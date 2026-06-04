@@ -25,15 +25,15 @@
           "WWE"
         ],
         "retry_added_at": "2026-06-03T20:37:32.431993+00:00",
-        "retry_attempts": 1,
+        "retry_attempts": 2,
         "source": "wrestlinginc",
         "source_title": "Comedian Michael Che Teases Writing For WWE, Talks His Favorite Performers",
         "source_url": "https://www.wrestlinginc.com/2184203/michael-che-writing-wwe-favorite-performers-paul-heyman-stephanie-mcmahon/",
         "title_it": "Il comico Michael Che apre a un ruolo come autore in WWE"
       },
-      "attempts": 2,
+      "attempts": 3,
       "last_reason": "",
-      "last_seen_at": "2026-06-03T23:04:30.461073+00:00",
+      "last_seen_at": "2026-06-04T02:06:01.366961+00:00",
       "last_status": "wp_not_ready",
       "source_url": "https://www.wrestlinginc.com/2184203/michael-che-writing-wwe-favorite-performers-paul-heyman-stephanie-mcmahon/",
       "title_it": "Il comico Michael Che apre a un ruolo come autore in WWE",
@@ -64,15 +64,15 @@
           "WWE"
         ],
         "retry_added_at": "2026-06-03T20:37:32.432008+00:00",
-        "retry_attempts": 1,
+        "retry_attempts": 2,
         "source": "ringsidenews",
         "source_title": "Logan Paul Reveals Real Pain Behind Torn Tricep Injury At WWE Saturday Night’s Main Event",
         "source_url": "https://www.ringsidenews.com/logan-paul-reveals-real-pain-behind-torn-tricep-injury-wwe-saturday-nights-main-event/",
         "title_it": "Logan Paul rivela il dolore dell'infortunio al tricipite durante Saturday Night’s Main Event"
       },
-      "attempts": 2,
+      "attempts": 3,
       "last_reason": "",
-      "last_seen_at": "2026-06-03T23:04:30.461081+00:00",
+      "last_seen_at": "2026-06-04T02:06:01.366975+00:00",
       "last_status": "wp_not_ready",
       "source_url": "https://www.ringsidenews.com/logan-paul-reveals-real-pain-behind-torn-tricep-injury-wwe-saturday-nights-main-event/",
       "title_it": "Logan Paul rivela il dolore dell'infortunio al tricipite durante Saturday Night’s Main Event",
@@ -103,15 +103,15 @@
           "WWE"
         ],
         "retry_added_at": "2026-06-03T20:37:32.432013+00:00",
-        "retry_attempts": 1,
+        "retry_attempts": 2,
         "source": "ringsidenews",
         "source_title": "Sol Ruca’s WWE Clash In Italy Match Criticized for Being Too Structured",
         "source_url": "https://www.ringsidenews.com/sol-rucas-wwe-clash-italy-match-criticized-too-structured/",
         "title_it": "Booker T critica il match di Sol Ruca a Clash in Italy: \"Troppo strutturato\""
       },
-      "attempts": 2,
+      "attempts": 3,
       "last_reason": "",
-      "last_seen_at": "2026-06-03T23:04:30.461085+00:00",
+      "last_seen_at": "2026-06-04T02:06:01.366979+00:00",
       "last_status": "wp_not_ready",
       "source_url": "https://www.ringsidenews.com/sol-rucas-wwe-clash-italy-match-criticized-too-structured/",
       "title_it": "Booker T critica il match di Sol Ruca a Clash in Italy: \"Troppo strutturato\"",
@@ -119,6 +119,6 @@
     }
   ],
   "ttl_hours": 36,
-  "updated_at": "2026-06-03T23:04:30.461099+00:00",
+  "updated_at": "2026-06-04T02:06:01.367000+00:00",
   "version": "v93_20_1_publisher_retry_queue_recursion_fix"
 }

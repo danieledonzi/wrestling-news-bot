@@ -584,9 +584,90 @@
       "reason": "softpool_ineligible:recency:fresh_12h",
       "title": "Ilja Dragunov’s WWE Status After Absence From TV",
       "url": "https://www.ringsidenews.com/ilja-dragunovs-wwe-status-absence-tv/"
+    },
+    {
+      "added_at": "2026-06-04T02:05:28.440683+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2184419/wwe-hofer-nikki-bella-wishes-wrestle-wnba-stars-caitlin-clark-alex-morgan",
+      "reason": "softpool_ineligible:recency:fresh_12h",
+      "title": "WWE HOFer Nikki Bella Wishes She Could Wrestle These WNBA Stars",
+      "url": "https://www.wrestlinginc.com/2184419/wwe-hofer-nikki-bella-wishes-wrestle-wnba-stars-caitlin-clark-alex-morgan/"
+    },
+    {
+      "added_at": "2026-06-04T02:05:28.440683+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2187189/mjf-escapes-no-count-out-match-aew-world-title",
+      "reason": "softpool_ineligible:recency:fresh_12h",
+      "title": "MJF Escapes No Count Out Match With AEW World Title",
+      "url": "https://www.wrestlinginc.com/2187189/mjf-escapes-no-count-out-match-aew-world-title/"
+    },
+    {
+      "added_at": "2026-06-04T02:05:28.440683+00:00",
+      "article_type": "duplicate",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/mercedes-mone-advances-owen-hart-tournament-making-alex-windsor-tap-out-aew-dynamite",
+      "reason": "ai_duplicate_event:mercedes mone return; ai_duplicate_of:c1; hard:return,entity:mercedes mone,recency:fresh_12h",
+      "title": "Mercedes Moné Advances In Owen Hart Tournament After Making Alex Windsor Tap Out On AEW Dynamite",
+      "url": "https://www.ringsidenews.com/mercedes-mone-advances-owen-hart-tournament-making-alex-windsor-tap-out-aew-dynamite/"
+    },
+    {
+      "added_at": "2026-06-04T02:05:28.440683+00:00",
+      "article_type": "duplicate",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/mercedes-mone-returns-wild-card-owen-hart-tournament-during-june-3-aew-dynamite",
+      "reason": "ai_duplicate_event:mercedes mone return; ai_duplicate_of:c1; hard:returns,hard:return,entity:mercedes mone,recency:fresh_12h",
+      "title": "Mercedes Moné Returns As Wild Card In Owen Hart Tournament During June 3 AEW Dynamite",
+      "url": "https://www.ringsidenews.com/mercedes-mone-returns-wild-card-owen-hart-tournament-during-june-3-aew-dynamite/"
+    },
+    {
+      "added_at": "2026-06-04T02:05:28.440683+00:00",
+      "article_type": "duplicate",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/kevin-knight-revealed-newest-member-don-callis-family-aew-dynamite",
+      "reason": "ai_duplicate_event:kevin knight don callis; ai_duplicate_of:c8; hard:championship,recency:fresh_12h",
+      "title": "Kevin Knight Revealed As Newest Member Of Don Callis Family On AEW Dynamite",
+      "url": "https://www.ringsidenews.com/kevin-knight-revealed-newest-member-don-callis-family-aew-dynamite/"
+    },
+    {
+      "added_at": "2026-06-04T02:05:28.440683+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/thekla-forces-announcers-apologize-spitting-flipping-off-stardom-sign-during-aew-dynamite",
+      "reason": "softpool_ineligible:recency:fresh_12h",
+      "title": "Thekla Forces Announcers to Apologize After Spitting & Flipping Off STARDOM Sign During AEW Dynamite",
+      "url": "https://www.ringsidenews.com/thekla-forces-announcers-apologize-spitting-flipping-off-stardom-sign-during-aew-dynamite/"
+    },
+    {
+      "added_at": "2026-06-04T02:05:28.440683+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/young-bucks-pledge-youtube-stream-proceeds-support-rebel-als-diagnosis",
+      "reason": "softpool_ineligible:recency:fresh_12h",
+      "title": "The Young Bucks Pledge YouTube Stream Proceeds To Support Rebel After ALS Diagnosis",
+      "url": "https://www.ringsidenews.com/young-bucks-pledge-youtube-stream-proceeds-support-rebel-als-diagnosis/"
+    },
+    {
+      "added_at": "2026-06-04T02:05:28.440683+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/liv-morgan-calls-herself-greatest-womens-world-champion-all-time",
+      "reason": "softpool_ineligible:entity:liv morgan,recency:fresh_12h",
+      "title": "Liv Morgan Calls Herself The Greatest Women’s World Champion Of All Time",
+      "url": "https://www.ringsidenews.com/liv-morgan-calls-herself-greatest-womens-world-champion-all-time/"
+    },
+    {
+      "added_at": "2026-06-04T02:05:28.440683+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/liv-morgan-addresses-defending-wwe-womens-world-title-summerslam",
+      "reason": "softpool_ineligible:entity:liv morgan,soft_penalty:addresses,recency:fresh_12h",
+      "title": "Liv Morgan Addresses Defending WWE Women’s World Title at SummerSlam",
+      "url": "https://www.ringsidenews.com/liv-morgan-addresses-defending-wwe-womens-world-title-summerslam/"
     }
   ],
   "ttl_hours": 168,
-  "updated_at": "2026-06-03T23:03:56.402897+00:00",
+  "updated_at": "2026-06-04T02:05:28.440683+00:00",
   "version": "v93_20_selective_softpool"
 }

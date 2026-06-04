@@ -1,16 +1,14 @@
 {
   "agent": "Menzo",
   "allowed_urls_for_v92": [
+    "https://www.wrestlinginc.com/2187197/mercedes-mone-returns-aew-womens-owen-hart-tourney-wild-card-slot/",
+    "https://www.ringsidenews.com/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet/",
+    "https://www.wrestlinginc.com/2187106/bully-ray-oba-femi-wwe-raw-evolution-clash-in-italy/",
+    "https://www.ringsidenews.com/absent-talent-makes-surprise-return-prior-june-3-aew-dynamite/",
+    "https://www.wrestlinginc.com/2187196/kevin-knight-don-callis-family-retains-aew-tnt-title/",
+    "https://www.ringsidenews.com/mjf-survives-bloody-world-title-fight-rush-passes-out-wild-finish-aew-dynamite/",
+    "https://www.ringsidenews.com/triple-hs-backstage-reaction-sol-rucas-wwe-ic-title-win/",
     "https://www.ringsidenews.com/former-wwf-star-mike-duke-droeses-criminal-case-delayed-yet-again/",
-    "https://www.ringsidenews.com/mercedes-mones-aew-return-status-months-away-television/",
-    "https://www.ringsidenews.com/rhea-ripley-calls-out-fan-sharing-ai-generated-wwe-render/",
-    "https://www.ringsidenews.com/how-womens-wrestling-became-major-influence-across-entertainment/",
-    "https://www.wrestlinginc.com/2186331/mick-foley-one-more-match-aew-stranger-things-happened/",
-    "https://www.ringsidenews.com/former-wwe-talent-confirms-departure-long-absence-due-injury/",
-    "https://www.ringsidenews.com/wwe-quietly-retires-nxt-heritage-cup/",
-    "https://www.ringsidenews.com/nwa-adds-world-title-match-hard-times-6/",
-    "https://www.ringsidenews.com/mjf-announces-hes-stepping-away-american-independent-wrestling-focus-aew/",
-    "https://www.ringsidenews.com/dark-side-ring-season-7-trailer-reveals-star-studded-lineup/",
     "https://www.wrestlinginc.com/2187009/bully-ray-jacob-fatu-bloodline-wwe-clash-in-italy-raw/"
   ],
   "daily_policy": {
@@ -20,14 +18,14 @@
     "target_max": 30,
     "target_min": 20
   },
-  "generated_at": "2026-06-03T23:03:56.399747+00:00",
+  "generated_at": "2026-06-04T02:05:28.436782+00:00",
   "handoff": {
     "pending": 1,
-    "skipped": 8,
-    "to_bob_or_v92": 11
+    "skipped": 9,
+    "to_bob_or_v92": 9
   },
   "input": {
-    "candidate_count": 20,
+    "candidate_count": 19,
     "massy_version": "v93_24_massy_show_news_before_report_closure"
   },
   "menzo_ai": {
@@ -38,145 +36,19 @@
     "error": "",
     "model": "gemini-3.1-flash-lite",
     "prompt_count": 12,
-    "raw_preview": "{\n  \"reviews\": [\n    {\n      \"id\": \"c1\",\n      \"decision\": \"selected\",\n      \"priority\": 7,\n      \"category_hint\": \"World\",\n      \"article_type\": \"business_legal\",\n      \"event_key\": \"mike_duke_droese_legal\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia di cronaca giudiziaria rilevante per il settore.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": false,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"Sintetizzare bene il contenuto legale evitando speculazioni.\"\n      }\n    },\n    {\n      \"id\": \"c2\",\n      \"decision\": \"selected\",\n      \"priority\": 9,\n      \"category_hint\": \"AEW\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"mercedes_mone_return\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Aggiornamento strategico fondamentale per la programmazione AEW.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"instagram\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Priorità alta, incrociare con c7 se necessario.\"\n      }\n    },\n    {\n      \"id\": \"c3\",\n      \"decision\": \"selected\",\n      \"priority\": 6,\n      \"category_hint\": \"AEW\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"mick_foley_aew\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Dichiarazione d'interesse di una leggenda per un possibile ritorno.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"video\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Taglio informativo, mantenere tono neutro.\"\n      }\n    },\n    {\n      \"id\": \"c4\",\n      \"decision\": \"skip\",\n      \"priority\": 2,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"low_value\",\n      \"event_key\": \"rhea_ripley_ai\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Curiosità debole, mera reazione social poco rilevante per il pubblico italiano.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"x_tweet\"],\n        \"expected_quotes\": false,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"Scartare.\"\n      }\n    },\n    {\n      \"id\": \"c5\",\n      \"decision\": \"skip\",\n      \"priority\": 3,\n      \"category_hint\": \"World\",\n      \"article_type\": \"low_value\",\n      \"event_key\": \"womens_wrestling_influence\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Articolo di opinione/listicle generico non strettamente necessario.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": false,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"Scartare.\"\n      }\n    },\n    {\n      \"id\": \"c6\",\n      \"decision\": \"selected\",\n      \"priority\": 5,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"hard_news\",\n      \"event_key\": \"aria_bennett_release\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia ufficiale di licenziamento/rilascio talento.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Breve e diretto.\"\n      }\n    },\n    {\n      \"id\": \"c7\",\n      \"decision\": \"skip\",\n      \"priority\": 0,\n      \"category_hint\": \"AEW\",\n      \"article_type\": \"duplicate\",\n      \"event_key\": \"mercedes_mone",
+    "raw_preview": "{\n  \"reviews\": [\n    {\n      \"id\": \"c1\",\n      \"decision\": \"selected\",\n      \"priority\": 10,\n      \"category_hint\": \"AEW\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"mercedes_mone_return\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Ritorno di alto profilo, notizia principale della serata AEW.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"youtube\", \"x_tweet\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"embed video/tweet se presente\", \"citazioni dirette\"],\n        \"source_specific_notes\": \"Scegliere questa fonte rispetto a Ringsidenews per tono più asciutto.\"\n      }\n    },\n    {\n      \"id\": \"c2\",\n      \"decision\": \"skip\",\n      \"priority\": 0,\n      \"category_hint\": \"AEW\",\n      \"article_type\": \"duplicate\",\n      \"event_key\": \"mercedes_mone_return\",\n      \"duplicate_of\": \"c1\",\n      \"editorial_reason\": \"Duplicato.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": false,\n        \"expected_tables\": false,\n        \"possible_noise\": [],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"\"\n      }\n    },\n    {\n      \"id\": \"c3\",\n      \"decision\": \"skip\",\n      \"priority\": 1,\n      \"category_hint\": \"World\",\n      \"article_type\": \"low_value\",\n      \"event_key\": \"duke_droese_legal\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia di cronaca giudiziaria non prioritaria per il pubblico italiano.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": false,\n        \"expected_tables\": false,\n        \"possible_noise\": [],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"\"\n      }\n    },\n    {\n      \"id\": \"c4\",\n      \"decision\": \"skip\",\n      \"priority\": 0,\n      \"category_hint\": \"AEW\",\n      \"article_type\": \"duplicate\",\n      \"event_key\": \"mercedes_mone_return\",\n      \"duplicate_of\": \"c1\",\n      \"editorial_reason\": \"Duplicato, focalizzato su dettaglio match.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": false,\n        \"expected_tables\": false,\n        \"possible_noise\": [],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"\"\n      }\n    },\n    {\n      \"id\": \"c5\",\n      \"decision\": \"skip\",\n      \"priority\": 2,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"soft_news\",\n      \"event_key\": \"sol_ruca_interview\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Curiosità debole, non essenziale.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": false,\n        \"expected_tables\": false,\n        \"possible_noise\": [],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"\"\n      }\n    },\n    {\n      \"id\": \"c6\",\n      \"decision\": \"selected\",\n      \"priority\": 6,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"oba_femi_evolution\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Importante per il contesto post-Clash in Italy.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Enfatizzare il legame con l'evento di Milano.\"\n      }\n    },\n    {\n      \"id\": \"c7\",\n      \"decision\": \"selected\",\n      \"priority\": 7,\n      \"category_hint\": \"AEW\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"ishii_return\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Ritorno a sorpresa, rilevante per i fan del puroresu/AEW.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"\"\n      }\n    },\n    {\n      \"id\": \"c8\",\n      \"decisio",
     "reviews": [
       {
-        "article_type": "business_legal",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Sintetizzare bene il contenuto legale evitando speculazioni."
-        },
-        "category_hint": "World",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Notizia di cronaca giudiziaria rilevante per il settore.",
-        "event_key": "mike_duke_droese_legal",
-        "id": "c1",
-        "priority": 7,
-        "priority_label": "medium"
-      },
-      {
         "article_type": "storyline_development",
         "bob_brief": {
           "expected_embeds": [
-            "instagram"
-          ],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [
-            "citazioni dirette"
-          ],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Priorità alta, incrociare con c7 se necessario."
-        },
-        "category_hint": "AEW",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Aggiornamento strategico fondamentale per la programmazione AEW.",
-        "event_key": "mercedes_mone_return",
-        "id": "c2",
-        "priority": 9,
-        "priority_label": "medium"
-      },
-      {
-        "article_type": "storyline_development",
-        "bob_brief": {
-          "expected_embeds": [
-            "video"
-          ],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [
-            "citazioni dirette"
-          ],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Taglio informativo, mantenere tono neutro."
-        },
-        "category_hint": "AEW",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Dichiarazione d'interesse di una leggenda per un possibile ritorno.",
-        "event_key": "mick_foley_aew",
-        "id": "c3",
-        "priority": 6,
-        "priority_label": "medium"
-      },
-      {
-        "article_type": "low_value",
-        "bob_brief": {
-          "expected_embeds": [
+            "youtube",
             "x_tweet"
           ],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Scartare."
-        },
-        "category_hint": "WWE",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Curiosità debole, mera reazione social poco rilevante per il pubblico italiano.",
-        "event_key": "rhea_ripley_ai",
-        "id": "c4",
-        "priority": 2,
-        "priority_label": "medium"
-      },
-      {
-        "article_type": "low_value",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Scartare."
-        },
-        "category_hint": "World",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Articolo di opinione/listicle generico non strettamente necessario.",
-        "event_key": "womens_wrestling_influence",
-        "id": "c5",
-        "priority": 3,
-        "priority_label": "medium"
-      },
-      {
-        "article_type": "hard_news",
-        "bob_brief": {
-          "expected_embeds": [],
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
+            "embed video/tweet se presente",
             "citazioni dirette"
           ],
           "possible_noise": [
@@ -185,15 +57,15 @@
             "cta",
             "share_links"
           ],
-          "source_specific_notes": "Breve e diretto."
+          "source_specific_notes": "Scegliere questa fonte rispetto a Ringsidenews per tono più asciutto."
         },
-        "category_hint": "WWE",
+        "category_hint": "AEW",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Notizia ufficiale di licenziamento/rilascio talento.",
-        "event_key": "aria_bennett_release",
-        "id": "c6",
-        "priority": 5,
+        "editorial_reason": "Ritorno di alto profilo, notizia principale della serata AEW.",
+        "event_key": "mercedes_mone_return",
+        "id": "c1",
+        "priority": 10,
         "priority_label": "medium"
       },
       {
@@ -204,115 +76,72 @@
           "expected_tables": false,
           "must_preserve": [],
           "possible_noise": [],
-          "source_specific_notes": "Ignorare."
+          "source_specific_notes": ""
         },
         "category_hint": "AEW",
         "decision": "skip",
-        "duplicate_of": "c2",
-        "editorial_reason": "Duplicato di c2, selezionata la notizia originale.",
+        "duplicate_of": "c1",
+        "editorial_reason": "Duplicato.",
         "event_key": "mercedes_mone_return",
-        "id": "c7",
+        "id": "c2",
         "priority": 0,
         "priority_label": "skip"
-      },
-      {
-        "article_type": "hard_news",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Notizia secca, fondamentale per gli appassionati del prodotto NXT."
-        },
-        "category_hint": "NXT",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Cambiamento ufficiale nel roster titoli WWE/NXT.",
-        "event_key": "nxt_heritage_cup_retirement",
-        "id": "c8",
-        "priority": 7,
-        "priority_label": "medium"
-      },
-      {
-        "article_type": "storyline_development",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Formato breve."
-        },
-        "category_hint": "World",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Aggiornamento card per show di federazione minore.",
-        "event_key": "nwa_hard_times_6",
-        "id": "c9",
-        "priority": 4,
-        "priority_label": "medium"
       },
       {
         "article_type": "low_value",
         "bob_brief": {
           "expected_embeds": [],
-          "expected_quotes": true,
+          "expected_quotes": false,
           "expected_tables": false,
           "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Scartare."
+          "possible_noise": [],
+          "source_specific_notes": ""
+        },
+        "category_hint": "World",
+        "decision": "skip",
+        "duplicate_of": "",
+        "editorial_reason": "Notizia di cronaca giudiziaria non prioritaria per il pubblico italiano.",
+        "event_key": "duke_droese_legal",
+        "id": "c3",
+        "priority": 1,
+        "priority_label": "low"
+      },
+      {
+        "article_type": "duplicate",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [],
+          "source_specific_notes": ""
         },
         "category_hint": "AEW",
         "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Dichiarazione autoreferenziale, poco impatto operativo.",
-        "event_key": "mjf_indie_departure",
-        "id": "c10",
-        "priority": 3,
-        "priority_label": "medium"
+        "duplicate_of": "c1",
+        "editorial_reason": "Duplicato, focalizzato su dettaglio match.",
+        "event_key": "mercedes_mone_return",
+        "id": "c4",
+        "priority": 0,
+        "priority_label": "skip"
       },
       {
-        "article_type": "hard_news",
+        "article_type": "soft_news",
         "bob_brief": {
-          "expected_embeds": [
-            "youtube"
-          ],
+          "expected_embeds": [],
           "expected_quotes": false,
           "expected_tables": false,
-          "must_preserve": [
-            "embed video"
-          ],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Includere trailer."
+          "must_preserve": [],
+          "possible_noise": [],
+          "source_specific_notes": ""
         },
-        "category_hint": "World",
-        "decision": "selected",
+        "category_hint": "WWE",
+        "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Notizia su media partner importante per il wrestling.",
-        "event_key": "dark_side_ring_s7",
-        "id": "c11",
-        "priority": 5,
+        "editorial_reason": "Curiosità debole, non essenziale.",
+        "event_key": "sol_ruca_interview",
+        "id": "c5",
+        "priority": 2,
         "priority_label": "medium"
       },
       {
@@ -326,19 +155,147 @@
           ],
           "possible_noise": [
             "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
+            "author_bio"
           ],
-          "source_specific_notes": "Sottolineare il legame con la tappa italiana del tour."
+          "source_specific_notes": "Enfatizzare il legame con l'evento di Milano."
         },
         "category_hint": "WWE",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Analisi rilevante su una storyline core, menziona evento in Italia (ottimo per il target).",
+        "editorial_reason": "Importante per il contesto post-Clash in Italy.",
+        "event_key": "oba_femi_evolution",
+        "id": "c6",
+        "priority": 6,
+        "priority_label": "medium"
+      },
+      {
+        "article_type": "storyline_development",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar"
+          ],
+          "source_specific_notes": ""
+        },
+        "category_hint": "AEW",
+        "decision": "selected",
+        "duplicate_of": "",
+        "editorial_reason": "Ritorno a sorpresa, rilevante per i fan del puroresu/AEW.",
+        "event_key": "ishii_return",
+        "id": "c7",
+        "priority": 7,
+        "priority_label": "medium"
+      },
+      {
+        "article_type": "storyline_development",
+        "bob_brief": {
+          "expected_embeds": [
+            "x_tweet"
+          ],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar"
+          ],
+          "source_specific_notes": "Priorità rispetto a c9 perché più completo."
+        },
+        "category_hint": "AEW",
+        "decision": "selected",
+        "duplicate_of": "",
+        "editorial_reason": "Sviluppo di storyline importante con cambio di fazione.",
+        "event_key": "kevin_knight_don_callis",
+        "id": "c8",
+        "priority": 8,
+        "priority_label": "medium"
+      },
+      {
+        "article_type": "duplicate",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [],
+          "source_specific_notes": ""
+        },
+        "category_hint": "AEW",
+        "decision": "skip",
+        "duplicate_of": "c8",
+        "editorial_reason": "Duplicato.",
+        "event_key": "kevin_knight_don_callis",
+        "id": "c9",
+        "priority": 0,
+        "priority_label": "skip"
+      },
+      {
+        "article_type": "storyline_development",
+        "bob_brief": {
+          "expected_embeds": [
+            "youtube"
+          ],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "cta"
+          ],
+          "source_specific_notes": ""
+        },
+        "category_hint": "AEW",
+        "decision": "selected",
+        "duplicate_of": "",
+        "editorial_reason": "Difesa titolata principale, risultato cruciale.",
+        "event_key": "mjf_rush_dynamite",
+        "id": "c10",
+        "priority": 8,
+        "priority_label": "medium"
+      },
+      {
+        "article_type": "soft_news",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [],
+          "source_specific_notes": ""
+        },
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "",
+        "editorial_reason": "Reaction/Soft news, poco valore editoriale.",
+        "event_key": "sol_ruca_backstage",
+        "id": "c11",
+        "priority": 2,
+        "priority_label": "medium"
+      },
+      {
+        "article_type": "soft_news",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [],
+          "source_specific_notes": ""
+        },
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "",
+        "editorial_reason": "Opinioni di Bully Ray, troppo soggettivo/soft news.",
         "event_key": "bloodline_storyline",
         "id": "c12",
-        "priority": 8,
+        "priority": 3,
         "priority_label": "medium"
       }
     ],
@@ -347,7 +304,7 @@
   "mode": "selective_softpool",
   "pending": [
     {
-      "age_hours": 4.416002287222222,
+      "age_hours": 7.441938941388889,
       "agent": "Menzo",
       "ai_priority_label": "medium",
       "article_type": "strategic_discussion",
@@ -355,13 +312,18 @@
       "category_hint": "WWE",
       "decision": "pending",
       "deterministic_score": 64,
-      "evaluated_at": "2026-06-03T23:03:49.608235+00:00",
+      "evaluated_at": "2026-06-04T02:05:22.980190+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
+      "from_softpool": true,
+      "last_seen_at": "2026-06-03T23:03:56.402634+00:00",
       "normalized_url": "https://www.ringsidenews.com/kane-reacts-undertakers-success-running-aaa-wwe-takeover",
       "priority": "soft",
       "published": "Wed, 03 Jun 2026 18:38:52 +0000",
       "reason": "strategic:creative,soft_penalty:reacts,recency:fresh_12h",
       "score": 64,
+      "softpool_added_at": "2026-06-03T23:03:56.402634+00:00",
+      "softpool_reason": "medium_candidate_above_quality_threshold",
+      "softpool_ttl_hours": 36,
       "source": "ringsidenews",
       "summary": "<p><img alt=\"Kane Reacts To Undertaker’s Success Running AAA After WWE Takeover\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/kane-reacts-to-undertakers-success-running-aaa-after-wwe-takeover-43.jpg?x52795\" width=\"800\" /></p>Kane couldn&#8217;t be happier with what his longtime storyline brother has accomplished behind the scenes in AAA. Since WWE acquired AAA, Undertaker has taken on a major creative role within the lucha libre promotion. The company hit a new high point last weekend at Noche de Los Grandes, where the mask vs. mask match between ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/kane-reacts-undertakers-success-running-aaa-wwe-takeover/\" title=\"Kane Reacts To Undertaker’s Success Running AAA After WWE Takeover\">Read more</a>",
       "title": "Kane Reacts To Undertaker’s Success Running AAA After WWE Takeover",
@@ -392,82 +354,23 @@
   },
   "selected": [
     {
-      "age_hours": 0.31544523555555554,
+      "age_hours": 0.22915776527777776,
       "agent": "Menzo",
-      "ai_editorial_reason": "Notizia di cronaca giudiziaria rilevante per il settore.",
+      "ai_editorial_reason": "Ritorno di alto profilo, notizia principale della serata AEW.",
       "ai_id": "c1",
-      "ai_priority": 72,
-      "ai_priority_label": "medium",
-      "article_type": "business_legal",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": false,
-        "expected_tables": false,
-        "must_preserve": [],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "Sintetizzare bene il contenuto legale evitando speculazioni."
-      },
-      "category_hint": "World",
-      "decision": "selected",
-      "deterministic_score": 90,
-      "evaluated_at": "2026-06-03T23:03:49.602849+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "business_legal",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Sintetizzare bene il contenuto legale evitando speculazioni."
-        },
-        "category_hint": "World",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Notizia di cronaca giudiziaria rilevante per il settore.",
-        "event_key": "mike_duke_droese_legal",
-        "id": "c1",
-        "priority": 7,
-        "priority_label": "medium"
-      },
-      "normalized_url": "https://www.ringsidenews.com/former-wwf-star-mike-duke-droeses-criminal-case-delayed-yet-again",
-      "priority": "hard",
-      "published": "Wed, 03 Jun 2026 22:44:54 +0000",
-      "reason": "ai:Notizia di cronaca giudiziaria rilevante per il settore.; deterministic:hard:legal,recency:fresh_12h",
-      "score": 82,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Former WWF Star Mike ‘Duke’ Droese’s Criminal Case Delayed Yet Again\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/former-wwf-star-mike-duke-droeses-criminal-case-delayed-yet-again-48.jpg?x52795\" width=\"800\" /></p>Mike &#8220;Duke&#8221; Droese will have to wait even longer before his criminal case moves forward. The former WWF star&#8217;s legal troubles continue to drag on, as court records show his latest hearing in Warren County, Tennessee has been postponed once again. The case stems from Droese&#8217;s May 2025 arrest on a charge of Attempted Aggravated ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/former-wwf-star-mike-duke-droeses-criminal-case-delayed-yet-again/\" title=\"Former WWF Star Mike ‘Duke’ Droese’s Criminal Case Delayed Yet Again\">Read more</a>",
-      "title": "Former WWF Star Mike ‘Duke’ Droese’s Criminal Case Delayed Yet Again",
-      "url": "https://www.ringsidenews.com/former-wwf-star-mike-duke-droeses-criminal-case-delayed-yet-again/"
-    },
-    {
-      "age_hours": 1.2479455869444445,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Aggiornamento strategico fondamentale per la programmazione AEW.",
-      "ai_id": "c2",
       "ai_priority": 72,
       "ai_priority_label": "medium",
       "article_type": "storyline_development",
       "assigned_to": "Menzo",
       "bob_brief": {
         "expected_embeds": [
-          "instagram"
+          "youtube",
+          "x_tweet"
         ],
         "expected_quotes": true,
         "expected_tables": false,
         "must_preserve": [
+          "embed video/tweet se presente",
           "citazioni dirette"
         ],
         "possible_noise": [
@@ -476,22 +379,24 @@
           "cta",
           "share_links"
         ],
-        "source_specific_notes": "Priorità alta, incrociare con c7 se necessario."
+        "source_specific_notes": "Scegliere questa fonte rispetto a Ringsidenews per tono più asciutto."
       },
       "category_hint": "AEW",
       "decision": "selected",
-      "deterministic_score": 88,
-      "evaluated_at": "2026-06-03T23:03:49.604114+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
+      "deterministic_score": 92,
+      "evaluated_at": "2026-06-04T02:05:22.967957+00:00",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
       "menzo_ai_review": {
         "article_type": "storyline_development",
         "bob_brief": {
           "expected_embeds": [
-            "instagram"
+            "youtube",
+            "x_tweet"
           ],
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
+            "embed video/tweet se presente",
             "citazioni dirette"
           ],
           "possible_noise": [
@@ -500,602 +405,485 @@
             "cta",
             "share_links"
           ],
-          "source_specific_notes": "Priorità alta, incrociare con c7 se necessario."
+          "source_specific_notes": "Scegliere questa fonte rispetto a Ringsidenews per tono più asciutto."
         },
         "category_hint": "AEW",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Aggiornamento strategico fondamentale per la programmazione AEW.",
+        "editorial_reason": "Ritorno di alto profilo, notizia principale della serata AEW.",
         "event_key": "mercedes_mone_return",
-        "id": "c2",
-        "priority": 9,
+        "id": "c1",
+        "priority": 10,
         "priority_label": "medium"
       },
-      "normalized_url": "https://www.ringsidenews.com/mercedes-mones-aew-return-status-months-away-television",
+      "normalized_url": "https://www.wrestlinginc.com/2187197/mercedes-mone-returns-aew-womens-owen-hart-tourney-wild-card-slot",
       "priority": "hard",
-      "published": "Wed, 03 Jun 2026 21:48:57 +0000",
-      "reason": "ai:Aggiornamento strategico fondamentale per la programmazione AEW.; deterministic:hard:return,strategic:future,entity:mercedes mone,recency:fresh_12h",
-      "score": 81,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Mercedes Mone’s AEW Return Status After Months Away From Television\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/mercedes-mones-aew-return-status-after-months-away-from-television-02.jpg?x52795\" width=\"800\" /></p>Mercedes Mone hasn&#8217;t wrestled for AEW a single time in 2026, but a new update indicates fans may not have to wait much longer for her return. The former TBS Champion has been absent from AEW programming since dropping the title at New Year&#8217;s Smash, leading to months of speculation about her future with the ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/mercedes-mones-aew-return-status-months-away-television/\" title=\"Mercedes Mone’s AEW Return Status After Months Away From Television\">Read more</a>",
-      "title": "Mercedes Mone’s AEW Return Status After Months Away From Television",
-      "url": "https://www.ringsidenews.com/mercedes-mones-aew-return-status-months-away-television/"
+      "published": "Thu, 04 Jun 2026 01:51:38 +0000",
+      "reason": "ai:Ritorno di alto profilo, notizia principale della serata AEW.; deterministic:hard:returns,hard:return,entity:mercedes mone,recency:fresh_12h",
+      "score": 83,
+      "source": "wrestlinginc",
+      "summary": "Mercedes Mone is back in AEW after five months away, and she has already reached the semi-finals of the Owen Hart Foundation Tournament.",
+      "title": "Mercedes Mone Returns To AEW In Women's Owen Hart Tourney Wild Card Slot",
+      "url": "https://www.wrestlinginc.com/2187197/mercedes-mone-returns-aew-womens-owen-hart-tourney-wild-card-slot/"
     },
     {
-      "age_hours": 2.386001737222222,
+      "age_hours": 2.0774928558333334,
       "agent": "Menzo",
-      "ai_editorial_reason": "Curiosità debole, mera reazione social poco rilevante per il pubblico italiano.",
-      "ai_id": "c4",
+      "ai_editorial_reason": "Curiosità debole, non essenziale.",
+      "ai_id": "c5",
       "ai_priority": 72,
       "ai_priority_label": "medium",
-      "article_type": "low_value",
+      "article_type": "soft_news",
+      "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": false,
+        "expected_tables": false,
+        "must_preserve": [],
+        "possible_noise": [],
+        "source_specific_notes": ""
+      },
+      "category_hint": "WWE",
+      "decision": "selected",
+      "deterministic_score": 84,
+      "evaluated_at": "2026-06-04T02:05:22.974283+00:00",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "soft_news",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [],
+          "source_specific_notes": ""
+        },
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "",
+        "editorial_reason": "Curiosità debole, non essenziale.",
+        "event_key": "sol_ruca_interview",
+        "id": "c5",
+        "priority": 2,
+        "priority_label": "medium"
+      },
+      "normalized_url": "https://www.ringsidenews.com/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet",
+      "priority": "hard",
+      "published": "Thu, 04 Jun 2026 00:00:44 +0000",
+      "reason": "ai:Curiosità debole, non essenziale.; deterministic:hard:championship,entity:becky lynch,recency:fresh_12h",
+      "score": 79,
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Sol Ruca Admits She Hasn’t Watched Full Becky Lynch Title Match Back Yet\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet-15.jpg?x10775\" width=\"800\" /></p>Sol Ruca is still riding high after winning the WWE Women’s Intercontinental Championship, but she has not fully watched the match that gave her the title. Ruca appeared on TMZ’s Inside the Ring after defeating Becky Lynch in Italy. During the interview, she was asked whether she had watched the match back after such a ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet/\" title=\"Sol Ruca Admits She Hasn’t Watched Full Becky Lynch Title Match Back Yet\">Read more</a>",
+      "title": "Sol Ruca Admits She Hasn’t Watched Full Becky Lynch Title Match Back Yet",
+      "url": "https://www.ringsidenews.com/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet/"
+    },
+    {
+      "age_hours": 2.728046936388889,
+      "agent": "Menzo",
+      "ai_editorial_reason": "Importante per il contesto post-Clash in Italy.",
+      "ai_id": "c6",
+      "ai_priority": 72,
+      "ai_priority_label": "medium",
+      "article_type": "storyline_development",
+      "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio"
+        ],
+        "source_specific_notes": "Enfatizzare il legame con l'evento di Milano."
+      },
+      "category_hint": "WWE",
+      "decision": "selected",
+      "deterministic_score": 82,
+      "evaluated_at": "2026-06-04T02:05:22.968972+00:00",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "storyline_development",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio"
+          ],
+          "source_specific_notes": "Enfatizzare il legame con l'evento di Milano."
+        },
+        "category_hint": "WWE",
+        "decision": "selected",
+        "duplicate_of": "",
+        "editorial_reason": "Importante per il contesto post-Clash in Italy.",
+        "event_key": "oba_femi_evolution",
+        "id": "c6",
+        "priority": 6,
+        "priority_label": "medium"
+      },
+      "normalized_url": "https://www.wrestlinginc.com/2187106/bully-ray-oba-femi-wwe-raw-evolution-clash-in-italy",
+      "priority": "hard",
+      "published": "Wed, 03 Jun 2026 23:21:42 +0000",
+      "reason": "ai:Importante per il contesto post-Clash in Italy.; deterministic:strategic:clash in italy,strategic:raw,entity:brock lesnar,entity:oba femi,recency:fresh_12h",
+      "score": 78,
+      "source": "wrestlinginc",
+      "summary": "WWE Hall of Famer Bully Ray explained how he liked what he described as the \"evolution\" of Oba Femi on \"WWE Raw\" following his loss to Brock Lesnar.",
+      "title": "Bully Ray Liked The 'Evolution' Of Oba Femi On WWE Raw Following Clash In Italy Loss",
+      "url": "https://www.wrestlinginc.com/2187106/bully-ray-oba-femi-wwe-raw-evolution-clash-in-italy/"
+    },
+    {
+      "age_hours": 2.7608266533333334,
+      "agent": "Menzo",
+      "ai_editorial_reason": "Ritorno a sorpresa, rilevante per i fan del puroresu/AEW.",
+      "ai_id": "c7",
+      "ai_priority": 72,
+      "ai_priority_label": "medium",
+      "article_type": "storyline_development",
+      "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "possible_noise": [
+          "source_social_bar"
+        ],
+        "source_specific_notes": ""
+      },
+      "category_hint": "AEW",
+      "decision": "selected",
+      "deterministic_score": 80,
+      "evaluated_at": "2026-06-04T02:05:22.975953+00:00",
+      "event_news_class": "post_show_hard_news",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "massive_editorial_boost": "show_factual_core",
+      "menzo_ai_review": {
+        "article_type": "storyline_development",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar"
+          ],
+          "source_specific_notes": ""
+        },
+        "category_hint": "AEW",
+        "decision": "selected",
+        "duplicate_of": "",
+        "editorial_reason": "Ritorno a sorpresa, rilevante per i fan del puroresu/AEW.",
+        "event_key": "ishii_return",
+        "id": "c7",
+        "priority": 7,
+        "priority_label": "medium"
+      },
+      "normalized_url": "https://www.ringsidenews.com/absent-talent-makes-surprise-return-prior-june-3-aew-dynamite",
+      "priority": "hard",
+      "published": "Wed, 03 Jun 2026 23:19:44 +0000",
+      "reason": "ai:Ritorno a sorpresa, rilevante per i fan del puroresu/AEW.; deterministic:hard:return,strategic:backstage,recency:fresh_12h",
+      "score": 76,
+      "show_day_policy": "news_before_report_then_report_closure",
+      "show_name": "AEW Dynamite",
+      "show_report_id": "aew_dynamite",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Absent AEW Talent Awaiting Approval For In-Ring Return\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/absent-aew-talent-awaiting-approval-for-in-ring-return-44.jpg?x10775\" width=\"800\" /></p>Tomohiro Ishii is officially back on AEW television. The longtime NJPW star made a surprise appearance prior to this week&#8217;s AEW programming, marking his first appearance for the company since disappearing from TV earlier this year. Ishii returned during a backstage segment featuring The Conglomeration. Mark Briscoe, Orange Cassidy, Kyle O&#8217;Reilly, and Roderick Strong were ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/absent-talent-makes-surprise-return-prior-june-3-aew-dynamite/\" title=\"Absent Talent Makes Surprise Return Prior to June 3 AEW Dynamite\">Read more</a>",
+      "title": "Absent Talent Makes Surprise Return Prior to June 3 AEW Dynamite",
+      "url": "https://www.ringsidenews.com/absent-talent-makes-surprise-return-prior-june-3-aew-dynamite/"
+    },
+    {
+      "age_hours": 0.5761022686111111,
+      "agent": "Menzo",
+      "ai_editorial_reason": "Sviluppo di storyline importante con cambio di fazione.",
+      "ai_id": "c8",
+      "ai_priority": 72,
+      "ai_priority_label": "medium",
+      "article_type": "storyline_development",
       "assigned_to": "Menzo",
       "bob_brief": {
         "expected_embeds": [
           "x_tweet"
         ],
-        "expected_quotes": false,
+        "expected_quotes": true,
         "expected_tables": false,
-        "must_preserve": [],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
+        "must_preserve": [
+          "citazioni dirette"
         ],
-        "source_specific_notes": "Scartare."
+        "possible_noise": [
+          "source_social_bar"
+        ],
+        "source_specific_notes": "Priorità rispetto a c9 perché più completo."
       },
-      "category_hint": "WWE",
+      "category_hint": "AEW",
       "decision": "selected",
-      "deterministic_score": 84,
-      "evaluated_at": "2026-06-03T23:03:49.606255+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
+      "deterministic_score": 76,
+      "evaluated_at": "2026-06-04T02:05:22.968168+00:00",
+      "event_news_class": "event_factual_news",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "massive_editorial_boost": "show_factual_core",
       "menzo_ai_review": {
-        "article_type": "low_value",
+        "article_type": "storyline_development",
         "bob_brief": {
           "expected_embeds": [
             "x_tweet"
           ],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Scartare."
-        },
-        "category_hint": "WWE",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Curiosità debole, mera reazione social poco rilevante per il pubblico italiano.",
-        "event_key": "rhea_ripley_ai",
-        "id": "c4",
-        "priority": 2,
-        "priority_label": "medium"
-      },
-      "normalized_url": "https://www.ringsidenews.com/rhea-ripley-calls-out-fan-sharing-ai-generated-wwe-render",
-      "priority": "hard",
-      "published": "Wed, 03 Jun 2026 20:40:40 +0000",
-      "reason": "ai:Curiosità debole, mera reazione social poco rilevante per il pubblico italiano.; deterministic:hard:championship,entity:rhea ripley,recency:fresh_12h",
-      "score": 79,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Rhea Ripley Calls Out Fan For Sharing AI-Generated WWE Render\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/rhea-ripley-calls-out-fan-for-sharing-ai-generated-wwe-render-21.jpg?x52795\" width=\"800\" /></p>Rhea Ripley wasn’t about to let an AI-generated image of herself pass as the real thing, as she immediately called out a fan for sharing that image. The WWE Women’s Champion spotted a fan tweet on Twitter that claimed to show a brand-new render of Ripley wearing fresh ring gear while holding her championship. The ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/rhea-ripley-calls-out-fan-sharing-ai-generated-wwe-render/\" title=\"Rhea Ripley Calls Out Fan For Sharing AI-Generated WWE Render\">Read more</a>",
-      "title": "Rhea Ripley Calls Out Fan For Sharing AI-Generated WWE Render",
-      "url": "https://www.ringsidenews.com/rhea-ripley-calls-out-fan-sharing-ai-generated-wwe-render/"
-    },
-    {
-      "age_hours": 2.8637798744444445,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Articolo di opinione/listicle generico non strettamente necessario.",
-      "ai_id": "c5",
-      "ai_priority": 72,
-      "ai_priority_label": "medium",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": false,
-        "expected_tables": false,
-        "must_preserve": [],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "Scartare."
-      },
-      "category_hint": "World",
-      "decision": "selected",
-      "deterministic_score": 84,
-      "evaluated_at": "2026-06-03T23:03:49.607548+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "low_value",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Scartare."
-        },
-        "category_hint": "World",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Articolo di opinione/listicle generico non strettamente necessario.",
-        "event_key": "womens_wrestling_influence",
-        "id": "c5",
-        "priority": 3,
-        "priority_label": "medium"
-      },
-      "normalized_url": "https://www.ringsidenews.com/how-womens-wrestling-became-major-influence-across-entertainment",
-      "priority": "hard",
-      "published": "Wed, 03 Jun 2026 20:12:00 +0000",
-      "reason": "ai:Articolo di opinione/listicle generico non strettamente necessario.; deterministic:hard:championship,entity:becky lynch,recency:fresh_12h",
-      "score": 79,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"How Women’s Wrestling Became a Major Influence Across Entertainment\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/how-womens-wrestling-became-a-major-influence-across-entertainment-04.jpg?x52795\" width=\"800\" /></p>Over the last decade, women’s divisions across professional wrestling have grown from being treated as supporting attractions into some of the most talked-about parts of the industry. Major championship matches, headline storylines and carefully developed characters have changed how audiences view female wrestlers and what fans now expect from them. Stars such as Becky Lynch, ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/how-womens-wrestling-became-major-influence-across-entertainment/\" title=\"How Women’s Wrestling Became a Major Influence Across Entertainment\">Read more</a>",
-      "title": "How Women’s Wrestling Became a Major Influence Across Entertainment",
-      "url": "https://www.ringsidenews.com/how-womens-wrestling-became-major-influence-across-entertainment/"
-    },
-    {
-      "age_hours": 9.563778225555556,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Dichiarazione d'interesse di una leggenda per un possibile ritorno.",
-      "ai_id": "c3",
-      "ai_priority": 72,
-      "ai_priority_label": "medium",
-      "article_type": "storyline_development",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [
-          "video"
-        ],
-        "expected_quotes": true,
-        "expected_tables": false,
-        "must_preserve": [
-          "citazioni dirette"
-        ],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "Taglio informativo, mantenere tono neutro."
-      },
-      "category_hint": "AEW",
-      "decision": "selected",
-      "deterministic_score": 85,
-      "evaluated_at": "2026-06-03T23:03:49.601613+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "storyline_development",
-        "bob_brief": {
-          "expected_embeds": [
-            "video"
-          ],
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
             "citazioni dirette"
           ],
           "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
+            "source_social_bar"
           ],
-          "source_specific_notes": "Taglio informativo, mantenere tono neutro."
+          "source_specific_notes": "Priorità rispetto a c9 perché più completo."
         },
         "category_hint": "AEW",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Dichiarazione d'interesse di una leggenda per un possibile ritorno.",
-        "event_key": "mick_foley_aew",
-        "id": "c3",
-        "priority": 6,
-        "priority_label": "medium"
-      },
-      "normalized_url": "https://www.wrestlinginc.com/2186331/mick-foley-one-more-match-aew-stranger-things-happened",
-      "priority": "hard",
-      "published": "Wed, 03 Jun 2026 13:30:00 +0000",
-      "reason": "ai:Dichiarazione d'interesse di una leggenda per un possibile ritorno.; deterministic:hard:return,entity:mick foley,recency:fresh_12h",
-      "score": 79,
-      "source": "wrestlinginc",
-      "summary": "New AEW star Mick Foley has opened the door to a return to the ring, explaining how his weight loss has helped make him confident about wrestling again.",
-      "title": "Mick Foley On Possibility Of One More Match In AEW: 'Stranger Things Have Happened'",
-      "url": "https://www.wrestlinginc.com/2186331/mick-foley-one-more-match-aew-stranger-things-happened/"
-    },
-    {
-      "age_hours": 1.3671124499999998,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Notizia ufficiale di licenziamento/rilascio talento.",
-      "ai_id": "c6",
-      "ai_priority": 72,
-      "ai_priority_label": "medium",
-      "article_type": "hard_news",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": true,
-        "expected_tables": false,
-        "must_preserve": [
-          "citazioni dirette"
-        ],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "Breve e diretto."
-      },
-      "category_hint": "WWE",
-      "decision": "selected",
-      "deterministic_score": 80,
-      "evaluated_at": "2026-06-03T23:03:49.604821+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "hard_news",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [
-            "citazioni dirette"
-          ],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Breve e diretto."
-        },
-        "category_hint": "WWE",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Notizia ufficiale di licenziamento/rilascio talento.",
-        "event_key": "aria_bennett_release",
-        "id": "c6",
-        "priority": 5,
-        "priority_label": "medium"
-      },
-      "normalized_url": "https://www.ringsidenews.com/former-wwe-talent-confirms-departure-long-absence-due-injury",
-      "priority": "hard",
-      "published": "Wed, 03 Jun 2026 21:41:48 +0000",
-      "reason": "ai:Notizia ufficiale di licenziamento/rilascio talento.; deterministic:hard:injury,soft_penalty:social media,recency:fresh_12h",
-      "score": 76,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Former WWE Talent Confirms Departure After Long Absence Due To Injury\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/former-wwe-talent-confirms-departure-after-long-absence-due-to-injury-26.jpg?x52795\" width=\"800\" /></p>Another WWE departure has now been confirmed. Aria Bennett, whose real name is Ajiea Lea Hargrave, has indicated that she is no longer with WWE following the company&#8217;s latest round of roster cuts and departures that took place after WrestleMania 42. Hargrave recently updated her social media profiles, changing her bio from identifying herself as ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/former-wwe-talent-confirms-departure-long-absence-due-injury/\" title=\"Former WWE Talent Confirms Departure After Long Absence Due To Injury\">Read more</a>",
-      "title": "Former WWE Talent Confirms Departure After Long Absence Due To Injury",
-      "url": "https://www.ringsidenews.com/former-wwe-talent-confirms-departure-long-absence-due-injury/"
-    },
-    {
-      "age_hours": 2.0751681916666667,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Cambiamento ufficiale nel roster titoli WWE/NXT.",
-      "ai_id": "c8",
-      "ai_priority": 72,
-      "ai_priority_label": "medium",
-      "article_type": "hard_news",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": false,
-        "expected_tables": false,
-        "must_preserve": [],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "Notizia secca, fondamentale per gli appassionati del prodotto NXT."
-      },
-      "category_hint": "NXT",
-      "decision": "selected",
-      "deterministic_score": 76,
-      "evaluated_at": "2026-06-03T23:03:49.605491+00:00",
-      "event_news_class": "event_soft_reaction",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "hard_news",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Notizia secca, fondamentale per gli appassionati del prodotto NXT."
-        },
-        "category_hint": "NXT",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Cambiamento ufficiale nel roster titoli WWE/NXT.",
-        "event_key": "nxt_heritage_cup_retirement",
+        "editorial_reason": "Sviluppo di storyline importante con cambio di fazione.",
+        "event_key": "kevin_knight_don_callis",
         "id": "c8",
-        "priority": 7,
+        "priority": 8,
         "priority_label": "medium"
       },
-      "normalized_url": "https://www.ringsidenews.com/wwe-quietly-retires-nxt-heritage-cup",
+      "normalized_url": "https://www.wrestlinginc.com/2187196/kevin-knight-don-callis-family-retains-aew-tnt-title",
       "priority": "soft",
-      "published": "Wed, 03 Jun 2026 20:59:19 +0000",
-      "reason": "ai:Cambiamento ufficiale nel roster titoli WWE/NXT.; deterministic:hard:championship,recency:fresh_12h",
+      "published": "Thu, 04 Jun 2026 01:30:49 +0000",
+      "reason": "ai:Sviluppo di storyline importante con cambio di fazione.; deterministic:hard:championship,recency:fresh_12h",
       "score": 74,
       "show_day_policy": "news_before_report_then_report_closure",
-      "show_name": "WWE NXT",
-      "show_report_id": "wwe_nxt",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"WWE Quietly Retires NXT Heritage Cup\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/wwe-quietly-retires-nxt-heritage-cup-25.jpg?x52795\" width=\"800\" /></p>The NXT Heritage Cup is officially dead. After months of uncertainty, WWE has removed the Heritage Cup from its list of active championships, bringing an apparent end to the title&#8217;s run in the company. The last recognized holder was Channing &#8220;Stacks&#8221; Lorenzo, but fans haven&#8217;t seen the cup since Tony D&#8217;Angelo threw it off a ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-quietly-retires-nxt-heritage-cup/\" title=\"WWE Quietly Retires NXT Heritage Cup\">Read more</a>",
-      "title": "WWE Quietly Retires NXT Heritage Cup",
-      "url": "https://www.ringsidenews.com/wwe-quietly-retires-nxt-heritage-cup/"
+      "show_name": "AEW Dynamite",
+      "show_report_id": "aew_dynamite",
+      "source": "wrestlinginc",
+      "summary": "Kevin Knight joined the Don Callis Family before retaining the TNT Championship during \"AEW Dynamite.\"",
+      "title": "Kevin Knight Joins Don Callis Family, Retains AEW TNT Title",
+      "url": "https://www.wrestlinginc.com/2187196/kevin-knight-don-callis-family-retains-aew-tnt-title/"
     },
     {
-      "age_hours": 4.5290579922222225,
+      "age_hours": 1.5002703886111113,
       "agent": "Menzo",
-      "ai_editorial_reason": "Aggiornamento card per show di federazione minore.",
-      "ai_id": "c9",
-      "ai_priority": 72,
-      "ai_priority_label": "medium",
-      "article_type": "storyline_development",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": false,
-        "expected_tables": false,
-        "must_preserve": [],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "Formato breve."
-      },
-      "category_hint": "World",
-      "decision": "selected",
-      "deterministic_score": 76,
-      "evaluated_at": "2026-06-03T23:03:49.608773+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "storyline_development",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Formato breve."
-        },
-        "category_hint": "World",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Aggiornamento card per show di federazione minore.",
-        "event_key": "nwa_hard_times_6",
-        "id": "c9",
-        "priority": 4,
-        "priority_label": "medium"
-      },
-      "normalized_url": "https://www.ringsidenews.com/nwa-adds-world-title-match-hard-times-6",
-      "priority": "soft",
-      "published": "Wed, 03 Jun 2026 18:32:05 +0000",
-      "reason": "selected_overflow:ai:Aggiornamento card per show di federazione minore.; deterministic:hard:championship,hard:lineup,recency:fresh_12h",
-      "score": 74,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"NWA Adds World Title Match To Hard Times 6\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/nwa-adds-world-title-match-to-hard-times-6-53.jpg?x52795\" width=\"800\" /></p>NWA has added a major championship match to Hard Times 6. The promotion announced that NWA Worlds Heavyweight Champion Thrillbilly Silas Mason will defend the title against Kerry Morton this Saturday at Center Stage in Atlanta, giving the event another high-profile match heading into the weekend. The show already featured a stacked lineup, including the ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/nwa-adds-world-title-match-hard-times-6/\" title=\"NWA Adds World Title Match To Hard Times 6\">Read more</a>",
-      "title": "NWA Adds World Title Match To Hard Times 6",
-      "url": "https://www.ringsidenews.com/nwa-adds-world-title-match-hard-times-6/"
-    },
-    {
-      "age_hours": 4.9257248294444445,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Dichiarazione autoreferenziale, poco impatto operativo.",
+      "ai_editorial_reason": "Difesa titolata principale, risultato cruciale.",
       "ai_id": "c10",
       "ai_priority": 72,
       "ai_priority_label": "medium",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": true,
-        "expected_tables": false,
-        "must_preserve": [],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "Scartare."
-      },
-      "category_hint": "AEW",
-      "decision": "selected",
-      "deterministic_score": 70,
-      "evaluated_at": "2026-06-03T23:03:49.609387+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "low_value",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Scartare."
-        },
-        "category_hint": "AEW",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Dichiarazione autoreferenziale, poco impatto operativo.",
-        "event_key": "mjf_indie_departure",
-        "id": "c10",
-        "priority": 3,
-        "priority_label": "medium"
-      },
-      "normalized_url": "https://www.ringsidenews.com/mjf-announces-hes-stepping-away-american-independent-wrestling-focus-aew",
-      "priority": "soft",
-      "published": "Wed, 03 Jun 2026 18:08:17 +0000",
-      "reason": "ai:Dichiarazione autoreferenziale, poco impatto operativo.; deterministic:hard:championship,soft_penalty:explains why,recency:fresh_12h",
-      "score": 71,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"MJF Explains Why He May Never Leave AEW\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/03/mjf-explains-why-he-may-never-leave-aew-11.jpg?x52795\" width=\"800\" /></p>MJF is stepping away from American independent wrestling, and he says losing the AEW World Championship played a big role in the decision. The reigning AEW World Champion told Justin Barrasso of Undisputed that his match against Bobby Orlando at Beyond Wrestling on Friday will likely be the last time fans see him wrestle on ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/mjf-announces-hes-stepping-away-american-independent-wrestling-focus-aew/\" title=\"MJF Announces He’s Stepping Away From American Independent Wrestling to Focus on AEW\">Read more</a>",
-      "title": "MJF Announces He’s Stepping Away From American Independent Wrestling to Focus on AEW",
-      "url": "https://www.ringsidenews.com/mjf-announces-hes-stepping-away-american-independent-wrestling-focus-aew/"
-    },
-    {
-      "age_hours": 5.094891663333334,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Notizia su media partner importante per il wrestling.",
-      "ai_id": "c11",
-      "ai_priority": 72,
-      "ai_priority_label": "medium",
-      "article_type": "hard_news",
+      "article_type": "storyline_development",
       "assigned_to": "Menzo",
       "bob_brief": {
         "expected_embeds": [
           "youtube"
         ],
-        "expected_quotes": false,
-        "expected_tables": false,
-        "must_preserve": [
-          "embed video"
-        ],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "Includere trailer."
-      },
-      "category_hint": "World",
-      "decision": "selected",
-      "deterministic_score": 70,
-      "evaluated_at": "2026-06-03T23:03:49.609989+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "hard_news",
-        "bob_brief": {
-          "expected_embeds": [
-            "youtube"
-          ],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [
-            "embed video"
-          ],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Includere trailer."
-        },
-        "category_hint": "World",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Notizia su media partner importante per il wrestling.",
-        "event_key": "dark_side_ring_s7",
-        "id": "c11",
-        "priority": 5,
-        "priority_label": "medium"
-      },
-      "normalized_url": "https://www.ringsidenews.com/dark-side-ring-season-7-trailer-reveals-star-studded-lineup",
-      "priority": "soft",
-      "published": "Wed, 03 Jun 2026 17:58:08 +0000",
-      "reason": "selected_overflow:ai:Notizia su media partner importante per il wrestling.; deterministic:hard:lineup,recency:fresh_12h",
-      "score": 71,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Dark Side of The Ring Season 7 Trailer Reveals Star-Studded Lineup\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/dark-side-of-the-ring-season-7-trailer-reveals-star-studded-lineup-44.jpg?x52795\" width=\"800\" /></p>Dark Side of the Ring is officially turning up the heat for Season 7 — and the first trailer makes it clear VICE is going big this time. After confirming that the new season will premiere on July 7 at 9 p.m. ET on Vice TV with two back-to-back episodes, VICE has now dropped the ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/dark-side-ring-season-7-trailer-reveals-star-studded-lineup/\" title=\"Dark Side of The Ring Season 7 Trailer Reveals Star-Studded Lineup\">Read more</a>",
-      "title": "Dark Side of The Ring Season 7 Trailer Reveals Star-Studded Lineup",
-      "url": "https://www.ringsidenews.com/dark-side-ring-season-7-trailer-reveals-star-studded-lineup/"
-    },
-    {
-      "age_hours": 1.8637781058333334,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Analisi rilevante su una storyline core, menziona evento in Italia (ottimo per il target).",
-      "ai_id": "c12",
-      "ai_priority": 72,
-      "ai_priority_label": "medium",
-      "article_type": "storyline_development",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
         "expected_quotes": true,
         "expected_tables": false,
         "must_preserve": [
           "citazioni dirette"
         ],
         "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
+          "cta"
         ],
-        "source_specific_notes": "Sottolineare il legame con la tappa italiana del tour."
+        "source_specific_notes": ""
       },
-      "category_hint": "WWE",
+      "category_hint": "AEW",
       "decision": "selected",
-      "deterministic_score": 66,
-      "evaluated_at": "2026-06-03T23:03:49.601182+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "deterministic_score": 76,
+      "evaluated_at": "2026-06-04T02:05:22.973400+00:00",
+      "event_news_class": "event_soft_reaction",
+      "feed_url": "https://www.ringsidenews.com/feed/",
       "menzo_ai_review": {
         "article_type": "storyline_development",
         "bob_brief": {
-          "expected_embeds": [],
+          "expected_embeds": [
+            "youtube"
+          ],
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
             "citazioni dirette"
           ],
           "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
+            "cta"
           ],
-          "source_specific_notes": "Sottolineare il legame con la tappa italiana del tour."
+          "source_specific_notes": ""
         },
-        "category_hint": "WWE",
+        "category_hint": "AEW",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Analisi rilevante su una storyline core, menziona evento in Italia (ottimo per il target).",
+        "editorial_reason": "Difesa titolata principale, risultato cruciale.",
+        "event_key": "mjf_rush_dynamite",
+        "id": "c10",
+        "priority": 8,
+        "priority_label": "medium"
+      },
+      "normalized_url": "https://www.ringsidenews.com/mjf-survives-bloody-world-title-fight-rush-passes-out-wild-finish-aew-dynamite",
+      "priority": "soft",
+      "published": "Thu, 04 Jun 2026 00:35:22 +0000",
+      "reason": "ai:Difesa titolata principale, risultato cruciale.; deterministic:hard:championship,recency:fresh_12h",
+      "score": 74,
+      "show_day_policy": "news_before_report_then_report_closure",
+      "show_name": "AEW Dynamite",
+      "show_report_id": "aew_dynamite",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"MJF Survives Bloody World Title Fight After RUSH Passes Out In Wild Finish on AEW Dynamite\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/mjf-survives-bloody-world-title-fight-after-rush-passes-out-in-wild-finish-on-aew-dynamite-08.jpg?x10775\" width=\"800\" /></p>MJF is still the AEW World Champion, but his title defense against RUSH on AEW Dynamite was anything but clean. The June 3 episode kicked off with MJF putting the AEW World Championship on the line against RUSH in a No Countout Match from Richmond, Virginia. Before the match even started, MJF slapped RUSH during ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/mjf-survives-bloody-world-title-fight-rush-passes-out-wild-finish-aew-dynamite/\" title=\"MJF Survives Bloody World Title Fight After RUSH Passes Out In Wild Finish on AEW Dynamite\">Read more</a>",
+      "title": "MJF Survives Bloody World Title Fight After RUSH Passes Out In Wild Finish on AEW Dynamite",
+      "url": "https://www.ringsidenews.com/mjf-survives-bloody-world-title-fight-rush-passes-out-wild-finish-aew-dynamite/"
+    },
+    {
+      "age_hours": 2.1186042275,
+      "agent": "Menzo",
+      "ai_editorial_reason": "Reaction/Soft news, poco valore editoriale.",
+      "ai_id": "c11",
+      "ai_priority": 72,
+      "ai_priority_label": "medium",
+      "article_type": "soft_news",
+      "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": false,
+        "expected_tables": false,
+        "must_preserve": [],
+        "possible_noise": [],
+        "source_specific_notes": ""
+      },
+      "category_hint": "WWE",
+      "decision": "selected",
+      "deterministic_score": 72,
+      "evaluated_at": "2026-06-04T02:05:22.975220+00:00",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "soft_news",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [],
+          "source_specific_notes": ""
+        },
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "",
+        "editorial_reason": "Reaction/Soft news, poco valore editoriale.",
+        "event_key": "sol_ruca_backstage",
+        "id": "c11",
+        "priority": 2,
+        "priority_label": "medium"
+      },
+      "normalized_url": "https://www.ringsidenews.com/triple-hs-backstage-reaction-sol-rucas-wwe-ic-title-win",
+      "priority": "soft",
+      "published": "Wed, 03 Jun 2026 23:58:16 +0000",
+      "reason": "ai:Reaction/Soft news, poco valore editoriale.; deterministic:hard:championship,strategic:backstage,entity:becky lynch,soft_penalty:reaction,recency:fresh_12h",
+      "score": 72,
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Triple H’s Backstage Reaction After Sol Ruca&#039;s WWE IC Title Win\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/triple-hs-backstage-reaction-after-sol-rucas-wwe-ic-title-win-31.jpg?x10775\" width=\"800\" /></p>Sol Ruca had a major moment after capturing the WWE Women’s Intercontinental Championship, but there wasn’t much time for her to slow down and take it all in. Ruca appeared on TMZ’s Inside the Ring after defeating Becky Lynch for the title in Italy. During the conversation, she was asked what happened after she walked ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/triple-hs-backstage-reaction-sol-rucas-wwe-ic-title-win/\" title=\"Triple H’s Backstage Reaction After Sol Ruca&#8217;s WWE IC Title Win\">Read more</a>",
+      "title": "Triple H’s Backstage Reaction After Sol Ruca’s WWE IC Title Win",
+      "url": "https://www.ringsidenews.com/triple-hs-backstage-reaction-sol-rucas-wwe-ic-title-win/"
+    },
+    {
+      "age_hours": 3.3413831380555554,
+      "agent": "Menzo",
+      "ai_editorial_reason": "Notizia di cronaca giudiziaria non prioritaria per il pubblico italiano.",
+      "ai_id": "c3",
+      "ai_priority": 48,
+      "ai_priority_label": "low",
+      "article_type": "low_value",
+      "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": false,
+        "expected_tables": false,
+        "must_preserve": [],
+        "possible_noise": [],
+        "source_specific_notes": ""
+      },
+      "category_hint": "World",
+      "decision": "selected",
+      "deterministic_score": 90,
+      "evaluated_at": "2026-06-04T02:05:22.979299+00:00",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "low_value",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [],
+          "source_specific_notes": ""
+        },
+        "category_hint": "World",
+        "decision": "skip",
+        "duplicate_of": "",
+        "editorial_reason": "Notizia di cronaca giudiziaria non prioritaria per il pubblico italiano.",
+        "event_key": "duke_droese_legal",
+        "id": "c3",
+        "priority": 1,
+        "priority_label": "low"
+      },
+      "normalized_url": "https://www.ringsidenews.com/former-wwf-star-mike-duke-droeses-criminal-case-delayed-yet-again",
+      "priority": "soft",
+      "published": "Wed, 03 Jun 2026 22:44:54 +0000",
+      "reason": "ai:Notizia di cronaca giudiziaria non prioritaria per il pubblico italiano.; deterministic:hard:legal,recency:fresh_12h",
+      "score": 71,
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Former WWF Star Mike ‘Duke’ Droese’s Criminal Case Delayed Yet Again\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/former-wwf-star-mike-duke-droeses-criminal-case-delayed-yet-again-48.jpg?x10775\" width=\"800\" /></p>Mike &#8220;Duke&#8221; Droese will have to wait even longer before his criminal case moves forward. The former WWF star&#8217;s legal troubles continue to drag on, as court records show his latest hearing in Warren County, Tennessee has been postponed once again. The case stems from Droese&#8217;s May 2025 arrest on a charge of Attempted Aggravated ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/former-wwf-star-mike-duke-droeses-criminal-case-delayed-yet-again/\" title=\"Former WWF Star Mike ‘Duke’ Droese’s Criminal Case Delayed Yet Again\">Read more</a>",
+      "title": "Former WWF Star Mike ‘Duke’ Droese’s Criminal Case Delayed Yet Again",
+      "url": "https://www.ringsidenews.com/former-wwf-star-mike-duke-droeses-criminal-case-delayed-yet-again/"
+    },
+    {
+      "age_hours": 4.889713688611112,
+      "agent": "Menzo",
+      "ai_editorial_reason": "Opinioni di Bully Ray, troppo soggettivo/soft news.",
+      "ai_id": "c12",
+      "ai_priority": 72,
+      "ai_priority_label": "medium",
+      "article_type": "soft_news",
+      "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "must_preserve": [],
+        "possible_noise": [],
+        "source_specific_notes": ""
+      },
+      "category_hint": "WWE",
+      "decision": "selected",
+      "deterministic_score": 66,
+      "evaluated_at": "2026-06-04T02:05:22.969280+00:00",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "soft_news",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [],
+          "source_specific_notes": ""
+        },
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "",
+        "editorial_reason": "Opinioni di Bully Ray, troppo soggettivo/soft news.",
         "event_key": "bloodline_storyline",
         "id": "c12",
-        "priority": 8,
+        "priority": 3,
         "priority_label": "medium"
       },
       "normalized_url": "https://www.wrestlinginc.com/2187009/bully-ray-jacob-fatu-bloodline-wwe-clash-in-italy-raw",
       "priority": "soft",
       "published": "Wed, 03 Jun 2026 21:12:00 +0000",
-      "reason": "selected_overflow:ai:Analisi rilevante su una storyline core, menziona evento in Italia (ottimo per il target).; deterministic:strategic:clash in italy,strategic:raw,recency:fresh_12h",
+      "reason": "ai:Opinioni di Bully Ray, troppo soggettivo/soft news.; deterministic:strategic:clash in italy,strategic:raw,recency:fresh_12h",
       "score": 69,
       "source": "wrestlinginc",
       "summary": "WWE Hall of Famer Bully Ray spoke about his thoughts on the Jacob Fatu-Bloodline storyline following the \"WWE Raw\" episode post-Clash in Italy.",
@@ -1105,28 +893,28 @@
   ],
   "skipped": [
     {
-      "age_hours": 1.934333723888889,
+      "age_hours": 1.0897134586111112,
       "agent": "Menzo",
-      "ai_priority_label": "low",
-      "article_type": "soft_news",
+      "ai_priority_label": "skip",
+      "article_type": "low_value",
       "assigned_to": "Menzo",
       "category_hint": "WWE",
       "decision": "skip",
-      "deterministic_score": 54,
-      "evaluated_at": "2026-06-03T23:03:49.601407+00:00",
+      "deterministic_score": 38,
+      "evaluated_at": "2026-06-04T02:05:22.968452+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2187001/nick-khan-cody-rhodes-roman-reigns-wwe-wrestlemania-40",
+      "normalized_url": "https://www.wrestlinginc.com/2184419/wwe-hofer-nikki-bella-wishes-wrestle-wnba-stars-caitlin-clark-alex-morgan",
       "priority": "skip",
-      "published": "Wed, 03 Jun 2026 21:07:46 +0000",
-      "reason": "softpool_ineligible:entity:roman reigns,entity:cody rhodes,entity:the rock,recency:fresh_12h",
-      "score": 54,
+      "published": "Thu, 04 Jun 2026 01:00:00 +0000",
+      "reason": "softpool_ineligible:recency:fresh_12h",
+      "score": 38,
       "source": "wrestlinginc",
-      "summary": "Nick Khan contradicts previous claims from The Rock and others by saying that Cody Rhodes beating Roman Reigns at WrestleMania 40 was always the plan",
-      "title": "Nick Khan: Cody Rhodes Beating Roman Reigns At WWE WrestleMania XL Was Always The Plan",
-      "url": "https://www.wrestlinginc.com/2187001/nick-khan-cody-rhodes-roman-reigns-wwe-wrestlemania-40/"
+      "summary": "WWE Hall of Famer Nikki Bella reveals which pro athletes she'd like to take on and partner with in the wrestling ring.",
+      "title": "WWE HOFer Nikki Bella Wishes She Could Wrestle These WNBA Stars",
+      "url": "https://www.wrestlinginc.com/2184419/wwe-hofer-nikki-bella-wishes-wrestle-wnba-stars-caitlin-clark-alex-morgan/"
     },
     {
-      "age_hours": 0.9451667513888888,
+      "age_hours": 1.3963801836111112,
       "agent": "Menzo",
       "ai_priority_label": "skip",
       "article_type": "low_value",
@@ -1134,23 +922,27 @@
       "category_hint": "AEW",
       "decision": "skip",
       "deterministic_score": 38,
-      "evaluated_at": "2026-06-03T23:03:49.600307+00:00",
+      "evaluated_at": "2026-06-04T02:05:22.968662+00:00",
+      "event_news_class": "event_soft_reaction",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2187054/aew-kevin-knight-speedball-mike-bailey-albert-einstein-deion-sanders-compares",
+      "normalized_url": "https://www.wrestlinginc.com/2187189/mjf-escapes-no-count-out-match-aew-world-title",
       "priority": "skip",
-      "published": "Wed, 03 Jun 2026 22:07:07 +0000",
+      "published": "Thu, 04 Jun 2026 00:41:36 +0000",
       "reason": "softpool_ineligible:recency:fresh_12h",
       "score": 38,
+      "show_day_policy": "news_before_report_then_report_closure",
+      "show_name": "AEW Dynamite",
+      "show_report_id": "aew_dynamite",
       "source": "wrestlinginc",
-      "summary": "They might not be on the same page now, but AEW's Kevin Knight believes \"Speedball\" Mike Bailey is on the level of Albert Einstein and Deion Sanders.",
-      "title": "AEW's Kevin Knight Compares Speedball Mike Bailey To Albert Einstein & Deion Sanders",
-      "url": "https://www.wrestlinginc.com/2187054/aew-kevin-knight-speedball-mike-bailey-albert-einstein-deion-sanders-compares/"
+      "summary": "MJF is still AEW World Champion after a brutal defense in a No Count Out match to open \"AEW Dynamite.\"",
+      "title": "MJF Escapes No Count Out Match With AEW World Title",
+      "url": "https://www.wrestlinginc.com/2187189/mjf-escapes-no-count-out-match-aew-world-title/"
     },
     {
-      "age_hours": 0.9840556988888889,
+      "age_hours": 0.2624917216666667,
       "agent": "Menzo",
-      "ai_editorial_reason": "Duplicato di c2, selezionata la notizia originale.",
-      "ai_id": "c7",
+      "ai_editorial_reason": "Duplicato, focalizzato su dettaglio match.",
+      "ai_id": "c4",
       "ai_priority": 0,
       "ai_priority_label": "skip",
       "article_type": "duplicate",
@@ -1161,15 +953,15 @@
         "expected_tables": false,
         "must_preserve": [],
         "possible_noise": [],
-        "source_specific_notes": "Ignorare."
+        "source_specific_notes": ""
       },
       "category_hint": "AEW",
       "decision": "skip",
-      "deterministic_score": 76,
-      "duplicate_of": "c2",
-      "evaluated_at": "2026-06-03T23:03:49.600517+00:00",
-      "event_news_class": "post_show_hard_news",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "deterministic_score": 88,
+      "duplicate_of": "c1",
+      "evaluated_at": "2026-06-04T02:05:22.970200+00:00",
+      "event_news_class": "event_factual_news",
+      "feed_url": "https://www.ringsidenews.com/feed/",
       "massive_editorial_boost": "show_factual_core",
       "menzo_ai_review": {
         "article_type": "duplicate",
@@ -1179,32 +971,145 @@
           "expected_tables": false,
           "must_preserve": [],
           "possible_noise": [],
-          "source_specific_notes": "Ignorare."
+          "source_specific_notes": ""
         },
         "category_hint": "AEW",
         "decision": "skip",
-        "duplicate_of": "c2",
-        "editorial_reason": "Duplicato di c2, selezionata la notizia originale.",
+        "duplicate_of": "c1",
+        "editorial_reason": "Duplicato, focalizzato su dettaglio match.",
         "event_key": "mercedes_mone_return",
-        "id": "c7",
+        "id": "c4",
         "priority": 0,
         "priority_label": "skip"
       },
-      "normalized_url": "https://www.wrestlinginc.com/2187053/mercedes-mone-aew-status-dynamite-owen-hart-tournament",
+      "normalized_url": "https://www.ringsidenews.com/mercedes-mone-advances-owen-hart-tournament-making-alex-windsor-tap-out-aew-dynamite",
       "priority": "skip",
-      "published": "Wed, 03 Jun 2026 22:04:47 +0000",
-      "reason": "ai_duplicate_event:mercedes mone return; ai_duplicate_of:c2; strategic:backstage,entity:mercedes mone,recency:fresh_12h",
+      "published": "Thu, 04 Jun 2026 01:49:38 +0000",
+      "reason": "ai_duplicate_event:mercedes mone return; ai_duplicate_of:c1; hard:return,entity:mercedes mone,recency:fresh_12h",
+      "score": 48,
+      "show_day_policy": "news_before_report_then_report_closure",
+      "show_name": "AEW Dynamite",
+      "show_report_id": "aew_dynamite",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Mercedes Moné Advances In Owen Hart Tournament After Making Alex Windsor Tap Out On AEW Dynamite\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/mercedes-mone-advances-in-owen-hart-tournament-after-making-alex-windsor-tap-out-on-aew-dynamite-03.jpg?x10775\" width=\"800\" /></p>Mercedes Moné didn’t just return to AEW on Dynamite, she picked up a big win in the process. Moné was revealed as the wild card entry in the Owen Hart Foundation Women’s Tournament during the June 3, 2026 episode of AEW Dynamite. She stepped into the quarterfinal match against Alex Windsor, marking her first AEW ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/mercedes-mone-advances-owen-hart-tournament-making-alex-windsor-tap-out-aew-dynamite/\" title=\"Mercedes Moné Advances In Owen Hart Tournament After Making Alex Windsor Tap Out On AEW Dynamite\">Read more</a>",
+      "title": "Mercedes Moné Advances In Owen Hart Tournament After Making Alex Windsor Tap Out On AEW Dynamite",
+      "url": "https://www.ringsidenews.com/mercedes-mone-advances-owen-hart-tournament-making-alex-windsor-tap-out-aew-dynamite/"
+    },
+    {
+      "age_hours": 0.4830475077777778,
+      "agent": "Menzo",
+      "ai_editorial_reason": "Duplicato.",
+      "ai_id": "c2",
+      "ai_priority": 0,
+      "ai_priority_label": "skip",
+      "article_type": "duplicate",
+      "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": false,
+        "expected_tables": false,
+        "must_preserve": [],
+        "possible_noise": [],
+        "source_specific_notes": ""
+      },
+      "category_hint": "AEW",
+      "decision": "skip",
+      "deterministic_score": 92,
+      "duplicate_of": "c1",
+      "evaluated_at": "2026-06-04T02:05:22.971030+00:00",
+      "event_news_class": "event_factual_news",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "massive_editorial_boost": "show_factual_core",
+      "menzo_ai_review": {
+        "article_type": "duplicate",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [],
+          "source_specific_notes": ""
+        },
+        "category_hint": "AEW",
+        "decision": "skip",
+        "duplicate_of": "c1",
+        "editorial_reason": "Duplicato.",
+        "event_key": "mercedes_mone_return",
+        "id": "c2",
+        "priority": 0,
+        "priority_label": "skip"
+      },
+      "normalized_url": "https://www.ringsidenews.com/mercedes-mone-returns-wild-card-owen-hart-tournament-during-june-3-aew-dynamite",
+      "priority": "skip",
+      "published": "Thu, 04 Jun 2026 01:36:24 +0000",
+      "reason": "ai_duplicate_event:mercedes mone return; ai_duplicate_of:c1; hard:returns,hard:return,entity:mercedes mone,recency:fresh_12h",
+      "score": 51,
+      "show_day_policy": "news_before_report_then_report_closure",
+      "show_name": "AEW Dynamite",
+      "show_report_id": "aew_dynamite",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Mercedes Moné Returns As Wild Card In Owen Hart Tournament During June 3 AEW Dynamite\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/mercedes-mone-returns-as-wild-card-in-owen-hart-tournament-during-june-3-aew-dynamite-54.jpg?x10775\" width=\"800\" /></p>Mercedes Moné is officially back in AEW. After months away from AEW television, Moné made her return during the June 3, 2026 episode of AEW Dynamite as the mystery wild card entry in the Owen Hart Foundation Tournament. The match was set up as Alex Windsor taking on a mystery opponent, but the big reveal ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/mercedes-mone-returns-wild-card-owen-hart-tournament-during-june-3-aew-dynamite/\" title=\"Mercedes Moné Returns As Wild Card In Owen Hart Tournament During June 3 AEW Dynamite\">Read more</a>",
+      "title": "Mercedes Moné Returns As Wild Card In Owen Hart Tournament During June 3 AEW Dynamite",
+      "url": "https://www.ringsidenews.com/mercedes-mone-returns-wild-card-owen-hart-tournament-during-june-3-aew-dynamite/"
+    },
+    {
+      "age_hours": 0.5911032675,
+      "agent": "Menzo",
+      "ai_editorial_reason": "Duplicato.",
+      "ai_id": "c9",
+      "ai_priority": 0,
+      "ai_priority_label": "skip",
+      "article_type": "duplicate",
+      "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": false,
+        "expected_tables": false,
+        "must_preserve": [],
+        "possible_noise": [],
+        "source_specific_notes": ""
+      },
+      "category_hint": "AEW",
+      "decision": "skip",
+      "deterministic_score": 76,
+      "duplicate_of": "c8",
+      "evaluated_at": "2026-06-04T02:05:22.971764+00:00",
+      "event_news_class": "event_soft_reaction",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "duplicate",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [],
+          "source_specific_notes": ""
+        },
+        "category_hint": "AEW",
+        "decision": "skip",
+        "duplicate_of": "c8",
+        "editorial_reason": "Duplicato.",
+        "event_key": "kevin_knight_don_callis",
+        "id": "c9",
+        "priority": 0,
+        "priority_label": "skip"
+      },
+      "normalized_url": "https://www.ringsidenews.com/kevin-knight-revealed-newest-member-don-callis-family-aew-dynamite",
+      "priority": "skip",
+      "published": "Thu, 04 Jun 2026 01:29:55 +0000",
+      "reason": "ai_duplicate_event:kevin knight don callis; ai_duplicate_of:c8; hard:championship,recency:fresh_12h",
       "score": 42,
       "show_day_policy": "news_before_report_then_report_closure",
       "show_name": "AEW Dynamite",
       "show_report_id": "aew_dynamite",
-      "source": "wrestlinginc",
-      "summary": "A new report revealed more about the AEW status of Mercedes Mone ahead of tonight's edition of \"AEW Dynamite.\"",
-      "title": "Backstage Update On Mercedes Mone's AEW Status Ahead Of Tonight's Dynamite",
-      "url": "https://www.wrestlinginc.com/2187053/mercedes-mone-aew-status-dynamite-owen-hart-tournament/"
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Kevin Knight Revealed As Newest Member Of Don Callis Family On AEW Dynamite\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/kevin-knight-revealed-as-newest-member-of-don-callis-family-on-aew-dynamite-28.jpg?x10775\" width=\"800\" /></p>Kevin Knight had a big night on AEW Dynamite, and it came with a major reveal before his TNT Championship defense. During the June 3 episode of AEW Dynamite from Richmond, Virginia, Andrade El Idolo made quick work of DK Vandu in singles action. After the match, Andrade grabbed a microphone and called out MJF, ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/kevin-knight-revealed-newest-member-don-callis-family-aew-dynamite/\" title=\"Kevin Knight Revealed As Newest Member Of Don Callis Family On AEW Dynamite\">Read more</a>",
+      "title": "Kevin Knight Revealed As Newest Member Of Don Callis Family On AEW Dynamite",
+      "url": "https://www.ringsidenews.com/kevin-knight-revealed-newest-member-don-callis-family-aew-dynamite/"
     },
     {
-      "age_hours": 1.0776668663888889,
+      "age_hours": 0.9947145994444444,
       "agent": "Menzo",
       "ai_priority_label": "skip",
       "article_type": "low_value",
@@ -1212,20 +1117,25 @@
       "category_hint": "AEW",
       "decision": "skip",
       "deterministic_score": 38,
-      "evaluated_at": "2026-06-03T23:03:49.600720+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2187049/tony-khan-aew-dark-side-of-the-ring-trailer",
+      "evaluated_at": "2026-06-04T02:05:22.972559+00:00",
+      "event_news_class": "event_factual_news",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "massive_editorial_boost": "show_factual_core",
+      "normalized_url": "https://www.ringsidenews.com/thekla-forces-announcers-apologize-spitting-flipping-off-stardom-sign-during-aew-dynamite",
       "priority": "skip",
-      "published": "Wed, 03 Jun 2026 21:59:10 +0000",
+      "published": "Thu, 04 Jun 2026 01:05:42 +0000",
       "reason": "softpool_ineligible:recency:fresh_12h",
       "score": 38,
-      "source": "wrestlinginc",
-      "summary": "AEW owner Tony Khan and multiple AEW stars are featured in the new trailer for Dark Side of the Ring, one month before the seventh season premieres",
-      "title": "Tony Khan, Multiple AEW Stars Featured In New Dark Side Of The Ring Trailer",
-      "url": "https://www.wrestlinginc.com/2187049/tony-khan-aew-dark-side-of-the-ring-trailer/"
+      "show_day_policy": "news_before_report_then_report_closure",
+      "show_name": "AEW Dynamite",
+      "show_report_id": "aew_dynamite",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Thekla Forces Announcers to Apologize After Spitting &amp; Flipping Off STARDOM Sign During AEW Dynamite\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/thekla-forces-announcers-to-apologize-after-spitting-amp-flipping-off-stardom-sign-during-aew-dynamite-39.jpg?x10775\" width=\"800\" /></p>Thekla took things to another level on AEW Dynamite this week, and the commentary team had to apologize after what happened. During the June 3 episode from Richmond, Virginia, Triangle of Madness came to the ring, with Thekla joined by Julia Hart and Skye Blue. The segment quickly turned into a direct shot at STARDOM ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/thekla-forces-announcers-apologize-spitting-flipping-off-stardom-sign-during-aew-dynamite/\" title=\"Thekla Forces Announcers to Apologize After Spitting &#38; Flipping Off STARDOM Sign During AEW Dynamite\">Read more</a>",
+      "title": "Thekla Forces Announcers to Apologize After Spitting & Flipping Off STARDOM Sign During AEW Dynamite",
+      "url": "https://www.ringsidenews.com/thekla-forces-announcers-apologize-spitting-flipping-off-stardom-sign-during-aew-dynamite/"
     },
     {
-      "age_hours": 1.3454447069444444,
+      "age_hours": 2.804993528333333,
       "agent": "Menzo",
       "ai_priority_label": "skip",
       "article_type": "low_value",
@@ -1233,20 +1143,20 @@
       "category_hint": "AEW",
       "decision": "skip",
       "deterministic_score": 38,
-      "evaluated_at": "2026-06-03T23:03:49.600946+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2187035/aew-anthony-bowens-new-day-great-addition-wwe-release",
+      "evaluated_at": "2026-06-04T02:05:22.976703+00:00",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/young-bucks-pledge-youtube-stream-proceeds-support-rebel-als-diagnosis",
       "priority": "skip",
-      "published": "Wed, 03 Jun 2026 21:43:06 +0000",
+      "published": "Wed, 03 Jun 2026 23:17:05 +0000",
       "reason": "softpool_ineligible:recency:fresh_12h",
       "score": 38,
-      "source": "wrestlinginc",
-      "summary": "Another AEW star has spoken out about how much they'd like to see New Day's Xavier Woods and Kofi Kingston in AEW following their WWE departure.",
-      "title": "AEW Star Says Former New Day Would 'Make A Great Addition' Following Their WWE Release",
-      "url": "https://www.wrestlinginc.com/2187035/aew-anthony-bowens-new-day-great-addition-wwe-release/"
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"The Young Bucks Pledge YouTube Stream Proceeds To Support Rebel After ALS Diagnosis\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/the-young-bucks-pledge-youtube-stream-proceeds-to-support-rebel-after-als-diagnosis-24.jpg?x10775\" width=\"800\" /></p>The Young Bucks are doing their part to help Rebel. During a live stream on their YouTube channel on July 3, Matthew and Nicholas Jackson announced that all money raised from the stream would be donated directly to I AM ALS in support of former AEW personality Rebel. The fundraiser is the latest show of ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/young-bucks-pledge-youtube-stream-proceeds-support-rebel-als-diagnosis/\" title=\"The Young Bucks Pledge YouTube Stream Proceeds To Support Rebel After ALS Diagnosis\">Read more</a>",
+      "title": "The Young Bucks Pledge YouTube Stream Proceeds To Support Rebel After ALS Diagnosis",
+      "url": "https://www.ringsidenews.com/young-bucks-pledge-youtube-stream-proceeds-support-rebel-als-diagnosis/"
     },
     {
-      "age_hours": 0.03905616333333334,
+      "age_hours": 2.8919382125,
       "agent": "Menzo",
       "ai_priority_label": "low",
       "article_type": "low_value",
@@ -1254,63 +1164,38 @@
       "category_hint": "WWE",
       "decision": "skip",
       "deterministic_score": 46,
-      "evaluated_at": "2026-06-03T23:03:49.602190+00:00",
+      "evaluated_at": "2026-06-04T02:05:22.977566+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/liv-morgan-declares-her-revenge-tour",
+      "normalized_url": "https://www.ringsidenews.com/liv-morgan-calls-herself-greatest-womens-world-champion-all-time",
       "priority": "skip",
-      "published": "Wed, 03 Jun 2026 23:01:29 +0000",
+      "published": "Wed, 03 Jun 2026 23:11:52 +0000",
       "reason": "softpool_ineligible:entity:liv morgan,recency:fresh_12h",
       "score": 46,
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Liv Morgan Declares Her Revenge Tour Is Over\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/liv-morgan-declares-her-revenge-tour-is-over-15.jpg?x52795\" width=\"800\" /></p>Liv Morgan believes her revenge tour has already done exactly what it needed to do, and now the WWE Women’s World Champion is ready to move into a whole new era. During a conversation with WSFL, Morgan was asked about her journey in WWE and how fans have followed what she called her revenge tour. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/liv-morgan-declares-her-revenge-tour/\" title=\"Liv Morgan Declares Her Revenge Tour Is Over\">Read more</a>",
-      "title": "Liv Morgan Declares Her Revenge Tour Is Over",
-      "url": "https://www.ringsidenews.com/liv-morgan-declares-her-revenge-tour/"
+      "summary": "<p><img alt=\"Liv Morgan Calls Herself The Greatest Women’s World Champion Of All Time\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/liv-morgan-calls-herself-the-greatest-womens-world-champion-of-all-time-30.jpg?x10775\" width=\"800\" /></p>Liv Morgan is not lacking confidence during her current run as WWE Women’s World Champion. During a conversation with WSFL, Morgan looked back on her rise from a childhood dream to becoming one of WWE’s top stars. The interview opened with Morgan being asked about growing up wrestling with her brothers in the backyard and ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/liv-morgan-calls-herself-greatest-womens-world-champion-all-time/\" title=\"Liv Morgan Calls Herself The Greatest Women’s World Champion Of All Time\">Read more</a>",
+      "title": "Liv Morgan Calls Herself The Greatest Women’s World Champion Of All Time",
+      "url": "https://www.ringsidenews.com/liv-morgan-calls-herself-greatest-womens-world-champion-all-time/"
     },
     {
-      "age_hours": 0.6637787533333334,
+      "age_hours": 2.9641606830555554,
       "agent": "Menzo",
       "ai_priority_label": "skip",
       "article_type": "low_value",
       "assigned_to": "Menzo",
       "category_hint": "WWE",
       "decision": "skip",
-      "deterministic_score": 32,
-      "evaluated_at": "2026-06-03T23:03:49.603513+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/sol-ruca-explains-why-dating-can-difficult-wwe-superstar",
-      "priority": "skip",
-      "published": "Wed, 03 Jun 2026 22:24:00 +0000",
-      "reason": "softpool_ineligible:soft_penalty:explains why,recency:fresh_12h",
-      "score": 32,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Sol Ruca Explains Why Dating Can Be Difficult as a WWE Superstar\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/sol-ruca-explains-why-dating-can-be-difficult-as-a-wwe-superstar-00.jpg?x52795\" width=\"800\" /></p>Sol Ruca is opening up about why dating as a WWE Superstar is not always easy, as they have to deal with hurdles that others don&#8217;t have to bear. While speaking to Inside The Ring, Ruca was asked whether dating is difficult as a major WWE star, and she admitted the schedule alone can make ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/sol-ruca-explains-why-dating-can-difficult-wwe-superstar/\" title=\"Sol Ruca Explains Why Dating Can Be Difficult as a WWE Superstar\">Read more</a>",
-      "title": "Sol Ruca Explains Why Dating Can Be Difficult as a WWE Superstar",
-      "url": "https://www.ringsidenews.com/sol-ruca-explains-why-dating-can-difficult-wwe-superstar/"
-    },
-    {
-      "age_hours": 2.4029463686111114,
-      "agent": "Menzo",
-      "ai_priority_label": "skip",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "NXT",
-      "decision": "skip",
       "deterministic_score": 38,
-      "evaluated_at": "2026-06-03T23:03:49.606928+00:00",
-      "event_news_class": "event_soft_reaction",
+      "evaluated_at": "2026-06-04T02:05:22.978460+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/ilja-dragunovs-wwe-status-absence-tv",
+      "normalized_url": "https://www.ringsidenews.com/liv-morgan-addresses-defending-wwe-womens-world-title-summerslam",
       "priority": "skip",
-      "published": "Wed, 03 Jun 2026 20:39:39 +0000",
-      "reason": "softpool_ineligible:recency:fresh_12h",
+      "published": "Wed, 03 Jun 2026 23:07:32 +0000",
+      "reason": "softpool_ineligible:entity:liv morgan,soft_penalty:addresses,recency:fresh_12h",
       "score": 38,
-      "show_day_policy": "news_before_report_then_report_closure",
-      "show_name": "WWE NXT",
-      "show_report_id": "wwe_nxt",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Ilja Dragunov&#039;s WWE Status After Absence From TV\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/ilja-dragunovs-wwe-status-after-absence-from-tv-19.jpg?x52795\" width=\"800\" /></p>Ilja Dragunov has been absent from WWE television since WrestleMania, and fans are still wondering why one of the company&#8217;s most intense performers has seemingly vanished from programming. A fan recently asked about Dragunov&#8217;s status during a Fightful Select Q&#38;A, leading to an update on where things currently stand for the former NXT Champion. While ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/ilja-dragunovs-wwe-status-absence-tv/\" title=\"Ilja Dragunov&#8217;s WWE Status After Absence From TV\">Read more</a>",
-      "title": "Ilja Dragunov’s WWE Status After Absence From TV",
-      "url": "https://www.ringsidenews.com/ilja-dragunovs-wwe-status-absence-tv/"
+      "summary": "<p><img alt=\"Liv Morgan Addresses Defending WWE Women’s World Title at SummerSlam\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/liv-morgan-addresses-defending-wwe-womens-world-title-at-summerslam-47.jpg?x10775\" width=\"800\" /></p>Liv Morgan is already looking ahead to SummerSlam, and she fully expects to walk into the event as WWE Women’s World Champion. During a conversation with WSFL, Morgan was asked about SummerSlam, which is set for August 1 and 2. The champion did not reveal who she may face at the event, but she made ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/liv-morgan-addresses-defending-wwe-womens-world-title-summerslam/\" title=\"Liv Morgan Addresses Defending WWE Women’s World Title at SummerSlam\">Read more</a>",
+      "title": "Liv Morgan Addresses Defending WWE Women’s World Title at SummerSlam",
+      "url": "https://www.ringsidenews.com/liv-morgan-addresses-defending-wwe-womens-world-title-summerslam/"
     }
   ],
   "version": "v93_20_selective_softpool"

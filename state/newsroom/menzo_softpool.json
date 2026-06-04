@@ -1,7 +1,7 @@
 {
   "items": [
     {
-      "age_hours": 4.416002287222222,
+      "age_hours": 7.441938941388889,
       "agent": "Menzo",
       "ai_priority_label": "medium",
       "article_type": "strategic_discussion",
@@ -9,9 +9,10 @@
       "category_hint": "WWE",
       "decision": "pending",
       "deterministic_score": 64,
-      "evaluated_at": "2026-06-03T23:03:49.608235+00:00",
+      "evaluated_at": "2026-06-04T02:05:22.980190+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
-      "last_seen_at": "2026-06-03T23:03:56.402634+00:00",
+      "from_softpool": true,
+      "last_seen_at": "2026-06-04T02:05:28.440308+00:00",
       "normalized_url": "https://www.ringsidenews.com/kane-reacts-undertakers-success-running-aaa-wwe-takeover",
       "priority": "soft",
       "published": "Wed, 03 Jun 2026 18:38:52 +0000",
@@ -29,6 +30,6 @@
   "min_score": 55,
   "softnews_ttl_hours": 24,
   "ttl_hours": 36,
-  "updated_at": "2026-06-03T23:03:56.402634+00:00",
+  "updated_at": "2026-06-04T02:05:28.440308+00:00",
   "version": "v93_20_selective_softpool"
 }

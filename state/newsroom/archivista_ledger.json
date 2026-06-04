@@ -2,582 +2,6 @@
   {
     "agent_handoffs": {
       "alfred": {
-        "approved": 2,
-        "blockers": 1,
-        "editorial_changes": 0,
-        "needs_revision": 1,
-        "warnings": 0
-      },
-      "bob": {
-        "errors": 0,
-        "extraction_empty": 0,
-        "ready_for_alfred": 3,
-        "translation_pending": 0
-      },
-      "massy": {
-        "already_published_hard_skipped": 8,
-        "already_worked": 1,
-        "hard_skipped": 10,
-        "to_menzo": 23,
-        "to_simone": 1
-      },
-      "menzo": {
-        "pending": 0,
-        "skipped": 17,
-        "to_bob_or_v92": 6
-      },
-      "publisher": {
-        "already_published": 0,
-        "dry_run": 0,
-        "errors": 0,
-        "published": 2,
-        "wp_not_ready": 0
-      },
-      "simone": {
-        "ready": 0,
-        "skipped": 6,
-        "waiting": 0
-      }
-    },
-    "already_published": 0,
-    "article_count": 6,
-    "errors": 1,
-    "generated_at": "2026-06-01T23:12:40.519330+00:00",
-    "overall_status": "error",
-    "published": 2,
-    "warnings": 2
-  },
-  {
-    "agent_handoffs": {
-      "alfred": {
-        "approved": 2,
-        "blockers": 1,
-        "editorial_changes": 0,
-        "needs_revision": 1,
-        "warnings": 0
-      },
-      "bob": {
-        "errors": 0,
-        "extraction_empty": 0,
-        "ready_for_alfred": 3,
-        "translation_pending": 0
-      },
-      "massy": {
-        "already_published_hard_skipped": 8,
-        "already_worked": 1,
-        "hard_skipped": 10,
-        "to_menzo": 23,
-        "to_simone": 1
-      },
-      "menzo": {
-        "pending": 0,
-        "skipped": 17,
-        "to_bob_or_v92": 6
-      },
-      "publisher": {
-        "already_published": 0,
-        "dry_run": 0,
-        "errors": 0,
-        "published": 2,
-        "wp_not_ready": 0
-      },
-      "simone": {
-        "ready": 0,
-        "skipped": 6,
-        "waiting": 0
-      }
-    },
-    "already_published": 0,
-    "article_count": 6,
-    "errors": 1,
-    "generated_at": "2026-06-01T23:12:40.523821+00:00",
-    "overall_status": "error",
-    "published": 2,
-    "warnings": 2
-  },
-  {
-    "agent_handoffs": {
-      "alfred": {
-        "approved": 3,
-        "blockers": 0,
-        "editorial_changes": 0,
-        "needs_revision": 0,
-        "warnings": 0
-      },
-      "bob": {
-        "errors": 0,
-        "extraction_empty": 0,
-        "ready_for_alfred": 3,
-        "translation_pending": 0
-      },
-      "massy": {
-        "already_published_hard_skipped": 8,
-        "already_worked": 1,
-        "hard_skipped": 10,
-        "to_menzo": 23,
-        "to_simone": 1
-      },
-      "menzo": {
-        "pending": 0,
-        "skipped": 17,
-        "to_bob_or_v92": 6
-      },
-      "publisher": {
-        "already_published": 0,
-        "dry_run": 0,
-        "errors": 0,
-        "published": 3,
-        "wp_not_ready": 0
-      },
-      "simone": {
-        "ready": 0,
-        "skipped": 6,
-        "waiting": 0
-      }
-    },
-    "already_published": 0,
-    "article_count": 6,
-    "errors": 0,
-    "generated_at": "2026-06-01T23:24:50.350227+00:00",
-    "overall_status": "ok",
-    "published": 3,
-    "warnings": 0
-  },
-  {
-    "agent_handoffs": {
-      "alfred": {
-        "approved": 3,
-        "blockers": 0,
-        "editorial_changes": 0,
-        "needs_revision": 0,
-        "warnings": 0
-      },
-      "bob": {
-        "errors": 0,
-        "extraction_empty": 0,
-        "ready_for_alfred": 3,
-        "translation_pending": 0
-      },
-      "massy": {
-        "already_published_hard_skipped": 8,
-        "already_worked": 1,
-        "hard_skipped": 10,
-        "to_menzo": 23,
-        "to_simone": 1
-      },
-      "menzo": {
-        "pending": 0,
-        "skipped": 17,
-        "to_bob_or_v92": 6
-      },
-      "publisher": {
-        "already_published": 0,
-        "dry_run": 0,
-        "errors": 0,
-        "published": 3,
-        "wp_not_ready": 0
-      },
-      "simone": {
-        "ready": 0,
-        "skipped": 6,
-        "waiting": 0
-      }
-    },
-    "already_published": 0,
-    "article_count": 6,
-    "errors": 0,
-    "generated_at": "2026-06-01T23:24:50.354917+00:00",
-    "overall_status": "ok",
-    "published": 3,
-    "warnings": 0
-  },
-  {
-    "agent_handoffs": {
-      "alfred": {
-        "approved": 3,
-        "blockers": 0,
-        "editorial_changes": 0,
-        "needs_revision": 0,
-        "warnings": 1
-      },
-      "bob": {
-        "errors": 0,
-        "extraction_empty": 0,
-        "ready_for_alfred": 3,
-        "translation_pending": 0
-      },
-      "massy": {
-        "already_published_hard_skipped": 10,
-        "already_worked": 1,
-        "hard_skipped": 12,
-        "to_menzo": 21,
-        "to_simone": 1
-      },
-      "menzo": {
-        "pending": 0,
-        "skipped": 18,
-        "to_bob_or_v92": 3
-      },
-      "publisher": {
-        "already_published": 0,
-        "dry_run": 0,
-        "errors": 0,
-        "published": 3,
-        "wp_not_ready": 0
-      },
-      "simone": {
-        "ready": 0,
-        "skipped": 6,
-        "waiting": 0
-      }
-    },
-    "already_published": 0,
-    "article_count": 3,
-    "errors": 0,
-    "generated_at": "2026-06-01T23:42:47.278516+00:00",
-    "overall_status": "ok",
-    "published": 3,
-    "warnings": 0
-  },
-  {
-    "agent_handoffs": {
-      "alfred": {
-        "approved": 3,
-        "blockers": 0,
-        "editorial_changes": 0,
-        "needs_revision": 0,
-        "warnings": 1
-      },
-      "bob": {
-        "errors": 0,
-        "extraction_empty": 0,
-        "ready_for_alfred": 3,
-        "translation_pending": 0
-      },
-      "massy": {
-        "already_published_hard_skipped": 10,
-        "already_worked": 1,
-        "hard_skipped": 12,
-        "to_menzo": 21,
-        "to_simone": 1
-      },
-      "menzo": {
-        "pending": 0,
-        "skipped": 18,
-        "to_bob_or_v92": 3
-      },
-      "publisher": {
-        "already_published": 0,
-        "dry_run": 0,
-        "errors": 0,
-        "published": 3,
-        "wp_not_ready": 0
-      },
-      "simone": {
-        "ready": 0,
-        "skipped": 6,
-        "waiting": 0
-      }
-    },
-    "already_published": 0,
-    "article_count": 3,
-    "errors": 0,
-    "generated_at": "2026-06-01T23:42:47.283767+00:00",
-    "overall_status": "ok",
-    "published": 3,
-    "warnings": 0
-  },
-  {
-    "agent_handoffs": {
-      "alfred": {
-        "approved": 3,
-        "blockers": 0,
-        "editorial_changes": 0,
-        "needs_revision": 0,
-        "warnings": 1
-      },
-      "bob": {
-        "errors": 0,
-        "extraction_empty": 0,
-        "ready_for_alfred": 3,
-        "translation_pending": 0
-      },
-      "massy": {
-        "already_published_hard_skipped": 13,
-        "already_worked": 1,
-        "hard_skipped": 15,
-        "to_menzo": 18,
-        "to_simone": 1
-      },
-      "menzo": {
-        "pending": 0,
-        "skipped": 13,
-        "to_bob_or_v92": 5
-      },
-      "publisher": {
-        "already_published": 0,
-        "dry_run": 0,
-        "errors": 0,
-        "published": 0,
-        "wp_not_ready": 3
-      },
-      "simone": {
-        "ready": 0,
-        "skipped": 6,
-        "waiting": 0
-      }
-    },
-    "already_published": 0,
-    "article_count": 5,
-    "errors": 1,
-    "generated_at": "2026-06-01T23:53:34.914979+00:00",
-    "overall_status": "error",
-    "published": 0,
-    "warnings": 0
-  },
-  {
-    "agent_handoffs": {
-      "alfred": {
-        "approved": 3,
-        "blockers": 0,
-        "editorial_changes": 0,
-        "needs_revision": 0,
-        "warnings": 1
-      },
-      "bob": {
-        "errors": 0,
-        "extraction_empty": 0,
-        "ready_for_alfred": 3,
-        "translation_pending": 0
-      },
-      "massy": {
-        "already_published_hard_skipped": 13,
-        "already_worked": 1,
-        "hard_skipped": 15,
-        "to_menzo": 18,
-        "to_simone": 1
-      },
-      "menzo": {
-        "pending": 0,
-        "skipped": 13,
-        "to_bob_or_v92": 5
-      },
-      "publisher": {
-        "already_published": 0,
-        "dry_run": 0,
-        "errors": 0,
-        "published": 0,
-        "wp_not_ready": 3
-      },
-      "simone": {
-        "ready": 0,
-        "skipped": 6,
-        "waiting": 0
-      }
-    },
-    "already_published": 0,
-    "article_count": 5,
-    "errors": 1,
-    "generated_at": "2026-06-01T23:53:34.920296+00:00",
-    "overall_status": "error",
-    "published": 0,
-    "warnings": 0
-  },
-  {
-    "agent_handoffs": {
-      "alfred": {
-        "approved": 2,
-        "blockers": 0,
-        "editorial_changes": 0,
-        "needs_revision": 0,
-        "warnings": 1
-      },
-      "bob": {
-        "errors": 0,
-        "extraction_empty": 0,
-        "ready_for_alfred": 2,
-        "translation_pending": 0
-      },
-      "massy": {
-        "already_published_hard_skipped": 15,
-        "already_worked": 1,
-        "hard_skipped": 17,
-        "to_menzo": 16,
-        "to_simone": 1
-      },
-      "menzo": {
-        "pending": 1,
-        "skipped": 13,
-        "to_bob_or_v92": 2
-      },
-      "publisher": {
-        "already_published": 0,
-        "dry_run": 0,
-        "errors": 0,
-        "published": 2,
-        "wp_not_ready": 0
-      },
-      "simone": {
-        "ready": 0,
-        "skipped": 6,
-        "waiting": 0
-      }
-    },
-    "already_published": 0,
-    "article_count": 2,
-    "errors": 0,
-    "generated_at": "2026-06-02T00:07:15.488939+00:00",
-    "overall_status": "ok",
-    "published": 2,
-    "warnings": 0
-  },
-  {
-    "agent_handoffs": {
-      "alfred": {
-        "approved": 2,
-        "blockers": 0,
-        "editorial_changes": 0,
-        "needs_revision": 0,
-        "warnings": 1
-      },
-      "bob": {
-        "errors": 0,
-        "extraction_empty": 0,
-        "ready_for_alfred": 2,
-        "translation_pending": 0
-      },
-      "massy": {
-        "already_published_hard_skipped": 15,
-        "already_worked": 1,
-        "hard_skipped": 17,
-        "to_menzo": 16,
-        "to_simone": 1
-      },
-      "menzo": {
-        "pending": 1,
-        "skipped": 13,
-        "to_bob_or_v92": 2
-      },
-      "publisher": {
-        "already_published": 0,
-        "dry_run": 0,
-        "errors": 0,
-        "published": 2,
-        "wp_not_ready": 0
-      },
-      "simone": {
-        "ready": 0,
-        "skipped": 6,
-        "waiting": 0
-      }
-    },
-    "already_published": 0,
-    "article_count": 2,
-    "errors": 0,
-    "generated_at": "2026-06-02T00:07:15.493890+00:00",
-    "overall_status": "ok",
-    "published": 2,
-    "warnings": 0
-  },
-  {
-    "agent_handoffs": {
-      "alfred": {
-        "approved": 2,
-        "blockers": 0,
-        "editorial_changes": 0,
-        "needs_revision": 0,
-        "warnings": 2
-      },
-      "bob": {
-        "errors": 0,
-        "extraction_empty": 0,
-        "ready_for_alfred": 2,
-        "translation_pending": 0
-      },
-      "massy": {
-        "already_published_hard_skipped": 15,
-        "already_worked": 2,
-        "hard_skipped": 17,
-        "to_menzo": 16,
-        "to_simone": 0
-      },
-      "menzo": {
-        "pending": 1,
-        "skipped": 13,
-        "to_bob_or_v92": 2
-      },
-      "publisher": {
-        "already_published": 0,
-        "dry_run": 0,
-        "errors": 0,
-        "published": 2,
-        "wp_not_ready": 0
-      },
-      "simone": {
-        "ready": 0,
-        "skipped": 6,
-        "waiting": 0
-      }
-    },
-    "already_published": 0,
-    "article_count": 2,
-    "errors": 0,
-    "generated_at": "2026-06-02T00:20:25.150689+00:00",
-    "overall_status": "ok",
-    "published": 2,
-    "warnings": 0
-  },
-  {
-    "agent_handoffs": {
-      "alfred": {
-        "approved": 2,
-        "blockers": 0,
-        "editorial_changes": 0,
-        "needs_revision": 0,
-        "warnings": 2
-      },
-      "bob": {
-        "errors": 0,
-        "extraction_empty": 0,
-        "ready_for_alfred": 2,
-        "translation_pending": 0
-      },
-      "massy": {
-        "already_published_hard_skipped": 15,
-        "already_worked": 2,
-        "hard_skipped": 17,
-        "to_menzo": 16,
-        "to_simone": 0
-      },
-      "menzo": {
-        "pending": 1,
-        "skipped": 13,
-        "to_bob_or_v92": 2
-      },
-      "publisher": {
-        "already_published": 0,
-        "dry_run": 0,
-        "errors": 0,
-        "published": 2,
-        "wp_not_ready": 0
-      },
-      "simone": {
-        "ready": 0,
-        "skipped": 6,
-        "waiting": 0
-      }
-    },
-    "already_published": 0,
-    "article_count": 2,
-    "errors": 0,
-    "generated_at": "2026-06-02T00:20:25.155971+00:00",
-    "overall_status": "ok",
-    "published": 2,
-    "warnings": 0
-  },
-  {
-    "agent_handoffs": {
-      "alfred": {
         "approved": 3,
         "blockers": 0,
         "editorial_changes": 0,
@@ -2395,6 +1819,116 @@
     "article_count": 14,
     "errors": 1,
     "generated_at": "2026-06-03T23:04:30.476817+00:00",
+    "overall_status": "error",
+    "published": 0,
+    "warnings": 0
+  },
+  {
+    "agent_handoffs": {
+      "alfred": {
+        "approved": 3,
+        "blockers": 0,
+        "editorial_changes": 0,
+        "needs_revision": 0,
+        "warnings": 1
+      },
+      "bob": {
+        "errors": 0,
+        "extraction_empty": 0,
+        "ready_for_alfred": 3,
+        "translation_pending": 0
+      },
+      "massy": {
+        "already_published_hard_skipped": 0,
+        "already_worked": 0,
+        "event_factual_news_to_menzo": 4,
+        "event_recap_duplicates_blocked_by_report": 0,
+        "event_soft_reactions_to_menzo": 3,
+        "hard_skipped": 15,
+        "menzo_memory_hard_skipped": 15,
+        "old_news_hard_skipped": 0,
+        "post_show_hard_news_to_menzo": 1,
+        "report_candidates_blocked_by_manual_or_history": 0,
+        "to_menzo": 18,
+        "to_simone": 2
+      },
+      "menzo": {
+        "pending": 1,
+        "skipped": 9,
+        "to_bob_or_v92": 9
+      },
+      "publisher": {
+        "already_published": 0,
+        "dry_run": 0,
+        "errors": 0,
+        "published": 0,
+        "wp_not_ready": 3
+      },
+      "simone": {
+        "ready": 0,
+        "skipped": 6,
+        "waiting": 0
+      }
+    },
+    "already_published": 0,
+    "article_count": 12,
+    "errors": 1,
+    "generated_at": "2026-06-04T02:06:01.375108+00:00",
+    "overall_status": "error",
+    "published": 0,
+    "warnings": 0
+  },
+  {
+    "agent_handoffs": {
+      "alfred": {
+        "approved": 3,
+        "blockers": 0,
+        "editorial_changes": 0,
+        "needs_revision": 0,
+        "warnings": 1
+      },
+      "bob": {
+        "errors": 0,
+        "extraction_empty": 0,
+        "ready_for_alfred": 3,
+        "translation_pending": 0
+      },
+      "massy": {
+        "already_published_hard_skipped": 0,
+        "already_worked": 0,
+        "event_factual_news_to_menzo": 4,
+        "event_recap_duplicates_blocked_by_report": 0,
+        "event_soft_reactions_to_menzo": 3,
+        "hard_skipped": 15,
+        "menzo_memory_hard_skipped": 15,
+        "old_news_hard_skipped": 0,
+        "post_show_hard_news_to_menzo": 1,
+        "report_candidates_blocked_by_manual_or_history": 0,
+        "to_menzo": 18,
+        "to_simone": 2
+      },
+      "menzo": {
+        "pending": 1,
+        "skipped": 9,
+        "to_bob_or_v92": 9
+      },
+      "publisher": {
+        "already_published": 0,
+        "dry_run": 0,
+        "errors": 0,
+        "published": 0,
+        "wp_not_ready": 3
+      },
+      "simone": {
+        "ready": 0,
+        "skipped": 6,
+        "waiting": 0
+      }
+    },
+    "already_published": 0,
+    "article_count": 12,
+    "errors": 1,
+    "generated_at": "2026-06-04T02:06:01.384342+00:00",
     "overall_status": "error",
     "published": 0,
     "warnings": 0

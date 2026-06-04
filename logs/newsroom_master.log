@@ -75,10 +75,22 @@ Published reports: -
 Massy: to_simone=1 to_menzo=20 hard_skip=14 menzo_skip=12 old_skip=0
 Simone: ready=0 reports_published=0 wp_not_ready=0
 Menzo: selected=11 pending=1 skipped=8 ai=True model=gemini-3.1-flash-lite
-Bob: ready=3 errors=0 changes={'bob_v93_16_changes': 2, 'bob_brief_warnings_added': 1}
+Bob: ready=3 errors=0 changes={'bob_brief_warnings_added': 1, 'bob_v93_16_changes': 2}
 Alfred: approved=3 warnings=1 blockers=0
 Publisher: published=0 wp_not_ready=3 errors=0
 Archivista: status=error anomalies=1
 Selected: Former WWF Star Mike ‘Duke’ Droese’s Criminal Case Delayed Yet Again, Mercedes Mone’s AEW Return Status After Months Away From Television, Rhea Ripley Calls Out Fan For Sharing AI-Generated WWE Render, How Women’s Wrestling Became a Major Influence Across Entertainment, Mick Foley On Possibility Of One More Match In AEW: 'Stranger Things Have Happened', Former WWE Talent Confirms Departure After Long Absence Due To Injury
+Published news: -
+Published reports: -
+
+===== NEWSROOM MASTER RUN 2026-06-04T02:05:19.147103+00:00 | v93_20_process_refinements | run_id=26925564548 =====
+Massy: to_simone=2 to_menzo=18 hard_skip=15 menzo_skip=15 old_skip=0
+Simone: ready=0 reports_published=0 wp_not_ready=0
+Menzo: selected=9 pending=1 skipped=9 ai=True model=gemini-3.1-flash-lite
+Bob: ready=3 errors=0 changes={'bob_v93_16_changes': 1, 'bob_brief_warnings_added': 1}
+Alfred: approved=3 warnings=1 blockers=0
+Publisher: published=0 wp_not_ready=3 errors=0
+Archivista: status=error anomalies=1
+Selected: Mercedes Mone Returns To AEW In Women's Owen Hart Tourney Wild Card Slot, Sol Ruca Admits She Hasn’t Watched Full Becky Lynch Title Match Back Yet, Bully Ray Liked The 'Evolution' Of Oba Femi On WWE Raw Following Clash In Italy Loss, Absent Talent Makes Surprise Return Prior to June 3 AEW Dynamite, Kevin Knight Joins Don Callis Family, Retains AEW TNT Title, MJF Survives Bloody World Title Fight After RUSH Passes Out In Wild Finish on AEW Dynamite
 Published news: -
 Published reports: -
