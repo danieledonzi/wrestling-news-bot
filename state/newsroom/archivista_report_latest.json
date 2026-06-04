@@ -2,42 +2,42 @@
   "agent": "Archivista",
   "agent_handoffs": {
     "alfred": {
-      "approved": 3,
+      "approved": 0,
       "blockers": 0,
       "editorial_changes": 0,
       "needs_revision": 0,
-      "warnings": 3
+      "warnings": 0
     },
     "bob": {
       "errors": 0,
       "extraction_empty": 0,
-      "ready_for_alfred": 3,
+      "ready_for_alfred": 0,
       "translation_pending": 0
     },
     "massy": {
-      "already_published_hard_skipped": 3,
+      "already_published_hard_skipped": 5,
       "already_worked": 0,
-      "event_factual_news_to_menzo": 2,
+      "event_factual_news_to_menzo": 0,
       "event_recap_duplicates_blocked_by_report": 0,
       "event_soft_reactions_to_menzo": 0,
-      "hard_skipped": 29,
-      "menzo_memory_hard_skipped": 25,
+      "hard_skipped": 28,
+      "menzo_memory_hard_skipped": 22,
       "old_news_hard_skipped": 0,
-      "post_show_hard_news_to_menzo": 0,
+      "post_show_hard_news_to_menzo": 1,
       "report_candidates_blocked_by_manual_or_history": 0,
-      "to_menzo": 4,
-      "to_simone": 2
+      "to_menzo": 6,
+      "to_simone": 1
     },
     "menzo": {
       "pending": 0,
       "skipped": 0,
-      "to_bob_or_v92": 4
+      "to_bob_or_v92": 0
     },
     "publisher": {
       "already_published": 0,
       "dry_run": 0,
       "errors": 0,
-      "published": 3,
+      "published": 0,
       "wp_not_ready": 0
     },
     "simone": {
@@ -47,268 +47,8 @@
     }
   },
   "anomalies": [],
-  "article_dossiers": [
-    {
-      "alfred": {
-        "decision": "approved",
-        "editorial_changes": [],
-        "issues": [],
-        "present": true,
-        "quality_score": 100,
-        "warnings": [
-          {
-            "code": "possible_missing_embed_from_menzo_brief",
-            "expected_embeds": [
-              "x_tweet"
-            ],
-            "message": "Menzo AI si aspettava embed/video/tweet, ma Bob non ne ha estratti.",
-            "severity": "warning",
-            "source_specific_notes": "Formatta bene i match in programma come elenco o piccola tabella."
-          }
-        ]
-      },
-      "bob": {
-        "clean_element_count": 9,
-        "diagnostic_stage": "ready_for_alfred",
-        "element_counts": {
-          "embed": 0,
-          "heading": 1,
-          "image": 0,
-          "quote": 0,
-          "table": 0,
-          "text": 8
-        },
-        "error": null,
-        "present": true,
-        "raw_element_count": 10,
-        "removed_before_gemini": 14,
-        "status": "ready_for_alfred",
-        "translation_model": "gemini-3.1-flash-lite",
-        "translation_used": true
-      },
-      "category_hint": "AEW",
-      "html_audit": {
-        "alfred_final_html_preview": "<p>La AEW sta già iniziando a costruire la card del prossimo Dynamite Summer Blockbuster.</p>\n<p>L&#x27;episodio del 10 giugno sarà caratterizzato da ulteriore azione legata all&#x27;Owen Hart Foundation Tournament, con il proseguimento sia del tabellone maschile che di quello femminile.</p>\n<p>Per quanto riguarda il tabellone maschile, Swerve Strickland affronterà Brody King in un match di semifinale. Il vincitore avanzerà verso Forbidden Door, dove Will Ospreay attende già nella finale del torneo.</p>\n<p>Anche il torneo femminile continuerà, con Skye Blue che se la vedrà con Sareee. La vincitrice di questo incontro accederà al turno di semifinale, dove affronterà Athena.</p>\n<h2>Al momento, sono due i match annunciati per AEW Dynamite Summer Blockbuster:</h2>\n<p>Semifinale maschile dell&#x27;Owen Hart Foundation Tournament: Swerve Strickland vs. Brody King</p>\n<p>Match femminile dell&#x27;Owen Hart Foundation Tournament: Skye Blue vs. Sareee</p>\n<p>È previsto l&#x27;annuncio di ulteriori incontri e segmenti prima della messa in onda dello show. Ringside News terrà aggiornati i fan non appena la AEW ufficializzerà altre novità per il Dynamite Summer Blockbuster della prossima settimana.</p>\n<p>Derek Holloway è un autore di Ringside News specializzato in notizie, indiscrezioni e risultati di wrestling professionistico. Si occupa di fornire una copertura affidabile riguardante WWE, AEW e le principali federazioni di wrestling.</p>",
-        "bob_body_html_preview": "<p>La AEW sta già iniziando a costruire la card del prossimo Dynamite Summer Blockbuster.</p>\n<p>L&#x27;episodio del 10 giugno sarà caratterizzato da ulteriore azione legata all&#x27;Owen Hart Foundation Tournament, con il proseguimento sia del tabellone maschile che di quello femminile.</p>\n<p>Per quanto riguarda il tabellone maschile, Swerve Strickland affronterà Brody King in un match di semifinale. Il vincitore avanzerà verso Forbidden Door, dove Will Ospreay attende già nella finale del torneo.</p>\n<p>Anche il torneo femminile continuerà, con Skye Blue che se la vedrà con Sareee. La vincitrice di questo incontro accederà al turno di semifinale, dove affronterà Athena.</p>\n<h2>Al momento, sono due i match annunciati per AEW Dynamite Summer Blockbuster:</h2>\n<p>Semifinale maschile dell&#x27;Owen Hart Foundation Tournament: Swerve Strickland vs. Brody King</p>\n<p>Match femminile dell&#x27;Owen Hart Foundation Tournament: Skye Blue vs. Sareee</p>\n<p>È previsto l&#x27;annuncio di ulteriori incontri e segmenti prima della messa in onda dello show. Ringside News terrà aggiornati i fan non appena la AEW ufficializzerà altre novità per il Dynamite Summer Blockbuster della prossima settimana.</p>\n<p>Derek Holloway è un autore di Ringside News specializzato in notizie, indiscrezioni e risultati di wrestling professionistico. Si occupa di fornire una copertura affidabile riguardante WWE, AEW e le principali federazioni di wrestling.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_aew-dynamite-summer-blockbuster-annunciati-due-match-per-l-owen-hart-tournament.html",
-        "published_html_preview": "<p>La AEW sta già iniziando a costruire la card del prossimo Dynamite Summer Blockbuster.</p>\n<p>L&#x27;episodio del 10 giugno sarà caratterizzato da ulteriore azione legata all&#x27;Owen Hart Foundation Tournament, con il proseguimento sia del tabellone maschile che di quello femminile.</p>\n<p>Per quanto riguarda il tabellone maschile, Swerve Strickland affronterà Brody King in un match di semifinale. Il vincitore avanzerà verso Forbidden Door, dove Will Ospreay attende già nella finale del torneo.</p>\n<p>Anche il torneo femminile continuerà, con Skye Blue che se la vedrà con Sareee. La vincitrice di questo incontro accederà al turno di semifinale, dove affronterà Athena.</p>\n<h2>Al momento, sono due i match annunciati per AEW Dynamite Summer Blockbuster:</h2>\n<p>Semifinale maschile dell&#x27;Owen Hart Foundation Tournament: Swerve Strickland vs. Brody King</p>\n<p>Match femminile dell&#x27;Owen Hart Foundation Tournament: Skye Blue vs. Sareee</p>\n<p>È previsto l&#x27;annuncio di ulteriori incontri e segmenti prima della messa in onda dello show. Ringside News terrà aggiornati i fan non appena la AEW ufficializzerà altre novità per il Dynamite Summer Blockbuster della prossima settimana.</p>\n<p>Derek Holloway è un autore di Ringside News specializzato in notizie, indiscrezioni e risultati di wrestling professionistico. Si occupa di fornire una copertura affidabile riguardante WWE, AEW e le principali federazioni di wrestling.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/aew-dynamite-summer-blockbuster-gets-two-owen-hart-tournament-matches-june-10/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_aew-dynamite-summer-blockbuster-annunciati-due-match-per-l-owen-hart-tournament.html",
-        "publisher_review_html_preview": "<p>La AEW sta già iniziando a costruire la card del prossimo Dynamite Summer Blockbuster.</p>\n<p>L&#x27;episodio del 10 giugno sarà caratterizzato da ulteriore azione legata all&#x27;Owen Hart Foundation Tournament, con il proseguimento sia del tabellone maschile che di quello femminile.</p>\n<p>Per quanto riguarda il tabellone maschile, Swerve Strickland affronterà Brody King in un match di semifinale. Il vincitore avanzerà verso Forbidden Door, dove Will Ospreay attende già nella finale del torneo.</p>\n<p>Anche il torneo femminile continuerà, con Skye Blue che se la vedrà con Sareee. La vincitrice di questo incontro accederà al turno di semifinale, dove affronterà Athena.</p>\n<h2>Al momento, sono due i match annunciati per AEW Dynamite Summer Blockbuster:</h2>\n<p>Semifinale maschile dell&#x27;Owen Hart Foundation Tournament: Swerve Strickland vs. Brody King</p>\n<p>Match femminile dell&#x27;Owen Hart Foundation Tournament: Skye Blue vs. Sareee</p>\n<p>È previsto l&#x27;annuncio di ulteriori incontri e segmenti prima della messa in onda dello show. Ringside News terrà aggiornati i fan non appena la AEW ufficializzerà altre novità per il Dynamite Summer Blockbuster della prossima settimana.</p>\n<p>Derek Holloway è un autore di Ringside News specializzato in notizie, indiscrezioni e risultati di wrestling professionistico. Si occupa di fornire una copertura affidabile riguardante WWE, AEW e le principali federazioni di wrestling.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/aew-dynamite-summer-blockbuster-gets-two-owen-hart-tournament-matches-june-10/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/aew-dynamite-summer-blockbuster-gets-two-owen-hart-tournament-matches-june-10/\nTitolo feed: AEW Dynamite Summer Blockbuster Gets Two Owen Hart Tournament Matches For June 10\nTitolo pagina: AEW Dynamite Summer Blockbuster Gets Two Owen Hart Tournament Matches For June 10\nDescrizione: AEW is already loading up next week’s Dynamite Summer Blockbuster. The June 10 episode will feature more Owen Hart Foundation Tournament action, with both\nCategoria suggerita: AEW\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"AEW is already loading up next week’s Dynamite Summer Blockbuster.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"The June 10 episode will feature more Owen Hart Foundation Tournament action, with both the men’s and women’s brackets moving forward.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"On the men’s side, Swerve Strickland will face Brody King in a semifinal match. The winner will advance to Forbidden Door, where Will Ospreay is already waiting in the tournament finals.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"The women’s tournament will also continue, as Skye Blue takes on Sareee. The winner of that match will move on to face Athena in the semifinal round.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"heading\",\n    \"text\": \"AEW Dynamite Summer Blockbuster currently has two matches announced:\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Men’s Owen Hart Foundation Tournament Semifinal: Swerve Strickland vs. Brody King\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"Women’s Owen Hart Foundation Tournament Match: Skye Blue vs. Sareee\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"More matches and segments are expected to be added before the show airs. Ringside News will keep fans updated as AEW announces more for next week’s Dynamite Summer Blockbuster.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"Derek Holloway is a writer at Ringside News specializing in professional wrestling news, rumors, and results. He focuses on delivering reliable coverage across WWE, AEW, and major wrestling promotions.\"\n  }\n]\n"
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "ai:Aggiornamento sulla card di un evento speciale (Summer Blockbuster) con match di un torneo prestigioso.; deterministic:hard:bracket,recency:fresh_12h",
-        "score": 73
-      },
-      "publisher": {
-        "categories": [
-          5
-        ],
-        "error": null,
-        "featured_media": 5968,
-        "present": true,
-        "status": "published",
-        "wp_link": "https://news.openwrestlingtv.com/aew/aew-dynamite-summer-blockbuster-annunciati-due-match-per-lowen-hart-tournament/",
-        "wp_post_id": 5969
-      },
-      "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/aew-dynamite-summer-blockbuster-gets-two-owen-hart-tournament-matches-june-10",
-      "title_it": "AEW Dynamite Summer Blockbuster: annunciati due match per l'Owen Hart Tournament"
-    },
-    {
-      "alfred": {
-        "decision": null,
-        "editorial_changes": [],
-        "issues": [],
-        "present": false,
-        "quality_score": null,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": null,
-        "diagnostic_stage": null,
-        "element_counts": null,
-        "error": null,
-        "present": false,
-        "raw_element_count": null,
-        "removed_before_gemini": null,
-        "status": null,
-        "translation_model": null,
-        "translation_used": null
-      },
-      "category_hint": "WWE",
-      "html_audit": {
-        "alfred_final_html_preview": "",
-        "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_la-knight-admits-he-feels-underappreciated-in-wwe.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_la-knight-admits-he-feels-underappreciated-in-wwe.html",
-        "publisher_review_html_preview": "",
-        "translation_prompt_preview": ""
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "ai:Intervista di spessore con Chris Van Vliet. LA Knight è un top name e le sue dichiarazioni sul sentirsi sottovalutato generano engagement.; deterministic:strategic:plans,strategic:future,recency:fresh_12h",
-        "score": 72
-      },
-      "publisher": {
-        "categories": null,
-        "error": null,
-        "featured_media": null,
-        "present": false,
-        "status": null,
-        "wp_link": null,
-        "wp_post_id": null
-      },
-      "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/la-knight-admits-he-feels-underappreciated-wwe",
-      "title_it": "LA Knight Admits He Feels Underappreciated in WWE"
-    },
-    {
-      "alfred": {
-        "decision": "approved",
-        "editorial_changes": [],
-        "issues": [],
-        "present": true,
-        "quality_score": 100,
-        "warnings": [
-          {
-            "code": "possible_missing_embed_from_menzo_brief",
-            "expected_embeds": [
-              "x_tweet",
-              "video"
-            ],
-            "message": "Menzo AI si aspettava embed/video/tweet, ma Bob non ne ha estratti.",
-            "severity": "warning",
-            "source_specific_notes": "Punta molto sull'aspetto della crescita di Oba Femi post-evento italiano."
-          }
-        ]
-      },
-      "bob": {
-        "clean_element_count": 4,
-        "diagnostic_stage": "ready_for_alfred",
-        "element_counts": {
-          "embed": 0,
-          "heading": 0,
-          "image": 0,
-          "quote": 0,
-          "table": 0,
-          "text": 4
-        },
-        "error": null,
-        "present": true,
-        "raw_element_count": 5,
-        "removed_before_gemini": 1,
-        "status": "ready_for_alfred",
-        "translation_model": "gemini-3.1-flash-lite",
-        "translation_used": true
-      },
-      "category_hint": "WWE",
-      "html_audit": {
-        "alfred_final_html_preview": "<p>Nonostante la sconfitta contro Brock Lesnar a Clash in Italy, Oba Femi ha dominato a &quot;WWE Raw&quot;, avanzando al turno successivo del torneo King of the Ring. Femi è stato un argomento caldo a &quot;Busted Open Radio&quot; e, dopo &quot;Raw&quot;, il WWE Hall of Famer Bully Ray ha espresso le sue opinioni su &quot;The Ruler&quot;, il quale, a suo dire, sembrava aver subìto una sorta di &quot;evoluzione&quot; nel corso del match.</p>\n<p>&quot;Oba, quando è uscito ieri sera, sembrava un uomo sconfitto, perché lo era effettivamente&quot;, ha spiegato. &quot;Ma, verso la fine del segmento, Oba sembrava pronto a vincere il King of the Ring e pronto ad affrontare Brock Lesnar, non appena quest&#x27;ultimo si farà rivedere.&quot;</p>\n<p>Bully Ray ha spiegato di aver apprezzato la gamma di emozioni mostrata da Femi. Ha affermato che il wrestler è arrivato sul ring senza la solita energia, a malapena in grado di fare la sua classica camminata verso il quadrato, poiché stava ancora vendendo i sette F5 subiti da Lesnar la sera precedente, o forse perché stava cercando di scacciare la delusione. Poi, &quot;The Ruler&quot; è salito sul ring per respingere Solo Sikoa, Carmelo Hayes e Penta, oltre a Talla Tonga a bordo ring.</p>\n<p>&quot;Ecco che Oba arriva al ring e vediamo l&#x27;evoluzione di Oba&quot;, ha detto Bully Ray. &quot;Andiamo dritti alla fisicità mostrata ieri sera... Vediamo Oba lanciare via Solo Sikoa come un peso, poi sollevarlo per la powerbomb e batterlo. Poi, per me, la parte più importante è stata il promo successivo. Perché ho visto un Oba Femi abbattuto arrivare al ring, un Oba Femi non proprio al meglio, ma alla fine del segmento mi sono detto: &#x27;Questo ragazzo è tornato in carreggiata&#x27;.&quot;</p>",
-        "bob_body_html_preview": "<p>Nonostante la sconfitta contro Brock Lesnar a Clash in Italy, Oba Femi ha dominato a &quot;WWE Raw&quot;, avanzando al turno successivo del torneo King of the Ring. Femi è stato un argomento caldo a &quot;Busted Open Radio&quot; e, dopo &quot;Raw&quot;, il WWE Hall of Famer Bully Ray ha espresso le sue opinioni su &quot;The Ruler&quot;, il quale, a suo dire, sembrava aver subìto una sorta di &quot;evoluzione&quot; nel corso del match.</p>\n<p>&quot;Oba, quando è uscito ieri sera, sembrava un uomo sconfitto, perché lo era effettivamente&quot;, ha spiegato. &quot;Ma, verso la fine del segmento, Oba sembrava pronto a vincere il King of the Ring e pronto ad affrontare Brock Lesnar, non appena quest&#x27;ultimo si farà rivedere.&quot;</p>\n<p>Bully Ray ha spiegato di aver apprezzato la gamma di emozioni mostrata da Femi. Ha affermato che il wrestler è arrivato sul ring senza la solita energia, a malapena in grado di fare la sua classica camminata verso il quadrato, poiché stava ancora vendendo i sette F5 subiti da Lesnar la sera precedente, o forse perché stava cercando di scacciare la delusione. Poi, &quot;The Ruler&quot; è salito sul ring per respingere Solo Sikoa, Carmelo Hayes e Penta, oltre a Talla Tonga a bordo ring.</p>\n<p>&quot;Ecco che Oba arriva al ring e vediamo l&#x27;evoluzione di Oba&quot;, ha detto Bully Ray. &quot;Andiamo dritti alla fisicità mostrata ieri sera... Vediamo Oba lanciare via Solo Sikoa come un peso, poi sollevarlo per la powerbomb e batterlo. Poi, per me, la parte più importante è stata il promo successivo. Perché ho visto un Oba Femi abbattuto arrivare al ring, un Oba Femi non proprio al meglio, ma alla fine del segmento mi sono detto: &#x27;Questo ragazzo è tornato in carreggiata&#x27;.&quot;</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_bully-ray-elogia-l-evoluzione-di-oba-femi-a-wwe-raw.html",
-        "published_html_preview": "<p>Nonostante la sconfitta contro Brock Lesnar a Clash in Italy, Oba Femi ha dominato a &quot;WWE Raw&quot;, avanzando al turno successivo del torneo King of the Ring. Femi è stato un argomento caldo a &quot;Busted Open Radio&quot; e, dopo &quot;Raw&quot;, il WWE Hall of Famer Bully Ray ha espresso le sue opinioni su &quot;The Ruler&quot;, il quale, a suo dire, sembrava aver subìto una sorta di &quot;evoluzione&quot; nel corso del match.</p>\n<p>&quot;Oba, quando è uscito ieri sera, sembrava un uomo sconfitto, perché lo era effettivamente&quot;, ha spiegato. &quot;Ma, verso la fine del segmento, Oba sembrava pronto a vincere il King of the Ring e pronto ad affrontare Brock Lesnar, non appena quest&#x27;ultimo si farà rivedere.&quot;</p>\n<p>Bully Ray ha spiegato di aver apprezzato la gamma di emozioni mostrata da Femi. Ha affermato che il wrestler è arrivato sul ring senza la solita energia, a malapena in grado di fare la sua classica camminata verso il quadrato, poiché stava ancora vendendo i sette F5 subiti da Lesnar la sera precedente, o forse perché stava cercando di scacciare la delusione. Poi, &quot;The Ruler&quot; è salito sul ring per respingere Solo Sikoa, Carmelo Hayes e Penta, oltre a Talla Tonga a bordo ring.</p>\n<p>&quot;Ecco che Oba arriva al ring e vediamo l&#x27;evoluzione di Oba&quot;, ha detto Bully Ray. &quot;Andiamo dritti alla fisicità mostrata ieri sera... Vediamo Oba lanciare via Solo Sikoa come un peso, poi sollevarlo per la powerbomb e batterlo. Poi, per me, la parte più importante è stata il promo successivo. Perché ho visto un Oba Femi abbattuto arrivare al ring, un Oba Femi non proprio al meglio, ma alla fine del segmento mi sono detto: &#x27;Questo ragazzo è tornato in carreggiata&#x27;.&quot;</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2187106/bully-ray-oba-femi-wwe-raw-evolution-clash-in-italy/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_bully-ray-elogia-l-evoluzione-di-oba-femi-a-wwe-raw.html",
-        "publisher_review_html_preview": "<p>Nonostante la sconfitta contro Brock Lesnar a Clash in Italy, Oba Femi ha dominato a &quot;WWE Raw&quot;, avanzando al turno successivo del torneo King of the Ring. Femi è stato un argomento caldo a &quot;Busted Open Radio&quot; e, dopo &quot;Raw&quot;, il WWE Hall of Famer Bully Ray ha espresso le sue opinioni su &quot;The Ruler&quot;, il quale, a suo dire, sembrava aver subìto una sorta di &quot;evoluzione&quot; nel corso del match.</p>\n<p>&quot;Oba, quando è uscito ieri sera, sembrava un uomo sconfitto, perché lo era effettivamente&quot;, ha spiegato. &quot;Ma, verso la fine del segmento, Oba sembrava pronto a vincere il King of the Ring e pronto ad affrontare Brock Lesnar, non appena quest&#x27;ultimo si farà rivedere.&quot;</p>\n<p>Bully Ray ha spiegato di aver apprezzato la gamma di emozioni mostrata da Femi. Ha affermato che il wrestler è arrivato sul ring senza la solita energia, a malapena in grado di fare la sua classica camminata verso il quadrato, poiché stava ancora vendendo i sette F5 subiti da Lesnar la sera precedente, o forse perché stava cercando di scacciare la delusione. Poi, &quot;The Ruler&quot; è salito sul ring per respingere Solo Sikoa, Carmelo Hayes e Penta, oltre a Talla Tonga a bordo ring.</p>\n<p>&quot;Ecco che Oba arriva al ring e vediamo l&#x27;evoluzione di Oba&quot;, ha detto Bully Ray. &quot;Andiamo dritti alla fisicità mostrata ieri sera... Vediamo Oba lanciare via Solo Sikoa come un peso, poi sollevarlo per la powerbomb e batterlo. Poi, per me, la parte più importante è stata il promo successivo. Perché ho visto un Oba Femi abbattuto arrivare al ring, un Oba Femi non proprio al meglio, ma alla fine del segmento mi sono detto: &#x27;Questo ragazzo è tornato in carreggiata&#x27;.&quot;</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2187106/bully-ray-oba-femi-wwe-raw-evolution-clash-in-italy/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2187106/bully-ray-oba-femi-wwe-raw-evolution-clash-in-italy/\nTitolo feed: Bully Ray Liked The 'Evolution' Of Oba Femi On WWE Raw Following Clash In Italy Loss\nTitolo pagina: Bully Ray Liked The 'Evolution' Of Oba Femi On WWE Raw Following Clash In Italy Loss - Wrestling Inc.\nDescrizione: WWE Hall of Famer Bully Ray explained how he liked what he described as the \"evolution\" of Oba Femi on \"WWE Raw\" following his loss to Brock Lesnar.\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Despite losing to Brock Lesnar at Clash in Italy , Oba Femi dominated on \\\"WWE Raw\\\" and advanced to the next round of the King of the Ring tournament . Femi has been a hot topic on \\\" Busted Open Radio ,\\\" and following \\\"Raw,\\\" WWE Hall of Famer Bully Ray gave his thoughts on \\\"The Ruler,\\\" who he said looked like he underwent an \\\"evolution\\\" as the match went on.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"\\\"Oba, when he first came out last night, looked like a defeated man, because he was a defeated man,\\\" he explained. \\\"But, by the end of the segment, Oba looked like he was ready to win the King of the Ring and he looked like he was ready for Brock Lesnar whenever Brock shows up again.\\\"\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Bully Ray explained he liked the range of emotion he saw from Femi. He said Femi came out without a pep in his step, barely able to do his strut down to the ring, because he was selling the seven F5s he took from Lesnar the night before, or because he was fighting off the disappointment. Then, \\\"The Ruler\\\" got in the ring to fight off Solo Sikoa, Carmelo Hayes, and Penta, as well as Talla Tonga on the outside.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"\\\"Here comes Oba to the ring, and we see Oba evolve,\\\" Bully Ray said. \\\"Go right into the physicality last night... We see Oba shotput Solo Sikoa and then pop him up for the powerbomb and beat him. Then, the most important part was the promo afterward, to me. Because, I saw a dejected Oba Femi coming to the ring last night, a not-so-ready Oba Femi, but by the end of the segment, I'm like, 'This guy's back on track.'\\\"\"\n  }\n]\n"
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "ai:Notizia con fortissimo appeal locale per via del riferimento a 'Clash in Italy' e al match con Brock Lesnar. Il commento di Bully Ray aggiunge prestigio.; deterministic:strategic:clash in italy,strategic:raw,entity:brock lesnar,entity:oba femi,recency:fresh_12h",
-        "score": 78
-      },
-      "publisher": {
-        "categories": [
-          4
-        ],
-        "error": null,
-        "featured_media": 5964,
-        "present": true,
-        "status": "published",
-        "wp_link": "https://news.openwrestlingtv.com/wwe/bully-ray-elogia-levoluzione-di-oba-femi-a-wwe-raw/",
-        "wp_post_id": 5965
-      },
-      "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2187106/bully-ray-oba-femi-wwe-raw-evolution-clash-in-italy",
-      "title_it": "Bully Ray elogia l'evoluzione di Oba Femi a WWE Raw"
-    },
-    {
-      "alfred": {
-        "decision": "approved",
-        "editorial_changes": [],
-        "issues": [],
-        "present": true,
-        "quality_score": 100,
-        "warnings": [
-          {
-            "code": "possible_missing_embed_from_menzo_brief",
-            "expected_embeds": [
-              "x_tweet",
-              "video"
-            ],
-            "message": "Menzo AI si aspettava embed/video/tweet, ma Bob non ne ha estratti.",
-            "severity": "warning",
-            "source_specific_notes": "Assicurati di includere il tweet ufficiale AEW con il video del segmento."
-          }
-        ]
-      },
-      "bob": {
-        "clean_element_count": 7,
-        "diagnostic_stage": "ready_for_alfred",
-        "element_counts": {
-          "embed": 0,
-          "heading": 0,
-          "image": 0,
-          "quote": 0,
-          "table": 0,
-          "text": 7
-        },
-        "error": null,
-        "present": true,
-        "raw_element_count": 8,
-        "removed_before_gemini": 1,
-        "status": "ready_for_alfred",
-        "translation_model": "gemini-3.1-flash-lite",
-        "translation_used": true
-      },
-      "category_hint": "AEW",
-      "html_audit": {
-        "alfred_final_html_preview": "<p>Kevin Knight ha sconfitto &quot;Speedball&quot; Mike Bailey, mantenendo il TNT Championship durante &quot;AEW Dynamite&quot;.</p>\n<p>Knight difendeva il titolo contro il suo ex partner, con cui aveva vinto i Trios Championship, per la quinta volta; il wrestler aveva conquistato la cintura vacante ad aprile, durante Dynasty.</p>\n<p>Prima dell&#x27;inizio del match, Knight è stato presentato da Don Callis come nuovo membro della sua Family, riportando così il titolo TNT sotto l&#x27;egida della DCF dopo che Kyle Fletcher era stato costretto a renderlo vacante.</p>\n<p>Callis ha osservato l&#x27;incontro a bordo ring insieme a Jake Doyle mentre il suo nuovo protetto metteva in difficoltà Bailey, schernendo lo sfidante e intimandogli di arrendersi mentre era bloccato dal campione. Bailey non ha ceduto e, alla fine, è riuscito a rientrare nel match con una serie di calci che hanno steso Knight al centro del ring.</p>\n<p>Bailey si è spostato fuori dal ring per cercare spazio e riorganizzarsi, ma Knight lo ha seguito volando oltre le corde per colpirlo, prima di tornare sul quadrato per proseguire la contesa. Bailey è comunque riuscito a tornare in partita, sfiorando la vittoria con un near-fall dopo uno straitjacket pin e salendo sulla terza corda, momento in cui Doyle è salito sull&#x27;apron.</p>\n<p>La distrazione causata da Doyle ha dato a Callis l&#x27;opportunità di colpire Bailey mentre si trovava sulla corda più alta, permettendo così a Knight di farlo cadere e ottenere lo schienamento vincente.</p>\n<p>Dopo il match, Knight ha dichiarato di aver dovuto liberarsi del &quot;peso morto&quot; – riferendosi a Bailey – prima di riprendere la sua corsa per diventare un doppio campione. Si è poi rivolto all&#x27;AEW World Champion MJF, affermando di essere pronto quando lo sarà lui.</p>",
-        "bob_body_html_preview": "<p>Kevin Knight ha sconfitto &quot;Speedball&quot; Mike Bailey, mantenendo il TNT Championship durante &quot;AEW Dynamite&quot;.</p>\n<p>Knight difendeva il titolo contro il suo ex partner, con cui aveva vinto i Trios Championship, per la quinta volta; il wrestler aveva conquistato la cintura vacante ad aprile, durante Dynasty.</p>\n<p>Prima dell&#x27;inizio del match, Knight è stato presentato da Don Callis come nuovo membro della sua Family, riportando così il titolo TNT sotto l&#x27;egida della DCF dopo che Kyle Fletcher era stato costretto a renderlo vacante.</p>\n<p>Callis ha osservato l&#x27;incontro a bordo ring insieme a Jake Doyle mentre il suo nuovo protetto metteva in difficoltà Bailey, schernendo lo sfidante e intimandogli di arrendersi mentre era bloccato dal campione. Bailey non ha ceduto e, alla fine, è riuscito a rientrare nel match con una serie di calci che hanno steso Knight al centro del ring.</p>\n<p>Bailey si è spostato fuori dal ring per cercare spazio e riorganizzarsi, ma Knight lo ha seguito volando oltre le corde per colpirlo, prima di tornare sul quadrato per proseguire la contesa. Bailey è comunque riuscito a tornare in partita, sfiorando la vittoria con un near-fall dopo uno straitjacket pin e salendo sulla terza corda, momento in cui Doyle è salito sull&#x27;apron.</p>\n<p>La distrazione causata da Doyle ha dato a Callis l&#x27;opportunità di colpire Bailey mentre si trovava sulla corda più alta, permettendo così a Knight di farlo cadere e ottenere lo schienamento vincente.</p>\n<p>Dopo il match, Knight ha dichiarato di aver dovuto liberarsi del &quot;peso morto&quot; – riferendosi a Bailey – prima di riprendere la sua corsa per diventare un doppio campione. Si è poi rivolto all&#x27;AEW World Champion MJF, affermando di essere pronto quando lo sarà lui.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_kevin-knight-si-unisce-alla-don-callis-family-e-mantiene-il-titolo-tnt.html",
-        "published_html_preview": "<p>Kevin Knight ha sconfitto &quot;Speedball&quot; Mike Bailey, mantenendo il TNT Championship durante &quot;AEW Dynamite&quot;.</p>\n<p>Knight difendeva il titolo contro il suo ex partner, con cui aveva vinto i Trios Championship, per la quinta volta; il wrestler aveva conquistato la cintura vacante ad aprile, durante Dynasty.</p>\n<p>Prima dell&#x27;inizio del match, Knight è stato presentato da Don Callis come nuovo membro della sua Family, riportando così il titolo TNT sotto l&#x27;egida della DCF dopo che Kyle Fletcher era stato costretto a renderlo vacante.</p>\n<p>Callis ha osservato l&#x27;incontro a bordo ring insieme a Jake Doyle mentre il suo nuovo protetto metteva in difficoltà Bailey, schernendo lo sfidante e intimandogli di arrendersi mentre era bloccato dal campione. Bailey non ha ceduto e, alla fine, è riuscito a rientrare nel match con una serie di calci che hanno steso Knight al centro del ring.</p>\n<p>Bailey si è spostato fuori dal ring per cercare spazio e riorganizzarsi, ma Knight lo ha seguito volando oltre le corde per colpirlo, prima di tornare sul quadrato per proseguire la contesa. Bailey è comunque riuscito a tornare in partita, sfiorando la vittoria con un near-fall dopo uno straitjacket pin e salendo sulla terza corda, momento in cui Doyle è salito sull&#x27;apron.</p>\n<p>La distrazione causata da Doyle ha dato a Callis l&#x27;opportunità di colpire Bailey mentre si trovava sulla corda più alta, permettendo così a Knight di farlo cadere e ottenere lo schienamento vincente.</p>\n<p>Dopo il match, Knight ha dichiarato di aver dovuto liberarsi del &quot;peso morto&quot; – riferendosi a Bailey – prima di riprendere la sua corsa per diventare un doppio campione. Si è poi rivolto all&#x27;AEW World Champion MJF, affermando di essere pronto quando lo sarà lui.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2187196/kevin-knight-don-callis-family-retains-aew-tnt-title/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_kevin-knight-si-unisce-alla-don-callis-family-e-mantiene-il-titolo-tnt.html",
-        "publisher_review_html_preview": "<p>Kevin Knight ha sconfitto &quot;Speedball&quot; Mike Bailey, mantenendo il TNT Championship durante &quot;AEW Dynamite&quot;.</p>\n<p>Knight difendeva il titolo contro il suo ex partner, con cui aveva vinto i Trios Championship, per la quinta volta; il wrestler aveva conquistato la cintura vacante ad aprile, durante Dynasty.</p>\n<p>Prima dell&#x27;inizio del match, Knight è stato presentato da Don Callis come nuovo membro della sua Family, riportando così il titolo TNT sotto l&#x27;egida della DCF dopo che Kyle Fletcher era stato costretto a renderlo vacante.</p>\n<p>Callis ha osservato l&#x27;incontro a bordo ring insieme a Jake Doyle mentre il suo nuovo protetto metteva in difficoltà Bailey, schernendo lo sfidante e intimandogli di arrendersi mentre era bloccato dal campione. Bailey non ha ceduto e, alla fine, è riuscito a rientrare nel match con una serie di calci che hanno steso Knight al centro del ring.</p>\n<p>Bailey si è spostato fuori dal ring per cercare spazio e riorganizzarsi, ma Knight lo ha seguito volando oltre le corde per colpirlo, prima di tornare sul quadrato per proseguire la contesa. Bailey è comunque riuscito a tornare in partita, sfiorando la vittoria con un near-fall dopo uno straitjacket pin e salendo sulla terza corda, momento in cui Doyle è salito sull&#x27;apron.</p>\n<p>La distrazione causata da Doyle ha dato a Callis l&#x27;opportunità di colpire Bailey mentre si trovava sulla corda più alta, permettendo così a Knight di farlo cadere e ottenere lo schienamento vincente.</p>\n<p>Dopo il match, Knight ha dichiarato di aver dovuto liberarsi del &quot;peso morto&quot; – riferendosi a Bailey – prima di riprendere la sua corsa per diventare un doppio campione. Si è poi rivolto all&#x27;AEW World Champion MJF, affermando di essere pronto quando lo sarà lui.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2187196/kevin-knight-don-callis-family-retains-aew-tnt-title/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2187196/kevin-knight-don-callis-family-retains-aew-tnt-title/\nTitolo feed: Kevin Knight Joins Don Callis Family, Retains AEW TNT Title\nTitolo pagina: Kevin Knight Joins Don Callis Family, Retains AEW TNT Title - Wrestling Inc.\nDescrizione: Kevin Knight joined the Don Callis Family before retaining the TNT Championship during \"AEW Dynamite.\"\nCategoria suggerita: AEW\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Kevin Knight defeated \\\"Speedball\\\" Mike Bailey to retain his TNT Championship during \\\"AEW Dynamite.\\\"\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Knight was defending the title against his former Trios Championship-winning partner for the fifth time, having captured the vacant title at Dynasty in April .\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Prior to the match getting underway, Knight was introduced by Don Callis as the newest member of his Family, once again bringing the TNT title under the DCF's umbrella after Kyle Fletcher was forced to vacate it.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Callis watched on alongside Jake Doyle as his new recruit worked over Bailey in the ring, jeering at the challenger and telling him to give up as he was tied up by the champion. Bailey didn't, and eventually fought his way back into the bout with a series of kicks to drop Knight in the middle of the ring.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"Bailey went to the outside of the ring looking to find some space to rally, but Knight followed him by flying over the ropes to take him out, returning to the ring for the action to continue. Bailey still managed to find his way back into the contest, getting a close near-fall with a straitjacket pin and going to the top rope, prompting Doyle to get up on the apron.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"The distraction from Doyle gave Callis the opportunity to clock Bailey at the top rope, thus allowing Knight to crash Bailey from the top rope and gain the winning pinfall.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"After the match, Knight said that he needed to get the dead weight – Bailey – off his shoulders before resuming his quest to become a double champion. He then addressed AEW World Champion MJF and said he was ready when he is.\"\n  }\n]\n"
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "ai:Sviluppo narrativo importante: un nuovo membro nella Don Callis Family e una difesa del titolo TNT riuscita.; deterministic:hard:championship,recency:fresh_12h",
-        "score": 74
-      },
-      "publisher": {
-        "categories": [
-          5
-        ],
-        "error": null,
-        "featured_media": 5966,
-        "present": true,
-        "status": "published",
-        "wp_link": "https://news.openwrestlingtv.com/aew/kevin-knight-si-unisce-alla-don-callis-family-e-mantiene-il-titolo-tnt/",
-        "wp_post_id": 5967
-      },
-      "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2187196/kevin-knight-don-callis-family-retains-aew-tnt-title",
-      "title_it": "Kevin Knight si unisce alla Don Callis Family e mantiene il titolo TNT"
-    }
-  ],
-  "generated_at": "2026-06-04T10:47:47.269032+00:00",
+  "article_dossiers": [],
+  "generated_at": "2026-06-04T12:50:35.530697+00:00",
   "how_to_read": {
     "alfred_final_html_preview": "HTML dopo revisione/normalizzazioni di Alfred",
     "bob_body_html_preview": "HTML prodotto da Bob prima di Alfred",
@@ -2512,6 +2252,116 @@
       "overall_status": "ok",
       "published": 3,
       "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 0,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 0
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 0,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 5,
+          "already_worked": 0,
+          "event_factual_news_to_menzo": 0,
+          "event_recap_duplicates_blocked_by_report": 0,
+          "event_soft_reactions_to_menzo": 0,
+          "hard_skipped": 28,
+          "menzo_memory_hard_skipped": 22,
+          "old_news_hard_skipped": 0,
+          "post_show_hard_news_to_menzo": 1,
+          "report_candidates_blocked_by_manual_or_history": 0,
+          "to_menzo": 6,
+          "to_simone": 1
+        },
+        "menzo": {
+          "pending": 0,
+          "skipped": 0,
+          "to_bob_or_v92": 0
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 0,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 1,
+          "skipped": 5,
+          "waiting": 0
+        }
+      },
+      "already_published": 0,
+      "article_count": 0,
+      "errors": 0,
+      "generated_at": "2026-06-04T12:50:35.523188+00:00",
+      "overall_status": "ok",
+      "published": 0,
+      "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 0,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 0
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 0,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 5,
+          "already_worked": 0,
+          "event_factual_news_to_menzo": 0,
+          "event_recap_duplicates_blocked_by_report": 0,
+          "event_soft_reactions_to_menzo": 0,
+          "hard_skipped": 28,
+          "menzo_memory_hard_skipped": 22,
+          "old_news_hard_skipped": 0,
+          "post_show_hard_news_to_menzo": 1,
+          "report_candidates_blocked_by_manual_or_history": 0,
+          "to_menzo": 6,
+          "to_simone": 1
+        },
+        "menzo": {
+          "pending": 0,
+          "skipped": 0,
+          "to_bob_or_v92": 0
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 0,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 1,
+          "skipped": 5,
+          "waiting": 0
+        }
+      },
+      "already_published": 0,
+      "article_count": 0,
+      "errors": 0,
+      "generated_at": "2026-06-04T12:50:35.530697+00:00",
+      "overall_status": "ok",
+      "published": 0,
+      "warnings": 0
     }
   ],
   "overall_status": "ok",
@@ -2528,45 +2378,45 @@
       "simone": "real_report_director_and_autonomous_report_publisher"
     },
     "alfred_handoff": {
-      "approved": 3,
+      "approved": 0,
       "blockers": 0,
       "editorial_changes": 0,
       "needs_revision": 0,
-      "warnings": 3
+      "warnings": 0
     },
     "bob_handoff": {
       "errors": 0,
       "extraction_empty": 0,
-      "ready_for_alfred": 3,
+      "ready_for_alfred": 0,
       "translation_pending": 0
     },
-    "ended_at": "2026-06-04T10:47:47.253471+00:00",
+    "ended_at": "2026-06-04T12:50:35.518353+00:00",
     "engine": "bot_v92.py",
     "massy_handoff": {
-      "already_published_hard_skipped": 3,
+      "already_published_hard_skipped": 5,
       "already_worked": 0,
-      "event_factual_news_to_menzo": 2,
+      "event_factual_news_to_menzo": 0,
       "event_recap_duplicates_blocked_by_report": 0,
       "event_soft_reactions_to_menzo": 0,
-      "hard_skipped": 29,
-      "menzo_memory_hard_skipped": 25,
+      "hard_skipped": 28,
+      "menzo_memory_hard_skipped": 22,
       "old_news_hard_skipped": 0,
-      "post_show_hard_news_to_menzo": 0,
+      "post_show_hard_news_to_menzo": 1,
       "report_candidates_blocked_by_manual_or_history": 0,
-      "to_menzo": 4,
-      "to_simone": 2
+      "to_menzo": 6,
+      "to_simone": 1
     },
     "menzo_handoff": {
       "pending": 0,
       "skipped": 0,
-      "to_bob_or_v92": 4
+      "to_bob_or_v92": 0
     },
     "newsroom_engine_override": false,
     "publisher_handoff": {
       "already_published": 0,
       "dry_run": 0,
       "errors": 0,
-      "published": 3,
+      "published": 0,
       "wp_not_ready": 0
     },
     "runtime_delegations": 0,
@@ -2577,107 +2427,107 @@
       "waiting": 0
     },
     "simone_publish_handoff": {
-      "already_published": 1,
+      "already_published": 0,
       "dry_run": 0,
       "errors": 0,
       "published": 0,
-      "wp_not_ready": 0
+      "wp_not_ready": 1
     },
-    "started_at": "2026-06-04T10:47:14.391675+00:00",
+    "started_at": "2026-06-04T12:49:43.773021+00:00",
     "version": "v93_20_process_refinements"
   },
   "summary": {
     "anomalies": 0,
-    "article_dossiers": 4,
+    "article_dossiers": 0,
     "errors_48h": 16,
     "published_48h": 60,
-    "published_current_run": 3,
-    "runs_48h": 42
+    "published_current_run": 0,
+    "runs_48h": 44
   },
   "timeline": [
     {
       "agent": "Jarvis",
       "note": "engine=bot_v92.py",
       "phase": "bootstrap_status_written",
-      "timestamp": "2026-06-04T10:47:14.391998+00:00"
+      "timestamp": "2026-06-04T12:49:43.773294+00:00"
     },
     {
       "agent": "Massy",
-      "note": "to_simone=2 to_menzo=4 hard_skip=29 already=0",
+      "note": "to_simone=1 to_menzo=6 hard_skip=28 already=0",
       "phase": "sentinel_board_ready",
-      "timestamp": "2026-06-04T10:47:14.884897+00:00"
+      "timestamp": "2026-06-04T12:49:44.246007+00:00"
     },
     {
       "agent": "Massy",
       "note": "version=v93_24_massy_show_news_before_report_closure",
       "phase": "forced_policy_active",
-      "timestamp": "2026-06-04T10:47:14.884912+00:00"
+      "timestamp": "2026-06-04T12:49:44.246021+00:00"
     },
     {
       "agent": "Simone",
       "note": "ready=1 waiting=0 skipped=5",
       "phase": "report_decision_ready",
-      "timestamp": "2026-06-04T10:47:14.888573+00:00"
+      "timestamp": "2026-06-04T12:49:44.249328+00:00"
     },
     {
       "agent": "Simone",
-      "note": "published=0 already=1 wp_not_ready=0 errors=0",
+      "note": "published=0 already=0 wp_not_ready=1 errors=0",
       "phase": "report_publication_ready",
-      "timestamp": "2026-06-04T10:47:18.175205+00:00"
+      "timestamp": "2026-06-04T12:49:57.760189+00:00"
     },
     {
       "agent": "Menzo",
-      "note": "selected=4 pending=0 skipped=0",
+      "note": "selected=0 pending=0 skipped=0",
       "phase": "editorial_decision_ready",
-      "timestamp": "2026-06-04T10:47:32.663399+00:00"
+      "timestamp": "2026-06-04T12:50:10.213959+00:00"
     },
     {
       "agent": "Menzo",
-      "note": "version=v93_20_selective_softpool",
+      "note": "version=v93_25_wp_ready_guard",
       "phase": "forced_policy_active",
-      "timestamp": "2026-06-04T10:47:32.663415+00:00"
+      "timestamp": "2026-06-04T12:50:10.213976+00:00"
     },
     {
       "agent": "Bob",
-      "note": "ready=3 pending=0 empty=0 errors=0",
+      "note": "ready=0 pending=0 empty=0 errors=0",
       "phase": "article_packages_ready",
-      "timestamp": "2026-06-04T10:47:38.886058+00:00"
+      "timestamp": "2026-06-04T12:50:10.230264+00:00"
     },
     {
       "agent": "Bob",
-      "note": "warnings=3",
+      "note": "warnings=0",
       "phase": "bob_brief_guard_applied",
-      "timestamp": "2026-06-04T10:47:38.887386+00:00"
+      "timestamp": "2026-06-04T12:50:10.230553+00:00"
     },
     {
       "agent": "Alfred",
-      "note": "approved=3 needs_revision=0 blockers=0 warnings=0 changes=0",
+      "note": "approved=0 needs_revision=0 blockers=0 warnings=0 changes=0",
       "phase": "quality_review_ready",
-      "timestamp": "2026-06-04T10:47:38.897913+00:00"
+      "timestamp": "2026-06-04T12:50:10.237171+00:00"
     },
     {
       "agent": "Alfred",
-      "note": "surfaced=3",
+      "note": "surfaced=0",
       "phase": "bob_warning_guard_applied",
-      "timestamp": "2026-06-04T10:47:38.899490+00:00"
+      "timestamp": "2026-06-04T12:50:10.237463+00:00"
     },
     {
       "agent": "Publisher",
-      "note": "published=3 already=0 dry=0 wp_not_ready=0 errors=0",
+      "note": "published=0 already=0 dry=0 wp_not_ready=0 errors=0",
       "phase": "publication_ready",
-      "timestamp": "2026-06-04T10:47:47.253420+00:00"
+      "timestamp": "2026-06-04T12:50:35.518323+00:00"
     },
     {
       "agent": "Jarvis",
       "note": "v93 Publisher completed; v92 fallback skipped",
       "phase": "runtime_skipped",
-      "timestamp": "2026-06-04T10:47:47.253459+00:00"
+      "timestamp": "2026-06-04T12:50:35.518345+00:00"
     },
     {
       "agent": "Archivista",
       "note": "status=ok anomalies=0",
       "phase": "audit_ready",
-      "timestamp": "2026-06-04T10:47:47.268673+00:00"
+      "timestamp": "2026-06-04T12:50:35.530637+00:00"
     }
   ],
   "version": "v93_7_archivista_audit"

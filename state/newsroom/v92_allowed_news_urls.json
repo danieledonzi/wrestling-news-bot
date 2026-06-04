@@ -1,10 +1,5 @@
 {
-  "allowed_urls": [
-    "https://www.wrestlinginc.com/2187106/bully-ray-oba-femi-wwe-raw-evolution-clash-in-italy/",
-    "https://www.wrestlinginc.com/2187196/kevin-knight-don-callis-family-retains-aew-tnt-title/",
-    "https://www.ringsidenews.com/aew-dynamite-summer-blockbuster-gets-two-owen-hart-tournament-matches-june-10/",
-    "https://www.ringsidenews.com/la-knight-admits-he-feels-underappreciated-wwe/"
-  ],
-  "generated_at": "2026-06-04T10:47:32.663131+00:00",
-  "version": "v93_20_selective_softpool"
+  "allowed_urls": [],
+  "generated_at": "2026-06-04T12:50:10.213694+00:00",
+  "version": "v93_25_wp_ready_guard"
 }
