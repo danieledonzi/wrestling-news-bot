@@ -1,13 +1,5 @@
 {
-  "allowed_urls": [
-    "https://www.wrestlinginc.com/2187197/mercedes-mone-returns-aew-womens-owen-hart-tourney-wild-card-slot/",
-    "https://www.ringsidenews.com/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet/",
-    "https://www.wrestlinginc.com/2187106/bully-ray-oba-femi-wwe-raw-evolution-clash-in-italy/",
-    "https://www.ringsidenews.com/absent-talent-makes-surprise-return-prior-june-3-aew-dynamite/",
-    "https://www.wrestlinginc.com/2187196/kevin-knight-don-callis-family-retains-aew-tnt-title/",
-    "https://www.ringsidenews.com/aew-dynamite-summer-blockbuster-gets-two-owen-hart-tournament-matches-june-10/",
-    "https://www.wrestlinginc.com/2187009/bully-ray-jacob-fatu-bloodline-wwe-clash-in-italy-raw/"
-  ],
-  "generated_at": "2026-06-04T07:03:32.578586+00:00",
-  "version": "v93_20_selective_softpool"
+  "allowed_urls": [],
+  "generated_at": "2026-06-04T08:39:20.768364+00:00",
+  "version": "v93_25_wp_ready_guard"
 }

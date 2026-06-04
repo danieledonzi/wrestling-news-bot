@@ -1,12 +1,12 @@
 {
   "agent": "Simone",
-  "generated_at": "2026-06-04T07:03:25.546947+00:00",
+  "generated_at": "2026-06-04T08:39:08.270321+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
     "errors": 0,
-    "published": 1,
-    "wp_not_ready": 0
+    "published": 0,
+    "wp_not_ready": 1
   },
   "input": {
     "ready_reports": 1,
@@ -23,16 +23,11 @@
   },
   "results": [
     {
-      "categories": [
-        "Editoriali",
-        "AEW"
-      ],
+      "reason": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2ea9614c90>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=12)'))",
       "report_key": "aew_dynamite_2026_06_03",
       "source_url": "https://www.wrestlinginc.com/2186292/aew-dynamite-june-3-two-titles-on-line-owen-hart-cup-tournaments-continue/",
-      "status": "published",
-      "title": "AEW Dynamite del 3 giugno 2026 - risultati e momenti salienti",
-      "wp_link": "https://news.openwrestlingtv.com/aew/aew-dynamite-del-3-giugno-2026-risultati-e-momenti-salienti/",
-      "wp_post_id": 5940
+      "status": "wp_not_ready",
+      "title": "AEW Dynamite del 3 giugno 2026 - risultati e momenti salienti"
     }
   ],
   "version": "v93_25_simone_skip_wp_probe_without_ready_reports",
@@ -42,14 +37,29 @@
         {
           "attempt": 1,
           "label": "rest_root",
-          "status": "status_200"
+          "status": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2ea960a710>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=12)'))"
+        },
+        {
+          "attempt": 1,
+          "label": "posts_auth",
+          "status": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2ea9614ad0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=12)'))"
+        },
+        {
+          "attempt": 2,
+          "label": "rest_root",
+          "status": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2ea960a710>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=12)'))"
+        },
+        {
+          "attempt": 2,
+          "label": "posts_auth",
+          "status": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2ea9614c90>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=12)'))"
         }
       ],
       "dns": "89.40.173.112",
       "root": "https://news.openwrestlingtv.com"
     },
     "dry_run": false,
-    "ready": true,
-    "reason": "status_200"
+    "ready": false,
+    "reason": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2ea9614c90>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=12)'))"
   }
 }

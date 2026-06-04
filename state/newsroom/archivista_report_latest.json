@@ -2,42 +2,42 @@
   "agent": "Archivista",
   "agent_handoffs": {
     "alfred": {
-      "approved": 3,
+      "approved": 0,
       "blockers": 0,
       "editorial_changes": 0,
       "needs_revision": 0,
-      "warnings": 2
+      "warnings": 0
     },
     "bob": {
       "errors": 0,
       "extraction_empty": 0,
-      "ready_for_alfred": 3,
+      "ready_for_alfred": 0,
       "translation_pending": 0
     },
     "massy": {
       "already_published_hard_skipped": 0,
       "already_worked": 0,
-      "event_factual_news_to_menzo": 4,
+      "event_factual_news_to_menzo": 2,
       "event_recap_duplicates_blocked_by_report": 0,
-      "event_soft_reactions_to_menzo": 2,
-      "hard_skipped": 20,
-      "menzo_memory_hard_skipped": 19,
+      "event_soft_reactions_to_menzo": 0,
+      "hard_skipped": 24,
+      "menzo_memory_hard_skipped": 23,
       "old_news_hard_skipped": 0,
       "post_show_hard_news_to_menzo": 1,
       "report_candidates_blocked_by_manual_or_history": 0,
-      "to_menzo": 13,
+      "to_menzo": 9,
       "to_simone": 2
     },
     "menzo": {
       "pending": 0,
-      "skipped": 7,
-      "to_bob_or_v92": 7
+      "skipped": 0,
+      "to_bob_or_v92": 0
     },
     "publisher": {
       "already_published": 0,
       "dry_run": 0,
       "errors": 0,
-      "published": 3,
+      "published": 0,
       "wp_not_ready": 0
     },
     "simone": {
@@ -47,554 +47,8 @@
     }
   },
   "anomalies": [],
-  "article_dossiers": [
-    {
-      "alfred": {
-        "decision": null,
-        "editorial_changes": [],
-        "issues": [],
-        "present": false,
-        "quality_score": null,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": null,
-        "diagnostic_stage": null,
-        "element_counts": null,
-        "error": null,
-        "present": false,
-        "raw_element_count": null,
-        "removed_before_gemini": null,
-        "status": null,
-        "translation_model": null,
-        "translation_used": null
-      },
-      "category_hint": "AEW",
-      "html_audit": {
-        "alfred_final_html_preview": "",
-        "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_absent-talent-makes-surprise-return-prior-to-june-3-aew-dynamite.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_absent-talent-makes-surprise-return-prior-to-june-3-aew-dynamite.html",
-        "publisher_review_html_preview": "",
-        "translation_prompt_preview": ""
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "ai:Ritorno importante per il roster AEW.; deterministic:hard:return,strategic:backstage,recency:fresh_12h",
-        "score": 76
-      },
-      "publisher": {
-        "categories": null,
-        "error": null,
-        "featured_media": null,
-        "present": false,
-        "status": null,
-        "wp_link": null,
-        "wp_post_id": null
-      },
-      "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/absent-talent-makes-surprise-return-prior-june-3-aew-dynamite",
-      "title_it": "Absent Talent Makes Surprise Return Prior to June 3 AEW Dynamite"
-    },
-    {
-      "alfred": {
-        "decision": null,
-        "editorial_changes": [],
-        "issues": [],
-        "present": false,
-        "quality_score": null,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": null,
-        "diagnostic_stage": null,
-        "element_counts": null,
-        "error": null,
-        "present": false,
-        "raw_element_count": null,
-        "removed_before_gemini": null,
-        "status": null,
-        "translation_model": null,
-        "translation_used": null
-      },
-      "category_hint": "AEW",
-      "html_audit": {
-        "alfred_final_html_preview": "",
-        "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_aew-dynamite-summer-blockbuster-gets-two-owen-hart-tournament-matches-for-june-10.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_aew-dynamite-summer-blockbuster-gets-two-owen-hart-tournament-matches-for-june-10.html",
-        "publisher_review_html_preview": "",
-        "translation_prompt_preview": ""
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "ai:Utile solo come aggiornamento di programmazione.; deterministic:hard:bracket,recency:fresh_12h",
-        "score": 73
-      },
-      "publisher": {
-        "categories": null,
-        "error": null,
-        "featured_media": null,
-        "present": false,
-        "status": null,
-        "wp_link": null,
-        "wp_post_id": null
-      },
-      "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/aew-dynamite-summer-blockbuster-gets-two-owen-hart-tournament-matches-june-10",
-      "title_it": "AEW Dynamite Summer Blockbuster Gets Two Owen Hart Tournament Matches For June 10"
-    },
-    {
-      "alfred": {
-        "decision": null,
-        "editorial_changes": [],
-        "issues": [],
-        "present": false,
-        "quality_score": null,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": null,
-        "diagnostic_stage": null,
-        "element_counts": null,
-        "error": null,
-        "present": false,
-        "raw_element_count": null,
-        "removed_before_gemini": null,
-        "status": null,
-        "translation_model": null,
-        "translation_used": null
-      },
-      "category_hint": null,
-      "html_audit": {
-        "alfred_final_html_preview": "",
-        "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_logan-paul-rivela-il-dolore-dell-infortunio-al-tricipite-durante-saturday-night-s-main-event.html",
-        "published_html_preview": "<p>L&#x27;ultima avventura in WWE di Logan Paul ha subito una brutale battuta d&#x27;arresto a causa di uno strappo al tricipite riportato durante il suo match titolato a WWE Saturday Night’s Main Event.</p>\n\n<!-- wp:embed {\"url\":\"https://www.youtube.com/watch?v=B6eovayusbA\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\nhttps://www.youtube.com/watch?v=B6eovayusbA\n</div></figure>\n<!-- /wp:embed -->\n\n<p>Il 23 maggio, Paul e Austin Theory hanno difeso il WWE World Tag Team Championship contro gli Street Profits, ma il match si è concluso con Paul alle prese con un grave infortunio. La WWE ha successivamente annunciato che rimarrà lontano dal ring per &quot;diversi mesi&quot; proprio a causa dello strappo al tricipite.</p>\n<p>Parlando nel suo podcast ImPaulsive, Paul ha spiegato che l&#x27;infortunio è avvenuto quando Angelo Dawkins è volato oltre le corde verso l&#x27;esterno. Paul ha raccontato che il suo braccio era già contratto mentre tentava di afferrare Dawkins, e l&#x27;impatto è stato troppo violento per il suo corpo.</p>\n<blockquote>“Quello che è successo è stato che io ero fuori ring e un uomo di quasi 140 chili, Dawkins, è volato oltre le corde. Mi è atterrato addosso mentre il mio braccio era contratto e cercavo di prenderlo. Troppo peso, troppa tensione: ho sentito i tendini staccarsi dal gomito.”</blockquote>\n<p>Paul ha affermato di aver capito immediatamente che qualcosa non andava, vista la sua esperienza con numerosi infortuni passati. Ha inoltre sottolineato che i fan possono sentire il dolore nella sua voce durante il match.</p>\n<blockquote>“Mi sono infortunato così tante volte che l&#x27;ho capito subito. Potete sentirlo, ascoltate bene quando accade: potete sentirmi, non sto facendo selling da wrestler, quello è dolore reale. In quel momento ho capito: sono fottuto.”</blockquote>\n<p>Paul ha spiegato cosa è successo dopo il match, quando Bron Breakker ha provato a sollevargli il braccio per festeggiare. Ha rivelato di aver già comunicato ad Austin Theory, mentre erano ancora sul ring, di credere di essersi strappato il tricipite.</p>\n<blockquote>“Ho detto ad Austin mentre eravamo sul ring: &#x27;Mi sono strappato il tricipite&#x27;. Lui mi guarda – eravamo ancora in fase di lavoro – tipo: &#x27;Ma sei serio?&#x27;. &#x27;Sì, sì, sì&#x27;. Poi Bron Breakker va per alzarci le braccia perché avevamo appena vinto il match.”</blockquote>\n<p>Paul ha detto di essere andato nel panico in quel momento perché Breakker stava per sollevare proprio il braccio infortunato. Lo ha avvertito ripetutamente prima che Breakker lo sollevasse con cautela.</p>\n<blockquote>“Ho urlato: &#x27;Mi sono fatto male al braccio! Mi sono fatto male al braccio! Mi sono fatto male al braccio! Per favore, attento, attento&#x27;. Lui si è preso un secondo e poi lo ha sollevato lentamente, ed è andata bene, ma in quel momento pensavo: &#x27;Fratello, il mio partner sta per strapparmi il braccio ancora di più di quanto non sia già&#x27;.&quot;</blockquote>\n<p>Paul ha anche risposto ai fan che sostengono che la stable The Vision sia maledetta a causa della serie di infortuni del gruppo. Bron Breakker ha avuto un&#x27;ernia, Bronson Reed uno strappo al bicipite e Seth Rollins è stato rimosso dai programmi televisivi dopo un attacco di Breakker. Paul ha detto che la parte più frustrante è che l&#x27;infortunio sia avvenuto durante l&#x27;ultima mossa del match.</p>\n<blockquote>“Questa è una delle cose più deludenti: era l&#x27;ultima mossa che dovevo fare nel match. È stata l&#x27;ultima fottuta cosa, ho eseguito questa mossa e poi me ne andavo a casa.”</blockquote>\n<p>Nonostante l&#x27;infortunio, Paul ha chiarito di considerarsi ancora un campione, anche se al momento non ha la cintura con sé.</p>\n<blockquote>“Tra l&#x27;altro, sono ancora il campione, semplicemente non ho il metallo a provarlo. Non importa, perché indovinate un po&#x27;? I The Vision sono ancora i campioni di coppia.”</blockquote>\n<p>Paul ha anche respinto l&#x27;idea che la stable sia maledetta, tirando in ballo persino Danhausen.</p>\n<blockquote>“La gente dice che i The Vision sono maledetti, sei maledetto tu, Danhausen! Fratello, i The Vision non sono maledetti. Bron Breakker è indistruttibile, ernia a parte. Austin Theory lavora da anni.”</blockquote>\n<p>L&#x27;infortunio di Logan Paul arriva in un momento difficile per i The Vision, che stanno già gestendo diverse defezioni. Tuttavia, Paul ha chiarito di non essere disposto a lasciare che questo infortunio definisca il suo regno titolato o lo slancio del gruppo in WWE.</p>\n\n<!-- wp:embed {\"url\":\"https://www.youtube.com/embed/B6eovayusbA?feature=oembed\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\nhttps://www.youtube.com/embed/B6eovayusbA?feature=oembed\n</div></figure>\n<!-- /wp:embed -->\n\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/logan-paul-reveals-real-pain-behind-torn-tricep-injury-wwe-saturday-nights-main-event/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_logan-paul-rivela-il-dolore-dell-infortunio-al-tricipite-durante-saturday-night-s-main-event.html",
-        "publisher_review_html_preview": "<p>L&#x27;ultima avventura in WWE di Logan Paul ha subito una brutale battuta d&#x27;arresto a causa di uno strappo al tricipite riportato durante il suo match titolato a WWE Saturday Night’s Main Event.</p>\n\n<!-- wp:embed {\"url\":\"https://www.youtube.com/watch?v=B6eovayusbA\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\nhttps://www.youtube.com/watch?v=B6eovayusbA\n</div></figure>\n<!-- /wp:embed -->\n\n<p>Il 23 maggio, Paul e Austin Theory hanno difeso il WWE World Tag Team Championship contro gli Street Profits, ma il match si è concluso con Paul alle prese con un grave infortunio. La WWE ha successivamente annunciato che rimarrà lontano dal ring per &quot;diversi mesi&quot; proprio a causa dello strappo al tricipite.</p>\n<p>Parlando nel suo podcast ImPaulsive, Paul ha spiegato che l&#x27;infortunio è avvenuto quando Angelo Dawkins è volato oltre le corde verso l&#x27;esterno. Paul ha raccontato che il suo braccio era già contratto mentre tentava di afferrare Dawkins, e l&#x27;impatto è stato troppo violento per il suo corpo.</p>\n<blockquote>“Quello che è successo è stato che io ero fuori ring e un uomo di quasi 140 chili, Dawkins, è volato oltre le corde. Mi è atterrato addosso mentre il mio braccio era contratto e cercavo di prenderlo. Troppo peso, troppa tensione: ho sentito i tendini staccarsi dal gomito.”</blockquote>\n<p>Paul ha affermato di aver capito immediatamente che qualcosa non andava, vista la sua esperienza con numerosi infortuni passati. Ha inoltre sottolineato che i fan possono sentire il dolore nella sua voce durante il match.</p>\n<blockquote>“Mi sono infortunato così tante volte che l&#x27;ho capito subito. Potete sentirlo, ascoltate bene quando accade: potete sentirmi, non sto facendo selling da wrestler, quello è dolore reale. In quel momento ho capito: sono fottuto.”</blockquote>\n<p>Paul ha spiegato cosa è successo dopo il match, quando Bron Breakker ha provato a sollevargli il braccio per festeggiare. Ha rivelato di aver già comunicato ad Austin Theory, mentre erano ancora sul ring, di credere di essersi strappato il tricipite.</p>\n<blockquote>“Ho detto ad Austin mentre eravamo sul ring: &#x27;Mi sono strappato il tricipite&#x27;. Lui mi guarda – eravamo ancora in fase di lavoro – tipo: &#x27;Ma sei serio?&#x27;. &#x27;Sì, sì, sì&#x27;. Poi Bron Breakker va per alzarci le braccia perché avevamo appena vinto il match.”</blockquote>\n<p>Paul ha detto di essere andato nel panico in quel momento perché Breakker stava per sollevare proprio il braccio infortunato. Lo ha avvertito ripetutamente prima che Breakker lo sollevasse con cautela.</p>\n<blockquote>“Ho urlato: &#x27;Mi sono fatto male al braccio! Mi sono fatto male al braccio! Mi sono fatto male al braccio! Per favore, attento, attento&#x27;. Lui si è preso un secondo e poi lo ha sollevato lentamente, ed è andata bene, ma in quel momento pensavo: &#x27;Fratello, il mio partner sta per strapparmi il braccio ancora di più di quanto non sia già&#x27;.&quot;</blockquote>\n<p>Paul ha anche risposto ai fan che sostengono che la stable The Vision sia maledetta a causa della serie di infortuni del gruppo. Bron Breakker ha avuto un&#x27;ernia, Bronson Reed uno strappo al bicipite e Seth Rollins è stato rimosso dai programmi televisivi dopo un attacco di Breakker. Paul ha detto che la parte più frustrante è che l&#x27;infortunio sia avvenuto durante l&#x27;ultima mossa del match.</p>\n<blockquote>“Questa è una delle cose più deludenti: era l&#x27;ultima mossa che dovevo fare nel match. È stata l&#x27;ultima fottuta cosa, ho eseguito questa mossa e poi me ne andavo a casa.”</blockquote>\n<p>Nonostante l&#x27;infortunio, Paul ha chiarito di considerarsi ancora un campione, anche se al momento non ha la cintura con sé.</p>\n<blockquote>“Tra l&#x27;altro, sono ancora il campione, semplicemente non ho il metallo a provarlo. Non importa, perché indovinate un po&#x27;? I The Vision sono ancora i campioni di coppia.”</blockquote>\n<p>Paul ha anche respinto l&#x27;idea che la stable sia maledetta, tirando in ballo persino Danhausen.</p>\n<blockquote>“La gente dice che i The Vision sono maledetti, sei maledetto tu, Danhausen! Fratello, i The Vision non sono maledetti. Bron Breakker è indistruttibile, ernia a parte. Austin Theory lavora da anni.”</blockquote>\n<p>L&#x27;infortunio di Logan Paul arriva in un momento difficile per i The Vision, che stanno già gestendo diverse defezioni. Tuttavia, Paul ha chiarito di non essere disposto a lasciare che questo infortunio definisca il suo regno titolato o lo slancio del gruppo in WWE.</p>\n\n<!-- wp:embed {\"url\":\"https://www.youtube.com/embed/B6eovayusbA?feature=oembed\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\nhttps://www.youtube.com/embed/B6eovayusbA?feature=oembed\n</div></figure>\n<!-- /wp:embed -->\n\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/logan-paul-reveals-real-pain-behind-torn-tricep-injury-wwe-saturday-nights-main-event/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "translation_prompt_preview": ""
-      },
-      "menzo": {
-        "classification": null,
-        "present": false,
-        "reason": null,
-        "score": null
-      },
-      "publisher": {
-        "categories": [
-          4
-        ],
-        "error": null,
-        "featured_media": 5943,
-        "present": true,
-        "status": "published",
-        "wp_link": "https://news.openwrestlingtv.com/wwe/logan-paul-rivela-il-dolore-dellinfortunio-al-tricipite-durante-saturday-nights-main-event/",
-        "wp_post_id": 5944
-      },
-      "source": null,
-      "source_url": "https://www.ringsidenews.com/logan-paul-reveals-real-pain-behind-torn-tricep-injury-wwe-saturday-nights-main-event",
-      "title_it": "Logan Paul rivela il dolore dell'infortunio al tricipite durante Saturday Night’s Main Event"
-    },
-    {
-      "alfred": {
-        "decision": "approved",
-        "editorial_changes": [],
-        "issues": [],
-        "present": true,
-        "quality_score": 95,
-        "warnings": [
-          {
-            "code": "title_too_long",
-            "evidence": "Sol Ruca confessa di non aver ancora rivisto per intero il suo match titolato contro Becky Lynch",
-            "message": "Titolo probabilmente troppo lungo per SEO/social.",
-            "severity": "warning"
-          }
-        ]
-      },
-      "bob": {
-        "clean_element_count": 9,
-        "diagnostic_stage": "ready_for_alfred",
-        "element_counts": {
-          "embed": 1,
-          "heading": 0,
-          "image": 0,
-          "quote": 3,
-          "table": 0,
-          "text": 5
-        },
-        "error": null,
-        "present": true,
-        "raw_element_count": 12,
-        "removed_before_gemini": 16,
-        "status": "ready_for_alfred",
-        "translation_model": "gemini-3.1-flash-lite",
-        "translation_used": true
-      },
-      "category_hint": "WWE",
-      "html_audit": {
-        "alfred_final_html_preview": "<p>Sol Ruca sta vivendo un momento d&#x27;oro dopo aver conquistato il WWE Women’s Intercontinental Championship, ma non ha ancora guardato per intero il match che le ha consegnato il titolo.</p>\nhttps://www.youtube.com/watch?v=eKlWCV57cNc\n\n<p>Ruca è apparsa su &quot;Inside the Ring&quot; di TMZ dopo aver sconfitto Becky Lynch in Italia. Durante l&#x27;intervista, le è stato chiesto se avesse rivisto il match dopo un momento così importante della sua carriera. Ruca ha ammesso di non aver ancora visto l&#x27;incontro completo, in parte a causa dei suoi impegni serrati tra viaggi, media e attività WWE. Ha inoltre spiegato che rivedere i propri incontri può diventare complicato, poiché finisce per criticare eccessivamente se stessa invece di godersi il momento.</p>\n<blockquote>“Non ho ancora visto tutto il match. Sento che a volte guardo i miei incontri e altre volte no. Dipende molto da come mi sento a riguardo: a volte penso che il match sia andato bene e che il pubblico abbia reagito alla grande, ma poi lo riguardo e inizio a cercare il pelo nell&#x27;uovo su tutto, cosa che una persona comune che guarda lo show non farebbe.”</blockquote>\n<p>Ruca ha dichiarato di cercare un equilibrio tra l&#x27;imparare dai propri incontri e il non rovinare la sensazione di una grande performance analizzando ogni minimo dettaglio.</p>\n<blockquote>“Devo prendere le cose per quello che sono senza farmi le pulci da sola. Credo ci sia un buon equilibrio in questo. A volte mi piace semplicemente disputare un match e godermelo; mi sono divertita molto, quindi va bene così. Ma poi, ovviamente, mi piace tornare indietro, riguardare il tutto, darmi dei giudizi e chiedere critiche o aiuto per migliorare.”</blockquote>\n<p>Ruca ha chiarito di voler comunque vedere il match per intero appena ne avrà l&#x27;occasione, ma i suoi impegni hanno reso la cosa difficile.</p>\n<blockquote>“Non ho ancora avuto tempo di guardare l&#x27;intero match, ma voglio vederlo. Sì, sono stata davvero molto impegnata.”</blockquote>\n<p>La vittoria del titolo contro Becky Lynch ha rappresentato un passo importante nella carriera di Ruca nel main roster WWE. Tuttavia, le sue parole dimostrano che non è concentrata solo sui festeggiamenti: sta già pensando a come continuare a migliorare, imparando al contempo a concedersi il piacere di godersi il momento.</p>",
-        "bob_body_html_preview": "<p>Sol Ruca sta vivendo un momento d&#x27;oro dopo aver conquistato il WWE Women’s Intercontinental Championship, ma non ha ancora guardato per intero il match che le ha consegnato il titolo.</p>\nhttps://www.youtube.com/watch?v=eKlWCV57cNc\n\n<p>Ruca è apparsa su &quot;Inside the Ring&quot; di TMZ dopo aver sconfitto Becky Lynch in Italia. Durante l&#x27;intervista, le è stato chiesto se avesse rivisto il match dopo un momento così importante della sua carriera. Ruca ha ammesso di non aver ancora visto l&#x27;incontro completo, in parte a causa dei suoi impegni serrati tra viaggi, media e attività WWE. Ha inoltre spiegato che rivedere i propri incontri può diventare complicato, poiché finisce per criticare eccessivamente se stessa invece di godersi il momento.</p>\n<blockquote>“Non ho ancora visto tutto il match. Sento che a volte guardo i miei incontri e altre volte no. Dipende molto da come mi sento a riguardo: a volte penso che il match sia andato bene e che il pubblico abbia reagito alla grande, ma poi lo riguardo e inizio a cercare il pelo nell&#x27;uovo su tutto, cosa che una persona comune che guarda lo show non farebbe.”</blockquote>\n<p>Ruca ha dichiarato di cercare un equilibrio tra l&#x27;imparare dai propri incontri e il non rovinare la sensazione di una grande performance analizzando ogni minimo dettaglio.</p>\n<blockquote>“Devo prendere le cose per quello che sono senza farmi le pulci da sola. Credo ci sia un buon equilibrio in questo. A volte mi piace semplicemente disputare un match e godermelo; mi sono divertita molto, quindi va bene così. Ma poi, ovviamente, mi piace tornare indietro, riguardare il tutto, darmi dei giudizi e chiedere critiche o aiuto per migliorare.”</blockquote>\n<p>Ruca ha chiarito di voler comunque vedere il match per intero appena ne avrà l&#x27;occasione, ma i suoi impegni hanno reso la cosa difficile.</p>\n<blockquote>“Non ho ancora avuto tempo di guardare l&#x27;intero match, ma voglio vederlo. Sì, sono stata davvero molto impegnata.”</blockquote>\n<p>La vittoria del titolo contro Becky Lynch ha rappresentato un passo importante nella carriera di Ruca nel main roster WWE. Tuttavia, le sue parole dimostrano che non è concentrata solo sui festeggiamenti: sta già pensando a come continuare a migliorare, imparando al contempo a concedersi il piacere di godersi il momento.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_sol-ruca-confessa-di-non-aver-ancora-rivisto-per-intero-il-suo-match-titolato-contro-becky-lynch.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_sol-ruca-confessa-di-non-aver-ancora-rivisto-per-intero-il-suo-match-titolato-contro-becky-lynch.html",
-        "publisher_review_html_preview": "",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet/\nTitolo feed: Sol Ruca Admits She Hasn’t Watched Full Becky Lynch Title Match Back Yet\nTitolo pagina: Sol Ruca Admits She Hasn’t Watched Full Becky Lynch Title Match Back Yet\nDescrizione: Sol Ruca is still riding high after winning the WWE Women’s Intercontinental Championship, but she has not fully watched the match that gave her the\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Sol Ruca is still riding high after winning the WWE Women’s Intercontinental Championship , but she has not fully watched the match that gave her the title.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Ruca appeared on TMZ’s Inside the Ring after defeating Becky Lynch in Italy. During the interview, she was asked whether she had watched the match back after such a huge moment in her career. Ruca admitted she had not seen the full match yet, partly because her schedule has been packed with travel, media, and WWE commitments. Ruca also explained that watching her matches back can sometimes become a tricky thing because she starts picking herself apart instead of enjoying the moment.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"“So I have not watched the whole match back. I feel like sometimes I do watch the matches back and then sometimes I don’t. It kind of just depends on how I feel about it because sometimes if I feel really good about the match and I think the crowd was reacting really, really well, but then I watch it back and I start nitpicking everything where the standard person that’s watching isn’t going to be doing that.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"Ruca said she tries to find a balance between learning from her matches and not ruining the feeling of a big performance by overanalyzing every detail.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"quote\",\n    \"text\": \"“So I need to take it for what it is and not for like really nitpicking myself. I think there is a good balance with that. So sometimes I do like to just have a match, enjoy it. I had a lot of fun so like it is what it is. But then, you know, obviously I do like to go back and kind of watch and give myself critiques and ask for, you know, criticism and help with that.”\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"Ruca made it clear that she still wants to watch the match in full when she gets the chance, but her schedule has made that difficult.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"quote\",\n    \"text\": \"“So, I haven’t been had time to watch the whole match back yet, but I do want to see it back. But yeah, I’ve just been very busy.”\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"The title win over Becky Lynch was a major step in Ruca’s WWE main roster career. Still, her comments show that she is not just focused on the celebration. She is also thinking about how to keep improving while learning when to let herself enjoy the moment.\"\n  }\n]\n"
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "ai:Dichiarazioni post-titolo sulla nuova campionessa IC; utile per il feed WWE.; deterministic:hard:championship,entity:becky lynch,recency:fresh_12h",
-        "score": 79
-      },
-      "publisher": {
-        "categories": null,
-        "error": null,
-        "featured_media": null,
-        "present": false,
-        "status": null,
-        "wp_link": null,
-        "wp_post_id": null
-      },
-      "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet",
-      "title_it": "Sol Ruca confessa di non aver ancora rivisto per intero il suo match titolato contro Becky Lynch"
-    },
-    {
-      "alfred": {
-        "decision": null,
-        "editorial_changes": [],
-        "issues": [],
-        "present": false,
-        "quality_score": null,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": null,
-        "diagnostic_stage": null,
-        "element_counts": null,
-        "error": null,
-        "present": false,
-        "raw_element_count": null,
-        "removed_before_gemini": null,
-        "status": null,
-        "translation_model": null,
-        "translation_used": null
-      },
-      "category_hint": null,
-      "html_audit": {
-        "alfred_final_html_preview": "",
-        "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_booker-t-critica-il-match-di-sol-ruca-a-clash-in-italy-troppo-strutturato.html",
-        "published_html_preview": "<p>Booker T non boccia Sol Ruca dopo WWE Clash in Italy, ma è convinto che abbia ancora molta strada da fare per crescere.</p>\n\n<!-- wp:embed {\"url\":\"https://www.youtube.com/watch?v=a_gQ1-4Ezrg\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\nhttps://www.youtube.com/watch?v=a_gQ1-4Ezrg\n</div></figure>\n<!-- /wp:embed -->\n\n<p>Durante il podcast Hall of Fame, Booker T ha commentato il match valevole per il Women’s Intercontinental Championship tra Sol Ruca e Becky Lynch a Clash in Italy. Ruca ha conquistato il titolo dopo aver eseguito la Sol Snatcher, ma Booker ritiene che l&#x27;incontro abbia messo in luce una lacuna importante su cui deve lavorare.</p>\n<blockquote>Secondo Booker, il match è apparso a tratti troppo strutturato, dando l&#x27;impressione che le due atlete si limitassero a passare da uno spot pianificato all&#x27;altro: &quot;Sembrava tutto eseguito secondo un copione, come se stessero solo seguendo degli schemi. Sol Ruca dovrà imparare davvero a improvvisare.&quot;</blockquote>\n<p>Booker ha chiarito di vedere un enorme potenziale in Ruca, pur sostenendo che le manchi esperienza per gestire gli imprevisti sul ring. Ha spiegato che saper reagire in tempo reale è una componente fondamentale per lavorare ai massimi livelli.</p>\n<blockquote>&quot;Vorrei avere la possibilità di lavorare con Sol Ruca sull&#x27;improvvisazione e sul come far sì che ogni elemento di un match si incastri alla perfezione. È così talentuosa e la sua ascesa a NXT è stata fulminea, ma quando qualcosa va storto e devi cambiare i piani in corsa, devi comunque far sembrare che fosse tutto previsto fin dall&#x27;inizio.&quot;</blockquote>\n<p>Booker T ha osservato che, essendo stata catapultata così presto in una posizione di rilievo, per Sol Ruca è inevitabile commettere degli errori. Tuttavia, ha anche aggiunto che tali sbagli sono necessari se vuole trasformarsi in una vera star di primo piano.</p>\n<blockquote>&quot;Penso che essere stata gettata nella mischia così presto comporti degli errori che deve necessariamente commettere per poter lavorare al livello successivo. Questa è la realtà dei fatti, inutile indorare la pillola.&quot;</blockquote>\n<p>Il WWE Hall of Famer si è anche chiesto quanto il match sarebbe potuto essere migliore se Sol Ruca e Becky Lynch avessero avuto modo di affrontarsi negli house show prima di arrivare a questo scontro titolato su un palcoscenico così importante.</p>\n<blockquote>&quot;Quanto sarebbe stata più preparata Sol Ruca se avesse avuto l&#x27;opportunità di fare qualche house show con Becky Lynch prima di quel match? Quanto sarebbe stato migliore l&#x27;incontro? Moltissimo. Quindi, quello che dico è: commettendo questi errori, non ha altra scelta che imparare.&quot;</blockquote>\n<p>Sol Ruca ha lasciato Clash in Italy con una delle vittorie più importanti della sua carriera, ma per Booker T la prestazione ha evidenziato come sia ancora in fase di adattamento ai livelli del main event WWE. Per lui, il talento non si discute, ma il passo successivo è imparare a far funzionare un match anche quando non tutto va secondo i piani.</p>\n\n<!-- wp:embed {\"url\":\"https://www.youtube.com/embed/a_gQ1-4Ezrg?feature=oembed\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\nhttps://www.youtube.com/embed/a_gQ1-4Ezrg?feature=oembed\n</div></figure>\n<!-- /wp:embed -->\n\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/sol-rucas-wwe-clash-italy-match-criticized-too-structured/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_booker-t-critica-il-match-di-sol-ruca-a-clash-in-italy-troppo-strutturato.html",
-        "publisher_review_html_preview": "<p>Booker T non boccia Sol Ruca dopo WWE Clash in Italy, ma è convinto che abbia ancora molta strada da fare per crescere.</p>\n\n<!-- wp:embed {\"url\":\"https://www.youtube.com/watch?v=a_gQ1-4Ezrg\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\nhttps://www.youtube.com/watch?v=a_gQ1-4Ezrg\n</div></figure>\n<!-- /wp:embed -->\n\n<p>Durante il podcast Hall of Fame, Booker T ha commentato il match valevole per il Women’s Intercontinental Championship tra Sol Ruca e Becky Lynch a Clash in Italy. Ruca ha conquistato il titolo dopo aver eseguito la Sol Snatcher, ma Booker ritiene che l&#x27;incontro abbia messo in luce una lacuna importante su cui deve lavorare.</p>\n<blockquote>Secondo Booker, il match è apparso a tratti troppo strutturato, dando l&#x27;impressione che le due atlete si limitassero a passare da uno spot pianificato all&#x27;altro: &quot;Sembrava tutto eseguito secondo un copione, come se stessero solo seguendo degli schemi. Sol Ruca dovrà imparare davvero a improvvisare.&quot;</blockquote>\n<p>Booker ha chiarito di vedere un enorme potenziale in Ruca, pur sostenendo che le manchi esperienza per gestire gli imprevisti sul ring. Ha spiegato che saper reagire in tempo reale è una componente fondamentale per lavorare ai massimi livelli.</p>\n<blockquote>&quot;Vorrei avere la possibilità di lavorare con Sol Ruca sull&#x27;improvvisazione e sul come far sì che ogni elemento di un match si incastri alla perfezione. È così talentuosa e la sua ascesa a NXT è stata fulminea, ma quando qualcosa va storto e devi cambiare i piani in corsa, devi comunque far sembrare che fosse tutto previsto fin dall&#x27;inizio.&quot;</blockquote>\n<p>Booker T ha osservato che, essendo stata catapultata così presto in una posizione di rilievo, per Sol Ruca è inevitabile commettere degli errori. Tuttavia, ha anche aggiunto che tali sbagli sono necessari se vuole trasformarsi in una vera star di primo piano.</p>\n<blockquote>&quot;Penso che essere stata gettata nella mischia così presto comporti degli errori che deve necessariamente commettere per poter lavorare al livello successivo. Questa è la realtà dei fatti, inutile indorare la pillola.&quot;</blockquote>\n<p>Il WWE Hall of Famer si è anche chiesto quanto il match sarebbe potuto essere migliore se Sol Ruca e Becky Lynch avessero avuto modo di affrontarsi negli house show prima di arrivare a questo scontro titolato su un palcoscenico così importante.</p>\n<blockquote>&quot;Quanto sarebbe stata più preparata Sol Ruca se avesse avuto l&#x27;opportunità di fare qualche house show con Becky Lynch prima di quel match? Quanto sarebbe stato migliore l&#x27;incontro? Moltissimo. Quindi, quello che dico è: commettendo questi errori, non ha altra scelta che imparare.&quot;</blockquote>\n<p>Sol Ruca ha lasciato Clash in Italy con una delle vittorie più importanti della sua carriera, ma per Booker T la prestazione ha evidenziato come sia ancora in fase di adattamento ai livelli del main event WWE. Per lui, il talento non si discute, ma il passo successivo è imparare a far funzionare un match anche quando non tutto va secondo i piani.</p>\n\n<!-- wp:embed {\"url\":\"https://www.youtube.com/embed/a_gQ1-4Ezrg?feature=oembed\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\nhttps://www.youtube.com/embed/a_gQ1-4Ezrg?feature=oembed\n</div></figure>\n<!-- /wp:embed -->\n\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/sol-rucas-wwe-clash-italy-match-criticized-too-structured/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "translation_prompt_preview": ""
-      },
-      "menzo": {
-        "classification": null,
-        "present": false,
-        "reason": null,
-        "score": null
-      },
-      "publisher": {
-        "categories": [
-          4
-        ],
-        "error": null,
-        "featured_media": 5945,
-        "present": true,
-        "status": "published",
-        "wp_link": "https://news.openwrestlingtv.com/wwe/booker-t-critica-il-match-di-sol-ruca-a-clash-in-italy-troppo-strutturato/",
-        "wp_post_id": 5946
-      },
-      "source": null,
-      "source_url": "https://www.ringsidenews.com/sol-rucas-wwe-clash-italy-match-criticized-too-structured",
-      "title_it": "Booker T critica il match di Sol Ruca a Clash in Italy: \"Troppo strutturato\""
-    },
-    {
-      "alfred": {
-        "decision": null,
-        "editorial_changes": [],
-        "issues": [],
-        "present": false,
-        "quality_score": null,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": null,
-        "diagnostic_stage": null,
-        "element_counts": null,
-        "error": null,
-        "present": false,
-        "raw_element_count": null,
-        "removed_before_gemini": null,
-        "status": null,
-        "translation_model": null,
-        "translation_used": null
-      },
-      "category_hint": null,
-      "html_audit": {
-        "alfred_final_html_preview": "",
-        "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_il-comico-michael-che-apre-a-un-ruolo-come-autore-in-wwe.html",
-        "published_html_preview": "<blockquote>I fan del &quot;Saturday Night Live&quot; conosceranno il comico e autore Michael Che come co-conduttore del segmento di notizie settimanale dello show, &quot;Weekend Update&quot;, che conduce insieme a Colin Jost da 12 anni al momento della stesura di questo articolo. Tuttavia, gli appassionati di wrestling ricorderanno che Che e Jost hanno avuto un piccolo ruolo in WWE nel 2019.</blockquote>\n<blockquote>Dopo un&#x27;apparizione a &quot;WWE Raw&quot;, i due presero parte alla Andre The Giant Memorial Battle Royal a WWE WrestleMania 35, che avrebbero quasi sicuramente vinto se non fosse stato per Braun Strowman. Che non è più apparso in WWE da allora, ma è stato recentemente ospite del podcast di Stephanie McMahon &quot;What&#x27;s Your Story?&quot;, dove ha ammesso che scrivere per la WWE sarebbe per lui un sogno che si avvera.</blockquote>\n<blockquote>&quot;Mi piacerebbe moltissimo, sarebbe qualcosa da fare una volta nella vita&quot;, ha dichiarato Che. &quot;Sarebbe davvero divertente. È una cosa interessante, sai, sono un fan. I performer di oggi sono... ci sono dei talenti davvero, davvero interessanti. Sai chi adoro? IYO SKY, Rhea [Ripley] e stavo dicendo Jacob [Fatu]. Adoro Jacob Fatu, ci sono così tante persone davvero divertenti da guardare. Amo The Vision, amo Paul Heyman... È una delle persone migliori che abbia mai visto in televisione, è nella lista ristretta di persone... non so perché non sia ancora un vincitore di quattro Emmy. È così bravo davanti alla telecamera e, ogni volta che appare, succede sempre qualcosa di interessante o di importante&quot;.</blockquote>\n<p>Che non è l&#x27;unico comico ad aver mostrato interesse per la scrittura in WWE: anche il conduttore di &quot;Kill Tony&quot;, Tony Hinchcliffe, ha dichiarato pubblicamente che gli era stata offerta una posizione nel team creativo della WWE, ma che ha rifiutato per continuare a concentrarsi sulla sua carriera comica.</p>\n\n<!-- wp:embed {\"url\":\"https://www.youtube.com/watch?v=i5hhPcT4LKI\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\nhttps://www.youtube.com/watch?v=i5hhPcT4LKI\n</div></figure>\n<!-- /wp:embed -->\n\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2184203/michael-che-writing-wwe-favorite-performers-paul-heyman-stephanie-mcmahon/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_il-comico-michael-che-apre-a-un-ruolo-come-autore-in-wwe.html",
-        "publisher_review_html_preview": "<blockquote>I fan del &quot;Saturday Night Live&quot; conosceranno il comico e autore Michael Che come co-conduttore del segmento di notizie settimanale dello show, &quot;Weekend Update&quot;, che conduce insieme a Colin Jost da 12 anni al momento della stesura di questo articolo. Tuttavia, gli appassionati di wrestling ricorderanno che Che e Jost hanno avuto un piccolo ruolo in WWE nel 2019.</blockquote>\n<blockquote>Dopo un&#x27;apparizione a &quot;WWE Raw&quot;, i due presero parte alla Andre The Giant Memorial Battle Royal a WWE WrestleMania 35, che avrebbero quasi sicuramente vinto se non fosse stato per Braun Strowman. Che non è più apparso in WWE da allora, ma è stato recentemente ospite del podcast di Stephanie McMahon &quot;What&#x27;s Your Story?&quot;, dove ha ammesso che scrivere per la WWE sarebbe per lui un sogno che si avvera.</blockquote>\n<blockquote>&quot;Mi piacerebbe moltissimo, sarebbe qualcosa da fare una volta nella vita&quot;, ha dichiarato Che. &quot;Sarebbe davvero divertente. È una cosa interessante, sai, sono un fan. I performer di oggi sono... ci sono dei talenti davvero, davvero interessanti. Sai chi adoro? IYO SKY, Rhea [Ripley] e stavo dicendo Jacob [Fatu]. Adoro Jacob Fatu, ci sono così tante persone davvero divertenti da guardare. Amo The Vision, amo Paul Heyman... È una delle persone migliori che abbia mai visto in televisione, è nella lista ristretta di persone... non so perché non sia ancora un vincitore di quattro Emmy. È così bravo davanti alla telecamera e, ogni volta che appare, succede sempre qualcosa di interessante o di importante&quot;.</blockquote>\n<p>Che non è l&#x27;unico comico ad aver mostrato interesse per la scrittura in WWE: anche il conduttore di &quot;Kill Tony&quot;, Tony Hinchcliffe, ha dichiarato pubblicamente che gli era stata offerta una posizione nel team creativo della WWE, ma che ha rifiutato per continuare a concentrarsi sulla sua carriera comica.</p>\n\n<!-- wp:embed {\"url\":\"https://www.youtube.com/watch?v=i5hhPcT4LKI\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\nhttps://www.youtube.com/watch?v=i5hhPcT4LKI\n</div></figure>\n<!-- /wp:embed -->\n\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2184203/michael-che-writing-wwe-favorite-performers-paul-heyman-stephanie-mcmahon/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "translation_prompt_preview": ""
-      },
-      "menzo": {
-        "classification": null,
-        "present": false,
-        "reason": null,
-        "score": null
-      },
-      "publisher": {
-        "categories": [
-          4
-        ],
-        "error": null,
-        "featured_media": 5941,
-        "present": true,
-        "status": "published",
-        "wp_link": "https://news.openwrestlingtv.com/wwe/il-comico-michael-che-apre-a-un-ruolo-come-autore-in-wwe/",
-        "wp_post_id": 5942
-      },
-      "source": null,
-      "source_url": "https://www.wrestlinginc.com/2184203/michael-che-writing-wwe-favorite-performers-paul-heyman-stephanie-mcmahon",
-      "title_it": "Il comico Michael Che apre a un ruolo come autore in WWE"
-    },
-    {
-      "alfred": {
-        "decision": null,
-        "editorial_changes": [],
-        "issues": [],
-        "present": false,
-        "quality_score": null,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": null,
-        "diagnostic_stage": null,
-        "element_counts": null,
-        "error": null,
-        "present": false,
-        "raw_element_count": null,
-        "removed_before_gemini": null,
-        "status": null,
-        "translation_model": null,
-        "translation_used": null
-      },
-      "category_hint": "WWE",
-      "html_audit": {
-        "alfred_final_html_preview": "",
-        "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_bully-ray-comments-on-jacob-fatu-bloodline-story-in-wake-of-wwe-clash-in-italy-raw.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_bully-ray-comments-on-jacob-fatu-bloodline-story-in-wake-of-wwe-clash-in-italy-raw.html",
-        "publisher_review_html_preview": "",
-        "translation_prompt_preview": ""
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "ai:Opinioni generiche di terzi, non strettamente necessario.; deterministic:strategic:clash in italy,strategic:raw,recency:fresh_12h",
-        "score": 69
-      },
-      "publisher": {
-        "categories": null,
-        "error": null,
-        "featured_media": null,
-        "present": false,
-        "status": null,
-        "wp_link": null,
-        "wp_post_id": null
-      },
-      "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2187009/bully-ray-jacob-fatu-bloodline-wwe-clash-in-italy-raw",
-      "title_it": "Bully Ray Comments On Jacob Fatu-Bloodline Story In Wake Of WWE Clash In Italy, Raw"
-    },
-    {
-      "alfred": {
-        "decision": "approved",
-        "editorial_changes": [],
-        "issues": [],
-        "present": true,
-        "quality_score": 100,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": 4,
-        "diagnostic_stage": "ready_for_alfred",
-        "element_counts": {
-          "embed": 0,
-          "heading": 0,
-          "image": 0,
-          "quote": 3,
-          "table": 0,
-          "text": 1
-        },
-        "error": null,
-        "present": true,
-        "raw_element_count": 5,
-        "removed_before_gemini": 1,
-        "status": "ready_for_alfred",
-        "translation_model": "gemini-3.1-flash-lite",
-        "translation_used": true
-      },
-      "category_hint": "WWE",
-      "html_audit": {
-        "alfred_final_html_preview": "<blockquote>Nonostante la sconfitta contro Brock Lesnar a Clash in Italy, Oba Femi ha dominato a &quot;WWE Raw&quot;, avanzando al turno successivo del torneo King of the Ring. Femi è stato uno degli argomenti caldi su &quot;Busted Open Radio&quot; e, dopo &quot;Raw&quot;, il WWE Hall of Famer Bully Ray ha espresso le sue opinioni su &quot;The Ruler&quot;, affermando che è sembrato attraversare un&#x27;&quot;evoluzione&quot; nel corso del match.</blockquote>\n<blockquote>&quot;Oba, quando è uscito ieri sera, sembrava un uomo sconfitto, perché lo era&quot;, ha spiegato. &quot;Ma, alla fine del segmento, Oba sembrava pronto a vincere il King of the Ring e pronto per Brock Lesnar, ogni volta che Brock si farà rivedere.&quot;</blockquote>\n<p>Bully Ray ha spiegato di aver apprezzato la gamma di emozioni mostrata da Femi. Ha detto che Femi è arrivato senza il solito brio, riuscendo a stento a fare la sua camminata verso il ring, perché stava vendendo le sette F5 subite da Lesnar la sera prima, o forse perché stava combattendo contro la delusione. Poi, &quot;The Ruler&quot; è salito sul ring per respingere Solo Sikoa, Carmelo Hayes e Penta, oltre a Talla Tonga a bordo ring.</p>\n<blockquote>&quot;Arriva Oba al ring e vediamo Oba evolversi&quot;, ha detto Bully Ray. &quot;Andiamo dritti alla fisicità vista ieri sera... Vediamo Oba lanciare via Solo Sikoa e poi sollevarlo per la powerbomb, battendolo. Poi, la parte più importante per me è stata il promo successivo. Perché ho visto arrivare sul ring un Oba Femi abbattuto, un Oba Femi non proprio in palla, ma alla fine del segmento ho pensato: &#x27;Questo ragazzo è tornato in carreggiata&#x27;.&quot;</blockquote>",
-        "bob_body_html_preview": "<blockquote>Nonostante la sconfitta contro Brock Lesnar a Clash in Italy, Oba Femi ha dominato a &quot;WWE Raw&quot;, avanzando al turno successivo del torneo King of the Ring. Femi è stato uno degli argomenti caldi su &quot;Busted Open Radio&quot; e, dopo &quot;Raw&quot;, il WWE Hall of Famer Bully Ray ha espresso le sue opinioni su &quot;The Ruler&quot;, affermando che è sembrato attraversare un&#x27;&quot;evoluzione&quot; nel corso del match.</blockquote>\n<blockquote>&quot;Oba, quando è uscito ieri sera, sembrava un uomo sconfitto, perché lo era&quot;, ha spiegato. &quot;Ma, alla fine del segmento, Oba sembrava pronto a vincere il King of the Ring e pronto per Brock Lesnar, ogni volta che Brock si farà rivedere.&quot;</blockquote>\n<p>Bully Ray ha spiegato di aver apprezzato la gamma di emozioni mostrata da Femi. Ha detto che Femi è arrivato senza il solito brio, riuscendo a stento a fare la sua camminata verso il ring, perché stava vendendo le sette F5 subite da Lesnar la sera prima, o forse perché stava combattendo contro la delusione. Poi, &quot;The Ruler&quot; è salito sul ring per respingere Solo Sikoa, Carmelo Hayes e Penta, oltre a Talla Tonga a bordo ring.</p>\n<blockquote>&quot;Arriva Oba al ring e vediamo Oba evolversi&quot;, ha detto Bully Ray. &quot;Andiamo dritti alla fisicità vista ieri sera... Vediamo Oba lanciare via Solo Sikoa e poi sollevarlo per la powerbomb, battendolo. Poi, la parte più importante per me è stata il promo successivo. Perché ho visto arrivare sul ring un Oba Femi abbattuto, un Oba Femi non proprio in palla, ma alla fine del segmento ho pensato: &#x27;Questo ragazzo è tornato in carreggiata&#x27;.&quot;</blockquote>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_bully-ray-elogia-l-evoluzione-di-oba-femi-a-wwe-raw.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_bully-ray-elogia-l-evoluzione-di-oba-femi-a-wwe-raw.html",
-        "publisher_review_html_preview": "",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2187106/bully-ray-oba-femi-wwe-raw-evolution-clash-in-italy/\nTitolo feed: Bully Ray Liked The 'Evolution' Of Oba Femi On WWE Raw Following Clash In Italy Loss\nTitolo pagina: Bully Ray Liked The 'Evolution' Of Oba Femi On WWE Raw Following Clash In Italy Loss - Wrestling Inc.\nDescrizione: WWE Hall of Famer Bully Ray explained how he liked what he described as the \"evolution\" of Oba Femi on \"WWE Raw\" following his loss to Brock Lesnar.\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"quote\",\n    \"text\": \"Despite losing to Brock Lesnar at Clash in Italy , Oba Femi dominated on \\\"WWE Raw\\\" and advanced to the next round of the King of the Ring tournament . Femi has been a hot topic on \\\" Busted Open Radio ,\\\" and following \\\"Raw,\\\" WWE Hall of Famer Bully Ray gave his thoughts on \\\"The Ruler,\\\" who he said looked like he underwent an \\\"evolution\\\" as the match went on.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"quote\",\n    \"text\": \"\\\"Oba, when he first came out last night, looked like a defeated man, because he was a defeated man,\\\" he explained. \\\"But, by the end of the segment, Oba looked like he was ready to win the King of the Ring and he looked like he was ready for Brock Lesnar whenever Brock shows up again.\\\"\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Bully Ray explained he liked the range of emotion he saw from Femi. He said Femi came out without a pep in his step, barely able to do his strut down to the ring, because he was selling the seven F5s he took from Lesnar the night before, or because he was fighting off the disappointment. Then, \\\"The Ruler\\\" got in the ring to fight off Solo Sikoa, Carmelo Hayes, and Penta, as well as Talla Tonga on the outside.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"\\\"Here comes Oba to the ring, and we see Oba evolve,\\\" Bully Ray said. \\\"Go right into the physicality last night... We see Oba shotput Solo Sikoa and then pop him up for the powerbomb and beat him. Then, the most important part was the promo afterward, to me. Because, I saw a dejected Oba Femi coming to the ring last night, a not-so-ready Oba Femi, but by the end of the segment, I'm like, 'This guy's back on track.'\\\"\"\n  }\n]\n"
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "ai:Analisi su Oba Femi post-evento in Italia, rilevante per il pubblico italiano.; deterministic:strategic:clash in italy,strategic:raw,entity:brock lesnar,entity:oba femi,recency:fresh_12h",
-        "score": 78
-      },
-      "publisher": {
-        "categories": null,
-        "error": null,
-        "featured_media": null,
-        "present": false,
-        "status": null,
-        "wp_link": null,
-        "wp_post_id": null
-      },
-      "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2187106/bully-ray-oba-femi-wwe-raw-evolution-clash-in-italy",
-      "title_it": "Bully Ray elogia l'evoluzione di Oba Femi a WWE Raw"
-    },
-    {
-      "alfred": {
-        "decision": null,
-        "editorial_changes": [],
-        "issues": [],
-        "present": false,
-        "quality_score": null,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": null,
-        "diagnostic_stage": null,
-        "element_counts": null,
-        "error": null,
-        "present": false,
-        "raw_element_count": null,
-        "removed_before_gemini": null,
-        "status": null,
-        "translation_model": null,
-        "translation_used": null
-      },
-      "category_hint": "AEW",
-      "html_audit": {
-        "alfred_final_html_preview": "",
-        "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_kevin-knight-joins-don-callis-family-retains-aew-tnt-title.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_kevin-knight-joins-don-callis-family-retains-aew-tnt-title.html",
-        "publisher_review_html_preview": "",
-        "translation_prompt_preview": ""
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "ai:Sviluppi narrativi chiave su TNT Title e Don Callis Family.; deterministic:hard:championship,recency:fresh_12h",
-        "score": 74
-      },
-      "publisher": {
-        "categories": null,
-        "error": null,
-        "featured_media": null,
-        "present": false,
-        "status": null,
-        "wp_link": null,
-        "wp_post_id": null
-      },
-      "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2187196/kevin-knight-don-callis-family-retains-aew-tnt-title",
-      "title_it": "Kevin Knight Joins Don Callis Family, Retains AEW TNT Title"
-    },
-    {
-      "alfred": {
-        "decision": "approved",
-        "editorial_changes": [],
-        "issues": [],
-        "present": true,
-        "quality_score": 100,
-        "warnings": [
-          {
-            "code": "possible_missing_embed_from_menzo_brief",
-            "expected_embeds": [
-              "youtube",
-              "twitter"
-            ],
-            "message": "Menzo AI si aspettava embed/video/tweet, ma Bob non ne ha estratti.",
-            "severity": "warning",
-            "source_specific_notes": "Focus sulla sua entrata nel torneo, non perdere il dettaglio dello slot Wild Card."
-          }
-        ]
-      },
-      "bob": {
-        "clean_element_count": 4,
-        "diagnostic_stage": "ready_for_alfred",
-        "element_counts": {
-          "embed": 0,
-          "heading": 0,
-          "image": 0,
-          "quote": 1,
-          "table": 0,
-          "text": 3
-        },
-        "error": null,
-        "present": true,
-        "raw_element_count": 5,
-        "removed_before_gemini": 1,
-        "status": "ready_for_alfred",
-        "translation_model": "gemini-3.1-flash-lite",
-        "translation_used": true
-      },
-      "category_hint": "AEW",
-      "html_audit": {
-        "alfred_final_html_preview": "<blockquote>Dopo cinque mesi di assenza dalla compagnia, Mercedes Mone ha fatto il suo attesissimo ritorno in All Elite Wrestling durante la puntata di &quot;AEW Dynamite&quot; del 3 giugno. Si è rivelata come la Wild Card del 2026 Owen Hart Foundation Tournament, la stessa competizione vinta l&#x27;anno scorso; nonostante la tenace resistenza di Alex Windsor, &quot;The CEO&quot; ha strappato il pass per il turno successivo.</blockquote>\n<p>Mone ha mantenuto saldamente il controllo nelle prime fasi, provocando la Windsor restandole sopra, affrontandola a viso aperto e, soprattutto, dettando i ritmi dell&#x27;incontro. Nonostante un iniziale sprazzo di speranza per la Windsor, la Mone ha trasformato una Head Scissors in una Statement Maker, dalla quale la sua avversaria è però riuscita a liberarsi. La Windsor ha tentato di applicare una Sharpshooter, ma la Mone ha ribaltato la situazione portando l&#x27;azione sull&#x27;apron con una Neckbreaker, per poi connettere con una Meteora fuori ring prima della pausa pubblicitaria.</p>\n<p>Durante la pausa, la Mone ha dominato mettendo a segno una serie di near fall, perdendo per un attimo la calma quando la Windsor ha continuato a uscire da ogni schienamento. Al rientro dalla pausa, la Mone ha eseguito i Three Amigos e si è portata sul paletto per una Frog Splash, ma la rimonta della Windsor l&#x27;ha costretta a rifugiarsi all&#x27;esterno. Questo ha permesso alla Windsor di colpire con una Cannonball e una Clothesline dall&#x27;apron, cercando di riequilibrare il match.</p>\n<p>Tornate sul ring, la Windsor ha provato una Clothesline dalla terza corda, ma la Mone ha risposto con altri Three Amigos; la Windsor ha però contrattaccato al terzo Suplex con una Made in Japan, ottenendo un conto di due. La Windsor ha tentato un Superplex, ma la Mone ha reagito colpendo con una Meteora per un altro near fall, seguito da una Sunset Flip Powerbomb all&#x27;angolo. Dopo aver mancato le ginocchiate in corsa all&#x27;angolo e una serie di roll-up, la Mone ha piazzato il Backstabber, trasformandolo immediatamente nella Statement Maker che ha costretto la Windsor alla resa, con la Mone che ha rifiutato di lasciare la presa anche dopo il suono del gong. In semifinale, la Mone affronterà la vincente del match tra Persephone e Hazuki, che si sfideranno questo sabato a &quot;AEW Collision&quot;.</p>",
-        "bob_body_html_preview": "<blockquote>Dopo cinque mesi di assenza dalla compagnia, Mercedes Mone ha fatto il suo attesissimo ritorno in All Elite Wrestling durante la puntata di &quot;AEW Dynamite&quot; del 3 giugno. Si è rivelata come la Wild Card del 2026 Owen Hart Foundation Tournament, la stessa competizione vinta l&#x27;anno scorso; nonostante la tenace resistenza di Alex Windsor, &quot;The CEO&quot; ha strappato il pass per il turno successivo.</blockquote>\n<p>Mone ha mantenuto saldamente il controllo nelle prime fasi, provocando la Windsor restandole sopra, affrontandola a viso aperto e, soprattutto, dettando i ritmi dell&#x27;incontro. Nonostante un iniziale sprazzo di speranza per la Windsor, la Mone ha trasformato una Head Scissors in una Statement Maker, dalla quale la sua avversaria è però riuscita a liberarsi. La Windsor ha tentato di applicare una Sharpshooter, ma la Mone ha ribaltato la situazione portando l&#x27;azione sull&#x27;apron con una Neckbreaker, per poi connettere con una Meteora fuori ring prima della pausa pubblicitaria.</p>\n<p>Durante la pausa, la Mone ha dominato mettendo a segno una serie di near fall, perdendo per un attimo la calma quando la Windsor ha continuato a uscire da ogni schienamento. Al rientro dalla pausa, la Mone ha eseguito i Three Amigos e si è portata sul paletto per una Frog Splash, ma la rimonta della Windsor l&#x27;ha costretta a rifugiarsi all&#x27;esterno. Questo ha permesso alla Windsor di colpire con una Cannonball e una Clothesline dall&#x27;apron, cercando di riequilibrare il match.</p>\n<p>Tornate sul ring, la Windsor ha provato una Clothesline dalla terza corda, ma la Mone ha risposto con altri Three Amigos; la Windsor ha però contrattaccato al terzo Suplex con una Made in Japan, ottenendo un conto di due. La Windsor ha tentato un Superplex, ma la Mone ha reagito colpendo con una Meteora per un altro near fall, seguito da una Sunset Flip Powerbomb all&#x27;angolo. Dopo aver mancato le ginocchiate in corsa all&#x27;angolo e una serie di roll-up, la Mone ha piazzato il Backstabber, trasformandolo immediatamente nella Statement Maker che ha costretto la Windsor alla resa, con la Mone che ha rifiutato di lasciare la presa anche dopo il suono del gong. In semifinale, la Mone affronterà la vincente del match tra Persephone e Hazuki, che si sfideranno questo sabato a &quot;AEW Collision&quot;.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_mercedes-mone-torna-in-aew-e-si-qualifica-per-il-torneo-owen-hart.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_mercedes-mone-torna-in-aew-e-si-qualifica-per-il-torneo-owen-hart.html",
-        "publisher_review_html_preview": "",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2187197/mercedes-mone-returns-aew-womens-owen-hart-tourney-wild-card-slot/\nTitolo feed: Mercedes Mone Returns To AEW In Women's Owen Hart Tourney Wild Card Slot\nTitolo pagina: Mercedes Mone Returns To AEW In Women's Owen Hart Tourney Wild Card Slot - Wrestling Inc.\nDescrizione: Mercedes Mone is back in AEW after five months away, and she has already reached the semi-finals of the Owen Hart Foundation Tournament.\nCategoria suggerita: AEW\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"quote\",\n    \"text\": \"After five months away from the company, Mercedes Mone made her long-awaited return to All Elite Wrestling on the June 3 episode of \\\"AEW Dynamite.\\\" She revealed herself as the Wild Card in the 2026 Owen Hart Foundation Tournament, the same competition she won last year, and despite Alex Windsor putting up a strong fight, \\\"The CEO\\\" advanced to the next round.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Mone was in firm control in the early going, taunting Windsor by standing on her, getting in her face, and most importantly, keeping on top of the action. Despite Windsor getting some hope early, Mone turned a Head Scissors into a Statement Maker that Windsor was able to escape from. Windsor tried to lock in a Sharpshooter but Mone countered and took the action to the apron with a Neckbreaker, before hitting a Meteora on the floor as the match entered the commercial break.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"During the break, it was all Mone as she got a series of near falls, but she did have one small moment where she needed to maintain her composure due to Windsor kicking out of everything. Coming out of the break, Mone hit the Three Amigos and went to the top for a Frog Splash, but Windsor mounted a comeback which forced Mone to retreat to the outside. This led to Windsor hitting a Cannonball and a Clothesline off the apron to try and even things up.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"As the match re-entered the ring, Windsor went for a Clothesline off the top but Mone countered into the Three Amigos again, only for Windsor to counter out of the third Suplex to hit a Made in Japan for a two-count. Windsor went for a Superplex off the top but Mone fought back to hit a Meteora for another near fall, which led to a Sunset Flip Powerbomb into the corner. Mone would miss the running knees in the corner and after a series of roll ups, Mone hit the Backstabber and floated over into the Statement Maker which forced Windsor to submit, with Mone refusing to let go after the bell had rung. Mone will meet either Persephone or Hazuki in the semi-finals of the tournament, with those two women facing each other this Saturday on \\\"AEW Collision.\\\"\"\n  }\n]\n"
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "ai:Notizia di punta: il ritorno di Mercedes Moné è fondamentale per la copertura AEW.; deterministic:hard:returns,hard:return,entity:mercedes mone,recency:fresh_12h",
-        "score": 83
-      },
-      "publisher": {
-        "categories": null,
-        "error": null,
-        "featured_media": null,
-        "present": false,
-        "status": null,
-        "wp_link": null,
-        "wp_post_id": null
-      },
-      "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2187197/mercedes-mone-returns-aew-womens-owen-hart-tourney-wild-card-slot",
-      "title_it": "Mercedes Mone torna in AEW e si qualifica per il torneo Owen Hart"
-    }
-  ],
-  "generated_at": "2026-06-04T07:03:56.979030+00:00",
+  "article_dossiers": [],
+  "generated_at": "2026-06-04T08:39:45.993443+00:00",
   "how_to_read": {
     "alfred_final_html_preview": "HTML dopo revisione/normalizzazioni di Alfred",
     "bob_body_html_preview": "HTML prodotto da Bob prima di Alfred",
@@ -603,102 +57,6 @@
     "translation_prompt_preview": "testo pulito dato a Gemini da Bob"
   },
   "ledger_48h": [
-    {
-      "agent_handoffs": {
-        "alfred": {
-          "approved": 1,
-          "blockers": 0,
-          "editorial_changes": 0,
-          "needs_revision": 0,
-          "warnings": 1
-        },
-        "bob": {
-          "errors": 0,
-          "extraction_empty": 0,
-          "ready_for_alfred": 1,
-          "translation_pending": 0
-        },
-        "massy": {
-          "already_published_hard_skipped": 9,
-          "already_worked": 2,
-          "hard_skipped": 12,
-          "to_menzo": 21,
-          "to_simone": 0
-        },
-        "menzo": {
-          "pending": 1,
-          "skipped": 19,
-          "to_bob_or_v92": 1
-        },
-        "publisher": {
-          "already_published": 0,
-          "dry_run": 0,
-          "errors": 0,
-          "published": 1,
-          "wp_not_ready": 0
-        },
-        "simone": {
-          "ready": 0,
-          "skipped": 5,
-          "waiting": 1
-        }
-      },
-      "already_published": 0,
-      "article_count": 1,
-      "errors": 0,
-      "generated_at": "2026-06-02T08:11:52.477766+00:00",
-      "overall_status": "ok",
-      "published": 1,
-      "warnings": 0
-    },
-    {
-      "agent_handoffs": {
-        "alfred": {
-          "approved": 1,
-          "blockers": 0,
-          "editorial_changes": 0,
-          "needs_revision": 0,
-          "warnings": 1
-        },
-        "bob": {
-          "errors": 0,
-          "extraction_empty": 0,
-          "ready_for_alfred": 1,
-          "translation_pending": 0
-        },
-        "massy": {
-          "already_published_hard_skipped": 9,
-          "already_worked": 2,
-          "hard_skipped": 12,
-          "to_menzo": 21,
-          "to_simone": 0
-        },
-        "menzo": {
-          "pending": 1,
-          "skipped": 19,
-          "to_bob_or_v92": 1
-        },
-        "publisher": {
-          "already_published": 0,
-          "dry_run": 0,
-          "errors": 0,
-          "published": 1,
-          "wp_not_ready": 0
-        },
-        "simone": {
-          "ready": 0,
-          "skipped": 5,
-          "waiting": 1
-        }
-      },
-      "already_published": 0,
-      "article_count": 1,
-      "errors": 0,
-      "generated_at": "2026-06-02T08:11:52.483127+00:00",
-      "overall_status": "ok",
-      "published": 1,
-      "warnings": 0
-    },
     {
       "agent_handoffs": {
         "alfred": {
@@ -2550,6 +1908,116 @@
       "overall_status": "ok",
       "published": 3,
       "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 0,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 0
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 0,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 0,
+          "already_worked": 0,
+          "event_factual_news_to_menzo": 2,
+          "event_recap_duplicates_blocked_by_report": 0,
+          "event_soft_reactions_to_menzo": 0,
+          "hard_skipped": 24,
+          "menzo_memory_hard_skipped": 23,
+          "old_news_hard_skipped": 0,
+          "post_show_hard_news_to_menzo": 1,
+          "report_candidates_blocked_by_manual_or_history": 0,
+          "to_menzo": 9,
+          "to_simone": 2
+        },
+        "menzo": {
+          "pending": 0,
+          "skipped": 0,
+          "to_bob_or_v92": 0
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 0,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 1,
+          "skipped": 5,
+          "waiting": 0
+        }
+      },
+      "already_published": 0,
+      "article_count": 0,
+      "errors": 0,
+      "generated_at": "2026-06-04T08:39:45.988352+00:00",
+      "overall_status": "ok",
+      "published": 0,
+      "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 0,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 0
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 0,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 0,
+          "already_worked": 0,
+          "event_factual_news_to_menzo": 2,
+          "event_recap_duplicates_blocked_by_report": 0,
+          "event_soft_reactions_to_menzo": 0,
+          "hard_skipped": 24,
+          "menzo_memory_hard_skipped": 23,
+          "old_news_hard_skipped": 0,
+          "post_show_hard_news_to_menzo": 1,
+          "report_candidates_blocked_by_manual_or_history": 0,
+          "to_menzo": 9,
+          "to_simone": 2
+        },
+        "menzo": {
+          "pending": 0,
+          "skipped": 0,
+          "to_bob_or_v92": 0
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 0,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 1,
+          "skipped": 5,
+          "waiting": 0
+        }
+      },
+      "already_published": 0,
+      "article_count": 0,
+      "errors": 0,
+      "generated_at": "2026-06-04T08:39:45.993443+00:00",
+      "overall_status": "ok",
+      "published": 0,
+      "warnings": 0
     }
   ],
   "overall_status": "ok",
@@ -2566,45 +2034,45 @@
       "simone": "real_report_director_and_autonomous_report_publisher"
     },
     "alfred_handoff": {
-      "approved": 3,
+      "approved": 0,
       "blockers": 0,
       "editorial_changes": 0,
       "needs_revision": 0,
-      "warnings": 2
+      "warnings": 0
     },
     "bob_handoff": {
       "errors": 0,
       "extraction_empty": 0,
-      "ready_for_alfred": 3,
+      "ready_for_alfred": 0,
       "translation_pending": 0
     },
-    "ended_at": "2026-06-04T07:03:56.964535+00:00",
+    "ended_at": "2026-06-04T08:39:45.984291+00:00",
     "engine": "bot_v92.py",
     "massy_handoff": {
       "already_published_hard_skipped": 0,
       "already_worked": 0,
-      "event_factual_news_to_menzo": 4,
+      "event_factual_news_to_menzo": 2,
       "event_recap_duplicates_blocked_by_report": 0,
-      "event_soft_reactions_to_menzo": 2,
-      "hard_skipped": 20,
-      "menzo_memory_hard_skipped": 19,
+      "event_soft_reactions_to_menzo": 0,
+      "hard_skipped": 24,
+      "menzo_memory_hard_skipped": 23,
       "old_news_hard_skipped": 0,
       "post_show_hard_news_to_menzo": 1,
       "report_candidates_blocked_by_manual_or_history": 0,
-      "to_menzo": 13,
+      "to_menzo": 9,
       "to_simone": 2
     },
     "menzo_handoff": {
       "pending": 0,
-      "skipped": 7,
-      "to_bob_or_v92": 7
+      "skipped": 0,
+      "to_bob_or_v92": 0
     },
     "newsroom_engine_override": false,
     "publisher_handoff": {
       "already_published": 0,
       "dry_run": 0,
       "errors": 0,
-      "published": 3,
+      "published": 0,
       "wp_not_ready": 0
     },
     "runtime_delegations": 0,
@@ -2618,18 +2086,18 @@
       "already_published": 0,
       "dry_run": 0,
       "errors": 0,
-      "published": 1,
-      "wp_not_ready": 0
+      "published": 0,
+      "wp_not_ready": 1
     },
-    "started_at": "2026-06-04T07:02:11.032398+00:00",
+    "started_at": "2026-06-04T08:38:12.892010+00:00",
     "version": "v93_20_process_refinements"
   },
   "summary": {
     "anomalies": 0,
-    "article_dossiers": 10,
+    "article_dossiers": 0,
     "errors_48h": 16,
-    "published_48h": 56,
-    "published_current_run": 3,
+    "published_48h": 54,
+    "published_current_run": 0,
     "runs_48h": 38
   },
   "timeline": [
@@ -2637,85 +2105,85 @@
       "agent": "Jarvis",
       "note": "engine=bot_v92.py",
       "phase": "bootstrap_status_written",
-      "timestamp": "2026-06-04T07:02:11.032648+00:00"
+      "timestamp": "2026-06-04T08:38:12.892234+00:00"
     },
     {
       "agent": "Massy",
-      "note": "to_simone=2 to_menzo=13 hard_skip=20 already=0",
+      "note": "to_simone=2 to_menzo=9 hard_skip=24 already=0",
       "phase": "sentinel_board_ready",
-      "timestamp": "2026-06-04T07:02:13.775643+00:00"
+      "timestamp": "2026-06-04T08:38:13.734596+00:00"
     },
     {
       "agent": "Massy",
       "note": "version=v93_24_massy_show_news_before_report_closure",
       "phase": "forced_policy_active",
-      "timestamp": "2026-06-04T07:02:13.775660+00:00"
+      "timestamp": "2026-06-04T08:38:13.734610+00:00"
     },
     {
       "agent": "Simone",
       "note": "ready=1 waiting=0 skipped=5",
       "phase": "report_decision_ready",
-      "timestamp": "2026-06-04T07:02:13.778851+00:00"
+      "timestamp": "2026-06-04T08:38:13.737364+00:00"
     },
     {
       "agent": "Simone",
-      "note": "published=1 already=0 wp_not_ready=0 errors=0",
+      "note": "published=0 already=0 wp_not_ready=1 errors=0",
       "phase": "report_publication_ready",
-      "timestamp": "2026-06-04T07:03:25.547335+00:00"
+      "timestamp": "2026-06-04T08:39:08.271003+00:00"
     },
     {
       "agent": "Menzo",
-      "note": "selected=7 pending=0 skipped=7",
+      "note": "selected=0 pending=0 skipped=0",
       "phase": "editorial_decision_ready",
-      "timestamp": "2026-06-04T07:03:32.579562+00:00"
+      "timestamp": "2026-06-04T08:39:20.768560+00:00"
     },
     {
       "agent": "Menzo",
-      "note": "version=v93_20_selective_softpool",
+      "note": "version=v93_25_wp_ready_guard",
       "phase": "forced_policy_active",
-      "timestamp": "2026-06-04T07:03:32.579578+00:00"
+      "timestamp": "2026-06-04T08:39:20.768576+00:00"
     },
     {
       "agent": "Bob",
-      "note": "ready=3 pending=0 empty=0 errors=0",
+      "note": "ready=0 pending=0 empty=0 errors=0",
       "phase": "article_packages_ready",
-      "timestamp": "2026-06-04T07:03:48.081372+00:00"
+      "timestamp": "2026-06-04T08:39:20.780298+00:00"
     },
     {
       "agent": "Bob",
-      "note": "warnings=1",
+      "note": "warnings=0",
       "phase": "bob_brief_guard_applied",
-      "timestamp": "2026-06-04T07:03:48.082503+00:00"
+      "timestamp": "2026-06-04T08:39:20.780521+00:00"
     },
     {
       "agent": "Alfred",
-      "note": "approved=3 needs_revision=0 blockers=0 warnings=1 changes=0",
+      "note": "approved=0 needs_revision=0 blockers=0 warnings=0 changes=0",
       "phase": "quality_review_ready",
-      "timestamp": "2026-06-04T07:03:48.092573+00:00"
+      "timestamp": "2026-06-04T08:39:20.785528+00:00"
     },
     {
       "agent": "Alfred",
-      "note": "surfaced=1",
+      "note": "surfaced=0",
       "phase": "bob_warning_guard_applied",
-      "timestamp": "2026-06-04T07:03:48.093090+00:00"
+      "timestamp": "2026-06-04T08:39:20.785719+00:00"
     },
     {
       "agent": "Publisher",
-      "note": "published=3 already=0 dry=0 wp_not_ready=0 errors=0",
+      "note": "published=0 already=0 dry=0 wp_not_ready=0 errors=0",
       "phase": "publication_ready",
-      "timestamp": "2026-06-04T07:03:56.964499+00:00"
+      "timestamp": "2026-06-04T08:39:45.984256+00:00"
     },
     {
       "agent": "Jarvis",
       "note": "v93 Publisher completed; v92 fallback skipped",
       "phase": "runtime_skipped",
-      "timestamp": "2026-06-04T07:03:56.964524+00:00"
+      "timestamp": "2026-06-04T08:39:45.984280+00:00"
     },
     {
       "agent": "Archivista",
       "note": "status=ok anomalies=0",
       "phase": "audit_ready",
-      "timestamp": "2026-06-04T07:03:56.978491+00:00"
+      "timestamp": "2026-06-04T08:39:45.993401+00:00"
     }
   ],
   "version": "v93_7_archivista_audit"
