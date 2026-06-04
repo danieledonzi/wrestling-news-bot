@@ -165,11 +165,30 @@ jobs:
           echo "$status" > .bot_exit_code
           exit 0
 
+      - name: Snapshot per-run artifacts
+        if: always()
+        run: |
+          set -e
+          RUN_DIR="artifacts/newsroom_runs/${GITHUB_RUN_ID}"
+          mkdir -p "$RUN_DIR"
+          cp -a artifacts/newsroom/. "$RUN_DIR/" 2>/dev/null || true
+          cp -a state/newsroom "$RUN_DIR/state_newsroom" 2>/dev/null || true
+          cp -a published_html_review "$RUN_DIR/published_html_review" 2>/dev/null || true
+          cp -a published "$RUN_DIR/published" 2>/dev/null || true
+          if [ -f logs/newsroom_master.log ]; then
+            cp logs/newsroom_master.log "$RUN_DIR/newsroom_master.log"
+          fi
+          if [ -f .bot_exit_code ]; then
+            cp .bot_exit_code "$RUN_DIR/.bot_exit_code"
+          fi
+          find artifacts/newsroom_runs -mindepth 1 -maxdepth 1 -type d | sort | head -n -40 | xargs -r rm -rf
+          echo "[V93 ARTIFACTS] snapshot saved to $RUN_DIR"
+
       - name: Persist v92 runtime files
         if: always()
         run: |
           set -e
-          git add -f logs/ state/ published/ published_html_review/ .bot_exit_code || true
+          git add -f logs/ state/ published/ published_html_review/ artifacts/newsroom_runs/ .bot_exit_code || true
           if ! git diff --cached --quiet; then
             git commit -m "chore(v92): persist runtime state"
             git pull --rebase || echo "[v92] Warning: pull --rebase non riuscito, provo push diretto"
@@ -190,6 +209,7 @@ jobs:
             published/
             published_html_review/
             artifacts/newsroom/
+            artifacts/newsroom_runs/${{ github.run_id }}/
             review_bundle_latest.zip
             .bot_exit_code
 
