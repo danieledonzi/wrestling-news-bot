@@ -23,8 +23,9 @@ ARTIFACT_DIR = ROOT / "artifacts" / "newsroom"
 SIMONE_REPORT_STATUS_FILE = NEWSROOM_STATE_DIR / "simone_report_publish_latest.json"
 SIMONE_REPORT_HISTORY_FILE = NEWSROOM_STATE_DIR / "simone_report_history.json"
 ARTIFACT_SIMONE_PUBLISH_FILE = ARTIFACT_DIR / "simone_report_publish.json"
+WP_PREFLIGHT_FILE = NEWSROOM_STATE_DIR / "wp_preflight_latest.json"
 
-VERSION = "v93_25_simone_skip_wp_probe_without_ready_reports"
+VERSION = "v93_27_simone_uses_jarvis_wp_preflight"
 HEADERS = {"User-Agent": "OpenWrestlingTV-v93-Simone-Reports/1.0"}
 REQUEST_TIMEOUT = int(os.getenv("V93_SIMONE_REPORT_WP_TIMEOUT", "12"))
 WP_RETRIES = int(os.getenv("V93_SIMONE_REPORT_WP_RETRIES", "2"))
@@ -111,6 +112,22 @@ def wp_ready() -> tuple[bool, str, dict[str, Any]]:
     return False, last, diagnostics
 
 
+def jarvis_wp_preflight() -> tuple[bool, str, dict[str, Any]]:
+    """Use Jarvis' fast WP preflight before Simone attempts report publication.
+
+    This avoids Simone doing its slower internal two-pass WP probe when WordPress
+    is already unreachable, and keeps the run cheap before report translation.
+    """
+    try:
+        from agents.wp_preflight_v93_25 import run_wp_preflight
+        data = run_wp_preflight()
+        return bool(data.get("ready")), str(data.get("reason") or "unknown"), data
+    except Exception as exc:
+        # Non-blocking fallback: if Jarvis preflight itself has a technical issue,
+        # use the old internal check rather than incorrectly skipping reports.
+        return True, f"preflight_error_non_blocking:{exc}", {"error": str(exc)}
+
+
 def report_key(report: dict[str, Any]) -> str:
     return str(report.get("report_key") or report.get("source_url") or "").strip()
 
@@ -140,8 +157,27 @@ def empty_result(decision: dict[str, Any], ready_count: int) -> dict[str, Any]:
         "wp": {"ready": None, "reason": "skipped_no_ready_reports", "dry_run": DRY_RUN, "diagnostics": {}},
         "results": [],
         "handoff": {"published": 0, "already_published": 0, "wp_not_ready": 0, "dry_run": 0, "errors": 0},
-        "policy": {"simone_is_autonomous_for_reports": True, "uses_manual_report_workflow_engine": "modules.report_workshop_v92.run_report_workshop", "checks_wp_before_scrape_or_translation": True, "skips_wp_probe_when_no_ready_reports": True, "max_reports_per_run": MAX_REPORTS_PER_RUN, "reports_count_as_news": False},
+        "policy": {"simone_is_autonomous_for_reports": True, "uses_manual_report_workflow_engine": "modules.report_workshop_v92.run_report_workshop", "checks_wp_before_scrape_or_translation": True, "skips_wp_probe_when_no_ready_reports": True, "uses_jarvis_wp_preflight": True, "max_reports_per_run": MAX_REPORTS_PER_RUN, "reports_count_as_news": False},
     }
+
+
+def wp_not_ready_result(decision: dict[str, Any], ready_reports: list[dict[str, Any]], reason: str, diagnostics: dict[str, Any]) -> dict[str, Any]:
+    results = [{"report_key": report_key(report), "source_url": report.get("source_url"), "title": report.get("title"), "status": "wp_not_ready", "reason": reason} for report in ready_reports if isinstance(report, dict)]
+    result = {
+        "agent": "Simone",
+        "version": VERSION,
+        "generated_at": utc_now(),
+        "mode": "autonomous_report_publisher_v92_workshop",
+        "input": {"simone_version": decision.get("version") if isinstance(decision, dict) else None, "ready_reports": len(ready_reports)},
+        "wp": {"ready": False, "reason": reason, "dry_run": DRY_RUN, "diagnostics": diagnostics, "checked_by": "jarvis_wp_preflight"},
+        "results": results,
+        "handoff": {"published": 0, "already_published": 0, "wp_not_ready": len(results), "dry_run": 0, "errors": 0},
+        "policy": {"simone_is_autonomous_for_reports": True, "uses_manual_report_workflow_engine": "modules.report_workshop_v92.run_report_workshop", "checks_wp_before_scrape_or_translation": True, "uses_jarvis_wp_preflight": True, "skips_internal_wp_probe_when_jarvis_preflight_down": True, "max_reports_per_run": MAX_REPORTS_PER_RUN, "reports_count_as_news": False},
+    }
+    write_json(ARTIFACT_SIMONE_PUBLISH_FILE, result)
+    write_json(SIMONE_REPORT_STATUS_FILE, result)
+    print(f"[SIMONE v93.27] Jarvis WP preflight down: salto publisher report | ready={len(ready_reports)} reason={reason}", flush=True)
+    return result
 
 
 def run_simone_report_publisher(simone_decision: dict[str, Any] | None = None) -> dict[str, Any]:
@@ -155,15 +191,24 @@ def run_simone_report_publisher(simone_decision: dict[str, Any] | None = None) -
         result = empty_result(decision if isinstance(decision, dict) else {}, 0)
         write_json(ARTIFACT_SIMONE_PUBLISH_FILE, result)
         write_json(SIMONE_REPORT_STATUS_FILE, result)
-        print("[SIMONE v93.25] Nessun report pronto: salto WP probe", flush=True)
+        print("[SIMONE v93.27] Nessun report pronto: salto WP probe", flush=True)
         return result
+
+    preflight_ok, preflight_reason, preflight_diagnostics = jarvis_wp_preflight()
+    if not preflight_ok:
+        return wp_not_ready_result(decision if isinstance(decision, dict) else {}, ready_reports, preflight_reason, preflight_diagnostics)
 
     history = load_json(SIMONE_REPORT_HISTORY_FILE, {})
     if not isinstance(history, dict):
         history = {}
 
-    wp_ok, wp_status, wp_diagnostics = wp_ready()
-    print(f"[SIMONE v93.25] Avvio publisher report | ready={len(ready_reports)} wp_ok={wp_ok} dry_run={DRY_RUN}", flush=True)
+    # Jarvis preflight was OK. Keep the internal check as a second line of defense
+    # unless explicitly disabled.
+    if str(os.getenv("V93_SIMONE_SKIP_SECOND_WP_CHECK", "0")).strip().lower() in {"1", "true", "yes", "on"}:
+        wp_ok, wp_status, wp_diagnostics = True, preflight_reason, preflight_diagnostics
+    else:
+        wp_ok, wp_status, wp_diagnostics = wp_ready()
+    print(f"[SIMONE v93.27] Avvio publisher report | ready={len(ready_reports)} wp_ok={wp_ok} dry_run={DRY_RUN}", flush=True)
     results: list[dict[str, Any]] = []
     if not wp_ok:
         results = [{"report_key": report_key(report), "source_url": report.get("source_url"), "title": report.get("title"), "status": "wp_not_ready", "reason": wp_status} for report in ready_reports if isinstance(report, dict)]
@@ -192,10 +237,10 @@ def run_simone_report_publisher(simone_decision: dict[str, Any] | None = None) -
     if not DRY_RUN and wp_ok:
         write_json(SIMONE_REPORT_HISTORY_FILE, history)
 
-    result = {"agent": "Simone", "version": VERSION, "generated_at": utc_now(), "mode": "autonomous_report_publisher_v92_workshop", "input": {"simone_version": decision.get("version") if isinstance(decision, dict) else None, "ready_reports": len(ready_reports)}, "wp": {"ready": wp_ok, "reason": wp_status, "dry_run": DRY_RUN, "diagnostics": wp_diagnostics}, "results": results, "handoff": {"published": sum(1 for r in results if r.get("status") == "published"), "already_published": sum(1 for r in results if r.get("status") == "already_published"), "wp_not_ready": sum(1 for r in results if r.get("status") == "wp_not_ready"), "dry_run": sum(1 for r in results if r.get("status") == "dry_run"), "errors": sum(1 for r in results if r.get("status") == "publish_error")}, "policy": {"simone_is_autonomous_for_reports": True, "uses_manual_report_workflow_engine": "modules.report_workshop_v92.run_report_workshop", "checks_wp_before_scrape_or_translation": True, "skips_wp_probe_when_no_ready_reports": True, "max_reports_per_run": MAX_REPORTS_PER_RUN, "reports_count_as_news": False}}
+    result = {"agent": "Simone", "version": VERSION, "generated_at": utc_now(), "mode": "autonomous_report_publisher_v92_workshop", "input": {"simone_version": decision.get("version") if isinstance(decision, dict) else None, "ready_reports": len(ready_reports)}, "wp": {"ready": wp_ok, "reason": wp_status, "dry_run": DRY_RUN, "diagnostics": wp_diagnostics, "preflight_reason": preflight_reason}, "results": results, "handoff": {"published": sum(1 for r in results if r.get("status") == "published"), "already_published": sum(1 for r in results if r.get("status") == "already_published"), "wp_not_ready": sum(1 for r in results if r.get("status") == "wp_not_ready"), "dry_run": sum(1 for r in results if r.get("status") == "dry_run"), "errors": sum(1 for r in results if r.get("status") == "publish_error")}, "policy": {"simone_is_autonomous_for_reports": True, "uses_manual_report_workflow_engine": "modules.report_workshop_v92.run_report_workshop", "checks_wp_before_scrape_or_translation": True, "uses_jarvis_wp_preflight": True, "skips_internal_wp_probe_when_jarvis_preflight_down": True, "max_reports_per_run": MAX_REPORTS_PER_RUN, "reports_count_as_news": False}}
     write_json(ARTIFACT_SIMONE_PUBLISH_FILE, result)
     write_json(SIMONE_REPORT_STATUS_FILE, result)
-    print("[SIMONE v93.25] Report publisher completato | published={published} already={already} wp_not_ready={wp_not_ready} errors={errors}".format(published=result["handoff"]["published"], already=result["handoff"]["already_published"], wp_not_ready=result["handoff"]["wp_not_ready"], errors=result["handoff"]["errors"]), flush=True)
+    print("[SIMONE v93.27] Report publisher completato | published={published} already={already} wp_not_ready={wp_not_ready} errors={errors}".format(published=result["handoff"]["published"], already=result["handoff"]["already_published"], wp_not_ready=result["handoff"]["wp_not_ready"], errors=result["handoff"]["errors"]), flush=True)
     return result
 
 
