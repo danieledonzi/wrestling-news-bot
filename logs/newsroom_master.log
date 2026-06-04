@@ -123,10 +123,22 @@ Published reports: -
 Massy: to_simone=2 to_menzo=9 hard_skip=24 menzo_skip=23 old_skip=0
 Simone: ready=1 reports_published=0 wp_not_ready=1
 Menzo: selected=0 pending=0 skipped=0 ai=None model=None
-Bob: ready=0 errors=0 changes={'bob_v93_16_changes': 0, 'bob_brief_warnings_added': 0}
+Bob: ready=0 errors=0 changes={'bob_brief_warnings_added': 0, 'bob_v93_16_changes': 0}
 Alfred: approved=0 warnings=0 blockers=0
 Publisher: published=0 wp_not_ready=0 errors=0
 Archivista: status=ok anomalies=0
 Selected: -
 Published news: -
+Published reports: -
+
+===== NEWSROOM MASTER RUN 2026-06-04T10:32:58.945601+00:00 | v93_20_process_refinements | run_id=26946362631 =====
+Massy: to_simone=2 to_menzo=9 hard_skip=24 menzo_skip=23 old_skip=0
+Simone: ready=1 reports_published=0 wp_not_ready=0
+Menzo: selected=7 pending=0 skipped=2 ai=True model=gemini-3.1-flash-lite
+Bob: ready=3 errors=0 changes={'bob_v93_16_changes': 3, 'bob_brief_warnings_added': 1}
+Alfred: approved=3 warnings=2 blockers=0
+Publisher: published=3 wp_not_ready=0 errors=0
+Archivista: status=ok anomalies=0
+Selected: Seth Rollins Blasts Roman Reigns For Claiming He Made World Heavyweight Title Relevant, Mercedes Mone Returns To AEW In Women's Owen Hart Tourney Wild Card Slot, Sol Ruca Admits She Hasn’t Watched Full Becky Lynch Title Match Back Yet, Bully Ray Liked The 'Evolution' Of Oba Femi On WWE Raw Following Clash In Italy Loss, Kevin Knight Joins Don Callis Family, Retains AEW TNT Title, AEW Dynamite Summer Blockbuster Gets Two Owen Hart Tournament Matches For June 10
+Published news: Seth Rollins contro Roman Reigns: "Dire che ha reso rilevante il World Heavyweight Title è una stupidaggine", Mercedes Moné torna in AEW come Wild Card del torneo Owen Hart, Sol Ruca ammette di non aver ancora rivisto per intero il match titolato contro Becky Lynch
 Published reports: -

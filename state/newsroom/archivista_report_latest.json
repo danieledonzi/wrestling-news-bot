@@ -2,16 +2,16 @@
   "agent": "Archivista",
   "agent_handoffs": {
     "alfred": {
-      "approved": 0,
+      "approved": 3,
       "blockers": 0,
       "editorial_changes": 0,
       "needs_revision": 0,
-      "warnings": 0
+      "warnings": 2
     },
     "bob": {
       "errors": 0,
       "extraction_empty": 0,
-      "ready_for_alfred": 0,
+      "ready_for_alfred": 3,
       "translation_pending": 0
     },
     "massy": {
@@ -30,14 +30,14 @@
     },
     "menzo": {
       "pending": 0,
-      "skipped": 0,
-      "to_bob_or_v92": 0
+      "skipped": 2,
+      "to_bob_or_v92": 7
     },
     "publisher": {
       "already_published": 0,
       "dry_run": 0,
       "errors": 0,
-      "published": 0,
+      "published": 3,
       "wp_not_ready": 0
     },
     "simone": {
@@ -47,8 +47,404 @@
     }
   },
   "anomalies": [],
-  "article_dossiers": [],
-  "generated_at": "2026-06-04T10:00:44.825479+00:00",
+  "article_dossiers": [
+    {
+      "alfred": {
+        "decision": null,
+        "editorial_changes": [],
+        "issues": [],
+        "present": false,
+        "quality_score": null,
+        "warnings": []
+      },
+      "bob": {
+        "clean_element_count": null,
+        "diagnostic_stage": null,
+        "element_counts": null,
+        "error": null,
+        "present": false,
+        "raw_element_count": null,
+        "removed_before_gemini": null,
+        "status": null,
+        "translation_model": null,
+        "translation_used": null
+      },
+      "category_hint": "AEW",
+      "html_audit": {
+        "alfred_final_html_preview": "",
+        "bob_body_html_preview": "",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_aew-dynamite-summer-blockbuster-gets-two-owen-hart-tournament-matches-for-june-10.html",
+        "published_html_preview": "",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_aew-dynamite-summer-blockbuster-gets-two-owen-hart-tournament-matches-for-june-10.html",
+        "publisher_review_html_preview": "",
+        "translation_prompt_preview": ""
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "ai:Informazione di servizio necessaria per annunciare i prossimi incontri del torneo Owen Hart.; deterministic:hard:bracket,recency:fresh_12h",
+        "score": 73
+      },
+      "publisher": {
+        "categories": null,
+        "error": null,
+        "featured_media": null,
+        "present": false,
+        "status": null,
+        "wp_link": null,
+        "wp_post_id": null
+      },
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/aew-dynamite-summer-blockbuster-gets-two-owen-hart-tournament-matches-june-10",
+      "title_it": "AEW Dynamite Summer Blockbuster Gets Two Owen Hart Tournament Matches For June 10"
+    },
+    {
+      "alfred": {
+        "decision": null,
+        "editorial_changes": [],
+        "issues": [],
+        "present": false,
+        "quality_score": null,
+        "warnings": []
+      },
+      "bob": {
+        "clean_element_count": null,
+        "diagnostic_stage": null,
+        "element_counts": null,
+        "error": null,
+        "present": false,
+        "raw_element_count": null,
+        "removed_before_gemini": null,
+        "status": null,
+        "translation_model": null,
+        "translation_used": null
+      },
+      "category_hint": "WWE",
+      "html_audit": {
+        "alfred_final_html_preview": "",
+        "bob_body_html_preview": "",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_la-knight-admits-he-feels-underappreciated-in-wwe.html",
+        "published_html_preview": "",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_la-knight-admits-he-feels-underappreciated-in-wwe.html",
+        "publisher_review_html_preview": "",
+        "translation_prompt_preview": ""
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "selected_overflow:ai:Intervista di interesse generale per i fan di LA Knight, buon contenuto di approfondimento.; deterministic:strategic:plans,strategic:future,recency:fresh_12h",
+        "score": 72
+      },
+      "publisher": {
+        "categories": null,
+        "error": null,
+        "featured_media": null,
+        "present": false,
+        "status": null,
+        "wp_link": null,
+        "wp_post_id": null
+      },
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/la-knight-admits-he-feels-underappreciated-wwe",
+      "title_it": "LA Knight Admits He Feels Underappreciated in WWE"
+    },
+    {
+      "alfred": {
+        "decision": "approved",
+        "editorial_changes": [],
+        "issues": [],
+        "present": true,
+        "quality_score": 95,
+        "warnings": [
+          {
+            "code": "title_too_long",
+            "evidence": "Seth Rollins contro Roman Reigns: \"Dire che ha reso rilevante il World Heavyweight Title è una stupidaggine\"",
+            "message": "Titolo probabilmente troppo lungo per SEO/social.",
+            "severity": "warning"
+          }
+        ]
+      },
+      "bob": {
+        "clean_element_count": 10,
+        "diagnostic_stage": "ready_for_alfred",
+        "element_counts": {
+          "embed": 2,
+          "heading": 0,
+          "image": 0,
+          "quote": 3,
+          "table": 0,
+          "text": 5
+        },
+        "error": null,
+        "present": true,
+        "raw_element_count": 15,
+        "removed_before_gemini": 18,
+        "status": "ready_for_alfred",
+        "translation_model": "gemini-3.1-flash-lite",
+        "translation_used": true
+      },
+      "category_hint": "WWE",
+      "html_audit": {
+        "alfred_final_html_preview": "<p>Seth Rollins non è disposto a lasciare che Roman Reigns riscriva la storia per quanto riguarda il WWE World Heavyweight Championship.</p>\nhttps://www.youtube.com/watch?v=GYiZcPgFK9E\n\n<p>Durante un&#x27;intervista con Prince St. Pizza, Rollins si è sfogato riguardo al fatto di essere stato costretto a rendere vacante il WWE World Heavyweight Championship dopo essersi strappato la cuffia dei rotatori. Rollins ha chiarito di non aver mai perso il titolo in un match, il che ha reso ancora più difficile per lui guardare CM Punk e Roman Reigns contenderselo a WrestleMania 42.</p>\n<blockquote>“Dunque, mi sono strappato la cuffia dei rotatori a ottobre, ma detenevo quel titolo. L&#x27;ho perso. Non sono stato sconfitto in un match per perderlo: ho dovuto renderlo vacante perché dovevo operarmi alla cuffia. Quindi sono rimasto fuori per cinque mesi.”</blockquote>\n<p>Rollins ha affermato che la situazione a WrestleMania è stata particolarmente brutale, poiché due dei suoi più grandi rivali hanno finito per scontrarsi per quello che lui considera ancora il suo campionato, mentre il Visionary è stato costretto a guardare tutto da bordo ring.</p>\n<blockquote>“CM Punk vince il titolo, lo porta a WrestleMania e combatte nel main event contro, guarda caso, il mio altro rivale, Roman Reigns. Ti ritrovi due dei miei peggiori nemici che si affrontano per il mio titolo, nel mio main event, e io devo guardare tutto. Devo mandare giù questo boccone amaro.”</blockquote>\n<p>Roman ha lasciato WrestleMania 42 come campione e Rollins ha chiarito di essere disgustato dall&#x27;intera faccenda. Si è poi scagliato contro Reigns per aver sostenuto di aver reso rilevante il World Heavyweight Championship.</p>\n<blockquote>“Quindi per me è davvero difficile provare altro se non disgusto per il risultato. Ora Roman Reigns se ne va in giro con il mio titolo e dice di averlo reso rilevante: è una stronzata. Lo dico chiaramente. È una completa stronzata. Lo sa lui, lo so io, lo sanno tutti. Sembra un idiota quando lo dice.”</blockquote>\n<p>Rollins vede chiaramente quel titolo ancora come suo e non è intenzionato a riconoscere alcun merito a Roman Reigns. Con la previsione che Rollins vinca il torneo King of the Ring per affrontare Reigns a SummerSlam, questa faida è già carica di tensione ancor prima che i due tornino a scontrarsi sul ring.</p>\n\nhttps://www.youtube.com/embed/GYiZcPgFK9E?feature=oembed",
+        "bob_body_html_preview": "<p>Seth Rollins non è disposto a lasciare che Roman Reigns riscriva la storia per quanto riguarda il WWE World Heavyweight Championship.</p>\nhttps://www.youtube.com/watch?v=GYiZcPgFK9E\n\n<p>Durante un&#x27;intervista con Prince St. Pizza, Rollins si è sfogato riguardo al fatto di essere stato costretto a rendere vacante il WWE World Heavyweight Championship dopo essersi strappato la cuffia dei rotatori. Rollins ha chiarito di non aver mai perso il titolo in un match, il che ha reso ancora più difficile per lui guardare CM Punk e Roman Reigns contenderselo a WrestleMania 42.</p>\n<blockquote>“Dunque, mi sono strappato la cuffia dei rotatori a ottobre, ma detenevo quel titolo. L&#x27;ho perso. Non sono stato sconfitto in un match per perderlo: ho dovuto renderlo vacante perché dovevo operarmi alla cuffia. Quindi sono rimasto fuori per cinque mesi.”</blockquote>\n<p>Rollins ha affermato che la situazione a WrestleMania è stata particolarmente brutale, poiché due dei suoi più grandi rivali hanno finito per scontrarsi per quello che lui considera ancora il suo campionato, mentre il Visionary è stato costretto a guardare tutto da bordo ring.</p>\n<blockquote>“CM Punk vince il titolo, lo porta a WrestleMania e combatte nel main event contro, guarda caso, il mio altro rivale, Roman Reigns. Ti ritrovi due dei miei peggiori nemici che si affrontano per il mio titolo, nel mio main event, e io devo guardare tutto. Devo mandare giù questo boccone amaro.”</blockquote>\n<p>Roman ha lasciato WrestleMania 42 come campione e Rollins ha chiarito di essere disgustato dall&#x27;intera faccenda. Si è poi scagliato contro Reigns per aver sostenuto di aver reso rilevante il World Heavyweight Championship.</p>\n<blockquote>“Quindi per me è davvero difficile provare altro se non disgusto per il risultato. Ora Roman Reigns se ne va in giro con il mio titolo e dice di averlo reso rilevante: è una stronzata. Lo dico chiaramente. È una completa stronzata. Lo sa lui, lo so io, lo sanno tutti. Sembra un idiota quando lo dice.”</blockquote>\n<p>Rollins vede chiaramente quel titolo ancora come suo e non è intenzionato a riconoscere alcun merito a Roman Reigns. Con la previsione che Rollins vinca il torneo King of the Ring per affrontare Reigns a SummerSlam, questa faida è già carica di tensione ancor prima che i due tornino a scontrarsi sul ring.</p>\n\nhttps://www.youtube.com/embed/GYiZcPgFK9E?feature=oembed",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_seth-rollins-contro-roman-reigns-dire-che-ha-reso-rilevante-il-world-heavyweight-title-una-stupidagg.html",
+        "published_html_preview": "<p>Seth Rollins non è disposto a lasciare che Roman Reigns riscriva la storia per quanto riguarda il WWE World Heavyweight Championship.</p>\n\nhttps://www.youtube.com/watch?v=GYiZcPgFK9E\n\n<p>Durante un&#x27;intervista con Prince St. Pizza, Rollins si è sfogato riguardo al fatto di essere stato costretto a rendere vacante il WWE World Heavyweight Championship dopo essersi strappato la cuffia dei rotatori. Rollins ha chiarito di non aver mai perso il titolo in un match, il che ha reso ancora più difficile per lui guardare CM Punk e Roman Reigns contenderselo a WrestleMania 42.</p>\n<blockquote>“Dunque, mi sono strappato la cuffia dei rotatori a ottobre, ma detenevo quel titolo. L&#x27;ho perso. Non sono stato sconfitto in un match per perderlo: ho dovuto renderlo vacante perché dovevo operarmi alla cuffia. Quindi sono rimasto fuori per cinque mesi.”</blockquote>\n<p>Rollins ha affermato che la situazione a WrestleMania è stata particolarmente brutale, poiché due dei suoi più grandi rivali hanno finito per scontrarsi per quello che lui considera ancora il suo campionato, mentre il Visionary è stato costretto a guardare tutto da bordo ring.</p>\n<blockquote>“CM Punk vince il titolo, lo porta a WrestleMania e combatte nel main event contro, guarda caso, il mio altro rivale, Roman Reigns. Ti ritrovi due dei miei peggiori nemici che si affrontano per il mio titolo, nel mio main event, e io devo guardare tutto. Devo mandare giù questo boccone amaro.”</blockquote>\n<p>Roman ha lasciato WrestleMania 42 come campione e Rollins ha chiarito di essere disgustato dall&#x27;intera faccenda. Si è poi scagliato contro Reigns per aver sostenuto di aver reso rilevante il World Heavyweight Championship.</p>\n<blockquote>“Quindi per me è davvero difficile provare altro se non disgusto per il risultato. Ora Roman Reigns se ne va in giro con il mio titolo e dice di averlo reso rilevante: è una stronzata. Lo dico chiaramente. È una completa stronzata. Lo sa lui, lo so io, lo sanno tutti. Sembra un idiota quando lo dice.”</blockquote>\n<p>Rollins vede chiaramente quel titolo ancora come suo e non è intenzionato a riconoscere alcun merito a Roman Reigns. Con la previsione che Rollins vinca il torneo King of the Ring per affrontare Reigns a SummerSlam, questa faida è già carica di tensione ancor prima che i due tornino a scontrarsi sul ring.</p>\n\nhttps://www.youtube.com/embed/GYiZcPgFK9E?feature=oembed\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/seth-rollins-blasts-roman-reigns-claiming-he-made-world-heavyweight-title-relevant/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_seth-rollins-contro-roman-reigns-dire-che-ha-reso-rilevante-il-world-heavyweight-title-una-stupidagg.html",
+        "publisher_review_html_preview": "<p>Seth Rollins non è disposto a lasciare che Roman Reigns riscriva la storia per quanto riguarda il WWE World Heavyweight Championship.</p>\n\nhttps://www.youtube.com/watch?v=GYiZcPgFK9E\n\n<p>Durante un&#x27;intervista con Prince St. Pizza, Rollins si è sfogato riguardo al fatto di essere stato costretto a rendere vacante il WWE World Heavyweight Championship dopo essersi strappato la cuffia dei rotatori. Rollins ha chiarito di non aver mai perso il titolo in un match, il che ha reso ancora più difficile per lui guardare CM Punk e Roman Reigns contenderselo a WrestleMania 42.</p>\n<blockquote>“Dunque, mi sono strappato la cuffia dei rotatori a ottobre, ma detenevo quel titolo. L&#x27;ho perso. Non sono stato sconfitto in un match per perderlo: ho dovuto renderlo vacante perché dovevo operarmi alla cuffia. Quindi sono rimasto fuori per cinque mesi.”</blockquote>\n<p>Rollins ha affermato che la situazione a WrestleMania è stata particolarmente brutale, poiché due dei suoi più grandi rivali hanno finito per scontrarsi per quello che lui considera ancora il suo campionato, mentre il Visionary è stato costretto a guardare tutto da bordo ring.</p>\n<blockquote>“CM Punk vince il titolo, lo porta a WrestleMania e combatte nel main event contro, guarda caso, il mio altro rivale, Roman Reigns. Ti ritrovi due dei miei peggiori nemici che si affrontano per il mio titolo, nel mio main event, e io devo guardare tutto. Devo mandare giù questo boccone amaro.”</blockquote>\n<p>Roman ha lasciato WrestleMania 42 come campione e Rollins ha chiarito di essere disgustato dall&#x27;intera faccenda. Si è poi scagliato contro Reigns per aver sostenuto di aver reso rilevante il World Heavyweight Championship.</p>\n<blockquote>“Quindi per me è davvero difficile provare altro se non disgusto per il risultato. Ora Roman Reigns se ne va in giro con il mio titolo e dice di averlo reso rilevante: è una stronzata. Lo dico chiaramente. È una completa stronzata. Lo sa lui, lo so io, lo sanno tutti. Sembra un idiota quando lo dice.”</blockquote>\n<p>Rollins vede chiaramente quel titolo ancora come suo e non è intenzionato a riconoscere alcun merito a Roman Reigns. Con la previsione che Rollins vinca il torneo King of the Ring per affrontare Reigns a SummerSlam, questa faida è già carica di tensione ancor prima che i due tornino a scontrarsi sul ring.</p>\n\nhttps://www.youtube.com/embed/GYiZcPgFK9E?feature=oembed\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/seth-rollins-blasts-roman-reigns-claiming-he-made-world-heavyweight-title-relevant/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/seth-rollins-blasts-roman-reigns-claiming-he-made-world-heavyweight-title-relevant/\nTitolo feed: Seth Rollins Blasts Roman Reigns For Claiming He Made World Heavyweight Title Relevant\nTitolo pagina: Seth Rollins Blasts Roman Reigns For Claiming He Made World Heavyweight Title Relevant\nDescrizione: Seth Rollins is not letting Roman Reigns rewrite history when it comes to the WWE World Heavyweight Championship. While speaking to Prince St. Pizza,\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Seth Rollins is not letting Roman Reigns rewrite history when it comes to the WWE World Heavyweight Championship.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"While speaking to Prince St. Pizza , Rollins opened up about being forced to relinquish the WWE World Heavyweight Championship after tearing his rotator cuff. Rollins made it clear he never lost the title in a match, which made it even harder for him to watch CM Punk and Roman Reigns battle for it at WrestleMania 42.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"“So, I tore my rotator cuff back in October, but I was holding that title. I lost it. I didn’t get beaten in a match for it—I had to forfeit it because I had to go get surgery on my rotator. So I was out for five months.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"Rollins said the WrestleMania situation was especially brutal because two of his biggest rivals ended up fighting over what he still views as his championship, while the Visionary had to watch everything on the sidelines.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"quote\",\n    \"text\": \"“CM Punk wins the title, takes it into WrestleMania, and he’s wrestling in the main event—mind you—my other rival, Roman Reigns. So you’ve got two of my worst enemies fighting each other for my title, in my main event—and I have to watch that. I have to swallow that.”\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"Roman ultimately walked out of WrestleMania 42 as champion , and Rollins made it clear he was disgusted by the whole thing. He then unloaded on Reigns for claiming he made the World Heavyweight Championship relevant.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"quote\",\n    \"text\": \"“So it’s really difficult for me to feel any way other than disgusted by the result. Now Roman Reigns is walking around with my title and talking about how he made the title relevant—which is bulls*** . I’ll just say it. It is complete bulls***. He knows it, I know it, everybody else knows it. He sounds like an idiot when he says it.”\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"Rollins clearly still sees that title as his, and he’s not giving Roman Reigns credit for anything. With Rollins expected to win the King of the Ring tournament and face Reigns at SummerSlam , this feud already has plenty of bad blood before they even face each other in the ring again.\"\n  }\n]\n"
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "ai:Scontro verbale di alto profilo tra top star sul titolo World Heavyweight, essenziale per la narrativa attuale.; deterministic:hard:championship,entity:roman reigns,entity:seth rollins,recency:fresh_12h",
+        "score": 83
+      },
+      "publisher": {
+        "categories": [
+          4
+        ],
+        "error": null,
+        "featured_media": 5957,
+        "present": true,
+        "status": "published",
+        "wp_link": "https://news.openwrestlingtv.com/wwe/seth-rollins-contro-roman-reigns-dire-che-ha-reso-rilevante-il-world-heavyweight-title-e-una-stupidaggine/",
+        "wp_post_id": 5958
+      },
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/seth-rollins-blasts-roman-reigns-claiming-he-made-world-heavyweight-title-relevant",
+      "title_it": "Seth Rollins contro Roman Reigns: \"Dire che ha reso rilevante il World Heavyweight Title è una stupidaggine\""
+    },
+    {
+      "alfred": {
+        "decision": "approved",
+        "editorial_changes": [],
+        "issues": [],
+        "present": true,
+        "quality_score": 100,
+        "warnings": []
+      },
+      "bob": {
+        "clean_element_count": 9,
+        "diagnostic_stage": "ready_for_alfred",
+        "element_counts": {
+          "embed": 1,
+          "heading": 0,
+          "image": 0,
+          "quote": 3,
+          "table": 0,
+          "text": 5
+        },
+        "error": null,
+        "present": true,
+        "raw_element_count": 12,
+        "removed_before_gemini": 16,
+        "status": "ready_for_alfred",
+        "translation_model": "gemini-3.1-flash-lite",
+        "translation_used": true
+      },
+      "category_hint": "WWE",
+      "html_audit": {
+        "alfred_final_html_preview": "<p>Sol Ruca sta ancora cavalcando l&#x27;onda del successo dopo aver vinto il WWE Women’s Intercontinental Championship, ma non ha ancora rivisto per intero il match che le ha consegnato il titolo.</p>\nhttps://www.youtube.com/watch?v=eKlWCV57cNc\n\n<p>Ruca è apparsa su &quot;Inside the Ring&quot; di TMZ dopo aver sconfitto Becky Lynch in Italia. Durante l&#x27;intervista, le è stato chiesto se avesse rivisto l&#x27;incontro dopo un momento così importante della sua carriera. Ruca ha ammesso di non aver ancora visto il match completo, in parte perché la sua agenda è stata fitta di viaggi, impegni con i media e obblighi verso la WWE. Ruca ha inoltre spiegato che rivedere i propri incontri può talvolta diventare complicato, poiché finisce per essere troppo critica con se stessa invece di godersi il momento.</p>\n<blockquote>“Non ho ancora rivisto l’intero match. Sento che a volte guardo i match e altre volte no. Dipende un po’ da come mi sento a riguardo, perché a volte penso che il match sia andato molto bene e che il pubblico abbia reagito alla grande, ma poi lo riguardo e inizio a cercare il pelo nell’uovo, cosa che una persona comune che sta guardando non farebbe.”</blockquote>\n<p>Ruca ha dichiarato di cercare un equilibrio tra l&#x27;imparare dai propri match e il non rovinare la sensazione di una grande performance analizzando eccessivamente ogni dettaglio.</p>\n<blockquote>“Quindi devo prenderlo per quello che è, senza farmi troppe autocritiche. Credo ci sia un buon equilibrio in questo. A volte mi piace semplicemente disputare un match e godermelo. Mi sono divertita molto, quindi è andata così. Ma poi, ovviamente, mi piace tornare indietro, guardare, farmi delle critiche e chiedere consigli e supporto.”</blockquote>\n<p>Ruca ha chiarito che desidera ancora vedere il match per intero non appena ne avrà l&#x27;opportunità, ma che i suoi impegni l&#x27;hanno finora resa una cosa difficile.</p>\n<blockquote>“Quindi, non ho ancora avuto il tempo di rivedere l’intero match, ma voglio vederlo. Ma sì, sono stata davvero molto impegnata.”</blockquote>\n<p>La vittoria del titolo contro Becky Lynch è stata un passo fondamentale nella carriera di Ruca nel main roster WWE. Tuttavia, le sue parole dimostrano che non è concentrata solo sui festeggiamenti: sta anche riflettendo su come continuare a migliorare, imparando al contempo a concedersi il piacere di godersi il momento.</p>",
+        "bob_body_html_preview": "<p>Sol Ruca sta ancora cavalcando l&#x27;onda del successo dopo aver vinto il WWE Women’s Intercontinental Championship, ma non ha ancora rivisto per intero il match che le ha consegnato il titolo.</p>\nhttps://www.youtube.com/watch?v=eKlWCV57cNc\n\n<p>Ruca è apparsa su &quot;Inside the Ring&quot; di TMZ dopo aver sconfitto Becky Lynch in Italia. Durante l&#x27;intervista, le è stato chiesto se avesse rivisto l&#x27;incontro dopo un momento così importante della sua carriera. Ruca ha ammesso di non aver ancora visto il match completo, in parte perché la sua agenda è stata fitta di viaggi, impegni con i media e obblighi verso la WWE. Ruca ha inoltre spiegato che rivedere i propri incontri può talvolta diventare complicato, poiché finisce per essere troppo critica con se stessa invece di godersi il momento.</p>\n<blockquote>“Non ho ancora rivisto l’intero match. Sento che a volte guardo i match e altre volte no. Dipende un po’ da come mi sento a riguardo, perché a volte penso che il match sia andato molto bene e che il pubblico abbia reagito alla grande, ma poi lo riguardo e inizio a cercare il pelo nell’uovo, cosa che una persona comune che sta guardando non farebbe.”</blockquote>\n<p>Ruca ha dichiarato di cercare un equilibrio tra l&#x27;imparare dai propri match e il non rovinare la sensazione di una grande performance analizzando eccessivamente ogni dettaglio.</p>\n<blockquote>“Quindi devo prenderlo per quello che è, senza farmi troppe autocritiche. Credo ci sia un buon equilibrio in questo. A volte mi piace semplicemente disputare un match e godermelo. Mi sono divertita molto, quindi è andata così. Ma poi, ovviamente, mi piace tornare indietro, guardare, farmi delle critiche e chiedere consigli e supporto.”</blockquote>\n<p>Ruca ha chiarito che desidera ancora vedere il match per intero non appena ne avrà l&#x27;opportunità, ma che i suoi impegni l&#x27;hanno finora resa una cosa difficile.</p>\n<blockquote>“Quindi, non ho ancora avuto il tempo di rivedere l’intero match, ma voglio vederlo. Ma sì, sono stata davvero molto impegnata.”</blockquote>\n<p>La vittoria del titolo contro Becky Lynch è stata un passo fondamentale nella carriera di Ruca nel main roster WWE. Tuttavia, le sue parole dimostrano che non è concentrata solo sui festeggiamenti: sta anche riflettendo su come continuare a migliorare, imparando al contempo a concedersi il piacere di godersi il momento.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_sol-ruca-ammette-di-non-aver-ancora-rivisto-per-intero-il-match-titolato-contro-becky-lynch.html",
+        "published_html_preview": "<p>Sol Ruca sta ancora cavalcando l&#x27;onda del successo dopo aver vinto il WWE Women’s Intercontinental Championship, ma non ha ancora rivisto per intero il match che le ha consegnato il titolo.</p>\n\nhttps://www.youtube.com/watch?v=eKlWCV57cNc\n\n<p>Ruca è apparsa su &quot;Inside the Ring&quot; di TMZ dopo aver sconfitto Becky Lynch in Italia. Durante l&#x27;intervista, le è stato chiesto se avesse rivisto l&#x27;incontro dopo un momento così importante della sua carriera. Ruca ha ammesso di non aver ancora visto il match completo, in parte perché la sua agenda è stata fitta di viaggi, impegni con i media e obblighi verso la WWE. Ruca ha inoltre spiegato che rivedere i propri incontri può talvolta diventare complicato, poiché finisce per essere troppo critica con se stessa invece di godersi il momento.</p>\n<blockquote>“Non ho ancora rivisto l’intero match. Sento che a volte guardo i match e altre volte no. Dipende un po’ da come mi sento a riguardo, perché a volte penso che il match sia andato molto bene e che il pubblico abbia reagito alla grande, ma poi lo riguardo e inizio a cercare il pelo nell’uovo, cosa che una persona comune che sta guardando non farebbe.”</blockquote>\n<p>Ruca ha dichiarato di cercare un equilibrio tra l&#x27;imparare dai propri match e il non rovinare la sensazione di una grande performance analizzando eccessivamente ogni dettaglio.</p>\n<blockquote>“Quindi devo prenderlo per quello che è, senza farmi troppe autocritiche. Credo ci sia un buon equilibrio in questo. A volte mi piace semplicemente disputare un match e godermelo. Mi sono divertita molto, quindi è andata così. Ma poi, ovviamente, mi piace tornare indietro, guardare, farmi delle critiche e chiedere consigli e supporto.”</blockquote>\n<p>Ruca ha chiarito che desidera ancora vedere il match per intero non appena ne avrà l&#x27;opportunità, ma che i suoi impegni l&#x27;hanno finora resa una cosa difficile.</p>\n<blockquote>“Quindi, non ho ancora avuto il tempo di rivedere l’intero match, ma voglio vederlo. Ma sì, sono stata davvero molto impegnata.”</blockquote>\n<p>La vittoria del titolo contro Becky Lynch è stata un passo fondamentale nella carriera di Ruca nel main roster WWE. Tuttavia, le sue parole dimostrano che non è concentrata solo sui festeggiamenti: sta anche riflettendo su come continuare a migliorare, imparando al contempo a concedersi il piacere di godersi il momento.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_sol-ruca-ammette-di-non-aver-ancora-rivisto-per-intero-il-match-titolato-contro-becky-lynch.html",
+        "publisher_review_html_preview": "<p>Sol Ruca sta ancora cavalcando l&#x27;onda del successo dopo aver vinto il WWE Women’s Intercontinental Championship, ma non ha ancora rivisto per intero il match che le ha consegnato il titolo.</p>\n\nhttps://www.youtube.com/watch?v=eKlWCV57cNc\n\n<p>Ruca è apparsa su &quot;Inside the Ring&quot; di TMZ dopo aver sconfitto Becky Lynch in Italia. Durante l&#x27;intervista, le è stato chiesto se avesse rivisto l&#x27;incontro dopo un momento così importante della sua carriera. Ruca ha ammesso di non aver ancora visto il match completo, in parte perché la sua agenda è stata fitta di viaggi, impegni con i media e obblighi verso la WWE. Ruca ha inoltre spiegato che rivedere i propri incontri può talvolta diventare complicato, poiché finisce per essere troppo critica con se stessa invece di godersi il momento.</p>\n<blockquote>“Non ho ancora rivisto l’intero match. Sento che a volte guardo i match e altre volte no. Dipende un po’ da come mi sento a riguardo, perché a volte penso che il match sia andato molto bene e che il pubblico abbia reagito alla grande, ma poi lo riguardo e inizio a cercare il pelo nell’uovo, cosa che una persona comune che sta guardando non farebbe.”</blockquote>\n<p>Ruca ha dichiarato di cercare un equilibrio tra l&#x27;imparare dai propri match e il non rovinare la sensazione di una grande performance analizzando eccessivamente ogni dettaglio.</p>\n<blockquote>“Quindi devo prenderlo per quello che è, senza farmi troppe autocritiche. Credo ci sia un buon equilibrio in questo. A volte mi piace semplicemente disputare un match e godermelo. Mi sono divertita molto, quindi è andata così. Ma poi, ovviamente, mi piace tornare indietro, guardare, farmi delle critiche e chiedere consigli e supporto.”</blockquote>\n<p>Ruca ha chiarito che desidera ancora vedere il match per intero non appena ne avrà l&#x27;opportunità, ma che i suoi impegni l&#x27;hanno finora resa una cosa difficile.</p>\n<blockquote>“Quindi, non ho ancora avuto il tempo di rivedere l’intero match, ma voglio vederlo. Ma sì, sono stata davvero molto impegnata.”</blockquote>\n<p>La vittoria del titolo contro Becky Lynch è stata un passo fondamentale nella carriera di Ruca nel main roster WWE. Tuttavia, le sue parole dimostrano che non è concentrata solo sui festeggiamenti: sta anche riflettendo su come continuare a migliorare, imparando al contempo a concedersi il piacere di godersi il momento.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet/\nTitolo feed: Sol Ruca Admits She Hasn’t Watched Full Becky Lynch Title Match Back Yet\nTitolo pagina: Sol Ruca Admits She Hasn’t Watched Full Becky Lynch Title Match Back Yet\nDescrizione: Sol Ruca is still riding high after winning the WWE Women’s Intercontinental Championship, but she has not fully watched the match that gave her the\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Sol Ruca is still riding high after winning the WWE Women’s Intercontinental Championship , but she has not fully watched the match that gave her the title.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Ruca appeared on TMZ’s Inside the Ring after defeating Becky Lynch in Italy. During the interview, she was asked whether she had watched the match back after such a huge moment in her career. Ruca admitted she had not seen the full match yet, partly because her schedule has been packed with travel, media, and WWE commitments. Ruca also explained that watching her matches back can sometimes become a tricky thing because she starts picking herself apart instead of enjoying the moment.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"“So I have not watched the whole match back. I feel like sometimes I do watch the matches back and then sometimes I don’t. It kind of just depends on how I feel about it because sometimes if I feel really good about the match and I think the crowd was reacting really, really well, but then I watch it back and I start nitpicking everything where the standard person that’s watching isn’t going to be doing that.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"Ruca said she tries to find a balance between learning from her matches and not ruining the feeling of a big performance by overanalyzing every detail.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"quote\",\n    \"text\": \"“So I need to take it for what it is and not for like really nitpicking myself. I think there is a good balance with that. So sometimes I do like to just have a match, enjoy it. I had a lot of fun so like it is what it is. But then, you know, obviously I do like to go back and kind of watch and give myself critiques and ask for, you know, criticism and help with that.”\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"Ruca made it clear that she still wants to watch the match in full when she gets the chance, but her schedule has made that difficult.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"quote\",\n    \"text\": \"“So, I haven’t been had time to watch the whole match back yet, but I do want to see it back. But yeah, I’ve just been very busy.”\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"The title win over Becky Lynch was a major step in Ruca’s WWE main roster career. Still, her comments show that she is not just focused on the celebration. She is also thinking about how to keep improving while learning when to let herself enjoy the moment.\"\n  }\n]\n"
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "ai:Aggiornamento sulla nuova campionessa, utile per mantenere il focus sul roster femminile WWE.; deterministic:hard:championship,entity:becky lynch,recency:fresh_12h",
+        "score": 79
+      },
+      "publisher": {
+        "categories": [
+          4
+        ],
+        "error": null,
+        "featured_media": 5961,
+        "present": true,
+        "status": "published",
+        "wp_link": "https://news.openwrestlingtv.com/wwe/sol-ruca-ammette-di-non-aver-ancora-rivisto-per-intero-il-match-titolato-contro-becky-lynch/",
+        "wp_post_id": 5962
+      },
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet",
+      "title_it": "Sol Ruca ammette di non aver ancora rivisto per intero il match titolato contro Becky Lynch"
+    },
+    {
+      "alfred": {
+        "decision": null,
+        "editorial_changes": [],
+        "issues": [],
+        "present": false,
+        "quality_score": null,
+        "warnings": []
+      },
+      "bob": {
+        "clean_element_count": null,
+        "diagnostic_stage": null,
+        "element_counts": null,
+        "error": null,
+        "present": false,
+        "raw_element_count": null,
+        "removed_before_gemini": null,
+        "status": null,
+        "translation_model": null,
+        "translation_used": null
+      },
+      "category_hint": "WWE",
+      "html_audit": {
+        "alfred_final_html_preview": "",
+        "bob_body_html_preview": "",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_bully-ray-liked-the-evolution-of-oba-femi-on-wwe-raw-following-clash-in-italy-loss.html",
+        "published_html_preview": "",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_bully-ray-liked-the-evolution-of-oba-femi-on-wwe-raw-following-clash-in-italy-loss.html",
+        "publisher_review_html_preview": "",
+        "translation_prompt_preview": ""
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "ai:Notizia rilevante per il pubblico italiano (riferimento a Clash in Italy) e crescita di un talento in ascesa.; deterministic:strategic:clash in italy,strategic:raw,entity:brock lesnar,entity:oba femi,recency:fresh_12h",
+        "score": 78
+      },
+      "publisher": {
+        "categories": null,
+        "error": null,
+        "featured_media": null,
+        "present": false,
+        "status": null,
+        "wp_link": null,
+        "wp_post_id": null
+      },
+      "source": "wrestlinginc",
+      "source_url": "https://www.wrestlinginc.com/2187106/bully-ray-oba-femi-wwe-raw-evolution-clash-in-italy",
+      "title_it": "Bully Ray Liked The 'Evolution' Of Oba Femi On WWE Raw Following Clash In Italy Loss"
+    },
+    {
+      "alfred": {
+        "decision": null,
+        "editorial_changes": [],
+        "issues": [],
+        "present": false,
+        "quality_score": null,
+        "warnings": []
+      },
+      "bob": {
+        "clean_element_count": null,
+        "diagnostic_stage": null,
+        "element_counts": null,
+        "error": null,
+        "present": false,
+        "raw_element_count": null,
+        "removed_before_gemini": null,
+        "status": null,
+        "translation_model": null,
+        "translation_used": null
+      },
+      "category_hint": "AEW",
+      "html_audit": {
+        "alfred_final_html_preview": "",
+        "bob_body_html_preview": "",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_kevin-knight-joins-don-callis-family-retains-aew-tnt-title.html",
+        "published_html_preview": "",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_kevin-knight-joins-don-callis-family-retains-aew-tnt-title.html",
+        "publisher_review_html_preview": "",
+        "translation_prompt_preview": ""
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "ai:Cambio di stable e difesa titolata, impatto diretto sulla card di Dynamite.; deterministic:hard:championship,recency:fresh_12h",
+        "score": 74
+      },
+      "publisher": {
+        "categories": null,
+        "error": null,
+        "featured_media": null,
+        "present": false,
+        "status": null,
+        "wp_link": null,
+        "wp_post_id": null
+      },
+      "source": "wrestlinginc",
+      "source_url": "https://www.wrestlinginc.com/2187196/kevin-knight-don-callis-family-retains-aew-tnt-title",
+      "title_it": "Kevin Knight Joins Don Callis Family, Retains AEW TNT Title"
+    },
+    {
+      "alfred": {
+        "decision": "approved",
+        "editorial_changes": [],
+        "issues": [],
+        "present": true,
+        "quality_score": 100,
+        "warnings": [
+          {
+            "code": "possible_missing_embed_from_menzo_brief",
+            "expected_embeds": [
+              "x_tweet",
+              "instagram"
+            ],
+            "message": "Menzo AI si aspettava embed/video/tweet, ma Bob non ne ha estratti.",
+            "severity": "warning",
+            "source_specific_notes": "Conferma il ritorno e l'inserimento nel torneo."
+          }
+        ]
+      },
+      "bob": {
+        "clean_element_count": 4,
+        "diagnostic_stage": "ready_for_alfred",
+        "element_counts": {
+          "embed": 0,
+          "heading": 0,
+          "image": 0,
+          "quote": 0,
+          "table": 0,
+          "text": 4
+        },
+        "error": null,
+        "present": true,
+        "raw_element_count": 5,
+        "removed_before_gemini": 1,
+        "status": "ready_for_alfred",
+        "translation_model": "gemini-3.1-flash-lite",
+        "translation_used": true
+      },
+      "category_hint": "AEW",
+      "html_audit": {
+        "alfred_final_html_preview": "<p>Dopo cinque mesi di assenza dalla compagnia, Mercedes Moné ha fatto il suo atteso ritorno in All Elite Wrestling durante l&#x27;episodio di &quot;AEW Dynamite</p>\n<blockquote>&quot; del 3 giugno. Si è rivelata come la Wild Card del torneo Owen Hart Foundation 2026, la stessa competizione che aveva vinto l&#x27;anno scorso, e nonostante la strenua resistenza di Alex Windsor, &quot;</blockquote>\n<p>The CEO&quot; è riuscita ad avanzare al turno successivo.</p>\n<p>Moné ha mantenuto il controllo sin dalle prime battute, provocando Windsor calpestandola, sbeffeggiandola e, soprattutto, dettando il ritmo dell&#x27;incontro. Nonostante un iniziale tentativo di rimonta di Windsor, Moné ha trasformato una Head Scissors in una Statement Maker, dalla quale però l&#x27;avversaria è riuscita a liberarsi. Windsor ha provato a chiudere una Sharpshooter, ma Moné ha contrattaccato portando l&#x27;azione sull&#x27;apron con una Neckbreaker, prima di colpire con una Meteora fuori ring proprio mentre l&#x27;incontro entrava nella pausa pubblicitaria.</p>\n<p>Durante la pausa, il dominio è rimasto nelle mani di Moné, che ha ottenuto una serie di near fall, perdendo però per un istante la calma a causa della resistenza di Windsor, capace di uscire da ogni schienamento. Al rientro dalla pubblicità, Moné ha eseguito i Three Amigos ed è salita sulla terza corda per una Frog Splash, ma Windsor ha reagito costringendo Moné a ripiegare fuori ring. Ciò ha permesso a Windsor di connettere con una Cannonball e una Clothesline dall&#x27;apron per cercare di riequilibrare la contesa.</p>\n<p>Tornate sul ring, Windsor ha tentato una Clothesline dal paletto, ma Moné ha risposto con i Three Amigos; Windsor è però riuscita a evitare il terzo suplex andando a segno con una Made in Japan, ottenendo un conteggio di due. Windsor ha cercato un Superplex, ma Moné ha reagito colpendo con una Meteora per un altro near fall, seguito da una Sunset Flip Powerbomb all&#x27;angolo. Dopo aver mancato la ginocchiata in corsa all&#x27;angolo e una serie di roll-up, Moné ha colpito con il Backstabber, passando immediatamente alla Statement Maker che ha costretto Windsor alla resa. Moné non ha mollato la presa nemmeno dopo il suono della campanella. In semifinale, Moné affronterà la vincitrice del match tra Persephone e Hazuki, che si sfideranno questo sabato a &quot;AEW Collision&quot;.</p>",
+        "bob_body_html_preview": "<p>Dopo cinque mesi di assenza dalla compagnia, Mercedes Moné ha fatto il suo atteso ritorno in All Elite Wrestling durante l&#x27;episodio di &quot;AEW Dynamite</p>\n<blockquote>&quot; del 3 giugno. Si è rivelata come la Wild Card del torneo Owen Hart Foundation 2026, la stessa competizione che aveva vinto l&#x27;anno scorso, e nonostante la strenua resistenza di Alex Windsor, &quot;</blockquote>\n<p>The CEO&quot; è riuscita ad avanzare al turno successivo.</p>\n<p>Moné ha mantenuto il controllo sin dalle prime battute, provocando Windsor calpestandola, sbeffeggiandola e, soprattutto, dettando il ritmo dell&#x27;incontro. Nonostante un iniziale tentativo di rimonta di Windsor, Moné ha trasformato una Head Scissors in una Statement Maker, dalla quale però l&#x27;avversaria è riuscita a liberarsi. Windsor ha provato a chiudere una Sharpshooter, ma Moné ha contrattaccato portando l&#x27;azione sull&#x27;apron con una Neckbreaker, prima di colpire con una Meteora fuori ring proprio mentre l&#x27;incontro entrava nella pausa pubblicitaria.</p>\n<p>Durante la pausa, il dominio è rimasto nelle mani di Moné, che ha ottenuto una serie di near fall, perdendo però per un istante la calma a causa della resistenza di Windsor, capace di uscire da ogni schienamento. Al rientro dalla pubblicità, Moné ha eseguito i Three Amigos ed è salita sulla terza corda per una Frog Splash, ma Windsor ha reagito costringendo Moné a ripiegare fuori ring. Ciò ha permesso a Windsor di connettere con una Cannonball e una Clothesline dall&#x27;apron per cercare di riequilibrare la contesa.</p>\n<p>Tornate sul ring, Windsor ha tentato una Clothesline dal paletto, ma Moné ha risposto con i Three Amigos; Windsor è però riuscita a evitare il terzo suplex andando a segno con una Made in Japan, ottenendo un conteggio di due. Windsor ha cercato un Superplex, ma Moné ha reagito colpendo con una Meteora per un altro near fall, seguito da una Sunset Flip Powerbomb all&#x27;angolo. Dopo aver mancato la ginocchiata in corsa all&#x27;angolo e una serie di roll-up, Moné ha colpito con il Backstabber, passando immediatamente alla Statement Maker che ha costretto Windsor alla resa. Moné non ha mollato la presa nemmeno dopo il suono della campanella. In semifinale, Moné affronterà la vincitrice del match tra Persephone e Hazuki, che si sfideranno questo sabato a &quot;AEW Collision&quot;.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_mercedes-mon-torna-in-aew-come-wild-card-del-torneo-owen-hart.html",
+        "published_html_preview": "<p>Dopo cinque mesi di assenza dalla compagnia, Mercedes Moné ha fatto il suo atteso ritorno in All Elite Wrestling durante l&#x27;episodio di &quot;AEW Dynamite</p>\n<blockquote>&quot; del 3 giugno. Si è rivelata come la Wild Card del torneo Owen Hart Foundation 2026, la stessa competizione che aveva vinto l&#x27;anno scorso, e nonostante la strenua resistenza di Alex Windsor, &quot;</blockquote>\n<p>The CEO&quot; è riuscita ad avanzare al turno successivo.</p>\n<p>Moné ha mantenuto il controllo sin dalle prime battute, provocando Windsor calpestandola, sbeffeggiandola e, soprattutto, dettando il ritmo dell&#x27;incontro. Nonostante un iniziale tentativo di rimonta di Windsor, Moné ha trasformato una Head Scissors in una Statement Maker, dalla quale però l&#x27;avversaria è riuscita a liberarsi. Windsor ha provato a chiudere una Sharpshooter, ma Moné ha contrattaccato portando l&#x27;azione sull&#x27;apron con una Neckbreaker, prima di colpire con una Meteora fuori ring proprio mentre l&#x27;incontro entrava nella pausa pubblicitaria.</p>\n<p>Durante la pausa, il dominio è rimasto nelle mani di Moné, che ha ottenuto una serie di near fall, perdendo però per un istante la calma a causa della resistenza di Windsor, capace di uscire da ogni schienamento. Al rientro dalla pubblicità, Moné ha eseguito i Three Amigos ed è salita sulla terza corda per una Frog Splash, ma Windsor ha reagito costringendo Moné a ripiegare fuori ring. Ciò ha permesso a Windsor di connettere con una Cannonball e una Clothesline dall&#x27;apron per cercare di riequilibrare la contesa.</p>\n<p>Tornate sul ring, Windsor ha tentato una Clothesline dal paletto, ma Moné ha risposto con i Three Amigos; Windsor è però riuscita a evitare il terzo suplex andando a segno con una Made in Japan, ottenendo un conteggio di due. Windsor ha cercato un Superplex, ma Moné ha reagito colpendo con una Meteora per un altro near fall, seguito da una Sunset Flip Powerbomb all&#x27;angolo. Dopo aver mancato la ginocchiata in corsa all&#x27;angolo e una serie di roll-up, Moné ha colpito con il Backstabber, passando immediatamente alla Statement Maker che ha costretto Windsor alla resa. Moné non ha mollato la presa nemmeno dopo il suono della campanella. In semifinale, Moné affronterà la vincitrice del match tra Persephone e Hazuki, che si sfideranno questo sabato a &quot;AEW Collision&quot;.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2187197/mercedes-mone-returns-aew-womens-owen-hart-tourney-wild-card-slot/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_mercedes-mon-torna-in-aew-come-wild-card-del-torneo-owen-hart.html",
+        "publisher_review_html_preview": "<p>Dopo cinque mesi di assenza dalla compagnia, Mercedes Moné ha fatto il suo atteso ritorno in All Elite Wrestling durante l&#x27;episodio di &quot;AEW Dynamite</p>\n<blockquote>&quot; del 3 giugno. Si è rivelata come la Wild Card del torneo Owen Hart Foundation 2026, la stessa competizione che aveva vinto l&#x27;anno scorso, e nonostante la strenua resistenza di Alex Windsor, &quot;</blockquote>\n<p>The CEO&quot; è riuscita ad avanzare al turno successivo.</p>\n<p>Moné ha mantenuto il controllo sin dalle prime battute, provocando Windsor calpestandola, sbeffeggiandola e, soprattutto, dettando il ritmo dell&#x27;incontro. Nonostante un iniziale tentativo di rimonta di Windsor, Moné ha trasformato una Head Scissors in una Statement Maker, dalla quale però l&#x27;avversaria è riuscita a liberarsi. Windsor ha provato a chiudere una Sharpshooter, ma Moné ha contrattaccato portando l&#x27;azione sull&#x27;apron con una Neckbreaker, prima di colpire con una Meteora fuori ring proprio mentre l&#x27;incontro entrava nella pausa pubblicitaria.</p>\n<p>Durante la pausa, il dominio è rimasto nelle mani di Moné, che ha ottenuto una serie di near fall, perdendo però per un istante la calma a causa della resistenza di Windsor, capace di uscire da ogni schienamento. Al rientro dalla pubblicità, Moné ha eseguito i Three Amigos ed è salita sulla terza corda per una Frog Splash, ma Windsor ha reagito costringendo Moné a ripiegare fuori ring. Ciò ha permesso a Windsor di connettere con una Cannonball e una Clothesline dall&#x27;apron per cercare di riequilibrare la contesa.</p>\n<p>Tornate sul ring, Windsor ha tentato una Clothesline dal paletto, ma Moné ha risposto con i Three Amigos; Windsor è però riuscita a evitare il terzo suplex andando a segno con una Made in Japan, ottenendo un conteggio di due. Windsor ha cercato un Superplex, ma Moné ha reagito colpendo con una Meteora per un altro near fall, seguito da una Sunset Flip Powerbomb all&#x27;angolo. Dopo aver mancato la ginocchiata in corsa all&#x27;angolo e una serie di roll-up, Moné ha colpito con il Backstabber, passando immediatamente alla Statement Maker che ha costretto Windsor alla resa. Moné non ha mollato la presa nemmeno dopo il suono della campanella. In semifinale, Moné affronterà la vincitrice del match tra Persephone e Hazuki, che si sfideranno questo sabato a &quot;AEW Collision&quot;.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2187197/mercedes-mone-returns-aew-womens-owen-hart-tourney-wild-card-slot/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2187197/mercedes-mone-returns-aew-womens-owen-hart-tourney-wild-card-slot/\nTitolo feed: Mercedes Mone Returns To AEW In Women's Owen Hart Tourney Wild Card Slot\nTitolo pagina: Mercedes Mone Returns To AEW In Women's Owen Hart Tourney Wild Card Slot - Wrestling Inc.\nDescrizione: Mercedes Mone is back in AEW after five months away, and she has already reached the semi-finals of the Owen Hart Foundation Tournament.\nCategoria suggerita: AEW\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"After five months away from the company, Mercedes Mone made her long-awaited return to All Elite Wrestling on the June 3 episode of \\\"AEW Dynamite.\\\" She revealed herself as the Wild Card in the 2026 Owen Hart Foundation Tournament, the same competition she won last year, and despite Alex Windsor putting up a strong fight, \\\"The CEO\\\" advanced to the next round.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Mone was in firm control in the early going, taunting Windsor by standing on her, getting in her face, and most importantly, keeping on top of the action. Despite Windsor getting some hope early, Mone turned a Head Scissors into a Statement Maker that Windsor was able to escape from. Windsor tried to lock in a Sharpshooter but Mone countered and took the action to the apron with a Neckbreaker, before hitting a Meteora on the floor as the match entered the commercial break.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"During the break, it was all Mone as she got a series of near falls, but she did have one small moment where she needed to maintain her composure due to Windsor kicking out of everything. Coming out of the break, Mone hit the Three Amigos and went to the top for a Frog Splash, but Windsor mounted a comeback which forced Mone to retreat to the outside. This led to Windsor hitting a Cannonball and a Clothesline off the apron to try and even things up.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"As the match re-entered the ring, Windsor went for a Clothesline off the top but Mone countered into the Three Amigos again, only for Windsor to counter out of the third Suplex to hit a Made in Japan for a two-count. Windsor went for a Superplex off the top but Mone fought back to hit a Meteora for another near fall, which led to a Sunset Flip Powerbomb into the corner. Mone would miss the running knees in the corner and after a series of roll ups, Mone hit the Backstabber and floated over into the Statement Maker which forced Windsor to submit, with Mone refusing to let go after the bell had rung. Mone will meet either Persephone or Hazuki in the semi-finals of the tournament, with those two women facing each other this Saturday on \\\"AEW Collision.\\\"\"\n  }\n]\n"
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "ai:Il ritorno di Mercedes Mone è una notizia di primo piano per il mercato AEW.; deterministic:hard:returns,hard:return,entity:mercedes mone,recency:fresh_12h",
+        "score": 83
+      },
+      "publisher": {
+        "categories": [
+          5
+        ],
+        "error": null,
+        "featured_media": 5959,
+        "present": true,
+        "status": "published",
+        "wp_link": "https://news.openwrestlingtv.com/aew/mercedes-mone-torna-in-aew-come-wild-card-del-torneo-owen-hart/",
+        "wp_post_id": 5960
+      },
+      "source": "wrestlinginc",
+      "source_url": "https://www.wrestlinginc.com/2187197/mercedes-mone-returns-aew-womens-owen-hart-tourney-wild-card-slot",
+      "title_it": "Mercedes Moné torna in AEW come Wild Card del torneo Owen Hart"
+    }
+  ],
+  "generated_at": "2026-06-04T10:33:31.548362+00:00",
   "how_to_read": {
     "alfred_final_html_preview": "HTML dopo revisione/normalizzazioni di Alfred",
     "bob_body_html_preview": "HTML prodotto da Bob prima di Alfred",
@@ -2032,6 +2428,116 @@
       "overall_status": "ok",
       "published": 0,
       "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 3,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 2
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 3,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 0,
+          "already_worked": 0,
+          "event_factual_news_to_menzo": 2,
+          "event_recap_duplicates_blocked_by_report": 0,
+          "event_soft_reactions_to_menzo": 1,
+          "hard_skipped": 24,
+          "menzo_memory_hard_skipped": 23,
+          "old_news_hard_skipped": 0,
+          "post_show_hard_news_to_menzo": 0,
+          "report_candidates_blocked_by_manual_or_history": 0,
+          "to_menzo": 9,
+          "to_simone": 2
+        },
+        "menzo": {
+          "pending": 0,
+          "skipped": 2,
+          "to_bob_or_v92": 7
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 3,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 1,
+          "skipped": 5,
+          "waiting": 0
+        }
+      },
+      "already_published": 0,
+      "article_count": 7,
+      "errors": 0,
+      "generated_at": "2026-06-04T10:33:31.539523+00:00",
+      "overall_status": "ok",
+      "published": 3,
+      "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 3,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 2
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 3,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 0,
+          "already_worked": 0,
+          "event_factual_news_to_menzo": 2,
+          "event_recap_duplicates_blocked_by_report": 0,
+          "event_soft_reactions_to_menzo": 1,
+          "hard_skipped": 24,
+          "menzo_memory_hard_skipped": 23,
+          "old_news_hard_skipped": 0,
+          "post_show_hard_news_to_menzo": 0,
+          "report_candidates_blocked_by_manual_or_history": 0,
+          "to_menzo": 9,
+          "to_simone": 2
+        },
+        "menzo": {
+          "pending": 0,
+          "skipped": 2,
+          "to_bob_or_v92": 7
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 3,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 1,
+          "skipped": 5,
+          "waiting": 0
+        }
+      },
+      "already_published": 0,
+      "article_count": 7,
+      "errors": 0,
+      "generated_at": "2026-06-04T10:33:31.548362+00:00",
+      "overall_status": "ok",
+      "published": 3,
+      "warnings": 0
     }
   ],
   "overall_status": "ok",
@@ -2048,19 +2554,19 @@
       "simone": "real_report_director_and_autonomous_report_publisher"
     },
     "alfred_handoff": {
-      "approved": 0,
+      "approved": 3,
       "blockers": 0,
       "editorial_changes": 0,
       "needs_revision": 0,
-      "warnings": 0
+      "warnings": 2
     },
     "bob_handoff": {
       "errors": 0,
       "extraction_empty": 0,
-      "ready_for_alfred": 0,
+      "ready_for_alfred": 3,
       "translation_pending": 0
     },
-    "ended_at": "2026-06-04T10:00:44.813539+00:00",
+    "ended_at": "2026-06-04T10:33:31.532923+00:00",
     "engine": "bot_v92.py",
     "massy_handoff": {
       "already_published_hard_skipped": 0,
@@ -2078,15 +2584,15 @@
     },
     "menzo_handoff": {
       "pending": 0,
-      "skipped": 0,
-      "to_bob_or_v92": 0
+      "skipped": 2,
+      "to_bob_or_v92": 7
     },
     "newsroom_engine_override": false,
     "publisher_handoff": {
       "already_published": 0,
       "dry_run": 0,
       "errors": 0,
-      "published": 0,
+      "published": 3,
       "wp_not_ready": 0
     },
     "runtime_delegations": 0,
@@ -2097,107 +2603,107 @@
       "waiting": 0
     },
     "simone_publish_handoff": {
-      "already_published": 0,
+      "already_published": 1,
       "dry_run": 0,
       "errors": 0,
       "published": 0,
-      "wp_not_ready": 1
+      "wp_not_ready": 0
     },
-    "started_at": "2026-06-04T09:59:13.779053+00:00",
+    "started_at": "2026-06-04T10:32:58.945601+00:00",
     "version": "v93_20_process_refinements"
   },
   "summary": {
     "anomalies": 0,
-    "article_dossiers": 0,
+    "article_dossiers": 7,
     "errors_48h": 16,
-    "published_48h": 48,
-    "published_current_run": 0,
-    "runs_48h": 38
+    "published_48h": 54,
+    "published_current_run": 3,
+    "runs_48h": 40
   },
   "timeline": [
     {
       "agent": "Jarvis",
       "note": "engine=bot_v92.py",
       "phase": "bootstrap_status_written",
-      "timestamp": "2026-06-04T09:59:13.779317+00:00"
+      "timestamp": "2026-06-04T10:32:58.945869+00:00"
     },
     {
       "agent": "Massy",
       "note": "to_simone=2 to_menzo=9 hard_skip=24 already=0",
       "phase": "sentinel_board_ready",
-      "timestamp": "2026-06-04T09:59:14.425099+00:00"
+      "timestamp": "2026-06-04T10:32:59.752763+00:00"
     },
     {
       "agent": "Massy",
       "note": "version=v93_24_massy_show_news_before_report_closure",
       "phase": "forced_policy_active",
-      "timestamp": "2026-06-04T09:59:14.425122+00:00"
+      "timestamp": "2026-06-04T10:32:59.752777+00:00"
     },
     {
       "agent": "Simone",
       "note": "ready=1 waiting=0 skipped=5",
       "phase": "report_decision_ready",
-      "timestamp": "2026-06-04T09:59:14.428794+00:00"
+      "timestamp": "2026-06-04T10:32:59.756172+00:00"
     },
     {
       "agent": "Simone",
-      "note": "published=0 already=0 wp_not_ready=1 errors=0",
+      "note": "published=0 already=1 wp_not_ready=0 errors=0",
       "phase": "report_publication_ready",
-      "timestamp": "2026-06-04T10:00:07.335174+00:00"
+      "timestamp": "2026-06-04T10:33:05.719045+00:00"
     },
     {
       "agent": "Menzo",
-      "note": "selected=0 pending=0 skipped=0",
+      "note": "selected=7 pending=0 skipped=2",
       "phase": "editorial_decision_ready",
-      "timestamp": "2026-06-04T10:00:19.753195+00:00"
+      "timestamp": "2026-06-04T10:33:12.090662+00:00"
     },
     {
       "agent": "Menzo",
-      "note": "version=v93_25_wp_ready_guard",
+      "note": "version=v93_20_selective_softpool",
       "phase": "forced_policy_active",
-      "timestamp": "2026-06-04T10:00:19.753213+00:00"
+      "timestamp": "2026-06-04T10:33:12.090680+00:00"
     },
     {
       "agent": "Bob",
-      "note": "ready=0 pending=0 empty=0 errors=0",
+      "note": "ready=3 pending=0 empty=0 errors=0",
       "phase": "article_packages_ready",
-      "timestamp": "2026-06-04T10:00:19.767924+00:00"
+      "timestamp": "2026-06-04T10:33:21.089342+00:00"
     },
     {
       "agent": "Bob",
-      "note": "warnings=0",
+      "note": "warnings=1",
       "phase": "bob_brief_guard_applied",
-      "timestamp": "2026-06-04T10:00:19.768194+00:00"
+      "timestamp": "2026-06-04T10:33:21.090937+00:00"
     },
     {
       "agent": "Alfred",
-      "note": "approved=0 needs_revision=0 blockers=0 warnings=0 changes=0",
+      "note": "approved=3 needs_revision=0 blockers=0 warnings=1 changes=0",
       "phase": "quality_review_ready",
-      "timestamp": "2026-06-04T10:00:19.774701+00:00"
+      "timestamp": "2026-06-04T10:33:21.103348+00:00"
     },
     {
       "agent": "Alfred",
-      "note": "surfaced=0",
+      "note": "surfaced=1",
       "phase": "bob_warning_guard_applied",
-      "timestamp": "2026-06-04T10:00:19.774931+00:00"
+      "timestamp": "2026-06-04T10:33:21.103991+00:00"
     },
     {
       "agent": "Publisher",
-      "note": "published=0 already=0 dry=0 wp_not_ready=0 errors=0",
+      "note": "published=3 already=0 dry=0 wp_not_ready=0 errors=0",
       "phase": "publication_ready",
-      "timestamp": "2026-06-04T10:00:44.813487+00:00"
+      "timestamp": "2026-06-04T10:33:31.532894+00:00"
     },
     {
       "agent": "Jarvis",
       "note": "v93 Publisher completed; v92 fallback skipped",
       "phase": "runtime_skipped",
-      "timestamp": "2026-06-04T10:00:44.813525+00:00"
+      "timestamp": "2026-06-04T10:33:31.532915+00:00"
     },
     {
       "agent": "Archivista",
       "note": "status=ok anomalies=0",
       "phase": "audit_ready",
-      "timestamp": "2026-06-04T10:00:44.825421+00:00"
+      "timestamp": "2026-06-04T10:33:31.547773+00:00"
     }
   ],
   "version": "v93_7_archivista_audit"

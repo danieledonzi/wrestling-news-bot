@@ -1,16 +1,16 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-04T10:00:44.812872+00:00",
+  "generated_at": "2026-06-04T10:33:31.532383+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
     "errors": 0,
-    "published": 0,
+    "published": 3,
     "wp_not_ready": 0
   },
   "input": {
     "alfred_version": "v93_20_alfred_table_warning_precision",
-    "approved_articles": 0
+    "approved_articles": 3
   },
   "mode": "wordpress_publisher_plain_oembed_urls",
   "policy": {
@@ -20,12 +20,46 @@
     "source_attribution": true,
     "strip_inline_image_placeholders": true
   },
-  "results": [],
+  "results": [
+    {
+      "categories": [
+        4
+      ],
+      "featured_media": 5957,
+      "source_url": "https://www.ringsidenews.com/seth-rollins-blasts-roman-reigns-claiming-he-made-world-heavyweight-title-relevant/",
+      "status": "published",
+      "title_it": "Seth Rollins contro Roman Reigns: \"Dire che ha reso rilevante il World Heavyweight Title è una stupidaggine\"",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/seth-rollins-contro-roman-reigns-dire-che-ha-reso-rilevante-il-world-heavyweight-title-e-una-stupidaggine/",
+      "wp_post_id": 5958
+    },
+    {
+      "categories": [
+        5
+      ],
+      "featured_media": 5959,
+      "source_url": "https://www.wrestlinginc.com/2187197/mercedes-mone-returns-aew-womens-owen-hart-tourney-wild-card-slot/",
+      "status": "published",
+      "title_it": "Mercedes Moné torna in AEW come Wild Card del torneo Owen Hart",
+      "wp_link": "https://news.openwrestlingtv.com/aew/mercedes-mone-torna-in-aew-come-wild-card-del-torneo-owen-hart/",
+      "wp_post_id": 5960
+    },
+    {
+      "categories": [
+        4
+      ],
+      "featured_media": 5961,
+      "source_url": "https://www.ringsidenews.com/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet/",
+      "status": "published",
+      "title_it": "Sol Ruca ammette di non aver ancora rivisto per intero il match titolato contro Becky Lynch",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/sol-ruca-ammette-di-non-aver-ancora-rivisto-per-intero-il-match-titolato-contro-becky-lynch/",
+      "wp_post_id": 5962
+    }
+  ],
   "version": "v93_10_publisher_plain_oembed_urls",
   "wp": {
     "dry_run": false,
     "post_status": "publish",
-    "ready": false,
-    "reason": "wp_json_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2fac713490>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=25)'))"
+    "ready": true,
+    "reason": "ok"
   }
 }

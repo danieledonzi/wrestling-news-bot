@@ -1,5 +1,13 @@
 {
-  "allowed_urls": [],
-  "generated_at": "2026-06-04T10:00:19.752964+00:00",
-  "version": "v93_25_wp_ready_guard"
+  "allowed_urls": [
+    "https://www.ringsidenews.com/seth-rollins-blasts-roman-reigns-claiming-he-made-world-heavyweight-title-relevant/",
+    "https://www.wrestlinginc.com/2187197/mercedes-mone-returns-aew-womens-owen-hart-tourney-wild-card-slot/",
+    "https://www.ringsidenews.com/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet/",
+    "https://www.wrestlinginc.com/2187106/bully-ray-oba-femi-wwe-raw-evolution-clash-in-italy/",
+    "https://www.wrestlinginc.com/2187196/kevin-knight-don-callis-family-retains-aew-tnt-title/",
+    "https://www.ringsidenews.com/aew-dynamite-summer-blockbuster-gets-two-owen-hart-tournament-matches-june-10/",
+    "https://www.ringsidenews.com/la-knight-admits-he-feels-underappreciated-wwe/"
+  ],
+  "generated_at": "2026-06-04T10:33:12.090375+00:00",
+  "version": "v93_20_selective_softpool"
 }

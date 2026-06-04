@@ -1,16 +1,782 @@
 {
   "agent": "Bob",
-  "articles": [],
-  "generated_at": "2026-06-04T10:00:19.767035+00:00",
+  "articles": [
+    {
+      "bob_notes": [],
+      "body_html": "<p>Seth Rollins non è disposto a lasciare che Roman Reigns riscriva la storia per quanto riguarda il WWE World Heavyweight Championship.</p>\nhttps://www.youtube.com/watch?v=GYiZcPgFK9E\n\n<p>Durante un&#x27;intervista con Prince St. Pizza, Rollins si è sfogato riguardo al fatto di essere stato costretto a rendere vacante il WWE World Heavyweight Championship dopo essersi strappato la cuffia dei rotatori. Rollins ha chiarito di non aver mai perso il titolo in un match, il che ha reso ancora più difficile per lui guardare CM Punk e Roman Reigns contenderselo a WrestleMania 42.</p>\n<blockquote>“Dunque, mi sono strappato la cuffia dei rotatori a ottobre, ma detenevo quel titolo. L&#x27;ho perso. Non sono stato sconfitto in un match per perderlo: ho dovuto renderlo vacante perché dovevo operarmi alla cuffia. Quindi sono rimasto fuori per cinque mesi.”</blockquote>\n<p>Rollins ha affermato che la situazione a WrestleMania è stata particolarmente brutale, poiché due dei suoi più grandi rivali hanno finito per scontrarsi per quello che lui considera ancora il suo campionato, mentre il Visionary è stato costretto a guardare tutto da bordo ring.</p>\n<blockquote>“CM Punk vince il titolo, lo porta a WrestleMania e combatte nel main event contro, guarda caso, il mio altro rivale, Roman Reigns. Ti ritrovi due dei miei peggiori nemici che si affrontano per il mio titolo, nel mio main event, e io devo guardare tutto. Devo mandare giù questo boccone amaro.”</blockquote>\n<p>Roman ha lasciato WrestleMania 42 come campione e Rollins ha chiarito di essere disgustato dall&#x27;intera faccenda. Si è poi scagliato contro Reigns per aver sostenuto di aver reso rilevante il World Heavyweight Championship.</p>\n<blockquote>“Quindi per me è davvero difficile provare altro se non disgusto per il risultato. Ora Roman Reigns se ne va in giro con il mio titolo e dice di averlo reso rilevante: è una stronzata. Lo dico chiaramente. È una completa stronzata. Lo sa lui, lo so io, lo sanno tutti. Sembra un idiota quando lo dice.”</blockquote>\n<p>Rollins vede chiaramente quel titolo ancora come suo e non è intenzionato a riconoscere alcun merito a Roman Reigns. Con la previsione che Rollins vinca il torneo King of the Ring per affrontare Reigns a SummerSlam, questa faida è già carica di tensione ancor prima che i due tornino a scontrarsi sul ring.</p>\n\nhttps://www.youtube.com/embed/GYiZcPgFK9E?feature=oembed",
+      "category_hint": "WWE",
+      "clean_element_count": 10,
+      "created_at": "2026-06-04T10:33:12.105628+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "diagnostic_warnings": [],
+      "editorial_changes": [
+        {
+          "code": "leading_embed_moved_after_first_paragraph",
+          "evidence": "https://www.youtube.com/watch?v=GYiZcPgFK9E",
+          "message": "Embed iniziale spostato dopo il primo paragrafo.",
+          "severity": "info"
+        }
+      ],
+      "element_counts": {
+        "embed": 2,
+        "heading": 0,
+        "image": 0,
+        "quote": 3,
+        "table": 0,
+        "text": 5
+      },
+      "elements": [
+        {
+          "block_id": "b1",
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=GYiZcPgFK9E"
+        },
+        {
+          "block_id": "b2",
+          "text": "Seth Rollins is not letting Roman Reigns rewrite history when it comes to the WWE World Heavyweight Championship.",
+          "type": "text"
+        },
+        {
+          "block_id": "b3",
+          "text": "While speaking to Prince St. Pizza , Rollins opened up about being forced to relinquish the WWE World Heavyweight Championship after tearing his rotator cuff. Rollins made it clear he never lost the title in a match, which made it even harder for him to watch CM Punk and Roman Reigns battle for it at WrestleMania 42.",
+          "type": "text"
+        },
+        {
+          "block_id": "b4",
+          "source_tag": "blockquote",
+          "text": "“So, I tore my rotator cuff back in October, but I was holding that title. I lost it. I didn’t get beaten in a match for it—I had to forfeit it because I had to go get surgery on my rotator. So I was out for five months.”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b5",
+          "text": "Rollins said the WrestleMania situation was especially brutal because two of his biggest rivals ended up fighting over what he still views as his championship, while the Visionary had to watch everything on the sidelines.",
+          "type": "text"
+        },
+        {
+          "block_id": "b6",
+          "source_tag": "blockquote",
+          "text": "“CM Punk wins the title, takes it into WrestleMania, and he’s wrestling in the main event—mind you—my other rival, Roman Reigns. So you’ve got two of my worst enemies fighting each other for my title, in my main event—and I have to watch that. I have to swallow that.”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b7",
+          "text": "Roman ultimately walked out of WrestleMania 42 as champion , and Rollins made it clear he was disgusted by the whole thing. He then unloaded on Reigns for claiming he made the World Heavyweight Championship relevant.",
+          "type": "text"
+        },
+        {
+          "block_id": "b8",
+          "source_tag": "blockquote",
+          "text": "“So it’s really difficult for me to feel any way other than disgusted by the result. Now Roman Reigns is walking around with my title and talking about how he made the title relevant—which is bulls*** . I’ll just say it. It is complete bulls***. He knows it, I know it, everybody else knows it. He sounds like an idiot when he says it.”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b9",
+          "text": "Rollins clearly still sees that title as his, and he’s not giving Roman Reigns credit for anything. With Rollins expected to win the King of the Ring tournament and face Reigns at SummerSlam , this feud already has plenty of bad blood before they even face each other in the ring again.",
+          "type": "text"
+        },
+        {
+          "block_id": "b10",
+          "source_tag": "figure",
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/GYiZcPgFK9E?feature=oembed"
+        }
+      ],
+      "excerpt_it": "Seth Rollins non ci sta e contesta le recenti affermazioni di Roman Reigns riguardo al World Heavyweight Championship.",
+      "extraction_diagnostics": {
+        "candidate_node_count": 93,
+        "clean_element_count": 10,
+        "dom_noise_reduction_enabled": false,
+        "embed_count": 2,
+        "global_embed_recovery_enabled": false,
+        "quote_count": 3,
+        "raw_element_count": 15,
+        "removed_by_node_count": 13,
+        "removed_by_sanitize_count": 5,
+        "root_name": "article",
+        "root_text_chars": 2973,
+        "stage": "complete",
+        "table_count": 0
+      },
+      "fetched_html_chars": 528873,
+      "menzo_score": 83,
+      "meta": {
+        "description": "Seth Rollins is not letting Roman Reigns rewrite history when it comes to the WWE World Heavyweight Championship. While speaking to Prince St. Pizza,",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/seth-rollins-blasts-roman-reigns-for-claiming-he-made-world-heavyweight-title-relevant-28.jpg",
+        "source_title": "Seth Rollins Blasts Roman Reigns For Claiming He Made World Heavyweight Title Relevant"
+      },
+      "raw_element_count": 15,
+      "raw_elements_preview": [
+        {
+          "block_id": "b1",
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=GYiZcPgFK9E"
+        },
+        {
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=GYiZcPgFK9E"
+        },
+        {
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=GYiZcPgFK9E"
+        },
+        {
+          "block_id": "b2",
+          "text": "Seth Rollins is not letting Roman Reigns rewrite history when it comes to the WWE World Heavyweight Championship.",
+          "type": "text"
+        },
+        {
+          "block_id": "b3",
+          "text": "While speaking to Prince St. Pizza , Rollins opened up about being forced to relinquish the WWE World Heavyweight Championship after tearing his rotator cuff. Rollins made it clear he never lost the title in a match, which made it even harder for him to watch CM Punk and Roman Reigns battle for it at WrestleMania 42.",
+          "type": "text"
+        },
+        {
+          "block_id": "b4",
+          "source_tag": "blockquote",
+          "text": "“So, I tore my rotator cuff back in October, but I was holding that title. I lost it. I didn’t get beaten in a match for it—I had to forfeit it because I had to go get surgery on my rotator. So I was out for five months.”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b5",
+          "text": "Rollins said the WrestleMania situation was especially brutal because two of his biggest rivals ended up fighting over what he still views as his championship, while the Visionary had to watch everything on the sidelines.",
+          "type": "text"
+        },
+        {
+          "block_id": "b6",
+          "source_tag": "blockquote",
+          "text": "“CM Punk wins the title, takes it into WrestleMania, and he’s wrestling in the main event—mind you—my other rival, Roman Reigns. So you’ve got two of my worst enemies fighting each other for my title, in my main event—and I have to watch that. I have to swallow that.”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b7",
+          "text": "Roman ultimately walked out of WrestleMania 42 as champion , and Rollins made it clear he was disgusted by the whole thing. He then unloaded on Reigns for claiming he made the World Heavyweight Championship relevant.",
+          "type": "text"
+        },
+        {
+          "block_id": "b8",
+          "source_tag": "blockquote",
+          "text": "“So it’s really difficult for me to feel any way other than disgusted by the result. Now Roman Reigns is walking around with my title and talking about how he made the title relevant—which is bulls*** . I’ll just say it. It is complete bulls***. He knows it, I know it, everybody else knows it. He sounds like an idiot when he says it.”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b9",
+          "text": "Rollins clearly still sees that title as his, and he’s not giving Roman Reigns credit for anything. With Rollins expected to win the King of the Ring tournament and face Reigns at SummerSlam , this feud already has plenty of bad blood before they even face each other in the ring again.",
+          "type": "text"
+        },
+        {
+          "block_id": "b10",
+          "source_tag": "figure",
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/GYiZcPgFK9E?feature=oembed"
+        },
+        {
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/GYiZcPgFK9E?feature=oembed"
+        },
+        {
+          "source_tag": "iframe",
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/GYiZcPgFK9E?feature=oembed"
+        },
+        {
+          "text": "Spotlight AEW News Mercedes Moné Returns As Wild Card In Owen Hart Tournament During June 3 AEW Dynamite AEW Videos Kevin Knight Revealed As Newest Member Of Don Callis Family On AEW Dynamite AEW Dynamite Results AEW Dynamite Results, Highlights and Key Moments for June 3, 2026 AEW News Mercedes Mone’s AEW Return Status After Months Away From Television",
+          "type": "text"
+        }
+      ],
+      "removed_before_gemini": 18,
+      "removed_elements_debug": [
+        {
+          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
+          "node_index": 70,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Spotlight"
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197513 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news category-aew-videos tag-aew-featured tag-owen-hart   ",
+          "node_index": 74,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "AEW News Mercedes Moné Returns As Wild Card In Owen Hart Tournament During June 3 AEW Dynamite"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 77,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Mercedes Moné Returns As Wild Card In Owen Hart Tournament During June 3 AEW Dynamite"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 78,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197476 post type-post status-publish format-video has-post-thumbnail hentry category-aew-news category-aew-videos tag-aew-featured tag-kevin-knight post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
+          "node_index": 79,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "AEW Videos Kevin Knight Revealed As Newest Member Of Don Callis Family On AEW Dynamite"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 82,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Kevin Knight Revealed As Newest Member Of Don Callis Family On AEW Dynamite"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 83,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197150 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-dynamite-results category-aew-news category-aew-results tag-aew-featured   ",
+          "node_index": 84,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "AEW Dynamite Results AEW Dynamite Results, Highlights and Key Moments for June 3, 2026"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 87,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "AEW Dynamite Results, Highlights and Key Moments for June 3, 2026"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 88,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197314 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news tag-aew-featured tag-mercedes-mone   ",
+          "node_index": 89,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "AEW News Mercedes Mone’s AEW Return Status After Months Away From Television"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 92,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Mercedes Mone’s AEW Return Status After Months Away From Television"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 93,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "index": 2,
+          "item": {
+            "source_tag": "div",
+            "type": "embed",
+            "url": "https://www.youtube.com/watch?v=GYiZcPgFK9E"
+          },
+          "reason": "duplicate_or_empty_embed"
+        },
+        {
+          "index": 3,
+          "item": {
+            "source_tag": "div",
+            "type": "embed",
+            "url": "https://www.youtube.com/watch?v=GYiZcPgFK9E"
+          },
+          "reason": "duplicate_or_empty_embed"
+        },
+        {
+          "index": 13,
+          "item": {
+            "source_tag": "div",
+            "type": "embed",
+            "url": "https://www.youtube.com/embed/GYiZcPgFK9E?feature=oembed"
+          },
+          "reason": "duplicate_or_empty_embed"
+        },
+        {
+          "index": 14,
+          "item": {
+            "source_tag": "iframe",
+            "type": "embed",
+            "url": "https://www.youtube.com/embed/GYiZcPgFK9E?feature=oembed"
+          },
+          "reason": "duplicate_or_empty_embed"
+        },
+        {
+          "index": 15,
+          "item": {
+            "text": "Spotlight AEW News Mercedes Moné Returns As Wild Card In Owen Hart Tournament During June 3 AEW Dynamite AEW Videos Kevin Knight Revealed As Newest Member Of Don Callis Family On AEW Dynamite AEW Dynamite Results AEW Dynamite Results, Highlights and Key Moments for June 3, 2026 AEW News Mercedes Mone’s AEW Return Status After Months Away From Television",
+            "type": "text"
+          },
+          "reason": "footer_start"
+        }
+      ],
+      "source": "ringsidenews",
+      "source_html_contains_embed_hint": true,
+      "source_title": "Seth Rollins Blasts Roman Reigns For Claiming He Made World Heavyweight Title Relevant",
+      "source_url": "https://www.ringsidenews.com/seth-rollins-blasts-roman-reigns-claiming-he-made-world-heavyweight-title-relevant/",
+      "status": "ready_for_alfred",
+      "title_it": "Seth Rollins contro Roman Reigns: \"Dire che ha reso rilevante il World Heavyweight Title è una stupidaggine\"",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_missing_units": [],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/seth-rollins-blasts-roman-reigns-claiming-he-made-world-heavyweight-title-relevant/\nTitolo feed: Seth Rollins Blasts Roman Reigns For Claiming He Made World Heavyweight Title Relevant\nTitolo pagina: Seth Rollins Blasts Roman Reigns For Claiming He Made World Heavyweight Title Relevant\nDescrizione: Seth Rollins is not letting Roman Reigns rewrite history when it comes to the WWE World Heavyweight Championship. While speaking to Prince St. Pizza,\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Seth Rollins is not letting Roman Reigns rewrite history when it comes to the WWE World Heavyweight Championship.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"While speaking to Prince St. Pizza , Rollins opened up about being forced to relinquish the WWE World Heavyweight Championship after tearing his rotator cuff. Rollins made it clear he never lost the title in a match, which made it even harder for him to watch CM Punk and Roman Reigns battle for it at WrestleMania 42.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"“So, I tore my rotator cuff back in October, but I was holding that title. I lost it. I didn’t get beaten in a match for it—I had to forfeit it because I had to go get surgery on my rotator. So I was out for five months.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"Rollins said the WrestleMania situation was especially brutal because two of his biggest rivals ended up fighting over what he still views as his championship, while the Visionary had to watch everything on the sidelines.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"quote\",\n    \"text\": \"“CM Punk wins the title, takes it into WrestleMania, and he’s wrestling in the main event—mind you—my other rival, Roman Reigns. So you’ve got two of my worst enemies fighting each other for my title, in my main event—and I have to watch that. I have to swallow that.”\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"Roman ultimately walked out of WrestleMania 42 as champion , and Rollins made it clear he was disgusted by the whole thing. He then unloaded on Reigns for claiming he made the World Heavyweight Championship relevant.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"quote\",\n    \"text\": \"“So it’s really difficult for me to feel any way other than disgusted by the result. Now Roman Reigns is walking around with my title and talking about how he made the title relevant—which is bulls*** . I’ll just say it. It is complete bulls***. He knows it, I know it, everybody else knows it. He sounds like an idiot when he says it.”\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"Rollins clearly still sees that title as his, and he’s not giving Roman Reigns credit for anything. With Rollins expected to win the King of the Ring tournament and face Reigns at SummerSlam , this feud already has plenty of bad blood before they even face each other in the ring again.\"\n  }\n]\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Seth Rollins contro Roman Reigns: \\\"Dire che ha reso rilevante il World Heavyweight Title è una stupidaggine\\\"\",\n  \"excerpt_it\": \"Seth Rollins non ci sta e contesta le recenti affermazioni di Roman Reigns riguardo al World Heavyweight Championship.\",\n  \"translations\": {\n    \"b2\": \"Seth Rollins non è disposto a lasciare che Roman Reigns riscriva la storia per quanto riguarda il WWE World Heavyweight Championship.\",\n    \"b3\": \"Durante un'intervista con Prince St. Pizza, Rollins si è sfogato riguardo al fatto di essere stato costretto a rendere vacante il WWE World Heavyweight Championship dopo essersi strappato la cuffia dei rotatori. Rollins ha chiarito di non aver mai perso il titolo in un match, il che ha reso ancora più difficile per lui guardare CM Punk e Roman Reigns contenderselo a WrestleMania 42.\",\n    \"b4\": \"“Dunque, mi sono strappato la cuffia dei rotatori a ottobre, ma detenevo quel titolo. L'ho perso. Non sono stato sconfitto in un match per perderlo: ho dovuto renderlo vacante perché dovevo operarmi alla cuffia. Quindi sono rimasto fuori per cinque mesi.”\",\n    \"b5\": \"Rollins ha affermato che la situazione a WrestleMania è stata particolarmente brutale, poiché due dei suoi più grandi rivali hanno finito per scontrarsi per quello che lui considera ancora il suo campionato, mentre il Visionary è stato costretto a guardare tutto da bordo ring.\",\n    \"b6\": \"“CM Punk vince il titolo, lo porta a WrestleMania e combatte nel main event contro, guarda caso, il mio altro rivale, Roman Reigns. Ti ritrovi due dei miei peggiori nemici che si affrontano per il mio titolo, nel mio main event, e io devo guardare tutto. Devo mandare giù questo boccone amaro.”\",\n    \"b7\": \"Roman ha lasciato WrestleMania 42 come campione e Rollins ha chiarito di essere disgustato dall'intera faccenda. Si è poi scagliato contro Reigns per aver sostenuto di aver reso rilevante il World Heavyweight Championship.\",\n    \"b8\": \"“Quindi per me è davvero difficile provare altro se non disgusto per il risultato. Ora Roman Reigns se ne va in giro con il mio titolo e dice di averlo reso rilevante: è una stronzata. Lo dico chiaramente. È una completa stronzata. Lo sa lui, lo so io, lo sanno tutti. Sembra un idiota quando lo dice.”\",\n    \"b9\": \"Rollins vede chiaramente quel titolo ancora come suo e non è intenzionato a riconoscere alcun merito a Roman Reigns. Con la previsione che Rollins vinca il torneo King of the Ring per affrontare Reigns a SummerSlam, questa faida è già carica di tensione ancor prima che i due tornino a scontrarsi sul ring.\"\n  },\n  \"notes\": []\n}",
+      "translation_unit_count": 8,
+      "translation_used": true
+    },
+    {
+      "bob_notes": [],
+      "body_html": "<p>Dopo cinque mesi di assenza dalla compagnia, Mercedes Moné ha fatto il suo atteso ritorno in All Elite Wrestling durante l&#x27;episodio di &quot;AEW Dynamite</p>\n<blockquote>&quot; del 3 giugno. Si è rivelata come la Wild Card del torneo Owen Hart Foundation 2026, la stessa competizione che aveva vinto l&#x27;anno scorso, e nonostante la strenua resistenza di Alex Windsor, &quot;</blockquote>\n<p>The CEO&quot; è riuscita ad avanzare al turno successivo.</p>\n<p>Moné ha mantenuto il controllo sin dalle prime battute, provocando Windsor calpestandola, sbeffeggiandola e, soprattutto, dettando il ritmo dell&#x27;incontro. Nonostante un iniziale tentativo di rimonta di Windsor, Moné ha trasformato una Head Scissors in una Statement Maker, dalla quale però l&#x27;avversaria è riuscita a liberarsi. Windsor ha provato a chiudere una Sharpshooter, ma Moné ha contrattaccato portando l&#x27;azione sull&#x27;apron con una Neckbreaker, prima di colpire con una Meteora fuori ring proprio mentre l&#x27;incontro entrava nella pausa pubblicitaria.</p>\n<p>Durante la pausa, il dominio è rimasto nelle mani di Moné, che ha ottenuto una serie di near fall, perdendo però per un istante la calma a causa della resistenza di Windsor, capace di uscire da ogni schienamento. Al rientro dalla pubblicità, Moné ha eseguito i Three Amigos ed è salita sulla terza corda per una Frog Splash, ma Windsor ha reagito costringendo Moné a ripiegare fuori ring. Ciò ha permesso a Windsor di connettere con una Cannonball e una Clothesline dall&#x27;apron per cercare di riequilibrare la contesa.</p>\n<p>Tornate sul ring, Windsor ha tentato una Clothesline dal paletto, ma Moné ha risposto con i Three Amigos; Windsor è però riuscita a evitare il terzo suplex andando a segno con una Made in Japan, ottenendo un conteggio di due. Windsor ha cercato un Superplex, ma Moné ha reagito colpendo con una Meteora per un altro near fall, seguito da una Sunset Flip Powerbomb all&#x27;angolo. Dopo aver mancato la ginocchiata in corsa all&#x27;angolo e una serie di roll-up, Moné ha colpito con il Backstabber, passando immediatamente alla Statement Maker che ha costretto Windsor alla resa. Moné non ha mollato la presa nemmeno dopo il suono della campanella. In semifinale, Moné affronterà la vincitrice del match tra Persephone e Hazuki, che si sfideranno questo sabato a &quot;AEW Collision&quot;.</p>",
+      "category_hint": "AEW",
+      "clean_element_count": 4,
+      "created_at": "2026-06-04T10:33:15.173794+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "diagnostic_warnings": [],
+      "editorial_changes": [
+        {
+          "code": "inline_quote_split",
+          "evidence": "Dopo cinque mesi di assenza dalla compagnia, Mercedes Moné ha fatto il suo atteso ritorno in All Elite Wrestling durante l'episodio di \"AEW Dynamite\" del 3 giugno. Si è rivelata come la Wild Card del torneo Owen Hart Foundation 2026, la stessa competizione che aveva vinto l'anno scorso, e nonostante",
+          "message": "Citazione tra virgolette separata in blockquote dedicato.",
+          "severity": "info"
+        }
+      ],
+      "element_counts": {
+        "embed": 0,
+        "heading": 0,
+        "image": 0,
+        "quote": 0,
+        "table": 0,
+        "text": 4
+      },
+      "elements": [
+        {
+          "block_id": "b1",
+          "text": "After five months away from the company, Mercedes Mone made her long-awaited return to All Elite Wrestling on the June 3 episode of \"AEW Dynamite.\" She revealed herself as the Wild Card in the 2026 Owen Hart Foundation Tournament, the same competition she won last year, and despite Alex Windsor putting up a strong fight, \"The CEO\" advanced to the next round.",
+          "type": "text"
+        },
+        {
+          "block_id": "b2",
+          "text": "Mone was in firm control in the early going, taunting Windsor by standing on her, getting in her face, and most importantly, keeping on top of the action. Despite Windsor getting some hope early, Mone turned a Head Scissors into a Statement Maker that Windsor was able to escape from. Windsor tried to lock in a Sharpshooter but Mone countered and took the action to the apron with a Neckbreaker, before hitting a Meteora on the floor as the match entered the commercial break.",
+          "type": "text"
+        },
+        {
+          "block_id": "b3",
+          "text": "During the break, it was all Mone as she got a series of near falls, but she did have one small moment where she needed to maintain her composure due to Windsor kicking out of everything. Coming out of the break, Mone hit the Three Amigos and went to the top for a Frog Splash, but Windsor mounted a comeback which forced Mone to retreat to the outside. This led to Windsor hitting a Cannonball and a Clothesline off the apron to try and even things up.",
+          "type": "text"
+        },
+        {
+          "block_id": "b4",
+          "text": "As the match re-entered the ring, Windsor went for a Clothesline off the top but Mone countered into the Three Amigos again, only for Windsor to counter out of the third Suplex to hit a Made in Japan for a two-count. Windsor went for a Superplex off the top but Mone fought back to hit a Meteora for another near fall, which led to a Sunset Flip Powerbomb into the corner. Mone would miss the running knees in the corner and after a series of roll ups, Mone hit the Backstabber and floated over into the Statement Maker which forced Windsor to submit, with Mone refusing to let go after the bell had rung. Mone will meet either Persephone or Hazuki in the semi-finals of the tournament, with those two women facing each other this Saturday on \"AEW Collision.\"",
+          "type": "text"
+        }
+      ],
+      "excerpt_it": "Dopo cinque mesi di assenza, Mercedes Moné è tornata in AEW, qualificandosi per le semifinali del torneo Owen Hart Foundation.",
+      "extraction_diagnostics": {
+        "candidate_node_count": 11,
+        "clean_element_count": 4,
+        "dom_noise_reduction_enabled": false,
+        "embed_count": 0,
+        "global_embed_recovery_enabled": false,
+        "quote_count": 0,
+        "raw_element_count": 5,
+        "removed_by_node_count": 0,
+        "removed_by_sanitize_count": 1,
+        "root_name": "article",
+        "root_text_chars": 2178,
+        "stage": "complete",
+        "table_count": 0
+      },
+      "fetched_html_chars": 50573,
+      "menzo_score": 83,
+      "meta": {
+        "description": "Mercedes Mone is back in AEW after five months away, and she has already reached the semi-finals of the Owen Hart Foundation Tournament.",
+        "featured_image": "https://www.wrestlinginc.com/img/gallery/mercedes-mone-returns-to-aew-in-womens-owen-hart-tourney-wild-card-slot/l-intro-1780537807.jpg",
+        "source_title": "Mercedes Mone Returns To AEW In Women's Owen Hart Tourney Wild Card Slot - Wrestling Inc."
+      },
+      "raw_element_count": 5,
+      "raw_elements_preview": [
+        {
+          "alt": "Mercedes Mone on AEW Dynamite",
+          "type": "image",
+          "url": "https://www.wrestlinginc.com/img/gallery/mercedes-mone-returns-to-aew-in-womens-owen-hart-tourney-wild-card-slot/intro-1780537807.jpg"
+        },
+        {
+          "block_id": "b1",
+          "text": "After five months away from the company, Mercedes Mone made her long-awaited return to All Elite Wrestling on the June 3 episode of \"AEW Dynamite.\" She revealed herself as the Wild Card in the 2026 Owen Hart Foundation Tournament, the same competition she won last year, and despite Alex Windsor putting up a strong fight, \"The CEO\" advanced to the next round.",
+          "type": "text"
+        },
+        {
+          "block_id": "b2",
+          "text": "Mone was in firm control in the early going, taunting Windsor by standing on her, getting in her face, and most importantly, keeping on top of the action. Despite Windsor getting some hope early, Mone turned a Head Scissors into a Statement Maker that Windsor was able to escape from. Windsor tried to lock in a Sharpshooter but Mone countered and took the action to the apron with a Neckbreaker, before hitting a Meteora on the floor as the match entered the commercial break.",
+          "type": "text"
+        },
+        {
+          "block_id": "b3",
+          "text": "During the break, it was all Mone as she got a series of near falls, but she did have one small moment where she needed to maintain her composure due to Windsor kicking out of everything. Coming out of the break, Mone hit the Three Amigos and went to the top for a Frog Splash, but Windsor mounted a comeback which forced Mone to retreat to the outside. This led to Windsor hitting a Cannonball and a Clothesline off the apron to try and even things up.",
+          "type": "text"
+        },
+        {
+          "block_id": "b4",
+          "text": "As the match re-entered the ring, Windsor went for a Clothesline off the top but Mone countered into the Three Amigos again, only for Windsor to counter out of the third Suplex to hit a Made in Japan for a two-count. Windsor went for a Superplex off the top but Mone fought back to hit a Meteora for another near fall, which led to a Sunset Flip Powerbomb into the corner. Mone would miss the running knees in the corner and after a series of roll ups, Mone hit the Backstabber and floated over into the Statement Maker which forced Windsor to submit, with Mone refusing to let go after the bell had rung. Mone will meet either Persephone or Hazuki in the semi-finals of the tournament, with those two women facing each other this Saturday on \"AEW Collision.\"",
+          "type": "text"
+        }
+      ],
+      "removed_before_gemini": 1,
+      "removed_elements_debug": [
+        {
+          "index": 1,
+          "item": {
+            "alt": "Mercedes Mone on AEW Dynamite",
+            "type": "image",
+            "url": "https://www.wrestlinginc.com/img/gallery/mercedes-mone-returns-to-aew-in-womens-owen-hart-tourney-wild-card-slot/intro-1780537807.jpg"
+          },
+          "reason": "duplicate_featured_image"
+        }
+      ],
+      "source": "wrestlinginc",
+      "source_html_contains_embed_hint": true,
+      "source_title": "Mercedes Mone Returns To AEW In Women's Owen Hart Tourney Wild Card Slot",
+      "source_url": "https://www.wrestlinginc.com/2187197/mercedes-mone-returns-aew-womens-owen-hart-tourney-wild-card-slot/",
+      "status": "ready_for_alfred",
+      "title_it": "Mercedes Moné torna in AEW come Wild Card del torneo Owen Hart",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_missing_units": [],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2187197/mercedes-mone-returns-aew-womens-owen-hart-tourney-wild-card-slot/\nTitolo feed: Mercedes Mone Returns To AEW In Women's Owen Hart Tourney Wild Card Slot\nTitolo pagina: Mercedes Mone Returns To AEW In Women's Owen Hart Tourney Wild Card Slot - Wrestling Inc.\nDescrizione: Mercedes Mone is back in AEW after five months away, and she has already reached the semi-finals of the Owen Hart Foundation Tournament.\nCategoria suggerita: AEW\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"After five months away from the company, Mercedes Mone made her long-awaited return to All Elite Wrestling on the June 3 episode of \\\"AEW Dynamite.\\\" She revealed herself as the Wild Card in the 2026 Owen Hart Foundation Tournament, the same competition she won last year, and despite Alex Windsor putting up a strong fight, \\\"The CEO\\\" advanced to the next round.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Mone was in firm control in the early going, taunting Windsor by standing on her, getting in her face, and most importantly, keeping on top of the action. Despite Windsor getting some hope early, Mone turned a Head Scissors into a Statement Maker that Windsor was able to escape from. Windsor tried to lock in a Sharpshooter but Mone countered and took the action to the apron with a Neckbreaker, before hitting a Meteora on the floor as the match entered the commercial break.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"During the break, it was all Mone as she got a series of near falls, but she did have one small moment where she needed to maintain her composure due to Windsor kicking out of everything. Coming out of the break, Mone hit the Three Amigos and went to the top for a Frog Splash, but Windsor mounted a comeback which forced Mone to retreat to the outside. This led to Windsor hitting a Cannonball and a Clothesline off the apron to try and even things up.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"As the match re-entered the ring, Windsor went for a Clothesline off the top but Mone countered into the Three Amigos again, only for Windsor to counter out of the third Suplex to hit a Made in Japan for a two-count. Windsor went for a Superplex off the top but Mone fought back to hit a Meteora for another near fall, which led to a Sunset Flip Powerbomb into the corner. Mone would miss the running knees in the corner and after a series of roll ups, Mone hit the Backstabber and floated over into the Statement Maker which forced Windsor to submit, with Mone refusing to let go after the bell had rung. Mone will meet either Persephone or Hazuki in the semi-finals of the tournament, with those two women facing each other this Saturday on \\\"AEW Collision.\\\"\"\n  }\n]\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Mercedes Moné torna in AEW come Wild Card del torneo Owen Hart\",\n  \"excerpt_it\": \"Dopo cinque mesi di assenza, Mercedes Moné è tornata in AEW, qualificandosi per le semifinali del torneo Owen Hart Foundation.\",\n  \"translations\": {\n    \"b1\": \"Dopo cinque mesi di assenza dalla compagnia, Mercedes Moné ha fatto il suo atteso ritorno in All Elite Wrestling durante l'episodio di \\\"AEW Dynamite\\\" del 3 giugno. Si è rivelata come la Wild Card del torneo Owen Hart Foundation 2026, la stessa competizione che aveva vinto l'anno scorso, e nonostante la strenua resistenza di Alex Windsor, \\\"The CEO\\\" è riuscita ad avanzare al turno successivo.\",\n    \"b2\": \"Moné ha mantenuto il controllo sin dalle prime battute, provocando Windsor calpestandola, sbeffeggiandola e, soprattutto, dettando il ritmo dell'incontro. Nonostante un iniziale tentativo di rimonta di Windsor, Moné ha trasformato una Head Scissors in una Statement Maker, dalla quale però l'avversaria è riuscita a liberarsi. Windsor ha provato a chiudere una Sharpshooter, ma Moné ha contrattaccato portando l'azione sull'apron con una Neckbreaker, prima di colpire con una Meteora fuori ring proprio mentre l'incontro entrava nella pausa pubblicitaria.\",\n    \"b3\": \"Durante la pausa, il dominio è rimasto nelle mani di Moné, che ha ottenuto una serie di near fall, perdendo però per un istante la calma a causa della resistenza di Windsor, capace di uscire da ogni schienamento. Al rientro dalla pubblicità, Moné ha eseguito i Three Amigos ed è salita sulla terza corda per una Frog Splash, ma Windsor ha reagito costringendo Moné a ripiegare fuori ring. Ciò ha permesso a Windsor di connettere con una Cannonball e una Clothesline dall'apron per cercare di riequilibrare la contesa.\",\n    \"b4\": \"Tornate sul ring, Windsor ha tentato una Clothesline dal paletto, ma Moné ha risposto con i Three Amigos; Windsor è però riuscita a evitare il terzo suplex andando a segno con una Made in Japan, ottenendo un conteggio di due. Windsor ha cercato un Superplex, ma Moné ha reagito colpendo con una Meteora per un altro near fall, seguito da una Sunset Flip Powerbomb all'angolo. Dopo aver mancato la ginocchiata in corsa all'angolo e una serie di roll-up, Moné ha colpito con il Backstabber, passando immediatamente alla Statement Maker che ha costretto Windsor alla resa. Moné non ha mollato la presa nemmeno dopo il suono della campanella. In semifinale, Moné affronterà la vincitrice del match tra Persephone e Hazuki, che si sfideranno questo sabato a \\\"AEW Collision\\\".\"\n  },\n  \"notes\": []\n}",
+      "translation_unit_count": 4,
+      "translation_used": true
+    },
+    {
+      "bob_notes": [],
+      "body_html": "<p>Sol Ruca sta ancora cavalcando l&#x27;onda del successo dopo aver vinto il WWE Women’s Intercontinental Championship, ma non ha ancora rivisto per intero il match che le ha consegnato il titolo.</p>\nhttps://www.youtube.com/watch?v=eKlWCV57cNc\n\n<p>Ruca è apparsa su &quot;Inside the Ring&quot; di TMZ dopo aver sconfitto Becky Lynch in Italia. Durante l&#x27;intervista, le è stato chiesto se avesse rivisto l&#x27;incontro dopo un momento così importante della sua carriera. Ruca ha ammesso di non aver ancora visto il match completo, in parte perché la sua agenda è stata fitta di viaggi, impegni con i media e obblighi verso la WWE. Ruca ha inoltre spiegato che rivedere i propri incontri può talvolta diventare complicato, poiché finisce per essere troppo critica con se stessa invece di godersi il momento.</p>\n<blockquote>“Non ho ancora rivisto l’intero match. Sento che a volte guardo i match e altre volte no. Dipende un po’ da come mi sento a riguardo, perché a volte penso che il match sia andato molto bene e che il pubblico abbia reagito alla grande, ma poi lo riguardo e inizio a cercare il pelo nell’uovo, cosa che una persona comune che sta guardando non farebbe.”</blockquote>\n<p>Ruca ha dichiarato di cercare un equilibrio tra l&#x27;imparare dai propri match e il non rovinare la sensazione di una grande performance analizzando eccessivamente ogni dettaglio.</p>\n<blockquote>“Quindi devo prenderlo per quello che è, senza farmi troppe autocritiche. Credo ci sia un buon equilibrio in questo. A volte mi piace semplicemente disputare un match e godermelo. Mi sono divertita molto, quindi è andata così. Ma poi, ovviamente, mi piace tornare indietro, guardare, farmi delle critiche e chiedere consigli e supporto.”</blockquote>\n<p>Ruca ha chiarito che desidera ancora vedere il match per intero non appena ne avrà l&#x27;opportunità, ma che i suoi impegni l&#x27;hanno finora resa una cosa difficile.</p>\n<blockquote>“Quindi, non ho ancora avuto il tempo di rivedere l’intero match, ma voglio vederlo. Ma sì, sono stata davvero molto impegnata.”</blockquote>\n<p>La vittoria del titolo contro Becky Lynch è stata un passo fondamentale nella carriera di Ruca nel main roster WWE. Tuttavia, le sue parole dimostrano che non è concentrata solo sui festeggiamenti: sta anche riflettendo su come continuare a migliorare, imparando al contempo a concedersi il piacere di godersi il momento.</p>",
+      "category_hint": "WWE",
+      "clean_element_count": 9,
+      "created_at": "2026-06-04T10:33:17.705967+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "diagnostic_warnings": [],
+      "editorial_changes": [
+        {
+          "code": "leading_embed_moved_after_first_paragraph",
+          "evidence": "https://www.youtube.com/watch?v=eKlWCV57cNc",
+          "message": "Embed iniziale spostato dopo il primo paragrafo.",
+          "severity": "info"
+        }
+      ],
+      "element_counts": {
+        "embed": 1,
+        "heading": 0,
+        "image": 0,
+        "quote": 3,
+        "table": 0,
+        "text": 5
+      },
+      "elements": [
+        {
+          "block_id": "b1",
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=eKlWCV57cNc"
+        },
+        {
+          "block_id": "b2",
+          "text": "Sol Ruca is still riding high after winning the WWE Women’s Intercontinental Championship , but she has not fully watched the match that gave her the title.",
+          "type": "text"
+        },
+        {
+          "block_id": "b3",
+          "text": "Ruca appeared on TMZ’s Inside the Ring after defeating Becky Lynch in Italy. During the interview, she was asked whether she had watched the match back after such a huge moment in her career. Ruca admitted she had not seen the full match yet, partly because her schedule has been packed with travel, media, and WWE commitments. Ruca also explained that watching her matches back can sometimes become a tricky thing because she starts picking herself apart instead of enjoying the moment.",
+          "type": "text"
+        },
+        {
+          "block_id": "b4",
+          "source_tag": "blockquote",
+          "text": "“So I have not watched the whole match back. I feel like sometimes I do watch the matches back and then sometimes I don’t. It kind of just depends on how I feel about it because sometimes if I feel really good about the match and I think the crowd was reacting really, really well, but then I watch it back and I start nitpicking everything where the standard person that’s watching isn’t going to be doing that.”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b5",
+          "text": "Ruca said she tries to find a balance between learning from her matches and not ruining the feeling of a big performance by overanalyzing every detail.",
+          "type": "text"
+        },
+        {
+          "block_id": "b6",
+          "source_tag": "blockquote",
+          "text": "“So I need to take it for what it is and not for like really nitpicking myself. I think there is a good balance with that. So sometimes I do like to just have a match, enjoy it. I had a lot of fun so like it is what it is. But then, you know, obviously I do like to go back and kind of watch and give myself critiques and ask for, you know, criticism and help with that.”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b7",
+          "text": "Ruca made it clear that she still wants to watch the match in full when she gets the chance, but her schedule has made that difficult.",
+          "type": "text"
+        },
+        {
+          "block_id": "b8",
+          "source_tag": "blockquote",
+          "text": "“So, I haven’t been had time to watch the whole match back yet, but I do want to see it back. But yeah, I’ve just been very busy.”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b9",
+          "text": "The title win over Becky Lynch was a major step in Ruca’s WWE main roster career. Still, her comments show that she is not just focused on the celebration. She is also thinking about how to keep improving while learning when to let herself enjoy the moment.",
+          "type": "text"
+        }
+      ],
+      "excerpt_it": "Sol Ruca sta ancora celebrando la conquista del WWE Women’s Intercontinental Championship, ma non ha ancora rivisto il match che le ha regalato il titolo.",
+      "extraction_diagnostics": {
+        "candidate_node_count": 91,
+        "clean_element_count": 9,
+        "dom_noise_reduction_enabled": false,
+        "embed_count": 1,
+        "global_embed_recovery_enabled": false,
+        "quote_count": 3,
+        "raw_element_count": 12,
+        "removed_by_node_count": 13,
+        "removed_by_sanitize_count": 3,
+        "root_name": "article",
+        "root_text_chars": 3311,
+        "stage": "complete",
+        "table_count": 0
+      },
+      "fetched_html_chars": 525956,
+      "menzo_score": 79,
+      "meta": {
+        "description": "Sol Ruca is still riding high after winning the WWE Women’s Intercontinental Championship, but she has not fully watched the match that gave her the",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet-15.jpg",
+        "source_title": "Sol Ruca Admits She Hasn’t Watched Full Becky Lynch Title Match Back Yet"
+      },
+      "raw_element_count": 12,
+      "raw_elements_preview": [
+        {
+          "block_id": "b1",
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=eKlWCV57cNc"
+        },
+        {
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=eKlWCV57cNc"
+        },
+        {
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=eKlWCV57cNc"
+        },
+        {
+          "block_id": "b2",
+          "text": "Sol Ruca is still riding high after winning the WWE Women’s Intercontinental Championship , but she has not fully watched the match that gave her the title.",
+          "type": "text"
+        },
+        {
+          "block_id": "b3",
+          "text": "Ruca appeared on TMZ’s Inside the Ring after defeating Becky Lynch in Italy. During the interview, she was asked whether she had watched the match back after such a huge moment in her career. Ruca admitted she had not seen the full match yet, partly because her schedule has been packed with travel, media, and WWE commitments. Ruca also explained that watching her matches back can sometimes become a tricky thing because she starts picking herself apart instead of enjoying the moment.",
+          "type": "text"
+        },
+        {
+          "block_id": "b4",
+          "source_tag": "blockquote",
+          "text": "“So I have not watched the whole match back. I feel like sometimes I do watch the matches back and then sometimes I don’t. It kind of just depends on how I feel about it because sometimes if I feel really good about the match and I think the crowd was reacting really, really well, but then I watch it back and I start nitpicking everything where the standard person that’s watching isn’t going to be doing that.”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b5",
+          "text": "Ruca said she tries to find a balance between learning from her matches and not ruining the feeling of a big performance by overanalyzing every detail.",
+          "type": "text"
+        },
+        {
+          "block_id": "b6",
+          "source_tag": "blockquote",
+          "text": "“So I need to take it for what it is and not for like really nitpicking myself. I think there is a good balance with that. So sometimes I do like to just have a match, enjoy it. I had a lot of fun so like it is what it is. But then, you know, obviously I do like to go back and kind of watch and give myself critiques and ask for, you know, criticism and help with that.”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b7",
+          "text": "Ruca made it clear that she still wants to watch the match in full when she gets the chance, but her schedule has made that difficult.",
+          "type": "text"
+        },
+        {
+          "block_id": "b8",
+          "source_tag": "blockquote",
+          "text": "“So, I haven’t been had time to watch the whole match back yet, but I do want to see it back. But yeah, I’ve just been very busy.”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b9",
+          "text": "The title win over Becky Lynch was a major step in Ruca’s WWE main roster career. Still, her comments show that she is not just focused on the celebration. She is also thinking about how to keep improving while learning when to let herself enjoy the moment.",
+          "type": "text"
+        },
+        {
+          "text": "Spotlight AEW News Mercedes Moné Returns As Wild Card In Owen Hart Tournament During June 3 AEW Dynamite AEW Videos Kevin Knight Revealed As Newest Member Of Don Callis Family On AEW Dynamite AEW Dynamite Results AEW Dynamite Results, Highlights and Key Moments for June 3, 2026 AEW News Mercedes Mone’s AEW Return Status After Months Away From Television",
+          "type": "text"
+        }
+      ],
+      "removed_before_gemini": 16,
+      "removed_elements_debug": [
+        {
+          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
+          "node_index": 68,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Spotlight"
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197513 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news category-aew-videos tag-aew-featured tag-owen-hart   ",
+          "node_index": 72,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "AEW News Mercedes Moné Returns As Wild Card In Owen Hart Tournament During June 3 AEW Dynamite"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 75,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Mercedes Moné Returns As Wild Card In Owen Hart Tournament During June 3 AEW Dynamite"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 76,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197476 post type-post status-publish format-video has-post-thumbnail hentry category-aew-news category-aew-videos tag-aew-featured tag-kevin-knight post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
+          "node_index": 77,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "AEW Videos Kevin Knight Revealed As Newest Member Of Don Callis Family On AEW Dynamite"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 80,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Kevin Knight Revealed As Newest Member Of Don Callis Family On AEW Dynamite"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 81,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197150 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-dynamite-results category-aew-news category-aew-results tag-aew-featured   ",
+          "node_index": 82,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "AEW Dynamite Results AEW Dynamite Results, Highlights and Key Moments for June 3, 2026"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 85,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "AEW Dynamite Results, Highlights and Key Moments for June 3, 2026"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 86,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197314 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news tag-aew-featured tag-mercedes-mone   ",
+          "node_index": 87,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "AEW News Mercedes Mone’s AEW Return Status After Months Away From Television"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 90,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Mercedes Mone’s AEW Return Status After Months Away From Television"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 91,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "index": 2,
+          "item": {
+            "source_tag": "div",
+            "type": "embed",
+            "url": "https://www.youtube.com/watch?v=eKlWCV57cNc"
+          },
+          "reason": "duplicate_or_empty_embed"
+        },
+        {
+          "index": 3,
+          "item": {
+            "source_tag": "div",
+            "type": "embed",
+            "url": "https://www.youtube.com/watch?v=eKlWCV57cNc"
+          },
+          "reason": "duplicate_or_empty_embed"
+        },
+        {
+          "index": 12,
+          "item": {
+            "text": "Spotlight AEW News Mercedes Moné Returns As Wild Card In Owen Hart Tournament During June 3 AEW Dynamite AEW Videos Kevin Knight Revealed As Newest Member Of Don Callis Family On AEW Dynamite AEW Dynamite Results AEW Dynamite Results, Highlights and Key Moments for June 3, 2026 AEW News Mercedes Mone’s AEW Return Status After Months Away From Television",
+            "type": "text"
+          },
+          "reason": "footer_start"
+        }
+      ],
+      "source": "ringsidenews",
+      "source_html_contains_embed_hint": true,
+      "source_title": "Sol Ruca Admits She Hasn’t Watched Full Becky Lynch Title Match Back Yet",
+      "source_url": "https://www.ringsidenews.com/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet/",
+      "status": "ready_for_alfred",
+      "title_it": "Sol Ruca ammette di non aver ancora rivisto per intero il match titolato contro Becky Lynch",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_missing_units": [],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet/\nTitolo feed: Sol Ruca Admits She Hasn’t Watched Full Becky Lynch Title Match Back Yet\nTitolo pagina: Sol Ruca Admits She Hasn’t Watched Full Becky Lynch Title Match Back Yet\nDescrizione: Sol Ruca is still riding high after winning the WWE Women’s Intercontinental Championship, but she has not fully watched the match that gave her the\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Sol Ruca is still riding high after winning the WWE Women’s Intercontinental Championship , but she has not fully watched the match that gave her the title.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Ruca appeared on TMZ’s Inside the Ring after defeating Becky Lynch in Italy. During the interview, she was asked whether she had watched the match back after such a huge moment in her career. Ruca admitted she had not seen the full match yet, partly because her schedule has been packed with travel, media, and WWE commitments. Ruca also explained that watching her matches back can sometimes become a tricky thing because she starts picking herself apart instead of enjoying the moment.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"“So I have not watched the whole match back. I feel like sometimes I do watch the matches back and then sometimes I don’t. It kind of just depends on how I feel about it because sometimes if I feel really good about the match and I think the crowd was reacting really, really well, but then I watch it back and I start nitpicking everything where the standard person that’s watching isn’t going to be doing that.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"Ruca said she tries to find a balance between learning from her matches and not ruining the feeling of a big performance by overanalyzing every detail.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"quote\",\n    \"text\": \"“So I need to take it for what it is and not for like really nitpicking myself. I think there is a good balance with that. So sometimes I do like to just have a match, enjoy it. I had a lot of fun so like it is what it is. But then, you know, obviously I do like to go back and kind of watch and give myself critiques and ask for, you know, criticism and help with that.”\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"Ruca made it clear that she still wants to watch the match in full when she gets the chance, but her schedule has made that difficult.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"quote\",\n    \"text\": \"“So, I haven’t been had time to watch the whole match back yet, but I do want to see it back. But yeah, I’ve just been very busy.”\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"The title win over Becky Lynch was a major step in Ruca’s WWE main roster career. Still, her comments show that she is not just focused on the celebration. She is also thinking about how to keep improving while learning when to let herself enjoy the moment.\"\n  }\n]\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Sol Ruca ammette di non aver ancora rivisto per intero il match titolato contro Becky Lynch\",\n  \"excerpt_it\": \"Sol Ruca sta ancora celebrando la conquista del WWE Women’s Intercontinental Championship, ma non ha ancora rivisto il match che le ha regalato il titolo.\",\n  \"translations\": {\n    \"b2\": \"Sol Ruca sta ancora cavalcando l'onda del successo dopo aver vinto il WWE Women’s Intercontinental Championship, ma non ha ancora rivisto per intero il match che le ha consegnato il titolo.\",\n    \"b3\": \"Ruca è apparsa su \\\"Inside the Ring\\\" di TMZ dopo aver sconfitto Becky Lynch in Italia. Durante l'intervista, le è stato chiesto se avesse rivisto l'incontro dopo un momento così importante della sua carriera. Ruca ha ammesso di non aver ancora visto il match completo, in parte perché la sua agenda è stata fitta di viaggi, impegni con i media e obblighi verso la WWE. Ruca ha inoltre spiegato che rivedere i propri incontri può talvolta diventare complicato, poiché finisce per essere troppo critica con se stessa invece di godersi il momento.\",\n    \"b4\": \"“Non ho ancora rivisto l’intero match. Sento che a volte guardo i match e altre volte no. Dipende un po’ da come mi sento a riguardo, perché a volte penso che il match sia andato molto bene e che il pubblico abbia reagito alla grande, ma poi lo riguardo e inizio a cercare il pelo nell’uovo, cosa che una persona comune che sta guardando non farebbe.”\",\n    \"b5\": \"Ruca ha dichiarato di cercare un equilibrio tra l'imparare dai propri match e il non rovinare la sensazione di una grande performance analizzando eccessivamente ogni dettaglio.\",\n    \"b6\": \"“Quindi devo prenderlo per quello che è, senza farmi troppe autocritiche. Credo ci sia un buon equilibrio in questo. A volte mi piace semplicemente disputare un match e godermelo. Mi sono divertita molto, quindi è andata così. Ma poi, ovviamente, mi piace tornare indietro, guardare, farmi delle critiche e chiedere consigli e supporto.”\",\n    \"b7\": \"Ruca ha chiarito che desidera ancora vedere il match per intero non appena ne avrà l'opportunità, ma che i suoi impegni l'hanno finora resa una cosa difficile.\",\n    \"b8\": \"“Quindi, non ho ancora avuto il tempo di rivedere l’intero match, ma voglio vederlo. Ma sì, sono stata davvero molto impegnata.”\",\n    \"b9\": \"La vittoria del titolo contro Becky Lynch è stata un passo fondamentale nella carriera di Ruca nel main roster WWE. Tuttavia, le sue parole dimostrano che non è concentrata solo sui festeggiamenti: sta anche riflettendo su come continuare a migliorare, imparando al contempo a concedersi il piacere di godersi il momento.\"\n  },\n  \"notes\": []\n}",
+      "translation_unit_count": 8,
+      "translation_used": true
+    }
+  ],
+  "generated_at": "2026-06-04T10:33:21.082185+00:00",
   "handoff": {
     "errors": 0,
     "extraction_empty": 0,
-    "ready_for_alfred": 0,
+    "ready_for_alfred": 3,
     "translation_pending": 0
   },
   "input": {
-    "menzo_version": "v93_25_wp_ready_guard",
-    "selected_count": 0
+    "menzo_version": "v93_20_selective_softpool",
+    "selected_count": 7
   },
   "mode": "block_translation_prudent_embed_cleanup",
   "policy": {
@@ -49,7 +815,7 @@
     "unwrap_fake_data_blockquotes": true
   },
   "postprocess": {
-    "bob_v93_16_changes": 0
+    "bob_v93_16_changes": 3
   },
   "version": "v93_16_bob_embed_position_quote_cleanup"
 }

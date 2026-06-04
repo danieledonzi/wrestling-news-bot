@@ -1,12 +1,12 @@
 {
   "agent": "Simone",
-  "generated_at": "2026-06-04T10:00:07.334338+00:00",
+  "generated_at": "2026-06-04T10:33:05.718543+00:00",
   "handoff": {
-    "already_published": 0,
+    "already_published": 1,
     "dry_run": 0,
     "errors": 0,
     "published": 0,
-    "wp_not_ready": 1
+    "wp_not_ready": 0
   },
   "input": {
     "ready_reports": 1,
@@ -18,48 +18,35 @@
     "max_reports_per_run": 1,
     "reports_count_as_news": false,
     "simone_is_autonomous_for_reports": true,
-    "skips_wp_probe_when_no_ready_reports": true,
+    "skips_internal_wp_probe_when_jarvis_preflight_down": true,
+    "uses_jarvis_wp_preflight": true,
     "uses_manual_report_workflow_engine": "modules.report_workshop_v92.run_report_workshop"
   },
   "results": [
     {
-      "reason": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2fac71cc90>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=12)'))",
       "report_key": "aew_dynamite_2026_06_03",
-      "source_url": "https://www.wrestlinginc.com/2186292/aew-dynamite-june-3-two-titles-on-line-owen-hart-cup-tournaments-continue/",
-      "status": "wp_not_ready",
-      "title": "AEW Dynamite del 3 giugno 2026 - risultati e momenti salienti"
+      "status": "already_published",
+      "title": "AEW Dynamite del 3 giugno 2026 - risultati e momenti salienti",
+      "wp_link": "https://news.openwrestlingtv.com/aew/aew-dynamite-del-3-giugno-2026-risultati-e-momenti-salienti/",
+      "wp_post_id": 5940
     }
   ],
-  "version": "v93_25_simone_skip_wp_probe_without_ready_reports",
+  "version": "v93_27_simone_uses_jarvis_wp_preflight",
   "wp": {
     "diagnostics": {
       "attempts": [
         {
           "attempt": 1,
           "label": "rest_root",
-          "status": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2fac712710>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=12)'))"
-        },
-        {
-          "attempt": 1,
-          "label": "posts_auth",
-          "status": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2fac71cb50>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=12)'))"
-        },
-        {
-          "attempt": 2,
-          "label": "rest_root",
-          "status": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2fac711bd0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=12)'))"
-        },
-        {
-          "attempt": 2,
-          "label": "posts_auth",
-          "status": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2fac71cc90>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=12)'))"
+          "status": "status_200"
         }
       ],
       "dns": "89.40.173.112",
       "root": "https://news.openwrestlingtv.com"
     },
     "dry_run": false,
-    "ready": false,
-    "reason": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2fac71cc90>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=12)'))"
+    "preflight_reason": "status_200",
+    "ready": true,
+    "reason": "status_200"
   }
 }

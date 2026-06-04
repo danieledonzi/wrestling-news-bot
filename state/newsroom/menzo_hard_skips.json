@@ -728,9 +728,27 @@
       "reason": "softpool_ineligible:ai:Curiosità debole, non impatta la programmazione.; deterministic:strategic:creative,soft_penalty:reacts,recency:fresh_36h",
       "title": "Kane Reacts To Undertaker’s Success Running AAA After WWE Takeover",
       "url": "https://www.ringsidenews.com/kane-reacts-undertakers-success-running-aaa-wwe-takeover/"
+    },
+    {
+      "added_at": "2026-06-04T10:33:12.086821+00:00",
+      "article_type": "duplicate",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2187009/bully-ray-jacob-fatu-bloodline-wwe-clash-in-italy-raw",
+      "reason": "ai_duplicate_event:oba femi clash in italy followup; ai_duplicate_of:c4; strategic:clash in italy,strategic:raw,recency:fresh_36h",
+      "title": "Bully Ray Comments On Jacob Fatu-Bloodline Story In Wake Of WWE Clash In Italy, Raw",
+      "url": "https://www.wrestlinginc.com/2187009/bully-ray-jacob-fatu-bloodline-wwe-clash-in-italy-raw/"
+    },
+    {
+      "added_at": "2026-06-04T10:33:12.086821+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/la-knight-reveals-what-wwe-originally-wanted-name-him",
+      "reason": "softpool_ineligible:ai:Curiosità di basso valore giornalistico (nomenclatura pre-WWE).; deterministic:recency:fresh_12h",
+      "title": "LA Knight Reveals What WWE Originally Wanted to Name Him",
+      "url": "https://www.ringsidenews.com/la-knight-reveals-what-wwe-originally-wanted-name-him/"
     }
   ],
   "ttl_hours": 168,
-  "updated_at": "2026-06-04T07:03:32.574901+00:00",
+  "updated_at": "2026-06-04T10:33:12.086821+00:00",
   "version": "v93_20_selective_softpool"
 }
