@@ -1,6 +1,6 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-04T10:33:31.532383+00:00",
+  "generated_at": "2026-06-04T10:47:47.252913+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
@@ -25,34 +25,34 @@
       "categories": [
         4
       ],
-      "featured_media": 5957,
-      "source_url": "https://www.ringsidenews.com/seth-rollins-blasts-roman-reigns-claiming-he-made-world-heavyweight-title-relevant/",
+      "featured_media": 5964,
+      "source_url": "https://www.wrestlinginc.com/2187106/bully-ray-oba-femi-wwe-raw-evolution-clash-in-italy/",
       "status": "published",
-      "title_it": "Seth Rollins contro Roman Reigns: \"Dire che ha reso rilevante il World Heavyweight Title è una stupidaggine\"",
-      "wp_link": "https://news.openwrestlingtv.com/wwe/seth-rollins-contro-roman-reigns-dire-che-ha-reso-rilevante-il-world-heavyweight-title-e-una-stupidaggine/",
-      "wp_post_id": 5958
+      "title_it": "Bully Ray elogia l'evoluzione di Oba Femi a WWE Raw",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/bully-ray-elogia-levoluzione-di-oba-femi-a-wwe-raw/",
+      "wp_post_id": 5965
     },
     {
       "categories": [
         5
       ],
-      "featured_media": 5959,
-      "source_url": "https://www.wrestlinginc.com/2187197/mercedes-mone-returns-aew-womens-owen-hart-tourney-wild-card-slot/",
+      "featured_media": 5966,
+      "source_url": "https://www.wrestlinginc.com/2187196/kevin-knight-don-callis-family-retains-aew-tnt-title/",
       "status": "published",
-      "title_it": "Mercedes Moné torna in AEW come Wild Card del torneo Owen Hart",
-      "wp_link": "https://news.openwrestlingtv.com/aew/mercedes-mone-torna-in-aew-come-wild-card-del-torneo-owen-hart/",
-      "wp_post_id": 5960
+      "title_it": "Kevin Knight si unisce alla Don Callis Family e mantiene il titolo TNT",
+      "wp_link": "https://news.openwrestlingtv.com/aew/kevin-knight-si-unisce-alla-don-callis-family-e-mantiene-il-titolo-tnt/",
+      "wp_post_id": 5967
     },
     {
       "categories": [
-        4
+        5
       ],
-      "featured_media": 5961,
-      "source_url": "https://www.ringsidenews.com/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet/",
+      "featured_media": 5968,
+      "source_url": "https://www.ringsidenews.com/aew-dynamite-summer-blockbuster-gets-two-owen-hart-tournament-matches-june-10/",
       "status": "published",
-      "title_it": "Sol Ruca ammette di non aver ancora rivisto per intero il match titolato contro Becky Lynch",
-      "wp_link": "https://news.openwrestlingtv.com/wwe/sol-ruca-ammette-di-non-aver-ancora-rivisto-per-intero-il-match-titolato-contro-becky-lynch/",
-      "wp_post_id": 5962
+      "title_it": "AEW Dynamite Summer Blockbuster: annunciati due match per l'Owen Hart Tournament",
+      "wp_link": "https://news.openwrestlingtv.com/aew/aew-dynamite-summer-blockbuster-annunciati-due-match-per-lowen-hart-tournament/",
+      "wp_post_id": 5969
     }
   ],
   "version": "v93_10_publisher_plain_oembed_urls",

@@ -30,19 +30,19 @@
     }
   ],
   "found_urls": 35,
-  "generated_at": "2026-06-04T10:32:59.747761+00:00",
+  "generated_at": "2026-06-04T10:47:14.880139+00:00",
   "handoff": {
-    "already_published_hard_skipped": 0,
+    "already_published_hard_skipped": 3,
     "already_worked": 0,
     "event_factual_news_to_menzo": 2,
     "event_recap_duplicates_blocked_by_report": 0,
-    "event_soft_reactions_to_menzo": 1,
-    "hard_skipped": 24,
-    "menzo_memory_hard_skipped": 23,
+    "event_soft_reactions_to_menzo": 0,
+    "hard_skipped": 29,
+    "menzo_memory_hard_skipped": 25,
     "old_news_hard_skipped": 0,
     "post_show_hard_news_to_menzo": 0,
     "report_candidates_blocked_by_manual_or_history": 0,
-    "to_menzo": 9,
+    "to_menzo": 4,
     "to_simone": 2
   },
   "hard_skipped": [
@@ -56,6 +56,42 @@
       "summary": "The best and the worst of the first AEW Dynamite of June.",
       "title": "AEW Dynamite - 6/3/2026: 3 Things We Hated And 3 We Loved",
       "url": "https://www.wrestlinginc.com/2187224/aew-dynamite-june-3-2026-3-things-hated-loved-opinion-review/"
+    },
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2187197/mercedes-mone-returns-aew-womens-owen-hart-tourney-wild-card-slot",
+      "published": "Thu, 04 Jun 2026 01:51:38 +0000",
+      "published_guard": "publisher_history",
+      "reason": "url_already_published",
+      "source": "wrestlinginc",
+      "summary": "Mercedes Mone is back in AEW after five months away, and she has already reached the semi-finals of the Owen Hart Foundation Tournament.",
+      "title": "Mercedes Mone Returns To AEW In Women's Owen Hart Tourney Wild Card Slot",
+      "url": "https://www.wrestlinginc.com/2187197/mercedes-mone-returns-aew-womens-owen-hart-tourney-wild-card-slot/"
+    },
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/seth-rollins-blasts-roman-reigns-claiming-he-made-world-heavyweight-title-relevant",
+      "published": "Thu, 04 Jun 2026 07:31:33 +0000",
+      "published_guard": "publisher_history",
+      "reason": "url_already_published",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Seth Rollins Blasts Roman Reigns For Claiming He Made World Heavyweight Title Relevant\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/seth-rollins-blasts-roman-reigns-for-claiming-he-made-world-heavyweight-title-relevant-28.jpg?x69566\" width=\"800\" /></p>Seth Rollins is not letting Roman Reigns rewrite history when it comes to the WWE World Heavyweight Championship. While speaking to Prince St. Pizza, Rollins opened up about being forced to relinquish the WWE World Heavyweight Championship after tearing his rotator cuff. Rollins made it clear he never lost the title in a match, which ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/seth-rollins-blasts-roman-reigns-claiming-he-made-world-heavyweight-title-relevant/\" title=\"Seth Rollins Blasts Roman Reigns For Claiming He Made World Heavyweight Title Relevant\">Read more</a>",
+      "title": "Seth Rollins Blasts Roman Reigns For Claiming He Made World Heavyweight Title Relevant",
+      "url": "https://www.ringsidenews.com/seth-rollins-blasts-roman-reigns-claiming-he-made-world-heavyweight-title-relevant/"
+    },
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet",
+      "published": "Thu, 04 Jun 2026 00:00:44 +0000",
+      "published_guard": "publisher_history",
+      "reason": "url_already_published",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Sol Ruca Admits She Hasn’t Watched Full Becky Lynch Title Match Back Yet\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet-15.jpg?x69566\" width=\"800\" /></p>Sol Ruca is still riding high after winning the WWE Women’s Intercontinental Championship, but she has not fully watched the match that gave her the title. Ruca appeared on TMZ’s Inside the Ring after defeating Becky Lynch in Italy. During the interview, she was asked whether she had watched the match back after such a ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet/\" title=\"Sol Ruca Admits She Hasn’t Watched Full Becky Lynch Title Match Back Yet\">Read more</a>",
+      "title": "Sol Ruca Admits She Hasn’t Watched Full Becky Lynch Title Match Back Yet",
+      "url": "https://www.ringsidenews.com/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet/"
     },
     {
       "decision": "hard_skip",
@@ -151,6 +187,19 @@
     {
       "decision": "hard_skip",
       "feed_url": "https://www.wrestlinginc.com/feed/",
+      "menzo_article_type": "duplicate",
+      "menzo_reason": "ai_duplicate_event:oba femi clash in italy followup; ai_duplicate_of:c4; strategic:clash in italy,strategic:raw,recency:fresh_36h",
+      "normalized_url": "https://www.wrestlinginc.com/2187009/bully-ray-jacob-fatu-bloodline-wwe-clash-in-italy-raw",
+      "published": "Wed, 03 Jun 2026 21:12:00 +0000",
+      "reason": "menzo_hard_skip_memory",
+      "source": "wrestlinginc",
+      "summary": "WWE Hall of Famer Bully Ray spoke about his thoughts on the Jacob Fatu-Bloodline storyline following the \"WWE Raw\" episode post-Clash in Italy.",
+      "title": "Bully Ray Comments On Jacob Fatu-Bloodline Story In Wake Of WWE Clash In Italy, Raw",
+      "url": "https://www.wrestlinginc.com/2187009/bully-ray-jacob-fatu-bloodline-wwe-clash-in-italy-raw/"
+    },
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
       "menzo_article_type": "soft_news",
       "menzo_reason": "softpool_ineligible:entity:roman reigns,entity:cody rhodes,entity:the rock,recency:fresh_12h",
       "normalized_url": "https://www.wrestlinginc.com/2187001/nick-khan-cody-rhodes-roman-reigns-wwe-wrestlemania-40",
@@ -238,6 +287,19 @@
       "summary": "AEW's \"Speedball\" Mike Bailey isn't happy with Kevin Knight's attitude, but he still doesn't want his tag team partner to join 'The Dark Side.\"",
       "title": "AEW's Speedball Mike Bailey Doesn't Want Kevin Knight To Join 'The Dark Side'",
       "url": "https://www.wrestlinginc.com/2186633/aew-speedball-mike-bailey-kevin-knight-dark-side/"
+    },
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "menzo_article_type": "low_value",
+      "menzo_reason": "softpool_ineligible:ai:Curiosità di basso valore giornalistico (nomenclatura pre-WWE).; deterministic:recency:fresh_12h",
+      "normalized_url": "https://www.ringsidenews.com/la-knight-reveals-what-wwe-originally-wanted-name-him",
+      "published": "Thu, 04 Jun 2026 08:44:10 +0000",
+      "reason": "menzo_hard_skip_memory",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"LA Knight Reveals What WWE Originally Wanted to Name Him\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/la-knight-reveals-what-wwe-originally-wanted-to-name-him-15.jpg?x69566\" width=\"800\" /></p>LA Knight almost walked into WWE with a very different name, and he’s making it clear he was never going to be happy with it. While speaking to Chris Van Vliet, Knight revealed that WWE originally planned to bring him into NXT in 2021 as Eli Drake, the name he had already used before signing. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/la-knight-reveals-what-wwe-originally-wanted-name-him/\" title=\"LA Knight Reveals What WWE Originally Wanted to Name Him\">Read more</a>",
+      "title": "LA Knight Reveals What WWE Originally Wanted to Name Him",
+      "url": "https://www.ringsidenews.com/la-knight-reveals-what-wwe-originally-wanted-name-him/"
     },
     {
       "decision": "hard_skip",
@@ -357,23 +419,11 @@
       "url": "https://www.ringsidenews.com/triple-hs-backstage-reaction-sol-rucas-wwe-ic-title-win/"
     }
   ],
-  "known_menzo_hard_skip_urls": 81,
-  "known_published_urls": 52,
+  "known_menzo_hard_skip_urls": 83,
+  "known_published_urls": 55,
   "known_state_urls": 10,
   "mode": "sentinel_control_board",
   "news_candidates_for_menzo": [
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2187197/mercedes-mone-returns-aew-womens-owen-hart-tourney-wild-card-slot",
-      "published": "Thu, 04 Jun 2026 01:51:38 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "Mercedes Mone is back in AEW after five months away, and she has already reached the semi-finals of the Owen Hart Foundation Tournament.",
-      "title": "Mercedes Mone Returns To AEW In Women's Owen Hart Tourney Wild Card Slot",
-      "url": "https://www.wrestlinginc.com/2187197/mercedes-mone-returns-aew-womens-owen-hart-tourney-wild-card-slot/"
-    },
     {
       "assigned_to": "Menzo",
       "decision": "news_candidate",
@@ -406,34 +456,6 @@
     {
       "assigned_to": "Menzo",
       "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2187009/bully-ray-jacob-fatu-bloodline-wwe-clash-in-italy-raw",
-      "published": "Wed, 03 Jun 2026 21:12:00 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "WWE Hall of Famer Bully Ray spoke about his thoughts on the Jacob Fatu-Bloodline storyline following the \"WWE Raw\" episode post-Clash in Italy.",
-      "title": "Bully Ray Comments On Jacob Fatu-Bloodline Story In Wake Of WWE Clash In Italy, Raw",
-      "url": "https://www.wrestlinginc.com/2187009/bully-ray-jacob-fatu-bloodline-wwe-clash-in-italy-raw/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "event_news_class": "event_soft_reaction",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/la-knight-reveals-what-wwe-originally-wanted-name-him",
-      "published": "Thu, 04 Jun 2026 08:44:10 +0000",
-      "reason": "requires_menzo_classification",
-      "show_day_policy": "news_before_report_then_report_closure",
-      "show_name": "WWE NXT",
-      "show_report_id": "wwe_nxt",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"LA Knight Reveals What WWE Originally Wanted to Name Him\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/la-knight-reveals-what-wwe-originally-wanted-to-name-him-15.jpg?x69566\" width=\"800\" /></p>LA Knight almost walked into WWE with a very different name, and he’s making it clear he was never going to be happy with it. While speaking to Chris Van Vliet, Knight revealed that WWE originally planned to bring him into NXT in 2021 as Eli Drake, the name he had already used before signing. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/la-knight-reveals-what-wwe-originally-wanted-name-him/\" title=\"LA Knight Reveals What WWE Originally Wanted to Name Him\">Read more</a>",
-      "title": "LA Knight Reveals What WWE Originally Wanted to Name Him",
-      "url": "https://www.ringsidenews.com/la-knight-reveals-what-wwe-originally-wanted-name-him/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "normalized_url": "https://www.ringsidenews.com/la-knight-admits-he-feels-underappreciated-wwe",
       "published": "Thu, 04 Jun 2026 08:18:34 +0000",
@@ -442,18 +464,6 @@
       "summary": "<p><img alt=\"LA Knight Admits He Feels Underappreciated in WWE\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/la-knight-admits-he-feels-underappreciated-in-wwe-08.jpg?x69566\" width=\"800\" /></p>LA Knight has no problem admitting it — he feels like he’s never been fully appreciated in the wrestling business, including WWE. While speaking to Chris Van Vliet, Knight opened up about his wrestling future and made it clear he has no plans to keep doing this forever. Even though he feels physically capable of ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/la-knight-admits-he-feels-underappreciated-wwe/\" title=\"LA Knight Admits He Feels Underappreciated in WWE\">Read more</a>",
       "title": "LA Knight Admits He Feels Underappreciated in WWE",
       "url": "https://www.ringsidenews.com/la-knight-admits-he-feels-underappreciated-wwe/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/seth-rollins-blasts-roman-reigns-claiming-he-made-world-heavyweight-title-relevant",
-      "published": "Thu, 04 Jun 2026 07:31:33 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Seth Rollins Blasts Roman Reigns For Claiming He Made World Heavyweight Title Relevant\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/seth-rollins-blasts-roman-reigns-for-claiming-he-made-world-heavyweight-title-relevant-28.jpg?x69566\" width=\"800\" /></p>Seth Rollins is not letting Roman Reigns rewrite history when it comes to the WWE World Heavyweight Championship. While speaking to Prince St. Pizza, Rollins opened up about being forced to relinquish the WWE World Heavyweight Championship after tearing his rotator cuff. Rollins made it clear he never lost the title in a match, which ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/seth-rollins-blasts-roman-reigns-claiming-he-made-world-heavyweight-title-relevant/\" title=\"Seth Rollins Blasts Roman Reigns For Claiming He Made World Heavyweight Title Relevant\">Read more</a>",
-      "title": "Seth Rollins Blasts Roman Reigns For Claiming He Made World Heavyweight Title Relevant",
-      "url": "https://www.ringsidenews.com/seth-rollins-blasts-roman-reigns-claiming-he-made-world-heavyweight-title-relevant/"
     },
     {
       "assigned_to": "Menzo",
@@ -471,18 +481,6 @@
       "summary": "<p><img alt=\"Spoiler: Big Match Planned for Owen Hart Tournament\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2025/04/spoiler-big-match-planned-for-owen-hart-tournament-45.jpg?x69566\" width=\"800\" /></p>AEW is already loading up next week’s Dynamite Summer Blockbuster. The June 10 episode will feature more Owen Hart Foundation Tournament action, with both the men’s and women’s brackets moving forward. On the men’s side, Swerve Strickland will face Brody King in a semifinal match. The winner will advance to Forbidden Door, where Will Ospreay ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/aew-dynamite-summer-blockbuster-gets-two-owen-hart-tournament-matches-june-10/\" title=\"AEW Dynamite Summer Blockbuster Gets Two Owen Hart Tournament Matches For June 10\">Read more</a>",
       "title": "AEW Dynamite Summer Blockbuster Gets Two Owen Hart Tournament Matches For June 10",
       "url": "https://www.ringsidenews.com/aew-dynamite-summer-blockbuster-gets-two-owen-hart-tournament-matches-june-10/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet",
-      "published": "Thu, 04 Jun 2026 00:00:44 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Sol Ruca Admits She Hasn’t Watched Full Becky Lynch Title Match Back Yet\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet-15.jpg?x69566\" width=\"800\" /></p>Sol Ruca is still riding high after winning the WWE Women’s Intercontinental Championship, but she has not fully watched the match that gave her the title. Ruca appeared on TMZ’s Inside the Ring after defeating Becky Lynch in Italy. During the interview, she was asked whether she had watched the match back after such a ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet/\" title=\"Sol Ruca Admits She Hasn’t Watched Full Becky Lynch Title Match Back Yet\">Read more</a>",
-      "title": "Sol Ruca Admits She Hasn’t Watched Full Becky Lynch Title Match Back Yet",
-      "url": "https://www.ringsidenews.com/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet/"
     }
   ],
   "published_due_reports": {

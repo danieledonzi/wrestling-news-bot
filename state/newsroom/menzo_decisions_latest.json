@@ -1,9 +1,6 @@
 {
   "agent": "Menzo",
   "allowed_urls_for_v92": [
-    "https://www.ringsidenews.com/seth-rollins-blasts-roman-reigns-claiming-he-made-world-heavyweight-title-relevant/",
-    "https://www.wrestlinginc.com/2187197/mercedes-mone-returns-aew-womens-owen-hart-tourney-wild-card-slot/",
-    "https://www.ringsidenews.com/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet/",
     "https://www.wrestlinginc.com/2187106/bully-ray-oba-femi-wwe-raw-evolution-clash-in-italy/",
     "https://www.wrestlinginc.com/2187196/kevin-knight-don-callis-family-retains-aew-tnt-title/",
     "https://www.ringsidenews.com/aew-dynamite-summer-blockbuster-gets-two-owen-hart-tournament-matches-june-10/",
@@ -16,166 +13,81 @@
     "target_max": 30,
     "target_min": 20
   },
-  "generated_at": "2026-06-04T10:33:12.084002+00:00",
+  "generated_at": "2026-06-04T10:47:32.658096+00:00",
   "handoff": {
     "pending": 0,
-    "skipped": 2,
-    "to_bob_or_v92": 7
+    "skipped": 0,
+    "to_bob_or_v92": 4
   },
   "input": {
-    "candidate_count": 9,
+    "candidate_count": 4,
     "massy_version": "v93_24_massy_show_news_before_report_closure"
   },
   "menzo_ai": {
     "attempts": [
-      "gemini-3.1-flash-lite"
+      "gemini-3.1-flash-lite",
+      "gemini-3-flash-preview"
     ],
     "enabled": true,
     "error": "",
-    "model": "gemini-3.1-flash-lite",
-    "prompt_count": 9,
-    "raw_preview": "{\n  \"reviews\": [\n    {\n      \"id\": \"c1\",\n      \"decision\": \"selected\",\n      \"priority\": 9,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"rollins_reigns_title_controversy\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Scontro verbale di alto profilo tra top star sul titolo World Heavyweight, essenziale per la narrativa attuale.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"youtube\", \"x_tweet\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Focus sulle dichiarazioni di Rollins contro Reigns.\"\n      }\n    },\n    {\n      \"id\": \"c2\",\n      \"decision\": \"selected\",\n      \"priority\": 9,\n      \"category_hint\": \"AEW\",\n      \"article_type\": \"hard_news\",\n      \"event_key\": \"mercedes_mone_aew_return\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Il ritorno di Mercedes Mone è una notizia di primo piano per il mercato AEW.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"x_tweet\", \"instagram\"],\n        \"expected_quotes\": false,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"embed tweet di ritorno\"],\n        \"source_specific_notes\": \"Conferma il ritorno e l'inserimento nel torneo.\"\n      }\n    },\n    {\n      \"id\": \"c3\",\n      \"decision\": \"selected\",\n      \"priority\": 6,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"soft_news\",\n      \"event_key\": \"ruca_title_win_reaction\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Aggiornamento sulla nuova campionessa, utile per mantenere il focus sul roster femminile WWE.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"x_tweet\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Articolo breve, focus sulle parole di Ruca.\"\n      }\n    },\n    {\n      \"id\": \"c4\",\n      \"decision\": \"selected\",\n      \"priority\": 7,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"oba_femi_clash_in_italy_followup\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia rilevante per il pubblico italiano (riferimento a Clash in Italy) e crescita di un talento in ascesa.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"youtube\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"analisi di Bully Ray\"],\n        \"source_specific_notes\": \"Enfatizzare il legame con l'evento di Milano.\"\n      }\n    },\n    {\n      \"id\": \"c5\",\n      \"decision\": \"selected\",\n      \"priority\": 6,\n      \"category_hint\": \"AEW\",\n      \"article_type\": \"hard_news\",\n      \"event_key\": \"kevin_knight_turn\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Cambio di stable e difesa titolata, impatto diretto sulla card di Dynamite.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"x_tweet\"],\n        \"expected_quotes\": false,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"dettagli sul nuovo sodalizio\"],\n        \"source_specific_notes\": \"Diretto e sintetico.\"\n      }\n    },\n    {\n      \"id\": \"c6\",\n      \"decision\": \"selected\",\n      \"priority\": 5,\n      \"category_hint\": \"AEW\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"aew_dynamite_announcement\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Informazione di servizio necessaria per annunciare i prossimi incontri del torneo Owen Hart.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"x_tweet\"],\n        \"expected_quotes\": false,\n        \"expected_",
+    "model": "gemini-3-flash-preview",
+    "prompt_count": 4,
+    "raw_preview": "{\n  \"reviews\": [\n    {\n      \"id\": \"c1\",\n      \"decision\": \"selected\",\n      \"priority\": 8,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"soft_news\",\n      \"event_key\": \"oba_femi_clash_italy\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia con fortissimo appeal locale per via del riferimento a 'Clash in Italy' e al match con Brock Lesnar. Il commento di Bully Ray aggiunge prestigio.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"x_tweet\", \"video\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"author_bio\", \"cta\"],\n        \"must_preserve\": [\"citazioni dirette di Bully Ray\", \"riferimenti a Clash in Italy\"],\n        \"source_specific_notes\": \"Punta molto sull'aspetto della crescita di Oba Femi post-evento italiano.\"\n      }\n    },\n    {\n      \"id\": \"c2\",\n      \"decision\": \"selected\",\n      \"priority\": 9,\n      \"category_hint\": \"AEW\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"kevin_knight_don_callis\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Sviluppo narrativo importante: un nuovo membro nella Don Callis Family e una difesa del titolo TNT riuscita.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"x_tweet\", \"video\"],\n        \"expected_quotes\": false,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"share_links\"],\n        \"must_preserve\": [\"video dell'unione alla family\", \"dettaglio del mantenimento del titolo\"],\n        \"source_specific_notes\": \"Assicurati di includere il tweet ufficiale AEW con il video del segmento.\"\n      }\n    },\n    {\n      \"id\": \"c3\",\n      \"decision\": \"selected\",\n      \"priority\": 7,\n      \"category_hint\": \"AEW\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"owen_hart_tournament_june_10\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Aggiornamento sulla card di un evento speciale (Summer Blockbuster) con match di un torneo prestigioso.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"x_tweet\"],\n        \"expected_quotes\": false,\n        \"expected_tables\": true,\n        \"possible_noise\": [\"cta\", \"author_bio\"],\n        \"must_preserve\": [\"nomi dei partecipanti al torneo Owen Hart\"],\n        \"source_specific_notes\": \"Formatta bene i match in programma come elenco o piccola tabella.\"\n      }\n    },\n    {\n      \"id\": \"c4\",\n      \"decision\": \"selected\",\n      \"priority\": 6,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"soft_news\",\n      \"event_key\": \"la_knight_interview_cvv\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Intervista di spessore con Chris Van Vliet. LA Knight è un top name e le sue dichiarazioni sul sentirsi sottovalutato generano engagement.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"youtube\", \"instagram\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"cta\", \"share_links\", \"source_social_bar\"],\n        \"must_preserve\": [\"citazioni virgolettate sull'essere underappreciated\"],\n        \"source_specific_notes\": \"Cerca il video originale di Chris Van Vliet da incorporare.\"\n      }\n    }\n  ]\n}",
     "reviews": [
-      {
-        "article_type": "storyline_development",
-        "bob_brief": {
-          "expected_embeds": [
-            "youtube",
-            "x_tweet"
-          ],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [
-            "citazioni dirette"
-          ],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Focus sulle dichiarazioni di Rollins contro Reigns."
-        },
-        "category_hint": "WWE",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Scontro verbale di alto profilo tra top star sul titolo World Heavyweight, essenziale per la narrativa attuale.",
-        "event_key": "rollins_reigns_title_controversy",
-        "id": "c1",
-        "priority": 9,
-        "priority_label": "medium"
-      },
-      {
-        "article_type": "hard_news",
-        "bob_brief": {
-          "expected_embeds": [
-            "x_tweet",
-            "instagram"
-          ],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [
-            "embed tweet di ritorno"
-          ],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Conferma il ritorno e l'inserimento nel torneo."
-        },
-        "category_hint": "AEW",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Il ritorno di Mercedes Mone è una notizia di primo piano per il mercato AEW.",
-        "event_key": "mercedes_mone_aew_return",
-        "id": "c2",
-        "priority": 9,
-        "priority_label": "medium"
-      },
       {
         "article_type": "soft_news",
         "bob_brief": {
           "expected_embeds": [
-            "x_tweet"
+            "x_tweet",
+            "video"
           ],
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
-            "citazioni dirette"
+            "citazioni dirette di Bully Ray",
+            "riferimenti a Clash in Italy"
           ],
           "possible_noise": [
-            "source_social_bar",
             "author_bio",
-            "cta",
-            "share_links"
+            "cta"
           ],
-          "source_specific_notes": "Articolo breve, focus sulle parole di Ruca."
+          "source_specific_notes": "Punta molto sull'aspetto della crescita di Oba Femi post-evento italiano."
         },
         "category_hint": "WWE",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Aggiornamento sulla nuova campionessa, utile per mantenere il focus sul roster femminile WWE.",
-        "event_key": "ruca_title_win_reaction",
-        "id": "c3",
-        "priority": 6,
+        "editorial_reason": "Notizia con fortissimo appeal locale per via del riferimento a 'Clash in Italy' e al match con Brock Lesnar. Il commento di Bully Ray aggiunge prestigio.",
+        "event_key": "oba_femi_clash_italy",
+        "id": "c1",
+        "priority": 8,
         "priority_label": "medium"
       },
       {
         "article_type": "storyline_development",
         "bob_brief": {
           "expected_embeds": [
-            "youtube"
-          ],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [
-            "analisi di Bully Ray"
-          ],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Enfatizzare il legame con l'evento di Milano."
-        },
-        "category_hint": "WWE",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Notizia rilevante per il pubblico italiano (riferimento a Clash in Italy) e crescita di un talento in ascesa.",
-        "event_key": "oba_femi_clash_in_italy_followup",
-        "id": "c4",
-        "priority": 7,
-        "priority_label": "medium"
-      },
-      {
-        "article_type": "hard_news",
-        "bob_brief": {
-          "expected_embeds": [
-            "x_tweet"
+            "x_tweet",
+            "video"
           ],
           "expected_quotes": false,
           "expected_tables": false,
           "must_preserve": [
-            "dettagli sul nuovo sodalizio"
+            "video dell'unione alla family",
+            "dettaglio del mantenimento del titolo"
           ],
           "possible_noise": [
             "source_social_bar",
-            "author_bio",
-            "cta",
             "share_links"
           ],
-          "source_specific_notes": "Diretto e sintetico."
+          "source_specific_notes": "Assicurati di includere il tweet ufficiale AEW con il video del segmento."
         },
         "category_hint": "AEW",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Cambio di stable e difesa titolata, impatto diretto sulla card di Dynamite.",
-        "event_key": "kevin_knight_turn",
-        "id": "c5",
-        "priority": 6,
+        "editorial_reason": "Sviluppo narrativo importante: un nuovo membro nella Don Callis Family e una difesa del titolo TNT riuscita.",
+        "event_key": "kevin_knight_don_callis",
+        "id": "c2",
+        "priority": 9,
         "priority_label": "medium"
       },
       {
@@ -187,90 +99,50 @@
           "expected_quotes": false,
           "expected_tables": true,
           "must_preserve": [
-            "date e match annunciati"
+            "nomi dei partecipanti al torneo Owen Hart"
           ],
           "possible_noise": [
-            "source_social_bar",
-            "author_bio",
             "cta",
-            "share_links"
+            "author_bio"
           ],
-          "source_specific_notes": "Presentare in modo chiaro i match per la prossima settimana."
+          "source_specific_notes": "Formatta bene i match in programma come elenco o piccola tabella."
         },
         "category_hint": "AEW",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Informazione di servizio necessaria per annunciare i prossimi incontri del torneo Owen Hart.",
-        "event_key": "aew_dynamite_announcement",
-        "id": "c6",
-        "priority": 5,
+        "editorial_reason": "Aggiornamento sulla card di un evento speciale (Summer Blockbuster) con match di un torneo prestigioso.",
+        "event_key": "owen_hart_tournament_june_10",
+        "id": "c3",
+        "priority": 7,
         "priority_label": "medium"
       },
       {
         "article_type": "soft_news",
         "bob_brief": {
           "expected_embeds": [
-            "youtube"
+            "youtube",
+            "instagram"
           ],
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
-            "citazioni dirette"
+            "citazioni virgolettate sull'essere underappreciated"
           ],
           "possible_noise": [
-            "source_social_bar",
-            "author_bio",
             "cta",
-            "share_links"
+            "share_links",
+            "source_social_bar"
           ],
-          "source_specific_notes": "Taglio editoriale sulla percezione del lottatore in WWE."
+          "source_specific_notes": "Cerca il video originale di Chris Van Vliet da incorporare."
         },
         "category_hint": "WWE",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Intervista di interesse generale per i fan di LA Knight, buon contenuto di approfondimento.",
-        "event_key": "la_knight_interview",
-        "id": "c7",
-        "priority": 5,
+        "editorial_reason": "Intervista di spessore con Chris Van Vliet. LA Knight è un top name e le sue dichiarazioni sul sentirsi sottovalutato generano engagement.",
+        "event_key": "la_knight_interview_cvv",
+        "id": "c4",
+        "priority": 6,
         "priority_label": "medium"
-      },
-      {
-        "article_type": "duplicate",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": "Scartato, c4 è più focalizzato sull'evoluzione del talento."
-        },
-        "category_hint": "WWE",
-        "decision": "skip",
-        "duplicate_of": "c4",
-        "editorial_reason": "Commento ridondante post-evento già coperto.",
-        "event_key": "oba_femi_clash_in_italy_followup",
-        "id": "c8",
-        "priority": 2,
-        "priority_label": "medium"
-      },
-      {
-        "article_type": "low_value",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": "Troppo leggero, non prioritario."
-        },
-        "category_hint": "WWE",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Curiosità di basso valore giornalistico (nomenclatura pre-WWE).",
-        "event_key": "la_knight_trivia",
-        "id": "c9",
-        "priority": 1,
-        "priority_label": "low"
       }
     ],
     "used": true
@@ -301,279 +173,68 @@
   },
   "selected": [
     {
-      "age_hours": 3.0260509902777777,
+      "age_hours": 11.426937314722222,
       "agent": "Menzo",
-      "ai_editorial_reason": "Scontro verbale di alto profilo tra top star sul titolo World Heavyweight, essenziale per la narrativa attuale.",
+      "ai_editorial_reason": "Notizia con fortissimo appeal locale per via del riferimento a 'Clash in Italy' e al match con Brock Lesnar. Il commento di Bully Ray aggiunge prestigio.",
       "ai_id": "c1",
-      "ai_priority": 72,
-      "ai_priority_label": "medium",
-      "article_type": "storyline_development",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [
-          "youtube",
-          "x_tweet"
-        ],
-        "expected_quotes": true,
-        "expected_tables": false,
-        "must_preserve": [
-          "citazioni dirette"
-        ],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "Focus sulle dichiarazioni di Rollins contro Reigns."
-      },
-      "category_hint": "WWE",
-      "decision": "selected",
-      "deterministic_score": 92,
-      "evaluated_at": "2026-06-04T10:33:06.783566+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "storyline_development",
-        "bob_brief": {
-          "expected_embeds": [
-            "youtube",
-            "x_tweet"
-          ],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [
-            "citazioni dirette"
-          ],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Focus sulle dichiarazioni di Rollins contro Reigns."
-        },
-        "category_hint": "WWE",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Scontro verbale di alto profilo tra top star sul titolo World Heavyweight, essenziale per la narrativa attuale.",
-        "event_key": "rollins_reigns_title_controversy",
-        "id": "c1",
-        "priority": 9,
-        "priority_label": "medium"
-      },
-      "normalized_url": "https://www.ringsidenews.com/seth-rollins-blasts-roman-reigns-claiming-he-made-world-heavyweight-title-relevant",
-      "priority": "hard",
-      "published": "Thu, 04 Jun 2026 07:31:33 +0000",
-      "reason": "ai:Scontro verbale di alto profilo tra top star sul titolo World Heavyweight, essenziale per la narrativa attuale.; deterministic:hard:championship,entity:roman reigns,entity:seth rollins,recency:fresh_12h",
-      "score": 83,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Seth Rollins Blasts Roman Reigns For Claiming He Made World Heavyweight Title Relevant\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/seth-rollins-blasts-roman-reigns-for-claiming-he-made-world-heavyweight-title-relevant-28.jpg?x69566\" width=\"800\" /></p>Seth Rollins is not letting Roman Reigns rewrite history when it comes to the WWE World Heavyweight Championship. While speaking to Prince St. Pizza, Rollins opened up about being forced to relinquish the WWE World Heavyweight Championship after tearing his rotator cuff. Rollins made it clear he never lost the title in a match, which ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/seth-rollins-blasts-roman-reigns-claiming-he-made-world-heavyweight-title-relevant/\" title=\"Seth Rollins Blasts Roman Reigns For Claiming He Made World Heavyweight Title Relevant\">Read more</a>",
-      "title": "Seth Rollins Blasts Roman Reigns For Claiming He Made World Heavyweight Title Relevant",
-      "url": "https://www.ringsidenews.com/seth-rollins-blasts-roman-reigns-claiming-he-made-world-heavyweight-title-relevant/"
-    },
-    {
-      "age_hours": 8.6913278475,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Il ritorno di Mercedes Mone è una notizia di primo piano per il mercato AEW.",
-      "ai_id": "c2",
-      "ai_priority": 72,
-      "ai_priority_label": "medium",
-      "article_type": "hard_news",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [
-          "x_tweet",
-          "instagram"
-        ],
-        "expected_quotes": false,
-        "expected_tables": false,
-        "must_preserve": [
-          "embed tweet di ritorno"
-        ],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "Conferma il ritorno e l'inserimento nel torneo."
-      },
-      "category_hint": "AEW",
-      "decision": "selected",
-      "deterministic_score": 92,
-      "evaluated_at": "2026-06-04T10:33:06.780253+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "hard_news",
-        "bob_brief": {
-          "expected_embeds": [
-            "x_tweet",
-            "instagram"
-          ],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [
-            "embed tweet di ritorno"
-          ],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Conferma il ritorno e l'inserimento nel torneo."
-        },
-        "category_hint": "AEW",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Il ritorno di Mercedes Mone è una notizia di primo piano per il mercato AEW.",
-        "event_key": "mercedes_mone_aew_return",
-        "id": "c2",
-        "priority": 9,
-        "priority_label": "medium"
-      },
-      "normalized_url": "https://www.wrestlinginc.com/2187197/mercedes-mone-returns-aew-womens-owen-hart-tourney-wild-card-slot",
-      "priority": "hard",
-      "published": "Thu, 04 Jun 2026 01:51:38 +0000",
-      "reason": "ai:Il ritorno di Mercedes Mone è una notizia di primo piano per il mercato AEW.; deterministic:hard:returns,hard:return,entity:mercedes mone,recency:fresh_12h",
-      "score": 83,
-      "source": "wrestlinginc",
-      "summary": "Mercedes Mone is back in AEW after five months away, and she has already reached the semi-finals of the Owen Hart Foundation Tournament.",
-      "title": "Mercedes Mone Returns To AEW In Women's Owen Hart Tourney Wild Card Slot",
-      "url": "https://www.wrestlinginc.com/2187197/mercedes-mone-returns-aew-womens-owen-hart-tourney-wild-card-slot/"
-    },
-    {
-      "age_hours": 10.539662545277778,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Aggiornamento sulla nuova campionessa, utile per mantenere il focus sul roster femminile WWE.",
-      "ai_id": "c3",
       "ai_priority": 72,
       "ai_priority_label": "medium",
       "article_type": "soft_news",
       "assigned_to": "Menzo",
       "bob_brief": {
         "expected_embeds": [
-          "x_tweet"
+          "x_tweet",
+          "video"
         ],
         "expected_quotes": true,
         "expected_tables": false,
         "must_preserve": [
-          "citazioni dirette"
+          "citazioni dirette di Bully Ray",
+          "riferimenti a Clash in Italy"
         ],
         "possible_noise": [
-          "source_social_bar",
           "author_bio",
-          "cta",
-          "share_links"
+          "cta"
         ],
-        "source_specific_notes": "Articolo breve, focus sulle parole di Ruca."
-      },
-      "category_hint": "WWE",
-      "decision": "selected",
-      "deterministic_score": 84,
-      "evaluated_at": "2026-06-04T10:33:06.785165+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "soft_news",
-        "bob_brief": {
-          "expected_embeds": [
-            "x_tweet"
-          ],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [
-            "citazioni dirette"
-          ],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Articolo breve, focus sulle parole di Ruca."
-        },
-        "category_hint": "WWE",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Aggiornamento sulla nuova campionessa, utile per mantenere il focus sul roster femminile WWE.",
-        "event_key": "ruca_title_win_reaction",
-        "id": "c3",
-        "priority": 6,
-        "priority_label": "medium"
-      },
-      "normalized_url": "https://www.ringsidenews.com/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet",
-      "priority": "hard",
-      "published": "Thu, 04 Jun 2026 00:00:44 +0000",
-      "reason": "ai:Aggiornamento sulla nuova campionessa, utile per mantenere il focus sul roster femminile WWE.; deterministic:hard:championship,entity:becky lynch,recency:fresh_12h",
-      "score": 79,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Sol Ruca Admits She Hasn’t Watched Full Becky Lynch Title Match Back Yet\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet-15.jpg?x69566\" width=\"800\" /></p>Sol Ruca is still riding high after winning the WWE Women’s Intercontinental Championship, but she has not fully watched the match that gave her the title. Ruca appeared on TMZ’s Inside the Ring after defeating Becky Lynch in Italy. During the interview, she was asked whether she had watched the match back after such a ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet/\" title=\"Sol Ruca Admits She Hasn’t Watched Full Becky Lynch Title Match Back Yet\">Read more</a>",
-      "title": "Sol Ruca Admits She Hasn’t Watched Full Becky Lynch Title Match Back Yet",
-      "url": "https://www.ringsidenews.com/sol-ruca-admits-she-hasnt-watched-full-becky-lynch-title-match-back-yet/"
-    },
-    {
-      "age_hours": 11.190216897777777,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Notizia rilevante per il pubblico italiano (riferimento a Clash in Italy) e crescita di un talento in ascesa.",
-      "ai_id": "c4",
-      "ai_priority": 72,
-      "ai_priority_label": "medium",
-      "article_type": "storyline_development",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [
-          "youtube"
-        ],
-        "expected_quotes": true,
-        "expected_tables": false,
-        "must_preserve": [
-          "analisi di Bully Ray"
-        ],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "Enfatizzare il legame con l'evento di Milano."
+        "source_specific_notes": "Punta molto sull'aspetto della crescita di Oba Femi post-evento italiano."
       },
       "category_hint": "WWE",
       "decision": "selected",
       "deterministic_score": 82,
-      "evaluated_at": "2026-06-04T10:33:06.780834+00:00",
+      "evaluated_at": "2026-06-04T10:47:18.974334+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
       "menzo_ai_review": {
-        "article_type": "storyline_development",
+        "article_type": "soft_news",
         "bob_brief": {
           "expected_embeds": [
-            "youtube"
+            "x_tweet",
+            "video"
           ],
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
-            "analisi di Bully Ray"
+            "citazioni dirette di Bully Ray",
+            "riferimenti a Clash in Italy"
           ],
           "possible_noise": [
-            "source_social_bar",
             "author_bio",
-            "cta",
-            "share_links"
+            "cta"
           ],
-          "source_specific_notes": "Enfatizzare il legame con l'evento di Milano."
+          "source_specific_notes": "Punta molto sull'aspetto della crescita di Oba Femi post-evento italiano."
         },
         "category_hint": "WWE",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Notizia rilevante per il pubblico italiano (riferimento a Clash in Italy) e crescita di un talento in ascesa.",
-        "event_key": "oba_femi_clash_in_italy_followup",
-        "id": "c4",
-        "priority": 7,
+        "editorial_reason": "Notizia con fortissimo appeal locale per via del riferimento a 'Clash in Italy' e al match con Brock Lesnar. Il commento di Bully Ray aggiunge prestigio.",
+        "event_key": "oba_femi_clash_italy",
+        "id": "c1",
+        "priority": 8,
         "priority_label": "medium"
       },
       "normalized_url": "https://www.wrestlinginc.com/2187106/bully-ray-oba-femi-wwe-raw-evolution-clash-in-italy",
       "priority": "hard",
       "published": "Wed, 03 Jun 2026 23:21:42 +0000",
-      "reason": "ai:Notizia rilevante per il pubblico italiano (riferimento a Clash in Italy) e crescita di un talento in ascesa.; deterministic:strategic:clash in italy,strategic:raw,entity:brock lesnar,entity:oba femi,recency:fresh_12h",
+      "reason": "ai:Notizia con fortissimo appeal locale per via del riferimento a 'Clash in Italy' e al match con Brock Lesnar. Il commento di Bully Ray aggiunge prestigio.; deterministic:strategic:clash in italy,strategic:raw,entity:brock lesnar,entity:oba femi,recency:fresh_12h",
       "score": 78,
       "source": "wrestlinginc",
       "summary": "WWE Hall of Famer Bully Ray explained how he liked what he described as the \"evolution\" of Oba Femi on \"WWE Raw\" following his loss to Brock Lesnar.",
@@ -581,70 +242,70 @@
       "url": "https://www.wrestlinginc.com/2187106/bully-ray-oba-femi-wwe-raw-evolution-clash-in-italy/"
     },
     {
-      "age_hours": 9.038272346388888,
+      "age_hours": 9.27499277777778,
       "agent": "Menzo",
-      "ai_editorial_reason": "Cambio di stable e difesa titolata, impatto diretto sulla card di Dynamite.",
-      "ai_id": "c5",
+      "ai_editorial_reason": "Sviluppo narrativo importante: un nuovo membro nella Don Callis Family e una difesa del titolo TNT riuscita.",
+      "ai_id": "c2",
       "ai_priority": 72,
       "ai_priority_label": "medium",
-      "article_type": "hard_news",
+      "article_type": "storyline_development",
       "assigned_to": "Menzo",
       "bob_brief": {
         "expected_embeds": [
-          "x_tweet"
+          "x_tweet",
+          "video"
         ],
         "expected_quotes": false,
         "expected_tables": false,
         "must_preserve": [
-          "dettagli sul nuovo sodalizio"
+          "video dell'unione alla family",
+          "dettaglio del mantenimento del titolo"
         ],
         "possible_noise": [
           "source_social_bar",
-          "author_bio",
-          "cta",
           "share_links"
         ],
-        "source_specific_notes": "Diretto e sintetico."
+        "source_specific_notes": "Assicurati di includere il tweet ufficiale AEW con il video del segmento."
       },
       "category_hint": "AEW",
       "decision": "selected",
       "deterministic_score": 76,
-      "evaluated_at": "2026-06-04T10:33:06.780449+00:00",
+      "evaluated_at": "2026-06-04T10:47:18.974002+00:00",
       "event_news_class": "event_factual_news",
       "feed_url": "https://www.wrestlinginc.com/feed/",
       "massive_editorial_boost": "show_factual_core",
       "menzo_ai_review": {
-        "article_type": "hard_news",
+        "article_type": "storyline_development",
         "bob_brief": {
           "expected_embeds": [
-            "x_tweet"
+            "x_tweet",
+            "video"
           ],
           "expected_quotes": false,
           "expected_tables": false,
           "must_preserve": [
-            "dettagli sul nuovo sodalizio"
+            "video dell'unione alla family",
+            "dettaglio del mantenimento del titolo"
           ],
           "possible_noise": [
             "source_social_bar",
-            "author_bio",
-            "cta",
             "share_links"
           ],
-          "source_specific_notes": "Diretto e sintetico."
+          "source_specific_notes": "Assicurati di includere il tweet ufficiale AEW con il video del segmento."
         },
         "category_hint": "AEW",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Cambio di stable e difesa titolata, impatto diretto sulla card di Dynamite.",
-        "event_key": "kevin_knight_turn",
-        "id": "c5",
-        "priority": 6,
+        "editorial_reason": "Sviluppo narrativo importante: un nuovo membro nella Don Callis Family e una difesa del titolo TNT riuscita.",
+        "event_key": "kevin_knight_don_callis",
+        "id": "c2",
+        "priority": 9,
         "priority_label": "medium"
       },
       "normalized_url": "https://www.wrestlinginc.com/2187196/kevin-knight-don-callis-family-retains-aew-tnt-title",
       "priority": "soft",
       "published": "Thu, 04 Jun 2026 01:30:49 +0000",
-      "reason": "ai:Cambio di stable e difesa titolata, impatto diretto sulla card di Dynamite.; deterministic:hard:championship,recency:fresh_12h",
+      "reason": "ai:Sviluppo narrativo importante: un nuovo membro nella Don Callis Family e una difesa del titolo TNT riuscita.; deterministic:hard:championship,recency:fresh_12h",
       "score": 74,
       "show_day_policy": "news_before_report_then_report_closure",
       "show_name": "AEW Dynamite",
@@ -655,10 +316,10 @@
       "url": "https://www.wrestlinginc.com/2187196/kevin-knight-don-callis-family-retains-aew-tnt-title/"
     },
     {
-      "age_hours": 7.951328984722222,
+      "age_hours": 8.188048899444444,
       "agent": "Menzo",
-      "ai_editorial_reason": "Informazione di servizio necessaria per annunciare i prossimi incontri del torneo Owen Hart.",
-      "ai_id": "c6",
+      "ai_editorial_reason": "Aggiornamento sulla card di un evento speciale (Summer Blockbuster) con match di un torneo prestigioso.",
+      "ai_id": "c3",
       "ai_priority": 72,
       "ai_priority_label": "medium",
       "article_type": "storyline_development",
@@ -670,20 +331,18 @@
         "expected_quotes": false,
         "expected_tables": true,
         "must_preserve": [
-          "date e match annunciati"
+          "nomi dei partecipanti al torneo Owen Hart"
         ],
         "possible_noise": [
-          "source_social_bar",
-          "author_bio",
           "cta",
-          "share_links"
+          "author_bio"
         ],
-        "source_specific_notes": "Presentare in modo chiaro i match per la prossima settimana."
+        "source_specific_notes": "Formatta bene i match in programma come elenco o piccola tabella."
       },
       "category_hint": "AEW",
       "decision": "selected",
       "deterministic_score": 74,
-      "evaluated_at": "2026-06-04T10:33:06.784347+00:00",
+      "evaluated_at": "2026-06-04T10:47:18.976040+00:00",
       "event_news_class": "event_factual_news",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "massive_editorial_boost": "show_factual_core",
@@ -696,29 +355,27 @@
           "expected_quotes": false,
           "expected_tables": true,
           "must_preserve": [
-            "date e match annunciati"
+            "nomi dei partecipanti al torneo Owen Hart"
           ],
           "possible_noise": [
-            "source_social_bar",
-            "author_bio",
             "cta",
-            "share_links"
+            "author_bio"
           ],
-          "source_specific_notes": "Presentare in modo chiaro i match per la prossima settimana."
+          "source_specific_notes": "Formatta bene i match in programma come elenco o piccola tabella."
         },
         "category_hint": "AEW",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Informazione di servizio necessaria per annunciare i prossimi incontri del torneo Owen Hart.",
-        "event_key": "aew_dynamite_announcement",
-        "id": "c6",
-        "priority": 5,
+        "editorial_reason": "Aggiornamento sulla card di un evento speciale (Summer Blockbuster) con match di un torneo prestigioso.",
+        "event_key": "owen_hart_tournament_june_10",
+        "id": "c3",
+        "priority": 7,
         "priority_label": "medium"
       },
       "normalized_url": "https://www.ringsidenews.com/aew-dynamite-summer-blockbuster-gets-two-owen-hart-tournament-matches-june-10",
       "priority": "soft",
       "published": "Thu, 04 Jun 2026 02:36:02 +0000",
-      "reason": "ai:Informazione di servizio necessaria per annunciare i prossimi incontri del torneo Owen Hart.; deterministic:hard:bracket,recency:fresh_12h",
+      "reason": "ai:Aggiornamento sulla card di un evento speciale (Summer Blockbuster) con match di un torneo prestigioso.; deterministic:hard:bracket,recency:fresh_12h",
       "score": 73,
       "show_day_policy": "news_before_report_then_report_closure",
       "show_name": "AEW Dynamite",
@@ -729,68 +386,68 @@
       "url": "https://www.ringsidenews.com/aew-dynamite-summer-blockbuster-gets-two-owen-hart-tournament-matches-june-10/"
     },
     {
-      "age_hours": 2.2424396597222223,
+      "age_hours": 2.479159778333333,
       "agent": "Menzo",
-      "ai_editorial_reason": "Intervista di interesse generale per i fan di LA Knight, buon contenuto di approfondimento.",
-      "ai_id": "c7",
+      "ai_editorial_reason": "Intervista di spessore con Chris Van Vliet. LA Knight è un top name e le sue dichiarazioni sul sentirsi sottovalutato generano engagement.",
+      "ai_id": "c4",
       "ai_priority": 72,
       "ai_priority_label": "medium",
       "article_type": "soft_news",
       "assigned_to": "Menzo",
       "bob_brief": {
         "expected_embeds": [
-          "youtube"
+          "youtube",
+          "instagram"
         ],
         "expected_quotes": true,
         "expected_tables": false,
         "must_preserve": [
-          "citazioni dirette"
+          "citazioni virgolettate sull'essere underappreciated"
         ],
         "possible_noise": [
-          "source_social_bar",
-          "author_bio",
           "cta",
-          "share_links"
+          "share_links",
+          "source_social_bar"
         ],
-        "source_specific_notes": "Taglio editoriale sulla percezione del lottatore in WWE."
+        "source_specific_notes": "Cerca il video originale di Chris Van Vliet da incorporare."
       },
       "category_hint": "WWE",
       "decision": "selected",
       "deterministic_score": 72,
-      "evaluated_at": "2026-06-04T10:33:06.782777+00:00",
+      "evaluated_at": "2026-06-04T10:47:18.975204+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "menzo_ai_review": {
         "article_type": "soft_news",
         "bob_brief": {
           "expected_embeds": [
-            "youtube"
+            "youtube",
+            "instagram"
           ],
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
-            "citazioni dirette"
+            "citazioni virgolettate sull'essere underappreciated"
           ],
           "possible_noise": [
-            "source_social_bar",
-            "author_bio",
             "cta",
-            "share_links"
+            "share_links",
+            "source_social_bar"
           ],
-          "source_specific_notes": "Taglio editoriale sulla percezione del lottatore in WWE."
+          "source_specific_notes": "Cerca il video originale di Chris Van Vliet da incorporare."
         },
         "category_hint": "WWE",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Intervista di interesse generale per i fan di LA Knight, buon contenuto di approfondimento.",
-        "event_key": "la_knight_interview",
-        "id": "c7",
-        "priority": 5,
+        "editorial_reason": "Intervista di spessore con Chris Van Vliet. LA Knight è un top name e le sue dichiarazioni sul sentirsi sottovalutato generano engagement.",
+        "event_key": "la_knight_interview_cvv",
+        "id": "c4",
+        "priority": 6,
         "priority_label": "medium"
       },
       "normalized_url": "https://www.ringsidenews.com/la-knight-admits-he-feels-underappreciated-wwe",
       "priority": "soft",
       "published": "Thu, 04 Jun 2026 08:18:34 +0000",
-      "reason": "selected_overflow:ai:Intervista di interesse generale per i fan di LA Knight, buon contenuto di approfondimento.; deterministic:strategic:plans,strategic:future,recency:fresh_12h",
+      "reason": "ai:Intervista di spessore con Chris Van Vliet. LA Knight è un top name e le sue dichiarazioni sul sentirsi sottovalutato generano engagement.; deterministic:strategic:plans,strategic:future,recency:fresh_12h",
       "score": 72,
       "source": "ringsidenews",
       "summary": "<p><img alt=\"LA Knight Admits He Feels Underappreciated in WWE\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/la-knight-admits-he-feels-underappreciated-in-wwe-08.jpg?x69566\" width=\"800\" /></p>LA Knight has no problem admitting it — he feels like he’s never been fully appreciated in the wrestling business, including WWE. While speaking to Chris Van Vliet, Knight opened up about his wrestling future and made it clear he has no plans to keep doing this forever. Even though he feels physically capable of ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/la-knight-admits-he-feels-underappreciated-wwe/\" title=\"LA Knight Admits He Feels Underappreciated in WWE\">Read more</a>",
@@ -798,114 +455,6 @@
       "url": "https://www.ringsidenews.com/la-knight-admits-he-feels-underappreciated-wwe/"
     }
   ],
-  "skipped": [
-    {
-      "age_hours": 13.351883648333333,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Commento ridondante post-evento già coperto.",
-      "ai_id": "c8",
-      "ai_priority": 72,
-      "ai_priority_label": "medium",
-      "article_type": "duplicate",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": false,
-        "expected_tables": false,
-        "must_preserve": [],
-        "possible_noise": [],
-        "source_specific_notes": "Scartato, c4 è più focalizzato sull'evoluzione del talento."
-      },
-      "category_hint": "WWE",
-      "decision": "skip",
-      "deterministic_score": 62,
-      "duplicate_of": "c4",
-      "evaluated_at": "2026-06-04T10:33:06.781136+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "duplicate",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": "Scartato, c4 è più focalizzato sull'evoluzione del talento."
-        },
-        "category_hint": "WWE",
-        "decision": "skip",
-        "duplicate_of": "c4",
-        "editorial_reason": "Commento ridondante post-evento già coperto.",
-        "event_key": "oba_femi_clash_in_italy_followup",
-        "id": "c8",
-        "priority": 2,
-        "priority_label": "medium"
-      },
-      "normalized_url": "https://www.wrestlinginc.com/2187009/bully-ray-jacob-fatu-bloodline-wwe-clash-in-italy-raw",
-      "priority": "skip",
-      "published": "Wed, 03 Jun 2026 21:12:00 +0000",
-      "reason": "ai_duplicate_event:oba femi clash in italy followup; ai_duplicate_of:c4; strategic:clash in italy,strategic:raw,recency:fresh_36h",
-      "score": 66,
-      "source": "wrestlinginc",
-      "summary": "WWE Hall of Famer Bully Ray spoke about his thoughts on the Jacob Fatu-Bloodline storyline following the \"WWE Raw\" episode post-Clash in Italy.",
-      "title": "Bully Ray Comments On Jacob Fatu-Bloodline Story In Wake Of WWE Clash In Italy, Raw",
-      "url": "https://www.wrestlinginc.com/2187009/bully-ray-jacob-fatu-bloodline-wwe-clash-in-italy-raw/"
-    },
-    {
-      "age_hours": 1.8157727747222223,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Curiosità di basso valore giornalistico (nomenclatura pre-WWE).",
-      "ai_id": "c9",
-      "ai_priority": 48,
-      "ai_priority_label": "low",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": false,
-        "expected_tables": false,
-        "must_preserve": [],
-        "possible_noise": [],
-        "source_specific_notes": "Troppo leggero, non prioritario."
-      },
-      "category_hint": "WWE",
-      "decision": "skip",
-      "deterministic_score": 38,
-      "evaluated_at": "2026-06-04T10:33:06.781990+00:00",
-      "event_news_class": "event_soft_reaction",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "low_value",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": "Troppo leggero, non prioritario."
-        },
-        "category_hint": "WWE",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Curiosità di basso valore giornalistico (nomenclatura pre-WWE).",
-        "event_key": "la_knight_trivia",
-        "id": "c9",
-        "priority": 1,
-        "priority_label": "low"
-      },
-      "normalized_url": "https://www.ringsidenews.com/la-knight-reveals-what-wwe-originally-wanted-name-him",
-      "priority": "skip",
-      "published": "Thu, 04 Jun 2026 08:44:10 +0000",
-      "reason": "softpool_ineligible:ai:Curiosità di basso valore giornalistico (nomenclatura pre-WWE).; deterministic:recency:fresh_12h",
-      "score": 42,
-      "show_day_policy": "news_before_report_then_report_closure",
-      "show_name": "WWE NXT",
-      "show_report_id": "wwe_nxt",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"LA Knight Reveals What WWE Originally Wanted to Name Him\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/la-knight-reveals-what-wwe-originally-wanted-to-name-him-15.jpg?x69566\" width=\"800\" /></p>LA Knight almost walked into WWE with a very different name, and he’s making it clear he was never going to be happy with it. While speaking to Chris Van Vliet, Knight revealed that WWE originally planned to bring him into NXT in 2021 as Eli Drake, the name he had already used before signing. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/la-knight-reveals-what-wwe-originally-wanted-name-him/\" title=\"LA Knight Reveals What WWE Originally Wanted to Name Him\">Read more</a>",
-      "title": "LA Knight Reveals What WWE Originally Wanted to Name Him",
-      "url": "https://www.ringsidenews.com/la-knight-reveals-what-wwe-originally-wanted-name-him/"
-    }
-  ],
+  "skipped": [],
   "version": "v93_20_selective_softpool"
 }

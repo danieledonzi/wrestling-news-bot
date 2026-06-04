@@ -135,10 +135,22 @@ Published reports: -
 Massy: to_simone=2 to_menzo=9 hard_skip=24 menzo_skip=23 old_skip=0
 Simone: ready=1 reports_published=0 wp_not_ready=0
 Menzo: selected=7 pending=0 skipped=2 ai=True model=gemini-3.1-flash-lite
-Bob: ready=3 errors=0 changes={'bob_v93_16_changes': 3, 'bob_brief_warnings_added': 1}
+Bob: ready=3 errors=0 changes={'bob_brief_warnings_added': 1, 'bob_v93_16_changes': 3}
 Alfred: approved=3 warnings=2 blockers=0
 Publisher: published=3 wp_not_ready=0 errors=0
 Archivista: status=ok anomalies=0
 Selected: Seth Rollins Blasts Roman Reigns For Claiming He Made World Heavyweight Title Relevant, Mercedes Mone Returns To AEW In Women's Owen Hart Tourney Wild Card Slot, Sol Ruca Admits She Hasn’t Watched Full Becky Lynch Title Match Back Yet, Bully Ray Liked The 'Evolution' Of Oba Femi On WWE Raw Following Clash In Italy Loss, Kevin Knight Joins Don Callis Family, Retains AEW TNT Title, AEW Dynamite Summer Blockbuster Gets Two Owen Hart Tournament Matches For June 10
 Published news: Seth Rollins contro Roman Reigns: "Dire che ha reso rilevante il World Heavyweight Title è una stupidaggine", Mercedes Moné torna in AEW come Wild Card del torneo Owen Hart, Sol Ruca ammette di non aver ancora rivisto per intero il match titolato contro Becky Lynch
+Published reports: -
+
+===== NEWSROOM MASTER RUN 2026-06-04T10:47:14.391675+00:00 | v93_20_process_refinements | run_id=26947016537 =====
+Massy: to_simone=2 to_menzo=4 hard_skip=29 menzo_skip=25 old_skip=0
+Simone: ready=1 reports_published=0 wp_not_ready=0
+Menzo: selected=4 pending=0 skipped=0 ai=True model=gemini-3-flash-preview
+Bob: ready=3 errors=0 changes={'bob_v93_27_changes': 0, 'bob_v93_16_changes': 0, 'bob_brief_warnings_added': 3}
+Alfred: approved=3 warnings=3 blockers=0
+Publisher: published=3 wp_not_ready=0 errors=0
+Archivista: status=ok anomalies=0
+Selected: Bully Ray Liked The 'Evolution' Of Oba Femi On WWE Raw Following Clash In Italy Loss, Kevin Knight Joins Don Callis Family, Retains AEW TNT Title, AEW Dynamite Summer Blockbuster Gets Two Owen Hart Tournament Matches For June 10, LA Knight Admits He Feels Underappreciated in WWE
+Published news: Bully Ray elogia l'evoluzione di Oba Femi a WWE Raw, Kevin Knight si unisce alla Don Callis Family e mantiene il titolo TNT, AEW Dynamite Summer Blockbuster: annunciati due match per l'Owen Hart Tournament
 Published reports: -
