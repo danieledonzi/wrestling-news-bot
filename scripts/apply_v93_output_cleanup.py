@@ -1,5 +1,7 @@
 from pathlib import Path
 import re
+import subprocess
+import sys
 
 # Bob: only original source blockquote tags become quote blocks. Quotation marks
 # inside normal paragraphs remain normal text to avoid false blockquote styling.
@@ -120,3 +122,11 @@ def convert_plain_embed_urls_to_blocks(content: str) -> str:
     print('[V93 OUTPUT CLEANUP] Publisher embed cleanup applicato')
 else:
     print('[V93 OUTPUT CLEANUP] Publisher gia applicato')
+
+# v93.29: the runner may still fall back to agents.publisher in some runtime states.
+# Apply the same embed conversion directly to the base Publisher so the fix is binding.
+base_patch = Path('scripts/apply_v93_base_publisher_embed_patch.py')
+if base_patch.exists():
+    subprocess.run([sys.executable, str(base_patch)], check=True)
+else:
+    print('[V93 OUTPUT CLEANUP] base Publisher embed patch non presente')
