@@ -14,7 +14,7 @@ ARTIFACT_DIR = ROOT / "artifacts" / "newsroom"
 BOB_ARTICLES_FILE = NEWSROOM_STATE_DIR / "bob_articles_latest.json"
 ARTIFACT_BOB_FILE = ARTIFACT_DIR / "bob_articles.json"
 
-VERSION = "v93_16_bob_embed_position_quote_cleanup"
+VERSION = "v93_27_source_blockquote_only_no_inline_quote_split"
 
 RESIDUAL_BIO_PATTERNS = [
     re.compile(r"\b(felix\s+upton|steve\s+carrier)\b.*\b(ringside\s+news|esperienza|fondatore|giornalismo|wrestling)\b", re.I),
@@ -28,7 +28,6 @@ CTA_PATTERNS = [
     re.compile(r"\bfateci\s+sapere\b|\bdicci\s+la\s+tua\b|\bcosa\s+ne\s+pensate\b", re.I),
     re.compile(r"\bcommenti\s+qui\s+sotto\b|\blascia\s+un\s+commento\b", re.I),
 ]
-QUOTE_RE = re.compile(r"(.*?)([“\"]([^”\"]{35,})[”\"])(.*)", re.S)
 P_RE = re.compile(r"<p>(.*?)</p>", re.S | re.I)
 BLOCKQUOTE_RE = re.compile(r"<blockquote>(.*?)</blockquote>", re.S | re.I)
 EMBED_LINE_RE = re.compile(r"(?m)^\s*(https?://(?:www\.)?(?:x\.com|twitter\.com|instagram\.com|youtube\.com|youtu\.be|tiktok\.com|threads\.net|facebook\.com|bsky\.app)/\S+)\s*$", re.I)
@@ -60,26 +59,6 @@ def should_remove_paragraph(inner: str) -> str:
     return ""
 
 
-def split_quote_paragraph(inner: str) -> str | None:
-    text = html.unescape(re.sub(r"<[^>]+>", "", inner or "")).strip()
-    m = QUOTE_RE.match(text)
-    if not m:
-        return None
-    before, quote, _quote_inner, after = m.groups()
-    before = before.strip()
-    quote = quote.strip()
-    after = after.strip()
-    if not quote or len(_quote_inner.strip()) < 35:
-        return None
-    parts: list[str] = []
-    if before:
-        parts.append(f"<p>{html.escape(before)}</p>")
-    parts.append(f"<blockquote>{html.escape(quote)}</blockquote>")
-    if after:
-        parts.append(f"<p>{html.escape(after)}</p>")
-    return "\n".join(parts)
-
-
 def move_leading_embeds_after_first_paragraph(body_html: str) -> tuple[str, list[dict[str, str]]]:
     changes: list[dict[str, str]] = []
     text = body_html or ""
@@ -109,7 +88,6 @@ def unwrap_probable_fake_blockquotes(body_html: str) -> tuple[str, list[dict[str
     def repl(match: re.Match[str]) -> str:
         inner = match.group(1)
         text = clean_text(inner)
-        # Keep real quotation blocks. Unwrap factual/data paragraphs that Bob misclassified as quote.
         starts_with_quote = text.startswith(("\"", "“", "'"))
         ends_with_quote = text.endswith(("\"", "”", "'"))
         if starts_with_quote or ends_with_quote:
@@ -133,12 +111,10 @@ def postprocess_body(body_html: str) -> tuple[str, list[dict[str, str]]]:
         inner = match.group(1)
         remove_reason = should_remove_paragraph(inner)
         if remove_reason:
-            changes.append({"code": remove_reason, "severity": "info", "message": "Paragrafo residuo rimosso da Bob v93.16.", "evidence": clean_text(inner)[:300]})
+            changes.append({"code": remove_reason, "severity": "info", "message": "Paragrafo residuo rimosso da Bob v93.27.", "evidence": clean_text(inner)[:300]})
             return ""
-        split = split_quote_paragraph(inner)
-        if split:
-            changes.append({"code": "inline_quote_split", "severity": "info", "message": "Citazione tra virgolette separata in blockquote dedicato.", "evidence": clean_text(inner)[:300]})
-            return split
+        # v93.27: do not split inline quotation marks into blockquotes.
+        # Only blocks that were already <blockquote> in the source remain styled as quotes.
         return match.group(0)
 
     body_html = P_RE.sub(repl, body_html or "")
@@ -160,11 +136,14 @@ def run_bob(menzo_decision: dict[str, Any] | None = None) -> dict[str, Any]:
             total_changes += len(changes)
     result["version"] = VERSION
     result.setdefault("policy", {})["residual_author_bio_cleanup"] = True
-    result.setdefault("policy", {})["split_inline_quoted_text"] = True
+    result.setdefault("policy", {})["split_inline_quoted_text"] = False
+    result.setdefault("policy", {})["source_blockquote_only"] = True
     result.setdefault("policy", {})["move_leading_embeds_after_first_paragraph"] = True
     result.setdefault("policy", {})["unwrap_fake_data_blockquotes"] = True
+    result.setdefault("postprocess", {})["bob_v93_27_changes"] = total_changes
+    # Backward-compatible metric used by the master log.
     result.setdefault("postprocess", {})["bob_v93_16_changes"] = total_changes
     write_json(ARTIFACT_BOB_FILE, result)
     write_json(BOB_ARTICLES_FILE, result)
-    print(f"[BOB v93.16] Cleanup finale applicato | changes={total_changes}", flush=True)
+    print(f"[BOB v93.27] Cleanup finale applicato | changes={total_changes}", flush=True)
     return result
