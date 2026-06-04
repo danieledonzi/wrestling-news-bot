@@ -1,15 +1,15 @@
 {
   "agent": "Simone",
-  "generated_at": "2026-06-04T02:05:22.955220+00:00",
+  "generated_at": "2026-06-04T07:03:25.546947+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
     "errors": 0,
-    "published": 0,
+    "published": 1,
     "wp_not_ready": 0
   },
   "input": {
-    "ready_reports": 0,
+    "ready_reports": 1,
     "simone_version": "v93_3_simone_report_director"
   },
   "mode": "autonomous_report_publisher_v92_workshop",
@@ -21,12 +21,35 @@
     "skips_wp_probe_when_no_ready_reports": true,
     "uses_manual_report_workflow_engine": "modules.report_workshop_v92.run_report_workshop"
   },
-  "results": [],
+  "results": [
+    {
+      "categories": [
+        "Editoriali",
+        "AEW"
+      ],
+      "report_key": "aew_dynamite_2026_06_03",
+      "source_url": "https://www.wrestlinginc.com/2186292/aew-dynamite-june-3-two-titles-on-line-owen-hart-cup-tournaments-continue/",
+      "status": "published",
+      "title": "AEW Dynamite del 3 giugno 2026 - risultati e momenti salienti",
+      "wp_link": "https://news.openwrestlingtv.com/aew/aew-dynamite-del-3-giugno-2026-risultati-e-momenti-salienti/",
+      "wp_post_id": 5940
+    }
+  ],
   "version": "v93_25_simone_skip_wp_probe_without_ready_reports",
   "wp": {
-    "diagnostics": {},
+    "diagnostics": {
+      "attempts": [
+        {
+          "attempt": 1,
+          "label": "rest_root",
+          "status": "status_200"
+        }
+      ],
+      "dns": "89.40.173.112",
+      "root": "https://news.openwrestlingtv.com"
+    },
     "dry_run": false,
-    "ready": null,
-    "reason": "skipped_no_ready_reports"
+    "ready": true,
+    "reason": "status_200"
   }
 }

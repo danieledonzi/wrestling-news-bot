@@ -1,12 +1,12 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-04T02:06:01.365599+00:00",
+  "generated_at": "2026-06-04T07:03:56.962856+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
     "errors": 0,
-    "published": 0,
-    "wp_not_ready": 3
+    "published": 3,
+    "wp_not_ready": 0
   },
   "input": {
     "alfred_version": "v93_20_alfred_table_warning_precision",
@@ -61,78 +61,60 @@
   },
   "results": [
     {
-      "content_chars": 2523,
-      "image_url": "https://www.wrestlinginc.com/img/gallery/comedian-michael-che-teases-writing-for-wwe-talks-his-favorite-performers/l-intro-1780113014.jpg",
-      "media_id": null,
-      "payload_preview": {
-        "categories": [],
-        "excerpt": "Il volto del \"Weekend Update\" del Saturday Night Live rivela il suo desiderio di scrivere per la WWE e tesse le lodi di diverse superstar.",
-        "meta": {
-          "original_url": "https://www.wrestlinginc.com/2184203/michael-che-writing-wwe-favorite-performers-paul-heyman-stephanie-mcmahon/",
-          "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
-          "owtv_source": "wrestlinginc"
-        },
-        "status": "publish",
-        "title": "Il comico Michael Che apre a un ruolo come autore in WWE"
-      },
+      "categories": [
+        4
+      ],
+      "category_names_priority": [
+        "WWE"
+      ],
+      "featured_media": 5941,
       "source_url": "https://www.wrestlinginc.com/2184203/michael-che-writing-wwe-favorite-performers-paul-heyman-stephanie-mcmahon/",
-      "status": "wp_not_ready",
+      "status": "published",
       "title_it": "Il comico Michael Che apre a un ruolo come autore in WWE",
-      "wp_ready": false
+      "wp_link": "https://news.openwrestlingtv.com/wwe/il-comico-michael-che-apre-a-un-ruolo-come-autore-in-wwe/",
+      "wp_post_id": 5942
     },
     {
-      "content_chars": 5311,
-      "image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/06/logan-paul-reveals-real-pain-behind-torn-tricep-injury-at-wwe-saturday-nights-main-event-03.jpg",
-      "media_id": null,
-      "payload_preview": {
-        "categories": [],
-        "excerpt": "Logan Paul racconta i dettagli dell'infortunio subito durante un match titolato a WWE Saturday Night’s Main Event.",
-        "meta": {
-          "original_url": "https://www.ringsidenews.com/logan-paul-reveals-real-pain-behind-torn-tricep-injury-wwe-saturday-nights-main-event/",
-          "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
-          "owtv_source": "ringsidenews"
-        },
-        "status": "publish",
-        "title": "Logan Paul rivela il dolore dell'infortunio al tricipite durante Saturday Night’s Main Event"
-      },
+      "categories": [
+        4
+      ],
+      "category_names_priority": [
+        "WWE"
+      ],
+      "featured_media": 5943,
       "source_url": "https://www.ringsidenews.com/logan-paul-reveals-real-pain-behind-torn-tricep-injury-wwe-saturday-nights-main-event/",
-      "status": "wp_not_ready",
+      "status": "published",
       "title_it": "Logan Paul rivela il dolore dell'infortunio al tricipite durante Saturday Night’s Main Event",
-      "wp_ready": false
+      "wp_link": "https://news.openwrestlingtv.com/wwe/logan-paul-rivela-il-dolore-dellinfortunio-al-tricipite-durante-saturday-nights-main-event/",
+      "wp_post_id": 5944
     },
     {
-      "content_chars": 3825,
-      "image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/06/sol-rucas-wwe-clash-in-italy-match-criticized-for-being-too-structured-54.jpg",
-      "media_id": null,
-      "payload_preview": {
-        "categories": [],
-        "excerpt": "Booker T analizza la performance di Sol Ruca contro Becky Lynch a Clash in Italy, sottolineando la necessità di migliorare nell'improvvisazione.",
-        "meta": {
-          "original_url": "https://www.ringsidenews.com/sol-rucas-wwe-clash-italy-match-criticized-too-structured/",
-          "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
-          "owtv_source": "ringsidenews"
-        },
-        "status": "publish",
-        "title": "Booker T critica il match di Sol Ruca a Clash in Italy: \"Troppo strutturato\""
-      },
+      "categories": [
+        4
+      ],
+      "category_names_priority": [
+        "WWE"
+      ],
+      "featured_media": 5945,
       "source_url": "https://www.ringsidenews.com/sol-rucas-wwe-clash-italy-match-criticized-too-structured/",
-      "status": "wp_not_ready",
+      "status": "published",
       "title_it": "Booker T critica il match di Sol Ruca a Clash in Italy: \"Troppo strutturato\"",
-      "wp_ready": false
+      "wp_link": "https://news.openwrestlingtv.com/wwe/booker-t-critica-il-match-di-sol-ruca-a-clash-in-italy-troppo-strutturato/",
+      "wp_post_id": 5946
     }
   ],
   "retry_queue": {
     "added": 0,
     "injected": 3,
-    "resolved": 0,
-    "retained": 3,
-    "size": 3
+    "resolved": 3,
+    "retained": 0,
+    "size": 0
   },
   "version": "v93_20_1_publisher_retry_queue_recursion_fix",
   "wp": {
     "dry_run": false,
     "post_status": "publish",
-    "ready": false,
-    "reason": "wp_json_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f0922d4b2d0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=25)'))"
+    "ready": true,
+    "reason": "ok"
   }
 }

@@ -665,9 +665,72 @@
       "reason": "softpool_ineligible:entity:liv morgan,soft_penalty:addresses,recency:fresh_12h",
       "title": "Liv Morgan Addresses Defending WWE Women’s World Title at SummerSlam",
       "url": "https://www.ringsidenews.com/liv-morgan-addresses-defending-wwe-womens-world-title-summerslam/"
+    },
+    {
+      "added_at": "2026-06-04T07:03:32.574901+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2187207/will-ospreay-earns-spot-aew-forbidden-door-chaotic-semi-final",
+      "reason": "softpool_ineligible:recency:fresh_12h",
+      "title": "Will Ospreay Earns Spot At AEW Forbidden Door After Chaotic Semi-Final",
+      "url": "https://www.wrestlinginc.com/2187207/will-ospreay-earns-spot-aew-forbidden-door-chaotic-semi-final/"
+    },
+    {
+      "added_at": "2026-06-04T07:03:32.574901+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/wwe-2k26-adds-unexpected-playable-character",
+      "reason": "softpool_ineligible:ai:News su videogiochi, fuori target principale.; deterministic:recency:fresh_12h",
+      "title": "WWE 2K26 Adds Unexpected Playable Character",
+      "url": "https://www.ringsidenews.com/wwe-2k26-adds-unexpected-playable-character/"
+    },
+    {
+      "added_at": "2026-06-04T07:03:32.574901+00:00",
+      "article_type": "soft_news",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/stardom-president-rips-thekla-she-spits-company-logo-during-aew-dynamite",
+      "reason": "softpool_ineligible:ai:Reazione social/esterna, poco rilevante per il pubblico generalista.; deterministic:recency:fresh_12h",
+      "title": "STARDOM President Rips Thekla After She Spits On Company Logo During AEW Dynamite",
+      "url": "https://www.ringsidenews.com/stardom-president-rips-thekla-she-spits-company-logo-during-aew-dynamite/"
+    },
+    {
+      "added_at": "2026-06-04T07:03:32.574901+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/will-ospreay-advances-owen-hart-tournament-wild-aew-dynamite-main-event",
+      "reason": "softpool_ineligible:recency:fresh_12h",
+      "title": "Will Ospreay Advances In Owen Hart Tournament After Wild AEW Dynamite Main Event",
+      "url": "https://www.ringsidenews.com/will-ospreay-advances-owen-hart-tournament-wild-aew-dynamite-main-event/"
+    },
+    {
+      "added_at": "2026-06-04T07:03:32.574901+00:00",
+      "article_type": "duplicate",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/mjf-survives-bloody-world-title-fight-rush-passes-out-wild-finish-aew-dynamite",
+      "reason": "ai_duplicate_event:aew dynamite results; ai:Main event di Dynamite, necessario per il resoconto settimanale.; deterministic:hard:championship,recency:fresh_12h",
+      "title": "MJF Survives Bloody World Title Fight After RUSH Passes Out In Wild Finish on AEW Dynamite",
+      "url": "https://www.ringsidenews.com/mjf-survives-bloody-world-title-fight-rush-passes-out-wild-finish-aew-dynamite/"
+    },
+    {
+      "added_at": "2026-06-04T07:03:32.574901+00:00",
+      "article_type": "duplicate",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/triple-hs-backstage-reaction-sol-rucas-wwe-ic-title-win",
+      "reason": "ai_duplicate_event:ruca title win; ai_duplicate_of:c2; hard:championship,strategic:backstage,entity:becky lynch,soft_penalty:reaction,recency:fresh_12h",
+      "title": "Triple H’s Backstage Reaction After Sol Ruca’s WWE IC Title Win",
+      "url": "https://www.ringsidenews.com/triple-hs-backstage-reaction-sol-rucas-wwe-ic-title-win/"
+    },
+    {
+      "added_at": "2026-06-04T07:03:32.574901+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/kane-reacts-undertakers-success-running-aaa-wwe-takeover",
+      "reason": "softpool_ineligible:ai:Curiosità debole, non impatta la programmazione.; deterministic:strategic:creative,soft_penalty:reacts,recency:fresh_36h",
+      "title": "Kane Reacts To Undertaker’s Success Running AAA After WWE Takeover",
+      "url": "https://www.ringsidenews.com/kane-reacts-undertakers-success-running-aaa-wwe-takeover/"
     }
   ],
   "ttl_hours": 168,
-  "updated_at": "2026-06-04T02:05:28.440683+00:00",
+  "updated_at": "2026-06-04T07:03:32.574901+00:00",
   "version": "v93_20_selective_softpool"
 }
