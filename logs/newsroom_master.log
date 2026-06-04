@@ -183,10 +183,22 @@ Published reports: -
 Massy: to_simone=1 to_menzo=14 hard_skip=20 menzo_skip=13 old_skip=0
 Simone: ready=1 reports_published=0 wp_not_ready=1
 Menzo: selected=0 pending=0 skipped=0 ai=None model=None
-Bob: ready=0 errors=0 changes={'bob_v93_28_changes': 0, 'bob_v93_16_changes': 0, 'bob_brief_warnings_added': 0}
+Bob: ready=0 errors=0 changes={'bob_brief_warnings_added': 0, 'bob_v93_16_changes': 0, 'bob_v93_28_changes': 0}
 Alfred: approved=0 warnings=0 blockers=0
 Publisher: published=0 wp_not_ready=0 errors=0
 Archivista: status=ok anomalies=0
 Selected: -
 Published news: -
+Published reports: -
+
+===== NEWSROOM MASTER RUN 2026-06-04T16:55:58.225035+00:00 | v93_20_process_refinements | run_id=26966563016 =====
+Massy: to_simone=1 to_menzo=16 hard_skip=18 menzo_skip=11 old_skip=0
+Simone: ready=1 reports_published=0 wp_not_ready=0
+Menzo: selected=8 pending=1 skipped=7 ai=True model=gemini-3.1-flash-lite
+Bob: ready=3 errors=0 changes={'bob_v93_28_changes': 2, 'bob_v93_16_changes': 2, 'bob_brief_warnings_added': 0}
+Alfred: approved=3 warnings=0 blockers=0
+Publisher: published=3 wp_not_ready=0 errors=0
+Archivista: status=ok anomalies=0
+Selected: The Young Bucks Share Encouraging Update On Adam Cole’s Uncertain AEW Future, WWE Has Interest In Bringing Mike Santana To Main Roster, TKO Announces $150 Million Dividend For Second Quarter Of 2026, AEW's Jim Ross Doesn't Believe WWE Shareholder Lawsuit Will Be 'Over Quickly', Backstage Frustration Over Liv Morgan and Dominik Mysterio’s Booking in WWE, WWE Had No Firm King Of The Ring Winner Decided When Brackets Were Revealed
+Published news: Young Bucks: aggiornamento positivo sul futuro di Adam Cole in AEW, La WWE mostra interesse per Mike Santana, TKO annuncia un dividendo da 150 milioni di dollari per il secondo trimestre 2026
 Published reports: -

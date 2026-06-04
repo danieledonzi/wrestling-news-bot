@@ -1,16 +1,851 @@
 {
   "agent": "Bob",
-  "articles": [],
-  "generated_at": "2026-06-04T16:22:58.622524+00:00",
+  "articles": [
+    {
+      "bob_notes": [],
+      "body_html": "<p>Il futuro di Adam Cole nel wrestling è ancora incerto, ma i Young Bucks hanno fornito ai fan un aggiornamento positivo sulla situazione.</p>\nhttps://www.youtube.com/watch?v=8WVyasjfvAs\n\n<p>Cole è lontano dal ring da AEW All In 2025, evento tenutosi in Texas. In quell&#x27;occasione, il wrestler ha tenuto un promo emozionante che ha portato molti fan a chiedersi se si stesse ritirando definitivamente dal wrestling a causa dei persistenti problemi di salute.</p>\n<p>Da allora non ci sono stati molti aggiornamenti sulle condizioni di Cole. La situazione è cambiata durante una recente diretta sul canale YouTube di Being The Elite, in cui Matt e Nick Jackson hanno parlato del loro storico amico e di come sta procedendo il suo percorso. Nick Jackson ha dichiarato che Cole sta affrontando la situazione un passo alla volta, ma ha anche chiarito che ci sono stati dei miglioramenti.</p>\n<blockquote>“Gli abbiamo parlato proprio l&#x27;altro giorno. Per lui è una questione di fare un passo alla volta. Sta cercando di vivere giorno dopo giorno, ma sta riscontrando dei miglioramenti, il che è positivo.”</blockquote>\n<p>Si tratta di un segnale promettente per i fan che aspettavano novità su Cole dopo la sua commovente uscita di scena dai programmi AEW. Anche Matt Jackson ha avuto solo parole di elogio per lui, ribadendo quanto sia importante per le persone dietro le quinte.</p>\n<blockquote>“Quindi, tenetelo nei vostri pensieri e nelle vostre preghiere. È, mio Dio, la persona migliore che io abbia mai incontrato nel business del wrestling, senza esagerare. Il numero uno. È il migliore.”</blockquote>\n<p>Negli ultimi anni Cole ha dovuto affrontare diversi infortuni e non si sa ancora se sarà autorizzato a tornare sul ring. Tuttavia, l&#x27;aggiornamento fornito dai Young Bucks dà ai fan almeno un motivo per essere ottimisti.</p>\n<p>Per ora, Cole sembra concentrato sulla riabilitazione e sul vivere giorno per giorno. Resta da vedere se questo lo riporterà sul quadrato, ma il fatto che stia mostrando segni di miglioramento è certamente un buon segno.</p>\n\nhttps://www.youtube.com/embed/8WVyasjfvAs?feature=oembed",
+      "category_hint": "AEW",
+      "clean_element_count": 11,
+      "created_at": "2026-06-04T16:56:12.591964+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "diagnostic_warnings": [],
+      "editorial_changes": [
+        {
+          "code": "leading_embed_moved_after_first_paragraph",
+          "evidence": "https://www.youtube.com/watch?v=8WVyasjfvAs",
+          "message": "Embed iniziale spostato dopo il primo paragrafo.",
+          "severity": "info"
+        },
+        {
+          "code": "residual_author_bio",
+          "evidence": "Derek Holloway è un redattore di Ringside News specializzato in notizie, rumor e risultati di wrestling professionistico. Si occupa di fornire una copertura affidabile riguardante la WWE, la AEW e le principali promotion del settore.",
+          "message": "Paragrafo residuo rimosso da Bob v93.28.",
+          "severity": "info"
+        }
+      ],
+      "element_counts": {
+        "embed": 2,
+        "heading": 0,
+        "image": 0,
+        "quote": 2,
+        "table": 0,
+        "text": 7
+      },
+      "elements": [
+        {
+          "block_id": "b1",
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=8WVyasjfvAs"
+        },
+        {
+          "block_id": "b2",
+          "text": "Adam Cole’s future in wrestling is still up in the air, but The Young Bucks gave fans a positive update on where things stand.",
+          "type": "text"
+        },
+        {
+          "block_id": "b3",
+          "text": "Cole has been away from in-ring competition since AEW All In 2025 in Texas. At that event, he gave an emotional promo that left many fans wondering if he was stepping away from wrestling for good because of ongoing health issues.",
+          "type": "text"
+        },
+        {
+          "block_id": "b4",
+          "text": "Since then, there have not been many updates on Cole’s condition. That changed during a recent livestream on the Being The Elite YouTube channel , where Matt and Nick Jackson spoke about their longtime friend and how he is doing. Nick Jackson said Cole is taking things one step at a time, but he also made it clear there has been some improvement.",
+          "type": "text"
+        },
+        {
+          "block_id": "b5",
+          "source_tag": "blockquote",
+          "text": "“We were just talking to him the other day. It’s step by step for him. He’s just trying to take it day by day, but he’s having improvements which is good.”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b6",
+          "text": "That is a promising sign for fans who have been waiting to hear anything new about Cole since his emotional exit from AEW programming. Matt Jackson also had nothing but praise for Cole, making it clear just how much he means to people behind the scenes.",
+          "type": "text"
+        },
+        {
+          "block_id": "b7",
+          "source_tag": "blockquote",
+          "text": "“So, keep him in your thoughts and prayers. He’s, gosh, the best person I think I’ve ever met in the wrestling business without exaggeration. Number one. He’s the best.”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b8",
+          "text": "Cole has dealt with several injury setbacks in recent years, and there is still no word on whether he will be cleared to wrestle again. However, the update from The Young Bucks at least gives fans some reason to be hopeful.",
+          "type": "text"
+        },
+        {
+          "block_id": "b9",
+          "text": "For now, Cole appears focused on his recovery and taking things day by day. Whether that leads him back to the ring remains to be seen, but the fact that he is showing improvement is a good sign.",
+          "type": "text"
+        },
+        {
+          "block_id": "b10",
+          "source_tag": "figure",
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/8WVyasjfvAs?feature=oembed"
+        },
+        {
+          "block_id": "b11",
+          "text": "Derek Holloway is a writer at Ringside News specializing in professional wrestling news, rumors, and results. He focuses on delivering reliable coverage across WWE, AEW, and major wrestling promotions.",
+          "type": "text"
+        }
+      ],
+      "excerpt_it": "Il futuro di Adam Cole rimane incerto, ma i Young Bucks hanno fornito ai fan un aggiornamento incoraggiante sulle sue condizioni.",
+      "extraction_diagnostics": {
+        "candidate_node_count": 92,
+        "clean_element_count": 11,
+        "dom_noise_reduction_enabled": false,
+        "embed_count": 2,
+        "global_embed_recovery_enabled": false,
+        "quote_count": 2,
+        "raw_element_count": 16,
+        "removed_by_node_count": 13,
+        "removed_by_sanitize_count": 5,
+        "root_name": "article",
+        "root_text_chars": 2870,
+        "stage": "complete",
+        "table_count": 0
+      },
+      "fetched_html_chars": 526037,
+      "menzo_score": 84,
+      "meta": {
+        "description": "Adam Cole’s future in wrestling is still up in the air, but The Young Bucks gave fans a positive update on where things stand. Cole has been away from",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2024/11/adam-cole-admits-mental-discouragement-reached-all-time-high-after-ankle-injury-43.jpg",
+        "source_title": "The Young Bucks Share Encouraging Update On Adam Cole’s Uncertain AEW Future"
+      },
+      "raw_element_count": 16,
+      "raw_elements_preview": [
+        {
+          "block_id": "b1",
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=8WVyasjfvAs"
+        },
+        {
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=8WVyasjfvAs"
+        },
+        {
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=8WVyasjfvAs"
+        },
+        {
+          "block_id": "b2",
+          "text": "Adam Cole’s future in wrestling is still up in the air, but The Young Bucks gave fans a positive update on where things stand.",
+          "type": "text"
+        },
+        {
+          "block_id": "b3",
+          "text": "Cole has been away from in-ring competition since AEW All In 2025 in Texas. At that event, he gave an emotional promo that left many fans wondering if he was stepping away from wrestling for good because of ongoing health issues.",
+          "type": "text"
+        },
+        {
+          "block_id": "b4",
+          "text": "Since then, there have not been many updates on Cole’s condition. That changed during a recent livestream on the Being The Elite YouTube channel , where Matt and Nick Jackson spoke about their longtime friend and how he is doing. Nick Jackson said Cole is taking things one step at a time, but he also made it clear there has been some improvement.",
+          "type": "text"
+        },
+        {
+          "block_id": "b5",
+          "source_tag": "blockquote",
+          "text": "“We were just talking to him the other day. It’s step by step for him. He’s just trying to take it day by day, but he’s having improvements which is good.”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b6",
+          "text": "That is a promising sign for fans who have been waiting to hear anything new about Cole since his emotional exit from AEW programming. Matt Jackson also had nothing but praise for Cole, making it clear just how much he means to people behind the scenes.",
+          "type": "text"
+        },
+        {
+          "block_id": "b7",
+          "source_tag": "blockquote",
+          "text": "“So, keep him in your thoughts and prayers. He’s, gosh, the best person I think I’ve ever met in the wrestling business without exaggeration. Number one. He’s the best.”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b8",
+          "text": "Cole has dealt with several injury setbacks in recent years, and there is still no word on whether he will be cleared to wrestle again. However, the update from The Young Bucks at least gives fans some reason to be hopeful.",
+          "type": "text"
+        },
+        {
+          "block_id": "b9",
+          "text": "For now, Cole appears focused on his recovery and taking things day by day. Whether that leads him back to the ring remains to be seen, but the fact that he is showing improvement is a good sign.",
+          "type": "text"
+        },
+        {
+          "block_id": "b10",
+          "source_tag": "figure",
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/8WVyasjfvAs?feature=oembed"
+        },
+        {
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/8WVyasjfvAs?feature=oembed"
+        },
+        {
+          "source_tag": "iframe",
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/8WVyasjfvAs?feature=oembed"
+        },
+        {
+          "block_id": "b11",
+          "text": "Derek Holloway is a writer at Ringside News specializing in professional wrestling news, rumors, and results. He focuses on delivering reliable coverage across WWE, AEW, and major wrestling promotions.",
+          "type": "text"
+        },
+        {
+          "text": "Spotlight AEW News Mick Foley’s Final Match Could Be in AEW WWE News Backstage Frustration Over Liv Morgan and Dominik Mysterio’s Booking in WWE WWE News WWE Had No Firm King Of The Ring Winner Decided When Brackets Were Revealed AEW News MJF Pulled from Indie Booking After Suffering Injury on AEW Dynamite",
+          "type": "text"
+        }
+      ],
+      "removed_before_gemini": 18,
+      "removed_elements_debug": [
+        {
+          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
+          "node_index": 69,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Spotlight"
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197784 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news tag-aew-featured tag-mick-foley   ",
+          "node_index": 73,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "AEW News Mick Foley’s Final Match Could Be in AEW"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 76,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Mick Foley’s Final Match Could Be in AEW"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 77,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197776 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-dominik-mysterio tag-liv-morgan tag-wwe-featured   ",
+          "node_index": 78,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News Backstage Frustration Over Liv Morgan and Dominik Mysterio’s Booking in WWE"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 81,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Backstage Frustration Over Liv Morgan and Dominik Mysterio’s Booking in WWE"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 82,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197775 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
+          "node_index": 83,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News WWE Had No Firm King Of The Ring Winner Decided When Brackets Were Revealed"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 86,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "WWE Had No Firm King Of The Ring Winner Decided When Brackets Were Revealed"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 87,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197729 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news tag-aew-featured tag-mjf   ",
+          "node_index": 88,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "AEW News MJF Pulled from Indie Booking After Suffering Injury on AEW Dynamite"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 91,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "MJF Pulled from Indie Booking After Suffering Injury on AEW Dynamite"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 92,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "index": 2,
+          "item": {
+            "source_tag": "div",
+            "type": "embed",
+            "url": "https://www.youtube.com/watch?v=8WVyasjfvAs"
+          },
+          "reason": "duplicate_or_empty_embed"
+        },
+        {
+          "index": 3,
+          "item": {
+            "source_tag": "div",
+            "type": "embed",
+            "url": "https://www.youtube.com/watch?v=8WVyasjfvAs"
+          },
+          "reason": "duplicate_or_empty_embed"
+        },
+        {
+          "index": 13,
+          "item": {
+            "source_tag": "div",
+            "type": "embed",
+            "url": "https://www.youtube.com/embed/8WVyasjfvAs?feature=oembed"
+          },
+          "reason": "duplicate_or_empty_embed"
+        },
+        {
+          "index": 14,
+          "item": {
+            "source_tag": "iframe",
+            "type": "embed",
+            "url": "https://www.youtube.com/embed/8WVyasjfvAs?feature=oembed"
+          },
+          "reason": "duplicate_or_empty_embed"
+        },
+        {
+          "index": 16,
+          "item": {
+            "text": "Spotlight AEW News Mick Foley’s Final Match Could Be in AEW WWE News Backstage Frustration Over Liv Morgan and Dominik Mysterio’s Booking in WWE WWE News WWE Had No Firm King Of The Ring Winner Decided When Brackets Were Revealed AEW News MJF Pulled from Indie Booking After Suffering Injury on AEW Dynamite",
+            "type": "text"
+          },
+          "reason": "footer_start"
+        }
+      ],
+      "source": "ringsidenews",
+      "source_html_contains_embed_hint": true,
+      "source_title": "The Young Bucks Share Encouraging Update On Adam Cole’s Uncertain AEW Future",
+      "source_url": "https://www.ringsidenews.com/young-bucks-share-encouraging-update-adam-coles-uncertain-aew-future/",
+      "status": "ready_for_alfred",
+      "title_it": "Young Bucks: aggiornamento positivo sul futuro di Adam Cole in AEW",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_missing_units": [],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/young-bucks-share-encouraging-update-adam-coles-uncertain-aew-future/\nTitolo feed: The Young Bucks Share Encouraging Update On Adam Cole’s Uncertain AEW Future\nTitolo pagina: The Young Bucks Share Encouraging Update On Adam Cole’s Uncertain AEW Future\nDescrizione: Adam Cole’s future in wrestling is still up in the air, but The Young Bucks gave fans a positive update on where things stand. Cole has been away from\nCategoria suggerita: AEW\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Adam Cole’s future in wrestling is still up in the air, but The Young Bucks gave fans a positive update on where things stand.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Cole has been away from in-ring competition since AEW All In 2025 in Texas. At that event, he gave an emotional promo that left many fans wondering if he was stepping away from wrestling for good because of ongoing health issues.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Since then, there have not been many updates on Cole’s condition. That changed during a recent livestream on the Being The Elite YouTube channel , where Matt and Nick Jackson spoke about their longtime friend and how he is doing. Nick Jackson said Cole is taking things one step at a time, but he also made it clear there has been some improvement.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"“We were just talking to him the other day. It’s step by step for him. He’s just trying to take it day by day, but he’s having improvements which is good.”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"That is a promising sign for fans who have been waiting to hear anything new about Cole since his emotional exit from AEW programming. Matt Jackson also had nothing but praise for Cole, making it clear just how much he means to people behind the scenes.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"quote\",\n    \"text\": \"“So, keep him in your thoughts and prayers. He’s, gosh, the best person I think I’ve ever met in the wrestling business without exaggeration. Number one. He’s the best.”\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"Cole has dealt with several injury setbacks in recent years, and there is still no word on whether he will be cleared to wrestle again. However, the update from The Young Bucks at least gives fans some reason to be hopeful.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"For now, Cole appears focused on his recovery and taking things day by day. Whether that leads him back to the ring remains to be seen, but the fact that he is showing improvement is a good sign.\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"text\",\n    \"text\": \"Derek Holloway is a writer at Ringside News specializing in professional wrestling news, rumors, and results. He focuses on delivering reliable coverage across WWE, AEW, and major wrestling promotions.\"\n  }\n]\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Young Bucks: aggiornamento positivo sul futuro di Adam Cole in AEW\",\n  \"excerpt_it\": \"Il futuro di Adam Cole rimane incerto, ma i Young Bucks hanno fornito ai fan un aggiornamento incoraggiante sulle sue condizioni.\",\n  \"translations\": {\n    \"b2\": \"Il futuro di Adam Cole nel wrestling è ancora incerto, ma i Young Bucks hanno fornito ai fan un aggiornamento positivo sulla situazione.\",\n    \"b3\": \"Cole è lontano dal ring da AEW All In 2025, evento tenutosi in Texas. In quell'occasione, il wrestler ha tenuto un promo emozionante che ha portato molti fan a chiedersi se si stesse ritirando definitivamente dal wrestling a causa dei persistenti problemi di salute.\",\n    \"b4\": \"Da allora non ci sono stati molti aggiornamenti sulle condizioni di Cole. La situazione è cambiata durante una recente diretta sul canale YouTube di Being The Elite, in cui Matt e Nick Jackson hanno parlato del loro storico amico e di come sta procedendo il suo percorso. Nick Jackson ha dichiarato che Cole sta affrontando la situazione un passo alla volta, ma ha anche chiarito che ci sono stati dei miglioramenti.\",\n    \"b5\": \"“Gli abbiamo parlato proprio l'altro giorno. Per lui è una questione di fare un passo alla volta. Sta cercando di vivere giorno dopo giorno, ma sta riscontrando dei miglioramenti, il che è positivo.”\",\n    \"b6\": \"Si tratta di un segnale promettente per i fan che aspettavano novità su Cole dopo la sua commovente uscita di scena dai programmi AEW. Anche Matt Jackson ha avuto solo parole di elogio per lui, ribadendo quanto sia importante per le persone dietro le quinte.\",\n    \"b7\": \"“Quindi, tenetelo nei vostri pensieri e nelle vostre preghiere. È, mio Dio, la persona migliore che io abbia mai incontrato nel business del wrestling, senza esagerare. Il numero uno. È il migliore.”\",\n    \"b8\": \"Negli ultimi anni Cole ha dovuto affrontare diversi infortuni e non si sa ancora se sarà autorizzato a tornare sul ring. Tuttavia, l'aggiornamento fornito dai Young Bucks dà ai fan almeno un motivo per essere ottimisti.\",\n    \"b9\": \"Per ora, Cole sembra concentrato sulla riabilitazione e sul vivere giorno per giorno. Resta da vedere se questo lo riporterà sul quadrato, ma il fatto che stia mostrando segni di miglioramento è certamente un buon segno.\",\n    \"b11\": \"Derek Holloway è un redattore di Ringside News specializzato in notizie, rumor e risultati di wrestling professionistico. Si occupa di fornire una copertura affidabile riguardante la WWE, la AEW e le principali promotion del settore.\"\n  },\n  \"notes\": []\n}",
+      "translation_unit_count": 9,
+      "translation_used": true
+    },
+    {
+      "bob_notes": [],
+      "body_html": "<p>Mike Santana potrebbe presto trovarsi di fronte a una decisione importante e la WWE sembra stia monitorando attentamente la situazione.</p>\n<p>Si prevede che Santana diventerà un free agent quest&#x27;anno, dato che il suo contratto con la TNA dovrebbe scadere durante l&#x27;estate. Questo rendeva già il suo futuro degno di nota, ma un nuovo aggiornamento aggiunge ulteriore carne al fuoco.</p>\n<p>WrestleVotes Radio, su Fightful Select, ha riportato che la WWE è interessata ad acquisire Santana. L&#x27;aggiornamento ha inoltre specificato che esiste un forte supporto interno nei suoi confronti da parte di almeno un membro del main roster della WWE.</p>\n<p>Si dice anche che il lavoro e la professionalità di Santana siano tenuti in grande considerazione, il che potrebbe favorirlo qualora la WWE decidesse di puntare seriamente sul suo ingaggio.</p>\n<p>Non ci sono ancora notizie su quale brand accoglierebbe Santana in caso di firma con la WWE. Tuttavia, WrestleVotes ha sostenuto che, se riuscisse a ingaggiarlo, la compagnia vorrebbe averlo nel main roster entro la fine dell&#x27;anno.</p>\n<p>Questo rende le tempistiche molto interessanti. Santana è attualmente una delle stelle di punta della TNA e la sua situazione contrattuale potrebbe diventare una delle vicende di mercato più rilevanti dell&#x27;estate.</p>\n<p>Santana è riuscito a rilanciarsi in modo significativo durante il suo percorso in TNA e l&#x27;interesse della WWE rende il suo prossimo passo ancora più cruciale. Che decida di restare in TNA o di passare alla WWE, sembra proprio che Santana avrà diverse opzioni una volta scaduto il suo accordo.</p>",
+      "category_hint": "TNA",
+      "clean_element_count": 7,
+      "created_at": "2026-06-04T16:56:21.019130+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "element_counts": {
+        "embed": 0,
+        "heading": 0,
+        "image": 0,
+        "quote": 0,
+        "table": 0,
+        "text": 7
+      },
+      "elements": [
+        {
+          "block_id": "b1",
+          "text": "Mike Santana may have a big decision coming soon, and WWE appears to be keeping an eye on the situation.",
+          "type": "text"
+        },
+        {
+          "block_id": "b2",
+          "text": "Santana is expected to become a free agent this year, with his TNA contract believed to be up this summer . That already made his future worth watching, but a new update adds more fuel to the story.",
+          "type": "text"
+        },
+        {
+          "block_id": "b3",
+          "text": "WrestleVotes Radio on Fightful Select noted that WWE has interest in acquiring Santana. The update also stated that there is strong internal support for him from at least one member of WWE’s main roster.",
+          "type": "text"
+        },
+        {
+          "block_id": "b4",
+          "text": "Santana’s work and professionalism are also said to be highly regarded, which could help his case if WWE decides to make a serious push to bring him in.",
+          "type": "text"
+        },
+        {
+          "block_id": "b5",
+          "text": "There is no word yet on which brand Santana would land on if he signs with WWE. However, WrestleVotes claimed that WWE would like to have him on the main roster by the end of the year if they are able to land him.",
+          "type": "text"
+        },
+        {
+          "block_id": "b6",
+          "text": "That makes the timing very interesting. Santana is currently one of TNA’s top stars, and his contract situation could become one of the bigger free agency stories of the summer.",
+          "type": "text"
+        },
+        {
+          "block_id": "b7",
+          "text": "Santana has rebuilt himself in a major way during his TNA run, and WWE interest would only make his next move even more important. Whether he stays with TNA or makes the jump to WWE, it looks like Santana will have options when his deal is up.",
+          "type": "text"
+        }
+      ],
+      "excerpt_it": "Mike Santana potrebbe presto trovarsi di fronte a una decisione importante, con la WWE che osserva attentamente la situazione in vista della scadenza del suo contratto con TNA.",
+      "extraction_diagnostics": {
+        "candidate_node_count": 85,
+        "clean_element_count": 7,
+        "dom_noise_reduction_enabled": false,
+        "embed_count": 0,
+        "global_embed_recovery_enabled": false,
+        "quote_count": 0,
+        "raw_element_count": 8,
+        "removed_by_node_count": 13,
+        "removed_by_sanitize_count": 1,
+        "root_name": "article",
+        "root_text_chars": 2287,
+        "stage": "complete",
+        "table_count": 0
+      },
+      "fetched_html_chars": 518053,
+      "menzo_score": 80,
+      "meta": {
+        "description": "Mike Santana may have a big decision coming soon, and WWE appears to be keeping an eye on the situation. Santana is expected to become a free agent this",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/wwe-has-interest-in-bringing-mike-santana-to-main-roster-13.jpg",
+        "source_title": "WWE Has Interest In Bringing Mike Santana To Main Roster"
+      },
+      "raw_element_count": 8,
+      "raw_elements_preview": [
+        {
+          "block_id": "b1",
+          "text": "Mike Santana may have a big decision coming soon, and WWE appears to be keeping an eye on the situation.",
+          "type": "text"
+        },
+        {
+          "block_id": "b2",
+          "text": "Santana is expected to become a free agent this year, with his TNA contract believed to be up this summer . That already made his future worth watching, but a new update adds more fuel to the story.",
+          "type": "text"
+        },
+        {
+          "block_id": "b3",
+          "text": "WrestleVotes Radio on Fightful Select noted that WWE has interest in acquiring Santana. The update also stated that there is strong internal support for him from at least one member of WWE’s main roster.",
+          "type": "text"
+        },
+        {
+          "block_id": "b4",
+          "text": "Santana’s work and professionalism are also said to be highly regarded, which could help his case if WWE decides to make a serious push to bring him in.",
+          "type": "text"
+        },
+        {
+          "block_id": "b5",
+          "text": "There is no word yet on which brand Santana would land on if he signs with WWE. However, WrestleVotes claimed that WWE would like to have him on the main roster by the end of the year if they are able to land him.",
+          "type": "text"
+        },
+        {
+          "block_id": "b6",
+          "text": "That makes the timing very interesting. Santana is currently one of TNA’s top stars, and his contract situation could become one of the bigger free agency stories of the summer.",
+          "type": "text"
+        },
+        {
+          "block_id": "b7",
+          "text": "Santana has rebuilt himself in a major way during his TNA run, and WWE interest would only make his next move even more important. Whether he stays with TNA or makes the jump to WWE, it looks like Santana will have options when his deal is up.",
+          "type": "text"
+        },
+        {
+          "text": "Spotlight AEW News Mick Foley’s Final Match Could Be in AEW WWE News Backstage Frustration Over Liv Morgan and Dominik Mysterio’s Booking in WWE WWE News WWE Had No Firm King Of The Ring Winner Decided When Brackets Were Revealed AEW News MJF Pulled from Indie Booking After Suffering Injury on AEW Dynamite",
+          "type": "text"
+        }
+      ],
+      "removed_before_gemini": 14,
+      "removed_elements_debug": [
+        {
+          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
+          "node_index": 62,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Spotlight"
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197784 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news tag-aew-featured tag-mick-foley   ",
+          "node_index": 66,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "AEW News Mick Foley’s Final Match Could Be in AEW"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 69,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Mick Foley’s Final Match Could Be in AEW"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 70,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197776 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-dominik-mysterio tag-liv-morgan tag-wwe-featured   ",
+          "node_index": 71,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News Backstage Frustration Over Liv Morgan and Dominik Mysterio’s Booking in WWE"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 74,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Backstage Frustration Over Liv Morgan and Dominik Mysterio’s Booking in WWE"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 75,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197775 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
+          "node_index": 76,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News WWE Had No Firm King Of The Ring Winner Decided When Brackets Were Revealed"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 79,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "WWE Had No Firm King Of The Ring Winner Decided When Brackets Were Revealed"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 80,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197729 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news tag-aew-featured tag-mjf   ",
+          "node_index": 81,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "AEW News MJF Pulled from Indie Booking After Suffering Injury on AEW Dynamite"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 84,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "MJF Pulled from Indie Booking After Suffering Injury on AEW Dynamite"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 85,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "index": 8,
+          "item": {
+            "text": "Spotlight AEW News Mick Foley’s Final Match Could Be in AEW WWE News Backstage Frustration Over Liv Morgan and Dominik Mysterio’s Booking in WWE WWE News WWE Had No Firm King Of The Ring Winner Decided When Brackets Were Revealed AEW News MJF Pulled from Indie Booking After Suffering Injury on AEW Dynamite",
+            "type": "text"
+          },
+          "reason": "footer_start"
+        }
+      ],
+      "source": "ringsidenews",
+      "source_html_contains_embed_hint": true,
+      "source_title": "WWE Has Interest In Bringing Mike Santana To Main Roster",
+      "source_url": "https://www.ringsidenews.com/wwe-interest-bringing-mike-santana-main-roster/",
+      "status": "ready_for_alfred",
+      "title_it": "La WWE mostra interesse per Mike Santana",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_missing_units": [],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/wwe-interest-bringing-mike-santana-main-roster/\nTitolo feed: WWE Has Interest In Bringing Mike Santana To Main Roster\nTitolo pagina: WWE Has Interest In Bringing Mike Santana To Main Roster\nDescrizione: Mike Santana may have a big decision coming soon, and WWE appears to be keeping an eye on the situation. Santana is expected to become a free agent this\nCategoria suggerita: TNA\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Mike Santana may have a big decision coming soon, and WWE appears to be keeping an eye on the situation.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Santana is expected to become a free agent this year, with his TNA contract believed to be up this summer . That already made his future worth watching, but a new update adds more fuel to the story.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"WrestleVotes Radio on Fightful Select noted that WWE has interest in acquiring Santana. The update also stated that there is strong internal support for him from at least one member of WWE’s main roster.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Santana’s work and professionalism are also said to be highly regarded, which could help his case if WWE decides to make a serious push to bring him in.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"There is no word yet on which brand Santana would land on if he signs with WWE. However, WrestleVotes claimed that WWE would like to have him on the main roster by the end of the year if they are able to land him.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"That makes the timing very interesting. Santana is currently one of TNA’s top stars, and his contract situation could become one of the bigger free agency stories of the summer.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"Santana has rebuilt himself in a major way during his TNA run, and WWE interest would only make his next move even more important. Whether he stays with TNA or makes the jump to WWE, it looks like Santana will have options when his deal is up.\"\n  }\n]\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"La WWE mostra interesse per Mike Santana\",\n  \"excerpt_it\": \"Mike Santana potrebbe presto trovarsi di fronte a una decisione importante, con la WWE che osserva attentamente la situazione in vista della scadenza del suo contratto con TNA.\",\n  \"translations\": {\n    \"b1\": \"Mike Santana potrebbe presto trovarsi di fronte a una decisione importante e la WWE sembra stia monitorando attentamente la situazione.\",\n    \"b2\": \"Si prevede che Santana diventerà un free agent quest'anno, dato che il suo contratto con la TNA dovrebbe scadere durante l'estate. Questo rendeva già il suo futuro degno di nota, ma un nuovo aggiornamento aggiunge ulteriore carne al fuoco.\",\n    \"b3\": \"WrestleVotes Radio, su Fightful Select, ha riportato che la WWE è interessata ad acquisire Santana. L'aggiornamento ha inoltre specificato che esiste un forte supporto interno nei suoi confronti da parte di almeno un membro del main roster della WWE.\",\n    \"b4\": \"Si dice anche che il lavoro e la professionalità di Santana siano tenuti in grande considerazione, il che potrebbe favorirlo qualora la WWE decidesse di puntare seriamente sul suo ingaggio.\",\n    \"b5\": \"Non ci sono ancora notizie su quale brand accoglierebbe Santana in caso di firma con la WWE. Tuttavia, WrestleVotes ha sostenuto che, se riuscisse a ingaggiarlo, la compagnia vorrebbe averlo nel main roster entro la fine dell'anno.\",\n    \"b6\": \"Questo rende le tempistiche molto interessanti. Santana è attualmente una delle stelle di punta della TNA e la sua situazione contrattuale potrebbe diventare una delle vicende di mercato più rilevanti dell'estate.\",\n    \"b7\": \"Santana è riuscito a rilanciarsi in modo significativo durante il suo percorso in TNA e l'interesse della WWE rende il suo prossimo passo ancora più cruciale. Che decida di restare in TNA o di passare alla WWE, sembra proprio che Santana avrà diverse opzioni una volta scaduto il suo accordo.\"\n  },\n  \"notes\": []\n}",
+      "translation_unit_count": 7,
+      "translation_used": true
+    },
+    {
+      "bob_notes": [],
+      "body_html": "<p>TKO Group Holdings sta restituendo ulteriore liquidità ai propri azionisti.</p>\n<p>La società ha annunciato che il consiglio di amministrazione ha deliberato un dividendo in contanti per il secondo trimestre del 2026. Grazie a questa operazione, gli azionisti di classe A di TKO riceveranno la propria quota su una distribuzione complessiva di circa 150 milioni di dollari proveniente dalla TKO Operating Company, LLC.</p>\n<p>TKO ha specificato che il dividendo ammonterà a 0,79 dollari per azione per i detentori di azioni ordinarie di classe A.</p>\n<p>Il pagamento è previsto per il 30 giugno 2026. Per poterlo ricevere, gli azionisti dovranno risultare registrati entro la chiusura delle attività del 15 giugno 2026.</p>\n<p>TKO ha inoltre chiarito che i futuri dividendi trimestrali non sono garantiti. La società ha precisato che ogni decisione futura in merito dipenderà da diversi fattori, tra cui risultati operativi, condizioni finanziarie, andamento del mercato, utili, esigenze di cassa, restrizioni previste dagli accordi sul debito, requisiti legali e qualsiasi altro elemento ritenuto rilevante da TKO.</p>\n<p>L&#x27;annuncio arriva mentre TKO continua a gestire alcuni dei brand più importanti nel mondo dello sport e dell&#x27;intrattenimento. Il portafoglio dell&#x27;azienda include WWE, UFC, PBR e Zuffa Boxing, oltre a IMG e On Location.</p>\n<p>TKO ha dichiarato che le sue proprietà raggiungono oltre un miliardo di famiglie in 210 paesi e territori, organizzando al contempo più di 500 eventi dal vivo ogni anno e attirando oltre tre milioni di fan.</p>\n<p>L&#x27;annuncio del dividendo è un ulteriore segnale di come TKO continui a posizionarsi come un attore di primo piano nei settori dello sport, dell&#x27;intrattenimento, degli eventi dal vivo e dei media. Con WWE e UFC sotto lo stesso ombrello societario, l&#x27;azienda rimane una delle realtà più seguite negli sport da combattimento e nello sports entertainment.</p>",
+      "category_hint": "Business",
+      "clean_element_count": 8,
+      "created_at": "2026-06-04T16:56:23.143147+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "element_counts": {
+        "embed": 0,
+        "heading": 0,
+        "image": 0,
+        "quote": 0,
+        "table": 0,
+        "text": 8
+      },
+      "elements": [
+        {
+          "block_id": "b1",
+          "text": "TKO Group Holdings is sending more money back to shareholders.",
+          "type": "text"
+        },
+        {
+          "block_id": "b2",
+          "text": "The company announced that its board of directors has declared a second quarter 2026 cash dividend. The dividend will see TKO Class A common stockholders receive their share of an aggregate distribution of about $150 million from TKO Operating Company, LLC to its equityholders.",
+          "type": "text"
+        },
+        {
+          "block_id": "b3",
+          "text": "TKO said the dividend will come out to $0.79 per share for holders of the company’s Class A common stock.",
+          "type": "text"
+        },
+        {
+          "block_id": "b4",
+          "text": "The payment is scheduled for June 30, 2026. Stockholders must be on record by the close of business on June 15, 2026 in order to receive it.",
+          "type": "text"
+        },
+        {
+          "block_id": "b5",
+          "text": "TKO also made it clear that future quarterly dividends are not automatic. The company said any future dividend decisions will depend on several factors, including operating results, financial condition, market conditions, earnings, cash flow needs, debt agreement restrictions, legal requirements, and anything else TKO considers relevant.",
+          "type": "text"
+        },
+        {
+          "block_id": "b6",
+          "text": "The announcement comes as TKO continues to operate some of the biggest properties in sports and entertainment. The company’s portfolio includes WWE, UFC, PBR, and Zuffa Boxing, along with IMG and On Location.",
+          "type": "text"
+        },
+        {
+          "block_id": "b7",
+          "text": "TKO said its properties reach more than 1 billion households across 210 countries and territories, while also putting on more than 500 live events each year and drawing more than three million fans.",
+          "type": "text"
+        },
+        {
+          "block_id": "b8",
+          "text": "The dividend announcement is another sign of how TKO continues to position itself as a major player across sports, entertainment, live events, and media. With WWE and UFC under the same corporate umbrella, the company remains one of the most watched entities in combat sports and sports entertainment.",
+          "type": "text"
+        }
+      ],
+      "excerpt_it": "TKO Group Holdings ha annunciato la distribuzione di un dividendo in contanti per il secondo trimestre del 2026 destinato agli azionisti.",
+      "extraction_diagnostics": {
+        "candidate_node_count": 87,
+        "clean_element_count": 8,
+        "dom_noise_reduction_enabled": false,
+        "embed_count": 0,
+        "global_embed_recovery_enabled": false,
+        "quote_count": 0,
+        "raw_element_count": 9,
+        "removed_by_node_count": 13,
+        "removed_by_sanitize_count": 1,
+        "root_name": "article",
+        "root_text_chars": 2692,
+        "stage": "complete",
+        "table_count": 0
+      },
+      "fetched_html_chars": 521874,
+      "menzo_score": 78,
+      "meta": {
+        "description": "TKO Group Holdings is sending more money back to shareholders. The company announced that its board of directors has declared a second quarter 2026 cash",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2025/02/tko-group-holdings-reports-2-804-billion-revenue-for-2024-19.jpg",
+        "source_title": "TKO Announces $150 Million Dividend For Second Quarter Of 2026"
+      },
+      "raw_element_count": 9,
+      "raw_elements_preview": [
+        {
+          "block_id": "b1",
+          "text": "TKO Group Holdings is sending more money back to shareholders.",
+          "type": "text"
+        },
+        {
+          "block_id": "b2",
+          "text": "The company announced that its board of directors has declared a second quarter 2026 cash dividend. The dividend will see TKO Class A common stockholders receive their share of an aggregate distribution of about $150 million from TKO Operating Company, LLC to its equityholders.",
+          "type": "text"
+        },
+        {
+          "block_id": "b3",
+          "text": "TKO said the dividend will come out to $0.79 per share for holders of the company’s Class A common stock.",
+          "type": "text"
+        },
+        {
+          "block_id": "b4",
+          "text": "The payment is scheduled for June 30, 2026. Stockholders must be on record by the close of business on June 15, 2026 in order to receive it.",
+          "type": "text"
+        },
+        {
+          "block_id": "b5",
+          "text": "TKO also made it clear that future quarterly dividends are not automatic. The company said any future dividend decisions will depend on several factors, including operating results, financial condition, market conditions, earnings, cash flow needs, debt agreement restrictions, legal requirements, and anything else TKO considers relevant.",
+          "type": "text"
+        },
+        {
+          "block_id": "b6",
+          "text": "The announcement comes as TKO continues to operate some of the biggest properties in sports and entertainment. The company’s portfolio includes WWE, UFC, PBR, and Zuffa Boxing, along with IMG and On Location.",
+          "type": "text"
+        },
+        {
+          "block_id": "b7",
+          "text": "TKO said its properties reach more than 1 billion households across 210 countries and territories, while also putting on more than 500 live events each year and drawing more than three million fans.",
+          "type": "text"
+        },
+        {
+          "block_id": "b8",
+          "text": "The dividend announcement is another sign of how TKO continues to position itself as a major player across sports, entertainment, live events, and media. With WWE and UFC under the same corporate umbrella, the company remains one of the most watched entities in combat sports and sports entertainment.",
+          "type": "text"
+        },
+        {
+          "text": "Spotlight WWE News WWE Had No Firm King Of The Ring Winner Decided When Brackets Were Revealed AEW News MJF Pulled from Indie Booking After Suffering Injury on AEW Dynamite AEW News Mercedes Moné Returns As Wild Card In Owen Hart Tournament During June 3 AEW Dynamite AEW Videos Kevin Knight Revealed As Newest Member Of Don Callis Family On AEW Dynamite",
+          "type": "text"
+        }
+      ],
+      "removed_before_gemini": 14,
+      "removed_elements_debug": [
+        {
+          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
+          "node_index": 64,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Spotlight"
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197775 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
+          "node_index": 68,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News WWE Had No Firm King Of The Ring Winner Decided When Brackets Were Revealed"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 71,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "WWE Had No Firm King Of The Ring Winner Decided When Brackets Were Revealed"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 72,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197729 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news tag-aew-featured tag-mjf   ",
+          "node_index": 73,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "AEW News MJF Pulled from Indie Booking After Suffering Injury on AEW Dynamite"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 76,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "MJF Pulled from Indie Booking After Suffering Injury on AEW Dynamite"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 77,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197513 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news category-aew-videos tag-aew-featured tag-owen-hart   ",
+          "node_index": 78,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "AEW News Mercedes Moné Returns As Wild Card In Owen Hart Tournament During June 3 AEW Dynamite"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 81,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Mercedes Moné Returns As Wild Card In Owen Hart Tournament During June 3 AEW Dynamite"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 82,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197476 post type-post status-publish format-video has-post-thumbnail hentry category-aew-news category-aew-videos tag-aew-featured tag-kevin-knight post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
+          "node_index": 83,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "AEW Videos Kevin Knight Revealed As Newest Member Of Don Callis Family On AEW Dynamite"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 86,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Kevin Knight Revealed As Newest Member Of Don Callis Family On AEW Dynamite"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 87,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "index": 9,
+          "item": {
+            "text": "Spotlight WWE News WWE Had No Firm King Of The Ring Winner Decided When Brackets Were Revealed AEW News MJF Pulled from Indie Booking After Suffering Injury on AEW Dynamite AEW News Mercedes Moné Returns As Wild Card In Owen Hart Tournament During June 3 AEW Dynamite AEW Videos Kevin Knight Revealed As Newest Member Of Don Callis Family On AEW Dynamite",
+            "type": "text"
+          },
+          "reason": "footer_start"
+        }
+      ],
+      "source": "ringsidenews",
+      "source_html_contains_embed_hint": true,
+      "source_title": "TKO Announces $150 Million Dividend For Second Quarter Of 2026",
+      "source_url": "https://www.ringsidenews.com/tko-announces-150-million-dividend-second-quarter-2026/",
+      "status": "ready_for_alfred",
+      "title_it": "TKO annuncia un dividendo da 150 milioni di dollari per il secondo trimestre 2026",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_missing_units": [],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/tko-announces-150-million-dividend-second-quarter-2026/\nTitolo feed: TKO Announces $150 Million Dividend For Second Quarter Of 2026\nTitolo pagina: TKO Announces $150 Million Dividend For Second Quarter Of 2026\nDescrizione: TKO Group Holdings is sending more money back to shareholders. The company announced that its board of directors has declared a second quarter 2026 cash\nCategoria suggerita: Business\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"TKO Group Holdings is sending more money back to shareholders.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"The company announced that its board of directors has declared a second quarter 2026 cash dividend. The dividend will see TKO Class A common stockholders receive their share of an aggregate distribution of about $150 million from TKO Operating Company, LLC to its equityholders.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"TKO said the dividend will come out to $0.79 per share for holders of the company’s Class A common stock.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"The payment is scheduled for June 30, 2026. Stockholders must be on record by the close of business on June 15, 2026 in order to receive it.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"TKO also made it clear that future quarterly dividends are not automatic. The company said any future dividend decisions will depend on several factors, including operating results, financial condition, market conditions, earnings, cash flow needs, debt agreement restrictions, legal requirements, and anything else TKO considers relevant.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"The announcement comes as TKO continues to operate some of the biggest properties in sports and entertainment. The company’s portfolio includes WWE, UFC, PBR, and Zuffa Boxing, along with IMG and On Location.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"TKO said its properties reach more than 1 billion households across 210 countries and territories, while also putting on more than 500 live events each year and drawing more than three million fans.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"The dividend announcement is another sign of how TKO continues to position itself as a major player across sports, entertainment, live events, and media. With WWE and UFC under the same corporate umbrella, the company remains one of the most watched entities in combat sports and sports entertainment.\"\n  }\n]\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"TKO annuncia un dividendo da 150 milioni di dollari per il secondo trimestre 2026\",\n  \"excerpt_it\": \"TKO Group Holdings ha annunciato la distribuzione di un dividendo in contanti per il secondo trimestre del 2026 destinato agli azionisti.\",\n  \"translations\": {\n    \"b1\": \"TKO Group Holdings sta restituendo ulteriore liquidità ai propri azionisti.\",\n    \"b2\": \"La società ha annunciato che il consiglio di amministrazione ha deliberato un dividendo in contanti per il secondo trimestre del 2026. Grazie a questa operazione, gli azionisti di classe A di TKO riceveranno la propria quota su una distribuzione complessiva di circa 150 milioni di dollari proveniente dalla TKO Operating Company, LLC.\",\n    \"b3\": \"TKO ha specificato che il dividendo ammonterà a 0,79 dollari per azione per i detentori di azioni ordinarie di classe A.\",\n    \"b4\": \"Il pagamento è previsto per il 30 giugno 2026. Per poterlo ricevere, gli azionisti dovranno risultare registrati entro la chiusura delle attività del 15 giugno 2026.\",\n    \"b5\": \"TKO ha inoltre chiarito che i futuri dividendi trimestrali non sono garantiti. La società ha precisato che ogni decisione futura in merito dipenderà da diversi fattori, tra cui risultati operativi, condizioni finanziarie, andamento del mercato, utili, esigenze di cassa, restrizioni previste dagli accordi sul debito, requisiti legali e qualsiasi altro elemento ritenuto rilevante da TKO.\",\n    \"b6\": \"L'annuncio arriva mentre TKO continua a gestire alcuni dei brand più importanti nel mondo dello sport e dell'intrattenimento. Il portafoglio dell'azienda include WWE, UFC, PBR e Zuffa Boxing, oltre a IMG e On Location.\",\n    \"b7\": \"TKO ha dichiarato che le sue proprietà raggiungono oltre un miliardo di famiglie in 210 paesi e territori, organizzando al contempo più di 500 eventi dal vivo ogni anno e attirando oltre tre milioni di fan.\",\n    \"b8\": \"L'annuncio del dividendo è un ulteriore segnale di come TKO continui a posizionarsi come un attore di primo piano nei settori dello sport, dell'intrattenimento, degli eventi dal vivo e dei media. Con WWE e UFC sotto lo stesso ombrello societario, l'azienda rimane una delle realtà più seguite negli sport da combattimento e nello sports entertainment.\"\n  },\n  \"notes\": []\n}",
+      "translation_unit_count": 8,
+      "translation_used": true
+    }
+  ],
+  "generated_at": "2026-06-04T16:56:26.461562+00:00",
   "handoff": {
     "errors": 0,
     "extraction_empty": 0,
-    "ready_for_alfred": 0,
+    "ready_for_alfred": 3,
     "translation_pending": 0
   },
   "input": {
-    "menzo_version": "v93_25_wp_ready_guard",
-    "selected_count": 0
+    "menzo_version": "v93_20_selective_softpool",
+    "selected_count": 8
   },
   "mode": "block_translation_prudent_embed_cleanup",
   "policy": {
@@ -51,8 +886,8 @@
     "unwrap_fake_data_blockquotes": true
   },
   "postprocess": {
-    "bob_v93_16_changes": 0,
-    "bob_v93_28_changes": 0
+    "bob_v93_16_changes": 2,
+    "bob_v93_28_changes": 2
   },
   "version": "v93_28_generic_author_bio_exclusions"
 }

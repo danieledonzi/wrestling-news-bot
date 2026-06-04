@@ -1,16 +1,86 @@
 {
   "agent": "Alfred",
-  "approved_articles": [],
-  "generated_at": "2026-06-04T16:22:58.636980+00:00",
+  "approved_articles": [
+    {
+      "bob_translation_model": "gemini-3.1-flash-lite",
+      "body_html": "<p>Il futuro di Adam Cole nel wrestling è ancora incerto, ma i Young Bucks hanno fornito ai fan un aggiornamento positivo sulla situazione.</p>\nhttps://www.youtube.com/watch?v=8WVyasjfvAs\n\n<p>Cole è lontano dal ring da AEW All In 2025, evento tenutosi in Texas. In quell&#x27;occasione, il wrestler ha tenuto un promo emozionante che ha portato molti fan a chiedersi se si stesse ritirando definitivamente dal wrestling a causa dei persistenti problemi di salute.</p>\n<p>Da allora non ci sono stati molti aggiornamenti sulle condizioni di Cole. La situazione è cambiata durante una recente diretta sul canale YouTube di Being The Elite, in cui Matt e Nick Jackson hanno parlato del loro storico amico e di come sta procedendo il suo percorso. Nick Jackson ha dichiarato che Cole sta affrontando la situazione un passo alla volta, ma ha anche chiarito che ci sono stati dei miglioramenti.</p>\n<blockquote>“Gli abbiamo parlato proprio l&#x27;altro giorno. Per lui è una questione di fare un passo alla volta. Sta cercando di vivere giorno dopo giorno, ma sta riscontrando dei miglioramenti, il che è positivo.”</blockquote>\n<p>Si tratta di un segnale promettente per i fan che aspettavano novità su Cole dopo la sua commovente uscita di scena dai programmi AEW. Anche Matt Jackson ha avuto solo parole di elogio per lui, ribadendo quanto sia importante per le persone dietro le quinte.</p>\n<blockquote>“Quindi, tenetelo nei vostri pensieri e nelle vostre preghiere. È, mio Dio, la persona migliore che io abbia mai incontrato nel business del wrestling, senza esagerare. Il numero uno. È il migliore.”</blockquote>\n<p>Negli ultimi anni Cole ha dovuto affrontare diversi infortuni e non si sa ancora se sarà autorizzato a tornare sul ring. Tuttavia, l&#x27;aggiornamento fornito dai Young Bucks dà ai fan almeno un motivo per essere ottimisti.</p>\n<p>Per ora, Cole sembra concentrato sulla riabilitazione e sul vivere giorno per giorno. Resta da vedere se questo lo riporterà sul quadrato, ma il fatto che stia mostrando segni di miglioramento è certamente un buon segno.</p>\n\nhttps://www.youtube.com/embed/8WVyasjfvAs?feature=oembed",
+      "category_hint": "AEW",
+      "element_counts": {
+        "embed": 2,
+        "heading": 0,
+        "image": 0,
+        "quote": 2,
+        "table": 0,
+        "text": 7
+      },
+      "excerpt_it": "Il futuro di Adam Cole rimane incerto, ma i Young Bucks hanno fornito ai fan un aggiornamento incoraggiante sulle sue condizioni.",
+      "meta": {
+        "description": "Adam Cole’s future in wrestling is still up in the air, but The Young Bucks gave fans a positive update on where things stand. Cole has been away from",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2024/11/adam-cole-admits-mental-discouragement-reached-all-time-high-after-ankle-injury-43.jpg",
+        "source_title": "The Young Bucks Share Encouraging Update On Adam Cole’s Uncertain AEW Future"
+      },
+      "source": "ringsidenews",
+      "source_title": "The Young Bucks Share Encouraging Update On Adam Cole’s Uncertain AEW Future",
+      "source_url": "https://www.ringsidenews.com/young-bucks-share-encouraging-update-adam-coles-uncertain-aew-future/",
+      "title_it": "Young Bucks: aggiornamento positivo sul futuro di Adam Cole in AEW"
+    },
+    {
+      "bob_translation_model": "gemini-3.1-flash-lite",
+      "body_html": "<p>Mike Santana potrebbe presto trovarsi di fronte a una decisione importante e la WWE sembra stia monitorando attentamente la situazione.</p>\n<p>Si prevede che Santana diventerà un free agent quest&#x27;anno, dato che il suo contratto con la TNA dovrebbe scadere durante l&#x27;estate. Questo rendeva già il suo futuro degno di nota, ma un nuovo aggiornamento aggiunge ulteriore carne al fuoco.</p>\n<p>WrestleVotes Radio, su Fightful Select, ha riportato che la WWE è interessata ad acquisire Santana. L&#x27;aggiornamento ha inoltre specificato che esiste un forte supporto interno nei suoi confronti da parte di almeno un membro del main roster della WWE.</p>\n<p>Si dice anche che il lavoro e la professionalità di Santana siano tenuti in grande considerazione, il che potrebbe favorirlo qualora la WWE decidesse di puntare seriamente sul suo ingaggio.</p>\n<p>Non ci sono ancora notizie su quale brand accoglierebbe Santana in caso di firma con la WWE. Tuttavia, WrestleVotes ha sostenuto che, se riuscisse a ingaggiarlo, la compagnia vorrebbe averlo nel main roster entro la fine dell&#x27;anno.</p>\n<p>Questo rende le tempistiche molto interessanti. Santana è attualmente una delle stelle di punta della TNA e la sua situazione contrattuale potrebbe diventare una delle vicende di mercato più rilevanti dell&#x27;estate.</p>\n<p>Santana è riuscito a rilanciarsi in modo significativo durante il suo percorso in TNA e l&#x27;interesse della WWE rende il suo prossimo passo ancora più cruciale. Che decida di restare in TNA o di passare alla WWE, sembra proprio che Santana avrà diverse opzioni una volta scaduto il suo accordo.</p>",
+      "category_hint": "TNA",
+      "element_counts": {
+        "embed": 0,
+        "heading": 0,
+        "image": 0,
+        "quote": 0,
+        "table": 0,
+        "text": 7
+      },
+      "excerpt_it": "Mike Santana potrebbe presto trovarsi di fronte a una decisione importante, con la WWE che osserva attentamente la situazione in vista della scadenza del suo contratto con TNA.",
+      "meta": {
+        "description": "Mike Santana may have a big decision coming soon, and WWE appears to be keeping an eye on the situation. Santana is expected to become a free agent this",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/wwe-has-interest-in-bringing-mike-santana-to-main-roster-13.jpg",
+        "source_title": "WWE Has Interest In Bringing Mike Santana To Main Roster"
+      },
+      "source": "ringsidenews",
+      "source_title": "WWE Has Interest In Bringing Mike Santana To Main Roster",
+      "source_url": "https://www.ringsidenews.com/wwe-interest-bringing-mike-santana-main-roster/",
+      "title_it": "La WWE mostra interesse per Mike Santana"
+    },
+    {
+      "bob_translation_model": "gemini-3.1-flash-lite",
+      "body_html": "<p>TKO Group Holdings sta restituendo ulteriore liquidità ai propri azionisti.</p>\n<p>La società ha annunciato che il consiglio di amministrazione ha deliberato un dividendo in contanti per il secondo trimestre del 2026. Grazie a questa operazione, gli azionisti di classe A di TKO riceveranno la propria quota su una distribuzione complessiva di circa 150 milioni di dollari proveniente dalla TKO Operating Company, LLC.</p>\n<p>TKO ha specificato che il dividendo ammonterà a 0,79 dollari per azione per i detentori di azioni ordinarie di classe A.</p>\n<p>Il pagamento è previsto per il 30 giugno 2026. Per poterlo ricevere, gli azionisti dovranno risultare registrati entro la chiusura delle attività del 15 giugno 2026.</p>\n<p>TKO ha inoltre chiarito che i futuri dividendi trimestrali non sono garantiti. La società ha precisato che ogni decisione futura in merito dipenderà da diversi fattori, tra cui risultati operativi, condizioni finanziarie, andamento del mercato, utili, esigenze di cassa, restrizioni previste dagli accordi sul debito, requisiti legali e qualsiasi altro elemento ritenuto rilevante da TKO.</p>\n<p>L&#x27;annuncio arriva mentre TKO continua a gestire alcuni dei brand più importanti nel mondo dello sport e dell&#x27;intrattenimento. Il portafoglio dell&#x27;azienda include WWE, UFC, PBR e Zuffa Boxing, oltre a IMG e On Location.</p>\n<p>TKO ha dichiarato che le sue proprietà raggiungono oltre un miliardo di famiglie in 210 paesi e territori, organizzando al contempo più di 500 eventi dal vivo ogni anno e attirando oltre tre milioni di fan.</p>\n<p>L&#x27;annuncio del dividendo è un ulteriore segnale di come TKO continui a posizionarsi come un attore di primo piano nei settori dello sport, dell&#x27;intrattenimento, degli eventi dal vivo e dei media. Con WWE e UFC sotto lo stesso ombrello societario, l&#x27;azienda rimane una delle realtà più seguite negli sport da combattimento e nello sports entertainment.</p>",
+      "category_hint": "Business",
+      "element_counts": {
+        "embed": 0,
+        "heading": 0,
+        "image": 0,
+        "quote": 0,
+        "table": 0,
+        "text": 8
+      },
+      "excerpt_it": "TKO Group Holdings ha annunciato la distribuzione di un dividendo in contanti per il secondo trimestre del 2026 destinato agli azionisti.",
+      "meta": {
+        "description": "TKO Group Holdings is sending more money back to shareholders. The company announced that its board of directors has declared a second quarter 2026 cash",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2025/02/tko-group-holdings-reports-2-804-billion-revenue-for-2024-19.jpg",
+        "source_title": "TKO Announces $150 Million Dividend For Second Quarter Of 2026"
+      },
+      "source": "ringsidenews",
+      "source_title": "TKO Announces $150 Million Dividend For Second Quarter Of 2026",
+      "source_url": "https://www.ringsidenews.com/tko-announces-150-million-dividend-second-quarter-2026/",
+      "title_it": "TKO annuncia un dividendo da 150 milioni di dollari per il secondo trimestre 2026"
+    }
+  ],
+  "generated_at": "2026-06-04T16:56:26.480703+00:00",
   "handoff": {
-    "approved": 0,
+    "approved": 3,
     "blockers": 0,
     "editorial_changes": 0,
     "needs_revision": 0,
     "warnings": 0
   },
   "input": {
-    "articles": 0,
+    "articles": 3,
     "bob_version": "v93_28_generic_author_bio_exclusions"
   },
   "mode": "structured_content_quality_editor",
@@ -40,6 +110,145 @@
   "postprocess": {
     "false_table_warnings_removed": 0
   },
-  "reviews": [],
+  "reviews": [
+    {
+      "approved_article": {
+        "bob_translation_model": "gemini-3.1-flash-lite",
+        "body_html": "<p>Il futuro di Adam Cole nel wrestling è ancora incerto, ma i Young Bucks hanno fornito ai fan un aggiornamento positivo sulla situazione.</p>\nhttps://www.youtube.com/watch?v=8WVyasjfvAs\n\n<p>Cole è lontano dal ring da AEW All In 2025, evento tenutosi in Texas. In quell&#x27;occasione, il wrestler ha tenuto un promo emozionante che ha portato molti fan a chiedersi se si stesse ritirando definitivamente dal wrestling a causa dei persistenti problemi di salute.</p>\n<p>Da allora non ci sono stati molti aggiornamenti sulle condizioni di Cole. La situazione è cambiata durante una recente diretta sul canale YouTube di Being The Elite, in cui Matt e Nick Jackson hanno parlato del loro storico amico e di come sta procedendo il suo percorso. Nick Jackson ha dichiarato che Cole sta affrontando la situazione un passo alla volta, ma ha anche chiarito che ci sono stati dei miglioramenti.</p>\n<blockquote>“Gli abbiamo parlato proprio l&#x27;altro giorno. Per lui è una questione di fare un passo alla volta. Sta cercando di vivere giorno dopo giorno, ma sta riscontrando dei miglioramenti, il che è positivo.”</blockquote>\n<p>Si tratta di un segnale promettente per i fan che aspettavano novità su Cole dopo la sua commovente uscita di scena dai programmi AEW. Anche Matt Jackson ha avuto solo parole di elogio per lui, ribadendo quanto sia importante per le persone dietro le quinte.</p>\n<blockquote>“Quindi, tenetelo nei vostri pensieri e nelle vostre preghiere. È, mio Dio, la persona migliore che io abbia mai incontrato nel business del wrestling, senza esagerare. Il numero uno. È il migliore.”</blockquote>\n<p>Negli ultimi anni Cole ha dovuto affrontare diversi infortuni e non si sa ancora se sarà autorizzato a tornare sul ring. Tuttavia, l&#x27;aggiornamento fornito dai Young Bucks dà ai fan almeno un motivo per essere ottimisti.</p>\n<p>Per ora, Cole sembra concentrato sulla riabilitazione e sul vivere giorno per giorno. Resta da vedere se questo lo riporterà sul quadrato, ma il fatto che stia mostrando segni di miglioramento è certamente un buon segno.</p>\n\nhttps://www.youtube.com/embed/8WVyasjfvAs?feature=oembed",
+        "category_hint": "AEW",
+        "element_counts": {
+          "embed": 2,
+          "heading": 0,
+          "image": 0,
+          "quote": 2,
+          "table": 0,
+          "text": 7
+        },
+        "excerpt_it": "Il futuro di Adam Cole rimane incerto, ma i Young Bucks hanno fornito ai fan un aggiornamento incoraggiante sulle sue condizioni.",
+        "meta": {
+          "description": "Adam Cole’s future in wrestling is still up in the air, but The Young Bucks gave fans a positive update on where things stand. Cole has been away from",
+          "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2024/11/adam-cole-admits-mental-discouragement-reached-all-time-high-after-ankle-injury-43.jpg",
+          "source_title": "The Young Bucks Share Encouraging Update On Adam Cole’s Uncertain AEW Future"
+        },
+        "source": "ringsidenews",
+        "source_title": "The Young Bucks Share Encouraging Update On Adam Cole’s Uncertain AEW Future",
+        "source_url": "https://www.ringsidenews.com/young-bucks-share-encouraging-update-adam-coles-uncertain-aew-future/",
+        "title_it": "Young Bucks: aggiornamento positivo sul futuro di Adam Cole in AEW"
+      },
+      "category_hint": "AEW",
+      "decision": "approved",
+      "diagnostics": {
+        "bob_clean_element_count": 11,
+        "bob_diagnostic_stage": "ready_for_alfred",
+        "bob_removed_before_gemini": 18,
+        "bob_status": "ready_for_alfred",
+        "bob_translation_model": "gemini-3.1-flash-lite",
+        "editorial_changes": 0,
+        "plain_chars": 2021,
+        "quote_count": 2,
+        "table_count": 0,
+        "title_chars": 66
+      },
+      "editorial_changes": [],
+      "issues": [],
+      "quality_score": 100,
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/young-bucks-share-encouraging-update-adam-coles-uncertain-aew-future/",
+      "title_it": "Young Bucks: aggiornamento positivo sul futuro di Adam Cole in AEW",
+      "warnings": []
+    },
+    {
+      "approved_article": {
+        "bob_translation_model": "gemini-3.1-flash-lite",
+        "body_html": "<p>Mike Santana potrebbe presto trovarsi di fronte a una decisione importante e la WWE sembra stia monitorando attentamente la situazione.</p>\n<p>Si prevede che Santana diventerà un free agent quest&#x27;anno, dato che il suo contratto con la TNA dovrebbe scadere durante l&#x27;estate. Questo rendeva già il suo futuro degno di nota, ma un nuovo aggiornamento aggiunge ulteriore carne al fuoco.</p>\n<p>WrestleVotes Radio, su Fightful Select, ha riportato che la WWE è interessata ad acquisire Santana. L&#x27;aggiornamento ha inoltre specificato che esiste un forte supporto interno nei suoi confronti da parte di almeno un membro del main roster della WWE.</p>\n<p>Si dice anche che il lavoro e la professionalità di Santana siano tenuti in grande considerazione, il che potrebbe favorirlo qualora la WWE decidesse di puntare seriamente sul suo ingaggio.</p>\n<p>Non ci sono ancora notizie su quale brand accoglierebbe Santana in caso di firma con la WWE. Tuttavia, WrestleVotes ha sostenuto che, se riuscisse a ingaggiarlo, la compagnia vorrebbe averlo nel main roster entro la fine dell&#x27;anno.</p>\n<p>Questo rende le tempistiche molto interessanti. Santana è attualmente una delle stelle di punta della TNA e la sua situazione contrattuale potrebbe diventare una delle vicende di mercato più rilevanti dell&#x27;estate.</p>\n<p>Santana è riuscito a rilanciarsi in modo significativo durante il suo percorso in TNA e l&#x27;interesse della WWE rende il suo prossimo passo ancora più cruciale. Che decida di restare in TNA o di passare alla WWE, sembra proprio che Santana avrà diverse opzioni una volta scaduto il suo accordo.</p>",
+        "category_hint": "TNA",
+        "element_counts": {
+          "embed": 0,
+          "heading": 0,
+          "image": 0,
+          "quote": 0,
+          "table": 0,
+          "text": 7
+        },
+        "excerpt_it": "Mike Santana potrebbe presto trovarsi di fronte a una decisione importante, con la WWE che osserva attentamente la situazione in vista della scadenza del suo contratto con TNA.",
+        "meta": {
+          "description": "Mike Santana may have a big decision coming soon, and WWE appears to be keeping an eye on the situation. Santana is expected to become a free agent this",
+          "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/wwe-has-interest-in-bringing-mike-santana-to-main-roster-13.jpg",
+          "source_title": "WWE Has Interest In Bringing Mike Santana To Main Roster"
+        },
+        "source": "ringsidenews",
+        "source_title": "WWE Has Interest In Bringing Mike Santana To Main Roster",
+        "source_url": "https://www.ringsidenews.com/wwe-interest-bringing-mike-santana-main-roster/",
+        "title_it": "La WWE mostra interesse per Mike Santana"
+      },
+      "category_hint": "TNA",
+      "decision": "approved",
+      "diagnostics": {
+        "bob_clean_element_count": 7,
+        "bob_diagnostic_stage": "ready_for_alfred",
+        "bob_removed_before_gemini": 14,
+        "bob_status": "ready_for_alfred",
+        "bob_translation_model": "gemini-3.1-flash-lite",
+        "editorial_changes": 0,
+        "plain_chars": 1555,
+        "quote_count": 0,
+        "table_count": 0,
+        "title_chars": 40
+      },
+      "editorial_changes": [],
+      "issues": [],
+      "quality_score": 100,
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/wwe-interest-bringing-mike-santana-main-roster/",
+      "title_it": "La WWE mostra interesse per Mike Santana",
+      "warnings": []
+    },
+    {
+      "approved_article": {
+        "bob_translation_model": "gemini-3.1-flash-lite",
+        "body_html": "<p>TKO Group Holdings sta restituendo ulteriore liquidità ai propri azionisti.</p>\n<p>La società ha annunciato che il consiglio di amministrazione ha deliberato un dividendo in contanti per il secondo trimestre del 2026. Grazie a questa operazione, gli azionisti di classe A di TKO riceveranno la propria quota su una distribuzione complessiva di circa 150 milioni di dollari proveniente dalla TKO Operating Company, LLC.</p>\n<p>TKO ha specificato che il dividendo ammonterà a 0,79 dollari per azione per i detentori di azioni ordinarie di classe A.</p>\n<p>Il pagamento è previsto per il 30 giugno 2026. Per poterlo ricevere, gli azionisti dovranno risultare registrati entro la chiusura delle attività del 15 giugno 2026.</p>\n<p>TKO ha inoltre chiarito che i futuri dividendi trimestrali non sono garantiti. La società ha precisato che ogni decisione futura in merito dipenderà da diversi fattori, tra cui risultati operativi, condizioni finanziarie, andamento del mercato, utili, esigenze di cassa, restrizioni previste dagli accordi sul debito, requisiti legali e qualsiasi altro elemento ritenuto rilevante da TKO.</p>\n<p>L&#x27;annuncio arriva mentre TKO continua a gestire alcuni dei brand più importanti nel mondo dello sport e dell&#x27;intrattenimento. Il portafoglio dell&#x27;azienda include WWE, UFC, PBR e Zuffa Boxing, oltre a IMG e On Location.</p>\n<p>TKO ha dichiarato che le sue proprietà raggiungono oltre un miliardo di famiglie in 210 paesi e territori, organizzando al contempo più di 500 eventi dal vivo ogni anno e attirando oltre tre milioni di fan.</p>\n<p>L&#x27;annuncio del dividendo è un ulteriore segnale di come TKO continui a posizionarsi come un attore di primo piano nei settori dello sport, dell&#x27;intrattenimento, degli eventi dal vivo e dei media. Con WWE e UFC sotto lo stesso ombrello societario, l&#x27;azienda rimane una delle realtà più seguite negli sport da combattimento e nello sports entertainment.</p>",
+        "category_hint": "Business",
+        "element_counts": {
+          "embed": 0,
+          "heading": 0,
+          "image": 0,
+          "quote": 0,
+          "table": 0,
+          "text": 8
+        },
+        "excerpt_it": "TKO Group Holdings ha annunciato la distribuzione di un dividendo in contanti per il secondo trimestre del 2026 destinato agli azionisti.",
+        "meta": {
+          "description": "TKO Group Holdings is sending more money back to shareholders. The company announced that its board of directors has declared a second quarter 2026 cash",
+          "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2025/02/tko-group-holdings-reports-2-804-billion-revenue-for-2024-19.jpg",
+          "source_title": "TKO Announces $150 Million Dividend For Second Quarter Of 2026"
+        },
+        "source": "ringsidenews",
+        "source_title": "TKO Announces $150 Million Dividend For Second Quarter Of 2026",
+        "source_url": "https://www.ringsidenews.com/tko-announces-150-million-dividend-second-quarter-2026/",
+        "title_it": "TKO annuncia un dividendo da 150 milioni di dollari per il secondo trimestre 2026"
+      },
+      "category_hint": "Business",
+      "decision": "approved",
+      "diagnostics": {
+        "bob_clean_element_count": 8,
+        "bob_diagnostic_stage": "ready_for_alfred",
+        "bob_removed_before_gemini": 14,
+        "bob_status": "ready_for_alfred",
+        "bob_translation_model": "gemini-3.1-flash-lite",
+        "editorial_changes": 0,
+        "plain_chars": 1865,
+        "quote_count": 0,
+        "table_count": 0,
+        "title_chars": 81
+      },
+      "editorial_changes": [],
+      "issues": [],
+      "quality_score": 100,
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/tko-announces-150-million-dividend-second-quarter-2026/",
+      "title_it": "TKO annuncia un dividendo da 150 milioni di dollari per il secondo trimestre 2026",
+      "warnings": []
+    }
+  ],
   "version": "v93_20_alfred_table_warning_precision"
 }

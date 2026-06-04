@@ -773,9 +773,72 @@
       "reason": "ai_duplicate_event:la knight status; ai_duplicate_of:c6; soft_penalty:reaction,recency:fresh_12h",
       "title": "LA Knight Blames Lack of Direction for His WWE Crowd Reactions Cooling Off",
       "url": "https://www.ringsidenews.com/la-knight-blames-lack-direction-his-wwe-crowd-reactions-cooling-off/"
+    },
+    {
+      "added_at": "2026-06-04T16:56:12.570554+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2187538/nick-khan-wwe-social-media-criticism-vocal-minority",
+      "reason": "softpool_ineligible:soft_penalty:social media,recency:fresh_12h",
+      "title": "Nick Khan Says WWE Will Never Listen To Social Media Criticism From 'Vocal Minority'",
+      "url": "https://www.wrestlinginc.com/2187538/nick-khan-wwe-social-media-criticism-vocal-minority/"
+    },
+    {
+      "added_at": "2026-06-04T16:56:12.570554+00:00",
+      "article_type": "soft_news",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2187314/mick-foley-aew-swiss-army-knife-manager",
+      "reason": "softpool_ineligible:ai:Opinioni personali/intervista non critica per la narrazione.; deterministic:hard:debut,entity:mick foley,recency:fresh_12h",
+      "title": "Mick Foley Describes His AEW Role As A 'Swiss Army Knife,' Says He Could Be A Manager",
+      "url": "https://www.wrestlinginc.com/2187314/mick-foley-aew-swiss-army-knife-manager/"
+    },
+    {
+      "added_at": "2026-06-04T16:56:12.570554+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2187248/bully-ray-chad-gable-future-bubble-aaa",
+      "reason": "softpool_ineligible:ai:Opinione esterna su wrestler, non notizia utile.; deterministic:strategic:future,strategic:main roster,entity:chad gable,recency:fresh_12h",
+      "title": "Bully Ray Isn't Sure About Chad Gable's WWE Future Outside The 'Bubble' Of AAA",
+      "url": "https://www.wrestlinginc.com/2187248/bully-ray-chad-gable-future-bubble-aaa/"
+    },
+    {
+      "added_at": "2026-06-04T16:56:12.570554+00:00",
+      "article_type": "soft_news",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/wwe-planning-austin-316-nwo-30th-anniversary-merchandise-push",
+      "reason": "softpool_ineligible:ai:Curiosità su merchandising, poco valore informativo.; deterministic:strategic:king of the ring,recency:fresh_12h",
+      "title": "WWE Planning Austin 3:16 & nWo 30th Anniversary Merchandise Push",
+      "url": "https://www.ringsidenews.com/wwe-planning-austin-316-nwo-30th-anniversary-merchandise-push/"
+    },
+    {
+      "added_at": "2026-06-04T16:56:12.570554+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/mick-foleys-final-match-could-aew",
+      "reason": "softpool_ineligible:entity:mick foley,recency:fresh_12h",
+      "title": "Mick Foley’s Final Match Could Be in AEW",
+      "url": "https://www.ringsidenews.com/mick-foleys-final-match-could-aew/"
+    },
+    {
+      "added_at": "2026-06-04T16:56:12.570554+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/becky-lynch-explains-why-shes-torn-having-another-child",
+      "reason": "softpool_ineligible:entity:becky lynch,soft_penalty:explains why,recency:fresh_12h",
+      "title": "Becky Lynch Explains Why She’s Torn Over Having Another Child",
+      "url": "https://www.ringsidenews.com/becky-lynch-explains-why-shes-torn-having-another-child/"
+    },
+    {
+      "added_at": "2026-06-04T16:56:12.570554+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/becky-lynch-believes-wwe-women-will-main-event-more-wrestlemanias-than-men",
+      "reason": "softpool_ineligible:ai:Opinione personale, non notizia.; deterministic:strategic:future,entity:becky lynch,recency:fresh_12h",
+      "title": "Becky Lynch Believes WWE Women Will Main Event More WrestleManias Than the Men",
+      "url": "https://www.ringsidenews.com/becky-lynch-believes-wwe-women-will-main-event-more-wrestlemanias-than-men/"
     }
   ],
   "ttl_hours": 168,
-  "updated_at": "2026-06-04T13:57:31.429041+00:00",
+  "updated_at": "2026-06-04T16:56:12.570554+00:00",
   "version": "v93_20_selective_softpool"
 }

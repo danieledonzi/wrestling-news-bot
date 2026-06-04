@@ -1,8 +1,34 @@
 {
-  "items": [],
+  "items": [
+    {
+      "age_hours": 1.318284245,
+      "agent": "Menzo",
+      "ai_priority_label": "medium",
+      "article_type": "hard_news",
+      "assigned_to": "Menzo",
+      "category_hint": "WWE",
+      "decision": "pending",
+      "deterministic_score": 64,
+      "evaluated_at": "2026-06-04T16:56:05.823283+00:00",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "last_seen_at": "2026-06-04T16:56:12.570198+00:00",
+      "normalized_url": "https://www.ringsidenews.com/randy-orton-spotted-daughters-graduation-amid-wwe-absence",
+      "priority": "soft",
+      "published": "Thu, 04 Jun 2026 15:37:00 +0000",
+      "reason": "hard:return,soft_penalty:photo,recency:fresh_12h",
+      "score": 64,
+      "softpool_added_at": "2026-06-04T16:56:12.570198+00:00",
+      "softpool_reason": "medium_candidate_above_quality_threshold",
+      "softpool_ttl_hours": 36,
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Randy Orton Spotted at Daughter’s Graduation Amid WWE Absence\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/randy-orton-spotted-at-daughters-graduation-amid-wwe-absence-36.jpg?x69566\" width=\"800\" /></p>Randy Orton still hasn’t returned to WWE television, but he’s clearly enjoying some important family time while away from the ring. A new photo surfaced showing Orton attending his daughter’s graduation ceremony. The image showed the Apex Predator proudly standing alongside his daughter as she celebrated the special milestone. The sighting comes after weeks of ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/randy-orton-spotted-daughters-graduation-amid-wwe-absence/\" title=\"Randy Orton Spotted at Daughter’s Graduation Amid WWE Absence\">Read more</a>",
+      "title": "Randy Orton Spotted at Daughter’s Graduation Amid WWE Absence",
+      "url": "https://www.ringsidenews.com/randy-orton-spotted-daughters-graduation-amid-wwe-absence/"
+    }
+  ],
   "min_score": 55,
   "softnews_ttl_hours": 24,
   "ttl_hours": 36,
-  "updated_at": "2026-06-04T13:57:31.428752+00:00",
+  "updated_at": "2026-06-04T16:56:12.570198+00:00",
   "version": "v93_20_selective_softpool"
 }
