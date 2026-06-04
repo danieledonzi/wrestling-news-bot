@@ -836,9 +836,108 @@
       "reason": "softpool_ineligible:ai:Opinione personale, non notizia.; deterministic:strategic:future,entity:becky lynch,recency:fresh_12h",
       "title": "Becky Lynch Believes WWE Women Will Main Event More WrestleManias Than the Men",
       "url": "https://www.ringsidenews.com/becky-lynch-believes-wwe-women-will-main-event-more-wrestlemanias-than-men/"
+    },
+    {
+      "added_at": "2026-06-04T19:22:51.002343+00:00",
+      "article_type": "soft_news",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2187740/nikki-bella-missed-wwe-ple-kindergarten-graduation",
+      "reason": "softpool_ineligible:ai:Curiosità di poco interesse per il pubblico italiano.; deterministic:strategic:clash in italy,recency:fresh_12h",
+      "title": "Nikki Bella Missed WWE PLE Due To Kindergarten Graduation",
+      "url": "https://www.wrestlinginc.com/2187740/nikki-bella-missed-wwe-ple-kindergarten-graduation/"
+    },
+    {
+      "added_at": "2026-06-04T19:22:51.002343+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2187736/backstage-update-possibility-mick-foley-wrestling-aew",
+      "reason": "softpool_ineligible:ai:Rumor debole, non centrale.; deterministic:strategic:backstage,entity:mick foley,recency:fresh_12h",
+      "title": "Backstage Update On Possibility Of Mick Foley Wrestling In AEW",
+      "url": "https://www.wrestlinginc.com/2187736/backstage-update-possibility-mick-foley-wrestling-aew/"
+    },
+    {
+      "added_at": "2026-06-04T19:22:51.002343+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2187651/new-tna-star-fabian-aichner-congratulates-ludwig-kaiser-aaa-success",
+      "reason": "softpool_ineligible:recency:fresh_12h",
+      "title": "New TNA Star Fabian Aichner Congratulates Former Imperium Member On AAA Success",
+      "url": "https://www.wrestlinginc.com/2187651/new-tna-star-fabian-aichner-congratulates-ludwig-kaiser-aaa-success/"
+    },
+    {
+      "added_at": "2026-06-04T19:22:51.002343+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2187624/dave-meltzer-says-wwe-nxt-gab-2026-timing-no-coincidence",
+      "reason": "softpool_ineligible:recency:fresh_12h",
+      "title": "Dave Meltzer Says WWE NXT GAB 2026 Timing Is No Coincidence",
+      "url": "https://www.wrestlinginc.com/2187624/dave-meltzer-says-wwe-nxt-gab-2026-timing-no-coincidence/"
+    },
+    {
+      "added_at": "2026-06-04T19:22:51.002343+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2187621/shun-skywalker-announces-departure-dragongate",
+      "reason": "softpool_ineligible:recency:fresh_12h",
+      "title": "Shun Skywalker Announces Departure From Dragongate",
+      "url": "https://www.wrestlinginc.com/2187621/shun-skywalker-announces-departure-dragongate/"
+    },
+    {
+      "added_at": "2026-06-04T19:22:51.002343+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2187599/dave-meltzer-explains-odd-choice-aaa-triplemania-venue",
+      "reason": "softpool_ineligible:recency:fresh_12h",
+      "title": "Dave Meltzer Explains Odd Choice For AAA TripleMania Venue",
+      "url": "https://www.wrestlinginc.com/2187599/dave-meltzer-explains-odd-choice-aaa-triplemania-venue/"
+    },
+    {
+      "added_at": "2026-06-04T19:22:51.002343+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/andre-chase-reveals-new-ring-name-wwe-release",
+      "reason": "softpool_ineligible:recency:fresh_12h",
+      "title": "Andre Chase Reveals New Ring Name After WWE Release",
+      "url": "https://www.ringsidenews.com/andre-chase-reveals-new-ring-name-wwe-release/"
+    },
+    {
+      "added_at": "2026-06-04T19:22:51.002343+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/tna-knockout-granted-release-company",
+      "reason": "softpool_ineligible:recency:fresh_12h",
+      "title": "TNA Knockout Granted Release From Company",
+      "url": "https://www.ringsidenews.com/tna-knockout-granted-release-company/"
+    },
+    {
+      "added_at": "2026-06-04T19:22:51.002343+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/identity-woman-who-kissed-andrade-aew-dynamite-revealed",
+      "reason": "softpool_ineligible:recency:fresh_12h",
+      "title": "Identity of Woman Who Kissed Andrade on AEW Dynamite Revealed",
+      "url": "https://www.ringsidenews.com/identity-woman-who-kissed-andrade-aew-dynamite-revealed/"
+    },
+    {
+      "added_at": "2026-06-04T19:22:51.002343+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/wwe-producer-publicly-responds-la-knight-says-he-feels-underappreciated",
+      "reason": "softpool_ineligible:recency:fresh_12h",
+      "title": "WWE Producer Publicly Responds After LA Knight Says He Feels Underappreciated",
+      "url": "https://www.ringsidenews.com/wwe-producer-publicly-responds-la-knight-says-he-feels-underappreciated/"
+    },
+    {
+      "added_at": "2026-06-04T19:22:51.002343+00:00",
+      "article_type": "duplicate",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/backstage-frustration-liv-morgan-dominik-mysterios-booking-wwe",
+      "reason": "ai_duplicate_event:liv morgan dom booking; ai_duplicate_of:c5; strategic:booking,strategic:backstage,entity:liv morgan,recency:fresh_12h",
+      "title": "Backstage Frustration Over Liv Morgan and Dominik Mysterio’s Booking in WWE",
+      "url": "https://www.ringsidenews.com/backstage-frustration-liv-morgan-dominik-mysterios-booking-wwe/"
     }
   ],
   "ttl_hours": 168,
-  "updated_at": "2026-06-04T16:56:12.570554+00:00",
+  "updated_at": "2026-06-04T19:22:51.002343+00:00",
   "version": "v93_20_selective_softpool"
 }

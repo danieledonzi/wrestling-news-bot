@@ -1,6 +1,6 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-04T16:56:33.196580+00:00",
+  "generated_at": "2026-06-04T19:23:12.674411+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
@@ -24,38 +24,38 @@
   "results": [
     {
       "categories": [
-        5
-      ],
-      "featured_media": 5978,
-      "source_url": "https://www.ringsidenews.com/young-bucks-share-encouraging-update-adam-coles-uncertain-aew-future/",
-      "status": "published",
-      "title_it": "Young Bucks: aggiornamento positivo sul futuro di Adam Cole in AEW",
-      "wp_link": "https://news.openwrestlingtv.com/aew/young-bucks-aggiornamento-positivo-sul-futuro-di-adam-cole-in-aew/",
-      "wp_post_id": 5979
-    },
-    {
-      "categories": [
-        7,
-        8
-      ],
-      "featured_media": 5980,
-      "source_url": "https://www.ringsidenews.com/wwe-interest-bringing-mike-santana-main-roster/",
-      "status": "published",
-      "title_it": "La WWE mostra interesse per Mike Santana",
-      "wp_link": "https://news.openwrestlingtv.com/tna/la-wwe-mostra-interesse-per-mike-santana/",
-      "wp_post_id": 5981
-    },
-    {
-      "categories": [
         15,
         8
       ],
-      "featured_media": 5982,
-      "source_url": "https://www.ringsidenews.com/tko-announces-150-million-dividend-second-quarter-2026/",
+      "featured_media": 5986,
+      "source_url": "https://www.wrestlinginc.com/2187450/wwe-aew-jim-ross-doesnt-believe-shareholder-lawsuit-over-quickly/",
       "status": "published",
-      "title_it": "TKO annuncia un dividendo da 150 milioni di dollari per il secondo trimestre 2026",
-      "wp_link": "https://news.openwrestlingtv.com/world/tko-annuncia-un-dividendo-da-150-milioni-di-dollari-per-il-secondo-trimestre-2026/",
-      "wp_post_id": 5983
+      "title_it": "Jim Ross sulla causa degli azionisti WWE contro Vince McMahon",
+      "wp_link": "https://news.openwrestlingtv.com/world/jim-ross-sulla-causa-degli-azionisti-wwe-contro-vince-mcmahon/",
+      "wp_post_id": 5987
+    },
+    {
+      "categories": [
+        5
+      ],
+      "featured_media": 5988,
+      "source_url": "https://www.wrestlinginc.com/2187425/aew-world-champion-mjf-pulled-indie-booking-injury/",
+      "status": "published",
+      "title_it": "MJF rimosso da un evento indipendente per infortunio",
+      "wp_link": "https://news.openwrestlingtv.com/aew/mjf-rimosso-da-un-evento-indipendente-per-infortunio/",
+      "wp_post_id": 5989
+    },
+    {
+      "categories": [
+        6,
+        4
+      ],
+      "featured_media": 5990,
+      "source_url": "https://www.wrestlinginc.com/2187713/fka-andre-chase-reveals-new-name-post-wwe-nxt-release/",
+      "status": "published",
+      "title_it": "L'ex star di NXT Andre Chase annuncia il suo nuovo ring name",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/lex-star-di-nxt-andre-chase-annuncia-il-suo-nuovo-ring-name/",
+      "wp_post_id": 5991
     }
   ],
   "version": "v93_29_base_embed_patch",

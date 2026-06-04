@@ -1,15 +1,15 @@
 {
   "agent": "Simone",
-  "generated_at": "2026-06-04T16:56:04.481357+00:00",
+  "generated_at": "2026-06-04T19:22:43.437093+00:00",
   "handoff": {
-    "already_published": 1,
+    "already_published": 0,
     "dry_run": 0,
     "errors": 0,
     "published": 0,
     "wp_not_ready": 0
   },
   "input": {
-    "ready_reports": 1,
+    "ready_reports": 0,
     "simone_version": "v93_3_simone_report_director"
   },
   "mode": "autonomous_report_publisher_v92_workshop",
@@ -18,35 +18,16 @@
     "max_reports_per_run": 1,
     "reports_count_as_news": false,
     "simone_is_autonomous_for_reports": true,
-    "skips_internal_wp_probe_when_jarvis_preflight_down": true,
+    "skips_wp_probe_when_no_ready_reports": true,
     "uses_jarvis_wp_preflight": true,
     "uses_manual_report_workflow_engine": "modules.report_workshop_v92.run_report_workshop"
   },
-  "results": [
-    {
-      "report_key": "aew_dynamite_2026_06_03",
-      "status": "already_published",
-      "title": "AEW Dynamite del 3 giugno 2026 - risultati e momenti salienti",
-      "wp_link": "https://news.openwrestlingtv.com/aew/aew-dynamite-del-3-giugno-2026-risultati-e-momenti-salienti/",
-      "wp_post_id": 5940
-    }
-  ],
+  "results": [],
   "version": "v93_27_simone_uses_jarvis_wp_preflight",
   "wp": {
-    "diagnostics": {
-      "attempts": [
-        {
-          "attempt": 1,
-          "label": "rest_root",
-          "status": "status_200"
-        }
-      ],
-      "dns": "89.40.173.112",
-      "root": "https://news.openwrestlingtv.com"
-    },
+    "diagnostics": {},
     "dry_run": false,
-    "preflight_reason": "status_200",
-    "ready": true,
-    "reason": "status_200"
+    "ready": null,
+    "reason": "skipped_no_ready_reports"
   }
 }

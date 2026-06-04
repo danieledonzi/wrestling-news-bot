@@ -2,13 +2,13 @@
   "attempts": [
     {
       "attempt": 1,
-      "elapsed_seconds": 1.21,
+      "elapsed_seconds": 1.16,
       "endpoint": "https://news.openwrestlingtv.com/wp-json/",
       "label": "rest_root",
       "status": "status_200"
     }
   ],
-  "checked_at": "2026-06-04T16:56:04.493158+00:00",
+  "checked_at": "2026-06-04T19:22:43.450232+00:00",
   "dns_ips": [
     "89.40.173.112"
   ],
