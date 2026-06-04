@@ -123,6 +123,7 @@ for patch_name in [
     "scripts/apply_v93_simone_gate.py",
     "scripts/apply_v93_menzo_gate.py",
     "scripts/apply_v93_wp_ready_guard.py",
+    "scripts/apply_v93_output_cleanup.py",
 ]:
     patch = Path(patch_name)
     if patch.exists():
