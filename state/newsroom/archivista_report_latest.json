@@ -19,11 +19,11 @@
       "already_worked": 0,
       "event_factual_news_to_menzo": 2,
       "event_recap_duplicates_blocked_by_report": 0,
-      "event_soft_reactions_to_menzo": 0,
+      "event_soft_reactions_to_menzo": 1,
       "hard_skipped": 24,
       "menzo_memory_hard_skipped": 23,
       "old_news_hard_skipped": 0,
-      "post_show_hard_news_to_menzo": 1,
+      "post_show_hard_news_to_menzo": 0,
       "report_candidates_blocked_by_manual_or_history": 0,
       "to_menzo": 9,
       "to_simone": 2
@@ -48,7 +48,7 @@
   },
   "anomalies": [],
   "article_dossiers": [],
-  "generated_at": "2026-06-04T08:39:45.993443+00:00",
+  "generated_at": "2026-06-04T10:00:44.825479+00:00",
   "how_to_read": {
     "alfred_final_html_preview": "HTML dopo revisione/normalizzazioni di Alfred",
     "bob_body_html_preview": "HTML prodotto da Bob prima di Alfred",
@@ -57,102 +57,6 @@
     "translation_prompt_preview": "testo pulito dato a Gemini da Bob"
   },
   "ledger_48h": [
-    {
-      "agent_handoffs": {
-        "alfred": {
-          "approved": 3,
-          "blockers": 0,
-          "editorial_changes": 0,
-          "needs_revision": 0,
-          "warnings": 1
-        },
-        "bob": {
-          "errors": 0,
-          "extraction_empty": 0,
-          "ready_for_alfred": 3,
-          "translation_pending": 0
-        },
-        "massy": {
-          "already_published_hard_skipped": 6,
-          "already_worked": 2,
-          "hard_skipped": 9,
-          "to_menzo": 24,
-          "to_simone": 0
-        },
-        "menzo": {
-          "pending": 0,
-          "skipped": 19,
-          "to_bob_or_v92": 5
-        },
-        "publisher": {
-          "already_published": 0,
-          "dry_run": 0,
-          "errors": 0,
-          "published": 3,
-          "wp_not_ready": 0
-        },
-        "simone": {
-          "ready": 0,
-          "skipped": 5,
-          "waiting": 1
-        }
-      },
-      "already_published": 0,
-      "article_count": 5,
-      "errors": 0,
-      "generated_at": "2026-06-02T09:48:19.899711+00:00",
-      "overall_status": "ok",
-      "published": 3,
-      "warnings": 0
-    },
-    {
-      "agent_handoffs": {
-        "alfred": {
-          "approved": 3,
-          "blockers": 0,
-          "editorial_changes": 0,
-          "needs_revision": 0,
-          "warnings": 1
-        },
-        "bob": {
-          "errors": 0,
-          "extraction_empty": 0,
-          "ready_for_alfred": 3,
-          "translation_pending": 0
-        },
-        "massy": {
-          "already_published_hard_skipped": 6,
-          "already_worked": 2,
-          "hard_skipped": 9,
-          "to_menzo": 24,
-          "to_simone": 0
-        },
-        "menzo": {
-          "pending": 0,
-          "skipped": 19,
-          "to_bob_or_v92": 5
-        },
-        "publisher": {
-          "already_published": 0,
-          "dry_run": 0,
-          "errors": 0,
-          "published": 3,
-          "wp_not_ready": 0
-        },
-        "simone": {
-          "ready": 0,
-          "skipped": 5,
-          "waiting": 1
-        }
-      },
-      "already_published": 0,
-      "article_count": 5,
-      "errors": 0,
-      "generated_at": "2026-06-02T09:48:19.906397+00:00",
-      "overall_status": "ok",
-      "published": 3,
-      "warnings": 0
-    },
     {
       "agent_handoffs": {
         "alfred": {
@@ -2018,6 +1922,116 @@
       "overall_status": "ok",
       "published": 0,
       "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 0,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 0
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 0,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 0,
+          "already_worked": 0,
+          "event_factual_news_to_menzo": 2,
+          "event_recap_duplicates_blocked_by_report": 0,
+          "event_soft_reactions_to_menzo": 1,
+          "hard_skipped": 24,
+          "menzo_memory_hard_skipped": 23,
+          "old_news_hard_skipped": 0,
+          "post_show_hard_news_to_menzo": 0,
+          "report_candidates_blocked_by_manual_or_history": 0,
+          "to_menzo": 9,
+          "to_simone": 2
+        },
+        "menzo": {
+          "pending": 0,
+          "skipped": 0,
+          "to_bob_or_v92": 0
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 0,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 1,
+          "skipped": 5,
+          "waiting": 0
+        }
+      },
+      "already_published": 0,
+      "article_count": 0,
+      "errors": 0,
+      "generated_at": "2026-06-04T10:00:44.818640+00:00",
+      "overall_status": "ok",
+      "published": 0,
+      "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 0,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 0
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 0,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 0,
+          "already_worked": 0,
+          "event_factual_news_to_menzo": 2,
+          "event_recap_duplicates_blocked_by_report": 0,
+          "event_soft_reactions_to_menzo": 1,
+          "hard_skipped": 24,
+          "menzo_memory_hard_skipped": 23,
+          "old_news_hard_skipped": 0,
+          "post_show_hard_news_to_menzo": 0,
+          "report_candidates_blocked_by_manual_or_history": 0,
+          "to_menzo": 9,
+          "to_simone": 2
+        },
+        "menzo": {
+          "pending": 0,
+          "skipped": 0,
+          "to_bob_or_v92": 0
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 0,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 1,
+          "skipped": 5,
+          "waiting": 0
+        }
+      },
+      "already_published": 0,
+      "article_count": 0,
+      "errors": 0,
+      "generated_at": "2026-06-04T10:00:44.825479+00:00",
+      "overall_status": "ok",
+      "published": 0,
+      "warnings": 0
     }
   ],
   "overall_status": "ok",
@@ -2046,18 +2060,18 @@
       "ready_for_alfred": 0,
       "translation_pending": 0
     },
-    "ended_at": "2026-06-04T08:39:45.984291+00:00",
+    "ended_at": "2026-06-04T10:00:44.813539+00:00",
     "engine": "bot_v92.py",
     "massy_handoff": {
       "already_published_hard_skipped": 0,
       "already_worked": 0,
       "event_factual_news_to_menzo": 2,
       "event_recap_duplicates_blocked_by_report": 0,
-      "event_soft_reactions_to_menzo": 0,
+      "event_soft_reactions_to_menzo": 1,
       "hard_skipped": 24,
       "menzo_memory_hard_skipped": 23,
       "old_news_hard_skipped": 0,
-      "post_show_hard_news_to_menzo": 1,
+      "post_show_hard_news_to_menzo": 0,
       "report_candidates_blocked_by_manual_or_history": 0,
       "to_menzo": 9,
       "to_simone": 2
@@ -2089,14 +2103,14 @@
       "published": 0,
       "wp_not_ready": 1
     },
-    "started_at": "2026-06-04T08:38:12.892010+00:00",
+    "started_at": "2026-06-04T09:59:13.779053+00:00",
     "version": "v93_20_process_refinements"
   },
   "summary": {
     "anomalies": 0,
     "article_dossiers": 0,
     "errors_48h": 16,
-    "published_48h": 54,
+    "published_48h": 48,
     "published_current_run": 0,
     "runs_48h": 38
   },
@@ -2105,85 +2119,85 @@
       "agent": "Jarvis",
       "note": "engine=bot_v92.py",
       "phase": "bootstrap_status_written",
-      "timestamp": "2026-06-04T08:38:12.892234+00:00"
+      "timestamp": "2026-06-04T09:59:13.779317+00:00"
     },
     {
       "agent": "Massy",
       "note": "to_simone=2 to_menzo=9 hard_skip=24 already=0",
       "phase": "sentinel_board_ready",
-      "timestamp": "2026-06-04T08:38:13.734596+00:00"
+      "timestamp": "2026-06-04T09:59:14.425099+00:00"
     },
     {
       "agent": "Massy",
       "note": "version=v93_24_massy_show_news_before_report_closure",
       "phase": "forced_policy_active",
-      "timestamp": "2026-06-04T08:38:13.734610+00:00"
+      "timestamp": "2026-06-04T09:59:14.425122+00:00"
     },
     {
       "agent": "Simone",
       "note": "ready=1 waiting=0 skipped=5",
       "phase": "report_decision_ready",
-      "timestamp": "2026-06-04T08:38:13.737364+00:00"
+      "timestamp": "2026-06-04T09:59:14.428794+00:00"
     },
     {
       "agent": "Simone",
       "note": "published=0 already=0 wp_not_ready=1 errors=0",
       "phase": "report_publication_ready",
-      "timestamp": "2026-06-04T08:39:08.271003+00:00"
+      "timestamp": "2026-06-04T10:00:07.335174+00:00"
     },
     {
       "agent": "Menzo",
       "note": "selected=0 pending=0 skipped=0",
       "phase": "editorial_decision_ready",
-      "timestamp": "2026-06-04T08:39:20.768560+00:00"
+      "timestamp": "2026-06-04T10:00:19.753195+00:00"
     },
     {
       "agent": "Menzo",
       "note": "version=v93_25_wp_ready_guard",
       "phase": "forced_policy_active",
-      "timestamp": "2026-06-04T08:39:20.768576+00:00"
+      "timestamp": "2026-06-04T10:00:19.753213+00:00"
     },
     {
       "agent": "Bob",
       "note": "ready=0 pending=0 empty=0 errors=0",
       "phase": "article_packages_ready",
-      "timestamp": "2026-06-04T08:39:20.780298+00:00"
+      "timestamp": "2026-06-04T10:00:19.767924+00:00"
     },
     {
       "agent": "Bob",
       "note": "warnings=0",
       "phase": "bob_brief_guard_applied",
-      "timestamp": "2026-06-04T08:39:20.780521+00:00"
+      "timestamp": "2026-06-04T10:00:19.768194+00:00"
     },
     {
       "agent": "Alfred",
       "note": "approved=0 needs_revision=0 blockers=0 warnings=0 changes=0",
       "phase": "quality_review_ready",
-      "timestamp": "2026-06-04T08:39:20.785528+00:00"
+      "timestamp": "2026-06-04T10:00:19.774701+00:00"
     },
     {
       "agent": "Alfred",
       "note": "surfaced=0",
       "phase": "bob_warning_guard_applied",
-      "timestamp": "2026-06-04T08:39:20.785719+00:00"
+      "timestamp": "2026-06-04T10:00:19.774931+00:00"
     },
     {
       "agent": "Publisher",
       "note": "published=0 already=0 dry=0 wp_not_ready=0 errors=0",
       "phase": "publication_ready",
-      "timestamp": "2026-06-04T08:39:45.984256+00:00"
+      "timestamp": "2026-06-04T10:00:44.813487+00:00"
     },
     {
       "agent": "Jarvis",
       "note": "v93 Publisher completed; v92 fallback skipped",
       "phase": "runtime_skipped",
-      "timestamp": "2026-06-04T08:39:45.984280+00:00"
+      "timestamp": "2026-06-04T10:00:44.813525+00:00"
     },
     {
       "agent": "Archivista",
       "note": "status=ok anomalies=0",
       "phase": "audit_ready",
-      "timestamp": "2026-06-04T08:39:45.993401+00:00"
+      "timestamp": "2026-06-04T10:00:44.825421+00:00"
     }
   ],
   "version": "v93_7_archivista_audit"

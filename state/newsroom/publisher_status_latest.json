@@ -1,6 +1,6 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-04T08:39:45.982820+00:00",
+  "generated_at": "2026-06-04T10:00:44.812872+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
@@ -14,64 +14,18 @@
   },
   "mode": "wordpress_publisher_plain_oembed_urls",
   "policy": {
-    "business_preferred_over_world_for_data_reports": true,
-    "category_priority": {
-      "AEW": [
-        "AEW"
-      ],
-      "Business": [
-        "Business",
-        "World"
-      ],
-      "Editoriali": [
-        "Editoriali"
-      ],
-      "NXT": [
-        "NXT",
-        "WWE"
-      ],
-      "ROH": [
-        "ROH",
-        "AEW"
-      ],
-      "TNA": [
-        "TNA",
-        "World"
-      ],
-      "WWE": [
-        "WWE"
-      ],
-      "World": [
-        "World"
-      ]
-    },
     "featured_image_source": "meta.featured_image_or_first_placeholder",
     "idempotency": "state/newsroom/publisher_history.json by source_url",
-    "paragraph_wrapped_social_urls_rendered_as_gutenberg_embed_blocks": true,
-    "personal_wwe_legal_cases_category": [
-      "WWE",
-      "World"
-    ],
-    "plain_social_urls_rendered_as_gutenberg_embed_blocks": true,
     "preserve_plain_embed_urls_for_wordpress_oembed": true,
-    "publish_retry_queue": "state/newsroom/publish_retry_queue.json",
-    "retry_queue_before_new_articles": true,
     "source_attribution": true,
     "strip_inline_image_placeholders": true
   },
   "results": [],
-  "retry_queue": {
-    "added": 0,
-    "injected": 0,
-    "resolved": 0,
-    "retained": 0,
-    "size": 0
-  },
-  "version": "v93_20_1_publisher_retry_queue_recursion_fix",
+  "version": "v93_10_publisher_plain_oembed_urls",
   "wp": {
     "dry_run": false,
     "post_status": "publish",
     "ready": false,
-    "reason": "wp_json_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2ea96b49d0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=25)'))"
+    "reason": "wp_json_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2fac713490>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=25)'))"
   }
 }

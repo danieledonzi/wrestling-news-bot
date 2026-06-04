@@ -1,7 +1,7 @@
 {
   "agent": "Bob",
   "articles": [],
-  "generated_at": "2026-06-04T08:39:20.779530+00:00",
+  "generated_at": "2026-06-04T10:00:19.767035+00:00",
   "handoff": {
     "errors": 0,
     "extraction_empty": 0,
@@ -39,7 +39,7 @@
       "embed"
     ],
     "preserve_embeds_as_plain_url_lines": true,
-    "preserve_quotes_as_blockquote": true,
+    "preserve_quotes_as_blockquote": "source_blockquote_only",
     "preserve_sequence_outside_gemini": true,
     "preserve_tables_as_html_tables": true,
     "prompt_family": "v92_historical_natural_full_translation_blocks",

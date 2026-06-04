@@ -111,6 +111,18 @@ Published reports: AEW Dynamite del 3 giugno 2026 - risultati e momenti salienti
 Massy: to_simone=2 to_menzo=9 hard_skip=24 menzo_skip=23 old_skip=0
 Simone: ready=1 reports_published=0 wp_not_ready=1
 Menzo: selected=0 pending=0 skipped=0 ai=None model=None
+Bob: ready=0 errors=0 changes={'bob_brief_warnings_added': 0, 'bob_v93_16_changes': 0}
+Alfred: approved=0 warnings=0 blockers=0
+Publisher: published=0 wp_not_ready=0 errors=0
+Archivista: status=ok anomalies=0
+Selected: -
+Published news: -
+Published reports: -
+
+===== NEWSROOM MASTER RUN 2026-06-04T09:59:13.779053+00:00 | v93_20_process_refinements | run_id=26944741744 =====
+Massy: to_simone=2 to_menzo=9 hard_skip=24 menzo_skip=23 old_skip=0
+Simone: ready=1 reports_published=0 wp_not_ready=1
+Menzo: selected=0 pending=0 skipped=0 ai=None model=None
 Bob: ready=0 errors=0 changes={'bob_v93_16_changes': 0, 'bob_brief_warnings_added': 0}
 Alfred: approved=0 warnings=0 blockers=0
 Publisher: published=0 wp_not_ready=0 errors=0

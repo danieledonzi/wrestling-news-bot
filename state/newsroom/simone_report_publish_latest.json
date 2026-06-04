@@ -1,6 +1,6 @@
 {
   "agent": "Simone",
-  "generated_at": "2026-06-04T08:39:08.270321+00:00",
+  "generated_at": "2026-06-04T10:00:07.334338+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
@@ -23,7 +23,7 @@
   },
   "results": [
     {
-      "reason": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2ea9614c90>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=12)'))",
+      "reason": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2fac71cc90>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=12)'))",
       "report_key": "aew_dynamite_2026_06_03",
       "source_url": "https://www.wrestlinginc.com/2186292/aew-dynamite-june-3-two-titles-on-line-owen-hart-cup-tournaments-continue/",
       "status": "wp_not_ready",
@@ -37,22 +37,22 @@
         {
           "attempt": 1,
           "label": "rest_root",
-          "status": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2ea960a710>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=12)'))"
+          "status": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2fac712710>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=12)'))"
         },
         {
           "attempt": 1,
           "label": "posts_auth",
-          "status": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2ea9614ad0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=12)'))"
+          "status": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2fac71cb50>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=12)'))"
         },
         {
           "attempt": 2,
           "label": "rest_root",
-          "status": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2ea960a710>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=12)'))"
+          "status": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2fac711bd0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=12)'))"
         },
         {
           "attempt": 2,
           "label": "posts_auth",
-          "status": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2ea9614c90>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=12)'))"
+          "status": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2fac71cc90>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=12)'))"
         }
       ],
       "dns": "89.40.173.112",
@@ -60,6 +60,6 @@
     },
     "dry_run": false,
     "ready": false,
-    "reason": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2ea9614c90>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=12)'))"
+    "reason": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f2fac71cc90>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=12)'))"
   }
 }
