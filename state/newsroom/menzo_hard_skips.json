@@ -746,9 +746,36 @@
       "reason": "softpool_ineligible:ai:Curiosità di basso valore giornalistico (nomenclatura pre-WWE).; deterministic:recency:fresh_12h",
       "title": "LA Knight Reveals What WWE Originally Wanted to Name Him",
       "url": "https://www.ringsidenews.com/la-knight-reveals-what-wwe-originally-wanted-name-him/"
+    },
+    {
+      "added_at": "2026-06-04T13:57:31.429041+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2184821/eric-bischoff-nwo-third-man-hulk-hogan",
+      "reason": "softpool_ineligible:ai:Trivia storica, non utile per il pubblico attuale.; deterministic:recency:fresh_12h",
+      "title": "Eric Bischoff Discusses Who Would Have Been NWO's Third Man If It Wasn't Hulk Hogan",
+      "url": "https://www.wrestlinginc.com/2184821/eric-bischoff-nwo-third-man-hulk-hogan/"
+    },
+    {
+      "added_at": "2026-06-04T13:57:31.429041+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/becky-lynch-admits-she-considered-going-mma-wrestling-ronda-rousey",
+      "reason": "softpool_ineligible:ai:Curiosità retrospettiva non rilevante per il wrestling attuale.; deterministic:entity:becky lynch,recency:fresh_12h",
+      "title": "Becky Lynch Admits She Considered Going Into MMA After Wrestling Ronda Rousey",
+      "url": "https://www.ringsidenews.com/becky-lynch-admits-she-considered-going-mma-wrestling-ronda-rousey/"
+    },
+    {
+      "added_at": "2026-06-04T13:57:31.429041+00:00",
+      "article_type": "duplicate",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/la-knight-blames-lack-direction-his-wwe-crowd-reactions-cooling-off",
+      "reason": "ai_duplicate_event:la knight status; ai_duplicate_of:c6; soft_penalty:reaction,recency:fresh_12h",
+      "title": "LA Knight Blames Lack of Direction for His WWE Crowd Reactions Cooling Off",
+      "url": "https://www.ringsidenews.com/la-knight-blames-lack-direction-his-wwe-crowd-reactions-cooling-off/"
     }
   ],
   "ttl_hours": 168,
-  "updated_at": "2026-06-04T10:47:32.660166+00:00",
+  "updated_at": "2026-06-04T13:57:31.429041+00:00",
   "version": "v93_20_selective_softpool"
 }

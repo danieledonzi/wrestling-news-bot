@@ -1,5 +1,12 @@
 {
-  "allowed_urls": [],
-  "generated_at": "2026-06-04T12:50:10.213694+00:00",
-  "version": "v93_25_wp_ready_guard"
+  "allowed_urls": [
+    "https://www.ringsidenews.com/mjf-pulled-indie-booking-suffering-injury-aew-dynamite/",
+    "https://www.ringsidenews.com/braun-strowman-reveals-his-condition-wwe-return-release/",
+    "https://www.wrestlinginc.com/2187258/wwe-jbl-john-bradshaw-layfield-enzo-amore-baron-corbin-potential-returns/",
+    "https://www.wrestlinginc.com/2187248/bully-ray-chad-gable-future-bubble-aaa/",
+    "https://www.ringsidenews.com/becky-lynch-believes-wwe-women-will-main-event-more-wrestlemanias-than-men/",
+    "https://www.ringsidenews.com/la-knight-admits-he-feels-underappreciated-wwe/"
+  ],
+  "generated_at": "2026-06-04T13:57:31.432597+00:00",
+  "version": "v93_20_selective_softpool"
 }

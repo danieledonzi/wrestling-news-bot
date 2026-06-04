@@ -44,6 +44,15 @@
     "wp_link": "https://news.openwrestlingtv.com/world/incerto-il-futuro-di-bayley-in-wwe-con-la-scadenza-del-contratto/",
     "wp_post_id": 5913
   },
+  "https://www.ringsidenews.com/braun-strowman-reveals-his-condition-wwe-return-release": {
+    "published_at": "2026-06-04T13:57:53.117611+00:00",
+    "source": "ringsidenews",
+    "source_url": "https://www.ringsidenews.com/braun-strowman-reveals-his-condition-wwe-return-release/",
+    "status": "publish",
+    "title_it": "Braun Strowman chiarisce le condizioni per un eventuale ritorno in WWE",
+    "wp_link": "https://news.openwrestlingtv.com/wwe/braun-strowman-chiarisce-le-condizioni-per-un-eventuale-ritorno-in-wwe/",
+    "wp_post_id": 5974
+  },
   "https://www.ringsidenews.com/bron-breakkers-injury-status-limping-hotel-lobby-following-wwe-raw": {
     "published_at": "2026-06-02T21:30:29.405580+00:00",
     "source": "ringsidenews",
@@ -178,6 +187,15 @@
     "title_it": "Mike Santana: aggiornamenti sul contratto con TNA tra i rumors di interesse della WWE",
     "wp_link": "https://news.openwrestlingtv.com/tna/mike-santana-aggiornamenti-sul-contratto-con-tna-tra-i-rumors-di-interesse-della-wwe/",
     "wp_post_id": 5784
+  },
+  "https://www.ringsidenews.com/mjf-pulled-indie-booking-suffering-injury-aew-dynamite": {
+    "published_at": "2026-06-04T13:57:51.135400+00:00",
+    "source": "ringsidenews",
+    "source_url": "https://www.ringsidenews.com/mjf-pulled-indie-booking-suffering-injury-aew-dynamite/",
+    "status": "publish",
+    "title_it": "MJF costretto a rinunciare a un evento indipendente per infortunio",
+    "wp_link": "https://news.openwrestlingtv.com/aew/mjf-costretto-a-rinunciare-a-un-evento-indipendente-per-infortunio/",
+    "wp_post_id": 5972
   },
   "https://www.ringsidenews.com/nick-khan-says-wwe-will-never-change-creative-plans-because-social-media-backlash": {
     "published_at": "2026-06-03T02:07:55.083313+00:00",
@@ -520,5 +538,14 @@
     "title_it": "Mercedes Moné torna in AEW come Wild Card del torneo Owen Hart",
     "wp_link": "https://news.openwrestlingtv.com/aew/mercedes-mone-torna-in-aew-come-wild-card-del-torneo-owen-hart/",
     "wp_post_id": 5960
+  },
+  "https://www.wrestlinginc.com/2187258/wwe-jbl-john-bradshaw-layfield-enzo-amore-baron-corbin-potential-returns": {
+    "published_at": "2026-06-04T13:57:56.053120+00:00",
+    "source": "wrestlinginc",
+    "source_url": "https://www.wrestlinginc.com/2187258/wwe-jbl-john-bradshaw-layfield-enzo-amore-baron-corbin-potential-returns/",
+    "status": "publish",
+    "title_it": "JBL si esprime sui possibili ritorni in WWE di Baron Corbin ed Enzo Amore",
+    "wp_link": "https://news.openwrestlingtv.com/wwe/jbl-si-esprime-sui-possibili-ritorni-in-wwe-di-baron-corbin-ed-enzo-amore/",
+    "wp_post_id": 5976
   }
 }

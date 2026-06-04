@@ -1,16 +1,16 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-04T12:50:35.517650+00:00",
+  "generated_at": "2026-06-04T13:57:56.054181+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
     "errors": 0,
-    "published": 0,
+    "published": 3,
     "wp_not_ready": 0
   },
   "input": {
     "alfred_version": "v93_20_alfred_table_warning_precision",
-    "approved_articles": 0
+    "approved_articles": 3
   },
   "mode": "wordpress_publisher_plain_oembed_urls",
   "policy": {
@@ -20,12 +20,46 @@
     "source_attribution": true,
     "strip_inline_image_placeholders": true
   },
-  "results": [],
+  "results": [
+    {
+      "categories": [
+        5
+      ],
+      "featured_media": 5971,
+      "source_url": "https://www.ringsidenews.com/mjf-pulled-indie-booking-suffering-injury-aew-dynamite/",
+      "status": "published",
+      "title_it": "MJF costretto a rinunciare a un evento indipendente per infortunio",
+      "wp_link": "https://news.openwrestlingtv.com/aew/mjf-costretto-a-rinunciare-a-un-evento-indipendente-per-infortunio/",
+      "wp_post_id": 5972
+    },
+    {
+      "categories": [
+        4
+      ],
+      "featured_media": 5973,
+      "source_url": "https://www.ringsidenews.com/braun-strowman-reveals-his-condition-wwe-return-release/",
+      "status": "published",
+      "title_it": "Braun Strowman chiarisce le condizioni per un eventuale ritorno in WWE",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/braun-strowman-chiarisce-le-condizioni-per-un-eventuale-ritorno-in-wwe/",
+      "wp_post_id": 5974
+    },
+    {
+      "categories": [
+        4
+      ],
+      "featured_media": 5975,
+      "source_url": "https://www.wrestlinginc.com/2187258/wwe-jbl-john-bradshaw-layfield-enzo-amore-baron-corbin-potential-returns/",
+      "status": "published",
+      "title_it": "JBL si esprime sui possibili ritorni in WWE di Baron Corbin ed Enzo Amore",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/jbl-si-esprime-sui-possibili-ritorni-in-wwe-di-baron-corbin-ed-enzo-amore/",
+      "wp_post_id": 5976
+    }
+  ],
   "version": "v93_10_publisher_plain_oembed_urls",
   "wp": {
     "dry_run": false,
     "post_status": "publish",
-    "ready": false,
-    "reason": "wp_json_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7fde80c864d0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=25)'))"
+    "ready": true,
+    "reason": "ok"
   }
 }

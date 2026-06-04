@@ -1,20 +1,787 @@
 {
   "agent": "Menzo",
-  "allowed_urls_for_v92": [],
-  "generated_at": "2026-06-04T12:50:10.213251+00:00",
+  "allowed_urls_for_v92": [
+    "https://www.ringsidenews.com/mjf-pulled-indie-booking-suffering-injury-aew-dynamite/",
+    "https://www.ringsidenews.com/braun-strowman-reveals-his-condition-wwe-return-release/",
+    "https://www.wrestlinginc.com/2187258/wwe-jbl-john-bradshaw-layfield-enzo-amore-baron-corbin-potential-returns/",
+    "https://www.wrestlinginc.com/2187248/bully-ray-chad-gable-future-bubble-aaa/",
+    "https://www.ringsidenews.com/becky-lynch-believes-wwe-women-will-main-event-more-wrestlemanias-than-men/",
+    "https://www.ringsidenews.com/la-knight-admits-he-feels-underappreciated-wwe/"
+  ],
+  "daily_policy": {
+    "max_pending_this_run": 12,
+    "max_selected_this_run": 6,
+    "reports_excluded": true,
+    "target_max": 30,
+    "target_min": 20
+  },
+  "generated_at": "2026-06-04T13:57:31.426326+00:00",
   "handoff": {
     "pending": 0,
-    "skipped": 0,
-    "to_bob_or_v92": 0
+    "skipped": 3,
+    "to_bob_or_v92": 6
   },
+  "input": {
+    "candidate_count": 9,
+    "massy_version": "v93_24_massy_show_news_before_report_closure"
+  },
+  "menzo_ai": {
+    "attempts": [
+      "gemini-3.1-flash-lite"
+    ],
+    "enabled": true,
+    "error": "",
+    "model": "gemini-3.1-flash-lite",
+    "prompt_count": 9,
+    "raw_preview": "{\n  \"reviews\": [\n    {\n      \"id\": \"c1\",\n      \"decision\": \"selected\",\n      \"priority\": 90,\n      \"category_hint\": \"AEW\",\n      \"article_type\": \"hard_news\",\n      \"event_key\": \"mjf_injury\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia di cronaca diretta sugli infortuni: impatto immediato sulle storyline AEW.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"youtube\", \"x_tweet\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Ringsidenews spesso mette banner, ignora la barra social.\"\n      }\n    },\n    {\n      \"id\": \"c2\",\n      \"decision\": \"selected\",\n      \"priority\": 70,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"strowman_wwe_return\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Dichiarazioni rilevanti di un ex-top player sul proprio status contrattuale.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Attenzione a isolare la citazione principale dal podcast.\"\n      }\n    },\n    {\n      \"id\": \"c3\",\n      \"decision\": \"selected\",\n      \"priority\": 60,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"jbl_return_comments\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Opinioni autorevoli su potenziali ritorni di nomi noti.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Focus sul contenuto delle dichiarazioni di JBL.\"\n      }\n    },\n    {\n      \"id\": \"c4\",\n      \"decision\": \"pending\",\n      \"priority\": 40,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"soft_news\",\n      \"event_key\": \"chad_gable_future\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Analisi su Chad Gable; utile ma non urgente.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\"],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"Riassumere brevemente l'opinione di Bully Ray.\"\n      }\n    },\n    {\n      \"id\": \"c5\",\n      \"decision\": \"skip\",\n      \"priority\": 20,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"low_value\",\n      \"event_key\": \"becky_opinion_wrestlemania\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Opinione speculativa, non notizia di cronaca.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": false,\n        \"expected_tables\": false,\n        \"possible_noise\": [],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"\"\n      }\n    },\n    {\n      \"id\": \"c6\",\n      \"decision\": \"pending\",\n      \"priority\": 50,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"la_knight_status\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Dichiarazioni di LA Knight sullo status in WWE.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Nota bene: integrare con c9 se necessario o scartare c9.\"\n      }\n    },\n    {\n      \"id\": \"c7\",\n      \"decision\": \"skip\",\n      \"priority\": 10,\n      \"category_hint\": \"World\",\n      \"article_type\": \"low_value\",\n      \"event_key\": \"becky_mma_speculation\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Curiosità retrospettiva non rileva",
+    "reviews": [
+      {
+        "article_type": "hard_news",
+        "bob_brief": {
+          "expected_embeds": [
+            "youtube",
+            "x_tweet"
+          ],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta"
+          ],
+          "source_specific_notes": "Ringsidenews spesso mette banner, ignora la barra social."
+        },
+        "category_hint": "AEW",
+        "decision": "selected",
+        "duplicate_of": "",
+        "editorial_reason": "Notizia di cronaca diretta sugli infortuni: impatto immediato sulle storyline AEW.",
+        "event_key": "mjf_injury",
+        "id": "c1",
+        "priority": 90,
+        "priority_label": "high"
+      },
+      {
+        "article_type": "storyline_development",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio"
+          ],
+          "source_specific_notes": "Attenzione a isolare la citazione principale dal podcast."
+        },
+        "category_hint": "WWE",
+        "decision": "selected",
+        "duplicate_of": "",
+        "editorial_reason": "Dichiarazioni rilevanti di un ex-top player sul proprio status contrattuale.",
+        "event_key": "strowman_wwe_return",
+        "id": "c2",
+        "priority": 70,
+        "priority_label": "medium"
+      },
+      {
+        "article_type": "storyline_development",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "share_links"
+          ],
+          "source_specific_notes": "Focus sul contenuto delle dichiarazioni di JBL."
+        },
+        "category_hint": "WWE",
+        "decision": "selected",
+        "duplicate_of": "",
+        "editorial_reason": "Opinioni autorevoli su potenziali ritorni di nomi noti.",
+        "event_key": "jbl_return_comments",
+        "id": "c3",
+        "priority": 60,
+        "priority_label": "medium"
+      },
+      {
+        "article_type": "soft_news",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio"
+          ],
+          "source_specific_notes": "Riassumere brevemente l'opinione di Bully Ray."
+        },
+        "category_hint": "WWE",
+        "decision": "pending",
+        "duplicate_of": "",
+        "editorial_reason": "Analisi su Chad Gable; utile ma non urgente.",
+        "event_key": "chad_gable_future",
+        "id": "c4",
+        "priority": 40,
+        "priority_label": "medium"
+      },
+      {
+        "article_type": "low_value",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [],
+          "source_specific_notes": ""
+        },
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "",
+        "editorial_reason": "Opinione speculativa, non notizia di cronaca.",
+        "event_key": "becky_opinion_wrestlemania",
+        "id": "c5",
+        "priority": 20,
+        "priority_label": "medium"
+      },
+      {
+        "article_type": "storyline_development",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar"
+          ],
+          "source_specific_notes": "Nota bene: integrare con c9 se necessario o scartare c9."
+        },
+        "category_hint": "WWE",
+        "decision": "pending",
+        "duplicate_of": "",
+        "editorial_reason": "Dichiarazioni di LA Knight sullo status in WWE.",
+        "event_key": "la_knight_status",
+        "id": "c6",
+        "priority": 50,
+        "priority_label": "medium"
+      },
+      {
+        "article_type": "low_value",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [],
+          "source_specific_notes": ""
+        },
+        "category_hint": "World",
+        "decision": "skip",
+        "duplicate_of": "",
+        "editorial_reason": "Curiosità retrospettiva non rilevante per il wrestling attuale.",
+        "event_key": "becky_mma_speculation",
+        "id": "c7",
+        "priority": 10,
+        "priority_label": "medium"
+      },
+      {
+        "article_type": "low_value",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [],
+          "source_specific_notes": ""
+        },
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "",
+        "editorial_reason": "Trivia storica, non utile per il pubblico attuale.",
+        "event_key": "bischoff_nwo_history",
+        "id": "c8",
+        "priority": 10,
+        "priority_label": "medium"
+      },
+      {
+        "article_type": "duplicate",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [],
+          "source_specific_notes": ""
+        },
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "c6",
+        "editorial_reason": "Stesso tema trattato in c6, info ridondante.",
+        "event_key": "la_knight_status",
+        "id": "c9",
+        "priority": 20,
+        "priority_label": "medium"
+      }
+    ],
+    "used": true
+  },
+  "mode": "selective_softpool",
   "pending": [],
   "policy": {
-    "gemini_avoided": true,
-    "wp_must_be_ready_before_ai": true
+    "ai_duplicate_detection": true,
+    "bob_briefs_enabled": true,
+    "current_storyline_and_roster_boosts": true,
+    "external_sports_reactions_are_skipped": true,
+    "gemini_editorial_review": true,
+    "menzo_hard_skips_exported_to_massy": true,
+    "priority_schema": "priority_label_high_medium_low_skip",
+    "ratings_reports_penalized_unless_exceptional": true,
+    "recency_penalty_after_72h": true,
+    "released_data_disambiguation": true,
+    "selected_requires_high_label_or_min_score": 65,
+    "soft_news_ttl_hours": 24,
+    "softpool_enabled": true,
+    "softpool_excludes": [
+      "duplicate",
+      "external_sports_reaction",
+      "low_value"
+    ],
+    "softpool_min_score": 55,
+    "trade_requires_wrestling_roster_context": true
   },
-  "reason": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7fde80c98f90>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))",
-  "selected": [],
-  "skipped": [],
-  "status": "skipped",
-  "version": "v93_25_wp_ready_guard"
+  "selected": [
+    {
+      "age_hours": 1.6062105008333334,
+      "agent": "Menzo",
+      "ai_editorial_reason": "Notizia di cronaca diretta sugli infortuni: impatto immediato sulle storyline AEW.",
+      "ai_id": "c1",
+      "ai_priority": 92,
+      "ai_priority_label": "high",
+      "article_type": "hard_news",
+      "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [
+          "youtube",
+          "x_tweet"
+        ],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta"
+        ],
+        "source_specific_notes": "Ringsidenews spesso mette banner, ignora la barra social."
+      },
+      "category_hint": "AEW",
+      "decision": "selected",
+      "deterministic_score": 94,
+      "evaluated_at": "2026-06-04T13:57:26.357805+00:00",
+      "event_news_class": "post_show_hard_news",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "massive_editorial_boost": "show_factual_core",
+      "menzo_ai_review": {
+        "article_type": "hard_news",
+        "bob_brief": {
+          "expected_embeds": [
+            "youtube",
+            "x_tweet"
+          ],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta"
+          ],
+          "source_specific_notes": "Ringsidenews spesso mette banner, ignora la barra social."
+        },
+        "category_hint": "AEW",
+        "decision": "selected",
+        "duplicate_of": "",
+        "editorial_reason": "Notizia di cronaca diretta sugli infortuni: impatto immediato sulle storyline AEW.",
+        "event_key": "mjf_injury",
+        "id": "c1",
+        "priority": 90,
+        "priority_label": "high"
+      },
+      "normalized_url": "https://www.ringsidenews.com/mjf-pulled-indie-booking-suffering-injury-aew-dynamite",
+      "priority": "hard",
+      "published": "Thu, 04 Jun 2026 12:21:04 +0000",
+      "reason": "ai:Notizia di cronaca diretta sugli infortuni: impatto immediato sulle storyline AEW.; deterministic:hard:injury,strategic:booking,recency:fresh_12h",
+      "score": 93,
+      "show_day_policy": "news_before_report_then_report_closure",
+      "show_name": "AEW Dynamite",
+      "show_report_id": "aew_dynamite",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"MJF Pulled from Indie Booking After Suffering Injury on AEW Dynamite\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/mjf-pulled-from-indie-booking-after-suffering-injury-on-aew-dynamite-20.jpg?x69566\" width=\"800\" /></p>MJF survived RUSH on AEW Dynamite, but he didn’t walk away unscathed, as he has been forced to pull out of an indie booking due to an injury. Beyond Wrestling took to Twitter and announced that the AEW World Champion is no longer appearing at its June 5 event in Cranston, Rhode Island. MJF was ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/mjf-pulled-indie-booking-suffering-injury-aew-dynamite/\" title=\"MJF Pulled from Indie Booking After Suffering Injury on AEW Dynamite\">Read more</a>",
+      "title": "MJF Pulled from Indie Booking After Suffering Injury on AEW Dynamite",
+      "url": "https://www.ringsidenews.com/mjf-pulled-indie-booking-suffering-injury-aew-dynamite/"
+    },
+    {
+      "age_hours": 0.9284325094444444,
+      "agent": "Menzo",
+      "ai_editorial_reason": "Dichiarazioni rilevanti di un ex-top player sul proprio status contrattuale.",
+      "ai_id": "c2",
+      "ai_priority": 72,
+      "ai_priority_label": "medium",
+      "article_type": "storyline_development",
+      "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio"
+        ],
+        "source_specific_notes": "Attenzione a isolare la citazione principale dal podcast."
+      },
+      "category_hint": "WWE",
+      "decision": "selected",
+      "deterministic_score": 88,
+      "evaluated_at": "2026-06-04T13:57:26.357036+00:00",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "storyline_development",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio"
+          ],
+          "source_specific_notes": "Attenzione a isolare la citazione principale dal podcast."
+        },
+        "category_hint": "WWE",
+        "decision": "selected",
+        "duplicate_of": "",
+        "editorial_reason": "Dichiarazioni rilevanti di un ex-top player sul proprio status contrattuale.",
+        "event_key": "strowman_wwe_return",
+        "id": "c2",
+        "priority": 70,
+        "priority_label": "medium"
+      },
+      "normalized_url": "https://www.ringsidenews.com/braun-strowman-reveals-his-condition-wwe-return-release",
+      "priority": "hard",
+      "published": "Thu, 04 Jun 2026 13:01:44 +0000",
+      "reason": "ai:Dichiarazioni rilevanti di un ex-top player sul proprio status contrattuale.; deterministic:hard:return,entity:oba femi,recency:fresh_12h",
+      "score": 81,
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Braun Strowman Reveals His Condition for WWE Return After Release\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/braun-strowman-reveals-his-condition-for-wwe-return-after-release-49.jpg?x69566\" width=\"800\" /></p>Braun Strowman isn’t closing the door on WWE following his release last year — but he’s making it very clear that door has a price tag. While speaking on the Battleground podcast, Strowman addressed a possible WWE return and a potential match with Oba Femi. The former WWE star said he would be willing to ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/braun-strowman-reveals-his-condition-wwe-return-release/\" title=\"Braun Strowman Reveals His Condition for WWE Return After Release\">Read more</a>",
+      "title": "Braun Strowman Reveals His Condition for WWE Return After Release",
+      "url": "https://www.ringsidenews.com/braun-strowman-reveals-his-condition-wwe-return-release/"
+    },
+    {
+      "age_hours": 0.4573209847222222,
+      "agent": "Menzo",
+      "ai_editorial_reason": "Opinioni autorevoli su potenziali ritorni di nomi noti.",
+      "ai_id": "c3",
+      "ai_priority": 72,
+      "ai_priority_label": "medium",
+      "article_type": "storyline_development",
+      "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "share_links"
+        ],
+        "source_specific_notes": "Focus sul contenuto delle dichiarazioni di JBL."
+      },
+      "category_hint": "WWE",
+      "decision": "selected",
+      "deterministic_score": 84,
+      "evaluated_at": "2026-06-04T13:57:26.355547+00:00",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "storyline_development",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "share_links"
+          ],
+          "source_specific_notes": "Focus sul contenuto delle dichiarazioni di JBL."
+        },
+        "category_hint": "WWE",
+        "decision": "selected",
+        "duplicate_of": "",
+        "editorial_reason": "Opinioni autorevoli su potenziali ritorni di nomi noti.",
+        "event_key": "jbl_return_comments",
+        "id": "c3",
+        "priority": 60,
+        "priority_label": "medium"
+      },
+      "normalized_url": "https://www.wrestlinginc.com/2187258/wwe-jbl-john-bradshaw-layfield-enzo-amore-baron-corbin-potential-returns",
+      "priority": "hard",
+      "published": "Thu, 04 Jun 2026 13:30:00 +0000",
+      "reason": "ai:Opinioni autorevoli su potenziali ritorni di nomi noti.; deterministic:hard:returns,hard:return,recency:fresh_12h",
+      "score": 79,
+      "source": "wrestlinginc",
+      "summary": "WWE Hall of Famer JBL has discussed the possible returns of Enzo Amore and Baron Corbin to the promotion, explaining why he supports bringing both stars back.",
+      "title": "JBL Comments On Potential WWE Returns For Baron Corbin & Enzo Amore",
+      "url": "https://www.wrestlinginc.com/2187258/wwe-jbl-john-bradshaw-layfield-enzo-amore-baron-corbin-potential-returns/"
+    },
+    {
+      "age_hours": 0.9573210697222222,
+      "agent": "Menzo",
+      "ai_editorial_reason": "Analisi su Chad Gable; utile ma non urgente.",
+      "ai_id": "c4",
+      "ai_priority": 72,
+      "ai_priority_label": "medium",
+      "article_type": "soft_news",
+      "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "must_preserve": [],
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio"
+        ],
+        "source_specific_notes": "Riassumere brevemente l'opinione di Bully Ray."
+      },
+      "category_hint": "WWE",
+      "decision": "selected",
+      "deterministic_score": 76,
+      "evaluated_at": "2026-06-04T13:57:26.355852+00:00",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "soft_news",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio"
+          ],
+          "source_specific_notes": "Riassumere brevemente l'opinione di Bully Ray."
+        },
+        "category_hint": "WWE",
+        "decision": "pending",
+        "duplicate_of": "",
+        "editorial_reason": "Analisi su Chad Gable; utile ma non urgente.",
+        "event_key": "chad_gable_future",
+        "id": "c4",
+        "priority": 40,
+        "priority_label": "medium"
+      },
+      "normalized_url": "https://www.wrestlinginc.com/2187248/bully-ray-chad-gable-future-bubble-aaa",
+      "priority": "soft",
+      "published": "Thu, 04 Jun 2026 13:00:00 +0000",
+      "reason": "ai:Analisi su Chad Gable; utile ma non urgente.; deterministic:strategic:future,strategic:main roster,entity:chad gable,recency:fresh_12h",
+      "score": 74,
+      "source": "wrestlinginc",
+      "summary": "WWE legend Bully Ray wonders how Chad Gable will fare on the WWE main roster following his success in AAA, and how the American audience will react to him.",
+      "title": "Bully Ray Isn't Sure About Chad Gable's WWE Future Outside The 'Bubble' Of AAA",
+      "url": "https://www.wrestlinginc.com/2187248/bully-ray-chad-gable-future-bubble-aaa/"
+    },
+    {
+      "age_hours": 1.8800998988888888,
+      "agent": "Menzo",
+      "ai_editorial_reason": "Opinione speculativa, non notizia di cronaca.",
+      "ai_id": "c5",
+      "ai_priority": 72,
+      "ai_priority_label": "medium",
+      "article_type": "low_value",
+      "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": false,
+        "expected_tables": false,
+        "must_preserve": [],
+        "possible_noise": [],
+        "source_specific_notes": ""
+      },
+      "category_hint": "WWE",
+      "decision": "selected",
+      "deterministic_score": 74,
+      "evaluated_at": "2026-06-04T13:57:26.359638+00:00",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "low_value",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [],
+          "source_specific_notes": ""
+        },
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "",
+        "editorial_reason": "Opinione speculativa, non notizia di cronaca.",
+        "event_key": "becky_opinion_wrestlemania",
+        "id": "c5",
+        "priority": 20,
+        "priority_label": "medium"
+      },
+      "normalized_url": "https://www.ringsidenews.com/becky-lynch-believes-wwe-women-will-main-event-more-wrestlemanias-than-men",
+      "priority": "soft",
+      "published": "Thu, 04 Jun 2026 12:04:38 +0000",
+      "reason": "ai:Opinione speculativa, non notizia di cronaca.; deterministic:strategic:future,entity:becky lynch,recency:fresh_12h",
+      "score": 73,
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Becky Lynch Believes WWE Women Will Main Event More WrestleManias Than The Men\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/becky-lynch-believes-wwe-women-will-main-event-more-wrestlemanias-than-the-men-53.jpg?x69566\" width=\"800\" /></p>Becky Lynch sees where WWE’s women’s division is heading — and she thinks the ceiling is massive, as Lynch feels women will main event more WrestleManias than the men in the future. While speaking with Stephanie McMahon on the What’s Your Story? podcast, Becky reacted after Stephanie revealed that a friend recently asked whether WWE’s ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/becky-lynch-believes-wwe-women-will-main-event-more-wrestlemanias-than-men/\" title=\"Becky Lynch Believes WWE Women Will Main Event More WrestleManias Than the Men\">Read more</a>",
+      "title": "Becky Lynch Believes WWE Women Will Main Event More WrestleManias Than the Men",
+      "url": "https://www.ringsidenews.com/becky-lynch-believes-wwe-women-will-main-event-more-wrestlemanias-than-men/"
+    },
+    {
+      "age_hours": 5.647878166111111,
+      "agent": "Menzo",
+      "ai_editorial_reason": "Dichiarazioni di LA Knight sullo status in WWE.",
+      "ai_id": "c6",
+      "ai_priority": 72,
+      "ai_priority_label": "medium",
+      "article_type": "storyline_development",
+      "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "possible_noise": [
+          "source_social_bar"
+        ],
+        "source_specific_notes": "Nota bene: integrare con c9 se necessario o scartare c9."
+      },
+      "category_hint": "WWE",
+      "decision": "selected",
+      "deterministic_score": 72,
+      "evaluated_at": "2026-06-04T13:57:26.361399+00:00",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "storyline_development",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar"
+          ],
+          "source_specific_notes": "Nota bene: integrare con c9 se necessario o scartare c9."
+        },
+        "category_hint": "WWE",
+        "decision": "pending",
+        "duplicate_of": "",
+        "editorial_reason": "Dichiarazioni di LA Knight sullo status in WWE.",
+        "event_key": "la_knight_status",
+        "id": "c6",
+        "priority": 50,
+        "priority_label": "medium"
+      },
+      "normalized_url": "https://www.ringsidenews.com/la-knight-admits-he-feels-underappreciated-wwe",
+      "priority": "soft",
+      "published": "Thu, 04 Jun 2026 08:18:34 +0000",
+      "reason": "ai:Dichiarazioni di LA Knight sullo status in WWE.; deterministic:strategic:plans,strategic:future,recency:fresh_12h",
+      "score": 72,
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"LA Knight Admits He Feels Underappreciated in WWE\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/la-knight-admits-he-feels-underappreciated-in-wwe-08.jpg?x69566\" width=\"800\" /></p>LA Knight has no problem admitting it — he feels like he’s never been fully appreciated in the wrestling business, including WWE. While speaking to Chris Van Vliet, Knight opened up about his wrestling future and made it clear he has no plans to keep doing this forever. Even though he feels physically capable of ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/la-knight-admits-he-feels-underappreciated-wwe/\" title=\"LA Knight Admits He Feels Underappreciated in WWE\">Read more</a>",
+      "title": "LA Knight Admits He Feels Underappreciated in WWE",
+      "url": "https://www.ringsidenews.com/la-knight-admits-he-feels-underappreciated-wwe/"
+    }
+  ],
+  "skipped": [
+    {
+      "age_hours": 1.4573211369444445,
+      "agent": "Menzo",
+      "ai_editorial_reason": "Trivia storica, non utile per il pubblico attuale.",
+      "ai_id": "c8",
+      "ai_priority": 72,
+      "ai_priority_label": "medium",
+      "article_type": "low_value",
+      "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": false,
+        "expected_tables": false,
+        "must_preserve": [],
+        "possible_noise": [],
+        "source_specific_notes": ""
+      },
+      "category_hint": "WWE",
+      "decision": "skip",
+      "deterministic_score": 38,
+      "evaluated_at": "2026-06-04T13:57:26.356094+00:00",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "low_value",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [],
+          "source_specific_notes": ""
+        },
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "",
+        "editorial_reason": "Trivia storica, non utile per il pubblico attuale.",
+        "event_key": "bischoff_nwo_history",
+        "id": "c8",
+        "priority": 10,
+        "priority_label": "medium"
+      },
+      "normalized_url": "https://www.wrestlinginc.com/2184821/eric-bischoff-nwo-third-man-hulk-hogan",
+      "priority": "skip",
+      "published": "Thu, 04 Jun 2026 12:30:00 +0000",
+      "reason": "softpool_ineligible:ai:Trivia storica, non utile per il pubblico attuale.; deterministic:recency:fresh_12h",
+      "score": 53,
+      "source": "wrestlinginc",
+      "summary": "Eric Bischoff names the WWE legend who was considered to be the third member of the NWO instead of Hulk Hogan.",
+      "title": "Eric Bischoff Discusses Who Would Have Been NWO's Third Man If It Wasn't Hulk Hogan",
+      "url": "https://www.wrestlinginc.com/2184821/eric-bischoff-nwo-third-man-hulk-hogan/"
+    },
+    {
+      "age_hours": 1.829544064722222,
+      "agent": "Menzo",
+      "ai_editorial_reason": "Curiosità retrospettiva non rilevante per il wrestling attuale.",
+      "ai_id": "c7",
+      "ai_priority": 72,
+      "ai_priority_label": "medium",
+      "article_type": "low_value",
+      "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": false,
+        "expected_tables": false,
+        "must_preserve": [],
+        "possible_noise": [],
+        "source_specific_notes": ""
+      },
+      "category_hint": "World",
+      "decision": "skip",
+      "deterministic_score": 46,
+      "evaluated_at": "2026-06-04T13:57:26.358634+00:00",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "low_value",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [],
+          "source_specific_notes": ""
+        },
+        "category_hint": "World",
+        "decision": "skip",
+        "duplicate_of": "",
+        "editorial_reason": "Curiosità retrospettiva non rilevante per il wrestling attuale.",
+        "event_key": "becky_mma_speculation",
+        "id": "c7",
+        "priority": 10,
+        "priority_label": "medium"
+      },
+      "normalized_url": "https://www.ringsidenews.com/becky-lynch-admits-she-considered-going-mma-wrestling-ronda-rousey",
+      "priority": "skip",
+      "published": "Thu, 04 Jun 2026 12:07:40 +0000",
+      "reason": "softpool_ineligible:ai:Curiosità retrospettiva non rilevante per il wrestling attuale.; deterministic:entity:becky lynch,recency:fresh_12h",
+      "score": 58,
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Becky Lynch Admits She Considered Going Into MMA After Wrestling Ronda Rousey\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/becky-lynch-admits-she-considered-going-into-mma-after-wrestling-ronda-rousey-09.jpg?x69566\" width=\"800\" /></p>Becky Lynch never stepped into an MMA cage, but the Man just revealed that Ronda Rousey briefly had her thinking about it. While speaking with Stephanie McMahon on the What’s Your Story? podcast, Becky reflected on working with Rousey and revealed that one particular moment during their rivalry left her surprisingly confident about how much ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/becky-lynch-admits-she-considered-going-mma-wrestling-ronda-rousey/\" title=\"Becky Lynch Admits She Considered Going Into MMA After Wrestling Ronda Rousey\">Read more</a>",
+      "title": "Becky Lynch Admits She Considered Going Into MMA After Wrestling Ronda Rousey",
+      "url": "https://www.ringsidenews.com/becky-lynch-admits-she-considered-going-mma-wrestling-ronda-rousey/"
+    },
+    {
+      "age_hours": 1.9348223847222223,
+      "agent": "Menzo",
+      "ai_editorial_reason": "Stesso tema trattato in c6, info ridondante.",
+      "ai_id": "c9",
+      "ai_priority": 72,
+      "ai_priority_label": "medium",
+      "article_type": "duplicate",
+      "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": false,
+        "expected_tables": false,
+        "must_preserve": [],
+        "possible_noise": [],
+        "source_specific_notes": ""
+      },
+      "category_hint": "WWE",
+      "decision": "skip",
+      "deterministic_score": 26,
+      "duplicate_of": "c6",
+      "evaluated_at": "2026-06-04T13:57:26.360587+00:00",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "duplicate",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [],
+          "source_specific_notes": ""
+        },
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "c6",
+        "editorial_reason": "Stesso tema trattato in c6, info ridondante.",
+        "event_key": "la_knight_status",
+        "id": "c9",
+        "priority": 20,
+        "priority_label": "medium"
+      },
+      "normalized_url": "https://www.ringsidenews.com/la-knight-blames-lack-direction-his-wwe-crowd-reactions-cooling-off",
+      "priority": "skip",
+      "published": "Thu, 04 Jun 2026 12:01:21 +0000",
+      "reason": "ai_duplicate_event:la knight status; ai_duplicate_of:c6; soft_penalty:reaction,recency:fresh_12h",
+      "score": 47,
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"LA Knight Blames Lack of Direction for His WWE Crowd Reactions Cooling Off\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/la-knight-blames-lack-of-direction-for-his-wwe-crowd-reactions-cooling-off-37.jpg?x69566\" width=\"800\" /></p>LA Knight knows the reactions are still there — but he also knows they’re not as nuclear as they used to be, and he&#8217;s blaming it on a lack of direction in WWE. While speaking to Chris Van Vliet, Knight was asked when he first noticed his crowd reactions reaching another level. Instead of pretending ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/la-knight-blames-lack-direction-his-wwe-crowd-reactions-cooling-off/\" title=\"LA Knight Blames Lack of Direction for His WWE Crowd Reactions Cooling Off\">Read more</a>",
+      "title": "LA Knight Blames Lack of Direction for His WWE Crowd Reactions Cooling Off",
+      "url": "https://www.ringsidenews.com/la-knight-blames-lack-direction-his-wwe-crowd-reactions-cooling-off/"
+    }
+  ],
+  "version": "v93_20_selective_softpool"
 }

@@ -30,19 +30,19 @@
     }
   ],
   "found_urls": 35,
-  "generated_at": "2026-06-04T12:49:44.241461+00:00",
+  "generated_at": "2026-06-04T13:57:13.536797+00:00",
   "handoff": {
     "already_published_hard_skipped": 5,
     "already_worked": 0,
     "event_factual_news_to_menzo": 0,
     "event_recap_duplicates_blocked_by_report": 0,
     "event_soft_reactions_to_menzo": 0,
-    "hard_skipped": 28,
-    "menzo_memory_hard_skipped": 22,
+    "hard_skipped": 25,
+    "menzo_memory_hard_skipped": 19,
     "old_news_hard_skipped": 0,
     "post_show_hard_news_to_menzo": 1,
     "report_candidates_blocked_by_manual_or_history": 0,
-    "to_menzo": 6,
+    "to_menzo": 9,
     "to_simone": 1
   },
   "hard_skipped": [
@@ -275,32 +275,6 @@
     },
     {
       "decision": "hard_skip",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "menzo_article_type": "low_value",
-      "menzo_reason": "softpool_ineligible:ai:Curiosità marginale, non ha impatto sulla storyline attuale.; deterministic:strategic:clash in italy,recency:fresh_12h",
-      "normalized_url": "https://www.wrestlinginc.com/2186733/wwe-hofer-nikki-bella-emily-paris-inspited-idea-clash-italy",
-      "published": "Wed, 03 Jun 2026 17:03:10 +0000",
-      "reason": "menzo_hard_skip_memory",
-      "source": "wrestlinginc",
-      "summary": "WWE Hall of Famer Nikki Bella reveals she pitched an \"Emily in Paris\" inspired idea for Clash in Italy that WWE \"liked,\" but ultimately didn't go with",
-      "title": "WWE HOFer Nikki Bella Had 'Emily In Paris' Inspired Idea For Clash In Italy",
-      "url": "https://www.wrestlinginc.com/2186733/wwe-hofer-nikki-bella-emily-paris-inspited-idea-clash-italy/"
-    },
-    {
-      "decision": "hard_skip",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "menzo_article_type": "soft_news",
-      "menzo_reason": "softpool_ineligible:ai:Notizia personale non rilevante per il wrestling, categoria corretta in WWE.; deterministic:recency:fresh_12h",
-      "normalized_url": "https://www.wrestlinginc.com/2186660/wwe-bronson-reed-drivers-attention-vehicle-collision",
-      "published": "Wed, 03 Jun 2026 16:19:16 +0000",
-      "reason": "menzo_hard_skip_memory",
-      "source": "wrestlinginc",
-      "summary": "Bronson Reed gets involved in a car accident on Tuesday, advises people to be more aware on the road.",
-      "title": "WWE's Bronson Reed Urges Drivers To Pay Attention Following Vehicle Collision",
-      "url": "https://www.wrestlinginc.com/2186660/wwe-bronson-reed-drivers-attention-vehicle-collision/"
-    },
-    {
-      "decision": "hard_skip",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "menzo_article_type": "low_value",
       "menzo_reason": "softpool_ineligible:ai:Curiosità di basso valore giornalistico (nomenclatura pre-WWE).; deterministic:recency:fresh_12h",
@@ -389,19 +363,6 @@
       "summary": "<p><img alt=\"Kevin Knight Revealed As Newest Member Of Don Callis Family On AEW Dynamite\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/kevin-knight-revealed-as-newest-member-of-don-callis-family-on-aew-dynamite-28.jpg?x69566\" width=\"800\" /></p>Kevin Knight had a big night on AEW Dynamite, and it came with a major reveal before his TNT Championship defense. During the June 3 episode of AEW Dynamite from Richmond, Virginia, Andrade El Idolo made quick work of DK Vandu in singles action. After the match, Andrade grabbed a microphone and called out MJF, ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/kevin-knight-revealed-newest-member-don-callis-family-aew-dynamite/\" title=\"Kevin Knight Revealed As Newest Member Of Don Callis Family On AEW Dynamite\">Read more</a>",
       "title": "Kevin Knight Revealed As Newest Member Of Don Callis Family On AEW Dynamite",
       "url": "https://www.ringsidenews.com/kevin-knight-revealed-newest-member-don-callis-family-aew-dynamite/"
-    },
-    {
-      "decision": "hard_skip",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_article_type": "low_value",
-      "menzo_reason": "softpool_ineligible:recency:fresh_12h",
-      "normalized_url": "https://www.ringsidenews.com/thekla-forces-announcers-apologize-spitting-flipping-off-stardom-sign-during-aew-dynamite",
-      "published": "Thu, 04 Jun 2026 01:05:42 +0000",
-      "reason": "menzo_hard_skip_memory",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Thekla Forces Announcers to Apologize After Spitting &amp; Flipping Off STARDOM Sign During AEW Dynamite\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/thekla-forces-announcers-to-apologize-after-spitting-amp-flipping-off-stardom-sign-during-aew-dynamite-39.jpg?x69566\" width=\"800\" /></p>Thekla took things to another level on AEW Dynamite this week, and the commentary team had to apologize after what happened. During the June 3 episode from Richmond, Virginia, Triangle of Madness came to the ring, with Thekla joined by Julia Hart and Skye Blue. The segment quickly turned into a direct shot at STARDOM ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/thekla-forces-announcers-apologize-spitting-flipping-off-stardom-sign-during-aew-dynamite/\" title=\"Thekla Forces Announcers to Apologize After Spitting &#38; Flipping Off STARDOM Sign During AEW Dynamite\">Read more</a>",
-      "title": "Thekla Forces Announcers to Apologize After Spitting & Flipping Off STARDOM Sign During AEW Dynamite",
-      "url": "https://www.ringsidenews.com/thekla-forces-announcers-apologize-spitting-flipping-off-stardom-sign-during-aew-dynamite/"
     }
   ],
   "known_menzo_hard_skip_urls": 83,
@@ -413,6 +374,30 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2187258/wwe-jbl-john-bradshaw-layfield-enzo-amore-baron-corbin-potential-returns",
+      "published": "Thu, 04 Jun 2026 13:30:00 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "WWE Hall of Famer JBL has discussed the possible returns of Enzo Amore and Baron Corbin to the promotion, explaining why he supports bringing both stars back.",
+      "title": "JBL Comments On Potential WWE Returns For Baron Corbin & Enzo Amore",
+      "url": "https://www.wrestlinginc.com/2187258/wwe-jbl-john-bradshaw-layfield-enzo-amore-baron-corbin-potential-returns/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2187248/bully-ray-chad-gable-future-bubble-aaa",
+      "published": "Thu, 04 Jun 2026 13:00:00 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "WWE legend Bully Ray wonders how Chad Gable will fare on the WWE main roster following his success in AAA, and how the American audience will react to him.",
+      "title": "Bully Ray Isn't Sure About Chad Gable's WWE Future Outside The 'Bubble' Of AAA",
+      "url": "https://www.wrestlinginc.com/2187248/bully-ray-chad-gable-future-bubble-aaa/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2184821/eric-bischoff-nwo-third-man-hulk-hogan",
       "published": "Thu, 04 Jun 2026 12:30:00 +0000",
       "reason": "requires_menzo_classification",
@@ -420,6 +405,18 @@
       "summary": "Eric Bischoff names the WWE legend who was considered to be the third member of the NWO instead of Hulk Hogan.",
       "title": "Eric Bischoff Discusses Who Would Have Been NWO's Third Man If It Wasn't Hulk Hogan",
       "url": "https://www.wrestlinginc.com/2184821/eric-bischoff-nwo-third-man-hulk-hogan/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/braun-strowman-reveals-his-condition-wwe-return-release",
+      "published": "Thu, 04 Jun 2026 13:01:44 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Braun Strowman Reveals His Condition for WWE Return After Release\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/braun-strowman-reveals-his-condition-for-wwe-return-after-release-49.jpg?x69566\" width=\"800\" /></p>Braun Strowman isn’t closing the door on WWE following his release last year — but he’s making it very clear that door has a price tag. While speaking on the Battleground podcast, Strowman addressed a possible WWE return and a potential match with Oba Femi. The former WWE star said he would be willing to ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/braun-strowman-reveals-his-condition-wwe-return-release/\" title=\"Braun Strowman Reveals His Condition for WWE Return After Release\">Read more</a>",
+      "title": "Braun Strowman Reveals His Condition for WWE Return After Release",
+      "url": "https://www.ringsidenews.com/braun-strowman-reveals-his-condition-wwe-return-release/"
     },
     {
       "assigned_to": "Menzo",

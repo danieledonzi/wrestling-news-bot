@@ -159,10 +159,22 @@ Published reports: -
 Massy: to_simone=1 to_menzo=6 hard_skip=28 menzo_skip=22 old_skip=0
 Simone: ready=1 reports_published=0 wp_not_ready=1
 Menzo: selected=0 pending=0 skipped=0 ai=None model=None
-Bob: ready=0 errors=0 changes={'bob_v93_28_changes': 0, 'bob_v93_16_changes': 0, 'bob_brief_warnings_added': 0}
+Bob: ready=0 errors=0 changes={'bob_brief_warnings_added': 0, 'bob_v93_16_changes': 0, 'bob_v93_28_changes': 0}
 Alfred: approved=0 warnings=0 blockers=0
 Publisher: published=0 wp_not_ready=0 errors=0
 Archivista: status=ok anomalies=0
 Selected: -
 Published news: -
+Published reports: -
+
+===== NEWSROOM MASTER RUN 2026-06-04T13:57:12.990037+00:00 | v93_20_process_refinements | run_id=26956368872 =====
+Massy: to_simone=1 to_menzo=9 hard_skip=25 menzo_skip=19 old_skip=0
+Simone: ready=1 reports_published=0 wp_not_ready=0
+Menzo: selected=6 pending=0 skipped=3 ai=True model=gemini-3.1-flash-lite
+Bob: ready=3 errors=0 changes={'bob_v93_28_changes': 1, 'bob_v93_16_changes': 1, 'bob_brief_warnings_added': 0}
+Alfred: approved=3 warnings=1 blockers=0
+Publisher: published=3 wp_not_ready=0 errors=0
+Archivista: status=ok anomalies=0
+Selected: MJF Pulled from Indie Booking After Suffering Injury on AEW Dynamite, Braun Strowman Reveals His Condition for WWE Return After Release, JBL Comments On Potential WWE Returns For Baron Corbin & Enzo Amore, Bully Ray Isn't Sure About Chad Gable's WWE Future Outside The 'Bubble' Of AAA, Becky Lynch Believes WWE Women Will Main Event More WrestleManias Than the Men, LA Knight Admits He Feels Underappreciated in WWE
+Published news: MJF costretto a rinunciare a un evento indipendente per infortunio, Braun Strowman chiarisce le condizioni per un eventuale ritorno in WWE, JBL si esprime sui possibili ritorni in WWE di Baron Corbin ed Enzo Amore
 Published reports: -

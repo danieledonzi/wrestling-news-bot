@@ -2,16 +2,16 @@
   "agent": "Archivista",
   "agent_handoffs": {
     "alfred": {
-      "approved": 0,
+      "approved": 3,
       "blockers": 0,
       "editorial_changes": 0,
       "needs_revision": 0,
-      "warnings": 0
+      "warnings": 1
     },
     "bob": {
       "errors": 0,
       "extraction_empty": 0,
-      "ready_for_alfred": 0,
+      "ready_for_alfred": 3,
       "translation_pending": 0
     },
     "massy": {
@@ -20,24 +20,24 @@
       "event_factual_news_to_menzo": 0,
       "event_recap_duplicates_blocked_by_report": 0,
       "event_soft_reactions_to_menzo": 0,
-      "hard_skipped": 28,
-      "menzo_memory_hard_skipped": 22,
+      "hard_skipped": 25,
+      "menzo_memory_hard_skipped": 19,
       "old_news_hard_skipped": 0,
       "post_show_hard_news_to_menzo": 1,
       "report_candidates_blocked_by_manual_or_history": 0,
-      "to_menzo": 6,
+      "to_menzo": 9,
       "to_simone": 1
     },
     "menzo": {
       "pending": 0,
-      "skipped": 0,
-      "to_bob_or_v92": 0
+      "skipped": 3,
+      "to_bob_or_v92": 6
     },
     "publisher": {
       "already_published": 0,
       "dry_run": 0,
       "errors": 0,
-      "published": 0,
+      "published": 3,
       "wp_not_ready": 0
     },
     "simone": {
@@ -47,8 +47,343 @@
     }
   },
   "anomalies": [],
-  "article_dossiers": [],
-  "generated_at": "2026-06-04T12:50:35.530697+00:00",
+  "article_dossiers": [
+    {
+      "alfred": {
+        "decision": null,
+        "editorial_changes": [],
+        "issues": [],
+        "present": false,
+        "quality_score": null,
+        "warnings": []
+      },
+      "bob": {
+        "clean_element_count": null,
+        "diagnostic_stage": null,
+        "element_counts": null,
+        "error": null,
+        "present": false,
+        "raw_element_count": null,
+        "removed_before_gemini": null,
+        "status": null,
+        "translation_model": null,
+        "translation_used": null
+      },
+      "category_hint": "WWE",
+      "html_audit": {
+        "alfred_final_html_preview": "",
+        "bob_body_html_preview": "",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_becky-lynch-believes-wwe-women-will-main-event-more-wrestlemanias-than-the-men.html",
+        "published_html_preview": "",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_becky-lynch-believes-wwe-women-will-main-event-more-wrestlemanias-than-the-men.html",
+        "publisher_review_html_preview": "",
+        "translation_prompt_preview": ""
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "ai:Opinione speculativa, non notizia di cronaca.; deterministic:strategic:future,entity:becky lynch,recency:fresh_12h",
+        "score": 73
+      },
+      "publisher": {
+        "categories": null,
+        "error": null,
+        "featured_media": null,
+        "present": false,
+        "status": null,
+        "wp_link": null,
+        "wp_post_id": null
+      },
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/becky-lynch-believes-wwe-women-will-main-event-more-wrestlemanias-than-men",
+      "title_it": "Becky Lynch Believes WWE Women Will Main Event More WrestleManias Than the Men"
+    },
+    {
+      "alfred": {
+        "decision": "approved",
+        "editorial_changes": [],
+        "issues": [],
+        "present": true,
+        "quality_score": 100,
+        "warnings": []
+      },
+      "bob": {
+        "clean_element_count": 10,
+        "diagnostic_stage": "ready_for_alfred",
+        "element_counts": {
+          "embed": 0,
+          "heading": 0,
+          "image": 0,
+          "quote": 4,
+          "table": 0,
+          "text": 6
+        },
+        "error": null,
+        "present": true,
+        "raw_element_count": 11,
+        "removed_before_gemini": 14,
+        "status": "ready_for_alfred",
+        "translation_model": "gemini-3.1-flash-lite",
+        "translation_used": true
+      },
+      "category_hint": "WWE",
+      "html_audit": {
+        "alfred_final_html_preview": "<p>Braun Strowman non chiude le porte alla WWE dopo il suo licenziamento dello scorso anno, ma ha messo in chiaro che quella porta ha un prezzo.</p>\n<p>Intervenuto nel podcast Battleground, Strowman ha parlato di un possibile ritorno in WWE e di un potenziale match contro Oba Femi. L&#x27;ex star della WWE ha dichiarato di essere disposto a risalire sul ring se l&#x27;offerta economica fosse adeguata, scherzando sul fatto che la WWE dovrebbe presentarsi alla sua porta con una proposta davvero seria.</p>\n<blockquote>“Se i soldi sono quelli giusti, sono disposto a fare quasi tutto. Proverei qualsiasi cosa due volte giusto per essere sicuro di non apprezzarla. Ma ehi, sì, è quello che ho detto. Volete parcheggiare un furgone blindato e scaricarmi lingotti d&#x27;oro sul portico? Allora verrò a prendere a calci nel sedere quel ragazzino in un attimo.”</blockquote>\n<p>Strowman ha anche elogiato Oba Femi, sottolineando come la stella emergente della WWE abbia davanti a sé un futuro radioso. Tuttavia, ha ribadito che se la WWE desidera vedere uno scontro tra mostri di quel calibro, dovrà compiere la mossa commerciale giusta.</p>\n<blockquote>“Non fraintendetemi, Oba è impressionante, battute a parte. Quel ragazzo ha un futuro incredibile davanti a sé. È proprio un bell&#x27;atleta. E come ho detto, se la WWE decidesse di usare un po&#x27; di buon senso, potremmo guadagnare un sacco di soldi.”</blockquote>\n<p>Al momento, Strowman non se ne sta certo con le mani in mano ad aspettare una chiamata della WWE. Ha dichiarato di amare la sua vita come conduttore di &#x27;Everything on the Menu&#x27; e che, per distoglierlo da questa nuova carriera, servirebbe una cifra considerevole.</p>\n<blockquote>“Il business è business. Mi sto godendo alla grande il ruolo di conduttore del programma di cucina numero uno via cavo, &#x27;Everything on the Menu&#x27;. Quindi, come ho detto, per tirarmi via dalla tavola, servirà una cifra da capogiro.”</blockquote>\n<p>Strowman ha ammesso di sentire la mancanza di alcuni aspetti del wrestling, in particolare del ring, dello spogliatoio e della reazione del pubblico. Detto questo, non ha alcun interesse a gestire le dinamiche e i drammi del backstage che accompagnano questo settore.</p>\n<blockquote>“Non fraintendetemi, il ring mi manca. Mi manca stare lì, mi manca lo spogliatoio con i ragazzi. Mi manca l&#x27;ovazione del pubblico e i fan. Non mi mancano però le politiche e le stronzate che ne conseguono. Che stiano pure lì a discutere e a fare tutto quel casino. Io resto qui a mangiare, amici miei.”</blockquote>\n<p>Il messaggio di Strowman è piuttosto chiaro: nutre ancora affetto per il wrestling, ma non ha alcuna fretta di tornare solo per il gusto di farlo. Ha un programma televisivo, un nuovo capitolo della sua vita e una richiesta economica molto alta, nel caso la WWE voglia riportare &#x27;The Monster Among Monsters&#x27; al centro della scena.</p>",
+        "bob_body_html_preview": "<p>Braun Strowman non chiude le porte alla WWE dopo il suo licenziamento dello scorso anno, ma ha messo in chiaro che quella porta ha un prezzo.</p>\n<p>Intervenuto nel podcast Battleground, Strowman ha parlato di un possibile ritorno in WWE e di un potenziale match contro Oba Femi. L&#x27;ex star della WWE ha dichiarato di essere disposto a risalire sul ring se l&#x27;offerta economica fosse adeguata, scherzando sul fatto che la WWE dovrebbe presentarsi alla sua porta con una proposta davvero seria.</p>\n<blockquote>“Se i soldi sono quelli giusti, sono disposto a fare quasi tutto. Proverei qualsiasi cosa due volte giusto per essere sicuro di non apprezzarla. Ma ehi, sì, è quello che ho detto. Volete parcheggiare un furgone blindato e scaricarmi lingotti d&#x27;oro sul portico? Allora verrò a prendere a calci nel sedere quel ragazzino in un attimo.”</blockquote>\n<p>Strowman ha anche elogiato Oba Femi, sottolineando come la stella emergente della WWE abbia davanti a sé un futuro radioso. Tuttavia, ha ribadito che se la WWE desidera vedere uno scontro tra mostri di quel calibro, dovrà compiere la mossa commerciale giusta.</p>\n<blockquote>“Non fraintendetemi, Oba è impressionante, battute a parte. Quel ragazzo ha un futuro incredibile davanti a sé. È proprio un bell&#x27;atleta. E come ho detto, se la WWE decidesse di usare un po&#x27; di buon senso, potremmo guadagnare un sacco di soldi.”</blockquote>\n<p>Al momento, Strowman non se ne sta certo con le mani in mano ad aspettare una chiamata della WWE. Ha dichiarato di amare la sua vita come conduttore di &#x27;Everything on the Menu&#x27; e che, per distoglierlo da questa nuova carriera, servirebbe una cifra considerevole.</p>\n<blockquote>“Il business è business. Mi sto godendo alla grande il ruolo di conduttore del programma di cucina numero uno via cavo, &#x27;Everything on the Menu&#x27;. Quindi, come ho detto, per tirarmi via dalla tavola, servirà una cifra da capogiro.”</blockquote>\n<p>Strowman ha ammesso di sentire la mancanza di alcuni aspetti del wrestling, in particolare del ring, dello spogliatoio e della reazione del pubblico. Detto questo, non ha alcun interesse a gestire le dinamiche e i drammi del backstage che accompagnano questo settore.</p>\n<blockquote>“Non fraintendetemi, il ring mi manca. Mi manca stare lì, mi manca lo spogliatoio con i ragazzi. Mi manca l&#x27;ovazione del pubblico e i fan. Non mi mancano però le politiche e le stronzate che ne conseguono. Che stiano pure lì a discutere e a fare tutto quel casino. Io resto qui a mangiare, amici miei.”</blockquote>\n<p>Il messaggio di Strowman è piuttosto chiaro: nutre ancora affetto per il wrestling, ma non ha alcuna fretta di tornare solo per il gusto di farlo. Ha un programma televisivo, un nuovo capitolo della sua vita e una richiesta economica molto alta, nel caso la WWE voglia riportare &#x27;The Monster Among Monsters&#x27; al centro della scena.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_braun-strowman-chiarisce-le-condizioni-per-un-eventuale-ritorno-in-wwe.html",
+        "published_html_preview": "<p>Braun Strowman non chiude le porte alla WWE dopo il suo licenziamento dello scorso anno, ma ha messo in chiaro che quella porta ha un prezzo.</p>\n<p>Intervenuto nel podcast Battleground, Strowman ha parlato di un possibile ritorno in WWE e di un potenziale match contro Oba Femi. L&#x27;ex star della WWE ha dichiarato di essere disposto a risalire sul ring se l&#x27;offerta economica fosse adeguata, scherzando sul fatto che la WWE dovrebbe presentarsi alla sua porta con una proposta davvero seria.</p>\n<blockquote>“Se i soldi sono quelli giusti, sono disposto a fare quasi tutto. Proverei qualsiasi cosa due volte giusto per essere sicuro di non apprezzarla. Ma ehi, sì, è quello che ho detto. Volete parcheggiare un furgone blindato e scaricarmi lingotti d&#x27;oro sul portico? Allora verrò a prendere a calci nel sedere quel ragazzino in un attimo.”</blockquote>\n<p>Strowman ha anche elogiato Oba Femi, sottolineando come la stella emergente della WWE abbia davanti a sé un futuro radioso. Tuttavia, ha ribadito che se la WWE desidera vedere uno scontro tra mostri di quel calibro, dovrà compiere la mossa commerciale giusta.</p>\n<blockquote>“Non fraintendetemi, Oba è impressionante, battute a parte. Quel ragazzo ha un futuro incredibile davanti a sé. È proprio un bell&#x27;atleta. E come ho detto, se la WWE decidesse di usare un po&#x27; di buon senso, potremmo guadagnare un sacco di soldi.”</blockquote>\n<p>Al momento, Strowman non se ne sta certo con le mani in mano ad aspettare una chiamata della WWE. Ha dichiarato di amare la sua vita come conduttore di &#x27;Everything on the Menu&#x27; e che, per distoglierlo da questa nuova carriera, servirebbe una cifra considerevole.</p>\n<blockquote>“Il business è business. Mi sto godendo alla grande il ruolo di conduttore del programma di cucina numero uno via cavo, &#x27;Everything on the Menu&#x27;. Quindi, come ho detto, per tirarmi via dalla tavola, servirà una cifra da capogiro.”</blockquote>\n<p>Strowman ha ammesso di sentire la mancanza di alcuni aspetti del wrestling, in particolare del ring, dello spogliatoio e della reazione del pubblico. Detto questo, non ha alcun interesse a gestire le dinamiche e i drammi del backstage che accompagnano questo settore.</p>\n<blockquote>“Non fraintendetemi, il ring mi manca. Mi manca stare lì, mi manca lo spogliatoio con i ragazzi. Mi manca l&#x27;ovazione del pubblico e i fan. Non mi mancano però le politiche e le stronzate che ne conseguono. Che stiano pure lì a discutere e a fare tutto quel casino. Io resto qui a mangiare, amici miei.”</blockquote>\n<p>Il messaggio di Strowman è piuttosto chiaro: nutre ancora affetto per il wrestling, ma non ha alcuna fretta di tornare solo per il gusto di farlo. Ha un programma televisivo, un nuovo capitolo della sua vita e una richiesta economica molto alta, nel caso la WWE voglia riportare &#x27;The Monster Among Monsters&#x27; al centro della scena.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/braun-strowman-reveals-his-condition-wwe-return-release/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_braun-strowman-chiarisce-le-condizioni-per-un-eventuale-ritorno-in-wwe.html",
+        "publisher_review_html_preview": "<p>Braun Strowman non chiude le porte alla WWE dopo il suo licenziamento dello scorso anno, ma ha messo in chiaro che quella porta ha un prezzo.</p>\n<p>Intervenuto nel podcast Battleground, Strowman ha parlato di un possibile ritorno in WWE e di un potenziale match contro Oba Femi. L&#x27;ex star della WWE ha dichiarato di essere disposto a risalire sul ring se l&#x27;offerta economica fosse adeguata, scherzando sul fatto che la WWE dovrebbe presentarsi alla sua porta con una proposta davvero seria.</p>\n<blockquote>“Se i soldi sono quelli giusti, sono disposto a fare quasi tutto. Proverei qualsiasi cosa due volte giusto per essere sicuro di non apprezzarla. Ma ehi, sì, è quello che ho detto. Volete parcheggiare un furgone blindato e scaricarmi lingotti d&#x27;oro sul portico? Allora verrò a prendere a calci nel sedere quel ragazzino in un attimo.”</blockquote>\n<p>Strowman ha anche elogiato Oba Femi, sottolineando come la stella emergente della WWE abbia davanti a sé un futuro radioso. Tuttavia, ha ribadito che se la WWE desidera vedere uno scontro tra mostri di quel calibro, dovrà compiere la mossa commerciale giusta.</p>\n<blockquote>“Non fraintendetemi, Oba è impressionante, battute a parte. Quel ragazzo ha un futuro incredibile davanti a sé. È proprio un bell&#x27;atleta. E come ho detto, se la WWE decidesse di usare un po&#x27; di buon senso, potremmo guadagnare un sacco di soldi.”</blockquote>\n<p>Al momento, Strowman non se ne sta certo con le mani in mano ad aspettare una chiamata della WWE. Ha dichiarato di amare la sua vita come conduttore di &#x27;Everything on the Menu&#x27; e che, per distoglierlo da questa nuova carriera, servirebbe una cifra considerevole.</p>\n<blockquote>“Il business è business. Mi sto godendo alla grande il ruolo di conduttore del programma di cucina numero uno via cavo, &#x27;Everything on the Menu&#x27;. Quindi, come ho detto, per tirarmi via dalla tavola, servirà una cifra da capogiro.”</blockquote>\n<p>Strowman ha ammesso di sentire la mancanza di alcuni aspetti del wrestling, in particolare del ring, dello spogliatoio e della reazione del pubblico. Detto questo, non ha alcun interesse a gestire le dinamiche e i drammi del backstage che accompagnano questo settore.</p>\n<blockquote>“Non fraintendetemi, il ring mi manca. Mi manca stare lì, mi manca lo spogliatoio con i ragazzi. Mi manca l&#x27;ovazione del pubblico e i fan. Non mi mancano però le politiche e le stronzate che ne conseguono. Che stiano pure lì a discutere e a fare tutto quel casino. Io resto qui a mangiare, amici miei.”</blockquote>\n<p>Il messaggio di Strowman è piuttosto chiaro: nutre ancora affetto per il wrestling, ma non ha alcuna fretta di tornare solo per il gusto di farlo. Ha un programma televisivo, un nuovo capitolo della sua vita e una richiesta economica molto alta, nel caso la WWE voglia riportare &#x27;The Monster Among Monsters&#x27; al centro della scena.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/braun-strowman-reveals-his-condition-wwe-return-release/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/braun-strowman-reveals-his-condition-wwe-return-release/\nTitolo feed: Braun Strowman Reveals His Condition for WWE Return After Release\nTitolo pagina: Braun Strowman Reveals His Condition for WWE Return After Release\nDescrizione: Braun Strowman isn’t closing the door on WWE following his release last year — but he’s making it very clear that door has a price tag. While speaking on\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Braun Strowman isn’t closing the door on WWE following his release last year — but he’s making it very clear that door has a price tag.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"While speaking on the Battleground podcast , Strowman addressed a possible WWE return and a potential match with Oba Femi. The former WWE star said he would be willing to get back in the ring if the money made sense, joking that WWE would need to bring a serious offer to his doorstep.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"quote\",\n    \"text\": \"“Money’s right, I’m down to do about anything. I’ll try anything twice to make sure I don’t like it. But hey, yeah, that’s what I said. You want to back that Brinks truck up, dump some gold bullion on my porch? I’ll come whip that young kid’s ass real quick.”\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Strowman also gave Oba Femi credit, saying the rising WWE star has a huge future ahead of him. Still, he made it clear that if WWE wants that kind of monster clash, the company needs to make the right business move.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"“Don’t get me wrong, Oba’s very impressive, all goofing aside and stuff like that. The kid’s got a hell of a future in front of him. He’s quite the specimen. And like I said, if WWE pull their head out of their you-know-what and have some common sense, we can make a lot of money.”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Right now, Strowman isn’t exactly sitting around waiting for WWE to call. He said he’s loving life as the host of Everything on the Menu , and pulling him away from that new lane would take a major number.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"quote\",\n    \"text\": \"“Business is business. I’m enjoying the hell out of being the host of the number one food television show on cable television, Everything on the Menu. So like I said, to pull me away from the table, it’s going to take a hell of a number.”\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"Strowman admitted he does miss parts of wrestling, especially the ring, the locker room, and the reaction from the crowd. That said, he has no interest in dealing with the backstage drama that comes with the business.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"quote\",\n    \"text\": \"“Don’t get me wrong, I miss the ring. I miss being in the ring. I miss being in the locker room with the boys. I miss the pop. I miss the fans. I don’t miss the politics and the bull crap that comes along with it. They can sit over there and argue and do all that stuff. I’ll be over here eating food, my friends.”\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"text\",\n    \"text\": \"Strowman’s message is pretty simple: he still has love for wrestling, but he’s not rushing back just to be back. He’s got a television show, a new chapter, and a very large asking price if WWE wants The Monster Among Monsters back in the mix.\"\n  }\n]\n"
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "ai:Dichiarazioni rilevanti di un ex-top player sul proprio status contrattuale.; deterministic:hard:return,entity:oba femi,recency:fresh_12h",
+        "score": 81
+      },
+      "publisher": {
+        "categories": [
+          4
+        ],
+        "error": null,
+        "featured_media": 5973,
+        "present": true,
+        "status": "published",
+        "wp_link": "https://news.openwrestlingtv.com/wwe/braun-strowman-chiarisce-le-condizioni-per-un-eventuale-ritorno-in-wwe/",
+        "wp_post_id": 5974
+      },
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/braun-strowman-reveals-his-condition-wwe-return-release",
+      "title_it": "Braun Strowman chiarisce le condizioni per un eventuale ritorno in WWE"
+    },
+    {
+      "alfred": {
+        "decision": null,
+        "editorial_changes": [],
+        "issues": [],
+        "present": false,
+        "quality_score": null,
+        "warnings": []
+      },
+      "bob": {
+        "clean_element_count": null,
+        "diagnostic_stage": null,
+        "element_counts": null,
+        "error": null,
+        "present": false,
+        "raw_element_count": null,
+        "removed_before_gemini": null,
+        "status": null,
+        "translation_model": null,
+        "translation_used": null
+      },
+      "category_hint": "WWE",
+      "html_audit": {
+        "alfred_final_html_preview": "",
+        "bob_body_html_preview": "",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_la-knight-admits-he-feels-underappreciated-in-wwe.html",
+        "published_html_preview": "",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_la-knight-admits-he-feels-underappreciated-in-wwe.html",
+        "publisher_review_html_preview": "",
+        "translation_prompt_preview": ""
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "ai:Dichiarazioni di LA Knight sullo status in WWE.; deterministic:strategic:plans,strategic:future,recency:fresh_12h",
+        "score": 72
+      },
+      "publisher": {
+        "categories": null,
+        "error": null,
+        "featured_media": null,
+        "present": false,
+        "status": null,
+        "wp_link": null,
+        "wp_post_id": null
+      },
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/la-knight-admits-he-feels-underappreciated-wwe",
+      "title_it": "LA Knight Admits He Feels Underappreciated in WWE"
+    },
+    {
+      "alfred": {
+        "decision": "approved",
+        "editorial_changes": [],
+        "issues": [],
+        "present": true,
+        "quality_score": 100,
+        "warnings": []
+      },
+      "bob": {
+        "clean_element_count": 6,
+        "diagnostic_stage": "ready_for_alfred",
+        "element_counts": {
+          "embed": 1,
+          "heading": 0,
+          "image": 0,
+          "quote": 1,
+          "table": 0,
+          "text": 4
+        },
+        "error": null,
+        "present": true,
+        "raw_element_count": 9,
+        "removed_before_gemini": 16,
+        "status": "ready_for_alfred",
+        "translation_model": "gemini-3.1-flash-lite",
+        "translation_used": true
+      },
+      "category_hint": "AEW",
+      "html_audit": {
+        "alfred_final_html_preview": "<p>MJF è sopravvissuto a RUSH nell&#x27;ultima puntata di AEW Dynamite, ma non ne è uscito indenne: è stato infatti costretto a ritirarsi da un evento indipendente a causa di un infortunio.</p>\nhttps://x.com/beyondwrestling/status/2062487283706519905\n\n<p>La Beyond Wrestling ha annunciato via Twitter che l&#x27;AEW World Champion non prenderà più parte al loro evento del 5 giugno a Cranston, nel Rhode Island. MJF avrebbe dovuto affrontare Bobby Orlando, ma la federazione ha dichiarato che il wrestler ha subito un&#x27;iperestensione al ginocchio durante la puntata di mercoledì di AEW Dynamite e non ha ricevuto il via libera per viaggiare o competere.</p>\n<blockquote>“Purtroppo @The_MJF ha subito un&#x27;iperestensione al ginocchio durante il suo match di ieri sera e non ha ricevuto l&#x27;idoneità medica per viaggiare o competere. Non sarà a Cranston domani sera, ma mi ha assicurato che lotterà per la Beyond Wrestling non appena il suo calendario glielo permetterà. Gli auguriamo una pronta guarigione.”</blockquote>\n<p>L&#x27;infortunio arriva subito dopo che MJF ha difeso con successo l&#x27;AEW World Championship contro RUSH in un brutale No Countout Match nell&#x27;edizione di Dynamite del 3 giugno. RUSH ha messo a dura prova MJF per tutto l&#x27;incontro, ma quest&#x27;ultimo è riuscito a conservare il titolo applicando una crossface che ha costretto RUSH allo svenimento.</p>\n<p>Sebbene MJF abbia mantenuto la cintura, ha incassato molti colpi durante il match. Ora, l&#x27;iperestensione al ginocchio lo ha già costretto a saltare almeno un impegno indipendente in programma. Al momento, la AEW non ha comunicato se l&#x27;infortunio influirà sul calendario televisivo di MJF. Per ora rimane il campione in carica, ma le sue condizioni saranno da monitorare attentamente dopo l&#x27;estenuante main event di Dynamite.</p>",
+        "bob_body_html_preview": "<p>MJF è sopravvissuto a RUSH nell&#x27;ultima puntata di AEW Dynamite, ma non ne è uscito indenne: è stato infatti costretto a ritirarsi da un evento indipendente a causa di un infortunio.</p>\nhttps://x.com/beyondwrestling/status/2062487283706519905\n\n<p>La Beyond Wrestling ha annunciato via Twitter che l&#x27;AEW World Champion non prenderà più parte al loro evento del 5 giugno a Cranston, nel Rhode Island. MJF avrebbe dovuto affrontare Bobby Orlando, ma la federazione ha dichiarato che il wrestler ha subito un&#x27;iperestensione al ginocchio durante la puntata di mercoledì di AEW Dynamite e non ha ricevuto il via libera per viaggiare o competere.</p>\n<blockquote>“Purtroppo @The_MJF ha subito un&#x27;iperestensione al ginocchio durante il suo match di ieri sera e non ha ricevuto l&#x27;idoneità medica per viaggiare o competere. Non sarà a Cranston domani sera, ma mi ha assicurato che lotterà per la Beyond Wrestling non appena il suo calendario glielo permetterà. Gli auguriamo una pronta guarigione.”</blockquote>\n<p>L&#x27;infortunio arriva subito dopo che MJF ha difeso con successo l&#x27;AEW World Championship contro RUSH in un brutale No Countout Match nell&#x27;edizione di Dynamite del 3 giugno. RUSH ha messo a dura prova MJF per tutto l&#x27;incontro, ma quest&#x27;ultimo è riuscito a conservare il titolo applicando una crossface che ha costretto RUSH allo svenimento.</p>\n<p>Sebbene MJF abbia mantenuto la cintura, ha incassato molti colpi durante il match. Ora, l&#x27;iperestensione al ginocchio lo ha già costretto a saltare almeno un impegno indipendente in programma. Al momento, la AEW non ha comunicato se l&#x27;infortunio influirà sul calendario televisivo di MJF. Per ora rimane il campione in carica, ma le sue condizioni saranno da monitorare attentamente dopo l&#x27;estenuante main event di Dynamite.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_mjf-costretto-a-rinunciare-a-un-evento-indipendente-per-infortunio.html",
+        "published_html_preview": "<p>MJF è sopravvissuto a RUSH nell&#x27;ultima puntata di AEW Dynamite, ma non ne è uscito indenne: è stato infatti costretto a ritirarsi da un evento indipendente a causa di un infortunio.</p>\n\nhttps://x.com/beyondwrestling/status/2062487283706519905\n\n<p>La Beyond Wrestling ha annunciato via Twitter che l&#x27;AEW World Champion non prenderà più parte al loro evento del 5 giugno a Cranston, nel Rhode Island. MJF avrebbe dovuto affrontare Bobby Orlando, ma la federazione ha dichiarato che il wrestler ha subito un&#x27;iperestensione al ginocchio durante la puntata di mercoledì di AEW Dynamite e non ha ricevuto il via libera per viaggiare o competere.</p>\n<blockquote>“Purtroppo @The_MJF ha subito un&#x27;iperestensione al ginocchio durante il suo match di ieri sera e non ha ricevuto l&#x27;idoneità medica per viaggiare o competere. Non sarà a Cranston domani sera, ma mi ha assicurato che lotterà per la Beyond Wrestling non appena il suo calendario glielo permetterà. Gli auguriamo una pronta guarigione.”</blockquote>\n<p>L&#x27;infortunio arriva subito dopo che MJF ha difeso con successo l&#x27;AEW World Championship contro RUSH in un brutale No Countout Match nell&#x27;edizione di Dynamite del 3 giugno. RUSH ha messo a dura prova MJF per tutto l&#x27;incontro, ma quest&#x27;ultimo è riuscito a conservare il titolo applicando una crossface che ha costretto RUSH allo svenimento.</p>\n<p>Sebbene MJF abbia mantenuto la cintura, ha incassato molti colpi durante il match. Ora, l&#x27;iperestensione al ginocchio lo ha già costretto a saltare almeno un impegno indipendente in programma. Al momento, la AEW non ha comunicato se l&#x27;infortunio influirà sul calendario televisivo di MJF. Per ora rimane il campione in carica, ma le sue condizioni saranno da monitorare attentamente dopo l&#x27;estenuante main event di Dynamite.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/mjf-pulled-indie-booking-suffering-injury-aew-dynamite/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_mjf-costretto-a-rinunciare-a-un-evento-indipendente-per-infortunio.html",
+        "publisher_review_html_preview": "<p>MJF è sopravvissuto a RUSH nell&#x27;ultima puntata di AEW Dynamite, ma non ne è uscito indenne: è stato infatti costretto a ritirarsi da un evento indipendente a causa di un infortunio.</p>\n\nhttps://x.com/beyondwrestling/status/2062487283706519905\n\n<p>La Beyond Wrestling ha annunciato via Twitter che l&#x27;AEW World Champion non prenderà più parte al loro evento del 5 giugno a Cranston, nel Rhode Island. MJF avrebbe dovuto affrontare Bobby Orlando, ma la federazione ha dichiarato che il wrestler ha subito un&#x27;iperestensione al ginocchio durante la puntata di mercoledì di AEW Dynamite e non ha ricevuto il via libera per viaggiare o competere.</p>\n<blockquote>“Purtroppo @The_MJF ha subito un&#x27;iperestensione al ginocchio durante il suo match di ieri sera e non ha ricevuto l&#x27;idoneità medica per viaggiare o competere. Non sarà a Cranston domani sera, ma mi ha assicurato che lotterà per la Beyond Wrestling non appena il suo calendario glielo permetterà. Gli auguriamo una pronta guarigione.”</blockquote>\n<p>L&#x27;infortunio arriva subito dopo che MJF ha difeso con successo l&#x27;AEW World Championship contro RUSH in un brutale No Countout Match nell&#x27;edizione di Dynamite del 3 giugno. RUSH ha messo a dura prova MJF per tutto l&#x27;incontro, ma quest&#x27;ultimo è riuscito a conservare il titolo applicando una crossface che ha costretto RUSH allo svenimento.</p>\n<p>Sebbene MJF abbia mantenuto la cintura, ha incassato molti colpi durante il match. Ora, l&#x27;iperestensione al ginocchio lo ha già costretto a saltare almeno un impegno indipendente in programma. Al momento, la AEW non ha comunicato se l&#x27;infortunio influirà sul calendario televisivo di MJF. Per ora rimane il campione in carica, ma le sue condizioni saranno da monitorare attentamente dopo l&#x27;estenuante main event di Dynamite.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/mjf-pulled-indie-booking-suffering-injury-aew-dynamite/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/mjf-pulled-indie-booking-suffering-injury-aew-dynamite/\nTitolo feed: MJF Pulled from Indie Booking After Suffering Injury on AEW Dynamite\nTitolo pagina: MJF Pulled from Indie Booking After Suffering Injury on AEW Dynamite\nDescrizione: MJF survived RUSH on AEW Dynamite, but he didn’t walk away unscathed, as he has been forced to pull out of an indie booking due to an injury. Beyond\nCategoria suggerita: AEW\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"MJF survived RUSH on AEW Dynamite, but he didn’t walk away unscathed, as he has been forced to pull out of an indie booking due to an injury.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Beyond Wrestling took to Twitter and announced that the AEW World Champion is no longer appearing at its June 5 event in Cranston, Rhode Island. MJF was scheduled to face Bobby Orlando, but the promotion said he hyperextended his knee during Wednesday night’s AEW Dynamite and is not cleared to travel or wrestle.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"“Unfortunately @The_MJF hyperextended his knee during his match last night & is not medically cleared to travel or compete. He will not be in Cranston tomorrow night but assured me he will wrestle for Beyond Wrestling as soon as his schedule allows. We wish him a speedy recovery.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"The injury comes right after MJF retained the AEW World Championship against RUSH in a brutal No Countout Match on the June 3 edition of Dynamite . RUSH pushed MJF hard throughout the fight, but MJF eventually retained after locking in a crossface and forcing RUSH to pass out.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"While MJF kept the title, he also took a lot of punishment in the process. Now, the hyperextended knee has already forced him off at least one upcoming independent date. At this point, AEW has not announced whether the injury will impact MJF’s television schedule. For now, he remains champion, but his status will be worth watching after a hard-fought Dynamite main event.\"\n  }\n]\n"
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "ai:Notizia di cronaca diretta sugli infortuni: impatto immediato sulle storyline AEW.; deterministic:hard:injury,strategic:booking,recency:fresh_12h",
+        "score": 93
+      },
+      "publisher": {
+        "categories": [
+          5
+        ],
+        "error": null,
+        "featured_media": 5971,
+        "present": true,
+        "status": "published",
+        "wp_link": "https://news.openwrestlingtv.com/aew/mjf-costretto-a-rinunciare-a-un-evento-indipendente-per-infortunio/",
+        "wp_post_id": 5972
+      },
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/mjf-pulled-indie-booking-suffering-injury-aew-dynamite",
+      "title_it": "MJF costretto a rinunciare a un evento indipendente per infortunio"
+    },
+    {
+      "alfred": {
+        "decision": null,
+        "editorial_changes": [],
+        "issues": [],
+        "present": false,
+        "quality_score": null,
+        "warnings": []
+      },
+      "bob": {
+        "clean_element_count": null,
+        "diagnostic_stage": null,
+        "element_counts": null,
+        "error": null,
+        "present": false,
+        "raw_element_count": null,
+        "removed_before_gemini": null,
+        "status": null,
+        "translation_model": null,
+        "translation_used": null
+      },
+      "category_hint": "WWE",
+      "html_audit": {
+        "alfred_final_html_preview": "",
+        "bob_body_html_preview": "",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_bully-ray-isn-t-sure-about-chad-gable-s-wwe-future-outside-the-bubble-of-aaa.html",
+        "published_html_preview": "",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_bully-ray-isn-t-sure-about-chad-gable-s-wwe-future-outside-the-bubble-of-aaa.html",
+        "publisher_review_html_preview": "",
+        "translation_prompt_preview": ""
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "ai:Analisi su Chad Gable; utile ma non urgente.; deterministic:strategic:future,strategic:main roster,entity:chad gable,recency:fresh_12h",
+        "score": 74
+      },
+      "publisher": {
+        "categories": null,
+        "error": null,
+        "featured_media": null,
+        "present": false,
+        "status": null,
+        "wp_link": null,
+        "wp_post_id": null
+      },
+      "source": "wrestlinginc",
+      "source_url": "https://www.wrestlinginc.com/2187248/bully-ray-chad-gable-future-bubble-aaa",
+      "title_it": "Bully Ray Isn't Sure About Chad Gable's WWE Future Outside The 'Bubble' Of AAA"
+    },
+    {
+      "alfred": {
+        "decision": "approved",
+        "editorial_changes": [],
+        "issues": [],
+        "present": true,
+        "quality_score": 95,
+        "warnings": [
+          {
+            "code": "image_placeholder_present",
+            "evidence": "<!--IMAGE:...-->",
+            "message": "Presente placeholder immagine da gestire nel Publisher.",
+            "severity": "warning"
+          }
+        ]
+      },
+      "bob": {
+        "clean_element_count": 9,
+        "diagnostic_stage": "ready_for_alfred",
+        "element_counts": {
+          "embed": 0,
+          "heading": 1,
+          "image": 1,
+          "quote": 0,
+          "table": 0,
+          "text": 7
+        },
+        "error": null,
+        "present": true,
+        "raw_element_count": 10,
+        "removed_before_gemini": 1,
+        "status": "ready_for_alfred",
+        "translation_model": "gemini-3.1-flash-lite",
+        "translation_used": true
+      },
+      "category_hint": "WWE",
+      "html_audit": {
+        "alfred_final_html_preview": "<p>JBL ha espresso il suo sostegno per un ritorno di Baron Corbin ed Enzo Amore in WWE.</p>\n<p>La leggenda della WWE ha parlato recentemente al podcast &quot;Something To Wrestle&quot;, augurandosi che le voci sul ritorno di Corbin siano fondate. JBL ritiene che l&#x27;ex stella della WWE abbia il talento necessario per conquistare il pubblico, una dote che considera rara tra i wrestler.</p>\n<p>&quot;Speravo che Baron non si ritirasse semplicemente o decidesse di mandare tutto all&#x27;aria, dicendo &#x27;basta con il wrestling&#x27;, perché pensavo avesse ancora molto da offrire. E si può vedere da quello che ha fatto in MLW e nel circuito indipendente che ha davvero molto da dare&quot;, ha detto. &quot;Baron Corbin è riuscito a farsi amare dal pubblico e ragazzi come lui sono rari. Il fatto che se ne sia andato per fare bene altrove lo rende solo più prezioso. Può essere un top guy, lo è già stato, ma può ricoprire qualsiasi ruolo nella card perché è un talento valido. Baron è un ragazzo intelligente. È un bravo wrestler. È un tipo tosto, e questo aiuta perché la gente sa che è autentico, ed è un vantaggio quando si guarda al suo passato e ci si rende conto che questo ragazzo è realmente un duro.&quot;</p>\n<p>Le notizie più recenti riguardo al ritorno di Corbin in WWE indicano che la compagnia è intenzionata a rimetterlo sotto contratto, con il wrestler che starebbe ultimando i suoi impegni con altre promotion.</p>\n<h2>JBL vuole il ritorno di Amore in WWE</h2>\n<!--IMAGE:https://www.wrestlinginc.com/img/gallery/jbl-comments-on-potential-wwe-returns-for-baron-corbin-enzo-amore/jbl-wants-amores-return-to-wwe-1780559497.jpg-->\n<p>JBL, pur promuovendo il ritorno di Baron Corbin in WWE, ritiene anche che un&#x27;altra ex stella, Enzo Amore — protagonista di un passato controverso — dovrebbe essere riaccolto nella federazione. Ha espresso sorpresa per il fatto che la WWE non lo abbia ripreso dopo che le accuse contro di lui si sono rivelate infondate.</p>\n<p>&quot;Penso che sarebbe fantastico. Ero presente quando Enzo arrivò e l&#x27;ho visto imporsi. Il ragazzo sapeva parlare. Voglio dire, ha un carisma innato e ha saputo farsi amare dal pubblico. Molto bene. Anche Cass ci era riuscito&quot;, ha dichiarato. &quot;Sono rimasto davvero sorpreso dal fatto che non l&#x27;abbiano fatto [riportarlo indietro] dopo che le accuse si sono rivelate false, ma credo che sia un ottimo momento per Enzo. Sta facendo grandi cose con la Fourth Row. Penso che ora sarebbe molto migliore di quanto non fosse prima, e già allora lo consideravo molto valido.&quot;</p>\n<p>Recenti indiscrezioni suggeriscono che Amore potrebbe essere già tornato in WWE, essendo stato avvistato al WWE Performance Center. Si vocifera che, al suo rientro, possa apparire nel brand di &quot;WWE NXT&quot;.</p>",
+        "bob_body_html_preview": "<p>JBL ha espresso il suo sostegno per un ritorno di Baron Corbin ed Enzo Amore in WWE.</p>\n<p>La leggenda della WWE ha parlato recentemente al podcast &quot;Something To Wrestle&quot;, augurandosi che le voci sul ritorno di Corbin siano fondate. JBL ritiene che l&#x27;ex stella della WWE abbia il talento necessario per conquistare il pubblico, una dote che considera rara tra i wrestler.</p>\n<p>&quot;Speravo che Baron non si ritirasse semplicemente o decidesse di mandare tutto all&#x27;aria, dicendo &#x27;basta con il wrestling&#x27;, perché pensavo avesse ancora molto da offrire. E si può vedere da quello che ha fatto in MLW e nel circuito indipendente che ha davvero molto da dare&quot;, ha detto. &quot;Baron Corbin è riuscito a farsi amare dal pubblico e ragazzi come lui sono rari. Il fatto che se ne sia andato per fare bene altrove lo rende solo più prezioso. Può essere un top guy, lo è già stato, ma può ricoprire qualsiasi ruolo nella card perché è un talento valido. Baron è un ragazzo intelligente. È un bravo wrestler. È un tipo tosto, e questo aiuta perché la gente sa che è autentico, ed è un vantaggio quando si guarda al suo passato e ci si rende conto che questo ragazzo è realmente un duro.&quot;</p>\n<p>Le notizie più recenti riguardo al ritorno di Corbin in WWE indicano che la compagnia è intenzionata a rimetterlo sotto contratto, con il wrestler che starebbe ultimando i suoi impegni con altre promotion.</p>\n<h2>JBL vuole il ritorno di Amore in WWE</h2>\n<!--IMAGE:https://www.wrestlinginc.com/img/gallery/jbl-comments-on-potential-wwe-returns-for-baron-corbin-enzo-amore/jbl-wants-amores-return-to-wwe-1780559497.jpg-->\n<p>JBL, pur promuovendo il ritorno di Baron Corbin in WWE, ritiene anche che un&#x27;altra ex stella, Enzo Amore — protagonista di un passato controverso — dovrebbe essere riaccolto nella federazione. Ha espresso sorpresa per il fatto che la WWE non lo abbia ripreso dopo che le accuse contro di lui si sono rivelate infondate.</p>\n<p>&quot;Penso che sarebbe fantastico. Ero presente quando Enzo arrivò e l&#x27;ho visto imporsi. Il ragazzo sapeva parlare. Voglio dire, ha un carisma innato e ha saputo farsi amare dal pubblico. Molto bene. Anche Cass ci era riuscito&quot;, ha dichiarato. &quot;Sono rimasto davvero sorpreso dal fatto che non l&#x27;abbiano fatto [riportarlo indietro] dopo che le accuse si sono rivelate false, ma credo che sia un ottimo momento per Enzo. Sta facendo grandi cose con la Fourth Row. Penso che ora sarebbe molto migliore di quanto non fosse prima, e già allora lo consideravo molto valido.&quot;</p>\n<p>Recenti indiscrezioni suggeriscono che Amore potrebbe essere già tornato in WWE, essendo stato avvistato al WWE Performance Center. Si vocifera che, al suo rientro, possa apparire nel brand di &quot;WWE NXT&quot;.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_jbl-si-esprime-sui-possibili-ritorni-in-wwe-di-baron-corbin-ed-enzo-amore.html",
+        "published_html_preview": "<p>JBL ha espresso il suo sostegno per un ritorno di Baron Corbin ed Enzo Amore in WWE.</p>\n<p>La leggenda della WWE ha parlato recentemente al podcast &quot;Something To Wrestle&quot;, augurandosi che le voci sul ritorno di Corbin siano fondate. JBL ritiene che l&#x27;ex stella della WWE abbia il talento necessario per conquistare il pubblico, una dote che considera rara tra i wrestler.</p>\n<p>&quot;Speravo che Baron non si ritirasse semplicemente o decidesse di mandare tutto all&#x27;aria, dicendo &#x27;basta con il wrestling&#x27;, perché pensavo avesse ancora molto da offrire. E si può vedere da quello che ha fatto in MLW e nel circuito indipendente che ha davvero molto da dare&quot;, ha detto. &quot;Baron Corbin è riuscito a farsi amare dal pubblico e ragazzi come lui sono rari. Il fatto che se ne sia andato per fare bene altrove lo rende solo più prezioso. Può essere un top guy, lo è già stato, ma può ricoprire qualsiasi ruolo nella card perché è un talento valido. Baron è un ragazzo intelligente. È un bravo wrestler. È un tipo tosto, e questo aiuta perché la gente sa che è autentico, ed è un vantaggio quando si guarda al suo passato e ci si rende conto che questo ragazzo è realmente un duro.&quot;</p>\n<p>Le notizie più recenti riguardo al ritorno di Corbin in WWE indicano che la compagnia è intenzionata a rimetterlo sotto contratto, con il wrestler che starebbe ultimando i suoi impegni con altre promotion.</p>\n<h2>JBL vuole il ritorno di Amore in WWE</h2>\n\n<p>JBL, pur promuovendo il ritorno di Baron Corbin in WWE, ritiene anche che un&#x27;altra ex stella, Enzo Amore — protagonista di un passato controverso — dovrebbe essere riaccolto nella federazione. Ha espresso sorpresa per il fatto che la WWE non lo abbia ripreso dopo che le accuse contro di lui si sono rivelate infondate.</p>\n<p>&quot;Penso che sarebbe fantastico. Ero presente quando Enzo arrivò e l&#x27;ho visto imporsi. Il ragazzo sapeva parlare. Voglio dire, ha un carisma innato e ha saputo farsi amare dal pubblico. Molto bene. Anche Cass ci era riuscito&quot;, ha dichiarato. &quot;Sono rimasto davvero sorpreso dal fatto che non l&#x27;abbiano fatto [riportarlo indietro] dopo che le accuse si sono rivelate false, ma credo che sia un ottimo momento per Enzo. Sta facendo grandi cose con la Fourth Row. Penso che ora sarebbe molto migliore di quanto non fosse prima, e già allora lo consideravo molto valido.&quot;</p>\n<p>Recenti indiscrezioni suggeriscono che Amore potrebbe essere già tornato in WWE, essendo stato avvistato al WWE Performance Center. Si vocifera che, al suo rientro, possa apparire nel brand di &quot;WWE NXT&quot;.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2187258/wwe-jbl-john-bradshaw-layfield-enzo-amore-baron-corbin-potential-returns/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_jbl-si-esprime-sui-possibili-ritorni-in-wwe-di-baron-corbin-ed-enzo-amore.html",
+        "publisher_review_html_preview": "<p>JBL ha espresso il suo sostegno per un ritorno di Baron Corbin ed Enzo Amore in WWE.</p>\n<p>La leggenda della WWE ha parlato recentemente al podcast &quot;Something To Wrestle&quot;, augurandosi che le voci sul ritorno di Corbin siano fondate. JBL ritiene che l&#x27;ex stella della WWE abbia il talento necessario per conquistare il pubblico, una dote che considera rara tra i wrestler.</p>\n<p>&quot;Speravo che Baron non si ritirasse semplicemente o decidesse di mandare tutto all&#x27;aria, dicendo &#x27;basta con il wrestling&#x27;, perché pensavo avesse ancora molto da offrire. E si può vedere da quello che ha fatto in MLW e nel circuito indipendente che ha davvero molto da dare&quot;, ha detto. &quot;Baron Corbin è riuscito a farsi amare dal pubblico e ragazzi come lui sono rari. Il fatto che se ne sia andato per fare bene altrove lo rende solo più prezioso. Può essere un top guy, lo è già stato, ma può ricoprire qualsiasi ruolo nella card perché è un talento valido. Baron è un ragazzo intelligente. È un bravo wrestler. È un tipo tosto, e questo aiuta perché la gente sa che è autentico, ed è un vantaggio quando si guarda al suo passato e ci si rende conto che questo ragazzo è realmente un duro.&quot;</p>\n<p>Le notizie più recenti riguardo al ritorno di Corbin in WWE indicano che la compagnia è intenzionata a rimetterlo sotto contratto, con il wrestler che starebbe ultimando i suoi impegni con altre promotion.</p>\n<h2>JBL vuole il ritorno di Amore in WWE</h2>\n\n<p>JBL, pur promuovendo il ritorno di Baron Corbin in WWE, ritiene anche che un&#x27;altra ex stella, Enzo Amore — protagonista di un passato controverso — dovrebbe essere riaccolto nella federazione. Ha espresso sorpresa per il fatto che la WWE non lo abbia ripreso dopo che le accuse contro di lui si sono rivelate infondate.</p>\n<p>&quot;Penso che sarebbe fantastico. Ero presente quando Enzo arrivò e l&#x27;ho visto imporsi. Il ragazzo sapeva parlare. Voglio dire, ha un carisma innato e ha saputo farsi amare dal pubblico. Molto bene. Anche Cass ci era riuscito&quot;, ha dichiarato. &quot;Sono rimasto davvero sorpreso dal fatto che non l&#x27;abbiano fatto [riportarlo indietro] dopo che le accuse si sono rivelate false, ma credo che sia un ottimo momento per Enzo. Sta facendo grandi cose con la Fourth Row. Penso che ora sarebbe molto migliore di quanto non fosse prima, e già allora lo consideravo molto valido.&quot;</p>\n<p>Recenti indiscrezioni suggeriscono che Amore potrebbe essere già tornato in WWE, essendo stato avvistato al WWE Performance Center. Si vocifera che, al suo rientro, possa apparire nel brand di &quot;WWE NXT&quot;.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2187258/wwe-jbl-john-bradshaw-layfield-enzo-amore-baron-corbin-potential-returns/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2187258/wwe-jbl-john-bradshaw-layfield-enzo-amore-baron-corbin-potential-returns/\nTitolo feed: JBL Comments On Potential WWE Returns For Baron Corbin & Enzo Amore\nTitolo pagina: JBL Comments On Potential WWE Returns For Baron Corbin & Enzo Amore - Wrestling Inc.\nDescrizione: WWE Hall of Famer JBL has discussed the possible returns of Enzo Amore and Baron Corbin to the promotion, explaining why he supports bringing both stars back.\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"JBL has backed the returns of Baron Corbin and Enzo Amore to WWE.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"The WWE legend recently spoke on the \\\" Something To Wrestle \\\" podcast, where he hoped that the rumors of Corbin's return are true. He feels that the former WWE star has the talent to get over with the fans, which he feels is something not every wrestler can do.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"\\\"I was hoping that Baron wouldn't just retire or then decide, you know, the heck with it, I'm done with wrestling because I thought he had a lot to offer. And you see from what he's done with MLW and what he's done on the independents, he does have a lot to offer,\\\" he said. \\\"Baron Corbin has gotten over, and guys like that are rare. And for him to leave and go off and do good things, it just makes him more valuable. He can be a top guy, and he has been a top guy, but he can also be anywhere on the card because he's a good talent. Baron's a smart guy. He's a good wrestler. He's a tough guy, which helps because people know it is legit, and it helps when people look back into his background and realize that this guy is a legitimately tough guy.\\\"\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"The most recent reports about Corbin's return to WWE stated that the company is keen to re-sign him, with him reportedly wrapping up his commitments with other promotions.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"heading\",\n    \"text\": \"JBL wants Amore's return to WWE\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"JBL, while giving the thumbs up to Baron Corbin for a return to WWE, also believes that another former star, Enzo Amore — who has had a controversial past — should be brought back to the promotion. He stated his surprise at WWE not re-signing him after allegations against him were proven to be false.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"\\\"I think it'd be great. I was there when Enzo came in, and I saw him get over. The guy could talk. I mean, the guy has just an innate charisma about him, and he got over. He got over really well. Cass did as well,\\\" he said. \\\"I was really surprised they didn't [bring him back] after the allegations turned out to be false, but I think it's a great time for Enzo. He's been doing great stuff with Fourth Row. I think he would be a lot better now than he was, and I thought then he was very good.\\\"\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"Recent reports have suggested that Amore could already be back in WWE and was rumored to have been spotted at the WWE Performance Center. He is rumored to feature in \\\"WWE NXT\\\" following his return to the promotion.\"\n  }\n]\n"
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "ai:Opinioni autorevoli su potenziali ritorni di nomi noti.; deterministic:hard:returns,hard:return,recency:fresh_12h",
+        "score": 79
+      },
+      "publisher": {
+        "categories": [
+          4
+        ],
+        "error": null,
+        "featured_media": 5975,
+        "present": true,
+        "status": "published",
+        "wp_link": "https://news.openwrestlingtv.com/wwe/jbl-si-esprime-sui-possibili-ritorni-in-wwe-di-baron-corbin-ed-enzo-amore/",
+        "wp_post_id": 5976
+      },
+      "source": "wrestlinginc",
+      "source_url": "https://www.wrestlinginc.com/2187258/wwe-jbl-john-bradshaw-layfield-enzo-amore-baron-corbin-potential-returns",
+      "title_it": "JBL si esprime sui possibili ritorni in WWE di Baron Corbin ed Enzo Amore"
+    }
+  ],
+  "generated_at": "2026-06-04T13:57:56.071459+00:00",
   "how_to_read": {
     "alfred_final_html_preview": "HTML dopo revisione/normalizzazioni di Alfred",
     "bob_body_html_preview": "HTML prodotto da Bob prima di Alfred",
@@ -2362,6 +2697,116 @@
       "overall_status": "ok",
       "published": 0,
       "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 3,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 1
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 3,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 5,
+          "already_worked": 0,
+          "event_factual_news_to_menzo": 0,
+          "event_recap_duplicates_blocked_by_report": 0,
+          "event_soft_reactions_to_menzo": 0,
+          "hard_skipped": 25,
+          "menzo_memory_hard_skipped": 19,
+          "old_news_hard_skipped": 0,
+          "post_show_hard_news_to_menzo": 1,
+          "report_candidates_blocked_by_manual_or_history": 0,
+          "to_menzo": 9,
+          "to_simone": 1
+        },
+        "menzo": {
+          "pending": 0,
+          "skipped": 3,
+          "to_bob_or_v92": 6
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 3,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 1,
+          "skipped": 5,
+          "waiting": 0
+        }
+      },
+      "already_published": 0,
+      "article_count": 6,
+      "errors": 0,
+      "generated_at": "2026-06-04T13:57:56.061465+00:00",
+      "overall_status": "ok",
+      "published": 3,
+      "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 3,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 1
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 3,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 5,
+          "already_worked": 0,
+          "event_factual_news_to_menzo": 0,
+          "event_recap_duplicates_blocked_by_report": 0,
+          "event_soft_reactions_to_menzo": 0,
+          "hard_skipped": 25,
+          "menzo_memory_hard_skipped": 19,
+          "old_news_hard_skipped": 0,
+          "post_show_hard_news_to_menzo": 1,
+          "report_candidates_blocked_by_manual_or_history": 0,
+          "to_menzo": 9,
+          "to_simone": 1
+        },
+        "menzo": {
+          "pending": 0,
+          "skipped": 3,
+          "to_bob_or_v92": 6
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 3,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 1,
+          "skipped": 5,
+          "waiting": 0
+        }
+      },
+      "already_published": 0,
+      "article_count": 6,
+      "errors": 0,
+      "generated_at": "2026-06-04T13:57:56.071459+00:00",
+      "overall_status": "ok",
+      "published": 3,
+      "warnings": 0
     }
   ],
   "overall_status": "ok",
@@ -2378,19 +2823,19 @@
       "simone": "real_report_director_and_autonomous_report_publisher"
     },
     "alfred_handoff": {
-      "approved": 0,
+      "approved": 3,
       "blockers": 0,
       "editorial_changes": 0,
       "needs_revision": 0,
-      "warnings": 0
+      "warnings": 1
     },
     "bob_handoff": {
       "errors": 0,
       "extraction_empty": 0,
-      "ready_for_alfred": 0,
+      "ready_for_alfred": 3,
       "translation_pending": 0
     },
-    "ended_at": "2026-06-04T12:50:35.518353+00:00",
+    "ended_at": "2026-06-04T13:57:56.054752+00:00",
     "engine": "bot_v92.py",
     "massy_handoff": {
       "already_published_hard_skipped": 5,
@@ -2398,25 +2843,25 @@
       "event_factual_news_to_menzo": 0,
       "event_recap_duplicates_blocked_by_report": 0,
       "event_soft_reactions_to_menzo": 0,
-      "hard_skipped": 28,
-      "menzo_memory_hard_skipped": 22,
+      "hard_skipped": 25,
+      "menzo_memory_hard_skipped": 19,
       "old_news_hard_skipped": 0,
       "post_show_hard_news_to_menzo": 1,
       "report_candidates_blocked_by_manual_or_history": 0,
-      "to_menzo": 6,
+      "to_menzo": 9,
       "to_simone": 1
     },
     "menzo_handoff": {
       "pending": 0,
-      "skipped": 0,
-      "to_bob_or_v92": 0
+      "skipped": 3,
+      "to_bob_or_v92": 6
     },
     "newsroom_engine_override": false,
     "publisher_handoff": {
       "already_published": 0,
       "dry_run": 0,
       "errors": 0,
-      "published": 0,
+      "published": 3,
       "wp_not_ready": 0
     },
     "runtime_delegations": 0,
@@ -2427,107 +2872,107 @@
       "waiting": 0
     },
     "simone_publish_handoff": {
-      "already_published": 0,
+      "already_published": 1,
       "dry_run": 0,
       "errors": 0,
       "published": 0,
-      "wp_not_ready": 1
+      "wp_not_ready": 0
     },
-    "started_at": "2026-06-04T12:49:43.773021+00:00",
+    "started_at": "2026-06-04T13:57:12.990037+00:00",
     "version": "v93_20_process_refinements"
   },
   "summary": {
     "anomalies": 0,
-    "article_dossiers": 0,
+    "article_dossiers": 6,
     "errors_48h": 16,
-    "published_48h": 60,
-    "published_current_run": 0,
-    "runs_48h": 44
+    "published_48h": 66,
+    "published_current_run": 3,
+    "runs_48h": 46
   },
   "timeline": [
     {
       "agent": "Jarvis",
       "note": "engine=bot_v92.py",
       "phase": "bootstrap_status_written",
-      "timestamp": "2026-06-04T12:49:43.773294+00:00"
+      "timestamp": "2026-06-04T13:57:12.990322+00:00"
     },
     {
       "agent": "Massy",
-      "note": "to_simone=1 to_menzo=6 hard_skip=28 already=0",
+      "note": "to_simone=1 to_menzo=9 hard_skip=25 already=0",
       "phase": "sentinel_board_ready",
-      "timestamp": "2026-06-04T12:49:44.246007+00:00"
+      "timestamp": "2026-06-04T13:57:13.541646+00:00"
     },
     {
       "agent": "Massy",
       "note": "version=v93_24_massy_show_news_before_report_closure",
       "phase": "forced_policy_active",
-      "timestamp": "2026-06-04T12:49:44.246021+00:00"
+      "timestamp": "2026-06-04T13:57:13.541666+00:00"
     },
     {
       "agent": "Simone",
       "note": "ready=1 waiting=0 skipped=5",
       "phase": "report_decision_ready",
-      "timestamp": "2026-06-04T12:49:44.249328+00:00"
+      "timestamp": "2026-06-04T13:57:13.545246+00:00"
     },
     {
       "agent": "Simone",
-      "note": "published=0 already=0 wp_not_ready=1 errors=0",
+      "note": "published=0 already=1 wp_not_ready=0 errors=0",
       "phase": "report_publication_ready",
-      "timestamp": "2026-06-04T12:49:57.760189+00:00"
+      "timestamp": "2026-06-04T13:57:25.329021+00:00"
     },
     {
       "agent": "Menzo",
-      "note": "selected=0 pending=0 skipped=0",
+      "note": "selected=6 pending=0 skipped=3",
       "phase": "editorial_decision_ready",
-      "timestamp": "2026-06-04T12:50:10.213959+00:00"
+      "timestamp": "2026-06-04T13:57:31.432867+00:00"
     },
     {
       "agent": "Menzo",
-      "note": "version=v93_25_wp_ready_guard",
+      "note": "version=v93_20_selective_softpool",
       "phase": "forced_policy_active",
-      "timestamp": "2026-06-04T12:50:10.213976+00:00"
+      "timestamp": "2026-06-04T13:57:31.432879+00:00"
     },
     {
       "agent": "Bob",
-      "note": "ready=0 pending=0 empty=0 errors=0",
+      "note": "ready=3 pending=0 empty=0 errors=0",
       "phase": "article_packages_ready",
-      "timestamp": "2026-06-04T12:50:10.230264+00:00"
+      "timestamp": "2026-06-04T13:57:47.563836+00:00"
     },
     {
       "agent": "Bob",
       "note": "warnings=0",
       "phase": "bob_brief_guard_applied",
-      "timestamp": "2026-06-04T12:50:10.230553+00:00"
+      "timestamp": "2026-06-04T13:57:47.565491+00:00"
     },
     {
       "agent": "Alfred",
-      "note": "approved=0 needs_revision=0 blockers=0 warnings=0 changes=0",
+      "note": "approved=3 needs_revision=0 blockers=0 warnings=1 changes=0",
       "phase": "quality_review_ready",
-      "timestamp": "2026-06-04T12:50:10.237171+00:00"
+      "timestamp": "2026-06-04T13:57:47.578244+00:00"
     },
     {
       "agent": "Alfred",
       "note": "surfaced=0",
       "phase": "bob_warning_guard_applied",
-      "timestamp": "2026-06-04T12:50:10.237463+00:00"
+      "timestamp": "2026-06-04T13:57:47.578821+00:00"
     },
     {
       "agent": "Publisher",
-      "note": "published=0 already=0 dry=0 wp_not_ready=0 errors=0",
+      "note": "published=3 already=0 dry=0 wp_not_ready=0 errors=0",
       "phase": "publication_ready",
-      "timestamp": "2026-06-04T12:50:35.518323+00:00"
+      "timestamp": "2026-06-04T13:57:56.054721+00:00"
     },
     {
       "agent": "Jarvis",
       "note": "v93 Publisher completed; v92 fallback skipped",
       "phase": "runtime_skipped",
-      "timestamp": "2026-06-04T12:50:35.518345+00:00"
+      "timestamp": "2026-06-04T13:57:56.054744+00:00"
     },
     {
       "agent": "Archivista",
       "note": "status=ok anomalies=0",
       "phase": "audit_ready",
-      "timestamp": "2026-06-04T12:50:35.530637+00:00"
+      "timestamp": "2026-06-04T13:57:56.070932+00:00"
     }
   ],
   "version": "v93_7_archivista_audit"

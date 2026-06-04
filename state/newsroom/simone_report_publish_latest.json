@@ -1,12 +1,12 @@
 {
   "agent": "Simone",
-  "generated_at": "2026-06-04T12:49:57.759452+00:00",
+  "generated_at": "2026-06-04T13:57:25.328577+00:00",
   "handoff": {
-    "already_published": 0,
+    "already_published": 1,
     "dry_run": 0,
     "errors": 0,
     "published": 0,
-    "wp_not_ready": 1
+    "wp_not_ready": 0
   },
   "input": {
     "ready_reports": 1,
@@ -24,52 +24,29 @@
   },
   "results": [
     {
-      "reason": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7fde80c526d0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))",
       "report_key": "aew_dynamite_2026_06_03",
-      "source_url": "https://www.wrestlinginc.com/2186292/aew-dynamite-june-3-two-titles-on-line-owen-hart-cup-tournaments-continue/",
-      "status": "wp_not_ready",
-      "title": "AEW Dynamite del 3 giugno 2026 - risultati e momenti salienti"
+      "status": "already_published",
+      "title": "AEW Dynamite del 3 giugno 2026 - risultati e momenti salienti",
+      "wp_link": "https://news.openwrestlingtv.com/aew/aew-dynamite-del-3-giugno-2026-risultati-e-momenti-salienti/",
+      "wp_post_id": 5940
     }
   ],
   "version": "v93_27_simone_uses_jarvis_wp_preflight",
   "wp": {
-    "checked_by": "jarvis_wp_preflight",
     "diagnostics": {
       "attempts": [
         {
           "attempt": 1,
-          "elapsed_seconds": 6.14,
-          "endpoint": "https://news.openwrestlingtv.com/wp-json/",
           "label": "rest_root",
-          "status": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7fde80c50b90>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))"
-        },
-        {
-          "attempt": 1,
-          "elapsed_seconds": 6.13,
-          "endpoint": "https://news.openwrestlingtv.com/wp-json/wp/v2/posts?per_page=1",
-          "label": "posts_auth",
-          "status": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7fde80c526d0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))"
+          "status": "status_200"
         }
       ],
-      "checked_at": "2026-06-04T12:49:45.298408+00:00",
-      "dns_ips": [
-        "89.40.173.112"
-      ],
-      "handoff": {
-        "ready": 0,
-        "skipped_expensive_agents": 1
-      },
-      "policy": {
-        "skip_gemini_when_wp_down": true,
-        "skip_menzo_bob_alfred_publisher_when_wp_down": true
-      },
-      "ready": false,
-      "reason": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7fde80c526d0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))",
-      "root": "https://news.openwrestlingtv.com",
-      "version": "v93_25_fast_wp_preflight_gate"
+      "dns": "89.40.173.112",
+      "root": "https://news.openwrestlingtv.com"
     },
     "dry_run": false,
-    "ready": false,
-    "reason": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7fde80c526d0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))"
+    "preflight_reason": "status_200",
+    "ready": true,
+    "reason": "status_200"
   }
 }
