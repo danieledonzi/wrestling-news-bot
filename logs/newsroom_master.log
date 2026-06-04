@@ -207,10 +207,22 @@ Published reports: -
 Massy: to_simone=0 to_menzo=24 hard_skip=11 menzo_skip=8 old_skip=0
 Simone: ready=0 reports_published=0 wp_not_ready=0
 Menzo: selected=11 pending=2 skipped=11 ai=True model=gemini-3.1-flash-lite
-Bob: ready=3 errors=0 changes={'bob_v93_28_changes': 3, 'bob_v93_16_changes': 3, 'bob_brief_warnings_added': 0}
+Bob: ready=3 errors=0 changes={'bob_brief_warnings_added': 0, 'bob_v93_16_changes': 3, 'bob_v93_28_changes': 3}
 Alfred: approved=3 warnings=0 blockers=0
 Publisher: published=3 wp_not_ready=0 errors=0
 Archivista: status=ok anomalies=0
 Selected: AEW's Jim Ross Doesn't Believe WWE Shareholder Lawsuit Will Be 'Over Quickly', AEW World Champion MJF Pulled From Indie Booking Due To Injury, FKA Andre Chase Reveals New Name Post-WWE NXT Release, Zoey Stark Set For First Match After WWE Release, Update On Frustrations With WWE's Handling Of Liv Morgan And Dom Mysterio, Stephanie McMahon Says Vince McMahon Scandal Changed Daughter’s WWE Plans
 Published news: Jim Ross sulla causa degli azionisti WWE contro Vince McMahon, MJF rimosso da un evento indipendente per infortunio, L'ex star di NXT Andre Chase annuncia il suo nuovo ring name
+Published reports: -
+
+===== NEWSROOM MASTER RUN 2026-06-04T21:10:59.052241+00:00 | v93_20_process_refinements | run_id=26979821768 =====
+Massy: to_simone=0 to_menzo=14 hard_skip=21 menzo_skip=17 old_skip=0
+Simone: ready=0 reports_published=0 wp_not_ready=0
+Menzo: selected=0 pending=0 skipped=0 ai=None model=None
+Bob: ready=0 errors=0 changes={'bob_v93_28_changes': 0, 'bob_v93_16_changes': 0, 'bob_brief_warnings_added': 0}
+Alfred: approved=0 warnings=0 blockers=0
+Publisher: published=0 wp_not_ready=0 errors=0
+Archivista: status=ok anomalies=0
+Selected: -
+Published news: -
 Published reports: -

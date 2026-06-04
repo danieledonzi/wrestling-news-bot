@@ -2,7 +2,7 @@
   "agent": "Archivista",
   "agent_handoffs": {
     "alfred": {
-      "approved": 3,
+      "approved": 0,
       "blockers": 0,
       "editorial_changes": 0,
       "needs_revision": 0,
@@ -11,33 +11,33 @@
     "bob": {
       "errors": 0,
       "extraction_empty": 0,
-      "ready_for_alfred": 3,
+      "ready_for_alfred": 0,
       "translation_pending": 0
     },
     "massy": {
-      "already_published_hard_skipped": 2,
+      "already_published_hard_skipped": 4,
       "already_worked": 0,
       "event_factual_news_to_menzo": 0,
       "event_recap_duplicates_blocked_by_report": 0,
-      "event_soft_reactions_to_menzo": 2,
-      "hard_skipped": 11,
-      "menzo_memory_hard_skipped": 8,
+      "event_soft_reactions_to_menzo": 0,
+      "hard_skipped": 21,
+      "menzo_memory_hard_skipped": 17,
       "old_news_hard_skipped": 0,
       "post_show_hard_news_to_menzo": 1,
       "report_candidates_blocked_by_manual_or_history": 0,
-      "to_menzo": 24,
+      "to_menzo": 14,
       "to_simone": 0
     },
     "menzo": {
-      "pending": 2,
-      "skipped": 11,
-      "to_bob_or_v92": 11
+      "pending": 0,
+      "skipped": 0,
+      "to_bob_or_v92": 0
     },
     "publisher": {
       "already_published": 0,
       "dry_run": 0,
       "errors": 0,
-      "published": 3,
+      "published": 0,
       "wp_not_ready": 0
     },
     "simone": {
@@ -47,588 +47,8 @@
     }
   },
   "anomalies": [],
-  "article_dossiers": [
-    {
-      "alfred": {
-        "decision": null,
-        "editorial_changes": [],
-        "issues": [],
-        "present": false,
-        "quality_score": null,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": null,
-        "diagnostic_stage": null,
-        "element_counts": null,
-        "error": null,
-        "present": false,
-        "raw_element_count": null,
-        "removed_before_gemini": null,
-        "status": null,
-        "translation_model": null,
-        "translation_used": null
-      },
-      "category_hint": "AEW",
-      "html_audit": {
-        "alfred_final_html_preview": "",
-        "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_aew-njpw-partnership-s-future-revealed-after-ownership-change.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_aew-njpw-partnership-s-future-revealed-after-ownership-change.html",
-        "publisher_review_html_preview": "",
-        "translation_prompt_preview": ""
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "strategic:future,recency:fresh_12h",
-        "score": 66
-      },
-      "publisher": {
-        "categories": null,
-        "error": null,
-        "featured_media": null,
-        "present": false,
-        "status": null,
-        "wp_link": null,
-        "wp_post_id": null
-      },
-      "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/aew-njpw-partnerships-future-revealed-ownership-change",
-      "title_it": "AEW-NJPW Partnership’s Future Revealed After Ownership Change"
-    },
-    {
-      "alfred": {
-        "decision": null,
-        "editorial_changes": [],
-        "issues": [],
-        "present": false,
-        "quality_score": null,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": null,
-        "diagnostic_stage": null,
-        "element_counts": null,
-        "error": null,
-        "present": false,
-        "raw_element_count": null,
-        "removed_before_gemini": null,
-        "status": null,
-        "translation_model": null,
-        "translation_used": null
-      },
-      "category_hint": "WWE",
-      "html_audit": {
-        "alfred_final_html_preview": "",
-        "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_stephanie-mcmahon-says-vince-mcmahon-scandal-changed-daughter-s-wwe-plans.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_stephanie-mcmahon-says-vince-mcmahon-scandal-changed-daughter-s-wwe-plans.html",
-        "publisher_review_html_preview": "",
-        "translation_prompt_preview": ""
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "selected_overflow:ai:Approfondimento sulla gestione aziendale e cambiamenti interni.; deterministic:strategic:plans,entity:becky lynch,recency:fresh_12h",
-        "score": 76
-      },
-      "publisher": {
-        "categories": null,
-        "error": null,
-        "featured_media": null,
-        "present": false,
-        "status": null,
-        "wp_link": null,
-        "wp_post_id": null
-      },
-      "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/stephanie-mcmahon-says-vince-mcmahon-scandal-changed-daughters-wwe-plans",
-      "title_it": "Stephanie McMahon Says Vince McMahon Scandal Changed Daughter’s WWE Plans"
-    },
-    {
-      "alfred": {
-        "decision": null,
-        "editorial_changes": [],
-        "issues": [],
-        "present": false,
-        "quality_score": null,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": null,
-        "diagnostic_stage": null,
-        "element_counts": null,
-        "error": null,
-        "present": false,
-        "raw_element_count": null,
-        "removed_before_gemini": null,
-        "status": null,
-        "translation_model": null,
-        "translation_used": null
-      },
-      "category_hint": "WWE",
-      "html_audit": {
-        "alfred_final_html_preview": "",
-        "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_wwe-had-no-firm-king-of-the-ring-winner-decided-when-brackets-were-revealed.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_wwe-had-no-firm-king-of-the-ring-winner-decided-when-brackets-were-revealed.html",
-        "publisher_review_html_preview": "",
-        "translation_prompt_preview": ""
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "selected_overflow:ai:Retroscena sul processo creativo WWE.; deterministic:hard:bracket,strategic:creative,strategic:king of the ring,recency:fresh_12h",
-        "score": 73
-      },
-      "publisher": {
-        "categories": null,
-        "error": null,
-        "featured_media": null,
-        "present": false,
-        "status": null,
-        "wp_link": null,
-        "wp_post_id": null
-      },
-      "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/wwe-no-firm-king-ring-winner-decided-when-brackets-revealed",
-      "title_it": "WWE Had No Firm King Of The Ring Winner Decided When Brackets Were Revealed"
-    },
-    {
-      "alfred": {
-        "decision": null,
-        "editorial_changes": [],
-        "issues": [],
-        "present": false,
-        "quality_score": null,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": null,
-        "diagnostic_stage": null,
-        "element_counts": null,
-        "error": null,
-        "present": false,
-        "raw_element_count": null,
-        "removed_before_gemini": null,
-        "status": null,
-        "translation_model": null,
-        "translation_used": null
-      },
-      "category_hint": "WWE",
-      "html_audit": {
-        "alfred_final_html_preview": "",
-        "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_zoey-stark-set-for-first-match-after-wwe-release.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_zoey-stark-set-for-first-match-after-wwe-release.html",
-        "publisher_review_html_preview": "",
-        "translation_prompt_preview": ""
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "selected_overflow:ai:Notizia di mercato rilevante per la divisione femminile.; deterministic:hard:debut,recency:fresh_12h",
-        "score": 80
-      },
-      "publisher": {
-        "categories": null,
-        "error": null,
-        "featured_media": null,
-        "present": false,
-        "status": null,
-        "wp_link": null,
-        "wp_post_id": null
-      },
-      "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/zoey-stark-set-first-match-wwe-release",
-      "title_it": "Zoey Stark Set For First Match After WWE Release"
-    },
-    {
-      "alfred": {
-        "decision": null,
-        "editorial_changes": [],
-        "issues": [],
-        "present": false,
-        "quality_score": null,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": null,
-        "diagnostic_stage": null,
-        "element_counts": null,
-        "error": null,
-        "present": false,
-        "raw_element_count": null,
-        "removed_before_gemini": null,
-        "status": null,
-        "translation_model": null,
-        "translation_used": null
-      },
-      "category_hint": "WWE",
-      "html_audit": {
-        "alfred_final_html_preview": "",
-        "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_breaking-down-the-belts-sol-ruca-s-wwe-women-s-intercontinental-championship.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_breaking-down-the-belts-sol-ruca-s-wwe-women-s-intercontinental-championship.html",
-        "publisher_review_html_preview": "",
-        "translation_prompt_preview": ""
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "ai:Editoriale speculativo/listicle, basso valore informativo.; deterministic:hard:championship,recency:fresh_12h",
-        "score": 74
-      },
-      "publisher": {
-        "categories": null,
-        "error": null,
-        "featured_media": null,
-        "present": false,
-        "status": null,
-        "wp_link": null,
-        "wp_post_id": null
-      },
-      "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2187199/breaking-down-belts-sol-ruca-wwe-womens-intercontinental-championship-opinion",
-      "title_it": "Breaking Down The Belts: Sol Ruca's WWE Women's Intercontinental Championship"
-    },
-    {
-      "alfred": {
-        "decision": "approved",
-        "editorial_changes": [],
-        "issues": [],
-        "present": true,
-        "quality_score": 100,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": 6,
-        "diagnostic_stage": "ready_for_alfred",
-        "element_counts": {
-          "embed": 1,
-          "heading": 0,
-          "image": 0,
-          "quote": 0,
-          "table": 0,
-          "text": 5
-        },
-        "error": null,
-        "present": true,
-        "raw_element_count": 9,
-        "removed_before_gemini": 3,
-        "status": "ready_for_alfred",
-        "translation_model": "gemini-3.1-flash-lite",
-        "translation_used": true
-      },
-      "category_hint": "AEW",
-      "html_audit": {
-        "alfred_final_html_preview": "<p>Ieri sera a &quot;AEW Dynamite&quot;, MJF ha difeso con successo l&#x27;AEW World Championship contro Rush in un No Count Out Match; nonostante la vittoria, ha riportato un infortunio che lo costringerà a un periodo di stop dal ring.</p>\nhttps://x.com/beyondwrestling/status/2062487283706519905\n\n<p>Per questo venerdì, MJF era stato annunciato per un match contro Bobby Orlando all&#x27;evento &quot;Break The Walls Down&quot; della Beyond Wrestling a Cranston, Rhode Island. Tuttavia, nella giornata di giovedì, Friedman ha comunicato alla compagnia che non potrà prendere parte allo show a causa di un infortunio al ginocchio rimediato contro Rush.</p>\n<p>&quot;Sfortunatamente, @The_MJF ha subito un&#x27;iperestensione al ginocchio durante il suo match di ieri sera e non ha ricevuto l&#x27;idoneità medica per viaggiare o competere. Non sarà a Cranston domani sera, ma mi ha assicurato che lotterà per la Beyond Wrestling non appena i suoi impegni glielo permetteranno. Gli auguriamo una pronta guarigione.&quot;</p>\n<p>Sebbene l&#x27;AEW World Champion abbia promesso alla Beyond Wrestling che salirà sul ring per loro una volta guarito, il suo match contro Bobby Orlando sarebbe dovuto essere, nel prossimo futuro, la sua ultima apparizione nel circuito indipendente americano. All&#x27;inizio di questa settimana, MJF aveva dichiarato di voler concentrare tutte le proprie attenzioni esclusivamente sulla AEW, una decisione presa in seguito alla sconfitta del titolo mondiale contro Darby Allin ad aprile. Inoltre, MJF aveva intenzione di mettere in palio l&#x27;AEW World Championship proprio contro Orlando.</p>\n<p>All&#x27;inizio di quest&#x27;anno, MJF aveva affermato di sentirsi finalmente in salute dopo la rottura del labbro glenoideo subita alla fine del 2023. Si spera che l&#x27;infortunio al ginocchio rimediato mercoledì non sia così grave, ma al momento non ci sono aggiornamenti sui tempi di recupero.</p>",
-        "bob_body_html_preview": "<p>Ieri sera a &quot;AEW Dynamite&quot;, MJF ha difeso con successo l&#x27;AEW World Championship contro Rush in un No Count Out Match; nonostante la vittoria, ha riportato un infortunio che lo costringerà a un periodo di stop dal ring.</p>\nhttps://x.com/beyondwrestling/status/2062487283706519905\n\n<p>Per questo venerdì, MJF era stato annunciato per un match contro Bobby Orlando all&#x27;evento &quot;Break The Walls Down&quot; della Beyond Wrestling a Cranston, Rhode Island. Tuttavia, nella giornata di giovedì, Friedman ha comunicato alla compagnia che non potrà prendere parte allo show a causa di un infortunio al ginocchio rimediato contro Rush.</p>\n<p>&quot;Sfortunatamente, @The_MJF ha subito un&#x27;iperestensione al ginocchio durante il suo match di ieri sera e non ha ricevuto l&#x27;idoneità medica per viaggiare o competere. Non sarà a Cranston domani sera, ma mi ha assicurato che lotterà per la Beyond Wrestling non appena i suoi impegni glielo permetteranno. Gli auguriamo una pronta guarigione.&quot;</p>\n<p>Sebbene l&#x27;AEW World Champion abbia promesso alla Beyond Wrestling che salirà sul ring per loro una volta guarito, il suo match contro Bobby Orlando sarebbe dovuto essere, nel prossimo futuro, la sua ultima apparizione nel circuito indipendente americano. All&#x27;inizio di questa settimana, MJF aveva dichiarato di voler concentrare tutte le proprie attenzioni esclusivamente sulla AEW, una decisione presa in seguito alla sconfitta del titolo mondiale contro Darby Allin ad aprile. Inoltre, MJF aveva intenzione di mettere in palio l&#x27;AEW World Championship proprio contro Orlando.</p>\n<p>All&#x27;inizio di quest&#x27;anno, MJF aveva affermato di sentirsi finalmente in salute dopo la rottura del labbro glenoideo subita alla fine del 2023. Si spera che l&#x27;infortunio al ginocchio rimediato mercoledì non sia così grave, ma al momento non ci sono aggiornamenti sui tempi di recupero.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_mjf-rimosso-da-un-evento-indipendente-per-infortunio.html",
-        "published_html_preview": "<p>Ieri sera a &quot;AEW Dynamite&quot;, MJF ha difeso con successo l&#x27;AEW World Championship contro Rush in un No Count Out Match; nonostante la vittoria, ha riportato un infortunio che lo costringerà a un periodo di stop dal ring.</p>\n\n<!-- wp:embed {\"url\":\"https://x.com/beyondwrestling/status/2062487283706519905\",\"type\":\"rich\",\"providerNameSlug\":\"twitter\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter\"><div class=\"wp-block-embed__wrapper\">\nhttps://x.com/beyondwrestling/status/2062487283706519905\n</div></figure>\n<!-- /wp:embed -->\n\n<p>Per questo venerdì, MJF era stato annunciato per un match contro Bobby Orlando all&#x27;evento &quot;Break The Walls Down&quot; della Beyond Wrestling a Cranston, Rhode Island. Tuttavia, nella giornata di giovedì, Friedman ha comunicato alla compagnia che non potrà prendere parte allo show a causa di un infortunio al ginocchio rimediato contro Rush.</p>\n<p>&quot;Sfortunatamente, @The_MJF ha subito un&#x27;iperestensione al ginocchio durante il suo match di ieri sera e non ha ricevuto l&#x27;idoneità medica per viaggiare o competere. Non sarà a Cranston domani sera, ma mi ha assicurato che lotterà per la Beyond Wrestling non appena i suoi impegni glielo permetteranno. Gli auguriamo una pronta guarigione.&quot;</p>\n<p>Sebbene l&#x27;AEW World Champion abbia promesso alla Beyond Wrestling che salirà sul ring per loro una volta guarito, il suo match contro Bobby Orlando sarebbe dovuto essere, nel prossimo futuro, la sua ultima apparizione nel circuito indipendente americano. All&#x27;inizio di questa settimana, MJF aveva dichiarato di voler concentrare tutte le proprie attenzioni esclusivamente sulla AEW, una decisione presa in seguito alla sconfitta del titolo mondiale contro Darby Allin ad aprile. Inoltre, MJF aveva intenzione di mettere in palio l&#x27;AEW World Championship proprio contro Orlando.</p>\n<p>All&#x27;inizio di quest&#x27;anno, MJF aveva affermato di sentirsi finalmente in salute dopo la rottura del labbro glenoideo subita alla fine del 2023. Si spera che l&#x27;infortunio al ginocchio rimediato mercoledì non sia così grave, ma al momento non ci sono aggiornamenti sui tempi di recupero.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2187425/aew-world-champion-mjf-pulled-indie-booking-injury/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_mjf-rimosso-da-un-evento-indipendente-per-infortunio.html",
-        "publisher_review_html_preview": "<p>Ieri sera a &quot;AEW Dynamite&quot;, MJF ha difeso con successo l&#x27;AEW World Championship contro Rush in un No Count Out Match; nonostante la vittoria, ha riportato un infortunio che lo costringerà a un periodo di stop dal ring.</p>\n\n<!-- wp:embed {\"url\":\"https://x.com/beyondwrestling/status/2062487283706519905\",\"type\":\"rich\",\"providerNameSlug\":\"twitter\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter\"><div class=\"wp-block-embed__wrapper\">\nhttps://x.com/beyondwrestling/status/2062487283706519905\n</div></figure>\n<!-- /wp:embed -->\n\n<p>Per questo venerdì, MJF era stato annunciato per un match contro Bobby Orlando all&#x27;evento &quot;Break The Walls Down&quot; della Beyond Wrestling a Cranston, Rhode Island. Tuttavia, nella giornata di giovedì, Friedman ha comunicato alla compagnia che non potrà prendere parte allo show a causa di un infortunio al ginocchio rimediato contro Rush.</p>\n<p>&quot;Sfortunatamente, @The_MJF ha subito un&#x27;iperestensione al ginocchio durante il suo match di ieri sera e non ha ricevuto l&#x27;idoneità medica per viaggiare o competere. Non sarà a Cranston domani sera, ma mi ha assicurato che lotterà per la Beyond Wrestling non appena i suoi impegni glielo permetteranno. Gli auguriamo una pronta guarigione.&quot;</p>\n<p>Sebbene l&#x27;AEW World Champion abbia promesso alla Beyond Wrestling che salirà sul ring per loro una volta guarito, il suo match contro Bobby Orlando sarebbe dovuto essere, nel prossimo futuro, la sua ultima apparizione nel circuito indipendente americano. All&#x27;inizio di questa settimana, MJF aveva dichiarato di voler concentrare tutte le proprie attenzioni esclusivamente sulla AEW, una decisione presa in seguito alla sconfitta del titolo mondiale contro Darby Allin ad aprile. Inoltre, MJF aveva intenzione di mettere in palio l&#x27;AEW World Championship proprio contro Orlando.</p>\n<p>All&#x27;inizio di quest&#x27;anno, MJF aveva affermato di sentirsi finalmente in salute dopo la rottura del labbro glenoideo subita alla fine del 2023. Si spera che l&#x27;infortunio al ginocchio rimediato mercoledì non sia così grave, ma al momento non ci sono aggiornamenti sui tempi di recupero.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2187425/aew-world-champion-mjf-pulled-indie-booking-injury/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2187425/aew-world-champion-mjf-pulled-indie-booking-injury/\nTitolo feed: AEW World Champion MJF Pulled From Indie Booking Due To Injury\nTitolo pagina: AEW World Champion MJF Pulled From Indie Booking Due To Injury - Wrestling Inc.\nDescrizione: MJF's match at Beyond Wrestling's Break The Walls Down has officially been cancelled after he suffered a knee injury on \"AEW Dynamite.\"\nCategoria suggerita: AEW\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Last night on \\\"AEW Dynamite,\\\" MJF retained the AEW World Championship against Rush in a No Count Out Match, and though he escaped with the victory, he picked up an injury that will cause him to miss time in the ring.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"This Friday, MJF was scheduled to compete against Bobby Orlando at Beyond Wrestling's Break The Walls Down in Cranston, Rhode Island. However, on Thursday, Friedman informed Beyond Wrestling that he will be unable to compete at the show after injuring his knee against Rush.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"\\\"Unfortunately @The_MJF hyperextended his knee during his match last night & is not medically cleared to travel or compete. He will not be in Cranston tomorrow night but assured me he will wrestle for Beyond Wrestling as soon as his schedule allows. We wish him a speedy recovery.\\\"\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"Although the AEW World Champion promised Beyond Wrestling that he will compete for them once he's healthy, his match against Bobby Orlando was going to be his last appearance on the independent wrestling scene in America for the foreseeable future. Earlier this week, MJF claimed that he's shifting all of his attention to AEW going forward, and came to this decision after losing the world title to Darby Allin in April. Additionally, MJF was intending to put the AEW World Championship on the line against Orlando.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Earlier this year, MJF stated that he was finally feeling healthy again following the torn labrum he suffered near the end of 2023. Hopefully the knee injury MJF suffered on Wednesday is not as severe, but there's currently no update on the timeline for his return.\"\n  }\n]\n"
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "ai:Notizia rilevante sullo status dell'attuale campione del mondo.; deterministic:hard:injury,strategic:booking,recency:fresh_12h",
-        "score": 84
-      },
-      "publisher": {
-        "categories": [
-          5
-        ],
-        "error": null,
-        "featured_media": 5988,
-        "present": true,
-        "status": "published",
-        "wp_link": "https://news.openwrestlingtv.com/aew/mjf-rimosso-da-un-evento-indipendente-per-infortunio/",
-        "wp_post_id": 5989
-      },
-      "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2187425/aew-world-champion-mjf-pulled-indie-booking-injury",
-      "title_it": "MJF rimosso da un evento indipendente per infortunio"
-    },
-    {
-      "alfred": {
-        "decision": "approved",
-        "editorial_changes": [],
-        "issues": [],
-        "present": true,
-        "quality_score": 100,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": 4,
-        "diagnostic_stage": "ready_for_alfred",
-        "element_counts": {
-          "embed": 1,
-          "heading": 0,
-          "image": 0,
-          "quote": 0,
-          "table": 0,
-          "text": 3
-        },
-        "error": null,
-        "present": true,
-        "raw_element_count": 7,
-        "removed_before_gemini": 3,
-        "status": "ready_for_alfred",
-        "translation_model": "gemini-3.1-flash-lite",
-        "translation_used": true
-      },
-      "category_hint": "Business",
-      "html_audit": {
-        "alfred_final_html_preview": "<p>La causa degli azionisti WWE contro Vince McMahon dovrebbe iniziare l&#x27;8 giugno. Gli azionisti ritengono che McMahon abbia venduto la WWE a Endeavor per mantenere il proprio potere, escludendo potenziali acquirenti che avrebbero potuto essere più idonei. La scorsa settimana, McMahon e il presidente della WWE Nick Khan sono stati sanzionati dal giudice J. Travis Laster per la gestione dei messaggi Signal, lasciati &quot;scomparire&quot;. È prevista la testimonianza di McMahon, Khan e altri dirigenti di TKO durante il processo.</p>\nhttps://x.com/BJBethelTweets/status/2062345763921736190\n\n<p>Nel podcast &quot;Grilling JR&quot;, Jim Ross della AEW ha espresso la sua opinione sull&#x27;imminente processo: &quot;Dove c&#x27;è fumo c&#x27;è arrosto, e qui credo ci sia davvero fuoco. È un caso molto particolare che porterà a galla molte conversazioni&quot;. Data l&#x27;ingente somma di denaro in gioco, Ross si aspetta un clima molto ostile. Ross precisa di non conoscere personalmente Khan, pur riconoscendone il successo in WWE, mentre sul suo ex capo afferma che &quot;ha il cappio al collo&quot;. Ross ha aggiunto: &quot;Non credo che sarà una causa che si concluderà rapidamente. A causa delle sfumature del linguaggio; &#x27;cosa intendevi dire esattamente con questo?&#x27;&quot;. Ha inoltre sottolineato come il processo sottrarrà figure chiave al loro lavoro per un periodo prolungato, un lusso che l&#x27;azienda non può permettersi.</p>\n<p>B.J. Bethel riporta che il processo inizierà lunedì e proseguirà fino a mercoledì. Giovedì è previsto un giorno di pausa, con la conclusione del dibattimento fissata per venerdì. Brandon Thurston di POST Wrestling ha confermato il calendario, sottolineando che il giudice non emetterà una sentenza prima di diversi mesi.</p>",
-        "bob_body_html_preview": "<p>La causa degli azionisti WWE contro Vince McMahon dovrebbe iniziare l&#x27;8 giugno. Gli azionisti ritengono che McMahon abbia venduto la WWE a Endeavor per mantenere il proprio potere, escludendo potenziali acquirenti che avrebbero potuto essere più idonei. La scorsa settimana, McMahon e il presidente della WWE Nick Khan sono stati sanzionati dal giudice J. Travis Laster per la gestione dei messaggi Signal, lasciati &quot;scomparire&quot;. È prevista la testimonianza di McMahon, Khan e altri dirigenti di TKO durante il processo.</p>\nhttps://x.com/BJBethelTweets/status/2062345763921736190\n\n<p>Nel podcast &quot;Grilling JR&quot;, Jim Ross della AEW ha espresso la sua opinione sull&#x27;imminente processo: &quot;Dove c&#x27;è fumo c&#x27;è arrosto, e qui credo ci sia davvero fuoco. È un caso molto particolare che porterà a galla molte conversazioni&quot;. Data l&#x27;ingente somma di denaro in gioco, Ross si aspetta un clima molto ostile. Ross precisa di non conoscere personalmente Khan, pur riconoscendone il successo in WWE, mentre sul suo ex capo afferma che &quot;ha il cappio al collo&quot;. Ross ha aggiunto: &quot;Non credo che sarà una causa che si concluderà rapidamente. A causa delle sfumature del linguaggio; &#x27;cosa intendevi dire esattamente con questo?&#x27;&quot;. Ha inoltre sottolineato come il processo sottrarrà figure chiave al loro lavoro per un periodo prolungato, un lusso che l&#x27;azienda non può permettersi.</p>\n<p>B.J. Bethel riporta che il processo inizierà lunedì e proseguirà fino a mercoledì. Giovedì è previsto un giorno di pausa, con la conclusione del dibattimento fissata per venerdì. Brandon Thurston di POST Wrestling ha confermato il calendario, sottolineando che il giudice non emetterà una sentenza prima di diversi mesi.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_jim-ross-sulla-causa-degli-azionisti-wwe-contro-vince-mcmahon.html",
-        "published_html_preview": "<p>La causa degli azionisti WWE contro Vince McMahon dovrebbe iniziare l&#x27;8 giugno. Gli azionisti ritengono che McMahon abbia venduto la WWE a Endeavor per mantenere il proprio potere, escludendo potenziali acquirenti che avrebbero potuto essere più idonei. La scorsa settimana, McMahon e il presidente della WWE Nick Khan sono stati sanzionati dal giudice J. Travis Laster per la gestione dei messaggi Signal, lasciati &quot;scomparire&quot;. È prevista la testimonianza di McMahon, Khan e altri dirigenti di TKO durante il processo.</p>\n\n<!-- wp:embed {\"url\":\"https://x.com/BJBethelTweets/status/2062345763921736190\",\"type\":\"rich\",\"providerNameSlug\":\"twitter\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter\"><div class=\"wp-block-embed__wrapper\">\nhttps://x.com/BJBethelTweets/status/2062345763921736190\n</div></figure>\n<!-- /wp:embed -->\n\n<p>Nel podcast &quot;Grilling JR&quot;, Jim Ross della AEW ha espresso la sua opinione sull&#x27;imminente processo: &quot;Dove c&#x27;è fumo c&#x27;è arrosto, e qui credo ci sia davvero fuoco. È un caso molto particolare che porterà a galla molte conversazioni&quot;. Data l&#x27;ingente somma di denaro in gioco, Ross si aspetta un clima molto ostile. Ross precisa di non conoscere personalmente Khan, pur riconoscendone il successo in WWE, mentre sul suo ex capo afferma che &quot;ha il cappio al collo&quot;. Ross ha aggiunto: &quot;Non credo che sarà una causa che si concluderà rapidamente. A causa delle sfumature del linguaggio; &#x27;cosa intendevi dire esattamente con questo?&#x27;&quot;. Ha inoltre sottolineato come il processo sottrarrà figure chiave al loro lavoro per un periodo prolungato, un lusso che l&#x27;azienda non può permettersi.</p>\n<p>B.J. Bethel riporta che il processo inizierà lunedì e proseguirà fino a mercoledì. Giovedì è previsto un giorno di pausa, con la conclusione del dibattimento fissata per venerdì. Brandon Thurston di POST Wrestling ha confermato il calendario, sottolineando che il giudice non emetterà una sentenza prima di diversi mesi.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2187450/wwe-aew-jim-ross-doesnt-believe-shareholder-lawsuit-over-quickly/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_jim-ross-sulla-causa-degli-azionisti-wwe-contro-vince-mcmahon.html",
-        "publisher_review_html_preview": "<p>La causa degli azionisti WWE contro Vince McMahon dovrebbe iniziare l&#x27;8 giugno. Gli azionisti ritengono che McMahon abbia venduto la WWE a Endeavor per mantenere il proprio potere, escludendo potenziali acquirenti che avrebbero potuto essere più idonei. La scorsa settimana, McMahon e il presidente della WWE Nick Khan sono stati sanzionati dal giudice J. Travis Laster per la gestione dei messaggi Signal, lasciati &quot;scomparire&quot;. È prevista la testimonianza di McMahon, Khan e altri dirigenti di TKO durante il processo.</p>\n\n<!-- wp:embed {\"url\":\"https://x.com/BJBethelTweets/status/2062345763921736190\",\"type\":\"rich\",\"providerNameSlug\":\"twitter\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter\"><div class=\"wp-block-embed__wrapper\">\nhttps://x.com/BJBethelTweets/status/2062345763921736190\n</div></figure>\n<!-- /wp:embed -->\n\n<p>Nel podcast &quot;Grilling JR&quot;, Jim Ross della AEW ha espresso la sua opinione sull&#x27;imminente processo: &quot;Dove c&#x27;è fumo c&#x27;è arrosto, e qui credo ci sia davvero fuoco. È un caso molto particolare che porterà a galla molte conversazioni&quot;. Data l&#x27;ingente somma di denaro in gioco, Ross si aspetta un clima molto ostile. Ross precisa di non conoscere personalmente Khan, pur riconoscendone il successo in WWE, mentre sul suo ex capo afferma che &quot;ha il cappio al collo&quot;. Ross ha aggiunto: &quot;Non credo che sarà una causa che si concluderà rapidamente. A causa delle sfumature del linguaggio; &#x27;cosa intendevi dire esattamente con questo?&#x27;&quot;. Ha inoltre sottolineato come il processo sottrarrà figure chiave al loro lavoro per un periodo prolungato, un lusso che l&#x27;azienda non può permettersi.</p>\n<p>B.J. Bethel riporta che il processo inizierà lunedì e proseguirà fino a mercoledì. Giovedì è previsto un giorno di pausa, con la conclusione del dibattimento fissata per venerdì. Brandon Thurston di POST Wrestling ha confermato il calendario, sottolineando che il giudice non emetterà una sentenza prima di diversi mesi.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2187450/wwe-aew-jim-ross-doesnt-believe-shareholder-lawsuit-over-quickly/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2187450/wwe-aew-jim-ross-doesnt-believe-shareholder-lawsuit-over-quickly/\nTitolo feed: AEW's Jim Ross Doesn't Believe WWE Shareholder Lawsuit Will Be 'Over Quickly'\nTitolo pagina: AEW's Jim Ross Doesn't Believe WWE Shareholder Lawsuit Will Be 'Over Quickly' - Wrestling Inc.\nDescrizione: The WWE Shareholders lawsuit against Vince McMahon is set to begin next week.\nCategoria suggerita: Business\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"The WWE Shareholders lawsuit against Vince McMahon is scheduled to begin on June 8. The shareholders believe McMahon sold WWE to Endeavor to help himself stay in power and shut out potential buyers that may have been more suitable. Last week, McMahon and WWE President Nick Khan were sanctioned by Judge J. Travis Laster for their handling for Signal messages, which were allowed to \\\"disappear\\\". McMahon, Khan, and other TKO executives are expected to testify during the trial.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"On \\\"Grilling JR\\\" , AEW's Jim Ross weighed in on the upcoming trial. \\\"Where there's smoke there's fire and there's fire here, I think. That's a very unique case that's going to expose a lot of conversations.\\\" Due to a lot of money being involved, he expects it to be very hostile. Ross notes that he doesn't know Khan, but he's been successful with WWE. He says his former boss \\\"has a noose around his neck.\\\" Ross said \\\"it's not a case that will be over quickly, I don't think. Because of verbiage; 'what did you mean by that?'\\\" He also says it's taking important people away from their work for an extended period of time and they can't afford to be distracted.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"B.J. Bethel reports that the trail will begin on Monday and run through Wednesday. The court will have an off day on Thursday and the trial will end on Friday. POST Wrestling's Brandon Thurston confirmed the schedule . He notes that a judge will not make a judgement for several months.\"\n  }\n]\n"
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "ai:Notizia business di alto rilievo, impatto diretto sulla WWE.; deterministic:hard:lawsuit,current:business_legal,recency:fresh_12h",
-        "score": 87
-      },
-      "publisher": {
-        "categories": [
-          15,
-          8
-        ],
-        "error": null,
-        "featured_media": 5986,
-        "present": true,
-        "status": "published",
-        "wp_link": "https://news.openwrestlingtv.com/world/jim-ross-sulla-causa-degli-azionisti-wwe-contro-vince-mcmahon/",
-        "wp_post_id": 5987
-      },
-      "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2187450/wwe-aew-jim-ross-doesnt-believe-shareholder-lawsuit-over-quickly",
-      "title_it": "Jim Ross sulla causa degli azionisti WWE contro Vince McMahon"
-    },
-    {
-      "alfred": {
-        "decision": null,
-        "editorial_changes": [],
-        "issues": [],
-        "present": false,
-        "quality_score": null,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": null,
-        "diagnostic_stage": null,
-        "element_counts": null,
-        "error": null,
-        "present": false,
-        "raw_element_count": null,
-        "removed_before_gemini": null,
-        "status": null,
-        "translation_model": null,
-        "translation_used": null
-      },
-      "category_hint": "TNA",
-      "html_audit": {
-        "alfred_final_html_preview": "",
-        "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_backstage-update-on-possibility-of-tna-s-mike-santana-in-wwe.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_backstage-update-on-possibility-of-tna-s-mike-santana-in-wwe.html",
-        "publisher_review_html_preview": "",
-        "translation_prompt_preview": ""
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "selected_overflow:ai:Interesse di mercato tra TNA e WWE.; deterministic:strategic:backstage,recency:fresh_12h",
-        "score": 70
-      },
-      "publisher": {
-        "categories": null,
-        "error": null,
-        "featured_media": null,
-        "present": false,
-        "status": null,
-        "wp_link": null,
-        "wp_post_id": null
-      },
-      "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2187576/backstage-update-tna-mike-santana-wwe",
-      "title_it": "Backstage Update On Possibility Of TNA's Mike Santana In WWE"
-    },
-    {
-      "alfred": {
-        "decision": null,
-        "editorial_changes": [],
-        "issues": [],
-        "present": false,
-        "quality_score": null,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": null,
-        "diagnostic_stage": null,
-        "element_counts": null,
-        "error": null,
-        "present": false,
-        "raw_element_count": null,
-        "removed_before_gemini": null,
-        "status": null,
-        "translation_model": null,
-        "translation_used": null
-      },
-      "category_hint": "TNA",
-      "html_audit": {
-        "alfred_final_html_preview": "",
-        "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_former-wwe-star-fabian-aichner-discusses-future-in-tna.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_former-wwe-star-fabian-aichner-discusses-future-in-tna.html",
-        "publisher_review_html_preview": "",
-        "translation_prompt_preview": ""
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "strategic:future,recency:fresh_12h",
-        "score": 66
-      },
-      "publisher": {
-        "categories": null,
-        "error": null,
-        "featured_media": null,
-        "present": false,
-        "status": null,
-        "wp_link": null,
-        "wp_post_id": null
-      },
-      "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2187580/former-wwe-star-fabian-aichner-discusses-future-tna",
-      "title_it": "Former WWE Star Fabian Aichner Discusses Future In TNA"
-    },
-    {
-      "alfred": {
-        "decision": null,
-        "editorial_changes": [],
-        "issues": [],
-        "present": false,
-        "quality_score": null,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": null,
-        "diagnostic_stage": null,
-        "element_counts": null,
-        "error": null,
-        "present": false,
-        "raw_element_count": null,
-        "removed_before_gemini": null,
-        "status": null,
-        "translation_model": null,
-        "translation_used": null
-      },
-      "category_hint": "WWE",
-      "html_audit": {
-        "alfred_final_html_preview": "",
-        "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_update-on-frustrations-with-wwe-s-handling-of-liv-morgan-and-dom-mysterio.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_update-on-frustrations-with-wwe-s-handling-of-liv-morgan-and-dom-mysterio.html",
-        "publisher_review_html_preview": "",
-        "translation_prompt_preview": ""
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "selected_overflow:ai:Storyline di punta, preferito a c7 per profondità dell'analisi.; deterministic:strategic:creative,entity:liv morgan,recency:fresh_12h",
-        "score": 78
-      },
-      "publisher": {
-        "categories": null,
-        "error": null,
-        "featured_media": null,
-        "present": false,
-        "status": null,
-        "wp_link": null,
-        "wp_post_id": null
-      },
-      "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2187674/update-frustrations-wwe-handling-liv-morgan-dom-mysterio",
-      "title_it": "Update On Frustrations With WWE's Handling Of Liv Morgan And Dom Mysterio"
-    },
-    {
-      "alfred": {
-        "decision": "approved",
-        "editorial_changes": [],
-        "issues": [],
-        "present": true,
-        "quality_score": 100,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": 4,
-        "diagnostic_stage": "ready_for_alfred",
-        "element_counts": {
-          "embed": 1,
-          "heading": 0,
-          "image": 0,
-          "quote": 0,
-          "table": 0,
-          "text": 3
-        },
-        "error": null,
-        "present": true,
-        "raw_element_count": 7,
-        "removed_before_gemini": 3,
-        "status": "ready_for_alfred",
-        "translation_model": "gemini-3.1-flash-lite",
-        "translation_used": true
-      },
-      "category_hint": "NXT",
-      "html_audit": {
-        "alfred_final_html_preview": "<p>Alla fine di aprile, un gran numero di talenti WWE è stato rilasciato, coinvolgendo sia figure di primo piano che nuove leve. Da allora, diversi atleti come Dexter Lumis hanno iniziato a promuovere le date in cui saranno nuovamente disponibili per le prenotazioni. Un&#x27;altra Superstar rilasciata, Nikki Cross, ha acquistato una promotion di wrestling insieme al marito ed ex Superstar WWE, Killian Dain (Big Damo).</p>\nhttps://x.com/AndreChaseWWE/status/2062589979465756905\n\n<p>Uno dei tagli al roster più sorprendenti è stato quello di Andre Chase, diventato un wrestler amatissimo da gran parte dei fan di &quot;NXT&quot; in qualità di leader della Chase U. Dopo aver lasciato &quot;NXT&quot;, ha conseguito una laurea in Sports Management presso l&#x27;Università della Florida. Giovedì, tramite i social media, ha annunciato il suo nuovo nome: d&#x27;ora in avanti sarà noto come &quot;The Professor&quot; Andre Chance. Chance ha inoltre comunicato di essere disponibile per ingaggi, sessioni di autografi, meet and greet e seminari. &quot;Voglio che spargiate la voce: siamo tornati!! Volete che il Professor Chance porti il tailgate nella vostra città? Taggate le vostre promotion locali o preferite qui sotto e mettiamoci al lavoro!&quot;</p>\n<p>Chance è stato due volte NXT Tag Team Champion, rispettivamente insieme ai membri della Chase U Duke Hudson e Ridge Holland.</p>",
-        "bob_body_html_preview": "<p>Alla fine di aprile, un gran numero di talenti WWE è stato rilasciato, coinvolgendo sia figure di primo piano che nuove leve. Da allora, diversi atleti come Dexter Lumis hanno iniziato a promuovere le date in cui saranno nuovamente disponibili per le prenotazioni. Un&#x27;altra Superstar rilasciata, Nikki Cross, ha acquistato una promotion di wrestling insieme al marito ed ex Superstar WWE, Killian Dain (Big Damo).</p>\nhttps://x.com/AndreChaseWWE/status/2062589979465756905\n\n<p>Uno dei tagli al roster più sorprendenti è stato quello di Andre Chase, diventato un wrestler amatissimo da gran parte dei fan di &quot;NXT&quot; in qualità di leader della Chase U. Dopo aver lasciato &quot;NXT&quot;, ha conseguito una laurea in Sports Management presso l&#x27;Università della Florida. Giovedì, tramite i social media, ha annunciato il suo nuovo nome: d&#x27;ora in avanti sarà noto come &quot;The Professor&quot; Andre Chance. Chance ha inoltre comunicato di essere disponibile per ingaggi, sessioni di autografi, meet and greet e seminari. &quot;Voglio che spargiate la voce: siamo tornati!! Volete che il Professor Chance porti il tailgate nella vostra città? Taggate le vostre promotion locali o preferite qui sotto e mettiamoci al lavoro!&quot;</p>\n<p>Chance è stato due volte NXT Tag Team Champion, rispettivamente insieme ai membri della Chase U Duke Hudson e Ridge Holland.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_l-ex-star-di-nxt-andre-chase-annuncia-il-suo-nuovo-ring-name.html",
-        "published_html_preview": "<p>Alla fine di aprile, un gran numero di talenti WWE è stato rilasciato, coinvolgendo sia figure di primo piano che nuove leve. Da allora, diversi atleti come Dexter Lumis hanno iniziato a promuovere le date in cui saranno nuovamente disponibili per le prenotazioni. Un&#x27;altra Superstar rilasciata, Nikki Cross, ha acquistato una promotion di wrestling insieme al marito ed ex Superstar WWE, Killian Dain (Big Damo).</p>\n\n<!-- wp:embed {\"url\":\"https://x.com/AndreChaseWWE/status/2062589979465756905\",\"type\":\"rich\",\"providerNameSlug\":\"twitter\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter\"><div class=\"wp-block-embed__wrapper\">\nhttps://x.com/AndreChaseWWE/status/2062589979465756905\n</div></figure>\n<!-- /wp:embed -->\n\n<p>Uno dei tagli al roster più sorprendenti è stato quello di Andre Chase, diventato un wrestler amatissimo da gran parte dei fan di &quot;NXT&quot; in qualità di leader della Chase U. Dopo aver lasciato &quot;NXT&quot;, ha conseguito una laurea in Sports Management presso l&#x27;Università della Florida. Giovedì, tramite i social media, ha annunciato il suo nuovo nome: d&#x27;ora in avanti sarà noto come &quot;The Professor&quot; Andre Chance. Chance ha inoltre comunicato di essere disponibile per ingaggi, sessioni di autografi, meet and greet e seminari. &quot;Voglio che spargiate la voce: siamo tornati!! Volete che il Professor Chance porti il tailgate nella vostra città? Taggate le vostre promotion locali o preferite qui sotto e mettiamoci al lavoro!&quot;</p>\n<p>Chance è stato due volte NXT Tag Team Champion, rispettivamente insieme ai membri della Chase U Duke Hudson e Ridge Holland.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2187713/fka-andre-chase-reveals-new-name-post-wwe-nxt-release/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_l-ex-star-di-nxt-andre-chase-annuncia-il-suo-nuovo-ring-name.html",
-        "publisher_review_html_preview": "<p>Alla fine di aprile, un gran numero di talenti WWE è stato rilasciato, coinvolgendo sia figure di primo piano che nuove leve. Da allora, diversi atleti come Dexter Lumis hanno iniziato a promuovere le date in cui saranno nuovamente disponibili per le prenotazioni. Un&#x27;altra Superstar rilasciata, Nikki Cross, ha acquistato una promotion di wrestling insieme al marito ed ex Superstar WWE, Killian Dain (Big Damo).</p>\n\n<!-- wp:embed {\"url\":\"https://x.com/AndreChaseWWE/status/2062589979465756905\",\"type\":\"rich\",\"providerNameSlug\":\"twitter\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter\"><div class=\"wp-block-embed__wrapper\">\nhttps://x.com/AndreChaseWWE/status/2062589979465756905\n</div></figure>\n<!-- /wp:embed -->\n\n<p>Uno dei tagli al roster più sorprendenti è stato quello di Andre Chase, diventato un wrestler amatissimo da gran parte dei fan di &quot;NXT&quot; in qualità di leader della Chase U. Dopo aver lasciato &quot;NXT&quot;, ha conseguito una laurea in Sports Management presso l&#x27;Università della Florida. Giovedì, tramite i social media, ha annunciato il suo nuovo nome: d&#x27;ora in avanti sarà noto come &quot;The Professor&quot; Andre Chance. Chance ha inoltre comunicato di essere disponibile per ingaggi, sessioni di autografi, meet and greet e seminari. &quot;Voglio che spargiate la voce: siamo tornati!! Volete che il Professor Chance porti il tailgate nella vostra città? Taggate le vostre promotion locali o preferite qui sotto e mettiamoci al lavoro!&quot;</p>\n<p>Chance è stato due volte NXT Tag Team Champion, rispettivamente insieme ai membri della Chase U Duke Hudson e Ridge Holland.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2187713/fka-andre-chase-reveals-new-name-post-wwe-nxt-release/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2187713/fka-andre-chase-reveals-new-name-post-wwe-nxt-release/\nTitolo feed: FKA Andre Chase Reveals New Name Post-WWE NXT Release\nTitolo pagina: FKA Andre Chase Reveals New Name Post-WWE NXT Release - Wrestling Inc.\nDescrizione: Andre Chase was included in the post WWE WrestleMania 42 releases. He debuted in \"NXT\" in 2021.\nCategoria suggerita: NXT\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"At the end of April, a slew of WWE talents were released from the top of the card to the recruits. Since then, several talents like Dexter Lumis have promoted the date they'll be able to take bookings again . One released Superstar, Nikki Cross, has purchased a wrestling promotion alongside her husband and former WWE Superstar, Killian Dane (Big Damo).\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"One of the more surprising roster cuts was Andre Chase. He became a beloved wrestler to many of the \\\"NXT\\\" faithful as the leader of Chase U. Since leaving \\\"NXT\\\", he has graduated from the University of Florida with a Bachelor of Science in Sports Management. On Thursday, he announced his new name on social media. He will now be known as \\\"The Professor\\\" Andre Chance. Chance also announced that he is available for bookings, signings, meet and greets, and seminars. \\\"I want you to put the word out there we back up!! Want Professor Chance to bring the tailgate to your town? Tag your local/favorite promotions below and let's get to work!\\\"\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Chance was a two-time NXT Tag Team Champion with Chase U members, Duke Hudson and Ridge Holland, respectively.\"\n  }\n]\n"
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "selected_overflow:ai:Update di mercato post-rilascio per un volto noto di NXT.; deterministic:hard:debut,recency:fresh_12h",
-        "score": 80
-      },
-      "publisher": {
-        "categories": [
-          6,
-          4
-        ],
-        "error": null,
-        "featured_media": 5990,
-        "present": true,
-        "status": "published",
-        "wp_link": "https://news.openwrestlingtv.com/wwe/lex-star-di-nxt-andre-chase-annuncia-il-suo-nuovo-ring-name/",
-        "wp_post_id": 5991
-      },
-      "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2187713/fka-andre-chase-reveals-new-name-post-wwe-nxt-release",
-      "title_it": "L'ex star di NXT Andre Chase annuncia il suo nuovo ring name"
-    }
-  ],
-  "generated_at": "2026-06-04T19:23:12.692289+00:00",
+  "article_dossiers": [],
+  "generated_at": "2026-06-04T21:11:39.734187+00:00",
   "how_to_read": {
     "alfred_final_html_preview": "HTML dopo revisione/normalizzazioni di Alfred",
     "bob_body_html_preview": "HTML prodotto da Bob prima di Alfred",
@@ -3190,6 +2610,116 @@
       "overall_status": "ok",
       "published": 3,
       "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 0,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 0
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 0,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 4,
+          "already_worked": 0,
+          "event_factual_news_to_menzo": 0,
+          "event_recap_duplicates_blocked_by_report": 0,
+          "event_soft_reactions_to_menzo": 0,
+          "hard_skipped": 21,
+          "menzo_memory_hard_skipped": 17,
+          "old_news_hard_skipped": 0,
+          "post_show_hard_news_to_menzo": 1,
+          "report_candidates_blocked_by_manual_or_history": 0,
+          "to_menzo": 14,
+          "to_simone": 0
+        },
+        "menzo": {
+          "pending": 0,
+          "skipped": 0,
+          "to_bob_or_v92": 0
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 0,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 0,
+          "skipped": 5,
+          "waiting": 1
+        }
+      },
+      "already_published": 0,
+      "article_count": 0,
+      "errors": 0,
+      "generated_at": "2026-06-04T21:11:39.725744+00:00",
+      "overall_status": "ok",
+      "published": 0,
+      "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 0,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 0
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 0,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 4,
+          "already_worked": 0,
+          "event_factual_news_to_menzo": 0,
+          "event_recap_duplicates_blocked_by_report": 0,
+          "event_soft_reactions_to_menzo": 0,
+          "hard_skipped": 21,
+          "menzo_memory_hard_skipped": 17,
+          "old_news_hard_skipped": 0,
+          "post_show_hard_news_to_menzo": 1,
+          "report_candidates_blocked_by_manual_or_history": 0,
+          "to_menzo": 14,
+          "to_simone": 0
+        },
+        "menzo": {
+          "pending": 0,
+          "skipped": 0,
+          "to_bob_or_v92": 0
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 0,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 0,
+          "skipped": 5,
+          "waiting": 1
+        }
+      },
+      "already_published": 0,
+      "article_count": 0,
+      "errors": 0,
+      "generated_at": "2026-06-04T21:11:39.734187+00:00",
+      "overall_status": "ok",
+      "published": 0,
+      "warnings": 0
     }
   ],
   "overall_status": "ok",
@@ -3206,7 +2736,7 @@
       "simone": "real_report_director_and_autonomous_report_publisher"
     },
     "alfred_handoff": {
-      "approved": 3,
+      "approved": 0,
       "blockers": 0,
       "editorial_changes": 0,
       "needs_revision": 0,
@@ -3215,36 +2745,36 @@
     "bob_handoff": {
       "errors": 0,
       "extraction_empty": 0,
-      "ready_for_alfred": 3,
+      "ready_for_alfred": 0,
       "translation_pending": 0
     },
-    "ended_at": "2026-06-04T19:23:12.674949+00:00",
+    "ended_at": "2026-06-04T21:11:39.719912+00:00",
     "engine": "bot_v92.py",
     "massy_handoff": {
-      "already_published_hard_skipped": 2,
+      "already_published_hard_skipped": 4,
       "already_worked": 0,
       "event_factual_news_to_menzo": 0,
       "event_recap_duplicates_blocked_by_report": 0,
-      "event_soft_reactions_to_menzo": 2,
-      "hard_skipped": 11,
-      "menzo_memory_hard_skipped": 8,
+      "event_soft_reactions_to_menzo": 0,
+      "hard_skipped": 21,
+      "menzo_memory_hard_skipped": 17,
       "old_news_hard_skipped": 0,
       "post_show_hard_news_to_menzo": 1,
       "report_candidates_blocked_by_manual_or_history": 0,
-      "to_menzo": 24,
+      "to_menzo": 14,
       "to_simone": 0
     },
     "menzo_handoff": {
-      "pending": 2,
-      "skipped": 11,
-      "to_bob_or_v92": 11
+      "pending": 0,
+      "skipped": 0,
+      "to_bob_or_v92": 0
     },
     "newsroom_engine_override": false,
     "publisher_handoff": {
       "already_published": 0,
       "dry_run": 0,
       "errors": 0,
-      "published": 3,
+      "published": 0,
       "wp_not_ready": 0
     },
     "runtime_delegations": 0,
@@ -3261,101 +2791,101 @@
       "published": 0,
       "wp_not_ready": 0
     },
-    "started_at": "2026-06-04T19:22:38.923597+00:00",
+    "started_at": "2026-06-04T21:10:59.052241+00:00",
     "version": "v93_20_process_refinements"
   },
   "summary": {
     "anomalies": 0,
-    "article_dossiers": 11,
+    "article_dossiers": 0,
     "errors_48h": 14,
     "published_48h": 72,
-    "published_current_run": 3,
-    "runs_48h": 48
+    "published_current_run": 0,
+    "runs_48h": 50
   },
   "timeline": [
     {
       "agent": "Jarvis",
       "note": "engine=bot_v92.py",
       "phase": "bootstrap_status_written",
-      "timestamp": "2026-06-04T19:22:38.923865+00:00"
+      "timestamp": "2026-06-04T21:10:59.052571+00:00"
     },
     {
       "agent": "Massy",
-      "note": "to_simone=0 to_menzo=24 hard_skip=11 already=0",
+      "note": "to_simone=0 to_menzo=14 hard_skip=21 already=0",
       "phase": "sentinel_board_ready",
-      "timestamp": "2026-06-04T19:22:41.683159+00:00"
+      "timestamp": "2026-06-04T21:10:59.701640+00:00"
     },
     {
       "agent": "Massy",
       "note": "version=v93_24_massy_show_news_before_report_closure",
       "phase": "forced_policy_active",
-      "timestamp": "2026-06-04T19:22:41.683172+00:00"
+      "timestamp": "2026-06-04T21:10:59.701660+00:00"
     },
     {
       "agent": "Simone",
       "note": "ready=0 waiting=1 skipped=5",
       "phase": "report_decision_ready",
-      "timestamp": "2026-06-04T19:22:41.686581+00:00"
+      "timestamp": "2026-06-04T21:10:59.704920+00:00"
     },
     {
       "agent": "Simone",
       "note": "published=0 already=0 wp_not_ready=0 errors=0",
       "phase": "report_publication_ready",
-      "timestamp": "2026-06-04T19:22:43.437569+00:00"
+      "timestamp": "2026-06-04T21:11:01.341854+00:00"
     },
     {
       "agent": "Menzo",
-      "note": "selected=11 pending=2 skipped=11",
+      "note": "selected=0 pending=0 skipped=0",
       "phase": "editorial_decision_ready",
-      "timestamp": "2026-06-04T19:22:51.007172+00:00"
+      "timestamp": "2026-06-04T21:11:14.526720+00:00"
     },
     {
       "agent": "Menzo",
-      "note": "version=v93_20_selective_softpool",
+      "note": "version=v93_25_wp_ready_guard",
       "phase": "forced_policy_active",
-      "timestamp": "2026-06-04T19:22:51.007200+00:00"
+      "timestamp": "2026-06-04T21:11:14.526733+00:00"
     },
     {
       "agent": "Bob",
-      "note": "ready=3 pending=0 empty=0 errors=0",
+      "note": "ready=0 pending=0 empty=0 errors=0",
       "phase": "article_packages_ready",
-      "timestamp": "2026-06-04T19:22:57.712948+00:00"
+      "timestamp": "2026-06-04T21:11:14.543958+00:00"
     },
     {
       "agent": "Bob",
       "note": "warnings=0",
       "phase": "bob_brief_guard_applied",
-      "timestamp": "2026-06-04T19:22:57.714113+00:00"
+      "timestamp": "2026-06-04T21:11:14.544244+00:00"
     },
     {
       "agent": "Alfred",
-      "note": "approved=3 needs_revision=0 blockers=0 warnings=0 changes=0",
+      "note": "approved=0 needs_revision=0 blockers=0 warnings=0 changes=0",
       "phase": "quality_review_ready",
-      "timestamp": "2026-06-04T19:22:57.725137+00:00"
+      "timestamp": "2026-06-04T21:11:14.550624+00:00"
     },
     {
       "agent": "Alfred",
       "note": "surfaced=0",
       "phase": "bob_warning_guard_applied",
-      "timestamp": "2026-06-04T19:22:57.725747+00:00"
+      "timestamp": "2026-06-04T21:11:14.550887+00:00"
     },
     {
       "agent": "Publisher",
-      "note": "published=3 already=0 dry=0 wp_not_ready=0 errors=0",
+      "note": "published=0 already=0 dry=0 wp_not_ready=0 errors=0",
       "phase": "publication_ready",
-      "timestamp": "2026-06-04T19:23:12.674919+00:00"
+      "timestamp": "2026-06-04T21:11:39.719879+00:00"
     },
     {
       "agent": "Jarvis",
       "note": "v93 Publisher completed; v92 fallback skipped",
       "phase": "runtime_skipped",
-      "timestamp": "2026-06-04T19:23:12.674940+00:00"
+      "timestamp": "2026-06-04T21:11:39.719904+00:00"
     },
     {
       "agent": "Archivista",
       "note": "status=ok anomalies=0",
       "phase": "audit_ready",
-      "timestamp": "2026-06-04T19:23:12.691594+00:00"
+      "timestamp": "2026-06-04T21:11:39.734112+00:00"
     }
   ],
   "version": "v93_7_archivista_audit"
