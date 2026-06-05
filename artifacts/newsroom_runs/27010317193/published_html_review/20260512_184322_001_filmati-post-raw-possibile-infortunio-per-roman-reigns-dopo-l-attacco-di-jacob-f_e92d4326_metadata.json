@@ -1,0 +1,37 @@
+{
+  "run_id": "2026-05-12 18:40:22",
+  "bot_version": "v85_4_skipped_history_boot_diagnostics (777c3a4)",
+  "git_sha": "777c3a4a0351fbb67fd234edc51b9455a094bd10",
+  "created_at": "2026-05-12T18:43:22",
+  "source_title": "Footage Shows Roman Reigns Possibly Injured After Brutal RAW Attack",
+  "final_title": "Filmati post-Raw: possibile infortunio per Roman Reigns dopo l'attacco di Jacob Fatu",
+  "source_url": "https://www.ringsidenews.com/footage-shows-roman-reigns-possibly-injured-brutal-raw-attack/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "RUMOR",
+  "semantic_id": "footage-shows-roman-reigns-possibly-injured-after-brutal-raw-attack",
+  "story_signature_v71": "stable:roman_reigns|jacob_fatu|outcome|wwe|raw",
+  "refined_score": 95,
+  "refined_reasons": [
+    "WWE/main roster",
+    "top star titolo: roman reigns",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "infortunio",
+    "combo top name titolo + evento forte",
+    "show settimanale",
+    "v62 infortunio/operazione",
+    "v72.3 cap rumor",
+    "v79.1.3 post-show recovery 68->95"
+  ],
+  "blocks_summary": {
+    "text": 7,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260512_184322_001_filmati-post-raw-possibile-infortunio-per-roman-reigns-dopo-l-attacco-di-jacob-f_e92d4326_original.html",
+  "final_html_file": "20260512_184322_001_filmati-post-raw-possibile-infortunio-per-roman-reigns-dopo-l-attacco-di-jacob-f_e92d4326_final.html",
+  "metadata_file": "20260512_184322_001_filmati-post-raw-possibile-infortunio-per-roman-reigns-dopo-l-attacco-di-jacob-f_e92d4326_metadata.json"
+}

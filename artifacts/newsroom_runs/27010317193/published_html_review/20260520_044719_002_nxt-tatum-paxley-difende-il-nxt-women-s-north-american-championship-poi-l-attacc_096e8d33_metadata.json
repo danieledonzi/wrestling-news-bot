@@ -1,0 +1,31 @@
+{
+  "run_id": "2026-05-20 04:44:59",
+  "bot_version": "v89_editorial_report_quality (1adea8d)",
+  "git_sha": "1adea8d00b50da8d330933b48fed3fce4915ee13",
+  "created_at": "2026-05-20T04:47:19",
+  "source_title": "Tatum Paxley Retains Women's NA Title, Laid Out By Zaria",
+  "final_title": "NXT: tatum paxley difende il NXT women's north american championship, poi l'attacco di zaria",
+  "source_url": "https://www.wrestlinginc.com/2177374/tatum-paxley-retains-womens-na-title-laid-out-zaria/",
+  "category_id": 6,
+  "category_slug": "NXT",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "tatum-paxley-retains-womens-na-title-laid-out-by-zaria",
+  "story_signature_v71": "stable:tatum_paxley_retains_women|na_title|laid_out_by_zaria|title|wwe",
+  "refined_score": 82,
+  "refined_reasons": [
+    "WWE/main roster",
+    "WWE main roster + storyline/evento",
+    "show settimanale",
+    "v62 titolo/championship"
+  ],
+  "blocks_summary": {
+    "text": 5,
+    "image": 1,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260520_044719_002_nxt-tatum-paxley-difende-il-nxt-women-s-north-american-championship-poi-l-attacc_096e8d33_original.html",
+  "final_html_file": "20260520_044719_002_nxt-tatum-paxley-difende-il-nxt-women-s-north-american-championship-poi-l-attacc_096e8d33_final.html",
+  "metadata_file": "20260520_044719_002_nxt-tatum-paxley-difende-il-nxt-women-s-north-american-championship-poi-l-attacc_096e8d33_metadata.json"
+}

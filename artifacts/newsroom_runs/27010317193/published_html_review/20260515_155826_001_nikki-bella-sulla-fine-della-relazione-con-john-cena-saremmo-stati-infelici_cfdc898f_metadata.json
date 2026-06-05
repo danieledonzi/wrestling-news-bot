@@ -1,0 +1,35 @@
+{
+  "run_id": "2026-05-15 15:57:55",
+  "bot_version": "v88_4_quality_microfixes (e414a44)",
+  "git_sha": "e414a440ded1cd4df583abe2b5fdd476b5bc7da0",
+  "created_at": "2026-05-15T15:58:26",
+  "source_title": "Nikki Bella Says Staying With John Cena Would Have Led to a Lonely and Sad Life",
+  "final_title": "Nikki Bella sulla fine della relazione con John Cena: \"Saremmo stati infelici\"",
+  "source_url": "https://www.ringsidenews.com/nikki-bella-says-staying-john-cena-would-have-led-lonely-sad-life/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "nikki-bella-says-staying-with-john-cena-would-have-led-to-a-lonely-and-sad-life",
+  "story_signature_v71": "stable:nikki_bella|john_cena|nikki_bella_says_staying_with_john_cena_would_have_led|story|wrestling",
+  "refined_score": 97,
+  "refined_reasons": [
+    "WWE/main roster",
+    "top star titolo: john cena",
+    "nomi forti titolo: nikki bella",
+    "WWE main roster + storyline/evento",
+    "rumor/backstage",
+    "PLE/PPV"
+  ],
+  "blocks_summary": {
+    "text": 11,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [
+    "https://twitter.com/nikkigarcialove/status/2055248531741442097"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260515_155826_001_nikki-bella-sulla-fine-della-relazione-con-john-cena-saremmo-stati-infelici_cfdc898f_original.html",
+  "final_html_file": "20260515_155826_001_nikki-bella-sulla-fine-della-relazione-con-john-cena-saremmo-stati-infelici_cfdc898f_final.html",
+  "metadata_file": "20260515_155826_001_nikki-bella-sulla-fine-della-relazione-con-john-cena-saremmo-stati-infelici_cfdc898f_metadata.json"
+}
