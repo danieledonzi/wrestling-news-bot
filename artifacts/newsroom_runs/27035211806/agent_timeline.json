@@ -1,0 +1,98 @@
+[
+  {
+    "timestamp": "2026-06-05T19:18:55.979263+00:00",
+    "agent": "Jarvis",
+    "phase": "bootstrap_status_written",
+    "note": "engine=bot_v92.py"
+  },
+  {
+    "timestamp": "2026-06-05T19:18:58.664470+00:00",
+    "agent": "Massy",
+    "phase": "sentinel_board_ready",
+    "note": "to_simone=1 to_menzo=13 hard_skip=21 already=0"
+  },
+  {
+    "timestamp": "2026-06-05T19:18:58.664505+00:00",
+    "agent": "Massy",
+    "phase": "forced_policy_active",
+    "note": "version=v93_32_massy_story_dedupe"
+  },
+  {
+    "timestamp": "2026-06-05T19:18:58.668086+00:00",
+    "agent": "Simone",
+    "phase": "report_decision_ready",
+    "note": "ready=0 waiting=1 skipped=5"
+  },
+  {
+    "timestamp": "2026-06-05T19:19:00.154646+00:00",
+    "agent": "Simone",
+    "phase": "report_publication_ready",
+    "note": "published=0 already=0 wp_not_ready=0 errors=0"
+  },
+  {
+    "timestamp": "2026-06-05T19:19:13.033003+00:00",
+    "agent": "Menzo",
+    "phase": "editorial_decision_ready",
+    "note": "selected=0 pending=0 skipped=0"
+  },
+  {
+    "timestamp": "2026-06-05T19:19:13.033020+00:00",
+    "agent": "Menzo",
+    "phase": "forced_policy_active",
+    "note": "version=v93_25_wp_ready_guard"
+  },
+  {
+    "timestamp": "2026-06-05T19:19:13.127686+00:00",
+    "agent": "Bob",
+    "phase": "article_packages_ready",
+    "note": "ready=0 pending=0 empty=0 errors=0"
+  },
+  {
+    "timestamp": "2026-06-05T19:19:13.128279+00:00",
+    "agent": "Bob",
+    "phase": "bob_brief_guard_applied",
+    "note": "warnings=0"
+  },
+  {
+    "timestamp": "2026-06-05T19:19:13.135218+00:00",
+    "agent": "Alfred",
+    "phase": "quality_review_ready",
+    "note": "approved=0 needs_revision=0 blockers=0 warnings=0 changes=0"
+  },
+  {
+    "timestamp": "2026-06-05T19:19:13.136125+00:00",
+    "agent": "Alfred",
+    "phase": "bob_warning_guard_applied",
+    "note": "surfaced=0"
+  },
+  {
+    "timestamp": "2026-06-05T19:19:38.875783+00:00",
+    "agent": "Publisher",
+    "phase": "publication_ready",
+    "note": "published=0 already=0 dry=0 wp_not_ready=0 errors=0"
+  },
+  {
+    "timestamp": "2026-06-05T19:19:38.875821+00:00",
+    "agent": "Jarvis",
+    "phase": "runtime_skipped",
+    "note": "v93 Publisher completed; v92 fallback skipped"
+  },
+  {
+    "timestamp": "2026-06-05T19:19:38.891624+00:00",
+    "agent": "Archivista",
+    "phase": "audit_ready",
+    "note": "status=ok anomalies=0"
+  },
+  {
+    "timestamp": "2026-06-05T19:19:38.903769+00:00",
+    "agent": "Archivista",
+    "phase": "audit_context_refreshed",
+    "note": "status=ok"
+  },
+  {
+    "timestamp": "2026-06-05T19:19:38.927672+00:00",
+    "agent": "MasterLog",
+    "phase": "master_log_saved",
+    "note": "records=33"
+  }
+]

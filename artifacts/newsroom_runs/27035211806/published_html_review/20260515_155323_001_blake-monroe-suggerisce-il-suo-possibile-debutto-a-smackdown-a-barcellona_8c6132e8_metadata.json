@@ -1,0 +1,35 @@
+{
+  "run_id": "2026-05-15 15:52:49",
+  "bot_version": "v88_4_quality_microfixes (01c56bc)",
+  "git_sha": "01c56bc07a6e5f3b234e2af702168a0ea4abfea6",
+  "created_at": "2026-05-15T15:53:23",
+  "source_title": "Blake Monroe Drops Major Hint About WWE SmackDown Debut Date",
+  "final_title": "Blake Monroe suggerisce il suo possibile debutto a SmackDown a Barcellona",
+  "source_url": "https://www.ringsidenews.com/blake-monroe-drops-major-hint-about-wwe-smackdown-debut-date/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "RUMOR",
+  "semantic_id": "blake-monroe-drops-major-hint-about-wwe-smackdown-debut-date",
+  "story_signature_v71": "stable:blake_monroe_drops_major_hint_about|debut_date|debut|wwe",
+  "refined_score": 56,
+  "refined_reasons": [
+    "WWE/main roster",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "PLE/PPV",
+    "v62 ritorno/debutto",
+    "v72.3 cap rumor",
+    "v77 AI reason/type coherence: PREVIEW cap"
+  ],
+  "blocks_summary": {
+    "text": 9,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260515_155323_001_blake-monroe-suggerisce-il-suo-possibile-debutto-a-smackdown-a-barcellona_8c6132e8_original.html",
+  "final_html_file": "20260515_155323_001_blake-monroe-suggerisce-il-suo-possibile-debutto-a-smackdown-a-barcellona_8c6132e8_final.html",
+  "metadata_file": "20260515_155323_001_blake-monroe-suggerisce-il-suo-possibile-debutto-a-smackdown-a-barcellona_8c6132e8_metadata.json"
+}

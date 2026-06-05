@@ -1,0 +1,106 @@
+{
+  "items": [
+    {
+      "age_hours": 0.45674549583333335,
+      "agent": "Menzo",
+      "ai_editorial_reason": "Interesse moderato, da valutare se serve riempire il palinsesto AEW.",
+      "ai_id": "c4",
+      "ai_priority": 72,
+      "ai_priority_label": "medium",
+      "article_type": "soft_news",
+      "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [
+          "youtube"
+        ],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta",
+          "share_links"
+        ],
+        "source_specific_notes": "Non dare troppa enfasi, è opinione soggettiva."
+      },
+      "category_hint": "AEW",
+      "decision": "pending",
+      "deterministic_score": 43,
+      "evaluated_at": "2026-06-05T17:28:12.283787+00:00",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "last_seen_at": "2026-06-05T17:28:15.567663+00:00",
+      "menzo_ai_review": {
+        "article_type": "soft_news",
+        "bob_brief": {
+          "expected_embeds": [
+            "youtube"
+          ],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": "Non dare troppa enfasi, è opinione soggettiva."
+        },
+        "category_hint": "AEW",
+        "decision": "pending",
+        "duplicate_of": "",
+        "editorial_reason": "Interesse moderato, da valutare se serve riempire il palinsesto AEW.",
+        "event_key": "foley_aew_comments",
+        "id": "c4",
+        "priority": 3,
+        "priority_label": "medium"
+      },
+      "normalized_url": "https://www.wrestlinginc.com/2188390/mick-foley-aew-connection-tony-khan",
+      "priority": "soft",
+      "published": "Fri, 05 Jun 2026 17:00:48 +0000",
+      "reason": "ai:Interesse moderato, da valutare se serve riempire il palinsesto AEW.; deterministic:entity:mick foley,recency:fresh_12h",
+      "score": 56,
+      "softpool_added_at": "2026-06-05T17:28:15.567663+00:00",
+      "softpool_reason": "medium_candidate_above_quality_threshold",
+      "softpool_ttl_hours": 24,
+      "source": "wrestlinginc",
+      "story_footprint": {
+        "actions": [],
+        "ai_story_footprint": "",
+        "entities": [],
+        "source": "wrestlinginc",
+        "story_signature": "",
+        "text_sample": "mick foley reveals how he ended up in aew says he feels connection with tony khan wwe hall of famer mick foley reveals what attracted him to all elite wrestling and how he formed a connection with ceo tony khan",
+        "title": "Mick Foley Reveals How He Ended Up In AEW, Says He Feels Connection With Tony Khan",
+        "tokens": [
+          "attracted",
+          "connection",
+          "elite",
+          "ended",
+          "famer",
+          "feels",
+          "foley",
+          "formed",
+          "hall",
+          "khan",
+          "mick",
+          "tony"
+        ],
+        "url": "https://www.wrestlinginc.com/2188390/mick-foley-aew-connection-tony-khan/"
+      },
+      "summary": "WWE Hall of Famer Mick Foley reveals what attracted him to All Elite Wrestling and how he formed a connection with CEO Tony Khan.",
+      "title": "Mick Foley Reveals How He Ended Up In AEW, Says He Feels Connection With Tony Khan",
+      "url": "https://www.wrestlinginc.com/2188390/mick-foley-aew-connection-tony-khan/"
+    }
+  ],
+  "min_score": 55,
+  "softnews_ttl_hours": 24,
+  "ttl_hours": 36,
+  "updated_at": "2026-06-05T17:28:15.567663+00:00",
+  "version": "v93_35_medical_brand_ranking"
+}
