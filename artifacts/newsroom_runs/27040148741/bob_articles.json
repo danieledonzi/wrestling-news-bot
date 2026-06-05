@@ -1,0 +1,877 @@
+{
+  "agent": "Bob",
+  "version": "v93_33_youtube_plain_and_cta_cleanup",
+  "generated_at": "2026-06-05T21:07:31.916656+00:00",
+  "mode": "block_translation_prudent_embed_cleanup",
+  "policy": {
+    "clean_before_gemini": true,
+    "gemini_receives_only_text_units": true,
+    "preserve_sequence_outside_gemini": true,
+    "preserve_embeds_as_plain_url_lines": true,
+    "filter_source_social_bars": true,
+    "filter_author_bios_before_gemini": true,
+    "filter_cta_before_gemini": true,
+    "recover_embeds_from_raw_html": false,
+    "embed_urls_require_post_or_video_shape": true,
+    "preserve_quotes_as_blockquote": "source_blockquote_only",
+    "preserve_tables_as_html_tables": true,
+    "ordered_elements": [
+      "text",
+      "heading",
+      "quote",
+      "table",
+      "image",
+      "embed"
+    ],
+    "model_chain": [
+      "gemini-3.1-flash-lite",
+      "gemini-3-flash-preview",
+      "gemini-2.5-flash-lite",
+      "gemini-2.5-flash"
+    ],
+    "max_articles_per_run": 3,
+    "prompt_family": "v92_historical_natural_full_translation_blocks",
+    "diagnostic_mode": true,
+    "fallback_mode": false,
+    "residual_author_bio_cleanup": true,
+    "generic_ringside_author_bio_cleanup": true,
+    "residual_cta_cleanup": true,
+    "split_inline_quoted_text": false,
+    "source_blockquote_only": true,
+    "move_leading_embeds_after_first_paragraph": true,
+    "unwrap_fake_data_blockquotes": true,
+    "consume_menzo_bob_brief": true,
+    "missing_expected_embed_warning": true
+  },
+  "input": {
+    "menzo_version": "v93_35_medical_brand_ranking",
+    "selected_count": 13
+  },
+  "articles": [
+    {
+      "source_url": "https://www.ringsidenews.com/spoiler-paul-heyman-injury-storyline-bron-breakkers-brutal-spear/",
+      "source": "ringsidenews",
+      "source_title": "Spoiler on Paul Heyman Injury Storyline After Bron Breakker’s Brutal Spear",
+      "category_hint": "WWE",
+      "menzo_score": 87,
+      "status": "ready_for_alfred",
+      "created_at": "2026-06-05T21:07:24.278933+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "fetched_html_chars": 527204,
+      "source_html_contains_embed_hint": true,
+      "meta": {
+        "source_title": "Spoiler on Paul Heyman Injury Storyline After Bron Breakker's Brutal Spear",
+        "description": "Paul Heyman is still feeling the damage from RAW as WWE just confirmed the Oracle is not medically cleared following Bron Breakker's spear. During the",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/spoiler-on-paul-heyman-injury-storyline-after-bron-breakkers-brutal-spear-30.jpg"
+      },
+      "extraction_diagnostics": {
+        "dom_noise_reduction_enabled": false,
+        "stage": "complete",
+        "global_embed_recovery_enabled": false,
+        "root_name": "article",
+        "root_text_chars": 2145,
+        "candidate_node_count": 80,
+        "raw_element_count": 7,
+        "clean_element_count": 6,
+        "removed_by_node_count": 13,
+        "removed_by_sanitize_count": 1,
+        "table_count": 0,
+        "quote_count": 0,
+        "embed_count": 0
+      },
+      "raw_element_count": 7,
+      "clean_element_count": 6,
+      "translation_unit_count": 5,
+      "removed_before_gemini": 14,
+      "removed_elements_debug": [
+        {
+          "node_index": 57,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
+          "text_preview": "Spotlight"
+        },
+        {
+          "node_index": 61,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2198322 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-the-rock tag-wwe-featured   ",
+          "text_preview": "WWE News The Rock Skipping UFC’s White House Event Despite Dana White Invite"
+        },
+        {
+          "node_index": 64,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "The Rock Skipping UFC’s White House Event Despite Dana White Invite"
+        },
+        {
+          "node_index": 65,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 66,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2198114 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-results category-wwe-smackdown-results tag-wwe-featured   ",
+          "text_preview": "WWE SmackDown Results WWE SmackDown Spoiler Results, Highlights and Key Moments for June 5, 2026"
+        },
+        {
+          "node_index": 69,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "WWE SmackDown Spoiler Results, Highlights and Key Moments for June 5, 2026"
+        },
+        {
+          "node_index": 70,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 71,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2198165 post type-post status-publish format-standard has-post-thumbnail hentry category-indy-wrestling-news category-tna-wrestling-news tag-tessa-blanchard tag-tna-featured   ",
+          "text_preview": "TNA Wrestling News Tessa Blanchard Caught in Crossfire of TNA-CMLL Promotional War"
+        },
+        {
+          "node_index": 74,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "Tessa Blanchard Caught in Crossfire of TNA-CMLL Promotional War"
+        },
+        {
+          "node_index": 75,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 76,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2198163 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news tag-aew-featured tag-mjf   ",
+          "text_preview": "AEW News MJF’s Current Status for Forbidden Door After Knee Injury"
+        },
+        {
+          "node_index": 79,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "MJF’s Current Status for Forbidden Door After Knee Injury"
+        },
+        {
+          "node_index": 80,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "index": 7,
+          "reason": "footer_start",
+          "item": {
+            "type": "text",
+            "text": "Spotlight WWE News The Rock Skipping UFC’s White House Event Despite Dana White Invite WWE SmackDown Results WWE SmackDown Spoiler Results, Highlights and Key Moments for June 5, 2026 TNA Wrestling News Tessa Blanchard Caught in Crossfire of TNA-CMLL Promotional War AEW News MJF’s Current Status for Forbidden Door After Knee Injury"
+          }
+        }
+      ],
+      "raw_elements_preview": [
+        {
+          "type": "text",
+          "text": "Paul Heyman is still feeling the damage from RAW as WWE just confirmed the Oracle is not medically cleared following Bron Breakker’s spear.",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "During the June 5 edition of Friday Night SmackDown , Bron Breakker made his entrance for the King of the Ring qualifying match, but Heyman was nowhere to be seen. Michael Cole then revealed on commentary that Heyman was not in Breakker’s corner because he is not medically cleared.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "This comes after the June 1 episode of RAW, where Breakker accidentally destroyed Heyman with a spear through the ringside barricade . Breakker was aiming for Seth Rollins, but Rollins pulled Heyman into the line of fire at the last second.",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "Heyman had been trying to help Breakker earlier in the match, but things completely backfired. Instead of guiding him to a win, Heyman ended up taking one of the nastiest shots of the night and now appears to be sidelined from ringside duties.",
+          "block_id": "b4"
+        },
+        {
+          "type": "text",
+          "text": "WWE has not confirmed when Heyman will return, but for now, Bron Breakker is moving forward without him after that brutal accident on RAW, so the Vision member certainly has his work cut out for him.",
+          "block_id": "b5"
+        },
+        {
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/2025/06/-38-96x96.jpg",
+          "alt": "Felix Upton",
+          "block_id": "b6"
+        },
+        {
+          "type": "text",
+          "text": "Spotlight WWE News The Rock Skipping UFC’s White House Event Despite Dana White Invite WWE SmackDown Results WWE SmackDown Spoiler Results, Highlights and Key Moments for June 5, 2026 TNA Wrestling News Tessa Blanchard Caught in Crossfire of TNA-CMLL Promotional War AEW News MJF’s Current Status for Forbidden Door After Knee Injury"
+        }
+      ],
+      "elements": [
+        {
+          "type": "text",
+          "text": "Paul Heyman is still feeling the damage from RAW as WWE just confirmed the Oracle is not medically cleared following Bron Breakker’s spear.",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "During the June 5 edition of Friday Night SmackDown , Bron Breakker made his entrance for the King of the Ring qualifying match, but Heyman was nowhere to be seen. Michael Cole then revealed on commentary that Heyman was not in Breakker’s corner because he is not medically cleared.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "This comes after the June 1 episode of RAW, where Breakker accidentally destroyed Heyman with a spear through the ringside barricade . Breakker was aiming for Seth Rollins, but Rollins pulled Heyman into the line of fire at the last second.",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "Heyman had been trying to help Breakker earlier in the match, but things completely backfired. Instead of guiding him to a win, Heyman ended up taking one of the nastiest shots of the night and now appears to be sidelined from ringside duties.",
+          "block_id": "b4"
+        },
+        {
+          "type": "text",
+          "text": "WWE has not confirmed when Heyman will return, but for now, Bron Breakker is moving forward without him after that brutal accident on RAW, so the Vision member certainly has his work cut out for him.",
+          "block_id": "b5"
+        },
+        {
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/2025/06/-38-96x96.jpg",
+          "alt": "Felix Upton",
+          "block_id": "b6"
+        }
+      ],
+      "element_counts": {
+        "text": 5,
+        "heading": 0,
+        "quote": 0,
+        "table": 0,
+        "image": 1,
+        "embed": 0
+      },
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/spoiler-paul-heyman-injury-storyline-bron-breakkers-brutal-spear/\nTitolo feed: Spoiler on Paul Heyman Injury Storyline After Bron Breakker’s Brutal Spear\nTitolo pagina: Spoiler on Paul Heyman Injury Storyline After Bron Breakker's Brutal Spear\nDescrizione: Paul Heyman is still feeling the damage from RAW as WWE just confirmed the Oracle is not medically cleared following Bron Breakker's spear. During the\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Paul Heyman is still feeling the damage from RAW as WWE just confirmed the Oracle is not medically cleared following Bron Breakker’s spear.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"During the June 5 edition of Friday Night SmackDown , Bron Breakker made his entrance for the King of the Ring qualifying match, but Heyman was nowhere to be seen. Michael Cole then revealed on commentary that Heyman was not in Breakker’s corner because he is not medically cleared.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"This comes after the June 1 episode of RAW, where Breakker accidentally destroyed Heyman with a spear through the ringside barricade . Breakker was aiming for Seth Rollins, but Rollins pulled Heyman into the line of fire at the last second.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Heyman had been trying to help Breakker earlier in the match, but things completely backfired. Instead of guiding him to a win, Heyman ended up taking one of the nastiest shots of the night and now appears to be sidelined from ringside duties.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"WWE has not confirmed when Heyman will return, but for now, Bron Breakker is moving forward without him after that brutal accident on RAW, so the Vision member certainly has his work cut out for him.\"\n  }\n]\n",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_used": true,
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Aggiornamenti sulle condizioni di Paul Heyman dopo la Spear di Bron Breakker\",\n  \"excerpt_it\": \"La WWE ha confermato che Paul Heyman non è stato dichiarato abile a combattere in seguito alla brutale Spear subita da Bron Breakker durante l'ultima puntata di RAW.\",\n  \"translations\": {\n    \"b1\": \"Paul Heyman sta ancora pagando le conseguenze di quanto accaduto a RAW; la WWE ha infatti appena confermato che l'Oracle non è stato dichiarato idoneo dai medici a seguito della Spear subita da Bron Breakker.\",\n    \"b2\": \"Durante la puntata di Friday Night SmackDown del 5 giugno, Bron Breakker ha fatto il suo ingresso per il match di qualificazione al King of the Ring, ma di Heyman non c'era traccia. Michael Cole ha rivelato al tavolo di commento che Heyman non si trovava all'angolo di Breakker proprio perché non è stato autorizzato dai medici.\",\n    \"b3\": \"L'episodio fa seguito alla puntata di RAW dell'1 giugno, durante la quale Breakker ha accidentalmente travolto Heyman con una Spear che ha sfondato la barricata a bordo ring. Breakker mirava a Seth Rollins, ma quest'ultimo ha tirato a sé Heyman mettendolo sulla traiettoria all'ultimo secondo.\",\n    \"b4\": \"Heyman aveva cercato di aiutare Breakker all'inizio del match, ma la situazione si è ritorta contro di lui. Invece di guidarlo alla vittoria, Heyman ha finito per incassare uno dei colpi più duri della serata e ora sembra essere costretto a uno stop forzato dalle sue mansioni a bordo ring.\",\n    \"b5\": \"La WWE non ha ancora confermato quando Heyman tornerà, ma per il momento Bron Breakker sta proseguendo per la sua strada senza di lui dopo quel brutto incidente a RAW; il membro della Vision avrà sicuramente il suo bel da fare.\"\n  },\n  \"notes\": []\n}",
+      "title_it": "Aggiornamenti sulle condizioni di Paul Heyman dopo la Spear di Bron Breakker",
+      "body_html": "<p>Paul Heyman sta ancora pagando le conseguenze di quanto accaduto a RAW; la WWE ha infatti appena confermato che l&#x27;Oracle non è stato dichiarato idoneo dai medici a seguito della Spear subita da Bron Breakker.</p>\n<p>Durante la puntata di Friday Night SmackDown del 5 giugno, Bron Breakker ha fatto il suo ingresso per il match di qualificazione al King of the Ring, ma di Heyman non c&#x27;era traccia. Michael Cole ha rivelato al tavolo di commento che Heyman non si trovava all&#x27;angolo di Breakker proprio perché non è stato autorizzato dai medici.</p>\n<p>L&#x27;episodio fa seguito alla puntata di RAW dell&#x27;1 giugno, durante la quale Breakker ha accidentalmente travolto Heyman con una Spear che ha sfondato la barricata a bordo ring. Breakker mirava a Seth Rollins, ma quest&#x27;ultimo ha tirato a sé Heyman mettendolo sulla traiettoria all&#x27;ultimo secondo.</p>\n<p>Heyman aveva cercato di aiutare Breakker all&#x27;inizio del match, ma la situazione si è ritorta contro di lui. Invece di guidarlo alla vittoria, Heyman ha finito per incassare uno dei colpi più duri della serata e ora sembra essere costretto a uno stop forzato dalle sue mansioni a bordo ring.</p>\n<p>La WWE non ha ancora confermato quando Heyman tornerà, ma per il momento Bron Breakker sta proseguendo per la sua strada senza di lui dopo quel brutto incidente a RAW; il membro della Vision avrà sicuramente il suo bel da fare.</p>\n<!--IMAGE:https://www.ringsidenews.com/wp-content/uploads/2025/06/-38-96x96.jpg-->",
+      "excerpt_it": "La WWE ha confermato che Paul Heyman non è stato dichiarato abile a combattere in seguito alla brutale Spear subita da Bron Breakker durante l'ultima puntata di RAW.",
+      "bob_notes": [],
+      "translation_missing_units": [],
+      "bob_brief": {
+        "expected_embeds": [
+          "video"
+        ],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta"
+        ],
+        "must_preserve": [
+          "embed video/tweet se presente",
+          "citazioni dirette"
+        ],
+        "source_specific_notes": "Focus sul bollettino medico in kayfabe."
+      },
+      "menzo_ai_review": {
+        "id": "c1",
+        "decision": "selected",
+        "priority": 10,
+        "category_hint": "WWE",
+        "article_type": "storyline_development",
+        "event_key": "heyman_injury",
+        "duplicate_of": "",
+        "editorial_reason": "Notizia di impatto sulla storyline principale di The Bloodline/Heyman.",
+        "bob_brief": {
+          "expected_embeds": [
+            "video"
+          ],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta"
+          ],
+          "must_preserve": [
+            "embed video/tweet se presente",
+            "citazioni dirette"
+          ],
+          "source_specific_notes": "Focus sul bollettino medico in kayfabe."
+        },
+        "priority_label": "medium"
+      },
+      "ai_editorial_reason": "Notizia di impatto sulla storyline principale di The Bloodline/Heyman.",
+      "ai_priority_label": "medium",
+      "diagnostic_warnings": [
+        {
+          "code": "possible_missing_embed_from_menzo_brief",
+          "severity": "warning",
+          "message": "Menzo AI si aspettava embed/video/tweet, ma Bob non ne ha estratti.",
+          "expected_embeds": [
+            "video"
+          ],
+          "source_specific_notes": "Focus sul bollettino medico in kayfabe."
+        }
+      ]
+    },
+    {
+      "source_url": "https://www.ringsidenews.com/spoiler-ring-debut-set-june-12-wwe-smackdown/",
+      "source": "ringsidenews",
+      "source_title": "Spoiler on In-Ring Debut Set for June 12 WWE SmackDown",
+      "category_hint": "WWE",
+      "menzo_score": 84,
+      "status": "ready_for_alfred",
+      "created_at": "2026-06-05T21:07:26.321271+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "fetched_html_chars": 534238,
+      "source_html_contains_embed_hint": true,
+      "meta": {
+        "source_title": "Spoiler on In-Ring Debut Set for June 12 WWE SmackDown",
+        "description": "Finn Bálor is officially ready to start his SmackDown run as the Prince of WWE will be making his in-ring debut on the blue brand next week. During the",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/spoiler-on-in-ring-debut-set-for-june-12-wwe-smackdown-08.jpg"
+      },
+      "extraction_diagnostics": {
+        "dom_noise_reduction_enabled": false,
+        "stage": "complete",
+        "global_embed_recovery_enabled": false,
+        "root_name": "article",
+        "root_text_chars": 2513,
+        "candidate_node_count": 84,
+        "raw_element_count": 8,
+        "clean_element_count": 7,
+        "removed_by_node_count": 13,
+        "removed_by_sanitize_count": 1,
+        "table_count": 0,
+        "quote_count": 1,
+        "embed_count": 0
+      },
+      "raw_element_count": 8,
+      "clean_element_count": 7,
+      "translation_unit_count": 6,
+      "removed_before_gemini": 14,
+      "removed_elements_debug": [
+        {
+          "node_index": 61,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
+          "text_preview": "Spotlight"
+        },
+        {
+          "node_index": 65,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2198322 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-the-rock tag-wwe-featured   ",
+          "text_preview": "WWE News The Rock Skipping UFC’s White House Event Despite Dana White Invite"
+        },
+        {
+          "node_index": 68,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "The Rock Skipping UFC’s White House Event Despite Dana White Invite"
+        },
+        {
+          "node_index": 69,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 70,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2198114 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-results category-wwe-smackdown-results tag-wwe-featured   ",
+          "text_preview": "WWE SmackDown Results WWE SmackDown Spoiler Results, Highlights and Key Moments for June 5, 2026"
+        },
+        {
+          "node_index": 73,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "WWE SmackDown Spoiler Results, Highlights and Key Moments for June 5, 2026"
+        },
+        {
+          "node_index": 74,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 75,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2198165 post type-post status-publish format-standard has-post-thumbnail hentry category-indy-wrestling-news category-tna-wrestling-news tag-tessa-blanchard tag-tna-featured   ",
+          "text_preview": "TNA Wrestling News Tessa Blanchard Caught in Crossfire of TNA-CMLL Promotional War"
+        },
+        {
+          "node_index": 78,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "Tessa Blanchard Caught in Crossfire of TNA-CMLL Promotional War"
+        },
+        {
+          "node_index": 79,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 80,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2198163 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news tag-aew-featured tag-mjf   ",
+          "text_preview": "AEW News MJF’s Current Status for Forbidden Door After Knee Injury"
+        },
+        {
+          "node_index": 83,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "MJF’s Current Status for Forbidden Door After Knee Injury"
+        },
+        {
+          "node_index": 84,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "index": 8,
+          "reason": "footer_start",
+          "item": {
+            "type": "text",
+            "text": "Spotlight WWE News The Rock Skipping UFC’s White House Event Despite Dana White Invite WWE SmackDown Results WWE SmackDown Spoiler Results, Highlights and Key Moments for June 5, 2026 TNA Wrestling News Tessa Blanchard Caught in Crossfire of TNA-CMLL Promotional War AEW News MJF’s Current Status for Forbidden Door After Knee Injury"
+          }
+        }
+      ],
+      "raw_elements_preview": [
+        {
+          "type": "text",
+          "text": "Finn Bálor is officially ready to start his SmackDown run as the Prince of WWE will be making his in-ring debut on the blue brand next week.",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "During the June 5 episode of Friday Night SmackDown , WWE aired a vignette for Bálor, where he made it clear he is coming to the blue brand with something to prove. After accomplishing plenty in WWE already, Bálor said he is now on SmackDown to take it all.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "WWE also confirmed that Bálor will make his SmackDown in-ring debut on the June 12 episode. He will compete in a Fatal Four-Way King of the Ring qualifying match against Jey Uso, LA Knight, and Royce Keys. The match gives Bálor a major opportunity right out of the gate, as a win would send him forward in the King of the Ring tournament and immediately place him in the mix on Friday nights.",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "This comes after Dave Meltzer explained on Wrestling Observer Radio that WWE moved Bálor to SmackDown to separate him from Dominik Mysterio and JD McDonagh following their recent RAW storyline.",
+          "block_id": "b4"
+        },
+        {
+          "type": "quote",
+          "text": "“I never heard anything about a draft. The idea is they just want to get him away from Dominik Mysterio and JD. He beat JD, and if he stays on Raw, how does he not work with those guys? So they just figured they’re done with that—they’re done with Finn Bálor doing that—and they wanted to give him a fresh start.”",
+          "source_tag": "blockquote",
+          "block_id": "b5"
+        },
+        {
+          "type": "text",
+          "text": "Now, that fresh start begins with a huge King of the Ring qualifier. Bálor may have left RAW behind, but SmackDown is wasting no time putting him in a high-stakes match and so we’ll have to see how he will fare next week.",
+          "block_id": "b6"
+        },
+        {
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/2025/06/-38-96x96.jpg",
+          "alt": "Felix Upton",
+          "block_id": "b7"
+        },
+        {
+          "type": "text",
+          "text": "Spotlight WWE News The Rock Skipping UFC’s White House Event Despite Dana White Invite WWE SmackDown Results WWE SmackDown Spoiler Results, Highlights and Key Moments for June 5, 2026 TNA Wrestling News Tessa Blanchard Caught in Crossfire of TNA-CMLL Promotional War AEW News MJF’s Current Status for Forbidden Door After Knee Injury"
+        }
+      ],
+      "elements": [
+        {
+          "type": "text",
+          "text": "Finn Bálor is officially ready to start his SmackDown run as the Prince of WWE will be making his in-ring debut on the blue brand next week.",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "During the June 5 episode of Friday Night SmackDown , WWE aired a vignette for Bálor, where he made it clear he is coming to the blue brand with something to prove. After accomplishing plenty in WWE already, Bálor said he is now on SmackDown to take it all.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "WWE also confirmed that Bálor will make his SmackDown in-ring debut on the June 12 episode. He will compete in a Fatal Four-Way King of the Ring qualifying match against Jey Uso, LA Knight, and Royce Keys. The match gives Bálor a major opportunity right out of the gate, as a win would send him forward in the King of the Ring tournament and immediately place him in the mix on Friday nights.",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "This comes after Dave Meltzer explained on Wrestling Observer Radio that WWE moved Bálor to SmackDown to separate him from Dominik Mysterio and JD McDonagh following their recent RAW storyline.",
+          "block_id": "b4"
+        },
+        {
+          "type": "quote",
+          "text": "“I never heard anything about a draft. The idea is they just want to get him away from Dominik Mysterio and JD. He beat JD, and if he stays on Raw, how does he not work with those guys? So they just figured they’re done with that—they’re done with Finn Bálor doing that—and they wanted to give him a fresh start.”",
+          "source_tag": "blockquote",
+          "block_id": "b5"
+        },
+        {
+          "type": "text",
+          "text": "Now, that fresh start begins with a huge King of the Ring qualifier. Bálor may have left RAW behind, but SmackDown is wasting no time putting him in a high-stakes match and so we’ll have to see how he will fare next week.",
+          "block_id": "b6"
+        },
+        {
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/2025/06/-38-96x96.jpg",
+          "alt": "Felix Upton",
+          "block_id": "b7"
+        }
+      ],
+      "element_counts": {
+        "text": 5,
+        "heading": 0,
+        "quote": 1,
+        "table": 0,
+        "image": 1,
+        "embed": 0
+      },
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/spoiler-ring-debut-set-june-12-wwe-smackdown/\nTitolo feed: Spoiler on In-Ring Debut Set for June 12 WWE SmackDown\nTitolo pagina: Spoiler on In-Ring Debut Set for June 12 WWE SmackDown\nDescrizione: Finn Bálor is officially ready to start his SmackDown run as the Prince of WWE will be making his in-ring debut on the blue brand next week. During the\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Finn Bálor is officially ready to start his SmackDown run as the Prince of WWE will be making his in-ring debut on the blue brand next week.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"During the June 5 episode of Friday Night SmackDown , WWE aired a vignette for Bálor, where he made it clear he is coming to the blue brand with something to prove. After accomplishing plenty in WWE already, Bálor said he is now on SmackDown to take it all.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"WWE also confirmed that Bálor will make his SmackDown in-ring debut on the June 12 episode. He will compete in a Fatal Four-Way King of the Ring qualifying match against Jey Uso, LA Knight, and Royce Keys. The match gives Bálor a major opportunity right out of the gate, as a win would send him forward in the King of the Ring tournament and immediately place him in the mix on Friday nights.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"This comes after Dave Meltzer explained on Wrestling Observer Radio that WWE moved Bálor to SmackDown to separate him from Dominik Mysterio and JD McDonagh following their recent RAW storyline.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"“I never heard anything about a draft. The idea is they just want to get him away from Dominik Mysterio and JD. He beat JD, and if he stays on Raw, how does he not work with those guys? So they just figured they’re done with that—they’re done with Finn Bálor doing that—and they wanted to give him a fresh start.”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Now, that fresh start begins with a huge King of the Ring qualifier. Bálor may have left RAW behind, but SmackDown is wasting no time putting him in a high-stakes match and so we’ll have to see how he will fare next week.\"\n  }\n]\n",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_used": true,
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Spoiler sul debutto sul ring a SmackDown del 12 giugno\",\n  \"excerpt_it\": \"Finn Bálor è pronto a iniziare la sua avventura a SmackDown: il Prince of WWE farà il suo debutto sul ring dello show blu la prossima settimana.\",\n  \"translations\": {\n    \"b1\": \"Finn Bálor è ufficialmente pronto a iniziare la sua avventura a SmackDown, con il \\\"Prince of WWE\\\" che farà il suo debutto sul ring dello show blu la prossima settimana.\",\n    \"b2\": \"Durante l'episodio di Friday Night SmackDown del 5 giugno, la WWE ha mandato in onda una vignetta per Bálor, nella quale ha messo in chiaro di essere arrivato nel brand blu con l'intenzione di dimostrare il suo valore. Dopo aver già ottenuto numerosi successi in WWE, Bálor ha dichiarato di essere ora a SmackDown per prendersi tutto.\",\n    \"b3\": \"La WWE ha inoltre confermato che Bálor farà il suo debutto sul ring di SmackDown nella puntata del 12 giugno. Sarà impegnato in un Fatal Four-Way match di qualificazione al torneo King of the Ring contro Jey Uso, LA Knight e Royce Keys. L'incontro rappresenta una grande opportunità per Bálor fin da subito, poiché una vittoria gli permetterebbe di proseguire nel torneo King of the Ring e di inserirsi immediatamente nelle dinamiche del venerdì sera.\",\n    \"b4\": \"Questa notizia arriva dopo che Dave Meltzer, su Wrestling Observer Radio, ha spiegato che la WWE ha spostato Bálor a SmackDown per separarlo da Dominik Mysterio e JD McDonagh dopo la loro recente storyline a RAW.\",\n    \"b5\": \"“Non ho mai sentito parlare di un draft. L'idea è semplicemente quella di allontanarlo da Dominik Mysterio e JD. Ha battuto JD e, se fosse rimasto a Raw, come avrebbe potuto non avere a che fare con loro? Quindi hanno pensato che fosse finita lì – che avessero finito con Finn Bálor in quel contesto – e volevano dargli un nuovo inizio.”\",\n    \"b6\": \"Ora, questo nuovo inizio parte con un importante match di qualificazione al King of the Ring. Bálor si sarà anche lasciato alle spalle RAW, ma SmackDown non perde tempo a inserirlo in un incontro ad alta posta in palio; staremo a vedere come se la caverà la prossima settimana.\"\n  },\n  \"notes\": []\n}",
+      "title_it": "Spoiler sul debutto sul ring a SmackDown del 12 giugno",
+      "body_html": "<p>Finn Bálor è ufficialmente pronto a iniziare la sua avventura a SmackDown, con il &quot;Prince of WWE&quot; che farà il suo debutto sul ring dello show blu la prossima settimana.</p>\n<p>Durante l&#x27;episodio di Friday Night SmackDown del 5 giugno, la WWE ha mandato in onda una vignetta per Bálor, nella quale ha messo in chiaro di essere arrivato nel brand blu con l&#x27;intenzione di dimostrare il suo valore. Dopo aver già ottenuto numerosi successi in WWE, Bálor ha dichiarato di essere ora a SmackDown per prendersi tutto.</p>\n<p>La WWE ha inoltre confermato che Bálor farà il suo debutto sul ring di SmackDown nella puntata del 12 giugno. Sarà impegnato in un Fatal Four-Way match di qualificazione al torneo King of the Ring contro Jey Uso, LA Knight e Royce Keys. L&#x27;incontro rappresenta una grande opportunità per Bálor fin da subito, poiché una vittoria gli permetterebbe di proseguire nel torneo King of the Ring e di inserirsi immediatamente nelle dinamiche del venerdì sera.</p>\n<p>Questa notizia arriva dopo che Dave Meltzer, su Wrestling Observer Radio, ha spiegato che la WWE ha spostato Bálor a SmackDown per separarlo da Dominik Mysterio e JD McDonagh dopo la loro recente storyline a RAW.</p>\n<blockquote>“Non ho mai sentito parlare di un draft. L&#x27;idea è semplicemente quella di allontanarlo da Dominik Mysterio e JD. Ha battuto JD e, se fosse rimasto a Raw, come avrebbe potuto non avere a che fare con loro? Quindi hanno pensato che fosse finita lì – che avessero finito con Finn Bálor in quel contesto – e volevano dargli un nuovo inizio.”</blockquote>\n<p>Ora, questo nuovo inizio parte con un importante match di qualificazione al King of the Ring. Bálor si sarà anche lasciato alle spalle RAW, ma SmackDown non perde tempo a inserirlo in un incontro ad alta posta in palio; staremo a vedere come se la caverà la prossima settimana.</p>\n<!--IMAGE:https://www.ringsidenews.com/wp-content/uploads/2025/06/-38-96x96.jpg-->",
+      "excerpt_it": "Finn Bálor è pronto a iniziare la sua avventura a SmackDown: il Prince of WWE farà il suo debutto sul ring dello show blu la prossima settimana.",
+      "bob_notes": [],
+      "translation_missing_units": [],
+      "bob_brief": {
+        "expected_embeds": [
+          "video"
+        ],
+        "expected_quotes": false,
+        "expected_tables": false,
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta"
+        ],
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "source_specific_notes": "Evidenzia la data del 12 giugno."
+      },
+      "menzo_ai_review": {
+        "id": "c2",
+        "decision": "selected",
+        "priority": 7,
+        "category_hint": "WWE",
+        "article_type": "storyline_development",
+        "event_key": "balor_debut",
+        "duplicate_of": "",
+        "editorial_reason": "Annuncio ufficiale di debutto importante per il roster di SmackDown.",
+        "bob_brief": {
+          "expected_embeds": [
+            "video"
+          ],
+          "expected_quotes": false,
+          "expected_tables": false,
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta"
+          ],
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "source_specific_notes": "Evidenzia la data del 12 giugno."
+        },
+        "priority_label": "medium"
+      },
+      "ai_editorial_reason": "Annuncio ufficiale di debutto importante per il roster di SmackDown.",
+      "ai_priority_label": "medium",
+      "diagnostic_warnings": [
+        {
+          "code": "possible_missing_embed_from_menzo_brief",
+          "severity": "warning",
+          "message": "Menzo AI si aspettava embed/video/tweet, ma Bob non ne ha estratti.",
+          "expected_embeds": [
+            "video"
+          ],
+          "source_specific_notes": "Evidenzia la data del 12 giugno."
+        }
+      ]
+    },
+    {
+      "source_url": "https://www.wrestlinginc.com/2188526/wwe-logan-paul-triceps-injury-depressing/",
+      "source": "wrestlinginc",
+      "source_title": "WWE's Logan Paul Details Triceps Injury: 'It's Depressing'",
+      "category_hint": "WWE",
+      "menzo_score": 84,
+      "status": "ready_for_alfred",
+      "created_at": "2026-06-05T21:07:28.485801+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "fetched_html_chars": 53814,
+      "source_html_contains_embed_hint": true,
+      "meta": {
+        "source_title": "WWE's Logan Paul Details Triceps Injury: 'It's Depressing' - Wrestling Inc.",
+        "description": "Former WWE World Tag Team Champion Logan Paul describes the mental and emotional toll his triceps injury has taken on him.",
+        "featured_image": "https://www.wrestlinginc.com/img/gallery/wwes-logan-paul-details-triceps-injury-its-depressing/l-intro-1780686946.jpg"
+      },
+      "extraction_diagnostics": {
+        "dom_noise_reduction_enabled": false,
+        "stage": "complete",
+        "global_embed_recovery_enabled": false,
+        "root_name": "article",
+        "root_text_chars": 3020,
+        "candidate_node_count": 19,
+        "raw_element_count": 11,
+        "clean_element_count": 9,
+        "removed_by_node_count": 0,
+        "removed_by_sanitize_count": 2,
+        "table_count": 0,
+        "quote_count": 0,
+        "embed_count": 1
+      },
+      "raw_element_count": 11,
+      "clean_element_count": 9,
+      "translation_unit_count": 7,
+      "removed_before_gemini": 2,
+      "removed_elements_debug": [
+        {
+          "index": 2,
+          "reason": "duplicate_featured_image",
+          "item": {
+            "type": "image",
+            "url": "https://www.wrestlinginc.com/img/gallery/wwes-logan-paul-details-triceps-injury-its-depressing/intro-1780686946.jpg",
+            "alt": "Logan Paul flies towards the corner, where Angelo Dawkins is cornered."
+          }
+        },
+        {
+          "index": 3,
+          "reason": "duplicate_or_empty_embed",
+          "item": {
+            "type": "embed",
+            "url": "https://www.youtube.com/watch?v=B6eovayusbA",
+            "source_tag": "div"
+          }
+        }
+      ],
+      "raw_elements_preview": [
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=B6eovayusbA",
+          "source_tag": "div",
+          "block_id": "b1"
+        },
+        {
+          "type": "image",
+          "url": "https://www.wrestlinginc.com/img/gallery/wwes-logan-paul-details-triceps-injury-its-depressing/intro-1780686946.jpg",
+          "alt": "Logan Paul flies towards the corner, where Angelo Dawkins is cornered."
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=B6eovayusbA",
+          "source_tag": "div"
+        },
+        {
+          "type": "text",
+          "text": "One of the toughest terms many active professional wrestlers have a hard time accepting, is the fact that there will be times where one has to sit out and recover from injuries. Whether they're on the top of the food chain as champions or striving for a title belt, when an injury comes, it destroys a \"what could have been\" scenario. Riding high on what was his first run as a World Tag Team Champion, Logan Paul is disappointed that he cannot continue as a reigning and defending champion, after sustaining a torn tricep during his tag team title defense with Austin Theory against The Street Profits (Angelo Dawkins and Montez Ford) at Saturday Night's Main Event last month. While some were skeptical if Paul's injury is a \"work,\" \"The Maverick\" made sure to clarify that it isn't.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "\"This is not a work. I tore my tricep off the bone, and a little piece of bone literally came with the tent,\" he said on his \"Impaulsive\" podcast. \"So, what had happened was, I was on the outside. A nearly 300 pound Dawkins comes flying over the ropes. He lands on me. My arm is flexed and trying to catch him landing on the ground. Too much weight, too much tension. I could feel the tendons snap off the elbow.\"",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "He said that if one were to go back and watch that scene, you could hear him visibly cry out in that moment.",
+          "block_id": "b4"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Paul Gets Candid On Trying To See The Silver Lining Despite Such A Pushback",
+          "block_id": "b5"
+        },
+        {
+          "type": "image",
+          "url": "https://www.wrestlinginc.com/img/gallery/wwes-logan-paul-details-triceps-injury-its-depressing/paul-gets-candid-on-trying-to-see-the-silver-lining-despite-such-a-pushback-1780686947.jpg",
+          "alt": "The WWE World Tag Team Champions (Austin Theory and Logan Paul), alongside online streamer IShowSpeed, live it up on the WrestleMania 42 entrance ramp",
+          "block_id": "b6"
+        },
+        {
+          "type": "text",
+          "text": "After undergoing successful surgery recently, Paul will be sidelined for the next six months or more. It's not the vision he envisioned for his 2026 career trajectory, which has caused him to feel quite depressed.",
+          "block_id": "b7"
+        },
+        {
+          "type": "text",
+          "text": "\"I get a little stuck thinking about all the things that I could have done differently, or what my life would have looked like 'cause truly, at least in my professional career with the WWE, which I love, I literally think it's the best job in the world...I felt like me and Austin had so much momentum and we were about to go on a generational tag team run,\" he mentioned. \"I'm in the best shape of my life, ever. My whole business is firing on all cylinders...everything is just firing, and then, I'm just thrown this curveball during the last move of this match. And now, the next six months of my life look drastically different, and I cannot see the silver lining yet.\"",
+          "block_id": "b8"
+        },
+        {
+          "type": "text",
+          "text": "While still down in the dumps, Paul promised his co-hosts that the time to sulk is coming to an end. As he stated towards the end of his commentary, he is ready to \"get on the horse and kick this recovery's a**.\" The Vision's Theory and Paul won the world tag team titles from The Usos (Jimmy and Jey) on the March 30 edition of \"WWE Raw.\" They only defended the titles once, which was the night of Paul's injury. As part of the \"Freebird Rule,\" Bron Breakker has replaced Paul as one-half of the tag team champions.",
+          "block_id": "b9"
+        }
+      ],
+      "elements": [
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=B6eovayusbA",
+          "source_tag": "div",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "One of the toughest terms many active professional wrestlers have a hard time accepting, is the fact that there will be times where one has to sit out and recover from injuries. Whether they're on the top of the food chain as champions or striving for a title belt, when an injury comes, it destroys a \"what could have been\" scenario. Riding high on what was his first run as a World Tag Team Champion, Logan Paul is disappointed that he cannot continue as a reigning and defending champion, after sustaining a torn tricep during his tag team title defense with Austin Theory against The Street Profits (Angelo Dawkins and Montez Ford) at Saturday Night's Main Event last month. While some were skeptical if Paul's injury is a \"work,\" \"The Maverick\" made sure to clarify that it isn't.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "\"This is not a work. I tore my tricep off the bone, and a little piece of bone literally came with the tent,\" he said on his \"Impaulsive\" podcast. \"So, what had happened was, I was on the outside. A nearly 300 pound Dawkins comes flying over the ropes. He lands on me. My arm is flexed and trying to catch him landing on the ground. Too much weight, too much tension. I could feel the tendons snap off the elbow.\"",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "He said that if one were to go back and watch that scene, you could hear him visibly cry out in that moment.",
+          "block_id": "b4"
+        },
+        {
+          "type": "heading",
+          "level": 2,
+          "text": "Paul Gets Candid On Trying To See The Silver Lining Despite Such A Pushback",
+          "block_id": "b5"
+        },
+        {
+          "type": "image",
+          "url": "https://www.wrestlinginc.com/img/gallery/wwes-logan-paul-details-triceps-injury-its-depressing/paul-gets-candid-on-trying-to-see-the-silver-lining-despite-such-a-pushback-1780686947.jpg",
+          "alt": "The WWE World Tag Team Champions (Austin Theory and Logan Paul), alongside online streamer IShowSpeed, live it up on the WrestleMania 42 entrance ramp",
+          "block_id": "b6"
+        },
+        {
+          "type": "text",
+          "text": "After undergoing successful surgery recently, Paul will be sidelined for the next six months or more. It's not the vision he envisioned for his 2026 career trajectory, which has caused him to feel quite depressed.",
+          "block_id": "b7"
+        },
+        {
+          "type": "text",
+          "text": "\"I get a little stuck thinking about all the things that I could have done differently, or what my life would have looked like 'cause truly, at least in my professional career with the WWE, which I love, I literally think it's the best job in the world...I felt like me and Austin had so much momentum and we were about to go on a generational tag team run,\" he mentioned. \"I'm in the best shape of my life, ever. My whole business is firing on all cylinders...everything is just firing, and then, I'm just thrown this curveball during the last move of this match. And now, the next six months of my life look drastically different, and I cannot see the silver lining yet.\"",
+          "block_id": "b8"
+        },
+        {
+          "type": "text",
+          "text": "While still down in the dumps, Paul promised his co-hosts that the time to sulk is coming to an end. As he stated towards the end of his commentary, he is ready to \"get on the horse and kick this recovery's a**.\" The Vision's Theory and Paul won the world tag team titles from The Usos (Jimmy and Jey) on the March 30 edition of \"WWE Raw.\" They only defended the titles once, which was the night of Paul's injury. As part of the \"Freebird Rule,\" Bron Breakker has replaced Paul as one-half of the tag team champions.",
+          "block_id": "b9"
+        }
+      ],
+      "element_counts": {
+        "text": 6,
+        "heading": 1,
+        "quote": 0,
+        "table": 0,
+        "image": 1,
+        "embed": 1
+      },
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2188526/wwe-logan-paul-triceps-injury-depressing/\nTitolo feed: WWE's Logan Paul Details Triceps Injury: 'It's Depressing'\nTitolo pagina: WWE's Logan Paul Details Triceps Injury: 'It's Depressing' - Wrestling Inc.\nDescrizione: Former WWE World Tag Team Champion Logan Paul describes the mental and emotional toll his triceps injury has taken on him.\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"One of the toughest terms many active professional wrestlers have a hard time accepting, is the fact that there will be times where one has to sit out and recover from injuries. Whether they're on the top of the food chain as champions or striving for a title belt, when an injury comes, it destroys a \\\"what could have been\\\" scenario. Riding high on what was his first run as a World Tag Team Champion, Logan Paul is disappointed that he cannot continue as a reigning and defending champion, after sustaining a torn tricep during his tag team title defense with Austin Theory against The Street Profits (Angelo Dawkins and Montez Ford) at Saturday Night's Main Event last month. While some were skeptical if Paul's injury is a \\\"work,\\\" \\\"The Maverick\\\" made sure to clarify that it isn't.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"\\\"This is not a work. I tore my tricep off the bone, and a little piece of bone literally came with the tent,\\\" he said on his \\\"Impaulsive\\\" podcast. \\\"So, what had happened was, I was on the outside. A nearly 300 pound Dawkins comes flying over the ropes. He lands on me. My arm is flexed and trying to catch him landing on the ground. Too much weight, too much tension. I could feel the tendons snap off the elbow.\\\"\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"He said that if one were to go back and watch that scene, you could hear him visibly cry out in that moment.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"heading\",\n    \"text\": \"Paul Gets Candid On Trying To See The Silver Lining Despite Such A Pushback\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"After undergoing successful surgery recently, Paul will be sidelined for the next six months or more. It's not the vision he envisioned for his 2026 career trajectory, which has caused him to feel quite depressed.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"\\\"I get a little stuck thinking about all the things that I could have done differently, or what my life would have looked like 'cause truly, at least in my professional career with the WWE, which I love, I literally think it's the best job in the world...I felt like me and Austin had so much momentum and we were about to go on a generational tag team run,\\\" he mentioned. \\\"I'm in the best shape of my life, ever. My whole business is firing on all cylinders...everything is just firing, and then, I'm just thrown this curveball during the last move of this match. And now, the next six months of my life look drastically different, and I cannot see the silver lining yet.\\\"\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"While still down in the dumps, Paul promised his co-hosts that the time to sulk is coming to an end. As he stated towards the end of his commentary, he is ready to \\\"get on the horse and kick this recovery's a**.\\\" The Vision's Theory and Paul won the world tag team titles from The Usos (Jimmy and Jey) on the March 30 edition of \\\"WWE Raw.\\\" They only defended the titles once, which was the night of Paul's injury. As part of the \\\"Freebird Rule,\\\" Bron Breakker has replaced Paul as one-half of the tag team champions.\"\n  }\n]\n",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_used": true,
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Logan Paul parla dell'infortunio al tricipite: \\\"È deprimente\\\"\",\n  \"excerpt_it\": \"L'ex WWE World Tag Team Champion Logan Paul descrive il peso mentale ed emotivo causato dal grave infortunio al braccio.\",\n  \"translations\": {\n    \"b2\": \"Uno degli aspetti più difficili da accettare per molti wrestler professionisti in attività è il dover restare ai box per recuperare dagli infortuni. Che si trovino al vertice della piramide come campioni o che stiano inseguendo una cintura, un infortunio distrugge ogni scenario ipotetico. Sull'onda del suo primo regno come World Tag Team Champion, Logan Paul è deluso dal non poter proseguire il suo percorso da campione in carica, dopo aver riportato uno strappo al tricipite durante la difesa dei titoli di coppia insieme ad Austin Theory contro gli Street Profits (Angelo Dawkins e Montez Ford) a Saturday Night's Main Event il mese scorso. Nonostante qualcuno fosse scettico sulla veridicità dell'infortunio, \\\"The Maverick\\\" ha voluto chiarire che non si tratta di una messa in scena.\",\n    \"b3\": \"\\\"Non è un work. Ho strappato il tricipite dall'osso e un piccolo frammento osseo si è letteralmente staccato con il tendine\\\", ha raccontato nel suo podcast \\\"Impaulsive\\\". \\\"È successo che ero all'esterno del ring. Dawkins, che pesa quasi 140 chili, è volato oltre le corde atterrandomi addosso. Il mio braccio era in tensione, cercando di attutire il suo impatto a terra. Troppo peso, troppa tensione. Ho sentito i tendini staccarsi dal gomito.\\\"\",\n    \"b4\": \"Ha aggiunto che, rivedendo quella sequenza, è possibile sentire chiaramente il suo grido di dolore in quel momento.\",\n    \"b5\": \"Paul si confessa: difficile vedere il lato positivo dopo la battuta d'arresto\",\n    \"b7\": \"Dopo essere stato sottoposto con successo a un intervento chirurgico, Paul resterà fuori gioco per i prossimi sei mesi o più. Non è lo scenario che aveva previsto per la sua carriera nel 2026, il che lo ha fatto cadere in uno stato di forte depressione.\",\n    \"b8\": \"\\\"Mi blocco spesso a pensare a tutto ciò che avrei potuto fare diversamente, o a come sarebbe stata la mia vita, perché davvero, almeno per quanto riguarda la mia carriera in WWE, che amo e che considero letteralmente il miglior lavoro del mondo... sentivo che io e Austin avevamo un grande slancio e stavamo per intraprendere un percorso generazionale come tag team\\\", ha dichiarato. \\\"Sono nella forma fisica migliore della mia vita. Tutti i miei affari stanno andando a gonfie vele... tutto stava girando per il verso giusto, e poi, proprio durante l'ultima mossa del match, arriva questo imprevisto. Ora i prossimi sei mesi della mia vita saranno drasticamente diversi e non riesco ancora a vedere il lato positivo\\\".\",\n    \"b9\": \"Nonostante sia ancora giù di morale, Paul ha promesso ai suoi co-conduttori che il tempo del rammarico sta per finire. Come ha affermato verso la fine del suo intervento, è pronto a \\\"tornare in sella e prendere a calci in culo questo recupero\\\". Theory e Paul avevano conquistato i titoli di coppia sconfiggendo gli Usos (Jimmy e Jey) nella puntata di \\\"WWE Raw\\\" del 30 marzo. Hanno difeso i titoli una sola volta, proprio la sera dell'infortunio di Paul. In base alla \\\"Freebird Rule\\\", Bron Breakker ha sostituito Paul come uno dei due detentori dei titoli di coppia.\"\n  },\n  \"notes\": []\n}",
+      "title_it": "Logan Paul parla dell'infortunio al tricipite: \"È deprimente\"",
+      "body_html": "<p>Uno degli aspetti più difficili da accettare per molti wrestler professionisti in attività è il dover restare ai box per recuperare dagli infortuni. Che si trovino al vertice della piramide come campioni o che stiano inseguendo una cintura, un infortunio distrugge ogni scenario ipotetico. Sull&#x27;onda del suo primo regno come World Tag Team Champion, Logan Paul è deluso dal non poter proseguire il suo percorso da campione in carica, dopo aver riportato uno strappo al tricipite durante la difesa dei titoli di coppia insieme ad Austin Theory contro gli Street Profits (Angelo Dawkins e Montez Ford) a Saturday Night&#x27;s Main Event il mese scorso. Nonostante qualcuno fosse scettico sulla veridicità dell&#x27;infortunio, &quot;The Maverick&quot; ha voluto chiarire che non si tratta di una messa in scena.</p>\nhttps://www.youtube.com/watch?v=B6eovayusbA\n\n<p>&quot;Non è un work. Ho strappato il tricipite dall&#x27;osso e un piccolo frammento osseo si è letteralmente staccato con il tendine&quot;, ha raccontato nel suo podcast &quot;Impaulsive&quot;. &quot;È successo che ero all&#x27;esterno del ring. Dawkins, che pesa quasi 140 chili, è volato oltre le corde atterrandomi addosso. Il mio braccio era in tensione, cercando di attutire il suo impatto a terra. Troppo peso, troppa tensione. Ho sentito i tendini staccarsi dal gomito.&quot;</p>\n<p>Ha aggiunto che, rivedendo quella sequenza, è possibile sentire chiaramente il suo grido di dolore in quel momento.</p>\n<h2>Paul si confessa: difficile vedere il lato positivo dopo la battuta d&#x27;arresto</h2>\n<!--IMAGE:https://www.wrestlinginc.com/img/gallery/wwes-logan-paul-details-triceps-injury-its-depressing/paul-gets-candid-on-trying-to-see-the-silver-lining-despite-such-a-pushback-1780686947.jpg-->\n<p>Dopo essere stato sottoposto con successo a un intervento chirurgico, Paul resterà fuori gioco per i prossimi sei mesi o più. Non è lo scenario che aveva previsto per la sua carriera nel 2026, il che lo ha fatto cadere in uno stato di forte depressione.</p>\n<p>&quot;Mi blocco spesso a pensare a tutto ciò che avrei potuto fare diversamente, o a come sarebbe stata la mia vita, perché davvero, almeno per quanto riguarda la mia carriera in WWE, che amo e che considero letteralmente il miglior lavoro del mondo... sentivo che io e Austin avevamo un grande slancio e stavamo per intraprendere un percorso generazionale come tag team&quot;, ha dichiarato. &quot;Sono nella forma fisica migliore della mia vita. Tutti i miei affari stanno andando a gonfie vele... tutto stava girando per il verso giusto, e poi, proprio durante l&#x27;ultima mossa del match, arriva questo imprevisto. Ora i prossimi sei mesi della mia vita saranno drasticamente diversi e non riesco ancora a vedere il lato positivo&quot;.</p>\n<p>Nonostante sia ancora giù di morale, Paul ha promesso ai suoi co-conduttori che il tempo del rammarico sta per finire. Come ha affermato verso la fine del suo intervento, è pronto a &quot;tornare in sella e prendere a calci in culo questo recupero&quot;. Theory e Paul avevano conquistato i titoli di coppia sconfiggendo gli Usos (Jimmy e Jey) nella puntata di &quot;WWE Raw&quot; del 30 marzo. Hanno difeso i titoli una sola volta, proprio la sera dell&#x27;infortunio di Paul. In base alla &quot;Freebird Rule&quot;, Bron Breakker ha sostituito Paul come uno dei due detentori dei titoli di coppia.</p>",
+      "excerpt_it": "L'ex WWE World Tag Team Champion Logan Paul descrive il peso mentale ed emotivo causato dal grave infortunio al braccio.",
+      "bob_notes": [],
+      "translation_missing_units": [],
+      "editorial_changes": [
+        {
+          "code": "leading_embed_moved_after_first_paragraph",
+          "severity": "info",
+          "message": "Embed iniziale spostato dopo il primo paragrafo.",
+          "evidence": "https://www.youtube.com/watch?v=B6eovayusbA"
+        }
+      ],
+      "diagnostic_warnings": [],
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "possible_noise": [
+          "author_bio",
+          "share_links"
+        ],
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "source_specific_notes": "Mantieni il tono rispettoso sulla dichiarazione dell'atleta."
+      },
+      "menzo_ai_review": {
+        "id": "c3",
+        "decision": "selected",
+        "priority": 6,
+        "category_hint": "WWE",
+        "article_type": "hard_news",
+        "event_key": "logan_paul_injury",
+        "duplicate_of": "",
+        "editorial_reason": "Aggiornamento serio su infortunio di un atleta di primo piano.",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "possible_noise": [
+            "author_bio",
+            "share_links"
+          ],
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "source_specific_notes": "Mantieni il tono rispettoso sulla dichiarazione dell'atleta."
+        },
+        "priority_label": "medium"
+      },
+      "ai_editorial_reason": "Aggiornamento serio su infortunio di un atleta di primo piano.",
+      "ai_priority_label": "medium"
+    }
+  ],
+  "handoff": {
+    "ready_for_alfred": 3,
+    "translation_pending": 0,
+    "errors": 0,
+    "extraction_empty": 0
+  },
+  "postprocess": {
+    "bob_v93_33_changes": 1,
+    "bob_v93_16_changes": 1,
+    "bob_brief_warnings_added": 2
+  }
+}

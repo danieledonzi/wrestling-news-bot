@@ -1,0 +1,36 @@
+{
+  "run_id": "2026-05-19 14:52:26",
+  "bot_version": "v89_editorial_report_quality (d58ea0a)",
+  "git_sha": "d58ea0ad4fc8687b83811a0536ef8dbede44b674",
+  "created_at": "2026-05-19T14:53:29",
+  "source_title": "AEW Talent Pushing to Sign Leon Slater as TNA Deal Nears End",
+  "final_title": "AEW, alcuni atleti spingono per l'ingaggio di Leon Slater in scadenza con TNA",
+  "source_url": "https://www.ringsidenews.com/aew-talent-pushing-sign-leon-slater-tna-deal-nears-end/",
+  "category_id": 5,
+  "category_slug": "AEW",
+  "article_type": "RUMOR",
+  "semantic_id": "aew-talent-pushing-to-sign-leon-slater-as-tna-deal-nears-end",
+  "story_signature_v71": "stable:aew_talent_pushing|sign_leon_slater|tna_deal_nears_end|contract|wwe",
+  "refined_score": 62,
+  "refined_reasons": [
+    "WWE/main roster",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "contratto",
+    "PLE/PPV",
+    "v62 titolo/championship",
+    "v72.3 cap rumor: niente boost raffinamento"
+  ],
+  "blocks_summary": {
+    "text": 13,
+    "image": 0,
+    "embed": 1
+  },
+  "embed_urls": [
+    "https://www.youtube.com/watch?v=fI2jZCqHNpE"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260519_145329_001_aew-alcuni-atleti-spingono-per-l-ingaggio-di-leon-slater-in-scadenza-con-tna_53158245_original.html",
+  "final_html_file": "20260519_145329_001_aew-alcuni-atleti-spingono-per-l-ingaggio-di-leon-slater-in-scadenza-con-tna_53158245_final.html",
+  "metadata_file": "20260519_145329_001_aew-alcuni-atleti-spingono-per-l-ingaggio-di-leon-slater-in-scadenza-con-tna_53158245_metadata.json"
+}

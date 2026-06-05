@@ -1,0 +1,29 @@
+{
+  "run_id": "2026-05-25 17:44:04",
+  "bot_version": "v90_2_6_2_clean_consolidated_source (16efb60)",
+  "git_sha": "16efb60e120115f779cd52d398c2cdd066e2a26f",
+  "created_at": "2026-05-25T17:45:50",
+  "source_title": "Beth Copeland Reacts After Surprise Return at AEW Double or Nothing",
+  "final_title": "Beth Copeland commenta il suo ritorno a AEW Double or Nothing",
+  "source_url": "https://www.ringsidenews.com/beth-copeland-reacts-surprise-return-aew-double-nothing/",
+  "category_id": 5,
+  "category_slug": "AEW",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "beth-copeland-reacts-after-surprise-return-at-aew-double-or-nothing",
+  "story_signature_v71": "event:aew-double-or-nothing-2026-05-25:adam-copeland-return",
+  "refined_score": 76,
+  "refined_reasons": [
+    "event_related",
+    "concrete_outcome"
+  ],
+  "blocks_summary": {
+    "text": 8,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260525_174550_002_beth-copeland-commenta-il-suo-ritorno-a-aew-double-or-nothing_13d38c6f_original.html",
+  "final_html_file": "20260525_174550_002_beth-copeland-commenta-il-suo-ritorno-a-aew-double-or-nothing_13d38c6f_final.html",
+  "metadata_file": "20260525_174550_002_beth-copeland-commenta-il-suo-ritorno-a-aew-double-or-nothing_13d38c6f_metadata.json"
+}

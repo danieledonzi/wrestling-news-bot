@@ -1,0 +1,36 @@
+{
+  "run_id": "2026-05-17 23:27:03",
+  "bot_version": "v89_editorial_report_quality (6a65f4b)",
+  "git_sha": "6a65f4bb8a57d63250e6eb163ef9d932e5d59cc2",
+  "created_at": "2026-05-17T23:28:52",
+  "source_title": "IYO SKY Explains Why She And NARAKU Finally Went Public With Marriage",
+  "final_title": "Iyo Sky spiega perché ha reso pubblico il matrimonio con NARAKU",
+  "source_url": "https://www.ringsidenews.com/iyo-sky-explains-why-she-naraku-finally-went-public-marriage/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "iyo-sky-explains-why-she-and-naraku-finally-went-public-with-marriage",
+  "story_signature_v71": "stable:iyo_sky|naraku|sky_explains_why_she_and|debut|wwe",
+  "refined_score": 54,
+  "refined_reasons": [
+    "WWE/main roster",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "PLE/PPV",
+    "developmental secondario",
+    "v62 ritorno/debutto",
+    "v66 cap opinion/commentary storyline",
+    "v68 cap duro opinion/commentary"
+  ],
+  "blocks_summary": {
+    "text": 11,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260517_232852_001_iyo-sky-spiega-perch-ha-reso-pubblico-il-matrimonio-con-naraku_1ae7dbd9_original.html",
+  "final_html_file": "20260517_232852_001_iyo-sky-spiega-perch-ha-reso-pubblico-il-matrimonio-con-naraku_1ae7dbd9_final.html",
+  "metadata_file": "20260517_232852_001_iyo-sky-spiega-perch-ha-reso-pubblico-il-matrimonio-con-naraku_1ae7dbd9_metadata.json"
+}
