@@ -1,0 +1,20 @@
+{
+  "schema": "owtv_published_artifact_v87_6",
+  "run_id": "2026-05-22 16:02:59",
+  "bot_version": "v90_2_2_report_flow_tuning (086d15f)",
+  "git_sha": "086d15f4507b53f668eb4c95b11a19f1ddab4e1c",
+  "created_at": "2026-05-22T16:03:23",
+  "wp_post_id": 5127,
+  "wp_status": "publish",
+  "title": "MJF accusa la WWE di diffondere notizie false sul futuro televisivo della AEW",
+  "source_url": "https://www.wrestlinginc.com/2179226/aew-wwe-mjf-maxwell-jacob-friedman-of-course-sources-leak-negative-stories/",
+  "semantic_id": "mjf-says-of-course-wwe-sources-leak-negative-stories-about-aew",
+  "event_key": "event:postshow:mjf-says-course-sources-leak-negative-stories-about-followup-mjf-says-course-sources-leak-negative-stories-about",
+  "category": 5,
+  "featured_image_url": "https://www.wrestlinginc.com/img/gallery/mjf-says-of-course-wwe-sources-leak-negative-stories-about-aew/l-intro-1779447348.jpg",
+  "embed_urls": [],
+  "inline_images": [],
+  "html_file": "published/20260522_160323_001_mjf-accusa-la-wwe-di-diffondere-notizie-false-sul-futuro-televisivo-della-aew_5127_final.html",
+  "metadata_file": "published/20260522_160323_001_mjf-accusa-la-wwe-di-diffondere-notizie-false-sul-futuro-televisivo-della-aew_5127_metadata.json",
+  "source_file": "published/20260522_160323_001_mjf-accusa-la-wwe-di-diffondere-notizie-false-sul-futuro-televisivo-della-aew_5127_source.txt"
+}
