@@ -1,0 +1,20 @@
+{
+  "schema": "owtv_published_artifact_v87_6",
+  "run_id": "2026-05-18 18:27:23",
+  "bot_version": "v89_editorial_report_quality (7f4bdac)",
+  "git_sha": "7f4bdac01c1cb63f5cc904d967e11bbf6c9502f4",
+  "created_at": "2026-05-18T18:27:56",
+  "wp_post_id": 4866,
+  "wp_status": "publish",
+  "title": "Voci nel backstage WWE su un possibile futuro di AEW con Paramount",
+  "source_url": "https://www.wrestlinginc.com/2175644/wwe-aew-paramount-rumors-circulating-backstage/",
+  "semantic_id": "backstage-report-on-aew-paramount-rumors-circulating-backstage-in-wwe",
+  "event_key": "event:business:media-rights",
+  "category": 15,
+  "featured_image_url": "https://www.wrestlinginc.com/img/gallery/backstage-report-on-aew-paramount-rumors-circulating-backstage-in-wwe/l-intro-1779122804.jpg",
+  "embed_urls": [],
+  "inline_images": [],
+  "html_file": "published/20260518_182756_001_voci-nel-backstage-wwe-su-un-possibile-futuro-di-aew-con-paramount_4866_final.html",
+  "metadata_file": "published/20260518_182756_001_voci-nel-backstage-wwe-su-un-possibile-futuro-di-aew-con-paramount_4866_metadata.json",
+  "source_file": "published/20260518_182756_001_voci-nel-backstage-wwe-su-un-possibile-futuro-di-aew-con-paramount_4866_source.txt"
+}

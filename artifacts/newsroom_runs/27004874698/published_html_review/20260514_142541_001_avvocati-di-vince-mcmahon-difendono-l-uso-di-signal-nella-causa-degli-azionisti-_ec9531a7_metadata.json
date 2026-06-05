@@ -1,0 +1,36 @@
+{
+  "run_id": "2026-05-14 14:24:32",
+  "bot_version": "v88_1_report_dedupe_pending_cleanup (48a84fb)",
+  "git_sha": "48a84fbafc158153919d7f256577c80025afc9de",
+  "created_at": "2026-05-14T14:25:41",
+  "source_title": "Vince McMahon's Lawyers Defend Signal App Use in WWE Shareholders Lawsuit",
+  "final_title": "Avvocati di Vince McMahon difendono l'uso di Signal nella causa degli azionisti WWE",
+  "source_url": "https://www.ringsidenews.com/vince-mcmahons-lawyers-defend-signal-app-use-wwe-shareholders-lawsuit/",
+  "category_id": 15,
+  "category_slug": "BUSINESS",
+  "article_type": "OTHER",
+  "semantic_id": "vince-mcmahons-lawyers-defend-signal-app-use-in-wwe-shareholders-lawsuit",
+  "story_signature_v71": "stable:vince_mcmahon|lawyers_defend_signal_app_use|wwe_shareholders_lawsuit|contract|wwe",
+  "refined_score": 100,
+  "refined_reasons": [
+    "WWE/main roster",
+    "business/contratti WWE-TKO",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "evento legale/controversia",
+    "PLE/PPV",
+    "non wrestling puro",
+    "v62 evento legale grave",
+    "v62 categoria business"
+  ],
+  "blocks_summary": {
+    "text": 13,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260514_142541_001_avvocati-di-vince-mcmahon-difendono-l-uso-di-signal-nella-causa-degli-azionisti-_ec9531a7_original.html",
+  "final_html_file": "20260514_142541_001_avvocati-di-vince-mcmahon-difendono-l-uso-di-signal-nella-causa-degli-azionisti-_ec9531a7_final.html",
+  "metadata_file": "20260514_142541_001_avvocati-di-vince-mcmahon-difendono-l-uso-di-signal-nella-causa-degli-azionisti-_ec9531a7_metadata.json"
+}

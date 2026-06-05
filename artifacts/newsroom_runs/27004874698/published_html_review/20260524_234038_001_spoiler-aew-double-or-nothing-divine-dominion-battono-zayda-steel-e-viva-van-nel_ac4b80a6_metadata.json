@@ -1,0 +1,31 @@
+{
+  "run_id": "2026-05-24 23:38:44",
+  "bot_version": "v90_2_6_2_clean_consolidated_source (bd2415e)",
+  "git_sha": "bd2415e3201af80f0b010a04e10a53dd96c7c080",
+  "created_at": "2026-05-24T23:40:38",
+  "source_title": "Divine Dominion Hold Off Zayda Steel & Viva Van In AEW Double Or Nothing Eliminator",
+  "final_title": "[SPOILER] AEW Double or Nothing: Divine Dominion battono Zayda Steel e Viva Van nel Buy In",
+  "source_url": "https://www.wrestlinginc.com/2180285/aew-double-or-nothing-2026-divine-dominion-megan-bayne-lena-kross-viva-van-zayda-steel-title-eliminator/",
+  "category_id": 5,
+  "category_slug": "AEW",
+  "article_type": "RESULTS_REPORT",
+  "semantic_id": "divine-dominion-hold-off-zayda-steel-viva-van-in-aew-double-or-nothing-eliminator",
+  "story_signature_v71": "stable:divine_dominion_hold_off_zayda_steel|viva_van_in|aew_double_or_nothing_eliminator|title|aew",
+  "refined_score": 75,
+  "refined_reasons": [
+    "AEW",
+    "titolo/championship",
+    "PLE/PPV",
+    "v62 titolo/championship"
+  ],
+  "blocks_summary": {
+    "text": 5,
+    "image": 1,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260524_234038_001_spoiler-aew-double-or-nothing-divine-dominion-battono-zayda-steel-e-viva-van-nel_ac4b80a6_original.html",
+  "final_html_file": "20260524_234038_001_spoiler-aew-double-or-nothing-divine-dominion-battono-zayda-steel-e-viva-van-nel_ac4b80a6_final.html",
+  "metadata_file": "20260524_234038_001_spoiler-aew-double-or-nothing-divine-dominion-battono-zayda-steel-e-viva-van-nel_ac4b80a6_metadata.json"
+}

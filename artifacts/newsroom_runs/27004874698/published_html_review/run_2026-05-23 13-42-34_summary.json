@@ -1,0 +1,32 @@
+{
+  "run_id": "2026-05-23 13:42:34",
+  "bot_version": "v90_2_4_2_report_artifacts_recovery (d44aa80)",
+  "git_sha": "d44aa808b7a11f045e925e2079749573916753cb",
+  "published_items_count": 3,
+  "items": [
+    {
+      "run_id": "2026-05-23 13:42:34",
+      "title": "Tyler Breeze parla del futuro di UpUpDownDown dopo l'addio di Xavier Woods alla WWE",
+      "url": "https://www.ringsidenews.com/tyler-breeze-addresses-future-upupdowndown-xavier-woods-wwe-exit/",
+      "original_html_file": "20260523_134320_001_tyler-breeze-parla-del-futuro-di-upupdowndown-dopo-l-addio-di-xavier-woods-alla-_d3f4efc3_original.html",
+      "final_html_file": "20260523_134320_001_tyler-breeze-parla-del-futuro-di-upupdowndown-dopo-l-addio-di-xavier-woods-alla-_d3f4efc3_final.html",
+      "metadata_file": "20260523_134320_001_tyler-breeze-parla-del-futuro-di-upupdowndown-dopo-l-addio-di-xavier-woods-alla-_d3f4efc3_metadata.json"
+    },
+    {
+      "run_id": "2026-05-23 13:42:34",
+      "title": "Eric Bischoff ricorda il suo lavoro con Ted Turner",
+      "url": "https://www.wrestlinginc.com/2176092/wwe-hofer-eric-bischoff-reflects-working-late-ted-turner/",
+      "original_html_file": "20260523_134347_002_eric-bischoff-ricorda-il-suo-lavoro-con-ted-turner_f008cd03_original.html",
+      "final_html_file": "20260523_134347_002_eric-bischoff-ricorda-il-suo-lavoro-con-ted-turner_f008cd03_final.html",
+      "metadata_file": "20260523_134347_002_eric-bischoff-ricorda-il-suo-lavoro-con-ted-turner_f008cd03_metadata.json"
+    },
+    {
+      "run_id": "2026-05-23 13:42:34",
+      "title": "AEW: Tony Khan fiducioso sulla permanenza in TV dopo la fusione Warner-Paramount",
+      "url": "https://www.ringsidenews.com/tony-khan-100-confident-paramount-will-keep-aew-wbd-merger-goes-through/",
+      "original_html_file": "20260523_134414_003_aew-tony-khan-fiducioso-sulla-permanenza-in-tv-dopo-la-fusione-warner-paramount_eefe5959_original.html",
+      "final_html_file": "20260523_134414_003_aew-tony-khan-fiducioso-sulla-permanenza-in-tv-dopo-la-fusione-warner-paramount_eefe5959_final.html",
+      "metadata_file": "20260523_134414_003_aew-tony-khan-fiducioso-sulla-permanenza-in-tv-dopo-la-fusione-warner-paramount_eefe5959_metadata.json"
+    }
+  ]
+}

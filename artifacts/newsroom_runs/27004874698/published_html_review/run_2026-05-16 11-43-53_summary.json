@@ -1,0 +1,16 @@
+{
+  "run_id": "2026-05-16 11:43:53",
+  "bot_version": "v88_4_1_canonical_event_dedupe (9b70900)",
+  "git_sha": "9b70900992b19cbc56dd7527715a669b2eba3fb4",
+  "published_items_count": 1,
+  "items": [
+    {
+      "run_id": "2026-05-16 11:43:53",
+      "title": "Tony Khan nega di aver seguito corsi di media training: \"Merito dell'esperienza e della mia fede\"",
+      "url": "https://www.ringsidenews.com/tony-khan-responds-fan-claims-media-trained-tony-becoming-problem/",
+      "original_html_file": "20260516_114509_001_tony-khan-nega-di-aver-seguito-corsi-di-media-training-merito-dell-esperienza-e-_1b738789_original.html",
+      "final_html_file": "20260516_114509_001_tony-khan-nega-di-aver-seguito-corsi-di-media-training-merito-dell-esperienza-e-_1b738789_final.html",
+      "metadata_file": "20260516_114509_001_tony-khan-nega-di-aver-seguito-corsi-di-media-training-merito-dell-esperienza-e-_1b738789_metadata.json"
+    }
+  ]
+}

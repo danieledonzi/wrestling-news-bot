@@ -1,0 +1,32 @@
+{
+  "run_id": "2026-05-20 20:09:47",
+  "bot_version": "v90_1_quality_correctness (382faf5)",
+  "git_sha": "382faf51e9123d515843e2b94c7068ea3604670d",
+  "published_items_count": 3,
+  "items": [
+    {
+      "run_id": "2026-05-20 20:09:47",
+      "title": "WWE: Triple H e Nick Khan elogiano l'impatto di Danhausen in azienda",
+      "url": "https://www.wrestlinginc.com/2178006/wwe-triple-h-paul-levesque-nick-khan-danhausen-praised-company-town-hall/",
+      "original_html_file": "20260520_201124_001_wwe-triple-h-e-nick-khan-elogiano-l-impatto-di-danhausen-in-azienda_a41628e7_original.html",
+      "final_html_file": "20260520_201124_001_wwe-triple-h-e-nick-khan-elogiano-l-impatto-di-danhausen-in-azienda_a41628e7_final.html",
+      "metadata_file": "20260520_201124_001_wwe-triple-h-e-nick-khan-elogiano-l-impatto-di-danhausen-in-azienda_a41628e7_metadata.json"
+    },
+    {
+      "run_id": "2026-05-20 20:09:47",
+      "title": "MJF dichiara di aver fatto causa alla giovane fan che lo ha colpito a AEW Dynamite",
+      "url": "https://www.ringsidenews.com/mjf-claims-he-sued-young-fan-who-attacked-him-during-aew-dynamite/",
+      "original_html_file": "20260520_201232_002_mjf-dichiara-di-aver-fatto-causa-alla-giovane-fan-che-lo-ha-colpito-a-aew-dynami_00dcd5e5_original.html",
+      "final_html_file": "20260520_201232_002_mjf-dichiara-di-aver-fatto-causa-alla-giovane-fan-che-lo-ha-colpito-a-aew-dynami_00dcd5e5_final.html",
+      "metadata_file": "20260520_201232_002_mjf-dichiara-di-aver-fatto-causa-alla-giovane-fan-che-lo-ha-colpito-a-aew-dynami_00dcd5e5_metadata.json"
+    },
+    {
+      "run_id": "2026-05-20 20:09:47",
+      "title": "La reazione gelida di MJF al debutto di Mick Foley in AEW",
+      "url": "https://www.ringsidenews.com/mjf-reacts-mick-foleys-upcoming-aew-debut-cold-response/",
+      "original_html_file": "20260520_201255_003_la-reazione-gelida-di-mjf-al-debutto-di-mick-foley-in-aew_40f8c2ce_original.html",
+      "final_html_file": "20260520_201255_003_la-reazione-gelida-di-mjf-al-debutto-di-mick-foley-in-aew_40f8c2ce_final.html",
+      "metadata_file": "20260520_201255_003_la-reazione-gelida-di-mjf-al-debutto-di-mick-foley-in-aew_40f8c2ce_metadata.json"
+    }
+  ]
+}
