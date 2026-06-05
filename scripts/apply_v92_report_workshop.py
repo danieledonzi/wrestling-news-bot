@@ -124,6 +124,7 @@ for patch_name in [
     "scripts/apply_v93_menzo_gate.py",
     "scripts/apply_v93_wp_ready_guard.py",
     "scripts/apply_v93_story_dedupe.py",
+    "scripts/apply_v93_menzo_footprint_policy.py",
     "scripts/apply_v93_universal_embed_extractor.py",
     "scripts/apply_v93_output_cleanup.py",
 ]:
