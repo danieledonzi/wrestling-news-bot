@@ -130,3 +130,11 @@ if base_patch.exists():
     subprocess.run([sys.executable, str(base_patch)], check=True)
 else:
     print('[V93 OUTPUT CLEANUP] base Publisher embed patch non presente')
+
+# v93.35: media extraction/ranking refinement. Run last because it intentionally
+# overrides the v93.33 base Publisher media behavior.
+media_patch = Path('scripts/apply_v93_media_ranking_patch.py')
+if media_patch.exists():
+    subprocess.run([sys.executable, str(media_patch)], check=True)
+else:
+    print('[V93 OUTPUT CLEANUP] media/ranking patch non presente')
