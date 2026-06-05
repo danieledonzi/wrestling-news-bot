@@ -1,0 +1,36 @@
+{
+  "run_id": "2026-05-18 21:44:14",
+  "bot_version": "v89_editorial_report_quality (f1cdc45)",
+  "git_sha": "f1cdc4559b1d4801560ac3ecd761d0fb69e8ba88",
+  "created_at": "2026-05-18T21:45:29",
+  "source_title": "CM Punk's Return Timeline Revealed Amid WWE TV Absence",
+  "final_title": "WWE: svelati i piani per il ritorno in TV di CM Punk",
+  "source_url": "https://www.ringsidenews.com/cm-punks-return-timeline-revealed-amid-wwe-tv-absence/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "RUMOR",
+  "semantic_id": "cm-punks-return-timeline-revealed-amid-wwe-tv-absence",
+  "story_signature_v71": "stable:cm_punk|return_timeline_revealed_amid|tv_absence|status|wwe",
+  "refined_score": 68,
+  "refined_reasons": [
+    "WWE/main roster",
+    "top star titolo: cm punk",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "combo top name titolo + evento forte",
+    "PLE/PPV",
+    "v62 ritorno/debutto",
+    "v86.9 cap commentary/opinion 100->68"
+  ],
+  "blocks_summary": {
+    "text": 11,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260518_214529_001_wwe-svelati-i-piani-per-il-ritorno-in-tv-di-cm-punk_2c43ceb8_original.html",
+  "final_html_file": "20260518_214529_001_wwe-svelati-i-piani-per-il-ritorno-in-tv-di-cm-punk_2c43ceb8_final.html",
+  "metadata_file": "20260518_214529_001_wwe-svelati-i-piani-per-il-ritorno-in-tv-di-cm-punk_2c43ceb8_metadata.json"
+}

@@ -1,0 +1,37 @@
+{
+  "run_id": "2026-05-12 18:40:22",
+  "bot_version": "v85_4_skipped_history_boot_diagnostics (777c3a4)",
+  "git_sha": "777c3a4a0351fbb67fd234edc51b9455a094bd10",
+  "created_at": "2026-05-12T18:44:29",
+  "source_title": "Former WWE & AEW Star Thanks Late Ted Turner For 'Pushing Pro Wrestling Forward'",
+  "final_title": "Matt Hardy ringrazia il compianto Ted Turner per aver fatto avanzare il wrestling",
+  "source_url": "https://www.wrestlinginc.com/2171140/wwe-aew-matt-hardy-ted-turner-pushing-pro-wrestling-forward/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "OPINION",
+  "semantic_id": "former-wwe-aew-star-thanks-late-ted-turner-for-pushing-pro-wrestling-forward",
+  "story_signature_v71": "stable:vince_mcmahon|ted_turner|outcome|wwe|aew|raw",
+  "refined_score": 54,
+  "refined_reasons": [
+    "WWE/main roster",
+    "business/contratti WWE-TKO",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "release/addio",
+    "PLE/PPV",
+    "opinione generica",
+    "v62 media rights/streaming",
+    "v62 categoria business",
+    "v68 cap duro opinion/commentary"
+  ],
+  "blocks_summary": {
+    "text": 3,
+    "image": 1,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260512_184429_002_matt-hardy-ringrazia-il-compianto-ted-turner-per-aver-fatto-avanzare-il-wrestlin_07c9cde3_original.html",
+  "final_html_file": "20260512_184429_002_matt-hardy-ringrazia-il-compianto-ted-turner-per-aver-fatto-avanzare-il-wrestlin_07c9cde3_final.html",
+  "metadata_file": "20260512_184429_002_matt-hardy-ringrazia-il-compianto-ted-turner-per-aver-fatto-avanzare-il-wrestlin_07c9cde3_metadata.json"
+}

@@ -1,0 +1,38 @@
+{
+  "run_id": "2026-05-14 20:12:06",
+  "bot_version": "v88_1_report_dedupe_pending_cleanup (788e8dd)",
+  "git_sha": "788e8dd79b1f8762f565c5989740470e5326e9d6",
+  "created_at": "2026-05-14T20:19:13",
+  "source_title": "Crowd Reactions To Fatal Influence Reportedly Shifting WWE Creative Plans",
+  "final_title": "Fatal Influence: reazioni del pubblico WWE potrebbero cambiare piani creativi",
+  "source_url": "https://www.wrestlinginc.com/2173180/wwe-creative-plans-fatal-influence-crowd-reactions/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "RUMOR",
+  "semantic_id": "crowd-reactions-to-fatal-influence-reportedly-shifting-wwe-creative-plans",
+  "story_signature_v71": "stable:charlotte_flair|rhea_ripley|alexa_bliss|debut|wwe",
+  "refined_score": 68,
+  "refined_reasons": [
+    "WWE/main roster",
+    "top star lead: rhea ripley",
+    "nomi forti lead: rhea ripley",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "combo top name lead + evento forte",
+    "PLE/PPV",
+    "developmental secondario",
+    "v62 ritorno/debutto",
+    "v72.3 cap rumor: niente boost raffinamento"
+  ],
+  "blocks_summary": {
+    "text": 3,
+    "image": 1,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260514_201913_003_fatal-influence-reazioni-del-pubblico-wwe-potrebbero-cambiare-piani-creativi_094e8a6d_original.html",
+  "final_html_file": "20260514_201913_003_fatal-influence-reazioni-del-pubblico-wwe-potrebbero-cambiare-piani-creativi_094e8a6d_final.html",
+  "metadata_file": "20260514_201913_003_fatal-influence-reazioni-del-pubblico-wwe-potrebbero-cambiare-piani-creativi_094e8a6d_metadata.json"
+}
