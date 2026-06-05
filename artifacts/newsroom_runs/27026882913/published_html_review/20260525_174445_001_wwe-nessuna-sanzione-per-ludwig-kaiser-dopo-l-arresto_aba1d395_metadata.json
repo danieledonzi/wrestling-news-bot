@@ -1,0 +1,30 @@
+{
+  "run_id": "2026-05-25 17:44:04",
+  "bot_version": "v90_2_6_2_clean_consolidated_source (16efb60)",
+  "git_sha": "16efb60e120115f779cd52d398c2cdd066e2a26f",
+  "created_at": "2026-05-25T17:44:45",
+  "source_title": "WWE's Current Stance on Ludwig Kaiser After Recent Arrest Revealed",
+  "final_title": "WWE: nessuna sanzione per Ludwig Kaiser dopo l'arresto",
+  "source_url": "https://www.ringsidenews.com/wwes-current-stance-ludwig-kaiser-recent-arrest-revealed/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "RUMOR",
+  "semantic_id": "wwes-current-stance-on-ludwig-kaiser-after-recent-arrest-revealed",
+  "story_signature_v71": "business:business:paramount",
+  "refined_score": 82,
+  "refined_reasons": [
+    "concrete_outcome",
+    "discussion_value",
+    "hard_news"
+  ],
+  "blocks_summary": {
+    "text": 10,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260525_174445_001_wwe-nessuna-sanzione-per-ludwig-kaiser-dopo-l-arresto_aba1d395_original.html",
+  "final_html_file": "20260525_174445_001_wwe-nessuna-sanzione-per-ludwig-kaiser-dopo-l-arresto_aba1d395_final.html",
+  "metadata_file": "20260525_174445_001_wwe-nessuna-sanzione-per-ludwig-kaiser-dopo-l-arresto_aba1d395_metadata.json"
+}

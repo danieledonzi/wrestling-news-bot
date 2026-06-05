@@ -1,0 +1,20 @@
+{
+  "schema": "owtv_published_artifact_v87_6",
+  "run_id": "2026-05-19 17:36:56",
+  "bot_version": "v89_editorial_report_quality (f550e58)",
+  "git_sha": "f550e5864f549e765c50b804480be8c601d3573b",
+  "created_at": "2026-05-19T17:38:36",
+  "wp_post_id": 4925,
+  "wp_status": "publish",
+  "title": "Athena punta a superare il record di giorni da campione di Roman Reigns",
+  "source_url": "https://www.wrestlinginc.com/2176831/aew-athena-roh-womens-world-title-wwe-roman-reigns/",
+  "semantic_id": "aews-athena-talks-current-roh-womens-world-title-run-beating-wwes-roman-reigns",
+  "event_key": "event:title:roman-reigns:world:championship",
+  "category": 5,
+  "featured_image_url": "https://www.wrestlinginc.com/img/gallery/aews-athena-talks-current-roh-womens-world-title-run-beating-wwes-roman-reigns/l-intro-1779211504.jpg",
+  "embed_urls": [],
+  "inline_images": [],
+  "html_file": "published/20260519_173836_002_athena-punta-a-superare-il-record-di-giorni-da-campione-di-roman-reigns_4925_final.html",
+  "metadata_file": "published/20260519_173836_002_athena-punta-a-superare-il-record-di-giorni-da-campione-di-roman-reigns_4925_metadata.json",
+  "source_file": "published/20260519_173836_002_athena-punta-a-superare-il-record-di-giorni-da-campione-di-roman-reigns_4925_source.txt"
+}

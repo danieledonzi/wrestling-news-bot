@@ -1,0 +1,89 @@
+{
+  "version": "v93_20_process_refinements",
+  "started_at": "2026-06-05T16:26:49.370590+00:00",
+  "ended_at": "2026-06-05T16:27:22.239248+00:00",
+  "engine": "bot_v92.py",
+  "newsroom_engine_override": false,
+  "runtime_delegations": 0,
+  "runtime_exit_code": 0,
+  "agents": {
+    "jarvis": "real_orchestrator",
+    "massy": "real_sentinel_control",
+    "simone": "real_report_director_and_autonomous_report_publisher",
+    "menzo": "real_editorial_director",
+    "bob": "real_article_writer",
+    "alfred": "real_quality_editor",
+    "publisher": "real_wordpress_publisher",
+    "archivista": "real_audit_agent",
+    "master_log": "real_structured_run_memory"
+  },
+  "massy_handoff": {
+    "to_simone": 1,
+    "to_menzo": 10,
+    "already_worked": 0,
+    "hard_skipped": 24,
+    "already_published_hard_skipped": 4,
+    "menzo_memory_hard_skipped": 17,
+    "old_news_hard_skipped": 0,
+    "report_candidates_blocked_by_manual_or_history": 0,
+    "event_recap_duplicates_blocked_by_report": 0,
+    "event_factual_news_to_menzo": 0,
+    "post_show_hard_news_to_menzo": 0,
+    "event_soft_reactions_to_menzo": 0,
+    "story_memory_hard_skipped": 2,
+    "story_batch_hard_skipped": 0
+  },
+  "simone_handoff": {
+    "ready": 1,
+    "waiting": 0,
+    "skipped": 5
+  },
+  "simone_publish_handoff": {
+    "published": 0,
+    "already_published": 1,
+    "wp_not_ready": 0,
+    "dry_run": 0,
+    "errors": 0
+  },
+  "menzo_handoff": {
+    "to_bob_or_v92": 5,
+    "pending": 0,
+    "skipped": 5
+  },
+  "bob_handoff": {
+    "ready_for_alfred": 3,
+    "translation_pending": 0,
+    "errors": 0,
+    "extraction_empty": 0
+  },
+  "alfred_handoff": {
+    "approved": 3,
+    "needs_revision": 0,
+    "warnings": 2,
+    "blockers": 0,
+    "editorial_changes": 0
+  },
+  "publisher_handoff": {
+    "published": 3,
+    "already_published": 0,
+    "dry_run": 0,
+    "wp_not_ready": 0,
+    "errors": 0
+  },
+  "archivista_handoff": {
+    "runs_48h": 56,
+    "published_current_run": 3,
+    "published_48h": 68,
+    "errors_48h": 10,
+    "anomalies": 0,
+    "article_dossiers": 5
+  },
+  "archivista_status": "ok",
+  "master_log": {
+    "version": "v93_19_newsroom_master_log",
+    "records": 31,
+    "latest_run_id": "27026882913",
+    "jsonl": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/state/newsroom/master_log.jsonl",
+    "human": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/logs/newsroom_master.log"
+  }
+}

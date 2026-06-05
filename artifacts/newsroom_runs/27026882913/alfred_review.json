@@ -1,0 +1,270 @@
+{
+  "agent": "Alfred",
+  "version": "v93_20_alfred_table_warning_precision",
+  "generated_at": "2026-06-05T16:27:12.467211+00:00",
+  "mode": "structured_content_quality_editor",
+  "input": {
+    "bob_version": "v93_33_youtube_plain_and_cta_cleanup",
+    "articles": 3
+  },
+  "reviews": [
+    {
+      "source_url": "https://www.ringsidenews.com/mercedes-mone-tells-fan-go-youtube-if-they-want-alexa-bliss-rematch/",
+      "source": "ringsidenews",
+      "category_hint": "AEW",
+      "title_it": "Mercedes Moné replica a un fan: \"Andate su YouTube\" per il rematch con Alexa Bliss",
+      "decision": "approved",
+      "quality_score": 95,
+      "issues": [],
+      "warnings": [
+        {
+          "code": "image_placeholder_present",
+          "severity": "warning",
+          "message": "Presente placeholder immagine da gestire nel Publisher.",
+          "evidence": "<!--IMAGE:...-->"
+        }
+      ],
+      "editorial_changes": [],
+      "approved_article": {
+        "source_url": "https://www.ringsidenews.com/mercedes-mone-tells-fan-go-youtube-if-they-want-alexa-bliss-rematch/",
+        "source_title": "Mercedes Moné Tells Fan To “Go To YouTube” If They Want Alexa Bliss Rematch",
+        "title_it": "Mercedes Moné replica a un fan: \"Andate su YouTube\" per il rematch con Alexa Bliss",
+        "body_html": "<p>Non sembra che Mercedes Moné abbia alcuna fretta di tornare in WWE per un rematch contro Alexa Bliss.</p>\nhttps://www.instagram.com/p/DZJXB-GNZ2d/?hl=en\n\n<p>Moné ha pubblicato su Instagram un video dal backstage del suo ritorno a AEW Dynamite mercoledì scorso e un fan ha colto l&#x27;occasione nei commenti per menzionare una sua storica rivale dei tempi della WWE. Il fan ha espresso il desiderio di vedere nuovamente Moné e Alexa Bliss l&#x27;una contro l&#x27;altra sul ring.</p>\n<blockquote>“Ho bisogno che tu e Alexa Bliss lottiate di nuovo.”</blockquote>\n<p>Mercedes ha risposto in modo conciso, indirizzando i fan altrove.</p>\n<blockquote>“Andate su @youtube.”</blockquote>\n<p>Questo dice praticamente tutto. I fan che sperano di vedere Mercedes Moné e Alexa Bliss scontrarsi di nuovo in WWE farebbero meglio a non trattenere il fiato al momento.</p>\n<p>Mercedes, che in WWE combatteva come Sasha Banks, ha affrontato Alexa Bliss per l&#x27;ultima volta in un match singolo nel maggio 2020, al WWE Performance Center, durante l&#x27;era della pandemia. Moné ha vinto anche gli ultimi due scontri diretti in singolo tra loro.</p>\n<p>Ora Mercedes è tornata in TV in AEW e la sua risposta ha chiarito che chiunque cerchi quel match contro Alexa Bliss può tranquillamente guardarsi i vecchi filmati. Il ritorno di Mercedes Moné in AEW sta già facendo discutere i fan, ma questa sua rapida replica su Instagram potrebbe aver messo in archivio, almeno per ora, uno dei &quot;dream match&quot; targati WWE.</p>\n<!--IMAGE:https://www.ringsidenews.com/wp-content/uploads/2024/01/avatar_user_1_1704158183-96x96.jpg-->",
+        "excerpt_it": "Mercedes Moné ha risposto in modo netto a un fan che chiedeva un nuovo scontro con Alexa Bliss, chiudendo per il momento la porta a un ipotetico ritorno in WWE.",
+        "category_hint": "AEW",
+        "source": "ringsidenews",
+        "meta": {
+          "source_title": "Mercedes Moné Tells Fan To “Go To YouTube” If They Want Alexa Bliss Rematch",
+          "description": "Mercedes Moné does not sound like she is rushing back to WWE for an Alexa Bliss rematch. Moné posted a behind-the-scenes video on Instagram from her",
+          "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/mercedes-mone-tells-fan-to-go-to-youtube-if-they-want-alexa-bliss-rematch-58.jpg"
+        },
+        "element_counts": {
+          "text": 6,
+          "heading": 0,
+          "quote": 2,
+          "table": 0,
+          "image": 1,
+          "embed": 1
+        },
+        "bob_translation_model": "gemini-3.1-flash-lite"
+      },
+      "diagnostics": {
+        "plain_chars": 1386,
+        "title_chars": 82,
+        "bob_status": "ready_for_alfred",
+        "bob_diagnostic_stage": "ready_for_alfred",
+        "bob_removed_before_gemini": 16,
+        "bob_clean_element_count": 10,
+        "bob_translation_model": "gemini-3.1-flash-lite",
+        "editorial_changes": 0,
+        "quote_count": 2,
+        "table_count": 0
+      }
+    },
+    {
+      "source_url": "https://www.wrestlinginc.com/2188333/aew-myaew-produce-orange-crush-jonathan-gresham-indie-promotion-debut-curated/",
+      "source": "wrestlinginc",
+      "category_hint": "AEW",
+      "title_it": "La federazione indie PRODUCE approda su MyAEW, primo show curato da Jonathan Gresham",
+      "decision": "approved",
+      "quality_score": 100,
+      "issues": [],
+      "warnings": [],
+      "editorial_changes": [],
+      "approved_article": {
+        "source_url": "https://www.wrestlinginc.com/2188333/aew-myaew-produce-orange-crush-jonathan-gresham-indie-promotion-debut-curated/",
+        "source_title": "Indie Promotion PRODUCE Joins MyAEW, Announces First Show Curated By Jonathan Gresham",
+        "title_it": "La federazione indie PRODUCE approda su MyAEW, primo show curato da Jonathan Gresham",
+        "body_html": "<p>MyAEW ha lanciato di recente una piattaforma streaming dedicata ai fan internazionali per accedere ai contenuti AEW e ROH. Gli abbonati possono seguire la programmazione settimanale e i pay-per-view. Il mese scorso, MyAEW ha annunciato che sarebbe diventata la casa online della 1FW (One Fall Wrestling), promotion gestita dal wrestler e Vice President of Show and Creative Coordination della AEW, QT Marshall. Venerdì, è stato ufficializzato l&#x27;arrivo di una seconda realtà indipendente sulla piattaforma.</p>\nhttps://x.com/PRODUCENYC/status/2062897143807946847\n\n<p>PRODUCE Wrestling è una nuova federazione e compagnia di intrattenimento dal vivo ideata dal curatore e direttore creativo Adam Abdalla, proprietario anche di Orange Crush, pubblicazione indipendente dedicata al wrestling e all&#x27;arte. A marzo, Orange Crush aveva presentato un&#x27;offerta per l&#x27;acquisizione di TrillerTV. PRODUCE Wrestling unisce wrestling, musica, arte e cinema. Sono stati annunciati sei show, quattro dei quali presenteranno diversi incontri selezionati da wrestler specifici.</p>\n<p>Il primo evento includerà quattro match curati da Jonathan Gresham, tra cui Zack Sabre Jr. contro Darian Bengston. Lo stesso Gresham combatterà nel main event contro Fuminori Abe. Tra gli atleti pubblicizzati figurano Deonna Purrazzo, Liiza Hall, Mance Warner, EFFY e LaBron Kozone, mentre Charles Mason difenderà il JCW World Title contro Amazing Red. Ogni singolo show sarà acquistabile al costo di 14,95 dollari, oppure sarà possibile sottoscrivere un abbonamento stagionale per tutti e sei gli eventi al prezzo di 50 dollari. &quot;PRODUCE: Volume One – The Octopus&quot; andrà in onda il 29 giugno da Brooklyn, New York, e includerà anche un&#x27;esibizione dal vivo di Abel Ferrara con Joe Delia e Sanford.</p>\n\nhttps://x.com/PRODUCENYC/status/2062880736856662272\n\n<p>Altri show saranno curati da Lee Moriarty, Rocky Romero e Joey Janela. &quot;Afternoon Special&quot; si terrà a Montreal, mentre &quot;DEAN: Sunday School&quot; andrà in scena in diretta da Jersey City, nel New Jersey.</p>",
+        "excerpt_it": "MyAEW amplia la propria offerta ospitando la nuova realtà indipendente PRODUCE Wrestling, che debutterà con uno show curato da Jonathan Gresham.",
+        "category_hint": "AEW",
+        "source": "wrestlinginc",
+        "meta": {
+          "source_title": "Indie Promotion PRODUCE Joins MyAEW, Announces First Show Curated By Jonathan Gresham - Wrestling Inc.",
+          "description": "MyAEW is an international streaming platform for AEW and ROH. It will now be the home to two indie promotions, including new promotion, PRODUCE Wrestling.",
+          "featured_image": "https://www.wrestlinginc.com/img/gallery/indie-promotion-produce-joins-myaew-announces-first-show-curated-by-jonathan-gresham/l-intro-1780675091.jpg"
+        },
+        "element_counts": {
+          "text": 4,
+          "heading": 0,
+          "quote": 0,
+          "table": 0,
+          "image": 0,
+          "embed": 2
+        },
+        "bob_translation_model": "gemini-3.1-flash-lite"
+      },
+      "diagnostics": {
+        "plain_chars": 1998,
+        "title_chars": 84,
+        "bob_status": "ready_for_alfred",
+        "bob_diagnostic_stage": "ready_for_alfred",
+        "bob_removed_before_gemini": 3,
+        "bob_clean_element_count": 6,
+        "bob_translation_model": "gemini-3.1-flash-lite",
+        "editorial_changes": 0,
+        "quote_count": 0,
+        "table_count": 0
+      }
+    },
+    {
+      "source_url": "https://www.ringsidenews.com/why-sol-ruca-won-womens-intercontinental-title-wwe-clash-italy/",
+      "source": "ringsidenews",
+      "category_hint": "WWE",
+      "title_it": "Il motivo dietro la vittoria del titolo Intercontinentale di Sol Ruca a WWE Clash in Italy",
+      "decision": "approved",
+      "quality_score": 95,
+      "issues": [],
+      "warnings": [
+        {
+          "code": "image_placeholder_present",
+          "severity": "warning",
+          "message": "Presente placeholder immagine da gestire nel Publisher.",
+          "evidence": "<!--IMAGE:...-->"
+        }
+      ],
+      "editorial_changes": [],
+      "approved_article": {
+        "source_url": "https://www.ringsidenews.com/why-sol-ruca-won-womens-intercontinental-title-wwe-clash-italy/",
+        "source_title": "Why Sol Ruca Won Women’s Intercontinental Title at WWE Clash in Italy",
+        "title_it": "Il motivo dietro la vittoria del titolo Intercontinentale di Sol Ruca a WWE Clash in Italy",
+        "body_html": "<p>La grande vittoria titolata di Sol Ruca ai danni di Becky Lynch non è stata un semplice colpo di scena casuale: la WWE aveva una buona ragione per premere il grilletto.</p>\n<blockquote>“L&#x27;unico cambio di titolo nello show ha visto Ruca battere Lynch per vincere il titolo IC, cosa ampiamente prevista dato che Ruca era stata gestita in modo molto scadente fin dal suo debutto.”</blockquote>\n<p>Meltzer ha sottolineato che questo booking altalenante faceva parte del piano, dato che la WWE ha fatto vincere il campionato a Ruca dopo aver collezionato zero vittorie nel main roster: “Ed era parzialmente questa l&#x27;idea, visto che avrebbe vinto il titolo dopo aver ottenuto zero vittorie nel main roster.”</p>\n<p>Ruca ha precedentemente rivelato che, dopo il match, ha ricevuto il consueto scatto fotografico con Triple H e il suo iconico “puntamento” nel backstage, prima di dedicarsi alle interviste e ai doveri post-show. In seguito ha festeggiato con atlete del calibro di Bayley e Lyra Valkyria, dichiarando che quel momento l&#x27;ha fatta sentire come se fosse “qui per restare.”</p>\n<p>Con questo aggiornamento, la conquista del titolo da parte di Ruca assume ora più senso. La WWE potrebbe averla fatta faticare inizialmente, ma il risultato finale è stato una vittoria titolata di grande prestigio contro Becky Lynch, che cambia istantaneamente la percezione del suo ruolo nel main roster.</p>\n<!--IMAGE:https://www.ringsidenews.com/wp-content/uploads/2024/01/avatar_user_1_1704158183-96x96.jpg-->",
+        "excerpt_it": "La conquista del titolo da parte di Sol Ruca contro Becky Lynch non è stata una sorpresa casuale: ecco la strategia della WWE dietro questa scelta.",
+        "category_hint": "WWE",
+        "source": "ringsidenews",
+        "meta": {
+          "source_title": "Why Sol Ruca Won Women's Intercontinental Title at WWE Clash in Italy",
+          "description": "Sol Ruca’s big title win over Becky Lynch wasn’t just a random shocker — WWE had a good reason for pulling the trigger. According to Dave Meltzer in the",
+          "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/why-sol-ruca-won-womens-intercontinental-title-at-wwe-clash-in-italy-53.jpg"
+        },
+        "element_counts": {
+          "text": 4,
+          "heading": 0,
+          "quote": 1,
+          "table": 0,
+          "image": 1,
+          "embed": 0
+        },
+        "bob_translation_model": "gemini-3.1-flash-lite"
+      },
+      "diagnostics": {
+        "plain_chars": 1344,
+        "title_chars": 90,
+        "bob_status": "ready_for_alfred",
+        "bob_diagnostic_stage": "ready_for_alfred",
+        "bob_removed_before_gemini": 14,
+        "bob_clean_element_count": 6,
+        "bob_translation_model": "gemini-3.1-flash-lite",
+        "editorial_changes": 0,
+        "quote_count": 1,
+        "table_count": 0
+      }
+    }
+  ],
+  "approved_articles": [
+    {
+      "source_url": "https://www.ringsidenews.com/mercedes-mone-tells-fan-go-youtube-if-they-want-alexa-bliss-rematch/",
+      "source_title": "Mercedes Moné Tells Fan To “Go To YouTube” If They Want Alexa Bliss Rematch",
+      "title_it": "Mercedes Moné replica a un fan: \"Andate su YouTube\" per il rematch con Alexa Bliss",
+      "body_html": "<p>Non sembra che Mercedes Moné abbia alcuna fretta di tornare in WWE per un rematch contro Alexa Bliss.</p>\nhttps://www.instagram.com/p/DZJXB-GNZ2d/?hl=en\n\n<p>Moné ha pubblicato su Instagram un video dal backstage del suo ritorno a AEW Dynamite mercoledì scorso e un fan ha colto l&#x27;occasione nei commenti per menzionare una sua storica rivale dei tempi della WWE. Il fan ha espresso il desiderio di vedere nuovamente Moné e Alexa Bliss l&#x27;una contro l&#x27;altra sul ring.</p>\n<blockquote>“Ho bisogno che tu e Alexa Bliss lottiate di nuovo.”</blockquote>\n<p>Mercedes ha risposto in modo conciso, indirizzando i fan altrove.</p>\n<blockquote>“Andate su @youtube.”</blockquote>\n<p>Questo dice praticamente tutto. I fan che sperano di vedere Mercedes Moné e Alexa Bliss scontrarsi di nuovo in WWE farebbero meglio a non trattenere il fiato al momento.</p>\n<p>Mercedes, che in WWE combatteva come Sasha Banks, ha affrontato Alexa Bliss per l&#x27;ultima volta in un match singolo nel maggio 2020, al WWE Performance Center, durante l&#x27;era della pandemia. Moné ha vinto anche gli ultimi due scontri diretti in singolo tra loro.</p>\n<p>Ora Mercedes è tornata in TV in AEW e la sua risposta ha chiarito che chiunque cerchi quel match contro Alexa Bliss può tranquillamente guardarsi i vecchi filmati. Il ritorno di Mercedes Moné in AEW sta già facendo discutere i fan, ma questa sua rapida replica su Instagram potrebbe aver messo in archivio, almeno per ora, uno dei &quot;dream match&quot; targati WWE.</p>\n<!--IMAGE:https://www.ringsidenews.com/wp-content/uploads/2024/01/avatar_user_1_1704158183-96x96.jpg-->",
+      "excerpt_it": "Mercedes Moné ha risposto in modo netto a un fan che chiedeva un nuovo scontro con Alexa Bliss, chiudendo per il momento la porta a un ipotetico ritorno in WWE.",
+      "category_hint": "AEW",
+      "source": "ringsidenews",
+      "meta": {
+        "source_title": "Mercedes Moné Tells Fan To “Go To YouTube” If They Want Alexa Bliss Rematch",
+        "description": "Mercedes Moné does not sound like she is rushing back to WWE for an Alexa Bliss rematch. Moné posted a behind-the-scenes video on Instagram from her",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/mercedes-mone-tells-fan-to-go-to-youtube-if-they-want-alexa-bliss-rematch-58.jpg"
+      },
+      "element_counts": {
+        "text": 6,
+        "heading": 0,
+        "quote": 2,
+        "table": 0,
+        "image": 1,
+        "embed": 1
+      },
+      "bob_translation_model": "gemini-3.1-flash-lite"
+    },
+    {
+      "source_url": "https://www.wrestlinginc.com/2188333/aew-myaew-produce-orange-crush-jonathan-gresham-indie-promotion-debut-curated/",
+      "source_title": "Indie Promotion PRODUCE Joins MyAEW, Announces First Show Curated By Jonathan Gresham",
+      "title_it": "La federazione indie PRODUCE approda su MyAEW, primo show curato da Jonathan Gresham",
+      "body_html": "<p>MyAEW ha lanciato di recente una piattaforma streaming dedicata ai fan internazionali per accedere ai contenuti AEW e ROH. Gli abbonati possono seguire la programmazione settimanale e i pay-per-view. Il mese scorso, MyAEW ha annunciato che sarebbe diventata la casa online della 1FW (One Fall Wrestling), promotion gestita dal wrestler e Vice President of Show and Creative Coordination della AEW, QT Marshall. Venerdì, è stato ufficializzato l&#x27;arrivo di una seconda realtà indipendente sulla piattaforma.</p>\nhttps://x.com/PRODUCENYC/status/2062897143807946847\n\n<p>PRODUCE Wrestling è una nuova federazione e compagnia di intrattenimento dal vivo ideata dal curatore e direttore creativo Adam Abdalla, proprietario anche di Orange Crush, pubblicazione indipendente dedicata al wrestling e all&#x27;arte. A marzo, Orange Crush aveva presentato un&#x27;offerta per l&#x27;acquisizione di TrillerTV. PRODUCE Wrestling unisce wrestling, musica, arte e cinema. Sono stati annunciati sei show, quattro dei quali presenteranno diversi incontri selezionati da wrestler specifici.</p>\n<p>Il primo evento includerà quattro match curati da Jonathan Gresham, tra cui Zack Sabre Jr. contro Darian Bengston. Lo stesso Gresham combatterà nel main event contro Fuminori Abe. Tra gli atleti pubblicizzati figurano Deonna Purrazzo, Liiza Hall, Mance Warner, EFFY e LaBron Kozone, mentre Charles Mason difenderà il JCW World Title contro Amazing Red. Ogni singolo show sarà acquistabile al costo di 14,95 dollari, oppure sarà possibile sottoscrivere un abbonamento stagionale per tutti e sei gli eventi al prezzo di 50 dollari. &quot;PRODUCE: Volume One – The Octopus&quot; andrà in onda il 29 giugno da Brooklyn, New York, e includerà anche un&#x27;esibizione dal vivo di Abel Ferrara con Joe Delia e Sanford.</p>\n\nhttps://x.com/PRODUCENYC/status/2062880736856662272\n\n<p>Altri show saranno curati da Lee Moriarty, Rocky Romero e Joey Janela. &quot;Afternoon Special&quot; si terrà a Montreal, mentre &quot;DEAN: Sunday School&quot; andrà in scena in diretta da Jersey City, nel New Jersey.</p>",
+      "excerpt_it": "MyAEW amplia la propria offerta ospitando la nuova realtà indipendente PRODUCE Wrestling, che debutterà con uno show curato da Jonathan Gresham.",
+      "category_hint": "AEW",
+      "source": "wrestlinginc",
+      "meta": {
+        "source_title": "Indie Promotion PRODUCE Joins MyAEW, Announces First Show Curated By Jonathan Gresham - Wrestling Inc.",
+        "description": "MyAEW is an international streaming platform for AEW and ROH. It will now be the home to two indie promotions, including new promotion, PRODUCE Wrestling.",
+        "featured_image": "https://www.wrestlinginc.com/img/gallery/indie-promotion-produce-joins-myaew-announces-first-show-curated-by-jonathan-gresham/l-intro-1780675091.jpg"
+      },
+      "element_counts": {
+        "text": 4,
+        "heading": 0,
+        "quote": 0,
+        "table": 0,
+        "image": 0,
+        "embed": 2
+      },
+      "bob_translation_model": "gemini-3.1-flash-lite"
+    },
+    {
+      "source_url": "https://www.ringsidenews.com/why-sol-ruca-won-womens-intercontinental-title-wwe-clash-italy/",
+      "source_title": "Why Sol Ruca Won Women’s Intercontinental Title at WWE Clash in Italy",
+      "title_it": "Il motivo dietro la vittoria del titolo Intercontinentale di Sol Ruca a WWE Clash in Italy",
+      "body_html": "<p>La grande vittoria titolata di Sol Ruca ai danni di Becky Lynch non è stata un semplice colpo di scena casuale: la WWE aveva una buona ragione per premere il grilletto.</p>\n<blockquote>“L&#x27;unico cambio di titolo nello show ha visto Ruca battere Lynch per vincere il titolo IC, cosa ampiamente prevista dato che Ruca era stata gestita in modo molto scadente fin dal suo debutto.”</blockquote>\n<p>Meltzer ha sottolineato che questo booking altalenante faceva parte del piano, dato che la WWE ha fatto vincere il campionato a Ruca dopo aver collezionato zero vittorie nel main roster: “Ed era parzialmente questa l&#x27;idea, visto che avrebbe vinto il titolo dopo aver ottenuto zero vittorie nel main roster.”</p>\n<p>Ruca ha precedentemente rivelato che, dopo il match, ha ricevuto il consueto scatto fotografico con Triple H e il suo iconico “puntamento” nel backstage, prima di dedicarsi alle interviste e ai doveri post-show. In seguito ha festeggiato con atlete del calibro di Bayley e Lyra Valkyria, dichiarando che quel momento l&#x27;ha fatta sentire come se fosse “qui per restare.”</p>\n<p>Con questo aggiornamento, la conquista del titolo da parte di Ruca assume ora più senso. La WWE potrebbe averla fatta faticare inizialmente, ma il risultato finale è stato una vittoria titolata di grande prestigio contro Becky Lynch, che cambia istantaneamente la percezione del suo ruolo nel main roster.</p>\n<!--IMAGE:https://www.ringsidenews.com/wp-content/uploads/2024/01/avatar_user_1_1704158183-96x96.jpg-->",
+      "excerpt_it": "La conquista del titolo da parte di Sol Ruca contro Becky Lynch non è stata una sorpresa casuale: ecco la strategia della WWE dietro questa scelta.",
+      "category_hint": "WWE",
+      "source": "ringsidenews",
+      "meta": {
+        "source_title": "Why Sol Ruca Won Women's Intercontinental Title at WWE Clash in Italy",
+        "description": "Sol Ruca’s big title win over Becky Lynch wasn’t just a random shocker — WWE had a good reason for pulling the trigger. According to Dave Meltzer in the",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/why-sol-ruca-won-womens-intercontinental-title-at-wwe-clash-in-italy-53.jpg"
+      },
+      "element_counts": {
+        "text": 4,
+        "heading": 0,
+        "quote": 1,
+        "table": 0,
+        "image": 1,
+        "embed": 0
+      },
+      "bob_translation_model": "gemini-3.1-flash-lite"
+    }
+  ],
+  "handoff": {
+    "approved": 3,
+    "needs_revision": 0,
+    "warnings": 2,
+    "blockers": 0,
+    "editorial_changes": 0
+  },
+  "policy": {
+    "checks": [
+      "untranslated_quotes",
+      "quote_semantics",
+      "table_semantics",
+      "possible_missing_table",
+      "cta_residue",
+      "source_credit_residue",
+      "unsafe_html",
+      "missing_or_short_body",
+      "image_embed_placeholders",
+      "title_clickbait_or_length"
+    ],
+    "deterministic_normalizations": [
+      "split_inline_image_embed_placeholders",
+      "long_quote_paragraphs_to_blockquote",
+      "funzionari_wwe_to_dirigenti_wwe"
+    ],
+    "ai_used": false,
+    "auto_rewrite": false,
+    "conservative_mode": true,
+    "possible_missing_table_requires_real_table_signal": true,
+    "consume_bob_diagnostic_warnings": true
+  },
+  "postprocess": {
+    "false_table_warnings_removed": 0,
+    "bob_warnings_surfaced": 0
+  }
+}

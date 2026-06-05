@@ -1,0 +1,37 @@
+{
+  "run_id": "2026-05-14 21:30:33",
+  "bot_version": "v88_2_editorial_performance_guards (0205aa0)",
+  "git_sha": "0205aa0dc85c658a2c150011d09fc38d2a228f1a",
+  "created_at": "2026-05-14T21:31:35",
+  "source_title": "Ronda Rousey Credits Paul Heyman & WWE For Changing How She Promotes MMA Fights",
+  "final_title": "Ronda Rousey: come Paul Heyman ha cambiato il mio modo di promuovere i match",
+  "source_url": "https://www.ringsidenews.com/ronda-rousey-credits-paul-heyman-wwe-changing-how-she-promotes-mma-fights/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "ronda-rousey-credits-paul-heyman-wwe-for-changing-how-she-promotes-mma-fights",
+  "story_signature_v71": "stable:paul_heyman|ronda_rousey_credits_paul_heyman|wwe_for_changing_how_she_promotes|story|wwe",
+  "refined_score": 68,
+  "refined_reasons": [
+    "WWE/main roster",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "PLE/PPV",
+    "non wrestling puro",
+    "v62 ritorno/debutto",
+    "v66 cap opinion/commentary storyline",
+    "v68 cap opinion senza news concreta"
+  ],
+  "blocks_summary": {
+    "text": 10,
+    "image": 0,
+    "embed": 1
+  },
+  "embed_urls": [
+    "https://www.youtube.com/watch?v=fDuzb_oMNdk"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260514_213135_002_ronda-rousey-come-paul-heyman-ha-cambiato-il-mio-modo-di-promuovere-i-match_2030edcd_original.html",
+  "final_html_file": "20260514_213135_002_ronda-rousey-come-paul-heyman-ha-cambiato-il-mio-modo-di-promuovere-i-match_2030edcd_final.html",
+  "metadata_file": "20260514_213135_002_ronda-rousey-come-paul-heyman-ha-cambiato-il-mio-modo-di-promuovere-i-match_2030edcd_metadata.json"
+}

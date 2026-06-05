@@ -1,0 +1,20 @@
+{
+  "schema": "owtv_published_artifact_v87_6",
+  "run_id": "2026-05-15 17:26:40",
+  "bot_version": "v88_4_quality_microfixes (d7d141e)",
+  "git_sha": "d7d141e0a6f30eef33b2a9f6e9066aad539ad8d9",
+  "created_at": "2026-05-15T17:27:18",
+  "wp_post_id": 4686,
+  "wp_status": "publish",
+  "title": "Causa contro Vince McMahon: i ring boys potranno restare anonimi",
+  "source_url": "https://www.ringsidenews.com/judge-rules-wwe-ring-boys-can-stay-anonymous-lawsuit-against-vince-mcmahon/",
+  "semantic_id": "judge-rules-wwe-ring-boys-can-stay-anonymous-in-lawsuit-against-vince-mcmahon",
+  "event_key": "event:legal:vince-mcmahon",
+  "category": 4,
+  "featured_image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/05/judge-rules-wwe-ring-boys-can-stay-anonymous-in-lawsuit-against-vince-mcmahon-56.jpg",
+  "embed_urls": [],
+  "inline_images": [],
+  "html_file": "published/20260515_172718_001_causa-contro-vince-mcmahon-i-ring-boys-potranno-restare-anonimi_4686_final.html",
+  "metadata_file": "published/20260515_172718_001_causa-contro-vince-mcmahon-i-ring-boys-potranno-restare-anonimi_4686_metadata.json",
+  "source_file": "published/20260515_172718_001_causa-contro-vince-mcmahon-i-ring-boys-potranno-restare-anonimi_4686_source.txt"
+}

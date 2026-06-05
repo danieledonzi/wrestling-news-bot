@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-05-15 02:25:35",
+  "bot_version": "v88_2_editorial_performance_guards (86441d6)",
+  "git_sha": "86441d6c4ef88469810c3bb867cc729392d70b06",
+  "created_at": "2026-05-15T02:26:42",
+  "source_title": "John Cena Reveals He Was Diagnosed With Rare Eye Condition After Ignoring Symptoms",
+  "final_title": "John Cena rivela di aver ignorato i sintomi di una rara patologia oculare",
+  "source_url": "https://www.ringsidenews.com/john-cena-reveals-he-diagnosed-rare-eye-condition-ignoring-symptoms/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "OTHER",
+  "semantic_id": "john-cena-reveals-he-was-diagnosed-with-rare-eye-condition-after-ignoring-symptoms",
+  "story_signature_v71": "stable:john_cena|john_cena_reveals_he_was_diagnosed_with_rare_eye_condition_a|story|wrestling",
+  "refined_score": 65,
+  "refined_reasons": [
+    "WWE/main roster",
+    "top star titolo: john cena",
+    "WWE main roster + storyline/evento",
+    "intervista/opinione",
+    "PLE/PPV",
+    "v88.2 cap OTHER/feature non-news 82->65"
+  ],
+  "blocks_summary": {
+    "text": 14,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260515_022642_003_john-cena-rivela-di-aver-ignorato-i-sintomi-di-una-rara-patologia-oculare_317e7792_original.html",
+  "final_html_file": "20260515_022642_003_john-cena-rivela-di-aver-ignorato-i-sintomi-di-una-rara-patologia-oculare_317e7792_final.html",
+  "metadata_file": "20260515_022642_003_john-cena-rivela-di-aver-ignorato-i-sintomi-di-una-rara-patologia-oculare_317e7792_metadata.json"
+}
