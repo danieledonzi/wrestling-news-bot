@@ -1,0 +1,20 @@
+{
+  "schema": "owtv_published_artifact_v87_6",
+  "run_id": "2026-05-14 20:12:06",
+  "bot_version": "v88_1_report_dedupe_pending_cleanup (788e8dd)",
+  "git_sha": "788e8dd79b1f8762f565c5989740470e5326e9d6",
+  "created_at": "2026-05-14T20:15:04",
+  "wp_post_id": 4609,
+  "wp_status": "publish",
+  "title": "Ronda Rousey svela il match contro Becky Lynch approvato dalla WWE ma mai realizzato",
+  "source_url": "https://www.wrestlinginc.com/2173220/wwe-ronda-rousey-becky-lynch-high-profile-pitch-never-delivered/",
+  "semantic_id": "ronda-rousey-details-high-profile-pitch-that-wwe-approved-but-never-delivered",
+  "event_key": "event:liv-morgan-return",
+  "category": 4,
+  "featured_image_url": "https://www.wrestlinginc.com/img/gallery/ronda-rousey-details-high-profile-pitch-that-wwe-approved-but-never-delivered/l-intro-1778786553.jpg",
+  "embed_urls": [],
+  "inline_images": [],
+  "html_file": "published/20260514_201504_001_ronda-rousey-svela-il-match-contro-becky-lynch-approvato-dalla-wwe-ma-mai-realizzato_4609_final.html",
+  "metadata_file": "published/20260514_201504_001_ronda-rousey-svela-il-match-contro-becky-lynch-approvato-dalla-wwe-ma-mai-realizzato_4609_metadata.json",
+  "source_file": "published/20260514_201504_001_ronda-rousey-svela-il-match-contro-becky-lynch-approvato-dalla-wwe-ma-mai-realizzato_4609_source.txt"
+}

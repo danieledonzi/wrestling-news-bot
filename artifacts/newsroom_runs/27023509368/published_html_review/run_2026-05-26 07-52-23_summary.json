@@ -1,0 +1,32 @@
+{
+  "run_id": "2026-05-26 07:52:23",
+  "bot_version": "v91_6_1_resolved_report_publish_bypass (8a88fb5)",
+  "git_sha": "8a88fb54a07b3214f07decc42d6612a192ad1ac9",
+  "published_items_count": 3,
+  "items": [
+    {
+      "run_id": "2026-05-26 07:52:23",
+      "title": "WWE: annunciato il ritorno dei tornei King & Queen of the Ring a Raw",
+      "url": "https://www.ringsidenews.com/wwe-announces-return-king-queen-ring-tournaments-during-525-raw/",
+      "original_html_file": "20260526_075326_001_wwe-annunciato-il-ritorno-dei-tornei-king-queen-of-the-ring-a-raw_a8760622_original.html",
+      "final_html_file": "20260526_075326_001_wwe-annunciato-il-ritorno-dei-tornei-king-queen-of-the-ring-a-raw_a8760622_final.html",
+      "metadata_file": "20260526_075326_001_wwe-annunciato-il-ritorno-dei-tornei-king-queen-of-the-ring-a-raw_a8760622_metadata.json"
+    },
+    {
+      "run_id": "2026-05-26 07:52:23",
+      "title": "Roman Reigns chiarisce le conseguenze del Tribal Combat a Clash in Italy",
+      "url": "https://www.ringsidenews.com/roman-reigns-reveals-new-consequences-attached-clash-italy-tribal-combat-match-during-525-raw/",
+      "original_html_file": "20260526_075345_002_roman-reigns-chiarisce-le-conseguenze-del-tribal-combat-a-clash-in-italy_9ab4aa1f_original.html",
+      "final_html_file": "20260526_075345_002_roman-reigns-chiarisce-le-conseguenze-del-tribal-combat-a-clash-in-italy_9ab4aa1f_final.html",
+      "metadata_file": "20260526_075345_002_roman-reigns-chiarisce-le-conseguenze-del-tribal-combat-a-clash-in-italy_9ab4aa1f_metadata.json"
+    },
+    {
+      "run_id": "2026-05-26 07:52:23",
+      "title": "FTR vicini all'anno di opzione contrattuale in AEW: interesse dalla WWE",
+      "url": "https://www.ringsidenews.com/ftr-approaching-aew-contract-option-year-amid-preliminary-wwe-interest/",
+      "original_html_file": "20260526_075418_003_ftr-vicini-all-anno-di-opzione-contrattuale-in-aew-interesse-dalla-wwe_3e2933a9_original.html",
+      "final_html_file": "20260526_075418_003_ftr-vicini-all-anno-di-opzione-contrattuale-in-aew-interesse-dalla-wwe_3e2933a9_final.html",
+      "metadata_file": "20260526_075418_003_ftr-vicini-all-anno-di-opzione-contrattuale-in-aew-interesse-dalla-wwe_3e2933a9_metadata.json"
+    }
+  ]
+}

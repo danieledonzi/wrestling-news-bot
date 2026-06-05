@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-05-20 00:00:36",
+  "bot_version": "v89_editorial_report_quality (69b2396)",
+  "git_sha": "69b23965a776b4fdda121bd26898dc4b3ca6dde6",
+  "created_at": "2026-05-20T00:02:53",
+  "source_title": "Danhausen Becomes One Of WWE's Biggest Success Stories After Rocky Debut",
+  "final_title": "Danhausen: da un debutto difficile al grande successo commerciale in WWE",
+  "source_url": "https://www.ringsidenews.com/danhausen-becomes-one-wwes-biggest-success-stories-rocky-debut/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "danhausen-becomes-one-of-wwes-biggest-success-stories-after-rocky-debut",
+  "story_signature_v71": "stable:danhausen|nick_khan|triple_h|debut|wwe",
+  "refined_score": 100,
+  "refined_reasons": [
+    "WWE/main roster",
+    "nomi forti titolo: danhausen",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "PLE/PPV"
+  ],
+  "blocks_summary": {
+    "text": 9,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260520_000253_001_danhausen-da-un-debutto-difficile-al-grande-successo-commerciale-in-wwe_3493743c_original.html",
+  "final_html_file": "20260520_000253_001_danhausen-da-un-debutto-difficile-al-grande-successo-commerciale-in-wwe_3493743c_final.html",
+  "metadata_file": "20260520_000253_001_danhausen-da-un-debutto-difficile-al-grande-successo-commerciale-in-wwe_3493743c_metadata.json"
+}
