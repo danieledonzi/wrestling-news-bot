@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-05-15 23:46:40",
+  "bot_version": "v88_4_1_canonical_event_dedupe (5fa346a)",
+  "git_sha": "5fa346aa351d299f779aa65cade297af789e0e21",
+  "created_at": "2026-05-15T23:47:44",
+  "source_title": "Judge Allows Plaintiffs To Remain Anonymous In WWE Ring Boy Lawsuit",
+  "final_title": "WWE, caso Ring Boy: i querelanti potranno mantenere l'anonimato",
+  "source_url": "https://www.wrestlinginc.com/2174193/wwe-vince-mcmahon-linda-ring-boy-lawsuit-judge-plaintiffs-anonymous/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "OTHER",
+  "semantic_id": "judge-allows-plaintiffs-to-remain-anonymous-in-wwe-ring-boy-lawsuit",
+  "story_signature_v71": "stable:vince_mcmahon|judge_allows_plaintiffs_to_remain_anonymous_in|wwe_ring_boy_lawsuit|story|wwe",
+  "refined_score": 54,
+  "refined_reasons": [
+    "WWE/main roster",
+    "WWE main roster + storyline/evento",
+    "evento legale/controversia",
+    "v62 evento legale grave",
+    "v62 categoria business",
+    "v88.2 cap OTHER/feature non-news 100->54"
+  ],
+  "blocks_summary": {
+    "text": 6,
+    "image": 1,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260515_234744_001_wwe-caso-ring-boy-i-querelanti-potranno-mantenere-l-anonimato_1a3eaf9f_original.html",
+  "final_html_file": "20260515_234744_001_wwe-caso-ring-boy-i-querelanti-potranno-mantenere-l-anonimato_1a3eaf9f_final.html",
+  "metadata_file": "20260515_234744_001_wwe-caso-ring-boy-i-querelanti-potranno-mantenere-l-anonimato_1a3eaf9f_metadata.json"
+}
