@@ -1,0 +1,603 @@
+{
+  "agent": "Bob",
+  "version": "v93_33_youtube_plain_and_cta_cleanup",
+  "generated_at": "2026-06-05T15:05:04.779986+00:00",
+  "mode": "block_translation_prudent_embed_cleanup",
+  "policy": {
+    "clean_before_gemini": true,
+    "gemini_receives_only_text_units": true,
+    "preserve_sequence_outside_gemini": true,
+    "preserve_embeds_as_plain_url_lines": true,
+    "filter_source_social_bars": true,
+    "filter_author_bios_before_gemini": true,
+    "filter_cta_before_gemini": true,
+    "recover_embeds_from_raw_html": false,
+    "embed_urls_require_post_or_video_shape": true,
+    "preserve_quotes_as_blockquote": "source_blockquote_only",
+    "preserve_tables_as_html_tables": true,
+    "ordered_elements": [
+      "text",
+      "heading",
+      "quote",
+      "table",
+      "image",
+      "embed"
+    ],
+    "model_chain": [
+      "gemini-3.1-flash-lite",
+      "gemini-3-flash-preview",
+      "gemini-2.5-flash-lite",
+      "gemini-2.5-flash"
+    ],
+    "max_articles_per_run": 3,
+    "prompt_family": "v92_historical_natural_full_translation_blocks",
+    "diagnostic_mode": true,
+    "fallback_mode": false,
+    "residual_author_bio_cleanup": true,
+    "generic_ringside_author_bio_cleanup": true,
+    "residual_cta_cleanup": true,
+    "split_inline_quoted_text": false,
+    "source_blockquote_only": true,
+    "move_leading_embeds_after_first_paragraph": true,
+    "unwrap_fake_data_blockquotes": true,
+    "consume_menzo_bob_brief": true,
+    "missing_expected_embed_warning": true
+  },
+  "input": {
+    "menzo_version": "v93_35_medical_brand_ranking",
+    "selected_count": 2
+  },
+  "articles": [
+    {
+      "source_url": "https://www.wrestlinginc.com/2188229/wwe-madrid-rhea-ripley-injured-rumors/",
+      "source": "wrestlinginc",
+      "source_title": "Rumors Coming Out Of WWE Live Event In Madrid Suggest Rhea Ripley Could Be Injured",
+      "category_hint": "WWE",
+      "menzo_score": 87,
+      "status": "ready_for_alfred",
+      "created_at": "2026-06-05T15:04:59.697309+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "fetched_html_chars": 51352,
+      "source_html_contains_embed_hint": true,
+      "meta": {
+        "source_title": "Rumors Coming Out Of WWE Live Event In Madrid Suggest Rhea Ripley Could Be Injured - Wrestling Inc.",
+        "description": "Rhea Ripley looked to have suffered a knee injury during a WWE house show in Madrid, Spain on Thursday.",
+        "featured_image": "https://www.wrestlinginc.com/img/gallery/rumors-coming-out-of-wwe-live-event-in-madrid-suggest-rhea-ripley-could-be-injured/l-intro-1780669743.jpg"
+      },
+      "extraction_diagnostics": {
+        "dom_noise_reduction_enabled": false,
+        "stage": "complete",
+        "global_embed_recovery_enabled": false,
+        "root_name": "article",
+        "root_text_chars": 1975,
+        "candidate_node_count": 16,
+        "raw_element_count": 9,
+        "clean_element_count": 6,
+        "removed_by_node_count": 0,
+        "removed_by_sanitize_count": 3,
+        "table_count": 0,
+        "quote_count": 0,
+        "embed_count": 1
+      },
+      "raw_element_count": 9,
+      "clean_element_count": 6,
+      "translation_unit_count": 5,
+      "removed_before_gemini": 3,
+      "removed_elements_debug": [
+        {
+          "index": 2,
+          "reason": "duplicate_featured_image",
+          "item": {
+            "type": "image",
+            "url": "https://www.wrestlinginc.com/img/gallery/rumors-coming-out-of-wwe-live-event-in-madrid-suggest-rhea-ripley-could-be-injured/intro-1780669743.jpg",
+            "alt": "Rhea Ripley is introduced before her match against Jade Cargill for the WWE Women's Championship during WrestleMania 42"
+          }
+        },
+        {
+          "index": 3,
+          "reason": "duplicate_or_empty_embed",
+          "item": {
+            "type": "embed",
+            "url": "https://x.com/Contralona/status/2062602676349681920",
+            "source_tag": "div"
+          }
+        },
+        {
+          "index": 7,
+          "reason": "duplicate_or_empty_embed",
+          "item": {
+            "type": "embed",
+            "url": "https://x.com/Contralona/status/2062602676349681920",
+            "source_tag": "blockquote"
+          }
+        }
+      ],
+      "raw_elements_preview": [
+        {
+          "type": "embed",
+          "url": "https://x.com/Contralona/status/2062602676349681920",
+          "source_tag": "div",
+          "block_id": "b1"
+        },
+        {
+          "type": "image",
+          "url": "https://www.wrestlinginc.com/img/gallery/rumors-coming-out-of-wwe-live-event-in-madrid-suggest-rhea-ripley-could-be-injured/intro-1780669743.jpg",
+          "alt": "Rhea Ripley is introduced before her match against Jade Cargill for the WWE Women's Championship during WrestleMania 42"
+        },
+        {
+          "type": "embed",
+          "url": "https://x.com/Contralona/status/2062602676349681920",
+          "source_tag": "div"
+        },
+        {
+          "type": "text",
+          "text": "WWE Women's Champion Rhea Ripley has possibly suffered an injury during WWE's European Summer Tour.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "After defeating Jade Cargill to retain her title at Clash In Italy, Ripley was featured on two WWE house shows this week, but last night she didn't lace up her boots when the company travelled to Madrid, Spain due to a potential right knee injury.",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "\"According to reports from #WWEMadrid , @RheaRipley_WWE has appeared with protection on her right knee and has had difficulty getting down from the ring. Let's hope it's nothing for the champion of @wwe .\"",
+          "block_id": "b4"
+        },
+        {
+          "type": "embed",
+          "url": "https://x.com/Contralona/status/2062602676349681920",
+          "source_tag": "blockquote"
+        },
+        {
+          "type": "text",
+          "text": "During WWE's house show in Madrid, Charlotte Flair was ambushed by Fatal Influence, leading both Women's United States Champion Tiffany Stratton and Ripley to make the save. However, Ripley didn't get physical, as she was used as a distraction for Flair and Stratton to fight off Fatal Influence. Over the past three years, Ripley has been unable to escape the injury bug, having broken her nose last November in addition to suffering a AC joint shoulder sprain and a fractured orbital socket in 2024.",
+          "block_id": "b5"
+        },
+        {
+          "type": "text",
+          "text": "Tonight, \"WWE SmackDown\" will take place from Bologna, Italy, and so far, Ripley has yet to be advertised for the show. That said, the Queen Of The Ring tournament will likely continue on Friday's episode, with the winner of the competition earning the opportunity to challenge for a world title. Ripley's tag team partner IYO SKY is the only woman to advance in the tournament so far, as she defeated Giulia, Lash Legend and Roxanne Perez on this past Monday's edition of \"WWE Raw.\"",
+          "block_id": "b6"
+        }
+      ],
+      "elements": [
+        {
+          "type": "embed",
+          "url": "https://x.com/Contralona/status/2062602676349681920",
+          "source_tag": "div",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "WWE Women's Champion Rhea Ripley has possibly suffered an injury during WWE's European Summer Tour.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "After defeating Jade Cargill to retain her title at Clash In Italy, Ripley was featured on two WWE house shows this week, but last night she didn't lace up her boots when the company travelled to Madrid, Spain due to a potential right knee injury.",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "\"According to reports from #WWEMadrid , @RheaRipley_WWE has appeared with protection on her right knee and has had difficulty getting down from the ring. Let's hope it's nothing for the champion of @wwe .\"",
+          "block_id": "b4"
+        },
+        {
+          "type": "text",
+          "text": "During WWE's house show in Madrid, Charlotte Flair was ambushed by Fatal Influence, leading both Women's United States Champion Tiffany Stratton and Ripley to make the save. However, Ripley didn't get physical, as she was used as a distraction for Flair and Stratton to fight off Fatal Influence. Over the past three years, Ripley has been unable to escape the injury bug, having broken her nose last November in addition to suffering a AC joint shoulder sprain and a fractured orbital socket in 2024.",
+          "block_id": "b5"
+        },
+        {
+          "type": "text",
+          "text": "Tonight, \"WWE SmackDown\" will take place from Bologna, Italy, and so far, Ripley has yet to be advertised for the show. That said, the Queen Of The Ring tournament will likely continue on Friday's episode, with the winner of the competition earning the opportunity to challenge for a world title. Ripley's tag team partner IYO SKY is the only woman to advance in the tournament so far, as she defeated Giulia, Lash Legend and Roxanne Perez on this past Monday's edition of \"WWE Raw.\"",
+          "block_id": "b6"
+        }
+      ],
+      "element_counts": {
+        "text": 5,
+        "heading": 0,
+        "quote": 0,
+        "table": 0,
+        "image": 0,
+        "embed": 1
+      },
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2188229/wwe-madrid-rhea-ripley-injured-rumors/\nTitolo feed: Rumors Coming Out Of WWE Live Event In Madrid Suggest Rhea Ripley Could Be Injured\nTitolo pagina: Rumors Coming Out Of WWE Live Event In Madrid Suggest Rhea Ripley Could Be Injured - Wrestling Inc.\nDescrizione: Rhea Ripley looked to have suffered a knee injury during a WWE house show in Madrid, Spain on Thursday.\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"WWE Women's Champion Rhea Ripley has possibly suffered an injury during WWE's European Summer Tour.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"After defeating Jade Cargill to retain her title at Clash In Italy, Ripley was featured on two WWE house shows this week, but last night she didn't lace up her boots when the company travelled to Madrid, Spain due to a potential right knee injury.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"\\\"According to reports from #WWEMadrid , @RheaRipley_WWE has appeared with protection on her right knee and has had difficulty getting down from the ring. Let's hope it's nothing for the champion of @wwe .\\\"\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"During WWE's house show in Madrid, Charlotte Flair was ambushed by Fatal Influence, leading both Women's United States Champion Tiffany Stratton and Ripley to make the save. However, Ripley didn't get physical, as she was used as a distraction for Flair and Stratton to fight off Fatal Influence. Over the past three years, Ripley has been unable to escape the injury bug, having broken her nose last November in addition to suffering a AC joint shoulder sprain and a fractured orbital socket in 2024.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Tonight, \\\"WWE SmackDown\\\" will take place from Bologna, Italy, and so far, Ripley has yet to be advertised for the show. That said, the Queen Of The Ring tournament will likely continue on Friday's episode, with the winner of the competition earning the opportunity to challenge for a world title. Ripley's tag team partner IYO SKY is the only woman to advance in the tournament so far, as she defeated Giulia, Lash Legend and Roxanne Perez on this past Monday's edition of \\\"WWE Raw.\\\"\"\n  }\n]\n",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_used": true,
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Possibile infortunio per Rhea Ripley durante il tour WWE in Spagna\",\n  \"excerpt_it\": \"Rhea Ripley sembra aver subito un infortunio al ginocchio durante un house show della WWE tenutosi giovedì a Madrid.\",\n  \"translations\": {\n    \"b2\": \"La campionessa femminile della WWE, Rhea Ripley, potrebbe aver subito un infortunio nel corso del tour estivo europeo della federazione.\",\n    \"b3\": \"Dopo aver sconfitto Jade Cargill mantenendo il titolo a Clash In Italy, la Ripley è stata impegnata in due house show questa settimana; tuttavia, ieri sera, in occasione della tappa di Madrid, non è salita sul ring a causa di un potenziale infortunio al ginocchio destro.\",\n    \"b4\": \"\\\"Secondo i resoconti da #WWEMadrid, @RheaRipley_WWE si è presentata con una protezione al ginocchio destro e ha avuto difficoltà a scendere dal ring. Speriamo non sia nulla di grave per la campionessa della @wwe.\\\"\",\n    \"b5\": \"Durante l'house show di Madrid, Charlotte Flair è stata attaccata dalla Fatal Influence, portando la campionessa degli Stati Uniti Tiffany Stratton e la stessa Ripley a intervenire per salvarla. La Ripley, tuttavia, non è stata coinvolta fisicamente, fungendo solo da distrazione per permettere alla Flair e alla Stratton di respingere le avversarie. Negli ultimi tre anni, la Ripley non è riuscita a evitare gli infortuni: oltre al naso rotto lo scorso novembre, nel 2024 ha riportato una distorsione all'articolazione acromion-claveare della spalla e una frattura dell'orbita oculare.\",\n    \"b6\": \"Stasera \\\"WWE SmackDown\\\" si terrà a Bologna e, finora, la presenza della Ripley non è stata pubblicizzata. Detto ciò, il torneo Queen Of The Ring proseguirà probabilmente nell'episodio di venerdì, con la vincitrice che guadagnerà l'opportunità di sfidare una campionessa mondiale. IYO SKY, compagna di tag team della Ripley, è l'unica ad essersi qualificata finora, avendo battuto Giulia, Lash Legend e Roxanne Perez nell'ultima puntata di \\\"WWE Raw\\\".\"\n  },\n  \"notes\": []\n}",
+      "title_it": "Possibile infortunio per Rhea Ripley durante il tour WWE in Spagna",
+      "body_html": "<p>La campionessa femminile della WWE, Rhea Ripley, potrebbe aver subito un infortunio nel corso del tour estivo europeo della federazione.</p>\nhttps://x.com/Contralona/status/2062602676349681920\n\n<p>Dopo aver sconfitto Jade Cargill mantenendo il titolo a Clash In Italy, la Ripley è stata impegnata in due house show questa settimana; tuttavia, ieri sera, in occasione della tappa di Madrid, non è salita sul ring a causa di un potenziale infortunio al ginocchio destro.</p>\n<p>&quot;Secondo i resoconti da #WWEMadrid, @RheaRipley_WWE si è presentata con una protezione al ginocchio destro e ha avuto difficoltà a scendere dal ring. Speriamo non sia nulla di grave per la campionessa della @wwe.&quot;</p>\n<p>Durante l&#x27;house show di Madrid, Charlotte Flair è stata attaccata dalla Fatal Influence, portando la campionessa degli Stati Uniti Tiffany Stratton e la stessa Ripley a intervenire per salvarla. La Ripley, tuttavia, non è stata coinvolta fisicamente, fungendo solo da distrazione per permettere alla Flair e alla Stratton di respingere le avversarie. Negli ultimi tre anni, la Ripley non è riuscita a evitare gli infortuni: oltre al naso rotto lo scorso novembre, nel 2024 ha riportato una distorsione all&#x27;articolazione acromion-claveare della spalla e una frattura dell&#x27;orbita oculare.</p>\n<p>Stasera &quot;WWE SmackDown&quot; si terrà a Bologna e, finora, la presenza della Ripley non è stata pubblicizzata. Detto ciò, il torneo Queen Of The Ring proseguirà probabilmente nell&#x27;episodio di venerdì, con la vincitrice che guadagnerà l&#x27;opportunità di sfidare una campionessa mondiale. IYO SKY, compagna di tag team della Ripley, è l&#x27;unica ad essersi qualificata finora, avendo battuto Giulia, Lash Legend e Roxanne Perez nell&#x27;ultima puntata di &quot;WWE Raw&quot;.</p>",
+      "excerpt_it": "Rhea Ripley sembra aver subito un infortunio al ginocchio durante un house show della WWE tenutosi giovedì a Madrid.",
+      "bob_notes": [],
+      "translation_missing_units": [],
+      "editorial_changes": [
+        {
+          "code": "leading_embed_moved_after_first_paragraph",
+          "severity": "info",
+          "message": "Embed iniziale spostato dopo il primo paragrafo.",
+          "evidence": "https://x.com/Contralona/status/2062602676349681920"
+        }
+      ],
+      "diagnostic_warnings": [],
+      "bob_brief": {
+        "expected_embeds": [
+          "video"
+        ],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "possible_noise": [
+          "author_bio",
+          "cta",
+          "source_social_bar"
+        ],
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "source_specific_notes": "Verifica se ci sono testimonianze video dai fan presenti a Madrid."
+      },
+      "menzo_ai_review": {
+        "id": "c1",
+        "decision": "selected",
+        "priority": 10,
+        "category_hint": "WWE",
+        "article_type": "hard_news",
+        "event_key": "rhea_ripley_injury",
+        "duplicate_of": "",
+        "editorial_reason": "Notizia di primaria importanza per il roster femminile WWE, impatto immediato sulle storyline.",
+        "bob_brief": {
+          "expected_embeds": [
+            "video"
+          ],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "possible_noise": [
+            "author_bio",
+            "cta",
+            "source_social_bar"
+          ],
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "source_specific_notes": "Verifica se ci sono testimonianze video dai fan presenti a Madrid."
+        },
+        "priority_label": "medium"
+      },
+      "ai_editorial_reason": "Notizia di primaria importanza per il roster femminile WWE, impatto immediato sulle storyline.",
+      "ai_priority_label": "medium"
+    },
+    {
+      "source_url": "https://www.ringsidenews.com/aew-lands-new-pay-per-view-distribution-deal-produce-wrestling/",
+      "source": "ringsidenews",
+      "source_title": "AEW Lands New Pay-Per-View Distribution Deal With PRODUCE Wrestling",
+      "category_hint": "AEW",
+      "menzo_score": 80,
+      "status": "ready_for_alfred",
+      "created_at": "2026-06-05T15:05:01.693977+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "fetched_html_chars": 534560,
+      "source_html_contains_embed_hint": true,
+      "meta": {
+        "source_title": "AEW Lands New Pay-Per-View Distribution Deal With PRODUCE Wrestling",
+        "description": "MyAEW is adding more wrestling content to its pay-per-view lineup. PRODUCE Wrestling announced that it has signed a pay-per-view distribution deal with",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/aew-lands-new-pay-per-view-distribution-deal-with-produce-wrestling-51.jpg"
+      },
+      "extraction_diagnostics": {
+        "dom_noise_reduction_enabled": false,
+        "stage": "complete",
+        "global_embed_recovery_enabled": false,
+        "root_name": "article",
+        "root_text_chars": 2936,
+        "candidate_node_count": 93,
+        "raw_element_count": 12,
+        "clean_element_count": 11,
+        "removed_by_node_count": 13,
+        "removed_by_sanitize_count": 1,
+        "table_count": 0,
+        "quote_count": 1,
+        "embed_count": 1
+      },
+      "raw_element_count": 12,
+      "clean_element_count": 11,
+      "translation_unit_count": 9,
+      "removed_before_gemini": 14,
+      "removed_elements_debug": [
+        {
+          "node_index": 70,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
+          "text_preview": "Spotlight"
+        },
+        {
+          "node_index": 74,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2197963 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news tag-aew-featured   ",
+          "text_preview": "AEW News Two Talents Gone from AEW After Contracts Expire"
+        },
+        {
+          "node_index": 77,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "Two Talents Gone from AEW After Contracts Expire"
+        },
+        {
+          "node_index": 78,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 79,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2197914 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news tag-aew-featured tag-will-ospreay   ",
+          "text_preview": "AEW News Will Ospreay Fires Back at Claim Mask vs. Mask Match Overshadows His Career"
+        },
+        {
+          "node_index": 82,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "Will Ospreay Fires Back at Claim Mask vs. Mask Match Overshadows His Career"
+        },
+        {
+          "node_index": 83,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 84,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2197883 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
+          "text_preview": "WWE News WWE Issues Rules For Ring Gear Approval"
+        },
+        {
+          "node_index": 87,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "WWE Issues Rules For Ring Gear Approval"
+        },
+        {
+          "node_index": 88,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 89,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2197784 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news tag-aew-featured tag-mick-foley   ",
+          "text_preview": "AEW News Mick Foley’s Final Match Could Be in AEW"
+        },
+        {
+          "node_index": 92,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "Mick Foley’s Final Match Could Be in AEW"
+        },
+        {
+          "node_index": 93,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "index": 12,
+          "reason": "footer_start",
+          "item": {
+            "type": "text",
+            "text": "Spotlight AEW News Two Talents Gone from AEW After Contracts Expire AEW News Will Ospreay Fires Back at Claim Mask vs. Mask Match Overshadows His Career WWE News WWE Issues Rules For Ring Gear Approval AEW News Mick Foley’s Final Match Could Be in AEW"
+          }
+        }
+      ],
+      "raw_elements_preview": [
+        {
+          "type": "text",
+          "text": "MyAEW is adding more wrestling content to its pay-per-view lineup.",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "PRODUCE Wrestling announced that it has signed a pay-per-view distribution deal with MyAEW, meaning the promotion’s full summer series will stream live globally through MyAEW.com and the MyAEW app.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "The deal kicks off with PRODUCE’s debut event, Volume 1 — The Octopus, on June 29 at Pioneer Works in Brooklyn, New York. The show will feature a live musical performance from Abel Ferrara, along with a major main event between former ROH World Champion Jonathan Gresham and Japanese technician Fuminori Abe.",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "Each PRODUCE supercard will be available for $14.95, while fans can also buy all six shows with a $50 season pass. PRODUCE founder and creative director Adam Abdalla said the partnership gives the company a strong platform for its vision.",
+          "block_id": "b4"
+        },
+        {
+          "type": "quote",
+          "text": "“We’re honored to bring PRODUCE PPVs to MyAEW. Like Tony Khan, we believe in the artistic spirit of professional wrestlers. I couldn’t think of a better partner to share our unique vision for the sport with the best fans in the world.”",
+          "source_tag": "blockquote",
+          "block_id": "b5"
+        },
+        {
+          "type": "text",
+          "text": "The promotion is also taking a different approach to its events. Each edition of PRODUCE is co-produced by an active wrestler, who helps shape the card while mixing wrestling with music, art, and film.",
+          "block_id": "b6"
+        },
+        {
+          "type": "text",
+          "text": "Future PRODUCE events will include shows co-produced by Lee Moriarty and Rocky Romero. Moriarty’s Volume 2 — TAIGASTYLE is set for July 16 in Jersey City, while Romero’s Volume 3 — Azúcar will take place August 3 in Brooklyn.",
+          "block_id": "b7"
+        },
+        {
+          "type": "text",
+          "text": "The opening show, Volume 1 — The Octopus, will also feature Deonna Purrazzo, Zack Sabre Jr., Joey Janela, Effy, Mance Warner, Steph De Lander, “Hot Sauce” Tracy Williams, LaBron Kozone, Mad Dog Connelly, Amazing Red, and more.",
+          "block_id": "b8"
+        },
+        {
+          "type": "text",
+          "text": "This gives MyAEW another live wrestling property as the platform continues building out its streaming slate. PRODUCE is clearly trying to stand apart from the usual independent wrestling setup, and now it has a major pay-per-view home for its full summer run.",
+          "block_id": "b9"
+        },
+        {
+          "type": "embed",
+          "url": "https://x.com/stevecarrier_/status/2062908085992128903",
+          "source_tag": "div",
+          "block_id": "b10"
+        },
+        {
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/2024/01/avatar_user_1_1704158183-96x96.jpg",
+          "alt": "Steve Carrier",
+          "block_id": "b11"
+        },
+        {
+          "type": "text",
+          "text": "Spotlight AEW News Two Talents Gone from AEW After Contracts Expire AEW News Will Ospreay Fires Back at Claim Mask vs. Mask Match Overshadows His Career WWE News WWE Issues Rules For Ring Gear Approval AEW News Mick Foley’s Final Match Could Be in AEW"
+        }
+      ],
+      "elements": [
+        {
+          "type": "text",
+          "text": "MyAEW is adding more wrestling content to its pay-per-view lineup.",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "PRODUCE Wrestling announced that it has signed a pay-per-view distribution deal with MyAEW, meaning the promotion’s full summer series will stream live globally through MyAEW.com and the MyAEW app.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "The deal kicks off with PRODUCE’s debut event, Volume 1 — The Octopus, on June 29 at Pioneer Works in Brooklyn, New York. The show will feature a live musical performance from Abel Ferrara, along with a major main event between former ROH World Champion Jonathan Gresham and Japanese technician Fuminori Abe.",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "Each PRODUCE supercard will be available for $14.95, while fans can also buy all six shows with a $50 season pass. PRODUCE founder and creative director Adam Abdalla said the partnership gives the company a strong platform for its vision.",
+          "block_id": "b4"
+        },
+        {
+          "type": "quote",
+          "text": "“We’re honored to bring PRODUCE PPVs to MyAEW. Like Tony Khan, we believe in the artistic spirit of professional wrestlers. I couldn’t think of a better partner to share our unique vision for the sport with the best fans in the world.”",
+          "source_tag": "blockquote",
+          "block_id": "b5"
+        },
+        {
+          "type": "text",
+          "text": "The promotion is also taking a different approach to its events. Each edition of PRODUCE is co-produced by an active wrestler, who helps shape the card while mixing wrestling with music, art, and film.",
+          "block_id": "b6"
+        },
+        {
+          "type": "text",
+          "text": "Future PRODUCE events will include shows co-produced by Lee Moriarty and Rocky Romero. Moriarty’s Volume 2 — TAIGASTYLE is set for July 16 in Jersey City, while Romero’s Volume 3 — Azúcar will take place August 3 in Brooklyn.",
+          "block_id": "b7"
+        },
+        {
+          "type": "text",
+          "text": "The opening show, Volume 1 — The Octopus, will also feature Deonna Purrazzo, Zack Sabre Jr., Joey Janela, Effy, Mance Warner, Steph De Lander, “Hot Sauce” Tracy Williams, LaBron Kozone, Mad Dog Connelly, Amazing Red, and more.",
+          "block_id": "b8"
+        },
+        {
+          "type": "text",
+          "text": "This gives MyAEW another live wrestling property as the platform continues building out its streaming slate. PRODUCE is clearly trying to stand apart from the usual independent wrestling setup, and now it has a major pay-per-view home for its full summer run.",
+          "block_id": "b9"
+        },
+        {
+          "type": "embed",
+          "url": "https://x.com/stevecarrier_/status/2062908085992128903",
+          "source_tag": "div",
+          "block_id": "b10"
+        },
+        {
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/2024/01/avatar_user_1_1704158183-96x96.jpg",
+          "alt": "Steve Carrier",
+          "block_id": "b11"
+        }
+      ],
+      "element_counts": {
+        "text": 8,
+        "heading": 0,
+        "quote": 1,
+        "table": 0,
+        "image": 1,
+        "embed": 1
+      },
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/aew-lands-new-pay-per-view-distribution-deal-produce-wrestling/\nTitolo feed: AEW Lands New Pay-Per-View Distribution Deal With PRODUCE Wrestling\nTitolo pagina: AEW Lands New Pay-Per-View Distribution Deal With PRODUCE Wrestling\nDescrizione: MyAEW is adding more wrestling content to its pay-per-view lineup. PRODUCE Wrestling announced that it has signed a pay-per-view distribution deal with\nCategoria suggerita: AEW\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"MyAEW is adding more wrestling content to its pay-per-view lineup.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"PRODUCE Wrestling announced that it has signed a pay-per-view distribution deal with MyAEW, meaning the promotion’s full summer series will stream live globally through MyAEW.com and the MyAEW app.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"The deal kicks off with PRODUCE’s debut event, Volume 1 — The Octopus, on June 29 at Pioneer Works in Brooklyn, New York. The show will feature a live musical performance from Abel Ferrara, along with a major main event between former ROH World Champion Jonathan Gresham and Japanese technician Fuminori Abe.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Each PRODUCE supercard will be available for $14.95, while fans can also buy all six shows with a $50 season pass. PRODUCE founder and creative director Adam Abdalla said the partnership gives the company a strong platform for its vision.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"“We’re honored to bring PRODUCE PPVs to MyAEW. Like Tony Khan, we believe in the artistic spirit of professional wrestlers. I couldn’t think of a better partner to share our unique vision for the sport with the best fans in the world.”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"The promotion is also taking a different approach to its events. Each edition of PRODUCE is co-produced by an active wrestler, who helps shape the card while mixing wrestling with music, art, and film.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"Future PRODUCE events will include shows co-produced by Lee Moriarty and Rocky Romero. Moriarty’s Volume 2 — TAIGASTYLE is set for July 16 in Jersey City, while Romero’s Volume 3 — Azúcar will take place August 3 in Brooklyn.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"The opening show, Volume 1 — The Octopus, will also feature Deonna Purrazzo, Zack Sabre Jr., Joey Janela, Effy, Mance Warner, Steph De Lander, “Hot Sauce” Tracy Williams, LaBron Kozone, Mad Dog Connelly, Amazing Red, and more.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"This gives MyAEW another live wrestling property as the platform continues building out its streaming slate. PRODUCE is clearly trying to stand apart from the usual independent wrestling setup, and now it has a major pay-per-view home for its full summer run.\"\n  }\n]\n",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_used": true,
+      "translation_raw_response_preview": "{\n  \"title_it\": \"AEW sigla un accordo per la distribuzione in pay-per-view con PRODUCE Wrestling\",\n  \"excerpt_it\": \"MyAEW arricchisce la propria offerta in pay-per-view grazie a una nuova partnership con la promotion PRODUCE Wrestling.\",\n  \"translations\": {\n    \"b1\": \"MyAEW arricchisce la propria offerta di contenuti wrestling in pay-per-view.\",\n    \"b2\": \"PRODUCE Wrestling ha annunciato la firma di un accordo di distribuzione in pay-per-view con MyAEW: l'intera serie estiva della promotion sarà trasmessa in diretta streaming a livello globale su MyAEW.com e tramite l'app MyAEW.\",\n    \"b3\": \"L'accordo prenderà il via il 29 giugno con l'evento di debutto di PRODUCE, Volume 1 — The Octopus, che si terrà al Pioneer Works di Brooklyn, New York. Lo show includerà un'esibizione musicale dal vivo di Abel Ferrara e un importante main event tra l'ex ROH World Champion Jonathan Gresham e il tecnico giapponese Fuminori Abe.\",\n    \"b4\": \"Ogni supercard di PRODUCE sarà disponibile al costo di 14,95 dollari, mentre i fan potranno acquistare l'intero pacchetto di sei show tramite un season pass da 50 dollari. Adam Abdalla, fondatore e direttore creativo di PRODUCE, ha dichiarato che la partnership fornisce alla compagnia una solida piattaforma per la propria visione.\",\n    \"b5\": \"“Siamo onorati di portare i PPV di PRODUCE su MyAEW. Proprio come Tony Khan, crediamo nello spirito artistico dei wrestler professionisti. Non avrei potuto immaginare un partner migliore con cui condividere la nostra visione unica di questo sport insieme ai migliori fan del mondo.”\",\n    \"b6\": \"La promotion sta adottando un approccio inedito per i propri eventi. Ogni edizione di PRODUCE è co-prodotta da un wrestler in attività, che contribuisce a definire la card fondendo il wrestling con musica, arte e cinema.\",\n    \"b7\": \"I futuri eventi di PRODUCE includeranno show co-prodotti da Lee Moriarty e Rocky Romero. Volume 2 — TAIGASTYLE di Moriarty è in programma per il 16 luglio a Jersey City, mentre Volume 3 — Azúcar di Romero si terrà il 3 agosto a Brooklyn.\",\n    \"b8\": \"Lo show d'apertura, Volume 1 — The Octopus, vedrà la partecipazione anche di Deonna Purrazzo, Zack Sabre Jr., Joey Janela, Effy, Mance Warner, Steph De Lander, “Hot Sauce” Tracy Williams, LaBron Kozone, Mad Dog Connelly, Amazing Red e molti altri.\",\n    \"b9\": \"Con questa mossa, MyAEW acquisisce un'ulteriore proprietà di wrestling dal vivo, proseguendo nell'ampliamento del proprio palinsesto streaming. PRODUCE punta chiaramente a distinguersi dal classico panorama indipendente e, da oggi, dispone di una piattaforma di rilievo per la distribuzione in pay-per-view dell'intera programmazione estiva.\"\n  },\n  \"notes\": []\n}",
+      "title_it": "AEW sigla un accordo per la distribuzione in pay-per-view con PRODUCE Wrestling",
+      "body_html": "<p>MyAEW arricchisce la propria offerta di contenuti wrestling in pay-per-view.</p>\n<p>PRODUCE Wrestling ha annunciato la firma di un accordo di distribuzione in pay-per-view con MyAEW: l&#x27;intera serie estiva della promotion sarà trasmessa in diretta streaming a livello globale su MyAEW.com e tramite l&#x27;app MyAEW.</p>\n<p>L&#x27;accordo prenderà il via il 29 giugno con l&#x27;evento di debutto di PRODUCE, Volume 1 — The Octopus, che si terrà al Pioneer Works di Brooklyn, New York. Lo show includerà un&#x27;esibizione musicale dal vivo di Abel Ferrara e un importante main event tra l&#x27;ex ROH World Champion Jonathan Gresham e il tecnico giapponese Fuminori Abe.</p>\n<p>Ogni supercard di PRODUCE sarà disponibile al costo di 14,95 dollari, mentre i fan potranno acquistare l&#x27;intero pacchetto di sei show tramite un season pass da 50 dollari. Adam Abdalla, fondatore e direttore creativo di PRODUCE, ha dichiarato che la partnership fornisce alla compagnia una solida piattaforma per la propria visione.</p>\n<blockquote>“Siamo onorati di portare i PPV di PRODUCE su MyAEW. Proprio come Tony Khan, crediamo nello spirito artistico dei wrestler professionisti. Non avrei potuto immaginare un partner migliore con cui condividere la nostra visione unica di questo sport insieme ai migliori fan del mondo.”</blockquote>\n<p>La promotion sta adottando un approccio inedito per i propri eventi. Ogni edizione di PRODUCE è co-prodotta da un wrestler in attività, che contribuisce a definire la card fondendo il wrestling con musica, arte e cinema.</p>\n<p>I futuri eventi di PRODUCE includeranno show co-prodotti da Lee Moriarty e Rocky Romero. Volume 2 — TAIGASTYLE di Moriarty è in programma per il 16 luglio a Jersey City, mentre Volume 3 — Azúcar di Romero si terrà il 3 agosto a Brooklyn.</p>\n<p>Lo show d&#x27;apertura, Volume 1 — The Octopus, vedrà la partecipazione anche di Deonna Purrazzo, Zack Sabre Jr., Joey Janela, Effy, Mance Warner, Steph De Lander, “Hot Sauce” Tracy Williams, LaBron Kozone, Mad Dog Connelly, Amazing Red e molti altri.</p>\n<p>Con questa mossa, MyAEW acquisisce un&#x27;ulteriore proprietà di wrestling dal vivo, proseguendo nell&#x27;ampliamento del proprio palinsesto streaming. PRODUCE punta chiaramente a distinguersi dal classico panorama indipendente e, da oggi, dispone di una piattaforma di rilievo per la distribuzione in pay-per-view dell&#x27;intera programmazione estiva.</p>\n\nhttps://x.com/stevecarrier_/status/2062908085992128903\n\n<!--IMAGE:https://www.ringsidenews.com/wp-content/uploads/2024/01/avatar_user_1_1704158183-96x96.jpg-->",
+      "excerpt_it": "MyAEW arricchisce la propria offerta in pay-per-view grazie a una nuova partnership con la promotion PRODUCE Wrestling.",
+      "bob_notes": [],
+      "translation_missing_units": [],
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "possible_noise": [
+          "author_bio",
+          "cta"
+        ],
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "source_specific_notes": "Focus sui dettagli del deal commerciale."
+      },
+      "menzo_ai_review": {
+        "id": "c3",
+        "decision": "selected",
+        "priority": 7,
+        "category_hint": "AEW",
+        "article_type": "business_legal",
+        "event_key": "aew_distribution_deal",
+        "duplicate_of": "",
+        "editorial_reason": "Accordo di distribuzione PPV importante per il mercato internazionale AEW.",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "possible_noise": [
+            "author_bio",
+            "cta"
+          ],
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "source_specific_notes": "Focus sui dettagli del deal commerciale."
+        },
+        "priority_label": "medium"
+      },
+      "ai_editorial_reason": "Accordo di distribuzione PPV importante per il mercato internazionale AEW.",
+      "ai_priority_label": "medium"
+    }
+  ],
+  "handoff": {
+    "ready_for_alfred": 2,
+    "translation_pending": 0,
+    "errors": 0,
+    "extraction_empty": 0
+  },
+  "postprocess": {
+    "bob_v93_33_changes": 1,
+    "bob_v93_16_changes": 1,
+    "bob_brief_warnings_added": 0
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "run_id": "2026-05-21 10:37:43",
+  "bot_version": "v90_1_quality_correctness (c5136fb)",
+  "git_sha": "c5136fb78e3e5e272f8d7bda959fdc6e02e92ed6",
+  "created_at": "2026-05-21T10:39:09",
+  "source_title": "Baron Corbin Mocks Claims He Wrapped Up Outside Commitments Amid WWE Return Rumors",
+  "final_title": "Baron Corbin ironizza sulle voci di un suo possibile ritorno in WWE",
+  "source_url": "https://www.ringsidenews.com/baron-corbin-mocks-claims-he-wrapped-outside-commitments-amid-wwe-return-rumors/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "RUMOR",
+  "semantic_id": "baron-corbin-mocks-claims-he-wrapped-up-outside-commitments-amid-wwe-return-rumors",
+  "story_signature_v71": "stable:dave_meltzer|baron_corbin_mocks_claims_he_wrapped_up_outside_commitments_|wwe_return_rumors|status|wwe",
+  "refined_score": 68,
+  "refined_reasons": [
+    "WWE/main roster",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "PLE/PPV",
+    "v62 ritorno/debutto",
+    "v86.9 cap commentary/opinion 100->68"
+  ],
+  "blocks_summary": {
+    "text": 12,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [
+    "https://twitter.com/TomPestock/status/2057300970619514986"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260521_103909_001_baron-corbin-ironizza-sulle-voci-di-un-suo-possibile-ritorno-in-wwe_1e0d89bc_original.html",
+  "final_html_file": "20260521_103909_001_baron-corbin-ironizza-sulle-voci-di-un-suo-possibile-ritorno-in-wwe_1e0d89bc_final.html",
+  "metadata_file": "20260521_103909_001_baron-corbin-ironizza-sulle-voci-di-un-suo-possibile-ritorno-in-wwe_1e0d89bc_metadata.json"
+}
