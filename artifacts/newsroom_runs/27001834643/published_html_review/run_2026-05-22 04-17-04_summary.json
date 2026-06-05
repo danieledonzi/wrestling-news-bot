@@ -1,0 +1,32 @@
+{
+  "run_id": "2026-05-22 04:17:04",
+  "bot_version": "v90_2_editorial_pacing_update_gate (792e2fb)",
+  "git_sha": "792e2fbda87a89406034e8cdbe6a7175d63a461f",
+  "published_items_count": 3,
+  "items": [
+    {
+      "run_id": "2026-05-22 04:17:04",
+      "title": "TNA Impact: Mustafa Ali difende il titolo X-Division contro Starboy Charlie",
+      "url": "https://www.wrestlinginc.com/2179143/tna-impact-mustafa-ali-starboy-charlie-international-championship-open-challenge-reta/",
+      "original_html_file": "20260522_041757_001_tna-impact-mustafa-ali-difende-il-titolo-x-division-contro-starboy-charlie_92f40b2a_original.html",
+      "final_html_file": "20260522_041757_001_tna-impact-mustafa-ali-difende-il-titolo-x-division-contro-starboy-charlie_92f40b2a_final.html",
+      "metadata_file": "20260522_041757_001_tna-impact-mustafa-ali-difende-il-titolo-x-division-contro-starboy-charlie_92f40b2a_metadata.json"
+    },
+    {
+      "run_id": "2026-05-22 04:17:04",
+      "title": "Ethan Page parla della collaborazione tra WWE e AAA e di una possibile reunion con Chelsea Green",
+      "url": "https://www.wrestlinginc.com/2175844/wwe-aaa-ethan-page-chelsea-green-partnership-reunion/",
+      "original_html_file": "20260522_041820_002_ethan-page-parla-della-collaborazione-tra-wwe-e-aaa-e-di-una-possibile-reunion-c_0046ed71_original.html",
+      "final_html_file": "20260522_041820_002_ethan-page-parla-della-collaborazione-tra-wwe-e-aaa-e-di-una-possibile-reunion-c_0046ed71_final.html",
+      "metadata_file": "20260522_041820_002_ethan-page-parla-della-collaborazione-tra-wwe-e-aaa-e-di-una-possibile-reunion-c_0046ed71_metadata.json"
+    },
+    {
+      "run_id": "2026-05-22 04:17:04",
+      "title": "Grave problema audio durante la diretta di JCW Lunacy",
+      "url": "https://www.ringsidenews.com/jcw-lunacy-experiencing-major-audio-issues-during-live-broadcast/",
+      "original_html_file": "20260522_041848_003_grave-problema-audio-durante-la-diretta-di-jcw-lunacy_3e896836_original.html",
+      "final_html_file": "20260522_041848_003_grave-problema-audio-durante-la-diretta-di-jcw-lunacy_3e896836_final.html",
+      "metadata_file": "20260522_041848_003_grave-problema-audio-durante-la-diretta-di-jcw-lunacy_3e896836_metadata.json"
+    }
+  ]
+}

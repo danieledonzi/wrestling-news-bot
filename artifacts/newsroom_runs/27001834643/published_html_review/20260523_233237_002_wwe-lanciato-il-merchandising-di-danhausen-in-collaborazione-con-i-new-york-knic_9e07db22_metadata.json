@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-05-23 23:28:40",
+  "bot_version": "v90_2_5_1_processed_skip_recorder (5b27d65)",
+  "git_sha": "5b27d65144fd8e591d39153ced464ade08699878",
+  "created_at": "2026-05-23T23:32:37",
+  "source_title": "WWE Drops Danhausen x New York Knicks Merch After Team's Playoff Surge",
+  "final_title": "WWE: lanciato il merchandising di Danhausen in collaborazione con i New York Knicks",
+  "source_url": "https://www.ringsidenews.com/wwe-drops-danhausen-x-new-york-knicks-merch-teams-playoff-surge/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "wwe-drops-danhausen-x-new-york-knicks-merch-after-teams-playoff-surge",
+  "story_signature_v71": "stable:danhausen|wwe_drops_danhausen|new_york_knicks_merch_after_team|status|wwe",
+  "refined_score": 92,
+  "refined_reasons": [
+    "WWE/main roster",
+    "nomi forti titolo: danhausen",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "release/addio",
+    "PLE/PPV"
+  ],
+  "blocks_summary": {
+    "text": 11,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260523_233237_002_wwe-lanciato-il-merchandising-di-danhausen-in-collaborazione-con-i-new-york-knic_9e07db22_original.html",
+  "final_html_file": "20260523_233237_002_wwe-lanciato-il-merchandising-di-danhausen-in-collaborazione-con-i-new-york-knic_9e07db22_final.html",
+  "metadata_file": "20260523_233237_002_wwe-lanciato-il-merchandising-di-danhausen-in-collaborazione-con-i-new-york-knic_9e07db22_metadata.json"
+}
