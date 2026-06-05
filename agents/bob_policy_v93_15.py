@@ -14,7 +14,7 @@ ARTIFACT_DIR = ROOT / "artifacts" / "newsroom"
 BOB_ARTICLES_FILE = NEWSROOM_STATE_DIR / "bob_articles_latest.json"
 ARTIFACT_BOB_FILE = ARTIFACT_DIR / "bob_articles.json"
 
-VERSION = "v93_28_generic_author_bio_exclusions"
+VERSION = "v93_33_youtube_plain_and_cta_cleanup"
 
 RESIDUAL_BIO_PATTERNS = [
     # Known Ringside boilerplate authors.
@@ -37,6 +37,11 @@ RESIDUAL_BIO_PATTERNS = [
 CTA_PATTERNS = [
     re.compile(r"\bfateci\s+sapere\b|\bdicci\s+la\s+tua\b|\bcosa\s+ne\s+pensate\b", re.I),
     re.compile(r"\bcommenti\s+qui\s+sotto\b|\blascia\s+un\s+commento\b", re.I),
+    re.compile(r"\bpensi\s+che\b.*\b(d[iì]\s+la\s+tua|commenti|nei\s+commenti)\b", re.I),
+    re.compile(r"\bche\s+ne\s+pensi\b.*\b(commenti|facci\s+sapere|dicci)\b", re.I),
+    re.compile(r"\b(drop|leave)\s+(your\s+)?(thoughts|comments?)\b.*\bcomments?\b", re.I),
+    re.compile(r"\blet\s+us\s+know\b.*\bcomments?\b", re.I),
+    re.compile(r"\bsound\s+off\b.*\bcomments?\b", re.I),
 ]
 P_RE = re.compile(r"<p>(.*?)</p>", re.S | re.I)
 BLOCKQUOTE_RE = re.compile(r"<blockquote>(.*?)</blockquote>", re.S | re.I)
@@ -126,7 +131,7 @@ def postprocess_body(body_html: str) -> tuple[str, list[dict[str, str]]]:
         inner = match.group(1)
         remove_reason = should_remove_paragraph(inner)
         if remove_reason:
-            changes.append({"code": remove_reason, "severity": "info", "message": "Paragrafo residuo rimosso da Bob v93.28.", "evidence": clean_text(inner)[:300]})
+            changes.append({"code": remove_reason, "severity": "info", "message": "Paragrafo residuo rimosso da Bob v93.33.", "evidence": clean_text(inner)[:300]})
             return ""
         # v93.27+: do not split inline quotation marks into blockquotes.
         # Only blocks that were already <blockquote> in the source remain styled as quotes.
@@ -152,14 +157,15 @@ def run_bob(menzo_decision: dict[str, Any] | None = None) -> dict[str, Any]:
     result["version"] = VERSION
     result.setdefault("policy", {})["residual_author_bio_cleanup"] = True
     result.setdefault("policy", {})["generic_ringside_author_bio_cleanup"] = True
+    result.setdefault("policy", {})["residual_cta_cleanup"] = True
     result.setdefault("policy", {})["split_inline_quoted_text"] = False
     result.setdefault("policy", {})["source_blockquote_only"] = True
     result.setdefault("policy", {})["move_leading_embeds_after_first_paragraph"] = True
     result.setdefault("policy", {})["unwrap_fake_data_blockquotes"] = True
-    result.setdefault("postprocess", {})["bob_v93_28_changes"] = total_changes
+    result.setdefault("postprocess", {})["bob_v93_33_changes"] = total_changes
     # Backward-compatible metric used by the master log.
     result.setdefault("postprocess", {})["bob_v93_16_changes"] = total_changes
     write_json(ARTIFACT_BOB_FILE, result)
     write_json(BOB_ARTICLES_FILE, result)
-    print(f"[BOB v93.28] Cleanup finale applicato | changes={total_changes}", flush=True)
+    print(f"[BOB v93.33] Cleanup finale applicato | changes={total_changes}", flush=True)
     return result
