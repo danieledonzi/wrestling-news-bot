@@ -1,0 +1,39 @@
+{
+  "run_id": "2026-05-20 17:39:50",
+  "bot_version": "v90_1_quality_correctness (132eb51)",
+  "git_sha": "132eb518c1ef3224acb37a49e50c77568f44a770",
+  "created_at": "2026-05-20T17:40:29",
+  "source_title": "Former WWE Star Spotted At Performance Center Ahead of Tuesday's NXT",
+  "final_title": "Enzo Amore avvistato al WWE Performance Center prima di NXT",
+  "source_url": "https://www.ringsidenews.com/former-wwe-star-spotted-performance-center-ahead-tuesdays-nxt/",
+  "category_id": 6,
+  "category_slug": "NXT",
+  "article_type": "RUMOR",
+  "semantic_id": "former-wwe-star-spotted-at-performance-center-ahead-of-tuesdays-nxt",
+  "story_signature_v71": "stable:wwe_star_spotted_at_performance_center_ahead|status|wwe",
+  "refined_score": 68,
+  "refined_reasons": [
+    "WWE/main roster",
+    "business/contratti WWE-TKO",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "evento legale/controversia",
+    "PLE/PPV",
+    "developmental secondario",
+    "v62 evento legale grave",
+    "v62 categoria business",
+    "v72.3 cap rumor"
+  ],
+  "blocks_summary": {
+    "text": 10,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [
+    "https://twitter.com/FalseFinishHQ/status/2057081786484535637"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260520_174029_001_enzo-amore-avvistato-al-wwe-performance-center-prima-di-nxt_452894a4_original.html",
+  "final_html_file": "20260520_174029_001_enzo-amore-avvistato-al-wwe-performance-center-prima-di-nxt_452894a4_final.html",
+  "metadata_file": "20260520_174029_001_enzo-amore-avvistato-al-wwe-performance-center-prima-di-nxt_452894a4_metadata.json"
+}

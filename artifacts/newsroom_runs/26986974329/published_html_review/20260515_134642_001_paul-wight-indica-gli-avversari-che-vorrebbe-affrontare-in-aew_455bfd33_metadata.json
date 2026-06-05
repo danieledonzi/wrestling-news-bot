@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-05-15 13:45:39",
+  "bot_version": "v88_3_1_roster_arrival_guard (93e5f64)",
+  "git_sha": "93e5f6443c2e8df4fa163fde2b2509e8d78150ac",
+  "created_at": "2026-05-15T13:46:42",
+  "source_title": "Paul Wight Names AEW Stars He'd Still Like To Get In The Ring With",
+  "final_title": "Paul Wight indica gli avversari che vorrebbe affrontare in AEW",
+  "source_url": "https://www.wrestlinginc.com/2170206/aew-paul-wight-kenny-omega-darby-allin-ring/",
+  "category_id": 5,
+  "category_slug": "AEW",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "paul-wight-names-aew-stars-hed-still-like-to-get-in-the-ring-with",
+  "story_signature_v71": "stable:paul_wight_names|aew_stars_he|still_like_to_get_in_the_ring_with|injury|aew",
+  "refined_score": 65,
+  "refined_reasons": [
+    "AEW",
+    "impatto roster/storyline",
+    "breaking/major update",
+    "PLE/PPV"
+  ],
+  "blocks_summary": {
+    "text": 4,
+    "image": 1,
+    "embed": 1
+  },
+  "embed_urls": [
+    "https://www.youtube.com/watch?v=iJQEEvkOrXA"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260515_134642_001_paul-wight-indica-gli-avversari-che-vorrebbe-affrontare-in-aew_455bfd33_original.html",
+  "final_html_file": "20260515_134642_001_paul-wight-indica-gli-avversari-che-vorrebbe-affrontare-in-aew_455bfd33_final.html",
+  "metadata_file": "20260515_134642_001_paul-wight-indica-gli-avversari-che-vorrebbe-affrontare-in-aew_455bfd33_metadata.json"
+}

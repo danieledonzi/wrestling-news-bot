@@ -1,0 +1,24 @@
+{
+  "run_id": "2026-05-18 13:38:39",
+  "bot_version": "v89_editorial_report_quality (780a13e)",
+  "git_sha": "780a13eb21e759ded9b9085f84f83d8b5b44518f",
+  "published_items_count": 2,
+  "items": [
+    {
+      "run_id": "2026-05-18 13:38:39",
+      "title": "NARAKU spiega i motivi dell'addio alla NJPW per la WWE",
+      "url": "https://www.ringsidenews.com/naraku-reveals-real-reason-he-left-njpw-wwe/",
+      "original_html_file": "20260518_133906_001_naraku-spiega-i-motivi-dell-addio-alla-njpw-per-la-wwe_47639c24_original.html",
+      "final_html_file": "20260518_133906_001_naraku-spiega-i-motivi-dell-addio-alla-njpw-per-la-wwe_47639c24_final.html",
+      "metadata_file": "20260518_133906_001_naraku-spiega-i-motivi-dell-addio-alla-njpw-per-la-wwe_47639c24_metadata.json"
+    },
+    {
+      "run_id": "2026-05-18 13:38:39",
+      "title": "Tiffany Stratton risponde alle critiche sulla chirurgia estetica",
+      "url": "https://www.ringsidenews.com/tiffany-stratton-shuts-down-claim-she-plastic-head-toe/",
+      "original_html_file": "20260518_133920_002_tiffany-stratton-risponde-alle-critiche-sulla-chirurgia-estetica_46eb15ae_original.html",
+      "final_html_file": "20260518_133920_002_tiffany-stratton-risponde-alle-critiche-sulla-chirurgia-estetica_46eb15ae_final.html",
+      "metadata_file": "20260518_133920_002_tiffany-stratton-risponde-alle-critiche-sulla-chirurgia-estetica_46eb15ae_metadata.json"
+    }
+  ]
+}
