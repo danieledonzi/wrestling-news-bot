@@ -1,0 +1,20 @@
+{
+  "schema": "owtv_published_artifact_v87_6",
+  "run_id": "2026-05-16 05:39:01",
+  "bot_version": "v88_4_1_canonical_event_dedupe (e8fc5b5)",
+  "git_sha": "e8fc5b5291c9484744b5c01e3ac87b8a699ba1c1",
+  "created_at": "2026-05-16T05:42:17",
+  "wp_post_id": 4737,
+  "wp_status": "publish",
+  "title": "WWE SmackDown del 15 maggio 2026: Jade Cargill e Trick Williams sotto i riflettori; risultati e il match di coppia femminile",
+  "source_url": "https://www.wrestlinginc.com/2174199/wwe-smackdown-may-15-trick-williams-jade-cargill-womens-tag-match/",
+  "semantic_id": "report-wwe-smackdown-2026-05-15",
+  "event_key": "report:wwe-smackdown-2026-05-15",
+  "category": 13,
+  "featured_image_url": "https://www.wrestlinginc.com/img/gallery/wwe-smackdown-may-15-trick-williams-jade-cargill-womens-tag-match/l-intro-1778900418.jpg",
+  "embed_urls": [],
+  "inline_images": [],
+  "html_file": "published/20260516_054217_001_wwe-smackdown-del-15-maggio-2026-jade-cargill-e-trick-williams-sotto-i-riflettori-risultat_4737_final.html",
+  "metadata_file": "published/20260516_054217_001_wwe-smackdown-del-15-maggio-2026-jade-cargill-e-trick-williams-sotto-i-riflettori-risultat_4737_metadata.json",
+  "source_file": "published/20260516_054217_001_wwe-smackdown-del-15-maggio-2026-jade-cargill-e-trick-williams-sotto-i-riflettori-risultat_4737_source.txt"
+}

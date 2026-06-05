@@ -1,0 +1,35 @@
+{
+  "run_id": "2026-05-21 02:54:08",
+  "bot_version": "v90_1_quality_correctness (48ece88)",
+  "git_sha": "48ece88808ef4808090a55b42723389ad20151ea",
+  "created_at": "2026-05-21T02:57:12",
+  "source_title": "Injured Willow Nightingale Withdraws From Owen Hart Tournament, Vacates AEW TBS Title",
+  "final_title": "Infortunata, Willow Nightingale lascia il titolo AEW TBS e si ritira dal torneo Owen Hart",
+  "source_url": "https://www.wrestlinginc.com/2178277/aew-dynamite-willow-nightingale-injured-withdraws-owen-hart-tournament-vacates-tbs/",
+  "category_id": 5,
+  "category_slug": "AEW",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "injured-willow-nightingale-withdraws-from-owen-hart-tournament-vacates-aew-tbs-title",
+  "story_signature_v71": "stable:injured_willow_nightingale_withdraws_from_owen_hart_tourname|tbs_title|status|aew",
+  "refined_score": 92,
+  "refined_reasons": [
+    "WWE/main roster",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "infortunio",
+    "PLE/PPV",
+    "v62 titolo/championship",
+    "v77 AI reason/type coherence: PREVIEW cap",
+    "v79.1.3 post-show recovery 56->92"
+  ],
+  "blocks_summary": {
+    "text": 5,
+    "image": 1,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260521_025712_005_infortunata-willow-nightingale-lascia-il-titolo-aew-tbs-e-si-ritira-dal-torneo-o_99b1e389_original.html",
+  "final_html_file": "20260521_025712_005_infortunata-willow-nightingale-lascia-il-titolo-aew-tbs-e-si-ritira-dal-torneo-o_99b1e389_final.html",
+  "metadata_file": "20260521_025712_005_infortunata-willow-nightingale-lascia-il-titolo-aew-tbs-e-si-ritira-dal-torneo-o_99b1e389_metadata.json"
+}

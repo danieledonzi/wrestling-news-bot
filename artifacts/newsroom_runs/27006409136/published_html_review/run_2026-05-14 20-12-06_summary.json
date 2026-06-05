@@ -1,0 +1,32 @@
+{
+  "run_id": "2026-05-14 20:12:06",
+  "bot_version": "v88_1_report_dedupe_pending_cleanup (788e8dd)",
+  "git_sha": "788e8dd79b1f8762f565c5989740470e5326e9d6",
+  "published_items_count": 3,
+  "items": [
+    {
+      "run_id": "2026-05-14 20:12:06",
+      "title": "Ronda Rousey svela il match contro Becky Lynch approvato dalla WWE ma mai realizzato",
+      "url": "https://www.wrestlinginc.com/2173220/wwe-ronda-rousey-becky-lynch-high-profile-pitch-never-delivered/",
+      "original_html_file": "20260514_201505_001_ronda-rousey-svela-il-match-contro-becky-lynch-approvato-dalla-wwe-ma-mai-realiz_4fd37e3e_original.html",
+      "final_html_file": "20260514_201505_001_ronda-rousey-svela-il-match-contro-becky-lynch-approvato-dalla-wwe-ma-mai-realiz_4fd37e3e_final.html",
+      "metadata_file": "20260514_201505_001_ronda-rousey-svela-il-match-contro-becky-lynch-approvato-dalla-wwe-ma-mai-realiz_4fd37e3e_metadata.json"
+    },
+    {
+      "run_id": "2026-05-14 20:12:06",
+      "title": "Tekashi 6ix9ine vorrebbe debuttare in WWE e sfida Randy Orton",
+      "url": "https://www.ringsidenews.com/rapper-tekashi-6ix9ine-reveals-he-wants-get-involved-wwe/",
+      "original_html_file": "20260514_201829_002_tekashi-6ix9ine-vorrebbe-debuttare-in-wwe-e-sfida-randy-orton_c993195e_original.html",
+      "final_html_file": "20260514_201829_002_tekashi-6ix9ine-vorrebbe-debuttare-in-wwe-e-sfida-randy-orton_c993195e_final.html",
+      "metadata_file": "20260514_201829_002_tekashi-6ix9ine-vorrebbe-debuttare-in-wwe-e-sfida-randy-orton_c993195e_metadata.json"
+    },
+    {
+      "run_id": "2026-05-14 20:12:06",
+      "title": "Fatal Influence: reazioni del pubblico WWE potrebbero cambiare piani creativi",
+      "url": "https://www.wrestlinginc.com/2173180/wwe-creative-plans-fatal-influence-crowd-reactions/",
+      "original_html_file": "20260514_201913_003_fatal-influence-reazioni-del-pubblico-wwe-potrebbero-cambiare-piani-creativi_094e8a6d_original.html",
+      "final_html_file": "20260514_201913_003_fatal-influence-reazioni-del-pubblico-wwe-potrebbero-cambiare-piani-creativi_094e8a6d_final.html",
+      "metadata_file": "20260514_201913_003_fatal-influence-reazioni-del-pubblico-wwe-potrebbero-cambiare-piani-creativi_094e8a6d_metadata.json"
+    }
+  ]
+}

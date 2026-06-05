@@ -1,0 +1,67 @@
+{
+  "job": {
+    "kind": "news",
+    "news_key": "news:https-www-ringsidenews-com-wwe-announces-2026-queen-ring-tournament-bracket",
+    "source": "ringsidenews",
+    "source_url": "https://www.ringsidenews.com/wwe-announces-2026-queen-ring-tournament-bracket/",
+    "source_title": "WWE Announces 2026 Queen of the Ring Tournament Bracket",
+    "categories": [
+      "WWE"
+    ],
+    "score": 70,
+    "priority": "soft",
+    "article_type": "hard_news",
+    "story_core": "annuncio-bracket-torneo-2026",
+    "created_at": "2026-06-01T10:37:57.504670"
+  },
+  "blocks": [
+    {
+      "type": "paragraph",
+      "text": "WWE Clash in Italy took place on Sunday, May 31, 2026, at the Inalpi Arena in Turin, Italy. After the event was over, WWE got right to work on hyping their next big event."
+    },
+    {
+      "type": "paragraph",
+      "text": "During the Clash in Italy post show, they revealed the brackets for this year’s tournaments. Needless to say, fans are in for an exciting ride to Saudi Arabia’s big event."
+    },
+    {
+      "type": "paragraph",
+      "text": "The 2026 Queen of the Ring tournament bracket is stacked with names from all over WWE. On one side, Liv Morgan faces Becky Lynch, Alexa Bliss takes on Chelsea Green, Sol Ruca battles Lyra Valkyria, and Charlotte Flair goes one-on-one with Jade Cargill."
+    },
+    {
+      "type": "paragraph",
+      "text": "The other side of the bracket features Roxanne Perez against Iyo Sky, Giulia facing Lash Legend, Bayley taking on Raquel Rodriguez, and Jacy Jayne squaring off with Kiana James. We will have to see who wins the big matches when everything is said and done."
+    },
+    {
+      "type": "paragraph",
+      "text": "The Queen of the Ring tournament has already become a major spotlight for the women’s division. WWE officially introduced Queen’s Crown in 2021, where Zelina Vega became the first winner, before the company later rebranded it into Queen of the Ring."
+    },
+    {
+      "type": "paragraph",
+      "text": "Since the tournament’s rebranding, stars like Nia Jax and Asuka have used the tournament to elevate their status and move into championship storylines. Only time will tell who wins the tournament to clinch a SummerSlam title match."
+    },
+    {
+      "type": "paragraph",
+      "text": "The Queen of the Ring finals are set for June 27 at WWE Night of Champions in Riyadh, Saudi Arabia. We’ll be keeping a close eye on the 2026 King & Queen of the Ring tournaments as the brackets continue to take shape. With title shots on the line, the stakes are high, and only time will tell who earns the honor of becoming the next number one contender."
+    },
+    {
+      "type": "image",
+      "src": "https://www.ringsidenews.com/wp-content/smush-avif/2026/05/wwe-announces-2026-queen-of-the-ring-tournament-bracket-58.jpg.avif?x16316",
+      "alt": "WWE Announces 2026 Queen of the Ring Tournament Bracket"
+    },
+    {
+      "type": "paragraph",
+      "text": "What’s your take on this year’s Queen of the Ring Tournament? Who is your money on to win the whole thing? Let us know what you think in the comments section!"
+    }
+  ],
+  "translated_indexes": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8
+  ],
+  "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/05/wwe-reveals-bracket-for-2026-king-of-the-ring-tournament-18.jpg"
+}
