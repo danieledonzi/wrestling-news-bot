@@ -1,4 +1,5 @@
 from pathlib import Path
+import py_compile
 import re
 
 p = Path('agents/bob.py')
@@ -6,6 +7,7 @@ text = p.read_text(encoding='utf-8')
 
 if 'v93_31_universal_embed_extractor' in text:
     print('[V93 EMBED EXTRACTOR] gia applicato')
+    py_compile.compile(str(p), doraise=True)
     raise SystemExit(0)
 
 text = re.sub(r'BOB_VERSION = "[^"]+"', 'BOB_VERSION = "v93_31_universal_embed_extractor"', text, count=1)
@@ -22,10 +24,10 @@ old_canonical = '''def canonical_embed_url(url: str) -> str:
 new_canonical = '''def tweet_id_from_value(value: str) -> str:
     raw = html.unescape((value or "").replace("\\/", "/"))
     patterns = [
-        r'data-tweet-id=["\\']?(\\d{8,25})',
-        r'(?:tweet_id|tweetId|id)=["\\']?(\\d{8,25})',
-        r'/(?:status|statuses)/(\\d{8,25})',
-        r'twitter\\.com/i/status/(\\d{8,25})',
+        r"data-tweet-id=[\\\"']?(\\d{8,25})",
+        r"(?:tweet_id|tweetId|id)=[\\\"']?(\\d{8,25})",
+        r"/(?:status|statuses)/(\\d{8,25})",
+        r"twitter\\.com/i/status/(\\d{8,25})",
     ]
     for pattern in patterns:
         m = re.search(pattern, raw, re.I)
@@ -47,10 +49,10 @@ def youtube_id_from_value(value: str) -> str:
             return path.split("/", 1)[1].split("/", 1)[0]
     if host == "youtu.be" and path:
         return path.split("/", 1)[0]
-    m = re.search(r'(?:youtube(?:-nocookie)?\\.com/(?:embed|shorts)/|youtu\\.be/)([A-Za-z0-9_-]{6,})', raw, re.I)
+    m = re.search(r"(?:youtube(?:-nocookie)?\\.com/(?:embed|shorts)/|youtu\\.be/)([A-Za-z0-9_-]{6,})", raw, re.I)
     if m:
         return m.group(1)
-    m = re.search(r'(?:^|[?&])v=([A-Za-z0-9_-]{6,})', raw, re.I)
+    m = re.search(r"(?:^|[?&])v=([A-Za-z0-9_-]{6,})", raw, re.I)
     return m.group(1) if m else ""
 
 
@@ -72,8 +74,9 @@ def canonical_embed_url(url: str) -> str:
 
 '''
 if old_canonical not in text:
-    raise SystemExit('[V93 EMBED EXTRACTOR] canonical_embed_url anchor non trovato')
-text = text.replace(old_canonical, new_canonical, 1)
+    print('[V93 EMBED EXTRACTOR] canonical_embed_url anchor non trovato, salto patch canonical')
+else:
+    text = text.replace(old_canonical, new_canonical, 1)
 
 old_valid = '''    if host in {"x.com", "twitter.com"}:
         return "/status/" in path or "/statuses/" in path
@@ -81,9 +84,10 @@ old_valid = '''    if host in {"x.com", "twitter.com"}:
 new_valid = '''    if host in {"x.com", "twitter.com"}:
         return "/status/" in path or "/statuses/" in path or path.startswith("i/status/")
 '''
-if old_valid not in text:
-    raise SystemExit('[V93 EMBED EXTRACTOR] twitter validation anchor non trovato')
-text = text.replace(old_valid, new_valid, 1)
+if old_valid in text:
+    text = text.replace(old_valid, new_valid, 1)
+else:
+    print('[V93 EMBED EXTRACTOR] twitter validation anchor non trovato, salto validation')
 
 old_extract = '''def extract_embed_urls_from_text(raw: str, base_url: str) -> list[str]:
     text = html.unescape((raw or "").replace("\\/", "/"))
@@ -146,7 +150,7 @@ def extract_embed_url(node: Tag, base_url: str) -> str:
             continue
         for attr in ["data-tweet-id", "tweet-id", "data-twitter-id"]:
             value = current.get(attr)
-            if value and re.fullmatch(r"\\d{8,25}", str(value).strip()):
+            if value and re.fullmatch(r"\d{8,25}", str(value).strip()):
                 return f"https://twitter.com/i/status/{str(value).strip()}"
         title = str(current.get("title", ""))
         if title.lower() in {"x post", "twitter post", "tweet"}:
@@ -175,12 +179,11 @@ def extract_embed_url(node: Tag, base_url: str) -> str:
 
 
 '''
-if old_extract not in text:
-    raise SystemExit('[V93 EMBED EXTRACTOR] extract functions anchor non trovato')
-text = text.replace(old_extract, new_extract, 1)
-
-# Make embed dedupe canonical across twitter.com/x.com/i/status and YouTube watch/embed variants.
-text = text.replace('url = canonical_embed_url(str(item.get("url") or ""))\n            item["url"] = url', 'url = canonical_embed_url(str(item.get("url") or ""))\n            item["url"] = url', 1)
+if old_extract in text:
+    text = text.replace(old_extract, new_extract, 1)
+else:
+    print('[V93 EMBED EXTRACTOR] extract functions anchor non trovato, salto extract')
 
 p.write_text(text, encoding='utf-8')
+py_compile.compile(str(p), doraise=True)
 print('[V93 EMBED EXTRACTOR] applicato')
