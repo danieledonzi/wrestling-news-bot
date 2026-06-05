@@ -1,0 +1,40 @@
+{
+  "run_id": "2026-05-23 13:42:34",
+  "bot_version": "v90_2_4_2_report_artifacts_recovery (d44aa80)",
+  "git_sha": "d44aa808b7a11f045e925e2079749573916753cb",
+  "created_at": "2026-05-23T13:43:47",
+  "source_title": "WWE HOFer Eric Bischoff Reflects On Working For The Late Ted Turner",
+  "final_title": "Eric Bischoff ricorda il suo lavoro con Ted Turner",
+  "source_url": "https://www.wrestlinginc.com/2176092/wwe-hofer-eric-bischoff-reflects-working-late-ted-turner/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "wwe-hofer-eric-bischoff-reflects-on-working-for-the-late-ted-turner",
+  "story_signature_v71": "stable:eric_bischoff|ted_turner|eric_bischoff_reflects_on_working_for_the_late_ted_turner|contract|wwe",
+  "refined_score": 78,
+  "refined_reasons": [
+    "WWE/main roster",
+    "business/contratti WWE-TKO",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "morte",
+    "PLE/PPV",
+    "non wrestling puro",
+    "opinione generica",
+    "v62 categoria business",
+    "v77 strong-word guardrail",
+    "v81.1 cap light name-driven item 99->78"
+  ],
+  "blocks_summary": {
+    "text": 3,
+    "image": 1,
+    "embed": 1
+  },
+  "embed_urls": [
+    "https://www.youtube.com/watch?v=ZG5TPBDTA3o"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260523_134347_002_eric-bischoff-ricorda-il-suo-lavoro-con-ted-turner_f008cd03_original.html",
+  "final_html_file": "20260523_134347_002_eric-bischoff-ricorda-il-suo-lavoro-con-ted-turner_f008cd03_final.html",
+  "metadata_file": "20260523_134347_002_eric-bischoff-ricorda-il-suo-lavoro-con-ted-turner_f008cd03_metadata.json"
+}

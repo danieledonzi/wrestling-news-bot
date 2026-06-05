@@ -1,0 +1,35 @@
+{
+  "run_id": "2026-05-16 07:51:42",
+  "bot_version": "v88_4_1_canonical_event_dedupe (0c91a2d)",
+  "git_sha": "0c91a2d8a6a6930d03d03aaf9cbfaa2ab1e2c9da",
+  "created_at": "2026-05-16T07:52:43",
+  "source_title": "Tony Khan Calls Out WWE Background Chatter About AEW's Next TV Deal",
+  "final_title": "Tony Khan risponde alle voci dalla WWE sul futuro televisivo della AEW",
+  "source_url": "https://www.ringsidenews.com/tony-khan-calls-out-wwe-background-chatter-about-aews-next-tv-deal/",
+  "category_id": 5,
+  "category_slug": "AEW",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "tony-khan-calls-out-wwe-background-chatter-about-aews-next-tv-deal",
+  "story_signature_v71": "stable:tony_khan|tony_khan_calls_out|wwe_background_chatter_about|contract|wwe",
+  "refined_score": 100,
+  "refined_reasons": [
+    "WWE/main roster",
+    "business/contratti WWE-TKO",
+    "WWE main roster + storyline/evento",
+    "contratto",
+    "PLE/PPV",
+    "opinione generica",
+    "v62 media rights/streaming",
+    "v62 categoria business"
+  ],
+  "blocks_summary": {
+    "text": 10,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260516_075243_001_tony-khan-risponde-alle-voci-dalla-wwe-sul-futuro-televisivo-della-aew_6acc61eb_original.html",
+  "final_html_file": "20260516_075243_001_tony-khan-risponde-alle-voci-dalla-wwe-sul-futuro-televisivo-della-aew_6acc61eb_final.html",
+  "metadata_file": "20260516_075243_001_tony-khan-risponde-alle-voci-dalla-wwe-sul-futuro-televisivo-della-aew_6acc61eb_metadata.json"
+}

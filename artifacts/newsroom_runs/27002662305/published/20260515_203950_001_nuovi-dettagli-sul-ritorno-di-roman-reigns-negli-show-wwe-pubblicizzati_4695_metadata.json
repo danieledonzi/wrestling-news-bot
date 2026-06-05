@@ -1,0 +1,20 @@
+{
+  "schema": "owtv_published_artifact_v87_6",
+  "run_id": "2026-05-15 20:38:28",
+  "bot_version": "v88_4_1_canonical_event_dedupe (a77c339)",
+  "git_sha": "a77c339d6bb38a25175a12c3345ac73a882ede3f",
+  "created_at": "2026-05-15T20:39:50",
+  "wp_post_id": 4695,
+  "wp_status": "publish",
+  "title": "Nuovi dettagli sul ritorno di Roman Reigns negli show WWE pubblicizzati",
+  "source_url": "https://www.wrestlinginc.com/2173963/wwe-roman-reigns-added-advertised-dates-additional-details/",
+  "semantic_id": "additional-details-on-roman-reigns-being-added-back-to-advertised-wwe-dates",
+  "event_key": "event:title:roman-reigns:world",
+  "category": 4,
+  "featured_image_url": "https://www.wrestlinginc.com/img/gallery/additional-details-on-roman-reigns-being-added-back-to-advertised-wwe-dates/l-intro-1778871730.jpg",
+  "embed_urls": [],
+  "inline_images": [],
+  "html_file": "published/20260515_203950_001_nuovi-dettagli-sul-ritorno-di-roman-reigns-negli-show-wwe-pubblicizzati_4695_final.html",
+  "metadata_file": "published/20260515_203950_001_nuovi-dettagli-sul-ritorno-di-roman-reigns-negli-show-wwe-pubblicizzati_4695_metadata.json",
+  "source_file": "published/20260515_203950_001_nuovi-dettagli-sul-ritorno-di-roman-reigns-negli-show-wwe-pubblicizzati_4695_source.txt"
+}
