@@ -1,0 +1,37 @@
+{
+  "run_id": "2026-05-19 17:36:56",
+  "bot_version": "v89_editorial_report_quality (f550e58)",
+  "git_sha": "f550e5864f549e765c50b804480be8c601d3573b",
+  "created_at": "2026-05-19T17:38:20",
+  "source_title": "Backstage Report Details Alternate Creative Plans For WWE WrestleMania 42",
+  "final_title": "WrestleMania 42: i dettagli sui piani creativi alternativi della WWE",
+  "source_url": "https://www.wrestlinginc.com/2176571/wwe-wrestlemania-42-cm-punk-bron-breakker-roman-reigns-cody-rhodes-alternate-creative-plans-backstage-report/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "RUMOR",
+  "semantic_id": "backstage-report-details-alternate-creative-plans-for-wwe-wrestlemania-42",
+  "story_signature_v71": "stable:roman_reigns|cm_punk|backstage_report_details_alternate_creative_plans_for|injury|wwe",
+  "refined_score": 45,
+  "refined_reasons": [
+    "WWE/main roster",
+    "top star titolo: cm punk, roman reigns, cody rhodes",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "infortunio",
+    "combo top name titolo + evento forte",
+    "PLE/PPV",
+    "v62 titolo/championship",
+    "v62 categoria business",
+    "v88.2 cap feature storico numerico 100->45"
+  ],
+  "blocks_summary": {
+    "text": 4,
+    "image": 1,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260519_173820_001_wrestlemania-42-i-dettagli-sui-piani-creativi-alternativi-della-wwe_3435c347_original.html",
+  "final_html_file": "20260519_173820_001_wrestlemania-42-i-dettagli-sui-piani-creativi-alternativi-della-wwe_3435c347_final.html",
+  "metadata_file": "20260519_173820_001_wrestlemania-42-i-dettagli-sui-piani-creativi-alternativi-della-wwe_3435c347_metadata.json"
+}

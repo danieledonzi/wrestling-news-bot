@@ -1,0 +1,36 @@
+{
+  "run_id": "2026-05-23 21:14:19",
+  "bot_version": "v90_2_5_1_processed_skip_recorder (d6df453)",
+  "git_sha": "d6df453d11406f6de08bebf501de79eb762f1afe",
+  "created_at": "2026-05-23T21:15:21",
+  "source_title": "MJF Says Kofi Kingston & Xavier Woods Would Be 'Incredible Additions' To AEW",
+  "final_title": "MJF: \"Kofi Kingston e Xavier Woods sarebbero ottimi innesti per la AEW\"",
+  "source_url": "https://www.wrestlinginc.com/2178404/aew-mjf-new-day-kofi-kingston-xavier-woods-austin-creed-incredible-additions/",
+  "category_id": 5,
+  "category_slug": "AEW",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "mjf-says-kofi-kingston-xavier-woods-would-be-incredible-additions-to-aew",
+  "story_signature_v71": "stable:mjf|mjf_says_kofi_kingston|xavier_woods_would_be|status|wwe",
+  "refined_score": 68,
+  "refined_reasons": [
+    "WWE/main roster",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "evento legale/controversia",
+    "PLE/PPV",
+    "v62 evento legale grave",
+    "v68 cap opinion senza news concreta"
+  ],
+  "blocks_summary": {
+    "text": 6,
+    "image": 1,
+    "embed": 1
+  },
+  "embed_urls": [
+    "https://www.youtube.com/watch?v=Icd0oR11Ca4"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260523_211521_001_mjf-kofi-kingston-e-xavier-woods-sarebbero-ottimi-innesti-per-la-aew_84851820_original.html",
+  "final_html_file": "20260523_211521_001_mjf-kofi-kingston-e-xavier-woods-sarebbero-ottimi-innesti-per-la-aew_84851820_final.html",
+  "metadata_file": "20260523_211521_001_mjf-kofi-kingston-e-xavier-woods-sarebbero-ottimi-innesti-per-la-aew_84851820_metadata.json"
+}

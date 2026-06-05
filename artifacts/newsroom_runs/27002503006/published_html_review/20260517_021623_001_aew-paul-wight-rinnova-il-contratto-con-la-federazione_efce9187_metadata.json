@@ -1,0 +1,36 @@
+{
+  "run_id": "2026-05-17 02:12:17",
+  "bot_version": "v88_4_2_report_softfixes (f6f4c5d)",
+  "git_sha": "f6f4c5d34e7d15ba20a8a8f3579ac682ef575f57",
+  "created_at": "2026-05-17T02:16:23",
+  "source_title": "AEW Quietly Keeps Paul Wight Under Contract With New Deal",
+  "final_title": "AEW: Paul Wight rinnova il contratto con la federazione",
+  "source_url": "https://www.ringsidenews.com/aew-quietly-keeps-paul-wight-under-contract-new-deal/",
+  "category_id": 5,
+  "category_slug": "AEW",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "aew-quietly-keeps-paul-wight-under-contract-with-new-deal",
+  "story_signature_v71": "stable:aew_quietly_keeps_paul_wight_under_contract_with_new_deal|contract|wwe",
+  "refined_score": 68,
+  "refined_reasons": [
+    "WWE/main roster",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "PLE/PPV",
+    "v62 business/dirigenza",
+    "v62 categoria business",
+    "v66 cap opinion/commentary storyline",
+    "v68 cap opinion senza news concreta"
+  ],
+  "blocks_summary": {
+    "text": 6,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260517_021623_001_aew-paul-wight-rinnova-il-contratto-con-la-federazione_efce9187_original.html",
+  "final_html_file": "20260517_021623_001_aew-paul-wight-rinnova-il-contratto-con-la-federazione_efce9187_final.html",
+  "metadata_file": "20260517_021623_001_aew-paul-wight-rinnova-il-contratto-con-la-federazione_efce9187_metadata.json"
+}

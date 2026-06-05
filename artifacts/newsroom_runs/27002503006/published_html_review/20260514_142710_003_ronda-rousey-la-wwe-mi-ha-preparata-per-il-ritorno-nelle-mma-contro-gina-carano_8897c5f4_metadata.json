@@ -1,0 +1,37 @@
+{
+  "run_id": "2026-05-14 14:24:32",
+  "bot_version": "v88_1_report_dedupe_pending_cleanup (48a84fb)",
+  "git_sha": "48a84fbafc158153919d7f256577c80025afc9de",
+  "created_at": "2026-05-14T14:27:10",
+  "source_title": "Ronda Rousey Explains How WWE Helped Prepare Her For MMA Return Against Gina Carano",
+  "final_title": "Ronda Rousey: la WWE mi ha preparata per il ritorno nelle MMA contro Gina Carano",
+  "source_url": "https://www.ringsidenews.com/ronda-rousey-explains-how-wwe-helped-prepare-her-mma-return-against-gina-carano/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "OPINION",
+  "semantic_id": "ronda-rousey-explains-how-wwe-helped-prepare-her-for-mma-return-against-gina-carano",
+  "story_signature_v71": "stable:ronda_rousey_explains_how|wwe_helped_prepare_her_for|mma_return_against_gina_carano|return|wwe",
+  "refined_score": 54,
+  "refined_reasons": [
+    "WWE/main roster",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "PLE/PPV",
+    "non wrestling puro",
+    "v62 ritorno/debutto",
+    "v72.3 cap opinion"
+  ],
+  "blocks_summary": {
+    "text": 10,
+    "image": 0,
+    "embed": 1
+  },
+  "embed_urls": [
+    "https://www.youtube.com/watch?v=pjkMuDWwFRE"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260514_142710_003_ronda-rousey-la-wwe-mi-ha-preparata-per-il-ritorno-nelle-mma-contro-gina-carano_8897c5f4_original.html",
+  "final_html_file": "20260514_142710_003_ronda-rousey-la-wwe-mi-ha-preparata-per-il-ritorno-nelle-mma-contro-gina-carano_8897c5f4_final.html",
+  "metadata_file": "20260514_142710_003_ronda-rousey-la-wwe-mi-ha-preparata-per-il-ritorno-nelle-mma-contro-gina-carano_8897c5f4_metadata.json"
+}
