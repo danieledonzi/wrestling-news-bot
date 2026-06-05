@@ -1,0 +1,20 @@
+{
+  "schema": "owtv_published_artifact_v87_6",
+  "run_id": "2026-05-14 18:15:07",
+  "bot_version": "v88_1_report_dedupe_pending_cleanup (3b808f1)",
+  "git_sha": "3b808f19ecde3c35a6d2a0c04e1b3592a5d5b0c3",
+  "created_at": "2026-05-14T18:19:41",
+  "wp_post_id": 4603,
+  "wp_status": "publish",
+  "title": "AEW interessata a Mick Foley in vista della scadenza del suo contratto WWE",
+  "source_url": "https://www.ringsidenews.com/aew-real-interest-mick-foley-wwe-legends-contract-nears-end/",
+  "semantic_id": "aew-has-real-interest-in-mick-foley-as-wwe-legends-contract-nears-end",
+  "event_key": "event:title:tony-khan:darby-allin:world:tag:championship:double-or-nothing",
+  "category": 5,
+  "featured_image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/05/aew-has-real-interest-in-mick-foley-as-wwe-legends-contract-nears-end-08.jpg",
+  "embed_urls": [],
+  "inline_images": [],
+  "html_file": "published/20260514_181941_003_aew-interessata-a-mick-foley-in-vista-della-scadenza-del-suo-contratto-wwe_4603_final.html",
+  "metadata_file": "published/20260514_181941_003_aew-interessata-a-mick-foley-in-vista-della-scadenza-del-suo-contratto-wwe_4603_metadata.json",
+  "source_file": "published/20260514_181941_003_aew-interessata-a-mick-foley-in-vista-della-scadenza-del-suo-contratto-wwe_4603_source.txt"
+}

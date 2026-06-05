@@ -1,0 +1,912 @@
+{
+  "agent": "Bob",
+  "version": "v93_33_youtube_plain_and_cta_cleanup",
+  "generated_at": "2026-06-05T22:41:27.161551+00:00",
+  "mode": "block_translation_prudent_embed_cleanup",
+  "policy": {
+    "clean_before_gemini": true,
+    "gemini_receives_only_text_units": true,
+    "preserve_sequence_outside_gemini": true,
+    "preserve_embeds_as_plain_url_lines": true,
+    "filter_source_social_bars": true,
+    "filter_author_bios_before_gemini": true,
+    "filter_cta_before_gemini": true,
+    "recover_embeds_from_raw_html": false,
+    "embed_urls_require_post_or_video_shape": true,
+    "preserve_quotes_as_blockquote": "source_blockquote_only",
+    "preserve_tables_as_html_tables": true,
+    "ordered_elements": [
+      "text",
+      "heading",
+      "quote",
+      "table",
+      "image",
+      "embed"
+    ],
+    "model_chain": [
+      "gemini-3.1-flash-lite",
+      "gemini-3-flash-preview",
+      "gemini-2.5-flash-lite",
+      "gemini-2.5-flash"
+    ],
+    "max_articles_per_run": 3,
+    "prompt_family": "v92_historical_natural_full_translation_blocks",
+    "diagnostic_mode": true,
+    "fallback_mode": false,
+    "residual_author_bio_cleanup": true,
+    "generic_ringside_author_bio_cleanup": true,
+    "residual_cta_cleanup": true,
+    "split_inline_quoted_text": false,
+    "source_blockquote_only": true,
+    "move_leading_embeds_after_first_paragraph": true,
+    "unwrap_fake_data_blockquotes": true,
+    "consume_menzo_bob_brief": true,
+    "missing_expected_embed_warning": true
+  },
+  "input": {
+    "menzo_version": "v93_35_medical_brand_ranking",
+    "selected_count": 12
+  },
+  "articles": [
+    {
+      "source_url": "https://www.ringsidenews.com/logan-paul-calls-out-haters-celebrating-his-triceps-injury/",
+      "source": "ringsidenews",
+      "source_title": "Logan Paul Calls Out Haters Celebrating His Triceps Injury",
+      "category_hint": "WWE",
+      "menzo_score": 84,
+      "status": "ready_for_alfred",
+      "created_at": "2026-06-05T22:41:20.343139+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "fetched_html_chars": 540397,
+      "source_html_contains_embed_hint": true,
+      "meta": {
+        "source_title": "Logan Paul Calls Out Haters Celebrating His Triceps Injury",
+        "description": "Logan Paul knows some people are happy he got hurt, and he just sent them a warning that they shouldn't ignore. Paul recently confirmed that he tore his",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/logan-paul-calls-out-haters-celebrating-his-triceps-injury-00.jpg"
+      },
+      "extraction_diagnostics": {
+        "dom_noise_reduction_enabled": false,
+        "stage": "complete",
+        "global_embed_recovery_enabled": false,
+        "root_name": "article",
+        "root_text_chars": 2812,
+        "candidate_node_count": 92,
+        "raw_element_count": 15,
+        "clean_element_count": 10,
+        "removed_by_node_count": 13,
+        "removed_by_sanitize_count": 5,
+        "table_count": 0,
+        "quote_count": 2,
+        "embed_count": 2
+      },
+      "raw_element_count": 15,
+      "clean_element_count": 10,
+      "translation_unit_count": 7,
+      "removed_before_gemini": 18,
+      "removed_elements_debug": [
+        {
+          "node_index": 69,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
+          "text_preview": "Spotlight"
+        },
+        {
+          "node_index": 73,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2198322 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-the-rock tag-wwe-featured   ",
+          "text_preview": "WWE News The Rock Skipping UFC’s White House Event Despite Dana White Invite"
+        },
+        {
+          "node_index": 76,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "The Rock Skipping UFC’s White House Event Despite Dana White Invite"
+        },
+        {
+          "node_index": 77,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 78,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2198114 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-results category-wwe-smackdown-results tag-wwe-featured   ",
+          "text_preview": "WWE SmackDown Results WWE SmackDown Spoiler Results, Highlights and Key Moments for June 5, 2026"
+        },
+        {
+          "node_index": 81,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "WWE SmackDown Spoiler Results, Highlights and Key Moments for June 5, 2026"
+        },
+        {
+          "node_index": 82,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 83,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2198165 post type-post status-publish format-standard has-post-thumbnail hentry category-indy-wrestling-news category-tna-wrestling-news tag-tessa-blanchard tag-tna-featured   ",
+          "text_preview": "TNA Wrestling News Tessa Blanchard Caught in Crossfire of TNA-CMLL Promotional War"
+        },
+        {
+          "node_index": 86,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "Tessa Blanchard Caught in Crossfire of TNA-CMLL Promotional War"
+        },
+        {
+          "node_index": 87,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 88,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2198163 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news tag-aew-featured tag-mjf   ",
+          "text_preview": "AEW News MJF’s Current Status for Forbidden Door After Knee Injury"
+        },
+        {
+          "node_index": 91,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "MJF’s Current Status for Forbidden Door After Knee Injury"
+        },
+        {
+          "node_index": 92,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "index": 2,
+          "reason": "duplicate_or_empty_embed",
+          "item": {
+            "type": "embed",
+            "url": "https://www.youtube.com/watch?v=zzbdffcuvyg",
+            "source_tag": "div"
+          }
+        },
+        {
+          "index": 3,
+          "reason": "duplicate_or_empty_embed",
+          "item": {
+            "type": "embed",
+            "url": "https://www.youtube.com/watch?v=zzbdffcuvyg",
+            "source_tag": "div"
+          }
+        },
+        {
+          "index": 12,
+          "reason": "duplicate_or_empty_embed",
+          "item": {
+            "type": "embed",
+            "url": "https://www.youtube.com/embed/zzbdffcuvyg?feature=oembed",
+            "source_tag": "div"
+          }
+        },
+        {
+          "index": 13,
+          "reason": "duplicate_or_empty_embed",
+          "item": {
+            "type": "embed",
+            "url": "https://www.youtube.com/embed/zzbdffcuvyg?feature=oembed",
+            "source_tag": "iframe"
+          }
+        },
+        {
+          "index": 15,
+          "reason": "footer_start",
+          "item": {
+            "type": "text",
+            "text": "Spotlight WWE News The Rock Skipping UFC’s White House Event Despite Dana White Invite WWE SmackDown Results WWE SmackDown Spoiler Results, Highlights and Key Moments for June 5, 2026 TNA Wrestling News Tessa Blanchard Caught in Crossfire of TNA-CMLL Promotional War AEW News MJF’s Current Status for Forbidden Door After Knee Injury"
+          }
+        }
+      ],
+      "raw_elements_preview": [
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=zzbdffcuvyg",
+          "source_tag": "div",
+          "block_id": "b1"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=zzbdffcuvyg",
+          "source_tag": "div"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=zzbdffcuvyg",
+          "source_tag": "div"
+        },
+        {
+          "type": "text",
+          "text": "Logan Paul knows some people are happy he got hurt , and he just sent them a warning that they shouldn’t ignore.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "Paul recently confirmed that he tore his triceps during his WWE World Tag Team Title match at Saturday Night’s Main Event . While speaking on his YouTube channel , Paul addressed the people celebrating his injury and made it clear he plans to use the time away to come back stronger. Paul said he understands why his critics are enjoying the setback.",
+          "block_id": "b3"
+        },
+        {
+          "type": "quote",
+          "text": "“Bro, I get it. If you don’t like me, obviously you’re going to pray on my downfall. That’s what these people live for. Imagine being someone who’s like, ‘Yeah, I’m so glad he hurt himself.’”",
+          "source_tag": "blockquote",
+          "block_id": "b4"
+        },
+        {
+          "type": "text",
+          "text": "Logan Paul then told his haters to enjoy the next six months while they can. The Maverick then made it clear he plans to turn the injury into motivation, as he’ll be coming back with a vengeance and be better than ever.",
+          "block_id": "b5"
+        },
+        {
+          "type": "quote",
+          "text": "“For all the haters out there praying on my downfall, enjoy it. Soak it up. You got 6 months to soak it up. But I want you to know I’m locking in in a way that people would never expect ever. Bro, I’m going to lock in so hard. I’m going to come back with a vengeance better than ever. And during this six months, I’m going to do things in life that will only help me win more, which will piss off the haters even more. So, if I were y’all, I’d be scared.”",
+          "source_tag": "blockquote",
+          "block_id": "b6"
+        },
+        {
+          "type": "text",
+          "text": "Paul previously explained that the injury happened when Angelo Dawkins landed awkwardly on him during the closing moments of the match. He said his arm got trapped underneath him during the impact, which led to the torn triceps.",
+          "block_id": "b7"
+        },
+        {
+          "type": "text",
+          "text": "Now, Logan Paul is facing a possible six-month recovery, but he clearly has no plans to stay quiet while he is gone. His message makes it clear that he sees the injury as fuel for an even bigger comeback.",
+          "block_id": "b8"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/zzbdffcuvyg?feature=oembed",
+          "source_tag": "figure",
+          "block_id": "b9"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/zzbdffcuvyg?feature=oembed",
+          "source_tag": "div"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/zzbdffcuvyg?feature=oembed",
+          "source_tag": "iframe"
+        },
+        {
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/2025/06/-38-96x96.jpg",
+          "alt": "Felix Upton",
+          "block_id": "b10"
+        },
+        {
+          "type": "text",
+          "text": "Spotlight WWE News The Rock Skipping UFC’s White House Event Despite Dana White Invite WWE SmackDown Results WWE SmackDown Spoiler Results, Highlights and Key Moments for June 5, 2026 TNA Wrestling News Tessa Blanchard Caught in Crossfire of TNA-CMLL Promotional War AEW News MJF’s Current Status for Forbidden Door After Knee Injury"
+        }
+      ],
+      "elements": [
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=zzbdffcuvyg",
+          "source_tag": "div",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "Logan Paul knows some people are happy he got hurt , and he just sent them a warning that they shouldn’t ignore.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "Paul recently confirmed that he tore his triceps during his WWE World Tag Team Title match at Saturday Night’s Main Event . While speaking on his YouTube channel , Paul addressed the people celebrating his injury and made it clear he plans to use the time away to come back stronger. Paul said he understands why his critics are enjoying the setback.",
+          "block_id": "b3"
+        },
+        {
+          "type": "quote",
+          "text": "“Bro, I get it. If you don’t like me, obviously you’re going to pray on my downfall. That’s what these people live for. Imagine being someone who’s like, ‘Yeah, I’m so glad he hurt himself.’”",
+          "source_tag": "blockquote",
+          "block_id": "b4"
+        },
+        {
+          "type": "text",
+          "text": "Logan Paul then told his haters to enjoy the next six months while they can. The Maverick then made it clear he plans to turn the injury into motivation, as he’ll be coming back with a vengeance and be better than ever.",
+          "block_id": "b5"
+        },
+        {
+          "type": "quote",
+          "text": "“For all the haters out there praying on my downfall, enjoy it. Soak it up. You got 6 months to soak it up. But I want you to know I’m locking in in a way that people would never expect ever. Bro, I’m going to lock in so hard. I’m going to come back with a vengeance better than ever. And during this six months, I’m going to do things in life that will only help me win more, which will piss off the haters even more. So, if I were y’all, I’d be scared.”",
+          "source_tag": "blockquote",
+          "block_id": "b6"
+        },
+        {
+          "type": "text",
+          "text": "Paul previously explained that the injury happened when Angelo Dawkins landed awkwardly on him during the closing moments of the match. He said his arm got trapped underneath him during the impact, which led to the torn triceps.",
+          "block_id": "b7"
+        },
+        {
+          "type": "text",
+          "text": "Now, Logan Paul is facing a possible six-month recovery, but he clearly has no plans to stay quiet while he is gone. His message makes it clear that he sees the injury as fuel for an even bigger comeback.",
+          "block_id": "b8"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/zzbdffcuvyg?feature=oembed",
+          "source_tag": "figure",
+          "block_id": "b9"
+        },
+        {
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/2025/06/-38-96x96.jpg",
+          "alt": "Felix Upton",
+          "block_id": "b10"
+        }
+      ],
+      "element_counts": {
+        "text": 5,
+        "heading": 0,
+        "quote": 2,
+        "table": 0,
+        "image": 1,
+        "embed": 2
+      },
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/logan-paul-calls-out-haters-celebrating-his-triceps-injury/\nTitolo feed: Logan Paul Calls Out Haters Celebrating His Triceps Injury\nTitolo pagina: Logan Paul Calls Out Haters Celebrating His Triceps Injury\nDescrizione: Logan Paul knows some people are happy he got hurt, and he just sent them a warning that they shouldn't ignore. Paul recently confirmed that he tore his\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Logan Paul knows some people are happy he got hurt , and he just sent them a warning that they shouldn’t ignore.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Paul recently confirmed that he tore his triceps during his WWE World Tag Team Title match at Saturday Night’s Main Event . While speaking on his YouTube channel , Paul addressed the people celebrating his injury and made it clear he plans to use the time away to come back stronger. Paul said he understands why his critics are enjoying the setback.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"“Bro, I get it. If you don’t like me, obviously you’re going to pray on my downfall. That’s what these people live for. Imagine being someone who’s like, ‘Yeah, I’m so glad he hurt himself.’”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"Logan Paul then told his haters to enjoy the next six months while they can. The Maverick then made it clear he plans to turn the injury into motivation, as he’ll be coming back with a vengeance and be better than ever.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"quote\",\n    \"text\": \"“For all the haters out there praying on my downfall, enjoy it. Soak it up. You got 6 months to soak it up. But I want you to know I’m locking in in a way that people would never expect ever. Bro, I’m going to lock in so hard. I’m going to come back with a vengeance better than ever. And during this six months, I’m going to do things in life that will only help me win more, which will piss off the haters even more. So, if I were y’all, I’d be scared.”\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"Paul previously explained that the injury happened when Angelo Dawkins landed awkwardly on him during the closing moments of the match. He said his arm got trapped underneath him during the impact, which led to the torn triceps.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"Now, Logan Paul is facing a possible six-month recovery, but he clearly has no plans to stay quiet while he is gone. His message makes it clear that he sees the injury as fuel for an even bigger comeback.\"\n  }\n]\n",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_used": true,
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Logan Paul risponde a chi esulta per il suo infortunio al tricipite\",\n  \"excerpt_it\": \"Logan Paul ha confermato la rottura del tricipite e ha lanciato un chiaro avvertimento ai suoi detrattori che festeggiano il suo stop forzato.\",\n  \"translations\": {\n    \"b2\": \"Logan Paul è consapevole che alcune persone siano felici del suo infortunio e ha appena inviato loro un avvertimento che farebbero bene a non ignorare.\",\n    \"b3\": \"Paul ha recentemente confermato di essersi rotto il tricipite durante il match valevole per i WWE World Tag Team Titles a Saturday Night’s Main Event. Parlando sul suo canale YouTube, Paul si è rivolto a coloro che stanno festeggiando il suo infortunio, mettendo in chiaro di voler sfruttare questo periodo di assenza per tornare più forte di prima. Paul ha dichiarato di capire il motivo per cui i suoi critici stiano godendo di questo contrattempo.\",\n    \"b4\": \"“Fratello, lo capisco. Se non ti piaccio, è ovvio che spererai nella mia caduta. È quello per cui vive questa gente. Immagina di essere uno che pensa: 'Sì, sono così felice che si sia fatto male'.”\",\n    \"b5\": \"Logan Paul ha poi detto ai suoi detrattori di godersi i prossimi sei mesi finché possono. 'The Maverick' ha chiarito di voler trasformare l'infortunio in motivazione, promettendo di tornare più determinato che mai e in forma smagliante.\",\n    \"b6\": \"“A tutti gli hater che pregano per la mia caduta: godetevela. Assaporatela. Avete 6 mesi per farlo. Ma voglio che sappiate che mi impegnerò come nessuno si aspetterebbe mai. Fratello, mi concentrerò al massimo. Tornerò con una voglia di rivalsa mai vista, migliore di prima. E durante questi sei mesi, farò cose nella vita che mi aiuteranno a vincere ancora di più, il che farà infuriare gli hater ancora di più. Quindi, fossi in voi, inizierei ad avere paura.”\",\n    \"b7\": \"In precedenza, Paul aveva spiegato che l'infortunio è avvenuto quando Angelo Dawkins gli è caduto addosso in modo goffo durante le fasi finali del match. Ha raccontato che il suo braccio è rimasto incastrato sotto il peso del compagno durante l'impatto, causando la rottura del tricipite.\",\n    \"b8\": \"Ora, Logan Paul dovrà affrontare un periodo di recupero stimato in sei mesi, ma è chiaro che non ha alcuna intenzione di restare in silenzio durante la sua assenza. Il suo messaggio ribadisce chiaramente che vede questo infortunio come benzina per un ritorno ancora più eclatante.\"\n  },\n  \"notes\": []\n}",
+      "title_it": "Logan Paul risponde a chi esulta per il suo infortunio al tricipite",
+      "body_html": "<p>Logan Paul è consapevole che alcune persone siano felici del suo infortunio e ha appena inviato loro un avvertimento che farebbero bene a non ignorare.</p>\nhttps://www.youtube.com/watch?v=zzbdffcuvyg\n\n<p>Paul ha recentemente confermato di essersi rotto il tricipite durante il match valevole per i WWE World Tag Team Titles a Saturday Night’s Main Event. Parlando sul suo canale YouTube, Paul si è rivolto a coloro che stanno festeggiando il suo infortunio, mettendo in chiaro di voler sfruttare questo periodo di assenza per tornare più forte di prima. Paul ha dichiarato di capire il motivo per cui i suoi critici stiano godendo di questo contrattempo.</p>\n<blockquote>“Fratello, lo capisco. Se non ti piaccio, è ovvio che spererai nella mia caduta. È quello per cui vive questa gente. Immagina di essere uno che pensa: &#x27;Sì, sono così felice che si sia fatto male&#x27;.”</blockquote>\n<p>Logan Paul ha poi detto ai suoi detrattori di godersi i prossimi sei mesi finché possono. &#x27;The Maverick&#x27; ha chiarito di voler trasformare l&#x27;infortunio in motivazione, promettendo di tornare più determinato che mai e in forma smagliante.</p>\n<blockquote>“A tutti gli hater che pregano per la mia caduta: godetevela. Assaporatela. Avete 6 mesi per farlo. Ma voglio che sappiate che mi impegnerò come nessuno si aspetterebbe mai. Fratello, mi concentrerò al massimo. Tornerò con una voglia di rivalsa mai vista, migliore di prima. E durante questi sei mesi, farò cose nella vita che mi aiuteranno a vincere ancora di più, il che farà infuriare gli hater ancora di più. Quindi, fossi in voi, inizierei ad avere paura.”</blockquote>\n<p>In precedenza, Paul aveva spiegato che l&#x27;infortunio è avvenuto quando Angelo Dawkins gli è caduto addosso in modo goffo durante le fasi finali del match. Ha raccontato che il suo braccio è rimasto incastrato sotto il peso del compagno durante l&#x27;impatto, causando la rottura del tricipite.</p>\n<p>Ora, Logan Paul dovrà affrontare un periodo di recupero stimato in sei mesi, ma è chiaro che non ha alcuna intenzione di restare in silenzio durante la sua assenza. Il suo messaggio ribadisce chiaramente che vede questo infortunio come benzina per un ritorno ancora più eclatante.</p>\n\nhttps://www.youtube.com/embed/zzbdffcuvyg?feature=oembed\n\n<!--IMAGE:https://www.ringsidenews.com/wp-content/uploads/2025/06/-38-96x96.jpg-->",
+      "excerpt_it": "Logan Paul ha confermato la rottura del tricipite e ha lanciato un chiaro avvertimento ai suoi detrattori che festeggiano il suo stop forzato.",
+      "bob_notes": [],
+      "translation_missing_units": [],
+      "editorial_changes": [
+        {
+          "code": "leading_embed_moved_after_first_paragraph",
+          "severity": "info",
+          "message": "Embed iniziale spostato dopo il primo paragrafo.",
+          "evidence": "https://www.youtube.com/watch?v=zzbdffcuvyg"
+        }
+      ],
+      "diagnostic_warnings": [],
+      "bob_brief": {
+        "expected_embeds": [
+          "youtube",
+          "instagram"
+        ],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta"
+        ],
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "source_specific_notes": "Ringsidenews spesso prolissa, estrai solo il fatto dell'infortunio."
+      },
+      "menzo_ai_review": {
+        "id": "c1",
+        "decision": "selected",
+        "priority": 8,
+        "category_hint": "WWE",
+        "article_type": "hard_news",
+        "event_key": "logan_paul_injury",
+        "duplicate_of": "",
+        "editorial_reason": "Notizia importante su infortunio di un top wrestler, rilevante per il pubblico.",
+        "bob_brief": {
+          "expected_embeds": [
+            "youtube",
+            "instagram"
+          ],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta"
+          ],
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "source_specific_notes": "Ringsidenews spesso prolissa, estrai solo il fatto dell'infortunio."
+        },
+        "priority_label": "medium"
+      },
+      "ai_editorial_reason": "Notizia importante su infortunio di un top wrestler, rilevante per il pubblico.",
+      "ai_priority_label": "medium"
+    },
+    {
+      "source_url": "https://www.wrestlinginc.com/2188717/aew-njpw-forbidden-door-2026-mjf-creative-plans-not-jeopardy-injury/",
+      "source": "wrestlinginc",
+      "source_title": "Report: AEW X NJPW Forbidden Door Creative Plans 'Not In Jeopardy' Due To MJF Injury",
+      "category_hint": "AEW",
+      "menzo_score": 84,
+      "status": "ready_for_alfred",
+      "created_at": "2026-06-05T22:41:22.913512+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "fetched_html_chars": 50943,
+      "source_html_contains_embed_hint": true,
+      "meta": {
+        "source_title": "Report: AEW X NJPW Forbidden Door Creative Plans 'Not In Jeopardy' Due To MJF Injury - Wrestling Inc.",
+        "description": "MJF might have suffered an injury on \"AEW Dynamite,\" but the AEW World Champion should be healthy enough to compete at Forbidden Door.",
+        "featured_image": "https://www.wrestlinginc.com/img/gallery/report-aew-x-njpw-forbidden-door-creative-plans-not-in-jeopardy-due-to-mjf-injury/l-intro-1780696276.jpg"
+      },
+      "extraction_diagnostics": {
+        "dom_noise_reduction_enabled": false,
+        "stage": "complete",
+        "global_embed_recovery_enabled": false,
+        "root_name": "article",
+        "root_text_chars": 1891,
+        "candidate_node_count": 10,
+        "raw_element_count": 3,
+        "clean_element_count": 2,
+        "removed_by_node_count": 0,
+        "removed_by_sanitize_count": 1,
+        "table_count": 0,
+        "quote_count": 0,
+        "embed_count": 0
+      },
+      "raw_element_count": 3,
+      "clean_element_count": 2,
+      "translation_unit_count": 2,
+      "removed_before_gemini": 1,
+      "removed_elements_debug": [
+        {
+          "index": 1,
+          "reason": "duplicate_featured_image",
+          "item": {
+            "type": "image",
+            "url": "https://www.wrestlinginc.com/img/gallery/report-aew-x-njpw-forbidden-door-creative-plans-not-in-jeopardy-due-to-mjf-injury/intro-1780696276.jpg",
+            "alt": "MJF on AEW Dynamite"
+          }
+        }
+      ],
+      "raw_elements_preview": [
+        {
+          "type": "image",
+          "url": "https://www.wrestlinginc.com/img/gallery/report-aew-x-njpw-forbidden-door-creative-plans-not-in-jeopardy-due-to-mjf-injury/intro-1780696276.jpg",
+          "alt": "MJF on AEW Dynamite"
+        },
+        {
+          "type": "text",
+          "text": "Despite successfully defending his AEW Men's World Championship against Rush on the June 3 episode of \"AEW Dynamite,\" there was a big concern surrounding MJF's health after the show. It was reported that the current champion had hyperextended his knee at some point during the match with Rush, which inevitably forced him to pull out of a match against Bobby Orlando for Beyond Wrestling.",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "Meltzer made sure to note that he is not aware of what MJF is doing at Forbidden Door as of yet, or in any scheduled TV plans have to be altered in the case that he isn't medically cleared to wrestle weekly. MJF has already had to tell Mark Briscoe that he isn't getting a shot at the title despite Briscoe's consistently calling him out, and Andrade El Idolo has also thrown his name in the mix due to not being happy with Don Callis wanting to work with MJF on a more regular basis. There is still a month left until Forbidden Door, and with stars from both CMLL and New Japan Pro Wrestling being involved in the show, MJF's next challenger could come from any corner of the globe.",
+          "block_id": "b2"
+        }
+      ],
+      "elements": [
+        {
+          "type": "text",
+          "text": "Despite successfully defending his AEW Men's World Championship against Rush on the June 3 episode of \"AEW Dynamite,\" there was a big concern surrounding MJF's health after the show. It was reported that the current champion had hyperextended his knee at some point during the match with Rush, which inevitably forced him to pull out of a match against Bobby Orlando for Beyond Wrestling.",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "Meltzer made sure to note that he is not aware of what MJF is doing at Forbidden Door as of yet, or in any scheduled TV plans have to be altered in the case that he isn't medically cleared to wrestle weekly. MJF has already had to tell Mark Briscoe that he isn't getting a shot at the title despite Briscoe's consistently calling him out, and Andrade El Idolo has also thrown his name in the mix due to not being happy with Don Callis wanting to work with MJF on a more regular basis. There is still a month left until Forbidden Door, and with stars from both CMLL and New Japan Pro Wrestling being involved in the show, MJF's next challenger could come from any corner of the globe.",
+          "block_id": "b2"
+        }
+      ],
+      "element_counts": {
+        "text": 2,
+        "heading": 0,
+        "quote": 0,
+        "table": 0,
+        "image": 0,
+        "embed": 0
+      },
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2188717/aew-njpw-forbidden-door-2026-mjf-creative-plans-not-jeopardy-injury/\nTitolo feed: Report: AEW X NJPW Forbidden Door Creative Plans 'Not In Jeopardy' Due To MJF Injury\nTitolo pagina: Report: AEW X NJPW Forbidden Door Creative Plans 'Not In Jeopardy' Due To MJF Injury - Wrestling Inc.\nDescrizione: MJF might have suffered an injury on \"AEW Dynamite,\" but the AEW World Champion should be healthy enough to compete at Forbidden Door.\nCategoria suggerita: AEW\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Despite successfully defending his AEW Men's World Championship against Rush on the June 3 episode of \\\"AEW Dynamite,\\\" there was a big concern surrounding MJF's health after the show. It was reported that the current champion had hyperextended his knee at some point during the match with Rush, which inevitably forced him to pull out of a match against Bobby Orlando for Beyond Wrestling.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Meltzer made sure to note that he is not aware of what MJF is doing at Forbidden Door as of yet, or in any scheduled TV plans have to be altered in the case that he isn't medically cleared to wrestle weekly. MJF has already had to tell Mark Briscoe that he isn't getting a shot at the title despite Briscoe's consistently calling him out, and Andrade El Idolo has also thrown his name in the mix due to not being happy with Don Callis wanting to work with MJF on a more regular basis. There is still a month left until Forbidden Door, and with stars from both CMLL and New Japan Pro Wrestling being involved in the show, MJF's next challenger could come from any corner of the globe.\"\n  }\n]\n",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_used": true,
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Report: I piani creativi per AEW x NJPW Forbidden Door non sono a rischio per l'infortunio di MJF\",\n  \"excerpt_it\": \"MJF potrebbe aver subito un infortunio durante AEW Dynamite, ma l'AEW World Champion dovrebbe essere in grado di competere a Forbidden Door.\",\n  \"translations\": {\n    \"b1\": \"Nonostante la difesa titolata di successo del suo AEW Men's World Championship contro Rush nella puntata di \\\"AEW Dynamite\\\" del 3 giugno, al termine dello show è emersa una forte preoccupazione riguardo alla salute di MJF. È stato riportato che l'attuale campione ha subito un'iperestensione del ginocchio durante il match contro Rush, il che lo ha inevitabilmente costretto a rinunciare all'incontro contro Bobby Orlando per la Beyond Wrestling.\",\n    \"b2\": \"Meltzer ha tenuto a precisare di non essere ancora a conoscenza di cosa farà MJF a Forbidden Door, né se i piani televisivi debbano essere modificati qualora non ricevesse l'idoneità medica per lottare con regolarità. MJF ha già dovuto comunicare a Mark Briscoe che non otterrà un'opportunità titolata, nonostante le continue provocazioni di quest'ultimo; anche Andrade El Idolo si è fatto avanti, essendo contrariato dal fatto che Don Callis voglia lavorare con MJF in modo più costante. Manca ancora un mese a Forbidden Door e, con la partecipazione di stelle provenienti sia dalla CMLL che dalla New Japan Pro-Wrestling, il prossimo sfidante di MJF potrebbe arrivare da qualsiasi parte del mondo.\"\n  },\n  \"notes\": []\n}",
+      "title_it": "Report: I piani creativi per AEW x NJPW Forbidden Door non sono a rischio per l'infortunio di MJF",
+      "body_html": "<p>Nonostante la difesa titolata di successo del suo AEW Men&#x27;s World Championship contro Rush nella puntata di &quot;AEW Dynamite&quot; del 3 giugno, al termine dello show è emersa una forte preoccupazione riguardo alla salute di MJF. È stato riportato che l&#x27;attuale campione ha subito un&#x27;iperestensione del ginocchio durante il match contro Rush, il che lo ha inevitabilmente costretto a rinunciare all&#x27;incontro contro Bobby Orlando per la Beyond Wrestling.</p>\n<p>Meltzer ha tenuto a precisare di non essere ancora a conoscenza di cosa farà MJF a Forbidden Door, né se i piani televisivi debbano essere modificati qualora non ricevesse l&#x27;idoneità medica per lottare con regolarità. MJF ha già dovuto comunicare a Mark Briscoe che non otterrà un&#x27;opportunità titolata, nonostante le continue provocazioni di quest&#x27;ultimo; anche Andrade El Idolo si è fatto avanti, essendo contrariato dal fatto che Don Callis voglia lavorare con MJF in modo più costante. Manca ancora un mese a Forbidden Door e, con la partecipazione di stelle provenienti sia dalla CMLL che dalla New Japan Pro-Wrestling, il prossimo sfidante di MJF potrebbe arrivare da qualsiasi parte del mondo.</p>",
+      "excerpt_it": "MJF potrebbe aver subito un infortunio durante AEW Dynamite, ma l'AEW World Champion dovrebbe essere in grado di competere a Forbidden Door.",
+      "bob_notes": [],
+      "translation_missing_units": [],
+      "bob_brief": {
+        "expected_embeds": [
+          "x_tweet"
+        ],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "possible_noise": [
+          "author_bio",
+          "share_links"
+        ],
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "source_specific_notes": "Fornire contesto chiaro sulla card di Forbidden Door."
+      },
+      "menzo_ai_review": {
+        "id": "c2",
+        "decision": "selected",
+        "priority": 9,
+        "category_hint": "AEW",
+        "article_type": "hard_news",
+        "event_key": "mjf_injury_fd",
+        "duplicate_of": "",
+        "editorial_reason": "Aggiornamento cruciale su infortunio del campione AEW verso Forbidden Door.",
+        "bob_brief": {
+          "expected_embeds": [
+            "x_tweet"
+          ],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "possible_noise": [
+            "author_bio",
+            "share_links"
+          ],
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "source_specific_notes": "Fornire contesto chiaro sulla card di Forbidden Door."
+        },
+        "priority_label": "medium"
+      },
+      "ai_editorial_reason": "Aggiornamento cruciale su infortunio del campione AEW verso Forbidden Door.",
+      "ai_priority_label": "medium",
+      "diagnostic_warnings": [
+        {
+          "code": "possible_missing_embed_from_menzo_brief",
+          "severity": "warning",
+          "message": "Menzo AI si aspettava embed/video/tweet, ma Bob non ne ha estratti.",
+          "expected_embeds": [
+            "x_tweet"
+          ],
+          "source_specific_notes": "Fornire contesto chiaro sulla card di Forbidden Door."
+        }
+      ]
+    },
+    {
+      "source_url": "https://www.ringsidenews.com/rock-skipping-ufcs-white-house-event-despite-dana-white-invite/",
+      "source": "ringsidenews",
+      "source_title": "The Rock Skipping UFC’s White House Event Despite Dana White Invite",
+      "category_hint": "Business",
+      "menzo_score": 83,
+      "status": "ready_for_alfred",
+      "created_at": "2026-06-05T22:41:24.633556+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "fetched_html_chars": 540828,
+      "source_html_contains_embed_hint": true,
+      "meta": {
+        "source_title": "The Rock Skipping UFC’s White House Event Despite Dana White Invite",
+        "description": "The Rock is tied directly to TKO, but he is not expected to attend UFC’s upcoming White House event. TIME Magazine published a story on the UFC event",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/the-rock-skipping-ufcs-white-house-event-despite-dana-white-invite-09.jpg"
+      },
+      "extraction_diagnostics": {
+        "dom_noise_reduction_enabled": false,
+        "stage": "complete",
+        "global_embed_recovery_enabled": false,
+        "root_name": "article",
+        "root_text_chars": 2711,
+        "candidate_node_count": 92,
+        "raw_element_count": 12,
+        "clean_element_count": 11,
+        "removed_by_node_count": 13,
+        "removed_by_sanitize_count": 1,
+        "table_count": 0,
+        "quote_count": 3,
+        "embed_count": 0
+      },
+      "raw_element_count": 12,
+      "clean_element_count": 11,
+      "translation_unit_count": 10,
+      "removed_before_gemini": 14,
+      "removed_elements_debug": [
+        {
+          "node_index": 69,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
+          "text_preview": "Spotlight"
+        },
+        {
+          "node_index": 73,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2198322 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-the-rock tag-wwe-featured   ",
+          "text_preview": "WWE News The Rock Skipping UFC’s White House Event Despite Dana White Invite"
+        },
+        {
+          "node_index": 76,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "The Rock Skipping UFC’s White House Event Despite Dana White Invite"
+        },
+        {
+          "node_index": 77,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 78,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2198114 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-results category-wwe-smackdown-results tag-wwe-featured   ",
+          "text_preview": "WWE SmackDown Results WWE SmackDown Spoiler Results, Highlights and Key Moments for June 5, 2026"
+        },
+        {
+          "node_index": 81,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "WWE SmackDown Spoiler Results, Highlights and Key Moments for June 5, 2026"
+        },
+        {
+          "node_index": 82,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 83,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2198165 post type-post status-publish format-standard has-post-thumbnail hentry category-indy-wrestling-news category-tna-wrestling-news tag-tessa-blanchard tag-tna-featured   ",
+          "text_preview": "TNA Wrestling News Tessa Blanchard Caught in Crossfire of TNA-CMLL Promotional War"
+        },
+        {
+          "node_index": 86,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "Tessa Blanchard Caught in Crossfire of TNA-CMLL Promotional War"
+        },
+        {
+          "node_index": 87,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 88,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2198163 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news tag-aew-featured tag-mjf   ",
+          "text_preview": "AEW News MJF’s Current Status for Forbidden Door After Knee Injury"
+        },
+        {
+          "node_index": 91,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "MJF’s Current Status for Forbidden Door After Knee Injury"
+        },
+        {
+          "node_index": 92,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "index": 12,
+          "reason": "footer_start",
+          "item": {
+            "type": "text",
+            "text": "Spotlight WWE News The Rock Skipping UFC’s White House Event Despite Dana White Invite WWE SmackDown Results WWE SmackDown Spoiler Results, Highlights and Key Moments for June 5, 2026 TNA Wrestling News Tessa Blanchard Caught in Crossfire of TNA-CMLL Promotional War AEW News MJF’s Current Status for Forbidden Door After Knee Injury"
+          }
+        }
+      ],
+      "raw_elements_preview": [
+        {
+          "type": "text",
+          "text": "The Rock is tied directly to TKO, but he is not expected to attend UFC’s upcoming White House event.",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "TIME Magazine published a story on the UFC event being planned on White House property. The piece noted that Dana White invited several celebrities, including Dwayne “The Rock” Johnson.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "That is not just a random invite. The Rock sits on TKO’s Board of Directors, and TKO owns both WWE and UFC. So there is a clear business connection there. Even with that connection, sources close to The Rock told TIME that he will not be attending.",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "The article also looked at Dana White’s long relationship with Donald Trump. White’s first UFC event in charge was UFC 30 in February 2001, and it was held at the Trump Taj Mahal in Atlantic City. Trump said he was blown away by what he saw that night.",
+          "block_id": "b4"
+        },
+        {
+          "type": "quote",
+          "text": "“That first night, I went home, I said, ‘This is the most unbelievable thing I’ve ever seen.’”",
+          "source_tag": "blockquote",
+          "block_id": "b5"
+        },
+        {
+          "type": "text",
+          "text": "Trump also spoke about UFC’s violent reputation.",
+          "block_id": "b6"
+        },
+        {
+          "type": "quote",
+          "text": "“The punishment. You know, it’s violent, but when I look at some of these other things, like the bare-knuckle stuff, it’s not that [violent].”",
+          "source_tag": "blockquote",
+          "block_id": "b7"
+        },
+        {
+          "type": "text",
+          "text": "White also talked about why he agreed to speak at the 2016 Republican National Convention, even though people around him told him not to do it.",
+          "block_id": "b8"
+        },
+        {
+          "type": "quote",
+          "text": "“Everybody said, ‘Don’t do it. Don’t do it.’ It was about more than ‘You don’t want to get into politics.’ The bigger one was ‘He’s never gonna win.’ And I was like, ‘Well, whether he wins or not, the guy’s been a good friend to me.’”",
+          "source_tag": "blockquote",
+          "block_id": "b9"
+        },
+        {
+          "type": "text",
+          "text": "The UFC event already has a lot of attention because of the White House setting. The Rock has a real connection to TKO, WWE, and UFC, but this is one event he is apparently sitting out.",
+          "block_id": "b10"
+        },
+        {
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/2024/01/avatar_user_1_1704158183-96x96.jpg",
+          "alt": "Steve Carrier",
+          "block_id": "b11"
+        },
+        {
+          "type": "text",
+          "text": "Spotlight WWE News The Rock Skipping UFC’s White House Event Despite Dana White Invite WWE SmackDown Results WWE SmackDown Spoiler Results, Highlights and Key Moments for June 5, 2026 TNA Wrestling News Tessa Blanchard Caught in Crossfire of TNA-CMLL Promotional War AEW News MJF’s Current Status for Forbidden Door After Knee Injury"
+        }
+      ],
+      "elements": [
+        {
+          "type": "text",
+          "text": "The Rock is tied directly to TKO, but he is not expected to attend UFC’s upcoming White House event.",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "TIME Magazine published a story on the UFC event being planned on White House property. The piece noted that Dana White invited several celebrities, including Dwayne “The Rock” Johnson.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "That is not just a random invite. The Rock sits on TKO’s Board of Directors, and TKO owns both WWE and UFC. So there is a clear business connection there. Even with that connection, sources close to The Rock told TIME that he will not be attending.",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "The article also looked at Dana White’s long relationship with Donald Trump. White’s first UFC event in charge was UFC 30 in February 2001, and it was held at the Trump Taj Mahal in Atlantic City. Trump said he was blown away by what he saw that night.",
+          "block_id": "b4"
+        },
+        {
+          "type": "quote",
+          "text": "“That first night, I went home, I said, ‘This is the most unbelievable thing I’ve ever seen.’”",
+          "source_tag": "blockquote",
+          "block_id": "b5"
+        },
+        {
+          "type": "text",
+          "text": "Trump also spoke about UFC’s violent reputation.",
+          "block_id": "b6"
+        },
+        {
+          "type": "quote",
+          "text": "“The punishment. You know, it’s violent, but when I look at some of these other things, like the bare-knuckle stuff, it’s not that [violent].”",
+          "source_tag": "blockquote",
+          "block_id": "b7"
+        },
+        {
+          "type": "text",
+          "text": "White also talked about why he agreed to speak at the 2016 Republican National Convention, even though people around him told him not to do it.",
+          "block_id": "b8"
+        },
+        {
+          "type": "quote",
+          "text": "“Everybody said, ‘Don’t do it. Don’t do it.’ It was about more than ‘You don’t want to get into politics.’ The bigger one was ‘He’s never gonna win.’ And I was like, ‘Well, whether he wins or not, the guy’s been a good friend to me.’”",
+          "source_tag": "blockquote",
+          "block_id": "b9"
+        },
+        {
+          "type": "text",
+          "text": "The UFC event already has a lot of attention because of the White House setting. The Rock has a real connection to TKO, WWE, and UFC, but this is one event he is apparently sitting out.",
+          "block_id": "b10"
+        },
+        {
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/2024/01/avatar_user_1_1704158183-96x96.jpg",
+          "alt": "Steve Carrier",
+          "block_id": "b11"
+        }
+      ],
+      "element_counts": {
+        "text": 7,
+        "heading": 0,
+        "quote": 3,
+        "table": 0,
+        "image": 1,
+        "embed": 0
+      },
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/rock-skipping-ufcs-white-house-event-despite-dana-white-invite/\nTitolo feed: The Rock Skipping UFC’s White House Event Despite Dana White Invite\nTitolo pagina: The Rock Skipping UFC’s White House Event Despite Dana White Invite\nDescrizione: The Rock is tied directly to TKO, but he is not expected to attend UFC’s upcoming White House event. TIME Magazine published a story on the UFC event\nCategoria suggerita: Business\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"The Rock is tied directly to TKO, but he is not expected to attend UFC’s upcoming White House event.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"TIME Magazine published a story on the UFC event being planned on White House property. The piece noted that Dana White invited several celebrities, including Dwayne “The Rock” Johnson.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"That is not just a random invite. The Rock sits on TKO’s Board of Directors, and TKO owns both WWE and UFC. So there is a clear business connection there. Even with that connection, sources close to The Rock told TIME that he will not be attending.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"The article also looked at Dana White’s long relationship with Donald Trump. White’s first UFC event in charge was UFC 30 in February 2001, and it was held at the Trump Taj Mahal in Atlantic City. Trump said he was blown away by what he saw that night.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"“That first night, I went home, I said, ‘This is the most unbelievable thing I’ve ever seen.’”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Trump also spoke about UFC’s violent reputation.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"quote\",\n    \"text\": \"“The punishment. You know, it’s violent, but when I look at some of these other things, like the bare-knuckle stuff, it’s not that [violent].”\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"White also talked about why he agreed to speak at the 2016 Republican National Convention, even though people around him told him not to do it.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"quote\",\n    \"text\": \"“Everybody said, ‘Don’t do it. Don’t do it.’ It was about more than ‘You don’t want to get into politics.’ The bigger one was ‘He’s never gonna win.’ And I was like, ‘Well, whether he wins or not, the guy’s been a good friend to me.’”\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"text\",\n    \"text\": \"The UFC event already has a lot of attention because of the White House setting. The Rock has a real connection to TKO, WWE, and UFC, but this is one event he is apparently sitting out.\"\n  }\n]\n",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_used": true,
+      "translation_raw_response_preview": "{\n  \"title_it\": \"The Rock non parteciperà all'evento UFC alla Casa Bianca nonostante l'invito di Dana White\",\n  \"excerpt_it\": \"Nonostante il suo ruolo in TKO, The Rock non sarà presente all'imminente evento organizzato dall'UFC presso la Casa Bianca.\",\n  \"translations\": {\n    \"b1\": \"The Rock è direttamente legato alla TKO, ma non è prevista la sua partecipazione all'imminente evento dell'UFC alla Casa Bianca.\",\n    \"b2\": \"Il TIME Magazine ha pubblicato un articolo in merito all'evento UFC in programma presso la Casa Bianca. Il pezzo sottolinea come Dana White abbia invitato diverse celebrità, tra cui Dwayne \\\"The Rock\\\" Johnson.\",\n    \"b3\": \"Non si tratta di un invito casuale. The Rock fa parte del Consiglio di Amministrazione di TKO, la società che detiene sia la WWE che l'UFC, dunque esiste un chiaro legame commerciale. Nonostante tale connessione, alcune fonti vicine a The Rock hanno riferito al TIME che l'attore non presenzierà.\",\n    \"b4\": \"L'articolo analizza inoltre il lungo rapporto tra Dana White e Donald Trump. Il primo evento UFC gestito da White fu UFC 30, nel febbraio 2001, tenutosi proprio al Trump Taj Mahal di Atlantic City. Trump ha dichiarato di essere rimasto folgorato da ciò a cui assistette quella sera.\",\n    \"b5\": \"“Quella prima sera tornai a casa e dissi: 'È la cosa più incredibile che abbia mai visto'”.\",\n    \"b6\": \"Trump ha parlato anche della reputazione violenta dell'UFC.\",\n    \"b7\": \"“Le punizioni. Sapete, è violento, ma se guardo ad altre discipline, come la boxe a mani nude, non è poi così [violento]”.\",\n    \"b8\": \"White ha anche spiegato perché ha accettato di parlare alla Convention Nazionale Repubblicana del 2016, nonostante le persone a lui vicine gli avessero sconsigliato di farlo.\",\n    \"b9\": \"“Tutti dicevano: 'Non farlo. Non farlo'. E non era solo per il timore di 'non volersi immischiare in politica'. La preoccupazione maggiore era: 'Non vincerà mai'. E io rispondevo: 'Beh, che vinca o meno, quest'uomo è sempre stato un buon amico per me'”.\",\n    \"b10\": \"L'evento UFC sta già attirando molta attenzione a causa della location alla Casa Bianca. The Rock ha un legame concreto con TKO, WWE e UFC, ma questo è un evento a cui, a quanto pare, non prenderà parte.\"\n  },\n  \"notes\": []\n}",
+      "title_it": "The Rock non parteciperà all'evento UFC alla Casa Bianca nonostante l'invito di Dana White",
+      "body_html": "<p>The Rock è direttamente legato alla TKO, ma non è prevista la sua partecipazione all&#x27;imminente evento dell&#x27;UFC alla Casa Bianca.</p>\n<p>Il TIME Magazine ha pubblicato un articolo in merito all&#x27;evento UFC in programma presso la Casa Bianca. Il pezzo sottolinea come Dana White abbia invitato diverse celebrità, tra cui Dwayne &quot;The Rock&quot; Johnson.</p>\n<p>Non si tratta di un invito casuale. The Rock fa parte del Consiglio di Amministrazione di TKO, la società che detiene sia la WWE che l&#x27;UFC, dunque esiste un chiaro legame commerciale. Nonostante tale connessione, alcune fonti vicine a The Rock hanno riferito al TIME che l&#x27;attore non presenzierà.</p>\n<p>L&#x27;articolo analizza inoltre il lungo rapporto tra Dana White e Donald Trump. Il primo evento UFC gestito da White fu UFC 30, nel febbraio 2001, tenutosi proprio al Trump Taj Mahal di Atlantic City. Trump ha dichiarato di essere rimasto folgorato da ciò a cui assistette quella sera.</p>\n<blockquote>“Quella prima sera tornai a casa e dissi: &#x27;È la cosa più incredibile che abbia mai visto&#x27;”.</blockquote>\n<p>Trump ha parlato anche della reputazione violenta dell&#x27;UFC.</p>\n<blockquote>“Le punizioni. Sapete, è violento, ma se guardo ad altre discipline, come la boxe a mani nude, non è poi così [violento]”.</blockquote>\n<p>White ha anche spiegato perché ha accettato di parlare alla Convention Nazionale Repubblicana del 2016, nonostante le persone a lui vicine gli avessero sconsigliato di farlo.</p>\n<blockquote>“Tutti dicevano: &#x27;Non farlo. Non farlo&#x27;. E non era solo per il timore di &#x27;non volersi immischiare in politica&#x27;. La preoccupazione maggiore era: &#x27;Non vincerà mai&#x27;. E io rispondevo: &#x27;Beh, che vinca o meno, quest&#x27;uomo è sempre stato un buon amico per me&#x27;”.</blockquote>\n<p>L&#x27;evento UFC sta già attirando molta attenzione a causa della location alla Casa Bianca. The Rock ha un legame concreto con TKO, WWE e UFC, ma questo è un evento a cui, a quanto pare, non prenderà parte.</p>\n<!--IMAGE:https://www.ringsidenews.com/wp-content/uploads/2024/01/avatar_user_1_1704158183-96x96.jpg-->",
+      "excerpt_it": "Nonostante il suo ruolo in TKO, The Rock non sarà presente all'imminente evento organizzato dall'UFC presso la Casa Bianca.",
+      "bob_notes": [],
+      "translation_missing_units": [],
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": false,
+        "expected_tables": false,
+        "possible_noise": [],
+        "must_preserve": [],
+        "source_specific_notes": ""
+      },
+      "menzo_ai_review": {
+        "id": "c3",
+        "decision": "skip",
+        "priority": 2,
+        "category_hint": "Business",
+        "article_type": "low_value",
+        "event_key": "rock_ufc_whitehouse",
+        "duplicate_of": "",
+        "editorial_reason": "Curiosità di gossip extra-wrestling, non fondamentale per il fan italiano.",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": false,
+          "possible_noise": [],
+          "must_preserve": [],
+          "source_specific_notes": ""
+        },
+        "priority_label": "medium"
+      },
+      "ai_editorial_reason": "Curiosità di gossip extra-wrestling, non fondamentale per il fan italiano.",
+      "ai_priority_label": "medium"
+    }
+  ],
+  "handoff": {
+    "ready_for_alfred": 3,
+    "translation_pending": 0,
+    "errors": 0,
+    "extraction_empty": 0
+  },
+  "postprocess": {
+    "bob_v93_33_changes": 1,
+    "bob_v93_16_changes": 1,
+    "bob_brief_warnings_added": 1
+  }
+}
