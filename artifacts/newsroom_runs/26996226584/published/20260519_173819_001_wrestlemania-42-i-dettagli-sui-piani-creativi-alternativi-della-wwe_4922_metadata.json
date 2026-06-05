@@ -1,0 +1,20 @@
+{
+  "schema": "owtv_published_artifact_v87_6",
+  "run_id": "2026-05-19 17:36:56",
+  "bot_version": "v89_editorial_report_quality (f550e58)",
+  "git_sha": "f550e5864f549e765c50b804480be8c601d3573b",
+  "created_at": "2026-05-19T17:38:19",
+  "wp_post_id": 4922,
+  "wp_status": "publish",
+  "title": "WrestleMania 42: i dettagli sui piani creativi alternativi della WWE",
+  "source_url": "https://www.wrestlinginc.com/2176571/wwe-wrestlemania-42-cm-punk-bron-breakker-roman-reigns-cody-rhodes-alternate-creative-plans-backstage-report/",
+  "semantic_id": "backstage-report-details-alternate-creative-plans-for-wwe-wrestlemania-42",
+  "event_key": "event:rumor:backstage-details-alternate-creative",
+  "category": 4,
+  "featured_image_url": "https://www.wrestlinginc.com/img/gallery/backstage-report-details-alternate-creative-plans-for-wwe-wrestlemania-42/l-intro-1779204077.jpg",
+  "embed_urls": [],
+  "inline_images": [],
+  "html_file": "published/20260519_173819_001_wrestlemania-42-i-dettagli-sui-piani-creativi-alternativi-della-wwe_4922_final.html",
+  "metadata_file": "published/20260519_173819_001_wrestlemania-42-i-dettagli-sui-piani-creativi-alternativi-della-wwe_4922_metadata.json",
+  "source_file": "published/20260519_173819_001_wrestlemania-42-i-dettagli-sui-piani-creativi-alternativi-della-wwe_4922_source.txt"
+}

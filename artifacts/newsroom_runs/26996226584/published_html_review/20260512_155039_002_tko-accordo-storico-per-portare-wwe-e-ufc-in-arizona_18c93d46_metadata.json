@@ -1,0 +1,36 @@
+{
+  "run_id": "2026-05-12 15:44:15",
+  "bot_version": "v84_publish_safety_oembed_image_guardrails (f37a5da)",
+  "git_sha": "f37a5da03e4ae3f7293942c092037aed6be2c8a2",
+  "created_at": "2026-05-12T15:50:39",
+  "source_title": "TKO Announces 'Landmark' Deal To Bring WWE, UFC & More To Arizona",
+  "final_title": "TKO: accordo storico per portare WWE e UFC in Arizona",
+  "source_url": "https://www.wrestlinginc.com/2170832/tko-wwe-ufc-arizona-landmark-deal/",
+  "category_id": 15,
+  "category_slug": "BUSINESS",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "tko-announces-landmark-deal-to-bring-wwe-ufc-more-to-arizona",
+  "story_signature_v71": "stable:tko_announces|landmark_deal_to|contract|wwe|raw|smackdown|tko",
+  "refined_score": 100,
+  "refined_reasons": [
+    "WWE/main roster",
+    "business/contratti WWE-TKO",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "release/addio",
+    "show settimanale",
+    "non wrestling puro",
+    "v62 business/dirigenza",
+    "v62 categoria business"
+  ],
+  "blocks_summary": {
+    "text": 4,
+    "image": 1,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260512_155039_002_tko-accordo-storico-per-portare-wwe-e-ufc-in-arizona_18c93d46_original.html",
+  "final_html_file": "20260512_155039_002_tko-accordo-storico-per-portare-wwe-e-ufc-in-arizona_18c93d46_final.html",
+  "metadata_file": "20260512_155039_002_tko-accordo-storico-per-portare-wwe-e-ufc-in-arizona_18c93d46_metadata.json"
+}
