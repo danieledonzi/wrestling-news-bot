@@ -2,12 +2,17 @@ from pathlib import Path
 
 p = Path('agents/publisher.py')
 s = p.read_text(encoding='utf-8')
-if 'v93_30_base_embed_shortcode_story_dedupe' in s:
+if 'v93_33_youtube_plain_social_shortcode_story_dedupe' in s:
     print('[V93 BASE PUBLISHER] gia applicato')
     raise SystemExit(0)
 
-s = s.replace('PUBLISHER_VERSION = "v93_10_publisher_plain_oembed_urls"', 'PUBLISHER_VERSION = "v93_30_base_embed_shortcode_story_dedupe"')
-s = s.replace('PUBLISHER_VERSION = "v93_29_base_embed_patch"', 'PUBLISHER_VERSION = "v93_30_base_embed_shortcode_story_dedupe"')
+for old_version in [
+    'PUBLISHER_VERSION = "v93_10_publisher_plain_oembed_urls"',
+    'PUBLISHER_VERSION = "v93_29_base_embed_patch"',
+    'PUBLISHER_VERSION = "v93_30_base_embed_shortcode_story_dedupe"',
+]:
+    s = s.replace(old_version, 'PUBLISHER_VERSION = "v93_33_youtube_plain_social_shortcode_story_dedupe"')
+
 if 'from urllib.parse import parse_qs, urlparse' not in s:
     s = s.replace('from typing import Any\n', 'from typing import Any\nfrom urllib.parse import parse_qs, urlparse\n')
 
@@ -48,6 +53,8 @@ def embed_key(url: str) -> str:
             i = parts.index("status")
             if i + 1 < len(parts):
                 return "twitter:" + parts[i + 1].lower()
+        if len(parts) >= 3 and parts[0] == "i" and parts[1] == "status":
+            return "twitter:" + parts[2].lower()
     return host + ":" + path.lower()
 
 
@@ -62,14 +69,21 @@ def display_embed_url(url: str) -> str:
         parts = [x for x in parsed.path.strip("/").split("/") if x]
         if len(parts) >= 3 and parts[1] == "status":
             return "https://twitter.com/" + parts[0] + "/status/" + parts[2]
+        if len(parts) >= 3 and parts[0] == "i" and parts[1] == "status":
+            return "https://twitter.com/i/status/" + parts[2]
     return u
 
 
 def embed_block(url: str) -> str:
-    # v93.30: shortcode block forces WordPress to resolve the oEmbed on front-end,
-    # avoiding plain-text tweets until the editor manually converts the post to blocks.
-    u = html.escape(display_embed_url(url))
-    return '<!-- wp:shortcode -->\\n[embed]' + u + '[/embed]\\n<!-- /wp:shortcode -->'
+    u = display_embed_url(url)
+    host = urlparse(u).netloc.lower().replace("www.", "")
+    if host in {"youtube.com", "youtube-nocookie.com", "youtu.be"}:
+        # v93.33: YouTube embeds work best in WordPress as a plain URL on its own line.
+        # This avoids an ugly Shortcode block in the editor while preserving front-end oEmbed.
+        return html.escape(u)
+    # v93.33: social embeds are kept as shortcode blocks because plain X/Twitter URLs
+    # often remain plain text until a manual editor conversion.
+    return '<!-- wp:shortcode -->\\n[embed]' + html.escape(u) + '[/embed]\\n<!-- /wp:shortcode -->'
 
 
 def convert_embed_urls(body_html: str) -> str:
@@ -121,19 +135,17 @@ def existing_story_duplicate(history: dict[str, Any], signature: str) -> dict[st
 
 
 '''
-if 'def embed_key(url: str)' not in s:
+start = s.find('def clean_url(url: str) -> str:')
+end = s.find('def clean_body_for_wordpress(body_html: str) -> str:')
+if start != -1 and end != -1:
+    s = s[:start] + helpers + s[end:]
+else:
     if insert_after not in s:
         raise SystemExit('[V93 BASE PUBLISHER] image placeholder anchor non trovato')
     s = s.replace(insert_after, insert_after + helpers, 1)
-else:
-    # upgrade older v93.29 helper behavior without duplicating helpers
-    s = s.replace('PUBLISHER_VERSION = "v93_29_base_embed_patch"', 'PUBLISHER_VERSION = "v93_30_base_embed_shortcode_story_dedupe"')
-    start = s.find('def clean_url(url: str) -> str:')
-    end = s.find('def clean_body_for_wordpress(body_html: str) -> str:')
-    if start != -1 and end != -1:
-        s = s[:start] + helpers + s[end:]
 
-s = s.replace('    body_html = re.sub(r"<p>\\s*</p>", "", body_html)\n    body_html = re.sub(r"\\n{3,}", "\\n\\n", body_html)\n', '    body_html = convert_embed_urls(body_html)\n    body_html = re.sub(r"<p>\\s*</p>", "", body_html)\n    body_html = re.sub(r"\\n{3,}", "\\n\\n", body_html)\n', 1)
+if 'convert_embed_urls(body_html)' not in s:
+    s = s.replace('    body_html = re.sub(r"<p>\\s*</p>", "", body_html)\n    body_html = re.sub(r"\\n{3,}", "\\n\\n", body_html)\n', '    body_html = convert_embed_urls(body_html)\n    body_html = re.sub(r"<p>\\s*</p>", "", body_html)\n    body_html = re.sub(r"\\n{3,}", "\\n\\n", body_html)\n', 1)
 
 old_dup = '''    if key in history:
         return {"source_url": url, "status": "already_published", "wp_post_id": history[key].get("wp_post_id"), "title_it": title}
@@ -157,9 +169,11 @@ elif 'semantic_story_duplicate' not in s:
 old_hist = 'history[key] = {"source_url": url, "title_it": title, "wp_post_id": post_id, "wp_link": post_link, "published_at": utc_now(), "status": POST_STATUS, "source": source}'
 new_hist = 'history[key] = {"source_url": url, "title_it": title, "wp_post_id": post_id, "wp_link": post_link, "published_at": utc_now(), "status": POST_STATUS, "source": source, "story_signature": story_signature(article)}'
 s = s.replace(old_hist, new_hist, 1)
-s = s.replace('"mode": "wordpress_publisher_plain_oembed_urls",', '"mode": "wordpress_publisher_embed_shortcode_blocks",')
-s = s.replace('"mode": "wordpress_publisher_gutenberg_embeds",', '"mode": "wordpress_publisher_embed_shortcode_blocks",')
-s = s.replace('"preserve_plain_embed_urls_for_wordpress_oembed": True,', '"plain_embed_urls_to_shortcode_blocks": True, "normalized_embed_dedupe": True, "semantic_story_dedupe": True,')
-s = s.replace('"plain_embed_urls_to_gutenberg_blocks": True, "normalized_embed_dedupe": True,', '"plain_embed_urls_to_shortcode_blocks": True, "normalized_embed_dedupe": True, "semantic_story_dedupe": True,')
+s = s.replace('"mode": "wordpress_publisher_plain_oembed_urls",', '"mode": "wordpress_publisher_mixed_embed_blocks",')
+s = s.replace('"mode": "wordpress_publisher_gutenberg_embeds",', '"mode": "wordpress_publisher_mixed_embed_blocks",')
+s = s.replace('"mode": "wordpress_publisher_embed_shortcode_blocks",', '"mode": "wordpress_publisher_mixed_embed_blocks",')
+s = s.replace('"preserve_plain_embed_urls_for_wordpress_oembed": True,', '"plain_youtube_urls_for_wordpress_oembed": True, "social_embed_shortcode_blocks": True, "normalized_embed_dedupe": True, "semantic_story_dedupe": True,')
+s = s.replace('"plain_embed_urls_to_gutenberg_blocks": True, "normalized_embed_dedupe": True,', '"plain_youtube_urls_for_wordpress_oembed": True, "social_embed_shortcode_blocks": True, "normalized_embed_dedupe": True, "semantic_story_dedupe": True,')
+s = s.replace('"plain_embed_urls_to_shortcode_blocks": True, "normalized_embed_dedupe": True, "semantic_story_dedupe": True,', '"plain_youtube_urls_for_wordpress_oembed": True, "social_embed_shortcode_blocks": True, "normalized_embed_dedupe": True, "semantic_story_dedupe": True,')
 p.write_text(s, encoding='utf-8')
 print('[V93 BASE PUBLISHER] applicato')
