@@ -1,0 +1,36 @@
+{
+  "run_id": "2026-05-19 07:00:11",
+  "bot_version": "v89_editorial_report_quality (7a7864f)",
+  "git_sha": "7a7864f3cbea44daebb4caeabbefba5e3b9b2527",
+  "created_at": "2026-05-19T07:03:04",
+  "source_title": "WWE RAW del 18 maggio 2026: risultati e momenti salienti",
+  "final_title": "WWE Raw 18 maggio 2026: i Women's Tag Team Championship in palio e l'Open Challenge di Oba Femi",
+  "source_url": "https://www.wrestlinginc.com/2176064/wwe-raw-may-18-womens-tag-team-title-on-line-oba-femi-open-challenge/",
+  "category_id": 13,
+  "category_slug": "EDITORIALI",
+  "article_type": "RESULTS_REPORT",
+  "semantic_id": "report-wwe-raw-2026-05-18",
+  "story_signature_v71": "stable:report_wwe-raw-2026-05-18",
+  "refined_score": 93,
+  "refined_reasons": [
+    "WWE/main roster",
+    "nomi forti titolo: oba femi",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "show settimanale",
+    "v62 titolo/championship",
+    "v75 hard results report",
+    "v77 hard report protected",
+    "v77 report score protected"
+  ],
+  "blocks_summary": {
+    "text": 60,
+    "image": 7,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260519_070304_001_wwe-raw-18-maggio-2026-i-women-s-tag-team-championship-in-palio-e-l-open-challen_d5b32b6c_original.html",
+  "final_html_file": "20260519_070304_001_wwe-raw-18-maggio-2026-i-women-s-tag-team-championship-in-palio-e-l-open-challen_d5b32b6c_final.html",
+  "metadata_file": "20260519_070304_001_wwe-raw-18-maggio-2026-i-women-s-tag-team-championship-in-palio-e-l-open-challen_d5b32b6c_metadata.json"
+}

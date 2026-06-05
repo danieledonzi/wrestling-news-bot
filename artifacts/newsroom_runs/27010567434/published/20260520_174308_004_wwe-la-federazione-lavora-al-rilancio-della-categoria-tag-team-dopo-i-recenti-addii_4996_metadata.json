@@ -1,0 +1,20 @@
+{
+  "schema": "owtv_published_artifact_v87_6",
+  "run_id": "2026-05-20 17:39:50",
+  "bot_version": "v90_1_quality_correctness (132eb51)",
+  "git_sha": "132eb518c1ef3224acb37a49e50c77568f44a770",
+  "created_at": "2026-05-20T17:43:08",
+  "wp_post_id": 4996,
+  "wp_status": "publish",
+  "title": "WWE: la federazione lavora al rilancio della categoria tag team dopo i recenti addii",
+  "source_url": "https://www.ringsidenews.com/wwe-quietly-making-big-changes-tag-team-division-major-exits/",
+  "semantic_id": "wwe-quietly-making-big-changes-to-tag-team-division-after-major-exits",
+  "event_key": "event:logan-paul-diagnosis",
+  "category": 4,
+  "featured_image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/05/wwe-quietly-making-big-changes-to-tag-team-division-after-major-exits-43.jpg",
+  "embed_urls": [],
+  "inline_images": [],
+  "html_file": "published/20260520_174308_004_wwe-la-federazione-lavora-al-rilancio-della-categoria-tag-team-dopo-i-recenti-addii_4996_final.html",
+  "metadata_file": "published/20260520_174308_004_wwe-la-federazione-lavora-al-rilancio-della-categoria-tag-team-dopo-i-recenti-addii_4996_metadata.json",
+  "source_file": "published/20260520_174308_004_wwe-la-federazione-lavora-al-rilancio-della-categoria-tag-team-dopo-i-recenti-addii_4996_source.txt"
+}

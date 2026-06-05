@@ -1,0 +1,35 @@
+{
+  "run_id": "2026-05-22 04:17:04",
+  "bot_version": "v90_2_editorial_pacing_update_gate (792e2fb)",
+  "git_sha": "792e2fbda87a89406034e8cdbe6a7175d63a461f",
+  "created_at": "2026-05-22T04:17:57",
+  "source_title": "Mustafa Ali Retains In Open Challenge Answered By Starboy Charlie On TNA Impact",
+  "final_title": "TNA Impact: Mustafa Ali difende il titolo X-Division contro Starboy Charlie",
+  "source_url": "https://www.wrestlinginc.com/2179143/tna-impact-mustafa-ali-starboy-charlie-international-championship-open-challenge-reta/",
+  "category_id": 7,
+  "category_slug": "TNA",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "mustafa-ali-retains-in-open-challenge-answered-by-starboy-charlie-on-tna-impact",
+  "story_signature_v71": "stable:mustafa_ali|rebel|mustafa_ali_retains_in_open_challenge_answered_by_starboy_ch|debut|wwe",
+  "refined_score": 80,
+  "refined_reasons": [
+    "WWE/main roster",
+    "nome AEW: rebel",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "show settimanale",
+    "developmental secondario",
+    "v62 ritorno/debutto"
+  ],
+  "blocks_summary": {
+    "text": 4,
+    "image": 1,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260522_041757_001_tna-impact-mustafa-ali-difende-il-titolo-x-division-contro-starboy-charlie_92f40b2a_original.html",
+  "final_html_file": "20260522_041757_001_tna-impact-mustafa-ali-difende-il-titolo-x-division-contro-starboy-charlie_92f40b2a_final.html",
+  "metadata_file": "20260522_041757_001_tna-impact-mustafa-ali-difende-il-titolo-x-division-contro-starboy-charlie_92f40b2a_metadata.json"
+}

@@ -1,0 +1,35 @@
+{
+  "run_id": "2026-05-15 21:51:11",
+  "bot_version": "v88_4_1_canonical_event_dedupe (f6059bb)",
+  "git_sha": "f6059bb25329f064383a88c7edcf60776b2d42d5",
+  "created_at": "2026-05-15T21:52:38",
+  "source_title": "AEW's Buddy Matthews Offers Injury Update During Indie Appearance",
+  "final_title": "Buddy Matthews torna sul ring in Australia: aggiornamenti sull'infortunio",
+  "source_url": "https://www.wrestlinginc.com/2174099/aew-buddy-matthews-injury-update-indie-appearance-cleared-october/",
+  "category_id": 5,
+  "category_slug": "AEW",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "aews-buddy-matthews-offers-injury-update-during-indie-appearance",
+  "story_signature_v71": "stable:kazuchika_okada|buddy_matthews_offers_injury_update_during_indie_appearance|return|aew",
+  "refined_score": 88,
+  "refined_reasons": [
+    "WWE/main roster",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "v62 ritorno/debutto"
+  ],
+  "blocks_summary": {
+    "text": 9,
+    "image": 1,
+    "embed": 2
+  },
+  "embed_urls": [
+    "https://twitter.com/TheDrainmaker/status/2055260243031118308",
+    "https://twitter.com/RasslinVids/status/2055267732292358636"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260515_215238_001_buddy-matthews-torna-sul-ring-in-australia-aggiornamenti-sull-infortunio_604902cb_original.html",
+  "final_html_file": "20260515_215238_001_buddy-matthews-torna-sul-ring-in-australia-aggiornamenti-sull-infortunio_604902cb_final.html",
+  "metadata_file": "20260515_215238_001_buddy-matthews-torna-sul-ring-in-australia-aggiornamenti-sull-infortunio_604902cb_metadata.json"
+}

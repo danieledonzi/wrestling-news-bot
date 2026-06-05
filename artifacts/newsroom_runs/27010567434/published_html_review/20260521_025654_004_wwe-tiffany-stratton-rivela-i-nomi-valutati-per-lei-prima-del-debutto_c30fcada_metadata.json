@@ -1,0 +1,36 @@
+{
+  "run_id": "2026-05-21 02:54:08",
+  "bot_version": "v90_1_quality_correctness (48ece88)",
+  "git_sha": "48ece88808ef4808090a55b42723389ad20151ea",
+  "created_at": "2026-05-21T02:56:54",
+  "source_title": "Tiffany Stratton Reveals WWE Almost Gave Her A Completely Different Ring Name",
+  "final_title": "WWE: Tiffany Stratton rivela i nomi valutati per lei prima del debutto",
+  "source_url": "https://www.ringsidenews.com/tiffany-stratton-reveals-wwe-almost-gave-her-completely-different-ring-name/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "tiffany-stratton-reveals-wwe-almost-gave-her-a-completely-different-ring-name",
+  "story_signature_v71": "stable:tiffany_stratton|tiffany_stratton_reveals|wwe_almost_gave_her|story|wwe",
+  "refined_score": 68,
+  "refined_reasons": [
+    "WWE/main roster",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "PLE/PPV",
+    "v62 ritorno/debutto",
+    "v86.9 cap commentary/opinion 100->68",
+    "v79.1.3 post-show recovery 68->95",
+    "v86.9 cap AI commentary/opinion 95->68"
+  ],
+  "blocks_summary": {
+    "text": 10,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260521_025654_004_wwe-tiffany-stratton-rivela-i-nomi-valutati-per-lei-prima-del-debutto_c30fcada_original.html",
+  "final_html_file": "20260521_025654_004_wwe-tiffany-stratton-rivela-i-nomi-valutati-per-lei-prima-del-debutto_c30fcada_final.html",
+  "metadata_file": "20260521_025654_004_wwe-tiffany-stratton-rivela-i-nomi-valutati-per-lei-prima-del-debutto_c30fcada_metadata.json"
+}
