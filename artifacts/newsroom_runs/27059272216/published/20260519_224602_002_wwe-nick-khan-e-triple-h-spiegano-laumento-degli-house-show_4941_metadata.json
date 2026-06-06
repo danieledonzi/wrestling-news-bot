@@ -1,0 +1,20 @@
+{
+  "schema": "owtv_published_artifact_v87_6",
+  "run_id": "2026-05-19 22:43:46",
+  "bot_version": "v89_editorial_report_quality (198105d)",
+  "git_sha": "198105d329a2e07482236851484ebec41373dc14",
+  "created_at": "2026-05-19T22:46:02",
+  "wp_post_id": 4941,
+  "wp_status": "publish",
+  "title": "WWE: Nick Khan e Triple H spiegano l'aumento degli House Show",
+  "source_url": "https://www.ringsidenews.com/nick-khan-triple-h-reveal-why-wwe-expanding-its-house-show-schedule/",
+  "semantic_id": "nick-khan-and-triple-h-reveal-why-wwe-is-expanding-its-house-show-schedule",
+  "event_key": "event:business:nick-khan-followup-nick-khan-triple-h-reveal-why-is-expanding-its-house-show-schedule",
+  "category": 15,
+  "featured_image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/05/nick-khan-and-triple-h-reveal-why-wwe-is-expanding-its-house-show-schedule-28.jpg",
+  "embed_urls": [],
+  "inline_images": [],
+  "html_file": "published/20260519_224602_002_wwe-nick-khan-e-triple-h-spiegano-laumento-degli-house-show_4941_final.html",
+  "metadata_file": "published/20260519_224602_002_wwe-nick-khan-e-triple-h-spiegano-laumento-degli-house-show_4941_metadata.json",
+  "source_file": "published/20260519_224602_002_wwe-nick-khan-e-triple-h-spiegano-laumento-degli-house-show_4941_source.txt"
+}

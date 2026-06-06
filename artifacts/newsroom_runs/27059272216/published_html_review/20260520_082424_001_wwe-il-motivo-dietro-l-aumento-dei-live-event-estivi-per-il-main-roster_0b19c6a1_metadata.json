@@ -1,0 +1,37 @@
+{
+  "run_id": "2026-05-20 08:23:38",
+  "bot_version": "v89_editorial_report_quality (51c0932)",
+  "git_sha": "51c09321af7153128193932648d886797cf902f4",
+  "created_at": "2026-05-20T08:24:24",
+  "source_title": "WWE Reveals Why More Main Roster House Shows Are Returning This Summer",
+  "final_title": "WWE: il motivo dietro l'aumento dei live event estivi per il main roster",
+  "source_url": "https://www.ringsidenews.com/wwe-reveals-why-more-main-roster-house-shows-returning-this-summer/",
+  "category_id": 15,
+  "category_slug": "BUSINESS",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "wwe-reveals-why-more-main-roster-house-shows-are-returning-this-summer",
+  "story_signature_v71": "stable:nick_khan|triple_h|wwe_reveals_why_more_main_roster_house_shows_are_returning_t|injury|wwe",
+  "refined_score": 68,
+  "refined_reasons": [
+    "WWE/main roster",
+    "nomi forti lead: triple h",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "PLE/PPV",
+    "opinione generica",
+    "v62 business/dirigenza",
+    "v62 categoria business",
+    "v86.9 cap commentary/opinion 100->68"
+  ],
+  "blocks_summary": {
+    "text": 9,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260520_082424_001_wwe-il-motivo-dietro-l-aumento-dei-live-event-estivi-per-il-main-roster_0b19c6a1_original.html",
+  "final_html_file": "20260520_082424_001_wwe-il-motivo-dietro-l-aumento-dei-live-event-estivi-per-il-main-roster_0b19c6a1_final.html",
+  "metadata_file": "20260520_082424_001_wwe-il-motivo-dietro-l-aumento-dei-live-event-estivi-per-il-main-roster_0b19c6a1_metadata.json"
+}

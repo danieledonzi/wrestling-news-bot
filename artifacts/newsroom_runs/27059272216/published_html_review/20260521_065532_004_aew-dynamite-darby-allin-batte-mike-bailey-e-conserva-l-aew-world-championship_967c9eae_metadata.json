@@ -1,0 +1,32 @@
+{
+  "run_id": "2026-05-21 06:51:07",
+  "bot_version": "v90_1_quality_correctness (2b68fd7)",
+  "git_sha": "2b68fd780f1052d8d7b2f7ed15dfb40c9590fcd1",
+  "created_at": "2026-05-21T06:55:32",
+  "source_title": "Darby Allin Taps Out Speedball Mike Bailey To Retain AEW World Title On Dynamite",
+  "final_title": "AEW Dynamite: Darby Allin batte Mike Bailey e conserva l'AEW World Championship",
+  "source_url": "https://www.wrestlinginc.com/2178287/aew-dynamite-darby-allin-speedball-mike-bailey-world-title/",
+  "category_id": 5,
+  "category_slug": "AEW",
+  "article_type": "RESULTS_REPORT",
+  "semantic_id": "darby-allin-taps-out-speedball-mike-bailey-to-retain-aew-world-title-on-dynamite",
+  "story_signature_v71": "stable:darby_allin|mjf|darby_allin_taps_out_speedball_mike_bailey_to_retain|title|aew",
+  "refined_score": 41,
+  "refined_reasons": [
+    "AEW",
+    "PLE/PPV",
+    "trash talk/clickbait forte",
+    "cap anti-clickbait",
+    "v62 titolo/championship"
+  ],
+  "blocks_summary": {
+    "text": 5,
+    "image": 1,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260521_065532_004_aew-dynamite-darby-allin-batte-mike-bailey-e-conserva-l-aew-world-championship_967c9eae_original.html",
+  "final_html_file": "20260521_065532_004_aew-dynamite-darby-allin-batte-mike-bailey-e-conserva-l-aew-world-championship_967c9eae_final.html",
+  "metadata_file": "20260521_065532_004_aew-dynamite-darby-allin-batte-mike-bailey-e-conserva-l-aew-world-championship_967c9eae_metadata.json"
+}

@@ -1,0 +1,20 @@
+{
+  "schema": "owtv_published_artifact_v87_6",
+  "run_id": "2026-05-16 07:51:42",
+  "bot_version": "v88_4_1_canonical_event_dedupe (0c91a2d)",
+  "git_sha": "0c91a2d8a6a6930d03d03aaf9cbfaa2ab1e2c9da",
+  "created_at": "2026-05-16T07:52:42",
+  "wp_post_id": 4740,
+  "wp_status": "publish",
+  "title": "Tony Khan risponde alle voci dalla WWE sul futuro televisivo della AEW",
+  "source_url": "https://www.ringsidenews.com/tony-khan-calls-out-wwe-background-chatter-about-aews-next-tv-deal/",
+  "semantic_id": "tony-khan-calls-out-wwe-background-chatter-about-aews-next-tv-deal",
+  "event_key": "event:business:tko-financials-followup-tony-khan-calls-out-background-chatter-about-s-next-tv-deal",
+  "category": 5,
+  "featured_image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/05/tony-khan-calls-out-wwe-background-chatter-about-aews-next-tv-deal-10.jpg",
+  "embed_urls": [],
+  "inline_images": [],
+  "html_file": "published/20260516_075242_001_tony-khan-risponde-alle-voci-dalla-wwe-sul-futuro-televisivo-della-aew_4740_final.html",
+  "metadata_file": "published/20260516_075242_001_tony-khan-risponde-alle-voci-dalla-wwe-sul-futuro-televisivo-della-aew_4740_metadata.json",
+  "source_file": "published/20260516_075242_001_tony-khan-risponde-alle-voci-dalla-wwe-sul-futuro-televisivo-della-aew_4740_source.txt"
+}

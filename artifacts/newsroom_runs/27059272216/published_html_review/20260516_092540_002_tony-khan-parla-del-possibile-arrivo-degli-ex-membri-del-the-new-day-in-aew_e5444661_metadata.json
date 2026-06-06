@@ -1,0 +1,34 @@
+{
+  "run_id": "2026-05-16 09:23:21",
+  "bot_version": "v88_4_1_canonical_event_dedupe (9043d82)",
+  "git_sha": "9043d82ee7bffe1f994d2d24618d98f3af7e453f",
+  "created_at": "2026-05-16T09:25:40",
+  "source_title": "Tony Khan Addresses Interest In Signing Former New Day Stars To AEW",
+  "final_title": "Tony Khan parla del possibile arrivo degli ex membri del The New Day in AEW",
+  "source_url": "https://www.ringsidenews.com/tony-khan-addresses-interest-signing-former-new-day-stars-aew/",
+  "category_id": 5,
+  "category_slug": "AEW",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "tony-khan-addresses-interest-in-signing-former-new-day-stars-to-aew",
+  "story_signature_v71": "stable:tony_khan|tony_khan_addresses_interest_in_signing_former_new_day_stars|story|aew",
+  "refined_score": 58,
+  "refined_reasons": [
+    "WWE/main roster",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "release/addio",
+    "opinione generica"
+  ],
+  "blocks_summary": {
+    "text": 11,
+    "image": 0,
+    "embed": 1
+  },
+  "embed_urls": [
+    "https://www.youtube.com/watch?v=MLLohz88B8c"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260516_092540_002_tony-khan-parla-del-possibile-arrivo-degli-ex-membri-del-the-new-day-in-aew_e5444661_original.html",
+  "final_html_file": "20260516_092540_002_tony-khan-parla-del-possibile-arrivo-degli-ex-membri-del-the-new-day-in-aew_e5444661_final.html",
+  "metadata_file": "20260516_092540_002_tony-khan-parla-del-possibile-arrivo-degli-ex-membri-del-the-new-day-in-aew_e5444661_metadata.json"
+}
