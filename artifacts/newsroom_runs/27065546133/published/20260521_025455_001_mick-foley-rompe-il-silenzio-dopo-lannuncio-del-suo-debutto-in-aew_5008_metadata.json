@@ -1,0 +1,20 @@
+{
+  "schema": "owtv_published_artifact_v87_6",
+  "run_id": "2026-05-21 02:54:08",
+  "bot_version": "v90_1_quality_correctness (48ece88)",
+  "git_sha": "48ece88808ef4808090a55b42723389ad20151ea",
+  "created_at": "2026-05-21T02:54:55",
+  "wp_post_id": 5008,
+  "wp_status": "publish",
+  "title": "Mick Foley rompe il silenzio dopo l'annuncio del suo debutto in AEW",
+  "source_url": "https://www.ringsidenews.com/mick-foley-breaks-silence-aew-debut-announcement/",
+  "semantic_id": "mick-foley-breaks-silence-after-aew-debut-announcement",
+  "event_key": "event:business:tony-khan",
+  "category": 5,
+  "featured_image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/05/mick-foley-breaks-silence-after-aew-debut-announcement-51.jpg",
+  "embed_urls": [],
+  "inline_images": [],
+  "html_file": "published/20260521_025455_001_mick-foley-rompe-il-silenzio-dopo-lannuncio-del-suo-debutto-in-aew_5008_final.html",
+  "metadata_file": "published/20260521_025455_001_mick-foley-rompe-il-silenzio-dopo-lannuncio-del-suo-debutto-in-aew_5008_metadata.json",
+  "source_file": "published/20260521_025455_001_mick-foley-rompe-il-silenzio-dopo-lannuncio-del-suo-debutto-in-aew_5008_source.txt"
+}
