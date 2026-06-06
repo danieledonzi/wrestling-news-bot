@@ -1,0 +1,16 @@
+{
+  "run_id": "2026-05-25 13:24:36",
+  "bot_version": "v90_2_8_feed_level_processed_skip (53effda)",
+  "git_sha": "53effdaa1f38fb735f964b457e51b9ffb4447b18",
+  "published_items_count": 1,
+  "items": [
+    {
+      "run_id": "2026-05-25 13:24:36",
+      "title": "Paul Wight: \"Chiesi a Floyd Mayweather di rompermi il naso, poi lui lasciò l'arena\"",
+      "url": "https://www.ringsidenews.com/paul-wight-claims-floyd-mayweather-left-wwe-arena-breaking-his-nose/",
+      "original_html_file": "20260525_132759_001_paul-wight-chiesi-a-floyd-mayweather-di-rompermi-il-naso-poi-lui-lasci-l-arena_1948f8d3_original.html",
+      "final_html_file": "20260525_132759_001_paul-wight-chiesi-a-floyd-mayweather-di-rompermi-il-naso-poi-lui-lasci-l-arena_1948f8d3_final.html",
+      "metadata_file": "20260525_132759_001_paul-wight-chiesi-a-floyd-mayweather-di-rompermi-il-naso-poi-lui-lasci-l-arena_1948f8d3_metadata.json"
+    }
+  ]
+}

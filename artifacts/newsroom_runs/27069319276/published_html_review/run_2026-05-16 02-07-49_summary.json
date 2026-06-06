@@ -1,0 +1,16 @@
+{
+  "run_id": "2026-05-16 02:07:49",
+  "bot_version": "v88_4_1_canonical_event_dedupe (ea22c9e)",
+  "git_sha": "ea22c9e599424d3256909562e7bb482c0a4f0025",
+  "published_items_count": 1,
+  "items": [
+    {
+      "run_id": "2026-05-16 02:07:49",
+      "title": "Trick Williams festeggia il ritorno a casa nella puntata di SmackDown del 15 maggio",
+      "url": "https://www.ringsidenews.com/trick-williams-rousing-homecoming-celebration-during-515-wwe-smackdown/",
+      "original_html_file": "20260516_021032_001_trick-williams-festeggia-il-ritorno-a-casa-nella-puntata-di-smackdown-del-15-mag_de3be992_original.html",
+      "final_html_file": "20260516_021032_001_trick-williams-festeggia-il-ritorno-a-casa-nella-puntata-di-smackdown-del-15-mag_de3be992_final.html",
+      "metadata_file": "20260516_021032_001_trick-williams-festeggia-il-ritorno-a-casa-nella-puntata-di-smackdown-del-15-mag_de3be992_metadata.json"
+    }
+  ]
+}

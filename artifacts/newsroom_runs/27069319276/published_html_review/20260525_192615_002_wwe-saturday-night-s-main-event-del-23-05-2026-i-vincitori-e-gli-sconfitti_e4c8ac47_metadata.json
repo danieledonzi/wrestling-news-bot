@@ -1,0 +1,28 @@
+{
+  "run_id": "2026-05-25 19:23:37",
+  "bot_version": "v90_2_6_2_clean_consolidated_source (ec630c4)",
+  "git_sha": "ec630c4ae2ab3522be40fe0f45c8b2e3867bd5f9",
+  "created_at": "2026-05-25T19:26:15",
+  "source_title": "WWE SNME - 5/23/2026: Biggest Winners & Losers",
+  "final_title": "WWE Saturday Night's Main Event del 23/05/2026: i vincitori e gli sconfitti",
+  "source_url": "https://www.wrestlinginc.com/2180267/wwe-snme-may-23-2026-biggest-winners-losers-opinion-review/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "OPINION",
+  "semantic_id": "wwe-snme-5232026-biggest-winners-losers",
+  "story_signature_v71": "report:wwe-snme-2026-05-23",
+  "refined_score": 82,
+  "refined_reasons": [
+    "event_report"
+  ],
+  "blocks_summary": {
+    "text": 17,
+    "image": 5,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260525_192615_002_wwe-saturday-night-s-main-event-del-23-05-2026-i-vincitori-e-gli-sconfitti_e4c8ac47_original.html",
+  "final_html_file": "20260525_192615_002_wwe-saturday-night-s-main-event-del-23-05-2026-i-vincitori-e-gli-sconfitti_e4c8ac47_final.html",
+  "metadata_file": "20260525_192615_002_wwe-saturday-night-s-main-event-del-23-05-2026-i-vincitori-e-gli-sconfitti_e4c8ac47_metadata.json"
+}
