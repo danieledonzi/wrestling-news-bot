@@ -1,0 +1,32 @@
+{
+  "run_id": "2026-05-14 21:30:33",
+  "bot_version": "v88_2_editorial_performance_guards (0205aa0)",
+  "git_sha": "0205aa0dc85c658a2c150011d09fc38d2a228f1a",
+  "published_items_count": 3,
+  "items": [
+    {
+      "run_id": "2026-05-14 21:30:33",
+      "title": "R-Truth: \"Non credo che porterò a termine il mio attuale contratto con la WWE\"",
+      "url": "https://www.ringsidenews.com/r-truth-reveals-he-not-expect-finish-his-current-wwe-deal/",
+      "original_html_file": "20260514_213113_001_r-truth-non-credo-che-porter-a-termine-il-mio-attuale-contratto-con-la-wwe_a69a5796_original.html",
+      "final_html_file": "20260514_213113_001_r-truth-non-credo-che-porter-a-termine-il-mio-attuale-contratto-con-la-wwe_a69a5796_final.html",
+      "metadata_file": "20260514_213113_001_r-truth-non-credo-che-porter-a-termine-il-mio-attuale-contratto-con-la-wwe_a69a5796_metadata.json"
+    },
+    {
+      "run_id": "2026-05-14 21:30:33",
+      "title": "Ronda Rousey: come Paul Heyman ha cambiato il mio modo di promuovere i match",
+      "url": "https://www.ringsidenews.com/ronda-rousey-credits-paul-heyman-wwe-changing-how-she-promotes-mma-fights/",
+      "original_html_file": "20260514_213135_002_ronda-rousey-come-paul-heyman-ha-cambiato-il-mio-modo-di-promuovere-i-match_2030edcd_original.html",
+      "final_html_file": "20260514_213135_002_ronda-rousey-come-paul-heyman-ha-cambiato-il-mio-modo-di-promuovere-i-match_2030edcd_final.html",
+      "metadata_file": "20260514_213135_002_ronda-rousey-come-paul-heyman-ha-cambiato-il-mio-modo-di-promuovere-i-match_2030edcd_metadata.json"
+    },
+    {
+      "run_id": "2026-05-14 21:30:33",
+      "title": "AEW: svelati i possibili ring name di Kofi Kingston e Xavier Woods",
+      "url": "https://www.ringsidenews.com/possible-aew-names-kofi-kingston-xavier-woods-revealed/",
+      "original_html_file": "20260514_213201_003_aew-svelati-i-possibili-ring-name-di-kofi-kingston-e-xavier-woods_2f3f152e_original.html",
+      "final_html_file": "20260514_213201_003_aew-svelati-i-possibili-ring-name-di-kofi-kingston-e-xavier-woods_2f3f152e_final.html",
+      "metadata_file": "20260514_213201_003_aew-svelati-i-possibili-ring-name-di-kofi-kingston-e-xavier-woods_2f3f152e_metadata.json"
+    }
+  ]
+}

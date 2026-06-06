@@ -1,0 +1,37 @@
+{
+  "run_id": "2026-05-16 02:07:49",
+  "bot_version": "v88_4_1_canonical_event_dedupe (ea22c9e)",
+  "git_sha": "ea22c9e599424d3256909562e7bb482c0a4f0025",
+  "created_at": "2026-05-16T02:10:32",
+  "source_title": "Trick Williams Has Rousing Homecoming Celebration During 5/15 WWE SmackDown",
+  "final_title": "Trick Williams festeggia il ritorno a casa nella puntata di SmackDown del 15 maggio",
+  "source_url": "https://www.ringsidenews.com/trick-williams-rousing-homecoming-celebration-during-515-wwe-smackdown/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "trick-williams-has-rousing-homecoming-celebration-during-515-wwe-smackdown",
+  "story_signature_v71": "stable:trick_williams|trick_williams_has_rousing_homecoming_celebration_during|title|wwe",
+  "refined_score": 100,
+  "refined_reasons": [
+    "WWE/main roster",
+    "nomi forti titolo: trick williams",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "PLE/PPV",
+    "v62 titolo/championship"
+  ],
+  "blocks_summary": {
+    "text": 9,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [
+    "https://twitter.com/WWE/status/2055439672038277204",
+    "https://twitter.com/WWE/status/2055440656709906441",
+    "https://twitter.com/WWE/status/2055442287132368903"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260516_021032_001_trick-williams-festeggia-il-ritorno-a-casa-nella-puntata-di-smackdown-del-15-mag_de3be992_original.html",
+  "final_html_file": "20260516_021032_001_trick-williams-festeggia-il-ritorno-a-casa-nella-puntata-di-smackdown-del-15-mag_de3be992_final.html",
+  "metadata_file": "20260516_021032_001_trick-williams-festeggia-il-ritorno-a-casa-nella-puntata-di-smackdown-del-15-mag_de3be992_metadata.json"
+}

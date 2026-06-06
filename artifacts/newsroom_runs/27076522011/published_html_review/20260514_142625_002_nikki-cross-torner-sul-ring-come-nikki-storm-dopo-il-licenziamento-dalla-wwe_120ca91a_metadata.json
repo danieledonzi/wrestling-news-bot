@@ -1,0 +1,35 @@
+{
+  "run_id": "2026-05-14 14:24:32",
+  "bot_version": "v88_1_report_dedupe_pending_cleanup (48a84fb)",
+  "git_sha": "48a84fbafc158153919d7f256577c80025afc9de",
+  "created_at": "2026-05-14T14:26:25",
+  "source_title": "Nikki Cross Books First Match Since WWE Release Under Different Name",
+  "final_title": "Nikki Cross tornerà sul ring come Nikki Storm dopo il licenziamento dalla WWE",
+  "source_url": "https://www.ringsidenews.com/nikki-cross-books-first-match-since-wwe-release-under-different-name/",
+  "category_id": 8,
+  "category_slug": "WORLD",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "nikki-cross-books-first-match-since-wwe-release-under-different-name",
+  "story_signature_v71": "stable:nikki_cross_books_first_match_since|wwe_release_under_different_name|status|wwe",
+  "refined_score": 100,
+  "refined_reasons": [
+    "WWE/main roster",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "PLE/PPV",
+    "v62 titolo/championship"
+  ],
+  "blocks_summary": {
+    "text": 11,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [
+    "https://twitter.com/ThisIs_Progress/status/2054860717363216823"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260514_142625_002_nikki-cross-torner-sul-ring-come-nikki-storm-dopo-il-licenziamento-dalla-wwe_120ca91a_original.html",
+  "final_html_file": "20260514_142625_002_nikki-cross-torner-sul-ring-come-nikki-storm-dopo-il-licenziamento-dalla-wwe_120ca91a_final.html",
+  "metadata_file": "20260514_142625_002_nikki-cross-torner-sul-ring-come-nikki-storm-dopo-il-licenziamento-dalla-wwe_120ca91a_metadata.json"
+}

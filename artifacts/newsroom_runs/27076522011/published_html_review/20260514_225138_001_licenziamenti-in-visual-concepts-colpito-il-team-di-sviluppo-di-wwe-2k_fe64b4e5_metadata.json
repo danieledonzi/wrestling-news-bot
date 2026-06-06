@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-05-14 22:50:12",
+  "bot_version": "v88_2_editorial_performance_guards (0d6d2e1)",
+  "git_sha": "0d6d2e10d213cead0af5e8db3715e31de40593cd",
+  "created_at": "2026-05-14T22:51:38",
+  "source_title": "WWE 2K Developers Hit Hard in Company-Wide Layoffs",
+  "final_title": "Licenziamenti in Visual Concepts: colpito il team di sviluppo di WWE 2K",
+  "source_url": "https://www.ringsidenews.com/wwe-2k-developers-hit-hard-company-wide-layoffs/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "wwe-2k-developers-hit-hard-in-company-wide-layoffs",
+  "story_signature_v71": "stable:developers_hit_hard|wide_layoffs|story|wwe",
+  "refined_score": 100,
+  "refined_reasons": [
+    "WWE/main roster",
+    "business/contratti WWE-TKO",
+    "impatto roster/storyline",
+    "ritorno/debutto",
+    "v62 business/dirigenza",
+    "v62 categoria business"
+  ],
+  "blocks_summary": {
+    "text": 11,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260514_225138_001_licenziamenti-in-visual-concepts-colpito-il-team-di-sviluppo-di-wwe-2k_fe64b4e5_original.html",
+  "final_html_file": "20260514_225138_001_licenziamenti-in-visual-concepts-colpito-il-team-di-sviluppo-di-wwe-2k_fe64b4e5_final.html",
+  "metadata_file": "20260514_225138_001_licenziamenti-in-visual-concepts-colpito-il-team-di-sviluppo-di-wwe-2k_fe64b4e5_metadata.json"
+}
