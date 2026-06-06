@@ -1,0 +1,16 @@
+{
+  "run_id": "2026-05-15 23:46:40",
+  "bot_version": "v88_4_1_canonical_event_dedupe (5fa346a)",
+  "git_sha": "5fa346aa351d299f779aa65cade297af789e0e21",
+  "published_items_count": 1,
+  "items": [
+    {
+      "run_id": "2026-05-15 23:46:40",
+      "title": "WWE, caso Ring Boy: i querelanti potranno mantenere l'anonimato",
+      "url": "https://www.wrestlinginc.com/2174193/wwe-vince-mcmahon-linda-ring-boy-lawsuit-judge-plaintiffs-anonymous/",
+      "original_html_file": "20260515_234744_001_wwe-caso-ring-boy-i-querelanti-potranno-mantenere-l-anonimato_1a3eaf9f_original.html",
+      "final_html_file": "20260515_234744_001_wwe-caso-ring-boy-i-querelanti-potranno-mantenere-l-anonimato_1a3eaf9f_final.html",
+      "metadata_file": "20260515_234744_001_wwe-caso-ring-boy-i-querelanti-potranno-mantenere-l-anonimato_1a3eaf9f_metadata.json"
+    }
+  ]
+}

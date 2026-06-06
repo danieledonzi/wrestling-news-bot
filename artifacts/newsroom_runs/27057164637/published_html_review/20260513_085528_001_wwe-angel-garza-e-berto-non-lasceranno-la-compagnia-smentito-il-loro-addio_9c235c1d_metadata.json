@@ -1,0 +1,38 @@
+{
+  "run_id": "2026-05-13 08:54:28",
+  "bot_version": "v86_structured_pipeline_embed_engine (62caff4)",
+  "git_sha": "62caff4c9d069543843efcabce7d7777b068e9de",
+  "created_at": "2026-05-13T08:55:28",
+  "source_title": "Backstage Update Emerges On Angel Garza & Berto's WWE Status After RAW Panic",
+  "final_title": "WWE: Angel Garza e Berto non lasceranno la compagnia, smentito il loro addio",
+  "source_url": "https://www.ringsidenews.com/backstage-update-emerges-angel-garza-bertos-wwe-status-raw-panic/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "RUMOR",
+  "semantic_id": "backstage-update-emerges-on-angel-garza-bertos-wwe-status-after-raw-panic",
+  "story_signature_v71": "stable:triplemania|oba_femi|triplemania|contract|wwe|aaa|raw",
+  "refined_score": 68,
+  "refined_reasons": [
+    "WWE/main roster",
+    "nomi forti lead: oba femi",
+    "business/contratti WWE-TKO",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "PLE/PPV",
+    "v62 media rights/streaming",
+    "v62 categoria business",
+    "v80.4 AAA major World priority 100->100",
+    "v72.3 cap rumor"
+  ],
+  "blocks_summary": {
+    "text": 9,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260513_085528_001_wwe-angel-garza-e-berto-non-lasceranno-la-compagnia-smentito-il-loro-addio_9c235c1d_original.html",
+  "final_html_file": "20260513_085528_001_wwe-angel-garza-e-berto-non-lasceranno-la-compagnia-smentito-il-loro-addio_9c235c1d_final.html",
+  "metadata_file": "20260513_085528_001_wwe-angel-garza-e-berto-non-lasceranno-la-compagnia-smentito-il-loro-addio_9c235c1d_metadata.json"
+}

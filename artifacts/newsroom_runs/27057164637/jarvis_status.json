@@ -1,0 +1,15 @@
+{
+  "version": "v93_20_process_refinements",
+  "created_at": "2026-06-06T08:14:29.900631+00:00",
+  "agent": "Jarvis",
+  "mode": "v93_orchestrator",
+  "engine": "bot_v92.py",
+  "newsroom_engine_override": false,
+  "wp_status_source": "v93_publisher",
+  "can_translate": "v93_bob",
+  "can_review": "v93_alfred",
+  "can_publish": "v93_publisher",
+  "can_audit": "v93_archivista",
+  "can_publish_reports": "v93_simone_autonomous",
+  "can_write_master_log": "v93_master_log"
+}

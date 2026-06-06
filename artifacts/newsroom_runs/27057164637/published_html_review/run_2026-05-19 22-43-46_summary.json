@@ -1,0 +1,32 @@
+{
+  "run_id": "2026-05-19 22:43:46",
+  "bot_version": "v89_editorial_report_quality (198105d)",
+  "git_sha": "198105d329a2e07482236851484ebec41373dc14",
+  "published_items_count": 3,
+  "items": [
+    {
+      "run_id": "2026-05-19 22:43:46",
+      "title": "WWE: il lancio del John Cena Classic previsto per fine anno",
+      "url": "https://www.ringsidenews.com/whats-said-about-when-john-cena-classic-will-actually-start/",
+      "original_html_file": "20260519_224451_001_wwe-il-lancio-del-john-cena-classic-previsto-per-fine-anno_27e3e240_original.html",
+      "final_html_file": "20260519_224451_001_wwe-il-lancio-del-john-cena-classic-previsto-per-fine-anno_27e3e240_final.html",
+      "metadata_file": "20260519_224451_001_wwe-il-lancio-del-john-cena-classic-previsto-per-fine-anno_27e3e240_metadata.json"
+    },
+    {
+      "run_id": "2026-05-19 22:43:46",
+      "title": "WWE: Nick Khan e Triple H spiegano l'aumento degli House Show",
+      "url": "https://www.ringsidenews.com/nick-khan-triple-h-reveal-why-wwe-expanding-its-house-show-schedule/",
+      "original_html_file": "20260519_224603_002_wwe-nick-khan-e-triple-h-spiegano-l-aumento-degli-house-show_7d0409c0_original.html",
+      "final_html_file": "20260519_224603_002_wwe-nick-khan-e-triple-h-spiegano-l-aumento-degli-house-show_7d0409c0_final.html",
+      "metadata_file": "20260519_224603_002_wwe-nick-khan-e-triple-h-spiegano-l-aumento-degli-house-show_7d0409c0_metadata.json"
+    },
+    {
+      "run_id": "2026-05-19 22:43:46",
+      "title": "Netflix: grandi ascolti per Ronda Rousey vs. Gina Carano nonostante i 17 secondi di match",
+      "url": "https://www.ringsidenews.com/ronda-rousey-vs-gina-carano-pulls-huge-netflix-numbers-despite-17-second-fight/",
+      "original_html_file": "20260519_224635_003_netflix-grandi-ascolti-per-ronda-rousey-vs-gina-carano-nonostante-i-17-secondi-d_1b19d698_original.html",
+      "final_html_file": "20260519_224635_003_netflix-grandi-ascolti-per-ronda-rousey-vs-gina-carano-nonostante-i-17-secondi-d_1b19d698_final.html",
+      "metadata_file": "20260519_224635_003_netflix-grandi-ascolti-per-ronda-rousey-vs-gina-carano-nonostante-i-17-secondi-d_1b19d698_metadata.json"
+    }
+  ]
+}

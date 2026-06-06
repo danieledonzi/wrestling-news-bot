@@ -1,0 +1,35 @@
+{
+  "run_id": "2026-05-19 21:16:28",
+  "bot_version": "v89_editorial_report_quality (52d4957)",
+  "git_sha": "52d495781c633aeac254ecb265e462ebb0d5f7a1",
+  "created_at": "2026-05-19T21:16:57",
+  "source_title": "John Cena Says In-Ring Retirement Does Not Mean Retiring From WWE",
+  "final_title": "John Cena chiarisce: il ritiro dal ring non significa l'addio alla WWE",
+  "source_url": "https://www.wrestlinginc.com/2177184/john-cena-in-ring-retirement-not-mean-retiring-wwe/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "john-cena-says-in-ring-retirement-does-not-mean-retiring-from-wwe",
+  "story_signature_v71": "stable:john_cena|john_cena_says_in|ring_retirement_does_not_mean_retiring_from|status|wwe",
+  "refined_score": 100,
+  "refined_reasons": [
+    "WWE/main roster",
+    "top star titolo: john cena",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "combo top name titolo + evento forte",
+    "PLE/PPV"
+  ],
+  "blocks_summary": {
+    "text": 4,
+    "image": 1,
+    "embed": 1
+  },
+  "embed_urls": [
+    "https://www.youtube.com/watch?v=224Hkn1NnWQ"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260519_211657_001_john-cena-chiarisce-il-ritiro-dal-ring-non-significa-l-addio-alla-wwe_043cb0fa_original.html",
+  "final_html_file": "20260519_211657_001_john-cena-chiarisce-il-ritiro-dal-ring-non-significa-l-addio-alla-wwe_043cb0fa_final.html",
+  "metadata_file": "20260519_211657_001_john-cena-chiarisce-il-ritiro-dal-ring-non-significa-l-addio-alla-wwe_043cb0fa_metadata.json"
+}
