@@ -1,0 +1,20 @@
+{
+  "schema": "owtv_published_artifact_v87_6",
+  "run_id": "2026-05-24 18:35:52",
+  "bot_version": "v90_2_5_3_1_snme_publish_tighten (f0889c4)",
+  "git_sha": "f0889c4333756cfa3db384c625bd0402ceef681a",
+  "created_at": "2026-05-24T18:36:33",
+  "wp_post_id": 5240,
+  "wp_status": "publish",
+  "title": "Possibili infortuni per Logan Paul e Sol Ruca durante il Saturday Night's Main Event",
+  "source_url": "https://www.ringsidenews.com/two-wwe-stars-may-have-injured-saturday-nights-main-event/",
+  "semantic_id": "two-wwe-stars-may-have-been-injured-at-saturday-nights-main-event",
+  "event_key": "event:logan-paul-injury",
+  "category": 4,
+  "featured_image_url": "https://www.ringsidenews.com/wp-content/uploads/2025/03/scrapped-plans-for-wwe-saturday-nights-main-event-match-revealed-43.xml",
+  "embed_urls": [],
+  "inline_images": [],
+  "html_file": "published/20260524_183633_001_possibili-infortuni-per-logan-paul-e-sol-ruca-durante-il-saturday-nights-main-event_5240_final.html",
+  "metadata_file": "published/20260524_183633_001_possibili-infortuni-per-logan-paul-e-sol-ruca-durante-il-saturday-nights-main-event_5240_metadata.json",
+  "source_file": "published/20260524_183633_001_possibili-infortuni-per-logan-paul-e-sol-ruca-durante-il-saturday-nights-main-event_5240_source.txt"
+}

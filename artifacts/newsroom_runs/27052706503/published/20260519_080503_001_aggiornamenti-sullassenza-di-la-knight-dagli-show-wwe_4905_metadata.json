@@ -1,0 +1,22 @@
+{
+  "schema": "owtv_published_artifact_v87_6",
+  "run_id": "2026-05-19 08:04:19",
+  "bot_version": "v89_editorial_report_quality (ad33230)",
+  "git_sha": "ad33230715fde9eb540828eb0c0e331052e174e7",
+  "created_at": "2026-05-19T08:05:03",
+  "wp_post_id": 4905,
+  "wp_status": "publish",
+  "title": "Aggiornamenti sull'assenza di LA Knight dagli show WWE",
+  "source_url": "https://www.ringsidenews.com/backstage-update-emerges-la-knights-wwe-absence/",
+  "semantic_id": "backstage-update-emerges-on-la-knights-wwe-absence",
+  "event_key": "event:cody-rhodes-diagnosis-followup-backstage-update-emerges-la-knight-s-absence",
+  "category": 4,
+  "featured_image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/01/la-knights-current-status-for-wwe-return-in-germany-00.jpg",
+  "embed_urls": [],
+  "inline_images": [
+    "https://www.ringsidenews.com/wp-content/uploads/2026/01/la-knights-current-status-for-wwe-return-in-germany-00.jpg"
+  ],
+  "html_file": "published/20260519_080503_001_aggiornamenti-sullassenza-di-la-knight-dagli-show-wwe_4905_final.html",
+  "metadata_file": "published/20260519_080503_001_aggiornamenti-sullassenza-di-la-knight-dagli-show-wwe_4905_metadata.json",
+  "source_file": "published/20260519_080503_001_aggiornamenti-sullassenza-di-la-knight-dagli-show-wwe_4905_source.txt"
+}
