@@ -1,0 +1,30 @@
+{
+  "run_id": "2026-05-26 13:51:52",
+  "bot_version": "v90_2_6_2_clean_consolidated_source (867610f)",
+  "git_sha": "867610fdaf135afe1c9213f3bc08970d7c2315ae",
+  "created_at": "2026-05-26T13:53:50",
+  "source_title": "WWE Called Out Over Lack of Creative Plans for CM Punk After WrestleMania 42",
+  "final_title": "WWE criticata per la mancanza di piani creativi per CM Punk dopo WrestleMania",
+  "source_url": "https://www.ringsidenews.com/wwe-called-out-lack-creative-plans-cm-punk-wrestlemania-42/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "OPINION",
+  "semantic_id": "wwe-called-out-over-lack-of-creative-plans-for-cm-punk-after-wrestlemania-42",
+  "story_signature_v71": "event:wwe-wrestlemania-2026-05-26:roman-reigns-story",
+  "refined_score": 72,
+  "refined_reasons": [
+    "event_related"
+  ],
+  "blocks_summary": {
+    "text": 19,
+    "image": 0,
+    "embed": 1
+  },
+  "embed_urls": [
+    "https://www.youtube.com/watch?v=47sH0byRgE4"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260526_135350_002_wwe-criticata-per-la-mancanza-di-piani-creativi-per-cm-punk-dopo-wrestlemania_4c9a053d_original.html",
+  "final_html_file": "20260526_135350_002_wwe-criticata-per-la-mancanza-di-piani-creativi-per-cm-punk-dopo-wrestlemania_4c9a053d_final.html",
+  "metadata_file": "20260526_135350_002_wwe-criticata-per-la-mancanza-di-piani-creativi-per-cm-punk-dopo-wrestlemania_4c9a053d_metadata.json"
+}

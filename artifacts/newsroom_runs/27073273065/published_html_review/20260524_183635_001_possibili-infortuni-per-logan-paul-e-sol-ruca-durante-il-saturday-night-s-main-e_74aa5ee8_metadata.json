@@ -1,0 +1,35 @@
+{
+  "run_id": "2026-05-24 18:35:52",
+  "bot_version": "v90_2_5_3_1_snme_publish_tighten (f0889c4)",
+  "git_sha": "f0889c4333756cfa3db384c625bd0402ceef681a",
+  "created_at": "2026-05-24T18:36:35",
+  "source_title": "Two WWE Stars May Have Been Injured at Saturday Night's Main Event",
+  "final_title": "Possibili infortuni per Logan Paul e Sol Ruca durante il Saturday Night's Main Event",
+  "source_url": "https://www.ringsidenews.com/two-wwe-stars-may-have-injured-saturday-nights-main-event/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "RUMOR",
+  "semantic_id": "two-wwe-stars-may-have-been-injured-at-saturday-nights-main-event",
+  "story_signature_v71": "stable:logan_paul|sol_ruca|wwe_stars_may_have_been_injured|injury|wwe",
+  "refined_score": 67,
+  "refined_reasons": [
+    "WWE/main roster",
+    "nomi forti lead: logan paul",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "infortunio",
+    "PLE/PPV",
+    "v62 titolo/championship",
+    "v72.3 cap rumor: niente boost raffinamento"
+  ],
+  "blocks_summary": {
+    "text": 7,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260524_183635_001_possibili-infortuni-per-logan-paul-e-sol-ruca-durante-il-saturday-night-s-main-e_74aa5ee8_original.html",
+  "final_html_file": "20260524_183635_001_possibili-infortuni-per-logan-paul-e-sol-ruca-durante-il-saturday-night-s-main-e_74aa5ee8_final.html",
+  "metadata_file": "20260524_183635_001_possibili-infortuni-per-logan-paul-e-sol-ruca-durante-il-saturday-night-s-main-e_74aa5ee8_metadata.json"
+}

@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-05-20 08:23:38",
+  "bot_version": "v89_editorial_report_quality (51c0932)",
+  "git_sha": "51c09321af7153128193932648d886797cf902f4",
+  "created_at": "2026-05-20T08:25:35",
+  "source_title": "AEW Crossover Star Mistico Reportedly Injured After Appearing On Crutches At CMLL Show",
+  "final_title": "Mistico costretto alle stampelle a Puebla, infortunio per la stella di AEW e CMLL",
+  "source_url": "https://www.wrestlinginc.com/2177255/aew-mistico-injured-crutches-cmll/",
+  "category_id": 8,
+  "category_slug": "WORLD",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "aew-crossover-star-mistico-reportedly-injured-after-appearing-on-crutches-at-cmll-show",
+  "story_signature_v71": "stable:aew_crossover_star_mistico_reportedly_injured_after_appearin|cmll_show|contract|aew",
+  "refined_score": 64,
+  "refined_reasons": [
+    "AEW",
+    "impatto roster/storyline",
+    "infortunio",
+    "v62 titolo/championship"
+  ],
+  "blocks_summary": {
+    "text": 8,
+    "image": 2,
+    "embed": 1
+  },
+  "embed_urls": [
+    "https://twitter.com/luchablog/status/2056582447865668064"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260520_082535_002_mistico-costretto-alle-stampelle-a-puebla-infortunio-per-la-stella-di-aew-e-cmll_fcf8b789_original.html",
+  "final_html_file": "20260520_082535_002_mistico-costretto-alle-stampelle-a-puebla-infortunio-per-la-stella-di-aew-e-cmll_fcf8b789_final.html",
+  "metadata_file": "20260520_082535_002_mistico-costretto-alle-stampelle-a-puebla-infortunio-per-la-stella-di-aew-e-cmll_fcf8b789_metadata.json"
+}

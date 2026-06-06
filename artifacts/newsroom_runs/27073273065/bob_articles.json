@@ -1,0 +1,555 @@
+{
+  "agent": "Bob",
+  "version": "v93_33_youtube_plain_and_cta_cleanup",
+  "generated_at": "2026-06-06T20:40:47.100907+00:00",
+  "mode": "block_translation_prudent_embed_cleanup",
+  "policy": {
+    "clean_before_gemini": true,
+    "gemini_receives_only_text_units": true,
+    "preserve_sequence_outside_gemini": true,
+    "preserve_embeds_as_plain_url_lines": true,
+    "filter_source_social_bars": true,
+    "filter_author_bios_before_gemini": true,
+    "filter_cta_before_gemini": true,
+    "recover_embeds_from_raw_html": false,
+    "embed_urls_require_post_or_video_shape": true,
+    "preserve_quotes_as_blockquote": "source_blockquote_only",
+    "preserve_tables_as_html_tables": true,
+    "ordered_elements": [
+      "text",
+      "heading",
+      "quote",
+      "table",
+      "image",
+      "embed"
+    ],
+    "model_chain": [
+      "gemini-3.1-flash-lite",
+      "gemini-3-flash-preview",
+      "gemini-2.5-flash-lite",
+      "gemini-2.5-flash"
+    ],
+    "max_articles_per_run": 3,
+    "prompt_family": "v92_historical_natural_full_translation_blocks",
+    "diagnostic_mode": true,
+    "fallback_mode": false,
+    "residual_author_bio_cleanup": true,
+    "generic_ringside_author_bio_cleanup": true,
+    "residual_cta_cleanup": true,
+    "split_inline_quoted_text": false,
+    "source_blockquote_only": true,
+    "move_leading_embeds_after_first_paragraph": true,
+    "unwrap_fake_data_blockquotes": true,
+    "consume_menzo_bob_brief": true,
+    "missing_expected_embed_warning": true
+  },
+  "input": {
+    "menzo_version": "v93_36_ai_skip_binding_fingerprint",
+    "selected_count": 3
+  },
+  "articles": [
+    {
+      "source_url": "https://www.wrestlinginc.com/2188925/eric-bischoff-wwe-new-nwo-new-world-order-thunderdome/",
+      "source": "wrestlinginc",
+      "source_title": "Eric Bischoff Comments On Story About WWE Nearly Debuting New NWO In ThunderDome Era",
+      "category_hint": "WWE",
+      "menzo_score": 89,
+      "status": "ready_for_alfred",
+      "created_at": "2026-06-06T20:40:01.845820+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "fetched_html_chars": 51340,
+      "source_html_contains_embed_hint": true,
+      "meta": {
+        "source_title": "Eric Bischoff Comments On Story About WWE Nearly Debuting New NWO In ThunderDome Era - Wrestling Inc.",
+        "description": "Back in 2020, the New World Order was close to taking over once again, but during WWE’s ThunderDome era. Eric Bischoff says he was unaware of this idea.",
+        "featured_image": "https://www.wrestlinginc.com/img/gallery/eric-bischoff-comments-on-story-about-wwe-nearly-debuting-new-nwo-in-thunderdome-era/l-intro-1780768240.jpg"
+      },
+      "extraction_diagnostics": {
+        "dom_noise_reduction_enabled": false,
+        "stage": "complete",
+        "global_embed_recovery_enabled": false,
+        "root_name": "article",
+        "root_text_chars": 2156,
+        "candidate_node_count": 12,
+        "raw_element_count": 7,
+        "clean_element_count": 5,
+        "removed_by_node_count": 0,
+        "removed_by_sanitize_count": 2,
+        "table_count": 0,
+        "quote_count": 0,
+        "embed_count": 1
+      },
+      "raw_element_count": 7,
+      "clean_element_count": 5,
+      "translation_unit_count": 4,
+      "removed_before_gemini": 2,
+      "removed_elements_debug": [
+        {
+          "index": 2,
+          "reason": "duplicate_featured_image",
+          "item": {
+            "type": "image",
+            "url": "https://www.wrestlinginc.com/img/gallery/eric-bischoff-comments-on-story-about-wwe-nearly-debuting-new-nwo-in-thunderdome-era/intro-1780768240.jpg",
+            "alt": "The original faces of the New World Order (Hulk Hogan, Sean Waltman, Kevin Nash, and Scott Hall) all pose together in a backstage photo shoot"
+          }
+        },
+        {
+          "index": 3,
+          "reason": "duplicate_or_empty_embed",
+          "item": {
+            "type": "embed",
+            "url": "https://www.youtube.com/watch?v=T2hYxhcc_BQ",
+            "source_tag": "div"
+          }
+        }
+      ],
+      "raw_elements_preview": [
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=T2hYxhcc_BQ",
+          "source_tag": "div",
+          "block_id": "b1"
+        },
+        {
+          "type": "image",
+          "url": "https://www.wrestlinginc.com/img/gallery/eric-bischoff-comments-on-story-about-wwe-nearly-debuting-new-nwo-in-thunderdome-era/intro-1780768240.jpg",
+          "alt": "The original faces of the New World Order (Hulk Hogan, Sean Waltman, Kevin Nash, and Scott Hall) all pose together in a backstage photo shoot"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=T2hYxhcc_BQ",
+          "source_tag": "div"
+        },
+        {
+          "type": "text",
+          "text": "When you're in the New World Order (nWo), you're in it for life. However, if you're part of the original pack, you're not in on its plans to potentially expand. Well, lack thereof. As the 30th anniversary of the formation of nWo approaches on July 7, talks to reboot the cool anti-heroes made its rounds around the creative tables in WWE during the ThunderDome era back in 2020. Eric Bischoff, who showcased the trendsetting stable in his promotion at the now defunct WCW, was unaware of these discussions. Even most of its other members were in the dark on these talks, too.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "\"Sean Waltman [X-Pac] reached out to me and said, 'Hey, did you ever hear anything about this?' I said, 'I never heard anything about that,' and neither did Kevin Nash, apparently, according to Sean Waltman,\" the former nWo manager said on his \"83 Weeks\" podcast. \"You know, the three surviving members of the nWo knew nothing about it. So, obviously, we weren't involved in it, which makes me think maybe there's something lost in translation along the way here.\"",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "In a recent interview with \"Public Enemies Podcast HQ,\" former WWE writer Chris Dunn revealed that the Stamford-based promotion was desperate for ideas at a time when the world had shut down due to the COVID-19 pandemic. One idea that sparked interest among those in charge of writing for WWE's flagship television programs mentioned the idea of bringing back the nWo, but with newer prime athletes like Sheamus, Shinsuke Nakamura, and former stars Cesaro and Lars Sullivan leading the charge.",
+          "block_id": "b4"
+        },
+        {
+          "type": "text",
+          "text": "As Dunn recounted, the idea was \"close to happening,\" though plans to have one of its original members (not X-Pac, according to Dunn) introduce the new nWo didn't come to fruition. The reason being the star, who Dunn couldn't recall in his interview, didn't pass their COVID test, thus causing them to delay, then eventually scrapping the idea.",
+          "block_id": "b5"
+        }
+      ],
+      "elements": [
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=T2hYxhcc_BQ",
+          "source_tag": "div",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "When you're in the New World Order (nWo), you're in it for life. However, if you're part of the original pack, you're not in on its plans to potentially expand. Well, lack thereof. As the 30th anniversary of the formation of nWo approaches on July 7, talks to reboot the cool anti-heroes made its rounds around the creative tables in WWE during the ThunderDome era back in 2020. Eric Bischoff, who showcased the trendsetting stable in his promotion at the now defunct WCW, was unaware of these discussions. Even most of its other members were in the dark on these talks, too.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "\"Sean Waltman [X-Pac] reached out to me and said, 'Hey, did you ever hear anything about this?' I said, 'I never heard anything about that,' and neither did Kevin Nash, apparently, according to Sean Waltman,\" the former nWo manager said on his \"83 Weeks\" podcast. \"You know, the three surviving members of the nWo knew nothing about it. So, obviously, we weren't involved in it, which makes me think maybe there's something lost in translation along the way here.\"",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "In a recent interview with \"Public Enemies Podcast HQ,\" former WWE writer Chris Dunn revealed that the Stamford-based promotion was desperate for ideas at a time when the world had shut down due to the COVID-19 pandemic. One idea that sparked interest among those in charge of writing for WWE's flagship television programs mentioned the idea of bringing back the nWo, but with newer prime athletes like Sheamus, Shinsuke Nakamura, and former stars Cesaro and Lars Sullivan leading the charge.",
+          "block_id": "b4"
+        },
+        {
+          "type": "text",
+          "text": "As Dunn recounted, the idea was \"close to happening,\" though plans to have one of its original members (not X-Pac, according to Dunn) introduce the new nWo didn't come to fruition. The reason being the star, who Dunn couldn't recall in his interview, didn't pass their COVID test, thus causing them to delay, then eventually scrapping the idea.",
+          "block_id": "b5"
+        }
+      ],
+      "element_counts": {
+        "text": 4,
+        "heading": 0,
+        "quote": 0,
+        "table": 0,
+        "image": 0,
+        "embed": 1
+      },
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2188925/eric-bischoff-wwe-new-nwo-new-world-order-thunderdome/\nTitolo feed: Eric Bischoff Comments On Story About WWE Nearly Debuting New NWO In ThunderDome Era\nTitolo pagina: Eric Bischoff Comments On Story About WWE Nearly Debuting New NWO In ThunderDome Era - Wrestling Inc.\nDescrizione: Back in 2020, the New World Order was close to taking over once again, but during WWE’s ThunderDome era. Eric Bischoff says he was unaware of this idea.\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"When you're in the New World Order (nWo), you're in it for life. However, if you're part of the original pack, you're not in on its plans to potentially expand. Well, lack thereof. As the 30th anniversary of the formation of nWo approaches on July 7, talks to reboot the cool anti-heroes made its rounds around the creative tables in WWE during the ThunderDome era back in 2020. Eric Bischoff, who showcased the trendsetting stable in his promotion at the now defunct WCW, was unaware of these discussions. Even most of its other members were in the dark on these talks, too.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"\\\"Sean Waltman [X-Pac] reached out to me and said, 'Hey, did you ever hear anything about this?' I said, 'I never heard anything about that,' and neither did Kevin Nash, apparently, according to Sean Waltman,\\\" the former nWo manager said on his \\\"83 Weeks\\\" podcast. \\\"You know, the three surviving members of the nWo knew nothing about it. So, obviously, we weren't involved in it, which makes me think maybe there's something lost in translation along the way here.\\\"\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"In a recent interview with \\\"Public Enemies Podcast HQ,\\\" former WWE writer Chris Dunn revealed that the Stamford-based promotion was desperate for ideas at a time when the world had shut down due to the COVID-19 pandemic. One idea that sparked interest among those in charge of writing for WWE's flagship television programs mentioned the idea of bringing back the nWo, but with newer prime athletes like Sheamus, Shinsuke Nakamura, and former stars Cesaro and Lars Sullivan leading the charge.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"As Dunn recounted, the idea was \\\"close to happening,\\\" though plans to have one of its original members (not X-Pac, according to Dunn) introduce the new nWo didn't come to fruition. The reason being the star, who Dunn couldn't recall in his interview, didn't pass their COVID test, thus causing them to delay, then eventually scrapping the idea.\"\n  }\n]\n",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_used": true,
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Eric Bischoff commenta i piani WWE per una nuova nWo nell'era del ThunderDome\",\n  \"excerpt_it\": \"Eric Bischoff rivela di non essere mai stato informato dei piani che la WWE aveva nel 2020 per riportare in vita la nWo.\",\n  \"translations\": {\n    \"b2\": \"Quando fai parte del New World Order (nWo), ci sei per la vita. Tuttavia, se fai parte del gruppo originale, non sei necessariamente al corrente dei suoi piani di espansione. O, meglio, della loro assenza. Con l'avvicinarsi del 30° anniversario della fondazione della nWo, il 7 luglio, sono tornate a galla le voci riguardanti i tentativi di rilanciare gli iconici antieroi, discussi nei tavoli creativi della WWE durante l'era del ThunderDome nel 2020. Eric Bischoff, che ha lanciato questa stable rivoluzionaria nella sua WCW, era all'oscuro di queste discussioni. Anche la maggior parte degli altri membri originali non ne sapeva nulla.\",\n    \"b3\": \"\\\"Sean Waltman [X-Pac] mi ha contattato dicendomi: 'Ehi, hai mai sentito parlare di questa cosa?'. Io ho risposto: 'Non ne ho mai saputo nulla', e a quanto pare, secondo Sean Waltman, nemmeno Kevin Nash ne sapeva niente\\\", ha raccontato l'ex manager della nWo nel suo podcast '83 Weeks'. \\\"Sapete, i tre membri superstiti della nWo non ne sapevano nulla. Quindi, ovviamente, non siamo stati coinvolti, il che mi fa pensare che forse qualcosa sia andato perso per strada lungo il percorso.\\\"\",\n    \"b4\": \"In una recente intervista con il \\\"Public Enemies Podcast HQ\\\", l'ex writer della WWE Chris Dunn ha rivelato che la federazione di Stamford era alla disperata ricerca di idee in un momento in cui il mondo si era fermato a causa della pandemia di COVID-19. Un'idea che aveva suscitato interesse tra i responsabili della scrittura per i programmi televisivi di punta della WWE prevedeva il ritorno della nWo, ma con atleti di punta più recenti come Sheamus, Shinsuke Nakamura e le ex star Cesaro e Lars Sullivan a guidare il gruppo.\",\n    \"b5\": \"Come ha raccontato Dunn, l'idea era \\\"vicina alla realizzazione\\\", sebbene i piani per far sì che uno dei membri originali (non X-Pac, secondo Dunn) introducesse la nuova nWo non si siano concretizzati. Il motivo risiede nel fatto che la star in questione, di cui Dunn non è riuscito a ricordare il nome durante l'intervista, non ha superato il test COVID, causando così un ritardo e il successivo accantonamento definitivo del progetto.\"\n  },\n  \"notes\": []\n}",
+      "title_it": "Eric Bischoff commenta i piani WWE per una nuova nWo nell'era del ThunderDome",
+      "body_html": "<p>Quando fai parte del New World Order (nWo), ci sei per la vita. Tuttavia, se fai parte del gruppo originale, non sei necessariamente al corrente dei suoi piani di espansione. O, meglio, della loro assenza. Con l&#x27;avvicinarsi del 30° anniversario della fondazione della nWo, il 7 luglio, sono tornate a galla le voci riguardanti i tentativi di rilanciare gli iconici antieroi, discussi nei tavoli creativi della WWE durante l&#x27;era del ThunderDome nel 2020. Eric Bischoff, che ha lanciato questa stable rivoluzionaria nella sua WCW, era all&#x27;oscuro di queste discussioni. Anche la maggior parte degli altri membri originali non ne sapeva nulla.</p>\nhttps://www.youtube.com/watch?v=T2hYxhcc_BQ\n\n<p>&quot;Sean Waltman [X-Pac] mi ha contattato dicendomi: &#x27;Ehi, hai mai sentito parlare di questa cosa?&#x27;. Io ho risposto: &#x27;Non ne ho mai saputo nulla&#x27;, e a quanto pare, secondo Sean Waltman, nemmeno Kevin Nash ne sapeva niente&quot;, ha raccontato l&#x27;ex manager della nWo nel suo podcast &#x27;83 Weeks&#x27;. &quot;Sapete, i tre membri superstiti della nWo non ne sapevano nulla. Quindi, ovviamente, non siamo stati coinvolti, il che mi fa pensare che forse qualcosa sia andato perso per strada lungo il percorso.&quot;</p>\n<p>In una recente intervista con il &quot;Public Enemies Podcast HQ&quot;, l&#x27;ex writer della WWE Chris Dunn ha rivelato che la federazione di Stamford era alla disperata ricerca di idee in un momento in cui il mondo si era fermato a causa della pandemia di COVID-19. Un&#x27;idea che aveva suscitato interesse tra i responsabili della scrittura per i programmi televisivi di punta della WWE prevedeva il ritorno della nWo, ma con atleti di punta più recenti come Sheamus, Shinsuke Nakamura e le ex star Cesaro e Lars Sullivan a guidare il gruppo.</p>\n<p>Come ha raccontato Dunn, l&#x27;idea era &quot;vicina alla realizzazione&quot;, sebbene i piani per far sì che uno dei membri originali (non X-Pac, secondo Dunn) introducesse la nuova nWo non si siano concretizzati. Il motivo risiede nel fatto che la star in questione, di cui Dunn non è riuscito a ricordare il nome durante l&#x27;intervista, non ha superato il test COVID, causando così un ritardo e il successivo accantonamento definitivo del progetto.</p>",
+      "excerpt_it": "Eric Bischoff rivela di non essere mai stato informato dei piani che la WWE aveva nel 2020 per riportare in vita la nWo.",
+      "bob_notes": [],
+      "translation_missing_units": [],
+      "editorial_changes": [
+        {
+          "code": "leading_embed_moved_after_first_paragraph",
+          "severity": "info",
+          "message": "Embed iniziale spostato dopo il primo paragrafo.",
+          "evidence": "https://www.youtube.com/watch?v=T2hYxhcc_BQ"
+        }
+      ],
+      "diagnostic_warnings": [],
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta",
+          "share_links"
+        ],
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "source_specific_notes": "Focus sulla dichiarazione di Bischoff, taglia introduzioni prolisse."
+      },
+      "menzo_ai_review": {
+        "id": "c1",
+        "decision": "selected",
+        "priority": 80,
+        "category_hint": "WWE",
+        "article_type": "storyline_development",
+        "event_key": "bischoff_nwo_thunderdome",
+        "duplicate_of": "",
+        "editorial_reason": "Notizia curiosa che coinvolge una leggenda e la storia recente della WWE; buon appeal per il pubblico italiano.",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "source_specific_notes": "Focus sulla dichiarazione di Bischoff, taglia introduzioni prolisse."
+        },
+        "priority_label": "high"
+      },
+      "ai_editorial_reason": "Notizia curiosa che coinvolge una leggenda e la storia recente della WWE; buon appeal per il pubblico italiano.",
+      "ai_priority_label": "high"
+    },
+    {
+      "source_url": "https://www.wrestlinginc.com/2188922/tna-cmll-tessa-blanchard-sources-unhappy-working/",
+      "source": "wrestlinginc",
+      "source_title": "TNA Sources Reportedly Unhappy Over Tessa Blanchard Working With CMLL",
+      "category_hint": "TNA",
+      "menzo_score": 71,
+      "status": "ready_for_alfred",
+      "created_at": "2026-06-06T20:40:27.648176+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "fetched_html_chars": 50778,
+      "source_html_contains_embed_hint": true,
+      "meta": {
+        "source_title": "TNA Sources Reportedly Unhappy Over Tessa Blanchard Working With CMLL - Wrestling Inc.",
+        "description": "Tessa Blanchard is under pressure from TNA officials as they are reportedly not happy with her working for CMLL on a regular basis.",
+        "featured_image": "https://www.wrestlinginc.com/img/gallery/tna-sources-reportedly-unhappy-over-tessa-blanchard-working-with-cmll/l-intro-1780765084.jpg"
+      },
+      "extraction_diagnostics": {
+        "dom_noise_reduction_enabled": false,
+        "stage": "complete",
+        "global_embed_recovery_enabled": false,
+        "root_name": "article",
+        "root_text_chars": 2087,
+        "candidate_node_count": 11,
+        "raw_element_count": 4,
+        "clean_element_count": 3,
+        "removed_by_node_count": 0,
+        "removed_by_sanitize_count": 1,
+        "table_count": 0,
+        "quote_count": 0,
+        "embed_count": 0
+      },
+      "raw_element_count": 4,
+      "clean_element_count": 3,
+      "translation_unit_count": 3,
+      "removed_before_gemini": 1,
+      "removed_elements_debug": [
+        {
+          "index": 1,
+          "reason": "duplicate_featured_image",
+          "item": {
+            "type": "image",
+            "url": "https://www.wrestlinginc.com/img/gallery/tna-sources-reportedly-unhappy-over-tessa-blanchard-working-with-cmll/intro-1780765084.jpg",
+            "alt": "Tessa Blanchard"
+          }
+        }
+      ],
+      "raw_elements_preview": [
+        {
+          "type": "image",
+          "url": "https://www.wrestlinginc.com/img/gallery/tna-sources-reportedly-unhappy-over-tessa-blanchard-working-with-cmll/intro-1780765084.jpg",
+          "alt": "Tessa Blanchard"
+        },
+        {
+          "type": "text",
+          "text": "Tessa Blanchard has been back on the TNA Knockouts roster for 18 months at the time of writing, and in that time she has challenged for singles and tag team gold. She has also attempted to rebuild her reputation as fans, and even some wrestlers, have not forgotten about her previous allegations of racism and bullying towards other female wrestlers . However, she might be in hot water again, only this time it's to do with the wrestling war between WWE, AEW, and their respective partners in Mexico, CMLL and AAA.",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "However, over WWE WrestleMania 42 weekend, Blanchard wrestled Persephone for the CMLL World Women's Championship at a CMLL event. This has naturally caused a stir in TNA as Persephone is signed to a dual AEW-CMLL contract, and given TNA's working relationship with WWE, who also own CMLL's biggest rivals in AAA, TNA officials, and even those in positions of power above the TNA officials, don't want one of their wrestlers working with an AEW wrestler.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "Blanchard and Persephone have crossed paths multiple times in Arena Mexico this year, albeit in tag team action, but their singles match happening over WrestleMania weekend is what angered people. Meltzer rounded off by saying that TNA shouldn't really care about this situation because the real wars are between WWE and AEW, as well CMLL and AAA. However, the fact that there is pressure on Blanchard to stop working for CMLL led to Meltzer saying that it \"just confirms what everyone already knows about TNA.\"",
+          "block_id": "b3"
+        }
+      ],
+      "elements": [
+        {
+          "type": "text",
+          "text": "Tessa Blanchard has been back on the TNA Knockouts roster for 18 months at the time of writing, and in that time she has challenged for singles and tag team gold. She has also attempted to rebuild her reputation as fans, and even some wrestlers, have not forgotten about her previous allegations of racism and bullying towards other female wrestlers . However, she might be in hot water again, only this time it's to do with the wrestling war between WWE, AEW, and their respective partners in Mexico, CMLL and AAA.",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "However, over WWE WrestleMania 42 weekend, Blanchard wrestled Persephone for the CMLL World Women's Championship at a CMLL event. This has naturally caused a stir in TNA as Persephone is signed to a dual AEW-CMLL contract, and given TNA's working relationship with WWE, who also own CMLL's biggest rivals in AAA, TNA officials, and even those in positions of power above the TNA officials, don't want one of their wrestlers working with an AEW wrestler.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "Blanchard and Persephone have crossed paths multiple times in Arena Mexico this year, albeit in tag team action, but their singles match happening over WrestleMania weekend is what angered people. Meltzer rounded off by saying that TNA shouldn't really care about this situation because the real wars are between WWE and AEW, as well CMLL and AAA. However, the fact that there is pressure on Blanchard to stop working for CMLL led to Meltzer saying that it \"just confirms what everyone already knows about TNA.\"",
+          "block_id": "b3"
+        }
+      ],
+      "element_counts": {
+        "text": 3,
+        "heading": 0,
+        "quote": 0,
+        "table": 0,
+        "image": 0,
+        "embed": 0
+      },
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2188922/tna-cmll-tessa-blanchard-sources-unhappy-working/\nTitolo feed: TNA Sources Reportedly Unhappy Over Tessa Blanchard Working With CMLL\nTitolo pagina: TNA Sources Reportedly Unhappy Over Tessa Blanchard Working With CMLL - Wrestling Inc.\nDescrizione: Tessa Blanchard is under pressure from TNA officials as they are reportedly not happy with her working for CMLL on a regular basis.\nCategoria suggerita: TNA\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Tessa Blanchard has been back on the TNA Knockouts roster for 18 months at the time of writing, and in that time she has challenged for singles and tag team gold. She has also attempted to rebuild her reputation as fans, and even some wrestlers, have not forgotten about her previous allegations of racism and bullying towards other female wrestlers . However, she might be in hot water again, only this time it's to do with the wrestling war between WWE, AEW, and their respective partners in Mexico, CMLL and AAA.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"However, over WWE WrestleMania 42 weekend, Blanchard wrestled Persephone for the CMLL World Women's Championship at a CMLL event. This has naturally caused a stir in TNA as Persephone is signed to a dual AEW-CMLL contract, and given TNA's working relationship with WWE, who also own CMLL's biggest rivals in AAA, TNA officials, and even those in positions of power above the TNA officials, don't want one of their wrestlers working with an AEW wrestler.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Blanchard and Persephone have crossed paths multiple times in Arena Mexico this year, albeit in tag team action, but their singles match happening over WrestleMania weekend is what angered people. Meltzer rounded off by saying that TNA shouldn't really care about this situation because the real wars are between WWE and AEW, as well CMLL and AAA. However, the fact that there is pressure on Blanchard to stop working for CMLL led to Meltzer saying that it \\\"just confirms what everyone already knows about TNA.\\\"\"\n  }\n]\n",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_used": true,
+      "translation_raw_response_preview": "{\n  \"title_it\": \"TNA: malumori per le apparizioni di Tessa Blanchard in CMLL\",\n  \"excerpt_it\": \"Fonti interne alla TNA riferiscono di tensioni riguardanti la costante collaborazione tra Tessa Blanchard e la CMLL.\",\n  \"translations\": {\n    \"b1\": \"Al momento in cui scriviamo, Tessa Blanchard è tornata nel roster delle Knockouts della TNA da 18 mesi, periodo durante il quale ha lottato per titoli singoli e di coppia. Ha inoltre cercato di ricostruire la propria reputazione, dato che i fan, e persino alcune lottatrici, non hanno dimenticato le precedenti accuse di razzismo e bullismo nei confronti di altre atlete. Tuttavia, potrebbe trovarsi di nuovo nei guai, questa volta a causa della guerra nel mondo del wrestling tra WWE, AEW e i rispettivi partner in Messico, CMLL e AAA.\",\n    \"b2\": \"Tuttavia, durante il fine settimana di WWE WrestleMania 42, la Blanchard ha affrontato Persephone con in palio il CMLL World Women's Championship in un evento della CMLL. La cosa ha naturalmente causato scalpore in TNA, dato che Persephone è sotto contratto con un accordo duale AEW-CMLL; inoltre, considerando il rapporto di collaborazione tra la TNA e la WWE (che detiene anche i diritti dei maggiori rivali della CMLL, la AAA), i dirigenti della TNA, e persino chi occupa posizioni di potere al di sopra di loro, non vedono di buon occhio che una delle loro atlete lavori con una lottatrice AEW.\",\n    \"b3\": \"La Blanchard e Persephone si sono incrociate più volte all'Arena Mexico quest'anno, sebbene in match di coppia, ma è stato il loro scontro in singolo durante il weekend di WrestleMania a far arrabbiare i vertici. Meltzer ha concluso dicendo che la TNA non dovrebbe dare troppo peso alla situazione, poiché le vere guerre sono quelle tra WWE e AEW, così come tra CMLL e AAA. Tuttavia, il fatto che ci sia pressione sulla Blanchard affinché smetta di lavorare per la CMLL ha portato Meltzer ad affermare che ciò \\\"conferma solo quello che tutti sanno già sulla TNA\\\".\"\n  },\n  \"notes\": []\n}",
+      "title_it": "TNA: malumori per le apparizioni di Tessa Blanchard in CMLL",
+      "body_html": "<p>Al momento in cui scriviamo, Tessa Blanchard è tornata nel roster delle Knockouts della TNA da 18 mesi, periodo durante il quale ha lottato per titoli singoli e di coppia. Ha inoltre cercato di ricostruire la propria reputazione, dato che i fan, e persino alcune lottatrici, non hanno dimenticato le precedenti accuse di razzismo e bullismo nei confronti di altre atlete. Tuttavia, potrebbe trovarsi di nuovo nei guai, questa volta a causa della guerra nel mondo del wrestling tra WWE, AEW e i rispettivi partner in Messico, CMLL e AAA.</p>\n<p>Tuttavia, durante il fine settimana di WWE WrestleMania 42, la Blanchard ha affrontato Persephone con in palio il CMLL World Women&#x27;s Championship in un evento della CMLL. La cosa ha naturalmente causato scalpore in TNA, dato che Persephone è sotto contratto con un accordo duale AEW-CMLL; inoltre, considerando il rapporto di collaborazione tra la TNA e la WWE (che detiene anche i diritti dei maggiori rivali della CMLL, la AAA), i dirigenti della TNA, e persino chi occupa posizioni di potere al di sopra di loro, non vedono di buon occhio che una delle loro atlete lavori con una lottatrice AEW.</p>\n<p>La Blanchard e Persephone si sono incrociate più volte all&#x27;Arena Mexico quest&#x27;anno, sebbene in match di coppia, ma è stato il loro scontro in singolo durante il weekend di WrestleMania a far arrabbiare i vertici. Meltzer ha concluso dicendo che la TNA non dovrebbe dare troppo peso alla situazione, poiché le vere guerre sono quelle tra WWE e AEW, così come tra CMLL e AAA. Tuttavia, il fatto che ci sia pressione sulla Blanchard affinché smetta di lavorare per la CMLL ha portato Meltzer ad affermare che ciò &quot;conferma solo quello che tutti sanno già sulla TNA&quot;.</p>",
+      "excerpt_it": "Fonti interne alla TNA riferiscono di tensioni riguardanti la costante collaborazione tra Tessa Blanchard e la CMLL.",
+      "bob_notes": [],
+      "translation_missing_units": [],
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta",
+          "share_links"
+        ],
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "source_specific_notes": "Sintetizza il conflitto contrattuale/organizzativo."
+      },
+      "menzo_ai_review": {
+        "id": "c3",
+        "decision": "selected",
+        "priority": 70,
+        "category_hint": "TNA",
+        "article_type": "business_legal",
+        "event_key": "blanchard_tna_cmll",
+        "duplicate_of": "",
+        "editorial_reason": "Importante dinamica di spogliatoio e rapporti tra federazioni (TNA/CMLL). Rilevante.",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "source_specific_notes": "Sintetizza il conflitto contrattuale/organizzativo."
+        },
+        "priority_label": "medium"
+      },
+      "ai_editorial_reason": "Importante dinamica di spogliatoio e rapporti tra federazioni (TNA/CMLL). Rilevante.",
+      "ai_priority_label": "medium"
+    },
+    {
+      "source_url": "https://www.wrestlinginc.com/2188910/wwe-jordynne-grace-absence-backstage-report/",
+      "source": "wrestlinginc",
+      "source_title": "Backstage Report On Jordynne Grace's WWE Absence",
+      "category_hint": "WWE",
+      "menzo_score": 70,
+      "status": "ready_for_alfred",
+      "created_at": "2026-06-06T20:40:34.037173+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "fetched_html_chars": 50003,
+      "source_html_contains_embed_hint": true,
+      "meta": {
+        "source_title": "Backstage Report On Jordynne Grace's WWE Absence - Wrestling Inc.",
+        "description": "Details on why Jordynne Grace hasn't been featured on \"WWE SmackDown\" as of late have been revealed.",
+        "featured_image": "https://www.wrestlinginc.com/img/gallery/backstage-report-on-jordynne-graces-wwe-absence/l-intro-1780762006.jpg"
+      },
+      "extraction_diagnostics": {
+        "dom_noise_reduction_enabled": false,
+        "stage": "complete",
+        "global_embed_recovery_enabled": false,
+        "root_name": "article",
+        "root_text_chars": 1878,
+        "candidate_node_count": 10,
+        "raw_element_count": 4,
+        "clean_element_count": 3,
+        "removed_by_node_count": 0,
+        "removed_by_sanitize_count": 1,
+        "table_count": 0,
+        "quote_count": 0,
+        "embed_count": 0
+      },
+      "raw_element_count": 4,
+      "clean_element_count": 3,
+      "translation_unit_count": 3,
+      "removed_before_gemini": 1,
+      "removed_elements_debug": [
+        {
+          "index": 1,
+          "reason": "duplicate_featured_image",
+          "item": {
+            "type": "image",
+            "url": "https://www.wrestlinginc.com/img/gallery/backstage-report-on-jordynne-graces-wwe-absence/intro-1780762006.jpg",
+            "alt": "Jordynne Grace on WWE Main Event"
+          }
+        }
+      ],
+      "raw_elements_preview": [
+        {
+          "type": "image",
+          "url": "https://www.wrestlinginc.com/img/gallery/backstage-report-on-jordynne-graces-wwe-absence/intro-1780762006.jpg",
+          "alt": "Jordynne Grace on WWE Main Event"
+        },
+        {
+          "type": "text",
+          "text": "2026 has been a stop/start year for \"The Juggernaut\" Jordynne Grace in WWE. She was officially drafted to \"WWE SmackDown\" at the start of the year, and even challenged Jade Cargill for the WWE Women's Championship in February. However, she suffered an ankle injury against Zelina Vega in March that kept her on the sidelines for five weeks, and has only wrestled on \"SmackDown\" once since her return.",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "While she has appeared on \"WWE Main Event\" as recently as June 4, her prolonged absence from \"SmackDown\" has caused some concern for a number of fans. This led to Sean Ross Sapp of Fightful Select being asked where Grace has been and why she hasn't been factored in to many storylines. According to Sapp, Grace has been backstage at some recent episodes of \"SmackDown,\" but outside of being used in a dark match against Blake Monroe on May 15, she hasn't been used consistently since her injury. Whether her injury is the reason remains to be seen. Sapp did note that Grace is currently in Europe right now with WWE, and as previously mentioned she did appear on the June 4 episode of \"Main Event,\" but other than that, she is simply waiting until the company has something for her.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "Grace is yet to win any gold in WWE since officially signing with the company last January, despite having a very impressive year in \"WWE NXT\" where she was in the title picture for the majority of 2025. She challenged for the WWE NXT Women's Championship and WWE NXT Women's North American Championship on TV and at Premium Live Events, but was unsuccessful in dethroning the likes of Jacy Jayne, Stephanie Vaquer, and Blake Monroe. On top of that, Grace challenged for the TNA Knockouts World Championship on two occasions thanks to the company's working relationship with TNA.",
+          "block_id": "b3"
+        }
+      ],
+      "elements": [
+        {
+          "type": "text",
+          "text": "2026 has been a stop/start year for \"The Juggernaut\" Jordynne Grace in WWE. She was officially drafted to \"WWE SmackDown\" at the start of the year, and even challenged Jade Cargill for the WWE Women's Championship in February. However, she suffered an ankle injury against Zelina Vega in March that kept her on the sidelines for five weeks, and has only wrestled on \"SmackDown\" once since her return.",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "While she has appeared on \"WWE Main Event\" as recently as June 4, her prolonged absence from \"SmackDown\" has caused some concern for a number of fans. This led to Sean Ross Sapp of Fightful Select being asked where Grace has been and why she hasn't been factored in to many storylines. According to Sapp, Grace has been backstage at some recent episodes of \"SmackDown,\" but outside of being used in a dark match against Blake Monroe on May 15, she hasn't been used consistently since her injury. Whether her injury is the reason remains to be seen. Sapp did note that Grace is currently in Europe right now with WWE, and as previously mentioned she did appear on the June 4 episode of \"Main Event,\" but other than that, she is simply waiting until the company has something for her.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "Grace is yet to win any gold in WWE since officially signing with the company last January, despite having a very impressive year in \"WWE NXT\" where she was in the title picture for the majority of 2025. She challenged for the WWE NXT Women's Championship and WWE NXT Women's North American Championship on TV and at Premium Live Events, but was unsuccessful in dethroning the likes of Jacy Jayne, Stephanie Vaquer, and Blake Monroe. On top of that, Grace challenged for the TNA Knockouts World Championship on two occasions thanks to the company's working relationship with TNA.",
+          "block_id": "b3"
+        }
+      ],
+      "element_counts": {
+        "text": 3,
+        "heading": 0,
+        "quote": 0,
+        "table": 0,
+        "image": 0,
+        "embed": 0
+      },
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2188910/wwe-jordynne-grace-absence-backstage-report/\nTitolo feed: Backstage Report On Jordynne Grace's WWE Absence\nTitolo pagina: Backstage Report On Jordynne Grace's WWE Absence - Wrestling Inc.\nDescrizione: Details on why Jordynne Grace hasn't been featured on \"WWE SmackDown\" as of late have been revealed.\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"2026 has been a stop/start year for \\\"The Juggernaut\\\" Jordynne Grace in WWE. She was officially drafted to \\\"WWE SmackDown\\\" at the start of the year, and even challenged Jade Cargill for the WWE Women's Championship in February. However, she suffered an ankle injury against Zelina Vega in March that kept her on the sidelines for five weeks, and has only wrestled on \\\"SmackDown\\\" once since her return.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"While she has appeared on \\\"WWE Main Event\\\" as recently as June 4, her prolonged absence from \\\"SmackDown\\\" has caused some concern for a number of fans. This led to Sean Ross Sapp of Fightful Select being asked where Grace has been and why she hasn't been factored in to many storylines. According to Sapp, Grace has been backstage at some recent episodes of \\\"SmackDown,\\\" but outside of being used in a dark match against Blake Monroe on May 15, she hasn't been used consistently since her injury. Whether her injury is the reason remains to be seen. Sapp did note that Grace is currently in Europe right now with WWE, and as previously mentioned she did appear on the June 4 episode of \\\"Main Event,\\\" but other than that, she is simply waiting until the company has something for her.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Grace is yet to win any gold in WWE since officially signing with the company last January, despite having a very impressive year in \\\"WWE NXT\\\" where she was in the title picture for the majority of 2025. She challenged for the WWE NXT Women's Championship and WWE NXT Women's North American Championship on TV and at Premium Live Events, but was unsuccessful in dethroning the likes of Jacy Jayne, Stephanie Vaquer, and Blake Monroe. On top of that, Grace challenged for the TNA Knockouts World Championship on two occasions thanks to the company's working relationship with TNA.\"\n  }\n]\n",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_used": true,
+      "translation_raw_response_preview": "```json\n{\n  \"title_it\": \"Report dal backstage sull'assenza di Jordynne Grace dalla WWE\",\n  \"excerpt_it\": \"Sono emersi i dettagli sul perché Jordynne Grace non sia stata impiegata regolarmente a \\\"WWE SmackDown\\\" nell'ultimo periodo.\",\n  \"translations\": {\n    \"b1\": \"Il 2026 è stato un anno caratterizzato da continui stop and go per \\\"The Juggernaut\\\" Jordynne Grace in WWE. È stata ufficialmente selezionata per \\\"WWE SmackDown\\\" a inizio anno e ha persino sfidato Jade Cargill per il WWE Women's Championship a febbraio. Tuttavia, a marzo ha subito un infortunio alla caviglia contro Zelina Vega che l'ha tenuta lontana dal ring per cinque settimane, e dal suo ritorno ha lottato a \\\"SmackDown\\\" una sola volta.\",\n    \"b2\": \"Sebbene sia apparsa a \\\"WWE Main Event\\\" ancora il 4 giugno, la sua prolungata assenza da \\\"SmackDown\\\" ha destato qualche preoccupazione tra i fan. Questo ha portato Sean Ross Sapp di Fightful Select a essere interpellato su dove sia finita la Grace e perché non sia stata inserita in molte storyline. Secondo Sapp, la Grace è stata presente nel backstage di alcuni recenti episodi di \\\"SmackDown\\\", ma, al di fuori di un dark match disputato contro Blake Monroe il 15 maggio, non è stata utilizzata con continuità dopo l'infortunio. Resta da capire se la causa sia proprio l'infortunio. Sapp ha precisato che attualmente la Grace si trova in Europa con la WWE e, come già menzionato, è apparsa nella puntata di \\\"Main Event\\\" del 4 giugno, ma a parte questo, è semplicemente in attesa che la compagnia abbia dei piani per lei.\",\n    \"b3\": \"La Grace non ha ancora vinto alcun titolo in WWE da quando ha firmato ufficialmente con la compagnia lo scorso gennaio, nonostante abbia avuto un anno molto positivo a \\\"WWE NXT\\\", dove è stata protagonista della scena titolata per gran parte del 2025. Ha lottato per il WWE NXT Women's Championship e il WWE NXT Women's North American Championship in TV e nei Premium Live Event, senza però riuscire a strappare le cinture a lottatrici del calibro di Jacy Jayne, Stephanie Vaquer e Blake Monroe. Oltre a ciò, la Grace ha sfidato per il TNA Knockouts World Championship in due occasioni, grazie al rapporto di collaborazione tra la compagnia e la TNA.\"\n  },\n  \"notes\": []\n}\n```",
+      "title_it": "Report dal backstage sull'assenza di Jordynne Grace dalla WWE",
+      "body_html": "<p>Il 2026 è stato un anno caratterizzato da continui stop and go per &quot;The Juggernaut&quot; Jordynne Grace in WWE. È stata ufficialmente selezionata per &quot;WWE SmackDown&quot; a inizio anno e ha persino sfidato Jade Cargill per il WWE Women&#x27;s Championship a febbraio. Tuttavia, a marzo ha subito un infortunio alla caviglia contro Zelina Vega che l&#x27;ha tenuta lontana dal ring per cinque settimane, e dal suo ritorno ha lottato a &quot;SmackDown&quot; una sola volta.</p>\n<p>Sebbene sia apparsa a &quot;WWE Main Event&quot; ancora il 4 giugno, la sua prolungata assenza da &quot;SmackDown&quot; ha destato qualche preoccupazione tra i fan. Questo ha portato Sean Ross Sapp di Fightful Select a essere interpellato su dove sia finita la Grace e perché non sia stata inserita in molte storyline. Secondo Sapp, la Grace è stata presente nel backstage di alcuni recenti episodi di &quot;SmackDown&quot;, ma, al di fuori di un dark match disputato contro Blake Monroe il 15 maggio, non è stata utilizzata con continuità dopo l&#x27;infortunio. Resta da capire se la causa sia proprio l&#x27;infortunio. Sapp ha precisato che attualmente la Grace si trova in Europa con la WWE e, come già menzionato, è apparsa nella puntata di &quot;Main Event&quot; del 4 giugno, ma a parte questo, è semplicemente in attesa che la compagnia abbia dei piani per lei.</p>\n<p>La Grace non ha ancora vinto alcun titolo in WWE da quando ha firmato ufficialmente con la compagnia lo scorso gennaio, nonostante abbia avuto un anno molto positivo a &quot;WWE NXT&quot;, dove è stata protagonista della scena titolata per gran parte del 2025. Ha lottato per il WWE NXT Women&#x27;s Championship e il WWE NXT Women&#x27;s North American Championship in TV e nei Premium Live Event, senza però riuscire a strappare le cinture a lottatrici del calibro di Jacy Jayne, Stephanie Vaquer e Blake Monroe. Oltre a ciò, la Grace ha sfidato per il TNA Knockouts World Championship in due occasioni, grazie al rapporto di collaborazione tra la compagnia e la TNA.</p>",
+      "excerpt_it": "Sono emersi i dettagli sul perché Jordynne Grace non sia stata impiegata regolarmente a \"WWE SmackDown\" nell'ultimo periodo.",
+      "bob_notes": [],
+      "translation_missing_units": [],
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta",
+          "share_links"
+        ],
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "source_specific_notes": "Vai dritto al punto sulla causa dell'assenza."
+      },
+      "menzo_ai_review": {
+        "id": "c4",
+        "decision": "selected",
+        "priority": 65,
+        "category_hint": "WWE",
+        "article_type": "hard_news",
+        "event_key": "jordynne_grace_absence",
+        "duplicate_of": "",
+        "editorial_reason": "Aggiornamento concreto su un talento di punta che fa apparizioni crossover.",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "source_specific_notes": "Vai dritto al punto sulla causa dell'assenza."
+        },
+        "priority_label": "medium"
+      },
+      "ai_editorial_reason": "Aggiornamento concreto su un talento di punta che fa apparizioni crossover.",
+      "ai_priority_label": "medium"
+    }
+  ],
+  "handoff": {
+    "ready_for_alfred": 3,
+    "translation_pending": 0,
+    "errors": 0,
+    "extraction_empty": 0
+  },
+  "postprocess": {
+    "bob_v93_33_changes": 1,
+    "bob_v93_16_changes": 1,
+    "bob_brief_warnings_added": 0
+  }
+}

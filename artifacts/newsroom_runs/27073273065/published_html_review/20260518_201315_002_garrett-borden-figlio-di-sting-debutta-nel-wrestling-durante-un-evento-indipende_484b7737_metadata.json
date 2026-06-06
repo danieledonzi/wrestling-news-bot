@@ -1,0 +1,34 @@
+{
+  "run_id": "2026-05-18 20:12:08",
+  "bot_version": "v89_editorial_report_quality (4810afc)",
+  "git_sha": "4810afc7e5d9d54a1c8326670c0014acde5ca40f",
+  "created_at": "2026-05-18T20:13:15",
+  "source_title": "Garrett Borden, Son Of Sting, Makes Pro Wrestling Debut At AEW Star's Indie Event",
+  "final_title": "Garrett Borden, figlio di Sting, debutta nel wrestling durante un evento indipendente",
+  "source_url": "https://www.wrestlinginc.com/2175813/aew-garrett-borden-sting-dustin-rhodes-debut-indie-event/",
+  "category_id": 8,
+  "category_slug": "WORLD",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "garrett-borden-son-of-sting-makes-pro-wrestling-debut-at-aew-stars-indie-event",
+  "story_signature_v71": "stable:darby_allin|garrett_borden|son_of_sting|debut|aew",
+  "refined_score": 83,
+  "refined_reasons": [
+    "AEW",
+    "impatto roster/storyline",
+    "ritorno/debutto",
+    "PLE/PPV",
+    "v62 ritorno/debutto"
+  ],
+  "blocks_summary": {
+    "text": 5,
+    "image": 1,
+    "embed": 1
+  },
+  "embed_urls": [
+    "https://twitter.com/jjasportstudio/status/2056330392769003941"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260518_201315_002_garrett-borden-figlio-di-sting-debutta-nel-wrestling-durante-un-evento-indipende_484b7737_original.html",
+  "final_html_file": "20260518_201315_002_garrett-borden-figlio-di-sting-debutta-nel-wrestling-durante-un-evento-indipende_484b7737_final.html",
+  "metadata_file": "20260518_201315_002_garrett-borden-figlio-di-sting-debutta-nel-wrestling-durante-un-evento-indipende_484b7737_metadata.json"
+}

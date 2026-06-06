@@ -1,0 +1,32 @@
+{
+  "run_id": "2026-05-17 20:01:57",
+  "bot_version": "v89_editorial_report_quality (1ab1ca9)",
+  "git_sha": "1ab1ca90eef98404e5c6dc5d8969233b572be321",
+  "published_items_count": 3,
+  "items": [
+    {
+      "run_id": "2026-05-17 20:01:57",
+      "title": "John Cena indica Mason Rook di NXT come futuro World Champion",
+      "url": "https://www.wrestlinginc.com/2174996/wwe-nxt-john-cena-mason-rook-future-world-champions/",
+      "original_html_file": "20260517_200255_001_john-cena-indica-mason-rook-di-nxt-come-futuro-world-champion_cb15a258_original.html",
+      "final_html_file": "20260517_200255_001_john-cena-indica-mason-rook-di-nxt-come-futuro-world-champion_cb15a258_final.html",
+      "metadata_file": "20260517_200255_001_john-cena-indica-mason-rook-di-nxt-come-futuro-world-champion_cb15a258_metadata.json"
+    },
+    {
+      "run_id": "2026-05-17 20:01:57",
+      "title": "Paul Wight: \"I pyro della WWE mi hanno fatto quasi farmela addosso\"",
+      "url": "https://www.ringsidenews.com/paul-wight-admits-wwe-pyro-once-made-him-tinkle-himself/",
+      "original_html_file": "20260517_200419_002_paul-wight-i-pyro-della-wwe-mi-hanno-fatto-quasi-farmela-addosso_931b0082_original.html",
+      "final_html_file": "20260517_200419_002_paul-wight-i-pyro-della-wwe-mi-hanno-fatto-quasi-farmela-addosso_931b0082_final.html",
+      "metadata_file": "20260517_200419_002_paul-wight-i-pyro-della-wwe-mi-hanno-fatto-quasi-farmela-addosso_931b0082_metadata.json"
+    },
+    {
+      "run_id": "2026-05-17 20:01:57",
+      "title": "È morto MB Funk, wrestler del circuito indipendente",
+      "url": "https://www.ringsidenews.com/independent-wrestler-mb-funk-passes-away/",
+      "original_html_file": "20260517_200456_003_morto-mb-funk-wrestler-del-circuito-indipendente_226d9ae3_original.html",
+      "final_html_file": "20260517_200456_003_morto-mb-funk-wrestler-del-circuito-indipendente_226d9ae3_final.html",
+      "metadata_file": "20260517_200456_003_morto-mb-funk-wrestler-del-circuito-indipendente_226d9ae3_metadata.json"
+    }
+  ]
+}
