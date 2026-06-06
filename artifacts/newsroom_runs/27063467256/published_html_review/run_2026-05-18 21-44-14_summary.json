@@ -1,0 +1,24 @@
+{
+  "run_id": "2026-05-18 21:44:14",
+  "bot_version": "v89_editorial_report_quality (f1cdc45)",
+  "git_sha": "f1cdc4559b1d4801560ac3ecd761d0fb69e8ba88",
+  "published_items_count": 2,
+  "items": [
+    {
+      "run_id": "2026-05-18 21:44:14",
+      "title": "WWE: svelati i piani per il ritorno in TV di CM Punk",
+      "url": "https://www.ringsidenews.com/cm-punks-return-timeline-revealed-amid-wwe-tv-absence/",
+      "original_html_file": "20260518_214529_001_wwe-svelati-i-piani-per-il-ritorno-in-tv-di-cm-punk_2c43ceb8_original.html",
+      "final_html_file": "20260518_214529_001_wwe-svelati-i-piani-per-il-ritorno-in-tv-di-cm-punk_2c43ceb8_final.html",
+      "metadata_file": "20260518_214529_001_wwe-svelati-i-piani-per-il-ritorno-in-tv-di-cm-punk_2c43ceb8_metadata.json"
+    },
+    {
+      "run_id": "2026-05-18 21:44:14",
+      "title": "Chris Jericho chiarisce le voci su un suo possibile ritorno in WWE",
+      "url": "https://www.ringsidenews.com/chris-jericho-addresses-wwe-return-rumors-before-aew-comeback/",
+      "original_html_file": "20260518_214719_002_chris-jericho-chiarisce-le-voci-su-un-suo-possibile-ritorno-in-wwe_e804ddaf_original.html",
+      "final_html_file": "20260518_214719_002_chris-jericho-chiarisce-le-voci-su-un-suo-possibile-ritorno-in-wwe_e804ddaf_final.html",
+      "metadata_file": "20260518_214719_002_chris-jericho-chiarisce-le-voci-su-un-suo-possibile-ritorno-in-wwe_e804ddaf_metadata.json"
+    }
+  ]
+}

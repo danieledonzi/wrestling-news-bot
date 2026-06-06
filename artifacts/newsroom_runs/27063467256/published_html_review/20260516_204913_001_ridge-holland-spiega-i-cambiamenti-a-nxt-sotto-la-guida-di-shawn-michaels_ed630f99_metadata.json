@@ -1,0 +1,39 @@
+{
+  "run_id": "2026-05-16 20:48:19",
+  "bot_version": "v88_4_2_report_softfixes (781503d)",
+  "git_sha": "781503d80e0e2624e2abb6baa97cdf58bd365682",
+  "created_at": "2026-05-16T20:49:13",
+  "source_title": "Former WWE NXT Star Reveals How Things Changed When Shawn Michaels Took Over",
+  "final_title": "Ridge Holland spiega i cambiamenti a NXT sotto la guida di Shawn Michaels",
+  "source_url": "https://www.wrestlinginc.com/2171776/wwe-nxt-ridge-holland-shawn-michaels/",
+  "category_id": 6,
+  "category_slug": "NXT",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "former-wwe-nxt-star-reveals-how-things-changed-when-shawn-michaels-took-over",
+  "story_signature_v71": "stable:triple_h|nxt_star_reveals_how_things_changed_when_shawn_michaels_took|injury|wwe",
+  "refined_score": 68,
+  "refined_reasons": [
+    "WWE/main roster",
+    "nomi forti lead: triple h",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "PLE/PPV",
+    "developmental secondario",
+    "v62 ritorno/debutto",
+    "v66 cap opinion/commentary storyline",
+    "v68 cap opinion senza news concreta"
+  ],
+  "blocks_summary": {
+    "text": 5,
+    "image": 1,
+    "embed": 1
+  },
+  "embed_urls": [
+    "https://www.youtube.com/watch?v=k0vHZvF19_E"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260516_204913_001_ridge-holland-spiega-i-cambiamenti-a-nxt-sotto-la-guida-di-shawn-michaels_ed630f99_original.html",
+  "final_html_file": "20260516_204913_001_ridge-holland-spiega-i-cambiamenti-a-nxt-sotto-la-guida-di-shawn-michaels_ed630f99_final.html",
+  "metadata_file": "20260516_204913_001_ridge-holland-spiega-i-cambiamenti-a-nxt-sotto-la-guida-di-shawn-michaels_ed630f99_metadata.json"
+}

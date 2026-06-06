@@ -1,0 +1,38 @@
+{
+  "run_id": "2026-05-16 10:43:37",
+  "bot_version": "v88_4_1_canonical_event_dedupe (37be70e)",
+  "git_sha": "37be70e51ac7408b53cb613cf799bf8204935799",
+  "created_at": "2026-05-16T10:44:59",
+  "source_title": "Former WWE Star Says AEW/ROH Deal Is In The Works",
+  "final_title": "Sidney Akeem (Reginald) vicino all'accordo con AEW e ROH",
+  "source_url": "https://www.ringsidenews.com/former-wwe-star-says-aewroh-deal-works/",
+  "category_id": 5,
+  "category_slug": "AEW",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "former-wwe-star-says-aewroh-deal-is-in-the-works",
+  "story_signature_v71": "stable:wwe_star_says|roh_deal_is_in_the_works|contract|wwe",
+  "refined_score": 54,
+  "refined_reasons": [
+    "WWE/main roster",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "show settimanale",
+    "opinione generica",
+    "v62 ritorno/debutto",
+    "v66 cap opinion/commentary storyline",
+    "v68 cap duro opinion/commentary"
+  ],
+  "blocks_summary": {
+    "text": 8,
+    "image": 0,
+    "embed": 1
+  },
+  "embed_urls": [
+    "https://www.youtube.com/watch?v=79Fsg7qDpvs"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260516_104459_001_sidney-akeem-reginald-vicino-all-accordo-con-aew-e-roh_7f8d12c4_original.html",
+  "final_html_file": "20260516_104459_001_sidney-akeem-reginald-vicino-all-accordo-con-aew-e-roh_7f8d12c4_final.html",
+  "metadata_file": "20260516_104459_001_sidney-akeem-reginald-vicino-all-accordo-con-aew-e-roh_7f8d12c4_metadata.json"
+}
