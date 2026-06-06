@@ -1,0 +1,270 @@
+{
+  "agent": "Alfred",
+  "version": "v93_20_alfred_table_warning_precision",
+  "generated_at": "2026-06-06T19:16:57.356208+00:00",
+  "mode": "structured_content_quality_editor",
+  "input": {
+    "bob_version": "v93_33_youtube_plain_and_cta_cleanup",
+    "articles": 3
+  },
+  "reviews": [
+    {
+      "source_url": "https://www.ringsidenews.com/mr-anderson-believes-randy-orton-john-cena-worked-together-get-him-fired-wwe/",
+      "source": "ringsidenews",
+      "category_hint": "WWE",
+      "title_it": "Mr. Anderson: \"Randy Orton e John Cena hanno complottato per farmi licenziare\"",
+      "decision": "approved",
+      "quality_score": 95,
+      "issues": [],
+      "warnings": [
+        {
+          "code": "image_placeholder_present",
+          "severity": "warning",
+          "message": "Presente placeholder immagine da gestire nel Publisher.",
+          "evidence": "<!--IMAGE:...-->"
+        }
+      ],
+      "editorial_changes": [],
+      "approved_article": {
+        "source_url": "https://www.ringsidenews.com/mr-anderson-believes-randy-orton-john-cena-worked-together-get-him-fired-wwe/",
+        "source_title": "Mr. Anderson Believes Randy Orton and John Cena Worked Together to Get Him Fired from WWE",
+        "title_it": "Mr. Anderson: \"Randy Orton e John Cena hanno complottato per farmi licenziare\"",
+        "body_html": "<p>Mr. Anderson non fa passi indietro sulla sua versione dei fatti riguardo all&#x27;addio alla WWE.</p>\nhttps://www.youtube.com/watch?v=PpX4K6I2C54\n\n<p>Intervenuto durante il podcast &quot;Tagging In&quot; con Chris Harris, Anderson ha affrontato la storia, ormai datata, secondo cui fu licenziato per aver presumibilmente fatto cadere Randy Orton sulla testa durante un match. Anderson ha smentito questa ricostruzione, affermando che il filmato non supporta tale tesi. Anderson ha dichiarato che i fan possono rallentare il video e notare come il collo di Orton non abbia mai toccato il tappeto.</p>\n<blockquote>“Sì, decisamente. Sapete, come tutti hanno detto, Randy... insomma, sono stato licenziato per aver fatto cadere Randy sulla testa. Se rallentate il video, potete vedere che il suo collo non entra mai in contatto con il tappeto. Anche il modo in cui ha subito il bump: si è posizionato in modo che fosse perfettamente allineato con la telecamera. Si può vedere che, insomma, lui dice che l&#x27;ho fatto cadere sulla testa, ma guardando l&#x27;ombra del suo collo si nota che è stato un bump completamente piatto, dalle spalle al sedere, una linea retta perfetta.”</blockquote>\n<p>Anderson ha poi espresso la sua opinione su quanto accaduto dietro le quinte, sostenendo che Randy Orton e John Cena siano stati entrambi coinvolti nel suo allontanamento dalla WWE.</p>\n<blockquote>“Credo che Randy e John abbiano collaborato. Quel giorno decisero che era arrivato il momento di farmi fuori. E ha funzionato. Le cose sono andate così.”</blockquote>\n<p>Tuttavia, Anderson non ha dato tutta la colpa a Orton e Cena. Ha ammesso che, se il suo nome non fosse già stato associato a voci negative nel backstage, la situazione avrebbe potuto avere un epilogo diverso.</p>\n<blockquote>“E devo dire, come ho già affermato in passato, che quella è stata la goccia che ha fatto traboccare il vaso, ma se mi fossi comportato come avrei dovuto ogni giorno, non sarebbe mai successo.”</blockquote>\n<p>Anderson ha spiegato che il problema non riguardava solo un singolo spot in un match. Secondo la sua visione, su di lui c&#x27;era già troppa attenzione negativa e quell&#x27;incidente è diventato la scusa definitiva.</p>\n<blockquote>“Avrebbero potuto andare da Vince a dire qualsiasi cosa e lui ci avrebbe creduto, dato che il mio nome continuava a circolare in un&#x27;ottica negativa e io continuavo a incasinare le cose in vari modi, e di questo mi assumo la responsabilità. Quindi, come ho detto, quella è stata la goccia che ha fatto traboccare il vaso, ma il motivo per cui sono stato licenziato è colpa mia. Al 100% colpa mia.”</blockquote>\n<p>Chris Harris ha aggiunto di ricordare che Anderson e Orton sembravano in buoni rapporti nel backstage durante il suo periodo in WWE. Anderson ha confermato che erano abbastanza legati da viaggiare insieme regolarmente.</p>\n<blockquote>“Sì. Abbiamo viaggiato insieme probabilmente per due anni. Ogni settimana, letteralmente ogni settimana.”</blockquote>\n<p>Ciò ha reso la situazione ancora più dolorosa per Anderson, poiché ha percepito un cambiamento durante i nove mesi in cui è rimasto fuori per infortunio.</p>\n<blockquote>“Quindi, vedere che sia successo tutto ciò e ripensare alle interazioni avute durante quell&#x27;ultimo giorno a Los Angeles... è stato molto freddo. Era come se qualcosa fosse cambiato durante i nove mesi in cui sono stato assente per infortunio; qualcosa è successo in quel lasso di tempo che ha causato tutto questo.”</blockquote>\n<p>Anderson ha inoltre chiarito di aver percepito fin da subito che Cena avesse un problema con lui.</p>\n<blockquote>“E il punto è che a John non sono mai piaciuto. Ho sempre sentito che John mi avesse preso di mira fin dal primo giorno, ed è stato strano perché, quando ero a SmackDown, sembrava che fossi stato accolto a braccia aperte.”</blockquote>\n<p>Ha poi confrontato l&#x27;atmosfera del backstage di SmackDown con quella di Raw, affermando che i top name di SmackDown cercavano di aiutare i nuovi talenti, mentre Raw sembrava molto più territoriale.</p>\n<blockquote>“Erano come due montagne: da un lato avevi tutte queste grandi star, Undertaker, Rey Mysterio, Batista, Eddie Guerrero, Kane, Booker T, Finlay, tutti che lanciavano corde e tendevano la mano dicendo: &#x27;Dai, vieni su qui, ti aiutiamo noi&#x27;, cercando di far diventare tutti delle star. Dall&#x27;altra parte, a Raw, era come se la gente ti rovesciasse secchi di olio bollente addosso e ti tirasse massi contro, dicendo: &#x27;Stai lontano dalla mia montagna. Questa è la mia montagna&#x27;.”</blockquote>\n<p>La versione di Anderson dipinge un quadro piuttosto teso del suo ultimo periodo in WWE. Crede che Orton e Cena abbiano giocato un ruolo determinante nella spinta finale verso il licenziamento, ma accetta anche che le sue azioni abbiano dato alla WWE ragioni sufficienti per chiudere il rapporto. È raro sentire qualcuno essere così diretto assumendosi al contempo le proprie responsabilità, ma Anderson ha reso chiaro che, dal suo punto di vista, entrambe le verità possono coesistere.</p>\n\nhttps://www.youtube.com/embed/PpX4K6I2C54?feature=oembed\n\n<!--IMAGE:https://www.ringsidenews.com/wp-content/uploads/2024/01/avatar_user_1_1704158183-96x96.jpg-->",
+        "excerpt_it": "Mr. Anderson torna a parlare del suo addio alla WWE, sostenendo che Orton e Cena abbiano lavorato insieme per favorire il suo licenziamento.",
+        "category_hint": "WWE",
+        "source": "ringsidenews",
+        "meta": {
+          "source_title": "Mr. Anderson Believes Randy Orton and John Cena Worked Together to Get Him Fired from WWE",
+          "description": "Mr. Anderson is not backing away from his side of the story when it comes to his WWE exit. While speaking on Tagging In with Chris Harris, Anderson",
+          "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/mr-anderson-believes-randy-orton-and-john-cena-worked-together-to-get-him-fired-from-wwe-44.jpg"
+        },
+        "element_counts": {
+          "text": 10,
+          "heading": 0,
+          "quote": 8,
+          "table": 0,
+          "image": 1,
+          "embed": 2
+        },
+        "bob_translation_model": "gemini-3.1-flash-lite"
+      },
+      "diagnostics": {
+        "plain_chars": 4800,
+        "title_chars": 78,
+        "bob_status": "ready_for_alfred",
+        "bob_diagnostic_stage": "ready_for_alfred",
+        "bob_removed_before_gemini": 18,
+        "bob_clean_element_count": 21,
+        "bob_translation_model": "gemini-3.1-flash-lite",
+        "editorial_changes": 0,
+        "quote_count": 8,
+        "table_count": 0
+      }
+    },
+    {
+      "source_url": "https://www.wrestlinginc.com/2188921/wwe-shareholders-lawsuit-additional-details-trial/",
+      "source": "wrestlinginc",
+      "category_hint": "Business",
+      "title_it": "Ulteriori dettagli sulla causa degli azionisti WWE in vista del processo",
+      "decision": "approved",
+      "quality_score": 100,
+      "issues": [],
+      "warnings": [],
+      "editorial_changes": [],
+      "approved_article": {
+        "source_url": "https://www.wrestlinginc.com/2188921/wwe-shareholders-lawsuit-additional-details-trial/",
+        "source_title": "Additional Details On WWE Shareholders Lawsuit As Case Gets Set For Trial",
+        "title_it": "Ulteriori dettagli sulla causa degli azionisti WWE in vista del processo",
+        "body_html": "<p>Secondo il veterano del giornalismo, i querelanti in questo caso chiedono un risarcimento danni compreso tra i 466 e i 957 milioni di dollari, oltre agli interessi maturati dalla chiusura della fusione, avvenuta quasi tre anni fa. Queste cifre derivano da un rapporto di oltre 200 pagine redatto dal loro testimone esperto, James L. Canessa. Dall&#x27;altra parte, la difesa sostiene che la natura della vendita non abbia causato alcun danno agli azionisti.</p>\n<p>Come riportato in precedenza, il processo includerà le testimonianze di McMahon, del presidente della WWE Nick Khan, del Chief Content Officer Paul &quot;Triple H&quot; Levesque, di George Barrios, Michelle Wilson, Emanuel, del presidente e Chief Operating Officer di TKO Mark Shapiro e di altri soggetti non ancora elencati. È importante notare che, mentre McMahon, Khan, Levesque, Barrios e Wilson sono citati come imputati nel caso, Emanuel e Shapiro non lo sono.</p>\n<p>Non si tratterà di un processo con giuria. Sarà il giudice Travis Laster a emettere il verdetto finale al termine del procedimento, che potrebbe richiedere mesi. Qualora il giudice dovesse disporre un risarcimento monetario, questo verrebbe ripartito tra coloro che detenevano azioni WWE al momento della vendita. Il processo si svolgerà nell&#x27;arco di quattro giorni, a partire da lunedì presso la Delaware Court of Chancery; la conclusione è prevista per venerdì, con una pausa prevista per la giornata di giovedì.</p>",
+        "excerpt_it": "In vista del processo che inizierà lunedì, emergono nuove cifre sulla richiesta di risarcimento avanzata dagli azionisti contro la WWE.",
+        "category_hint": "Business",
+        "source": "wrestlinginc",
+        "meta": {
+          "source_title": "Additional Details On WWE Shareholders Lawsuit As Case Gets Set For Trial - Wrestling Inc.",
+          "description": "Ahead of the WWE shareholders lawsuit on Monday, new information has been released, including the financial amount the plaintiffs are seeking in this case.",
+          "featured_image": "https://www.wrestlinginc.com/img/gallery/additional-details-on-wwe-shareholders-lawsuit-as-case-gets-set-for-trial/l-intro-1780763976.jpg"
+        },
+        "element_counts": {
+          "text": 3,
+          "heading": 0,
+          "quote": 0,
+          "table": 0,
+          "image": 0,
+          "embed": 0
+        },
+        "bob_translation_model": "gemini-3.1-flash-lite"
+      },
+      "diagnostics": {
+        "plain_chars": 1424,
+        "title_chars": 72,
+        "bob_status": "ready_for_alfred",
+        "bob_diagnostic_stage": "ready_for_alfred",
+        "bob_removed_before_gemini": 1,
+        "bob_clean_element_count": 3,
+        "bob_translation_model": "gemini-3.1-flash-lite",
+        "editorial_changes": 0,
+        "quote_count": 0,
+        "table_count": 0
+      }
+    },
+    {
+      "source_url": "https://www.ringsidenews.com/title-match-confirmed-june-8-wwe-raw-paris/",
+      "source": "ringsidenews",
+      "category_hint": "WWE",
+      "title_it": "Confermato un match titolato per la puntata di WWE RAW a Parigi dell'8 giugno",
+      "decision": "approved",
+      "quality_score": 95,
+      "issues": [],
+      "warnings": [
+        {
+          "code": "image_placeholder_present",
+          "severity": "warning",
+          "message": "Presente placeholder immagine da gestire nel Publisher.",
+          "evidence": "<!--IMAGE:...-->"
+        }
+      ],
+      "editorial_changes": [],
+      "approved_article": {
+        "source_url": "https://www.ringsidenews.com/title-match-confirmed-june-8-wwe-raw-paris/",
+        "source_title": "Title Match Confirmed for June 8 WWE RAW in Paris",
+        "title_it": "Confermato un match titolato per la puntata di WWE RAW a Parigi dell'8 giugno",
+        "body_html": "<p>Penta ha appena confermato un importante match valido per il WWE Intercontinental Championship per la puntata di RAW a Parigi, dove difenderà il titolo contro Rey Mysterio.</p>\nhttps://www.instagram.com/p/DZQUHc5Dxtx/?utm_source=ig_web_copy_link&amp;igsh=MzRlODBiNWFlZA==\n\n<p>Penta ha annunciato tramite Instagram che difenderà il suo titolo Intercontinentale contro Rey Mysterio nella puntata di Monday Night RAW dell&#x27;8 giugno a Parigi, in Francia. L&#x27;incontro si aggiunge a uno show già molto ricco che vedrà protagonista il torneo King and Queen of the Ring. Penta ha sottolineato come affrontare Rey rappresenti un momento fondamentale della sua carriera.</p>\n<blockquote>“QUESTO LUNEDÌ SERA IN DIRETTA DA PARIGI!!! 🇫🇷 Affrontare @619iamlucha per il WWE Intercontinental Championship è il coronamento di un sogno!!! Il match più significativo della mia carriera si terrà questo lunedì a RAW, IN DIRETTA DA PARIGI! Rey: È un onore e un sogno poter affrontarti per il mio campionato. Ci vediamo a Parigi con grande rispetto, e ZERO MIEDO!!!! 🔥🔥🔥”</blockquote>\n<p>La puntata di RAW dell&#x27;8 giugno ha già in programma due importanti incontri del torneo. Seth Rollins, Je’Von Evans, Ricky Saints e Talla Tonga si affronteranno in un match di qualificazione al King of the Ring, mentre Becky Lynch, Liv Morgan, Alexa Bliss e Chelsea Green si scontreranno in un match del Queen of the Ring.</p>\n<p>Il match tra Penta e Rey Mysterio conferisce all&#x27;episodio di Parigi un incontro titolato ancora più prestigioso. Per Penta, questa non è solo un&#x27;ulteriore difesa, ma un vero e proprio dream match contro uno dei luchadores più importanti nella storia della WWE.</p>\n\nhttps://www.instagram.com/p/DZQUHc5Dxtx\n\n<h2>Programma attuale per WWE RAW dell&#x27;8 giugno</h2>\n<p>Intercontinental Championship: Penta (c) vs. Rey Mysterio</p>\n<p>King of the Ring Qualifier: Seth Rollins vs. Je’Von Evans vs. Ricky Saints vs. Talla Tonga</p>\n<p>Queen of the Ring Qualifier: Becky Lynch vs. Liv Morgan vs. Alexa Bliss vs. Chelsea Green</p>\n<!--IMAGE:https://www.ringsidenews.com/wp-content/uploads/2025/06/-38-96x96.jpg-->",
+        "excerpt_it": "Penta ha annunciato un importante match per il titolo Intercontinentale contro Rey Mysterio in occasione della tappa parigina di Monday Night RAW.",
+        "category_hint": "WWE",
+        "source": "ringsidenews",
+        "meta": {
+          "source_title": "Title Match Confirmed for June 8 WWE RAW in Paris",
+          "description": "Penta just confirmed a major WWE Intercontinental Championship match for RAW in Paris, and he's set to defend the title against Rey Mysterio. Penta took",
+          "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/title-match-confirmed-for-june-8-wwe-raw-in-paris-52.jpg"
+        },
+        "element_counts": {
+          "text": 7,
+          "heading": 1,
+          "quote": 1,
+          "table": 0,
+          "image": 1,
+          "embed": 2
+        },
+        "bob_translation_model": "gemini-3.1-flash-lite"
+      },
+      "diagnostics": {
+        "plain_chars": 1925,
+        "title_chars": 77,
+        "bob_status": "ready_for_alfred",
+        "bob_diagnostic_stage": "ready_for_alfred",
+        "bob_removed_before_gemini": 16,
+        "bob_clean_element_count": 12,
+        "bob_translation_model": "gemini-3.1-flash-lite",
+        "editorial_changes": 0,
+        "quote_count": 1,
+        "table_count": 0
+      }
+    }
+  ],
+  "approved_articles": [
+    {
+      "source_url": "https://www.ringsidenews.com/mr-anderson-believes-randy-orton-john-cena-worked-together-get-him-fired-wwe/",
+      "source_title": "Mr. Anderson Believes Randy Orton and John Cena Worked Together to Get Him Fired from WWE",
+      "title_it": "Mr. Anderson: \"Randy Orton e John Cena hanno complottato per farmi licenziare\"",
+      "body_html": "<p>Mr. Anderson non fa passi indietro sulla sua versione dei fatti riguardo all&#x27;addio alla WWE.</p>\nhttps://www.youtube.com/watch?v=PpX4K6I2C54\n\n<p>Intervenuto durante il podcast &quot;Tagging In&quot; con Chris Harris, Anderson ha affrontato la storia, ormai datata, secondo cui fu licenziato per aver presumibilmente fatto cadere Randy Orton sulla testa durante un match. Anderson ha smentito questa ricostruzione, affermando che il filmato non supporta tale tesi. Anderson ha dichiarato che i fan possono rallentare il video e notare come il collo di Orton non abbia mai toccato il tappeto.</p>\n<blockquote>“Sì, decisamente. Sapete, come tutti hanno detto, Randy... insomma, sono stato licenziato per aver fatto cadere Randy sulla testa. Se rallentate il video, potete vedere che il suo collo non entra mai in contatto con il tappeto. Anche il modo in cui ha subito il bump: si è posizionato in modo che fosse perfettamente allineato con la telecamera. Si può vedere che, insomma, lui dice che l&#x27;ho fatto cadere sulla testa, ma guardando l&#x27;ombra del suo collo si nota che è stato un bump completamente piatto, dalle spalle al sedere, una linea retta perfetta.”</blockquote>\n<p>Anderson ha poi espresso la sua opinione su quanto accaduto dietro le quinte, sostenendo che Randy Orton e John Cena siano stati entrambi coinvolti nel suo allontanamento dalla WWE.</p>\n<blockquote>“Credo che Randy e John abbiano collaborato. Quel giorno decisero che era arrivato il momento di farmi fuori. E ha funzionato. Le cose sono andate così.”</blockquote>\n<p>Tuttavia, Anderson non ha dato tutta la colpa a Orton e Cena. Ha ammesso che, se il suo nome non fosse già stato associato a voci negative nel backstage, la situazione avrebbe potuto avere un epilogo diverso.</p>\n<blockquote>“E devo dire, come ho già affermato in passato, che quella è stata la goccia che ha fatto traboccare il vaso, ma se mi fossi comportato come avrei dovuto ogni giorno, non sarebbe mai successo.”</blockquote>\n<p>Anderson ha spiegato che il problema non riguardava solo un singolo spot in un match. Secondo la sua visione, su di lui c&#x27;era già troppa attenzione negativa e quell&#x27;incidente è diventato la scusa definitiva.</p>\n<blockquote>“Avrebbero potuto andare da Vince a dire qualsiasi cosa e lui ci avrebbe creduto, dato che il mio nome continuava a circolare in un&#x27;ottica negativa e io continuavo a incasinare le cose in vari modi, e di questo mi assumo la responsabilità. Quindi, come ho detto, quella è stata la goccia che ha fatto traboccare il vaso, ma il motivo per cui sono stato licenziato è colpa mia. Al 100% colpa mia.”</blockquote>\n<p>Chris Harris ha aggiunto di ricordare che Anderson e Orton sembravano in buoni rapporti nel backstage durante il suo periodo in WWE. Anderson ha confermato che erano abbastanza legati da viaggiare insieme regolarmente.</p>\n<blockquote>“Sì. Abbiamo viaggiato insieme probabilmente per due anni. Ogni settimana, letteralmente ogni settimana.”</blockquote>\n<p>Ciò ha reso la situazione ancora più dolorosa per Anderson, poiché ha percepito un cambiamento durante i nove mesi in cui è rimasto fuori per infortunio.</p>\n<blockquote>“Quindi, vedere che sia successo tutto ciò e ripensare alle interazioni avute durante quell&#x27;ultimo giorno a Los Angeles... è stato molto freddo. Era come se qualcosa fosse cambiato durante i nove mesi in cui sono stato assente per infortunio; qualcosa è successo in quel lasso di tempo che ha causato tutto questo.”</blockquote>\n<p>Anderson ha inoltre chiarito di aver percepito fin da subito che Cena avesse un problema con lui.</p>\n<blockquote>“E il punto è che a John non sono mai piaciuto. Ho sempre sentito che John mi avesse preso di mira fin dal primo giorno, ed è stato strano perché, quando ero a SmackDown, sembrava che fossi stato accolto a braccia aperte.”</blockquote>\n<p>Ha poi confrontato l&#x27;atmosfera del backstage di SmackDown con quella di Raw, affermando che i top name di SmackDown cercavano di aiutare i nuovi talenti, mentre Raw sembrava molto più territoriale.</p>\n<blockquote>“Erano come due montagne: da un lato avevi tutte queste grandi star, Undertaker, Rey Mysterio, Batista, Eddie Guerrero, Kane, Booker T, Finlay, tutti che lanciavano corde e tendevano la mano dicendo: &#x27;Dai, vieni su qui, ti aiutiamo noi&#x27;, cercando di far diventare tutti delle star. Dall&#x27;altra parte, a Raw, era come se la gente ti rovesciasse secchi di olio bollente addosso e ti tirasse massi contro, dicendo: &#x27;Stai lontano dalla mia montagna. Questa è la mia montagna&#x27;.”</blockquote>\n<p>La versione di Anderson dipinge un quadro piuttosto teso del suo ultimo periodo in WWE. Crede che Orton e Cena abbiano giocato un ruolo determinante nella spinta finale verso il licenziamento, ma accetta anche che le sue azioni abbiano dato alla WWE ragioni sufficienti per chiudere il rapporto. È raro sentire qualcuno essere così diretto assumendosi al contempo le proprie responsabilità, ma Anderson ha reso chiaro che, dal suo punto di vista, entrambe le verità possono coesistere.</p>\n\nhttps://www.youtube.com/embed/PpX4K6I2C54?feature=oembed\n\n<!--IMAGE:https://www.ringsidenews.com/wp-content/uploads/2024/01/avatar_user_1_1704158183-96x96.jpg-->",
+      "excerpt_it": "Mr. Anderson torna a parlare del suo addio alla WWE, sostenendo che Orton e Cena abbiano lavorato insieme per favorire il suo licenziamento.",
+      "category_hint": "WWE",
+      "source": "ringsidenews",
+      "meta": {
+        "source_title": "Mr. Anderson Believes Randy Orton and John Cena Worked Together to Get Him Fired from WWE",
+        "description": "Mr. Anderson is not backing away from his side of the story when it comes to his WWE exit. While speaking on Tagging In with Chris Harris, Anderson",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/mr-anderson-believes-randy-orton-and-john-cena-worked-together-to-get-him-fired-from-wwe-44.jpg"
+      },
+      "element_counts": {
+        "text": 10,
+        "heading": 0,
+        "quote": 8,
+        "table": 0,
+        "image": 1,
+        "embed": 2
+      },
+      "bob_translation_model": "gemini-3.1-flash-lite"
+    },
+    {
+      "source_url": "https://www.wrestlinginc.com/2188921/wwe-shareholders-lawsuit-additional-details-trial/",
+      "source_title": "Additional Details On WWE Shareholders Lawsuit As Case Gets Set For Trial",
+      "title_it": "Ulteriori dettagli sulla causa degli azionisti WWE in vista del processo",
+      "body_html": "<p>Secondo il veterano del giornalismo, i querelanti in questo caso chiedono un risarcimento danni compreso tra i 466 e i 957 milioni di dollari, oltre agli interessi maturati dalla chiusura della fusione, avvenuta quasi tre anni fa. Queste cifre derivano da un rapporto di oltre 200 pagine redatto dal loro testimone esperto, James L. Canessa. Dall&#x27;altra parte, la difesa sostiene che la natura della vendita non abbia causato alcun danno agli azionisti.</p>\n<p>Come riportato in precedenza, il processo includerà le testimonianze di McMahon, del presidente della WWE Nick Khan, del Chief Content Officer Paul &quot;Triple H&quot; Levesque, di George Barrios, Michelle Wilson, Emanuel, del presidente e Chief Operating Officer di TKO Mark Shapiro e di altri soggetti non ancora elencati. È importante notare che, mentre McMahon, Khan, Levesque, Barrios e Wilson sono citati come imputati nel caso, Emanuel e Shapiro non lo sono.</p>\n<p>Non si tratterà di un processo con giuria. Sarà il giudice Travis Laster a emettere il verdetto finale al termine del procedimento, che potrebbe richiedere mesi. Qualora il giudice dovesse disporre un risarcimento monetario, questo verrebbe ripartito tra coloro che detenevano azioni WWE al momento della vendita. Il processo si svolgerà nell&#x27;arco di quattro giorni, a partire da lunedì presso la Delaware Court of Chancery; la conclusione è prevista per venerdì, con una pausa prevista per la giornata di giovedì.</p>",
+      "excerpt_it": "In vista del processo che inizierà lunedì, emergono nuove cifre sulla richiesta di risarcimento avanzata dagli azionisti contro la WWE.",
+      "category_hint": "Business",
+      "source": "wrestlinginc",
+      "meta": {
+        "source_title": "Additional Details On WWE Shareholders Lawsuit As Case Gets Set For Trial - Wrestling Inc.",
+        "description": "Ahead of the WWE shareholders lawsuit on Monday, new information has been released, including the financial amount the plaintiffs are seeking in this case.",
+        "featured_image": "https://www.wrestlinginc.com/img/gallery/additional-details-on-wwe-shareholders-lawsuit-as-case-gets-set-for-trial/l-intro-1780763976.jpg"
+      },
+      "element_counts": {
+        "text": 3,
+        "heading": 0,
+        "quote": 0,
+        "table": 0,
+        "image": 0,
+        "embed": 0
+      },
+      "bob_translation_model": "gemini-3.1-flash-lite"
+    },
+    {
+      "source_url": "https://www.ringsidenews.com/title-match-confirmed-june-8-wwe-raw-paris/",
+      "source_title": "Title Match Confirmed for June 8 WWE RAW in Paris",
+      "title_it": "Confermato un match titolato per la puntata di WWE RAW a Parigi dell'8 giugno",
+      "body_html": "<p>Penta ha appena confermato un importante match valido per il WWE Intercontinental Championship per la puntata di RAW a Parigi, dove difenderà il titolo contro Rey Mysterio.</p>\nhttps://www.instagram.com/p/DZQUHc5Dxtx/?utm_source=ig_web_copy_link&amp;igsh=MzRlODBiNWFlZA==\n\n<p>Penta ha annunciato tramite Instagram che difenderà il suo titolo Intercontinentale contro Rey Mysterio nella puntata di Monday Night RAW dell&#x27;8 giugno a Parigi, in Francia. L&#x27;incontro si aggiunge a uno show già molto ricco che vedrà protagonista il torneo King and Queen of the Ring. Penta ha sottolineato come affrontare Rey rappresenti un momento fondamentale della sua carriera.</p>\n<blockquote>“QUESTO LUNEDÌ SERA IN DIRETTA DA PARIGI!!! 🇫🇷 Affrontare @619iamlucha per il WWE Intercontinental Championship è il coronamento di un sogno!!! Il match più significativo della mia carriera si terrà questo lunedì a RAW, IN DIRETTA DA PARIGI! Rey: È un onore e un sogno poter affrontarti per il mio campionato. Ci vediamo a Parigi con grande rispetto, e ZERO MIEDO!!!! 🔥🔥🔥”</blockquote>\n<p>La puntata di RAW dell&#x27;8 giugno ha già in programma due importanti incontri del torneo. Seth Rollins, Je’Von Evans, Ricky Saints e Talla Tonga si affronteranno in un match di qualificazione al King of the Ring, mentre Becky Lynch, Liv Morgan, Alexa Bliss e Chelsea Green si scontreranno in un match del Queen of the Ring.</p>\n<p>Il match tra Penta e Rey Mysterio conferisce all&#x27;episodio di Parigi un incontro titolato ancora più prestigioso. Per Penta, questa non è solo un&#x27;ulteriore difesa, ma un vero e proprio dream match contro uno dei luchadores più importanti nella storia della WWE.</p>\n\nhttps://www.instagram.com/p/DZQUHc5Dxtx\n\n<h2>Programma attuale per WWE RAW dell&#x27;8 giugno</h2>\n<p>Intercontinental Championship: Penta (c) vs. Rey Mysterio</p>\n<p>King of the Ring Qualifier: Seth Rollins vs. Je’Von Evans vs. Ricky Saints vs. Talla Tonga</p>\n<p>Queen of the Ring Qualifier: Becky Lynch vs. Liv Morgan vs. Alexa Bliss vs. Chelsea Green</p>\n<!--IMAGE:https://www.ringsidenews.com/wp-content/uploads/2025/06/-38-96x96.jpg-->",
+      "excerpt_it": "Penta ha annunciato un importante match per il titolo Intercontinentale contro Rey Mysterio in occasione della tappa parigina di Monday Night RAW.",
+      "category_hint": "WWE",
+      "source": "ringsidenews",
+      "meta": {
+        "source_title": "Title Match Confirmed for June 8 WWE RAW in Paris",
+        "description": "Penta just confirmed a major WWE Intercontinental Championship match for RAW in Paris, and he's set to defend the title against Rey Mysterio. Penta took",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/title-match-confirmed-for-june-8-wwe-raw-in-paris-52.jpg"
+      },
+      "element_counts": {
+        "text": 7,
+        "heading": 1,
+        "quote": 1,
+        "table": 0,
+        "image": 1,
+        "embed": 2
+      },
+      "bob_translation_model": "gemini-3.1-flash-lite"
+    }
+  ],
+  "handoff": {
+    "approved": 3,
+    "needs_revision": 0,
+    "warnings": 2,
+    "blockers": 0,
+    "editorial_changes": 0
+  },
+  "policy": {
+    "checks": [
+      "untranslated_quotes",
+      "quote_semantics",
+      "table_semantics",
+      "possible_missing_table",
+      "cta_residue",
+      "source_credit_residue",
+      "unsafe_html",
+      "missing_or_short_body",
+      "image_embed_placeholders",
+      "title_clickbait_or_length"
+    ],
+    "deterministic_normalizations": [
+      "split_inline_image_embed_placeholders",
+      "long_quote_paragraphs_to_blockquote",
+      "funzionari_wwe_to_dirigenti_wwe"
+    ],
+    "ai_used": false,
+    "auto_rewrite": false,
+    "conservative_mode": true,
+    "possible_missing_table_requires_real_table_signal": true,
+    "consume_bob_diagnostic_warnings": true
+  },
+  "postprocess": {
+    "false_table_warnings_removed": 0,
+    "bob_warnings_surfaced": 0
+  }
+}
