@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-05-21 16:04:41",
+  "bot_version": "v90_2_editorial_pacing_update_gate (b0df1e7)",
+  "git_sha": "b0df1e7fcdbbdcd1596f19025a942a96e242b1fe",
+  "created_at": "2026-05-21T16:05:12",
+  "source_title": "Ludwig Kaiser Requests Trial In Florida Battery Case After Hiring Attorney",
+  "final_title": "Ludwig Kaiser chiede il processo per l'accusa di percosse in Florida",
+  "source_url": "https://www.ringsidenews.com/ludwig-kaiser-requests-trial-florida-battery-case-hiring-attorney/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "ludwig-kaiser-requests-trial-in-florida-battery-case-after-hiring-attorney",
+  "story_signature_v71": "stable:ludwig_kaiser_requests_trial_in_florida_battery_case_after_h|story|wwe",
+  "refined_score": 100,
+  "refined_reasons": [
+    "WWE/main roster",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "evento legale/controversia",
+    "PLE/PPV",
+    "v62 evento legale grave"
+  ],
+  "blocks_summary": {
+    "text": 10,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260521_160512_001_ludwig-kaiser-chiede-il-processo-per-l-accusa-di-percosse-in-florida_dbfe604d_original.html",
+  "final_html_file": "20260521_160512_001_ludwig-kaiser-chiede-il-processo-per-l-accusa-di-percosse-in-florida_dbfe604d_final.html",
+  "metadata_file": "20260521_160512_001_ludwig-kaiser-chiede-il-processo-per-l-accusa-di-percosse-in-florida_dbfe604d_metadata.json"
+}

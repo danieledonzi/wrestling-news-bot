@@ -1,0 +1,34 @@
+{
+  "run_id": "2026-05-14 21:30:33",
+  "bot_version": "v88_2_editorial_performance_guards (0205aa0)",
+  "git_sha": "0205aa0dc85c658a2c150011d09fc38d2a228f1a",
+  "created_at": "2026-05-14T21:32:01",
+  "source_title": "Possible AEW Names For Kofi Kingston and Xavier Woods Revealed",
+  "final_title": "AEW: svelati i possibili ring name di Kofi Kingston e Xavier Woods",
+  "source_url": "https://www.ringsidenews.com/possible-aew-names-kofi-kingston-xavier-woods-revealed/",
+  "category_id": 5,
+  "category_slug": "AEW",
+  "article_type": "RUMOR",
+  "semantic_id": "possible-aew-names-for-kofi-kingston-and-xavier-woods-revealed",
+  "story_signature_v71": "stable:tony_khan|aew_names_for_kofi_kingston|xavier_woods_revealed|title|wwe",
+  "refined_score": 63,
+  "refined_reasons": [
+    "WWE/main roster",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "v62 titolo/championship",
+    "v86.9 cap commentary/opinion 86->68",
+    "v72.3 cap rumor: niente boost raffinamento"
+  ],
+  "blocks_summary": {
+    "text": 12,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260514_213201_003_aew-svelati-i-possibili-ring-name-di-kofi-kingston-e-xavier-woods_2f3f152e_original.html",
+  "final_html_file": "20260514_213201_003_aew-svelati-i-possibili-ring-name-di-kofi-kingston-e-xavier-woods_2f3f152e_final.html",
+  "metadata_file": "20260514_213201_003_aew-svelati-i-possibili-ring-name-di-kofi-kingston-e-xavier-woods_2f3f152e_metadata.json"
+}

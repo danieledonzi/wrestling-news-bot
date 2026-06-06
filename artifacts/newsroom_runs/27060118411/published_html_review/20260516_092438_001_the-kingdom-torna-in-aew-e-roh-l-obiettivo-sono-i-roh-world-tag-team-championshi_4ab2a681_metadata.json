@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-05-16 09:23:21",
+  "bot_version": "v88_4_1_canonical_event_dedupe (9043d82)",
+  "git_sha": "9043d82ee7bffe1f994d2d24618d98f3af7e453f",
+  "created_at": "2026-05-16T09:24:38",
+  "source_title": "The Kingdom Returns To AEW/ROH With ROH Tag Team Titles In Their Sights",
+  "final_title": "The Kingdom torna in AEW e ROH: l'obiettivo sono i ROH World Tag Team Championship",
+  "source_url": "https://www.ringsidenews.com/kingdom-returns-aewroh-roh-tag-team-titles-their-sights/",
+  "category_id": 5,
+  "category_slug": "AEW",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "the-kingdom-returns-to-aewroh-with-roh-tag-team-titles-in-their-sights",
+  "story_signature_v71": "stable:the_kingdom_returns_to|roh_with|roh_tag_team_titles_in_their_sights|return|aew",
+  "refined_score": 68,
+  "refined_reasons": [
+    "AEW",
+    "impatto roster/storyline",
+    "ritorno/debutto",
+    "v62 ritorno/debutto"
+  ],
+  "blocks_summary": {
+    "text": 6,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [
+    "https://twitter.com/ringofhonor/status/2055466269776740866"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260516_092438_001_the-kingdom-torna-in-aew-e-roh-l-obiettivo-sono-i-roh-world-tag-team-championshi_4ab2a681_original.html",
+  "final_html_file": "20260516_092438_001_the-kingdom-torna-in-aew-e-roh-l-obiettivo-sono-i-roh-world-tag-team-championshi_4ab2a681_final.html",
+  "metadata_file": "20260516_092438_001_the-kingdom-torna-in-aew-e-roh-l-obiettivo-sono-i-roh-world-tag-team-championshi_4ab2a681_metadata.json"
+}

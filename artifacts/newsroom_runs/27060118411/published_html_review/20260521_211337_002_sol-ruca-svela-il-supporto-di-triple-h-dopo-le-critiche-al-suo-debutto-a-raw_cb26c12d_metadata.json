@@ -1,0 +1,39 @@
+{
+  "run_id": "2026-05-21 21:10:21",
+  "bot_version": "v90_2_editorial_pacing_update_gate (1c11f8c)",
+  "git_sha": "1c11f8c454f1e614e142265c763f12e97019c620",
+  "created_at": "2026-05-21T21:13:37",
+  "source_title": "Sol Ruca Reveals How Triple H Helped Her After Backlash Over WWE RAW Debut",
+  "final_title": "Sol Ruca svela il supporto di Triple H dopo le critiche al suo debutto a Raw",
+  "source_url": "https://www.ringsidenews.com/sol-ruca-reveals-how-triple-h-helped-her-backlash-wwe-raw-debut/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "sol-ruca-reveals-how-triple-h-helped-her-after-backlash-over-wwe-raw-debut",
+  "story_signature_v71": "stable:becky_lynch|sol_ruca|triple_h|debut|wwe",
+  "refined_score": 72,
+  "refined_reasons": [
+    "WWE/main roster",
+    "top star lead: becky lynch",
+    "nomi forti titolo: triple h",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "combo top name lead + evento forte",
+    "PLE/PPV",
+    "v62 ritorno/debutto",
+    "v86.8 cap executive interview/opinion 100->72"
+  ],
+  "blocks_summary": {
+    "text": 17,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [
+    "https://www.youtube.com/watch?v=FpHfLxwco9M"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260521_211337_002_sol-ruca-svela-il-supporto-di-triple-h-dopo-le-critiche-al-suo-debutto-a-raw_cb26c12d_original.html",
+  "final_html_file": "20260521_211337_002_sol-ruca-svela-il-supporto-di-triple-h-dopo-le-critiche-al-suo-debutto-a-raw_cb26c12d_final.html",
+  "metadata_file": "20260521_211337_002_sol-ruca-svela-il-supporto-di-triple-h-dopo-le-critiche-al-suo-debutto-a-raw_cb26c12d_metadata.json"
+}

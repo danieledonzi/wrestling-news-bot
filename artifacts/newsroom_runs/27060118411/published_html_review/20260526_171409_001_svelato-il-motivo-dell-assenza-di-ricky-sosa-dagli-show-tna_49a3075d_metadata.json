@@ -1,0 +1,32 @@
+{
+  "run_id": "2026-05-26 17:12:54",
+  "bot_version": "v91_6_4_force_true_results_report_lane (509d5d2)",
+  "git_sha": "509d5d23d6fcde7e07c4f361f889fc8f1477fe95",
+  "created_at": "2026-05-26T17:14:09",
+  "source_title": "Real Reason Behind Ricky Sosa's TNA TV Absence Revealed",
+  "final_title": "Svelato il motivo dell'assenza di Ricky Sosa dagli show TNA",
+  "source_url": "https://www.ringsidenews.com/real-reason-behind-ricky-sosas-tna-tv-absence-revealed/",
+  "category_id": 7,
+  "category_slug": "TNA",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "real-reason-behind-ricky-sosas-tna-tv-absence-revealed",
+  "story_signature_v71": "report:tna-sacrifice-2026-05-26",
+  "refined_score": 86,
+  "refined_reasons": [
+    "event_report",
+    "hard_news",
+    "major_title_outcome",
+    "true_results_report",
+    "v91_6_4_true_results_report_forced_publish"
+  ],
+  "blocks_summary": {
+    "text": 7,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260526_171409_001_svelato-il-motivo-dell-assenza-di-ricky-sosa-dagli-show-tna_49a3075d_original.html",
+  "final_html_file": "20260526_171409_001_svelato-il-motivo-dell-assenza-di-ricky-sosa-dagli-show-tna_49a3075d_final.html",
+  "metadata_file": "20260526_171409_001_svelato-il-motivo-dell-assenza-di-ricky-sosa-dagli-show-tna_49a3075d_metadata.json"
+}
