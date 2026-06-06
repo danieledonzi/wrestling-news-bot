@@ -127,6 +127,8 @@ for patch_name in [
     "scripts/apply_v93_menzo_footprint_policy.py",
     "scripts/apply_v93_universal_embed_extractor.py",
     "scripts/apply_v93_output_cleanup.py",
+    "scripts/apply_v93_media_ranking_patch.py",
+    "scripts/apply_v93_menzo_ai_skip_fingerprint.py",
 ]:
     patch = Path(patch_name)
     if patch.exists():
