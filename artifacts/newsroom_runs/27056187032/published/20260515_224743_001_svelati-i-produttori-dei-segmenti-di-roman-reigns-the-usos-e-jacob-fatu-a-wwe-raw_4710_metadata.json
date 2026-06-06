@@ -1,0 +1,20 @@
+{
+  "schema": "owtv_published_artifact_v87_6",
+  "run_id": "2026-05-15 22:45:40",
+  "bot_version": "v88_4_1_canonical_event_dedupe (0c4e8f4)",
+  "git_sha": "0c4e8f4814dd6aada936e11b4c6411125bc2c90c",
+  "created_at": "2026-05-15T22:47:43",
+  "wp_post_id": 4710,
+  "wp_status": "publish",
+  "title": "Svelati i produttori dei segmenti di Roman Reigns, The Usos e Jacob Fatu a WWE Raw",
+  "source_url": "https://www.ringsidenews.com/masterminds-behind-roman-reigns-usos-jacob-fatu-may-11-wwe-raw-storyline-revealed/",
+  "semantic_id": "masterminds-behind-roman-reigns-usos-jacob-fatu-may-11-wwe-raw-storyline-revealed",
+  "event_key": "event:title:roman-reigns:world:tag:championship",
+  "category": 4,
+  "featured_image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/05/masterminds-behind-roman-reigns-usos-amp-jacob-fatu-may-11-wwe-raw-storyline-revealed-34.jpg",
+  "embed_urls": [],
+  "inline_images": [],
+  "html_file": "published/20260515_224743_001_svelati-i-produttori-dei-segmenti-di-roman-reigns-the-usos-e-jacob-fatu-a-wwe-raw_4710_final.html",
+  "metadata_file": "published/20260515_224743_001_svelati-i-produttori-dei-segmenti-di-roman-reigns-the-usos-e-jacob-fatu-a-wwe-raw_4710_metadata.json",
+  "source_file": "published/20260515_224743_001_svelati-i-produttori-dei-segmenti-di-roman-reigns-the-usos-e-jacob-fatu-a-wwe-raw_4710_source.txt"
+}
