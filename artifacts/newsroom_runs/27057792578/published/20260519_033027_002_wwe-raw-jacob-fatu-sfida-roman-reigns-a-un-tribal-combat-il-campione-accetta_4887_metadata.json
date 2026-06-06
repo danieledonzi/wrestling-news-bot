@@ -1,0 +1,20 @@
+{
+  "schema": "owtv_published_artifact_v87_6",
+  "run_id": "2026-05-19 03:26:01",
+  "bot_version": "v89_editorial_report_quality (c404fec)",
+  "git_sha": "c404fec6255b71a34d209f26eec6e6c3833e27d1",
+  "created_at": "2026-05-19T03:30:27",
+  "wp_post_id": 4887,
+  "wp_status": "publish",
+  "title": "WWE Raw: Jacob Fatu sfida Roman Reigns a un Tribal Combat, il campione accetta",
+  "source_url": "https://www.wrestlinginc.com/2176114/wwe-raw-jacob-fatu-roman-reigns-tribal-combat-challenge/",
+  "semantic_id": "jacob-fatu-challenges-roman-reigns-to-tribal-combat-on-wwe-raw-reigns-accepts",
+  "event_key": "event:title:roman-reigns:world",
+  "category": 4,
+  "featured_image_url": "https://www.wrestlinginc.com/img/gallery/wwe-raw-jacob-fatu-roman-reigns-tribal-combat-challenge/l-intro-1779155865.jpg",
+  "embed_urls": [],
+  "inline_images": [],
+  "html_file": "published/20260519_033027_002_wwe-raw-jacob-fatu-sfida-roman-reigns-a-un-tribal-combat-il-campione-accetta_4887_final.html",
+  "metadata_file": "published/20260519_033027_002_wwe-raw-jacob-fatu-sfida-roman-reigns-a-un-tribal-combat-il-campione-accetta_4887_metadata.json",
+  "source_file": "published/20260519_033027_002_wwe-raw-jacob-fatu-sfida-roman-reigns-a-un-tribal-combat-il-campione-accetta_4887_source.txt"
+}

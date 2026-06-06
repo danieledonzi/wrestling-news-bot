@@ -1,0 +1,20 @@
+{
+  "schema": "owtv_published_artifact_v87_6",
+  "run_id": "2026-05-15 23:46:40",
+  "bot_version": "v88_4_1_canonical_event_dedupe (5fa346a)",
+  "git_sha": "5fa346aa351d299f779aa65cade297af789e0e21",
+  "created_at": "2026-05-15T23:47:42",
+  "wp_post_id": 4719,
+  "wp_status": "publish",
+  "title": "WWE, caso Ring Boy: i querelanti potranno mantenere l'anonimato",
+  "source_url": "https://www.wrestlinginc.com/2174193/wwe-vince-mcmahon-linda-ring-boy-lawsuit-judge-plaintiffs-anonymous/",
+  "semantic_id": "judge-allows-plaintiffs-to-remain-anonymous-in-wwe-ring-boy-lawsuit",
+  "event_key": "event:legal:vince-mcmahon",
+  "category": 4,
+  "featured_image_url": "https://www.wrestlinginc.com/img/gallery/judge-allows-plaintiffs-to-remain-anonymous-in-wwe-ring-boy-lawsuit/l-intro-1778885038.jpg",
+  "embed_urls": [],
+  "inline_images": [],
+  "html_file": "published/20260515_234742_001_wwe-caso-ring-boy-i-querelanti-potranno-mantenere-lanonimato_4719_final.html",
+  "metadata_file": "published/20260515_234742_001_wwe-caso-ring-boy-i-querelanti-potranno-mantenere-lanonimato_4719_metadata.json",
+  "source_file": "published/20260515_234742_001_wwe-caso-ring-boy-i-querelanti-potranno-mantenere-lanonimato_4719_source.txt"
+}

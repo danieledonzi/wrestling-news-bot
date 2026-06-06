@@ -1,0 +1,37 @@
+{
+  "run_id": "2026-05-19 08:04:19",
+  "bot_version": "v89_editorial_report_quality (ad33230)",
+  "git_sha": "ad33230715fde9eb540828eb0c0e331052e174e7",
+  "created_at": "2026-05-19T08:05:05",
+  "source_title": "Backstage Update Emerges On LA Knight's WWE Absence",
+  "final_title": "Aggiornamenti sull'assenza di LA Knight dagli show WWE",
+  "source_url": "https://www.ringsidenews.com/backstage-update-emerges-la-knights-wwe-absence/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "RUMOR",
+  "semantic_id": "backstage-update-emerges-on-la-knights-wwe-absence",
+  "story_signature_v71": "stable:cody_rhodes|gunther|backstage_update_emerges_on|contract|wwe",
+  "refined_score": 56,
+  "refined_reasons": [
+    "WWE/main roster",
+    "top star lead: cody rhodes",
+    "nomi forti lead: cody rhodes",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "combo top name lead + evento forte",
+    "PLE/PPV",
+    "v72.3 cap rumor: niente boost raffinamento",
+    "v79.1.3 true future preview cap"
+  ],
+  "blocks_summary": {
+    "text": 9,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260519_080505_001_aggiornamenti-sull-assenza-di-la-knight-dagli-show-wwe_38320657_original.html",
+  "final_html_file": "20260519_080505_001_aggiornamenti-sull-assenza-di-la-knight-dagli-show-wwe_38320657_final.html",
+  "metadata_file": "20260519_080505_001_aggiornamenti-sull-assenza-di-la-knight-dagli-show-wwe_38320657_metadata.json"
+}
