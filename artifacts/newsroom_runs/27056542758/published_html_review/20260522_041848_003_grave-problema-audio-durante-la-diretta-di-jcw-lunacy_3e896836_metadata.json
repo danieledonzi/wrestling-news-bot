@@ -1,0 +1,35 @@
+{
+  "run_id": "2026-05-22 04:17:04",
+  "bot_version": "v90_2_editorial_pacing_update_gate (792e2fb)",
+  "git_sha": "792e2fbda87a89406034e8cdbe6a7175d63a461f",
+  "created_at": "2026-05-22T04:18:48",
+  "source_title": "JCW Lunacy Experiencing Major Audio Issues During Live Broadcast",
+  "final_title": "Grave problema audio durante la diretta di JCW Lunacy",
+  "source_url": "https://www.ringsidenews.com/jcw-lunacy-experiencing-major-audio-issues-during-live-broadcast/",
+  "category_id": 1,
+  "category_slug": "UNCATEGORIZED",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "jcw-lunacy-experiencing-major-audio-issues-during-live-broadcast",
+  "story_signature_v71": "stable:jcw_lunacy_experiencing_major_audio_issues_during_live_broad|status|wrestling",
+  "refined_score": 44,
+  "refined_reasons": [
+    "PLE/PPV",
+    "v62 media rights/streaming",
+    "v62 categoria business",
+    "v88.2 cap OTHER/feature non-news 76->54",
+    "v88.3 hard feature skip cap 54->45",
+    "v73 cap uncategorized"
+  ],
+  "blocks_summary": {
+    "text": 7,
+    "image": 0,
+    "embed": 1
+  },
+  "embed_urls": [
+    "https://www.youtube.com/watch?v=qhYsYnHG4bk"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260522_041848_003_grave-problema-audio-durante-la-diretta-di-jcw-lunacy_3e896836_original.html",
+  "final_html_file": "20260522_041848_003_grave-problema-audio-durante-la-diretta-di-jcw-lunacy_3e896836_final.html",
+  "metadata_file": "20260522_041848_003_grave-problema-audio-durante-la-diretta-di-jcw-lunacy_3e896836_metadata.json"
+}

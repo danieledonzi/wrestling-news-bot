@@ -1,0 +1,24 @@
+{
+  "run_id": "2026-05-15 21:51:11",
+  "bot_version": "v88_4_1_canonical_event_dedupe (f6059bb)",
+  "git_sha": "f6059bb25329f064383a88c7edcf60776b2d42d5",
+  "published_items_count": 2,
+  "items": [
+    {
+      "run_id": "2026-05-15 21:51:11",
+      "title": "Buddy Matthews torna sul ring in Australia: aggiornamenti sull'infortunio",
+      "url": "https://www.wrestlinginc.com/2174099/aew-buddy-matthews-injury-update-indie-appearance-cleared-october/",
+      "original_html_file": "20260515_215238_001_buddy-matthews-torna-sul-ring-in-australia-aggiornamenti-sull-infortunio_604902cb_original.html",
+      "final_html_file": "20260515_215238_001_buddy-matthews-torna-sul-ring-in-australia-aggiornamenti-sull-infortunio_604902cb_final.html",
+      "metadata_file": "20260515_215238_001_buddy-matthews-torna-sul-ring-in-australia-aggiornamenti-sull-infortunio_604902cb_metadata.json"
+    },
+    {
+      "run_id": "2026-05-15 21:51:11",
+      "title": "Ronda Rousey: \"Il mio ultimo match in WWE è stato un dito medio ai fan\"",
+      "url": "https://www.ringsidenews.com/ronda-rousey-says-final-wwe-match-middle-finger-fans/",
+      "original_html_file": "20260515_215333_002_ronda-rousey-il-mio-ultimo-match-in-wwe-stato-un-dito-medio-ai-fan_884cab3e_original.html",
+      "final_html_file": "20260515_215333_002_ronda-rousey-il-mio-ultimo-match-in-wwe-stato-un-dito-medio-ai-fan_884cab3e_final.html",
+      "metadata_file": "20260515_215333_002_ronda-rousey-il-mio-ultimo-match-in-wwe-stato-un-dito-medio-ai-fan_884cab3e_metadata.json"
+    }
+  ]
+}

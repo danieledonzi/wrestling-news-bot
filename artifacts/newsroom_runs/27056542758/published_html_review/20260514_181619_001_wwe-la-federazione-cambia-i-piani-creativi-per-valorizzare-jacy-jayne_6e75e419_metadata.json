@@ -1,0 +1,37 @@
+{
+  "run_id": "2026-05-14 18:15:07",
+  "bot_version": "v88_1_report_dedupe_pending_cleanup (3b808f1)",
+  "git_sha": "3b808f19ecde3c35a6d2a0c04e1b3592a5d5b0c3",
+  "created_at": "2026-05-14T18:16:19",
+  "source_title": "WWE Already Changing Creative Plans Due To Jacy Jayne's Strong Main Roster Start",
+  "final_title": "WWE: la federazione cambia i piani creativi per valorizzare Jacy Jayne",
+  "source_url": "https://www.ringsidenews.com/wwe-already-changing-creative-plans-due-jacy-jaynes-strong-main-roster-start/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "RUMOR",
+  "semantic_id": "wwe-already-changing-creative-plans-due-to-jacy-jaynes-strong-main-roster-start",
+  "story_signature_v71": "stable:charlotte_flair|alexa_bliss|rhea_ripley|story|wwe",
+  "refined_score": 68,
+  "refined_reasons": [
+    "WWE/main roster",
+    "top star lead: rhea ripley",
+    "nomi forti lead: rhea ripley",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "combo top name lead + evento forte",
+    "PLE/PPV",
+    "v62 ritorno/debutto",
+    "v72.3 cap rumor"
+  ],
+  "blocks_summary": {
+    "text": 10,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260514_181619_001_wwe-la-federazione-cambia-i-piani-creativi-per-valorizzare-jacy-jayne_6e75e419_original.html",
+  "final_html_file": "20260514_181619_001_wwe-la-federazione-cambia-i-piani-creativi-per-valorizzare-jacy-jayne_6e75e419_final.html",
+  "metadata_file": "20260514_181619_001_wwe-la-federazione-cambia-i-piani-creativi-per-valorizzare-jacy-jayne_6e75e419_metadata.json"
+}

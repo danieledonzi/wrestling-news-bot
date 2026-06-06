@@ -1,0 +1,32 @@
+{
+  "run_id": "2026-05-25 17:44:04",
+  "bot_version": "v90_2_6_2_clean_consolidated_source (16efb60)",
+  "git_sha": "16efb60e120115f779cd52d398c2cdd066e2a26f",
+  "published_items_count": 3,
+  "items": [
+    {
+      "run_id": "2026-05-25 17:44:04",
+      "title": "WWE: nessuna sanzione per Ludwig Kaiser dopo l'arresto",
+      "url": "https://www.ringsidenews.com/wwes-current-stance-ludwig-kaiser-recent-arrest-revealed/",
+      "original_html_file": "20260525_174445_001_wwe-nessuna-sanzione-per-ludwig-kaiser-dopo-l-arresto_aba1d395_original.html",
+      "final_html_file": "20260525_174445_001_wwe-nessuna-sanzione-per-ludwig-kaiser-dopo-l-arresto_aba1d395_final.html",
+      "metadata_file": "20260525_174445_001_wwe-nessuna-sanzione-per-ludwig-kaiser-dopo-l-arresto_aba1d395_metadata.json"
+    },
+    {
+      "run_id": "2026-05-25 17:44:04",
+      "title": "Beth Copeland commenta il suo ritorno a AEW Double or Nothing",
+      "url": "https://www.ringsidenews.com/beth-copeland-reacts-surprise-return-aew-double-nothing/",
+      "original_html_file": "20260525_174550_002_beth-copeland-commenta-il-suo-ritorno-a-aew-double-or-nothing_13d38c6f_original.html",
+      "final_html_file": "20260525_174550_002_beth-copeland-commenta-il-suo-ritorno-a-aew-double-or-nothing_13d38c6f_final.html",
+      "metadata_file": "20260525_174550_002_beth-copeland-commenta-il-suo-ritorno-a-aew-double-or-nothing_13d38c6f_metadata.json"
+    },
+    {
+      "run_id": "2026-05-25 17:44:04",
+      "title": "Matt Hardy smentisce le accuse di aver rivelato informazioni sul Brawl Out della AEW",
+      "url": "https://www.ringsidenews.com/matt-hardy-shuts-down-accusations-he-leaked-aew-brawl-out-information-dirt-sheets/",
+      "original_html_file": "20260525_174625_003_matt-hardy-smentisce-le-accuse-di-aver-rivelato-informazioni-sul-brawl-out-della_634c1223_original.html",
+      "final_html_file": "20260525_174625_003_matt-hardy-smentisce-le-accuse-di-aver-rivelato-informazioni-sul-brawl-out-della_634c1223_final.html",
+      "metadata_file": "20260525_174625_003_matt-hardy-smentisce-le-accuse-di-aver-rivelato-informazioni-sul-brawl-out-della_634c1223_metadata.json"
+    }
+  ]
+}

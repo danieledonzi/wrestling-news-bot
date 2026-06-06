@@ -1,0 +1,30 @@
+{
+  "run_id": "2026-05-25 17:44:04",
+  "bot_version": "v90_2_6_2_clean_consolidated_source (16efb60)",
+  "git_sha": "16efb60e120115f779cd52d398c2cdd066e2a26f",
+  "created_at": "2026-05-25T17:46:25",
+  "source_title": "Matt Hardy Shuts Down Accusations He Leaked AEW Brawl Out Information to Dirt Sheets",
+  "final_title": "Matt Hardy smentisce le accuse di aver rivelato informazioni sul Brawl Out della AEW",
+  "source_url": "https://www.ringsidenews.com/matt-hardy-shuts-down-accusations-he-leaked-aew-brawl-out-information-dirt-sheets/",
+  "category_id": 5,
+  "category_slug": "AEW",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "matt-hardy-shuts-down-accusations-he-leaked-aew-brawl-out-information-to-dirt-sheets",
+  "story_signature_v71": "event:aew-all-out-2026-05-25:young-bucks-story",
+  "refined_score": 72,
+  "refined_reasons": [
+    "event_related"
+  ],
+  "blocks_summary": {
+    "text": 12,
+    "image": 0,
+    "embed": 1
+  },
+  "embed_urls": [
+    "https://www.youtube.com/watch?v=GJ7-jSgdJ5E"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260525_174625_003_matt-hardy-smentisce-le-accuse-di-aver-rivelato-informazioni-sul-brawl-out-della_634c1223_original.html",
+  "final_html_file": "20260525_174625_003_matt-hardy-smentisce-le-accuse-di-aver-rivelato-informazioni-sul-brawl-out-della_634c1223_final.html",
+  "metadata_file": "20260525_174625_003_matt-hardy-smentisce-le-accuse-di-aver-rivelato-informazioni-sul-brawl-out-della_634c1223_metadata.json"
+}

@@ -1,0 +1,32 @@
+{
+  "run_id": "2026-05-26 06:50:17",
+  "bot_version": "v90_2_6_2_clean_consolidated_source (b10a446)",
+  "git_sha": "b10a44674ad27395015ec0a00198a697f02cb200",
+  "created_at": "2026-05-26T06:51:42",
+  "source_title": "Buddy Matthews Locked In For Major WSW Return Tour Across Australia & New Zealand",
+  "final_title": "Buddy Matthews confermato per il tour di World Series Wrestling in Australia e Nuova Zelanda",
+  "source_url": "https://www.ringsidenews.com/buddy-matthews-locked-major-wsw-return-tour-across-australia-new-zealand/",
+  "category_id": 5,
+  "category_slug": "AEW",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "buddy-matthews-locked-in-for-major-wsw-return-tour-across-australia-new-zealand",
+  "story_signature_v71": "event:aew-grand-slam-2026-05-26:buddy-matthews-locked-major-wsw-injury",
+  "refined_score": 82,
+  "refined_reasons": [
+    "event_related",
+    "concrete_outcome",
+    "hard_news"
+  ],
+  "blocks_summary": {
+    "text": 17,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [
+    "https://twitter.com/WSWWrestlingAUS/status/2059123094460264927"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260526_065142_001_buddy-matthews-confermato-per-il-tour-di-world-series-wrestling-in-australia-e-n_d1b81a12_original.html",
+  "final_html_file": "20260526_065142_001_buddy-matthews-confermato-per-il-tour-di-world-series-wrestling-in-australia-e-n_d1b81a12_final.html",
+  "metadata_file": "20260526_065142_001_buddy-matthews-confermato-per-il-tour-di-world-series-wrestling-in-australia-e-n_d1b81a12_metadata.json"
+}
