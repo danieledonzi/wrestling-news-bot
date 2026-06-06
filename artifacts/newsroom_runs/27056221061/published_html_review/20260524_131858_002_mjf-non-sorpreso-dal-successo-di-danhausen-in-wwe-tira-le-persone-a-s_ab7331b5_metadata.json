@@ -1,0 +1,35 @@
+{
+  "run_id": "2026-05-24 13:17:10",
+  "bot_version": "v90_2_5_3_1_snme_publish_tighten (ad54636)",
+  "git_sha": "ad5463602032821d02ead040027996d603984877",
+  "created_at": "2026-05-24T13:18:58",
+  "source_title": "AEW's MJF Isn't Surprised By Danhausen's WWE Success: He 'Pulls People In'",
+  "final_title": "MJF non sorpreso dal successo di Danhausen in WWE: \"Tira le persone a sé\"",
+  "source_url": "https://www.wrestlinginc.com/2178523/aew-wwe-mjf-maxwell-jacob-friedman-danhausen-isnt-surprised/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "OPINION",
+  "semantic_id": "aews-mjf-isnt-surprised-by-danhausens-wwe-success-he-pulls-people-in",
+  "story_signature_v71": "stable:danhausen|mjf|mjf_isn|title|wwe",
+  "refined_score": 54,
+  "refined_reasons": [
+    "WWE/main roster",
+    "nomi forti titolo: danhausen",
+    "WWE main roster + storyline/evento",
+    "titolo/championship",
+    "PLE/PPV",
+    "v88.2 cap OTHER/feature non-news 68->54"
+  ],
+  "blocks_summary": {
+    "text": 5,
+    "image": 1,
+    "embed": 1
+  },
+  "embed_urls": [
+    "https://www.youtube.com/watch?v=Icd0oR11Ca4"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260524_131858_002_mjf-non-sorpreso-dal-successo-di-danhausen-in-wwe-tira-le-persone-a-s_ab7331b5_original.html",
+  "final_html_file": "20260524_131858_002_mjf-non-sorpreso-dal-successo-di-danhausen-in-wwe-tira-le-persone-a-s_ab7331b5_final.html",
+  "metadata_file": "20260524_131858_002_mjf-non-sorpreso-dal-successo-di-danhausen-in-wwe-tira-le-persone-a-s_ab7331b5_metadata.json"
+}

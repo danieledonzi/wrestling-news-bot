@@ -1,0 +1,39 @@
+{
+  "run_id": "2026-05-15 20:38:28",
+  "bot_version": "v88_4_1_canonical_event_dedupe (a77c339)",
+  "git_sha": "a77c339d6bb38a25175a12c3345ac73a882ede3f",
+  "created_at": "2026-05-15T20:42:07",
+  "source_title": "Joe Hendry Names CM Punk As WWE Opponent He Wants Most",
+  "final_title": "Joe Hendry punta CM Punk come avversario ideale in WWE",
+  "source_url": "https://www.ringsidenews.com/joe-hendry-names-cm-punk-as-wwe-opponent-he-wants-most/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "joe-hendry-names-cm-punk-as-wwe-opponent-he-wants-most",
+  "story_signature_v71": "stable:logan_paul|joe_hendry|cm_punk|title|wwe",
+  "refined_score": 84,
+  "refined_reasons": [
+    "WWE/main roster",
+    "top star titolo: cm punk",
+    "nomi forti lead: logan paul",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "combo top name titolo + evento forte",
+    "PLE/PPV",
+    "v62 ritorno/debutto",
+    "v66 cap title match non-title-change"
+  ],
+  "blocks_summary": {
+    "text": 10,
+    "image": 0,
+    "embed": 1
+  },
+  "embed_urls": [
+    "https://www.youtube.com/watch?v=0PkuTSnEtl4"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260515_204207_003_joe-hendry-punta-cm-punk-come-avversario-ideale-in-wwe_fd493a55_original.html",
+  "final_html_file": "20260515_204207_003_joe-hendry-punta-cm-punk-come-avversario-ideale-in-wwe_fd493a55_final.html",
+  "metadata_file": "20260515_204207_003_joe-hendry-punta-cm-punk-come-avversario-ideale-in-wwe_fd493a55_metadata.json"
+}

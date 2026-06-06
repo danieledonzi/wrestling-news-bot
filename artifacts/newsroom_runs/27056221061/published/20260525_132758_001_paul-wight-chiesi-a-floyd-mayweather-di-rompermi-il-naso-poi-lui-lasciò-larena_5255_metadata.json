@@ -1,0 +1,20 @@
+{
+  "schema": "owtv_published_artifact_v87_6",
+  "run_id": "2026-05-25 13:24:36",
+  "bot_version": "v90_2_8_feed_level_processed_skip (53effda)",
+  "git_sha": "53effdaa1f38fb735f964b457e51b9ffb4447b18",
+  "created_at": "2026-05-25T13:27:58",
+  "wp_post_id": 5255,
+  "wp_status": "publish",
+  "title": "Paul Wight: \"Chiesi a Floyd Mayweather di rompermi il naso, poi lui lasciò l'arena\"",
+  "source_url": "https://www.ringsidenews.com/paul-wight-claims-floyd-mayweather-left-wwe-arena-breaking-his-nose/",
+  "semantic_id": "paul-wight-claims-floyd-mayweather-left-wwe-arena-after-breaking-his-nose",
+  "event_key": "event:wwe-wrestlemania-2026-05-25",
+  "category": 4,
+  "featured_image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/05/paul-wight-claims-floyd-mayweather-left-wwe-arena-after-breaking-his-nose-32.jpg",
+  "embed_urls": [],
+  "inline_images": [],
+  "html_file": "published/20260525_132758_001_paul-wight-chiesi-a-floyd-mayweather-di-rompermi-il-naso-poi-lui-lasciò-larena_5255_final.html",
+  "metadata_file": "published/20260525_132758_001_paul-wight-chiesi-a-floyd-mayweather-di-rompermi-il-naso-poi-lui-lasciò-larena_5255_metadata.json",
+  "source_file": "published/20260525_132758_001_paul-wight-chiesi-a-floyd-mayweather-di-rompermi-il-naso-poi-lui-lasciò-larena_5255_source.txt"
+}

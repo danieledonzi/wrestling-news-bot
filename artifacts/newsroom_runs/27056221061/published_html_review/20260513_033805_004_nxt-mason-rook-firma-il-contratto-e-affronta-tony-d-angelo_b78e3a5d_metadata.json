@@ -1,0 +1,35 @@
+{
+  "run_id": "2026-05-13 03:34:02",
+  "bot_version": "v85_5_performance_fast_history_pre_gemini_gates (8eab2cd)",
+  "git_sha": "8eab2cd0d72d5c153aede6798032318e956fa1d5",
+  "created_at": "2026-05-13T03:38:05",
+  "source_title": "Mason Rook Makes Big Declaration During Contract Signing On 5/12 NXT",
+  "final_title": "NXT: Mason Rook firma il contratto e affronta Tony D'angelo",
+  "source_url": "https://www.ringsidenews.com/mason-rook-makes-big-declaration-during-contract-signing-512-nxt/",
+  "category_id": 6,
+  "category_slug": "NXT",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "mason-rook-makes-big-declaration-during-contract-signing-on-512-nxt",
+  "story_signature_v71": "stable:tony_d_angelo|john_cena|contract|nxt",
+  "refined_score": 91,
+  "refined_reasons": [
+    "NXT",
+    "top star lead: john cena",
+    "nomi forti lead: john cena",
+    "impatto roster/storyline",
+    "ritorno/debutto",
+    "combo top name lead + evento forte",
+    "show settimanale",
+    "v62 ritorno/debutto"
+  ],
+  "blocks_summary": {
+    "text": 8,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260513_033805_004_nxt-mason-rook-firma-il-contratto-e-affronta-tony-d-angelo_b78e3a5d_original.html",
+  "final_html_file": "20260513_033805_004_nxt-mason-rook-firma-il-contratto-e-affronta-tony-d-angelo_b78e3a5d_final.html",
+  "metadata_file": "20260513_033805_004_nxt-mason-rook-firma-il-contratto-e-affronta-tony-d-angelo_b78e3a5d_metadata.json"
+}
