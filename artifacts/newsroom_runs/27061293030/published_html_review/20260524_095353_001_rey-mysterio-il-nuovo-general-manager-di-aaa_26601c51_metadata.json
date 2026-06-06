@@ -1,0 +1,36 @@
+{
+  "run_id": "2026-05-24 09:52:53",
+  "bot_version": "v90_2_5_2_processed_competitive_guard (670761f)",
+  "git_sha": "670761fed4670e8208e9467910043047f0281409",
+  "created_at": "2026-05-24T09:53:53",
+  "source_title": "Rey Mysterio Announced As New General Manager For AAA",
+  "final_title": "Rey Mysterio è il nuovo General Manager di AAA",
+  "source_url": "https://www.ringsidenews.com/rey-mysterio-announced-new-general-manager-aaa/",
+  "category_id": 8,
+  "category_slug": "WORLD",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "rey-mysterio-announced-as-new-general-manager-for-aaa",
+  "story_signature_v71": "stable:rey_mysterio_announced_as_new_general_manager_for|story|wwe",
+  "refined_score": 54,
+  "refined_reasons": [
+    "WWE/main roster",
+    "WWE main roster + storyline/evento",
+    "breaking/major update",
+    "v80.4 AAA major World priority 58->72",
+    "v88.2 cap OTHER/feature non-news 72->54",
+    "v80.4 AAA major World final floor 54->76",
+    "v88.2 cap OTHER/feature non-news 76->54"
+  ],
+  "blocks_summary": {
+    "text": 7,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [
+    "https://twitter.com/luchalibreaaa/status/2058369579043217605"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260524_095353_001_rey-mysterio-il-nuovo-general-manager-di-aaa_26601c51_original.html",
+  "final_html_file": "20260524_095353_001_rey-mysterio-il-nuovo-general-manager-di-aaa_26601c51_final.html",
+  "metadata_file": "20260524_095353_001_rey-mysterio-il-nuovo-general-manager-di-aaa_26601c51_metadata.json"
+}
