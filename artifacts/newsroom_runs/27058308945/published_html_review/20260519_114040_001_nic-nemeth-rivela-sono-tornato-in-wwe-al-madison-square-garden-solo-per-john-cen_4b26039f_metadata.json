@@ -1,0 +1,42 @@
+{
+  "run_id": "2026-05-19 11:38:31",
+  "bot_version": "v89_editorial_report_quality (d84a881)",
+  "git_sha": "d84a8811788cd52b05cd48d9e4565444989e960c",
+  "created_at": "2026-05-19T11:40:40",
+  "source_title": "Nic Nemeth Reveals Real Reason Behind His WWE Return at MSG",
+  "final_title": "Nic Nemeth rivela: \"Sono tornato in WWE al Madison Square Garden solo per John Cena\"",
+  "source_url": "https://www.ringsidenews.com/nic-nemeth-reveals-real-reason-behind-his-wwe-return-msg/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "nic-nemeth-reveals-real-reason-behind-his-wwe-return-at-msg",
+  "story_signature_v71": "stable:nic_nemeth|john_cena|nic_nemeth_reveals_real_reason_behind_his|status|wwe",
+  "refined_score": 68,
+  "refined_reasons": [
+    "WWE/main roster",
+    "top star lead: john cena",
+    "nomi forti lead: john cena",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "combo top name lead + evento forte",
+    "PLE/PPV",
+    "opinione generica",
+    "v62 ritorno/debutto",
+    "v86.9 cap commentary/opinion 78->68",
+    "v79.1.3 post-show recovery 68->95",
+    "v86.9 cap AI commentary/opinion 95->68"
+  ],
+  "blocks_summary": {
+    "text": 20,
+    "image": 0,
+    "embed": 1
+  },
+  "embed_urls": [
+    "https://www.youtube.com/watch?v=avWjaZeqk7A"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260519_114040_001_nic-nemeth-rivela-sono-tornato-in-wwe-al-madison-square-garden-solo-per-john-cen_4b26039f_original.html",
+  "final_html_file": "20260519_114040_001_nic-nemeth-rivela-sono-tornato-in-wwe-al-madison-square-garden-solo-per-john-cen_4b26039f_final.html",
+  "metadata_file": "20260519_114040_001_nic-nemeth-rivela-sono-tornato-in-wwe-al-madison-square-garden-solo-per-john-cen_4b26039f_metadata.json"
+}

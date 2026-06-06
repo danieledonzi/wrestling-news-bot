@@ -1,0 +1,35 @@
+{
+  "run_id": "2026-05-14 20:12:06",
+  "bot_version": "v88_1_report_dedupe_pending_cleanup (788e8dd)",
+  "git_sha": "788e8dd79b1f8762f565c5989740470e5326e9d6",
+  "created_at": "2026-05-14T20:18:29",
+  "source_title": "Rapper Tekashi 6ix9ine Reveals He Wants to Get Involved With WWE",
+  "final_title": "Tekashi 6ix9ine vorrebbe debuttare in WWE e sfida Randy Orton",
+  "source_url": "https://www.ringsidenews.com/rapper-tekashi-6ix9ine-reveals-he-wants-get-involved-wwe/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "rapper-tekashi-6ix9ine-reveals-he-wants-to-get-involved-with-wwe",
+  "story_signature_v71": "stable:randy_orton|logan_paul|rapper_tekashi|story|wwe",
+  "refined_score": 89,
+  "refined_reasons": [
+    "WWE/main roster",
+    "top star lead: randy orton",
+    "nomi forti lead: randy orton, logan paul",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "PLE/PPV"
+  ],
+  "blocks_summary": {
+    "text": 10,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [
+    "https://twitter.com/DailyLoud/status/2054764035447439738"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260514_201829_002_tekashi-6ix9ine-vorrebbe-debuttare-in-wwe-e-sfida-randy-orton_c993195e_original.html",
+  "final_html_file": "20260514_201829_002_tekashi-6ix9ine-vorrebbe-debuttare-in-wwe-e-sfida-randy-orton_c993195e_final.html",
+  "metadata_file": "20260514_201829_002_tekashi-6ix9ine-vorrebbe-debuttare-in-wwe-e-sfida-randy-orton_c993195e_metadata.json"
+}

@@ -1,0 +1,20 @@
+{
+  "schema": "owtv_published_artifact_v87_6",
+  "run_id": "2026-05-23 10:51:03",
+  "bot_version": "v90_2_4_2_report_artifacts_recovery (1368401)",
+  "git_sha": "13684013887db259923661da4dd220d99b12bc10",
+  "created_at": "2026-05-23T10:52:12",
+  "wp_post_id": 5168,
+  "wp_status": "publish",
+  "title": "Tony Khan smentisce la AAW Wrestling sul caso Mance Warner",
+  "source_url": "https://www.ringsidenews.com/tony-khan-publicly-calls-out-indie-promotion-mance-warner-claim/",
+  "semantic_id": "tony-khan-publicly-calls-out-indie-promotion-over-mance-warner-claim",
+  "event_key": "event:business:tony-khan",
+  "category": 5,
+  "featured_image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/05/tony-khan-publicly-calls-out-indie-promotion-over-mance-warner-claim-26.jpg",
+  "embed_urls": [],
+  "inline_images": [],
+  "html_file": "published/20260523_105212_001_tony-khan-smentisce-la-aaw-wrestling-sul-caso-mance-warner_5168_final.html",
+  "metadata_file": "published/20260523_105212_001_tony-khan-smentisce-la-aaw-wrestling-sul-caso-mance-warner_5168_metadata.json",
+  "source_file": "published/20260523_105212_001_tony-khan-smentisce-la-aaw-wrestling-sul-caso-mance-warner_5168_source.txt"
+}
