@@ -1,0 +1,20 @@
+{
+  "schema": "owtv_published_artifact_v87_6",
+  "run_id": "2026-05-14 16:24:56",
+  "bot_version": "v88_1_report_dedupe_pending_cleanup (9b40361)",
+  "git_sha": "9b40361d806aaf3cb306d4a3598a4bb620f017bd",
+  "created_at": "2026-05-14T16:29:38",
+  "wp_post_id": 4560,
+  "wp_status": "publish",
+  "title": "Karrion Kross e Scarlett commentano gli ultimi licenziamenti in WWE",
+  "source_url": "https://www.wrestlinginc.com/2172708/karrion-kross-scarlett-wwe-releases/",
+  "semantic_id": "former-wwe-stars-karrion-kross-and-scarlett-comment-on-latest-round-of-releases",
+  "event_key": "event:business:tko-financials",
+  "category": 15,
+  "featured_image_url": "https://www.wrestlinginc.com/img/gallery/former-wwe-stars-karrion-kross-and-scarlett-comment-on-latest-round-of-releases/l-intro-1778756395.jpg",
+  "embed_urls": [],
+  "inline_images": [],
+  "html_file": "published/20260514_162938_003_karrion-kross-e-scarlett-commentano-gli-ultimi-licenziamenti-in-wwe_4560_final.html",
+  "metadata_file": "published/20260514_162938_003_karrion-kross-e-scarlett-commentano-gli-ultimi-licenziamenti-in-wwe_4560_metadata.json",
+  "source_file": "published/20260514_162938_003_karrion-kross-e-scarlett-commentano-gli-ultimi-licenziamenti-in-wwe_4560_source.txt"
+}

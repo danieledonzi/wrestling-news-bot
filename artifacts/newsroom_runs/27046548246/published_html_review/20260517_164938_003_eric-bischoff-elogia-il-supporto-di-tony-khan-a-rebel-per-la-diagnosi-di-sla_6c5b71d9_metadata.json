@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-05-17 16:47:44",
+  "bot_version": "v88_4_2_report_softfixes (1b7aa22)",
+  "git_sha": "1b7aa22b91bfedc2f7752ef129b79da33dfc311d",
+  "created_at": "2026-05-17T16:49:38",
+  "source_title": "Eric Bischoff Talks Recent Development That Makes Him Respect AEW's Tony Khan",
+  "final_title": "Eric Bischoff elogia il supporto di Tony Khan a Rebel per la diagnosi di SLA",
+  "source_url": "https://www.wrestlinginc.com/2173128/eric-bischoff-respects-aew-tony-khan-rebel/",
+  "category_id": 5,
+  "category_slug": "AEW",
+  "article_type": "OPINION",
+  "semantic_id": "eric-bischoff-talks-recent-development-that-makes-him-respect-aews-tony-khan",
+  "story_signature_v71": "stable:eric_bischoff|tanea_brooks|tony_khan|story|aew",
+  "refined_score": 54,
+  "refined_reasons": [
+    "AEW",
+    "infortunio",
+    "PLE/PPV",
+    "opinione generica",
+    "v62 infortunio/operazione",
+    "v88.3 notte povera: non forzo articolo soft sotto 65 dopo publish 63->54"
+  ],
+  "blocks_summary": {
+    "text": 4,
+    "image": 1,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260517_164938_003_eric-bischoff-elogia-il-supporto-di-tony-khan-a-rebel-per-la-diagnosi-di-sla_6c5b71d9_original.html",
+  "final_html_file": "20260517_164938_003_eric-bischoff-elogia-il-supporto-di-tony-khan-a-rebel-per-la-diagnosi-di-sla_6c5b71d9_final.html",
+  "metadata_file": "20260517_164938_003_eric-bischoff-elogia-il-supporto-di-tony-khan-a-rebel-per-la-diagnosi-di-sla_6c5b71d9_metadata.json"
+}
