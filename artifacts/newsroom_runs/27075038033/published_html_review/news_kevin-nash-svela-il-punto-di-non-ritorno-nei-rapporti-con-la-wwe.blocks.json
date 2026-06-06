@@ -1,0 +1,56 @@
+{
+  "job": {
+    "kind": "news",
+    "news_key": "news:https-www-wrestlinginc-com-2171388-wwe-kevin-nash-paul-levesque-triple-h-point-no-return-involvement",
+    "source": "wrestlinginc",
+    "source_url": "https://www.wrestlinginc.com/2171388/wwe-kevin-nash-paul-levesque-triple-h-point-no-return-involvement/",
+    "source_title": "Kevin Nash Identifies Point Of No Return Regarding His Involvement With WWE",
+    "categories": [
+      "WWE"
+    ],
+    "score": 72,
+    "priority": "soft",
+    "article_type": "soft_news",
+    "story_core": "kevin-nash-opinione-tko-wwe",
+    "created_at": "2026-06-01T14:16:31.414528"
+  },
+  "blocks": [
+    {
+      "type": "image",
+      "src": "https://www.wrestlinginc.com/img/gallery/kevin-nash-identifies-point-of-no-return-regarding-his-involvement-with-wwe/intro-1778619149.jpg",
+      "alt": "Kevin Nash in disbelief"
+    },
+    {
+      "type": "paragraph",
+      "text": "There has been a ton of negativity directed towards WWE in recent weeks, from what many felt was a lackluster build to WrestleMania , to a large number of roster cuts , some of which were caused by talents refusing to take pay cuts . Among the loudest voices complaining about WWE and TKO's treatment of the promotion and its roster is WWE Hall of Famer Kevin Nash, who himself felt mistreated when appearing at WrestleMania weekend for the WWE Hall of Fame ceremony."
+    },
+    {
+      "type": "embed",
+      "url": "https://www.youtube.com/watch?v=04ynRTd5Vzc"
+    },
+    {
+      "type": "quote",
+      "text": "It doesn't take anything from Paul Levesque, because Paul Levesque still knows what the f**k he's doing,\" Nash said. \"So if anyone out there just seems to be maybe think that this might be applying to them, how about leaving the f*****g company alone, get your f*****g noses out of creative, go f**k yourselves, let Paul run the f*****g company. You guys want to cut the talents? Don't f*****g throw it in Paul's lap. Don't make him be the bad guy."
+    },
+    {
+      "type": "paragraph",
+      "text": "Nash's loyalty to Triple H is so strong that he admitted, despite his misgivings towards TKO running WWE, he would only completely cut bait with the promotion if they ever did anything to mess with Triple H's job."
+    },
+    {
+      "type": "paragraph",
+      "text": "\"If something happens, and Triple H is no longer at the helm through some kind of a powerplay, I hope you would follow my lead, because the minute they f**k with him, I'll have nothing to do with that product for the rest of my life,\" Nash said."
+    },
+    {
+      "type": "paragraph",
+      "text": "If you use any of the quotes in this article, please credit \"Kliq This\" and provide a h/t to Wrestling Inc. for the transcription"
+    }
+  ],
+  "translated_indexes": [
+    1,
+    3,
+    4,
+    5,
+    6
+  ],
+  "featured_image": "https://www.wrestlinginc.com/img/gallery/kevin-nash-identifies-point-of-no-return-regarding-his-involvement-with-wwe/l-intro-1778619149.jpg"
+}
