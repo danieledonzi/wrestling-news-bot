@@ -22829,3 +22829,14 @@ RecursionError: maximum recursion depth exceeded while calling a Python object
 [MANUAL v92] title=WWE NXT del 3 Giugno 2026 - Risultati e momenti salienti
 [MANUAL v92] categories=Editoriali, WWE
 [MANUAL v92] Pubblicato post_id=5909 link=https://news.openwrestlingtv.com/wwe/wwe-nxt-del-3-giugno-2026-risultati-e-momenti-salienti/
+[MANUAL v92] DNS news.openwrestlingtv.com: 89.40.173.112
+[MANUAL v92] WP health check attempt 1/2 timeout=10s
+[MANUAL v92] WP probe status=200 elapsed=1.02s endpoint=https://news.openwrestlingtv.com/
+[MANUAL v92] WP probe status=200 elapsed=0.97s endpoint=https://news.openwrestlingtv.com/wp-json/
+[MANUAL v92] WP health check OK label=rest_root status=status_200 | tentativo 1/2
+[MANUAL v92] wp_ok=True wp_status=status_200
+[MANUAL v92] Avvio manual report url=https://www.wrestlinginc.com/2188752/wwe-smackdown-june-5-king-queen-of-the-ring-tournaments-continue-more/
+[MANUAL v92] source=wrestlinginc source_title=WWE SmackDown Results 6/5 - King & Queen Of The Ring Tournaments Continue, More - Wrestling Inc.
+[MANUAL v92] title=WWE SmackDown del 5 Giugno 2026 - Risultati e momenti salienti
+[MANUAL v92] categories=Editoriali, WWE
+[MANUAL v92] Pubblicato post_id=6063 link=https://news.openwrestlingtv.com/wwe/wwe-smackdown-del-5-giugno-2026-risultati-e-momenti-salienti/

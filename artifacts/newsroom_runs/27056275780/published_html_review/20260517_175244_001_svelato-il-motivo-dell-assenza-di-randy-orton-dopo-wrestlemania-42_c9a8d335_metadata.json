@@ -1,0 +1,38 @@
+{
+  "run_id": "2026-05-17 17:51:39",
+  "bot_version": "v88_4_2_report_softfixes (7dce52b)",
+  "git_sha": "7dce52bc91e0e9dee8b16e7eba8d90525933e03d",
+  "created_at": "2026-05-17T17:52:44",
+  "source_title": "Real Reason Behind Randy Orton's WWE Absence After WrestleMania 42 Revealed",
+  "final_title": "Svelato il motivo dell'assenza di Randy Orton dopo WrestleMania 42",
+  "source_url": "https://www.ringsidenews.com/real-reason-behind-randy-ortons-wwe-absence-wrestlemania-42-revealed/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "RUMOR",
+  "semantic_id": "real-reason-behind-randy-ortons-wwe-absence-after-wrestlemania-42-revealed",
+  "story_signature_v71": "stable:dave_meltzer|randy_orton|cody_rhodes|return|wwe",
+  "refined_score": 63,
+  "refined_reasons": [
+    "WWE/main roster",
+    "top star titolo: randy orton",
+    "nomi forti lead: cody rhodes",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "combo top name titolo + evento forte",
+    "PLE/PPV",
+    "v62 ritorno/debutto",
+    "v86.9 cap commentary/opinion 100->68",
+    "v72.3 cap rumor: niente boost raffinamento"
+  ],
+  "blocks_summary": {
+    "text": 9,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260517_175244_001_svelato-il-motivo-dell-assenza-di-randy-orton-dopo-wrestlemania-42_c9a8d335_original.html",
+  "final_html_file": "20260517_175244_001_svelato-il-motivo-dell-assenza-di-randy-orton-dopo-wrestlemania-42_c9a8d335_final.html",
+  "metadata_file": "20260517_175244_001_svelato-il-motivo-dell-assenza-di-randy-orton-dopo-wrestlemania-42_c9a8d335_metadata.json"
+}
