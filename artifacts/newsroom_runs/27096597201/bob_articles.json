@@ -1,0 +1,1083 @@
+{
+  "agent": "Bob",
+  "version": "v93_33_youtube_plain_and_cta_cleanup",
+  "generated_at": "2026-06-07T15:23:35.760897+00:00",
+  "mode": "block_translation_prudent_embed_cleanup",
+  "policy": {
+    "clean_before_gemini": true,
+    "gemini_receives_only_text_units": true,
+    "preserve_sequence_outside_gemini": true,
+    "preserve_embeds_as_plain_url_lines": true,
+    "filter_source_social_bars": true,
+    "filter_author_bios_before_gemini": true,
+    "filter_cta_before_gemini": true,
+    "recover_embeds_from_raw_html": false,
+    "embed_urls_require_post_or_video_shape": true,
+    "preserve_quotes_as_blockquote": "source_blockquote_only",
+    "preserve_tables_as_html_tables": true,
+    "ordered_elements": [
+      "text",
+      "heading",
+      "quote",
+      "table",
+      "image",
+      "embed"
+    ],
+    "model_chain": [
+      "gemini-3.1-flash-lite",
+      "gemini-3-flash-preview",
+      "gemini-2.5-flash-lite",
+      "gemini-2.5-flash"
+    ],
+    "max_articles_per_run": 3,
+    "prompt_family": "v92_historical_natural_full_translation_blocks",
+    "diagnostic_mode": true,
+    "fallback_mode": false,
+    "residual_author_bio_cleanup": true,
+    "generic_ringside_author_bio_cleanup": true,
+    "residual_cta_cleanup": true,
+    "split_inline_quoted_text": false,
+    "source_blockquote_only": true,
+    "move_leading_embeds_after_first_paragraph": true,
+    "unwrap_fake_data_blockquotes": true,
+    "consume_menzo_bob_brief": true,
+    "missing_expected_embed_warning": true
+  },
+  "input": {
+    "menzo_version": "v93_36_ai_skip_binding_fingerprint",
+    "selected_count": 6
+  },
+  "articles": [
+    {
+      "source_url": "https://www.ringsidenews.com/cody-rhodes-shuts-down-claims-wwe-unreal-exposes-business/",
+      "source": "ringsidenews",
+      "source_title": "Cody Rhodes Shuts Down Claims WWE Unreal Exposes the Business",
+      "category_hint": "WWE",
+      "menzo_score": 87,
+      "status": "ready_for_alfred",
+      "created_at": "2026-06-07T15:23:14.431587+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "fetched_html_chars": 555354,
+      "source_html_contains_embed_hint": true,
+      "meta": {
+        "source_title": "Cody Rhodes Shuts Down Claims WWE Unreal Exposes the Business",
+        "description": "Cody Rhodes isn’t buying the idea that WWE Unreal ruins wrestling by exposing the wrestling business. While speaking on his What Do You Wanna Talk About?",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/cody-rhodes-shuts-down-claims-wwe-unreal-exposes-the-business-08.jpg"
+      },
+      "extraction_diagnostics": {
+        "dom_noise_reduction_enabled": false,
+        "stage": "complete",
+        "global_embed_recovery_enabled": false,
+        "root_name": "article",
+        "root_text_chars": 2765,
+        "candidate_node_count": 91,
+        "raw_element_count": 15,
+        "clean_element_count": 10,
+        "removed_by_node_count": 13,
+        "removed_by_sanitize_count": 5,
+        "table_count": 0,
+        "quote_count": 1,
+        "embed_count": 2
+      },
+      "raw_element_count": 15,
+      "clean_element_count": 10,
+      "translation_unit_count": 7,
+      "removed_before_gemini": 18,
+      "removed_elements_debug": [
+        {
+          "node_index": 68,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
+          "text_preview": "Spotlight"
+        },
+        {
+          "node_index": 72,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2199355 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-solo-sikoa tag-wwe-featured   ",
+          "text_preview": "WWE News Solo Sikoa’s Likeness Seemingly Stolen By Upcoming Wrestling Video Game"
+        },
+        {
+          "node_index": 75,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "Solo Sikoa’s Likeness Seemingly Stolen By Upcoming Wrestling Video Game"
+        },
+        {
+          "node_index": 76,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 77,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2199124 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
+          "text_preview": "WWE News WWE Shareholder Trial Cancelled After Being Pulled From Court Calendar"
+        },
+        {
+          "node_index": 80,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "WWE Shareholder Trial Cancelled After Being Pulled From Court Calendar"
+        },
+        {
+          "node_index": 81,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 82,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2198937 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-jordynne-grace tag-wwe-featured   ",
+          "text_preview": "WWE News What We Know About Jordynne Grace’s WWE Status After SmackDown Absence"
+        },
+        {
+          "node_index": 85,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "What We Know About Jordynne Grace’s WWE Status After SmackDown Absence"
+        },
+        {
+          "node_index": 86,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 87,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2198913 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-cm-punk tag-wwe-featured   ",
+          "text_preview": "WWE News CM Punk’s WWE Absence May Be Tied To Limited Dates And Recovery Time"
+        },
+        {
+          "node_index": 90,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "CM Punk’s WWE Absence May Be Tied To Limited Dates And Recovery Time"
+        },
+        {
+          "node_index": 91,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "index": 2,
+          "reason": "duplicate_or_empty_embed",
+          "item": {
+            "type": "embed",
+            "url": "https://www.youtube.com/watch?v=egQ_2OXtppI",
+            "source_tag": "div"
+          }
+        },
+        {
+          "index": 3,
+          "reason": "duplicate_or_empty_embed",
+          "item": {
+            "type": "embed",
+            "url": "https://www.youtube.com/watch?v=egQ_2OXtppI",
+            "source_tag": "div"
+          }
+        },
+        {
+          "index": 12,
+          "reason": "duplicate_or_empty_embed",
+          "item": {
+            "type": "embed",
+            "url": "https://www.youtube.com/embed/egQ_2OXtppI?feature=oembed",
+            "source_tag": "div"
+          }
+        },
+        {
+          "index": 13,
+          "reason": "duplicate_or_empty_embed",
+          "item": {
+            "type": "embed",
+            "url": "https://www.youtube.com/embed/egQ_2OXtppI?feature=oembed",
+            "source_tag": "iframe"
+          }
+        },
+        {
+          "index": 15,
+          "reason": "footer_start",
+          "item": {
+            "type": "text",
+            "text": "Spotlight WWE News Solo Sikoa’s Likeness Seemingly Stolen By Upcoming Wrestling Video Game WWE News WWE Shareholder Trial Cancelled After Being Pulled From Court Calendar WWE News What We Know About Jordynne Grace’s WWE Status After SmackDown Absence WWE News CM Punk’s WWE Absence May Be Tied To Limited Dates And Recovery Time"
+          }
+        }
+      ],
+      "raw_elements_preview": [
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=egQ_2OXtppI",
+          "source_tag": "div",
+          "block_id": "b1"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=egQ_2OXtppI",
+          "source_tag": "div"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=egQ_2OXtppI",
+          "source_tag": "div"
+        },
+        {
+          "type": "text",
+          "text": "Cody Rhodes isn’t buying the idea that WWE Unreal ruins wrestling by exposing the wrestling business.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "While speaking on his What Do You Wanna Talk About? podcast, Cody responded to the debate around the Netflix series after Brian Koppelman praised the show. Cody said he loves WWE Unreal and made it clear he does not see it as damaging the business: “I love it. I’ve watched every episode. Thank you for liking Unreal. A lot of people watch it and say they don’t like it. We love it.”",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "The American Nightmare pushed back on the idea that WWE Unreal is simply peeling back the curtain and exposing the business. In his view, wrestling has too many layers for one behind-the-scenes series to truly expose everything.",
+          "block_id": "b4"
+        },
+        {
+          "type": "quote",
+          "text": "“That’s why I don’t get mad at it, by the way, they’re like, ‘Oh, you’re peeling the curtain back.’ I mean, come on. There’s 16 curtains here guys. There’s so many layers of curtain the whole time.”",
+          "source_tag": "blockquote",
+          "block_id": "b5"
+        },
+        {
+          "type": "text",
+          "text": "Cody Rhodes then explained that even when viewers think they are seeing the real process, the performance is still continuing: “That’s why I kinda let you know, you’re just working more, the match is just still on.”",
+          "block_id": "b6"
+        },
+        {
+          "type": "text",
+          "text": "Brian Koppelman agreed, saying WWE Unreal works because it presents itself as behind-the-scenes reality while everyone involved is still performing. Cody then noted that even a show claiming to reveal everything still has limits: “And the challenge of Unreal is, okay, we’re gonna show everything. Are we, you know? Like the challenge is…”",
+          "block_id": "b7"
+        },
+        {
+          "type": "text",
+          "text": "Cody’s comments come after Brie Bella said WWE Unreal made her feel like kayfabe is dead . Cody clearly sees it differently. To him, the show doesn’t expose the business — it just becomes another part of the performance.",
+          "block_id": "b8"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/egQ_2OXtppI?feature=oembed",
+          "source_tag": "figure",
+          "block_id": "b9"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/egQ_2OXtppI?feature=oembed",
+          "source_tag": "div"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/egQ_2OXtppI?feature=oembed",
+          "source_tag": "iframe"
+        },
+        {
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/youzify/members/1/2021/03/6058ff2088358-bpfull-96x96.jpg",
+          "alt": "Subhojeet Mukherjee",
+          "block_id": "b10"
+        },
+        {
+          "type": "text",
+          "text": "Spotlight WWE News Solo Sikoa’s Likeness Seemingly Stolen By Upcoming Wrestling Video Game WWE News WWE Shareholder Trial Cancelled After Being Pulled From Court Calendar WWE News What We Know About Jordynne Grace’s WWE Status After SmackDown Absence WWE News CM Punk’s WWE Absence May Be Tied To Limited Dates And Recovery Time"
+        }
+      ],
+      "elements": [
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=egQ_2OXtppI",
+          "source_tag": "div",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "Cody Rhodes isn’t buying the idea that WWE Unreal ruins wrestling by exposing the wrestling business.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "While speaking on his What Do You Wanna Talk About? podcast, Cody responded to the debate around the Netflix series after Brian Koppelman praised the show. Cody said he loves WWE Unreal and made it clear he does not see it as damaging the business: “I love it. I’ve watched every episode. Thank you for liking Unreal. A lot of people watch it and say they don’t like it. We love it.”",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "The American Nightmare pushed back on the idea that WWE Unreal is simply peeling back the curtain and exposing the business. In his view, wrestling has too many layers for one behind-the-scenes series to truly expose everything.",
+          "block_id": "b4"
+        },
+        {
+          "type": "quote",
+          "text": "“That’s why I don’t get mad at it, by the way, they’re like, ‘Oh, you’re peeling the curtain back.’ I mean, come on. There’s 16 curtains here guys. There’s so many layers of curtain the whole time.”",
+          "source_tag": "blockquote",
+          "block_id": "b5"
+        },
+        {
+          "type": "text",
+          "text": "Cody Rhodes then explained that even when viewers think they are seeing the real process, the performance is still continuing: “That’s why I kinda let you know, you’re just working more, the match is just still on.”",
+          "block_id": "b6"
+        },
+        {
+          "type": "text",
+          "text": "Brian Koppelman agreed, saying WWE Unreal works because it presents itself as behind-the-scenes reality while everyone involved is still performing. Cody then noted that even a show claiming to reveal everything still has limits: “And the challenge of Unreal is, okay, we’re gonna show everything. Are we, you know? Like the challenge is…”",
+          "block_id": "b7"
+        },
+        {
+          "type": "text",
+          "text": "Cody’s comments come after Brie Bella said WWE Unreal made her feel like kayfabe is dead . Cody clearly sees it differently. To him, the show doesn’t expose the business — it just becomes another part of the performance.",
+          "block_id": "b8"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/egQ_2OXtppI?feature=oembed",
+          "source_tag": "figure",
+          "block_id": "b9"
+        },
+        {
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/youzify/members/1/2021/03/6058ff2088358-bpfull-96x96.jpg",
+          "alt": "Subhojeet Mukherjee",
+          "block_id": "b10"
+        }
+      ],
+      "element_counts": {
+        "text": 6,
+        "heading": 0,
+        "quote": 1,
+        "table": 0,
+        "image": 1,
+        "embed": 2
+      },
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/cody-rhodes-shuts-down-claims-wwe-unreal-exposes-business/\nTitolo feed: Cody Rhodes Shuts Down Claims WWE Unreal Exposes the Business\nTitolo pagina: Cody Rhodes Shuts Down Claims WWE Unreal Exposes the Business\nDescrizione: Cody Rhodes isn’t buying the idea that WWE Unreal ruins wrestling by exposing the wrestling business. While speaking on his What Do You Wanna Talk About?\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Cody Rhodes isn’t buying the idea that WWE Unreal ruins wrestling by exposing the wrestling business.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"While speaking on his What Do You Wanna Talk About? podcast, Cody responded to the debate around the Netflix series after Brian Koppelman praised the show. Cody said he loves WWE Unreal and made it clear he does not see it as damaging the business: “I love it. I’ve watched every episode. Thank you for liking Unreal. A lot of people watch it and say they don’t like it. We love it.”\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"The American Nightmare pushed back on the idea that WWE Unreal is simply peeling back the curtain and exposing the business. In his view, wrestling has too many layers for one behind-the-scenes series to truly expose everything.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"“That’s why I don’t get mad at it, by the way, they’re like, ‘Oh, you’re peeling the curtain back.’ I mean, come on. There’s 16 curtains here guys. There’s so many layers of curtain the whole time.”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Cody Rhodes then explained that even when viewers think they are seeing the real process, the performance is still continuing: “That’s why I kinda let you know, you’re just working more, the match is just still on.”\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"Brian Koppelman agreed, saying WWE Unreal works because it presents itself as behind-the-scenes reality while everyone involved is still performing. Cody then noted that even a show claiming to reveal everything still has limits: “And the challenge of Unreal is, okay, we’re gonna show everything. Are we, you know? Like the challenge is…”\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"Cody’s comments come after Brie Bella said WWE Unreal made her feel like kayfabe is dead . Cody clearly sees it differently. To him, the show doesn’t expose the business — it just becomes another part of the performance.\"\n  }\n]\n",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_used": true,
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Cody Rhodes smentisce le critiche su WWE Unreal: \\\"Non danneggia il business\\\"\",\n  \"excerpt_it\": \"Cody Rhodes prende le difese di WWE Unreal, spiegando perché la docuserie non rovina il wrestling svelando i retroscena del business.\",\n  \"translations\": {\n    \"b2\": \"Cody Rhodes non condivide l'idea che WWE Unreal rovini il wrestling svelando troppo sui retroscena del business.\",\n    \"b3\": \"Durante il suo podcast \\\"What Do You Wanna Talk About?\\\", Cody ha risposto al dibattito sorto attorno alla serie Netflix dopo che Brian Koppelman ne aveva elogiato i contenuti. Cody ha dichiarato di amare WWE Unreal e ha chiarito di non considerarlo affatto dannoso per il settore: \\\"Lo adoro. Ho visto ogni episodio. Grazie per aver apprezzato Unreal. Molte persone lo guardano e dicono di non gradirlo. Noi lo adoriamo\\\".\",\n    \"b4\": \"L'American Nightmare ha respinto la tesi secondo cui WWE Unreal si limiti a sollevare il sipario, esponendo il business. Secondo il suo punto di vista, il wrestling ha troppi strati perché una sola serie dietro le quinte possa svelare davvero tutto.\",\n    \"b5\": \"“Ecco perché non mi arrabbio per questa cosa, tra l'altro. Dicono: 'Oh, stai sollevando il sipario'. Ma dai, ragazzi. Qui ci sono 16 sipari. Ci sono così tanti strati di sipari per tutto il tempo”.\",\n    \"b6\": \"Cody Rhodes ha poi spiegato che, anche quando gli spettatori pensano di vedere il vero processo produttivo, la performance continua: \\\"Ecco perché vi faccio capire che state solo lavorando ancora di più; il match è ancora in corso\\\".\",\n    \"b7\": \"Brian Koppelman ha concordato, affermando che WWE Unreal funziona perché si propone come realtà dietro le quinte mentre tutti i soggetti coinvolti stanno ancora recitando. Cody ha poi sottolineato che anche uno show che dichiara di mostrare tutto ha comunque dei limiti: \\\"E la sfida di Unreal è: ok, mostreremo tutto. Lo faremo davvero? È questa la sfida...\\\"\",\n    \"b8\": \"I commenti di Cody arrivano dopo le dichiarazioni di Brie Bella, secondo cui WWE Unreal le avrebbe dato l'impressione che la kayfabe sia morta. Cody ha una visione chiaramente diversa: per lui, lo show non espone il business, ma diventa semplicemente un'altra parte della performance.\"\n  },\n  \"notes\": []\n}",
+      "title_it": "Cody Rhodes smentisce le critiche su WWE Unreal: \"Non danneggia il business\"",
+      "body_html": "<p>Cody Rhodes non condivide l&#x27;idea che WWE Unreal rovini il wrestling svelando troppo sui retroscena del business.</p>\nhttps://www.youtube.com/watch?v=egQ_2OXtppI\n\n<p>Durante il suo podcast &quot;What Do You Wanna Talk About?&quot;, Cody ha risposto al dibattito sorto attorno alla serie Netflix dopo che Brian Koppelman ne aveva elogiato i contenuti. Cody ha dichiarato di amare WWE Unreal e ha chiarito di non considerarlo affatto dannoso per il settore: &quot;Lo adoro. Ho visto ogni episodio. Grazie per aver apprezzato Unreal. Molte persone lo guardano e dicono di non gradirlo. Noi lo adoriamo&quot;.</p>\n<p>L&#x27;American Nightmare ha respinto la tesi secondo cui WWE Unreal si limiti a sollevare il sipario, esponendo il business. Secondo il suo punto di vista, il wrestling ha troppi strati perché una sola serie dietro le quinte possa svelare davvero tutto.</p>\n<blockquote>“Ecco perché non mi arrabbio per questa cosa, tra l&#x27;altro. Dicono: &#x27;Oh, stai sollevando il sipario&#x27;. Ma dai, ragazzi. Qui ci sono 16 sipari. Ci sono così tanti strati di sipari per tutto il tempo”.</blockquote>\n<p>Cody Rhodes ha poi spiegato che, anche quando gli spettatori pensano di vedere il vero processo produttivo, la performance continua: &quot;Ecco perché vi faccio capire che state solo lavorando ancora di più; il match è ancora in corso&quot;.</p>\n<p>Brian Koppelman ha concordato, affermando che WWE Unreal funziona perché si propone come realtà dietro le quinte mentre tutti i soggetti coinvolti stanno ancora recitando. Cody ha poi sottolineato che anche uno show che dichiara di mostrare tutto ha comunque dei limiti: &quot;E la sfida di Unreal è: ok, mostreremo tutto. Lo faremo davvero? È questa la sfida...&quot;</p>\n<p>I commenti di Cody arrivano dopo le dichiarazioni di Brie Bella, secondo cui WWE Unreal le avrebbe dato l&#x27;impressione che la kayfabe sia morta. Cody ha una visione chiaramente diversa: per lui, lo show non espone il business, ma diventa semplicemente un&#x27;altra parte della performance.</p>\n\nhttps://www.youtube.com/embed/egQ_2OXtppI?feature=oembed\n\n<!--IMAGE:https://www.ringsidenews.com/wp-content/uploads/youzify/members/1/2021/03/6058ff2088358-bpfull-96x96.jpg-->",
+      "excerpt_it": "Cody Rhodes prende le difese di WWE Unreal, spiegando perché la docuserie non rovina il wrestling svelando i retroscena del business.",
+      "bob_notes": [],
+      "translation_missing_units": [],
+      "editorial_changes": [
+        {
+          "code": "leading_embed_moved_after_first_paragraph",
+          "severity": "info",
+          "message": "Embed iniziale spostato dopo il primo paragrafo.",
+          "evidence": "https://www.youtube.com/watch?v=egQ_2OXtppI"
+        }
+      ],
+      "diagnostic_warnings": [],
+      "bob_brief": {
+        "expected_embeds": [
+          "youtube"
+        ],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta",
+          "share_links"
+        ],
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "source_specific_notes": "Ringsidenews spesso integra podcast, estrai le citazioni chiave."
+      },
+      "menzo_ai_review": {
+        "id": "c1",
+        "decision": "selected",
+        "priority": 8,
+        "category_hint": "WWE",
+        "article_type": "storyline_development",
+        "event_key": "cody_rhodes_wwe_unreal",
+        "duplicate_of": "",
+        "editorial_reason": "Dichiarazioni ufficiali di Cody Rhodes sul prodotto WWE; notizia fresca e rilevante per il pubblico italiano.",
+        "bob_brief": {
+          "expected_embeds": [
+            "youtube"
+          ],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "source_specific_notes": "Ringsidenews spesso integra podcast, estrai le citazioni chiave."
+        },
+        "priority_label": "medium"
+      },
+      "ai_editorial_reason": "Dichiarazioni ufficiali di Cody Rhodes sul prodotto WWE; notizia fresca e rilevante per il pubblico italiano.",
+      "ai_priority_label": "medium"
+    },
+    {
+      "source_url": "https://www.wrestlinginc.com/2187355/aew-skye-blue-injury-doubt-return-possible/",
+      "source": "wrestlinginc",
+      "source_title": "AEW's Skye Blue Looks Back On Injury That Made Her Doubt Whether Return Was Possible",
+      "category_hint": "AEW",
+      "menzo_score": 84,
+      "status": "ready_for_alfred",
+      "created_at": "2026-06-07T15:23:25.535847+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "fetched_html_chars": 50304,
+      "source_html_contains_embed_hint": true,
+      "meta": {
+        "source_title": "AEW's Skye Blue Looks Back On Injury That Made Her Doubt Whether Return Was Possible - Wrestling Inc.",
+        "description": "When AEW star Skye Blue underwent surgery on her injured ankle in 2024, she initially had some doubts about whether she'd be able to get back in the ring.",
+        "featured_image": "https://www.wrestlinginc.com/img/gallery/aews-skye-blue-looks-back-on-injury-that-made-her-doubt-whether-return-was-possible/l-intro-1780579615.jpg"
+      },
+      "extraction_diagnostics": {
+        "dom_noise_reduction_enabled": false,
+        "stage": "complete",
+        "global_embed_recovery_enabled": false,
+        "root_name": "article",
+        "root_text_chars": 1860,
+        "candidate_node_count": 13,
+        "raw_element_count": 8,
+        "clean_element_count": 6,
+        "removed_by_node_count": 0,
+        "removed_by_sanitize_count": 2,
+        "table_count": 0,
+        "quote_count": 0,
+        "embed_count": 1
+      },
+      "raw_element_count": 8,
+      "clean_element_count": 6,
+      "translation_unit_count": 5,
+      "removed_before_gemini": 2,
+      "removed_elements_debug": [
+        {
+          "index": 2,
+          "reason": "duplicate_featured_image",
+          "item": {
+            "type": "image",
+            "url": "https://www.wrestlinginc.com/img/gallery/aews-skye-blue-looks-back-on-injury-that-made-her-doubt-whether-return-was-possible/intro-1780579615.jpg",
+            "alt": "Skye Blue during her AEW entrance"
+          }
+        },
+        {
+          "index": 3,
+          "reason": "duplicate_or_empty_embed",
+          "item": {
+            "type": "embed",
+            "url": "https://www.youtube.com/watch?v=NTuWAh-SwCo",
+            "source_tag": "div"
+          }
+        }
+      ],
+      "raw_elements_preview": [
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=NTuWAh-SwCo",
+          "source_tag": "div",
+          "block_id": "b1"
+        },
+        {
+          "type": "image",
+          "url": "https://www.wrestlinginc.com/img/gallery/aews-skye-blue-looks-back-on-injury-that-made-her-doubt-whether-return-was-possible/intro-1780579615.jpg",
+          "alt": "Skye Blue during her AEW entrance"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=NTuWAh-SwCo",
+          "source_tag": "div"
+        },
+        {
+          "type": "text",
+          "text": "In July 2024, AEW star Skye Blue suffered an ankle injury which required surgery and wound up keeping her out of the ring for nine months. Recalling the injury during an interview with TMZ, Blue admitted that, immediately after the procedure, she experienced some doubt as to whether she'd be able to wrestle again.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "\"Those few days after surgery, where you can't move, I was just laying flat on a couch trying not to move my leg,\" Blue said. \"I was like, 'This is insane. How am I going to go back to flipping and running and twisting and turning and all the crazy things we have to put our bodies through?' So it definitely flickered across my brain.\"",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "At the same time, Blue felt worried that even if she did mount a return to the ring, she'd be forced to greatly alter her wrestling style and the fans might not accept it. Spending so much more time at home compared to when she was working, Blue said her mind was constantly racing, and it added to the anxiety.",
+          "block_id": "b4"
+        },
+        {
+          "type": "text",
+          "text": "As the weeks and months wore on, though, her physical condition began to improve, which in turn helped her mental state. As Blue began walking again, she started to regain her confidence, but she maintains that getting back into the ring for the first time after suffering the injury was a terrifying experience.",
+          "block_id": "b5"
+        },
+        {
+          "type": "text",
+          "text": "Following her return in May of last year, Blue and her Sisters of Sin partner Julia Hart latched on to more recent AEW addition Thekla. Together, the three women are known as the Triangle of Madness, and the arrangement can be at least partially credited for Thekla winning the AEW Women's World Championship in 2026.",
+          "block_id": "b6"
+        }
+      ],
+      "elements": [
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=NTuWAh-SwCo",
+          "source_tag": "div",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "In July 2024, AEW star Skye Blue suffered an ankle injury which required surgery and wound up keeping her out of the ring for nine months. Recalling the injury during an interview with TMZ, Blue admitted that, immediately after the procedure, she experienced some doubt as to whether she'd be able to wrestle again.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "\"Those few days after surgery, where you can't move, I was just laying flat on a couch trying not to move my leg,\" Blue said. \"I was like, 'This is insane. How am I going to go back to flipping and running and twisting and turning and all the crazy things we have to put our bodies through?' So it definitely flickered across my brain.\"",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "At the same time, Blue felt worried that even if she did mount a return to the ring, she'd be forced to greatly alter her wrestling style and the fans might not accept it. Spending so much more time at home compared to when she was working, Blue said her mind was constantly racing, and it added to the anxiety.",
+          "block_id": "b4"
+        },
+        {
+          "type": "text",
+          "text": "As the weeks and months wore on, though, her physical condition began to improve, which in turn helped her mental state. As Blue began walking again, she started to regain her confidence, but she maintains that getting back into the ring for the first time after suffering the injury was a terrifying experience.",
+          "block_id": "b5"
+        },
+        {
+          "type": "text",
+          "text": "Following her return in May of last year, Blue and her Sisters of Sin partner Julia Hart latched on to more recent AEW addition Thekla. Together, the three women are known as the Triangle of Madness, and the arrangement can be at least partially credited for Thekla winning the AEW Women's World Championship in 2026.",
+          "block_id": "b6"
+        }
+      ],
+      "element_counts": {
+        "text": 5,
+        "heading": 0,
+        "quote": 0,
+        "table": 0,
+        "image": 0,
+        "embed": 1
+      },
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2187355/aew-skye-blue-injury-doubt-return-possible/\nTitolo feed: AEW's Skye Blue Looks Back On Injury That Made Her Doubt Whether Return Was Possible\nTitolo pagina: AEW's Skye Blue Looks Back On Injury That Made Her Doubt Whether Return Was Possible - Wrestling Inc.\nDescrizione: When AEW star Skye Blue underwent surgery on her injured ankle in 2024, she initially had some doubts about whether she'd be able to get back in the ring.\nCategoria suggerita: AEW\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"In July 2024, AEW star Skye Blue suffered an ankle injury which required surgery and wound up keeping her out of the ring for nine months. Recalling the injury during an interview with TMZ, Blue admitted that, immediately after the procedure, she experienced some doubt as to whether she'd be able to wrestle again.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"\\\"Those few days after surgery, where you can't move, I was just laying flat on a couch trying not to move my leg,\\\" Blue said. \\\"I was like, 'This is insane. How am I going to go back to flipping and running and twisting and turning and all the crazy things we have to put our bodies through?' So it definitely flickered across my brain.\\\"\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"At the same time, Blue felt worried that even if she did mount a return to the ring, she'd be forced to greatly alter her wrestling style and the fans might not accept it. Spending so much more time at home compared to when she was working, Blue said her mind was constantly racing, and it added to the anxiety.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"As the weeks and months wore on, though, her physical condition began to improve, which in turn helped her mental state. As Blue began walking again, she started to regain her confidence, but she maintains that getting back into the ring for the first time after suffering the injury was a terrifying experience.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Following her return in May of last year, Blue and her Sisters of Sin partner Julia Hart latched on to more recent AEW addition Thekla. Together, the three women are known as the Triangle of Madness, and the arrangement can be at least partially credited for Thekla winning the AEW Women's World Championship in 2026.\"\n  }\n]\n",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_used": true,
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Skye Blue riflette sull'infortunio che le ha fatto dubitare del suo ritorno\",\n  \"excerpt_it\": \"La star della AEW Skye Blue ha raccontato il difficile periodo post-operatorio e i dubbi sulla sua carriera dopo il grave infortunio alla caviglia subito nel 2024.\",\n  \"translations\": {\n    \"b2\": \"Nel luglio 2024, la star della AEW Skye Blue ha subito un infortunio alla caviglia che ha richiesto un intervento chirurgico, costringendola a restare lontana dal ring per nove mesi. Ricordando l'accaduto in un'intervista a TMZ, la Blue ha ammesso che, subito dopo l'operazione, ha nutrito dei dubbi sulla possibilità di tornare a lottare.\",\n    \"b3\": \"\\\"Nei giorni successivi all'intervento, quando non riuscivo a muovermi, rimanevo stesa sul divano cercando di non spostare la gamba\\\", ha raccontato la Blue. \\\"Pensavo: 'È pazzesco. Come farò a tornare a fare capriole, correre, ruotare e fare tutte le cose folli a cui dobbiamo sottoporre i nostri corpi?'. Quindi il pensiero mi ha sicuramente attraversato la mente\\\".\",\n    \"b4\": \"Allo stesso tempo, la Blue temeva che, anche in caso di ritorno sul ring, sarebbe stata costretta a modificare drasticamente il suo stile di lotta, col rischio che i fan non lo accettassero. Passando molto più tempo a casa rispetto a quando lavorava, ha spiegato che la sua mente correva costantemente, aumentando il suo stato d'ansia.\",\n    \"b5\": \"Con il passare delle settimane e dei mesi, però, le sue condizioni fisiche hanno iniziato a migliorare, aiutando di riflesso anche il suo stato mentale. Non appena ha ricominciato a camminare, la Blue ha iniziato a recuperare fiducia, pur sostenendo che tornare sul ring per la prima volta dopo l'infortunio sia stata un'esperienza terrificante.\",\n    \"b6\": \"Dopo il suo rientro nel maggio dello scorso anno, la Blue e la sua compagna nelle Sisters of Sin, Julia Hart, si sono legate alla più recente aggiunta della AEW, Thekla. Insieme, le tre atlete formano il Triangle of Madness, un'alleanza che può essere considerata, almeno in parte, responsabile della conquista dell'AEW Women's World Championship da parte di Thekla nel 2026.\"\n  },\n  \"notes\": []\n}",
+      "title_it": "Skye Blue riflette sull'infortunio che le ha fatto dubitare del suo ritorno",
+      "body_html": "<p>Nel luglio 2024, la star della AEW Skye Blue ha subito un infortunio alla caviglia che ha richiesto un intervento chirurgico, costringendola a restare lontana dal ring per nove mesi. Ricordando l&#x27;accaduto in un&#x27;intervista a TMZ, la Blue ha ammesso che, subito dopo l&#x27;operazione, ha nutrito dei dubbi sulla possibilità di tornare a lottare.</p>\nhttps://www.youtube.com/watch?v=NTuWAh-SwCo\n\n<p>&quot;Nei giorni successivi all&#x27;intervento, quando non riuscivo a muovermi, rimanevo stesa sul divano cercando di non spostare la gamba&quot;, ha raccontato la Blue. &quot;Pensavo: &#x27;È pazzesco. Come farò a tornare a fare capriole, correre, ruotare e fare tutte le cose folli a cui dobbiamo sottoporre i nostri corpi?&#x27;. Quindi il pensiero mi ha sicuramente attraversato la mente&quot;.</p>\n<p>Allo stesso tempo, la Blue temeva che, anche in caso di ritorno sul ring, sarebbe stata costretta a modificare drasticamente il suo stile di lotta, col rischio che i fan non lo accettassero. Passando molto più tempo a casa rispetto a quando lavorava, ha spiegato che la sua mente correva costantemente, aumentando il suo stato d&#x27;ansia.</p>\n<p>Con il passare delle settimane e dei mesi, però, le sue condizioni fisiche hanno iniziato a migliorare, aiutando di riflesso anche il suo stato mentale. Non appena ha ricominciato a camminare, la Blue ha iniziato a recuperare fiducia, pur sostenendo che tornare sul ring per la prima volta dopo l&#x27;infortunio sia stata un&#x27;esperienza terrificante.</p>\n<p>Dopo il suo rientro nel maggio dello scorso anno, la Blue e la sua compagna nelle Sisters of Sin, Julia Hart, si sono legate alla più recente aggiunta della AEW, Thekla. Insieme, le tre atlete formano il Triangle of Madness, un&#x27;alleanza che può essere considerata, almeno in parte, responsabile della conquista dell&#x27;AEW Women&#x27;s World Championship da parte di Thekla nel 2026.</p>",
+      "excerpt_it": "La star della AEW Skye Blue ha raccontato il difficile periodo post-operatorio e i dubbi sulla sua carriera dopo il grave infortunio alla caviglia subito nel 2024.",
+      "bob_notes": [],
+      "translation_missing_units": [],
+      "editorial_changes": [
+        {
+          "code": "leading_embed_moved_after_first_paragraph",
+          "severity": "info",
+          "message": "Embed iniziale spostato dopo il primo paragrafo.",
+          "evidence": "https://www.youtube.com/watch?v=NTuWAh-SwCo"
+        }
+      ],
+      "diagnostic_warnings": [],
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta",
+          "share_links"
+        ],
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "source_specific_notes": "Focus sul ritorno in ring di Skye Blue."
+      },
+      "menzo_ai_review": {
+        "id": "c2",
+        "decision": "selected",
+        "priority": 6,
+        "category_hint": "AEW",
+        "article_type": "storyline_development",
+        "event_key": "skye_blue_injury",
+        "duplicate_of": "",
+        "editorial_reason": "Aggiornamento sullo stato di salute di un talento AEW, utile per il seguito narrativo.",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "source_specific_notes": "Focus sul ritorno in ring di Skye Blue."
+        },
+        "priority_label": "medium"
+      },
+      "ai_editorial_reason": "Aggiornamento sullo stato di salute di un talento AEW, utile per il seguito narrativo.",
+      "ai_priority_label": "medium"
+    },
+    {
+      "source_url": "https://www.ringsidenews.com/cody-rhodes-reveals-why-paul-heyman-his-creative-cheat-code/",
+      "source": "ringsidenews",
+      "source_title": "Cody Rhodes Reveals Why Paul Heyman Is His Creative Cheat Code",
+      "category_hint": "WWE",
+      "menzo_score": 82,
+      "status": "ready_for_alfred",
+      "created_at": "2026-06-07T15:23:31.740505+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "fetched_html_chars": 556931,
+      "source_html_contains_embed_hint": true,
+      "meta": {
+        "source_title": "Cody Rhodes Reveals Why Paul Heyman Is His Creative Cheat Code",
+        "description": "Cody Rhodes is revealing how his WWE creative process works, and Paul Heyman clearly plays a major role in shaping the final product. While speaking on",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/cody-rhodes-reveals-why-paul-heyman-is-his-creative-cheat-code-32.jpg"
+      },
+      "extraction_diagnostics": {
+        "dom_noise_reduction_enabled": false,
+        "stage": "complete",
+        "global_embed_recovery_enabled": false,
+        "root_name": "article",
+        "root_text_chars": 3820,
+        "candidate_node_count": 98,
+        "raw_element_count": 19,
+        "clean_element_count": 14,
+        "removed_by_node_count": 13,
+        "removed_by_sanitize_count": 5,
+        "table_count": 0,
+        "quote_count": 4,
+        "embed_count": 2
+      },
+      "raw_element_count": 19,
+      "clean_element_count": 14,
+      "translation_unit_count": 11,
+      "removed_before_gemini": 18,
+      "removed_elements_debug": [
+        {
+          "node_index": 75,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
+          "text_preview": "Spotlight"
+        },
+        {
+          "node_index": 79,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2199355 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-solo-sikoa tag-wwe-featured   ",
+          "text_preview": "WWE News Solo Sikoa’s Likeness Seemingly Stolen By Upcoming Wrestling Video Game"
+        },
+        {
+          "node_index": 82,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "Solo Sikoa’s Likeness Seemingly Stolen By Upcoming Wrestling Video Game"
+        },
+        {
+          "node_index": 83,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 84,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2199124 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
+          "text_preview": "WWE News WWE Shareholder Trial Cancelled After Being Pulled From Court Calendar"
+        },
+        {
+          "node_index": 87,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "WWE Shareholder Trial Cancelled After Being Pulled From Court Calendar"
+        },
+        {
+          "node_index": 88,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 89,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2198937 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-jordynne-grace tag-wwe-featured   ",
+          "text_preview": "WWE News What We Know About Jordynne Grace’s WWE Status After SmackDown Absence"
+        },
+        {
+          "node_index": 92,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "What We Know About Jordynne Grace’s WWE Status After SmackDown Absence"
+        },
+        {
+          "node_index": 93,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 94,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2198913 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-cm-punk tag-wwe-featured   ",
+          "text_preview": "WWE News CM Punk’s WWE Absence May Be Tied To Limited Dates And Recovery Time"
+        },
+        {
+          "node_index": 97,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "CM Punk’s WWE Absence May Be Tied To Limited Dates And Recovery Time"
+        },
+        {
+          "node_index": 98,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "index": 2,
+          "reason": "duplicate_or_empty_embed",
+          "item": {
+            "type": "embed",
+            "url": "https://www.youtube.com/watch?v=egQ_2OXtppI",
+            "source_tag": "div"
+          }
+        },
+        {
+          "index": 3,
+          "reason": "duplicate_or_empty_embed",
+          "item": {
+            "type": "embed",
+            "url": "https://www.youtube.com/watch?v=egQ_2OXtppI",
+            "source_tag": "div"
+          }
+        },
+        {
+          "index": 16,
+          "reason": "duplicate_or_empty_embed",
+          "item": {
+            "type": "embed",
+            "url": "https://www.youtube.com/embed/egQ_2OXtppI?feature=oembed",
+            "source_tag": "div"
+          }
+        },
+        {
+          "index": 17,
+          "reason": "duplicate_or_empty_embed",
+          "item": {
+            "type": "embed",
+            "url": "https://www.youtube.com/embed/egQ_2OXtppI?feature=oembed",
+            "source_tag": "iframe"
+          }
+        },
+        {
+          "index": 19,
+          "reason": "footer_start",
+          "item": {
+            "type": "text",
+            "text": "Spotlight WWE News Solo Sikoa’s Likeness Seemingly Stolen By Upcoming Wrestling Video Game WWE News WWE Shareholder Trial Cancelled After Being Pulled From Court Calendar WWE News What We Know About Jordynne Grace’s WWE Status After SmackDown Absence WWE News CM Punk’s WWE Absence May Be Tied To Limited Dates And Recovery Time"
+          }
+        }
+      ],
+      "raw_elements_preview": [
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=egQ_2OXtppI",
+          "source_tag": "div",
+          "block_id": "b1"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=egQ_2OXtppI",
+          "source_tag": "div"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=egQ_2OXtppI",
+          "source_tag": "div"
+        },
+        {
+          "type": "text",
+          "text": "Cody Rhodes is revealing how his WWE creative process works, and Paul Heyman clearly plays a major role in shaping the final product.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "While speaking on his What Do You Wanna Talk About? podcast, the American Nightmare explained that he likes to build his ideas first before taking them to Heyman, because going straight to him would be too easy.",
+          "block_id": "b3"
+        },
+        {
+          "type": "quote",
+          "text": "“I just spoke to somebody, I said, let’s put this together first, then go there. Love it. Then go there. Let’s bring him ours and then go there ’cause if we go there first, we’re not even challenging ourselves as artists.”",
+          "source_tag": "blockquote",
+          "block_id": "b4"
+        },
+        {
+          "type": "text",
+          "text": "Cody said Heyman has accepted that some ideas already come in strong, but his real value comes in Gorilla, where he can look at what is on paper and add something special to it. Rhodes then made it clear just how valuable Heyman is when a segment needs that extra push, calling him the “cheat code.”",
+          "block_id": "b5"
+        },
+        {
+          "type": "quote",
+          "text": "“But the magic now, and I don’t think he’d be offended in me telling you is he sits up in Gorilla in the corner of Gorilla and he looks at what’s on paper and he adds legitimate magic to it. He’s the cheat code and I need the cheat code some nights.”",
+          "source_tag": "blockquote",
+          "block_id": "b6"
+        },
+        {
+          "type": "text",
+          "text": "The Undisputed WWE Champion also compared Paul Heyman’s approach to Dusty Rhodes’ old mindset, saying the Oracle looks at scenes, stakes, and dialogue like they are making movies.",
+          "block_id": "b7"
+        },
+        {
+          "type": "quote",
+          "text": "“Mr. Heyman might give it a, hmm. I saw this scene once and this is similar and the stakes and what if you said something like, he’ll look at it from the way my dad did. We’re making movies, kid, we’re making movies, kid, that was always, we’re making movies.”",
+          "source_tag": "blockquote",
+          "block_id": "b8"
+        },
+        {
+          "type": "text",
+          "text": "Cody added that WWE has several creative voices who bring different perspectives, including Michael Hayes and Bruce Prichard. Hayes focuses on where the story goes next week, while Prichard brings his own Texas wrestling influence.",
+          "block_id": "b9"
+        },
+        {
+          "type": "quote",
+          "text": "“You got Michael PS Hayes down the hall. PS is gonna take it from the perspective of where does that leave us in the week? And then don’t you want to get here? And that’s gonna be even better. Then Bruce is gonna speak to you from the perspective of Paul Bosch and Texas. And he’s got his own. The flavors here are so wild that, like I said, it’s a cheat code.”",
+          "source_tag": "blockquote",
+          "block_id": "b10"
+        },
+        {
+          "type": "text",
+          "text": "For Cody, the process still starts with ownership over his own character and story. He wants to bring the best version of his ideas forward before letting WWE’s creative minds refine them: “Most of the time, this is my story. This is my character. I want to get it as good as I can. And then you guys fix it up, filter it, produce it for me.”",
+          "block_id": "b11"
+        },
+        {
+          "type": "text",
+          "text": "Cody Rhodes’ comments show how much collaboration goes into his WWE presentation. While he still sees the story as his own, he clearly views Paul Heyman, Michael Hayes, and Bruce Prichard as key figures who help turn strong ideas into television moments.",
+          "block_id": "b12"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/egQ_2OXtppI?feature=oembed",
+          "source_tag": "figure",
+          "block_id": "b13"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/egQ_2OXtppI?feature=oembed",
+          "source_tag": "div"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/egQ_2OXtppI?feature=oembed",
+          "source_tag": "iframe"
+        },
+        {
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/youzify/members/1/2021/03/6058ff2088358-bpfull-96x96.jpg",
+          "alt": "Subhojeet Mukherjee",
+          "block_id": "b14"
+        },
+        {
+          "type": "text",
+          "text": "Spotlight WWE News Solo Sikoa’s Likeness Seemingly Stolen By Upcoming Wrestling Video Game WWE News WWE Shareholder Trial Cancelled After Being Pulled From Court Calendar WWE News What We Know About Jordynne Grace’s WWE Status After SmackDown Absence WWE News CM Punk’s WWE Absence May Be Tied To Limited Dates And Recovery Time"
+        }
+      ],
+      "elements": [
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=egQ_2OXtppI",
+          "source_tag": "div",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "Cody Rhodes is revealing how his WWE creative process works, and Paul Heyman clearly plays a major role in shaping the final product.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "While speaking on his What Do You Wanna Talk About? podcast, the American Nightmare explained that he likes to build his ideas first before taking them to Heyman, because going straight to him would be too easy.",
+          "block_id": "b3"
+        },
+        {
+          "type": "quote",
+          "text": "“I just spoke to somebody, I said, let’s put this together first, then go there. Love it. Then go there. Let’s bring him ours and then go there ’cause if we go there first, we’re not even challenging ourselves as artists.”",
+          "source_tag": "blockquote",
+          "block_id": "b4"
+        },
+        {
+          "type": "text",
+          "text": "Cody said Heyman has accepted that some ideas already come in strong, but his real value comes in Gorilla, where he can look at what is on paper and add something special to it. Rhodes then made it clear just how valuable Heyman is when a segment needs that extra push, calling him the “cheat code.”",
+          "block_id": "b5"
+        },
+        {
+          "type": "quote",
+          "text": "“But the magic now, and I don’t think he’d be offended in me telling you is he sits up in Gorilla in the corner of Gorilla and he looks at what’s on paper and he adds legitimate magic to it. He’s the cheat code and I need the cheat code some nights.”",
+          "source_tag": "blockquote",
+          "block_id": "b6"
+        },
+        {
+          "type": "text",
+          "text": "The Undisputed WWE Champion also compared Paul Heyman’s approach to Dusty Rhodes’ old mindset, saying the Oracle looks at scenes, stakes, and dialogue like they are making movies.",
+          "block_id": "b7"
+        },
+        {
+          "type": "quote",
+          "text": "“Mr. Heyman might give it a, hmm. I saw this scene once and this is similar and the stakes and what if you said something like, he’ll look at it from the way my dad did. We’re making movies, kid, we’re making movies, kid, that was always, we’re making movies.”",
+          "source_tag": "blockquote",
+          "block_id": "b8"
+        },
+        {
+          "type": "text",
+          "text": "Cody added that WWE has several creative voices who bring different perspectives, including Michael Hayes and Bruce Prichard. Hayes focuses on where the story goes next week, while Prichard brings his own Texas wrestling influence.",
+          "block_id": "b9"
+        },
+        {
+          "type": "quote",
+          "text": "“You got Michael PS Hayes down the hall. PS is gonna take it from the perspective of where does that leave us in the week? And then don’t you want to get here? And that’s gonna be even better. Then Bruce is gonna speak to you from the perspective of Paul Bosch and Texas. And he’s got his own. The flavors here are so wild that, like I said, it’s a cheat code.”",
+          "source_tag": "blockquote",
+          "block_id": "b10"
+        },
+        {
+          "type": "text",
+          "text": "For Cody, the process still starts with ownership over his own character and story. He wants to bring the best version of his ideas forward before letting WWE’s creative minds refine them: “Most of the time, this is my story. This is my character. I want to get it as good as I can. And then you guys fix it up, filter it, produce it for me.”",
+          "block_id": "b11"
+        },
+        {
+          "type": "text",
+          "text": "Cody Rhodes’ comments show how much collaboration goes into his WWE presentation. While he still sees the story as his own, he clearly views Paul Heyman, Michael Hayes, and Bruce Prichard as key figures who help turn strong ideas into television moments.",
+          "block_id": "b12"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/egQ_2OXtppI?feature=oembed",
+          "source_tag": "figure",
+          "block_id": "b13"
+        },
+        {
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/youzify/members/1/2021/03/6058ff2088358-bpfull-96x96.jpg",
+          "alt": "Subhojeet Mukherjee",
+          "block_id": "b14"
+        }
+      ],
+      "element_counts": {
+        "text": 7,
+        "heading": 0,
+        "quote": 4,
+        "table": 0,
+        "image": 1,
+        "embed": 2
+      },
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/cody-rhodes-reveals-why-paul-heyman-his-creative-cheat-code/\nTitolo feed: Cody Rhodes Reveals Why Paul Heyman Is His Creative Cheat Code\nTitolo pagina: Cody Rhodes Reveals Why Paul Heyman Is His Creative Cheat Code\nDescrizione: Cody Rhodes is revealing how his WWE creative process works, and Paul Heyman clearly plays a major role in shaping the final product. While speaking on\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Cody Rhodes is revealing how his WWE creative process works, and Paul Heyman clearly plays a major role in shaping the final product.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"While speaking on his What Do You Wanna Talk About? podcast, the American Nightmare explained that he likes to build his ideas first before taking them to Heyman, because going straight to him would be too easy.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"“I just spoke to somebody, I said, let’s put this together first, then go there. Love it. Then go there. Let’s bring him ours and then go there ’cause if we go there first, we’re not even challenging ourselves as artists.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"Cody said Heyman has accepted that some ideas already come in strong, but his real value comes in Gorilla, where he can look at what is on paper and add something special to it. Rhodes then made it clear just how valuable Heyman is when a segment needs that extra push, calling him the “cheat code.”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"quote\",\n    \"text\": \"“But the magic now, and I don’t think he’d be offended in me telling you is he sits up in Gorilla in the corner of Gorilla and he looks at what’s on paper and he adds legitimate magic to it. He’s the cheat code and I need the cheat code some nights.”\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"The Undisputed WWE Champion also compared Paul Heyman’s approach to Dusty Rhodes’ old mindset, saying the Oracle looks at scenes, stakes, and dialogue like they are making movies.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"quote\",\n    \"text\": \"“Mr. Heyman might give it a, hmm. I saw this scene once and this is similar and the stakes and what if you said something like, he’ll look at it from the way my dad did. We’re making movies, kid, we’re making movies, kid, that was always, we’re making movies.”\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"Cody added that WWE has several creative voices who bring different perspectives, including Michael Hayes and Bruce Prichard. Hayes focuses on where the story goes next week, while Prichard brings his own Texas wrestling influence.\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"quote\",\n    \"text\": \"“You got Michael PS Hayes down the hall. PS is gonna take it from the perspective of where does that leave us in the week? And then don’t you want to get here? And that’s gonna be even better. Then Bruce is gonna speak to you from the perspective of Paul Bosch and Texas. And he’s got his own. The flavors here are so wild that, like I said, it’s a cheat code.”\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"text\",\n    \"text\": \"For Cody, the process still starts with ownership over his own character and story. He wants to bring the best version of his ideas forward before letting WWE’s creative minds refine them: “Most of the time, this is my story. This is my character. I want to get it as good as I can. And then you guys fix it up, filter it, produce it for me.”\"\n  },\n  {\n    \"id\": \"b12\",\n    \"type\": \"text\",\n    \"text\": \"Cody Rhodes’ comments show how much collaboration goes into his WWE presentation. While he still sees the story as his own, he clearly views Paul Heyman, Michael Hayes, and Bruce Prichard as key figures who help turn strong ideas into television moments.\"\n  }\n]\n",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_used": true,
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Cody Rhodes spiega perché Paul Heyman è il suo \\\"trucco\\\" creativo\",\n  \"excerpt_it\": \"Cody Rhodes svela il dietro le quinte del suo processo creativo in WWE, sottolineando l'importanza fondamentale di figure come Paul Heyman.\",\n  \"translations\": {\n    \"b2\": \"Cody Rhodes ha svelato come funziona il suo processo creativo in WWE, confermando che Paul Heyman gioca un ruolo di primo piano nel definire il prodotto finale.\",\n    \"b3\": \"Durante il suo podcast \\\"What Do You Wanna Talk About?\\\", l'American Nightmare ha spiegato che preferisce sviluppare le proprie idee prima di sottoporle a Heyman, perché rivolgersi subito a lui sarebbe troppo facile.\",\n    \"b4\": \"“Ho parlato con qualcuno e ho detto: mettiamolo insieme prima, poi andiamo da lui. Mi piace. Poi andiamo da lui. Portiamogli le nostre idee e poi andiamo da lui, perché se andiamo da lui subito, non stiamo nemmeno sfidando noi stessi come artisti.”\",\n    \"b5\": \"Cody ha affermato che Heyman ha accettato il fatto che alcune idee arrivino già solide, ma che il suo vero valore emerga nella Gorilla Position, dove riesce a guardare ciò che è scritto su carta e ad aggiungere quel tocco speciale. Rhodes ha poi chiarito quanto Heyman sia prezioso quando un segmento ha bisogno di una marcia in più, definendolo un vero e proprio \\\"trucco\\\" (cheat code).\",\n    \"b6\": \"“Ma la magia, ora – e non credo che si offenderebbe se lo dicessi – è che lui si siede in un angolo della Gorilla Position, guarda quello che c'è scritto su carta e ci aggiunge una magia autentica. È il mio cheat code e, certe sere, ho bisogno del cheat code.”\",\n    \"b7\": \"L'Undisputed WWE Champion ha inoltre paragonato l'approccio di Paul Heyman alla mentalità di suo padre, Dusty Rhodes, dicendo che l'\\\"Oracolo\\\" analizza scene, posta in gioco e dialoghi come se si stesse girando un film.\",\n    \"b8\": \"“Magari il signor Heyman fa un verso, tipo 'hmm'. Ho visto questa scena una volta ed è simile, e riguardo alla posta in gioco o a cosa potresti dire, lui la guarda proprio come faceva mio padre. 'Stiamo girando dei film, ragazzo, stiamo girando dei film', era sempre così: stiamo girando dei film.”\",\n    \"b9\": \"Cody ha aggiunto che la WWE vanta diverse voci creative che portano prospettive differenti, tra cui Michael Hayes e Bruce Prichard. Hayes si concentra sulla direzione della storia per la settimana successiva, mentre Prichard apporta la sua tipica influenza del wrestling texano.\",\n    \"b10\": \"“Hai Michael PS Hayes in corridoio. PS la prenderà dal punto di vista di: 'Dove ci porta questo la prossima settimana? Non vorresti arrivare qui? Sarà ancora meglio'. Poi Bruce ti parlerà dal punto di vista di Paul Bosch e del Texas. Ha il suo stile. Qui ci sono sfumature così incredibili che, come ho detto, è un cheat code.”\",\n    \"b11\": \"Per Cody, il processo inizia sempre con il prendersi la responsabilità del proprio personaggio e della propria storia. Vuole presentare la versione migliore delle sue idee prima di lasciare che le menti creative della WWE le rifiniscano: “Il più delle volte, questa è la mia storia. È il mio personaggio. Voglio renderlo il migliore possibile. E poi voi ragazzi lo sistemate, lo filtrate e lo producete per me.”\",\n    \"b12\": \"Le parole di Cody Rhodes dimostrano quanta collaborazione ci sia dietro la sua presentazione in WWE. Sebbene consideri la storia come propria, vede chiaramente in Paul Heyman, Michael Hayes e Bruce Prichard figure chiave che aiutano a trasformare ottime idee in momenti televisivi memorabili.\"\n  },\n  \"notes\": []\n}",
+      "title_it": "Cody Rhodes spiega perché Paul Heyman è il suo \"trucco\" creativo",
+      "body_html": "<p>Cody Rhodes ha svelato come funziona il suo processo creativo in WWE, confermando che Paul Heyman gioca un ruolo di primo piano nel definire il prodotto finale.</p>\nhttps://www.youtube.com/watch?v=egQ_2OXtppI\n\n<p>Durante il suo podcast &quot;What Do You Wanna Talk About?&quot;, l&#x27;American Nightmare ha spiegato che preferisce sviluppare le proprie idee prima di sottoporle a Heyman, perché rivolgersi subito a lui sarebbe troppo facile.</p>\n<blockquote>“Ho parlato con qualcuno e ho detto: mettiamolo insieme prima, poi andiamo da lui. Mi piace. Poi andiamo da lui. Portiamogli le nostre idee e poi andiamo da lui, perché se andiamo da lui subito, non stiamo nemmeno sfidando noi stessi come artisti.”</blockquote>\n<p>Cody ha affermato che Heyman ha accettato il fatto che alcune idee arrivino già solide, ma che il suo vero valore emerga nella Gorilla Position, dove riesce a guardare ciò che è scritto su carta e ad aggiungere quel tocco speciale. Rhodes ha poi chiarito quanto Heyman sia prezioso quando un segmento ha bisogno di una marcia in più, definendolo un vero e proprio &quot;trucco&quot; (cheat code).</p>\n<blockquote>“Ma la magia, ora – e non credo che si offenderebbe se lo dicessi – è che lui si siede in un angolo della Gorilla Position, guarda quello che c&#x27;è scritto su carta e ci aggiunge una magia autentica. È il mio cheat code e, certe sere, ho bisogno del cheat code.”</blockquote>\n<p>L&#x27;Undisputed WWE Champion ha inoltre paragonato l&#x27;approccio di Paul Heyman alla mentalità di suo padre, Dusty Rhodes, dicendo che l&#x27;&quot;Oracolo&quot; analizza scene, posta in gioco e dialoghi come se si stesse girando un film.</p>\n<blockquote>“Magari il signor Heyman fa un verso, tipo &#x27;hmm&#x27;. Ho visto questa scena una volta ed è simile, e riguardo alla posta in gioco o a cosa potresti dire, lui la guarda proprio come faceva mio padre. &#x27;Stiamo girando dei film, ragazzo, stiamo girando dei film&#x27;, era sempre così: stiamo girando dei film.”</blockquote>\n<p>Cody ha aggiunto che la WWE vanta diverse voci creative che portano prospettive differenti, tra cui Michael Hayes e Bruce Prichard. Hayes si concentra sulla direzione della storia per la settimana successiva, mentre Prichard apporta la sua tipica influenza del wrestling texano.</p>\n<blockquote>“Hai Michael PS Hayes in corridoio. PS la prenderà dal punto di vista di: &#x27;Dove ci porta questo la prossima settimana? Non vorresti arrivare qui? Sarà ancora meglio&#x27;. Poi Bruce ti parlerà dal punto di vista di Paul Bosch e del Texas. Ha il suo stile. Qui ci sono sfumature così incredibili che, come ho detto, è un cheat code.”</blockquote>\n<p>Per Cody, il processo inizia sempre con il prendersi la responsabilità del proprio personaggio e della propria storia. Vuole presentare la versione migliore delle sue idee prima di lasciare che le menti creative della WWE le rifiniscano: “Il più delle volte, questa è la mia storia. È il mio personaggio. Voglio renderlo il migliore possibile. E poi voi ragazzi lo sistemate, lo filtrate e lo producete per me.”</p>\n<p>Le parole di Cody Rhodes dimostrano quanta collaborazione ci sia dietro la sua presentazione in WWE. Sebbene consideri la storia come propria, vede chiaramente in Paul Heyman, Michael Hayes e Bruce Prichard figure chiave che aiutano a trasformare ottime idee in momenti televisivi memorabili.</p>\n\nhttps://www.youtube.com/embed/egQ_2OXtppI?feature=oembed\n\n<!--IMAGE:https://www.ringsidenews.com/wp-content/uploads/youzify/members/1/2021/03/6058ff2088358-bpfull-96x96.jpg-->",
+      "excerpt_it": "Cody Rhodes svela il dietro le quinte del suo processo creativo in WWE, sottolineando l'importanza fondamentale di figure come Paul Heyman.",
+      "bob_notes": [],
+      "translation_missing_units": [],
+      "editorial_changes": [
+        {
+          "code": "leading_embed_moved_after_first_paragraph",
+          "severity": "info",
+          "message": "Embed iniziale spostato dopo il primo paragrafo.",
+          "evidence": "https://www.youtube.com/watch?v=egQ_2OXtppI"
+        }
+      ],
+      "diagnostic_warnings": [],
+      "bob_brief": {
+        "expected_embeds": [
+          "youtube"
+        ],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta",
+          "share_links"
+        ],
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "source_specific_notes": "Approfondire il ruolo di Heyman come mentor."
+      },
+      "menzo_ai_review": {
+        "id": "c3",
+        "decision": "selected",
+        "priority": 7,
+        "category_hint": "WWE",
+        "article_type": "storyline_development",
+        "event_key": "cody_heyman_creative",
+        "duplicate_of": "",
+        "editorial_reason": "approfondimento interessante sul processo creativo WWE che coinvolge Heyman.",
+        "bob_brief": {
+          "expected_embeds": [
+            "youtube"
+          ],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "source_specific_notes": "Approfondire il ruolo di Heyman come mentor."
+        },
+        "priority_label": "medium"
+      },
+      "ai_editorial_reason": "approfondimento interessante sul processo creativo WWE che coinvolge Heyman.",
+      "ai_priority_label": "medium"
+    }
+  ],
+  "handoff": {
+    "ready_for_alfred": 3,
+    "translation_pending": 0,
+    "errors": 0,
+    "extraction_empty": 0
+  },
+  "postprocess": {
+    "bob_v93_33_changes": 3,
+    "bob_v93_16_changes": 3,
+    "bob_brief_warnings_added": 0
+  }
+}
