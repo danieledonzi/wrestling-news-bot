@@ -1,0 +1,891 @@
+{
+  "agent": "Bob",
+  "version": "v93_33_youtube_plain_and_cta_cleanup",
+  "generated_at": "2026-06-08T10:02:03.818487+00:00",
+  "mode": "block_translation_prudent_embed_cleanup",
+  "policy": {
+    "clean_before_gemini": true,
+    "gemini_receives_only_text_units": true,
+    "preserve_sequence_outside_gemini": true,
+    "preserve_embeds_as_plain_url_lines": true,
+    "filter_source_social_bars": true,
+    "filter_author_bios_before_gemini": true,
+    "filter_cta_before_gemini": true,
+    "recover_embeds_from_raw_html": false,
+    "embed_urls_require_post_or_video_shape": true,
+    "preserve_quotes_as_blockquote": "source_blockquote_only",
+    "preserve_tables_as_html_tables": true,
+    "ordered_elements": [
+      "text",
+      "heading",
+      "quote",
+      "table",
+      "image",
+      "embed"
+    ],
+    "model_chain": [
+      "gemini-3.1-flash-lite",
+      "gemini-3-flash-preview",
+      "gemini-2.5-flash-lite",
+      "gemini-2.5-flash"
+    ],
+    "max_articles_per_run": 5,
+    "max_articles_with_report": 4,
+    "post_show_max_articles": 6,
+    "dynamic_article_capacity": true,
+    "prompt_family": "v92_historical_natural_full_translation_blocks",
+    "diagnostic_mode": true,
+    "fallback_mode": false,
+    "residual_author_bio_cleanup": true,
+    "generic_ringside_author_bio_cleanup": true,
+    "residual_cta_cleanup": true,
+    "split_inline_quoted_text": false,
+    "source_blockquote_only": true,
+    "move_leading_embeds_after_first_paragraph": true,
+    "unwrap_fake_data_blockquotes": true,
+    "consume_menzo_bob_brief": true,
+    "missing_expected_embed_warning": true
+  },
+  "input": {
+    "menzo_version": "v93_39_capacity_buffer",
+    "selected_count": 2,
+    "selected_processed": 2,
+    "capacity": 5,
+    "capacity_reason": "normal"
+  },
+  "articles": [
+    {
+      "source_url": "https://www.ringsidenews.com/billie-starkz-says-mercedes-mone-match-taught-her-lot/",
+      "source": "ringsidenews",
+      "source_title": "Billie Starkz Says Mercedes Moné Match Taught Her A Lot",
+      "category_hint": "AEW",
+      "menzo_score": 79,
+      "status": "ready_for_alfred",
+      "created_at": "2026-06-08T10:01:58.323141+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "fetched_html_chars": 563278,
+      "source_html_contains_embed_hint": true,
+      "meta": {
+        "source_title": "Billie Starkz Says Mercedes Moné Match Taught Her A Lot",
+        "description": "Billie Starkz got a major test when she stepped into the ring with Mercedes Moné, and she walked away from that match with more than just another big-name",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/billie-starkz-says-mercedes-mone-match-taught-her-a-lot-23.jpg"
+      },
+      "extraction_diagnostics": {
+        "dom_noise_reduction_enabled": false,
+        "stage": "complete",
+        "global_embed_recovery_enabled": false,
+        "root_name": "article",
+        "root_text_chars": 2867,
+        "candidate_node_count": 95,
+        "raw_element_count": 18,
+        "clean_element_count": 13,
+        "removed_by_node_count": 13,
+        "removed_by_sanitize_count": 5,
+        "table_count": 0,
+        "quote_count": 3,
+        "embed_count": 2
+      },
+      "raw_element_count": 18,
+      "clean_element_count": 13,
+      "translation_unit_count": 10,
+      "removed_before_gemini": 18,
+      "removed_elements_debug": [
+        {
+          "node_index": 72,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
+          "text_preview": "Spotlight"
+        },
+        {
+          "node_index": 76,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2199713 post type-post status-publish format-standard has-post-thumbnail hentry category-tna-wrestling-news tag-steve-maclin tag-tna-featured   ",
+          "text_preview": "TNA Wrestling News Steve Maclin Expected to Land in WWE or AEW After TNA Release"
+        },
+        {
+          "node_index": 79,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "Steve Maclin Expected to Land in WWE or AEW After TNA Release"
+        },
+        {
+          "node_index": 80,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 81,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2199623 post type-post status-publish format-standard has-post-thumbnail hentry category-tna-wrestling-news category-wwe-news tag-mike-santana tag-tna-featured   ",
+          "text_preview": "TNA Wrestling News WWE Believes Mike Santana Is Leaving TNA When His Contract Expires"
+        },
+        {
+          "node_index": 84,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "WWE Believes Mike Santana Is Leaving TNA When His Contract Expires"
+        },
+        {
+          "node_index": 85,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 86,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2199606 post type-post status-publish format-standard has-post-thumbnail hentry category-tna-wrestling-news tag-tna-featured   ",
+          "text_preview": "TNA Wrestling News TNA Announces Two Releases from the Company"
+        },
+        {
+          "node_index": 89,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "TNA Announces Two Releases from the Company"
+        },
+        {
+          "node_index": 90,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 91,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2199567 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-cm-punk tag-wwe-featured   ",
+          "text_preview": "WWE News Maria Kanellis Says WWE Stars Called Her Dumb For Dating CM Punk"
+        },
+        {
+          "node_index": 94,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "Maria Kanellis Says WWE Stars Called Her Dumb For Dating CM Punk"
+        },
+        {
+          "node_index": 95,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "index": 2,
+          "reason": "duplicate_or_empty_embed",
+          "item": {
+            "type": "embed",
+            "url": "https://www.youtube.com/watch?v=gRe_8AqZMF8",
+            "source_tag": "div"
+          }
+        },
+        {
+          "index": 3,
+          "reason": "duplicate_or_empty_embed",
+          "item": {
+            "type": "embed",
+            "url": "https://www.youtube.com/watch?v=gRe_8AqZMF8",
+            "source_tag": "div"
+          }
+        },
+        {
+          "index": 14,
+          "reason": "duplicate_or_empty_embed",
+          "item": {
+            "type": "embed",
+            "url": "https://www.youtube.com/embed/gRe_8AqZMF8?feature=oembed",
+            "source_tag": "div"
+          }
+        },
+        {
+          "index": 15,
+          "reason": "duplicate_or_empty_embed",
+          "item": {
+            "type": "embed",
+            "url": "https://www.youtube.com/embed/gRe_8AqZMF8?feature=oembed",
+            "source_tag": "iframe"
+          }
+        },
+        {
+          "index": 18,
+          "reason": "footer_start",
+          "item": {
+            "type": "text",
+            "text": "Spotlight TNA Wrestling News Steve Maclin Expected to Land in WWE or AEW After TNA Release TNA Wrestling News WWE Believes Mike Santana Is Leaving TNA When His Contract Expires TNA Wrestling News TNA Announces Two Releases from the Company WWE News Maria Kanellis Says WWE Stars Called Her Dumb For Dating CM Punk"
+          }
+        }
+      ],
+      "raw_elements_preview": [
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=gRe_8AqZMF8",
+          "source_tag": "div",
+          "block_id": "b1"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=gRe_8AqZMF8",
+          "source_tag": "div"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=gRe_8AqZMF8",
+          "source_tag": "div"
+        },
+        {
+          "type": "text",
+          "text": "Billie Starkz got a major test when she stepped into the ring with Mercedes Moné, and she walked away from that match with more than just another big-name opponent on her résumé.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "During her appearance on Hitting The Turnbuckle , Starkz looked back on her TBS Championship match against Moné and explained that every new opponent gives her something different to take away.",
+          "block_id": "b3"
+        },
+        {
+          "type": "quote",
+          "text": "“Honestly, I think wrestling any new opponent has given me a new learning experience.”",
+          "source_tag": "blockquote",
+          "block_id": "b4"
+        },
+        {
+          "type": "text",
+          "text": "That was especially true with Mercedes Moné, because Starkz recognized how much experience Moné brings to the ring. Moné has been around major stages for years, and Starkz said there was plenty she could pick up from being in there with someone who has stacked up championship wins.",
+          "block_id": "b5"
+        },
+        {
+          "type": "quote",
+          "text": "“Especially where she has came from. She’s given me so much more knowledge and having done wrestling for as long as she has in the ring that she just went on winning championship after championship, there’s definitely something I can learn from watching her.”",
+          "source_tag": "blockquote",
+          "block_id": "b6"
+        },
+        {
+          "type": "text",
+          "text": "Starkz also made it clear that facing Moné was not easy, but that is exactly the kind of situation she wants. She called the match a challenge, while also saying she is ready for anything thrown her way.",
+          "block_id": "b7"
+        },
+        {
+          "type": "quote",
+          "text": "“Being in the ring with her, it was a challenge, but I’m up for any challenge of the week.”",
+          "source_tag": "blockquote",
+          "block_id": "b8"
+        },
+        {
+          "type": "text",
+          "text": "That kind of attitude is why Starkz continues to stand out in AEW and ROH. She is still young, but she has already been in the ring with some serious names, and she is treating each match as another chance to sharpen her game.",
+          "block_id": "b9"
+        },
+        {
+          "type": "text",
+          "text": "Mercedes Moné gave Billie Starkz a tough test, but Starkz clearly sees matches like that as part of her growth. With more opportunities in AEW and ROH, Starkz could use those lessons to keep climbing the ladder.",
+          "block_id": "b10"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/gRe_8AqZMF8?feature=oembed",
+          "source_tag": "figure",
+          "block_id": "b11"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/gRe_8AqZMF8?feature=oembed",
+          "source_tag": "div"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/gRe_8AqZMF8?feature=oembed",
+          "source_tag": "iframe"
+        },
+        {
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/2026/04/Derek%20Holloway-96x96.jpg",
+          "alt": "Derek Holloway",
+          "block_id": "b12"
+        },
+        {
+          "type": "text",
+          "text": "Derek Holloway is a writer at Ringside News specializing in professional wrestling news, rumors, and results. He focuses on delivering reliable coverage across WWE, AEW, and major wrestling promotions.",
+          "block_id": "b13"
+        },
+        {
+          "type": "text",
+          "text": "Spotlight TNA Wrestling News Steve Maclin Expected to Land in WWE or AEW After TNA Release TNA Wrestling News WWE Believes Mike Santana Is Leaving TNA When His Contract Expires TNA Wrestling News TNA Announces Two Releases from the Company WWE News Maria Kanellis Says WWE Stars Called Her Dumb For Dating CM Punk"
+        }
+      ],
+      "elements": [
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=gRe_8AqZMF8",
+          "source_tag": "div",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "Billie Starkz got a major test when she stepped into the ring with Mercedes Moné, and she walked away from that match with more than just another big-name opponent on her résumé.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "During her appearance on Hitting The Turnbuckle , Starkz looked back on her TBS Championship match against Moné and explained that every new opponent gives her something different to take away.",
+          "block_id": "b3"
+        },
+        {
+          "type": "quote",
+          "text": "“Honestly, I think wrestling any new opponent has given me a new learning experience.”",
+          "source_tag": "blockquote",
+          "block_id": "b4"
+        },
+        {
+          "type": "text",
+          "text": "That was especially true with Mercedes Moné, because Starkz recognized how much experience Moné brings to the ring. Moné has been around major stages for years, and Starkz said there was plenty she could pick up from being in there with someone who has stacked up championship wins.",
+          "block_id": "b5"
+        },
+        {
+          "type": "quote",
+          "text": "“Especially where she has came from. She’s given me so much more knowledge and having done wrestling for as long as she has in the ring that she just went on winning championship after championship, there’s definitely something I can learn from watching her.”",
+          "source_tag": "blockquote",
+          "block_id": "b6"
+        },
+        {
+          "type": "text",
+          "text": "Starkz also made it clear that facing Moné was not easy, but that is exactly the kind of situation she wants. She called the match a challenge, while also saying she is ready for anything thrown her way.",
+          "block_id": "b7"
+        },
+        {
+          "type": "quote",
+          "text": "“Being in the ring with her, it was a challenge, but I’m up for any challenge of the week.”",
+          "source_tag": "blockquote",
+          "block_id": "b8"
+        },
+        {
+          "type": "text",
+          "text": "That kind of attitude is why Starkz continues to stand out in AEW and ROH. She is still young, but she has already been in the ring with some serious names, and she is treating each match as another chance to sharpen her game.",
+          "block_id": "b9"
+        },
+        {
+          "type": "text",
+          "text": "Mercedes Moné gave Billie Starkz a tough test, but Starkz clearly sees matches like that as part of her growth. With more opportunities in AEW and ROH, Starkz could use those lessons to keep climbing the ladder.",
+          "block_id": "b10"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/gRe_8AqZMF8?feature=oembed",
+          "source_tag": "figure",
+          "block_id": "b11"
+        },
+        {
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/2026/04/Derek%20Holloway-96x96.jpg",
+          "alt": "Derek Holloway",
+          "block_id": "b12"
+        },
+        {
+          "type": "text",
+          "text": "Derek Holloway is a writer at Ringside News specializing in professional wrestling news, rumors, and results. He focuses on delivering reliable coverage across WWE, AEW, and major wrestling promotions.",
+          "block_id": "b13"
+        }
+      ],
+      "element_counts": {
+        "text": 7,
+        "heading": 0,
+        "quote": 3,
+        "table": 0,
+        "image": 1,
+        "embed": 2
+      },
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/billie-starkz-says-mercedes-mone-match-taught-her-lot/\nTitolo feed: Billie Starkz Says Mercedes Moné Match Taught Her A Lot\nTitolo pagina: Billie Starkz Says Mercedes Moné Match Taught Her A Lot\nDescrizione: Billie Starkz got a major test when she stepped into the ring with Mercedes Moné, and she walked away from that match with more than just another big-name\nCategoria suggerita: AEW\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Billie Starkz got a major test when she stepped into the ring with Mercedes Moné, and she walked away from that match with more than just another big-name opponent on her résumé.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"During her appearance on Hitting The Turnbuckle , Starkz looked back on her TBS Championship match against Moné and explained that every new opponent gives her something different to take away.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"“Honestly, I think wrestling any new opponent has given me a new learning experience.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"That was especially true with Mercedes Moné, because Starkz recognized how much experience Moné brings to the ring. Moné has been around major stages for years, and Starkz said there was plenty she could pick up from being in there with someone who has stacked up championship wins.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"quote\",\n    \"text\": \"“Especially where she has came from. She’s given me so much more knowledge and having done wrestling for as long as she has in the ring that she just went on winning championship after championship, there’s definitely something I can learn from watching her.”\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"Starkz also made it clear that facing Moné was not easy, but that is exactly the kind of situation she wants. She called the match a challenge, while also saying she is ready for anything thrown her way.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"quote\",\n    \"text\": \"“Being in the ring with her, it was a challenge, but I’m up for any challenge of the week.”\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"That kind of attitude is why Starkz continues to stand out in AEW and ROH. She is still young, but she has already been in the ring with some serious names, and she is treating each match as another chance to sharpen her game.\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"text\",\n    \"text\": \"Mercedes Moné gave Billie Starkz a tough test, but Starkz clearly sees matches like that as part of her growth. With more opportunities in AEW and ROH, Starkz could use those lessons to keep climbing the ladder.\"\n  },\n  {\n    \"id\": \"b13\",\n    \"type\": \"text\",\n    \"text\": \"Derek Holloway is a writer at Ringside News specializing in professional wrestling news, rumors, and results. He focuses on delivering reliable coverage across WWE, AEW, and major wrestling promotions.\"\n  }\n]\n",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_used": true,
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Billie Starkz: il match con Mercedes Moné mi ha insegnato molto\",\n  \"excerpt_it\": \"Billie Starkz ha affrontato un banco di prova importante contro Mercedes Moné, traendone preziosi insegnamenti per la sua crescita.\",\n  \"translations\": {\n    \"b2\": \"Billie Starkz ha dovuto affrontare un banco di prova significativo quando è salita sul ring con Mercedes Moné, uscendo da quell'incontro con qualcosa di più di una semplice avversaria di alto profilo nel suo curriculum.\",\n    \"b3\": \"Durante la sua partecipazione al podcast 'Hitting The Turnbuckle', la Starkz ha ripensato al suo match valevole per il TBS Championship contro la Moné, spiegando che ogni nuova avversaria le offre qualcosa di diverso da imparare.\",\n    \"b4\": \"“Onestamente, credo che lottare contro ogni nuova avversaria mi abbia offerto una nuova esperienza formativa.”\",\n    \"b5\": \"Questo è stato particolarmente vero con Mercedes Moné, poiché la Starkz ha riconosciuto quanta esperienza quest'ultima porti sul ring. La Moné calca i palcoscenici più importanti da anni e la Starkz ha affermato che c'era molto da apprendere nel condividere il ring con una lottatrice che ha collezionato numerosi titoli.\",\n    \"b6\": \"“Specialmente considerando il suo percorso. Mi ha trasmesso così tante nozioni; avendo lottato per così tanto tempo e avendo vinto un campionato dopo l'altro, c'è sicuramente qualcosa che posso imparare osservandola.”\",\n    \"b7\": \"La Starkz ha anche chiarito che affrontare la Moné non è stato semplice, ma è esattamente il tipo di situazione che cerca. Ha definito il match una sfida, ribadendo di essere pronta a tutto ciò che le verrà proposto.\",\n    \"b8\": \"“Essere sul ring con lei è stata una sfida, ma io sono pronta a qualsiasi sfida settimanale.”\",\n    \"b9\": \"È proprio questo atteggiamento che permette alla Starkz di distinguersi in AEW e ROH. Nonostante la giovane età, ha già condiviso il ring con nomi di grande spessore e considera ogni incontro come un'opportunità per affinare il proprio stile.\",\n    \"b10\": \"Mercedes Moné ha messo a dura prova Billie Starkz, ma quest'ultima vede chiaramente incontri del genere come parte fondamentale del suo percorso di crescita. Con le crescenti opportunità in AEW e ROH, la Starkz potrebbe sfruttare questi insegnamenti per continuare la sua scalata.\",\n    \"b13\": \"Derek Holloway è un redattore di Ringside News specializzato in notizie, indiscrezioni e risultati del wrestling professionistico. Si occupa di fornire una copertura affidabile riguardante WWE, AEW e le principali federazioni di wrestling.\"\n  },\n  \"notes\": []\n}",
+      "title_it": "Billie Starkz: il match con Mercedes Moné mi ha insegnato molto",
+      "body_html": "<p>Billie Starkz ha dovuto affrontare un banco di prova significativo quando è salita sul ring con Mercedes Moné, uscendo da quell&#x27;incontro con qualcosa di più di una semplice avversaria di alto profilo nel suo curriculum.</p>\nhttps://www.youtube.com/watch?v=gRe_8AqZMF8\n\n<p>Durante la sua partecipazione al podcast &#x27;Hitting The Turnbuckle&#x27;, la Starkz ha ripensato al suo match valevole per il TBS Championship contro la Moné, spiegando che ogni nuova avversaria le offre qualcosa di diverso da imparare.</p>\n<blockquote>“Onestamente, credo che lottare contro ogni nuova avversaria mi abbia offerto una nuova esperienza formativa.”</blockquote>\n<p>Questo è stato particolarmente vero con Mercedes Moné, poiché la Starkz ha riconosciuto quanta esperienza quest&#x27;ultima porti sul ring. La Moné calca i palcoscenici più importanti da anni e la Starkz ha affermato che c&#x27;era molto da apprendere nel condividere il ring con una lottatrice che ha collezionato numerosi titoli.</p>\n<blockquote>“Specialmente considerando il suo percorso. Mi ha trasmesso così tante nozioni; avendo lottato per così tanto tempo e avendo vinto un campionato dopo l&#x27;altro, c&#x27;è sicuramente qualcosa che posso imparare osservandola.”</blockquote>\n<p>La Starkz ha anche chiarito che affrontare la Moné non è stato semplice, ma è esattamente il tipo di situazione che cerca. Ha definito il match una sfida, ribadendo di essere pronta a tutto ciò che le verrà proposto.</p>\n<blockquote>“Essere sul ring con lei è stata una sfida, ma io sono pronta a qualsiasi sfida settimanale.”</blockquote>\n<p>È proprio questo atteggiamento che permette alla Starkz di distinguersi in AEW e ROH. Nonostante la giovane età, ha già condiviso il ring con nomi di grande spessore e considera ogni incontro come un&#x27;opportunità per affinare il proprio stile.</p>\n<p>Mercedes Moné ha messo a dura prova Billie Starkz, ma quest&#x27;ultima vede chiaramente incontri del genere come parte fondamentale del suo percorso di crescita. Con le crescenti opportunità in AEW e ROH, la Starkz potrebbe sfruttare questi insegnamenti per continuare la sua scalata.</p>\n\nhttps://www.youtube.com/embed/gRe_8AqZMF8?feature=oembed\n\n<!--IMAGE:https://www.ringsidenews.com/wp-content/uploads/2026/04/Derek%20Holloway-96x96.jpg-->",
+      "excerpt_it": "Billie Starkz ha affrontato un banco di prova importante contro Mercedes Moné, traendone preziosi insegnamenti per la sua crescita.",
+      "bob_notes": [],
+      "translation_missing_units": [],
+      "editorial_changes": [
+        {
+          "code": "leading_embed_moved_after_first_paragraph",
+          "severity": "info",
+          "message": "Embed iniziale spostato dopo il primo paragrafo.",
+          "evidence": "https://www.youtube.com/watch?v=gRe_8AqZMF8"
+        },
+        {
+          "code": "residual_author_bio",
+          "severity": "info",
+          "message": "Paragrafo residuo rimosso da Bob v93.33.",
+          "evidence": "Derek Holloway è un redattore di Ringside News specializzato in notizie, indiscrezioni e risultati del wrestling professionistico. Si occupa di fornire una copertura affidabile riguardante WWE, AEW e le principali federazioni di wrestling."
+        }
+      ],
+      "diagnostic_warnings": [],
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta",
+          "share_links"
+        ],
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "source_specific_notes": "Ringsidenews spesso è prolisso, estrai solo il succo della dichiarazione."
+      },
+      "menzo_ai_review": {
+        "id": "c1",
+        "decision": "pending",
+        "priority": 5,
+        "category_hint": "AEW",
+        "article_type": "storyline_development",
+        "event_key": "starkz_mone_comments",
+        "duplicate_of": "",
+        "editorial_reason": "Dichiarazioni post-match interessanti per il pubblico che segue la divisione femminile AEW.",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "source_specific_notes": "Ringsidenews spesso è prolisso, estrai solo il succo della dichiarazione."
+        },
+        "priority_label": "medium"
+      },
+      "ai_editorial_reason": "Dichiarazioni post-match interessanti per il pubblico che segue la divisione femminile AEW.",
+      "ai_priority_label": "medium"
+    },
+    {
+      "source_url": "https://www.ringsidenews.com/victoria-crawford-sets-her-sights-tna-knockouts-championship/",
+      "source": "ringsidenews",
+      "source_title": "Victoria Crawford Sets Her Sights On TNA Knockouts Championship",
+      "category_hint": "TNA",
+      "menzo_score": 74,
+      "status": "ready_for_alfred",
+      "created_at": "2026-06-08T10:02:01.047692+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "fetched_html_chars": 568688,
+      "source_html_contains_embed_hint": true,
+      "meta": {
+        "source_title": "Victoria Crawford Sets Her Sights On TNA Knockouts Championship",
+        "description": "Victoria Crawford has gold on her mind, and she’s not being shy about it. During an appearance on the Hitting The Turnbuckle podcast, the TNA Knockout",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/victoria-crawford-sets-her-sights-on-tna-knockouts-championship-10.jpg"
+      },
+      "extraction_diagnostics": {
+        "dom_noise_reduction_enabled": false,
+        "stage": "complete",
+        "global_embed_recovery_enabled": false,
+        "root_name": "article",
+        "root_text_chars": 2745,
+        "candidate_node_count": 95,
+        "raw_element_count": 16,
+        "clean_element_count": 11,
+        "removed_by_node_count": 13,
+        "removed_by_sanitize_count": 5,
+        "table_count": 0,
+        "quote_count": 3,
+        "embed_count": 2
+      },
+      "raw_element_count": 16,
+      "clean_element_count": 11,
+      "translation_unit_count": 8,
+      "removed_before_gemini": 18,
+      "removed_elements_debug": [
+        {
+          "node_index": 72,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
+          "text_preview": "Spotlight"
+        },
+        {
+          "node_index": 76,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2199713 post type-post status-publish format-standard has-post-thumbnail hentry category-tna-wrestling-news tag-steve-maclin tag-tna-featured   ",
+          "text_preview": "TNA Wrestling News Steve Maclin Expected to Land in WWE or AEW After TNA Release"
+        },
+        {
+          "node_index": 79,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "Steve Maclin Expected to Land in WWE or AEW After TNA Release"
+        },
+        {
+          "node_index": 80,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 81,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2199623 post type-post status-publish format-standard has-post-thumbnail hentry category-tna-wrestling-news category-wwe-news tag-mike-santana tag-tna-featured   ",
+          "text_preview": "TNA Wrestling News WWE Believes Mike Santana Is Leaving TNA When His Contract Expires"
+        },
+        {
+          "node_index": 84,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "WWE Believes Mike Santana Is Leaving TNA When His Contract Expires"
+        },
+        {
+          "node_index": 85,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 86,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2199606 post type-post status-publish format-standard has-post-thumbnail hentry category-tna-wrestling-news tag-tna-featured   ",
+          "text_preview": "TNA Wrestling News TNA Announces Two Releases from the Company"
+        },
+        {
+          "node_index": 89,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "TNA Announces Two Releases from the Company"
+        },
+        {
+          "node_index": 90,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 91,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2199567 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-cm-punk tag-wwe-featured   ",
+          "text_preview": "WWE News Maria Kanellis Says WWE Stars Called Her Dumb For Dating CM Punk"
+        },
+        {
+          "node_index": 94,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "Maria Kanellis Says WWE Stars Called Her Dumb For Dating CM Punk"
+        },
+        {
+          "node_index": 95,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "index": 2,
+          "reason": "duplicate_or_empty_embed",
+          "item": {
+            "type": "embed",
+            "url": "https://www.youtube.com/watch?v=EN6ZYLoLkNg",
+            "source_tag": "div"
+          }
+        },
+        {
+          "index": 3,
+          "reason": "duplicate_or_empty_embed",
+          "item": {
+            "type": "embed",
+            "url": "https://www.youtube.com/watch?v=EN6ZYLoLkNg",
+            "source_tag": "div"
+          }
+        },
+        {
+          "index": 13,
+          "reason": "duplicate_or_empty_embed",
+          "item": {
+            "type": "embed",
+            "url": "https://www.youtube.com/embed/EN6ZYLoLkNg?feature=oembed",
+            "source_tag": "div"
+          }
+        },
+        {
+          "index": 14,
+          "reason": "duplicate_or_empty_embed",
+          "item": {
+            "type": "embed",
+            "url": "https://www.youtube.com/embed/EN6ZYLoLkNg?feature=oembed",
+            "source_tag": "iframe"
+          }
+        },
+        {
+          "index": 16,
+          "reason": "footer_start",
+          "item": {
+            "type": "text",
+            "text": "Spotlight TNA Wrestling News Steve Maclin Expected to Land in WWE or AEW After TNA Release TNA Wrestling News WWE Believes Mike Santana Is Leaving TNA When His Contract Expires TNA Wrestling News TNA Announces Two Releases from the Company WWE News Maria Kanellis Says WWE Stars Called Her Dumb For Dating CM Punk"
+          }
+        }
+      ],
+      "raw_elements_preview": [
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=EN6ZYLoLkNg",
+          "source_tag": "div",
+          "block_id": "b1"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=EN6ZYLoLkNg",
+          "source_tag": "div"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=EN6ZYLoLkNg",
+          "source_tag": "div"
+        },
+        {
+          "type": "text",
+          "text": "Victoria Crawford has gold on her mind, and she’s not being shy about it.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "During an appearance on the Hitting The Turnbuckle podcast , the TNA Knockout made it clear that she wants to add the Knockouts Championship to her résumé. Crawford was asked whether she has her eyes on the Knockouts Championship, and she did not dance around the question. She said the title is something she definitely wants as part of her TNA run.",
+          "block_id": "b3"
+        },
+        {
+          "type": "quote",
+          "text": "“Oh, yeah. Oh, yeah. I definitely need a Knockout Championship on my resume.”",
+          "source_tag": "blockquote",
+          "block_id": "b4"
+        },
+        {
+          "type": "text",
+          "text": "That wasn’t just a quick answer either. Crawford doubled down and made it clear that becoming Knockouts Champion is one of her goals. For Crawford, it sounds like the title would mean more than just another accolade. She explained that winning the championship would give her a chance to show leadership in front of the fans and among the women in TNA.",
+          "block_id": "b5"
+        },
+        {
+          "type": "quote",
+          "text": "“I definitely want to be a Knockout Champion. I want to be able to demonstrate leadership amongst the women, you know, in front of the people.”",
+          "source_tag": "blockquote",
+          "block_id": "b6"
+        },
+        {
+          "type": "text",
+          "text": "Crawford also noted that TNA has had plenty of great Knockouts Champions over the years, and she wants her name included with them. That is no small goal, especially with the Knockouts division continuing to be one of the company’s strongest pieces.",
+          "block_id": "b7"
+        },
+        {
+          "type": "quote",
+          "text": "“I think Tessa’s great. There’s a lot of great champions to follow, and I just really want to be on that list.”",
+          "source_tag": "blockquote",
+          "block_id": "b8"
+        },
+        {
+          "type": "text",
+          "text": "Victoria Crawford has been finding her place in TNA, and it sounds like she has no intention of just blending into the division. With the Knockouts Championship in her sights, fans may want to keep an eye on whether she starts making a serious push toward the title picture.",
+          "block_id": "b9"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/EN6ZYLoLkNg?feature=oembed",
+          "source_tag": "figure",
+          "block_id": "b10"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/EN6ZYLoLkNg?feature=oembed",
+          "source_tag": "div"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/EN6ZYLoLkNg?feature=oembed",
+          "source_tag": "iframe"
+        },
+        {
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/2024/01/avatar_user_1_1704158183-96x96.jpg",
+          "alt": "Steve Carrier",
+          "block_id": "b11"
+        },
+        {
+          "type": "text",
+          "text": "Spotlight TNA Wrestling News Steve Maclin Expected to Land in WWE or AEW After TNA Release TNA Wrestling News WWE Believes Mike Santana Is Leaving TNA When His Contract Expires TNA Wrestling News TNA Announces Two Releases from the Company WWE News Maria Kanellis Says WWE Stars Called Her Dumb For Dating CM Punk"
+        }
+      ],
+      "elements": [
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=EN6ZYLoLkNg",
+          "source_tag": "div",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "Victoria Crawford has gold on her mind, and she’s not being shy about it.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "During an appearance on the Hitting The Turnbuckle podcast , the TNA Knockout made it clear that she wants to add the Knockouts Championship to her résumé. Crawford was asked whether she has her eyes on the Knockouts Championship, and she did not dance around the question. She said the title is something she definitely wants as part of her TNA run.",
+          "block_id": "b3"
+        },
+        {
+          "type": "quote",
+          "text": "“Oh, yeah. Oh, yeah. I definitely need a Knockout Championship on my resume.”",
+          "source_tag": "blockquote",
+          "block_id": "b4"
+        },
+        {
+          "type": "text",
+          "text": "That wasn’t just a quick answer either. Crawford doubled down and made it clear that becoming Knockouts Champion is one of her goals. For Crawford, it sounds like the title would mean more than just another accolade. She explained that winning the championship would give her a chance to show leadership in front of the fans and among the women in TNA.",
+          "block_id": "b5"
+        },
+        {
+          "type": "quote",
+          "text": "“I definitely want to be a Knockout Champion. I want to be able to demonstrate leadership amongst the women, you know, in front of the people.”",
+          "source_tag": "blockquote",
+          "block_id": "b6"
+        },
+        {
+          "type": "text",
+          "text": "Crawford also noted that TNA has had plenty of great Knockouts Champions over the years, and she wants her name included with them. That is no small goal, especially with the Knockouts division continuing to be one of the company’s strongest pieces.",
+          "block_id": "b7"
+        },
+        {
+          "type": "quote",
+          "text": "“I think Tessa’s great. There’s a lot of great champions to follow, and I just really want to be on that list.”",
+          "source_tag": "blockquote",
+          "block_id": "b8"
+        },
+        {
+          "type": "text",
+          "text": "Victoria Crawford has been finding her place in TNA, and it sounds like she has no intention of just blending into the division. With the Knockouts Championship in her sights, fans may want to keep an eye on whether she starts making a serious push toward the title picture.",
+          "block_id": "b9"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/embed/EN6ZYLoLkNg?feature=oembed",
+          "source_tag": "figure",
+          "block_id": "b10"
+        },
+        {
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/2024/01/avatar_user_1_1704158183-96x96.jpg",
+          "alt": "Steve Carrier",
+          "block_id": "b11"
+        }
+      ],
+      "element_counts": {
+        "text": 5,
+        "heading": 0,
+        "quote": 3,
+        "table": 0,
+        "image": 1,
+        "embed": 2
+      },
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/victoria-crawford-sets-her-sights-tna-knockouts-championship/\nTitolo feed: Victoria Crawford Sets Her Sights On TNA Knockouts Championship\nTitolo pagina: Victoria Crawford Sets Her Sights On TNA Knockouts Championship\nDescrizione: Victoria Crawford has gold on her mind, and she’s not being shy about it. During an appearance on the Hitting The Turnbuckle podcast, the TNA Knockout\nCategoria suggerita: TNA\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Victoria Crawford has gold on her mind, and she’s not being shy about it.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"During an appearance on the Hitting The Turnbuckle podcast , the TNA Knockout made it clear that she wants to add the Knockouts Championship to her résumé. Crawford was asked whether she has her eyes on the Knockouts Championship, and she did not dance around the question. She said the title is something she definitely wants as part of her TNA run.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"“Oh, yeah. Oh, yeah. I definitely need a Knockout Championship on my resume.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"That wasn’t just a quick answer either. Crawford doubled down and made it clear that becoming Knockouts Champion is one of her goals. For Crawford, it sounds like the title would mean more than just another accolade. She explained that winning the championship would give her a chance to show leadership in front of the fans and among the women in TNA.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"quote\",\n    \"text\": \"“I definitely want to be a Knockout Champion. I want to be able to demonstrate leadership amongst the women, you know, in front of the people.”\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"Crawford also noted that TNA has had plenty of great Knockouts Champions over the years, and she wants her name included with them. That is no small goal, especially with the Knockouts division continuing to be one of the company’s strongest pieces.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"quote\",\n    \"text\": \"“I think Tessa’s great. There’s a lot of great champions to follow, and I just really want to be on that list.”\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"Victoria Crawford has been finding her place in TNA, and it sounds like she has no intention of just blending into the division. With the Knockouts Championship in her sights, fans may want to keep an eye on whether she starts making a serious push toward the title picture.\"\n  }\n]\n",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_used": true,
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Victoria Crawford punta al TNA Knockouts Championship\",\n  \"excerpt_it\": \"Victoria Crawford ha le idee chiare sul suo futuro in TNA: la lottatrice punta dritta al Knockouts Championship per consolidare il suo ruolo nella divisione.\",\n  \"translations\": {\n    \"b2\": \"Victoria Crawford ha l'oro nel mirino e non fa nulla per nasconderlo.\",\n    \"b3\": \"Durante un'apparizione nel podcast Hitting The Turnbuckle, la Knockout della TNA ha chiarito di voler aggiungere il Knockouts Championship al proprio palmarès. Quando le è stato chiesto se avesse messo gli occhi sul titolo, la Crawford non ha girato intorno alla domanda, confermando che conquistare la cintura è un obiettivo concreto del suo percorso in TNA.\",\n    \"b4\": \"“Oh, sì. Oh, sì. Ho decisamente bisogno di un Knockouts Championship sul mio curriculum.”\",\n    \"b5\": \"Non si è trattato solo di una risposta veloce. La Crawford ha rincarato la dose, ribadendo che diventare campionessa è uno dei suoi scopi principali. Per lei, il titolo rappresenterebbe molto più di un semplice riconoscimento: ha infatti spiegato che vincere il campionato le darebbe l'opportunità di esercitare una leadership davanti ai fan e tra le altre atlete della TNA.\",\n    \"b6\": \"“Voglio assolutamente essere una Knockout Champion. Voglio essere in grado di dimostrare leadership tra le donne, sapete, davanti al pubblico.”\",\n    \"b7\": \"La Crawford ha inoltre sottolineato come la TNA abbia avuto numerose grandi Knockout Champions nel corso degli anni e desidera che il suo nome venga aggiunto a questa lista. Non è un obiettivo da poco, specialmente considerando che la divisione femminile continua a essere uno dei punti di forza della federazione.\",\n    \"b8\": \"“Penso che Tessa sia fantastica. Ci sono molte grandi campionesse a cui ispirarsi e voglio davvero far parte di quella lista.”\",\n    \"b9\": \"Victoria Crawford sta trovando la sua dimensione in TNA e sembra non avere alcuna intenzione di restare nell'ombra. Con il Knockouts Championship nel mirino, i fan faranno bene a tenere d'occhio se inizierà presto una scalata verso le zone alte della classifica.\"\n  },\n  \"notes\": []\n}",
+      "title_it": "Victoria Crawford punta al TNA Knockouts Championship",
+      "body_html": "<p>Victoria Crawford ha l&#x27;oro nel mirino e non fa nulla per nasconderlo.</p>\nhttps://www.youtube.com/watch?v=EN6ZYLoLkNg\n\n<p>Durante un&#x27;apparizione nel podcast Hitting The Turnbuckle, la Knockout della TNA ha chiarito di voler aggiungere il Knockouts Championship al proprio palmarès. Quando le è stato chiesto se avesse messo gli occhi sul titolo, la Crawford non ha girato intorno alla domanda, confermando che conquistare la cintura è un obiettivo concreto del suo percorso in TNA.</p>\n<blockquote>“Oh, sì. Oh, sì. Ho decisamente bisogno di un Knockouts Championship sul mio curriculum.”</blockquote>\n<p>Non si è trattato solo di una risposta veloce. La Crawford ha rincarato la dose, ribadendo che diventare campionessa è uno dei suoi scopi principali. Per lei, il titolo rappresenterebbe molto più di un semplice riconoscimento: ha infatti spiegato che vincere il campionato le darebbe l&#x27;opportunità di esercitare una leadership davanti ai fan e tra le altre atlete della TNA.</p>\n<blockquote>“Voglio assolutamente essere una Knockout Champion. Voglio essere in grado di dimostrare leadership tra le donne, sapete, davanti al pubblico.”</blockquote>\n<p>La Crawford ha inoltre sottolineato come la TNA abbia avuto numerose grandi Knockout Champions nel corso degli anni e desidera che il suo nome venga aggiunto a questa lista. Non è un obiettivo da poco, specialmente considerando che la divisione femminile continua a essere uno dei punti di forza della federazione.</p>\n<blockquote>“Penso che Tessa sia fantastica. Ci sono molte grandi campionesse a cui ispirarsi e voglio davvero far parte di quella lista.”</blockquote>\n<p>Victoria Crawford sta trovando la sua dimensione in TNA e sembra non avere alcuna intenzione di restare nell&#x27;ombra. Con il Knockouts Championship nel mirino, i fan faranno bene a tenere d&#x27;occhio se inizierà presto una scalata verso le zone alte della classifica.</p>\n\nhttps://www.youtube.com/embed/EN6ZYLoLkNg?feature=oembed\n\n<!--IMAGE:https://www.ringsidenews.com/wp-content/uploads/2024/01/avatar_user_1_1704158183-96x96.jpg-->",
+      "excerpt_it": "Victoria Crawford ha le idee chiare sul suo futuro in TNA: la lottatrice punta dritta al Knockouts Championship per consolidare il suo ruolo nella divisione.",
+      "bob_notes": [],
+      "translation_missing_units": [],
+      "editorial_changes": [
+        {
+          "code": "leading_embed_moved_after_first_paragraph",
+          "severity": "info",
+          "message": "Embed iniziale spostato dopo il primo paragrafo.",
+          "evidence": "https://www.youtube.com/watch?v=EN6ZYLoLkNg"
+        }
+      ],
+      "diagnostic_warnings": [],
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta",
+          "share_links"
+        ],
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "source_specific_notes": "Focus sulla volontà della lottatrice, testo breve."
+      },
+      "menzo_ai_review": {
+        "id": "c3",
+        "decision": "selected",
+        "priority": 6,
+        "category_hint": "TNA",
+        "article_type": "storyline_development",
+        "event_key": "victoria_crawford_tna_title",
+        "duplicate_of": "",
+        "editorial_reason": "Notizia utile per mantenere aggiornato il pubblico TNA sulle mire titolate.",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "source_specific_notes": "Focus sulla volontà della lottatrice, testo breve."
+        },
+        "priority_label": "medium"
+      },
+      "ai_editorial_reason": "Notizia utile per mantenere aggiornato il pubblico TNA sulle mire titolate.",
+      "ai_priority_label": "medium"
+    }
+  ],
+  "handoff": {
+    "ready_for_alfred": 2,
+    "translation_pending": 0,
+    "errors": 0,
+    "extraction_empty": 0,
+    "publishable_left_out_by_capacity": 0
+  },
+  "postprocess": {
+    "capacity": 5,
+    "capacity_reason": "normal",
+    "selected_total_before_capacity": 2,
+    "selected_processed": 2,
+    "publishable_left_out_by_capacity": 0,
+    "bob_v93_33_changes": 3,
+    "bob_v93_16_changes": 3,
+    "bob_brief_warnings_added": 0
+  }
+}
