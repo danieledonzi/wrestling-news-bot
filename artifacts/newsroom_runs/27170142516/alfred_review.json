@@ -1,0 +1,292 @@
+{
+  "agent": "Alfred",
+  "version": "v93_20_alfred_table_warning_precision",
+  "generated_at": "2026-06-08T22:09:29.882568+00:00",
+  "mode": "structured_content_quality_editor",
+  "input": {
+    "bob_version": "v93_33_youtube_plain_and_cta_cleanup",
+    "articles": 6
+  },
+  "reviews": [
+    {
+      "source_url": "https://www.ringsidenews.com/vince-mcmahon-reached-last-minute-deal-avoid-trial-wwe-shareholder-lawsuit/",
+      "source": "ringsidenews",
+      "category_hint": "Business",
+      "title_it": "Vince McMahon Reached Last-Minute Deal to Avoid Trial in WWE Shareholder Lawsuit",
+      "decision": "needs_revision",
+      "quality_score": 45,
+      "issues": [
+        {
+          "code": "bob_not_ready",
+          "severity": "blocker",
+          "message": "Bob non ha consegnato l'articolo come ready_for_alfred.",
+          "evidence": "extraction_ready_translation_pending"
+        },
+        {
+          "code": "untranslated_quote",
+          "severity": "blocker",
+          "message": "Citazione rimasta in inglese o non tradotta integralmente.",
+          "evidence": "Vince McMahon reached a last-minute settlement to avoid a trial over the 2023 merger of WWE and UFC, a case which risked making information about his sexual misconduct allegations and hush money scandals public."
+        }
+      ],
+      "warnings": [
+        {
+          "code": "image_placeholder_present",
+          "severity": "warning",
+          "message": "Presente placeholder immagine da gestire nel Publisher.",
+          "evidence": "<!--IMAGE:...-->"
+        }
+      ],
+      "editorial_changes": [],
+      "approved_article": null,
+      "diagnostics": {
+        "plain_chars": 2516,
+        "title_chars": 80,
+        "bob_status": "extraction_ready_translation_pending",
+        "bob_diagnostic_stage": "translation_pending",
+        "bob_removed_before_gemini": 14,
+        "bob_clean_element_count": 10,
+        "bob_translation_model": "gemini-2.5-flash: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}",
+        "editorial_changes": 0,
+        "quote_count": 1,
+        "table_count": 0
+      }
+    },
+    {
+      "source_url": "https://www.wrestlinginc.com/2189970/wwe-raw-penta-rey-mysterio-mens-intercontinental-title-chad-gable/",
+      "source": "wrestlinginc",
+      "category_hint": "WWE",
+      "title_it": "Penta Defeats Rey Mysterio, Retains WWE Men's Intercontinental Title On Raw - Wrestling Inc.",
+      "decision": "needs_revision",
+      "quality_score": 50,
+      "issues": [
+        {
+          "code": "bob_not_ready",
+          "severity": "blocker",
+          "message": "Bob non ha consegnato l'articolo come ready_for_alfred.",
+          "evidence": "extraction_ready_translation_pending"
+        },
+        {
+          "code": "untranslated_quote",
+          "severity": "blocker",
+          "message": "Citazione rimasta in inglese o non tradotta integralmente.",
+          "evidence": "s first episode of Season Three, and then once more in 2018 for NEW Wrestling. Mysterio picked up the win in both. At multiple points in the match the action was taken to the outside with Penta wearing down his challenger with chops and dumping him back down on the apron. In the ring, Mysterio got an early near-fall with a tornado DDT. Penta connected with Penta Driver in the middle of the ring, going for what looked to be the winning cover before Mysterio kicked out. Mysterio looked to have the match stolen from the champion as he connected with 619 and the accompanying frog splash, but Penta kicked out at the last moment. The pair entered a back-and-forth exchange that ended with another 6"
+        }
+      ],
+      "warnings": [],
+      "editorial_changes": [],
+      "approved_article": null,
+      "diagnostics": {
+        "plain_chars": 1625,
+        "title_chars": 92,
+        "bob_status": "extraction_ready_translation_pending",
+        "bob_diagnostic_stage": "translation_pending",
+        "bob_removed_before_gemini": 1,
+        "bob_clean_element_count": 7,
+        "bob_translation_model": "gemini-2.5-flash: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}",
+        "editorial_changes": 0,
+        "quote_count": 0,
+        "table_count": 0
+      }
+    },
+    {
+      "source_url": "https://www.wrestlinginc.com/2189891/wwe-tko-aj-styles-good-things-going-praise-criticism/",
+      "source": "wrestlinginc",
+      "category_hint": "Business",
+      "title_it": "AJ Styles Says WWE 'Has Good Things Going On,' Deserves Praise Alongside Criticism - Wrestling Inc.",
+      "decision": "needs_revision",
+      "quality_score": 45,
+      "issues": [
+        {
+          "code": "bob_not_ready",
+          "severity": "blocker",
+          "message": "Bob non ha consegnato l'articolo come ready_for_alfred.",
+          "evidence": "extraction_ready_translation_pending"
+        },
+        {
+          "code": "untranslated_quote",
+          "severity": "blocker",
+          "message": "Citazione rimasta in inglese o non tradotta integralmente.",
+          "evidence": " at the start of 2025, TKO has flooded the company's programming with advertisements, set record high prices for tickets, and reduced the amount of house shows that take place on a year-to-year basis. Today, the resentment from fans for TKO is at an all-time high, with the company even taking the blame for some of WWE's creative decisions, but according to AJ Styles on "
+        }
+      ],
+      "warnings": [
+        {
+          "code": "title_too_long",
+          "severity": "warning",
+          "message": "Titolo probabilmente troppo lungo per SEO/social.",
+          "evidence": "AJ Styles Says WWE 'Has Good Things Going On,' Deserves Praise Alongside Criticism - Wrestling Inc."
+        }
+      ],
+      "editorial_changes": [],
+      "approved_article": null,
+      "diagnostics": {
+        "plain_chars": 1845,
+        "title_chars": 99,
+        "bob_status": "extraction_ready_translation_pending",
+        "bob_diagnostic_stage": "translation_pending",
+        "bob_removed_before_gemini": 2,
+        "bob_clean_element_count": 4,
+        "bob_translation_model": "gemini-2.5-flash: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}",
+        "editorial_changes": 0,
+        "quote_count": 0,
+        "table_count": 0
+      }
+    },
+    {
+      "source_url": "https://www.ringsidenews.com/liv-morgan-pulls-off-win-advance-queen-ring-tournament-during-68-wwe-raw/",
+      "source": "ringsidenews",
+      "category_hint": "WWE",
+      "title_it": "Liv Morgan Pulls Off Win To Advance In Queen of the Ring Tournament During 6/8 WWE RAW",
+      "decision": "needs_revision",
+      "quality_score": 70,
+      "issues": [
+        {
+          "code": "bob_not_ready",
+          "severity": "blocker",
+          "message": "Bob non ha consegnato l'articolo come ready_for_alfred.",
+          "evidence": "extraction_ready_translation_pending"
+        }
+      ],
+      "warnings": [
+        {
+          "code": "image_placeholder_present",
+          "severity": "warning",
+          "message": "Presente placeholder immagine da gestire nel Publisher.",
+          "evidence": "<!--IMAGE:...-->"
+        }
+      ],
+      "editorial_changes": [],
+      "approved_article": null,
+      "diagnostics": {
+        "plain_chars": 1583,
+        "title_chars": 86,
+        "bob_status": "extraction_ready_translation_pending",
+        "bob_diagnostic_stage": "translation_pending",
+        "bob_removed_before_gemini": 14,
+        "bob_clean_element_count": 10,
+        "bob_translation_model": "gemini-2.5-flash: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}",
+        "editorial_changes": 0,
+        "quote_count": 0,
+        "table_count": 0
+      }
+    },
+    {
+      "source_url": "https://www.ringsidenews.com/braun-strowman-says-enough-zeros-could-open-his-schedule-wrestling-return/",
+      "source": "ringsidenews",
+      "category_hint": "WWE",
+      "title_it": "Braun Strowman Says “Enough Zeros” Could Open Up His Schedule For A Wrestling Return",
+      "decision": "needs_revision",
+      "quality_score": 45,
+      "issues": [
+        {
+          "code": "bob_not_ready",
+          "severity": "blocker",
+          "message": "Bob non ha consegnato l'articolo come ready_for_alfred.",
+          "evidence": "extraction_ready_translation_pending"
+        },
+        {
+          "code": "untranslated_quote",
+          "severity": "blocker",
+          "message": "Citazione rimasta in inglese o non tradotta integralmente.",
+          "evidence": "You want to honestly know what happened recently. That Triple A match between Gable and Ludwig, that match made me feel. It made me remember why I love professional wrestling. And it made me go, I can go."
+        }
+      ],
+      "warnings": [
+        {
+          "code": "image_placeholder_present",
+          "severity": "warning",
+          "message": "Presente placeholder immagine da gestire nel Publisher.",
+          "evidence": "<!--IMAGE:...-->"
+        }
+      ],
+      "editorial_changes": [],
+      "approved_article": null,
+      "diagnostics": {
+        "plain_chars": 1525,
+        "title_chars": 84,
+        "bob_status": "extraction_ready_translation_pending",
+        "bob_diagnostic_stage": "translation_pending",
+        "bob_removed_before_gemini": 14,
+        "bob_clean_element_count": 9,
+        "bob_translation_model": "gemini-2.5-flash: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}",
+        "editorial_changes": 0,
+        "quote_count": 2,
+        "table_count": 0
+      }
+    },
+    {
+      "source_url": "https://www.wrestlinginc.com/2189986/zilla-fatu-anoai-roman-reigns-umaga-wwe-performance-center/",
+      "source": "wrestlinginc",
+      "category_hint": "WWE",
+      "title_it": "Anoa'i Family Member, Indie Star Reportedly Spotted At WWE Performance Center - Wrestling Inc.",
+      "decision": "needs_revision",
+      "quality_score": 50,
+      "issues": [
+        {
+          "code": "bob_not_ready",
+          "severity": "blocker",
+          "message": "Bob non ha consegnato l'articolo come ready_for_alfred.",
+          "evidence": "extraction_ready_translation_pending"
+        },
+        {
+          "code": "untranslated_quote",
+          "severity": "blocker",
+          "message": "Citazione rimasta in inglese o non tradotta integralmente.",
+          "evidence": "i/Fatu family could be joining their ranks. PWInsider Elite reports that Zilla Fatu was recently spotted at the WWE Performance Center. While it wasn"
+        }
+      ],
+      "warnings": [],
+      "editorial_changes": [],
+      "approved_article": null,
+      "diagnostics": {
+        "plain_chars": 1548,
+        "title_chars": 94,
+        "bob_status": "extraction_ready_translation_pending",
+        "bob_diagnostic_stage": "translation_pending",
+        "bob_removed_before_gemini": 1,
+        "bob_clean_element_count": 3,
+        "bob_translation_model": "gemini-2.5-flash: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}",
+        "editorial_changes": 0,
+        "quote_count": 0,
+        "table_count": 0
+      }
+    }
+  ],
+  "approved_articles": [],
+  "handoff": {
+    "approved": 0,
+    "needs_revision": 6,
+    "warnings": 4,
+    "blockers": 11,
+    "editorial_changes": 0
+  },
+  "policy": {
+    "checks": [
+      "untranslated_quotes",
+      "quote_semantics",
+      "table_semantics",
+      "possible_missing_table",
+      "cta_residue",
+      "source_credit_residue",
+      "unsafe_html",
+      "missing_or_short_body",
+      "image_embed_placeholders",
+      "title_clickbait_or_length"
+    ],
+    "deterministic_normalizations": [
+      "split_inline_image_embed_placeholders",
+      "long_quote_paragraphs_to_blockquote",
+      "funzionari_wwe_to_dirigenti_wwe"
+    ],
+    "ai_used": false,
+    "auto_rewrite": false,
+    "conservative_mode": true,
+    "possible_missing_table_requires_real_table_signal": true,
+    "consume_bob_diagnostic_warnings": true
+  },
+  "postprocess": {
+    "false_table_warnings_removed": 0,
+    "bob_warnings_surfaced": 0
+  }
+}

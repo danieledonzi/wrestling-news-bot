@@ -1,0 +1,1328 @@
+{
+  "agent": "Bob",
+  "version": "v93_33_youtube_plain_and_cta_cleanup",
+  "generated_at": "2026-06-08T22:09:29.851213+00:00",
+  "mode": "block_translation_prudent_embed_cleanup",
+  "policy": {
+    "clean_before_gemini": true,
+    "gemini_receives_only_text_units": true,
+    "preserve_sequence_outside_gemini": true,
+    "preserve_embeds_as_plain_url_lines": true,
+    "filter_source_social_bars": true,
+    "filter_author_bios_before_gemini": true,
+    "filter_cta_before_gemini": true,
+    "recover_embeds_from_raw_html": false,
+    "embed_urls_require_post_or_video_shape": true,
+    "preserve_quotes_as_blockquote": "source_blockquote_only",
+    "preserve_tables_as_html_tables": true,
+    "ordered_elements": [
+      "text",
+      "heading",
+      "quote",
+      "table",
+      "image",
+      "embed"
+    ],
+    "model_chain": [
+      "gemini-3.1-flash-lite",
+      "gemini-3-flash-preview",
+      "gemini-2.5-flash-lite",
+      "gemini-2.5-flash"
+    ],
+    "max_articles_per_run": 5,
+    "max_articles_with_report": 4,
+    "post_show_max_articles": 6,
+    "dynamic_article_capacity": true,
+    "prompt_family": "v92_historical_natural_full_translation_blocks",
+    "diagnostic_mode": true,
+    "fallback_mode": false,
+    "residual_author_bio_cleanup": true,
+    "generic_ringside_author_bio_cleanup": true,
+    "residual_cta_cleanup": true,
+    "split_inline_quoted_text": false,
+    "source_blockquote_only": true,
+    "move_leading_embeds_after_first_paragraph": true,
+    "unwrap_fake_data_blockquotes": true,
+    "consume_menzo_bob_brief": true,
+    "missing_expected_embed_warning": true
+  },
+  "input": {
+    "menzo_version": "v93_39_capacity_buffer",
+    "selected_count": 7,
+    "selected_processed": 6,
+    "capacity": 6,
+    "capacity_reason": "post_show_event_heavy"
+  },
+  "articles": [
+    {
+      "source_url": "https://www.ringsidenews.com/vince-mcmahon-reached-last-minute-deal-avoid-trial-wwe-shareholder-lawsuit/",
+      "source": "ringsidenews",
+      "source_title": "Vince McMahon Reached Last-Minute Deal to Avoid Trial in WWE Shareholder Lawsuit",
+      "category_hint": "Business",
+      "menzo_score": 100,
+      "status": "extraction_ready_translation_pending",
+      "created_at": "2026-06-08T22:09:25.381331+00:00",
+      "diagnostic_stage": "translation_pending",
+      "fetched_html_chars": 568768,
+      "source_html_contains_embed_hint": true,
+      "meta": {
+        "source_title": "Vince McMahon Reached Last-Minute Deal to Avoid Trial in WWE Shareholder Lawsuit",
+        "description": "Vince McMahon avoided a major courtroom battle over WWE’s merger with UFC, and it's due to the fact that he cut a last-minute deal to avoid a trial. The",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/vince-mcmahon-reached-last-minute-deal-to-avoid-trial-in-wwe-shareholder-lawsuit-28.jpg"
+      },
+      "extraction_diagnostics": {
+        "dom_noise_reduction_enabled": false,
+        "stage": "complete",
+        "global_embed_recovery_enabled": false,
+        "root_name": "article",
+        "root_text_chars": 3580,
+        "candidate_node_count": 89,
+        "raw_element_count": 11,
+        "clean_element_count": 10,
+        "removed_by_node_count": 13,
+        "removed_by_sanitize_count": 1,
+        "table_count": 0,
+        "quote_count": 1,
+        "embed_count": 0
+      },
+      "raw_element_count": 11,
+      "clean_element_count": 10,
+      "translation_unit_count": 9,
+      "removed_before_gemini": 14,
+      "removed_elements_debug": [
+        {
+          "node_index": 66,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
+          "text_preview": "Spotlight"
+        },
+        {
+          "node_index": 70,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2200172 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-vince-mcmahon tag-wwe-featured   ",
+          "text_preview": "WWE News Vince McMahon Reached Last-Minute Deal to Avoid Trial in WWE Shareholder Lawsuit"
+        },
+        {
+          "node_index": 73,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "Vince McMahon Reached Last-Minute Deal to Avoid Trial in WWE Shareholder Lawsuit"
+        },
+        {
+          "node_index": 74,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 75,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2200041 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-liv-morgan tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
+          "text_preview": "WWE News Liv Morgan Pulls Off Win To Advance In Queen of the Ring Tournament During 6/8 WWE RAW"
+        },
+        {
+          "node_index": 78,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "Liv Morgan Pulls Off Win To Advance In Queen of the Ring Tournament During 6/8 WWE RAW"
+        },
+        {
+          "node_index": 79,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 80,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2200102 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news tag-aew-featured tag-keith-lee   ",
+          "text_preview": "AEW News Keith Lee’s AEW Return Was Discussed Internally After Long Absence"
+        },
+        {
+          "node_index": 83,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "Keith Lee’s AEW Return Was Discussed Internally After Long Absence"
+        },
+        {
+          "node_index": 84,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 85,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2199841 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-raw-results category-wwe-results tag-wwe-featured   ",
+          "text_preview": "WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 8, 2026"
+        },
+        {
+          "node_index": 88,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "WWE RAW Results, Highlights and Key Moments for June 8, 2026"
+        },
+        {
+          "node_index": 89,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "index": 11,
+          "reason": "footer_start",
+          "item": {
+            "type": "text",
+            "text": "Spotlight WWE News Vince McMahon Reached Last-Minute Deal to Avoid Trial in WWE Shareholder Lawsuit WWE News Liv Morgan Pulls Off Win To Advance In Queen of the Ring Tournament During 6/8 WWE RAW AEW News Keith Lee’s AEW Return Was Discussed Internally After Long Absence WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 8, 2026"
+          }
+        }
+      ],
+      "raw_elements_preview": [
+        {
+          "type": "text",
+          "text": "Vince McMahon avoided a major courtroom battle over WWE’s merger with UFC, and it’s due to the fact that he cut a last-minute deal to avoid a trial.",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "The WWE shareholder lawsuit was already pulled from the Delaware Court of Chancery calendar after it was reported that the parties had reached an agreement in principle . Court Administrator Tamara Burton confirmed the trial was cancelled at the parties’ request and that the settlement will be presented for court approval later.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "Now, Front Office Sports has provided more context, reporting that McMahon reached a last-minute settlement in a case that could have brought more attention to his sexual misconduct allegations and hush money scandals . An attorney for the plaintiffs confirmed the settlement to Front Office Sports, but declined to go further because the terms are not public yet: “Details aren’t public yet.”",
+          "block_id": "b3"
+        },
+        {
+          "type": "quote",
+          "text": "“Vince McMahon reached a last-minute settlement to avoid a trial over the 2023 merger of WWE and UFC, a case which risked making information about his sexual misconduct allegations and hush money scandals public.”",
+          "source_tag": "blockquote",
+          "block_id": "b4"
+        },
+        {
+          "type": "text",
+          "text": "The lawsuit was filed by WWE stockholders after WWE’s $21 billion merger with UFC parent Endeavor, which created TKO Group Holdings. The suit claimed McMahon pushed WWE toward Endeavor over other possible buyers because Ari Emanuel would allow him to maintain financial benefits and control over WWE.",
+          "block_id": "b5"
+        },
+        {
+          "type": "text",
+          "text": "The plaintiffs also alleged that other bidders could have forced McMahon out due to sexual misconduct and settlement payment scandals. Current and former WWE executives Nick Khan, George Barrios, Steve Koonin, Michelle Wilson, and Frank Riddick were also listed as defendants.",
+          "block_id": "b6"
+        },
+        {
+          "type": "text",
+          "text": "During discovery, shareholders requested documents tied to sexual misconduct allegations and payments made to women who accused McMahon of misconduct. They argued those records were relevant to McMahon’s “state of mind” during the merger process.",
+          "block_id": "b7"
+        },
+        {
+          "type": "text",
+          "text": "McMahon may have avoided this Delaware trial, but his legal issues are not fully behind him. Janel Grant’s lawsuit remains ongoing , and McMahon has moved to compel that case into arbitration. He and Linda McMahon are also still facing a lawsuit from five former “Ring Boys,” who allege the couple knowingly allowed a ring crew chief to sexually abuse them decades ago.",
+          "block_id": "b8"
+        },
+        {
+          "type": "text",
+          "text": "The settlement means the shareholder case will not go to trial this week, keeping a lot of potentially explosive material out of open court for now. Still, with other lawsuits ongoing, the legal cloud around McMahon is far from gone.",
+          "block_id": "b9"
+        },
+        {
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/2024/01/avatar_user_1_1704158183-96x96.jpg",
+          "alt": "Steve Carrier",
+          "block_id": "b10"
+        },
+        {
+          "type": "text",
+          "text": "Spotlight WWE News Vince McMahon Reached Last-Minute Deal to Avoid Trial in WWE Shareholder Lawsuit WWE News Liv Morgan Pulls Off Win To Advance In Queen of the Ring Tournament During 6/8 WWE RAW AEW News Keith Lee’s AEW Return Was Discussed Internally After Long Absence WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 8, 2026"
+        }
+      ],
+      "elements": [
+        {
+          "type": "text",
+          "text": "Vince McMahon avoided a major courtroom battle over WWE’s merger with UFC, and it’s due to the fact that he cut a last-minute deal to avoid a trial.",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "The WWE shareholder lawsuit was already pulled from the Delaware Court of Chancery calendar after it was reported that the parties had reached an agreement in principle . Court Administrator Tamara Burton confirmed the trial was cancelled at the parties’ request and that the settlement will be presented for court approval later.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "Now, Front Office Sports has provided more context, reporting that McMahon reached a last-minute settlement in a case that could have brought more attention to his sexual misconduct allegations and hush money scandals . An attorney for the plaintiffs confirmed the settlement to Front Office Sports, but declined to go further because the terms are not public yet: “Details aren’t public yet.”",
+          "block_id": "b3"
+        },
+        {
+          "type": "quote",
+          "text": "“Vince McMahon reached a last-minute settlement to avoid a trial over the 2023 merger of WWE and UFC, a case which risked making information about his sexual misconduct allegations and hush money scandals public.”",
+          "source_tag": "blockquote",
+          "block_id": "b4"
+        },
+        {
+          "type": "text",
+          "text": "The lawsuit was filed by WWE stockholders after WWE’s $21 billion merger with UFC parent Endeavor, which created TKO Group Holdings. The suit claimed McMahon pushed WWE toward Endeavor over other possible buyers because Ari Emanuel would allow him to maintain financial benefits and control over WWE.",
+          "block_id": "b5"
+        },
+        {
+          "type": "text",
+          "text": "The plaintiffs also alleged that other bidders could have forced McMahon out due to sexual misconduct and settlement payment scandals. Current and former WWE executives Nick Khan, George Barrios, Steve Koonin, Michelle Wilson, and Frank Riddick were also listed as defendants.",
+          "block_id": "b6"
+        },
+        {
+          "type": "text",
+          "text": "During discovery, shareholders requested documents tied to sexual misconduct allegations and payments made to women who accused McMahon of misconduct. They argued those records were relevant to McMahon’s “state of mind” during the merger process.",
+          "block_id": "b7"
+        },
+        {
+          "type": "text",
+          "text": "McMahon may have avoided this Delaware trial, but his legal issues are not fully behind him. Janel Grant’s lawsuit remains ongoing , and McMahon has moved to compel that case into arbitration. He and Linda McMahon are also still facing a lawsuit from five former “Ring Boys,” who allege the couple knowingly allowed a ring crew chief to sexually abuse them decades ago.",
+          "block_id": "b8"
+        },
+        {
+          "type": "text",
+          "text": "The settlement means the shareholder case will not go to trial this week, keeping a lot of potentially explosive material out of open court for now. Still, with other lawsuits ongoing, the legal cloud around McMahon is far from gone.",
+          "block_id": "b9"
+        },
+        {
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/2024/01/avatar_user_1_1704158183-96x96.jpg",
+          "alt": "Steve Carrier",
+          "block_id": "b10"
+        }
+      ],
+      "element_counts": {
+        "text": 8,
+        "heading": 0,
+        "quote": 1,
+        "table": 0,
+        "image": 1,
+        "embed": 0
+      },
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/vince-mcmahon-reached-last-minute-deal-avoid-trial-wwe-shareholder-lawsuit/\nTitolo feed: Vince McMahon Reached Last-Minute Deal to Avoid Trial in WWE Shareholder Lawsuit\nTitolo pagina: Vince McMahon Reached Last-Minute Deal to Avoid Trial in WWE Shareholder Lawsuit\nDescrizione: Vince McMahon avoided a major courtroom battle over WWE’s merger with UFC, and it's due to the fact that he cut a last-minute deal to avoid a trial. The\nCategoria suggerita: Business\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Vince McMahon avoided a major courtroom battle over WWE’s merger with UFC, and it’s due to the fact that he cut a last-minute deal to avoid a trial.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"The WWE shareholder lawsuit was already pulled from the Delaware Court of Chancery calendar after it was reported that the parties had reached an agreement in principle . Court Administrator Tamara Burton confirmed the trial was cancelled at the parties’ request and that the settlement will be presented for court approval later.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Now, Front Office Sports has provided more context, reporting that McMahon reached a last-minute settlement in a case that could have brought more attention to his sexual misconduct allegations and hush money scandals . An attorney for the plaintiffs confirmed the settlement to Front Office Sports, but declined to go further because the terms are not public yet: “Details aren’t public yet.”\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"“Vince McMahon reached a last-minute settlement to avoid a trial over the 2023 merger of WWE and UFC, a case which risked making information about his sexual misconduct allegations and hush money scandals public.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"The lawsuit was filed by WWE stockholders after WWE’s $21 billion merger with UFC parent Endeavor, which created TKO Group Holdings. The suit claimed McMahon pushed WWE toward Endeavor over other possible buyers because Ari Emanuel would allow him to maintain financial benefits and control over WWE.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"The plaintiffs also alleged that other bidders could have forced McMahon out due to sexual misconduct and settlement payment scandals. Current and former WWE executives Nick Khan, George Barrios, Steve Koonin, Michelle Wilson, and Frank Riddick were also listed as defendants.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"During discovery, shareholders requested documents tied to sexual misconduct allegations and payments made to women who accused McMahon of misconduct. They argued those records were relevant to McMahon’s “state of mind” during the merger process.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"McMahon may have avoided this Delaware trial, but his legal issues are not fully behind him. Janel Grant’s lawsuit remains ongoing , and McMahon has moved to compel that case into arbitration. He and Linda McMahon are also still facing a lawsuit from five former “Ring Boys,” who allege the couple knowingly allowed a ring crew chief to sexually abuse them decades ago.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"The settlement means the shareholder case will not go to trial this week, keeping a lot of potentially explosive material out of open court for now. Still, with other lawsuits ongoing, the legal cloud around McMahon is far from gone.\"\n  }\n]\n",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite",
+        "gemini-3-flash-preview",
+        "gemini-2.5-flash-lite",
+        "gemini-2.5-flash"
+      ],
+      "translation_model": "gemini-2.5-flash: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}",
+      "translation_used": false,
+      "title_it": "Vince McMahon Reached Last-Minute Deal to Avoid Trial in WWE Shareholder Lawsuit",
+      "body_html": "<p>Vince McMahon avoided a major courtroom battle over WWE’s merger with UFC, and it’s due to the fact that he cut a last-minute deal to avoid a trial.</p>\n<p>The WWE shareholder lawsuit was already pulled from the Delaware Court of Chancery calendar after it was reported that the parties had reached an agreement in principle . Court Administrator Tamara Burton confirmed the trial was cancelled at the parties’ request and that the settlement will be presented for court approval later.</p>\n<p>Now, Front Office Sports has provided more context, reporting that McMahon reached a last-minute settlement in a case that could have brought more attention to his sexual misconduct allegations and hush money scandals . An attorney for the plaintiffs confirmed the settlement to Front Office Sports, but declined to go further because the terms are not public yet: “Details aren’t public yet.”</p>\n<blockquote>“Vince McMahon reached a last-minute settlement to avoid a trial over the 2023 merger of WWE and UFC, a case which risked making information about his sexual misconduct allegations and hush money scandals public.”</blockquote>\n<p>The lawsuit was filed by WWE stockholders after WWE’s $21 billion merger with UFC parent Endeavor, which created TKO Group Holdings. The suit claimed McMahon pushed WWE toward Endeavor over other possible buyers because Ari Emanuel would allow him to maintain financial benefits and control over WWE.</p>\n<p>The plaintiffs also alleged that other bidders could have forced McMahon out due to sexual misconduct and settlement payment scandals. Current and former WWE executives Nick Khan, George Barrios, Steve Koonin, Michelle Wilson, and Frank Riddick were also listed as defendants.</p>\n<p>During discovery, shareholders requested documents tied to sexual misconduct allegations and payments made to women who accused McMahon of misconduct. They argued those records were relevant to McMahon’s “state of mind” during the merger process.</p>\n<p>McMahon may have avoided this Delaware trial, but his legal issues are not fully behind him. Janel Grant’s lawsuit remains ongoing , and McMahon has moved to compel that case into arbitration. He and Linda McMahon are also still facing a lawsuit from five former “Ring Boys,” who allege the couple knowingly allowed a ring crew chief to sexually abuse them decades ago.</p>\n<p>The settlement means the shareholder case will not go to trial this week, keeping a lot of potentially explosive material out of open court for now. Still, with other lawsuits ongoing, the legal cloud around McMahon is far from gone.</p>\n<!--IMAGE:https://www.ringsidenews.com/wp-content/uploads/2024/01/avatar_user_1_1704158183-96x96.jpg-->",
+      "excerpt_it": "Vince McMahon avoided a major courtroom battle over WWE’s merger with UFC, and it's due to the fact that he cut a last-minute deal to avoid a trial. The",
+      "bob_notes": [
+        "translation_unavailable",
+        "gemini-2.5-flash: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      ],
+      "bob_brief": {},
+      "menzo_ai_review": null,
+      "ai_editorial_reason": null,
+      "ai_priority_label": "high"
+    },
+    {
+      "source_url": "https://www.wrestlinginc.com/2189970/wwe-raw-penta-rey-mysterio-mens-intercontinental-title-chad-gable/",
+      "source": "wrestlinginc",
+      "source_title": "Penta Defeats Rey Mysterio, Retains WWE Men's Intercontinental Title On Raw",
+      "category_hint": "WWE",
+      "menzo_score": 84,
+      "status": "extraction_ready_translation_pending",
+      "created_at": "2026-06-08T22:09:26.280351+00:00",
+      "diagnostic_stage": "translation_pending",
+      "fetched_html_chars": 49945,
+      "source_html_contains_embed_hint": true,
+      "meta": {
+        "source_title": "Penta Defeats Rey Mysterio, Retains WWE Men's Intercontinental Title On Raw - Wrestling Inc.",
+        "description": "Penta defeated Rey Mysterio to retain the Intercontinental Championship during \"WWE Raw.\"",
+        "featured_image": "https://www.wrestlinginc.com/img/gallery/penta-defeats-rey-mysterio-retains-wwe-mens-intercontinental-title-on-raw/l-intro-1780949404.jpg"
+      },
+      "extraction_diagnostics": {
+        "dom_noise_reduction_enabled": false,
+        "stage": "complete",
+        "global_embed_recovery_enabled": false,
+        "root_name": "article",
+        "root_text_chars": 1745,
+        "candidate_node_count": 14,
+        "raw_element_count": 8,
+        "clean_element_count": 7,
+        "removed_by_node_count": 0,
+        "removed_by_sanitize_count": 1,
+        "table_count": 0,
+        "quote_count": 0,
+        "embed_count": 0
+      },
+      "raw_element_count": 8,
+      "clean_element_count": 7,
+      "translation_unit_count": 7,
+      "removed_before_gemini": 1,
+      "removed_elements_debug": [
+        {
+          "index": 1,
+          "reason": "duplicate_featured_image",
+          "item": {
+            "type": "image",
+            "url": "https://www.wrestlinginc.com/img/gallery/penta-defeats-rey-mysterio-retains-wwe-mens-intercontinental-title-on-raw/intro-1780949404.jpg",
+            "alt": "Penta shares a moment with Rey Mysterio after beating him"
+          }
+        }
+      ],
+      "raw_elements_preview": [
+        {
+          "type": "image",
+          "url": "https://www.wrestlinginc.com/img/gallery/penta-defeats-rey-mysterio-retains-wwe-mens-intercontinental-title-on-raw/intro-1780949404.jpg",
+          "alt": "Penta shares a moment with Rey Mysterio after beating him"
+        },
+        {
+          "type": "text",
+          "text": "Penta defeated Rey Mysterio to retain the Intercontinental Championship during \"WWE Raw.\"",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "Penta and Mysterio were facing one another for the first time in WWE, having fought first in 2016 during Lucha Underground's first episode of Season Three, and then once more in 2018 for NEW Wrestling. Mysterio picked up the win in both.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "At multiple points in the match the action was taken to the outside with Penta wearing down his challenger with chops and dumping him back down on the apron. In the ring, Mysterio got an early near-fall with a tornado DDT.",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "Penta connected with Penta Driver in the middle of the ring, going for what looked to be the winning cover before Mysterio kicked out. Mysterio looked to have the match stolen from the champion as he connected with 619 and the accompanying frog splash, but Penta kicked out at the last moment.",
+          "block_id": "b4"
+        },
+        {
+          "type": "text",
+          "text": "The pair entered a back-and-forth exchange that ended with another 619, but Penta got his knees up on the splash this time around. He followed that up with a Mexican Destroyer for the winning pinfall, retaining his title for the ninth time this reign.",
+          "block_id": "b5"
+        },
+        {
+          "type": "text",
+          "text": "After the match, Ethan Page and Rusev jumped both competitors. Rusev delivered a Machka Kick to Penta before cinching in the Accolade on Mysterio. But then Dragon Lee ran down the ramp to make the save and oust Rusev and Page from the ring.",
+          "block_id": "b6"
+        },
+        {
+          "type": "text",
+          "text": "Page threw Lee into the timekeeper's area and returned to the ring alongside Rusev, attacking Penta and Mysterio again before removing the latter's mask. Chad Gable then made his own run down the ramp to make the save, clearing the ring before looking at Mysterio's mask contemplatively.",
+          "block_id": "b7"
+        }
+      ],
+      "elements": [
+        {
+          "type": "text",
+          "text": "Penta defeated Rey Mysterio to retain the Intercontinental Championship during \"WWE Raw.\"",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "Penta and Mysterio were facing one another for the first time in WWE, having fought first in 2016 during Lucha Underground's first episode of Season Three, and then once more in 2018 for NEW Wrestling. Mysterio picked up the win in both.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "At multiple points in the match the action was taken to the outside with Penta wearing down his challenger with chops and dumping him back down on the apron. In the ring, Mysterio got an early near-fall with a tornado DDT.",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "Penta connected with Penta Driver in the middle of the ring, going for what looked to be the winning cover before Mysterio kicked out. Mysterio looked to have the match stolen from the champion as he connected with 619 and the accompanying frog splash, but Penta kicked out at the last moment.",
+          "block_id": "b4"
+        },
+        {
+          "type": "text",
+          "text": "The pair entered a back-and-forth exchange that ended with another 619, but Penta got his knees up on the splash this time around. He followed that up with a Mexican Destroyer for the winning pinfall, retaining his title for the ninth time this reign.",
+          "block_id": "b5"
+        },
+        {
+          "type": "text",
+          "text": "After the match, Ethan Page and Rusev jumped both competitors. Rusev delivered a Machka Kick to Penta before cinching in the Accolade on Mysterio. But then Dragon Lee ran down the ramp to make the save and oust Rusev and Page from the ring.",
+          "block_id": "b6"
+        },
+        {
+          "type": "text",
+          "text": "Page threw Lee into the timekeeper's area and returned to the ring alongside Rusev, attacking Penta and Mysterio again before removing the latter's mask. Chad Gable then made his own run down the ramp to make the save, clearing the ring before looking at Mysterio's mask contemplatively.",
+          "block_id": "b7"
+        }
+      ],
+      "element_counts": {
+        "text": 7,
+        "heading": 0,
+        "quote": 0,
+        "table": 0,
+        "image": 0,
+        "embed": 0
+      },
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2189970/wwe-raw-penta-rey-mysterio-mens-intercontinental-title-chad-gable/\nTitolo feed: Penta Defeats Rey Mysterio, Retains WWE Men's Intercontinental Title On Raw\nTitolo pagina: Penta Defeats Rey Mysterio, Retains WWE Men's Intercontinental Title On Raw - Wrestling Inc.\nDescrizione: Penta defeated Rey Mysterio to retain the Intercontinental Championship during \"WWE Raw.\"\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Penta defeated Rey Mysterio to retain the Intercontinental Championship during \\\"WWE Raw.\\\"\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Penta and Mysterio were facing one another for the first time in WWE, having fought first in 2016 during Lucha Underground's first episode of Season Three, and then once more in 2018 for NEW Wrestling. Mysterio picked up the win in both.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"At multiple points in the match the action was taken to the outside with Penta wearing down his challenger with chops and dumping him back down on the apron. In the ring, Mysterio got an early near-fall with a tornado DDT.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Penta connected with Penta Driver in the middle of the ring, going for what looked to be the winning cover before Mysterio kicked out. Mysterio looked to have the match stolen from the champion as he connected with 619 and the accompanying frog splash, but Penta kicked out at the last moment.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"The pair entered a back-and-forth exchange that ended with another 619, but Penta got his knees up on the splash this time around. He followed that up with a Mexican Destroyer for the winning pinfall, retaining his title for the ninth time this reign.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"After the match, Ethan Page and Rusev jumped both competitors. Rusev delivered a Machka Kick to Penta before cinching in the Accolade on Mysterio. But then Dragon Lee ran down the ramp to make the save and oust Rusev and Page from the ring.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"Page threw Lee into the timekeeper's area and returned to the ring alongside Rusev, attacking Penta and Mysterio again before removing the latter's mask. Chad Gable then made his own run down the ramp to make the save, clearing the ring before looking at Mysterio's mask contemplatively.\"\n  }\n]\n",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite",
+        "gemini-3-flash-preview",
+        "gemini-2.5-flash-lite",
+        "gemini-2.5-flash"
+      ],
+      "translation_model": "gemini-2.5-flash: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}",
+      "translation_used": false,
+      "title_it": "Penta Defeats Rey Mysterio, Retains WWE Men's Intercontinental Title On Raw - Wrestling Inc.",
+      "body_html": "<p>Penta defeated Rey Mysterio to retain the Intercontinental Championship during &quot;WWE Raw.&quot;</p>\n<p>Penta and Mysterio were facing one another for the first time in WWE, having fought first in 2016 during Lucha Underground&#x27;s first episode of Season Three, and then once more in 2018 for NEW Wrestling. Mysterio picked up the win in both.</p>\n<p>At multiple points in the match the action was taken to the outside with Penta wearing down his challenger with chops and dumping him back down on the apron. In the ring, Mysterio got an early near-fall with a tornado DDT.</p>\n<p>Penta connected with Penta Driver in the middle of the ring, going for what looked to be the winning cover before Mysterio kicked out. Mysterio looked to have the match stolen from the champion as he connected with 619 and the accompanying frog splash, but Penta kicked out at the last moment.</p>\n<p>The pair entered a back-and-forth exchange that ended with another 619, but Penta got his knees up on the splash this time around. He followed that up with a Mexican Destroyer for the winning pinfall, retaining his title for the ninth time this reign.</p>\n<p>After the match, Ethan Page and Rusev jumped both competitors. Rusev delivered a Machka Kick to Penta before cinching in the Accolade on Mysterio. But then Dragon Lee ran down the ramp to make the save and oust Rusev and Page from the ring.</p>\n<p>Page threw Lee into the timekeeper&#x27;s area and returned to the ring alongside Rusev, attacking Penta and Mysterio again before removing the latter&#x27;s mask. Chad Gable then made his own run down the ramp to make the save, clearing the ring before looking at Mysterio&#x27;s mask contemplatively.</p>",
+      "excerpt_it": "Penta defeated Rey Mysterio to retain the Intercontinental Championship during \"WWE Raw.\"",
+      "bob_notes": [
+        "translation_unavailable",
+        "gemini-2.5-flash: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      ],
+      "bob_brief": {},
+      "menzo_ai_review": null,
+      "ai_editorial_reason": null,
+      "ai_priority_label": "high"
+    },
+    {
+      "source_url": "https://www.wrestlinginc.com/2189891/wwe-tko-aj-styles-good-things-going-praise-criticism/",
+      "source": "wrestlinginc",
+      "source_title": "AJ Styles Says WWE 'Has Good Things Going On,' Deserves Praise Alongside Criticism",
+      "category_hint": "Business",
+      "menzo_score": 82,
+      "status": "extraction_ready_translation_pending",
+      "created_at": "2026-06-08T22:09:26.994035+00:00",
+      "diagnostic_stage": "translation_pending",
+      "fetched_html_chars": 51104,
+      "source_html_contains_embed_hint": true,
+      "meta": {
+        "source_title": "AJ Styles Says WWE 'Has Good Things Going On,' Deserves Praise Alongside Criticism - Wrestling Inc.",
+        "description": "AJ Styles believes that WWE and TKO should be credited for the positive moves they've made in addition to the criticism they receive for the negatives.",
+        "featured_image": "https://www.wrestlinginc.com/img/gallery/aj-styles-says-wwe-has-good-things-going-on-deserves-praise-alongside-criticism/l-intro-1780945372.jpg"
+      },
+      "extraction_diagnostics": {
+        "dom_noise_reduction_enabled": false,
+        "stage": "complete",
+        "global_embed_recovery_enabled": false,
+        "root_name": "article",
+        "root_text_chars": 2081,
+        "candidate_node_count": 11,
+        "raw_element_count": 6,
+        "clean_element_count": 4,
+        "removed_by_node_count": 0,
+        "removed_by_sanitize_count": 2,
+        "table_count": 0,
+        "quote_count": 0,
+        "embed_count": 1
+      },
+      "raw_element_count": 6,
+      "clean_element_count": 4,
+      "translation_unit_count": 3,
+      "removed_before_gemini": 2,
+      "removed_elements_debug": [
+        {
+          "index": 2,
+          "reason": "duplicate_featured_image",
+          "item": {
+            "type": "image",
+            "url": "https://www.wrestlinginc.com/img/gallery/aj-styles-says-wwe-has-good-things-going-on-deserves-praise-alongside-criticism/intro-1780945372.jpg",
+            "alt": "AJ Styles at WrestleMania 41"
+          }
+        },
+        {
+          "index": 3,
+          "reason": "duplicate_or_empty_embed",
+          "item": {
+            "type": "embed",
+            "url": "https://www.youtube.com/watch?v=TbIcaDliv2g",
+            "source_tag": "div"
+          }
+        }
+      ],
+      "raw_elements_preview": [
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=TbIcaDliv2g",
+          "source_tag": "div",
+          "block_id": "b1"
+        },
+        {
+          "type": "image",
+          "url": "https://www.wrestlinginc.com/img/gallery/aj-styles-says-wwe-has-good-things-going-on-deserves-praise-alongside-criticism/intro-1780945372.jpg",
+          "alt": "AJ Styles at WrestleMania 41"
+        },
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=TbIcaDliv2g",
+          "source_tag": "div"
+        },
+        {
+          "type": "text",
+          "text": "When TKO and WWE started working together in 2023 after Vince McMahon stepped down from his position as the CEO of the promotion, the partnership was largely praised due to the improvement of the on-screen product and backstage morale. However, since Netflix became the new home of \"WWE Raw\" at the start of 2025, TKO has flooded the company's programming with advertisements, set record high prices for tickets, and reduced the amount of house shows that take place on a year-to-year basis. Today, the resentment from fans for TKO is at an all-time high, with the company even taking the blame for some of WWE's creative decisions, but according to AJ Styles on \"The Phenomenally Retro Podcast,\" there's still positives to take away from both TKO and WWE.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "\"That is their job to take the blame for everything that is going on and that's their responsibility ... but we also, if they do something right, we need to give them praise like with AAA, they did something right. We can praise him for that. With other things, maybe they've done wrong. Freak it. That kind of sucked. We're entitled to opinions and stuff like that, but at the same time, you can't be boo boo face about everything that's going on because there is some good things that are going on with TKO. It's not going to be perfect all the time. Nobody is.\"",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "Today, the WWE Shareholders lawsuit against McMahon was supposed to begin, with the former CEO, Ari Emmanuel, Nick Khan and others expected to testify in a week-long trial about the deal between WWE and Endeavor, now TKO Group Holdings, and if it was fast tracked to keep McMahon in power in the midst of the sexual misconduct allegations against him. However, on Sunday, the trail was cancelled after it was reported that both parties had come to an agreement on the settlement.",
+          "block_id": "b4"
+        }
+      ],
+      "elements": [
+        {
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=TbIcaDliv2g",
+          "source_tag": "div",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "When TKO and WWE started working together in 2023 after Vince McMahon stepped down from his position as the CEO of the promotion, the partnership was largely praised due to the improvement of the on-screen product and backstage morale. However, since Netflix became the new home of \"WWE Raw\" at the start of 2025, TKO has flooded the company's programming with advertisements, set record high prices for tickets, and reduced the amount of house shows that take place on a year-to-year basis. Today, the resentment from fans for TKO is at an all-time high, with the company even taking the blame for some of WWE's creative decisions, but according to AJ Styles on \"The Phenomenally Retro Podcast,\" there's still positives to take away from both TKO and WWE.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "\"That is their job to take the blame for everything that is going on and that's their responsibility ... but we also, if they do something right, we need to give them praise like with AAA, they did something right. We can praise him for that. With other things, maybe they've done wrong. Freak it. That kind of sucked. We're entitled to opinions and stuff like that, but at the same time, you can't be boo boo face about everything that's going on because there is some good things that are going on with TKO. It's not going to be perfect all the time. Nobody is.\"",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "Today, the WWE Shareholders lawsuit against McMahon was supposed to begin, with the former CEO, Ari Emmanuel, Nick Khan and others expected to testify in a week-long trial about the deal between WWE and Endeavor, now TKO Group Holdings, and if it was fast tracked to keep McMahon in power in the midst of the sexual misconduct allegations against him. However, on Sunday, the trail was cancelled after it was reported that both parties had come to an agreement on the settlement.",
+          "block_id": "b4"
+        }
+      ],
+      "element_counts": {
+        "text": 3,
+        "heading": 0,
+        "quote": 0,
+        "table": 0,
+        "image": 0,
+        "embed": 1
+      },
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2189891/wwe-tko-aj-styles-good-things-going-praise-criticism/\nTitolo feed: AJ Styles Says WWE 'Has Good Things Going On,' Deserves Praise Alongside Criticism\nTitolo pagina: AJ Styles Says WWE 'Has Good Things Going On,' Deserves Praise Alongside Criticism - Wrestling Inc.\nDescrizione: AJ Styles believes that WWE and TKO should be credited for the positive moves they've made in addition to the criticism they receive for the negatives.\nCategoria suggerita: Business\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"When TKO and WWE started working together in 2023 after Vince McMahon stepped down from his position as the CEO of the promotion, the partnership was largely praised due to the improvement of the on-screen product and backstage morale. However, since Netflix became the new home of \\\"WWE Raw\\\" at the start of 2025, TKO has flooded the company's programming with advertisements, set record high prices for tickets, and reduced the amount of house shows that take place on a year-to-year basis. Today, the resentment from fans for TKO is at an all-time high, with the company even taking the blame for some of WWE's creative decisions, but according to AJ Styles on \\\"The Phenomenally Retro Podcast,\\\" there's still positives to take away from both TKO and WWE.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"\\\"That is their job to take the blame for everything that is going on and that's their responsibility ... but we also, if they do something right, we need to give them praise like with AAA, they did something right. We can praise him for that. With other things, maybe they've done wrong. Freak it. That kind of sucked. We're entitled to opinions and stuff like that, but at the same time, you can't be boo boo face about everything that's going on because there is some good things that are going on with TKO. It's not going to be perfect all the time. Nobody is.\\\"\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Today, the WWE Shareholders lawsuit against McMahon was supposed to begin, with the former CEO, Ari Emmanuel, Nick Khan and others expected to testify in a week-long trial about the deal between WWE and Endeavor, now TKO Group Holdings, and if it was fast tracked to keep McMahon in power in the midst of the sexual misconduct allegations against him. However, on Sunday, the trail was cancelled after it was reported that both parties had come to an agreement on the settlement.\"\n  }\n]\n",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite",
+        "gemini-3-flash-preview",
+        "gemini-2.5-flash-lite",
+        "gemini-2.5-flash"
+      ],
+      "translation_model": "gemini-2.5-flash: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}",
+      "translation_used": false,
+      "title_it": "AJ Styles Says WWE 'Has Good Things Going On,' Deserves Praise Alongside Criticism - Wrestling Inc.",
+      "body_html": "<p>When TKO and WWE started working together in 2023 after Vince McMahon stepped down from his position as the CEO of the promotion, the partnership was largely praised due to the improvement of the on-screen product and backstage morale. However, since Netflix became the new home of &quot;WWE Raw&quot; at the start of 2025, TKO has flooded the company&#x27;s programming with advertisements, set record high prices for tickets, and reduced the amount of house shows that take place on a year-to-year basis. Today, the resentment from fans for TKO is at an all-time high, with the company even taking the blame for some of WWE&#x27;s creative decisions, but according to AJ Styles on &quot;The Phenomenally Retro Podcast,&quot; there&#x27;s still positives to take away from both TKO and WWE.</p>\nhttps://www.youtube.com/watch?v=TbIcaDliv2g\n\n<p>&quot;That is their job to take the blame for everything that is going on and that&#x27;s their responsibility ... but we also, if they do something right, we need to give them praise like with AAA, they did something right. We can praise him for that. With other things, maybe they&#x27;ve done wrong. Freak it. That kind of sucked. We&#x27;re entitled to opinions and stuff like that, but at the same time, you can&#x27;t be boo boo face about everything that&#x27;s going on because there is some good things that are going on with TKO. It&#x27;s not going to be perfect all the time. Nobody is.&quot;</p>\n<p>Today, the WWE Shareholders lawsuit against McMahon was supposed to begin, with the former CEO, Ari Emmanuel, Nick Khan and others expected to testify in a week-long trial about the deal between WWE and Endeavor, now TKO Group Holdings, and if it was fast tracked to keep McMahon in power in the midst of the sexual misconduct allegations against him. However, on Sunday, the trail was cancelled after it was reported that both parties had come to an agreement on the settlement.</p>",
+      "excerpt_it": "AJ Styles believes that WWE and TKO should be credited for the positive moves they've made in addition to the criticism they receive for the negatives.",
+      "bob_notes": [
+        "translation_unavailable",
+        "gemini-2.5-flash: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      ],
+      "editorial_changes": [
+        {
+          "code": "leading_embed_moved_after_first_paragraph",
+          "severity": "info",
+          "message": "Embed iniziale spostato dopo il primo paragrafo.",
+          "evidence": "https://www.youtube.com/watch?v=TbIcaDliv2g"
+        }
+      ],
+      "diagnostic_warnings": [],
+      "bob_brief": {},
+      "menzo_ai_review": null,
+      "ai_editorial_reason": null,
+      "ai_priority_label": "high"
+    },
+    {
+      "source_url": "https://www.ringsidenews.com/liv-morgan-pulls-off-win-advance-queen-ring-tournament-during-68-wwe-raw/",
+      "source": "ringsidenews",
+      "source_title": "Liv Morgan Pulls Off Win To Advance In Queen of the Ring Tournament During 6/8 WWE RAW",
+      "category_hint": "WWE",
+      "menzo_score": 82,
+      "status": "extraction_ready_translation_pending",
+      "created_at": "2026-06-08T22:09:27.624476+00:00",
+      "diagnostic_stage": "translation_pending",
+      "fetched_html_chars": 565813,
+      "source_html_contains_embed_hint": true,
+      "meta": {
+        "source_title": "Liv Morgan Pulls Off Win To Advance In Queen of the Ring Tournament During 6/8 WWE RAW",
+        "description": "The June 8 episode of WWE RAW took place at the Accor Arena in Paris, France. The special early broadcast featured several key developments on the road to",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/liv-morgan-pulls-off-win-to-advance-in-queen-of-the-ring-tournament-during-68-wwe-raw-11.jpg"
+      },
+      "extraction_diagnostics": {
+        "dom_noise_reduction_enabled": false,
+        "stage": "complete",
+        "global_embed_recovery_enabled": false,
+        "root_name": "article",
+        "root_text_chars": 2561,
+        "candidate_node_count": 93,
+        "raw_element_count": 11,
+        "clean_element_count": 10,
+        "removed_by_node_count": 13,
+        "removed_by_sanitize_count": 1,
+        "table_count": 0,
+        "quote_count": 0,
+        "embed_count": 2
+      },
+      "raw_element_count": 11,
+      "clean_element_count": 10,
+      "translation_unit_count": 7,
+      "removed_before_gemini": 14,
+      "removed_elements_debug": [
+        {
+          "node_index": 70,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
+          "text_preview": "Spotlight"
+        },
+        {
+          "node_index": 74,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2200172 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-vince-mcmahon tag-wwe-featured   ",
+          "text_preview": "WWE News Vince McMahon Reached Last-Minute Deal to Avoid Trial in WWE Shareholder Lawsuit"
+        },
+        {
+          "node_index": 77,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "Vince McMahon Reached Last-Minute Deal to Avoid Trial in WWE Shareholder Lawsuit"
+        },
+        {
+          "node_index": 78,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 79,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2200041 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-liv-morgan tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
+          "text_preview": "WWE News Liv Morgan Pulls Off Win To Advance In Queen of the Ring Tournament During 6/8 WWE RAW"
+        },
+        {
+          "node_index": 82,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "Liv Morgan Pulls Off Win To Advance In Queen of the Ring Tournament During 6/8 WWE RAW"
+        },
+        {
+          "node_index": 83,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 84,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2200102 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news tag-aew-featured tag-keith-lee   ",
+          "text_preview": "AEW News Keith Lee’s AEW Return Was Discussed Internally After Long Absence"
+        },
+        {
+          "node_index": 87,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "Keith Lee’s AEW Return Was Discussed Internally After Long Absence"
+        },
+        {
+          "node_index": 88,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 89,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2199841 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-raw-results category-wwe-results tag-wwe-featured   ",
+          "text_preview": "WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 8, 2026"
+        },
+        {
+          "node_index": 92,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "WWE RAW Results, Highlights and Key Moments for June 8, 2026"
+        },
+        {
+          "node_index": 93,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "index": 11,
+          "reason": "footer_start",
+          "item": {
+            "type": "text",
+            "text": "Spotlight WWE News Vince McMahon Reached Last-Minute Deal to Avoid Trial in WWE Shareholder Lawsuit WWE News Liv Morgan Pulls Off Win To Advance In Queen of the Ring Tournament During 6/8 WWE RAW AEW News Keith Lee’s AEW Return Was Discussed Internally After Long Absence WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 8, 2026"
+          }
+        }
+      ],
+      "raw_elements_preview": [
+        {
+          "type": "text",
+          "text": "The June 8 episode of WWE RAW took place at the Accor Arena in Paris, France. The special early broadcast featured several key developments on the road to Night of Champions, including another important Queen of the Ring qualifying match.",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "One of the night’s biggest matches saw Becky Lynch, Liv Morgan, Alexa Bliss, and Chelsea Green collide in a Queen of the Ring qualifier. With four former champions and top stars battling for a spot in the tournament semifinals, fans knew anything could happen once the bell rang.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "This match kicked off WWE RAW, and fans were ready to see who would go on to the semifinals of the tournament. Everyone in the match had a chance to show off with some high spots, and fans were behind Alexa Bliss in a big way as she battled Becky Lynch on the top rope. Then Chelsea Green got involved, but Alexa Bliss broke up the pinfall attempt with a Twisted Bliss.",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "In the end, Liv Morgan, who is Women’s World Champion, pulled off the win. Chelsea Green wasn’t happy about that at all, but Morgan will move on in the tournament.",
+          "block_id": "b4"
+        },
+        {
+          "type": "text",
+          "text": "Liv Morgan will move on in the 2026 Queen of the Ring tournament. It’s anyone’s guess if she will win, but she has certainly never been one to back down from a chance to celebrate.",
+          "block_id": "b5"
+        },
+        {
+          "type": "text",
+          "text": "The 2026 WWE Queen of the Ring tournament will conclude on June 27 at Night of Champions in Riyadh, Saudi Arabia. The winner will earn a championship opportunity, and Ringside News will have full coverage of the tournament and the premium live event.",
+          "block_id": "b6"
+        },
+        {
+          "type": "embed",
+          "url": "https://x.com/_RoxyRollins/status/2064054491679220130",
+          "source_tag": "div",
+          "block_id": "b7"
+        },
+        {
+          "type": "embed",
+          "url": "https://x.com/WWE/status/2064054716690989493",
+          "source_tag": "div",
+          "block_id": "b8"
+        },
+        {
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/2023/12/download-96x96.jpg",
+          "alt": "H Jenkins",
+          "block_id": "b9"
+        },
+        {
+          "type": "text",
+          "text": "H Jenkins has been breaking pro wrestling news on Ringside News for nearly a decade, with his reports featured by TMZ, Forbes, The Sun, and more.",
+          "block_id": "b10"
+        },
+        {
+          "type": "text",
+          "text": "Spotlight WWE News Vince McMahon Reached Last-Minute Deal to Avoid Trial in WWE Shareholder Lawsuit WWE News Liv Morgan Pulls Off Win To Advance In Queen of the Ring Tournament During 6/8 WWE RAW AEW News Keith Lee’s AEW Return Was Discussed Internally After Long Absence WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 8, 2026"
+        }
+      ],
+      "elements": [
+        {
+          "type": "text",
+          "text": "The June 8 episode of WWE RAW took place at the Accor Arena in Paris, France. The special early broadcast featured several key developments on the road to Night of Champions, including another important Queen of the Ring qualifying match.",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "One of the night’s biggest matches saw Becky Lynch, Liv Morgan, Alexa Bliss, and Chelsea Green collide in a Queen of the Ring qualifier. With four former champions and top stars battling for a spot in the tournament semifinals, fans knew anything could happen once the bell rang.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "This match kicked off WWE RAW, and fans were ready to see who would go on to the semifinals of the tournament. Everyone in the match had a chance to show off with some high spots, and fans were behind Alexa Bliss in a big way as she battled Becky Lynch on the top rope. Then Chelsea Green got involved, but Alexa Bliss broke up the pinfall attempt with a Twisted Bliss.",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "In the end, Liv Morgan, who is Women’s World Champion, pulled off the win. Chelsea Green wasn’t happy about that at all, but Morgan will move on in the tournament.",
+          "block_id": "b4"
+        },
+        {
+          "type": "text",
+          "text": "Liv Morgan will move on in the 2026 Queen of the Ring tournament. It’s anyone’s guess if she will win, but she has certainly never been one to back down from a chance to celebrate.",
+          "block_id": "b5"
+        },
+        {
+          "type": "text",
+          "text": "The 2026 WWE Queen of the Ring tournament will conclude on June 27 at Night of Champions in Riyadh, Saudi Arabia. The winner will earn a championship opportunity, and Ringside News will have full coverage of the tournament and the premium live event.",
+          "block_id": "b6"
+        },
+        {
+          "type": "embed",
+          "url": "https://x.com/_RoxyRollins/status/2064054491679220130",
+          "source_tag": "div",
+          "block_id": "b7"
+        },
+        {
+          "type": "embed",
+          "url": "https://x.com/WWE/status/2064054716690989493",
+          "source_tag": "div",
+          "block_id": "b8"
+        },
+        {
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/2023/12/download-96x96.jpg",
+          "alt": "H Jenkins",
+          "block_id": "b9"
+        },
+        {
+          "type": "text",
+          "text": "H Jenkins has been breaking pro wrestling news on Ringside News for nearly a decade, with his reports featured by TMZ, Forbes, The Sun, and more.",
+          "block_id": "b10"
+        }
+      ],
+      "element_counts": {
+        "text": 7,
+        "heading": 0,
+        "quote": 0,
+        "table": 0,
+        "image": 1,
+        "embed": 2
+      },
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/liv-morgan-pulls-off-win-advance-queen-ring-tournament-during-68-wwe-raw/\nTitolo feed: Liv Morgan Pulls Off Win To Advance In Queen of the Ring Tournament During 6/8 WWE RAW\nTitolo pagina: Liv Morgan Pulls Off Win To Advance In Queen of the Ring Tournament During 6/8 WWE RAW\nDescrizione: The June 8 episode of WWE RAW took place at the Accor Arena in Paris, France. The special early broadcast featured several key developments on the road to\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"The June 8 episode of WWE RAW took place at the Accor Arena in Paris, France. The special early broadcast featured several key developments on the road to Night of Champions, including another important Queen of the Ring qualifying match.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"One of the night’s biggest matches saw Becky Lynch, Liv Morgan, Alexa Bliss, and Chelsea Green collide in a Queen of the Ring qualifier. With four former champions and top stars battling for a spot in the tournament semifinals, fans knew anything could happen once the bell rang.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"This match kicked off WWE RAW, and fans were ready to see who would go on to the semifinals of the tournament. Everyone in the match had a chance to show off with some high spots, and fans were behind Alexa Bliss in a big way as she battled Becky Lynch on the top rope. Then Chelsea Green got involved, but Alexa Bliss broke up the pinfall attempt with a Twisted Bliss.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"In the end, Liv Morgan, who is Women’s World Champion, pulled off the win. Chelsea Green wasn’t happy about that at all, but Morgan will move on in the tournament.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"Liv Morgan will move on in the 2026 Queen of the Ring tournament. It’s anyone’s guess if she will win, but she has certainly never been one to back down from a chance to celebrate.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"The 2026 WWE Queen of the Ring tournament will conclude on June 27 at Night of Champions in Riyadh, Saudi Arabia. The winner will earn a championship opportunity, and Ringside News will have full coverage of the tournament and the premium live event.\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"text\",\n    \"text\": \"H Jenkins has been breaking pro wrestling news on Ringside News for nearly a decade, with his reports featured by TMZ, Forbes, The Sun, and more.\"\n  }\n]\n",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite",
+        "gemini-3-flash-preview",
+        "gemini-2.5-flash-lite",
+        "gemini-2.5-flash"
+      ],
+      "translation_model": "gemini-2.5-flash: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}",
+      "translation_used": false,
+      "title_it": "Liv Morgan Pulls Off Win To Advance In Queen of the Ring Tournament During 6/8 WWE RAW",
+      "body_html": "<p>The June 8 episode of WWE RAW took place at the Accor Arena in Paris, France. The special early broadcast featured several key developments on the road to Night of Champions, including another important Queen of the Ring qualifying match.</p>\n<p>One of the night’s biggest matches saw Becky Lynch, Liv Morgan, Alexa Bliss, and Chelsea Green collide in a Queen of the Ring qualifier. With four former champions and top stars battling for a spot in the tournament semifinals, fans knew anything could happen once the bell rang.</p>\n<p>This match kicked off WWE RAW, and fans were ready to see who would go on to the semifinals of the tournament. Everyone in the match had a chance to show off with some high spots, and fans were behind Alexa Bliss in a big way as she battled Becky Lynch on the top rope. Then Chelsea Green got involved, but Alexa Bliss broke up the pinfall attempt with a Twisted Bliss.</p>\n<p>In the end, Liv Morgan, who is Women’s World Champion, pulled off the win. Chelsea Green wasn’t happy about that at all, but Morgan will move on in the tournament.</p>\n<p>Liv Morgan will move on in the 2026 Queen of the Ring tournament. It’s anyone’s guess if she will win, but she has certainly never been one to back down from a chance to celebrate.</p>\n<p>The 2026 WWE Queen of the Ring tournament will conclude on June 27 at Night of Champions in Riyadh, Saudi Arabia. The winner will earn a championship opportunity, and Ringside News will have full coverage of the tournament and the premium live event.</p>\n\nhttps://x.com/_RoxyRollins/status/2064054491679220130\n\nhttps://x.com/WWE/status/2064054716690989493\n\n<!--IMAGE:https://www.ringsidenews.com/wp-content/uploads/2023/12/download-96x96.jpg-->",
+      "excerpt_it": "The June 8 episode of WWE RAW took place at the Accor Arena in Paris, France. The special early broadcast featured several key developments on the road to",
+      "bob_notes": [
+        "translation_unavailable",
+        "gemini-2.5-flash: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      ],
+      "editorial_changes": [
+        {
+          "code": "residual_author_bio",
+          "severity": "info",
+          "message": "Paragrafo residuo rimosso da Bob v93.33.",
+          "evidence": "H Jenkins has been breaking pro wrestling news on Ringside News for nearly a decade, with his reports featured by TMZ, Forbes, The Sun, and more."
+        }
+      ],
+      "diagnostic_warnings": [],
+      "bob_brief": {},
+      "menzo_ai_review": null,
+      "ai_editorial_reason": null,
+      "ai_priority_label": "high"
+    },
+    {
+      "source_url": "https://www.ringsidenews.com/braun-strowman-says-enough-zeros-could-open-his-schedule-wrestling-return/",
+      "source": "ringsidenews",
+      "source_title": "Braun Strowman Says “Enough Zeros” Could Open Up His Schedule For A Wrestling Return",
+      "category_hint": "WWE",
+      "menzo_score": 80,
+      "status": "extraction_ready_translation_pending",
+      "created_at": "2026-06-08T22:09:28.485143+00:00",
+      "diagnostic_stage": "translation_pending",
+      "fetched_html_chars": 570447,
+      "source_html_contains_embed_hint": true,
+      "meta": {
+        "source_title": "Braun Strowman Says “Enough Zeros” Could Open Up His Schedule For A Wrestling Return",
+        "description": "Braun Strowman may not be back in wrestling right now, but he is not acting like the door is closed. The former WWE Superstar made it very clear that the",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/braun-strowman-says-enough-zeros-could-open-up-his-schedule-for-a-wrestling-return-12.jpg"
+      },
+      "extraction_diagnostics": {
+        "dom_noise_reduction_enabled": false,
+        "stage": "complete",
+        "global_embed_recovery_enabled": false,
+        "root_name": "article",
+        "root_text_chars": 2554,
+        "candidate_node_count": 93,
+        "raw_element_count": 10,
+        "clean_element_count": 9,
+        "removed_by_node_count": 13,
+        "removed_by_sanitize_count": 1,
+        "table_count": 0,
+        "quote_count": 2,
+        "embed_count": 1
+      },
+      "raw_element_count": 10,
+      "clean_element_count": 9,
+      "translation_unit_count": 7,
+      "removed_before_gemini": 14,
+      "removed_elements_debug": [
+        {
+          "node_index": 70,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
+          "text_preview": "Spotlight"
+        },
+        {
+          "node_index": 74,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2200172 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-vince-mcmahon tag-wwe-featured   ",
+          "text_preview": "WWE News Vince McMahon Reached Last-Minute Deal to Avoid Trial in WWE Shareholder Lawsuit"
+        },
+        {
+          "node_index": 77,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "Vince McMahon Reached Last-Minute Deal to Avoid Trial in WWE Shareholder Lawsuit"
+        },
+        {
+          "node_index": 78,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 79,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2200041 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-liv-morgan tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
+          "text_preview": "WWE News Liv Morgan Pulls Off Win To Advance In Queen of the Ring Tournament During 6/8 WWE RAW"
+        },
+        {
+          "node_index": 82,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "Liv Morgan Pulls Off Win To Advance In Queen of the Ring Tournament During 6/8 WWE RAW"
+        },
+        {
+          "node_index": 83,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 84,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2200102 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news tag-aew-featured tag-keith-lee   ",
+          "text_preview": "AEW News Keith Lee’s AEW Return Was Discussed Internally After Long Absence"
+        },
+        {
+          "node_index": 87,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "Keith Lee’s AEW Return Was Discussed Internally After Long Absence"
+        },
+        {
+          "node_index": 88,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "node_index": 89,
+          "reason": "node_class_noise",
+          "node_name": "li",
+          "classes": "gb-loop-item rsn-spotlight-item post-2199841 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-raw-results category-wwe-results tag-wwe-featured   ",
+          "text_preview": "WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 8, 2026"
+        },
+        {
+          "node_index": 92,
+          "reason": "node_class_noise",
+          "node_name": "h2",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "text_preview": "WWE RAW Results, Highlights and Key Moments for June 8, 2026"
+        },
+        {
+          "node_index": 93,
+          "reason": "node_class_noise",
+          "node_name": "img",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "text_preview": ""
+        },
+        {
+          "index": 10,
+          "reason": "footer_start",
+          "item": {
+            "type": "text",
+            "text": "Spotlight WWE News Vince McMahon Reached Last-Minute Deal to Avoid Trial in WWE Shareholder Lawsuit WWE News Liv Morgan Pulls Off Win To Advance In Queen of the Ring Tournament During 6/8 WWE RAW AEW News Keith Lee’s AEW Return Was Discussed Internally After Long Absence WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 8, 2026"
+          }
+        }
+      ],
+      "raw_elements_preview": [
+        {
+          "type": "text",
+          "text": "Braun Strowman may not be back in wrestling right now, but he is not acting like the door is closed. The former WWE Superstar made it very clear that the right offer could change his schedule in a hurry.",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "Strowman appeared on Jonathan Coachman’s Off The Ropes podcast and admitted that he still misses parts of the wrestling business. He said a recent AAA match between Chad Gable and Ludwig Kaiser reminded him why he loved wrestling in the first place.",
+          "block_id": "b2"
+        },
+        {
+          "type": "quote",
+          "text": "“You want to honestly know what happened recently. That Triple A match between Gable and Ludwig, that match made me feel. It made me remember why I love professional wrestling. And it made me go, I can go.”",
+          "source_tag": "blockquote",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "Strowman also said he misses being in the ring and in the locker room, even though he does not miss everything else that comes with the job. That led Coachman to ask whether his schedule would allow a wrestling return if Tony Khan or Triple H called with the right role. Strowman did not dance around the answer.",
+          "block_id": "b4"
+        },
+        {
+          "type": "quote",
+          "text": "“A number with enough zeros behind it, my schedule will open up.”",
+          "source_tag": "blockquote",
+          "block_id": "b5"
+        },
+        {
+          "type": "text",
+          "text": "That is about as direct as it gets. Strowman did not say he is begging for a return, and he did not name one company as his preferred landing spot, but he made it clear money would matter.",
+          "block_id": "b6"
+        },
+        {
+          "type": "text",
+          "text": "Strowman has been away from WWE, but his name still carries weight because of his size, look, and past run as one of the company’s top monsters. If a promotion wants that presence badly enough, Strowman sounds like he is willing to listen.",
+          "block_id": "b7"
+        },
+        {
+          "type": "embed",
+          "url": "https://x.com/BustedOpenRadio/status/2064099376662761574",
+          "source_tag": "div",
+          "block_id": "b8"
+        },
+        {
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/2024/01/avatar_user_1_1704158183-96x96.jpg",
+          "alt": "Steve Carrier",
+          "block_id": "b9"
+        },
+        {
+          "type": "text",
+          "text": "Spotlight WWE News Vince McMahon Reached Last-Minute Deal to Avoid Trial in WWE Shareholder Lawsuit WWE News Liv Morgan Pulls Off Win To Advance In Queen of the Ring Tournament During 6/8 WWE RAW AEW News Keith Lee’s AEW Return Was Discussed Internally After Long Absence WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 8, 2026"
+        }
+      ],
+      "elements": [
+        {
+          "type": "text",
+          "text": "Braun Strowman may not be back in wrestling right now, but he is not acting like the door is closed. The former WWE Superstar made it very clear that the right offer could change his schedule in a hurry.",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "Strowman appeared on Jonathan Coachman’s Off The Ropes podcast and admitted that he still misses parts of the wrestling business. He said a recent AAA match between Chad Gable and Ludwig Kaiser reminded him why he loved wrestling in the first place.",
+          "block_id": "b2"
+        },
+        {
+          "type": "quote",
+          "text": "“You want to honestly know what happened recently. That Triple A match between Gable and Ludwig, that match made me feel. It made me remember why I love professional wrestling. And it made me go, I can go.”",
+          "source_tag": "blockquote",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "Strowman also said he misses being in the ring and in the locker room, even though he does not miss everything else that comes with the job. That led Coachman to ask whether his schedule would allow a wrestling return if Tony Khan or Triple H called with the right role. Strowman did not dance around the answer.",
+          "block_id": "b4"
+        },
+        {
+          "type": "quote",
+          "text": "“A number with enough zeros behind it, my schedule will open up.”",
+          "source_tag": "blockquote",
+          "block_id": "b5"
+        },
+        {
+          "type": "text",
+          "text": "That is about as direct as it gets. Strowman did not say he is begging for a return, and he did not name one company as his preferred landing spot, but he made it clear money would matter.",
+          "block_id": "b6"
+        },
+        {
+          "type": "text",
+          "text": "Strowman has been away from WWE, but his name still carries weight because of his size, look, and past run as one of the company’s top monsters. If a promotion wants that presence badly enough, Strowman sounds like he is willing to listen.",
+          "block_id": "b7"
+        },
+        {
+          "type": "embed",
+          "url": "https://x.com/BustedOpenRadio/status/2064099376662761574",
+          "source_tag": "div",
+          "block_id": "b8"
+        },
+        {
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/2024/01/avatar_user_1_1704158183-96x96.jpg",
+          "alt": "Steve Carrier",
+          "block_id": "b9"
+        }
+      ],
+      "element_counts": {
+        "text": 5,
+        "heading": 0,
+        "quote": 2,
+        "table": 0,
+        "image": 1,
+        "embed": 1
+      },
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/braun-strowman-says-enough-zeros-could-open-his-schedule-wrestling-return/\nTitolo feed: Braun Strowman Says “Enough Zeros” Could Open Up His Schedule For A Wrestling Return\nTitolo pagina: Braun Strowman Says “Enough Zeros” Could Open Up His Schedule For A Wrestling Return\nDescrizione: Braun Strowman may not be back in wrestling right now, but he is not acting like the door is closed. The former WWE Superstar made it very clear that the\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Braun Strowman may not be back in wrestling right now, but he is not acting like the door is closed. The former WWE Superstar made it very clear that the right offer could change his schedule in a hurry.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Strowman appeared on Jonathan Coachman’s Off The Ropes podcast and admitted that he still misses parts of the wrestling business. He said a recent AAA match between Chad Gable and Ludwig Kaiser reminded him why he loved wrestling in the first place.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"quote\",\n    \"text\": \"“You want to honestly know what happened recently. That Triple A match between Gable and Ludwig, that match made me feel. It made me remember why I love professional wrestling. And it made me go, I can go.”\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Strowman also said he misses being in the ring and in the locker room, even though he does not miss everything else that comes with the job. That led Coachman to ask whether his schedule would allow a wrestling return if Tony Khan or Triple H called with the right role. Strowman did not dance around the answer.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"“A number with enough zeros behind it, my schedule will open up.”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"That is about as direct as it gets. Strowman did not say he is begging for a return, and he did not name one company as his preferred landing spot, but he made it clear money would matter.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"Strowman has been away from WWE, but his name still carries weight because of his size, look, and past run as one of the company’s top monsters. If a promotion wants that presence badly enough, Strowman sounds like he is willing to listen.\"\n  }\n]\n",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite",
+        "gemini-3-flash-preview",
+        "gemini-2.5-flash-lite",
+        "gemini-2.5-flash"
+      ],
+      "translation_model": "gemini-2.5-flash: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}",
+      "translation_used": false,
+      "title_it": "Braun Strowman Says “Enough Zeros” Could Open Up His Schedule For A Wrestling Return",
+      "body_html": "<p>Braun Strowman may not be back in wrestling right now, but he is not acting like the door is closed. The former WWE Superstar made it very clear that the right offer could change his schedule in a hurry.</p>\n<p>Strowman appeared on Jonathan Coachman’s Off The Ropes podcast and admitted that he still misses parts of the wrestling business. He said a recent AAA match between Chad Gable and Ludwig Kaiser reminded him why he loved wrestling in the first place.</p>\n<blockquote>“You want to honestly know what happened recently. That Triple A match between Gable and Ludwig, that match made me feel. It made me remember why I love professional wrestling. And it made me go, I can go.”</blockquote>\n<p>Strowman also said he misses being in the ring and in the locker room, even though he does not miss everything else that comes with the job. That led Coachman to ask whether his schedule would allow a wrestling return if Tony Khan or Triple H called with the right role. Strowman did not dance around the answer.</p>\n<blockquote>“A number with enough zeros behind it, my schedule will open up.”</blockquote>\n<p>That is about as direct as it gets. Strowman did not say he is begging for a return, and he did not name one company as his preferred landing spot, but he made it clear money would matter.</p>\n<p>Strowman has been away from WWE, but his name still carries weight because of his size, look, and past run as one of the company’s top monsters. If a promotion wants that presence badly enough, Strowman sounds like he is willing to listen.</p>\n\nhttps://x.com/BustedOpenRadio/status/2064099376662761574\n\n<!--IMAGE:https://www.ringsidenews.com/wp-content/uploads/2024/01/avatar_user_1_1704158183-96x96.jpg-->",
+      "excerpt_it": "Braun Strowman may not be back in wrestling right now, but he is not acting like the door is closed. The former WWE Superstar made it very clear that the",
+      "bob_notes": [
+        "translation_unavailable",
+        "gemini-2.5-flash: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      ],
+      "bob_brief": {},
+      "menzo_ai_review": null,
+      "ai_editorial_reason": null,
+      "ai_priority_label": "high"
+    },
+    {
+      "source_url": "https://www.wrestlinginc.com/2189986/zilla-fatu-anoai-roman-reigns-umaga-wwe-performance-center/",
+      "source": "wrestlinginc",
+      "source_title": "Anoa'i Family Member, Indie Star Reportedly Spotted At WWE Performance Center",
+      "category_hint": "WWE",
+      "menzo_score": 80,
+      "status": "extraction_ready_translation_pending",
+      "created_at": "2026-06-08T22:09:29.155500+00:00",
+      "diagnostic_stage": "translation_pending",
+      "fetched_html_chars": 50552,
+      "source_html_contains_embed_hint": true,
+      "meta": {
+        "source_title": "Anoa'i Family Member, Indie Star Reportedly Spotted At WWE Performance Center - Wrestling Inc.",
+        "description": "An Anoa'i family member, and well known indie star has reportedly been spotted at the WWE Performance Center as rumors swirl that WWE is interested in him",
+        "featured_image": "https://www.wrestlinginc.com/img/gallery/anoai-family-member-indie-star-reportedly-spotted-at-wwe-performance-center/l-intro-1780949716.jpg"
+      },
+      "extraction_diagnostics": {
+        "dom_noise_reduction_enabled": false,
+        "stage": "complete",
+        "global_embed_recovery_enabled": false,
+        "root_name": "article",
+        "root_text_chars": 1692,
+        "candidate_node_count": 10,
+        "raw_element_count": 4,
+        "clean_element_count": 3,
+        "removed_by_node_count": 0,
+        "removed_by_sanitize_count": 1,
+        "table_count": 0,
+        "quote_count": 0,
+        "embed_count": 0
+      },
+      "raw_element_count": 4,
+      "clean_element_count": 3,
+      "translation_unit_count": 3,
+      "removed_before_gemini": 1,
+      "removed_elements_debug": [
+        {
+          "index": 1,
+          "reason": "duplicate_featured_image",
+          "item": {
+            "type": "image",
+            "url": "https://www.wrestlinginc.com/img/gallery/anoai-family-member-indie-star-reportedly-spotted-at-wwe-performance-center/intro-1780949716.jpg",
+            "alt": "Roman Reigns celebrating the arrival of another cousin"
+          }
+        }
+      ],
+      "raw_elements_preview": [
+        {
+          "type": "image",
+          "url": "https://www.wrestlinginc.com/img/gallery/anoai-family-member-indie-star-reportedly-spotted-at-wwe-performance-center/intro-1780949716.jpg",
+          "alt": "Roman Reigns celebrating the arrival of another cousin"
+        },
+        {
+          "type": "text",
+          "text": "After a few years apart, The Bloodline is now back together , with Roman Reigns leading The Usos and Jacob Fatu into battle against former member Solo Sikoa and The MFTs. And soon another member of the Anoa'i/Fatu family could be joining their ranks. PWInsider Elite reports that Zilla Fatu was recently spotted at the WWE Performance Center. While it wasn't confirmed that Fatu had signed with the promotion, it's believed that WWE has interest in bringing him in.",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "A trainee of WWE Hall of Famer Booker T, Fatu has become a well known commodity on the independent circuit over the last few years, primarily wrestling for Booker's Reality of Wrestling promotion in Texas, as well as promotions such as GCW and House of Glory. Between HOG and ROW, Fatu is a two-time ROW Champion and two-time reigning and defending HOG Crown Jewel Champion, having won the title from another WWE Hall of Famer, Bully Ray, in September 2025. Fatu's most high profile indie match arguably occurred in March of this year, where he challenged AEW Men's World Champion MJF at a House of Glory event, ultimately coming up short.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "Due to his family connections, many have expected Fatu to eventually wind up in WWE, though this recent report is the most overt sign that the promotion has been pursuing the 26 year old. Several notable WWE figures have vouched for Fatu as a potential WWE star, including Bully , Fatu's uncle Rikishi , and former Bloodline \"wise man\" Paul Heyman, who even went as far to say that WWE \"would be remiss\" if they didn't offer Fatu a contract .",
+          "block_id": "b3"
+        }
+      ],
+      "elements": [
+        {
+          "type": "text",
+          "text": "After a few years apart, The Bloodline is now back together , with Roman Reigns leading The Usos and Jacob Fatu into battle against former member Solo Sikoa and The MFTs. And soon another member of the Anoa'i/Fatu family could be joining their ranks. PWInsider Elite reports that Zilla Fatu was recently spotted at the WWE Performance Center. While it wasn't confirmed that Fatu had signed with the promotion, it's believed that WWE has interest in bringing him in.",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "A trainee of WWE Hall of Famer Booker T, Fatu has become a well known commodity on the independent circuit over the last few years, primarily wrestling for Booker's Reality of Wrestling promotion in Texas, as well as promotions such as GCW and House of Glory. Between HOG and ROW, Fatu is a two-time ROW Champion and two-time reigning and defending HOG Crown Jewel Champion, having won the title from another WWE Hall of Famer, Bully Ray, in September 2025. Fatu's most high profile indie match arguably occurred in March of this year, where he challenged AEW Men's World Champion MJF at a House of Glory event, ultimately coming up short.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "Due to his family connections, many have expected Fatu to eventually wind up in WWE, though this recent report is the most overt sign that the promotion has been pursuing the 26 year old. Several notable WWE figures have vouched for Fatu as a potential WWE star, including Bully , Fatu's uncle Rikishi , and former Bloodline \"wise man\" Paul Heyman, who even went as far to say that WWE \"would be remiss\" if they didn't offer Fatu a contract .",
+          "block_id": "b3"
+        }
+      ],
+      "element_counts": {
+        "text": 3,
+        "heading": 0,
+        "quote": 0,
+        "table": 0,
+        "image": 0,
+        "embed": 0
+      },
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2189986/zilla-fatu-anoai-roman-reigns-umaga-wwe-performance-center/\nTitolo feed: Anoa'i Family Member, Indie Star Reportedly Spotted At WWE Performance Center\nTitolo pagina: Anoa'i Family Member, Indie Star Reportedly Spotted At WWE Performance Center - Wrestling Inc.\nDescrizione: An Anoa'i family member, and well known indie star has reportedly been spotted at the WWE Performance Center as rumors swirl that WWE is interested in him\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"After a few years apart, The Bloodline is now back together , with Roman Reigns leading The Usos and Jacob Fatu into battle against former member Solo Sikoa and The MFTs. And soon another member of the Anoa'i/Fatu family could be joining their ranks. PWInsider Elite reports that Zilla Fatu was recently spotted at the WWE Performance Center. While it wasn't confirmed that Fatu had signed with the promotion, it's believed that WWE has interest in bringing him in.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"A trainee of WWE Hall of Famer Booker T, Fatu has become a well known commodity on the independent circuit over the last few years, primarily wrestling for Booker's Reality of Wrestling promotion in Texas, as well as promotions such as GCW and House of Glory. Between HOG and ROW, Fatu is a two-time ROW Champion and two-time reigning and defending HOG Crown Jewel Champion, having won the title from another WWE Hall of Famer, Bully Ray, in September 2025. Fatu's most high profile indie match arguably occurred in March of this year, where he challenged AEW Men's World Champion MJF at a House of Glory event, ultimately coming up short.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Due to his family connections, many have expected Fatu to eventually wind up in WWE, though this recent report is the most overt sign that the promotion has been pursuing the 26 year old. Several notable WWE figures have vouched for Fatu as a potential WWE star, including Bully , Fatu's uncle Rikishi , and former Bloodline \\\"wise man\\\" Paul Heyman, who even went as far to say that WWE \\\"would be remiss\\\" if they didn't offer Fatu a contract .\"\n  }\n]\n",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite",
+        "gemini-3-flash-preview",
+        "gemini-2.5-flash-lite",
+        "gemini-2.5-flash"
+      ],
+      "translation_model": "gemini-2.5-flash: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}",
+      "translation_used": false,
+      "title_it": "Anoa'i Family Member, Indie Star Reportedly Spotted At WWE Performance Center - Wrestling Inc.",
+      "body_html": "<p>After a few years apart, The Bloodline is now back together , with Roman Reigns leading The Usos and Jacob Fatu into battle against former member Solo Sikoa and The MFTs. And soon another member of the Anoa&#x27;i/Fatu family could be joining their ranks. PWInsider Elite reports that Zilla Fatu was recently spotted at the WWE Performance Center. While it wasn&#x27;t confirmed that Fatu had signed with the promotion, it&#x27;s believed that WWE has interest in bringing him in.</p>\n<p>A trainee of WWE Hall of Famer Booker T, Fatu has become a well known commodity on the independent circuit over the last few years, primarily wrestling for Booker&#x27;s Reality of Wrestling promotion in Texas, as well as promotions such as GCW and House of Glory. Between HOG and ROW, Fatu is a two-time ROW Champion and two-time reigning and defending HOG Crown Jewel Champion, having won the title from another WWE Hall of Famer, Bully Ray, in September 2025. Fatu&#x27;s most high profile indie match arguably occurred in March of this year, where he challenged AEW Men&#x27;s World Champion MJF at a House of Glory event, ultimately coming up short.</p>\n<p>Due to his family connections, many have expected Fatu to eventually wind up in WWE, though this recent report is the most overt sign that the promotion has been pursuing the 26 year old. Several notable WWE figures have vouched for Fatu as a potential WWE star, including Bully , Fatu&#x27;s uncle Rikishi , and former Bloodline &quot;wise man&quot; Paul Heyman, who even went as far to say that WWE &quot;would be remiss&quot; if they didn&#x27;t offer Fatu a contract .</p>",
+      "excerpt_it": "An Anoa'i family member, and well known indie star has reportedly been spotted at the WWE Performance Center as rumors swirl that WWE is interested in him",
+      "bob_notes": [
+        "translation_unavailable",
+        "gemini-2.5-flash: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      ],
+      "bob_brief": {},
+      "menzo_ai_review": null,
+      "ai_editorial_reason": null,
+      "ai_priority_label": "high"
+    }
+  ],
+  "handoff": {
+    "ready_for_alfred": 0,
+    "translation_pending": 6,
+    "errors": 0,
+    "extraction_empty": 0,
+    "publishable_left_out_by_capacity": 1
+  },
+  "postprocess": {
+    "capacity": 6,
+    "capacity_reason": "post_show_event_heavy",
+    "selected_total_before_capacity": 7,
+    "selected_processed": 6,
+    "publishable_left_out_by_capacity": 1,
+    "bob_v93_33_changes": 2,
+    "bob_v93_16_changes": 2,
+    "bob_brief_warnings_added": 0
+  }
+}
