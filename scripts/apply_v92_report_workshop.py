@@ -130,6 +130,7 @@ for patch_name in [
     "scripts/apply_v93_media_ranking_patch.py",
     "scripts/apply_v93_menzo_ai_skip_fingerprint.py",
     "scripts/apply_v93_capacity_patch.py",
+    "scripts/apply_v93_publisher_capacity_audit.py",
 ]:
     patch = Path(patch_name)
     if patch.exists():
