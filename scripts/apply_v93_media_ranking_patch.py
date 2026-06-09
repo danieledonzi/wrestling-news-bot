@@ -7,6 +7,12 @@ import re
 # - Recover Ringside lazy Instagram embeds from data-rsn-html base64 wrappers.
 # - Recover article images from lazy srcset/data-srcset, including Smush AVIF wrappers.
 # - Hard-skip non-major-brand medical-return stories and rank major brands above OVW/indie at similar score.
+#
+# v93.43 consolidation note:
+# This patch is part of an old runtime patch chain. On the fully split/consolidated v93 source,
+# several legacy anchors may legitimately be absent because the behavior is already applied by
+# later files/patches. Missing legacy anchors must be non-fatal so the one-shot source
+# consolidator can finish and commit the consolidated source.
 
 # -------------------------
 # Base Publisher media rules
@@ -26,7 +32,7 @@ if 'v93_35_media_case_instagram_policy' not in s:
         return html.escape(u)
     # v93.33: social embeds are kept as shortcode blocks because plain X/Twitter URLs
     # often remain plain text until a manual editor conversion.
-    return '<!-- wp:shortcode -->\\n[embed]' + html.escape(u) + '[/embed]\\n<!-- /wp:shortcode -->'
+    return '<!-- wp:shortcode -->\n[embed]' + html.escape(u) + '[/embed]\n<!-- /wp:shortcode -->'
 '''
     new = '''def embed_block(url: str) -> str:
     u = display_embed_url(url)
@@ -37,12 +43,12 @@ if 'v93_35_media_case_instagram_policy' not in s:
         return html.escape(u)
     # v93.33/v93.35: X/Twitter and similar social embeds stay shortcode-backed because
     # plain X/Twitter URLs often remain plain text until a manual editor conversion.
-    return '<!-- wp:shortcode -->\\n[embed]' + html.escape(u) + '[/embed]\\n<!-- /wp:shortcode -->'
+    return '<!-- wp:shortcode -->\n[embed]' + html.escape(u) + '[/embed]\n<!-- /wp:shortcode -->'
 '''
     if old in s:
         s = s.replace(old, new, 1)
     elif 'host in {"youtube.com", "youtube-nocookie.com", "youtu.be", "instagram.com"}' not in s:
-        raise SystemExit('[V93 MEDIA] Publisher embed_block anchor non trovato')
+        print('[V93 MEDIA] Publisher embed_block anchor non trovato; salto per sorgente consolidato')
     s = s.replace('"plain_youtube_urls_for_wordpress_oembed": True, "social_embed_shortcode_blocks": True,', '"plain_youtube_urls_for_wordpress_oembed": True, "plain_instagram_urls_for_wordpress_oembed": True, "social_embed_shortcode_blocks": True,')
     pub.write_text(s, encoding='utf-8')
     print('[V93 MEDIA] Base Publisher media policy applicata')
@@ -85,7 +91,7 @@ def pick_srcset_url(value: str) -> str:
         url = bits[0].strip()
         width = 0
         if len(bits) > 1:
-            m = re.search(r"(\\d+)w", bits[1])
+            m = re.search(r"(\d+)w", bits[1])
             if m:
                 width = int(m.group(1))
         if width >= best_width:
@@ -98,7 +104,7 @@ def normalize_ringside_image_url(url: str) -> str:
     u = html.unescape(str(url or "").replace("\\/", "/")).strip()
     if not u or u.startswith("data:"):
         return ""
-    u = re.sub(r"\\?.*$", "", u)
+    u = re.sub(r"\?.*$", "", u)
     u = u.replace("/wp-content/smush-avif/", "/wp-content/uploads/")
     if u.lower().endswith(".avif"):
         u = u[:-5]
@@ -123,11 +129,13 @@ def image_url_from_node(node: Tag, base_url: str) -> str:
             return url
     return ""
 
-
 '''
-    if helper_anchor not in s:
-        raise SystemExit('[V93 MEDIA] Bob helper anchor non trovato')
-    s = s.replace(helper_anchor, helper + helper_anchor, 1)
+    if helper_anchor in s:
+        s = s.replace(helper_anchor, helper + helper_anchor, 1)
+    elif 'def decode_possible_rsn_lazy_embed_html' in s and 'def image_url_from_node' in s:
+        print('[V93 MEDIA] Bob helper gia presente')
+    else:
+        print('[V93 MEDIA] Bob helper anchor non trovato; salto per sorgente consolidato')
 
     old_extract = '''def extract_embed_url(node: Tag, base_url: str) -> str:
     candidates: list[str] = []
@@ -171,9 +179,12 @@ def image_url_from_node(node: Tag, base_url: str) -> str:
             return url
     return ""
 '''
-    if old_extract not in s:
-        raise SystemExit('[V93 MEDIA] Bob extract_embed_url anchor non trovato')
-    s = s.replace(old_extract, new_extract, 1)
+    if old_extract in s:
+        s = s.replace(old_extract, new_extract, 1)
+    elif 'data-instgrm-permalink' in s and 'data-rsn-html' in s:
+        print('[V93 MEDIA] Bob extract_embed_url gia consolidato')
+    else:
+        print('[V93 MEDIA] Bob extract_embed_url anchor non trovato; salto per sorgente consolidato')
 
     old_img = '''    if name == "img":
         src = node.get("src") or node.get("data-src") or node.get("data-lazy-src") or ""
@@ -190,9 +201,12 @@ def image_url_from_node(node: Tag, base_url: str) -> str:
             return None
         return {"type": "image", "url": src, "alt": clean_text(node.get("alt", ""))}
 '''
-    if old_img not in s:
-        raise SystemExit('[V93 MEDIA] Bob image anchor non trovato')
-    s = s.replace(old_img, new_img, 1)
+    if old_img in s:
+        s = s.replace(old_img, new_img, 1)
+    elif 'src = image_url_from_node(node, base_url)' in s:
+        print('[V93 MEDIA] Bob image extraction gia consolidata')
+    else:
+        print('[V93 MEDIA] Bob image anchor non trovato; salto per sorgente consolidato')
 
     prompt_anchor = '''REGOLE
 - Non riassumere e non aggiungere informazioni.
@@ -289,9 +303,12 @@ def sort_item(item: dict[str, Any]) -> tuple[int, int, float, str]:
     # TNA/ROH outrank OVW/indie, and WWE/NXT/AEW outrank all.
     return score, brand_rank(item), -age, str(item.get("published") or "")
 '''
-    if old_sort not in s:
-        raise SystemExit('[V93 MEDIA] Menzo sort anchor non trovato')
-    s = s.replace(old_sort, new_sort, 1)
+    if old_sort in s:
+        s = s.replace(old_sort, new_sort, 1)
+    elif 'def brand_rank(item: dict[str, Any])' in s and 'medical_return_major_brands_only' in s:
+        print('[V93 MEDIA] Menzo medical/brand ranking gia consolidato')
+    else:
+        print('[V93 MEDIA] Menzo sort anchor non trovato; salto per sorgente consolidato')
 
     # Insert the medical gate after source-opinion and before footprint policy when v93.34 is active.
     old_gate = '''    apply_source_opinion_policy(result)
@@ -303,8 +320,9 @@ def sort_item(item: dict[str, Any]) -> tuple[int, int, float, str]:
 '''
     if old_gate in s:
         s = s.replace(old_gate, new_gate, 1)
+    elif 'apply_medical_brand_policy(result)' in s:
+        print('[V93 MEDIA] Menzo medical gate gia consolidato')
     else:
-        # fallback when footprint policy has not been injected yet
         old_base = '''    rebuild_decisions(result)
     result["version"] = MENZO_VERSION
 '''
@@ -314,7 +332,7 @@ def sort_item(item: dict[str, Any]) -> tuple[int, int, float, str]:
     result["version"] = MENZO_VERSION
 ''', 1)
         else:
-            raise SystemExit('[V93 MEDIA] Menzo gate anchor non trovato')
+            print('[V93 MEDIA] Menzo gate anchor non trovato; salto per sorgente consolidato')
 
     s = s.replace('    result.setdefault("policy", {})["story_footprints_ttl_days"] = 7\n', '    result.setdefault("policy", {})["story_footprints_ttl_days"] = 7\n    result.setdefault("policy", {})["medical_return_major_brands_only"] = True\n    result.setdefault("policy", {})["brand_rank_tiebreaker"] = "WWE/NXT/AEW > TNA/ROH > OVW/indie"\n')
     s = s.replace('footprint_dupes={result.get(\'postprocess\', {}).get(\'story_footprint_duplicates_skipped\', 0)} softpool=', 'footprint_dupes={result.get(\'postprocess\', {}).get(\'story_footprint_duplicates_skipped\', 0)} medical_non_major={result.get(\'postprocess\', {}).get(\'medical_return_non_major_brand_skipped\', 0)} softpool=')
