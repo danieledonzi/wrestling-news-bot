@@ -1,17 +1,23 @@
 #!/usr/bin/env python3
 """OpenWrestlingTV consolidated v93 bot entrypoint.
 
-This is the stable command for VPS/cron usage:
+Stable VPS/cron command:
 
     python bot.py
 
-It intentionally does not contain the full newsroom logic inline. Instead it performs the
-same idempotent bootstrap used by GitHub Actions, applying every v92/v93 patch in the
-current repository checkout, then delegates to the v93 Virtual Newsroom runner.
+v93.42 is VPS-safe: by default it does not run the historical patch bootstrap
+when the checked-out source already contains the consolidated v93 markers. This
+keeps tracked source files clean after a normal cron run.
 
-Operational rule for VPS deployments:
-- keep the repository updated with `git pull --ff-only` before running this file;
-- this file will then consolidate the checked-out code by applying the patch chain.
+Operational VPS flow:
+
+    cd /opt/owtv/wrestling-news-bot
+    git pull --ff-only
+    python bot.py
+    git status --short
+
+Expected result after the run: no modified tracked source files. Runtime files
+must be ignored by .gitignore.
 """
 
 from __future__ import annotations
@@ -22,10 +28,20 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-BOT_VERSION = "v93_41_consolidated_vps_entrypoint"
+BOT_VERSION = "v93_42_vps_clean_runtime"
 ROOT = Path(__file__).resolve().parent
 PATCH_CHAIN = ROOT / "scripts" / "apply_v92_report_workshop.py"
 NEWSROOM_RUNNER = ROOT / "newsroom_runner.py"
+
+CONSOLIDATED_MARKERS = {
+    "agents/bob.py": ["v93_39_dynamic_article_capacity"],
+    "agents/menzo_policy_v93_15.py": ["v93_39_capacity_buffer"],
+    "agents/publisher.py": ["v93_40_publisher_capacity_audit"],
+    "agents/publisher_policy_v93_20.py": ["v93_40_outer_publisher_handoff_audit"],
+    "agents/massy_policy_v93_24.py": ["v93_32"],
+    "agents/story_dedupe_v93_32.py": ["story"],
+    "newsroom_runner.py": ["v93_20_process_refinements"],
+}
 
 
 def utc_now() -> str:
@@ -49,33 +65,86 @@ def git_head() -> str:
     return "unknown"
 
 
+def git_tracked_source_status() -> list[str]:
+    try:
+        res = subprocess.run(["git", "status", "--short"], cwd=str(ROOT), text=True, capture_output=True, check=False)
+        if res.returncode != 0:
+            return []
+        lines = []
+        for line in res.stdout.splitlines():
+            path = line[3:].strip() if len(line) >= 4 else ""
+            if not path:
+                continue
+            if path.endswith(".py") or path.endswith(".yml") or path.endswith(".yaml") or path.endswith(".md") or path == ".gitignore":
+                lines.append(line)
+        return lines
+    except Exception:
+        return []
+
+
+def source_is_consolidated() -> bool:
+    missing: list[str] = []
+    for rel_path, markers in CONSOLIDATED_MARKERS.items():
+        path = ROOT / rel_path
+        if not path.exists():
+            missing.append(f"{rel_path}:missing")
+            continue
+        text = path.read_text(encoding="utf-8", errors="ignore")
+        for marker in markers:
+            if marker not in text:
+                missing.append(f"{rel_path}:{marker}")
+    if missing:
+        print(f"[BOT {BOT_VERSION}] consolidated_source=False missing_markers={missing}", flush=True)
+        return False
+    print(f"[BOT {BOT_VERSION}] consolidated_source=True", flush=True)
+    return True
+
+
 def main() -> int:
     started = utc_now()
     print(f"===== BOT CONSOLIDATED RUN START [{started}] VERSION [{BOT_VERSION}] =====", flush=True)
     print(f"[BOT {BOT_VERSION}] repo={ROOT} git_head={git_head()}", flush=True)
 
-    if not PATCH_CHAIN.exists():
-        print(f"[BOT {BOT_VERSION}] ERRORE: patch chain non trovata: {PATCH_CHAIN}", flush=True)
-        return 2
     if not NEWSROOM_RUNNER.exists():
         print(f"[BOT {BOT_VERSION}] ERRORE: newsroom_runner non trovato: {NEWSROOM_RUNNER}", flush=True)
         return 2
 
     env = os.environ.copy()
-    # The v93 newsroom is the source of truth. Keep the legacy v92 fallback disabled unless
-    # explicitly overridden for a test run.
     env.setdefault("V93_SKIP_V92_AFTER_BOB", "1")
 
+    force_bootstrap = env.get("OWTV_FORCE_PATCH_BOOTSTRAP", "").strip().lower() in {"1", "true", "yes", "on"}
     skip_bootstrap = env.get("OWTV_SKIP_PATCH_BOOTSTRAP", "").strip().lower() in {"1", "true", "yes", "on"}
-    if skip_bootstrap:
-        print(f"[BOT {BOT_VERSION}] patch bootstrap saltato per OWTV_SKIP_PATCH_BOOTSTRAP=1", flush=True)
-    else:
+    consolidated = source_is_consolidated()
+
+    if force_bootstrap:
+        print(f"[BOT {BOT_VERSION}] patch bootstrap forzato da OWTV_FORCE_PATCH_BOOTSTRAP=1", flush=True)
+    elif skip_bootstrap:
+        print(f"[BOT {BOT_VERSION}] patch bootstrap saltato da OWTV_SKIP_PATCH_BOOTSTRAP=1", flush=True)
+    elif consolidated:
+        skip_bootstrap = True
+        print(f"[BOT {BOT_VERSION}] patch bootstrap saltato automaticamente: sorgente gia consolidato", flush=True)
+
+    if not skip_bootstrap:
+        if not PATCH_CHAIN.exists():
+            print(f"[BOT {BOT_VERSION}] ERRORE: patch chain non trovata: {PATCH_CHAIN}", flush=True)
+            return 2
         code = run_step("apply_idempotent_patch_chain", [sys.executable, str(PATCH_CHAIN)], env=env)
         if code != 0:
             print(f"[BOT {BOT_VERSION}] ERRORE: bootstrap patch fallito, fermo la run", flush=True)
             return code
 
+    before_status = git_tracked_source_status()
+    if before_status:
+        print(f"[BOT {BOT_VERSION}] ATTENZIONE: sorgenti gia sporchi prima della run: {before_status}", flush=True)
+
     code = run_step("run_v93_newsroom", [sys.executable, str(NEWSROOM_RUNNER)], env=env)
+
+    after_status = git_tracked_source_status()
+    if after_status:
+        print(f"[BOT {BOT_VERSION}] ATTENZIONE: sorgenti modificati dopo la run: {after_status}", flush=True)
+    else:
+        print(f"[BOT {BOT_VERSION}] vps_clean_check=ok tracked_source_status=clean", flush=True)
+
     ended = utc_now()
     print(f"===== BOT CONSOLIDATED RUN END [{ended}] VERSION [{BOT_VERSION}] EXIT [{code}] =====", flush=True)
     return code
