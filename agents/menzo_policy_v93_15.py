@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from agents import menzo as base
+from agents.story_dedupe_v93_32 import dedupe_within_batch, is_source_opinion, remember_footprints, remember_stories, story_footprint, story_signature
 from agents.story_dedupe_v93_32 import build_generalized_fingerprint, dedupe_within_batch, find_duplicate_by_fingerprint, is_source_opinion, load_story_fingerprints, remember_fingerprints, remember_footprints, remember_stories, story_footprint, story_signature
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -408,6 +409,35 @@ def enforce_selected_cap(result: dict[str, Any]) -> None:
     result.setdefault("postprocess", {})["selected_overflow_to_pending"] = len(overflow)
 
 
+def apply_story_dedupe_to_result(result: dict[str, Any]) -> None:
+    selected = [x for x in result.get("selected", []) if isinstance(x, dict)]
+    pending = [x for x in result.get("pending", []) if isinstance(x, dict)]
+    skipped = [x for x in result.get("skipped", []) if isinstance(x, dict)]
+    candidates = selected + pending
+    kept, dupes = dedupe_within_batch(candidates)
+    selected_urls = {source_key(x.get("url") or x.get("source_url") or "") for x in selected if isinstance(x, dict)}
+    new_selected: list[dict[str, Any]] = []
+    new_pending: list[dict[str, Any]] = []
+    for item in kept:
+        key = source_key(item.get("url") or item.get("source_url") or "")
+        if key in selected_urls or str(item.get("ai_priority_label") or "").lower() == "high":
+            item["decision"] = "selected"
+            new_selected.append(item)
+        else:
+            item["decision"] = "pending"
+            new_pending.append(item)
+    for dupe in dupes:
+        dupe["decision"] = "skip"
+        dupe["priority"] = "skip"
+        dupe["article_type"] = dupe.get("article_type") or "duplicate"
+    result["selected"] = sorted(new_selected, key=sort_item, reverse=True)
+    result["pending"] = sorted(new_pending, key=sort_item, reverse=True)
+    result["skipped"] = skipped + dupes
+    result["allowed_urls_for_v92"] = [str(x.get("url") or x.get("source_url") or "") for x in result["selected"] if x.get("url") or x.get("source_url")]
+    result["handoff"] = {"to_bob_or_v92": len(result["selected"]), "pending": len(result["pending"]), "skipped": len(result["skipped"])}
+    result.setdefault("postprocess", {})["story_duplicates_skipped"] = len(dupes)
+
+
 def rebuild_decisions(result: dict[str, Any]) -> None:
     all_items: list[dict[str, Any]] = []
     for section in ["selected", "pending", "skipped"]:
@@ -596,15 +626,28 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     result.setdefault("policy", {})["softpool_excludes"] = sorted(EXCLUDED_SOFTPOOL_TYPES)
     result.setdefault("policy", {})["soft_news_ttl_hours"] = SOFTNEWS_TTL_HOURS
     result.setdefault("policy", {})["menzo_hard_skips_exported_to_massy"] = True
+    result.setdefault("policy", {})["source_opinion_skip"] = True
+    result.setdefault("policy", {})["story_footprint_dedupe_before_bob"] = True
+    result.setdefault("policy", {})["story_footprints_ttl_days"] = 7
+    result.setdefault("policy", {})["medical_return_major_brands_only"] = True
+    result.setdefault("policy", {})["brand_rank_tiebreaker"] = "WWE/NXT/AEW > TNA/ROH > OVW/indie"
+    result.setdefault("policy", {})["medical_return_major_brands_only"] = True
+    result.setdefault("policy", {})["brand_rank_tiebreaker"] = "WWE/NXT/AEW > TNA/ROH > OVW/indie"
+    result.setdefault("policy", {})["story_dedupe_before_bob"] = True
     result.setdefault("policy", {})["news_capacity_buffer_for_bob"] = MAX_SELECTED_THIS_RUN
     result.setdefault("policy", {})["source_opinion_skip"] = True
     result.setdefault("policy", {})["story_footprint_dedupe_before_bob"] = True
     result.setdefault("policy", {})["story_footprints_ttl_days"] = 7
     result.setdefault("policy", {})["medical_return_major_brands_only"] = True
     result.setdefault("policy", {})["brand_rank_tiebreaker"] = "WWE/NXT/AEW > TNA/ROH > OVW/indie"
+    result.setdefault("policy", {})["medical_return_major_brands_only"] = True
+    result.setdefault("policy", {})["brand_rank_tiebreaker"] = "WWE/NXT/AEW > TNA/ROH > OVW/indie"
+    result.setdefault("policy", {})["medical_return_major_brands_only"] = True
+    result.setdefault("policy", {})["brand_rank_tiebreaker"] = "WWE/NXT/AEW > TNA/ROH > OVW/indie"
     result.setdefault("policy", {})["story_dedupe_before_bob"] = True
     save_softpool(result)
     save_hard_skips(result)
+    remember_stories(result.get("selected", []), reason="menzo_selected")
     remember_stories(result.get("selected", []), reason="menzo_selected")
     remember_footprints(result.get("selected", []), reason="menzo_selected")
     remember_fingerprints(result.get("selected", []), reason="menzo_selected")
@@ -612,7 +655,7 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     write_json(ARTIFACT_DECISIONS_FILE, result)
     write_json(MENZO_DECISIONS_FILE, result)
     write_json(V92_ALLOWED_URLS_FILE, {"generated_at": utc_now(), "version": MENZO_VERSION, "allowed_urls": result.get("allowed_urls_for_v92", [])})
-    print(f"[MENZO v93.34] Decisione selettiva | selected={len(result.get('selected', []))} pending={len(result.get('pending', []))} skipped={len(result.get('skipped', []))} source_opinion={result.get('postprocess', {}).get('source_opinion_skipped', 0)} footprint_dupes={result.get('postprocess', {}).get('story_footprint_duplicates_skipped', 0)} fingerprint_dupes={result.get('postprocess', {}).get('story_fingerprint_duplicates_skipped', 0)} ai_skip_bound={result.get('postprocess', {}).get('ai_skip_binding_moved', 0)} medical_non_major={result.get('postprocess', {}).get('medical_return_non_major_brand_skipped', 0)} softpool={len(load_softpool())} capacity_buffer={MAX_SELECTED_THIS_RUN}", flush=True)
+    print(f"[MENZO v93.34] Decisione selettiva | selected={len(result.get('selected', []))} pending={len(result.get('pending', []))} skipped={len(result.get('skipped', []))} source_opinion={result.get('postprocess', {}).get('source_opinion_skipped', 0)} footprint_dupes={result.get('postprocess', {}).get('story_footprint_duplicates_skipped', 0)} fingerprint_dupes={result.get('postprocess', {}).get('story_fingerprint_duplicates_skipped', 0)} ai_skip_bound={result.get('postprocess', {}).get('ai_skip_binding_moved', 0)} fingerprint_dupes={result.get('postprocess', {}).get('story_fingerprint_duplicates_skipped', 0)} ai_skip_bound={result.get('postprocess', {}).get('ai_skip_binding_moved', 0)} medical_non_major={result.get('postprocess', {}).get('medical_return_non_major_brand_skipped', 0)} softpool={len(load_softpool())} capacity_buffer={MAX_SELECTED_THIS_RUN} capacity_buffer={MAX_SELECTED_THIS_RUN}", flush=True)
     return result
 
 

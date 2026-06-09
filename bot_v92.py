@@ -516,7 +516,7 @@ def run_report_pipeline(wp_ok: bool, now: datetime) -> int:
     else:
         log("[REPORT v92] V93 Simone gate non vincolante: decisioni assenti o gate disattivato")
 
-    entries = feed_entries(feeds_cfg.get("feeds", []))
+    entries: Optional[List[Dict[str, Any]]] = None
     published = 0
 
     for report in reports_cfg.get("reports", []):

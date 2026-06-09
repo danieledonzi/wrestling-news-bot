@@ -210,12 +210,12 @@ def display_embed_url(url: str) -> str:
 def embed_block(url: str) -> str:
     u = display_embed_url(url)
     host = urlparse(u).netloc.lower().replace("www.", "")
-    if host in {"youtube.com", "youtube-nocookie.com", "youtu.be", "instagram.com"}:
-        # v93.35: YouTube IDs are case-sensitive, so keep the original display URL.
-        # Instagram posts/reels are also left as plain URLs: WordPress/plugin resolves them reliably.
+    if host in {"youtube.com", "youtube-nocookie.com", "youtu.be"}:
+        # v93.33: YouTube embeds work best in WordPress as a plain URL on its own line.
+        # This avoids an ugly Shortcode block in the editor while preserving front-end oEmbed.
         return html.escape(u)
-    # v93.33/v93.35: X/Twitter and similar social embeds stay shortcode-backed because
-    # plain X/Twitter URLs often remain plain text until a manual editor conversion.
+    # v93.33: social embeds are kept as shortcode blocks because plain X/Twitter URLs
+    # often remain plain text until a manual editor conversion.
     return '<!-- wp:shortcode -->\n[embed]' + html.escape(u) + '[/embed]\n<!-- /wp:shortcode -->'
 
 
@@ -265,7 +265,6 @@ def existing_story_duplicate(history: dict[str, Any], signature: str) -> dict[st
         if isinstance(item, dict) and item.get("story_signature") == signature:
             return item
     return None
-
 
 
 def clean_body_for_wordpress(body_html: str) -> str:
@@ -448,12 +447,16 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
         "wp": {"ready": wp_ok, "reason": wp_reason, "post_status": POST_STATUS, "dry_run": DRY_RUN},
         "results": results,
         "skipped_approved_articles": capacity_skipped,
+        "skipped_approved_articles": capacity_skipped,
         "handoff": {
             "published": sum(1 for r in results if r.get("status") == "published"),
             "already_published": sum(1 for r in results if r.get("status") == "already_published"),
             "dry_run": sum(1 for r in results if r.get("status") == "dry_run"),
             "wp_not_ready": sum(1 for r in results if r.get("status") == "wp_not_ready"),
             "errors": sum(1 for r in results if r.get("status") == "publish_error"),
+            "skipped_capacity": len(capacity_skipped),
+            "approved_not_attempted": len(capacity_skipped),
+            "approved_accounted_for": len(results_for_audit),
             "skipped_capacity": len(capacity_skipped),
             "approved_not_attempted": len(capacity_skipped),
             "approved_accounted_for": len(results_for_audit),
