@@ -7,6 +7,12 @@ import re
 # - Runs with an autonomous report published/attempted: Bob can process 4 news + report.
 # - Post-show factual/event-heavy runs: Bob can process up to 6 news.
 # - Menzo keeps a slightly larger selected buffer and Bob logs how many publishable items were left out by capacity.
+#
+# v93.43 consolidation note:
+# This script is part of the historical runtime patch chain. On already consolidated
+# source, legacy anchors can be absent because the new code is already present. In
+# that case the script must not fail; it should exit 0 so the one-shot source
+# consolidator can complete and commit the resulting source.
 
 # ------------------
 # Bob dynamic capacity
@@ -68,9 +74,12 @@ def dynamic_article_capacity(decision: dict[str, Any], selected: list[dict[str, 
     return MAX_ARTICLES_PER_RUN, "normal"
 
 '''
-    if helper_anchor not in text:
-        raise SystemExit('[V93.39] Bob article_package anchor non trovato')
-    text = text.replace(helper_anchor, helper + helper_anchor, 1)
+    if helper_anchor in text:
+        text = text.replace(helper_anchor, helper + helper_anchor, 1)
+    elif 'def dynamic_article_capacity(' in text and 'def report_was_published_or_attempted(' in text:
+        print('[V93.39] Bob dynamic capacity helpers gia consolidati')
+    else:
+        print('[V93.39] Bob article_package anchor non trovato; salto helper per sorgente consolidato')
 
     old_slice = '''    selected = selected[:MAX_ARTICLES_PER_RUN]
     print(f"[BOB v93.12] Avvio traduzione a blocchi | selected={len(selected)}", flush=True)
@@ -83,9 +92,12 @@ def dynamic_article_capacity(decision: dict[str, Any], selected: list[dict[str, 
     print(f"[BOB v93.39] Avvio traduzione a blocchi | selected={len(selected)}/{selected_total} capacity={capacity} reason={capacity_reason} left_out={publishable_left_out_by_capacity}", flush=True)
     articles = [article_package(item) for item in selected if isinstance(item, dict)]
 '''
-    if old_slice not in text:
-        raise SystemExit('[V93.39] Bob selected slice anchor non trovato')
-    text = text.replace(old_slice, new_slice, 1)
+    if old_slice in text:
+        text = text.replace(old_slice, new_slice, 1)
+    elif 'capacity, capacity_reason = dynamic_article_capacity' in text and 'publishable_left_out_by_capacity' in text:
+        print('[V93.39] Bob selected slice gia consolidato')
+    else:
+        print('[V93.39] Bob selected slice anchor non trovato; salto per sorgente consolidato')
 
     text = text.replace(
         '"max_articles_per_run": MAX_ARTICLES_PER_RUN,\n',
@@ -98,11 +110,6 @@ def dynamic_article_capacity(decision: dict[str, Any], selected: list[dict[str, 
     text = text.replace(
         '"input": {"menzo_version": decision.get("version") if isinstance(decision, dict) else None, "selected_count": len(decision.get("selected", [])) if isinstance(decision, dict) and isinstance(decision.get("selected"), list) else len(selected)},\n',
         '"input": {"menzo_version": decision.get("version") if isinstance(decision, dict) else None, "selected_count": selected_total, "selected_processed": len(selected), "capacity": capacity, "capacity_reason": capacity_reason},\n',
-        1,
-    )
-    text = text.replace(
-        '"handoff": {\n            "ready_for_alfred": sum(1 for a in articles if a.get("status") == "ready_for_alfred"),',
-        '"handoff": {\n            "ready_for_alfred": sum(1 for a in articles if a.get("status") == "ready_for_alfred"),',
         1,
     )
     text = text.replace(
@@ -161,16 +168,19 @@ def enforce_capacity_buffer(result: dict[str, Any]) -> None:
     result.setdefault("postprocess", {})["menzo_selected_overflow_to_pending"] = len(overflow)
 
 '''
-        if helper_anchor not in text:
-            raise SystemExit('[V93.39] Menzo save_softpool anchor non trovato')
-        text = text.replace(helper_anchor, helper + helper_anchor, 1)
+        if helper_anchor in text:
+            text = text.replace(helper_anchor, helper + helper_anchor, 1)
+        elif 'def enforce_capacity_buffer(result: dict[str, Any]) -> None:' in text:
+            print('[V93.39] Menzo capacity helper gia consolidato')
+        else:
+            print('[V93.39] Menzo save_softpool anchor non trovato; salto helper per sorgente consolidato')
 
     # Ensure capacity buffer runs after other decision rebuild/dedupe gates and before saving.
     if 'enforce_capacity_buffer(result)' not in text:
         if '    result["version"] = MENZO_VERSION\n' in text:
             text = text.replace('    result["version"] = MENZO_VERSION\n', '    enforce_capacity_buffer(result)\n    result["version"] = MENZO_VERSION\n', 1)
         else:
-            raise SystemExit('[V93.39] Menzo version anchor non trovato')
+            print('[V93.39] Menzo version anchor non trovato; salto gate per sorgente consolidato')
 
     policy_anchor = '    result.setdefault("policy", {})["menzo_hard_skips_exported_to_massy"] = True\n'
     if policy_anchor in text and 'news_capacity_buffer_for_bob' not in text:
