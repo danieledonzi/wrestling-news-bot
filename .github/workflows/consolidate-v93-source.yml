@@ -1,0 +1,89 @@
+name: Consolidate v93 source
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/consolidate-v93-source.yml'
+      - 'scripts/apply_v92_report_workshop.py'
+      - 'scripts/apply_v93_*.py'
+      - 'bot.py'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: owtv-v93-source-consolidation
+  cancel-in-progress: false
+
+jobs:
+  consolidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Apply patch chain once
+        run: |
+          set -e
+          python scripts/apply_v92_report_workshop.py
+
+      - name: Verify consolidated markers
+        run: |
+          set -e
+          python - <<'PY'
+          from pathlib import Path
+          required = {
+              'agents/bob.py': ['v93_39_dynamic_article_capacity'],
+              'agents/menzo_policy_v93_15.py': ['v93_39_capacity_buffer'],
+              'agents/publisher.py': ['v93_40_publisher_capacity_audit'],
+              'agents/publisher_policy_v93_20.py': ['v93_40_outer_publisher_handoff_audit'],
+              'agents/massy_policy_v93_24.py': ['v93_32'],
+              'agents/story_dedupe_v93_32.py': ['story'],
+              'bot.py': ['v93_43_fully_consolidated_vps_runtime'],
+              'newsroom_runner.py': ['v93_20_process_refinements'],
+          }
+          missing = []
+          for path, markers in required.items():
+              text = Path(path).read_text(encoding='utf-8', errors='ignore')
+              for marker in markers:
+                  if marker not in text:
+                      missing.append(f'{path}:{marker}')
+          if missing:
+              raise SystemExit('missing consolidated markers: ' + ', '.join(missing))
+          print('[V93.43 CONSOLIDATE] markers ok')
+          PY
+
+      - name: Commit consolidated source if changed
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add agents/bob.py \
+                  agents/massy_policy_v93_24.py \
+                  agents/menzo_policy_v93_15.py \
+                  agents/publisher.py \
+                  agents/publisher_policy_v93_16.py \
+                  agents/publisher_policy_v93_20.py \
+                  agents/story_dedupe_v93_32.py \
+                  bot_v92.py \
+                  modules/news_workshop_v92.py \
+                  modules/report_workshop_v92.py \
+                  bot.py
+          if git diff --cached --quiet; then
+            echo '[V93.43 CONSOLIDATE] source already consolidated; no commit needed'
+          else
+            git commit -m 'feat(v93.43): consolidate patched v93 source for VPS runtime'
+            git pull --rebase
+            git push
+          fi
