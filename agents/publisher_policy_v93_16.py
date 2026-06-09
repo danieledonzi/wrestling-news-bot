@@ -15,7 +15,7 @@ ARTIFACT_DIR = ROOT / "artifacts" / "newsroom"
 PUBLISHER_STATUS_FILE = NEWSROOM_STATE_DIR / "publisher_status_latest.json"
 ARTIFACT_PUBLISHER_FILE = ARTIFACT_DIR / "publisher_result.json"
 
-VERSION = "v93_27_publisher_embed_dedupe_normalized"
+VERSION = "v93_26_publisher_embed_cleanup"
 
 CATEGORY_PRIORITY = {
     "Business": ["Business", "World"],
@@ -162,30 +162,82 @@ def remove_duplicate_embed_urls_preserve_first(text: str) -> str:
     return text
 
 
+def normalize_embed_key(url: str) -> str:
+    url = clean_url(url)
+    url = re.sub(r"[?&]feature=oembed\b", "", url, flags=re.I)
+    url = re.sub(r"[?&]utm_[^&]+", "", url, flags=re.I)
+    url = url.replace("?&", "?").rstrip("?&")
+    return url.rstrip("/").lower()
+
+
+def remove_duplicate_embed_urls_preserve_first(text: str) -> str:
+    seen: set[str] = set()
+
+    def block_repl(match: re.Match[str]) -> str:
+        block = match.group(0)
+        found = EMBED_URL_ANY_RE.search(block)
+        if not found:
+            return block
+        key = normalize_embed_key(found.group(1))
+        if key in seen:
+            return ""
+        seen.add(key)
+        return block
+
+    text = WP_EMBED_BLOCK_RE.sub(block_repl, text)
+
+    def p_repl(match: re.Match[str]) -> str:
+        key = normalize_embed_key(match.group(1))
+        if key in seen:
+            return ""
+        seen.add(key)
+        return match.group(0)
+
+    text = P_ONLY_EMBED_RE.sub(p_repl, text)
+    return text
+
+
 def convert_plain_embed_urls_to_blocks(content: str) -> str:
     text = content or ""
 
     def repl_p_start(match: re.Match[str]) -> str:
         url = clean_url(match.group(1))
         rest = (match.group(2) or "").strip()
-        block = "\n\n" + gutenberg_embed_block(url) + "\n\n"
+        block = "
+
+" + gutenberg_embed_block(url) + "
+
+"
         if rest:
             return block + f"<p>{rest}</p>"
         return block
 
     def repl_p_only(match: re.Match[str]) -> str:
-        return "\n\n" + gutenberg_embed_block(match.group(1)) + "\n\n"
+        return "
+
+" + gutenberg_embed_block(match.group(1)) + "
+
+"
 
     def repl_line(match: re.Match[str]) -> str:
-        return "\n\n" + gutenberg_embed_block(match.group(1)) + "\n\n"
+        return "
+
+" + gutenberg_embed_block(match.group(1)) + "
+
+"
 
     text = P_START_EMBED_RE.sub(repl_p_start, text)
     text = P_URL_THEN_TEXT_RE.sub(repl_p_start, text)
     text = P_ONLY_EMBED_RE.sub(repl_p_only, text)
     text = EMBED_LINE_RE.sub(repl_line, text)
     text = remove_duplicate_embed_urls_preserve_first(text)
-    text = re.sub(r"(<!-- /wp:embed -->)\s*(<p>)", r"\1\n\n\2", text)
-    text = re.sub(r"\n{3,}", "\n\n", text)
+    text = re.sub(r"(<!-- /wp:embed -->)\s*(<p>)", r"
+
+", text)
+    text = re.sub(r"
+{3,}", "
+
+", text)
     return text
 
 

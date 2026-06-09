@@ -15,7 +15,7 @@ PUBLISHER_STATUS_FILE = NEWSROOM_STATE_DIR / "publisher_status_latest.json"
 ARTIFACT_PUBLISHER_FILE = ARTIFACT_DIR / "publisher_result.json"
 RETRY_QUEUE_FILE = NEWSROOM_STATE_DIR / "publish_retry_queue.json"
 
-VERSION = "v93_20_1_publisher_retry_queue_recursion_fix"
+VERSION = "v93_40_outer_publisher_handoff_audit"
 RETRY_TTL_HOURS = 36
 MAX_QUEUE_ITEMS = 30
 
@@ -201,6 +201,25 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
         alfred_for_publish, old_queue, queued_keys = prepare_alfred_with_queue(alfred if isinstance(alfred, dict) else {})
         input_articles = [x for x in alfred_for_publish.get("approved_articles", []) if isinstance(x, dict)]
         result = previous.run_publisher(alfred_for_publish)
+        result_results = result.get("results", []) if isinstance(result.get("results"), list) else []
+        result_skipped = result.get("skipped_approved_articles", []) if isinstance(result.get("skipped_approved_articles"), list) else []
+        accounted_keys = {source_key(r.get("source_url") or "") for r in result_results + result_skipped if isinstance(r, dict)}
+        missing = []
+        for article in input_articles:
+            key = source_key(article.get("source_url") or "")
+            if key and key not in accounted_keys:
+                missing.append({
+                    "source_url": article.get("source_url"),
+                    "title_it": article.get("title_it"),
+                    "status": "skipped_unaccounted",
+                    "reason": "approved_article_missing_from_publisher_results",
+                })
+        if missing:
+            result.setdefault("skipped_approved_articles", []).extend(missing)
+            result.setdefault("handoff", {})["skipped_unaccounted"] = len(missing)
+            result.setdefault("handoff", {})["approved_accounted_for"] = len(accounted_keys) + len(missing)
+        result.setdefault("handoff", {})["approved_input_total"] = len(input_articles)
+        result.setdefault("policy", {})["outer_publisher_handoff_audit"] = True
         queue_stats = update_queue_after_run(input_articles, result.get("results", []) if isinstance(result.get("results"), list) else [], old_queue)
     finally:
         previous.category_names_for_hint = original_category

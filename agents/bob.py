@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import base64
 import html
 import json
 import os
@@ -20,11 +21,14 @@ ARTIFACT_DIR = ROOT / "artifacts" / "newsroom"
 
 MENZO_DECISIONS_FILE = NEWSROOM_STATE_DIR / "menzo_decisions_latest.json"
 BOB_ARTICLES_FILE = NEWSROOM_STATE_DIR / "bob_articles_latest.json"
+SIMONE_REPORT_STATUS_FILE = NEWSROOM_STATE_DIR / "simone_report_publish_latest.json"
 ARTIFACT_BOB_FILE = ARTIFACT_DIR / "bob_articles.json"
 
-BOB_VERSION = "v93_12_prudent_embed_cleanup"
+BOB_VERSION = "v93_39_dynamic_article_capacity"
 REQUEST_TIMEOUT = int(os.getenv("V93_BOB_REQUEST_TIMEOUT", "18"))
-MAX_ARTICLES_PER_RUN = int(os.getenv("V93_BOB_MAX_ARTICLES_PER_RUN", "3"))
+MAX_ARTICLES_PER_RUN = int(os.getenv("V93_BOB_MAX_ARTICLES_PER_RUN", "5"))
+MAX_ARTICLES_WITH_REPORT = int(os.getenv("V93_BOB_MAX_ARTICLES_WITH_REPORT", "4"))
+POST_SHOW_MAX_ARTICLES = int(os.getenv("V93_BOB_POST_SHOW_MAX_ARTICLES", "6"))
 AUDIT_CHARS = int(os.getenv("V93_BOB_AUDIT_CHARS", "24000"))
 MODEL_CHAIN = [m.strip() for m in os.getenv("GEMINI_MODEL_CHAIN", "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash").split(",") if m.strip()]
 
@@ -181,7 +185,7 @@ def is_valid_editorial_embed_url(url: str) -> bool:
     if any(bad in url.lower() for bad in ["intent/tweet", "sharer.php", "share?", "/profile.php", "addthis", "mailto:"]):
         return False
     if host in {"x.com", "twitter.com"}:
-        return "/status/" in path or "/statuses/" in path
+        return "/status/" in path or "/statuses/" in path or path.startswith("i/status/")
     if host == "bsky.app":
         return "/post/" in path
     if host == "instagram.com":
@@ -219,6 +223,68 @@ def is_probable_long_quote(text: str) -> bool:
     return len(text) >= 90 and (text.startswith(("\"", "“", "'")) or bool(QUOTE_RE.search(text)))
 
 
+def decode_possible_rsn_lazy_embed_html(value: str) -> str:
+    raw = str(value or "").strip()
+    if not raw:
+        return ""
+    try:
+        return base64.b64decode(raw + "=" * (-len(raw) % 4)).decode("utf-8", errors="ignore")
+    except Exception:
+        return ""
+
+
+def pick_srcset_url(value: str) -> str:
+    raw = html.unescape(str(value or "").replace("\/", "/")).strip()
+    if not raw:
+        return ""
+    best_url = ""
+    best_width = -1
+    for part in raw.split(","):
+        bits = part.strip().split()
+        if not bits:
+            continue
+        url = bits[0].strip()
+        width = 0
+        if len(bits) > 1:
+            m = re.search(r"(\d+)w", bits[1])
+            if m:
+                width = int(m.group(1))
+        if width >= best_width:
+            best_url = url
+            best_width = width
+    return best_url
+
+
+def normalize_ringside_image_url(url: str) -> str:
+    u = html.unescape(str(url or "").replace("\/", "/")).strip()
+    if not u or u.startswith("data:"):
+        return ""
+    u = re.sub(r"\?.*$", "", u)
+    u = u.replace("/wp-content/smush-avif/", "/wp-content/uploads/")
+    if u.lower().endswith(".avif"):
+        u = u[:-5]
+    return u
+
+
+def image_url_from_node(node: Tag, base_url: str) -> str:
+    candidates: list[str] = []
+    for attr in ["src", "data-src", "data-lazy-src", "data-original", "data-orig-src"]:
+        value = node.get(attr)
+        if value:
+            candidates.append(str(value))
+    for attr in ["srcset", "data-srcset", "data-lazy-srcset", "data-original-srcset"]:
+        value = node.get(attr)
+        if value:
+            picked = pick_srcset_url(str(value))
+            if picked:
+                candidates.append(picked)
+    for raw in candidates:
+        url = normalize_ringside_image_url(absolute_url(base_url, raw))
+        if url:
+            return url
+    return ""
+
+
 def extract_embed_urls_from_text(raw: str, base_url: str) -> list[str]:
     text = html.unescape((raw or "").replace("\\/", "/"))
     out: list[str] = []
@@ -233,10 +299,22 @@ def extract_embed_urls_from_text(raw: str, base_url: str) -> list[str]:
 
 def extract_embed_url(node: Tag, base_url: str) -> str:
     candidates: list[str] = []
-    for attr in ["src", "href", "cite", "data-url", "data-href", "data-src", "data-lazy-src", "data-embed-url", "data-permalink"]:
+    for attr in ["src", "href", "cite", "data-url", "data-href", "data-src", "data-lazy-src", "data-embed-url", "data-permalink", "data-instgrm-permalink"]:
         value = node.get(attr)
         if value:
             candidates.append(str(value))
+    lazy_html = decode_possible_rsn_lazy_embed_html(str(node.get("data-rsn-html") or ""))
+    if lazy_html:
+        candidates.extend(extract_embed_urls_from_text(lazy_html, base_url))
+        try:
+            lazy_soup = BeautifulSoup(lazy_html, "html.parser")
+            for tag in lazy_soup.find_all(True):
+                for attr in ["href", "src", "data-instgrm-permalink", "data-permalink"]:
+                    value = tag.get(attr)
+                    if value:
+                        candidates.append(str(value))
+        except Exception:
+            pass
     for link in node.find_all("a", href=True):
         candidates.append(str(link.get("href")))
     candidates.extend(extract_embed_urls_from_text(str(node), base_url))
@@ -289,8 +367,8 @@ def element_from_node(node: Tag, base_url: str) -> dict[str, Any] | None:
         text = clean_text(node.get_text(" "))
         if is_bio_or_footer_text(text) or any(p.search(text) for p in SOURCE_INTRO_PATTERNS):
             return None
-        if is_probable_long_quote(text):
-            return {"type": "quote", "text": text, "source_tag": name}
+        # v93.26: do not infer quote blocks from quotation marks in normal paragraphs.
+        # Only original source <blockquote> nodes are rendered as blockquotes.
         return {"type": "text", "text": text}
     if name in {"h2", "h3", "h4"}:
         text = clean_text(node.get_text(" "))
@@ -307,11 +385,8 @@ def element_from_node(node: Tag, base_url: str) -> dict[str, Any] | None:
         if rows:
             return {"type": "table", "rows": rows, "markdown": table_to_markdown(rows)}
     if name == "img":
-        src = node.get("src") or node.get("data-src") or node.get("data-lazy-src") or ""
-        if not src and node.get("srcset"):
-            src = str(node.get("srcset")).split(",")[0].strip().split(" ")[0]
-        src = absolute_url(base_url, src)
-        if not src or src.startswith("data:"):
+        src = image_url_from_node(node, base_url)
+        if not src:
             return None
         return {"type": "image", "url": src, "alt": clean_text(node.get("alt", ""))}
     return None
@@ -457,6 +532,7 @@ Traduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. N
 
 REGOLE
 - Non riassumere e non aggiungere informazioni.
+- Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.
 - Conserva fedelmente il significato di ogni blocco.
 - Le citazioni vanno tradotte integralmente.
 - Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.
@@ -516,6 +592,41 @@ def render_body(elements: list[dict[str, Any]], translations: dict[str, str]) ->
             if is_valid_editorial_embed_url(url):
                 out.append("\n" + html.escape(url) + "\n")
     return "\n".join(x for x in out if x).strip()
+
+
+def report_was_published_or_attempted() -> bool:
+    data = load_json(SIMONE_REPORT_STATUS_FILE, {})
+    if not isinstance(data, dict):
+        return False
+    handoff = data.get("handoff") if isinstance(data.get("handoff"), dict) else {}
+    if int(handoff.get("published", 0) or 0) > 0:
+        return True
+    if int(handoff.get("already_published", 0) or 0) > 0:
+        return True
+    # If Simone had ready reports but WordPress was not ready, keep the next news batch slightly smaller.
+    # This avoids overloading the first good run after a report window while keeping the report as the editorial anchor.
+    if int(handoff.get("wp_not_ready", 0) or 0) > 0:
+        return True
+    return False
+
+
+def is_post_show_candidate(item: dict[str, Any]) -> bool:
+    blob = " ".join(str(item.get(k) or "") for k in ["title", "source_title", "category_hint", "article_type", "reason", "ai_editorial_reason", "event_key"]).lower()
+    show_terms = ["raw", "smackdown", "nxt", "dynamite", "collision", "clash", "forbidden door", "summer blockbuster", "paris", "king of the ring", "queen of the ring"]
+    factual_terms = ["result", "results", "wins", "defeats", "title match", "match confirmed", "match revealed", "added", "returns", "return", "injury", "infortun", "announced", "scheduled", "set for", "confermato", "rivelato", "vittoria", "titolo"]
+    article_type = str(item.get("article_type") or "").lower()
+    if article_type in {"event_outcome", "match_announcement", "injury_update", "hard_news"}:
+        return True
+    return any(t in blob for t in show_terms) and any(t in blob for t in factual_terms)
+
+
+def dynamic_article_capacity(decision: dict[str, Any], selected: list[dict[str, Any]]) -> tuple[int, str]:
+    if report_was_published_or_attempted():
+        return max(0, MAX_ARTICLES_WITH_REPORT), "report_run"
+    post_show_count = sum(1 for item in selected if isinstance(item, dict) and is_post_show_candidate(item))
+    if post_show_count >= 3:
+        return max(MAX_ARTICLES_PER_RUN, POST_SHOW_MAX_ARTICLES), "post_show_event_heavy"
+    return MAX_ARTICLES_PER_RUN, "normal"
 
 
 def article_package(item: dict[str, Any]) -> dict[str, Any]:
@@ -581,8 +692,11 @@ def run_bob(menzo_decision: dict[str, Any] | None = None) -> dict[str, Any]:
     selected = decision.get("selected", []) if isinstance(decision, dict) else []
     if not isinstance(selected, list):
         selected = []
-    selected = selected[:MAX_ARTICLES_PER_RUN]
-    print(f"[BOB v93.12] Avvio traduzione a blocchi | selected={len(selected)}", flush=True)
+    selected_total = len(selected)
+    capacity, capacity_reason = dynamic_article_capacity(decision if isinstance(decision, dict) else {}, selected)
+    selected = selected[:capacity]
+    publishable_left_out_by_capacity = max(0, selected_total - len(selected))
+    print(f"[BOB v93.39] Avvio traduzione a blocchi | selected={len(selected)}/{selected_total} capacity={capacity} reason={capacity_reason} left_out={publishable_left_out_by_capacity}", flush=True)
     articles = [article_package(item) for item in selected if isinstance(item, dict)]
     result = {
         "agent": "Bob",
@@ -599,23 +713,28 @@ def run_bob(menzo_decision: dict[str, Any] | None = None) -> dict[str, Any]:
             "filter_cta_before_gemini": True,
             "recover_embeds_from_raw_html": False,
             "embed_urls_require_post_or_video_shape": True,
-            "preserve_quotes_as_blockquote": True,
+            "preserve_quotes_as_blockquote": "source_blockquote_only",
             "preserve_tables_as_html_tables": True,
             "ordered_elements": ["text", "heading", "quote", "table", "image", "embed"],
             "model_chain": MODEL_CHAIN,
             "max_articles_per_run": MAX_ARTICLES_PER_RUN,
+            "max_articles_with_report": MAX_ARTICLES_WITH_REPORT,
+            "post_show_max_articles": POST_SHOW_MAX_ARTICLES,
+            "dynamic_article_capacity": True,
             "prompt_family": "v92_historical_natural_full_translation_blocks",
             "diagnostic_mode": True,
             "fallback_mode": False,
         },
-        "input": {"menzo_version": decision.get("version") if isinstance(decision, dict) else None, "selected_count": len(decision.get("selected", [])) if isinstance(decision, dict) and isinstance(decision.get("selected"), list) else len(selected)},
+        "input": {"menzo_version": decision.get("version") if isinstance(decision, dict) else None, "selected_count": selected_total, "selected_processed": len(selected), "capacity": capacity, "capacity_reason": capacity_reason},
         "articles": articles,
         "handoff": {
             "ready_for_alfred": sum(1 for a in articles if a.get("status") == "ready_for_alfred"),
             "translation_pending": sum(1 for a in articles if a.get("status") == "extraction_ready_translation_pending"),
             "errors": sum(1 for a in articles if a.get("status") == "error"),
             "extraction_empty": sum(1 for a in articles if a.get("status") == "extraction_empty"),
+            "publishable_left_out_by_capacity": publishable_left_out_by_capacity,
         },
+        "postprocess": {"capacity": capacity, "capacity_reason": capacity_reason, "selected_total_before_capacity": selected_total, "selected_processed": len(selected), "publishable_left_out_by_capacity": publishable_left_out_by_capacity},
     }
     write_json(ARTIFACT_BOB_FILE, result)
     write_json(BOB_ARTICLES_FILE, result)

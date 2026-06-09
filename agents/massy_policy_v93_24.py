@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from agents.massy import run_massy as base_run_massy, write_json
+from agents.story_dedupe_v93_32 import dedupe_against_memory, dedupe_within_batch, load_published_story_memory, remember_stories
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_DIR = ROOT / "config"
@@ -21,7 +22,7 @@ ARTIFACT_MASSY_FILE = ARTIFACT_DIR / "massy_board.json"
 REPORT_STATUS_FILE = STATE_DIR / "report_status.json"
 REPORTS_CONFIG = CONFIG_DIR / "reports_v92.json"
 
-VERSION = "v93_24_massy_show_news_before_report_closure"
+VERSION = "v93_32_massy_story_dedupe"
 MAX_NEWS_AGE_DAYS = int(os.getenv("V93_MASSY_MAX_NEWS_AGE_DAYS", "7"))
 DAY_NAMES = {"monday": 0, "tuesday": 1, "wednesday": 2, "thursday": 3, "friday": 4, "saturday": 5, "sunday": 6}
 SHOW_PATTERNS = {
@@ -208,9 +209,14 @@ def run_massy() -> dict[str, Any]:
     candidates = [x for x in board.get("news_candidates_for_menzo", []) if isinstance(x, dict)]
     report_candidates = [x for x in board.get("report_candidates", []) if isinstance(x, dict)]
     published_reports, active_report_ids, waiting_report_ids = report_coverage(report_candidates)
+    story_memory = load_published_story_memory()
+    candidates, story_memory_skips = dedupe_against_memory(candidates, story_memory)
+    candidates, story_batch_skips = dedupe_within_batch(candidates)
     memory = menzo_skip_memory()
     kept: list[dict[str, Any]] = []
-    moved: list[dict[str, Any]] = []
+    moved: list[dict[str, Any]] = list(story_memory_skips) + list(story_batch_skips)
+    story_memory_skip_count = len(story_memory_skips)
+    story_batch_skip_count = len(story_batch_skips)
     filtered_reports: list[dict[str, Any]] = []
     report_skips: list[dict[str, Any]] = []
     menzo_memory_count = old_count = report_skip_count = recap_skip_count = factual_count = post_show_count = soft_reaction_count = 0
@@ -272,6 +278,7 @@ def run_massy() -> dict[str, Any]:
     board.setdefault("binding", {})["show_factual_news_allowed_before_report"] = True
     board.setdefault("binding", {})["menzo_hard_skip_memory_is_binding"] = True
     board.setdefault("binding", {})["news_older_than_7_days_are_hard_skips"] = True
+    board.setdefault("binding", {})["story_dedupe_before_menzo"] = True
     board["handoff"]["to_simone"] = len(filtered_reports)
     board["handoff"]["to_menzo"] = len(kept)
     board["handoff"]["hard_skipped"] = len(board.get("hard_skipped", []))
@@ -282,11 +289,13 @@ def run_massy() -> dict[str, Any]:
     board["handoff"]["event_factual_news_to_menzo"] = factual_count
     board["handoff"]["post_show_hard_news_to_menzo"] = post_show_count
     board["handoff"]["event_soft_reactions_to_menzo"] = soft_reaction_count
+    board["handoff"]["story_memory_hard_skipped"] = story_memory_skip_count
+    board["handoff"]["story_batch_hard_skipped"] = story_batch_skip_count
     board["known_menzo_hard_skip_urls"] = len(memory)
     board["active_report_ids_for_recap_suppression"] = sorted(active_report_ids)
     board["waiting_report_ids_for_show_news_boost"] = sorted(waiting_report_ids)
     board["published_due_reports"] = published_reports
     write_json(ARTIFACT_MASSY_FILE, board)
     write_json(MASSY_BOARD_FILE, board)
-    print(f"[MASSY v93.24] Policy applicata | to_simone={board['handoff']['to_simone']} to_menzo={board['handoff']['to_menzo']} menzo_skip={menzo_memory_count} old_skip={old_count} report_skip={report_skip_count} recap_skip={recap_skip_count} factual={factual_count} post_show={post_show_count} soft_show={soft_reaction_count}", flush=True)
+    print(f"[MASSY v93.32] Policy applicata | to_simone={board['handoff']['to_simone']} to_menzo={board['handoff']['to_menzo']} menzo_skip={menzo_memory_count} old_skip={old_count} story_mem_skip={story_memory_skip_count} story_batch_skip={story_batch_skip_count} report_skip={report_skip_count} recap_skip={recap_skip_count} factual={factual_count} post_show={post_show_count} soft_show={soft_reaction_count}", flush=True)
     return board
