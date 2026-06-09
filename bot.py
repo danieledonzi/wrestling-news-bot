@@ -5,9 +5,10 @@ Stable VPS/cron command:
 
     python bot.py
 
-v93.42 is VPS-safe: by default it does not run the historical patch bootstrap
-when the checked-out source already contains the consolidated v93 markers. This
-keeps tracked source files clean after a normal cron run.
+v93.43 is fully consolidated and VPS-safe: by default it does not run the
+historical patch bootstrap when the checked-out source already contains the
+consolidated v93 markers. This keeps tracked source files clean after a normal
+cron run.
 
 Operational VPS flow:
 
@@ -28,7 +29,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-BOT_VERSION = "v93_42_vps_clean_runtime"
+BOT_VERSION = "v93_43_fully_consolidated_vps_runtime"
 ROOT = Path(__file__).resolve().parent
 PATCH_CHAIN = ROOT / "scripts" / "apply_v92_report_workshop.py"
 NEWSROOM_RUNNER = ROOT / "newsroom_runner.py"
