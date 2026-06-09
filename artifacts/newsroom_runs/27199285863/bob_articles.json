@@ -1,0 +1,323 @@
+{
+  "agent": "Bob",
+  "version": "v93_33_youtube_plain_and_cta_cleanup",
+  "generated_at": "2026-06-09T10:14:13.468249+00:00",
+  "mode": "block_translation_prudent_embed_cleanup",
+  "policy": {
+    "clean_before_gemini": true,
+    "gemini_receives_only_text_units": true,
+    "preserve_sequence_outside_gemini": true,
+    "preserve_embeds_as_plain_url_lines": true,
+    "filter_source_social_bars": true,
+    "filter_author_bios_before_gemini": true,
+    "filter_cta_before_gemini": true,
+    "recover_embeds_from_raw_html": false,
+    "embed_urls_require_post_or_video_shape": true,
+    "preserve_quotes_as_blockquote": "source_blockquote_only",
+    "preserve_tables_as_html_tables": true,
+    "ordered_elements": [
+      "text",
+      "heading",
+      "quote",
+      "table",
+      "image",
+      "embed"
+    ],
+    "model_chain": [
+      "gemini-3.1-flash-lite",
+      "gemini-3-flash-preview",
+      "gemini-2.5-flash-lite",
+      "gemini-2.5-flash"
+    ],
+    "max_articles_per_run": 5,
+    "max_articles_with_report": 4,
+    "post_show_max_articles": 6,
+    "dynamic_article_capacity": true,
+    "prompt_family": "v92_historical_natural_full_translation_blocks",
+    "diagnostic_mode": true,
+    "fallback_mode": false,
+    "residual_author_bio_cleanup": true,
+    "generic_ringside_author_bio_cleanup": true,
+    "residual_cta_cleanup": true,
+    "split_inline_quoted_text": false,
+    "source_blockquote_only": true,
+    "move_leading_embeds_after_first_paragraph": true,
+    "unwrap_fake_data_blockquotes": true,
+    "consume_menzo_bob_brief": true,
+    "missing_expected_embed_warning": true
+  },
+  "input": {
+    "menzo_version": "v93_39_capacity_buffer",
+    "selected_count": 2,
+    "selected_processed": 2,
+    "capacity": 5,
+    "capacity_reason": "normal"
+  },
+  "articles": [
+    {
+      "source_url": "https://www.wrestlinginc.com/2189951/wwe-danhausen-nba-finals-game-3-expected-guest/",
+      "source": "wrestlinginc",
+      "source_title": "WWE's Danhausen Reportedly Expected As Guest At Game 3 Of NBA Finals",
+      "category_hint": "WWE",
+      "menzo_score": 66,
+      "status": "extraction_ready_translation_pending",
+      "created_at": "2026-06-09T10:14:12.006622+00:00",
+      "diagnostic_stage": "translation_pending",
+      "fetched_html_chars": 50406,
+      "source_html_contains_embed_hint": true,
+      "meta": {
+        "source_title": "WWE's Danhausen Reportedly Expected As Guest At Game 3 Of NBA Finals - Wrestling Inc.",
+        "description": "Credited for helping The New York Knicks get to the NBA Finals, Danhausen will be in attendance at tonight's Game Three in the series at Madison Square Garden.",
+        "featured_image": "https://www.wrestlinginc.com/img/gallery/wwes-danhausen-reportedly-expected-as-guest-at-game-3-of-nba-finals/l-intro-1780948225.jpg"
+      },
+      "extraction_diagnostics": {
+        "dom_noise_reduction_enabled": false,
+        "stage": "complete",
+        "global_embed_recovery_enabled": false,
+        "root_name": "article",
+        "root_text_chars": 1605,
+        "candidate_node_count": 11,
+        "raw_element_count": 5,
+        "clean_element_count": 4,
+        "removed_by_node_count": 0,
+        "removed_by_sanitize_count": 1,
+        "table_count": 0,
+        "quote_count": 0,
+        "embed_count": 0
+      },
+      "raw_element_count": 5,
+      "clean_element_count": 4,
+      "translation_unit_count": 4,
+      "removed_before_gemini": 1,
+      "removed_elements_debug": [
+        {
+          "index": 1,
+          "reason": "duplicate_featured_image",
+          "item": {
+            "type": "image",
+            "url": "https://www.wrestlinginc.com/img/gallery/wwes-danhausen-reportedly-expected-as-guest-at-game-3-of-nba-finals/intro-1780948225.jpg",
+            "alt": "Danhausen holds up a New York Knicks towel"
+          }
+        }
+      ],
+      "raw_elements_preview": [
+        {
+          "type": "image",
+          "url": "https://www.wrestlinginc.com/img/gallery/wwes-danhausen-reportedly-expected-as-guest-at-game-3-of-nba-finals/intro-1780948225.jpg",
+          "alt": "Danhausen holds up a New York Knicks towel"
+        },
+        {
+          "type": "text",
+          "text": "One of the men whose been credited for breaking the 27-year hex on the New York Knicks, WWE's Danhausen, is expected to be a guest in attendance at tonight's Game Three in the NBA Finals, at the \"World's Most Famous Arena\" Madison Square Garden, according to today's report by PWInsider. The Knicks are currently 2-0 in the series against the San Antonio Spurs.",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "Though his curses have worked in the ring on \"Dirty\" Dominik Mysterio, Kit Wilson, online streamer/ influencer IShowSpeed, Grayson Waller, The New Day (prior to their departure), and The Miz, he never thought his abilities would ever backfire, let alone help propel an underdog team in another professional sports realm. Unbeknownst to him, his cursing abilities created a turnaround for the New York team, as they secured their position in this year's Finals after winning the Eastern Conference Finals against the Cleveland Cavaliers, 130-93. Even though many attribute this broken spell toward players Jalen Brunson and Karl-Anthony Towns, it was \"ESPN's SportsCenter\" who gave the \"Very Nice, Very Evil\" star credit for concocting this improbable to probable moment.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "After he leaves courtside tonight, Danhausen will return to his lab-hausen in the WWE. The mad genius is currently working on another top secret project. His last televised match was at Backlash, where he and Minihausen came out victorious against Wilson and The Miz earlier last month.",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "Tipoff for game three will begin tonight at 8:30 PM ET.",
+          "block_id": "b4"
+        }
+      ],
+      "elements": [
+        {
+          "type": "text",
+          "text": "One of the men whose been credited for breaking the 27-year hex on the New York Knicks, WWE's Danhausen, is expected to be a guest in attendance at tonight's Game Three in the NBA Finals, at the \"World's Most Famous Arena\" Madison Square Garden, according to today's report by PWInsider. The Knicks are currently 2-0 in the series against the San Antonio Spurs.",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "Though his curses have worked in the ring on \"Dirty\" Dominik Mysterio, Kit Wilson, online streamer/ influencer IShowSpeed, Grayson Waller, The New Day (prior to their departure), and The Miz, he never thought his abilities would ever backfire, let alone help propel an underdog team in another professional sports realm. Unbeknownst to him, his cursing abilities created a turnaround for the New York team, as they secured their position in this year's Finals after winning the Eastern Conference Finals against the Cleveland Cavaliers, 130-93. Even though many attribute this broken spell toward players Jalen Brunson and Karl-Anthony Towns, it was \"ESPN's SportsCenter\" who gave the \"Very Nice, Very Evil\" star credit for concocting this improbable to probable moment.",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "After he leaves courtside tonight, Danhausen will return to his lab-hausen in the WWE. The mad genius is currently working on another top secret project. His last televised match was at Backlash, where he and Minihausen came out victorious against Wilson and The Miz earlier last month.",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "Tipoff for game three will begin tonight at 8:30 PM ET.",
+          "block_id": "b4"
+        }
+      ],
+      "element_counts": {
+        "text": 4,
+        "heading": 0,
+        "quote": 0,
+        "table": 0,
+        "image": 0,
+        "embed": 0
+      },
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2189951/wwe-danhausen-nba-finals-game-3-expected-guest/\nTitolo feed: WWE's Danhausen Reportedly Expected As Guest At Game 3 Of NBA Finals\nTitolo pagina: WWE's Danhausen Reportedly Expected As Guest At Game 3 Of NBA Finals - Wrestling Inc.\nDescrizione: Credited for helping The New York Knicks get to the NBA Finals, Danhausen will be in attendance at tonight's Game Three in the series at Madison Square Garden.\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"One of the men whose been credited for breaking the 27-year hex on the New York Knicks, WWE's Danhausen, is expected to be a guest in attendance at tonight's Game Three in the NBA Finals, at the \\\"World's Most Famous Arena\\\" Madison Square Garden, according to today's report by PWInsider. The Knicks are currently 2-0 in the series against the San Antonio Spurs.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Though his curses have worked in the ring on \\\"Dirty\\\" Dominik Mysterio, Kit Wilson, online streamer/ influencer IShowSpeed, Grayson Waller, The New Day (prior to their departure), and The Miz, he never thought his abilities would ever backfire, let alone help propel an underdog team in another professional sports realm. Unbeknownst to him, his cursing abilities created a turnaround for the New York team, as they secured their position in this year's Finals after winning the Eastern Conference Finals against the Cleveland Cavaliers, 130-93. Even though many attribute this broken spell toward players Jalen Brunson and Karl-Anthony Towns, it was \\\"ESPN's SportsCenter\\\" who gave the \\\"Very Nice, Very Evil\\\" star credit for concocting this improbable to probable moment.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"After he leaves courtside tonight, Danhausen will return to his lab-hausen in the WWE. The mad genius is currently working on another top secret project. His last televised match was at Backlash, where he and Minihausen came out victorious against Wilson and The Miz earlier last month.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Tipoff for game three will begin tonight at 8:30 PM ET.\"\n  }\n]\n",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite",
+        "gemini-3-flash-preview",
+        "gemini-2.5-flash-lite",
+        "gemini-2.5-flash"
+      ],
+      "translation_model": "gemini-2.5-flash: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}",
+      "translation_used": false,
+      "title_it": "WWE's Danhausen Reportedly Expected As Guest At Game 3 Of NBA Finals - Wrestling Inc.",
+      "body_html": "<p>One of the men whose been credited for breaking the 27-year hex on the New York Knicks, WWE&#x27;s Danhausen, is expected to be a guest in attendance at tonight&#x27;s Game Three in the NBA Finals, at the &quot;World&#x27;s Most Famous Arena&quot; Madison Square Garden, according to today&#x27;s report by PWInsider. The Knicks are currently 2-0 in the series against the San Antonio Spurs.</p>\n<p>Though his curses have worked in the ring on &quot;Dirty&quot; Dominik Mysterio, Kit Wilson, online streamer/ influencer IShowSpeed, Grayson Waller, The New Day (prior to their departure), and The Miz, he never thought his abilities would ever backfire, let alone help propel an underdog team in another professional sports realm. Unbeknownst to him, his cursing abilities created a turnaround for the New York team, as they secured their position in this year&#x27;s Finals after winning the Eastern Conference Finals against the Cleveland Cavaliers, 130-93. Even though many attribute this broken spell toward players Jalen Brunson and Karl-Anthony Towns, it was &quot;ESPN&#x27;s SportsCenter&quot; who gave the &quot;Very Nice, Very Evil&quot; star credit for concocting this improbable to probable moment.</p>\n<p>After he leaves courtside tonight, Danhausen will return to his lab-hausen in the WWE. The mad genius is currently working on another top secret project. His last televised match was at Backlash, where he and Minihausen came out victorious against Wilson and The Miz earlier last month.</p>\n<p>Tipoff for game three will begin tonight at 8:30 PM ET.</p>",
+      "excerpt_it": "Credited for helping The New York Knicks get to the NBA Finals, Danhausen will be in attendance at tonight's Game Three in the series at Madison Square Garden.",
+      "bob_notes": [
+        "translation_unavailable",
+        "gemini-2.5-flash: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      ],
+      "bob_brief": {},
+      "menzo_ai_review": null,
+      "ai_editorial_reason": null,
+      "ai_priority_label": "medium"
+    },
+    {
+      "source_url": "https://www.wrestlinginc.com/2189525/wwe-headquarters-flag-power-outage/",
+      "source": "wrestlinginc",
+      "source_title": "Flag At WWE HQ Reportedly Causes Significant Power Outage",
+      "category_hint": "WWE",
+      "menzo_score": 66,
+      "status": "extraction_ready_translation_pending",
+      "created_at": "2026-06-09T10:14:12.780877+00:00",
+      "diagnostic_stage": "translation_pending",
+      "fetched_html_chars": 49741,
+      "source_html_contains_embed_hint": true,
+      "meta": {
+        "source_title": "Flag At WWE HQ Reportedly Causes Significant Power Outage - Wrestling Inc.",
+        "description": "An American flag at WWE headquarters in Stamford, Connecticut caused a significant power outage in the area after a storm blew the flag into power lines",
+        "featured_image": "https://www.wrestlinginc.com/img/gallery/flag-at-wwe-hq-reportedly-causes-significant-power-outage/l-intro-1780932829.jpg"
+      },
+      "extraction_diagnostics": {
+        "dom_noise_reduction_enabled": false,
+        "stage": "complete",
+        "global_embed_recovery_enabled": false,
+        "root_name": "article",
+        "root_text_chars": 1737,
+        "candidate_node_count": 11,
+        "raw_element_count": 5,
+        "clean_element_count": 4,
+        "removed_by_node_count": 0,
+        "removed_by_sanitize_count": 1,
+        "table_count": 0,
+        "quote_count": 0,
+        "embed_count": 0
+      },
+      "raw_element_count": 5,
+      "clean_element_count": 4,
+      "translation_unit_count": 4,
+      "removed_before_gemini": 1,
+      "removed_elements_debug": [
+        {
+          "index": 1,
+          "reason": "duplicate_featured_image",
+          "item": {
+            "type": "image",
+            "url": "https://www.wrestlinginc.com/img/gallery/flag-at-wwe-hq-reportedly-causes-significant-power-outage/intro-1780932829.jpg",
+            "alt": "Triple H hearing about the flag story"
+          }
+        }
+      ],
+      "raw_elements_preview": [
+        {
+          "type": "image",
+          "url": "https://www.wrestlinginc.com/img/gallery/flag-at-wwe-hq-reportedly-causes-significant-power-outage/intro-1780932829.jpg",
+          "alt": "Triple H hearing about the flag story"
+        },
+        {
+          "type": "text",
+          "text": "WWE has been responsible for many things during the course of its 73 year history. But inadvertently being behind a mass power outage had not been one of those things, at least until this past weekend. The Greenwich Times reports that a recent outage in Stamford, Connecticut had been caused by an American Flag that had previously flown atop WWE headquarters in the city.",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "Stamford Deputy Fire Chief Matt Palmer has since confirmed that the flag was blown free from WWE HQ a little before 9 p.m. on Saturday evening, as the result of storm winds. It would come to rest on \"high-voltage wires\" near the Stamford Train Station, causing both the outage and some \"arcing,\" though Palmer stated that no fire was seen when the fire department arrived. It would take until next morning before the flag was removed from the wires, and was described as \"severely damaged.\"",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "According to Stamford utility spokesman Kaitlyn Woods, around 5,000 Stamford customers lost power upon the flag making contact with the wires. Woods stated that 3,000 of those customers were able to get power back within 20 minutes, but others weren't so lucky, and in the process of removing the flag, another outage was caused, this time to customers in Greenwich, Connecticut.",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "By early Sunday evening, an outage map showed there were still at least 6,700 combined outages between Greenwich and Stamford, though quick work led to the numbers decreasing to the hundreds within the hour. By Monday morning, a look at the Eversource power outage map showed that almost all outages had been taken care of, bringing an end to the unfortunate accident.",
+          "block_id": "b4"
+        }
+      ],
+      "elements": [
+        {
+          "type": "text",
+          "text": "WWE has been responsible for many things during the course of its 73 year history. But inadvertently being behind a mass power outage had not been one of those things, at least until this past weekend. The Greenwich Times reports that a recent outage in Stamford, Connecticut had been caused by an American Flag that had previously flown atop WWE headquarters in the city.",
+          "block_id": "b1"
+        },
+        {
+          "type": "text",
+          "text": "Stamford Deputy Fire Chief Matt Palmer has since confirmed that the flag was blown free from WWE HQ a little before 9 p.m. on Saturday evening, as the result of storm winds. It would come to rest on \"high-voltage wires\" near the Stamford Train Station, causing both the outage and some \"arcing,\" though Palmer stated that no fire was seen when the fire department arrived. It would take until next morning before the flag was removed from the wires, and was described as \"severely damaged.\"",
+          "block_id": "b2"
+        },
+        {
+          "type": "text",
+          "text": "According to Stamford utility spokesman Kaitlyn Woods, around 5,000 Stamford customers lost power upon the flag making contact with the wires. Woods stated that 3,000 of those customers were able to get power back within 20 minutes, but others weren't so lucky, and in the process of removing the flag, another outage was caused, this time to customers in Greenwich, Connecticut.",
+          "block_id": "b3"
+        },
+        {
+          "type": "text",
+          "text": "By early Sunday evening, an outage map showed there were still at least 6,700 combined outages between Greenwich and Stamford, though quick work led to the numbers decreasing to the hundreds within the hour. By Monday morning, a look at the Eversource power outage map showed that almost all outages had been taken care of, bringing an end to the unfortunate accident.",
+          "block_id": "b4"
+        }
+      ],
+      "element_counts": {
+        "text": 4,
+        "heading": 0,
+        "quote": 0,
+        "table": 0,
+        "image": 0,
+        "embed": 0
+      },
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2189525/wwe-headquarters-flag-power-outage/\nTitolo feed: Flag At WWE HQ Reportedly Causes Significant Power Outage\nTitolo pagina: Flag At WWE HQ Reportedly Causes Significant Power Outage - Wrestling Inc.\nDescrizione: An American flag at WWE headquarters in Stamford, Connecticut caused a significant power outage in the area after a storm blew the flag into power lines\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"WWE has been responsible for many things during the course of its 73 year history. But inadvertently being behind a mass power outage had not been one of those things, at least until this past weekend. The Greenwich Times reports that a recent outage in Stamford, Connecticut had been caused by an American Flag that had previously flown atop WWE headquarters in the city.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Stamford Deputy Fire Chief Matt Palmer has since confirmed that the flag was blown free from WWE HQ a little before 9 p.m. on Saturday evening, as the result of storm winds. It would come to rest on \\\"high-voltage wires\\\" near the Stamford Train Station, causing both the outage and some \\\"arcing,\\\" though Palmer stated that no fire was seen when the fire department arrived. It would take until next morning before the flag was removed from the wires, and was described as \\\"severely damaged.\\\"\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"According to Stamford utility spokesman Kaitlyn Woods, around 5,000 Stamford customers lost power upon the flag making contact with the wires. Woods stated that 3,000 of those customers were able to get power back within 20 minutes, but others weren't so lucky, and in the process of removing the flag, another outage was caused, this time to customers in Greenwich, Connecticut.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"By early Sunday evening, an outage map showed there were still at least 6,700 combined outages between Greenwich and Stamford, though quick work led to the numbers decreasing to the hundreds within the hour. By Monday morning, a look at the Eversource power outage map showed that almost all outages had been taken care of, bringing an end to the unfortunate accident.\"\n  }\n]\n",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite",
+        "gemini-3-flash-preview",
+        "gemini-2.5-flash-lite",
+        "gemini-2.5-flash"
+      ],
+      "translation_model": "gemini-2.5-flash: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}",
+      "translation_used": false,
+      "title_it": "Flag At WWE HQ Reportedly Causes Significant Power Outage - Wrestling Inc.",
+      "body_html": "<p>WWE has been responsible for many things during the course of its 73 year history. But inadvertently being behind a mass power outage had not been one of those things, at least until this past weekend. The Greenwich Times reports that a recent outage in Stamford, Connecticut had been caused by an American Flag that had previously flown atop WWE headquarters in the city.</p>\n<p>Stamford Deputy Fire Chief Matt Palmer has since confirmed that the flag was blown free from WWE HQ a little before 9 p.m. on Saturday evening, as the result of storm winds. It would come to rest on &quot;high-voltage wires&quot; near the Stamford Train Station, causing both the outage and some &quot;arcing,&quot; though Palmer stated that no fire was seen when the fire department arrived. It would take until next morning before the flag was removed from the wires, and was described as &quot;severely damaged.&quot;</p>\n<p>According to Stamford utility spokesman Kaitlyn Woods, around 5,000 Stamford customers lost power upon the flag making contact with the wires. Woods stated that 3,000 of those customers were able to get power back within 20 minutes, but others weren&#x27;t so lucky, and in the process of removing the flag, another outage was caused, this time to customers in Greenwich, Connecticut.</p>\n<p>By early Sunday evening, an outage map showed there were still at least 6,700 combined outages between Greenwich and Stamford, though quick work led to the numbers decreasing to the hundreds within the hour. By Monday morning, a look at the Eversource power outage map showed that almost all outages had been taken care of, bringing an end to the unfortunate accident.</p>",
+      "excerpt_it": "An American flag at WWE headquarters in Stamford, Connecticut caused a significant power outage in the area after a storm blew the flag into power lines",
+      "bob_notes": [
+        "translation_unavailable",
+        "gemini-2.5-flash: 429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ', 'status': 'RESOURCE_EXHAUSTED'}}"
+      ],
+      "bob_brief": {},
+      "menzo_ai_review": null,
+      "ai_editorial_reason": null,
+      "ai_priority_label": "medium"
+    }
+  ],
+  "handoff": {
+    "ready_for_alfred": 0,
+    "translation_pending": 2,
+    "errors": 0,
+    "extraction_empty": 0,
+    "publishable_left_out_by_capacity": 0
+  },
+  "postprocess": {
+    "capacity": 5,
+    "capacity_reason": "normal",
+    "selected_total_before_capacity": 2,
+    "selected_processed": 2,
+    "publishable_left_out_by_capacity": 0,
+    "bob_v93_33_changes": 0,
+    "bob_v93_16_changes": 0,
+    "bob_brief_warnings_added": 0
+  }
+}
