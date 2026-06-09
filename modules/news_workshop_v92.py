@@ -874,6 +874,10 @@ Regole obbligatorie:
 - Mantieni naturali termini come match, promo, segment, storyline, push, turn, feud, stable, tag team, heel, face, main event.
 - "Botch" puo' restare botch se il contesto e' tecnico; altrimenti usa errore sul ring, ma non costruire titoli goffi.
 - Evita titoli letterali o melodrammatici come "non devono farsi spezzare": preferisci formule giornalistiche naturali.
+- Regola ferrea di glossario: nel wrestling "match" resta sempre "match". Non tradurlo mai con partita, incontro, gara o gioco.
+- Mantieni naturali termini come match, promo, segment, storyline, push, turn, feud, stable, tag team, heel, face, main event.
+- "Botch" puo' restare botch se il contesto e' tecnico; altrimenti usa errore sul ring, ma non costruire titoli goffi.
+- Evita titoli letterali o melodrammatici come "non devono farsi spezzare": preferisci formule giornalistiche naturali.
 {protected_event_instructions(source_title, source_text)}
 - Regola ferrea di glossario: nel wrestling "match" resta sempre "match". Non tradurlo mai con partita, incontro, gara o gioco.
 - Mantieni naturali termini come match, promo, segment, storyline, push, turn, feud, stable, tag team, heel, face, main event.

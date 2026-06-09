@@ -346,6 +346,67 @@ def image_url_from_node(node: Tag, base_url: str) -> str:
             return url
     return ""
 
+def decode_possible_rsn_lazy_embed_html(value: str) -> str:
+    raw = str(value or "").strip()
+    if not raw:
+        return ""
+    try:
+        return base64.b64decode(raw + "=" * (-len(raw) % 4)).decode("utf-8", errors="ignore")
+    except Exception:
+        return ""
+
+
+def pick_srcset_url(value: str) -> str:
+    raw = html.unescape(str(value or "").replace("\/", "/")).strip()
+    if not raw:
+        return ""
+    best_url = ""
+    best_width = -1
+    for part in raw.split(","):
+        bits = part.strip().split()
+        if not bits:
+            continue
+        url = bits[0].strip()
+        width = 0
+        if len(bits) > 1:
+            m = re.search(r"(\d+)w", bits[1])
+            if m:
+                width = int(m.group(1))
+        if width >= best_width:
+            best_url = url
+            best_width = width
+    return best_url
+
+
+def normalize_ringside_image_url(url: str) -> str:
+    u = html.unescape(str(url or "").replace("\/", "/")).strip()
+    if not u or u.startswith("data:"):
+        return ""
+    u = re.sub(r"\?.*$", "", u)
+    u = u.replace("/wp-content/smush-avif/", "/wp-content/uploads/")
+    if u.lower().endswith(".avif"):
+        u = u[:-5]
+    return u
+
+
+def image_url_from_node(node: Tag, base_url: str) -> str:
+    candidates: list[str] = []
+    for attr in ["src", "data-src", "data-lazy-src", "data-original", "data-orig-src"]:
+        value = node.get(attr)
+        if value:
+            candidates.append(str(value))
+    for attr in ["srcset", "data-srcset", "data-lazy-srcset", "data-original-srcset"]:
+        value = node.get(attr)
+        if value:
+            picked = pick_srcset_url(str(value))
+            if picked:
+                candidates.append(picked)
+    for raw in candidates:
+        url = normalize_ringside_image_url(absolute_url(base_url, raw))
+        if url:
+            return url
+    return ""
+
 def extract_embed_urls_from_text(raw: str, base_url: str) -> list[str]:
     text = html.unescape((raw or "").replace("\\/", "/"))
     out: list[str] = []
@@ -725,6 +786,41 @@ def dynamic_article_capacity(decision: dict[str, Any], selected: list[dict[str, 
     return MAX_ARTICLES_PER_RUN, "normal"
 
 
+def report_was_published_or_attempted() -> bool:
+    data = load_json(SIMONE_REPORT_STATUS_FILE, {})
+    if not isinstance(data, dict):
+        return False
+    handoff = data.get("handoff") if isinstance(data.get("handoff"), dict) else {}
+    if int(handoff.get("published", 0) or 0) > 0:
+        return True
+    if int(handoff.get("already_published", 0) or 0) > 0:
+        return True
+    # If Simone had ready reports but WordPress was not ready, keep the next news batch slightly smaller.
+    # This avoids overloading the first good run after a report window while keeping the report as the editorial anchor.
+    if int(handoff.get("wp_not_ready", 0) or 0) > 0:
+        return True
+    return False
+
+
+def is_post_show_candidate(item: dict[str, Any]) -> bool:
+    blob = " ".join(str(item.get(k) or "") for k in ["title", "source_title", "category_hint", "article_type", "reason", "ai_editorial_reason", "event_key"]).lower()
+    show_terms = ["raw", "smackdown", "nxt", "dynamite", "collision", "clash", "forbidden door", "summer blockbuster", "paris", "king of the ring", "queen of the ring"]
+    factual_terms = ["result", "results", "wins", "defeats", "title match", "match confirmed", "match revealed", "added", "returns", "return", "injury", "infortun", "announced", "scheduled", "set for", "confermato", "rivelato", "vittoria", "titolo"]
+    article_type = str(item.get("article_type") or "").lower()
+    if article_type in {"event_outcome", "match_announcement", "injury_update", "hard_news"}:
+        return True
+    return any(t in blob for t in show_terms) and any(t in blob for t in factual_terms)
+
+
+def dynamic_article_capacity(decision: dict[str, Any], selected: list[dict[str, Any]]) -> tuple[int, str]:
+    if report_was_published_or_attempted():
+        return max(0, MAX_ARTICLES_WITH_REPORT), "report_run"
+    post_show_count = sum(1 for item in selected if isinstance(item, dict) and is_post_show_candidate(item))
+    if post_show_count >= 3:
+        return max(MAX_ARTICLES_PER_RUN, POST_SHOW_MAX_ARTICLES), "post_show_event_heavy"
+    return MAX_ARTICLES_PER_RUN, "normal"
+
+
 def article_package(item: dict[str, Any]) -> dict[str, Any]:
     url = str(item.get("url") or item.get("source_url") or "")
     package: dict[str, Any] = {"source_url": url, "source": item.get("source"), "source_title": item.get("title"), "category_hint": item.get("category_hint"), "menzo_score": item.get("score"), "status": "error", "created_at": utc_now(), "diagnostic_stage": "start"}
@@ -814,6 +910,9 @@ def run_bob(menzo_decision: dict[str, Any] | None = None) -> dict[str, Any]:
             "ordered_elements": ["text", "heading", "quote", "table", "image", "embed"],
             "model_chain": MODEL_CHAIN,
             "max_articles_per_run": MAX_ARTICLES_PER_RUN,
+            "max_articles_with_report": MAX_ARTICLES_WITH_REPORT,
+            "post_show_max_articles": POST_SHOW_MAX_ARTICLES,
+            "dynamic_article_capacity": True,
             "max_articles_with_report": MAX_ARTICLES_WITH_REPORT,
             "post_show_max_articles": POST_SHOW_MAX_ARTICLES,
             "dynamic_article_capacity": True,
