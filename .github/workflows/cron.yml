@@ -23,8 +23,8 @@ on:
         description: "Percorso repo opzionale di un HTML grezzo salvato dal browser, es. manual_inputs/ringside_raw.html"
         required: false
         default: ""
-  schedule:
-    - cron: "*/30 * * * *"
+  # schedule:
+  # - cron: "*/30 * * * *"
 
 permissions:
   contents: write
