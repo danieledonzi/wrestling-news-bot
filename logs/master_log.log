@@ -22850,3 +22850,14 @@ RecursionError: maximum recursion depth exceeded while calling a Python object
 [MANUAL v92] source=wrestlinginc source_title=WWE Raw Results 6/8 - Two Championships Up For Grabs, KOTR & QOTR First Round Matches - Wrestling Inc.
 [MANUAL v92] title=WWE Raw dell'8 Giugno 2026 - Risultati e momenti salienti
 [MANUAL v92] categories=Editoriali, WWE
+[MANUAL v92] DNS news.openwrestlingtv.com: 89.40.173.112
+[MANUAL v92] WP health check attempt 1/2 timeout=10s
+[MANUAL v92] WP probe timeout/errore elapsed=10.31s endpoint=https://news.openwrestlingtv.com/: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Read timed out. (read timeout=10)
+[MANUAL v92] WP probe timeout/errore elapsed=10.42s endpoint=https://news.openwrestlingtv.com/wp-json/: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Read timed out. (read timeout=10)
+[MANUAL v92] WP probe timeout/errore elapsed=10.33s endpoint=https://news.openwrestlingtv.com/wp-json/wp/v2/posts?per_page=1: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Read timed out. (read timeout=10)
+[MANUAL v92] WP health check attempt 2/2 timeout=10s
+[MANUAL v92] WP probe timeout/errore elapsed=10.26s endpoint=https://news.openwrestlingtv.com/: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Read timed out. (read timeout=10)
+[MANUAL v92] WP probe timeout/errore elapsed=10.47s endpoint=https://news.openwrestlingtv.com/wp-json/: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Read timed out. (read timeout=10)
+[MANUAL v92] WP probe timeout/errore elapsed=10.38s endpoint=https://news.openwrestlingtv.com/wp-json/wp/v2/posts?per_page=1: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Read timed out. (read timeout=10)
+[MANUAL v92] wp_ok=False wp_status=wp_error
+[MANUAL v92] WordPress non disponibile: interrompo prima di scrape/traduzione
