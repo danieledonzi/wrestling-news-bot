@@ -1,12 +1,21 @@
 __pycache__/
 *.pyc
+.venv/
 .env
 
 logs/
+artifacts/
+published/
 published_html_review/
 review_packages/
 review_bundle_latest.zip
 
+article_analysis_cache_v91.json
 history.txt
 pending_articles.json
 failed_articles.json
+processed_urls.json
+skipped_history.json
+confirmed_published_reports.json
+state/
+v90_2_event_cores.json
