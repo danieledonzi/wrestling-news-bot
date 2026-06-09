@@ -6,6 +6,12 @@ from pathlib import Path
 # "parent" can match inside words like "apparent/apparently", forcing unrelated
 # WWE storyline items into Business. Use word-boundary regexes and only concrete
 # corporate phrases.
+#
+# v93.43 note:
+# In the split v93 source, this legacy v92 anchor can legitimately be absent
+# because the patched behavior has already moved/consolidated elsewhere. During
+# one-shot source consolidation this script must be idempotent and non-fatal: if
+# the legacy block is not present, leave the source untouched and exit 0.
 # -----------------------------------------------------------------------------
 
 bot_path = Path("bot_v92.py")
@@ -21,7 +27,9 @@ if "V92_BUSINESS_BOUNDARY_PATCH_ACTIVE = True" not in text:
 start = text.find("def has_business_signal(entry: Dict[str, Any], analysis: Optional[Dict[str, Any]] = None) -> bool:")
 end = text.find("\n\ndef is_ple_card_item", start)
 if start == -1 or end == -1:
-    raise SystemExit("[V92 BUSINESS BOUNDARY] has_business_signal block non trovato")
+    bot_path.write_text(text, encoding="utf-8")
+    print("[V92 BUSINESS BOUNDARY] has_business_signal block non trovato; sorgente gia consolidato o funzione legacy assente")
+    raise SystemExit(0)
 
 new_func = r'''def has_business_signal(entry: Dict[str, Any], analysis: Optional[Dict[str, Any]] = None) -> bool:
     blob = normalize_text(
