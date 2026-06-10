@@ -1,0 +1,64 @@
+name: Cleanup Runtime Tracking
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup-runtime-tracking:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Remove runtime files from Git tracking
+        run: |
+          set -euo pipefail
+
+          echo "[CLEANUP] Current HEAD: $(git rev-parse --short HEAD)"
+
+          git rm -r --cached --ignore-unmatch \
+            logs \
+            state \
+            artifacts \
+            published \
+            published_html_review \
+            review_packages \
+            review_bundle_latest.zip \
+            article_analysis_cache_v91.json \
+            history.txt \
+            pending_articles.json \
+            failed_articles.json \
+            processed_urls.json \
+            skipped_history.json \
+            confirmed_published_reports.json \
+            v90_2_event_cores.json
+
+          echo "[CLEANUP] Staged changes:"
+          git status --short
+
+          if git diff --cached --quiet; then
+            echo "[CLEANUP] No tracked runtime files to remove. Nothing to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore(v93.44): remove runtime files from git tracking"
+          git push
+
+      - name: Verify runtime paths are untracked
+        run: |
+          set -euo pipefail
+          echo "[VERIFY] Tracked runtime files still present:"
+          REMAINING=$(git ls-files logs state artifacts published published_html_review review_packages review_bundle_latest.zip article_analysis_cache_v91.json history.txt pending_articles.json failed_articles.json processed_urls.json skipped_history.json confirmed_published_reports.json v90_2_event_cores.json || true)
+          if [ -n "$REMAINING" ]; then
+            echo "$REMAINING"
+            echo "[VERIFY] ERROR: runtime files are still tracked"
+            exit 1
+          fi
+          echo "[VERIFY] OK: runtime files are no longer tracked"
