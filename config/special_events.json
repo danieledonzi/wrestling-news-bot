@@ -1,0 +1,563 @@
+{
+  "schema_version": "v94_special_events_registry_1",
+  "generated_at_utc": "2026-06-11T16:52:55Z",
+  "timezone": "Europe/Rome",
+  "default_report_publish_after_local": "06:30",
+  "default_lookback_hours": 18,
+  "default_lookahead_hours": 36,
+  "status_legend": {
+    "expected": "Evento atteso/ricorrente, ma senza data confermata. Non attiva finestre report.",
+    "proposed": "Evento trovato da fonte esterna, da confermare manualmente.",
+    "confirmed": "Evento confermato e utilizzabile da Simone.",
+    "active": "Evento nella finestra temporale di copertura.",
+    "completed": "Report pubblicato e freeze applicato.",
+    "cancelled": "Evento annullato o da ignorare."
+  },
+  "coverage_policy_legend": {
+    "report_and_post_event_freeze": "Simone cerca un report/results compatibile e dopo la pubblicazione blocca news puramente riepilogative.",
+    "multi_night_report_and_post_event_freeze": "Ogni night genera un report separato e un freeze separato.",
+    "await_manual_confirmation": "Non produce report finche non vengono aggiunte una o piu nights confermate."
+  },
+  "events": [
+    {
+      "key": "wwe_night_of_champions_2026",
+      "promotion": "WWE",
+      "brand": "Raw/SmackDown",
+      "event_name": "Night of Champions",
+      "event_type": "PLE",
+      "priority": "major",
+      "status": "confirmed",
+      "coverage_policy": "report_and_post_event_freeze",
+      "category_hint": "WWE",
+      "aliases": [
+        "Night of Champions",
+        "WWE Night of Champions",
+        "Night of Champions Riyadh",
+        "WWE Night of Champions 2026"
+      ],
+      "nights": [
+        {
+          "night_key": "wwe_night_of_champions_2026_main",
+          "label": "Main show",
+          "date_local": "2026-06-27",
+          "report_publish_after_local": "06:30",
+          "enabled": true,
+          "aliases": [
+            "Night of Champions results",
+            "WWE Night of Champions results"
+          ]
+        }
+      ],
+      "source": "seed_2026_verified"
+    },
+    {
+      "key": "wwe_saturday_nights_main_event_xlv_2026",
+      "promotion": "WWE",
+      "brand": "Raw/SmackDown",
+      "event_name": "Saturday Night's Main Event XLV",
+      "event_type": "Special",
+      "priority": "medium",
+      "status": "confirmed",
+      "coverage_policy": "report_and_post_event_freeze",
+      "category_hint": "WWE",
+      "aliases": [
+        "Saturday Night's Main Event",
+        "Saturday Night Main Event",
+        "SNME",
+        "WWE SNME",
+        "Saturday Night's Main Event XLV"
+      ],
+      "nights": [
+        {
+          "night_key": "wwe_snme_xlv_2026_main",
+          "label": "Main show",
+          "date_local": "2026-07-18",
+          "report_publish_after_local": "06:30",
+          "enabled": true,
+          "aliases": [
+            "Saturday Night's Main Event results",
+            "SNME results"
+          ]
+        }
+      ],
+      "source": "seed_2026_verified"
+    },
+    {
+      "key": "wwe_summerslam_2026",
+      "promotion": "WWE",
+      "brand": "Raw/SmackDown",
+      "event_name": "SummerSlam",
+      "event_type": "PLE",
+      "priority": "major",
+      "status": "confirmed",
+      "coverage_policy": "multi_night_report_and_post_event_freeze",
+      "category_hint": "WWE",
+      "aliases": [
+        "SummerSlam",
+        "WWE SummerSlam",
+        "SummerSlam Minnesota",
+        "SummerSlam 2026",
+        "WWE SummerSlam 2026"
+      ],
+      "nights": [
+        {
+          "night_key": "wwe_summerslam_2026_night_1",
+          "label": "Night 1",
+          "date_local": "2026-08-01",
+          "report_publish_after_local": "06:30",
+          "enabled": true,
+          "aliases": [
+            "SummerSlam Night 1",
+            "WWE SummerSlam Night 1",
+            "SummerSlam 2026 Night 1"
+          ]
+        },
+        {
+          "night_key": "wwe_summerslam_2026_night_2",
+          "label": "Night 2",
+          "date_local": "2026-08-02",
+          "report_publish_after_local": "06:30",
+          "enabled": true,
+          "aliases": [
+            "SummerSlam Night 2",
+            "WWE SummerSlam Night 2",
+            "SummerSlam 2026 Night 2"
+          ]
+        }
+      ],
+      "source": "seed_2026_verified"
+    },
+    {
+      "key": "wwe_money_in_the_bank_2026",
+      "promotion": "WWE",
+      "brand": "Raw/SmackDown",
+      "event_name": "Money in the Bank",
+      "event_type": "PLE",
+      "priority": "major",
+      "status": "confirmed",
+      "coverage_policy": "report_and_post_event_freeze",
+      "category_hint": "WWE",
+      "aliases": [
+        "Money in the Bank",
+        "WWE Money in the Bank",
+        "MITB",
+        "Money in the Bank New Orleans",
+        "Money in the Bank 2026"
+      ],
+      "nights": [
+        {
+          "night_key": "wwe_money_in_the_bank_2026_main",
+          "label": "Main show",
+          "date_local": "2026-10-10",
+          "report_publish_after_local": "06:30",
+          "enabled": true,
+          "aliases": [
+            "Money in the Bank results",
+            "WWE Money in the Bank results",
+            "MITB results"
+          ]
+        }
+      ],
+      "source": "seed_2026_verified_latest_change"
+    },
+    {
+      "key": "wwe_survivor_series_2026",
+      "promotion": "WWE",
+      "brand": "Raw/SmackDown",
+      "event_name": "Survivor Series",
+      "event_type": "PLE",
+      "priority": "major",
+      "status": "expected",
+      "coverage_policy": "await_manual_confirmation",
+      "category_hint": "WWE",
+      "aliases": [
+        "Survivor Series",
+        "WWE Survivor Series",
+        "Survivor Series WarGames",
+        "WarGames"
+      ],
+      "nights": [],
+      "source": "expected_annual_event_no_confirmed_date"
+    },
+    {
+      "key": "wwe_wrestlepalooza_2026",
+      "promotion": "WWE",
+      "brand": "Raw/SmackDown",
+      "event_name": "Wrestlepalooza",
+      "event_type": "PLE",
+      "priority": "major",
+      "status": "expected",
+      "coverage_policy": "await_manual_confirmation",
+      "category_hint": "WWE",
+      "aliases": [
+        "Wrestlepalooza",
+        "WWE Wrestlepalooza"
+      ],
+      "nights": [],
+      "source": "expected_possible_return_no_confirmed_date"
+    },
+    {
+      "key": "wwe_sunday_night_main_event_2026",
+      "promotion": "WWE",
+      "brand": "Raw/SmackDown",
+      "event_name": "Sunday Night Main Event",
+      "event_type": "Special",
+      "priority": "medium",
+      "status": "expected",
+      "coverage_policy": "await_manual_confirmation",
+      "category_hint": "WWE",
+      "aliases": [
+        "Sunday Night Main Event",
+        "WWE Sunday Night Main Event",
+        "SNME",
+        "Sunday Night's Main Event"
+      ],
+      "nights": [],
+      "source": "manual_placeholder_for_renamed_snme"
+    },
+    {
+      "key": "nxt_great_american_bash_2026",
+      "promotion": "WWE",
+      "brand": "NXT",
+      "event_name": "The Great American Bash",
+      "event_type": "NXT Special/PLE",
+      "priority": "medium",
+      "status": "confirmed",
+      "coverage_policy": "report_and_post_event_freeze",
+      "category_hint": "NXT",
+      "aliases": [
+        "The Great American Bash",
+        "NXT Great American Bash",
+        "NXT GAB",
+        "Great American Bash"
+      ],
+      "nights": [
+        {
+          "night_key": "nxt_great_american_bash_2026_main",
+          "label": "Main show",
+          "date_local": "2026-06-28",
+          "report_publish_after_local": "06:30",
+          "enabled": true,
+          "aliases": [
+            "NXT Great American Bash results",
+            "NXT GAB results"
+          ]
+        }
+      ],
+      "source": "seed_2026_verified"
+    },
+    {
+      "key": "nxt_heatwave_2026",
+      "promotion": "WWE",
+      "brand": "NXT",
+      "event_name": "Heatwave",
+      "event_type": "NXT PLE",
+      "priority": "medium",
+      "status": "expected",
+      "coverage_policy": "await_manual_confirmation",
+      "category_hint": "NXT",
+      "aliases": [
+        "Heatwave",
+        "NXT Heatwave"
+      ],
+      "nights": [],
+      "source": "expected_annual_nxt_event_no_confirmed_date"
+    },
+    {
+      "key": "nxt_no_mercy_2026",
+      "promotion": "WWE",
+      "brand": "NXT",
+      "event_name": "No Mercy",
+      "event_type": "NXT PLE",
+      "priority": "medium",
+      "status": "expected",
+      "coverage_policy": "await_manual_confirmation",
+      "category_hint": "NXT",
+      "aliases": [
+        "No Mercy",
+        "NXT No Mercy"
+      ],
+      "nights": [],
+      "source": "expected_annual_nxt_event_no_confirmed_date"
+    },
+    {
+      "key": "nxt_halloween_havoc_2026",
+      "promotion": "WWE",
+      "brand": "NXT",
+      "event_name": "Halloween Havoc",
+      "event_type": "NXT PLE",
+      "priority": "medium",
+      "status": "expected",
+      "coverage_policy": "await_manual_confirmation",
+      "category_hint": "NXT",
+      "aliases": [
+        "Halloween Havoc",
+        "NXT Halloween Havoc"
+      ],
+      "nights": [],
+      "source": "expected_annual_nxt_event_no_confirmed_date"
+    },
+    {
+      "key": "nxt_deadline_2026",
+      "promotion": "WWE",
+      "brand": "NXT",
+      "event_name": "Deadline",
+      "event_type": "NXT PLE",
+      "priority": "medium",
+      "status": "expected",
+      "coverage_policy": "await_manual_confirmation",
+      "category_hint": "NXT",
+      "aliases": [
+        "Deadline",
+        "NXT Deadline"
+      ],
+      "nights": [],
+      "source": "expected_annual_nxt_event_no_confirmed_date"
+    },
+    {
+      "key": "aew_forbidden_door_2026",
+      "promotion": "AEW",
+      "brand": "AEW/NJPW/CMLL/Stardom",
+      "event_name": "Forbidden Door",
+      "event_type": "PPV",
+      "priority": "major",
+      "status": "confirmed",
+      "coverage_policy": "report_and_post_event_freeze",
+      "category_hint": "AEW",
+      "aliases": [
+        "Forbidden Door",
+        "AEW Forbidden Door",
+        "AEW x NJPW Forbidden Door",
+        "AEW×NJPW Forbidden Door",
+        "Forbidden Door 2026"
+      ],
+      "nights": [
+        {
+          "night_key": "aew_forbidden_door_2026_main",
+          "label": "Main show",
+          "date_local": "2026-06-28",
+          "report_publish_after_local": "06:30",
+          "enabled": true,
+          "aliases": [
+            "Forbidden Door results",
+            "AEW Forbidden Door results"
+          ]
+        }
+      ],
+      "source": "seed_2026_verified"
+    },
+    {
+      "key": "aew_all_in_2026",
+      "promotion": "AEW",
+      "brand": "AEW",
+      "event_name": "All In",
+      "event_type": "PPV",
+      "priority": "major",
+      "status": "confirmed",
+      "coverage_policy": "report_and_post_event_freeze",
+      "category_hint": "AEW",
+      "aliases": [
+        "All In",
+        "AEW All In",
+        "All In London",
+        "AEW All In London",
+        "All In 2026"
+      ],
+      "nights": [
+        {
+          "night_key": "aew_all_in_2026_main",
+          "label": "Main show",
+          "date_local": "2026-08-30",
+          "report_publish_after_local": "06:30",
+          "enabled": true,
+          "aliases": [
+            "AEW All In results",
+            "All In results"
+          ]
+        }
+      ],
+      "source": "seed_2026_verified"
+    },
+    {
+      "key": "aew_all_out_2026",
+      "promotion": "AEW",
+      "brand": "AEW",
+      "event_name": "All Out",
+      "event_type": "PPV",
+      "priority": "major",
+      "status": "expected",
+      "coverage_policy": "await_manual_confirmation",
+      "category_hint": "AEW",
+      "aliases": [
+        "All Out",
+        "AEW All Out"
+      ],
+      "nights": [],
+      "source": "expected_annual_aew_event_no_confirmed_date"
+    },
+    {
+      "key": "aew_full_gear_2026",
+      "promotion": "AEW",
+      "brand": "AEW",
+      "event_name": "Full Gear",
+      "event_type": "PPV",
+      "priority": "major",
+      "status": "expected",
+      "coverage_policy": "await_manual_confirmation",
+      "category_hint": "AEW",
+      "aliases": [
+        "Full Gear",
+        "AEW Full Gear"
+      ],
+      "nights": [],
+      "source": "expected_annual_aew_event_no_confirmed_date"
+    },
+    {
+      "key": "aew_worlds_end_2026",
+      "promotion": "AEW",
+      "brand": "AEW",
+      "event_name": "Worlds End",
+      "event_type": "PPV",
+      "priority": "major",
+      "status": "expected",
+      "coverage_policy": "await_manual_confirmation",
+      "category_hint": "AEW",
+      "aliases": [
+        "Worlds End",
+        "AEW Worlds End",
+        "World's End"
+      ],
+      "nights": [],
+      "source": "expected_annual_aew_event_no_confirmed_date"
+    },
+    {
+      "key": "tna_slammiversary_2026",
+      "promotion": "TNA",
+      "brand": "TNA",
+      "event_name": "Slammiversary",
+      "event_type": "PPV",
+      "priority": "major",
+      "status": "confirmed",
+      "coverage_policy": "report_and_post_event_freeze",
+      "category_hint": "TNA",
+      "aliases": [
+        "Slammiversary",
+        "TNA Slammiversary",
+        "TNASlammiversary",
+        "Slammiversary 2026"
+      ],
+      "nights": [
+        {
+          "night_key": "tna_slammiversary_2026_main",
+          "label": "Main show",
+          "date_local": "2026-06-28",
+          "report_publish_after_local": "06:30",
+          "enabled": true,
+          "aliases": [
+            "TNA Slammiversary results",
+            "Slammiversary results"
+          ]
+        }
+      ],
+      "source": "seed_2026_verified"
+    },
+    {
+      "key": "tna_lockdown_2026",
+      "promotion": "TNA",
+      "brand": "TNA",
+      "event_name": "Lockdown",
+      "event_type": "PPV",
+      "priority": "major",
+      "status": "confirmed",
+      "coverage_policy": "report_and_post_event_freeze",
+      "category_hint": "TNA",
+      "aliases": [
+        "Lockdown",
+        "TNA Lockdown",
+        "TNA Lockdown 2026"
+      ],
+      "nights": [
+        {
+          "night_key": "tna_lockdown_2026_main",
+          "label": "Main show",
+          "date_local": "2026-08-23",
+          "report_publish_after_local": "06:30",
+          "enabled": true,
+          "aliases": [
+            "TNA Lockdown results",
+            "Lockdown results"
+          ]
+        }
+      ],
+      "source": "seed_2026_verified"
+    },
+    {
+      "key": "tna_bound_for_glory_2026",
+      "promotion": "TNA",
+      "brand": "TNA",
+      "event_name": "Bound For Glory",
+      "event_type": "PPV",
+      "priority": "major",
+      "status": "confirmed",
+      "coverage_policy": "report_and_post_event_freeze",
+      "category_hint": "TNA",
+      "aliases": [
+        "Bound For Glory",
+        "Bound for Glory",
+        "TNA Bound For Glory",
+        "TNA BFG",
+        "BFG"
+      ],
+      "nights": [
+        {
+          "night_key": "tna_bound_for_glory_2026_main",
+          "label": "Main show",
+          "date_local": "2026-10-11",
+          "report_publish_after_local": "06:30",
+          "enabled": true,
+          "aliases": [
+            "TNA Bound For Glory results",
+            "Bound For Glory results",
+            "TNA BFG results"
+          ]
+        }
+      ],
+      "source": "seed_2026_verified"
+    },
+    {
+      "key": "roh_death_before_dishonor_2026",
+      "promotion": "ROH",
+      "brand": "ROH",
+      "event_name": "Death Before Dishonor",
+      "event_type": "PPV",
+      "priority": "medium",
+      "status": "expected",
+      "coverage_policy": "await_manual_confirmation",
+      "category_hint": "ROH",
+      "aliases": [
+        "Death Before Dishonor",
+        "ROH Death Before Dishonor",
+        "DBD"
+      ],
+      "nights": [],
+      "source": "expected_annual_roh_event_no_confirmed_date"
+    },
+    {
+      "key": "roh_final_battle_2026",
+      "promotion": "ROH",
+      "brand": "ROH",
+      "event_name": "Final Battle",
+      "event_type": "PPV",
+      "priority": "medium",
+      "status": "expected",
+      "coverage_policy": "await_manual_confirmation",
+      "category_hint": "ROH",
+      "aliases": [
+        "Final Battle",
+        "ROH Final Battle"
+      ],
+      "nights": [],
+      "source": "expected_annual_roh_event_no_confirmed_date"
+    }
+  ]
+}
