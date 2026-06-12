@@ -119,26 +119,48 @@ def coverage_for(dates: list[str]) -> str:
 def update_existing(reg: dict[str, Any], ev: dict[str, Any]) -> list[str]:
     changes = []
     dates = sorted(set(ev.get("dates") or []))
-    old_dates = [n.get("date_local") for n in reg.get("nights", []) if n.get("date_local")]
+    old_dates = sorted([n.get("date_local") for n in reg.get("nights", []) if n.get("date_local")])
+
+    # Evento già confermato e date identiche: non toccare il registry.
+    # Questo evita diff rumorosi a ogni refresh.
+    if reg.get("status") == "confirmed" and dates and old_dates == dates:
+        return ["already_confirmed_dates_match"]
+
     if reg.get("status") != "confirmed":
         changes.append(f"status {reg.get('status')} -> confirmed")
         reg["status"] = "confirmed"
+
     if reg.get("coverage_policy") == "await_manual_confirmation":
         reg["coverage_policy"] = coverage_for(dates)
-        changes.append("coverage_policy -> report_and_post_event_freeze")
-    if dates and sorted(old_dates) != dates:
-        reg["nights"] = build_nights(reg["key"], dates, reg.get("promotion", ev["promotion"]), reg.get("event_name", ev["event_name"]))
+        changes.append(f"coverage_policy -> {reg['coverage_policy']}")
+
+    if dates and old_dates != dates:
+        reg["nights"] = build_nights(
+            reg["key"],
+            dates,
+            reg.get("promotion", ev["promotion"]),
+            reg.get("event_name", ev["event_name"]),
+        )
         changes.append(f"nights {old_dates or 'none'} -> {dates}")
+
     aliases = set(reg.get("aliases", []))
-    for a in [ev.get("event_name"), f"{ev.get('promotion')} {ev.get('event_name')}", f"{ev.get('event_name')} 2026"]:
-        if a: aliases.add(a)
+    for a in [
+        ev.get("event_name"),
+        f"{ev.get('promotion')} {ev.get('event_name')}",
+        f"{ev.get('event_name')} 2026",
+    ]:
+        if a:
+            aliases.add(a)
     reg["aliases"] = sorted(aliases)
+
     if ev.get("venue"):
         reg["venue"] = ev["venue"]
     if ev.get("location"):
         reg["location"] = ev["location"]
+
     reg["source"] = "wikipedia_schedule_auto_applied"
     reg["last_verified_at_utc"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
     return changes or ["verified_no_date_change"]
 
 

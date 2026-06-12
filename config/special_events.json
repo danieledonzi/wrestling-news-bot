@@ -1,6 +1,6 @@
 {
   "schema_version": "v94_special_events_registry_1",
-  "generated_at_utc": "2026-06-11T16:52:55Z",
+  "generated_at_utc": "2026-06-12T13:57:14Z",
   "timezone": "Europe/Rome",
   "default_report_publish_after_local": "06:30",
   "default_lookback_hours": 18,
@@ -203,17 +203,34 @@
       "event_name": "Sunday Night Main Event",
       "event_type": "Special",
       "priority": "medium",
-      "status": "expected",
-      "coverage_policy": "await_manual_confirmation",
+      "status": "confirmed",
+      "coverage_policy": "report_and_post_event_freeze",
       "category_hint": "WWE",
       "aliases": [
-        "Sunday Night Main Event",
-        "WWE Sunday Night Main Event",
         "SNME",
-        "Sunday Night's Main Event"
+        "Sunday Night Main Event",
+        "Sunday Night's Main Event",
+        "Sunday Night's Main Event 2026",
+        "WWE Sunday Night Main Event",
+        "WWE Sunday Night's Main Event"
       ],
-      "nights": [],
-      "source": "manual_placeholder_for_renamed_snme"
+      "nights": [
+        {
+          "night_key": "wwe_sunday_night_main_event_2026_main",
+          "label": "Main show",
+          "date_local": "2026-09-06",
+          "report_publish_after_local": "06:30",
+          "enabled": true,
+          "aliases": [
+            "Sunday Night Main Event results",
+            "WWE Sunday Night Main Event results"
+          ]
+        }
+      ],
+      "source": "wikipedia_schedule_auto_applied",
+      "venue": "State Farm Arena",
+      "location": "Atlanta, Georgia",
+      "last_verified_at_utc": "2026-06-12T13:57:14Z"
     },
     {
       "key": "nxt_great_american_bash_2026",
@@ -558,6 +575,39 @@
       ],
       "nights": [],
       "source": "expected_annual_roh_event_no_confirmed_date"
+    },
+    {
+      "key": "aew_redemption_2026",
+      "promotion": "AEW",
+      "brand": "AEW",
+      "event_name": "Redemption",
+      "event_type": "PPV",
+      "priority": "major",
+      "status": "confirmed",
+      "coverage_policy": "report_and_post_event_freeze",
+      "category_hint": "AEW",
+      "aliases": [
+        "AEW Redemption",
+        "Redemption",
+        "Redemption 2026"
+      ],
+      "nights": [
+        {
+          "night_key": "aew_redemption_2026_main",
+          "label": "Main show",
+          "date_local": "2026-07-26",
+          "report_publish_after_local": "06:30",
+          "enabled": true,
+          "aliases": [
+            "AEW Redemption results",
+            "Redemption results"
+          ]
+        }
+      ],
+      "venue": "Bell Centre",
+      "location": "Montreal, Quebec",
+      "source": "wikipedia_schedule_auto_applied",
+      "last_verified_at_utc": "2026-06-12T13:57:14Z"
     }
   ]
 }
