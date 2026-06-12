@@ -1,0 +1,43 @@
+{
+  "schema_version": "v94_special_event_sources_1",
+  "generated_at_utc": "2026-06-11T17:10:00Z",
+  "notes": [
+    "Queste fonti servono solo per generare proposte: non modificano direttamente config/special_events.json.",
+    "Il registry interno resta la fonte di verita editoriale usata da Simone.",
+    "Le proposte devono essere approvate manualmente prima di diventare confirmed."
+  ],
+  "sources": [
+    {
+      "key": "wwe_events_official",
+      "promotion": "WWE",
+      "trust_level": "high",
+      "enabled": true,
+      "url": "https://www.wwe.com/events",
+      "notes": "Pagina ufficiale eventi WWE, utile per PLE, special e date annunciate."
+    },
+    {
+      "key": "aew_events_official",
+      "promotion": "AEW",
+      "trust_level": "high",
+      "enabled": true,
+      "url": "https://www.allelitewrestling.com/aew-events",
+      "notes": "Pagina ufficiale eventi AEW."
+    },
+    {
+      "key": "tna_events_official",
+      "promotion": "TNA",
+      "trust_level": "high",
+      "enabled": true,
+      "url": "https://tnawrestling.com/events/",
+      "notes": "Pagina ufficiale eventi TNA."
+    },
+    {
+      "key": "roh_events_official",
+      "promotion": "ROH",
+      "trust_level": "medium",
+      "enabled": false,
+      "url": "https://www.rohwrestling.com/events",
+      "notes": "Fonte ROH da riabilitare dopo verifica manuale, al momento puo essere instabile."
+    }
+  ]
+}
