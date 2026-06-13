@@ -25,7 +25,7 @@ PUBLISHER_STATUS_FILE = NEWSROOM_STATE_DIR / "publisher_status_latest.json"
 PUBLISHER_HISTORY_FILE = NEWSROOM_STATE_DIR / "publisher_history.json"
 ARTIFACT_PUBLISHER_FILE = ARTIFACT_DIR / "publisher_result.json"
 
-PUBLISHER_VERSION = "v93_40_publisher_capacity_audit"
+PUBLISHER_VERSION = "v94_9_news_internal_media_preservation"
 REQUEST_TIMEOUT = int(os.getenv("V93_PUBLISHER_TIMEOUT", "25"))
 MAX_POSTS_PER_RUN = int(os.getenv("V93_PUBLISHER_MAX_POSTS_PER_RUN", os.getenv("V93_BOB_MAX_ARTICLES_PER_RUN", "5")))
 POST_STATUS = os.getenv("V93_PUBLISHER_POST_STATUS", "publish").strip() or "publish"
@@ -239,6 +239,44 @@ def convert_embed_urls(body_html: str) -> str:
     return text
 
 
+def image_block(image_url: str, *, wp_ok: bool = True) -> str:
+    """v94.9: preserve standard-news internal images in the article body.
+
+    Bob renders source images as <!--IMAGE:url--> placeholders.
+    Before v94.9 Publisher stripped those placeholders. Now Publisher rehydrates
+    them as WordPress image figures, uploading to Media Library when possible.
+    """
+    image_url = clean_url(image_url)
+    if not image_url:
+        return ""
+    media_id = None
+    src = image_url
+    if wp_ok:
+        media_id, uploaded_src = upload_media(image_url)
+        if uploaded_src:
+            src = uploaded_src
+    safe_src = html.escape(src, quote=True)
+    wp_id_class = f" wp-image-{media_id}" if media_id else ""
+    return (
+        f'<!-- wp:image -->\n'
+        f'<figure class="wp-block-image owtv-inline-image{wp_id_class}">'
+        f'<img src="{safe_src}" alt="" loading="lazy" />'
+        f'</figure>\n'
+        f'<!-- /wp:image -->'
+    )
+
+
+def render_image_placeholders(body_html: str, *, wp_ok: bool = True) -> str:
+    def repl(match: re.Match[str]) -> str:
+        url = match.group(1).strip()
+        block = image_block(url, wp_ok=wp_ok)
+        if block:
+            print(f"[PUBLISHER v94.9] Immagine interna preservata: {url}", flush=True)
+            return "\n\n" + block + "\n\n"
+        return ""
+    return IMAGE_PLACEHOLDER_RE.sub(repl, body_html or "")
+
+
 def normalized_story_blob(article: dict[str, Any]) -> str:
     parts = [article.get("title_it"), article.get("source_title"), article.get("excerpt_it"), article.get("source_url")]
     meta = article.get("meta") if isinstance(article.get("meta"), dict) else {}
@@ -267,8 +305,8 @@ def existing_story_duplicate(history: dict[str, Any], signature: str) -> dict[st
     return None
 
 
-def clean_body_for_wordpress(body_html: str) -> str:
-    body_html = IMAGE_PLACEHOLDER_RE.sub("", body_html or "")
+def clean_body_for_wordpress(body_html: str, *, wp_ok: bool = True) -> str:
+    body_html = render_image_placeholders(body_html or "", wp_ok=wp_ok)
     body_html = EMBED_PLACEHOLDER_RE.sub(lambda m: "\n" + html.escape(m.group(1).strip()) + "\n", body_html)
     body_html = PLAIN_EMBED_URL_RE.sub(lambda m: "\n" + html.escape(m.group(1).strip()) + "\n", body_html)
     body_html = convert_embed_urls(body_html)
@@ -371,7 +409,7 @@ def publish_article(article: dict[str, Any], history: dict[str, Any], wp_ok: boo
     if duplicate:
         return {"source_url": url, "title_it": title, "status": "already_published", "reason": "semantic_story_duplicate", "story_signature": sig, "duplicate_of": duplicate.get("source_url"), "wp_post_id": duplicate.get("wp_post_id")}
 
-    cleaned_body = clean_body_for_wordpress(str(article.get("body_html") or ""))
+    cleaned_body = clean_body_for_wordpress(str(article.get("body_html") or ""), wp_ok=wp_ok)
     content = append_source(cleaned_body, source, url)
     image_url = candidate_featured_image(article)
     categories = resolve_category_ids(str(article.get("category_hint") or "")) if wp_ok else []
