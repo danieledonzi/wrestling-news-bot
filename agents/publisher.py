@@ -25,7 +25,7 @@ PUBLISHER_STATUS_FILE = NEWSROOM_STATE_DIR / "publisher_status_latest.json"
 PUBLISHER_HISTORY_FILE = NEWSROOM_STATE_DIR / "publisher_history.json"
 ARTIFACT_PUBLISHER_FILE = ARTIFACT_DIR / "publisher_result.json"
 
-PUBLISHER_VERSION = "v94_9_news_internal_media_preservation"
+PUBLISHER_VERSION = "v93_40_publisher_capacity_audit"
 REQUEST_TIMEOUT = int(os.getenv("V93_PUBLISHER_TIMEOUT", "25"))
 MAX_POSTS_PER_RUN = int(os.getenv("V93_PUBLISHER_MAX_POSTS_PER_RUN", os.getenv("V93_BOB_MAX_ARTICLES_PER_RUN", "5")))
 POST_STATUS = os.getenv("V93_PUBLISHER_POST_STATUS", "publish").strip() or "publish"
@@ -239,6 +239,132 @@ def convert_embed_urls(body_html: str) -> str:
     return text
 
 
+def normalized_story_blob(article: dict[str, Any]) -> str:
+    parts = [article.get("title_it"), article.get("source_title"), article.get("excerpt_it"), article.get("source_url")]
+    meta = article.get("meta") if isinstance(article.get("meta"), dict) else {}
+    parts.extend([meta.get("title"), meta.get("source_title")])
+    blob = " ".join(str(x or "") for x in parts).lower()
+    return re.sub(r"\s+", " ", blob)
+
+
+def story_signature(article: dict[str, Any]) -> str:
+    blob = normalized_story_blob(article)
+    if "mjf" in blob and any(x in blob for x in ["injury", "infortun", "pulled", "rimosso", "rinunciare", "booking"]) and any(x in blob for x in ["indie", "independent", "evento indipendente", "beyond wrestling"]):
+        return "story:aew:mjf:indie_injury"
+    if "liv morgan" in blob and "dominik" in blob and any(x in blob for x in ["frustration", "frustrazione", "booking"]):
+        return "story:wwe:liv_morgan_dominik_booking_frustration"
+    if "jim ross" in blob and "lawsuit" in blob and any(x in blob for x in ["vince", "shareholder", "azionisti"]):
+        return "story:wwe:vince_shareholder_lawsuit_jim_ross"
+    return ""
+
+
+def existing_story_duplicate(history: dict[str, Any], signature: str) -> dict[str, Any] | None:
+    if not signature:
+        return None
+    for item in history.values():
+        if isinstance(item, dict) and item.get("story_signature") == signature:
+            return item
+    return None
+
+
+def clean_url(url: str) -> str:
+    return html.unescape(str(url or "").strip()).rstrip(".,;:)]}\u201d\u2019</p>")
+
+
+def embed_key(url: str) -> str:
+    u = clean_url(url)
+    parsed = urlparse(u)
+    host = parsed.netloc.lower().replace("www.", "")
+    path = parsed.path.strip("/")
+    q = parse_qs(parsed.query)
+    if host in {"youtube.com", "youtube-nocookie.com", "youtu.be"}:
+        vid = ""
+        if host == "youtu.be":
+            vid = path.split("/", 1)[0]
+        elif path.startswith("watch"):
+            vid = (q.get("v") or [""])[0]
+        elif path.startswith("embed/"):
+            vid = path.split("/", 1)[1].split("/", 1)[0]
+        if vid:
+            return "youtube:" + vid
+    if host in {"x.com", "twitter.com"}:
+        parts = [x for x in path.split("/") if x]
+        if "status" in parts:
+            i = parts.index("status")
+            if i + 1 < len(parts):
+                return "twitter:" + parts[i + 1].lower()
+        if len(parts) >= 3 and parts[0] == "i" and parts[1] == "status":
+            return "twitter:" + parts[2].lower()
+    return host + ":" + path.lower()
+
+
+def display_embed_url(url: str) -> str:
+    u = clean_url(url)
+    parsed = urlparse(u)
+    host = parsed.netloc.lower().replace("www.", "")
+    k = embed_key(u)
+    if k.startswith("youtube:"):
+        return "https://www.youtube.com/watch?v=" + k.split(":", 1)[1]
+    if k.startswith("twitter:") and host in {"x.com", "twitter.com"}:
+        parts = [x for x in parsed.path.strip("/").split("/") if x]
+        if len(parts) >= 3 and parts[1] == "status":
+            return "https://twitter.com/" + parts[0] + "/status/" + parts[2]
+        if len(parts) >= 3 and parts[0] == "i" and parts[1] == "status":
+            return "https://twitter.com/i/status/" + parts[2]
+    return u
+
+
+def embed_block(url: str) -> str:
+    u = display_embed_url(url)
+    host = urlparse(u).netloc.lower().replace("www.", "")
+    if host in {"youtube.com", "youtube-nocookie.com", "youtu.be"}:
+        # v93.33: YouTube embeds work best in WordPress as a plain URL on its own line.
+        # This avoids an ugly Shortcode block in the editor while preserving front-end oEmbed.
+        return html.escape(u)
+    # v93.33: social embeds are kept as shortcode blocks because plain X/Twitter URLs
+    # often remain plain text until a manual editor conversion.
+    return '<!-- wp:shortcode -->\n[embed]' + html.escape(u) + '[/embed]\n<!-- /wp:shortcode -->'
+
+
+def convert_embed_urls(body_html: str) -> str:
+    seen: set[str] = set()
+    def repl(match):
+        url = match.group(1)
+        k = embed_key(url)
+        if k in seen:
+            return ""
+        seen.add(k)
+        rest = match.group(2).strip() if len(match.groups()) > 1 and match.group(2) else ""
+        out = "\n\n" + embed_block(url) + "\n\n"
+        return out + ("<p>" + rest + "</p>" if rest else "")
+    text = body_html or ""
+    text = P_START_EMBED_RE.sub(repl, text)
+    text = P_URL_THEN_TEXT_RE.sub(repl, text)
+    text = P_ONLY_EMBED_RE.sub(repl, text)
+    text = PLAIN_EMBED_URL_RE.sub(repl, text)
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    return text
+
+
+def is_author_or_boilerplate_image_url(image_url: str) -> bool:
+    """v94.10 safety net: avoid rendering author/avatar/sidebar/footer images."""
+    u = clean_url(image_url).lower()
+    if not u:
+        return True
+    bad_terms = [
+        "avatar", "gravatar", "author", "profile", "bio",
+        "headshot", "userphoto", "user-photo", "wp-user-avatar",
+        "derek%20holloway", "derek-holloway",
+        "ringside-text-footer", "footer"
+    ]
+    if any(term in u for term in bad_terms):
+        return True
+    # Typical author thumbnails such as Name-96x96.jpg
+    if any(size in u for size in ["-64x64.", "-70x70.", "-88x88.", "-96x96.", "-120x120.", "-128x128.", "-150x150.", "-192x192."]):
+        return True
+    return False
+
+
 def image_block(image_url: str, *, wp_ok: bool = True) -> str:
     """v94.9: preserve standard-news internal images in the article body.
 
@@ -249,6 +375,9 @@ def image_block(image_url: str, *, wp_ok: bool = True) -> str:
     image_url = clean_url(image_url)
     if not image_url:
         return ""
+    if is_author_or_boilerplate_image_url(image_url):
+        print(f"[PUBLISHER v94.10] Immagine autore/boilerplate scartata: {image_url}", flush=True)
+        return ""
     media_id = None
     src = image_url
     if wp_ok:
@@ -258,11 +387,9 @@ def image_block(image_url: str, *, wp_ok: bool = True) -> str:
     safe_src = html.escape(src, quote=True)
     wp_id_class = f" wp-image-{media_id}" if media_id else ""
     return (
-        f'<!-- wp:image -->\n'
-        f'<figure class="wp-block-image owtv-inline-image{wp_id_class}">'
+        f'<figure class="owtv-inline-image{wp_id_class}">'
         f'<img src="{safe_src}" alt="" loading="lazy" />'
-        f'</figure>\n'
-        f'<!-- /wp:image -->'
+        f'</figure>'
     )
 
 
@@ -271,7 +398,7 @@ def render_image_placeholders(body_html: str, *, wp_ok: bool = True) -> str:
         url = match.group(1).strip()
         block = image_block(url, wp_ok=wp_ok)
         if block:
-            print(f"[PUBLISHER v94.9] Immagine interna preservata: {url}", flush=True)
+            print(f"[PUBLISHER v94.10] Immagine interna preservata: {url}", flush=True)
             return "\n\n" + block + "\n\n"
         return ""
     return IMAGE_PLACEHOLDER_RE.sub(repl, body_html or "")
@@ -487,12 +614,16 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
         "skipped_approved_articles": capacity_skipped,
         "skipped_approved_articles": capacity_skipped,
         "skipped_approved_articles": capacity_skipped,
+        "skipped_approved_articles": capacity_skipped,
         "handoff": {
             "published": sum(1 for r in results if r.get("status") == "published"),
             "already_published": sum(1 for r in results if r.get("status") == "already_published"),
             "dry_run": sum(1 for r in results if r.get("status") == "dry_run"),
             "wp_not_ready": sum(1 for r in results if r.get("status") == "wp_not_ready"),
             "errors": sum(1 for r in results if r.get("status") == "publish_error"),
+            "skipped_capacity": len(capacity_skipped),
+            "approved_not_attempted": len(capacity_skipped),
+            "approved_accounted_for": len(results_for_audit),
             "skipped_capacity": len(capacity_skipped),
             "approved_not_attempted": len(capacity_skipped),
             "approved_accounted_for": len(results_for_audit),
