@@ -456,7 +456,7 @@ def deterministic_story_key(item: dict[str, Any]) -> str:
         return "tessa_blanchard_tna_departure"
     if ("iyo" in text or "io " in text) and "sky" in text and "queen of the ring" in text and any(x in text for x in ["final", "finale"]):
         return "iyo_sky_queen_of_the_ring_final"
-    if "jacob" in text and "fatu" in text and "eric" in text and "andre" in text and any(x in text for x in ["splash", "aggredis", "attack", "brutal"]):
+    if "jacob" in text and "fatu" in text and "eric" in text and "andr" in text and any(x in text for x in ["splash", "aggredis", "attack", "brutal"]):
         return "jacob_fatu_eric_andre_raw_attack"
     return ""
 
@@ -608,7 +608,13 @@ def apply_ai_duplicate_arbitration(result: dict[str, Any]) -> None:
         ai_statuses.append(status)
         if ai_data:
             ai_used += 1
-        same_story = bool(ai_data and ai_data.get("cluster_type") == "same_story") or len({deterministic_story_key(x) for x in cluster if deterministic_story_key(x)}) == 1
+        det_keys = [deterministic_story_key(x) for x in cluster]
+        deterministic_same_story = (
+            len(det_keys) == len(cluster)
+            and all(det_keys)
+            and len(set(det_keys)) == 1
+        )
+        same_story = bool(ai_data and ai_data.get("cluster_type") == "same_story") or deterministic_same_story
         if not same_story:
             continue
         keep_ids = set(ai_data.get("keep_ids") or []) if ai_data else set()
