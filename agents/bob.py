@@ -24,7 +24,7 @@ BOB_ARTICLES_FILE = NEWSROOM_STATE_DIR / "bob_articles_latest.json"
 SIMONE_REPORT_STATUS_FILE = NEWSROOM_STATE_DIR / "simone_report_publish_latest.json"
 ARTIFACT_BOB_FILE = ARTIFACT_DIR / "bob_articles.json"
 
-BOB_VERSION = "v93_39_dynamic_article_capacity"
+BOB_VERSION = "v94.11_source_self_reference_cleanup"
 REQUEST_TIMEOUT = int(os.getenv("V93_BOB_REQUEST_TIMEOUT", "18"))
 MAX_ARTICLES_PER_RUN = int(os.getenv("V93_BOB_MAX_ARTICLES_PER_RUN", "5"))
 MAX_ARTICLES_WITH_REPORT = int(os.getenv("V93_BOB_MAX_ARTICLES_WITH_REPORT", "4"))
@@ -78,6 +78,19 @@ FOOTER_START_PATTERNS = [
     re.compile(r"\bmore\s+(wwe|aew|nxt|tna|roh)\s+news\b", re.I),
 ]
 SOURCE_INTRO_PATTERNS = [re.compile(r"^\s*according\s+to\s+.+?:\s*$", re.I), re.compile(r"^\s*per\s+.+?:\s*$", re.I)]
+SOURCE_SELF_REFERENCE_SITE_RE = r"(?:ringside\s+news|wrestling\s*inc\.?|fightful|pwinsider|f4wonline|wrestling\s+observer|sescoops|ewrestlingnews|411mania|bodyslam\.net)"
+SOURCE_SELF_REFERENCE_PATTERNS = [
+    re.compile(rf"\b{SOURCE_SELF_REFERENCE_SITE_RE}\s+(?:will\s+)?(?:continue|continuerà|continueranno)\s+(?:(?:to|a)\s+)?(?:monitor|follow|cover|provide|seguire|monitorare|fornire)\b", re.I),
+    re.compile(rf"\bstay\s+tuned\s+(?:to\s+)?{SOURCE_SELF_REFERENCE_SITE_RE}\b", re.I),
+    re.compile(rf"\bwe\s+at\s+{SOURCE_SELF_REFERENCE_SITE_RE}\b", re.I),
+    re.compile(rf"\b{SOURCE_SELF_REFERENCE_SITE_RE}\s+(?:will\s+)?bring\s+you\s+(?:more\s+)?updates\b", re.I),
+]
+
+def is_source_self_reference_text(text: str) -> bool:
+    cleaned = clean_text(text)
+    if not cleaned:
+        return False
+    return any(pattern.search(cleaned) for pattern in SOURCE_SELF_REFERENCE_PATTERNS)
 QUOTE_RE = re.compile(r"[“\"]([^”\"]{60,})[”\"]")
 EMBED_URL_RE = re.compile(r"https?://(?:www\.)?(?:x\.com|twitter\.com|instagram\.com|youtube\.com|youtube-nocookie\.com|youtu\.be|tiktok\.com|threads\.net|facebook\.com|bsky\.app)/[^\s\"'<>\\]+", re.I)
 
@@ -234,7 +247,7 @@ def decode_possible_rsn_lazy_embed_html(value: str) -> str:
 
 
 def pick_srcset_url(value: str) -> str:
-    raw = html.unescape(str(value or "").replace("\/", "/")).strip()
+    raw = html.unescape(str(value or "").replace("\\/", "/")).strip()
     if not raw:
         return ""
     best_url = ""
@@ -256,7 +269,7 @@ def pick_srcset_url(value: str) -> str:
 
 
 def normalize_ringside_image_url(url: str) -> str:
-    u = html.unescape(str(url or "").replace("\/", "/")).strip()
+    u = html.unescape(str(url or "").replace("\\/", "/")).strip()
     if not u or u.startswith("data:"):
         return ""
     u = re.sub(r"\?.*$", "", u)
@@ -284,128 +297,6 @@ def image_url_from_node(node: Tag, base_url: str) -> str:
             return url
     return ""
 
-
-def decode_possible_rsn_lazy_embed_html(value: str) -> str:
-    raw = str(value or "").strip()
-    if not raw:
-        return ""
-    try:
-        return base64.b64decode(raw + "=" * (-len(raw) % 4)).decode("utf-8", errors="ignore")
-    except Exception:
-        return ""
-
-
-def pick_srcset_url(value: str) -> str:
-    raw = html.unescape(str(value or "").replace("\/", "/")).strip()
-    if not raw:
-        return ""
-    best_url = ""
-    best_width = -1
-    for part in raw.split(","):
-        bits = part.strip().split()
-        if not bits:
-            continue
-        url = bits[0].strip()
-        width = 0
-        if len(bits) > 1:
-            m = re.search(r"(\d+)w", bits[1])
-            if m:
-                width = int(m.group(1))
-        if width >= best_width:
-            best_url = url
-            best_width = width
-    return best_url
-
-
-def normalize_ringside_image_url(url: str) -> str:
-    u = html.unescape(str(url or "").replace("\/", "/")).strip()
-    if not u or u.startswith("data:"):
-        return ""
-    u = re.sub(r"\?.*$", "", u)
-    u = u.replace("/wp-content/smush-avif/", "/wp-content/uploads/")
-    if u.lower().endswith(".avif"):
-        u = u[:-5]
-    return u
-
-
-def image_url_from_node(node: Tag, base_url: str) -> str:
-    candidates: list[str] = []
-    for attr in ["src", "data-src", "data-lazy-src", "data-original", "data-orig-src"]:
-        value = node.get(attr)
-        if value:
-            candidates.append(str(value))
-    for attr in ["srcset", "data-srcset", "data-lazy-srcset", "data-original-srcset"]:
-        value = node.get(attr)
-        if value:
-            picked = pick_srcset_url(str(value))
-            if picked:
-                candidates.append(picked)
-    for raw in candidates:
-        url = normalize_ringside_image_url(absolute_url(base_url, raw))
-        if url:
-            return url
-    return ""
-
-def decode_possible_rsn_lazy_embed_html(value: str) -> str:
-    raw = str(value or "").strip()
-    if not raw:
-        return ""
-    try:
-        return base64.b64decode(raw + "=" * (-len(raw) % 4)).decode("utf-8", errors="ignore")
-    except Exception:
-        return ""
-
-
-def pick_srcset_url(value: str) -> str:
-    raw = html.unescape(str(value or "").replace("\/", "/")).strip()
-    if not raw:
-        return ""
-    best_url = ""
-    best_width = -1
-    for part in raw.split(","):
-        bits = part.strip().split()
-        if not bits:
-            continue
-        url = bits[0].strip()
-        width = 0
-        if len(bits) > 1:
-            m = re.search(r"(\d+)w", bits[1])
-            if m:
-                width = int(m.group(1))
-        if width >= best_width:
-            best_url = url
-            best_width = width
-    return best_url
-
-
-def normalize_ringside_image_url(url: str) -> str:
-    u = html.unescape(str(url or "").replace("\/", "/")).strip()
-    if not u or u.startswith("data:"):
-        return ""
-    u = re.sub(r"\?.*$", "", u)
-    u = u.replace("/wp-content/smush-avif/", "/wp-content/uploads/")
-    if u.lower().endswith(".avif"):
-        u = u[:-5]
-    return u
-
-
-def image_url_from_node(node: Tag, base_url: str) -> str:
-    candidates: list[str] = []
-    for attr in ["src", "data-src", "data-lazy-src", "data-original", "data-orig-src"]:
-        value = node.get(attr)
-        if value:
-            candidates.append(str(value))
-    for attr in ["srcset", "data-srcset", "data-lazy-srcset", "data-original-srcset"]:
-        value = node.get(attr)
-        if value:
-            picked = pick_srcset_url(str(value))
-            if picked:
-                candidates.append(picked)
-    for raw in candidates:
-        url = normalize_ringside_image_url(absolute_url(base_url, raw))
-        if url:
-            return url
-    return ""
 
 def extract_embed_urls_from_text(raw: str, base_url: str) -> list[str]:
     text = html.unescape((raw or "").replace("\\/", "/"))
@@ -487,19 +378,19 @@ def element_from_node(node: Tag, base_url: str) -> dict[str, Any] | None:
         return {"type": "embed", "url": embed_url, "source_tag": name}
     if name in {"p", "li"}:
         text = clean_text(node.get_text(" "))
-        if is_bio_or_footer_text(text) or any(p.search(text) for p in SOURCE_INTRO_PATTERNS):
+        if is_bio_or_footer_text(text) or is_source_self_reference_text(text) or any(p.search(text) for p in SOURCE_INTRO_PATTERNS):
             return None
         # v93.26: do not infer quote blocks from quotation marks in normal paragraphs.
         # Only original source <blockquote> nodes are rendered as blockquotes.
         return {"type": "text", "text": text}
     if name in {"h2", "h3", "h4"}:
         text = clean_text(node.get_text(" "))
-        if not text or is_bio_or_footer_text(text) or is_footer_start_text(text):
+        if not text or is_bio_or_footer_text(text) or is_source_self_reference_text(text) or is_footer_start_text(text):
             return None
         return {"type": "heading", "level": int(name[1]), "text": text}
     if name == "blockquote":
         text = clean_text(node.get_text(" "))
-        if len(text) < 8 or is_cta_text(text):
+        if len(text) < 8 or is_cta_text(text) or is_source_self_reference_text(text):
             return None
         return {"type": "quote", "text": text, "source_tag": "blockquote"}
     if name == "table":
@@ -657,6 +548,7 @@ REGOLE
 - Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.
 - Conserva fedelmente il significato di ogni blocco.
 - Le citazioni vanno tradotte integralmente.
+- Rimuovi qualunque frase autoreferenziale della fonte originale che prometta monitoraggio, copertura futura, aggiornamenti o inviti a seguire Ringside News, WrestlingInc, Fightful o altri siti. Non tradurla.
 - Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.
 - Usa terminologia wrestling italiana corretta e naturale.
 - Rispondi SOLO in JSON valido.

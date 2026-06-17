@@ -296,6 +296,7 @@ def render_image_placeholders(body_html: str, *, wp_ok: bool = True) -> str:
     return IMAGE_PLACEHOLDER_RE.sub(repl, body_html or "")
 
 
+
 def normalized_story_blob(article: dict[str, Any]) -> str:
     parts = [article.get("title_it"), article.get("source_title"), article.get("excerpt_it"), article.get("source_url")]
     meta = article.get("meta") if isinstance(article.get("meta"), dict) else {}
@@ -322,7 +323,6 @@ def existing_story_duplicate(history: dict[str, Any], signature: str) -> dict[st
         if isinstance(item, dict) and item.get("story_signature") == signature:
             return item
     return None
-
 
 def clean_body_for_wordpress(body_html: str, *, wp_ok: bool = True) -> str:
     body_html = render_image_placeholders(body_html or "", wp_ok=wp_ok)

@@ -2,14 +2,24 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
 from agents import menzo as base
-from agents.story_dedupe_v93_32 import dedupe_within_batch, is_source_opinion, remember_footprints, remember_stories, story_footprint, story_signature
-from agents.story_dedupe_v93_32 import dedupe_within_batch, is_source_opinion, remember_footprints, remember_stories, story_footprint, story_signature
-from agents.story_dedupe_v93_32 import build_generalized_fingerprint, dedupe_within_batch, find_duplicate_by_fingerprint, is_source_opinion, load_story_fingerprints, remember_fingerprints, remember_footprints, remember_stories, story_footprint, story_signature
+from agents.story_dedupe_v93_32 import (
+    build_generalized_fingerprint,
+    dedupe_within_batch,
+    find_duplicate_by_fingerprint,
+    is_source_opinion,
+    load_story_fingerprints,
+    remember_fingerprints,
+    remember_footprints,
+    remember_stories,
+    story_footprint,
+    story_signature,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 STATE_DIR = ROOT / "state"
@@ -22,7 +32,7 @@ ARTIFACT_DECISIONS_FILE = ARTIFACT_DIR / "menzo_decisions.json"
 SOFTPOOL_FILE = NEWSROOM_STATE_DIR / "menzo_softpool.json"
 HARD_SKIP_FILE = NEWSROOM_STATE_DIR / "menzo_hard_skips.json"
 
-MENZO_VERSION = "v93_39_capacity_buffer"
+MENZO_VERSION = "v94.11_menzo_ai_duplicate_arbitration"
 VALID_LABELS = {"high", "medium", "low", "skip"}
 LABEL_SCORE = {"high": 92, "medium": 72, "low": 48, "skip": 0}
 SOFTPOOL_TTL_HOURS = int(os.getenv("V93_MENZO_SOFTPOOL_TTL_HOURS", "36"))
@@ -410,62 +420,267 @@ def enforce_selected_cap(result: dict[str, Any]) -> None:
     result.setdefault("postprocess", {})["selected_overflow_to_pending"] = len(overflow)
 
 
-def apply_story_dedupe_to_result(result: dict[str, Any]) -> None:
-    selected = [x for x in result.get("selected", []) if isinstance(x, dict)]
-    pending = [x for x in result.get("pending", []) if isinstance(x, dict)]
-    skipped = [x for x in result.get("skipped", []) if isinstance(x, dict)]
-    candidates = selected + pending
-    kept, dupes = dedupe_within_batch(candidates)
-    selected_urls = {source_key(x.get("url") or x.get("source_url") or "") for x in selected if isinstance(x, dict)}
-    new_selected: list[dict[str, Any]] = []
-    new_pending: list[dict[str, Any]] = []
-    for item in kept:
-        key = source_key(item.get("url") or item.get("source_url") or "")
-        if key in selected_urls or str(item.get("ai_priority_label") or "").lower() == "high":
-            item["decision"] = "selected"
-            new_selected.append(item)
-        else:
-            item["decision"] = "pending"
-            new_pending.append(item)
-    for dupe in dupes:
-        dupe["decision"] = "skip"
-        dupe["priority"] = "skip"
-        dupe["article_type"] = dupe.get("article_type") or "duplicate"
-    result["selected"] = sorted(new_selected, key=sort_item, reverse=True)
-    result["pending"] = sorted(new_pending, key=sort_item, reverse=True)
-    result["skipped"] = skipped + dupes
-    result["allowed_urls_for_v92"] = [str(x.get("url") or x.get("source_url") or "") for x in result["selected"] if x.get("url") or x.get("source_url")]
-    result["handoff"] = {"to_bob_or_v92": len(result["selected"]), "pending": len(result["pending"]), "skipped": len(result["skipped"])}
-    result.setdefault("postprocess", {})["story_duplicates_skipped"] = len(dupes)
+AI_DEDUPE_MAX_CLUSTERS = 5
+AI_DEDUPE_MAX_CANDIDATES = 4
+AI_DEDUPE_MIN_OVERLAP = 0.46
+RATINGS_TERMS = {"ratings", "ascolti", "viewership", "audience", "netflix"}
+SHOW_TERMS = {"raw", "smackdown", "nxt", "dynamite", "collision", "impact"}
+SOURCE_RELIABILITY = {"wrestlinginc": 92, "wrestling inc": 92, "fightful": 90, "pwinsider": 88, "f4wonline": 84, "ringside news": 78, "ringsidenews": 78}
 
 
-def apply_story_dedupe_to_result(result: dict[str, Any]) -> None:
-    selected = [x for x in result.get("selected", []) if isinstance(x, dict)]
-    pending = [x for x in result.get("pending", []) if isinstance(x, dict)]
+def ai_dedupe_text(item: dict[str, Any]) -> str:
+    meta = item.get("meta") if isinstance(item.get("meta"), dict) else {}
+    return " ".join(str(x or "") for x in [
+        item.get("title"), item.get("source_title"), item.get("title_it"), item.get("summary"),
+        item.get("excerpt"), item.get("excerpt_it"), item.get("category_hint"), item.get("source"),
+        meta.get("title"), meta.get("source_title"), meta.get("description"),
+    ])
+
+
+def ai_dedupe_words(item: dict[str, Any]) -> set[str]:
+    stop = {"wwe", "aew", "tna", "the", "and", "per", "con", "del", "della", "dopo", "during", "after", "news", "update", "aggiornamento"}
+    return {w for w in re.findall(r"[a-z0-9àèéìòù']+", normalize_text(ai_dedupe_text(item)).lower()) if len(w) >= 3 and w not in stop}
+
+
+def rating_show_key(item: dict[str, Any]) -> str:
+    words = ai_dedupe_words(item)
+    if not (words & RATINGS_TERMS):
+        return ""
+    shows = sorted(words & SHOW_TERMS)
+    return shows[0] if shows else "unknown"
+
+
+def deterministic_story_key(item: dict[str, Any]) -> str:
+    text = normalize_text(ai_dedupe_text(item)).lower()
+    if "tessa" in text and "blanchard" in text and any(x in text for x in ["lascia", "leave", "leaves", "release", "rilascio"]):
+        return "tessa_blanchard_tna_departure"
+    if ("iyo" in text or "io " in text) and "sky" in text and "queen of the ring" in text and any(x in text for x in ["final", "finale"]):
+        return "iyo_sky_queen_of_the_ring_final"
+    if "jacob" in text and "fatu" in text and "eric" in text and "andr" in text and any(x in text for x in ["splash", "aggredis", "attack", "brutal"]):
+        return "jacob_fatu_eric_andre_raw_attack"
+    return ""
+
+
+def source_reliability_score(item: dict[str, Any]) -> int:
+    source = str(item.get("source") or item.get("url") or item.get("source_url") or "").lower()
+    for key, score in SOURCE_RELIABILITY.items():
+        if key in source:
+            return score
+    return 70
+
+
+def candidate_quality_score(item: dict[str, Any]) -> tuple[int, int, int, int, int]:
+    text = ai_dedupe_text(item)
+    has_media = int(bool(item.get("has_image") or item.get("featured_image") or item.get("image_url") or int(item.get("embed_count") or 0)))
+    quotes = text.count('"') + text.count("“") + text.count("”")
+    clickbait_penalty = int(any(x in text.lower() for x in ["shocking", "you won't believe", "incredibile", "clamoroso"]))*20
+    return (len(ai_dedupe_words(item)), source_reliability_score(item), has_media, quotes, -clickbait_penalty)
+
+
+def lightweight_ai_record(item: dict[str, Any], item_id: str) -> dict[str, Any]:
+    return {
+        "id": item_id,
+        "title": item.get("title") or item.get("source_title") or item.get("title_it") or "",
+        "source": item.get("source") or "",
+        "url": item.get("url") or item.get("source_url") or "",
+        "summary": item.get("summary") or item.get("excerpt") or item.get("excerpt_it") or "",
+        "category_hint": item.get("category_hint") or "",
+        "published_at": item.get("published_at") or item.get("published") or item.get("date") or "",
+        "has_image": bool(item.get("has_image") or item.get("featured_image") or item.get("image_url")),
+        "embed_count": int(item.get("embed_count") or 0),
+    }
+
+
+def build_ai_dedupe_prompt(records: list[dict[str, Any]]) -> str:
+    return """You are Menzo's duplicate-news arbiter. Use only the lightweight metadata below; do not assume full article bodies.
+Return ONLY valid JSON with this shape:
+{"cluster_type":"same_story|follow_up|different_story|mixed","keep_ids":[],"drop_ids":[],"reason":"","novelty_by_id":{"id":"none|minor|substantial"}}
+Rules: same central wrestling fact with no substantial novelty is same_story. If multiple same-run candidates describe the same fact, keep the best by verifiable details, source reliability, useful image/embed, less clickbait, central clarity, and direct/original details. Different TV ratings stories for different shows are not same_story.
+
+Candidates:
+""" + json.dumps(records, ensure_ascii=False, indent=2)
+
+
+def call_gemini_json(prompt: str) -> tuple[dict[str, Any] | None, str]:
+    api_key = os.getenv("GEMINI_API_KEY", "").strip()
+    if not api_key:
+        return None, "missing_api_key"
+    try:
+        from google import genai  # type: ignore
+        client = genai.Client(api_key=api_key)
+        for model in [m.strip() for m in os.getenv("GEMINI_MODEL_CHAIN", "gemini-3.1-flash-lite,gemini-2.5-flash-lite").split(",") if m.strip()]:
+            try:
+                response = client.models.generate_content(model=model, contents=prompt)
+                raw = re.sub(r"^```(?:json)?|```$", "", (getattr(response, "text", "") or "").strip(), flags=re.I).strip()
+                data = json.loads(raw)
+                if isinstance(data, dict):
+                    return data, model
+            except Exception:
+                continue
+    except Exception as exc:
+        return None, f"gemini_unavailable:{exc}"
+    return None, "empty_or_invalid_response"
+
+
+def build_suspicious_ai_clusters(items: list[dict[str, Any]]) -> list[list[dict[str, Any]]]:
+    clusters: list[list[dict[str, Any]]] = []
+    used: set[int] = set()
+    for i, item in enumerate(items):
+        if i in used:
+            continue
+        key = deterministic_story_key(item)
+        words = ai_dedupe_words(item)
+        cluster = [item]
+        for j, other in enumerate(items[i + 1:], start=i + 1):
+            if j in used:
+                continue
+            other_key = deterministic_story_key(other)
+            if key and key == other_key:
+                cluster.append(other); used.add(j); continue
+            show_a, show_b = rating_show_key(item), rating_show_key(other)
+            if show_a and show_b and show_a != show_b:
+                continue
+            other_words = ai_dedupe_words(other)
+            overlap = len(words & other_words) / max(1, min(len(words), len(other_words)))
+            if overlap >= AI_DEDUPE_MIN_OVERLAP and len(words & other_words) >= 4:
+                cluster.append(other); used.add(j)
+        if len(cluster) > 1:
+            clusters.append(cluster[:AI_DEDUPE_MAX_CANDIDATES])
+            used.add(i)
+        if len(clusters) >= AI_DEDUPE_MAX_CLUSTERS:
+            break
+    return clusters
+
+
+def published_fingerprint_records() -> list[dict[str, Any]]:
+    out: list[dict[str, Any]] = []
+    for old in load_story_fingerprints():
+        if not isinstance(old, dict):
+            continue
+        fp = old.get("fingerprint") if isinstance(old.get("fingerprint"), dict) else old
+        out.append({
+            "title": fp.get("title") or old.get("title") or "",
+            "source": fp.get("source") or old.get("source") or "",
+            "url": fp.get("url") or old.get("url") or "",
+            "summary": fp.get("canonical_summary") or "",
+            "category_hint": "published_memory",
+            "published_at": old.get("added_at") or "",
+            "has_image": False,
+            "embed_count": 0,
+        })
+    return out[:20]
+
+
+def suspicious_published_records(item: dict[str, Any], published: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    item_key = deterministic_story_key(item)
+    item_words = ai_dedupe_words(item)
+    matches: list[tuple[float, dict[str, Any]]] = []
+    for old in published:
+        old_key = deterministic_story_key(old)
+        if item_key and old_key and item_key == old_key:
+            matches.append((1.0, old))
+            continue
+        show_a, show_b = rating_show_key(item), rating_show_key(old)
+        if show_a and show_b and show_a != show_b:
+            continue
+        old_words = ai_dedupe_words(old)
+        overlap = len(item_words & old_words) / max(1, min(len(item_words), len(old_words)))
+        if overlap >= AI_DEDUPE_MIN_OVERLAP and len(item_words & old_words) >= 4:
+            matches.append((overlap, old))
+    return [record for _, record in sorted(matches, key=lambda x: x[0], reverse=True)[: AI_DEDUPE_MAX_CANDIDATES - 1]]
+
+
+def apply_ai_duplicate_arbitration(result: dict[str, Any]) -> None:
+    selected = [dict(x) for x in result.get("selected", []) if isinstance(x, dict)]
+    pending = [dict(x) for x in result.get("pending", []) if isinstance(x, dict)]
     skipped = [x for x in result.get("skipped", []) if isinstance(x, dict)]
     candidates = selected + pending
-    kept, dupes = dedupe_within_batch(candidates)
-    selected_urls = {source_key(x.get("url") or x.get("source_url") or "") for x in selected if isinstance(x, dict)}
-    new_selected: list[dict[str, Any]] = []
-    new_pending: list[dict[str, Any]] = []
+    original_selected = {source_key(x.get("url") or x.get("source_url") or "") for x in selected}
+    clusters = build_suspicious_ai_clusters(candidates)
+    ai_used = 0
+    ai_statuses: list[str] = []
+    dropped: dict[str, dict[str, Any]] = {}
+    keep_keys: set[str] = set()
+
+    for idx, cluster in enumerate(clusters, start=1):
+        records = [lightweight_ai_record(item, f"c{idx}_{n}") for n, item in enumerate(cluster, start=1)]
+        ai_data, status = call_gemini_json(build_ai_dedupe_prompt(records))
+        ai_statuses.append(status)
+        if ai_data:
+            ai_used += 1
+        det_keys = [deterministic_story_key(x) for x in cluster]
+        deterministic_same_story = (
+            len(det_keys) == len(cluster)
+            and all(det_keys)
+            and len(set(det_keys)) == 1
+        )
+        same_story = bool(ai_data and ai_data.get("cluster_type") == "same_story") or deterministic_same_story
+        if not same_story:
+            continue
+        keep_ids = set(ai_data.get("keep_ids") or []) if ai_data else set()
+        if keep_ids:
+            keep_item = next((cluster[int(k.rsplit("_", 1)[-1]) - 1] for k in keep_ids if k.rsplit("_", 1)[-1].isdigit() and 0 < int(k.rsplit("_", 1)[-1]) <= len(cluster)), None)
+        else:
+            keep_item = sorted(cluster, key=candidate_quality_score, reverse=True)[0]
+        keep_url = str(keep_item.get("url") or keep_item.get("source_url") or "")
+        keep_keys.add(source_key(keep_url))
+        for item in cluster:
+            key = source_key(item.get("url") or item.get("source_url") or "")
+            if key == source_key(keep_url):
+                continue
+            item["decision"] = "skip"
+            item["priority"] = "skip"
+            item["article_type"] = "duplicate"
+            item["reason"] = "ai_cluster_duplicate_loser"
+            item["duplicate_of"] = keep_url
+            item.setdefault("menzo_policy", {})["ai_duplicate_arbitration"] = True
+            dropped[key] = item
+
+    # Published-memory check is AI-only and only runs for lightweight suspicious matches.
+    # If Gemini is unavailable, leave candidates untouched/pending via the existing conservative flow.
+    published_records = published_fingerprint_records()
+    for item in list(candidates):
+        key = source_key(item.get("url") or item.get("source_url") or "")
+        if key in dropped:
+            continue
+        suspicious_published = suspicious_published_records(item, published_records)
+        if not suspicious_published:
+            continue
+        probe = [lightweight_ai_record(item, "new_1")] + [dict(r, id=f"pub_{i}") for i, r in enumerate(suspicious_published, start=1)]
+        if len(probe) <= 1 or len(ai_statuses) >= AI_DEDUPE_MAX_CLUSTERS:
+            break
+        ai_data, status = call_gemini_json(build_ai_dedupe_prompt(probe))
+        ai_statuses.append(status)
+        if not ai_data:
+            continue
+        ai_used += 1
+        novelty = (ai_data.get("novelty_by_id") or {}).get("new_1")
+        drop_ids = set(ai_data.get("drop_ids") or [])
+        if ai_data.get("cluster_type") == "same_story" and ("new_1" in drop_ids or novelty in {"none", "minor"}):
+            pub_id = next((x for x in ai_data.get("keep_ids", []) if str(x).startswith("pub_")), "")
+            pub_url = next((r.get("url") for r in probe if r.get("id") == pub_id), "")
+            item["decision"] = "skip"; item["priority"] = "skip"; item["article_type"] = "duplicate"
+            item["reason"] = "ai_confirmed_duplicate_of_published"; item["duplicate_of"] = pub_url
+            item.setdefault("menzo_policy", {})["ai_duplicate_arbitration"] = True
+            dropped[key] = item
+
+    kept = [x for x in candidates if source_key(x.get("url") or x.get("source_url") or "") not in dropped]
+    new_selected, new_pending = [], []
     for item in kept:
         key = source_key(item.get("url") or item.get("source_url") or "")
-        if key in selected_urls or str(item.get("ai_priority_label") or "").lower() == "high":
-            item["decision"] = "selected"
-            new_selected.append(item)
+        if key in original_selected or key in keep_keys or str(item.get("ai_priority_label") or "").lower() == "high":
+            item["decision"] = "selected"; new_selected.append(item)
         else:
-            item["decision"] = "pending"
-            new_pending.append(item)
-    for dupe in dupes:
-        dupe["decision"] = "skip"
-        dupe["priority"] = "skip"
-        dupe["article_type"] = dupe.get("article_type") or "duplicate"
+            item["decision"] = "pending"; new_pending.append(item)
     result["selected"] = sorted(new_selected, key=sort_item, reverse=True)
     result["pending"] = sorted(new_pending, key=sort_item, reverse=True)
-    result["skipped"] = skipped + dupes
+    result["skipped"] = skipped + list(dropped.values())
     result["allowed_urls_for_v92"] = [str(x.get("url") or x.get("source_url") or "") for x in result["selected"] if x.get("url") or x.get("source_url")]
     result["handoff"] = {"to_bob_or_v92": len(result["selected"]), "pending": len(result["pending"]), "skipped": len(result["skipped"])}
-    result.setdefault("postprocess", {})["story_duplicates_skipped"] = len(dupes)
+    result.setdefault("postprocess", {})["ai_duplicate_arbitration_clusters"] = len(clusters)
+    result.setdefault("postprocess", {})["ai_duplicate_arbitration_calls"] = ai_used
+    result.setdefault("postprocess", {})["ai_duplicate_arbitration_skipped"] = len(dropped)
+    result.setdefault("postprocess", {})["ai_duplicate_arbitration_statuses"] = ai_statuses[:AI_DEDUPE_MAX_CLUSTERS]
 
 
 def rebuild_decisions(result: dict[str, Any]) -> None:
@@ -645,64 +860,51 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     apply_story_footprint_policy(result)
     enforce_ai_skip_binding(result)
     apply_generalized_fingerprint_policy(result)
+    apply_ai_duplicate_arbitration(result)
     enforce_selected_cap(result)
     enforce_capacity_buffer(result)
     result["version"] = MENZO_VERSION
     result["mode"] = "selective_softpool_footprint_policy"
-    result.setdefault("policy", {})["priority_schema"] = "priority_label_high_medium_low_skip"
-    result.setdefault("policy", {})["selected_requires_high_label_or_min_score"] = MIN_SELECTED_SCORE
-    result.setdefault("policy", {})["softpool_enabled"] = True
-    result.setdefault("policy", {})["softpool_min_score"] = MIN_SOFTPOOL_SCORE
-    result.setdefault("policy", {})["softpool_excludes"] = sorted(EXCLUDED_SOFTPOOL_TYPES)
-    result.setdefault("policy", {})["soft_news_ttl_hours"] = SOFTNEWS_TTL_HOURS
-    result.setdefault("policy", {})["menzo_hard_skips_exported_to_massy"] = True
-    result.setdefault("policy", {})["source_opinion_skip"] = True
-    result.setdefault("policy", {})["story_footprint_dedupe_before_bob"] = True
-    result.setdefault("policy", {})["story_footprints_ttl_days"] = 7
-    result.setdefault("policy", {})["medical_return_major_brands_only"] = True
-    result.setdefault("policy", {})["brand_rank_tiebreaker"] = "WWE/NXT/AEW > TNA/ROH > OVW/indie"
-    result.setdefault("policy", {})["medical_return_major_brands_only"] = True
-    result.setdefault("policy", {})["brand_rank_tiebreaker"] = "WWE/NXT/AEW > TNA/ROH > OVW/indie"
-    result.setdefault("policy", {})["story_dedupe_before_bob"] = True
-    result.setdefault("policy", {})["source_opinion_skip"] = True
-    result.setdefault("policy", {})["story_footprint_dedupe_before_bob"] = True
-    result.setdefault("policy", {})["story_footprints_ttl_days"] = 7
-    result.setdefault("policy", {})["medical_return_major_brands_only"] = True
-    result.setdefault("policy", {})["brand_rank_tiebreaker"] = "WWE/NXT/AEW > TNA/ROH > OVW/indie"
-    result.setdefault("policy", {})["medical_return_major_brands_only"] = True
-    result.setdefault("policy", {})["brand_rank_tiebreaker"] = "WWE/NXT/AEW > TNA/ROH > OVW/indie"
-    result.setdefault("policy", {})["medical_return_major_brands_only"] = True
-    result.setdefault("policy", {})["brand_rank_tiebreaker"] = "WWE/NXT/AEW > TNA/ROH > OVW/indie"
-    result.setdefault("policy", {})["medical_return_major_brands_only"] = True
-    result.setdefault("policy", {})["brand_rank_tiebreaker"] = "WWE/NXT/AEW > TNA/ROH > OVW/indie"
-    result.setdefault("policy", {})["story_dedupe_before_bob"] = True
-    result.setdefault("policy", {})["news_capacity_buffer_for_bob"] = MAX_SELECTED_THIS_RUN
-    result.setdefault("policy", {})["source_opinion_skip"] = True
-    result.setdefault("policy", {})["story_footprint_dedupe_before_bob"] = True
-    result.setdefault("policy", {})["story_footprints_ttl_days"] = 7
-    result.setdefault("policy", {})["medical_return_major_brands_only"] = True
-    result.setdefault("policy", {})["brand_rank_tiebreaker"] = "WWE/NXT/AEW > TNA/ROH > OVW/indie"
-    result.setdefault("policy", {})["medical_return_major_brands_only"] = True
-    result.setdefault("policy", {})["brand_rank_tiebreaker"] = "WWE/NXT/AEW > TNA/ROH > OVW/indie"
-    result.setdefault("policy", {})["medical_return_major_brands_only"] = True
-    result.setdefault("policy", {})["brand_rank_tiebreaker"] = "WWE/NXT/AEW > TNA/ROH > OVW/indie"
-    result.setdefault("policy", {})["medical_return_major_brands_only"] = True
-    result.setdefault("policy", {})["brand_rank_tiebreaker"] = "WWE/NXT/AEW > TNA/ROH > OVW/indie"
-    result.setdefault("policy", {})["medical_return_major_brands_only"] = True
-    result.setdefault("policy", {})["brand_rank_tiebreaker"] = "WWE/NXT/AEW > TNA/ROH > OVW/indie"
-    result.setdefault("policy", {})["story_dedupe_before_bob"] = True
+    policy = result.setdefault("policy", {})
+    policy["priority_schema"] = "priority_label_high_medium_low_skip"
+    policy["selected_requires_high_label_or_min_score"] = MIN_SELECTED_SCORE
+    policy["softpool_enabled"] = True
+    policy["softpool_min_score"] = MIN_SOFTPOOL_SCORE
+    policy["softpool_excludes"] = sorted(EXCLUDED_SOFTPOOL_TYPES)
+    policy["soft_news_ttl_hours"] = SOFTNEWS_TTL_HOURS
+    policy["menzo_hard_skips_exported_to_massy"] = True
+    policy["source_opinion_skip"] = True
+    policy["story_footprint_dedupe_before_bob"] = True
+    policy["story_footprints_ttl_days"] = 7
+    policy["story_dedupe_before_bob"] = True
+    policy["medical_return_major_brands_only"] = True
+    policy["brand_rank_tiebreaker"] = "WWE/NXT/AEW > TNA/ROH > OVW/indie"
+    policy["news_capacity_buffer_for_bob"] = MAX_SELECTED_THIS_RUN
+    policy["ai_duplicate_arbitration"] = True
+    policy["ai_duplicate_arbitration_limits"] = {"max_clusters_per_run": AI_DEDUPE_MAX_CLUSTERS, "max_candidates_per_cluster": AI_DEDUPE_MAX_CANDIDATES}
     save_softpool(result)
     save_hard_skips(result)
     remember_stories(result.get("selected", []), reason="menzo_selected")
-    remember_stories(result.get("selected", []), reason="menzo_selected")
-    remember_stories(result.get("selected", []), reason="menzo_selected")
     remember_footprints(result.get("selected", []), reason="menzo_selected")
     remember_fingerprints(result.get("selected", []), reason="menzo_selected")
-    remember_stories(result.get("selected", []), reason="menzo_selected")
     write_json(ARTIFACT_DECISIONS_FILE, result)
     write_json(MENZO_DECISIONS_FILE, result)
     write_json(V92_ALLOWED_URLS_FILE, {"generated_at": utc_now(), "version": MENZO_VERSION, "allowed_urls": result.get("allowed_urls_for_v92", [])})
-    print(f"[MENZO v93.34] Decisione selettiva | selected={len(result.get('selected', []))} pending={len(result.get('pending', []))} skipped={len(result.get('skipped', []))} source_opinion={result.get('postprocess', {}).get('source_opinion_skipped', 0)} footprint_dupes={result.get('postprocess', {}).get('story_footprint_duplicates_skipped', 0)} fingerprint_dupes={result.get('postprocess', {}).get('story_fingerprint_duplicates_skipped', 0)} ai_skip_bound={result.get('postprocess', {}).get('ai_skip_binding_moved', 0)} fingerprint_dupes={result.get('postprocess', {}).get('story_fingerprint_duplicates_skipped', 0)} ai_skip_bound={result.get('postprocess', {}).get('ai_skip_binding_moved', 0)} fingerprint_dupes={result.get('postprocess', {}).get('story_fingerprint_duplicates_skipped', 0)} ai_skip_bound={result.get('postprocess', {}).get('ai_skip_binding_moved', 0)} medical_non_major={result.get('postprocess', {}).get('medical_return_non_major_brand_skipped', 0)} softpool={len(load_softpool())} capacity_buffer={MAX_SELECTED_THIS_RUN} capacity_buffer={MAX_SELECTED_THIS_RUN} capacity_buffer={MAX_SELECTED_THIS_RUN}", flush=True)
+    print(
+        f"[MENZO v94.11] Decisione selettiva | "
+        f"selected={len(result.get('selected', []))} "
+        f"pending={len(result.get('pending', []))} "
+        f"skipped={len(result.get('skipped', []))} "
+        f"source_opinion={result.get('postprocess', {}).get('source_opinion_skipped', 0)} "
+        f"footprint_dupes={result.get('postprocess', {}).get('story_footprint_duplicates_skipped', 0)} "
+        f"fingerprint_dupes={result.get('postprocess', {}).get('story_fingerprint_duplicates_skipped', 0)} "
+        f"ai_dupes={result.get('postprocess', {}).get('ai_duplicate_arbitration_skipped', 0)} "
+        f"ai_skip_bound={result.get('postprocess', {}).get('ai_skip_binding_moved', 0)} "
+        f"medical_non_major={result.get('postprocess', {}).get('medical_return_non_major_brand_skipped', 0)} "
+        f"softpool={len(load_softpool())} "
+        f"capacity_buffer={MAX_SELECTED_THIS_RUN}",
+        flush=True,
+    )
     return result
 
 
