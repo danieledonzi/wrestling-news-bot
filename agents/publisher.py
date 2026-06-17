@@ -296,34 +296,6 @@ def render_image_placeholders(body_html: str, *, wp_ok: bool = True) -> str:
     return IMAGE_PLACEHOLDER_RE.sub(repl, body_html or "")
 
 
-def normalized_story_blob(article: dict[str, Any]) -> str:
-    parts = [article.get("title_it"), article.get("source_title"), article.get("excerpt_it"), article.get("source_url")]
-    meta = article.get("meta") if isinstance(article.get("meta"), dict) else {}
-    parts.extend([meta.get("title"), meta.get("source_title")])
-    blob = " ".join(str(x or "") for x in parts).lower()
-    return re.sub(r"\s+", " ", blob)
-
-
-def story_signature(article: dict[str, Any]) -> str:
-    blob = normalized_story_blob(article)
-    if "mjf" in blob and any(x in blob for x in ["injury", "infortun", "pulled", "rimosso", "rinunciare", "booking"]) and any(x in blob for x in ["indie", "independent", "evento indipendente", "beyond wrestling"]):
-        return "story:aew:mjf:indie_injury"
-    if "liv morgan" in blob and "dominik" in blob and any(x in blob for x in ["frustration", "frustrazione", "booking"]):
-        return "story:wwe:liv_morgan_dominik_booking_frustration"
-    if "jim ross" in blob and "lawsuit" in blob and any(x in blob for x in ["vince", "shareholder", "azionisti"]):
-        return "story:wwe:vince_shareholder_lawsuit_jim_ross"
-    return ""
-
-
-def existing_story_duplicate(history: dict[str, Any], signature: str) -> dict[str, Any] | None:
-    if not signature:
-        return None
-    for item in history.values():
-        if isinstance(item, dict) and item.get("story_signature") == signature:
-            return item
-    return None
-
-
 def clean_body_for_wordpress(body_html: str, *, wp_ok: bool = True) -> str:
     body_html = render_image_placeholders(body_html or "", wp_ok=wp_ok)
     body_html = EMBED_PLACEHOLDER_RE.sub(lambda m: "\n" + html.escape(m.group(1).strip()) + "\n", body_html)
