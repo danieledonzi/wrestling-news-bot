@@ -5,10 +5,10 @@ Stable VPS/cron command:
 
     python bot.py
 
-v93.43 is fully consolidated and VPS-safe: by default it does not run the
-historical patch bootstrap when the checked-out source already contains the
-consolidated v93 markers. This keeps tracked source files clean after a normal
-cron run.
+v94.13 is VPS-safe: by default it never runs the historical patch
+bootstrap from runtime. Production cron/VPS runs newsroom_runner.py against the
+checked-out source; the historical patch chain is allowed only with
+OWTV_FORCE_PATCH_BOOTSTRAP=1.
 
 Operational VPS flow:
 
@@ -29,7 +29,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-BOT_VERSION = "v93_43_fully_consolidated_vps_runtime"
+BOT_VERSION = "v94_13_disable_runtime_source_bootstrap"
 ROOT = Path(__file__).resolve().parent
 PATCH_CHAIN = ROOT / "scripts" / "apply_v92_report_workshop.py"
 NEWSROOM_RUNNER = ROOT / "newsroom_runner.py"
@@ -114,16 +114,20 @@ def main() -> int:
     env.setdefault("V93_SKIP_V92_AFTER_BOB", "1")
 
     force_bootstrap = env.get("OWTV_FORCE_PATCH_BOOTSTRAP", "").strip().lower() in {"1", "true", "yes", "on"}
-    skip_bootstrap = env.get("OWTV_SKIP_PATCH_BOOTSTRAP", "").strip().lower() in {"1", "true", "yes", "on"}
-    consolidated = source_is_consolidated()
+    explicit_skip_bootstrap = env.get("OWTV_SKIP_PATCH_BOOTSTRAP", "").strip().lower() in {"1", "true", "yes", "on"}
+    skip_bootstrap = not force_bootstrap
+
+    # Diagnostic only: v94+ runtime must not use source marker state to decide
+    # whether to mutate tracked source files. Historical patch bootstrap is
+    # disabled by default and can only run with OWTV_FORCE_PATCH_BOOTSTRAP=1.
+    source_is_consolidated()
 
     if force_bootstrap:
         print(f"[BOT {BOT_VERSION}] patch bootstrap forzato da OWTV_FORCE_PATCH_BOOTSTRAP=1", flush=True)
-    elif skip_bootstrap:
+    elif explicit_skip_bootstrap:
         print(f"[BOT {BOT_VERSION}] patch bootstrap saltato da OWTV_SKIP_PATCH_BOOTSTRAP=1", flush=True)
-    elif consolidated:
-        skip_bootstrap = True
-        print(f"[BOT {BOT_VERSION}] patch bootstrap saltato automaticamente: sorgente gia consolidato", flush=True)
+    else:
+        print(f"[BOT {BOT_VERSION}] patch bootstrap disabilitato di default; usare OWTV_FORCE_PATCH_BOOTSTRAP=1 per abilitarlo", flush=True)
 
     if not skip_bootstrap:
         if not PATCH_CHAIN.exists():
