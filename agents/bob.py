@@ -24,7 +24,7 @@ BOB_ARTICLES_FILE = NEWSROOM_STATE_DIR / "bob_articles_latest.json"
 SIMONE_REPORT_STATUS_FILE = NEWSROOM_STATE_DIR / "simone_report_publish_latest.json"
 ARTIFACT_BOB_FILE = ARTIFACT_DIR / "bob_articles.json"
 
-BOB_VERSION = "v94.11_source_self_reference_cleanup"
+BOB_VERSION = "v94_13_2_preserve_valid_x_status_embeds"
 REQUEST_TIMEOUT = int(os.getenv("V93_BOB_REQUEST_TIMEOUT", "18"))
 MAX_ARTICLES_PER_RUN = int(os.getenv("V93_BOB_MAX_ARTICLES_PER_RUN", "5"))
 MAX_ARTICLES_WITH_REPORT = int(os.getenv("V93_BOB_MAX_ARTICLES_WITH_REPORT", "4"))
@@ -187,6 +187,18 @@ def canonical_embed_url(url: str) -> str:
     return url.rstrip("/")
 
 
+
+def is_valid_x_status_url(url: str) -> bool:
+    url = canonical_embed_url(url)
+    parsed = urlparse(url)
+    host = parsed.netloc.lower().replace("www.", "")
+    path = parsed.path
+    if host not in {"x.com", "twitter.com"}:
+        return False
+    if "intent/tweet" in url.lower() or "/intent/" in path.lower():
+        return False
+    return bool(re.fullmatch(r"/[^/?#]+/status/\d+", path.rstrip("/")))
+
 def is_valid_editorial_embed_url(url: str) -> bool:
     url = canonical_embed_url(url)
     parsed = urlparse(url)
@@ -198,7 +210,7 @@ def is_valid_editorial_embed_url(url: str) -> bool:
     if any(bad in url.lower() for bad in ["intent/tweet", "sharer.php", "share?", "/profile.php", "addthis", "mailto:"]):
         return False
     if host in {"x.com", "twitter.com"}:
-        return "/status/" in path or "/statuses/" in path or path.startswith("i/status/")
+        return is_valid_x_status_url(url)
     if host == "bsky.app":
         return "/post/" in path
     if host == "instagram.com":
@@ -447,6 +459,31 @@ def sanitize_elements(elements: list[dict[str, Any]], featured_image: str) -> tu
     return cleaned, removed
 
 
+
+def recover_valid_x_status_embeds(raw_elements: list[dict[str, Any]], clean_elements: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    recovered: list[dict[str, Any]] = []
+    recovered_debug: list[dict[str, Any]] = []
+    clean_by_identity = {id(item) for item in clean_elements}
+    clean_x_urls = {canonical_embed_url(str(item.get("url") or "")) for item in clean_elements if item.get("type") == "embed" and is_valid_x_status_url(str(item.get("url") or ""))}
+    emitted_x_urls: set[str] = set()
+    for idx, item in enumerate(raw_elements, start=1):
+        if id(item) in clean_by_identity:
+            recovered.append(item)
+            if item.get("type") == "embed":
+                emitted_x_urls.add(canonical_embed_url(str(item.get("url") or "")))
+            continue
+        if item.get("type") != "embed":
+            continue
+        url = canonical_embed_url(str(item.get("url") or ""))
+        if not is_valid_x_status_url(url) or url in clean_x_urls or url in emitted_x_urls:
+            continue
+        recovered_item = dict(item)
+        recovered_item["url"] = url
+        recovered.append(recovered_item)
+        emitted_x_urls.add(url)
+        recovered_debug.append({"raw_index": idx, "reason": "recovered_valid_x_status_embed", "item": recovered_item})
+    return recovered, recovered_debug
+
 def extract_elements(source_url: str, raw_html: str) -> tuple[dict[str, str], list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
     diagnostics: dict[str, Any] = {"dom_noise_reduction_enabled": False, "stage": "parse_html", "global_embed_recovery_enabled": False}
     soup = BeautifulSoup(raw_html, "html.parser")
@@ -482,6 +519,7 @@ def extract_elements(source_url: str, raw_html: str) -> tuple[dict[str, str], li
         except Exception as exc:
             removed_by_node.append({"node_index": node_idx, "reason": "node_exception", "node_name": getattr(node, "name", ""), "error": str(exc)[:1000]})
     clean_elements, removed_by_sanitize = sanitize_elements(raw_elements, meta.get("featured_image", ""))
+    clean_elements, recovered_x_embeds = recover_valid_x_status_embeds(raw_elements, clean_elements)
     diagnostics.update({
         "root_name": getattr(root, "name", ""),
         "root_text_chars": len(clean_text(root.get_text(" "))) if root else 0,
@@ -490,12 +528,13 @@ def extract_elements(source_url: str, raw_html: str) -> tuple[dict[str, str], li
         "clean_element_count": len(clean_elements),
         "removed_by_node_count": len(removed_by_node),
         "removed_by_sanitize_count": len(removed_by_sanitize),
+        "recovered_valid_x_status_embed_count": len(recovered_x_embeds),
         "table_count": sum(1 for e in clean_elements if e.get("type") == "table"),
         "quote_count": sum(1 for e in clean_elements if e.get("type") == "quote"),
         "embed_count": sum(1 for e in clean_elements if e.get("type") == "embed"),
         "stage": "complete",
     })
-    return meta, raw_elements, clean_elements, removed_by_node + removed_by_sanitize, diagnostics
+    return meta, raw_elements, clean_elements, removed_by_node + removed_by_sanitize + recovered_x_embeds, diagnostics
 
 
 def build_translation_units(elements: list[dict[str, Any]]) -> list[dict[str, str]]:
