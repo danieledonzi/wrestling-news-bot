@@ -19,7 +19,7 @@ ARTIFACT_DIR = ROOT / "artifacts" / "newsroom"
 NEWSROOM_STATE_DIR = STATE_DIR / "newsroom"
 FEEDS_CONFIG = CONFIG_DIR / "feeds_v92.json"
 
-MASSY_VERSION = "v94_12_report_like_routing_guard"
+MASSY_VERSION = "v94_13_1_report_source_gate"
 
 TRACKED_STATE_FILES = [
     STATE_DIR / "report_status.json",
@@ -197,6 +197,13 @@ def is_wrestlinginc_source(source: str) -> bool:
     return "wrestlinginc" in normalize_text(source).replace(" ", "")
 
 
+def is_preferred_report_source(entry: dict[str, Any]) -> bool:
+    # Editorial rule: automatic show reports must come from WrestlingInc only.
+    # Other sources may still feed normal news to Menzo, but report-like items
+    # must not be routed to Simone or fall through as normal news.
+    return is_wrestlinginc_source(str(entry.get("source", "") or ""))
+
+
 def has_date_hint(text: str) -> bool:
     return bool(DATE_HINT_PATTERN.search(text or ""))
 
@@ -267,6 +274,16 @@ def classify_entries(entries: list[dict[str, Any]], already_worked_urls: set[str
             continue
         show_hint, report_reason = report_hint(entry)
         if show_hint:
+            if not is_preferred_report_source(entry):
+                hard_skipped.append(compact_entry(
+                    entry,
+                    "hard_skip",
+                    "report_source_not_preferred",
+                    original_report_reason=report_reason or "report_like_title",
+                    show_hint=show_hint,
+                    preferred_report_source="wrestlinginc",
+                ))
+                continue
             report_candidates.append(compact_entry(entry, "report_candidate", report_reason or "report_like_title", assigned_to="Simone", show_hint=show_hint))
             continue
         news_candidates.append(compact_entry(entry, "news_candidate", "requires_menzo_classification", assigned_to="Menzo"))
