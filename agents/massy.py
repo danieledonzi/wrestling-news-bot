@@ -19,7 +19,7 @@ ARTIFACT_DIR = ROOT / "artifacts" / "newsroom"
 NEWSROOM_STATE_DIR = STATE_DIR / "newsroom"
 FEEDS_CONFIG = CONFIG_DIR / "feeds_v92.json"
 
-MASSY_VERSION = "v93_9_massy_published_hard_skip"
+MASSY_VERSION = "v94_12_report_like_routing_guard"
 
 TRACKED_STATE_FILES = [
     STATE_DIR / "report_status.json",
@@ -180,18 +180,62 @@ def low_value_reason(entry: dict[str, Any]) -> str | None:
     return None
 
 
-def report_hint(entry: dict[str, Any]) -> tuple[str | None, str | None]:
-    blob = f"{entry.get('title', '')} {entry.get('url', '')}"
-    normalized = normalize_text(blob)
-    if not ("results" in normalized or "risultati" in normalized or "highlights" in normalized):
+WRESTLINGINC_REPORT_LIKE_INDICATOR_PATTERNS = [
+    re.compile(r"\bthis\s+is\s+wrestling\s+inc\.?['’]?s\s+results\b", re.I),
+    re.compile(r"\bthis\s+is\s+wrestling\s+inc\.?['’]?s\s+coverage\b", re.I),
+    re.compile(r"\bcoverage\b", re.I),
+    re.compile(r"\bmatch\s*(?:&|and)\s*more\b", re.I),
+]
+
+DATE_HINT_PATTERN = re.compile(
+    r"(?:\b\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?\b|\b(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)\.?\s+\d{1,2}(?:,\s*\d{4})?\b)",
+    re.I,
+)
+
+
+def is_wrestlinginc_source(source: str) -> bool:
+    return "wrestlinginc" in normalize_text(source).replace(" ", "")
+
+
+def has_date_hint(text: str) -> bool:
+    return bool(DATE_HINT_PATTERN.search(text or ""))
+
+
+def wrestlinginc_report_like_hint(entry: dict[str, Any], blob: str) -> tuple[str | None, str | None]:
+    if not is_wrestlinginc_source(str(entry.get("source", "") or "")):
+        return None, None
+    if not has_date_hint(blob):
+        return None, None
+    if not any(pattern.search(blob) for pattern in WRESTLINGINC_REPORT_LIKE_INDICATOR_PATTERNS):
         return None, None
     for pattern, show_name in REPORT_SHOW_PATTERNS:
         if pattern.search(blob):
-            return show_name, "weekly_show_results"
-    for pattern, event_name in SPECIAL_EVENT_PATTERNS:
-        if pattern.search(blob):
-            return event_name, "special_event_results"
+            return show_name, "wrestlinginc_show_report_like"
     return None, None
+
+
+def report_hint(entry: dict[str, Any]) -> tuple[str | None, str | None]:
+    title_url_blob = f"{entry.get('title', '')} {entry.get('url', '')}"
+    blob = f"{title_url_blob} {entry.get('summary', '')}"
+    title_url_normalized = normalize_text(title_url_blob)
+    normalized = normalize_text(blob)
+    title_url_has_results_hint = (
+        "results" in title_url_normalized
+        or "risultati" in title_url_normalized
+        or "highlights" in title_url_normalized
+    )
+    if not title_url_has_results_hint:
+        show_hint, reason = wrestlinginc_report_like_hint(entry, blob)
+        if show_hint:
+            return show_hint, reason
+    if "results" in normalized or "risultati" in normalized or "highlights" in normalized:
+        for pattern, show_name in REPORT_SHOW_PATTERNS:
+            if pattern.search(blob):
+                return show_name, "weekly_show_results"
+        for pattern, event_name in SPECIAL_EVENT_PATTERNS:
+            if pattern.search(blob):
+                return event_name, "special_event_results"
+    return wrestlinginc_report_like_hint(entry, blob)
 
 
 def classify_entries(entries: list[dict[str, Any]], already_worked_urls: set[str], already_published_urls: set[str]) -> dict[str, Any]:
