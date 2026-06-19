@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from agents.massy import run_massy as base_run_massy, write_json
-from agents.story_dedupe_v93_32 import dedupe_against_memory, dedupe_within_batch, load_published_story_memory, remember_stories
+from agents.story_dedupe_v93_32 import load_story_fingerprints
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_DIR = ROOT / "config"
@@ -22,7 +22,7 @@ ARTIFACT_MASSY_FILE = ARTIFACT_DIR / "massy_board.json"
 REPORT_STATUS_FILE = STATE_DIR / "report_status.json"
 REPORTS_CONFIG = CONFIG_DIR / "reports_v92.json"
 
-VERSION = "v93_32_massy_story_dedupe"
+VERSION = "v94.13.3_ai_cross_source_duplicate_arbitration"
 MAX_NEWS_AGE_DAYS = int(os.getenv("V93_MASSY_MAX_NEWS_AGE_DAYS", "7"))
 DAY_NAMES = {"monday": 0, "tuesday": 1, "wednesday": 2, "thursday": 3, "friday": 4, "saturday": 5, "sunday": 6}
 SHOW_PATTERNS = {
@@ -35,6 +35,66 @@ SHOW_PATTERNS = {
 }
 RECAP_DUPLICATE_RE = re.compile(r"\b(results?|highlights?|key\s+moments?|recap|full\s+results?|live\s+coverage|complete\s+coverage|moments\s+salienti|risultati)\b", re.I)
 FACTUAL_RE = re.compile(r"\b(new\s+champion|wins?\s+(?:the\s+)?title|title\s+change|retains?|defeats?|debut|returns?|comeback|injur(?:y|ed)|limping|botch|controversy|attack(?:s|ed)?|turns?|heel\s+turn|face\s+turn|announced|set\s+for|confirmed|qualif(?:y|ies|ied)|tournament|cash\s*in|suspended|fired|released|signs?|contract|medical|backstage)\b", re.I)
+
+SUSPICIOUS_CLUSTER_MIN_OVERLAP = float(os.getenv("V94_MASSY_SUSPICIOUS_CLUSTER_MIN_OVERLAP", "0.42"))
+SUSPICIOUS_CLUSTER_MAX = int(os.getenv("V94_MASSY_SUSPICIOUS_CLUSTER_MAX", "12"))
+SUSPICIOUS_STOPWORDS = {"wwe", "aew", "tna", "roh", "the", "and", "with", "from", "after", "before", "during", "ahead", "news", "wrestling", "match", "title", "star", "ex", "former", "officially"}
+
+
+def suspicious_words(item: dict[str, Any]) -> set[str]:
+    meta = item.get("meta") if isinstance(item.get("meta"), dict) else {}
+    review = item.get("menzo_ai_review") if isinstance(item.get("menzo_ai_review"), dict) else {}
+    text = " ".join(str(x or "") for x in [
+        item.get("title"), item.get("source_title"), item.get("summary"), item.get("excerpt"),
+        item.get("category_hint"), item.get("source"), meta.get("title"), meta.get("description"),
+        review.get("canonical_summary"), review.get("event_key"), review.get("story_footprint"),
+    ]).lower()
+    return {w for w in re.findall(r"[a-z0-9àèéìòù']+", text) if len(w) >= 3 and w not in SUSPICIOUS_STOPWORDS}
+
+
+def suspicious_record(item: dict[str, Any], record_id: str, *, origin: str = "candidate") -> dict[str, Any]:
+    review = item.get("menzo_ai_review") if isinstance(item.get("menzo_ai_review"), dict) else {}
+    fp = item.get("fingerprint") if isinstance(item.get("fingerprint"), dict) else {}
+    return {
+        "id": record_id,
+        "origin": origin,
+        "title": item.get("title") or item.get("source_title") or fp.get("title") or "",
+        "summary": item.get("summary") or item.get("excerpt") or fp.get("canonical_summary") or "",
+        "source": item.get("source") or fp.get("source") or "",
+        "source_url": item.get("url") or item.get("source_url") or item.get("url") or fp.get("url") or "",
+        "published_at": item.get("published") or item.get("published_at") or item.get("added_at") or "",
+        "event_key": review.get("event_key") or fp.get("news_action") or "",
+        "canonical_summary": review.get("canonical_summary") or fp.get("canonical_summary") or "",
+    }
+
+
+def build_suspicious_story_clusters(candidates: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    clusters: list[dict[str, Any]] = []
+    published = [x for x in load_story_fingerprints() if isinstance(x, dict)]
+    for i, item in enumerate(candidates):
+        item_words = suspicious_words(item)
+        if len(item_words) < 3:
+            continue
+        members = [suspicious_record(item, f"c{i+1}")]
+        for j, other in enumerate(candidates):
+            if i == j:
+                continue
+            other_words = suspicious_words(other)
+            overlap = len(item_words & other_words) / max(1, min(len(item_words), len(other_words)))
+            if overlap >= SUSPICIOUS_CLUSTER_MIN_OVERLAP and len(item_words & other_words) >= 3:
+                members.append(suspicious_record(other, f"c{j+1}"))
+        for k, old in enumerate(published[:40], start=1):
+            fp = old.get("fingerprint") if isinstance(old.get("fingerprint"), dict) else old
+            old_words = suspicious_words({"fingerprint": fp, "title": old.get("title"), "summary": fp.get("canonical_summary"), "source": fp.get("source"), "url": fp.get("url"), "added_at": old.get("added_at")})
+            overlap = len(item_words & old_words) / max(1, min(len(item_words), len(old_words)))
+            if overlap >= SUSPICIOUS_CLUSTER_MIN_OVERLAP and len(item_words & old_words) >= 3:
+                members.append(suspicious_record({"fingerprint": fp, "title": old.get("title"), "added_at": old.get("added_at")}, f"p{k}", origin="published_or_memory"))
+        if len(members) > 1:
+            clusters.append({"cluster_id": f"suspicious_story_cluster_{len(clusters)+1}", "candidate_url": members[0].get("source_url"), "records": members[:5], "reason": "cross_source_semantic_overlap_for_menzo_ai_arbitration"})
+        if len(clusters) >= SUSPICIOUS_CLUSTER_MAX:
+            break
+    return clusters
+
 POST_SHOW_HARD_RE = re.compile(r"\b(injur(?:y|ed)|botch|backstage|controversy|fallout|reaction|responds?|comments?|explains?|breaks\s+silence|medical|hospital|heat|real\s+reason)\b", re.I)
 
 
@@ -209,14 +269,12 @@ def run_massy() -> dict[str, Any]:
     candidates = [x for x in board.get("news_candidates_for_menzo", []) if isinstance(x, dict)]
     report_candidates = [x for x in board.get("report_candidates", []) if isinstance(x, dict)]
     published_reports, active_report_ids, waiting_report_ids = report_coverage(report_candidates)
-    story_memory = load_published_story_memory()
-    candidates, story_memory_skips = dedupe_against_memory(candidates, story_memory)
-    candidates, story_batch_skips = dedupe_within_batch(candidates)
+    suspicious_story_clusters = build_suspicious_story_clusters(candidates)
     memory = menzo_skip_memory()
     kept: list[dict[str, Any]] = []
-    moved: list[dict[str, Any]] = list(story_memory_skips) + list(story_batch_skips)
-    story_memory_skip_count = len(story_memory_skips)
-    story_batch_skip_count = len(story_batch_skips)
+    moved: list[dict[str, Any]] = []
+    story_memory_skip_count = 0
+    story_batch_skip_count = 0
     filtered_reports: list[dict[str, Any]] = []
     report_skips: list[dict[str, Any]] = []
     menzo_memory_count = old_count = report_skip_count = recap_skip_count = factual_count = post_show_count = soft_reaction_count = 0
@@ -278,7 +336,8 @@ def run_massy() -> dict[str, Any]:
     board.setdefault("binding", {})["show_factual_news_allowed_before_report"] = True
     board.setdefault("binding", {})["menzo_hard_skip_memory_is_binding"] = True
     board.setdefault("binding", {})["news_older_than_7_days_are_hard_skips"] = True
-    board.setdefault("binding", {})["story_dedupe_before_menzo"] = True
+    board.setdefault("binding", {})["story_dedupe_before_menzo"] = False
+    board.setdefault("binding", {})["massy_sends_suspicious_story_clusters_to_menzo"] = True
     board["handoff"]["to_simone"] = len(filtered_reports)
     board["handoff"]["to_menzo"] = len(kept)
     board["handoff"]["hard_skipped"] = len(board.get("hard_skipped", []))
@@ -291,11 +350,13 @@ def run_massy() -> dict[str, Any]:
     board["handoff"]["event_soft_reactions_to_menzo"] = soft_reaction_count
     board["handoff"]["story_memory_hard_skipped"] = story_memory_skip_count
     board["handoff"]["story_batch_hard_skipped"] = story_batch_skip_count
+    board["handoff"]["suspicious_story_cluster_count"] = len(suspicious_story_clusters)
     board["known_menzo_hard_skip_urls"] = len(memory)
     board["active_report_ids_for_recap_suppression"] = sorted(active_report_ids)
     board["waiting_report_ids_for_show_news_boost"] = sorted(waiting_report_ids)
     board["published_due_reports"] = published_reports
+    board["suspicious_story_clusters"] = suspicious_story_clusters
     write_json(ARTIFACT_MASSY_FILE, board)
     write_json(MASSY_BOARD_FILE, board)
-    print(f"[MASSY v93.32] Policy applicata | to_simone={board['handoff']['to_simone']} to_menzo={board['handoff']['to_menzo']} menzo_skip={menzo_memory_count} old_skip={old_count} story_mem_skip={story_memory_skip_count} story_batch_skip={story_batch_skip_count} report_skip={report_skip_count} recap_skip={recap_skip_count} factual={factual_count} post_show={post_show_count} soft_show={soft_reaction_count}", flush=True)
+    print(f"[MASSY v94.13.3] Policy applicata | to_simone={board['handoff']['to_simone']} to_menzo={board['handoff']['to_menzo']} menzo_skip={menzo_memory_count} old_skip={old_count} story_mem_skip={story_memory_skip_count} story_batch_skip={story_batch_skip_count} report_skip={report_skip_count} recap_skip={recap_skip_count} factual={factual_count} post_show={post_show_count} soft_show={soft_reaction_count} suspicious_story_cluster_count={len(suspicious_story_clusters)}", flush=True)
     return board

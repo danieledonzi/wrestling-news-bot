@@ -32,7 +32,7 @@ ARTIFACT_DECISIONS_FILE = ARTIFACT_DIR / "menzo_decisions.json"
 SOFTPOOL_FILE = NEWSROOM_STATE_DIR / "menzo_softpool.json"
 HARD_SKIP_FILE = NEWSROOM_STATE_DIR / "menzo_hard_skips.json"
 
-MENZO_VERSION = "v94.11_menzo_ai_duplicate_arbitration"
+MENZO_VERSION = "v94.13.3_ai_cross_source_duplicate_arbitration"
 VALID_LABELS = {"high", "medium", "low", "skip"}
 LABEL_SCORE = {"high": 92, "medium": 72, "low": 48, "skip": 0}
 SOFTPOOL_TTL_HOURS = int(os.getenv("V93_MENZO_SOFTPOOL_TTL_HOURS", "36"))
@@ -492,33 +492,82 @@ def lightweight_ai_record(item: dict[str, Any], item_id: str) -> dict[str, Any]:
 
 
 def build_ai_dedupe_prompt(records: list[dict[str, Any]]) -> str:
-    return """You are Menzo's duplicate-news arbiter. Use only the lightweight metadata below; do not assume full article bodies.
-Return ONLY valid JSON with this shape:
-{"cluster_type":"same_story|follow_up|different_story|mixed","keep_ids":[],"drop_ids":[],"reason":"","novelty_by_id":{"id":"none|minor|substantial"}}
-Rules: same central wrestling fact with no substantial novelty is same_story. If multiple same-run candidates describe the same fact, keep the best by verifiable details, source reliability, useful image/embed, less clickbait, central clarity, and direct/original details. Different TV ratings stories for different shows are not same_story.
+    return """You are Menzo's cross-source duplicate arbiter. Decide whether the NEW candidate repeats already-published or suspicious records, or has a truly new editorial angle.
+Return ONLY valid JSON with this exact shape:
+{
+  "cluster_type": "same_story|same_core_fact_new_angle|different_story|uncertain",
+  "decision": "skip_duplicate|pending_followup|selected|pending_review",
+  "confidence": 0,
+  "canonical_event_label": "",
+  "reason": "",
+  "suggested_followup_title_it": "",
+  "angle_summary_it": ""
+}
+Rules:
+- same_story + no meaningful new angle => decision skip_duplicate.
+- same core fact but a useful different angle => pending_followup unless editorial value is clearly high; then selected.
+- uncertain or low confidence => pending_review.
+- Do not invent deterministic local rules. Judge only provided title, summary, source_url/source, event_key, excerpt/canonical_summary, and footprints/history.
+- If follow-up, suggested_followup_title_it must not repeat the already-published core fact as the title angle.
 
-Candidates:
+Records:
 """ + json.dumps(records, ensure_ascii=False, indent=2)
 
 
-def call_gemini_json(prompt: str) -> tuple[dict[str, Any] | None, str]:
+def build_ai_dedupe_second_pass_prompt(records: list[dict[str, Any]], history: dict[str, Any]) -> str:
+    return build_ai_dedupe_prompt(records) + "\n\nSecond-pass context (publisher_history/story_footprints relevant to the suspected core fact):\n" + json.dumps(history, ensure_ascii=False, indent=2)
+
+
+def needs_second_pass(ai_data: dict[str, Any] | None) -> bool:
+    if not ai_data:
+        return False
+    try:
+        confidence = int(ai_data.get("confidence", 0) or 0)
+    except Exception:
+        confidence = 0
+    cluster_type = str(ai_data.get("cluster_type") or "").lower()
+    return confidence < 75 or cluster_type in {"uncertain", "mixed_signals", "same_event_but_new_angle", "same_core_fact_new_angle"}
+
+
+def relevant_history_payload(records: list[dict[str, Any]]) -> dict[str, Any]:
+    tokens = set()
+    for rec in records:
+        tokens |= {w for w in re.findall(r"[a-z0-9àèéìòù']+", normalize_text(json.dumps(rec, ensure_ascii=False)).lower()) if len(w) >= 4}
+    footprints = []
+    for old in load_story_fingerprints()[:60]:
+        blob = normalize_text(json.dumps(old, ensure_ascii=False)).lower()
+        if sum(1 for t in tokens if t in blob) >= 2:
+            footprints.append(old)
+        if len(footprints) >= 8:
+            break
+    return {"story_footprints": footprints}
+
+
+def _parse_gemini_json_text(text: str) -> dict[str, Any] | None:
+    raw = re.sub(r"^```(?:json)?|```$", "", (text or "").strip(), flags=re.I).strip()
+    data = json.loads(raw)
+    return data if isinstance(data, dict) else None
+
+
+def call_gemini_json_model(prompt: str, model: str) -> tuple[dict[str, Any] | None, str]:
     api_key = os.getenv("GEMINI_API_KEY", "").strip()
     if not api_key:
         return None, "missing_api_key"
     try:
         from google import genai  # type: ignore
         client = genai.Client(api_key=api_key)
-        for model in [m.strip() for m in os.getenv("GEMINI_MODEL_CHAIN", "gemini-3.1-flash-lite,gemini-2.5-flash-lite").split(",") if m.strip()]:
-            try:
-                response = client.models.generate_content(model=model, contents=prompt)
-                raw = re.sub(r"^```(?:json)?|```$", "", (getattr(response, "text", "") or "").strip(), flags=re.I).strip()
-                data = json.loads(raw)
-                if isinstance(data, dict):
-                    return data, model
-            except Exception:
-                continue
+        response = client.models.generate_content(model=model, contents=prompt)
+        data = _parse_gemini_json_text(getattr(response, "text", "") or "")
+        return (data, model) if data else (None, f"invalid_json:{model}")
     except Exception as exc:
-        return None, f"gemini_unavailable:{exc}"
+        return None, f"gemini_unavailable:{model}:{exc}"
+
+
+def call_gemini_json(prompt: str) -> tuple[dict[str, Any] | None, str]:
+    for model in [m.strip() for m in os.getenv("GEMINI_MODEL_CHAIN", "gemini-3.1-flash-lite,gemini-2.5-flash-lite").split(",") if m.strip()]:
+        data, status = call_gemini_json_model(prompt, model)
+        if data:
+            return data, status
     return None, "empty_or_invalid_response"
 
 
@@ -590,98 +639,150 @@ def suspicious_published_records(item: dict[str, Any], published: list[dict[str,
     return [record for _, record in sorted(matches, key=lambda x: x[0], reverse=True)[: AI_DEDUPE_MAX_CANDIDATES - 1]]
 
 
-def apply_ai_duplicate_arbitration(result: dict[str, Any]) -> None:
+def massy_cluster_records(board: dict[str, Any]) -> dict[str, list[dict[str, Any]]]:
+    out: dict[str, list[dict[str, Any]]] = {}
+    for cluster in board.get("suspicious_story_clusters", []) if isinstance(board.get("suspicious_story_clusters"), list) else []:
+        if not isinstance(cluster, dict):
+            continue
+        records = [r for r in cluster.get("records", []) if isinstance(r, dict)]
+        for rec in records:
+            key = source_key(rec.get("source_url") or rec.get("url") or "")
+            if key and rec.get("origin") == "candidate":
+                out.setdefault(key, records)
+    return out
+
+
+def arbitration_records_for_item(item: dict[str, Any], cluster_records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    candidate = lightweight_ai_record(item, "new_1")
+    review = item.get("menzo_ai_review") if isinstance(item.get("menzo_ai_review"), dict) else {}
+    candidate.update({
+        "source_url": candidate.get("url") or item.get("source_url") or "",
+        "event_key": review.get("event_key") or "",
+        "excerpt": item.get("excerpt") or "",
+        "canonical_summary": review.get("canonical_summary") or item.get("summary") or "",
+        "story_footprint": item.get("story_footprint") or review.get("story_footprint") or "",
+    })
+    records = [candidate]
+    seen = {source_key(candidate.get("source_url") or candidate.get("url") or "")}
+    for rec in cluster_records:
+        key = source_key(rec.get("source_url") or rec.get("url") or "")
+        if key in seen:
+            continue
+        seen.add(key)
+        records.append({
+            "id": rec.get("id") or f"suspect_{len(records)}",
+            "title": rec.get("title") or "",
+            "summary": rec.get("summary") or "",
+            "source": rec.get("source") or "",
+            "source_url": rec.get("source_url") or rec.get("url") or "",
+            "event_key": rec.get("event_key") or "",
+            "excerpt": rec.get("excerpt") or "",
+            "canonical_summary": rec.get("canonical_summary") or rec.get("summary") or "",
+            "publisher_history_origin": rec.get("origin") or "suspicious",
+        })
+    return records[:AI_DEDUPE_MAX_CANDIDATES]
+
+
+def apply_arbitration_decision(item: dict[str, Any], ai_data: dict[str, Any], model_used: str, second_pass: bool) -> dict[str, Any]:
+    item = dict(item)
+    decision = str(ai_data.get("decision") or "pending_review").lower()
+    cluster_type = str(ai_data.get("cluster_type") or "uncertain").lower()
+    try:
+        confidence = int(ai_data.get("confidence", 0) or 0)
+    except Exception:
+        confidence = 0
+    arbitration = {
+        "ai_cross_source_duplicate_arbitration_used": True,
+        "model_used": model_used,
+        "second_pass_used": second_pass,
+        "decision": decision,
+        "cluster_type": cluster_type,
+        "confidence": confidence,
+        "canonical_event_label": ai_data.get("canonical_event_label") or "",
+        "reason": ai_data.get("reason") or "",
+        "suggested_followup_title_it": ai_data.get("suggested_followup_title_it") or "",
+        "angle_summary_it": ai_data.get("angle_summary_it") or "",
+    }
+    item.setdefault("menzo_policy", {})["ai_cross_source_duplicate_arbitration"] = arbitration
+    item["ai_cross_source_duplicate_arbitration"] = arbitration
+    if decision == "skip_duplicate" or cluster_type == "same_story":
+        item["decision"] = "skip"; item["priority"] = "skip"; item["article_type"] = "duplicate"
+        item["reason"] = "skip:ai_cross_source_duplicate_arbitration; " + str(ai_data.get("reason") or "same core fact, no meaningful new angle")
+    elif decision == "pending_followup" or cluster_type == "same_core_fact_new_angle":
+        item["decision"] = "pending"; item["priority"] = "soft"; item["article_type"] = "pending_followup"
+        item["reason"] = "pending_followup:ai_cross_source_duplicate_arbitration; " + str(ai_data.get("reason") or "same core fact with possible new angle")
+        if ai_data.get("suggested_followup_title_it"):
+            item["suggested_followup_title_it"] = ai_data.get("suggested_followup_title_it")
+        if ai_data.get("angle_summary_it"):
+            item["angle_summary_it"] = ai_data.get("angle_summary_it")
+    elif decision == "selected" and cluster_type == "different_story":
+        item["decision"] = "selected"
+    else:
+        item["decision"] = "pending"; item["priority"] = "soft"; item["article_type"] = "pending_review"
+        item["reason"] = "pending_review:ai_cross_source_duplicate_arbitration; " + str(ai_data.get("reason") or "uncertain duplicate/follow-up arbitration")
+    return item
+
+
+def apply_ai_duplicate_arbitration(result: dict[str, Any], massy_board: dict[str, Any] | None = None) -> None:
     selected = [dict(x) for x in result.get("selected", []) if isinstance(x, dict)]
     pending = [dict(x) for x in result.get("pending", []) if isinstance(x, dict)]
     skipped = [x for x in result.get("skipped", []) if isinstance(x, dict)]
+    board = massy_board if isinstance(massy_board, dict) else {}
+    records_by_url = massy_cluster_records(board)
     candidates = selected + pending
     original_selected = {source_key(x.get("url") or x.get("source_url") or "") for x in selected}
-    clusters = build_suspicious_ai_clusters(candidates)
-    ai_used = 0
-    ai_statuses: list[str] = []
-    dropped: dict[str, dict[str, Any]] = {}
-    keep_keys: set[str] = set()
+    resolved: dict[str, dict[str, Any]] = {}
+    logs: list[dict[str, Any]] = []
 
-    for idx, cluster in enumerate(clusters, start=1):
-        records = [lightweight_ai_record(item, f"c{idx}_{n}") for n, item in enumerate(cluster, start=1)]
-        ai_data, status = call_gemini_json(build_ai_dedupe_prompt(records))
-        ai_statuses.append(status)
-        if ai_data:
-            ai_used += 1
-        det_keys = [deterministic_story_key(x) for x in cluster]
-        deterministic_same_story = (
-            len(det_keys) == len(cluster)
-            and all(det_keys)
-            and len(set(det_keys)) == 1
-        )
-        same_story = bool(ai_data and ai_data.get("cluster_type") == "same_story") or deterministic_same_story
-        if not same_story:
-            continue
-        keep_ids = set(ai_data.get("keep_ids") or []) if ai_data else set()
-        if keep_ids:
-            keep_item = next((cluster[int(k.rsplit("_", 1)[-1]) - 1] for k in keep_ids if k.rsplit("_", 1)[-1].isdigit() and 0 < int(k.rsplit("_", 1)[-1]) <= len(cluster)), None)
-        else:
-            keep_item = sorted(cluster, key=candidate_quality_score, reverse=True)[0]
-        keep_url = str(keep_item.get("url") or keep_item.get("source_url") or "")
-        keep_keys.add(source_key(keep_url))
-        for item in cluster:
-            key = source_key(item.get("url") or item.get("source_url") or "")
-            if key == source_key(keep_url):
-                continue
-            item["decision"] = "skip"
-            item["priority"] = "skip"
-            item["article_type"] = "duplicate"
-            item["reason"] = "ai_cluster_duplicate_loser"
-            item["duplicate_of"] = keep_url
-            item.setdefault("menzo_policy", {})["ai_duplicate_arbitration"] = True
-            dropped[key] = item
-
-    # Published-memory check is AI-only and only runs for lightweight suspicious matches.
-    # If Gemini is unavailable, leave candidates untouched/pending via the existing conservative flow.
-    published_records = published_fingerprint_records()
-    for item in list(candidates):
+    for item in candidates:
         key = source_key(item.get("url") or item.get("source_url") or "")
-        if key in dropped:
+        cluster_records = records_by_url.get(key, [])
+        if not cluster_records:
+            suspicious_published = suspicious_published_records(item, published_fingerprint_records())
+            if suspicious_published:
+                cluster_records = [dict(r, origin="published_or_memory", source_url=r.get("url") or r.get("source_url") or "") for r in suspicious_published]
+        if not cluster_records:
+            resolved[key] = item
             continue
-        suspicious_published = suspicious_published_records(item, published_records)
-        if not suspicious_published:
-            continue
-        probe = [lightweight_ai_record(item, "new_1")] + [dict(r, id=f"pub_{i}") for i, r in enumerate(suspicious_published, start=1)]
-        if len(probe) <= 1 or len(ai_statuses) >= AI_DEDUPE_MAX_CLUSTERS:
-            break
-        ai_data, status = call_gemini_json(build_ai_dedupe_prompt(probe))
-        ai_statuses.append(status)
+        records = arbitration_records_for_item(item, cluster_records)
+        ai_data, model = call_gemini_json_model(build_ai_dedupe_prompt(records), "gemini-3.1-flash-lite")
+        second_pass = False
+        if needs_second_pass(ai_data):
+            second_pass = True
+            ai_data2, model2 = call_gemini_json_model(build_ai_dedupe_second_pass_prompt(records, relevant_history_payload(records)), "gemini-3-flash-preview")
+            if ai_data2:
+                ai_data, model = ai_data2, model2
         if not ai_data:
-            continue
-        ai_used += 1
-        novelty = (ai_data.get("novelty_by_id") or {}).get("new_1")
-        drop_ids = set(ai_data.get("drop_ids") or [])
-        if ai_data.get("cluster_type") == "same_story" and ("new_1" in drop_ids or novelty in {"none", "minor"}):
-            pub_id = next((x for x in ai_data.get("keep_ids", []) if str(x).startswith("pub_")), "")
-            pub_url = next((r.get("url") for r in probe if r.get("id") == pub_id), "")
-            item["decision"] = "skip"; item["priority"] = "skip"; item["article_type"] = "duplicate"
-            item["reason"] = "ai_confirmed_duplicate_of_published"; item["duplicate_of"] = pub_url
-            item.setdefault("menzo_policy", {})["ai_duplicate_arbitration"] = True
-            dropped[key] = item
+            ai_data = {"cluster_type": "uncertain", "decision": "pending_review", "confidence": 0, "reason": model}
+        resolved_item = apply_arbitration_decision(item, ai_data, model, second_pass)
+        resolved[key] = resolved_item
+        logs.append(resolved_item["ai_cross_source_duplicate_arbitration"])
 
-    kept = [x for x in candidates if source_key(x.get("url") or x.get("source_url") or "") not in dropped]
-    new_selected, new_pending = [], []
-    for item in kept:
+    new_selected: list[dict[str, Any]] = []
+    new_pending: list[dict[str, Any]] = []
+    new_skipped: list[dict[str, Any]] = list(skipped)
+    for item in resolved.values():
         key = source_key(item.get("url") or item.get("source_url") or "")
-        if key in original_selected or key in keep_keys or str(item.get("ai_priority_label") or "").lower() == "high":
+        if item.get("decision") == "skip":
+            new_skipped.append(item)
+        elif item.get("decision") == "pending":
+            new_pending.append(item)
+        elif key in original_selected or str(item.get("ai_priority_label") or "").lower() == "high":
             item["decision"] = "selected"; new_selected.append(item)
         else:
             item["decision"] = "pending"; new_pending.append(item)
     result["selected"] = sorted(new_selected, key=sort_item, reverse=True)
     result["pending"] = sorted(new_pending, key=sort_item, reverse=True)
-    result["skipped"] = skipped + list(dropped.values())
+    result["skipped"] = new_skipped
     result["allowed_urls_for_v92"] = [str(x.get("url") or x.get("source_url") or "") for x in result["selected"] if x.get("url") or x.get("source_url")]
     result["handoff"] = {"to_bob_or_v92": len(result["selected"]), "pending": len(result["pending"]), "skipped": len(result["skipped"])}
-    result.setdefault("postprocess", {})["ai_duplicate_arbitration_clusters"] = len(clusters)
-    result.setdefault("postprocess", {})["ai_duplicate_arbitration_calls"] = ai_used
-    result.setdefault("postprocess", {})["ai_duplicate_arbitration_skipped"] = len(dropped)
-    result.setdefault("postprocess", {})["ai_duplicate_arbitration_statuses"] = ai_statuses[:AI_DEDUPE_MAX_CLUSTERS]
-
+    pp = result.setdefault("postprocess", {})
+    pp["ai_cross_source_duplicate_arbitration_used"] = len(logs)
+    pp["ai_duplicate_arbitration_clusters"] = len(records_by_url)
+    pp["ai_duplicate_arbitration_calls"] = len(logs)
+    pp["ai_duplicate_arbitration_skipped"] = sum(1 for l in logs if l.get("decision") == "skip_duplicate")
+    pp["ai_duplicate_arbitration_pending_followup"] = sum(1 for l in logs if l.get("decision") in {"pending_followup", "pending_review"})
+    pp["ai_cross_source_duplicate_arbitration_logs"] = logs[:AI_DEDUPE_MAX_CLUSTERS * AI_DEDUPE_MAX_CANDIDATES]
 
 def rebuild_decisions(result: dict[str, Any]) -> None:
     all_items: list[dict[str, Any]] = []
@@ -860,7 +961,7 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     apply_story_footprint_policy(result)
     enforce_ai_skip_binding(result)
     apply_generalized_fingerprint_policy(result)
-    apply_ai_duplicate_arbitration(result)
+    apply_ai_duplicate_arbitration(result, board)
     enforce_selected_cap(result)
     enforce_capacity_buffer(result)
     result["version"] = MENZO_VERSION
@@ -881,6 +982,9 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     policy["brand_rank_tiebreaker"] = "WWE/NXT/AEW > TNA/ROH > OVW/indie"
     policy["news_capacity_buffer_for_bob"] = MAX_SELECTED_THIS_RUN
     policy["ai_duplicate_arbitration"] = True
+    policy["ai_cross_source_duplicate_arbitration"] = True
+    policy["ai_duplicate_arbitration_first_pass_model"] = "gemini-3.1-flash-lite"
+    policy["ai_duplicate_arbitration_second_pass_model"] = "gemini-3-flash-preview"
     policy["ai_duplicate_arbitration_limits"] = {"max_clusters_per_run": AI_DEDUPE_MAX_CLUSTERS, "max_candidates_per_cluster": AI_DEDUPE_MAX_CANDIDATES}
     save_softpool(result)
     save_hard_skips(result)
@@ -891,14 +995,14 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     write_json(MENZO_DECISIONS_FILE, result)
     write_json(V92_ALLOWED_URLS_FILE, {"generated_at": utc_now(), "version": MENZO_VERSION, "allowed_urls": result.get("allowed_urls_for_v92", [])})
     print(
-        f"[MENZO v94.11] Decisione selettiva | "
+        f"[MENZO v94.13.3] Decisione selettiva | "
         f"selected={len(result.get('selected', []))} "
         f"pending={len(result.get('pending', []))} "
         f"skipped={len(result.get('skipped', []))} "
         f"source_opinion={result.get('postprocess', {}).get('source_opinion_skipped', 0)} "
         f"footprint_dupes={result.get('postprocess', {}).get('story_footprint_duplicates_skipped', 0)} "
         f"fingerprint_dupes={result.get('postprocess', {}).get('story_fingerprint_duplicates_skipped', 0)} "
-        f"ai_dupes={result.get('postprocess', {}).get('ai_duplicate_arbitration_skipped', 0)} "
+        f"ai_dupes={result.get('postprocess', {}).get('ai_duplicate_arbitration_skipped', 0)} ai_cross_source_duplicate_arbitration_used={result.get('postprocess', {}).get('ai_cross_source_duplicate_arbitration_used', 0)} "
         f"ai_skip_bound={result.get('postprocess', {}).get('ai_skip_binding_moved', 0)} "
         f"medical_non_major={result.get('postprocess', {}).get('medical_return_non_major_brand_skipped', 0)} "
         f"softpool={len(load_softpool())} "
