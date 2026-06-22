@@ -32,11 +32,14 @@ ARTIFACT_DECISIONS_FILE = ARTIFACT_DIR / "menzo_decisions.json"
 SOFTPOOL_FILE = NEWSROOM_STATE_DIR / "menzo_softpool.json"
 HARD_SKIP_FILE = NEWSROOM_STATE_DIR / "menzo_hard_skips.json"
 
-MENZO_VERSION = "v94.13.3_ai_cross_source_duplicate_arbitration"
+MENZO_VERSION = "v94.13.4_dynamic_editorial_budget_and_softpool_decay"
 VALID_LABELS = {"high", "medium", "low", "skip"}
 LABEL_SCORE = {"high": 92, "medium": 72, "low": 48, "skip": 0}
 SOFTPOOL_TTL_HOURS = int(os.getenv("V93_MENZO_SOFTPOOL_TTL_HOURS", "36"))
-SOFTNEWS_TTL_HOURS = int(os.getenv("V93_MENZO_SOFTNEWS_TTL_HOURS", "24"))
+SOFTNEWS_TTL_HOURS = int(os.getenv("V93_MENZO_SOFTNEWS_TTL_HOURS", "6"))
+SOFTPOOL_MAX_DEFERRALS = int(os.getenv("OWTV_SOFTPOOL_MAX_DEFERRALS", "4"))
+SOFTPOOL_OUTRANKED_DEFERRALS = int(os.getenv("OWTV_SOFTPOOL_OUTRANKED_DEFERRALS", "3"))
+DAILY_NEWS_TARGET = max(1, int(os.getenv("OWTV_DAILY_NEWS_TARGET", "30")))
 HARD_SKIP_TTL_HOURS = int(os.getenv("V93_MENZO_HARD_SKIP_TTL_HOURS", "168"))
 MIN_SELECTED_SCORE = int(os.getenv("V93_MENZO_MIN_SELECTED_SCORE", "65"))
 MIN_SOFTPOOL_SCORE = int(os.getenv("V93_MENZO_MIN_SOFTPOOL_SCORE", "55"))
@@ -199,6 +202,144 @@ def augment_board_with_softpool(board: dict[str, Any]) -> dict[str, Any]:
     cloned.setdefault("softpool", {})["injected_candidates"] = added
     return cloned
 
+
+
+MAJOR_HARD_TERMS = {
+    "breaking", "death", "passes away", "major injury", "injury", "injured", "title change",
+    "new champion", "championship", "signs", "signing", "released", "release", "fired",
+    "returns", "returning", "major return", "debut", "arrested", "lawsuit", "media rights", "tv deal",
+}
+
+
+def publisher_history_file() -> Path:
+    return NEWSROOM_STATE_DIR / "publisher_history.json"
+
+
+def published_today_count(now: datetime | None = None) -> int:
+    now = now or datetime.now(timezone.utc)
+    raw = load_json(publisher_history_file(), {})
+    records = raw.values() if isinstance(raw, dict) else (raw if isinstance(raw, list) else [])
+    count = 0
+    for item in records:
+        if not isinstance(item, dict):
+            continue
+        if str(item.get("status") or "publish").lower() not in {"publish", "published"}:
+            continue
+        dt = parse_dt(item.get("published_at") or item.get("updated_at") or item.get("created_at"))
+        if dt and now - dt <= timedelta(hours=24):
+            count += 1
+    return count
+
+
+def dynamic_soft_threshold(base_threshold: int = MIN_SELECTED_SCORE, published_count: int | None = None) -> tuple[int, dict[str, Any]]:
+    count = published_today_count() if published_count is None else max(0, int(published_count))
+    percent = count / DAILY_NEWS_TARGET
+    if percent < 0.40:
+        multiplier = 1.0
+    elif percent < 0.70:
+        multiplier = 1.2
+    elif percent < 0.90:
+        multiplier = 1.5
+    elif percent <= 1.0:
+        multiplier = 1.8
+    else:
+        multiplier = float("inf")
+    threshold = 101 if multiplier == float("inf") else int(round(base_threshold * multiplier))
+    meta = {
+        "daily_news_target": DAILY_NEWS_TARGET,
+        "published_today_count": count,
+        "published_today_percent": round(percent, 4),
+        "dynamic_soft_threshold": threshold,
+        "dynamic_soft_threshold_multiplier": "hard_only" if multiplier == float("inf") else multiplier,
+    }
+    return threshold, meta
+
+
+def is_major_hard_news(item: dict[str, Any]) -> bool:
+    score = int(item.get("score", 0) or 0)
+    label = str(item.get("ai_priority_label") or "").lower()
+    article_type = str(item.get("article_type") or "").lower()
+    text = normalize_text(" ".join(str(item.get(k) or "") for k in ["title", "summary", "reason", "article_type", "category_hint"])).lower()
+    has_major_term = any(term in text for term in MAJOR_HARD_TERMS)
+    return article_type in {"hard_news", "business_legal"} and (score >= 75 or label == "high") and has_major_term
+
+
+def softpool_age_hours(item: dict[str, Any], now: datetime | None = None) -> float:
+    now = now or datetime.now(timezone.utc)
+    added = parse_dt(item.get("softpool_added_at")) or parse_dt(item.get("first_seen_at")) or now
+    return max(0.0, (now - added).total_seconds() / 3600.0)
+
+
+def softpool_deferrals(item: dict[str, Any]) -> int:
+    try:
+        return int(item.get("softpool_deferrals", item.get("deferrals", 0)) or 0)
+    except Exception:
+        return 0
+
+
+def apply_softpool_decay(result: dict[str, Any]) -> None:
+    expired: list[dict[str, Any]] = []
+    outranked: list[dict[str, Any]] = []
+    for section in ["selected", "pending"]:
+        kept: list[dict[str, Any]] = []
+        for item in result.get(section, []) if isinstance(result.get(section), list) else []:
+            if not isinstance(item, dict):
+                continue
+            if item.get("from_softpool"):
+                item["softpool_age_hours"] = round(softpool_age_hours(item), 3)
+                item["softpool_deferrals"] = softpool_deferrals(item)
+                if item["softpool_age_hours"] > SOFTNEWS_TTL_HOURS:
+                    item = dict(item, decision="skip", priority="skip", reason="softpool_expired_not_fresh")
+                    item.setdefault("menzo_policy", {})["softpool_expired_not_fresh"] = True
+                    expired.append(item); continue
+                if item["softpool_deferrals"] >= SOFTPOOL_OUTRANKED_DEFERRALS:
+                    item = dict(item, decision="skip", priority="skip", reason="softpool_repeatedly_outranked")
+                    item.setdefault("menzo_policy", {})["softpool_repeatedly_outranked"] = True
+                    outranked.append(item); continue
+            kept.append(item)
+        result[section] = kept
+    result.setdefault("skipped", []).extend(expired + outranked)
+    pp = result.setdefault("postprocess", {})
+    pp["softpool_expired_not_fresh"] = len(expired)
+    pp["softpool_repeatedly_outranked"] = len(outranked)
+
+
+def apply_dynamic_editorial_budget(result: dict[str, Any], published_count: int | None = None) -> None:
+    threshold, meta = dynamic_soft_threshold(MIN_SELECTED_SCORE, published_count)
+    selected = [dict(x) for x in result.get("selected", []) if isinstance(x, dict)]
+    pending = [dict(x) for x in result.get("pending", []) if isinstance(x, dict)]
+    skipped = [x for x in result.get("skipped", []) if isinstance(x, dict)]
+    new_selected: list[dict[str, Any]] = []
+    new_pending: list[dict[str, Any]] = pending
+    threshold_skips = 0
+    for item in selected:
+        score = int(item.get("score", 0) or 0)
+        is_hard = is_major_hard_news(item)
+        is_soft = str(item.get("priority") or "").lower() == "soft" or str(item.get("article_type") or "").lower() in {"soft_news", "strategic_discussion", "data_report", "pending_followup", "pending_review"}
+        item.setdefault("menzo_policy", {}).update(meta)
+        if meta["published_today_percent"] > 1.0 and not is_hard:
+            item["decision"] = "pending" if is_softpool_eligible(item) else "skip"
+            item["reason"] = "skipped_by_dynamic_threshold:over_daily_target_hard_only; " + str(item.get("reason") or "")
+            threshold_skips += 1
+            (new_pending if item["decision"] == "pending" else skipped).append(item)
+        elif is_soft and not is_hard and score < threshold:
+            item["decision"] = "pending" if is_softpool_eligible(item) else "skip"
+            item["reason"] = f"skipped_by_dynamic_threshold:{score}<{threshold}; " + str(item.get("reason") or "")
+            threshold_skips += 1
+            (new_pending if item["decision"] == "pending" else skipped).append(item)
+        else:
+            item["decision"] = "selected"
+            new_selected.append(item)
+    result["selected"] = sorted(new_selected, key=sort_item, reverse=True)
+    result["pending"] = sorted(new_pending, key=sort_item, reverse=True)
+    result["skipped"] = skipped
+    result["allowed_urls_for_v92"] = [str(x.get("url") or x.get("source_url") or "") for x in result["selected"] if x.get("url") or x.get("source_url")]
+    result["handoff"] = {"to_bob_or_v92": len(result["selected"]), "pending": len(result["pending"]), "skipped": len(result["skipped"])}
+    result["daily_policy"] = {**(result.get("daily_policy") if isinstance(result.get("daily_policy"), dict) else {}), **meta, "not_a_hard_cap": True}
+    pp = result.setdefault("postprocess", {})
+    pp.update(meta)
+    pp["skipped_by_dynamic_threshold"] = threshold_skips
+    pp["gemini_calls_avoided_by_threshold"] = threshold_skips
 
 def normalize_ai_fields(result: dict[str, Any]) -> None:
     reviews = ((result.get("menzo_ai") or {}).get("reviews") or []) if isinstance(result.get("menzo_ai"), dict) else []
@@ -780,6 +921,7 @@ def apply_ai_duplicate_arbitration(result: dict[str, Any], massy_board: dict[str
     pp["ai_cross_source_duplicate_arbitration_used"] = len(logs)
     pp["ai_duplicate_arbitration_clusters"] = len(records_by_url)
     pp["ai_duplicate_arbitration_calls"] = len(logs)
+    pp["gemini_calls_used_for_duplicate_arbitration"] = len(logs)
     pp["ai_duplicate_arbitration_skipped"] = sum(1 for l in logs if l.get("decision") == "skip_duplicate")
     pp["ai_duplicate_arbitration_pending_followup"] = sum(1 for l in logs if l.get("decision") in {"pending_followup", "pending_review"})
     pp["ai_cross_source_duplicate_arbitration_logs"] = logs[:AI_DEDUPE_MAX_CLUSTERS * AI_DEDUPE_MAX_CANDIDATES]
@@ -865,11 +1007,16 @@ def save_softpool(result: dict[str, Any]) -> None:
         key = source_key(item.get("url") or item.get("source_url") or "")
         if not key:
             continue
-        clone = dict(item)
-        clone.setdefault("softpool_added_at", now)
+        previous_item = by_url.get(key, {}) if isinstance(by_url.get(key), dict) else {}
+        clone = {**previous_item, **dict(item)}
+        clone.setdefault("softpool_added_at", previous_item.get("softpool_added_at") or now)
         clone["last_seen_at"] = now
         clone["softpool_reason"] = "medium_candidate_above_quality_threshold"
         clone["softpool_ttl_hours"] = item_ttl_hours(clone)
+        if clone.get("from_softpool") or previous_item:
+            clone["softpool_deferrals"] = softpool_deferrals(previous_item) + 1
+        else:
+            clone.setdefault("softpool_deferrals", 0)
         by_url[key] = clone
     for section in ["selected", "skipped"]:
         for item in result.get(section, []) if isinstance(result.get(section), list) else []:
@@ -953,7 +1100,12 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     if not ok:
         return _empty_menzo_when_wp_unready(why)
     board = augment_board_with_softpool(massy_board if isinstance(massy_board, dict) else base.load_json(base.MASSY_BOARD_FILE, {}))
-    result = base.run_menzo(board)
+    previous_ai_enabled = base.AI_ENABLED
+    base.AI_ENABLED = False
+    try:
+        result = base.run_menzo(board)
+    finally:
+        base.AI_ENABLED = previous_ai_enabled
     normalize_ai_fields(result)
     rebuild_decisions(result)
     apply_source_opinion_policy(result)
@@ -961,7 +1113,10 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     apply_story_footprint_policy(result)
     enforce_ai_skip_binding(result)
     apply_generalized_fingerprint_policy(result)
+    apply_softpool_decay(result)
+    apply_dynamic_editorial_budget(result)
     apply_ai_duplicate_arbitration(result, board)
+    apply_dynamic_editorial_budget(result)
     enforce_selected_cap(result)
     enforce_capacity_buffer(result)
     result["version"] = MENZO_VERSION
@@ -981,6 +1136,13 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     policy["medical_return_major_brands_only"] = True
     policy["brand_rank_tiebreaker"] = "WWE/NXT/AEW > TNA/ROH > OVW/indie"
     policy["news_capacity_buffer_for_bob"] = MAX_SELECTED_THIS_RUN
+    policy["daily_editorial_target"] = DAILY_NEWS_TARGET
+    policy["dynamic_soft_threshold"] = result.get("daily_policy", {}).get("dynamic_soft_threshold")
+    policy["softpool_max_age_hours"] = SOFTNEWS_TTL_HOURS
+    policy["softpool_max_deferrals"] = SOFTPOOL_MAX_DEFERRALS
+    policy["softpool_outranked_deferrals"] = SOFTPOOL_OUTRANKED_DEFERRALS
+    policy["gemini_editorial_review_for_generic_soft_news"] = False
+    policy["gemini_only_for_duplicate_novelty_arbitration"] = True
     policy["ai_duplicate_arbitration"] = True
     policy["ai_cross_source_duplicate_arbitration"] = True
     policy["ai_duplicate_arbitration_first_pass_model"] = "gemini-3.1-flash-lite"
@@ -995,7 +1157,7 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     write_json(MENZO_DECISIONS_FILE, result)
     write_json(V92_ALLOWED_URLS_FILE, {"generated_at": utc_now(), "version": MENZO_VERSION, "allowed_urls": result.get("allowed_urls_for_v92", [])})
     print(
-        f"[MENZO v94.13.3] Decisione selettiva | "
+        f"[MENZO v94.13.4] Decisione selettiva | "
         f"selected={len(result.get('selected', []))} "
         f"pending={len(result.get('pending', []))} "
         f"skipped={len(result.get('skipped', []))} "
@@ -1005,6 +1167,15 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
         f"ai_dupes={result.get('postprocess', {}).get('ai_duplicate_arbitration_skipped', 0)} ai_cross_source_duplicate_arbitration_used={result.get('postprocess', {}).get('ai_cross_source_duplicate_arbitration_used', 0)} "
         f"ai_skip_bound={result.get('postprocess', {}).get('ai_skip_binding_moved', 0)} "
         f"medical_non_major={result.get('postprocess', {}).get('medical_return_non_major_brand_skipped', 0)} "
+        f"daily_news_target={result.get('daily_policy', {}).get('daily_news_target')} "
+        f"published_today_count={result.get('daily_policy', {}).get('published_today_count')} "
+        f"published_today_percent={result.get('daily_policy', {}).get('published_today_percent')} "
+        f"dynamic_soft_threshold={result.get('daily_policy', {}).get('dynamic_soft_threshold')} "
+        f"skipped_by_dynamic_threshold={result.get('postprocess', {}).get('skipped_by_dynamic_threshold', 0)} "
+        f"softpool_expired_not_fresh={result.get('postprocess', {}).get('softpool_expired_not_fresh', 0)} "
+        f"softpool_repeatedly_outranked={result.get('postprocess', {}).get('softpool_repeatedly_outranked', 0)} "
+        f"gemini_calls_avoided_by_threshold={result.get('postprocess', {}).get('gemini_calls_avoided_by_threshold', 0)} "
+        f"gemini_calls_used_for_duplicate_arbitration={result.get('postprocess', {}).get('gemini_calls_used_for_duplicate_arbitration', 0)} "
         f"softpool={len(load_softpool())} "
         f"capacity_buffer={MAX_SELECTED_THIS_RUN}",
         flush=True,
