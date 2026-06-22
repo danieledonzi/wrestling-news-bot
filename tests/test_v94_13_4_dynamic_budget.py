@@ -36,13 +36,31 @@ def test_target_30_published_zero_minimum_soft_score_passes(monkeypatch):
     assert result["daily_policy"]["published_today_percent"] == 0
 
 
-def test_published_21_of_30_same_soft_under_1_5x_threshold_does_not_pass(monkeypatch):
+def test_published_12_of_30_soft_threshold_tuned_to_1_1x(monkeypatch):
     monkeypatch.setattr(menzo, "DAILY_NEWS_TARGET", 30)
-    result = run_budget(item(score=90, article_type="soft_news", priority="soft"), 21)
+    result = run_budget(item(score=71, article_type="soft_news", priority="soft"), 12)
     assert len(result["selected"]) == 0
     blocked = (result["pending"] or result["skipped"])[0]
     assert blocked["reason"].startswith("skipped_by_dynamic_threshold")
-    assert result["daily_policy"]["dynamic_soft_threshold"] == 98
+    assert result["daily_policy"]["dynamic_soft_threshold"] == 72
+
+
+def test_published_21_of_30_soft_threshold_tuned_to_1_2x(monkeypatch):
+    monkeypatch.setattr(menzo, "DAILY_NEWS_TARGET", 30)
+    result = run_budget(item(score=77, article_type="soft_news", priority="soft"), 21)
+    assert len(result["selected"]) == 0
+    blocked = (result["pending"] or result["skipped"])[0]
+    assert blocked["reason"].startswith("skipped_by_dynamic_threshold")
+    assert result["daily_policy"]["dynamic_soft_threshold"] == 78
+
+
+def test_published_28_of_30_soft_threshold_tuned_to_1_25x(monkeypatch):
+    monkeypatch.setattr(menzo, "DAILY_NEWS_TARGET", 30)
+    result = run_budget(item(score=80, article_type="soft_news", priority="soft"), 28)
+    assert len(result["selected"]) == 0
+    blocked = (result["pending"] or result["skipped"])[0]
+    assert blocked["reason"].startswith("skipped_by_dynamic_threshold")
+    assert result["daily_policy"]["dynamic_soft_threshold"] == 81
 
 
 def test_over_target_only_major_hard_high_score_passes(monkeypatch):

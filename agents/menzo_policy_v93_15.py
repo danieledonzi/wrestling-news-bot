@@ -32,7 +32,7 @@ ARTIFACT_DECISIONS_FILE = ARTIFACT_DIR / "menzo_decisions.json"
 SOFTPOOL_FILE = NEWSROOM_STATE_DIR / "menzo_softpool.json"
 HARD_SKIP_FILE = NEWSROOM_STATE_DIR / "menzo_hard_skips.json"
 
-MENZO_VERSION = "v94.13.4_dynamic_editorial_budget_and_softpool_decay"
+MENZO_VERSION = "v94.13.4.1_dynamic_threshold_tuning"
 VALID_LABELS = {"high", "medium", "low", "skip"}
 LABEL_SCORE = {"high": 92, "medium": 72, "low": 48, "skip": 0}
 SOFTPOOL_TTL_HOURS = int(os.getenv("V93_MENZO_SOFTPOOL_TTL_HOURS", "36"))
@@ -237,11 +237,11 @@ def dynamic_soft_threshold(base_threshold: int = MIN_SELECTED_SCORE, published_c
     if percent < 0.40:
         multiplier = 1.0
     elif percent < 0.70:
-        multiplier = 1.2
+        multiplier = 1.1
     elif percent < 0.90:
-        multiplier = 1.5
+        multiplier = 1.2
     elif percent <= 1.0:
-        multiplier = 1.8
+        multiplier = 1.25
     else:
         multiplier = float("inf")
     threshold = 101 if multiplier == float("inf") else int(round(base_threshold * multiplier))
@@ -1157,7 +1157,7 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     write_json(MENZO_DECISIONS_FILE, result)
     write_json(V92_ALLOWED_URLS_FILE, {"generated_at": utc_now(), "version": MENZO_VERSION, "allowed_urls": result.get("allowed_urls_for_v92", [])})
     print(
-        f"[MENZO v94.13.4] Decisione selettiva | "
+        f"[MENZO v94.13.4.1] Decisione selettiva | "
         f"selected={len(result.get('selected', []))} "
         f"pending={len(result.get('pending', []))} "
         f"skipped={len(result.get('skipped', []))} "
