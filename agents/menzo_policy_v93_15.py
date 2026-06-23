@@ -32,7 +32,7 @@ ARTIFACT_DECISIONS_FILE = ARTIFACT_DIR / "menzo_decisions.json"
 SOFTPOOL_FILE = NEWSROOM_STATE_DIR / "menzo_softpool.json"
 HARD_SKIP_FILE = NEWSROOM_STATE_DIR / "menzo_hard_skips.json"
 
-MENZO_VERSION = "v94.13.4.1_dynamic_threshold_tuning"
+MENZO_VERSION = "v94.13.5_duplicate_arbitration_must_select_winner"
 VALID_LABELS = {"high", "medium", "low", "skip"}
 LABEL_SCORE = {"high": 92, "medium": 72, "low": 48, "skip": 0}
 SOFTPOOL_TTL_HOURS = int(os.getenv("V93_MENZO_SOFTPOOL_TTL_HOURS", "36"))
@@ -824,6 +824,121 @@ def arbitration_records_for_item(item: dict[str, Any], cluster_records: list[dic
     return records[:AI_DEDUPE_MAX_CANDIDATES]
 
 
+def duplicate_cluster_article_type(item: dict[str, Any]) -> str:
+    """Return an editorial type for a duplicate-cluster survivor."""
+    current = str(item.get("article_type") or "").strip().lower()
+    if current and current != "duplicate":
+        return current
+    text = normalize_text(" ".join(str(item.get(k) or "") for k in ["title", "summary", "excerpt", "reason", "category_hint"])).lower()
+    if any(term in text for term in ["turns heel", "turn heel", "heel turn", "turns face", "turn face", "face turn", "title change", "new champion", "debut", "returns", "returning", "injury", "injured"]):
+        return "post_show_major_angle"
+    return "hard_news"
+
+
+def duplicate_cluster_source_rank(item: dict[str, Any]) -> int:
+    source = " ".join(str(item.get(k) or "") for k in ["source", "url", "source_url"]).lower()
+    if "wrestlinginc" in source or "wrestling inc" in source:
+        return 30
+    if "fightful" in source:
+        return 30
+    if "ringsidenews" in source or "ringside news" in source:
+        return 10
+    return 20
+
+
+def duplicate_cluster_richness(item: dict[str, Any]) -> int:
+    text = " ".join(str(item.get(k) or "") for k in ["summary", "excerpt", "body", "content", "reason"])
+    embeds = item.get("embed_count") or item.get("embeds_count") or 0
+    try:
+        embed_score = int(embeds) * 120
+    except Exception:
+        embed_score = 0
+    return len(text) + embed_score + (120 if item.get("image") or item.get("image_url") or item.get("has_image") else 0)
+
+
+def duplicate_cluster_winner_key(items: list[dict[str, Any]]) -> str:
+    label_rank = {"high": 3, "medium": 2, "low": 1, "skip": 0}
+
+    def rank(item: dict[str, Any]) -> tuple[int, int, int, int, int]:
+        try:
+            score = int(item.get("score", 0) or 0)
+        except Exception:
+            score = 0
+        label = label_rank.get(str(item.get("ai_priority_label") or item.get("priority_label") or "").lower(), 0)
+        non_duplicate = 1 if str(item.get("article_type") or "").lower() != "duplicate" else 0
+        return score, label, non_duplicate, duplicate_cluster_source_rank(item), duplicate_cluster_richness(item)
+
+    winner = max(items, key=rank)
+    return source_key(winner.get("url") or winner.get("source_url") or "")
+
+
+def apply_candidate_duplicate_cluster_survivors(
+    result: dict[str, Any],
+    records_by_url: dict[str, list[dict[str, Any]]],
+    logs: list[dict[str, Any]],
+) -> set[str]:
+    """Resolve candidate-only duplicate clusters so at least one new story survives."""
+    items_by_key: dict[str, dict[str, Any]] = {}
+    section_by_key: dict[str, str] = {}
+    for section in ["selected", "pending"]:
+        for item in result.get(section, []) if isinstance(result.get(section), list) else []:
+            if isinstance(item, dict):
+                key = source_key(item.get("url") or item.get("source_url") or "")
+                if key:
+                    items_by_key[key] = item
+                    section_by_key[key] = section
+
+    processed: set[tuple[str, ...]] = set()
+    handled: set[str] = set()
+    threshold = int(result.get("daily_policy", {}).get("dynamic_soft_threshold") or MIN_SELECTED_SCORE)
+    for cluster_records in records_by_url.values():
+        candidate_keys = []
+        existing_published = False
+        for rec in cluster_records:
+            key = source_key(rec.get("source_url") or rec.get("url") or "")
+            if rec.get("origin") == "published_or_memory":
+                existing_published = True
+            elif key in items_by_key:
+                candidate_keys.append(key)
+        cluster_id = tuple(sorted(set(candidate_keys)))
+        if len(cluster_id) < 2 or cluster_id in processed:
+            continue
+        processed.add(cluster_id)
+        cluster_items = [items_by_key[k] for k in cluster_id]
+        already_selected = [k for k in cluster_id if section_by_key.get(k) == "selected" and str(items_by_key[k].get("decision") or "") == "selected"]
+        survivor_key = "" if existing_published else (already_selected[0] if already_selected else duplicate_cluster_winner_key(cluster_items))
+        for key in cluster_id:
+            item = items_by_key[key]
+            if existing_published or key != survivor_key:
+                item["decision"] = "skip"
+                item["priority"] = "skip"
+                item["article_type"] = "duplicate"
+                item["reason"] = "skip:ai_cross_source_duplicate_arbitration_loser"
+                handled.add(key)
+            else:
+                item["article_type"] = duplicate_cluster_article_type(item)
+                try:
+                    score = int(item.get("score", 0) or 0)
+                except Exception:
+                    score = 0
+                if score >= threshold or is_major_hard_news(item):
+                    item["decision"] = "selected"
+                else:
+                    item["decision"] = "pending"
+                handled.add(key)
+        logs.append({
+            "ai_cross_source_duplicate_arbitration_used": True,
+            "decision": "cluster_survivor_selected" if survivor_key else "cluster_existing_published_skip",
+            "cluster_type": "same_story",
+            "duplicate_cluster_survivor_selected": bool(survivor_key),
+            "duplicate_cluster_survivor_url": items_by_key[survivor_key].get("url") or items_by_key[survivor_key].get("source_url") if survivor_key else "",
+            "duplicate_cluster_loser_count": len(cluster_id) if existing_published else max(0, len(cluster_id) - 1),
+            "duplicate_cluster_existing_published": existing_published,
+            "reason": "candidate duplicate cluster resolved with mandatory survivor",
+        })
+    return handled
+
+
 def apply_arbitration_decision(item: dict[str, Any], ai_data: dict[str, Any], model_used: str, second_pass: bool) -> dict[str, Any]:
     item = dict(item)
     decision = str(ai_data.get("decision") or "pending_review").lower()
@@ -874,9 +989,13 @@ def apply_ai_duplicate_arbitration(result: dict[str, Any], massy_board: dict[str
     original_selected = {source_key(x.get("url") or x.get("source_url") or "") for x in selected}
     resolved: dict[str, dict[str, Any]] = {}
     logs: list[dict[str, Any]] = []
+    handled_cluster_keys = apply_candidate_duplicate_cluster_survivors({"selected": selected, "pending": pending, "daily_policy": result.get("daily_policy", {})}, records_by_url, logs)
 
     for item in candidates:
         key = source_key(item.get("url") or item.get("source_url") or "")
+        if key in handled_cluster_keys:
+            resolved[key] = item
+            continue
         cluster_records = records_by_url.get(key, [])
         if not cluster_records:
             suspicious_published = suspicious_published_records(item, published_fingerprint_records())
