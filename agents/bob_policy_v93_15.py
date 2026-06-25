@@ -6,6 +6,7 @@ import re
 from pathlib import Path
 from typing import Any
 
+import agents.bob as bob_base
 from agents.bob import run_bob as base_run_bob
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,7 +15,33 @@ ARTIFACT_DIR = ROOT / "artifacts" / "newsroom"
 BOB_ARTICLES_FILE = NEWSROOM_STATE_DIR / "bob_articles_latest.json"
 ARTIFACT_BOB_FILE = ARTIFACT_DIR / "bob_articles.json"
 
-VERSION = "v93_33_youtube_plain_and_cta_cleanup"
+VERSION = "v94_14_translation_guardrails_from_v92"
+
+TRANSLATION_STYLE_GUARDRAILS_V94_14 = """
+GUARDRAIL LINGUISTICI OBBLIGATORI v94.14:
+- Scrivi come una news wrestling italiana reale: diretto, concreto, asciutto. Evita tono AI, formule enfatiche, chiusure speculative e frasi di riempimento.
+- Non tradurre mai i nomi ufficiali di titoli/cinture: World Heavyweight Championship, Intercontinental Championship, United States Championship, WWE Championship, WWE Women's Championship, Women's World Championship, NXT Championship, AEW World Championship, AEW World Tag Team Championship, TNA Knockouts Title, TNA Knockouts World Championship, AAA Mega Championship, Money in the Bank.
+- Non tradurre mai i nomi ufficiali di stipulazioni/match type: Last Man Standing Match, Last Woman Standing Match, WarGames Match, Royal Rumble Match, Hell in a Cell Match, Steel Cage Match, Ladder Match, Street Fight, No Disqualification Match, Triple Threat Match, Fatal 4-Way Match, 6-Man Tag Team Match, 8-Woman Tag Team Match, title match.
+- Nel wrestling italiano, match resta match: mai partita, gara o gioco. Promo e' maschile: un promo. Chop e' femminile: le chop, delle chop.
+- Mantieni normalmente in inglese: promo, segment, storyline, push, turn, feud, stable, heel, face, main event, main eventer, tag team.
+- Le mosse riconoscibili restano in inglese, ma la frase deve essere italiana naturale: connected with a Spear -> ha colpito con una Spear / ha messo a segno una Spear; connected a flurry -> ha messo a segno una raffica; tide turned -> l'inerzia del match e' cambiata; well-connected backstage -> ben introdotto nel backstage / con agganci nel backstage.
+- release/released/roster cuts -> licenziamento, licenziato/licenziata, addio o uscita secondo contesto; mai rilascio/rilasciato. retirement -> ritiro/ritirarsi; mai pensione/pensionamento. cleared/not cleared -> autorizzato/non autorizzato a lottare; mai pulito/non pulito.
+- Evita calchi e parole innaturali: si e' aperto riguardo, ha affrontato una sfida, coinvolto in una dinamica, all'interno della compagnia, televisione nazionale, rivelatrice, prevalenza, stella se il senso e' wrestler/fighter/top name.
+- Se non sei sicuro su un nome proprio, titolo, show, stable, evento, cintura, stipulazione, numero, data o sigla, copialo esattamente dal sorgente.
+""".strip()
+
+_ORIGINAL_BUILD_TRANSLATION_PROMPT = bob_base.build_translation_prompt
+
+
+def build_translation_prompt_with_v94_14_guardrails(item: dict[str, Any], meta: dict[str, str], units: list[dict[str, str]]) -> str:
+    prompt = _ORIGINAL_BUILD_TRANSLATION_PROMPT(item, meta, units)
+    marker = "Forma richiesta:"
+    if marker in prompt:
+        return prompt.replace(marker, f"{TRANSLATION_STYLE_GUARDRAILS_V94_14}\n\n{marker}", 1)
+    return f"{prompt.rstrip()}\n\n{TRANSLATION_STYLE_GUARDRAILS_V94_14}\n"
+
+
+bob_base.build_translation_prompt = build_translation_prompt_with_v94_14_guardrails
 
 RESIDUAL_BIO_PATTERNS = [
     # Known Ringside boilerplate authors.
@@ -155,6 +182,8 @@ def run_bob(menzo_decision: dict[str, Any] | None = None) -> dict[str, Any]:
             article.setdefault("diagnostic_warnings", [])
             total_changes += len(changes)
     result["version"] = VERSION
+    result.setdefault("policy", {})["v94_14_translation_guardrails_in_prompt"] = True
+    result.setdefault("policy", {})["v92_translation_prompt_policy_embedded_compact"] = True
     result.setdefault("policy", {})["residual_author_bio_cleanup"] = True
     result.setdefault("policy", {})["generic_ringside_author_bio_cleanup"] = True
     result.setdefault("policy", {})["residual_cta_cleanup"] = True
@@ -162,10 +191,11 @@ def run_bob(menzo_decision: dict[str, Any] | None = None) -> dict[str, Any]:
     result.setdefault("policy", {})["source_blockquote_only"] = True
     result.setdefault("policy", {})["move_leading_embeds_after_first_paragraph"] = True
     result.setdefault("policy", {})["unwrap_fake_data_blockquotes"] = True
+    result.setdefault("postprocess", {})["bob_v94_14_prompt_guardrails"] = True
     result.setdefault("postprocess", {})["bob_v93_33_changes"] = total_changes
     # Backward-compatible metric used by the master log.
     result.setdefault("postprocess", {})["bob_v93_16_changes"] = total_changes
     write_json(ARTIFACT_BOB_FILE, result)
     write_json(BOB_ARTICLES_FILE, result)
-    print(f"[BOB v93.33] Cleanup finale applicato | changes={total_changes}", flush=True)
+    print(f"[BOB v94.14] Cleanup finale + guardrail traduzione applicati | changes={total_changes}", flush=True)
     return result
