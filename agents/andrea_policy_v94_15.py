@@ -75,20 +75,28 @@ def existing_blocks(candidate: dict[str, Any]) -> list[dict[str, Any]]:
 def fetch_and_extract_if_needed(candidate: dict[str, Any]) -> tuple[str, list[dict[str, Any]], dict[str, Any]]:
     text = text_from_candidate(candidate)
     blocks = existing_blocks(candidate)
-    diagnostics: dict[str, Any] = {}
+    diagnostics: dict[str, Any] = {"andrea_fetch_performed": False, "bob_reuse_supported": False, "bob_may_reextract": False}
     if blocks or len(text) >= 500:
+        diagnostics["source"] = "candidate_payload"
         return text, blocks, diagnostics
     url = str(candidate.get("url") or candidate.get("source_url") or "")
     if not url:
-        return text, blocks, {"stage": "missing_url"}
+        return text, blocks, {"stage": "missing_url", "andrea_fetch_performed": False, "bob_reuse_supported": False, "bob_may_reextract": False}
     try:
         from agents.bob import extract_elements, fetch_html
         raw = fetch_html(url)
         _meta, _raw_elements, elements, _removed, diagnostics = extract_elements(url, raw)
+        diagnostics.update({
+            "andrea_fetch_performed": True,
+            "andrea_extracted_reusable_elements": bool(elements),
+            "bob_reuse_supported": False,
+            "bob_may_reextract": True,
+            "reuse_note": "Andrea reused Bob extraction helpers for pre-Bob metrics; current Bob article_package does not accept pre-extracted elements, so Bob may fetch/extract again for passed candidates.",
+        })
         extracted = clean_text("\n".join(str(e.get("text") or e.get("markdown") or "") for e in elements if e.get("type") in {"text", "heading", "quote", "table"}))
         return extracted or text, elements, diagnostics
     except Exception as exc:
-        return text, blocks, {"stage": "andrea_extract_error", "error": str(exc)[:500]}
+        return text, blocks, {"stage": "andrea_extract_error", "error": str(exc)[:500], "andrea_fetch_performed": True, "bob_reuse_supported": False, "bob_may_reextract": False}
 
 
 def count_sentences(text: str) -> int:
@@ -129,7 +137,7 @@ def pre_bob_content_sufficiency_check(candidate: dict[str, Any]) -> dict[str, An
         ok, decision, reason, saved = False, "blocked_before_bob", "pre_bob_content_insufficient", True
     else:
         ok, decision, reason, saved = True, "pass_to_bob", "sufficient_content", False
-    return {"ok": ok, "decision": decision, "reason": reason, "body_chars": body_chars, "body_words": body_words, "meaningful_text_blocks": meaningful_text_blocks, "paragraph_count": paragraph_count, "sentence_count": sentence_count, "quote_count": quote_count, "embed_count": embed_count, "image_count": image_count, "has_only_image_or_embed": has_only_image_or_embed, "has_extraction_failure_signals": has_extraction_failure_signals, "has_source_boilerplate_only": has_source_boilerplate_only, "is_quote_based_exception": is_quote_based_exception, "is_breaking_exception": is_breaking_exception, "is_major_hard_news_exception": is_major_hard_news_exception, "exceptions": exceptions, "saved_gemini_call": saved, "source_title": candidate.get("source_title") or candidate.get("title"), "source_url": candidate.get("source_url") or candidate.get("url"), "menzo_score": candidate.get("score") or candidate.get("menzo_score"), "menzo_article_type": candidate.get("article_type") or candidate.get("category_hint"), "extraction_diagnostics": diagnostics}
+    return {"ok": ok, "decision": decision, "reason": reason, "body_chars": body_chars, "body_words": body_words, "meaningful_text_blocks": meaningful_text_blocks, "paragraph_count": paragraph_count, "sentence_count": sentence_count, "quote_count": quote_count, "embed_count": embed_count, "image_count": image_count, "has_only_image_or_embed": has_only_image_or_embed, "has_extraction_failure_signals": has_extraction_failure_signals, "has_source_boilerplate_only": has_source_boilerplate_only, "is_quote_based_exception": is_quote_based_exception, "is_breaking_exception": is_breaking_exception, "is_major_hard_news_exception": is_major_hard_news_exception, "exceptions": exceptions, "saved_gemini_call": saved, "andrea_fetch_performed": bool(diagnostics.get("andrea_fetch_performed")), "andrea_extracted_reusable_elements": bool(diagnostics.get("andrea_extracted_reusable_elements")), "bob_reuse_supported": bool(diagnostics.get("bob_reuse_supported")), "bob_may_reextract": bool(diagnostics.get("bob_may_reextract")), "reuse_note": diagnostics.get("reuse_note", ""), "source_title": candidate.get("source_title") or candidate.get("title"), "source_url": candidate.get("source_url") or candidate.get("url"), "menzo_score": candidate.get("score") or candidate.get("menzo_score"), "menzo_article_type": candidate.get("article_type") or candidate.get("category_hint"), "extraction_diagnostics": diagnostics}
 
 
 def run_andrea(menzo_output: dict[str, Any], state: dict[str, Any] | None = None) -> dict[str, Any]:
@@ -148,7 +156,7 @@ def run_andrea(menzo_output: dict[str, Any], state: dict[str, Any] | None = None
             passed.append(enriched)
         else:
             print(f"[ANDREA v94.15] blocked_before_bob | reason={check['reason']} body_chars={check['body_chars']} text_blocks={check['meaningful_text_blocks']} paragraphs={check['paragraph_count']} sentences={check['sentence_count']} quotes={check['quote_count']} embeds={check['embed_count']} url={check.get('source_url')}", flush=True)
-    summary = {"checked": len(items), "passed": len(passed), "blocked": sum(1 for x in items if not x.get("ok")), "passed_with_exception": sum(1 for x in items if x.get("decision") == "passed_with_exception"), "saved_gemini_calls": sum(1 for x in items if x.get("saved_gemini_call"))}
+    summary = {"checked": len(items), "passed": len(passed), "blocked": sum(1 for x in items if not x.get("ok")), "passed_with_exception": sum(1 for x in items if x.get("decision") == "passed_with_exception"), "saved_gemini_calls": sum(1 for x in items if x.get("saved_gemini_call")), "andrea_fetch_performed": sum(1 for x in items if x.get("andrea_fetch_performed")), "bob_may_reextract": sum(1 for x in items if x.get("bob_may_reextract"))}
     result = {"agent": "Andrea", "version": VERSION, "generated_at": utc_now(), "input": {"selected_count": len(selected), "menzo_version": menzo_output.get("version") if isinstance(menzo_output, dict) else None}, "summary": summary, "items": items, "handoff": {"to_bob": len(passed), "blocked_before_bob": summary["blocked"], "saved_gemini_calls": summary["saved_gemini_calls"]}}
     filtered = dict(menzo_output)
     filtered["selected"] = passed
@@ -158,5 +166,5 @@ def run_andrea(menzo_output: dict[str, Any], state: dict[str, Any] | None = None
     result["menzo_handoff_to_bob"] = filtered["handoff"]
     write_json(ARTIFACT_FILE, result)
     write_json(STATE_FILE, result)
-    print(f"[ANDREA v94.15] Pre-Bob content sufficiency guard | checked={summary['checked']} passed={summary['passed']} blocked={summary['blocked']} passed_with_exception={summary['passed_with_exception']} saved_gemini_calls={summary['saved_gemini_calls']}", flush=True)
+    print(f"[ANDREA v94.15] Pre-Bob content sufficiency guard | checked={summary['checked']} passed={summary['passed']} blocked={summary['blocked']} passed_with_exception={summary['passed_with_exception']} saved_gemini_calls={summary['saved_gemini_calls']} andrea_fetch_performed={summary['andrea_fetch_performed']} bob_may_reextract={summary['bob_may_reextract']}", flush=True)
     return filtered

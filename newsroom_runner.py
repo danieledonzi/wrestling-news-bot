@@ -296,7 +296,7 @@ def main() -> int:
     if archivista_result.get("status") != "error":
         try:
             from agents.archivista import run_archivista
-            archivista_result = run_archivista(timeline=timeline, run_summary=run_summary, massy=massy_board, simone=simone_decision, menzo=andrea_handoff, bob=bob_result, alfred=alfred_result, publisher=publisher_result)
+            archivista_result = run_archivista(timeline=timeline, run_summary=run_summary, massy=massy_board, simone=simone_decision, menzo=menzo_decision, bob=bob_result, alfred=alfred_result, publisher=publisher_result)
             add_timeline(timeline, "Archivista", "audit_context_refreshed", f"status={archivista_result.get('overall_status')}")
         except Exception as exc:
             add_timeline(timeline, "Archivista", "error", str(exc))
@@ -319,7 +319,7 @@ def main() -> int:
         massy=massy_board,
         simone=simone_decision,
         simone_publish=simone_publish,
-        menzo=andrea_handoff,
+        menzo=menzo_decision,
         bob=bob_result,
         alfred=alfred_result,
         publisher=publisher_result,
