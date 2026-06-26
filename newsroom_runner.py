@@ -184,6 +184,11 @@ def import_menzo():
         return run_menzo
 
 
+
+def import_andrea():
+    from agents.andrea_policy_v94_15 import run_andrea
+    return run_andrea
+
 def import_bob():
     try:
         from agents.bob_policy_v93_15 import run_bob
@@ -239,11 +244,11 @@ def main() -> int:
     timeline: list[dict[str, str]] = []
     print(f"===== NEWSROOM RUN START [{started_at}] VERSION [{NEWSROOM_VERSION}] =====", flush=True)
     print("[NEWSROOM v93] Avvio Virtual Newsroom", flush=True)
-    print("[NEWSROOM v93] Massy, Simone, Menzo, Bob, Alfred, Publisher and Archivista are real", flush=True)
+    print("[NEWSROOM v93] Massy, Simone, Menzo, Andrea, Bob, Alfred, Publisher and Archivista are real", flush=True)
     command = runtime_command()
     engine = command[1] if len(command) > 1 else "unknown"
     is_test_override = bool(os.getenv("NEWSROOM_ENGINE", "").strip())
-    jarvis_status = {"version": NEWSROOM_VERSION, "created_at": utc_now(), "agent": "Jarvis", "mode": "v93_orchestrator", "engine": engine, "newsroom_engine_override": is_test_override, "wp_status_source": "v93_publisher", "can_translate": "v93_bob", "can_review": "v93_alfred", "can_publish": "v93_publisher", "can_audit": "v93_archivista", "can_publish_reports": "v93_simone_autonomous", "can_write_master_log": "v93_master_log"}
+    jarvis_status = {"version": NEWSROOM_VERSION, "created_at": utc_now(), "agent": "Jarvis", "mode": "v93_orchestrator", "engine": engine, "newsroom_engine_override": is_test_override, "wp_status_source": "v93_publisher", "can_pre_bob_guard": "v94_15_andrea", "can_translate": "v93_bob", "can_review": "v93_alfred", "can_publish": "v93_publisher", "can_audit": "v93_archivista", "can_publish_reports": "v93_simone_autonomous", "can_write_master_log": "v93_master_log"}
     write_json(ARTIFACT_DIR / "jarvis_status.json", jarvis_status)
     add_timeline(timeline, "Jarvis", "bootstrap_status_written", f"engine={engine}")
 
@@ -256,8 +261,10 @@ def main() -> int:
     menzo_decision = safe_agent(timeline=timeline, agent="Menzo", phase="editorial_decision_ready", import_fn=import_menzo, call_args=(massy_board,), artifact_name="menzo_decisions.json", default_handoff={"to_bob_or_v92": 0, "pending": 0, "skipped": 0}, note_fn=lambda r: "selected={to_bob_or_v92} pending={pending} skipped={skipped}".format(**{**{"to_bob_or_v92": 0, "pending": 0, "skipped": 0}, **handoff(r)}))
     add_timeline(timeline, "Menzo", "forced_policy_active", f"version={menzo_decision.get('version')}")
 
-    bob_result = safe_agent(timeline=timeline, agent="Bob", phase="article_packages_ready", import_fn=import_bob, call_args=(menzo_decision,), artifact_name="bob_articles.json", default_handoff={"ready_for_alfred": 0, "translation_pending": 0, "errors": 0, "extraction_empty": 0}, note_fn=lambda r: "ready={ready_for_alfred} pending={translation_pending} empty={extraction_empty} errors={errors}".format(**{**{"ready_for_alfred": 0, "translation_pending": 0, "errors": 0, "extraction_empty": 0}, **handoff(r)}))
-    bob_result = attach_bob_brief_warnings(bob_result, menzo_decision)
+    andrea_handoff = safe_agent(timeline=timeline, agent="Andrea", phase="pre_bob_content_sufficiency_ready", import_fn=import_andrea, call_args=(menzo_decision,), artifact_name="andrea_pre_bob_latest.json", default_handoff={"to_bob": 0, "blocked_before_bob": 0, "saved_gemini_calls": 0}, note_fn=lambda r: "to_bob={to_bob_or_v92} checked={andrea_checked} blocked={andrea_blocked} saved_gemini={andrea_saved_gemini_calls}".format(**{**{"to_bob_or_v92": 0, "andrea_checked": 0, "andrea_blocked": 0, "andrea_saved_gemini_calls": 0}, **handoff(r)}))
+
+    bob_result = safe_agent(timeline=timeline, agent="Bob", phase="article_packages_ready", import_fn=import_bob, call_args=(andrea_handoff,), artifact_name="bob_articles.json", default_handoff={"ready_for_alfred": 0, "translation_pending": 0, "errors": 0, "extraction_empty": 0}, note_fn=lambda r: "ready={ready_for_alfred} pending={translation_pending} empty={extraction_empty} errors={errors}".format(**{**{"ready_for_alfred": 0, "translation_pending": 0, "errors": 0, "extraction_empty": 0}, **handoff(r)}))
+    bob_result = attach_bob_brief_warnings(bob_result, andrea_handoff)
     write_json(ARTIFACT_DIR / "bob_articles.json", bob_result)
     add_timeline(timeline, "Bob", "bob_brief_guard_applied", f"warnings={bob_result.get('postprocess', {}).get('bob_brief_warnings_added', 0)}")
 
@@ -283,16 +290,26 @@ def main() -> int:
         add_timeline(timeline, "Publisher", "runtime_finished", f"exit_code={runtime_exit_code}")
 
     ended_at = utc_now()
-    run_summary = {"version": NEWSROOM_VERSION, "started_at": started_at, "ended_at": ended_at, "engine": engine, "newsroom_engine_override": is_test_override, "runtime_delegations": runtime_delegations, "runtime_exit_code": runtime_exit_code, "agents": {"jarvis": "real_orchestrator", "massy": "real_sentinel_control", "simone": "real_report_director_and_autonomous_report_publisher", "menzo": "real_editorial_director", "bob": "real_article_writer", "alfred": "real_quality_editor", "publisher": "real_wordpress_publisher", "archivista": "real_audit_agent", "master_log": "real_structured_run_memory"}, "massy_handoff": handoff(massy_board), "simone_handoff": handoff(simone_decision), "simone_publish_handoff": handoff(simone_publish), "menzo_handoff": handoff(menzo_decision), "bob_handoff": handoff(bob_result), "alfred_handoff": handoff(alfred_result), "publisher_handoff": handoff(publisher_result)}
+    run_summary = {"version": NEWSROOM_VERSION, "started_at": started_at, "ended_at": ended_at, "engine": engine, "newsroom_engine_override": is_test_override, "runtime_delegations": runtime_delegations, "runtime_exit_code": runtime_exit_code, "agents": {"jarvis": "real_orchestrator", "massy": "real_sentinel_control", "simone": "real_report_director_and_autonomous_report_publisher", "menzo": "real_editorial_director", "andrea": "real_pre_bob_content_sufficiency_guard", "bob": "real_article_writer", "alfred": "real_quality_editor", "publisher": "real_wordpress_publisher", "archivista": "real_audit_agent", "master_log": "real_structured_run_memory"}, "massy_handoff": handoff(massy_board), "simone_handoff": handoff(simone_decision), "simone_publish_handoff": handoff(simone_publish), "menzo_handoff": handoff(menzo_decision), "andrea_handoff": handoff(andrea_handoff), "bob_handoff": handoff(bob_result), "alfred_handoff": handoff(alfred_result), "publisher_handoff": handoff(publisher_result)}
 
     archivista_result = safe_agent(timeline=timeline, agent="Archivista", phase="audit_ready", import_fn=import_archivista, call_args=(), artifact_name="archivista_report.json", default_handoff={"overall_status": "error"}, note_fn=lambda r: "status={status} anomalies={anomalies}".format(status=r.get("overall_status", "unknown"), anomalies=(r.get("summary", {}) if isinstance(r.get("summary"), dict) else {}).get("anomalies", 0)))
     if archivista_result.get("status") != "error":
         try:
             from agents.archivista import run_archivista
-            archivista_result = run_archivista(timeline=timeline, run_summary=run_summary, massy=massy_board, simone=simone_decision, menzo=menzo_decision, bob=bob_result, alfred=alfred_result, publisher=publisher_result)
+            archivista_result = run_archivista(timeline=timeline, run_summary=run_summary, massy=massy_board, simone=simone_decision, menzo=andrea_handoff, bob=bob_result, alfred=alfred_result, publisher=publisher_result)
             add_timeline(timeline, "Archivista", "audit_context_refreshed", f"status={archivista_result.get('overall_status')}")
         except Exception as exc:
             add_timeline(timeline, "Archivista", "error", str(exc))
+    if isinstance(andrea_handoff, dict):
+        ah = handoff(andrea_handoff)
+        run_summary.update({
+            "andrea_checked": ah.get("andrea_checked", 0),
+            "andrea_passed": ah.get("andrea_passed", 0),
+            "andrea_blocked": ah.get("andrea_blocked", 0),
+            "andrea_saved_gemini_calls": ah.get("andrea_saved_gemini_calls", 0),
+            "andrea_block_reasons": ah.get("andrea_block_reasons", []),
+            "andrea_passed_with_exception": ah.get("andrea_passed_with_exception", 0),
+        })
     run_summary["archivista_handoff"] = archivista_result.get("summary", {}) if isinstance(archivista_result, dict) else {}
     run_summary["archivista_status"] = archivista_result.get("overall_status") if isinstance(archivista_result, dict) else "error"
 
@@ -302,7 +319,7 @@ def main() -> int:
         massy=massy_board,
         simone=simone_decision,
         simone_publish=simone_publish,
-        menzo=menzo_decision,
+        menzo=andrea_handoff,
         bob=bob_result,
         alfred=alfred_result,
         publisher=publisher_result,
