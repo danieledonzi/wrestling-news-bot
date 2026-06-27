@@ -7,6 +7,8 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
+from agents.gemini_ledger import record_gemini_event
+
 from agents import menzo as base
 from agents.story_dedupe_v93_32 import (
     build_generalized_fingerprint,
@@ -690,7 +692,7 @@ def _parse_gemini_json_text(text: str) -> dict[str, Any] | None:
     return data if isinstance(data, dict) else None
 
 
-def call_gemini_json_model(prompt: str, model: str) -> tuple[dict[str, Any] | None, str]:
+def call_gemini_json_model(prompt: str, model: str, *, ledger_context: dict[str, Any] | None = None) -> tuple[dict[str, Any] | None, str]:
     api_key = os.getenv("GEMINI_API_KEY", "").strip()
     if not api_key:
         return None, "missing_api_key"
@@ -699,8 +701,10 @@ def call_gemini_json_model(prompt: str, model: str) -> tuple[dict[str, Any] | No
         client = genai.Client(api_key=api_key)
         response = client.models.generate_content(model=model, contents=prompt)
         data = _parse_gemini_json_text(getattr(response, "text", "") or "")
+        record_gemini_event(agent="Menzo", phase="duplicate_arbitration", model=model, status="called", reason="ai_duplicate_arbitration", result="valid_json" if data else "invalid_json", **(ledger_context or {}))
         return (data, model) if data else (None, f"invalid_json:{model}")
     except Exception as exc:
+        record_gemini_event(agent="Menzo", phase="duplicate_arbitration", model=model, status="failed", reason="ai_duplicate_arbitration", result=str(exc)[:500], **(ledger_context or {}))
         return None, f"gemini_unavailable:{model}:{exc}"
 
 
@@ -1005,11 +1009,11 @@ def apply_ai_duplicate_arbitration(result: dict[str, Any], massy_board: dict[str
             resolved[key] = item
             continue
         records = arbitration_records_for_item(item, cluster_records)
-        ai_data, model = call_gemini_json_model(build_ai_dedupe_prompt(records), "gemini-3.1-flash-lite")
+        ai_data, model = call_gemini_json_model(build_ai_dedupe_prompt(records), "gemini-3.1-flash-lite", ledger_context={"url": item.get("url") or item.get("source_url"), "title": item.get("title") or item.get("source_title"), "candidate_id": item.get("candidate_id") or item.get("id") or item.get("semantic_id"), "source_id": item.get("source_id") or item.get("source")})
         second_pass = False
         if needs_second_pass(ai_data):
             second_pass = True
-            ai_data2, model2 = call_gemini_json_model(build_ai_dedupe_second_pass_prompt(records, relevant_history_payload(records)), "gemini-3-flash-preview")
+            ai_data2, model2 = call_gemini_json_model(build_ai_dedupe_second_pass_prompt(records, relevant_history_payload(records)), "gemini-3-flash-preview", ledger_context={"url": item.get("url") or item.get("source_url"), "title": item.get("title") or item.get("source_title"), "candidate_id": item.get("candidate_id") or item.get("id") or item.get("semantic_id"), "source_id": item.get("source_id") or item.get("source")})
             if ai_data2:
                 ai_data, model = ai_data2, model2
         if not ai_data:

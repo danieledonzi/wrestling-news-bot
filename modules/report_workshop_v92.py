@@ -7,6 +7,8 @@ import os
 import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+
+from agents.gemini_ledger import record_gemini_event
 from urllib.parse import urljoin, urlparse
 import time
 import base64
@@ -631,10 +633,12 @@ def generate_json(prompt: str, chain_name: str = "unknown") -> Tuple[Dict[str, A
             print(f"[TRANSLATE v92] Provo modello: {model} | chain={chain_name}", flush=True)
             res = client.models.generate_content(model=model, contents=prompt)
             data = extract_json_object(res.text)
+            record_gemini_event(agent="Bob", phase=chain_name, model=model, status="called", reason="report_translation", result="valid_json")
             print(f"[TRANSLATE v92] Modello scelto: {model} | chain={chain_name}", flush=True)
             return data, model
         except Exception as exc:
             last = exc
+            record_gemini_event(agent="Bob", phase=chain_name, model=model, status="failed", reason="report_translation", result=str(exc)[:500])
             print(f"[TRANSLATE v92] Modello fallito: {model} | chain={chain_name} | error={str(exc)[:220]}", flush=True)
             continue
     raise last if last else RuntimeError("Nessun modello disponibile")

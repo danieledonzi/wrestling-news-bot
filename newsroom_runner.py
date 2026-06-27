@@ -19,7 +19,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
 
-NEWSROOM_VERSION = "v93_20_process_refinements"
+NEWSROOM_VERSION = "v95_gemini_call_ledger_and_cost_observability"
 ARTIFACT_DIR = Path("artifacts") / "newsroom"
 
 
@@ -55,6 +55,80 @@ def runtime_command() -> list[str]:
 
 def handoff(data: dict[str, Any]) -> dict[str, Any]:
     return data.get("handoff", {}) if isinstance(data.get("handoff"), dict) else {}
+
+
+def import_andrea():
+    try:
+        from agents.andrea import run_andrea
+        return run_andrea
+    except Exception:
+        from agents.andrea_policy_v94_15 import run_andrea
+        return run_andrea
+
+
+def andrea_output_for_bob(menzo: dict[str, Any], andrea: dict[str, Any]) -> dict[str, Any]:
+    if not isinstance(andrea, dict) or andrea.get("status") == "error":
+        return menzo
+    for key in ("menzo_decision", "filtered_menzo_decision", "decision", "output"):
+        value = andrea.get(key)
+        if isinstance(value, dict) and isinstance(value.get("selected"), list):
+            return value
+    if isinstance(andrea.get("selected"), list):
+        merged = dict(menzo)
+        merged["selected"] = andrea.get("selected") or []
+        for key in ("pending", "skipped", "allowed_urls_for_v92", "handoff"):
+            if key in andrea:
+                merged[key] = andrea[key]
+        return merged
+    return menzo
+
+
+def andrea_blocked_items(andrea: dict[str, Any]) -> list[dict[str, Any]]:
+    if not isinstance(andrea, dict):
+        return []
+    for key in ("blocked_items", "andrea_blocked_items", "blocked_candidates", "blocked"):
+        items = andrea.get(key)
+        if isinstance(items, list):
+            return [item if isinstance(item, dict) else {"title": str(item)} for item in items]
+    nested = andrea.get("andrea") if isinstance(andrea.get("andrea"), dict) else {}
+    for key in ("blocked_items", "blocked_candidates", "blocked"):
+        items = nested.get(key)
+        if isinstance(items, list):
+            return [item if isinstance(item, dict) else {"title": str(item)} for item in items]
+    return []
+
+
+def andrea_blocked_count(andrea: dict[str, Any]) -> int:
+    h = handoff(andrea)
+    for key in ("andrea_blocked", "blocked", "blocked_by_andrea"):
+        try:
+            return int(h.get(key, andrea.get(key, 0)) or 0)
+        except Exception:
+            continue
+    return len(andrea_blocked_items(andrea))
+
+
+def record_andrea_avoids_from_result(andrea: dict[str, Any]) -> None:
+    try:
+        from agents.gemini_ledger import record_andrea_avoided
+        items = andrea_blocked_items(andrea)
+        blocked = andrea_blocked_count(andrea)
+        if items:
+            for item in items:
+                record_andrea_avoided(item)
+            return
+        for idx in range(max(0, blocked)):
+            record_andrea_avoided({"candidate_id": f"andrea_blocked_synthetic_{idx + 1}", "reason": "andrea_blocked_count_only"})
+    except Exception:
+        return
+
+
+def gemini_ledger_summary() -> dict[str, Any]:
+    try:
+        from agents.gemini_ledger import write_latest_snapshot
+        return write_latest_snapshot().get("summary", {})
+    except Exception:
+        return {"gemini_calls_total": 0, "gemini_calls_by_agent": {}, "gemini_calls_avoided_total": 0, "gemini_calls_avoided_by_andrea": 0, "gemini_calls_failed": 0}
 
 
 def source_key(value: str) -> str:
@@ -241,6 +315,7 @@ def write_master_log_safe(timeline: list[dict[str, str]], **kwargs: Any) -> dict
 def main() -> int:
     ensure_artifacts()
     started_at = utc_now()
+    os.environ["NEWSROOM_RUN_ID"] = os.getenv("NEWSROOM_RUN_ID", "").strip() or started_at
     timeline: list[dict[str, str]] = []
     print(f"===== NEWSROOM RUN START [{started_at}] VERSION [{NEWSROOM_VERSION}] =====", flush=True)
     print("[NEWSROOM v93] Avvio Virtual Newsroom", flush=True)
@@ -262,6 +337,7 @@ def main() -> int:
     add_timeline(timeline, "Menzo", "forced_policy_active", f"version={menzo_decision.get('version')}")
 
     andrea_handoff = safe_agent(timeline=timeline, agent="Andrea", phase="pre_bob_content_sufficiency_ready", import_fn=import_andrea, call_args=(menzo_decision,), artifact_name="andrea_pre_bob_latest.json", default_handoff={"to_bob": 0, "blocked_before_bob": 0, "saved_gemini_calls": 0}, note_fn=lambda r: "to_bob={to_bob_or_v92} checked={andrea_checked} blocked={andrea_blocked} saved_gemini={andrea_saved_gemini_calls}".format(**{**{"to_bob_or_v92": 0, "andrea_checked": 0, "andrea_blocked": 0, "andrea_saved_gemini_calls": 0}, **handoff(r)}))
+    record_andrea_avoids_from_result(andrea_handoff)
 
     bob_result = safe_agent(timeline=timeline, agent="Bob", phase="article_packages_ready", import_fn=import_bob, call_args=(andrea_handoff,), artifact_name="bob_articles.json", default_handoff={"ready_for_alfred": 0, "translation_pending": 0, "errors": 0, "extraction_empty": 0}, note_fn=lambda r: "ready={ready_for_alfred} pending={translation_pending} empty={extraction_empty} errors={errors}".format(**{**{"ready_for_alfred": 0, "translation_pending": 0, "errors": 0, "extraction_empty": 0}, **handoff(r)}))
     bob_result = attach_bob_brief_warnings(bob_result, andrea_handoff)
@@ -290,7 +366,7 @@ def main() -> int:
         add_timeline(timeline, "Publisher", "runtime_finished", f"exit_code={runtime_exit_code}")
 
     ended_at = utc_now()
-    run_summary = {"version": NEWSROOM_VERSION, "started_at": started_at, "ended_at": ended_at, "engine": engine, "newsroom_engine_override": is_test_override, "runtime_delegations": runtime_delegations, "runtime_exit_code": runtime_exit_code, "agents": {"jarvis": "real_orchestrator", "massy": "real_sentinel_control", "simone": "real_report_director_and_autonomous_report_publisher", "menzo": "real_editorial_director", "andrea": "real_pre_bob_content_sufficiency_guard", "bob": "real_article_writer", "alfred": "real_quality_editor", "publisher": "real_wordpress_publisher", "archivista": "real_audit_agent", "master_log": "real_structured_run_memory"}, "massy_handoff": handoff(massy_board), "simone_handoff": handoff(simone_decision), "simone_publish_handoff": handoff(simone_publish), "menzo_handoff": handoff(menzo_decision), "andrea_handoff": handoff(andrea_handoff), "bob_handoff": handoff(bob_result), "alfred_handoff": handoff(alfred_result), "publisher_handoff": handoff(publisher_result)}
+    run_summary = {"version": NEWSROOM_VERSION, "started_at": started_at, "ended_at": ended_at, "engine": engine, "newsroom_engine_override": is_test_override, "runtime_delegations": runtime_delegations, "runtime_exit_code": runtime_exit_code, "agents": {"jarvis": "real_orchestrator", "massy": "real_sentinel_control", "simone": "real_report_director_and_autonomous_report_publisher", "menzo": "real_editorial_director", "andrea": "real_pre_bob_content_sufficiency_guard", "bob": "real_article_writer", "alfred": "real_quality_editor", "publisher": "real_wordpress_publisher", "archivista": "real_audit_agent", "master_log": "real_structured_run_memory"}, "massy_handoff": handoff(massy_board), "simone_handoff": handoff(simone_decision), "simone_publish_handoff": handoff(simone_publish), "menzo_handoff": handoff(menzo_decision), "andrea_handoff": handoff(andrea_handoff), "bob_handoff": handoff(bob_result), "alfred_handoff": handoff(alfred_result), "publisher_handoff": handoff(publisher_result), "gemini_ledger_summary": gemini_ledger_summary()}
 
     archivista_result = safe_agent(timeline=timeline, agent="Archivista", phase="audit_ready", import_fn=import_archivista, call_args=(), artifact_name="archivista_report.json", default_handoff={"overall_status": "error"}, note_fn=lambda r: "status={status} anomalies={anomalies}".format(status=r.get("overall_status", "unknown"), anomalies=(r.get("summary", {}) if isinstance(r.get("summary"), dict) else {}).get("anomalies", 0)))
     if archivista_result.get("status") != "error":

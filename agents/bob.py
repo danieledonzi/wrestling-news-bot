@@ -9,6 +9,8 @@ import traceback
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+
+from agents.gemini_ledger import record_gemini_event
 from urllib.parse import urljoin, urlparse
 
 import requests
@@ -554,7 +556,7 @@ def build_translation_units(elements: list[dict[str, Any]]) -> list[dict[str, st
     return units
 
 
-def call_gemini(prompt: str) -> tuple[str, str, list[str]]:
+def call_gemini(prompt: str, *, ledger_context: dict[str, Any] | None = None) -> tuple[str, str, list[str]]:
     api_key = os.getenv("GEMINI_API_KEY", "").strip()
     attempts: list[str] = []
     if not api_key:
@@ -568,10 +570,12 @@ def call_gemini(prompt: str) -> tuple[str, str, list[str]]:
             try:
                 response = client.models.generate_content(model=model, contents=prompt)
                 text = getattr(response, "text", "") or ""
+                record_gemini_event(agent="Bob", phase="translate_article", model=model, status="called", reason="generate_translate_article", result="text" if text.strip() else "empty_response", **(ledger_context or {}))
                 if text.strip():
                     return text.strip(), model, attempts
             except Exception as exc:
                 last_error = f"{model}: {exc}"
+                record_gemini_event(agent="Bob", phase="translate_article", model=model, status="failed", reason="generate_translate_article", result=str(exc)[:500], **(ledger_context or {}))
     except Exception as exc:
         last_error = f"genai_import_or_client_error: {exc}"
     return "", last_error or "empty_response", attempts
@@ -779,7 +783,7 @@ def article_package(item: dict[str, Any]) -> dict[str, Any]:
             return package
         prompt = build_translation_prompt(item, meta, units)
         package["translation_prompt_preview"] = prompt[:AUDIT_CHARS]
-        translated, model_or_error, attempts = call_gemini(prompt)
+        translated, model_or_error, attempts = call_gemini(prompt, ledger_context={"url": url, "title": item.get("title") or meta.get("source_title"), "candidate_id": item.get("candidate_id") or item.get("id") or item.get("semantic_id"), "source_id": item.get("source_id") or item.get("source")})
         package["translation_chain_attempted"] = attempts
         package["translation_model"] = model_or_error
         package["translation_used"] = bool(translated)

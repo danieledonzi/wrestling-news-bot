@@ -8,6 +8,8 @@ import re
 import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+
+from agents.gemini_ledger import record_gemini_event
 from urllib.parse import urljoin, urlparse
 
 import requests
@@ -698,11 +700,13 @@ def gemini_generate(prompt: str, *, purpose: str) -> Tuple[str, str]:
             print(f"[NEWS v92] Provo modello: {model} | purpose={purpose}", flush=True)
             response = client.models.generate_content(model=model, contents=prompt)
             text = getattr(response, "text", None) or ""
+            record_gemini_event(agent="Bob" if purpose.startswith("news_translate") else "Menzo", phase=purpose, model=model, status="called", reason=purpose, result="text" if text.strip() else "empty_response")
             if text.strip():
                 print(f"[NEWS v92] Modello scelto: {model} | purpose={purpose}", flush=True)
                 return text.strip(), model
         except Exception as exc:
             last_error = exc
+            record_gemini_event(agent="Bob" if purpose.startswith("news_translate") else "Menzo", phase=purpose, model=model, status="failed", reason=purpose, result=str(exc)[:500])
             print(f"[NEWS v92] Modello fallito: {model} | purpose={purpose} | error={exc}", flush=True)
             continue
     raise RuntimeError(f"Nessun modello Gemini disponibile per {purpose}: {last_error}")

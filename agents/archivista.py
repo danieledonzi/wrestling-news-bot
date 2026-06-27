@@ -255,6 +255,17 @@ def render_markdown(report: dict[str, Any]) -> str:
     summary = report.get("summary", {})
     lines.append(f"Runs in ledger 48h: {summary.get('runs_48h')} | Published current run: {summary.get('published_current_run')} | Anomalies: {summary.get('anomalies')}")
     lines.append("")
+    ledger_summary = ((report.get("run_summary_input") or {}).get("gemini_ledger_summary") or {})
+    calls_by_agent = ledger_summary.get("gemini_calls_by_agent") if isinstance(ledger_summary.get("gemini_calls_by_agent"), dict) else {}
+    lines.append("## Gemini / AI Cost Ledger")
+    lines.append(f"- Gemini calls total: {ledger_summary.get('gemini_calls_total', 0)}")
+    lines.append(f"- Gemini calls by Menzo: {calls_by_agent.get('Menzo', 0)}")
+    lines.append(f"- Gemini calls by Bob: {calls_by_agent.get('Bob', 0)}")
+    lines.append(f"- Gemini calls by Alfred: {calls_by_agent.get('Alfred', 0)}")
+    lines.append(f"- Gemini calls avoided: {ledger_summary.get('gemini_calls_avoided_total', 0)}")
+    lines.append(f"- Gemini calls avoided by Andrea: {ledger_summary.get('gemini_calls_avoided_by_andrea', 0)}")
+    lines.append(f"- Gemini calls failed: {ledger_summary.get('gemini_calls_failed', 0)}")
+    lines.append("")
     lines.append("## Agent handoff")
     for name, handoff in (report.get("agent_handoffs") or {}).items():
         lines.append(f"- {name}: `{json.dumps(handoff, ensure_ascii=False)}`")
