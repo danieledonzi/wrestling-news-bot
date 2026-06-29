@@ -270,6 +270,27 @@ def render_markdown(report: dict[str, Any]) -> str:
     for name, handoff in (report.get("agent_handoffs") or {}).items():
         lines.append(f"- {name}: `{json.dumps(handoff, ensure_ascii=False)}`")
     lines.append("")
+    simone = report.get("inputs", {}).get("simone", {}) if isinstance(report.get("inputs"), dict) else {}
+    if not isinstance(simone, dict):
+        simone = {}
+    special_expected = simone.get("expected_special_events", []) if isinstance(simone.get("expected_special_events"), list) else []
+    special_ready = simone.get("special_ready", []) if isinstance(simone.get("special_ready"), list) else []
+    special_missing = simone.get("special_missing", []) if isinstance(simone.get("special_missing"), list) else []
+    special_already = simone.get("special_already_published", []) if isinstance(simone.get("special_already_published"), list) else []
+    special_blocked = simone.get("special_blocked", []) if isinstance(simone.get("special_blocked"), list) else []
+    lines.append("## Simone / Special Events")
+    lines.append(f"- Expected special event reports: {len(special_expected)}")
+    lines.append(f"- Ready: {len(special_ready)}")
+    lines.append(f"- Published/already: {len(special_already)}")
+    lines.append(f"- Missing: {len(special_missing)}")
+    lines.append(f"- Blocked: {len(special_blocked)}")
+    lines.append("- Missing events:")
+    if special_missing:
+        for item in special_missing:
+            lines.append(f"  - {item.get('event_key')} / {item.get('night_key')}: {item.get('reason')}")
+    else:
+        lines.append("  - -")
+    lines.append("")
     lines.append("## Anomalies")
     anomalies = report.get("anomalies") or []
     if not anomalies:
@@ -356,6 +377,7 @@ def run_archivista(
         "article_dossiers": dossiers,
         "ledger_48h": ledger,
         "run_summary_input": run_summary or {},
+        "inputs": {"simone": inputs.get("simone", {})},
         "how_to_read": {
             "translation_prompt_preview": "testo pulito dato a Gemini da Bob",
             "bob_body_html_preview": "HTML prodotto da Bob prima di Alfred",

@@ -4,6 +4,7 @@ import json
 import re
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
+from zoneinfo import ZoneInfo
 from pathlib import Path
 from typing import Any
 
@@ -18,8 +19,13 @@ REPORT_STATUS_FILE = STATE_DIR / "report_status.json"
 MASSY_BOARD_FILE = NEWSROOM_STATE_DIR / "massy_board_latest.json"
 SIMONE_DECISIONS_FILE = NEWSROOM_STATE_DIR / "simone_reports_latest.json"
 ARTIFACT_SIMONE_FILE = ARTIFACT_DIR / "simone_reports.json"
+SPECIAL_EVENTS_CONFIG = CONFIG_DIR / "special_events.json"
+MANUAL_RUNS_FILE = STATE_DIR / "manual_runs.json"
+REPORT_REGISTRY_FILE = NEWSROOM_STATE_DIR / "report_publication_registry.json"
+SIMONE_EXPECTED_EVENTS_FILE = NEWSROOM_STATE_DIR / "simone_expected_events_latest.json"
+ARTIFACT_EXPECTED_EVENTS_FILE = ARTIFACT_DIR / "simone_expected_events_latest.json"
 
-SIMONE_VERSION = "v93_3_simone_report_director"
+SIMONE_VERSION = "v95_1_1_simone_special_events_already_published_and_matching_fix"
 
 DAY_NAMES = {
     "monday": 0,
@@ -44,6 +50,10 @@ def utc_now() -> str:
 def local_now() -> datetime:
     # GitHub runner is UTC; for the report scheduler we only need date/day stability.
     return datetime.utcnow() + timedelta(hours=2)
+
+
+def rome_now() -> datetime:
+    return datetime.now(ZoneInfo("Europe/Rome"))
 
 
 def load_json(path: Path, default: Any) -> Any:
@@ -104,6 +114,234 @@ def report_key_and_date(report: dict[str, Any], now: datetime) -> tuple[str, str
     return f"{report.get('id')}_{date_iso.replace('-', '_')}", date_iso
 
 
+
+def load_special_events_config() -> dict[str, Any]:
+    data = load_json(SPECIAL_EVENTS_CONFIG, {})
+    return data if isinstance(data, dict) else {}
+
+
+def parse_local_event_time(date_iso: str, hhmm: str) -> datetime | None:
+    try:
+        hour, minute = [int(x) for x in str(hhmm or "06:30").split(":", 1)]
+        y, m, d = [int(x) for x in str(date_iso).split("-")]
+        return datetime(y, m, d, hour, minute, tzinfo=ZoneInfo("Europe/Rome"))
+    except Exception:
+        return None
+
+
+def special_report_key(night_key: str, date_iso: str) -> str:
+    return f"special_event_{night_key}_{date_iso.replace('-', '_')}"
+
+
+def special_display_name(event: dict[str, Any]) -> str:
+    promotion = str(event.get("promotion") or "").strip()
+    name = str(event.get("event_name") or event.get("key") or "Special Event").strip()
+    aliases = [str(x).strip() for x in event.get("aliases", []) if str(x).strip()] if isinstance(event.get("aliases"), list) else []
+    if any("AEW x NJPW" in a or "AEW×NJPW" in a for a in aliases):
+        return "AEW x NJPW Forbidden Door"
+    if promotion and promotion.upper() == "WWE" and str(event.get("brand") or "").upper() == "NXT" and not name.upper().startswith("NXT"):
+        return f"NXT {name.removeprefix('The ').strip()}"
+    if promotion and promotion.upper() not in name.upper():
+        return f"{promotion} {name}"
+    return name
+
+
+def build_expected_special_reports(cfg: dict[str, Any], now: datetime | None = None) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    now = now or rome_now()
+    lookback = int(cfg.get("default_lookback_hours") or 18) if isinstance(cfg, dict) else 18
+    # Prudential rescue window keeps just-confirmed weekend PLE/PPV diagnosable across a missed daily run.
+    window_hours = max(lookback, int(cfg.get("simone_special_report_window_hours") or 72) if isinstance(cfg, dict) else 72)
+    expected: list[dict[str, Any]] = []
+    blocked: list[dict[str, Any]] = []
+    events = cfg.get("events", []) if isinstance(cfg, dict) else []
+    if not isinstance(events, list):
+        return expected, blocked
+    for event in events:
+        if not isinstance(event, dict):
+            continue
+        if str(event.get("status") or "").lower() not in {"confirmed", "active"}:
+            continue
+        nights = event.get("nights", []) if isinstance(event.get("nights"), list) else []
+        for night in nights:
+            if not isinstance(night, dict) or not night.get("enabled", True):
+                continue
+            date_iso = str(night.get("date_local") or "")
+            due_at = parse_local_event_time(date_iso, str(night.get("report_publish_after_local") or cfg.get("default_report_publish_after_local") or "06:30"))
+            night_key = str(night.get("night_key") or "")
+            if not due_at or not night_key:
+                blocked.append({"event_key": event.get("key"), "night_key": night_key, "reason": "invalid_special_event_schedule"})
+                continue
+            if now < due_at:
+                blocked.append({"event_key": event.get("key"), "night_key": night_key, "reason": "not_due_yet", "due_at_local": due_at.isoformat()})
+                continue
+            age_hours = (now - due_at).total_seconds() / 3600
+            if age_hours > window_hours:
+                blocked.append({"event_key": event.get("key"), "night_key": night_key, "reason": "outside_special_event_lookback_window", "age_hours": round(age_hours, 2), "window_hours": window_hours})
+                continue
+            aliases = []
+            for source in (event.get("aliases"), night.get("aliases")):
+                if isinstance(source, list):
+                    aliases.extend(str(x) for x in source if x)
+            aliases.append(str(event.get("event_name") or ""))
+            show_name = special_display_name(event)
+            expected.append({
+                "event_key": str(event.get("key") or ""),
+                "night_key": night_key,
+                "report_key": special_report_key(night_key, date_iso),
+                "promotion": event.get("promotion"),
+                "category_hint": event.get("category_hint") or event.get("promotion"),
+                "event_name": event.get("event_name"),
+                "aliases": sorted(set(a for a in aliases if a)),
+                "title": f"{show_name} del {date_it(date_iso)} - risultati e momenti salienti",
+                "date": date_iso,
+                "report_type": "special_event",
+            })
+    return expected, blocked
+
+
+REPORT_SIGNAL_RE = re.compile(r"\b(results?|risultati|recap|report|full\s+results?|live\s+results?|highlights?)\b", re.I)
+NON_REPORT_RE = re.compile(r"\b(preview|card|betting|odds|rumou?rs?|spoilers?|spoiler\s+lineup|lineup|reaction|post[-\s]?show|media scrum|press conference|appears|returns|wins|retains|defeats|title change)\b", re.I)
+REPORT_HINT_VALUES = {"report", "results", "results_report", "full_results", "live_results", "recap"}
+
+
+def candidate_report_hint(candidate: dict[str, Any], report: dict[str, Any], raw: str) -> bool:
+    for key in ["kind_hint", "kind", "article_type", "content_type", "candidate_type", "classification", "bucket"]:
+        value = normalize(str(candidate.get(key) or ""))
+        if value in REPORT_HINT_VALUES or "results report" in value or "report candidate" in value:
+            return True
+    for key in ["report_candidate", "is_report_candidate", "assigned_to_simone"]:
+        if candidate.get(key) is True:
+            return True
+    if str(candidate.get("assigned_to") or "").lower() == "simone":
+        return True
+    show_hint = normalize(str(candidate.get("show_hint") or ""))
+    source_blob = normalize(f"{candidate.get('source', '')} {candidate.get('url', '')} {candidate.get('source_url', '')}")
+    aliases = [normalize(x) for x in report.get("aliases", []) if x]
+    if "wrestlinginc" in source_blob and show_hint and any(alias and alias in show_hint for alias in aliases):
+        return True
+    blob = normalize(raw)
+    return any(token in blob for token in ["results report", "full results", "live results", "complete results"])
+
+
+def candidate_matches_special_report(candidate: dict[str, Any], report: dict[str, Any]) -> tuple[bool, str]:
+    raw = " ".join(str(candidate.get(k) or "") for k in ["title", "url", "source_url", "show_hint", "summary", "description", "reason"])
+    blob = normalize(raw)
+    aliases = [normalize(x) for x in report.get("aliases", []) if x]
+    event_hit = any(alias and alias in blob for alias in aliases)
+    if not event_hit:
+        return False, "event_alias_not_found"
+    if NON_REPORT_RE.search(raw):
+        return False, "only_non_report_event_news_found"
+    if REPORT_SIGNAL_RE.search(raw) or candidate_report_hint(candidate, report, raw):
+        return True, "special_report_match"
+    return False, "missing_report_results_signal"
+
+
+def choose_special_report_candidate(candidates: list[dict[str, Any]], report: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
+    rejected_reasons: list[str] = []
+    event_related_rejections: list[str] = []
+    matches = []
+    for c in candidates:
+        ok, reason = candidate_matches_special_report(c, report)
+        if ok:
+            matches.append(c)
+        else:
+            rejected_reasons.append(reason)
+            if reason != "event_alias_not_found":
+                event_related_rejections.append(reason)
+    if not matches:
+        if event_related_rejections and all(r in {"missing_report_results_signal", "only_non_report_event_news_found"} for r in event_related_rejections):
+            return None, "only_non_report_event_news_found"
+        return None, "missing_report_source_not_found"
+    def rank(c: dict[str, Any]) -> tuple[int, str]:
+        source = str(c.get("source") or "").lower()
+        return (0 if "wrestlinginc" in source or "wrestlinginc" in str(c.get("url") or "").lower() else 1, candidate_published_score(c))
+    matches.sort(key=rank)
+    return matches[0], "preferred_wrestlinginc" if rank(matches[0])[0] == 0 else "fallback_source"
+
+
+PUBLISHED_STATUS_VALUES = {"", "published", "already_published", "completed", "dry_run"}
+
+
+def published_record_compatible(record: dict[str, Any], *, require_evidence: bool = False) -> bool:
+    status = str(record.get("status") or "").strip().lower()
+    if status and status not in PUBLISHED_STATUS_VALUES:
+        return False
+    if require_evidence:
+        return bool(record.get("wp_post_id") or record.get("link") or record.get("wp_link"))
+    return True
+
+
+def report_identity_values(report: dict[str, Any]) -> set[str]:
+    values = {str(report.get(k) or "").strip() for k in ["report_key", "event_key", "night_key", "source_url", "wp_post_id"]}
+    event_key = str(report.get("event_key") or "").strip()
+    night_key = str(report.get("night_key") or "").strip()
+    if event_key:
+        values.add(f"manual:{event_key}")
+    if night_key:
+        values.add(f"manual:{night_key}")
+    return {v for v in values if v}
+
+
+def record_identity_values(record: dict[str, Any], *, keyed_report_key: str = "") -> set[str]:
+    values = {keyed_report_key.strip()} if keyed_report_key else set()
+    for key in ["report_key", "event_key", "night_key", "source_url", "url", "link", "wp_link", "wp_post_id"]:
+        value = str(record.get(key) or "").strip()
+        if value:
+            values.add(value)
+    job = record.get("job") if isinstance(record.get("job"), dict) else {}
+    for key in ["report_key", "event_key", "night_key", "source_url", "url", "link", "wp_link", "wp_post_id"]:
+        value = str(job.get(key) or "").strip()
+        if value:
+            values.add(value)
+    for key in [
+        str(record.get("event_key") or "").strip(),
+        str(record.get("night_key") or "").strip(),
+        str(job.get("event_key") or "").strip(),
+        str(job.get("night_key") or "").strip(),
+    ]:
+        if key:
+            values.add(f"manual:{key}")
+    return {v for v in values if v}
+
+
+def title_fallback_matches(report: dict[str, Any], record: dict[str, Any]) -> bool:
+    report_title = normalize(str(report.get("title") or ""))
+    if not report_title:
+        return False
+    titles = [str(record.get("title") or ""), str(record.get("source_title") or "")]
+    job = record.get("job") if isinstance(record.get("job"), dict) else {}
+    titles.extend([str(job.get("title") or ""), str(job.get("source_title") or "")])
+    return any(report_title and normalize(title) == report_title for title in titles if title)
+
+
+def report_already_published(report: dict[str, Any], status: dict[str, Any], registry: dict[str, Any], manual_runs: list[Any]) -> bool:
+    expected_ids = report_identity_values(report)
+    if not expected_ids:
+        return False
+    if isinstance(status, dict):
+        for key, value in status.items():
+            if not isinstance(value, dict) or not published_record_compatible(value):
+                continue
+            if expected_ids & record_identity_values(value, keyed_report_key=str(key)) or title_fallback_matches(report, value):
+                return True
+    items = registry.get("items", []) if isinstance(registry, dict) else []
+    for item in items if isinstance(items, list) else []:
+        if not isinstance(item, dict) or not published_record_compatible(item, require_evidence=True):
+            continue
+        if expected_ids & record_identity_values(item) or title_fallback_matches(report, item):
+            return True
+    for run in manual_runs if isinstance(manual_runs, list) else []:
+        if not isinstance(run, dict):
+            continue
+        job = run.get("job") if isinstance(run.get("job"), dict) else {}
+        merged = {**job, **{k: v for k, v in run.items() if k != "job"}}
+        if not published_record_compatible(merged, require_evidence=True):
+            continue
+        if expected_ids & record_identity_values(merged) or title_fallback_matches(report, merged):
+            return True
+    return False
+
 def source_rank(source: str, report: dict[str, Any]) -> int:
     if source == report.get("preferred_source"):
         return 0
@@ -130,7 +368,13 @@ def candidate_matches_report(candidate: dict[str, Any], report: dict[str, Any], 
 
 
 def candidate_published_score(candidate: dict[str, Any]) -> str:
-    return str(candidate.get("published") or "")
+    raw = str(candidate.get("published") or candidate.get("published_at") or "")
+    if not raw:
+        return ""
+    try:
+        return parsedate_to_datetime(raw).isoformat()
+    except Exception:
+        return raw
 
 
 def choose_report_candidate(candidates: list[dict[str, Any]], report: dict[str, Any], date_iso: str) -> tuple[dict[str, Any] | None, str]:
@@ -154,15 +398,22 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
         report_candidates = []
 
     reports_cfg = load_json(REPORTS_CONFIG, {"reports": []})
+    special_cfg = load_special_events_config()
     status = load_json(REPORT_STATUS_FILE, {})
+    publication_registry = load_json(REPORT_REGISTRY_FILE, {"items": []})
+    manual_runs = load_json(MANUAL_RUNS_FILE, [])
     reports = reports_cfg.get("reports", []) if isinstance(reports_cfg, dict) else []
     now = local_now()
 
     ready: list[dict[str, Any]] = []
     waiting: list[dict[str, Any]] = []
     skipped: list[dict[str, Any]] = []
+    expected_special, special_blocked = build_expected_special_reports(special_cfg)
+    special_ready: list[dict[str, Any]] = []
+    special_missing: list[dict[str, Any]] = []
+    special_already: list[dict[str, Any]] = []
 
-    print(f"[SIMONE v93.3] Avvio controllo report | candidates={len(report_candidates)} reports={len(reports)}", flush=True)
+    print(f"[SIMONE v95.1.1] Avvio controllo report | candidates={len(report_candidates)} reports={len(reports)}", flush=True)
 
     for report in reports:
         if not isinstance(report, dict):
@@ -214,6 +465,40 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
             "counts_as_news": False,
         })
 
+
+    special_publish_slots = 1
+    for report in expected_special:
+        if report_already_published(report, status if isinstance(status, dict) else {}, publication_registry if isinstance(publication_registry, dict) else {}, manual_runs if isinstance(manual_runs, list) else []):
+            item = {**report, "decision": "skip", "reason": "already_published"}
+            special_already.append(item)
+            skipped.append(item)
+            continue
+        chosen, reason = choose_special_report_candidate(report_candidates, report)
+        if not chosen:
+            item = {**report, "decision": "missing", "reason": reason}
+            special_missing.append(item)
+            waiting.append(item)
+            continue
+        item = {
+            **report,
+            "report_id": report.get("night_key"),
+            "decision": "ready_for_bob_or_v92",
+            "reason": reason,
+            "source": chosen.get("source"),
+            "source_url": chosen.get("url") or chosen.get("source_url"),
+            "source_title": chosen.get("title"),
+            "categories": [x for x in ["Editoriali", report.get("category_hint")] if x],
+            "counts_as_news": False,
+        }
+        if special_publish_slots > 0:
+            special_ready.append(item)
+            ready.append(item)
+            special_publish_slots -= 1
+        else:
+            blocked = {**report, "decision": "blocked", "reason": "special_event_publish_cap_per_run"}
+            special_blocked.append(blocked)
+            waiting.append(blocked)
+
     result = {
         "agent": "Simone",
         "version": SIMONE_VERSION,
@@ -223,20 +508,34 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
             "massy_version": board.get("version") if isinstance(board, dict) else None,
             "report_candidates": len(report_candidates),
             "configured_reports": len(reports),
+            "expected_special_events": len(expected_special),
         },
         "ready_reports": ready,
         "waiting_reports": waiting,
         "skipped_reports": skipped,
+        "expected_special_events": expected_special,
+        "special_ready": special_ready,
+        "special_missing": special_missing,
+        "special_already_published": special_already,
+        "special_blocked": special_blocked,
         "handoff": {
             "ready": len(ready),
             "waiting": len(waiting),
             "skipped": len(skipped),
+            "expected_special_events": len(expected_special),
+            "special_ready": len(special_ready),
+            "special_missing": len(special_missing),
+            "special_already_published": len(special_already),
+            "special_blocked": len(special_blocked),
         },
     }
+    expected_artifact = {"generated_at": result["generated_at"], "expected_special_events": expected_special, "special_ready": special_ready, "special_missing": special_missing, "special_already_published": special_already, "special_blocked": special_blocked}
+    write_json(SIMONE_EXPECTED_EVENTS_FILE, expected_artifact)
+    write_json(ARTIFACT_EXPECTED_EVENTS_FILE, expected_artifact)
     write_json(ARTIFACT_SIMONE_FILE, result)
     write_json(SIMONE_DECISIONS_FILE, result)
     print(
-        "[SIMONE v93.3] Decisione report pronta | "
+        "[SIMONE v95.1.1] Decisione report pronta | "
         f"ready={len(ready)} waiting={len(waiting)} skipped={len(skipped)}",
         flush=True,
     )
