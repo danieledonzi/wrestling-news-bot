@@ -128,8 +128,13 @@ jobs:
           WP_PASSWORD: ${{ secrets.WP_PASSWORD }}
           WP_URL: ${{ secrets.WP_URL }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_MODEL_CHAIN: gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
-          GEMINI_REPORT_MODEL_CHAIN: gemini-3-flash-preview,gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite
+          BOB_GEMINI_MODEL_CHAIN: gemini-3.1-flash-lite,gemini-3.5-flash,gemini-2.5-flash-lite,gemini-2.5-flash
+          NEWS_GEMINI_MODEL_CHAIN: gemini-3.1-flash-lite,gemini-3.5-flash,gemini-2.5-flash-lite,gemini-2.5-flash
+          REPORT_GEMINI_MODEL_CHAIN: gemini-3.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite
+          MENZO_DUPLICATE_ARBITRATION_FIRST_MODEL: gemini-3.1-flash-lite
+          MENZO_DUPLICATE_ARBITRATION_SECOND_MODEL: gemini-3.5-flash
+          GEMINI_MODEL_CHAIN: gemini-3.1-flash-lite,gemini-3.5-flash,gemini-2.5-flash-lite,gemini-2.5-flash
+          GEMINI_REPORT_MODEL_CHAIN: gemini-3.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite
           V92_MANUAL_URL: ${{ github.event.inputs.manual_url }}
           V92_MANUAL_KIND: ${{ github.event.inputs.manual_kind }}
           V92_MANUAL_TITLE: ${{ github.event.inputs.manual_title }}
@@ -150,8 +155,16 @@ jobs:
           WP_PASSWORD: ${{ secrets.WP_PASSWORD }}
           WP_URL: ${{ secrets.WP_URL }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_MODEL_CHAIN: gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
-          GEMINI_REPORT_MODEL_CHAIN: gemini-3-flash-preview,gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite
+          WP_PASSWORD: ${{ secrets.WP_PASSWORD }}
+          WP_URL: ${{ secrets.WP_URL }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          BOB_GEMINI_MODEL_CHAIN: gemini-3.1-flash-lite,gemini-3.5-flash,gemini-2.5-flash-lite,gemini-2.5-flash
+          NEWS_GEMINI_MODEL_CHAIN: gemini-3.1-flash-lite,gemini-3.5-flash,gemini-2.5-flash-lite,gemini-2.5-flash
+          REPORT_GEMINI_MODEL_CHAIN: gemini-3.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite
+          MENZO_DUPLICATE_ARBITRATION_FIRST_MODEL: gemini-3.1-flash-lite
+          MENZO_DUPLICATE_ARBITRATION_SECOND_MODEL: gemini-3.5-flash
+          GEMINI_MODEL_CHAIN: gemini-3.1-flash-lite,gemini-3.5-flash,gemini-2.5-flash-lite,gemini-2.5-flash
+          GEMINI_REPORT_MODEL_CHAIN: gemini-3.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite
           V92_MAX_REPORTS_PER_RUN: "1"
           V92_MAX_NEWS_PER_RUN: "3"
         run: |
