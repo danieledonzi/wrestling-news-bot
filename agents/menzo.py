@@ -23,7 +23,7 @@ AI_ENABLED = str(os.getenv("V93_MENZO_AI_ENABLED", "1")).strip().lower() not in 
 AI_TOP_N = int(os.getenv("V93_MENZO_AI_TOP_N", "12"))
 MODEL_CHAIN = [m.strip() for m in os.getenv(
     "GEMINI_MODEL_CHAIN",
-    "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash",
+    "gemini-3.1-flash-lite,gemini-3.5-flash,gemini-2.5-flash-lite,gemini-2.5-flash",
 ).split(",") if m.strip()]
 
 HARD_SIGNALS = {

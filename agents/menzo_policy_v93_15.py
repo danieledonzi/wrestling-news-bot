@@ -563,6 +563,9 @@ def enforce_selected_cap(result: dict[str, Any]) -> None:
     result.setdefault("postprocess", {})["selected_overflow_to_pending"] = len(overflow)
 
 
+
+MENZO_DUPLICATE_ARBITRATION_FIRST_MODEL = os.getenv("MENZO_DUPLICATE_ARBITRATION_FIRST_MODEL", "gemini-3.1-flash-lite").strip() or "gemini-3.1-flash-lite"
+MENZO_DUPLICATE_ARBITRATION_SECOND_MODEL = os.getenv("MENZO_DUPLICATE_ARBITRATION_SECOND_MODEL", "gemini-3.5-flash").strip() or "gemini-3.5-flash"
 AI_DEDUPE_MAX_CLUSTERS = 5
 AI_DEDUPE_MAX_CANDIDATES = 4
 AI_DEDUPE_MIN_OVERLAP = 0.46
@@ -1009,11 +1012,11 @@ def apply_ai_duplicate_arbitration(result: dict[str, Any], massy_board: dict[str
             resolved[key] = item
             continue
         records = arbitration_records_for_item(item, cluster_records)
-        ai_data, model = call_gemini_json_model(build_ai_dedupe_prompt(records), "gemini-3.1-flash-lite", ledger_context={"url": item.get("url") or item.get("source_url"), "title": item.get("title") or item.get("source_title"), "candidate_id": item.get("candidate_id") or item.get("id") or item.get("semantic_id"), "source_id": item.get("source_id") or item.get("source")})
+        ai_data, model = call_gemini_json_model(build_ai_dedupe_prompt(records), MENZO_DUPLICATE_ARBITRATION_FIRST_MODEL, ledger_context={"url": item.get("url") or item.get("source_url"), "title": item.get("title") or item.get("source_title"), "candidate_id": item.get("candidate_id") or item.get("id") or item.get("semantic_id"), "source_id": item.get("source_id") or item.get("source")})
         second_pass = False
         if needs_second_pass(ai_data):
             second_pass = True
-            ai_data2, model2 = call_gemini_json_model(build_ai_dedupe_second_pass_prompt(records, relevant_history_payload(records)), "gemini-3-flash-preview", ledger_context={"url": item.get("url") or item.get("source_url"), "title": item.get("title") or item.get("source_title"), "candidate_id": item.get("candidate_id") or item.get("id") or item.get("semantic_id"), "source_id": item.get("source_id") or item.get("source")})
+            ai_data2, model2 = call_gemini_json_model(build_ai_dedupe_second_pass_prompt(records, relevant_history_payload(records)), MENZO_DUPLICATE_ARBITRATION_SECOND_MODEL, ledger_context={"url": item.get("url") or item.get("source_url"), "title": item.get("title") or item.get("source_title"), "candidate_id": item.get("candidate_id") or item.get("id") or item.get("semantic_id"), "source_id": item.get("source_id") or item.get("source")})
             if ai_data2:
                 ai_data, model = ai_data2, model2
         if not ai_data:
@@ -1268,8 +1271,8 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     policy["gemini_only_for_duplicate_novelty_arbitration"] = True
     policy["ai_duplicate_arbitration"] = True
     policy["ai_cross_source_duplicate_arbitration"] = True
-    policy["ai_duplicate_arbitration_first_pass_model"] = "gemini-3.1-flash-lite"
-    policy["ai_duplicate_arbitration_second_pass_model"] = "gemini-3-flash-preview"
+    policy["ai_duplicate_arbitration_first_pass_model"] = MENZO_DUPLICATE_ARBITRATION_FIRST_MODEL
+    policy["ai_duplicate_arbitration_second_pass_model"] = MENZO_DUPLICATE_ARBITRATION_SECOND_MODEL
     policy["ai_duplicate_arbitration_limits"] = {"max_clusters_per_run": AI_DEDUPE_MAX_CLUSTERS, "max_candidates_per_cluster": AI_DEDUPE_MAX_CANDIDATES}
     save_softpool(result)
     save_hard_skips(result)

@@ -32,7 +32,13 @@ MAX_ARTICLES_PER_RUN = int(os.getenv("V93_BOB_MAX_ARTICLES_PER_RUN", "5"))
 MAX_ARTICLES_WITH_REPORT = int(os.getenv("V93_BOB_MAX_ARTICLES_WITH_REPORT", "4"))
 POST_SHOW_MAX_ARTICLES = int(os.getenv("V93_BOB_POST_SHOW_MAX_ARTICLES", "6"))
 AUDIT_CHARS = int(os.getenv("V93_BOB_AUDIT_CHARS", "24000"))
-MODEL_CHAIN = [m.strip() for m in os.getenv("GEMINI_MODEL_CHAIN", "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash").split(",") if m.strip()]
+DEFAULT_BOB_MODEL_CHAIN = "gemini-3.1-flash-lite,gemini-3.5-flash,gemini-2.5-flash-lite,gemini-2.5-flash"
+BOB_TITLE_CHAIN_MODE = "same_as_body_translation"
+MODEL_CHAIN = [
+    m.strip()
+    for m in os.getenv("BOB_GEMINI_MODEL_CHAIN", os.getenv("GEMINI_MODEL_CHAIN", DEFAULT_BOB_MODEL_CHAIN)).split(",")
+    if m.strip()
+]
 
 ARTICLE_SELECTORS = ["article", "main article", ".article-body", ".post-content", ".entry-content", ".content", "main"]
 TRANSLATABLE_TYPES = {"text", "heading", "quote"}
@@ -844,6 +850,7 @@ def run_bob(menzo_decision: dict[str, Any] | None = None) -> dict[str, Any]:
             "preserve_tables_as_html_tables": True,
             "ordered_elements": ["text", "heading", "quote", "table", "image", "embed"],
             "model_chain": MODEL_CHAIN,
+            "bob_title_chain_mode": BOB_TITLE_CHAIN_MODE,
             "max_articles_per_run": MAX_ARTICLES_PER_RUN,
             "max_articles_with_report": MAX_ARTICLES_WITH_REPORT,
             "post_show_max_articles": POST_SHOW_MAX_ARTICLES,

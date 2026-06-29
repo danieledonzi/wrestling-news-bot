@@ -22,10 +22,13 @@ except Exception:  # pragma: no cover
 
 REQUEST_TIMEOUT = int(os.getenv("V92_REQUEST_TIMEOUT", "12"))
 REQUEST_TIMEOUT_WP = int(os.getenv("V92_WP_TIMEOUT", "25"))
+DEFAULT_NEWS_MODEL_CHAIN_V95_2 = "gemini-3.1-flash-lite,gemini-3.5-flash,gemini-2.5-flash-lite,gemini-2.5-flash"
+DEFAULT_NEWS_TITLE_MODEL_CHAIN_V95_2 = "gemini-3.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash"
 DEFAULT_NEWS_MODEL_CHAIN = os.getenv(
-    "GEMINI_NEWS_MODEL_CHAIN",
-    os.getenv("GEMINI_MODEL_CHAIN", "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"),
+    "NEWS_GEMINI_MODEL_CHAIN",
+    os.getenv("GEMINI_NEWS_MODEL_CHAIN", os.getenv("GEMINI_MODEL_CHAIN", DEFAULT_NEWS_MODEL_CHAIN_V95_2)),
 )
+DEFAULT_NEWS_TITLE_MODEL_CHAIN = os.getenv("NEWS_TITLE_GEMINI_MODEL_CHAIN", DEFAULT_NEWS_TITLE_MODEL_CHAIN_V95_2)
 V92_NEWS_SCORING_V2_WORKSHOP = True
 V92_BUSINESS_PLE_CARD_PROMPT = True
 V92_BUSINESS_LEGAL_CATEGORY_PROMPT = True
@@ -688,14 +691,15 @@ def gemini_client():
     return genai.Client(api_key=key)
 
 
-def model_chain() -> List[str]:
-    return [m.strip() for m in DEFAULT_NEWS_MODEL_CHAIN.split(",") if m.strip()]
+def model_chain(purpose: str = "") -> List[str]:
+    raw = DEFAULT_NEWS_TITLE_MODEL_CHAIN if purpose == "news_translate_title" else DEFAULT_NEWS_MODEL_CHAIN
+    return [m.strip() for m in raw.split(",") if m.strip()]
 
 
 def gemini_generate(prompt: str, *, purpose: str) -> Tuple[str, str]:
     client = gemini_client()
     last_error: Optional[Exception] = None
-    for model in model_chain():
+    for model in model_chain(purpose):
         try:
             print(f"[NEWS v92] Provo modello: {model} | purpose={purpose}", flush=True)
             response = client.models.generate_content(model=model, contents=prompt)
