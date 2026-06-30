@@ -220,11 +220,12 @@ def resolve_possible_untranslated_quote(expression: str, article_context: dict[s
         record_gemini_event(agent="Alfred", phase="quote_ambiguity_resolver", model=model, status="failed", reason="possible_untranslated_quote_ambiguity", result="json_error" if status != "missing_api_key" else "missing_api_key", saved_gemini_call=False, **ledger_context)
         return {"allow": False, "kind": "uncertain", "canonical": canonical, "variants": quote_aliases(normalized), "source": "error", "reason": status or "invalid_json"}
     kind = str(data.get("kind") or "uncertain")
-    allow = bool(data.get("allow")) and kind in QUOTE_RESOLVER_ALLOWED_KINDS
+    malformed_allow = not isinstance(data.get("allow"), bool)
+    allow = data.get("allow") is True and kind in QUOTE_RESOLVER_ALLOWED_KINDS
     decision = {"allow": allow, "kind": kind, "canonical": data.get("canonical") or canonical, "variants": data.get("variants") if isinstance(data.get("variants"), list) else [], "reason": str(data.get("reason") or "")[:300]}
     update_quote_history(history, decision, expression=expression, article_context=ctx, model=model)
     save_quote_history(history)
-    record_gemini_event(agent="Alfred", phase="quote_ambiguity_resolver", model=model, status="called", reason="possible_untranslated_quote_ambiguity", result="allow" if allow else ("uncertain" if kind == "uncertain" else "block"), saved_gemini_call=False, **ledger_context)
+    record_gemini_event(agent="Alfred", phase="quote_ambiguity_resolver", model=model, status="called", reason="possible_untranslated_quote_ambiguity", result="allow" if allow else ("malformed_allow" if malformed_allow else ("uncertain" if kind == "uncertain" else "block")), saved_gemini_call=False, **ledger_context)
     return {**decision, "allow": allow, "canonical": canonical_quote_key(str(decision.get("canonical") or canonical)), "source": "gemini"}
 
 
@@ -363,10 +364,22 @@ def resolve_untranslated_quote_issues(review: dict[str, Any], article: dict[str,
         review.setdefault("diagnostics", {})["quote_resolver"] = resolvers
         blockers = [x for x in kept if isinstance(x, dict) and x.get("severity") == "blocker"]
         warnings = review.get("warnings") if isinstance(review.get("warnings"), list) else []
-        review["quality_score"] = max(0, min(100, 100 - 25 * len(blockers) - 5 * len(warnings)))
         if not blockers:
-            review["decision"] = "approved"
-            review["approved_article"] = review.get("approved_article") or _approved_article_from_source(review, article)
+            approved_article = review.get("approved_article") or _approved_article_from_source(review, article)
+            if approved_article:
+                review["decision"] = "approved"
+                review["approved_article"] = approved_article
+            else:
+                review["decision"] = "needs_revision"
+                missing_issue = {
+                    "code": "missing_approved_article_after_quote_resolver",
+                    "severity": "blocker",
+                    "message": "Quote resolver ha rimosso i blocker, ma Alfred non ha un approved_article da consegnare.",
+                }
+                kept.append(missing_issue)
+                review["issues"] = kept
+                blockers = [x for x in kept if isinstance(x, dict) and x.get("severity") == "blocker"]
+        review["quality_score"] = max(0, min(100, 100 - 25 * len(blockers) - 5 * len(warnings)))
     return review, stats
 
 

@@ -168,3 +168,33 @@ def test_resolver_does_not_create_quote_issue_when_base_alfred_did_not(tmp_path,
     assert issues(result) == []
     assert result["postprocess"]["quote_resolver_calls"] == 0
     assert result["postprocess"]["quote_resolver_blocked"] == 0
+
+
+def test_string_false_allow_is_conservative_block_and_not_history_approval(tmp_path, monkeypatch):
+    patch_paths(tmp_path, monkeypatch)
+    monkeypatch.setattr(alfred, "call_quote_resolver_gemini", lambda *a, **k: ({"allow": "false", "kind": "nickname_or_catchphrase", "canonical": "final boss", "variants": ["the final boss", "final boss"], "reason": "malformed allow"}, "gemini-2.5-flash-lite", "called"))
+
+    result = run_with_base_review(monkeypatch, article_with_quote("The Final Boss"), base_review_for("The Final Boss"))
+
+    assert [i for i in issues(result) if i.get("code") == "untranslated_quote"]
+    history = json.loads(alfred.QUOTE_RESOLVER_HISTORY_FILE.read_text(encoding="utf-8"))
+    assert history["entries"]["final boss"]["allow"] is False
+    record = ledger_records()[-1]
+    assert record["status"] == "called"
+    assert record["result"] == "malformed_allow"
+
+
+def test_allow_without_approved_article_stays_needs_revision_with_blocker(tmp_path, monkeypatch):
+    patch_paths(tmp_path, monkeypatch)
+    monkeypatch.setattr(alfred, "call_quote_resolver_gemini", lambda *a, **k: ({"allow": True, "kind": "nickname_or_catchphrase", "canonical": "best in the world", "variants": ["the best in the world", "best in the world"], "reason": "nickname/catchphrase"}, "gemini-2.5-flash-lite", "called"))
+    review = base_review_for("The Best in the World")
+    review["approved_article"] = None
+
+    refined, removed, stats = alfred.refine_review(review, None)
+
+    assert removed == 0
+    assert stats["allowed"] == 1
+    assert refined["decision"] == "needs_revision"
+    assert refined.get("approved_article") is None
+    assert [i for i in refined["issues"] if i.get("code") == "missing_approved_article_after_quote_resolver"]
+    assert not [i for i in refined["issues"] if i.get("code") == "untranslated_quote"]
