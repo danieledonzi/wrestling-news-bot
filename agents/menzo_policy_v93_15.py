@@ -16,6 +16,7 @@ from agents.story_dedupe_v93_32 import (
     find_duplicate_by_fingerprint,
     is_source_opinion,
     load_story_fingerprints,
+    load_story_footprints,
     remember_fingerprints,
     remember_footprints,
     remember_stories,
@@ -34,7 +35,7 @@ ARTIFACT_DECISIONS_FILE = ARTIFACT_DIR / "menzo_decisions.json"
 SOFTPOOL_FILE = NEWSROOM_STATE_DIR / "menzo_softpool.json"
 HARD_SKIP_FILE = NEWSROOM_STATE_DIR / "menzo_hard_skips.json"
 
-MENZO_VERSION = "v95.4_gemini_purpose_based_model_routing"
+MENZO_VERSION = "v95.5_cross_run_story_novelty_gate"
 VALID_LABELS = {"high", "medium", "low", "skip"}
 LABEL_SCORE = {"high": 92, "medium": 72, "low": 48, "skip": 0}
 SOFTPOOL_TTL_HOURS = int(os.getenv("V93_MENZO_SOFTPOOL_TTL_HOURS", "36"))
@@ -49,6 +50,14 @@ MAX_DATA_REPORTS = int(os.getenv("V93_MENZO_MAX_DATA_REPORTS_PER_RUN", "1"))
 MAX_SELECTED_THIS_RUN = int(os.getenv("V93_MENZO_MAX_SELECTED_THIS_RUN", "7"))
 
 EXCLUDED_SOFTPOOL_TYPES = {"low_value", "duplicate", "external_sports_reaction"}
+
+# v95.5_cross_run_story_novelty_gate
+MENZO_CROSS_RUN_NOVELTY_GATE_ENABLED = os.getenv("MENZO_CROSS_RUN_NOVELTY_GATE_ENABLED", "true").strip().lower() not in {"0", "false", "no", "off"}
+MENZO_CROSS_RUN_NOVELTY_LOOKBACK_HOURS = int(os.getenv("MENZO_CROSS_RUN_NOVELTY_LOOKBACK_HOURS", "72"))
+MENZO_CROSS_RUN_NOVELTY_MIN_SCORE = float(os.getenv("MENZO_CROSS_RUN_NOVELTY_MIN_SCORE", "0.62"))
+MENZO_CROSS_RUN_NOVELTY_AI_ENABLED = os.getenv("MENZO_CROSS_RUN_NOVELTY_AI_ENABLED", "true").strip().lower() not in {"0", "false", "no", "off"}
+MENZO_CROSS_RUN_NOVELTY_AI_MODEL = os.getenv("MENZO_CROSS_RUN_NOVELTY_AI_MODEL", "gemini-3.1-flash-lite").strip() or "gemini-3.1-flash-lite"
+MASTER_LOG_FILE = NEWSROOM_STATE_DIR / "master_log.jsonl"
 
 
 def utc_now() -> str:
@@ -754,13 +763,14 @@ def call_gemini_json_model(prompt: str, model: str, *, ledger_context: dict[str,
         client = genai.Client(api_key=api_key)
         response = client.models.generate_content(model=model, contents=prompt)
         data = _parse_gemini_json_text(getattr(response, "text", "") or "")
-        record_gemini_event(agent="Menzo", phase=phase, model=model, status="called", reason="ai_duplicate_arbitration", result="valid_json" if data else "invalid_json", **(ledger_context or {}))
+        event_reason = "ai_novelty_allow" if phase == "cross_run_novelty_gate" and data and str(data.get("decision") or "").lower() == "allow" else ("ai_no_novelty_skip" if phase == "cross_run_novelty_gate" and data and str(data.get("decision") or "").lower() == "skip" else ("ai_uncertain_pending" if phase == "cross_run_novelty_gate" else "ai_duplicate_arbitration"))
+        record_gemini_event(agent="Menzo", phase=phase, model=model, status="called", reason=event_reason, result="valid_json" if data else "invalid_json", **(ledger_context or {}))
         return (data, model) if data else (None, f"invalid_json:{model}")
     except Exception as exc:
         err = str(exc)[:500]
         if _is_cooldown_error(err):
             MENZO_MODEL_COOLDOWN_FAILURES.add(_cooldown_key(model, ledger_context))
-        record_gemini_event(agent="Menzo", phase=phase, model=model, status="failed", reason="ai_duplicate_arbitration", result=err, **(ledger_context or {}))
+        record_gemini_event(agent="Menzo", phase=phase, model=model, status="failed", reason="ai_uncertain_pending" if phase == "cross_run_novelty_gate" else "ai_duplicate_arbitration", result=err, **(ledger_context or {}))
         return None, f"gemini_unavailable:{model}:{exc}"
 
 
@@ -770,6 +780,191 @@ def call_gemini_json(prompt: str) -> tuple[dict[str, Any] | None, str]:
         if data:
             return data, status
     return None, "empty_or_invalid_response"
+
+
+def cross_run_text(item: dict[str, Any]) -> str:
+    return normalize_text(" ".join(str(item.get(k) or "") for k in ["title", "source_title", "title_it", "summary", "excerpt", "reason", "category_hint", "event_key"])).lower()
+
+
+def cross_run_tokens(item: dict[str, Any]) -> set[str]:
+    stop = {"wwe", "aew", "tna", "roh", "nxt", "the", "and", "con", "per", "del", "della", "news", "rumor", "rumors", "report", "reports", "update", "aggiornamento", "possibile", "possible", "verso", "alla"}
+    return {w for w in re.findall(r"[a-z0-9àèéìòù']+", cross_run_text(item)) if len(w) >= 3 and w not in stop}
+
+
+def cross_run_entities(item: dict[str, Any]) -> set[str]:
+    text = " ".join(str(item.get(k) or "") for k in ["title", "source_title", "title_it", "summary", "reason"])
+    entities = {m.group(0).lower() for m in re.finditer(r"\b[A-Z][A-Za-zÀ-ÿ']+(?:\s+[A-Z][A-Za-zÀ-ÿ']+){0,2}\b", text)}
+    known = {"big bill", "enzo amore", "cm punk", "roman reigns", "cody rhodes", "seth rollins", "mjf", "jon moxley"}
+    low = normalize_text(text).lower()
+    entities |= {e for e in known if e in low}
+    return {e for e in entities if e not in {"wwe", "aew", "tna", "nxt", "roh"}}
+
+
+def cross_run_actions(item: dict[str, Any]) -> set[str]:
+    text = cross_run_text(item)
+    groups = {
+        "rumor": {"rumor", "rumors", "possible", "possibile", "potrebbe", "talk", "si parla", "verso"},
+        "confirmed": {"confirmed", "confermato", "official", "ufficiale", "announced", "annunciato"},
+        "contract_status_changed": {"leaves", "left", "lascia", "free agent", "scadenza", "contract", "contratto", "released", "rilasciato"},
+        "signed": {"signed", "signs", "firma", "accordo"},
+        "medical": {"injured", "injury", "infortunio", "cleared", "medico"},
+        "creative": {"creative", "piani", "plans", "storyline", "match", "title", "stipulation", "stipulazione", "booked", "aggiunto", "removed"},
+        "denial": {"denied", "smentita", "smentisce", "false"},
+    }
+    return {code for code, terms in groups.items() if any(term in text for term in terms)}
+
+
+def cross_run_dates(item: dict[str, Any]) -> set[str]:
+    text = cross_run_text(item)
+    found = set(re.findall(r"\b(?:20\d{2}|\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?)\b", text))
+    found |= set(re.findall(r"\b(?:raw|smackdown|dynamite|collision|wrestlemania|summerslam|royal rumble|all out|full gear|forbidden door)\b", text))
+    return found
+
+
+def _history_dt(item: dict[str, Any]) -> datetime | None:
+    return parse_dt(item.get("published_at") or item.get("updated_at") or item.get("created_at") or item.get("added_at") or item.get("timestamp") or item.get("published"))
+
+
+def load_cross_run_story_history(lookback_hours: int | None = None) -> list[dict[str, Any]]:
+    lookback_hours = lookback_hours or MENZO_CROSS_RUN_NOVELTY_LOOKBACK_HOURS
+    cutoff = datetime.now(timezone.utc) - timedelta(hours=lookback_hours)
+    out: list[dict[str, Any]] = []
+    raw = load_json(publisher_history_file(), {})
+    records = raw.values() if isinstance(raw, dict) else (raw if isinstance(raw, list) else [])
+    for item in records:
+        if isinstance(item, dict) and (_history_dt(item) or datetime.now(timezone.utc)) >= cutoff:
+            out.append({**item, "cross_run_origin": "publisher_history"})
+    for old in load_story_footprints():
+        if isinstance(old, dict) and (_history_dt(old) or datetime.now(timezone.utc)) >= cutoff:
+            out.append({**old, "cross_run_origin": "story_footprints"})
+    if MASTER_LOG_FILE.exists():
+        try:
+            for line in MASTER_LOG_FILE.read_text(encoding="utf-8").splitlines()[-400:]:
+                try:
+                    item = json.loads(line)
+                except Exception:
+                    continue
+                if isinstance(item, dict) and (_history_dt(item) or datetime.now(timezone.utc)) >= cutoff:
+                    out.append({**item, "cross_run_origin": "master_log"})
+        except Exception:
+            pass
+    return out
+
+
+def cross_run_similarity(item: dict[str, Any], old: dict[str, Any]) -> float:
+    if source_key(item.get("url") or item.get("source_url") or "") == source_key(old.get("url") or old.get("source_url") or ""):
+        return 0.0
+    a, b = cross_run_tokens(item), cross_run_tokens(old)
+    token_score = len(a & b) / max(1, min(len(a), len(b)))
+    ea, eb = cross_run_entities(item), cross_run_entities(old)
+    entity_score = len(ea & eb) / max(1, min(len(ea), len(eb))) if ea and eb else 0.0
+    action_score = 0.15 if cross_run_actions(item) & cross_run_actions(old) else 0.0
+    brand_score = 0.12 if ({w for w in ["wwe", "aew", "tna", "nxt", "roh"] if w in cross_run_text(item)} & {w for w in ["wwe", "aew", "tna", "nxt", "roh"] if w in cross_run_text(old)}) else 0.0
+    return round(min(1.0, max(token_score, entity_score) + action_score + brand_score), 3)
+
+
+def find_cross_run_match(item: dict[str, Any], history: list[dict[str, Any]] | None = None) -> tuple[dict[str, Any] | None, float]:
+    best, best_score = None, 0.0
+    for old in history if history is not None else load_cross_run_story_history():
+        if not isinstance(old, dict):
+            continue
+        score = cross_run_similarity(item, old)
+        if score > best_score:
+            best, best_score = old, score
+    return (best, best_score) if best and best_score >= MENZO_CROSS_RUN_NOVELTY_MIN_SCORE else (None, best_score)
+
+
+def deterministic_cross_run_novelty(item: dict[str, Any], old: dict[str, Any]) -> tuple[str, list[str], str]:
+    codes: list[str] = []
+    new_entities = cross_run_entities(item) - cross_run_entities(old)
+    if new_entities:
+        codes.append("new_entity")
+    new_actions = cross_run_actions(item) - cross_run_actions(old)
+    codes.extend(sorted(a for a in new_actions if a != "rumor"))
+    new_dates = cross_run_dates(item) - cross_run_dates(old)
+    if new_dates:
+        codes.append("new_event_or_date")
+    ia, oa = cross_run_actions(item), cross_run_actions(old)
+    if "confirmed" in ia and "rumor" in oa:
+        codes.append("rumor_to_confirmation")
+    if "contract_status_changed" in ia and any(term in cross_run_text(item) for term in ["lascia", "leaves", "left", "released", "rilasciato"]):
+        codes.append("contract_status_changed")
+    text = cross_run_text(item)
+    if any(x in text for x in ["update", "aggiornamento", "new detail", "dettaglio", "esclusiva", "exclusive"]):
+        codes.append("explicit_update")
+    if codes:
+        return "allow", sorted(set(codes)), "cross_run_story_novelty_detected"
+    return "unclear", [], "deterministic_no_material_novelty"
+
+
+def build_cross_run_novelty_prompt(item: dict[str, Any], old: dict[str, Any]) -> str:
+    return """Compare the new wrestling-news candidate against a recently published/worked story.
+Return ONLY strict JSON:
+{"same_story": true, "has_material_novelty": false, "novelty_codes": [], "decision": "allow|skip|pending", "reason": ""}
+Rules: allow only if same_story=false or has_material_novelty=true; skip if same_story=true and novelty is absent; pending if uncertain or insufficient data.
+Material novelty includes official/primary confirmation, rumor-to-fact, contract status change, new involved name, new date, denial, concrete creative consequence, roster/medical/legal update, or changed match/title/stipulation/event.
+New candidate:
+""" + json.dumps(lightweight_ai_record(item, "new"), ensure_ascii=False) + "\nPrevious story:\n" + json.dumps(lightweight_ai_record(old, "previous"), ensure_ascii=False)
+
+
+def apply_cross_run_novelty_gate(result: dict[str, Any]) -> None:
+    pp = result.setdefault("postprocess", {})
+    pp.update({"cross_run_story_novelty_gate_v95_5": True, "cross_run_novelty_gate_enabled": MENZO_CROSS_RUN_NOVELTY_GATE_ENABLED})
+    if not MENZO_CROSS_RUN_NOVELTY_GATE_ENABLED:
+        return
+    counters = {"matches": 0, "allowed": 0, "skipped": 0, "pending": 0, "ai_calls": 0, "ai_avoided": 0}
+    history = load_cross_run_story_history()
+    new_selected: list[dict[str, Any]] = []
+    new_pending = [x for x in result.get("pending", []) if isinstance(x, dict)]
+    new_skipped = [x for x in result.get("skipped", []) if isinstance(x, dict)]
+    for item in [dict(x) for x in result.get("selected", []) if isinstance(x, dict)]:
+        match, score = find_cross_run_match(item, history)
+        item["cross_run_novelty_gate_v95_5"] = True
+        item["cross_run_match"] = bool(match)
+        item["cross_run_match_score"] = score
+        if not match:
+            item["cross_run_novelty_decision"] = "none"
+            item["cross_run_novelty_reason"] = "no_cross_run_match"
+            new_selected.append(item)
+            continue
+        counters["matches"] += 1
+        item["cross_run_match_title"] = match.get("title") or match.get("source_title") or ""
+        item["cross_run_match_url"] = match.get("url") or match.get("source_url") or ""
+        decision, codes, reason = deterministic_cross_run_novelty(item, match)
+        if decision == "allow":
+            item["cross_run_novelty_decision"] = "allow"; item["cross_run_novelty_reason"] = reason; item["cross_run_novelty_codes"] = codes
+            item["reason"] = "cross_run_story_novelty_detected; " + str(item.get("reason") or "")
+            new_selected.append(item); counters["allowed"] += 1; counters["ai_avoided"] += 1
+            record_gemini_event(agent="Menzo", phase="cross_run_novelty_gate", model=MENZO_CROSS_RUN_NOVELTY_AI_MODEL, status="avoided", reason="deterministic_novelty_allow", saved_gemini_call=True, url=item.get("url") or item.get("source_url"), title=item.get("title") or item.get("source_title"))
+            continue
+        if not MENZO_CROSS_RUN_NOVELTY_AI_ENABLED:
+            item["decision"] = "pending"; item["priority"] = "soft"; item["cross_run_novelty_decision"] = "pending"; item["cross_run_novelty_reason"] = "ai_disabled"; item["cross_run_novelty_codes"] = []
+            new_pending.append(item); counters["pending"] += 1
+            record_gemini_event(agent="Menzo", phase="cross_run_novelty_gate", model=MENZO_CROSS_RUN_NOVELTY_AI_MODEL, status="avoided", reason="ai_disabled", saved_gemini_call=True, url=item.get("url") or item.get("source_url"), title=item.get("title") or item.get("source_title"))
+            continue
+        ai_data, model_status = call_gemini_json_model(build_cross_run_novelty_prompt(item, match), MENZO_CROSS_RUN_NOVELTY_AI_MODEL, ledger_context={"url": item.get("url") or item.get("source_url"), "title": item.get("title") or item.get("source_title")}, phase="cross_run_novelty_gate")
+        counters["ai_calls"] += 1
+        ai_decision = str((ai_data or {}).get("decision") or "pending").lower()
+        if ai_data and (ai_decision == "allow" and (ai_data.get("same_story") is False or ai_data.get("has_material_novelty") is True)):
+            item["cross_run_novelty_decision"] = "allow"; item["cross_run_novelty_reason"] = ai_data.get("reason") or "ai_novelty_allow"; item["cross_run_novelty_codes"] = ai_data.get("novelty_codes") or []
+            new_selected.append(item); counters["allowed"] += 1
+        elif ai_data and ai_decision == "skip":
+            item["decision"] = "skip"; item["priority"] = "skip"; item["article_type"] = item.get("article_type") or "duplicate"; item["cross_run_novelty_decision"] = "skip"; item["cross_run_novelty_reason"] = ai_data.get("reason") or "ai_no_novelty_skip"; item["cross_run_novelty_codes"] = ai_data.get("novelty_codes") or []
+            new_skipped.append(item); counters["skipped"] += 1
+        else:
+            item["decision"] = "pending"; item["priority"] = "soft"; item["article_type"] = item.get("article_type") or "pending_followup"; item["cross_run_novelty_decision"] = "pending"; item["cross_run_novelty_reason"] = (ai_data or {}).get("reason") or model_status; item["cross_run_novelty_codes"] = (ai_data or {}).get("novelty_codes") or []
+            new_pending.append(item); counters["pending"] += 1
+    result["selected"] = sorted(new_selected, key=sort_item, reverse=True)
+    result["pending"] = sorted(new_pending, key=sort_item, reverse=True)
+    result["skipped"] = new_skipped
+    result["allowed_urls_for_v92"] = [str(x.get("url") or x.get("source_url") or "") for x in result["selected"] if x.get("url") or x.get("source_url")]
+    result["handoff"] = {"to_bob_or_v92": len(result["selected"]), "pending": len(result["pending"]), "skipped": len(result["skipped"])}
+    pp["cross_run_novelty_matches"] = counters["matches"]
+    pp["cross_run_novelty_allowed"] = counters["allowed"]
+    pp["cross_run_novelty_skipped"] = counters["skipped"]
+    pp["cross_run_novelty_pending"] = counters["pending"]
+    pp["cross_run_novelty_ai_calls"] = counters["ai_calls"]
+    pp["cross_run_novelty_ai_avoided"] = counters["ai_avoided"]
 
 
 def build_suspicious_ai_clusters(items: list[dict[str, Any]]) -> list[list[dict[str, Any]]]:
@@ -1302,6 +1497,7 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     apply_dynamic_editorial_budget(result)
     apply_ai_duplicate_arbitration(result, board)
     apply_dynamic_editorial_budget(result)
+    apply_cross_run_novelty_gate(result)
     enforce_selected_cap(result)
     enforce_capacity_buffer(result)
     result["version"] = MENZO_VERSION
@@ -1333,6 +1529,9 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     policy["ai_duplicate_arbitration_first_pass_model"] = MENZO_DUPLICATE_ARBITRATION_FIRST_MODEL
     policy["ai_duplicate_arbitration_second_pass_model"] = MENZO_DUPLICATE_ARBITRATION_SECOND_MODEL
     policy["gemini_model_routing_v95_4"] = True
+    policy["cross_run_story_novelty_gate_v95_5"] = True
+    policy["cross_run_novelty_gate_enabled"] = MENZO_CROSS_RUN_NOVELTY_GATE_ENABLED
+    policy["cross_run_novelty_ai_model"] = MENZO_CROSS_RUN_NOVELTY_AI_MODEL
     policy["menzo_35_gate"] = {"enabled": MENZO_ENABLE_35_FOR_HIGH_AMBIGUITY, "min_score": MENZO_35_MIN_SCORE, "require_duplicate_or_same_story": MENZO_35_REQUIRE_DUPLICATE_OR_SAME_STORY}
     policy["ai_duplicate_arbitration_limits"] = {"max_clusters_per_run": AI_DEDUPE_MAX_CLUSTERS, "max_candidates_per_cluster": AI_DEDUPE_MAX_CANDIDATES}
     save_softpool(result)
