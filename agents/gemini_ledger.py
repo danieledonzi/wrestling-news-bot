@@ -85,12 +85,22 @@ def summarize(records: list[dict[str, Any]]) -> dict[str, Any]:
     avoided = [r for r in records if r.get("status") == "avoided"]
     failed = [r for r in records if r.get("status") == "failed"]
     by_agent = Counter(str(r.get("agent") or "unknown") for r in calls)
+    premium_calls = [r for r in calls if r.get("selected_model_chain_kind") == "premium" or str(r.get("model") or "") == "gemini-3.5-flash"]
+    standard_calls = [r for r in calls if r.get("selected_model_chain_kind") == "standard" or str(r.get("model") or "") != "gemini-3.5-flash"]
     return {
+        "gemini_model_routing_v95_4": True,
         "gemini_calls_total": len(calls),
         "gemini_calls_by_agent": dict(sorted(by_agent.items())),
         "gemini_calls_avoided_total": len(avoided),
         "gemini_calls_avoided_by_andrea": sum(1 for r in avoided if str(r.get("agent") or "").lower() == "andrea"),
         "gemini_calls_failed": len(failed),
+        "premium_model_calls": len(premium_calls),
+        "standard_model_calls": len(standard_calls),
+        "purpose_gate_avoided_calls": sum(1 for r in avoided if r.get("reason") in {"purpose_gate_not_met", "high_ambiguity_gate_not_met"}),
+        "menzo_second_pass_35_avoided": sum(1 for r in avoided if r.get("agent") == "Menzo" and r.get("phase") == "duplicate_arbitration_second_pass"),
+        "menzo_model_cooldown_avoided": sum(1 for r in avoided if r.get("reason") == "model_cooldown_after_failure"),
+        "bob_premium_articles": sum(1 for r in calls if r.get("agent") == "Bob" and r.get("selected_model_chain_kind") == "premium"),
+        "bob_standard_articles": sum(1 for r in calls if r.get("agent") == "Bob" and r.get("selected_model_chain_kind") == "standard"),
     }
 
 
