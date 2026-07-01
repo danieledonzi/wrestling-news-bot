@@ -26,19 +26,30 @@ BOB_ARTICLES_FILE = NEWSROOM_STATE_DIR / "bob_articles_latest.json"
 SIMONE_REPORT_STATUS_FILE = NEWSROOM_STATE_DIR / "simone_report_publish_latest.json"
 ARTIFACT_BOB_FILE = ARTIFACT_DIR / "bob_articles.json"
 
-BOB_VERSION = "v94_13_2_preserve_valid_x_status_embeds"
+BOB_VERSION = "v95_4_gemini_purpose_based_model_routing"
 REQUEST_TIMEOUT = int(os.getenv("V93_BOB_REQUEST_TIMEOUT", "18"))
 MAX_ARTICLES_PER_RUN = int(os.getenv("V93_BOB_MAX_ARTICLES_PER_RUN", "5"))
 MAX_ARTICLES_WITH_REPORT = int(os.getenv("V93_BOB_MAX_ARTICLES_WITH_REPORT", "4"))
 POST_SHOW_MAX_ARTICLES = int(os.getenv("V93_BOB_POST_SHOW_MAX_ARTICLES", "6"))
 AUDIT_CHARS = int(os.getenv("V93_BOB_AUDIT_CHARS", "24000"))
 DEFAULT_BOB_MODEL_CHAIN = "gemini-3.1-flash-lite,gemini-3.5-flash,gemini-2.5-flash-lite,gemini-2.5-flash"
+DEFAULT_BOB_PREMIUM_MODEL_CHAIN = "gemini-3.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
+DEFAULT_BOB_STANDARD_MODEL_CHAIN = "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
+BOB_PREMIUM_MIN_SCORE = int(os.getenv("BOB_PREMIUM_MIN_SCORE", "85"))
+BOB_PREMIUM_PRIORITY_LABELS = {x.strip().lower() for x in os.getenv("BOB_PREMIUM_PRIORITY_LABELS", "high").split(",") if x.strip()}
+BOB_PREMIUM_ARTICLE_TYPES = {x.strip().lower() for x in os.getenv("BOB_PREMIUM_ARTICLE_TYPES", "hard_news,report_related,major_return,contract_roster,title_change,injury_major,ple_event").split(",") if x.strip()}
+BOB_PREMIUM_CATEGORY_HINTS = {x.strip().lower() for x in os.getenv("BOB_PREMIUM_CATEGORY_HINTS", "WWE,AEW,NXT,TNA").split(",") if x.strip()}
 BOB_TITLE_CHAIN_MODE = "same_as_body_translation"
+BOB_GEMINI_MODEL_CHAIN_SET = "BOB_GEMINI_MODEL_CHAIN" in os.environ
+GEMINI_MODEL_CHAIN_SET = "GEMINI_MODEL_CHAIN" in os.environ
+LEGACY_BOB_MODEL_CHAIN_OVERRIDE = BOB_GEMINI_MODEL_CHAIN_SET or GEMINI_MODEL_CHAIN_SET
 MODEL_CHAIN = [
     m.strip()
     for m in os.getenv("BOB_GEMINI_MODEL_CHAIN", os.getenv("GEMINI_MODEL_CHAIN", DEFAULT_BOB_MODEL_CHAIN)).split(",")
     if m.strip()
 ]
+BOB_PREMIUM_MODEL_CHAIN = [m.strip() for m in os.getenv("BOB_PREMIUM_MODEL_CHAIN", DEFAULT_BOB_PREMIUM_MODEL_CHAIN).split(",") if m.strip()]
+BOB_STANDARD_MODEL_CHAIN = [m.strip() for m in os.getenv("BOB_STANDARD_MODEL_CHAIN", DEFAULT_BOB_STANDARD_MODEL_CHAIN).split(",") if m.strip()]
 
 ARTICLE_SELECTORS = ["article", "main article", ".article-body", ".post-content", ".entry-content", ".content", "main"]
 TRANSLATABLE_TYPES = {"text", "heading", "quote"}
@@ -93,6 +104,33 @@ SOURCE_SELF_REFERENCE_PATTERNS = [
     re.compile(rf"\bwe\s+at\s+{SOURCE_SELF_REFERENCE_SITE_RE}\b", re.I),
     re.compile(rf"\b{SOURCE_SELF_REFERENCE_SITE_RE}\s+(?:will\s+)?bring\s+you\s+(?:more\s+)?updates\b", re.I),
 ]
+
+
+def _int_or_none(value: Any) -> int | None:
+    try:
+        if value is None or value == "":
+            return None
+        return int(float(value))
+    except Exception:
+        return None
+
+
+def bob_model_routing(item: dict[str, Any]) -> dict[str, Any]:
+    score = _int_or_none(item.get("score") if item.get("score") is not None else item.get("menzo_score"))
+    priority_label = str(item.get("priority_label") or item.get("ai_priority_label") or item.get("priority") or "").strip().lower()
+    article_type = str(item.get("article_type") or "").strip().lower()
+    category_hint = str(item.get("category_hint") or "").strip().lower()
+    if LEGACY_BOB_MODEL_CHAIN_OVERRIDE:
+        reason = "BOB_GEMINI_MODEL_CHAIN explicitly set" if BOB_GEMINI_MODEL_CHAIN_SET else "GEMINI_MODEL_CHAIN explicitly set"
+        return {"kind": "legacy_override", "chain": MODEL_CHAIN, "reason": reason, "native_score": score, "priority_label": priority_label, "article_type": article_type, "category_hint": category_hint}
+    if score is not None and score >= BOB_PREMIUM_MIN_SCORE:
+        return {"kind": "premium", "chain": BOB_PREMIUM_MODEL_CHAIN, "reason": f"score>={BOB_PREMIUM_MIN_SCORE}", "native_score": score, "priority_label": priority_label, "article_type": article_type, "category_hint": category_hint}
+    if priority_label in BOB_PREMIUM_PRIORITY_LABELS and article_type in BOB_PREMIUM_ARTICLE_TYPES:
+        reason = "priority_label+important_article_type"
+        if category_hint in BOB_PREMIUM_CATEGORY_HINTS:
+            reason += "+category_hint"
+        return {"kind": "premium", "chain": BOB_PREMIUM_MODEL_CHAIN, "reason": reason, "native_score": score, "priority_label": priority_label, "article_type": article_type, "category_hint": category_hint}
+    return {"kind": "standard", "chain": BOB_STANDARD_MODEL_CHAIN, "reason": "conservative_cost_default", "native_score": score, "priority_label": priority_label, "article_type": article_type, "category_hint": category_hint}
 
 def is_source_self_reference_text(text: str) -> bool:
     cleaned = clean_text(text)
@@ -562,7 +600,7 @@ def build_translation_units(elements: list[dict[str, Any]]) -> list[dict[str, st
     return units
 
 
-def call_gemini(prompt: str, *, ledger_context: dict[str, Any] | None = None) -> tuple[str, str, list[str]]:
+def call_gemini(prompt: str, *, ledger_context: dict[str, Any] | None = None, model_chain: list[str] | None = None) -> tuple[str, str, list[str]]:
     api_key = os.getenv("GEMINI_API_KEY", "").strip()
     attempts: list[str] = []
     if not api_key:
@@ -571,7 +609,7 @@ def call_gemini(prompt: str, *, ledger_context: dict[str, Any] | None = None) ->
     try:
         from google import genai  # type: ignore
         client = genai.Client(api_key=api_key)
-        for model in MODEL_CHAIN:
+        for model in (model_chain or MODEL_CHAIN):
             attempts.append(model)
             try:
                 response = client.models.generate_content(model=model, contents=prompt)
@@ -789,7 +827,9 @@ def article_package(item: dict[str, Any]) -> dict[str, Any]:
             return package
         prompt = build_translation_prompt(item, meta, units)
         package["translation_prompt_preview"] = prompt[:AUDIT_CHARS]
-        translated, model_or_error, attempts = call_gemini(prompt, ledger_context={"url": url, "title": item.get("title") or meta.get("source_title"), "candidate_id": item.get("candidate_id") or item.get("id") or item.get("semantic_id"), "source_id": item.get("source_id") or item.get("source")})
+        routing = bob_model_routing(item)
+        package.update({"bob_model_routing_v95_4": True, "selected_model_chain_kind": routing["kind"], "selected_model_chain_reason": routing["reason"], "native_score": routing["native_score"], "priority_label": routing["priority_label"], "article_type": routing["article_type"], "selected_model_chain": routing["chain"]})
+        translated, model_or_error, attempts = call_gemini(prompt, ledger_context={"url": url, "title": item.get("title") or meta.get("source_title"), "candidate_id": item.get("candidate_id") or item.get("id") or item.get("semantic_id"), "source_id": item.get("source_id") or item.get("source"), "selected_model_chain_kind": routing["kind"], "selected_model_chain_reason": routing["reason"], "native_score": routing["native_score"], "priority_label": routing["priority_label"], "article_type": routing["article_type"]}, model_chain=routing["chain"])
         package["translation_chain_attempted"] = attempts
         package["translation_model"] = model_or_error
         package["translation_used"] = bool(translated)
@@ -850,6 +890,9 @@ def run_bob(menzo_decision: dict[str, Any] | None = None) -> dict[str, Any]:
             "preserve_tables_as_html_tables": True,
             "ordered_elements": ["text", "heading", "quote", "table", "image", "embed"],
             "model_chain": MODEL_CHAIN,
+            "bob_model_routing_v95_4": True,
+            "premium_model_chain": BOB_PREMIUM_MODEL_CHAIN,
+            "standard_model_chain": BOB_STANDARD_MODEL_CHAIN,
             "bob_title_chain_mode": BOB_TITLE_CHAIN_MODE,
             "max_articles_per_run": MAX_ARTICLES_PER_RUN,
             "max_articles_with_report": MAX_ARTICLES_WITH_REPORT,
@@ -873,6 +916,8 @@ def run_bob(menzo_decision: dict[str, Any] | None = None) -> dict[str, Any]:
             "errors": sum(1 for a in articles if a.get("status") == "error"),
             "extraction_empty": sum(1 for a in articles if a.get("status") == "extraction_empty"),
             "publishable_left_out_by_capacity": publishable_left_out_by_capacity,
+            "bob_premium_articles": sum(1 for a in articles if a.get("selected_model_chain_kind") == "premium"),
+            "bob_standard_articles": sum(1 for a in articles if a.get("selected_model_chain_kind") == "standard"),
         },
         "postprocess": {"capacity": capacity, "capacity_reason": capacity_reason, "selected_total_before_capacity": selected_total, "selected_processed": len(selected), "publishable_left_out_by_capacity": publishable_left_out_by_capacity},
     }

@@ -34,6 +34,7 @@ REPORT_TRANSLATION_BATCH_SIZE = int(os.getenv("V92_REPORT_TRANSLATION_BATCH_SIZE
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 DEFAULT_MODEL_CHAIN_V95_2 = "gemini-3.1-flash-lite,gemini-3.5-flash,gemini-2.5-flash-lite,gemini-2.5-flash"
 DEFAULT_REPORT_MODEL_CHAIN_V95_2 = "gemini-3.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite"
+REPORT_MODEL_ROUTING_V95_4 = "report_show_premium_allowed"
 MODEL_CHAIN = [m.strip() for m in os.getenv(
     "GEMINI_MODEL_CHAIN",
     DEFAULT_MODEL_CHAIN_V95_2,
@@ -1028,5 +1029,7 @@ def run_report_workshop(job: Dict[str, Any], published_dir: Path, review_dir: Pa
         "blocks": blocks[:120],
         "featured_image": featured_image,
         "translated_indexes": sorted(translated.keys()),
+        "report_model_routing_v95_4": REPORT_MODEL_ROUTING_V95_4,
+        "report_model_chain": REPORT_MODEL_CHAIN,
     }, ensure_ascii=False, indent=2), encoding="utf-8")
     return int(post_id), post_json or {}

@@ -34,7 +34,7 @@ ARTIFACT_DECISIONS_FILE = ARTIFACT_DIR / "menzo_decisions.json"
 SOFTPOOL_FILE = NEWSROOM_STATE_DIR / "menzo_softpool.json"
 HARD_SKIP_FILE = NEWSROOM_STATE_DIR / "menzo_hard_skips.json"
 
-MENZO_VERSION = "v94.13.5_duplicate_arbitration_must_select_winner"
+MENZO_VERSION = "v95.4_gemini_purpose_based_model_routing"
 VALID_LABELS = {"high", "medium", "low", "skip"}
 LABEL_SCORE = {"high": 92, "medium": 72, "low": 48, "skip": 0}
 SOFTPOOL_TTL_HOURS = int(os.getenv("V93_MENZO_SOFTPOOL_TTL_HOURS", "36"))
@@ -566,6 +566,10 @@ def enforce_selected_cap(result: dict[str, Any]) -> None:
 
 MENZO_DUPLICATE_ARBITRATION_FIRST_MODEL = os.getenv("MENZO_DUPLICATE_ARBITRATION_FIRST_MODEL", "gemini-3.1-flash-lite").strip() or "gemini-3.1-flash-lite"
 MENZO_DUPLICATE_ARBITRATION_SECOND_MODEL = os.getenv("MENZO_DUPLICATE_ARBITRATION_SECOND_MODEL", "gemini-3.5-flash").strip() or "gemini-3.5-flash"
+MENZO_ENABLE_35_FOR_HIGH_AMBIGUITY = os.getenv("MENZO_ENABLE_35_FOR_HIGH_AMBIGUITY", "true").strip().lower() not in {"0", "false", "no", "off"}
+MENZO_35_MIN_SCORE = int(os.getenv("MENZO_35_MIN_SCORE", "72"))
+MENZO_35_REQUIRE_DUPLICATE_OR_SAME_STORY = os.getenv("MENZO_35_REQUIRE_DUPLICATE_OR_SAME_STORY", "true").strip().lower() not in {"0", "false", "no", "off"}
+MENZO_MODEL_COOLDOWN_FAILURES: set[tuple[str, str]] = set()
 AI_DEDUPE_MAX_CLUSTERS = 5
 AI_DEDUPE_MAX_CANDIDATES = 4
 AI_DEDUPE_MIN_OVERLAP = 0.46
@@ -634,6 +638,7 @@ def lightweight_ai_record(item: dict[str, Any], item_id: str) -> dict[str, Any]:
         "published_at": item.get("published_at") or item.get("published") or item.get("date") or "",
         "has_image": bool(item.get("has_image") or item.get("featured_image") or item.get("image_url")),
         "embed_count": int(item.get("embed_count") or 0),
+        "score": item.get("score") or item.get("menzo_score") or 0,
     }
 
 
@@ -675,6 +680,37 @@ def needs_second_pass(ai_data: dict[str, Any] | None) -> bool:
     return confidence < 75 or cluster_type in {"uncertain", "mixed_signals", "same_event_but_new_angle", "same_core_fact_new_angle"}
 
 
+
+def _record_menzo_second_pass_avoided(reason: str, ledger_context: dict[str, Any], *, result: str = "gate") -> None:
+    record_gemini_event(agent="Menzo", phase="duplicate_arbitration_second_pass", model=MENZO_DUPLICATE_ARBITRATION_SECOND_MODEL, status="avoided", reason=reason, result=result, saved_gemini_call=True, **ledger_context)
+
+
+def _record_score(record: dict[str, Any]) -> int:
+    try:
+        return int(record.get("score") or record.get("menzo_score") or 0)
+    except Exception:
+        return 0
+
+
+def menzo_second_pass_gate(item: dict[str, Any], records: list[dict[str, Any]], ai_data: dict[str, Any] | None) -> tuple[bool, str]:
+    if not MENZO_ENABLE_35_FOR_HIGH_AMBIGUITY:
+        return False, "purpose_gate_not_met"
+    if not needs_second_pass(ai_data):
+        return False, "high_ambiguity_gate_not_met"
+    if len(records) < 2:
+        return False, "high_ambiguity_gate_not_met"
+    if MENZO_35_REQUIRE_DUPLICATE_OR_SAME_STORY:
+        cluster_type = str((ai_data or {}).get("cluster_type") or "").lower()
+        if cluster_type not in {"same_story", "same_core_fact_new_angle", "uncertain", "mixed_signals", "same_event_but_new_angle"}:
+            return False, "purpose_gate_not_met"
+    candidates = [r for r in records if str(r.get("publisher_history_origin") or "candidate") != "published_or_memory"]
+    if len(candidates) < 2 and not any(str(r.get("publisher_history_origin") or "") == "suspicious" for r in records):
+        return False, "high_ambiguity_gate_not_met"
+    cluster_score = max([_record_score(item)] + [_record_score(r) for r in records])
+    if cluster_score < MENZO_35_MIN_SCORE:
+        return False, "high_ambiguity_gate_not_met"
+    return True, "high_ambiguity_duplicate_novelty_arbitration"
+
 def relevant_history_payload(records: list[dict[str, Any]]) -> dict[str, Any]:
     tokens = set()
     for rec in records:
@@ -695,8 +731,22 @@ def _parse_gemini_json_text(text: str) -> dict[str, Any] | None:
     return data if isinstance(data, dict) else None
 
 
-def call_gemini_json_model(prompt: str, model: str, *, ledger_context: dict[str, Any] | None = None) -> tuple[dict[str, Any] | None, str]:
+def _cooldown_key(model: str, ledger_context: dict[str, Any] | None) -> tuple[str, str]:
+    ctx = ledger_context or {}
+    title_or_cluster = str(ctx.get("cluster_id") or ctx.get("title") or ctx.get("url") or "unknown")[:240]
+    return model, title_or_cluster
+
+
+def _is_cooldown_error(text: str) -> bool:
+    low = text.lower()
+    return "503" in low or "high demand" in low or "resource_exhausted" in low or "unavailable" in low
+
+
+def call_gemini_json_model(prompt: str, model: str, *, ledger_context: dict[str, Any] | None = None, phase: str = "duplicate_arbitration") -> tuple[dict[str, Any] | None, str]:
     api_key = os.getenv("GEMINI_API_KEY", "").strip()
+    if _cooldown_key(model, ledger_context) in MENZO_MODEL_COOLDOWN_FAILURES:
+        record_gemini_event(agent="Menzo", phase=phase, model=model, status="avoided", reason="model_cooldown_after_failure", result="cooldown", saved_gemini_call=True, **(ledger_context or {}))
+        return None, f"model_cooldown_after_failure:{model}"
     if not api_key:
         return None, "missing_api_key"
     try:
@@ -704,10 +754,13 @@ def call_gemini_json_model(prompt: str, model: str, *, ledger_context: dict[str,
         client = genai.Client(api_key=api_key)
         response = client.models.generate_content(model=model, contents=prompt)
         data = _parse_gemini_json_text(getattr(response, "text", "") or "")
-        record_gemini_event(agent="Menzo", phase="duplicate_arbitration", model=model, status="called", reason="ai_duplicate_arbitration", result="valid_json" if data else "invalid_json", **(ledger_context or {}))
+        record_gemini_event(agent="Menzo", phase=phase, model=model, status="called", reason="ai_duplicate_arbitration", result="valid_json" if data else "invalid_json", **(ledger_context or {}))
         return (data, model) if data else (None, f"invalid_json:{model}")
     except Exception as exc:
-        record_gemini_event(agent="Menzo", phase="duplicate_arbitration", model=model, status="failed", reason="ai_duplicate_arbitration", result=str(exc)[:500], **(ledger_context or {}))
+        err = str(exc)[:500]
+        if _is_cooldown_error(err):
+            MENZO_MODEL_COOLDOWN_FAILURES.add(_cooldown_key(model, ledger_context))
+        record_gemini_event(agent="Menzo", phase=phase, model=model, status="failed", reason="ai_duplicate_arbitration", result=err, **(ledger_context or {}))
         return None, f"gemini_unavailable:{model}:{exc}"
 
 
@@ -827,6 +880,7 @@ def arbitration_records_for_item(item: dict[str, Any], cluster_records: list[dic
             "excerpt": rec.get("excerpt") or "",
             "canonical_summary": rec.get("canonical_summary") or rec.get("summary") or "",
             "publisher_history_origin": rec.get("origin") or "suspicious",
+            "score": rec.get("score") or rec.get("menzo_score") or 0,
         })
     return records[:AI_DEDUPE_MAX_CANDIDATES]
 
@@ -1012,11 +1066,15 @@ def apply_ai_duplicate_arbitration(result: dict[str, Any], massy_board: dict[str
             resolved[key] = item
             continue
         records = arbitration_records_for_item(item, cluster_records)
-        ai_data, model = call_gemini_json_model(build_ai_dedupe_prompt(records), MENZO_DUPLICATE_ARBITRATION_FIRST_MODEL, ledger_context={"url": item.get("url") or item.get("source_url"), "title": item.get("title") or item.get("source_title"), "candidate_id": item.get("candidate_id") or item.get("id") or item.get("semantic_id"), "source_id": item.get("source_id") or item.get("source")})
+        ledger_context = {"url": item.get("url") or item.get("source_url"), "title": item.get("title") or item.get("source_title"), "candidate_id": item.get("candidate_id") or item.get("id") or item.get("semantic_id"), "source_id": item.get("source_id") or item.get("source"), "cluster_id": "|".join(source_key(r.get("source_url") or r.get("url") or "") for r in records)}
+        ai_data, model = call_gemini_json_model(build_ai_dedupe_prompt(records), MENZO_DUPLICATE_ARBITRATION_FIRST_MODEL, ledger_context=ledger_context)
         second_pass = False
-        if needs_second_pass(ai_data):
+        allowed_second_pass, second_pass_reason = menzo_second_pass_gate(item, records, ai_data)
+        if needs_second_pass(ai_data) and not allowed_second_pass:
+            _record_menzo_second_pass_avoided(second_pass_reason, ledger_context)
+        if allowed_second_pass:
             second_pass = True
-            ai_data2, model2 = call_gemini_json_model(build_ai_dedupe_second_pass_prompt(records, relevant_history_payload(records)), MENZO_DUPLICATE_ARBITRATION_SECOND_MODEL, ledger_context={"url": item.get("url") or item.get("source_url"), "title": item.get("title") or item.get("source_title"), "candidate_id": item.get("candidate_id") or item.get("id") or item.get("semantic_id"), "source_id": item.get("source_id") or item.get("source")})
+            ai_data2, model2 = call_gemini_json_model(build_ai_dedupe_second_pass_prompt(records, relevant_history_payload(records)), MENZO_DUPLICATE_ARBITRATION_SECOND_MODEL, ledger_context=ledger_context, phase="duplicate_arbitration_second_pass")
             if ai_data2:
                 ai_data, model = ai_data2, model2
         if not ai_data:
@@ -1051,6 +1109,7 @@ def apply_ai_duplicate_arbitration(result: dict[str, Any], massy_board: dict[str
     pp["ai_duplicate_arbitration_skipped"] = sum(1 for l in logs if l.get("decision") == "skip_duplicate")
     pp["ai_duplicate_arbitration_pending_followup"] = sum(1 for l in logs if l.get("decision") in {"pending_followup", "pending_review"})
     pp["ai_cross_source_duplicate_arbitration_logs"] = logs[:AI_DEDUPE_MAX_CLUSTERS * AI_DEDUPE_MAX_CANDIDATES]
+    pp["gemini_model_routing_v95_4"] = True
 
 def rebuild_decisions(result: dict[str, Any]) -> None:
     all_items: list[dict[str, Any]] = []
@@ -1273,6 +1332,8 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     policy["ai_cross_source_duplicate_arbitration"] = True
     policy["ai_duplicate_arbitration_first_pass_model"] = MENZO_DUPLICATE_ARBITRATION_FIRST_MODEL
     policy["ai_duplicate_arbitration_second_pass_model"] = MENZO_DUPLICATE_ARBITRATION_SECOND_MODEL
+    policy["gemini_model_routing_v95_4"] = True
+    policy["menzo_35_gate"] = {"enabled": MENZO_ENABLE_35_FOR_HIGH_AMBIGUITY, "min_score": MENZO_35_MIN_SCORE, "require_duplicate_or_same_story": MENZO_35_REQUIRE_DUPLICATE_OR_SAME_STORY}
     policy["ai_duplicate_arbitration_limits"] = {"max_clusters_per_run": AI_DEDUPE_MAX_CLUSTERS, "max_candidates_per_cluster": AI_DEDUPE_MAX_CANDIDATES}
     save_softpool(result)
     save_hard_skips(result)
