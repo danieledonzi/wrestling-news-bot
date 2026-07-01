@@ -793,11 +793,35 @@ def cross_run_tokens(item: dict[str, Any]) -> set[str]:
 
 def cross_run_entities(item: dict[str, Any]) -> set[str]:
     text = " ".join(str(item.get(k) or "") for k in ["title", "source_title", "title_it", "summary", "reason"])
-    entities = {m.group(0).lower() for m in re.finditer(r"\b[A-Z][A-Za-zÀ-ÿ']+(?:\s+[A-Z][A-Za-zÀ-ÿ']+){0,2}\b", text)}
-    known = {"big bill", "enzo amore", "cm punk", "roman reigns", "cody rhodes", "seth rollins", "mjf", "jon moxley"}
+    filler = {
+        "a", "ad", "al", "alla", "allo", "anche", "and", "as", "back", "con", "contro", "del", "della",
+        "dello", "di", "dopo", "for", "from", "in", "il", "la", "le", "lo", "new", "news", "on", "per",
+        "possibile", "possible", "potrebbe", "report", "reports", "return", "ritorno", "rumor", "rumors",
+        "the", "to", "update", "verso", "with",
+    }
+    known = {
+        "big bill", "enzo amore", "cm punk", "roman reigns", "cody rhodes", "seth rollins", "mjf", "jon moxley",
+        "wwe", "aew", "tna", "nxt", "roh", "njpw", "raw", "smackdown", "dynamite", "collision",
+        "wrestlemania", "summerslam", "royal rumble", "all out", "full gear", "forbidden door",
+    }
     low = normalize_text(text).lower()
-    entities |= {e for e in known if e in low}
-    return {e for e in entities if e not in {"wwe", "aew", "tna", "nxt", "roh"}}
+    entities: set[str] = {e for e in known if re.search(rf"\b{re.escape(e)}\b", low)}
+    for m in re.finditer(r"\b[A-Z][A-Za-zÀ-ÿ']+(?:\s+[A-Z][A-Za-zÀ-ÿ']+){0,2}\b", text):
+        raw = m.group(0).strip()
+        value = raw.lower()
+        parts = value.split()
+        if len(parts) > 1:
+            kept = " ".join(p for p in parts if p not in filler)
+            if len(kept.split()) >= 2 or kept in known:
+                entities.add(kept)
+            continue
+        if value in filler:
+            continue
+        if m.start() == 0 and value not in known:
+            continue
+        entities.add(value)
+    entities |= {m.group(0).lower() for m in re.finditer(r"\b(?:WWE|AEW|TNA|NXT|ROH|NJPW)\b", text)}
+    return {e for e in entities if e and e not in filler}
 
 
 def cross_run_actions(item: dict[str, Any]) -> set[str]:

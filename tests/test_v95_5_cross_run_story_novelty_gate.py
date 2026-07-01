@@ -55,9 +55,24 @@ def test_same_story_without_novelty_not_selected_when_ai_disabled(tmp_path, monk
     assert result["postprocess"]["cross_run_novelty_pending"] == 1
 
 
+def test_same_story_reorder_does_not_treat_sentence_start_filler_as_new_entity(tmp_path, monkeypatch):
+    patch_paths(tmp_path, monkeypatch)
+    monkeypatch.setattr(menzo, "MENZO_CROSS_RUN_NOVELTY_AI_ENABLED", False)
+    old = {"title": "Big Bill possibile ritorno in WWE", "url": "https://old.test/big-bill"}
+    monkeypatch.setattr(menzo, "load_cross_run_story_history", lambda lookback_hours=None: [old])
+    result = base_result({"title": "Possibile ritorno in WWE per Big Bill", "url": "https://new.test/big-bill-reorder", "score": 94})
+
+    menzo.apply_cross_run_novelty_gate(result)
+
+    assert result["selected"] == []
+    assert len(result["pending"]) == 1
+    assert result["pending"][0]["cross_run_novelty_decision"] == "pending"
+    assert "new_entity" not in result["pending"][0].get("cross_run_novelty_codes", [])
+
+
 def test_same_story_with_contract_and_new_entity_novelty_is_allowed(tmp_path, monkeypatch):
     patch_paths(tmp_path, monkeypatch)
-    old = {"title": "Big Bill verso il ritorno in WWE alla scadenza del contratto AEW", "url": "https://old.test/big-bill"}
+    old = {"title": "Big Bill possibile ritorno in WWE", "url": "https://old.test/big-bill"}
     monkeypatch.setattr(menzo, "load_cross_run_story_history", lambda lookback_hours=None: [old])
     result = base_result({"title": "Big Bill lascia la AEW, possibile ritorno in WWE con Enzo Amore", "url": "https://new.test/big-bill-enzo", "score": 94})
 
@@ -72,6 +87,20 @@ def test_same_story_with_contract_and_new_entity_novelty_is_allowed(tmp_path, mo
     record = json.loads(gemini_ledger.LEDGER_FILE.read_text(encoding="utf-8").splitlines()[-1])
     assert record["reason"] == "deterministic_novelty_allow"
     assert record["saved_gemini_call"] is True
+
+
+def test_material_new_brand_acronym_can_count_as_entity_novelty(tmp_path, monkeypatch):
+    patch_paths(tmp_path, monkeypatch)
+    old = {"title": "Big Bill possibile ritorno", "url": "https://old.test/big-bill"}
+    monkeypatch.setattr(menzo, "load_cross_run_story_history", lambda lookback_hours=None: [old])
+    result = base_result({"title": "Big Bill possibile ritorno in WWE", "url": "https://new.test/big-bill-wwe", "score": 94})
+
+    menzo.apply_cross_run_novelty_gate(result)
+
+    assert len(result["selected"]) == 1
+    selected = result["selected"][0]
+    assert selected["cross_run_novelty_decision"] == "allow"
+    assert "new_entity" in selected["cross_run_novelty_codes"]
 
 
 def test_ai_fallback_allow_and_skip_and_malformed_pending(tmp_path, monkeypatch):
