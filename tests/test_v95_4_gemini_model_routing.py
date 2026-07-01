@@ -39,6 +39,28 @@ def test_bob_uses_premium_chain_for_high_score_or_high_important_type(monkeypatc
     assert by_score["chain"][0] == "gemini-3.5-flash"
 
 
+
+def test_bob_legacy_override_uses_bob_specific_chain(monkeypatch):
+    monkeypatch.setattr(bob, "BOB_GEMINI_MODEL_CHAIN_SET", True)
+    monkeypatch.setattr(bob, "GEMINI_MODEL_CHAIN_SET", False)
+    monkeypatch.setattr(bob, "LEGACY_BOB_MODEL_CHAIN_OVERRIDE", True)
+    monkeypatch.setattr(bob, "MODEL_CHAIN", ["bob-a", "bob-b"])
+    routing = bob.bob_model_routing({"score": 10})
+    assert routing["kind"] == "legacy_override"
+    assert routing["chain"] == ["bob-a", "bob-b"]
+    assert routing["reason"] == "BOB_GEMINI_MODEL_CHAIN explicitly set"
+
+
+def test_bob_legacy_override_uses_generic_gemini_model_chain(monkeypatch):
+    monkeypatch.setattr(bob, "BOB_GEMINI_MODEL_CHAIN_SET", False)
+    monkeypatch.setattr(bob, "GEMINI_MODEL_CHAIN_SET", True)
+    monkeypatch.setattr(bob, "LEGACY_BOB_MODEL_CHAIN_OVERRIDE", True)
+    monkeypatch.setattr(bob, "MODEL_CHAIN", ["custom-a", "custom-b"])
+    routing = bob.bob_model_routing({"score": 10})
+    assert routing["kind"] == "legacy_override"
+    assert routing["chain"] == ["custom-a", "custom-b"]
+    assert routing["reason"] == "GEMINI_MODEL_CHAIN explicitly set"
+
 def test_menzo_does_not_call_35_when_high_ambiguity_gate_not_satisfied(tmp_path, monkeypatch):
     patch_ledger_paths(tmp_path, monkeypatch)
     item = {"title": "Minor story", "score": 50}

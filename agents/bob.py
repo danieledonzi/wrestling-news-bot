@@ -40,7 +40,9 @@ BOB_PREMIUM_PRIORITY_LABELS = {x.strip().lower() for x in os.getenv("BOB_PREMIUM
 BOB_PREMIUM_ARTICLE_TYPES = {x.strip().lower() for x in os.getenv("BOB_PREMIUM_ARTICLE_TYPES", "hard_news,report_related,major_return,contract_roster,title_change,injury_major,ple_event").split(",") if x.strip()}
 BOB_PREMIUM_CATEGORY_HINTS = {x.strip().lower() for x in os.getenv("BOB_PREMIUM_CATEGORY_HINTS", "WWE,AEW,NXT,TNA").split(",") if x.strip()}
 BOB_TITLE_CHAIN_MODE = "same_as_body_translation"
-LEGACY_BOB_MODEL_CHAIN_OVERRIDE = "BOB_GEMINI_MODEL_CHAIN" in os.environ
+BOB_GEMINI_MODEL_CHAIN_SET = "BOB_GEMINI_MODEL_CHAIN" in os.environ
+GEMINI_MODEL_CHAIN_SET = "GEMINI_MODEL_CHAIN" in os.environ
+LEGACY_BOB_MODEL_CHAIN_OVERRIDE = BOB_GEMINI_MODEL_CHAIN_SET or GEMINI_MODEL_CHAIN_SET
 MODEL_CHAIN = [
     m.strip()
     for m in os.getenv("BOB_GEMINI_MODEL_CHAIN", os.getenv("GEMINI_MODEL_CHAIN", DEFAULT_BOB_MODEL_CHAIN)).split(",")
@@ -119,7 +121,8 @@ def bob_model_routing(item: dict[str, Any]) -> dict[str, Any]:
     article_type = str(item.get("article_type") or "").strip().lower()
     category_hint = str(item.get("category_hint") or "").strip().lower()
     if LEGACY_BOB_MODEL_CHAIN_OVERRIDE:
-        return {"kind": "legacy_override", "chain": MODEL_CHAIN, "reason": "BOB_GEMINI_MODEL_CHAIN explicitly set", "native_score": score, "priority_label": priority_label, "article_type": article_type, "category_hint": category_hint}
+        reason = "BOB_GEMINI_MODEL_CHAIN explicitly set" if BOB_GEMINI_MODEL_CHAIN_SET else "GEMINI_MODEL_CHAIN explicitly set"
+        return {"kind": "legacy_override", "chain": MODEL_CHAIN, "reason": reason, "native_score": score, "priority_label": priority_label, "article_type": article_type, "category_hint": category_hint}
     if score is not None and score >= BOB_PREMIUM_MIN_SCORE:
         return {"kind": "premium", "chain": BOB_PREMIUM_MODEL_CHAIN, "reason": f"score>={BOB_PREMIUM_MIN_SCORE}", "native_score": score, "priority_label": priority_label, "article_type": article_type, "category_hint": category_hint}
     if priority_label in BOB_PREMIUM_PRIORITY_LABELS and article_type in BOB_PREMIUM_ARTICLE_TYPES:
