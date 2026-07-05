@@ -203,41 +203,24 @@ def convert_plain_embed_urls_to_blocks(content: str) -> str:
     def repl_p_start(match: re.Match[str]) -> str:
         url = clean_url(match.group(1))
         rest = (match.group(2) or "").strip()
-        block = "
-
-" + gutenberg_embed_block(url) + "
-
-"
+        block = "\n\n" + gutenberg_embed_block(url) + "\n\n"
         if rest:
             return block + f"<p>{rest}</p>"
         return block
 
     def repl_p_only(match: re.Match[str]) -> str:
-        return "
-
-" + gutenberg_embed_block(match.group(1)) + "
-
-"
+        return "\n\n" + gutenberg_embed_block(match.group(1)) + "\n\n"
 
     def repl_line(match: re.Match[str]) -> str:
-        return "
-
-" + gutenberg_embed_block(match.group(1)) + "
-
-"
+        return "\n\n" + gutenberg_embed_block(match.group(1)) + "\n\n"
 
     text = P_START_EMBED_RE.sub(repl_p_start, text)
     text = P_URL_THEN_TEXT_RE.sub(repl_p_start, text)
     text = P_ONLY_EMBED_RE.sub(repl_p_only, text)
     text = EMBED_LINE_RE.sub(repl_line, text)
     text = remove_duplicate_embed_urls_preserve_first(text)
-    text = re.sub(r"(<!-- /wp:embed -->)\s*(<p>)", r"
-
-", text)
-    text = re.sub(r"
-{3,}", "
-
-", text)
+    text = re.sub(r"(<!-- /wp:embed -->)\s*(<p>)", r"\1\n\n\2", text)
+    text = re.sub(r"\n{3,}", "\n\n", text)
     return text
 
 
@@ -245,8 +228,11 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
     original_resolve = base.resolve_category_ids
     original_clean = base.clean_body_for_wordpress
 
-    def clean_with_gutenberg_embeds(body_html: str) -> str:
-        cleaned = original_clean(body_html)
+    def clean_with_gutenberg_embeds(body_html: str, *args: Any, **kwargs: Any) -> str:
+        try:
+            cleaned = original_clean(body_html, *args, **kwargs)
+        except TypeError:
+            cleaned = original_clean(body_html)
         return convert_plain_embed_urls_to_blocks(cleaned)
 
     base.clean_body_for_wordpress = clean_with_gutenberg_embeds
