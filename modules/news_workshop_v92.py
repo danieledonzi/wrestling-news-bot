@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 from agents.gemini_ledger import record_gemini_event
-from urllib.parse import urljoin, urlparse
+from urllib.parse import parse_qs, urljoin, urlparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -190,17 +190,40 @@ def warn_embed_once(message: str) -> None:
     print(message, flush=True)
 
 
+
+def canonical_youtube_embed_url_preserve_case(raw_url: str) -> Optional[str]:
+    url = html_lib.unescape((raw_url or "").strip())
+    if not url:
+        return None
+    parsed = urlparse(url)
+    host = parsed.netloc.lower().replace("www.", "")
+    path = parsed.path.strip("/")
+    video_id = ""
+    if host == "youtu.be":
+        video_id = path.split("/", 1)[0]
+    elif host in {"youtube.com", "youtube-nocookie.com"}:
+        if path.startswith("watch"):
+            video_id = parse_qs(parsed.query).get("v", [""])[0]
+        elif path.startswith(("embed/", "shorts/")):
+            video_id = path.split("/", 1)[1].split("/", 1)[0]
+    if not video_id:
+        return None
+    return f"https://www.youtube.com/watch?v={video_id}"
+
 def normalize_embed_url(raw_url: str) -> Optional[str]:
     url = html_lib.unescape((raw_url or "").strip())
     if not url:
         return None
     url = re.sub(r"[\s\"'<>]+$", "", url)
-    url = url.split("?", 1)[0]
     url = url.rstrip("/.,)]}")
     if url.startswith("//"):
         url = "https:" + url
     if not url.startswith(("http://", "https://")):
         return None
+    youtube_url = canonical_youtube_embed_url_preserve_case(url)
+    if youtube_url:
+        return youtube_url
+    url = url.split("?", 1)[0]
     return url
 
 

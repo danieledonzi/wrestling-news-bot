@@ -15,7 +15,7 @@ ARTIFACT_DIR = ROOT / "artifacts" / "newsroom"
 PUBLISHER_STATUS_FILE = NEWSROOM_STATE_DIR / "publisher_status_latest.json"
 ARTIFACT_PUBLISHER_FILE = ARTIFACT_DIR / "publisher_result.json"
 
-VERSION = "v93_26_publisher_embed_cleanup"
+VERSION = "v95_7_1_youtube_embed_case_preservation"
 
 CATEGORY_PRIORITY = {
     "Business": ["Business", "World"],
@@ -84,22 +84,38 @@ def clean_url(url: str) -> str:
     return html.unescape(str(url or "").strip()).rstrip(".,;:)]}\u201d\u2019</p>")
 
 
-def canonical_embed_key(url: str) -> str:
+def youtube_video_id_from_url(url: str) -> str:
     clean = clean_url(url)
     parsed = urlparse(clean)
     host = parsed.netloc.lower().replace("www.", "")
     path = parsed.path.strip("/")
     query = parse_qs(parsed.query)
+    if host == "youtu.be":
+        return path.split("/", 1)[0]
+    if host in {"youtube.com", "youtube-nocookie.com"}:
+        if path.startswith("watch"):
+            return (query.get("v") or [""])[0]
+        if path.startswith(("embed/", "shorts/")):
+            return path.split("/", 1)[1].split("/", 1)[0]
+    return ""
+
+
+def canonical_youtube_embed_url(url: str) -> str:
+    video_id = youtube_video_id_from_url(url)
+    if not video_id:
+        return clean_url(url)
+    return f"https://www.youtube.com/watch?v={video_id}"
+
+
+def canonical_embed_key(url: str) -> str:
+    clean = clean_url(url)
+    parsed = urlparse(clean)
+    host = parsed.netloc.lower().replace("www.", "")
+    path = parsed.path.strip("/")
     if host in {"youtube.com", "youtube-nocookie.com", "youtu.be"}:
-        video_id = ""
-        if host == "youtu.be":
-            video_id = path.split("/", 1)[0]
-        elif path.startswith("watch"):
-            video_id = (query.get("v") or [""])[0]
-        elif path.startswith("embed/"):
-            video_id = path.split("/", 1)[1].split("/", 1)[0]
+        video_id = youtube_video_id_from_url(clean)
         if video_id:
-            return f"youtube:{video_id.lower()}"
+            return f"youtube:{video_id}"
     if host in {"x.com", "twitter.com"}:
         parts = [p for p in path.split("/") if p]
         if "status" in parts:
@@ -113,10 +129,8 @@ def display_embed_url(url: str) -> str:
     clean = clean_url(url)
     parsed = urlparse(clean)
     host = parsed.netloc.lower().replace("www.", "")
-    key = canonical_embed_key(clean)
-    if key.startswith("youtube:"):
-        video_id = key.split(":", 1)[1]
-        return f"https://www.youtube.com/watch?v={video_id}"
+    if host in {"youtube.com", "youtube-nocookie.com", "youtu.be"}:
+        return canonical_youtube_embed_url(clean)
     return clean
 
 
@@ -163,11 +177,15 @@ def remove_duplicate_embed_urls_preserve_first(text: str) -> str:
 
 
 def normalize_embed_key(url: str) -> str:
-    url = clean_url(url)
-    url = re.sub(r"[?&]feature=oembed\b", "", url, flags=re.I)
-    url = re.sub(r"[?&]utm_[^&]+", "", url, flags=re.I)
-    url = url.replace("?&", "?").rstrip("?&")
-    return url.rstrip("/").lower()
+    clean = clean_url(url)
+    parsed = urlparse(clean)
+    host = parsed.netloc.lower().replace("www.", "")
+    if host in {"youtube.com", "youtube-nocookie.com", "youtu.be"}:
+        return canonical_embed_key(clean)
+    clean = re.sub(r"[?&]feature=oembed\b", "", clean, flags=re.I)
+    clean = re.sub(r"[?&]utm_[^&]+", "", clean, flags=re.I)
+    clean = clean.replace("?&", "?").rstrip("?&")
+    return clean.rstrip("/").lower()
 
 
 def remove_duplicate_embed_urls_preserve_first(text: str) -> str:
@@ -283,6 +301,7 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
     result.setdefault("policy", {})["paragraph_wrapped_social_urls_rendered_as_gutenberg_embed_blocks"] = True
     result.setdefault("policy", {})["duplicate_trailing_embed_urls_removed_preserve_first"] = True
     result.setdefault("policy", {})["youtube_watch_and_embed_urls_deduped_as_same_video"] = True
+    result.setdefault("policy", {})["v95_7_1_youtube_embed_case_preservation"] = True
     result.setdefault("policy", {})["post_embed_spacing_enforced"] = True
     write_json(ARTIFACT_PUBLISHER_FILE, result)
     write_json(PUBLISHER_STATUS_FILE, result)

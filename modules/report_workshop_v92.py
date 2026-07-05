@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 from agents.gemini_ledger import record_gemini_event
-from urllib.parse import urljoin, urlparse
+from urllib.parse import parse_qs, urljoin, urlparse
 import time
 import base64
 
@@ -444,6 +444,26 @@ def resolve_short_social_url(url: str) -> str:
     return url
 
 
+
+def canonical_youtube_embed_url_preserve_case(raw_url: str) -> str:
+    url = html_lib.unescape((raw_url or "").strip())
+    if not url:
+        return ""
+    parsed = urlparse(url)
+    host = parsed.netloc.lower().replace("www.", "")
+    path = parsed.path.strip("/")
+    video_id = ""
+    if host == "youtu.be":
+        video_id = path.split("/", 1)[0]
+    elif host in {"youtube.com", "youtube-nocookie.com"}:
+        if path.startswith("watch"):
+            video_id = parse_qs(parsed.query).get("v", [""])[0]
+        elif path.startswith(("embed/", "shorts/")):
+            video_id = path.split("/", 1)[1].split("/", 1)[0]
+    if not video_id:
+        return ""
+    return f"https://www.youtube.com/watch?v={video_id}"
+
 def canonical_embed_url(raw_url: str, base_url: str = "") -> str:
     url = normalize_url_for_embed(raw_url, base_url)
     if not url:
@@ -470,9 +490,9 @@ def canonical_embed_url(raw_url: str, base_url: str = "") -> str:
     if "youtube.com/" in low:
         if not any(x in low for x in ["/watch", "/embed/", "/shorts/"]):
             return ""
-        return url
+        return canonical_youtube_embed_url_preserve_case(url) or url
     if "youtu.be/" in low:
-        return url
+        return canonical_youtube_embed_url_preserve_case(url) or url
     if "tiktok.com/" in low:
         if "/video/" not in low and "vm.tiktok.com/" not in low:
             return ""
