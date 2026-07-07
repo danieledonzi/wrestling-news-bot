@@ -37,6 +37,11 @@ PREPUBLISH_RE = re.compile(r"\.prepublish(?:\.[^.]+)?$", re.I)
 SHOW_MARKER_RE = re.compile(r"\b(raw|smackdown|nxt|dynamite|collision|rampage|impact|roh|results?|recap|live coverage|title match|main event|championship|champion|segment|july\s+\d{1,2}|\d{1,2}/\d{1,2})\b", re.I)
 PUBLISHED_STATUSES = {"published", "already_published", "published_file"}
 UNPUBLISHED_STATUSES = {"skipped_approved_articles", "wp_not_ready", "publish_error", "skipped_capacity", "skipped", "error"}
+DUPLICATE_LOSER_RE = re.compile(r"(ai_cross_source_duplicate_arbitration_loser|duplicate_arbitration_loser|duplicate loser)", re.I)
+MAJOR_ANGLE_RE = re.compile(r"\b(title change|new champion|return|returns|attack|injury angle|announced match|main event|championship retention|retains?|wins? (?:the )?title)\b", re.I)
+GENERIC_REPORT_RE = re.compile(r"\b(results?|moments|highlights|recap)\b", re.I)
+REPORT_PUBLICATION_RE = re.compile(r"\b(simone|report[_ -]?show|show[_ -]?report|report publication|simone report|reporto|risultati|results)\b", re.I)
+ITALIAN_MONTHS = {"gennaio": 1, "febbraio": 2, "marzo": 3, "aprile": 4, "maggio": 5, "giugno": 6, "luglio": 7, "agosto": 8, "settembre": 9, "ottobre": 10, "novembre": 11, "dicembre": 12}
 
 @dataclass
 class Trace:
@@ -151,8 +156,11 @@ def in_window(item: dict[str, Any], since: datetime, until: datetime) -> bool:
     dt = parse_dt(first(item, "published", "published_at", "created_at", "generated_at", "mtime_utc"))
     return True if dt is None else since <= dt <= until
 
-def classify(t: Trace, published: bool) -> str:
+def classify(t: Trace, published: bool, duplicate_survivor_found: bool = False) -> str:
     blob = f"{t.title} {t.menzo_reason} {t.article_type} {t.priority_label}".lower()
+    if not published and DUPLICATE_LOSER_RE.search(f"{t.menzo_reason} {t.duplicate_reason}"):
+        t.why.append("duplicate loser; verify survivor coverage")
+        return "correctly_skipped_likely" if duplicate_survivor_found else "duplicate_loser_review"
     if not published and t.andrea_blocked_before_bob:
         t.why.append(f"andrea_blocked_before_bob:{t.andrea_reason or t.andrea_outcome}")
         if t.score is not None and t.score >= 80:
@@ -181,10 +189,11 @@ def classify(t: Trace, published: bool) -> str:
 def extract_published_from_files(since: datetime, until: datetime) -> list[dict[str, Any]]:
     rows=[]
     title_re=re.compile(r"<h1[^>]*>(.*?)</h1>|<title[^>]*>(.*?)</title>", re.I|re.S)
-    trusted_dirs = [(ROOT/"published_html_review", "published_html_review"), (ROOT/"published", "published")]
+    trusted_dirs = [(ROOT/"published_html_review", "published_html_review"), (ROOT/"published", "published"), (ARTIFACTS/"published_html_review", "artifact_published_html_review"), (ARTIFACTS/"published", "artifact_published")]
     for base, source in trusted_dirs:
         if not base.exists(): continue
-        for p in base.iterdir():
+        iterator = base.rglob("*") if base.is_relative_to(ARTIFACTS) else base.iterdir()
+        for p in iterator:
             if not p.is_file() or p.suffix.lower() not in {".html", ".json", ".md"}: continue
             if ".prepublish" in p.name.lower():
                 continue
@@ -215,6 +224,8 @@ def extract_published_from_files(since: datetime, until: datetime) -> list[dict[
             except Exception:
                 continue
             if not isinstance(item, dict):
+                continue
+            if "simone_report_publish" in str(p).lower() or is_report_publication_record(item, str(p)):
                 continue
             status=str(item.get("status") or "").lower()
             has_explicit_publication = (
@@ -349,6 +360,59 @@ def article_matches_report_family(report_text: str, article_text: str) -> bool:
         return False if GENERAL_NON_RAW_RE.search(article_text) else False
     return bool(rfamily and afamily == rfamily)
 
+def report_label(title: str) -> str:
+    if MAJOR_ANGLE_RE.search(title):
+        return "likely_valid_major_angle"
+    if GENERIC_REPORT_RE.search(title):
+        return "possible_report_duplicate"
+    return "likely_valid_major_angle" if HARD_RE.search(title) else "possible_report_duplicate"
+
+def report_show_date(text: str, row: dict[str, Any]) -> str:
+    explicit = parse_dt(first(row, "show_date", "event_date", "episode_date"))
+    if explicit:
+        return explicit.date().isoformat()
+    m = re.search(r"\b(\d{1,2})/(\d{1,2})(?:/(\d{2,4}))?\b", text)
+    if m:
+        month, day = int(m.group(1)), int(m.group(2))
+        year = int(m.group(3)) if m.group(3) else (parse_dt(first(row, "published_at", "generated_at", "created_at")) or utc_now()).year
+        if year < 100:
+            year += 2000
+        try:
+            return datetime(year, month, day, tzinfo=timezone.utc).date().isoformat()
+        except ValueError:
+            pass
+    m = re.search(r"\b(\d{1,2})\s+(?:di\s+)?(" + "|".join(ITALIAN_MONTHS) + r")(?:\s+(\d{4}))?\b", text, re.I)
+    if m:
+        day, month = int(m.group(1)), ITALIAN_MONTHS[m.group(2).lower()]
+        year = int(m.group(3)) if m.group(3) else (parse_dt(first(row, "published_at", "generated_at", "created_at")) or utc_now()).year
+        try:
+            return datetime(year, month, day, tzinfo=timezone.utc).date().isoformat()
+        except ValueError:
+            pass
+    dt = parse_dt(first(row,"published_at","generated_at","created_at"))
+    return dt.date().isoformat() if dt else ""
+
+def report_thread_key(r: dict[str, Any]) -> str:
+    text = str(first(r,"title","show","show_name") or "")
+    fam = show_family(text)
+    day = report_show_date(text, r)
+    if fam and day:
+        return f"{fam}:{day}"
+    if fam:
+        return f"{fam}:{re.sub(r'[^a-z0-9]+', '-', text.lower())[:40]}"
+    return re.sub(r"[^a-z0-9]+", "-", text.lower())[:40]
+
+def dedupe_reports(reports: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    out: dict[str, dict[str, Any]] = {}
+    for r in reports:
+        key = report_thread_key(r)
+        current = out.get(key)
+        is_pub = bool(first(r, "wp_link", "published_url", "final_url")) or str(first(r, "status", "outcome") or "").lower() in PUBLISHED_STATUSES
+        cur_pub = bool(current and (first(current, "wp_link", "published_url", "final_url") or str(first(current, "status", "outcome") or "").lower() in PUBLISHED_STATUSES))
+        if current is None or (is_pub and not cur_pub):
+            out[key] = r
+    return list(out.values())
+
 def report_overlap(pubs: list[dict[str,Any]], reports: list[dict[str,Any]]) -> list[dict[str,Any]]:
     risks=[]
     for r in reports:
@@ -362,9 +426,17 @@ def report_overlap(pubs: list[dict[str,Any]], reports: list[dict[str,Any]]) -> l
             if not article_matches_report_family(report_text, article_text):
                 continue
             if abs(((parse_dt(first(p,"published_at","created_at")) or rt)-rt).total_seconds()) <= 24*3600:
-                cls="likely_valid_major_angle" if HARD_RE.search(title) else "possible_report_duplicate"
+                cls=report_label(title)
                 risks.append({"report":rtitle,"title":title,"classification":cls})
     return risks
+
+
+def is_report_publication_record(item: dict[str, Any], source_hint: str = "") -> bool:
+    if first(item, "source_url", "url"):
+        return False
+    blob = " ".join(str(first(item, key) or item.get(key) or "") for key in ("type", "kind", "category", "article_type", "report_type", "status", "title", "title_it", "show", "show_name", "path", "file", "filename"))
+    blob = f"{source_hint} {blob}"
+    return bool(REPORT_PUBLICATION_RE.search(blob) and (show_family(blob) or "simone" in blob.lower() or "report" in blob.lower()))
 
 def is_published_record(item: dict[str, Any]) -> bool:
     status = str(item.get("status") or "").lower()
@@ -426,7 +498,7 @@ def merge_stage(dest: dict[str, Any], src: dict[str, Any], keys: list[str], pare
                 added += len(rows)
     return added
 
-def collect_window_artifacts(since: datetime, until: datetime, warnings: list[str]) -> tuple[dict[str, Any], bool]:
+def collect_window_artifacts(since: datetime, until: datetime, warnings: list[str]) -> tuple[dict[str, Any], bool, dict[str, Any]]:
     """Aggregate historical per-run newsroom artifacts in the audit window.
 
     Returns a stage bundle plus whether any historical run artifact was found.
@@ -438,10 +510,12 @@ def collect_window_artifacts(since: datetime, until: datetime, warnings: list[st
     roots = [ARTIFACTS / "newsroom_runs", ARTIFACTS / "newsroom", NEWSROOM]
     latest_re = re.compile(r"_latest\.json$", re.I)
     found = False
+    diag = {"historical_files_scanned": 0, "historical_files_inside_window": 0, "merged_by_stage": {k: 0 for k in bundle}}
     for base in roots:
         if not base.exists():
             continue
         for path in base.rglob("*.json"):
+            diag["historical_files_scanned"] += 1
             if not path.is_file() or latest_re.search(path.name):
                 continue
             try:
@@ -454,6 +528,7 @@ def collect_window_artifacts(since: datetime, until: datetime, warnings: list[st
             parent_ok, parent_dt, timestamp_source = file_in_window(path, obj, since, until)
             if not parent_ok:
                 continue
+            diag["historical_files_inside_window"] += 1
             if path.is_relative_to(ARTIFACTS / "newsroom") and timestamp_source != "embedded":
                 # artifacts/newsroom also contains generic diagnostic snapshots;
                 # require an embedded run timestamp there so mtime-only ad-hoc
@@ -476,7 +551,7 @@ def collect_window_artifacts(since: datetime, until: datetime, warnings: list[st
                 merge_stage(bundle["bob"], run_obj, ["articles"], parent_dt)
             if "alfred" in name or any(k in run_obj for k in ["reviews", "approved_articles"]):
                 merge_stage(bundle["alfred"], run_obj, ["reviews", "approved_articles"], parent_dt)
-            if "publisher" in name or any(k in run_obj for k in ["results", "skipped_approved_articles"]):
+            if "simone_report_publish" not in name and ("publisher" in name or any(k in run_obj for k in ["results", "skipped_approved_articles"])):
                 if any(k in run_obj for k in ["results", "skipped_approved_articles"]):
                     if timestamp_source == "embedded":
                         merge_stage(bundle["publisher"], run_obj, ["results", "skipped_approved_articles"], parent_dt)
@@ -492,15 +567,18 @@ def collect_window_artifacts(since: datetime, until: datetime, warnings: list[st
                 merge_stage(bundle["simpub"], run_obj, ["results", "published_reports", "reports"], parent_dt)
             elif "simone" in name or any(k in run_obj for k in ["reports", "report_candidates"]):
                 merge_stage(bundle["simone"], run_obj, ["reports", "report_candidates"], parent_dt)
-            if useful_stage_count(bundle) > before_count:
+            after_count = useful_stage_count(bundle)
+            if after_count > before_count:
                 found = True
-    return bundle, found
+                for stage in bundle:
+                    diag["merged_by_stage"][stage] = sum(len(v) for v in bundle[stage].values() if isinstance(v, list))
+    return bundle, found, diag
 
 def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
     global ROOT, STATE, NEWSROOM, ARTIFACTS
     ROOT=root; STATE=root/"state"; NEWSROOM=STATE/"newsroom"; ARTIFACTS=root/"artifacts"
     until=utc_now(); since=until-timedelta(hours=hours); warnings=[]
-    historical, has_historical = collect_window_artifacts(since, until, warnings)
+    historical, has_historical, hist_diag = collect_window_artifacts(since, until, warnings)
     mode = "historical_window" if has_historical else "latest_snapshot_fallback"
     if has_historical:
         massy=historical["massy"]; menzo=historical["menzo"]; bob=historical["bob"]; andrea=historical["andrea"]
@@ -515,6 +593,12 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
         publisher=load_json(NEWSROOM/"publisher_status_latest.json", warnings, {})
         simone=load_json(NEWSROOM/"simone_reports_latest.json", warnings, {})
         simpub=load_json(NEWSROOM/"simone_report_publish_latest.json", warnings, {})
+        simone_dt = embedded_dt(simone)
+        simpub_dt = embedded_dt(simpub)
+        if simone_dt:
+            simone = {**simone, **{key: [row_with_parent_timestamp(x, simone_dt) for x in val] for key, val in simone.items() if isinstance(val, list)}}
+        if simpub_dt:
+            simpub = {**simpub, **{key: [row_with_parent_timestamp(x, simpub_dt) for x in val] for key, val in simpub.items() if isinstance(val, list)}}
     for extra in ["archivista_report_latest.json","gemini_call_ledger.jsonl","report_publication_registry.json"]:
         if not (NEWSROOM/extra).exists(): warnings.append(f"missing_input: state/newsroom/{extra}")
     for extra in ["manual_runs.json","report_status.json"]:
@@ -560,16 +644,29 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
         art=rev.get("approved_article") if isinstance(rev.get("approved_article"),dict) else rev
         u=norm_url(first(art,"source_url","url"));
         if u in traces: traces[u].alfred_outcome=str(rev.get("decision") or "approved")
-    publisher_records=[{**item, "_pub_source":"publisher"} for item in iter_items(publisher,["results","skipped_approved_articles"])]
+    publisher_records=[{**item, "_pub_source":"publisher"} for item in iter_items(publisher,["results","skipped_approved_articles"]) if not is_report_publication_record(item, "publisher")]
     file_pubs=extract_published_from_files(since,until)
+    file_pubs=[item for item in file_pubs if not is_report_publication_record(item, str(first(item, "_pub_source", "path")))]
     all_pub_candidates=publisher_records+file_pubs
+    publisher_before=sum(1 for item in publisher_records if is_published_record(item))
+    publisher_after=len(dedupe_published_records(publisher_records))
+    file_before=sum(1 for item in file_pubs if is_published_record(item))
+    file_after=len(dedupe_published_records(file_pubs))
     published_records=dedupe_published_records(all_pub_candidates)
     published_urls, published_by_url, published_by_slug = build_published_indexes(published_records)
     for it in all_pub_candidates:
         u=norm_url(first(it,"source_url","url"));
+        if not u and is_published_record(it):
+            slug = record_slug(it) or canonical_slug(first(it,"title_it","title","source_title") or first(it,"path","file","filename"))
+            existing_key = ""
+            for trace_key, trace in traces.items():
+                if slug and canonical_slug(trace.final_title or trace.title) == slug:
+                    existing_key = trace_key
+                    break
+            u = existing_key or f"published-artifact:{slug or len(traces)}"
         if u:
             t=traces.setdefault(u, Trace(url=u, title=str(first(it,"title_it","title") or "")))
-            t.publisher_outcome=str(it.get("status") or ""); t.final_title=str(first(it,"title_it","title") or t.title); t.final_url=str(first(it,"wp_link","url","path") or "")
+            t.publisher_outcome=str(it.get("status") or "published_file"); t.final_title=str(first(it,"title_it","title") or t.title); t.final_url=str(first(it,"wp_link","published_url","final_url","path") or "")
     for t in traces.values():
         matched_trace = published_by_url.get(t.url)
         if not matched_trace:
@@ -590,34 +687,46 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
         elif t.kind_hint=="report_candidate": t.trace_status="report_candidate"
         elif re.search("already", f"{t.kind_hint} {t.menzo_reason} {t.massy_decision} {t.massy_reason}", re.I): t.trace_status="already_seen"
         else: t.trace_status="unknown"
-        t.recall_class=classify(t,published)
+        survivor = False
+        if DUPLICATE_LOSER_RE.search(f"{t.menzo_reason} {t.duplicate_reason}"):
+            survivor = bool(t.duplicate_reason and (norm_url(t.duplicate_reason) in published_urls or canonical_slug(t.duplicate_reason) in published_by_slug))
+            if not survivor:
+                tt = tokens(t.title)
+                survivor = any(len(tt & tokens(str(first(p,"title_it","title","source_title") or ""))) >= 2 for p in published_records)
+        t.recall_class=classify(t,published,survivor)
     trace_list=sorted(traces.values(), key=lambda x:(x.trace_status,x.source,x.title))
     missed=[t for t in trace_list if t.trace_status!="published" and t.recall_class in {"must_publish_candidate","should_publish_candidate"}]
     soft=[t for t in trace_list if t.trace_status=="published" and t.recall_class=="optional_soft"]
     over=overcoverage(published_records)
-    reports=iter_items(simone,["reports","report_candidates"])+iter_items(simpub,["results","published_reports","reports"])
+    reports=dedupe_reports(iter_items(simone,["reports","report_candidates"])+iter_items(simpub,["results","published_reports","reports"]))
     overlaps=report_overlap(published_records,reports)
     def c(status): return sum(1 for t in trace_list if t.trace_status==status)
     lines=[f"# OWTV Feed Coverage Editorial Recall Audit v95.8", "", f"Artifact marker: `{MARKER}`", f"Window: {hours}h ({since.isoformat()} → {until.isoformat()} UTC)", f"mode: {mode}", "", "## 1. Executive summary", "", f"- Feed URLs seen: {len(trace_list)}", f"- Feed URLs with Menzo decision: {sum(1 for t in trace_list if t.menzo_decision)}", f"- Feed URLs published: {c('published')}", f"- Feed URLs skipped: {c('skipped')}", f"- Feed URLs pending: {c('pending')}", f"- Feed URLs unknown/untracked: {c('unknown')}", f"- Potential must-publish missed: {sum(1 for t in missed if t.recall_class=='must_publish_candidate')}", f"- Potential should-publish missed: {sum(1 for t in missed if t.recall_class=='should_publish_candidate')}", f"- Potential overpublished soft items: {len(soft)}", f"- Potential story-thread overcoverage: {len(over)}", f"- Post-show/report overlap risks: {len(overlaps)}", "", "## 2. Coverage funnel", "", "| Stage | Count |", "|---|---:|", f"| Massy feed URLs | {len(trace_list)} |", f"| Menzo evaluated | {sum(1 for t in trace_list if t.menzo_decision)} |", f"| Menzo selected | {sum(1 for t in trace_list if t.menzo_decision=='selected')} |", f"| Menzo pending | {sum(1 for t in trace_list if t.menzo_decision=='pending')} |", f"| Menzo skipped | {sum(1 for t in trace_list if t.menzo_decision=='skip')} |", f"| Andrea checked/passed/blocked | n/a / {sum(1 for t in trace_list if t.andrea_outcome=='passed')} / {sum(1 for t in trace_list if t.andrea_outcome=='blocked')} |", f"| Bob generated | {sum(1 for t in trace_list if t.bob_outcome)} |", f"| Alfred approved/warnings/blockers | {sum(1 for t in trace_list if t.alfred_outcome=='approved')} / n/a / n/a |", f"| Publisher published/already/errors | {sum(1 for t in trace_list if t.publisher_outcome=='published')} / {sum(1 for t in trace_list if t.publisher_outcome=='already_published')} / {sum(1 for t in trace_list if 'error' in t.publisher_outcome)} |", f"| Final published | {c('published')} |", ""]
-    lines += ["## 3. Feed URL trace table", "", "| source | source_title | source_url | feed published_at | Massy disposition/reason/score | Menzo decision | Menzo reason | score | priority | article_type | duplicate/story | Andrea outcome/reason | Bob | Alfred | Publisher | final title/url | trace_status | editorial_recall_class |", "|---|---|---|---|---|---|---|---:|---|---|---|---|---|---|---|---|---|---|"]
+    lines += ["## 3. Historical artifact discovery diagnostics", "", "| Diagnostic | Count |", "|---|---:|", f"| Historical files scanned | {hist_diag['historical_files_scanned']} |", f"| Historical files inside window | {hist_diag['historical_files_inside_window']} |"]
+    for label, key in [("Massy", "massy"), ("Menzo", "menzo"), ("Andrea", "andrea"), ("Bob", "bob"), ("Alfred", "alfred"), ("Publisher", "publisher"), ("Simone", "simone"), ("Simone publish", "simpub")]:
+        lines.append(f"| Useful {label} records merged | {hist_diag['merged_by_stage'].get(key, 0)} |")
+    lines += [f"| Publisher published records before dedupe | {publisher_before} |", f"| Publisher published records after dedupe | {publisher_after} |", f"| Published file artifacts before dedupe | {file_before} |", f"| Published file artifacts after dedupe | {file_after} |", ""]
+    lines += ["## 4. Feed URL trace table", "", "| source | source_title | source_url | feed published_at | Massy disposition/reason/score | Menzo decision | Menzo reason | score | priority | article_type | duplicate/story | Andrea outcome/reason | Bob | Alfred | Publisher | final title/url | trace_status | editorial_recall_class |", "|---|---|---|---|---|---|---|---:|---|---|---|---|---|---|---|---|---|---|"]
     for t in trace_list:
         esc=lambda s: str(s or "").replace("|","/")[:180]
         massy_cell = "/".join(x for x in [t.massy_decision or t.kind_hint, t.massy_reason, t.score_hint] if x)
         andrea_cell = "/".join(x for x in [t.andrea_outcome, t.andrea_reason] if x)
         lines.append(f"| {esc(t.source)} | {esc(t.title)} | {esc(t.url)} | {esc(t.published_at)} | {esc(massy_cell)} | {esc(t.menzo_decision)} | {esc(t.menzo_reason)} | {t.score if t.score is not None else ''} | {esc(t.priority_label)} | {esc(t.article_type)} | {esc(t.duplicate_reason)} | {esc(andrea_cell)} | {esc(t.bob_outcome)} | {esc(t.alfred_outcome)} | {esc(t.publisher_outcome)} | {esc(t.final_title or t.final_url)} | {t.trace_status} | {t.recall_class} |")
-    lines += ["", "## 4. Potential missed stories", ""] + ([f"- **{t.title or t.url}** ({t.source}) — {t.url} — potential_miss: {', '.join(t.why) or 'review signal'}; skipped/trace reason: {t.menzo_reason or t.trace_status}; suggested human action: {'check_policy' if 'duplicate' in t.menzo_reason else 'review'}" for t in missed] or ["- None detected."])
-    lines += ["", "## 5. Potential overpublished soft items", ""] + ([f"- **{t.final_title or t.title}** — possible_overpublished_soft_item: {', '.join(t.why)} — {t.url}" for t in soft] or ["- None detected."])
-    lines += ["", "## 6. Story thread overcoverage", ""] + ([f"- **{r['label']}** ({r['count']} published) — {r['reason']}; titles: " + "; ".join(str(first(i,'title_it','title','source_title')) for i in r['items']) for r in over] or ["- None detected by fallback grouping; latest story cluster audit, if present, should be reviewed separately."])
-    lines += ["", "## 7. Report/post-show overlap", ""] + ([f"- Report `{o['report']}` vs `{o['title']}` — {o['classification']}" for o in overlaps] or ["- None detected."])
-    lines += ["", "## 8. Source coverage", "", "| source | seen | published | skipped | pending | unknown | publish rate | possible missed high-value |", "|---|---:|---:|---:|---:|---:|---:|---:|"]
+    dup_rows=[t for t in trace_list if DUPLICATE_LOSER_RE.search(f"{t.menzo_reason} {t.duplicate_reason}")]
+    lines += ["", "### Duplicate loser review notes", ""] + ([f"- {t.recall_class}: {t.title} — {t.url}; duplicate loser; verify survivor coverage; suggested human action: check_survivor" for t in dup_rows] or ["- None."])
+    lines += ["", "## 5. Potential missed stories", ""] + ([f"- **{t.title or t.url}** ({t.source}) — {t.url} — potential_miss: {', '.join(t.why) or 'review signal'}; skipped/trace reason: {t.menzo_reason or t.trace_status}; suggested human action: {'check_survivor' if DUPLICATE_LOSER_RE.search(t.menzo_reason) else ('check_policy' if 'duplicate' in t.menzo_reason else 'review')}" for t in missed] or ["- None detected."])
+    lines += ["", "## 6. Potential overpublished soft items", ""] + ([f"- **{t.final_title or t.title}** — possible_overpublished_soft_item: {', '.join(t.why)} — {t.url}" for t in soft] or ["- None detected."])
+    lines += ["", "## 7. Story thread overcoverage", ""] + ([f"- **{r['label']}** ({r['count']} published) — {r['reason']}; titles: " + "; ".join(str(first(i,'title_it','title','source_title')) for i in r['items']) for r in over] or ["- None detected by fallback grouping; latest story cluster audit, if present, should be reviewed separately."])
+    lines += ["", "## 8. Report/post-show overlap", ""] + ([f"- Report `{o['report']}` vs `{o['title']}` — {o['classification']}" for o in overlaps] or ["- None detected."])
+    lines += ["", "## 9. Source coverage", "", "| source | seen | published | skipped | pending | unknown | publish rate | possible missed high-value |", "|---|---:|---:|---:|---:|---:|---:|---:|"]
     for src in sorted({t.source or 'unknown' for t in trace_list}):
         rows=[t for t in trace_list if (t.source or 'unknown')==src]; pub=sum(1 for t in rows if t.trace_status=='published')
         lines.append(f"| {src} | {len(rows)} | {pub} | {sum(1 for t in rows if t.trace_status=='skipped')} | {sum(1 for t in rows if t.trace_status=='pending')} | {sum(1 for t in rows if t.trace_status=='unknown')} | {pub/len(rows):.0%} | {sum(1 for t in rows if t in missed)} |")
-    lines += ["", "## 9. Category/type coverage", "", "| type/category | count |", "|---|---:|"]
+    lines += ["", "## 10. Category/type coverage", "", "| type/category | count |", "|---|---:|"]
     for typ in sorted({(t.article_type or ('report' if t.trace_status=='report_candidate' else 'unknown')) for t in trace_list}): lines.append(f"| {typ} | {sum(1 for t in trace_list if (t.article_type or ('report' if t.trace_status=='report_candidate' else 'unknown'))==typ)} |")
-    lines += ["", "## 10. Human review samples", "", "### Top skipped candidates to review"] + ([f"- {t.recall_class}: {t.title} — {t.url}" for t in missed[:5]] or ["- None."])
+    lines += ["", "## 11. Human review samples", "", "### Top skipped candidates to review"] + ([f"- {t.recall_class}: {t.title} — {t.url}" for t in missed[:5]] or ["- None."])
     published_samples = soft[:5] or [t for t in trace_list if t.trace_status=="published"][:5]
-    lines += ["", "### Top published candidates to quality-check"] + ([f"- {t.recall_class}: {t.final_title or t.title} — {t.url}" for t in published_samples] or ["- None."])
+    lines += ["", "### Top published candidates to quality-check"] + ([f"- {t.recall_class}: {t.final_title or t.title} — {t.url or 'source_url_unavailable'}" for t in published_samples] or ["- None."])
     lines += ["", "### Top overcoverage candidates"] + ([f"- {r['label']} ({r['count']})" for r in over[:5]] or ["- None."])
     lines += ["", "### Top unknown/untracked URLs"] + ([f"- {t.title} — {t.url}" for t in trace_list if t.trace_status=='unknown'][:5] or ["- None."])
     lines += ["", "## Input warnings", ""] + ([f"- {w}" for w in warnings] or ["- None."])
