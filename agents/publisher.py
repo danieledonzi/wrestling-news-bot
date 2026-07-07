@@ -17,15 +17,18 @@ ROOT = Path(__file__).resolve().parents[1]
 STATE_DIR = ROOT / "state"
 NEWSROOM_STATE_DIR = STATE_DIR / "newsroom"
 ARTIFACT_DIR = ROOT / "artifacts" / "newsroom"
+PUBLISHED_TRACE_DIR = ROOT / "artifacts" / "published_traces"
 PUBLISHED_DIR = ROOT / "published"
 REVIEW_DIR = ROOT / "published_html_review"
 
 ALFRED_REVIEW_FILE = NEWSROOM_STATE_DIR / "alfred_review_latest.json"
+BOB_ARTICLES_FILE = NEWSROOM_STATE_DIR / "bob_articles_latest.json"
+MENZO_DECISIONS_FILE = NEWSROOM_STATE_DIR / "menzo_decisions_latest.json"
 PUBLISHER_STATUS_FILE = NEWSROOM_STATE_DIR / "publisher_status_latest.json"
 PUBLISHER_HISTORY_FILE = NEWSROOM_STATE_DIR / "publisher_history.json"
 ARTIFACT_PUBLISHER_FILE = ARTIFACT_DIR / "publisher_result.json"
 
-PUBLISHER_VERSION = "v94_10_1_internal_media_preserve_author_filter_clean"
+PUBLISHER_VERSION = "v95_8_6_published_trace_metadata"
 REQUEST_TIMEOUT = int(os.getenv("V93_PUBLISHER_TIMEOUT", "25"))
 MAX_POSTS_PER_RUN = int(os.getenv("V93_PUBLISHER_MAX_POSTS_PER_RUN", os.getenv("V93_BOB_MAX_ARTICLES_PER_RUN", "5")))
 POST_STATUS = os.getenv("V93_PUBLISHER_POST_STATUS", "publish").strip() or "publish"
@@ -342,6 +345,146 @@ def append_source(content: str, source: str, url: str) -> str:
     return content + f'\n<p class="owtv-source-attribution"><em>Fonte: <a href="{href}" target="_blank" rel="nofollow noopener">{label}</a>.</em></p>'
 
 
+def metadata_first(item: dict[str, Any], *keys: str) -> Any:
+    for key in keys:
+        value = item.get(key)
+        if value not in (None, ""):
+            return value
+    return ""
+
+
+def merge_trace_metadata(target: dict[str, Any], source: dict[str, Any]) -> None:
+    mapping = {
+        "score": ("score", "menzo_score", "native_score", "deterministic_score", "ai_priority"),
+        "priority": ("priority", "priority_label", "ai_priority_label"),
+        "article_type": ("article_type",),
+        "menzo_decision": ("menzo_decision", "decision"),
+        "menzo_reason": ("menzo_reason", "reason", "editorial_reason", "ai_editorial_reason"),
+        "feed_published_at": ("feed_published_at", "published", "published_at"),
+        "run_id": ("run_id",),
+        "pipeline_version": ("pipeline_version", "version"),
+    }
+    for out_key, keys in mapping.items():
+        if target.get(out_key) not in (None, ""):
+            continue
+        value = metadata_first(source, *keys)
+        if value not in (None, ""):
+            target[out_key] = value
+
+
+def iter_stage_items(obj: Any, keys: list[str]) -> list[dict[str, Any]]:
+    if isinstance(obj, list):
+        return [x for x in obj if isinstance(x, dict)]
+    if not isinstance(obj, dict):
+        return []
+    out: list[dict[str, Any]] = []
+    for key in keys:
+        value = obj.get(key)
+        if isinstance(value, list):
+            out.extend(x for x in value if isinstance(x, dict))
+    return out
+
+
+def build_trace_metadata_index(alfred: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    index: dict[str, dict[str, Any]] = {}
+    menzo = load_json(MENZO_DECISIONS_FILE, {})
+    bob = load_json(BOB_ARTICLES_FILE, {})
+    for item in iter_stage_items(menzo, ["selected", "skipped", "pending", "items", "results"]):
+        key = source_key(str(item.get("source_url") or item.get("url") or ""))
+        if not key:
+            continue
+        meta = index.setdefault(key, {})
+        merge_trace_metadata(meta, item)
+    for item in iter_stage_items(bob, ["articles", "results"]):
+        key = source_key(str(item.get("source_url") or item.get("url") or ""))
+        if not key:
+            continue
+        meta = index.setdefault(key, {})
+        merge_trace_metadata(meta, item)
+        status = item.get("bob_status") or item.get("status")
+        if status not in (None, "") and meta.get("bob_status") in (None, ""):
+            meta["bob_status"] = status
+    for review in iter_stage_items(alfred, ["reviews"]):
+        key = source_key(str(review.get("source_url") or review.get("url") or ""))
+        if not key and isinstance(review.get("approved_article"), dict):
+            key = source_key(str(review["approved_article"].get("source_url") or review["approved_article"].get("url") or ""))
+        if not key:
+            continue
+        meta = index.setdefault(key, {})
+        decision = review.get("decision")
+        if decision not in (None, "") and meta.get("alfred_status") in (None, ""):
+            meta["alfred_status"] = decision
+    return index
+
+
+def enrich_article_trace_metadata(article: dict[str, Any], metadata_index: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    key = source_key(str(article.get("source_url") or article.get("url") or ""))
+    indexed = metadata_index.get(key, {}) if key else {}
+    existing = article.get("trace_metadata") if isinstance(article.get("trace_metadata"), dict) else {}
+    if not indexed and not existing:
+        return article
+    enriched = dict(article)
+    enriched["trace_metadata"] = {**indexed, **existing}
+    return enriched
+
+def article_first(article: dict[str, Any], *keys: str) -> Any:
+    meta = article.get("meta") if isinstance(article.get("meta"), dict) else {}
+    for key in keys:
+        value = article.get(key)
+        if value not in (None, ""):
+            return value
+        value = meta.get(key)
+        if value not in (None, ""):
+            return value
+    return ""
+
+
+def trace_first(article: dict[str, Any], *keys: str) -> Any:
+    trace_metadata = article.get("trace_metadata") if isinstance(article.get("trace_metadata"), dict) else {}
+    for key in keys:
+        value = trace_metadata.get(key)
+        if value not in (None, ""):
+            return value
+    return article_first(article, *keys)
+
+
+def write_published_trace(article: dict[str, Any], result: dict[str, Any], slug: str, published_at: str) -> None:
+    trace = {
+        "artifact_marker": "owtv_published_trace_v1",
+        "published_at": published_at,
+        "owtv_title": result.get("title_it") or article_first(article, "title_it", "title"),
+        "owtv_url": result.get("wp_link") or result.get("published_url") or result.get("final_url") or "",
+        "slug": slug,
+        "source": article_first(article, "source", "source_id", "feed"),
+        "source_url": article_first(article, "source_url", "url"),
+        "source_title": article_first(article, "source_title", "title", "original_title"),
+        "publisher_status": result.get("status") or "published",
+        "recovery_method": "published_trace",
+    }
+    optional_map = {
+        "wp_post_id": (result.get("wp_post_id"),),
+        "feed_published_at": ("feed_published_at", "published", "published_at"),
+        "score": ("score", "ai_priority", "deterministic_score"),
+        "priority": ("priority", "priority_label", "ai_priority_label"),
+        "article_type": ("article_type",),
+        "menzo_decision": ("menzo_decision", "decision"),
+        "menzo_reason": ("menzo_reason", "reason", "editorial_reason", "ai_editorial_reason"),
+        "bob_status": ("bob_status",),
+        "alfred_status": ("alfred_status", "alfred_decision", "decision"),
+        "run_id": ("run_id",),
+        "pipeline_version": ("pipeline_version", "version"),
+    }
+    for key, candidates in optional_map.items():
+        if key == "wp_post_id":
+            value = candidates[0]
+        else:
+            value = trace_first(article, *candidates)
+        if value not in (None, ""):
+            trace[key] = value
+    PUBLISHED_TRACE_DIR.mkdir(parents=True, exist_ok=True)
+    write_json(PUBLISHED_TRACE_DIR / f"{slug}.published_trace.json", trace)
+
+
 def candidate_featured_image(article: dict[str, Any]) -> str:
     meta = article.get("meta", {}) if isinstance(article.get("meta"), dict) else {}
     featured = str(meta.get("featured_image") or "").strip()
@@ -460,10 +603,16 @@ def publish_article(article: dict[str, Any], history: dict[str, Any], wp_ok: boo
     data = res.json()
     post_id = int(data.get("id"))
     post_link = data.get("link") or ""
-    history[key] = {"source_url": url, "title_it": title, "wp_post_id": post_id, "wp_link": post_link, "published_at": utc_now(), "status": POST_STATUS, "source": source, "story_signature": story_signature(article)}
+    published_at = utc_now()
+    history[key] = {"source_url": url, "title_it": title, "wp_post_id": post_id, "wp_link": post_link, "published_at": published_at, "status": POST_STATUS, "source": source, "story_signature": story_signature(article)}
     PUBLISHED_DIR.mkdir(parents=True, exist_ok=True)
     (PUBLISHED_DIR / f"v93_news_{review_slug}.html").write_text(content, encoding="utf-8")
-    return {"source_url": url, "title_it": title, "status": "published", "wp_post_id": post_id, "wp_link": post_link, "featured_media": media_id, "categories": categories}
+    result = {"source_url": url, "title_it": title, "status": "published", "wp_post_id": post_id, "wp_link": post_link, "featured_media": media_id, "categories": categories}
+    try:
+        write_published_trace(article, result, review_slug, published_at)
+    except Exception as exc:
+        print(f"[PUBLISHER v95.8.6] Warning: published trace write failed for {url}: {exc}", flush=True)
+    return result
 
 
 def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]:
@@ -472,6 +621,8 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
     if not isinstance(all_articles, list):
         all_articles = []
     valid_articles = [article for article in all_articles if isinstance(article, dict)]
+    trace_metadata_index = build_trace_metadata_index(alfred if isinstance(alfred, dict) else {})
+    valid_articles = [enrich_article_trace_metadata(article, trace_metadata_index) for article in valid_articles]
     approved_total = len(valid_articles)
     articles = valid_articles[:MAX_POSTS_PER_RUN]
     overflow_articles = valid_articles[MAX_POSTS_PER_RUN:]
