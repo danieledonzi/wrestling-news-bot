@@ -125,7 +125,7 @@ def test_report_overlap_ignores_unpublished_publisher_records(tmp_path, monkeypa
     write(ns / "simone_reports_latest.json", {"reports": [{"title":"WWE Raw report"}]})
     text = run(tmp_path, monkeypatch)
     assert "- Post-show/report overlap risks: 0" in text
-    assert "## 7. Report/post-show overlap\n\n- None detected." in text
+    assert "## 8. Report/post-show overlap\n\n- None detected." in text
 
 
 def test_pipeline_artifact_variants_collapse_to_one_published_item(tmp_path, monkeypatch):
@@ -455,3 +455,94 @@ def test_tna_impact_report_overlaps_impact_result_article(tmp_path, monkeypatch)
     text = run(tmp_path, monkeypatch)
     assert "- Post-show/report overlap risks: 1" in text
     assert "TNA Impact results new champion wins title" in text
+
+
+def test_duplicate_arbitration_loser_with_related_published_survivor_is_not_potential_miss(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    loser = {"source":"Fightful", "title":"WWE Raw new champion wins title", "url":"https://e.test/loser"}
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": [loser]})
+    write(ns / "menzo_decisions_latest.json", {"selected": [], "skipped": [
+        {**loser, "decision":"skip", "score":92, "priority":"hard", "article_type":"title", "reason":"ai_cross_source_duplicate_arbitration_loser"}
+    ], "pending": []})
+    write(ns / "publisher_status_latest.json", {"results": [
+        {"source_url":"https://e.test/survivor", "title_it":"WWE Raw new champion wins title", "status":"published"}
+    ]})
+    text = run(tmp_path, monkeypatch)
+    assert "- Potential must-publish missed: 0" in text
+    assert "duplicate loser; verify survivor coverage" in text
+    assert "must_publish_candidate" not in text
+
+
+def test_duplicate_arbitration_loser_without_known_survivor_is_review_not_must_publish(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    loser = {"source":"Fightful", "title":"WWE Raw new champion wins title", "url":"https://e.test/loser"}
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": [loser]})
+    write(ns / "menzo_decisions_latest.json", {"selected": [], "skipped": [
+        {**loser, "decision":"skip", "score":92, "priority":"hard", "article_type":"title", "reason":"duplicate_arbitration_loser"}
+    ], "pending": []})
+    write(ns / "publisher_status_latest.json", {"results": []})
+    text = run(tmp_path, monkeypatch)
+    assert "duplicate_loser_review" in text
+    assert "- Potential must-publish missed: 0" in text
+    assert "potential_miss" not in text
+
+
+def test_published_html_without_source_url_counts_in_final_published(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": []})
+    write(ns / "menzo_decisions_latest.json", {"selected": [], "skipped": [], "pending": []})
+    write(ns / "publisher_status_latest.json", {"results": []})
+    artifact = tmp_path / "published_html_review" / "v93_news_orphan-published.html"
+    artifact.parent.mkdir(parents=True, exist_ok=True)
+    artifact.write_text("<html><title>Orphan published item</title></html>", encoding="utf-8")
+    text = run(tmp_path, monkeypatch)
+    assert "| Final published | 1 |" in text
+    assert "Orphan published item" in text
+
+
+def test_report_candidate_and_simone_published_report_collapse_to_one_overlap_source(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": []})
+    write(ns / "menzo_decisions_latest.json", {"selected": [], "skipped": [], "pending": []})
+    write(ns / "publisher_status_latest.json", {"results": [
+        {"source_url":"https://e.test/raw", "title_it":"WWE Raw results highlights", "status":"published"}
+    ]})
+    write(ns / "simone_reports_latest.json", {"reports": [{"title":"WWE Raw results July 6", "generated_at": audit.utc_now().isoformat()}]})
+    write(ns / "simone_report_publish_latest.json", {"results": [{"title":"WWE Raw results July 6", "status":"published", "wp_link":"https://owtv.test/raw-report", "published_at": audit.utc_now().isoformat()}]})
+    text = run(tmp_path, monkeypatch)
+    assert "- Post-show/report overlap risks: 1" in text
+
+
+def test_raw_title_change_article_labeled_likely_valid_major_angle(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": []})
+    write(ns / "menzo_decisions_latest.json", {"selected": [], "skipped": [], "pending": []})
+    write(ns / "publisher_status_latest.json", {"results": [
+        {"source_url":"https://e.test/raw-title", "title_it":"WWE Raw title change crowns new champion", "status":"published"}
+    ]})
+    write(ns / "simone_reports_latest.json", {"reports": [{"title":"WWE Raw results July 6"}]})
+    text = run(tmp_path, monkeypatch)
+    assert "likely_valid_major_angle" in text
+    assert "WWE Raw title change crowns new champion` — possible_report_duplicate" not in text
+
+
+def test_diagnostics_show_stage_file_counts_and_merged_record_counts(tmp_path, monkeypatch):
+    runs = tmp_path / "artifacts" / "newsroom_runs"
+    write(runs / "run1" / "massy_board.json", {"news_candidates_for_menzo": [
+        {"source":"Fightful", "title":"Diagnostic item", "url":"https://e.test/diag"}
+    ]})
+    write(runs / "run1" / "publisher_status.json", {"generated_at": audit.utc_now().isoformat(), "results": [
+        {"source_url":"https://e.test/diag", "title_it":"Diagnostic item", "status":"published"}
+    ]})
+    text = run(tmp_path, monkeypatch)
+    assert "Historical artifact discovery diagnostics" in text
+    assert "| Historical files scanned |" in text
+    assert "| Historical files inside window |" in text
+    assert "| Useful Massy records merged | 1 |" in text
+    assert "| Useful Publisher records merged | 1 |" in text
+    assert "| Publisher published records before dedupe | 1 |" in text
