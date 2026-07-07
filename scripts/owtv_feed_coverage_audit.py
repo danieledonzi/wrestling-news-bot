@@ -35,7 +35,7 @@ STOP = {"the","and","for","with","from","this","that","after","before","wwe","ae
 ARTIFACT_PREFIX_RE = re.compile(r"^(?:v\d+[_-])?(?:news|publisher)[_-]", re.I)
 PREPUBLISH_RE = re.compile(r"\.prepublish(?:\.[^.]+)?$", re.I)
 SHOW_MARKER_RE = re.compile(r"\b(raw|smackdown|nxt|dynamite|collision|rampage|impact|roh|results?|recap|live coverage|title match|main event|championship|champion|segment|july\s+\d{1,2}|\d{1,2}/\d{1,2})\b", re.I)
-PUBLISHED_STATUSES = {"published", "already_published", "published_file"}
+PUBLISHED_STATUSES = {"published", "already_published", "published_file", "published_trace"}
 UNPUBLISHED_STATUSES = {"skipped_approved_articles", "wp_not_ready", "publish_error", "skipped_capacity", "skipped", "error"}
 DUPLICATE_LOSER_RE = re.compile(r"(ai_cross_source_duplicate_arbitration_loser|duplicate_arbitration_loser|duplicate loser)", re.I)
 GENERIC_RECAP_DUPLICATE_RE = re.compile(
@@ -197,6 +197,33 @@ def classify(t: Trace, published: bool, duplicate_survivor_found: bool = False) 
         t.why.append("skip_reason_looks_expected"); return "correctly_skipped_likely"
     return "unknown"
 
+def extract_published_traces(since: datetime, until: datetime) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    base = ARTIFACTS / "published_traces"
+    if not base.exists():
+        return rows
+    for p in base.glob("*.published_trace.json"):
+        if not p.is_file():
+            continue
+        try:
+            item = json.loads(p.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if not isinstance(item, dict) or item.get("artifact_marker") != "owtv_published_trace_v1":
+            continue
+        if is_report_publication_record(item, str(p)) and item.get("artifact_marker") != "owtv_report_trace_v1":
+            continue
+        check = dict(item)
+        check.setdefault("published_at", datetime.fromtimestamp(p.stat().st_mtime, timezone.utc).isoformat())
+        if not in_window(check, since, until):
+            continue
+        check.setdefault("status", "published_trace")
+        check.setdefault("path", str(p))
+        check.setdefault("slug", canonical_slug(check.get("slug") or p.name))
+        check["_pub_source"] = "published_trace"
+        rows.append(check)
+    return rows
+
 def extract_published_from_files(since: datetime, until: datetime) -> list[dict[str, Any]]:
     rows=[]
     title_re=re.compile(r"<h1[^>]*>(.*?)</h1>|<title[^>]*>(.*?)</title>", re.I|re.S)
@@ -225,7 +252,7 @@ def extract_published_from_files(since: datetime, until: datetime) -> list[dict[
     # that explicitly looks like a final publication record.
     if ARTIFACTS.exists():
         for p in ARTIFACTS.rglob("*.json"):
-            if not p.is_file() or ".prepublish" in p.name.lower():
+            if not p.is_file() or ".prepublish" in p.name.lower() or p.name.endswith(".published_trace.json"):
                 continue
             mt=datetime.fromtimestamp(p.stat().st_mtime, timezone.utc)
             if mt < since or mt > until:
@@ -257,6 +284,8 @@ def extract_published_from_files(since: datetime, until: datetime) -> list[dict[
 def record_priority(item: dict[str, Any]) -> int:
     source = str(item.get("_pub_source") or "")
     status = str(item.get("status") or "").lower()
+    if source == "published_trace":
+        return 4
     if source == "publisher" or (status in {"published", "already_published"} and first(item, "source_url", "wp_link", "published_url", "final_url")):
         return 3
     if source == "published_html_review":
@@ -328,6 +357,8 @@ def url_is_monitored(value: Any) -> bool:
 
 def published_recovery_method(item: dict[str, Any]) -> str:
     src = str(item.get("_pub_source") or "")
+    if src == "published_trace" or item.get("artifact_marker") == "owtv_published_trace_v1":
+        return "published_trace"
     if src == "publisher":
         return "publisher_record"
     if src.startswith("published") or src.startswith("artifact_published"):
@@ -802,11 +833,14 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
         u=norm_url(first(art,"source_url","url"));
         if u in traces: traces[u].alfred_outcome=str(rev.get("decision") or "approved")
     publisher_records=[{**item, "_pub_source":"publisher"} for item in iter_items(publisher,["results","skipped_approved_articles"]) if not is_report_publication_record(item, "publisher")]
+    trace_pubs=extract_published_traces(since,until)
     file_pubs=extract_published_from_files(since,until)
     file_pubs=[item for item in file_pubs if not is_report_publication_record(item, str(first(item, "_pub_source", "path")))]
-    all_pub_candidates=publisher_records+file_pubs
+    all_pub_candidates=trace_pubs+publisher_records+file_pubs
     publisher_before=sum(1 for item in publisher_records if is_published_record(item))
     publisher_after=len(dedupe_published_records(publisher_records))
+    trace_before=sum(1 for item in trace_pubs if is_published_record(item))
+    trace_with_source=sum(1 for item in trace_pubs if norm_url(first(item, "source_url", "url")))
     file_before=sum(1 for item in file_pubs if is_published_record(item))
     file_after=len(dedupe_published_records(file_pubs))
     published_records=dedupe_published_records(all_pub_candidates)
@@ -890,11 +924,11 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
     lines += ["", "## 5. Published without source attribution", "", "These are trace-quality issues, not editorial misses.", ""]
     lines += ([f"- **{esc(first(p,'title_it','title','final_title') or record_slug(p))}** — {esc(first(p,'wp_link','published_url','final_url') or record_slug(p) or first(p,'path','file','filename'))} — recovery_method={published_recovery_method(p)} — source_url_missing" for p in missing_source_pubs] or ["- None detected."])
 
-    lines += ["", "## 6. Summary", "", f"- total feed URLs seen: {len(trace_list)}", f"- total published articles: {len(published_records)}", f"- feed URLs exactly matched to published: {exact_count}", f"- feed URLs covered by alternate/slug match: {alt_count}", f"- feed URLs skipped correctly: {skipped_count}", f"- feed URLs requiring human review: {len(review)}", f"- published articles missing source attribution: {len(missing_source_pubs)}", "", "### Legacy summary compatibility", "", f"- Feed URLs seen: {len(trace_list)}", f"- Feed URLs with Menzo decision: {sum(1 for t in trace_list if t.menzo_decision)}", f"- Feed URLs published: {c('published')}", f"- Feed URLs skipped: {c('skipped')}", f"- Feed URLs pending: {c('pending')}", f"- Feed URLs unknown/untracked: {c('unknown')}", f"- Potential must-publish missed: {sum(1 for t in missed if t.recall_class=='must_publish_candidate')}", f"- Potential should-publish missed: {sum(1 for t in missed if t.recall_class=='should_publish_candidate')}", f"- Potential overpublished soft items: {len(soft)}", f"- Potential story-thread overcoverage: {len(over)}", f"- Post-show duplicate recap risks: {len(overlaps)}", "", "## 7. Secondary diagnostics (demoted)", "", "### Coverage funnel", "", "| Stage | Count |", "|---|---:|", f"| Massy feed URLs | {len(trace_list)} |", f"| Menzo evaluated | {sum(1 for t in trace_list if t.menzo_decision)} |", f"| Final published | {len(published_records)} |", ""]
+    lines += ["", "## 6. Summary", "", f"- total feed URLs seen: {len(trace_list)}", f"- total published articles: {len(published_records)}", f"- published trace records found: {trace_before}", f"- published trace records with source_url: {trace_with_source}", f"- published file fallback records used: {file_before}", f"- feed URLs exactly matched to published: {exact_count}", f"- feed URLs covered by alternate/slug match: {alt_count}", f"- feed URLs skipped correctly: {skipped_count}", f"- feed URLs requiring human review: {len(review)}", f"- published articles missing source attribution: {len(missing_source_pubs)}", "", "### Legacy summary compatibility", "", f"- Feed URLs seen: {len(trace_list)}", f"- Feed URLs with Menzo decision: {sum(1 for t in trace_list if t.menzo_decision)}", f"- Feed URLs published: {c('published')}", f"- Feed URLs skipped: {c('skipped')}", f"- Feed URLs pending: {c('pending')}", f"- Feed URLs unknown/untracked: {c('unknown')}", f"- Potential must-publish missed: {sum(1 for t in missed if t.recall_class=='must_publish_candidate')}", f"- Potential should-publish missed: {sum(1 for t in missed if t.recall_class=='should_publish_candidate')}", f"- Potential overpublished soft items: {len(soft)}", f"- Potential story-thread overcoverage: {len(over)}", f"- Post-show duplicate recap risks: {len(overlaps)}", "", "## 7. Secondary diagnostics (demoted)", "", "### Coverage funnel", "", "| Stage | Count |", "|---|---:|", f"| Massy feed URLs | {len(trace_list)} |", f"| Menzo evaluated | {sum(1 for t in trace_list if t.menzo_decision)} |", f"| Final published | {len(published_records)} |", ""]
     lines += ["### Historical artifact discovery diagnostics", "", "| Diagnostic | Count |", "|---|---:|", f"| Historical files scanned | {hist_diag['historical_files_scanned']} |", f"| Historical files inside window | {hist_diag['historical_files_inside_window']} |"]
     for label, key in [("Massy", "massy"), ("Menzo", "menzo"), ("Andrea", "andrea"), ("Bob", "bob"), ("Alfred", "alfred"), ("Publisher", "publisher"), ("Simone", "simone"), ("Simone publish", "simpub")]:
         lines.append(f"| Useful {label} records merged | {hist_diag['merged_by_stage'].get(key, 0)} |")
-    lines += [f"| Publisher published records before dedupe | {publisher_before} |", f"| Publisher published records after dedupe | {publisher_after} |", f"| Published file artifacts before dedupe | {file_before} |", f"| Published file artifacts after dedupe | {file_after} |", "", "### Legacy recall classes", "", "| source | source_title | source_url | massy | andrea | trace_status | editorial_recall_class | comparison_class |", "|---|---|---|---|---|---|---|---|"]
+    lines += [f"| Publisher published records before dedupe | {publisher_before} |", f"| Publisher published records after dedupe | {publisher_after} |", f"| Published trace records found | {trace_before} |", f"| Published trace records with source_url | {trace_with_source} |", f"| Published file artifacts before dedupe | {file_before} |", f"| Published file artifacts after dedupe | {file_after} |", "", "### Legacy recall classes", "", "| source | source_title | source_url | massy | andrea | trace_status | editorial_recall_class | comparison_class |", "|---|---|---|---|---|---|---|---|"]
     for t in trace_list:
         lines.append(f"| {esc(t.source)} | {esc(t.title)} | {esc(t.url)} | {esc('/'.join(x for x in [t.massy_decision or t.kind_hint, t.massy_reason, t.score_hint] if x))} | {esc('/'.join(x for x in [t.andrea_outcome, t.andrea_reason] if x))} | {esc(t.trace_status)} | {t.recall_class} | {t.comparison_class} |")
     dup_rows=[t for t in trace_list if DUPLICATE_LOSER_RE.search(f"{t.menzo_reason} {t.duplicate_reason}")]

@@ -881,3 +881,117 @@ def test_v95_8_5_ringside_and_wrestlinginc_urls_remain_included(tmp_path, monkey
     text = run(tmp_path, monkeypatch)
     assert "https://wrestlinginc.com/wi-contract" in text
     assert "https://ringsidenews.com/rsn-title" in text
+
+
+def test_v95_8_6_audit_reads_published_trace_exact_source_url(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    item = {"source":"WrestlingInc", "title":"Trace exact story", "url":"https://wrestlinginc.com/trace-exact"}
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": [item]})
+    write(ns / "menzo_decisions_latest.json", {"selected":[{**item,"score":90,"article_type":"roster"}], "skipped":[], "pending":[]})
+    write(ns / "publisher_status_latest.json", {"results":[]})
+    write(tmp_path / "artifacts" / "published_traces" / "trace-exact-story.published_trace.json", {
+        "artifact_marker":"owtv_published_trace_v1",
+        "published_at":"2026-07-07T00:00:00+00:00",
+        "owtv_title":"Trace exact story",
+        "owtv_url":"https://owtv.test/trace-exact-story",
+        "slug":"trace-exact-story",
+        "source":"WrestlingInc",
+        "source_url":"https://wrestlinginc.com/trace-exact",
+        "source_title":"Trace exact story",
+        "publisher_status":"published",
+        "recovery_method":"published_trace",
+    })
+    text = run(tmp_path, monkeypatch)
+    assert "published_exact_source_url" in text
+    assert "published_trace" in text
+    assert "published trace records found: 1" in text
+    assert "published trace records with source_url: 1" in text
+
+
+def test_v95_8_6_published_trace_takes_priority_over_file_fallback(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": []})
+    write(ns / "menzo_decisions_latest.json", {"selected":[], "pending":[], "skipped":[]})
+    write(ns / "publisher_status_latest.json", {"results":[]})
+    write(tmp_path / "artifacts" / "published_traces" / "same-slug.published_trace.json", {
+        "artifact_marker":"owtv_published_trace_v1",
+        "published_at":"2026-07-07T00:00:00+00:00",
+        "owtv_title":"Trace title",
+        "owtv_url":"https://owtv.test/same-slug",
+        "slug":"same-slug",
+        "source":"WrestlingInc",
+        "source_url":"https://wrestlinginc.com/same-slug",
+        "source_title":"Source title",
+        "publisher_status":"published",
+        "recovery_method":"published_trace",
+    })
+    pub = tmp_path / "published" / "v93_news_same-slug.html"
+    pub.parent.mkdir(parents=True, exist_ok=True)
+    pub.write_text("<h1>Fallback title</h1>", encoding="utf-8")
+    text = run(tmp_path, monkeypatch)
+    rows = [line for line in text.splitlines() if "same-slug" in line and "published_trace" in line]
+    assert rows
+    assert "https://wrestlinginc.com/same-slug" in rows[0]
+
+
+def test_v95_8_6_published_file_without_source_url_remains_fallback(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": []})
+    write(ns / "menzo_decisions_latest.json", {"selected":[], "pending":[], "skipped":[]})
+    write(ns / "publisher_status_latest.json", {"results":[]})
+    pub = tmp_path / "published" / "v93_news_no-source.html"
+    pub.parent.mkdir(parents=True, exist_ok=True)
+    pub.write_text("<h1>No source fallback</h1>", encoding="utf-8")
+    text = run(tmp_path, monkeypatch)
+    assert "published_file" in text
+    assert "source_url_missing" in text
+    assert "published articles missing source attribution: 1" in text
+    assert "published file fallback records used: 1" in text
+
+
+def test_v95_8_6_publisher_success_writes_published_trace(tmp_path, monkeypatch):
+    from agents import publisher
+    monkeypatch.setattr(publisher, "ROOT", tmp_path)
+    monkeypatch.setattr(publisher, "PUBLISHED_TRACE_DIR", tmp_path / "artifacts" / "published_traces")
+    monkeypatch.setattr(publisher, "PUBLISHED_DIR", tmp_path / "published")
+    monkeypatch.setattr(publisher, "REVIEW_DIR", tmp_path / "published_html_review")
+    monkeypatch.setattr(publisher, "DRY_RUN", False)
+    monkeypatch.setattr(publisher, "resolve_category_ids", lambda _hint: [])
+    class Response:
+        status_code = 201
+        text = ""
+        def json(self):
+            return {"id": 123, "link": "https://owtv.test/star-signs"}
+    monkeypatch.setattr(publisher, "wp_request", lambda *a, **k: Response())
+    article = {
+        "source_url":"https://wrestlinginc.com/star-signs",
+        "source":"WrestlingInc",
+        "source_title":"Star signs original",
+        "title_it":"Star signs translated",
+        "body_html":"<p>Body</p>",
+        "score":91,
+        "menzo_reason":"major roster move",
+    }
+    result = publisher.publish_article(article, {}, True)
+    assert result["status"] == "published"
+    trace_path = tmp_path / "artifacts" / "published_traces" / "star-signs-translated.published_trace.json"
+    trace = json.loads(trace_path.read_text(encoding="utf-8"))
+    assert trace["artifact_marker"] == "owtv_published_trace_v1"
+    assert trace["source_url"] == "https://wrestlinginc.com/star-signs"
+    assert trace["source"] == "WrestlingInc"
+    assert trace["source_title"] == "Star signs original"
+    assert trace["score"] == 91
+    assert trace["menzo_reason"] == "major roster move"
+
+
+def test_v95_8_6_simone_report_publication_does_not_create_news_trace(tmp_path, monkeypatch):
+    from agents import simone_publisher_v93_18 as simone
+    monkeypatch.setattr(simone, "PUBLISHED_DIR", tmp_path / "published")
+    monkeypatch.setattr(simone, "REVIEW_DIR", tmp_path / "review")
+    monkeypatch.setattr(simone, "wp_ready", lambda: (False, "missing_wp_env"))
+    result = simone.run_simone_report_publisher({"ready_reports":[{"title":"WWE Raw Results", "status":"ready"}]})
+    assert result["policy"]["reports_count_as_news"] is False
+    assert not (tmp_path / "artifacts" / "published_traces").exists()
