@@ -211,3 +211,79 @@ def test_source_coverage_publish_rate_uses_published_artifact_trace(tmp_path, mo
     text = run(tmp_path, monkeypatch)
     assert "Feed URLs published: 1" in text
     assert "| Fightful | 1 | 1 | 0 | 0 | 0 | 100% | 0 |" in text
+
+
+def test_artifacts_newsroom_massy_board_is_not_published_story(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": []})
+    write(ns / "menzo_decisions_latest.json", {"selected": [], "skipped": [], "pending": []})
+    write(ns / "publisher_status_latest.json", {"results": []})
+    write(tmp_path / "artifacts" / "newsroom" / "massy_board.json", {
+        "news_candidates_for_menzo": [{"title": "Not a published story", "url": "https://e.test/not-published"}]
+    })
+    text = run(tmp_path, monkeypatch)
+    assert "Not a published story" not in text
+    assert "- Post-show/report overlap risks: 0" in text
+
+
+def test_artifacts_newsroom_publisher_result_without_metadata_is_not_published_story(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": []})
+    write(ns / "menzo_decisions_latest.json", {"selected": [], "skipped": [], "pending": []})
+    write(ns / "publisher_status_latest.json", {"results": []})
+    write(tmp_path / "artifacts" / "newsroom" / "publisher_result.json", {
+        "source_url": "https://e.test/unpublished",
+        "title_it": "Raw results not actually published",
+    })
+    write(ns / "simone_reports_latest.json", {"reports": [{"title": "WWE Raw results July 6"}]})
+    text = run(tmp_path, monkeypatch)
+    assert "Raw results not actually published" not in text
+    assert "- Post-show/report overlap risks: 0" in text
+
+
+def test_publisher_source_url_and_publisher_html_slug_collapse(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": []})
+    write(ns / "menzo_decisions_latest.json", {"selected": [], "skipped": [], "pending": []})
+    write(ns / "publisher_status_latest.json", {"results": [
+        {"source_url": "https://source.test/cm-punk-title-details", "title_it": "CM Punk title details", "status": "published", "wp_link": "https://owtv.test/cm-punk-title-details"},
+    ]})
+    artifact = tmp_path / "published_html_review" / "v93_publisher_cm-punk-title-details.html"
+    artifact.parent.mkdir(parents=True, exist_ok=True)
+    artifact.write_text("<html><title>CM Punk title details</title></html>", encoding="utf-8")
+    text = run(tmp_path, monkeypatch)
+    assert "- Potential story-thread overcoverage: 0" in text
+
+
+def test_news_and_publisher_html_artifacts_collapse_by_slug(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": []})
+    write(ns / "menzo_decisions_latest.json", {"selected": [], "skipped": [], "pending": []})
+    write(ns / "publisher_status_latest.json", {"results": []})
+    for name in ["v93_news_cm-punk-title-details.html", "v93_publisher_cm-punk-title-details.html"]:
+        artifact = tmp_path / "published_html_review" / name
+        artifact.parent.mkdir(parents=True, exist_ok=True)
+        artifact.write_text("<html><title>CM Punk title details</title></html>", encoding="utf-8")
+    text = run(tmp_path, monkeypatch)
+    assert "- Potential story-thread overcoverage: 0" in text
+
+
+def test_overcoverage_ignores_duplicated_local_artifacts_for_same_slug(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": []})
+    write(ns / "menzo_decisions_latest.json", {"selected": [], "skipped": [], "pending": []})
+    write(ns / "publisher_status_latest.json", {"results": []})
+    for directory, name in [
+        ("published", "v93_news_vikingo-injury-surgery.html"),
+        ("published_html_review", "v93_publisher_vikingo-injury-surgery.html"),
+    ]:
+        artifact = tmp_path / directory / name
+        artifact.parent.mkdir(parents=True, exist_ok=True)
+        artifact.write_text("<html><title>Vikingo injury surgery</title></html>", encoding="utf-8")
+    text = run(tmp_path, monkeypatch)
+    assert "- Potential story-thread overcoverage: 0" in text

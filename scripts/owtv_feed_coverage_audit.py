@@ -35,6 +35,8 @@ STOP = {"the","and","for","with","from","this","that","after","before","wwe","ae
 ARTIFACT_PREFIX_RE = re.compile(r"^(?:v\d+[_-])?(?:news|publisher)[_-]", re.I)
 PREPUBLISH_RE = re.compile(r"\.prepublish(?:\.[^.]+)?$", re.I)
 SHOW_MARKER_RE = re.compile(r"\b(raw|smackdown|nxt|dynamite|collision|rampage|impact|roh|results?|recap|live coverage|title match|main event|championship|champion|segment|july\s+\d{1,2}|\d{1,2}/\d{1,2})\b", re.I)
+PUBLISHED_STATUSES = {"published", "already_published", "published_file"}
+UNPUBLISHED_STATUSES = {"skipped_approved_articles", "wp_not_ready", "publish_error", "skipped_capacity", "skipped", "error"}
 
 @dataclass
 class Trace:
@@ -111,14 +113,23 @@ def canonical_slug(value: Any) -> str:
     return raw
 
 def record_slug(item: dict[str, Any]) -> str:
-    for key in ("slug", "artifact_slug", "path", "file", "filename", "final_url", "wp_link", "published_url", "url"):
+    for key in ("slug", "artifact_slug", "path", "file", "filename"):
         v = item.get(key)
         if v:
             slug = canonical_slug(v)
             if slug:
                 return slug
     title = first(item, "title_it", "title", "source_title")
-    return canonical_slug(title)
+    slug = canonical_slug(title)
+    if slug:
+        return slug
+    for key in ("final_url", "wp_link", "published_url", "url"):
+        v = item.get(key)
+        if v:
+            slug = canonical_slug(v)
+            if slug:
+                return slug
+    return ""
 
 def first(d: dict[str, Any], *keys: str) -> Any:
     for k in keys:
@@ -170,10 +181,10 @@ def classify(t: Trace, published: bool) -> str:
 def extract_published_from_files(since: datetime, until: datetime) -> list[dict[str, Any]]:
     rows=[]
     title_re=re.compile(r"<h1[^>]*>(.*?)</h1>|<title[^>]*>(.*?)</title>", re.I|re.S)
-    for base in [ROOT/"published_html_review", ROOT/"published", ARTIFACTS]:
+    trusted_dirs = [(ROOT/"published_html_review", "published_html_review"), (ROOT/"published", "published")]
+    for base, source in trusted_dirs:
         if not base.exists(): continue
-        iterator = base.rglob("*") if base == ARTIFACTS else base.iterdir()
-        for p in iterator:
+        for p in base.iterdir():
             if not p.is_file() or p.suffix.lower() not in {".html", ".json", ".md"}: continue
             if ".prepublish" in p.name.lower():
                 continue
@@ -189,27 +200,87 @@ def extract_published_from_files(since: datetime, until: datetime) -> list[dict[
                     pass
             else:
                 m=title_re.search(text); title=re.sub(r"<[^>]+>"," ",(m.group(1) or m.group(2)) if m else title).strip(); url=""
-            rows.append({"source_url":url,"title_it":title,"status":"published_file","published_at":mt.isoformat(),"path":str(p)})
+            rows.append({"source_url":url,"title_it":title,"status":"published_file","published_at":mt.isoformat(),"path":str(p), "_pub_source":source})
+    # Generic artifacts are not publication directories. Only accept artifact JSON
+    # that explicitly looks like a final publication record.
+    if ARTIFACTS.exists():
+        for p in ARTIFACTS.rglob("*.json"):
+            if not p.is_file() or ".prepublish" in p.name.lower():
+                continue
+            mt=datetime.fromtimestamp(p.stat().st_mtime, timezone.utc)
+            if mt < since or mt > until:
+                continue
+            try:
+                item=json.loads(p.read_text(encoding="utf-8"))
+            except Exception:
+                continue
+            if not isinstance(item, dict):
+                continue
+            status=str(item.get("status") or "").lower()
+            has_explicit_publication = (
+                status in PUBLISHED_STATUSES
+                or bool(first(item, "published_url", "wp_post_id", "final_url"))
+                or (bool(first(item, "source_url", "url")) and bool(first(item, "final_title", "slug", "artifact_slug")))
+            )
+            if not has_explicit_publication or status in UNPUBLISHED_STATUSES:
+                continue
+            item=dict(item)
+            item.setdefault("status", "published_file")
+            item.setdefault("path", str(p))
+            item.setdefault("published_at", mt.isoformat())
+            item["_pub_source"]="artifact_metadata"
+            rows.append(item)
     return rows
 
+def record_priority(item: dict[str, Any]) -> int:
+    source = str(item.get("_pub_source") or "")
+    status = str(item.get("status") or "").lower()
+    if source == "publisher" or (status in {"published", "already_published"} and first(item, "source_url", "wp_link", "published_url", "final_url")):
+        return 3
+    if source == "published_html_review":
+        return 2
+    if source == "published":
+        return 1
+    return 0
+
+def merge_published_records(current: dict[str, Any], incoming: dict[str, Any]) -> dict[str, Any]:
+    if record_priority(incoming) > record_priority(current):
+        winner, loser = dict(incoming), current
+    else:
+        winner, loser = dict(current), incoming
+    for key, value in loser.items():
+        if winner.get(key) in (None, "") and value not in (None, ""):
+            winner[key] = value
+    return winner
+
 def dedupe_published_records(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    deduped: dict[str, dict[str, Any]] = {}
+    deduped: list[dict[str, Any]] = []
+    key_to_index: dict[str, int] = {}
     for item in records:
         if not is_published_record(item):
             continue
-        key = norm_url(first(item, "source_url", "url"))
-        if not key:
-            key = record_slug(item)
-        if not key:
-            key = str(id(item))
-        current = deduped.get(key)
-        if current is None:
-            deduped[key] = item
-            continue
-        # Prefer richer publisher records over local artifact fallbacks.
-        if current.get("status") == "published_file" and item.get("status") != "published_file":
-            deduped[key] = item
-    return list(deduped.values())
+        keys = {f"url:{u}" for u in [norm_url(first(item, "source_url", "url"))] if u}
+        slug = record_slug(item)
+        if slug:
+            keys.add(f"slug:{slug}")
+        matched = sorted({key_to_index[k] for k in keys if k in key_to_index})
+        if not matched:
+            deduped.append(dict(item))
+            index = len(deduped)-1
+        else:
+            index = matched[0]
+            deduped[index] = merge_published_records(deduped[index], item)
+            for duplicate_index in reversed(matched[1:]):
+                deduped[index] = merge_published_records(deduped[index], deduped[duplicate_index])
+                del deduped[duplicate_index]
+                for key, old_index in list(key_to_index.items()):
+                    if old_index == duplicate_index:
+                        key_to_index[key] = index
+                    elif old_index > duplicate_index:
+                        key_to_index[key] = old_index - 1
+        for key in keys:
+            key_to_index[key] = index
+    return deduped
 
 def build_published_indexes(records: list[dict[str, Any]]) -> tuple[set[str], dict[str, dict[str, Any]], dict[str, dict[str, Any]]]:
     urls: set[str] = set()
@@ -267,9 +338,9 @@ def report_overlap(pubs: list[dict[str,Any]], reports: list[dict[str,Any]]) -> l
 
 def is_published_record(item: dict[str, Any]) -> bool:
     status = str(item.get("status") or "").lower()
-    if status in {"published", "published_file", "already_published"}:
+    if status in PUBLISHED_STATUSES:
         return True
-    if status in {"skipped_approved_articles", "wp_not_ready", "publish_error", "skipped_capacity", "skipped", "error"}:
+    if status in UNPUBLISHED_STATUSES:
         return False
     return bool(first(item, "wp_link", "published_url", "final_url", "path") and status not in {"wp_not_ready", "publish_error", "skipped_capacity"})
 
@@ -340,7 +411,7 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
         art=rev.get("approved_article") if isinstance(rev.get("approved_article"),dict) else rev
         u=norm_url(first(art,"source_url","url"));
         if u in traces: traces[u].alfred_outcome=str(rev.get("decision") or "approved")
-    publisher_records=iter_items(publisher,["results","skipped_approved_articles"])
+    publisher_records=[{**item, "_pub_source":"publisher"} for item in iter_items(publisher,["results","skipped_approved_articles"])]
     file_pubs=extract_published_from_files(since,until)
     all_pub_candidates=publisher_records+file_pubs
     published_records=dedupe_published_records(all_pub_candidates)
