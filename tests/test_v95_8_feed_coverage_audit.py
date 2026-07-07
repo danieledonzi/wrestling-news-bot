@@ -995,3 +995,156 @@ def test_v95_8_6_simone_report_publication_does_not_create_news_trace(tmp_path, 
     result = simone.run_simone_report_publisher({"ready_reports":[{"title":"WWE Raw Results", "status":"ready"}]})
     assert result["policy"]["reports_count_as_news"] is False
     assert not (tmp_path / "artifacts" / "published_traces").exists()
+
+
+def _publisher_wp_success(monkeypatch, publisher, link="https://owtv.test/story", post_id=123):
+    monkeypatch.setattr(publisher, "DRY_RUN", False)
+    monkeypatch.setattr(publisher, "resolve_category_ids", lambda _hint: [])
+    class Response:
+        status_code = 201
+        text = ""
+        def json(self):
+            return {"id": post_id, "link": link}
+    monkeypatch.setattr(publisher, "wp_request", lambda *a, **k: Response())
+
+
+def test_v95_8_6_trace_metadata_block_preferred_for_editorial_fields(tmp_path, monkeypatch):
+    from agents import publisher
+    monkeypatch.setattr(publisher, "PUBLISHED_TRACE_DIR", tmp_path / "artifacts" / "published_traces")
+    monkeypatch.setattr(publisher, "PUBLISHED_DIR", tmp_path / "published")
+    monkeypatch.setattr(publisher, "REVIEW_DIR", tmp_path / "published_html_review")
+    _publisher_wp_success(monkeypatch, publisher, link="https://owtv.test/nested")
+    article = {
+        "source_url":"https://wrestlinginc.com/nested",
+        "source":"WrestlingInc",
+        "source_title":"Nested source title",
+        "title_it":"Nested approved title",
+        "body_html":"<p>Body</p>",
+        "trace_metadata": {
+            "score": 88,
+            "priority": "high",
+            "article_type": "roster",
+            "menzo_decision": "selected",
+            "menzo_reason": "real upstream reason",
+            "bob_status": "generated",
+            "alfred_status": "approved",
+        },
+    }
+    result = publisher.publish_article(article, {}, True)
+    assert result["status"] == "published"
+    trace = json.loads((tmp_path / "artifacts" / "published_traces" / "nested-approved-title.published_trace.json").read_text(encoding="utf-8"))
+    assert trace["score"] == 88
+    assert trace["priority"] == "high"
+    assert trace["article_type"] == "roster"
+    assert trace["menzo_decision"] == "selected"
+    assert trace["menzo_reason"] == "real upstream reason"
+    assert trace["bob_status"] == "generated"
+    assert trace["alfred_status"] == "approved"
+
+
+def test_v95_8_6_direct_fields_only_article_still_writes_available_trace(tmp_path, monkeypatch):
+    from agents import publisher
+    monkeypatch.setattr(publisher, "PUBLISHED_TRACE_DIR", tmp_path / "artifacts" / "published_traces")
+    monkeypatch.setattr(publisher, "PUBLISHED_DIR", tmp_path / "published")
+    monkeypatch.setattr(publisher, "REVIEW_DIR", tmp_path / "published_html_review")
+    _publisher_wp_success(monkeypatch, publisher, link="https://owtv.test/direct-only")
+    article = {
+        "source_url":"https://ringsidenews.com/direct-only",
+        "source":"RingsideNews",
+        "source_title":"Direct only source",
+        "title_it":"Direct only approved title",
+        "body_html":"<p>Body</p>",
+    }
+    result = publisher.publish_article(article, {}, True)
+    assert result["status"] == "published"
+    trace = json.loads((tmp_path / "artifacts" / "published_traces" / "direct-only-approved-title.published_trace.json").read_text(encoding="utf-8"))
+    assert trace["source_url"] == "https://ringsidenews.com/direct-only"
+    assert trace["source"] == "RingsideNews"
+    assert trace["source_title"] == "Direct only source"
+    assert "score" not in trace
+    assert "menzo_reason" not in trace
+
+
+def test_v95_8_6_trace_write_failure_does_not_block_publish_article(tmp_path, monkeypatch):
+    from agents import publisher
+    monkeypatch.setattr(publisher, "PUBLISHED_DIR", tmp_path / "published")
+    monkeypatch.setattr(publisher, "REVIEW_DIR", tmp_path / "published_html_review")
+    _publisher_wp_success(monkeypatch, publisher, link="https://owtv.test/nonblocking")
+    monkeypatch.setattr(publisher, "write_published_trace", lambda *a, **k: (_ for _ in ()).throw(OSError("disk full")))
+    history = {}
+    article = {"source_url":"https://wrestlinginc.com/nonblocking", "source":"WrestlingInc", "title_it":"Nonblocking title", "body_html":"<p>Body</p>"}
+    result = publisher.publish_article(article, history, True)
+    assert result["status"] == "published"
+    assert publisher.source_key(article["source_url"]) in history
+    duplicate = publisher.publish_article(article, history, True)
+    assert duplicate["status"] == "already_published"
+
+
+def test_v95_8_6_run_publisher_persists_history_and_status_when_trace_write_fails(tmp_path, monkeypatch):
+    from agents import publisher
+    monkeypatch.setattr(publisher, "NEWSROOM_STATE_DIR", tmp_path / "state" / "newsroom")
+    monkeypatch.setattr(publisher, "ARTIFACT_DIR", tmp_path / "artifacts" / "newsroom")
+    monkeypatch.setattr(publisher, "PUBLISHER_STATUS_FILE", tmp_path / "state" / "newsroom" / "publisher_status_latest.json")
+    monkeypatch.setattr(publisher, "PUBLISHER_HISTORY_FILE", tmp_path / "state" / "newsroom" / "publisher_history.json")
+    monkeypatch.setattr(publisher, "ARTIFACT_PUBLISHER_FILE", tmp_path / "artifacts" / "newsroom" / "publisher_result.json")
+    monkeypatch.setattr(publisher, "PUBLISHED_DIR", tmp_path / "published")
+    monkeypatch.setattr(publisher, "REVIEW_DIR", tmp_path / "published_html_review")
+    monkeypatch.setattr(publisher, "MAX_POSTS_PER_RUN", 5)
+    monkeypatch.setattr(publisher, "wp_ready", lambda: (True, "ok"))
+    _publisher_wp_success(monkeypatch, publisher, link="https://owtv.test/run-nonblocking", post_id=456)
+    monkeypatch.setattr(publisher, "write_published_trace", lambda *a, **k: (_ for _ in ()).throw(OSError("disk full")))
+    alfred = {"version":"test", "approved_articles":[{"source_url":"https://wrestlinginc.com/run-nonblocking", "source":"WrestlingInc", "title_it":"Run nonblocking title", "body_html":"<p>Body</p>"}]}
+    result = publisher.run_publisher(alfred)
+    assert result["handoff"]["published"] == 1
+    history = json.loads((tmp_path / "state" / "newsroom" / "publisher_history.json").read_text(encoding="utf-8"))
+    assert publisher.source_key("https://wrestlinginc.com/run-nonblocking") in history
+    status = json.loads((tmp_path / "state" / "newsroom" / "publisher_status_latest.json").read_text(encoding="utf-8"))
+    assert status["results"][0]["status"] == "published"
+
+
+def test_v95_8_6_run_publisher_enriches_trace_from_upstream_stage_records(tmp_path, monkeypatch):
+    from agents import publisher
+    newsroom = tmp_path / "state" / "newsroom"
+    monkeypatch.setattr(publisher, "NEWSROOM_STATE_DIR", newsroom)
+    monkeypatch.setattr(publisher, "BOB_ARTICLES_FILE", newsroom / "bob_articles_latest.json")
+    monkeypatch.setattr(publisher, "MENZO_DECISIONS_FILE", newsroom / "menzo_decisions_latest.json")
+    monkeypatch.setattr(publisher, "PUBLISHER_STATUS_FILE", newsroom / "publisher_status_latest.json")
+    monkeypatch.setattr(publisher, "PUBLISHER_HISTORY_FILE", newsroom / "publisher_history.json")
+    monkeypatch.setattr(publisher, "ARTIFACT_PUBLISHER_FILE", tmp_path / "artifacts" / "newsroom" / "publisher_result.json")
+    monkeypatch.setattr(publisher, "PUBLISHED_TRACE_DIR", tmp_path / "artifacts" / "published_traces")
+    monkeypatch.setattr(publisher, "PUBLISHED_DIR", tmp_path / "published")
+    monkeypatch.setattr(publisher, "REVIEW_DIR", tmp_path / "published_html_review")
+    monkeypatch.setattr(publisher, "MAX_POSTS_PER_RUN", 5)
+    monkeypatch.setattr(publisher, "wp_ready", lambda: (True, "ok"))
+    _publisher_wp_success(monkeypatch, publisher, link="https://owtv.test/upstream", post_id=789)
+    write(newsroom / "menzo_decisions_latest.json", {"selected":[{
+        "source_url":"https://wrestlinginc.com/upstream",
+        "score": 93,
+        "priority": "hard",
+        "article_type": "injury",
+        "decision": "selected",
+        "reason": "upstream menzo reason",
+    }]})
+    write(newsroom / "bob_articles_latest.json", {"articles":[{
+        "source_url":"https://wrestlinginc.com/upstream",
+        "status":"ready_for_alfred",
+        "priority_label":"high",
+        "article_type":"injury",
+    }]})
+    alfred = {"version":"test", "reviews":[{"source_url":"https://wrestlinginc.com/upstream", "decision":"approved"}], "approved_articles":[{
+        "source_url":"https://wrestlinginc.com/upstream",
+        "source":"WrestlingInc",
+        "source_title":"Upstream source title",
+        "title_it":"Upstream approved title",
+        "body_html":"<p>Body</p>",
+    }]}
+    result = publisher.run_publisher(alfred)
+    assert result["handoff"]["published"] == 1
+    trace = json.loads((tmp_path / "artifacts" / "published_traces" / "upstream-approved-title.published_trace.json").read_text(encoding="utf-8"))
+    assert trace["score"] == 93
+    assert trace["priority"] == "hard"
+    assert trace["article_type"] == "injury"
+    assert trace["menzo_decision"] == "selected"
+    assert trace["menzo_reason"] == "upstream menzo reason"
+    assert trace["bob_status"] == "ready_for_alfred"
+    assert trace["alfred_status"] == "approved"
