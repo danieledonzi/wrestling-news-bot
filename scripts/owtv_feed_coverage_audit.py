@@ -42,6 +42,8 @@ GENERIC_RECAP_DUPLICATE_RE = re.compile(
     r"\b("
     r"live\s+results?|full\s+results?|complete\s+results?|results?|risultati|"
     r"recap|highlights?|momenti\s+salienti|moments?|what\s+happened|"
+    r"live\s+coverage|live\s+blog|play[-\s]+by[-\s]+play|"
+    r"live\s+updates?|ongoing\s+coverage|"
     r"reports?|show\s+review|things\s+(?:we\s+)?(?:loved|hated)|"
     r"\d+\s+things|full\s+show\s+coverage"
     r")\b",

@@ -649,6 +649,10 @@ def test_raw_report_flags_required_generic_duplicate_recap_titles(tmp_path, monk
         "WWE Raw recap",
         "WWE Raw highlights",
         "WWE RAW 7/6: 3 Things We Hated & 3 Things We Loved",
+        "WWE Raw live coverage",
+        "WWE Raw live blog",
+        "WWE Raw play-by-play",
+        "WWE Raw live updates",
     ]
     write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": []})
     write(ns / "menzo_decisions_latest.json", {"selected": [], "skipped": [], "pending": []})
@@ -658,6 +662,6 @@ def test_raw_report_flags_required_generic_duplicate_recap_titles(tmp_path, monk
     ]})
     write(ns / "simone_reports_latest.json", {"reports": [{"title": "WWE Raw results July 6"}]})
     text = run(tmp_path, monkeypatch)
-    assert "- Post-show duplicate recap risks: 5" in text
+    assert "- Post-show duplicate recap risks: 9" in text
     for title in titles:
         assert f"`{title}` — duplicate_recap_risk" in text
