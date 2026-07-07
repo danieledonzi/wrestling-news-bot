@@ -32,6 +32,11 @@ SHOULD_RE = re.compile(r"\b(backstage|reportedly|update|follow-up|major|plans|cr
 SOFT_RE = re.compile(r"\b(opinion|commentary|podcast|reacts?|reaction|interview|recalls|nostalgia|social media|photo|listicle|things we|quote|jokes|explains why|addresses)\b", re.I)
 REPORT_RE = re.compile(r"\b(report|risultati|results|recap|live coverage|raw|smackdown|dynamite|collision|nxt|impact|payback|summerslam|wrestlemania|aew|wwe)\b", re.I)
 STOP = {"the","and","for","with","from","this","that","after","before","wwe","aew","nxt","tna","roh","news","report","reports","update","results","result","wrestling","title","match","follow","up","followup"}
+ARTIFACT_PREFIX_RE = re.compile(r"^(?:v\d+[_-])?(?:news|publisher)[_-]", re.I)
+PREPUBLISH_RE = re.compile(r"\.prepublish(?:\.[^.]+)?$", re.I)
+SHOW_MARKER_RE = re.compile(r"\b(raw|smackdown|nxt|dynamite|collision|rampage|impact|roh|results?|recap|live coverage|title match|main event|championship|champion|segment|july\s+\d{1,2}|\d{1,2}/\d{1,2})\b", re.I)
+PUBLISHED_STATUSES = {"published", "already_published", "published_file"}
+UNPUBLISHED_STATUSES = {"skipped_approved_articles", "wp_not_ready", "publish_error", "skipped_capacity", "skipped", "error"}
 
 @dataclass
 class Trace:
@@ -95,6 +100,37 @@ def norm_url(u: Any) -> str:
     p = urlsplit(raw)
     return urlunsplit((p.scheme.lower(), p.netloc.lower().replace("www.", ""), p.path.rstrip("/"), "", ""))
 
+def canonical_slug(value: Any) -> str:
+    """Collapse local pipeline artifact variants to one story-level slug."""
+    raw = Path(str(value or "")).name
+    raw = PREPUBLISH_RE.sub("", raw)
+    raw = re.sub(r"\.(?:html|json|md|txt)$", "", raw, flags=re.I)
+    previous = None
+    while raw != previous:
+        previous = raw
+        raw = ARTIFACT_PREFIX_RE.sub("", raw)
+    raw = re.sub(r"[^a-z0-9]+", "-", raw.lower()).strip("-")
+    return raw
+
+def record_slug(item: dict[str, Any]) -> str:
+    for key in ("slug", "artifact_slug", "path", "file", "filename"):
+        v = item.get(key)
+        if v:
+            slug = canonical_slug(v)
+            if slug:
+                return slug
+    title = first(item, "title_it", "title", "source_title")
+    slug = canonical_slug(title)
+    if slug:
+        return slug
+    for key in ("final_url", "wp_link", "published_url", "url"):
+        v = item.get(key)
+        if v:
+            slug = canonical_slug(v)
+            if slug:
+                return slug
+    return ""
+
 def first(d: dict[str, Any], *keys: str) -> Any:
     for k in keys:
         if d.get(k) not in (None, ""):
@@ -145,22 +181,120 @@ def classify(t: Trace, published: bool) -> str:
 def extract_published_from_files(since: datetime, until: datetime) -> list[dict[str, Any]]:
     rows=[]
     title_re=re.compile(r"<h1[^>]*>(.*?)</h1>|<title[^>]*>(.*?)</title>", re.I|re.S)
-    for base in [ROOT/"published_html_review", ROOT/"published"]:
+    trusted_dirs = [(ROOT/"published_html_review", "published_html_review"), (ROOT/"published", "published")]
+    for base, source in trusted_dirs:
         if not base.exists(): continue
         for p in base.iterdir():
             if not p.is_file() or p.suffix.lower() not in {".html", ".json", ".md"}: continue
+            if ".prepublish" in p.name.lower():
+                continue
             mt=datetime.fromtimestamp(p.stat().st_mtime, timezone.utc)
             if mt < since or mt > until: continue
             text=p.read_text(encoding="utf-8", errors="ignore")[:5000]
             title=p.stem
+            url=""
             if p.suffix.lower()==".json":
                 try:
                     j=json.loads(text); title=str(first(j,"title_it","title","source_title") or title); url=first(j,"source_url","url")
-                except Exception: url=""
+                except Exception:
+                    pass
             else:
                 m=title_re.search(text); title=re.sub(r"<[^>]+>"," ",(m.group(1) or m.group(2)) if m else title).strip(); url=""
-            rows.append({"source_url":url,"title_it":title,"status":"published_file","published_at":mt.isoformat(),"path":str(p)})
+            rows.append({"source_url":url,"title_it":title,"status":"published_file","published_at":mt.isoformat(),"path":str(p), "_pub_source":source})
+    # Generic artifacts are not publication directories. Only accept artifact JSON
+    # that explicitly looks like a final publication record.
+    if ARTIFACTS.exists():
+        for p in ARTIFACTS.rglob("*.json"):
+            if not p.is_file() or ".prepublish" in p.name.lower():
+                continue
+            mt=datetime.fromtimestamp(p.stat().st_mtime, timezone.utc)
+            if mt < since or mt > until:
+                continue
+            try:
+                item=json.loads(p.read_text(encoding="utf-8"))
+            except Exception:
+                continue
+            if not isinstance(item, dict):
+                continue
+            status=str(item.get("status") or "").lower()
+            has_explicit_publication = (
+                status in PUBLISHED_STATUSES
+                or bool(first(item, "published_url", "wp_post_id", "final_url"))
+                or (bool(first(item, "source_url", "url")) and bool(first(item, "final_title", "slug", "artifact_slug")))
+            )
+            if not has_explicit_publication or status in UNPUBLISHED_STATUSES:
+                continue
+            item=dict(item)
+            item.setdefault("status", "published_file")
+            item.setdefault("path", str(p))
+            item.setdefault("published_at", mt.isoformat())
+            item["_pub_source"]="artifact_metadata"
+            rows.append(item)
     return rows
+
+def record_priority(item: dict[str, Any]) -> int:
+    source = str(item.get("_pub_source") or "")
+    status = str(item.get("status") or "").lower()
+    if source == "publisher" or (status in {"published", "already_published"} and first(item, "source_url", "wp_link", "published_url", "final_url")):
+        return 3
+    if source == "published_html_review":
+        return 2
+    if source == "published":
+        return 1
+    return 0
+
+def merge_published_records(current: dict[str, Any], incoming: dict[str, Any]) -> dict[str, Any]:
+    if record_priority(incoming) > record_priority(current):
+        winner, loser = dict(incoming), current
+    else:
+        winner, loser = dict(current), incoming
+    for key, value in loser.items():
+        if winner.get(key) in (None, "") and value not in (None, ""):
+            winner[key] = value
+    return winner
+
+def dedupe_published_records(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    deduped: list[dict[str, Any]] = []
+    key_to_index: dict[str, int] = {}
+    for item in records:
+        if not is_published_record(item):
+            continue
+        keys = {f"url:{u}" for u in [norm_url(first(item, "source_url", "url"))] if u}
+        slug = record_slug(item)
+        if slug:
+            keys.add(f"slug:{slug}")
+        matched = sorted({key_to_index[k] for k in keys if k in key_to_index})
+        if not matched:
+            deduped.append(dict(item))
+            index = len(deduped)-1
+        else:
+            index = matched[0]
+            deduped[index] = merge_published_records(deduped[index], item)
+            for duplicate_index in reversed(matched[1:]):
+                deduped[index] = merge_published_records(deduped[index], deduped[duplicate_index])
+                del deduped[duplicate_index]
+                for key, old_index in list(key_to_index.items()):
+                    if old_index == duplicate_index:
+                        key_to_index[key] = index
+                    elif old_index > duplicate_index:
+                        key_to_index[key] = old_index - 1
+        for key in keys:
+            key_to_index[key] = index
+    return deduped
+
+def build_published_indexes(records: list[dict[str, Any]]) -> tuple[set[str], dict[str, dict[str, Any]], dict[str, dict[str, Any]]]:
+    urls: set[str] = set()
+    by_url: dict[str, dict[str, Any]] = {}
+    by_slug: dict[str, dict[str, Any]] = {}
+    for item in records:
+        for key in ("source_url", "url"):
+            u = norm_url(item.get(key))
+            if u:
+                urls.add(u); by_url[u] = item
+        slug = record_slug(item)
+        if slug:
+            by_slug[slug] = item
+    return urls, by_url, by_slug
 
 def tokens(title: str) -> set[str]:
     return {w for w in re.sub(r"[^a-z0-9]+"," ",title.lower()).split() if len(w)>3 and w not in STOP}
@@ -190,18 +324,23 @@ def report_overlap(pubs: list[dict[str,Any]], reports: list[dict[str,Any]]) -> l
     for r in reports:
         rt=parse_dt(first(r,"published_at","generated_at","created_at")) or utc_now()
         rtitle=str(first(r,"title","show","show_name") or "report")
+        rbody=str(first(r,"body","content","html","summary") or "")
+        rterms=tokens(rtitle+" "+rbody)
         for p in pubs:
             title=str(first(p,"title_it","title","source_title") or "")
-            if REPORT_RE.search(title) and abs(((parse_dt(first(p,"published_at","created_at")) or rt)-rt).total_seconds()) <= 24*3600:
+            pterms=tokens(title+" "+str(first(p,"body","content","summary") or ""))
+            has_show_marker = bool(SHOW_MARKER_RE.search(title))
+            shares_show_term = bool(rterms & pterms & {"raw","smackdown","dynamite","collision","nxt","results","result","championship","segment"})
+            if (has_show_marker or shares_show_term) and abs(((parse_dt(first(p,"published_at","created_at")) or rt)-rt).total_seconds()) <= 24*3600:
                 cls="likely_valid_major_angle" if HARD_RE.search(title) else "possible_report_duplicate"
                 risks.append({"report":rtitle,"title":title,"classification":cls})
     return risks
 
 def is_published_record(item: dict[str, Any]) -> bool:
     status = str(item.get("status") or "").lower()
-    if status in {"published", "published_file", "already_published"}:
+    if status in PUBLISHED_STATUSES:
         return True
-    if status in {"skipped_approved_articles", "wp_not_ready", "publish_error", "skipped_capacity", "skipped", "error"}:
+    if status in UNPUBLISHED_STATUSES:
         return False
     return bool(first(item, "wp_link", "published_url", "final_url", "path") and status not in {"wp_not_ready", "publish_error", "skipped_capacity"})
 
@@ -272,17 +411,29 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
         art=rev.get("approved_article") if isinstance(rev.get("approved_article"),dict) else rev
         u=norm_url(first(art,"source_url","url"));
         if u in traces: traces[u].alfred_outcome=str(rev.get("decision") or "approved")
-    publisher_records=iter_items(publisher,["results","skipped_approved_articles"])
+    publisher_records=[{**item, "_pub_source":"publisher"} for item in iter_items(publisher,["results","skipped_approved_articles"])]
     file_pubs=extract_published_from_files(since,until)
-    pubs=publisher_records+file_pubs
-    for it in pubs:
+    all_pub_candidates=publisher_records+file_pubs
+    published_records=dedupe_published_records(all_pub_candidates)
+    published_urls, published_by_url, published_by_slug = build_published_indexes(published_records)
+    for it in all_pub_candidates:
         u=norm_url(first(it,"source_url","url"));
         if u:
             t=traces.setdefault(u, Trace(url=u, title=str(first(it,"title_it","title") or "")))
             t.publisher_outcome=str(it.get("status") or ""); t.final_title=str(first(it,"title_it","title") or t.title); t.final_url=str(first(it,"wp_link","url","path") or "")
     for t in traces.values():
-        published=t.publisher_outcome in {"published","already_published","published_file"} or bool(t.final_url and t.publisher_outcome not in {"wp_not_ready","publish_error","skipped_capacity","skipped"})
-        if published: t.trace_status="published"
+        matched_trace = published_by_url.get(t.url)
+        if not matched_trace:
+            slug = canonical_slug(t.final_title or t.title)
+            matched_trace = published_by_slug.get(slug) if slug else None
+        published=t.publisher_outcome in {"published","already_published","published_file"} or bool(t.final_url and t.publisher_outcome not in {"wp_not_ready","publish_error","skipped_capacity","skipped"}) or t.url in published_urls or matched_trace is not None
+        if published:
+            if not t.publisher_outcome:
+                t.publisher_outcome="published_trace"
+            if matched_trace:
+                t.final_title=t.final_title or str(first(matched_trace,"title_it","title","source_title") or "")
+                t.final_url=t.final_url or str(first(matched_trace,"wp_link","published_url","final_url","path","url") or "")
+            t.trace_status="published"
         elif t.andrea_blocked_before_bob: t.trace_status="blocked_by_andrea"
         elif t.menzo_decision=="skip": t.trace_status="skipped"
         elif t.menzo_decision=="pending": t.trace_status="pending"
@@ -294,7 +445,6 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
     trace_list=sorted(traces.values(), key=lambda x:(x.trace_status,x.source,x.title))
     missed=[t for t in trace_list if t.trace_status!="published" and t.recall_class in {"must_publish_candidate","should_publish_candidate"}]
     soft=[t for t in trace_list if t.trace_status=="published" and t.recall_class=="optional_soft"]
-    published_records=[p for p in pubs if is_published_record(p)]
     over=overcoverage(published_records)
     reports=iter_items(simone,["reports","report_candidates"])+iter_items(simpub,["results","published_reports","reports"])
     overlaps=report_overlap(published_records,reports)
