@@ -287,3 +287,88 @@ def test_overcoverage_ignores_duplicated_local_artifacts_for_same_slug(tmp_path,
         artifact.write_text("<html><title>Vikingo injury surgery</title></html>", encoding="utf-8")
     text = run(tmp_path, monkeypatch)
     assert "- Potential story-thread overcoverage: 0" in text
+
+
+def test_window_artifacts_aggregate_multiple_runs_into_24h_audit(tmp_path, monkeypatch):
+    runs = tmp_path / "artifacts" / "newsroom_runs"
+    write(runs / "run1" / "massy_board.json", {"news_candidates_for_menzo": [
+        {"source": "Fightful", "title": "First WWE item", "url": "https://e.test/first"}
+    ]})
+    write(runs / "run2" / "massy_board.json", {"news_candidates_for_menzo": [
+        {"source": "WON", "title": "Second WWE item", "url": "https://e.test/second"}
+    ]})
+    write(runs / "run2" / "menzo_decisions.json", {"selected": [
+        {"title": "Second WWE item", "url": "https://e.test/second", "decision": "selected", "score": 82, "article_type": "hard_news"}
+    ], "pending": [], "skipped": []})
+    text = run(tmp_path, monkeypatch)
+    assert "mode: historical_window" in text
+    assert "Feed URLs seen: 2" in text
+    assert "First WWE item" in text and "Second WWE item" in text
+    assert "Feed URLs with Menzo decision: 1" in text
+
+
+def test_latest_only_fallback_emits_mode_and_warning(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": [
+        {"source": "Fightful", "title": "Latest snapshot item", "url": "https://e.test/latest"}
+    ]})
+    write(ns / "menzo_decisions_latest.json", {"selected": [], "pending": [], "skipped": []})
+    write(ns / "publisher_status_latest.json", {"results": []})
+    text = run(tmp_path, monkeypatch)
+    assert "mode: latest_snapshot_fallback" in text
+    assert "published coverage may be incomplete" in text
+
+
+def test_published_count_recovers_when_massy_and_publisher_are_different_runs(tmp_path, monkeypatch):
+    runs = tmp_path / "artifacts" / "newsroom_runs"
+    item = {"source": "Fightful", "title": "CM Punk wins title", "url": "https://e.test/punk-title"}
+    write(runs / "run1" / "massy_board.json", {"news_candidates_for_menzo": [item]})
+    write(runs / "run2" / "publisher_status.json", {"results": [
+        {"source_url": "https://e.test/punk-title", "title_it": "CM Punk wins title", "status": "published", "wp_link": "https://owtv.test/punk-title"}
+    ]})
+    text = run(tmp_path, monkeypatch)
+    assert "Feed URLs published: 1" in text
+    assert "| Final published | 1 |" in text
+    assert "CM Punk wins title" in text
+
+
+def test_source_coverage_publish_rate_recovered_from_per_run_artifacts(tmp_path, monkeypatch):
+    runs = tmp_path / "artifacts" / "newsroom_runs"
+    write(runs / "run1" / "massy_board.json", {"news_candidates_for_menzo": [
+        {"source": "Fightful", "title": "Published one", "url": "https://e.test/pub"},
+        {"source": "Fightful", "title": "Unpublished one", "url": "https://e.test/unpub"},
+    ]})
+    write(runs / "run2" / "publisher_status.json", {"results": [
+        {"source_url": "https://e.test/pub", "title_it": "Published one", "status": "published", "wp_link": "https://owtv.test/pub"}
+    ]})
+    text = run(tmp_path, monkeypatch)
+    assert "Feed URLs published: 1" in text
+    assert "| Fightful | 2 | 1 | 0 | 0 | 1 | 50% | 0 |" in text
+
+
+def test_raw_report_does_not_overlap_with_aew_dynamite_article(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": []})
+    write(ns / "menzo_decisions_latest.json", {"selected": [], "skipped": [], "pending": []})
+    write(ns / "publisher_status_latest.json", {"results": [
+        {"source_url": "https://e.test/dynamite", "title_it": "AEW Dynamite results new champion wins title", "status": "published"},
+    ]})
+    write(ns / "simone_reports_latest.json", {"reports": [{"title": "WWE Raw results July 6"}]})
+    text = run(tmp_path, monkeypatch)
+    assert "- Post-show/report overlap risks: 0" in text
+
+
+def test_raw_report_overlaps_raw_title_change_result_article(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": []})
+    write(ns / "menzo_decisions_latest.json", {"selected": [], "skipped": [], "pending": []})
+    write(ns / "publisher_status_latest.json", {"results": [
+        {"source_url": "https://e.test/raw-change", "title_it": "WWE Raw results new champion wins title", "status": "published"},
+    ]})
+    write(ns / "simone_reports_latest.json", {"reports": [{"title": "WWE Raw results July 6"}]})
+    text = run(tmp_path, monkeypatch)
+    assert "- Post-show/report overlap risks: 1" in text
+    assert "WWE Raw results new champion wins title" in text

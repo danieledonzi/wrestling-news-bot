@@ -319,19 +319,48 @@ def overcoverage(pubs: list[dict[str,Any]]) -> list[dict[str,Any]]:
             risks.append({"label":key,"count":len(items),"items":items,"reason":"possible_overcoverage: story_thread_saturation"})
     return sorted(risks, key=lambda r: r["count"], reverse=True)
 
+SHOW_FAMILIES = {
+    "raw": re.compile(r"\b(wwe\s+raw|raw|monday\s+night\s+raw)\b", re.I),
+    "smackdown": re.compile(r"\b(smackdown|friday\s+night\s+smackdown)\b", re.I),
+    "nxt": re.compile(r"\bnxt\b", re.I),
+    "dynamite": re.compile(r"\b(aew\s+dynamite|dynamite)\b", re.I),
+    "collision": re.compile(r"\b(aew\s+collision|collision)\b", re.I),
+}
+RAW_SPECIFIC_RE = re.compile(r"\b(wwe\s+raw|raw|monday\s+night\s+raw|raw\s+results?|results?\s+.*raw|title\s+(?:change|match)|main\s+event|new\s+champion|wins?\s+(?:the\s+)?title)\b", re.I)
+GENERAL_NON_RAW_RE = re.compile(r"\b(aew|dynamite|collision|tko|business|earnings|contract|backstage|roster update|media rights)\b", re.I)
+
+def show_family(text: str) -> str:
+    for family, rx in SHOW_FAMILIES.items():
+        if rx.search(text):
+            return family
+    return ""
+
+def article_matches_report_family(report_text: str, article_text: str) -> bool:
+    rfamily = show_family(report_text)
+    afamily = show_family(article_text)
+    if rfamily and afamily and rfamily != afamily:
+        return False
+    if rfamily == "raw":
+        if re.search(r"\b(aew\s+dynamite|dynamite|aew)\b", article_text, re.I):
+            return False
+        if RAW_SPECIFIC_RE.search(article_text):
+            return True
+        return False if GENERAL_NON_RAW_RE.search(article_text) else False
+    return bool(rfamily and afamily == rfamily)
+
 def report_overlap(pubs: list[dict[str,Any]], reports: list[dict[str,Any]]) -> list[dict[str,Any]]:
     risks=[]
     for r in reports:
         rt=parse_dt(first(r,"published_at","generated_at","created_at")) or utc_now()
         rtitle=str(first(r,"title","show","show_name") or "report")
         rbody=str(first(r,"body","content","html","summary") or "")
-        rterms=tokens(rtitle+" "+rbody)
+        report_text = rtitle + " " + rbody
         for p in pubs:
             title=str(first(p,"title_it","title","source_title") or "")
-            pterms=tokens(title+" "+str(first(p,"body","content","summary") or ""))
-            has_show_marker = bool(SHOW_MARKER_RE.search(title))
-            shares_show_term = bool(rterms & pterms & {"raw","smackdown","dynamite","collision","nxt","results","result","championship","segment"})
-            if (has_show_marker or shares_show_term) and abs(((parse_dt(first(p,"published_at","created_at")) or rt)-rt).total_seconds()) <= 24*3600:
+            article_text = title + " " + str(first(p,"body","content","summary") or "")
+            if not article_matches_report_family(report_text, article_text):
+                continue
+            if abs(((parse_dt(first(p,"published_at","created_at")) or rt)-rt).total_seconds()) <= 24*3600:
                 cls="likely_valid_major_angle" if HARD_RE.search(title) else "possible_report_duplicate"
                 risks.append({"report":rtitle,"title":title,"classification":cls})
     return risks
@@ -354,18 +383,102 @@ def massy_status(decision: str, assigned: str, kind: str, reason: str) -> str:
         return "skipped"
     return ""
 
+
+def file_in_window(path: Path, obj: Any, since: datetime, until: datetime) -> bool:
+    candidates: list[datetime] = []
+    if isinstance(obj, dict):
+        dt = parse_dt(first(obj, "generated_at", "created_at", "published_at", "run_at", "timestamp"))
+        if dt:
+            candidates.append(dt)
+    try:
+        candidates.append(datetime.fromtimestamp(path.stat().st_mtime, timezone.utc))
+    except Exception:
+        pass
+    return any(since <= dt <= until for dt in candidates)
+
+def merge_stage(dest: dict[str, Any], src: dict[str, Any], keys: list[str]) -> None:
+    for key in keys:
+        val = src.get(key)
+        if isinstance(val, list):
+            dest.setdefault(key, []).extend([x for x in val if isinstance(x, dict)])
+
+def collect_window_artifacts(since: datetime, until: datetime, warnings: list[str]) -> tuple[dict[str, Any], bool]:
+    """Aggregate historical per-run newsroom artifacts in the audit window.
+
+    Returns a stage bundle plus whether any historical run artifact was found.
+    """
+    bundle: dict[str, Any] = {
+        "massy": {}, "menzo": {}, "bob": {}, "andrea": {},
+        "alfred": {}, "publisher": {}, "simone": {}, "simpub": {},
+    }
+    roots = [ARTIFACTS / "newsroom_runs", ARTIFACTS / "newsroom", NEWSROOM]
+    latest_re = re.compile(r"_latest\.json$", re.I)
+    found = False
+    for base in roots:
+        if not base.exists():
+            continue
+        for path in base.rglob("*.json"):
+            if not path.is_file() or latest_re.search(path.name):
+                continue
+            try:
+                obj = json.loads(path.read_text(encoding="utf-8"))
+            except Exception as exc:
+                warnings.append(f"unreadable_historical_artifact: {path}: {exc}")
+                continue
+            if not isinstance(obj, dict) or not file_in_window(path, obj, since, until):
+                continue
+            if path.is_relative_to(ARTIFACTS / "newsroom") and not parse_dt(first(obj, "generated_at", "created_at", "published_at", "run_at", "timestamp")):
+                # artifacts/newsroom also contains generic diagnostic snapshots;
+                # require an embedded run timestamp there so mtime-only ad-hoc
+                # snapshots are not mistaken for historical run coverage.
+                continue
+            name = path.name.lower()
+            # Also recognize run bundles that carry multiple stage keys.
+            run_obj = obj.get("newsroom") if isinstance(obj.get("newsroom"), dict) else obj
+            found = True
+            if "massy" in name or any(k in run_obj for k in ["news_candidates_for_menzo", "report_candidates", "hard_skipped", "already_worked"]):
+                if any(k in run_obj for k in ["news_candidates_for_menzo", "report_candidates", "hard_skipped", "already_worked", "items", "entries"]):
+                    merge_stage(bundle["massy"], run_obj, ["news_candidates_for_menzo", "report_candidates", "hard_skipped", "already_worked", "items", "entries"])
+                elif first(run_obj, "url", "source_url"):
+                    bundle["massy"].setdefault("news_candidates_for_menzo", []).append(run_obj)
+            if "menzo" in name or any(k in run_obj for k in ["selected", "pending", "skipped"]):
+                merge_stage(bundle["menzo"], run_obj, ["selected", "pending", "skipped"])
+            if "andrea" in name:
+                merge_stage(bundle["andrea"], run_obj, ["blocked_items", "passed_items", "selected", "items", "results"])
+            if "bob" in name or "articles" in run_obj:
+                merge_stage(bundle["bob"], run_obj, ["articles"])
+            if "alfred" in name or any(k in run_obj for k in ["reviews", "approved_articles"]):
+                merge_stage(bundle["alfred"], run_obj, ["reviews", "approved_articles"])
+            if "publisher" in name or any(k in run_obj for k in ["results", "skipped_approved_articles"]):
+                if any(k in run_obj for k in ["results", "skipped_approved_articles"]):
+                    merge_stage(bundle["publisher"], run_obj, ["results", "skipped_approved_articles"])
+                elif is_published_record(run_obj) or first(run_obj, "source_url", "url"):
+                    bundle["publisher"].setdefault("results", []).append(run_obj)
+            if "simone_report_publish" in name:
+                merge_stage(bundle["simpub"], run_obj, ["results", "published_reports", "reports"])
+            elif "simone" in name or any(k in run_obj for k in ["reports", "report_candidates"]):
+                merge_stage(bundle["simone"], run_obj, ["reports", "report_candidates"])
+    return bundle, found
+
 def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
     global ROOT, STATE, NEWSROOM, ARTIFACTS
     ROOT=root; STATE=root/"state"; NEWSROOM=STATE/"newsroom"; ARTIFACTS=root/"artifacts"
     until=utc_now(); since=until-timedelta(hours=hours); warnings=[]
-    massy=load_json(NEWSROOM/"massy_board_latest.json", warnings, {})
-    menzo=load_json(NEWSROOM/"menzo_decisions_latest.json", warnings, {})
-    bob=load_json(NEWSROOM/"bob_articles_latest.json", warnings, {})
-    andrea=load_json(NEWSROOM/"andrea_pre_bob_latest.json", warnings, {})
-    alfred=load_json(NEWSROOM/"alfred_review_latest.json", warnings, {})
-    publisher=load_json(NEWSROOM/"publisher_status_latest.json", warnings, {})
-    simone=load_json(NEWSROOM/"simone_reports_latest.json", warnings, {})
-    simpub=load_json(NEWSROOM/"simone_report_publish_latest.json", warnings, {})
+    historical, has_historical = collect_window_artifacts(since, until, warnings)
+    mode = "historical_window" if has_historical else "latest_snapshot_fallback"
+    if has_historical:
+        massy=historical["massy"]; menzo=historical["menzo"]; bob=historical["bob"]; andrea=historical["andrea"]
+        alfred=historical["alfred"]; publisher=historical["publisher"]; simone=historical["simone"]; simpub=historical["simpub"]
+    else:
+        warnings.append("mode: latest_snapshot_fallback - published coverage may be incomplete because no historical per-run artifacts were found")
+        massy=load_json(NEWSROOM/"massy_board_latest.json", warnings, {})
+        menzo=load_json(NEWSROOM/"menzo_decisions_latest.json", warnings, {})
+        bob=load_json(NEWSROOM/"bob_articles_latest.json", warnings, {})
+        andrea=load_json(NEWSROOM/"andrea_pre_bob_latest.json", warnings, {})
+        alfred=load_json(NEWSROOM/"alfred_review_latest.json", warnings, {})
+        publisher=load_json(NEWSROOM/"publisher_status_latest.json", warnings, {})
+        simone=load_json(NEWSROOM/"simone_reports_latest.json", warnings, {})
+        simpub=load_json(NEWSROOM/"simone_report_publish_latest.json", warnings, {})
     for extra in ["archivista_report_latest.json","gemini_call_ledger.jsonl","report_publication_registry.json"]:
         if not (NEWSROOM/extra).exists(): warnings.append(f"missing_input: state/newsroom/{extra}")
     for extra in ["manual_runs.json","report_status.json"]:
@@ -449,7 +562,7 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
     reports=iter_items(simone,["reports","report_candidates"])+iter_items(simpub,["results","published_reports","reports"])
     overlaps=report_overlap(published_records,reports)
     def c(status): return sum(1 for t in trace_list if t.trace_status==status)
-    lines=[f"# OWTV Feed Coverage Editorial Recall Audit v95.8", "", f"Artifact marker: `{MARKER}`", f"Window: {hours}h ({since.isoformat()} → {until.isoformat()} UTC)", "", "## 1. Executive summary", "", f"- Feed URLs seen: {len(trace_list)}", f"- Feed URLs with Menzo decision: {sum(1 for t in trace_list if t.menzo_decision)}", f"- Feed URLs published: {c('published')}", f"- Feed URLs skipped: {c('skipped')}", f"- Feed URLs pending: {c('pending')}", f"- Feed URLs unknown/untracked: {c('unknown')}", f"- Potential must-publish missed: {sum(1 for t in missed if t.recall_class=='must_publish_candidate')}", f"- Potential should-publish missed: {sum(1 for t in missed if t.recall_class=='should_publish_candidate')}", f"- Potential overpublished soft items: {len(soft)}", f"- Potential story-thread overcoverage: {len(over)}", f"- Post-show/report overlap risks: {len(overlaps)}", "", "## 2. Coverage funnel", "", "| Stage | Count |", "|---|---:|", f"| Massy feed URLs | {len(trace_list)} |", f"| Menzo evaluated | {sum(1 for t in trace_list if t.menzo_decision)} |", f"| Menzo selected | {sum(1 for t in trace_list if t.menzo_decision=='selected')} |", f"| Menzo pending | {sum(1 for t in trace_list if t.menzo_decision=='pending')} |", f"| Menzo skipped | {sum(1 for t in trace_list if t.menzo_decision=='skip')} |", f"| Andrea checked/passed/blocked | n/a / {sum(1 for t in trace_list if t.andrea_outcome=='passed')} / {sum(1 for t in trace_list if t.andrea_outcome=='blocked')} |", f"| Bob generated | {sum(1 for t in trace_list if t.bob_outcome)} |", f"| Alfred approved/warnings/blockers | {sum(1 for t in trace_list if t.alfred_outcome=='approved')} / n/a / n/a |", f"| Publisher published/already/errors | {sum(1 for t in trace_list if t.publisher_outcome=='published')} / {sum(1 for t in trace_list if t.publisher_outcome=='already_published')} / {sum(1 for t in trace_list if 'error' in t.publisher_outcome)} |", f"| Final published | {c('published')} |", ""]
+    lines=[f"# OWTV Feed Coverage Editorial Recall Audit v95.8", "", f"Artifact marker: `{MARKER}`", f"Window: {hours}h ({since.isoformat()} → {until.isoformat()} UTC)", f"mode: {mode}", "", "## 1. Executive summary", "", f"- Feed URLs seen: {len(trace_list)}", f"- Feed URLs with Menzo decision: {sum(1 for t in trace_list if t.menzo_decision)}", f"- Feed URLs published: {c('published')}", f"- Feed URLs skipped: {c('skipped')}", f"- Feed URLs pending: {c('pending')}", f"- Feed URLs unknown/untracked: {c('unknown')}", f"- Potential must-publish missed: {sum(1 for t in missed if t.recall_class=='must_publish_candidate')}", f"- Potential should-publish missed: {sum(1 for t in missed if t.recall_class=='should_publish_candidate')}", f"- Potential overpublished soft items: {len(soft)}", f"- Potential story-thread overcoverage: {len(over)}", f"- Post-show/report overlap risks: {len(overlaps)}", "", "## 2. Coverage funnel", "", "| Stage | Count |", "|---|---:|", f"| Massy feed URLs | {len(trace_list)} |", f"| Menzo evaluated | {sum(1 for t in trace_list if t.menzo_decision)} |", f"| Menzo selected | {sum(1 for t in trace_list if t.menzo_decision=='selected')} |", f"| Menzo pending | {sum(1 for t in trace_list if t.menzo_decision=='pending')} |", f"| Menzo skipped | {sum(1 for t in trace_list if t.menzo_decision=='skip')} |", f"| Andrea checked/passed/blocked | n/a / {sum(1 for t in trace_list if t.andrea_outcome=='passed')} / {sum(1 for t in trace_list if t.andrea_outcome=='blocked')} |", f"| Bob generated | {sum(1 for t in trace_list if t.bob_outcome)} |", f"| Alfred approved/warnings/blockers | {sum(1 for t in trace_list if t.alfred_outcome=='approved')} / n/a / n/a |", f"| Publisher published/already/errors | {sum(1 for t in trace_list if t.publisher_outcome=='published')} / {sum(1 for t in trace_list if t.publisher_outcome=='already_published')} / {sum(1 for t in trace_list if 'error' in t.publisher_outcome)} |", f"| Final published | {c('published')} |", ""]
     lines += ["## 3. Feed URL trace table", "", "| source | source_title | source_url | feed published_at | Massy disposition/reason/score | Menzo decision | Menzo reason | score | priority | article_type | duplicate/story | Andrea outcome/reason | Bob | Alfred | Publisher | final title/url | trace_status | editorial_recall_class |", "|---|---|---|---|---|---|---|---:|---|---|---|---|---|---|---|---|---|---|"]
     for t in trace_list:
         esc=lambda s: str(s or "").replace("|","/")[:180]
@@ -467,7 +580,8 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
     lines += ["", "## 9. Category/type coverage", "", "| type/category | count |", "|---|---:|"]
     for typ in sorted({(t.article_type or ('report' if t.trace_status=='report_candidate' else 'unknown')) for t in trace_list}): lines.append(f"| {typ} | {sum(1 for t in trace_list if (t.article_type or ('report' if t.trace_status=='report_candidate' else 'unknown'))==typ)} |")
     lines += ["", "## 10. Human review samples", "", "### Top skipped candidates to review"] + ([f"- {t.recall_class}: {t.title} — {t.url}" for t in missed[:5]] or ["- None."])
-    lines += ["", "### Top published candidates to quality-check"] + ([f"- optional_soft: {t.final_title or t.title} — {t.url}" for t in soft[:5]] or ["- None."])
+    published_samples = soft[:5] or [t for t in trace_list if t.trace_status=="published"][:5]
+    lines += ["", "### Top published candidates to quality-check"] + ([f"- {t.recall_class}: {t.final_title or t.title} — {t.url}" for t in published_samples] or ["- None."])
     lines += ["", "### Top overcoverage candidates"] + ([f"- {r['label']} ({r['count']})" for r in over[:5]] or ["- None."])
     lines += ["", "### Top unknown/untracked URLs"] + ([f"- {t.title} — {t.url}" for t in trace_list if t.trace_status=='unknown'][:5] or ["- None."])
     lines += ["", "## Input warnings", ""] + ([f"- {w}" for w in warnings] or ["- None."])
