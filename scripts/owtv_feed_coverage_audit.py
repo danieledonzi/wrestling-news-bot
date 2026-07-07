@@ -39,6 +39,8 @@ class Trace:
     source: str = ""
     title: str = ""
     published_at: str = ""
+    massy_decision: str = ""
+    massy_reason: str = ""
     kind_hint: str = ""
     score_hint: str = ""
     menzo_decision: str = ""
@@ -48,6 +50,8 @@ class Trace:
     article_type: str = ""
     duplicate_reason: str = ""
     andrea_outcome: str = ""
+    andrea_reason: str = ""
+    andrea_blocked_before_bob: bool = False
     bob_outcome: str = ""
     alfred_outcome: str = ""
     publisher_outcome: str = ""
@@ -113,6 +117,16 @@ def in_window(item: dict[str, Any], since: datetime, until: datetime) -> bool:
 
 def classify(t: Trace, published: bool) -> str:
     blob = f"{t.title} {t.menzo_reason} {t.article_type} {t.priority_label}".lower()
+    if not published and t.andrea_blocked_before_bob:
+        t.why.append(f"andrea_blocked_before_bob:{t.andrea_reason or t.andrea_outcome}")
+        if t.score is not None and t.score >= 80:
+            t.why.append("needs_human_review_high_score_andrea_block")
+        return "correctly_skipped_likely"
+    if not published and t.trace_status in {"skipped", "already_seen", "already_worked", "report_candidate"}:
+        massy_blob = f"{t.massy_decision} {t.massy_reason} {t.kind_hint}".lower()
+        if re.search(r"hard_skip|already|report_candidate|simone|duplicate|low|expired|history|published", massy_blob):
+            t.why.append(f"massy_disposition:{t.massy_decision or t.kind_hint}")
+            return "correctly_skipped_likely"
     strong = []
     if t.score is not None and t.score >= 80: strong.append("score>=80")
     if str(t.priority_label).lower() in {"high", "critical", "hard"}: strong.append("high_priority")
@@ -183,6 +197,24 @@ def report_overlap(pubs: list[dict[str,Any]], reports: list[dict[str,Any]]) -> l
                 risks.append({"report":rtitle,"title":title,"classification":cls})
     return risks
 
+def is_published_record(item: dict[str, Any]) -> bool:
+    status = str(item.get("status") or "").lower()
+    if status in {"published", "published_file", "already_published"}:
+        return True
+    if status in {"skipped_approved_articles", "wp_not_ready", "publish_error", "skipped_capacity", "skipped", "error"}:
+        return False
+    return bool(first(item, "wp_link", "published_url", "final_url", "path") and status not in {"wp_not_ready", "publish_error", "skipped_capacity"})
+
+def massy_status(decision: str, assigned: str, kind: str, reason: str) -> str:
+    blob = f"{decision} {assigned} {kind} {reason}".lower()
+    if "report_candidate" in blob or assigned.lower() == "simone":
+        return "report_candidate"
+    if "already_worked" in blob or "already_seen" in blob or "already_published" in blob:
+        return "already_seen"
+    if "hard_skip" in blob:
+        return "skipped"
+    return ""
+
 def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
     global ROOT, STATE, NEWSROOM, ARTIFACTS
     ROOT=root; STATE=root/"state"; NEWSROOM=STATE/"newsroom"; ARTIFACTS=root/"artifacts"
@@ -190,6 +222,7 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
     massy=load_json(NEWSROOM/"massy_board_latest.json", warnings, {})
     menzo=load_json(NEWSROOM/"menzo_decisions_latest.json", warnings, {})
     bob=load_json(NEWSROOM/"bob_articles_latest.json", warnings, {})
+    andrea=load_json(NEWSROOM/"andrea_pre_bob_latest.json", warnings, {})
     alfred=load_json(NEWSROOM/"alfred_review_latest.json", warnings, {})
     publisher=load_json(NEWSROOM/"publisher_status_latest.json", warnings, {})
     simone=load_json(NEWSROOM/"simone_reports_latest.json", warnings, {})
@@ -207,7 +240,12 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
         if not in_window(it,since,until): continue
         u=norm_url(first(it,"url","source_url","link"));
         if not u: continue
-        traces[u]=Trace(url=u, source=str(first(it,"source","source_id","feed") or ""), title=str(first(it,"title","source_title") or ""), published_at=str(first(it,"published","published_at") or ""), kind_hint=str(first(it,"kind","kind_hint","assigned_to") or ""), score_hint=str(first(it,"score","score_hint") or ""))
+        massy_decision=str(first(it,"decision","kind","kind_hint") or "")
+        assigned=str(it.get("assigned_to") or "")
+        traces[u]=Trace(url=u, source=str(first(it,"source","source_id","feed") or ""), title=str(first(it,"title","source_title") or ""), published_at=str(first(it,"published","published_at") or ""), massy_decision=massy_decision, massy_reason=str(first(it,"reason","original_report_reason","skip_reason") or ""), kind_hint=str(first(it,"kind_hint","kind","assigned_to") or ""), score_hint=str(first(it,"score","score_hint") or ""))
+        status=massy_status(massy_decision, assigned, traces[u].kind_hint, traces[u].massy_reason)
+        if status:
+            traces[u].trace_status=status
     menzo_items=iter_items(menzo,["selected","pending","skipped"])
     for it in menzo_items:
         u=norm_url(first(it,"url","source_url"));
@@ -218,6 +256,15 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
         except Exception: pass
         t.priority_label=str(first(it,"ai_priority_label","priority_label","priority") or ""); t.article_type=str(it.get("article_type") or ""); t.duplicate_reason=str(first(it,"duplicate_of","duplicate_reason","event_key") or "")
         if not t.title: t.title=str(first(it,"title","source_title") or "")
+    for it in iter_items(andrea,["blocked_items","passed_items","selected","items","results"]):
+        u=norm_url(first(it,"source_url","url"));
+        if not u: continue
+        t=traces.setdefault(u, Trace(url=u, title=str(first(it,"title","source_title") or "")))
+        raw_outcome=str(first(it,"andrea_outcome","status","decision","outcome") or "")
+        blocked=bool(first(it,"andrea_blocked_before_bob","blocked_before_bob")) or raw_outcome.lower() in {"blocked","rejected","failed","blocked_before_bob"}
+        t.andrea_blocked_before_bob=blocked
+        t.andrea_outcome="blocked" if blocked else (raw_outcome or "passed")
+        t.andrea_reason=str(first(it,"reason","andrea_reason","block_reason","guard_reason") or "")
     for it in iter_items(bob,["articles"]):
         u=norm_url(first(it,"source_url","url"));
         if u in traces: traces[u].bob_outcome=str(it.get("status") or "generated")
@@ -225,33 +272,40 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
         art=rev.get("approved_article") if isinstance(rev.get("approved_article"),dict) else rev
         u=norm_url(first(art,"source_url","url"));
         if u in traces: traces[u].alfred_outcome=str(rev.get("decision") or "approved")
-    pubs=iter_items(publisher,["results","skipped_approved_articles"])+extract_published_from_files(since,until)
+    publisher_records=iter_items(publisher,["results","skipped_approved_articles"])
+    file_pubs=extract_published_from_files(since,until)
+    pubs=publisher_records+file_pubs
     for it in pubs:
         u=norm_url(first(it,"source_url","url"));
         if u:
             t=traces.setdefault(u, Trace(url=u, title=str(first(it,"title_it","title") or "")))
             t.publisher_outcome=str(it.get("status") or ""); t.final_title=str(first(it,"title_it","title") or t.title); t.final_url=str(first(it,"wp_link","url","path") or "")
     for t in traces.values():
-        published=t.publisher_outcome in {"published","already_published","dry_run","published_file"} or bool(t.final_url and t.publisher_outcome)
+        published=t.publisher_outcome in {"published","already_published","published_file"} or bool(t.final_url and t.publisher_outcome not in {"wp_not_ready","publish_error","skipped_capacity","skipped"})
         if published: t.trace_status="published"
+        elif t.andrea_blocked_before_bob: t.trace_status="blocked_by_andrea"
         elif t.menzo_decision=="skip": t.trace_status="skipped"
         elif t.menzo_decision=="pending": t.trace_status="pending"
+        elif t.trace_status in {"report_candidate", "already_seen", "skipped"}: pass
         elif t.kind_hint=="report_candidate": t.trace_status="report_candidate"
-        elif re.search("already", f"{t.kind_hint} {t.menzo_reason}", re.I): t.trace_status="already_seen"
+        elif re.search("already", f"{t.kind_hint} {t.menzo_reason} {t.massy_decision} {t.massy_reason}", re.I): t.trace_status="already_seen"
         else: t.trace_status="unknown"
         t.recall_class=classify(t,published)
     trace_list=sorted(traces.values(), key=lambda x:(x.trace_status,x.source,x.title))
     missed=[t for t in trace_list if t.trace_status!="published" and t.recall_class in {"must_publish_candidate","should_publish_candidate"}]
     soft=[t for t in trace_list if t.trace_status=="published" and t.recall_class=="optional_soft"]
-    over=overcoverage([p for p in pubs if str(p.get("status")) in {"published","already_published","dry_run","published_file"}])
+    published_records=[p for p in pubs if is_published_record(p)]
+    over=overcoverage(published_records)
     reports=iter_items(simone,["reports","report_candidates"])+iter_items(simpub,["results","published_reports","reports"])
-    overlaps=report_overlap(pubs,reports)
+    overlaps=report_overlap(published_records,reports)
     def c(status): return sum(1 for t in trace_list if t.trace_status==status)
     lines=[f"# OWTV Feed Coverage Editorial Recall Audit v95.8", "", f"Artifact marker: `{MARKER}`", f"Window: {hours}h ({since.isoformat()} → {until.isoformat()} UTC)", "", "## 1. Executive summary", "", f"- Feed URLs seen: {len(trace_list)}", f"- Feed URLs with Menzo decision: {sum(1 for t in trace_list if t.menzo_decision)}", f"- Feed URLs published: {c('published')}", f"- Feed URLs skipped: {c('skipped')}", f"- Feed URLs pending: {c('pending')}", f"- Feed URLs unknown/untracked: {c('unknown')}", f"- Potential must-publish missed: {sum(1 for t in missed if t.recall_class=='must_publish_candidate')}", f"- Potential should-publish missed: {sum(1 for t in missed if t.recall_class=='should_publish_candidate')}", f"- Potential overpublished soft items: {len(soft)}", f"- Potential story-thread overcoverage: {len(over)}", f"- Post-show/report overlap risks: {len(overlaps)}", "", "## 2. Coverage funnel", "", "| Stage | Count |", "|---|---:|", f"| Massy feed URLs | {len(trace_list)} |", f"| Menzo evaluated | {sum(1 for t in trace_list if t.menzo_decision)} |", f"| Menzo selected | {sum(1 for t in trace_list if t.menzo_decision=='selected')} |", f"| Menzo pending | {sum(1 for t in trace_list if t.menzo_decision=='pending')} |", f"| Menzo skipped | {sum(1 for t in trace_list if t.menzo_decision=='skip')} |", f"| Andrea checked/passed/blocked | n/a / {sum(1 for t in trace_list if t.andrea_outcome=='passed')} / {sum(1 for t in trace_list if t.andrea_outcome=='blocked')} |", f"| Bob generated | {sum(1 for t in trace_list if t.bob_outcome)} |", f"| Alfred approved/warnings/blockers | {sum(1 for t in trace_list if t.alfred_outcome=='approved')} / n/a / n/a |", f"| Publisher published/already/errors | {sum(1 for t in trace_list if t.publisher_outcome=='published')} / {sum(1 for t in trace_list if t.publisher_outcome=='already_published')} / {sum(1 for t in trace_list if 'error' in t.publisher_outcome)} |", f"| Final published | {c('published')} |", ""]
-    lines += ["## 3. Feed URL trace table", "", "| source | source_title | source_url | feed published_at | Massy kind/score | Menzo decision | Menzo reason | score | priority | article_type | duplicate/story | Andrea | Bob | Alfred | Publisher | final title/url | trace_status | editorial_recall_class |", "|---|---|---|---|---|---|---|---:|---|---|---|---|---|---|---|---|---|---|"]
+    lines += ["## 3. Feed URL trace table", "", "| source | source_title | source_url | feed published_at | Massy disposition/reason/score | Menzo decision | Menzo reason | score | priority | article_type | duplicate/story | Andrea outcome/reason | Bob | Alfred | Publisher | final title/url | trace_status | editorial_recall_class |", "|---|---|---|---|---|---|---|---:|---|---|---|---|---|---|---|---|---|---|"]
     for t in trace_list:
         esc=lambda s: str(s or "").replace("|","/")[:180]
-        lines.append(f"| {esc(t.source)} | {esc(t.title)} | {esc(t.url)} | {esc(t.published_at)} | {esc(t.kind_hint+'/'+t.score_hint)} | {esc(t.menzo_decision)} | {esc(t.menzo_reason)} | {t.score if t.score is not None else ''} | {esc(t.priority_label)} | {esc(t.article_type)} | {esc(t.duplicate_reason)} | {esc(t.andrea_outcome)} | {esc(t.bob_outcome)} | {esc(t.alfred_outcome)} | {esc(t.publisher_outcome)} | {esc(t.final_title or t.final_url)} | {t.trace_status} | {t.recall_class} |")
+        massy_cell = "/".join(x for x in [t.massy_decision or t.kind_hint, t.massy_reason, t.score_hint] if x)
+        andrea_cell = "/".join(x for x in [t.andrea_outcome, t.andrea_reason] if x)
+        lines.append(f"| {esc(t.source)} | {esc(t.title)} | {esc(t.url)} | {esc(t.published_at)} | {esc(massy_cell)} | {esc(t.menzo_decision)} | {esc(t.menzo_reason)} | {t.score if t.score is not None else ''} | {esc(t.priority_label)} | {esc(t.article_type)} | {esc(t.duplicate_reason)} | {esc(andrea_cell)} | {esc(t.bob_outcome)} | {esc(t.alfred_outcome)} | {esc(t.publisher_outcome)} | {esc(t.final_title or t.final_url)} | {t.trace_status} | {t.recall_class} |")
     lines += ["", "## 4. Potential missed stories", ""] + ([f"- **{t.title or t.url}** ({t.source}) — {t.url} — potential_miss: {', '.join(t.why) or 'review signal'}; skipped/trace reason: {t.menzo_reason or t.trace_status}; suggested human action: {'check_policy' if 'duplicate' in t.menzo_reason else 'review'}" for t in missed] or ["- None detected."])
     lines += ["", "## 5. Potential overpublished soft items", ""] + ([f"- **{t.final_title or t.title}** — possible_overpublished_soft_item: {', '.join(t.why)} — {t.url}" for t in soft] or ["- None detected."])
     lines += ["", "## 6. Story thread overcoverage", ""] + ([f"- **{r['label']}** ({r['count']} published) — {r['reason']}; titles: " + "; ".join(str(first(i,'title_it','title','source_title')) for i in r['items']) for r in over] or ["- None detected by fallback grouping; latest story cluster audit, if present, should be reviewed separately."])

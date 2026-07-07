@@ -21,6 +21,7 @@ def run(tmp_path, monkeypatch):
 
 def seed_required(tmp_path):
     ns = tmp_path / "state" / "newsroom"
+    write(ns / "andrea_pre_bob_latest.json", {"blocked_items": [], "passed_items": []})
     write(ns / "bob_articles_latest.json", {"articles": []})
     write(ns / "alfred_review_latest.json", {"reviews": [], "approved_articles": []})
     write(ns / "simone_reports_latest.json", {"reports": []})
@@ -76,3 +77,52 @@ def test_missing_input_files_do_not_crash(tmp_path, monkeypatch):
     text = run(tmp_path, monkeypatch)
     assert "Feed URLs seen: 0" in text
     assert "Input warnings" in text
+
+
+def test_massy_routing_decisions_are_preserved(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    write(ns / "massy_board_latest.json", {
+        "report_candidates": [{"source":"A", "title":"Raw results", "url":"https://e.test/report", "decision":"report_candidate", "assigned_to":"Simone", "reason":"report_like_title"}],
+        "already_worked": [{"source":"B", "title":"Seen", "url":"https://e.test/seen", "decision":"already_worked", "reason":"history_match"}],
+        "hard_skipped": [{"source":"C", "title":"Skipped", "url":"https://e.test/skip", "decision":"hard_skip", "reason":"url_already_published"}],
+    })
+    write(ns / "menzo_decisions_latest.json", {"selected": [], "skipped": [], "pending": []})
+    write(ns / "publisher_status_latest.json", {"results": []})
+    text = run(tmp_path, monkeypatch)
+    assert "report_candidate" in text
+    assert "already_seen" in text
+    assert "hard_skip/url_already_published" in text
+    assert "https://e.test/report" in text and "| unknown |" not in text.split("https://e.test/report", 1)[1].splitlines()[0]
+
+
+def test_andrea_blocked_selected_high_score_is_not_potential_miss(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    item = {"source":"Fightful", "title":"Major star signs with WWE", "url":"https://e.test/andrea"}
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": [item]})
+    write(ns / "menzo_decisions_latest.json", {"selected": [{**item, "decision":"selected", "score":94, "priority":"hard", "article_type":"roster"}], "skipped": [], "pending": []})
+    write(ns / "andrea_pre_bob_latest.json", {"blocked_items": [{**item, "status":"blocked", "reason":"insufficient_content", "andrea_blocked_before_bob": True}]})
+    write(ns / "publisher_status_latest.json", {"results": []})
+    text = run(tmp_path, monkeypatch)
+    assert "blocked_by_andrea" in text
+    assert "blocked/insufficient_content" in text
+    assert "- Potential must-publish missed: 0" in text
+    assert "potential_miss" not in text
+
+
+def test_report_overlap_ignores_unpublished_publisher_records(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    item = {"source":"A", "title":"WWE Raw results not published", "url":"https://e.test/unpub"}
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": [item]})
+    write(ns / "menzo_decisions_latest.json", {"selected": [{**item, "decision":"selected", "score":75, "article_type":"result_event"}], "skipped": [], "pending": []})
+    write(ns / "publisher_status_latest.json", {"results": [
+        {"source_url":"https://e.test/unpub", "title_it":"WWE Raw results not published", "status":"wp_not_ready"}
+    ], "skipped_approved_articles": [
+        {"source_url":"https://e.test/capacity", "title_it":"WWE Raw results capacity", "status":"skipped_capacity"}
+    ]})
+    write(ns / "simone_reports_latest.json", {"reports": [{"title":"WWE Raw report"}]})
+    text = run(tmp_path, monkeypatch)
+    assert "- Post-show/report overlap risks: 0" in text
+    assert "## 7. Report/post-show overlap\n\n- None detected." in text
