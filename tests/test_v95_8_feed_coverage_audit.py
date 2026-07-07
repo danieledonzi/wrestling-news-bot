@@ -324,7 +324,7 @@ def test_published_count_recovers_when_massy_and_publisher_are_different_runs(tm
     runs = tmp_path / "artifacts" / "newsroom_runs"
     item = {"source": "Fightful", "title": "CM Punk wins title", "url": "https://e.test/punk-title"}
     write(runs / "run1" / "massy_board.json", {"news_candidates_for_menzo": [item]})
-    write(runs / "run2" / "publisher_status.json", {"results": [
+    write(runs / "run2" / "publisher_status.json", {"generated_at": audit.utc_now().isoformat(), "results": [
         {"source_url": "https://e.test/punk-title", "title_it": "CM Punk wins title", "status": "published", "wp_link": "https://owtv.test/punk-title"}
     ]})
     text = run(tmp_path, monkeypatch)
@@ -339,7 +339,7 @@ def test_source_coverage_publish_rate_recovered_from_per_run_artifacts(tmp_path,
         {"source": "Fightful", "title": "Published one", "url": "https://e.test/pub"},
         {"source": "Fightful", "title": "Unpublished one", "url": "https://e.test/unpub"},
     ]})
-    write(runs / "run2" / "publisher_status.json", {"results": [
+    write(runs / "run2" / "publisher_status.json", {"generated_at": audit.utc_now().isoformat(), "results": [
         {"source_url": "https://e.test/pub", "title_it": "Published one", "status": "published", "wp_link": "https://owtv.test/pub"}
     ]})
     text = run(tmp_path, monkeypatch)
@@ -372,3 +372,86 @@ def test_raw_report_overlaps_raw_title_change_result_article(tmp_path, monkeypat
     text = run(tmp_path, monkeypatch)
     assert "- Post-show/report overlap risks: 1" in text
     assert "WWE Raw results new champion wins title" in text
+
+
+def test_old_generated_at_artifact_with_fresh_mtime_is_excluded(tmp_path, monkeypatch):
+    runs = tmp_path / "artifacts" / "newsroom_runs"
+    write(runs / "old" / "massy_board.json", {
+        "generated_at": "2000-01-01T00:00:00Z",
+        "news_candidates_for_menzo": [
+            {"source": "Old", "title": "Old generated item", "url": "https://e.test/old-generated"}
+        ],
+    })
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": []})
+    write(ns / "menzo_decisions_latest.json", {"selected": [], "pending": [], "skipped": []})
+    write(ns / "publisher_status_latest.json", {"results": []})
+    text = run(tmp_path, monkeypatch)
+    assert "Old generated item" not in text
+    assert "mode: latest_snapshot_fallback" in text
+
+
+def test_artifact_without_embedded_timestamp_can_use_mtime_fallback(tmp_path, monkeypatch):
+    runs = tmp_path / "artifacts" / "newsroom_runs"
+    write(runs / "mtime" / "massy_board.json", {"news_candidates_for_menzo": [
+        {"source": "Fightful", "title": "Fresh mtime item", "url": "https://e.test/fresh-mtime"}
+    ]})
+    text = run(tmp_path, monkeypatch)
+    assert "mode: historical_window" in text
+    assert "Fresh mtime item" in text
+
+
+def test_publisher_rows_inherit_trusted_parent_generated_at(tmp_path, monkeypatch):
+    runs = tmp_path / "artifacts" / "newsroom_runs"
+    item = {"source": "Fightful", "title": "Trusted parent publish", "url": "https://e.test/trusted-parent"}
+    write(runs / "run1" / "massy_board.json", {"news_candidates_for_menzo": [item]})
+    write(runs / "run2" / "publisher_status.json", {
+        "generated_at": audit.utc_now().isoformat(),
+        "results": [
+            {"source_url": "https://e.test/trusted-parent", "title_it": "Trusted parent publish", "status": "published", "wp_link": "https://owtv.test/trusted-parent"}
+        ],
+    })
+    text = run(tmp_path, monkeypatch)
+    assert "Feed URLs published: 1" in text
+    assert "Trusted parent publish" in text
+
+
+def test_irrelevant_fresh_json_does_not_disable_latest_fallback(tmp_path, monkeypatch):
+    write(tmp_path / "artifacts" / "newsroom_runs" / "run1" / "diagnostic.json", {"generated_at": audit.utc_now().isoformat(), "note": "not a stage"})
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": [
+        {"source": "Fightful", "title": "Latest still used", "url": "https://e.test/latest-used"}
+    ]})
+    write(ns / "menzo_decisions_latest.json", {"selected": [], "pending": [], "skipped": []})
+    write(ns / "publisher_status_latest.json", {"results": []})
+    text = run(tmp_path, monkeypatch)
+    assert "mode: latest_snapshot_fallback" in text
+    assert "Latest still used" in text
+
+
+def test_historical_mode_activates_only_when_useful_stage_is_merged(tmp_path, monkeypatch):
+    write(tmp_path / "artifacts" / "newsroom_runs" / "run1" / "massy_board.json", {
+        "generated_at": audit.utc_now().isoformat(),
+        "news_candidates_for_menzo": [
+            {"source": "Fightful", "title": "Useful historical item", "url": "https://e.test/useful-historical"}
+        ],
+    })
+    text = run(tmp_path, monkeypatch)
+    assert "mode: historical_window" in text
+    assert "Useful historical item" in text
+
+
+def test_tna_impact_report_overlaps_impact_result_article(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": []})
+    write(ns / "menzo_decisions_latest.json", {"selected": [], "skipped": [], "pending": []})
+    write(ns / "publisher_status_latest.json", {"results": [
+        {"source_url": "https://e.test/impact", "title_it": "TNA Impact results new champion wins title", "status": "published"},
+    ]})
+    write(ns / "simone_reports_latest.json", {"reports": [{"title": "TNA Impact results July 6"}]})
+    text = run(tmp_path, monkeypatch)
+    assert "- Post-show/report overlap risks: 1" in text
+    assert "TNA Impact results new champion wins title" in text

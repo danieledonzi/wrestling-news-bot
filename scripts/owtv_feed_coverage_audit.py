@@ -325,6 +325,7 @@ SHOW_FAMILIES = {
     "nxt": re.compile(r"\bnxt\b", re.I),
     "dynamite": re.compile(r"\b(aew\s+dynamite|dynamite)\b", re.I),
     "collision": re.compile(r"\b(aew\s+collision|collision)\b", re.I),
+    "impact": re.compile(r"\b(tna\s+impact|impact\s+wrestling|tna|impact)\b", re.I),
 }
 RAW_SPECIFIC_RE = re.compile(r"\b(wwe\s+raw|raw|monday\s+night\s+raw|raw\s+results?|results?\s+.*raw|title\s+(?:change|match)|main\s+event|new\s+champion|wins?\s+(?:the\s+)?title)\b", re.I)
 GENERAL_NON_RAW_RE = re.compile(r"\b(aew|dynamite|collision|tko|business|earnings|contract|backstage|roster update|media rights)\b", re.I)
@@ -384,23 +385,46 @@ def massy_status(decision: str, assigned: str, kind: str, reason: str) -> str:
     return ""
 
 
-def file_in_window(path: Path, obj: Any, since: datetime, until: datetime) -> bool:
-    candidates: list[datetime] = []
-    if isinstance(obj, dict):
-        dt = parse_dt(first(obj, "generated_at", "created_at", "published_at", "run_at", "timestamp"))
-        if dt:
-            candidates.append(dt)
-    try:
-        candidates.append(datetime.fromtimestamp(path.stat().st_mtime, timezone.utc))
-    except Exception:
-        pass
-    return any(since <= dt <= until for dt in candidates)
+ARTIFACT_TIMESTAMP_KEYS = (
+    "generated_at", "timestamp", "created_at", "run_started_at",
+    "run_finished_at", "started_at", "finished_at", "window_start",
+    "window_end", "published_at", "run_at",
+)
 
-def merge_stage(dest: dict[str, Any], src: dict[str, Any], keys: list[str]) -> None:
+def embedded_dt(obj: Any) -> datetime | None:
+    if not isinstance(obj, dict):
+        return None
+    return parse_dt(first(obj, *ARTIFACT_TIMESTAMP_KEYS))
+
+def file_in_window(path: Path, obj: Any, since: datetime, until: datetime) -> tuple[bool, datetime | None, str]:
+    dt = embedded_dt(obj)
+    if dt is not None:
+        return since <= dt <= until, dt, "embedded"
+    try:
+        mt = datetime.fromtimestamp(path.stat().st_mtime, timezone.utc)
+    except Exception:
+        return False, None, "none"
+    return since <= mt <= until, mt, "mtime"
+
+def useful_stage_count(bundle: dict[str, Any]) -> int:
+    return sum(len(v) for stage in bundle.values() for v in stage.values() if isinstance(v, list))
+
+def row_with_parent_timestamp(item: dict[str, Any], parent_dt: datetime | None) -> dict[str, Any]:
+    row = dict(item)
+    if parent_dt is not None and embedded_dt(row) is None:
+        row["generated_at"] = parent_dt.isoformat()
+    return row
+
+def merge_stage(dest: dict[str, Any], src: dict[str, Any], keys: list[str], parent_dt: datetime | None = None) -> int:
+    added = 0
     for key in keys:
         val = src.get(key)
         if isinstance(val, list):
-            dest.setdefault(key, []).extend([x for x in val if isinstance(x, dict)])
+            rows = [row_with_parent_timestamp(x, parent_dt) for x in val if isinstance(x, dict)]
+            if rows:
+                dest.setdefault(key, []).extend(rows)
+                added += len(rows)
+    return added
 
 def collect_window_artifacts(since: datetime, until: datetime, warnings: list[str]) -> tuple[dict[str, Any], bool]:
     """Aggregate historical per-run newsroom artifacts in the audit window.
@@ -425,9 +449,12 @@ def collect_window_artifacts(since: datetime, until: datetime, warnings: list[st
             except Exception as exc:
                 warnings.append(f"unreadable_historical_artifact: {path}: {exc}")
                 continue
-            if not isinstance(obj, dict) or not file_in_window(path, obj, since, until):
+            if not isinstance(obj, dict):
                 continue
-            if path.is_relative_to(ARTIFACTS / "newsroom") and not parse_dt(first(obj, "generated_at", "created_at", "published_at", "run_at", "timestamp")):
+            parent_ok, parent_dt, timestamp_source = file_in_window(path, obj, since, until)
+            if not parent_ok:
+                continue
+            if path.is_relative_to(ARTIFACTS / "newsroom") and timestamp_source != "embedded":
                 # artifacts/newsroom also contains generic diagnostic snapshots;
                 # require an embedded run timestamp there so mtime-only ad-hoc
                 # snapshots are not mistaken for historical run coverage.
@@ -435,29 +462,38 @@ def collect_window_artifacts(since: datetime, until: datetime, warnings: list[st
             name = path.name.lower()
             # Also recognize run bundles that carry multiple stage keys.
             run_obj = obj.get("newsroom") if isinstance(obj.get("newsroom"), dict) else obj
-            found = True
+            before_count = useful_stage_count(bundle)
             if "massy" in name or any(k in run_obj for k in ["news_candidates_for_menzo", "report_candidates", "hard_skipped", "already_worked"]):
                 if any(k in run_obj for k in ["news_candidates_for_menzo", "report_candidates", "hard_skipped", "already_worked", "items", "entries"]):
-                    merge_stage(bundle["massy"], run_obj, ["news_candidates_for_menzo", "report_candidates", "hard_skipped", "already_worked", "items", "entries"])
+                    merge_stage(bundle["massy"], run_obj, ["news_candidates_for_menzo", "report_candidates", "hard_skipped", "already_worked", "items", "entries"], parent_dt)
                 elif first(run_obj, "url", "source_url"):
-                    bundle["massy"].setdefault("news_candidates_for_menzo", []).append(run_obj)
+                    bundle["massy"].setdefault("news_candidates_for_menzo", []).append(row_with_parent_timestamp(run_obj, parent_dt))
             if "menzo" in name or any(k in run_obj for k in ["selected", "pending", "skipped"]):
-                merge_stage(bundle["menzo"], run_obj, ["selected", "pending", "skipped"])
+                merge_stage(bundle["menzo"], run_obj, ["selected", "pending", "skipped"], parent_dt)
             if "andrea" in name:
-                merge_stage(bundle["andrea"], run_obj, ["blocked_items", "passed_items", "selected", "items", "results"])
+                merge_stage(bundle["andrea"], run_obj, ["blocked_items", "passed_items", "selected", "items", "results"], parent_dt)
             if "bob" in name or "articles" in run_obj:
-                merge_stage(bundle["bob"], run_obj, ["articles"])
+                merge_stage(bundle["bob"], run_obj, ["articles"], parent_dt)
             if "alfred" in name or any(k in run_obj for k in ["reviews", "approved_articles"]):
-                merge_stage(bundle["alfred"], run_obj, ["reviews", "approved_articles"])
+                merge_stage(bundle["alfred"], run_obj, ["reviews", "approved_articles"], parent_dt)
             if "publisher" in name or any(k in run_obj for k in ["results", "skipped_approved_articles"]):
                 if any(k in run_obj for k in ["results", "skipped_approved_articles"]):
-                    merge_stage(bundle["publisher"], run_obj, ["results", "skipped_approved_articles"])
+                    if timestamp_source == "embedded":
+                        merge_stage(bundle["publisher"], run_obj, ["results", "skipped_approved_articles"], parent_dt)
+                    else:
+                        for key in ["results", "skipped_approved_articles"]:
+                            rows = [x for x in run_obj.get(key, []) if isinstance(x, dict) and embedded_dt(x) is not None]
+                            if rows:
+                                bundle["publisher"].setdefault(key, []).extend(rows)
                 elif is_published_record(run_obj) or first(run_obj, "source_url", "url"):
-                    bundle["publisher"].setdefault("results", []).append(run_obj)
+                    if timestamp_source == "embedded" or embedded_dt(run_obj) is not None:
+                        bundle["publisher"].setdefault("results", []).append(row_with_parent_timestamp(run_obj, parent_dt))
             if "simone_report_publish" in name:
-                merge_stage(bundle["simpub"], run_obj, ["results", "published_reports", "reports"])
+                merge_stage(bundle["simpub"], run_obj, ["results", "published_reports", "reports"], parent_dt)
             elif "simone" in name or any(k in run_obj for k in ["reports", "report_candidates"]):
-                merge_stage(bundle["simone"], run_obj, ["reports", "report_candidates"])
+                merge_stage(bundle["simone"], run_obj, ["reports", "report_candidates"], parent_dt)
+            if useful_stage_count(bundle) > before_count:
+                found = True
     return bundle, found
 
 def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
