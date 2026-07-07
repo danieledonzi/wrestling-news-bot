@@ -758,3 +758,126 @@ def test_v95_8_5_report_candidates_not_missed_and_raw_news_normal(tmp_path, monk
     text = run(tmp_path, monkeypatch)
     assert "skipped_correctly_likely" in text
     assert "published_exact_source_url" in text
+
+
+def test_v95_8_5_john_cena_injury_does_not_match_contract_update(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    item = {"source":"WrestlingInc", "title":"John Cena injury update", "url":"https://wrestlinginc.com/cena-injury"}
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo":[item]})
+    write(ns / "menzo_decisions_latest.json", {"selected":[{**item,"decision":"selected","score":90,"article_type":"injury"}], "pending":[], "skipped":[]})
+    write(ns / "publisher_status_latest.json", {"results":[{"title_it":"John Cena contract update", "status":"published", "path":"john-cena-contract-update.html"}]})
+    text = run(tmp_path, monkeypatch)
+    assert "candidate_not_published_review" in text
+    assert "published_by_alternate_source_or_slug" not in text
+
+
+def test_v95_8_5_drew_return_rumor_does_not_match_social_gym_post(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    item = {"source":"RingsideNews", "title":"Drew McIntyre return rumor", "url":"https://ringsidenews.com/drew-return"}
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo":[item]})
+    write(ns / "menzo_decisions_latest.json", {"selected":[{**item,"decision":"selected","score":88,"article_type":"hard_news"}], "pending":[], "skipped":[]})
+    write(ns / "publisher_status_latest.json", {"results":[{"title_it":"Drew McIntyre social gym post", "status":"published", "path":"drew-mcintyre-social-gym-post.html"}]})
+    text = run(tmp_path, monkeypatch)
+    assert "candidate_not_published_review" in text
+    assert "published_by_alternate_source_or_slug" not in text
+
+
+def test_v95_8_5_cm_punk_title_win_matches_title_win_details(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    item = {"source":"WrestlingInc", "title":"CM Punk wins WWE title", "url":"https://wrestlinginc.com/punk-title"}
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo":[item]})
+    write(ns / "menzo_decisions_latest.json", {"selected":[{**item,"decision":"selected","score":90,"article_type":"title"}], "pending":[], "skipped":[]})
+    write(ns / "publisher_status_latest.json", {"results":[{"title_it":"CM Punk wins WWE title details", "status":"published", "path":"cm-punk-wins-wwe-title-details.html"}]})
+    text = run(tmp_path, monkeypatch)
+    assert "published_by_alternate_source_or_slug" in text
+
+
+def test_v95_8_5_sheamus_contract_update_matches_related_contract_story(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    item = {"source":"RingsideNews", "title":"Sheamus contract situation", "url":"https://ringsidenews.com/sheamus-contract"}
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo":[item]})
+    write(ns / "menzo_decisions_latest.json", {"selected":[{**item,"decision":"selected","score":86,"article_type":"roster"}], "pending":[], "skipped":[]})
+    write(ns / "publisher_status_latest.json", {"results":[{"title_it":"Sheamus contract update", "status":"published", "path":"sheamus-contract-update.html"}]})
+    text = run(tmp_path, monkeypatch)
+    assert "published_by_alternate_source_or_slug" in text
+
+
+def test_v95_8_5_report_injury_hard_news_is_review_not_generic_skip(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    item = {"source":"WrestlingInc", "title":"Report: WWE star injured backstage", "url":"https://wrestlinginc.com/report-injury"}
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo":[item]})
+    write(ns / "menzo_decisions_latest.json", {"selected":[{**item,"decision":"selected","score":92,"priority":"high","article_type":"hard_news"}], "pending":[], "skipped":[]})
+    write(ns / "publisher_status_latest.json", {"results":[]})
+    text = run(tmp_path, monkeypatch)
+    assert "candidate_not_published_review" in text
+
+
+def test_v95_8_5_report_contract_hard_news_is_review_not_generic_skip(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    item = {"source":"RingsideNews", "title":"Report: WWE contract expires soon", "url":"https://ringsidenews.com/report-contract"}
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo":[item]})
+    write(ns / "menzo_decisions_latest.json", {"selected":[{**item,"decision":"selected","score":91,"priority":"high","article_type":"hard_news"}], "pending":[], "skipped":[]})
+    write(ns / "publisher_status_latest.json", {"results":[]})
+    text = run(tmp_path, monkeypatch)
+    assert "candidate_not_published_review" in text
+
+
+def test_v95_8_5_raw_results_report_candidate_still_skipped(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    item = {"source":"WrestlingInc", "title":"WWE Raw Results 7/6", "url":"https://wrestlinginc.com/raw-results", "decision":"report_candidate", "reason":"report_candidate"}
+    write(ns / "massy_board_latest.json", {"report_candidates":[item]})
+    write(ns / "menzo_decisions_latest.json", {"selected":[], "pending":[], "skipped":[]})
+    write(ns / "publisher_status_latest.json", {"results":[]})
+    text = run(tmp_path, monkeypatch)
+    assert "skipped_correctly_likely" in text
+
+
+def test_v95_8_5_raw_live_coverage_report_candidate_still_skipped(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    item = {"source":"RingsideNews", "title":"WWE Raw live coverage", "url":"https://ringsidenews.com/raw-live", "decision":"report_candidate", "reason":"report_candidate"}
+    write(ns / "massy_board_latest.json", {"report_candidates":[item]})
+    write(ns / "menzo_decisions_latest.json", {"selected":[], "pending":[], "skipped":[]})
+    write(ns / "publisher_status_latest.json", {"results":[]})
+    text = run(tmp_path, monkeypatch)
+    assert "skipped_correctly_likely" in text
+
+
+def test_v95_8_5_monitored_filtering_excludes_non_monitored_downstream(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    monitored = {"source":"WrestlingInc", "title":"WrestlingInc included injury", "url":"https://wrestlinginc.com/included"}
+    non_mon = {"source":"Fightful", "title":"Fightful should not appear", "url":"https://fightful.com/drop"}
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo":[monitored, non_mon]})
+    write(ns / "menzo_decisions_latest.json", {"selected":[{**monitored,"score":90,"article_type":"injury"},{**non_mon,"score":95,"article_type":"injury"},{"title":"Blank source downstream", "url":"https://blank.test/downstream", "score":95, "article_type":"injury"}], "pending":[], "skipped":[]})
+    write(ns / "publisher_status_latest.json", {"results":[{"title_it":"Source less published", "status":"published", "path":"source-less-published.html"}]})
+    text = run(tmp_path, monkeypatch)
+    assert "WrestlingInc included injury" in text
+    assert "https://wrestlinginc.com/included" in text
+    assert "Fightful should not appear" not in text
+    assert "https://fightful.com/drop" not in text
+    assert "Blank source downstream" not in text
+    assert "https://blank.test/downstream" not in text
+    assert "Source less published" in text
+    feed_section = text.split("## 1. Feed inventory", 1)[1].split("## 2. Published inventory", 1)[0]
+    assert "Source less published" not in feed_section
+
+
+def test_v95_8_5_ringside_and_wrestlinginc_urls_remain_included(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    wi = {"source":"WrestlingInc", "title":"WI contract update", "url":"https://www.wrestlinginc.com/wi-contract"}
+    rsn = {"source":"RingsideNews", "title":"RSN title update", "url":"https://ringsidenews.com/rsn-title"}
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo":[wi, rsn]})
+    write(ns / "menzo_decisions_latest.json", {"selected":[], "pending":[], "skipped":[]})
+    write(ns / "publisher_status_latest.json", {"results":[]})
+    text = run(tmp_path, monkeypatch)
+    assert "https://wrestlinginc.com/wi-contract" in text
+    assert "https://ringsidenews.com/rsn-title" in text

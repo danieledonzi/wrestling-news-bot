@@ -322,6 +322,10 @@ def source_is_monitored(value: Any) -> bool:
     s = str(value or "").lower().replace(" ", "")
     return "wrestlinginc" in s or "ringsidenews" in s or "ringside-news" in s
 
+def url_is_monitored(value: Any) -> bool:
+    host = urlsplit(str(value or "")).netloc.lower().replace("www.", "")
+    return host.endswith("wrestlinginc.com") or host.endswith("ringsidenews.com")
+
 def published_recovery_method(item: dict[str, Any]) -> str:
     src = str(item.get("_pub_source") or "")
     if src == "publisher":
@@ -332,11 +336,65 @@ def published_recovery_method(item: dict[str, Any]) -> str:
         return "artifact_slug"
     return "unknown_source"
 
+ENTITY_ONLY_TOKENS = {
+    "wwe", "aew", "nxt", "tna", "roh", "john", "cena", "drew", "mcintyre",
+    "punk", "sheamus", "cody", "rhodes", "roman", "reigns", "seth", "rollins",
+    "becky", "lynch", "rhea", "ripley", "cm",
+}
+ACTION_GROUPS: dict[str, set[str]] = {
+    "injury": {"injury", "injured", "health", "surgery", "medical", "backstage"},
+    "contract": {"contract", "expires", "extension", "deal", "signed", "signs", "situation"},
+    "return": {"return", "returns", "rumor", "rumour", "comeback", "back"},
+    "legal": {"legal", "lawsuit", "arrest", "arrested", "charged", "charges", "court"},
+    "title": {"title", "champion", "championship", "wins", "win", "won", "defeats", "beats", "crowns"},
+    "ratings": {"ratings", "viewership", "demo", "audience"},
+    "backstage": {"backstage", "creative", "plans", "development"},
+    "reaction": {"reacts", "reaction", "fans", "social", "photo", "gym", "post"},
+}
+INCOMPATIBLE_ACTIONS = {
+    frozenset(("injury", "contract")), frozenset(("return", "reaction")),
+    frozenset(("title", "reaction")), frozenset(("ratings", "backstage")),
+    frozenset(("legal", "return")), frozenset(("legal", "reaction")),
+}
+
 def title_similarity(a: str, b: str) -> float:
     ta, tb = tokens(a), tokens(b)
     if not ta or not tb:
         return 0.0
     return len(ta & tb) / max(1, min(len(ta), len(tb)))
+
+def action_labels(title: str) -> set[str]:
+    tt = tokens(title)
+    return {label for label, words in ACTION_GROUPS.items() if tt & words}
+
+def substantive_overlap(a: str, b: str) -> set[str]:
+    return (tokens(a) & tokens(b)) - ENTITY_ONLY_TOKENS
+
+def action_compatible(feed_title: str, pub_title: str) -> bool:
+    feed_actions = action_labels(feed_title)
+    pub_actions = action_labels(pub_title)
+    if not feed_actions or not pub_actions:
+        return False
+    if any(frozenset((a, b)) in INCOMPATIBLE_ACTIONS for a in feed_actions for b in pub_actions):
+        return False
+    return bool(feed_actions & pub_actions)
+
+def reliable_alternate_title_match(feed_title: str, pub_title: str) -> bool:
+    shared_substantive = substantive_overlap(feed_title, pub_title)
+    if not shared_substantive:
+        return False
+    if not action_compatible(feed_title, pub_title):
+        return False
+    # Require strong overlap after also confirming an event/action token. This
+    # prevents entity-only matches such as "John Cena injury" vs "John Cena contract".
+    sim = title_similarity(feed_title, pub_title)
+    if sim >= 0.75:
+        return True
+    actions = action_labels(feed_title) & action_labels(pub_title)
+    # Short hard-news titles often share one entity plus one decisive action
+    # token (e.g. Sheamus + contract, CM Punk + title). Allow those only for
+    # compatible hard-news action families, not reactions/social posts.
+    return sim >= 0.66 and bool(actions & {"contract", "title", "injury", "legal", "return"})
 
 def find_alternate_published_match(t: Trace, published_records: list[dict[str, Any]], published_by_slug: dict[str, dict[str, Any]]) -> dict[str, Any] | None:
     slug = canonical_slug(t.final_title or t.title)
@@ -346,10 +404,12 @@ def find_alternate_published_match(t: Trace, published_records: list[dict[str, A
     best_score = 0.0
     for p in published_records:
         pt = str(first(p, "title_it", "title", "source_title") or "")
+        if not reliable_alternate_title_match(t.title, pt):
+            continue
         sim = title_similarity(t.title, pt)
         if sim > best_score:
             best, best_score = p, sim
-    return best if best_score >= 0.6 else None
+    return best
 
 def is_low_value_or_report_candidate(t: Trace) -> bool:
     blob = f"{t.title} {t.massy_decision} {t.massy_reason} {t.kind_hint} {t.menzo_decision} {t.menzo_reason} {t.article_type} {t.priority_label}".lower()
@@ -387,10 +447,10 @@ def classify_comparison(t: Trace, exact: bool, alternate: bool, duplicate_surviv
         return "duplicate_loser_covered"
     if alternate:
         return "published_by_alternate_source_or_slug"
-    if is_low_value_or_report_candidate(t):
-        return "skipped_correctly_likely"
     if is_relevant_unpublished_candidate(t):
         return "candidate_not_published_review"
+    if is_low_value_or_report_candidate(t):
+        return "skipped_correctly_likely"
     if t.trace_status in {"skipped", "report_candidate", "already_seen"}:
         return "skipped_correctly_likely"
     return "unknown_needs_trace"
@@ -694,11 +754,14 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
         if not (root/extra).exists(): warnings.append(f"missing_optional_input: {extra}")
 
     feed_items=iter_items(massy,["news_candidates_for_menzo","report_candidates","hard_skipped","already_worked","items","entries"])
-    # v95.8.5 centers the editorial comparison on the two monitored feeds.
-    # Test fixtures and legacy fallback snapshots may omit real source names, so
-    # only narrow to monitored sources when at least one monitored item is present.
-    if any(source_is_monitored(first(it,"source","source_id","feed")) for it in feed_items):
-        feed_items=[it for it in feed_items if source_is_monitored(first(it,"source","source_id","feed"))]
+    monitored_feed_urls = {
+        norm_url(first(it,"url","source_url","link"))
+        for it in feed_items
+        if url_is_monitored(first(it,"url","source_url","link"))
+    }
+    monitored_mode = bool(monitored_feed_urls)
+    if monitored_mode:
+        feed_items=[it for it in feed_items if norm_url(first(it,"url","source_url","link")) in monitored_feed_urls]
     traces: dict[str,Trace]={}
     for it in feed_items:
         if not in_window(it,since,until): continue
@@ -714,6 +777,7 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
     for it in menzo_items:
         u=norm_url(first(it,"url","source_url"));
         if not u: continue
+        if monitored_mode and u not in monitored_feed_urls: continue
         t=traces.setdefault(u, Trace(url=u, title=str(first(it,"title","source_title") or "")))
         t.menzo_decision=str(it.get("decision") or ("selected" if it in menzo.get("selected",[]) else "")); t.menzo_reason=str(first(it,"reason","editorial_reason","ai_editorial_reason") or "")
         try: t.score=int(first(it,"score","ai_priority","deterministic_score") or 0)
@@ -723,6 +787,7 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
     for it in iter_items(andrea,["blocked_items","passed_items","selected","items","results"]):
         u=norm_url(first(it,"source_url","url"));
         if not u: continue
+        if monitored_mode and u not in monitored_feed_urls: continue
         t=traces.setdefault(u, Trace(url=u, title=str(first(it,"title","source_title") or "")))
         raw_outcome=str(first(it,"andrea_outcome","status","decision","outcome") or "")
         blocked=bool(first(it,"andrea_blocked_before_bob","blocked_before_bob")) or raw_outcome.lower() in {"blocked","rejected","failed","blocked_before_bob"}
@@ -749,6 +814,7 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
     for it in all_pub_candidates:
         u=norm_url(first(it,"source_url","url"));
         if u:
+            if monitored_mode and u not in monitored_feed_urls: continue
             t=traces.setdefault(u, Trace(url=u, title=str(first(it,"title_it","title") or "")))
             t.publisher_outcome=str(it.get("status") or "published_file"); t.final_title=str(first(it,"title_it","title") or t.title); t.final_url=str(first(it,"wp_link","published_url","final_url","path") or "")
     for t in traces.values():
@@ -785,6 +851,8 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
             t.published_match_method="source_url"
         elif alternate_match is not None:
             t.published_match_method="slug_or_title"
+    if monitored_mode:
+        traces={u: t for u, t in traces.items() if u in monitored_feed_urls}
     trace_list=sorted(traces.values(), key=lambda x:(x.trace_status,x.source,x.title))
     missed=[t for t in trace_list if t.trace_status!="published" and t.recall_class in {"must_publish_candidate","should_publish_candidate"}]
     soft=[t for t in trace_list if t.trace_status=="published" and t.recall_class=="optional_soft"]
