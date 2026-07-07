@@ -40,6 +40,8 @@ UNPUBLISHED_STATUSES = {"skipped_approved_articles", "wp_not_ready", "publish_er
 DUPLICATE_LOSER_RE = re.compile(r"(ai_cross_source_duplicate_arbitration_loser|duplicate_arbitration_loser|duplicate loser)", re.I)
 MAJOR_ANGLE_RE = re.compile(r"\b(title change|new champion|return|returns|attack|injury angle|announced match|main event|championship retention|retains?|wins? (?:the )?title)\b", re.I)
 GENERIC_REPORT_RE = re.compile(r"\b(results?|moments|highlights|recap)\b", re.I)
+REPORT_PUBLICATION_RE = re.compile(r"\b(simone|report[_ -]?show|show[_ -]?report|report publication|simone report|reporto|risultati|results)\b", re.I)
+ITALIAN_MONTHS = {"gennaio": 1, "febbraio": 2, "marzo": 3, "aprile": 4, "maggio": 5, "giugno": 6, "luglio": 7, "agosto": 8, "settembre": 9, "ottobre": 10, "novembre": 11, "dicembre": 12}
 
 @dataclass
 class Trace:
@@ -223,6 +225,8 @@ def extract_published_from_files(since: datetime, until: datetime) -> list[dict[
                 continue
             if not isinstance(item, dict):
                 continue
+            if "simone_report_publish" in str(p).lower() or is_report_publication_record(item, str(p)):
+                continue
             status=str(item.get("status") or "").lower()
             has_explicit_publication = (
                 status in PUBLISHED_STATUSES
@@ -363,12 +367,40 @@ def report_label(title: str) -> str:
         return "possible_report_duplicate"
     return "likely_valid_major_angle" if HARD_RE.search(title) else "possible_report_duplicate"
 
+def report_show_date(text: str, row: dict[str, Any]) -> str:
+    explicit = parse_dt(first(row, "show_date", "event_date", "episode_date"))
+    if explicit:
+        return explicit.date().isoformat()
+    m = re.search(r"\b(\d{1,2})/(\d{1,2})(?:/(\d{2,4}))?\b", text)
+    if m:
+        month, day = int(m.group(1)), int(m.group(2))
+        year = int(m.group(3)) if m.group(3) else (parse_dt(first(row, "published_at", "generated_at", "created_at")) or utc_now()).year
+        if year < 100:
+            year += 2000
+        try:
+            return datetime(year, month, day, tzinfo=timezone.utc).date().isoformat()
+        except ValueError:
+            pass
+    m = re.search(r"\b(\d{1,2})\s+(?:di\s+)?(" + "|".join(ITALIAN_MONTHS) + r")(?:\s+(\d{4}))?\b", text, re.I)
+    if m:
+        day, month = int(m.group(1)), ITALIAN_MONTHS[m.group(2).lower()]
+        year = int(m.group(3)) if m.group(3) else (parse_dt(first(row, "published_at", "generated_at", "created_at")) or utc_now()).year
+        try:
+            return datetime(year, month, day, tzinfo=timezone.utc).date().isoformat()
+        except ValueError:
+            pass
+    dt = parse_dt(first(row,"published_at","generated_at","created_at"))
+    return dt.date().isoformat() if dt else ""
+
 def report_thread_key(r: dict[str, Any]) -> str:
     text = str(first(r,"title","show","show_name") or "")
-    fam = show_family(text) or "unknown"
-    dt = parse_dt(first(r,"published_at","generated_at","created_at"))
-    day = dt.date().isoformat() if dt else re.sub(r"[^a-z0-9]+", "-", text.lower())[:40]
-    return f"{fam}:{day}"
+    fam = show_family(text)
+    day = report_show_date(text, r)
+    if fam and day:
+        return f"{fam}:{day}"
+    if fam:
+        return f"{fam}:{re.sub(r'[^a-z0-9]+', '-', text.lower())[:40]}"
+    return re.sub(r"[^a-z0-9]+", "-", text.lower())[:40]
 
 def dedupe_reports(reports: list[dict[str, Any]]) -> list[dict[str, Any]]:
     out: dict[str, dict[str, Any]] = {}
@@ -397,6 +429,14 @@ def report_overlap(pubs: list[dict[str,Any]], reports: list[dict[str,Any]]) -> l
                 cls=report_label(title)
                 risks.append({"report":rtitle,"title":title,"classification":cls})
     return risks
+
+
+def is_report_publication_record(item: dict[str, Any], source_hint: str = "") -> bool:
+    if first(item, "source_url", "url"):
+        return False
+    blob = " ".join(str(first(item, key) or item.get(key) or "") for key in ("type", "kind", "category", "article_type", "report_type", "status", "title", "title_it", "show", "show_name", "path", "file", "filename"))
+    blob = f"{source_hint} {blob}"
+    return bool(REPORT_PUBLICATION_RE.search(blob) and (show_family(blob) or "simone" in blob.lower() or "report" in blob.lower()))
 
 def is_published_record(item: dict[str, Any]) -> bool:
     status = str(item.get("status") or "").lower()
@@ -511,7 +551,7 @@ def collect_window_artifacts(since: datetime, until: datetime, warnings: list[st
                 merge_stage(bundle["bob"], run_obj, ["articles"], parent_dt)
             if "alfred" in name or any(k in run_obj for k in ["reviews", "approved_articles"]):
                 merge_stage(bundle["alfred"], run_obj, ["reviews", "approved_articles"], parent_dt)
-            if "publisher" in name or any(k in run_obj for k in ["results", "skipped_approved_articles"]):
+            if "simone_report_publish" not in name and ("publisher" in name or any(k in run_obj for k in ["results", "skipped_approved_articles"])):
                 if any(k in run_obj for k in ["results", "skipped_approved_articles"]):
                     if timestamp_source == "embedded":
                         merge_stage(bundle["publisher"], run_obj, ["results", "skipped_approved_articles"], parent_dt)
@@ -553,6 +593,12 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
         publisher=load_json(NEWSROOM/"publisher_status_latest.json", warnings, {})
         simone=load_json(NEWSROOM/"simone_reports_latest.json", warnings, {})
         simpub=load_json(NEWSROOM/"simone_report_publish_latest.json", warnings, {})
+        simone_dt = embedded_dt(simone)
+        simpub_dt = embedded_dt(simpub)
+        if simone_dt:
+            simone = {**simone, **{key: [row_with_parent_timestamp(x, simone_dt) for x in val] for key, val in simone.items() if isinstance(val, list)}}
+        if simpub_dt:
+            simpub = {**simpub, **{key: [row_with_parent_timestamp(x, simpub_dt) for x in val] for key, val in simpub.items() if isinstance(val, list)}}
     for extra in ["archivista_report_latest.json","gemini_call_ledger.jsonl","report_publication_registry.json"]:
         if not (NEWSROOM/extra).exists(): warnings.append(f"missing_input: state/newsroom/{extra}")
     for extra in ["manual_runs.json","report_status.json"]:
@@ -598,8 +644,9 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
         art=rev.get("approved_article") if isinstance(rev.get("approved_article"),dict) else rev
         u=norm_url(first(art,"source_url","url"));
         if u in traces: traces[u].alfred_outcome=str(rev.get("decision") or "approved")
-    publisher_records=[{**item, "_pub_source":"publisher"} for item in iter_items(publisher,["results","skipped_approved_articles"])]
+    publisher_records=[{**item, "_pub_source":"publisher"} for item in iter_items(publisher,["results","skipped_approved_articles"]) if not is_report_publication_record(item, "publisher")]
     file_pubs=extract_published_from_files(since,until)
+    file_pubs=[item for item in file_pubs if not is_report_publication_record(item, str(first(item, "_pub_source", "path")))]
     all_pub_candidates=publisher_records+file_pubs
     publisher_before=sum(1 for item in publisher_records if is_published_record(item))
     publisher_after=len(dedupe_published_records(publisher_records))

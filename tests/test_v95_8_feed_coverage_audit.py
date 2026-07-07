@@ -546,3 +546,74 @@ def test_diagnostics_show_stage_file_counts_and_merged_record_counts(tmp_path, m
     assert "| Useful Massy records merged | 1 |" in text
     assert "| Useful Publisher records merged | 1 |" in text
     assert "| Publisher published records before dedupe | 1 |" in text
+
+
+def test_source_less_simone_report_publish_does_not_count_as_feed_story(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": []})
+    write(ns / "menzo_decisions_latest.json", {"selected": [], "skipped": [], "pending": []})
+    write(ns / "publisher_status_latest.json", {"results": []})
+    write(ns / "simone_report_publish_latest.json", {
+        "generated_at": audit.utc_now().isoformat(),
+        "results": [{"title": "WWE Raw del 6 luglio 2026", "status": "published", "wp_link": "https://owtv.test/raw-report"}],
+    })
+    text = run(tmp_path, monkeypatch)
+    assert "- Feed URLs seen: 0" in text
+    assert "- Feed URLs published: 0" in text
+    assert "| Final published | 0 |" in text
+    assert "published-artifact:wwe-raw-del-6-luglio-2026" not in text
+
+
+def test_source_less_simone_report_publish_remains_available_for_overlap(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": []})
+    write(ns / "menzo_decisions_latest.json", {"selected": [], "skipped": [], "pending": []})
+    write(ns / "publisher_status_latest.json", {"results": [
+        {"source_url": "https://e.test/raw-angle", "title_it": "WWE Raw title change crowns new champion", "status": "published"}
+    ]})
+    write(ns / "simone_report_publish_latest.json", {
+        "generated_at": audit.utc_now().isoformat(),
+        "results": [{"title": "WWE Raw del 6 luglio 2026", "status": "published", "wp_link": "https://owtv.test/raw-report"}],
+    })
+    text = run(tmp_path, monkeypatch)
+    assert "- Feed URLs published: 1" in text
+    assert "- Post-show/report overlap risks: 1" in text
+    assert "WWE Raw title change crowns new champion" in text
+
+
+def test_raw_report_candidate_and_simone_report_collapse_without_child_timestamps(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": []})
+    write(ns / "menzo_decisions_latest.json", {"selected": [], "skipped": [], "pending": []})
+    write(ns / "publisher_status_latest.json", {"results": [
+        {"source_url": "https://e.test/raw-title", "title_it": "WWE Raw title change crowns new champion", "status": "published"}
+    ]})
+    parent_time = "2026-07-06T23:00:00Z"
+    write(ns / "simone_reports_latest.json", {"generated_at": parent_time, "reports": [
+        {"title": "WWE Raw Results 7/6 full report"}
+    ]})
+    write(ns / "simone_report_publish_latest.json", {"generated_at": parent_time, "results": [
+        {"title": "WWE Raw del 6 luglio 2026", "status": "published", "wp_link": "https://owtv.test/raw-report"}
+    ]})
+    text = run(tmp_path, monkeypatch)
+    assert "- Post-show/report overlap risks: 1" in text
+    assert text.count("Report `WWE Raw del 6 luglio 2026` vs `WWE Raw title change crowns new champion`") == 1
+
+
+def test_raw_reports_from_different_dates_do_not_collapse(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": []})
+    write(ns / "menzo_decisions_latest.json", {"selected": [], "skipped": [], "pending": []})
+    write(ns / "publisher_status_latest.json", {"results": [
+        {"source_url": "https://e.test/raw-title", "title_it": "WWE Raw title change crowns new champion", "status": "published"}
+    ]})
+    write(ns / "simone_reports_latest.json", {"generated_at": "2026-07-06T23:00:00Z", "reports": [
+        {"title": "WWE Raw Results 7/6 full report"},
+        {"title": "WWE Raw Results 7/7 full report"},
+    ]})
+    text = run(tmp_path, monkeypatch)
+    assert "- Post-show/report overlap risks: 2" in text
