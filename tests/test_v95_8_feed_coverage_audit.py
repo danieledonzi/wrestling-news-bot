@@ -665,3 +665,96 @@ def test_raw_report_flags_required_generic_duplicate_recap_titles(tmp_path, monk
     assert "- Post-show duplicate recap risks: 9" in text
     for title in titles:
         assert f"`{title}` — duplicate_recap_risk" in text
+
+
+def test_v95_8_5_exact_source_url_match(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    item = {"source":"WrestlingInc", "title":"Star signs with WWE", "url":"https://wrestlinginc.com/exact"}
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": [item]})
+    write(ns / "menzo_decisions_latest.json", {"selected":[{**item,"score":90,"article_type":"roster"}], "skipped":[], "pending":[]})
+    write(ns / "publisher_status_latest.json", {"results":[{"source_url":"https://wrestlinginc.com/exact", "title_it":"Star signs with WWE", "status":"published"}]})
+    text = run(tmp_path, monkeypatch)
+    assert "published_exact_source_url" in text
+
+
+def test_v95_8_5_already_published_classification(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    item = {"source":"RingsideNews", "title":"Seen again", "url":"https://ringsidenews.com/seen", "decision":"hard_skip", "reason":"url_already_published"}
+    write(ns / "massy_board_latest.json", {"hard_skipped": [item]})
+    write(ns / "menzo_decisions_latest.json", {"selected":[], "skipped":[], "pending":[]})
+    write(ns / "publisher_status_latest.json", {"results":[]})
+    text = run(tmp_path, monkeypatch)
+    assert "already_published_before_window_or_seen_again" in text
+
+
+def test_v95_8_5_duplicate_loser_has_survivor_not_missed(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    loser = {"source":"WrestlingInc", "title":"CM Punk title update", "url":"https://wrestlinginc.com/loser"}
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": [loser]})
+    write(ns / "menzo_decisions_latest.json", {"selected":[], "pending":[], "skipped":[{**loser,"decision":"skip","score":85,"article_type":"title","reason":"ai_cross_source_duplicate_arbitration_loser","duplicate_of":"cm-punk-title-update"}]})
+    write(ns / "publisher_status_latest.json", {"results":[{"title_it":"CM Punk title update", "status":"published", "path":"cm-punk-title-update.html"}]})
+    text = run(tmp_path, monkeypatch)
+    assert "duplicate_loser_covered" in text
+    assert "CM Punk title update" in text and "candidate_not_published_review" not in text
+
+
+def test_v95_8_5_low_value_social_reaction_skipped(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    item = {"source":"RingsideNews", "title":"Fans react to star photo", "url":"https://ringsidenews.com/react"}
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": [item]})
+    write(ns / "menzo_decisions_latest.json", {"selected":[], "pending":[], "skipped":[{**item,"decision":"skip","score":20,"article_type":"reaction","reason":"low_value social reaction"}]})
+    write(ns / "publisher_status_latest.json", {"results":[]})
+    text = run(tmp_path, monkeypatch)
+    assert "skipped_correctly_likely" in text
+
+
+def test_v95_8_5_hard_news_unmatched_is_review(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    item = {"source":"WrestlingInc", "title":"Major star signs with WWE", "url":"https://wrestlinginc.com/hard"}
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": [item]})
+    write(ns / "menzo_decisions_latest.json", {"selected":[{**item,"decision":"selected","score":91,"priority":"hard","article_type":"roster"}], "pending":[], "skipped":[]})
+    write(ns / "publisher_status_latest.json", {"results":[]})
+    text = run(tmp_path, monkeypatch)
+    assert "candidate_not_published_review" in text
+    assert "What might we have missed" in text
+
+
+def test_v95_8_5_published_artifact_without_source_url_is_trace_issue_only(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": []})
+    write(ns / "menzo_decisions_latest.json", {"selected":[], "pending":[], "skipped":[]})
+    write(ns / "publisher_status_latest.json", {"results":[{"title_it":"No source story", "status":"published", "path":"no-source-story.html"}]})
+    text = run(tmp_path, monkeypatch)
+    assert "source_url_missing" in text
+    assert "Published without source attribution" in text
+    assert "published-artifact:" not in text
+
+
+def test_v95_8_5_slug_title_match_is_alternate(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    item = {"source":"RingsideNews", "title":"CM Punk injury update", "url":"https://ringsidenews.com/original"}
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": [item]})
+    write(ns / "menzo_decisions_latest.json", {"selected":[{**item,"score":88,"article_type":"injury"}], "pending":[], "skipped":[]})
+    write(ns / "publisher_status_latest.json", {"results":[{"title_it":"CM Punk injury update", "status":"published", "path":"cm-punk-injury-update.html"}]})
+    text = run(tmp_path, monkeypatch)
+    assert "published_by_alternate_source_or_slug" in text
+
+
+def test_v95_8_5_report_candidates_not_missed_and_raw_news_normal(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    report = {"source":"WrestlingInc", "title":"WWE Raw results recap", "url":"https://wrestlinginc.com/report", "decision":"report_candidate", "reason":"report_candidate"}
+    raw_news = {"source":"RingsideNews", "title":"New champion wins title on WWE Raw", "url":"https://ringsidenews.com/raw-title"}
+    write(ns / "massy_board_latest.json", {"report_candidates":[report], "news_candidates_for_menzo":[raw_news]})
+    write(ns / "menzo_decisions_latest.json", {"selected":[{**raw_news,"score":90,"article_type":"title"}], "pending":[], "skipped":[]})
+    write(ns / "publisher_status_latest.json", {"results":[{"source_url":"https://ringsidenews.com/raw-title", "title_it":"New champion wins title on WWE Raw", "status":"published"}]})
+    text = run(tmp_path, monkeypatch)
+    assert "skipped_correctly_likely" in text
+    assert "published_exact_source_url" in text
