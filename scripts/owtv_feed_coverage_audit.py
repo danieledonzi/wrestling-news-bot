@@ -78,6 +78,8 @@ class Trace:
     final_url: str = ""
     trace_status: str = "unknown"
     recall_class: str = "unknown"
+    comparison_class: str = "unknown_needs_trace"
+    published_match_method: str = ""
     why: list[str] = field(default_factory=list)
 
 
@@ -315,6 +317,143 @@ def build_published_indexes(records: list[dict[str, Any]]) -> tuple[set[str], di
         if slug:
             by_slug[slug] = item
     return urls, by_url, by_slug
+
+def source_is_monitored(value: Any) -> bool:
+    s = str(value or "").lower().replace(" ", "")
+    return "wrestlinginc" in s or "ringsidenews" in s or "ringside-news" in s
+
+def url_is_monitored(value: Any) -> bool:
+    host = urlsplit(str(value or "")).netloc.lower().replace("www.", "")
+    return host.endswith("wrestlinginc.com") or host.endswith("ringsidenews.com")
+
+def published_recovery_method(item: dict[str, Any]) -> str:
+    src = str(item.get("_pub_source") or "")
+    if src == "publisher":
+        return "publisher_record"
+    if src.startswith("published") or src.startswith("artifact_published"):
+        return "published_file"
+    if record_slug(item):
+        return "artifact_slug"
+    return "unknown_source"
+
+ENTITY_ONLY_TOKENS = {
+    "wwe", "aew", "nxt", "tna", "roh", "john", "cena", "drew", "mcintyre",
+    "punk", "sheamus", "cody", "rhodes", "roman", "reigns", "seth", "rollins",
+    "becky", "lynch", "rhea", "ripley", "cm",
+}
+ACTION_GROUPS: dict[str, set[str]] = {
+    "injury": {"injury", "injured", "health", "surgery", "medical", "backstage"},
+    "contract": {"contract", "expires", "extension", "deal", "signed", "signs", "situation"},
+    "return": {"return", "returns", "rumor", "rumour", "comeback", "back"},
+    "legal": {"legal", "lawsuit", "arrest", "arrested", "charged", "charges", "court"},
+    "title": {"title", "champion", "championship", "wins", "win", "won", "defeats", "beats", "crowns"},
+    "ratings": {"ratings", "viewership", "demo", "audience"},
+    "backstage": {"backstage", "creative", "plans", "development"},
+    "reaction": {"reacts", "reaction", "fans", "social", "photo", "gym", "post"},
+}
+INCOMPATIBLE_ACTIONS = {
+    frozenset(("injury", "contract")), frozenset(("return", "reaction")),
+    frozenset(("title", "reaction")), frozenset(("ratings", "backstage")),
+    frozenset(("legal", "return")), frozenset(("legal", "reaction")),
+}
+
+def title_similarity(a: str, b: str) -> float:
+    ta, tb = tokens(a), tokens(b)
+    if not ta or not tb:
+        return 0.0
+    return len(ta & tb) / max(1, min(len(ta), len(tb)))
+
+def action_labels(title: str) -> set[str]:
+    tt = tokens(title)
+    return {label for label, words in ACTION_GROUPS.items() if tt & words}
+
+def substantive_overlap(a: str, b: str) -> set[str]:
+    return (tokens(a) & tokens(b)) - ENTITY_ONLY_TOKENS
+
+def action_compatible(feed_title: str, pub_title: str) -> bool:
+    feed_actions = action_labels(feed_title)
+    pub_actions = action_labels(pub_title)
+    if not feed_actions or not pub_actions:
+        return False
+    if any(frozenset((a, b)) in INCOMPATIBLE_ACTIONS for a in feed_actions for b in pub_actions):
+        return False
+    return bool(feed_actions & pub_actions)
+
+def reliable_alternate_title_match(feed_title: str, pub_title: str) -> bool:
+    shared_substantive = substantive_overlap(feed_title, pub_title)
+    if not shared_substantive:
+        return False
+    if not action_compatible(feed_title, pub_title):
+        return False
+    # Require strong overlap after also confirming an event/action token. This
+    # prevents entity-only matches such as "John Cena injury" vs "John Cena contract".
+    sim = title_similarity(feed_title, pub_title)
+    if sim >= 0.75:
+        return True
+    actions = action_labels(feed_title) & action_labels(pub_title)
+    # Short hard-news titles often share one entity plus one decisive action
+    # token (e.g. Sheamus + contract, CM Punk + title). Allow those only for
+    # compatible hard-news action families, not reactions/social posts.
+    return sim >= 0.66 and bool(actions & {"contract", "title", "injury", "legal", "return"})
+
+def find_alternate_published_match(t: Trace, published_records: list[dict[str, Any]], published_by_slug: dict[str, dict[str, Any]]) -> dict[str, Any] | None:
+    slug = canonical_slug(t.final_title or t.title)
+    if slug and slug in published_by_slug:
+        return published_by_slug[slug]
+    best = None
+    best_score = 0.0
+    for p in published_records:
+        pt = str(first(p, "title_it", "title", "source_title") or "")
+        if not reliable_alternate_title_match(t.title, pt):
+            continue
+        sim = title_similarity(t.title, pt)
+        if sim > best_score:
+            best, best_score = p, sim
+    return best
+
+def is_low_value_or_report_candidate(t: Trace) -> bool:
+    blob = f"{t.title} {t.massy_decision} {t.massy_reason} {t.kind_hint} {t.menzo_decision} {t.menzo_reason} {t.article_type} {t.priority_label}".lower()
+    if "report_candidate" in blob or "simone" in blob:
+        return True
+    if GENERIC_RECAP_DUPLICATE_RE.search(blob):
+        return True
+    if re.search(r"low[-_ ]?value|low_score|soft reaction|reaction|listicle|source not preferred|hard_skip|hard skip memory|expired|promo|podcast|recap", blob):
+        return True
+    if SOFT_RE.search(blob) or str(t.article_type).lower() in SOFT_TYPES:
+        return True
+    return False
+
+def is_already_published_trace(t: Trace) -> bool:
+    return bool(re.search(r"url_already_published|already_published|already_worked|already_seen", f"{t.massy_decision} {t.massy_reason} {t.kind_hint} {t.menzo_reason}", re.I))
+
+def is_relevant_unpublished_candidate(t: Trace) -> bool:
+    blob = f"{t.title} {t.menzo_reason} {t.article_type} {t.priority_label}".lower()
+    if t.score is not None and t.score >= 80:
+        return True
+    if str(t.priority_label).lower() in {"high", "critical", "hard"}:
+        return True
+    if str(t.article_type).lower() in HARD_TYPES:
+        return True
+    if HARD_RE.search(blob):
+        return True
+    return False
+
+def classify_comparison(t: Trace, exact: bool, alternate: bool, duplicate_survivor_found: bool = False) -> str:
+    if exact:
+        return "published_exact_source_url"
+    if is_already_published_trace(t):
+        return "already_published_before_window_or_seen_again"
+    if DUPLICATE_LOSER_RE.search(f"{t.menzo_reason} {t.duplicate_reason}") and duplicate_survivor_found:
+        return "duplicate_loser_covered"
+    if alternate:
+        return "published_by_alternate_source_or_slug"
+    if is_relevant_unpublished_candidate(t):
+        return "candidate_not_published_review"
+    if is_low_value_or_report_candidate(t):
+        return "skipped_correctly_likely"
+    if t.trace_status in {"skipped", "report_candidate", "already_seen"}:
+        return "skipped_correctly_likely"
+    return "unknown_needs_trace"
 
 def tokens(title: str) -> set[str]:
     return {w for w in re.sub(r"[^a-z0-9]+"," ",title.lower()).split() if len(w)>3 and w not in STOP}
@@ -615,6 +754,14 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
         if not (root/extra).exists(): warnings.append(f"missing_optional_input: {extra}")
 
     feed_items=iter_items(massy,["news_candidates_for_menzo","report_candidates","hard_skipped","already_worked","items","entries"])
+    monitored_feed_urls = {
+        norm_url(first(it,"url","source_url","link"))
+        for it in feed_items
+        if url_is_monitored(first(it,"url","source_url","link"))
+    }
+    monitored_mode = bool(monitored_feed_urls)
+    if monitored_mode:
+        feed_items=[it for it in feed_items if norm_url(first(it,"url","source_url","link")) in monitored_feed_urls]
     traces: dict[str,Trace]={}
     for it in feed_items:
         if not in_window(it,since,until): continue
@@ -630,6 +777,7 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
     for it in menzo_items:
         u=norm_url(first(it,"url","source_url"));
         if not u: continue
+        if monitored_mode and u not in monitored_feed_urls: continue
         t=traces.setdefault(u, Trace(url=u, title=str(first(it,"title","source_title") or "")))
         t.menzo_decision=str(it.get("decision") or ("selected" if it in menzo.get("selected",[]) else "")); t.menzo_reason=str(first(it,"reason","editorial_reason","ai_editorial_reason") or "")
         try: t.score=int(first(it,"score","ai_priority","deterministic_score") or 0)
@@ -639,6 +787,7 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
     for it in iter_items(andrea,["blocked_items","passed_items","selected","items","results"]):
         u=norm_url(first(it,"source_url","url"));
         if not u: continue
+        if monitored_mode and u not in monitored_feed_urls: continue
         t=traces.setdefault(u, Trace(url=u, title=str(first(it,"title","source_title") or "")))
         raw_outcome=str(first(it,"andrea_outcome","status","decision","outcome") or "")
         blocked=bool(first(it,"andrea_blocked_before_bob","blocked_before_bob")) or raw_outcome.lower() in {"blocked","rejected","failed","blocked_before_bob"}
@@ -664,23 +813,18 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
     published_urls, published_by_url, published_by_slug = build_published_indexes(published_records)
     for it in all_pub_candidates:
         u=norm_url(first(it,"source_url","url"));
-        if not u and is_published_record(it):
-            slug = record_slug(it) or canonical_slug(first(it,"title_it","title","source_title") or first(it,"path","file","filename"))
-            existing_key = ""
-            for trace_key, trace in traces.items():
-                if slug and canonical_slug(trace.final_title or trace.title) == slug:
-                    existing_key = trace_key
-                    break
-            u = existing_key or f"published-artifact:{slug or len(traces)}"
         if u:
+            if monitored_mode and u not in monitored_feed_urls: continue
             t=traces.setdefault(u, Trace(url=u, title=str(first(it,"title_it","title") or "")))
             t.publisher_outcome=str(it.get("status") or "published_file"); t.final_title=str(first(it,"title_it","title") or t.title); t.final_url=str(first(it,"wp_link","published_url","final_url","path") or "")
     for t in traces.values():
         matched_trace = published_by_url.get(t.url)
+        exact_match = matched_trace is not None
+        alternate_match = None
         if not matched_trace:
-            slug = canonical_slug(t.final_title or t.title)
-            matched_trace = published_by_slug.get(slug) if slug else None
-        published=t.publisher_outcome in {"published","already_published","published_file"} or bool(t.final_url and t.publisher_outcome not in {"wp_not_ready","publish_error","skipped_capacity","skipped"}) or t.url in published_urls or matched_trace is not None
+            alternate_match = find_alternate_published_match(t, published_records, published_by_slug)
+            matched_trace = alternate_match
+        published=t.publisher_outcome in {"published","already_published","published_file"} or bool(t.final_url and t.publisher_outcome not in {"wp_not_ready","publish_error","skipped_capacity","skipped"}) or exact_match or alternate_match is not None
         if published:
             if not t.publisher_outcome:
                 t.publisher_outcome="published_trace"
@@ -702,6 +846,13 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
                 tt = tokens(t.title)
                 survivor = any(len(tt & tokens(str(first(p,"title_it","title","source_title") or ""))) >= 2 for p in published_records)
         t.recall_class=classify(t,published,survivor)
+        t.comparison_class=classify_comparison(t, exact_match, alternate_match is not None, survivor)
+        if exact_match:
+            t.published_match_method="source_url"
+        elif alternate_match is not None:
+            t.published_match_method="slug_or_title"
+    if monitored_mode:
+        traces={u: t for u, t in traces.items() if u in monitored_feed_urls}
     trace_list=sorted(traces.values(), key=lambda x:(x.trace_status,x.source,x.title))
     missed=[t for t in trace_list if t.trace_status!="published" and t.recall_class in {"must_publish_candidate","should_publish_candidate"}]
     soft=[t for t in trace_list if t.trace_status=="published" and t.recall_class=="optional_soft"]
@@ -709,30 +860,56 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
     reports=dedupe_reports(iter_items(simone,["reports","report_candidates"])+iter_items(simpub,["results","published_reports","reports"]))
     overlaps=report_overlap(published_records,reports)
     def c(status): return sum(1 for t in trace_list if t.trace_status==status)
-    lines=[f"# OWTV Feed Coverage Editorial Recall Audit v95.8", "", f"Artifact marker: `{MARKER}`", f"Window: {hours}h ({since.isoformat()} → {until.isoformat()} UTC)", f"mode: {mode}", "", "## 1. Executive summary", "", f"- Feed URLs seen: {len(trace_list)}", f"- Feed URLs with Menzo decision: {sum(1 for t in trace_list if t.menzo_decision)}", f"- Feed URLs published: {c('published')}", f"- Feed URLs skipped: {c('skipped')}", f"- Feed URLs pending: {c('pending')}", f"- Feed URLs unknown/untracked: {c('unknown')}", f"- Potential must-publish missed: {sum(1 for t in missed if t.recall_class=='must_publish_candidate')}", f"- Potential should-publish missed: {sum(1 for t in missed if t.recall_class=='should_publish_candidate')}", f"- Potential overpublished soft items: {len(soft)}", f"- Potential story-thread overcoverage: {len(over)}", f"- Post-show duplicate recap risks: {len(overlaps)}", "", "## 2. Coverage funnel", "", "| Stage | Count |", "|---|---:|", f"| Massy feed URLs | {len(trace_list)} |", f"| Menzo evaluated | {sum(1 for t in trace_list if t.menzo_decision)} |", f"| Menzo selected | {sum(1 for t in trace_list if t.menzo_decision=='selected')} |", f"| Menzo pending | {sum(1 for t in trace_list if t.menzo_decision=='pending')} |", f"| Menzo skipped | {sum(1 for t in trace_list if t.menzo_decision=='skip')} |", f"| Andrea checked/passed/blocked | n/a / {sum(1 for t in trace_list if t.andrea_outcome=='passed')} / {sum(1 for t in trace_list if t.andrea_outcome=='blocked')} |", f"| Bob generated | {sum(1 for t in trace_list if t.bob_outcome)} |", f"| Alfred approved/warnings/blockers | {sum(1 for t in trace_list if t.alfred_outcome=='approved')} / n/a / n/a |", f"| Publisher published/already/errors | {sum(1 for t in trace_list if t.publisher_outcome=='published')} / {sum(1 for t in trace_list if t.publisher_outcome=='already_published')} / {sum(1 for t in trace_list if 'error' in t.publisher_outcome)} |", f"| Final published | {c('published')} |", ""]
-    lines += ["## 3. Historical artifact discovery diagnostics", "", "| Diagnostic | Count |", "|---|---:|", f"| Historical files scanned | {hist_diag['historical_files_scanned']} |", f"| Historical files inside window | {hist_diag['historical_files_inside_window']} |"]
+    def esc(s: Any) -> str:
+        return str(s or "").replace("|","/").replace("\n", " ")[:220]
+    missing_source_pubs = [p for p in published_records if not norm_url(first(p, "source_url", "url"))]
+    exact_count = sum(1 for t in trace_list if t.comparison_class == "published_exact_source_url")
+    alt_count = sum(1 for t in trace_list if t.comparison_class == "published_by_alternate_source_or_slug")
+    skipped_count = sum(1 for t in trace_list if t.comparison_class in {"skipped_correctly_likely", "already_published_before_window_or_seen_again", "duplicate_loser_covered"})
+    review = [t for t in trace_list if t.comparison_class == "candidate_not_published_review"]
+    lines=[f"# OWTV Feed vs Published Comparison Audit v95.8.5", "", f"Artifact marker: `{MARKER}`", f"Window: {hours}h ({since.isoformat()} → {until.isoformat()} UTC)", f"mode: {mode}", "", "Diagnostic-only. This report compares the monitored feed inventory with published OWTV inventory; it does not change publishing behavior.", ""]
+
+    lines += ["## 1. Feed inventory", "", "| source | source_title | source_url | feed_published_at | Massy disposition | Massy reason | Menzo decision if available | Menzo reason if available | score if available | priority if available | article_type if available | trace status |", "|---|---|---|---|---|---|---|---|---:|---|---|---|"]
+    for t in trace_list:
+        lines.append(f"| {esc(t.source)} | {esc(t.title)} | {esc(t.url)} | {esc(t.published_at)} | {esc(t.massy_decision or t.kind_hint)} | {esc(t.massy_reason)} | {esc(t.menzo_decision)} | {esc(t.menzo_reason)} | {t.score if t.score is not None else ''} | {esc(t.priority_label)} | {esc(t.article_type)} | {esc(t.trace_status)} |")
+
+    lines += ["", "## 2. Published inventory", "", "| OWTV title | OWTV slug or URL if available | source | source_url if available | source_title if available | published_at if available | recovery method |", "|---|---|---|---|---|---|---|"]
+    for p in published_records:
+        src_url = norm_url(first(p, "source_url", "url"))
+        slug_or_url = first(p, "wp_link", "published_url", "final_url") or record_slug(p) or first(p, "path", "file", "filename")
+        lines.append(f"| {esc(first(p,'title_it','title','final_title') or record_slug(p))} | {esc(slug_or_url)} | {esc(first(p,'source','source_id','feed') or 'unknown')} | {esc(src_url or 'source_url_missing')} | {esc(first(p,'source_title','original_title'))} | {esc(first(p,'published_at','created_at','generated_at'))} | {published_recovery_method(p)} |")
+
+    lines += ["", "## 3. Feed-to-published comparison", "", "| source | source_title | source_url | comparison classification | published match method | reason |", "|---|---|---|---|---|---|"]
+    for t in trace_list:
+        reason = ", ".join(t.why) or t.menzo_reason or t.massy_reason or t.trace_status
+        lines.append(f"| {esc(t.source)} | {esc(t.title)} | {esc(t.url)} | {t.comparison_class} | {esc(t.published_match_method)} | {esc(reason)} |")
+
+    lines += ["", "## 4. Editorial review list", "", "This is the short human list answering: **What might we have missed?**", ""]
+    lines += ([f"- **{esc(t.title or t.url)}** ({esc(t.source)}) — {esc(t.url)} — {esc(', '.join(t.why) or t.menzo_reason or t.massy_reason or 'relevance signal with no published match')}" for t in review] or ["- None detected."])
+
+    lines += ["", "## 5. Published without source attribution", "", "These are trace-quality issues, not editorial misses.", ""]
+    lines += ([f"- **{esc(first(p,'title_it','title','final_title') or record_slug(p))}** — {esc(first(p,'wp_link','published_url','final_url') or record_slug(p) or first(p,'path','file','filename'))} — recovery_method={published_recovery_method(p)} — source_url_missing" for p in missing_source_pubs] or ["- None detected."])
+
+    lines += ["", "## 6. Summary", "", f"- total feed URLs seen: {len(trace_list)}", f"- total published articles: {len(published_records)}", f"- feed URLs exactly matched to published: {exact_count}", f"- feed URLs covered by alternate/slug match: {alt_count}", f"- feed URLs skipped correctly: {skipped_count}", f"- feed URLs requiring human review: {len(review)}", f"- published articles missing source attribution: {len(missing_source_pubs)}", "", "### Legacy summary compatibility", "", f"- Feed URLs seen: {len(trace_list)}", f"- Feed URLs with Menzo decision: {sum(1 for t in trace_list if t.menzo_decision)}", f"- Feed URLs published: {c('published')}", f"- Feed URLs skipped: {c('skipped')}", f"- Feed URLs pending: {c('pending')}", f"- Feed URLs unknown/untracked: {c('unknown')}", f"- Potential must-publish missed: {sum(1 for t in missed if t.recall_class=='must_publish_candidate')}", f"- Potential should-publish missed: {sum(1 for t in missed if t.recall_class=='should_publish_candidate')}", f"- Potential overpublished soft items: {len(soft)}", f"- Potential story-thread overcoverage: {len(over)}", f"- Post-show duplicate recap risks: {len(overlaps)}", "", "## 7. Secondary diagnostics (demoted)", "", "### Coverage funnel", "", "| Stage | Count |", "|---|---:|", f"| Massy feed URLs | {len(trace_list)} |", f"| Menzo evaluated | {sum(1 for t in trace_list if t.menzo_decision)} |", f"| Final published | {len(published_records)} |", ""]
+    lines += ["### Historical artifact discovery diagnostics", "", "| Diagnostic | Count |", "|---|---:|", f"| Historical files scanned | {hist_diag['historical_files_scanned']} |", f"| Historical files inside window | {hist_diag['historical_files_inside_window']} |"]
     for label, key in [("Massy", "massy"), ("Menzo", "menzo"), ("Andrea", "andrea"), ("Bob", "bob"), ("Alfred", "alfred"), ("Publisher", "publisher"), ("Simone", "simone"), ("Simone publish", "simpub")]:
         lines.append(f"| Useful {label} records merged | {hist_diag['merged_by_stage'].get(key, 0)} |")
-    lines += [f"| Publisher published records before dedupe | {publisher_before} |", f"| Publisher published records after dedupe | {publisher_after} |", f"| Published file artifacts before dedupe | {file_before} |", f"| Published file artifacts after dedupe | {file_after} |", ""]
-    lines += ["## 4. Feed URL trace table", "", "| source | source_title | source_url | feed published_at | Massy disposition/reason/score | Menzo decision | Menzo reason | score | priority | article_type | duplicate/story | Andrea outcome/reason | Bob | Alfred | Publisher | final title/url | trace_status | editorial_recall_class |", "|---|---|---|---|---|---|---|---:|---|---|---|---|---|---|---|---|---|---|"]
+    lines += [f"| Publisher published records before dedupe | {publisher_before} |", f"| Publisher published records after dedupe | {publisher_after} |", f"| Published file artifacts before dedupe | {file_before} |", f"| Published file artifacts after dedupe | {file_after} |", "", "### Legacy recall classes", "", "| source | source_title | source_url | massy | andrea | trace_status | editorial_recall_class | comparison_class |", "|---|---|---|---|---|---|---|---|"]
     for t in trace_list:
-        esc=lambda s: str(s or "").replace("|","/")[:180]
-        massy_cell = "/".join(x for x in [t.massy_decision or t.kind_hint, t.massy_reason, t.score_hint] if x)
-        andrea_cell = "/".join(x for x in [t.andrea_outcome, t.andrea_reason] if x)
-        lines.append(f"| {esc(t.source)} | {esc(t.title)} | {esc(t.url)} | {esc(t.published_at)} | {esc(massy_cell)} | {esc(t.menzo_decision)} | {esc(t.menzo_reason)} | {t.score if t.score is not None else ''} | {esc(t.priority_label)} | {esc(t.article_type)} | {esc(t.duplicate_reason)} | {esc(andrea_cell)} | {esc(t.bob_outcome)} | {esc(t.alfred_outcome)} | {esc(t.publisher_outcome)} | {esc(t.final_title or t.final_url)} | {t.trace_status} | {t.recall_class} |")
+        lines.append(f"| {esc(t.source)} | {esc(t.title)} | {esc(t.url)} | {esc('/'.join(x for x in [t.massy_decision or t.kind_hint, t.massy_reason, t.score_hint] if x))} | {esc('/'.join(x for x in [t.andrea_outcome, t.andrea_reason] if x))} | {esc(t.trace_status)} | {t.recall_class} | {t.comparison_class} |")
     dup_rows=[t for t in trace_list if DUPLICATE_LOSER_RE.search(f"{t.menzo_reason} {t.duplicate_reason}")]
-    lines += ["", "### Duplicate loser review notes", ""] + ([f"- {t.recall_class}: {t.title} — {t.url}; duplicate loser; verify survivor coverage; suggested human action: check_survivor" for t in dup_rows] or ["- None."])
-    lines += ["", "## 5. Potential missed stories", ""] + ([f"- **{t.title or t.url}** ({t.source}) — {t.url} — potential_miss: {', '.join(t.why) or 'review signal'}; skipped/trace reason: {t.menzo_reason or t.trace_status}; suggested human action: {'check_survivor' if DUPLICATE_LOSER_RE.search(t.menzo_reason) else ('check_policy' if 'duplicate' in t.menzo_reason else 'review')}" for t in missed] or ["- None detected."])
+    lines += ["", "### Duplicate loser review notes", ""] + ([f"- {t.comparison_class}: {t.title} — {t.url}; duplicate loser; verify survivor coverage" for t in dup_rows] or ["- None."])
+    lines += ["", "### Potential missed stories (legacy)", ""] + ([f"- **{t.title or t.url}** ({t.source}) — {t.url} — potential_miss: {', '.join(t.why) or 'review signal'}; skipped/trace reason: {t.menzo_reason or t.trace_status}" for t in missed] or ["- None detected."])
     lines += ["", "## 6. Potential overpublished soft items", ""] + ([f"- **{t.final_title or t.title}** — possible_overpublished_soft_item: {', '.join(t.why)} — {t.url}" for t in soft] or ["- None detected."])
-    lines += ["", "## 7. Story thread overcoverage", ""] + ([f"- **{r['label']}** ({r['count']} published) — {r['reason']}; titles: " + "; ".join(str(first(i,'title_it','title','source_title')) for i in r['items']) for r in over] or ["- None detected by fallback grouping; latest story cluster audit, if present, should be reviewed separately."])
+    lines += ["", "### Story thread overcoverage", ""] + ([f"- **{r['label']}** ({r['count']} published) — {r['reason']}; titles: " + "; ".join(str(first(i,'title_it','title','source_title')) for i in r['items']) for r in over] or ["- None detected by fallback grouping; latest story cluster audit, if present, should be reviewed separately."])
     lines += ["", "## 8. Post-show duplicate recap risks", ""] + ([f"- Report `{o['report']}` vs `{o['title']}` — {o['classification']}" for o in overlaps] or ["- None detected."])
-    lines += ["", "## 9. Source coverage", "", "| source | seen | published | skipped | pending | unknown | publish rate | possible missed high-value |", "|---|---:|---:|---:|---:|---:|---:|---:|"]
+    lines += ["", "### Source coverage", "", "| source | seen | published | skipped | pending | unknown | publish rate | possible missed high-value |", "|---|---:|---:|---:|---:|---:|---:|---:|"]
     for src in sorted({t.source or 'unknown' for t in trace_list}):
         rows=[t for t in trace_list if (t.source or 'unknown')==src]; pub=sum(1 for t in rows if t.trace_status=='published')
         lines.append(f"| {src} | {len(rows)} | {pub} | {sum(1 for t in rows if t.trace_status=='skipped')} | {sum(1 for t in rows if t.trace_status=='pending')} | {sum(1 for t in rows if t.trace_status=='unknown')} | {pub/len(rows):.0%} | {sum(1 for t in rows if t in missed)} |")
-    lines += ["", "## 10. Category/type coverage", "", "| type/category | count |", "|---|---:|"]
+    lines += ["", "### Category/type coverage", "", "| type/category | count |", "|---|---:|"]
     for typ in sorted({(t.article_type or ('report' if t.trace_status=='report_candidate' else 'unknown')) for t in trace_list}): lines.append(f"| {typ} | {sum(1 for t in trace_list if (t.article_type or ('report' if t.trace_status=='report_candidate' else 'unknown'))==typ)} |")
-    lines += ["", "## 11. Human review samples", "", "### Top skipped candidates to review"] + ([f"- {t.recall_class}: {t.title} — {t.url}" for t in missed[:5]] or ["- None."])
+    lines += ["", "### Human review samples", "", "### Top skipped candidates to review"] + ([f"- {t.recall_class}: {t.title} — {t.url}" for t in missed[:5]] or ["- None."])
     published_samples = soft[:5] or [t for t in trace_list if t.trace_status=="published"][:5]
     lines += ["", "### Top published candidates to quality-check"] + ([f"- {t.recall_class}: {t.final_title or t.title} — {t.url or 'source_url_unavailable'}" for t in published_samples] or ["- None."])
     lines += ["", "### Top overcoverage candidates"] + ([f"- {r['label']} ({r['count']})" for r in over[:5]] or ["- None."])
@@ -745,6 +922,6 @@ def build_audit(hours: int, root: Path = ROOT) -> tuple[str, Path]:
 
 def main() -> int:
     ap=argparse.ArgumentParser(description="OWTV v95.8 feed coverage editorial recall audit")
-    ap.add_argument("hours", nargs="?", type=int, default=24, choices=[12,24,48])
+    ap.add_argument("hours", nargs="?", type=int, default=24, choices=[12,24,48,72,168])
     args=ap.parse_args(); _, out=build_audit(args.hours); print(out); return 0
 if __name__ == "__main__": raise SystemExit(main())
