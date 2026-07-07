@@ -70,7 +70,7 @@ def test_story_thread_overcoverage_and_report_overlap(tmp_path, monkeypatch):
     write(ns / "simone_reports_latest.json", {"reports": [{"title":"WWE Raw report"}]})
     text = run(tmp_path, monkeypatch)
     assert "possible_overcoverage" in text
-    assert "possible_report_duplicate" in text or "likely_valid_major_angle" in text
+    assert "duplicate_recap_risk" in text
 
 
 def test_missing_input_files_do_not_crash(tmp_path, monkeypatch):
@@ -124,8 +124,8 @@ def test_report_overlap_ignores_unpublished_publisher_records(tmp_path, monkeypa
     ]})
     write(ns / "simone_reports_latest.json", {"reports": [{"title":"WWE Raw report"}]})
     text = run(tmp_path, monkeypatch)
-    assert "- Post-show/report overlap risks: 0" in text
-    assert "## 8. Report/post-show overlap\n\n- None detected." in text
+    assert "- Post-show duplicate recap risks: 0" in text
+    assert "## 8. Post-show duplicate recap risks\n\n- None detected." in text
 
 
 def test_pipeline_artifact_variants_collapse_to_one_published_item(tmp_path, monkeypatch):
@@ -181,7 +181,7 @@ def test_report_overlap_ignores_unrelated_published_articles(tmp_path, monkeypat
     ]})
     write(ns / "simone_reports_latest.json", {"reports": [{"title": "WWE Raw results July 6"}]})
     text = run(tmp_path, monkeypatch)
-    assert "- Post-show/report overlap risks: 0" in text
+    assert "- Post-show duplicate recap risks: 0" in text
 
 
 def test_report_overlap_detects_raw_title_change_candidate(tmp_path, monkeypatch):
@@ -194,7 +194,7 @@ def test_report_overlap_detects_raw_title_change_candidate(tmp_path, monkeypatch
     ]})
     write(ns / "simone_reports_latest.json", {"reports": [{"title": "WWE Raw results July 6"}]})
     text = run(tmp_path, monkeypatch)
-    assert "- Post-show/report overlap risks: 1" in text
+    assert "- Post-show duplicate recap risks: 1" in text
     assert "WWE Raw results new champion wins title on July 6" in text
 
 
@@ -224,7 +224,7 @@ def test_artifacts_newsroom_massy_board_is_not_published_story(tmp_path, monkeyp
     })
     text = run(tmp_path, monkeypatch)
     assert "Not a published story" not in text
-    assert "- Post-show/report overlap risks: 0" in text
+    assert "- Post-show duplicate recap risks: 0" in text
 
 
 def test_artifacts_newsroom_publisher_result_without_metadata_is_not_published_story(tmp_path, monkeypatch):
@@ -240,7 +240,7 @@ def test_artifacts_newsroom_publisher_result_without_metadata_is_not_published_s
     write(ns / "simone_reports_latest.json", {"reports": [{"title": "WWE Raw results July 6"}]})
     text = run(tmp_path, monkeypatch)
     assert "Raw results not actually published" not in text
-    assert "- Post-show/report overlap risks: 0" in text
+    assert "- Post-show duplicate recap risks: 0" in text
 
 
 def test_publisher_source_url_and_publisher_html_slug_collapse(tmp_path, monkeypatch):
@@ -357,7 +357,7 @@ def test_raw_report_does_not_overlap_with_aew_dynamite_article(tmp_path, monkeyp
     ]})
     write(ns / "simone_reports_latest.json", {"reports": [{"title": "WWE Raw results July 6"}]})
     text = run(tmp_path, monkeypatch)
-    assert "- Post-show/report overlap risks: 0" in text
+    assert "- Post-show duplicate recap risks: 0" in text
 
 
 def test_raw_report_overlaps_raw_title_change_result_article(tmp_path, monkeypatch):
@@ -370,7 +370,7 @@ def test_raw_report_overlaps_raw_title_change_result_article(tmp_path, monkeypat
     ]})
     write(ns / "simone_reports_latest.json", {"reports": [{"title": "WWE Raw results July 6"}]})
     text = run(tmp_path, monkeypatch)
-    assert "- Post-show/report overlap risks: 1" in text
+    assert "- Post-show duplicate recap risks: 1" in text
     assert "WWE Raw results new champion wins title" in text
 
 
@@ -453,7 +453,7 @@ def test_tna_impact_report_overlaps_impact_result_article(tmp_path, monkeypatch)
     ]})
     write(ns / "simone_reports_latest.json", {"reports": [{"title": "TNA Impact results July 6"}]})
     text = run(tmp_path, monkeypatch)
-    assert "- Post-show/report overlap risks: 1" in text
+    assert "- Post-show duplicate recap risks: 1" in text
     assert "TNA Impact results new champion wins title" in text
 
 
@@ -514,10 +514,10 @@ def test_report_candidate_and_simone_published_report_collapse_to_one_overlap_so
     write(ns / "simone_reports_latest.json", {"reports": [{"title":"WWE Raw results July 6", "generated_at": audit.utc_now().isoformat()}]})
     write(ns / "simone_report_publish_latest.json", {"results": [{"title":"WWE Raw results July 6", "status":"published", "wp_link":"https://owtv.test/raw-report", "published_at": audit.utc_now().isoformat()}]})
     text = run(tmp_path, monkeypatch)
-    assert "- Post-show/report overlap risks: 1" in text
+    assert "- Post-show duplicate recap risks: 1" in text
 
 
-def test_raw_title_change_article_labeled_likely_valid_major_angle(tmp_path, monkeypatch):
+def test_raw_title_change_article_not_labeled_duplicate_recap_risk(tmp_path, monkeypatch):
     seed_required(tmp_path)
     ns = tmp_path / "state" / "newsroom"
     write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": []})
@@ -527,8 +527,8 @@ def test_raw_title_change_article_labeled_likely_valid_major_angle(tmp_path, mon
     ]})
     write(ns / "simone_reports_latest.json", {"reports": [{"title":"WWE Raw results July 6"}]})
     text = run(tmp_path, monkeypatch)
-    assert "likely_valid_major_angle" in text
-    assert "WWE Raw title change crowns new champion` — possible_report_duplicate" not in text
+    assert "- Post-show duplicate recap risks: 0" in text
+    assert "WWE Raw title change crowns new champion` — duplicate_recap_risk" not in text
 
 
 def test_diagnostics_show_stage_file_counts_and_merged_record_counts(tmp_path, monkeypatch):
@@ -579,8 +579,8 @@ def test_source_less_simone_report_publish_remains_available_for_overlap(tmp_pat
     })
     text = run(tmp_path, monkeypatch)
     assert "- Feed URLs published: 1" in text
-    assert "- Post-show/report overlap risks: 1" in text
-    assert "WWE Raw title change crowns new champion" in text
+    assert "- Post-show duplicate recap risks: 0" in text
+    assert "WWE Raw title change crowns new champion` — duplicate_recap_risk" not in text
 
 
 def test_raw_report_candidate_and_simone_report_collapse_without_child_timestamps(tmp_path, monkeypatch):
@@ -599,8 +599,8 @@ def test_raw_report_candidate_and_simone_report_collapse_without_child_timestamp
         {"title": "WWE Raw del 6 luglio 2026", "status": "published", "wp_link": "https://owtv.test/raw-report"}
     ]})
     text = run(tmp_path, monkeypatch)
-    assert "- Post-show/report overlap risks: 1" in text
-    assert text.count("Report `WWE Raw del 6 luglio 2026` vs `WWE Raw title change crowns new champion`") == 1
+    assert "- Post-show duplicate recap risks: 0" in text
+    assert text.count("Report `WWE Raw del 6 luglio 2026` vs `WWE Raw title change crowns new champion`") == 0
 
 
 def test_raw_reports_from_different_dates_do_not_collapse(tmp_path, monkeypatch):
@@ -616,4 +616,52 @@ def test_raw_reports_from_different_dates_do_not_collapse(tmp_path, monkeypatch)
         {"title": "WWE Raw Results 7/7 full report"},
     ]})
     text = run(tmp_path, monkeypatch)
-    assert "- Post-show/report overlap risks: 2" in text
+    assert "- Post-show duplicate recap risks: 0" in text
+
+
+def test_raw_report_does_not_flag_required_standalone_major_event_news(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    articles = [
+        ("https://e.test/cm-punk", "CM Punk conquista l’Undisputed WWE Championship"),
+        ("https://e.test/cody", "Cody Rhodes rimosso dal title match dopo l’attacco di Gunther"),
+        ("https://e.test/brock", "Il ritorno di Brock Lesnar e i match annunciati per la prossima Raw"),
+        ("https://e.test/sol", "Sol Ruca batte Raquel Rodriguez e mantiene il Women’s Intercontinental Championship"),
+    ]
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": []})
+    write(ns / "menzo_decisions_latest.json", {"selected": [], "skipped": [], "pending": []})
+    write(ns / "publisher_status_latest.json", {"results": [
+        {"source_url": url, "title_it": title, "status": "published"} for url, title in articles
+    ]})
+    write(ns / "simone_reports_latest.json", {"reports": [{"title": "WWE Raw results July 6"}]})
+    text = run(tmp_path, monkeypatch)
+    assert "- Post-show duplicate recap risks: 0" in text
+    for _, title in articles:
+        assert f"`{title}` — duplicate_recap_risk" not in text
+
+
+def test_raw_report_flags_required_generic_duplicate_recap_titles(tmp_path, monkeypatch):
+    seed_required(tmp_path)
+    ns = tmp_path / "state" / "newsroom"
+    titles = [
+        "WWE Raw Results 7/6",
+        "WWE Raw risultati e momenti salienti",
+        "WWE Raw recap",
+        "WWE Raw highlights",
+        "WWE RAW 7/6: 3 Things We Hated & 3 Things We Loved",
+        "WWE Raw live coverage",
+        "WWE Raw live blog",
+        "WWE Raw play-by-play",
+        "WWE Raw live updates",
+    ]
+    write(ns / "massy_board_latest.json", {"news_candidates_for_menzo": []})
+    write(ns / "menzo_decisions_latest.json", {"selected": [], "skipped": [], "pending": []})
+    write(ns / "publisher_status_latest.json", {"results": [
+        {"source_url": f"https://e.test/generic-{i}", "title_it": title, "status": "published"}
+        for i, title in enumerate(titles)
+    ]})
+    write(ns / "simone_reports_latest.json", {"reports": [{"title": "WWE Raw results July 6"}]})
+    text = run(tmp_path, monkeypatch)
+    assert "- Post-show duplicate recap risks: 9" in text
+    for title in titles:
+        assert f"`{title}` — duplicate_recap_risk" in text
