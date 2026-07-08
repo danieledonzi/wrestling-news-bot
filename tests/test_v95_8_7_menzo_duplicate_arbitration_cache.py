@@ -52,6 +52,8 @@ def test_same_candidate_cluster_within_ttl_calls_gemini_once(tmp_path, monkeypat
     assert len(calls) == 1
     assert second["postprocess"]["duplicate_arbitration_cache_hit"] == 1
     assert second["postprocess"]["gemini_calls_avoided_by_duplicate_arbitration_cache"] == 1
+    assert second["postprocess"]["gemini_calls_used_for_duplicate_arbitration"] == 0
+    assert second["postprocess"]["ai_duplicate_arbitration_calls"] == 0
 
 
 def test_sami_zayn_pending_followup_uses_cache_on_second_run(tmp_path, monkeypatch):
@@ -100,7 +102,9 @@ def test_new_url_or_material_title_or_score_crossing_invalidates_cache(tmp_path,
     menzo.apply_ai_duplicate_arbitration(r_new_url, board("https://example.test/punk", "https://example.test/new"))
     run_once(item(title="Sami Zayn Responds To Different Raw Situation", score=60, article_type="soft_news"))
     run_once(item(score=80, article_type="soft_news"))
-    assert len(calls) == 4
+    # Crossing the threshold in either direction is material enough to re-arbitrate.
+    run_once(item(score=60, article_type="soft_news"))
+    assert len(calls) == 5
 
 
 def test_cache_read_write_failure_non_fatal(tmp_path, monkeypatch):

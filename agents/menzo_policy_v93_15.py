@@ -748,7 +748,7 @@ def duplicate_arbitration_cache_lookup(context: dict[str, Any], *, threshold: in
                 return None, "duplicate_arbitration_cache_miss"
         if context.get("article_type_snapshot") == "hard_news" and entry.get("article_type_snapshot") != "hard_news":
             return None, "duplicate_arbitration_cache_miss"
-        if bool(entry.get("score_above_threshold_snapshot")) is False and bool(context.get("score_snapshot", 0) >= threshold) is True:
+        if bool(entry.get("score_above_threshold_snapshot")) != bool(context.get("score_snapshot", 0) >= threshold):
             return None, "duplicate_arbitration_cache_miss"
         now = datetime.now(timezone.utc).isoformat()
         entry["last_used_at"] = now
@@ -1381,6 +1381,7 @@ def apply_ai_duplicate_arbitration(result: dict[str, Any], massy_board: dict[str
     duplicate_arbitration_cache_hits = 0
     duplicate_arbitration_cache_misses = 0
     duplicate_arbitration_cache_expired = 0
+    duplicate_arbitration_ai_calls = 0
 
     for item in candidates:
         key = source_key(item.get("url") or item.get("source_url") or "")
@@ -1410,6 +1411,7 @@ def apply_ai_duplicate_arbitration(result: dict[str, Any], massy_board: dict[str
                 duplicate_arbitration_cache_expired += 1
             else:
                 duplicate_arbitration_cache_misses += 1
+            duplicate_arbitration_ai_calls += 1
             ai_data, model = call_gemini_json_model(build_ai_dedupe_prompt(records), MENZO_DUPLICATE_ARBITRATION_FIRST_MODEL, ledger_context=ledger_context)
             second_pass = False
             allowed_second_pass, second_pass_reason = menzo_second_pass_gate(item, records, ai_data)
@@ -1451,8 +1453,8 @@ def apply_ai_duplicate_arbitration(result: dict[str, Any], massy_board: dict[str
     pp = result.setdefault("postprocess", {})
     pp["ai_cross_source_duplicate_arbitration_used"] = len(logs)
     pp["ai_duplicate_arbitration_clusters"] = len(records_by_url)
-    pp["ai_duplicate_arbitration_calls"] = len(logs)
-    pp["gemini_calls_used_for_duplicate_arbitration"] = len(logs)
+    pp["ai_duplicate_arbitration_calls"] = duplicate_arbitration_ai_calls
+    pp["gemini_calls_used_for_duplicate_arbitration"] = duplicate_arbitration_ai_calls
     pp["duplicate_arbitration_cache_hit"] = duplicate_arbitration_cache_hits
     pp["duplicate_arbitration_cache_miss"] = duplicate_arbitration_cache_misses
     pp["duplicate_arbitration_cache_expired"] = duplicate_arbitration_cache_expired
