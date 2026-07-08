@@ -6,6 +6,8 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
+from agents.gemini_diagnostics import build_gemini_diagnostics, load_ledger, render_gemini_diagnostics_markdown
+
 ROOT = Path(__file__).resolve().parents[1]
 STATE_DIR = ROOT / "state"
 NEWSROOM_STATE_DIR = STATE_DIR / "newsroom"
@@ -265,6 +267,16 @@ def render_markdown(report: dict[str, Any]) -> str:
     lines.append(f"- Gemini calls avoided: {ledger_summary.get('gemini_calls_avoided_total', 0)}")
     lines.append(f"- Gemini calls avoided by Andrea: {ledger_summary.get('gemini_calls_avoided_by_andrea', 0)}")
     lines.append(f"- Gemini calls failed: {ledger_summary.get('gemini_calls_failed', 0)}")
+    lines.append("")
+    gemini_records, gemini_warnings = load_ledger()
+    report_inputs = report.get("inputs", {}) if isinstance(report.get("inputs"), dict) else {}
+    menzo_context = report_inputs.get("menzo") if isinstance(report_inputs.get("menzo"), dict) else None
+    gemini_diag = build_gemini_diagnostics(gemini_records, menzo_context=menzo_context)
+    lines.append(render_gemini_diagnostics_markdown(gemini_diag).rstrip())
+    if gemini_warnings:
+        lines.append("### Gemini ledger warnings")
+        for warning in gemini_warnings[:10]:
+            lines.append(f"- {warning}")
     lines.append("")
     lines.append("## Agent handoff")
     for name, handoff in (report.get("agent_handoffs") or {}).items():
