@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
@@ -34,6 +35,8 @@ V92_ALLOWED_URLS_FILE = NEWSROOM_STATE_DIR / "v92_allowed_news_urls.json"
 ARTIFACT_DECISIONS_FILE = ARTIFACT_DIR / "menzo_decisions.json"
 SOFTPOOL_FILE = NEWSROOM_STATE_DIR / "menzo_softpool.json"
 HARD_SKIP_FILE = NEWSROOM_STATE_DIR / "menzo_hard_skips.json"
+MENZO_DUPLICATE_ARBITRATION_CACHE_FILE = NEWSROOM_STATE_DIR / "menzo_duplicate_arbitration_cache.json"
+MENZO_DUPLICATE_ARBITRATION_CACHE_SCHEMA_VERSION = "v95.8.7"
 
 MENZO_VERSION = "v95.5_cross_run_story_novelty_gate"
 VALID_LABELS = {"high", "medium", "low", "skip"}
@@ -678,6 +681,110 @@ def build_ai_dedupe_second_pass_prompt(records: list[dict[str, Any]], history: d
     return build_ai_dedupe_prompt(records) + "\n\nSecond-pass context (publisher_history/story_footprints relevant to the suspected core fact):\n" + json.dumps(history, ensure_ascii=False, indent=2)
 
 
+def duplicate_arbitration_cache_ttl_hours() -> int:
+    try:
+        return max(1, int(os.getenv("MENZO_DUPLICATE_ARBITRATION_CACHE_TTL_HOURS", "24")))
+    except Exception:
+        return 24
+
+
+def duplicate_arbitration_title(item_or_record: dict[str, Any]) -> str:
+    return normalize_text(str(item_or_record.get("title") or item_or_record.get("source_title") or item_or_record.get("title_it") or "")).lower()
+
+
+def duplicate_arbitration_context(item: dict[str, Any], records: list[dict[str, Any]], threshold: int) -> dict[str, Any]:
+    candidate_url = source_key(item.get("url") or item.get("source_url") or (records[0].get("source_url") if records else "") or "")
+    compared_urls = sorted({source_key(r.get("source_url") or r.get("url") or "") for r in records if source_key(r.get("source_url") or r.get("url") or "") and source_key(r.get("source_url") or r.get("url") or "") != candidate_url})
+    candidate_title = duplicate_arbitration_title(item) or (duplicate_arbitration_title(records[0]) if records else "")
+    compared_titles = sorted({duplicate_arbitration_title(r) for r in records[1:] if duplicate_arbitration_title(r)})
+    story_fingerprint = str(item.get("story_fingerprint") or item.get("story_footprint") or deterministic_story_key(item) or "")
+    try:
+        score = int(item.get("score") or item.get("menzo_score") or 0)
+    except Exception:
+        score = 0
+    article_type = str(item.get("article_type") or "").strip().lower()
+    payload = {
+        "purpose": "ai_duplicate_arbitration",
+        "schema_version": MENZO_DUPLICATE_ARBITRATION_CACHE_SCHEMA_VERSION,
+        "candidate_source_url": candidate_url,
+        "compared_source_urls": compared_urls,
+        "candidate_title_normalized": candidate_title,
+        "story_fingerprint": story_fingerprint,
+    }
+    cache_key = hashlib.sha256(json.dumps(payload, ensure_ascii=False, sort_keys=True).encode("utf-8")).hexdigest()
+    return {
+        **payload,
+        "cache_key": cache_key,
+        "compared_titles_normalized": compared_titles,
+        "score_snapshot": score,
+        "priority_snapshot": item.get("priority") or item.get("ai_priority_label") or item.get("priority_label") or "",
+        "article_type_snapshot": article_type,
+        "score_above_threshold_snapshot": score >= threshold,
+    }
+
+
+def load_duplicate_arbitration_cache() -> dict[str, Any]:
+    data = load_json(MENZO_DUPLICATE_ARBITRATION_CACHE_FILE, {})
+    return data if isinstance(data, dict) else {}
+
+
+def write_duplicate_arbitration_cache(cache: dict[str, Any]) -> None:
+    write_json(MENZO_DUPLICATE_ARBITRATION_CACHE_FILE, cache)
+
+
+def duplicate_arbitration_cache_lookup(context: dict[str, Any], *, threshold: int) -> tuple[dict[str, Any] | None, str]:
+    try:
+        cache = load_duplicate_arbitration_cache()
+        entry = cache.get(context["cache_key"])
+        if not isinstance(entry, dict):
+            return None, "duplicate_arbitration_cache_miss"
+        if entry.get("schema_version") != MENZO_DUPLICATE_ARBITRATION_CACHE_SCHEMA_VERSION:
+            return None, "duplicate_arbitration_cache_miss"
+        expires_at = datetime.fromisoformat(str(entry.get("expires_at") or "").replace("Z", "+00:00"))
+        if expires_at < datetime.now(timezone.utc):
+            return None, "duplicate_arbitration_cache_expired"
+        for field in ["candidate_source_url", "candidate_title_normalized", "compared_source_urls", "story_fingerprint"]:
+            if entry.get(field) != context.get(field):
+                return None, "duplicate_arbitration_cache_miss"
+        if context.get("article_type_snapshot") == "hard_news" and entry.get("article_type_snapshot") != "hard_news":
+            return None, "duplicate_arbitration_cache_miss"
+        if bool(entry.get("score_above_threshold_snapshot")) != bool(context.get("score_snapshot", 0) >= threshold):
+            return None, "duplicate_arbitration_cache_miss"
+        now = datetime.now(timezone.utc).isoformat()
+        entry["last_used_at"] = now
+        entry["cache_hit_count"] = int(entry.get("cache_hit_count") or 0) + 1
+        cache[context["cache_key"]] = entry
+        write_duplicate_arbitration_cache(cache)
+        return entry, "duplicate_arbitration_cache_hit"
+    except Exception as exc:
+        print(f"WARNING: menzo duplicate arbitration cache lookup failed: {exc}")
+        return None, "duplicate_arbitration_cache_miss"
+
+
+def duplicate_arbitration_cache_store(context: dict[str, Any], ai_data: dict[str, Any], model_used: str, *, second_pass: bool) -> None:
+    try:
+        cache = load_duplicate_arbitration_cache()
+        now = datetime.now(timezone.utc)
+        entry = {
+            **context,
+            "result": ai_data,
+            "decision": ai_data.get("decision") or "",
+            "winner_url": ai_data.get("winner_url") or "",
+            "loser_urls": ai_data.get("loser_urls") or [],
+            "pending_followup": str(ai_data.get("decision") or "").lower() == "pending_followup",
+            "reason": ai_data.get("reason") or "",
+            "model_used": model_used,
+            "second_pass_used": second_pass,
+            "created_at": now.isoformat(),
+            "last_used_at": now.isoformat(),
+            "expires_at": (now + timedelta(hours=duplicate_arbitration_cache_ttl_hours())).isoformat(),
+        }
+        cache[context["cache_key"]] = entry
+        write_duplicate_arbitration_cache(cache)
+    except Exception as exc:
+        print(f"WARNING: menzo duplicate arbitration cache write failed: {exc}")
+
+
 def needs_second_pass(ai_data: dict[str, Any] | None) -> bool:
     if not ai_data:
         return False
@@ -1270,6 +1377,11 @@ def apply_ai_duplicate_arbitration(result: dict[str, Any], massy_board: dict[str
     resolved: dict[str, dict[str, Any]] = {}
     logs: list[dict[str, Any]] = []
     handled_cluster_keys = apply_candidate_duplicate_cluster_survivors({"selected": selected, "pending": pending, "daily_policy": result.get("daily_policy", {})}, records_by_url, logs)
+    threshold = int(result.get("daily_policy", {}).get("dynamic_soft_threshold") or MIN_SELECTED_SCORE)
+    duplicate_arbitration_cache_hits = 0
+    duplicate_arbitration_cache_misses = 0
+    duplicate_arbitration_cache_expired = 0
+    duplicate_arbitration_ai_calls = 0
 
     for item in candidates:
         key = source_key(item.get("url") or item.get("source_url") or "")
@@ -1286,19 +1398,37 @@ def apply_ai_duplicate_arbitration(result: dict[str, Any], massy_board: dict[str
             continue
         records = arbitration_records_for_item(item, cluster_records)
         ledger_context = {"url": item.get("url") or item.get("source_url"), "title": item.get("title") or item.get("source_title"), "candidate_id": item.get("candidate_id") or item.get("id") or item.get("semantic_id"), "source_id": item.get("source_id") or item.get("source"), "cluster_id": "|".join(source_key(r.get("source_url") or r.get("url") or "") for r in records)}
-        ai_data, model = call_gemini_json_model(build_ai_dedupe_prompt(records), MENZO_DUPLICATE_ARBITRATION_FIRST_MODEL, ledger_context=ledger_context)
-        second_pass = False
-        allowed_second_pass, second_pass_reason = menzo_second_pass_gate(item, records, ai_data)
-        if needs_second_pass(ai_data) and not allowed_second_pass:
-            _record_menzo_second_pass_avoided(second_pass_reason, ledger_context)
-        if allowed_second_pass:
-            second_pass = True
-            ai_data2, model2 = call_gemini_json_model(build_ai_dedupe_second_pass_prompt(records, relevant_history_payload(records)), MENZO_DUPLICATE_ARBITRATION_SECOND_MODEL, ledger_context=ledger_context, phase="duplicate_arbitration_second_pass")
-            if ai_data2:
-                ai_data, model = ai_data2, model2
+        cache_context = duplicate_arbitration_context(item, records, threshold)
+        cache_entry, cache_status = duplicate_arbitration_cache_lookup(cache_context, threshold=threshold)
+        if cache_status == "duplicate_arbitration_cache_hit":
+            duplicate_arbitration_cache_hits += 1
+            ai_data = cache_entry.get("result") if isinstance(cache_entry, dict) and isinstance(cache_entry.get("result"), dict) else None
+            model = str(cache_entry.get("model_used") or "duplicate_arbitration_cache") if isinstance(cache_entry, dict) else "duplicate_arbitration_cache"
+            second_pass = bool(cache_entry.get("second_pass_used")) if isinstance(cache_entry, dict) else False
+            record_gemini_event(agent="Menzo", phase="duplicate_arbitration", model=model, status="avoided", reason="duplicate_arbitration_cache_hit", result="cache_hit", saved_gemini_call=True, **ledger_context)
+        else:
+            if cache_status == "duplicate_arbitration_cache_expired":
+                duplicate_arbitration_cache_expired += 1
+            else:
+                duplicate_arbitration_cache_misses += 1
+            duplicate_arbitration_ai_calls += 1
+            ai_data, model = call_gemini_json_model(build_ai_dedupe_prompt(records), MENZO_DUPLICATE_ARBITRATION_FIRST_MODEL, ledger_context=ledger_context)
+            second_pass = False
+            allowed_second_pass, second_pass_reason = menzo_second_pass_gate(item, records, ai_data)
+            if needs_second_pass(ai_data) and not allowed_second_pass:
+                _record_menzo_second_pass_avoided(second_pass_reason, ledger_context)
+            if allowed_second_pass:
+                second_pass = True
+                ai_data2, model2 = call_gemini_json_model(build_ai_dedupe_second_pass_prompt(records, relevant_history_payload(records)), MENZO_DUPLICATE_ARBITRATION_SECOND_MODEL, ledger_context=ledger_context, phase="duplicate_arbitration_second_pass")
+                if ai_data2:
+                    ai_data, model = ai_data2, model2
+            if ai_data:
+                duplicate_arbitration_cache_store(cache_context, ai_data, model, second_pass=second_pass)
         if not ai_data:
             ai_data = {"cluster_type": "uncertain", "decision": "pending_review", "confidence": 0, "reason": model}
         resolved_item = apply_arbitration_decision(item, ai_data, model, second_pass)
+        if cache_status == "duplicate_arbitration_cache_hit":
+            resolved_item["ai_cross_source_duplicate_arbitration"]["cache_hit"] = True
         resolved[key] = resolved_item
         logs.append(resolved_item["ai_cross_source_duplicate_arbitration"])
 
@@ -1323,8 +1453,12 @@ def apply_ai_duplicate_arbitration(result: dict[str, Any], massy_board: dict[str
     pp = result.setdefault("postprocess", {})
     pp["ai_cross_source_duplicate_arbitration_used"] = len(logs)
     pp["ai_duplicate_arbitration_clusters"] = len(records_by_url)
-    pp["ai_duplicate_arbitration_calls"] = len(logs)
-    pp["gemini_calls_used_for_duplicate_arbitration"] = len(logs)
+    pp["ai_duplicate_arbitration_calls"] = duplicate_arbitration_ai_calls
+    pp["gemini_calls_used_for_duplicate_arbitration"] = duplicate_arbitration_ai_calls
+    pp["duplicate_arbitration_cache_hit"] = duplicate_arbitration_cache_hits
+    pp["duplicate_arbitration_cache_miss"] = duplicate_arbitration_cache_misses
+    pp["duplicate_arbitration_cache_expired"] = duplicate_arbitration_cache_expired
+    pp["gemini_calls_avoided_by_duplicate_arbitration_cache"] = duplicate_arbitration_cache_hits
     pp["ai_duplicate_arbitration_skipped"] = sum(1 for l in logs if l.get("decision") == "skip_duplicate")
     pp["ai_duplicate_arbitration_pending_followup"] = sum(1 for l in logs if l.get("decision") in {"pending_followup", "pending_review"})
     pp["ai_cross_source_duplicate_arbitration_logs"] = logs[:AI_DEDUPE_MAX_CLUSTERS * AI_DEDUPE_MAX_CANDIDATES]

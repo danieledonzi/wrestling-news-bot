@@ -98,6 +98,7 @@ def summarize(records: list[dict[str, Any]]) -> dict[str, Any]:
         "standard_model_calls": len(standard_calls),
         "purpose_gate_avoided_calls": sum(1 for r in avoided if r.get("reason") in {"purpose_gate_not_met", "high_ambiguity_gate_not_met"}),
         "menzo_second_pass_35_avoided": sum(1 for r in avoided if r.get("agent") == "Menzo" and r.get("phase") == "duplicate_arbitration_second_pass"),
+        "gemini_calls_avoided_by_duplicate_arbitration_cache": sum(1 for r in avoided if r.get("agent") == "Menzo" and r.get("reason") == "duplicate_arbitration_cache_hit"),
         "menzo_model_cooldown_avoided": sum(1 for r in avoided if r.get("reason") == "model_cooldown_after_failure"),
         "bob_premium_articles": sum(1 for r in calls if r.get("agent") == "Bob" and r.get("selected_model_chain_kind") == "premium"),
         "bob_standard_articles": sum(1 for r in calls if r.get("agent") == "Bob" and r.get("selected_model_chain_kind") == "standard"),
