@@ -36,8 +36,10 @@ def test_bob_uses_premium_chain_for_high_score_or_high_important_type(monkeypatc
     by_type = bob.bob_model_routing({"score": 50, "priority_label": "high", "article_type": "major_return"})
     assert by_score["kind"] == "premium"
     assert by_type["kind"] == "premium"
-    assert by_score["chain"][0] == "gemini-3.5-flash"
-
+    # Premium/high-score routing does not mean 3.5-first by default:
+    # Gemini 3.5 is cost-sensitive and should remain a fallback/exceptional model.
+    assert by_score["chain"][0] == "gemini-3.1-flash-lite"
+    assert "gemini-3.5-flash" in by_score["chain"]
 
 
 def test_bob_legacy_override_uses_bob_specific_chain(monkeypatch):
