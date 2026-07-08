@@ -269,7 +269,9 @@ def render_markdown(report: dict[str, Any]) -> str:
     lines.append(f"- Gemini calls failed: {ledger_summary.get('gemini_calls_failed', 0)}")
     lines.append("")
     gemini_records, gemini_warnings = load_ledger()
-    gemini_diag = build_gemini_diagnostics(gemini_records)
+    report_inputs = report.get("inputs", {}) if isinstance(report.get("inputs"), dict) else {}
+    menzo_context = report_inputs.get("menzo") if isinstance(report_inputs.get("menzo"), dict) else None
+    gemini_diag = build_gemini_diagnostics(gemini_records, menzo_context=menzo_context)
     lines.append(render_gemini_diagnostics_markdown(gemini_diag).rstrip())
     if gemini_warnings:
         lines.append("### Gemini ledger warnings")

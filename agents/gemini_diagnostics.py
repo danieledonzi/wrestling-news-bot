@@ -10,6 +10,10 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 LEDGER_FILE = ROOT / "state" / "newsroom" / "gemini_call_ledger.jsonl"
 MENZO_CACHE_FILE = ROOT / "state" / "newsroom" / "menzo_duplicate_arbitration_cache.json"
+MENZO_DECISIONS_FILES = (
+    ROOT / "state" / "newsroom" / "menzo_decisions_latest.json",
+    ROOT / "artifacts" / "newsroom" / "menzo_decisions.json",
+)
 
 REASON_FIELDS = ("reason", "purpose", "phase", "task", "selected_model_chain_reason")
 MODEL_FIELDS = ("model", "actual_model", "selected_model", "translation_model")
@@ -115,6 +119,50 @@ def _top_titles(records: list[dict[str, Any]], limit: int = 10) -> list[dict[str
     return sorted(rows, key=lambda x: (-int(x["called_count"]), str(x["title"])))[:limit]
 
 
+
+def _coerce_int(value: Any) -> int | None:
+    if value is None or value == "":
+        return None
+    try:
+        return int(value)
+    except Exception:
+        return None
+
+
+def _extract_menzo_postprocess(data: Any) -> dict[str, Any] | None:
+    if not isinstance(data, dict):
+        return None
+    postprocess = data.get("postprocess") if isinstance(data.get("postprocess"), dict) else data
+    wanted = (
+        "duplicate_arbitration_cache_hit",
+        "duplicate_arbitration_cache_miss",
+        "duplicate_arbitration_cache_expired",
+        "gemini_calls_avoided_by_duplicate_arbitration_cache",
+    )
+    found = {key: _coerce_int(postprocess.get(key)) for key in wanted if _coerce_int(postprocess.get(key)) is not None}
+    return found or None
+
+
+def load_menzo_postprocess(
+    context: dict[str, Any] | None = None,
+    paths: tuple[Path, ...] = MENZO_DECISIONS_FILES,
+) -> dict[str, Any]:
+    """Load latest Menzo postprocess cache counters without making them look like 24h ledger counts."""
+    sources: list[tuple[str, Any]] = []
+    if context:
+        sources.append(("archivista_context", context))
+    for path in paths:
+        try:
+            if path.exists():
+                sources.append((str(path), json.loads(path.read_text(encoding="utf-8"))))
+        except Exception as exc:
+            return {"available": False, "source": str(path), "warnings": [f"Menzo postprocess read/parse warning: {exc}"]}
+    for source, data in sources:
+        counters = _extract_menzo_postprocess(data)
+        if counters is not None:
+            return {"available": True, "source": source, "counters": counters, "warnings": []}
+    return {"available": False, "source": "not_available", "counters": {}, "warnings": []}
+
 def load_menzo_cache(path: Path = MENZO_CACHE_FILE, *, now: datetime | None = None) -> dict[str, Any]:
     out = {"present": path.exists(), "warnings": [], "entries_total": 0, "entries_expired": 0, "entries_valid": 0, "newest": []}
     if not path.exists():
@@ -139,12 +187,21 @@ def load_menzo_cache(path: Path = MENZO_CACHE_FILE, *, now: datetime | None = No
     return out
 
 
-def build_gemini_diagnostics(records: list[dict[str, Any]], cache_path: Path = MENZO_CACHE_FILE) -> dict[str, Any]:
+def build_gemini_diagnostics(
+    records: list[dict[str, Any]],
+    cache_path: Path = MENZO_CACHE_FILE,
+    menzo_context: dict[str, Any] | None = None,
+    menzo_decisions_paths: tuple[Path, ...] = MENZO_DECISIONS_FILES,
+) -> dict[str, Any]:
     called = [r for r in records if status_name(r) == "called"]
     avoided = [r for r in records if status_name(r) == "avoided"]
     failed = [r for r in records if status_name(r) == "failed"]
     called35 = [r for r in called if "3.5" in model_name(r)]
     avoided35 = [r for r in avoided if "3.5" in model_name(r)]
+    ledger_cache_hits = sum(1 for r in avoided if reason_or_purpose(r) == "duplicate_arbitration_cache_hit")
+    menzo_postprocess = load_menzo_postprocess(menzo_context, menzo_decisions_paths)
+    latest_counters = menzo_postprocess.get("counters", {}) if isinstance(menzo_postprocess.get("counters"), dict) else {}
+    not_available = "not_available"
     return {
         "called_total": len(called), "avoided_total": len(avoided), "failed_total": len(failed),
         "called_by_model_agent": dict(_counter(called, "model", "agent")),
@@ -158,12 +215,18 @@ def build_gemini_diagnostics(records: list[dict[str, Any]], cache_path: Path = M
         "avoided_35_by_reason": dict(_counter(avoided35, "reason")),
         "avoided_by_agent": dict(_counter(avoided, "agent")),
         "avoided_by_agent_reason": dict(_counter(avoided, "agent", "reason")),
-        "duplicate_arbitration_cache_hit": sum(1 for r in avoided if reason_or_purpose(r) == "duplicate_arbitration_cache_hit"),
+        "duplicate_arbitration_cache_hit": ledger_cache_hits,
+        "ledger_duplicate_arbitration_cache_hit_24h": ledger_cache_hits,
         "purpose_gate_not_met": sum(1 for r in avoided if reason_or_purpose(r) == "purpose_gate_not_met"),
         "deterministic_novelty_allow": sum(1 for r in avoided if reason_or_purpose(r) == "deterministic_novelty_allow"),
         "high_ambiguity_gate_not_met": sum(1 for r in avoided if reason_or_purpose(r) == "high_ambiguity_gate_not_met"),
-        "menzo_cache_miss": sum(1 for r in records if reason_or_purpose(r) == "duplicate_arbitration_cache_miss"),
-        "menzo_cache_expired": sum(1 for r in records if reason_or_purpose(r) == "duplicate_arbitration_cache_expired"),
+        "menzo_postprocess": menzo_postprocess,
+        "menzo_latest_cache_hit": latest_counters.get("duplicate_arbitration_cache_hit", not_available),
+        "menzo_latest_cache_miss": latest_counters.get("duplicate_arbitration_cache_miss", not_available),
+        "menzo_latest_cache_expired": latest_counters.get("duplicate_arbitration_cache_expired", not_available),
+        "menzo_latest_cache_avoided": latest_counters.get("gemini_calls_avoided_by_duplicate_arbitration_cache", not_available),
+        "menzo_cache_miss": latest_counters.get("duplicate_arbitration_cache_miss", not_available),
+        "menzo_cache_expired": latest_counters.get("duplicate_arbitration_cache_expired", not_available),
         "menzo_cache": load_menzo_cache(cache_path),
         "top_repeated_titles": _top_titles(called),
         "top_repeated_35_titles": _top_titles(called35),
@@ -192,10 +255,13 @@ def render_gemini_diagnostics_markdown(diag: dict[str, Any]) -> str:
     for key in ("duplicate_arbitration_cache_hit", "purpose_gate_not_met", "deterministic_novelty_allow", "high_ambiguity_gate_not_met"):
         lines.append(f"- {key}: {diag.get(key, 0)}")
     cache = diag.get("menzo_cache", {}) or {}
-    lines += ["", "### Menzo duplicate arbitration cache", f"- cache file present: {'yes' if cache.get('present') else 'no'}", f"- cache entries total: {cache.get('entries_total', 0)}", f"- cache entries expired: {cache.get('entries_expired', 0)}", f"- cache entries valid: {cache.get('entries_valid', 0)}", f"- duplicate_arbitration_cache_hit: {diag.get('duplicate_arbitration_cache_hit', 0)}", f"- duplicate_arbitration_cache_miss: {diag.get('menzo_cache_miss', 0)}", f"- duplicate_arbitration_cache_expired: {diag.get('menzo_cache_expired', 0)}", f"- gemini_calls_avoided_by_duplicate_arbitration_cache: {diag.get('duplicate_arbitration_cache_hit', 0)}"]
+    post = diag.get("menzo_postprocess", {}) or {}
+    lines += ["", "### Menzo duplicate arbitration cache", f"- cache file present: {'yes' if cache.get('present') else 'no'}", f"- cache entries total: {cache.get('entries_total', 0)}", f"- cache entries expired: {cache.get('entries_expired', 0)}", f"- cache entries valid: {cache.get('entries_valid', 0)}", f"- 24h ledger duplicate_arbitration_cache_hit avoided records: {diag.get('ledger_duplicate_arbitration_cache_hit_24h', 0)}", f"- latest Menzo run cache counters source: {post.get('source', 'not_available')}", f"- latest Menzo run duplicate_arbitration_cache_hit: {diag.get('menzo_latest_cache_hit', 'not_available')}", f"- latest Menzo run duplicate_arbitration_cache_miss: {diag.get('menzo_latest_cache_miss', 'not_available')}", f"- latest Menzo run duplicate_arbitration_cache_expired: {diag.get('menzo_latest_cache_expired', 'not_available')}", f"- latest Menzo run gemini_calls_avoided_by_duplicate_arbitration_cache: {diag.get('menzo_latest_cache_avoided', 'not_available')}"]
     for e in cache.get("newest", []):
         lines.append(f"- newest: {e.get('created_at')} | {e.get('model_used')} | {e.get('decision')} | {e.get('candidate_title_normalized')}")
     for w in cache.get("warnings", []):
+        lines.append(f"- warning: {w}")
+    for w in post.get("warnings", []):
         lines.append(f"- warning: {w}")
     lines += ["", "### Top repeated Gemini titles"]
     for label, rows in (("called", diag.get("top_repeated_titles", [])), ("3.5 called", diag.get("top_repeated_35_titles", []))):
@@ -209,7 +275,7 @@ def build_email_gemini_summary(diag: dict[str, Any]) -> str:
     top_agent = next(iter(sorted((diag.get("called_35_by_agent") or {}).items(), key=lambda kv: (-kv[1], kv[0]))), ("none", 0))
     top_reason = next(iter(sorted((diag.get("called_35_by_reason") or {}).items(), key=lambda kv: (-kv[1], kv[0]))), ("none", 0))
     top_title = (diag.get("top_repeated_35_titles") or [{}])[0]
-    lines = ["Gemini summary:", f"- Gemini calls total: {diag.get('called_total', 0)}", f"- Gemini 3.5 called total: {diag.get('called_35_total', 0)}", f"- Gemini 3.5 top agent/purpose: {top_agent[0]} ({top_agent[1]}) / {top_reason[0]} ({top_reason[1]})", f"- Gemini avoided total: {diag.get('avoided_total', 0)}", f"- Menzo duplicate arbitration cache hits / avoided: {diag.get('duplicate_arbitration_cache_hit', 0)} / {diag.get('duplicate_arbitration_cache_hit', 0)}"]
+    lines = ["Gemini summary:", f"- Gemini calls total: {diag.get('called_total', 0)}", f"- Gemini 3.5 called total: {diag.get('called_35_total', 0)}", f"- Gemini 3.5 top agent/purpose: {top_agent[0]} ({top_agent[1]}) / {top_reason[0]} ({top_reason[1]})", f"- Gemini avoided total: {diag.get('avoided_total', 0)}", f"- Menzo duplicate arbitration cache hits / avoided: latest={diag.get('menzo_latest_cache_hit', 'not_available')} / {diag.get('menzo_latest_cache_avoided', 'not_available')}; 24h ledger hits={diag.get('ledger_duplicate_arbitration_cache_hit_24h', 0)}"]
     if top_title:
         lines.append(f"- Top repeated 3.5 title: {top_title.get('title')} ({top_title.get('called_count', 0)} calls)")
     return "\n".join(lines)
