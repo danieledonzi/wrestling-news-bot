@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -16,6 +17,8 @@ from agents.gemini_diagnostics import (
 
 DETAILED_LEDGER_HEADING = "## Gemini / AI Detailed Ledger 24h"
 COST_LEDGER_HEADING = "## Gemini / AI Cost Ledger 24h"
+COST_LEDGER_HEADING_RE = re.compile(r"^## Gemini / AI Cost Ledger(?: 24h)?\s*$", re.MULTILINE)
+H2_HEADING_RE = re.compile(r"^## ", re.MULTILINE)
 
 
 def load_operational_menzo_context(paths: tuple[Path, ...] = MENZO_DECISIONS_FILES) -> dict[str, Any] | None:
@@ -75,13 +78,13 @@ def add_gemini_detailed_ledger_to_report(
         menzo_context=menzo_context,
     ).rstrip()
 
-    start = report_markdown.find(COST_LEDGER_HEADING)
-    if start == -1:
+    cost_heading_match = COST_LEDGER_HEADING_RE.search(report_markdown)
+    if cost_heading_match is None:
         suffix = "" if report_markdown.endswith("\n") else "\n"
         return report_markdown + suffix + "\n" + detailed + "\n"
 
-    next_section = report_markdown.find("\n## ", start + len(COST_LEDGER_HEADING))
-    insert_at = len(report_markdown) if next_section == -1 else next_section + 1
+    next_section = H2_HEADING_RE.search(report_markdown, cost_heading_match.end())
+    insert_at = len(report_markdown) if next_section is None else next_section.start()
     before = report_markdown[:insert_at].rstrip()
     after = report_markdown[insert_at:].lstrip("\n")
     return before + "\n\n" + detailed + ("\n" + after if after else "\n")
