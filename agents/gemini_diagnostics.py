@@ -59,11 +59,19 @@ def parse_dt(value: Any) -> datetime | None:
         return None
 
 
-def load_ledger(path: Path = LEDGER_FILE, *, hours: int = 24, now: datetime | None = None) -> tuple[list[dict[str, Any]], list[str]]:
+def load_ledger(
+    path: Path = LEDGER_FILE,
+    *,
+    hours: int = 24,
+    now: datetime | None = None,
+    since: datetime | None = None,
+    until: datetime | None = None,
+) -> tuple[list[dict[str, Any]], list[str]]:
     warnings: list[str] = []
     if not path.exists():
         return [], [f"ledger file missing: {path}"]
-    cutoff = (now or datetime.now(timezone.utc)) - timedelta(hours=hours)
+    cutoff = since or ((now or datetime.now(timezone.utc)) - timedelta(hours=hours))
+    upper = until
     records: list[dict[str, Any]] = []
     try:
         for idx, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
@@ -77,7 +85,10 @@ def load_ledger(path: Path = LEDGER_FILE, *, hours: int = 24, now: datetime | No
             if not isinstance(data, dict):
                 continue
             ts = parse_dt(data.get("timestamp") or data.get("generated_at") or data.get("started_at"))
-            if ts is None or ts >= cutoff:
+            if ts is None:
+                records.append(data)
+                continue
+            if ts >= cutoff and (upper is None or ts <= upper):
                 records.append(data)
     except Exception as exc:
         return [], [f"ledger read failed: {exc}"]
