@@ -27,6 +27,65 @@ def test_normal_quote_citation_not_flagged_as_betting():
     assert "betting_odds_article_published" not in a.issues
 
 
+def test_image_placeholder_warning_alone_does_not_need_human_review():
+    a = audit.ArticleAudit(key="x", title="Solo warning media", alfred_warnings=["image_placeholder_present"])
+    audit.run_checks(a)
+    assert a.issues == []
+    assert audit.alfred_warning_severity("image_placeholder_present") == "technical"
+    assert not audit.needs_human_review(a)
+
+
+def test_image_placeholder_warning_code_parsed_from_supported_shapes():
+    dict_warning = {"code": "image_placeholder_present", "evidence": "<!--IMAGE:...-->", "severity": "warning"}
+    json_warning = json.dumps(dict_warning)
+    repr_warning = "{'code': 'image_placeholder_present', 'evidence': '<!--IMAGE:...-->', 'severity': 'warning'}"
+    legacy_warning = "image_placeholder_present: Presente placeholder immagine"
+
+    assert audit.alfred_warning_code(dict_warning) == "image_placeholder_present"
+    assert audit.alfred_warning_code(json_warning) == "image_placeholder_present"
+    assert audit.alfred_warning_code(repr_warning) == "image_placeholder_present"
+    assert audit.alfred_warning_code(legacy_warning) == "image_placeholder_present"
+
+    for warning in (dict_warning, json_warning, repr_warning, legacy_warning):
+        a = audit.ArticleAudit(key="x", alfred_warnings=[warning])
+        audit.run_checks(a)
+        assert audit.alfred_warning_severity(warning) == "technical"
+        assert not audit.needs_human_review(a)
+
+
+def test_long_recap_paragraph_without_direct_quote_not_flagged_for_blockquote():
+    recap = (
+        "Il match si è sviluppato con un lungo controllo a centro ring, diversi cambi di inerzia, "
+        "un tentativo di rimonta nel finale e una sequenza conclusiva in cui il campione ha evitato "
+        "la finisher dello sfidante prima di chiudere con la propria manovra decisiva. "
+    ) * 4
+    a = audit.ArticleAudit(key="x", published_text=recap, blockquote_count=0)
+    audit.run_checks(a)
+    assert "blockquote_missing_for_long_quotes" not in a.issues
+
+
+def test_long_direct_quote_without_blockquote_still_triggers_blockquote_diagnostic():
+    quote = (
+        'CM Punk ha detto: "Sono tornato perché questo posto significa ancora moltissimo per me, '
+        "per il pubblico che mi ha seguito negli anni e per tutti quelli che volevano vedere se "
+        "avessi ancora qualcosa da dimostrare su un ring importante dopo tutto quello che è successo. "
+        "Non prometto scorciatoie, prometto lavoro, attenzione e responsabilità ogni volta che avrò un microfono in mano.\""
+    )
+    a = audit.ArticleAudit(key="x", published_text=quote, blockquote_count=0)
+    audit.run_checks(a)
+    assert "blockquote_missing_for_long_quotes" in a.issues
+    assert a.issue_severities["blockquote_missing_for_long_quotes"] == "low"
+    assert not audit.needs_human_review(a)
+
+
+def test_betting_odds_article_is_high_severity_and_needs_human_review():
+    a = audit.ArticleAudit(key="x", title="WWE betting odds", published_text="Le betting odds di DraftKings indicano un favorito.")
+    audit.run_checks(a)
+    assert "betting_odds_article_published" in a.issues
+    assert a.issue_severities["betting_odds_article_published"] == "high"
+    assert audit.needs_human_review(a)
+
+
 def test_mojibake_detection():
     a = audit.ArticleAudit(key="x", published_text="PerchÃ© il match sarÃ importante per il roster.")
     audit.run_checks(a)
@@ -37,6 +96,22 @@ def test_ai_filler_detection():
     a = audit.ArticleAudit(key="x", published_text="Only time will tell cosa succederà nel prossimo episodio.")
     audit.run_checks(a)
     assert "ai_style_filler" in a.issues
+    assert a.issue_severities["ai_style_filler"] == "low"
+    assert not audit.needs_human_review(a)
+
+
+def test_unknown_issue_defaults_to_low_and_does_not_need_human_review():
+    a = audit.ArticleAudit(key="x", issues=["new_low_confidence_diagnostic"])
+    assert audit.issue_severity("new_low_confidence_diagnostic") == "low"
+    assert not audit.needs_human_review(a)
+
+
+def test_medium_issue_still_needs_human_review():
+    a = audit.ArticleAudit(key="x", published_text="The sources told the newsletter of creative plans for the main event.")
+    audit.run_checks(a)
+    assert "untranslated_quote_or_residual_english" in a.issues
+    assert a.issue_severities["untranslated_quote_or_residual_english"] == "medium"
+    assert audit.needs_human_review(a)
 
 
 def test_build_audit_writes_json_and_markdown(tmp_path):
