@@ -334,3 +334,56 @@ def test_gemini_35_count_is_limited_to_24h_window() -> None:
         {"timestamp": (now - timedelta(hours=1)).isoformat(), "model": "gemini-3.5-pro", "status": "avoided"},
     ]}
     assert build_report(data)["gemini_called"] == 1
+
+
+def test_real_vps_italian_markdown_labels_are_parsed_with_operational_preference() -> None:
+    operational = """# Report operativo
+- Run completate: 48
+- Run con EXIT 0: 48
+- Articoli/news pubblicati da Publisher: 24
+- Report pubblicati da Simone: 1
+- Alfred blockers: 1
+- Alfred warnings: 20
+- Gemini 3.5 called total: 0
+"""
+    editorial = """# Audit editoriale
+## 3. Tipologia contenuti pubblicati/rilevati
+- news_generica: 12
+- risultato_match/evento: 4
+- contratti/roster: 2
+- dichiarazione/reazione: 2
+- report_show: 1
+- Alfred warnings: 20
+- Blocker Alfred: 1
+"""
+    report = build_report({
+        "operational_report": {"_format": "markdown", "_markdown": operational},
+        "editorial_audit": {"_format": "markdown", "_markdown": editorial},
+        "__artifact_status__": {"used": ["operational_report", "editorial_audit"], "missing": []},
+    })
+    payload = __import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(report)
+    assert payload["daily_numbers"]["runs_completed"] == 48
+    assert payload["daily_numbers"]["news_published"] == 24
+    assert payload["daily_numbers"]["reports_published"] == 1
+    assert payload["daily_numbers"]["article_types"] == {
+        "news_generica": 12,
+        "risultato_match/evento": 4,
+        "contratti/roster": 2,
+        "dichiarazione/reazione": 2,
+        "report_show": 1,
+    }
+    assert payload["daily_numbers"]["alfred"] == {"warnings": "20", "blockers": "1"}
+    assert payload["daily_numbers"]["gemini_3_5_called_total"] == 0
+    assert payload["hard_soft_balance"]["source"] == "article_types_markdown"
+    assert payload["missing_artifacts"] == []
+
+
+def test_missing_italian_publication_label_does_not_create_false_zero() -> None:
+    operational = """- Run completate: 48
+- Articoli/news pubblicati da Publisher: 24
+"""
+    report = build_report({"operational_report": {"_format": "markdown", "_markdown": operational}})
+    payload = __import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(report)
+    assert payload["daily_numbers"]["news_published"] == 24
+    assert payload["daily_numbers"]["reports_published"] is None
+    assert "reports_published_count_not_available" in payload["schema_warnings"]
