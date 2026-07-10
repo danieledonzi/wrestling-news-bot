@@ -10,6 +10,147 @@ from agents.gemini_diagnostics import build_email_gemini_summary, build_gemini_d
 BOT_DIR = Path("/opt/owtv/wrestling-news-bot")
 DAILY_JUDGMENT_LATEST_JSON = BOT_DIR / "state" / "reports" / "owtv_daily_editorial_judgment_latest.json"
 DAILY_JUDGMENT_MARKDOWN_GLOB = "owtv_daily_editorial_judgment_24h_*.md"
+TRANSLATION_QUALITY_LATEST_JSON = BOT_DIR / "state" / "reports" / "owtv_translation_quality_audit_latest.json"
+TRANSLATION_QUALITY_MARKDOWN_GLOB = "owtv_translation_quality_audit_24h_*.md"
+
+
+def generate_translation_quality_audit_24h() -> tuple[Path | None, Path | None, str | None]:
+    """Generate the translation quality audit without blocking email delivery."""
+    try:
+        subprocess.run(
+            [
+                "python3",
+                str(BOT_DIR / "scripts" / "translation_quality_audit.py"),
+                "--hours",
+                "24",
+                "--limit",
+                "25",
+                "--output-dir",
+                "reports",
+            ],
+            cwd=BOT_DIR,
+            check=True,
+        )
+        markdown = newest_translation_quality_audit_markdown()
+        latest_json = TRANSLATION_QUALITY_LATEST_JSON if TRANSLATION_QUALITY_LATEST_JSON.exists() else None
+        print(f"[TRANSLATION QUALITY] generated {markdown or 'no markdown found'}")
+        return markdown, latest_json, None
+    except Exception as exc:
+        warning = f"Translation Quality Audit skipped/error: {exc}"
+        print(f"[TRANSLATION QUALITY] skipped/error {exc}")
+        return None, TRANSLATION_QUALITY_LATEST_JSON if TRANSLATION_QUALITY_LATEST_JSON.exists() else None, warning
+
+
+def newest_translation_quality_audit_markdown() -> Path | None:
+    reports_dir = BOT_DIR / "reports"
+    matches = [path for path in reports_dir.glob(TRANSLATION_QUALITY_MARKDOWN_GLOB) if path.is_file()]
+    return max(matches, key=lambda path: (path.stat().st_mtime, path.name)) if matches else None
+
+
+def _count_article_severities(articles: list[Any]) -> dict[str, int]:
+    counts = {"high": 0, "medium": 0, "low": 0, "technical": 0}
+    for article in articles:
+        if not isinstance(article, dict):
+            continue
+        severities = article.get("issue_severities")
+        if isinstance(severities, dict):
+            iterable = severities.values()
+        else:
+            iterable = article.get("severities", [])
+        for severity in iterable if isinstance(iterable, list) else list(iterable):
+            if severity in counts:
+                counts[severity] += 1
+    return counts
+
+
+def _top_counts_from_articles(articles: list[Any], key: str, nested_key: str | None = None, technical_only: bool = False) -> list[tuple[str, int]]:
+    counts: dict[str, int] = {}
+    for article in articles:
+        if not isinstance(article, dict):
+            continue
+        values = article.get(key, [])
+        if isinstance(values, dict):
+            values = list(values.values())
+        if not isinstance(values, list):
+            continue
+        for value in values:
+            if technical_only:
+                code = value.get("code") if isinstance(value, dict) else str(value)
+                severity = value.get("severity") if isinstance(value, dict) else ""
+                if code != "image_placeholder_present" and severity != "technical":
+                    continue
+            if nested_key and isinstance(value, dict):
+                value = value.get(nested_key) or value.get("code") or value.get("warning")
+            if isinstance(value, dict):
+                value = value.get("code") or value.get("warning") or value.get("message")
+            if value:
+                text = str(value)
+                counts[text] = counts.get(text, 0) + 1
+    return sorted(counts.items(), key=lambda item: (-item[1], item[0]))[:3]
+
+
+def _format_top_counts(items: list[tuple[str, int]]) -> str:
+    return ", ".join(f"{name} ({count})" for name, count in items) if items else "none detected"
+
+
+def translation_quality_audit_body_section(json_path: Path = TRANSLATION_QUALITY_LATEST_JSON, warning: str | None = None) -> str:
+    """Build the compact email-body section from the latest translation audit JSON."""
+    if not json_path.exists():
+        return f"\nTRANSLATION QUALITY AUDIT\n- Warning: {warning or 'latest JSON not available'}\n"
+    try:
+        payload: dict[str, Any] = json.loads(json_path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        print(f"[TRANSLATION QUALITY] skipped/error JSON read failed: {exc}")
+        return f"\nTRANSLATION QUALITY AUDIT\n- JSON read failed: {exc}\n"
+
+    articles = payload.get("articles") if isinstance(payload.get("articles"), list) else []
+    severity = _count_article_severities(articles)
+    review_count = 0
+    for article in articles:
+        if not isinstance(article, dict):
+            continue
+        issue_severities = article.get("issue_severities")
+        severity_values = issue_severities.values() if isinstance(issue_severities, dict) else []
+        if article.get("needs_human_review") is True or any(sev in {"high", "medium"} for sev in severity_values):
+            review_count += 1
+    top_issues = _top_counts_from_articles(articles, "issues")
+    technical_warnings = _top_counts_from_articles(articles, "alfred_warnings", "code", technical_only=True)
+    if severity["high"]:
+        attention = "Review high-severity translation issues before relying on the affected articles."
+    elif severity["medium"]:
+        attention = "Spot-check medium-severity translation issues when time allows."
+    else:
+        attention = "No high/medium translation issues detected in available artifacts."
+
+    lines = [
+        "",
+        "TRANSLATION QUALITY AUDIT",
+        f"- Articles inspected: {payload.get('count', len(articles))}",
+        f"- Articles needing human review: {review_count}",
+        f"- Severity: high {severity['high']} / medium {severity['medium']} / low {severity['low']} / technical {severity['technical']}",
+        f"- Top issues: {_format_top_counts(top_issues)}",
+        f"- Technical/media warnings: {_format_top_counts(technical_warnings)}",
+        f"- Recommended attention: {attention}",
+    ]
+    if warning:
+        lines.append(f"- Warning: {warning}")
+    return "\n".join(lines) + "\n"
+
+
+def append_translation_quality_audit_attachments(attachments: list[Path]) -> list[Path]:
+    """Append generated translation audit markdown and latest JSON to an email attachment list."""
+    markdown = newest_translation_quality_audit_markdown()
+    for path in (markdown, TRANSLATION_QUALITY_LATEST_JSON if TRANSLATION_QUALITY_LATEST_JSON.exists() else None):
+        if path and path.exists() and path not in attachments:
+            attachments.append(path)
+            print(f"[TRANSLATION QUALITY] attached {path}")
+    return attachments
+
+
+def translation_quality_audit_summary_24h() -> str:
+    """Run the 24h translation audit and return its compact daily-email section."""
+    _markdown, latest_json, warning = generate_translation_quality_audit_24h()
+    return translation_quality_audit_body_section(latest_json or TRANSLATION_QUALITY_LATEST_JSON, warning=warning)
 
 
 def gemini_email_summary_24h() -> str:

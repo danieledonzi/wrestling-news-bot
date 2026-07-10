@@ -817,3 +817,76 @@ def test_daily_email_summary_missing_alfred_values_render_nd(tmp_path: Path) -> 
     assert "- news_published: 0" in summary
     assert "- reports_published: 0" in summary
     assert "- gemini_3_5_called_total: 0" in summary
+
+
+def test_translation_quality_audit_email_summary(tmp_path: Path) -> None:
+    from send_daily_report import translation_quality_audit_body_section
+
+    latest = write_json(tmp_path / "latest.json", {
+        "count": 3,
+        "articles": [
+            {
+                "issues": ["source_intro_leaked", "ai_style_filler"],
+                "issue_severities": {"source_intro_leaked": "high", "ai_style_filler": "low"},
+                "alfred_warnings": [{"code": "image_placeholder_present"}],
+            },
+            {
+                "issues": ["source_intro_leaked", "wrestling_lexicon_issue"],
+                "issue_severities": {"source_intro_leaked": "high", "wrestling_lexicon_issue": "medium"},
+                "alfred_warnings": [{"code": "image_placeholder_present"}],
+            },
+            {
+                "issues": ["title_too_long"],
+                "issue_severities": {"title_too_long": "low"},
+                "alfred_warnings": [],
+            },
+        ],
+    })
+
+    summary = translation_quality_audit_body_section(latest)
+
+    assert "TRANSLATION QUALITY AUDIT" in summary
+    assert "- Articles inspected: 3" in summary
+    assert "- Articles needing human review: 2" in summary
+    assert "- Severity: high 2 / medium 1 / low 2 / technical 0" in summary
+    assert "source_intro_leaked (2)" in summary
+    assert "image_placeholder_present (2)" in summary
+    assert "Review high-severity translation issues" in summary
+
+
+def test_translation_quality_audit_generation_is_nonfatal(tmp_path: Path, monkeypatch) -> None:
+    import subprocess
+    import send_daily_report as sdr
+
+    latest = write_json(tmp_path / "state" / "reports" / "owtv_translation_quality_audit_latest.json", {"count": 0, "articles": []})
+    monkeypatch.setattr(sdr, "BOT_DIR", tmp_path)
+    monkeypatch.setattr(sdr, "TRANSLATION_QUALITY_LATEST_JSON", latest)
+
+    def fail_run(*args, **kwargs):
+        raise subprocess.CalledProcessError(1, args[0])
+
+    monkeypatch.setattr(sdr.subprocess, "run", fail_run)
+
+    markdown, json_path, warning = sdr.generate_translation_quality_audit_24h()
+
+    assert markdown is None
+    assert json_path == latest
+    assert warning and "Translation Quality Audit skipped/error" in warning
+
+
+def test_append_translation_quality_audit_attachments(tmp_path: Path, monkeypatch) -> None:
+    import send_daily_report as sdr
+
+    reports = tmp_path / "reports"
+    reports.mkdir()
+    old = reports / "owtv_translation_quality_audit_24h_20200101.md"
+    new = reports / "owtv_translation_quality_audit_24h_20200102.md"
+    old.write_text("old", encoding="utf-8")
+    new.write_text("new", encoding="utf-8")
+    latest = write_json(tmp_path / "state" / "reports" / "owtv_translation_quality_audit_latest.json", {"count": 0, "articles": []})
+    monkeypatch.setattr(sdr, "BOT_DIR", tmp_path)
+    monkeypatch.setattr(sdr, "TRANSLATION_QUALITY_LATEST_JSON", latest)
+
+    attachments = sdr.append_translation_quality_audit_attachments([])
+
+    assert attachments == [new, latest]
