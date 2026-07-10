@@ -439,3 +439,29 @@ def test_placeholder_report_records_do_not_create_false_news_zero() -> None:
     assert report["news"] == []
     assert report["news_published_count"] is None
     assert report["reports_published_count"] == 1
+
+
+def test_empty_master_log_does_not_override_italian_markdown_publication_counts() -> None:
+    md = "- Articoli/news pubblicati da Publisher: 24\n- Report pubblicati da Simone: 1\n"
+    report = build_report({
+        "operational_report": {"_format": "markdown", "_markdown": md},
+        "master_log": {"publisher": {}, "simone": {}},
+    })
+    payload = __import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(report)
+    assert report["news_records"] == []
+    assert report["report_records"] == []
+    assert payload["daily_numbers"]["news_published"] == 24
+    assert payload["daily_numbers"]["reports_published"] == 1
+    assert payload["daily_numbers"]["news_published_count"] == 24
+    assert payload["daily_numbers"]["reports_published_count"] == 1
+    assert payload["redundancy_risks"]["show_report_integration"] == "post-show presente"
+    assert "24 news e 1 report show" in payload["summary"]
+
+
+def test_report_placeholder_count_drives_markdown_show_integration() -> None:
+    report = build_report({"operational_report": {"_format": "markdown", "_markdown": "- Report pubblicati da Simone: 1\n"}})
+    text = render_markdown(report)
+    payload = __import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(report)
+    assert report["report_records"] == []
+    assert payload["redundancy_risks"]["show_report_integration"] == "post-show presente"
+    assert "pubblicazione post-show presente" in text
