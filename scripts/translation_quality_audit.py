@@ -381,6 +381,56 @@ def alfred_warning_code(warning: Any) -> str:
     return raw.split(":", 1)[0].strip()
 
 
+def render_alfred_warning(warning: Any) -> str:
+    """Render Alfred warning payloads compactly for human-facing reports.
+
+    Alfred artifacts may contain legacy strings, JSON/repr-encoded dicts, or
+    structured dictionaries. Keep the stable code prominent while adding compact
+    evidence/message context when available. Malformed inputs fall back safely.
+    """
+    code = alfred_warning_code(warning)
+    parsed: Any = warning if isinstance(warning, dict) else None
+    if parsed is None and isinstance(warning, str):
+        raw = warning.strip()
+        for parser in (json.loads, ast.literal_eval):
+            try:
+                candidate = parser(raw)
+            except Exception:
+                continue
+            if isinstance(candidate, dict):
+                parsed = candidate
+                break
+    if isinstance(parsed, dict):
+        parts = [code] if code else []
+        details = []
+        for key in ("evidence", "message"):
+            value = parsed.get(key)
+            if value not in (None, "", []):
+                details.append(f"{key}={esc(value)}")
+        if details:
+            parts.append(f"({'; '.join(details)})")
+        if parts:
+            return " ".join(parts)
+    return esc(code or warning)
+
+
+def json_safe(value: Any) -> Any:
+    """Return a JSON-serializable value without stringifying dict warnings."""
+    if isinstance(value, dict):
+        return {str(k): json_safe(v) for k, v in value.items()}
+    if isinstance(value, list):
+        return [json_safe(v) for v in value]
+    if isinstance(value, tuple):
+        return [json_safe(v) for v in value]
+    if isinstance(value, (str, int, float, bool)) or value is None:
+        return value
+    return str(value)
+
+
+def article_payload(a: ArticleAudit) -> dict[str, Any]:
+    return json_safe(asdict(a))
+
+
 def alfred_warning_severity(warning: Any) -> str:
     code = alfred_warning_code(warning)
     if code in TECHNICAL_ALFRED_WARNINGS:
@@ -414,9 +464,9 @@ def needs_human_review(a: ArticleAudit) -> bool:
 
 def markdown_report(rows: list[ArticleAudit], hours: int, generated_at: str) -> str:
     issue_counts = Counter(i for a in rows for i in a.issues)
-    warning_counts = Counter(alfred_warning_code(w) or esc(w) for a in rows for w in a.alfred_warnings)
+    warning_counts = Counter(alfred_warning_code(w) or render_alfred_warning(w) for a in rows for w in a.alfred_warnings)
     severity_counts = Counter(issue_severity(i) for a in rows for i in a.issues)
-    technical_warning_counts = Counter(alfred_warning_code(w) or esc(w) for a in rows for w in a.alfred_warnings if alfred_warning_severity(w) == "technical")
+    technical_warning_counts = Counter(alfred_warning_code(w) or render_alfred_warning(w) for a in rows for w in a.alfred_warnings if alfred_warning_severity(w) == "technical")
     review = [a for a in rows if needs_human_review(a)]
     lines = [f"# OpenWrestlingTV Translation Quality Audit ({hours}h)", "", f"Generated: {generated_at}", "", "## 1. Summary", "", f"- Articles/reports inspected: {len(rows)}", f"- Articles needing human review: {len(review)}", f"- Distinct deterministic issue types: {len(issue_counts)}", f"- Distinct Alfred warnings: {len(warning_counts)}", "", "### Severity summary", ""]
     lines += [f"- {k}: {v}" for k, v in sorted(severity_counts.items())] or ["- None detected."]
@@ -432,12 +482,12 @@ def markdown_report(rows: list[ArticleAudit], hours: int, generated_at: str) -> 
         lines.append("|---|---|---|---|---|---|---|")
         for a in review[:50]:
             severities = ", ".join(f"{issue}:{issue_severity(issue)}" for issue in a.issues)
-            lines.append(f"| {esc(a.title)} | {esc(a.source_url)} | {esc(a.wp_link)} | {esc(', '.join(a.issues))} | {esc(severities)} | {esc(', '.join(a.alfred_warnings))} | {esc(', '.join(a.artifact_paths[:4]))} |")
+            lines.append(f"| {esc(a.title)} | {esc(a.source_url)} | {esc(a.wp_link)} | {esc(', '.join(a.issues))} | {esc(severities)} | {esc(', '.join(render_alfred_warning(w) for w in a.alfred_warnings))} | {esc(', '.join(a.artifact_paths[:4]))} |")
     else:
         lines.append("- None detected.")
     fp = [(a, w) for a in rows for w in a.possible_false_positive_warnings]
     lines += ["", "## 6. Possible false-positive warning candidates", ""]
-    lines += [f"- {esc(a.title)}: {esc(w)}" for a, w in fp[:30]] or ["- None detected."]
+    lines += [f"- {esc(a.title)}: {render_alfred_warning(w)}" for a, w in fp[:30]] or ["- None detected."]
     lines += ["", "## 7. Suggested prompt/guardrail refinements", ""]
     suggestions = {
         "source_intro_leaked": "Add a deterministic strip-list for source boilerplate intros and newsletter/subscription language before translation.",
@@ -463,7 +513,7 @@ def esc(v: Any) -> str:
 def build_audit(hours: int = 24, limit: int | None = None, output_dir: str | Path | None = None, root: Path = ROOT) -> tuple[dict[str, Any], Path, Path]:
     rows = discover(root, hours, limit)
     generated_at = utc_now().isoformat()
-    payload = {"artifact_marker": "owtv_translation_quality_audit_v1", "generated_at": generated_at, "hours": hours, "count": len(rows), "articles": [asdict(a) for a in rows]}
+    payload = {"artifact_marker": "owtv_translation_quality_audit_v1", "generated_at": generated_at, "hours": hours, "count": len(rows), "articles": [article_payload(a) for a in rows]}
     latest = root / "state" / "reports" / "owtv_translation_quality_audit_latest.json"
     latest.parent.mkdir(parents=True, exist_ok=True)
     latest.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")

@@ -53,6 +53,18 @@ def test_image_placeholder_warning_code_parsed_from_supported_shapes():
         assert not audit.needs_human_review(a)
 
 
+def test_structured_image_placeholder_warning_renders_without_human_review():
+    warning = {"code": "image_placeholder_present", "evidence": "<!--IMAGE:...-->", "severity": "warning"}
+    a = audit.ArticleAudit(key="x", title="Structured warning", alfred_warnings=[warning])
+    audit.run_checks(a)
+
+    md = audit.markdown_report([a], hours=24, generated_at=audit.utc_now().isoformat())
+
+    assert "image_placeholder_present" in md
+    assert "Articles needing human review: 0" in md
+    assert not audit.needs_human_review(a)
+
+
 def test_long_recap_paragraph_without_direct_quote_not_flagged_for_blockquote():
     recap = (
         "Il match si è sviluppato con un lungo controllo a centro ring, diversi cambi di inerzia, "
