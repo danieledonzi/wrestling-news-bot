@@ -465,3 +465,38 @@ def test_report_placeholder_count_drives_markdown_show_integration() -> None:
     assert report["report_records"] == []
     assert payload["redundancy_risks"]["show_report_integration"] == "post-show presente"
     assert "pubblicazione post-show presente" in text
+
+
+def test_markdown_news_count_placeholders_do_not_create_borderline_published() -> None:
+    report = build_report({"operational_report": {"_format": "markdown", "_markdown": "- Articoli/news pubblicati da Publisher: 24\n"}})
+    payload = __import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(report)
+    text = render_markdown(report)
+    assert report["news_published_count"] == 24
+    assert payload["daily_numbers"]["news_published"] == 24
+    assert payload["borderline_published"] == []
+    assert "Senza titolo" not in text
+    assert "Senza titolo" not in str(payload["borderline_published"])
+    assert "24 news" in payload["summary"]
+    assert "Nessun articolo pubblicato borderline valutabile perché sono disponibili solo conteggi aggregati." in text
+
+
+def test_placeholder_records_are_excluded_but_concrete_low_score_news_is_borderline() -> None:
+    report = build_report({
+        "operational_report": {"_format": "markdown", "_markdown": "- Articoli/news pubblicati da Publisher: 24\n"},
+        "master_log": {"publisher": {"published": [
+            {"title": "Concrete soft item", "url": "https://example.test/news", "source": "Example", "score": 42, "article_type": "news_generica"}
+        ]}},
+    })
+    payload = __import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(report)
+    assert report["news_published_count"] == 1
+    assert payload["borderline_published"] == [{
+        "title": "Concrete soft item",
+        "source": "Example",
+        "url": "https://example.test/news",
+        "score": 42,
+        "article_type": "news_generica",
+        "priority": "",
+        "menzo_decision": "",
+        "menzo_reason": "",
+        "automatic_judgment": "",
+    }]

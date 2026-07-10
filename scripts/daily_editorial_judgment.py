@@ -181,6 +181,13 @@ def is_soft(item: dict[str, Any]) -> bool:
     return at in SOFT_TYPES or str(item.get("priority") or "").lower() in {"soft", "low", "medium"}
 
 
+def _is_count_placeholder(item: dict[str, Any]) -> bool:
+    if item.get("_placeholder_from_markdown") is True:
+        return True
+    has_identity = bool(_title(item) != "Senza titolo" or _url(item) or str(item.get("source") or "").strip())
+    return not has_identity and set(item).issubset({"count", "published_count", "_count_only", "_placeholder_from_markdown"})
+
+
 def collect_menzo(data: dict[str, Any]) -> dict[str, Any]:
     menzo = data.get("menzo_latest") or {}
     if not menzo and isinstance(_nested(data.get("master_log", {}), "latest", "menzo"), dict):
@@ -552,7 +559,8 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
     published_total = (news_published_count or 0) + (reports_published_count or 0) if (news_published_count is not None or reports_published_count is not None) else None
     judgment = "OTTIMO" if (hard_count or 0) >= 8 and len(top_discarded(menzo, 1)) == 0 else "BUONO" if (published_total or 0) >= 8 else "DISCRETO" if (published_total or 0) >= 3 else "DEBOLE"
     top = top_discarded(menzo)
-    borderline = [x for x in selected + news if is_soft(x) or _score(x) < 65][:3]
+    published_items_for_review = [x for x in selected + concrete_news if not _is_count_placeholder(x)]
+    borderline = [x for x in published_items_for_review if is_soft(x) or _score(x) < 65][:3]
     news_label = str(news_published_count) if news_published_count is not None else "n.d."
     reports_label = str(reports_published_count) if reports_published_count is not None else "n.d."
     summary = f"Giornata {dtype} con {news_label} news e {reports_label} report show pubblicati. La copertura hard news è stimata a {hard_count if hard_count is not None else 'n.d.'} elementi e quella soft a {soft_count if soft_count is not None else 'n.d.'}; {'softpool usato' if softpool else 'softpool non usato'}."
@@ -576,7 +584,10 @@ def render_markdown(report: dict[str, Any]) -> str:
         lines += [f"### {_title(item)}", f"- source: {item.get('source') or 'n.d.'}", f"- url: {_url(item) or 'n.d.'}", f"- score: {_score(item) or 'n.d.'}", f"- article_type: {_article_type(item)}", f"- priority: {item.get('priority') or 'n.d.'}", f"- Menzo decision/reason: {item.get('_decision_bucket')} / {item.get('reason') or 'n.d.'}", "- why it is worth checking: punteggio/priorità o rilevanza potenziale per il pubblico OWTV.", f"- automatic judgment: {_auto_judgment(item)}", ""]
     lines += ["## Published borderline/soft picks", ""]
     if not report["borderline"]:
-        lines.append("Nessun pick pubblicato chiaramente borderline/soft dagli artefatti disponibili.")
+        if (report.get("news_published_count") is not None or report.get("reports_published_count") is not None) and not (report.get("news_records") or report.get("report_records")):
+            lines.append("Nessun articolo pubblicato borderline valutabile perché sono disponibili solo conteggi aggregati.")
+        else:
+            lines.append("Nessun pick pubblicato chiaramente borderline/soft dagli artefatti disponibili.")
     for item in report["borderline"]:
         lines += [f"- {_title(item)} — type={_article_type(item)}, score={_score(item) or 'n.d.'}, valutazione: accettabile se utile al mix quotidiano; da monitorare se sostituisce hard news."]
     lines += ["", "## Redundancy and show-report integration", "", f"Duplicate risk: {'high' if (story['same_story_clusters'] or 0) > 3 else 'medium' if (story['same_story_clusters'] or story['duplicate_candidates'] or story['same_event_clusters']) else 'low'}. Same-story clusters: {_num(story['same_story_clusters'])}. Story_review items: {_num(story['story_reviews'])}. Le news risultato/evento vanno controllate rispetto ai report show quando presenti; pubblicazione post-show {'presente' if (report.get('reports_published_count') or 0) > 0 else 'non presente'}.", ""]
