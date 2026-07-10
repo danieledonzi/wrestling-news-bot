@@ -265,6 +265,47 @@ Alfred warnings/blockers: 2/0
     assert payload["daily_numbers"]["reports_published"] == 1
     assert payload["daily_numbers"]["alfred"]["warnings"] == "2"
     assert payload["daily_numbers"]["article_types"]["hard_news"] == 9
+    assert payload["daily_numbers"]["hard_news_count"] == 9
+    assert payload["daily_numbers"]["soft_news_count"] == 6
+    assert payload["hard_soft_balance"]["source"] == "article_types_markdown"
+
+
+def test_markdown_fallback_without_article_types_keeps_hard_soft_nd() -> None:
+    md = "news published: 15\nreports published: 1\n"
+    report = build_report({"operational_report": {"_format": "markdown", "_markdown": md}})
+    text = render_markdown(report)
+    payload = __import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(report)
+    assert payload["daily_numbers"]["news_published"] == 15
+    assert payload["daily_numbers"]["hard_news_count"] is None
+    assert payload["daily_numbers"]["soft_news_count"] is None
+    assert "- hard news count: n.d." in text
+    assert "- soft news count: n.d." in text
+
+
+def test_parsed_runs_completed_is_used_in_markdown_and_json() -> None:
+    md = "runs completed: 47\nnews published: 15\narticle types: {'hard_news': 9, 'news_generica': 6}\n"
+    report = build_report({"operational_report": {"_format": "markdown", "_markdown": md}})
+    text = render_markdown(report)
+    payload = __import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(report)
+    assert "- runs completed: 47" in text
+    assert payload["daily_numbers"]["runs_completed"] == 47
+
+
+def test_no_false_run_count_when_unavailable() -> None:
+    md = "news published: 15\nreports published: 1\narticle types: {'hard_news': 9, 'news_generica': 6}\n"
+    report = build_report({"operational_report": {"_format": "markdown", "_markdown": md}})
+    text = render_markdown(report)
+    payload = __import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(report)
+    assert "- runs completed: n.d." in text
+    assert payload["daily_numbers"]["runs_completed"] is None
+
+
+def test_published_placeholder_records_do_not_force_hard_soft_zero() -> None:
+    md = "news published: 15\n"
+    report = build_report({"operational_report": {"_format": "markdown", "_markdown": md}})
+    assert report["news"][0]["_placeholder_from_markdown"] is True
+    assert report["hard_count"] is None
+    assert report["soft_count"] is None
 
 
 def test_story_cluster_json_from_external_reports_schema_is_parsed(tmp_path: Path, monkeypatch) -> None:
