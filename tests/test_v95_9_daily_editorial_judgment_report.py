@@ -387,3 +387,55 @@ def test_missing_italian_publication_label_does_not_create_false_zero() -> None:
     assert payload["daily_numbers"]["news_published"] == 24
     assert payload["daily_numbers"]["reports_published"] is None
     assert "reports_published_count_not_available" in payload["schema_warnings"]
+
+
+def test_markdown_only_report_count_keeps_news_unknown() -> None:
+    report = build_report({"operational_report": {"_format": "markdown", "_markdown": "- Report pubblicati da Simone: 1\n"}})
+    text = render_markdown(report)
+    payload = __import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(report)
+    assert payload["daily_numbers"]["news_published"] is None
+    assert payload["daily_numbers"]["reports_published"] == 1
+    assert "- news published: n.d." in text
+    assert "- reports published: 1" in text
+    assert "news_published_count_not_available" in payload["schema_warnings"]
+
+
+def test_markdown_only_news_count_keeps_reports_unknown() -> None:
+    report = build_report({"operational_report": {"_format": "markdown", "_markdown": "- Articoli/news pubblicati da Publisher: 24\n"}})
+    text = render_markdown(report)
+    payload = __import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(report)
+    assert payload["daily_numbers"]["news_published"] == 24
+    assert payload["daily_numbers"]["reports_published"] is None
+    assert "- news published: 24" in text
+    assert "- reports published: n.d." in text
+    assert "reports_published_count_not_available" in payload["schema_warnings"]
+
+
+def test_markdown_both_italian_publication_counts_are_available() -> None:
+    md = "- Articoli/news pubblicati da Publisher: 24\n- Report pubblicati da Simone: 1\n"
+    report = build_report({"operational_report": {"_format": "markdown", "_markdown": md}})
+    payload = __import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(report)
+    assert payload["daily_numbers"]["news_published"] == 24
+    assert payload["daily_numbers"]["reports_published"] == 1
+    assert "news_published_count_not_available" not in payload["schema_warnings"]
+    assert "reports_published_count_not_available" not in payload["schema_warnings"]
+
+
+def test_markdown_without_publication_labels_keeps_both_counts_unknown() -> None:
+    report = build_report({"operational_report": {"_format": "markdown", "_markdown": "- Alfred warnings: 20\n"}})
+    text = render_markdown(report)
+    payload = __import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(report)
+    assert payload["daily_numbers"]["news_published"] is None
+    assert payload["daily_numbers"]["reports_published"] is None
+    assert "- news published: n.d." in text
+    assert "- reports published: n.d." in text
+    assert "news_published_count_not_available" in payload["schema_warnings"]
+    assert "reports_published_count_not_available" in payload["schema_warnings"]
+
+
+def test_placeholder_report_records_do_not_create_false_news_zero() -> None:
+    report = build_report({"operational_report": {"_format": "markdown", "_markdown": "- Report pubblicati da Simone: 1\n"}})
+    assert report["reports"][0]["_placeholder_from_markdown"] is True
+    assert report["news"] == []
+    assert report["news_published_count"] is None
+    assert report["reports_published_count"] == 1

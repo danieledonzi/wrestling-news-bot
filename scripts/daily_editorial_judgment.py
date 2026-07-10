@@ -500,11 +500,13 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
         news = parsed_md.get("news", news)
         reports = parsed_md.get("reports", reports)
         published_meta = {"available": True, "report_status_counts": {}}
-    if not published_meta["available"]:
+    news_count_available = records_published_available or markdown_news_available
+    reports_count_available = records_published_available or markdown_reports_available
+    if not (news_count_available or reports_count_available):
         schema_warnings.append("published_counts_not_available")
-    if published_meta["available"] and not markdown_news_available and not news:
+    if not news_count_available:
         schema_warnings.append("news_published_count_not_available")
-    if published_meta["available"] and not markdown_reports_available and not reports:
+    if not reports_count_available:
         schema_warnings.append("reports_published_count_not_available")
     selected, pending, skipped = _items(menzo, "selected"), _items(menzo, "pending"), _items(menzo, "skipped") or _items(menzo, "skipped_sample")
     article_types = Counter(_article_type(x) for x in selected + news if _article_type(x) != "unknown")
@@ -520,8 +522,8 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
         hard_soft_source = "article_types_markdown"
     story = parse_story_cluster_audit(data.get("story_cluster_audit", {}))
     schema_warnings.extend(story["schema_warnings"])
-    news_published_count = parsed_md.get("news_count") if "news_count" in parsed_md else (len(news) if published_meta["available"] else None)
-    reports_published_count = parsed_md.get("reports_count") if "reports_count" in parsed_md else (len(reports) if records_published_available else None)
+    news_published_count = len(news) if records_published_available else (parsed_md.get("news_count") if markdown_news_available else None)
+    reports_published_count = len(reports) if records_published_available else (parsed_md.get("reports_count") if markdown_reports_available else None)
     dtype = day_type(news_published_count, reports_published_count or 0, hard_count, story["story_reviews"])
     softpool = _nested(menzo, "softpool", "injected_candidates") or _nested(menzo, "daily_policy", "softpool_used") or any(x.get("from_softpool") for x in selected + pending + skipped)
     warnings = _nested(_master(data), "alfred", "handoff", "warnings") or _nested(_master(data), "alfred", "postprocess", "warnings") or "n.d."
@@ -532,8 +534,8 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
         blockers = parsed_md["blockers"]
     gemini_called = _gemini_35_calls(data)
     runs_completed = parsed_md.get("runs_completed")
-    news_published_count = parsed_md.get("news_count") if "news_count" in parsed_md else (len(news) if published_meta["available"] else None)
-    reports_published_count = parsed_md.get("reports_count") if "reports_count" in parsed_md else (len(reports) if records_published_available else None)
+    news_published_count = len(news) if records_published_available else (parsed_md.get("news_count") if markdown_news_available else None)
+    reports_published_count = len(reports) if records_published_available else (parsed_md.get("reports_count") if markdown_reports_available else None)
     published_total = (news_published_count or 0) + (reports_published_count or 0) if (news_published_count is not None or reports_published_count is not None) else None
     judgment = "OTTIMO" if (hard_count or 0) >= 8 and len(top_discarded(menzo, 1)) == 0 else "BUONO" if (published_total or 0) >= 8 else "DISCRETO" if (published_total or 0) >= 3 else "DEBOLE"
     top = top_discarded(menzo)
@@ -545,7 +547,7 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
         summary += " Il principale controllo umano riguarda: " + _title(top[0]) + "."
     else:
         summary += " Non emergono forti candidati scartati da recuperare."
-    return {"generated_at": generated_at, "source_artifacts_used": used, "missing_artifacts": missing, "schema_warnings": schema_warnings, "published_available": published_meta["available"], "report_status_counts": published_meta["report_status_counts"], "menzo": menzo, "news": news, "reports": reports, "selected": selected, "pending": pending, "skipped": skipped, "runs_completed": runs_completed, "news_published_count": news_published_count, "reports_published_count": reports_published_count, "hard_count": hard_count, "soft_count": soft_count, "hard_soft_source": hard_soft_source, "story": story, "day_type": dtype, "softpool": bool(softpool), "warnings": warnings, "blockers": blockers, "gemini_called": gemini_called, "article_types": article_types, "judgment": judgment, "top_discarded": top, "borderline": borderline, "summary": summary}
+    return {"generated_at": generated_at, "source_artifacts_used": used, "missing_artifacts": missing, "schema_warnings": schema_warnings, "published_available": published_meta["available"], "report_status_counts": published_meta["report_status_counts"], "menzo": menzo, "news": news, "reports": reports, "selected": selected, "pending": pending, "skipped": skipped, "runs_completed": runs_completed, "news_published_count": news_published_count, "reports_published_count": reports_published_count, "news_count_available": news_count_available, "reports_count_available": reports_count_available, "hard_count": hard_count, "soft_count": soft_count, "hard_soft_source": hard_soft_source, "story": story, "day_type": dtype, "softpool": bool(softpool), "warnings": warnings, "blockers": blockers, "gemini_called": gemini_called, "article_types": article_types, "judgment": judgment, "top_discarded": top, "borderline": borderline, "summary": summary}
 
 
 def _num(value: Any) -> str:
