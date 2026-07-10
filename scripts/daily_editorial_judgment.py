@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import argparse
 import json
 import re
 from collections import Counter
@@ -9,8 +10,10 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORTS_DIR = ROOT / "reports"
+VPS_REPORTS_DIR = Path("/opt/owtv/reports")
 STATE_REPORTS_DIR = ROOT / "state" / "reports"
 DEFAULT_ARTIFACT_CANDIDATES: dict[str, tuple[str, ...]] = {
+    "operational_report": ("reports/owtv_operational_report_24h_*.md",),
     "menzo_latest": ("state/newsroom/menzo_decisions_latest.json", "artifacts/newsroom/menzo_decisions.json"),
     "master_log": ("artifacts/newsroom/master_log_tail.jsonl", "logs/newsroom_master.log", "artifacts/newsroom/master_log_latest.json"),
     "editorial_audit": ("reports/owtv_editorial_audit_v1_1_24h_*.json", "reports/owtv_editorial_audit_v1_1_24h_*.md", "reports/editorial_audit_v1_1_latest.json"),
@@ -29,9 +32,30 @@ COUNT_PATTERNS = {
 }
 
 
-def _latest_glob(pattern: str) -> Path | None:
-    matches = [p for p in ROOT.glob(pattern) if p.is_file()]
-    return max(matches, key=lambda p: p.stat().st_mtime) if matches else None
+def _latest_glob(pattern: str, *, base: Path | None = None) -> Path | None:
+    root = base or ROOT
+    matches = [p for p in root.glob(pattern) if p.is_file()]
+    return max(matches, key=lambda p: (p.name, p.stat().st_mtime)) if matches else None
+
+
+def _report_input_dirs() -> list[Path]:
+    # Prefer the VPS-level operational report directory; the repo reports directory
+    # remains the default output location and a fallback input source for dev/test.
+    dirs = [VPS_REPORTS_DIR, ROOT / "reports"]
+    out: list[Path] = []
+    for d in dirs:
+        if d not in out:
+            out.append(d)
+    return out
+
+
+def _latest_report_artifact(pattern: str) -> Path | None:
+    bare = pattern.removeprefix("reports/")
+    for directory in _report_input_dirs():
+        found = _latest_glob(bare, base=directory)
+        if found:
+            return found
+    return _latest_glob(pattern)
 
 
 def resolve_artifact_paths(paths: dict[str, Path] | None = None) -> dict[str, Path | None]:
@@ -39,7 +63,7 @@ def resolve_artifact_paths(paths: dict[str, Path] | None = None) -> dict[str, Pa
     for name, candidates in DEFAULT_ARTIFACT_CANDIDATES.items():
         found: Path | None = None
         for candidate in candidates:
-            path = _latest_glob(candidate) if "*" in candidate else ROOT / candidate
+            path = _latest_report_artifact(candidate) if candidate.startswith("reports/") and "*" in candidate else (_latest_glob(candidate) if "*" in candidate else ROOT / candidate)
             if path and path.exists():
                 found = path
                 break
@@ -101,11 +125,12 @@ def artifact_presence(paths: dict[str, Path] | None = None) -> tuple[list[str], 
     return used, missing
 
 
-def load_inputs(paths: dict[str, Path] | None = None) -> dict[str, Any]:
+def load_inputs(paths: dict[str, Path] | None = None, *, hours: int = 24, now: datetime | None = None) -> dict[str, Any]:
     resolved = resolve_artifact_paths(paths)
     used, missing = artifact_presence(paths)
     data = {name: _load(path) for name, path in resolved.items()}
     data["__artifact_status__"] = {"used": used, "missing": missing}
+    data["__window__"] = {"hours": hours, "now": (now or datetime.now(timezone.utc)).isoformat()}
     return data
 
 
@@ -237,16 +262,86 @@ def _count_from_markdown(text: str, key: str) -> int | None:
     return int(match.group(1)) if match else None
 
 
+def _md_int(text: str, patterns: tuple[str, ...]) -> int | None:
+    for pattern in patterns:
+        match = re.search(pattern, text, re.I | re.M)
+        if match:
+            return int(match.group(1))
+    return None
+
+
+def _md_list_count(text: str, patterns: tuple[str, ...]) -> list[dict[str, Any]]:
+    count = _md_int(text, patterns)
+    return [{} for _ in range(count or 0)]
+
+
+def parse_daily_markdown_inputs(data: dict[str, Any]) -> dict[str, Any]:
+    """Parse real 24h markdown reports without inventing zeroes on mismatch."""
+    texts = "\n".join(str((data.get(k) or {}).get("_markdown") or "") for k in ("operational_report", "editorial_audit"))
+    if not texts.strip():
+        return {}
+    parsed: dict[str, Any] = {}
+    runs = _md_int(texts, (r"runs completed\D+(\d+)",))
+    if runs is not None:
+        parsed["runs_completed"] = runs if isinstance(runs, int) else 1
+    elif re.search(r"EXIT\s+0", texts, re.I):
+        parsed["runs_completed"] = 1
+    news_count = _md_int(texts, (r"news published\D+(\d+)", r"news_published\D+(\d+)"))
+    reports_count = _md_int(texts, (r"reports? show published\D+(\d+)", r"reports? published\D+(\d+)", r"reports_published\D+(\d+)"))
+    if news_count is not None:
+        parsed["news"] = _md_list_count(texts, (r"news published\D+(\d+)", r"news_published\D+(\d+)"))
+    if reports_count is not None:
+        parsed["reports"] = _md_list_count(texts, (r"reports? show published\D+(\d+)", r"reports? published\D+(\d+)", r"reports_published\D+(\d+)"))
+    decision = re.search(r"Menzo first decision selected/pending/skipped\D+(\d+)\D+(\d+)\D+(\d+)", texts, re.I)
+    if decision:
+        parsed["menzo"] = {"selected": [{}] * int(decision.group(1)), "pending": [{}] * int(decision.group(2)), "skipped": [{}] * int(decision.group(3))}
+    types: Counter[str] = Counter()
+    type_match = re.search(r"article types?\s*[:=]\s*(\{[^\n]+\}|[^\n]+)", texts, re.I)
+    if type_match:
+        raw = type_match.group(1).strip()
+        try:
+            parsed_obj = json.loads(raw.replace("'", '"'))
+            if isinstance(parsed_obj, dict):
+                types.update({str(k): int(v) for k, v in parsed_obj.items()})
+        except Exception:
+            for name, value in re.findall(r"([a-zA-Z_]+)\D+(\d+)", raw):
+                types[name.lower()] += int(value)
+    if types:
+        parsed["article_types"] = types
+    alfred = re.search(r"Alfred warnings/blockers\D+(\d+|n\.d\.)\D+(\d+|n\.d\.)", texts, re.I)
+    if alfred:
+        parsed["warnings"], parsed["blockers"] = alfred.group(1), alfred.group(2)
+    pub_errors = _md_int(texts, (r"Publisher errors\D+(\d+)",))
+    andrea_blocked = _md_int(texts, (r"Andrea blocked\D+(\d+)",))
+    if pub_errors is not None:
+        parsed["publisher_errors"] = pub_errors
+    if andrea_blocked is not None:
+        parsed["andrea_blocked"] = andrea_blocked
+    gemini = _md_int(texts, (r"Gemini(?:\s+3\.5)? called total\D+(\d+)", r"gemini[_\s-]*3[_\s.-]*5[_\s-]*called[_\s-]*total\D+(\d+)"))
+    if gemini is not None:
+        parsed["gemini_3_5_called_total"] = gemini
+    return parsed
+
+
 def parse_story_cluster_audit(data: dict[str, Any]) -> dict[str, Any]:
     warnings: list[str] = []
     counts = data.get("counts") if isinstance(data.get("counts"), dict) else {}
     markdown = str(data.get("_markdown") or "")
     def count(name: str, legacy_list: str) -> int | None:
-        if name in counts:
+        aliases = {
+            "duplicate_candidates": ("duplicate_candidates", "duplicate_candidate"),
+            "same_story_clusters": ("same_story_clusters", "same_story_cluster"),
+            "same_event_clusters": ("same_event_clusters", "same_event_cluster"),
+            "story_reviews": ("story_reviews", "story_review"),
+            "pairs_above_threshold": ("pairs_above_threshold", "pairs_above_threshold_count"),
+        }.get(name, (name,))
+        for alias in aliases:
+            if alias not in counts:
+                continue
             try:
-                return int(counts[name])
+                return int(counts[alias])
             except Exception:
-                warnings.append(f"story_cluster_count_invalid:{name}")
+                warnings.append(f"story_cluster_count_invalid:{alias}")
         if isinstance(data.get(legacy_list), list):
             return len(data[legacy_list])
         if legacy_list == "story_review" and isinstance(data.get("story_reviews"), list):
@@ -269,11 +364,35 @@ def parse_story_cluster_audit(data: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _parse_dt(value: Any) -> datetime | None:
+    if not value:
+        return None
+    try:
+        text = str(value).replace("Z", "+00:00")
+        dt = datetime.fromisoformat(text)
+        return dt if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
+    except Exception:
+        return None
+
+
 def _gemini_35_calls(data: dict[str, Any]) -> int | str:
+    parsed = parse_daily_markdown_inputs(data)
+    if parsed.get("gemini_3_5_called_total") is not None:
+        return parsed["gemini_3_5_called_total"]
+    window = data.get("__window__", {}) if isinstance(data.get("__window__"), dict) else {}
+    try:
+        hours = int(window.get("hours") or 24)
+    except Exception:
+        hours = 24
+    now = _parse_dt(window.get("now")) or datetime.now(timezone.utc)
+    since_ts = now.timestamp() - (hours * 3600)
     ledger = data.get("gemini_ledger", {})
     if isinstance(ledger.get("records"), list):
         total = 0
         for record in ledger["records"]:
+            stamp = _parse_dt(record.get("timestamp") or record.get("ts") or record.get("created_at"))
+            if stamp and stamp.timestamp() < since_ts:
+                continue
             model = str(record.get("model") or record.get("actual_model") or record.get("selected_model") or "").lower()
             status = str(record.get("status") or "called").lower()
             if "3.5" in model and status != "avoided":
@@ -288,8 +407,15 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
     used = source_artifacts_used if source_artifacts_used is not None else list(status.get("used") or [])
     missing = missing_artifacts if missing_artifacts is not None else list(status.get("missing") or [])
     schema_warnings: list[str] = []
+    parsed_md = parse_daily_markdown_inputs(data)
     menzo = collect_menzo(data)
+    if not menzo and isinstance(parsed_md.get("menzo"), dict):
+        menzo = parsed_md["menzo"]
     news, reports, published_meta = collect_published(data)
+    if not published_meta["available"] and ("news" in parsed_md or "reports" in parsed_md):
+        news = parsed_md.get("news", news)
+        reports = parsed_md.get("reports", reports)
+        published_meta = {"available": True, "report_status_counts": {}}
     if not published_meta["available"]:
         schema_warnings.append("published_counts_not_available")
     selected, pending, skipped = _items(menzo, "selected"), _items(menzo, "pending"), _items(menzo, "skipped") or _items(menzo, "skipped_sample")
@@ -301,8 +427,14 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
     softpool = _nested(menzo, "softpool", "injected_candidates") or _nested(menzo, "daily_policy", "softpool_used") or any(x.get("from_softpool") for x in selected + pending + skipped)
     warnings = _nested(_master(data), "alfred", "handoff", "warnings") or _nested(_master(data), "alfred", "postprocess", "warnings") or "n.d."
     blockers = _nested(_master(data), "alfred", "handoff", "blockers") or "n.d."
+    if warnings == "n.d." and parsed_md.get("warnings") is not None:
+        warnings = parsed_md["warnings"]
+    if blockers == "n.d." and parsed_md.get("blockers") is not None:
+        blockers = parsed_md["blockers"]
     gemini_called = _gemini_35_calls(data)
     article_types = Counter(_article_type(x) for x in selected + news if _article_type(x) != "unknown")
+    if not article_types and isinstance(parsed_md.get("article_types"), Counter):
+        article_types = parsed_md["article_types"]
     published_total = len(news) + len(reports) if published_meta["available"] else None
     judgment = "OTTIMO" if (hard_count or 0) >= 8 and len(top_discarded(menzo, 1)) == 0 else "BUONO" if (published_total or 0) >= 8 else "DISCRETO" if (published_total or 0) >= 3 else "DEBOLE"
     top = top_discarded(menzo)
@@ -367,8 +499,8 @@ def email_summary(report: dict[str, Any]) -> str:
     return "\n".join(["Daily Editorial Judgment:", f"- Judgment: {report['judgment']}", f"- Day type: {report['day_type']}", f"- Published: {news_count} news / {len(report['reports'])} report", f"- Hard/soft balance: {_num(report['hard_count'])} hard vs {_num(report['soft_count'])} soft (stima)", f"- Top concern: {'controllare scarti/pending ad alta rilevanza' if top else 'nessun forte candidato scartato emerso'}", f"- Top discarded URL: {_url(top) if top else 'n.d.'}"])
 
 
-def generate_daily_editorial_judgment_outputs(paths: dict[str, Path] | None = None, output_dir: Path = REPORTS_DIR, state_dir: Path = STATE_REPORTS_DIR, now: datetime | None = None) -> dict[str, Path]:
-    data = load_inputs(paths)
+def generate_daily_editorial_judgment_outputs(paths: dict[str, Path] | None = None, output_dir: Path = REPORTS_DIR, state_dir: Path = STATE_REPORTS_DIR, now: datetime | None = None, hours: int = 24) -> dict[str, Path]:
+    data = load_inputs(paths, hours=hours, now=now)
     status = data.get("__artifact_status__", {})
     report = build_report(data, generated_at=now, source_artifacts_used=list(status.get("used") or []), missing_artifacts=list(status.get("missing") or []))
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -384,10 +516,14 @@ def generate_daily_editorial_judgment_outputs(paths: dict[str, Path] | None = No
     return {"markdown": markdown_path, "json": json_path, "latest_json": latest_json_path}
 
 
-def generate_daily_editorial_judgment_report(paths: dict[str, Path] | None = None, output_dir: Path = REPORTS_DIR, now: datetime | None = None) -> Path:
+def generate_daily_editorial_judgment_report(paths: dict[str, Path] | None = None, output_dir: Path = REPORTS_DIR, now: datetime | None = None, hours: int = 24) -> Path:
     state_dir = STATE_REPORTS_DIR if output_dir == REPORTS_DIR else output_dir / "state_reports"
-    return generate_daily_editorial_judgment_outputs(paths=paths, output_dir=output_dir, state_dir=state_dir, now=now)["markdown"]
+    return generate_daily_editorial_judgment_outputs(paths=paths, output_dir=output_dir, state_dir=state_dir, now=now, hours=hours)["markdown"]
 
 
 if __name__ == "__main__":
-    print(generate_daily_editorial_judgment_report())
+    parser = argparse.ArgumentParser(description="Generate the report-only OWTV daily editorial judgment.")
+    parser.add_argument("--hours", type=int, default=24, help="Report/Gemini ledger window in hours (default: 24).")
+    parser.add_argument("--output-dir", type=Path, default=REPORTS_DIR, help="Output directory for judgment markdown/json.")
+    args = parser.parse_args()
+    print(generate_daily_editorial_judgment_report(output_dir=args.output_dir, hours=args.hours))

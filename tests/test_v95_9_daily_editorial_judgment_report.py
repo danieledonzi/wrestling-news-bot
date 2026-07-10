@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -195,3 +195,101 @@ def test_non_published_simone_reports_do_not_create_post_show_day() -> None:
     payload = __import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(report)
     assert payload["daily_numbers"]["reports_published"] == 0
     assert report["day_type"] != "post-show"
+
+
+def test_vps_reports_directory_is_preferred_over_repo_reports(tmp_path: Path, monkeypatch) -> None:
+    import scripts.daily_editorial_judgment as dej
+
+    repo = tmp_path / "repo"
+    external = tmp_path / "owtv_reports"
+    (repo / "reports").mkdir(parents=True)
+    external.mkdir(parents=True)
+    write_json(repo / "reports/story_cluster_audit_v94_7_1_2099.json", {"counts": {"story_reviews": 1}})
+    write_json(external / "story_cluster_audit_v94_7_1_20260710.json", {"counts": {"story_reviews": 7}})
+    monkeypatch.setattr(dej, "ROOT", repo)
+    monkeypatch.setattr(dej, "VPS_REPORTS_DIR", external)
+    data = dej.load_inputs()
+    assert data["story_cluster_audit"]["counts"]["story_reviews"] == 7
+
+
+def test_repo_judgment_outputs_do_not_mask_external_inputs(tmp_path: Path, monkeypatch) -> None:
+    import scripts.daily_editorial_judgment as dej
+
+    repo = tmp_path / "repo"
+    external = tmp_path / "owtv_reports"
+    (repo / "reports").mkdir(parents=True)
+    external.mkdir(parents=True)
+    (repo / "reports/owtv_daily_editorial_judgment_24h_20260710.md").write_text("old output", encoding="utf-8")
+    (external / "owtv_editorial_audit_v1_1_24h_20260710.md").write_text("news published: 15\nreports published: 1\n", encoding="utf-8")
+    write_json(external / "story_cluster_audit_v94_7_1_20260710.json", {"counts": {"story_review": 2}})
+    monkeypatch.setattr(dej, "ROOT", repo)
+    monkeypatch.setattr(dej, "VPS_REPORTS_DIR", external)
+    report = dej.build_report(dej.load_inputs())
+    payload = dej.structured_json(report)
+    assert payload["daily_numbers"]["news_published"] == 15
+    assert "editorial_audit" not in payload["missing_artifacts"]
+    assert "story_cluster_audit" not in payload["missing_artifacts"]
+
+
+def test_latest_timestamped_reports_are_selected(tmp_path: Path, monkeypatch) -> None:
+    import scripts.daily_editorial_judgment as dej
+
+    external = tmp_path / "owtv_reports"
+    external.mkdir()
+    (external / "owtv_operational_report_24h_20260709.md").write_text("news published: 1", encoding="utf-8")
+    (external / "owtv_operational_report_24h_20260710.md").write_text("news published: 15", encoding="utf-8")
+    (external / "owtv_editorial_audit_v1_1_24h_20260709.md").write_text("reports published: 0", encoding="utf-8")
+    (external / "owtv_editorial_audit_v1_1_24h_20260710.md").write_text("reports published: 1", encoding="utf-8")
+    write_json(external / "story_cluster_audit_v94_7_1_20260709.json", {"counts": {"story_review": 1}})
+    write_json(external / "story_cluster_audit_v94_7_1_20260710.json", {"counts": {"story_review": 4}})
+    monkeypatch.setattr(dej, "ROOT", tmp_path / "repo")
+    monkeypatch.setattr(dej, "VPS_REPORTS_DIR", external)
+    report = dej.build_report(dej.load_inputs())
+    payload = dej.structured_json(report)
+    assert payload["daily_numbers"]["news_published"] == 15
+    assert payload["daily_numbers"]["reports_published"] == 1
+    assert payload["redundancy_risks"]["story_review_count"] == 4
+
+
+def test_real_style_markdown_parses_counts_warnings_and_article_types() -> None:
+    md = """EXIT 0
+news published: 15
+report show published: 1
+Menzo first decision selected/pending/skipped: 15/2/3
+article types: {'hard_news': 9, 'news_generica': 6}
+Alfred warnings/blockers: 2/0
+"""
+    report = build_report({"operational_report": {"_format": "markdown", "_markdown": md}})
+    payload = json.loads(json.dumps(__import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(report)))
+    assert payload["daily_numbers"]["news_published"] == 15
+    assert payload["daily_numbers"]["reports_published"] == 1
+    assert payload["daily_numbers"]["alfred"]["warnings"] == "2"
+    assert payload["daily_numbers"]["article_types"]["hard_news"] == 9
+
+
+def test_story_cluster_json_from_external_reports_schema_is_parsed(tmp_path: Path, monkeypatch) -> None:
+    import scripts.daily_editorial_judgment as dej
+
+    external = tmp_path / "owtv_reports"
+    external.mkdir()
+    write_json(external / "story_cluster_audit_v94_7_1_20260710.json", {"counts": {"story_review": 5, "same_story_cluster": 3, "duplicate_candidate": 2, "pairs_above_threshold": 8}})
+    monkeypatch.setattr(dej, "ROOT", tmp_path / "repo")
+    monkeypatch.setattr(dej, "VPS_REPORTS_DIR", external)
+    payload = dej.structured_json(dej.build_report(dej.load_inputs()))
+    assert payload["daily_numbers"]["duplicate_candidates"] == 2
+    assert payload["redundancy_risks"]["same_story_cluster_count"] == 3
+    assert payload["redundancy_risks"]["story_review_count"] == 5
+    assert payload["redundancy_risks"]["pairs_above_threshold"] == 8
+
+
+def test_gemini_35_count_is_limited_to_24h_window() -> None:
+    now = datetime(2026, 7, 10, 12, tzinfo=timezone.utc)
+    data = load_inputs({
+        "gemini_ledger": write_json(Path("/tmp") / "unused.json", {}),
+    }, now=now)
+    data["gemini_ledger"] = {"records": [
+        {"timestamp": (now - timedelta(hours=2)).isoformat(), "model": "gemini-3.5-pro", "status": "called"},
+        {"timestamp": (now - timedelta(hours=26)).isoformat(), "model": "gemini-3.5-pro", "status": "called"},
+        {"timestamp": (now - timedelta(hours=1)).isoformat(), "model": "gemini-3.5-pro", "status": "avoided"},
+    ]}
+    assert build_report(data)["gemini_called"] == 1
