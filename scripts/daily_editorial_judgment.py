@@ -192,6 +192,46 @@ def _dedupe_records(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return out
 
 
+def _editorial_aggregation_key(item: dict[str, Any]) -> str:
+    source_url = str(item.get("source_url") or "").strip().lower()
+    if source_url:
+        return "source_url:" + source_url
+    url = str(item.get("url") or item.get("link") or "").strip().lower()
+    if url:
+        return "url:" + url
+    wp_link = _wp_link(item).lower()
+    if wp_link:
+        return "wp_link:" + wp_link
+    title = re.sub(r"\s+", " ", _title(item).lower()).strip()
+    return "title:" + title
+
+
+def _editorial_record_richness(item: dict[str, Any]) -> int:
+    return sum(
+        1
+        for value in (
+            _numeric_score(item),
+            item.get("priority"),
+            item.get("article_type"),
+            item.get("decision"),
+            item.get("reason") or item.get("menzo_reason"),
+            item.get("source"),
+            _wp_link(item),
+        )
+        if value
+    )
+
+
+def _dedupe_editorial_aggregation_items(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    by_key: dict[str, dict[str, Any]] = {}
+    for record in records:
+        key = _editorial_aggregation_key(record)
+        current = by_key.get(key)
+        if current is None or _editorial_record_richness(record) > _editorial_record_richness(current):
+            by_key[key] = record
+    return list(by_key.values())
+
+
 def _numeric_score(item: dict[str, Any]) -> int | None:
     for key in ("native_score", "score", "deterministic_score", "final_score", "priority_score"):
         try:
@@ -706,15 +746,16 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
     if not reports_count_available:
         schema_warnings.append("reports_published_count_not_available")
     selected, pending, skipped = _items(menzo, "selected"), _items(menzo, "pending"), _items(menzo, "skipped") or _items(menzo, "skipped_sample")
-    article_types = Counter(_article_type(x) for x in selected + news if _article_type(x) != "unknown")
-    if isinstance(parsed_md.get("article_types"), Counter):
-        article_types = parsed_md["article_types"]
     concrete_selected = [x for x in selected if not x.get("_placeholder_from_markdown")]
     concrete_news = [x for x in news if not x.get("_placeholder_from_markdown")]
     concrete_reports = [x for x in reports if not x.get("_placeholder_from_markdown")]
+    aggregate_items = _dedupe_editorial_aggregation_items(concrete_selected + concrete_news)
+    article_types = Counter(_article_type(x) for x in aggregate_items if _article_type(x) != "unknown")
+    if isinstance(parsed_md.get("article_types"), Counter):
+        article_types = parsed_md["article_types"]
     hard_soft_source = None if isinstance(parsed_md.get("article_types"), Counter) else ("records" if (concrete_selected or concrete_news) else None)
-    hard_count = sum(1 for x in concrete_selected + concrete_news if is_hard(x)) if hard_soft_source == "records" else None
-    soft_count = sum(1 for x in concrete_selected + concrete_news if is_soft(x)) if hard_soft_source == "records" else None
+    hard_count = sum(1 for x in aggregate_items if is_hard(x)) if hard_soft_source == "records" else None
+    soft_count = sum(1 for x in aggregate_items if is_soft(x)) if hard_soft_source == "records" else None
     if hard_soft_source is None and article_types:
         hard_count, soft_count = _article_type_hard_soft_counts(article_types)
         hard_soft_source = "article_types_markdown"
@@ -744,7 +785,7 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
     published_total = (news_published_count or 0) + (reports_published_count or 0) if (news_published_count is not None or reports_published_count is not None) else None
     judgment = "OTTIMO" if (hard_count or 0) >= 8 and len(top_discarded(menzo, 1)) == 0 else "BUONO" if (published_total or 0) >= 8 else "DISCRETO" if (published_total or 0) >= 3 else "DEBOLE"
     top = top_discarded(menzo)
-    published_items_for_review = [x for x in concrete_news if not _is_count_placeholder(x)]
+    published_items_for_review = _dedupe_editorial_aggregation_items([x for x in concrete_news if not _is_count_placeholder(x)])
     borderline = [x for x in published_items_for_review if _is_borderline_published(x)][:3]
     news_label = str(news_published_count) if news_published_count is not None else "n.d."
     reports_label = str(reports_published_count) if reports_published_count is not None else "n.d."
