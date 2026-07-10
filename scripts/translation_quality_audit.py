@@ -10,6 +10,7 @@ publication registry.
 from __future__ import annotations
 
 import argparse
+import ast
 import html
 import json
 import re
@@ -42,9 +43,13 @@ ISSUE_SEVERITY: dict[str, str] = {
     "official_title_translated": "high",
     "mojibake_or_broken_accents": "high",
     "untranslated_quote_or_residual_english": "medium",
+    "possible_release_mistranslation": "medium",
+    "possible_match_mistranslation": "medium",
     "wrestling_lexicon_issue": "medium",
+    "ai_style_filler": "low",
     "blockquote_missing_for_long_quotes": "low",
     "paragraph_count_drop": "low",
+    "published_text_too_short_vs_original": "low",
     "title_too_long": "low",
     "image_placeholder_present": "technical",
 }
@@ -154,14 +159,14 @@ class ArticleAudit:
     published_paragraph_count: int = 0
     quote_count: int = 0
     blockquote_count: int = 0
-    alfred_warnings: list[str] = field(default_factory=list)
+    alfred_warnings: list[Any] = field(default_factory=list)
     article_type: str = ""
     priority: str = ""
     score: Any = ""
     artifact_paths: list[str] = field(default_factory=list)
     issues: list[str] = field(default_factory=list)
     issue_severities: dict[str, str] = field(default_factory=dict)
-    possible_false_positive_warnings: list[str] = field(default_factory=list)
+    possible_false_positive_warnings: list[Any] = field(default_factory=list)
 
 
 def iter_json_objects(path: Path) -> Iterable[dict[str, Any]]:
@@ -275,7 +280,7 @@ def merge_item(a: ArticleAudit, item: dict[str, Any], relpath: str) -> None:
     a.score = a.score or first(item, "score", "quality_score", "news_score")
     warnings = first(item, "alfred_warnings", "warnings", "warning_codes", "issues")
     if isinstance(warnings, list):
-        a.alfred_warnings.extend(str(w) for w in warnings if w)
+        a.alfred_warnings.extend(w for w in warnings if w)
     elif isinstance(warnings, str) and warnings:
         a.alfred_warnings.append(warnings)
     if relpath not in a.artifact_paths:
@@ -352,19 +357,31 @@ def run_checks(a: ArticleAudit) -> None:
     a.issues = sorted(set(issues))
     a.issue_severities = {issue: issue_severity(issue) for issue in a.issues}
     for w in a.alfred_warnings:
-        if "bet" in w.lower() and not BETTING_RE.search(f"{a.title} {text}"):
+        if "bet" in str(w).lower() and not BETTING_RE.search(f"{a.title} {text}"):
             a.possible_false_positive_warnings.append(w)
 
 
 def issue_severity(issue: str) -> str:
-    return ISSUE_SEVERITY.get(issue, "medium")
+    return ISSUE_SEVERITY.get(issue, "low")
 
 
-def alfred_warning_code(warning: str) -> str:
-    return str(warning or "").split(":", 1)[0].strip()
+def alfred_warning_code(warning: Any) -> str:
+    if isinstance(warning, dict):
+        return str(warning.get("code") or "").strip()
+    raw = str(warning or "").strip()
+    if not raw:
+        return ""
+    for parser in (json.loads, ast.literal_eval):
+        try:
+            parsed = parser(raw)
+        except Exception:
+            continue
+        if isinstance(parsed, dict) and parsed.get("code"):
+            return str(parsed["code"]).strip()
+    return raw.split(":", 1)[0].strip()
 
 
-def alfred_warning_severity(warning: str) -> str:
+def alfred_warning_severity(warning: Any) -> str:
     code = alfred_warning_code(warning)
     if code in TECHNICAL_ALFRED_WARNINGS:
         return "technical"
@@ -397,9 +414,9 @@ def needs_human_review(a: ArticleAudit) -> bool:
 
 def markdown_report(rows: list[ArticleAudit], hours: int, generated_at: str) -> str:
     issue_counts = Counter(i for a in rows for i in a.issues)
-    warning_counts = Counter(w for a in rows for w in a.alfred_warnings)
+    warning_counts = Counter(alfred_warning_code(w) or esc(w) for a in rows for w in a.alfred_warnings)
     severity_counts = Counter(issue_severity(i) for a in rows for i in a.issues)
-    technical_warning_counts = Counter(w for a in rows for w in a.alfred_warnings if alfred_warning_severity(w) == "technical")
+    technical_warning_counts = Counter(alfred_warning_code(w) or esc(w) for a in rows for w in a.alfred_warnings if alfred_warning_severity(w) == "technical")
     review = [a for a in rows if needs_human_review(a)]
     lines = [f"# OpenWrestlingTV Translation Quality Audit ({hours}h)", "", f"Generated: {generated_at}", "", "## 1. Summary", "", f"- Articles/reports inspected: {len(rows)}", f"- Articles needing human review: {len(review)}", f"- Distinct deterministic issue types: {len(issue_counts)}", f"- Distinct Alfred warnings: {len(warning_counts)}", "", "### Severity summary", ""]
     lines += [f"- {k}: {v}" for k, v in sorted(severity_counts.items())] or ["- None detected."]
