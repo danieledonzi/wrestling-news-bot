@@ -1,5 +1,6 @@
 import json
 import sys
+from datetime import timedelta
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -47,3 +48,59 @@ def test_build_audit_writes_json_and_markdown(tmp_path):
     assert md.exists()
     assert payload["artifact_marker"] == "owtv_translation_quality_audit_v1"
     assert "source_intro_leaked" in latest.read_text(encoding="utf-8")
+
+
+def test_master_log_filters_jsonl_rows_by_record_timestamp(tmp_path):
+    ns = tmp_path / "state" / "newsroom"
+    ns.mkdir(parents=True)
+    old = {
+        "recorded_at": (audit.utc_now() - timedelta(hours=49)).isoformat(),
+        "source_url": "https://example.test/old",
+        "title": "Old story outside window",
+    }
+    recent = {
+        "recorded_at": audit.utc_now().isoformat(),
+        "source_url": "https://example.test/recent",
+        "title": "Recent story inside window",
+    }
+    (ns / "master_log.jsonl").write_text(json.dumps(old) + "\n" + json.dumps(recent) + "\n", encoding="utf-8")
+
+    rows = audit.discover(tmp_path, hours=24, limit=None)
+
+    assert {row.source_url for row in rows} == {"https://example.test/recent"}
+
+
+def test_published_html_attaches_to_source_url_record_and_runs_comparison_checks(tmp_path):
+    ns = tmp_path / "state" / "newsroom"
+    ns.mkdir(parents=True)
+    original = "\n\n".join([
+        "Original paragraph with detailed reporting " + ("x" * 240),
+        "Second original paragraph " + ("y" * 240),
+        "Third original paragraph " + ("z" * 240),
+        "Fourth original paragraph " + ("q" * 240),
+        "Fifth original paragraph " + ("r" * 240),
+    ])
+    source = {
+        "recorded_at": audit.utc_now().isoformat(),
+        "source_url": "https://example.test/source-major-star-returns",
+        "title_it": "Major Star Returns",
+        "source_title": "Major Star Returns Original",
+        "original_text": original,
+    }
+    (ns / "master_log.jsonl").write_text(json.dumps(source) + "\n", encoding="utf-8")
+    pub = tmp_path / "published_html_review"
+    pub.mkdir()
+    (pub / "v93_publisher_major-star-returns.html").write_text(
+        "<html><title>Major Star Returns</title><p>Breve testo pubblicato.</p></html>",
+        encoding="utf-8",
+    )
+
+    rows = audit.discover(tmp_path, hours=24, limit=None)
+
+    assert len(rows) == 1
+    row = rows[0]
+    assert row.source_url == "https://example.test/source-major-star-returns"
+    assert row.published_text_length > 0
+    assert "published_html_review/v93_publisher_major-star-returns.html" in row.artifact_paths
+    assert "published_text_too_short_vs_original" in row.issues
+    assert "paragraph_count_drop" in row.issues

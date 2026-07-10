@@ -66,7 +66,7 @@ def norm_url(u: Any) -> str:
 def slugify(v: Any) -> str:
     raw = str(v or "")
     raw = re.sub(r"\.(?:html|json|md|txt)$", "", Path(raw).name, flags=re.I)
-    raw = re.sub(r"^(?:v\d+[_-])?(?:news|publisher|bob|alfred)[_-]", "", raw, flags=re.I)
+    raw = re.sub(r"^(?:v\d+[_-])?(?:news|publisher|published|bob|alfred)[_-]", "", raw, flags=re.I)
     return re.sub(r"[^a-z0-9]+", "-", raw.lower()).strip("-")
 
 
@@ -171,6 +171,75 @@ def flatten_dicts(obj: Any) -> Iterable[dict[str, Any]]:
             yield from flatten_dicts(x)
 
 
+def best_record_dt(item: dict[str, Any]) -> datetime | None:
+    """Return the best available row-level timestamp for window filtering."""
+    for key in ("recorded_at", "created_at", "timestamp", "published_at"):
+        dt = parse_dt(item.get(key))
+        if dt:
+            return dt
+    for path in (("run", "started_at"), ("event", "timestamp"), ("item", "published_at")):
+        cur: Any = item
+        for key in path:
+            cur = cur.get(key) if isinstance(cur, dict) else None
+        dt = parse_dt(cur)
+        if dt:
+            return dt
+    return None
+
+
+def iter_master_log_objects(path: Path, since: datetime) -> Iterable[dict[str, Any]]:
+    """Yield only in-window master_log rows; undated rows keep legacy fallback behavior."""
+    try:
+        for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+            if not line.strip():
+                continue
+            obj = json.loads(line)
+            if not isinstance(obj, dict):
+                continue
+            dt = best_record_dt(obj)
+            if dt is not None and dt < since:
+                continue
+            yield from flatten_dicts(obj)
+    except Exception:
+        return
+
+
+def article_match_slugs(a: ArticleAudit) -> set[str]:
+    values = [a.title, a.source_title, a.wp_link]
+    slugs = {slugify(v) for v in values if v}
+    return {s for s in slugs if s}
+
+
+def safe_slug_contains(left: str, right: str) -> bool:
+    if not left or not right or left == right:
+        return False
+    shorter, longer = sorted((left, right), key=len)
+    if len(shorter) < 14 or len(shorter.split("-")) < 3:
+        return False
+    return shorter in longer
+
+
+def find_matching_article(articles: dict[str, ArticleAudit], file_slug: str, html_title: str = "") -> ArticleAudit | None:
+    """Conservatively attach published HTML to an existing metadata record."""
+    title_slug = slugify(html_title)
+    needles = {s for s in (file_slug, title_slug) if s}
+    # Exact key or exact known title/url-derived slug match first.
+    for key in needles:
+        if key in articles:
+            return articles[key]
+    for a in articles.values():
+        slugs = article_match_slugs(a)
+        if needles & slugs:
+            return a
+    # Conservative containment fallback for production filenames that add/remove
+    # small suffixes around a stable title slug.
+    for a in articles.values():
+        for existing in article_match_slugs(a):
+            if any(safe_slug_contains(existing, needle) or safe_slug_contains(needle, existing) for needle in needles):
+                return a
+    return None
+
+
 def item_key(item: dict[str, Any], path: Path | None = None) -> str:
     return norm_url(first(item, "source_url", "url", "original_url", "link")) or slugify(first(item, "wp_link", "published_url", "title", "title_it", "source_title") or (path.name if path else ""))
 
@@ -206,7 +275,8 @@ def discover(root: Path, hours: int, limit: int | None) -> list[ArticleAudit]:
         if not p.exists() or (parse_dt(datetime.fromtimestamp(p.stat().st_mtime, timezone.utc).isoformat()) or utc_now()) < since:
             continue
         rel = str(p.relative_to(root)) if p.is_relative_to(root) else str(p)
-        for item in iter_json_objects(p):
+        source_iter = iter_master_log_objects(p, since) if p.name == "master_log.jsonl" else iter_json_objects(p)
+        for item in source_iter:
             key = item_key(item, p)
             if not key:
                 continue
@@ -221,8 +291,7 @@ def discover(root: Path, hours: int, limit: int | None) -> list[ArticleAudit]:
             raw = p.read_text(encoding="utf-8", errors="replace")
             st = html_stats(raw)
             key = slugify(p.name)
-            # Prefer existing URL/title match when possible, otherwise file slug.
-            a = articles.setdefault(key, ArticleAudit(key=key))
+            a = find_matching_article(articles, key, st["title"]) or articles.setdefault(key, ArticleAudit(key=key))
             a.title = a.title or st["title"] or slugify(p.name).replace("-", " ").title()
             a.published_text = st["text"] if len(st["text"]) > len(a.published_text) else a.published_text
             a.published_text_length = max(a.published_text_length, st["text_length"])
