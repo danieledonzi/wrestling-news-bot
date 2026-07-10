@@ -738,3 +738,82 @@ def test_borderline_published_dedupes_enriched_published_duplicates() -> None:
     assert len(payload["borderline_published"]) == 1
     assert payload["borderline_published"][0]["source_url"] == "https://example.test/soft-dupe"
     assert payload["borderline_published"][0]["score"] == 72
+
+
+def test_daily_email_summary_reads_nested_alfred_counts(tmp_path: Path) -> None:
+    from send_daily_report import daily_editorial_judgment_body_section
+
+    latest = write_json(tmp_path / "latest.json", {
+        "judgment": "GOOD",
+        "day_type": "intensa",
+        "summary": "Strong news day",
+        "daily_numbers": {
+            "news_published": 12,
+            "reports_published": 2,
+            "alfred": {"warnings": 20, "blockers": 1},
+            "gemini_3_5_called_total": 4,
+        },
+    })
+
+    summary = daily_editorial_judgment_body_section(latest)
+
+    assert "- judgment: GOOD" in summary
+    assert "- day_type: intensa" in summary
+    assert "- summary: Strong news day" in summary
+    assert "- news_published: 12" in summary
+    assert "- reports_published: 2" in summary
+    assert "- Alfred warnings/blockers: 20/1" in summary
+    assert "- gemini_3_5_called_total: 4" in summary
+
+
+def test_daily_email_summary_uses_legacy_flat_alfred_fallback(tmp_path: Path) -> None:
+    from send_daily_report import daily_editorial_judgment_body_section
+
+    latest = write_json(tmp_path / "latest.json", {
+        "judgment": "OK",
+        "day_type": "normale",
+        "summary": "Normal day",
+        "daily_numbers": {
+            "news_published": 5,
+            "reports_published": 1,
+            "alfred_warnings": 7,
+            "alfred_blockers": 2,
+            "gemini_3_5_called_total": 3,
+        },
+    })
+
+    summary = daily_editorial_judgment_body_section(latest)
+
+    assert "- Alfred warnings/blockers: 7/2" in summary
+    assert "- judgment: OK" in summary
+    assert "- day_type: normale" in summary
+    assert "- summary: Normal day" in summary
+    assert "- news_published: 5" in summary
+    assert "- reports_published: 1" in summary
+    assert "- gemini_3_5_called_total: 3" in summary
+
+
+def test_daily_email_summary_missing_alfred_values_render_nd(tmp_path: Path) -> None:
+    from send_daily_report import daily_editorial_judgment_body_section
+
+    latest = write_json(tmp_path / "latest.json", {
+        "judgment": "LOW",
+        "day_type": "scarica",
+        "summary": "Quiet day",
+        "daily_numbers": {
+            "news_published": 0,
+            "reports_published": 0,
+            "alfred": "unexpected",
+            "gemini_3_5_called_total": 0,
+        },
+    })
+
+    summary = daily_editorial_judgment_body_section(latest)
+
+    assert "- Alfred warnings/blockers: n.d./n.d." in summary
+    assert "- judgment: LOW" in summary
+    assert "- day_type: scarica" in summary
+    assert "- summary: Quiet day" in summary
+    assert "- news_published: 0" in summary
+    assert "- reports_published: 0" in summary
+    assert "- gemini_3_5_called_total: 0" in summary
