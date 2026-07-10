@@ -526,6 +526,24 @@ def test_master_log_jsonl_window_produces_deduped_concrete_news_records(tmp_path
     assert payload["daily_numbers"]["news_records"][0]["wp_link"] == "https://owrestling.test/jr"
 
 
+def test_master_log_jsonl_window_excludes_records_after_explicit_now(tmp_path: Path) -> None:
+    now = datetime(2026, 7, 10, 12, tzinfo=timezone.utc)
+    master = write_jsonl(tmp_path / "state/newsroom/master_log.jsonl", [
+        {"recorded_at": (now - timedelta(hours=25)).isoformat(), "publisher": {"published": [{"title": "Before since", "source_url": "https://example.test/before"}]}},
+        {"recorded_at": (now - timedelta(hours=1)).isoformat(), "publisher": {"published": [{"title": "Inside window", "source_url": "https://example.test/inside"}]}},
+        {"recorded_at": (now + timedelta(minutes=1)).isoformat(), "publisher": {"published": [{"title": "Future skew", "source_url": "https://example.test/future"}]}},
+    ])
+    report = build_report(load_inputs({
+        "operational_report": write_json(tmp_path / "reports/op.json", {"_markdown": "- Articoli/news pubblicati da Publisher: 24\n"}),
+        "master_log": master,
+    }, hours=24, now=now))
+    payload = __import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(report)
+    assert payload["daily_numbers"]["news_published"] == 24
+    assert payload["daily_numbers"]["concrete_news_record_count"] == 1
+    assert [item["title"] for item in payload["daily_numbers"]["news_records"]] == ["Inside window"]
+    assert "Future skew" not in str(payload["daily_numbers"]["news_records"])
+
+
 def test_tail_partial_records_do_not_override_official_markdown_count(tmp_path: Path) -> None:
     now = datetime(2026, 7, 10, 12, tzinfo=timezone.utc)
     tail = write_jsonl(tmp_path / "artifacts/newsroom/master_log_tail.jsonl", [

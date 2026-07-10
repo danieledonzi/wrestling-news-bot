@@ -271,13 +271,16 @@ def _master_records_in_window(data: dict[str, Any]) -> list[dict[str, Any]]:
         hours = int(window.get("hours") or 24)
     except Exception:
         hours = 24
-    since_ts = (now.timestamp() - (hours * 3600)) if now else None
+    until_ts = now.timestamp() if now else None
+    since_ts = (until_ts - (hours * 3600)) if until_ts is not None else None
     selected: list[dict[str, Any]] = []
     for record in master["records"]:
         if not isinstance(record, dict):
             continue
         stamp = _record_timestamp(record)
         if since_ts is not None and stamp is not None and stamp.timestamp() < since_ts:
+            continue
+        if until_ts is not None and stamp is not None and stamp.timestamp() > until_ts:
             continue
         selected.append(record)
     return selected
