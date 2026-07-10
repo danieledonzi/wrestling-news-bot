@@ -192,17 +192,76 @@ def _dedupe_records(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return out
 
 
-def _score(item: dict[str, Any]) -> int:
-    for key in ("native_score", "score", "final_score", "priority_score"):
+def _editorial_aggregation_key(item: dict[str, Any]) -> str:
+    source_url = str(item.get("source_url") or "").strip().lower()
+    if source_url:
+        return "source_url:" + source_url
+    url = str(item.get("url") or item.get("link") or "").strip().lower()
+    if url:
+        return "url:" + url
+    wp_link = _wp_link(item).lower()
+    if wp_link:
+        return "wp_link:" + wp_link
+    title = re.sub(r"\s+", " ", _title(item).lower()).strip()
+    return "title:" + title
+
+
+def _editorial_record_richness(item: dict[str, Any]) -> int:
+    return sum(
+        1
+        for value in (
+            _numeric_score(item),
+            item.get("priority"),
+            item.get("article_type"),
+            item.get("decision"),
+            item.get("reason") or item.get("menzo_reason"),
+            item.get("source"),
+            _wp_link(item),
+        )
+        if value
+    )
+
+
+def _dedupe_editorial_aggregation_items(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    by_key: dict[str, dict[str, Any]] = {}
+    for record in records:
+        key = _editorial_aggregation_key(record)
+        current = by_key.get(key)
+        if current is None or _editorial_record_richness(record) > _editorial_record_richness(current):
+            by_key[key] = record
+    return list(by_key.values())
+
+
+def _numeric_score(item: dict[str, Any]) -> int | None:
+    for key in ("native_score", "score", "deterministic_score", "final_score", "priority_score"):
         try:
-            return int(float(item.get(key)))
+            value = item.get(key)
+            if value is None or value == "":
+                continue
+            return int(float(value))
         except Exception:
             continue
-    return 0
+    return None
+
+
+def _score(item: dict[str, Any]) -> int:
+    return _numeric_score(item) or 0
 
 
 def _article_type(item: dict[str, Any]) -> str:
     return str(item.get("article_type") or item.get("type") or item.get("category") or item.get("cluster_type") or "unknown").strip().lower()
+
+
+def _to_int_if_numeric(value: Any) -> Any:
+    try:
+        if value is None or value == "":
+            return value
+        numeric = float(value)
+        if numeric.is_integer():
+            return int(numeric)
+    except Exception:
+        return value
+    return value
 
 
 def is_hard(item: dict[str, Any]) -> bool:
@@ -231,6 +290,39 @@ def collect_menzo(data: dict[str, Any]) -> dict[str, Any]:
     if not menzo and isinstance(_nested(data.get("master_log", {}), "menzo"), dict):
         menzo = _nested(data.get("master_log", {}), "menzo")
     return menzo if isinstance(menzo, dict) else {}
+
+
+def _menzo_selected_map(data: dict[str, Any], menzo: dict[str, Any] | None = None) -> dict[str, dict[str, Any]]:
+    selected: list[dict[str, Any]] = []
+    if isinstance(menzo, dict):
+        selected.extend(_items(menzo, "selected"))
+    for master in _master_records_in_window(data):
+        selected.extend(_items(_nested(master, "menzo") or {}, "selected"))
+        selected.extend(_items(_nested(master, "menzo", "first_decision") or {}, "selected"))
+        selected.extend(_items(_nested(master, "menzo", "decisions") or {}, "selected"))
+    out: dict[str, dict[str, Any]] = {}
+    for item in selected:
+        url = str(item.get("source_url") or item.get("url") or item.get("link") or "").strip()
+        if url:
+            out[url] = item
+    return out
+
+
+def _enrich_published_with_menzo(record: dict[str, Any], selected_by_url: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    url = str(record.get("source_url") or record.get("url") or record.get("link") or "").strip()
+    selected = selected_by_url.get(url)
+    if not selected:
+        return record
+    enriched = dict(record)
+    for key in ("score", "deterministic_score", "priority", "article_type", "decision", "source", "category_hint", "ai_priority_label"):
+        if selected.get(key) is not None:
+            enriched[key] = selected.get(key)
+    if selected.get("reason") is not None:
+        enriched["reason"] = selected.get("reason")
+        enriched["menzo_reason"] = selected.get("reason")
+    if selected.get("source_url") is not None:
+        enriched["source_url"] = selected.get("source_url")
+    return enriched
 
 
 def _master(data: dict[str, Any]) -> dict[str, Any]:
@@ -286,8 +378,9 @@ def _master_records_in_window(data: dict[str, Any]) -> list[dict[str, Any]]:
     return selected
 
 
-def collect_published(data: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
+def collect_published(data: dict[str, Any], menzo: dict[str, Any] | None = None) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
     records = _master_records_in_window(data)
+    selected_by_url = _menzo_selected_map(data, menzo)
     include_already_published_reports = _master_log_source(data) in {"master_log", "master_log_tail_partial"}
     news: list[dict[str, Any]] = []
     reports: list[dict[str, Any]] = []
@@ -300,8 +393,8 @@ def collect_published(data: dict[str, Any]) -> tuple[list[dict[str, Any]], list[
         publisher_results = _items(publisher, "results")
         if isinstance(publisher, dict) and ("published" in publisher or "results" in publisher):
             news_stream_available = True
-        news.extend(publisher_published)
-        news.extend(r for r in publisher_results if str(r.get("status")).lower() == "published")
+        news.extend(_enrich_published_with_menzo(r, selected_by_url) for r in publisher_published)
+        news.extend(_enrich_published_with_menzo(r, selected_by_url) for r in publisher_results if str(r.get("status")).lower() == "published")
         simone = _nested(master, "simone") or {}
         run_reports = _items(simone, "published_reports")
         if isinstance(simone, dict) and "published_reports" in simone:
@@ -371,6 +464,28 @@ def _auto_judgment(item: dict[str, Any]) -> str:
     return "scarto probabilmente corretto"
 
 
+def _has_meaningful_editorial_metadata(item: dict[str, Any]) -> bool:
+    return (
+        _numeric_score(item) is not None
+        or bool(str(item.get("priority") or "").strip())
+        or _article_type(item) != "unknown"
+        or bool(str(item.get("reason") or item.get("menzo_reason") or item.get("decision") or "").strip())
+    )
+
+
+def _is_borderline_published(item: dict[str, Any]) -> bool:
+    if not _has_meaningful_editorial_metadata(item):
+        return False
+    score = _numeric_score(item)
+    priority = str(item.get("priority") or "").strip().lower()
+    article_type = _article_type(item)
+    if score is not None and score < 65:
+        return True
+    if priority in {"soft", "skip", "low"}:
+        return True
+    return article_type in SOFT_TYPES or article_type in {"strategic_discussion", "low_value", "news_generica"}
+
+
 def _count_from_markdown(text: str, key: str) -> int | None:
     pattern = COUNT_PATTERNS.get(key)
     if not pattern:
@@ -434,13 +549,13 @@ def _parse_markdown_report_text(text: str) -> dict[str, Any]:
         parsed["article_types"] = types
     alfred_pair = re.search(r"Alfred warnings/blockers\D+(\d+|n\.d\.)\D+(\d+|n\.d\.)", text, re.I)
     if alfred_pair:
-        parsed["warnings"], parsed["blockers"] = alfred_pair.group(1), alfred_pair.group(2)
+        parsed["warnings"], parsed["blockers"] = _to_int_if_numeric(alfred_pair.group(1)), _to_int_if_numeric(alfred_pair.group(2))
     warnings = _md_int(text, (r"^\s*-?\s*Alfred warnings\s*:\s*(\d+)\s*$",))
     blockers = _md_int(text, (r"^\s*-?\s*Alfred blockers\s*:\s*(\d+)\s*$", r"^\s*-?\s*Blocker Alfred\s*:\s*(\d+)\s*$"))
     if warnings is not None:
-        parsed["warnings"] = str(warnings)
+        parsed["warnings"] = warnings
     if blockers is not None:
-        parsed["blockers"] = str(blockers)
+        parsed["blockers"] = blockers
     pub_errors = _md_int(text, (r"Publisher errors\D+(\d+)",))
     andrea_blocked = _md_int(text, (r"Andrea blocked\D+(\d+)",))
     if pub_errors is not None:
@@ -609,7 +724,7 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
     menzo = collect_menzo(data)
     if not menzo and isinstance(parsed_md.get("menzo"), dict):
         menzo = parsed_md["menzo"]
-    news, reports, published_meta = collect_published(data)
+    news, reports, published_meta = collect_published(data, menzo)
     markdown_news_available = "news_count" in parsed_md
     markdown_reports_available = "reports_count" in parsed_md
     concrete_news_records = [x for x in news if not x.get("_placeholder_from_markdown")]
@@ -631,15 +746,16 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
     if not reports_count_available:
         schema_warnings.append("reports_published_count_not_available")
     selected, pending, skipped = _items(menzo, "selected"), _items(menzo, "pending"), _items(menzo, "skipped") or _items(menzo, "skipped_sample")
-    article_types = Counter(_article_type(x) for x in selected + news if _article_type(x) != "unknown")
-    if isinstance(parsed_md.get("article_types"), Counter):
-        article_types = parsed_md["article_types"]
     concrete_selected = [x for x in selected if not x.get("_placeholder_from_markdown")]
     concrete_news = [x for x in news if not x.get("_placeholder_from_markdown")]
     concrete_reports = [x for x in reports if not x.get("_placeholder_from_markdown")]
+    aggregate_items = _dedupe_editorial_aggregation_items(concrete_selected + concrete_news)
+    article_types = Counter(_article_type(x) for x in aggregate_items if _article_type(x) != "unknown")
+    if isinstance(parsed_md.get("article_types"), Counter):
+        article_types = parsed_md["article_types"]
     hard_soft_source = None if isinstance(parsed_md.get("article_types"), Counter) else ("records" if (concrete_selected or concrete_news) else None)
-    hard_count = sum(1 for x in concrete_selected + concrete_news if is_hard(x)) if hard_soft_source == "records" else None
-    soft_count = sum(1 for x in concrete_selected + concrete_news if is_soft(x)) if hard_soft_source == "records" else None
+    hard_count = sum(1 for x in aggregate_items if is_hard(x)) if hard_soft_source == "records" else None
+    soft_count = sum(1 for x in aggregate_items if is_soft(x)) if hard_soft_source == "records" else None
     if hard_soft_source is None and article_types:
         hard_count, soft_count = _article_type_hard_soft_counts(article_types)
         hard_soft_source = "article_types_markdown"
@@ -650,12 +766,14 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
     reports_published_count = (parsed_md.get("reports_count") if markdown_reports_available and official_counts_authoritative else (len(concrete_reports) if concrete_reports else (parsed_md.get("reports_count") if markdown_reports_available else (0 if report_stream_available else None))))
     dtype = day_type(news_published_count, reports_published_count, hard_count, story["story_reviews"])
     softpool = _nested(menzo, "softpool", "injected_candidates") or _nested(menzo, "daily_policy", "softpool_used") or any(x.get("from_softpool") for x in selected + pending + skipped)
-    warnings = _nested(_master(data), "alfred", "handoff", "warnings") or _nested(_master(data), "alfred", "postprocess", "warnings") or "n.d."
-    blockers = _nested(_master(data), "alfred", "handoff", "blockers") or "n.d."
-    if warnings == "n.d." and parsed_md.get("warnings") is not None:
-        warnings = parsed_md["warnings"]
-    if blockers == "n.d." and parsed_md.get("blockers") is not None:
-        blockers = parsed_md["blockers"]
+    warnings = parsed_md.get("warnings")
+    blockers = parsed_md.get("blockers")
+    if warnings is None:
+        warnings = _nested(_master(data), "alfred", "handoff", "warnings") or _nested(_master(data), "alfred", "postprocess", "warnings") or "n.d."
+    if blockers is None:
+        blockers = _nested(_master(data), "alfred", "handoff", "blockers") or "n.d."
+    warnings = _to_int_if_numeric(warnings)
+    blockers = _to_int_if_numeric(blockers)
     gemini_called = _gemini_35_calls(data)
     runs_completed = parsed_md.get("runs_completed")
     news_published_count = (parsed_md.get("news_count") if markdown_news_available and official_counts_authoritative else (len(concrete_news) if concrete_news else (parsed_md.get("news_count") if markdown_news_available else (0 if news_stream_available else None))))
@@ -667,8 +785,8 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
     published_total = (news_published_count or 0) + (reports_published_count or 0) if (news_published_count is not None or reports_published_count is not None) else None
     judgment = "OTTIMO" if (hard_count or 0) >= 8 and len(top_discarded(menzo, 1)) == 0 else "BUONO" if (published_total or 0) >= 8 else "DISCRETO" if (published_total or 0) >= 3 else "DEBOLE"
     top = top_discarded(menzo)
-    published_items_for_review = [x for x in selected + concrete_news if not _is_count_placeholder(x)]
-    borderline = [x for x in published_items_for_review if is_soft(x) or _score(x) < 65][:3]
+    published_items_for_review = _dedupe_editorial_aggregation_items([x for x in concrete_news if not _is_count_placeholder(x)])
+    borderline = [x for x in published_items_for_review if _is_borderline_published(x)][:3]
     news_label = str(news_published_count) if news_published_count is not None else "n.d."
     reports_label = str(reports_published_count) if reports_published_count is not None else "n.d."
     summary = f"Giornata {dtype} con {news_label} news e {reports_label} report show pubblicati. La copertura hard news è stimata a {hard_count if hard_count is not None else 'n.d.'} elementi e quella soft a {soft_count if soft_count is not None else 'n.d.'}; {'softpool usato' if softpool else 'softpool non usato'}."
@@ -712,7 +830,7 @@ def render_markdown(report: dict[str, Any]) -> str:
 
 
 def _compact_item(item: dict[str, Any]) -> dict[str, Any]:
-    compact = {"title": _title(item), "source": item.get("source") or "", "url": _url(item), "score": _score(item) or None, "article_type": _article_type(item), "priority": item.get("priority") or "", "menzo_decision": item.get("_decision_bucket") or item.get("decision") or "", "menzo_reason": item.get("reason") or "", "automatic_judgment": _auto_judgment(item) if item.get("_decision_bucket") else ""}
+    compact = {"title": _title(item), "source": item.get("source") or "", "url": _url(item), "score": _numeric_score(item), "article_type": _article_type(item), "priority": item.get("priority") or "", "menzo_decision": item.get("_decision_bucket") or item.get("decision") or "", "menzo_reason": item.get("menzo_reason") or item.get("reason") or "", "automatic_judgment": _auto_judgment(item) if item.get("_decision_bucket") else ""}
     if item.get("source_url"):
         compact["source_url"] = item.get("source_url")
     if _wp_link(item):

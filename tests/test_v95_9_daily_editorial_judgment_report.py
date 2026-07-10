@@ -263,7 +263,7 @@ Alfred warnings/blockers: 2/0
     payload = json.loads(json.dumps(__import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(report)))
     assert payload["daily_numbers"]["news_published"] == 15
     assert payload["daily_numbers"]["reports_published"] == 1
-    assert payload["daily_numbers"]["alfred"]["warnings"] == "2"
+    assert payload["daily_numbers"]["alfred"]["warnings"] == 2
     assert payload["daily_numbers"]["article_types"]["hard_news"] == 9
     assert payload["daily_numbers"]["hard_news_count"] == 9
     assert payload["daily_numbers"]["soft_news_count"] == 6
@@ -372,7 +372,7 @@ def test_real_vps_italian_markdown_labels_are_parsed_with_operational_preference
         "dichiarazione/reazione": 2,
         "report_show": 1,
     }
-    assert payload["daily_numbers"]["alfred"] == {"warnings": "20", "blockers": "1"}
+    assert payload["daily_numbers"]["alfred"] == {"warnings": 20, "blockers": 1}
     assert payload["daily_numbers"]["gemini_3_5_called_total"] == 0
     assert payload["hard_soft_balance"]["source"] == "article_types_markdown"
     assert payload["missing_artifacts"] == []
@@ -611,3 +611,130 @@ def test_report_records_are_extracted_from_master_log_simone_published_reports(t
     )
     assert payload["daily_numbers"]["reports_published"] == 2
     assert [item["title"] for item in payload["daily_numbers"]["report_records"]] == ["Show report", "Already show"]
+
+
+def test_markdown_alfred_counts_override_master_log_and_are_integers() -> None:
+    operational = """- Alfred blockers: 1
+- Alfred warnings: 20
+"""
+    master = {"alfred": {"handoff": {"warnings": 2, "blockers": "0"}}}
+    payload = __import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(
+        build_report({"operational_report": {"_format": "markdown", "_markdown": operational}, "master_log": master})
+    )
+    assert payload["daily_numbers"]["alfred"] == {"warnings": 20, "blockers": 1}
+    assert isinstance(payload["daily_numbers"]["alfred"]["warnings"], int)
+    assert isinstance(payload["daily_numbers"]["alfred"]["blockers"], int)
+
+
+def test_published_records_are_enriched_from_menzo_selected_by_source_url(tmp_path: Path) -> None:
+    now = datetime(2026, 7, 10, 12, tzinfo=timezone.utc)
+    master = write_jsonl(tmp_path / "state/newsroom/master_log.jsonl", [
+        {"recorded_at": now.isoformat(), "menzo": {"selected": [
+            {"title": "Menzo Finn", "source_url": "https://example.test/finn", "score": 100, "priority": "hard", "article_type": "hard_news", "decision": "selected", "reason": "major injury angle", "source": "Fightful", "category_hint": "wwe", "ai_priority_label": "high"},
+            {"title": "Menzo Kenny", "source_url": "https://example.test/kenny", "deterministic_score": 72, "priority": "soft", "article_type": "hard_news", "decision": "selected", "reason": "not urgent", "source": "WON"},
+            {"title": "Menzo Jack", "source_url": "https://example.test/jack", "score": 88, "priority": "hard", "article_type": "hard_news", "decision": "selected", "reason": "strong item", "source": "PWInsider"},
+        ]}, "publisher": {"published": [
+            {"title": "Finn Balor published", "source_url": "https://example.test/finn", "wp_link": "https://owrestling.test/finn"},
+            {"title": "Kenny Omega published", "source_url": "https://example.test/kenny", "wp_link": "https://owrestling.test/kenny"},
+            {"title": "Jack Perry published", "source_url": "https://example.test/jack", "wp_link": "https://owrestling.test/jack"},
+        ]}},
+    ])
+    payload = __import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(
+        build_report(load_inputs({"master_log": master}, now=now))
+    )
+    records = {item["source_url"]: item for item in payload["daily_numbers"]["news_records"]}
+    assert records["https://example.test/finn"]["title"] == "Finn Balor published"
+    assert records["https://example.test/finn"]["wp_link"] == "https://owrestling.test/finn"
+    assert records["https://example.test/finn"]["score"] == 100
+    assert records["https://example.test/finn"]["priority"] == "hard"
+    assert records["https://example.test/finn"]["article_type"] == "hard_news"
+    assert records["https://example.test/finn"]["menzo_decision"] == "selected"
+    assert records["https://example.test/finn"]["menzo_reason"] == "major injury angle"
+    assert records["https://example.test/kenny"]["score"] == 72
+    assert records["https://example.test/kenny"]["priority"] == "soft"
+    assert records["https://example.test/jack"]["score"] == 88
+
+
+def test_null_score_is_not_borderline_without_meaningful_metadata_and_enriched_soft_can_be_borderline() -> None:
+    report = build_report({"master_log": {"menzo": {"selected": [
+        {"source_url": "https://example.test/soft", "score": 72, "priority": "soft", "article_type": "strategic_discussion", "decision": "selected", "reason": "discussion piece"}
+    ]}, "publisher": {"published": [
+        {"title": "No metadata", "source_url": "https://example.test/no-meta"},
+        {"title": "Vince Russo", "source_url": "https://example.test/soft"},
+    ]}}})
+    payload = __import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(report)
+    assert [item["title"] for item in payload["daily_numbers"]["news_records"]] == ["No metadata", "Vince Russo"]
+    assert payload["daily_numbers"]["news_records"][0]["score"] is None
+    assert payload["borderline_published"] == [{
+        "title": "Vince Russo",
+        "source": "",
+        "url": "https://example.test/soft",
+        "score": 72,
+        "article_type": "strategic_discussion",
+        "priority": "soft",
+        "menzo_decision": "selected",
+        "menzo_reason": "discussion piece",
+        "automatic_judgment": "",
+        "source_url": "https://example.test/soft",
+    }]
+
+
+def test_menzo_enriched_published_records_do_not_double_count_aggregate_hard_soft(tmp_path: Path) -> None:
+    now = datetime(2026, 7, 10, 12, tzinfo=timezone.utc)
+    selected = [
+        {"title": f"Selected {idx}", "source_url": f"https://example.test/hard-{idx}", "score": 90 + idx, "priority": "hard", "article_type": "hard_news", "decision": "selected", "reason": "hard item"}
+        for idx in range(3)
+    ]
+    master = write_jsonl(tmp_path / "state/newsroom/master_log.jsonl", [
+        {"recorded_at": now.isoformat(), "menzo": {"selected": selected}, "publisher": {"published": [
+            {"title": f"Published {idx}", "source_url": f"https://example.test/hard-{idx}", "wp_link": f"https://owrestling.test/hard-{idx}"}
+            for idx in range(3)
+        ]}},
+    ])
+    payload = __import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(
+        build_report(load_inputs({"master_log": master}, now=now))
+    )
+    assert payload["daily_numbers"]["hard_news_count"] == 3
+    assert payload["daily_numbers"]["soft_news_count"] == 0
+    assert payload["daily_numbers"]["article_types"] == {"hard_news": 3}
+    assert payload["hard_soft_balance"]["source"] == "records"
+    assert [item["wp_link"] for item in payload["daily_numbers"]["news_records"]] == [
+        "https://owrestling.test/hard-0",
+        "https://owrestling.test/hard-1",
+        "https://owrestling.test/hard-2",
+    ]
+    assert payload["daily_numbers"]["news_records"][0]["score"] == 90
+
+
+def test_markdown_article_types_still_override_deduped_record_aggregates(tmp_path: Path) -> None:
+    now = datetime(2026, 7, 10, 12, tzinfo=timezone.utc)
+    master = write_jsonl(tmp_path / "state/newsroom/master_log.jsonl", [
+        {"recorded_at": now.isoformat(), "menzo": {"selected": [
+            {"title": "Selected hard", "source_url": "https://example.test/hard", "score": 90, "priority": "hard", "article_type": "hard_news"}
+        ]}, "publisher": {"published": [
+            {"title": "Published hard", "source_url": "https://example.test/hard", "wp_link": "https://owrestling.test/hard"}
+        ]}},
+    ])
+    editorial = """## 3. Tipologia contenuti pubblicati/rilevati
+- news_generica: 2
+"""
+    payload = __import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(
+        build_report(load_inputs({"master_log": master, "editorial_audit": write_json(tmp_path / "reports/audit.json", {"_markdown": editorial})}, now=now))
+    )
+    assert payload["daily_numbers"]["article_types"] == {"news_generica": 2}
+    assert payload["daily_numbers"]["hard_news_count"] == 0
+    assert payload["daily_numbers"]["soft_news_count"] == 2
+    assert payload["hard_soft_balance"]["source"] == "article_types_markdown"
+
+
+def test_borderline_published_dedupes_enriched_published_duplicates() -> None:
+    report = build_report({"master_log": {"menzo": {"selected": [
+        {"source_url": "https://example.test/soft-dupe", "score": 72, "priority": "soft", "article_type": "hard_news", "decision": "selected", "reason": "soft priority"}
+    ]}, "publisher": {"published": [
+        {"title": "Soft published", "source_url": "https://example.test/soft-dupe", "wp_link": "https://owrestling.test/soft-dupe"},
+        {"title": "Soft published duplicate", "source_url": "https://example.test/soft-dupe", "wp_link": "https://owrestling.test/soft-dupe-2"},
+    ]}}})
+    payload = __import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(report)
+    assert len(payload["borderline_published"]) == 1
+    assert payload["borderline_published"][0]["source_url"] == "https://example.test/soft-dupe"
+    assert payload["borderline_published"][0]["score"] == 72
