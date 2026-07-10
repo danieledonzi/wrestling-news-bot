@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
@@ -9,49 +10,103 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 REPORTS_DIR = ROOT / "reports"
 STATE_REPORTS_DIR = ROOT / "state" / "reports"
-DEFAULT_ARTIFACTS = {
-    "menzo_latest": ROOT / "state" / "newsroom" / "menzo_decisions_latest.json",
-    "menzo_artifact": ROOT / "artifacts" / "newsroom" / "menzo_decisions.json",
-    "master_log": ROOT / "artifacts" / "newsroom" / "master_log_latest.json",
-    "editorial_audit": ROOT / "reports" / "editorial_audit_v1_1_latest.json",
-    "story_cluster_audit": ROOT / "reports" / "story_cluster_audit_latest.json",
-    "gemini_summary": ROOT / "reports" / "gemini_diagnostics_summary_latest.json",
+DEFAULT_ARTIFACT_CANDIDATES: dict[str, tuple[str, ...]] = {
+    "menzo_latest": ("state/newsroom/menzo_decisions_latest.json", "artifacts/newsroom/menzo_decisions.json"),
+    "master_log": ("artifacts/newsroom/master_log_tail.jsonl", "logs/newsroom_master.log", "artifacts/newsroom/master_log_latest.json"),
+    "editorial_audit": ("reports/owtv_editorial_audit_v1_1_24h_*.json", "reports/owtv_editorial_audit_v1_1_24h_*.md", "reports/editorial_audit_v1_1_latest.json"),
+    "story_cluster_audit": ("reports/story_cluster_audit_v94_7_1_*.json", "reports/story_cluster_audit_v94_7_1_*.md", "reports/story_cluster_audit_latest.json"),
+    "gemini_ledger": ("state/newsroom/gemini_call_ledger.jsonl", "reports/gemini_diagnostics_summary_latest.json"),
 }
 HARD_TYPES = {"hard_news", "news_risultato", "news_evento", "report_show", "injury", "contract", "roster", "title_change", "business"}
 SOFT_TYPES = {"soft_news", "news_generica", "intervista", "rumor", "social", "curiosita"}
 MAJOR_TERMS = ("wwe", "aew", "title", "champion", "injury", "contract", "roster", "release", "business", "raw", "smackdown", "dynamite")
+COUNT_PATTERNS = {
+    "duplicate_candidates": r"Duplicate candidate:\s*(\d+)",
+    "same_story_clusters": r"Same story cluster:\s*(\d+)",
+    "same_event_clusters": r"Same event cluster:\s*(\d+)",
+    "story_reviews": r"Story review:\s*(\d+)",
+    "pairs_above_threshold": r"Coppie sopra soglia diagnostica:\s*(\d+)",
+}
 
 
-def _load(path: Path) -> dict[str, Any]:
+def _latest_glob(pattern: str) -> Path | None:
+    matches = [p for p in ROOT.glob(pattern) if p.is_file()]
+    return max(matches, key=lambda p: p.stat().st_mtime) if matches else None
+
+
+def resolve_artifact_paths(paths: dict[str, Path] | None = None) -> dict[str, Path | None]:
+    resolved: dict[str, Path | None] = {}
+    for name, candidates in DEFAULT_ARTIFACT_CANDIDATES.items():
+        found: Path | None = None
+        for candidate in candidates:
+            path = _latest_glob(candidate) if "*" in candidate else ROOT / candidate
+            if path and path.exists():
+                found = path
+                break
+        resolved[name] = found
+    if paths:
+        resolved.update(paths)
+    return resolved
+
+
+def _rel(path: Path | None, fallback: str) -> str:
+    if path is None:
+        return fallback
     try:
-        if path.exists():
+        return str(path.relative_to(ROOT))
+    except Exception:
+        return str(path)
+
+
+def _load_jsonl(path: Path) -> dict[str, Any]:
+    records: list[dict[str, Any]] = []
+    for line in path.read_text(encoding="utf-8", errors="ignore").splitlines():
+        line = line.strip()
+        if not line or not line.startswith("{"):
+            continue
+        try:
+            item = json.loads(line)
+        except Exception:
+            continue
+        if isinstance(item, dict):
+            records.append(item)
+    return {"_format": "jsonl", "records": records, "latest": records[-1] if records else {}}
+
+
+def _load(path: Path | None) -> dict[str, Any]:
+    if path is None or not path.exists():
+        return {}
+    try:
+        suffix = path.suffix.lower()
+        if suffix == ".json":
             data = json.loads(path.read_text(encoding="utf-8"))
             return data if isinstance(data, dict) else {}
-    except Exception:
-        return {}
+        if suffix == ".jsonl" or path.name.endswith(".log"):
+            return _load_jsonl(path)
+        if suffix == ".md":
+            return {"_format": "markdown", "_markdown": path.read_text(encoding="utf-8", errors="ignore")}
+    except Exception as exc:
+        return {"_schema_warning": f"read_failed:{exc}"}
     return {}
-
-
-def resolve_artifact_paths(paths: dict[str, Path] | None = None) -> dict[str, Path]:
-    selected = dict(DEFAULT_ARTIFACTS)
-    if paths:
-        selected.update(paths)
-    return selected
-
-
-def load_inputs(paths: dict[str, Path] | None = None) -> dict[str, Any]:
-    return {name: _load(path) for name, path in resolve_artifact_paths(paths).items()}
 
 
 def artifact_presence(paths: dict[str, Path] | None = None) -> tuple[list[str], list[str]]:
     used: list[str] = []
     missing: list[str] = []
     for name, path in resolve_artifact_paths(paths).items():
-        if path.exists():
-            used.append(str(path.relative_to(ROOT) if path.is_absolute() and path.is_relative_to(ROOT) else path))
+        if path and path.exists():
+            used.append(_rel(path, name))
         else:
-            missing.append(str(path.relative_to(ROOT) if path.is_absolute() and path.is_relative_to(ROOT) else path))
+            missing.append(name)
     return used, missing
+
+
+def load_inputs(paths: dict[str, Path] | None = None) -> dict[str, Any]:
+    resolved = resolve_artifact_paths(paths)
+    used, missing = artifact_presence(paths)
+    data = {name: _load(path) for name, path in resolved.items()}
+    data["__artifact_status__"] = {"used": used, "missing": missing}
+    return data
 
 
 def _items(data: dict[str, Any], key: str) -> list[dict[str, Any]]:
@@ -69,7 +124,7 @@ def _nested(data: dict[str, Any], *keys: str) -> Any:
 
 
 def _title(item: dict[str, Any]) -> str:
-    return str(item.get("title") or item.get("title_it") or item.get("headline") or "Senza titolo").strip()
+    return str(item.get("title") or item.get("title_it") or item.get("headline") or item.get("title_a") or "Senza titolo").strip()
 
 
 def _url(item: dict[str, Any]) -> str:
@@ -86,7 +141,7 @@ def _score(item: dict[str, Any]) -> int:
 
 
 def _article_type(item: dict[str, Any]) -> str:
-    return str(item.get("article_type") or item.get("type") or item.get("category") or "unknown").strip().lower()
+    return str(item.get("article_type") or item.get("type") or item.get("category") or item.get("cluster_type") or "unknown").strip().lower()
 
 
 def is_hard(item: dict[str, Any]) -> bool:
@@ -102,20 +157,37 @@ def is_soft(item: dict[str, Any]) -> bool:
 
 
 def collect_menzo(data: dict[str, Any]) -> dict[str, Any]:
-    menzo = data.get("menzo_latest") or data.get("menzo_artifact") or {}
+    menzo = data.get("menzo_latest") or {}
+    if not menzo and isinstance(_nested(data.get("master_log", {}), "latest", "menzo"), dict):
+        menzo = _nested(data.get("master_log", {}), "latest", "menzo")
     if not menzo and isinstance(_nested(data.get("master_log", {}), "menzo"), dict):
         menzo = _nested(data.get("master_log", {}), "menzo")
     return menzo if isinstance(menzo, dict) else {}
 
 
-def collect_published(data: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+def _master(data: dict[str, Any]) -> dict[str, Any]:
     master = data.get("master_log", {})
-    news = _items(_nested(master, "publisher") or {}, "published") + [r for r in _items(_nested(master, "publisher") or {}, "results") if str(r.get("status")) == "published"]
-    reports = _items(_nested(master, "simone") or {}, "published_reports")
-    return news, reports
+    if isinstance(master.get("latest"), dict):
+        return master["latest"]
+    return master if isinstance(master, dict) else {}
 
 
-def day_type(news_count: int, report_count: int, hard_count: int, story_reviews: int = 0) -> str:
+def collect_published(data: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
+    master = _master(data)
+    publisher = _nested(master, "publisher") or {}
+    news = _items(publisher, "published") + [r for r in _items(publisher, "results") if str(r.get("status")) == "published"]
+    simone = _nested(master, "simone") or {}
+    all_reports = _items(simone, "published_reports")
+    reports = [r for r in all_reports if str(r.get("status") or "").lower() == "published"]
+    report_status_counts = Counter(str(r.get("status") or "unknown").lower() for r in all_reports)
+    return news, reports, {"available": bool(master), "report_status_counts": dict(report_status_counts)}
+
+
+def day_type(news_count: int | None, report_count: int | None, hard_count: int | None, story_reviews: int | None = 0) -> str:
+    news_count = news_count or 0
+    report_count = report_count or 0
+    hard_count = hard_count or 0
+    story_reviews = story_reviews or 0
     if report_count > 0:
         return "post-show"
     if news_count >= 18 or hard_count >= 10 or story_reviews >= 5:
@@ -157,125 +229,148 @@ def _auto_judgment(item: dict[str, Any]) -> str:
     return "scarto probabilmente corretto"
 
 
+def _count_from_markdown(text: str, key: str) -> int | None:
+    pattern = COUNT_PATTERNS.get(key)
+    if not pattern:
+        return None
+    match = re.search(pattern, text, re.I)
+    return int(match.group(1)) if match else None
+
+
+def parse_story_cluster_audit(data: dict[str, Any]) -> dict[str, Any]:
+    warnings: list[str] = []
+    counts = data.get("counts") if isinstance(data.get("counts"), dict) else {}
+    markdown = str(data.get("_markdown") or "")
+    def count(name: str, legacy_list: str) -> int | None:
+        if name in counts:
+            try:
+                return int(counts[name])
+            except Exception:
+                warnings.append(f"story_cluster_count_invalid:{name}")
+        if isinstance(data.get(legacy_list), list):
+            return len(data[legacy_list])
+        if legacy_list == "story_review" and isinstance(data.get("story_reviews"), list):
+            return len(data["story_reviews"])
+        return _count_from_markdown(markdown, name)
+    pairs = _items(data, "pairs")
+    suspicious_pairs = [p for p in pairs if _article_type(p) in {"duplicate_candidate", "same_story_cluster", "same_event_cluster", "story_review"}]
+    if not counts and not markdown and not pairs and data:
+        warnings.append("story_cluster_schema_unrecognized")
+    return {
+        "duplicate_candidates": count("duplicate_candidates", "duplicate_candidates"),
+        "same_story_clusters": count("same_story_clusters", "same_story_clusters"),
+        "same_event_clusters": count("same_event_clusters", "same_event_clusters"),
+        "story_reviews": count("story_reviews", "story_review"),
+        "pairs_above_threshold": count("pairs_above_threshold", "pairs") if count("pairs_above_threshold", "pairs") is not None else (len(pairs) if pairs else None),
+        "clusters": data.get("clusters") if isinstance(data.get("clusters"), list) else [],
+        "story_review_items": _items(data, "story_review") or _items(data, "story_reviews") or [p for p in pairs if _article_type(p) == "story_review"],
+        "suspicious_pairs": sorted(suspicious_pairs, key=lambda p: float(p.get("score") or 0), reverse=True)[:5],
+        "schema_warnings": warnings,
+    }
+
+
+def _gemini_35_calls(data: dict[str, Any]) -> int | str:
+    ledger = data.get("gemini_ledger", {})
+    if isinstance(ledger.get("records"), list):
+        total = 0
+        for record in ledger["records"]:
+            model = str(record.get("model") or record.get("actual_model") or record.get("selected_model") or "").lower()
+            status = str(record.get("status") or "called").lower()
+            if "3.5" in model and status != "avoided":
+                total += 1
+        return total
+    return _nested(ledger, "models", "gemini-3.5", "called") or _nested(ledger, "gemini_3_5_called_total") or "n.d."
+
+
 def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, source_artifacts_used: list[str] | None = None, missing_artifacts: list[str] | None = None) -> dict[str, Any]:
     generated_at = generated_at or datetime.now(timezone.utc)
+    status = data.get("__artifact_status__", {}) if isinstance(data.get("__artifact_status__"), dict) else {}
+    used = source_artifacts_used if source_artifacts_used is not None else list(status.get("used") or [])
+    missing = missing_artifacts if missing_artifacts is not None else list(status.get("missing") or [])
+    schema_warnings: list[str] = []
     menzo = collect_menzo(data)
-    news, reports = collect_published(data)
+    news, reports, published_meta = collect_published(data)
+    if not published_meta["available"]:
+        schema_warnings.append("published_counts_not_available")
     selected, pending, skipped = _items(menzo, "selected"), _items(menzo, "pending"), _items(menzo, "skipped") or _items(menzo, "skipped_sample")
-    hard_count = sum(1 for x in selected + news if is_hard(x))
-    soft_count = sum(1 for x in selected + news if is_soft(x))
-    story_audit = data.get("story_cluster_audit", {})
-    story_reviews = _items(story_audit, "story_review") or _items(story_audit, "story_reviews")
-    clusters = _items(story_audit, "same_story_clusters") or _items(story_audit, "suspicious_story_clusters")
-    duplicate_candidates = len(_items(story_audit, "duplicate_candidates"))
-    dtype = day_type(len(news), len(reports), hard_count, len(story_reviews))
+    hard_count = sum(1 for x in selected + news if is_hard(x)) if (menzo or published_meta["available"]) else None
+    soft_count = sum(1 for x in selected + news if is_soft(x)) if (menzo or published_meta["available"]) else None
+    story = parse_story_cluster_audit(data.get("story_cluster_audit", {}))
+    schema_warnings.extend(story["schema_warnings"])
+    dtype = day_type(len(news) if published_meta["available"] else None, len(reports), hard_count, story["story_reviews"])
     softpool = _nested(menzo, "softpool", "injected_candidates") or _nested(menzo, "daily_policy", "softpool_used") or any(x.get("from_softpool") for x in selected + pending + skipped)
-    warnings = _nested(data.get("master_log", {}), "alfred", "handoff", "warnings") or _nested(data.get("master_log", {}), "alfred", "postprocess", "warnings") or 0
-    blockers = _nested(data.get("master_log", {}), "alfred", "handoff", "blockers") or 0
-    gemini_called = _nested(data.get("gemini_summary", {}), "models", "gemini-3.5", "called") or _nested(data.get("gemini_summary", {}), "gemini_3_5_called_total") or "n/d"
+    warnings = _nested(_master(data), "alfred", "handoff", "warnings") or _nested(_master(data), "alfred", "postprocess", "warnings") or "n.d."
+    blockers = _nested(_master(data), "alfred", "handoff", "blockers") or "n.d."
+    gemini_called = _gemini_35_calls(data)
     article_types = Counter(_article_type(x) for x in selected + news if _article_type(x) != "unknown")
-    judgment = "OTTIMO" if hard_count >= 8 and len(top_discarded(menzo, 1)) == 0 else "BUONO" if len(news) + len(reports) >= 8 else "DISCRETO" if len(news) + len(reports) >= 3 else "DEBOLE"
+    published_total = len(news) + len(reports) if published_meta["available"] else None
+    judgment = "OTTIMO" if (hard_count or 0) >= 8 and len(top_discarded(menzo, 1)) == 0 else "BUONO" if (published_total or 0) >= 8 else "DISCRETO" if (published_total or 0) >= 3 else "DEBOLE"
     top = top_discarded(menzo)
     borderline = [x for x in selected + news if is_soft(x) or _score(x) < 65][:3]
-    summary = f"Giornata {dtype} con {len(news)} news e {len(reports)} report show pubblicati. La copertura hard news è stimata a {hard_count} elementi e quella soft a {soft_count}; {'softpool usato' if softpool else 'softpool non usato'}."
+    news_label = str(len(news)) if published_meta["available"] else "n.d."
+    summary = f"Giornata {dtype} con {news_label} news e {len(reports)} report show pubblicati. La copertura hard news è stimata a {hard_count if hard_count is not None else 'n.d.'} elementi e quella soft a {soft_count if soft_count is not None else 'n.d.'}; {'softpool usato' if softpool else 'softpool non usato'}."
     if top:
         summary += " Il principale controllo umano riguarda: " + _title(top[0]) + "."
     else:
         summary += " Non emergono forti candidati scartati da recuperare."
-    return {"generated_at": generated_at, "source_artifacts_used": source_artifacts_used or [], "missing_artifacts": missing_artifacts or [], "menzo": menzo, "news": news, "reports": reports, "selected": selected, "pending": pending, "skipped": skipped, "hard_count": hard_count, "soft_count": soft_count, "story_reviews": story_reviews, "clusters": clusters, "duplicate_candidates": duplicate_candidates, "day_type": dtype, "softpool": bool(softpool), "warnings": warnings, "blockers": blockers, "gemini_called": gemini_called, "article_types": article_types, "judgment": judgment, "top_discarded": top, "borderline": borderline, "summary": summary}
+    return {"generated_at": generated_at, "source_artifacts_used": used, "missing_artifacts": missing, "schema_warnings": schema_warnings, "published_available": published_meta["available"], "report_status_counts": published_meta["report_status_counts"], "menzo": menzo, "news": news, "reports": reports, "selected": selected, "pending": pending, "skipped": skipped, "hard_count": hard_count, "soft_count": soft_count, "story": story, "day_type": dtype, "softpool": bool(softpool), "warnings": warnings, "blockers": blockers, "gemini_called": gemini_called, "article_types": article_types, "judgment": judgment, "top_discarded": top, "borderline": borderline, "summary": summary}
+
+
+def _num(value: Any) -> str:
+    return str(value) if value is not None else "n.d."
 
 
 def render_markdown(report: dict[str, Any]) -> str:
-    lines = ["# OWTV Daily Editorial Judgment 24h", "", "## Daily Editorial Judgment", "", f"- Judgment: {report['judgment']}", f"- Day type: {report['day_type']}", "", report["summary"], "", "## Daily numbers", "", f"- runs completed: {1 if (report['news'] or report['reports'] or report['selected']) else 0}", f"- news published: {len(report['news'])}", f"- reports published: {len(report['reports'])}", f"- article types: {dict(report['article_types']) or 'n/d'}", f"- Menzo first decision selected/pending/skipped: {len(report['selected'])}/{len(report['pending'])}/{len(report['skipped'])}", f"- final selected/pending/skipped: {len(report['selected'])}/{len(report['pending'])}/{len(report['skipped'])}", f"- hard news count: {report['hard_count']} (stima)", f"- soft news count: {report['soft_count']} (stima)", f"- softpool used: {'yes' if report['softpool'] else 'no'}", f"- Alfred warnings/blockers: {report['warnings']}/{report['blockers']}", f"- duplicate candidates / same story clusters / story reviews: {report['duplicate_candidates']} / {len(report['clusters'])} / {len(report['story_reviews'])}", f"- Gemini 3.5 called total: {report['gemini_called']}", "", "## Hard vs soft editorial balance", "", f"Stima: {report['hard_count']} hard news e {report['soft_count']} soft news. " + ("Il ricorso al softpool sembra giustificato solo se le hard news erano limitate." if report['softpool'] else "Softpool non usato: scelta coerente se la giornata aveva sufficiente materiale hard o nessun soft recuperabile."), "", "## Top 3 discarded URLs for human control", ""]
+    story = report["story"]
+    lines = ["# OWTV Daily Editorial Judgment 24h", "", "## Daily Editorial Judgment", "", f"- Judgment: {report['judgment']}", f"- Day type: {report['day_type']}", "", report["summary"], "", "## Daily numbers", "", f"- runs completed: {1 if (report['published_available'] or report['selected']) else 'n.d.'}", f"- news published: {len(report['news']) if report['published_available'] else 'n.d.'}", f"- reports published: {len(report['reports'])}", f"- article types: {dict(report['article_types']) or 'n.d.'}", f"- Menzo first decision selected/pending/skipped: {len(report['selected'])}/{len(report['pending'])}/{len(report['skipped'])}", f"- final selected/pending/skipped: {len(report['selected'])}/{len(report['pending'])}/{len(report['skipped'])}", f"- hard news count: {_num(report['hard_count'])} (stima)", f"- soft news count: {_num(report['soft_count'])} (stima)", f"- softpool used: {'yes' if report['softpool'] else 'no'}", f"- Alfred warnings/blockers: {report['warnings']}/{report['blockers']}", f"- duplicate candidates / same story clusters / same event clusters / story reviews: {_num(story['duplicate_candidates'])} / {_num(story['same_story_clusters'])} / {_num(story['same_event_clusters'])} / {_num(story['story_reviews'])}", f"- suspicious pairs above threshold: {_num(story['pairs_above_threshold'])}", f"- Gemini 3.5 called total: {report['gemini_called']}", "", "## Hard vs soft editorial balance", "", f"Stima: {_num(report['hard_count'])} hard news e {_num(report['soft_count'])} soft news. " + ("Il ricorso al softpool sembra giustificato solo se le hard news erano limitate." if report['softpool'] else "Softpool non usato: scelta coerente se la giornata aveva sufficiente materiale hard o nessun soft recuperabile."), "", "## Top 3 discarded URLs for human control", ""]
     if not report["top_discarded"]:
         lines.append("Nessun forte candidato scartato/pending emerso dagli artefatti disponibili.")
     for item in report["top_discarded"]:
-        lines += [f"### {_title(item)}", f"- source: {item.get('source') or 'n/d'}", f"- url: {_url(item) or 'n/d'}", f"- score: {_score(item) or 'n/d'}", f"- article_type: {_article_type(item)}", f"- priority: {item.get('priority') or 'n/d'}", f"- Menzo decision/reason: {item.get('_decision_bucket')} / {item.get('reason') or 'n/d'}", "- why it is worth checking: punteggio/priorità o rilevanza potenziale per il pubblico OWTV.", f"- automatic judgment: {_auto_judgment(item)}", ""]
+        lines += [f"### {_title(item)}", f"- source: {item.get('source') or 'n.d.'}", f"- url: {_url(item) or 'n.d.'}", f"- score: {_score(item) or 'n.d.'}", f"- article_type: {_article_type(item)}", f"- priority: {item.get('priority') or 'n.d.'}", f"- Menzo decision/reason: {item.get('_decision_bucket')} / {item.get('reason') or 'n.d.'}", "- why it is worth checking: punteggio/priorità o rilevanza potenziale per il pubblico OWTV.", f"- automatic judgment: {_auto_judgment(item)}", ""]
     lines += ["## Published borderline/soft picks", ""]
     if not report["borderline"]:
         lines.append("Nessun pick pubblicato chiaramente borderline/soft dagli artefatti disponibili.")
     for item in report["borderline"]:
-        lines += [f"- {_title(item)} — type={_article_type(item)}, score={_score(item) or 'n/d'}, valutazione: accettabile se utile al mix quotidiano; da monitorare se sostituisce hard news."]
-    lines += ["", "## Redundancy and show-report integration", "", f"Duplicate risk: {'high' if len(report['clusters']) > 3 else 'medium' if report['clusters'] else 'low'}. Same-story clusters: {len(report['clusters'])}. Story_review items: {len(report['story_reviews'])}. Le news risultato/evento vanno controllate rispetto ai report show quando presenti; pubblicazione post-show {'presente' if report['reports'] else 'non presente'}.", ""]
-    if report["story_reviews"]:
-        lines.append("Story_review inclusi: " + "; ".join(_title(x) for x in report["story_reviews"][:5]))
-    lines += ["", "## Editorial risks and patterns of the day", "", "- " + ("news_generica/soft da monitorare." if report['soft_count'] > report['hard_count'] else "no major issue found nella stima hard/soft."), "- controllare eventuali sovrapposizioni tra news evento/risultato e report show.", "", "## Recommended actions", "", "1. Rivedere il primo URL scartato/pending se presente.", "2. Monitorare il rapporto hard/soft nel prossimo ciclo.", "3. Rafforzare il controllo post-show se emergono duplicazioni con report.", ""]
+        lines += [f"- {_title(item)} — type={_article_type(item)}, score={_score(item) or 'n.d.'}, valutazione: accettabile se utile al mix quotidiano; da monitorare se sostituisce hard news."]
+    lines += ["", "## Redundancy and show-report integration", "", f"Duplicate risk: {'high' if (story['same_story_clusters'] or 0) > 3 else 'medium' if (story['same_story_clusters'] or story['duplicate_candidates'] or story['same_event_clusters']) else 'low'}. Same-story clusters: {_num(story['same_story_clusters'])}. Story_review items: {_num(story['story_reviews'])}. Le news risultato/evento vanno controllate rispetto ai report show quando presenti; pubblicazione post-show {'presente' if report['reports'] else 'non presente'}.", ""]
+    if story["suspicious_pairs"]:
+        lines.append("Top suspicious pairs:")
+        for pair in story["suspicious_pairs"][:3]:
+            lines.append(f"- {_article_type(pair)} score={pair.get('score')}: {pair.get('title_a')} / {pair.get('title_b')}")
+    if story["story_review_items"]:
+        lines.append("Story_review inclusi: " + "; ".join(_title(x) for x in story["story_review_items"][:5]))
+    if report["schema_warnings"]:
+        lines += ["", "Schema warnings:"] + [f"- {w}" for w in report["schema_warnings"]]
+    lines += ["", "## Editorial risks and patterns of the day", "", "- " + ("news_generica/soft da monitorare." if (report['soft_count'] or 0) > (report['hard_count'] or 0) else "no major issue found nella stima hard/soft."), "- controllare eventuali sovrapposizioni tra news evento/risultato e report show.", "", "## Recommended actions", "", "1. Rivedere il primo URL scartato/pending se presente.", "2. Monitorare il rapporto hard/soft nel prossimo ciclo.", "3. Rafforzare il controllo post-show se emergono duplicazioni con report.", ""]
     return "\n".join(lines)
 
 
 def _compact_item(item: dict[str, Any]) -> dict[str, Any]:
-    return {
-        "title": _title(item),
-        "source": item.get("source") or "",
-        "url": _url(item),
-        "score": _score(item) or None,
-        "article_type": _article_type(item),
-        "priority": item.get("priority") or "",
-        "menzo_decision": item.get("_decision_bucket") or item.get("decision") or "",
-        "menzo_reason": item.get("reason") or "",
-        "automatic_judgment": _auto_judgment(item) if item.get("_decision_bucket") else "",
-    }
+    return {"title": _title(item), "source": item.get("source") or "", "url": _url(item), "score": _score(item) or None, "article_type": _article_type(item), "priority": item.get("priority") or "", "menzo_decision": item.get("_decision_bucket") or item.get("decision") or "", "menzo_reason": item.get("reason") or "", "automatic_judgment": _auto_judgment(item) if item.get("_decision_bucket") else ""}
+
+
+def _compact_pair(item: dict[str, Any]) -> dict[str, Any]:
+    return {"title_a": item.get("title_a") or "", "title_b": item.get("title_b") or "", "score": item.get("score"), "cluster_type": item.get("cluster_type") or "", "reason": item.get("reason") or ""}
 
 
 def structured_json(report: dict[str, Any]) -> dict[str, Any]:
-    daily_numbers = {
-        "runs_completed": 1 if (report["news"] or report["reports"] or report["selected"]) else 0,
-        "news_published": len(report["news"]),
-        "reports_published": len(report["reports"]),
-        "article_types": dict(report["article_types"]),
-        "menzo_first_decision": {"selected": len(report["selected"]), "pending": len(report["pending"]), "skipped": len(report["skipped"])},
-        "final_decision": {"selected": len(report["selected"]), "pending": len(report["pending"]), "skipped": len(report["skipped"])},
-        "hard_news_count": report["hard_count"],
-        "soft_news_count": report["soft_count"],
-        "softpool_used": report["softpool"],
-        "alfred": {"warnings": report["warnings"], "blockers": report["blockers"]},
-        "duplicate_candidates": report["duplicate_candidates"],
-        "same_story_clusters": len(report["clusters"]),
-        "story_reviews": len(report["story_reviews"]),
-        "gemini_3_5_called_total": report["gemini_called"],
-    }
-    hard_soft_balance = {
-        "hard_news_count": report["hard_count"],
-        "soft_news_count": report["soft_count"],
-        "softpool_used": report["softpool"],
-        "is_estimate": True,
-        "explanation": "Stima deterministica da priority, article_type, score e decisioni Menzo disponibili.",
-    }
-    redundancy_risks = {
-        "duplicate_risk": "high" if len(report["clusters"]) > 3 else "medium" if report["clusters"] else "low",
-        "same_story_clusters": len(report["clusters"]),
-        "story_review_items": [_compact_item(x) for x in report["story_reviews"][:10]],
-        "show_report_integration": "post-show presente" if report["reports"] else "nessun report show pubblicato negli artefatti disponibili",
-    }
-    recommended_actions = [
-        "Rivedere il primo URL scartato/pending se presente.",
-        "Monitorare il rapporto hard/soft nel prossimo ciclo.",
-        "Rafforzare il controllo post-show se emergono duplicazioni con report.",
-    ]
-    return {
-        "judgment": report["judgment"],
-        "day_type": report["day_type"],
-        "summary": report["summary"],
-        "daily_numbers": daily_numbers,
-        "hard_soft_balance": hard_soft_balance,
-        "top_discarded_candidates": [_compact_item(x) for x in report["top_discarded"]],
-        "borderline_published": [_compact_item(x) for x in report["borderline"]],
-        "redundancy_risks": redundancy_risks,
-        "recommended_actions": recommended_actions,
-        "generated_at": report["generated_at"].isoformat(),
-        "source_artifacts_used": report["source_artifacts_used"],
-        "missing_artifacts": report["missing_artifacts"],
-    }
+    story = report["story"]
+    daily_numbers = {"runs_completed": 1 if (report["published_available"] or report["selected"]) else None, "news_published": len(report["news"]) if report["published_available"] else None, "reports_published": len(report["reports"]), "report_status_counts": report["report_status_counts"], "article_types": dict(report["article_types"]), "menzo_first_decision": {"selected": len(report["selected"]), "pending": len(report["pending"]), "skipped": len(report["skipped"])}, "final_decision": {"selected": len(report["selected"]), "pending": len(report["pending"]), "skipped": len(report["skipped"])}, "hard_news_count": report["hard_count"], "soft_news_count": report["soft_count"], "softpool_used": report["softpool"], "alfred": {"warnings": report["warnings"], "blockers": report["blockers"]}, "duplicate_candidates": story["duplicate_candidates"], "same_story_clusters": story["same_story_clusters"], "same_event_clusters": story["same_event_clusters"], "story_reviews": story["story_reviews"], "pairs_above_threshold": story["pairs_above_threshold"], "gemini_3_5_called_total": report["gemini_called"]}
+    hard_soft_balance = {"hard_news_count": report["hard_count"], "soft_news_count": report["soft_count"], "softpool_used": report["softpool"], "is_estimate": True, "explanation": "Stima deterministica da priority, article_type, score e decisioni Menzo disponibili; n.d. se mancano gli artefatti affidabili."}
+    redundancy_risks = {"duplicate_risk": "high" if (story["same_story_clusters"] or 0) > 3 else "medium" if (story["same_story_clusters"] or story["duplicate_candidates"] or story["same_event_clusters"]) else "low", "duplicate_candidate_count": story["duplicate_candidates"], "same_story_cluster_count": story["same_story_clusters"], "same_event_cluster_count": story["same_event_clusters"], "story_review_count": story["story_reviews"], "pairs_above_threshold": story["pairs_above_threshold"], "top_suspicious_pairs": [_compact_pair(x) for x in story["suspicious_pairs"]], "story_review_items": [_compact_pair(x) if x.get("title_a") else _compact_item(x) for x in story["story_review_items"][:10]], "show_report_integration": "post-show presente" if report["reports"] else "nessun report show pubblicato negli artefatti disponibili"}
+    return {"judgment": report["judgment"], "day_type": report["day_type"], "summary": report["summary"], "daily_numbers": daily_numbers, "hard_soft_balance": hard_soft_balance, "top_discarded_candidates": [_compact_item(x) for x in report["top_discarded"]], "borderline_published": [_compact_item(x) for x in report["borderline"]], "redundancy_risks": redundancy_risks, "recommended_actions": ["Rivedere il primo URL scartato/pending se presente.", "Monitorare il rapporto hard/soft nel prossimo ciclo.", "Rafforzare il controllo post-show se emergono duplicazioni con report."], "generated_at": report["generated_at"].isoformat(), "source_artifacts_used": report["source_artifacts_used"], "missing_artifacts": report["missing_artifacts"], "schema_warnings": report["schema_warnings"]}
 
 
 def email_summary(report: dict[str, Any]) -> str:
     top = report["top_discarded"][0] if report["top_discarded"] else None
-    return "\n".join(["Daily Editorial Judgment:", f"- Judgment: {report['judgment']}", f"- Day type: {report['day_type']}", f"- Published: {len(report['news'])} news / {len(report['reports'])} report", f"- Hard/soft balance: {report['hard_count']} hard vs {report['soft_count']} soft (stima)", f"- Top concern: {'controllare scarti/pending ad alta rilevanza' if top else 'nessun forte candidato scartato emerso'}", f"- Top discarded URL: {_url(top) if top else 'n/d'}"])
+    news_count = len(report["news"]) if report["published_available"] else "n.d."
+    return "\n".join(["Daily Editorial Judgment:", f"- Judgment: {report['judgment']}", f"- Day type: {report['day_type']}", f"- Published: {news_count} news / {len(report['reports'])} report", f"- Hard/soft balance: {_num(report['hard_count'])} hard vs {_num(report['soft_count'])} soft (stima)", f"- Top concern: {'controllare scarti/pending ad alta rilevanza' if top else 'nessun forte candidato scartato emerso'}", f"- Top discarded URL: {_url(top) if top else 'n.d.'}"])
 
 
 def generate_daily_editorial_judgment_outputs(paths: dict[str, Path] | None = None, output_dir: Path = REPORTS_DIR, state_dir: Path = STATE_REPORTS_DIR, now: datetime | None = None) -> dict[str, Path]:
-    used, missing = artifact_presence(paths)
-    report = build_report(load_inputs(paths), generated_at=now, source_artifacts_used=used, missing_artifacts=missing)
+    data = load_inputs(paths)
+    status = data.get("__artifact_status__", {})
+    report = build_report(data, generated_at=now, source_artifacts_used=list(status.get("used") or []), missing_artifacts=list(status.get("missing") or []))
     output_dir.mkdir(parents=True, exist_ok=True)
     state_dir.mkdir(parents=True, exist_ok=True)
     ts = (now or report["generated_at"]).strftime("%Y%m%d_%H%M%S")
@@ -283,8 +378,7 @@ def generate_daily_editorial_judgment_outputs(paths: dict[str, Path] | None = No
     json_path = output_dir / f"owtv_daily_editorial_judgment_24h_{ts}.json"
     latest_json_path = state_dir / "owtv_daily_editorial_judgment_latest.json"
     markdown_path.write_text(render_markdown(report), encoding="utf-8")
-    payload = structured_json(report)
-    json_text = json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+    json_text = json.dumps(structured_json(report), ensure_ascii=False, indent=2, sort_keys=True) + "\n"
     json_path.write_text(json_text, encoding="utf-8")
     latest_json_path.write_text(json_text, encoding="utf-8")
     return {"markdown": markdown_path, "json": json_path, "latest_json": latest_json_path}
@@ -296,5 +390,4 @@ def generate_daily_editorial_judgment_report(paths: dict[str, Path] | None = Non
 
 
 if __name__ == "__main__":
-    path = generate_daily_editorial_judgment_report()
-    print(path)
+    print(generate_daily_editorial_judgment_report())

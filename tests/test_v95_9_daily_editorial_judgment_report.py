@@ -63,13 +63,15 @@ def test_structured_json_companion_and_latest_state_are_written(tmp_path: Path) 
         "missing_artifacts",
     }
     assert payload["top_discarded_candidates"][0]["url"] == "https://x/title"
-    assert any("missing-master.json" in item for item in payload["missing_artifacts"])
+    assert payload["daily_numbers"]["news_published"] is None
+    assert any("missing-master.json" in item or item == "master_log" for item in payload["missing_artifacts"])
+    assert "schema_warnings" in payload
 
 
 def test_missing_artifacts_are_non_fatal(tmp_path: Path) -> None:
     data = load_inputs({"menzo_latest": tmp_path / "missing.json", "story_cluster_audit": tmp_path / "nope.json"})
     text = render_markdown(build_report(data))
-    assert "news published: 0" in text
+    assert "news published: n.d." in text
     assert "Nessun forte candidato" in text
 
 
@@ -114,3 +116,82 @@ def test_email_summary_generation_if_implemented() -> None:
     summary = email_summary(report)
     assert "Judgment:" in summary
     assert "Top discarded URL: https://x/top" in summary
+
+
+def test_default_input_discovery_with_real_style_artifact_names(tmp_path: Path, monkeypatch) -> None:
+    import scripts.daily_editorial_judgment as dej
+
+    (tmp_path / "state/newsroom").mkdir(parents=True)
+    (tmp_path / "artifacts/newsroom").mkdir(parents=True)
+    (tmp_path / "reports").mkdir(parents=True)
+    write_json(tmp_path / "state/newsroom/menzo_decisions_latest.json", {"selected": [], "pending": [], "skipped": []})
+    (tmp_path / "artifacts/newsroom/master_log_tail.jsonl").write_text(json.dumps({"publisher": {"published": []}, "simone": {"published_reports": []}}) + "\n", encoding="utf-8")
+    write_json(tmp_path / "reports/story_cluster_audit_v94_7_1_2026-07-10_12-00.json", {"counts": {"duplicate_candidates": 2, "same_story_clusters": 1, "same_event_clusters": 1, "story_reviews": 3, "pairs_above_threshold": 4}, "pairs": []})
+    (tmp_path / "state/newsroom/gemini_call_ledger.jsonl").write_text(json.dumps({"model": "gemini-3.5-pro", "status": "called"}) + "\n", encoding="utf-8")
+    monkeypatch.setattr(dej, "ROOT", tmp_path)
+    data = dej.load_inputs()
+    assert any("master_log_tail.jsonl" in p for p in data["__artifact_status__"]["used"])
+    assert data["story_cluster_audit"]["counts"]["duplicate_candidates"] == 2
+    assert data["gemini_ledger"]["records"][0]["model"] == "gemini-3.5-pro"
+
+
+def test_missing_defaults_do_not_produce_misleading_zero_published_day(tmp_path: Path, monkeypatch) -> None:
+    import scripts.daily_editorial_judgment as dej
+
+    monkeypatch.setattr(dej, "ROOT", tmp_path)
+    report = dej.build_report(dej.load_inputs())
+    payload = dej.structured_json(report)
+    assert payload["daily_numbers"]["news_published"] is None
+    assert "published_counts_not_available" in payload["schema_warnings"]
+    assert payload["missing_artifacts"]
+
+
+def test_story_cluster_real_schema_counts_and_pairs_are_parsed_correctly() -> None:
+    report = build_report({"story_cluster_audit": {"counts": {"duplicate_candidates": 2, "same_story_clusters": 3, "same_event_clusters": 1, "story_reviews": 4, "pairs_above_threshold": 7}, "pairs": [
+        {"cluster_type": "same_story_cluster", "score": 0.91, "title_a": "A", "title_b": "B", "reason": "same"},
+        {"cluster_type": "story_review", "score": 0.55, "title_a": "C", "title_b": "D", "reason": "review"},
+    ]}})
+    payload = json.loads(json.dumps(__import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(report)))
+    assert payload["daily_numbers"]["duplicate_candidates"] == 2
+    assert payload["redundancy_risks"]["same_story_cluster_count"] == 3
+    assert payload["redundancy_risks"]["same_event_cluster_count"] == 1
+    assert payload["redundancy_risks"]["story_review_count"] == 4
+    assert payload["redundancy_risks"]["pairs_above_threshold"] == 7
+    assert payload["redundancy_risks"]["top_suspicious_pairs"][0]["title_a"] == "A"
+
+
+def test_story_cluster_markdown_fallback_counts() -> None:
+    md = """# audit\n- Coppie sopra soglia diagnostica: 9\n- Duplicate candidate: 2\n- Same story cluster: 3\n- Same event cluster: 4\n- Story review: 5\n"""
+    report = build_report({"story_cluster_audit": {"_format": "markdown", "_markdown": md}})
+    payload = __import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(report)
+    assert payload["daily_numbers"]["duplicate_candidates"] == 2
+    assert payload["redundancy_risks"]["story_review_count"] == 5
+    assert payload["redundancy_risks"]["pairs_above_threshold"] == 9
+
+
+def test_simone_report_counts_filter_only_published_status() -> None:
+    master = {"publisher": {"published": []}, "simone": {"published_reports": [
+        {"title": "Published", "status": "published"},
+        {"title": "Ready only", "status": "wp_not_ready"},
+        {"title": "Dry", "status": "dry_run"},
+        {"title": "Error", "status": "publish_error"},
+        {"title": "Already", "status": "already_published"},
+    ]}}
+    report = build_report({"master_log": master})
+    payload = __import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(report)
+    assert payload["daily_numbers"]["reports_published"] == 1
+    assert payload["daily_numbers"]["report_status_counts"]["already_published"] == 1
+    assert report["day_type"] == "post-show"
+
+
+def test_non_published_simone_reports_do_not_create_post_show_day() -> None:
+    master = {"publisher": {"published": []}, "simone": {"published_reports": [
+        {"title": "Ready only", "status": "wp_not_ready"},
+        {"title": "Dry", "status": "dry_run"},
+        {"title": "Error", "status": "publish_error"},
+        {"title": "Already", "status": "already_published"},
+    ]}}
+    report = build_report({"master_log": master})
+    payload = __import__("scripts.daily_editorial_judgment", fromlist=["structured_json"]).structured_json(report)
+    assert payload["daily_numbers"]["reports_published"] == 0
+    assert report["day_type"] != "post-show"
