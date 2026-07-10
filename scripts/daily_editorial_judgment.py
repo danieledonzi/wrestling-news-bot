@@ -15,7 +15,7 @@ STATE_REPORTS_DIR = ROOT / "state" / "reports"
 DEFAULT_ARTIFACT_CANDIDATES: dict[str, tuple[str, ...]] = {
     "operational_report": ("reports/owtv_operational_report_24h_*.md",),
     "menzo_latest": ("state/newsroom/menzo_decisions_latest.json", "artifacts/newsroom/menzo_decisions.json"),
-    "master_log": ("artifacts/newsroom/master_log_tail.jsonl", "logs/newsroom_master.log", "artifacts/newsroom/master_log_latest.json"),
+    "master_log": ("state/newsroom/master_log.jsonl", "artifacts/newsroom/master_log_tail.jsonl", "logs/newsroom_master.log", "artifacts/newsroom/master_log_latest.json"),
     "editorial_audit": ("reports/owtv_editorial_audit_v1_1_24h_*.json", "reports/owtv_editorial_audit_v1_1_24h_*.md", "reports/editorial_audit_v1_1_latest.json"),
     "story_cluster_audit": ("reports/story_cluster_audit_v94_7_1_*.json", "reports/story_cluster_audit_v94_7_1_*.md", "reports/story_cluster_audit_latest.json"),
     "gemini_ledger": ("state/newsroom/gemini_call_ledger.jsonl", "reports/gemini_diagnostics_summary_latest.json"),
@@ -129,6 +129,15 @@ def load_inputs(paths: dict[str, Path] | None = None, *, hours: int = 24, now: d
     resolved = resolve_artifact_paths(paths)
     used, missing = artifact_presence(paths)
     data = {name: _load(path) for name, path in resolved.items()}
+    if (
+        (not paths or "master_log" not in paths)
+        and isinstance(data.get("master_log"), dict)
+        and data["master_log"].get("_schema_warning")
+        and (ROOT / "artifacts/newsroom/master_log_tail.jsonl").exists()
+    ):
+        tail = ROOT / "artifacts/newsroom/master_log_tail.jsonl"
+        data["master_log"] = _load(tail)
+        used = [u for u in used if "master_log" not in u] + [_rel(tail, "master_log")]
     data["__artifact_status__"] = {"used": used, "missing": missing}
     data["__window__"] = {"hours": hours, "now": (now or datetime.now(timezone.utc)).isoformat()}
     return data
@@ -154,6 +163,33 @@ def _title(item: dict[str, Any]) -> str:
 
 def _url(item: dict[str, Any]) -> str:
     return str(item.get("url") or item.get("source_url") or item.get("link") or "").strip()
+
+
+def _wp_link(item: dict[str, Any]) -> str:
+    return str(item.get("wp_link") or item.get("wordpress_url") or item.get("published_url") or "").strip()
+
+
+def _dedupe_key(item: dict[str, Any]) -> str:
+    source_url = str(item.get("source_url") or item.get("url") or item.get("link") or "").strip().lower()
+    if source_url:
+        return "source_url:" + source_url
+    wp_link = _wp_link(item).lower()
+    if wp_link:
+        return "wp_link:" + wp_link
+    title = re.sub(r"\s+", " ", _title(item).lower()).strip()
+    return "title:" + title
+
+
+def _dedupe_records(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    seen: set[str] = set()
+    out: list[dict[str, Any]] = []
+    for record in records:
+        key = _dedupe_key(record)
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append(record)
+    return out
 
 
 def _score(item: dict[str, Any]) -> int:
@@ -204,21 +240,88 @@ def _master(data: dict[str, Any]) -> dict[str, Any]:
     return master if isinstance(master, dict) else {}
 
 
+def _master_log_source(data: dict[str, Any]) -> str:
+    for item in (data.get("__artifact_status__", {}) or {}).get("used", []):
+        if str(item).endswith("state/newsroom/master_log.jsonl"):
+            return "master_log"
+        if "master_log_tail.jsonl" in str(item):
+            return "master_log_tail_partial"
+    master = data.get("master_log", {})
+    if isinstance(master, dict) and master.get("_format") == "jsonl":
+        return "master_log"
+    return "inline_or_latest"
+
+
+def _record_timestamp(record: dict[str, Any]) -> datetime | None:
+    return (
+        _parse_dt(record.get("recorded_at"))
+        or _parse_dt(_nested(record, "run", "ended_at"))
+        or _parse_dt(_nested(record, "run", "started_at"))
+    )
+
+
+def _master_records_in_window(data: dict[str, Any]) -> list[dict[str, Any]]:
+    master = data.get("master_log", {})
+    if not isinstance(master, dict) or not isinstance(master.get("records"), list):
+        latest = _master(data)
+        return [latest] if latest else []
+    window = data.get("__window__", {}) if isinstance(data.get("__window__"), dict) else {}
+    now = _parse_dt(window.get("now")) if window else None
+    try:
+        hours = int(window.get("hours") or 24)
+    except Exception:
+        hours = 24
+    until_ts = now.timestamp() if now else None
+    since_ts = (until_ts - (hours * 3600)) if until_ts is not None else None
+    selected: list[dict[str, Any]] = []
+    for record in master["records"]:
+        if not isinstance(record, dict):
+            continue
+        stamp = _record_timestamp(record)
+        if since_ts is not None and stamp is not None and stamp.timestamp() < since_ts:
+            continue
+        if until_ts is not None and stamp is not None and stamp.timestamp() > until_ts:
+            continue
+        selected.append(record)
+    return selected
+
+
 def collect_published(data: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
-    master = _master(data)
-    publisher = _nested(master, "publisher") or {}
-    publisher_published = _items(publisher, "published")
-    publisher_results = _items(publisher, "results")
-    news = publisher_published + [r for r in publisher_results if str(r.get("status")).lower() == "published"]
-    simone = _nested(master, "simone") or {}
-    all_reports = _items(simone, "published_reports")
-    reports = [r for r in all_reports if str(r.get("status") or "").lower() == "published"]
+    records = _master_records_in_window(data)
+    include_already_published_reports = _master_log_source(data) in {"master_log", "master_log_tail_partial"}
+    news: list[dict[str, Any]] = []
+    reports: list[dict[str, Any]] = []
+    all_reports: list[dict[str, Any]] = []
+    news_stream_available = False
+    report_stream_available = False
+    for master in records:
+        publisher = _nested(master, "publisher") or {}
+        publisher_published = _items(publisher, "published")
+        publisher_results = _items(publisher, "results")
+        if isinstance(publisher, dict) and ("published" in publisher or "results" in publisher):
+            news_stream_available = True
+        news.extend(publisher_published)
+        news.extend(r for r in publisher_results if str(r.get("status")).lower() == "published")
+        simone = _nested(master, "simone") or {}
+        run_reports = _items(simone, "published_reports")
+        if isinstance(simone, dict) and "published_reports" in simone:
+            report_stream_available = True
+        all_reports.extend(run_reports)
+        reports.extend(
+            r
+            for r in run_reports
+            if str(r.get("status") or "").lower() == "published"
+            or (include_already_published_reports and str(r.get("status") or "").lower() == "already_published")
+        )
+    news = _dedupe_records(news)
+    reports = _dedupe_records(reports)
     report_status_counts = Counter(str(r.get("status") or "unknown").lower() for r in all_reports)
     return news, reports, {
-        "available": bool(master),
-        "news_stream_available": isinstance(publisher, dict) and ("published" in publisher or "results" in publisher),
-        "report_stream_available": isinstance(simone, dict) and "published_reports" in simone,
+        "available": bool(records),
+        "news_stream_available": news_stream_available,
+        "report_stream_available": report_stream_available,
         "report_status_counts": dict(report_status_counts),
+        "published_records_source": _master_log_source(data),
     }
 
 
@@ -529,12 +632,12 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
         schema_warnings.append("reports_published_count_not_available")
     selected, pending, skipped = _items(menzo, "selected"), _items(menzo, "pending"), _items(menzo, "skipped") or _items(menzo, "skipped_sample")
     article_types = Counter(_article_type(x) for x in selected + news if _article_type(x) != "unknown")
-    if not article_types and isinstance(parsed_md.get("article_types"), Counter):
+    if isinstance(parsed_md.get("article_types"), Counter):
         article_types = parsed_md["article_types"]
     concrete_selected = [x for x in selected if not x.get("_placeholder_from_markdown")]
     concrete_news = [x for x in news if not x.get("_placeholder_from_markdown")]
     concrete_reports = [x for x in reports if not x.get("_placeholder_from_markdown")]
-    hard_soft_source = "records" if (concrete_selected or concrete_news) else None
+    hard_soft_source = None if isinstance(parsed_md.get("article_types"), Counter) else ("records" if (concrete_selected or concrete_news) else None)
     hard_count = sum(1 for x in concrete_selected + concrete_news if is_hard(x)) if hard_soft_source == "records" else None
     soft_count = sum(1 for x in concrete_selected + concrete_news if is_soft(x)) if hard_soft_source == "records" else None
     if hard_soft_source is None and article_types:
@@ -542,8 +645,9 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
         hard_soft_source = "article_types_markdown"
     story = parse_story_cluster_audit(data.get("story_cluster_audit", {}))
     schema_warnings.extend(story["schema_warnings"])
-    news_published_count = len(concrete_news) if concrete_news else (parsed_md.get("news_count") if markdown_news_available else (0 if news_stream_available else None))
-    reports_published_count = len(concrete_reports) if concrete_reports else (parsed_md.get("reports_count") if markdown_reports_available else (0 if report_stream_available else None))
+    official_counts_authoritative = published_meta.get("published_records_source") in {"master_log", "master_log_tail_partial"}
+    news_published_count = (parsed_md.get("news_count") if markdown_news_available and official_counts_authoritative else (len(concrete_news) if concrete_news else (parsed_md.get("news_count") if markdown_news_available else (0 if news_stream_available else None))))
+    reports_published_count = (parsed_md.get("reports_count") if markdown_reports_available and official_counts_authoritative else (len(concrete_reports) if concrete_reports else (parsed_md.get("reports_count") if markdown_reports_available else (0 if report_stream_available else None))))
     dtype = day_type(news_published_count, reports_published_count, hard_count, story["story_reviews"])
     softpool = _nested(menzo, "softpool", "injected_candidates") or _nested(menzo, "daily_policy", "softpool_used") or any(x.get("from_softpool") for x in selected + pending + skipped)
     warnings = _nested(_master(data), "alfred", "handoff", "warnings") or _nested(_master(data), "alfred", "postprocess", "warnings") or "n.d."
@@ -554,8 +658,12 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
         blockers = parsed_md["blockers"]
     gemini_called = _gemini_35_calls(data)
     runs_completed = parsed_md.get("runs_completed")
-    news_published_count = len(concrete_news) if concrete_news else (parsed_md.get("news_count") if markdown_news_available else (0 if news_stream_available else None))
-    reports_published_count = len(concrete_reports) if concrete_reports else (parsed_md.get("reports_count") if markdown_reports_available else (0 if report_stream_available else None))
+    news_published_count = (parsed_md.get("news_count") if markdown_news_available and official_counts_authoritative else (len(concrete_news) if concrete_news else (parsed_md.get("news_count") if markdown_news_available else (0 if news_stream_available else None))))
+    reports_published_count = (parsed_md.get("reports_count") if markdown_reports_available and official_counts_authoritative else (len(concrete_reports) if concrete_reports else (parsed_md.get("reports_count") if markdown_reports_available else (0 if report_stream_available else None))))
+    if markdown_news_available and concrete_news and len(concrete_news) != parsed_md.get("news_count") and official_counts_authoritative:
+        schema_warnings.append("published_record_count_differs_from_official_count")
+    if markdown_reports_available and concrete_reports and len(concrete_reports) != parsed_md.get("reports_count") and official_counts_authoritative:
+        schema_warnings.append("published_record_count_differs_from_official_count")
     published_total = (news_published_count or 0) + (reports_published_count or 0) if (news_published_count is not None or reports_published_count is not None) else None
     judgment = "OTTIMO" if (hard_count or 0) >= 8 and len(top_discarded(menzo, 1)) == 0 else "BUONO" if (published_total or 0) >= 8 else "DISCRETO" if (published_total or 0) >= 3 else "DEBOLE"
     top = top_discarded(menzo)
@@ -568,7 +676,7 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
         summary += " Il principale controllo umano riguarda: " + _title(top[0]) + "."
     else:
         summary += " Non emergono forti candidati scartati da recuperare."
-    return {"generated_at": generated_at, "source_artifacts_used": used, "missing_artifacts": missing, "schema_warnings": schema_warnings, "published_available": news_count_available or reports_count_available, "report_status_counts": published_meta["report_status_counts"], "menzo": menzo, "news": news, "reports": reports, "news_records": concrete_news, "report_records": concrete_reports, "selected": selected, "pending": pending, "skipped": skipped, "runs_completed": runs_completed, "news_published_count": news_published_count, "reports_published_count": reports_published_count, "news_count_available": news_count_available, "reports_count_available": reports_count_available, "hard_count": hard_count, "soft_count": soft_count, "hard_soft_source": hard_soft_source, "story": story, "day_type": dtype, "softpool": bool(softpool), "warnings": warnings, "blockers": blockers, "gemini_called": gemini_called, "article_types": article_types, "judgment": judgment, "top_discarded": top, "borderline": borderline, "summary": summary}
+    return {"generated_at": generated_at, "source_artifacts_used": used, "missing_artifacts": missing, "schema_warnings": list(dict.fromkeys(schema_warnings)), "published_available": news_count_available or reports_count_available, "report_status_counts": published_meta["report_status_counts"], "published_records_source": published_meta.get("published_records_source"), "official_news_published_count": parsed_md.get("news_count") if markdown_news_available else None, "concrete_news_record_count": len(concrete_news), "menzo": menzo, "news": news, "reports": reports, "news_records": concrete_news, "report_records": concrete_reports, "selected": selected, "pending": pending, "skipped": skipped, "runs_completed": runs_completed, "news_published_count": news_published_count, "reports_published_count": reports_published_count, "news_count_available": news_count_available, "reports_count_available": reports_count_available, "hard_count": hard_count, "soft_count": soft_count, "hard_soft_source": hard_soft_source, "story": story, "day_type": dtype, "softpool": bool(softpool), "warnings": warnings, "blockers": blockers, "gemini_called": gemini_called, "article_types": article_types, "judgment": judgment, "top_discarded": top, "borderline": borderline, "summary": summary}
 
 
 def _num(value: Any) -> str:
@@ -604,7 +712,12 @@ def render_markdown(report: dict[str, Any]) -> str:
 
 
 def _compact_item(item: dict[str, Any]) -> dict[str, Any]:
-    return {"title": _title(item), "source": item.get("source") or "", "url": _url(item), "score": _score(item) or None, "article_type": _article_type(item), "priority": item.get("priority") or "", "menzo_decision": item.get("_decision_bucket") or item.get("decision") or "", "menzo_reason": item.get("reason") or "", "automatic_judgment": _auto_judgment(item) if item.get("_decision_bucket") else ""}
+    compact = {"title": _title(item), "source": item.get("source") or "", "url": _url(item), "score": _score(item) or None, "article_type": _article_type(item), "priority": item.get("priority") or "", "menzo_decision": item.get("_decision_bucket") or item.get("decision") or "", "menzo_reason": item.get("reason") or "", "automatic_judgment": _auto_judgment(item) if item.get("_decision_bucket") else ""}
+    if item.get("source_url"):
+        compact["source_url"] = item.get("source_url")
+    if _wp_link(item):
+        compact["wp_link"] = _wp_link(item)
+    return compact
 
 
 def _compact_pair(item: dict[str, Any]) -> dict[str, Any]:
@@ -613,7 +726,7 @@ def _compact_pair(item: dict[str, Any]) -> dict[str, Any]:
 
 def structured_json(report: dict[str, Any]) -> dict[str, Any]:
     story = report["story"]
-    daily_numbers = {"runs_completed": report.get("runs_completed"), "news_published": report.get("news_published_count"), "reports_published": report.get("reports_published_count"), "news_published_count": report.get("news_published_count"), "reports_published_count": report.get("reports_published_count"), "news_records": [_compact_item(x) for x in report.get("news_records", [])], "report_records": [_compact_item(x) for x in report.get("report_records", [])], "report_status_counts": report["report_status_counts"], "article_types": dict(report["article_types"]), "menzo_first_decision": {"selected": len(report["selected"]), "pending": len(report["pending"]), "skipped": len(report["skipped"])}, "final_decision": {"selected": len(report["selected"]), "pending": len(report["pending"]), "skipped": len(report["skipped"])}, "hard_news_count": report["hard_count"], "soft_news_count": report["soft_count"], "softpool_used": report["softpool"], "alfred": {"warnings": report["warnings"], "blockers": report["blockers"]}, "duplicate_candidates": story["duplicate_candidates"], "same_story_clusters": story["same_story_clusters"], "same_event_clusters": story["same_event_clusters"], "story_reviews": story["story_reviews"], "pairs_above_threshold": story["pairs_above_threshold"], "gemini_3_5_called_total": report["gemini_called"]}
+    daily_numbers = {"runs_completed": report.get("runs_completed"), "news_published": report.get("news_published_count"), "reports_published": report.get("reports_published_count"), "news_published_count": report.get("news_published_count"), "reports_published_count": report.get("reports_published_count"), "official_news_published_count": report.get("official_news_published_count"), "concrete_news_record_count": report.get("concrete_news_record_count"), "published_records_source": report.get("published_records_source"), "news_records": [_compact_item(x) for x in report.get("news_records", [])], "report_records": [_compact_item(x) for x in report.get("report_records", [])], "report_status_counts": report["report_status_counts"], "article_types": dict(report["article_types"]), "menzo_first_decision": {"selected": len(report["selected"]), "pending": len(report["pending"]), "skipped": len(report["skipped"])}, "final_decision": {"selected": len(report["selected"]), "pending": len(report["pending"]), "skipped": len(report["skipped"])}, "hard_news_count": report["hard_count"], "soft_news_count": report["soft_count"], "softpool_used": report["softpool"], "alfred": {"warnings": report["warnings"], "blockers": report["blockers"]}, "duplicate_candidates": story["duplicate_candidates"], "same_story_clusters": story["same_story_clusters"], "same_event_clusters": story["same_event_clusters"], "story_reviews": story["story_reviews"], "pairs_above_threshold": story["pairs_above_threshold"], "gemini_3_5_called_total": report["gemini_called"]}
     hard_soft_balance = {"hard_news_count": report["hard_count"], "soft_news_count": report["soft_count"], "softpool_used": report["softpool"], "is_estimate": True, "source": report.get("hard_soft_source") or "n.d.", "explanation": "Stima deterministica da priority, article_type, score e decisioni Menzo disponibili; source=article_types_markdown quando derivata solo dai tipi articolo del markdown; n.d. se mancano gli artefatti affidabili."}
     redundancy_risks = {"duplicate_risk": "high" if (story["same_story_clusters"] or 0) > 3 else "medium" if (story["same_story_clusters"] or story["duplicate_candidates"] or story["same_event_clusters"]) else "low", "duplicate_candidate_count": story["duplicate_candidates"], "same_story_cluster_count": story["same_story_clusters"], "same_event_cluster_count": story["same_event_clusters"], "story_review_count": story["story_reviews"], "pairs_above_threshold": story["pairs_above_threshold"], "top_suspicious_pairs": [_compact_pair(x) for x in story["suspicious_pairs"]], "story_review_items": [_compact_pair(x) if x.get("title_a") else _compact_item(x) for x in story["story_review_items"][:10]], "show_report_integration": "post-show presente" if (report.get("reports_published_count") or 0) > 0 else "nessun report show pubblicato negli artefatti disponibili"}
     return {"judgment": report["judgment"], "day_type": report["day_type"], "summary": report["summary"], "daily_numbers": daily_numbers, "hard_soft_balance": hard_soft_balance, "top_discarded_candidates": [_compact_item(x) for x in report["top_discarded"]], "borderline_published": [_compact_item(x) for x in report["borderline"]], "redundancy_risks": redundancy_risks, "recommended_actions": ["Rivedere il primo URL scartato/pending se presente.", "Monitorare il rapporto hard/soft nel prossimo ciclo.", "Rafforzare il controllo post-show se emergono duplicazioni con report."], "generated_at": report["generated_at"].isoformat(), "source_artifacts_used": report["source_artifacts_used"], "missing_artifacts": report["missing_artifacts"], "schema_warnings": report["schema_warnings"]}
