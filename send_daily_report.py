@@ -57,8 +57,11 @@ def daily_editorial_judgment_body_section(json_path: Path = DAILY_JUDGMENT_LATES
         return f"\nDAILY EDITORIAL JUDGMENT\n- JSON read failed: {exc}\n"
 
     daily_numbers = payload.get("daily_numbers") if isinstance(payload.get("daily_numbers"), dict) else {}
-    warnings = payload.get("alfred_warnings")
-    blockers = payload.get("alfred_blockers")
+    alfred = daily_numbers.get("alfred")
+    if not isinstance(alfred, dict):
+        alfred = {}
+    warnings = alfred.get("warnings")
+    blockers = alfred.get("blockers")
     if warnings is None:
         warnings = daily_numbers.get("alfred_warnings")
     if blockers is None:
