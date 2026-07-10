@@ -161,27 +161,42 @@ def is_source_intro_text(text: str) -> bool:
     probe = normalize_text(text or "")
     if not probe:
         return False
+    source_names = ("wrestling inc", "wrestlinginc", "ringside news", "ringsidenews")
+    if not any(name in probe for name in source_names):
+        return False
     source_intro_patterns = [
-        "welcome to wrestling inc",
-        "welcome to wrestlinginc",
-        "wrestling inc live coverage",
-        "wrestling inc s live coverage",
-        "wrestlinginc live coverage",
-        "benvenuti al report di wrestling inc",
-        "benvenuti alla copertura live di wrestling inc",
-        "benvenuti ai risultati di wrestling inc",
-        "benvenuti al live coverage di wrestling inc",
-        "ringside news live coverage",
-        "benvenuti alla copertura live di ringside news",
+        "welcome to wrestling inc", "welcome to wrestlinginc",
+        "welcome to our report", "welcome to our live coverage",
+        "wrestling inc live coverage", "wrestling inc s live coverage",
+        "wrestling inc brings you live coverage", "wrestlinginc live coverage",
+        "ringside news live coverage", "ringside news brings you live coverage",
+        "follow along with our live coverage", "follow along with wrestling inc",
+        "follow along with ringside news", "benvenuti al report di wrestling inc",
+        "benvenuti alla copertura live di wrestling inc", "benvenuti ai risultati di wrestling inc",
+        "benvenuti al live coverage di wrestling inc", "benvenuti al nostro report",
+        "benvenuti alla nostra copertura live", "benvenuti alla copertura live di ringside news",
     ]
     if any(pattern in probe for pattern in source_intro_patterns):
         return True
-    # Source-branded dateline intros add no editorial value in our report.
-    if probe.startswith("benvenuti") and ("wrestling inc" in probe or "ringside news" in probe):
+    if probe.startswith(("welcome", "benvenuti", "segui", "seguite")) and any(term in probe for term in ("report", "coverage", "copertura", "risultati")):
         return True
-    if probe.startswith("welcome") and ("wrestling inc" in probe or "ringside news" in probe):
+    if any(term in probe for term in ("live coverage", "copertura live")) and any(term in probe for term in ("brings you", "vi porta", "porta la", "follow along", "segui")):
         return True
     return False
+
+
+def strip_source_boilerplate_blocks(blocks: List[Dict[str, str]]) -> List[Dict[str, str]]:
+    cleaned = list(blocks or [])
+    removed = 0
+    def textish(block: Dict[str, str]) -> bool:
+        return block.get("type") in {"heading", "paragraph", "quote"}
+    while cleaned and textish(cleaned[0]) and is_source_intro_text(cleaned[0].get("text", "")):
+        cleaned.pop(0); removed += 1
+    while cleaned and textish(cleaned[-1]) and is_source_intro_text(cleaned[-1].get("text", "")):
+        cleaned.pop(); removed += 1
+    if removed:
+        print(f"[REPORT CLEAN v92] Rimosso boilerplate fonte ai margini: {removed}", flush=True)
+    return cleaned
 
 
 def social_embed_key(url: str) -> str:
@@ -556,7 +571,7 @@ def should_skip_block_text(text: str) -> bool:
         "derek holloway is a writer", "ringside news specializing", "youtube com channel",
         "instagram com ringsidenewscom", "twitter com intent tweet", "source ringside news",
     ]
-    return any(p in norm for p in skip_phrases)
+    return any(p in norm for p in skip_phrases) or is_source_intro_text(text)
 
 
 def is_standalone_quote_text(text: str) -> bool:
@@ -632,6 +647,7 @@ def scrape_article(url: str) -> Tuple[List[Dict[str, str]], str, Optional[str]]:
     blocks = extract_blocks(content, url)
     rsn_embeds = extract_ringside_embed_blocks(soup, content, url)
     blocks = merge_ringside_embeds_by_position(blocks, rsn_embeds)
+    blocks = strip_source_boilerplate_blocks(blocks)
     return blocks, html, featured
 
 
@@ -989,6 +1005,21 @@ def is_bad_ringside_render_line(line: str) -> bool:
     return False
 
 
+def cleanup_source_boilerplate_rendered_html(content: str) -> str:
+    soup = BeautifulSoup(content or "", "html.parser")
+    removed = 0
+    candidates = soup.find_all(["p", "blockquote", "h2", "h3"], recursive=False)
+    while candidates and is_source_intro_text(candidates[0].get_text(" ", strip=True)):
+        candidates[0].decompose(); removed += 1
+        candidates = soup.find_all(["p", "blockquote", "h2", "h3"], recursive=False)
+    while candidates and is_source_intro_text(candidates[-1].get_text(" ", strip=True)):
+        candidates[-1].decompose(); removed += 1
+        candidates = soup.find_all(["p", "blockquote", "h2", "h3"], recursive=False)
+    if removed:
+        print(f"[REPORT CLEAN v92] Rimosso boilerplate fonte post-render: {removed}", flush=True)
+    return str(soup)
+
+
 def cleanup_ringside_rendered_html(content: str, job: Dict[str, Any]) -> str:
     if str(job.get('source') or '').lower() != 'ringsidenews':
         return content
@@ -1010,7 +1041,7 @@ def cleanup_ringside_rendered_html(content: str, job: Dict[str, Any]) -> str:
 
 
 def publish_report(job: Dict[str, Any], content: str, featured_image_url: Optional[str]) -> Tuple[Optional[int], Optional[Dict[str, Any]]]:
-    content = cleanup_ringside_rendered_html(content, job)
+    content = cleanup_source_boilerplate_rendered_html(cleanup_ringside_rendered_html(content, job))
     content = append_source_attribution(content_with_embeds(content), job)
     payload: Dict[str, Any] = {
         "title": job["title"],
