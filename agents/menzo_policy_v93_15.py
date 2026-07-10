@@ -173,24 +173,21 @@ def is_betting_odds_article(item: dict[str, Any]) -> bool:
     text = normalize_text(" ".join(str(item.get(k) or "") for k in ["title", "summary", "reason", "excerpt", "canonical_summary", "source_url", "url"]))
     if not text:
         return False
-    betting_markers = (
-        "betting odds", "bookmaker odds", "bookmaker", "sportsbook", "sports book",
-        "scommesse", "quote scommesse", "quote bookmaker", "quote dei bookmaker",
+    explicit_betting_markers = (
+        "betting odds", "sportsbook", "sports book", "bookmaker", "wager", "wagers",
+        "gambling", "betting market", "betting markets", "oddsmaker", "oddsmakers",
+        "draftkings", "fan duel", "fanduel", "scommesse", "quote scommesse",
+        "quote bookmaker", "quote dei bookmaker",
     )
-    if any(marker in text for marker in betting_markers):
+    if any(marker in text for marker in explicit_betting_markers):
         return True
-    odds_phrases = (
-        "odds point to", "odds suggest", "odds indicate", "according to betting odds",
-        "favorite according to betting odds", "favorites according to betting odds",
-        "favourite according to betting odds", "favourites according to betting odds",
+    if "odds" not in text:
+        return False
+    odds_betting_context = (
+        "favorite", "favorites", "favourite", "favourites", "underdog", "underdogs",
+        "clear winner", "clear winners", "point to", "points to", "favored", "favoured",
     )
-    if any(phrase in text for phrase in odds_phrases):
-        return True
-    if "odds" in text and any(marker in text for marker in ("favorite", "favorites", "favourite", "favourites", "according to", "wager", "betting", "sportsbook", "bookmaker")):
-        return True
-    if "quote" in text and any(phrase in text for phrase in ("favoriti secondo le quote", "favorito secondo le quote", "secondo le quote scommesse", "quote scommesse")):
-        return True
-    return False
+    return any(marker in text for marker in odds_betting_context)
 
 
 def apply_betting_odds_policy(result: dict[str, Any]) -> None:

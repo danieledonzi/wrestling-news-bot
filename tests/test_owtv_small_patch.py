@@ -44,11 +44,13 @@ def test_rendered_report_source_intro_cleanup_does_not_remove_attribution_class(
 def test_betting_odds_policy_moves_selected_and_preserves_quote_articles():
     result = {
         "selected": [
-            {"title": "Favorites according to betting odds for WWE SummerSlam", "summary": "Sportsbook lines shifted.", "url": "https://example.test/odds", "score": 90},
+            {"title": "Betting odds point to two clear winners", "summary": "Sportsbook lines shifted.", "url": "https://example.test/odds", "score": 90},
             {"title": "Top quotes from Cody Rhodes after Raw", "summary": "Cody gave several statements backstage.", "url": "https://example.test/quotes", "score": 88},
         ],
         "pending": [
-            {"title": "Favoriti secondo le quote per WrestleMania", "summary": "quote scommesse aggiornate", "url": "https://example.test/quote-scommesse", "score": 60},
+            {"title": "Bookmaker odds list Cody Rhodes as favorite", "summary": "Updated market notes", "url": "https://example.test/bookmaker-odds", "score": 60},
+            {"title": "According to Fightful, John Cena overcame the odds", "summary": "A comeback story after Raw", "url": "https://example.test/overcame-odds", "score": 58},
+            {"title": "Against all odds, a wrestler returned", "summary": "A surprise return closed the show", "url": "https://example.test/against-all-odds", "score": 57},
         ],
         "skipped": [],
     }
@@ -56,7 +58,14 @@ def test_betting_odds_policy_moves_selected_and_preserves_quote_articles():
     menzo.apply_betting_odds_policy(result)
 
     assert [item["url"] for item in result["selected"]] == ["https://example.test/quotes"]
-    assert result["pending"] == []
+    assert [item["url"] for item in result["pending"]] == [
+        "https://example.test/overcame-odds",
+        "https://example.test/against-all-odds",
+    ]
+    assert [item["url"] for item in result["skipped"]] == [
+        "https://example.test/odds",
+        "https://example.test/bookmaker-odds",
+    ]
     reasons = [item["reason"] for item in result["skipped"]]
     assert reasons == [menzo.BETTING_ODDS_SKIP_REASON, menzo.BETTING_ODDS_SKIP_REASON]
     assert result["postprocess"]["betting_odds_low_editorial_value_skipped"] == 2
