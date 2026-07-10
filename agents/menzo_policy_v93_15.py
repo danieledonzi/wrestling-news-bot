@@ -164,6 +164,60 @@ def apply_medical_brand_policy(result: dict[str, Any]) -> None:
     result.setdefault("postprocess", {})["medical_return_non_major_brand_skipped"] = len(moved)
 
 
+
+
+BETTING_ODDS_SKIP_REASON = "skip:betting_odds_low_editorial_value"
+
+
+def is_betting_odds_article(item: dict[str, Any]) -> bool:
+    text = normalize_text(" ".join(str(item.get(k) or "") for k in ["title", "summary", "reason", "excerpt", "canonical_summary", "source_url", "url"]))
+    if not text:
+        return False
+    betting_markers = (
+        "betting odds", "bookmaker odds", "bookmaker", "sportsbook", "sports book",
+        "scommesse", "quote scommesse", "quote bookmaker", "quote dei bookmaker",
+    )
+    if any(marker in text for marker in betting_markers):
+        return True
+    odds_phrases = (
+        "odds point to", "odds suggest", "odds indicate", "according to betting odds",
+        "favorite according to betting odds", "favorites according to betting odds",
+        "favourite according to betting odds", "favourites according to betting odds",
+    )
+    if any(phrase in text for phrase in odds_phrases):
+        return True
+    if "odds" in text and any(marker in text for marker in ("favorite", "favorites", "favourite", "favourites", "according to", "wager", "betting", "sportsbook", "bookmaker")):
+        return True
+    if "quote" in text and any(phrase in text for phrase in ("favoriti secondo le quote", "favorito secondo le quote", "secondo le quote scommesse", "quote scommesse")):
+        return True
+    return False
+
+
+def apply_betting_odds_policy(result: dict[str, Any]) -> None:
+    moved: list[dict[str, Any]] = []
+    for section in ["selected", "pending"]:
+        kept: list[dict[str, Any]] = []
+        for item in result.get(section, []) if isinstance(result.get(section), list) else []:
+            if not isinstance(item, dict):
+                continue
+            if is_betting_odds_article(item):
+                item = dict(item)
+                item["decision"] = "skip"
+                item["priority"] = "skip"
+                item["article_type"] = "low_value"
+                previous = str(item.get("reason") or "").strip()
+                item["reason"] = BETTING_ODDS_SKIP_REASON + (f"; {previous}" if previous else "")
+                item.setdefault("menzo_policy", {})["betting_odds_low_editorial_value"] = True
+                moved.append(item)
+            else:
+                kept.append(item)
+        result[section] = kept
+    result.setdefault("skipped", []).extend(moved)
+    result["allowed_urls_for_v92"] = [str(x.get("url") or x.get("source_url") or "") for x in result.get("selected", []) if x.get("url") or x.get("source_url")]
+    result["handoff"] = {"to_bob_or_v92": len(result.get("selected", [])), "pending": len(result.get("pending", [])), "skipped": len(result.get("skipped", []))}
+    result.setdefault("postprocess", {})["betting_odds_low_editorial_value_skipped"] = len(moved)
+
+
 def sort_item(item: dict[str, Any]) -> tuple[int, int, float, str]:
     try:
         score = int(item.get("score", 0) or 0)
@@ -1646,6 +1700,7 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
         base.AI_ENABLED = previous_ai_enabled
     normalize_ai_fields(result)
     rebuild_decisions(result)
+    apply_betting_odds_policy(result)
     apply_source_opinion_policy(result)
     apply_medical_brand_policy(result)
     apply_story_footprint_policy(result)
@@ -1673,6 +1728,7 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     policy["story_footprints_ttl_days"] = 7
     policy["story_dedupe_before_bob"] = True
     policy["medical_return_major_brands_only"] = True
+    policy["betting_odds_low_editorial_value_skip"] = True
     policy["brand_rank_tiebreaker"] = "WWE/NXT/AEW > TNA/ROH > OVW/indie"
     policy["news_capacity_buffer_for_bob"] = MAX_SELECTED_THIS_RUN
     policy["daily_editorial_target"] = DAILY_NEWS_TARGET
