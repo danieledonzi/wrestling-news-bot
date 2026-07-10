@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import ast
 import json
 import subprocess
 from pathlib import Path
@@ -12,6 +13,7 @@ DAILY_JUDGMENT_LATEST_JSON = BOT_DIR / "state" / "reports" / "owtv_daily_editori
 DAILY_JUDGMENT_MARKDOWN_GLOB = "owtv_daily_editorial_judgment_24h_*.md"
 TRANSLATION_QUALITY_LATEST_JSON = BOT_DIR / "state" / "reports" / "owtv_translation_quality_audit_latest.json"
 TRANSLATION_QUALITY_MARKDOWN_GLOB = "owtv_translation_quality_audit_24h_*.md"
+TRANSLATION_QUALITY_BLOCKER_WARNING_CODES = {"untranslated_quote"}
 
 
 def generate_translation_quality_audit_24h() -> tuple[Path | None, Path | None, str | None]:
@@ -47,6 +49,63 @@ def newest_translation_quality_audit_markdown() -> Path | None:
     return max(matches, key=lambda path: (path.stat().st_mtime, path.name)) if matches else None
 
 
+def _parse_translation_quality_alfred_warning(warning: Any) -> Any:
+    if isinstance(warning, dict):
+        return warning
+    if not isinstance(warning, str):
+        return None
+    raw = warning.strip()
+    if not raw:
+        return None
+    for parser in (json.loads, ast.literal_eval):
+        try:
+            parsed = parser(raw)
+        except Exception:
+            continue
+        if isinstance(parsed, dict):
+            return parsed
+    return None
+
+
+def _translation_quality_alfred_warning_code(warning: Any) -> str:
+    parsed = _parse_translation_quality_alfred_warning(warning)
+    if isinstance(parsed, dict):
+        return str(parsed.get("code") or "").strip()
+    raw = str(warning or "").strip()
+    return raw.split(":", 1)[0].strip() if raw else ""
+
+
+def _translation_quality_alfred_warning_severity(warning: Any) -> str:
+    parsed = _parse_translation_quality_alfred_warning(warning)
+    if isinstance(parsed, dict):
+        severity = str(parsed.get("severity") or "").strip().lower()
+        if severity:
+            return severity
+    if "blocker" in str(warning or "").lower():
+        return "blocker"
+    if _translation_quality_alfred_warning_code(warning) == "image_placeholder_present":
+        return "technical"
+    return "warning"
+
+
+def _article_needs_translation_human_review(article: dict[str, Any]) -> bool:
+    if article.get("needs_human_review") is True:
+        return True
+    issue_severities = article.get("issue_severities")
+    severity_values = issue_severities.values() if isinstance(issue_severities, dict) else []
+    if any(str(sev).lower() in {"high", "medium"} for sev in severity_values):
+        return True
+    warnings = article.get("alfred_warnings", [])
+    if not isinstance(warnings, list):
+        warnings = list(warnings.values()) if isinstance(warnings, dict) else [warnings]
+    for warning in warnings:
+        if _translation_quality_alfred_warning_severity(warning) == "blocker":
+            return True
+        if _translation_quality_alfred_warning_code(warning) in TRANSLATION_QUALITY_BLOCKER_WARNING_CODES:
+            return True
+    return False
+
+
 def _count_article_severities(articles: list[Any]) -> dict[str, int]:
     counts = {"high": 0, "medium": 0, "low": 0, "technical": 0}
     for article in articles:
@@ -75,12 +134,12 @@ def _top_counts_from_articles(articles: list[Any], key: str, nested_key: str | N
             continue
         for value in values:
             if technical_only:
-                code = value.get("code") if isinstance(value, dict) else str(value)
-                severity = value.get("severity") if isinstance(value, dict) else ""
+                code = _translation_quality_alfred_warning_code(value)
+                severity = _translation_quality_alfred_warning_severity(value)
                 if code != "image_placeholder_present" and severity != "technical":
                     continue
-            if nested_key and isinstance(value, dict):
-                value = value.get(nested_key) or value.get("code") or value.get("warning")
+            if nested_key:
+                value = _translation_quality_alfred_warning_code(value) if nested_key == "code" else value
             if isinstance(value, dict):
                 value = value.get("code") or value.get("warning") or value.get("message")
             if value:
@@ -105,14 +164,11 @@ def translation_quality_audit_body_section(json_path: Path = TRANSLATION_QUALITY
 
     articles = payload.get("articles") if isinstance(payload.get("articles"), list) else []
     severity = _count_article_severities(articles)
-    review_count = 0
-    for article in articles:
-        if not isinstance(article, dict):
-            continue
-        issue_severities = article.get("issue_severities")
-        severity_values = issue_severities.values() if isinstance(issue_severities, dict) else []
-        if article.get("needs_human_review") is True or any(sev in {"high", "medium"} for sev in severity_values):
-            review_count += 1
+    review_count = sum(
+        1
+        for article in articles
+        if isinstance(article, dict) and _article_needs_translation_human_review(article)
+    )
     top_issues = _top_counts_from_articles(articles, "issues")
     technical_warnings = _top_counts_from_articles(articles, "alfred_warnings", "code", technical_only=True)
     if severity["high"]:

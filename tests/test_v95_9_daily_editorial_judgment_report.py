@@ -890,3 +890,57 @@ def test_append_translation_quality_audit_attachments(tmp_path: Path, monkeypatc
     attachments = sdr.append_translation_quality_audit_attachments([])
 
     assert attachments == [new, latest]
+
+
+def test_translation_quality_human_review_counts_alfred_blockers_and_malformed_warnings(tmp_path: Path) -> None:
+    from send_daily_report import translation_quality_audit_body_section
+
+    latest = write_json(tmp_path / "latest.json", {
+        "count": 4,
+        "articles": [
+            {
+                "issues": [],
+                "issue_severities": {},
+                "alfred_warnings": [{"code": "untranslated_quote", "severity": "blocker"}],
+            },
+            {
+                "issues": [],
+                "issue_severities": {},
+                "alfred_warnings": [{"code": "image_placeholder_present"}],
+            },
+            {
+                "issues": ["betting_odds_article_published"],
+                "issue_severities": {"betting_odds_article_published": "high"},
+                "alfred_warnings": [],
+            },
+            {
+                "issues": [],
+                "issue_severities": {},
+                "alfred_warnings": ["{'code': 'not valid'"],
+            },
+        ],
+    })
+
+    summary = translation_quality_audit_body_section(latest)
+
+    assert "- Articles inspected: 4" in summary
+    assert "- Articles needing human review: 2" in summary
+    assert "- Severity: high 1 / medium 0 / low 0 / technical 0" in summary
+    assert "image_placeholder_present (1)" in summary
+
+
+def test_translation_quality_human_review_counts_stringified_alfred_blocker_code(tmp_path: Path) -> None:
+    from send_daily_report import translation_quality_audit_body_section
+
+    latest = write_json(tmp_path / "latest.json", {
+        "count": 3,
+        "articles": [
+            {"issues": [], "issue_severities": {}, "alfred_warnings": ['{"code":"untranslated_quote"}']},
+            {"issues": [], "issue_severities": {}, "alfred_warnings": ["{'code': 'untranslated_quote'}"]},
+            {"issues": [], "issue_severities": {}, "alfred_warnings": ["untranslated_quote: legacy blocker"]},
+        ],
+    })
+
+    summary = translation_quality_audit_body_section(latest)
+
+    assert "- Articles needing human review: 3" in summary
