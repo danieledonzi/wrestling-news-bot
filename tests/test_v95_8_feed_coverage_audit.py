@@ -892,6 +892,7 @@ def test_v95_8_6_audit_reads_published_trace_exact_source_url(tmp_path, monkeypa
     write(ns / "publisher_status_latest.json", {"results":[]})
     write(tmp_path / "artifacts" / "published_traces" / "trace-exact-story.published_trace.json", {
         "artifact_marker":"owtv_published_trace_v1",
+        "published_at":audit.utc_now().isoformat(),
         "owtv_title":"Trace exact story",
         "owtv_url":"https://owtv.test/trace-exact-story",
         "slug":"trace-exact-story",
@@ -916,6 +917,7 @@ def test_v95_8_6_published_trace_takes_priority_over_file_fallback(tmp_path, mon
     write(ns / "publisher_status_latest.json", {"results":[]})
     write(tmp_path / "artifacts" / "published_traces" / "same-slug.published_trace.json", {
         "artifact_marker":"owtv_published_trace_v1",
+        "published_at":audit.utc_now().isoformat(),
         "owtv_title":"Trace title",
         "owtv_url":"https://owtv.test/same-slug",
         "slug":"same-slug",
