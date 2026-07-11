@@ -204,3 +204,97 @@ def test_metadata_propagation_actual_andrea_bob_alfred_publisher(monkeypatch, tm
     out = publisher.run_publisher({"approved_articles":[wrapped, malformed]})
     assert [x["source_url"] for x in calls] == ["https://t/win"]
     assert any(x.get("source_url") == "https://t/bad" and x.get("reason") == "skip:duplicate_arbitration_unresolved" for x in out["results"])
+
+
+def test_story_footprint_enrichment_does_not_remove_candidates_before_gemini(monkeypatch):
+    calls = []
+    a = item("https://same/a", "CM Punk signs WWE contract", "CM Punk signs a WWE contract.")
+    b = item("https://same/b", "CM Punk signs WWE contract", "CM Punk signs a WWE contract.", section="pending")
+    r = result([a, b])
+    menzo.apply_story_footprint_policy(r)
+    assert [x["url"] for x in r["selected"]] == ["https://same/a"]
+    assert [x["url"] for x in r["pending"]] == ["https://same/b"]
+    assert r["postprocess"]["story_footprint_duplicates_skipped"] == 0
+    monkeypatch.setattr(menzo, "call_gemini_json_model", lambda prompt, model, **k: calls.append(prompt) or ({"duplicate_groups": []}, "gemini-3.1-flash-lite"))
+    menzo.apply_same_story_duplicate_guard(r, {})
+    assert "https://same/a" in calls[0] and "https://same/b" in calls[0]
+    assert [x["url"] for x in r["selected"]] == ["https://same/a"]
+    assert [x["url"] for x in r["pending"]] == ["https://same/b"]
+
+
+def test_generalized_fingerprint_enrichment_does_not_skip_memory_match_before_gemini(monkeypatch):
+    current = item("https://new/fp", "WWE officially announced CM Punk match", "WWE officially announced CM Punk match.")
+    r = result([current])
+    monkeypatch.setattr(menzo, "load_story_fingerprints", lambda: [{"fingerprint": menzo.build_generalized_fingerprint(current), "url": "https://old/fp", "title": "Old"}])
+    menzo.apply_generalized_fingerprint_policy(r)
+    assert r["selected"] == [current]
+    assert r["skipped"] == []
+    assert r["postprocess"]["story_fingerprint_duplicates_skipped"] == 0
+    assert "duplicate_of" not in current and current.get("reason") != "skip:story_fingerprint_overlap"
+
+
+def test_deterministic_similarity_does_not_block_when_gemini_says_no_duplicate(monkeypatch):
+    a = item("https://sim/a", "Identical headline", "Identical body text")
+    b = item("https://sim/b", "Identical headline", "Identical body text")
+    r = result([a, b])
+    menzo.apply_story_footprint_policy(r)
+    menzo.apply_generalized_fingerprint_policy(r)
+    monkeypatch.setattr(menzo, "call_gemini_json_model", lambda *a, **k: ({"duplicate_groups": []}, "gemini-3.1-flash-lite"))
+    menzo.apply_same_story_duplicate_guard(r, {})
+    assert [x["url"] for x in r["selected"]] == ["https://sim/a", "https://sim/b"]
+    assert r["skipped"] == []
+    assert all("menzo_duplicate_checked" not in x for x in r["selected"])
+
+
+def test_only_gemini_confirmed_duplicate_blocks_after_enrichment(monkeypatch):
+    a = item("https://sim/a", "Identical headline", "Identical body text")
+    b = item("https://sim/b", "Identical headline", "Identical body text")
+    r = result([a, b])
+    menzo.apply_story_footprint_policy(r)
+    menzo.apply_generalized_fingerprint_policy(r)
+    monkeypatch.setattr(menzo, "call_gemini_json_model", lambda *a, **k: ({"duplicate_groups": [{"keep_id":"c0", "discard_ids":["c1"], "reason":"Gemini says same fact"}]}, "gemini-3.1-flash-lite"))
+    menzo.apply_same_story_duplicate_guard(r, {})
+    assert [x["url"] for x in r["selected"]] == ["https://sim/a"]
+    assert r["skipped"][0]["url"] == "https://sim/b"
+    assert r["skipped"][0]["reason"] == "skip:duplicate_same_run"
+
+
+def test_run_menzo_payload_complete_after_enrichment_and_massy_diagnostics(monkeypatch):
+    sent = []
+    candidates = [item(f"https://run/{i}", f"Story {i}", f"Story {i} body") for i in range(3)] + [item(f"https://run/p{i}", f"Pending {i}", f"Pending {i} body", section="pending") for i in range(2)]
+    base = {"selected": candidates[:3], "pending": candidates[3:], "skipped": [], "postprocess": {}, "policy": {}}
+    monkeypatch.setattr(menzo, "_wp_ready_for_costly_work", lambda: (True, "ok"))
+    monkeypatch.setattr(menzo.base, "run_menzo", lambda board: {"selected": list(base["selected"]), "pending": list(base["pending"]), "skipped": [], "postprocess": {}, "policy": {}})
+    monkeypatch.setattr(menzo, "normalize_ai_fields", lambda r: None)
+    monkeypatch.setattr(menzo, "rebuild_decisions", lambda r: None)
+    monkeypatch.setattr(menzo, "apply_betting_odds_policy", lambda r: None)
+    monkeypatch.setattr(menzo, "apply_source_opinion_policy", lambda r: None)
+    monkeypatch.setattr(menzo, "apply_medical_brand_policy", lambda r: None)
+    monkeypatch.setattr(menzo, "enforce_ai_skip_binding", lambda r: None)
+    monkeypatch.setattr(menzo, "load_cross_run_story_history", lambda *a, **k: [])
+    monkeypatch.setattr(menzo, "apply_dynamic_editorial_budget", lambda r: None)
+    monkeypatch.setattr(menzo, "enforce_selected_cap", lambda r: None)
+    monkeypatch.setattr(menzo, "enforce_capacity_buffer", lambda r: None)
+    monkeypatch.setattr(menzo, "save_softpool", lambda r: None)
+    monkeypatch.setattr(menzo, "save_hard_skips", lambda r: None)
+    monkeypatch.setattr(menzo, "remember_stories", lambda *a, **k: None)
+    monkeypatch.setattr(menzo, "remember_footprints", lambda *a, **k: None)
+    monkeypatch.setattr(menzo, "remember_fingerprints", lambda *a, **k: None)
+    monkeypatch.setattr(menzo, "write_json", lambda *a, **k: None)
+    def fake(prompt, model, **k):
+        sent.append(prompt)
+        return {"duplicate_groups": []}, "gemini-3.1-flash-lite"
+    monkeypatch.setattr(menzo, "call_gemini_json_model", fake)
+    board = {"suspicious_story_clusters": [{"records": [{"url": "https://run/0"}, {"url": "https://run/1"}]}] * 12}
+    out = menzo.run_menzo(board)
+    assert len(sent) == 1
+    for candidate in candidates:
+        assert candidate["url"] in sent[0]
+    assert out["postprocess"]["massy_suspicious_duplicate_pairs"] == 12
+    assert out["postprocess"]["story_footprint_duplicates_skipped"] == 0
+    assert out["postprocess"]["story_fingerprint_duplicates_skipped"] == 0
+    assert out["policy"].get("story_footprint_dedupe_before_bob") is not True
+    assert out["policy"].get("story_dedupe_before_bob") is not True
+    assert out["policy"]["story_footprint_enrichment_only"] is True
+    assert out["policy"]["story_fingerprint_enrichment_only"] is True
+    assert out["policy"]["gemini_batch_duplicate_arbitration_is_sole_semantic_authority"] is True

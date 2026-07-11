@@ -634,38 +634,27 @@ def apply_source_opinion_policy(result: dict[str, Any]) -> None:
 
 
 def apply_story_footprint_policy(result: dict[str, Any]) -> None:
+    """Enrich selected/pending candidates with story footprint diagnostics only.
+
+    Gemini batch arbitration is the sole active semantic duplicate authority; this
+    policy must not drop, merge, or choose winners before Gemini sees the full
+    actionable selected + pending list.
+    """
     selected = [x for x in result.get("selected", []) if isinstance(x, dict)]
     pending = [x for x in result.get("pending", []) if isinstance(x, dict)]
-    skipped = [x for x in result.get("skipped", []) if isinstance(x, dict)]
-    kept, dupes = dedupe_within_batch(selected + pending)
-    original_selected = {source_key(x.get("url") or x.get("source_url") or "") for x in selected}
-    new_selected: list[dict[str, Any]] = []
-    new_pending: list[dict[str, Any]] = []
-    for item in kept:
+    for item in selected + pending:
         sig = story_signature(item)
         if sig:
             item["story_signature"] = sig
         item["story_footprint"] = story_footprint(item)
-        key = source_key(item.get("url") or item.get("source_url") or "")
-        if key in original_selected or str(item.get("ai_priority_label") or "").lower() == "high":
-            item["decision"] = "selected"
-            new_selected.append(item)
-        else:
-            item["decision"] = "pending"
-            new_pending.append(item)
-    for dupe in dupes:
-        dupe = dict(dupe)
-        dupe["decision"] = "skip"
-        dupe["priority"] = "skip"
-        dupe["article_type"] = "duplicate"
-        dupe.setdefault("menzo_policy", {})["duplicate_by_story_footprint"] = True
-        skipped.append(dupe)
-    result["selected"] = sorted(new_selected, key=sort_item, reverse=True)
-    result["pending"] = sorted(new_pending, key=sort_item, reverse=True)
-    result["skipped"] = skipped
+        item.setdefault("menzo_policy", {})["story_footprint_enrichment_only"] = True
+    result["selected"] = sorted(selected, key=sort_item, reverse=True)
+    result["pending"] = sorted(pending, key=sort_item, reverse=True)
     result["allowed_urls_for_v92"] = [str(x.get("url") or x.get("source_url") or "") for x in result["selected"] if x.get("url") or x.get("source_url")]
-    result["handoff"] = {"to_bob_or_v92": len(result["selected"]), "pending": len(result["pending"]), "skipped": len(result["skipped"])}
-    result.setdefault("postprocess", {})["story_footprint_duplicates_skipped"] = len(dupes)
+    result["handoff"] = {"to_bob_or_v92": len(result["selected"]), "pending": len(result["pending"]), "skipped": len(result.get("skipped", []))}
+    pp = result.setdefault("postprocess", {})
+    pp["story_footprint_duplicates_skipped"] = 0
+    pp["story_footprint_enrichment_only"] = len(selected) + len(pending)
 
 
 def ai_review_by_url(result: dict[str, Any]) -> dict[str, dict[str, Any]]:
@@ -707,39 +696,20 @@ def enforce_ai_skip_binding(result: dict[str, Any]) -> None:
 
 
 def apply_generalized_fingerprint_policy(result: dict[str, Any]) -> None:
-    memory = load_story_fingerprints()
+    """Attach generalized story fingerprints without enforcing duplicate skips.
+
+    Fingerprints remain useful diagnostics and memory material, but they cannot
+    remove current candidates before Menzo's Gemini duplicate batches.
+    """
     selected = [x for x in result.get("selected", []) if isinstance(x, dict)]
     pending = [x for x in result.get("pending", []) if isinstance(x, dict)]
-    skipped = [x for x in result.get("skipped", []) if isinstance(x, dict)]
-    new_selected: list[dict[str, Any]] = []
-    new_pending: list[dict[str, Any]] = []
-    dupes: list[dict[str, Any]] = []
-    local_memory: list[dict[str, Any]] = list(memory)
-    for item in sorted(selected + pending, key=sort_item, reverse=True):
-        item = dict(item)
+    for item in selected + pending:
         item["story_fingerprint"] = build_generalized_fingerprint(item)
-        duplicate, score = find_duplicate_by_fingerprint(item, local_memory)
-        if duplicate:
-            item["decision"] = "skip"
-            item["priority"] = "skip"
-            item["article_type"] = "duplicate"
-            item["reason"] = f"skip:story_fingerprint_overlap:{score}"
-            item["duplicate_of"] = duplicate.get("url") or duplicate.get("source_url")
-            item["story_overlap_score"] = score
-            item.setdefault("menzo_policy", {})["duplicate_by_generalized_story_fingerprint"] = True
-            dupes.append(item)
-            continue
-        # Add the item to local memory immediately to dedupe within the same run.
-        local_memory.append({"fingerprint": item["story_fingerprint"], "url": item.get("url") or item.get("source_url"), "title": item.get("title") or item.get("source_title")})
-        if str(item.get("decision") or "").lower() == "pending":
-            new_pending.append(item)
-        else:
-            item["decision"] = "selected"
-            new_selected.append(item)
-    result["selected"] = sorted(new_selected, key=sort_item, reverse=True)
-    result["pending"] = sorted(new_pending, key=sort_item, reverse=True)
-    result["skipped"] = skipped + dupes
-    result.setdefault("postprocess", {})["story_fingerprint_duplicates_skipped"] = len(dupes)
+        item.setdefault("menzo_policy", {})["story_fingerprint_enrichment_only"] = True
+    result["selected"] = sorted(selected, key=sort_item, reverse=True)
+    result["pending"] = sorted(pending, key=sort_item, reverse=True)
+    result.setdefault("postprocess", {})["story_fingerprint_duplicates_skipped"] = 0
+    result.setdefault("postprocess", {})["story_fingerprint_enrichment_only"] = len(selected) + len(pending)
 
 
 def enforce_selected_cap(result: dict[str, Any]) -> None:
@@ -2279,6 +2249,23 @@ def apply_arbitration_decision(item: dict[str, Any], ai_data: dict[str, Any], mo
 
 
 def apply_ai_duplicate_arbitration(result: dict[str, Any], massy_board: dict[str, Any] | None = None) -> None:
+    """Legacy duplicate arbitration is disabled; Gemini batch guards are authoritative.
+
+    Kept as a compatibility entry point for older callers/tests, but it must not
+    call Gemini, use Massy clusters, consult caches, or mutate selected/pending
+    candidates as duplicate decisions.
+    """
+    pp = result.setdefault("postprocess", {})
+    pp.setdefault("ai_cross_source_duplicate_arbitration_used", 0)
+    pp.setdefault("ai_duplicate_arbitration_clusters", 0)
+    pp.setdefault("ai_duplicate_arbitration_calls", 0)
+    pp.setdefault("gemini_calls_used_for_duplicate_arbitration", 0)
+    pp.setdefault("duplicate_arbitration_cache_hit", 0)
+    pp.setdefault("duplicate_arbitration_cache_miss", 0)
+    pp.setdefault("duplicate_arbitration_cache_expired", 0)
+    pp.setdefault("gemini_calls_avoided_by_duplicate_arbitration_cache", 0)
+    pp["legacy_ai_duplicate_arbitration_disabled"] = True
+    return
     selected = [dict(x) for x in result.get("selected", []) if isinstance(x, dict)]
     pending = [dict(x) for x in result.get("pending", []) if isinstance(x, dict)]
     skipped = [x for x in result.get("skipped", []) if isinstance(x, dict)]
@@ -2588,9 +2575,10 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     policy["soft_news_ttl_hours"] = SOFTNEWS_TTL_HOURS
     policy["menzo_hard_skips_exported_to_massy"] = True
     policy["source_opinion_skip"] = True
-    policy["story_footprint_dedupe_before_bob"] = True
+    policy["story_footprint_enrichment_only"] = True
+    policy["story_fingerprint_enrichment_only"] = True
     policy["story_footprints_ttl_days"] = 7
-    policy["story_dedupe_before_bob"] = True
+    policy["gemini_batch_duplicate_arbitration_is_sole_semantic_authority"] = True
     policy["medical_return_major_brands_only"] = True
     policy["betting_odds_low_editorial_value_skip"] = True
     policy["brand_rank_tiebreaker"] = "WWE/NXT/AEW > TNA/ROH > OVW/indie"
