@@ -23,7 +23,7 @@ def patch_paths(tmp_path, monkeypatch):
 
 
 def item(url="https://example.test/sami", title="Sami Zayn Has Profanity-Laden Reaction To Undisputed WWE Title Loss To CM Punk On Raw", score=80, article_type="hard_news"):
-    return {"title": title, "url": url, "source": "Example", "score": score, "priority": "hard", "article_type": article_type, "decision": "pending", "summary": "Sami Zayn reacted after losing to CM Punk on Raw."}
+    return {"title": title, "url": url, "source": "Example", "score": score, "priority": "hard", "article_type": article_type, "decision": "pending", "summary": "Sami Zayn reacted after losing to CM Punk on Raw. WWE officially confirmed Sami Zayn's injury requires surgery."}
 
 
 def board(*urls):
@@ -40,7 +40,7 @@ def run_once(candidate):
 
 
 def ai_pending(*args, **kwargs):
-    return ({"cluster_type": "same_core_fact_new_angle", "decision": "pending_followup", "confidence": 90, "reason": "same pending follow-up"}, "gemini-3.5-flash")
+    return ({"decision": "MATERIAL_UPDATE", "material_new_fact": "WWE officially confirmed Sami Zayn's injury requires surgery.", "reason": "same pending follow-up"}, "gemini-3.5-flash")
 
 
 def test_same_candidate_cluster_within_ttl_calls_gemini_once(tmp_path, monkeypatch):
@@ -93,7 +93,7 @@ def test_expired_cache_triggers_new_gemini_arbitration(tmp_path, monkeypatch):
     assert result["postprocess"]["duplicate_arbitration_cache_expired"] == 1
 
 
-def test_new_url_or_material_title_or_score_crossing_invalidates_cache(tmp_path, monkeypatch):
+def test_same_story_new_source_reuses_cache_but_material_title_or_score_crossing_invalidates_cache(tmp_path, monkeypatch):
     patch_paths(tmp_path, monkeypatch)
     calls = []
     monkeypatch.setattr(menzo, "call_gemini_json_model", lambda *a, **k: (calls.append(1) or ai_pending(*a, **k)))
@@ -102,9 +102,9 @@ def test_new_url_or_material_title_or_score_crossing_invalidates_cache(tmp_path,
     menzo.apply_ai_duplicate_arbitration(r_new_url, board("https://example.test/punk", "https://example.test/new"))
     run_once(item(title="Sami Zayn Responds To Different Raw Situation", score=60, article_type="soft_news"))
     run_once(item(score=80, article_type="soft_news"))
-    # Crossing the threshold in either direction is material enough to re-arbitrate.
+    # New source URL for the same normalized story reuses cache; material title and score threshold changes still re-arbitrate.
     run_once(item(score=60, article_type="soft_news"))
-    assert len(calls) == 5
+    assert len(calls) == 4
 
 
 def test_cache_read_write_failure_non_fatal(tmp_path, monkeypatch):
