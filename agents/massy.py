@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import hashlib
 import json
+import os
 import re
 from datetime import datetime, timezone
 from pathlib import Path
@@ -245,6 +247,42 @@ def report_hint(entry: dict[str, Any]) -> tuple[str | None, str | None]:
     return wrestlinginc_report_like_hint(entry, blob)
 
 
+MASSY_DUPLICATE_SUSPECT_THRESHOLD = float(os.getenv("MASSY_DUPLICATE_SUSPECT_THRESHOLD", "0.55"))
+
+
+def _duplicate_words(item: dict[str, Any]) -> set[str]:
+    text = " ".join(str(item.get(k) or "") for k in ["title", "source_title", "summary", "description", "excerpt", "body_html"]).lower()
+    return {w for w in re.findall(r"[a-z0-9]+", text) if len(w) >= 3 and w not in {"the", "and", "with", "from", "during", "after", "before", "news", "report", "wwe", "aew"}}
+
+
+def deterministic_duplicate_score(a: dict[str, Any], b: dict[str, Any]) -> float:
+    ua = normalize_url(str(a.get("url") or a.get("source_url") or ""))
+    ub = normalize_url(str(b.get("url") or b.get("source_url") or ""))
+    if ua and ub and ua == ub:
+        return 1.0
+    wa, wb = _duplicate_words(a), _duplicate_words(b)
+    if not wa or not wb:
+        return 0.0
+    return round(len(wa & wb) / max(1, min(len(wa), len(wb))), 3)
+
+
+def suspicious_duplicate_clusters(candidates: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    clusters: list[dict[str, Any]] = []
+    seen: set[tuple[str, str]] = set()
+    for i in range(len(candidates)):
+        for j in range(i + 1, len(candidates)):
+            score = deterministic_duplicate_score(candidates[i], candidates[j])
+            if score < MASSY_DUPLICATE_SUSPECT_THRESHOLD:
+                continue
+            urls = tuple(sorted([normalize_url(str(candidates[i].get("url") or candidates[i].get("source_url") or "")), normalize_url(str(candidates[j].get("url") or candidates[j].get("source_url") or ""))]))
+            if urls in seen:
+                continue
+            seen.add(urls)
+            records = [dict(candidates[i], deterministic_duplicate_score=score), dict(candidates[j], deterministic_duplicate_score=score)]
+            clusters.append({"scope": "same_run", "deterministic_duplicate_score": score, "records": records})
+    return clusters
+
+
 def classify_entries(entries: list[dict[str, Any]], already_worked_urls: set[str], already_published_urls: set[str]) -> dict[str, Any]:
     seen_scan: set[str] = set()
     already_worked: list[dict[str, Any]] = []
@@ -288,7 +326,8 @@ def classify_entries(entries: list[dict[str, Any]], already_worked_urls: set[str
             continue
         news_candidates.append(compact_entry(entry, "news_candidate", "requires_menzo_classification", assigned_to="Menzo"))
 
-    return {"already_worked": already_worked, "hard_skipped": hard_skipped, "report_candidates": report_candidates, "news_candidates_for_menzo": news_candidates}
+    suspicious = suspicious_duplicate_clusters(news_candidates)
+    return {"already_worked": already_worked, "hard_skipped": hard_skipped, "report_candidates": report_candidates, "news_candidates_for_menzo": news_candidates, "suspicious_story_clusters": suspicious, "massy_suspicious_duplicate_pairs": len(suspicious)}
 
 
 def run_massy() -> dict[str, Any]:
@@ -320,6 +359,7 @@ def run_massy() -> dict[str, Any]:
             "already_worked": len(classified["already_worked"]),
             "hard_skipped": len(classified["hard_skipped"]),
             "already_published_hard_skipped": sum(1 for x in classified["hard_skipped"] if x.get("reason") == "url_already_published"),
+            "massy_suspicious_duplicate_pairs": classified.get("massy_suspicious_duplicate_pairs", 0),
         },
     }
     write_json(ARTIFACT_DIR / "massy_board.json", board)

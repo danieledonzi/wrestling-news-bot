@@ -36,6 +36,8 @@ DRY_RUN = str(os.getenv("V93_PUBLISHER_DRY_RUN", "0")).strip().lower() in {"1", 
 
 session = requests.Session()
 session.headers.update({"User-Agent": "OpenWrestlingTV-v93-Publisher/1.0"})
+
+from agents import same_story_guard as same_story_safety
 _category_cache: dict[str, int | None] = {}
 _media_cache: dict[str, tuple[int | None, str | None]] = {}
 
@@ -615,6 +617,45 @@ def publish_article(article: dict[str, Any], history: dict[str, Any], wp_ok: boo
     return result
 
 
+def publisher_duplicate_safety_filter(articles: list[dict[str, Any]], history: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Publisher only enforces Menzo duplicate authorization; it never classifies stories or calls Gemini."""
+    kept: list[dict[str, Any]] = []
+    skipped: list[dict[str, Any]] = []
+    for article in articles:
+        has_resolution = any(k in article for k in ["menzo_duplicate_checked", "menzo_authorized", "menzo_duplicate_decision", "menzo_duplicate_scope"])
+        authorized = article.get("menzo_authorized")
+        if has_resolution and authorized is not True:
+            reason = str(article.get("menzo_duplicate_reason") or "skip:duplicate_arbitration_unresolved")
+            row = {
+                "source_url": str(article.get("source_url") or article.get("url") or ""),
+                "title_it": str(article.get("title_it") or article.get("title") or article.get("source_title") or ""),
+                "status": "skipped",
+                "reason": reason,
+                "menzo_duplicate_checked": article.get("menzo_duplicate_checked"),
+                "menzo_duplicate_scope": article.get("menzo_duplicate_scope") or "",
+                "menzo_duplicate_decision": article.get("menzo_duplicate_decision") or "",
+                "menzo_authorized": False,
+                "menzo_compared_with_url": article.get("menzo_compared_with_url") or "",
+                "menzo_duplicate_reason": reason,
+                "menzo_new_fact": article.get("menzo_new_fact") or "",
+                "menzo_winner_url": article.get("menzo_winner_url") or "",
+            }
+            skipped.append(row)
+            continue
+        if article.get("menzo_duplicate_checked") and article.get("menzo_authorized") is not True:
+            row = {
+                "source_url": str(article.get("source_url") or article.get("url") or ""),
+                "title_it": str(article.get("title_it") or article.get("title") or article.get("source_title") or ""),
+                "status": "skipped",
+                "reason": "skip:duplicate_arbitration_unresolved",
+                "menzo_authorized": False,
+            }
+            skipped.append(row)
+            continue
+        kept.append(article)
+    return kept, skipped
+
+
 def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]:
     alfred = alfred_result if isinstance(alfred_result, dict) else load_json(ALFRED_REVIEW_FILE, {})
     all_articles = alfred.get("approved_articles", []) if isinstance(alfred, dict) else []
@@ -623,13 +664,29 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
     valid_articles = [article for article in all_articles if isinstance(article, dict)]
     trace_metadata_index = build_trace_metadata_index(alfred if isinstance(alfred, dict) else {})
     valid_articles = [enrich_article_trace_metadata(article, trace_metadata_index) for article in valid_articles]
-    approved_total = len(valid_articles)
-    articles = valid_articles[:MAX_POSTS_PER_RUN]
-    overflow_articles = valid_articles[MAX_POSTS_PER_RUN:]
     wp_ok, wp_reason = wp_ready()
     history = load_json(PUBLISHER_HISTORY_FILE, {})
     if not isinstance(history, dict):
         history = {}
+    safety_error = ""
+    try:
+        valid_articles, safety_skipped = publisher_duplicate_safety_filter(valid_articles, history)
+    except Exception as exc:
+        safety_error = f"publisher_same_story_safety_unavailable:{exc}"
+        safety_skipped = [
+            {
+                "source_url": str(article.get("source_url") or article.get("url") or ""),
+                "title_it": str(article.get("title_it") or article.get("title") or ""),
+                "status": "skipped",
+                "reason": "skip:publisher_same_story_safety_unavailable",
+                "publisher_safety_error": safety_error,
+            }
+            for article in valid_articles
+        ]
+        valid_articles = []
+    approved_total = len(valid_articles) + len(safety_skipped)
+    articles = valid_articles[:MAX_POSTS_PER_RUN]
+    overflow_articles = valid_articles[MAX_POSTS_PER_RUN:]
 
     print(f"[PUBLISHER v93.40] Avvio pubblicazione | approved_total={approved_total} attempted={len(articles)} max={MAX_POSTS_PER_RUN} wp_ok={wp_ok} dry_run={DRY_RUN}", flush=True)
     results = [publish_article(article, history, wp_ok) for article in articles if isinstance(article, dict)]
@@ -642,7 +699,7 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
         }
         for article in overflow_articles
     ]
-    results_for_audit = results + capacity_skipped
+    results_for_audit = results + capacity_skipped + safety_skipped
     if not DRY_RUN and wp_ok:
         write_json(PUBLISHER_HISTORY_FILE, history)
 
@@ -653,24 +710,20 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
         "mode": "wordpress_publisher_mixed_embed_blocks",
         "input": {"alfred_version": alfred.get("version") if isinstance(alfred, dict) else None, "approved_articles": approved_total, "attempted_articles": len(articles), "max_posts_per_run": MAX_POSTS_PER_RUN, "capacity_skipped": len(capacity_skipped)},
         "wp": {"ready": wp_ok, "reason": wp_reason, "post_status": POST_STATUS, "dry_run": DRY_RUN},
-        "results": results,
-        "skipped_approved_articles": capacity_skipped,
-        "skipped_approved_articles": capacity_skipped,
-        "skipped_approved_articles": capacity_skipped,
+        "publisher_safety_error": safety_error,
+        "results": results + safety_skipped,
+        "skipped_approved_articles": capacity_skipped + safety_skipped,
         "handoff": {
             "published": sum(1 for r in results if r.get("status") == "published"),
             "already_published": sum(1 for r in results if r.get("status") == "already_published"),
             "dry_run": sum(1 for r in results if r.get("status") == "dry_run"),
             "wp_not_ready": sum(1 for r in results if r.get("status") == "wp_not_ready"),
             "errors": sum(1 for r in results if r.get("status") == "publish_error"),
+            "publisher_unauthorized_duplicate_blocks": len(safety_skipped),
+            "publisher_duplicate_safety_blocks": len(safety_skipped),
+            "publisher_safety_unavailable_blocks": len([r for r in safety_skipped if r.get("reason") == "skip:publisher_same_story_safety_unavailable"]),
             "skipped_capacity": len(capacity_skipped),
-            "approved_not_attempted": len(capacity_skipped),
-            "approved_accounted_for": len(results_for_audit),
-            "skipped_capacity": len(capacity_skipped),
-            "approved_not_attempted": len(capacity_skipped),
-            "approved_accounted_for": len(results_for_audit),
-            "skipped_capacity": len(capacity_skipped),
-            "approved_not_attempted": len(capacity_skipped),
+            "approved_not_attempted": len(capacity_skipped) + len(safety_skipped),
             "approved_accounted_for": len(results_for_audit),
         },
         "policy": {"source_attribution": True, "strip_inline_image_placeholders": True, "plain_youtube_urls_for_wordpress_oembed": True, "plain_instagram_urls_for_wordpress_oembed": True, "social_embed_shortcode_blocks": True, "normalized_embed_dedupe": True, "semantic_story_dedupe": True, "featured_image_source": "meta.featured_image_or_first_placeholder", "idempotency": "state/newsroom/publisher_history.json by source_url"},

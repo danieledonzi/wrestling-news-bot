@@ -24,6 +24,15 @@ from agents.story_dedupe_v93_32 import (
     story_footprint,
     story_signature,
 )
+from agents.same_story_guard import (
+    cleaned_meaningful_text,
+    duplicate_guard_mark,
+    normalized_same_story_cluster_key,
+    richer_winner,
+    same_story_signal,
+    story_terms as generalized_story_terms,
+    unique_media_count,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 STATE_DIR = ROOT / "state"
@@ -61,6 +70,37 @@ MENZO_CROSS_RUN_NOVELTY_MIN_SCORE = float(os.getenv("MENZO_CROSS_RUN_NOVELTY_MIN
 MENZO_CROSS_RUN_NOVELTY_AI_ENABLED = os.getenv("MENZO_CROSS_RUN_NOVELTY_AI_ENABLED", "true").strip().lower() not in {"0", "false", "no", "off"}
 MENZO_CROSS_RUN_NOVELTY_AI_MODEL = os.getenv("MENZO_CROSS_RUN_NOVELTY_AI_MODEL", "gemini-3.1-flash-lite").strip() or "gemini-3.1-flash-lite"
 MASTER_LOG_FILE = NEWSROOM_STATE_DIR / "master_log.jsonl"
+RECENT_PUBLISHED_DUPLICATE_LOOKBACK_HOURS = int(os.getenv("MENZO_RECENT_PUBLISHED_DUPLICATE_LOOKBACK_HOURS", "12"))
+
+SAME_STORY_STOPWORDS = {
+    "wwe", "aew", "nxt", "roh", "tna", "the", "and", "with", "from", "during", "after", "before",
+    "news", "report", "reports", "update", "officially", "revealed", "booked", "makes", "made",
+    "takes", "over", "into", "match", "title", "championship", "undisputed", "challenger", "return",
+    "returns", "returned", "smackdown", "raw", "dynamite", "collision", "summerslam",
+}
+
+SAME_STORY_ENTITY_ALIASES = {
+    "baron corbin": ["baron corbin", "corbin"],
+    "trick williams": ["trick williams", "trick"],
+    "carmelo hayes": ["carmelo hayes", "hayes"],
+    "cm punk": ["cm punk", "punk"],
+    "cody rhodes": ["cody rhodes", "cody"],
+}
+
+SAME_STORY_ACTION_ALIASES = {
+    "return": ["return", "returns", "returned", "makes wwe return", "back"],
+    "match_announcement": ["match booked", "challenger", "officially revealed", "announced", "announcement", "set for", "booked"],
+    "attack_intervention": ["takes out", "attack", "attacks", "intervention", "intervenes", "costs"],
+    "contract": ["contract", "signed", "signs", "free agent"],
+    "injury": ["injury", "injured", "hurt", "medical"],
+}
+
+SAME_STORY_EVENT_ALIASES = {
+    "smackdown": ["smackdown", "7/10", "7 10"],
+    "summerslam": ["summerslam", "summer slam"],
+    "raw": ["raw"],
+    "dynamite": ["dynamite"],
+}
 
 
 def utc_now() -> str:
@@ -99,6 +139,103 @@ def source_key(value: str) -> str:
 
 def normalize_text(value: str) -> str:
     return base.normalize(value)
+
+
+def same_story_blob(item: dict[str, Any]) -> str:
+    meta = item.get("meta") if isinstance(item.get("meta"), dict) else {}
+    trace = item.get("trace_metadata") if isinstance(item.get("trace_metadata"), dict) else {}
+    return normalize_text(" ".join(str(x or "") for x in [
+        item.get("title"), item.get("source_title"), item.get("title_it"), item.get("summary"),
+        item.get("excerpt"), item.get("excerpt_it"), item.get("body_html"), item.get("reason"),
+        item.get("category_hint"), item.get("event_key"), item.get("story_footprint"),
+        meta.get("title"), meta.get("source_title"), meta.get("description"),
+        trace.get("source_title"), trace.get("menzo_reason"),
+    ])).lower()
+
+
+def _alias_hits(blob: str, aliases: dict[str, list[str]]) -> set[str]:
+    return {key for key, values in aliases.items() if any(re.search(rf"\b{re.escape(v)}\b", blob) for v in values)}
+
+
+def same_story_terms(item: dict[str, Any]) -> dict[str, Any]:
+    blob = same_story_blob(item)
+    words = {w for w in re.findall(r"[a-z0-9']+", blob) if len(w) >= 3 and w not in SAME_STORY_STOPWORDS}
+    return {
+        "blob": blob,
+        "entities": _alias_hits(blob, SAME_STORY_ENTITY_ALIASES),
+        "actions": _alias_hits(blob, SAME_STORY_ACTION_ALIASES),
+        "events": _alias_hits(blob, SAME_STORY_EVENT_ALIASES),
+        "words": words,
+    }
+
+
+def same_story_signal(a: dict[str, Any], b: dict[str, Any]) -> tuple[str, list[str], float]:
+    """Return certain_duplicate, suspicious_or_ambiguous, or clearly_distinct."""
+    ta, tb = same_story_terms(a), same_story_terms(b)
+    entity_overlap = ta["entities"] & tb["entities"]
+    action_overlap = ta["actions"] & tb["actions"]
+    event_overlap = ta["events"] & tb["events"]
+    word_overlap = len(ta["words"] & tb["words"]) / max(1, min(len(ta["words"]), len(tb["words"])))
+    sources: list[str] = []
+    if entity_overlap:
+        sources.append("entity_overlap")
+    if action_overlap:
+        sources.append("action_overlap")
+    if event_overlap:
+        sources.append("event_context_overlap")
+    if word_overlap >= 0.45:
+        sources.append("token_overlap")
+    # Obvious same factual story: same named subject(s), same action, same show/event.
+    if entity_overlap and action_overlap and (event_overlap or word_overlap >= 0.55):
+        return "certain_duplicate", sources, round(min(1.0, 0.72 + word_overlap / 4), 3)
+    # Same match announcement can use different wording: Punk/Cody + SummerSlam + title/challenger terms.
+    if len(entity_overlap) >= 2 and event_overlap and (action_overlap or word_overlap >= 0.35):
+        return "certain_duplicate", sources, round(min(1.0, 0.70 + word_overlap / 4), 3)
+    # Plausible same-story signal: do not let deterministic novelty allow bypass AI.
+    if (entity_overlap and event_overlap) or (entity_overlap and action_overlap) or word_overlap >= 0.52:
+        return "suspicious_or_ambiguous", sources or ["token_overlap"], round(max(0.5, word_overlap), 3)
+    return "clearly_distinct", sources, round(word_overlap, 3)
+
+
+def normalized_same_story_cluster_key(records: list[dict[str, Any]]) -> str:
+    entities: set[str] = set()
+    actions: set[str] = set()
+    events: set[str] = set()
+    words: set[str] = set()
+    for rec in records:
+        terms = same_story_terms(rec)
+        entities |= terms["entities"]; actions |= terms["actions"]; events |= terms["events"]
+        words |= set(sorted(terms["words"])[:12])
+    payload = {"entities": sorted(entities), "actions": sorted(actions), "events": sorted(events), "words": sorted(words)[:18]}
+    return hashlib.sha256(json.dumps(payload, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()
+
+
+def duplicate_guard_mark(item: dict[str, Any], *, scope: str, result: str, compared: dict[str, Any] | None = None, signal_sources: list[str] | None = None, ai_called: bool = False, model: str = "", cache_hit: bool = False, skip_reason: str = "", winner: dict[str, Any] | None = None, winner_reason: str = "") -> None:
+    item["duplicate_guard_checked"] = True
+    item["duplicate_guard_scope"] = scope
+    item["duplicate_guard_signal_sources"] = signal_sources or []
+    item["duplicate_guard_result"] = result
+    item["duplicate_guard_ai_called"] = ai_called
+    item["duplicate_guard_ai_model"] = model
+    item["duplicate_guard_cache_hit"] = cache_hit
+    if compared:
+        item["duplicate_guard_compared_with_url"] = compared.get("url") or compared.get("source_url") or ""
+        item["duplicate_guard_compared_with_title"] = compared.get("title") or compared.get("source_title") or compared.get("title_it") or ""
+        item["duplicate_guard_compared_with_wp_link"] = compared.get("wp_link") or ""
+    if winner:
+        item["duplicate_guard_winner_url"] = winner.get("url") or winner.get("source_url") or ""
+        item["duplicate_guard_winner_reason"] = winner_reason
+    if skip_reason:
+        item["duplicate_guard_skip_reason"] = skip_reason
+
+
+# P0 duplicate safety uses dependency-light generalized utilities, not title-specific aliases above.
+from agents.same_story_guard import (  # noqa: E402,F811
+    duplicate_guard_mark,
+    normalized_same_story_cluster_key,
+    richer_winner,
+    same_story_signal,
+)
 
 
 def priority_label_from_review(review: dict[str, Any]) -> str:
@@ -709,20 +846,16 @@ def build_ai_dedupe_prompt(records: list[dict[str, Any]]) -> str:
     return """You are Menzo's cross-source duplicate arbiter. Decide whether the NEW candidate repeats already-published or suspicious records, or has a truly new editorial angle.
 Return ONLY valid JSON with this exact shape:
 {
-  "cluster_type": "same_story|same_core_fact_new_angle|different_story|uncertain",
-  "decision": "skip_duplicate|pending_followup|selected|pending_review",
-  "confidence": 0,
-  "canonical_event_label": "",
-  "reason": "",
-  "suggested_followup_title_it": "",
-  "angle_summary_it": ""
+  "decision": "SAME_STORY_DUPLICATE|MATERIAL_UPDATE|DISTINCT_STORY",
+  "winner_url": "",
+  "material_new_fact": "",
+  "reason": ""
 }
 Rules:
-- same_story + no meaningful new angle => decision skip_duplicate.
-- same core fact but a useful different angle => pending_followup unless editorial value is clearly high; then selected.
-- uncertain or low confidence => pending_review.
+- SAME_STORY_DUPLICATE: same factual event with no concrete new development.
+- MATERIAL_UPDATE: allow only when material_new_fact identifies a new fact that changes the story; extra prose, background, quotes, or a second source are not material updates.
+- DISTINCT_STORY: facts are materially different.
 - Do not invent deterministic local rules. Judge only provided title, summary, source_url/source, event_key, excerpt/canonical_summary, and footprints/history.
-- If follow-up, suggested_followup_title_it must not repeat the already-published core fact as the title angle.
 
 Records:
 """ + json.dumps(records, ensure_ascii=False, indent=2)
@@ -754,18 +887,20 @@ def duplicate_arbitration_context(item: dict[str, Any], records: list[dict[str, 
     except Exception:
         score = 0
     article_type = str(item.get("article_type") or "").strip().lower()
+    cluster_key = normalized_same_story_cluster_key([item] + records)
     payload = {
         "purpose": "ai_duplicate_arbitration",
         "schema_version": MENZO_DUPLICATE_ARBITRATION_CACHE_SCHEMA_VERSION,
-        "candidate_source_url": candidate_url,
-        "compared_source_urls": compared_urls,
-        "candidate_title_normalized": candidate_title,
+        "normalized_story_cluster_key": cluster_key,
         "story_fingerprint": story_fingerprint,
     }
     cache_key = hashlib.sha256(json.dumps(payload, ensure_ascii=False, sort_keys=True).encode("utf-8")).hexdigest()
     return {
         **payload,
         "cache_key": cache_key,
+        "candidate_source_url": candidate_url,
+        "compared_source_urls": compared_urls,
+        "candidate_title_normalized": candidate_title,
         "compared_titles_normalized": compared_titles,
         "score_snapshot": score,
         "priority_snapshot": item.get("priority") or item.get("ai_priority_label") or item.get("priority_label") or "",
@@ -794,7 +929,7 @@ def duplicate_arbitration_cache_lookup(context: dict[str, Any], *, threshold: in
         expires_at = datetime.fromisoformat(str(entry.get("expires_at") or "").replace("Z", "+00:00"))
         if expires_at < datetime.now(timezone.utc):
             return None, "duplicate_arbitration_cache_expired"
-        for field in ["candidate_source_url", "candidate_title_normalized", "compared_source_urls", "story_fingerprint"]:
+        for field in ["normalized_story_cluster_key", "story_fingerprint"]:
             if entry.get(field) != context.get(field):
                 return None, "duplicate_arbitration_cache_miss"
         if context.get("article_type_snapshot") == "hard_news" and entry.get("article_type_snapshot") != "hard_news":
@@ -835,6 +970,146 @@ def duplicate_arbitration_cache_store(context: dict[str, Any], ai_data: dict[str
     except Exception as exc:
         print(f"WARNING: menzo duplicate arbitration cache write failed: {exc}")
 
+
+GENERIC_MATERIAL_UPDATE_TEXT = {
+    "more details", "new information", "different source", "additional context", "longer report",
+    "more background", "extra quotes", "another source", "same story", "follow up", "follow-up",
+}
+GENERIC_MATERIAL_UPDATE_PATTERNS = [
+    r"\b(?:more|additional|further|extra)\s+(?:details?|context|information|quotes?|background)\b",
+    r"\b(?:second|another|new|different)\s+source\b",
+    r"\b(?:longer|fuller|more complete|richer)\s+(?:report|article|story|coverage)\b",
+    r"\b(?:different wording|different title|more media|new photos?|new videos?|expanded coverage|added background)\b",
+    r"\b(?:elaborates|expands on|repeats the announcement|confirms the same report|same announcement|same story)\b",
+]
+CONCRETE_MATERIAL_UPDATE_PATTERNS = {
+    "official_confirmation": r"\b(?:wwe|aew|nxt|roh|tna|official(?:ly)?|announced?|confirmed?|revealed?|booked)\b",
+    "opponent_or_participant_change": r"\b(?:opponent|challenger|participant|replaced|added|removed|fatal four-way|triple threat|four-way|tag team)\b",
+    "match_type_change": r"\b(?:changed from|changed to|singles match|fatal four-way|triple threat|stipulation|match type)\b",
+    "date_location_event_change": r"\b(?:date|location|venue|city|chicago|moved|postponed|cancelled|canceled|rescheduled)\b",
+    "title_or_championship_change": r"\b(?:title|championship|champion|captures|wins|won|undisputed)\b",
+    "injury_status_change": r"\b(?:injury|injured|surgery|medical|cleared|ruled out|requires surgery|evaluation)\b",
+    "contract_status_change": r"\b(?:contract|signed|renewed|terminated|multi-year|deal|agreement|free agent)\b",
+    "disciplinary_status_change": r"\b(?:suspension|suspended|released|release|fired|disciplinary|legal)\b",
+}
+
+
+def _canonical_arbitration_payload(data: dict[str, Any], *, legacy_cache_normalized: bool = False) -> dict[str, Any]:
+    return {
+        "decision": str(data.get("decision") or ""),
+        "winner_url": str(data.get("winner_url") or ""),
+        "material_new_fact": str(data.get("material_new_fact") or ""),
+        "reason": str(data.get("reason") or ""),
+        **({"legacy_cache_normalized": True} if legacy_cache_normalized else {}),
+    }
+
+
+def _material_fact_class(fact: str) -> str:
+    low = fact.lower().strip()
+    if len(low) < 12:
+        return ""
+    if low in GENERIC_MATERIAL_UPDATE_TEXT or any(re.search(pat, low) for pat in GENERIC_MATERIAL_UPDATE_PATTERNS):
+        return ""
+    for cls, pat in CONCRETE_MATERIAL_UPDATE_PATTERNS.items():
+        if re.search(pat, low):
+            return cls
+    return ""
+
+
+def _salient_material_tokens(text: str) -> set[str]:
+    generic = {"the", "this", "that", "with", "from", "match", "story", "report", "article", "officially", "announced", "confirmed", "revealed", "booked", "wwe", "aew", "nxt", "now", "has", "have", "was", "were", "been", "will", "for", "and", "about"}
+    return {w for w in re.findall(r"[a-z0-9]+", str(text or "").lower()) if len(w) >= 4 and w not in generic}
+
+
+def _record_text_for_material(record: dict[str, Any]) -> str:
+    return " ".join(str(record.get(k) or "") for k in ["title", "source_title", "summary", "description", "body_html", "excerpt", "story_footprint"]).lower()
+
+
+def _validate_material_update_fact(fact: str, *, records: list[dict[str, Any]] | None = None, candidate_url: str = "", winner_url: str = "", allow_without_records: bool = False) -> dict[str, Any]:
+    fact_class = _material_fact_class(fact)
+    if not fact_class:
+        return {"valid": False, "reason": "generic_or_non_concrete", "fact_class": "", "grounded": False}
+    if not records:
+        if allow_without_records:
+            return {"valid": True, "reason": "concrete_fact_from_cached_record_without_context", "fact_class": fact_class, "grounded": False}
+        return {"valid": False, "reason": "material_fact_not_grounded_no_records", "fact_class": fact_class, "grounded": False}
+    candidate_key = source_key(winner_url or candidate_url or "")
+    candidate_records = [r for r in records if candidate_key and source_key(r.get("url") or r.get("source_url") or "") == candidate_key]
+    if not candidate_records and records:
+        candidate_records = [records[0]]
+    prior_records = [r for r in records if r not in candidate_records]
+    tokens = _salient_material_tokens(fact)
+    if not tokens:
+        return {"valid": False, "reason": "material_fact_too_vague", "fact_class": fact_class, "grounded": False}
+    candidate_blob = " ".join(_record_text_for_material(r) for r in candidate_records)
+    prior_blob = " ".join(_record_text_for_material(r) for r in prior_records)
+    if tokens and not (tokens & set(re.findall(r"[a-z0-9]+", candidate_blob))):
+        return {"valid": False, "reason": "material_fact_not_grounded_in_candidate", "fact_class": fact_class, "grounded": False}
+    # Reject when the supposedly new salient fact is already present in the compared/prior record set.
+    if tokens and tokens.issubset(set(re.findall(r"[a-z0-9]+", prior_blob))):
+        return {"valid": False, "reason": "material_fact_already_known", "fact_class": fact_class, "grounded": True}
+    return {"valid": True, "reason": "concrete_grounded_new_fact", "fact_class": fact_class, "grounded": True}
+
+
+def parse_live_arbitration_result(data: dict[str, Any] | None, *, cluster_urls: set[str] | None = None, require_winner: bool = False, records: list[dict[str, Any]] | None = None, candidate_url: str = "", allow_without_records: bool = False) -> dict[str, Any] | None:
+    if not isinstance(data, dict):
+        return None
+    decision = str(data.get("decision") or "").strip()
+    if decision not in {"SAME_STORY_DUPLICATE", "MATERIAL_UPDATE", "DISTINCT_STORY"}:
+        return None
+    out = _canonical_arbitration_payload(data)
+    urls = {source_key(u) for u in (cluster_urls or set()) if source_key(u)}
+    winner = source_key(out.get("winner_url") or "")
+    if decision == "SAME_STORY_DUPLICATE" and require_winner:
+        if not winner or (urls and winner not in urls):
+            return None
+    if decision == "MATERIAL_UPDATE":
+        if winner and urls and winner not in urls:
+            return None
+        validation = _validate_material_update_fact(out.get("material_new_fact", ""), records=records, candidate_url=candidate_url, winner_url=out.get("winner_url") or "", allow_without_records=allow_without_records)
+        if not validation.get("valid"):
+            return None
+        out["material_update_validated"] = True
+        out["material_update_validation_reason"] = validation.get("reason", "")
+        out["material_update_fact_class"] = validation.get("fact_class", "")
+        out["material_update_grounded"] = bool(validation.get("grounded"))
+    if decision == "DISTINCT_STORY" and winner and urls and winner not in urls:
+        return None
+    return out
+
+
+def normalize_cached_arbitration_result(data: dict[str, Any] | None) -> dict[str, Any] | None:
+    if not isinstance(data, dict):
+        return None
+    decision = str(data.get("decision") or "").strip().upper()
+    if decision in {"SAME_STORY_DUPLICATE", "MATERIAL_UPDATE", "DISTINCT_STORY"}:
+        return parse_live_arbitration_result(data, require_winner=False, allow_without_records=True)
+    legacy = {
+        "SKIP_DUPLICATE": "SAME_STORY_DUPLICATE",
+        "PENDING_FOLLOWUP": "MATERIAL_UPDATE",
+        "SELECTED": "DISTINCT_STORY" if str(data.get("cluster_type") or "").lower() == "different_story" else "MATERIAL_UPDATE",
+    }
+    decision = legacy.get(decision, "")
+    if not decision:
+        cluster_type = str(data.get("cluster_type") or "").lower()
+        if cluster_type == "same_story":
+            decision = "SAME_STORY_DUPLICATE"
+        elif cluster_type == "same_core_fact_new_angle":
+            decision = "MATERIAL_UPDATE"
+        elif cluster_type == "different_story":
+            decision = "DISTINCT_STORY"
+    if decision not in {"SAME_STORY_DUPLICATE", "MATERIAL_UPDATE", "DISTINCT_STORY"}:
+        return None
+    out = dict(data)
+    out["decision"] = decision
+    if decision == "MATERIAL_UPDATE" and not str(out.get("material_new_fact") or "").strip():
+        out["material_new_fact"] = str(out.get("angle_summary_it") or out.get("suggested_followup_title_it") or out.get("reason") or "legacy material update").strip()
+    return _canonical_arbitration_payload(out, legacy_cache_normalized=True)
+
+
+# Backward-compatible name for existing cache tests/imports. Do not use for live Gemini responses.
+def normalize_arbitration_result(data: dict[str, Any] | None) -> dict[str, Any] | None:
+    return normalize_cached_arbitration_result(data)
 
 def needs_second_pass(ai_data: dict[str, Any] | None) -> bool:
     if not ai_data:
@@ -1014,10 +1289,12 @@ def load_cross_run_story_history(lookback_hours: int | None = None) -> list[dict
     raw = load_json(publisher_history_file(), {})
     records = raw.values() if isinstance(raw, dict) else (raw if isinstance(raw, list) else [])
     for item in records:
-        if isinstance(item, dict) and (_history_dt(item) or datetime.now(timezone.utc)) >= cutoff:
+        dt = _history_dt(item) if isinstance(item, dict) else None
+        if isinstance(item, dict) and dt and dt >= cutoff:
             out.append({**item, "cross_run_origin": "publisher_history"})
     for old in load_story_footprints():
-        if isinstance(old, dict) and (_history_dt(old) or datetime.now(timezone.utc)) >= cutoff:
+        dt = _history_dt(old) if isinstance(old, dict) else None
+        if isinstance(old, dict) and dt and dt >= cutoff:
             out.append({**old, "cross_run_origin": "story_footprints"})
     if MASTER_LOG_FILE.exists():
         try:
@@ -1026,7 +1303,8 @@ def load_cross_run_story_history(lookback_hours: int | None = None) -> list[dict
                     item = json.loads(line)
                 except Exception:
                     continue
-                if isinstance(item, dict) and (_history_dt(item) or datetime.now(timezone.utc)) >= cutoff:
+                dt = _history_dt(item) if isinstance(item, dict) else None
+                if isinstance(item, dict) and dt and dt >= cutoff:
                     out.append({**item, "cross_run_origin": "master_log"})
         except Exception:
             pass
@@ -1087,6 +1365,298 @@ Rules: allow only if same_story=false or has_material_novelty=true; skip if same
 Material novelty includes official/primary confirmation, rumor-to-fact, contract status change, new involved name, new date, denial, concrete creative consequence, roster/medical/legal update, or changed match/title/stipulation/event.
 New candidate:
 """ + json.dumps(lightweight_ai_record(item, "new"), ensure_ascii=False) + "\nPrevious story:\n" + json.dumps(lightweight_ai_record(old, "previous"), ensure_ascii=False)
+
+
+def richer_winner(items: list[dict[str, Any]]) -> tuple[dict[str, Any], str]:
+    def q(item: dict[str, Any]) -> tuple[int, int, int, int, str]:
+        text = same_story_blob(item)
+        meaningful_len = len([w for w in re.findall(r"[a-z0-9']+", text) if w not in SAME_STORY_STOPWORDS])
+        detail = len(same_story_terms(item)["entities"]) + len(same_story_terms(item)["actions"]) + len(same_story_terms(item)["events"])
+        media = int(bool(item.get("featured_image") or item.get("image_url") or item.get("has_image"))) + int(item.get("embed_count") or 0)
+        source = source_reliability_score(item)
+        return (meaningful_len, detail, media, source, source_key(item.get("url") or item.get("source_url") or ""))
+    winner = sorted(items, key=q, reverse=True)[0]
+    return winner, "richer_body_then_factual_detail_then_media_then_structure_source_tiebreak"
+
+
+from agents.same_story_guard import richer_winner  # noqa: E402,F811
+
+
+
+MENZO_DUPLICATE_PROMPT_VERSION = "simple_duplicate_v1"
+MASSY_DUPLICATE_SUSPECT_THRESHOLD = float(os.getenv("MASSY_DUPLICATE_SUSPECT_THRESHOLD", "0.55"))
+
+
+def duplicate_score_words(item: dict[str, Any]) -> set[str]:
+    text = cleaned_meaningful_text(item) or " ".join(str(item.get(k) or "") for k in ["title", "source_title", "summary", "description", "body_html"])
+    return {w for w in re.findall(r"[a-z0-9]+", text.lower()) if len(w) >= 3 and w not in SAME_STORY_STOPWORDS}
+
+
+def deterministic_duplicate_score(a: dict[str, Any], b: dict[str, Any]) -> float:
+    ua = source_key(a.get("url") or a.get("source_url") or "")
+    ub = source_key(b.get("url") or b.get("source_url") or "")
+    if ua and ub and ua == ub:
+        return 1.0
+    ha = content_hash_for_duplicate(a)
+    hb = content_hash_for_duplicate(b)
+    if ha and hb and ha == hb:
+        return 1.0
+    wa, wb = duplicate_score_words(a), duplicate_score_words(b)
+    if not wa or not wb:
+        return 0.0
+    return round(len(wa & wb) / max(1, min(len(wa), len(wb))), 3)
+
+
+def content_hash_for_duplicate(item: dict[str, Any]) -> str:
+    text = cleaned_meaningful_text(item) or " ".join(str(item.get(k) or "") for k in ["title", "source_title", "summary", "description", "body_html"])
+    norm = normalize_text(text).strip().lower()
+    return hashlib.sha256(norm.encode("utf-8")).hexdigest() if norm else ""
+
+
+def duplicate_record_payload(item: dict[str, Any], *, score: float = 0.0, wp_link: str = "") -> dict[str, Any]:
+    return {
+        "source_url": item.get("source_url") or item.get("url") or "",
+        "source": item.get("source") or "",
+        "title": item.get("title") or item.get("source_title") or item.get("title_it") or "",
+        "cleaned_text": cleaned_meaningful_text(item),
+        "published_at": item.get("published_at") or item.get("published") or item.get("date") or "",
+        "wp_link": wp_link or item.get("wp_link") or "",
+        "unique_media_count": unique_media_count(item),
+        "deterministic_duplicate_score": score,
+        "content_hash": content_hash_for_duplicate(item),
+    }
+
+
+def simple_duplicate_cache_key(records: list[dict[str, Any]], scope: str) -> str:
+    payload = {
+        "prompt_version": MENZO_DUPLICATE_PROMPT_VERSION,
+        "scope": scope,
+        "urls": sorted(source_key(r.get("source_url") or r.get("url") or "") for r in records),
+        "content_hashes": sorted(str(r.get("content_hash") or content_hash_for_duplicate(r)) for r in records),
+    }
+    return hashlib.sha256(json.dumps(payload, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()
+
+
+def simple_cache_lookup(records: list[dict[str, Any]], scope: str) -> dict[str, Any] | None:
+    cache = load_duplicate_arbitration_cache()
+    key = simple_duplicate_cache_key(records, scope)
+    entry = cache.get(key)
+    if not isinstance(entry, dict) or entry.get("prompt_version") != MENZO_DUPLICATE_PROMPT_VERSION:
+        return None
+    return entry.get("result") if isinstance(entry.get("result"), dict) else None
+
+
+def simple_cache_store(records: list[dict[str, Any]], scope: str, result: dict[str, Any], model: str) -> None:
+    cache = load_duplicate_arbitration_cache()
+    key = simple_duplicate_cache_key(records, scope)
+    cache[key] = {
+        "prompt_version": MENZO_DUPLICATE_PROMPT_VERSION,
+        "scope": scope,
+        "result": result,
+        "model_used": model,
+        "source_urls": sorted(source_key(r.get("source_url") or r.get("url") or "") for r in records),
+        "content_hashes": sorted(str(r.get("content_hash") or content_hash_for_duplicate(r)) for r in records),
+        "created_at": datetime.now(timezone.utc).isoformat(),
+    }
+    write_duplicate_arbitration_cache(cache)
+
+
+def build_simple_same_run_prompt(records: list[dict[str, Any]]) -> str:
+    return """You are Menzo, editorial duplicate arbiter for OpenWrestlingTV.
+Decide whether these current-run candidates are the same publishable story.
+Return ONLY valid JSON with this exact shape:
+{"decision":"DUPLICATE|DISTINCT","reason":"concise explanation"}
+DUPLICATE means the same publishable factual story. DISTINCT means both are legitimate separate stories, including reaction/commentary/follow-up if editorially separate.
+Records:
+""" + json.dumps(records, ensure_ascii=False, indent=2)
+
+
+def build_simple_cross_run_prompt(candidate: dict[str, Any], published: dict[str, Any]) -> str:
+    return """You are Menzo, editorial duplicate arbiter for OpenWrestlingTV.
+A new candidate is plausibly related to a story published in the last 12 hours.
+Return ONLY valid JSON with this exact shape:
+{"decision":"DUPLICATE|REAL_UPDATE|DISTINCT_STORY","new_fact":"concrete new fact, or empty string","reason":"concise explanation"}
+DUPLICATE: same already-published story; second source, longer prose, more background, quotes, context, media, title wording, non-official confirmation, or repeated announcement are not updates.
+REAL_UPDATE: a concrete fact occurred or became known after the original publication, such as rumor becoming official, changed opponent/match type/date/location, injury/surgery/contract/release/suspension/title change, or a new event.
+DISTINCT_STORY: genuinely different editorial story.
+Records:
+""" + json.dumps({"candidate": candidate, "recent_published": published}, ensure_ascii=False, indent=2)
+
+
+def parse_same_run_duplicate_result(data: dict[str, Any] | None) -> dict[str, Any] | None:
+    if not isinstance(data, dict):
+        return None
+    decision = str(data.get("decision") or "").strip().upper()
+    if decision not in {"DUPLICATE", "DISTINCT"}:
+        return None
+    return {"decision": decision, "reason": str(data.get("reason") or "")}
+
+
+def parse_cross_run_duplicate_result(data: dict[str, Any] | None) -> dict[str, Any] | None:
+    if not isinstance(data, dict):
+        return None
+    decision = str(data.get("decision") or "").strip().upper()
+    if decision not in {"DUPLICATE", "REAL_UPDATE", "DISTINCT_STORY"}:
+        return None
+    new_fact = str(data.get("new_fact") or "").strip()
+    if decision == "REAL_UPDATE" and not new_fact:
+        return None
+    return {"decision": decision, "new_fact": new_fact, "reason": str(data.get("reason") or "")}
+
+
+def mark_menzo_duplicate(item: dict[str, Any], *, checked: bool, scope: str = "", decision: str = "", authorized: bool = True, compared: dict[str, Any] | None = None, reason: str = "", new_fact: str = "", winner: dict[str, Any] | None = None) -> None:
+    item["menzo_duplicate_checked"] = checked
+    item["menzo_duplicate_scope"] = scope
+    item["menzo_duplicate_decision"] = decision
+    item["menzo_authorized"] = authorized
+    item["menzo_compared_with_url"] = (compared or {}).get("url") or (compared or {}).get("source_url") or (compared or {}).get("wp_link") or ""
+    item["menzo_duplicate_reason"] = reason
+    item["menzo_new_fact"] = new_fact
+    item["menzo_winner_url"] = (winner or {}).get("url") or (winner or {}).get("source_url") or ""
+
+
+def suspicious_same_run_clusters(candidates: list[dict[str, Any]], massy_board: dict[str, Any] | None = None) -> list[list[dict[str, Any]]]:
+    clusters: list[list[dict[str, Any]]] = []
+    by_url = {source_key(x.get("url") or x.get("source_url") or ""): x for x in candidates}
+    board = massy_board if isinstance(massy_board, dict) else {}
+    for cluster in board.get("suspicious_story_clusters", []) if isinstance(board.get("suspicious_story_clusters"), list) else []:
+        records = cluster.get("records") if isinstance(cluster, dict) else []
+        items = []
+        for rec in records if isinstance(records, list) else []:
+            key = source_key(rec.get("url") or rec.get("source_url") or "")
+            if key in by_url:
+                by_url[key]["massy_duplicate_score"] = rec.get("deterministic_duplicate_score") or cluster.get("deterministic_duplicate_score") or 0
+                items.append(by_url[key])
+        if len(items) >= 2:
+            clusters.append(items)
+    seen_pairs: set[tuple[str, str]] = set()
+    for cluster in clusters:
+        keys = sorted(source_key(x.get("url") or x.get("source_url") or "") for x in cluster)
+        if len(keys) == 2:
+            seen_pairs.add(tuple(keys))
+    for i in range(len(candidates)):
+        for j in range(i + 1, len(candidates)):
+            score = deterministic_duplicate_score(candidates[i], candidates[j])
+            if score < MASSY_DUPLICATE_SUSPECT_THRESHOLD:
+                continue
+            keys = tuple(sorted([source_key(candidates[i].get("url") or candidates[i].get("source_url") or ""), source_key(candidates[j].get("url") or candidates[j].get("source_url") or "")]))
+            if keys in seen_pairs:
+                continue
+            candidates[i]["massy_duplicate_score"] = score; candidates[j]["massy_duplicate_score"] = score
+            clusters.append([candidates[i], candidates[j]]); seen_pairs.add(keys)
+    return clusters
+
+
+def apply_same_story_duplicate_guard(result: dict[str, Any], massy_board: dict[str, Any] | None = None) -> None:
+    candidates = [dict(x) for x in result.get("selected", []) if isinstance(x, dict)]
+    pp = result.setdefault("postprocess", {})
+    for key in ["massy_suspicious_duplicate_pairs", "menzo_same_run_duplicate_calls", "menzo_duplicates_blocked_same_run", "menzo_distinct_stories_allowed", "menzo_duplicate_arbitration_fail_closed"]:
+        pp.setdefault(key, 0)
+    clusters = suspicious_same_run_clusters(candidates, massy_board)
+    pp["massy_suspicious_duplicate_pairs"] = len(clusters)
+    blocked_keys: set[str] = set(); pending: list[dict[str, Any]] = list(result.get("pending", [])); skipped = [x for x in result.get("skipped", []) if isinstance(x, dict)]
+    processed: set[str] = set(); kept_by_key = {source_key(x.get("url") or x.get("source_url") or ""): x for x in candidates}
+    for cluster_items in clusters:
+        keys = {source_key(x.get("url") or x.get("source_url") or "") for x in cluster_items}
+        if keys & processed:
+            continue
+        processed |= keys
+        winner, why = richer_winner(cluster_items)
+        records = [duplicate_record_payload(x, score=float(x.get("massy_duplicate_score") or deterministic_duplicate_score(cluster_items[0], x))) for x in cluster_items]
+        exact = len({source_key(x.get("url") or x.get("source_url") or "") for x in cluster_items}) < len(cluster_items) or len({content_hash_for_duplicate(x) for x in cluster_items if content_hash_for_duplicate(x)}) == 1
+        ai_data = {"decision": "DUPLICATE", "reason": "exact_url_or_content_hash"} if exact else simple_cache_lookup(records, "same_run")
+        ai_called = False; model = "duplicate_arbitration_cache" if ai_data else ""
+        if not ai_data:
+            ai_called = True; pp["menzo_same_run_duplicate_calls"] += 1
+            try:
+                raw, model = call_gemini_json_model(build_simple_same_run_prompt(records), MENZO_DUPLICATE_ARBITRATION_FIRST_MODEL, ledger_context={"scope": "same_run", "urls": sorted(keys)})
+            except Exception as exc:
+                raw, model = None, f"gemini_exception:{exc}"
+            ai_data = parse_same_run_duplicate_result(raw)
+            if ai_data:
+                simple_cache_store(records, "same_run", ai_data, model)
+        decision = str((ai_data or {}).get("decision") or "")
+        if decision == "DISTINCT":
+            for item in cluster_items:
+                mark_menzo_duplicate(item, checked=True, scope="same_run", decision="DISTINCT", authorized=True, reason=(ai_data or {}).get("reason") or "distinct")
+            pp["menzo_distinct_stories_allowed"] += len(cluster_items)
+            continue
+        if decision == "DUPLICATE":
+            for item in cluster_items:
+                if item is winner:
+                    mark_menzo_duplicate(item, checked=True, scope="same_run", decision="DUPLICATE", authorized=True, reason=(ai_data or {}).get("reason") or why, winner=winner)
+                else:
+                    item["decision"] = "skip"; item["priority"] = "skip"; item["article_type"] = "duplicate"; item["reason"] = "skip:duplicate_same_run"
+                    mark_menzo_duplicate(item, checked=True, scope="same_run", decision="DUPLICATE", authorized=False, reason="skip:duplicate_same_run", winner=winner)
+                    blocked_keys.add(source_key(item.get("url") or item.get("source_url") or "")); skipped.append(item); pp["menzo_duplicates_blocked_same_run"] += 1
+            continue
+        pp["menzo_duplicate_arbitration_fail_closed"] += 1
+        for item in cluster_items:
+            if item is winner:
+                mark_menzo_duplicate(item, checked=True, scope="same_run", decision="ARBITRATION_FAILED", authorized=True, reason="skip:duplicate_arbitration_unresolved", winner=winner)
+            else:
+                item["decision"] = "skip"; item["priority"] = "skip"; item["article_type"] = "duplicate"; item["reason"] = "skip:duplicate_arbitration_unresolved"
+                mark_menzo_duplicate(item, checked=True, scope="same_run", decision="ARBITRATION_FAILED", authorized=False, reason="skip:duplicate_arbitration_unresolved", winner=winner)
+                blocked_keys.add(source_key(item.get("url") or item.get("source_url") or "")); skipped.append(item)
+    selected = []
+    for item in candidates:
+        key = source_key(item.get("url") or item.get("source_url") or "")
+        if key in blocked_keys:
+            continue
+        if not item.get("menzo_duplicate_checked"):
+            mark_menzo_duplicate(item, checked=False, authorized=True)
+        selected.append(item)
+    result["selected"] = sorted(selected, key=sort_item, reverse=True); result["pending"] = pending; result["skipped"] = skipped
+    result["allowed_urls_for_v92"] = [str(x.get("url") or x.get("source_url") or "") for x in result["selected"] if x.get("url") or x.get("source_url")]
+    result["handoff"] = {"to_bob_or_v92": len(result["selected"]), "pending": len(result.get("pending", [])), "skipped": len(result["skipped"])}
+
+
+def apply_recent_published_duplicate_guard(result: dict[str, Any]) -> None:
+    pp = result.setdefault("postprocess", {})
+    for key in ["menzo_recent_history_duplicate_calls", "menzo_duplicates_blocked_recent_history", "menzo_real_updates_allowed", "menzo_distinct_stories_allowed", "menzo_duplicate_arbitration_fail_closed"]:
+        pp.setdefault(key, 0)
+    history = load_cross_run_story_history(RECENT_PUBLISHED_DUPLICATE_LOOKBACK_HOURS)
+    selected: list[dict[str, Any]] = []
+    skipped = [x for x in result.get("skipped", []) if isinstance(x, dict)]
+    for item in [dict(x) for x in result.get("selected", []) if isinstance(x, dict)]:
+        best = None; best_score = 0.0
+        for old in history:
+            score = deterministic_duplicate_score(item, old)
+            if score > best_score:
+                best, best_score = old, score
+        if not best or best_score < MASSY_DUPLICATE_SUSPECT_THRESHOLD:
+            selected.append(item); continue
+        records = [duplicate_record_payload(item, score=best_score), duplicate_record_payload(best, score=best_score, wp_link=best.get("wp_link") or "")]
+        exact = source_key(item.get("url") or item.get("source_url") or "") == source_key(best.get("url") or best.get("source_url") or "") or (content_hash_for_duplicate(item) and content_hash_for_duplicate(item) == content_hash_for_duplicate(best))
+        ai_data = {"decision": "DUPLICATE", "reason": "exact_url_or_content_hash", "new_fact": ""} if exact else simple_cache_lookup(records, "recent_history")
+        cache_hit = bool(ai_data and not exact)
+        if not ai_data:
+            pp["menzo_recent_history_duplicate_calls"] += 1
+            try:
+                raw, model = call_gemini_json_model(build_simple_cross_run_prompt(records[0], records[1]), MENZO_DUPLICATE_ARBITRATION_FIRST_MODEL, ledger_context={"scope": "recent_history", "url": item.get("url") or item.get("source_url")})
+            except Exception as exc:
+                raw, model = None, f"gemini_exception:{exc}"
+            ai_data = parse_cross_run_duplicate_result(raw)
+            if ai_data:
+                simple_cache_store(records, "recent_history", ai_data, model)
+        decision = str((ai_data or {}).get("decision") or "")
+        if decision == "DISTINCT_STORY":
+            mark_menzo_duplicate(item, checked=True, scope="recent_history", decision="DISTINCT_STORY", authorized=True, compared=best, reason=(ai_data or {}).get("reason") or "distinct")
+            selected.append(item); pp["menzo_distinct_stories_allowed"] += 1; continue
+        if decision == "REAL_UPDATE":
+            item["menzo_new_fact"] = (ai_data or {}).get("new_fact") or ""
+            mark_menzo_duplicate(item, checked=True, scope="recent_history", decision="REAL_UPDATE", authorized=True, compared=best, reason=(ai_data or {}).get("reason") or "real_update", new_fact=item["menzo_new_fact"])
+            selected.append(item); pp["menzo_real_updates_allowed"] += 1; continue
+        item["decision"] = "skip"; item["priority"] = "skip"; item["article_type"] = "duplicate"; item["reason"] = "skip:duplicate_recently_published" if decision == "DUPLICATE" else "skip:duplicate_arbitration_unresolved"
+        mark_menzo_duplicate(item, checked=True, scope="recent_history", decision=decision or "ARBITRATION_FAILED", authorized=False, compared=best, reason=item["reason"], winner=best)
+        skipped.append(item)
+        if decision == "DUPLICATE":
+            pp["menzo_duplicates_blocked_recent_history"] += 1
+        else:
+            pp["menzo_duplicate_arbitration_fail_closed"] += 1
+    result["selected"] = sorted(selected, key=sort_item, reverse=True); result["skipped"] = skipped
+    result["allowed_urls_for_v92"] = [str(x.get("url") or x.get("source_url") or "") for x in result["selected"] if x.get("url") or x.get("source_url")]
+    result["handoff"] = {"to_bob_or_v92": len(result["selected"]), "pending": len(result.get("pending", [])), "skipped": len(result["skipped"])}
 
 
 def apply_cross_run_novelty_gate(result: dict[str, Any]) -> None:
@@ -1379,8 +1949,9 @@ def apply_candidate_duplicate_cluster_survivors(
 
 def apply_arbitration_decision(item: dict[str, Any], ai_data: dict[str, Any], model_used: str, second_pass: bool) -> dict[str, Any]:
     item = dict(item)
-    decision = str(ai_data.get("decision") or "pending_review").lower()
-    cluster_type = str(ai_data.get("cluster_type") or "uncertain").lower()
+    ai_data = normalize_arbitration_result(ai_data) or {}
+    decision = str(ai_data.get("decision") or "").upper()
+    cluster_type = str(ai_data.get("cluster_type") or "").lower()
     try:
         confidence = int(ai_data.get("confidence", 0) or 0)
     except Exception:
@@ -1390,26 +1961,26 @@ def apply_arbitration_decision(item: dict[str, Any], ai_data: dict[str, Any], mo
         "model_used": model_used,
         "second_pass_used": second_pass,
         "decision": decision,
-        "cluster_type": cluster_type,
+        "cluster_type": cluster_type or decision,
         "confidence": confidence,
         "canonical_event_label": ai_data.get("canonical_event_label") or "",
         "reason": ai_data.get("reason") or "",
-        "suggested_followup_title_it": ai_data.get("suggested_followup_title_it") or "",
-        "angle_summary_it": ai_data.get("angle_summary_it") or "",
+        "winner_url": ai_data.get("winner_url") or "",
+        "material_new_fact": ai_data.get("material_new_fact") or "",
     }
     item.setdefault("menzo_policy", {})["ai_cross_source_duplicate_arbitration"] = arbitration
     item["ai_cross_source_duplicate_arbitration"] = arbitration
-    if decision == "skip_duplicate" or cluster_type == "same_story":
+    if decision == "SAME_STORY_DUPLICATE":
         item["decision"] = "skip"; item["priority"] = "skip"; item["article_type"] = "duplicate"
         item["reason"] = "skip:ai_cross_source_duplicate_arbitration; " + str(ai_data.get("reason") or "same core fact, no meaningful new angle")
-    elif decision == "pending_followup" or cluster_type == "same_core_fact_new_angle":
-        item["decision"] = "pending"; item["priority"] = "soft"; item["article_type"] = "pending_followup"
-        item["reason"] = "pending_followup:ai_cross_source_duplicate_arbitration; " + str(ai_data.get("reason") or "same core fact with possible new angle")
-        if ai_data.get("suggested_followup_title_it"):
-            item["suggested_followup_title_it"] = ai_data.get("suggested_followup_title_it")
-        if ai_data.get("angle_summary_it"):
-            item["angle_summary_it"] = ai_data.get("angle_summary_it")
-    elif decision == "selected" and cluster_type == "different_story":
+    elif decision == "MATERIAL_UPDATE":
+        if item.get("decision") == "pending":
+            item["decision"] = "pending"; item["priority"] = "soft"; item["article_type"] = "pending_followup"
+        else:
+            item["decision"] = "selected"; item["article_type"] = item.get("article_type") or "material_update"
+        item["material_new_fact"] = ai_data.get("material_new_fact") or ""
+        item["reason"] = "material_update:ai_cross_source_duplicate_arbitration; " + str(ai_data.get("reason") or "material new fact")
+    elif decision == "DISTINCT_STORY":
         item["decision"] = "selected"
     else:
         item["decision"] = "pending"; item["priority"] = "soft"; item["article_type"] = "pending_review"
@@ -1463,7 +2034,12 @@ def apply_ai_duplicate_arbitration(result: dict[str, Any], massy_board: dict[str
             else:
                 duplicate_arbitration_cache_misses += 1
             duplicate_arbitration_ai_calls += 1
-            ai_data, model = call_gemini_json_model(build_ai_dedupe_prompt(records), MENZO_DUPLICATE_ARBITRATION_FIRST_MODEL, ledger_context=ledger_context)
+            try:
+                ai_data, model = call_gemini_json_model(build_ai_dedupe_prompt(records), MENZO_DUPLICATE_ARBITRATION_FIRST_MODEL, ledger_context=ledger_context)
+            except Exception as exc:
+                ai_data, model = None, f"gemini_exception:{exc}"
+            record_urls = {str(r.get("url") or r.get("source_url") or "") for r in records}
+            ai_data = parse_live_arbitration_result(ai_data, cluster_urls=record_urls, require_winner=False, records=records, candidate_url=item.get("url") or item.get("source_url") or "")
             second_pass = False
             allowed_second_pass, second_pass_reason = menzo_second_pass_gate(item, records, ai_data)
             if needs_second_pass(ai_data) and not allowed_second_pass:
@@ -1471,12 +2047,13 @@ def apply_ai_duplicate_arbitration(result: dict[str, Any], massy_board: dict[str
             if allowed_second_pass:
                 second_pass = True
                 ai_data2, model2 = call_gemini_json_model(build_ai_dedupe_second_pass_prompt(records, relevant_history_payload(records)), MENZO_DUPLICATE_ARBITRATION_SECOND_MODEL, ledger_context=ledger_context, phase="duplicate_arbitration_second_pass")
+                ai_data2 = parse_live_arbitration_result(ai_data2, cluster_urls=record_urls, require_winner=False, records=records, candidate_url=item.get("url") or item.get("source_url") or "")
                 if ai_data2:
                     ai_data, model = ai_data2, model2
             if ai_data:
                 duplicate_arbitration_cache_store(cache_context, ai_data, model, second_pass=second_pass)
         if not ai_data:
-            ai_data = {"cluster_type": "uncertain", "decision": "pending_review", "confidence": 0, "reason": model}
+            ai_data = {"decision": "", "confidence": 0, "reason": model}
         resolved_item = apply_arbitration_decision(item, ai_data, model, second_pass)
         if cache_status == "duplicate_arbitration_cache_hit":
             resolved_item["ai_cross_source_duplicate_arbitration"]["cache_hit"] = True
@@ -1705,9 +2282,9 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     apply_generalized_fingerprint_policy(result)
     apply_softpool_decay(result)
     apply_dynamic_editorial_budget(result)
-    apply_ai_duplicate_arbitration(result, board)
+    apply_same_story_duplicate_guard(result, board)
+    apply_recent_published_duplicate_guard(result)
     apply_dynamic_editorial_budget(result)
-    apply_cross_run_novelty_gate(result)
     enforce_selected_cap(result)
     enforce_capacity_buffer(result)
     result["version"] = MENZO_VERSION
@@ -1742,6 +2319,8 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     policy["gemini_model_routing_v95_4"] = True
     policy["cross_run_story_novelty_gate_v95_5"] = True
     policy["cross_run_novelty_gate_enabled"] = MENZO_CROSS_RUN_NOVELTY_GATE_ENABLED
+    policy["same_story_duplicate_guard"] = "certain_duplicate_blocks_before_bob_ambiguous_requires_gemini"
+    policy["recent_published_duplicate_lookback_hours"] = RECENT_PUBLISHED_DUPLICATE_LOOKBACK_HOURS
     policy["cross_run_novelty_ai_model"] = MENZO_CROSS_RUN_NOVELTY_AI_MODEL
     policy["menzo_35_gate"] = {"enabled": MENZO_ENABLE_35_FOR_HIGH_AMBIGUITY, "min_score": MENZO_35_MIN_SCORE, "require_duplicate_or_same_story": MENZO_35_REQUIRE_DUPLICATE_OR_SAME_STORY}
     policy["ai_duplicate_arbitration_limits"] = {"max_clusters_per_run": AI_DEDUPE_MAX_CLUSTERS, "max_candidates_per_cluster": AI_DEDUPE_MAX_CANDIDATES}
