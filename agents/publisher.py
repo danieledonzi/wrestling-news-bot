@@ -617,40 +617,83 @@ def publish_article(article: dict[str, Any], history: dict[str, Any], wp_ok: boo
     return result
 
 
+MENZO_DUPLICATE_FIELDS = {
+    "menzo_duplicate_checked",
+    "menzo_duplicate_scope",
+    "menzo_duplicate_decision",
+    "menzo_authorized",
+    "menzo_compared_with_url",
+    "menzo_duplicate_reason",
+    "menzo_new_fact",
+    "menzo_winner_url",
+}
+
+
+def publisher_source_key(value: Any) -> str:
+    return str(value or "").split("#", 1)[0].split("?", 1)[0].rstrip("/").lower()
+
+
+def publisher_skip_duplicate_resolution(article: dict[str, Any], reason: str) -> dict[str, Any]:
+    return {
+        "source_url": str(article.get("source_url") or article.get("url") or ""),
+        "title_it": str(article.get("title_it") or article.get("title") or article.get("source_title") or ""),
+        "status": "skipped",
+        "reason": reason,
+        "menzo_duplicate_checked": article.get("menzo_duplicate_checked"),
+        "menzo_duplicate_scope": article.get("menzo_duplicate_scope") or "",
+        "menzo_duplicate_decision": article.get("menzo_duplicate_decision") or "",
+        "menzo_authorized": False,
+        "menzo_compared_with_url": article.get("menzo_compared_with_url") or "",
+        "menzo_duplicate_reason": article.get("menzo_duplicate_reason") or reason,
+        "menzo_new_fact": article.get("menzo_new_fact") or "",
+        "menzo_winner_url": article.get("menzo_winner_url") or "",
+    }
+
+
+def valid_menzo_duplicate_resolution(article: dict[str, Any]) -> tuple[bool, str]:
+    if not any(field in article for field in MENZO_DUPLICATE_FIELDS):
+        return True, "ordinary_article"
+    if article.get("menzo_duplicate_checked") is not True:
+        return False, "skip:duplicate_arbitration_unresolved"
+    authorized = article.get("menzo_authorized")
+    if not isinstance(authorized, bool):
+        return False, "skip:duplicate_arbitration_unresolved"
+    scope = str(article.get("menzo_duplicate_scope") or "").strip()
+    decision = str(article.get("menzo_duplicate_decision") or "").strip().upper()
+    source_url = publisher_source_key(article.get("source_url") or article.get("url") or "")
+    winner_url = publisher_source_key(article.get("menzo_winner_url") or "")
+    if scope == "same_run":
+        if decision not in {"DUPLICATE", "DISTINCT"}:
+            return False, "skip:duplicate_arbitration_unresolved"
+        if decision == "DISTINCT":
+            return (authorized is True, "skip:duplicate_arbitration_unresolved")
+        if decision == "DUPLICATE":
+            if authorized is True:
+                return (bool(winner_url and source_url and winner_url == source_url), "skip:duplicate_arbitration_unresolved")
+            return True, "skip:duplicate_same_run"
+    if scope == "recent_history":
+        if decision not in {"DUPLICATE", "REAL_UPDATE", "DISTINCT_STORY"}:
+            return False, "skip:duplicate_arbitration_unresolved"
+        if decision == "DUPLICATE":
+            return (authorized is False, article.get("menzo_duplicate_reason") or "skip:duplicate_recently_published")
+        if decision == "REAL_UPDATE":
+            return (authorized is True and bool(str(article.get("menzo_new_fact") or "").strip()), "skip:duplicate_arbitration_unresolved")
+        if decision == "DISTINCT_STORY":
+            return (authorized is True, "skip:duplicate_arbitration_unresolved")
+    return False, "skip:duplicate_arbitration_unresolved"
+
+
 def publisher_duplicate_safety_filter(articles: list[dict[str, Any]], history: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     """Publisher only enforces Menzo duplicate authorization; it never classifies stories or calls Gemini."""
     kept: list[dict[str, Any]] = []
     skipped: list[dict[str, Any]] = []
     for article in articles:
-        has_resolution = any(k in article for k in ["menzo_duplicate_checked", "menzo_authorized", "menzo_duplicate_decision", "menzo_duplicate_scope"])
-        authorized = article.get("menzo_authorized")
-        if has_resolution and authorized is not True:
-            reason = str(article.get("menzo_duplicate_reason") or "skip:duplicate_arbitration_unresolved")
-            row = {
-                "source_url": str(article.get("source_url") or article.get("url") or ""),
-                "title_it": str(article.get("title_it") or article.get("title") or article.get("source_title") or ""),
-                "status": "skipped",
-                "reason": reason,
-                "menzo_duplicate_checked": article.get("menzo_duplicate_checked"),
-                "menzo_duplicate_scope": article.get("menzo_duplicate_scope") or "",
-                "menzo_duplicate_decision": article.get("menzo_duplicate_decision") or "",
-                "menzo_authorized": False,
-                "menzo_compared_with_url": article.get("menzo_compared_with_url") or "",
-                "menzo_duplicate_reason": reason,
-                "menzo_new_fact": article.get("menzo_new_fact") or "",
-                "menzo_winner_url": article.get("menzo_winner_url") or "",
-            }
-            skipped.append(row)
+        valid, reason = valid_menzo_duplicate_resolution(article)
+        if not valid:
+            skipped.append(publisher_skip_duplicate_resolution(article, "skip:duplicate_arbitration_unresolved"))
             continue
-        if article.get("menzo_duplicate_checked") and article.get("menzo_authorized") is not True:
-            row = {
-                "source_url": str(article.get("source_url") or article.get("url") or ""),
-                "title_it": str(article.get("title_it") or article.get("title") or article.get("source_title") or ""),
-                "status": "skipped",
-                "reason": "skip:duplicate_arbitration_unresolved",
-                "menzo_authorized": False,
-            }
-            skipped.append(row)
+        if any(field in article for field in MENZO_DUPLICATE_FIELDS) and article.get("menzo_authorized") is False:
+            skipped.append(publisher_skip_duplicate_resolution(article, reason or "skip:duplicate_arbitration_unresolved"))
             continue
         kept.append(article)
     return kept, skipped
