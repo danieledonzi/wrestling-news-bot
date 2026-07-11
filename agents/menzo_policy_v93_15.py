@@ -2546,7 +2546,7 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     previous_ai_enabled = base.AI_ENABLED
     base.AI_ENABLED = False
     try:
-        result = base.run_menzo(board)
+        result = base.run_menzo(board, apply_capacity_limits=False)
     finally:
         base.AI_ENABLED = previous_ai_enabled
     normalize_ai_fields(result)

@@ -6,6 +6,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from agents import alfred, alfred_policy_v93_20, bob, publisher
 from agents import andrea_policy_v94_15 as andrea
+from agents import menzo as base_menzo
 from agents import menzo_policy_v93_15 as menzo
 
 
@@ -18,11 +19,128 @@ def result(items):
     return {"selected": [x for x in items if x["decision"] == "selected"], "pending": [x for x in items if x["decision"] == "pending"], "skipped": [], "postprocess": {}}
 
 
+
+def base_candidate(url, title):
+    return {"url": url, "source_url": url, "title": title, "summary": title, "source": "Test"}
+
+
+def test_base_menzo_default_capacity_limits_remain(monkeypatch, tmp_path):
+    monkeypatch.setattr(base_menzo, "AI_ENABLED", False)
+    monkeypatch.setenv("V93_MENZO_MAX_SELECTED_PER_RUN", "2")
+    monkeypatch.setenv("V93_MENZO_MAX_PENDING_PER_RUN", "3")
+    monkeypatch.setattr(base_menzo, "ARTIFACT_DECISIONS_FILE", tmp_path / "artifacts" / "menzo.json")
+    monkeypatch.setattr(base_menzo, "MENZO_DECISIONS_FILE", tmp_path / "state" / "menzo.json")
+    monkeypatch.setattr(base_menzo, "V92_ALLOWED_URLS_FILE", tmp_path / "state" / "urls.json")
+    board = {"news_candidates_for_menzo": [base_candidate(f"https://base/{i}", f"CM Punk signs WWE contract {i}") for i in range(6)]}
+    out = base_menzo.run_menzo(board)
+    assert len(out["selected"]) == 2
+    assert len(out["pending"]) == 3
+    assert out["daily_policy"]["base_capacity_limits_applied"] is True
+
+
+def test_base_menzo_unlimited_handoff_preserves_all_actionable(monkeypatch, tmp_path):
+    monkeypatch.setattr(base_menzo, "AI_ENABLED", False)
+    monkeypatch.setenv("V93_MENZO_MAX_SELECTED_PER_RUN", "2")
+    monkeypatch.setenv("V93_MENZO_MAX_PENDING_PER_RUN", "3")
+    monkeypatch.setattr(base_menzo, "ARTIFACT_DECISIONS_FILE", tmp_path / "artifacts" / "menzo.json")
+    monkeypatch.setattr(base_menzo, "MENZO_DECISIONS_FILE", tmp_path / "state" / "menzo.json")
+    monkeypatch.setattr(base_menzo, "V92_ALLOWED_URLS_FILE", tmp_path / "state" / "urls.json")
+    selected = [base_candidate(f"https://base/sel{i}", f"CM Punk signs WWE contract {i}") for i in range(7)]
+    pending = [base_candidate(f"https://base/pen{i}", f"Backstage plans for Raw {i}") for i in range(14)]
+    skipped = [base_candidate("https://base/skip", "10 things we hated on Raw")]
+    out = base_menzo.run_menzo({"news_candidates_for_menzo": selected + pending + skipped}, apply_capacity_limits=False)
+    assert len(out["selected"]) == 7
+    assert len(out["pending"]) == 14
+    assert len(out["skipped"]) == 1
+    assert out["skipped"][0]["url"] == "https://base/skip"
+    assert out["daily_policy"]["base_capacity_limits_applied"] is False
+
+
+def test_wrapper_passes_apply_capacity_limits_false(monkeypatch):
+    seen = []
+    monkeypatch.setattr(menzo, "_wp_ready_for_costly_work", lambda: (True, "ok"))
+    def fake_base(board, *, apply_capacity_limits=True):
+        seen.append(apply_capacity_limits)
+        return {"selected": [], "pending": [], "skipped": [], "postprocess": {}, "policy": {}, "daily_policy": {}}
+    monkeypatch.setattr(menzo.base, "run_menzo", fake_base)
+    monkeypatch.setattr(menzo, "normalize_ai_fields", lambda r: None)
+    monkeypatch.setattr(menzo, "rebuild_decisions", lambda r: None)
+    for name in ["apply_betting_odds_policy", "apply_source_opinion_policy", "apply_medical_brand_policy", "apply_story_footprint_policy", "enforce_ai_skip_binding", "apply_generalized_fingerprint_policy", "apply_softpool_decay", "apply_same_story_duplicate_guard", "apply_recent_published_duplicate_guard", "apply_dynamic_editorial_budget", "enforce_selected_cap", "enforce_capacity_buffer", "enforce_final_menzo_duplicate_authorization"]:
+        monkeypatch.setattr(menzo, name, lambda *a, **k: None)
+    monkeypatch.setattr(menzo, "save_softpool", lambda r: None)
+    monkeypatch.setattr(menzo, "save_hard_skips", lambda r: None)
+    monkeypatch.setattr(menzo, "remember_stories", lambda *a, **k: None)
+    monkeypatch.setattr(menzo, "remember_footprints", lambda *a, **k: None)
+    monkeypatch.setattr(menzo, "remember_fingerprints", lambda *a, **k: None)
+    monkeypatch.setattr(menzo, "write_json", lambda *a, **k: None)
+    menzo.run_menzo({})
+    assert seen == [False]
+
+
+def test_real_base_unlimited_pipeline_payload_exceeds_old_caps(monkeypatch, tmp_path):
+    monkeypatch.setenv("V93_MENZO_MAX_SELECTED_PER_RUN", "6")
+    monkeypatch.setenv("V93_MENZO_MAX_PENDING_PER_RUN", "12")
+    monkeypatch.setattr(base_menzo, "ARTIFACT_DECISIONS_FILE", tmp_path / "base_artifacts" / "menzo.json")
+    monkeypatch.setattr(base_menzo, "MENZO_DECISIONS_FILE", tmp_path / "base_state" / "menzo.json")
+    monkeypatch.setattr(base_menzo, "V92_ALLOWED_URLS_FILE", tmp_path / "base_state" / "urls.json")
+    monkeypatch.setattr(menzo, "_wp_ready_for_costly_work", lambda: (True, "ok"))
+    monkeypatch.setattr(menzo, "ARTIFACT_DECISIONS_FILE", tmp_path / "wrapper_artifacts" / "menzo.json")
+    monkeypatch.setattr(menzo, "MENZO_DECISIONS_FILE", tmp_path / "wrapper_state" / "menzo.json")
+    monkeypatch.setattr(menzo, "V92_ALLOWED_URLS_FILE", tmp_path / "wrapper_state" / "urls.json")
+    monkeypatch.setattr(menzo.base, "ARTIFACT_DECISIONS_FILE", tmp_path / "base_artifacts" / "menzo.json")
+    monkeypatch.setattr(menzo.base, "MENZO_DECISIONS_FILE", tmp_path / "base_state" / "menzo.json")
+    monkeypatch.setattr(menzo.base, "V92_ALLOWED_URLS_FILE", tmp_path / "base_state" / "urls.json")
+    monkeypatch.setattr(menzo.base, "AI_ENABLED", False)
+    monkeypatch.setattr(menzo, "load_cross_run_story_history", lambda *a, **k: [])
+    sent = []
+    monkeypatch.setattr(menzo, "call_gemini_json_model", lambda prompt, model, **k: sent.append(prompt) or ({"duplicate_groups": []}, "gemini-3.1-flash-lite"))
+    monkeypatch.setattr(menzo, "save_softpool", lambda r: None)
+    monkeypatch.setattr(menzo, "save_hard_skips", lambda r: None)
+    monkeypatch.setattr(menzo, "remember_stories", lambda *a, **k: None)
+    monkeypatch.setattr(menzo, "remember_footprints", lambda *a, **k: None)
+    monkeypatch.setattr(menzo, "remember_fingerprints", lambda *a, **k: None)
+    selected = [base_candidate(f"https://pipe/sel{i}", f"CM Punk signs WWE contract {i}") for i in range(7)]
+    pending = [base_candidate(f"https://pipe/pen{i}", f"Backstage plans for Raw {i}") for i in range(13)]
+    board = {"news_candidates_for_menzo": selected + pending, "suspicious_story_clusters": [{"records": [{"url": "https://pipe/sel0"}]}] * 12}
+    out = menzo.run_menzo(board)
+    assert len(sent) == 1
+    for candidate in selected + pending:
+        assert candidate["url"] in sent[0]
+    assert out["postprocess"]["massy_suspicious_duplicate_pairs"] == 12
+    assert out["daily_policy"]["base_capacity_limits_applied"] is False
+
+
+def test_duplicate_arbitration_before_post_caps_then_caps_apply(monkeypatch, tmp_path):
+    monkeypatch.setenv("V93_MENZO_MAX_SELECTED_PER_RUN", "6")
+    monkeypatch.setattr(menzo, "MAX_SELECTED_THIS_RUN", 3)
+    monkeypatch.setattr(menzo, "_wp_ready_for_costly_work", lambda: (True, "ok"))
+    for obj in [base_menzo, menzo.base]:
+        monkeypatch.setattr(obj, "ARTIFACT_DECISIONS_FILE", tmp_path / "base_artifacts" / "menzo.json")
+        monkeypatch.setattr(obj, "MENZO_DECISIONS_FILE", tmp_path / "base_state" / "menzo.json")
+        monkeypatch.setattr(obj, "V92_ALLOWED_URLS_FILE", tmp_path / "base_state" / "urls.json")
+        monkeypatch.setattr(obj, "AI_ENABLED", False)
+    monkeypatch.setattr(menzo, "ARTIFACT_DECISIONS_FILE", tmp_path / "wrapper_artifacts" / "menzo.json")
+    monkeypatch.setattr(menzo, "MENZO_DECISIONS_FILE", tmp_path / "wrapper_state" / "menzo.json")
+    monkeypatch.setattr(menzo, "V92_ALLOWED_URLS_FILE", tmp_path / "wrapper_state" / "urls.json")
+    monkeypatch.setattr(menzo, "load_cross_run_story_history", lambda *a, **k: [])
+    monkeypatch.setattr(menzo, "save_softpool", lambda r: None)
+    monkeypatch.setattr(menzo, "save_hard_skips", lambda r: None)
+    monkeypatch.setattr(menzo, "remember_stories", lambda *a, **k: None)
+    monkeypatch.setattr(menzo, "remember_footprints", lambda *a, **k: None)
+    monkeypatch.setattr(menzo, "remember_fingerprints", lambda *a, **k: None)
+    sent = []
+    monkeypatch.setattr(menzo, "call_gemini_json_model", lambda prompt, model, **k: sent.append(prompt) or ({"duplicate_groups": [{"keep_id": "c0", "discard_ids": ["c1"], "reason": "same"}]}, "gemini-3.1-flash-lite"))
+    board = {"news_candidates_for_menzo": [base_candidate(f"https://cap/{i}", f"CM Punk signs WWE contract {i}") for i in range(7)]}
+    out = menzo.run_menzo(board)
+    assert "https://cap/6" in sent[0]
+    assert any(x["url"] == "https://cap/1" and x["reason"] == "skip:duplicate_same_run" for x in out["skipped"])
+    assert len(out["selected"]) <= 3
+
 def test_runtime_order_has_one_budget_after_duplicate_guards(monkeypatch):
     order = []
     base = {"selected": [], "pending": [], "skipped": [], "postprocess": {}, "policy": {}}
     monkeypatch.setattr(menzo, "_wp_ready_for_costly_work", lambda: (True, "ok"))
-    monkeypatch.setattr(menzo.base, "run_menzo", lambda board: dict(base))
+    monkeypatch.setattr(menzo.base, "run_menzo", lambda board, **kwargs: dict(base))
     monkeypatch.setattr(menzo, "normalize_ai_fields", lambda r: None)
     monkeypatch.setattr(menzo, "rebuild_decisions", lambda r: None)
     for name in ["apply_betting_odds_policy", "apply_source_opinion_policy", "apply_medical_brand_policy", "apply_story_footprint_policy", "enforce_ai_skip_binding", "apply_generalized_fingerprint_policy"]:
@@ -264,7 +382,7 @@ def test_run_menzo_payload_complete_after_enrichment_and_massy_diagnostics(monke
     candidates = [item(f"https://run/{i}", f"Story {i}", f"Story {i} body") for i in range(3)] + [item(f"https://run/p{i}", f"Pending {i}", f"Pending {i} body", section="pending") for i in range(2)]
     base = {"selected": candidates[:3], "pending": candidates[3:], "skipped": [], "postprocess": {}, "policy": {}}
     monkeypatch.setattr(menzo, "_wp_ready_for_costly_work", lambda: (True, "ok"))
-    monkeypatch.setattr(menzo.base, "run_menzo", lambda board: {"selected": list(base["selected"]), "pending": list(base["pending"]), "skipped": [], "postprocess": {}, "policy": {}})
+    monkeypatch.setattr(menzo.base, "run_menzo", lambda board, **kwargs: {"selected": list(base["selected"]), "pending": list(base["pending"]), "skipped": [], "postprocess": {}, "policy": {}})
     monkeypatch.setattr(menzo, "normalize_ai_fields", lambda r: None)
     monkeypatch.setattr(menzo, "rebuild_decisions", lambda r: None)
     monkeypatch.setattr(menzo, "apply_betting_odds_policy", lambda r: None)
