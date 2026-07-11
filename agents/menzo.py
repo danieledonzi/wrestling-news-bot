@@ -519,7 +519,7 @@ def apply_ai_review(items: list[dict[str, Any]]) -> dict[str, Any]:
     return ai_result
 
 
-def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
+def run_menzo(massy_board: dict[str, Any] | None = None, *, apply_capacity_limits: bool = True, persist_outputs: bool = True) -> dict[str, Any]:
     board = massy_board if isinstance(massy_board, dict) else load_json(MASSY_BOARD_FILE, {})
     candidates = board.get("news_candidates_for_menzo", []) if isinstance(board, dict) else []
     if not isinstance(candidates, list):
@@ -550,21 +550,25 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
             skipped.append(item)
     selected = sorted(selected, key=sort_key, reverse=True)
     pending = sorted(pending, key=sort_key, reverse=True)
-    overflow = selected[max_selected:]
-    selected = selected[:max_selected]
-    for item in overflow:
-        item = dict(item)
-        item["decision"] = "pending"
-        item["reason"] = f"selected_overflow:{item.get('reason', '')}"
-        pending.append(item)
-    pending = sorted(pending, key=sort_key, reverse=True)[:max_pending]
+    overflow: list[dict[str, Any]] = []
+    if apply_capacity_limits:
+        overflow = selected[max_selected:]
+        selected = selected[:max_selected]
+        for item in overflow:
+            item = dict(item)
+            item["decision"] = "pending"
+            item["reason"] = f"selected_overflow:{item.get('reason', '')}"
+            pending.append(item)
+        pending = sorted(pending, key=sort_key, reverse=True)[:max_pending]
+    else:
+        pending = sorted(pending, key=sort_key, reverse=True)
     allowed_urls = [str(item.get("url") or item.get("source_url") or "") for item in selected if item.get("url") or item.get("source_url")]
     result = {
         "agent": "Menzo",
         "version": MENZO_VERSION,
         "generated_at": utc_now(),
         "mode": "ai_editorial_review_with_bob_briefs",
-        "daily_policy": {"target_min": 20, "target_max": 30, "reports_excluded": True, "max_selected_this_run": max_selected, "max_pending_this_run": max_pending},
+        "daily_policy": {"target_min": 20, "target_max": 30, "reports_excluded": True, "max_selected_this_run": max_selected, "max_pending_this_run": max_pending, "base_capacity_limits_applied": apply_capacity_limits, "base_outputs_persisted": persist_outputs},
         "policy": {
             "recency_penalty_after_72h": True,
             "released_data_disambiguation": True,
@@ -576,7 +580,7 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
             "bob_briefs_enabled": True,
             "ai_duplicate_detection": True,
         },
-        "input": {"massy_version": board.get("version") if isinstance(board, dict) else None, "candidate_count": len(candidates)},
+        "input": {"massy_version": board.get("version") if isinstance(board, dict) else None, "candidate_count": len(candidates), "base_capacity_limits_applied": apply_capacity_limits, "base_outputs_persisted": persist_outputs},
         "menzo_ai": ai_result,
         "selected": selected,
         "pending": pending,
@@ -584,9 +588,10 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
         "allowed_urls_for_v92": allowed_urls,
         "handoff": {"to_bob_or_v92": len(selected), "pending": len(pending), "skipped": len(skipped)},
     }
-    write_json(ARTIFACT_DECISIONS_FILE, result)
-    write_json(MENZO_DECISIONS_FILE, result)
-    write_json(V92_ALLOWED_URLS_FILE, {"generated_at": utc_now(), "version": MENZO_VERSION, "allowed_urls": allowed_urls})
+    if persist_outputs:
+        write_json(ARTIFACT_DECISIONS_FILE, result)
+        write_json(MENZO_DECISIONS_FILE, result)
+        write_json(V92_ALLOWED_URLS_FILE, {"generated_at": utc_now(), "version": MENZO_VERSION, "allowed_urls": allowed_urls})
     print(f"[MENZO v93.13] Decisione pronta | selected={len(selected)} pending={len(pending)} skipped={len(skipped)} ai_used={ai_result.get('used')} allowed_for_v92={len(allowed_urls)}", flush=True)
     return result
 

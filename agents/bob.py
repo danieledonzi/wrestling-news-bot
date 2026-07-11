@@ -803,6 +803,9 @@ def dynamic_article_capacity(decision: dict[str, Any], selected: list[dict[str, 
 def article_package(item: dict[str, Any]) -> dict[str, Any]:
     url = str(item.get("url") or item.get("source_url") or "")
     package: dict[str, Any] = {"source_url": url, "source": item.get("source"), "source_title": item.get("title"), "category_hint": item.get("category_hint"), "menzo_score": item.get("score"), "status": "error", "created_at": utc_now(), "diagnostic_stage": "start"}
+    for _field in ["menzo_duplicate_checked", "menzo_duplicate_scope", "menzo_duplicate_decision", "menzo_authorized", "menzo_compared_with_url", "menzo_duplicate_reason", "menzo_new_fact", "menzo_winner_url"]:
+        if _field in item:
+            package[_field] = item[_field]
     try:
         raw = fetch_html(url)
         package["fetched_html_chars"] = len(raw)

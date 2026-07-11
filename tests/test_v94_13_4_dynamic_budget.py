@@ -93,7 +93,7 @@ def test_softpool_item_deferred_four_times_hard_skip(monkeypatch):
     assert result["postprocess"]["softpool_repeatedly_outranked"] == 1
 
 
-def test_ambiguous_duplicate_cluster_still_uses_gemini_arbitration(monkeypatch):
+def test_legacy_ai_duplicate_arbitration_no_longer_active_before_batch(monkeypatch):
     calls = []
 
     def fake_call(prompt, model):
@@ -108,5 +108,6 @@ def test_ambiguous_duplicate_cluster_still_uses_gemini_arbitration(monkeypatch):
     ]}]}
     result = {"selected": [candidate], "pending": [], "skipped": [], "postprocess": {}}
     menzo.apply_ai_duplicate_arbitration(result, board)
-    assert calls
-    assert result["postprocess"]["gemini_calls_used_for_duplicate_arbitration"] == 1
+    assert calls == []
+    assert result["selected"] == [candidate]
+    assert result["postprocess"].get("gemini_calls_used_for_duplicate_arbitration", 0) == 0

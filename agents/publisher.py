@@ -663,23 +663,18 @@ def valid_menzo_duplicate_resolution(article: dict[str, Any]) -> tuple[bool, str
     source_url = publisher_source_key(article.get("source_url") or article.get("url") or "")
     winner_url = publisher_source_key(article.get("menzo_winner_url") or "")
     if scope == "same_run":
-        if decision not in {"DUPLICATE", "DISTINCT"}:
+        if decision != "DUPLICATE":
             return False, "skip:duplicate_arbitration_unresolved"
-        if decision == "DISTINCT":
-            return (authorized is True, "skip:duplicate_arbitration_unresolved")
-        if decision == "DUPLICATE":
-            if authorized is True:
-                return (bool(winner_url and source_url and winner_url == source_url), "skip:duplicate_arbitration_unresolved")
-            return True, "skip:duplicate_same_run"
+        if authorized is True:
+            return (bool(winner_url and source_url and winner_url == source_url), "skip:duplicate_arbitration_unresolved")
+        return True, "skip:duplicate_same_run"
     if scope == "recent_history":
-        if decision not in {"DUPLICATE", "REAL_UPDATE", "DISTINCT_STORY"}:
+        if decision not in {"DUPLICATE", "REAL_UPDATE"}:
             return False, "skip:duplicate_arbitration_unresolved"
         if decision == "DUPLICATE":
             return (authorized is False, article.get("menzo_duplicate_reason") or "skip:duplicate_recently_published")
         if decision == "REAL_UPDATE":
-            return (authorized is True and bool(str(article.get("menzo_new_fact") or "").strip()), "skip:duplicate_arbitration_unresolved")
-        if decision == "DISTINCT_STORY":
-            return (authorized is True, "skip:duplicate_arbitration_unresolved")
+            return (authorized is True and bool(str(article.get("menzo_new_fact") or "").strip()) and bool(str(article.get("menzo_compared_with_url") or "").strip()), "skip:duplicate_arbitration_unresolved")
     return False, "skip:duplicate_arbitration_unresolved"
 
 
