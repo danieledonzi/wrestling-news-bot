@@ -24,6 +24,101 @@ def base_candidate(url, title):
     return {"url": url, "source_url": url, "title": title, "summary": title, "source": "Test"}
 
 
+
+def test_base_menzo_default_persistence_compatibility(monkeypatch, tmp_path):
+    monkeypatch.setattr(base_menzo, "AI_ENABLED", False)
+    art = tmp_path / "artifacts" / "menzo.json"
+    dec = tmp_path / "state" / "menzo.json"
+    urls = tmp_path / "state" / "urls.json"
+    monkeypatch.setattr(base_menzo, "ARTIFACT_DECISIONS_FILE", art)
+    monkeypatch.setattr(base_menzo, "MENZO_DECISIONS_FILE", dec)
+    monkeypatch.setattr(base_menzo, "V92_ALLOWED_URLS_FILE", urls)
+    out = base_menzo.run_menzo({"news_candidates_for_menzo": [base_candidate("https://persist/one", "CM Punk signs WWE contract")]})
+    assert art.exists() and dec.exists() and urls.exists()
+    assert out["daily_policy"]["base_capacity_limits_applied"] is True
+    assert out["daily_policy"]["base_outputs_persisted"] is True
+    assert out["input"]["base_outputs_persisted"] is True
+
+
+def test_base_internal_mode_preserves_existing_output_files(monkeypatch, tmp_path):
+    monkeypatch.setattr(base_menzo, "AI_ENABLED", False)
+    art = tmp_path / "artifacts" / "menzo.json"
+    dec = tmp_path / "state" / "menzo.json"
+    urls = tmp_path / "state" / "urls.json"
+    for path in [art, dec, urls]:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text('{"sentinel": true}', encoding="utf-8")
+    monkeypatch.setattr(base_menzo, "ARTIFACT_DECISIONS_FILE", art)
+    monkeypatch.setattr(base_menzo, "MENZO_DECISIONS_FILE", dec)
+    monkeypatch.setattr(base_menzo, "V92_ALLOWED_URLS_FILE", urls)
+    board = {"news_candidates_for_menzo": [base_candidate(f"https://internal/{i}", f"CM Punk signs WWE contract {i}") for i in range(8)]}
+    out = base_menzo.run_menzo(board, apply_capacity_limits=False, persist_outputs=False)
+    assert len(out["selected"]) == 8
+    assert out["daily_policy"]["base_capacity_limits_applied"] is False
+    assert out["daily_policy"]["base_outputs_persisted"] is False
+    assert out["input"]["base_outputs_persisted"] is False
+    assert art.read_text(encoding="utf-8") == '{"sentinel": true}'
+    assert dec.read_text(encoding="utf-8") == '{"sentinel": true}'
+    assert urls.read_text(encoding="utf-8") == '{"sentinel": true}'
+
+
+def test_no_provisional_allowed_url_write_and_final_wrapper_write(monkeypatch, tmp_path):
+    monkeypatch.setattr(menzo, "_wp_ready_for_costly_work", lambda: (True, "ok"))
+    for obj in [base_menzo, menzo.base]:
+        monkeypatch.setattr(obj, "AI_ENABLED", False)
+        monkeypatch.setattr(obj, "ARTIFACT_DECISIONS_FILE", tmp_path / "base_artifacts" / "menzo.json")
+        monkeypatch.setattr(obj, "MENZO_DECISIONS_FILE", tmp_path / "base_state" / "menzo.json")
+        monkeypatch.setattr(obj, "V92_ALLOWED_URLS_FILE", tmp_path / "base_state" / "urls.json")
+    final_art = tmp_path / "wrapper_artifacts" / "menzo.json"
+    final_dec = tmp_path / "wrapper_state" / "menzo.json"
+    final_urls = tmp_path / "wrapper_state" / "urls.json"
+    monkeypatch.setattr(menzo, "ARTIFACT_DECISIONS_FILE", final_art)
+    monkeypatch.setattr(menzo, "MENZO_DECISIONS_FILE", final_dec)
+    monkeypatch.setattr(menzo, "V92_ALLOWED_URLS_FILE", final_urls)
+    monkeypatch.setattr(menzo, "load_cross_run_story_history", lambda *a, **k: [])
+    monkeypatch.setattr(menzo, "save_softpool", lambda r: None)
+    monkeypatch.setattr(menzo, "save_hard_skips", lambda r: None)
+    monkeypatch.setattr(menzo, "remember_stories", lambda *a, **k: None)
+    monkeypatch.setattr(menzo, "remember_footprints", lambda *a, **k: None)
+    monkeypatch.setattr(menzo, "remember_fingerprints", lambda *a, **k: None)
+    writes = []
+    real_write = menzo.write_json
+    def spy(path, data):
+        writes.append((Path(path), data))
+        real_write(path, data)
+    monkeypatch.setattr(menzo, "write_json", spy)
+    monkeypatch.setattr(menzo, "call_gemini_json_model", lambda *a, **k: ({"duplicate_groups": [{"keep_id": "c0", "discard_ids": ["c1"], "reason": "same"}]}, "gemini-3.1-flash-lite"))
+    board = {"news_candidates_for_menzo": [base_candidate("https://safe/winner", "CM Punk signs WWE contract"), base_candidate("https://safe/loser", "CM Punk signs WWE contract")]}
+    out = menzo.run_menzo(board)
+    allowed_writes = [data for path, data in writes if path == final_urls]
+    assert len(allowed_writes) == 1
+    assert allowed_writes[0]["allowed_urls"] == ["https://safe/winner"]
+    assert "https://safe/loser" not in final_urls.read_text(encoding="utf-8")
+    assert not (tmp_path / "base_state" / "urls.json").exists()
+    assert out["allowed_urls_for_v92"] == ["https://safe/winner"]
+
+
+def test_wrapper_exception_after_base_leaves_existing_allowed_urls_intact(monkeypatch, tmp_path):
+    sentinel = tmp_path / "wrapper_state" / "urls.json"
+    sentinel.parent.mkdir(parents=True, exist_ok=True)
+    sentinel.write_text('{"allowed_urls": ["https://safe/sentinel"]}', encoding="utf-8")
+    monkeypatch.setattr(menzo, "_wp_ready_for_costly_work", lambda: (True, "ok"))
+    monkeypatch.setattr(menzo, "V92_ALLOWED_URLS_FILE", sentinel)
+    for obj in [base_menzo, menzo.base]:
+        monkeypatch.setattr(obj, "AI_ENABLED", False)
+        monkeypatch.setattr(obj, "ARTIFACT_DECISIONS_FILE", tmp_path / "base_artifacts" / "menzo.json")
+        monkeypatch.setattr(obj, "MENZO_DECISIONS_FILE", tmp_path / "base_state" / "menzo.json")
+        monkeypatch.setattr(obj, "V92_ALLOWED_URLS_FILE", tmp_path / "base_state" / "urls.json")
+    def boom(result):
+        raise RuntimeError("post-base failure")
+    monkeypatch.setattr(menzo, "normalize_ai_fields", boom)
+    try:
+        menzo.run_menzo({"news_candidates_for_menzo": [base_candidate("https://unsafe/provisional", "CM Punk signs WWE contract")]})
+    except RuntimeError:
+        pass
+    assert sentinel.read_text(encoding="utf-8") == '{"allowed_urls": ["https://safe/sentinel"]}'
+    assert not (tmp_path / "base_state" / "urls.json").exists()
+
 def test_base_menzo_default_capacity_limits_remain(monkeypatch, tmp_path):
     monkeypatch.setattr(base_menzo, "AI_ENABLED", False)
     monkeypatch.setenv("V93_MENZO_MAX_SELECTED_PER_RUN", "2")
@@ -59,8 +154,8 @@ def test_base_menzo_unlimited_handoff_preserves_all_actionable(monkeypatch, tmp_
 def test_wrapper_passes_apply_capacity_limits_false(monkeypatch):
     seen = []
     monkeypatch.setattr(menzo, "_wp_ready_for_costly_work", lambda: (True, "ok"))
-    def fake_base(board, *, apply_capacity_limits=True):
-        seen.append(apply_capacity_limits)
+    def fake_base(board, *, apply_capacity_limits=True, persist_outputs=True):
+        seen.append((apply_capacity_limits, persist_outputs))
         return {"selected": [], "pending": [], "skipped": [], "postprocess": {}, "policy": {}, "daily_policy": {}}
     monkeypatch.setattr(menzo.base, "run_menzo", fake_base)
     monkeypatch.setattr(menzo, "normalize_ai_fields", lambda r: None)
@@ -74,7 +169,7 @@ def test_wrapper_passes_apply_capacity_limits_false(monkeypatch):
     monkeypatch.setattr(menzo, "remember_fingerprints", lambda *a, **k: None)
     monkeypatch.setattr(menzo, "write_json", lambda *a, **k: None)
     menzo.run_menzo({})
-    assert seen == [False]
+    assert seen == [(False, False)]
 
 
 def test_real_base_unlimited_pipeline_payload_exceeds_old_caps(monkeypatch, tmp_path):

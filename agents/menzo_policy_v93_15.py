@@ -2546,7 +2546,7 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     previous_ai_enabled = base.AI_ENABLED
     base.AI_ENABLED = False
     try:
-        result = base.run_menzo(board, apply_capacity_limits=False)
+        result = base.run_menzo(board, apply_capacity_limits=False, persist_outputs=False)
     finally:
         base.AI_ENABLED = previous_ai_enabled
     normalize_ai_fields(result)
@@ -2589,19 +2589,18 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     policy["softpool_max_deferrals"] = SOFTPOOL_MAX_DEFERRALS
     policy["softpool_outranked_deferrals"] = SOFTPOOL_OUTRANKED_DEFERRALS
     policy["gemini_editorial_review_for_generic_soft_news"] = False
-    policy["gemini_only_for_duplicate_novelty_arbitration"] = True
-    policy["ai_duplicate_arbitration"] = True
-    policy["ai_cross_source_duplicate_arbitration"] = True
-    policy["ai_duplicate_arbitration_first_pass_model"] = MENZO_DUPLICATE_ARBITRATION_FIRST_MODEL
-    policy["ai_duplicate_arbitration_second_pass_model"] = MENZO_DUPLICATE_ARBITRATION_SECOND_MODEL
-    policy["gemini_model_routing_v95_4"] = True
+    policy["gemini_batch_duplicate_arbitration"] = True
+    policy["gemini_same_run_duplicate_model"] = DUPLICATE_BATCH_MODEL
+    policy["gemini_recent_history_duplicate_model"] = DUPLICATE_BATCH_MODEL
+    policy["duplicate_repair_and_micro_fallback"] = True
+    policy["legacy_ai_duplicate_arbitration_active"] = False
+    policy["publisher_duplicate_semantics"] = "authorization_only"
     policy["cross_run_story_novelty_gate_v95_5"] = True
     policy["cross_run_novelty_gate_enabled"] = MENZO_CROSS_RUN_NOVELTY_GATE_ENABLED
-    policy["same_story_duplicate_guard"] = "certain_duplicate_blocks_before_bob_ambiguous_requires_gemini"
+    policy["same_story_duplicate_guard"] = "gemini_batch_only_no_deterministic_preblock"
     policy["recent_published_duplicate_lookback_hours"] = RECENT_PUBLISHED_DUPLICATE_LOOKBACK_HOURS
     policy["cross_run_novelty_ai_model"] = MENZO_CROSS_RUN_NOVELTY_AI_MODEL
-    policy["menzo_35_gate"] = {"enabled": MENZO_ENABLE_35_FOR_HIGH_AMBIGUITY, "min_score": MENZO_35_MIN_SCORE, "require_duplicate_or_same_story": MENZO_35_REQUIRE_DUPLICATE_OR_SAME_STORY}
-    policy["ai_duplicate_arbitration_limits"] = {"max_clusters_per_run": AI_DEDUPE_MAX_CLUSTERS, "max_candidates_per_cluster": AI_DEDUPE_MAX_CANDIDATES}
+    policy["massy_suspicious_clusters"] = "diagnostic_only"
     save_softpool(result)
     save_hard_skips(result)
     remember_stories(result.get("selected", []), reason="menzo_selected")
