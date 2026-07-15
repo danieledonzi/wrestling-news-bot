@@ -20,6 +20,27 @@ VERSION = "v93_19_newsroom_master_log"
 MAX_RUNS = int(os.getenv("V93_MASTER_LOG_MAX_RUNS", "300"))
 TAIL_RUNS = int(os.getenv("V93_MASTER_LOG_ARTIFACT_TAIL", "40"))
 
+DUPLICATE_ARBITRATION_COUNTER_KEYS = (
+    "menzo_same_run_batch_calls",
+    "menzo_same_run_batch_repairs",
+    "menzo_same_run_micro_fallback_calls",
+    "menzo_same_run_duplicate_groups",
+    "menzo_same_run_duplicates_blocked",
+    "menzo_recent_history_batch_calls",
+    "menzo_recent_history_batch_repairs",
+    "menzo_recent_history_micro_fallback_calls",
+    "menzo_recent_history_duplicates_blocked",
+    "menzo_recent_history_material_updates",
+    "menzo_duplicate_arbitration_fail_closed",
+    "gemini_calls_used_for_duplicate_arbitration",
+)
+
+
+def compact_duplicate_arbitration(postprocess: dict[str, Any] | None) -> dict[str, Any]:
+    if not isinstance(postprocess, dict):
+        return {}
+    return {key: postprocess[key] for key in DUPLICATE_ARBITRATION_COUNTER_KEYS if isinstance(postprocess.get(key), int)}
+
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
@@ -113,13 +134,16 @@ def compact_article_diagnostics(article: dict[str, Any] | None) -> dict[str, Any
 def compact_alfred_review(review: dict[str, Any] | None) -> dict[str, Any]:
     if not isinstance(review, dict):
         return {}
+    blockers = review.get("blockers", []) if isinstance(review.get("blockers"), list) else []
+    if not blockers and isinstance(review.get("issues"), list):
+        blockers = [x for x in review.get("issues", []) if isinstance(x, dict) and str(x.get("severity") or "").lower() == "blocker"]
     return {
         "title": scalar(review.get("title") or review.get("title_it"), ""),
         "source_url": scalar(review.get("source_url"), ""),
-        "status": scalar(review.get("status"), ""),
+        "status": scalar(review.get("status") or review.get("decision"), ""),
         "quality_score": review.get("quality_score"),
         "warnings": [compact_warning(x) for x in review.get("warnings", []) if x][:10] if isinstance(review.get("warnings"), list) else [],
-        "blockers": [compact_warning(x) for x in review.get("blockers", []) if x][:10] if isinstance(review.get("blockers"), list) else [],
+        "blockers": [compact_warning(x) for x in blockers if x][:10],
         "changes": [compact_warning(x) for x in review.get("editorial_changes", []) if x][:10] if isinstance(review.get("editorial_changes"), list) else [],
     }
 
@@ -159,6 +183,7 @@ def build_master_record(
     selected = [compact_item(x) for x in menzo.get("selected", []) if isinstance(x, dict)] if isinstance(menzo.get("selected"), list) else []
     pending = [compact_item(x) for x in menzo.get("pending", []) if isinstance(x, dict)][:20] if isinstance(menzo.get("pending"), list) else []
     skipped = top_skips(menzo.get("skipped", []) if isinstance(menzo.get("skipped"), list) else [], 12)
+    duplicate_arbitration = compact_duplicate_arbitration(menzo.get("postprocess") if isinstance(menzo.get("postprocess"), dict) else {})
 
     bob_articles = [compact_article_diagnostics(x) for x in bob.get("articles", []) if isinstance(x, dict)] if isinstance(bob.get("articles"), list) else []
     alfred_reviews = [compact_alfred_review(x) for x in alfred.get("reviews", []) if isinstance(x, dict)] if isinstance(alfred.get("reviews"), list) else []
@@ -213,6 +238,7 @@ def build_master_record(
             "selected": selected,
             "pending": pending,
             "skipped_sample": skipped,
+            "duplicate_arbitration": duplicate_arbitration,
         },
         "bob": {
             "version": bob.get("version"),
