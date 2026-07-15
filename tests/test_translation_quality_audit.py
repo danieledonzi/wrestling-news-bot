@@ -129,7 +129,7 @@ def test_medium_issue_still_needs_human_review():
 def test_build_audit_writes_json_and_markdown(tmp_path):
     pub = tmp_path / "published_html_review"
     pub.mkdir()
-    (pub / "story.html").write_text("<html><title>Story</title><p>Welcome to our coverage.</p></html>", encoding="utf-8")
+    (pub / "v93-publisher-story.html").write_text("<html><title>Story</title><p>Welcome to our coverage.</p></html>", encoding="utf-8")
     payload, latest, md = audit.build_audit(hours=24, output_dir=tmp_path / "reports", root=tmp_path)
     assert latest.exists()
     assert md.exists()
