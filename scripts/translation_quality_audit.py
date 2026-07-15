@@ -351,8 +351,12 @@ def set_source_material(a: ArticleAudit, text: str, rank: int, provenance: str, 
     a.original_text = text
     a.source_material_rank = rank
     a.source_material_provenance = provenance
-    a.original_text_length = int((stats or {}).get("text_length") or len(text))
-    a.original_paragraph_count = int((stats or {}).get("paragraph_count") or a.original_paragraph_count or (1 if text.strip() else 0))
+    if stats is not None:
+        a.original_text_length = int(stats.get("text_length", len(text)))
+        a.original_paragraph_count = int(stats.get("paragraph_count", 0))
+    else:
+        a.original_text_length = len(text)
+        a.original_paragraph_count = 0
     refresh_material_flags(a)
     return True
 
@@ -375,10 +379,16 @@ def set_final_published_material(a: ArticleAudit, text: str, rank: int, provenan
     a.published_text = text
     a.final_published_material_rank = rank
     a.final_published_material_provenance = provenance
-    a.published_text_length = int((stats or {}).get("text_length") or len(text))
-    a.published_paragraph_count = int((stats or {}).get("paragraph_count") or a.published_paragraph_count)
-    a.blockquote_count = int((stats or {}).get("blockquote_count") or a.blockquote_count)
-    a.quote_count = int((stats or {}).get("quote_count") or a.quote_count)
+    if stats is not None:
+        a.published_text_length = int(stats.get("text_length", len(text)))
+        a.published_paragraph_count = int(stats.get("paragraph_count", 0))
+        a.blockquote_count = int(stats.get("blockquote_count", 0))
+        a.quote_count = int(stats.get("quote_count", 0))
+    else:
+        a.published_text_length = len(text)
+        a.published_paragraph_count = len([part for part in re.split(r"\n\s*\n", text) if part.strip()]) or (1 if text.strip() else 0)
+        a.blockquote_count = 0
+        a.quote_count = len(re.findall(r'[“”"]', text)) // 2
     refresh_material_flags(a)
     return True
 
@@ -719,7 +729,8 @@ def discover(root: Path, hours: int, limit: int | None) -> list[ArticleAudit]:
     for a in rows:
         if a.original_text:
             a.original_text_length = len(" ".join(a.original_text.split()))
-            a.original_paragraph_count = len([x for x in re.split(r"\n\s*\n", a.original_text) if x.strip()]) or (1 if a.original_text.strip() else 0)
+            if not a.original_paragraph_count:
+                a.original_paragraph_count = len([x for x in re.split(r"\n\s*\n", a.original_text) if x.strip()]) or (1 if a.original_text.strip() else 0)
         refresh_material_flags(a)
         if unmatched_authoritative.get(a.key) and not a.comparative_pair_available:
             marker = unmatched_authoritative[a.key]

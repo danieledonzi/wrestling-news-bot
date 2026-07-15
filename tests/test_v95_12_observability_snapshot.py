@@ -913,3 +913,57 @@ def test_translation_audit_human_review_summary_counts_full_population_not_detai
     assert "Human-review articles shown: 0 of 1" in text
     assert "Limited Out Review" not in text
     assert len(payload["articles"]) == 25
+
+
+def test_translation_audit_preserves_source_html_structural_paragraph_count(tmp_path):
+    _root, source_url, wp_link = authoritative_publication_root(tmp_path, title="Paragraph Source")
+    original = "<html>" + "".join(f"<p>Source paragraph {i}</p>" for i in range(6)) + "</html>"
+    _write_published_html_review_article(tmp_path, source_url=source_url, wp_link=wp_link, title="Paragraph Source", original=original, final=None)
+
+    row = discover(tmp_path, hours=24, limit=None)[0]
+    assert row.source_material_available is True
+    assert row.original_paragraph_count == 6
+
+
+def test_translation_audit_plain_text_source_paragraph_fallback_still_counts(tmp_path):
+    _root, source_url, _wp_link = authoritative_publication_root(tmp_path, title="Plain Paragraphs")
+    art = tmp_path / "artifacts/newsroom"
+    art.mkdir(parents=True)
+    (art / "source.json").write_text(json.dumps({"source_url": source_url, "original_text": "Para one.\n\nPara two.\n\nPara three."}), encoding="utf-8")
+
+    row = discover(tmp_path, hours=24, limit=None)[0]
+    assert row.source_material_available is True
+    assert row.original_paragraph_count == 3
+
+
+def test_translation_audit_verified_final_replaces_old_structural_metrics_with_zeroes(tmp_path):
+    _root, source_url, _wp_link = authoritative_publication_root(tmp_path, title="Zero Structure")
+    art = tmp_path / "artifacts/newsroom"
+    art.mkdir(parents=True)
+    lower = "<p>Lower final says &quot;quoted&quot; text.</p><blockquote>quoted block</blockquote><p>Another lower paragraph.</p>"
+    (art / "lower.json").write_text(json.dumps({"source_url": source_url, "published_html": lower}), encoding="utf-8")
+    archive = tmp_path / "published_html_review"
+    archive.mkdir()
+    (archive / "v93-publisher-zero-structure.html").write_text("<html><title>Zero Structure</title><p>Verified publisher final without quoted passages.</p></html>", encoding="utf-8")
+
+    row = discover(tmp_path, hours=24, limit=None)[0]
+    assert row.final_published_material_rank == 400
+    assert "v93-publisher" in row.final_published_material_provenance
+    assert "Verified publisher final" in row.published_text
+    assert "Lower final" not in row.published_text
+    assert row.published_paragraph_count == 1
+    assert row.blockquote_count == 0
+    assert row.quote_count == 0
+
+
+def test_translation_audit_same_rank_longer_final_replacement_updates_structural_metrics():
+    audit = __import__("scripts.translation_quality_audit", fromlist=["ArticleAudit", "set_final_published_material"])
+    row = audit.ArticleAudit(key="same-rank")
+    audit.set_final_published_material(row, "Short final with \"quotes\".", 250, "short", {"text_length": 26, "paragraph_count": 1, "blockquote_count": 2, "quote_count": 1})
+    audit.set_final_published_material(row, "Longer final without blockquotes or quote markers for the selected article.", 250, "long", {"text_length": 70, "paragraph_count": 3, "blockquote_count": 0, "quote_count": 0})
+    assert row.published_text.startswith("Longer final")
+    assert row.final_published_material_provenance == "long"
+    assert row.published_text_length == 70
+    assert row.published_paragraph_count == 3
+    assert row.blockquote_count == 0
+    assert row.quote_count == 0
