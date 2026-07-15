@@ -887,9 +887,10 @@ def markdown_report(rows: list[ArticleAudit], hours: int, generated_at: str, aut
     warning_counts = Counter(alfred_warning_code(w) or render_alfred_warning(w) for a in rows for w in a.alfred_warnings)
     severity_counts = Counter(issue_severity(i) for a in rows for i in a.issues)
     technical_warning_counts = Counter(alfred_warning_code(w) or render_alfred_warning(w) for a in rows for w in a.alfred_warnings if alfred_warning_severity(w) == "technical")
-    review = [a for a in detail_rows if needs_human_review(a)]
+    review_population = [a for a in rows if needs_human_review(a)]
+    review_detail = [a for a in detail_rows if needs_human_review(a)]
     coverage = audit_coverage(rows, authority_available, len(detail_rows), detail_limit)
-    lines = [f"# OpenWrestlingTV Translation Quality Audit ({hours}h)", "", f"Generated: {generated_at}", "", "## 1. Summary", "", f"- Articles/reports inspected: {len(rows)}", f"- Articles needing human review: {len(review)}", f"- Publication authority available: {coverage['publication_authority_available']}", f"- Authoritative publications: {coverage['authoritative_total']}", f"- Legacy artifacts inspected: {coverage['legacy_artifacts_inspected']}", f"- Audit population total: {coverage['audit_population_total']}", f"- Detailed articles shown: {coverage['detailed_rows_returned']}", f"- Detail limit: {coverage['detail_limit']}", f"- Source material available: {coverage['source_material_available']}", f"- Translated candidate material available: {coverage['translated_candidate_material_available']}", f"- Final published material available: {coverage['final_published_material_available']}", f"- Comparative pairs available: {coverage['comparative_pairs_available']}", f"- Missing source material: {coverage['missing_source_material']}", f"- Missing final published material: {coverage['missing_final_published_material']}", f"- Distinct deterministic issue types: {len(issue_counts)}", f"- Distinct Alfred warnings: {len(warning_counts)}", "", "### Severity summary", ""]
+    lines = [f"# OpenWrestlingTV Translation Quality Audit ({hours}h)", "", f"Generated: {generated_at}", "", "## 1. Summary", "", f"- Articles/reports inspected: {len(rows)}", f"- Articles needing human review: {len(review_population)}", f"- Human-review articles shown: {len(review_detail)} of {len(review_population)}", f"- Publication authority available: {coverage['publication_authority_available']}", f"- Authoritative publications: {coverage['authoritative_total']}", f"- Legacy artifacts inspected: {coverage['legacy_artifacts_inspected']}", f"- Audit population total: {coverage['audit_population_total']}", f"- Detailed articles shown: {coverage['detailed_rows_returned']}", f"- Detail limit: {coverage['detail_limit']}", f"- Source material available: {coverage['source_material_available']}", f"- Translated candidate material available: {coverage['translated_candidate_material_available']}", f"- Final published material available: {coverage['final_published_material_available']}", f"- Comparative pairs available: {coverage['comparative_pairs_available']}", f"- Missing source material: {coverage['missing_source_material']}", f"- Missing final published material: {coverage['missing_final_published_material']}", f"- Distinct deterministic issue types: {len(issue_counts)}", f"- Distinct Alfred warnings: {len(warning_counts)}", "", "### Severity summary", ""]
     lines += [f"- {k}: {v}" for k, v in sorted(severity_counts.items())] or ["- None detected."]
     lines += ["", "## 2. Top recurring issues", ""]
     lines += [f"- {k}: {v}" for k, v in issue_counts.most_common(20)] or ["- None detected."]
@@ -898,10 +899,10 @@ def markdown_report(rows: list[ArticleAudit], hours: int, generated_at: str, aut
     lines += ["", "## 4. Technical/media warnings", ""]
     lines += [f"- {k}: {v}" for k, v in technical_warning_counts.most_common(30)] or ["- None found in available artifacts."]
     lines += ["", "## 5. Articles needing human review", ""]
-    if review:
+    if review_detail:
         lines.append("| Title | Source URL | WP link | Issues | Severities | Alfred warnings | Artifacts |")
         lines.append("|---|---|---|---|---|---|---|")
-        for a in review[:50]:
+        for a in review_detail[:50]:
             severities = ", ".join(f"{issue}:{issue_severity(issue)}" for issue in a.issues)
             lines.append(f"| {esc(a.title)} | {esc(a.source_url)} | {esc(a.wp_link)} | {esc(', '.join(a.issues))} | {esc(severities)} | {esc(', '.join(render_alfred_warning(w) for w in a.alfred_warnings))} | {esc(', '.join(a.artifact_paths[:4]))} |")
     else:

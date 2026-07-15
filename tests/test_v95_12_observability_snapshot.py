@@ -878,3 +878,38 @@ def test_translation_audit_mixed_archive_formats_remain_distinct_canonical_rows(
     assert any("Nested final" in text for text in finals.values())
     assert any("Flat final" in text for text in finals.values())
     assert any("V93 final" in text for text in finals.values())
+
+
+def test_translation_audit_human_review_summary_counts_full_population_not_detail_limit(tmp_path):
+    now = datetime.now(timezone.utc)
+    published = []
+    for i in range(28):
+        title = "Limited Out Review" if i == 27 else f"Clean Detail {i:02d}"
+        published.append({"source_url": f"https://src/detail-{i}", "wp_link": f"https://owtv/detail-{i}", "title": title, "status": "published"})
+    write_master(tmp_path, [master_row(now, idx=4000, publisher_results=published)])
+    archive = tmp_path / "published_html_review"
+    archive.mkdir()
+    for i in range(25):
+        (archive / f"v93-publisher-clean-detail-{i:02d}.html").write_text(
+            f"<html><title>Clean Detail {i:02d}</title><p>Clean final material {i} with enough text to sort before empty rows.</p></html>",
+            encoding="utf-8",
+        )
+    art = tmp_path / "artifacts/newsroom"
+    art.mkdir(parents=True)
+    (art / "limited_review.json").write_text(json.dumps({
+        "source_url": "https://src/detail-27",
+        "title": "Limited Out Review",
+        "alfred_warnings": ["blocker: needs human review"],
+    }), encoding="utf-8")
+
+    payload, _latest, md = __import__("scripts.translation_quality_audit", fromlist=["build_audit"]).build_audit(hours=24, limit=25, output_dir=tmp_path / "reports", root=tmp_path)
+    text = md.read_text(encoding="utf-8")
+    assert payload["coverage"]["authoritative_total"] == 28
+    assert payload["coverage"]["audit_population_total"] == 28
+    assert payload["coverage"]["detailed_rows_returned"] == 25
+    assert payload["coverage"]["detail_limit"] == 25
+    assert "Articles/reports inspected: 28" in text
+    assert "Articles needing human review: 1" in text
+    assert "Human-review articles shown: 0 of 1" in text
+    assert "Limited Out Review" not in text
+    assert len(payload["articles"]) == 25
