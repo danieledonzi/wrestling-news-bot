@@ -481,7 +481,7 @@ def merge_candidate_html(a: ArticleAudit, raw: str, rel: str, rank: int = 150, p
 
 
 def parse_archive_time_from_name(path: Path) -> datetime | None:
-    for part in [path.stem, *(parent.name for parent in path.parents[:3])]:
+    for part in [path.stem, *(parent.name for parent in list(path.parents)[:3])]:
         m = re.search(r"(20\d{2})[-_]?([01]\d)[-_]?([0-3]\d)(?:[-_T]?([0-2]\d)[-_]?([0-5]\d)(?:[-_]?([0-5]\d))?)?", part)
         if not m:
             continue
