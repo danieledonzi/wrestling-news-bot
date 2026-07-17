@@ -8,7 +8,7 @@ import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-from agents.gemini_ledger import record_gemini_event
+from agents.gemini_ledger import make_operation_id, record_gemini_attempt, record_gemini_event
 from urllib.parse import parse_qs, urljoin, urlparse
 import time
 import base64
@@ -670,7 +670,7 @@ def is_temporary_gemini_error(exc: Exception) -> bool:
     return any(marker in text for marker in markers)
 
 
-def generate_json(prompt: str, chain_name: str = "unknown", cooldown_models: Optional[set[str]] = None) -> Tuple[Dict[str, Any], str]:
+def generate_json(prompt: str, chain_name: str = "unknown", cooldown_models: Optional[set[str]] = None, ledger_context: Optional[Dict[str, Any]] = None) -> Tuple[Dict[str, Any], str]:
     if not GEMINI_API_KEY:
         raise RuntimeError("GEMINI_API_KEY mancante")
     is_report_chain = chain_name.startswith("report_")
@@ -681,16 +681,30 @@ def generate_json(prompt: str, chain_name: str = "unknown", cooldown_models: Opt
     client = genai.Client(api_key=GEMINI_API_KEY)
     last: Optional[Exception] = None
     cooldown_models = cooldown_models if cooldown_models is not None else set()
+    context = ledger_context or {}
+    operation_id = make_operation_id("Bob", chain_name, context.get("report_id") or context.get("report_key") or context.get("batch") or "report")
+    real_attempt_index = 0
     for model in active_models:
         if is_report_chain and model in cooldown_models:
-            record_gemini_event(agent="Bob", phase=chain_name, model=model, status="skipped", reason="report_translation_cooldown", result="cooldown_skipped", pipeline="report", cooldown_skipped=True)
+            record_gemini_event(agent="Bob", phase=chain_name, model=model, status="avoided", reason="report_translation_cooldown", result="cooldown_skipped", pipeline="report", cooldown_skipped=True, purpose=chain_name, **context)
             print(f"[REPORT v95.2] model cooldown skip model={model}", flush=True)
             continue
+        print(f"[TRANSLATE v92] Provo modello: {model} | chain={chain_name}", flush=True)
+        attempt_index = real_attempt_index
+        real_attempt_index += 1
         try:
-            print(f"[TRANSLATE v92] Provo modello: {model} | chain={chain_name}", flush=True)
             res = client.models.generate_content(model=model, contents=prompt)
-            data = extract_json_object(res.text)
-            record_gemini_event(agent="Bob", phase=chain_name, model=model, status="called", reason="report_translation", result="valid_json", pipeline="report" if is_report_chain else None)
+            data = None
+            parse_error = None
+            try:
+                data = extract_json_object(res.text)
+            except Exception as exc:
+                parse_error = str(exc)[:500]
+            record_gemini_attempt(response=res, agent="Bob", phase=chain_name, model_requested=model, status="called", reason="report_translation", result="valid_json" if data is not None else "invalid_json", pipeline="report" if is_report_chain else None, operation_id=operation_id, attempt_index=attempt_index, fallback=attempt_index > 0, retry=False, purpose=chain_name, **context)
+            if data is None:
+                last = ValueError(parse_error or "invalid_json")
+                print(f"[TRANSLATE v92] Modello fallito: {model} | chain={chain_name} | error={parse_error or 'invalid_json'}", flush=True)
+                continue
             if is_report_chain:
                 print(f"[REPORT v95.2] model selected model={model} purpose={chain_name}", flush=True)
             print(f"[TRANSLATE v92] Modello scelto: {model} | chain={chain_name}", flush=True)
@@ -701,7 +715,7 @@ def generate_json(prompt: str, chain_name: str = "unknown", cooldown_models: Opt
             if temporary:
                 cooldown_models.add(model)
                 print(f"[REPORT v95.2] model cooldown set model={model} reason={str(exc)[:180]}", flush=True)
-            record_gemini_event(agent="Bob", phase=chain_name, model=model, status="failed", reason="report_translation_temporary" if temporary else "report_translation", result=str(exc)[:500], pipeline="report" if is_report_chain else None, cooldown_applied=temporary or None)
+            record_gemini_attempt(response=None, agent="Bob", phase=chain_name, model_requested=model, status="failed", reason="report_translation_temporary" if temporary else "report_translation", result=str(exc)[:500], pipeline="report" if is_report_chain else None, cooldown_applied=temporary or None, operation_id=operation_id, attempt_index=attempt_index, retry=False, fallback=attempt_index > 0, purpose=chain_name, **context)
             print(f"[TRANSLATE v92] Modello fallito: {model} | chain={chain_name} | error={str(exc)[:220]}", flush=True)
             continue
     raise last if last else RuntimeError("Nessun modello disponibile")
@@ -795,7 +809,7 @@ BLOCCHI JSON:
 {json.dumps(batch, ensure_ascii=False)}
 """
         print(f"[TRANSLATE v92] Batch report_blocks_legacy_prompt {batch_no}/{batch_total} | items={len(batch)} | indici={batch_indexes[0]}-{batch_indexes[-1]}", flush=True)
-        data, model = generate_json(prompt, chain_name="report_blocks_legacy_prompt", cooldown_models=cooldown_models)
+        data, model = generate_json(prompt, chain_name="report_blocks_legacy_prompt", cooldown_models=cooldown_models, ledger_context={"report_id": deterministic_title or source_title, "report_key": deterministic_title or source_title, "source_url": None, "title": deterministic_title or source_title, "batch": f"{batch_no}/{batch_total}", "batch_no": batch_no, "batch_total": batch_total})
         arr = data.get("items") or []
         batch_translated: Dict[int, str] = {}
         for item in arr:

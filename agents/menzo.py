@@ -8,6 +8,8 @@ from email.utils import parsedate_to_datetime
 from pathlib import Path
 from typing import Any
 
+from agents.gemini_ledger import make_operation_id, record_gemini_attempt
+
 ROOT = Path(__file__).resolve().parents[1]
 STATE_DIR = ROOT / "state"
 NEWSROOM_STATE_DIR = STATE_DIR / "newsroom"
@@ -425,15 +427,18 @@ def call_gemini(prompt: str) -> tuple[str, str, list[str]]:
     try:
         from google import genai  # type: ignore
         client = genai.Client(api_key=api_key)
-        for model in MODEL_CHAIN:
+        operation_id = make_operation_id("Menzo", "ai_editorial_review", "batch")
+        for attempt_index, model in enumerate(MODEL_CHAIN):
             attempts.append(model)
             try:
                 response = client.models.generate_content(model=model, contents=prompt)
                 text = getattr(response, "text", "") or ""
+                record_gemini_attempt(response=response, agent="Menzo", phase="ai_editorial_review", model_requested=model, status="called", reason="ai_editorial_review", result="text" if text.strip() else "empty_response", operation_id=operation_id, attempt_index=attempt_index, fallback=attempt_index > 0)
                 if text.strip():
                     return text.strip(), model, attempts
             except Exception as exc:
                 last_error = f"{model}: {exc}"
+                record_gemini_attempt(response=None, agent="Menzo", phase="ai_editorial_review", model_requested=model, status="failed", reason="ai_editorial_review", result=str(exc)[:500], operation_id=operation_id, attempt_index=attempt_index, fallback=attempt_index > 0)
     except Exception as exc:
         last_error = f"genai_import_or_client_error: {exc}"
     return "", last_error or "empty_response", attempts

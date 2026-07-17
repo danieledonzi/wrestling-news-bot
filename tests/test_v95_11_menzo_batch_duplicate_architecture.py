@@ -511,3 +511,100 @@ def test_run_menzo_payload_complete_after_enrichment_and_massy_diagnostics(monke
     assert out["policy"]["story_footprint_enrichment_only"] is True
     assert out["policy"]["story_fingerprint_enrichment_only"] is True
     assert out["policy"]["gemini_batch_duplicate_arbitration_is_sole_semantic_authority"] is True
+
+def test_menzo_model_chain_shared_operation_id_and_invalid_json_usage(monkeypatch, tmp_path):
+    from agents import gemini_ledger
+    monkeypatch.setenv("GEMINI_API_KEY", "test-key")
+    monkeypatch.setenv("GEMINI_MODEL_CHAIN", "m1,m2")
+    monkeypatch.setattr(gemini_ledger, "STATE_DIR", tmp_path / "state" / "newsroom")
+    monkeypatch.setattr(gemini_ledger, "ARTIFACT_DIR", tmp_path / "artifacts" / "newsroom")
+    monkeypatch.setattr(gemini_ledger, "LEDGER_FILE", tmp_path / "state" / "newsroom" / "gemini_call_ledger.jsonl")
+    monkeypatch.setattr(gemini_ledger, "LATEST_FILE", tmp_path / "artifacts" / "newsroom" / "gemini_call_ledger_latest.json")
+
+    class Resp:
+        text = '{"duplicate_groups": []}'
+        usage_metadata = type("Meta", (), {"prompt_token_count": 5, "candidates_token_count": 6, "total_token_count": 11})()
+
+    class Models:
+        def generate_content(self, *, model, contents):
+            if model == "m1":
+                raise RuntimeError("boom")
+            return Resp()
+
+    class Client:
+        def __init__(self, api_key):
+            self.models = Models()
+
+    import google.genai as real_genai
+    monkeypatch.setattr(real_genai, "Client", Client)
+    data, status = menzo.call_gemini_json("prompt")
+    assert data == {"duplicate_groups": []}
+    rows = [json.loads(line) for line in gemini_ledger.LEDGER_FILE.read_text(encoding="utf-8").splitlines()]
+    assert len(rows) == 2
+    assert rows[0]["operation_id"] == rows[1]["operation_id"]
+    assert [r["attempt_index"] for r in rows] == [0, 1]
+    assert [r["fallback"] for r in rows] == [False, True]
+    assert rows[1]["usage_available"] is True
+
+
+def test_menzo_invalid_json_preserves_usage_single_row(monkeypatch, tmp_path):
+    from agents import gemini_ledger
+    monkeypatch.setenv("GEMINI_API_KEY", "test-key")
+    monkeypatch.setattr(gemini_ledger, "STATE_DIR", tmp_path / "state" / "newsroom")
+    monkeypatch.setattr(gemini_ledger, "ARTIFACT_DIR", tmp_path / "artifacts" / "newsroom")
+    monkeypatch.setattr(gemini_ledger, "LEDGER_FILE", tmp_path / "state" / "newsroom" / "gemini_call_ledger.jsonl")
+    monkeypatch.setattr(gemini_ledger, "LATEST_FILE", tmp_path / "artifacts" / "newsroom" / "gemini_call_ledger_latest.json")
+
+    class Resp:
+        text = 'not json'
+        usage_metadata = type("Meta", (), {"prompt_token_count": 1, "candidates_token_count": 1, "total_token_count": 2})()
+
+    class Models:
+        def generate_content(self, *, model, contents):
+            return Resp()
+
+    class Client:
+        def __init__(self, api_key):
+            self.models = Models()
+
+    import google.genai as real_genai
+    monkeypatch.setattr(real_genai, "Client", Client)
+    data, status = menzo.call_gemini_json_model("prompt", "m1", operation_id="op", attempt_index=0)
+    assert data is None
+    rows = [json.loads(line) for line in gemini_ledger.LEDGER_FILE.read_text(encoding="utf-8").splitlines()]
+    assert len(rows) == 1
+    assert rows[0]["status"] == "called" and rows[0]["result"] == "invalid_json"
+    assert rows[0]["usage_available"] is True
+
+def test_menzo_cooldown_skip_does_not_consume_attempt_index(monkeypatch, tmp_path):
+    from agents import gemini_ledger
+    monkeypatch.setenv("GEMINI_API_KEY", "test-key")
+    monkeypatch.setenv("GEMINI_MODEL_CHAIN", "m1,m2")
+    monkeypatch.setattr(gemini_ledger, "STATE_DIR", tmp_path / "state" / "newsroom")
+    monkeypatch.setattr(gemini_ledger, "ARTIFACT_DIR", tmp_path / "artifacts" / "newsroom")
+    monkeypatch.setattr(gemini_ledger, "LEDGER_FILE", tmp_path / "state" / "newsroom" / "gemini_call_ledger.jsonl")
+    monkeypatch.setattr(gemini_ledger, "LATEST_FILE", tmp_path / "artifacts" / "newsroom" / "gemini_call_ledger_latest.json")
+    menzo.MENZO_MODEL_COOLDOWN_FAILURES.clear()
+    menzo.MENZO_MODEL_COOLDOWN_FAILURES.add(("m1", "unknown"))
+
+    class Resp:
+        text = '{"duplicate_groups": []}'
+        usage_metadata = type("Meta", (), {"prompt_token_count": 2, "candidates_token_count": 3, "total_token_count": 5})()
+
+    class Models:
+        def generate_content(self, *, model, contents):
+            return Resp()
+
+    class Client:
+        def __init__(self, api_key):
+            self.models = Models()
+
+    import google.genai as real_genai
+    monkeypatch.setattr(real_genai, "Client", Client)
+    data, status = menzo.call_gemini_json("prompt")
+    assert data == {"duplicate_groups": []}
+    rows = [json.loads(line) for line in gemini_ledger.LEDGER_FILE.read_text(encoding="utf-8").splitlines()]
+    assert rows[0]["status"] == "avoided"
+    assert rows[1]["status"] == "called"
+    assert rows[1]["attempt_index"] == 0
+    assert rows[1]["fallback"] is False

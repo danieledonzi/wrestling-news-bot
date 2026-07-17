@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from agents.alfred import normalize_placeholders, normalize_quote_paragraphs, apply_style_normalizations, run_alfred as base_run_alfred
-from agents.gemini_ledger import record_gemini_event
+from agents.gemini_ledger import make_operation_id, record_gemini_attempt, record_gemini_event
 
 ROOT = Path(__file__).resolve().parents[1]
 NEWSROOM_STATE_DIR = ROOT / "state" / "newsroom"
@@ -185,15 +185,37 @@ def call_quote_resolver_gemini(prompt: str, *, article_context: dict[str, Any] |
         from google import genai  # type: ignore
         client = genai.Client(api_key=api_key)
         last_error = ""
-        for model in ALFRED_QUOTE_RESOLVER_MODEL_CHAIN:
+        operation_id = make_operation_id("Alfred", "quote_resolver", canonical or expression)
+        for attempt_index, model in enumerate(ALFRED_QUOTE_RESOLVER_MODEL_CHAIN):
             try:
-                text = (getattr(client.models.generate_content(model=model, contents=prompt), "text", "") or "").strip()
-                data = json.loads(text)
-                if isinstance(data, dict):
+                response = client.models.generate_content(model=model, contents=prompt)
+                text = (getattr(response, "text", "") or "").strip()
+                data = None
+                parse_error = None
+                try:
+                    parsed = json.loads(text)
+                    if isinstance(parsed, dict):
+                        data = parsed
+                    else:
+                        parse_error = "json_not_object"
+                except Exception as exc:
+                    parse_error = str(exc)[:500]
+                decision_result = None
+                if data is not None:
+                    kind = str(data.get("kind") or "uncertain")
+                    if not isinstance(data.get("allow"), bool):
+                        decision_result = "malformed_allow"
+                    elif data.get("allow") is True and kind in QUOTE_RESOLVER_ALLOWED_KINDS:
+                        decision_result = "allow"
+                    else:
+                        decision_result = "uncertain" if kind == "uncertain" else "block"
+                record_gemini_attempt(response=response, agent="Alfred", phase="quote_resolver", model_requested=model, status="called", reason="quote_resolver", result="valid_json" if data else "invalid_json", decision_result=decision_result, operation_id=operation_id, attempt_index=attempt_index, fallback=attempt_index > 0, article_id=(article_context or {}).get("article_id"), title=(article_context or {}).get("title"))
+                if data is not None:
                     return data, model, "called"
-                last_error = "json_not_object"
+                last_error = parse_error or "invalid_json"
             except Exception as exc:
                 last_error = str(exc)[:500]
+                record_gemini_attempt(response=None, agent="Alfred", phase="quote_resolver", model_requested=model, status="failed", reason="quote_resolver", result=last_error, operation_id=operation_id, attempt_index=attempt_index, fallback=attempt_index > 0, article_id=(article_context or {}).get("article_id"), title=(article_context or {}).get("title"))
         return None, model, last_error or "failed"
     except Exception as exc:
         return None, model, f"genai_import_or_client_error: {exc}"
@@ -217,7 +239,6 @@ def resolve_possible_untranslated_quote(expression: str, article_context: dict[s
         return {"allow": allow, "kind": hit.get("kind"), "canonical": hit_key or canonical, "variants": hit.get("variants", []), "source": "history_hit", "reason": hit.get("reason", "")}
     data, model, status = call_quote_resolver_gemini(build_quote_resolver_prompt(expression, ctx), article_context=ctx, expression=expression, canonical=canonical)
     if not isinstance(data, dict) or "allow" not in data:
-        record_gemini_event(agent="Alfred", phase="quote_ambiguity_resolver", model=model, status="failed", reason="possible_untranslated_quote_ambiguity", result="json_error" if status != "missing_api_key" else "missing_api_key", saved_gemini_call=False, **ledger_context)
         return {"allow": False, "kind": "uncertain", "canonical": canonical, "variants": quote_aliases(normalized), "source": "error", "reason": status or "invalid_json"}
     kind = str(data.get("kind") or "uncertain")
     malformed_allow = not isinstance(data.get("allow"), bool)
@@ -225,7 +246,6 @@ def resolve_possible_untranslated_quote(expression: str, article_context: dict[s
     decision = {"allow": allow, "kind": kind, "canonical": data.get("canonical") or canonical, "variants": data.get("variants") if isinstance(data.get("variants"), list) else [], "reason": str(data.get("reason") or "")[:300]}
     update_quote_history(history, decision, expression=expression, article_context=ctx, model=model)
     save_quote_history(history)
-    record_gemini_event(agent="Alfred", phase="quote_ambiguity_resolver", model=model, status="called", reason="possible_untranslated_quote_ambiguity", result="allow" if allow else ("malformed_allow" if malformed_allow else ("uncertain" if kind == "uncertain" else "block")), saved_gemini_call=False, **ledger_context)
     return {**decision, "allow": allow, "canonical": canonical_quote_key(str(decision.get("canonical") or canonical)), "source": "gemini"}
 
 
