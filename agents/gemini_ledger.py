@@ -16,7 +16,7 @@ LEDGER_FILE = STATE_DIR / "gemini_call_ledger.jsonl"
 LATEST_FILE = ARTIFACT_DIR / "gemini_call_ledger_latest.json"
 PRICING_FILE = ROOT / "config" / "gemini_pricing.json"
 V2_TOKEN_FIELDS = ("input_tokens", "output_tokens", "total_tokens", "cached_input_tokens", "thinking_tokens")
-V2_COST_FIELDS = ("estimated_input_cost", "estimated_output_cost", "estimated_cached_input_cost", "estimated_cost")
+V2_COST_FIELDS = ("estimated_input_cost", "estimated_output_cost", "estimated_thinking_cost", "estimated_cached_input_cost", "estimated_cost")
 
 
 def utc_now() -> str:
@@ -167,7 +167,7 @@ def _decimal_or_none(value: Any) -> Any:
 
 
 def calculate_estimated_cost(usage: dict[str, Any], model: Any, pricing_table: Any = None) -> dict[str, Any]:
-    out = {"pricing_currency": None, "price_table_version": None, "pricing_model_key": None, "input_price_per_million": None, "output_price_per_million": None, "cached_input_price_per_million": None, "estimated_input_cost": None, "estimated_output_cost": None, "estimated_cached_input_cost": None, "estimated_cost": None, "pricing_warning": None}
+    out = {"pricing_currency": None, "price_table_version": None, "pricing_model_key": None, "input_price_per_million": None, "output_price_per_million": None, "cached_input_price_per_million": None, "estimated_input_cost": None, "estimated_output_cost": None, "estimated_thinking_cost": None, "estimated_cached_input_cost": None, "estimated_cost": None, "pricing_warning": None}
     try:
         if usage.get("usage_available") is not True:
             return out
@@ -189,7 +189,7 @@ def calculate_estimated_cost(usage: dict[str, Any], model: Any, pricing_table: A
         complete = True
         billable_seen = False
         incomplete: list[str] = []
-        components = (("input_tokens", in_p, "estimated_input_cost", "input"), ("output_tokens", out_p, "estimated_output_cost", "output"), ("cached_input_tokens", cache_p, "estimated_cached_input_cost", "cached_input"))
+        components = (("input_tokens", in_p, "estimated_input_cost", "input"), ("output_tokens", out_p, "estimated_output_cost", "output"), ("thinking_tokens", out_p, "estimated_thinking_cost", "thinking"), ("cached_input_tokens", cache_p, "estimated_cached_input_cost", "cached_input"))
         for token_field, price, cost_field, label in components:
             tokens = usage.get(token_field)
             if tokens is None:
@@ -257,7 +257,7 @@ def record_gemini_event(**kwargs: Any) -> None:
             "saved_gemini_call": bool(kwargs.pop("saved_gemini_call", False)),
         }
         if record.get("status") == "avoided" and record.get("ledger_schema_version") == "v2":
-            record.update({"input_tokens": 0, "output_tokens": 0, "total_tokens": 0, "cached_input_tokens": 0, "thinking_tokens": 0, "usage_available": True, "usage_source": "avoided_no_api_call", "estimated_input_cost": "0", "estimated_output_cost": "0", "estimated_cached_input_cost": "0", "estimated_cost": "0"})
+            record.update({"input_tokens": 0, "output_tokens": 0, "total_tokens": 0, "cached_input_tokens": 0, "thinking_tokens": 0, "usage_available": True, "usage_source": "avoided_no_api_call", "estimated_input_cost": "0", "estimated_output_cost": "0", "estimated_thinking_cost": "0", "estimated_cached_input_cost": "0", "estimated_cost": "0"})
         elif record.get("ledger_schema_version") == "v2":
             for field in V2_TOKEN_FIELDS:
                 record.setdefault(field, None)

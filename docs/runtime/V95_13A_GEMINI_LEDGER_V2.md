@@ -20,7 +20,7 @@ Missing metadata records `usage_available=false` and null token fields. Malforme
 
 ## Pricing configuration
 
-Pricing is loaded from `config/gemini_pricing.json` or `GEMINI_PRICING_FILE`. The production file defines the schema, currency, aliases, and models map but intentionally contains no prices. Calculations use `Decimal` and write JSON-safe decimal strings without per-attempt aggressive rounding. Aliases are explicit JSON entries. Unknown model prices leave usage intact, leave cost fields null, and add `price_not_configured:<model>` to the warning path.
+Pricing is loaded from `config/gemini_pricing.json` or `GEMINI_PRICING_FILE`. The production file defines the schema, currency, aliases, and models map but intentionally contains no prices. Calculations use `Decimal` and write JSON-safe decimal strings without per-attempt aggressive rounding. Aliases are explicit JSON entries. Thinking tokens remain a separate raw measurement and are billed with the configured output-token rate when pricing is available; they are not merged into `output_tokens`. Unknown model prices leave usage intact, leave cost fields null, and add `price_not_configured:<model>` to the warning path.
 
 ## Avoided events
 

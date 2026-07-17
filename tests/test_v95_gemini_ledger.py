@@ -225,10 +225,55 @@ def test_v95_13a_no_billable_tokens_do_not_emit_false_zero_cost(tmp_path, monkey
     only_total = gemini_ledger.calculate_estimated_cost({"usage_available": True, "total_tokens": 7}, "m")
     assert only_total["estimated_cost"] is None
     assert only_total["pricing_warning"] == "no_billable_token_components"
-    only_thinking = gemini_ledger.calculate_estimated_cost({"usage_available": True, "thinking_tokens": 7}, "m")
-    assert only_thinking["estimated_cost"] is None
-    assert only_thinking["pricing_warning"] == "no_billable_token_components"
+    no_billable = gemini_ledger.calculate_estimated_cost({"usage_available": True, "total_tokens": 7}, "m")
+    assert no_billable["estimated_cost"] is None
+    assert no_billable["pricing_warning"] == "no_billable_token_components"
     zero_io = gemini_ledger.calculate_estimated_cost({"usage_available": True, "input_tokens": 0, "output_tokens": 0}, "m")
     assert zero_io["estimated_cost"] == "0"
     normal = gemini_ledger.calculate_estimated_cost({"usage_available": True, "input_tokens": 1000, "output_tokens": 1000}, "m")
     assert normal["estimated_cost"] == "0.003"
+
+def test_v95_13a_thinking_tokens_use_output_rate_and_are_not_double_counted(tmp_path, monkeypatch):
+    pricing = tmp_path / "pricing.json"
+    pricing.write_text(json.dumps({"price_table_version": "thinking-test", "currency": "USD", "aliases": {}, "models": {"m": {"input_price_per_million": "1", "output_price_per_million": "2", "cached_input_price_per_million": "0.5"}}}), encoding="utf-8")
+    monkeypatch.setenv("GEMINI_PRICING_FILE", str(pricing))
+    cost = gemini_ledger.calculate_estimated_cost({"usage_available": True, "input_tokens": 10, "output_tokens": 100, "thinking_tokens": 50, "cached_input_tokens": 20, "total_tokens": 999999}, "m")
+    assert cost["estimated_input_cost"] == "0.00001"
+    assert cost["estimated_output_cost"] == "0.0002"
+    assert cost["estimated_thinking_cost"] == "0.0001"
+    assert cost["estimated_cached_input_cost"] == "0.00001"
+    assert cost["estimated_cost"] == "0.00032"
+
+
+def test_v95_13a_thinking_without_output_uses_output_rate(tmp_path, monkeypatch):
+    pricing = tmp_path / "pricing.json"
+    pricing.write_text(json.dumps({"price_table_version": "thinking-test", "currency": "USD", "aliases": {}, "models": {"m": {"output_price_per_million": "2"}}}), encoding="utf-8")
+    monkeypatch.setenv("GEMINI_PRICING_FILE", str(pricing))
+    cost = gemini_ledger.calculate_estimated_cost({"usage_available": True, "thinking_tokens": 50}, "m")
+    assert cost["estimated_output_cost"] is None
+    assert cost["estimated_thinking_cost"] == "0.0001"
+    assert cost["estimated_cost"] == "0.0001"
+
+
+def test_v95_13a_nonzero_thinking_requires_output_price(tmp_path, monkeypatch):
+    pricing = tmp_path / "pricing.json"
+    pricing.write_text(json.dumps({"price_table_version": "thinking-test", "currency": "USD", "aliases": {}, "models": {"m": {"input_price_per_million": "1"}}}), encoding="utf-8")
+    monkeypatch.setenv("GEMINI_PRICING_FILE", str(pricing))
+    cost = gemini_ledger.calculate_estimated_cost({"usage_available": True, "input_tokens": 10, "thinking_tokens": 50}, "m")
+    assert cost["estimated_input_cost"] == "0.00001"
+    assert cost["estimated_thinking_cost"] is None
+    assert cost["estimated_cost"] is None
+    assert "incomplete_price_configuration:thinking" in cost["pricing_warning"]
+
+
+def test_v95_13a_zero_and_absent_thinking_semantics(tmp_path, monkeypatch):
+    pricing = tmp_path / "pricing.json"
+    pricing.write_text(json.dumps({"price_table_version": "thinking-test", "currency": "USD", "aliases": {}, "models": {"m": {"input_price_per_million": "1"}, "m2": {"input_price_per_million": "1", "output_price_per_million": "2"}}}), encoding="utf-8")
+    monkeypatch.setenv("GEMINI_PRICING_FILE", str(pricing))
+    zero = gemini_ledger.calculate_estimated_cost({"usage_available": True, "input_tokens": 10, "thinking_tokens": 0}, "m")
+    assert zero["estimated_thinking_cost"] == "0"
+    assert zero["estimated_cost"] == "0.00001"
+    assert zero["pricing_warning"] is None
+    absent = gemini_ledger.calculate_estimated_cost({"usage_available": True, "input_tokens": 10}, "m2")
+    assert absent["estimated_thinking_cost"] is None
+    assert absent["estimated_cost"] == "0.00001"
