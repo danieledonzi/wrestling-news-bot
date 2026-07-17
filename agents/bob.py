@@ -10,7 +10,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from agents.gemini_ledger import record_gemini_event
+from agents.gemini_ledger import make_operation_id, record_gemini_attempt, record_gemini_event
 from urllib.parse import urljoin, urlparse
 
 import requests
@@ -609,17 +609,18 @@ def call_gemini(prompt: str, *, ledger_context: dict[str, Any] | None = None, mo
     try:
         from google import genai  # type: ignore
         client = genai.Client(api_key=api_key)
-        for model in (model_chain or MODEL_CHAIN):
+        operation_id = make_operation_id("Bob", "translate_article", (ledger_context or {}).get("candidate_id") or (ledger_context or {}).get("url"))
+        for attempt_index, model in enumerate(model_chain or MODEL_CHAIN):
             attempts.append(model)
             try:
                 response = client.models.generate_content(model=model, contents=prompt)
                 text = getattr(response, "text", "") or ""
-                record_gemini_event(agent="Bob", phase="translate_article", model=model, status="called", reason="generate_translate_article", result="text" if text.strip() else "empty_response", **(ledger_context or {}))
+                record_gemini_attempt(response=response, agent="Bob", phase="translate_article", model_requested=model, status="called", reason="generate_translate_article", result="text" if text.strip() else "empty_response", operation_id=operation_id, attempt_index=attempt_index, retry=False, fallback=attempt_index > 0, **(ledger_context or {}))
                 if text.strip():
                     return text.strip(), model, attempts
             except Exception as exc:
                 last_error = f"{model}: {exc}"
-                record_gemini_event(agent="Bob", phase="translate_article", model=model, status="failed", reason="generate_translate_article", result=str(exc)[:500], **(ledger_context or {}))
+                record_gemini_attempt(response=None, agent="Bob", phase="translate_article", model_requested=model, status="failed", reason="generate_translate_article", result=str(exc)[:500], operation_id=operation_id, attempt_index=attempt_index, retry=False, fallback=attempt_index > 0, **(ledger_context or {}))
     except Exception as exc:
         last_error = f"genai_import_or_client_error: {exc}"
     return "", last_error or "empty_response", attempts

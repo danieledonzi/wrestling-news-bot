@@ -9,7 +9,7 @@ import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-from agents.gemini_ledger import record_gemini_event
+from agents.gemini_ledger import make_operation_id, record_gemini_attempt, record_gemini_event
 from urllib.parse import parse_qs, urljoin, urlparse
 
 import requests
@@ -719,21 +719,23 @@ def model_chain(purpose: str = "") -> List[str]:
     return [m.strip() for m in raw.split(",") if m.strip()]
 
 
-def gemini_generate(prompt: str, *, purpose: str) -> Tuple[str, str]:
+def gemini_generate(prompt: str, *, purpose: str, ledger_context: Optional[Dict[str, Any]] = None) -> Tuple[str, str]:
     client = gemini_client()
     last_error: Optional[Exception] = None
-    for model in model_chain(purpose):
+    context = ledger_context or {}
+    operation_id = make_operation_id("Bob" if purpose.startswith("news_translate") else "Menzo", purpose, context.get("article_id") or context.get("candidate_id") or context.get("url") or context.get("source_url") or purpose)
+    for attempt_index, model in enumerate(model_chain(purpose)):
         try:
             print(f"[NEWS v92] Provo modello: {model} | purpose={purpose}", flush=True)
             response = client.models.generate_content(model=model, contents=prompt)
             text = getattr(response, "text", None) or ""
-            record_gemini_event(agent="Bob" if purpose.startswith("news_translate") else "Menzo", phase=purpose, model=model, status="called", reason=purpose, result="text" if text.strip() else "empty_response")
+            record_gemini_attempt(response=response, agent="Bob" if purpose.startswith("news_translate") else "Menzo", phase=purpose, model_requested=model, status="called", reason=purpose, result="text" if text.strip() else "empty_response", operation_id=operation_id, attempt_index=attempt_index, fallback=attempt_index > 0, purpose=purpose, **context)
             if text.strip():
                 print(f"[NEWS v92] Modello scelto: {model} | purpose={purpose}", flush=True)
                 return text.strip(), model
         except Exception as exc:
             last_error = exc
-            record_gemini_event(agent="Bob" if purpose.startswith("news_translate") else "Menzo", phase=purpose, model=model, status="failed", reason=purpose, result=str(exc)[:500])
+            record_gemini_attempt(response=None, agent="Bob" if purpose.startswith("news_translate") else "Menzo", phase=purpose, model_requested=model, status="failed", reason=purpose, result=str(exc)[:500], operation_id=operation_id, attempt_index=attempt_index, fallback=attempt_index > 0, purpose=purpose, **context)
             print(f"[NEWS v92] Modello fallito: {model} | purpose={purpose} | error={exc}", flush=True)
             continue
     raise RuntimeError(f"Nessun modello Gemini disponibile per {purpose}: {last_error}")
@@ -798,7 +800,7 @@ Summary feed: {summary}
 Pre-score locale: {local_score}/100
 Motivo pre-score: {local_reason}
 """.strip()
-    raw, model = gemini_generate(prompt, purpose="news_editorial_analysis")
+    raw, model = gemini_generate(prompt, purpose="news_editorial_analysis", ledger_context={"source_url": url, "url": url, "title": source_title, "candidate_id": url})
     data = extract_json(raw)
     data["analysis_model"] = model
     return data
@@ -927,7 +929,7 @@ Titolo originale: {source_title}
 TESTO ORIGINALE:
 {source_text}
 """.strip()
-    raw, model = gemini_generate(prompt, purpose="news_translate_title")
+    raw, model = gemini_generate(prompt, purpose="news_translate_title", ledger_context={"source_url": url, "url": url, "title": source_title, "candidate_id": url})
     data = extract_json(raw)
     title = clean_text(str(data.get("title") or source_title))[:120]
     body = cleanup_news_html(str(data.get("body_html") or "").strip())
@@ -1199,7 +1201,7 @@ Titolo originale: {source_title}
 BLOCCHI JSON:
 {json.dumps(items, ensure_ascii=False)}
 """.strip()
-    raw, model = gemini_generate(prompt, purpose="news_translate_blocks")
+    raw, model = gemini_generate(prompt, purpose="news_translate_blocks", ledger_context={"source_url": url, "url": url, "title": source_title, "candidate_id": url})
     data = extract_json(raw)
     title = clean_text(str(data.get("title") or source_title))[:120]
     arr = data.get("items") or []

@@ -208,6 +208,10 @@ def build_gemini_diagnostics(
     avoided = [r for r in records if status_name(r) == "avoided"]
     failed = [r for r in records if status_name(r) == "failed"]
     called35 = [r for r in called if "3.5" in model_name(r)]
+    real_attempts = [r for r in records if status_name(r) in {"called", "failed"}]
+    v2_real = [r for r in real_attempts if r.get("ledger_schema_version") == "v2"]
+    real_with_usage = [r for r in v2_real if r.get("usage_available") is True]
+    real_with_cost = [r for r in v2_real if r.get("estimated_cost") is not None]
     avoided35 = [r for r in avoided if "3.5" in model_name(r)]
     ledger_cache_hits = sum(1 for r in avoided if reason_or_purpose(r) == "duplicate_arbitration_cache_hit")
     menzo_postprocess = load_menzo_postprocess(menzo_context, menzo_decisions_paths)
@@ -239,6 +243,11 @@ def build_gemini_diagnostics(
         "menzo_cache_miss": latest_counters.get("duplicate_arbitration_cache_miss", not_available),
         "menzo_cache_expired": latest_counters.get("duplicate_arbitration_cache_expired", not_available),
         "menzo_cache": load_menzo_cache(cache_path),
+        "v2_real_attempts": len(v2_real),
+        "real_attempts_with_usage": len(real_with_usage),
+        "real_attempts_with_cost": len(real_with_cost),
+        "usage_coverage": (len(real_with_usage) / len(v2_real)) if v2_real else None,
+        "pricing_coverage": (len(real_with_cost) / len(v2_real)) if v2_real else None,
         "top_repeated_titles": _top_titles(called),
         "top_repeated_35_titles": _top_titles(called35),
     }

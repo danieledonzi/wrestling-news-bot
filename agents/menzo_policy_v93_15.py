@@ -8,7 +8,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
-from agents.gemini_ledger import record_gemini_event
+from agents.gemini_ledger import make_operation_id, record_gemini_attempt, record_gemini_event
 
 from agents import menzo as base
 from agents.story_dedupe_v93_32 import (
@@ -1154,32 +1154,43 @@ def _is_cooldown_error(text: str) -> bool:
     return "503" in low or "high demand" in low or "resource_exhausted" in low or "unavailable" in low
 
 
-def call_gemini_json_model(prompt: str, model: str, *, ledger_context: dict[str, Any] | None = None, phase: str = "duplicate_arbitration") -> tuple[dict[str, Any] | None, str]:
+def call_gemini_json_model(prompt: str, model: str, *, ledger_context: dict[str, Any] | None = None, phase: str = "duplicate_arbitration", operation_id: Any = None, attempt_index: int = 0, fallback: bool = False) -> tuple[dict[str, Any] | None, str]:
     api_key = os.getenv("GEMINI_API_KEY", "").strip()
     if _cooldown_key(model, ledger_context) in MENZO_MODEL_COOLDOWN_FAILURES:
-        record_gemini_event(agent="Menzo", phase=phase, model=model, status="avoided", reason="model_cooldown_after_failure", result="cooldown", saved_gemini_call=True, **(ledger_context or {}))
+        record_gemini_event(ledger_schema_version="v2", agent="Menzo", phase=phase, model=model, status="avoided", reason="model_cooldown_after_failure", result="cooldown", saved_gemini_call=True, **(ledger_context or {}))
         return None, f"model_cooldown_after_failure:{model}"
     if not api_key:
         return None, "missing_api_key"
     try:
         from google import genai  # type: ignore
         client = genai.Client(api_key=api_key)
+        operation_id = operation_id or make_operation_id("Menzo", phase, (ledger_context or {}).get("cluster_id") or (ledger_context or {}).get("url"))
         response = client.models.generate_content(model=model, contents=prompt)
-        data = _parse_gemini_json_text(getattr(response, "text", "") or "")
+        data = None
+        parse_error = None
+        try:
+            data = _parse_gemini_json_text(getattr(response, "text", "") or "")
+        except Exception as exc:
+            parse_error = str(exc)[:500]
         event_reason = "ai_novelty_allow" if phase == "cross_run_novelty_gate" and data and str(data.get("decision") or "").lower() == "allow" else ("ai_no_novelty_skip" if phase == "cross_run_novelty_gate" and data and str(data.get("decision") or "").lower() == "skip" else ("ai_uncertain_pending" if phase == "cross_run_novelty_gate" else "ai_duplicate_arbitration"))
-        record_gemini_event(agent="Menzo", phase=phase, model=model, status="called", reason=event_reason, result="valid_json" if data else "invalid_json", **(ledger_context or {}))
-        return (data, model) if data else (None, f"invalid_json:{model}")
+        record_gemini_attempt(response=response, agent="Menzo", phase=phase, model_requested=model, status="called", reason=event_reason, result="valid_json" if data else "invalid_json", operation_id=operation_id, attempt_index=attempt_index, fallback=fallback, **(ledger_context or {}))
+        return (data, model) if data else (None, f"invalid_json:{model}:{parse_error or 'json_not_object'}")
     except Exception as exc:
         err = str(exc)[:500]
         if _is_cooldown_error(err):
             MENZO_MODEL_COOLDOWN_FAILURES.add(_cooldown_key(model, ledger_context))
-        record_gemini_event(agent="Menzo", phase=phase, model=model, status="failed", reason="ai_uncertain_pending" if phase == "cross_run_novelty_gate" else "ai_duplicate_arbitration", result=err, **(ledger_context or {}))
+        operation_id = operation_id or make_operation_id("Menzo", phase, (ledger_context or {}).get("cluster_id") or (ledger_context or {}).get("url"))
+        record_gemini_attempt(response=None, agent="Menzo", phase=phase, model_requested=model, status="failed", reason="ai_uncertain_pending" if phase == "cross_run_novelty_gate" else "ai_duplicate_arbitration", result=err, operation_id=operation_id, attempt_index=attempt_index, fallback=fallback, **(ledger_context or {}))
         return None, f"gemini_unavailable:{model}:{exc}"
 
 
 def call_gemini_json(prompt: str) -> tuple[dict[str, Any] | None, str]:
+    operation_id = make_operation_id("Menzo", "duplicate_arbitration", "model_chain")
+    real_attempt_index = 0
     for model in [m.strip() for m in os.getenv("GEMINI_MODEL_CHAIN", "gemini-3.1-flash-lite,gemini-2.5-flash-lite").split(",") if m.strip()]:
-        data, status = call_gemini_json_model(prompt, model)
+        data, status = call_gemini_json_model(prompt, model, operation_id=operation_id, attempt_index=real_attempt_index, fallback=real_attempt_index > 0)
+        if not (str(status).startswith("model_cooldown_after_failure") or status == "missing_api_key"):
+            real_attempt_index += 1
         if data:
             return data, status
     return None, "empty_or_invalid_response"

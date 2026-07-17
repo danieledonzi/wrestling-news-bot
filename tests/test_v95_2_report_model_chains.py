@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import importlib
 import sys
 from pathlib import Path
@@ -139,3 +140,76 @@ def test_report_title_policy_is_deterministic_no_extra_title_chain(monkeypatch):
     job.setdefault("title_policy", "simone_deterministic")
     assert job["title_policy"] == "simone_deterministic"
     assert "simone_deterministic" in Path(simone.__file__).read_text(encoding="utf-8")
+
+def test_report_invalid_json_and_cooldown_attempt_identity(monkeypatch, tmp_path):
+    clear_chain_env(monkeypatch)
+    monkeypatch.setenv("REPORT_GEMINI_MODEL_CHAIN", "cool,m1")
+    report = reload_module("modules.report_workshop_v92")
+    from agents import gemini_ledger
+    monkeypatch.setattr(gemini_ledger, "STATE_DIR", tmp_path / "state" / "newsroom")
+    monkeypatch.setattr(gemini_ledger, "ARTIFACT_DIR", tmp_path / "artifacts" / "newsroom")
+    monkeypatch.setattr(gemini_ledger, "LEDGER_FILE", tmp_path / "state" / "newsroom" / "gemini_call_ledger.jsonl")
+    monkeypatch.setattr(gemini_ledger, "LATEST_FILE", tmp_path / "artifacts" / "newsroom" / "gemini_call_ledger_latest.json")
+    monkeypatch.setattr(report, "record_gemini_event", gemini_ledger.record_gemini_event)
+    monkeypatch.setattr(report, "record_gemini_attempt", gemini_ledger.record_gemini_attempt)
+    report.GEMINI_API_KEY = "test-key"
+
+    class Resp:
+        text = "not json"
+        usage_metadata = type("Meta", (), {"prompt_token_count": 3, "candidates_token_count": 1, "total_token_count": 4})()
+
+    class Models:
+        def generate_content(self, *, model, contents):
+            return Resp()
+
+    class Client:
+        def __init__(self, api_key):
+            self.models = Models()
+
+    monkeypatch.setattr(report.genai, "Client", Client)
+    try:
+        report.generate_json("prompt", chain_name="report_blocks_test", cooldown_models={"cool"}, ledger_context={"report_id": "r1", "batch": "1/2", "title": "Report One"})
+    except Exception:
+        pass
+    rows = [json.loads(line) for line in gemini_ledger.LEDGER_FILE.read_text(encoding="utf-8").splitlines()]
+    assert len(rows) == 2
+    assert rows[0]["status"] == "avoided"
+    assert rows[1]["status"] == "called" and rows[1]["result"] == "invalid_json"
+    assert rows[1]["attempt_index"] == 0 and rows[1]["fallback"] is False
+    assert rows[1]["usage_available"] is True
+    assert rows[1]["report_id"] == "r1" and rows[1]["batch"] == "1/2"
+
+def test_report_failed_attempt_index_not_double_incremented(monkeypatch, tmp_path):
+    clear_chain_env(monkeypatch)
+    monkeypatch.setenv("REPORT_GEMINI_MODEL_CHAIN", "m1,m2")
+    report = reload_module("modules.report_workshop_v92")
+    from agents import gemini_ledger
+    monkeypatch.setattr(gemini_ledger, "STATE_DIR", tmp_path / "state" / "newsroom")
+    monkeypatch.setattr(gemini_ledger, "ARTIFACT_DIR", tmp_path / "artifacts" / "newsroom")
+    monkeypatch.setattr(gemini_ledger, "LEDGER_FILE", tmp_path / "state" / "newsroom" / "gemini_call_ledger.jsonl")
+    monkeypatch.setattr(gemini_ledger, "LATEST_FILE", tmp_path / "artifacts" / "newsroom" / "gemini_call_ledger_latest.json")
+    monkeypatch.setattr(report, "record_gemini_event", gemini_ledger.record_gemini_event)
+    monkeypatch.setattr(report, "record_gemini_attempt", gemini_ledger.record_gemini_attempt)
+    report.GEMINI_API_KEY = "test-key"
+
+    class Resp:
+        text = '{"items": []}'
+        usage_metadata = type("Meta", (), {"prompt_token_count": 1, "candidates_token_count": 1, "total_token_count": 2})()
+
+    class Models:
+        def generate_content(self, *, model, contents):
+            if model == "m1":
+                raise RuntimeError("first fails")
+            return Resp()
+
+    class Client:
+        def __init__(self, api_key):
+            self.models = Models()
+
+    monkeypatch.setattr(report.genai, "Client", Client)
+    data, model = report.generate_json("prompt", chain_name="report_blocks_test", ledger_context={"report_id": "r2"})
+    assert model == "m2"
+    rows = [json.loads(line) for line in gemini_ledger.LEDGER_FILE.read_text(encoding="utf-8").splitlines() if '"status": "avoided"' not in line]
+    assert len(rows) == 2
+    assert [r["attempt_index"] for r in rows] == [0, 1]
+    assert [r["fallback"] for r in rows] == [False, True]

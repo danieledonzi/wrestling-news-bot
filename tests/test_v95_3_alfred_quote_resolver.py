@@ -82,9 +82,7 @@ def test_best_in_the_world_allow_writes_history_and_called_ledger(tmp_path, monk
     assert not [i for i in issues(result) if i.get("code") == "untranslated_quote"]
     history = json.loads(alfred.QUOTE_RESOLVER_HISTORY_FILE.read_text(encoding="utf-8"))
     assert history["entries"]["best in the world"]["allow"] is True
-    record = ledger_records()[-1]
-    assert record["status"] == "called"
-    assert record["saved_gemini_call"] is False
+    assert not gemini_ledger.LEDGER_FILE.exists()
 
 
 def test_salt_of_the_earth_allow(tmp_path, monkeypatch):
@@ -154,9 +152,7 @@ def test_invalid_json_or_gemini_error_remains_blocker_and_failed_ledger(tmp_path
     result = run_with_base_review(monkeypatch, article_with_quote("The Final Boss"), base_review_for("The Final Boss"))
 
     assert [i for i in issues(result) if i.get("code") == "untranslated_quote"]
-    record = ledger_records()[-1]
-    assert record["status"] == "failed"
-    assert record["result"] == "json_error"
+    assert not gemini_ledger.LEDGER_FILE.exists()
 
 
 def test_resolver_does_not_create_quote_issue_when_base_alfred_did_not(tmp_path, monkeypatch):
@@ -179,9 +175,7 @@ def test_string_false_allow_is_conservative_block_and_not_history_approval(tmp_p
     assert [i for i in issues(result) if i.get("code") == "untranslated_quote"]
     history = json.loads(alfred.QUOTE_RESOLVER_HISTORY_FILE.read_text(encoding="utf-8"))
     assert history["entries"]["final boss"]["allow"] is False
-    record = ledger_records()[-1]
-    assert record["status"] == "called"
-    assert record["result"] == "malformed_allow"
+    assert not gemini_ledger.LEDGER_FILE.exists()
 
 
 def test_allow_without_approved_article_stays_needs_revision_with_blocker(tmp_path, monkeypatch):
@@ -198,3 +192,58 @@ def test_allow_without_approved_article_stays_needs_revision_with_blocker(tmp_pa
     assert refined.get("approved_article") is None
     assert [i for i in refined["issues"] if i.get("code") == "missing_approved_article_after_quote_resolver"]
     assert not [i for i in refined["issues"] if i.get("code") == "untranslated_quote"]
+
+def test_alfred_invalid_json_real_response_writes_one_usage_row(tmp_path, monkeypatch):
+    patch_paths(tmp_path, monkeypatch)
+    monkeypatch.setenv("GEMINI_API_KEY", "test-key")
+    monkeypatch.setattr(alfred, "ALFRED_QUOTE_RESOLVER_MODEL_CHAIN", ["m1"])
+
+    class Resp:
+        text = "not json"
+        usage_metadata = type("Meta", (), {"prompt_token_count": 4, "candidates_token_count": 2, "total_token_count": 6})()
+
+    class Models:
+        def generate_content(self, *, model, contents):
+            return Resp()
+
+    class Client:
+        def __init__(self, api_key):
+            self.models = Models()
+
+    import google.genai as real_genai
+    monkeypatch.setattr(real_genai, "Client", Client)
+    out = alfred.resolve_possible_untranslated_quote("The Final Boss", {"title": "Article"}, history={"entries": {}})
+    assert out["source"] == "error"
+    rows = ledger_records()
+    assert len(rows) == 1
+    assert rows[0]["status"] == "called"
+    assert rows[0]["result"] == "invalid_json"
+    assert rows[0]["usage_available"] is True
+
+def test_alfred_valid_json_real_response_writes_one_decision_row(tmp_path, monkeypatch):
+    patch_paths(tmp_path, monkeypatch)
+    monkeypatch.setenv("GEMINI_API_KEY", "test-key")
+    monkeypatch.setattr(alfred, "ALFRED_QUOTE_RESOLVER_MODEL_CHAIN", ["m1"])
+
+    class Resp:
+        text = json.dumps({"allow": True, "kind": "nickname_or_catchphrase", "canonical": "final boss", "variants": ["the final boss"], "reason": "ring persona"})
+        usage_metadata = type("Meta", (), {"prompt_token_count": 4, "candidates_token_count": 2, "total_token_count": 6})()
+
+    class Models:
+        def generate_content(self, *, model, contents):
+            return Resp()
+
+    class Client:
+        def __init__(self, api_key):
+            self.models = Models()
+
+    import google.genai as real_genai
+    monkeypatch.setattr(real_genai, "Client", Client)
+    out = alfred.resolve_possible_untranslated_quote("The Final Boss", {"title": "Article"}, history={"entries": {}})
+    assert out["allow"] is True
+    rows = ledger_records()
+    assert len(rows) == 1
+    assert rows[0]["status"] == "called"
+    assert rows[0]["result"] == "valid_json"
+    assert rows[0]["decision_result"] == "allow"
+    assert rows[0]["usage_available"] is True
