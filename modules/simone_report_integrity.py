@@ -1,0 +1,306 @@
+"""Deterministic v95.13.1 report reservation, registry and cleanup helpers."""
+from __future__ import annotations
+
+import copy
+import json
+import re
+import subprocess
+import sys
+from datetime import datetime, timedelta, timezone
+from email.utils import parsedate_to_datetime
+from pathlib import Path
+from typing import Any, Iterable
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
+
+from bs4 import BeautifulSoup
+
+ROOT = Path(__file__).resolve().parents[1]
+SEED_REGISTRY = ROOT / "config" / "special_events.json"
+EFFECTIVE_REGISTRY = ROOT / "state" / "newsroom" / "special_events_effective.json"
+PENDING_REPORTS = ROOT / "state" / "newsroom" / "simone_pending_reports.json"
+SCHEDULE_REPORT_DIR = ROOT / "reports"
+SCHEDULE_RUNTIME_DIR = ROOT / "state" / "newsroom" / "special_events_schedule_runtime"
+TRUSTED_PROMOTIONS = {"WWE", "AEW", "TNA", "ROH"}
+REFRESH_INTERVAL = timedelta(hours=20)
+REFRESH_TIMEOUT_SECONDS = 75
+
+
+def _load(path: Path, default: Any) -> Any:
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return default
+
+
+def _write(path: Path, value: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_text(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    tmp.replace(path)
+
+
+def normalize_url(url: str) -> str:
+    p = urlsplit((url or "").strip())
+    query = [(k, v) for k, v in parse_qsl(p.query) if not k.lower().startswith("utm_") and k.lower() not in {"fbclid", "gclid"}]
+    return urlunsplit(((p.scheme or "https").lower(), p.netloc.lower(), p.path.rstrip("/") or "/", urlencode(query), ""))
+
+
+def _slug(value: str) -> str:
+    return re.sub(r"_+", "_", re.sub(r"[^a-z0-9]+", "_", value.lower())).strip("_")
+
+
+def _nights(key: str, dates: list[str], promotion: str, name: str) -> list[dict[str, Any]]:
+    dates = sorted(set(dates))
+    many = len(dates) > 1
+    return [{"night_key": f"{key}_night_{i}" if many else f"{key}_main", "label": f"Night {i}" if many else "Main show", "date_local": date, "report_publish_after_local": "06:30", "enabled": True, "aliases": [f"{name} results", f"{promotion} {name} results"]} for i, date in enumerate(dates, 1)]
+
+
+def _proposal_event(row: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
+    promotion = str(row.get("promotion") or "").upper()
+    dates = sorted(set(str(x) for x in (row.get("dates") or []) if re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(x))))
+    name = str(row.get("event_name") or "").strip()
+    if promotion not in TRUSTED_PROMOTIONS:
+        return None, "excluded_promotion" if promotion else "missing_promotion"
+    if not dates:
+        return None, "missing_concrete_date"
+    if not name:
+        return None, "missing_event_name"
+    key = f"{promotion.lower()}_{_slug(name)}_{dates[0][:4]}"
+    return {"key": key, "promotion": promotion, "brand": row.get("brand") or promotion, "event_name": name, "aliases": sorted(set([name, f"{promotion} {name}"] + list(row.get("aliases") or []))), "status": "confirmed", "coverage_policy": "multi_night_report_and_post_event_freeze" if len(dates) > 1 else "report_and_post_event_freeze", "category_hint": promotion, "nights": _nights(key, dates, promotion, name), "venue": row.get("venue"), "location": row.get("location"), "source": row.get("source") or "trusted_structured_schedule", "last_verified_at_utc": datetime.now(timezone.utc).isoformat()}, "trusted_dated_event"
+
+
+def build_effective_registry(seed: dict[str, Any], proposals: Iterable[dict[str, Any]]) -> tuple[dict[str, Any], dict[str, Any]]:
+    effective = copy.deepcopy(seed)
+    events = effective.setdefault("events", [])
+    by_key = {str(e.get("key")): e for e in events if isinstance(e, dict)}
+    diagnostics: dict[str, Any] = {"accepted": [], "skipped": [], "ambiguous": []}
+    for row in proposals:
+        event, reason = _proposal_event(row)
+        if event is None:
+            diagnostics["skipped"].append({"event_name": row.get("event_name"), "promotion": row.get("promotion"), "reason": reason})
+            continue
+        exact = by_key.get(event["key"])
+        aliases = {_slug(str(event.get("event_name") or "")), *(_slug(str(a)) for a in event.get("aliases", []))}
+        possible = [e for e in events if isinstance(e, dict) and str(e.get("promotion") or "").upper() == event["promotion"] and _slug(str(e.get("event_name") or "")) in aliases]
+        if exact is None and len(possible) > 1:
+            diagnostics["ambiguous"].append({"event_name": event["event_name"], "matches": [e.get("key") for e in possible]})
+            continue
+        target = exact or (possible[0] if possible else None)
+        if target is None:
+            events.append(event); by_key[event["key"]] = event
+        else:
+            # Never delete curated fields; runtime confirmation/date information may advance them.
+            target.update({k: v for k, v in event.items() if v is not None and k in {"status", "nights", "venue", "location", "source", "last_verified_at_utc"}})
+            target["aliases"] = sorted(set(list(target.get("aliases") or []) + list(event["aliases"])))
+        diagnostics["accepted"].append({"key": (target or event).get("key"), "reason": reason})
+    return effective, diagnostics
+
+
+def _schedule_files() -> list[Path]:
+    files = list(SCHEDULE_RUNTIME_DIR.glob("special_events_wikipedia_schedule_layer_*.json"))
+    files.extend(SCHEDULE_REPORT_DIR.glob("special_events_wikipedia_schedule_layer_*.json"))
+    return sorted(files, key=lambda path: path.stat().st_mtime, reverse=True)
+
+
+def _generate_schedule_artifact() -> Path:
+    """Run only the trusted schedule collector, isolated from newsroom publishing."""
+    SCHEDULE_RUNTIME_DIR.mkdir(parents=True, exist_ok=True)
+    subprocess.run(
+        [sys.executable, str(ROOT / "tools" / "special_events_wikipedia_schedule_layer.py"), "--repo-dir", str(ROOT), "--report-dir", str(SCHEDULE_RUNTIME_DIR)],
+        check=True, timeout=REFRESH_TIMEOUT_SECONDS, capture_output=True, text=True,
+    )
+    files = list(SCHEDULE_RUNTIME_DIR.glob("special_events_wikipedia_schedule_layer_*.json"))
+    if not files:
+        raise RuntimeError("schedule generator produced no JSON artifact")
+    return max(files, key=lambda path: path.stat().st_mtime)
+
+
+def load_effective_registry(now: datetime | None = None) -> tuple[dict[str, Any], dict[str, Any]]:
+    now = now or datetime.now(timezone.utc)
+    prior = _load(EFFECTIVE_REGISTRY, {})
+    refreshed = str(prior.get("refreshed_at_utc") or "") if isinstance(prior, dict) else ""
+    try:
+        age = now - datetime.fromisoformat(refreshed.replace("Z", "+00:00"))
+    except Exception:
+        age = REFRESH_INTERVAL + timedelta(seconds=1)
+    if isinstance(prior, dict) and prior.get("events") and age < REFRESH_INTERVAL:
+        return prior, {"effective_registry_source": "prior_runtime_state", "refresh_status": "fresh_cache"}
+    seed = _load(SEED_REGISTRY, {})
+    files = _schedule_files()
+    artifact: Path | None = None
+    refresh_status = "refresh_used_existing_fresh_artifact"
+    if files and now.timestamp() - files[0].stat().st_mtime < REFRESH_INTERVAL.total_seconds():
+        artifact = files[0]
+    else:
+        try:
+            artifact = _generate_schedule_artifact()
+            refresh_status = "refresh_generated_new_artifact"
+        except Exception as exc:
+            if isinstance(prior, dict) and prior.get("events"):
+                return prior, {"effective_registry_source": "prior_runtime_state", "refresh_status": "refresh_failed_using_prior_state", "refresh_error": str(exc)[:500]}
+            return seed, {"effective_registry_source": "static_fallback", "refresh_status": "refresh_failed_using_static_fallback", "refresh_error": str(exc)[:500]}
+    if artifact:
+        raw = _load(artifact, {})
+        proposals = raw.get("events") or raw.get("proposals") or raw.get("schedule") or []
+        if isinstance(proposals, list):
+            effective, diag = build_effective_registry(seed, [x for x in proposals if isinstance(x, dict)])
+            effective["refreshed_at_utc"] = now.isoformat()
+            effective["runtime_diagnostics"] = diag
+            _write(EFFECTIVE_REGISTRY, effective)
+            return effective, {"effective_registry_source": "refreshed_structured_schedule", "refresh_status": refresh_status, "schedule_artifact": str(artifact), **diag}
+    if isinstance(prior, dict) and prior.get("events"):
+        return prior, {"effective_registry_source": "prior_runtime_state", "refresh_status": "refresh_failed_using_prior_state", "refresh_error": "invalid_schedule_artifact"}
+    return seed, {"effective_registry_source": "static_fallback", "refresh_status": "refresh_failed_using_static_fallback", "refresh_error": "invalid_schedule_artifact"}
+
+
+REPORT_WORDS = re.compile(r"\b(results?|risultati|recap|report|live[\s-]+coverage|live[\s-]+results?|highlights?)\b", re.I)
+FACTUAL_NEWS = re.compile(r"\b(injur(?:y|ed)|debut|returns?|backstage|controversy|comments?|interference|wins?|won|defeats?|retains?|title[s]? (?:change|win)|new champion)\b", re.I)
+
+
+MONTH_NUMBERS = {name.lower(): number for number, names in enumerate(((), ("january", "jan"), ("february", "feb"), ("march", "mar"), ("april", "apr"), ("may",), ("june", "jun"), ("july", "jul"), ("august", "aug"), ("september", "sep", "sept"), ("october", "oct"), ("november", "nov"), ("december", "dec"))) for name in names}
+
+
+def _parse_timestamp(value: str) -> datetime | None:
+    try:
+        return datetime.fromisoformat(value.strip().replace("Z", "+00:00"))
+    except Exception:
+        try:
+            return parsedate_to_datetime(value)
+        except Exception:
+            return None
+
+
+def _candidate_dates(entry: dict[str, Any], registry: dict[str, Any]) -> dict[str, set[str]]:
+    content = " ".join(str(entry.get(k) or "") for k in ("title", "url", "summary", "description", "metadata"))
+    timestamps = {_parse_timestamp(str(entry.get(k) or "")) for k in ("published", "published_at", "updated")}
+    timestamps.discard(None)
+    feed_dates = {stamp.date().isoformat() for stamp in timestamps if stamp is not None}
+    years = {int(n.get("date_local", "")[:4]) for e in registry.get("events", []) if isinstance(e, dict) for n in e.get("nights", []) if isinstance(n, dict) and re.match(r"^20\d{2}", str(n.get("date_local") or ""))}
+    years.update(stamp.year for stamp in timestamps if stamp is not None)
+    explicit: set[str] = set()
+    for year, month, day in re.findall(r"\b(20\d{2})[-/](\d{1,2})[-/](\d{1,2})\b", content):
+        explicit.add(f"{int(year):04d}-{int(month):02d}-{int(day):02d}")
+    for month, day, year in re.findall(r"(?<!\d)(\d{1,2})/(\d{1,2})/(20\d{2})(?!\d)", content):
+        explicit.add(f"{int(year):04d}-{int(month):02d}-{int(day):02d}")
+    month_pattern = "|".join(sorted(MONTH_NUMBERS, key=len, reverse=True))
+    for month, day, year in re.findall(rf"\b({month_pattern})[\s_-]+(\d{{1,2}})(?:,?[\s_-]+(20\d{{2}}))?\b", content, re.I):
+        for resolved_year in ([int(year)] if year else years):
+            explicit.add(f"{resolved_year:04d}-{MONTH_NUMBERS[month.lower()]:02d}-{int(day):02d}")
+    for month, day in re.findall(r"(?<![\d/])(\d{1,2})/(\d{1,2})(?![/\d])", content):
+        for resolved_year in years:
+            explicit.add(f"{resolved_year:04d}-{int(month):02d}-{int(day):02d}")
+    return {"explicit_content_dates": explicit, "feed_timestamp_dates": feed_dates}
+
+
+def dynamic_special_event_match(entry: dict[str, Any], registry: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
+    raw = " ".join(str(entry.get(k) or "") for k in ("title", "url", "summary", "published", "metadata"))
+    explicit_report = bool(re.search(r"\b(?:full\s+)?results?|live[\s-]+coverage|live[\s-]+results?|complete\s+recap\b", raw, re.I))
+    if not REPORT_WORDS.search(raw) or (not explicit_report and FACTUAL_NEWS.search(str(entry.get("title") or ""))):
+        return None, "distinct_factual_news_or_missing_report_wording"
+    blob = _slug(raw).replace("_", " ")
+    candidate_dates = _candidate_dates(entry, registry)
+    explicit_dates = candidate_dates["explicit_content_dates"]
+    feed_dates = candidate_dates["feed_timestamp_dates"]
+    matches: list[tuple[int, dict[str, Any]]] = []
+    for event in registry.get("events", []):
+        if not isinstance(event, dict) or str(event.get("status") or "").lower() not in {"confirmed", "active"}:
+            continue
+        event_aliases = [event.get("event_name")] + list(event.get("aliases") or [])
+        for night in event.get("nights", []):
+            if not isinstance(night, dict) or not night.get("enabled", True):
+                continue
+            night_aliases = list(night.get("aliases") or [])
+            aliases = event_aliases + night_aliases
+            hits = sorted({str(a) for a in aliases if a and len(_slug(str(a))) >= 4 and _slug(str(a)).replace("_", " ") in blob}, key=len, reverse=True)
+            if not hits:
+                continue
+            night_date = str(night.get("date_local") or "")
+            explicit_match = not explicit_dates or night_date in explicit_dates
+            if not explicit_match:
+                continue
+            try:
+                next_date = (datetime.strptime(night_date, "%Y-%m-%d").date() + timedelta(days=1)).isoformat()
+            except Exception:
+                next_date = ""
+            timestamp_compatible = not feed_dates or night_date in feed_dates or next_date in feed_dates
+            night_alias_hit = next((hit for hit in hits if hit in night_aliases), None)
+            score = len(_slug(hits[0])) + (200 if night_date in explicit_dates else 0) + (100 if timestamp_compatible and feed_dates else 0) + (50 if night_alias_hit else 0)
+            metadata = {
+                "event_key": event.get("key"), "night_key": night.get("night_key"),
+                "report_key": f"special_event_{night.get('night_key')}_{night_date.replace('-', '_')}",
+                "date_local": night_date,
+                "publish_after": night.get("report_publish_after_local") or registry.get("default_report_publish_after_local") or "06:30",
+                "category_hint": event.get("category_hint") or event.get("promotion"),
+                "event_name": event.get("event_name"), "promotion": event.get("promotion"),
+                "match_evidence": {"strong_alias": hits[0], "night_alias": night_alias_hit, "alias_hits": hits, "explicit_content_dates": sorted(explicit_dates), "feed_timestamp_dates": sorted(feed_dates), "explicit_date_match": night_date in explicit_dates, "feed_timestamp_compatible": timestamp_compatible, "promotion_support": str(event.get("promotion") or "").lower() in blob},
+            }
+            matches.append((score, metadata))
+    matches.sort(key=lambda item: item[0], reverse=True)
+    if not matches or (len(matches) > 1 and matches[0][0] == matches[1][0]):
+        return None, "ambiguous_event_match" if matches else "event_alias_not_found"
+    return matches[0][1], "dynamic_confirmed_special_event_report"
+
+
+def reserve_report(candidate: dict[str, Any], identity: dict[str, Any], *, now: datetime, pending_path: Path = PENDING_REPORTS) -> dict[str, Any]:
+    state = _load(pending_path, {"reports": []}); rows = state.get("reports", []) if isinstance(state, dict) else []
+    url = normalize_url(str(candidate.get("url") or candidate.get("source_url") or "")); key = str(identity.get("report_key") or "")
+    existing = next((r for r in rows if isinstance(r, dict) and r.get("report_key") == key and r.get("normalized_url") == url), None)
+    if existing is None:
+        existing = {**identity, "source_url": url, "normalized_url": url, "source": candidate.get("source"), "source_title": candidate.get("title"), "discovered_at": now.isoformat(), "status": "waiting_publish_after", "last_checked_at": None, "readiness": None, "retry_count": 0}
+        rows.append(existing)
+    else:
+        for key, value in identity.items():
+            if value is not None:
+                existing[key] = value
+    state = {"updated_at": now.isoformat(), "reports": rows}; _write(pending_path, state)
+    return existing
+
+
+OUTCOME_RE = re.compile(r"\b(defeated|defeats|winner|won|retained|retains|pinfall|submission|disqualification|via pin|via submission|new champion)\b", re.I)
+RESULT_HEADING_RE = re.compile(r"\b(?:match\s+\d+\s*[:\-]|(?:official\s+)?result|winner)\s*[:\-]", re.I)
+PREVIEW_RE = re.compile(r"\b(will face|scheduled|tonight['’]?s card|announced card|previously|last week|previous event|background|storyline|is set to|will challenge)\b", re.I)
+
+
+def report_readiness(blocks: Iterable[Any]) -> dict[str, Any]:
+    texts = [str(b.get("text") or "") if isinstance(b, dict) else BeautifulSoup(str(b), "html.parser").get_text(" ", strip=True) for b in blocks]
+    current_units = historical = headings = 0
+    for index, text in enumerate(texts):
+        if PREVIEW_RE.search(text):
+            historical += len(OUTCOME_RE.findall(text)); continue
+        heading = bool(RESULT_HEADING_RE.search(text))
+        outcome = bool(OUTCOME_RE.search(text))
+        adjacent_heading = index > 0 and bool(RESULT_HEADING_RE.search(texts[index - 1])) and not PREVIEW_RE.search(texts[index - 1])
+        if heading: headings += 1
+        if (heading and outcome) or (outcome and adjacent_heading) or (outcome and re.search(r"\b(?:via|by)\s+(?:pinfall|submission|disqualification)|\bretained\s+(?:the|his|her)\s+title\b", text, re.I)):
+            current_units += 1
+    ready = current_units >= 2
+    return {"ready": ready, "reason": "ready_complete_results" if ready else "waiting_source_completion", "evidence": {"current_result_units": current_units, "structured_result_headings": headings, "historical_outcome_markers_excluded": historical}}
+
+
+INTRO_RE = re.compile(r"^(?:welcome to (?:wrestling inc\.?['’]?s|our) (?:live coverage|results)(?:\s+for)?|this is wrestling inc\.?['’]?s (?:live coverage|results)|wrestling inc\.? will provide live coverage|coverage begins at)\b", re.I)
+BIO_SIGNALS = [re.compile(x, re.I) for x in [r"ringside news", r"(?:cover(?:ing|s)|writes?) wrestling news|(?:si occupa|scrive) di news di wrestling", r"(?:nearly |for )?\w+ years|da .+ anni", r"articles? (?:have been )?(?:picked up|featured)|articoli (?:sono stati )?(?:ripresi|pubblicati)", r"\b(?:TMZ|Forbes|The Sun)\b"]]
+
+
+def is_author_bio(text: str, *, explicit_container: bool = False) -> bool:
+    hits = sum(bool(p.search(text or "")) for p in BIO_SIGNALS)
+    return hits >= (2 if explicit_container else 3)
+
+
+def cleanup_blocks(blocks: list[dict[str, Any]], source: str = "") -> tuple[list[dict[str, Any]], dict[str, int]]:
+    out = list(blocks); intro = bio = 0
+    if "wrestlinginc" in _slug(source):
+        while out[:1] and INTRO_RE.search(str(out[0].get("text") or "").strip()): out.pop(0); intro += 1
+    # Only trailing prose is considered unless the scraper explicitly identified a bio container.
+    for i in range(len(out) - 1, max(-1, len(out) - 7), -1):
+        block = out[i]; explicit = "author" in str(block.get("class") or block.get("type") or "").lower()
+        if is_author_bio(str(block.get("text") or ""), explicit_container=explicit): out.pop(i); bio += 1
+    return out, {"wrestlinginc_intro_blocks_removed": intro, "author_bio_blocks_removed": bio}
+
+
+def cleanup_rendered_html(content: str, source: str = "") -> tuple[str, dict[str, int]]:
+    soup = BeautifulSoup(content or "", "html.parser"); removed = 0
+    blocks = soup.find_all(["p", "div", "section", "aside"], recursive=False)
+    for i, node in enumerate(list(blocks)):
+        text = node.get_text(" ", strip=True); classes = " ".join(node.get("class", []))
+        if (i < 3 and "wrestlinginc" in _slug(source) and INTRO_RE.search(text)) or is_author_bio(text, explicit_container="author" in classes.lower()): node.decompose(); removed += 1
+    return str(soup), {"final_boilerplate_blocks_removed": removed}

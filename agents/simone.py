@@ -8,6 +8,8 @@ from zoneinfo import ZoneInfo
 from pathlib import Path
 from typing import Any
 
+from modules.simone_report_integrity import PENDING_REPORTS, load_effective_registry, reserve_report
+
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_DIR = ROOT / "config"
 STATE_DIR = ROOT / "state"
@@ -25,7 +27,7 @@ REPORT_REGISTRY_FILE = NEWSROOM_STATE_DIR / "report_publication_registry.json"
 SIMONE_EXPECTED_EVENTS_FILE = NEWSROOM_STATE_DIR / "simone_expected_events_latest.json"
 ARTIFACT_EXPECTED_EVENTS_FILE = ARTIFACT_DIR / "simone_expected_events_latest.json"
 
-SIMONE_VERSION = "v95_1_1_simone_special_events_already_published_and_matching_fix"
+SIMONE_VERSION = "v95_13_1_simone_report_integrity"
 
 DAY_NAMES = {
     "monday": 0,
@@ -114,9 +116,31 @@ def report_key_and_date(report: dict[str, Any], now: datetime) -> tuple[str, str
     return f"{report.get('id')}_{date_iso.replace('-', '_')}", date_iso
 
 
+def discovery_report_identity(report: dict[str, Any], now: datetime) -> tuple[str, str, str]:
+    """Key an evening discovery to that show and its next-morning report day."""
+    expected = DAY_NAMES.get(str(report.get("expected_day_after") or "").lower())
+    if expected is not None and now.weekday() == (expected - 1) % 7:
+        show_date = now.date(); publish_date = show_date + timedelta(days=1)
+    else:
+        show_date = now.date() - timedelta(days=int(report.get("show_date_offset_days", 1)))
+        publish_date = now.date()
+    date_iso = show_date.isoformat()
+    return f"{report.get('id')}_{date_iso.replace('-', '_')}", date_iso, publish_date.isoformat()
+
+
+def pending_due(row: dict[str, Any], now: datetime) -> bool:
+    try:
+        hour, minute = [int(x) for x in str(row.get("publish_after") or "06:30").split(":", 1)]
+        publish_date = str(row.get("publish_date_local") or row.get("date_local"))
+        y, m, d = [int(x) for x in publish_date.split("-")]
+        return now >= datetime(y, m, d, hour, minute)
+    except Exception:
+        return False
+
+
 
 def load_special_events_config() -> dict[str, Any]:
-    data = load_json(SPECIAL_EVENTS_CONFIG, {})
+    data, _diagnostics = load_effective_registry()
     return data if isinstance(data, dict) else {}
 
 
@@ -398,12 +422,24 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
         report_candidates = []
 
     reports_cfg = load_json(REPORTS_CONFIG, {"reports": []})
-    special_cfg = load_special_events_config()
+    special_cfg, registry_diagnostics = load_effective_registry()
     status = load_json(REPORT_STATUS_FILE, {})
     publication_registry = load_json(REPORT_REGISTRY_FILE, {"items": []})
     manual_runs = load_json(MANUAL_RUNS_FILE, [])
     reports = reports_cfg.get("reports", []) if isinstance(reports_cfg, dict) else []
     now = local_now()
+
+    # Reserve special-event candidates immediately from Massy's authoritative
+    # structured match, including discoveries before the event becomes due.
+    for candidate in report_candidates:
+        match = candidate.get("special_event_match") if isinstance(candidate, dict) else None
+        if not isinstance(match, dict) or not match.get("report_key"):
+            continue
+        try:
+            publish_date = (datetime.strptime(str(match.get("date_local")), "%Y-%m-%d").date() + timedelta(days=1)).isoformat()
+        except Exception:
+            publish_date = str(match.get("date_local") or "")
+        reserve_report(candidate, {**match, "report_id": match.get("night_key"), "event_identity": match.get("event_name"), "publish_date_local": publish_date, "category": match.get("category_hint"), "title": candidate.get("title"), "categories": [x for x in ["Editoriali", match.get("category_hint")] if x], "counts_as_news": False}, now=now, pending_path=PENDING_REPORTS)
 
     ready: list[dict[str, Any]] = []
     waiting: list[dict[str, Any]] = []
@@ -419,7 +455,7 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
         if not isinstance(report, dict):
             continue
         report_id = str(report.get("id") or "")
-        report_key, date_iso = report_key_and_date(report, now)
+        report_key, date_iso, publish_date_iso = discovery_report_identity(report, now)
         title = build_report_title(report, date_iso)
         current = status.get(report_key, {}) if isinstance(status, dict) else {}
         if current.get("status") == "published":
@@ -431,16 +467,26 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
                 "reason": "already_published",
             })
             continue
+        chosen, reason = choose_report_candidate(report_candidates, report, date_iso)
+        if chosen:
+            reservation = reserve_report(chosen, {
+                "report_key": report_key, "report_id": report_id, "event_identity": report.get("show_name"),
+                "date_local": date_iso, "publish_after": report.get("publish_after") or "06:30",
+                "publish_date_local": publish_date_iso, "category": report.get("category"), "title": title,
+                "categories": [x for x in [report.get("editorial_category", "Editoriali"), report.get("category")] if x], "counts_as_news": False,
+            }, now=now, pending_path=PENDING_REPORTS)
+        else:
+            reservation = None
         if not report_due_today(report, now):
             skipped.append({
                 "report_id": report_id,
                 "report_key": report_key,
                 "title": title,
                 "decision": "skip",
-                "reason": f"not_due_today:{report.get('expected_day_after')}",
+                "reason": "waiting_publish_after" if reservation else f"not_due_today:{report.get('expected_day_after')}",
+                **({"source_url": reservation.get("source_url"), "status": "waiting_publish_after"} if reservation else {}),
             })
             continue
-        chosen, reason = choose_report_candidate(report_candidates, report, date_iso)
         if not chosen:
             waiting.append({
                 "report_id": report_id,
@@ -490,14 +536,40 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
             "categories": [x for x in ["Editoriali", report.get("category_hint")] if x],
             "counts_as_news": False,
         }
-        if special_publish_slots > 0:
-            special_ready.append(item)
-            ready.append(item)
-            special_publish_slots -= 1
+        reserve_report(chosen, {"report_key": report.get("report_key"), "report_id": report.get("night_key"), "night_key": report.get("night_key"), "event_identity": report.get("event_name"), "date_local": report.get("date"), "publish_after": "06:30", "category": report.get("category_hint")}, now=now, pending_path=PENDING_REPORTS)
+        special_ready.append(item)
+        ready.append(item)
+
+    # Pending state is authoritative: replay a reservation even when this run's
+    # feed no longer contains its URL.
+    pending_state = load_json(PENDING_REPORTS, {"reports": []})
+    pending_rows = pending_state.get("reports", []) if isinstance(pending_state, dict) else []
+    for row in pending_rows:
+        if not isinstance(row, dict) or row.get("status") in {"published", "already_published"}:
+            continue
+        report = {**row, "source_url": row.get("source_url"), "source_title": row.get("source_title"), "report_id": row.get("report_id") or row.get("night_key"), "title": row.get("title") or row.get("source_title"), "categories": row.get("categories") or [x for x in ["Editoriali", row.get("category")] if x], "counts_as_news": False, "decision": "ready_for_bob_or_v92", "reason": "pending_queue_replay"}
+        if report_already_published(report, status if isinstance(status, dict) else {}, publication_registry if isinstance(publication_registry, dict) else {}, manual_runs if isinstance(manual_runs, list) else []):
+            row["status"] = "already_published"; skipped.append({**report, "reason": "already_published"}); continue
+        if pending_due(row, now):
+            ready.append(report)
         else:
-            blocked = {**report, "decision": "blocked", "reason": "special_event_publish_cap_per_run"}
-            special_blocked.append(blocked)
-            waiting.append(blocked)
+            row["status"] = "waiting_publish_after"; waiting.append({**report, "decision": "waiting", "reason": "waiting_publish_after"})
+    if isinstance(pending_state, dict):
+        pending_state["reports"] = pending_rows; pending_state["updated_at"] = utc_now(); write_json(PENDING_REPORTS, pending_state)
+
+    # One identity appears once even if both current feed and queue supplied it.
+    ready_by_key: dict[str, dict[str, Any]] = {}
+    pending_by_key = {str(x.get("report_key")): x for x in pending_rows if isinstance(x, dict) and x.get("report_key")}
+    for item in ready:
+        row = pending_by_key.get(str(item.get("report_key") or ""))
+        if row is not None and not pending_due(row, now):
+            continue
+        if item.get("report_key"):
+            ready_by_key.setdefault(str(item.get("report_key")), item)
+    ready = list(ready_by_key.values())
+    ready_keys = set(ready_by_key)
+    special_ready = [item for item in special_ready if str(item.get("report_key") or "") in ready_keys]
+    waiting = list({f"{x.get('report_key')}:{x.get('reason')}": x for x in waiting}.values())
 
     result = {
         "agent": "Simone",
@@ -518,6 +590,7 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
         "special_missing": special_missing,
         "special_already_published": special_already,
         "special_blocked": special_blocked,
+        "effective_registry": registry_diagnostics,
         "handoff": {
             "ready": len(ready),
             "waiting": len(waiting),
@@ -527,6 +600,9 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
             "special_missing": len(special_missing),
             "special_already_published": len(special_already),
             "special_blocked": len(special_blocked),
+            "report_urls_reserved": sum(1 for x in report_candidates if x.get("url") or x.get("source_url")),
+            "reports_waiting_publish_after": sum(1 for x in skipped if x.get("reason") == "waiting_publish_after"),
+            "multiple_reports_processed": len(ready) if len(ready) > 1 else 0,
         },
     }
     expected_artifact = {"generated_at": result["generated_at"], "expected_special_events": expected_special, "special_ready": special_ready, "special_missing": special_missing, "special_already_published": special_already, "special_blocked": special_blocked}

@@ -9,6 +9,8 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
+from modules.simone_report_integrity import dynamic_special_event_match, load_effective_registry
+
 try:
     import feedparser  # type: ignore
 except Exception:  # pragma: no cover - workflow installs feedparser
@@ -21,7 +23,7 @@ ARTIFACT_DIR = ROOT / "artifacts" / "newsroom"
 NEWSROOM_STATE_DIR = STATE_DIR / "newsroom"
 FEEDS_CONFIG = CONFIG_DIR / "feeds_v92.json"
 
-MASSY_VERSION = "v94_13_1_report_source_gate"
+MASSY_VERSION = "v95_13_1_simone_report_integrity"
 
 TRACKED_STATE_FILES = [
     STATE_DIR / "report_status.json",
@@ -223,11 +225,15 @@ def wrestlinginc_report_like_hint(entry: dict[str, Any], blob: str) -> tuple[str
     return None, None
 
 
-def report_hint(entry: dict[str, Any]) -> tuple[str | None, str | None]:
+def report_hint(entry: dict[str, Any], special_registry: dict[str, Any] | None = None) -> tuple[str | None, str | None]:
     title_url_blob = f"{entry.get('title', '')} {entry.get('url', '')}"
     blob = f"{title_url_blob} {entry.get('summary', '')}"
     title_url_normalized = normalize_text(title_url_blob)
     normalized = normalize_text(blob)
+    event_match, dynamic_reason = dynamic_special_event_match(entry, special_registry or {})
+    if event_match:
+        entry["special_event_match"] = event_match
+        return str(event_match.get("event_name") or event_match.get("event_key")), dynamic_reason
     title_url_has_results_hint = (
         "results" in title_url_normalized
         or "risultati" in title_url_normalized
@@ -283,7 +289,7 @@ def suspicious_duplicate_clusters(candidates: list[dict[str, Any]]) -> list[dict
     return clusters
 
 
-def classify_entries(entries: list[dict[str, Any]], already_worked_urls: set[str], already_published_urls: set[str]) -> dict[str, Any]:
+def classify_entries(entries: list[dict[str, Any]], already_worked_urls: set[str], already_published_urls: set[str], special_registry: dict[str, Any] | None = None) -> dict[str, Any]:
     seen_scan: set[str] = set()
     already_worked: list[dict[str, Any]] = []
     hard_skipped: list[dict[str, Any]] = []
@@ -310,7 +316,7 @@ def classify_entries(entries: list[dict[str, Any]], already_worked_urls: set[str
         if lv_reason:
             hard_skipped.append(compact_entry(entry, "hard_skip", lv_reason))
             continue
-        show_hint, report_reason = report_hint(entry)
+        show_hint, report_reason = report_hint(entry, special_registry)
         if show_hint:
             if not is_preferred_report_source(entry):
                 hard_skipped.append(compact_entry(
@@ -322,7 +328,7 @@ def classify_entries(entries: list[dict[str, Any]], already_worked_urls: set[str
                     preferred_report_source="wrestlinginc",
                 ))
                 continue
-            report_candidates.append(compact_entry(entry, "report_candidate", report_reason or "report_like_title", assigned_to="Simone", show_hint=show_hint))
+            report_candidates.append(compact_entry(entry, "report_candidate", report_reason or "report_like_title", assigned_to="Simone", show_hint=show_hint, special_event_match=entry.get("special_event_match")))
             continue
         news_candidates.append(compact_entry(entry, "news_candidate", "requires_menzo_classification", assigned_to="Menzo"))
 
@@ -336,7 +342,8 @@ def run_massy() -> dict[str, Any]:
     entries, feed_errors = read_feed_entries(feeds)
     known_urls = worked_urls()
     published = published_urls()
-    classified = classify_entries(entries, known_urls, published)
+    special_registry, registry_diagnostics = load_effective_registry()
+    classified = classify_entries(entries, known_urls, published, special_registry)
     board = {
         "agent": "Massy",
         "version": MASSY_VERSION,
@@ -352,6 +359,7 @@ def run_massy() -> dict[str, Any]:
         "found_urls": len(entries),
         "known_state_urls": len(known_urls),
         "known_published_urls": len(published),
+        "effective_registry": registry_diagnostics,
         **classified,
         "handoff": {
             "to_simone": len(classified["report_candidates"]),

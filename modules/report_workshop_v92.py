@@ -994,6 +994,8 @@ def append_source_attribution(content: str, job: Dict[str, Any]) -> str:
     if not url:
         return content
     attribution = f'<p class="owtv-source-attribution"><em>Fonte: <a href="{url}" target="_blank" rel="nofollow noopener">{label}</a>.</em></p>'
+    # Idempotent finalization: the visible, linked source footer must occur once.
+    content = re.sub(r'<p class=["\']owtv-source-attribution["\'][\s\S]*?</p>\s*', '', content or '', flags=re.I)
     return content + "\n" + attribution
 
 
@@ -1055,7 +1057,11 @@ def cleanup_ringside_rendered_html(content: str, job: Dict[str, Any]) -> str:
 
 
 def publish_report(job: Dict[str, Any], content: str, featured_image_url: Optional[str]) -> Tuple[Optional[int], Optional[Dict[str, Any]]]:
+    from modules.simone_report_integrity import cleanup_rendered_html
     content = cleanup_source_boilerplate_rendered_html(cleanup_ringside_rendered_html(content, job))
+    content, final_cleanup = cleanup_rendered_html(content, str(job.get("source") or ""))
+    if final_cleanup["final_boilerplate_blocks_removed"]:
+        print(f"[REPORT CLEAN v95.13.1] final_boilerplate_blocks_removed={final_cleanup['final_boilerplate_blocks_removed']}", flush=True)
     content = append_source_attribution(content_with_embeds(content), job)
     payload: Dict[str, Any] = {
         "title": job["title"],
@@ -1078,6 +1084,9 @@ def publish_report(job: Dict[str, Any], content: str, featured_image_url: Option
 
 def run_report_workshop(job: Dict[str, Any], published_dir: Path, review_dir: Path) -> Tuple[int, Dict[str, Any]]:
     blocks, _html, featured_image = scrape_article(job["source_url"])
+    from modules.simone_report_integrity import cleanup_blocks
+    blocks, cleanup_diagnostics = cleanup_blocks(blocks, str(job.get("source") or ""))
+    print(f"[REPORT CLEAN v95.13.1] {json.dumps(cleanup_diagnostics, sort_keys=True)}", flush=True)
     print(f"[REPORT v92] Blocchi estratti: total={len(blocks)} text={len([b for b in blocks if b.get('type') in {'heading','paragraph','quote'}])} images={len([b for b in blocks if b.get('type') == 'image'])} embeds={len([b for b in blocks if b.get('type') == 'embed'])} featured={bool(featured_image)}", flush=True)
     translated = translate_report_blocks(job.get("source_title") or job.get("title") or "", blocks, job["title"])
     content = render_blocks(blocks, translated, featured_image)
