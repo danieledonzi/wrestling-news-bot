@@ -1,3 +1,5 @@
+import pytest
+
 from agents import report_registry_v93_22 as registry_module
 from agents.report_registry_v93_22 import build_registry_entry
 from agents.simone import report_already_published
@@ -60,6 +62,90 @@ def test_manual_special_event_default_title_preserves_dynamic_identity(monkeypat
         "title": "WWE Saturday Night's Main Event XLV del 18 luglio 2026 - risultati e momenti salienti",
     }
     assert report_already_published(expected, {}, {"items": [entry]}, []) is True
+
+
+@pytest.mark.parametrize("job_date", ["2026-07-18", "2026-07-19"])
+def test_manual_special_event_matches_exact_date_or_next_morning(monkeypatch, job_date):
+    _snme_registry(monkeypatch)
+    entry = build_registry_entry(
+        {
+            "kind": "report",
+            "title": "WWE SNME results",
+            "source_title": "WWE SNME results",
+            "source_url": "https://example.test/snme-results",
+            "date": job_date,
+        },
+        wp_post_id=200,
+    )
+
+    assert entry is not None
+    assert entry["show_date"] == "2026-07-18"
+    assert entry["event_key"] == "wwe_saturday_nights_main_event_xlv_2026"
+    assert entry["night_key"] == "wwe_snme_xlv_2026_main"
+    assert entry["report_key"] == "special_event_wwe_snme_xlv_2026_main_2026_07_18"
+
+
+def test_manual_special_event_does_not_match_more_than_one_day_later(monkeypatch):
+    _snme_registry(monkeypatch)
+    entry = build_registry_entry(
+        {
+            "kind": "report",
+            "title": "WWE SNME results",
+            "source_title": "WWE SNME results",
+            "source_url": "https://example.test/snme-results",
+            "date": "2026-07-20",
+        },
+        wp_post_id=201,
+    )
+
+    assert entry is not None
+    assert entry["show_date"] == "2026-07-20"
+    assert entry["event_key"].startswith("special_event_manual_")
+    assert entry["night_key"] == entry["event_key"]
+    assert entry["report_key"].endswith("_2026_07_20")
+
+
+def test_explicit_night_alias_wins_over_exact_date_for_consecutive_nights(monkeypatch):
+    monkeypatch.setattr(
+        registry_module,
+        "load_special_events",
+        lambda: [
+            {
+                "key": "wwe_summerslam_2026",
+                "event_name": "SummerSlam",
+                "aliases": ["WWE SummerSlam"],
+                "nights": [
+                    {
+                        "night_key": "wwe_summerslam_2026_night_1",
+                        "date_local": "2026-08-01",
+                        "aliases": ["SummerSlam Night 1"],
+                    },
+                    {
+                        "night_key": "wwe_summerslam_2026_night_2",
+                        "date_local": "2026-08-02",
+                        "aliases": ["SummerSlam Night 2"],
+                    },
+                ],
+            }
+        ],
+    )
+    entry = build_registry_entry(
+        {
+            "kind": "report",
+            "title": "SummerSlam Night 1 results",
+            "source_title": "SummerSlam Night 1 results",
+            "source_url": "https://example.test/summerslam-night-1-results",
+            "date": "2026-08-02",
+        },
+        wp_post_id=202,
+    )
+
+    assert entry is not None
+    assert entry["event_key"] == "wwe_summerslam_2026"
+    assert entry["night_key"] == "wwe_summerslam_2026_night_1"
+    assert entry["report_id"] == "wwe_summerslam_2026_night_1"
+    assert entry["show_date"] == "2026-08-01"
+    assert entry["report_key"] == "special_event_wwe_summerslam_2026_night_1_2026_08_01"
 
 
 def test_unknown_same_date_special_events_get_distinct_keys(monkeypatch):
