@@ -13,7 +13,7 @@ REPORT_STATUS_FILE = STATE_DIR / "report_status.json"
 MANUAL_RUNS_FILE = STATE_DIR / "manual_runs.json"
 REPORT_REGISTRY_FILE = NEWSROOM_STATE_DIR / "report_publication_registry.json"
 
-VERSION = "v93_22_report_publication_registry"
+VERSION = "v95_13_2_manual_report_reconciliation"
 
 SHOW_PATTERNS = [
     ("wwe_raw", re.compile(r"\b(wwe\s+raw|raw)\b", re.I), ["Editoriali", "WWE"]),
@@ -77,6 +77,13 @@ def infer_report_id(job: dict[str, Any]) -> tuple[str, list[str]]:
     for report_id, pattern, categories in SHOW_PATTERNS:
         if pattern.search(blob):
             return report_id, categories
+
+    # Manual report publication is authoritative even when the event is not a
+    # configured weekly show. The exact title/source metadata is retained so
+    # Simone can reconcile the corresponding dynamic special-event identity.
+    if str(job.get("kind") or "").strip().lower() == "report":
+        categories = job.get("categories") if isinstance(job.get("categories"), list) else []
+        return "special_event_manual", [str(x) for x in categories if str(x)]
     return "", []
 
 
