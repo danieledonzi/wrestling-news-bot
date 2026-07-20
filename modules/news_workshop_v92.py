@@ -1108,9 +1108,13 @@ def cleanup_news_quotes(body_html: str) -> str:
 
 
 def publish_news(job: Dict[str, Any], translated_title: str, body_html: str, image_url: Optional[str]) -> Tuple[int, Dict[str, Any]]:
+    from modules.simone_report_integrity import cleanup_rendered_html
     body_html = cleanup_news_quotes(body_html)
     media_id, _src = upload_media(image_url)
     body_html = cleanup_news_html(body_html)
+    body_html, cleanup_diagnostics = cleanup_rendered_html(body_html, str(job.get("source") or ""))
+    if cleanup_diagnostics["final_boilerplate_blocks_removed"]:
+        print(f"[NEWS CLEAN v95.13.1] final_boilerplate_blocks_removed={cleanup_diagnostics['final_boilerplate_blocks_removed']}", flush=True)
     payload: Dict[str, Any] = {
         "title": translated_title,
         "content": append_source(body_html, str(job.get("source") or ""), str(job.get("source_url") or "")),
@@ -1273,7 +1277,11 @@ def render_news_blocks(blocks: List[Dict[str, str]], translated: Dict[int, str])
 def run_news_workshop(job: Dict[str, Any], published_dir: Path, review_dir: Path) -> Tuple[int, Dict[str, Any]]:
     print(f"[NEWS v92] Avvio workshop news BLOCK: {job.get('news_key')} url={job.get('source_url')}", flush=True)
     from modules import report_workshop_v92 as report_engine
+    from modules.simone_report_integrity import cleanup_blocks
     blocks, _html, featured_image = report_engine.scrape_article(str(job["source_url"]))
+    blocks, cleanup_diagnostics = cleanup_blocks(blocks, str(job.get("source") or ""))
+    if cleanup_diagnostics["author_bio_blocks_removed"]:
+        print(f"[NEWS CLEAN v95.13.1] author_bio_blocks_removed={cleanup_diagnostics['author_bio_blocks_removed']}", flush=True)
     validate_news_blocks_quality(blocks, str(job.get("source_url") or ""))
     title, translated, model = translate_news_blocks(str(job.get("source_title") or ""), blocks, str(job.get("source") or ""))
     body_html = render_news_blocks(blocks, translated)
