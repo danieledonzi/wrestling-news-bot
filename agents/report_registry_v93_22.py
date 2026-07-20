@@ -3,7 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -17,7 +17,7 @@ REPORT_REGISTRY_FILE = NEWSROOM_STATE_DIR / "report_publication_registry.json"
 SPECIAL_EVENTS_CONFIG = CONFIG_DIR / "special_events.json"
 EFFECTIVE_SPECIAL_EVENTS_FILE = NEWSROOM_STATE_DIR / "special_events_effective.json"
 
-VERSION = "v95_13_2_manual_report_reconciliation"
+VERSION = "v95_13_3_special_event_date_reconciliation"
 
 SHOW_PATTERNS = [
     ("wwe_raw", re.compile(r"\b(wwe\s+raw|raw)\b", re.I), ["Editoriali", "WWE"]),
@@ -140,35 +140,64 @@ def infer_special_event_identity(job: dict[str, Any], show_date: str) -> dict[st
     blob = normalize(blob_from_job(job))
     if not blob:
         return None
-    matches: list[tuple[int, dict[str, str]]] = []
+    try:
+        inferred_date = datetime.fromisoformat(show_date).date()
+    except ValueError:
+        return None
+    accepted_dates = {
+        inferred_date.isoformat(): 1,
+        (inferred_date - timedelta(days=1)).isoformat(): 0,
+    }
+    matches: list[tuple[int, int, int, dict[str, str]]] = []
     for event in load_special_events():
         event_key = str(event.get("key") or "").strip()
         aliases = [str(event.get("event_name") or "")]
         if isinstance(event.get("aliases"), list):
             aliases.extend(str(x) for x in event["aliases"] if x)
+        normalized_event_aliases = [normalize(alias) for alias in aliases if normalize(alias)]
+        event_hits = [alias for alias in normalized_event_aliases if alias in blob]
+        if not event_key or not event_hits:
+            continue
         nights = event.get("nights", []) if isinstance(event.get("nights"), list) else []
         for night in nights:
-            if not isinstance(night, dict) or str(night.get("date_local") or "") != show_date:
+            if not isinstance(night, dict):
+                continue
+            night_date = str(night.get("date_local") or "").strip()
+            if night_date not in accepted_dates:
                 continue
             night_key = str(night.get("night_key") or "").strip()
-            if not event_key or not night_key:
+            if not night_key:
                 continue
-            night_aliases = aliases[:]
+            night_aliases: list[str] = []
             if isinstance(night.get("aliases"), list):
                 night_aliases.extend(str(x) for x in night["aliases"] if x)
             normalized_aliases = [normalize(alias) for alias in night_aliases if normalize(alias)]
             hits = [alias for alias in normalized_aliases if alias in blob]
-            if hits:
-                matches.append((max(len(alias) for alias in hits), {
-                    "event_key": event_key,
-                    "night_key": night_key,
-                    "report_id": night_key,
-                    "report_key": f"special_event_{night_key}_{show_date.replace('-', '_')}",
-                }))
+            matches.append((max((len(alias) for alias in hits), default=0),
+                            accepted_dates[night_date], max(len(alias) for alias in event_hits), {
+                "event_key": event_key,
+                "night_key": night_key,
+                "report_id": night_key,
+                "report_key": f"special_event_{night_key}_{night_date.replace('-', '_')}",
+                "show_date": night_date,
+            }))
     if not matches:
         return None
-    matches.sort(key=lambda item: item[0], reverse=True)
-    return matches[0][1]
+    if any(item[0] for item in matches):
+        matches.sort(key=lambda item: item[:3], reverse=True)
+    else:
+        event_date_ranks: dict[str, set[int]] = {}
+        for _, date_rank, _, identity in matches:
+            event_date_ranks.setdefault(identity["event_key"], set()).add(date_rank)
+
+        def generic_match_rank(item: tuple[int, int, int, dict[str, str]]) -> tuple[int, int]:
+            _, date_rank, event_alias_length, identity = item
+            date_ranks = event_date_ranks[identity["event_key"]]
+            date_preference = 1 - date_rank if date_ranks == {0, 1} else date_rank
+            return event_alias_length, date_preference
+
+        matches.sort(key=generic_match_rank, reverse=True)
+    return matches[0][3]
 
 
 def fallback_special_event_identity(job: dict[str, Any], show_date: str) -> dict[str, str]:
@@ -191,6 +220,7 @@ def build_registry_entry(job: dict[str, Any], *, wp_post_id: Any = None, link: s
     identity: dict[str, str] = {}
     if report_id == "special_event_manual":
         identity = infer_special_event_identity(job, show_date) or fallback_special_event_identity(job, show_date)
+        show_date = identity.get("show_date", show_date)
         report_id = identity["report_id"]
         report_key = identity["report_key"]
     else:
