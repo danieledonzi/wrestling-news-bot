@@ -183,11 +183,26 @@ def wp_not_ready_result(decision: dict[str, Any], ready_reports: list[dict[str, 
 
 def run_simone_report_publisher(simone_decision: dict[str, Any] | None = None) -> dict[str, Any]:
     decision = simone_decision if isinstance(simone_decision, dict) else load_json(NEWSROOM_STATE_DIR / "simone_reports_latest.json", {})
-    ready_reports = decision.get("ready_reports", []) if isinstance(decision, dict) else []
-    if not isinstance(ready_reports, list):
-        ready_reports = []
-    deferred_reports = ready_reports[MAX_REPORTS_PER_RUN:]
-    ready_reports = ready_reports[:MAX_REPORTS_PER_RUN]
+    incoming_reports = decision.get("ready_reports", []) if isinstance(decision, dict) else []
+    if not isinstance(incoming_reports, list):
+        incoming_reports = []
+    history = load_json(SIMONE_REPORT_HISTORY_FILE, {})
+    if not isinstance(history, dict):
+        history = {}
+    already_results: list[dict[str, Any]] = []
+    unresolved_reports: list[dict[str, Any]] = []
+    for report in incoming_reports:
+        if not isinstance(report, dict):
+            continue
+        key = report_key(report)
+        stored = history.get(key) if key else None
+        if isinstance(stored, dict):
+            already_results.append({"report_key": key, "status": "already_published", "wp_post_id": stored.get("wp_post_id"), "wp_link": stored.get("wp_link"), "title": report.get("title"), "source_url": report.get("source_url")})
+        else:
+            unresolved_reports.append(report)
+
+    deferred_reports = unresolved_reports[MAX_REPORTS_PER_RUN:]
+    ready_reports = unresolved_reports[:MAX_REPORTS_PER_RUN]
 
     # Completeness is checked against a fresh fetch before WP preflight and,
     # crucially, before report_workshop can make any Gemini translation call.
@@ -195,6 +210,10 @@ def run_simone_report_publisher(simone_decision: dict[str, Any] | None = None) -
     incomplete_results: list[dict[str, Any]] = []
     pending = load_json(PENDING_REPORTS, {"reports": []})
     pending_rows = pending.get("reports", []) if isinstance(pending, dict) else []
+    already_keys = {str(item.get("report_key") or "") for item in already_results}
+    for row in pending_rows:
+        if isinstance(row, dict) and str(row.get("report_key") or "") in already_keys and row.get("status") != "published":
+            row["status"] = "already_published"
     deferred_keys = {report_key(x) for x in deferred_reports if isinstance(x, dict)}
     for row in pending_rows:
         if isinstance(row, dict) and row.get("report_key") in deferred_keys:
@@ -218,8 +237,8 @@ def run_simone_report_publisher(simone_decision: dict[str, Any] | None = None) -
 
     if not ready_reports:
         result = empty_result(decision if isinstance(decision, dict) else {}, 0)
-        result["results"] = incomplete_results
-        result["handoff"].update({"waiting_source_completion": len(incomplete_results), "incomplete_blocked_before_gemini": len(incomplete_results), "deferred_by_safety_cap": len(deferred_reports)})
+        result["results"] = already_results + incomplete_results
+        result["handoff"].update({"already_published": len(already_results), "waiting_source_completion": len(incomplete_results), "incomplete_blocked_before_gemini": len(incomplete_results), "deferred_by_safety_cap": len(deferred_reports)})
         write_json(ARTIFACT_SIMONE_PUBLISH_FILE, result)
         write_json(SIMONE_REPORT_STATUS_FILE, result)
         print("[SIMONE v93.27] Nessun report pronto: salto WP probe", flush=True)
@@ -227,11 +246,12 @@ def run_simone_report_publisher(simone_decision: dict[str, Any] | None = None) -
 
     preflight_ok, preflight_reason, preflight_diagnostics = jarvis_wp_preflight()
     if not preflight_ok:
-        return wp_not_ready_result(decision if isinstance(decision, dict) else {}, ready_reports, preflight_reason, preflight_diagnostics)
-
-    history = load_json(SIMONE_REPORT_HISTORY_FILE, {})
-    if not isinstance(history, dict):
-        history = {}
+        result = wp_not_ready_result(decision if isinstance(decision, dict) else {}, ready_reports, preflight_reason, preflight_diagnostics)
+        result["results"] = already_results + result.get("results", [])
+        result["handoff"]["already_published"] = len(already_results)
+        result["handoff"]["deferred_by_safety_cap"] = len(deferred_reports)
+        write_json(ARTIFACT_SIMONE_PUBLISH_FILE, result); write_json(SIMONE_REPORT_STATUS_FILE, result)
+        return result
 
     # Jarvis preflight was OK. Keep the internal check as a second line of defense
     # unless explicitly disabled.
@@ -250,9 +270,6 @@ def run_simone_report_publisher(simone_decision: dict[str, Any] | None = None) -
             key = report_key(report)
             if not key:
                 results.append({"status": "skipped", "reason": "missing_report_key", "source_url": report.get("source_url")})
-                continue
-            if key in history:
-                results.append({"report_key": key, "status": "already_published", "wp_post_id": history[key].get("wp_post_id"), "wp_link": history[key].get("wp_link"), "title": report.get("title")})
                 continue
             job = build_job(report)
             if DRY_RUN:
@@ -277,7 +294,7 @@ def run_simone_report_publisher(simone_decision: dict[str, Any] | None = None) -
     if isinstance(pending, dict):
         pending["reports"] = pending_rows; pending["updated_at"] = utc_now(); write_json(PENDING_REPORTS, pending)
 
-    results = incomplete_results + results
+    results = already_results + incomplete_results + results
     result = {"agent": "Simone", "version": VERSION, "generated_at": utc_now(), "mode": "autonomous_report_publisher_v92_workshop", "input": {"simone_version": decision.get("version") if isinstance(decision, dict) else None, "ready_reports": len(ready_reports)}, "wp": {"ready": wp_ok, "reason": wp_status, "dry_run": DRY_RUN, "diagnostics": wp_diagnostics, "preflight_reason": preflight_reason}, "results": results, "handoff": {"published": sum(1 for r in results if r.get("status") == "published"), "already_published": sum(1 for r in results if r.get("status") == "already_published"), "wp_not_ready": sum(1 for r in results if r.get("status") == "wp_not_ready"), "dry_run": sum(1 for r in results if r.get("status") == "dry_run"), "errors": sum(1 for r in results if r.get("status") == "publish_error"), "waiting_source_completion": len(incomplete_results), "incomplete_blocked_before_gemini": len(incomplete_results), "deferred_by_safety_cap": len(deferred_reports), "multiple_reports_processed": len(ready_reports) if len(ready_reports) > 1 else 0}, "policy": {"simone_is_autonomous_for_reports": True, "uses_manual_report_workflow_engine": "modules.report_workshop_v92.run_report_workshop", "checks_completeness_before_gemini_and_wp": True, "uses_jarvis_wp_preflight": True, "skips_internal_wp_probe_when_jarvis_preflight_down": True, "max_reports_per_run": MAX_REPORTS_PER_RUN, "reports_count_as_news": False}}
     write_json(ARTIFACT_SIMONE_PUBLISH_FILE, result)
     write_json(SIMONE_REPORT_STATUS_FILE, result)

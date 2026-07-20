@@ -23,6 +23,7 @@ SCHEDULE_RUNTIME_DIR = ROOT / "state" / "newsroom" / "special_events_schedule_ru
 TRUSTED_PROMOTIONS = {"WWE", "AEW", "TNA", "ROH"}
 REFRESH_INTERVAL = timedelta(hours=20)
 REFRESH_TIMEOUT_SECONDS = 75
+ARTIFACT_CLOCK_SKEW = timedelta(minutes=10)
 
 
 def _load(path: Path, default: Any) -> Any:
@@ -99,7 +100,32 @@ def build_effective_registry(seed: dict[str, Any], proposals: Iterable[dict[str,
 def _schedule_files() -> list[Path]:
     files = list(SCHEDULE_RUNTIME_DIR.glob("special_events_wikipedia_schedule_layer_*.json"))
     files.extend(SCHEDULE_REPORT_DIR.glob("special_events_wikipedia_schedule_layer_*.json"))
-    return sorted(files, key=lambda path: path.stat().st_mtime, reverse=True)
+    return files
+
+
+def _artifact_generated_at(path: Path) -> datetime | None:
+    raw = _load(path, {})
+    value = str(raw.get("generated_at_utc") or "") if isinstance(raw, dict) else ""
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        if parsed.tzinfo is None:
+            return None
+        return parsed.astimezone(timezone.utc)
+    except Exception:
+        return None
+
+
+def _newest_valid_artifact(paths: Iterable[Path], now: datetime) -> tuple[Path | None, datetime | None]:
+    valid = []
+    for path in paths:
+        generated_at = _artifact_generated_at(path)
+        if generated_at is None or generated_at > now + ARTIFACT_CLOCK_SKEW:
+            continue
+        valid.append((generated_at, path))
+    if not valid:
+        return None, None
+    generated_at, path = max(valid, key=lambda item: item[0])
+    return path, generated_at
 
 
 def _generate_schedule_artifact() -> Path:
@@ -110,9 +136,10 @@ def _generate_schedule_artifact() -> Path:
         check=True, timeout=REFRESH_TIMEOUT_SECONDS, capture_output=True, text=True,
     )
     files = list(SCHEDULE_RUNTIME_DIR.glob("special_events_wikipedia_schedule_layer_*.json"))
-    if not files:
+    path, _generated_at = _newest_valid_artifact(files, datetime.now(timezone.utc))
+    if path is None:
         raise RuntimeError("schedule generator produced no JSON artifact")
-    return max(files, key=lambda path: path.stat().st_mtime)
+    return path
 
 
 def load_effective_registry(now: datetime | None = None) -> tuple[dict[str, Any], dict[str, Any]]:
@@ -124,33 +151,39 @@ def load_effective_registry(now: datetime | None = None) -> tuple[dict[str, Any]
     except Exception:
         age = REFRESH_INTERVAL + timedelta(seconds=1)
     if isinstance(prior, dict) and prior.get("events") and age < REFRESH_INTERVAL:
-        return prior, {"effective_registry_source": "prior_runtime_state", "refresh_status": "fresh_cache"}
+        return prior, {"effective_registry_source": "prior_runtime_state", "refresh_status": "fresh_cache", "artifact_generated_at_utc": prior.get("artifact_generated_at_utc")}
     seed = _load(SEED_REGISTRY, {})
     files = _schedule_files()
     artifact: Path | None = None
+    artifact_generated_at: datetime | None = None
     refresh_status = "refresh_used_existing_fresh_artifact"
-    if files and now.timestamp() - files[0].stat().st_mtime < REFRESH_INTERVAL.total_seconds():
-        artifact = files[0]
+    newest_artifact, newest_generated_at = _newest_valid_artifact(files, now)
+    if newest_artifact is not None and newest_generated_at is not None and timedelta(0) <= now - newest_generated_at < REFRESH_INTERVAL:
+        artifact, artifact_generated_at = newest_artifact, newest_generated_at
     else:
         try:
             artifact = _generate_schedule_artifact()
+            artifact_generated_at = _artifact_generated_at(artifact)
+            if artifact_generated_at is None or artifact_generated_at > now + ARTIFACT_CLOCK_SKEW or now - artifact_generated_at >= REFRESH_INTERVAL:
+                raise RuntimeError("generated schedule artifact has invalid or stale generated_at_utc")
             refresh_status = "refresh_generated_new_artifact"
         except Exception as exc:
             if isinstance(prior, dict) and prior.get("events"):
-                return prior, {"effective_registry_source": "prior_runtime_state", "refresh_status": "refresh_failed_using_prior_state", "refresh_error": str(exc)[:500]}
-            return seed, {"effective_registry_source": "static_fallback", "refresh_status": "refresh_failed_using_static_fallback", "refresh_error": str(exc)[:500]}
+                return prior, {"effective_registry_source": "prior_runtime_state", "refresh_status": "refresh_failed_using_prior_state", "refresh_error": str(exc)[:500], "artifact_generated_at_utc": newest_generated_at.isoformat() if newest_generated_at else None}
+            return seed, {"effective_registry_source": "static_fallback", "refresh_status": "refresh_failed_using_static_fallback", "refresh_error": str(exc)[:500], "artifact_generated_at_utc": newest_generated_at.isoformat() if newest_generated_at else None}
     if artifact:
         raw = _load(artifact, {})
         proposals = raw.get("events") or raw.get("proposals") or raw.get("schedule") or []
         if isinstance(proposals, list):
             effective, diag = build_effective_registry(seed, [x for x in proposals if isinstance(x, dict)])
             effective["refreshed_at_utc"] = now.isoformat()
+            effective["artifact_generated_at_utc"] = artifact_generated_at.isoformat() if artifact_generated_at else None
             effective["runtime_diagnostics"] = diag
             _write(EFFECTIVE_REGISTRY, effective)
-            return effective, {"effective_registry_source": "refreshed_structured_schedule", "refresh_status": refresh_status, "schedule_artifact": str(artifact), **diag}
+            return effective, {"effective_registry_source": "refreshed_structured_schedule", "refresh_status": refresh_status, "schedule_artifact": str(artifact), "artifact_generated_at_utc": artifact_generated_at.isoformat() if artifact_generated_at else None, **diag}
     if isinstance(prior, dict) and prior.get("events"):
-        return prior, {"effective_registry_source": "prior_runtime_state", "refresh_status": "refresh_failed_using_prior_state", "refresh_error": "invalid_schedule_artifact"}
-    return seed, {"effective_registry_source": "static_fallback", "refresh_status": "refresh_failed_using_static_fallback", "refresh_error": "invalid_schedule_artifact"}
+        return prior, {"effective_registry_source": "prior_runtime_state", "refresh_status": "refresh_failed_using_prior_state", "refresh_error": "invalid_schedule_artifact", "artifact_generated_at_utc": artifact_generated_at.isoformat() if artifact_generated_at else None}
+    return seed, {"effective_registry_source": "static_fallback", "refresh_status": "refresh_failed_using_static_fallback", "refresh_error": "invalid_schedule_artifact", "artifact_generated_at_utc": artifact_generated_at.isoformat() if artifact_generated_at else None}
 
 
 REPORT_WORDS = re.compile(r"\b(results?|risultati|recap|report|live[\s-]+coverage|live[\s-]+results?|highlights?)\b", re.I)

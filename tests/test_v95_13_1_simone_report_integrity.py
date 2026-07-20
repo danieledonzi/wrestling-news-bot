@@ -157,7 +157,7 @@ def test_stale_registry_generates_once_then_uses_twenty_hour_cache(tmp_path, mon
     artifact = tmp_path / "generated.json"; calls = []
     def generate():
         calls.append(1)
-        artifact.write_text(json.dumps({"events": [{"promotion": "WWE", "brand": "NXT", "event_name": "NXT Heatwave", "dates": ["2026-08-22"], "source": "wikipedia"}]}), encoding="utf-8")
+        artifact.write_text(json.dumps({"generated_at_utc": "2026-07-20T00:00:00Z", "events": [{"promotion": "WWE", "brand": "NXT", "event_name": "NXT Heatwave", "dates": ["2026-08-22"], "source": "wikipedia"}]}), encoding="utf-8")
         return artifact
     monkeypatch.setattr(integrity, "SEED_REGISTRY", seed_path); monkeypatch.setattr(integrity, "EFFECTIVE_REGISTRY", effective_path)
     monkeypatch.setattr(integrity, "_schedule_files", lambda: []); monkeypatch.setattr(integrity, "_generate_schedule_artifact", generate)
@@ -179,6 +179,56 @@ def test_refresh_failure_uses_prior_effective_state(tmp_path, monkeypatch):
     monkeypatch.setattr(integrity, "_generate_schedule_artifact", lambda: (_ for _ in ()).throw(RuntimeError("timeout")))
     loaded, diagnostics = integrity.load_effective_registry(datetime(2026, 7, 20, tzinfo=timezone.utc))
     assert loaded["events"][0]["key"] == "prior" and diagnostics["refresh_status"] == "refresh_failed_using_prior_state"
+
+
+def test_artifact_freshness_uses_generated_metadata_not_mtime(tmp_path, monkeypatch):
+    import json, os
+    from modules import simone_report_integrity as integrity
+    now = datetime(2026, 7, 20, 12, tzinfo=timezone.utc)
+    seed = tmp_path / "seed.json"; seed.write_text('{"events": []}', encoding="utf-8")
+    effective = tmp_path / "effective.json"
+    stale = tmp_path / "stale.json"; stale.write_text(json.dumps({"generated_at_utc": "2026-07-19T06:00:00Z", "events": []}), encoding="utf-8")
+    os.utime(stale, (now.timestamp(), now.timestamp()))
+    generated = tmp_path / "generated.json"; calls = []
+    def generate():
+        calls.append(1); generated.write_text(json.dumps({"generated_at_utc": "2026-07-20T11:00:00Z", "events": []}), encoding="utf-8"); return generated
+    monkeypatch.setattr(integrity, "SEED_REGISTRY", seed); monkeypatch.setattr(integrity, "EFFECTIVE_REGISTRY", effective)
+    monkeypatch.setattr(integrity, "_schedule_files", lambda: [stale]); monkeypatch.setattr(integrity, "_generate_schedule_artifact", generate)
+    _loaded, diagnostics = integrity.load_effective_registry(now)
+    assert calls == [1] and diagnostics["refresh_status"] == "refresh_generated_new_artifact"
+    assert diagnostics["artifact_generated_at_utc"] == "2026-07-20T11:00:00+00:00"
+
+
+def test_fresh_old_mtime_and_newest_metadata_are_selected(tmp_path, monkeypatch):
+    import json, os
+    from modules import simone_report_integrity as integrity
+    now = datetime(2026, 7, 20, 12, tzinfo=timezone.utc)
+    seed = tmp_path / "seed.json"; seed.write_text('{"events": []}', encoding="utf-8")
+    older = tmp_path / "older.json"; newer = tmp_path / "newer.json"
+    older.write_text(json.dumps({"generated_at_utc": "2026-07-20T08:00:00Z", "events": [{"promotion": "WWE", "event_name": "Older", "dates": ["2026-08-01"]}]}), encoding="utf-8")
+    newer.write_text(json.dumps({"generated_at_utc": "2026-07-20T10:00:00Z", "events": [{"promotion": "AEW", "event_name": "Newest", "dates": ["2026-08-02"]}]}), encoding="utf-8")
+    os.utime(newer, (1, 1)); os.utime(older, (now.timestamp(), now.timestamp()))
+    monkeypatch.setattr(integrity, "SEED_REGISTRY", seed); monkeypatch.setattr(integrity, "EFFECTIVE_REGISTRY", tmp_path / "effective.json")
+    monkeypatch.setattr(integrity, "_schedule_files", lambda: [older, newer]); monkeypatch.setattr(integrity, "_generate_schedule_artifact", lambda: (_ for _ in ()).throw(AssertionError("must not generate")))
+    loaded, diagnostics = integrity.load_effective_registry(now)
+    assert loaded["events"][0]["event_name"] == "Newest"
+    assert diagnostics["artifact_generated_at_utc"] == "2026-07-20T10:00:00+00:00"
+
+
+def test_missing_and_malformed_artifact_metadata_force_regeneration(tmp_path, monkeypatch):
+    import json
+    from modules import simone_report_integrity as integrity
+    now = datetime(2026, 7, 20, 12, tzinfo=timezone.utc)
+    seed = tmp_path / "seed.json"; seed.write_text('{"events": []}', encoding="utf-8")
+    missing = tmp_path / "missing.json"; missing.write_text('{"events": []}', encoding="utf-8")
+    malformed = tmp_path / "malformed.json"; malformed.write_text('{"generated_at_utc":"nope","events":[]}', encoding="utf-8")
+    generated = tmp_path / "generated.json"; calls = []
+    def generate():
+        calls.append(1); generated.write_text(json.dumps({"generated_at_utc": "2026-07-20T11:00:00Z", "events": []}), encoding="utf-8"); return generated
+    monkeypatch.setattr(integrity, "SEED_REGISTRY", seed); monkeypatch.setattr(integrity, "EFFECTIVE_REGISTRY", tmp_path / "effective.json")
+    monkeypatch.setattr(integrity, "_schedule_files", lambda: [missing, malformed]); monkeypatch.setattr(integrity, "_generate_schedule_artifact", generate)
+    integrity.load_effective_registry(now)
+    assert calls == [1]
 
 
 def test_incomplete_page_stops_before_gemini_and_wordpress(tmp_path, monkeypatch):
@@ -218,3 +268,36 @@ def test_collision_and_ple_are_attempted_independently(tmp_path, monkeypatch):
     assert attempted == ["collision", "ple"]
     assert {x["status"] for x in result["results"]} == {"publish_error", "published"}
     assert result["handoff"]["multiple_reports_processed"] == 2
+
+
+def test_history_known_reports_skip_scrape_preflight_and_preserve_published_pending(tmp_path, monkeypatch):
+    import json
+    from agents import simone_publisher_v93_18 as publisher
+    history = tmp_path / "history.json"; history.write_text(json.dumps({"known": {"wp_post_id": 7, "wp_link": "https://wp.test/7"}, "known2": {"wp_post_id": 8, "wp_link": "https://wp.test/8"}}), encoding="utf-8")
+    pending = tmp_path / "pending.json"; pending.write_text(json.dumps({"reports": [{"report_key": "known", "status": "published"}, {"report_key": "known2", "status": "waiting_source_completion"}]}), encoding="utf-8")
+    monkeypatch.setattr(publisher, "SIMONE_REPORT_HISTORY_FILE", history); monkeypatch.setattr(publisher, "PENDING_REPORTS", pending)
+    monkeypatch.setattr(publisher, "ARTIFACT_SIMONE_PUBLISH_FILE", tmp_path / "artifact.json"); monkeypatch.setattr(publisher, "SIMONE_REPORT_STATUS_FILE", tmp_path / "status.json")
+    monkeypatch.setattr(publisher, "scrape_article", lambda _url: (_ for _ in ()).throw(AssertionError("no scrape")))
+    monkeypatch.setattr(publisher, "jarvis_wp_preflight", lambda: (_ for _ in ()).throw(AssertionError("no preflight")))
+    result = publisher.run_simone_report_publisher({"ready_reports": [{"report_key": "known", "source_url": "broken"}, {"report_key": "known2", "source_url": "broken"}]})
+    rows = {row["report_key"]: row for row in json.loads(pending.read_text())["reports"]}
+    assert result["handoff"]["already_published"] == 2 and all(x["status"] == "already_published" for x in result["results"])
+    assert rows["known"]["status"] == "published" and rows["known2"]["status"] == "already_published"
+
+
+def test_history_reports_do_not_consume_cap_and_mixed_incomplete_is_preserved(tmp_path, monkeypatch):
+    import json
+    from agents import simone_publisher_v93_18 as publisher
+    history_data = {f"old{i}": {"wp_post_id": i, "wp_link": f"https://wp.test/{i}"} for i in range(4)}
+    history = tmp_path / "history.json"; history.write_text(json.dumps(history_data), encoding="utf-8")
+    monkeypatch.setattr(publisher, "SIMONE_REPORT_HISTORY_FILE", history); monkeypatch.setattr(publisher, "PENDING_REPORTS", tmp_path / "pending.json")
+    monkeypatch.setattr(publisher, "ARTIFACT_SIMONE_PUBLISH_FILE", tmp_path / "artifact.json"); monkeypatch.setattr(publisher, "SIMONE_REPORT_STATUS_FILE", tmp_path / "status.json")
+    monkeypatch.setattr(publisher, "MAX_REPORTS_PER_RUN", 1)
+    scrape_calls = []
+    def scrape(url): scrape_calls.append(url); return ([{"text": "Tonight's scheduled card only."}], "", None)
+    monkeypatch.setattr(publisher, "scrape_article", scrape); monkeypatch.setattr(publisher, "jarvis_wp_preflight", lambda: (_ for _ in ()).throw(AssertionError("incomplete skips preflight")))
+    reports = [{"report_key": key, "source_url": "broken"} for key in history_data] + [{"report_key": "new", "source_url": "https://x.test/new"}]
+    result = publisher.run_simone_report_publisher({"ready_reports": reports})
+    assert scrape_calls == ["https://x.test/new"] and result["handoff"]["deferred_by_safety_cap"] == 0
+    assert result["handoff"]["already_published"] == 4
+    assert {x["status"] for x in result["results"]} == {"already_published", "waiting_source_completion"}
