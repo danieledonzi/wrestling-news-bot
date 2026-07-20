@@ -183,7 +183,20 @@ def infer_special_event_identity(job: dict[str, Any], show_date: str) -> dict[st
             }))
     if not matches:
         return None
-    matches.sort(key=lambda item: item[:3], reverse=True)
+    if any(item[0] for item in matches):
+        matches.sort(key=lambda item: item[:3], reverse=True)
+    else:
+        event_date_ranks: dict[str, set[int]] = {}
+        for _, date_rank, _, identity in matches:
+            event_date_ranks.setdefault(identity["event_key"], set()).add(date_rank)
+
+        def generic_match_rank(item: tuple[int, int, int, dict[str, str]]) -> tuple[int, int]:
+            _, date_rank, event_alias_length, identity = item
+            date_ranks = event_date_ranks[identity["event_key"]]
+            date_preference = 1 - date_rank if date_ranks == {0, 1} else date_rank
+            return event_alias_length, date_preference
+
+        matches.sort(key=generic_match_rank, reverse=True)
     return matches[0][3]
 
 

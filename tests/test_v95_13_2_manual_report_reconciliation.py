@@ -26,6 +26,33 @@ def _snme_registry(monkeypatch):
     )
 
 
+def _summerslam_registry(monkeypatch, nights=None):
+    configured_nights = nights or [
+        {
+            "night_key": "wwe_summerslam_2026_night_1",
+            "date_local": "2026-08-01",
+            "aliases": ["SummerSlam Night 1"],
+        },
+        {
+            "night_key": "wwe_summerslam_2026_night_2",
+            "date_local": "2026-08-02",
+            "aliases": ["SummerSlam Night 2"],
+        },
+    ]
+    monkeypatch.setattr(
+        registry_module,
+        "load_special_events",
+        lambda: [
+            {
+                "key": "wwe_summerslam_2026",
+                "event_name": "SummerSlam",
+                "aliases": ["WWE SummerSlam"],
+                "nights": configured_nights,
+            }
+        ],
+    )
+
+
 def test_manual_special_event_default_title_preserves_dynamic_identity(monkeypatch):
     _snme_registry(monkeypatch)
     source_title = "WWE Saturday Night's Main Event Results 7/18 - Women's Tag Team Title On The Line & More - Wrestling Inc."
@@ -106,29 +133,7 @@ def test_manual_special_event_does_not_match_more_than_one_day_later(monkeypatch
 
 
 def test_explicit_night_alias_wins_over_exact_date_for_consecutive_nights(monkeypatch):
-    monkeypatch.setattr(
-        registry_module,
-        "load_special_events",
-        lambda: [
-            {
-                "key": "wwe_summerslam_2026",
-                "event_name": "SummerSlam",
-                "aliases": ["WWE SummerSlam"],
-                "nights": [
-                    {
-                        "night_key": "wwe_summerslam_2026_night_1",
-                        "date_local": "2026-08-01",
-                        "aliases": ["SummerSlam Night 1"],
-                    },
-                    {
-                        "night_key": "wwe_summerslam_2026_night_2",
-                        "date_local": "2026-08-02",
-                        "aliases": ["SummerSlam Night 2"],
-                    },
-                ],
-            }
-        ],
-    )
+    _summerslam_registry(monkeypatch)
     entry = build_registry_entry(
         {
             "kind": "report",
@@ -146,6 +151,60 @@ def test_explicit_night_alias_wins_over_exact_date_for_consecutive_nights(monkey
     assert entry["report_id"] == "wwe_summerslam_2026_night_1"
     assert entry["show_date"] == "2026-08-01"
     assert entry["report_key"] == "special_event_wwe_summerslam_2026_night_1_2026_08_01"
+
+
+@pytest.mark.parametrize(
+    ("title", "job_date", "expected_night", "expected_date"),
+    [
+        ("SummerSlam results", "2026-08-02", "wwe_summerslam_2026_night_1", "2026-08-01"),
+        ("SummerSlam Night 2 results", "2026-08-02", "wwe_summerslam_2026_night_2", "2026-08-02"),
+        ("SummerSlam results", "2026-08-03", "wwe_summerslam_2026_night_2", "2026-08-02"),
+    ],
+)
+def test_consecutive_night_selection(monkeypatch, title, job_date, expected_night, expected_date):
+    _summerslam_registry(monkeypatch)
+    entry = build_registry_entry(
+        {
+            "kind": "report",
+            "title": title,
+            "source_title": title,
+            "source_url": "https://example.test/summerslam-results",
+            "date": job_date,
+        },
+        wp_post_id=203,
+    )
+
+    assert entry is not None
+    assert entry["night_key"] == expected_night
+    assert entry["show_date"] == expected_date
+    assert entry["report_key"] == f"special_event_{expected_night}_{expected_date.replace('-', '_')}"
+
+
+def test_generic_report_selects_exact_date_when_it_is_the_only_night(monkeypatch):
+    _summerslam_registry(
+        monkeypatch,
+        nights=[
+            {
+                "night_key": "wwe_summerslam_2026_night_2",
+                "date_local": "2026-08-02",
+                "aliases": ["SummerSlam Night 2"],
+            }
+        ],
+    )
+    entry = build_registry_entry(
+        {
+            "kind": "report",
+            "title": "SummerSlam results",
+            "source_title": "SummerSlam results",
+            "source_url": "https://example.test/summerslam-results",
+            "date": "2026-08-02",
+        },
+        wp_post_id=204,
+    )
+
+    assert entry is not None
+    assert entry["night_key"] == "wwe_summerslam_2026_night_2"
+    assert entry["show_date"] == "2026-08-02"
 
 
 def test_unknown_same_date_special_events_get_distinct_keys(monkeypatch):
