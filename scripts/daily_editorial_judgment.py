@@ -70,6 +70,13 @@ def _latest_report_artifact(pattern: str) -> Path | None:
 
 
 def resolve_artifact_paths(paths: dict[str, Path] | None = None) -> dict[str, Path | None]:
+    if paths is not None:
+        # An explicit mapping is a complete diagnostic input manifest.  In
+        # particular, do not let a partial test manifest fall through to VPS or
+        # repository discovery for the names it omits.
+        resolved_explicit: dict[str, Path | None] = {name: None for name in DEFAULT_ARTIFACT_CANDIDATES}
+        resolved_explicit.update(paths)
+        return resolved_explicit
     resolved: dict[str, Path | None] = {}
     for name, candidates in DEFAULT_ARTIFACT_CANDIDATES.items():
         found: Path | None = None
@@ -79,8 +86,6 @@ def resolve_artifact_paths(paths: dict[str, Path] | None = None) -> dict[str, Pa
                 found = path
                 break
         resolved[name] = found
-    if paths:
-        resolved.update(paths)
     return resolved
 
 
@@ -151,6 +156,10 @@ def load_inputs(paths: dict[str, Path] | None = None, *, hours: int = 24, now: d
         used = [u for u in used if "master_log" not in u] + [_rel(tail, "master_log")]
     data["__artifact_status__"] = {"used": used, "missing": missing}
     data["__window__"] = {"hours": hours, "now": (now or datetime.now(timezone.utc)).isoformat()}
+    data["__input_provenance__"] = {
+        "discovery_mode": "default" if paths is None else "explicit",
+        "master_log_path": str(resolved["master_log"]) if resolved.get("master_log") is not None else None,
+    }
     return data
 
 
@@ -734,17 +743,26 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
     parsed_md = parse_daily_markdown_inputs(data)
     observability = None
     window = data.get("__window__", {}) if isinstance(data.get("__window__"), dict) else {}
+    provenance = data.get("__input_provenance__", {}) if isinstance(data.get("__input_provenance__"), dict) else {}
     until_dt = parse_utc_datetime(window.get("now")) or generated_at
     try:
         hours_for_snapshot = int(window.get("hours") or 24)
     except Exception:
         hours_for_snapshot = 24
-    try:
-        observability = build_observability_snapshot(until_dt - timedelta(hours=hours_for_snapshot), until_dt, ROOT)
-    except Exception as exc:
-        schema_warnings.append(f"observability_snapshot_unavailable:{exc}")
-    has_master_artifact_input = any("master_log" in str(item) for item in used)
-    snapshot_authoritative = bool(has_master_artifact_input and observability and observability.get("authority_available") is True)
+    snapshot_root = None
+    if provenance.get("discovery_mode") == "default":
+        snapshot_root = ROOT
+    elif provenance.get("discovery_mode") == "explicit" and provenance.get("master_log_path"):
+        master_path = Path(str(provenance["master_log_path"]))
+        authoritative_master_path = ROOT / "state/newsroom/master_log.jsonl"
+        if master_path.is_file() and master_path.resolve() == authoritative_master_path.resolve():
+            snapshot_root = ROOT
+    if snapshot_root is not None:
+        try:
+            observability = build_observability_snapshot(until_dt - timedelta(hours=hours_for_snapshot), until_dt, snapshot_root)
+        except Exception as exc:
+            schema_warnings.append(f"observability_snapshot_unavailable:{exc}")
+    snapshot_authoritative = bool(snapshot_root is not None and observability and observability.get("authority_available") is True)
     menzo = collect_menzo(data)
     if not menzo and isinstance(parsed_md.get("menzo"), dict):
         menzo = parsed_md["menzo"]
@@ -816,9 +834,6 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
             warnings = snap_events.get("warning_count")
         if snap_unique.get("final_blocked") is not None:
             blockers = snap_unique.get("final_blocked")
-    elif observability and sum((observability.get("alfred", {}).get("events", {}) or {}).values()):
-        warnings = observability.get("alfred", {}).get("events", {}).get("warning_count", warnings)
-        blockers = observability.get("alfred", {}).get("unique", {}).get("final_blocked", blockers)
     gemini_called = _gemini_35_calls(data)
     if snapshot_authoritative:
         snap_pub = observability.get("publication", {})

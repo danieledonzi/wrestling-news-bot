@@ -75,6 +75,122 @@ def test_missing_artifacts_are_non_fatal(tmp_path: Path) -> None:
     assert "Nessun forte candidato" in text
 
 
+def test_explicit_master_log_is_an_isolated_artifact_manifest(tmp_path: Path, monkeypatch) -> None:
+    master = tmp_path / "master.jsonl"
+    master.write_text("", encoding="utf-8")
+
+    def reject_default_report_discovery():
+        raise AssertionError("explicit manifests must not inspect default report directories")
+
+    monkeypatch.setattr("scripts.daily_editorial_judgment._report_input_dirs", reject_default_report_discovery)
+    data = load_inputs({"master_log": master})
+
+    assert data["__artifact_status__"]["used"] == [str(master)]
+    assert set(data["__artifact_status__"]["missing"]) == {
+        "operational_report",
+        "menzo_latest",
+        "editorial_audit",
+        "story_cluster_audit",
+        "gemini_ledger",
+    }
+    assert all(data[name] == {} for name in data["__artifact_status__"]["missing"])
+
+
+def test_inline_alfred_counts_never_read_or_accept_root_snapshot(monkeypatch) -> None:
+    calls = []
+
+    def sentinel_snapshot(*args):
+        calls.append(args)
+        return {
+            "authority_available": True,
+            "alfred": {"events": {"warning_count": 999}, "unique": {"final_blocked": 888}},
+        }
+
+    monkeypatch.setattr("scripts.daily_editorial_judgment.build_observability_snapshot", sentinel_snapshot)
+    report = build_report({
+        "operational_report": {
+            "_format": "markdown",
+            "_markdown": "- Alfred warnings: 2\n- Alfred blockers: 1\n",
+        }
+    })
+
+    assert calls == []
+    assert (report["warnings"], report["blockers"]) == (2, 1)
+
+
+def test_missing_explicit_master_inside_root_cannot_authorize_snapshot(tmp_path: Path, monkeypatch) -> None:
+    missing_master = tmp_path / "state/newsroom/master_log.jsonl"
+    operational = write_json(tmp_path / "operational.json", {
+        "_markdown": (
+            "- Articoli/news pubblicati da Publisher: 3\n"
+            "- Report pubblicati da Simone: 1\n"
+            "- Alfred warnings: 2\n"
+            "- Alfred blockers: 1\n"
+        )
+    })
+
+    def reject_snapshot(*args):
+        raise AssertionError("a missing explicit master log must not authorize ROOT")
+
+    monkeypatch.setattr("scripts.daily_editorial_judgment.ROOT", tmp_path)
+    monkeypatch.setattr("scripts.daily_editorial_judgment.build_observability_snapshot", reject_snapshot)
+    report = build_report(load_inputs({"master_log": missing_master, "operational_report": operational}))
+
+    assert report["observability_snapshot"] is None
+    assert (report["news_published_count"], report["reports_published_count"]) == (3, 1)
+    assert (report["warnings"], report["blockers"]) == (2, 1)
+
+
+def test_existing_explicit_authoritative_root_master_permits_snapshot(tmp_path: Path, monkeypatch) -> None:
+    master = tmp_path / "state/newsroom/master_log.jsonl"
+    master.parent.mkdir(parents=True)
+    master.write_text("", encoding="utf-8")
+    calls = []
+
+    def snapshot(*args):
+        calls.append(args)
+        return {"authority_available": False}
+
+    monkeypatch.setattr("scripts.daily_editorial_judgment.ROOT", tmp_path)
+    monkeypatch.setattr("scripts.daily_editorial_judgment.build_observability_snapshot", snapshot)
+    report = build_report(load_inputs({"master_log": master}))
+
+    assert len(calls) == 1
+    assert calls[0][2] == tmp_path
+    assert report["observability_snapshot"] == {"authority_available": False}
+
+
+def test_explicit_root_tail_cannot_authorize_snapshot_or_read_primary(tmp_path: Path, monkeypatch) -> None:
+    now = datetime(2026, 7, 10, 12, tzinfo=timezone.utc)
+    primary = tmp_path / "state/newsroom/master_log.jsonl"
+    tail = tmp_path / "artifacts/newsroom/master_log_tail.jsonl"
+    primary.parent.mkdir(parents=True)
+    tail.parent.mkdir(parents=True)
+    primary.write_text(json.dumps({
+        "recorded_at": now.isoformat(),
+        "publisher": {"published": [{"title": "Primary only", "source_url": "https://example.test/primary"}]},
+        "alfred": {"handoff": {"warnings": 99, "blockers": 98}},
+    }) + "\n", encoding="utf-8")
+    tail.write_text(json.dumps({
+        "recorded_at": now.isoformat(),
+        "publisher": {"published": [{"title": "Tail only", "source_url": "https://example.test/tail"}]},
+        "alfred": {"handoff": {"warnings": 2, "blockers": 1}},
+    }) + "\n", encoding="utf-8")
+
+    def reject_snapshot(*args):
+        raise AssertionError("an explicit tail must not authorize a ROOT snapshot")
+
+    monkeypatch.setattr("scripts.daily_editorial_judgment.ROOT", tmp_path)
+    monkeypatch.setattr("scripts.daily_editorial_judgment.build_observability_snapshot", reject_snapshot)
+    report = build_report(load_inputs({"master_log": tail}, hours=24, now=now))
+
+    assert report["observability_snapshot"] is None
+    assert report["news_published_count"] == 1
+    assert [item["title"] for item in report["news_records"]] == ["Tail only"]
+    assert "Primary only" not in str(report["news_records"])
+    assert (report["warnings"], report["blockers"]) == (2, 1)
+
+
 def test_top_3_discarded_candidates_are_selected_from_skipped_pending_high_score_items() -> None:
     menzo = {"skipped": [{"title": "Low", "url": "l", "score": 10}], "pending": [
         {"title": "AEW injury", "url": "a", "score": 70, "article_type": "hard_news"},
