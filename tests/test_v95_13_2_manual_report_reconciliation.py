@@ -1,7 +1,7 @@
 import pytest
 
 from agents import report_registry_v93_22 as registry_module
-from agents.report_registry_v93_22 import build_registry_entry
+from agents.report_registry_v93_22 import build_registry_entry, infer_show_date_with_provenance
 from agents.simone import report_already_published
 
 
@@ -31,12 +31,14 @@ def _summerslam_registry(monkeypatch, nights=None):
         {
             "night_key": "wwe_summerslam_2026_night_1",
             "date_local": "2026-08-01",
-            "aliases": ["SummerSlam Night 1"],
+            "label": "Night 1",
+            "aliases": ["SummerSlam results", "WWE SummerSlam results"],
         },
         {
             "night_key": "wwe_summerslam_2026_night_2",
             "date_local": "2026-08-02",
-            "aliases": ["SummerSlam Night 2"],
+            "label": "Night 2",
+            "aliases": ["SummerSlam results", "WWE SummerSlam results"],
         },
     ]
     monkeypatch.setattr(
@@ -158,6 +160,7 @@ def test_explicit_night_alias_wins_over_exact_date_for_consecutive_nights(monkey
     [
         ("SummerSlam results", "2026-08-02", "wwe_summerslam_2026_night_1", "2026-08-01"),
         ("SummerSlam Night 2 results", "2026-08-02", "wwe_summerslam_2026_night_2", "2026-08-02"),
+        ("WWE SummerSlam Night 1 results", "2026-08-02", "wwe_summerslam_2026_night_1", "2026-08-01"),
         ("SummerSlam results", "2026-08-03", "wwe_summerslam_2026_night_2", "2026-08-02"),
     ],
 )
@@ -178,6 +181,86 @@ def test_consecutive_night_selection(monkeypatch, title, job_date, expected_nigh
     assert entry["night_key"] == expected_night
     assert entry["show_date"] == expected_date
     assert entry["report_key"] == f"special_event_{expected_night}_{expected_date.replace('-', '_')}"
+
+
+@pytest.mark.parametrize("source_url", [
+    "https://example.test/2026-08-03/summerslam-results/",
+    "https://example.test/summerslam-results/",
+])
+def test_explicit_title_date_is_authoritative_for_generic_multi_night_report(
+    monkeypatch, source_url
+):
+    _summerslam_registry(monkeypatch)
+    entry = build_registry_entry(
+        {
+            "kind": "report",
+            "title": "SummerSlam results",
+            "source_title": "SummerSlam results August 2, 2026",
+            "source_url": source_url,
+            "date": "2026-08-03",
+        },
+        wp_post_id=205,
+    )
+
+    assert entry is not None
+    assert entry["night_key"] == "wwe_summerslam_2026_night_2"
+    assert entry["show_date"] == "2026-08-02"
+
+
+def test_source_url_date_uses_publication_timing_for_generic_multi_night_report(monkeypatch):
+    _summerslam_registry(monkeypatch)
+    entry = build_registry_entry(
+        {
+            "kind": "report",
+            "title": "SummerSlam results",
+            "source_title": "SummerSlam results",
+            "source_url": "https://example.test/2026-08-02/summerslam-results/",
+            "date": "2026-08-02",
+        },
+        wp_post_id=206,
+    )
+
+    assert entry is not None
+    assert entry["night_key"] == "wwe_summerslam_2026_night_1"
+    assert entry["show_date"] == "2026-08-01"
+
+
+@pytest.mark.parametrize(
+    ("source_title", "title"),
+    [
+        ("SummerSlam Results 8/2/2026", "SummerSlam results"),
+        ("SummerSlam results", "Risultati SummerSlam 2/8/2026"),
+    ],
+)
+def test_ambiguous_numeric_dates_follow_title_source_convention(
+    monkeypatch, source_title, title
+):
+    _summerslam_registry(monkeypatch)
+    entry = build_registry_entry(
+        {
+            "kind": "report",
+            "title": title,
+            "source_title": source_title,
+            "source_url": "https://example.test/2026-08-02/summerslam-results/",
+            "date": "2026-08-03",
+        },
+        wp_post_id=207,
+    )
+
+    assert entry is not None
+    assert entry["night_key"] == "wwe_summerslam_2026_night_2"
+    assert entry["show_date"] == "2026-08-02"
+
+
+@pytest.mark.parametrize(
+    ("job", "expected"),
+    [
+        ({"source_title": "SNME Results 7/18/2026"}, "2026-07-18"),
+        ({"title": "Risultati SNME 18/7/2026"}, "2026-07-18"),
+    ],
+)
+def test_unambiguous_numeric_dates_parse_for_source_and_internal_titles(job, expected):
+    assert infer_show_date_with_provenance(job) == (expected, True)
 
 
 def test_generic_report_selects_exact_date_when_it_is_the_only_night(monkeypatch):

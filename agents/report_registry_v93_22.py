@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+from collections import Counter
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
@@ -17,7 +18,7 @@ REPORT_REGISTRY_FILE = NEWSROOM_STATE_DIR / "report_publication_registry.json"
 SPECIAL_EVENTS_CONFIG = CONFIG_DIR / "special_events.json"
 EFFECTIVE_SPECIAL_EVENTS_FILE = NEWSROOM_STATE_DIR / "special_events_effective.json"
 
-VERSION = "v95_13_3_special_event_date_reconciliation"
+VERSION = "v95_13_4_effective_night_alias_reconciliation"
 
 SHOW_PATTERNS = [
     ("wwe_raw", re.compile(r"\b(wwe\s+raw|raw)\b", re.I), ["Editoriali", "WWE"]),
@@ -84,7 +85,7 @@ def infer_report_id(job: dict[str, Any]) -> tuple[str, list[str]]:
     return "", []
 
 
-def parse_date_candidate(value: str) -> datetime | None:
+def parse_date_candidate(value: str, *, ambiguous_month_first: bool = False) -> datetime | None:
     text = value or ""
     match = DATE_PATTERNS[0].search(text)
     if match:
@@ -95,7 +96,17 @@ def parse_date_candidate(value: str) -> datetime | None:
     match = DATE_PATTERNS[1].search(text)
     if match:
         try:
-            return datetime(int(match.group(3)), int(match.group(2)), int(match.group(1)))
+            first = int(match.group(1))
+            second = int(match.group(2))
+            if first > 12:
+                day, month = first, second
+            elif second > 12:
+                month, day = first, second
+            elif ambiguous_month_first:
+                month, day = first, second
+            else:
+                day, month = first, second
+            return datetime(int(match.group(3)), month, day)
         except Exception:
             pass
     for pattern in DATE_PATTERNS[2:]:
@@ -112,19 +123,31 @@ def parse_date_candidate(value: str) -> datetime | None:
     return None
 
 
-def infer_show_date(job: dict[str, Any], created_at: str | None = None) -> str:
-    for key in ["source_url", "source_title", "title", "report_key"]:
+def infer_show_date_with_provenance(
+    job: dict[str, Any], created_at: str | None = None
+) -> tuple[str, bool]:
+    for key in ["source_title", "title"]:
+        parsed = parse_date_candidate(
+            str(job.get(key) or ""), ambiguous_month_first=key == "source_title"
+        )
+        if parsed:
+            return parsed.date().isoformat(), True
+    for key in ["source_url", "report_key"]:
         parsed = parse_date_candidate(str(job.get(key) or ""))
         if parsed:
-            return parsed.date().isoformat()
+            return parsed.date().isoformat(), False
     parsed = parse_date_candidate(str(job.get("date") or ""))
     if parsed:
-        return parsed.date().isoformat()
+        return parsed.date().isoformat(), False
     raw_created = created_at or str(job.get("created_at") or "")
     try:
-        return datetime.fromisoformat(raw_created.replace("Z", "+00:00")).date().isoformat()
+        return datetime.fromisoformat(raw_created.replace("Z", "+00:00")).date().isoformat(), False
     except Exception:
-        return datetime.utcnow().date().isoformat()
+        return datetime.utcnow().date().isoformat(), False
+
+
+def infer_show_date(job: dict[str, Any], created_at: str | None = None) -> str:
+    return infer_show_date_with_provenance(job, created_at)[0]
 
 
 def load_special_events() -> list[dict[str, Any]]:
@@ -136,7 +159,9 @@ def load_special_events() -> list[dict[str, Any]]:
     return []
 
 
-def infer_special_event_identity(job: dict[str, Any], show_date: str) -> dict[str, str] | None:
+def infer_special_event_identity(
+    job: dict[str, Any], show_date: str, *, explicit_source_date: bool = False
+) -> dict[str, str] | None:
     blob = normalize(blob_from_job(job))
     if not blob:
         return None
@@ -159,7 +184,28 @@ def infer_special_event_identity(job: dict[str, Any], show_date: str) -> dict[st
         if not event_key or not event_hits:
             continue
         nights = event.get("nights", []) if isinstance(event.get("nights"), list) else []
+        normalized_night_aliases: list[set[str]] = []
         for night in nights:
+            if not isinstance(night, dict):
+                normalized_night_aliases.append(set())
+                continue
+            raw_night_aliases = night.get("aliases", [])
+            night_aliases = set()
+            if isinstance(raw_night_aliases, list):
+                night_aliases.update(normalize(alias) for alias in raw_night_aliases if normalize(alias))
+            label = str(night.get("label") or "").strip()
+            if label:
+                night_aliases.update(
+                    normalize(f"{event_alias} {label}")
+                    for event_alias in aliases
+                    if normalize(f"{event_alias} {label}")
+                )
+            normalized_night_aliases.append(night_aliases)
+        night_alias_counts = Counter(
+            alias for night_aliases in normalized_night_aliases for alias in night_aliases
+        )
+
+        for night, night_aliases in zip(nights, normalized_night_aliases):
             if not isinstance(night, dict):
                 continue
             night_date = str(night.get("date_local") or "").strip()
@@ -168,11 +214,8 @@ def infer_special_event_identity(job: dict[str, Any], show_date: str) -> dict[st
             night_key = str(night.get("night_key") or "").strip()
             if not night_key:
                 continue
-            night_aliases: list[str] = []
-            if isinstance(night.get("aliases"), list):
-                night_aliases.extend(str(x) for x in night["aliases"] if x)
-            normalized_aliases = [normalize(alias) for alias in night_aliases if normalize(alias)]
-            hits = [alias for alias in normalized_aliases if alias in blob]
+            unique_aliases = [alias for alias in night_aliases if night_alias_counts[alias] == 1]
+            hits = [alias for alias in unique_aliases if alias in blob]
             matches.append((max((len(alias) for alias in hits), default=0),
                             accepted_dates[night_date], max(len(alias) for alias in event_hits), {
                 "event_key": event_key,
@@ -193,7 +236,8 @@ def infer_special_event_identity(job: dict[str, Any], show_date: str) -> dict[st
         def generic_match_rank(item: tuple[int, int, int, dict[str, str]]) -> tuple[int, int]:
             _, date_rank, event_alias_length, identity = item
             date_ranks = event_date_ranks[identity["event_key"]]
-            date_preference = 1 - date_rank if date_ranks == {0, 1} else date_rank
+            prefer_preceding_date = date_ranks == {0, 1} and not explicit_source_date
+            date_preference = 1 - date_rank if prefer_preceding_date else date_rank
             return event_alias_length, date_preference
 
         matches.sort(key=generic_match_rank, reverse=True)
@@ -216,10 +260,12 @@ def build_registry_entry(job: dict[str, Any], *, wp_post_id: Any = None, link: s
     report_id, default_categories = infer_report_id(job)
     if not report_id:
         return None
-    show_date = infer_show_date(job, created_at)
+    show_date, explicit_source_date = infer_show_date_with_provenance(job, created_at)
     identity: dict[str, str] = {}
     if report_id == "special_event_manual":
-        identity = infer_special_event_identity(job, show_date) or fallback_special_event_identity(job, show_date)
+        identity = infer_special_event_identity(
+            job, show_date, explicit_source_date=explicit_source_date
+        ) or fallback_special_event_identity(job, show_date)
         show_date = identity.get("show_date", show_date)
         report_id = identity["report_id"]
         report_key = identity["report_key"]
