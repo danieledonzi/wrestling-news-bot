@@ -212,6 +212,36 @@ def test_vps_reports_directory_is_preferred_over_repo_reports(tmp_path: Path, mo
     assert data["story_cluster_audit"]["counts"]["story_reviews"] == 7
 
 
+def test_isolated_root_does_not_read_default_external_reports(tmp_path: Path, monkeypatch) -> None:
+    import scripts.daily_editorial_judgment as dej
+
+    repo = tmp_path / "repo"
+    default_external = tmp_path / "default_external"
+    (repo / "reports").mkdir(parents=True)
+    default_external.mkdir()
+    write_json(repo / "reports/story_cluster_audit_v94_7_1_fixture.json", {"counts": {"story_reviews": 3}})
+    write_json(default_external / "story_cluster_audit_v94_7_1_sentinel.json", {"counts": {"story_reviews": 999}})
+    (default_external / "owtv_operational_report_24h_sentinel.md").write_text("news published: 999", encoding="utf-8")
+    monkeypatch.setattr(dej, "ROOT", repo)
+    monkeypatch.setattr(dej, "DEFAULT_VPS_REPORTS_DIR", default_external)
+    monkeypatch.setattr(dej, "VPS_REPORTS_DIR", default_external)
+
+    data = dej.load_inputs()
+    payload = dej.structured_json(dej.build_report(data))
+
+    assert data["story_cluster_audit"]["counts"]["story_reviews"] == 3
+    assert payload["daily_numbers"]["news_published"] is None
+    assert "operational_report" in data["__artifact_status__"]["missing"]
+
+
+def test_normal_configuration_prefers_default_vps_reports_directory() -> None:
+    import scripts.daily_editorial_judgment as dej
+
+    assert dej.ROOT == dej.MODULE_ROOT
+    assert dej.VPS_REPORTS_DIR == dej.DEFAULT_VPS_REPORTS_DIR
+    assert dej._report_input_dirs() == [dej.DEFAULT_VPS_REPORTS_DIR, dej.ROOT / "reports"]
+
+
 def test_repo_judgment_outputs_do_not_mask_external_inputs(tmp_path: Path, monkeypatch) -> None:
     import scripts.daily_editorial_judgment as dej
 

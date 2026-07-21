@@ -9,13 +9,16 @@ from pathlib import Path
 import sys
 from typing import Any
 
-ROOT = Path(__file__).resolve().parents[1]
+MODULE_ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_VPS_REPORTS_DIR = Path("/opt/owtv/reports")
+
+ROOT = MODULE_ROOT
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from scripts.observability_snapshot import build_snapshot as build_observability_snapshot, parse_utc_datetime
 REPORTS_DIR = ROOT / "reports"
-VPS_REPORTS_DIR = Path("/opt/owtv/reports")
+VPS_REPORTS_DIR = DEFAULT_VPS_REPORTS_DIR
 STATE_REPORTS_DIR = ROOT / "state" / "reports"
 DEFAULT_ARTIFACT_CANDIDATES: dict[str, tuple[str, ...]] = {
     "operational_report": ("reports/owtv_operational_report_24h_*.md",),
@@ -46,7 +49,10 @@ def _latest_glob(pattern: str, *, base: Path | None = None) -> Path | None:
 def _report_input_dirs() -> list[Path]:
     # Prefer the VPS-level operational report directory; the repo reports directory
     # remains the default output location and a fallback input source for dev/test.
-    dirs = [VPS_REPORTS_DIR, ROOT / "reports"]
+    dirs = []
+    if ROOT == MODULE_ROOT or VPS_REPORTS_DIR != DEFAULT_VPS_REPORTS_DIR:
+        dirs.append(VPS_REPORTS_DIR)
+    dirs.append(ROOT / "reports")
     out: list[Path] = []
     for d in dirs:
         if d not in out:
