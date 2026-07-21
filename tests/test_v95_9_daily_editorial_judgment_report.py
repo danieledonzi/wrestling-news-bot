@@ -147,8 +147,8 @@ def test_existing_explicit_authoritative_root_master_permits_snapshot(tmp_path: 
     master.write_text("", encoding="utf-8")
     calls = []
 
-    def snapshot(*args):
-        calls.append(args)
+    def snapshot(*args, **kwargs):
+        calls.append((args, kwargs))
         return {"authority_available": False}
 
     monkeypatch.setattr("scripts.daily_editorial_judgment.ROOT", tmp_path)
@@ -156,7 +156,8 @@ def test_existing_explicit_authoritative_root_master_permits_snapshot(tmp_path: 
     report = build_report(load_inputs({"master_log": master}))
 
     assert len(calls) == 1
-    assert calls[0][2] == tmp_path
+    assert calls[0][0][2] == tmp_path
+    assert calls[0][1] == {"allow_tail_fallback": False}
     assert report["observability_snapshot"] == {"authority_available": False}
 
 
@@ -188,6 +189,44 @@ def test_explicit_root_tail_cannot_authorize_snapshot_or_read_primary(tmp_path: 
     assert report["news_published_count"] == 1
     assert [item["title"] for item in report["news_records"]] == ["Tail only"]
     assert "Primary only" not in str(report["news_records"])
+    assert (report["warnings"], report["blockers"]) == (2, 1)
+
+
+def test_explicit_malformed_primary_snapshot_cannot_fall_back_to_tail(tmp_path: Path, monkeypatch) -> None:
+    now = datetime(2026, 7, 10, 12, tzinfo=timezone.utc)
+    primary = tmp_path / "state/newsroom/master_log.jsonl"
+    tail = tmp_path / "artifacts/newsroom/master_log_tail.jsonl"
+    primary.parent.mkdir(parents=True)
+    tail.parent.mkdir(parents=True)
+    primary.write_text("{bad\n", encoding="utf-8")
+    tail.write_text(json.dumps({
+        "schema_version": "v93_19",
+        "recorded_at": now.isoformat(),
+        "run": {"run_id": "tail-sentinel", "started_at": now.isoformat(), "ended_at": now.isoformat()},
+        "publisher": {"published": [{"title": "Tail sentinel", "source_url": "https://example.test/tail-sentinel"}]},
+        "alfred": {"reviews": [{"source_url": "https://example.test/tail-sentinel", "status": "needs_revision"}]},
+    }) + "\n", encoding="utf-8")
+    operational = write_json(tmp_path / "operational.json", {
+        "_markdown": (
+            "- Articoli/news pubblicati da Publisher: 3\n"
+            "- Report pubblicati da Simone: 1\n"
+            "- Alfred warnings: 2\n"
+            "- Alfred blockers: 1\n"
+        )
+    })
+
+    monkeypatch.setattr("scripts.daily_editorial_judgment.ROOT", tmp_path)
+    report = build_report(load_inputs(
+        {"master_log": primary, "operational_report": operational}, hours=24, now=now
+    ))
+
+    snapshot = report["observability_snapshot"]
+    assert snapshot["authority_available"] is False
+    assert snapshot["artifact_sources"] == ["state/newsroom/master_log.jsonl"]
+    assert snapshot["diagnostics"]["tail_fallback_used"] is False
+    assert "Tail sentinel" not in str(snapshot["publication"]["records"])
+    assert snapshot["alfred"]["events"]["needs_revision_count"] == 0
+    assert (report["news_published_count"], report["reports_published_count"]) == (3, 1)
     assert (report["warnings"], report["blockers"]) == (2, 1)
 
 

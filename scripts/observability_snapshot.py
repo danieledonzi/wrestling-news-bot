@@ -204,7 +204,7 @@ def _is_production_shaped(row: dict[str, Any]) -> bool:
     return isinstance(row.get("run"), dict) or str(row.get("schema_version") or "").startswith("v93_19")
 
 
-def load_master_runs(root: Path = ROOT) -> tuple[list[dict[str, Any]], list[str], list[str], bool, dict[str, Any]]:
+def load_master_runs(root: Path = ROOT, *, allow_tail_fallback: bool = True) -> tuple[list[dict[str, Any]], list[str], list[str], bool, dict[str, Any]]:
     sources: list[str] = []
     warnings: list[str] = []
     primary = root / "state/newsroom/master_log.jsonl"
@@ -223,7 +223,7 @@ def load_master_runs(root: Path = ROOT) -> tuple[list[dict[str, Any]], list[str]
         if readable and (production_rows or (not primary_rows and malformed == 0)):
             rows = production_rows
             source_name = "primary"
-        elif tail.exists():
+        elif allow_tail_fallback and tail.exists():
             tail_rows, tail_ws, tail_readable, tail_malformed = load_jsonl_defensively(tail)
             warnings.extend(tail_ws)
             sources.append(str(tail.relative_to(root)))
@@ -235,7 +235,7 @@ def load_master_runs(root: Path = ROOT) -> tuple[list[dict[str, Any]], list[str]
         else:
             rows = []
             source_name = "primary_unusable"
-    elif tail.exists():
+    elif allow_tail_fallback and tail.exists():
         tail_rows, ws, readable, malformed = load_jsonl_defensively(tail)
         warnings.extend(ws)
         sources.append(str(tail.relative_to(root)))
@@ -500,8 +500,10 @@ def repository_diagnostics(root: Path = ROOT) -> dict[str, Any]:
     return {"expected_runtime_untracked_paths": expected, "actual_source_modifications": actual, "scheduler": {"systemd_timer": "separate_authority_if_configured", "cron_absence_is_anomaly": False}}
 
 
-def build_snapshot(since: datetime, until: datetime, root: Path = ROOT) -> dict[str, Any]:
-    runs, sources, warnings, authority_available, source_health = load_master_runs(root)
+def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow_tail_fallback: bool = True) -> dict[str, Any]:
+    runs, sources, warnings, authority_available, source_health = load_master_runs(
+        root, allow_tail_fallback=allow_tail_fallback
+    )
     in_window_runs = list(iter_master_runs_in_window(runs, since, until))
     pub = build_authoritative_publication_set(runs, since, until)
     funnel = build_editorial_funnel(runs, pub, since, until)

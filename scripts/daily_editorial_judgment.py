@@ -759,7 +759,12 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
             snapshot_root = ROOT
     if snapshot_root is not None:
         try:
-            observability = build_observability_snapshot(until_dt - timedelta(hours=hours_for_snapshot), until_dt, snapshot_root)
+            observability = build_observability_snapshot(
+                until_dt - timedelta(hours=hours_for_snapshot),
+                until_dt,
+                snapshot_root,
+                allow_tail_fallback=provenance.get("discovery_mode") == "default",
+            )
         except Exception as exc:
             schema_warnings.append(f"observability_snapshot_unavailable:{exc}")
     snapshot_authoritative = bool(snapshot_root is not None and observability and observability.get("authority_available") is True)
