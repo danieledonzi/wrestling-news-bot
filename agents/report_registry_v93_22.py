@@ -85,7 +85,7 @@ def infer_report_id(job: dict[str, Any]) -> tuple[str, list[str]]:
     return "", []
 
 
-def parse_date_candidate(value: str) -> datetime | None:
+def parse_date_candidate(value: str, *, ambiguous_month_first: bool = False) -> datetime | None:
     text = value or ""
     match = DATE_PATTERNS[0].search(text)
     if match:
@@ -96,7 +96,17 @@ def parse_date_candidate(value: str) -> datetime | None:
     match = DATE_PATTERNS[1].search(text)
     if match:
         try:
-            return datetime(int(match.group(3)), int(match.group(2)), int(match.group(1)))
+            first = int(match.group(1))
+            second = int(match.group(2))
+            if first > 12:
+                day, month = first, second
+            elif second > 12:
+                month, day = first, second
+            elif ambiguous_month_first:
+                month, day = first, second
+            else:
+                day, month = first, second
+            return datetime(int(match.group(3)), month, day)
         except Exception:
             pass
     for pattern in DATE_PATTERNS[2:]:
@@ -117,7 +127,9 @@ def infer_show_date_with_provenance(
     job: dict[str, Any], created_at: str | None = None
 ) -> tuple[str, bool]:
     for key in ["source_title", "title"]:
-        parsed = parse_date_candidate(str(job.get(key) or ""))
+        parsed = parse_date_candidate(
+            str(job.get(key) or ""), ambiguous_month_first=key == "source_title"
+        )
         if parsed:
             return parsed.date().isoformat(), True
     for key in ["source_url", "report_key"]:
