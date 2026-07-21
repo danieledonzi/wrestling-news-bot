@@ -408,6 +408,9 @@ def choose_report_candidate(candidates: list[dict[str, Any]], report: dict[str, 
     matches.sort(key=lambda c: (source_rank(str(c.get("source") or ""), report), candidate_published_score(c)))
     preferred = [c for c in matches if c.get("source") == report.get("preferred_source")]
     if preferred:
+        preferred_urls = {str(c.get("normalized_url") or c.get("url") or c.get("source_url") or "").rstrip("/") for c in preferred}
+        if len(preferred_urls) != 1:
+            return None, "ambiguous_preferred_candidates"
         return preferred[0], "preferred_source"
     fallback = [c for c in matches if c.get("source") == report.get("fallback_source")]
     if fallback:
