@@ -334,6 +334,30 @@ def test_completely_malformed_primary_uses_valid_tail_or_reports_unavailable(tmp
     assert snap2["authority_available"] is False
 
 
+def test_malformed_primary_can_disable_valid_tail_fallback(tmp_path):
+    primary = tmp_path / "state/newsroom/master_log.jsonl"
+    primary.parent.mkdir(parents=True)
+    primary.write_text("{bad\n", encoding="utf-8")
+    tail = tmp_path / "artifacts/newsroom/master_log_tail.jsonl"
+    tail.parent.mkdir(parents=True)
+    tail.write_text(json.dumps(master_row(
+        SINCE,
+        idx=1,
+        publisher_results=[{"source_url": "https://src/tail-sentinel", "status": "published"}],
+        alfred_reviews=[{"source_url": "https://src/tail-sentinel", "status": "needs_revision"}],
+    )) + "\n", encoding="utf-8")
+
+    snap = build_snapshot(SINCE, UNTIL, tmp_path, allow_tail_fallback=False)
+
+    assert snap["authority_available"] is False
+    assert snap["artifact_sources"] == ["state/newsroom/master_log.jsonl"]
+    assert snap["publication"]["news_unique"] == 0
+    assert snap["publication"]["records"] == []
+    assert snap["alfred"]["events"]["needs_revision_count"] == 0
+    assert snap["diagnostics"]["master_log_source"] == "primary_unusable"
+    assert snap["diagnostics"]["tail_fallback_used"] is False
+
+
 def test_valid_empty_primary_is_authoritative_empty(tmp_path):
     primary = tmp_path / "state/newsroom/master_log.jsonl"
     primary.parent.mkdir(parents=True)
