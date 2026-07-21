@@ -118,6 +118,20 @@ def test_collision_evening_identity_uses_saturday_show_date():
     assert (key, show_date, publish_date) == ("aew_collision_2026_07_18", "2026-07-18", "2026-07-19")
 
 
+def test_raw_source_date_is_event_date_and_ambiguous_candidates_are_rejected():
+    import json
+    import agents.simone as simone
+    raw = next(row for row in json.loads((Path(__file__).parents[1] / "config" / "reports_v92.json").read_text())["reports"] if row["id"] == "wwe_raw")
+    key, show_date, _publish_date = simone.discovery_report_identity(raw, datetime(2026, 7, 21, 7, 0))
+    candidate = {"source": "wrestlinginc", "title": "WWE Raw Results 7/20 - Jacob Fatu Collides With LA Knight", "url": "https://www.wrestlinginc.com/2219333/wwe-raw-july-20-jacob-fatu-la-knight-two-tag-team-matches-more/"}
+    chosen, reason = simone.choose_report_candidate([candidate], raw, show_date)
+    assert (show_date, key, chosen, reason) == ("2026-07-20", "wwe_raw_2026_07_20", candidate, "preferred_source")
+    unrelated = {"source": "wrestlinginc", "title": "WWE SmackDown Results 7/20", "url": "https://www.wrestlinginc.com/wwe-smackdown-july-20/"}
+    assert simone.choose_report_candidate([unrelated], raw, show_date) == (None, "no_candidate")
+    duplicate_match = {**candidate, "url": "https://www.wrestlinginc.com/a-second-wwe-raw-results-july-20/"}
+    assert simone.choose_report_candidate([candidate, duplicate_match], raw, show_date) == (None, "ambiguous_preferred_candidates")
+
+
 def test_collision_and_ple_and_two_nights_have_distinct_keys():
     keys = {"aew_collision_2026_07_18", "special_event_snme_main_2026_07_18", "special_event_wm_night_1_2026_04_18", "special_event_wm_night_2_2026_04_19"}
     assert len(keys) == 4
@@ -231,19 +245,48 @@ def test_missing_and_malformed_artifact_metadata_force_regeneration(tmp_path, mo
     assert calls == [1]
 
 
-def test_incomplete_page_stops_before_gemini_and_wordpress(tmp_path, monkeypatch):
+def test_due_incomplete_page_reaches_workshop_with_readiness_as_diagnostic(tmp_path, monkeypatch):
     from agents import simone_publisher_v93_18 as publisher
     calls = {"wp": 0, "workshop": 0}
     monkeypatch.setattr(publisher, "PENDING_REPORTS", tmp_path / "pending.json")
     monkeypatch.setattr(publisher, "ARTIFACT_SIMONE_PUBLISH_FILE", tmp_path / "artifact.json")
     monkeypatch.setattr(publisher, "SIMONE_REPORT_STATUS_FILE", tmp_path / "status.json")
+    monkeypatch.setattr(publisher, "SIMONE_REPORT_HISTORY_FILE", tmp_path / "history.json")
     historical_preview = [{"text": "Welcome to our live coverage."}, {"text": "Tonight's card: Cody will face Drew."}, {"text": "Last week Cody defeated Randy and Rhea won by submission."}, {"text": "Previously Gunther retained at the previous event."}]
     monkeypatch.setattr(publisher, "scrape_article", lambda _url: (historical_preview, "", None))
-    monkeypatch.setattr(publisher, "jarvis_wp_preflight", lambda: calls.__setitem__("wp", calls["wp"] + 1))
-    monkeypatch.setattr(publisher, "run_report_workshop", lambda *_a: calls.__setitem__("workshop", calls["workshop"] + 1))
-    result = publisher.run_simone_report_publisher({"ready_reports": [{"report_key": "snme", "source_url": "https://x.test/snme", "title": "SNME"}]})
-    assert result["results"][0]["status"] == "waiting_source_completion"
-    assert calls == {"wp": 0, "workshop": 0}
+    monkeypatch.setattr(publisher, "DRY_RUN", False)
+    monkeypatch.setattr(publisher, "jarvis_wp_preflight", lambda: (True, "mock_ok", {}))
+    monkeypatch.setattr(publisher, "wp_ready", lambda: (True, "mock_ok", {}))
+    def publish(job, *_args):
+        calls["workshop"] += 1
+        assert job["readiness"]["reason"] == "waiting_source_completion"
+        return 42, {"link": "https://wp.test/snme"}
+    monkeypatch.setattr(publisher, "run_report_workshop", publish)
+    result = publisher.run_simone_report_publisher({"ready_reports": [{"report_key": "snme", "source_url": "https://x.test/snme", "title": "SNME", "source": "wrestlinginc"}]})
+    assert result["results"][0]["status"] == "published"
+    assert calls["workshop"] == 1
+
+
+def test_real_raw_zero_unit_candidate_is_processed_after_publish_after(tmp_path, monkeypatch):
+    from agents import simone_publisher_v93_18 as publisher
+    url = "https://www.wrestlinginc.com/2219333/wwe-raw-july-20-jacob-fatu-la-knight-two-tag-team-matches-more/"
+    pending = tmp_path / "pending.json"
+    monkeypatch.setattr(publisher, "PENDING_REPORTS", pending)
+    monkeypatch.setattr(publisher, "ARTIFACT_SIMONE_PUBLISH_FILE", tmp_path / "artifact.json")
+    monkeypatch.setattr(publisher, "SIMONE_REPORT_STATUS_FILE", tmp_path / "status.json")
+    monkeypatch.setattr(publisher, "SIMONE_REPORT_HISTORY_FILE", tmp_path / "history.json")
+    monkeypatch.setattr(publisher, "DRY_RUN", False)
+    monkeypatch.setattr(publisher, "scrape_article", lambda _url: ([{"text": "Welcome to Raw live coverage."}], "", None))
+    monkeypatch.setattr(publisher, "jarvis_wp_preflight", lambda: (True, "mock_ok", {}))
+    monkeypatch.setattr(publisher, "wp_ready", lambda: (True, "mock_ok", {}))
+    seen = []
+    monkeypatch.setattr(publisher, "run_report_workshop", lambda job, *_args: (seen.append(job) or (99, {"link": "https://wp.test/raw"})))
+    report = {"report_key": "wwe_raw_2026_07_20", "date": "2026-07-20", "source_url": url, "source_title": "WWE Raw Results 7/20 - Jacob Fatu Collides With LA Knight", "title": "WWE Raw 20/07/2026", "source": "wrestlinginc"}
+    result = publisher.run_simone_report_publisher({"ready_reports": [report]})
+    assert result["results"][0]["status"] == "published"
+    assert seen[0]["report_key"] == "wwe_raw_2026_07_20"
+    assert seen[0]["readiness"]["evidence"]["current_result_units"] == 0
+    assert seen[0]["readiness"]["evidence"]["structured_result_headings"] == 0
 
 
 def test_collision_and_ple_are_attempted_independently(tmp_path, monkeypatch):
@@ -285,19 +328,19 @@ def test_history_known_reports_skip_scrape_preflight_and_preserve_published_pend
     assert rows["known"]["status"] == "published" and rows["known2"]["status"] == "already_published"
 
 
-def test_history_reports_do_not_consume_cap_and_mixed_incomplete_is_preserved(tmp_path, monkeypatch):
+def test_history_reports_do_not_consume_cap_and_due_diagnostic_is_processed(tmp_path, monkeypatch):
     import json
     from agents import simone_publisher_v93_18 as publisher
     history_data = {f"old{i}": {"wp_post_id": i, "wp_link": f"https://wp.test/{i}"} for i in range(4)}
     history = tmp_path / "history.json"; history.write_text(json.dumps(history_data), encoding="utf-8")
     monkeypatch.setattr(publisher, "SIMONE_REPORT_HISTORY_FILE", history); monkeypatch.setattr(publisher, "PENDING_REPORTS", tmp_path / "pending.json")
     monkeypatch.setattr(publisher, "ARTIFACT_SIMONE_PUBLISH_FILE", tmp_path / "artifact.json"); monkeypatch.setattr(publisher, "SIMONE_REPORT_STATUS_FILE", tmp_path / "status.json")
-    monkeypatch.setattr(publisher, "MAX_REPORTS_PER_RUN", 1)
+    monkeypatch.setattr(publisher, "MAX_REPORTS_PER_RUN", 1); monkeypatch.setattr(publisher, "DRY_RUN", False)
     scrape_calls = []
     def scrape(url): scrape_calls.append(url); return ([{"text": "Tonight's scheduled card only."}], "", None)
-    monkeypatch.setattr(publisher, "scrape_article", scrape); monkeypatch.setattr(publisher, "jarvis_wp_preflight", lambda: (_ for _ in ()).throw(AssertionError("incomplete skips preflight")))
+    monkeypatch.setattr(publisher, "scrape_article", scrape); monkeypatch.setattr(publisher, "jarvis_wp_preflight", lambda: (True, "mock_ok", {})); monkeypatch.setattr(publisher, "wp_ready", lambda: (True, "mock_ok", {})); monkeypatch.setattr(publisher, "run_report_workshop", lambda *_args: (10, {"link": "https://wp.test/new"}))
     reports = [{"report_key": key, "source_url": "broken"} for key in history_data] + [{"report_key": "new", "source_url": "https://x.test/new"}]
     result = publisher.run_simone_report_publisher({"ready_reports": reports})
     assert scrape_calls == ["https://x.test/new"] and result["handoff"]["deferred_by_safety_cap"] == 0
     assert result["handoff"]["already_published"] == 4
-    assert {x["status"] for x in result["results"]} == {"already_published", "waiting_source_completion"}
+    assert {x["status"] for x in result["results"]} == {"already_published", "published"}
