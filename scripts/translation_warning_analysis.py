@@ -81,6 +81,17 @@ def _article_key(article: Dict[str, Any]) -> str:
     return str(article.get("key") or article.get("article_key") or article.get("source_url") or article.get("wp_link") or article.get("title") or "unknown")
 
 
+def _rule_match(code: str, title: str, final_text: str) -> Optional[Tuple[str, re.Match[str]]]:
+    """Return the audit-aligned search material and match for one warning rule."""
+    rule = FINAL_RULES[code]
+    if code == "betting_odds_article_published":
+        title_match = rule.search(title)
+        if title_match:
+            return "title", title_match
+    final_match = rule.search(final_text)
+    return ("final_published", final_match) if final_match else None
+
+
 def investigate_article(article: Dict[str, Any]) -> List[Dict[str, Any]]:
     instances: Dict[str, Dict[str, Any]] = {}
     severity_map = article.get("issue_severities") if isinstance(article.get("issue_severities"), dict) else {}
@@ -98,6 +109,7 @@ def investigate_article(article: Dict[str, Any]) -> List[Dict[str, Any]]:
                 item["severities"].append(str(severity).lower())
 
     final_text = _material(article, audit.FINAL_PUBLISHED_MATERIAL_KEYS) or str(article.get("published_text") or "")
+    title = str(article.get("title") or "")
     source_text = _material(article, audit.SOURCE_MATERIAL_KEYS) or str(article.get("original_text") or "")
     candidate_text = _material(article, audit.TRANSLATED_CANDIDATE_KEYS) or str(article.get("translated_candidate_text") or "")
     final_available = bool(article.get("final_published_material_available", article.get("published_material_available", bool(final_text)))) and bool(final_text)
@@ -119,10 +131,12 @@ def investigate_article(article: Dict[str, Any]) -> List[Dict[str, Any]]:
         elif code in FINAL_RULES and not final_available:
             status, reason = "insufficient_material", "Authoritative final published material is unavailable."
         elif code in FINAL_RULES:
-            match = FINAL_RULES[code].search(final_text)
-            if match:
-                status, reason = "reproduced", "The existing audit rule directly matches the available final published material."
-                evidence.append({"material": "final_published", "excerpt": _excerpt(final_text, match)})
+            matched = _rule_match(code, title, final_text)
+            if matched:
+                material, match = matched
+                evidence_text = title if material == "title" else final_text
+                status, reason = "reproduced", "The existing audit rule directly matches the same available material searched by the audit."
+                evidence.append({"material": material, "excerpt": _excerpt(evidence_text, match)})
             else:
                 status, reason = "not_reproduced", "The authoritative final material is available and the existing audit rule does not match it."
         else:
