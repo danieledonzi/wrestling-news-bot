@@ -92,6 +92,7 @@ def test_explicit_master_log_is_an_isolated_artifact_manifest(tmp_path: Path, mo
         "editorial_audit",
         "story_cluster_audit",
         "gemini_ledger",
+        "translation_warning_analysis",
     }
     assert all(data[name] == {} for name in data["__artifact_status__"]["missing"])
 
@@ -1055,7 +1056,7 @@ def test_translation_quality_audit_generation_is_nonfatal(tmp_path: Path, monkey
     markdown, json_path, warning = sdr.generate_translation_quality_audit_24h()
 
     assert markdown is None
-    assert json_path == latest
+    assert json_path is None
     assert warning and "Translation Quality Audit skipped/error" in warning
 
 
@@ -1071,6 +1072,7 @@ def test_append_translation_quality_audit_attachments(tmp_path: Path, monkeypatc
     latest = write_json(tmp_path / "state" / "reports" / "owtv_translation_quality_audit_latest.json", {"count": 0, "articles": []})
     monkeypatch.setattr(sdr, "BOT_DIR", tmp_path)
     monkeypatch.setattr(sdr, "TRANSLATION_QUALITY_LATEST_JSON", latest)
+    monkeypatch.setattr(sdr, "TRANSLATION_QUALITY_CURRENT_FAILED", False)
 
     attachments = sdr.append_translation_quality_audit_attachments([])
 
