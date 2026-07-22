@@ -1,0 +1,12 @@
+{
+  "task": "menzo",
+  "critical": true,
+  "scope": "same_run",
+  "strata": ["same_run_duplicate", "survivor_required", "lyra_equivalent"],
+  "records": [
+    {"source_url":"https://one.test/lyra","title":"Lyra Valkyria title match announced","summary":"WWE officially announced that Lyra Valkyria will defend the Women's Intercontinental Championship against Jordan Star next Saturday in Chicago following their confrontation during Monday Night Raw."},
+    {"source_url":"https://two.test/lyra","title":"WWE confirms Lyra title match","summary":"The company confirmed Lyra Valkyria versus Jordan Star for the Women's Intercontinental Championship next Saturday in Chicago after their confrontation during Monday Night Raw."},
+    {"source_url":"https://three.test/aew","title":"AEW announces tournament bracket","summary":"AEW announced a separate eight wrestler tournament bracket for Dynamite next month, with four first round matches and a final scheduled for the pay per view."}
+  ],
+  "expected": {"duplicate_groups":[{"keep_id":"c0","discard_ids":["c1"]}], "unique_ids":["c2"]}
+}

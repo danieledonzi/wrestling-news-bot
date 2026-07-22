@@ -1,0 +1,15 @@
+{
+  "task":"menzo",
+  "critical":true,
+  "scope":"recent_history",
+  "strata":["recent_history_duplicate","material_update","already_published"],
+  "current_records":[
+    {"source_url":"https://new.test/repeat","title":"Lyra title match confirmed again","summary":"WWE again confirmed Lyra Valkyria against Jordan Star for the Women's Intercontinental Championship next Saturday in Chicago, repeating the existing announcement."},
+    {"source_url":"https://new.test/update","title":"Lyra title match moved","summary":"WWE officially changed the Lyra Valkyria title match date to Sunday in Boston after the earlier Chicago announcement was cancelled."},
+    {"source_url":"https://new.test/distinct","title":"AEW tournament bracket","summary":"AEW announced a separate eight wrestler tournament for Dynamite next month with four opening matches and a pay per view final."}
+  ],
+  "published_records":[
+    {"source_url":"https://published.test/lyra","wp_link":"https://owtv.test/lyra","title":"Lyra title match announced","summary":"WWE announced Lyra Valkyria against Jordan Star for the Women's Intercontinental Championship next Saturday in Chicago."}
+  ],
+  "expected":{"matches":[{"current_id":"c0","published_id":"p0","decision":"DUPLICATE"},{"current_id":"c1","published_id":"p0","decision":"MATERIAL_UPDATE","new_fact_contains":"changed date to Sunday in Boston"}],"unmatched_current_ids":["c2"]}
+}
