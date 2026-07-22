@@ -122,6 +122,23 @@ def setup_blind(tool,tmp_path,failed=False):
         path="parsed/%s.json"%suffix; (run/"parsed").mkdir(exist_ok=True); tool.write_json(run/path,{"parsed":{"title_it":suffix},"diagnostics":{}})
         metrics.append({"case_id":"bob-001","comparison_id":"bob-001","task":"bob","model_requested":model,"repetition":1,"batch_index":1,"batch_total":1,"status":"failed" if failed and suffix=="b" else "ok","error":"boom" if failed and suffix=="b" else None,"structured_output_valid":suffix=="a" or not failed,"parsed_output_path":path,"source":source,"critical":True,"diagnostics":{"protected_term_violations":[]},"repair_required":False,"latency_ms":1,"total_tokens":10,"estimated_cost":"0.01","prompt_id":"p"})
     tool.write_json(run/"metrics.json",metrics); tool.write_json(run/"run_manifest.json",{"models":list(tool.DEFAULT_MODELS)}); tool.blind_run(run,9515); return run
+
+def setup_all_task_blind(tool,tmp_path):
+    run=tmp_path/"run"; run.mkdir(); (run/"parsed").mkdir()
+    sources={
+        "bob-001":{"task":"bob","source_url":"https://example.test/story","source_text":"The authoritative English wrestling source contains enough original material for a blind translation review.","historical_title_it":"Titolo storico","wp_link":"https://wp.test/old","nested":{"translated_title":"Risposta precedente","keep":"source metadata"}},
+        "simone-001":{"task":"simone","source_title":"WWE Report","deterministic_title":"Report WWE","blocks":[{"type":"paragraph","text":"The original report block contains the complete wrestling results, quotations, names, and match details for evaluation."}]},
+        "menzo-001":{"task":"menzo","scope":"same_run","records":[{"summary":"The first wrestling news record contains enough original source details for duplicate evaluation."},{"summary":"The second wrestling news record contains enough original source details for duplicate evaluation."}],"expected":{"duplicate_groups":[]}},
+    }
+    metrics=[]
+    for case_id,source in sources.items():
+        task=source["task"]
+        for model,suffix in zip(tool.DEFAULT_MODELS,("a","b")):
+            path="parsed/%s-%s.json"%(case_id,suffix)
+            parsed={"items":[{"i":0,"text":"Traduzione valida"}]} if task=="simone" else {"title_it":"Titolo"} if task=="bob" else {"duplicate_groups":[]}
+            tool.write_json(run/path,{"parsed":parsed,"diagnostics":{}})
+            metrics.append({"case_id":case_id,"comparison_id":case_id,"task":task,"model_requested":model,"repetition":1,"batch_index":1,"batch_total":1,"status":"ok","error":None,"structured_output_valid":True,"parsed_output_path":path,"source":source,"critical":False,"diagnostics":{},"repair_required":False,"latency_ms":1,"total_tokens":10,"estimated_cost":"0.01","prompt_id":case_id})
+    tool.write_json(run/"metrics.json",metrics); tool.write_json(run/"run_manifest.json",{"models":list(tool.DEFAULT_MODELS)}); tool.blind_run(run,9515); return run
 def complete_review(tool,run,preference="A",candidate_bad_term=False):
     template=run/"blind_review/review_template.csv"; rows=list(csv.DictReader(template.open())); row=rows[0]; row["preferred_output"]=preference
     for label in ("A","B"):
@@ -133,6 +150,38 @@ def complete_review(tool,run,preference="A",candidate_bad_term=False):
 
 def test_blind_contains_source_and_hides_identity(tool,tmp_path):
     run=setup_blind(tool,tmp_path); case_dir=run/"blind_review/cases/bob-001"; assert "authoritative source" in (case_dir/"source.json").read_text(); visible="".join(p.read_text() for p in case_dir.iterdir()); assert "gemini-" not in visible and "estimated_cost" not in visible
+def test_source_sanitization_is_recursive_and_preserves_source_material(tool):
+    source={"historical_title_it":"old","wp_link":"old-link","translated_title":"old answer","previous_publication":"old metadata","final_html":"old translated HTML","source_url":"https://source.test","source_title":"English title","raw_html":"<p>English source</p>","nested":[{"historical_date":"old","model_requested":"secret","keep":"report block"}]}
+    cleaned=tool._sanitized_source({"source":source})
+    assert cleaned=={"source_url":"https://source.test","source_title":"English title","raw_html":"<p>English source</p>","nested":[{"keep":"report block"}]}
+def test_historical_metadata_stays_internal_but_never_in_blind_sources(tool,tmp_path):
+    run=setup_all_task_blind(tool,tmp_path); internal=json.loads((run/"metrics.json").read_text())
+    assert internal[0]["source"]["historical_title_it"]=="Titolo storico" and internal[0]["source"]["wp_link"]=="https://wp.test/old"
+    for path in (run/"blind_review/cases").glob("*/source.json"):
+        for obj in tool.json_objects(json.loads(path.read_text())):
+            assert not any(str(key).lower().startswith(("historical_","wp_","translated_")) for key in obj)
+def test_task_rows_prefill_all_unrelated_dimensions_with_na(tool,tmp_path):
+    run=setup_all_task_blind(tool,tmp_path); rows={row["task"]:row for row in csv.DictReader((run/"blind_review/review_template.csv").open())}
+    for label in ("A","B"):
+        assert rows["simone"][label+"_title_quality_1_5"]=="NA"
+        assert all(rows["bob"][label+"_"+dim]=="NA" for dim in tool.MENZO_DIMS)
+        assert all(rows["simone"][label+"_"+dim]=="NA" for dim in tool.MENZO_DIMS)
+        assert all(rows["menzo"][label+"_"+dim]=="NA" for dim in tool.BOB_DIMS+tool.SEVERITY_DIMS)
+def test_simone_na_applicability_and_completed_translation_report(tool,tmp_path):
+    run=setup_all_task_blind(tool,tmp_path); template=run/"blind_review/review_template.csv"; rows=list(csv.DictReader(template.open())); answer=json.loads((run/"benchmark_internal/answer_key.json").read_text())
+    for row in rows:
+        row["preferred_output"]="TIE"
+        for label in ("A","B"):
+            for dim in tool.ALL_REVIEW_DIMS:
+                key=label+"_"+dim
+                if row[key]=="": row[key]="0" if dim in tool.SEVERITY_DIMS+tool.MENZO_DIMS else "4"
+    completed=run/"blind_review/review_completed.csv"
+    with completed.open("w",newline="") as f: writer=csv.DictWriter(f,fieldnames=rows[0].keys()); writer.writeheader(); writer.writerows(rows)
+    assert len(tool.parse_reviews(completed,answer))==3
+    report=tool.report_run(run,completed); assert report["agents"]["bob"]["cases"]==1 and report["agents"]["simone"]["cases"]==1
+    next(row for row in rows if row["task"]=="simone")["A_fidelity_1_5"]="NA"
+    with completed.open("w",newline="") as f: writer=csv.DictWriter(f,fieldnames=rows[0].keys()); writer.writeheader(); writer.writerows(rows)
+    with pytest.raises(ValueError,match="applicable review dimension"): tool.parse_reviews(completed,answer)
 def test_blind_outputs_remove_correctness_leakage_but_metrics_keep_it(tool,manifest,tmp_path):
     run=tmp_path/"run"; tool.run_benchmark(manifest,run,tool.DEFAULT_MODELS,client=Client()); tool.blind_run(run,9515)
     forbidden=("diagnostics","expected_passed","unique_story_lost","generic_material_updates","validation_error","structured_output_valid")

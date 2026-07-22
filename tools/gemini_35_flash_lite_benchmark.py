@@ -22,6 +22,7 @@ SELF_FILES = {"candidate_inventory.json", "proposed_manifest.json", "frozen_mani
 BOB_DIMS = ("fidelity_1_5", "completeness_1_5", "natural_italian_1_5", "title_quality_1_5", "wrestling_terminology_1_5", "quote_and_name_preservation_1_5", "structure_preservation_1_5")
 SEVERITY_DIMS = ("hallucination_severity_0_3", "omission_severity_0_3")
 MENZO_DIMS = ("duplicate_decision_correct", "survivor_correct", "material_update_correct", "unique_story_lost")
+ALL_REVIEW_DIMS = BOB_DIMS + SEVERITY_DIMS + MENZO_DIMS
 BAD_TERMS = ("partita", "gara", "gioco", "rilascio", "pensione", "pulito")
 BOB_STRATA = ("hard_news", "contract_or_roster", "quote_or_interview", "business", "post_show", "soft_but_published")
 SIMONE_STRATA = ("WWE", "NXT", "AEW", "TNA", "PLE_PPV", "multi_batch")
@@ -319,10 +320,14 @@ def run_benchmark(manifest_path: Path,output_root: Path,models: Sequence[str],re
     write_json(out/"run_manifest.json",{"schema_version":SCHEMA,"models":list(models),"source_manifest":manifest,"completed_at":utc_now()}); return metrics
 
 def _sanitized_source(row: Dict[str,Any]) -> Dict[str,Any]:
-    source=copy.deepcopy(row.get("source") or {}); source.pop("expected",None)
-    for key in list(source):
-        if key.lower() in {"model","models","model_requested","actual_model","price","tokens","expected"}: source.pop(key,None)
-    return source
+    forbidden_prefixes=("historical_","wp_","translated_","previous_","final_translation_","final_translated_","final_answer_","model_","pricing_","price_","token_","expected_","estimated_cost")
+    forbidden_exact={"model","models","actual_model","price","pricing","prices","token","tokens","expected","final_answer","final_html","final_title_it","final_content_it","final_text_it","final_translation","final_translated_answer"}
+    def sanitize(value: Any) -> Any:
+        if isinstance(value,dict):
+            return {key:sanitize(child) for key,child in value.items() if str(key).lower() not in forbidden_exact and not str(key).lower().startswith(forbidden_prefixes)}
+        if isinstance(value,list): return [sanitize(child) for child in value]
+        return copy.deepcopy(value)
+    return sanitize(row.get("source") or {})
 
 def menzo_applicable_dimensions(source: Dict[str,Any]) -> List[str]:
     expected=source.get("expected") if isinstance(source.get("expected"),dict) else {}
@@ -360,20 +365,21 @@ def blind_run(run_root: Path,seed: int) -> Path:
                 else: output={"status":"failed","error":row.get("error") if row else "missing output"}
             write_json(case_dir/("output_%s.json"%label),output)
         record={"comparison_id":case_id,"case_id":cm[0]["case_id"],"task":task,"preferred_output":"","review_notes":""}
-        dims=MENZO_DIMS if task=="menzo" else BOB_DIMS+SEVERITY_DIMS
-        applicable=set(menzo_applicable_dimensions(cm[0].get("source") or {})) if task=="menzo" else set(dims)
-        if task=="menzo": answer["comparisons"][case_id]["applicable_dimensions"]=sorted(applicable)
+        if task=="menzo": applicable=set(menzo_applicable_dimensions(cm[0].get("source") or {}))
+        elif task=="simone": applicable=set(BOB_DIMS+SEVERITY_DIMS)-{"title_quality_1_5"}
+        else: applicable=set(BOB_DIMS+SEVERITY_DIMS)
+        answer["comparisons"][case_id]["applicable_dimensions"]=sorted(applicable)
         for label in labels:
-            for dim in dims: record["%s_%s"%(label,dim)]="" if dim in applicable else "NA"
+            for dim in ALL_REVIEW_DIMS: record["%s_%s"%(label,dim)]="" if dim in applicable else "NA"
         rows.append(record)
     fields=["comparison_id","case_id","task"]
     for label in ("A","B"):
-        fields += ["%s_%s"%(label,x) for x in BOB_DIMS+SEVERITY_DIMS+MENZO_DIMS]
+        fields += ["%s_%s"%(label,x) for x in ALL_REVIEW_DIMS]
     fields += ["preferred_output","review_notes"]
     blind.mkdir(parents=True,exist_ok=True)
     with (blind/"review_template.csv").open("w",encoding="utf-8",newline="") as f:
         w=csv.DictWriter(f,fieldnames=fields,extrasaction="ignore"); w.writeheader(); w.writerows(rows)
-    write_json(run_root/"benchmark_internal/answer_key.json",answer); (blind/"review_instructions.md").write_text("One row per comparison. Score both A and B, then choose exactly A, B, or TIE. Internal model mappings are not included in this reviewer package.\n",encoding="utf-8"); return blind
+    write_json(run_root/"benchmark_internal/answer_key.json",answer); (blind/"review_instructions.md").write_text("One row per comparison. Fill only blank score cells for both A and B, then choose exactly A, B, or TIE. Never edit cells prefilled with NA: NA means that dimension does not apply to that comparison. Internal model mappings are not included in this reviewer package.\n",encoding="utf-8"); return blind
 
 def _number(value: str,low: float,high: float) -> float:
     try: number=float(value)
@@ -396,14 +402,14 @@ def parse_reviews(path: Path,answer: Optional[Dict[str,Any]]=None) -> List[Dict[
                 continue
             mapping=comparisons.get(cid,{}).get("labels",{});
             if set(mapping)!={"A","B"} or len(set(mapping.values()))!=2: raise ValueError("invalid answer-key mapping")
-            dims=MENZO_DIMS if row.get("task")=="menzo" else BOB_DIMS+SEVERITY_DIMS
-            applicable=set(comparisons.get(cid,{}).get("applicable_dimensions",dims))
+            default_dims=MENZO_DIMS if row.get("task")=="menzo" else BOB_DIMS+SEVERITY_DIMS
+            applicable=set(comparisons.get(cid,{}).get("applicable_dimensions",default_dims))
             for label in ("A","B"):
                 if label not in mapping: raise ValueError("label absent from answer key")
-                for dim in dims:
+                for dim in ALL_REVIEW_DIMS:
                     value=(row.get("%s_%s"%(label,dim)) or "").strip().upper()
                     if dim not in applicable:
-                        if value!="NA": raise ValueError("inapplicable Menzo dimension must be NA")
+                        if value!="NA": raise ValueError("inapplicable review dimension must be NA")
                         continue
                     if value=="NA": raise ValueError("applicable review dimension cannot be NA")
                     _number(value,0,1 if dim in MENZO_DIMS else 3 if dim in SEVERITY_DIMS else 5)
