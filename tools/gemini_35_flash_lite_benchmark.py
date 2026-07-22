@@ -22,6 +22,7 @@ SELF_FILES = {"candidate_inventory.json", "proposed_manifest.json", "frozen_mani
 BOB_DIMS = ("fidelity_1_5", "completeness_1_5", "natural_italian_1_5", "title_quality_1_5", "wrestling_terminology_1_5", "quote_and_name_preservation_1_5", "structure_preservation_1_5")
 SEVERITY_DIMS = ("hallucination_severity_0_3", "omission_severity_0_3")
 MENZO_DIMS = ("duplicate_decision_correct", "survivor_correct", "material_update_correct", "unique_story_lost")
+ALL_REVIEW_DIMS = BOB_DIMS + SEVERITY_DIMS + MENZO_DIMS
 BAD_TERMS = ("partita", "gara", "gioco", "rilascio", "pensione", "pulito")
 BOB_STRATA = ("hard_news", "contract_or_roster", "quote_or_interview", "business", "post_show", "soft_but_published")
 SIMONE_STRATA = ("WWE", "NXT", "AEW", "TNA", "PLE_PPV", "multi_batch")
@@ -319,10 +320,14 @@ def run_benchmark(manifest_path: Path,output_root: Path,models: Sequence[str],re
     write_json(out/"run_manifest.json",{"schema_version":SCHEMA,"models":list(models),"source_manifest":manifest,"completed_at":utc_now()}); return metrics
 
 def _sanitized_source(row: Dict[str,Any]) -> Dict[str,Any]:
-    source=copy.deepcopy(row.get("source") or {}); source.pop("expected",None)
-    for key in list(source):
-        if key.lower() in {"model","models","model_requested","actual_model","price","tokens","expected"}: source.pop(key,None)
-    return source
+    forbidden_prefixes=("historical_","wp_","translated_","previous_","final_translation_","final_translated_","final_answer_","model_","pricing_","price_","token_","expected_","estimated_cost")
+    forbidden_exact={"model","models","actual_model","price","pricing","prices","token","tokens","expected","final_answer","final_html","final_title_it","final_content_it","final_text_it","final_translation","final_translated_answer"}
+    def sanitize(value: Any) -> Any:
+        if isinstance(value,dict):
+            return {key:sanitize(child) for key,child in value.items() if str(key).lower() not in forbidden_exact and not str(key).lower().startswith(forbidden_prefixes)}
+        if isinstance(value,list): return [sanitize(child) for child in value]
+        return copy.deepcopy(value)
+    return sanitize(row.get("source") or {})
 
 def menzo_applicable_dimensions(source: Dict[str,Any]) -> List[str]:
     expected=source.get("expected") if isinstance(source.get("expected"),dict) else {}
@@ -344,7 +349,7 @@ def recompose(metrics: List[Dict[str,Any]],case_id: str,model: str) -> Dict[str,
     return {"items":sorted(items,key=lambda x:x.get("i",0)),"complete_report_valid":valid,"batch_total":total,"missing_or_invalid_batches":errors}
 
 def blind_run(run_root: Path,seed: int) -> Path:
-    metrics=json.loads((run_root/"metrics.json").read_text()); models=json.loads((run_root/"run_manifest.json").read_text())["models"]; blind=run_root/"blind_review"; rng=random.Random(seed); answer={"seed":seed,"comparisons":{}}; rows=[]
+    metrics=json.loads((run_root/"metrics.json").read_text()); models=json.loads((run_root/"run_manifest.json").read_text())["models"]; blind=run_root/"blind_review"; rng=random.Random(seed); answer={"review_schema_version":2,"seed":seed,"comparisons":{}}; rows=[]
     for case_id in sorted({x["comparison_id"] for x in metrics}):
         cm=[x for x in metrics if x["comparison_id"]==case_id]; task=cm[0]["task"]; labels=["A","B"]; shuffled=list(models); rng.shuffle(shuffled); mapping=dict(zip(labels,shuffled)); answer["comparisons"][case_id]={"task":task,"labels":mapping}
         case_dir=blind/"cases"/case_id; case_dir.mkdir(parents=True,exist_ok=True); write_json(case_dir/"source.json",_sanitized_source(cm[0]))
@@ -360,20 +365,21 @@ def blind_run(run_root: Path,seed: int) -> Path:
                 else: output={"status":"failed","error":row.get("error") if row else "missing output"}
             write_json(case_dir/("output_%s.json"%label),output)
         record={"comparison_id":case_id,"case_id":cm[0]["case_id"],"task":task,"preferred_output":"","review_notes":""}
-        dims=MENZO_DIMS if task=="menzo" else BOB_DIMS+SEVERITY_DIMS
-        applicable=set(menzo_applicable_dimensions(cm[0].get("source") or {})) if task=="menzo" else set(dims)
-        if task=="menzo": answer["comparisons"][case_id]["applicable_dimensions"]=sorted(applicable)
+        if task=="menzo": applicable=set(menzo_applicable_dimensions(cm[0].get("source") or {}))
+        elif task=="simone": applicable=set(BOB_DIMS+SEVERITY_DIMS)-{"title_quality_1_5"}
+        else: applicable=set(BOB_DIMS+SEVERITY_DIMS)
+        answer["comparisons"][case_id]["applicable_dimensions"]=sorted(applicable)
         for label in labels:
-            for dim in dims: record["%s_%s"%(label,dim)]="" if dim in applicable else "NA"
+            for dim in ALL_REVIEW_DIMS: record["%s_%s"%(label,dim)]="" if dim in applicable else "NA"
         rows.append(record)
     fields=["comparison_id","case_id","task"]
     for label in ("A","B"):
-        fields += ["%s_%s"%(label,x) for x in BOB_DIMS+SEVERITY_DIMS+MENZO_DIMS]
+        fields += ["%s_%s"%(label,x) for x in ALL_REVIEW_DIMS]
     fields += ["preferred_output","review_notes"]
     blind.mkdir(parents=True,exist_ok=True)
     with (blind/"review_template.csv").open("w",encoding="utf-8",newline="") as f:
         w=csv.DictWriter(f,fieldnames=fields,extrasaction="ignore"); w.writeheader(); w.writerows(rows)
-    write_json(run_root/"benchmark_internal/answer_key.json",answer); (blind/"review_instructions.md").write_text("One row per comparison. Score both A and B, then choose exactly A, B, or TIE. Internal model mappings are not included in this reviewer package.\n",encoding="utf-8"); return blind
+    write_json(run_root/"benchmark_internal/answer_key.json",answer); (blind/"review_instructions.md").write_text("One row per comparison. Fill only blank score cells for both A and B, then choose exactly A, B, or TIE. Never edit cells prefilled with NA: NA means that dimension does not apply to that comparison. Internal model mappings are not included in this reviewer package.\n",encoding="utf-8"); return blind
 
 def _number(value: str,low: float,high: float) -> float:
     try: number=float(value)
@@ -385,7 +391,9 @@ def _number(value: str,low: float,high: float) -> float:
 def parse_reviews(path: Path,answer: Optional[Dict[str,Any]]=None) -> List[Dict[str,Any]]:
     with path.open(encoding="utf-8",newline="") as f: rows=list(csv.DictReader(f))
     if not rows: raise ValueError("empty review CSV")
-    seen=set(); comparisons=(answer or {}).get("comparisons",{})
+    seen=set(); comparisons=(answer or {}).get("comparisons",{}); review_schema_version=(answer or {}).get("review_schema_version",1)
+    if not isinstance(review_schema_version,int) or isinstance(review_schema_version,bool) or review_schema_version<1: raise ValueError("invalid review_schema_version")
+    strict_schema=review_schema_version>=2
     for row in rows:
         cid=row.get("comparison_id") or ""
         if not cid or cid in seen: raise ValueError("duplicated preference/comparison")
@@ -396,14 +404,19 @@ def parse_reviews(path: Path,answer: Optional[Dict[str,Any]]=None) -> List[Dict[
                 continue
             mapping=comparisons.get(cid,{}).get("labels",{});
             if set(mapping)!={"A","B"} or len(set(mapping.values()))!=2: raise ValueError("invalid answer-key mapping")
-            dims=MENZO_DIMS if row.get("task")=="menzo" else BOB_DIMS+SEVERITY_DIMS
-            applicable=set(comparisons.get(cid,{}).get("applicable_dimensions",dims))
+            comparison=comparisons.get(cid,{})
+            task_dims=MENZO_DIMS if row.get("task")=="menzo" else BOB_DIMS+SEVERITY_DIMS
+            dims=ALL_REVIEW_DIMS if strict_schema else task_dims
+            declared=comparison.get("applicable_dimensions")
+            if strict_schema and (not isinstance(declared,list) or any(not isinstance(dim,str) for dim in declared) or len(set(declared))!=len(declared) or any(dim not in ALL_REVIEW_DIMS for dim in declared)):
+                raise ValueError("schema-v2 comparison requires valid applicable_dimensions list")
+            applicable=set(declared) if isinstance(declared,list) else set(task_dims)
             for label in ("A","B"):
                 if label not in mapping: raise ValueError("label absent from answer key")
                 for dim in dims:
                     value=(row.get("%s_%s"%(label,dim)) or "").strip().upper()
                     if dim not in applicable:
-                        if value!="NA": raise ValueError("inapplicable Menzo dimension must be NA")
+                        if value!="NA": raise ValueError("inapplicable review dimension must be NA")
                         continue
                     if value=="NA": raise ValueError("applicable review dimension cannot be NA")
                     _number(value,0,1 if dim in MENZO_DIMS else 3 if dim in SEVERITY_DIMS else 5)
