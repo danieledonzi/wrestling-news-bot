@@ -179,9 +179,40 @@ def test_simone_na_applicability_and_completed_translation_report(tool,tmp_path)
     with completed.open("w",newline="") as f: writer=csv.DictWriter(f,fieldnames=rows[0].keys()); writer.writeheader(); writer.writerows(rows)
     assert len(tool.parse_reviews(completed,answer))==3
     report=tool.report_run(run,completed); assert report["agents"]["bob"]["cases"]==1 and report["agents"]["simone"]["cases"]==1
-    next(row for row in rows if row["task"]=="simone")["A_fidelity_1_5"]="NA"
+    simone=next(row for row in rows if row["task"]=="simone"); simone["A_title_quality_1_5"]="4"
+    with completed.open("w",newline="") as f: writer=csv.DictWriter(f,fieldnames=rows[0].keys()); writer.writeheader(); writer.writerows(rows)
+    with pytest.raises(ValueError,match="inapplicable review dimension"): tool.parse_reviews(completed,answer)
+    simone["A_title_quality_1_5"]="NA"; simone["A_fidelity_1_5"]="NA"
     with completed.open("w",newline="") as f: writer=csv.DictWriter(f,fieldnames=rows[0].keys()); writer.writeheader(); writer.writerows(rows)
     with pytest.raises(ValueError,match="applicable review dimension"): tool.parse_reviews(completed,answer)
+def legacy_review(tool,tmp_path,task):
+    cid=task+"-legacy"; row={"comparison_id":cid,"case_id":cid,"task":task,"preferred_output":"TIE","review_notes":""}
+    for label in ("A","B"):
+        for dim in tool.ALL_REVIEW_DIMS: row[label+"_"+dim]=""
+        dims=tool.MENZO_DIMS if task=="menzo" else tool.BOB_DIMS+tool.SEVERITY_DIMS
+        for dim in dims: row[label+"_"+dim]="0" if dim in tool.MENZO_DIMS+tool.SEVERITY_DIMS else "4"
+    path=tmp_path/(cid+".csv")
+    with path.open("w",newline="") as f: writer=csv.DictWriter(f,fieldnames=row.keys()); writer.writeheader(); writer.writerow(row)
+    answer={"comparisons":{cid:{"task":task,"labels":{"A":"legacy-a","B":"legacy-b"}}}}
+    return path,answer
+@pytest.mark.parametrize("task",["bob","simone","menzo"])
+def test_legacy_answer_keys_allow_blank_unrelated_columns(tool,tmp_path,task):
+    path,answer=legacy_review(tool,tmp_path,task)
+    rows=tool.parse_reviews(path,answer)
+    assert len(rows)==1
+    if task=="simone": assert rows[0]["A_title_quality_1_5"]=="4"
+def test_explicit_applicability_requires_na_in_unrelated_cells(tool,tmp_path):
+    run=setup_all_task_blind(tool,tmp_path); path=run/"blind_review/review_template.csv"; rows=list(csv.DictReader(path.open())); row=next(x for x in rows if x["task"]=="bob"); row["preferred_output"]="TIE"; row["A_duplicate_decision_correct"]=""
+    for label in ("A","B"):
+        for dim in tool.BOB_DIMS: row[label+"_"+dim]="4"
+        for dim in tool.SEVERITY_DIMS: row[label+"_"+dim]="0"
+    completed=run/"strict.csv"
+    with completed.open("w",newline="") as f: writer=csv.DictWriter(f,fieldnames=row.keys()); writer.writeheader(); writer.writerow(row)
+    answer=json.loads((run/"benchmark_internal/answer_key.json").read_text()); answer["comparisons"]={"bob-001":answer["comparisons"]["bob-001"]}
+    with pytest.raises(ValueError,match="inapplicable review dimension"): tool.parse_reviews(completed,answer)
+def test_present_empty_applicability_is_not_treated_as_legacy(tool,tmp_path):
+    path,answer=legacy_review(tool,tmp_path,"bob"); answer["comparisons"]["bob-legacy"]["applicable_dimensions"]=[]
+    with pytest.raises(ValueError,match="inapplicable review dimension"): tool.parse_reviews(path,answer)
 def test_blind_outputs_remove_correctness_leakage_but_metrics_keep_it(tool,manifest,tmp_path):
     run=tmp_path/"run"; tool.run_benchmark(manifest,run,tool.DEFAULT_MODELS,client=Client()); tool.blind_run(run,9515)
     forbidden=("diagnostics","expected_passed","unique_story_lost","generic_material_updates","validation_error","structured_output_valid")

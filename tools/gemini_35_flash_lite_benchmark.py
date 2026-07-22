@@ -402,11 +402,13 @@ def parse_reviews(path: Path,answer: Optional[Dict[str,Any]]=None) -> List[Dict[
                 continue
             mapping=comparisons.get(cid,{}).get("labels",{});
             if set(mapping)!={"A","B"} or len(set(mapping.values()))!=2: raise ValueError("invalid answer-key mapping")
-            default_dims=MENZO_DIMS if row.get("task")=="menzo" else BOB_DIMS+SEVERITY_DIMS
-            applicable=set(comparisons.get(cid,{}).get("applicable_dimensions",default_dims))
+            comparison=comparisons.get(cid,{})
+            explicit_applicability="applicable_dimensions" in comparison
+            dims=ALL_REVIEW_DIMS if explicit_applicability else MENZO_DIMS if row.get("task")=="menzo" else BOB_DIMS+SEVERITY_DIMS
+            applicable=set(comparison["applicable_dimensions"]) if explicit_applicability else set(dims)
             for label in ("A","B"):
                 if label not in mapping: raise ValueError("label absent from answer key")
-                for dim in ALL_REVIEW_DIMS:
+                for dim in dims:
                     value=(row.get("%s_%s"%(label,dim)) or "").strip().upper()
                     if dim not in applicable:
                         if value!="NA": raise ValueError("inapplicable review dimension must be NA")
