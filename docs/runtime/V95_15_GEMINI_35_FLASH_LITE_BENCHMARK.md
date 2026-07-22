@@ -6,6 +6,8 @@ This offline harness compares `gemini-3.1-flash-lite` with `gemini-3.5-flash-lit
 
 Every output is placed under the explicit output/run root. Roots below `state/`, `artifacts/newsroom/`, `reports/`, `published/`, and `published_html_review/` are rejected.
 
+The executable inserts its repository root into `sys.path` before any lazy sibling-package import. The documented `python3 /path/to/repository/tools/gemini_35_flash_lite_benchmark.py ...` form therefore works independently of the current directory and does not require `PYTHONPATH`.
+
 ## Reproducible source discovery
 
 ```bash
@@ -34,7 +36,7 @@ Bob imports `agents.bob` and `agents.bob_policy_v93_15`, thereby installing the 
 
 ### Simone
 
-Simone temporarily replaces `modules.report_workshop_v92.generate_json`, invokes the real `translate_report_blocks()`, records every exact production batch prompt, supplies a synthetic valid response only during capture, and restores the original function in `finally`. Each batch is sent separately to both benchmark models. Metrics carry `prompt_id`, `batch_index`, and `batch_total`. The blind package recomposes successful batches by source index into one complete output per model; a missing, failed, or structurally invalid batch marks the complete report invalid.
+Simone temporarily replaces `modules.report_workshop_v92.generate_json`, invokes the real `translate_report_blocks()`, records every exact production batch prompt, supplies a synthetic valid response only during capture, and restores the original function in `finally`. Each batch is sent separately to both benchmark models. Metrics carry `prompt_id`, `batch_index`, and `batch_total`. Every expected item must be a dictionary with its integer index and a non-empty string `text` after whitespace stripping; missing/empty text is recorded in `empty_text_indexes` and invalidates the batch. The blind package recomposes successful batches by source index into one complete output per model; a missing, failed, empty, or structurally invalid batch marks the complete report invalid.
 
 ### Menzo v95.11 batch authority
 
@@ -72,9 +74,11 @@ blind_review/cases/<comparison_id>/output_A.json
 blind_review/cases/<comparison_id>/output_B.json
 ```
 
-`source.json` contains common source blocks/records but excludes expected Menzo outcomes, model identity/order, prices, and tokens. Successful Bob/Menzo files expose only `{"status":"ok","output":...}`; structurally invalid results use a neutral `invalid_output` status, and failed calls use a neutral failure shape. Internal diagnostics—including expected-outcome checks, protected-term findings, missing IDs/indexes, and validator errors—remain exclusively in `metrics.json` and the internal report. Reviewer output therefore contains neither model identity nor automatic correctness judgments. `answer_key.json` is separate.
+`source.json` contains common source blocks/records but excludes expected Menzo outcomes, model identity/order, prices, and tokens. Successful Bob/Menzo files expose only `{"status":"ok","output":...}`; structurally invalid results use a neutral `invalid_output` status, and failed calls use a neutral failure shape. Internal diagnostics—including expected-outcome checks, protected-term findings, missing IDs/indexes, and validator errors—remain exclusively in `metrics.json` and the internal report. Reviewer output therefore contains neither model identity nor automatic correctness judgments.
 
-`review_template.csv` has exactly one row and one preference per comparison. It provides distinct A and B score columns. A completed preference must be exactly `A`, `B`, or `TIE`; blank, duplicated, contradictory, out-of-range, incomplete, or unmapped review data is rejected. Menzo dimensions that do not apply to a case are prefilled as `NA`; `NA` is accepted only when the answer-key case metadata declares that dimension inapplicable, while every applicable dimension requires a `0` or `1` for both outputs.
+The A/B mapping is written outside the distributable reviewer tree at `benchmark_internal/answer_key.json`. `blind_review/` contains only `cases/`, `review_template.csv`, and `review_instructions.md`; it contains no answer key, model ID, or mapping metadata.
+
+`review_template.csv` has exactly one row and one preference per comparison. It provides distinct A and B score columns. A completed preference must be exactly `A`, `B`, or `TIE`; blank, duplicated, contradictory, out-of-range, incomplete, or unmapped review data is rejected. All numeric values must be finite, so `NaN` and positive/negative infinity are invalid. When reporting, the completed CSV must cover exactly the comparison IDs in the internal answer key: missing and unexpected rows are rejected before any decision is produced. Menzo dimensions that do not apply to a case are prefilled as `NA`; `NA` is accepted only when the answer-key case metadata declares that dimension inapplicable, while every applicable dimension requires a `0` or `1` for both outputs.
 
 ## Derived report and promotion gates
 

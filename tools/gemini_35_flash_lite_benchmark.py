@@ -12,6 +12,8 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, Iterator, List, Optional, Sequence, Tuple
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 PRICING_FILE = Path(__file__).with_name("gemini_35_flash_lite_pricing.json")
 SCHEMA = "v95.15"
 DEFAULT_MODELS = ("gemini-3.1-flash-lite", "gemini-3.5-flash-lite")
@@ -30,7 +32,7 @@ def utc_now() -> str: return datetime.now(timezone.utc).isoformat()
 def sha(text: str) -> str: return hashlib.sha256(text.encode("utf-8")).hexdigest()
 def canonical(value: Any) -> str: return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
 def write_json(path: Path, value: Any) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True); path.write_text(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True)+"\n", encoding="utf-8")
+    path.parent.mkdir(parents=True, exist_ok=True); path.write_text(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True, allow_nan=False)+"\n", encoding="utf-8")
 
 def under(path: Path, parent: Path) -> bool:
     try: path.resolve().relative_to(parent.resolve()); return True
@@ -281,8 +283,12 @@ def validate_output(task: str,raw: str,context: Dict[str,Any]) -> Tuple[Any,Dict
         except Exception as exc: render=False; diag["render_error"]=str(exc)
         diag["structured_output_valid"]=json_ok and bool(parsed.get("title_it")) and bool(parsed.get("excerpt_it")) and not diag["missing_ids"] and not diag["foreign_ids"] and render
         return parsed,diag
-    items=data.get("items") if isinstance(data.get("items"),list) else []; indexes=[x.get("i") for x in items if isinstance(x,dict)]; expected=context["indexes"]
-    diag.update(missing_indexes=sorted(set(expected)-set(indexes)),invented_indexes=sorted(set(indexes)-set(expected)),duplicate_indexes=len(indexes)!=len(set(indexes))); diag["structured_output_valid"]=json_ok and not diag["missing_indexes"] and not diag["invented_indexes"] and not diag["duplicate_indexes"]
+    items=data.get("items") if isinstance(data.get("items"),list) else []; expected=context["indexes"]
+    valid_items=[x for x in items if isinstance(x,dict) and type(x.get("i")) is int]
+    indexes=[x["i"] for x in valid_items]
+    empty_text_indexes=sorted({x["i"] for x in valid_items if x["i"] in expected and (not isinstance(x.get("text"),str) or not x["text"].strip())})
+    missing_indexes=sorted((set(expected)-set(indexes))|set(empty_text_indexes))
+    diag.update(missing_indexes=missing_indexes,empty_text_indexes=empty_text_indexes,invented_indexes=sorted(set(indexes)-set(expected)),duplicate_indexes=len(indexes)!=len(set(indexes)),malformed_items=len(items)-len(valid_items)); diag["structured_output_valid"]=json_ok and not diag["missing_indexes"] and not diag["invented_indexes"] and not diag["duplicate_indexes"] and not diag["malformed_items"]
     return data,diag
 
 def run_benchmark(manifest_path: Path,output_root: Path,models: Sequence[str],repetitions: int=1,repeat_all: bool=False,client: Any=None) -> List[Dict[str,Any]]:
@@ -367,11 +373,12 @@ def blind_run(run_root: Path,seed: int) -> Path:
     blind.mkdir(parents=True,exist_ok=True)
     with (blind/"review_template.csv").open("w",encoding="utf-8",newline="") as f:
         w=csv.DictWriter(f,fieldnames=fields,extrasaction="ignore"); w.writeheader(); w.writerows(rows)
-    write_json(blind/"answer_key.json",answer); (blind/"review_instructions.md").write_text("One row per comparison. Score both A and B, then choose exactly A, B, or TIE. The answer key is not reviewer-visible.\n",encoding="utf-8"); return blind
+    write_json(run_root/"benchmark_internal/answer_key.json",answer); (blind/"review_instructions.md").write_text("One row per comparison. Score both A and B, then choose exactly A, B, or TIE. Internal model mappings are not included in this reviewer package.\n",encoding="utf-8"); return blind
 
 def _number(value: str,low: float,high: float) -> float:
     try: number=float(value)
     except Exception: raise ValueError("missing required numeric review score")
+    if not math.isfinite(number): raise ValueError("review score must be finite")
     if number<low or number>high: raise ValueError("review score out of range")
     return number
 
@@ -385,6 +392,8 @@ def parse_reviews(path: Path,answer: Optional[Dict[str,Any]]=None) -> List[Dict[
         seen.add(cid); pref=(row.get("preferred_output") or "").strip().upper()
         if pref not in {"A","B","TIE"}: raise ValueError("preference must be A, B, or TIE")
         if answer is not None:
+            if cid not in comparisons:
+                continue
             mapping=comparisons.get(cid,{}).get("labels",{});
             if set(mapping)!={"A","B"} or len(set(mapping.values()))!=2: raise ValueError("invalid answer-key mapping")
             dims=MENZO_DIMS if row.get("task")=="menzo" else BOB_DIMS+SEVERITY_DIMS
@@ -398,6 +407,11 @@ def parse_reviews(path: Path,answer: Optional[Dict[str,Any]]=None) -> List[Dict[
                         continue
                     if value=="NA": raise ValueError("applicable review dimension cannot be NA")
                     _number(value,0,1 if dim in MENZO_DIMS else 3 if dim in SEVERITY_DIMS else 5)
+    if answer is not None:
+        expected_ids=set(comparisons)
+        if seen!=expected_ids:
+            missing=sorted(expected_ids-seen); unexpected=sorted(seen-expected_ids)
+            raise ValueError("review coverage mismatch: missing=%s unexpected=%s"%(missing,unexpected))
     return rows
 
 def p95(values: List[float]) -> Optional[float]:
@@ -438,7 +452,7 @@ def report_run(run_root: Path,reviews_path: Path) -> Dict[str,Any]:
     run_manifest=json.loads((run_root/"run_manifest.json").read_text()); models=run_manifest.get("models")
     if not isinstance(models,list) or len(models)!=2 or len(set(models))!=2: raise ValueError("run manifest must declare two distinct models")
     baseline_model,candidate_model=models
-    metrics=json.loads((run_root/"metrics.json").read_text()); metrics=[dict(x,_run_root=str(run_root)) for x in metrics]; answer=json.loads((run_root/"blind_review/answer_key.json").read_text()); reviews=parse_reviews(reviews_path,answer); result={"schema_version":SCHEMA,"created_at":utc_now(),"baseline_model":baseline_model,"candidate_model":candidate_model,"agents":{}}
+    metrics=json.loads((run_root/"metrics.json").read_text()); metrics=[dict(x,_run_root=str(run_root)) for x in metrics]; answer=json.loads((run_root/"benchmark_internal/answer_key.json").read_text()); reviews=parse_reviews(reviews_path,answer); result={"schema_version":SCHEMA,"created_at":utc_now(),"baseline_model":baseline_model,"candidate_model":candidate_model,"agents":{}}
     for task in ("bob","simone","menzo"):
         rr=[x for x in reviews if x["task"]==task]; mm=[x for x in metrics if x["task"]==task]; cases=len(rr); wins=ties=losses=0; human={m:{d:[] for d in (MENZO_DIMS if task=="menzo" else BOB_DIMS+SEVERITY_DIMS)} for m in models}; critical_duplicate={m:[] for m in models}
         for review in rr:

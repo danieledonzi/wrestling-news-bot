@@ -1,4 +1,4 @@
-import csv, importlib.util, json
+import csv, importlib.util, json, subprocess, sys
 from pathlib import Path
 from types import SimpleNamespace
 import pytest
@@ -39,6 +39,12 @@ class Client:
 
 def test_import_no_effects(tool,tmp_path,monkeypatch):
     monkeypatch.chdir(tmp_path); before=list(tmp_path.iterdir()); load_tool(); assert list(tmp_path.iterdir())==before
+def test_direct_cli_outside_repository_loads_root_packages(tmp_path):
+    help_run=subprocess.run([sys.executable,str(TOOL_PATH),"--help"],cwd=tmp_path,text=True,capture_output=True)
+    assert help_run.returncode==0 and "discover" in help_run.stdout and "ModuleNotFoundError" not in help_run.stderr
+    output=tmp_path/"discovery"
+    discover_run=subprocess.run([sys.executable,str(TOOL_PATH),"discover","--artifact-root",str(FIX),"--output-root",str(output)],cwd=tmp_path,text=True,capture_output=True)
+    assert discover_run.returncode==0 and (output/"proposed_manifest.json").exists() and "ModuleNotFoundError" not in discover_run.stderr
 @pytest.mark.parametrize("p",["state/x","artifacts/newsroom/x","reports/x","published/x","published_html_review/x"])
 def test_forbidden_output(tool,p):
     with pytest.raises(ValueError): tool.safe_output(ROOT/p)
@@ -101,6 +107,13 @@ def test_simone_multibatch_recomposes_only_a_b(tool,tmp_path,monkeypatch):
 def test_incomplete_simone_invalid(tool):
     metrics=[{"comparison_id":"s","model_requested":"m","repetition":1,"batch_index":1,"batch_total":2,"status":"ok","structured_output_valid":True,"parsed_output_path":"x"}]
     assert not tool.recompose(metrics,"s","m")["complete_report_valid"]
+@pytest.mark.parametrize("item",[{"i":0},{"i":0,"text":""},{"i":0,"text":"   "}])
+def test_simone_empty_translation_is_invalid(tool,item):
+    _,diag=tool.validate_output("simone",json.dumps({"items":[item]}),{"indexes":[0]})
+    assert not diag["structured_output_valid"] and diag["empty_text_indexes"]==[0] and diag["missing_indexes"]==[0]
+def test_simone_nonempty_translation_is_valid(tool):
+    _,diag=tool.validate_output("simone",json.dumps({"items":[{"i":0,"text":"Traduzione valida"}]}),{"indexes":[0]})
+    assert diag["structured_output_valid"] and not diag["empty_text_indexes"]
 
 def setup_blind(tool,tmp_path,failed=False):
     run=tmp_path/"run"; run.mkdir(); source={"task":"bob","source_text":"The authoritative source article contains enough English words to provide common material for blind fidelity review and includes names and numbers from the wrestling story."}
@@ -127,16 +140,38 @@ def test_blind_outputs_remove_correctness_leakage_but_metrics_keep_it(tool,manif
     assert not any(term in visible for term in forbidden)
     internal=(run/"metrics.json").read_text()
     assert all(term in internal for term in ("diagnostics","expected_passed","structured_output_valid"))
+def test_answer_key_is_internal_and_absent_from_reviewer_package(tool,tmp_path):
+    run=setup_blind(tool,tmp_path); blind=run/"blind_review"
+    assert (run/"benchmark_internal/answer_key.json").exists()
+    assert not list(blind.rglob("*answer_key*"))
+    visible="".join(p.read_text() for p in blind.rglob("*") if p.is_file())
+    assert not any(model in visible for model in tool.DEFAULT_MODELS) and '"labels"' not in visible
 def test_blank_preference_rejected(tool,tmp_path):
     run=setup_blind(tool,tmp_path); path=complete_review(tool,run,"")
     with pytest.raises(ValueError,match="preference"): tool.report_run(run,path)
 def test_duplicate_preference_rejected(tool,tmp_path):
     run=setup_blind(tool,tmp_path); path=complete_review(tool,run); text=path.read_text(); path.write_text(text+text.splitlines()[-1]+"\n")
     with pytest.raises(ValueError,match="duplicated"): tool.report_run(run,path)
+@pytest.mark.parametrize("value",["NaN","nan","Infinity","-inf"])
+@pytest.mark.parametrize("high",[5,1],ids=["ordinary","menzo"])
+def test_nonfinite_review_scores_rejected(tool,value,high):
+    with pytest.raises(ValueError,match="finite"): tool._number(value,0,high)
+def test_review_coverage_requires_every_answer_key_comparison(tool,tmp_path):
+    run=setup_blind(tool,tmp_path); review=complete_review(tool,run); answer=json.loads((run/"benchmark_internal/answer_key.json").read_text())
+    answer["comparisons"]["missing-case"]={"task":"bob","labels":{"A":tool.DEFAULT_MODELS[0],"B":tool.DEFAULT_MODELS[1]}}
+    with pytest.raises(ValueError,match="missing-case"): tool.parse_reviews(review,answer)
+def test_review_coverage_rejects_unknown_comparison(tool,tmp_path):
+    run=setup_blind(tool,tmp_path); review=complete_review(tool,run); rows=list(csv.DictReader(review.open())); unknown=dict(rows[0],comparison_id="unknown-case",case_id="unknown-case")
+    with review.open("a",newline="") as f: csv.DictWriter(f,fieldnames=rows[0].keys()).writerow(unknown)
+    answer=json.loads((run/"benchmark_internal/answer_key.json").read_text())
+    with pytest.raises(ValueError,match="unknown-case"): tool.parse_reviews(review,answer)
+def test_review_coverage_accepts_exact_set(tool,tmp_path):
+    run=setup_blind(tool,tmp_path); review=complete_review(tool,run); answer=json.loads((run/"benchmark_internal/answer_key.json").read_text())
+    assert len(tool.parse_reviews(review,answer))==1
 def test_one_preference_once_rates_bounded_and_scores_attributed(tool,tmp_path):
     run=setup_blind(tool,tmp_path); review=complete_review(tool,run,"A"); report=tool.report_run(run,review); s=report["agents"]["bob"]
     assert s["wins"]+s["ties"]+s["losses"]==1 and all(0<=s[x]<=1 for x in ("win_rate","tie_rate","loss_rate","better_or_equal_rate"))
-    mapping=json.loads((run/"blind_review/answer_key.json").read_text())["comparisons"]["bob-001"]["labels"]
+    mapping=json.loads((run/"benchmark_internal/answer_key.json").read_text())["comparisons"]["bob-001"]["labels"]
     assert s["baseline" if mapping["A"]==tool.DEFAULT_MODELS[0] else "candidate"]["mean_scores"]["fidelity_1_5"]==4
 def test_critical_term_regression_gate(tool):
     s={"cases":1,"better_or_equal_rate":1,"loss_rate":0,"critical_protected_term_regressions":1,"baseline":{"severe_hallucinations":0,"severe_omissions":0,"structured_output_rate":1,"repair_rate":0},"candidate":{"severe_hallucinations":0,"severe_omissions":0,"structured_output_rate":1,"repair_rate":0}}
@@ -150,7 +185,7 @@ def test_failed_call_visible_in_blind_and_report(tool,tmp_path):
     run=setup_blind(tool,tmp_path,True); visible=json.loads((run/"blind_review/cases/bob-001/output_A.json").read_text()); other=json.loads((run/"blind_review/cases/bob-001/output_B.json").read_text()); assert "failed" in {visible.get("status"),other.get("status")}
     report=tool.report_run(run,complete_review(tool,run)); assert report["agents"]["bob"]["candidate"]["failed_calls"]+report["agents"]["bob"]["baseline"]["failed_calls"]==1
 def complete_menzo_reviews(tool,run,candidate_duplicate=1,candidate_unique_loss=0):
-    answer=json.loads((run/"blind_review/answer_key.json").read_text()); rows=list(csv.DictReader((run/"blind_review/review_template.csv").open()))
+    answer=json.loads((run/"benchmark_internal/answer_key.json").read_text()); rows=list(csv.DictReader((run/"blind_review/review_template.csv").open()))
     for row in rows:
         row["preferred_output"]="TIE"; mapping=answer["comparisons"][row["comparison_id"]]["labels"]
         for label,model in mapping.items():
