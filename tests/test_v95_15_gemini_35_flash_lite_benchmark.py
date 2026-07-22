@@ -195,12 +195,23 @@ def legacy_review(tool,tmp_path,task):
     with path.open("w",newline="") as f: writer=csv.DictWriter(f,fieldnames=row.keys()); writer.writeheader(); writer.writerow(row)
     answer={"comparisons":{cid:{"task":task,"labels":{"A":"legacy-a","B":"legacy-b"}}}}
     return path,answer
-@pytest.mark.parametrize("task",["bob","simone","menzo"])
+@pytest.mark.parametrize("task",["bob","simone"])
 def test_legacy_answer_keys_allow_blank_unrelated_columns(tool,tmp_path,task):
     path,answer=legacy_review(tool,tmp_path,task)
     rows=tool.parse_reviews(path,answer)
     assert len(rows)==1
     if task=="simone": assert rows[0]["A_title_quality_1_5"]=="4"
+def test_realistic_legacy_menzo_applicability_ignores_blank_unrelated_columns(tool,tmp_path):
+    path,answer=legacy_review(tool,tmp_path,"menzo"); comparison=answer["comparisons"]["menzo-legacy"]
+    comparison["applicable_dimensions"]=["duplicate_decision_correct","unique_story_lost"]
+    rows=list(csv.DictReader(path.open()))
+    for label in ("A","B"):
+        rows[0][label+"_survivor_correct"]="NA"; rows[0][label+"_material_update_correct"]="NA"
+    with path.open("w",newline="") as f: writer=csv.DictWriter(f,fieldnames=rows[0].keys()); writer.writeheader(); writer.writerows(rows)
+    assert len(tool.parse_reviews(path,answer))==1
+    rows[0]["A_survivor_correct"]="1"
+    with path.open("w",newline="") as f: writer=csv.DictWriter(f,fieldnames=rows[0].keys()); writer.writeheader(); writer.writerows(rows)
+    with pytest.raises(ValueError,match="inapplicable review dimension"): tool.parse_reviews(path,answer)
 def test_explicit_applicability_requires_na_in_unrelated_cells(tool,tmp_path):
     run=setup_all_task_blind(tool,tmp_path); path=run/"blind_review/review_template.csv"; rows=list(csv.DictReader(path.open())); row=next(x for x in rows if x["task"]=="bob"); row["preferred_output"]="TIE"; row["A_duplicate_decision_correct"]=""
     for label in ("A","B"):
@@ -211,8 +222,11 @@ def test_explicit_applicability_requires_na_in_unrelated_cells(tool,tmp_path):
     answer=json.loads((run/"benchmark_internal/answer_key.json").read_text()); answer["comparisons"]={"bob-001":answer["comparisons"]["bob-001"]}
     with pytest.raises(ValueError,match="inapplicable review dimension"): tool.parse_reviews(completed,answer)
 def test_present_empty_applicability_is_not_treated_as_legacy(tool,tmp_path):
-    path,answer=legacy_review(tool,tmp_path,"bob"); answer["comparisons"]["bob-legacy"]["applicable_dimensions"]=[]
+    path,answer=legacy_review(tool,tmp_path,"bob"); answer["review_schema_version"]=2; answer["comparisons"]["bob-legacy"]["applicable_dimensions"]=[]
     with pytest.raises(ValueError,match="inapplicable review dimension"): tool.parse_reviews(path,answer)
+def test_schema_v2_requires_applicability_metadata(tool,tmp_path):
+    path,answer=legacy_review(tool,tmp_path,"bob"); answer["review_schema_version"]=2
+    with pytest.raises(ValueError,match="schema-v2 comparison requires valid applicable_dimensions list"): tool.parse_reviews(path,answer)
 def test_blind_outputs_remove_correctness_leakage_but_metrics_keep_it(tool,manifest,tmp_path):
     run=tmp_path/"run"; tool.run_benchmark(manifest,run,tool.DEFAULT_MODELS,client=Client()); tool.blind_run(run,9515)
     forbidden=("diagnostics","expected_passed","unique_story_lost","generic_material_updates","validation_error","structured_output_valid")

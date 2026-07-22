@@ -349,7 +349,7 @@ def recompose(metrics: List[Dict[str,Any]],case_id: str,model: str) -> Dict[str,
     return {"items":sorted(items,key=lambda x:x.get("i",0)),"complete_report_valid":valid,"batch_total":total,"missing_or_invalid_batches":errors}
 
 def blind_run(run_root: Path,seed: int) -> Path:
-    metrics=json.loads((run_root/"metrics.json").read_text()); models=json.loads((run_root/"run_manifest.json").read_text())["models"]; blind=run_root/"blind_review"; rng=random.Random(seed); answer={"seed":seed,"comparisons":{}}; rows=[]
+    metrics=json.loads((run_root/"metrics.json").read_text()); models=json.loads((run_root/"run_manifest.json").read_text())["models"]; blind=run_root/"blind_review"; rng=random.Random(seed); answer={"review_schema_version":2,"seed":seed,"comparisons":{}}; rows=[]
     for case_id in sorted({x["comparison_id"] for x in metrics}):
         cm=[x for x in metrics if x["comparison_id"]==case_id]; task=cm[0]["task"]; labels=["A","B"]; shuffled=list(models); rng.shuffle(shuffled); mapping=dict(zip(labels,shuffled)); answer["comparisons"][case_id]={"task":task,"labels":mapping}
         case_dir=blind/"cases"/case_id; case_dir.mkdir(parents=True,exist_ok=True); write_json(case_dir/"source.json",_sanitized_source(cm[0]))
@@ -391,7 +391,9 @@ def _number(value: str,low: float,high: float) -> float:
 def parse_reviews(path: Path,answer: Optional[Dict[str,Any]]=None) -> List[Dict[str,Any]]:
     with path.open(encoding="utf-8",newline="") as f: rows=list(csv.DictReader(f))
     if not rows: raise ValueError("empty review CSV")
-    seen=set(); comparisons=(answer or {}).get("comparisons",{})
+    seen=set(); comparisons=(answer or {}).get("comparisons",{}); review_schema_version=(answer or {}).get("review_schema_version",1)
+    if not isinstance(review_schema_version,int) or isinstance(review_schema_version,bool) or review_schema_version<1: raise ValueError("invalid review_schema_version")
+    strict_schema=review_schema_version>=2
     for row in rows:
         cid=row.get("comparison_id") or ""
         if not cid or cid in seen: raise ValueError("duplicated preference/comparison")
@@ -403,9 +405,12 @@ def parse_reviews(path: Path,answer: Optional[Dict[str,Any]]=None) -> List[Dict[
             mapping=comparisons.get(cid,{}).get("labels",{});
             if set(mapping)!={"A","B"} or len(set(mapping.values()))!=2: raise ValueError("invalid answer-key mapping")
             comparison=comparisons.get(cid,{})
-            explicit_applicability="applicable_dimensions" in comparison
-            dims=ALL_REVIEW_DIMS if explicit_applicability else MENZO_DIMS if row.get("task")=="menzo" else BOB_DIMS+SEVERITY_DIMS
-            applicable=set(comparison["applicable_dimensions"]) if explicit_applicability else set(dims)
+            task_dims=MENZO_DIMS if row.get("task")=="menzo" else BOB_DIMS+SEVERITY_DIMS
+            dims=ALL_REVIEW_DIMS if strict_schema else task_dims
+            declared=comparison.get("applicable_dimensions")
+            if strict_schema and (not isinstance(declared,list) or any(not isinstance(dim,str) for dim in declared) or len(set(declared))!=len(declared) or any(dim not in ALL_REVIEW_DIMS for dim in declared)):
+                raise ValueError("schema-v2 comparison requires valid applicable_dimensions list")
+            applicable=set(declared) if isinstance(declared,list) else set(task_dims)
             for label in ("A","B"):
                 if label not in mapping: raise ValueError("label absent from answer key")
                 for dim in dims:
