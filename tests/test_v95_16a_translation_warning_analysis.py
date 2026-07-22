@@ -27,6 +27,33 @@ def test_reproduced_has_compact_final_evidence(tmp_path: Path) -> None:
     assert len(item["evidence"][0]["excerpt"]) < 200
 
 
+def test_betting_warning_matches_title_with_title_evidence(tmp_path: Path) -> None:
+    path = write_audit(tmp_path / "audit.json", [{
+        "key": "title-bet", "title": "SummerSlam DraftKings betting odds",
+        "issues": ["betting_odds_article_published"],
+        "published_text": "Il programma completo dello show è disponibile.",
+        "final_published_material_available": True,
+    }])
+    item = build_analysis(path)["investigations"][0]
+    assert item["investigation_status"] == "reproduced"
+    assert item["evidence"]
+    assert item["evidence"][0]["material"] == "title"
+    assert "DraftKings" in item["evidence"][0]["excerpt"]
+
+
+def test_betting_warning_body_match_retains_final_published_evidence(tmp_path: Path) -> None:
+    path = write_audit(tmp_path / "audit.json", [{
+        "key": "body-bet", "title": "SummerSlam preview",
+        "issues": ["betting_odds_article_published"],
+        "published_text": "Le betting odds sono state aggiornate.",
+        "final_published_material_available": True,
+    }])
+    item = build_analysis(path)["investigations"][0]
+    assert item["investigation_status"] == "reproduced"
+    assert item["evidence"][0]["material"] == "final_published"
+    assert "betting odds" in item["evidence"][0]["excerpt"]
+
+
 def test_false_positive_insufficient_technical_and_dedup(tmp_path: Path) -> None:
     path = write_audit(tmp_path / "audit.json", [
         {"key": "fp", "issues": ["wrestling_lexicon_issue"], "possible_false_positive_warnings": ["wrestling_lexicon_issue"]},
