@@ -3,6 +3,7 @@ from __future__ import annotations
 import ast
 import json
 import subprocess
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -13,11 +14,15 @@ DAILY_JUDGMENT_LATEST_JSON = BOT_DIR / "state" / "reports" / "owtv_daily_editori
 DAILY_JUDGMENT_MARKDOWN_GLOB = "owtv_daily_editorial_judgment_24h_*.md"
 TRANSLATION_QUALITY_LATEST_JSON = BOT_DIR / "state" / "reports" / "owtv_translation_quality_audit_latest.json"
 TRANSLATION_QUALITY_MARKDOWN_GLOB = "owtv_translation_quality_audit_24h_*.md"
+TRANSLATION_WARNING_LATEST_JSON = BOT_DIR / "state" / "reports" / "owtv_translation_warning_analysis_latest.json"
+TRANSLATION_WARNING_MARKDOWN_GLOB = "owtv_translation_warning_analysis_24h_*.md"
 TRANSLATION_QUALITY_BLOCKER_WARNING_CODES = {"untranslated_quote"}
+TRANSLATION_QUALITY_CURRENT_FAILED = False
 
 
 def generate_translation_quality_audit_24h() -> tuple[Path | None, Path | None, str | None]:
     """Generate the translation quality audit without blocking email delivery."""
+    global TRANSLATION_QUALITY_CURRENT_FAILED
     try:
         subprocess.run(
             [
@@ -35,18 +40,110 @@ def generate_translation_quality_audit_24h() -> tuple[Path | None, Path | None, 
         )
         markdown = newest_translation_quality_audit_markdown()
         latest_json = TRANSLATION_QUALITY_LATEST_JSON if TRANSLATION_QUALITY_LATEST_JSON.exists() else None
+        TRANSLATION_QUALITY_CURRENT_FAILED = False
         print(f"[TRANSLATION QUALITY] generated {markdown or 'no markdown found'}")
         return markdown, latest_json, None
     except Exception as exc:
+        TRANSLATION_QUALITY_CURRENT_FAILED = True
         warning = f"Translation Quality Audit skipped/error: {exc}"
         print(f"[TRANSLATION QUALITY] skipped/error {exc}")
-        return None, TRANSLATION_QUALITY_LATEST_JSON if TRANSLATION_QUALITY_LATEST_JSON.exists() else None, warning
+        return None, None, warning
 
 
 def newest_translation_quality_audit_markdown() -> Path | None:
     reports_dir = BOT_DIR / "reports"
     matches = [path for path in reports_dir.glob(TRANSLATION_QUALITY_MARKDOWN_GLOB) if path.is_file()]
     return max(matches, key=lambda path: (path.stat().st_mtime, path.name)) if matches else None
+
+
+def newest_translation_warning_analysis_markdown() -> Path | None:
+    """Return only the Markdown paired with the current latest JSON."""
+    if not TRANSLATION_WARNING_LATEST_JSON.exists():
+        return None
+    try:
+        payload = json.loads(TRANSLATION_WARNING_LATEST_JSON.read_text(encoding="utf-8"))
+        generated_at = datetime.fromisoformat(str(payload["generated_at"]).replace("Z", "+00:00"))
+        stamp = generated_at.strftime("%Y%m%d_%H%M%S")
+    except Exception:
+        return None
+    path = BOT_DIR / "reports" / f"owtv_translation_warning_analysis_24h_{stamp}.md"
+    return path if path.is_file() else None
+
+
+def _write_translation_warning_failure(audit_json: Path | None, exc: Exception) -> tuple[Path | None, Path | None]:
+    """Replace stale latest state with a controlled current-run failure report."""
+    try:
+        now = datetime.now(timezone.utc)
+        stamp = now.strftime("%Y%m%d_%H%M%S")
+        error = f"execution_failed:{type(exc).__name__}:{exc}"
+        payload = {
+            "schema_version": "v95.16a-1", "generated_at": now.isoformat(), "hours": 24,
+            "source_audit_path": str(audit_json) if audit_json is not None else None,
+            "source_audit_generated_at": None, "total_investigations": 0,
+            "status_counts": {name: 0 for name in ("insufficient_material", "not_reproduced", "possible_false_positive", "reproduced", "technical")},
+            "severity_counts": {}, "warning_code_counts": {}, "articles_with_investigations": 0,
+            "investigations": [], "warnings": [], "errors": [error],
+        }
+        reports = BOT_DIR / "reports"
+        latest_dir = TRANSLATION_WARNING_LATEST_JSON.parent
+        reports.mkdir(parents=True, exist_ok=True)
+        latest_dir.mkdir(parents=True, exist_ok=True)
+        json_path = reports / f"owtv_translation_warning_analysis_24h_{stamp}.json"
+        markdown = reports / f"owtv_translation_warning_analysis_24h_{stamp}.md"
+        text = json.dumps(payload, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+        json_path.write_text(text, encoding="utf-8")
+        TRANSLATION_WARNING_LATEST_JSON.write_text(text, encoding="utf-8")
+        markdown.write_text(
+            "# OWTV Translation Warning Analysis (24h)\n\n"
+            f"Generated: {payload['generated_at']}\n\n## Summary\n\n- Investigations: 0\n\n"
+            f"## Diagnostic errors\n\n- {error}\n",
+            encoding="utf-8",
+        )
+        return markdown, TRANSLATION_WARNING_LATEST_JSON
+    except Exception as artifact_exc:
+        print(f"[WARNING INVESTIGATION] failure artifact write error: {artifact_exc}")
+        return None, None
+
+
+def generate_translation_warning_analysis_24h(audit_json: Path) -> tuple[Path | None, Path | None, str | None]:
+    """Run warning investigation for this audit only; never return stale output on failure."""
+    try:
+        subprocess.run([
+            "python3", "-m", "scripts.translation_warning_analysis",
+            "--hours", "24", "--audit-json", str(audit_json),
+        ], cwd=BOT_DIR, check=True)
+        markdown = newest_translation_warning_analysis_markdown()
+        latest = TRANSLATION_WARNING_LATEST_JSON if TRANSLATION_WARNING_LATEST_JSON.exists() else None
+        print(f"[WARNING INVESTIGATION] generated {markdown or 'no markdown found'}")
+        return markdown, latest, None
+    except Exception as exc:
+        warning = f"Automatic Warning Investigation skipped/error: {exc}"
+        print(f"[WARNING INVESTIGATION] skipped/error {exc}")
+        markdown, latest = _write_translation_warning_failure(audit_json, exc)
+        return markdown, latest, warning
+
+
+def translation_warning_analysis_body_section(json_path: Path | None, warning: str | None = None) -> str:
+    if json_path is None or not json_path.exists():
+        return "\nAUTOMATIC WARNING INVESTIGATION\n- Diagnostic warning: %s\n" % (warning or "current analysis unavailable")
+    try:
+        payload = json.loads(json_path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        return "\nAUTOMATIC WARNING INVESTIGATION\n- Diagnostic warning: JSON read failed: %s\n" % exc
+    counts = payload.get("status_counts", {})
+    top_codes = sorted(payload.get("warning_code_counts", {}).items(), key=lambda item: (-int(item[1]), item[0]))[:3]
+    lines = ["", "AUTOMATIC WARNING INVESTIGATION", "- Investigations: %s" % payload.get("total_investigations", 0), "- Reproduced: %s" % counts.get("reproduced", 0), "- Possible false positives: %s" % counts.get("possible_false_positive", 0), "- Insufficient material: %s" % counts.get("insufficient_material", 0), "- Technical: %s" % counts.get("technical", 0), "- Top warning codes: %s" % (_format_top_counts(top_codes))]
+    priority = {"blocker": 5, "high": 4, "medium": 3, "low": 2, "warning": 1, "technical": 0}
+    investigations = sorted((item for item in payload.get("investigations", []) if isinstance(item, dict)), key=lambda item: (-priority.get(str(item.get("original_severity", "warning")), 1), str(item.get("title", ""))))
+    for item in investigations[:3]:
+        evidence = "; ".join(str(x.get("excerpt", "")) for x in item.get("evidence", []) if isinstance(x, dict)) or "none"
+        lines.append("- %s: %s / %s — %s — %s" % (item.get("title") or item.get("article_key"), item.get("warning_code"), item.get("investigation_status"), evidence[:180], item.get("recommended_action", "")))
+    diagnostic_errors = payload.get("errors") if isinstance(payload.get("errors"), list) else []
+    if diagnostic_errors:
+        lines.append("- Diagnostic warning: " + "; ".join(str(value) for value in diagnostic_errors))
+    if warning:
+        lines.append("- Diagnostic warning: %s" % warning)
+    return "\n".join(lines) + "\n"
 
 
 def _parse_translation_quality_alfred_warning(warning: Any) -> Any:
@@ -152,9 +249,9 @@ def _format_top_counts(items: list[tuple[str, int]]) -> str:
     return ", ".join(f"{name} ({count})" for name, count in items) if items else "none detected"
 
 
-def translation_quality_audit_body_section(json_path: Path = TRANSLATION_QUALITY_LATEST_JSON, warning: str | None = None) -> str:
+def translation_quality_audit_body_section(json_path: Path | None = TRANSLATION_QUALITY_LATEST_JSON, warning: str | None = None) -> str:
     """Build the compact email-body section from the latest translation audit JSON."""
-    if not json_path.exists():
+    if json_path is None or not json_path.exists():
         return f"\nTRANSLATION QUALITY AUDIT\n- Warning: {warning or 'latest JSON not available'}\n"
     try:
         payload: dict[str, Any] = json.loads(json_path.read_text(encoding="utf-8"))
@@ -195,18 +292,50 @@ def translation_quality_audit_body_section(json_path: Path = TRANSLATION_QUALITY
 
 def append_translation_quality_audit_attachments(attachments: list[Path]) -> list[Path]:
     """Append generated translation audit markdown and latest JSON to an email attachment list."""
-    markdown = newest_translation_quality_audit_markdown()
-    for path in (markdown, TRANSLATION_QUALITY_LATEST_JSON if TRANSLATION_QUALITY_LATEST_JSON.exists() else None):
+    if not TRANSLATION_QUALITY_CURRENT_FAILED:
+        markdown = newest_translation_quality_audit_markdown()
+        for path in (markdown, TRANSLATION_QUALITY_LATEST_JSON if TRANSLATION_QUALITY_LATEST_JSON.exists() else None):
+            if path and path.exists() and path not in attachments:
+                attachments.append(path)
+                print(f"[TRANSLATION QUALITY] attached {path}")
+    return append_translation_warning_analysis_attachments(attachments)
+
+
+def append_translation_warning_analysis_attachments(attachments: list[Path]) -> list[Path]:
+    """Append the full investigation artifacts while retaining audit attachments."""
+    markdown = newest_translation_warning_analysis_markdown()
+    for path in (markdown, TRANSLATION_WARNING_LATEST_JSON if TRANSLATION_WARNING_LATEST_JSON.exists() else None):
         if path and path.exists() and path not in attachments:
             attachments.append(path)
-            print(f"[TRANSLATION QUALITY] attached {path}")
+            print(f"[WARNING INVESTIGATION] attached {path}")
     return attachments
 
 
 def translation_quality_audit_summary_24h() -> str:
     """Run the 24h translation audit and return its compact daily-email section."""
-    _markdown, latest_json, warning = generate_translation_quality_audit_24h()
-    return translation_quality_audit_body_section(latest_json or TRANSLATION_QUALITY_LATEST_JSON, warning=warning)
+    audit_result = generate_translation_quality_audit_24h()
+    latest_json, warning = audit_result[1], audit_result[2]
+    audit_section = translation_quality_audit_body_section(latest_json, warning=warning)
+    _markdown, analysis_json, analysis_warning = _analysis_after_audit(audit_result)
+    return audit_section + translation_warning_analysis_body_section(analysis_json, analysis_warning)
+
+
+def _analysis_after_audit(audit_result: tuple[Path | None, Path | None, str | None]) -> tuple[Path | None, Path | None, str | None]:
+    """Run analysis or register one current failure state for an unavailable audit."""
+    audit_json, audit_warning = audit_result[1], audit_result[2]
+    if audit_warning or audit_json is None:
+        failure = RuntimeError(audit_warning or "current audit JSON unavailable")
+        markdown, latest = _write_translation_warning_failure(audit_json, failure)
+        return markdown, latest, str(failure)
+    return generate_translation_warning_analysis_24h(audit_json)
+
+
+def generate_daily_diagnostics_24h() -> dict[str, tuple[Path | None, Path | None, str | None]]:
+    """Run the diagnostic chain in its required order; every stage is non-blocking."""
+    audit_result = generate_translation_quality_audit_24h()
+    analysis_result = _analysis_after_audit(audit_result)
+    judgment_result = generate_daily_editorial_judgment_24h()
+    return {"translation_quality_audit": audit_result, "translation_warning_analysis": analysis_result, "daily_editorial_judgment": judgment_result}
 
 
 def gemini_email_summary_24h() -> str:
