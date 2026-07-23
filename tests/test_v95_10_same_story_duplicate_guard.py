@@ -65,14 +65,15 @@ def test_old_same_run_response_shape_repaired_before_any_apply(monkeypatch):
 
 
 def test_recent_history_duplicate_material_update_and_no_match(monkeypatch):
-    history = [item("Old duplicate", "https://old.test/dup"), item("Rumored Punk match", "https://old.test/update", "CM Punk vs Cody Rhodes was rumored for SummerSlam.")]
+    history = [item("CM Punk signs WWE contract", "https://old.test/dup"), item("Rumored Punk match", "https://old.test/update", "CM Punk vs Cody Rhodes was rumored for SummerSlam.")]
     monkeypatch.setattr(menzo, "load_cross_run_story_history", lambda *a, **k: history)
-    monkeypatch.setattr(menzo, "call_gemini_json_model", lambda *a, **k: ({"matches": [
-        {"current_id": "c0", "published_id": "p0", "decision": "DUPLICATE", "reason": "same fact"},
-        {"current_id": "c1", "published_id": "p1", "decision": "MATERIAL_UPDATE", "new_fact": "WWE officially announced CM Punk vs Cody Rhodes match.", "reason": "rumor official"},
-    ]}, "gemini-3.1-flash-lite"))
+    def arbitrate(prompt, *a, **k):
+        if "https://new.test/dup" in prompt:
+            return {"matches": [{"current_id":"c0","published_id":"p0","decision":"DUPLICATE","reason":"same fact"}]}, "gemini-3.1-flash-lite"
+        return {"matches": [{"current_id":"c0","published_id":"p0","decision":"MATERIAL_UPDATE","new_fact":"WWE officially announced CM Punk vs Cody Rhodes match.","reason":"rumor official"}]}, "gemini-3.1-flash-lite"
+    monkeypatch.setattr(menzo, "call_gemini_json_model", arbitrate)
     r = result([
-        item("Duplicate", "https://new.test/dup"),
+        item("CM Punk signs WWE contract", "https://new.test/dup"),
         item("Official Punk match", "https://new.test/update", "WWE officially announced CM Punk vs Cody Rhodes match for SummerSlam."),
         item("Ordinary", "https://new.test/ordinary"),
     ])
@@ -85,7 +86,7 @@ def test_recent_history_duplicate_material_update_and_no_match(monkeypatch):
 
 
 def test_old_recent_history_response_shape_repaired_before_any_apply(monkeypatch):
-    monkeypatch.setattr(menzo, "load_cross_run_story_history", lambda *a, **k: [item("Old", "https://old.test/a")])
+    monkeypatch.setattr(menzo, "load_cross_run_story_history", lambda *a, **k: [item("CM Punk signs WWE contract", "https://old.test/a")])
     calls = []
     def fake(*a, **k):
         calls.append(k.get("phase"))
@@ -93,7 +94,7 @@ def test_old_recent_history_response_shape_repaired_before_any_apply(monkeypatch
             return {"decision": "DUPLICATE", "reason": "legacy"}, "gemini-3.1-flash-lite"
         return {"matches": []}, "gemini-3.1-flash-lite"
     monkeypatch.setattr(menzo, "call_gemini_json_model", fake)
-    r = result([item("A", "https://new.test/a")])
+    r = result([item("CM Punk signs WWE contract", "https://new.test/a")])
     menzo.apply_recent_published_duplicate_guard(r)
     assert r["skipped"] == []
     assert "menzo_duplicate_checked" not in r["selected"][0]

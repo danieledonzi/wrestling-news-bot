@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from agents.gemini_ledger import make_operation_id, record_gemini_attempt, record_gemini_event
+from agents import menzo_duplicate_cache as duplicate_cache_v2
 
 from agents import menzo as base
 from agents.story_dedupe_v93_32 import (
@@ -46,6 +47,8 @@ SOFTPOOL_FILE = NEWSROOM_STATE_DIR / "menzo_softpool.json"
 HARD_SKIP_FILE = NEWSROOM_STATE_DIR / "menzo_hard_skips.json"
 MENZO_DUPLICATE_ARBITRATION_CACHE_FILE = NEWSROOM_STATE_DIR / "menzo_duplicate_arbitration_cache.json"
 MENZO_DUPLICATE_ARBITRATION_CACHE_SCHEMA_VERSION = "v95.8.7"
+MENZO_DUPLICATE_ARBITRATION_CACHE_V2_FILE = duplicate_cache_v2.CACHE_FILE
+MENZO_DUPLICATE_ARBITRATION_CONTRACT_VERSION = duplicate_cache_v2.MENZO_DUPLICATE_ARBITRATION_CONTRACT_VERSION
 
 MENZO_VERSION = "v95.5_cross_run_story_novelty_gate"
 VALID_LABELS = {"high", "medium", "low", "skip"}
@@ -1668,6 +1671,7 @@ def _actual_gemini_call(status: str) -> bool:
 def _record_duplicate_call(pp: dict[str, Any], counter: str, status: str) -> None:
     if _actual_gemini_call(status):
         pp[counter] = int(pp.get(counter, 0) or 0) + 1
+        pp["gemini_duplicate_calls_executed"] = int(pp.get("gemini_duplicate_calls_executed", 0) or 0) + 1
     else:
         pp[counter + "_avoided"] = int(pp.get(counter + "_avoided", 0) or 0) + 1
     _sync_duplicate_counters(pp)
@@ -1690,6 +1694,11 @@ def _init_batch_duplicate_counters(result: dict[str, Any]) -> dict[str, Any]:
         "menzo_same_run_duplicate_groups", "menzo_same_run_duplicates_blocked", "menzo_recent_history_duplicates_blocked",
         "menzo_recent_history_material_updates", "menzo_duplicate_arbitration_fail_closed", "gemini_calls_used_for_duplicate_arbitration",
         "menzo_duplicates_blocked_same_run", "menzo_duplicates_blocked_recent_history", "menzo_real_updates_allowed",
+        "duplicate_gate_unchanged_run", "duplicate_gate_no_comparisons", "duplicate_cache_same_run_hit",
+        "duplicate_cache_recent_history_hit", "duplicate_cache_candidate_changed", "duplicate_cache_comparison_changed",
+        "duplicate_cache_contract_changed", "duplicate_failure_cooldown_hit", "duplicate_components_recomputed",
+        "duplicate_recent_groups_recomputed", "gemini_duplicate_calls_planned", "gemini_duplicate_calls_executed",
+        "gemini_duplicate_calls_avoided",
     ]:
         pp.setdefault(key, 0)
     return pp
@@ -1821,11 +1830,176 @@ def _skip_unresolved(item: dict[str, Any]) -> dict[str, Any]:
     return item
 
 
+def _v2_identity(item: dict[str, Any]) -> str:
+    return source_key(item.get("url") or item.get("source_url") or "")
+
+
+def _v2_pairs(items: list[dict[str, Any]]) -> list[tuple[str, str]]:
+    return [(_v2_identity(item), duplicate_cache_v2.candidate_material_hash(compact_candidate_record(item, "stable"))) for item in items]
+
+
+def _v2_cache() -> dict[str, Any]:
+    # Legacy unit tests predate persistent state isolation.  Focused cache tests
+    # provide a temporary v2 path; never let the repository default leak state
+    # between unrelated pytest cases.
+    if os.getenv("PYTEST_CURRENT_TEST") and Path(MENZO_DUPLICATE_ARBITRATION_CACHE_V2_FILE) == duplicate_cache_v2.CACHE_FILE:
+        return duplicate_cache_v2.empty_cache("test_default_disabled")
+    return duplicate_cache_v2.load_cache(Path(MENZO_DUPLICATE_ARBITRATION_CACHE_V2_FILE))
+
+
+def _v2_persist(cache: dict[str, Any]) -> None:
+    if os.getenv("PYTEST_CURRENT_TEST") and Path(MENZO_DUPLICATE_ARBITRATION_CACHE_V2_FILE) == duplicate_cache_v2.CACHE_FILE:
+        return
+    duplicate_cache_v2.atomic_write(cache, Path(MENZO_DUPLICATE_ARBITRATION_CACHE_V2_FILE))
+
+
+def _v2_decisions(items: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    out = {}
+    for item in items:
+        if item.get("menzo_duplicate_checked") is True:
+            decision = {field: item.get(field, "") for field in duplicate_cache_v2.REQUIRED_DECISION_FIELDS}
+            decision["disposition"] = {k: item.get(k, "") for k in duplicate_cache_v2.REQUIRED_DISPOSITION_FIELDS}
+            out[_v2_identity(item)] = decision
+    return out
+
+
+def _v2_rehydrate(result: dict[str, Any], decisions: dict[str, dict[str, Any]]) -> None:
+    items, _ = _actionable_items(result); blocked=set(); skipped=[]
+    for item in items:
+        saved = decisions.get(_v2_identity(item))
+        if not saved: continue
+        for field in duplicate_cache_v2.REQUIRED_DECISION_FIELDS:
+            item[field] = saved[field]
+        disposition = saved.get("disposition") if isinstance(saved.get("disposition"), dict) else {}
+        item.update({k: v for k, v in disposition.items() if v is not None})
+        if item.get("menzo_authorized") is False:
+            blocked.add(id(item)); skipped.append(item)
+    if blocked: _remove_from_sections(result, blocked, skipped)
+
+
+def _v2_avoided(pp: dict[str, Any], reason: str, count: int = 1) -> None:
+    pp["gemini_duplicate_calls_avoided"] += max(0, count)
+    if count <= 0: return
+    for avoided_index in range(count):
+        record_gemini_event(agent="Menzo", phase="duplicate_arbitration", model=DUPLICATE_BATCH_MODEL,
+            status="avoided", reason="ai_duplicate_arbitration", result=reason, saved_gemini_call=True,
+            avoidance_reason=reason, avoided_index=avoided_index)
+
+
+def _same_state_outcomes(items: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    saved=_v2_decisions(items)
+    return { _v2_identity(x): saved.get(_v2_identity(x), {"validated_no_match": True}) for x in items }
+
+
+def _build_same_state(items: list[dict[str, Any]], pair_map: dict[str, str], request_count: int, snapshot: str) -> dict[str, Any]:
+    outcomes=_same_state_outcomes(items); grouped: dict[str, list[str]]={}
+    for cid,outcome in outcomes.items():
+        winner=source_key(outcome.get("menzo_winner_url")) if isinstance(outcome,dict) else ""
+        if winner: grouped.setdefault(winner,[]).append(cid)
+    groups={}
+    for winner,members in grouped.items():
+        members=sorted(set(members+[winner])); gid=duplicate_cache_v2.content_hash([winner,*members])
+        groups[gid]={"group_id":gid,"authorized_representative":winner,"member_candidate_ids":members,
+            "member_material_hashes":{cid:pair_map[cid] for cid in members if cid in pair_map},"winner_url":winner}
+    grouped_ids={cid for group in groups.values() for cid in group["member_candidate_ids"]}
+    return {"contract_fingerprint":duplicate_cache_v2.contract_fingerprint(),"candidate_material_hashes":pair_map,
+        "outcomes":outcomes,"groups":groups,"standalone_survivors":sorted(set(pair_map)-grouped_ids),
+        "actual_gemini_request_count":request_count,"snapshot_hash":snapshot}
+
+
+def _valid_complete_same_run_state(state: Any) -> bool:
+    if not isinstance(state,dict) or state.get("contract_fingerprint") != duplicate_cache_v2.contract_fingerprint(): return False
+    mats=state.get("candidate_material_hashes"); outcomes=state.get("outcomes")
+    groups=state.get("groups"); standalone=state.get("standalone_survivors")
+    if not isinstance(mats,dict) or not isinstance(outcomes,dict) or not isinstance(groups,dict) or not isinstance(standalone,list): return False
+    if set(mats) != set(outcomes): return False
+    for cid,outcome in outcomes.items():
+        if outcome != {"validated_no_match":True} and not duplicate_cache_v2.valid_decisions({cid:outcome}): return False
+    seen=set()
+    for gid,group in groups.items():
+        if not isinstance(group,dict) or group.get("group_id")!=gid or not group.get("authorized_representative"): return False
+        members=group.get("member_candidate_ids"); member_hashes=group.get("member_material_hashes")
+        representative=source_key(group.get("authorized_representative"))
+        if not isinstance(members,list) or not isinstance(member_hashes,dict) or representative not in members: return False
+        if seen & set(members) or any(cid not in mats or cid not in outcomes or member_hashes.get(cid)!=mats.get(cid) for cid in members): return False
+        seen.update(members)
+        rep=outcomes.get(representative)
+        if not isinstance(rep,dict) or rep.get("menzo_authorized") is not True: return False
+        for cid in members:
+            outcome=outcomes[cid]
+            if cid != representative and (not isinstance(outcome,dict) or outcome.get("menzo_authorized") is not False or source_key(outcome.get("menzo_winner_url")) != representative): return False
+        if source_key(group.get("winner_url")) != source_key(group.get("authorized_representative")): return False
+    if seen & set(standalone) or set(standalone) != set(mats)-seen: return False
+    return True
+
+
+def _same_state_valid(state: Any, pairs: list[tuple[str,str]]) -> bool:
+    return _valid_complete_same_run_state(state) and all(state["candidate_material_hashes"].get(cid)==material for cid,material in pairs)
+
+
+def _same_state_rehydrate(result: dict[str,Any], state: dict[str,Any], ids: set[str]) -> None:
+    _v2_rehydrate(result,{cid:d for cid,d in state.get("outcomes",{}).items() if cid in ids and d != {"validated_no_match":True}})
+
+
+def _v2_note_miss(pp: dict[str, Any], cache: dict[str, Any], scope: str, pairs: list[tuple[str, str]], comparisons: str = "") -> None:
+    entries = [entry for entry in cache.get("entries", {}).values() if isinstance(entry, dict) and entry.get("scope") == scope]
+    if any(entry.get("contract_fingerprint") != duplicate_cache_v2.contract_fingerprint() for entry in entries):
+        pp["duplicate_cache_contract_changed"] += 1
+    ids = sorted(identity for identity, _ in pairs)
+    comparable = [entry for entry in entries if sorted(str(pair[0]) for pair in entry.get("candidates", []) if isinstance(pair, list)) == ids]
+    if comparable and any(entry.get("candidates") != sorted(pairs) for entry in comparable):
+        pp["duplicate_cache_candidate_changed"] += 1
+    elif comparable and any(entry.get("comparisons", "") != comparisons for entry in comparable):
+        pp["duplicate_cache_comparison_changed"] += 1
+
+
 def apply_same_story_duplicate_guard(result: dict[str, Any], massy_board: dict[str, Any] | None = None) -> None:
     pp=_init_batch_duplicate_counters(result)
-    items,_=_actionable_items(result)
+    items,_=_actionable_items(result); all_items=list(items)
     pp["massy_suspicious_duplicate_pairs"] = len((massy_board or {}).get("suspicious_story_clusters", []) or [])
-    if len(items) < 2: return
+    if len(items) < 2:
+        pp["duplicate_gate_no_comparisons"] += 1
+        return
+    pairs=_v2_pairs(items); pair_map=dict(pairs); snapshot=duplicate_cache_v2.actionable_snapshot_hash(pairs)
+    cache=_v2_cache(); state=cache.get("same_run_state", {})
+    if not _valid_complete_same_run_state(state):
+        state={}
+        cache.pop("same_run_state",None)
+    pp["duplicate_cache_load_status"] = cache.get("load_status", "unknown")
+    pp["duplicate_cache_entry_count"] = len(cache.get("entries", {}))
+    if _same_state_valid(state,pairs) and set(state.get("candidate_material_hashes",{}))==set(pair_map):
+        _same_state_rehydrate(result,state,set(pair_map)); pp["duplicate_cache_same_run_hit"]+=1; pp["duplicate_gate_unchanged_run"]+=1
+        _v2_avoided(pp,"duplicate_run_snapshot_unchanged",int(state.get("actual_gemini_request_count",0))); return
+    oldm=state.get("candidate_material_hashes",{})
+    current_ids=set(pair_map); previous_ids=set(oldm); removed_ids=previous_ids-current_ids
+    changed_ids={cid for cid,material in pairs if oldm.get(cid)!=material or cid not in state.get("outcomes",{})}
+    invalidated=set(changed_ids)
+    for group in state.get("groups",{}).values() if isinstance(state.get("groups"),dict) else []:
+        members=set(group.get("member_candidate_ids",[]))
+        if members & (changed_ids|removed_ids): invalidated |= members & current_ids
+    unchanged={cid for cid,material in pairs if cid not in invalidated and oldm.get(cid)==material and cid in state.get("outcomes",{})}
+    if unchanged: _same_state_rehydrate(result,state,unchanged); pp["duplicate_cache_same_run_hit"]+=1
+    current,_=_actionable_items(result); changed=[x for x in current if _v2_identity(x) in invalidated]
+    representatives=[x for x in current if _v2_identity(x) in unchanged and x.get("menzo_authorized") is not False
+        and any(same_story_signal(candidate,x)[0] != "clearly_distinct" for candidate in changed)]
+    if not changed:
+        if removed_ids:
+            cache["same_run_state"]=_build_same_state(all_items,pair_map,0,snapshot); _v2_persist(cache)
+        return
+    if len(changed)+len(representatives)<2:
+        cache["same_run_state"]=_build_same_state(all_items,pair_map,0,snapshot); _v2_persist(cache)
+        pp["duplicate_gate_no_comparisons"]+=1
+        return
+    items=changed+representatives; eval_pairs=_v2_pairs(items); key=duplicate_cache_v2.request_key("same_run_delta",eval_pairs)
+    if duplicate_cache_v2.failure_in_cooldown(cache, key):
+        pp["duplicate_failure_cooldown_hit"] += 1; _v2_avoided(pp, "duplicate_failure_cooldown")
+        blocked=set(); skipped=[]
+        for item in changed: _skip_unresolved(item); blocked.add(id(item)); skipped.append(item)
+        _remove_from_sections(result, blocked, skipped); return
+    if unchanged: _v2_avoided(pp,"duplicate_component_cache_hit",int(state.get("actual_gemini_request_count",0)))
+    _v2_note_miss(pp, cache, "same_run", eval_pairs)
+    pp["duplicate_components_recomputed"] += 1; pp["gemini_duplicate_calls_planned"] += 1
+    calls_before=int(pp.get("gemini_duplicate_calls_executed",0))
     ids_by_item={id(x): f"c{i}" for i,x in enumerate(items)}
     recs=[compact_candidate_record(x, ids_by_item[id(x)]) for x in items]
     items_by_id={ids_by_item[id(x)]: x for x in items}; records_by_id={r["id"]: r for r in recs}; ids=set(items_by_id)
@@ -1836,10 +2010,12 @@ def apply_same_story_duplicate_guard(result: dict[str, Any], massy_board: dict[s
         raw,status=call_gemini_json_model(build_same_run_batch_prompt(recs, err), DUPLICATE_BATCH_MODEL, ledger_context={"candidate_count": len(recs), "repair": True}, phase="duplicate_arbitration_same_run_repair")
         _record_duplicate_call(pp, "menzo_same_run_batch_repairs", status)
         groups,err=validate_same_run_batch(raw, ids)
+    if groups is not None:
+        groups=[g for g in groups if ({_v2_identity(items_by_id[x]) for x in {g["keep_id"],*g["discard_ids"]}} & changed_ids)]
     if groups is None:
-        survivors: list[tuple[str, dict[str, Any]]] = []
+        survivors: list[tuple[str, dict[str, Any]]] = [(ids_by_item[id(x)],x) for x in representatives]
         blocked:set[int]=set(); skipped:list[dict[str, Any]]=[]
-        for cid,item in [(ids_by_item[id(x)], x) for x in items]:
+        for cid,item in [(ids_by_item[id(x)], x) for x in changed]:
             if id(item) in blocked:
                 continue
             if not survivors:
@@ -1864,7 +2040,12 @@ def apply_same_story_duplicate_guard(result: dict[str, Any], massy_board: dict[s
             mark_menzo_duplicate(winner, checked=True, scope="same_run", decision="DUPLICATE", authorized=True, reason=reason, winner=winner)
             loser.update({"decision":"skip","priority":"skip","article_type":"duplicate","reason":"skip:duplicate_same_run"}); mark_menzo_duplicate(loser, checked=True, scope="same_run", decision="DUPLICATE", authorized=False, reason=reason, winner=winner)
             blocked.add(id(loser)); skipped.append(loser); pp["menzo_same_run_duplicates_blocked"] += 1
-        _remove_from_sections(result, blocked, skipped); _sync_duplicate_counters(pp); return
+        _remove_from_sections(result, blocked, skipped); _sync_duplicate_counters(pp)
+        if pp.get("menzo_duplicate_arbitration_fail_closed"):
+            duplicate_cache_v2.record_failure(cache, key, "invalid_response")
+        else:
+            cache["same_run_state"]=_build_same_state(all_items,pair_map,int(pp.get("gemini_duplicate_calls_executed",0))-calls_before,snapshot)
+        _v2_persist(cache); return
     blocked=set(); skipped=[]; pp["menzo_same_run_duplicate_groups"] += len(groups)
     for g in groups:
         keep=items_by_id[g["keep_id"]]; reason=g["reason"]
@@ -1872,14 +2053,27 @@ def apply_same_story_duplicate_guard(result: dict[str, Any], massy_board: dict[s
         for did in g["discard_ids"]:
             loser=items_by_id[did]; loser.update({"decision":"skip","priority":"skip","article_type":"duplicate","reason":"skip:duplicate_same_run"}); mark_menzo_duplicate(loser, checked=True, scope="same_run", decision="DUPLICATE", authorized=False, reason=reason, winner=keep)
             blocked.add(id(loser)); skipped.append(loser); pp["menzo_same_run_duplicates_blocked"] += 1
+            loser_id=_v2_identity(loser)
+            for old_group in state.get("groups",{}).values() if isinstance(state.get("groups"),dict) else []:
+                if old_group.get("authorized_representative") != loser_id: continue
+                for member_id in old_group.get("member_candidate_ids",[]):
+                    member=next((x for x in all_items if _v2_identity(x)==member_id),None)
+                    if member is None or member is keep: continue
+                    member.update({"decision":"skip","priority":"skip","article_type":"duplicate","reason":"skip:duplicate_same_run"})
+                    mark_menzo_duplicate(member,checked=True,scope="same_run",decision="DUPLICATE",authorized=False,reason=reason,winner=keep)
+                    if id(member) not in blocked:
+                        blocked.add(id(member)); skipped.append(member)
     _remove_from_sections(result, blocked, skipped); _sync_duplicate_counters(pp)
+    cache["same_run_state"]=_build_same_state(all_items,pair_map,int(pp.get("gemini_duplicate_calls_executed",0))-calls_before,snapshot)
+    _v2_persist(cache)
 
 
-def apply_recent_published_duplicate_guard(result: dict[str, Any]) -> None:
+def _apply_recent_published_duplicate_group(result: dict[str, Any], history: list[dict[str, Any]]) -> None:
     pp=_init_batch_duplicate_counters(result); items,_=_actionable_items(result)
     if not items: return
-    history=[x for x in load_cross_run_story_history(RECENT_PUBLISHED_DUPLICATE_LOOKBACK_HOURS) if isinstance(x, dict)]
-    if not history: return
+    if not history:
+        pp["duplicate_gate_no_comparisons"] += 1
+        return
     ids_by_item={id(x): f"c{i}" for i,x in enumerate(items)}
     cur=[compact_candidate_record(x, ids_by_item[id(x)]) for x in items]; pub=[compact_published_record(x, f"p{i}") for i,x in enumerate(history)]
     byc={r["id"]: items[i] for i,r in enumerate(cur)}; byp={r["id"]: history[i] for i,r in enumerate(pub)}; cur_records={r["id"]: r for r in cur}; pub_records={r["id"]: r for r in pub}
@@ -1910,6 +2104,63 @@ def apply_recent_published_duplicate_guard(result: dict[str, Any]) -> None:
         else:
             mark_menzo_duplicate(item, checked=True, scope="recent_history", decision="REAL_UPDATE", authorized=True, compared={"url": compared}, reason=m.get("reason") or "material_update", new_fact=m["new_fact"]); pp["menzo_recent_history_material_updates"] += 1
     _remove_from_sections(result, blocked, skipped); _sync_duplicate_counters(pp)
+
+
+
+_GENERIC_SLUG_TERMS={"wwe","aew","nxt","tna","roh","news","report","reports","update","updates","result","results","latest","wrestling","star","superstar","match","show","event","exclusive"}
+
+
+def meaningful_slug_terms(item: dict[str, Any]) -> set[str]:
+    value=source_key(item.get("url") or item.get("source_url") or item.get("wp_link") or item.get("link") or "")
+    return {term for term in re.split(r"[^a-z0-9]+",value.rsplit("/",1)[-1])
+        if len(term)>=4 and not term.isdigit() and term not in _GENERIC_SLUG_TERMS}
+
+
+def _plausible_history(candidate: dict[str, Any], history: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    def plausible(old: dict[str, Any]) -> bool:
+        if same_story_signal(candidate, old)[0] != "clearly_distinct": return True
+        overlap=meaningful_slug_terms(candidate)&meaningful_slug_terms(old)
+        if len(overlap)>=2: return True
+        ca=generalized_story_terms(candidate); ob=generalized_story_terms(old)
+        return bool(overlap and set(ca.get("full_entities",set())) & set(ob.get("full_entities",set())))
+    return [old for old in history if plausible(old)]
+
+
+def apply_recent_published_duplicate_guard(result: dict[str, Any]) -> None:
+    pp=_init_batch_duplicate_counters(result); items,_=_actionable_items(result)
+    if not items: return
+    history=[x for x in load_cross_run_story_history(RECENT_PUBLISHED_DUPLICATE_LOOKBACK_HOURS) if isinstance(x,dict)]
+    if not history: pp["duplicate_gate_no_comparisons"] += 1; return
+    cache=_v2_cache(); grouped={}
+    for item in items:
+        relevant=_plausible_history(item,history)
+        if not relevant: pp["duplicate_gate_no_comparisons"] += 1; continue
+        hpairs=sorted((source_key(x.get("url") or x.get("source_url") or x.get("wp_link") or x.get("link") or ""),duplicate_cache_v2.candidate_material_hash(compact_published_record(x,"stable"))) for x in relevant)
+        hhash=duplicate_cache_v2.comparison_hash(hpairs)
+        token=duplicate_cache_v2.content_hash({"history_hash":hhash,"published":hpairs,"contract":duplicate_cache_v2.contract_fingerprint()})
+        bucket=grouped.setdefault(token,{"items":[],"history":relevant,"hpairs":hpairs,"history_hash":hhash}); bucket["items"].append(item)
+    for origin,bucket in grouped.items():
+        group_items=bucket["items"]; pairs=_v2_pairs(group_items); hhash=bucket["history_hash"]
+        key=duplicate_cache_v2.request_key("recent_history_group",pairs,hhash)
+        hit=duplicate_cache_v2.lookup(cache,key,candidates=pairs,comparisons=hhash)
+        if hit:
+            _v2_rehydrate(result,hit["decisions"]); pp["duplicate_cache_recent_history_hit"]+=1
+            _v2_avoided(pp,"duplicate_recent_history_cache_hit",hit["actual_gemini_request_count"]); continue
+        if duplicate_cache_v2.failure_in_cooldown(cache,key):
+            pp["duplicate_failure_cooldown_hit"]+=1; _v2_avoided(pp,"duplicate_failure_cooldown",1)
+            blocked=set(); skipped=[]
+            for item in group_items: _skip_unresolved(item); blocked.add(id(item)); skipped.append(item)
+            _remove_from_sections(result,blocked,skipped); continue
+        before=int(pp.get("gemini_duplicate_calls_executed",0)); pp["duplicate_recent_groups_recomputed"]+=1; pp["gemini_duplicate_calls_planned"]+=1
+        mini={"selected":[x for x in group_items if x in result.get("selected",[])],"pending":[x for x in group_items if x in result.get("pending",[])],"skipped":[],"postprocess":pp}
+        _apply_recent_published_duplicate_group(mini,bucket["history"]); used=int(pp.get("gemini_duplicate_calls_executed",0))-before
+        blocked={id(x) for x in mini.get("skipped",[])}; _remove_from_sections(result,blocked,mini.get("skipped",[]))
+        if any(x.get("reason")=="skip:duplicate_arbitration_unresolved" for x in group_items): duplicate_cache_v2.record_failure(cache,key,"invalid_response")
+        else:
+            duplicate_cache_v2.store(cache,key,"recent_history_group",_v2_decisions(group_items),candidates=pairs,comparisons=hhash,actual_request_count=used)
+            cache["entries"][key]["comparison_records"]=[{"identity":cid,"material_hash":material} for cid,material in bucket["hpairs"]]
+            cache["entries"][key]["origin_request_group_id"]=origin
+    _v2_persist(cache)
 
 
 def valid_menzo_selected_article(item: dict[str, Any]) -> bool:
