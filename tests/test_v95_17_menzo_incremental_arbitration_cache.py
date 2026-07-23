@@ -119,9 +119,9 @@ def test_recent_history_unrelated_stable_and_relevant_change_is_affected_only(mo
     monkeypatch.setattr(menzo,"call_gemini_json_model",lambda prompt,model,**k: prompts.append(prompt) or ({"matches":[]},model))
     menzo.apply_recent_published_duplicate_guard(result([dict(current)])); assert len(prompts)==1
     history.append(article("https://old/arena","AEW announces a new London arena"))
-    menzo.apply_recent_published_duplicate_guard(result([dict(current)])); assert len(prompts)==1
+    menzo.apply_recent_published_duplicate_guard(result([dict(current)])); assert len(prompts)==2 and "https://old/punk" not in prompts[-1]
     history.append(article("https://old/punk-two","CM Punk contract with WWE officially confirmed"))
-    menzo.apply_recent_published_duplicate_guard(result([dict(current)])); assert len(prompts)==2
+    menzo.apply_recent_published_duplicate_guard(result([dict(current)])); assert len(prompts)==3
     assert "https://old/arena" not in prompts[-1] and "https://old/punk-two" in prompts[-1]
 
 
@@ -187,10 +187,9 @@ def test_disjoint_recent_sets_never_share_prompt_and_group_hit_avoids_once(monke
     monkeypatch.setattr(menzo,"load_cross_run_story_history",lambda *a,**k:[olda,oldb]); prompts=[]
     monkeypatch.setattr(menzo,"call_gemini_json_model",lambda prompt,model,**k: prompts.append(prompt) or ({"matches":[]},model))
     first=result([dict(a),dict(b)]); menzo.apply_recent_published_duplicate_guard(first)
-    assert len(prompts)==2
-    assert all(not ("https://old/punk" in p and "https://old/mox" in p) for p in prompts)
+    assert len(prompts)==1 and "https://old/punk" in prompts[0] and "https://old/mox" in prompts[0]
     second=result([dict(a),dict(b)]); menzo.apply_recent_published_duplicate_guard(second)
-    assert len(prompts)==2 and second["postprocess"]["gemini_duplicate_calls_avoided"]==2
+    assert len(prompts)==1 and second["postprocess"]["gemini_duplicate_calls_avoided"]==0
 
 
 def test_recent_group_one_batch_avoided_once_and_cooldown_isolated(monkeypatch,tmp_path):
@@ -200,7 +199,7 @@ def test_recent_group_one_batch_avoided_once_and_cooldown_isolated(monkeypatch,t
     monkeypatch.setattr(menzo,"call_gemini_json_model",lambda prompt,model,**k: calls.append(prompt) or ({"matches":[]},model))
     menzo.apply_recent_published_duplicate_guard(result([dict(x) for x in candidates])); assert len(calls)==1
     again=result([dict(x) for x in candidates]); menzo.apply_recent_published_duplicate_guard(again)
-    assert len(calls)==1 and again["postprocess"]["gemini_duplicate_calls_avoided"]==1
+    assert len(calls)==1 and again["postprocess"]["gemini_duplicate_calls_avoided"]==0
 
 
 def test_recent_history_failure_cooldown_and_material_change_bypass(monkeypatch,tmp_path):
@@ -211,8 +210,8 @@ def test_recent_history_failure_cooldown_and_material_change_bypass(monkeypatch,
     menzo.apply_recent_published_duplicate_guard(result([dict(cur)])); first=len(calls); assert first==3
     cooled=result([dict(cur)]); menzo.apply_recent_published_duplicate_guard(cooled)
     assert len(calls)==first and cooled["postprocess"]["duplicate_failure_cooldown_hit"]==1
-    changed=dict(cur); changed["summary"]="CM Punk WWE contract materially changed"
-    menzo.apply_recent_published_duplicate_guard(result([changed])); assert len(calls)>first
+    old["summary"]="CM Punk WWE contract history materially changed"
+    menzo.apply_recent_published_duplicate_guard(result([dict(cur)])); assert len(calls)>first
 
 
 def test_changed_loser_includes_representative(monkeypatch,tmp_path):
@@ -263,10 +262,10 @@ def test_removed_loser_and_entire_group_are_pruned_without_unrelated_recompute(m
     monkeypatch.setattr(menzo,"call_gemini_json_model",fake)
     menzo.apply_same_story_duplicate_guard(result([article("https://g/a","CM Punk WWE contract"),article("https://g/b","CM Punk WWE deal"),article("https://u/c","AEW arena announced")]),{})
     out=result([article("https://g/a","CM Punk WWE contract"),article("https://u/c","AEW arena announced")]); menzo.apply_same_story_duplicate_guard(out,{})
-    assert len(prompts)==1 and "https://g/b" not in json.dumps(json.loads(path.read_text())["same_run_state"])
+    assert len(prompts)==2 and "https://g/b" not in json.dumps(json.loads(path.read_text())["same_run_state"])
     # Removing the remainder of the group only prunes state; unrelated C is a cache hit.
     out2=result([article("https://u/c","AEW arena announced"),article("https://u/d","TNA signs new venue")]); menzo.apply_same_story_duplicate_guard(out2,{})
-    assert len(prompts)==1 and "https://g/a" not in json.dumps(json.loads(path.read_text())["same_run_state"])
+    assert len(prompts)==3 and "https://g/a" not in json.dumps(json.loads(path.read_text())["same_run_state"])
 
 
 @pytest.mark.parametrize("mutate",[
@@ -324,4 +323,84 @@ def test_unrelated_generic_wwe_publication_preserves_recent_cache_hit(monkeypatc
     menzo.apply_recent_published_duplicate_guard(result([dict(current)])); assert len(prompts)==1
     history.append(article("https://old/wwe-latest-news-update","Roman Reigns charity appearance"))
     out=result([dict(current)]); menzo.apply_recent_published_duplicate_guard(out)
-    assert len(prompts)==1 and out["postprocess"]["duplicate_cache_recent_history_hit"]==1
+    assert len(prompts)==2 and "https://old/cm-punk-contract-status" not in prompts[-1]
+
+
+def test_same_run_semantic_mismatch_still_sends_all_authorized_survivors(monkeypatch,tmp_path):
+    monkeypatch.setattr(menzo,"MENZO_DUPLICATE_ARBITRATION_CACHE_V2_FILE",tmp_path/"cache.json"); prompts=[]
+    monkeypatch.setattr(menzo,"same_story_signal",lambda *a:("clearly_distinct",[],0.0))
+    def fake(prompt,model,**k):
+        prompts.append(prompt)
+        if len(prompts)==1: return {"duplicate_groups":[]},model
+        # c0 is new C, c1/c2/c3 are cached A/B/D. Apply C/A; ignore old-only B/D.
+        return {"duplicate_groups":[{"keep_id":"c1","discard_ids":["c0"],"reason":"semantic match"},{"keep_id":"c2","discard_ids":["c3"],"reason":"old only"}]},model
+    monkeypatch.setattr(menzo,"call_gemini_json_model",fake)
+    a=article("https://same/a","WWE agreement with Seth Rollins expires"); b=article("https://same/b","AEW announces arena renovation"); d=article("https://same/d","TNA schedules a media event")
+    menzo.apply_same_story_duplicate_guard(result([dict(a),dict(b),dict(d)]),{})
+    c=article("https://same/c","Seth Rollins departs the promotion"); out=result([dict(a),dict(b),dict(d),c]); menzo.apply_same_story_duplicate_guard(out,{})
+    assert len(prompts)==2 and all(url in prompts[-1] for url in ["https://same/a","https://same/b","https://same/c","https://same/d"])
+    assert any(x["url"]=="https://same/c" for x in out["skipped"])
+    assert any(x["url"]=="https://same/b" for x in out["selected"])
+
+
+def test_recent_wording_mismatch_always_reaches_gemini(monkeypatch,tmp_path):
+    monkeypatch.setattr(menzo,"MENZO_DUPLICATE_ARBITRATION_CACHE_V2_FILE",tmp_path/"cache.json"); monkeypatch.setattr(menzo,"same_story_signal",lambda *a:("clearly_distinct",[],0.0)); prompts=[]
+    history=[article("https://history/agreement-expiry","WWE agreement with Seth Rollins expires")]
+    monkeypatch.setattr(menzo,"load_cross_run_story_history",lambda *a,**k:history)
+    monkeypatch.setattr(menzo,"call_gemini_json_model",lambda prompt,model,**k: prompts.append(prompt) or ({"matches":[]},model))
+    menzo.apply_recent_published_duplicate_guard(result([article("https://current/departure","Seth Rollins departs the promotion")]))
+    assert len(prompts)==1 and "Seth Rollins departs" in prompts[0] and "agreement with Seth Rollins expires" in prompts[0]
+
+
+def test_history_frontier_new_changed_and_removed_records(monkeypatch,tmp_path):
+    path=tmp_path/"cache.json"; monkeypatch.setattr(menzo,"MENZO_DUPLICATE_ARBITRATION_CACHE_V2_FILE",path); prompts=[]
+    h1=article("https://h/one","History one"); history=[h1]; monkeypatch.setattr(menzo,"load_cross_run_story_history",lambda *a,**k:list(history))
+    monkeypatch.setattr(menzo,"call_gemini_json_model",lambda prompt,model,**k: prompts.append(prompt) or ({"matches":[]},model))
+    candidate=article("https://c/one","Current story")
+    menzo.apply_recent_published_duplicate_guard(result([dict(candidate)])); assert len(prompts)==1 and "https://h/one" in prompts[-1]
+    menzo.apply_recent_published_duplicate_guard(result([dict(candidate)])); assert len(prompts)==1
+    history.extend([article("https://h/two","History two"),article("https://h/three","History three")])
+    menzo.apply_recent_published_duplicate_guard(result([dict(candidate)])); assert len(prompts)==2 and "https://h/one" not in prompts[-1] and all(x in prompts[-1] for x in ["https://h/two","https://h/three"])
+    history[1]=article("https://h/two","History two materially changed")
+    menzo.apply_recent_published_duplicate_guard(result([dict(candidate)])); assert len(prompts)==3 and "https://h/two" in prompts[-1] and "https://h/three" not in prompts[-1]
+    history.pop(2)
+    menzo.apply_recent_published_duplicate_guard(result([dict(candidate)])); assert len(prompts)==3
+    state=json.loads(path.read_text())["recent_history_state"]["candidates"]["https://c/one"]["reviewed_history"]
+    assert "https://h/three" not in state
+
+
+def test_history_frontier_new_and_changed_candidate_get_full_history_only(monkeypatch,tmp_path):
+    monkeypatch.setattr(menzo,"MENZO_DUPLICATE_ARBITRATION_CACHE_V2_FILE",tmp_path/"cache.json"); prompts=[]
+    history=[article("https://h/one","One"),article("https://h/two","Two")]; monkeypatch.setattr(menzo,"load_cross_run_story_history",lambda *a,**k:history)
+    monkeypatch.setattr(menzo,"call_gemini_json_model",lambda prompt,model,**k: prompts.append(prompt) or ({"matches":[]},model))
+    old=article("https://c/old","Old candidate"); menzo.apply_recent_published_duplicate_guard(result([dict(old)]))
+    new=article("https://c/new","New candidate"); menzo.apply_recent_published_duplicate_guard(result([dict(old),dict(new)]))
+    assert len(prompts)==2 and "https://c/new" in prompts[-1] and "https://c/old" not in prompts[-1] and all(x["url"] in prompts[-1] for x in history)
+    changed=dict(old); changed["summary"]="Old candidate changed"; menzo.apply_recent_published_duplicate_guard(result([changed,dict(new)]))
+    assert len(prompts)==3 and "https://c/old" in prompts[-1] and "https://c/new" not in prompts[-1] and all(x["url"] in prompts[-1] for x in history)
+
+
+def test_removed_matched_history_clears_stale_decision_without_resending(monkeypatch,tmp_path):
+    path=tmp_path/"cache.json"; monkeypatch.setattr(menzo,"MENZO_DUPLICATE_ARBITRATION_CACHE_V2_FILE",path); prompts=[]
+    matched=article("https://h/matched","Matched history"); other=article("https://h/other","Other history"); history=[matched,other]
+    monkeypatch.setattr(menzo,"load_cross_run_story_history",lambda *a,**k:list(history))
+    def fake(prompt,model,**k):
+        prompts.append(prompt); return {"matches":[{"current_id":"c0","published_id":"p0","decision":"DUPLICATE","reason":"same"}]},model
+    monkeypatch.setattr(menzo,"call_gemini_json_model",fake)
+    candidate=article("https://c/item","Current"); menzo.apply_recent_published_duplicate_guard(result([dict(candidate)])); assert len(prompts)==1
+    history.pop(0); out=result([dict(candidate)]); menzo.apply_recent_published_duplicate_guard(out)
+    assert len(prompts)==1 and out["selected"][0].get("menzo_compared_with_url") in {None,""}
+    entry=json.loads(path.read_text())["recent_history_state"]["candidates"]["https://c/item"]
+    assert entry["outcome"]=={"validated_no_match":True} and entry["matched_published_identity"]==""
+
+
+def test_history_frontier_batches_one_new_record_once_for_three_candidates(monkeypatch,tmp_path):
+    monkeypatch.setattr(menzo,"MENZO_DUPLICATE_ARBITRATION_CACHE_V2_FILE",tmp_path/"cache.json"); prompts=[]
+    history=[article("https://h/old","Old")]; monkeypatch.setattr(menzo,"load_cross_run_story_history",lambda *a,**k:list(history))
+    monkeypatch.setattr(menzo,"call_gemini_json_model",lambda prompt,model,**k: prompts.append(prompt) or ({"matches":[]},model))
+    candidates=[article(f"https://c/{i}",f"Candidate {i}") for i in range(3)]
+    menzo.apply_recent_published_duplicate_guard(result([dict(x) for x in candidates])); assert len(prompts)==1
+    history.append(article("https://h/new","New publication")); second=result([dict(x) for x in candidates]); menzo.apply_recent_published_duplicate_guard(second)
+    assert len(prompts)==2 and "https://h/new" in prompts[-1] and "https://h/old" not in prompts[-1]
+    assert second["postprocess"]["gemini_duplicate_calls_executed"]==1
+    third=result([dict(x) for x in candidates]); menzo.apply_recent_published_duplicate_guard(third); assert len(prompts)==2

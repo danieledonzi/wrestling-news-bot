@@ -337,15 +337,14 @@ def test_recent_history_batch_duplicate_update_no_match_and_one_call(monkeypatch
     calls=[]
     def arbitrate(prompt, *a, **k):
         calls.append(k.get("phase"))
-        if "https://new/dup" in prompt: return {"matches":[{"current_id":"c0","published_id":"p0","decision":"DUPLICATE","reason":"same"}]}, "gemini-3.1-flash-lite"
-        return {"matches":[{"current_id":"c0","published_id":"p0","decision":"MATERIAL_UPDATE","new_fact":"WWE officially announced CM Punk match.","reason":"official"}]}, "gemini-3.1-flash-lite"
+        return {"matches":[{"current_id":"c0","published_id":"p0","decision":"DUPLICATE","reason":"same"},{"current_id":"c1","published_id":"p1","decision":"MATERIAL_UPDATE","new_fact":"WWE officially announced CM Punk match.","reason":"official"}]}, "gemini-3.1-flash-lite"
     monkeypatch.setattr(menzo, "call_gemini_json_model", arbitrate)
     r=result([item("https://new/dup","CM Punk signs WWE contract"), item("https://new/upd","WWE officially announced CM Punk match for SummerSlam.", "WWE officially announced CM Punk match for SummerSlam."), item("https://new/o","ordinary")])
     menzo.apply_recent_published_duplicate_guard(r)
     assert [x["url"] for x in r["selected"]] == ["https://new/upd", "https://new/o"]
     assert r["selected"][0]["menzo_duplicate_decision"] == "REAL_UPDATE"
     assert "menzo_duplicate_checked" not in r["selected"][1]
-    assert calls == ["duplicate_arbitration_recent_history_batch"] * 2
+    assert calls == ["duplicate_arbitration_recent_history_batch"]
 
 
 def test_recent_history_micro_requires_explicit_valid_published_id(monkeypatch):

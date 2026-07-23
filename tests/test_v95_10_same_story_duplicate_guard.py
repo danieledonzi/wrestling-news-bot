@@ -68,9 +68,8 @@ def test_recent_history_duplicate_material_update_and_no_match(monkeypatch):
     history = [item("CM Punk signs WWE contract", "https://old.test/dup"), item("Rumored Punk match", "https://old.test/update", "CM Punk vs Cody Rhodes was rumored for SummerSlam.")]
     monkeypatch.setattr(menzo, "load_cross_run_story_history", lambda *a, **k: history)
     def arbitrate(prompt, *a, **k):
-        if "https://new.test/dup" in prompt:
-            return {"matches": [{"current_id":"c0","published_id":"p0","decision":"DUPLICATE","reason":"same fact"}]}, "gemini-3.1-flash-lite"
-        return {"matches": [{"current_id":"c0","published_id":"p0","decision":"MATERIAL_UPDATE","new_fact":"WWE officially announced CM Punk vs Cody Rhodes match.","reason":"rumor official"}]}, "gemini-3.1-flash-lite"
+        return {"matches": [{"current_id":"c0","published_id":"p0","decision":"DUPLICATE","reason":"same fact"},
+            {"current_id":"c1","published_id":"p1","decision":"MATERIAL_UPDATE","new_fact":"WWE officially announced CM Punk vs Cody Rhodes match.","reason":"rumor official"}]}, "gemini-3.1-flash-lite"
     monkeypatch.setattr(menzo, "call_gemini_json_model", arbitrate)
     r = result([
         item("CM Punk signs WWE contract", "https://new.test/dup"),

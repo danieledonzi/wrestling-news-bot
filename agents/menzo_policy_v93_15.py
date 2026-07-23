@@ -1980,8 +1980,7 @@ def apply_same_story_duplicate_guard(result: dict[str, Any], massy_board: dict[s
     unchanged={cid for cid,material in pairs if cid not in invalidated and oldm.get(cid)==material and cid in state.get("outcomes",{})}
     if unchanged: _same_state_rehydrate(result,state,unchanged); pp["duplicate_cache_same_run_hit"]+=1
     current,_=_actionable_items(result); changed=[x for x in current if _v2_identity(x) in invalidated]
-    representatives=[x for x in current if _v2_identity(x) in unchanged and x.get("menzo_authorized") is not False
-        and any(same_story_signal(candidate,x)[0] != "clearly_distinct" for candidate in changed)]
+    representatives=[x for x in current if _v2_identity(x) in unchanged and x.get("menzo_authorized") is not False]
     if not changed:
         if removed_ids:
             cache["same_run_state"]=_build_same_state(all_items,pair_map,0,snapshot); _v2_persist(cache)
@@ -2126,40 +2125,83 @@ def _plausible_history(candidate: dict[str, Any], history: list[dict[str, Any]])
     return [old for old in history if plausible(old)]
 
 
+def _recent_history_identity(item: dict[str, Any]) -> str:
+    return source_key(item.get("url") or item.get("source_url") or item.get("wp_link") or item.get("link") or "")
+
+
+def _recent_decision(item: dict[str, Any]) -> dict[str, Any] | None:
+    if item.get("menzo_duplicate_scope") != "recent_history" or item.get("menzo_duplicate_checked") is not True: return None
+    return _v2_decisions([item]).get(_v2_identity(item))
+
+
+def _valid_recent_history_state(value: Any) -> bool:
+    if not isinstance(value,dict) or value.get("contract_fingerprint") != duplicate_cache_v2.contract_fingerprint(): return False
+    candidates=value.get("candidates")
+    if not isinstance(candidates,dict): return False
+    for cid,entry in candidates.items():
+        if not isinstance(entry,dict) or not isinstance(entry.get("candidate_material_hash"),str) or not isinstance(entry.get("reviewed_history"),dict): return False
+        outcome=entry.get("outcome")
+        if outcome != {"validated_no_match":True} and not duplicate_cache_v2.valid_decisions({cid:outcome}): return False
+        if not isinstance(entry.get("actual_gemini_request_count",0),int): return False
+    return True
+
+
 def apply_recent_published_duplicate_guard(result: dict[str, Any]) -> None:
     pp=_init_batch_duplicate_counters(result); items,_=_actionable_items(result)
     if not items: return
     history=[x for x in load_cross_run_story_history(RECENT_PUBLISHED_DUPLICATE_LOOKBACK_HOURS) if isinstance(x,dict)]
-    if not history: pp["duplicate_gate_no_comparisons"] += 1; return
-    cache=_v2_cache(); grouped={}
+    history_by_id={_recent_history_identity(x):x for x in history if _recent_history_identity(x)}
+    history_hashes={pid:duplicate_cache_v2.candidate_material_hash(compact_published_record(old,"stable")) for pid,old in history_by_id.items()}
+    cache=_v2_cache(); state=cache.get("recent_history_state",{})
+    if not _valid_recent_history_state(state): state={"contract_fingerprint":duplicate_cache_v2.contract_fingerprint(),"candidates":{}}
+    previous=state["candidates"]; next_candidates={}; next_request_groups={}; grouped={}; current_ids={_v2_identity(x) for x in items}
     for item in items:
-        relevant=_plausible_history(item,history)
-        if not relevant: pp["duplicate_gate_no_comparisons"] += 1; continue
-        hpairs=sorted((source_key(x.get("url") or x.get("source_url") or x.get("wp_link") or x.get("link") or ""),duplicate_cache_v2.candidate_material_hash(compact_published_record(x,"stable"))) for x in relevant)
-        hhash=duplicate_cache_v2.comparison_hash(hpairs)
-        token=duplicate_cache_v2.content_hash({"history_hash":hhash,"published":hpairs,"contract":duplicate_cache_v2.contract_fingerprint()})
-        bucket=grouped.setdefault(token,{"items":[],"history":relevant,"hpairs":hpairs,"history_hash":hhash}); bucket["items"].append(item)
-    for origin,bucket in grouped.items():
-        group_items=bucket["items"]; pairs=_v2_pairs(group_items); hhash=bucket["history_hash"]
-        key=duplicate_cache_v2.request_key("recent_history_group",pairs,hhash)
-        hit=duplicate_cache_v2.lookup(cache,key,candidates=pairs,comparisons=hhash)
-        if hit:
-            _v2_rehydrate(result,hit["decisions"]); pp["duplicate_cache_recent_history_hit"]+=1
-            _v2_avoided(pp,"duplicate_recent_history_cache_hit",hit["actual_gemini_request_count"]); continue
-        if duplicate_cache_v2.failure_in_cooldown(cache,key):
+        cid=_v2_identity(item); material=dict(_v2_pairs([item]))[cid]; old=previous.get(cid) if isinstance(previous.get(cid),dict) else None
+        reviewed={pid:value for pid,value in (old.get("reviewed_history",{}) if old else {}).items() if pid in history_hashes and history_hashes[pid]==value}
+        outcome=old.get("outcome") if old else {"validated_no_match":True}; matched=str(old.get("matched_published_identity") or "") if old else ""
+        material_changed=not old or old.get("candidate_material_hash")!=material
+        if not material_changed and outcome != {"validated_no_match":True} and matched in history_hashes and reviewed.get(matched)==history_hashes[matched]:
+            _v2_rehydrate(result,{cid:outcome}); pp["duplicate_cache_recent_history_hit"]+=1
+            next_candidates[cid]={**old,"reviewed_history":reviewed}; continue
+        if material_changed:
+            reviewed={}; outcome={"validated_no_match":True}; matched=""
+        elif outcome != {"validated_no_match":True}:
+            # The supporting record disappeared or changed. Keep no-match knowledge
+            # for every other unchanged record and clear the stale decision.
+            outcome={"validated_no_match":True}; matched=""
+        delta={pid:value for pid,value in history_hashes.items() if reviewed.get(pid)!=value}
+        base={"candidate_material_hash":material,"reviewed_history":reviewed,"outcome":outcome,
+              "matched_published_identity":matched,"actual_gemini_request_count":0}
+        next_candidates[cid]=base
+        if not delta: continue
+        token=duplicate_cache_v2.content_hash(sorted(delta.items())); bucket=grouped.setdefault(token,{"items":[],"delta":delta}); bucket["items"].append(item)
+    for token,bucket in grouped.items():
+        group_items=bucket["items"]; delta=bucket["delta"]; delta_history=[history_by_id[pid] for pid in sorted(delta)]
+        pairs=_v2_pairs(group_items); delta_hash=duplicate_cache_v2.comparison_hash(sorted(delta.items()))
+        request_key=duplicate_cache_v2.request_key("recent_history_frontier",pairs,delta_hash)
+        if duplicate_cache_v2.failure_in_cooldown(cache,request_key):
             pp["duplicate_failure_cooldown_hit"]+=1; _v2_avoided(pp,"duplicate_failure_cooldown",1)
             blocked=set(); skipped=[]
             for item in group_items: _skip_unresolved(item); blocked.add(id(item)); skipped.append(item)
             _remove_from_sections(result,blocked,skipped); continue
         before=int(pp.get("gemini_duplicate_calls_executed",0)); pp["duplicate_recent_groups_recomputed"]+=1; pp["gemini_duplicate_calls_planned"]+=1
         mini={"selected":[x for x in group_items if x in result.get("selected",[])],"pending":[x for x in group_items if x in result.get("pending",[])],"skipped":[],"postprocess":pp}
-        _apply_recent_published_duplicate_group(mini,bucket["history"]); used=int(pp.get("gemini_duplicate_calls_executed",0))-before
+        _apply_recent_published_duplicate_group(mini,delta_history); used=int(pp.get("gemini_duplicate_calls_executed",0))-before
         blocked={id(x) for x in mini.get("skipped",[])}; _remove_from_sections(result,blocked,mini.get("skipped",[]))
-        if any(x.get("reason")=="skip:duplicate_arbitration_unresolved" for x in group_items): duplicate_cache_v2.record_failure(cache,key,"invalid_response")
-        else:
-            duplicate_cache_v2.store(cache,key,"recent_history_group",_v2_decisions(group_items),candidates=pairs,comparisons=hhash,actual_request_count=used)
-            cache["entries"][key]["comparison_records"]=[{"identity":cid,"material_hash":material} for cid,material in bucket["hpairs"]]
-            cache["entries"][key]["origin_request_group_id"]=origin
+        if any(x.get("reason")=="skip:duplicate_arbitration_unresolved" for x in group_items):
+            duplicate_cache_v2.record_failure(cache,request_key,"invalid_response"); continue
+        for item in group_items:
+            cid=_v2_identity(item); entry=next_candidates[cid]; entry["reviewed_history"].update(delta)
+            decision=_recent_decision(item); entry["outcome"]=decision or {"validated_no_match":True}
+            entry["matched_published_identity"]=_recent_history_identity({"url":decision.get("menzo_compared_with_url")}) if decision else ""
+            entry["actual_gemini_request_count"]=used
+        next_request_groups[request_key]={"candidate_ids":sorted(_v2_identity(x) for x in group_items),
+            "history_delta":dict(sorted(delta.items())),"actual_gemini_request_count":used}
+        cache.setdefault("failures",{}).pop(request_key,None)
+    state={"contract_fingerprint":duplicate_cache_v2.contract_fingerprint(),"candidates":{cid:entry for cid,entry in next_candidates.items() if cid in current_ids},
+        "request_groups":next_request_groups}
+    cache["recent_history_state"]=state
+    if not history: pp["duplicate_gate_no_comparisons"]+=1
     _v2_persist(cache)
 
 
