@@ -17,7 +17,7 @@ Il documento distingue sempre tra:
 
 1. componenti versionati nella repository;
 2. componenti esterni presenti soltanto sulla VPS;
-3. artifact timestamped, che descrivono una singola esecuzione;
+3. artifact timestamped, riferiti a una singola esecuzione;
 4. artifact `latest`, che rappresentano lo stato più recente disponibile;
 5. dati autorevoli e dati legacy o soltanto diagnostici.
 
@@ -81,7 +81,7 @@ CRON_TZ=Europe/Rome
 0 12 * * * /opt/owtv/send_daily_report.sh >> /opt/owtv/wrestling-news-bot/logs/daily_report_email.log 2>&1
 ```
 
-Il report giornaliero viene quindi avviato alle 12:00 nel fuso `Europe/Rome`.
+Il report giornaliero viene avviato alle 12:00 nel fuso `Europe/Rome`.
 
 ### 3.2 Wrapper e lock
 
@@ -140,7 +140,7 @@ L'email giornaliera contiene le seguenti sezioni:
 5. Translation Quality Audit;
 6. Automatic Warning Investigation.
 
-Gli allegati previsti sono nove:
+Gli allegati previsti in una run completamente riuscita sono nove:
 
 1. Operational Report Markdown;
 2. Editorial Audit Markdown;
@@ -152,7 +152,7 @@ Gli allegati previsti sono nove:
 8. Automatic Warning Investigation Markdown;
 9. Automatic Warning Investigation latest JSON.
 
-La presenza di tutti e nove gli allegati va verificata nei test end-to-end.
+La presenza di tutti e nove gli allegati va verificata nei test end-to-end. In caso di errore di uno stadio opzionale, il numero degli allegati può essere inferiore e la run va interpretata tramite log ed errori riportati nel corpo email.
 
 ## 6. Artifact principali
 
@@ -228,15 +228,11 @@ Una differenza tra conteggi legacy e autorevoli non deve essere corretta arbitra
 
 ## 8. Semantica dell'Automatic Warning Investigation
 
-Gli stati previsti sono:
-
 ### `reproduced`
 
 La regola deterministica esistente ha trovato una corrispondenza nel materiale disponibile.
 
-Non equivale a conferma editoriale umana.
-
-Un warning riprodotto può ancora essere un falso positivo, per esempio quando una regex intercetta terminologia wrestling legittima, nomi di eventi o espressioni come `pay-per-view`.
+Non equivale a conferma editoriale umana. Un warning riprodotto può ancora essere un falso positivo, per esempio quando una regex intercetta terminologia wrestling legittima, nomi di eventi o espressioni come `pay-per-view`.
 
 ### `not_reproduced`
 
@@ -291,16 +287,43 @@ Il primo numero rappresenta occorrenze aggregate; il secondo rappresenta coppie 
 
 ## 10. Comportamento non bloccante e protezione dagli artifact obsoleti
 
-La consegna dell'email deve continuare anche se un diagnostico opzionale fallisce.
+La consegna dell'email deve continuare anche se un diagnostico opzionale fallisce. La protezione dagli artifact obsoleti, però, non è identica per tutti gli stadi.
 
-Regole operative:
+### 10.1 Translation Quality Audit
 
-- un errore dell'audit non deve far apparire il precedente JSON `latest` come risultato corrente;
-- un errore dell'investigazione deve produrre un artifact controllato della run corrente;
-- il file latest dell'investigazione deve essere sostituito con lo stato di errore corrente;
-- il Markdown allegato deve essere quello coerente con il `generated_at` del JSON latest;
-- un artifact del giorno precedente non deve mai essere presentato come corrente;
-- gli errori devono comparire nel corpo email o nel JSON diagnostico senza interrompere SMTP.
+In caso di errore dell'audit:
+
+- l'orchestratore non deve presentare il precedente JSON `latest` come risultato della run corrente;
+- il risultato restituito allo stadio successivo deve indicare l'errore;
+- il runner esterno non deve allegare un audit precedente come se fosse appena generato.
+
+### 10.2 Automatic Warning Investigation
+
+Questo è lo stadio con la protezione completa introdotta da v95.16a:
+
+- un errore produce un artifact controllato della run corrente;
+- il file `latest` dell'investigazione viene sostituito con lo stato di errore corrente;
+- il Markdown allegato viene ricostruito in coerenza con il `generated_at` del JSON `latest`;
+- un artifact di una run precedente non deve essere presentato come investigazione corrente;
+- l'errore compare nel corpo email o nel JSON diagnostico senza interrompere SMTP.
+
+La garanzia di pairing temporale e sostituzione dello stato `latest` descritta sopra riguarda specificamente l'Automatic Warning Investigation.
+
+### 10.3 Daily Editorial Judgment: eccezione nota
+
+Il Daily Editorial Judgment non dispone ancora della stessa protezione completa.
+
+Nell'implementazione corrente, se la generazione del Judgment fallisce:
+
+- `generate_daily_editorial_judgment_24h()` può restituire il JSON `latest` già esistente;
+- la selezione del Markdown e del JSON può avvenire indipendentemente;
+- un artifact di una run precedente può quindi restare disponibile o essere selezionato durante una run fallita.
+
+Regola operativa obbligatoria:
+
+> Quando la run segnala un errore del Daily Editorial Judgment, nessun allegato o file `latest` del Judgment deve essere considerato corrente senza verifica esplicita del `generated_at`, del timestamp del Markdown e del log della run.
+
+Il completamento della protezione anti-stale del Judgment è una correzione successiva e non fa parte di v95.16a.
 
 ## 11. Procedure operative
 
@@ -437,12 +460,41 @@ from pathlib import Path
 
 path = Path("/opt/owtv/wrestling-news-bot/state/reports/owtv_daily_editorial_judgment_latest.json")
 data = json.loads(path.read_text(encoding="utf-8"))
+print(data.get("generated_at"))
 print(data.get("translation_warning_analysis"))
 print(data.get("source_artifacts_used"))
 PY
 ```
 
-Verificare che `source_artifacts_used` includa il latest JSON dell'investigazione.
+Verificare che `source_artifacts_used` includa il latest JSON dell'investigazione e che `generated_at` appartenga alla run attesa.
+
+### 11.11 Controllo temporale del Judgment dopo un errore
+
+Quando il log contiene un errore del Daily Editorial Judgment:
+
+```bash
+python3 - <<'PY'
+import json
+from pathlib import Path
+
+root = Path("/opt/owtv/wrestling-news-bot")
+latest = root / "state/reports/owtv_daily_editorial_judgment_latest.json"
+
+if latest.exists():
+    data = json.loads(latest.read_text(encoding="utf-8"))
+    print("latest JSON:", latest)
+    print("generated_at:", data.get("generated_at"))
+
+for path in sorted(
+    (root / "reports").glob("owtv_daily_editorial_judgment_24h_*.md"),
+    key=lambda p: p.stat().st_mtime,
+    reverse=True,
+)[:3]:
+    print("markdown:", path, "mtime:", path.stat().st_mtime)
+PY
+```
+
+Se i timestamp non appartengono alla run corrente, il Judgment non va considerato valido anche se il file è presente.
 
 ## 12. Backup e rollback del runner esterno
 
@@ -534,6 +586,10 @@ Non devono essere considerate automaticamente regressioni del codice sorgente.
 
 Warning riprodotti possono essere falsi positivi per terminologia wrestling, nomi propri, eventi o espressioni legittime come `pay-per-view`.
 
+### Daily Judgment e artifact precedenti
+
+In caso di errore del Daily Editorial Judgment, il file `latest` o il Markdown più recente possono appartenere a una run precedente. La loro semplice presenza non prova che il Judgment corrente sia stato generato.
+
 ### Simone
 
 La readiness di Simone e la semantica degli errori di pubblicazione dei report show appartengono a una riforma diagnostica successiva.
@@ -557,9 +613,11 @@ Controllare:
 
 - che il relativo stadio non abbia prodotto errore;
 - che il path restituito esista;
-- che il Markdown sia coerente con `generated_at`;
+- che il Markdown sia coerente con `generated_at` quando lo stadio offre questa garanzia;
 - che il JSON latest sia quello della run corrente;
 - che il runner esterno sia la versione corretta.
+
+Per il Daily Editorial Judgment, un errore invalida l'assunzione che il file disponibile sia corrente: verificare sempre i timestamp.
 
 ### Investigazione con zero elementi
 
@@ -567,12 +625,14 @@ Può essere corretto se non esistono warning. Controllare sempre `errors` nel JS
 
 ### Artifact precedente presentato come corrente
 
-È una regressione grave. Non inviare il report come valido. Verificare immediatamente:
+Per Translation Quality Audit e Automatic Warning Investigation è una regressione grave. Non considerare il report valido e verificare immediatamente:
 
 - `generated_at` del latest JSON;
-- nome del Markdown associato;
-- comportamento di failure artifact;
+- nome e timestamp del Markdown associato;
+- comportamento del failure artifact;
 - eventuale richiamo diretto di funzioni legacy fuori dall'orchestratore.
+
+Per il Daily Editorial Judgment è una limitazione nota nella gestione degli errori: segnalare la run come non valida, non fidarsi dell'allegato e controllare il log prima di qualsiasi conclusione editoriale.
 
 ## 15. Checklist di deployment
 
@@ -582,10 +642,10 @@ Può essere corretto se non esistono warning. Controllare sempre `errors` nel JS
 - [ ] backup del runner esterno creato;
 - [ ] ordine audit → investigation → judgment verificato;
 - [ ] test diagnostico senza SMTP superato;
-- [ ] tutti e tre i latest JSON rigenerati;
+- [ ] tutti e tre i latest JSON rigenerati nella run riuscita;
 - [ ] Daily Judgment usa il latest JSON dell'investigazione;
 - [ ] email completa ricevuta;
-- [ ] tutti e nove gli allegati presenti;
+- [ ] tutti e nove gli allegati presenti nella run riuscita;
 - [ ] log senza errori non controllati;
 - [ ] successiva esecuzione cron non assistita verificata.
 
@@ -598,7 +658,8 @@ v95.16a non comprende:
 - riforma della diagnostic readiness di Simone;
 - riconciliazione autorevole dei conteggi;
 - diagnostica di costi e budget;
-- fase Guardian editoriale e stilistica.
+- fase Guardian editoriale e stilistica;
+- protezione anti-stale completa del Daily Editorial Judgment.
 
 Queste aree devono essere implementate separatamente per evitare regressioni e sovrapposizioni di responsabilità.
 
