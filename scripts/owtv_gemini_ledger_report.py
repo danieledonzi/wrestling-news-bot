@@ -63,7 +63,7 @@ def main() -> int:
                 if not isinstance(r, dict):
                     continue
                 ts = parse_ts(r.get("timestamp"))
-                if ts and ts >= cutoff:
+                if ts and cutoff <= ts <= now:
                     records.append(r)
             except Exception:
                 continue

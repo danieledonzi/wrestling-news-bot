@@ -2,8 +2,9 @@
 set -euo pipefail
 
 repo_root="${OWTV_REPO_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
+repo_root="$(cd "${repo_root}" && pwd)"
 source_path="${repo_root}/scripts/owtv_gemini_ledger_report.py"
-target_path="/opt/owtv/owtv_gemini_ledger_report.py"
+target_path="${OWTV_RUNTIME_REPORT_TARGET:-/opt/owtv/owtv_gemini_ledger_report.py}"
 
 if [ ! -f "${source_path}" ]; then
   echo "[REPORTING] Canonical script missing: ${source_path}" >&2
