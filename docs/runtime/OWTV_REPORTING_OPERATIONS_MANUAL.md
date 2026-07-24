@@ -57,10 +57,15 @@ I seguenti componenti sono residenti sulla VPS e non sono attualmente versionati
 /opt/owtv/report_email.env
 /opt/owtv/owtv_report.sh
 /opt/owtv/owtv_editorial_report.sh
+/opt/owtv/owtv_gemini_ledger_report.py
 /opt/owtv/reports
 ```
 
 Il file `/opt/owtv/send_daily_report.py` è il runner reale dell'email giornaliera. Non va confuso con il modulo omonimo presente nella repository.
+
+Lo script operativo `/opt/owtv/owtv_gemini_ledger_report.py` deve essere un collegamento simbolico alla sorgente canonica versionata `/opt/owtv/wrestling-news-bot/scripts/owtv_gemini_ledger_report.py`.
+
+Il collegamento viene installato o aggiornato tramite `scripts/install_runtime_reporting_links.sh`.
 
 Il runner esterno importa il modulo repository con un nome distinto e richiama:
 
