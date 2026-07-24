@@ -16,8 +16,15 @@ from agents.gemini_diagnostics import (
 )
 
 DETAILED_LEDGER_HEADING = "## Gemini / AI Detailed Ledger 24h"
+DETAILED_LEDGER_HEADING_RE = re.compile(
+    r"^## Gemini / AI Detailed Ledger(?: \d+h)?\s*$",
+    re.MULTILINE,
+)
 COST_LEDGER_HEADING = "## Gemini / AI Cost Ledger 24h"
-COST_LEDGER_HEADING_RE = re.compile(r"^## Gemini / AI Cost Ledger(?: 24h)?\s*$", re.MULTILINE)
+COST_LEDGER_HEADING_RE = re.compile(
+    r"^## Gemini / AI Cost Ledger(?: \d+h)?\s*$",
+    re.MULTILINE,
+)
 H2_HEADING_RE = re.compile(r"^## ", re.MULTILINE)
 
 
@@ -34,6 +41,23 @@ def load_operational_menzo_context(paths: tuple[Path, ...] = MENZO_DECISIONS_FIL
     return None
 
 
+
+def _window_hours(
+    since: datetime | None,
+    until: datetime | None,
+    now: datetime | None,
+) -> int:
+    end = until or now
+
+    if since is not None and end is not None:
+        seconds = (end - since).total_seconds()
+        if seconds > 0:
+            return max(1, int(round(seconds / 3600)))
+
+    return 24
+
+
+
 def render_gemini_detailed_ledger_24h(
     *,
     ledger_path: Path | None = None,
@@ -42,19 +66,53 @@ def render_gemini_detailed_ledger_24h(
     now: datetime | None = None,
     menzo_context: dict[str, Any] | None = None,
 ) -> str:
-    """Render the detailed Gemini diagnostics section without failing report generation."""
+    """Render detailed Gemini diagnostics without failing report generation."""
+    hours = _window_hours(since, until, now)
+
     try:
         if ledger_path is None:
-            records, warnings = load_ledger(since=since, until=until, now=now)
+            records, warnings = load_ledger(
+                since=since,
+                until=until,
+                now=now,
+            )
         else:
-            records, warnings = load_ledger(ledger_path, since=since, until=until, now=now)
-        context = menzo_context if menzo_context is not None else load_operational_menzo_context()
-        markdown = render_gemini_diagnostics_markdown(build_gemini_diagnostics(records, menzo_context=context)).rstrip()
+            records, warnings = load_ledger(
+                ledger_path,
+                since=since,
+                until=until,
+                now=now,
+            )
+
+        context = (
+            menzo_context
+            if menzo_context is not None
+            else load_operational_menzo_context()
+        )
+
+        diagnostics = build_gemini_diagnostics(
+            records,
+            menzo_context=context,
+        )
+        markdown = render_gemini_diagnostics_markdown(
+            diagnostics,
+            hours=hours,
+        ).rstrip()
+
         if warnings:
-            markdown += "\n\n### Gemini ledger warnings\n" + "\n".join(f"- {w}" for w in warnings[:10])
+            markdown += (
+                "\n\n### Gemini ledger warnings\n"
+                + "\n".join(f"- {warning}" for warning in warnings[:10])
+            )
+
         return markdown + "\n"
+
     except Exception as exc:
-        return f"{DETAILED_LEDGER_HEADING}\n\n- warning: Gemini detailed ledger unavailable: {exc}\n"
+        return (
+            f"## Gemini / AI Detailed Ledger {hours}h\n\n"
+            f"- warning: Gemini detailed ledger unavailable: {exc}\n"
+        )
+
 
 
 def add_gemini_detailed_ledger_to_report(
@@ -66,8 +124,8 @@ def add_gemini_detailed_ledger_to_report(
     now: datetime | None = None,
     menzo_context: dict[str, Any] | None = None,
 ) -> str:
-    """Insert detailed Gemini diagnostics immediately after the aggregate cost section."""
-    if DETAILED_LEDGER_HEADING in report_markdown:
+    """Insert detailed Gemini diagnostics after the aggregate cost section."""
+    if DETAILED_LEDGER_HEADING_RE.search(report_markdown):
         return report_markdown
 
     detailed = render_gemini_detailed_ledger_24h(
@@ -79,14 +137,24 @@ def add_gemini_detailed_ledger_to_report(
     ).rstrip()
 
     cost_heading_match = COST_LEDGER_HEADING_RE.search(report_markdown)
+
     if cost_heading_match is None:
         suffix = "" if report_markdown.endswith("\n") else "\n"
         return report_markdown + suffix + "\n" + detailed + "\n"
 
-    next_section = H2_HEADING_RE.search(report_markdown, cost_heading_match.end())
-    insert_at = len(report_markdown) if next_section is None else next_section.start()
+    next_section = H2_HEADING_RE.search(
+        report_markdown,
+        cost_heading_match.end(),
+    )
+    insert_at = (
+        len(report_markdown)
+        if next_section is None
+        else next_section.start()
+    )
+
     before = report_markdown[:insert_at].rstrip()
     after = report_markdown[insert_at:].lstrip("\n")
+
     return before + "\n\n" + detailed + ("\n" + after if after else "\n")
 
 

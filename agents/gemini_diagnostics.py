@@ -19,6 +19,39 @@ REASON_FIELDS = ("reason", "purpose", "phase", "task", "selected_model_chain_rea
 MODEL_FIELDS = ("model", "actual_model", "selected_model", "translation_model")
 AGENT_FIELDS = ("agent", "stage", "caller")
 
+MENZO_V9518_INT_FIELDS = (
+    "same_run_pairs_theoretical",
+    "same_run_exact_duplicates",
+    "same_run_pairs_below_threshold",
+    "same_run_pairs_above_threshold",
+    "same_run_suspicious_components",
+    "same_run_candidates_sent_to_gemini",
+    "recent_history_candidates",
+    "recent_history_publications_12h",
+    "recent_history_pairs_theoretical",
+    "recent_history_exact_duplicates",
+    "recent_history_pairs_below_threshold",
+    "recent_history_pairs_above_threshold",
+    "recent_history_candidates_sent_to_gemini",
+    "recent_history_publications_sent_to_gemini",
+    "duplicate_cache_hits",
+    "duplicate_cache_misses",
+    "gemini_duplicate_calls_planned",
+    "gemini_duplicate_calls_executed",
+    "gemini_duplicate_calls_avoided",
+    "duplicate_suspicion_audit_omitted",
+    "menzo_duplicate_arbitration_fail_closed",
+    "menzo_recent_history_material_updates",
+)
+
+MENZO_V9518_META_FIELDS = (
+    "duplicate_scorer_version",
+    "duplicate_suspect_threshold",
+    "gemini_duplicate_input_tokens",
+    "gemini_duplicate_output_tokens",
+    "gemini_duplicate_estimated_cost",
+)
+
 
 def _first(record: dict[str, Any], fields: tuple[str, ...]) -> str:
     for field in fields:
@@ -111,24 +144,44 @@ def _counter(records: list[dict[str, Any]], *parts: str) -> Counter[str]:
     return c
 
 
+
 def _top_titles(records: list[dict[str, Any]], limit: int = 10) -> list[dict[str, Any]]:
     grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    for r in records:
-        grouped[normalize_title(r.get("title") or r.get("candidate_title"))].append(r)
+
+    for record in records:
+        display_identity = (
+            record.get("title")
+            or record.get("candidate_title")
+            or record.get("current_url")
+            or record.get("url")
+            or record.get("cluster_id")
+            or reason_or_purpose(record)
+        )
+        grouped[normalize_title(display_identity)].append(record)
+
     rows = []
     for key, items in grouped.items():
-        times = [str(i.get("timestamp") or "") for i in items if i.get("timestamp")]
-        rows.append({
-            "title": key[:120],
-            "called_count": len(items),
-            "models": sorted({model_name(i) for i in items}),
-            "agents": sorted({agent_name(i) for i in items}),
-            "reasons": sorted({reason_or_purpose(i) for i in items}),
-            "first_timestamp": min(times) if times else "",
-            "last_timestamp": max(times) if times else "",
-        })
-    return sorted(rows, key=lambda x: (-int(x["called_count"]), str(x["title"])))[:limit]
+        times = [
+            str(item.get("timestamp") or "")
+            for item in items
+            if item.get("timestamp")
+        ]
+        rows.append(
+            {
+                "title": key[:120],
+                "called_count": len(items),
+                "models": sorted({model_name(item) for item in items}),
+                "agents": sorted({agent_name(item) for item in items}),
+                "reasons": sorted({reason_or_purpose(item) for item in items}),
+                "first_timestamp": min(times) if times else "",
+                "last_timestamp": max(times) if times else "",
+            }
+        )
 
+    return sorted(
+        rows,
+        key=lambda row: (-int(row["called_count"]), str(row["title"])),
+    )[:limit]
 
 
 def _coerce_int(value: Any) -> int | None:
@@ -140,17 +193,36 @@ def _coerce_int(value: Any) -> int | None:
         return None
 
 
+
 def _extract_menzo_postprocess(data: Any) -> dict[str, Any] | None:
     if not isinstance(data, dict):
         return None
-    postprocess = data.get("postprocess") if isinstance(data.get("postprocess"), dict) else data
-    wanted = (
+
+    postprocess = (
+        data.get("postprocess")
+        if isinstance(data.get("postprocess"), dict)
+        else data
+    )
+
+    legacy_int_fields = (
         "duplicate_arbitration_cache_hit",
         "duplicate_arbitration_cache_miss",
         "duplicate_arbitration_cache_expired",
         "gemini_calls_avoided_by_duplicate_arbitration_cache",
     )
-    found = {key: _coerce_int(postprocess.get(key)) for key in wanted if _coerce_int(postprocess.get(key)) is not None}
+
+    found: dict[str, Any] = {}
+
+    for key in legacy_int_fields + MENZO_V9518_INT_FIELDS:
+        value = _coerce_int(postprocess.get(key))
+        if value is not None:
+            found[key] = value
+
+    for key in MENZO_V9518_META_FIELDS:
+        value = postprocess.get(key)
+        if value is not None and value != "":
+            found[key] = value
+
     return found or None
 
 
@@ -198,56 +270,163 @@ def load_menzo_cache(path: Path = MENZO_CACHE_FILE, *, now: datetime | None = No
     return out
 
 
+
 def build_gemini_diagnostics(
     records: list[dict[str, Any]],
     cache_path: Path = MENZO_CACHE_FILE,
     menzo_context: dict[str, Any] | None = None,
     menzo_decisions_paths: tuple[Path, ...] = MENZO_DECISIONS_FILES,
 ) -> dict[str, Any]:
-    called = [r for r in records if status_name(r) == "called"]
-    avoided = [r for r in records if status_name(r) == "avoided"]
-    failed = [r for r in records if status_name(r) == "failed"]
-    called35 = [r for r in called if "3.5" in model_name(r)]
-    real_attempts = [r for r in records if status_name(r) in {"called", "failed"}]
-    v2_real = [r for r in real_attempts if r.get("ledger_schema_version") == "v2"]
-    real_with_usage = [r for r in v2_real if r.get("usage_available") is True]
-    real_with_cost = [r for r in v2_real if r.get("estimated_cost") is not None]
-    avoided35 = [r for r in avoided if "3.5" in model_name(r)]
-    ledger_cache_hits = sum(1 for r in avoided if reason_or_purpose(r) == "duplicate_arbitration_cache_hit")
-    menzo_postprocess = load_menzo_postprocess(menzo_context, menzo_decisions_paths)
-    latest_counters = menzo_postprocess.get("counters", {}) if isinstance(menzo_postprocess.get("counters"), dict) else {}
+    called = [record for record in records if status_name(record) == "called"]
+    avoided = [record for record in records if status_name(record) == "avoided"]
+    failed = [record for record in records if status_name(record) == "failed"]
+
+    called35 = [record for record in called if "3.5" in model_name(record)]
+    failed35 = [record for record in failed if "3.5" in model_name(record)]
+    attempted35 = called35 + failed35
+
+    real_attempts = [
+        record
+        for record in records
+        if status_name(record) in {"called", "failed"}
+    ]
+    v2_real = [
+        record
+        for record in real_attempts
+        if record.get("ledger_schema_version") == "v2"
+    ]
+    real_with_usage = [
+        record for record in v2_real if record.get("usage_available") is True
+    ]
+    real_with_cost = [
+        record for record in v2_real if record.get("estimated_cost") is not None
+    ]
+
+    avoided35 = [record for record in avoided if "3.5" in model_name(record)]
+
+    ledger_cache_hits = sum(
+        1
+        for record in avoided
+        if reason_or_purpose(record) == "duplicate_arbitration_cache_hit"
+    )
+
+    menzo_postprocess = load_menzo_postprocess(
+        menzo_context,
+        menzo_decisions_paths,
+    )
+    latest_counters = (
+        menzo_postprocess.get("counters", {})
+        if isinstance(menzo_postprocess.get("counters"), dict)
+        else {}
+    )
+
     not_available = "not_available"
+    v9518_fields = MENZO_V9518_INT_FIELDS + MENZO_V9518_META_FIELDS
+    v9518_snapshot = {
+        key: latest_counters.get(key, not_available)
+        for key in v9518_fields
+    }
+    v9518_available = any(key in latest_counters for key in v9518_fields)
+
     return {
-        "called_total": len(called), "avoided_total": len(avoided), "failed_total": len(failed),
+        "called_total": len(called),
+        "avoided_total": len(avoided),
+        "failed_total": len(failed),
         "called_by_model_agent": dict(_counter(called, "model", "agent")),
-        "called_by_model_agent_reason": dict(_counter(called, "model", "agent", "reason")),
+        "called_by_model_agent_reason": dict(
+            _counter(called, "model", "agent", "reason")
+        ),
         "called_by_agent_reason": dict(_counter(called, "agent", "reason")),
         "called_35_total": len(called35),
-        "called_35_rows": [{"timestamp": str(r.get("timestamp") or ""), "agent": agent_name(r), "reason_or_purpose": reason_or_purpose(r), "title": str(r.get("title") or "")[:120], "url": str(r.get("url") or "")[:180], "run_id": str(r.get("run_id") or "")} for r in called35[:50]],
+        "called_35_rows": [
+            {
+                "timestamp": str(record.get("timestamp") or ""),
+                "agent": agent_name(record),
+                "reason_or_purpose": reason_or_purpose(record),
+                "title": str(
+                    record.get("title")
+                    or record.get("candidate_title")
+                    or record.get("current_url")
+                    or record.get("url")
+                    or record.get("cluster_id")
+                    or reason_or_purpose(record)
+                )[:120],
+                "url": str(record.get("url") or "")[:180],
+                "run_id": str(record.get("run_id") or ""),
+            }
+            for record in called35[:50]
+        ],
         "called_35_by_agent": dict(_counter(called35, "agent")),
         "called_35_by_reason": dict(_counter(called35, "reason")),
+        "failed_35_total": len(failed35),
+        "failed_35_by_agent": dict(_counter(failed35, "agent")),
+        "failed_35_by_reason": dict(_counter(failed35, "reason")),
+        "attempted_35_total": len(attempted35),
         "avoided_35_total": len(avoided35),
         "avoided_35_by_reason": dict(_counter(avoided35, "reason")),
         "avoided_by_agent": dict(_counter(avoided, "agent")),
-        "avoided_by_agent_reason": dict(_counter(avoided, "agent", "reason")),
+        "avoided_by_agent_reason": dict(
+            _counter(avoided, "agent", "reason")
+        ),
         "duplicate_arbitration_cache_hit": ledger_cache_hits,
         "ledger_duplicate_arbitration_cache_hit_24h": ledger_cache_hits,
-        "purpose_gate_not_met": sum(1 for r in avoided if reason_or_purpose(r) == "purpose_gate_not_met"),
-        "deterministic_novelty_allow": sum(1 for r in avoided if reason_or_purpose(r) == "deterministic_novelty_allow"),
-        "high_ambiguity_gate_not_met": sum(1 for r in avoided if reason_or_purpose(r) == "high_ambiguity_gate_not_met"),
+        "ledger_duplicate_arbitration_cache_hit_window": ledger_cache_hits,
+        "purpose_gate_not_met": sum(
+            1
+            for record in avoided
+            if reason_or_purpose(record) == "purpose_gate_not_met"
+        ),
+        "deterministic_novelty_allow": sum(
+            1
+            for record in avoided
+            if reason_or_purpose(record) == "deterministic_novelty_allow"
+        ),
+        "high_ambiguity_gate_not_met": sum(
+            1
+            for record in avoided
+            if reason_or_purpose(record) == "high_ambiguity_gate_not_met"
+        ),
         "menzo_postprocess": menzo_postprocess,
-        "menzo_latest_cache_hit": latest_counters.get("duplicate_arbitration_cache_hit", not_available),
-        "menzo_latest_cache_miss": latest_counters.get("duplicate_arbitration_cache_miss", not_available),
-        "menzo_latest_cache_expired": latest_counters.get("duplicate_arbitration_cache_expired", not_available),
-        "menzo_latest_cache_avoided": latest_counters.get("gemini_calls_avoided_by_duplicate_arbitration_cache", not_available),
-        "menzo_cache_miss": latest_counters.get("duplicate_arbitration_cache_miss", not_available),
-        "menzo_cache_expired": latest_counters.get("duplicate_arbitration_cache_expired", not_available),
+        "menzo_v9518_available": v9518_available,
+        "menzo_v9518_snapshot": v9518_snapshot,
+        "menzo_latest_cache_hit": latest_counters.get(
+            "duplicate_arbitration_cache_hit",
+            not_available,
+        ),
+        "menzo_latest_cache_miss": latest_counters.get(
+            "duplicate_arbitration_cache_miss",
+            not_available,
+        ),
+        "menzo_latest_cache_expired": latest_counters.get(
+            "duplicate_arbitration_cache_expired",
+            not_available,
+        ),
+        "menzo_latest_cache_avoided": latest_counters.get(
+            "gemini_calls_avoided_by_duplicate_arbitration_cache",
+            not_available,
+        ),
+        "menzo_cache_miss": latest_counters.get(
+            "duplicate_arbitration_cache_miss",
+            not_available,
+        ),
+        "menzo_cache_expired": latest_counters.get(
+            "duplicate_arbitration_cache_expired",
+            not_available,
+        ),
         "menzo_cache": load_menzo_cache(cache_path),
         "v2_real_attempts": len(v2_real),
         "real_attempts_with_usage": len(real_with_usage),
         "real_attempts_with_cost": len(real_with_cost),
-        "usage_coverage": (len(real_with_usage) / len(v2_real)) if v2_real else None,
-        "pricing_coverage": (len(real_with_cost) / len(v2_real)) if v2_real else None,
+        "usage_coverage": (
+            len(real_with_usage) / len(v2_real)
+            if v2_real
+            else None
+        ),
+        "pricing_coverage": (
+            len(real_with_cost) / len(v2_real)
+            if v2_real
+            else None
+        ),
         "top_repeated_titles": _top_titles(called),
         "top_repeated_35_titles": _top_titles(called35),
     }
@@ -259,35 +438,228 @@ def _fmt_counter(counter: dict[str, int], limit: int = 30) -> list[str]:
     return [f"- {k}: {v}" for k, v in sorted(counter.items(), key=lambda kv: (-kv[1], kv[0]))[:limit]]
 
 
-def render_gemini_diagnostics_markdown(diag: dict[str, Any]) -> str:
-    lines = ["## Gemini / AI Detailed Ledger 24h", "", "### Gemini called by model × agent"]
+
+def render_gemini_diagnostics_markdown(
+    diag: dict[str, Any],
+    *,
+    hours: int = 24,
+) -> str:
+    lines = [
+        f"## Gemini / AI Detailed Ledger {hours}h",
+        "",
+        "### Gemini called by model × agent",
+    ]
+
     lines += _fmt_counter(diag.get("called_by_model_agent", {}))
-    lines += ["", "### Gemini called by model × agent × reason_or_purpose"] + _fmt_counter(diag.get("called_by_model_agent_reason", {}))
-    lines += ["", "### Gemini called by agent × reason_or_purpose"] + _fmt_counter(diag.get("called_by_agent_reason", {}))
-    lines += ["", "### Gemini 3.5 Flash called", f"- 3.5 called total: {diag.get('called_35_total', 0)}"]
-    lines += ["- 3.5 called by agent:"] + ["  " + x for x in _fmt_counter(diag.get("called_35_by_agent", {}))]
-    lines += ["- 3.5 called by reason_or_purpose:"] + ["  " + x for x in _fmt_counter(diag.get("called_35_by_reason", {}))]
-    lines += [f"- 3.5 avoided total: {diag.get('avoided_35_total', 0)}", "- 3.5 avoided by reason_or_purpose:"] + ["  " + x for x in _fmt_counter(diag.get("avoided_35_by_reason", {}))]
-    for r in diag.get("called_35_rows", []):
-        lines.append(f"- {r['timestamp']} | {r['agent']} | {r['reason_or_purpose']} | {r['title']} | {r['url']} | run_id={r['run_id']}")
-    lines += ["", "### Gemini avoided calls", f"- avoided total: {diag.get('avoided_total', 0)}", "- avoided by agent:"] + ["  " + x for x in _fmt_counter(diag.get("avoided_by_agent", {}))]
-    lines += ["- avoided by agent × reason_or_purpose:"] + ["  " + x for x in _fmt_counter(diag.get("avoided_by_agent_reason", {}))]
-    for key in ("duplicate_arbitration_cache_hit", "purpose_gate_not_met", "deterministic_novelty_allow", "high_ambiguity_gate_not_met"):
+    lines += [
+        "",
+        "### Gemini called by model × agent × reason_or_purpose",
+    ] + _fmt_counter(diag.get("called_by_model_agent_reason", {}))
+    lines += [
+        "",
+        "### Gemini called by agent × reason_or_purpose",
+    ] + _fmt_counter(diag.get("called_by_agent_reason", {}))
+
+    lines += [
+        "",
+        "### Gemini 3.5 Flash attempts",
+        f"- 3.5 attempts total: {diag.get('attempted_35_total', 0)}",
+        f"- 3.5 successful calls: {diag.get('called_35_total', 0)}",
+        f"- 3.5 failed attempts: {diag.get('failed_35_total', 0)}",
+        "- 3.5 called by agent:",
+    ]
+    lines += [
+        "  " + line
+        for line in _fmt_counter(diag.get("called_35_by_agent", {}))
+    ]
+    lines += ["- 3.5 called by reason_or_purpose:"]
+    lines += [
+        "  " + line
+        for line in _fmt_counter(diag.get("called_35_by_reason", {}))
+    ]
+    lines += ["- 3.5 failed by agent:"]
+    lines += [
+        "  " + line
+        for line in _fmt_counter(diag.get("failed_35_by_agent", {}))
+    ]
+    lines += ["- 3.5 failed by reason_or_purpose:"]
+    lines += [
+        "  " + line
+        for line in _fmt_counter(diag.get("failed_35_by_reason", {}))
+    ]
+    lines += [
+        f"- 3.5 avoided total: {diag.get('avoided_35_total', 0)}",
+        "- 3.5 avoided by reason_or_purpose:",
+    ]
+    lines += [
+        "  " + line
+        for line in _fmt_counter(diag.get("avoided_35_by_reason", {}))
+    ]
+
+    for row in diag.get("called_35_rows", []):
+        lines.append(
+            f"- {row['timestamp']} | {row['agent']} | "
+            f"{row['reason_or_purpose']} | {row['title']} | "
+            f"{row['url']} | run_id={row['run_id']}"
+        )
+
+    lines += [
+        "",
+        "### Gemini avoided calls",
+        f"- avoided total: {diag.get('avoided_total', 0)}",
+        "- avoided by agent:",
+    ]
+    lines += [
+        "  " + line
+        for line in _fmt_counter(diag.get("avoided_by_agent", {}))
+    ]
+    lines += ["- avoided by agent × reason_or_purpose:"]
+    lines += [
+        "  " + line
+        for line in _fmt_counter(diag.get("avoided_by_agent_reason", {}))
+    ]
+
+    for key in (
+        "duplicate_arbitration_cache_hit",
+        "purpose_gate_not_met",
+        "deterministic_novelty_allow",
+        "high_ambiguity_gate_not_met",
+    ):
         lines.append(f"- {key}: {diag.get(key, 0)}")
-    cache = diag.get("menzo_cache", {}) or {}
+
+    snapshot = diag.get("menzo_v9518_snapshot", {}) or {}
     post = diag.get("menzo_postprocess", {}) or {}
-    lines += ["", "### Menzo duplicate arbitration cache", f"- cache file present: {'yes' if cache.get('present') else 'no'}", f"- cache entries total: {cache.get('entries_total', 0)}", f"- cache entries expired: {cache.get('entries_expired', 0)}", f"- cache entries valid: {cache.get('entries_valid', 0)}", f"- 24h ledger duplicate_arbitration_cache_hit avoided records: {diag.get('ledger_duplicate_arbitration_cache_hit_24h', 0)}", f"- latest Menzo run cache counters source: {post.get('source', 'not_available')}", f"- latest Menzo run duplicate_arbitration_cache_hit: {diag.get('menzo_latest_cache_hit', 'not_available')}", f"- latest Menzo run duplicate_arbitration_cache_miss: {diag.get('menzo_latest_cache_miss', 'not_available')}", f"- latest Menzo run duplicate_arbitration_cache_expired: {diag.get('menzo_latest_cache_expired', 'not_available')}", f"- latest Menzo run gemini_calls_avoided_by_duplicate_arbitration_cache: {diag.get('menzo_latest_cache_avoided', 'not_available')}"]
-    for e in cache.get("newest", []):
-        lines.append(f"- newest: {e.get('created_at')} | {e.get('model_used')} | {e.get('decision')} | {e.get('candidate_title_normalized')}")
-    for w in cache.get("warnings", []):
-        lines.append(f"- warning: {w}")
-    for w in post.get("warnings", []):
-        lines.append(f"- warning: {w}")
+
+    lines += [
+        "",
+        "### Menzo Duplicate Gate v95.18 — latest run snapshot",
+    ]
+
+    if not diag.get("menzo_v9518_available"):
+        lines += [
+            "- available: no",
+            f"- source: {post.get('source', 'not_available')}",
+        ]
+    else:
+        lines += [
+            "- available: yes",
+            f"- source: {post.get('source', 'not_available')}",
+            f"- scorer version: "
+            f"{snapshot.get('duplicate_scorer_version', 'not_available')}",
+            f"- effective threshold: "
+            f"{snapshot.get('duplicate_suspect_threshold', 'not_available')}",
+            "",
+            "#### Same-run gate",
+            f"- theoretical pairs: "
+            f"{snapshot.get('same_run_pairs_theoretical', 'not_available')}",
+            f"- exact duplicates: "
+            f"{snapshot.get('same_run_exact_duplicates', 'not_available')}",
+            f"- below threshold: "
+            f"{snapshot.get('same_run_pairs_below_threshold', 'not_available')}",
+            f"- above threshold: "
+            f"{snapshot.get('same_run_pairs_above_threshold', 'not_available')}",
+            f"- suspicious components: "
+            f"{snapshot.get('same_run_suspicious_components', 'not_available')}",
+            f"- candidates sent to Gemini: "
+            f"{snapshot.get('same_run_candidates_sent_to_gemini', 'not_available')}",
+            "",
+            "#### Recent-history gate",
+            f"- current candidates: "
+            f"{snapshot.get('recent_history_candidates', 'not_available')}",
+            f"- authoritative publications in lookback: "
+            f"{snapshot.get('recent_history_publications_12h', 'not_available')}",
+            f"- theoretical pairs: "
+            f"{snapshot.get('recent_history_pairs_theoretical', 'not_available')}",
+            f"- exact duplicates: "
+            f"{snapshot.get('recent_history_exact_duplicates', 'not_available')}",
+            f"- below threshold: "
+            f"{snapshot.get('recent_history_pairs_below_threshold', 'not_available')}",
+            f"- above threshold: "
+            f"{snapshot.get('recent_history_pairs_above_threshold', 'not_available')}",
+            f"- candidates sent to Gemini: "
+            f"{snapshot.get('recent_history_candidates_sent_to_gemini', 'not_available')}",
+            f"- publications sent to Gemini: "
+            f"{snapshot.get('recent_history_publications_sent_to_gemini', 'not_available')}",
+            "",
+            "#### Arbitration and cache",
+            f"- cache hits: "
+            f"{snapshot.get('duplicate_cache_hits', 'not_available')}",
+            f"- cache misses: "
+            f"{snapshot.get('duplicate_cache_misses', 'not_available')}",
+            f"- Gemini calls planned: "
+            f"{snapshot.get('gemini_duplicate_calls_planned', 'not_available')}",
+            f"- Gemini calls executed: "
+            f"{snapshot.get('gemini_duplicate_calls_executed', 'not_available')}",
+            f"- Gemini calls avoided: "
+            f"{snapshot.get('gemini_duplicate_calls_avoided', 'not_available')}",
+            f"- material updates allowed: "
+            f"{snapshot.get('menzo_recent_history_material_updates', 'not_available')}",
+            f"- fail-closed units: "
+            f"{snapshot.get('menzo_duplicate_arbitration_fail_closed', 'not_available')}",
+            f"- audit records omitted: "
+            f"{snapshot.get('duplicate_suspicion_audit_omitted', 'not_available')}",
+            f"- measured input tokens: "
+            f"{snapshot.get('gemini_duplicate_input_tokens', 'not_available')}",
+            f"- measured output tokens: "
+            f"{snapshot.get('gemini_duplicate_output_tokens', 'not_available')}",
+            f"- measured estimated cost: "
+            f"{snapshot.get('gemini_duplicate_estimated_cost', 'not_available')}",
+        ]
+
+    cache = diag.get("menzo_cache", {}) or {}
+
+    lines += [
+        "",
+        "### Menzo duplicate arbitration cache",
+        f"- cache file present: {'yes' if cache.get('present') else 'no'}",
+        f"- cache entries total: {cache.get('entries_total', 0)}",
+        f"- cache entries expired: {cache.get('entries_expired', 0)}",
+        f"- cache entries valid: {cache.get('entries_valid', 0)}",
+        f"- {hours}h ledger duplicate_arbitration_cache_hit avoided records: "
+        f"{diag.get('ledger_duplicate_arbitration_cache_hit_window', 0)}",
+        f"- latest Menzo run cache counters source: "
+        f"{post.get('source', 'not_available')}",
+        f"- latest Menzo run duplicate_arbitration_cache_hit: "
+        f"{diag.get('menzo_latest_cache_hit', 'not_available')}",
+        f"- latest Menzo run duplicate_arbitration_cache_miss: "
+        f"{diag.get('menzo_latest_cache_miss', 'not_available')}",
+        f"- latest Menzo run duplicate_arbitration_cache_expired: "
+        f"{diag.get('menzo_latest_cache_expired', 'not_available')}",
+        f"- latest Menzo run gemini_calls_avoided_by_duplicate_arbitration_cache: "
+        f"{diag.get('menzo_latest_cache_avoided', 'not_available')}",
+    ]
+
+    for entry in cache.get("newest", []):
+        lines.append(
+            f"- newest: {entry.get('created_at')} | "
+            f"{entry.get('model_used')} | "
+            f"{entry.get('decision')} | "
+            f"{entry.get('candidate_title_normalized')}"
+        )
+
+    for warning in cache.get("warnings", []):
+        lines.append(f"- warning: {warning}")
+
+    for warning in post.get("warnings", []):
+        lines.append(f"- warning: {warning}")
+
     lines += ["", "### Top repeated Gemini titles"]
-    for label, rows in (("called", diag.get("top_repeated_titles", [])), ("3.5 called", diag.get("top_repeated_35_titles", []))):
+
+    for label, rows in (
+        ("called", diag.get("top_repeated_titles", [])),
+        ("3.5 called", diag.get("top_repeated_35_titles", [])),
+    ):
         lines.append(f"- {label}:")
-        for r in rows:
-            lines.append(f"  - {r['called_count']} | {r['title']} | models={','.join(r['models'])} | agents={','.join(r['agents'])} | reasons={','.join(r['reasons'])} | first={r['first_timestamp']} | last={r['last_timestamp']}")
+        for row in rows:
+            lines.append(
+                f"  - {row['called_count']} | {row['title']} | "
+                f"models={','.join(row['models'])} | "
+                f"agents={','.join(row['agents'])} | "
+                f"reasons={','.join(row['reasons'])} | "
+                f"first={row['first_timestamp']} | "
+                f"last={row['last_timestamp']}"
+            )
+
     return "\n".join(lines) + "\n"
 
 
