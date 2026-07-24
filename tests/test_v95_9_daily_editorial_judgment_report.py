@@ -1073,6 +1073,7 @@ def test_append_translation_quality_audit_attachments(tmp_path: Path, monkeypatc
     monkeypatch.setattr(sdr, "BOT_DIR", tmp_path)
     monkeypatch.setattr(sdr, "TRANSLATION_QUALITY_LATEST_JSON", latest)
     monkeypatch.setattr(sdr, "TRANSLATION_QUALITY_CURRENT_FAILED", False)
+    monkeypatch.setattr(sdr, "TRANSLATION_WARNING_LATEST_JSON", tmp_path / "state" / "reports" / "owtv_translation_warning_analysis_latest.json")
 
     attachments = sdr.append_translation_quality_audit_attachments([])
 
