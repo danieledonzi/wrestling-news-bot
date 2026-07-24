@@ -24,6 +24,15 @@ def base_candidate(url, title):
     return {"url": url, "source_url": url, "title": title, "summary": title, "source": "Test"}
 
 
+def isolate_wrapper_state(monkeypatch, tmp_path):
+    monkeypatch.setattr(menzo, "MENZO_DUPLICATE_ARBITRATION_CACHE_V2_FILE", tmp_path / "duplicate_cache.json")
+    publisher_history = tmp_path / "publisher_history.json"
+    publisher_history.write_text("[]", encoding="utf-8")
+    monkeypatch.setattr(menzo, "publisher_history_file", lambda: publisher_history)
+    monkeypatch.setattr(menzo, "SOFTPOOL_FILE", tmp_path / "softpool.json")
+    monkeypatch.setattr(menzo, "HARD_SKIP_FILE", tmp_path / "hard_skips.json")
+
+
 
 def test_base_menzo_default_persistence_compatibility(monkeypatch, tmp_path):
     monkeypatch.setattr(base_menzo, "AI_ENABLED", False)
@@ -63,6 +72,7 @@ def test_base_internal_mode_preserves_existing_output_files(monkeypatch, tmp_pat
 
 
 def test_no_provisional_allowed_url_write_and_final_wrapper_write(monkeypatch, tmp_path):
+    isolate_wrapper_state(monkeypatch, tmp_path)
     monkeypatch.setattr(menzo, "_wp_ready_for_costly_work", lambda: (True, "ok"))
     for obj in [base_menzo, menzo.base]:
         monkeypatch.setattr(obj, "AI_ENABLED", False)
@@ -99,6 +109,7 @@ def test_no_provisional_allowed_url_write_and_final_wrapper_write(monkeypatch, t
 
 
 def test_wrapper_exception_after_base_leaves_existing_allowed_urls_intact(monkeypatch, tmp_path):
+    isolate_wrapper_state(monkeypatch, tmp_path)
     sentinel = tmp_path / "wrapper_state" / "urls.json"
     sentinel.parent.mkdir(parents=True, exist_ok=True)
     sentinel.write_text('{"allowed_urls": ["https://safe/sentinel"]}', encoding="utf-8")
@@ -151,7 +162,8 @@ def test_base_menzo_unlimited_handoff_preserves_all_actionable(monkeypatch, tmp_
     assert out["daily_policy"]["base_capacity_limits_applied"] is False
 
 
-def test_wrapper_passes_apply_capacity_limits_false(monkeypatch):
+def test_wrapper_passes_apply_capacity_limits_false(monkeypatch, tmp_path):
+    isolate_wrapper_state(monkeypatch, tmp_path)
     seen = []
     monkeypatch.setattr(menzo, "_wp_ready_for_costly_work", lambda: (True, "ok"))
     def fake_base(board, *, apply_capacity_limits=True, persist_outputs=True):
@@ -173,6 +185,7 @@ def test_wrapper_passes_apply_capacity_limits_false(monkeypatch):
 
 
 def test_real_base_unlimited_pipeline_payload_exceeds_old_caps(monkeypatch, tmp_path):
+    isolate_wrapper_state(monkeypatch, tmp_path)
     monkeypatch.setenv("V93_MENZO_MAX_SELECTED_PER_RUN", "6")
     monkeypatch.setenv("V93_MENZO_MAX_PENDING_PER_RUN", "12")
     monkeypatch.setattr(base_menzo, "ARTIFACT_DECISIONS_FILE", tmp_path / "base_artifacts" / "menzo.json")
@@ -186,7 +199,6 @@ def test_real_base_unlimited_pipeline_payload_exceeds_old_caps(monkeypatch, tmp_
     monkeypatch.setattr(menzo.base, "MENZO_DECISIONS_FILE", tmp_path / "base_state" / "menzo.json")
     monkeypatch.setattr(menzo.base, "V92_ALLOWED_URLS_FILE", tmp_path / "base_state" / "urls.json")
     monkeypatch.setattr(menzo.base, "AI_ENABLED", False)
-    monkeypatch.setattr(menzo, "load_cross_run_story_history", lambda *a, **k: [])
     sent = []
     monkeypatch.setattr(menzo, "call_gemini_json_model", lambda prompt, model, **k: sent.append(prompt) or ({"duplicate_groups": []}, "gemini-3.1-flash-lite"))
     monkeypatch.setattr(menzo, "save_softpool", lambda r: None)
@@ -194,18 +206,33 @@ def test_real_base_unlimited_pipeline_payload_exceeds_old_caps(monkeypatch, tmp_
     monkeypatch.setattr(menzo, "remember_stories", lambda *a, **k: None)
     monkeypatch.setattr(menzo, "remember_footprints", lambda *a, **k: None)
     monkeypatch.setattr(menzo, "remember_fingerprints", lambda *a, **k: None)
-    selected = [base_candidate(f"https://pipe/sel{i}", f"CM Punk signs WWE contract {i}") for i in range(7)]
-    pending = [base_candidate(f"https://pipe/pen{i}", f"Backstage plans for Raw {i}") for i in range(13)]
+    selected = [
+        base_candidate("https://pipe/sel0", "CM Punk suffers a WWE knee injury"),
+        base_candidate("https://pipe/sel1", "CM Punk knee injury reported by WWE doctors"),
+        base_candidate("https://pipe/sel2", "Rhea Ripley discusses a charity project"),
+        base_candidate("https://pipe/sel3", "Seth Rollins launches a fitness program"),
+        base_candidate("https://pipe/sel4", "Becky Lynch appears at a community event"),
+        base_candidate("https://pipe/sel5", "Cody Rhodes signs a new AEW contract"),
+        base_candidate("https://pipe/sel6", "Cody Rhodes contract signing reported by AEW"),
+    ]
+    pending = [base_candidate(f"https://pipe/pen{i}", f"Community feature number {i}") for i in range(13)]
     board = {"news_candidates_for_menzo": selected + pending, "suspicious_story_clusters": [{"records": [{"url": "https://pipe/sel0"}]}] * 12}
     out = menzo.run_menzo(board)
-    assert len(sent) == 1
-    for candidate in selected + pending:
-        assert candidate["url"] in sent[0]
-    assert out["postprocess"]["massy_suspicious_duplicate_pairs"] == 12
+    assert len(sent) == 2
+    punk_prompt = next(prompt for prompt in sent if "https://pipe/sel0" in prompt)
+    cody_prompt = next(prompt for prompt in sent if "https://pipe/sel5" in prompt)
+    assert "https://pipe/sel1" in punk_prompt and "https://pipe/sel5" not in punk_prompt
+    assert "https://pipe/sel6" in cody_prompt and "https://pipe/sel0" not in cody_prompt
+    for candidate in selected[2:5] + pending:
+        assert all(candidate["url"] not in prompt for prompt in sent)
+    assert out["postprocess"]["same_run_suspicious_components"] == 2
+    assert out["postprocess"].get("massy_suspicious_duplicate_pairs", 0) == 0
     assert out["daily_policy"]["base_capacity_limits_applied"] is False
+    assert len(out["selected"]) <= menzo.MAX_SELECTED_THIS_RUN
 
 
 def test_duplicate_arbitration_before_post_caps_then_caps_apply(monkeypatch, tmp_path):
+    isolate_wrapper_state(monkeypatch, tmp_path)
     monkeypatch.setenv("V93_MENZO_MAX_SELECTED_PER_RUN", "6")
     monkeypatch.setattr(menzo, "MAX_SELECTED_THIS_RUN", 3)
     monkeypatch.setattr(menzo, "_wp_ready_for_costly_work", lambda: (True, "ok"))
@@ -217,7 +244,6 @@ def test_duplicate_arbitration_before_post_caps_then_caps_apply(monkeypatch, tmp
     monkeypatch.setattr(menzo, "ARTIFACT_DECISIONS_FILE", tmp_path / "wrapper_artifacts" / "menzo.json")
     monkeypatch.setattr(menzo, "MENZO_DECISIONS_FILE", tmp_path / "wrapper_state" / "menzo.json")
     monkeypatch.setattr(menzo, "V92_ALLOWED_URLS_FILE", tmp_path / "wrapper_state" / "urls.json")
-    monkeypatch.setattr(menzo, "load_cross_run_story_history", lambda *a, **k: [])
     monkeypatch.setattr(menzo, "save_softpool", lambda r: None)
     monkeypatch.setattr(menzo, "save_hard_skips", lambda r: None)
     monkeypatch.setattr(menzo, "remember_stories", lambda *a, **k: None)
@@ -230,8 +256,10 @@ def test_duplicate_arbitration_before_post_caps_then_caps_apply(monkeypatch, tmp
     assert "https://cap/6" in sent[0]
     assert any(x["url"] == "https://cap/1" and x["reason"] == "skip:duplicate_same_run" for x in out["skipped"])
     assert len(out["selected"]) <= 3
+    assert "https://cap/1" not in out["allowed_urls_for_v92"]
 
-def test_runtime_order_has_one_budget_after_duplicate_guards(monkeypatch):
+def test_runtime_order_has_one_budget_after_duplicate_guards(monkeypatch, tmp_path):
+    isolate_wrapper_state(monkeypatch, tmp_path)
     order = []
     base = {"selected": [], "pending": [], "skipped": [], "postprocess": {}, "policy": {}}
     monkeypatch.setattr(menzo, "_wp_ready_for_costly_work", lambda: (True, "ok"))
@@ -254,33 +282,45 @@ def test_runtime_order_has_one_budget_after_duplicate_guards(monkeypatch):
     assert order.count("apply_dynamic_editorial_budget") == 1
 
 
-def test_same_run_ab_duplicate_c_distinct_one_batch_and_massy_ignored(monkeypatch):
+def test_same_run_ab_duplicate_c_distinct_one_batch_and_massy_ignored(monkeypatch, tmp_path):
+    monkeypatch.setattr(menzo, "MENZO_DUPLICATE_ARBITRATION_CACHE_V2_FILE", tmp_path / "cache.json")
     calls=[]
     def fake(prompt, model, **k):
         calls.append((prompt, k.get("phase"), model))
         return {"duplicate_groups":[{"keep_id":"c0","discard_ids":["c1"],"reason":"same story"}]}, model
     monkeypatch.setattr(menzo, "call_gemini_json_model", fake)
-    r=result([item("https://t/A","A"), item("https://t/B","B"), item("https://t/C","C")])
+    r=result([item("https://t/A","CM Punk suffers a WWE knee injury"), item("https://t/B","CM Punk knee injury reported by WWE doctors"), item("https://t/C","Cody Rhodes signs a new AEW contract")])
     menzo.apply_same_story_duplicate_guard(r, {"suspicious_story_clusters":[{"records":[{}]}]*12})
     assert [x["url"] for x in r["selected"]] == ["https://t/A", "https://t/C"]
     assert r["skipped"][0]["url"] == "https://t/B"
     assert "menzo_duplicate_checked" not in r["selected"][1]
-    assert len(calls) == 1 and calls[0][1] == "duplicate_arbitration_same_run_batch" and "https://t/C" in calls[0][0]
+    assert len(calls) == 1 and calls[0][1] == "duplicate_arbitration_same_run_batch"
+    assert "https://t/A" in calls[0][0] and "https://t/B" in calls[0][0] and "https://t/C" not in calls[0][0]
+    assert r["postprocess"]["same_run_suspicious_components"] == 1
+    assert r["postprocess"].get("massy_suspicious_duplicate_pairs", 0) == 0
 
 
-def test_no_same_run_duplicates_and_two_independent_groups(monkeypatch):
-    monkeypatch.setattr(menzo, "call_gemini_json_model", lambda *a, **k: ({"duplicate_groups": []}, "gemini-3.1-flash-lite"))
-    r=result([item("https://t/A","A"), item("https://t/B","B")])
+def test_no_same_run_duplicates_and_two_independent_groups(monkeypatch, tmp_path):
+    monkeypatch.setattr(menzo, "MENZO_DUPLICATE_ARBITRATION_CACHE_V2_FILE", tmp_path / "scenario_a.json")
+    scenario_a_prompts=[]
+    monkeypatch.setattr(menzo, "call_gemini_json_model", lambda prompt,*a, **k: scenario_a_prompts.append(prompt) or ({"duplicate_groups": []}, "gemini-3.1-flash-lite"))
+    r=result([item("https://t/A","CM Punk suffers a WWE knee injury"), item("https://t/B","CM Punk knee injury reported by WWE doctors")])
     menzo.apply_same_story_duplicate_guard(r, {})
     assert len(r["selected"]) == 2 and all("menzo_duplicate_checked" not in x for x in r["selected"])
-    monkeypatch.setattr(menzo, "call_gemini_json_model", lambda *a, **k: ({"duplicate_groups":[{"keep_id":"c0","discard_ids":["c1"],"reason":"one"},{"keep_id":"c2","discard_ids":["c3"],"reason":"two"}]}, "gemini-3.1-flash-lite"))
-    r=result([item("https://t/A","A"), item("https://t/B","B"), item("https://t/C","C"), item("https://t/D","D")])
+    assert len(scenario_a_prompts)==1
+    monkeypatch.setattr(menzo, "MENZO_DUPLICATE_ARBITRATION_CACHE_V2_FILE", tmp_path / "scenario_b.json")
+    prompts=[]
+    monkeypatch.setattr(menzo, "call_gemini_json_model", lambda prompt,*a, **k: prompts.append(prompt) or ({"duplicate_groups":[{"keep_id":"c0","discard_ids":["c1"],"reason":"same"}]}, "gemini-3.1-flash-lite"))
+    r=result([item("https://t/A","CM Punk suffers a WWE knee injury"), item("https://t/B","CM Punk knee injury reported by WWE doctors"), item("https://t/C","Cody Rhodes signs a new AEW contract"), item("https://t/D","Cody Rhodes contract signing reported by AEW")])
     menzo.apply_same_story_duplicate_guard(r, {})
     assert [x["url"] for x in r["selected"]] == ["https://t/A", "https://t/C"]
     assert {x["url"] for x in r["skipped"]} == {"https://t/B", "https://t/D"}
+    assert len(prompts)==2 and all(not ("CM Punk" in prompt and "Cody Rhodes" in prompt) for prompt in prompts)
+    assert r["postprocess"]["same_run_suspicious_components"]==2
 
 
-def test_malformed_batch_repair_and_legacy_shape_never_applied(monkeypatch):
+def test_malformed_batch_repair_and_legacy_shape_never_applied(monkeypatch, tmp_path):
+    monkeypatch.setattr(menzo, "MENZO_DUPLICATE_ARBITRATION_CACHE_V2_FILE", tmp_path / "cache.json")
     calls=[]
     def fake(*a, **k):
         calls.append(k.get("phase"))
@@ -288,13 +328,19 @@ def test_malformed_batch_repair_and_legacy_shape_never_applied(monkeypatch):
             return {"decision":"DUPLICATE"}, "gemini-3.1-flash-lite"
         return {"duplicate_groups":[{"keep_id":"c0","discard_ids":["c1"],"reason":"fixed"}]}, "gemini-3.1-flash-lite"
     monkeypatch.setattr(menzo, "call_gemini_json_model", fake)
-    r=result([item("https://t/A","A"), item("https://t/B","B"), item("https://t/C","C")])
+    r=result([item("https://t/A","CM Punk suffers a WWE knee injury"), item("https://t/B","CM Punk knee injury reported by WWE doctors"), item("https://t/C","Cody Rhodes signs a new AEW contract")])
     menzo.apply_same_story_duplicate_guard(r, {})
     assert [x["url"] for x in r["selected"]] == ["https://t/A", "https://t/C"]
     assert calls == ["duplicate_arbitration_same_run_batch", "duplicate_arbitration_same_run_repair"]
+    assert r["postprocess"]["menzo_same_run_batch_calls"]==1
+    assert r["postprocess"]["menzo_same_run_batch_repairs"]==1
+    assert r["postprocess"]["menzo_same_run_micro_fallback_calls"]==0
+    assert r["postprocess"]["gemini_duplicate_calls_executed"]==2
 
 
-def test_same_run_micro_survivor_wins_current_wins_invalids_and_failure(monkeypatch):
+def test_same_run_micro_survivor_wins_current_wins_invalids_and_failure(monkeypatch, tmp_path):
+    cache_path = tmp_path / "cache.json"
+    monkeypatch.setattr(menzo, "MENZO_DUPLICATE_ARBITRATION_CACHE_V2_FILE", cache_path)
     # both batch attempts invalid; survivor wins over B; C replaces A; D compares only against C; E invalid fail-closes
     responses = [({"bad": True}, "gemini-3.1-flash-lite"), ({"bad": True}, "gemini-3.1-flash-lite"),
                  ({"decision":"DUPLICATE_OF", "matched_id":"c0", "keep_id":"c0", "reason":"A better"}, "gemini-3.1-flash-lite"),
@@ -306,61 +352,49 @@ def test_same_run_micro_survivor_wins_current_wins_invalids_and_failure(monkeypa
         prompts.append((k.get("phase"), prompt))
         return responses.pop(0)
     monkeypatch.setattr(menzo, "call_gemini_json_model", fake)
-    r=result([item("https://t/A","A"), item("https://t/B","B"), item("https://t/C","C"), item("https://t/D","D"), item("https://t/E","E")])
+    titles = ["CM Punk suffers a WWE knee injury", "CM Punk knee injury reported by WWE doctors", "New details on CM Punk WWE knee injury", "CM Punk WWE knee injury medical report", "CM Punk WWE knee injury surgery report"]
+    r=result([item(f"https://t/{letter}", title) for letter, title in zip("ABCDE", titles)])
     menzo.apply_same_story_duplicate_guard(r, {})
+    assert [phase for phase, _ in prompts] == ["duplicate_arbitration_same_run_batch", "duplicate_arbitration_same_run_repair"] + ["duplicate_arbitration_same_run_micro"] * 4
+    assert r["postprocess"]["gemini_duplicate_calls_executed"] == 6
     assert [x["url"] for x in r["selected"]] == ["https://t/C", "https://t/D"]
     assert {x["url"] for x in r["skipped"]} == {"https://t/B", "https://t/A", "https://t/E"}
     assert r["postprocess"]["menzo_duplicate_arbitration_fail_closed"] == 1
     d_prompt = [p for phase,p in prompts if phase == "duplicate_arbitration_same_run_micro"][2]
     assert '"id": "c0"' not in d_prompt and '"id": "c2"' in d_prompt
+    assert next(x for x in r["skipped"] if x["url"] == "https://t/E")["menzo_duplicate_decision"] == "ARBITRATION_FAILED"
+    cache_data = json.loads(cache_path.read_text(encoding="utf-8"))
+    assert cache_data["entries"] == {} and len(cache_data["failures"]) == 1
 
 
-def test_same_run_micro_invalid_matched_keep_missing_and_unresolved_only_current(monkeypatch):
-    for bad_response in [
+def test_same_run_micro_invalid_matched_keep_missing_and_unresolved_only_current(monkeypatch, tmp_path):
+    for index, bad_response in enumerate([
         {"decision":"DUPLICATE_OF", "matched_id":"future", "keep_id":"future", "reason":"bad"},
         {"decision":"DUPLICATE_OF", "matched_id":"c0", "keep_id":"c9", "reason":"bad"},
         {"decision":"DUPLICATE_OF", "keep_id":"c0", "reason":"bad"},
         None,
-    ]:
+    ]):
+        monkeypatch.setattr(menzo, "MENZO_DUPLICATE_ARBITRATION_CACHE_V2_FILE", tmp_path / f"cache-{index}.json")
         responses=[({"bad": True}, "gemini-3.1-flash-lite"), ({"bad": True}, "gemini-3.1-flash-lite"), (bad_response, "gemini-3.1-flash-lite")]
-        monkeypatch.setattr(menzo, "call_gemini_json_model", lambda *a, **k: responses.pop(0))
-        r=result([item("https://t/A","A"), item("https://t/B","B")])
+        phases=[]
+        def fake(*a, **kwargs):
+            phases.append(kwargs.get("phase"))
+            return responses.pop(0)
+        monkeypatch.setattr(menzo, "call_gemini_json_model", fake)
+        r=result([item("https://t/A","CM Punk suffers a WWE knee injury"), item("https://t/B","CM Punk knee injury reported by WWE doctors")])
         menzo.apply_same_story_duplicate_guard(r, {})
         assert [x["url"] for x in r["selected"]] == ["https://t/A"]
         assert r["skipped"][0]["url"] == "https://t/B"
         assert r["skipped"][0]["reason"] == "skip:duplicate_arbitration_unresolved"
+        assert r["skipped"][0]["menzo_duplicate_decision"] == "ARBITRATION_FAILED"
+        assert phases == ["duplicate_arbitration_same_run_batch", "duplicate_arbitration_same_run_repair", "duplicate_arbitration_same_run_micro"]
+        assert r["postprocess"]["gemini_duplicate_calls_executed"] == 3
+        cache_data=json.loads((tmp_path / f"cache-{index}.json").read_text(encoding="utf-8"))
+        assert cache_data["entries"] == {} and len(cache_data["failures"]) == 1
 
 
-def test_recent_history_batch_duplicate_update_no_match_and_one_call(monkeypatch):
-    history=[item("https://old/dup","CM Punk signs WWE contract"), item("https://old/upd","old rumor", "CM Punk match was rumored for SummerSlam.")]
-    monkeypatch.setattr(menzo, "load_cross_run_story_history", lambda *a, **k: history)
-    calls=[]
-    def arbitrate(prompt, *a, **k):
-        calls.append(k.get("phase"))
-        return {"matches":[{"current_id":"c0","published_id":"p0","decision":"DUPLICATE","reason":"same"},{"current_id":"c1","published_id":"p1","decision":"MATERIAL_UPDATE","new_fact":"WWE officially announced CM Punk match.","reason":"official"}]}, "gemini-3.1-flash-lite"
-    monkeypatch.setattr(menzo, "call_gemini_json_model", arbitrate)
-    r=result([item("https://new/dup","CM Punk signs WWE contract"), item("https://new/upd","WWE officially announced CM Punk match for SummerSlam.", "WWE officially announced CM Punk match for SummerSlam."), item("https://new/o","ordinary")])
-    menzo.apply_recent_published_duplicate_guard(r)
-    assert [x["url"] for x in r["selected"]] == ["https://new/upd", "https://new/o"]
-    assert r["selected"][0]["menzo_duplicate_decision"] == "REAL_UPDATE"
-    assert "menzo_duplicate_checked" not in r["selected"][1]
-    assert calls == ["duplicate_arbitration_recent_history_batch"]
 
 
-def test_recent_history_micro_requires_explicit_valid_published_id(monkeypatch):
-    history=[item("https://old/a","CM Punk signs WWE contract", "CM Punk signs WWE contract.")]
-    monkeypatch.setattr(menzo, "load_cross_run_story_history", lambda *a, **k: history)
-    for resp in [{"decision":"DUPLICATE", "reason":"missing"}, {"decision":"DUPLICATE", "published_id":"p9", "reason":"unknown"}]:
-        responses=[({"bad": True}, "gemini-3.1-flash-lite"), ({"bad": True}, "gemini-3.1-flash-lite"), (resp, "gemini-3.1-flash-lite")]
-        monkeypatch.setattr(menzo, "call_gemini_json_model", lambda *a, **k: responses.pop(0))
-        r=result([item("https://new/a","CM Punk signs WWE contract")])
-        menzo.apply_recent_published_duplicate_guard(r)
-        assert r["selected"] == [] and r["skipped"][0]["reason"] == "skip:duplicate_arbitration_unresolved"
-    responses=[({"bad": True}, "gemini-3.1-flash-lite"), ({"bad": True}, "gemini-3.1-flash-lite"), ({"decision":"DUPLICATE", "published_id":"p0", "reason":"same"}, "gemini-3.1-flash-lite")]
-    monkeypatch.setattr(menzo, "call_gemini_json_model", lambda *a, **k: responses.pop(0))
-    r=result([item("https://new/a","CM Punk signs WWE contract")])
-    menzo.apply_recent_published_duplicate_guard(r)
-    assert r["selected"] == [] and r["skipped"][0]["reason"] == "skip:duplicate_recently_published"
 
 
 def test_grounded_material_update_validation(monkeypatch):
@@ -372,15 +406,6 @@ def test_grounded_material_update_validation(monkeypatch):
     assert menzo.material_update_is_grounded("WWE officially announced CM Punk match.", current, old)
 
 
-def test_call_counters_actual_calls_missing_key_and_cooldown(monkeypatch):
-    monkeypatch.setattr(menzo, "load_cross_run_story_history", lambda *a, **k: [])
-    for status, expected_calls, expected_avoided in [("gemini-3.1-flash-lite", 1, 0), ("missing_api_key", 0, 1), ("model_cooldown_after_failure:gemini-3.1-flash-lite", 0, 1)]:
-        monkeypatch.setattr(menzo, "call_gemini_json_model", lambda *a, _status=status, **k: ({"duplicate_groups": []}, _status))
-        r=result([item("https://t/A","A"), item("https://t/B","B")])
-        menzo.apply_same_story_duplicate_guard(r, {})
-        assert r["postprocess"]["menzo_same_run_batch_calls"] == expected_calls
-        assert r["postprocess"]["menzo_same_run_batch_calls_avoided"] == expected_avoided
-        assert r["postprocess"]["gemini_calls_used_for_duplicate_arbitration"] == expected_calls
 
 
 def test_final_allowed_urls_only_valid_selected(monkeypatch):
@@ -422,20 +447,6 @@ def test_metadata_propagation_actual_andrea_bob_alfred_publisher(monkeypatch, tm
     assert any(x.get("source_url") == "https://t/bad" and x.get("reason") == "skip:duplicate_arbitration_unresolved" for x in out["results"])
 
 
-def test_story_footprint_enrichment_does_not_remove_candidates_before_gemini(monkeypatch):
-    calls = []
-    a = item("https://same/a", "CM Punk signs WWE contract", "CM Punk signs a WWE contract.")
-    b = item("https://same/b", "CM Punk signs WWE contract", "CM Punk signs a WWE contract.", section="pending")
-    r = result([a, b])
-    menzo.apply_story_footprint_policy(r)
-    assert [x["url"] for x in r["selected"]] == ["https://same/a"]
-    assert [x["url"] for x in r["pending"]] == ["https://same/b"]
-    assert r["postprocess"]["story_footprint_duplicates_skipped"] == 0
-    monkeypatch.setattr(menzo, "call_gemini_json_model", lambda prompt, model, **k: calls.append(prompt) or ({"duplicate_groups": []}, "gemini-3.1-flash-lite"))
-    menzo.apply_same_story_duplicate_guard(r, {})
-    assert "https://same/a" in calls[0] and "https://same/b" in calls[0]
-    assert [x["url"] for x in r["selected"]] == ["https://same/a"]
-    assert [x["url"] for x in r["pending"]] == ["https://same/b"]
 
 
 def test_generalized_fingerprint_enrichment_does_not_skip_memory_match_before_gemini(monkeypatch):
@@ -449,71 +460,10 @@ def test_generalized_fingerprint_enrichment_does_not_skip_memory_match_before_ge
     assert "duplicate_of" not in current and current.get("reason") != "skip:story_fingerprint_overlap"
 
 
-def test_deterministic_similarity_does_not_block_when_gemini_says_no_duplicate(monkeypatch):
-    a = item("https://sim/a", "Identical headline", "Identical body text")
-    b = item("https://sim/b", "Identical headline", "Identical body text")
-    r = result([a, b])
-    menzo.apply_story_footprint_policy(r)
-    menzo.apply_generalized_fingerprint_policy(r)
-    monkeypatch.setattr(menzo, "call_gemini_json_model", lambda *a, **k: ({"duplicate_groups": []}, "gemini-3.1-flash-lite"))
-    menzo.apply_same_story_duplicate_guard(r, {})
-    assert [x["url"] for x in r["selected"]] == ["https://sim/a", "https://sim/b"]
-    assert r["skipped"] == []
-    assert all("menzo_duplicate_checked" not in x for x in r["selected"])
 
 
-def test_only_gemini_confirmed_duplicate_blocks_after_enrichment(monkeypatch):
-    a = item("https://sim/a", "Identical headline", "Identical body text")
-    b = item("https://sim/b", "Identical headline", "Identical body text")
-    r = result([a, b])
-    menzo.apply_story_footprint_policy(r)
-    menzo.apply_generalized_fingerprint_policy(r)
-    monkeypatch.setattr(menzo, "call_gemini_json_model", lambda *a, **k: ({"duplicate_groups": [{"keep_id":"c0", "discard_ids":["c1"], "reason":"Gemini says same fact"}]}, "gemini-3.1-flash-lite"))
-    menzo.apply_same_story_duplicate_guard(r, {})
-    assert [x["url"] for x in r["selected"]] == ["https://sim/a"]
-    assert r["skipped"][0]["url"] == "https://sim/b"
-    assert r["skipped"][0]["reason"] == "skip:duplicate_same_run"
 
 
-def test_run_menzo_payload_complete_after_enrichment_and_massy_diagnostics(monkeypatch):
-    sent = []
-    candidates = [item(f"https://run/{i}", f"Story {i}", f"Story {i} body") for i in range(3)] + [item(f"https://run/p{i}", f"Pending {i}", f"Pending {i} body", section="pending") for i in range(2)]
-    base = {"selected": candidates[:3], "pending": candidates[3:], "skipped": [], "postprocess": {}, "policy": {}}
-    monkeypatch.setattr(menzo, "_wp_ready_for_costly_work", lambda: (True, "ok"))
-    monkeypatch.setattr(menzo.base, "run_menzo", lambda board, **kwargs: {"selected": list(base["selected"]), "pending": list(base["pending"]), "skipped": [], "postprocess": {}, "policy": {}})
-    monkeypatch.setattr(menzo, "normalize_ai_fields", lambda r: None)
-    monkeypatch.setattr(menzo, "rebuild_decisions", lambda r: None)
-    monkeypatch.setattr(menzo, "apply_betting_odds_policy", lambda r: None)
-    monkeypatch.setattr(menzo, "apply_source_opinion_policy", lambda r: None)
-    monkeypatch.setattr(menzo, "apply_medical_brand_policy", lambda r: None)
-    monkeypatch.setattr(menzo, "enforce_ai_skip_binding", lambda r: None)
-    monkeypatch.setattr(menzo, "load_cross_run_story_history", lambda *a, **k: [])
-    monkeypatch.setattr(menzo, "apply_dynamic_editorial_budget", lambda r: None)
-    monkeypatch.setattr(menzo, "enforce_selected_cap", lambda r: None)
-    monkeypatch.setattr(menzo, "enforce_capacity_buffer", lambda r: None)
-    monkeypatch.setattr(menzo, "save_softpool", lambda r: None)
-    monkeypatch.setattr(menzo, "save_hard_skips", lambda r: None)
-    monkeypatch.setattr(menzo, "remember_stories", lambda *a, **k: None)
-    monkeypatch.setattr(menzo, "remember_footprints", lambda *a, **k: None)
-    monkeypatch.setattr(menzo, "remember_fingerprints", lambda *a, **k: None)
-    monkeypatch.setattr(menzo, "write_json", lambda *a, **k: None)
-    def fake(prompt, model, **k):
-        sent.append(prompt)
-        return {"duplicate_groups": []}, "gemini-3.1-flash-lite"
-    monkeypatch.setattr(menzo, "call_gemini_json_model", fake)
-    board = {"suspicious_story_clusters": [{"records": [{"url": "https://run/0"}, {"url": "https://run/1"}]}] * 12}
-    out = menzo.run_menzo(board)
-    assert len(sent) == 1
-    for candidate in candidates:
-        assert candidate["url"] in sent[0]
-    assert out["postprocess"]["massy_suspicious_duplicate_pairs"] == 12
-    assert out["postprocess"]["story_footprint_duplicates_skipped"] == 0
-    assert out["postprocess"]["story_fingerprint_duplicates_skipped"] == 0
-    assert out["policy"].get("story_footprint_dedupe_before_bob") is not True
-    assert out["policy"].get("story_dedupe_before_bob") is not True
-    assert out["policy"]["story_footprint_enrichment_only"] is True
-    assert out["policy"]["story_fingerprint_enrichment_only"] is True
-    assert out["policy"]["gemini_batch_duplicate_arbitration_is_sole_semantic_authority"] is True
 
 def test_menzo_model_chain_shared_operation_id_and_invalid_json_usage(monkeypatch, tmp_path):
     from agents import gemini_ledger
