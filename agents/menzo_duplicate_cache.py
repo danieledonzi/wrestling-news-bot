@@ -17,9 +17,9 @@ from typing import Any, Callable
 ROOT = Path(__file__).resolve().parents[1]
 CACHE_FILE = ROOT / "state" / "newsroom" / "menzo_duplicate_arbitration_cache_v2.json"
 CACHE_SCHEMA_VERSION = "2"
-MENZO_DUPLICATE_ARBITRATION_CONTRACT_VERSION = "v95.17-content-cache-1"
-PROMPT_BUILDER_VERSION = "v95.11-batch-prompts-1"
-VALIDATOR_VERSION = "v95.11-batch-validators-1"
+MENZO_DUPLICATE_ARBITRATION_CONTRACT_VERSION = "v95.18-suspicious-doubts-1"
+PROMPT_BUILDER_VERSION = "v95.18-suspicious-subsets-1"
+VALIDATOR_VERSION = "v95.18-component-validators-1"
 MODEL_NAME = "gemini-3.1-flash-lite"
 FAILURE_COOLDOWN_HOURS = float(os.getenv("MENZO_DUPLICATE_FAILURE_COOLDOWN_HOURS", "2"))
 REQUIRED_DECISION_FIELDS = (
@@ -49,13 +49,16 @@ def content_hash(value: Any) -> str:
     return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
 
 
-def contract_fingerprint(contract_version: str | None = None) -> str:
+def contract_fingerprint(contract_version: str | None = None, *, threshold: float | None = None) -> str:
+    from agents.menzo_duplicate_scorer import SCORER_VERSION, effective_threshold
     return content_hash({
         "schema": CACHE_SCHEMA_VERSION,
         "contract": contract_version or MENZO_DUPLICATE_ARBITRATION_CONTRACT_VERSION,
         "model": MODEL_NAME,
         "prompt": PROMPT_BUILDER_VERSION,
         "validator": VALIDATOR_VERSION,
+        "scorer": SCORER_VERSION,
+        "threshold": effective_threshold() if threshold is None else float(threshold),
     })
 
 
