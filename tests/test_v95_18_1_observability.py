@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -11,7 +11,10 @@ from agents.gemini_diagnostics import (
     build_gemini_diagnostics,
     render_gemini_diagnostics_markdown,
 )
-from owtv_report import add_gemini_detailed_ledger_to_report
+from owtv_report import (
+    add_gemini_detailed_ledger_to_report,
+    render_gemini_detailed_ledger_24h,
+)
 
 
 def test_v9518_latest_run_snapshot_is_exposed(tmp_path: Path) -> None:
@@ -146,3 +149,17 @@ def test_existing_dynamic_detailed_heading_is_not_duplicated(
 
     assert out.count("## Gemini / AI Detailed Ledger 12h") == 1
     assert "- existing" in out
+
+def test_since_only_uses_current_time_for_dynamic_heading(
+    tmp_path: Path,
+) -> None:
+    ledger = tmp_path / "gemini_call_ledger.jsonl"
+    ledger.write_text("", encoding="utf-8")
+    since = datetime.now(timezone.utc) - timedelta(hours=6)
+
+    output = render_gemini_detailed_ledger_24h(
+        ledger_path=ledger,
+        since=since,
+    )
+
+    assert "## Gemini / AI Detailed Ledger 6h" in output

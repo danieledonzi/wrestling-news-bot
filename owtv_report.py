@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 import re
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -67,21 +67,22 @@ def render_gemini_detailed_ledger_24h(
     menzo_context: dict[str, Any] | None = None,
 ) -> str:
     """Render detailed Gemini diagnostics without failing report generation."""
-    hours = _window_hours(since, until, now)
+    effective_now = now or datetime.now(timezone.utc)
+    hours = _window_hours(since, until, effective_now)
 
     try:
         if ledger_path is None:
             records, warnings = load_ledger(
                 since=since,
                 until=until,
-                now=now,
+                now=effective_now,
             )
         else:
             records, warnings = load_ledger(
                 ledger_path,
                 since=since,
                 until=until,
-                now=now,
+                now=effective_now,
             )
 
         context = (
