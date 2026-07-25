@@ -190,3 +190,90 @@ def test_daily_judgment_gemini_canonical_and_legacy_both_unavailable():
     text = dej.render_markdown(report)
     assert "Gemini 3.5 attempts/completed/failed/avoided: n.d./n.d./n.d./n.d." in text
     assert "Legacy Gemini 3.5 called total" not in text
+
+
+def produced_run(*, selected=(), pending=(), reviews=()):
+    from agents.master_log_v93_19 import build_master_record
+    row = build_master_record(
+        run_summary={"started_at": NOW.isoformat(), "ended_at": NOW.isoformat(), "runtime_exit_code": 0},
+        timeline=[], massy={}, simone={}, simone_publish={},
+        menzo={"selected": list(selected), "pending": list(pending)}, bob={},
+        alfred={"reviews": list(reviews)}, publisher={}, archivista={},
+    )
+    row["recorded_at"] = NOW.isoformat()
+    return row
+
+
+def test_actionable_identities_cover_more_than_pending_sample(tmp_path):
+    pending = [{"source_url": f"https://source.example/{index}"} for index in range(25)]
+    row = produced_run(selected=[{"source_url": "https://source.example/selected"}], pending=pending)
+    assert len(row["menzo"]["pending"]) == 20
+    assert row["menzo"]["pending_sample_truncated"] is True
+    write_runtime(tmp_path, [row])
+    assert build_snapshot(NOW - timedelta(days=1), NOW, tmp_path)["funnel"]["canonical"]["unique_actionable_candidates"] == 26
+
+
+def test_actionable_identity_is_deduplicated_across_runs(tmp_path):
+    first = produced_run(pending=[{"source_url": "https://source.example/repeated"}])
+    second = produced_run(selected=[{"source_url": "https://source.example/repeated"}])
+    second["recorded_at"] = (NOW - timedelta(hours=1)).isoformat()
+    second["run"]["ended_at"] = second["recorded_at"]
+    write_runtime(tmp_path, [first, second])
+    assert build_snapshot(NOW - timedelta(days=1), NOW, tmp_path)["funnel"]["canonical"]["unique_actionable_candidates"] == 1
+
+
+def test_legacy_pending_at_cap_makes_actionable_unavailable(tmp_path):
+    pending = [{"source_url": f"https://source.example/{index}"} for index in range(20)]
+    write_runtime(tmp_path, [run(menzo={"selected": [], "pending": pending})])
+    funnel = build_snapshot(NOW - timedelta(days=1), NOW, tmp_path)["funnel"]
+    assert funnel["canonical"]["unique_actionable_candidates"] is None
+    assert funnel["canonical_unavailability_reasons"]["unique_actionable_candidates"]
+
+
+def test_legacy_pending_below_cap_remains_exact(tmp_path):
+    pending = [{"source_url": f"https://source.example/{index}"} for index in range(19)]
+    write_runtime(tmp_path, [run(menzo={"selected": [], "pending": pending})])
+    assert build_snapshot(NOW - timedelta(days=1), NOW, tmp_path)["funnel"]["canonical"]["unique_actionable_candidates"] == 19
+
+
+def test_alfred_warning_total_survives_compact_sample(tmp_path):
+    warnings = [{"code": f"w{index}"} for index in range(12)]
+    row = produced_run(reviews=[{"source_url": "https://source.example/a", "warnings": warnings}])
+    review = row["alfred"]["reviews"][0]
+    assert len(review["warnings"]) == 10 and review["warning_occurrences_total"] == 12 and review["warnings_truncated"] is True
+    write_runtime(tmp_path, [row])
+    events = build_snapshot(NOW - timedelta(days=1), NOW, tmp_path)["alfred"]["events"]
+    assert events["warning_events"] == 1
+    assert events["warning_occurrences"] == 12
+
+
+def test_legacy_alfred_warning_sample_at_cap_only_nulls_occurrences(tmp_path):
+    warnings = [{"code": f"w{index}"} for index in range(10)]
+    write_runtime(tmp_path, [run(alfred={"reviews": [{"source_url": "https://source.example/a", "warnings": warnings}]})])
+    alfred = build_snapshot(NOW - timedelta(days=1), NOW, tmp_path)["alfred"]
+    assert alfred["events"]["warning_events"] == 1
+    assert alfred["events"]["warning_occurrences"] is None
+    assert alfred["events"]["warning_occurrences_diagnostic_lower_bound"] == 10
+    assert alfred["unique"]["articles_with_warnings"] == 1
+    snapshot = build_snapshot(NOW - timedelta(days=1), NOW, tmp_path)
+    assert "alfred_warning_occurrences_unavailable_legacy_warning_sample_at_cap" in snapshot["section_metadata"]["alfred"]["diagnostic_warnings"]
+
+
+def test_daily_judgment_legacy_alfred_is_diagnostic_only():
+    import scripts.daily_editorial_judgment as dej
+    report = dej.build_report({"menzo_latest": {"selected": [], "pending": [], "skipped": []}})
+    report["canonical_alfred"] = {}
+    report["legacy_warnings"] = 9
+    text = dej.render_markdown(report)
+    assert "Alfred articles reviewed/articles with warnings/warning events/warning occurrences/final unique blockers: n.d./n.d./n.d./n.d./n.d." in text
+    assert "Legacy Alfred warning total (diagnostic): 9" in text
+
+
+def test_daily_judgment_without_alfred_sources_fabricates_nothing():
+    import scripts.daily_editorial_judgment as dej
+    report = dej.build_report({"menzo_latest": {"selected": [], "pending": [], "skipped": []}})
+    report["canonical_alfred"] = {}
+    report["legacy_warnings"] = "n.d."
+    text = dej.render_markdown(report)
+    assert "warning events/warning occurrences/final unique blockers: n.d./n.d./n.d." in text
+    assert "Legacy Alfred warning total" not in text
