@@ -12,6 +12,7 @@ import hashlib
 import json
 import re
 import subprocess
+import sys
 from collections import Counter, defaultdict
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -19,7 +20,10 @@ from typing import Any, Iterable
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 ROOT = Path(__file__).resolve().parents[1]
-SCHEMA_VERSION = "v95.12a_observability_snapshot.v2"
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+SCHEMA_VERSION = "v95.19_observability_snapshot.v3"
+METRIC_CONTRACT_VERSION = "v95.19.0"
 ACTIVE_DUPLICATE_COUNTERS = (
     "menzo_same_run_batch_calls",
     "menzo_same_run_batch_repairs",
@@ -35,7 +39,14 @@ ACTIVE_DUPLICATE_COUNTERS = (
     "gemini_calls_used_for_duplicate_arbitration",
 )
 LEGACY_DUPLICATE_KEYS = ("footprint", "fingerprint", "story_footprint", "story_fingerprint", "duplicate_candidates", "same_story_clusters")
-EXPECTED_RUNTIME_UNTRACKED_PATHS = ("reports/",)
+EXPECTED_RUNTIME_PATHS = (".bot_exit_code", "logs/master_log.log", "reports/")
+
+
+def section_metadata(*, available: bool, source: str, coverage: Any = None,
+                     warnings: list[str] | None = None, reason: str | None = None) -> dict[str, Any]:
+    return {"available": available, "coverage": coverage, "source": source,
+            "schema_version": SCHEMA_VERSION, "policy_version": METRIC_CONTRACT_VERSION,
+            "diagnostic_warnings": warnings or [], "unavailability_reason": reason if not available else None}
 
 
 def parse_utc_datetime(value: Any) -> datetime | None:
@@ -97,6 +108,21 @@ def identity_aliases(record: dict[str, Any]) -> set[str]:
     if not aliases:
         aliases.add(stable_article_identity(record))
     return aliases
+
+
+def linkage_aliases(record: dict[str, Any]) -> set[str]:
+    """Return only externally meaningful aliases; never hashed fallback identities."""
+    aliases = identity_aliases(record)
+    return {alias for alias in aliases if not alias.startswith("unknown:")}
+
+
+def linkage_aliases_by_namespace(record: dict[str, Any]) -> dict[str, set[str]]:
+    grouped = {namespace: set() for namespace in ("source", "wp", "title")}
+    for alias in linkage_aliases(record):
+        namespace, _separator, _value = alias.partition(":")
+        if namespace in grouped:
+            grouped[namespace].add(alias)
+    return grouped
 
 
 def load_json_defensively(path: Path) -> tuple[Any, str | None]:
@@ -336,6 +362,8 @@ def build_editorial_funnel(runs: list[dict[str, Any]], publication: dict[str, An
     buckets: dict[str, list[dict[str, Any]]] = defaultdict(list)
     event_counts: Counter[str] = Counter()
     runs_seen = runs_completed = runs_failed = runs_unknown = 0
+    actionable_identity_keys: set[str] = set()
+    actionable_ambiguous = False
     for run in iter_master_runs_in_window(runs, since, until):
         runs_seen += 1
         bucket = _run_exit_bucket(run)
@@ -346,6 +374,19 @@ def build_editorial_funnel(runs: list[dict[str, Any]], publication: dict[str, An
         else:
             runs_unknown += 1
         menzo = run.get("menzo") if isinstance(run.get("menzo"), dict) else {}
+        persisted_keys = menzo.get("actionable_identity_keys")
+        if isinstance(persisted_keys, list):
+            actionable_identity_keys.update(str(key) for key in persisted_keys if str(key).strip())
+        else:
+            selected_details = _items(menzo, "selected")
+            pending_details = _items(menzo, "pending")
+            pending_total = menzo.get("pending_total")
+            explicitly_exact = isinstance(pending_total, int) and pending_total == len(pending_details)
+            truncated = menzo.get("pending_sample_truncated") is True
+            if truncated or (len(pending_details) == 20 and not explicitly_exact):
+                actionable_ambiguous = True
+            else:
+                actionable_identity_keys.update(stable_article_identity(item) for item in selected_details + pending_details)
         bob = run.get("bob") if isinstance(run.get("bob"), dict) else {}
         alfred = run.get("alfred") if isinstance(run.get("alfred"), dict) else {}
         publisher = run.get("publisher") if isinstance(run.get("publisher"), dict) else {}
@@ -363,7 +404,7 @@ def build_editorial_funnel(runs: list[dict[str, Any]], publication: dict[str, An
             event_counts[name] += _add_items(buckets[name], run, items, since, until)
     unique: dict[str, Any] = {
         "massy_unique_candidates_seen": None,
-        "menzo_unique_actionable_candidates": len({stable_article_identity(x) for x in buckets["menzo_selected_downstream"] + buckets["menzo_pending"]}),
+        "menzo_unique_actionable_candidates": None if actionable_ambiguous else len(actionable_identity_keys),
         "menzo_unique_selected_for_downstream_handoff": len({stable_article_identity(x) for x in buckets["menzo_selected_downstream"]}),
         "menzo_selected_downstream": len({stable_article_identity(x) for x in buckets["menzo_selected_downstream"]}),
         "menzo_unique_skipped_sample": len({stable_article_identity(x) for x in buckets["menzo_skipped_sample"]}),
@@ -382,14 +423,34 @@ def build_editorial_funnel(runs: list[dict[str, Any]], publication: dict[str, An
         "andrea_item_level_outcomes_not_reconstructable_from_master_log_v93_19",
         "bob_item_level_errors_not_reconstructable_from_master_log_v93_19",
     ]
-    selected_ids = {stable_article_identity(x) for x in buckets["menzo_selected_downstream"]}
-    published_ids = {stable_article_identity(x) for x in publication.get("records", []) if x.get("content_kind") == "news"}
-    if selected_ids and published_ids:
-        overlap = len(selected_ids & published_ids)
-        selected_publication_ratio = overlap / len(selected_ids)
+    actionable_unavailability_reason = None
+    if actionable_ambiguous:
+        actionable_unavailability_reason = "menzo_actionable_identities_unavailable_legacy_pending_sample_at_cap"
+        schema_warnings.append(actionable_unavailability_reason)
+    handoffs = dedupe_events(buckets["menzo_selected_downstream"])
+    publications = dedupe_events([x for x in publication.get("records", []) if x.get("content_kind") == "news"])
+    handoff_aliases = [linkage_aliases_by_namespace(item) for item in handoffs]
+    publication_aliases = [linkage_aliases_by_namespace(item) for item in publications]
+    handoff_namespaces = {namespace for aliases in handoff_aliases for namespace, values in aliases.items() if values}
+    publication_namespaces = {namespace for aliases in publication_aliases for namespace, values in aliases.items() if values}
+    shared_namespaces = handoff_namespaces & publication_namespaces
+    comparable = lambda aliases: any(aliases[namespace] for namespace in shared_namespaces)
+    linked_handoff_ids = {stable_article_identity(h) for h in handoffs
+                          if any(any(linkage_aliases_by_namespace(h)[namespace] & linkage_aliases_by_namespace(p)[namespace]
+                                     for namespace in shared_namespaces) for p in publications)}
+    linkage_supported = bool(handoffs and publications and shared_namespaces and
+                             all(comparable(aliases) for aliases in handoff_aliases + publication_aliases))
+    linkage_unavailability_reason = None
+    if linkage_supported:
+        overlap = len(linked_handoff_ids)
+        selected_publication_ratio = overlap / len(handoffs)
     else:
         overlap = None
         selected_publication_ratio = None
+        linkage_unavailability_reason = ("selected_publication_linkage_no_shared_namespace"
+                                          if handoffs and publications and not shared_namespaces
+                                          else "selected_publication_linkage_incomplete_shared_namespace_coverage")
+        schema_warnings.append(linkage_unavailability_reason)
         schema_warnings.append("selected_publication_linkage_not_supported_by_available_identities")
     return {
         "runs_seen": runs_seen,
@@ -400,6 +461,17 @@ def build_editorial_funnel(runs: list[dict[str, Any]], publication: dict[str, An
         "event_counts": dict(event_counts),
         "selected_publication_overlap": overlap,
         "selected_publication_ratio": selected_publication_ratio,
+        "selected_publication_linkage_unavailability_reason": linkage_unavailability_reason,
+        "canonical": {
+            "unique_actionable_candidates": unique["menzo_unique_actionable_candidates"],
+            "unique_downstream_handoffs": len(handoffs),
+            "unique_final_publications": len(publications),
+            "linked_handoff_publication_overlap": overlap,
+            "handoff_to_publication_ratio": selected_publication_ratio,
+        },
+        "canonical_unavailability_reasons": {
+            "unique_actionable_candidates": actionable_unavailability_reason,
+        },
         "schema_warnings": schema_warnings,
     }
 
@@ -451,8 +523,22 @@ def aggregate_alfred(runs: list[dict[str, Any]], publication: dict[str, Any], si
             dt = child_event_timestamp(review, run)
             if in_window_dt(dt, since, until):
                 reviews.append((dt or since, _with_parent_timestamp(review, run)))
+    warning_reviews = [(dt, r) for dt, r in reviews
+                       if _warning_entries(r) or isinstance(r.get("warning_occurrences_total"), int) and r["warning_occurrences_total"] > 0]
+    warning_occurrences_lower_bound = sum(len(_warning_entries(r)) for _dt, r in reviews)
+    warning_occurrences_ambiguous = any(
+        not isinstance(r.get("warning_occurrences_total"), int) and len(_warning_entries(r)) == 10
+        for _dt, r in reviews
+    )
+    warning_occurrences = None if warning_occurrences_ambiguous else sum(
+        r["warning_occurrences_total"] if isinstance(r.get("warning_occurrences_total"), int) else len(_warning_entries(r))
+        for _dt, r in reviews
+    )
     events = {
         "warning_count": sum(len(_warning_entries(r)) for _dt, r in reviews),
+        "warning_events": len(warning_reviews),
+        "warning_occurrences": warning_occurrences,
+        "warning_occurrences_diagnostic_lower_bound": warning_occurrences_lower_bound,
         "needs_revision_count": sum(1 for _dt, r in reviews if _review_status(r) == "needs_revision"),
         "blocker_count": sum(len(_blocker_entries(r)) for _dt, r in reviews),
     }
@@ -482,16 +568,42 @@ def aggregate_alfred(runs: list[dict[str, Any]], publication: dict[str, Any], si
             later_resolution = any(t > latest_review_dt for t in approved_times) or (latest_publication_dt is not None and latest_publication_dt > latest_review_dt)
         if latest_review is not None and _event_is_unresolved(latest_review) and not later_resolution:
             unique["final_blocked"] += 1
-    return {"events": events, "unique": {"approved": unique["approved"], "final_blocked": unique["final_blocked"], "revised_then_approved": unique["revised_then_approved"], "revised_then_published": unique["revised_then_published"]}, "schema_warnings": []}
+    occurrence_reason = "alfred_warning_occurrences_unavailable_legacy_warning_sample_at_cap" if warning_occurrences_ambiguous else None
+    return {"events": events, "unique": {"articles_reviewed": len({stable_article_identity(r) for _dt, r in reviews}), "articles_with_warnings": len({stable_article_identity(r) for _dt, r in warning_reviews}), "approved": unique["approved"], "final_blockers": unique["final_blocked"], "final_blocked": unique["final_blocked"], "revised_then_approved": unique["revised_then_approved"], "revised_then_published": unique["revised_then_published"]}, "canonical_unavailability_reasons": {"warning_occurrences": occurrence_reason}, "schema_warnings": [occurrence_reason] if occurrence_reason else []}
+
+
+def aggregate_simone(runs: list[dict[str, Any]], since: datetime, until: datetime) -> dict[str, Any]:
+    statuses: Counter[str] = Counter()
+    legacy_errors = 0
+    for run in iter_master_runs_in_window(runs, since, until):
+        simone = run.get("simone") if isinstance(run.get("simone"), dict) else {}
+        for item in _items(simone, "published_reports"):
+            if _child_in_window(item, run, since, until):
+                statuses[str(item.get("status") or "unknown").lower()] += 1
+        handoff = simone.get("publish_handoff") if isinstance(simone.get("publish_handoff"), dict) else {}
+        try:
+            legacy_errors += int(handoff.get("errors") or 0)
+        except (TypeError, ValueError):
+            pass
+        try:
+            statuses["already_present_events"] += int(handoff.get("already_published") or 0)
+        except (TypeError, ValueError):
+            pass
+    return {"reports_published": statuses["published"], "already_present_events": statuses["already_present_events"],
+            "reports_already_present": statuses["already_present_events"],  # deprecated compatibility alias
+            "lifecycle_status_events": dict(statuses), "terminal_errors": None,
+            "terminal_errors_available": False,
+            "terminal_errors_unavailability_reason": "simone_error_taxonomy_not_implemented",
+            "legacy_errors_diagnostic": legacy_errors}
 
 def repository_diagnostics(root: Path = ROOT) -> dict[str, Any]:
     expected: list[str] = []
     actual: list[str] = []
     try:
-        out = subprocess.check_output(["git", "status", "--porcelain"], cwd=root, text=True)
+        out = subprocess.check_output(["git", "status", "--porcelain", "--untracked-files=all"], cwd=root, text=True)
         for line in out.splitlines():
             path = line[3:] if len(line) > 3 else line
-            if line.startswith("??") and any(path == p.rstrip("/") or path.startswith(p) for p in EXPECTED_RUNTIME_UNTRACKED_PATHS):
+            if any(path == p.rstrip("/") or path.startswith(p) for p in EXPECTED_RUNTIME_PATHS):
                 expected.append(path)
             else:
                 actual.append(line)
@@ -501,6 +613,7 @@ def repository_diagnostics(root: Path = ROOT) -> dict[str, Any]:
 
 
 def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow_tail_fallback: bool = True) -> dict[str, Any]:
+    from agents.gemini_diagnostics import build_gemini_diagnostics, load_ledger
     runs, sources, warnings, authority_available, source_health = load_master_runs(
         root, allow_tail_fallback=allow_tail_fallback
     )
@@ -509,9 +622,34 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
     funnel = build_editorial_funnel(runs, pub, since, until)
     dup, legacy, dup_warnings = aggregate_duplicate_arbitration(runs, since, until)
     alfred = aggregate_alfred(runs, pub, since, until)
+    simone = aggregate_simone(runs, since, until)
+    simone["reports_published"] = pub["reports_unique"]
+    ledger_path = root / "state/newsroom/gemini_call_ledger.jsonl"
+    gemini_records, gemini_warnings, gemini_health = load_ledger(
+        ledger_path, since=since, until=until, strict_bounded=True, return_metadata=True
+    )
+    gemini = build_gemini_diagnostics(gemini_records, cache_path=root / "state/newsroom/menzo_duplicate_arbitration_cache.json", menzo_decisions_paths=())
+    gemini_available = bool(gemini_health["readable"] and
+                            (gemini_health["valid_rows"] > 0 or
+                             gemini_health["malformed_rows"] == 0 and gemini_health["undated_rows"] == 0))
+    if not gemini_available:
+        for key in ("real_attempts", "completed_calls", "completed_successful_calls", "failures", "avoided_calls", "fallbacks",
+                    "gemini_3_5_attempts", "gemini_3_5_completed_calls", "gemini_3_5_completed_successful_calls", "gemini_3_5_failures", "gemini_3_5_avoided_calls"):
+            gemini[key] = None
+    gemini["undated_rows_diagnostic"] = gemini_health["undated_rows"]
+    if not authority_available:
+        funnel["canonical"] = {key: None for key in funnel["canonical"]}
+        for key in ("articles_reviewed", "articles_with_warnings", "final_blockers", "revised_then_approved", "revised_then_published"):
+            alfred["unique"][key] = None
+        for key in ("warning_events", "warning_occurrences"):
+            alfred["events"][key] = None
+        for key in ("reports_published", "already_present_events", "reports_already_present", "legacy_errors_diagnostic"):
+            simone[key] = None
+    warnings += gemini_warnings
     warnings += funnel.get("schema_warnings", []) + alfred.get("schema_warnings", []) + dup_warnings
     return {
         "schema_version": SCHEMA_VERSION,
+        "metric_contract_version": METRIC_CONTRACT_VERSION,
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "window_start": since.isoformat(),
         "window_end": until.isoformat(),
@@ -522,6 +660,14 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
         "funnel": funnel,
         "duplicate_arbitration": dup,
         "alfred": alfred,
+        "gemini": gemini,
+        "simone": simone,
+        "section_metadata": {
+            "menzo": section_metadata(available=authority_available, source="master_log", coverage={"runs": len(in_window_runs)}, warnings=funnel.get("schema_warnings"), reason="master_log_authority_unavailable"),
+            "alfred": section_metadata(available=authority_available, source="master_log", coverage={"runs": len(in_window_runs)}, warnings=alfred.get("schema_warnings"), reason="master_log_authority_unavailable"),
+            "gemini": section_metadata(available=gemini_available, source="state/newsroom/gemini_call_ledger.jsonl", coverage={**gemini_health, "bounded_records": len(gemini_records)}, warnings=gemini_warnings, reason="gemini_ledger_unavailable_for_bounded_metrics"),
+            "simone": section_metadata(available=authority_available, source="master_log.simone", coverage={"runs": len(in_window_runs)}, reason="master_log_authority_unavailable"),
+        },
         "gemini_summary_if_available": {"duplicate_arbitration_calls": (dup.get("counters") or {}).get("gemini_calls_used_for_duplicate_arbitration") if dup.get("available") else None},
         "diagnostics": {"legacy_duplicate_signals": legacy, "master_runs_in_window": len(in_window_runs), **source_health, **repository_diagnostics(root)},
     }

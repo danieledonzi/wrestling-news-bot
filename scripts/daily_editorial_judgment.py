@@ -769,6 +769,10 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
         except Exception as exc:
             schema_warnings.append(f"observability_snapshot_unavailable:{exc}")
     snapshot_authoritative = bool(snapshot_root is not None and observability and observability.get("authority_available") is True)
+    section_metadata = observability.get("section_metadata", {}) if isinstance(observability, dict) else {}
+    menzo_authoritative = (section_metadata.get("menzo") or {}).get("available") is True
+    alfred_authoritative = (section_metadata.get("alfred") or {}).get("available") is True
+    simone_authoritative = (section_metadata.get("simone") or {}).get("available") is True
     menzo = collect_menzo(data)
     if not menzo and isinstance(parsed_md.get("menzo"), dict):
         menzo = parsed_md["menzo"]
@@ -833,14 +837,27 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
         blockers = _nested(_master(data), "alfred", "handoff", "blockers") or "n.d."
     warnings = _to_int_if_numeric(warnings)
     blockers = _to_int_if_numeric(blockers)
-    if snapshot_authoritative:
+    legacy_warnings = warnings
+    if alfred_authoritative:
         snap_events = observability.get("alfred", {}).get("events", {})
         snap_unique = observability.get("alfred", {}).get("unique", {})
-        if snap_events.get("warning_count") is not None:
-            warnings = snap_events.get("warning_count")
+        if snap_events.get("warning_occurrences") is not None:
+            warnings = snap_events.get("warning_occurrences")
         if snap_unique.get("final_blocked") is not None:
             blockers = snap_unique.get("final_blocked")
     gemini_called = _gemini_35_calls(data)
+    canonical_gemini: dict[str, Any] = {}
+    canonical_alfred: dict[str, Any] = {}
+    canonical_menzo: dict[str, Any] = {}
+    canonical_simone: dict[str, Any] = {}
+    if (section_metadata.get("gemini") or {}).get("available") is True:
+        canonical_gemini = observability.get("gemini", {})
+    if menzo_authoritative:
+        canonical_menzo = observability.get("funnel", {}).get("canonical", {})
+    if alfred_authoritative:
+        canonical_alfred = {**observability.get("alfred", {}).get("events", {}), **observability.get("alfred", {}).get("unique", {})}
+    if simone_authoritative:
+        canonical_simone = observability.get("simone", {})
     if snapshot_authoritative:
         snap_pub = observability.get("publication", {})
         news_published_count = snap_pub.get("news_unique")
@@ -848,8 +865,6 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
         runs_completed = observability.get("funnel", {}).get("runs_completed")
         snap_events = observability.get("alfred", {}).get("events", {})
         snap_unique = observability.get("alfred", {}).get("unique", {})
-        if snap_events.get("warning_count") is not None:
-            warnings = snap_events.get("warning_count")
         if snap_unique.get("final_blocked") is not None:
             blockers = snap_unique.get("final_blocked")
         if markdown_news_available and parsed_md.get("news_count") != news_published_count:
@@ -858,8 +873,10 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
             schema_warnings.append("observability_reports_count_differs_from_markdown")
         if parsed_md.get("runs_completed") is not None and parsed_md.get("runs_completed") != runs_completed:
             schema_warnings.append("observability_runs_completed_differs_from_markdown")
-        if parsed_md.get("warnings") is not None and parsed_md.get("warnings") != warnings:
-            schema_warnings.append("observability_alfred_warning_events_differs_from_markdown")
+        canonical_warning_occurrences = snap_events.get("warning_occurrences")
+        if (canonical_warning_occurrences is not None and parsed_md.get("warnings") is not None
+                and parsed_md.get("warnings") != canonical_warning_occurrences):
+            schema_warnings.append("observability_alfred_warning_occurrences_differs_from_markdown")
         if parsed_md.get("blockers") is not None and parsed_md.get("blockers") != blockers:
             schema_warnings.append("observability_alfred_final_blockers_differs_from_markdown")
     else:
@@ -897,7 +914,7 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
         "top_investigations": sorted((item for item in investigations if isinstance(item, dict)), key=lambda item: (-priority.get(str(item.get("original_severity", "warning")), 1), str(item.get("title", ""))))[:3],
         "diagnostic_errors": list(analysis.get("errors") or []),
     }
-    return {"generated_at": generated_at, "observability_snapshot": observability, "source_artifacts_used": used, "missing_artifacts": missing, "schema_warnings": list(dict.fromkeys(schema_warnings)), "published_available": news_count_available or reports_count_available, "report_status_counts": published_meta["report_status_counts"], "published_records_source": published_meta.get("published_records_source"), "official_news_published_count": parsed_md.get("news_count") if markdown_news_available else None, "concrete_news_record_count": len(concrete_news), "menzo": menzo, "news": news, "reports": reports, "news_records": concrete_news, "report_records": concrete_reports, "selected": selected, "pending": pending, "skipped": skipped, "runs_completed": runs_completed, "news_published_count": news_published_count, "reports_published_count": reports_published_count, "news_count_available": news_count_available, "reports_count_available": reports_count_available, "hard_count": hard_count, "soft_count": soft_count, "hard_soft_source": hard_soft_source, "story": story, "day_type": dtype, "softpool": bool(softpool), "warnings": warnings, "blockers": blockers, "gemini_called": gemini_called, "article_types": article_types, "judgment": judgment, "top_discarded": top, "borderline": borderline, "summary": summary, "translation_warning_analysis": warning_analysis}
+    return {"generated_at": generated_at, "observability_snapshot": observability, "canonical_menzo": canonical_menzo, "canonical_alfred": canonical_alfred, "canonical_gemini": canonical_gemini, "canonical_simone": canonical_simone, "source_artifacts_used": used, "missing_artifacts": missing, "schema_warnings": list(dict.fromkeys(schema_warnings)), "published_available": news_count_available or reports_count_available, "report_status_counts": published_meta["report_status_counts"], "published_records_source": published_meta.get("published_records_source"), "official_news_published_count": parsed_md.get("news_count") if markdown_news_available else None, "concrete_news_record_count": len(concrete_news), "menzo": menzo, "news": news, "reports": reports, "news_records": concrete_news, "report_records": concrete_reports, "selected": selected, "pending": pending, "skipped": skipped, "runs_completed": runs_completed, "news_published_count": news_published_count, "reports_published_count": reports_published_count, "news_count_available": news_count_available, "reports_count_available": reports_count_available, "hard_count": hard_count, "soft_count": soft_count, "hard_soft_source": hard_soft_source, "story": story, "day_type": dtype, "softpool": bool(softpool), "warnings": warnings, "legacy_warnings": legacy_warnings, "blockers": blockers, "gemini_called": gemini_called, "article_types": article_types, "judgment": judgment, "top_discarded": top, "borderline": borderline, "summary": summary, "translation_warning_analysis": warning_analysis}
 
 
 def _num(value: Any) -> str:
@@ -906,7 +923,27 @@ def _num(value: Any) -> str:
 
 def render_markdown(report: dict[str, Any]) -> str:
     story = report["story"]
-    lines = ["# OWTV Daily Editorial Judgment 24h", "", "## Daily Editorial Judgment", "", f"- Judgment: {report['judgment']}", f"- Day type: {report['day_type']}", "", report["summary"], "", "## Daily numbers", "", f"- runs completed: {_num(report.get('runs_completed'))}", f"- news published: {_num(report.get('news_published_count'))}", f"- reports published: {_num(report.get('reports_published_count'))}", f"- article types: {dict(report['article_types']) or 'n.d.'}", f"- Menzo unique selected for downstream handoff: {_num((report.get('observability_snapshot') or {}).get('funnel', {}).get('unique', {}).get('menzo_selected_downstream'))}", f"- Diagnostic Menzo selected/pending/skipped events: {len(report['selected'])}/{len(report['pending'])}/{len(report['skipped'])}", f"- hard news count: {_num(report['hard_count'])} (stima)", f"- soft news count: {_num(report['soft_count'])} (stima)", f"- softpool used: {'yes' if report['softpool'] else 'no'}", f"- Alfred warning events/final unique blockers: {report['warnings']}/{report['blockers']}", f"- v95.11 duplicate arbitration: {(report.get('observability_snapshot') or {}).get('duplicate_arbitration', {})}", f"- legacy duplicate signals (diagnostic): duplicate candidates / same story clusters / same event clusters / story reviews: {_num(story['duplicate_candidates'])} / {_num(story['same_story_clusters'])} / {_num(story['same_event_clusters'])} / {_num(story['story_reviews'])}", f"- suspicious pairs above threshold: {_num(story['pairs_above_threshold'])}", f"- Gemini 3.5 called total: {report['gemini_called']}", "", "## Hard vs soft editorial balance", "", f"Stima: {_num(report['hard_count'])} hard news e {_num(report['soft_count'])} soft news. " + ("Il ricorso al softpool sembra giustificato solo se le hard news erano limitate." if report['softpool'] else "Softpool non usato: scelta coerente se la giornata aveva sufficiente materiale hard o nessun soft recuperabile."), "", "## Top 3 discarded URLs for human control", ""]
+    menzo_metrics = report.get("canonical_menzo") or {}
+    alfred_metrics = report.get("canonical_alfred") or {}
+    gemini_metrics = report.get("canonical_gemini") or {}
+    simone_metrics = report.get("canonical_simone") or {}
+    ratio = menzo_metrics.get("handoff_to_publication_ratio")
+    ratio_label = f"{ratio:.1%}" if isinstance(ratio, (int, float)) else "unavailable"
+    gemini_line = "- Gemini 3.5 attempts/completed/failed/avoided: {}/{}/{}/{}".format(
+        _num(gemini_metrics.get("gemini_3_5_attempts")),
+        _num(gemini_metrics.get("gemini_3_5_completed_calls")),
+        _num(gemini_metrics.get("gemini_3_5_failures")),
+        _num(gemini_metrics.get("gemini_3_5_avoided_calls")),
+    )
+    gemini_lines = [gemini_line]
+    legacy_gemini_called = report.get("gemini_called")
+    if legacy_gemini_called not in (None, "", "n.d."):
+        gemini_lines.append(f"- Legacy Gemini 3.5 called total (diagnostic): {legacy_gemini_called}")
+    alfred_lines = [f"- Alfred articles reviewed/articles with warnings/warning events/warning occurrences/final unique blockers: {_num(alfred_metrics.get('articles_reviewed'))}/{_num(alfred_metrics.get('articles_with_warnings'))}/{_num(alfred_metrics.get('warning_events'))}/{_num(alfred_metrics.get('warning_occurrences'))}/{_num(alfred_metrics.get('final_blockers'))}"]
+    legacy_alfred_warnings = report.get("legacy_warnings") if "legacy_warnings" in report else report.get("warnings")
+    if legacy_alfred_warnings not in (None, "", "n.d."):
+        alfred_lines.append(f"- Legacy Alfred warning total (diagnostic): {legacy_alfred_warnings}")
+    lines = ["# OWTV Daily Editorial Judgment 24h", "", "## Daily Editorial Judgment", "", f"- Judgment: {report['judgment']}", f"- Day type: {report['day_type']}", "", report["summary"], "", "## Daily numbers", "", f"- runs completed: {_num(report.get('runs_completed'))}", f"- news published: {_num(report.get('news_published_count'))}", f"- reports published: {_num(report.get('reports_published_count'))}", f"- article types: {dict(report['article_types']) or 'n.d.'}", f"- Menzo unique selected for downstream handoff: {_num((report.get('observability_snapshot') or {}).get('funnel', {}).get('unique', {}).get('menzo_selected_downstream'))}", f"- Diagnostic Menzo selected/pending/skipped events: {len(report['selected'])}/{len(report['pending'])}/{len(report['skipped'])}", f"- hard news count: {_num(report['hard_count'])} (stima)", f"- soft news count: {_num(report['soft_count'])} (stima)", f"- softpool used: {'yes' if report['softpool'] else 'no'}", *alfred_lines, f"- v95.11 duplicate arbitration: {(report.get('observability_snapshot') or {}).get('duplicate_arbitration', {})}", f"- legacy duplicate signals (diagnostic): duplicate candidates / same story clusters / same event clusters / story reviews: {_num(story['duplicate_candidates'])} / {_num(story['same_story_clusters'])} / {_num(story['same_event_clusters'])} / {_num(story['story_reviews'])}", f"- suspicious pairs above threshold: {_num(story['pairs_above_threshold'])}", f"- Menzo handoff-to-publication ratio: {ratio_label}", *gemini_lines, f"- Simone legacy errors (diagnostic; not terminal): {_num(simone_metrics.get('legacy_errors_diagnostic'))}", "", "## Hard vs soft editorial balance", "", f"Stima: {_num(report['hard_count'])} hard news e {_num(report['soft_count'])} soft news. " + ("Il ricorso al softpool sembra giustificato solo se le hard news erano limitate." if report['softpool'] else "Softpool non usato: scelta coerente se la giornata aveva sufficiente materiale hard o nessun soft recuperabile."), "", "## Top 3 discarded URLs for human control", ""]
     if not report["top_discarded"]:
         lines.append("Nessun forte candidato scartato/pending emerso dagli artefatti disponibili.")
     for item in report["top_discarded"]:
@@ -954,7 +991,7 @@ def _compact_pair(item: dict[str, Any]) -> dict[str, Any]:
 
 def structured_json(report: dict[str, Any]) -> dict[str, Any]:
     story = report["story"]
-    daily_numbers = {"runs_completed": report.get("runs_completed"), "news_published": report.get("news_published_count"), "reports_published": report.get("reports_published_count"), "news_published_count": report.get("news_published_count"), "reports_published_count": report.get("reports_published_count"), "official_news_published_count": report.get("official_news_published_count"), "concrete_news_record_count": report.get("concrete_news_record_count"), "published_records_source": report.get("published_records_source"), "news_records": [_compact_item(x) for x in report.get("news_records", [])], "report_records": [_compact_item(x) for x in report.get("report_records", [])], "report_status_counts": report["report_status_counts"], "article_types": dict(report["article_types"]), "menzo_first_decision": {"selected": len(report["selected"]), "pending": len(report["pending"]), "skipped": len(report["skipped"])}, "final_decision": {"selected": len(report["selected"]), "pending": len(report["pending"]), "skipped": len(report["skipped"])}, "hard_news_count": report["hard_count"], "soft_news_count": report["soft_count"], "softpool_used": report["softpool"], "alfred": {"warnings": report["warnings"], "blockers": report["blockers"]}, "duplicate_candidates": story["duplicate_candidates"], "same_story_clusters": story["same_story_clusters"], "same_event_clusters": story["same_event_clusters"], "story_reviews": story["story_reviews"], "pairs_above_threshold": story["pairs_above_threshold"], "gemini_3_5_called_total": report["gemini_called"], "observability_snapshot": report.get("observability_snapshot")}
+    daily_numbers = {"runs_completed": report.get("runs_completed"), "news_published": report.get("news_published_count"), "reports_published": report.get("reports_published_count"), "news_published_count": report.get("news_published_count"), "reports_published_count": report.get("reports_published_count"), "official_news_published_count": report.get("official_news_published_count"), "concrete_news_record_count": report.get("concrete_news_record_count"), "published_records_source": report.get("published_records_source"), "news_records": [_compact_item(x) for x in report.get("news_records", [])], "report_records": [_compact_item(x) for x in report.get("report_records", [])], "report_status_counts": report["report_status_counts"], "article_types": dict(report["article_types"]), "menzo_first_decision": {"selected": len(report["selected"]), "pending": len(report["pending"]), "skipped": len(report["skipped"])}, "final_decision": {"selected": len(report["selected"]), "pending": len(report["pending"]), "skipped": len(report["skipped"])}, "hard_news_count": report["hard_count"], "soft_news_count": report["soft_count"], "softpool_used": report["softpool"], "alfred": {"warnings": report["warnings"], "blockers": report["blockers"]}, "duplicate_candidates": story["duplicate_candidates"], "same_story_clusters": story["same_story_clusters"], "same_event_clusters": story["same_event_clusters"], "story_reviews": story["story_reviews"], "pairs_above_threshold": story["pairs_above_threshold"], "gemini_3_5_called_total": report["gemini_called"], "canonical_metrics": {"menzo": report.get("canonical_menzo", {}), "alfred": report.get("canonical_alfred", {}), "gemini": report.get("canonical_gemini", {}), "simone": report.get("canonical_simone", {})}, "observability_snapshot": report.get("observability_snapshot")}
     hard_soft_balance = {"hard_news_count": report["hard_count"], "soft_news_count": report["soft_count"], "softpool_used": report["softpool"], "is_estimate": True, "source": report.get("hard_soft_source") or "n.d.", "explanation": "Stima deterministica da priority, article_type, score e decisioni Menzo disponibili; source=article_types_markdown quando derivata solo dai tipi articolo del markdown; n.d. se mancano gli artefatti affidabili."}
     redundancy_risks = {"duplicate_risk": "high" if (story["same_story_clusters"] or 0) > 3 else "medium" if (story["same_story_clusters"] or story["duplicate_candidates"] or story["same_event_clusters"]) else "low", "duplicate_candidate_count": story["duplicate_candidates"], "same_story_cluster_count": story["same_story_clusters"], "same_event_cluster_count": story["same_event_clusters"], "story_review_count": story["story_reviews"], "pairs_above_threshold": story["pairs_above_threshold"], "top_suspicious_pairs": [_compact_pair(x) for x in story["suspicious_pairs"]], "story_review_items": [_compact_pair(x) if x.get("title_a") else _compact_item(x) for x in story["story_review_items"][:10]], "show_report_integration": "post-show presente" if (report.get("reports_published_count") or 0) > 0 else "nessun report show pubblicato negli artefatti disponibili"}
     return {"judgment": report["judgment"], "day_type": report["day_type"], "summary": report["summary"], "daily_numbers": daily_numbers, "hard_soft_balance": hard_soft_balance, "top_discarded_candidates": [_compact_item(x) for x in report["top_discarded"]], "borderline_published": [_compact_item(x) for x in report["borderline"]], "redundancy_risks": redundancy_risks, "recommended_actions": ["Rivedere il primo URL scartato/pending se presente.", "Monitorare il rapporto hard/soft nel prossimo ciclo.", "Rafforzare il controllo post-show se emergono duplicazioni con report."], "generated_at": report["generated_at"].isoformat(), "source_artifacts_used": report["source_artifacts_used"], "missing_artifacts": report["missing_artifacts"], "schema_warnings": report["schema_warnings"], "translation_warning_analysis": report.get("translation_warning_analysis", {})}

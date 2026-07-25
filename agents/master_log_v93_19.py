@@ -2,9 +2,12 @@ from __future__ import annotations
 
 import json
 import os
+import hashlib
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 STATE_DIR = ROOT / "state" / "newsroom"
@@ -58,6 +61,33 @@ def scalar(value: Any, default: Any = None) -> Any:
 
 def source_key(value: str) -> str:
     return str(value or "").split("#", 1)[0].split("?", 1)[0].rstrip("/").lower()
+
+
+def canonical_url(value: Any) -> str:
+    raw = str(value or "").strip()
+    if not raw:
+        return ""
+    parsed = urlsplit(raw)
+    query = [(key, val) for key, val in parse_qsl(parsed.query, keep_blank_values=True)
+             if not key.lower().startswith("utm_") and key.lower() not in {"fbclid", "gclid"}]
+    return urlunsplit((parsed.scheme.lower() or "https", parsed.netloc.lower().removeprefix("www."),
+                       parsed.path.rstrip("/"), urlencode(query), ""))
+
+
+def actionable_identity_key(item: dict[str, Any]) -> str:
+    for field in ("source_url", "url", "original_url"):
+        value = canonical_url(item.get(field))
+        if value:
+            return "source:" + value
+    for field in ("wp_link", "wordpress_url", "published_url", "final_url", "link"):
+        value = canonical_url(item.get(field))
+        if value:
+            return "wp:" + value
+    title = re.sub(r"[^a-z0-9]+", " ", str(item.get("title") or item.get("title_it") or item.get("source_title") or "").lower()).strip()
+    if title:
+        return "title:" + title
+    payload = json.dumps(item, sort_keys=True, default=str, ensure_ascii=True).encode()
+    return "unknown:" + hashlib.sha1(payload).hexdigest()[:12]
 
 
 def compact_item(item: dict[str, Any] | None) -> dict[str, Any]:
@@ -137,12 +167,15 @@ def compact_alfred_review(review: dict[str, Any] | None) -> dict[str, Any]:
     blockers = review.get("blockers", []) if isinstance(review.get("blockers"), list) else []
     if not blockers and isinstance(review.get("issues"), list):
         blockers = [x for x in review.get("issues", []) if isinstance(x, dict) and str(x.get("severity") or "").lower() == "blocker"]
+    warnings = [x for x in review.get("warnings", []) if x] if isinstance(review.get("warnings"), list) else []
     return {
         "title": scalar(review.get("title") or review.get("title_it"), ""),
         "source_url": scalar(review.get("source_url"), ""),
         "status": scalar(review.get("status") or review.get("decision"), ""),
         "quality_score": review.get("quality_score"),
-        "warnings": [compact_warning(x) for x in review.get("warnings", []) if x][:10] if isinstance(review.get("warnings"), list) else [],
+        "warnings": [compact_warning(x) for x in warnings[:10]],
+        "warning_occurrences_total": len(warnings),
+        "warnings_truncated": len(warnings) > 10,
         "blockers": [compact_warning(x) for x in blockers if x][:10],
         "changes": [compact_warning(x) for x in review.get("editorial_changes", []) if x][:10] if isinstance(review.get("editorial_changes"), list) else [],
     }
@@ -180,8 +213,11 @@ def build_master_record(
     publisher_h = safe_handoff(publisher)
     archivista_summary = archivista.get("summary", {}) if isinstance(archivista.get("summary"), dict) else {}
 
-    selected = [compact_item(x) for x in menzo.get("selected", []) if isinstance(x, dict)] if isinstance(menzo.get("selected"), list) else []
-    pending = [compact_item(x) for x in menzo.get("pending", []) if isinstance(x, dict)][:20] if isinstance(menzo.get("pending"), list) else []
+    selected_items = [x for x in menzo.get("selected", []) if isinstance(x, dict)] if isinstance(menzo.get("selected"), list) else []
+    pending_items = [x for x in menzo.get("pending", []) if isinstance(x, dict)] if isinstance(menzo.get("pending"), list) else []
+    selected = [compact_item(x) for x in selected_items]
+    pending = [compact_item(x) for x in pending_items[:20]]
+    actionable_identity_keys = sorted({actionable_identity_key(x) for x in selected_items + pending_items})
     skipped = top_skips(menzo.get("skipped", []) if isinstance(menzo.get("skipped"), list) else [], 12)
     duplicate_arbitration = compact_duplicate_arbitration(menzo.get("postprocess") if isinstance(menzo.get("postprocess"), dict) else {})
 
@@ -237,6 +273,11 @@ def build_master_record(
             "policy": menzo.get("policy", {}),
             "selected": selected,
             "pending": pending,
+            "actionable_identity_keys": actionable_identity_keys,
+            "selected_total": len(selected_items),
+            "pending_total": len(pending_items),
+            "pending_sample_size": len(pending),
+            "pending_sample_truncated": len(pending_items) > len(pending),
             "skipped_sample": skipped,
             "duplicate_arbitration": duplicate_arbitration,
         },
