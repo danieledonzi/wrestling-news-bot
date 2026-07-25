@@ -66,33 +66,46 @@ def load_ledger(
     now: datetime | None = None,
     since: datetime | None = None,
     until: datetime | None = None,
-) -> tuple[list[dict[str, Any]], list[str]]:
+    strict_bounded: bool = False,
+    return_metadata: bool = False,
+) -> Any:
     warnings: list[str] = []
+    metadata = {"readable": False, "valid_rows": 0, "malformed_rows": 0, "undated_rows": 0}
     if not path.exists():
-        return [], [f"ledger file missing: {path}"]
+        result = ([], [f"ledger file missing: {path}"])
+        return (*result, metadata) if return_metadata else result
     cutoff = since or ((now or datetime.now(timezone.utc)) - timedelta(hours=hours))
     upper = until
     records: list[dict[str, Any]] = []
     try:
-        for idx, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
+        lines = path.read_text(encoding="utf-8").splitlines()
+        metadata["readable"] = True
+        for idx, line in enumerate(lines, start=1):
             if not line.strip():
                 continue
             try:
                 data = json.loads(line)
             except Exception as exc:
                 warnings.append(f"invalid ledger JSON line {idx}: {exc}")
+                metadata["malformed_rows"] += 1
                 continue
             if not isinstance(data, dict):
+                metadata["malformed_rows"] += 1
                 continue
             ts = parse_dt(data.get("timestamp") or data.get("generated_at") or data.get("started_at"))
             if ts is None:
-                records.append(data)
+                metadata["undated_rows"] += 1
+                if not strict_bounded:
+                    records.append(data)
                 continue
             if ts >= cutoff and (upper is None or ts <= upper):
                 records.append(data)
+                metadata["valid_rows"] += 1
     except Exception as exc:
-        return [], [f"ledger read failed: {exc}"]
-    return records, warnings
+        result = ([], [f"ledger read failed: {exc}"])
+        return (*result, metadata) if return_metadata else result
+    result = (records, warnings)
+    return (*result, metadata) if return_metadata else result
 
 
 def normalize_title(title: Any) -> str:
@@ -213,11 +226,20 @@ def build_gemini_diagnostics(
     real_with_usage = [r for r in v2_real if r.get("usage_available") is True]
     real_with_cost = [r for r in v2_real if r.get("estimated_cost") is not None]
     avoided35 = [r for r in avoided if "3.5" in model_name(r)]
+    failed35 = [r for r in failed if "3.5" in model_name(r)]
     ledger_cache_hits = sum(1 for r in avoided if reason_or_purpose(r) == "duplicate_arbitration_cache_hit")
     menzo_postprocess = load_menzo_postprocess(menzo_context, menzo_decisions_paths)
     latest_counters = menzo_postprocess.get("counters", {}) if isinstance(menzo_postprocess.get("counters"), dict) else {}
     not_available = "not_available"
     return {
+        "real_attempts": len(real_attempts), "completed_calls": len(called),
+        "completed_successful_calls": len(called),  # deprecated compatibility alias
+        "failures": len(failed), "avoided_calls": len(avoided),
+        "fallbacks": sum(1 for r in real_attempts if r.get("fallback") is True),
+        "gemini_3_5_attempts": len(called35) + len(failed35),
+        "gemini_3_5_completed_calls": len(called35),
+        "gemini_3_5_completed_successful_calls": len(called35),  # deprecated compatibility alias
+        "gemini_3_5_failures": len(failed35), "gemini_3_5_avoided_calls": len(avoided35),
         "called_total": len(called), "avoided_total": len(avoided), "failed_total": len(failed),
         "called_by_model_agent": dict(_counter(called, "model", "agent")),
         "called_by_model_agent_reason": dict(_counter(called, "model", "agent", "reason")),
