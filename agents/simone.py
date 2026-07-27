@@ -481,7 +481,7 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
             publish_date = (datetime.strptime(str(match.get("date_local")), "%Y-%m-%d").date() + timedelta(days=1)).isoformat()
         except Exception:
             publish_date = str(match.get("date_local") or "")
-        reserve_report(candidate, {**match, "report_id": match.get("night_key"), "event_identity": match.get("event_name"), "publish_date_local": publish_date, "category": match.get("category_hint"), "title": candidate.get("title"), "categories": [x for x in ["Editoriali", match.get("category_hint")] if x], "counts_as_news": False}, now=now, pending_path=PENDING_REPORTS)
+        reserve_report(candidate, {**match, "report_id": match.get("night_key"), "event_identity": match.get("event_name"), "event_name": match.get("event_name"), "aliases": match.get("aliases") or [], "publish_date_local": publish_date, "category": match.get("category_hint"), "title": candidate.get("title"), "categories": [x for x in ["Editoriali", match.get("category_hint")] if x], "counts_as_news": False}, now=now, pending_path=PENDING_REPORTS)
 
     ready: list[dict[str, Any]] = []
     waiting: list[dict[str, Any]] = []
@@ -578,7 +578,7 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
             "categories": [x for x in ["Editoriali", report.get("category_hint")] if x],
             "counts_as_news": False,
         }
-        reserve_report(chosen, {"report_key": report.get("report_key"), "report_id": report.get("night_key"), "night_key": report.get("night_key"), "event_identity": report.get("event_name"), "date_local": report.get("date"), "publish_after": "06:30", "category": report.get("category_hint")}, now=now, pending_path=PENDING_REPORTS)
+        reserve_report(chosen, {"report_key": report.get("report_key"), "report_id": report.get("night_key"), "night_key": report.get("night_key"), "event_identity": report.get("event_name"), "event_name": report.get("event_name"), "aliases": report.get("aliases") or [], "date_local": report.get("date"), "publish_after": "06:30", "category": report.get("category_hint")}, now=now, pending_path=PENDING_REPORTS)
         special_ready.append(item)
         ready.append(item)
 

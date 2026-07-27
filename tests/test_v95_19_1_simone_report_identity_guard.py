@@ -178,3 +178,36 @@ def test_history_binding_blocks_old_url_but_later_correct_url_publishes(tmp_path
     result = publisher.run_simone_report_publisher({"ready_reports": reports})
     assert calls == [REDEMPTION_URL]
     assert next(item for item in result["results"] if item["report_key"] == "false_redemption")["reason"] == "source_url_already_bound_to_different_report_key"
+
+
+def test_old_pending_event_identity_replay_wins_same_url_collision(tmp_path, monkeypatch):
+    publisher_paths(tmp_path, monkeypatch)
+    old_replay = {
+        "report_key": "special_event_aew_redemption_2026_main_2026_07_26",
+        "report_id": "aew_redemption_2026_main",
+        "event_identity": "Redemption",
+        "source_url": REDEMPTION_URL,
+        "source_title": "AEW Redemption 2026 Results",
+        "status": "waiting_publish_after",
+    }
+    weak_assignment = {
+        "report_key": "unrelated_report",
+        "source_url": REDEMPTION_URL + "?utm_source=replay",
+        "source_title": "Championship results",
+        "status": "waiting_publish_after",
+    }
+    publisher.PENDING_REPORTS.write_text(json.dumps({"reports": [old_replay, weak_assignment]}))
+    scrape_calls = []
+    workshop_calls = []
+    monkeypatch.setattr(publisher, "scrape_article", lambda url: (scrape_calls.append(url) or ([{"text": "A defeated B."}], "", None)))
+    monkeypatch.setattr(publisher, "run_report_workshop", lambda job, *_: (workshop_calls.append(job["report_key"]) or (8617, {"link": "https://wp/8617"})))
+    result = publisher.run_simone_report_publisher({"ready_reports": [old_replay, weak_assignment]})
+    assert scrape_calls == [REDEMPTION_URL]
+    assert workshop_calls == [old_replay["report_key"]]
+    assert next(item for item in result["results"] if item["report_key"] == "unrelated_report")["reason"] == "source_url_identity_collision"
+
+
+def test_old_and_new_special_reservation_identity_shapes_are_explicit():
+    base = {"source_url": REDEMPTION_URL, "source_title": "AEW Redemption Results"}
+    assert publisher.source_identity_is_explicit({**base, "event_identity": "Redemption"})
+    assert publisher.source_identity_is_explicit({**base, "event_identity": "Redemption", "event_name": "Redemption", "aliases": ["AEW Redemption"]})

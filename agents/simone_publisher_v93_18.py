@@ -136,7 +136,7 @@ def report_key(report: dict[str, Any]) -> str:
 def source_identity_is_explicit(report: dict[str, Any]) -> bool:
     """Return whether source title/URL explicitly names its assigned report."""
     source_blob = " ".join(str(report.get(k) or "").lower() for k in ("source_title", "source_url"))
-    identities = [report.get("event_name"), *(report.get("aliases") or [])]
+    identities = [report.get("event_name"), report.get("event_identity"), *(report.get("aliases") or [])]
     report_id = str(report.get("report_id") or "")
     reports_cfg = load_json(ROOT / "config" / "reports_v92.json", {"reports": []})
     for configured in reports_cfg.get("reports", []) if isinstance(reports_cfg, dict) else []:
