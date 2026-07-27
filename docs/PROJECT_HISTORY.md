@@ -571,3 +571,6 @@ Show event outcomes are skipped after the report is published.
 WordPress must be checked before expensive work.
 Failed media should not destroy the article.
 ```
+# v95.19.1 — Simone report identity guard
+
+Special-event reports now become due the following morning, explicit title/URL show identity wins over supporting text, and the automatic publisher enforces one normalized source URL per report key. See `docs/v95.19.1_simone_report_identity_guard.md`.
