@@ -12,7 +12,7 @@ from urllib.parse import urlparse
 import requests
 
 from modules.report_workshop_v92 import run_report_workshop, scrape_article
-from modules.simone_report_integrity import PENDING_REPORTS, report_readiness
+from modules.simone_report_integrity import PENDING_REPORTS, normalize_url, report_readiness
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLISHED_DIR = ROOT / "published"
@@ -26,7 +26,7 @@ SIMONE_REPORT_HISTORY_FILE = NEWSROOM_STATE_DIR / "simone_report_history.json"
 ARTIFACT_SIMONE_PUBLISH_FILE = ARTIFACT_DIR / "simone_report_publish.json"
 WP_PREFLIGHT_FILE = NEWSROOM_STATE_DIR / "wp_preflight_latest.json"
 
-VERSION = "v95_13_1_simone_report_integrity"
+VERSION = "v95.19.1_simone_report_identity_guard"
 HEADERS = {"User-Agent": "OpenWrestlingTV-v93-Simone-Reports/1.0"}
 REQUEST_TIMEOUT = int(os.getenv("V93_SIMONE_REPORT_WP_TIMEOUT", "12"))
 WP_RETRIES = int(os.getenv("V93_SIMONE_REPORT_WP_RETRIES", "2"))
@@ -133,6 +133,48 @@ def report_key(report: dict[str, Any]) -> str:
     return str(report.get("report_key") or report.get("source_url") or "").strip()
 
 
+def source_identity_is_explicit(report: dict[str, Any]) -> bool:
+    """Return whether source title/URL explicitly names its assigned report."""
+    source_blob = " ".join(str(report.get(k) or "").lower() for k in ("source_title", "source_url"))
+    identities = [report.get("event_name"), *(report.get("aliases") or [])]
+    report_id = str(report.get("report_id") or "")
+    reports_cfg = load_json(ROOT / "config" / "reports_v92.json", {"reports": []})
+    for configured in reports_cfg.get("reports", []) if isinstance(reports_cfg, dict) else []:
+        if isinstance(configured, dict) and report_id == str(configured.get("id") or ""):
+            identities.extend([configured.get("show_name"), *(configured.get("match_keywords") or [])])
+    return any(str(identity or "").lower() in source_blob for identity in identities if str(identity or "").strip())
+
+
+def source_url_conflicts(reports: list[dict[str, Any]], history: dict[str, Any]) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Enforce the automatic publisher's one-source/one-report-key invariant."""
+    blocked: list[dict[str, Any]] = []
+    eligible: list[dict[str, Any]] = []
+    history_bindings: dict[str, set[str]] = {}
+    for stored_key, stored in history.items():
+        if isinstance(stored, dict) and stored.get("source_url"):
+            history_bindings.setdefault(normalize_url(str(stored["source_url"])), set()).add(str(stored.get("report_key") or stored_key))
+    groups: dict[str, list[dict[str, Any]]] = {}
+    for report in reports:
+        normalized = normalize_url(str(report.get("source_url") or ""))
+        key = report_key(report)
+        if normalized and any(bound != key for bound in history_bindings.get(normalized, set())):
+            blocked.append({"report_key": key, "source_url": report.get("source_url"), "normalized_source_url": normalized, "status": "identity_collision", "reason": "source_url_already_bound_to_different_report_key"})
+        else:
+            groups.setdefault(normalized, []).append(report)
+    for normalized, group in groups.items():
+        keys = {report_key(item) for item in group}
+        if not normalized or len(keys) <= 1:
+            eligible.extend(group)
+            continue
+        explicit = [item for item in group if source_identity_is_explicit(item)]
+        survivors = explicit if len(explicit) == 1 else []
+        eligible.extend(survivors)
+        for item in group:
+            if item not in survivors:
+                blocked.append({"report_key": report_key(item), "source_url": item.get("source_url"), "normalized_source_url": normalized, "status": "identity_collision", "reason": "source_url_identity_collision"})
+    return eligible, blocked
+
+
 def build_job(report: dict[str, Any]) -> dict[str, Any]:
     job = dict(report)
     job["kind"] = "report"
@@ -201,6 +243,7 @@ def run_simone_report_publisher(simone_decision: dict[str, Any] | None = None) -
         else:
             unresolved_reports.append(report)
 
+    unresolved_reports, collision_results = source_url_conflicts(unresolved_reports, history)
     deferred_reports = unresolved_reports[MAX_REPORTS_PER_RUN:]
     ready_reports = unresolved_reports[:MAX_REPORTS_PER_RUN]
 
@@ -237,8 +280,8 @@ def run_simone_report_publisher(simone_decision: dict[str, Any] | None = None) -
 
     if not ready_reports:
         result = empty_result(decision if isinstance(decision, dict) else {}, 0)
-        result["results"] = already_results + incomplete_results
-        result["handoff"].update({"already_published": len(already_results), "waiting_source_completion": len(incomplete_results), "incomplete_blocked_before_gemini": len(incomplete_results), "deferred_by_safety_cap": len(deferred_reports)})
+        result["results"] = already_results + collision_results + incomplete_results
+        result["handoff"].update({"already_published": len(already_results), "waiting_source_completion": len(incomplete_results), "incomplete_blocked_before_gemini": len(incomplete_results), "source_url_identity_collisions": len(collision_results), "deferred_by_safety_cap": len(deferred_reports)})
         write_json(ARTIFACT_SIMONE_PUBLISH_FILE, result)
         write_json(SIMONE_REPORT_STATUS_FILE, result)
         print("[SIMONE v93.27] Nessun report pronto: salto WP probe", flush=True)
@@ -247,8 +290,9 @@ def run_simone_report_publisher(simone_decision: dict[str, Any] | None = None) -
     preflight_ok, preflight_reason, preflight_diagnostics = jarvis_wp_preflight()
     if not preflight_ok:
         result = wp_not_ready_result(decision if isinstance(decision, dict) else {}, ready_reports, preflight_reason, preflight_diagnostics)
-        result["results"] = already_results + result.get("results", [])
+        result["results"] = already_results + collision_results + result.get("results", [])
         result["handoff"]["already_published"] = len(already_results)
+        result["handoff"]["source_url_identity_collisions"] = len(collision_results)
         result["handoff"]["deferred_by_safety_cap"] = len(deferred_reports)
         write_json(ARTIFACT_SIMONE_PUBLISH_FILE, result); write_json(SIMONE_REPORT_STATUS_FILE, result)
         return result
@@ -294,8 +338,8 @@ def run_simone_report_publisher(simone_decision: dict[str, Any] | None = None) -
     if isinstance(pending, dict):
         pending["reports"] = pending_rows; pending["updated_at"] = utc_now(); write_json(PENDING_REPORTS, pending)
 
-    results = already_results + incomplete_results + results
-    result = {"agent": "Simone", "version": VERSION, "generated_at": utc_now(), "mode": "autonomous_report_publisher_v92_workshop", "input": {"simone_version": decision.get("version") if isinstance(decision, dict) else None, "ready_reports": len(ready_reports)}, "wp": {"ready": wp_ok, "reason": wp_status, "dry_run": DRY_RUN, "diagnostics": wp_diagnostics, "preflight_reason": preflight_reason}, "results": results, "handoff": {"published": sum(1 for r in results if r.get("status") == "published"), "already_published": sum(1 for r in results if r.get("status") == "already_published"), "wp_not_ready": sum(1 for r in results if r.get("status") == "wp_not_ready"), "dry_run": sum(1 for r in results if r.get("status") == "dry_run"), "errors": sum(1 for r in results if r.get("status") == "publish_error"), "waiting_source_completion": 0, "incomplete_blocked_before_gemini": 0, "deferred_by_safety_cap": len(deferred_reports), "multiple_reports_processed": len(ready_reports) if len(ready_reports) > 1 else 0}, "policy": {"simone_is_autonomous_for_reports": True, "uses_manual_report_workflow_engine": "modules.report_workshop_v92.run_report_workshop", "report_readiness_is_diagnostic_only_after_publish_after": True, "uses_jarvis_wp_preflight": True, "skips_internal_wp_probe_when_jarvis_preflight_down": True, "max_reports_per_run": MAX_REPORTS_PER_RUN, "reports_count_as_news": False}}
+    results = already_results + collision_results + incomplete_results + results
+    result = {"agent": "Simone", "version": VERSION, "generated_at": utc_now(), "mode": "autonomous_report_publisher_v92_workshop", "input": {"simone_version": decision.get("version") if isinstance(decision, dict) else None, "ready_reports": len(ready_reports)}, "wp": {"ready": wp_ok, "reason": wp_status, "dry_run": DRY_RUN, "diagnostics": wp_diagnostics, "preflight_reason": preflight_reason}, "results": results, "handoff": {"published": sum(1 for r in results if r.get("status") == "published"), "already_published": sum(1 for r in results if r.get("status") == "already_published"), "wp_not_ready": sum(1 for r in results if r.get("status") == "wp_not_ready"), "dry_run": sum(1 for r in results if r.get("status") == "dry_run"), "errors": sum(1 for r in results if r.get("status") == "publish_error"), "source_url_identity_collisions": len(collision_results), "waiting_source_completion": 0, "incomplete_blocked_before_gemini": 0, "deferred_by_safety_cap": len(deferred_reports), "multiple_reports_processed": len(ready_reports) if len(ready_reports) > 1 else 0}, "policy": {"simone_is_autonomous_for_reports": True, "uses_manual_report_workflow_engine": "modules.report_workshop_v92.run_report_workshop", "report_readiness_is_diagnostic_only_after_publish_after": True, "source_url_unique_across_report_keys": True, "uses_jarvis_wp_preflight": True, "skips_internal_wp_probe_when_jarvis_preflight_down": True, "max_reports_per_run": MAX_REPORTS_PER_RUN, "reports_count_as_news": False}}
     write_json(ARTIFACT_SIMONE_PUBLISH_FILE, result)
     write_json(SIMONE_REPORT_STATUS_FILE, result)
     print("[SIMONE v93.27] Report publisher completato | published={published} already={already} wp_not_ready={wp_not_ready} errors={errors}".format(published=result["handoff"]["published"], already=result["handoff"]["already_published"], wp_not_ready=result["handoff"]["wp_not_ready"], errors=result["handoff"]["errors"]), flush=True)

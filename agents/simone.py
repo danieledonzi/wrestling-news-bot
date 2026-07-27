@@ -27,7 +27,7 @@ REPORT_REGISTRY_FILE = NEWSROOM_STATE_DIR / "report_publication_registry.json"
 SIMONE_EXPECTED_EVENTS_FILE = NEWSROOM_STATE_DIR / "simone_expected_events_latest.json"
 ARTIFACT_EXPECTED_EVENTS_FILE = ARTIFACT_DIR / "simone_expected_events_latest.json"
 
-SIMONE_VERSION = "v95_13_1_simone_report_integrity"
+SIMONE_VERSION = "v95.19.1_simone_report_identity_guard"
 
 DAY_NAMES = {
     "monday": 0,
@@ -153,6 +153,14 @@ def parse_local_event_time(date_iso: str, hhmm: str) -> datetime | None:
         return None
 
 
+def next_calendar_date(date_iso: str) -> str | None:
+    """Return the following local calendar date without raising on registry data."""
+    try:
+        return (datetime.strptime(str(date_iso or ""), "%Y-%m-%d").date() + timedelta(days=1)).isoformat()
+    except (TypeError, ValueError):
+        return None
+
+
 def special_report_key(night_key: str, date_iso: str) -> str:
     return f"special_event_{night_key}_{date_iso.replace('-', '_')}"
 
@@ -190,7 +198,8 @@ def build_expected_special_reports(cfg: dict[str, Any], now: datetime | None = N
             if not isinstance(night, dict) or not night.get("enabled", True):
                 continue
             date_iso = str(night.get("date_local") or "")
-            due_at = parse_local_event_time(date_iso, str(night.get("report_publish_after_local") or cfg.get("default_report_publish_after_local") or "06:30"))
+            publish_date_local = next_calendar_date(date_iso)
+            due_at = parse_local_event_time(publish_date_local or "", str(night.get("report_publish_after_local") or cfg.get("default_report_publish_after_local") or "06:30"))
             night_key = str(night.get("night_key") or "")
             if not due_at or not night_key:
                 blocked.append({"event_key": event.get("key"), "night_key": night_key, "reason": "invalid_special_event_schedule"})
@@ -218,6 +227,8 @@ def build_expected_special_reports(cfg: dict[str, Any], now: datetime | None = N
                 "aliases": sorted(set(a for a in aliases if a)),
                 "title": f"{show_name} del {date_it(date_iso)} - risultati e momenti salienti",
                 "date": date_iso,
+                "publish_date_local": publish_date_local,
+                "due_at_local": due_at.isoformat(),
                 "report_type": "special_event",
             })
     return expected, blocked
@@ -248,9 +259,37 @@ def candidate_report_hint(candidate: dict[str, Any], report: dict[str, Any], raw
 
 
 def candidate_matches_special_report(candidate: dict[str, Any], report: dict[str, Any]) -> tuple[bool, str]:
-    raw = " ".join(str(candidate.get(k) or "") for k in ["title", "url", "source_url", "show_hint", "summary", "description", "reason"])
+    explicit_raw = " ".join(str(candidate.get(k) or "") for k in ["title", "url", "source_url"])
+    supporting_raw = " ".join(str(candidate.get(k) or "") for k in ["show_hint", "summary", "description", "reason"])
+    raw = f"{explicit_raw} {supporting_raw}"
     blob = normalize(raw)
     aliases = [normalize(x) for x in report.get("aliases", []) if x]
+    explicit_blob = normalize(explicit_raw)
+    special_identity_explicit = any(alias and alias in explicit_blob for alias in aliases)
+    reports_cfg = load_json(REPORTS_CONFIG, {"reports": []})
+    weekly_reports = reports_cfg.get("reports", []) if isinstance(reports_cfg, dict) else []
+    for weekly in weekly_reports if isinstance(weekly_reports, list) else []:
+        if not isinstance(weekly, dict):
+            continue
+        show_identity = normalize(str(weekly.get("show_name") or ""))
+        result_identities = [
+            term for value in (weekly.get("match_keywords") or [])
+            if (term := normalize(str(value or ""))) and REPORT_SIGNAL_RE.search(str(value or ""))
+        ]
+        results_keyword_identity = any(term in explicit_blob for term in result_identities)
+        generic_show_report_identity = bool(
+            show_identity
+            and show_identity in explicit_blob
+            and REPORT_SIGNAL_RE.search(explicit_raw)
+            and not special_identity_explicit
+        )
+        strong_weekly_identity = results_keyword_identity or generic_show_report_identity
+        if strong_weekly_identity:
+            return False, "conflicting_explicit_show_identity"
+    structured = candidate.get("special_event_match")
+    structured_key = str(structured.get("report_key") or "") if isinstance(structured, dict) else ""
+    if structured_key and structured_key == str(report.get("report_key") or ""):
+        return True, "structured_special_event_match"
     event_hit = any(alias and alias in blob for alias in aliases)
     if not event_hit:
         return False, "event_alias_not_found"
