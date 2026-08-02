@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -238,6 +239,13 @@ def update_ledger(run_record: dict[str, Any]) -> list[dict[str, Any]]:
     ledger = load_json(ARCHIVISTA_LEDGER_FILE, [])
     if not isinstance(ledger, list):
         ledger = []
+    run_id = str(run_record.get("run_id") or "").strip()
+    if run_id:
+        ledger = [
+            item
+            for item in ledger
+            if not isinstance(item, dict) or str(item.get("run_id") or "").strip() != run_id
+        ]
     ledger.append(run_record)
     cutoff = utc_now_dt() - timedelta(hours=LEDGER_HOURS)
     recent: list[dict[str, Any]] = []
@@ -356,8 +364,10 @@ def run_archivista(
         "alfred": (inputs["alfred"].get("handoff", {}) if isinstance(inputs["alfred"], dict) else {}),
         "publisher": (inputs["publisher"].get("handoff", {}) if isinstance(inputs["publisher"], dict) else {}),
     }
+    generated_at = utc_now()
     run_record = {
-        "generated_at": utc_now(),
+        "generated_at": generated_at,
+        "run_id": os.getenv("NEWSROOM_RUN_ID", "").strip() or generated_at,
         "overall_status": overall,
         "agent_handoffs": handoffs,
         "published": handoffs.get("publisher", {}).get("published", 0),

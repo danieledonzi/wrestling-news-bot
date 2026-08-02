@@ -19,7 +19,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
 
-NEWSROOM_VERSION = "v95_gemini_call_ledger_and_cost_observability"
+NEWSROOM_VERSION = "v95_19_2_archivista_single_pass"
 ARTIFACT_DIR = Path("artifacts") / "newsroom"
 
 
@@ -208,6 +208,7 @@ def safe_agent(
     phase: str,
     import_fn: Callable[[], Callable[..., dict[str, Any]]],
     call_args: tuple[Any, ...] = (),
+    call_kwargs: dict[str, Any] | None = None,
     artifact_name: str,
     default_handoff: dict[str, Any],
     note_fn: Callable[[dict[str, Any]], str],
@@ -220,7 +221,7 @@ def safe_agent(
         add_timeline(timeline, agent, "error", f"import_failed={exc}")
         return error
     try:
-        result = fn(*call_args)
+        result = fn(*call_args, **(call_kwargs or {}))
         add_timeline(timeline, agent, phase, note_fn(result if isinstance(result, dict) else {}))
         return result if isinstance(result, dict) else {"agent": agent, "status": "invalid_result", "handoff": default_handoff}
     except Exception as exc:
@@ -368,14 +369,28 @@ def main() -> int:
     ended_at = utc_now()
     run_summary = {"version": NEWSROOM_VERSION, "started_at": started_at, "ended_at": ended_at, "engine": engine, "newsroom_engine_override": is_test_override, "runtime_delegations": runtime_delegations, "runtime_exit_code": runtime_exit_code, "agents": {"jarvis": "real_orchestrator", "massy": "real_sentinel_control", "simone": "real_report_director_and_autonomous_report_publisher", "menzo": "real_editorial_director", "andrea": "real_pre_bob_content_sufficiency_guard", "bob": "real_article_writer", "alfred": "real_quality_editor", "publisher": "real_wordpress_publisher", "archivista": "real_audit_agent", "master_log": "real_structured_run_memory"}, "massy_handoff": handoff(massy_board), "simone_handoff": handoff(simone_decision), "simone_publish_handoff": handoff(simone_publish), "menzo_handoff": handoff(menzo_decision), "andrea_handoff": handoff(andrea_handoff), "bob_handoff": handoff(bob_result), "alfred_handoff": handoff(alfred_result), "publisher_handoff": handoff(publisher_result), "gemini_ledger_summary": gemini_ledger_summary()}
 
-    archivista_result = safe_agent(timeline=timeline, agent="Archivista", phase="audit_ready", import_fn=import_archivista, call_args=(), artifact_name="archivista_report.json", default_handoff={"overall_status": "error"}, note_fn=lambda r: "status={status} anomalies={anomalies}".format(status=r.get("overall_status", "unknown"), anomalies=(r.get("summary", {}) if isinstance(r.get("summary"), dict) else {}).get("anomalies", 0)))
-    if archivista_result.get("status") != "error":
-        try:
-            from agents.archivista import run_archivista
-            archivista_result = run_archivista(timeline=timeline, run_summary=run_summary, massy=massy_board, simone=simone_decision, menzo=menzo_decision, bob=bob_result, alfred=alfred_result, publisher=publisher_result)
-            add_timeline(timeline, "Archivista", "audit_context_refreshed", f"status={archivista_result.get('overall_status')}")
-        except Exception as exc:
-            add_timeline(timeline, "Archivista", "error", str(exc))
+    archivista_result = safe_agent(
+        timeline=timeline,
+        agent="Archivista",
+        phase="audit_ready",
+        import_fn=import_archivista,
+        call_kwargs={
+            "timeline": timeline,
+            "run_summary": run_summary,
+            "massy": massy_board,
+            "simone": simone_decision,
+            "menzo": menzo_decision,
+            "bob": bob_result,
+            "alfred": alfred_result,
+            "publisher": publisher_result,
+        },
+        artifact_name="archivista_report.json",
+        default_handoff={"overall_status": "error"},
+        note_fn=lambda r: "status={status} anomalies={anomalies}".format(
+            status=r.get("overall_status", "unknown"),
+            anomalies=(r.get("summary", {}) if isinstance(r.get("summary"), dict) else {}).get("anomalies", 0),
+        ),
+    )
     if isinstance(andrea_handoff, dict):
         ah = handoff(andrea_handoff)
         run_summary.update({
