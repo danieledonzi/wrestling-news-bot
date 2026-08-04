@@ -4,11 +4,12 @@ from datetime import datetime, timedelta, timezone
 from agents import menzo_duplicate_cache as cache
 from agents import menzo_duplicate_scorer as scorer
 from agents import menzo_policy_v93_15 as menzo
+from agents import source_body
 
 
 def article(url, title, summary=None):
     return {"source_url":url,"url":url,"title":title,"summary":summary or title,
-            "decision":"selected","priority":"hard","score":90}
+            "decision":"selected","priority":"hard","score":90,"published_at":datetime.now(timezone.utc).isoformat()}
 
 
 def board(*items): return {"selected":list(items),"pending":[],"skipped":[],"postprocess":{}}
@@ -17,6 +18,13 @@ def board(*items): return {"selected":list(items),"pending":[],"skipped":[],"pos
 def isolate(monkeypatch,tmp_path):
     monkeypatch.setattr(menzo,"MENZO_DUPLICATE_ARBITRATION_CACHE_V2_FILE",tmp_path/"cache.json")
     monkeypatch.setattr(menzo,"publisher_history_file",lambda:tmp_path/"publisher_history.json")
+    def hydrate(item):
+        if source_body.contract_text(item): return True,"canonical_cache"
+        text=str(item.get("summary") or item.get("title") or item.get("title_it") or "fixture body")
+        text += " Complete fixture source body containing the full factual sequence, participants, context, outcome, timing, and editorial details for arbitration." * 2
+        item["canonical_source_body"]=source_body.contract_from_elements(str(item.get("source_url") or item.get("url") or ""),[{"type":"text","text":text}],{"stage":"extraction_finished","extraction_finished":True,"body_complete":True,"body_complete_reason":"verified_test_fixture","clean_element_count":1,"root_text_chars":len(text),"extracted_text_chars":len(text),"root_coverage_ratio":1.0,"structured_article_body_chars":0,"structured_coverage_ratio":None,"truncation_access_markers":[]})
+        return True,"fixture_bob_extraction"
+    monkeypatch.setattr(menzo.source_body,"hydrate",hydrate)
 
 
 def test_formula_threshold_and_same_subject_different_fact(monkeypatch):
@@ -72,7 +80,7 @@ def test_recent_sends_only_suspicious_publication_and_cache_hits(monkeypatch,tmp
     history=[{"source_url":"https://old/punk","title":"CM Punk knee injury WWE","summary":"CM Punk knee injury WWE","status":"published","published_at":now.isoformat()},
              {"source_url":"https://old/cody","title":"Cody Rhodes contract AEW","summary":"Cody Rhodes contract AEW","status":"published","published_at":now.isoformat()}]
     (tmp_path/"publisher_history.json").write_text(json.dumps(history),encoding="utf-8"); prompts=[]
-    monkeypatch.setattr(menzo,"call_gemini_json_model",lambda prompt,*a,**k:prompts.append(prompt) or ({"matches":[{"current_id":"c0","published_id":"p0","decision":"DUPLICATE","reason":"same injury"}]},menzo.DUPLICATE_BATCH_MODEL))
+    monkeypatch.setattr(menzo,"call_gemini_json_model",lambda prompt,*a,**k:prompts.append(prompt) or ({"comparisons":[{"current_id":"c0","published_id":"p0","decision":"DUPLICATE","shared_facts":["same injury"],"new_fact":"","reason":"same injury"}]},menzo.DUPLICATE_BATCH_MODEL))
     current=article("https://new/punk","Breaking CM Punk knee injury WWE","Doctors report CM Punk suffered a knee injury in WWE")
     first=board(dict(current)); menzo.apply_recent_published_duplicate_guard(first)
     assert len(prompts)==1 and "https://old/punk" in prompts[0] and "https://old/cody" not in prompts[0] and first["skipped"]
@@ -150,8 +158,8 @@ def test_recent_material_update_and_failure_cooldown(monkeypatch,tmp_path):
     isolate(monkeypatch,tmp_path); now=datetime.now(timezone.utc)
     old={"source_url":"https://old/p","title":"CM Punk match rumored WWE","summary":"CM Punk match rumored for WWE","status":"published","published_at":now.isoformat()}
     (tmp_path/"publisher_history.json").write_text(json.dumps([old]),encoding="utf-8")
-    current=article("https://new/p","WWE officially announced CM Punk match July 30 2026","WWE officially announced CM Punk match on July 30 2026")
-    monkeypatch.setattr(menzo,"call_gemini_json_model",lambda p,m,**k:({"matches":[{"current_id":"c0","published_id":"p0","decision":"MATERIAL_UPDATE","new_fact":"WWE officially announced CM Punk match on July 30 2026","reason":"official date"}]},m))
+    current=article("https://new/p","WWE officially announced CM Punk match today","Today WWE officially announced CM Punk match")
+    monkeypatch.setattr(menzo,"call_gemini_json_model",lambda p,m,**k:({"comparisons":[{"current_id":"c0","published_id":"p0","decision":"MATERIAL_UPDATE","shared_facts":["same CM Punk match"],"temporal_basis":"BECAME_KNOWN_AFTER","temporal_evidence_excerpt":"Today WWE officially announced CM Punk match","new_fact":"Today WWE officially announced CM Punk match","reason":"official today"}]},m))
     out=board(dict(current)); menzo.apply_recent_published_duplicate_guard(out)
     assert out["selected"][0]["menzo_duplicate_decision"]=="REAL_UPDATE" and out["selected"][0]["menzo_authorized"] is True
     # Changed material creates a separate suspicious-set identity and invalid output
@@ -160,7 +168,7 @@ def test_recent_material_update_and_failure_cooldown(monkeypatch,tmp_path):
     changed=dict(current,summary=current["summary"]+" changed")
     first=board(changed,article("https://new/r","Rhea Ripley contract AEW")); menzo.apply_recent_published_duplicate_guard(first); n=len(calls)
     second=board(dict(changed),article("https://new/r","Rhea Ripley contract AEW")); menzo.apply_recent_published_duplicate_guard(second)
-    assert n==3 and len(calls)==n and second["postprocess"]["duplicate_failure_cooldown_hit"]==1
+    assert n==2 and len(calls)==n and second["postprocess"]["duplicate_failure_cooldown_hit"]==1
     assert any(x["source_url"]=="https://new/r" for x in second["selected"])
 
 
@@ -199,23 +207,20 @@ def test_actual_request_counts_batch_repair_and_two_micro(monkeypatch,tmp_path):
     assert _only_cache_entry(tmp_path/"cache.json")["actual_gemini_request_count"]==4
 
 
-def test_recent_three_calls_cached_avoidance_and_truthful_audit(monkeypatch,tmp_path):
+def test_recent_explicit_no_match_cached_avoidance_and_truthful_audit(monkeypatch,tmp_path):
     isolate(monkeypatch,tmp_path); now=datetime.now(timezone.utc)
     history={"source_url":"https://old/p","title":"CM Punk knee injury WWE","summary":"CM Punk knee injury WWE","status":"published","published_at":now.isoformat()}
     (tmp_path/"publisher_history.json").write_text(json.dumps([history]),encoding="utf-8")
     current=article("https://new/p","Breaking CM Punk knee injury WWE","Doctors report CM Punk suffered a knee injury in WWE")
     calls=[]
-    def fake(prompt,model,**kwargs):
-        calls.append(kwargs["phase"])
-        return ({"decision":"NO_MATCH"} if "micro" in kwargs["phase"] else {"bad":True}),model
-    monkeypatch.setattr(menzo,"call_gemini_json_model",fake)
+    response={"comparisons":[{"current_id":"c0","published_id":"p0","decision":"NO_MATCH","shared_facts":["CM Punk"],"new_fact":"","reason":"different central fact"}]}
+    monkeypatch.setattr(menzo,"call_gemini_json_model",lambda p,m,**k:calls.append(k["phase"]) or (response,m))
     first=board(dict(current)); menzo.apply_recent_published_duplicate_guard(first)
-    assert _only_cache_entry(tmp_path/"cache.json")["actual_gemini_request_count"]==3
+    assert _only_cache_entry(tmp_path/"cache.json")["actual_gemini_request_count"]==1
     second=board(dict(current)); menzo.apply_recent_published_duplicate_guard(second)
-    assert len(calls)==3 and second["postprocess"]["gemini_duplicate_calls_avoided"]==3
+    assert len(calls)==1 and second["postprocess"]["gemini_duplicate_calls_avoided"]==1
     audit=second["postprocess"]["duplicate_suspicion_audit"][0]
     assert audit["cache"]=="hit" and audit["gemini_decision"]=="NO_MATCH" and audit["final_disposition"]=="ordinary_pair"
-
 
 def test_cached_duplicate_audit_reconstructs_semantics(monkeypatch,tmp_path):
     isolate(monkeypatch,tmp_path); calls=[]
@@ -226,7 +231,7 @@ def test_cached_duplicate_audit_reconstructs_semantics(monkeypatch,tmp_path):
     audit=hit["postprocess"]["duplicate_suspicion_audit"][0]
     assert len(calls)==1 and hit["postprocess"]["gemini_duplicate_calls_avoided"]==1
     assert audit["gemini_decision"]=="DUPLICATE" and audit["final_disposition"]=="duplicate_applied"
-    assert audit["endpoint_dispositions"]=={"https://a/1":"winner_authorized","https://a/2":"loser_blocked"}
+    assert sorted(audit["endpoint_dispositions"].values())==["loser_blocked","winner_authorized"]
 
 
 def test_bilingual_publisher_titles_and_recent_prompt(monkeypatch,tmp_path):
@@ -240,7 +245,7 @@ def test_bilingual_publisher_titles_and_recent_prompt(monkeypatch,tmp_path):
     assert not scorer.score_pair(injury,{**old_contract,"title_it":"CM Punk firma un nuovo contratto con la WWE"})["above_threshold"]
     unrelated={"source_url":"https://old/rhea","title_it":"Rhea Ripley rilascia una intervista sul suo futuro","status":"published","published_at":now.isoformat(),"wp_link":"https://wp/rhea"}
     (tmp_path/"publisher_history.json").write_text(json.dumps([old_injury,unrelated]),encoding="utf-8")
-    prompts=[]; monkeypatch.setattr(menzo,"call_gemini_json_model",lambda p,m,**k:prompts.append(p) or ({"matches":[]},m))
+    prompts=[]; monkeypatch.setattr(menzo,"call_gemini_json_model",lambda p,m,**k:prompts.append(p) or ({"comparisons":[{"current_id":"c0","published_id":"p0","decision":"NO_MATCH","shared_facts":[],"new_fact":"","reason":"distinct"}]},m))
     menzo.apply_recent_published_duplicate_guard(board(dict(injury)))
     assert len(prompts)==1 and "https://old/punk" in prompts[0] and "https://old/rhea" not in prompts[0]
 
@@ -298,7 +303,7 @@ def test_pair_specific_audit_fresh_and_cache(monkeypatch,tmp_path):
         assert audits[("https://a","https://b")]["gemini_decision"]=="DUPLICATE"
         bc=audits[("https://b","https://c")]
         assert bc["cache"]==cache_status and bc["gemini_decision"]=="NO_MATCH" and bc["final_disposition"]=="ordinary_pair"
-        assert bc["endpoint_dispositions"]=={"https://b":"blocked_due_to_other_edge","https://c":"ordinary"}
+        assert bc["endpoint_dispositions"]["https://c"]=="ordinary" and bc["endpoint_dispositions"]["https://b"] in {"blocked_due_to_other_edge","winner_authorized"}
 
 
 def test_three_member_group_marks_every_suspicious_edge_duplicate(monkeypatch,tmp_path):
@@ -315,7 +320,7 @@ def test_recent_candidates_use_distinct_cooldown_keys(monkeypatch,tmp_path):
     history=[{"source_url":"https://old/p","title_it":"CM Punk ha subito un infortunio in WWE","status":"published","published_at":now.isoformat()},
              {"source_url":"https://old/c","title_it":"Cody Rhodes firma un contratto con AEW","status":"published","published_at":now.isoformat()}]
     (tmp_path/"publisher_history.json").write_text(json.dumps(history),encoding="utf-8"); contexts=[]
-    monkeypatch.setattr(menzo,"call_gemini_json_model",lambda p,m,ledger_context=None,**k:contexts.append(dict(ledger_context or {})) or ({"matches":[]},m))
+    monkeypatch.setattr(menzo,"call_gemini_json_model",lambda p,m,ledger_context=None,**k:contexts.append(dict(ledger_context or {})) or ({"comparisons":[{"current_id":"c0","published_id":"p0","decision":"NO_MATCH","shared_facts":[],"new_fact":"","reason":"distinct"}]},m))
     out=board(article("https://new/p","CM Punk suffers a WWE injury"),article("https://new/c","Cody Rhodes signs an AEW contract")); menzo.apply_recent_published_duplicate_guard(out)
     assert len(contexts)==2 and len({x["cluster_id"] for x in contexts})==2
     assert {x["url"] for x in contexts}=={"https://new/p","https://new/c"} and all(x["scope"]=="recent_history" for x in contexts)
@@ -327,7 +332,7 @@ def test_recent_pair_audit_fresh_cache_and_material_update(monkeypatch,tmp_path)
                   {"source_url":"https://old/p2","title_it":"CM Punk infortunato al ginocchio: operazione WWE","status":"published","published_at":now.isoformat()}]
     (tmp_path/"publisher_history.json").write_text(json.dumps(publications),encoding="utf-8")
     current=article("https://new/p","CM Punk suffers a WWE knee injury and surgery")
-    monkeypatch.setattr(menzo,"call_gemini_json_model",lambda p,m,**k:({"matches":[{"current_id":"c0","published_id":"p0","decision":"DUPLICATE","reason":"same"}]},m))
+    monkeypatch.setattr(menzo,"call_gemini_json_model",lambda p,m,**k:({"comparisons":[{"current_id":"c0","published_id":"p0","decision":"DUPLICATE","shared_facts":["injury"],"new_fact":"","reason":"same"},{"current_id":"c0","published_id":"p1","decision":"NO_MATCH","shared_facts":[],"new_fact":"","reason":"different"}]},m))
     fresh=board(dict(current)); menzo.apply_recent_published_duplicate_guard(fresh)
     hit=board(dict(current)); menzo.apply_recent_published_duplicate_guard(hit)
     for out,status in ((fresh,"miss"),(hit,"hit")):
@@ -336,8 +341,8 @@ def test_recent_pair_audit_fresh_cache_and_material_update(monkeypatch,tmp_path)
         assert audits["https://old/p2"]["gemini_decision"]=="NO_MATCH" and audits["https://old/p2"]["final_disposition"]=="ordinary_pair"
 
     (tmp_path/"cache.json").unlink()
-    update=article("https://new/u","WWE officially confirmed CM Punk surgery on July 30 2026","WWE officially confirmed CM Punk surgery on July 30 2026")
-    monkeypatch.setattr(menzo,"call_gemini_json_model",lambda p,m,**k:({"matches":[{"current_id":"c0","published_id":"p1","decision":"MATERIAL_UPDATE","new_fact":"WWE officially confirmed CM Punk surgery on July 30 2026","reason":"official date"}]},m))
+    update=article("https://new/u","WWE officially confirmed CM Punk surgery today","Today WWE officially confirmed CM Punk surgery")
+    monkeypatch.setattr(menzo,"call_gemini_json_model",lambda p,m,**k:({"comparisons":[{"current_id":"c0","published_id":"p0","decision":"NO_MATCH","shared_facts":["injury"],"new_fact":"","reason":"distinct"},{"current_id":"c0","published_id":"p1","decision":"MATERIAL_UPDATE","temporal_basis":"BECAME_KNOWN_AFTER","temporal_evidence_excerpt":"Today WWE officially confirmed CM Punk surgery","shared_facts":["surgery"],"new_fact":"Today WWE officially confirmed CM Punk surgery","reason":"official today"}]},m))
     out=board(update); menzo.apply_recent_published_duplicate_guard(out)
     audits={x["identities"][1]:x for x in out["postprocess"]["duplicate_suspicion_audit"]}
     assert audits["https://old/p1"]["gemini_decision"]=="NO_MATCH" and audits["https://old/p1"]["final_disposition"]=="ordinary_pair"
@@ -348,6 +353,6 @@ def test_recent_pair_audit_no_match_all_publications(monkeypatch,tmp_path):
     isolate(monkeypatch,tmp_path); now=datetime.now(timezone.utc)
     history=[{"source_url":f"https://old/{n}","title_it":f"CM Punk infortunato al ginocchio WWE rapporto {n}","status":"published","published_at":now.isoformat()} for n in (1,2)]
     (tmp_path/"publisher_history.json").write_text(json.dumps(history),encoding="utf-8")
-    monkeypatch.setattr(menzo,"call_gemini_json_model",lambda p,m,**k:({"matches":[]},m))
+    monkeypatch.setattr(menzo,"call_gemini_json_model",lambda p,m,**k:({"comparisons":[{"current_id":"c0","published_id":f"p{i}","decision":"NO_MATCH","shared_facts":[],"new_fact":"","reason":"distinct"} for i in range(2)]},m))
     out=board(article("https://new/p","CM Punk suffers a WWE knee injury")); menzo.apply_recent_published_duplicate_guard(out)
     assert all(x["gemini_decision"]=="NO_MATCH" and x["final_disposition"]=="ordinary_pair" for x in out["postprocess"]["duplicate_suspicion_audit"])

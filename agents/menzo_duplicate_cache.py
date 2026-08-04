@@ -17,15 +17,15 @@ from typing import Any, Callable
 ROOT = Path(__file__).resolve().parents[1]
 CACHE_FILE = ROOT / "state" / "newsroom" / "menzo_duplicate_arbitration_cache_v2.json"
 CACHE_SCHEMA_VERSION = "2"
-MENZO_DUPLICATE_ARBITRATION_CONTRACT_VERSION = "v95.18-suspicious-doubts-1"
-PROMPT_BUILDER_VERSION = "v95.18-suspicious-subsets-1"
-VALIDATOR_VERSION = "v95.18-component-validators-1"
+MENZO_DUPLICATE_ARBITRATION_CONTRACT_VERSION = "v95.20-grounded-temporal-audit-4"
+PROMPT_BUILDER_VERSION = "v95.20-temporal-basis-comparisons-4"
+VALIDATOR_VERSION = "v95.20-grounded-temporal-validator-4"
 MODEL_NAME = "gemini-3.1-flash-lite"
 FAILURE_COOLDOWN_HOURS = float(os.getenv("MENZO_DUPLICATE_FAILURE_COOLDOWN_HOURS", "2"))
 REQUIRED_DECISION_FIELDS = (
     "menzo_duplicate_checked", "menzo_duplicate_scope", "menzo_duplicate_decision",
     "menzo_authorized", "menzo_compared_with_url", "menzo_duplicate_reason",
-    "menzo_new_fact", "menzo_winner_url",
+    "menzo_new_fact", "menzo_winner_url", "menzo_duplicate_audit", "menzo_duplicate_comparisons",
 )
 REQUIRED_DISPOSITION_FIELDS = ("decision", "priority", "article_type", "reason")
 

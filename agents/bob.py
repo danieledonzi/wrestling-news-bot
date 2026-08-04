@@ -14,6 +14,7 @@ from agents.gemini_ledger import make_operation_id, record_gemini_attempt, recor
 from urllib.parse import urljoin, urlparse
 
 import requests
+from agents import source_body
 from bs4 import BeautifulSoup, Tag
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -215,6 +216,79 @@ def choose_article_root(soup: BeautifulSoup) -> Tag:
         if found and len(clean_text(found.get_text(" "))) > 500:
             return found
     return soup.body or soup
+
+
+def structured_article_body(soup: BeautifulSoup) -> str:
+    """Return the longest schema.org articleBody, never a description fallback."""
+    bodies: list[str] = []
+    def visit(value: Any) -> None:
+        if isinstance(value, dict):
+            kind = value.get("@type") or ""
+            kinds = kind if isinstance(kind, list) else [kind]
+            if any(str(x).lower() in {"article", "newsarticle", "blogposting"} for x in kinds):
+                body = clean_text(str(value.get("articleBody") or ""))
+                if len(body) >= 200:
+                    bodies.append(body)
+            for child in value.values(): visit(child)
+        elif isinstance(value, list):
+            for child in value: visit(child)
+    for script in soup.find_all("script", attrs={"type": re.compile(r"ld\+json", re.I)}):
+        try: visit(json.loads(script.string or script.get_text(" ", strip=True) or "{}"))
+        except Exception: continue
+    return max(bodies, key=len, default="")
+
+
+def assess_body_completeness(root: Tag, elements: list[dict[str, Any]], soup: BeautifulSoup) -> dict[str, Any]:
+    root_text = clean_text(root.get_text(" ")) if root else ""
+    page_text = clean_text(soup.get_text(" "))
+    extracted = clean_text(" ".join(str(e.get("text") or e.get("markdown") or "") for e in elements if e.get("type") in {"text", "heading", "quote", "table"}))
+    structured = structured_article_body(soup)
+    root_coverage = min(1.0, len(extracted) / max(1, len(root_text)))
+    structured_coverage = min(1.0, len(extracted) / max(1, len(structured))) if structured else None
+    extracted_terms=set(re.findall(r"[a-z0-9à-ÿ]{3,}",extracted.lower()))
+    structured_terms=set(re.findall(r"[a-z0-9à-ÿ]{3,}",structured.lower()))
+    structured_overlap = len(extracted_terms & structured_terms) / max(1,len(structured_terms)) if structured_terms else None
+    marker_re = re.compile(r"\b(?:continue\s+reading\s+with\s+a\s+subscription|unlock\s+this\s+article|subscribe\s+to\s+unlock|become\s+a\s+member\s+to\s+read|access\s+the\s+full\s+article|this\s+article\s+is\s+for\s+subscribers|(?:subscribe|sign\s+in|log\s+in|register)\s+to\s+(?:continue|read)|already\s+a\s+subscriber|remaining\s+content|content\s+is\s+(?:only\s+)?for\s+(?:subscribers|members)|paywall)\b", re.I)
+    root_markers = sorted(set(m.group(0).lower() for m in marker_re.finditer(root_text)))
+    page_markers = sorted(set(m.group(0).lower() for m in marker_re.finditer(page_text)))
+    wall_attr_re=re.compile(r"(?:^|[-_\s])(?:paywall|subscriber-only|locked-content|metered-content|premium-content)(?:$|[-_\s])",re.I)
+    associated_dom_signals=[]; page_dom_signals=[]
+    root_related=[]
+    if root:
+        root_related=[root,*list(root.parents),*list(root.find_all(True))]
+        # Root descendants and ancestors are associated with the selected article.
+        # Unrelated page chrome (sidebars/footers) is intentionally excluded here.
+    for node in soup.find_all(attrs={"class":True})+soup.find_all(attrs={"id":True}):
+        attrs=node_classes(node)
+        if not wall_attr_re.search(attrs):
+            continue
+        page_dom_signals.append(attrs[:300])
+        if node in root_related:
+            associated_dom_signals.append(attrs[:300])
+    wall_dom_signals=sorted(set(associated_dom_signals))
+    page_only_dom_signals=sorted(set(page_dom_signals)-set(wall_dom_signals))
+    page_wide_restriction=bool((page_markers and wall_dom_signals) or len(page_dom_signals)>=2)
+    markers = root_markers or (page_markers if page_wide_restriction else [])
+    root_is_document_fallback = getattr(root, "name", "") in {"body", "html", "[document]"}
+    structured_verifies = bool(structured and structured_coverage is not None and structured_coverage >= 0.80 and structured_overlap is not None and structured_overlap >= 0.75)
+    dom_verifies = bool(not root_is_document_fallback and root_coverage >= 0.55)
+    complete = bool(len(extracted) >= 200 and not markers and not wall_dom_signals and (structured_verifies or dom_verifies))
+    reasons=[]
+    if len(extracted) < 200: reasons.append("insufficient_editorial_text")
+    if markers or wall_dom_signals: reasons.append("truncation_or_access_marker")
+    if root_is_document_fallback and not structured_verifies: reasons.append("unverified_document_root")
+    if not structured_verifies and not dom_verifies: reasons.append("insufficient_extraction_coverage")
+    return {
+        "extraction_finished": True, "body_complete": complete,
+        "body_complete_reason": "verified_structured_body" if structured_verifies and complete else "verified_dom_coverage" if complete else "body_incomplete",
+        "body_incomplete_reasons": reasons, "root_text_chars": len(root_text), "extracted_text_chars": len(extracted),
+        "root_coverage_ratio": round(root_coverage, 4), "structured_article_body_chars": len(structured),
+        "structured_coverage_ratio": round(structured_coverage, 4) if structured_coverage is not None else None,
+        "structured_token_overlap_ratio": round(structured_overlap, 4) if structured_overlap is not None else None,
+        "structured_article_body": structured if structured_verifies else "", "truncation_access_markers": markers,
+        "access_wall_dom_signals":wall_dom_signals, "page_access_wall_markers":page_markers, "page_unassociated_access_wall_dom_signals":page_only_dom_signals,
+        "selected_root_name": getattr(root, "name", ""), "selected_root_classes": node_classes(root)[:300] if root else "",
+    }
 
 
 def node_classes(node: Tag) -> str:
@@ -578,8 +652,9 @@ def extract_elements(source_url: str, raw_html: str) -> tuple[dict[str, str], li
         "table_count": sum(1 for e in clean_elements if e.get("type") == "table"),
         "quote_count": sum(1 for e in clean_elements if e.get("type") == "quote"),
         "embed_count": sum(1 for e in clean_elements if e.get("type") == "embed"),
-        "stage": "complete",
+        "stage": "extraction_finished",
     })
+    diagnostics.update(assess_body_completeness(root, clean_elements, soup))
     return meta, raw_elements, clean_elements, removed_by_node + removed_by_sanitize + recovered_x_embeds, diagnostics
 
 
@@ -804,7 +879,7 @@ def dynamic_article_capacity(decision: dict[str, Any], selected: list[dict[str, 
 def article_package(item: dict[str, Any]) -> dict[str, Any]:
     url = str(item.get("url") or item.get("source_url") or "")
     package: dict[str, Any] = {"source_url": url, "source": item.get("source"), "source_title": item.get("title"), "category_hint": item.get("category_hint"), "menzo_score": item.get("score"), "status": "error", "created_at": utc_now(), "diagnostic_stage": "start"}
-    for _field in ["menzo_duplicate_checked", "menzo_duplicate_scope", "menzo_duplicate_decision", "menzo_authorized", "menzo_compared_with_url", "menzo_duplicate_reason", "menzo_new_fact", "menzo_winner_url"]:
+    for _field in ["menzo_duplicate_checked", "menzo_duplicate_scope", "menzo_duplicate_decision", "menzo_authorized", "menzo_compared_with_url", "menzo_duplicate_reason", "menzo_new_fact", "menzo_winner_url", "menzo_duplicate_audit", "menzo_duplicate_comparisons"]:
         if _field in item:
             package[_field] = item[_field]
     try:
@@ -812,6 +887,9 @@ def article_package(item: dict[str, Any]) -> dict[str, Any]:
         package["fetched_html_chars"] = len(raw)
         package["source_html_contains_embed_hint"] = bool(re.search(r"twitter-tweet|x\.com/.+?/status|twitter\.com/.+?/status|instagram\.com/(p|reel)|youtube\.com/(watch|embed|shorts)|youtu\.be/|iframe|youtube-nocookie", raw, re.I))
         meta, raw_elements, elements, removed, extraction_diag = extract_elements(url, raw)
+        canonical_source_body = source_body.contract_from_elements(url, elements, extraction_diag)
+        if canonical_source_body:
+            package["canonical_source_body"] = canonical_source_body
         units = build_translation_units(elements)
         package.update({
             "meta": meta,

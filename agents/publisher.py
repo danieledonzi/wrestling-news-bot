@@ -38,6 +38,8 @@ session = requests.Session()
 session.headers.update({"User-Agent": "OpenWrestlingTV-v93-Publisher/1.0"})
 
 from agents import same_story_guard as same_story_safety
+from agents import source_body
+from agents import publisher_history as publisher_history_retention
 _category_cache: dict[str, int | None] = {}
 _media_cache: dict[str, tuple[int | None, str | None]] = {}
 
@@ -462,6 +464,10 @@ def write_published_trace(article: dict[str, Any], result: dict[str, Any], slug:
         "source_title": article_first(article, "source_title", "title", "original_title"),
         "publisher_status": result.get("status") or "published",
         "recovery_method": "published_trace",
+        "cleaned_full_text": result.get("cleaned_full_text") or "",
+        "published_cleaned_full_text": result.get("published_cleaned_full_text") or result.get("cleaned_full_text") or "",
+        "source_cleaned_full_text": result.get("source_cleaned_full_text") or "",
+        "canonical_source_body": result.get("canonical_source_body") or {},
     }
     optional_map = {
         "wp_post_id": (result.get("wp_post_id"),),
@@ -606,10 +612,13 @@ def publish_article(article: dict[str, Any], history: dict[str, Any], wp_ok: boo
     post_id = int(data.get("id"))
     post_link = data.get("link") or ""
     published_at = utc_now()
-    history[key] = {"source_url": url, "title_it": title, "wp_post_id": post_id, "wp_link": post_link, "published_at": published_at, "status": POST_STATUS, "source": source, "story_signature": story_signature(article)}
+    published_cleaned_full_text = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", cleaned_body))).strip()
+    canonical_source_body = article.get("canonical_source_body") if source_body.valid_contract(article.get("canonical_source_body")) else {}
+    source_cleaned_full_text = source_body.contract_text(article)
+    history[key] = {"source_url": url, "title_it": title, "wp_post_id": post_id, "wp_link": post_link, "published_at": published_at, "status": POST_STATUS, "source": source, "story_signature": story_signature(article), "canonical_source_body": canonical_source_body}
     PUBLISHED_DIR.mkdir(parents=True, exist_ok=True)
     (PUBLISHED_DIR / f"v93_news_{review_slug}.html").write_text(content, encoding="utf-8")
-    result = {"source_url": url, "title_it": title, "status": "published", "wp_post_id": post_id, "wp_link": post_link, "featured_media": media_id, "categories": categories}
+    result = {"source_url": url, "title_it": title, "status": "published", "wp_post_id": post_id, "wp_link": post_link, "featured_media": media_id, "categories": categories, "cleaned_full_text": published_cleaned_full_text, "published_cleaned_full_text": published_cleaned_full_text, "source_cleaned_full_text": source_cleaned_full_text, "canonical_source_body": canonical_source_body}
     try:
         write_published_trace(article, result, review_slug, published_at)
     except Exception as exc:
@@ -626,6 +635,8 @@ MENZO_DUPLICATE_FIELDS = {
     "menzo_duplicate_reason",
     "menzo_new_fact",
     "menzo_winner_url",
+    "menzo_duplicate_audit",
+    "menzo_duplicate_comparisons",
 }
 
 
@@ -669,8 +680,10 @@ def valid_menzo_duplicate_resolution(article: dict[str, Any]) -> tuple[bool, str
             return (bool(winner_url and source_url and winner_url == source_url), "skip:duplicate_arbitration_unresolved")
         return True, "skip:duplicate_same_run"
     if scope == "recent_history":
-        if decision not in {"DUPLICATE", "REAL_UPDATE"}:
+        if decision not in {"DUPLICATE", "REAL_UPDATE", "NO_MATCH"}:
             return False, "skip:duplicate_arbitration_unresolved"
+        if decision == "NO_MATCH":
+            return (authorized is True and bool(article.get("menzo_duplicate_comparisons")), "skip:duplicate_arbitration_unresolved")
         if decision == "DUPLICATE":
             return (authorized is False, article.get("menzo_duplicate_reason") or "skip:duplicate_recently_published")
         if decision == "REAL_UPDATE":
@@ -704,7 +717,9 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
     valid_articles = [enrich_article_trace_metadata(article, trace_metadata_index) for article in valid_articles]
     wp_ok, wp_reason = wp_ready()
     history = load_json(PUBLISHER_HISTORY_FILE, {})
-    if not isinstance(history, dict):
+    if isinstance(history, list):
+        history = {source_key(str(record.get("source_url") or record.get("url") or "")) or f"legacy:{index}": record for index, record in enumerate(history) if isinstance(record, dict)}
+    elif not isinstance(history, dict):
         history = {}
     safety_error = ""
     try:
@@ -739,6 +754,7 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
     ]
     results_for_audit = results + capacity_skipped + safety_skipped
     if not DRY_RUN and wp_ok:
+        history = publisher_history_retention.prune_history(history)
         write_json(PUBLISHER_HISTORY_FILE, history)
 
     result = {
