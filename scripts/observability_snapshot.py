@@ -476,6 +476,52 @@ def build_editorial_funnel(runs: list[dict[str, Any]], publication: dict[str, An
     }
 
 
+def aggregate_andrea(runs: list[dict[str, Any]], since: datetime, until: datetime) -> dict[str, Any]:
+    counters: Counter[str] = Counter()
+    exception_reasons: Counter[str] = Counter()
+    covered_runs = 0
+    total_runs = 0
+    field_map = {
+        "checked": "andrea_checked",
+        "passed": "andrea_passed",
+        "blocked": "andrea_blocked",
+        "passed_with_exception": "andrea_passed_with_exception",
+        "saved_gemini_calls": "andrea_saved_gemini_calls",
+        "fetch_performed": "andrea_fetch_performed",
+        "bob_may_reextract": "andrea_bob_may_reextract",
+    }
+    for run in iter_master_runs_in_window(runs, since, until):
+        total_runs += 1
+        andrea = run.get("andrea") if isinstance(run.get("andrea"), dict) else {}
+        handoff = andrea.get("handoff") if isinstance(andrea.get("handoff"), dict) else {}
+        if not any(key in handoff for key in field_map.values()):
+            continue
+        covered_runs += 1
+        for output_key, source_key in field_map.items():
+            value = handoff.get(source_key)
+            if isinstance(value, int) and value >= 0:
+                counters[output_key] += value
+        reasons = handoff.get("andrea_exception_reasons")
+        if isinstance(reasons, dict):
+            for reason, count in reasons.items():
+                if isinstance(count, int) and count > 0:
+                    exception_reasons[str(reason)] += count
+    available = covered_runs > 0
+    warnings: list[str] = []
+    if total_runs and not available:
+        warnings.append("andrea_event_stream_not_available")
+    elif covered_runs < total_runs:
+        warnings.append("andrea_event_stream_partial_coverage")
+    return {
+        "available": available,
+        "covered_runs": covered_runs,
+        "total_runs": total_runs,
+        "events": ({key: int(counters[key]) for key in field_map} if available else {}),
+        "exception_reasons": (dict(sorted(exception_reasons.items())) if available else {}),
+        "schema_warnings": warnings,
+    }
+
+
 def aggregate_duplicate_arbitration(runs: list[dict[str, Any]], since: datetime, until: datetime) -> tuple[dict[str, Any], dict[str, Any], list[str]]:
     counters: Counter[str] = Counter()
     legacy: Counter[str] = Counter()
@@ -621,6 +667,7 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
     pub = build_authoritative_publication_set(runs, since, until)
     funnel = build_editorial_funnel(runs, pub, since, until)
     dup, legacy, dup_warnings = aggregate_duplicate_arbitration(runs, since, until)
+    andrea = aggregate_andrea(runs, since, until)
     alfred = aggregate_alfred(runs, pub, since, until)
     simone = aggregate_simone(runs, since, until)
     simone["reports_published"] = pub["reports_unique"]
@@ -646,7 +693,7 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
         for key in ("reports_published", "already_present_events", "reports_already_present", "legacy_errors_diagnostic"):
             simone[key] = None
     warnings += gemini_warnings
-    warnings += funnel.get("schema_warnings", []) + alfred.get("schema_warnings", []) + dup_warnings
+    warnings += funnel.get("schema_warnings", []) + andrea.get("schema_warnings", []) + alfred.get("schema_warnings", []) + dup_warnings
     return {
         "schema_version": SCHEMA_VERSION,
         "metric_contract_version": METRIC_CONTRACT_VERSION,
@@ -659,11 +706,13 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
         "publication": pub,
         "funnel": funnel,
         "duplicate_arbitration": dup,
+        "andrea": andrea,
         "alfred": alfred,
         "gemini": gemini,
         "simone": simone,
         "section_metadata": {
             "menzo": section_metadata(available=authority_available, source="master_log", coverage={"runs": len(in_window_runs)}, warnings=funnel.get("schema_warnings"), reason="master_log_authority_unavailable"),
+            "andrea": section_metadata(available=authority_available and andrea.get("available") is True, source="master_log.andrea.handoff", coverage={"covered_runs": andrea.get("covered_runs", 0), "total_runs": andrea.get("total_runs", 0)}, warnings=andrea.get("schema_warnings"), reason="andrea_event_stream_unavailable"),
             "alfred": section_metadata(available=authority_available, source="master_log", coverage={"runs": len(in_window_runs)}, warnings=alfred.get("schema_warnings"), reason="master_log_authority_unavailable"),
             "gemini": section_metadata(available=gemini_available, source="state/newsroom/gemini_call_ledger.jsonl", coverage={**gemini_health, "bounded_records": len(gemini_records)}, warnings=gemini_warnings, reason="gemini_ledger_unavailable_for_bounded_metrics"),
             "simone": section_metadata(available=authority_available, source="master_log.simone", coverage={"runs": len(in_window_runs)}, reason="master_log_authority_unavailable"),

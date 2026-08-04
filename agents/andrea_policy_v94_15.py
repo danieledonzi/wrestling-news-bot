@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import re
+from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -156,13 +157,19 @@ def run_andrea(menzo_output: dict[str, Any], state: dict[str, Any] | None = None
             passed.append(enriched)
         else:
             print(f"[ANDREA v94.15] blocked_before_bob | reason={check['reason']} body_chars={check['body_chars']} text_blocks={check['meaningful_text_blocks']} paragraphs={check['paragraph_count']} sentences={check['sentence_count']} quotes={check['quote_count']} embeds={check['embed_count']} url={check.get('source_url')}", flush=True)
-    summary = {"checked": len(items), "passed": len(passed), "blocked": sum(1 for x in items if not x.get("ok")), "passed_with_exception": sum(1 for x in items if x.get("decision") == "passed_with_exception"), "saved_gemini_calls": sum(1 for x in items if x.get("saved_gemini_call")), "andrea_fetch_performed": sum(1 for x in items if x.get("andrea_fetch_performed")), "bob_may_reextract": sum(1 for x in items if x.get("bob_may_reextract"))}
+    exception_reason_counts: Counter[str] = Counter()
+    for item in items:
+        if item.get("decision") != "passed_with_exception":
+            continue
+        reasons = item.get("exceptions") if isinstance(item.get("exceptions"), list) else []
+        exception_reason_counts.update(str(reason) for reason in reasons if str(reason).strip())
+    summary = {"checked": len(items), "passed": len(passed), "blocked": sum(1 for x in items if not x.get("ok")), "passed_with_exception": sum(1 for x in items if x.get("decision") == "passed_with_exception"), "exception_reasons": dict(sorted(exception_reason_counts.items())), "saved_gemini_calls": sum(1 for x in items if x.get("saved_gemini_call")), "andrea_fetch_performed": sum(1 for x in items if x.get("andrea_fetch_performed")), "bob_may_reextract": sum(1 for x in items if x.get("bob_may_reextract"))}
     result = {"agent": "Andrea", "version": VERSION, "generated_at": utc_now(), "input": {"selected_count": len(selected), "menzo_version": menzo_output.get("version") if isinstance(menzo_output, dict) else None}, "summary": summary, "items": items, "handoff": {"to_bob": len(passed), "blocked_before_bob": summary["blocked"], "saved_gemini_calls": summary["saved_gemini_calls"]}}
     filtered = dict(menzo_output)
     filtered["selected"] = passed
     filtered["andrea"] = result
     filtered["handoff"] = dict(filtered.get("handoff") if isinstance(filtered.get("handoff"), dict) else {})
-    filtered["handoff"].update({"to_bob_or_v92": len(passed), "andrea_checked": summary["checked"], "andrea_passed": summary["passed"], "andrea_blocked": summary["blocked"], "andrea_saved_gemini_calls": summary["saved_gemini_calls"], "andrea_passed_with_exception": summary["passed_with_exception"], "andrea_block_reasons": sorted({x.get("reason") for x in items if not x.get("ok")})})
+    filtered["handoff"].update({"to_bob_or_v92": len(passed), "andrea_checked": summary["checked"], "andrea_passed": summary["passed"], "andrea_blocked": summary["blocked"], "andrea_saved_gemini_calls": summary["saved_gemini_calls"], "andrea_passed_with_exception": summary["passed_with_exception"], "andrea_exception_reasons": summary["exception_reasons"], "andrea_fetch_performed": summary["andrea_fetch_performed"], "andrea_bob_may_reextract": summary["bob_may_reextract"], "andrea_block_reasons": sorted({x.get("reason") for x in items if not x.get("ok")})})
     result["menzo_handoff_to_bob"] = filtered["handoff"]
     write_json(ARTIFACT_FILE, result)
     write_json(STATE_FILE, result)

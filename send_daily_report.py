@@ -372,41 +372,74 @@ def newest_daily_editorial_judgment_markdown() -> Path | None:
     return max(matches, key=lambda path: (path.stat().st_mtime, path.name)) if matches else None
 
 
-def daily_editorial_judgment_body_section(json_path: Path = DAILY_JUDGMENT_LATEST_JSON) -> str:
-    """Build the compact email-body section from the latest judgment JSON."""
+def daily_editorial_judgment_body_section(
+    json_path: Path = DAILY_JUDGMENT_LATEST_JSON,
+    warning: str | None = None,
+) -> str:
+    """Build the authoritative compact editorial section for the daily email."""
     if not json_path.exists():
-        return ""
+        return "\nSINTESI EDITORIALE AUTOREVOLE\n- Stato: non disponibile.\n"
     try:
         payload: dict[str, Any] = json.loads(json_path.read_text(encoding="utf-8"))
     except Exception as exc:
         print(f"[DAILY JUDGMENT] skipped/error JSON read failed: {exc}")
-        return f"\nDAILY EDITORIAL JUDGMENT\n- JSON read failed: {exc}\n"
+        return f"\nSINTESI EDITORIALE AUTOREVOLE\n- JSON non leggibile: {exc}\n"
 
     daily_numbers = payload.get("daily_numbers") if isinstance(payload.get("daily_numbers"), dict) else {}
-    alfred = daily_numbers.get("alfred")
-    if not isinstance(alfred, dict):
-        alfred = {}
-    warnings = alfred.get("warnings")
-    blockers = alfred.get("blockers")
-    if warnings is None:
-        warnings = daily_numbers.get("alfred_warnings")
-    if blockers is None:
-        blockers = daily_numbers.get("alfred_blockers")
-    gemini_total = payload.get("gemini_3_5_called_total")
-    if gemini_total is None:
-        gemini_total = daily_numbers.get("gemini_3_5_called_total")
+    canonical = daily_numbers.get("canonical_metrics") if isinstance(daily_numbers.get("canonical_metrics"), dict) else {}
+    menzo = canonical.get("menzo") if isinstance(canonical.get("menzo"), dict) else {}
+    andrea = canonical.get("andrea") if isinstance(canonical.get("andrea"), dict) else {}
+    alfred = canonical.get("alfred") if isinstance(canonical.get("alfred"), dict) else {}
+    analysis = payload.get("translation_warning_analysis") if isinstance(payload.get("translation_warning_analysis"), dict) else {}
+    analysis_available = analysis.get("available")
+    if analysis_available is None:
+        analysis_available = bool(analysis) and any(
+            key in analysis
+            for key in ("reproduced", "insufficient_material", "possible_false_positive", "technical")
+        )
+    warning_value = lambda key: analysis.get(key, 0) if analysis_available else "n.d."
+
+    ratio = menzo.get("handoff_to_publication_ratio")
+    ratio_label = f"{ratio:.1%}" if isinstance(ratio, (int, float)) else "non disponibile"
+
+    andrea_events = andrea.get("events") if isinstance(andrea.get("events"), dict) else {}
+    andrea_reasons = andrea.get("exception_reasons") if isinstance(andrea.get("exception_reasons"), dict) else {}
+    andrea_available = andrea.get("available") is True
+    if andrea_available:
+        andrea_coverage = f"{andrea.get('covered_runs', 0)}/{andrea.get('total_runs', 0)} run"
+        andrea_counts = "{}/{}/{}/{}".format(
+            andrea_events.get("checked", 0),
+            andrea_events.get("passed", 0),
+            andrea_events.get("passed_with_exception", 0),
+            andrea_events.get("blocked", 0),
+        )
+        reasons_label = ", ".join(
+            f"{name} ({count})"
+            for name, count in sorted(andrea_reasons.items(), key=lambda item: (-int(item[1]), item[0]))
+        ) or "nessuna"
+    else:
+        andrea_coverage = "non ancora disponibile"
+        andrea_counts = "n.d."
+        reasons_label = "n.d."
 
     lines = [
         "",
-        "DAILY EDITORIAL JUDGMENT",
-        f"- judgment: {payload.get('judgment', 'n.d.')}",
-        f"- day_type: {payload.get('day_type', 'n.d.')}",
-        f"- summary: {payload.get('summary', 'n.d.')}",
-        f"- news_published: {daily_numbers.get('news_published', 'n.d.')}",
-        f"- reports_published: {daily_numbers.get('reports_published', 'n.d.')}",
-        f"- Alfred warnings/blockers: {warnings if warnings is not None else 'n.d.'}/{blockers if blockers is not None else 'n.d.'}",
-        f"- gemini_3_5_called_total: {gemini_total if gemini_total is not None else 'n.d.'}",
+        "SINTESI EDITORIALE AUTOREVOLE",
+        f"- Giudizio: {payload.get('judgment', 'n.d.')}",
+        f"- Tipo di giornata: {payload.get('day_type', 'n.d.')}",
+        f"- Sintesi: {payload.get('summary', 'n.d.')}",
+        f"- Pubblicazioni uniche: {daily_numbers.get('news_published', 'n.d.')} news / {daily_numbers.get('reports_published', 'n.d.')} report",
+        f"- Menzo candidati unici actionable: {menzo.get('unique_actionable_candidates', 'n.d.')}",
+        f"- Menzo handoff unici / pubblicazioni finali uniche: {menzo.get('unique_downstream_handoffs', 'n.d.')}/{menzo.get('unique_final_publications', 'n.d.')}",
+        f"- Rapporto handoff/pubblicazioni Menzo: {ratio_label}",
+        f"- Warning confermati / materiale insufficiente / possibili falsi positivi / tecnici: {warning_value('reproduced')}/{warning_value('insufficient_material')}/{warning_value('possible_false_positive')}/{warning_value('technical')}",
+        f"- Alfred articoli revisionati / con warning / blocker finali unici: {alfred.get('articles_reviewed', 'n.d.')}/{alfred.get('articles_with_warnings', 'n.d.')}/{alfred.get('final_blockers', 'n.d.')}",
+        f"- Andrea copertura: {andrea_coverage}",
+        f"- Andrea checked/passed/con eccezione/blocked: {andrea_counts}",
+        f"- Ragioni eccezioni Andrea: {reasons_label}",
     ]
+    if warning:
+        lines.append(f"- Avviso diagnostico: {warning}")
     return "\n".join(lines) + "\n"
 
 
