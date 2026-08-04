@@ -6,6 +6,7 @@ from pathlib import Path
 
 from agents import andrea_policy_v94_15 as andrea_policy
 from agents.master_log_v93_19 import build_master_record
+from scripts.daily_editorial_judgment import render_markdown
 from scripts.observability_snapshot import build_snapshot
 from scripts.patch_runtime_daily_report_v95_19_3 import transform
 from send_daily_report import daily_editorial_judgment_body_section
@@ -255,3 +256,146 @@ def test_runtime_patcher_is_fail_closed_and_idempotent():
     same, second_changes = transform(patched)
     assert same == patched
     assert second_changes == ["already_patched"]
+
+
+
+def test_email_body_renders_missing_menzo_metrics_as_nd(tmp_path):
+    path = tmp_path / "judgment_missing_menzo.json"
+    path.write_text(
+        json.dumps(
+            {
+                "daily_numbers": {
+                    "canonical_metrics": {
+                        "menzo": {
+                            "unique_actionable_candidates": None,
+                            "unique_downstream_handoffs": None,
+                            "unique_final_publications": None,
+                        }
+                    }
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    text = daily_editorial_judgment_body_section(path)
+
+    assert "Menzo candidati unici actionable: n.d." in text
+    assert (
+        "Menzo handoff unici / pubblicazioni finali uniche: n.d./n.d."
+        in text
+    )
+    assert "None" not in text
+
+
+def test_email_body_preserves_zero_menzo_metrics(tmp_path):
+    path = tmp_path / "judgment_zero_menzo.json"
+    path.write_text(
+        json.dumps(
+            {
+                "daily_numbers": {
+                    "canonical_metrics": {
+                        "menzo": {
+                            "unique_actionable_candidates": 0,
+                            "unique_downstream_handoffs": 0,
+                            "unique_final_publications": 0,
+                        }
+                    }
+                }
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    text = daily_editorial_judgment_body_section(path)
+
+    assert "Menzo candidati unici actionable: 0" in text
+    assert (
+        "Menzo handoff unici / pubblicazioni finali uniche: 0/0"
+        in text
+    )
+
+
+def _minimal_markdown_report(canonical_andrea):
+    return {
+        "story": {
+            "duplicate_candidates": 0,
+            "same_story_clusters": 0,
+            "same_event_clusters": 0,
+            "story_reviews": 0,
+            "pairs_above_threshold": 0,
+            "suspicious_pairs": [],
+            "story_review_items": [],
+        },
+        "canonical_menzo": {},
+        "canonical_andrea": canonical_andrea,
+        "canonical_alfred": {},
+        "canonical_gemini": {},
+        "canonical_simone": {},
+        "translation_warning_analysis": {
+            "available": False,
+            "top_warning_codes": [],
+            "top_investigations": [],
+            "diagnostic_errors": [],
+        },
+        "gemini_called": None,
+        "judgment": "BUONO",
+        "day_type": "standard",
+        "summary": "Sintesi.",
+        "runs_completed": None,
+        "news_published_count": 0,
+        "reports_published_count": 0,
+        "article_types": {},
+        "hard_count": 0,
+        "soft_count": 0,
+        "softpool": False,
+        "observability_snapshot": {},
+        "selected": [],
+        "pending": [],
+        "skipped": [],
+        "top_discarded": [],
+        "borderline": [],
+        "news_records": [],
+        "report_records": [],
+        "schema_warnings": [],
+    }
+
+
+def test_markdown_reports_unavailable_andrea_as_unavailable():
+    text = render_markdown(_minimal_markdown_report({}))
+
+    assert "Andrea event coverage: unavailable" in text
+    assert (
+        "Andrea checked/passed/passed with exception/blocked events: "
+        "n.d./n.d./n.d./n.d."
+        in text
+    )
+    assert "Andrea exception reason occurrences: unavailable" in text
+    assert "Andrea exception reason occurrences: none recorded" not in text
+
+
+def test_markdown_reports_authoritative_andrea_without_reasons_as_none_recorded():
+    text = render_markdown(
+        _minimal_markdown_report(
+            {
+                "available": True,
+                "covered_runs": 2,
+                "total_runs": 2,
+                "events": {
+                    "checked": 3,
+                    "passed": 3,
+                    "passed_with_exception": 0,
+                    "blocked": 0,
+                },
+                "exception_reasons": {},
+            }
+        )
+    )
+
+    assert "Andrea event coverage: 2/2 runs" in text
+    assert (
+        "Andrea checked/passed/passed with exception/blocked events: "
+        "3/3/0/0"
+        in text
+    )
+    assert "Andrea exception reason occurrences: none recorded" in text

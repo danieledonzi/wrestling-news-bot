@@ -957,10 +957,30 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- Possible false positives: {warning_value('possible_false_positive')}",
         f"- Technical/media signals: {warning_value('technical')}",
     ]
-    andrea_events = andrea_metrics.get("events") if isinstance(andrea_metrics.get("events"), dict) else {}
-    andrea_reasons = andrea_metrics.get("exception_reasons") if isinstance(andrea_metrics.get("exception_reasons"), dict) else {}
-    andrea_coverage = f"{andrea_metrics.get('covered_runs', 0)}/{andrea_metrics.get('total_runs', 0)} runs" if andrea_metrics else "unavailable"
-    andrea_reason_label = ", ".join(f"{reason} ({count})" for reason, count in sorted(andrea_reasons.items())) or "none recorded"
+    andrea_available = andrea_metrics.get("available") is True
+    if andrea_available:
+        andrea_events = (
+            andrea_metrics.get("events")
+            if isinstance(andrea_metrics.get("events"), dict)
+            else {}
+        )
+        andrea_reasons = (
+            andrea_metrics.get("exception_reasons")
+            if isinstance(andrea_metrics.get("exception_reasons"), dict)
+            else {}
+        )
+        andrea_coverage = (
+            f"{andrea_metrics.get('covered_runs', 0)}/"
+            f"{andrea_metrics.get('total_runs', 0)} runs"
+        )
+        andrea_reason_label = ", ".join(
+            f"{reason} ({count})"
+            for reason, count in sorted(andrea_reasons.items())
+        ) or "none recorded"
+    else:
+        andrea_events = {}
+        andrea_coverage = "unavailable"
+        andrea_reason_label = "unavailable"
     andrea_lines = [
         f"- Andrea event coverage: {andrea_coverage}",
         f"- Andrea checked/passed/passed with exception/blocked events: {_num(andrea_events.get('checked'))}/{_num(andrea_events.get('passed'))}/{_num(andrea_events.get('passed_with_exception'))}/{_num(andrea_events.get('blocked'))}",

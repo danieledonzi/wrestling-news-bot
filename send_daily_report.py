@@ -372,6 +372,11 @@ def newest_daily_editorial_judgment_markdown() -> Path | None:
     return max(matches, key=lambda path: (path.stat().st_mtime, path.name)) if matches else None
 
 
+def _daily_metric_label(value: Any) -> str:
+    """Render missing canonical metrics as n.d. without hiding a real zero."""
+    return str(value) if value is not None else "n.d."
+
+
 def daily_editorial_judgment_body_section(
     json_path: Path = DAILY_JUDGMENT_LATEST_JSON,
     warning: str | None = None,
@@ -429,8 +434,10 @@ def daily_editorial_judgment_body_section(
         f"- Tipo di giornata: {payload.get('day_type', 'n.d.')}",
         f"- Sintesi: {payload.get('summary', 'n.d.')}",
         f"- Pubblicazioni uniche: {daily_numbers.get('news_published', 'n.d.')} news / {daily_numbers.get('reports_published', 'n.d.')} report",
-        f"- Menzo candidati unici actionable: {menzo.get('unique_actionable_candidates', 'n.d.')}",
-        f"- Menzo handoff unici / pubblicazioni finali uniche: {menzo.get('unique_downstream_handoffs', 'n.d.')}/{menzo.get('unique_final_publications', 'n.d.')}",
+        f"- Menzo candidati unici actionable: {_daily_metric_label(menzo.get('unique_actionable_candidates'))}",
+        "- Menzo handoff unici / pubblicazioni finali uniche: "
+        f"{_daily_metric_label(menzo.get('unique_downstream_handoffs'))}/"
+        f"{_daily_metric_label(menzo.get('unique_final_publications'))}",
         f"- Rapporto handoff/pubblicazioni Menzo: {ratio_label}",
         f"- Warning confermati / materiale insufficiente / possibili falsi positivi / tecnici: {warning_value('reproduced')}/{warning_value('insufficient_material')}/{warning_value('possible_false_positive')}/{warning_value('technical')}",
         f"- Alfred articoli revisionati / con warning / blocker finali unici: {alfred.get('articles_reviewed', 'n.d.')}/{alfred.get('articles_with_warnings', 'n.d.')}/{alfred.get('final_blockers', 'n.d.')}",
