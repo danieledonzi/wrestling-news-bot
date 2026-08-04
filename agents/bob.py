@@ -249,13 +249,26 @@ def assess_body_completeness(root: Tag, elements: list[dict[str, Any]], soup: Be
     structured_terms=set(re.findall(r"[a-z0-9à-ÿ]{3,}",structured.lower()))
     structured_overlap = len(extracted_terms & structured_terms) / max(1,len(structured_terms)) if structured_terms else None
     marker_re = re.compile(r"\b(?:continue\s+reading\s+with\s+a\s+subscription|unlock\s+this\s+article|subscribe\s+to\s+unlock|become\s+a\s+member\s+to\s+read|access\s+the\s+full\s+article|this\s+article\s+is\s+for\s+subscribers|(?:subscribe|sign\s+in|log\s+in|register)\s+to\s+(?:continue|read)|already\s+a\s+subscriber|remaining\s+content|content\s+is\s+(?:only\s+)?for\s+(?:subscribers|members)|paywall)\b", re.I)
-    markers = sorted(set(m.group(0).lower() for text in (root_text,page_text) for m in marker_re.finditer(text)))
+    root_markers = sorted(set(m.group(0).lower() for m in marker_re.finditer(root_text)))
+    page_markers = sorted(set(m.group(0).lower() for m in marker_re.finditer(page_text)))
     wall_attr_re=re.compile(r"(?:^|[-_\s])(?:paywall|subscriber-only|locked-content|metered-content|premium-content)(?:$|[-_\s])",re.I)
-    wall_dom_signals=[]
+    associated_dom_signals=[]; page_dom_signals=[]
+    root_related=[]
+    if root:
+        root_related=[root,*list(root.parents),*list(root.find_all(True))]
+        # Root descendants and ancestors are associated with the selected article.
+        # Unrelated page chrome (sidebars/footers) is intentionally excluded here.
     for node in soup.find_all(attrs={"class":True})+soup.find_all(attrs={"id":True}):
         attrs=node_classes(node)
-        if wall_attr_re.search(attrs): wall_dom_signals.append(attrs[:300])
-    wall_dom_signals=sorted(set(wall_dom_signals))
+        if not wall_attr_re.search(attrs):
+            continue
+        page_dom_signals.append(attrs[:300])
+        if node in root_related:
+            associated_dom_signals.append(attrs[:300])
+    wall_dom_signals=sorted(set(associated_dom_signals))
+    page_only_dom_signals=sorted(set(page_dom_signals)-set(wall_dom_signals))
+    page_wide_restriction=bool((page_markers and wall_dom_signals) or len(page_dom_signals)>=2)
+    markers = root_markers or (page_markers if page_wide_restriction else [])
     root_is_document_fallback = getattr(root, "name", "") in {"body", "html", "[document]"}
     structured_verifies = bool(structured and structured_coverage is not None and structured_coverage >= 0.80 and structured_overlap is not None and structured_overlap >= 0.75)
     dom_verifies = bool(not root_is_document_fallback and root_coverage >= 0.55)
@@ -273,7 +286,7 @@ def assess_body_completeness(root: Tag, elements: list[dict[str, Any]], soup: Be
         "structured_coverage_ratio": round(structured_coverage, 4) if structured_coverage is not None else None,
         "structured_token_overlap_ratio": round(structured_overlap, 4) if structured_overlap is not None else None,
         "structured_article_body": structured if structured_verifies else "", "truncation_access_markers": markers,
-        "access_wall_dom_signals":wall_dom_signals,
+        "access_wall_dom_signals":wall_dom_signals, "page_access_wall_markers":page_markers, "page_unassociated_access_wall_dom_signals":page_only_dom_signals,
         "selected_root_name": getattr(root, "name", ""), "selected_root_classes": node_classes(root)[:300] if root else "",
     }
 

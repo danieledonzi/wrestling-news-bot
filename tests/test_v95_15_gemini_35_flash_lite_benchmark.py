@@ -311,7 +311,7 @@ def test_expected_material_fact_tolerates_wording_but_rejects_different_fact(too
     assert good_diag["structured_output_valid"] and good_diag["expected_passed"]
     different={"comparisons":[{"current_id":"c0","published_id":"p0","decision":"DUPLICATE","shared_facts":["match"],"new_fact":"","reason":"same"},{"current_id":"c1","published_id":"p0","decision":"MATERIAL_UPDATE","temporal_basis":"BECAME_KNOWN_AFTER","temporal_evidence_excerpt":"WWE officially changed the Lyra Valkyria title match date to Sunday in Boston after the earlier Chicago announcement was cancelled","shared_facts":["match"],"new_fact":"officially changed match location to Boston after Chicago cancellation","reason":"location"},{"current_id":"c2","published_id":"p0","decision":"NO_MATCH","shared_facts":[],"new_fact":"","reason":"distinct"}]}
     _,different_diag=tool.validate_output("menzo",json.dumps(different),prepared["context"])
-    assert different_diag["structured_output_valid"] and not different_diag["expected_passed"]
+    assert not different_diag["structured_output_valid"] and different_diag["validation_error"]=="invalid_temporal_evidence"
     automatic={"cases":1,"baseline":{"structured_output_rate":1},"candidate":{"structured_output_rate":1,"critical_expected_rate":0,"human_unique_story_losses":0,"unique_stories_lost":0,"missing_survivors":0,"survivor_outside_payload":0,"overlapping_groups":0,"groups_discarding_all":0,"generic_material_updates":0}}
     assert tool.gate_menzo(automatic)=="REJECT"
 def test_report_uses_models_from_run_manifest(tool,tmp_path):

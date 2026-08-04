@@ -1780,9 +1780,46 @@ def material_update_is_grounded(new_fact: str, current: dict[str, Any], publishe
     return grounding >= 0.6 and already_present < 0.8
 
 
-def temporal_update_is_grounded(basis: str, excerpt: str, current: dict[str, Any], published: dict[str, Any]) -> bool:
+def temporal_evidence_supports_new_fact(new_fact: str, excerpt: str) -> bool:
+    fact=normalize_text(new_fact).lower().strip(" .")
+    evidence=normalize_text(excerpt).lower().strip(" .")
+    if not fact or not evidence:
+        return False
+    if fact in evidence:
+        return True
+    fact_tokens=_content_tokens(fact); evidence_tokens=_content_tokens(evidence)
+    if len(fact_tokens) < 2 or len(evidence_tokens) < 2:
+        return False
+    overlap=len(fact_tokens & evidence_tokens) / max(1, len(fact_tokens))
+    action_re=re.compile(r"\b(?:announced|confirmed|revealed|reported|disclosed|stated|occurred|happened|took|underwent|returned|debuted|signed|injured|released|changed|challenged|appeared|won|lost)\b")
+    fact_actions=set(action_re.findall(fact)); evidence_actions=set(action_re.findall(evidence))
+    fact_entities={t for t in re.findall(r"\b[A-Z][a-zA-Z0-9'’-]{2,}\b", new_fact)}
+    evidence_entities={t for t in re.findall(r"\b[A-Z][a-zA-Z0-9'’-]{2,}\b", excerpt)}
+    entity_ok=not fact_entities or bool(fact_entities & evidence_entities)
+    action_ok=not fact_actions or bool(fact_actions & evidence_actions)
+    return overlap >= 0.8 or (overlap >= 0.65 and entity_ok and action_ok)
+
+
+def _dated_after_previous_near_disclosure(low: str, previous_dt: datetime) -> bool:
+    disclosure_re=r"(?:announced|confirmed|revealed|reported|disclosed|officially\s+stated|officially\s+confirmed|officially\s+announced|officially\s+changed)"
+    for m in re.finditer(r"\b(january|february|march|april|may|june|july|august|september|october|november|december)\s+(\d{1,2})(?:,?\s+(20\d{2}))?\b",low):
+        try:
+            occurred=datetime.strptime(f"{m.group(1)} {m.group(2)} {m.group(3) or previous_dt.year}","%B %d %Y").replace(tzinfo=timezone.utc)
+        except ValueError:
+            continue
+        if occurred.date() <= previous_dt.date():
+            continue
+        window=low[max(0,m.start()-80):min(len(low),m.end()+120)]
+        if re.search(disclosure_re,window) and not re.search(r"\b(?:will|scheduled|takes?\s+place|set\s+for|on\s+sale|match)\b.{0,40}"+re.escape(m.group(0)),window):
+            return True
+    return False
+
+
+def temporal_update_is_grounded(basis: str, excerpt: str, current: dict[str, Any], published: dict[str, Any], new_fact: str = "") -> bool:
     basis=str(basis or "").upper(); evidence=normalize_text(excerpt).strip()
     if basis not in {"OCCURRED_AFTER","BECAME_KNOWN_AFTER"} or not evidence or len(evidence)>500:
+        return False
+    if new_fact and not temporal_evidence_supports_new_fact(new_fact, evidence):
         return False
     current_dt=parse_dt(current.get("published_at")); previous_dt=parse_dt(published.get("published_at"))
     if not current_dt or not previous_dt or current_dt <= previous_dt:
@@ -1793,7 +1830,7 @@ def temporal_update_is_grounded(basis: str, excerpt: str, current: dict[str, Any
     if len(evidence_tokens & previous_tokens)/len(evidence_tokens)>=0.6:
         return False
     low=evidence.lower()
-    relational=bool(re.search(r"\bafter\s+(?:the\s+)?(?:earlier|previous|prior)(?:\s+\w+){0,3}\s+(?:publication|report|announcement|story)\b",low))
+    relational=bool(re.search(r"\b(?:after|following|since)\s+(?:the\s+)?(?:earlier|previous|prior)(?:\s+\w+){0,3}\s+(?:publication|report|announcement|story)\b",low))
     dated=False
     for month,day,year in re.findall(r"\b(january|february|march|april|may|june|july|august|september|october|november|december)\s+(\d{1,2})(?:,?\s+(20\d{2}))?\b",low):
         try:
@@ -1802,7 +1839,8 @@ def temporal_update_is_grounded(basis: str, excerpt: str, current: dict[str, Any
         except ValueError: pass
     if basis=="BECAME_KNOWN_AFTER":
         disclosure=bool(re.search(r"\b(?:announced|confirmed|revealed|reported|disclosed|officially\s+stated|officially\s+confirmed|officially\s+announced|officially\s+changed)\b",low))
-        return disclosure and (relational or dated or bool(re.search(r"\b(?:now|today|subsequently|since\s+the\s+(?:earlier|previous|prior)\s+(?:report|publication|story))\b",low)))
+        relative_disclosure=bool(re.search(r"\b(?:now|today|subsequently)\b.{0,80}\b(?:announced|confirmed|revealed|reported|disclosed|officially\s+stated|officially\s+confirmed|officially\s+announced|officially\s+changed)\b",low)) or bool(re.search(r"\b(?:announced|confirmed|revealed|reported|disclosed|officially\s+stated|officially\s+confirmed|officially\s+announced|officially\s+changed)\b.{0,80}\b(?:now|today|subsequently)\b",low))
+        return disclosure and (relational or relative_disclosure or _dated_after_previous_near_disclosure(low, previous_dt))
     occurrence=bool(re.search(r"\b(?:occurred|happened|took\s+place|underwent|returned|debuted|signed|was\s+injured|was\s+released)\b",low))
     return occurrence and (relational or dated)
 
@@ -1861,7 +1899,7 @@ def validate_recent_history_batch(data: Any, current_records: dict[str, dict[str
         if not reason or not isinstance(shared,list): return None, "invalid_audit_fields"
         if dec in {"DUPLICATE","MATERIAL_UPDATE"} and not any(str(x).strip() for x in shared): return None, "missing_shared_facts"
         if dec in {"DUPLICATE","NO_MATCH"} and (nf or basis or excerpt): return None, "unexpected_novelty_evidence"
-        if dec == "MATERIAL_UPDATE" and not temporal_update_is_grounded(basis,excerpt,current_records[cid],published_records[pid]): return None, "invalid_temporal_evidence"
+        if dec == "MATERIAL_UPDATE" and not temporal_update_is_grounded(basis,excerpt,current_records[cid],published_records[pid],nf): return None, "invalid_temporal_evidence"
         if dec == "MATERIAL_UPDATE" and not material_update_is_grounded(nf, current_records[cid], published_records[pid]): return None, "invalid_material_update"
         seen.add(pair); out.append({"current_id": cid, "published_id": pid, "decision": dec, "shared_facts": shared, "new_fact": nf, "temporal_basis":basis, "temporal_evidence_excerpt":excerpt, "reason":reason})
     if explicit and seen != expected: return None, "incomplete_comparisons"

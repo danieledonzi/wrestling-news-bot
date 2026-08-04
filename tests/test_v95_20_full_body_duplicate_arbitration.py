@@ -261,3 +261,46 @@ def test_older_descriptive_detail_in_newer_article_is_not_material_update():
     response={"comparisons":[{"current_id":"c0","published_id":"p0","decision":"MATERIAL_UPDATE","shared_facts":["same Raw return segment"],"new_fact":"Becky Lynch wore a red coat","temporal_basis":"BECAME_KNOWN_AFTER","temporal_evidence_excerpt":"Becky Lynch returned in the same Raw segment wearing a red coat","reason":"The later article adds the coat description"}]}
     decisions,error=menzo.validate_recent_history_batch(response,{"c0":cur},{"p0":pub})
     assert decisions is None and error=="invalid_temporal_evidence"
+
+def test_temporal_evidence_must_support_same_new_fact():
+    now=datetime(2026,8,6,tzinfo=timezone.utc)
+    old=with_body({"source_url":"https://old-mixed","published_at":(now-timedelta(days=2)).isoformat()},"Raw featured Becky Lynch challenging Liv Morgan after the segment.")
+    current=with_body({"source_url":"https://new-mixed","published_at":now.isoformat()},"On August 6, WWE announced CM Punk underwent knee surgery. The same report also notes Becky Lynch wore a red coat during the older Raw segment with Liv Morgan.")
+    cur=menzo.compact_candidate_record(current,"c0"); pub=menzo.compact_published_record(old,"p0")
+    response={"comparisons":[{"current_id":"c0","published_id":"p0","decision":"MATERIAL_UPDATE","shared_facts":["Raw segment"],"new_fact":"Becky Lynch wore a red coat","temporal_basis":"BECAME_KNOWN_AFTER","temporal_evidence_excerpt":"On August 6, WWE announced CM Punk underwent knee surgery","reason":"Uses separate new announcement as timing evidence for an older omitted detail"}]}
+    decisions,error=menzo.validate_recent_history_batch(response,{"c0":cur},{"p0":pub})
+    assert decisions is None and error=="invalid_temporal_evidence"
+
+
+def test_became_known_after_requires_date_tied_to_disclosure_not_future_event_date():
+    now=datetime(2026,8,6,tzinfo=timezone.utc)
+    old=with_body({"source_url":"https://old-date","published_at":(now-timedelta(days=2)).isoformat()},"The earlier report covered the feud and noted no match announcement.")
+    current=with_body({"source_url":"https://new-date","published_at":now.isoformat()},"WWE announced today that the Morgan versus Vaquer match will take place on August 10 after weeks of tension.")
+    cur=menzo.compact_candidate_record(current,"c0"); pub=menzo.compact_published_record(old,"p0")
+    valid={"comparisons":[{"current_id":"c0","published_id":"p0","decision":"MATERIAL_UPDATE","shared_facts":["Morgan and Vaquer feud"],"new_fact":"WWE announced today that the Morgan versus Vaquer match will take place on August 10","temporal_basis":"BECAME_KNOWN_AFTER","temporal_evidence_excerpt":"WWE announced today that the Morgan versus Vaquer match will take place on August 10","reason":"The announcement is tied to today"}]}
+    assert menzo.validate_recent_history_batch(valid,{"c0":cur},{"p0":pub})[0]
+    invalid={"comparisons":[{"current_id":"c0","published_id":"p0","decision":"MATERIAL_UPDATE","shared_facts":["Morgan and Vaquer feud"],"new_fact":"the Morgan versus Vaquer match will take place on August 10","temporal_basis":"BECAME_KNOWN_AFTER","temporal_evidence_excerpt":"the Morgan versus Vaquer match will take place on August 10","reason":"Treats the future match date as disclosure timing"}]}
+    decisions,error=menzo.validate_recent_history_batch(invalid,{"c0":cur},{"p0":pub})
+    assert decisions is None and error=="invalid_temporal_evidence"
+
+
+def test_unrelated_footer_access_wall_text_does_not_block_complete_article():
+    from agents import bob
+    article="A free wrestling report with complete central facts, chronology, people, result, context, quotes, and editorial details. "*8
+    html=f"<html><body><article><p>{article}</p></article><footer>Subscribe to unlock premium content in our archives.</footer></body></html>"
+    _meta,_raw,elements,_removed,diagnostics=bob.extract_elements("https://source.test/free-footer",html)
+    assert "subscribe to unlock" in " ".join(diagnostics["page_access_wall_markers"]).lower()
+    assert diagnostics["truncation_access_markers"]==[]
+    assert diagnostics["body_complete"] is True
+    assert source_body.valid_contract(source_body.contract_from_elements("https://source.test/free-footer",elements,diagnostics))
+
+
+def test_unrelated_sidebar_premium_class_does_not_block_complete_article():
+    from agents import bob
+    article="A free wrestling report with complete central facts, chronology, people, result, context, quotes, and editorial details. "*8
+    html=f'<html><body><main><article><p>{article}</p></article><aside class="premium-content">Members get extra newsletters here.</aside></main></body></html>'
+    _meta,_raw,elements,_removed,diagnostics=bob.extract_elements("https://source.test/free-sidebar",html)
+    assert diagnostics["page_unassociated_access_wall_dom_signals"]
+    assert diagnostics["access_wall_dom_signals"]==[]
+    assert diagnostics["body_complete"] is True
+    assert source_body.valid_contract(source_body.contract_from_elements("https://source.test/free-sidebar",elements,diagnostics))
