@@ -86,7 +86,8 @@ def test_daily_judgment_renders_canonical_labels_and_old_data(monkeypatch):
     report["canonical_simone"] = {"legacy_errors_diagnostic": 4}
     text = dej.render_markdown(report)
     assert "Menzo handoff-to-publication ratio: unavailable" in text
-    assert "Alfred articles reviewed/articles with warnings/warning events/warning occurrences" in text
+    assert "Alfred articles reviewed/articles with warnings/final unique blockers" in text
+    assert "Legacy Alfred warning total" not in text
     assert "Gemini 3.5 attempts/completed/failed/avoided: 2/1/1/1" in text
     assert "Simone legacy errors (diagnostic; not terminal): 4" in text
 
@@ -265,8 +266,8 @@ def test_daily_judgment_legacy_alfred_is_diagnostic_only():
     report["canonical_alfred"] = {}
     report["legacy_warnings"] = 9
     text = dej.render_markdown(report)
-    assert "Alfred articles reviewed/articles with warnings/warning events/warning occurrences/final unique blockers: n.d./n.d./n.d./n.d./n.d." in text
-    assert "Legacy Alfred warning total (diagnostic): 9" in text
+    assert "Alfred articles reviewed/articles with warnings/final unique blockers: n.d./n.d./n.d." in text
+    assert "Legacy Alfred warning total" not in text
 
 
 def test_daily_judgment_without_alfred_sources_fabricates_nothing():
@@ -275,5 +276,5 @@ def test_daily_judgment_without_alfred_sources_fabricates_nothing():
     report["canonical_alfred"] = {}
     report["legacy_warnings"] = "n.d."
     text = dej.render_markdown(report)
-    assert "warning events/warning occurrences/final unique blockers: n.d./n.d./n.d." in text
+    assert "Alfred articles reviewed/articles with warnings/final unique blockers: n.d./n.d./n.d." in text
     assert "Legacy Alfred warning total" not in text

@@ -208,6 +208,7 @@ def build_master_record(
     simone_h = safe_handoff(simone)
     simone_pub_h = safe_handoff(simone_publish)
     menzo_h = safe_handoff(menzo)
+    andrea_h = dict(run_summary.get("andrea_handoff") or {}) if isinstance(run_summary.get("andrea_handoff"), dict) else {}
     bob_h = safe_handoff(bob)
     alfred_h = safe_handoff(alfred)
     publisher_h = safe_handoff(publisher)
@@ -280,6 +281,9 @@ def build_master_record(
             "pending_sample_truncated": len(pending_items) > len(pending),
             "skipped_sample": skipped,
             "duplicate_arbitration": duplicate_arbitration,
+        },
+        "andrea": {
+            "handoff": andrea_h,
         },
         "bob": {
             "version": bob.get("version"),

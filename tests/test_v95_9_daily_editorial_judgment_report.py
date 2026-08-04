@@ -926,7 +926,7 @@ def test_borderline_published_dedupes_enriched_published_duplicates() -> None:
     assert payload["borderline_published"][0]["score"] == 72
 
 
-def test_daily_email_summary_reads_nested_alfred_counts(tmp_path: Path) -> None:
+def test_daily_email_summary_reads_canonical_metrics(tmp_path: Path) -> None:
     from send_daily_report import daily_editorial_judgment_body_section
 
     latest = write_json(tmp_path / "latest.json", {
@@ -937,22 +937,42 @@ def test_daily_email_summary_reads_nested_alfred_counts(tmp_path: Path) -> None:
             "news_published": 12,
             "reports_published": 2,
             "alfred": {"warnings": 20, "blockers": 1},
-            "gemini_3_5_called_total": 4,
+            "canonical_metrics": {
+                "menzo": {
+                    "unique_actionable_candidates": 14,
+                    "unique_downstream_handoffs": 12,
+                    "unique_final_publications": 12,
+                    "handoff_to_publication_ratio": 1.0,
+                },
+                "alfred": {
+                    "articles_reviewed": 12,
+                    "articles_with_warnings": 3,
+                    "final_blockers": 0,
+                },
+            },
+        },
+        "translation_warning_analysis": {
+            "available": True,
+            "reproduced": 1,
+            "insufficient_material": 2,
+            "possible_false_positive": 0,
+            "technical": 9,
         },
     })
 
     summary = daily_editorial_judgment_body_section(latest)
 
-    assert "- judgment: GOOD" in summary
-    assert "- day_type: intensa" in summary
-    assert "- summary: Strong news day" in summary
-    assert "- news_published: 12" in summary
-    assert "- reports_published: 2" in summary
-    assert "- Alfred warnings/blockers: 20/1" in summary
-    assert "- gemini_3_5_called_total: 4" in summary
+    assert "- Giudizio: GOOD" in summary
+    assert "- Tipo di giornata: intensa" in summary
+    assert "- Sintesi: Strong news day" in summary
+    assert "- Pubblicazioni uniche: 12 news / 2 report" in summary
+    assert "- Menzo handoff unici / pubblicazioni finali uniche: 12/12" in summary
+    assert "- Warning confermati / materiale insufficiente / possibili falsi positivi / tecnici: 1/2/0/9" in summary
+    assert "- Alfred articoli revisionati / con warning / blocker finali unici: 12/3/0" in summary
+    assert "Alfred warnings/blockers" not in summary
 
 
-def test_daily_email_summary_uses_legacy_flat_alfred_fallback(tmp_path: Path) -> None:
+def test_daily_email_summary_ignores_legacy_flat_alfred_fallback(tmp_path: Path) -> None:
     from send_daily_report import daily_editorial_judgment_body_section
 
     latest = write_json(tmp_path / "latest.json", {
@@ -964,22 +984,18 @@ def test_daily_email_summary_uses_legacy_flat_alfred_fallback(tmp_path: Path) ->
             "reports_published": 1,
             "alfred_warnings": 7,
             "alfred_blockers": 2,
-            "gemini_3_5_called_total": 3,
         },
     })
 
     summary = daily_editorial_judgment_body_section(latest)
 
-    assert "- Alfred warnings/blockers: 7/2" in summary
-    assert "- judgment: OK" in summary
-    assert "- day_type: normale" in summary
-    assert "- summary: Normal day" in summary
-    assert "- news_published: 5" in summary
-    assert "- reports_published: 1" in summary
-    assert "- gemini_3_5_called_total: 3" in summary
+    assert "- Giudizio: OK" in summary
+    assert "- Pubblicazioni uniche: 5 news / 1 report" in summary
+    assert "blocker finali unici: n.d./n.d./n.d." in summary
+    assert "7/2" not in summary
 
 
-def test_daily_email_summary_missing_alfred_values_render_nd(tmp_path: Path) -> None:
+def test_daily_email_summary_missing_canonical_values_render_nd(tmp_path: Path) -> None:
     from send_daily_report import daily_editorial_judgment_body_section
 
     latest = write_json(tmp_path / "latest.json", {
@@ -990,19 +1006,17 @@ def test_daily_email_summary_missing_alfred_values_render_nd(tmp_path: Path) -> 
             "news_published": 0,
             "reports_published": 0,
             "alfred": "unexpected",
-            "gemini_3_5_called_total": 0,
         },
     })
 
     summary = daily_editorial_judgment_body_section(latest)
 
-    assert "- Alfred warnings/blockers: n.d./n.d." in summary
-    assert "- judgment: LOW" in summary
-    assert "- day_type: scarica" in summary
-    assert "- summary: Quiet day" in summary
-    assert "- news_published: 0" in summary
-    assert "- reports_published: 0" in summary
-    assert "- gemini_3_5_called_total: 0" in summary
+    assert "- Giudizio: LOW" in summary
+    assert "- Tipo di giornata: scarica" in summary
+    assert "- Sintesi: Quiet day" in summary
+    assert "- Pubblicazioni uniche: 0 news / 0 report" in summary
+    assert "blocker finali unici: n.d./n.d./n.d." in summary
+    assert "Andrea copertura: non ancora disponibile" in summary
 
 
 def test_translation_quality_audit_email_summary(tmp_path: Path) -> None:
