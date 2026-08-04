@@ -48,7 +48,7 @@ def contract_from_elements(url: str, elements: list[dict[str, Any]], diagnostics
         "sha256": _digest(text),
         "char_count": len(text),
         "provenance": {"extractor": "bob.extract_elements", "source_url": url, "stage": diagnostics.get("stage"), "body_complete": True, "body_complete_reason": diagnostics.get("body_complete_reason")},
-        "coverage": {"extraction_finished": True, "root_text_chars": diagnostics.get("root_text_chars"), "extracted_text_chars": diagnostics.get("extracted_text_chars"), "root_coverage_ratio": diagnostics.get("root_coverage_ratio"), "structured_article_body_chars": diagnostics.get("structured_article_body_chars"), "structured_coverage_ratio": diagnostics.get("structured_coverage_ratio"), "structured_token_overlap_ratio": diagnostics.get("structured_token_overlap_ratio"), "truncation_access_markers": diagnostics.get("truncation_access_markers") or []},
+        "coverage": {"extraction_finished": True, "root_text_chars": diagnostics.get("root_text_chars"), "extracted_text_chars": diagnostics.get("extracted_text_chars"), "root_coverage_ratio": diagnostics.get("root_coverage_ratio"), "structured_article_body_chars": diagnostics.get("structured_article_body_chars"), "structured_coverage_ratio": diagnostics.get("structured_coverage_ratio"), "structured_token_overlap_ratio": diagnostics.get("structured_token_overlap_ratio"), "truncation_access_markers": diagnostics.get("truncation_access_markers") or [], "access_wall_dom_signals": diagnostics.get("access_wall_dom_signals") or []},
     }
 
 

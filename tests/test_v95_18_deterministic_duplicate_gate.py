@@ -9,7 +9,7 @@ from agents import source_body
 
 def article(url, title, summary=None):
     return {"source_url":url,"url":url,"title":title,"summary":summary or title,
-            "decision":"selected","priority":"hard","score":90}
+            "decision":"selected","priority":"hard","score":90,"published_at":datetime.now(timezone.utc).isoformat()}
 
 
 def board(*items): return {"selected":list(items),"pending":[],"skipped":[],"postprocess":{}}
@@ -158,8 +158,8 @@ def test_recent_material_update_and_failure_cooldown(monkeypatch,tmp_path):
     isolate(monkeypatch,tmp_path); now=datetime.now(timezone.utc)
     old={"source_url":"https://old/p","title":"CM Punk match rumored WWE","summary":"CM Punk match rumored for WWE","status":"published","published_at":now.isoformat()}
     (tmp_path/"publisher_history.json").write_text(json.dumps([old]),encoding="utf-8")
-    current=article("https://new/p","WWE officially announced CM Punk match July 30 2026","WWE officially announced CM Punk match on July 30 2026")
-    monkeypatch.setattr(menzo,"call_gemini_json_model",lambda p,m,**k:({"comparisons":[{"current_id":"c0","published_id":"p0","decision":"MATERIAL_UPDATE","shared_facts":["same CM Punk match"],"temporal_evidence":"This fact became known after the earlier publication","new_fact":"WWE officially announced CM Punk match on July 30 2026","reason":"official date"}]},m))
+    current=article("https://new/p","WWE officially announced CM Punk match today","Today WWE officially announced CM Punk match")
+    monkeypatch.setattr(menzo,"call_gemini_json_model",lambda p,m,**k:({"comparisons":[{"current_id":"c0","published_id":"p0","decision":"MATERIAL_UPDATE","shared_facts":["same CM Punk match"],"temporal_basis":"BECAME_KNOWN_AFTER","temporal_evidence_excerpt":"Today WWE officially announced CM Punk match","new_fact":"Today WWE officially announced CM Punk match","reason":"official today"}]},m))
     out=board(dict(current)); menzo.apply_recent_published_duplicate_guard(out)
     assert out["selected"][0]["menzo_duplicate_decision"]=="REAL_UPDATE" and out["selected"][0]["menzo_authorized"] is True
     # Changed material creates a separate suspicious-set identity and invalid output
@@ -341,8 +341,8 @@ def test_recent_pair_audit_fresh_cache_and_material_update(monkeypatch,tmp_path)
         assert audits["https://old/p2"]["gemini_decision"]=="NO_MATCH" and audits["https://old/p2"]["final_disposition"]=="ordinary_pair"
 
     (tmp_path/"cache.json").unlink()
-    update=article("https://new/u","WWE officially confirmed CM Punk surgery on July 30 2026","WWE officially confirmed CM Punk surgery on July 30 2026")
-    monkeypatch.setattr(menzo,"call_gemini_json_model",lambda p,m,**k:({"comparisons":[{"current_id":"c0","published_id":"p0","decision":"NO_MATCH","shared_facts":["injury"],"new_fact":"","reason":"distinct"},{"current_id":"c0","published_id":"p1","decision":"MATERIAL_UPDATE","temporal_evidence":"This fact became known after the earlier publication","shared_facts":["surgery"],"new_fact":"WWE officially confirmed CM Punk surgery on July 30 2026","reason":"official date"}]},m))
+    update=article("https://new/u","WWE officially confirmed CM Punk surgery today","Today WWE officially confirmed CM Punk surgery")
+    monkeypatch.setattr(menzo,"call_gemini_json_model",lambda p,m,**k:({"comparisons":[{"current_id":"c0","published_id":"p0","decision":"NO_MATCH","shared_facts":["injury"],"new_fact":"","reason":"distinct"},{"current_id":"c0","published_id":"p1","decision":"MATERIAL_UPDATE","temporal_basis":"BECAME_KNOWN_AFTER","temporal_evidence_excerpt":"Today WWE officially confirmed CM Punk surgery","shared_facts":["surgery"],"new_fact":"Today WWE officially confirmed CM Punk surgery","reason":"official today"}]},m))
     out=board(update); menzo.apply_recent_published_duplicate_guard(out)
     audits={x["identities"][1]:x for x in out["postprocess"]["duplicate_suspicion_audit"]}
     assert audits["https://old/p1"]["gemini_decision"]=="NO_MATCH" and audits["https://old/p1"]["final_disposition"]=="ordinary_pair"

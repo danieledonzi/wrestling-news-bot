@@ -17,9 +17,9 @@ from typing import Any, Callable
 ROOT = Path(__file__).resolve().parents[1]
 CACHE_FILE = ROOT / "state" / "newsroom" / "menzo_duplicate_arbitration_cache_v2.json"
 CACHE_SCHEMA_VERSION = "2"
-MENZO_DUPLICATE_ARBITRATION_CONTRACT_VERSION = "v95.20-verified-body-auditable-3"
-PROMPT_BUILDER_VERSION = "v95.20-temporal-pair-comparisons-3"
-VALIDATOR_VERSION = "v95.20-semantic-pair-audit-3"
+MENZO_DUPLICATE_ARBITRATION_CONTRACT_VERSION = "v95.20-grounded-temporal-audit-4"
+PROMPT_BUILDER_VERSION = "v95.20-temporal-basis-comparisons-4"
+VALIDATOR_VERSION = "v95.20-grounded-temporal-validator-4"
 MODEL_NAME = "gemini-3.1-flash-lite"
 FAILURE_COOLDOWN_HOURS = float(os.getenv("MENZO_DUPLICATE_FAILURE_COOLDOWN_HOURS", "2"))
 REQUIRED_DECISION_FIELDS = (

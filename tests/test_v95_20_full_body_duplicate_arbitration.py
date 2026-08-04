@@ -1,5 +1,6 @@
 import json
 import sys
+import pytest
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -58,10 +59,10 @@ def test_vaquer_lynch_recent_history_duplicate_is_blocked_with_audit(monkeypatch
     assert source_body.contract_text(old) in prompts[0] and source_body.contract_text(candidate) in prompts[0]
 
 def test_concrete_later_fact_is_material_update(monkeypatch,tmp_path):
-    now=datetime.now(timezone.utc).isoformat(); old=with_body({"source_url":"https://old","title_it":"Punk injured","status":"published","published_at":now},"CM Punk suffered a knee injury and his status was unknown.")
-    cur=with_body({"source_url":"https://new","title":"Punk surgery confirmed"},"On August 4 WWE officially confirmed CM Punk underwent knee surgery after the earlier injury.")
+    current_dt=datetime.now(timezone.utc); old=with_body({"source_url":"https://old","title_it":"Punk injured","status":"published","published_at":(current_dt-timedelta(hours=2)).isoformat()},"CM Punk suffered a knee injury and his status was unknown.")
+    cur=with_body({"source_url":"https://new","title":"Punk surgery confirmed","published_at":current_dt.isoformat()},"Today WWE officially confirmed CM Punk underwent knee surgery after the earlier injury.")
     isolate(monkeypatch,tmp_path,[old]); force_suspicious(monkeypatch)
-    response={"comparisons":[{"current_id":"c0","published_id":"p0","decision":"MATERIAL_UPDATE","temporal_evidence":"This fact became known after the earlier publication","shared_facts":["knee injury"],"new_fact":"On August 4 WWE officially confirmed CM Punk underwent knee surgery","reason":"Surgery became known after publication"}]}
+    response={"comparisons":[{"current_id":"c0","published_id":"p0","decision":"MATERIAL_UPDATE","temporal_basis":"BECAME_KNOWN_AFTER","temporal_evidence_excerpt":"Today WWE officially confirmed CM Punk underwent knee surgery","shared_facts":["knee injury"],"new_fact":"Today WWE officially confirmed CM Punk underwent knee surgery","reason":"Surgery became known after publication"}]}
     monkeypatch.setattr(menzo,"call_gemini_json_model",lambda p,m,**k:(response,m))
     out=board(cur); menzo.apply_recent_published_duplicate_guard(out)
     assert out["selected"][0]["menzo_duplicate_decision"]=="REAL_UPDATE" and out["selected"][0]["menzo_new_fact"]
@@ -170,7 +171,7 @@ def test_recent_validator_rejects_semantically_empty_comparisons():
         {"decision":"NO_MATCH","shared_facts":[],"new_fact":"","reason":""},
         {"decision":"DUPLICATE","shared_facts":[],"new_fact":"","reason":"same"},
         {"decision":"DUPLICATE","shared_facts":["injury"],"new_fact":"extra detail","reason":"same"},
-        {"decision":"MATERIAL_UPDATE","shared_facts":["injury"],"new_fact":"WWE confirmed surgery","reason":"new","temporal_evidence":""},
+        {"decision":"MATERIAL_UPDATE","shared_facts":["injury"],"new_fact":"WWE confirmed surgery","reason":"new","temporal_basis":"BECAME_KNOWN_AFTER","temporal_evidence_excerpt":"This became known after the earlier publication"},
         {"decision":"NO_MATCH","shared_facts":[],"new_fact":"invented","reason":"different"},
     ]
     for comparison in invalid:
@@ -187,6 +188,25 @@ def test_unrelated_structured_body_cannot_verify_partial_dom():
     diagnostics=bob.assess_body_completeness(soup.body,[{"type":"text","text":visible}],soup)
     assert diagnostics["structured_coverage_ratio"] is not None and diagnostics["structured_token_overlap_ratio"] < .75
     assert diagnostics["body_complete"] is False
+
+
+@pytest.mark.parametrize("wall_text",["Continue reading with a subscription","Unlock this article"])
+def test_review_access_wall_examples_force_incomplete_even_with_high_coverage(wall_text):
+    from agents import bob
+    article=("A complete-looking wrestling paragraph with extensive event facts and detailed chronology. "*8)+" "+wall_text
+    html=f"<html><body><article><p>{article}</p></article></body></html>"
+    _meta,_raw,_elements,_removed,diagnostics=bob.extract_elements("https://source.test/wall",html)
+    assert diagnostics["root_coverage_ratio"]>=.55
+    assert diagnostics["truncation_access_markers"] and diagnostics["body_complete"] is False
+
+
+@pytest.mark.parametrize("signal",["paywall","subscriber-only","locked-content","metered-content","premium-content"])
+def test_access_wall_dom_signals_force_incomplete(signal):
+    from agents import bob
+    article="A complete-looking wrestling report with detailed facts, chronology, quotations, participants, and outcome. "*8
+    html=f'<html><body><article><p>{article}</p><div class="{signal}">Restricted</div></article></body></html>'
+    _meta,_raw,_elements,_removed,diagnostics=bob.extract_elements("https://source.test/wall-class",html)
+    assert diagnostics["access_wall_dom_signals"] and diagnostics["body_complete"] is False
 
 
 def test_publisher_history_retains_recent_canonical_and_prunes_duplicate_copies():
@@ -231,3 +251,13 @@ def test_backfill_write_prunes_unrelated_expired_heavy_fields_and_preserves_shap
         assert not (publisher_history_retention.HEAVY_BODY_FIELDS & set(expired_saved))
         for key in ("source_url","published_at","wp_post_id","wp_link","status","title_it","source","story_signature"):
             assert expired_saved[key]==expired[key]
+
+
+def test_older_descriptive_detail_in_newer_article_is_not_material_update():
+    now=datetime.now(timezone.utc)
+    old=with_body({"source_url":"https://old-detail","published_at":(now-timedelta(hours=2)).isoformat()},"Becky Lynch returned in the Raw segment and challenged Liv Morgan before Stephanie Vaquer followed.")
+    current=with_body({"source_url":"https://new-detail","published_at":now.isoformat()},"Becky Lynch returned in the same Raw segment wearing a red coat and challenged Liv Morgan before Stephanie Vaquer followed.")
+    cur=menzo.compact_candidate_record(current,"c0"); pub=menzo.compact_published_record(old,"p0")
+    response={"comparisons":[{"current_id":"c0","published_id":"p0","decision":"MATERIAL_UPDATE","shared_facts":["same Raw return segment"],"new_fact":"Becky Lynch wore a red coat","temporal_basis":"BECAME_KNOWN_AFTER","temporal_evidence_excerpt":"Becky Lynch returned in the same Raw segment wearing a red coat","reason":"The later article adds the coat description"}]}
+    decisions,error=menzo.validate_recent_history_batch(response,{"c0":cur},{"p0":pub})
+    assert decisions is None and error=="invalid_temporal_evidence"

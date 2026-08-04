@@ -1,7 +1,7 @@
 import json
 import pytest
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -36,6 +36,7 @@ def item(title, url, summary="", *, section="selected", score=90):
         "ai_priority_label": "high",
         "decision": section,
         "priority": "hard" if section == "selected" else "soft",
+        "published_at": datetime.now(timezone.utc).isoformat(),
     }
 
 
@@ -105,11 +106,11 @@ def test_recent_history_duplicate_material_update_and_no_match(monkeypatch, tmp_
         prompts.append(prompt)
         if "https://new.test/dup" in prompt:
             return {"comparisons": [{"current_id":"c0","published_id":"p0","decision":"DUPLICATE","shared_facts":["contract"],"new_fact":"","reason":"same fact"}]}, "gemini-3.1-flash-lite"
-        return {"comparisons": [{"current_id":"c0","published_id":"p0","decision":"MATERIAL_UPDATE","temporal_evidence":"This fact became known after the earlier publication","shared_facts":["match"],"new_fact":"WWE officially announced CM Punk vs Cody Rhodes match for SummerSlam on July 30 2026","reason":"rumor official with date"}]}, "gemini-3.1-flash-lite"
+        return {"comparisons": [{"current_id":"c0","published_id":"p0","decision":"MATERIAL_UPDATE","temporal_basis":"BECAME_KNOWN_AFTER","temporal_evidence_excerpt":"Today WWE officially announced CM Punk vs Cody Rhodes match for SummerSlam","shared_facts":["match"],"new_fact":"Today WWE officially announced CM Punk vs Cody Rhodes match for SummerSlam","reason":"rumor became official today"}]}, "gemini-3.1-flash-lite"
     monkeypatch.setattr(menzo, "call_gemini_json_model", arbitrate)
     r = result([
         item("CM Punk signs a new WWE contract", "https://new.test/dup"),
-        item("WWE officially announced CM Punk vs Cody Rhodes at SummerSlam", "https://new.test/update", "WWE officially announced CM Punk vs Cody Rhodes match for SummerSlam on July 30 2026"),
+        item("WWE officially announced CM Punk vs Cody Rhodes at SummerSlam", "https://new.test/update", "Today WWE officially announced CM Punk vs Cody Rhodes match for SummerSlam"),
         item("Cody Rhodes discusses a charity project", "https://new.test/ordinary"),
     ])
     menzo.apply_recent_published_duplicate_guard(r)
