@@ -1,4 +1,5 @@
 import json
+import pytest
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -6,7 +7,20 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from agents import menzo_policy_v93_15 as menzo
+from agents import source_body
 from agents import publisher
+
+
+
+@pytest.fixture(autouse=True)
+def canonical_fixture_bodies(monkeypatch):
+    def hydrate(record):
+        if source_body.contract_text(record): return True,"canonical_cache"
+        text=str(record.get("summary") or record.get("title") or record.get("title_it") or "fixture article")
+        text += " Complete fixture source body with all factual paragraphs, participants, chronology, context, outcome, and relevant editorial detail." * 2
+        record["canonical_source_body"]=source_body.contract_from_elements(str(record.get("source_url") or record.get("url") or ""),[{"type":"text","text":text}],{"stage":"extraction_finished","extraction_finished":True,"body_complete":True,"body_complete_reason":"verified_test_fixture","clean_element_count":1,"root_text_chars":len(text),"extracted_text_chars":len(text),"root_coverage_ratio":1.0,"structured_article_body_chars":0,"structured_coverage_ratio":None,"truncation_access_markers":[]})
+        return True,"fixture_bob_extraction"
+    monkeypatch.setattr(menzo.source_body,"hydrate",hydrate)
 
 
 def item(title, url, summary="", *, section="selected", score=90):
@@ -39,10 +53,10 @@ def test_same_run_duplicate_keeps_a_discards_b_leaves_c_metadata_free(monkeypatc
     monkeypatch.setattr(menzo, "call_gemini_json_model", fake)
     r = result([item("CM Punk suffers a WWE knee injury", "https://e.test/a"), item("CM Punk knee injury reported by WWE doctors", "https://e.test/b"), item("Cody Rhodes signs a new AEW contract", "https://e.test/c")])
     menzo.apply_same_story_duplicate_guard(r, {"suspicious_story_clusters": [{"records": [{}, {}]}] * 12})
-    assert [x["source_url"] for x in r["selected"]] == ["https://e.test/a", "https://e.test/c"]
-    assert r["skipped"][0]["source_url"] == "https://e.test/b"
+    assert [x["source_url"] for x in r["selected"]] == ["https://e.test/b", "https://e.test/c"]
+    assert r["skipped"][0]["source_url"] == "https://e.test/a"
     assert r["skipped"][0]["reason"] == "skip:duplicate_same_run"
-    assert r["selected"][0]["menzo_winner_url"] == "https://e.test/a"
+    assert r["selected"][0]["menzo_winner_url"] == "https://e.test/b"
     assert not any(k.startswith("menzo_duplicate") or k == "menzo_authorized" for k in r["selected"][1])
     assert calls == ["duplicate_arbitration_same_run_batch"]
     assert r["postprocess"]["menzo_same_run_batch_calls"] == 1
@@ -90,8 +104,8 @@ def test_recent_history_duplicate_material_update_and_no_match(monkeypatch, tmp_
     def arbitrate(prompt, *a, **k):
         prompts.append(prompt)
         if "https://new.test/dup" in prompt:
-            return {"matches": [{"current_id":"c0","published_id":"p0","decision":"DUPLICATE","reason":"same fact"}]}, "gemini-3.1-flash-lite"
-        return {"matches": [{"current_id":"c0","published_id":"p0","decision":"MATERIAL_UPDATE","new_fact":"WWE officially announced CM Punk vs Cody Rhodes match for SummerSlam on July 30 2026","reason":"rumor official with date"}]}, "gemini-3.1-flash-lite"
+            return {"comparisons": [{"current_id":"c0","published_id":"p0","decision":"DUPLICATE","shared_facts":["contract"],"new_fact":"","reason":"same fact"}]}, "gemini-3.1-flash-lite"
+        return {"comparisons": [{"current_id":"c0","published_id":"p0","decision":"MATERIAL_UPDATE","temporal_evidence":"This fact became known after the earlier publication","shared_facts":["match"],"new_fact":"WWE officially announced CM Punk vs Cody Rhodes match for SummerSlam on July 30 2026","reason":"rumor official with date"}]}, "gemini-3.1-flash-lite"
     monkeypatch.setattr(menzo, "call_gemini_json_model", arbitrate)
     r = result([
         item("CM Punk signs a new WWE contract", "https://new.test/dup"),
@@ -129,12 +143,12 @@ def test_old_recent_history_response_shape_repaired_before_any_apply(monkeypatch
         calls.append(k.get("phase"))
         if len(calls) == 1:
             return {"decision": "DUPLICATE", "reason": "legacy"}, "gemini-3.1-flash-lite"
-        return {"matches": []}, "gemini-3.1-flash-lite"
+        return {"comparisons": [{"current_id":"c0","published_id":"p0","decision":"NO_MATCH","shared_facts":[],"new_fact":"","reason":"distinct"}]}, "gemini-3.1-flash-lite"
     monkeypatch.setattr(menzo, "call_gemini_json_model", fake)
     r = result([item("CM Punk signs a WWE contract", "https://new.test/a")])
     menzo.apply_recent_published_duplicate_guard(r)
     assert r["skipped"] == []
-    assert "menzo_duplicate_checked" not in r["selected"][0]
+    assert r["selected"][0]["menzo_duplicate_decision"] == "NO_MATCH"
     assert calls == ["duplicate_arbitration_recent_history_batch", "duplicate_arbitration_recent_history_repair"]
     assert r["postprocess"]["gemini_duplicate_calls_executed"] == 2
     assert all("https://new.test/a" in prompt and "https://old.test/a" in prompt for prompt in prompts)

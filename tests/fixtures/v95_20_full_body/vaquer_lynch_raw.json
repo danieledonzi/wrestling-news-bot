@@ -1,0 +1,15 @@
+{
+  "published": {
+    "source_url": "https://example.test/stephanie-vaquer-becky-lynch-return",
+    "title_it": "Stephanie Vaquer & Becky Lynch Return During 8/3 WWE RAW After SummerSlam",
+    "cleaned_full_text": "Liv Morgan stood in the Raw ring after SummerSlam and demanded a challenger. Becky Lynch returned first and confronted Morgan. Stephanie Vaquer then made her return and joined the confrontation. Both former world champions challenged Liv Morgan, ending the same televised segment with Morgan retreating.",
+    "status": "published"
+  },
+  "candidate": {
+    "source_url": "https://example.test/two-former-world-champions-return",
+    "title": "Two Former World Champions Return To Challenge Liv Morgan On WWE Raw After SummerSlam",
+    "summary": "An exclusive follow-up with additional details.",
+    "body_text": "Liv Morgan opened the post-SummerSlam Raw segment boasting about her victory. Becky Lynch walked out first and challenged her. Stephanie Vaquer then returned, received a loud reaction, and also challenged Morgan. Morgan backed away as Vaquer and Lynch remained in the ring. The story retells the same segment while describing entrances and crowd reactions."
+  },
+  "expected_decision": "DUPLICATE"
+}

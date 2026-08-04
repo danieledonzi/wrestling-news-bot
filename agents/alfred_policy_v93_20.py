@@ -333,7 +333,7 @@ def _approved_article_from_source(review: dict[str, Any], article: dict[str, Any
         "meta": article.get("meta"),
         "element_counts": element_counts,
         "bob_translation_model": article.get("translation_model"),
-        **{k: article[k] for k in ["menzo_duplicate_checked", "menzo_duplicate_scope", "menzo_duplicate_decision", "menzo_authorized", "menzo_compared_with_url", "menzo_duplicate_reason", "menzo_new_fact", "menzo_winner_url"] if k in article},
+        **{k: article[k] for k in ["canonical_source_body", "menzo_duplicate_checked", "menzo_duplicate_scope", "menzo_duplicate_decision", "menzo_authorized", "menzo_compared_with_url", "menzo_duplicate_reason", "menzo_new_fact", "menzo_winner_url", "menzo_duplicate_audit", "menzo_duplicate_comparisons"] if k in article},
     }
 
 

@@ -18,8 +18,8 @@ def case(name):
 def valid_output(prompt):
     if '"duplicate_groups"' in prompt:
         return {"duplicate_groups":[{"keep_id":"c0","discard_ids":["c1"],"reason":"same central fact"}]}
-    if '"matches"' in prompt:
-        return {"matches":[{"current_id":"c0","published_id":"p0","decision":"DUPLICATE","reason":"same fact"},{"current_id":"c1","published_id":"p0","decision":"MATERIAL_UPDATE","new_fact":"officially changed match date to Sunday in Boston","reason":"date and location changed"}]}
+    if '"comparisons"' in prompt:
+        return {"comparisons":[{"current_id":"c0","published_id":"p0","decision":"DUPLICATE","shared_facts":["same match"],"new_fact":"","reason":"same fact"},{"current_id":"c1","published_id":"p0","decision":"MATERIAL_UPDATE","temporal_evidence":"This fact became known after the earlier publication","shared_facts":["same match"],"new_fact":"officially changed match date to Sunday in Boston","reason":"date and location changed"},{"current_id":"c2","published_id":"p0","decision":"NO_MATCH","shared_facts":[],"new_fact":"","reason":"different story"}]}
     if "BLOCCHI JSON:" in prompt:
         import re
         items=json.loads(re.search(r"BLOCCHI JSON:\s*(\[.*\])\s*$",prompt,re.S).group(1)); return {"items":[{"i":x["i"],"text":"Traduzione %s"%x["i"]} for x in items]}
@@ -66,7 +66,7 @@ def test_authoritative_same_run_prompt(tool):
     assert '"decision":"DUPLICATE|DISTINCT"' not in prompt
 def test_authoritative_recent_prompt(tool):
     prompt=tool.prepare_case(case("menzo_recent.json"))[0]["prompt"]
-    assert all(x in prompt for x in ("matches","current_id","published_id"))
+    assert all(x in prompt for x in ("comparisons","current_id","published_id","shared_facts"))
     assert "DISTINCT_STORY" not in prompt
 def test_old_simple_helpers_not_referenced():
     source=TOOL_PATH.read_text(); assert "build_simple_" not in source and "parse_same_run_duplicate_result" not in source
@@ -80,7 +80,7 @@ def test_overlapping_groups(tool):
 def test_unique_story_loss(tool):
     p=tool.prepare_case(case("menzo.json"))[0]; raw={"duplicate_groups":[{"keep_id":"c0","discard_ids":["c2"]}]}; _,d=tool.validate_output("menzo",json.dumps(raw),p["context"]); assert d["unique_story_lost"]==1
 def test_generic_material_update_rejected(tool):
-    p=tool.prepare_case(case("menzo_recent.json"))[0]; raw={"matches":[{"current_id":"c1","published_id":"p0","decision":"MATERIAL_UPDATE","new_fact":"new details","reason":"update"}]}; _,d=tool.validate_output("menzo",json.dumps(raw),p["context"]); assert d["generic_material_updates"]==1 and not d["structured_output_valid"]
+    p=tool.prepare_case(case("menzo_recent.json"))[0]; raw={"comparisons":[{"current_id":"c0","published_id":"p0","decision":"NO_MATCH","shared_facts":[],"new_fact":"","reason":"distinct"},{"current_id":"c1","published_id":"p0","decision":"MATERIAL_UPDATE","temporal_evidence":"This fact became known after the earlier publication","shared_facts":[],"new_fact":"new details","reason":"update"},{"current_id":"c2","published_id":"p0","decision":"NO_MATCH","shared_facts":[],"new_fact":"","reason":"distinct"}]}; _,d=tool.validate_output("menzo",json.dumps(raw),p["context"]); assert d["generic_material_updates"]==1 and not d["structured_output_valid"]
 
 def test_run_metrics_prompt_audit_and_pricing_key(tool,manifest,tmp_path):
     client=Client(); rows=tool.run_benchmark(manifest,tmp_path/"run",tool.DEFAULT_MODELS,client=client)
@@ -309,7 +309,7 @@ def test_expected_material_fact_tolerates_wording_but_rejects_different_fact(too
     prepared=tool.prepare_case(case("menzo_recent.json"))[0]
     good=valid_output(prepared["prompt"]); _,good_diag=tool.validate_output("menzo",json.dumps(good),prepared["context"])
     assert good_diag["structured_output_valid"] and good_diag["expected_passed"]
-    different={"matches":[{"current_id":"c0","published_id":"p0","decision":"DUPLICATE","reason":"same"},{"current_id":"c1","published_id":"p0","decision":"MATERIAL_UPDATE","new_fact":"officially changed match location to Boston after Chicago cancellation","reason":"location"}]}
+    different={"comparisons":[{"current_id":"c0","published_id":"p0","decision":"DUPLICATE","shared_facts":["match"],"new_fact":"","reason":"same"},{"current_id":"c1","published_id":"p0","decision":"MATERIAL_UPDATE","temporal_evidence":"This fact became known after the earlier publication","shared_facts":["match"],"new_fact":"officially changed match location to Boston after Chicago cancellation","reason":"location"},{"current_id":"c2","published_id":"p0","decision":"NO_MATCH","shared_facts":[],"new_fact":"","reason":"distinct"}]}
     _,different_diag=tool.validate_output("menzo",json.dumps(different),prepared["context"])
     assert different_diag["structured_output_valid"] and not different_diag["expected_passed"]
     automatic={"cases":1,"baseline":{"structured_output_rate":1},"candidate":{"structured_output_rate":1,"critical_expected_rate":0,"human_unique_story_losses":0,"unique_stories_lost":0,"missing_survivors":0,"survivor_outside_payload":0,"overlapping_groups":0,"groups_discarding_all":0,"generic_material_updates":0}}

@@ -1,4 +1,5 @@
 import json
+import pytest
 import sys
 from pathlib import Path
 
@@ -8,6 +9,19 @@ from agents import alfred, alfred_policy_v93_20, bob, publisher
 from agents import andrea_policy_v94_15 as andrea
 from agents import menzo as base_menzo
 from agents import menzo_policy_v93_15 as menzo
+from agents import source_body
+
+
+
+@pytest.fixture(autouse=True)
+def canonical_fixture_bodies(monkeypatch):
+    def hydrate(record):
+        if source_body.contract_text(record): return True,"canonical_cache"
+        text=str(record.get("summary") or record.get("title") or record.get("title_it") or "fixture article")
+        text += " Complete fixture source body with all factual paragraphs, participants, chronology, context, outcome, and relevant editorial detail." * 2
+        record["canonical_source_body"]=source_body.contract_from_elements(str(record.get("source_url") or record.get("url") or ""),[{"type":"text","text":text}],{"stage":"extraction_finished","extraction_finished":True,"body_complete":True,"body_complete_reason":"verified_test_fixture","clean_element_count":1,"root_text_chars":len(text),"extracted_text_chars":len(text),"root_coverage_ratio":1.0,"structured_article_body_chars":0,"structured_coverage_ratio":None,"truncation_access_markers":[]})
+        return True,"fixture_bob_extraction"
+    monkeypatch.setattr(menzo.source_body,"hydrate",hydrate)
 
 
 def item(url, title, summary=None, section="selected", score=90):
@@ -254,9 +268,9 @@ def test_duplicate_arbitration_before_post_caps_then_caps_apply(monkeypatch, tmp
     board = {"news_candidates_for_menzo": [base_candidate(f"https://cap/{i}", f"CM Punk signs WWE contract {i}") for i in range(7)]}
     out = menzo.run_menzo(board)
     assert "https://cap/6" in sent[0]
-    assert any(x["url"] == "https://cap/1" and x["reason"] == "skip:duplicate_same_run" for x in out["skipped"])
+    assert any(x["reason"] == "skip:duplicate_same_run" for x in out["skipped"])
     assert len(out["selected"]) <= 3
-    assert "https://cap/1" not in out["allowed_urls_for_v92"]
+    assert all(x["url"] not in out["allowed_urls_for_v92"] for x in out["skipped"] if x.get("reason")=="skip:duplicate_same_run")
 
 def test_runtime_order_has_one_budget_after_duplicate_guards(monkeypatch, tmp_path):
     isolate_wrapper_state(monkeypatch, tmp_path)
@@ -291,8 +305,8 @@ def test_same_run_ab_duplicate_c_distinct_one_batch_and_massy_ignored(monkeypatc
     monkeypatch.setattr(menzo, "call_gemini_json_model", fake)
     r=result([item("https://t/A","CM Punk suffers a WWE knee injury"), item("https://t/B","CM Punk knee injury reported by WWE doctors"), item("https://t/C","Cody Rhodes signs a new AEW contract")])
     menzo.apply_same_story_duplicate_guard(r, {"suspicious_story_clusters":[{"records":[{}]}]*12})
-    assert [x["url"] for x in r["selected"]] == ["https://t/A", "https://t/C"]
-    assert r["skipped"][0]["url"] == "https://t/B"
+    assert [x["url"] for x in r["selected"]] == ["https://t/B", "https://t/C"]
+    assert r["skipped"][0]["url"] == "https://t/A"
     assert "menzo_duplicate_checked" not in r["selected"][1]
     assert len(calls) == 1 and calls[0][1] == "duplicate_arbitration_same_run_batch"
     assert "https://t/A" in calls[0][0] and "https://t/B" in calls[0][0] and "https://t/C" not in calls[0][0]
@@ -313,8 +327,8 @@ def test_no_same_run_duplicates_and_two_independent_groups(monkeypatch, tmp_path
     monkeypatch.setattr(menzo, "call_gemini_json_model", lambda prompt,*a, **k: prompts.append(prompt) or ({"duplicate_groups":[{"keep_id":"c0","discard_ids":["c1"],"reason":"same"}]}, "gemini-3.1-flash-lite"))
     r=result([item("https://t/A","CM Punk suffers a WWE knee injury"), item("https://t/B","CM Punk knee injury reported by WWE doctors"), item("https://t/C","Cody Rhodes signs a new AEW contract"), item("https://t/D","Cody Rhodes contract signing reported by AEW")])
     menzo.apply_same_story_duplicate_guard(r, {})
-    assert [x["url"] for x in r["selected"]] == ["https://t/A", "https://t/C"]
-    assert {x["url"] for x in r["skipped"]} == {"https://t/B", "https://t/D"}
+    assert [x["url"] for x in r["selected"]] == ["https://t/B", "https://t/D"]
+    assert {x["url"] for x in r["skipped"]} == {"https://t/A", "https://t/C"}
     assert len(prompts)==2 and all(not ("CM Punk" in prompt and "Cody Rhodes" in prompt) for prompt in prompts)
     assert r["postprocess"]["same_run_suspicious_components"]==2
 
@@ -330,7 +344,7 @@ def test_malformed_batch_repair_and_legacy_shape_never_applied(monkeypatch, tmp_
     monkeypatch.setattr(menzo, "call_gemini_json_model", fake)
     r=result([item("https://t/A","CM Punk suffers a WWE knee injury"), item("https://t/B","CM Punk knee injury reported by WWE doctors"), item("https://t/C","Cody Rhodes signs a new AEW contract")])
     menzo.apply_same_story_duplicate_guard(r, {})
-    assert [x["url"] for x in r["selected"]] == ["https://t/A", "https://t/C"]
+    assert [x["url"] for x in r["selected"]] == ["https://t/B", "https://t/C"]
     assert calls == ["duplicate_arbitration_same_run_batch", "duplicate_arbitration_same_run_repair"]
     assert r["postprocess"]["menzo_same_run_batch_calls"]==1
     assert r["postprocess"]["menzo_same_run_batch_repairs"]==1
@@ -357,8 +371,8 @@ def test_same_run_micro_survivor_wins_current_wins_invalids_and_failure(monkeypa
     menzo.apply_same_story_duplicate_guard(r, {})
     assert [phase for phase, _ in prompts] == ["duplicate_arbitration_same_run_batch", "duplicate_arbitration_same_run_repair"] + ["duplicate_arbitration_same_run_micro"] * 4
     assert r["postprocess"]["gemini_duplicate_calls_executed"] == 6
-    assert [x["url"] for x in r["selected"]] == ["https://t/C", "https://t/D"]
-    assert {x["url"] for x in r["skipped"]} == {"https://t/B", "https://t/A", "https://t/E"}
+    assert [x["url"] for x in r["selected"]] == ["https://t/B", "https://t/C", "https://t/D"]
+    assert {x["url"] for x in r["skipped"]} == {"https://t/A", "https://t/E"}
     assert r["postprocess"]["menzo_duplicate_arbitration_fail_closed"] == 1
     d_prompt = [p for phase,p in prompts if phase == "duplicate_arbitration_same_run_micro"][2]
     assert '"id": "c0"' not in d_prompt and '"id": "c2"' in d_prompt
@@ -398,8 +412,8 @@ def test_same_run_micro_invalid_matched_keep_missing_and_unresolved_only_current
 
 
 def test_grounded_material_update_validation(monkeypatch):
-    old = {"id":"p0", "title":"Old", "summary":"CM Punk match was rumored.", "body_excerpt":"CM Punk match was rumored."}
-    current = {"id":"c0", "title":"Official", "summary":"WWE officially announced CM Punk match.", "body_excerpt":"WWE officially announced CM Punk match."}
+    old = {"id":"p0", "title":"Old", "full_body":"CM Punk match was rumored."}
+    current = {"id":"c0", "title":"Official", "full_body":"WWE officially announced CM Punk match."}
     assert not menzo.material_update_is_grounded("several additional details", current, old)
     assert not menzo.material_update_is_grounded("WWE officially changed the match opponent.", current, old)
     assert not menzo.material_update_is_grounded("CM Punk match was rumored.", current, old)

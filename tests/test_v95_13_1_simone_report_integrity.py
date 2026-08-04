@@ -108,7 +108,8 @@ def test_massy_to_simone_creates_special_reservation_before_0630(tmp_path, monke
     pending = json.loads(paths["PENDING_REPORTS"].read_text())["reports"]
     assert len(pending) == 1 and pending[0]["status"] == "waiting_publish_after"
     assert pending[0]["night_key"] == "snme_main"
-    assert result["ready_reports"] == [] and result["waiting_reports"][0]["reason"] == "waiting_publish_after"
+    assert result["ready_reports"] == []
+    assert any(row.get("reason") == "waiting_publish_after" and row.get("night_key") == "snme_main" for row in result["waiting_reports"])
 
 
 def test_collision_evening_identity_uses_saturday_show_date():
