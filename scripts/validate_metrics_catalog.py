@@ -65,6 +65,7 @@ def validate(catalog_path: Path = DEFAULT_CATALOG, markdown_path: Path = DEFAULT
     names = set()
     aliases = {}
     active_names = []
+    diagnostic_availability = {}
     planned_names = []
     deprecated_replacements = {}
     for index, metric in enumerate(metrics):
@@ -105,6 +106,8 @@ def validate(catalog_path: Path = DEFAULT_CATALOG, markdown_path: Path = DEFAULT
                 errors.append(f"{name}: active metric must be available")
             if metric.get("zero_semantics") == metric.get("missing_semantics"):
                 errors.append(f"{name}: zero_semantics must differ from missing_semantics")
+        elif status == "diagnostic_only":
+            diagnostic_availability[name] = availability
         elif status == "planned":
             planned_names.append(name)
             if availability != "unavailable":
@@ -127,6 +130,9 @@ def validate(catalog_path: Path = DEFAULT_CATALOG, markdown_path: Path = DEFAULT
         errors.append(f"cannot load Markdown catalog {markdown_path}: {exc}")
     else:
         active_rows = _markdown_table(markdown, "## 4. Active canonical metrics")
+        diagnostic_rows = _markdown_table(
+            markdown, "## 5. Partially available and diagnostic metrics"
+        )
         planned_rows = _markdown_table(markdown, "## 6. Planned metrics")
         alias_rows = _markdown_table(markdown, "## 7. Legacy aliases")
         deprecated_rows = _markdown_table(markdown, "## 9. Deprecated metrics")
@@ -134,6 +140,20 @@ def validate(catalog_path: Path = DEFAULT_CATALOG, markdown_path: Path = DEFAULT
         markdown_planned = {_code_cell(row[0]) for row in planned_rows}
         if markdown_active != set(active_names):
             errors.append("Markdown active table does not match JSON active metrics")
+        markdown_diagnostic = {}
+        for row in diagnostic_rows:
+            if len(row) < 2:
+                errors.append("Markdown diagnostic row must have an availability")
+                continue
+            name, availability = _code_cell(row[0]), row[1]
+            if name in markdown_diagnostic:
+                errors.append(f"duplicate Markdown diagnostic metric: {name}")
+            markdown_diagnostic[name] = availability
+        if markdown_diagnostic != diagnostic_availability:
+            errors.append(
+                "Markdown diagnostic table/availability does not match JSON "
+                "diagnostic_only metrics"
+            )
         if markdown_planned != set(planned_names):
             errors.append("Markdown planned table does not match JSON planned metrics")
         markdown_deprecated = {

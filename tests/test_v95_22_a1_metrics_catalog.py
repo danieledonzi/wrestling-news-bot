@@ -90,6 +90,52 @@ def test_duplicate_coverage_complete_has_boolean_coverage_semantics():
     assert "membership in the observed producing run cannot be verified" in row["missing_semantics"]
 
 
+def test_pair_coverage_metrics_use_exact_authoritative_nested_paths():
+    rows = by_name()
+    expected = {
+        "menzo.same_run_expected_pairs": (
+            "same_run.expected_pair_count",
+            "duplicate_pair_coverage.same_run_expected",
+        ),
+        "menzo.same_run_evaluated_pairs": (
+            "same_run.authoritative_evaluated_pair_count",
+            "duplicate_pair_coverage.same_run_evaluated",
+        ),
+        "menzo.recent_history_expected_pairs": (
+            "recent_history.expected_pair_count",
+            "duplicate_pair_coverage.recent_history_expected",
+        ),
+        "menzo.recent_history_evaluated_pairs": (
+            "recent_history.authoritative_evaluated_pair_count",
+            "duplicate_pair_coverage.recent_history_evaluated",
+        ),
+    }
+    for name, (field, alias) in expected.items():
+        row = rows[name]
+        assert row["source_primary"] == (
+            "artifacts/newsroom/menzo_duplicate_pair_coverage.json: " + field
+        )
+        assert row["formula"] == (
+            "read " + field
+            + " from the authoritative producing-run coverage artifact"
+        )
+        assert row["legacy_aliases"] == [alias]
+
+    coverage = rows["menzo.duplicate_coverage_complete"]
+    assert coverage["source_primary"] == (
+        "artifacts/newsroom/menzo_duplicate_pair_coverage.json: "
+        "total.coverage_complete"
+    )
+    assert coverage["formula"] == (
+        "read total.coverage_complete from the authoritative producing-run "
+        "coverage artifact"
+    )
+    assert coverage["legacy_aliases"] == [
+        "duplicate_pair_coverage.coverage_complete"
+    ]
+    assert all("reconciliation" in source for source in coverage["source_secondary"])
+
+
 def test_latest_run_metrics_never_claim_editorial_window_cardinality():
     for row in catalog()["metrics"]:
         if "latest-run" not in row["aggregation"]:
@@ -181,6 +227,72 @@ def test_markdown_contract_tables_match_json_exactly():
     assert "menzo.selected` is instead the authoritative source field" in markdown
 
 
+def test_runtime_completed_is_not_the_legacy_exit_zero_report_bucket():
+    rows = by_name()
+    completed = rows["runtime.runs_completed"]
+    assert completed["formula"] == (
+        "count production-shaped run records with an in-window parseable "
+        "run.ended_at"
+    )
+    assert completed["consumer_paths"] == []
+    assert completed["used_by_reports"] == []
+    assert "run_health.runs_completed" in completed["notes"]
+    assert "runtime.runs_exit_zero" in completed["notes"]
+    exit_zero = rows["runtime.runs_exit_zero"]
+    assert exit_zero["used_by_reports"] == [
+        "daily_editorial_judgment", "operational_report"
+    ]
+    assert "scripts/observability_snapshot.py" in exit_zero["consumer_paths"]
+    assert "scripts/daily_editorial_judgment.py" in exit_zero["consumer_paths"]
+
+
+def test_composite_pair_coverage_object_is_not_a_scalar_alias():
+    aliases = {
+        alias: row["canonical_name"]
+        for row in catalog()["metrics"]
+        for alias in row["legacy_aliases"]
+    }
+    assert "duplicate_pair_coverage" not in aliases
+    assert aliases["duplicate_pair_coverage.same_run_expected"] == (
+        "menzo.same_run_expected_pairs"
+    )
+    assert aliases["duplicate_pair_coverage.same_run_evaluated"] == (
+        "menzo.same_run_evaluated_pairs"
+    )
+    assert aliases["duplicate_pair_coverage.recent_history_expected"] == (
+        "menzo.recent_history_expected_pairs"
+    )
+    assert aliases["duplicate_pair_coverage.recent_history_evaluated"] == (
+        "menzo.recent_history_evaluated_pairs"
+    )
+    assert aliases["duplicate_pair_coverage.coverage_complete"] == (
+        "menzo.duplicate_coverage_complete"
+    )
+    legacy = LEGACY_PATH.read_text(encoding="utf-8")
+    assert "composite diagnostic; not an alias" in legacy
+
+
+def test_bare_errors_is_ambiguous_not_a_global_simone_alias():
+    aliases = {
+        alias: row["canonical_name"]
+        for row in catalog()["metrics"]
+        for alias in row["legacy_aliases"]
+    }
+    assert "errors" not in aliases
+    assert aliases["simone.publish_handoff.errors"] == (
+        "simone.legacy_errors_diagnostic"
+    )
+    markdown = MARKDOWN_PATH.read_text(encoding="utf-8")
+    assert "| `errors` |" not in markdown
+    assert (
+        "| `simone.publish_handoff.errors` | "
+        "`simone.legacy_errors_diagnostic` |"
+    ) in markdown
+    legacy = LEGACY_PATH.read_text(encoding="utf-8")
+    assert "bare `errors`" in legacy
+    assert "ambiguous and context-dependent" in legacy
+
+
 def test_validator_rejects_markdown_alias_collision(tmp_path):
     markdown = MARKDOWN_PATH.read_text(encoding="utf-8").replace(
         "| `selected` | `menzo.selected_after_budget` |",
@@ -207,10 +319,34 @@ def test_validator_rejects_markdown_status_and_replacement_drift(tmp_path):
     assert "Markdown deprecated table/replacements do not match JSON" in errors
 
 
+def test_validator_rejects_all_diagnostic_table_drift(tmp_path):
+    markdown = MARKDOWN_PATH.read_text(encoding="utf-8")
+    row = next(
+        line for line in markdown.splitlines()
+        if line.startswith("| `runtime.expected_dirt_paths` |")
+    )
+    variants = {
+        "missing": markdown.replace(row + "\n", "", 1),
+        "availability": markdown.replace(
+            row, row.replace("source_dependent", "available"), 1
+        ),
+        "extra": markdown.replace(
+            row, row + "\n| `diagnostic.extra` | partially_available | extra |", 1
+        ),
+        "duplicate": markdown.replace(row, row + "\n" + row, 1),
+    }
+    for name, altered in variants.items():
+        path = tmp_path / (name + ".md")
+        path.write_text(altered, encoding="utf-8")
+        assert validate(CATALOG_PATH, path), name
+
+
 def test_generic_errors_are_not_promoted_to_terminal_errors():
     rows = by_name()
     assert rows["simone.legacy_errors_diagnostic"]["status"] == "diagnostic_only"
-    assert rows["simone.legacy_errors_diagnostic"]["legacy_aliases"] == ["errors"]
+    assert rows["simone.legacy_errors_diagnostic"]["legacy_aliases"] == [
+        "simone.publish_handoff.errors"
+    ]
     assert rows["simone.terminal_errors"]["source_primary"] == "not_available"
     assert rows["publisher.terminal_errors"]["source_primary"] == "not_available"
     assert all(not row["canonical_name"].endswith(".errors") for row in rows.values())

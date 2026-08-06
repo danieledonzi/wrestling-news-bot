@@ -64,11 +64,8 @@
       "status": "active",
       "legacy_aliases": [],
       "replacement": null,
-      "used_by_reports": [
-        "daily_editorial_judgment",
-        "operational_report"
-      ],
-      "notes": ""
+      "used_by_reports": [],
+      "notes": "The legacy snapshot field run_health.runs_completed does not consume this metric; despite its name, that field is the exit-zero bucket and corresponds to runtime.runs_exit_zero."
     },
     {
       "canonical_name": "runtime.runs_exit_zero",
@@ -84,7 +81,10 @@
         "agents/master_log_v93_19.py",
         "newsroom_runner.py"
       ],
-      "consumer_paths": [],
+      "consumer_paths": [
+        "scripts/observability_snapshot.py",
+        "scripts/daily_editorial_judgment.py"
+      ],
       "formula": "count completed in-window run records where runtime_exit_code == 0",
       "aggregation": "event count",
       "identity_key": "run identity",
@@ -593,13 +593,15 @@
       "unit": "count",
       "cardinality": "one scalar per producing run/latest retained artifact",
       "authority_level": "contractual",
-      "source_primary": "artifacts/newsroom/menzo_duplicate_pair_coverage.json",
-      "source_secondary": [],
+      "source_primary": "artifacts/newsroom/menzo_duplicate_pair_coverage.json: same_run.expected_pair_count",
+      "source_secondary": [
+        "artifacts/newsroom/menzo_decisions.json: postprocess.duplicate_pair_coverage.same_run_expected (reconciliation)"
+      ],
       "producer_paths": [
         "agents/menzo_policy_v93_15.py"
       ],
       "consumer_paths": [],
-      "formula": "read coverage field same_run_expected for the latest produced run",
+      "formula": "read same_run.expected_pair_count from the authoritative producing-run coverage artifact",
       "aggregation": "latest-run scalar; not safely aggregable across a UTC window",
       "identity_key": "canonical pair key from two canonical_source_url_sha256_v1 identities",
       "time_window": "producing run represented by the latest retained artifact; no authoritative editorial-window series exists",
@@ -610,7 +612,9 @@
       "policy_version": "v95.22_a1",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
-      "legacy_aliases": [],
+      "legacy_aliases": [
+        "duplicate_pair_coverage.same_run_expected"
+      ],
       "replacement": null,
       "used_by_reports": [],
       "notes": "Authoritative for its producing run only; the artifact has no retained window series. The v95.21.1 matrix is unchanged. No authoritative series exists across the editorial window."
@@ -623,13 +627,15 @@
       "unit": "count",
       "cardinality": "one scalar per producing run/latest retained artifact",
       "authority_level": "contractual",
-      "source_primary": "artifacts/newsroom/menzo_duplicate_pair_coverage.json",
-      "source_secondary": [],
+      "source_primary": "artifacts/newsroom/menzo_duplicate_pair_coverage.json: same_run.authoritative_evaluated_pair_count",
+      "source_secondary": [
+        "artifacts/newsroom/menzo_decisions.json: postprocess.duplicate_pair_coverage.same_run_evaluated (reconciliation)"
+      ],
       "producer_paths": [
         "agents/menzo_policy_v93_15.py"
       ],
       "consumer_paths": [],
-      "formula": "read coverage field same_run_evaluated for the latest produced run",
+      "formula": "read same_run.authoritative_evaluated_pair_count from the authoritative producing-run coverage artifact",
       "aggregation": "latest-run scalar; not safely aggregable across a UTC window",
       "identity_key": "canonical pair key from two canonical_source_url_sha256_v1 identities",
       "time_window": "producing run represented by the latest retained artifact; no authoritative editorial-window series exists",
@@ -640,7 +646,9 @@
       "policy_version": "v95.22_a1",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
-      "legacy_aliases": [],
+      "legacy_aliases": [
+        "duplicate_pair_coverage.same_run_evaluated"
+      ],
       "replacement": null,
       "used_by_reports": [],
       "notes": "Authoritative for its producing run only; the artifact has no retained window series. The v95.21.1 matrix is unchanged. No authoritative series exists across the editorial window."
@@ -653,13 +661,15 @@
       "unit": "count",
       "cardinality": "one scalar per producing run/latest retained artifact",
       "authority_level": "contractual",
-      "source_primary": "artifacts/newsroom/menzo_duplicate_pair_coverage.json",
-      "source_secondary": [],
+      "source_primary": "artifacts/newsroom/menzo_duplicate_pair_coverage.json: recent_history.expected_pair_count",
+      "source_secondary": [
+        "artifacts/newsroom/menzo_decisions.json: postprocess.duplicate_pair_coverage.recent_history_expected (reconciliation)"
+      ],
       "producer_paths": [
         "agents/menzo_policy_v93_15.py"
       ],
       "consumer_paths": [],
-      "formula": "read coverage field recent_history_expected for the latest produced run",
+      "formula": "read recent_history.expected_pair_count from the authoritative producing-run coverage artifact",
       "aggregation": "latest-run scalar; not safely aggregable across a UTC window",
       "identity_key": "canonical pair key from two canonical_source_url_sha256_v1 identities",
       "time_window": "producing run represented by the latest retained artifact; no authoritative editorial-window series exists",
@@ -670,7 +680,9 @@
       "policy_version": "v95.22_a1",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
-      "legacy_aliases": [],
+      "legacy_aliases": [
+        "duplicate_pair_coverage.recent_history_expected"
+      ],
       "replacement": null,
       "used_by_reports": [],
       "notes": "Authoritative for its producing run only; the artifact has no retained window series. The v95.21.1 matrix is unchanged. No authoritative series exists across the editorial window."
@@ -683,13 +695,15 @@
       "unit": "count",
       "cardinality": "one scalar per producing run/latest retained artifact",
       "authority_level": "contractual",
-      "source_primary": "artifacts/newsroom/menzo_duplicate_pair_coverage.json",
-      "source_secondary": [],
+      "source_primary": "artifacts/newsroom/menzo_duplicate_pair_coverage.json: recent_history.authoritative_evaluated_pair_count",
+      "source_secondary": [
+        "artifacts/newsroom/menzo_decisions.json: postprocess.duplicate_pair_coverage.recent_history_evaluated (reconciliation)"
+      ],
       "producer_paths": [
         "agents/menzo_policy_v93_15.py"
       ],
       "consumer_paths": [],
-      "formula": "read coverage field recent_history_evaluated for the latest produced run",
+      "formula": "read recent_history.authoritative_evaluated_pair_count from the authoritative producing-run coverage artifact",
       "aggregation": "latest-run scalar; not safely aggregable across a UTC window",
       "identity_key": "canonical pair key from two canonical_source_url_sha256_v1 identities",
       "time_window": "producing run represented by the latest retained artifact; no authoritative editorial-window series exists",
@@ -700,7 +714,9 @@
       "policy_version": "v95.22_a1",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
-      "legacy_aliases": [],
+      "legacy_aliases": [
+        "duplicate_pair_coverage.recent_history_evaluated"
+      ],
       "replacement": null,
       "used_by_reports": [],
       "notes": "Authoritative for its producing run only; the artifact has no retained window series. The v95.21.1 matrix is unchanged. No authoritative series exists across the editorial window."
@@ -713,13 +729,15 @@
       "unit": "boolean",
       "cardinality": "one scalar per producing run/latest retained artifact",
       "authority_level": "contractual",
-      "source_primary": "artifacts/newsroom/menzo_decisions.json: postprocess and menzo_duplicate_pair_coverage.json",
-      "source_secondary": [],
+      "source_primary": "artifacts/newsroom/menzo_duplicate_pair_coverage.json: total.coverage_complete",
+      "source_secondary": [
+        "artifacts/newsroom/menzo_decisions.json: postprocess.duplicate_pair_coverage.coverage_complete (reconciliation)"
+      ],
       "producer_paths": [
         "agents/menzo_policy_v93_15.py"
       ],
       "consumer_paths": [],
-      "formula": "read explicit latest-run complete field(s); no cross-run authoritative aggregation currently retained",
+      "formula": "read total.coverage_complete from the authoritative producing-run coverage artifact",
       "aggregation": "latest-run diagnostic",
       "identity_key": "canonical pair key where pair-based; otherwise event",
       "time_window": "producing run represented by the latest retained artifact; no authoritative editorial-window series exists",
@@ -731,7 +749,7 @@
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [
-        "duplicate_pair_coverage"
+        "duplicate_pair_coverage.coverage_complete"
       ],
       "replacement": null,
       "used_by_reports": [],
@@ -2620,7 +2638,7 @@
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [
-        "errors"
+        "simone.publish_handoff.errors"
       ],
       "replacement": null,
       "used_by_reports": [],

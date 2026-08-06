@@ -54,6 +54,8 @@ Each JSON row has exactly one `source_primary`. `source_secondary` entries are e
 
 These rows expose real signals but not a complete authoritative editorial-window metric. Typical causes are per-run-only counters, incomplete stable identities, legacy caps, partial run coverage, or a latest-run artifact without retention.
 
+For Menzo pair coverage, the sole primary authority is the nested producing-run artifact: `same_run.expected_pair_count`, `same_run.authoritative_evaluated_pair_count`, `recent_history.expected_pair_count`, `recent_history.authoritative_evaluated_pair_count`, and `total.coverage_complete` under `artifacts/newsroom/menzo_duplicate_pair_coverage.json`. The corresponding flat `postprocess.duplicate_pair_coverage.*` fields are reconciliation sources only.
+
 | Name | Availability | Limitation |
 |---|---|---|
 | `runtime.expected_dirt_paths` | source_dependent | Expected paths are limited to .bot_exit_code, logs/master_log.log, and reports/. This is repository diagnostics, not a newsroom outcome. |
@@ -68,7 +70,7 @@ These rows expose real signals but not a complete authoritative editorial-window
 | `menzo.same_run_evaluated_pairs` | partially_available | Authoritative for its producing run only; the artifact has no retained window series. The v95.21.1 matrix is unchanged. No authoritative series exists across the editorial window. |
 | `menzo.recent_history_expected_pairs` | partially_available | Authoritative for its producing run only; the artifact has no retained window series. The v95.21.1 matrix is unchanged. No authoritative series exists across the editorial window. |
 | `menzo.recent_history_evaluated_pairs` | partially_available | Authoritative for its producing run only; the artifact has no retained window series. The v95.21.1 matrix is unchanged. No authoritative series exists across the editorial window. |
-| `menzo.duplicate_coverage_complete` | partially_available | Boolean producing-run pair-matrix coverage state: `False` means at least one expected pair lacks exactly one authoritative terminal evaluation; `null` means the artifact is absent, unreadable, or cannot be associated with the observed producing run. No authoritative series exists across the editorial window. |
+| `menzo.duplicate_coverage_complete` | partially_available | Not promoted to an editorial-window active metric because only latest-run detail is retained. No authoritative series exists across the editorial window. |
 | `menzo.exact_duplicate_pairs` | partially_available | Not promoted to an editorial-window active metric because only latest-run detail is retained. No authoritative series exists across the editorial window. |
 | `menzo.suspicious_pairs` | partially_available | Not promoted to an editorial-window active metric because only latest-run detail is retained. No authoritative series exists across the editorial window. |
 | `menzo.pairs_below_threshold` | partially_available | Not promoted to an editorial-window active metric because only latest-run detail is retained. No authoritative series exists across the editorial window. |
@@ -139,7 +141,11 @@ Aliases are input-compatibility labels only. They never become competing authori
 
 | Observed alias | Canonical destination | Warning |
 |---|---|---|
-| `duplicate_pair_coverage` | `menzo.duplicate_coverage_complete` | Interpret only with the destination semantics and source/window contract. |
+| `duplicate_pair_coverage.same_run_expected` | `menzo.same_run_expected_pairs` | Interpret only with the destination semantics and source/window contract. |
+| `duplicate_pair_coverage.same_run_evaluated` | `menzo.same_run_evaluated_pairs` | Interpret only with the destination semantics and source/window contract. |
+| `duplicate_pair_coverage.recent_history_expected` | `menzo.recent_history_expected_pairs` | Interpret only with the destination semantics and source/window contract. |
+| `duplicate_pair_coverage.recent_history_evaluated` | `menzo.recent_history_evaluated_pairs` | Interpret only with the destination semantics and source/window contract. |
+| `duplicate_pair_coverage.coverage_complete` | `menzo.duplicate_coverage_complete` | Interpret only with the destination semantics and source/window contract. |
 | `duplicate_pair_terminal_invariant_failures` | `menzo.terminal_invariant_failures` | Interpret only with the destination semantics and source/window contract. |
 | `selected` | `menzo.selected_after_budget` | Interpret only with the destination semantics and source/window contract. |
 | `pending` | `menzo.pending` | Interpret only with the destination semantics and source/window contract. |
@@ -150,7 +156,7 @@ Aliases are input-compatibility labels only. They never become competing authori
 | `avoided_total` | `gemini.avoided_calls` | Interpret only with the destination semantics and source/window contract. |
 | `called_35_total` | `gemini.gemini_3_5_completed_calls` | Interpret only with the destination semantics and source/window contract. |
 | `gemini_3_5_called_total` | `gemini.gemini_3_5_completed_calls` | Interpret only with the destination semantics and source/window contract. |
-| `errors` | `simone.legacy_errors_diagnostic` | Interpret only with the destination semantics and source/window contract. |
+| `simone.publish_handoff.errors` | `simone.legacy_errors_diagnostic` | Interpret only with the destination semantics and source/window contract. |
 
 ## 8. Ambiguous metrics
 
