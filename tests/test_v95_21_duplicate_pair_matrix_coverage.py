@@ -205,3 +205,47 @@ def test_semantic_and_failure_dispositions_propagate_by_pair_id():
                                           cache_status=cache, final_disposition=disposition)
         record = result["postprocess"]["_duplicate_pair_coverage_detail"]["same_run"]["records"][0]
         assert (record["gemini_decision"], record["cache_status"], record["final_disposition"]) == (decision, cache, disposition)
+
+
+def test_pending_recent_history_invariant_blocks_only_candidate_role(monkeypatch, tmp_path):
+    candidate_a = item(30)
+    history_h = item(31)
+    candidate_b = dict(history_h)
+    result = {"selected": [candidate_a, candidate_b], "pending": [], "skipped": [], "postprocess": {}}
+    specs = build_recent_history_pair_specs([candidate_a], [history_h])
+    menzo._v9521_stage(result, "recent_history", specs)
+    pair = result["postprocess"]["_duplicate_pair_coverage_detail"]["recent_history"]["records"][0]
+    pair.update(gemini_decision="", final_disposition="pending")
+    monkeypatch.setattr(menzo, "DUPLICATE_PAIR_COVERAGE_FILE", tmp_path / "coverage.json")
+
+    menzo._v9521_write_coverage(result)
+
+    assert result["selected"] == [candidate_b]
+    assert result["skipped"] == [candidate_a]
+    assert candidate_a["reason"] == "skip:duplicate_pair_matrix_unresolved"
+    artifact = json.loads((tmp_path / "coverage.json").read_text())
+    pair = artifact["recent_history"]["pairs"][0]
+    assert (pair["gemini_decision"], pair["final_disposition"]) == (
+        "ARBITRATION_FAILED", "invariant_fail_closed")
+    assert result["postprocess"]["duplicate_pair_terminal_invariant_failures"] == 1
+
+
+def test_pending_same_run_invariant_blocks_both_candidate_roles(monkeypatch, tmp_path):
+    candidate_a, candidate_b = item(40), item(41)
+    result = {"selected": [candidate_a, candidate_b], "pending": [], "skipped": [], "postprocess": {}}
+    specs = build_same_run_pair_specs([candidate_a, candidate_b])
+    menzo._v9521_stage(result, "same_run", specs)
+    pair = result["postprocess"]["_duplicate_pair_coverage_detail"]["same_run"]["records"][0]
+    pair.update(gemini_decision="", final_disposition="pending")
+    monkeypatch.setattr(menzo, "DUPLICATE_PAIR_COVERAGE_FILE", tmp_path / "coverage.json")
+
+    menzo._v9521_write_coverage(result)
+
+    assert result["selected"] == []
+    assert result["skipped"] == [candidate_a, candidate_b]
+    assert all(item["reason"] == "skip:duplicate_pair_matrix_unresolved" for item in result["skipped"])
+    artifact = json.loads((tmp_path / "coverage.json").read_text())
+    pair = artifact["same_run"]["pairs"][0]
+    assert (pair["gemini_decision"], pair["final_disposition"]) == (
+        "ARBITRATION_FAILED", "invariant_fail_closed")
+    assert result["postprocess"]["duplicate_pair_terminal_invariant_failures"] == 1
