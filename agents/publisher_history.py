@@ -42,7 +42,10 @@ def body_within_retention(record: dict[str, Any], *, now: datetime | None = None
 
 def prune_record(record: dict[str, Any], *, now: datetime | None = None, hours: int | None = None) -> dict[str, Any]:
     output = deepcopy(record)
-    output["article_id"] = output.get("article_id") or article_id(output)
+    calculated_id = article_id(output)
+    if output.get("article_id") and output.get("article_id") != calculated_id:
+        output["article_id_migrated_from"] = output["article_id"]
+    output["article_id"] = calculated_id
     recent = body_within_retention(output, now=now, hours=hours)
     # The source text already lives inside canonical_source_body; final editorial
     # text belongs only in the per-publication trace.

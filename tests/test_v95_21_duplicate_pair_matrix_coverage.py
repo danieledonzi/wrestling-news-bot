@@ -8,6 +8,8 @@ from agents.duplicate_pair_matrix import (
 from agents import menzo_policy_v93_15 as menzo
 from agents.menzo_duplicate_scorer import SCORER_VERSION
 from agents.publisher_history import prune_record
+from datetime import datetime, timezone
+import json
 
 
 def item(number):
@@ -137,3 +139,69 @@ def test_publisher_history_new_and_legacy_records_receive_article_id():
     legacy = {"source_url": "https://example.test/legacy", "status": "published"}
     saved = prune_record(legacy)
     assert saved["article_id"] == article_id(legacy)
+
+
+def test_stale_publisher_history_identity_is_recalculated(tmp_path):
+    record = {"source_url": "https://example.test/current", "article_id": "art_stale",
+              "status": "publish", "published_at": datetime.now(timezone.utc).isoformat()}
+    path = tmp_path / "history.json"
+    path.write_text(json.dumps([record]), encoding="utf-8")
+    loaded = menzo.load_authoritative_publisher_history(path=path)
+    assert loaded[0]["article_id"] == article_id(record)
+    assert loaded[0]["article_id_migrated_from"] == "art_stale"
+
+
+def test_prune_record_replaces_stale_identity():
+    record = {"source_url": "https://example.test/current", "article_id": "art_stale"}
+    saved = prune_record(record)
+    assert saved["article_id"] == article_id(record)
+    assert saved["article_id_migrated_from"] == "art_stale"
+
+
+def test_recent_history_stale_identity_uses_recalculated_endpoints(monkeypatch, tmp_path):
+    candidate = item(7)
+    old = {**item(8), "article_id": "art_stale", "status": "publish",
+           "published_at": datetime.now(timezone.utc).isoformat()}
+    path = tmp_path / "history.json"; path.write_text(json.dumps([old]), encoding="utf-8")
+    monkeypatch.setattr(menzo, "publisher_history_file", lambda: path)
+    monkeypatch.setattr(menzo, "DUPLICATE_PAIR_COVERAGE_FILE", tmp_path / "coverage.json")
+    result = {"selected": [candidate], "pending": [], "skipped": [], "postprocess": {}}
+    menzo.apply_recent_published_duplicate_guard(result)
+    artifact = json.loads((tmp_path / "coverage.json").read_text())
+    pair = artifact["recent_history"]["pairs"][0]
+    assert artifact["recent_history"]["coverage_complete"] is True
+    assert pair["left_article_id"] == article_id(candidate)
+    assert pair["right_article_id"] == article_id(old)
+
+
+def test_below_threshold_and_exact_records_are_terminal():
+    below_specs = build_same_run_pair_specs([item(1), item(2)])
+    below_result = {"selected": [item(1), item(2)], "pending": [], "skipped": [], "postprocess": {}}
+    menzo._v9521_stage(below_result, "same_run", below_specs)
+    below = below_result["postprocess"]["_duplicate_pair_coverage_detail"]["same_run"]["records"][0]
+    assert (below["gemini_decision"], below["final_disposition"]) == ("NOT_REQUIRED", "below_threshold")
+
+    exact_item = item(3)
+    exact_specs = build_recent_history_pair_specs([exact_item], [dict(exact_item)])
+    exact_result = {"selected": [exact_item], "pending": [], "skipped": [], "postprocess": {}}
+    menzo._v9521_stage(exact_result, "recent_history", exact_specs)
+    exact = exact_result["postprocess"]["_duplicate_pair_coverage_detail"]["recent_history"]["records"][0]
+    menzo.update_pair_coverage_record(exact_result, "recent_history", exact["pair_id"],
+        gemini_decision="EXACT_DUPLICATE", final_disposition="candidate_blocked")
+    assert exact["gemini_decision"] == "EXACT_DUPLICATE" and exact["final_disposition"] != "pending"
+
+
+def test_semantic_and_failure_dispositions_propagate_by_pair_id():
+    left, right = item(20), item(21)
+    specs = build_same_run_pair_specs([left, right])
+    result = {"selected": [left, right], "pending": [], "skipped": [], "postprocess": {}}
+    matrix = menzo._v9521_stage(result, "same_run", specs)
+    pair_id = matrix["records"][0]["pair_id"]
+    for decision, cache, disposition in (("NO_MATCH", "miss", "ordinary_pair"),
+                                         ("DUPLICATE", "miss", "duplicate_applied"),
+                                         ("NO_MATCH", "hit", "ordinary_pair"),
+                                         ("ARBITRATION_FAILED", "miss", "component_fail_closed")):
+        menzo.update_pair_coverage_record(result, "same_run", pair_id, gemini_decision=decision,
+                                          cache_status=cache, final_disposition=disposition)
+        record = result["postprocess"]["_duplicate_pair_coverage_detail"]["same_run"]["records"][0]
+        assert (record["gemini_decision"], record["cache_status"], record["final_disposition"]) == (decision, cache, disposition)
