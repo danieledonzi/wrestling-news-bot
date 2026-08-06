@@ -2480,10 +2480,32 @@ def _v9521_write_coverage(result: dict[str, Any]) -> None:
                 "unexpected_pair_ids":value.get("unexpected_pair_ids",[]),
                 "duplicate_evaluation_pair_ids":value.get("duplicate_evaluation_pair_ids",[]),
                 "invalid_score_pair_ids":value.get("invalid_score_pair_ids",[]), "pairs":value.get("records",[])}
+    pending_endpoint_ids:set[str]=set()
+    terminal_failures=0
     for value in (same,recent):
         for record in value.get("records",[]):
             if record.get("final_disposition") == "pending":
                 record.update(gemini_decision="ARBITRATION_FAILED",final_disposition="invariant_fail_closed")
+                if record.get("left_role") == "candidate" and record.get("left_article_id"):
+                    pending_endpoint_ids.add(record["left_article_id"])
+                if record.get("right_role") == "candidate" and record.get("right_article_id"):
+                    pending_endpoint_ids.add(record["right_article_id"])
+                terminal_failures+=1
+    if pending_endpoint_ids:
+        moved=[]; moved_objects:set[int]=set()
+        for section in ("selected","pending"):
+            retained=[]
+            for item in result.get(section,[]) if isinstance(result.get(section),list) else []:
+                if isinstance(item,dict) and article_id(item) in pending_endpoint_ids:
+                    item.update({"decision":"skip","priority":"skip","reason":"skip:duplicate_pair_matrix_unresolved",
+                                 "duplicate_pair_gate_complete":False})
+                    if id(item) not in moved_objects: moved.append(item); moved_objects.add(id(item))
+                else: retained.append(item)
+            result[section]=retained
+        existing=result.setdefault("skipped",[])
+        existing_ids={id(item) for item in existing}
+        existing.extend(item for item in moved if id(item) not in existing_ids)
+        pp["duplicate_pair_terminal_invariant_failures"]=pp.get("duplicate_pair_terminal_invariant_failures",0)+terminal_failures
     same_out=stage(same,"article_count"); recent_out=stage(recent,"candidate_count")
     same_out["article_count"]=same.get("article_count",0); recent_out.update(candidate_count=recent.get("candidate_count",0),history_count=recent.get("history_count",0))
     total_expected=same_out["expected_pair_count"]+recent_out["expected_pair_count"]
@@ -2561,7 +2583,13 @@ def apply_same_story_duplicate_guard(result: dict[str, Any], massy_board: dict[s
     for _i,_j,scored in exact_links:
         update_pair_coverage_record(result,"same_run",scored["pair_id"],gemini_decision="EXACT_DUPLICATE",
             cache_status="not_applicable",final_disposition="exact_duplicate_resolved")
-    edges=[(i,j,s) for i,j,s in edges if id(items[i]) not in blocked and id(items[j]) not in blocked]
+    retained_edges=[]
+    for i,j,scored in edges:
+        if id(items[i]) in blocked or id(items[j]) in blocked:
+            update_pair_coverage_record(result,"same_run",scored["pair_id"],gemini_decision="NOT_REQUIRED",
+                cache_status="not_applicable",final_disposition="endpoint_already_blocked_exact_duplicate")
+        else: retained_edges.append((i,j,scored))
+    edges=retained_edges
     audit_edges=[]
     for i,j,scored in edges:
         audit={"scope":"same_run","identities":[_v2_identity(items[i]),_v2_identity(items[j])],**scored,"cache":"miss","gemini_decision":"","final_disposition":""}
@@ -2609,7 +2637,7 @@ def apply_same_story_duplicate_guard(result: dict[str, Any], massy_board: dict[s
                 groups,_=validate_same_run_batch(raw,ids)
             if groups is None:
                 # Micro fallback never sees a node outside this component.
-                groups=[]; survivors=[("c0",members[0])]; unresolved=[]
+                groups=[]; survivors=[("c0",members[0])]; unresolved=[]; unresolved_article_ids:set[str]=set()
                 for n,item in enumerate(members[1:],1):
                     cid=f"c{n}"; survivor_ids={x for x,_ in survivors}
                     payload={"current_candidate":compact_candidate_record(item,cid),"survivors":[compact_candidate_record(x,sid) for sid,x in survivors]}
@@ -2618,7 +2646,7 @@ def apply_same_story_duplicate_guard(result: dict[str, Any], massy_board: dict[s
                     _record_duplicate_call(pp,"menzo_same_run_micro_fallback_calls",status)
                     if _actual_gemini_call(status): actual_requests+=1
                     micro,_=validate_same_run_micro(raw,cid,survivor_ids)
-                    if not micro: unresolved.append(item); continue
+                    if not micro: unresolved.append(item); unresolved_article_ids.add(article_id(item)); continue
                     if micro["decision"]=="NO_DUPLICATE": survivors.append((cid,item)); continue
                     groups.append({"keep_id":micro["keep_id"],"discard_ids":[cid if micro["keep_id"]==micro["matched_id"] else micro["matched_id"]],"reason":micro["reason"]})
                     if micro["keep_id"]==cid: survivors=[x for x in survivors if x[0]!=micro["matched_id"]]+[(cid,item)]
@@ -2650,6 +2678,12 @@ def apply_same_story_duplicate_guard(result: dict[str, Any], massy_board: dict[s
                 blocked.add(id(loser)); skipped.append(loser); pp["menzo_same_run_duplicates_blocked"]+=1
         component_decisions=_v2_decisions(members)
         _v9518_finalize_same_run_audit(result,audits,component_decisions,cache_status="miss")
+        if component_failed:
+            for audit in audits:
+                if unresolved_article_ids.intersection({audit.get("left_article_id"),audit.get("right_article_id")}):
+                    audit.update(gemini_decision="ARBITRATION_FAILED",final_disposition="component_fail_closed")
+                    update_pair_coverage_record(result,"same_run",audit["pair_id"],gemini_decision="ARBITRATION_FAILED",
+                        cache_status="miss",final_disposition="component_fail_closed")
         if not component_failed:
             duplicate_cache_v2.store(cache,key,"same_run_component",component_decisions,candidates=pairs,comparisons=comparison,actual_request_count=actual_requests)
     if blocked: _remove_from_sections(result,blocked,skipped)
@@ -2698,19 +2732,25 @@ def apply_recent_published_duplicate_guard(result: dict[str, Any]) -> None:
     pp["recent_history_candidates"]=len(items); pp["recent_history_publications_12h"]=len(history); pp["recent_history_pairs_theoretical"]=len(items)*len(history)
     cache=_v2_cache(); blocked=set(); skipped=[]
     for item in items:
-        suspicious=[]; exact=None; audits=[]
+        suspicious=[]; exact_matches=[]; audits=[]
         # Evaluate every theoretical pair even after an exact hit, keeping totals consistent.
         for old in history:
             scored=scored_by_endpoints[(item["article_id"],old["article_id"])]
-            if scored["exact_duplicate"]: pp["recent_history_exact_duplicates"]+=1; exact=exact or (old,scored)
+            if scored["exact_duplicate"]: pp["recent_history_exact_duplicates"]+=1; exact_matches.append((old,scored))
             elif scored["above_threshold"]:
                 pp["recent_history_pairs_above_threshold"]+=1; suspicious.append(old)
                 audit={"scope":"recent_history","identities":[_v2_identity(item),_recent_history_identity(old)],**scored,"cache":"miss","gemini_decision":"","final_disposition":""}
                 audits.append(audit); _v9518_audit(pp,audit)
             else: pp["recent_history_pairs_below_threshold"]+=1
-        if exact:
-            old,scored=exact; item.update({"decision":"skip","priority":"skip","article_type":"duplicate","reason":"skip:duplicate_recently_published"})
-            update_pair_coverage_record(result,"recent_history",scored["pair_id"],gemini_decision="EXACT_DUPLICATE",cache_status="not_applicable",final_disposition="candidate_blocked")
+        if exact_matches:
+            old,scored=exact_matches[0]; item.update({"decision":"skip","priority":"skip","article_type":"duplicate","reason":"skip:duplicate_recently_published"})
+            for _exact_old,exact_scored in exact_matches:
+                update_pair_coverage_record(result,"recent_history",exact_scored["pair_id"],gemini_decision="EXACT_DUPLICATE",cache_status="not_applicable",final_disposition="candidate_blocked")
+            for audit in audits:
+                audit.update(gemini_decision="NOT_REQUIRED",cache_status="not_applicable",
+                             final_disposition="candidate_already_blocked_exact_duplicate")
+                update_pair_coverage_record(result,"recent_history",audit["pair_id"],gemini_decision="NOT_REQUIRED",
+                    cache_status="not_applicable",final_disposition="candidate_already_blocked_exact_duplicate")
             mark_menzo_duplicate(item,checked=True,scope="recent_history",decision="DUPLICATE",authorized=False,compared=old,reason=scored["exact_reason"],winner=old)
             blocked.add(id(item)); skipped.append(item); pp["menzo_recent_history_duplicates_blocked"]+=1; continue
         if not suspicious: continue

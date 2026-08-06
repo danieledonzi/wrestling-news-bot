@@ -991,7 +991,8 @@ def test_v95_8_6_simone_report_publication_does_not_create_news_trace(tmp_path, 
     from agents import simone_publisher_v93_18 as simone
     monkeypatch.setattr(simone, "PUBLISHED_DIR", tmp_path / "published")
     monkeypatch.setattr(simone, "REVIEW_DIR", tmp_path / "review")
-    monkeypatch.setattr(simone, "wp_ready", lambda: (False, "missing_wp_env"))
+    monkeypatch.setattr(simone, "jarvis_wp_preflight", lambda: (False, "missing_wp_env", {}))
+    monkeypatch.setattr(simone, "wp_ready", lambda: (False, "missing_wp_env", {}))
     result = simone.run_simone_report_publisher({"ready_reports":[{"title":"WWE Raw Results", "status":"ready"}]})
     assert result["policy"]["reports_count_as_news"] is False
     assert not (tmp_path / "artifacts" / "published_traces").exists()
