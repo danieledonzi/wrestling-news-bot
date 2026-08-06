@@ -5,6 +5,7 @@ import os
 from copy import deepcopy
 from datetime import datetime, timedelta, timezone
 from typing import Any
+from agents.duplicate_pair_identity import article_id
 
 DEFAULT_CANONICAL_BODY_RETENTION_HOURS = 72
 HEAVY_BODY_FIELDS = {
@@ -41,6 +42,10 @@ def body_within_retention(record: dict[str, Any], *, now: datetime | None = None
 
 def prune_record(record: dict[str, Any], *, now: datetime | None = None, hours: int | None = None) -> dict[str, Any]:
     output = deepcopy(record)
+    calculated_id = article_id(output)
+    if output.get("article_id") and output.get("article_id") != calculated_id:
+        output["article_id_migrated_from"] = output["article_id"]
+    output["article_id"] = calculated_id
     recent = body_within_retention(output, now=now, hours=hours)
     # The source text already lives inside canonical_source_body; final editorial
     # text belongs only in the per-publication trace.
