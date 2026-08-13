@@ -1,0 +1,556 @@
+{
+  "schema_version": "owtv_legacy_metric_deprecations_v1",
+  "policy_version": "v95.22_a4",
+  "measurement_only": true,
+  "entries": [
+    {
+      "legacy_metric_name": "duplicate_pair_coverage.same_run_expected",
+      "legacy_source": "agents/menzo_policy_v93_15.py",
+      "deprecation_status": "compatibility_alias_only",
+      "reason_codes": [
+        "legacy_name",
+        "superseded_by_canonical_metric"
+      ],
+      "canonical_replacements": [
+        "menzo.same_run_expected_pairs"
+      ],
+      "current_authority": "menzo.same_run_expected_pairs",
+      "known_consumers": [
+        {
+          "path": "docs/runtime/OWTV_METRICS_LEGACY_INVENTORY.md",
+          "consumer_type": "documentation_only"
+        }
+      ],
+      "transition_requirement": "Migrate consumers and observe canonical output before controlled removal.",
+      "earliest_removal_phase": "phase_2_or_later",
+      "safety_notes": "No runtime removal in A4."
+    },
+    {
+      "legacy_metric_name": "duplicate_pair_coverage.same_run_evaluated",
+      "legacy_source": "agents/menzo_policy_v93_15.py",
+      "deprecation_status": "compatibility_alias_only",
+      "reason_codes": [
+        "legacy_name",
+        "superseded_by_canonical_metric"
+      ],
+      "canonical_replacements": [
+        "menzo.same_run_evaluated_pairs"
+      ],
+      "current_authority": "menzo.same_run_evaluated_pairs",
+      "known_consumers": [
+        {
+          "path": "docs/runtime/OWTV_METRICS_LEGACY_INVENTORY.md",
+          "consumer_type": "documentation_only"
+        }
+      ],
+      "transition_requirement": "Migrate consumers and observe canonical output before controlled removal.",
+      "earliest_removal_phase": "phase_2_or_later",
+      "safety_notes": "No runtime removal in A4."
+    },
+    {
+      "legacy_metric_name": "duplicate_pair_coverage.recent_history_expected",
+      "legacy_source": "agents/menzo_policy_v93_15.py",
+      "deprecation_status": "compatibility_alias_only",
+      "reason_codes": [
+        "legacy_name",
+        "superseded_by_canonical_metric"
+      ],
+      "canonical_replacements": [
+        "menzo.recent_history_expected_pairs"
+      ],
+      "current_authority": "menzo.recent_history_expected_pairs",
+      "known_consumers": [
+        {
+          "path": "docs/runtime/OWTV_METRICS_LEGACY_INVENTORY.md",
+          "consumer_type": "documentation_only"
+        }
+      ],
+      "transition_requirement": "Migrate consumers and observe canonical output before controlled removal.",
+      "earliest_removal_phase": "phase_2_or_later",
+      "safety_notes": "No runtime removal in A4."
+    },
+    {
+      "legacy_metric_name": "duplicate_pair_coverage.recent_history_evaluated",
+      "legacy_source": "agents/menzo_policy_v93_15.py",
+      "deprecation_status": "compatibility_alias_only",
+      "reason_codes": [
+        "legacy_name",
+        "superseded_by_canonical_metric"
+      ],
+      "canonical_replacements": [
+        "menzo.recent_history_evaluated_pairs"
+      ],
+      "current_authority": "menzo.recent_history_evaluated_pairs",
+      "known_consumers": [
+        {
+          "path": "docs/runtime/OWTV_METRICS_LEGACY_INVENTORY.md",
+          "consumer_type": "documentation_only"
+        }
+      ],
+      "transition_requirement": "Migrate consumers and observe canonical output before controlled removal.",
+      "earliest_removal_phase": "phase_2_or_later",
+      "safety_notes": "No runtime removal in A4."
+    },
+    {
+      "legacy_metric_name": "duplicate_pair_coverage.coverage_complete",
+      "legacy_source": "agents/menzo_policy_v93_15.py",
+      "deprecation_status": "compatibility_alias_only",
+      "reason_codes": [
+        "legacy_name",
+        "superseded_by_canonical_metric"
+      ],
+      "canonical_replacements": [
+        "menzo.duplicate_coverage_complete"
+      ],
+      "current_authority": "menzo.duplicate_coverage_complete",
+      "known_consumers": [
+        {
+          "path": "docs/runtime/OWTV_METRICS_LEGACY_INVENTORY.md",
+          "consumer_type": "documentation_only"
+        }
+      ],
+      "transition_requirement": "Migrate consumers and observe canonical output before controlled removal.",
+      "earliest_removal_phase": "phase_2_or_later",
+      "safety_notes": "No runtime removal in A4."
+    },
+    {
+      "legacy_metric_name": "duplicate_pair_terminal_invariant_failures",
+      "legacy_source": "agents/menzo_policy_v93_15.py",
+      "deprecation_status": "compatibility_alias_only",
+      "reason_codes": [
+        "legacy_name",
+        "superseded_by_canonical_metric"
+      ],
+      "canonical_replacements": [
+        "menzo.terminal_invariant_failures"
+      ],
+      "current_authority": "menzo.terminal_invariant_failures",
+      "known_consumers": [
+        {
+          "path": "docs/runtime/OWTV_METRICS_LEGACY_INVENTORY.md",
+          "consumer_type": "documentation_only"
+        }
+      ],
+      "transition_requirement": "Migrate consumers and observe canonical output before controlled removal.",
+      "earliest_removal_phase": "phase_2_or_later",
+      "safety_notes": "No runtime removal in A4."
+    },
+    {
+      "legacy_metric_name": "selected",
+      "legacy_source": "agents/menzo.py, agents/menzo_policy_v93_15.py, agents/master_log_v93_19.py",
+      "deprecation_status": "compatibility_alias_only",
+      "reason_codes": [
+        "legacy_name",
+        "superseded_by_canonical_metric"
+      ],
+      "canonical_replacements": [
+        "menzo.selected_after_budget"
+      ],
+      "current_authority": "menzo.selected_after_budget",
+      "known_consumers": [
+        {
+          "path": "docs/runtime/OWTV_METRICS_LEGACY_INVENTORY.md",
+          "consumer_type": "documentation_only"
+        }
+      ],
+      "transition_requirement": "Migrate consumers and observe canonical output before controlled removal.",
+      "earliest_removal_phase": "phase_2_or_later",
+      "safety_notes": "No runtime removal in A4."
+    },
+    {
+      "legacy_metric_name": "pending",
+      "legacy_source": "agents/menzo.py, agents/menzo_policy_v93_15.py, agents/master_log_v93_19.py",
+      "deprecation_status": "compatibility_alias_only",
+      "reason_codes": [
+        "legacy_name",
+        "superseded_by_canonical_metric"
+      ],
+      "canonical_replacements": [
+        "menzo.pending"
+      ],
+      "current_authority": "menzo.pending",
+      "known_consumers": [
+        {
+          "path": "docs/runtime/OWTV_METRICS_LEGACY_INVENTORY.md",
+          "consumer_type": "documentation_only"
+        }
+      ],
+      "transition_requirement": "Migrate consumers and observe canonical output before controlled removal.",
+      "earliest_removal_phase": "phase_2_or_later",
+      "safety_notes": "No runtime removal in A4."
+    },
+    {
+      "legacy_metric_name": "skipped",
+      "legacy_source": "agents/menzo.py, agents/menzo_policy_v93_15.py, agents/master_log_v93_19.py",
+      "deprecation_status": "compatibility_alias_only",
+      "reason_codes": [
+        "legacy_name",
+        "superseded_by_canonical_metric"
+      ],
+      "canonical_replacements": [
+        "menzo.skipped"
+      ],
+      "current_authority": "menzo.skipped",
+      "known_consumers": [
+        {
+          "path": "docs/runtime/OWTV_METRICS_LEGACY_INVENTORY.md",
+          "consumer_type": "documentation_only"
+        }
+      ],
+      "transition_requirement": "Migrate consumers and observe canonical output before controlled removal.",
+      "earliest_removal_phase": "phase_2_or_later",
+      "safety_notes": "No runtime removal in A4."
+    },
+    {
+      "legacy_metric_name": "warnings",
+      "legacy_source": "agents/alfred.py, agents/alfred_policy_v93_20.py, agents/master_log_v93_19.py, scripts/observability_snapshot.py",
+      "deprecation_status": "compatibility_alias_only",
+      "reason_codes": [
+        "legacy_name",
+        "superseded_by_canonical_metric"
+      ],
+      "canonical_replacements": [
+        "alfred.warning_occurrences"
+      ],
+      "current_authority": "alfred.warning_occurrences",
+      "known_consumers": [
+        {
+          "path": "scripts/daily_editorial_judgment.py",
+          "consumer_type": "report"
+        },
+        {
+          "path": "send_daily_report.py",
+          "consumer_type": "report"
+        }
+      ],
+      "transition_requirement": "Migrate consumers and observe canonical output before controlled removal.",
+      "earliest_removal_phase": "phase_2_or_later",
+      "safety_notes": "No runtime removal in A4."
+    },
+    {
+      "legacy_metric_name": "warning_count",
+      "legacy_source": "agents/alfred.py, agents/alfred_policy_v93_20.py, agents/master_log_v93_19.py, scripts/observability_snapshot.py",
+      "deprecation_status": "compatibility_alias_only",
+      "reason_codes": [
+        "legacy_name",
+        "superseded_by_canonical_metric"
+      ],
+      "canonical_replacements": [
+        "alfred.warning_occurrences"
+      ],
+      "current_authority": "alfred.warning_occurrences",
+      "known_consumers": [
+        {
+          "path": "scripts/daily_editorial_judgment.py",
+          "consumer_type": "report"
+        },
+        {
+          "path": "send_daily_report.py",
+          "consumer_type": "report"
+        }
+      ],
+      "transition_requirement": "Migrate consumers and observe canonical output before controlled removal.",
+      "earliest_removal_phase": "phase_2_or_later",
+      "safety_notes": "No runtime removal in A4."
+    },
+    {
+      "legacy_metric_name": "called_total",
+      "legacy_source": "agents/gemini_ledger.py",
+      "deprecation_status": "compatibility_alias_only",
+      "reason_codes": [
+        "legacy_name",
+        "superseded_by_canonical_metric"
+      ],
+      "canonical_replacements": [
+        "gemini.completed_calls"
+      ],
+      "current_authority": "gemini.completed_calls",
+      "known_consumers": [
+        {
+          "path": "agents/gemini_diagnostics.py",
+          "consumer_type": "runtime"
+        },
+        {
+          "path": "scripts/observability_snapshot.py",
+          "consumer_type": "report"
+        },
+        {
+          "path": "scripts/daily_editorial_judgment.py",
+          "consumer_type": "report"
+        },
+        {
+          "path": "scripts/owtv_gemini_ledger_report.py",
+          "consumer_type": "report"
+        }
+      ],
+      "transition_requirement": "Migrate consumers and observe canonical output before controlled removal.",
+      "earliest_removal_phase": "phase_2_or_later",
+      "safety_notes": "No runtime removal in A4."
+    },
+    {
+      "legacy_metric_name": "avoided_total",
+      "legacy_source": "agents/gemini_ledger.py",
+      "deprecation_status": "compatibility_alias_only",
+      "reason_codes": [
+        "legacy_name",
+        "superseded_by_canonical_metric"
+      ],
+      "canonical_replacements": [
+        "gemini.avoided_calls"
+      ],
+      "current_authority": "gemini.avoided_calls",
+      "known_consumers": [
+        {
+          "path": "agents/gemini_diagnostics.py",
+          "consumer_type": "runtime"
+        },
+        {
+          "path": "scripts/observability_snapshot.py",
+          "consumer_type": "report"
+        },
+        {
+          "path": "scripts/daily_editorial_judgment.py",
+          "consumer_type": "report"
+        },
+        {
+          "path": "scripts/owtv_gemini_ledger_report.py",
+          "consumer_type": "report"
+        }
+      ],
+      "transition_requirement": "Migrate consumers and observe canonical output before controlled removal.",
+      "earliest_removal_phase": "phase_2_or_later",
+      "safety_notes": "No runtime removal in A4."
+    },
+    {
+      "legacy_metric_name": "called_35_total",
+      "legacy_source": "agents/gemini_ledger.py",
+      "deprecation_status": "compatibility_alias_only",
+      "reason_codes": [
+        "legacy_name",
+        "superseded_by_canonical_metric"
+      ],
+      "canonical_replacements": [
+        "gemini.gemini_3_5_completed_calls"
+      ],
+      "current_authority": "gemini.gemini_3_5_completed_calls",
+      "known_consumers": [
+        {
+          "path": "agents/gemini_diagnostics.py",
+          "consumer_type": "runtime"
+        },
+        {
+          "path": "scripts/observability_snapshot.py",
+          "consumer_type": "report"
+        },
+        {
+          "path": "scripts/daily_editorial_judgment.py",
+          "consumer_type": "report"
+        }
+      ],
+      "transition_requirement": "Migrate consumers and observe canonical output before controlled removal.",
+      "earliest_removal_phase": "phase_2_or_later",
+      "safety_notes": "No runtime removal in A4."
+    },
+    {
+      "legacy_metric_name": "gemini_3_5_called_total",
+      "legacy_source": "agents/gemini_ledger.py",
+      "deprecation_status": "compatibility_alias_only",
+      "reason_codes": [
+        "legacy_name",
+        "superseded_by_canonical_metric"
+      ],
+      "canonical_replacements": [
+        "gemini.gemini_3_5_completed_calls"
+      ],
+      "current_authority": "gemini.gemini_3_5_completed_calls",
+      "known_consumers": [
+        {
+          "path": "agents/gemini_diagnostics.py",
+          "consumer_type": "runtime"
+        },
+        {
+          "path": "scripts/observability_snapshot.py",
+          "consumer_type": "report"
+        },
+        {
+          "path": "scripts/daily_editorial_judgment.py",
+          "consumer_type": "report"
+        }
+      ],
+      "transition_requirement": "Migrate consumers and observe canonical output before controlled removal.",
+      "earliest_removal_phase": "phase_2_or_later",
+      "safety_notes": "No runtime removal in A4."
+    },
+    {
+      "legacy_metric_name": "simone.publish_handoff.errors",
+      "legacy_source": "agents/simone_publisher_v93_18.py, agents/master_log_v93_19.py",
+      "deprecation_status": "compatibility_alias_only",
+      "reason_codes": [
+        "legacy_name",
+        "superseded_by_canonical_metric"
+      ],
+      "canonical_replacements": [
+        "simone.legacy_errors_diagnostic"
+      ],
+      "current_authority": "simone.legacy_errors_diagnostic",
+      "known_consumers": [
+        {
+          "path": "docs/runtime/OWTV_METRICS_LEGACY_INVENTORY.md",
+          "consumer_type": "documentation_only"
+        }
+      ],
+      "transition_requirement": "Migrate consumers and observe canonical output before controlled removal.",
+      "earliest_removal_phase": "phase_2_or_later",
+      "safety_notes": "No runtime removal in A4."
+    },
+    {
+      "legacy_metric_name": "completed_successful_calls",
+      "legacy_source": "agents/gemini_diagnostics.py",
+      "deprecation_status": "scheduled_for_deprecation",
+      "reason_codes": [
+        "ambiguous_semantics",
+        "duplicate_metric",
+        "superseded_by_canonical_metric"
+      ],
+      "canonical_replacements": [
+        "gemini.completed_calls"
+      ],
+      "current_authority": "gemini.completed_calls",
+      "known_consumers": [
+        {
+          "path": "agents/gemini_diagnostics.py",
+          "consumer_type": "runtime"
+        },
+        {
+          "path": "scripts/observability_snapshot.py",
+          "consumer_type": "report"
+        },
+        {
+          "path": "tests/test_v95_gemini_ledger.py",
+          "consumer_type": "test"
+        }
+      ],
+      "transition_requirement": "Migrate compatibility payload consumers; preserve completed versus semantic-success distinction.",
+      "earliest_removal_phase": "phase_2_or_later",
+      "safety_notes": "No runtime removal in A4."
+    },
+    {
+      "legacy_metric_name": "gemini_3_5_completed_successful_calls",
+      "legacy_source": "agents/gemini_diagnostics.py",
+      "deprecation_status": "scheduled_for_deprecation",
+      "reason_codes": [
+        "ambiguous_semantics",
+        "duplicate_metric",
+        "superseded_by_canonical_metric"
+      ],
+      "canonical_replacements": [
+        "gemini.gemini_3_5_completed_calls"
+      ],
+      "current_authority": "gemini.gemini_3_5_completed_calls",
+      "known_consumers": [
+        {
+          "path": "agents/gemini_diagnostics.py",
+          "consumer_type": "runtime"
+        },
+        {
+          "path": "scripts/observability_snapshot.py",
+          "consumer_type": "report"
+        },
+        {
+          "path": "tests/test_v95_gemini_ledger.py",
+          "consumer_type": "test"
+        }
+      ],
+      "transition_requirement": "Migrate compatibility payload consumers; preserve completed versus semantic-success distinction.",
+      "earliest_removal_phase": "phase_2_or_later",
+      "safety_notes": "No runtime removal in A4."
+    },
+    {
+      "legacy_metric_name": "run_health.runs_completed",
+      "legacy_source": "scripts/observability_snapshot.py",
+      "deprecation_status": "scheduled_for_deprecation",
+      "reason_codes": [
+        "ambiguous_semantics",
+        "legacy_name",
+        "superseded_by_canonical_metric"
+      ],
+      "canonical_replacements": [
+        "runtime.runs_exit_zero"
+      ],
+      "current_authority": "runtime.runs_exit_zero",
+      "known_consumers": [
+        {
+          "path": "scripts/observability_snapshot.py",
+          "consumer_type": "report"
+        },
+        {
+          "path": "scripts/daily_editorial_judgment.py",
+          "consumer_type": "report"
+        }
+      ],
+      "transition_requirement": "Migrate label without mapping it to runtime.runs_completed.",
+      "earliest_removal_phase": "phase_2_or_later",
+      "safety_notes": "No runtime removal in A4."
+    },
+    {
+      "legacy_metric_name": "Publisher errors",
+      "legacy_source": "agents/publisher.py handoff",
+      "deprecation_status": "blocked_missing_exact_replacement",
+      "reason_codes": [
+        "ambiguous_semantics",
+        "unsupported_exactness"
+      ],
+      "canonical_replacements": [],
+      "current_authority": "non_authoritative_diagnostic",
+      "known_consumers": [
+        {
+          "path": "agents/publisher.py",
+          "consumer_type": "runtime"
+        }
+      ],
+      "transition_requirement": "Implement typed recoverable/terminal lifecycle before removal.",
+      "earliest_removal_phase": "phase_2_or_later",
+      "safety_notes": "No runtime removal in A4."
+    },
+    {
+      "legacy_metric_name": "story/duplicate footprint",
+      "legacy_source": "agents/story_dedupe_v93_32.py",
+      "deprecation_status": "retain_diagnostic_until_replacement",
+      "reason_codes": [
+        "non_authoritative_source",
+        "unsupported_exactness"
+      ],
+      "canonical_replacements": [],
+      "current_authority": "legacy_context",
+      "known_consumers": [
+        {
+          "path": "agents/story_dedupe_v93_32.py",
+          "consumer_type": "runtime"
+        }
+      ],
+      "transition_requirement": "Retain until canonical pair-ledger migration and observation.",
+      "earliest_removal_phase": "phase_2_or_later",
+      "safety_notes": "No runtime removal in A4."
+    },
+    {
+      "legacy_metric_name": "story/duplicate fingerprint",
+      "legacy_source": "agents/story_dedupe_v93_32.py",
+      "deprecation_status": "retain_diagnostic_until_replacement",
+      "reason_codes": [
+        "non_authoritative_source",
+        "unsupported_exactness"
+      ],
+      "canonical_replacements": [],
+      "current_authority": "legacy_context",
+      "known_consumers": [
+        {
+          "path": "agents/story_dedupe_v93_32.py",
+          "consumer_type": "runtime"
+        }
+      ],
+      "transition_requirement": "Retain until canonical pair-ledger migration and observation.",
+      "earliest_removal_phase": "phase_2_or_later",
+      "safety_notes": "No runtime removal in A4."
+    }
+  ]
+}
