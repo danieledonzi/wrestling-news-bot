@@ -1,0 +1,2346 @@
+{
+  "schema_version": "owtv_artifact_manifest_schema_v1",
+  "policy_version": "v95.22_a3",
+  "contract_scope": "measurement_only_contract_no_runtime_emission",
+  "phase_boundary": {
+    "phase": "Phase 0",
+    "creates_runtime_manifest": false,
+    "creates_artifact_index": false,
+    "changes_retention": false,
+    "embeds_content": false
+  },
+  "envelope": {
+    "additional_fields_allowed": false,
+    "fields": [
+      {
+        "name": "schema_version",
+        "type": "string",
+        "presence": "required"
+      },
+      {
+        "name": "policy_version",
+        "type": "string",
+        "presence": "required"
+      },
+      {
+        "name": "artifact_id",
+        "type": "string",
+        "presence": "required"
+      },
+      {
+        "name": "artifact_type",
+        "type": "string",
+        "presence": "required"
+      },
+      {
+        "name": "path",
+        "type": "string",
+        "presence": "required"
+      },
+      {
+        "name": "storage_class",
+        "type": "string",
+        "presence": "required"
+      },
+      {
+        "name": "format",
+        "type": "string",
+        "presence": "required"
+      },
+      {
+        "name": "producer_agent",
+        "type": "string",
+        "presence": "optional"
+      },
+      {
+        "name": "producer_stage",
+        "type": "string",
+        "presence": "required"
+      },
+      {
+        "name": "producer_component",
+        "type": "string",
+        "presence": "required"
+      },
+      {
+        "name": "manifested_at_utc",
+        "type": "string",
+        "presence": "required"
+      },
+      {
+        "name": "artifact_created_at_utc",
+        "type": "string",
+        "presence": "optional"
+      },
+      {
+        "name": "run_id",
+        "type": "string",
+        "presence": "optional"
+      },
+      {
+        "name": "article_id",
+        "type": "string",
+        "presence": "optional"
+      },
+      {
+        "name": "pair_id",
+        "type": "string",
+        "presence": "optional"
+      },
+      {
+        "name": "correlation_id",
+        "type": "string",
+        "presence": "optional"
+      },
+      {
+        "name": "content_id",
+        "type": "string",
+        "presence": "optional"
+      },
+      {
+        "name": "story_id",
+        "type": "string",
+        "presence": "optional"
+      },
+      {
+        "name": "report_key",
+        "type": "string",
+        "presence": "optional"
+      },
+      {
+        "name": "logical_request_id",
+        "type": "string",
+        "presence": "optional"
+      },
+      {
+        "name": "semantic_roles",
+        "type": "array",
+        "presence": "required"
+      },
+      {
+        "name": "persistence_class",
+        "type": "string",
+        "presence": "required"
+      },
+      {
+        "name": "mutation_mode",
+        "type": "string",
+        "presence": "required"
+      },
+      {
+        "name": "retention_policy",
+        "type": "object",
+        "presence": "required"
+      },
+      {
+        "name": "authority_claims",
+        "type": "array",
+        "presence": "required"
+      },
+      {
+        "name": "artifact_schema_version",
+        "type": "object",
+        "presence": "required"
+      },
+      {
+        "name": "sha256",
+        "type": "string",
+        "presence": "optional"
+      },
+      {
+        "name": "size_bytes",
+        "type": "integer",
+        "presence": "optional"
+      },
+      {
+        "name": "code_commit",
+        "type": "string",
+        "presence": "optional"
+      }
+    ],
+    "required_fields": [
+      "schema_version",
+      "policy_version",
+      "artifact_id",
+      "artifact_type",
+      "path",
+      "storage_class",
+      "format",
+      "producer_stage",
+      "producer_component",
+      "manifested_at_utc",
+      "semantic_roles",
+      "persistence_class",
+      "mutation_mode",
+      "retention_policy",
+      "authority_claims",
+      "artifact_schema_version"
+    ],
+    "optional_fields": [
+      "producer_agent",
+      "artifact_created_at_utc",
+      "run_id",
+      "article_id",
+      "pair_id",
+      "correlation_id",
+      "content_id",
+      "story_id",
+      "report_key",
+      "logical_request_id",
+      "sha256",
+      "size_bytes",
+      "code_commit"
+    ],
+    "conditional_requirements": [
+      {
+        "id": "bounded_count_limit",
+        "when": "retention_policy.mode == bounded_count",
+        "require": [
+          "retention_policy.max_items"
+        ]
+      },
+      {
+        "id": "bounded_time_limit",
+        "when": "retention_policy.mode == bounded_time",
+        "require": [
+          "retention_policy.max_age_days"
+        ]
+      },
+      {
+        "id": "producer_agent_if_applicable",
+        "when": {
+          "producer_component_kind": "canonical_newsroom_or_model_agent"
+        },
+        "require": [
+          "producer_agent"
+        ]
+      }
+    ],
+    "artifact_id_semantics": {
+      "identifies_concrete_instance": true,
+      "stable_for_same_instance": true,
+      "unique_across_distinct_instances": true,
+      "not_equivalent_to": [
+        "path",
+        "artifact_type",
+        "content_id",
+        "run_id"
+      ],
+      "runtime_generation_algorithm": "not_defined_in_phase_0"
+    }
+  },
+  "taxonomies": {
+    "artifact_types": [
+      "snapshot",
+      "ledger",
+      "history",
+      "cache",
+      "memory",
+      "coverage",
+      "archive",
+      "report",
+      "log"
+    ],
+    "storage_classes": [
+      "runtime_snapshot",
+      "runtime_state",
+      "runtime_log",
+      "diagnostic_report",
+      "review_archive",
+      "published_material_archive"
+    ],
+    "persistence_classes": [
+      "current_snapshot",
+      "bounded_history",
+      "persistent_state",
+      "append_only_ledger",
+      "immutable_archive",
+      "generated_report"
+    ],
+    "mutation_modes": [
+      "atomic_overwrite",
+      "bounded_rewrite",
+      "append_only",
+      "immutable"
+    ],
+    "retention_modes": [
+      "current_only",
+      "bounded_count",
+      "bounded_time",
+      "persistent",
+      "sampled",
+      "unknown_legacy"
+    ],
+    "retention_value_sources": [
+      "fixed_contract",
+      "code_default",
+      "runtime_configurable",
+      "unknown_legacy"
+    ],
+    "semantic_roles": [
+      "runtime_status",
+      "intake_snapshot",
+      "report_lifecycle",
+      "selection_decision",
+      "duplicate_evidence",
+      "content_sufficiency",
+      "translated_candidate",
+      "quality_review",
+      "publication_result",
+      "audit",
+      "model_call_telemetry",
+      "source_material",
+      "final_published_material",
+      "diagnostic_output",
+      "state_memory"
+    ],
+    "authority_purposes": [
+      "pipeline_observability",
+      "publication_outcome",
+      "report_publication_outcome",
+      "source_material",
+      "translated_candidate_material",
+      "final_published_material",
+      "duplicate_decision",
+      "quality_review",
+      "model_usage_cost",
+      "runtime_health"
+    ],
+    "authority_levels": [
+      "authoritative",
+      "supporting",
+      "diagnostic",
+      "legacy_context"
+    ],
+    "formats": [
+      "json",
+      "jsonl",
+      "text/log",
+      "markdown",
+      "html",
+      "zip"
+    ],
+    "evidence_basis": [
+      "both",
+      "observed_production",
+      "code_declared",
+      "documented_legacy",
+      "planned_canonical"
+    ],
+    "lifecycle_statuses": [
+      "active",
+      "fallback",
+      "legacy",
+      "error_only",
+      "planned"
+    ],
+    "artifact_schema_statuses": [
+      "known",
+      "producer_version_only",
+      "none_unknown",
+      "varies"
+    ]
+  },
+  "retention_policy_contract": {
+    "additional_fields_allowed": false,
+    "required_fields": [
+      "mode",
+      "value_source"
+    ],
+    "optional_fields": [
+      "max_items",
+      "max_age_days"
+    ],
+    "max_items_minimum": 1,
+    "max_age_days_minimum": 1
+  },
+  "authority_claim_contract": {
+    "additional_fields_allowed": false,
+    "required_fields": [
+      "purpose",
+      "level"
+    ],
+    "optional_fields": [
+      "selector",
+      "note"
+    ],
+    "purpose_scoped": true,
+    "single_authoritative_boolean_forbidden": true
+  },
+  "path_contract": {
+    "relative_only": true,
+    "traversal_forbidden": true,
+    "content_embedding_forbidden": true,
+    "extension_format_mapping": {
+      ".json": "json",
+      ".jsonl": "jsonl",
+      ".md": "markdown",
+      ".html": "html",
+      ".zip": "zip",
+      ".log": "text/log"
+    },
+    "documented_pattern_exceptions": []
+  },
+  "integrity_contract": {
+    "sha256_pattern": "^[0-9a-f]{64}$",
+    "size_bytes_minimum": 0,
+    "required_for_legacy": false,
+    "recommended_for": [
+      "immutable_archive",
+      "future artifact-index entries"
+    ]
+  },
+  "identity_links": [
+    "run_id",
+    "article_id",
+    "pair_id",
+    "correlation_id",
+    "content_id",
+    "story_id",
+    "report_key",
+    "logical_request_id"
+  ],
+  "a2_compatibility": {
+    "schema_version": "owtv_event_schema_v1",
+    "artifact_ref_relations": [
+      "input",
+      "output",
+      "evidence"
+    ],
+    "artifact_ref_required_fields": [
+      "path",
+      "relation"
+    ],
+    "artifact_ref_optional_fields": [
+      "artifact_type",
+      "schema_version",
+      "sha256"
+    ],
+    "embed_content": false,
+    "producer_agents": [
+      "Jarvis",
+      "Massy",
+      "Simone",
+      "Menzo",
+      "Andrea",
+      "Bob",
+      "Alfred",
+      "Publisher",
+      "Archivista",
+      "Gemini"
+    ],
+    "producer_stages": [
+      "runtime",
+      "intake",
+      "reporting",
+      "selection",
+      "duplicate",
+      "content_sufficiency",
+      "generation",
+      "quality",
+      "publication",
+      "audit",
+      "model"
+    ],
+    "relation_semantics": "Manifest entries describe referenced instances; A2 relation remains event-relative input, output, or evidence."
+  },
+  "legacy_artifact_inventory": [
+    {
+      "path_or_pattern": "artifacts/newsroom/jarvis_status.json",
+      "artifact_type": "snapshot",
+      "format": "json",
+      "producer_component": "newsroom_runner",
+      "producer_agent": "Jarvis",
+      "producer_stage": "runtime",
+      "storage_class": "runtime_snapshot",
+      "persistence_class": "current_snapshot",
+      "mutation_mode": "atomic_overwrite",
+      "evidence_basis": "both",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "runtime_status"
+      ],
+      "retention_summary": {
+        "mode": "current_only",
+        "value_source": "fixed_contract"
+      },
+      "authority_claims": [
+        {
+          "purpose": "runtime_health",
+          "level": "authoritative"
+        }
+      ],
+      "artifact_schema_status": "none_unknown",
+      "notes": "Fixed-path newsroom snapshot atomically replaced by the runner."
+    },
+    {
+      "path_or_pattern": "artifacts/newsroom/massy_board.json",
+      "artifact_type": "snapshot",
+      "format": "json",
+      "producer_component": "newsroom_runner",
+      "producer_agent": "Massy",
+      "producer_stage": "intake",
+      "storage_class": "runtime_snapshot",
+      "persistence_class": "current_snapshot",
+      "mutation_mode": "atomic_overwrite",
+      "evidence_basis": "both",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "intake_snapshot"
+      ],
+      "retention_summary": {
+        "mode": "current_only",
+        "value_source": "fixed_contract"
+      },
+      "authority_claims": [
+        {
+          "purpose": "pipeline_observability",
+          "level": "supporting"
+        }
+      ],
+      "artifact_schema_status": "none_unknown",
+      "notes": "Fixed-path newsroom snapshot atomically replaced by the runner."
+    },
+    {
+      "path_or_pattern": "artifacts/newsroom/simone_reports.json",
+      "artifact_type": "snapshot",
+      "format": "json",
+      "producer_component": "newsroom_runner",
+      "producer_agent": "Simone",
+      "producer_stage": "reporting",
+      "storage_class": "runtime_snapshot",
+      "persistence_class": "current_snapshot",
+      "mutation_mode": "atomic_overwrite",
+      "evidence_basis": "both",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "report_lifecycle"
+      ],
+      "retention_summary": {
+        "mode": "current_only",
+        "value_source": "fixed_contract"
+      },
+      "authority_claims": [
+        {
+          "purpose": "pipeline_observability",
+          "level": "supporting"
+        }
+      ],
+      "artifact_schema_status": "none_unknown",
+      "notes": "Fixed-path newsroom snapshot atomically replaced by the runner."
+    },
+    {
+      "path_or_pattern": "artifacts/newsroom/simone_report_publish.json",
+      "artifact_type": "snapshot",
+      "format": "json",
+      "producer_component": "newsroom_runner",
+      "producer_agent": "Simone",
+      "producer_stage": "reporting",
+      "storage_class": "runtime_snapshot",
+      "persistence_class": "current_snapshot",
+      "mutation_mode": "atomic_overwrite",
+      "evidence_basis": "both",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "report_lifecycle",
+        "publication_result"
+      ],
+      "retention_summary": {
+        "mode": "current_only",
+        "value_source": "fixed_contract"
+      },
+      "authority_claims": [
+        {
+          "purpose": "report_publication_outcome",
+          "level": "authoritative",
+          "selector": "results[status=published]"
+        }
+      ],
+      "artifact_schema_status": "none_unknown",
+      "notes": "Raw Simone publisher artifact records outcome rows in results[]; only results with status=published establish report publication."
+    },
+    {
+      "path_or_pattern": "artifacts/newsroom/menzo_decisions.json",
+      "artifact_type": "snapshot",
+      "format": "json",
+      "producer_component": "newsroom_runner",
+      "producer_agent": "Menzo",
+      "producer_stage": "selection",
+      "storage_class": "runtime_snapshot",
+      "persistence_class": "current_snapshot",
+      "mutation_mode": "atomic_overwrite",
+      "evidence_basis": "both",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "selection_decision",
+        "duplicate_evidence"
+      ],
+      "retention_summary": {
+        "mode": "current_only",
+        "value_source": "fixed_contract"
+      },
+      "authority_claims": [
+        {
+          "purpose": "duplicate_decision",
+          "level": "supporting"
+        }
+      ],
+      "artifact_schema_status": "none_unknown",
+      "notes": "Fixed-path newsroom snapshot atomically replaced by the runner."
+    },
+    {
+      "path_or_pattern": "artifacts/newsroom/andrea_pre_bob_latest.json",
+      "artifact_type": "snapshot",
+      "format": "json",
+      "producer_component": "newsroom_runner",
+      "producer_agent": "Andrea",
+      "producer_stage": "content_sufficiency",
+      "storage_class": "runtime_snapshot",
+      "persistence_class": "current_snapshot",
+      "mutation_mode": "atomic_overwrite",
+      "evidence_basis": "both",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "content_sufficiency"
+      ],
+      "retention_summary": {
+        "mode": "current_only",
+        "value_source": "fixed_contract"
+      },
+      "authority_claims": [
+        {
+          "purpose": "pipeline_observability",
+          "level": "supporting"
+        }
+      ],
+      "artifact_schema_status": "none_unknown",
+      "notes": "Fixed-path newsroom snapshot atomically replaced by the runner."
+    },
+    {
+      "path_or_pattern": "artifacts/newsroom/bob_articles.json",
+      "artifact_type": "snapshot",
+      "format": "json",
+      "producer_component": "newsroom_runner",
+      "producer_agent": "Bob",
+      "producer_stage": "generation",
+      "storage_class": "runtime_snapshot",
+      "persistence_class": "current_snapshot",
+      "mutation_mode": "atomic_overwrite",
+      "evidence_basis": "both",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "translated_candidate"
+      ],
+      "retention_summary": {
+        "mode": "current_only",
+        "value_source": "fixed_contract"
+      },
+      "authority_claims": [
+        {
+          "purpose": "translated_candidate_material",
+          "level": "supporting",
+          "selector": "articles[].body_html"
+        }
+      ],
+      "artifact_schema_status": "none_unknown",
+      "notes": "Bob body_html is translated-candidate material and never final-published material."
+    },
+    {
+      "path_or_pattern": "artifacts/newsroom/alfred_review.json",
+      "artifact_type": "snapshot",
+      "format": "json",
+      "producer_component": "newsroom_runner",
+      "producer_agent": "Alfred",
+      "producer_stage": "quality",
+      "storage_class": "runtime_snapshot",
+      "persistence_class": "current_snapshot",
+      "mutation_mode": "atomic_overwrite",
+      "evidence_basis": "both",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "quality_review",
+        "translated_candidate"
+      ],
+      "retention_summary": {
+        "mode": "current_only",
+        "value_source": "fixed_contract"
+      },
+      "authority_claims": [
+        {
+          "purpose": "quality_review",
+          "level": "supporting"
+        },
+        {
+          "purpose": "translated_candidate_material",
+          "level": "supporting",
+          "selector": "reviews[].article.body_html"
+        }
+      ],
+      "artifact_schema_status": "none_unknown",
+      "notes": "Alfred review/candidate bodies are not final-published material."
+    },
+    {
+      "path_or_pattern": "artifacts/newsroom/publisher_result.json",
+      "artifact_type": "snapshot",
+      "format": "json",
+      "producer_component": "newsroom_runner",
+      "producer_agent": "Publisher",
+      "producer_stage": "publication",
+      "storage_class": "runtime_snapshot",
+      "persistence_class": "current_snapshot",
+      "mutation_mode": "atomic_overwrite",
+      "evidence_basis": "both",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "publication_result"
+      ],
+      "retention_summary": {
+        "mode": "current_only",
+        "value_source": "fixed_contract"
+      },
+      "authority_claims": [
+        {
+          "purpose": "publication_outcome",
+          "level": "authoritative",
+          "selector": "published[] and results[status=published]"
+        }
+      ],
+      "artifact_schema_status": "none_unknown",
+      "notes": "Publisher status, title, source URL and WordPress URL establish outcome, not final linguistic material."
+    },
+    {
+      "path_or_pattern": "artifacts/newsroom/archivista_report.json",
+      "artifact_type": "snapshot",
+      "format": "json",
+      "producer_component": "newsroom_runner",
+      "producer_agent": "Archivista",
+      "producer_stage": "audit",
+      "storage_class": "runtime_snapshot",
+      "persistence_class": "current_snapshot",
+      "mutation_mode": "atomic_overwrite",
+      "evidence_basis": "both",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "audit"
+      ],
+      "retention_summary": {
+        "mode": "current_only",
+        "value_source": "fixed_contract"
+      },
+      "authority_claims": [
+        {
+          "purpose": "pipeline_observability",
+          "level": "diagnostic"
+        }
+      ],
+      "artifact_schema_status": "none_unknown",
+      "notes": "Fixed-path newsroom snapshot atomically replaced by the runner."
+    },
+    {
+      "path_or_pattern": "artifacts/newsroom/agent_timeline.json",
+      "artifact_type": "snapshot",
+      "format": "json",
+      "producer_component": "newsroom_runner",
+      "producer_agent": "Jarvis",
+      "producer_stage": "runtime",
+      "storage_class": "runtime_snapshot",
+      "persistence_class": "current_snapshot",
+      "mutation_mode": "atomic_overwrite",
+      "evidence_basis": "both",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "runtime_status",
+        "diagnostic_output"
+      ],
+      "retention_summary": {
+        "mode": "current_only",
+        "value_source": "fixed_contract"
+      },
+      "authority_claims": [
+        {
+          "purpose": "pipeline_observability",
+          "level": "diagnostic"
+        }
+      ],
+      "artifact_schema_status": "none_unknown",
+      "notes": "Fixed-path newsroom snapshot atomically replaced by the runner."
+    },
+    {
+      "path_or_pattern": "artifacts/newsroom/run_summary.json",
+      "artifact_type": "snapshot",
+      "format": "json",
+      "producer_component": "newsroom_runner",
+      "producer_agent": "Jarvis",
+      "producer_stage": "runtime",
+      "storage_class": "runtime_snapshot",
+      "persistence_class": "current_snapshot",
+      "mutation_mode": "atomic_overwrite",
+      "evidence_basis": "both",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "runtime_status",
+        "diagnostic_output"
+      ],
+      "retention_summary": {
+        "mode": "current_only",
+        "value_source": "fixed_contract"
+      },
+      "authority_claims": [
+        {
+          "purpose": "pipeline_observability",
+          "level": "diagnostic"
+        }
+      ],
+      "artifact_schema_status": "none_unknown",
+      "notes": "Fixed-path newsroom snapshot atomically replaced by the runner."
+    },
+    {
+      "path_or_pattern": "state/newsroom/master_log.jsonl",
+      "artifact_type": "memory",
+      "format": "jsonl",
+      "producer_component": "agents.master_log_v93_19",
+      "producer_agent": "Jarvis",
+      "producer_stage": "runtime",
+      "storage_class": "runtime_state",
+      "persistence_class": "bounded_history",
+      "mutation_mode": "bounded_rewrite",
+      "evidence_basis": "both",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "state_memory",
+        "audit"
+      ],
+      "retention_summary": {
+        "mode": "bounded_count",
+        "max_items": 300,
+        "value_source": "runtime_configurable"
+      },
+      "authority_claims": [
+        {
+          "purpose": "pipeline_observability",
+          "level": "authoritative",
+          "selector": "complete run records"
+        }
+      ],
+      "artifact_schema_status": "none_unknown",
+      "notes": "Primary complete observability source; MAX_RUNS defaults to 300 and is environment-configurable."
+    },
+    {
+      "path_or_pattern": "artifacts/newsroom/master_log_tail.jsonl",
+      "artifact_type": "memory",
+      "format": "jsonl",
+      "producer_component": "agents.master_log_v93_19",
+      "producer_agent": "Jarvis",
+      "producer_stage": "runtime",
+      "storage_class": "runtime_snapshot",
+      "persistence_class": "bounded_history",
+      "mutation_mode": "bounded_rewrite",
+      "evidence_basis": "code_declared",
+      "lifecycle_status": "fallback",
+      "semantic_roles": [
+        "state_memory",
+        "diagnostic_output"
+      ],
+      "retention_summary": {
+        "mode": "bounded_count",
+        "max_items": 40,
+        "value_source": "runtime_configurable"
+      },
+      "authority_claims": [
+        {
+          "purpose": "pipeline_observability",
+          "level": "supporting",
+          "selector": "tail fallback"
+        }
+      ],
+      "artifact_schema_status": "none_unknown",
+      "notes": "Bounded TAIL_RUNS fallback only; never outranks the primary master log."
+    },
+    {
+      "path_or_pattern": "artifacts/newsroom/newsroom_master.log",
+      "artifact_type": "log",
+      "format": "text/log",
+      "producer_component": "agents.master_log_v93_19",
+      "producer_agent": "Jarvis",
+      "producer_stage": "runtime",
+      "storage_class": "runtime_log",
+      "persistence_class": "bounded_history",
+      "mutation_mode": "bounded_rewrite",
+      "evidence_basis": "code_declared",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "diagnostic_output"
+      ],
+      "retention_summary": {
+        "mode": "bounded_count",
+        "max_items": 40,
+        "value_source": "runtime_configurable"
+      },
+      "authority_claims": [
+        {
+          "purpose": "pipeline_observability",
+          "level": "diagnostic"
+        }
+      ],
+      "artifact_schema_status": "none_unknown",
+      "notes": "Human-readable artifact rebuilt atomically from records[-TAIL_RUNS:]; TAIL_RUNS defaults to 40 via V93_MASTER_LOG_ARTIFACT_TAIL."
+    },
+    {
+      "path_or_pattern": "state/newsroom/gemini_call_ledger.jsonl",
+      "artifact_type": "ledger",
+      "format": "jsonl",
+      "producer_component": "agents.gemini_ledger",
+      "producer_agent": "Gemini",
+      "producer_stage": "model",
+      "storage_class": "runtime_state",
+      "persistence_class": "append_only_ledger",
+      "mutation_mode": "append_only",
+      "evidence_basis": "both",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "model_call_telemetry"
+      ],
+      "retention_summary": {
+        "mode": "persistent",
+        "value_source": "code_default"
+      },
+      "authority_claims": [
+        {
+          "purpose": "model_usage_cost",
+          "level": "authoritative"
+        }
+      ],
+      "artifact_schema_status": "producer_version_only",
+      "notes": "Current runtime appends one JSONL row per Gemini call/avoidance record."
+    },
+    {
+      "path_or_pattern": "artifacts/newsroom/gemini_call_ledger_latest.json",
+      "artifact_type": "snapshot",
+      "format": "json",
+      "producer_component": "agents.gemini_ledger",
+      "producer_agent": "Gemini",
+      "producer_stage": "model",
+      "storage_class": "runtime_snapshot",
+      "persistence_class": "current_snapshot",
+      "mutation_mode": "atomic_overwrite",
+      "evidence_basis": "code_declared",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "model_call_telemetry"
+      ],
+      "retention_summary": {
+        "mode": "current_only",
+        "value_source": "fixed_contract"
+      },
+      "authority_claims": [
+        {
+          "purpose": "model_usage_cost",
+          "level": "supporting"
+        }
+      ],
+      "artifact_schema_status": "producer_version_only",
+      "notes": "Latest-call snapshot; it is not the append-only ledger."
+    },
+    {
+      "path_or_pattern": "artifacts/newsroom/menzo_duplicate_pair_coverage.json",
+      "artifact_type": "coverage",
+      "format": "json",
+      "producer_component": "agents.menzo_policy_v93_15",
+      "producer_agent": "Menzo",
+      "producer_stage": "duplicate",
+      "storage_class": "runtime_snapshot",
+      "persistence_class": "current_snapshot",
+      "mutation_mode": "atomic_overwrite",
+      "evidence_basis": "both",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "duplicate_evidence"
+      ],
+      "retention_summary": {
+        "mode": "current_only",
+        "value_source": "fixed_contract"
+      },
+      "authority_claims": [
+        {
+          "purpose": "duplicate_decision",
+          "level": "authoritative",
+          "selector": "producing latest run only"
+        }
+      ],
+      "artifact_schema_status": "known",
+      "notes": "Latest-run pair coverage written by Menzo policy with artifact schema owtv_duplicate_pair_coverage_v1."
+    },
+    {
+      "path_or_pattern": "state/newsroom/publisher_history.json",
+      "artifact_type": "history",
+      "format": "json",
+      "producer_component": "agents.publisher_history",
+      "producer_agent": "Publisher",
+      "producer_stage": "publication",
+      "storage_class": "runtime_state",
+      "persistence_class": "persistent_state",
+      "mutation_mode": "atomic_overwrite",
+      "evidence_basis": "both",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "publication_result",
+        "state_memory"
+      ],
+      "retention_summary": {
+        "mode": "persistent",
+        "value_source": "code_default"
+      },
+      "authority_claims": [
+        {
+          "purpose": "publication_outcome",
+          "level": "supporting",
+          "selector": "successful publication records"
+        }
+      ],
+      "artifact_schema_status": "none_unknown",
+      "notes": "Publisher idempotency/history state; outcome evidence, not final text."
+    },
+    {
+      "path_or_pattern": "state/newsroom/simone_report_history.json",
+      "artifact_type": "history",
+      "format": "json",
+      "producer_component": "agents.simone_publisher_v93_18",
+      "producer_agent": "Simone",
+      "producer_stage": "reporting",
+      "storage_class": "runtime_state",
+      "persistence_class": "persistent_state",
+      "mutation_mode": "atomic_overwrite",
+      "evidence_basis": "both",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "report_lifecycle",
+        "state_memory"
+      ],
+      "retention_summary": {
+        "mode": "persistent",
+        "value_source": "code_default"
+      },
+      "authority_claims": [
+        {
+          "purpose": "report_publication_outcome",
+          "level": "supporting"
+        }
+      ],
+      "artifact_schema_status": "none_unknown",
+      "notes": "Report publication history state."
+    },
+    {
+      "path_or_pattern": "state/newsroom/simone_reports_latest.json",
+      "artifact_type": "snapshot",
+      "format": "json",
+      "producer_component": "agents.simone_publisher_v93_18",
+      "producer_agent": "Simone",
+      "producer_stage": "reporting",
+      "storage_class": "runtime_state",
+      "persistence_class": "current_snapshot",
+      "mutation_mode": "atomic_overwrite",
+      "evidence_basis": "both",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "report_lifecycle"
+      ],
+      "retention_summary": {
+        "mode": "current_only",
+        "value_source": "fixed_contract"
+      },
+      "authority_claims": [
+        {
+          "purpose": "report_publication_outcome",
+          "level": "supporting"
+        }
+      ],
+      "artifact_schema_status": "none_unknown",
+      "notes": "Latest Simone report-processing snapshot."
+    },
+    {
+      "path_or_pattern": "state/newsroom/menzo_duplicate_arbitration_cache_v2.json",
+      "artifact_type": "cache",
+      "format": "json",
+      "producer_component": "agents.menzo_duplicate_cache",
+      "producer_agent": "Menzo",
+      "producer_stage": "duplicate",
+      "storage_class": "runtime_state",
+      "persistence_class": "persistent_state",
+      "mutation_mode": "atomic_overwrite",
+      "evidence_basis": "both",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "duplicate_evidence",
+        "state_memory"
+      ],
+      "retention_summary": {
+        "mode": "persistent",
+        "value_source": "code_default"
+      },
+      "authority_claims": [
+        {
+          "purpose": "duplicate_decision",
+          "level": "supporting"
+        }
+      ],
+      "artifact_schema_status": "producer_version_only",
+      "notes": "Versioned deterministic duplicate arbitration cache; cache evidence is not publication authority."
+    },
+    {
+      "path_or_pattern": "state/newsroom/story_dedupe_memory.json",
+      "artifact_type": "memory",
+      "format": "json",
+      "producer_component": "agents.story_dedupe_v93_32",
+      "producer_agent": "Menzo",
+      "producer_stage": "duplicate",
+      "storage_class": "runtime_state",
+      "persistence_class": "persistent_state",
+      "mutation_mode": "atomic_overwrite",
+      "evidence_basis": "code_declared",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "duplicate_evidence",
+        "state_memory"
+      ],
+      "retention_summary": {
+        "mode": "bounded_time",
+        "max_age_days": 4,
+        "value_source": "code_default"
+      },
+      "authority_claims": [
+        {
+          "purpose": "duplicate_decision",
+          "level": "legacy_context"
+        }
+      ],
+      "artifact_schema_status": "producer_version_only",
+      "notes": "Story dedupe memory is TTL-pruned at the 96-hour code default; it is not canonical pair truth."
+    },
+    {
+      "path_or_pattern": "state/newsroom/story_footprints.json",
+      "artifact_type": "memory",
+      "format": "json",
+      "producer_component": "agents.story_dedupe_v93_32",
+      "producer_agent": "Menzo",
+      "producer_stage": "duplicate",
+      "storage_class": "runtime_state",
+      "persistence_class": "persistent_state",
+      "mutation_mode": "atomic_overwrite",
+      "evidence_basis": "code_declared",
+      "lifecycle_status": "legacy",
+      "semantic_roles": [
+        "duplicate_evidence",
+        "state_memory"
+      ],
+      "retention_summary": {
+        "mode": "bounded_time",
+        "max_age_days": 7,
+        "value_source": "code_default"
+      },
+      "authority_claims": [
+        {
+          "purpose": "duplicate_decision",
+          "level": "legacy_context"
+        }
+      ],
+      "artifact_schema_status": "producer_version_only",
+      "notes": "Legacy heuristic story-footprint memory uses the 168-hour code default and is not blocking pair authority."
+    },
+    {
+      "path_or_pattern": "state/newsroom/story_fingerprints.json",
+      "artifact_type": "memory",
+      "format": "json",
+      "producer_component": "agents.story_dedupe_v93_32",
+      "producer_agent": "Menzo",
+      "producer_stage": "duplicate",
+      "storage_class": "runtime_state",
+      "persistence_class": "persistent_state",
+      "mutation_mode": "atomic_overwrite",
+      "evidence_basis": "code_declared",
+      "lifecycle_status": "legacy",
+      "semantic_roles": [
+        "duplicate_evidence",
+        "state_memory"
+      ],
+      "retention_summary": {
+        "mode": "bounded_time",
+        "max_age_days": 7,
+        "value_source": "code_default"
+      },
+      "authority_claims": [
+        {
+          "purpose": "duplicate_decision",
+          "level": "legacy_context"
+        }
+      ],
+      "artifact_schema_status": "producer_version_only",
+      "notes": "Generalized fingerprint memory uses the 168-hour code default and remains supporting/legacy duplicate context."
+    },
+    {
+      "path_or_pattern": "state/newsroom/menzo_softpool.json",
+      "artifact_type": "memory",
+      "format": "json",
+      "producer_component": "agents.menzo_policy_v93_15",
+      "producer_agent": "Menzo",
+      "producer_stage": "selection",
+      "storage_class": "runtime_state",
+      "persistence_class": "persistent_state",
+      "mutation_mode": "atomic_overwrite",
+      "evidence_basis": "code_declared",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "selection_decision",
+        "state_memory"
+      ],
+      "retention_summary": {
+        "mode": "persistent",
+        "value_source": "code_default"
+      },
+      "authority_claims": [
+        {
+          "purpose": "pipeline_observability",
+          "level": "supporting"
+        }
+      ],
+      "artifact_schema_status": "none_unknown",
+      "notes": "Selective softpool state confirmed by current policy code."
+    },
+    {
+      "path_or_pattern": "state/newsroom/pending_*.json",
+      "artifact_type": "memory",
+      "format": "json",
+      "producer_component": "legacy pending subsystem",
+      "producer_agent": null,
+      "producer_stage": "runtime",
+      "storage_class": "runtime_state",
+      "persistence_class": "persistent_state",
+      "mutation_mode": "atomic_overwrite",
+      "evidence_basis": "code_declared",
+      "lifecycle_status": "legacy",
+      "semantic_roles": [
+        "state_memory",
+        "report_lifecycle"
+      ],
+      "retention_summary": {
+        "mode": "unknown_legacy",
+        "value_source": "unknown_legacy"
+      },
+      "authority_claims": [
+        {
+          "purpose": "pipeline_observability",
+          "level": "legacy_context"
+        }
+      ],
+      "artifact_schema_status": "none_unknown",
+      "notes": "Legacy root/state pending families are producer-specific and do not imply selection or publication."
+    },
+    {
+      "path_or_pattern": "reports/*.json",
+      "artifact_type": "report",
+      "format": "json",
+      "producer_component": "observability and audit scripts",
+      "producer_agent": null,
+      "producer_stage": "audit",
+      "storage_class": "diagnostic_report",
+      "persistence_class": "generated_report",
+      "mutation_mode": "immutable",
+      "evidence_basis": "code_declared",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "audit",
+        "diagnostic_output"
+      ],
+      "retention_summary": {
+        "mode": "unknown_legacy",
+        "value_source": "unknown_legacy"
+      },
+      "authority_claims": [
+        {
+          "purpose": "pipeline_observability",
+          "level": "diagnostic"
+        }
+      ],
+      "artifact_schema_status": "varies",
+      "notes": "Generated JSON diagnostic report family; retention is producer/runtime-specific and not changed by A3."
+    },
+    {
+      "path_or_pattern": "reports/*.md",
+      "artifact_type": "report",
+      "format": "markdown",
+      "producer_component": "observability and audit scripts",
+      "producer_agent": null,
+      "producer_stage": "audit",
+      "storage_class": "diagnostic_report",
+      "persistence_class": "generated_report",
+      "mutation_mode": "immutable",
+      "evidence_basis": "code_declared",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "audit",
+        "diagnostic_output"
+      ],
+      "retention_summary": {
+        "mode": "unknown_legacy",
+        "value_source": "unknown_legacy"
+      },
+      "authority_claims": [
+        {
+          "purpose": "pipeline_observability",
+          "level": "diagnostic"
+        }
+      ],
+      "artifact_schema_status": "varies",
+      "notes": "Generated Markdown diagnostic report family; retention is producer/runtime-specific and not changed by A3."
+    },
+    {
+      "path_or_pattern": "review_packages/**/original.html",
+      "artifact_type": "archive",
+      "format": "html",
+      "producer_component": "scripts.translation_quality_audit documented review-package adapter",
+      "producer_agent": null,
+      "producer_stage": "quality",
+      "storage_class": "review_archive",
+      "persistence_class": "immutable_archive",
+      "mutation_mode": "immutable",
+      "evidence_basis": "documented_legacy",
+      "lifecycle_status": "legacy",
+      "semantic_roles": [
+        "source_material",
+        "quality_review"
+      ],
+      "retention_summary": {
+        "mode": "unknown_legacy",
+        "value_source": "unknown_legacy"
+      },
+      "authority_claims": [
+        {
+          "purpose": "source_material",
+          "level": "supporting",
+          "selector": "recognized original.html or source.html"
+        }
+      ],
+      "artifact_schema_status": "varies",
+      "notes": "Recognized review-package source HTML; never publication or final-material authority."
+    },
+    {
+      "path_or_pattern": "review_packages/**/source.html",
+      "artifact_type": "archive",
+      "format": "html",
+      "producer_component": "scripts.translation_quality_audit documented review-package adapter",
+      "producer_agent": null,
+      "producer_stage": "quality",
+      "storage_class": "review_archive",
+      "persistence_class": "immutable_archive",
+      "mutation_mode": "immutable",
+      "evidence_basis": "documented_legacy",
+      "lifecycle_status": "legacy",
+      "semantic_roles": [
+        "source_material",
+        "quality_review"
+      ],
+      "retention_summary": {
+        "mode": "unknown_legacy",
+        "value_source": "unknown_legacy"
+      },
+      "authority_claims": [
+        {
+          "purpose": "source_material",
+          "level": "supporting",
+          "selector": "recognized original.html or source.html"
+        }
+      ],
+      "artifact_schema_status": "varies",
+      "notes": "Recognized review-package source HTML; never publication or final-material authority."
+    },
+    {
+      "path_or_pattern": "review_packages/**/*_original.html",
+      "artifact_type": "archive",
+      "format": "html",
+      "producer_component": "scripts.translation_quality_audit documented review-package adapter",
+      "producer_agent": null,
+      "producer_stage": "quality",
+      "storage_class": "review_archive",
+      "persistence_class": "immutable_archive",
+      "mutation_mode": "immutable",
+      "evidence_basis": "documented_legacy",
+      "lifecycle_status": "legacy",
+      "semantic_roles": [
+        "source_material",
+        "quality_review"
+      ],
+      "retention_summary": {
+        "mode": "unknown_legacy",
+        "value_source": "unknown_legacy"
+      },
+      "authority_claims": [
+        {
+          "purpose": "source_material",
+          "level": "supporting",
+          "selector": "recognized *_original.html or *_source.html"
+        }
+      ],
+      "artifact_schema_status": "varies",
+      "notes": "Recognized suffixed review-package source HTML; never publication or final-material authority."
+    },
+    {
+      "path_or_pattern": "review_packages/**/*_source.html",
+      "artifact_type": "archive",
+      "format": "html",
+      "producer_component": "scripts.translation_quality_audit documented review-package adapter",
+      "producer_agent": null,
+      "producer_stage": "quality",
+      "storage_class": "review_archive",
+      "persistence_class": "immutable_archive",
+      "mutation_mode": "immutable",
+      "evidence_basis": "documented_legacy",
+      "lifecycle_status": "legacy",
+      "semantic_roles": [
+        "source_material",
+        "quality_review"
+      ],
+      "retention_summary": {
+        "mode": "unknown_legacy",
+        "value_source": "unknown_legacy"
+      },
+      "authority_claims": [
+        {
+          "purpose": "source_material",
+          "level": "supporting",
+          "selector": "recognized *_original.html or *_source.html"
+        }
+      ],
+      "artifact_schema_status": "varies",
+      "notes": "Recognized suffixed review-package source HTML; never publication or final-material authority."
+    },
+    {
+      "path_or_pattern": "review_packages/**/translated.html",
+      "artifact_type": "archive",
+      "format": "html",
+      "producer_component": "scripts.translation_quality_audit documented review-package adapter",
+      "producer_agent": null,
+      "producer_stage": "quality",
+      "storage_class": "review_archive",
+      "persistence_class": "immutable_archive",
+      "mutation_mode": "immutable",
+      "evidence_basis": "documented_legacy",
+      "lifecycle_status": "legacy",
+      "semantic_roles": [
+        "translated_candidate",
+        "quality_review"
+      ],
+      "retention_summary": {
+        "mode": "unknown_legacy",
+        "value_source": "unknown_legacy"
+      },
+      "authority_claims": [
+        {
+          "purpose": "translated_candidate_material",
+          "level": "supporting",
+          "selector": "recognized translated.html, candidate.html, or body.html"
+        }
+      ],
+      "artifact_schema_status": "varies",
+      "notes": "Recognized review-package candidate HTML; never publication or final-material authority."
+    },
+    {
+      "path_or_pattern": "review_packages/**/candidate.html",
+      "artifact_type": "archive",
+      "format": "html",
+      "producer_component": "scripts.translation_quality_audit documented review-package adapter",
+      "producer_agent": null,
+      "producer_stage": "quality",
+      "storage_class": "review_archive",
+      "persistence_class": "immutable_archive",
+      "mutation_mode": "immutable",
+      "evidence_basis": "documented_legacy",
+      "lifecycle_status": "legacy",
+      "semantic_roles": [
+        "translated_candidate",
+        "quality_review"
+      ],
+      "retention_summary": {
+        "mode": "unknown_legacy",
+        "value_source": "unknown_legacy"
+      },
+      "authority_claims": [
+        {
+          "purpose": "translated_candidate_material",
+          "level": "supporting",
+          "selector": "recognized translated.html, candidate.html, or body.html"
+        }
+      ],
+      "artifact_schema_status": "varies",
+      "notes": "Recognized review-package candidate HTML; never publication or final-material authority."
+    },
+    {
+      "path_or_pattern": "review_packages/**/body.html",
+      "artifact_type": "archive",
+      "format": "html",
+      "producer_component": "scripts.translation_quality_audit documented review-package adapter",
+      "producer_agent": null,
+      "producer_stage": "quality",
+      "storage_class": "review_archive",
+      "persistence_class": "immutable_archive",
+      "mutation_mode": "immutable",
+      "evidence_basis": "documented_legacy",
+      "lifecycle_status": "legacy",
+      "semantic_roles": [
+        "translated_candidate",
+        "quality_review"
+      ],
+      "retention_summary": {
+        "mode": "unknown_legacy",
+        "value_source": "unknown_legacy"
+      },
+      "authority_claims": [
+        {
+          "purpose": "translated_candidate_material",
+          "level": "supporting",
+          "selector": "recognized translated.html, candidate.html, or body.html"
+        }
+      ],
+      "artifact_schema_status": "varies",
+      "notes": "Recognized review-package candidate HTML; never publication or final-material authority."
+    },
+    {
+      "path_or_pattern": "review_packages/**/*_translated.html",
+      "artifact_type": "archive",
+      "format": "html",
+      "producer_component": "scripts.translation_quality_audit documented review-package adapter",
+      "producer_agent": null,
+      "producer_stage": "quality",
+      "storage_class": "review_archive",
+      "persistence_class": "immutable_archive",
+      "mutation_mode": "immutable",
+      "evidence_basis": "documented_legacy",
+      "lifecycle_status": "legacy",
+      "semantic_roles": [
+        "translated_candidate",
+        "quality_review"
+      ],
+      "retention_summary": {
+        "mode": "unknown_legacy",
+        "value_source": "unknown_legacy"
+      },
+      "authority_claims": [
+        {
+          "purpose": "translated_candidate_material",
+          "level": "supporting",
+          "selector": "recognized suffixed candidate/body HTML"
+        }
+      ],
+      "artifact_schema_status": "varies",
+      "notes": "Recognized suffixed review-package candidate HTML; never publication or final-material authority."
+    },
+    {
+      "path_or_pattern": "review_packages/**/*_candidate.html",
+      "artifact_type": "archive",
+      "format": "html",
+      "producer_component": "scripts.translation_quality_audit documented review-package adapter",
+      "producer_agent": null,
+      "producer_stage": "quality",
+      "storage_class": "review_archive",
+      "persistence_class": "immutable_archive",
+      "mutation_mode": "immutable",
+      "evidence_basis": "documented_legacy",
+      "lifecycle_status": "legacy",
+      "semantic_roles": [
+        "translated_candidate",
+        "quality_review"
+      ],
+      "retention_summary": {
+        "mode": "unknown_legacy",
+        "value_source": "unknown_legacy"
+      },
+      "authority_claims": [
+        {
+          "purpose": "translated_candidate_material",
+          "level": "supporting",
+          "selector": "recognized suffixed candidate/body HTML"
+        }
+      ],
+      "artifact_schema_status": "varies",
+      "notes": "Recognized suffixed review-package candidate HTML; never publication or final-material authority."
+    },
+    {
+      "path_or_pattern": "review_packages/**/*_body.html",
+      "artifact_type": "archive",
+      "format": "html",
+      "producer_component": "scripts.translation_quality_audit documented review-package adapter",
+      "producer_agent": null,
+      "producer_stage": "quality",
+      "storage_class": "review_archive",
+      "persistence_class": "immutable_archive",
+      "mutation_mode": "immutable",
+      "evidence_basis": "documented_legacy",
+      "lifecycle_status": "legacy",
+      "semantic_roles": [
+        "translated_candidate",
+        "quality_review"
+      ],
+      "retention_summary": {
+        "mode": "unknown_legacy",
+        "value_source": "unknown_legacy"
+      },
+      "authority_claims": [
+        {
+          "purpose": "translated_candidate_material",
+          "level": "supporting",
+          "selector": "recognized suffixed candidate/body HTML"
+        }
+      ],
+      "artifact_schema_status": "varies",
+      "notes": "Recognized suffixed review-package candidate HTML; never publication or final-material authority."
+    },
+    {
+      "path_or_pattern": "review_packages/**/*.html",
+      "artifact_type": "archive",
+      "format": "html",
+      "producer_component": "scripts.translation_quality_audit documented review-package adapter",
+      "producer_agent": null,
+      "producer_stage": "quality",
+      "storage_class": "review_archive",
+      "persistence_class": "immutable_archive",
+      "mutation_mode": "immutable",
+      "evidence_basis": "documented_legacy",
+      "lifecycle_status": "legacy",
+      "semantic_roles": [
+        "diagnostic_output",
+        "quality_review"
+      ],
+      "retention_summary": {
+        "mode": "unknown_legacy",
+        "value_source": "unknown_legacy"
+      },
+      "authority_claims": [
+        {
+          "purpose": "quality_review",
+          "level": "diagnostic",
+          "selector": "only unclassified review-package HTML"
+        }
+      ],
+      "artifact_schema_status": "varies",
+      "notes": "Unknown review-package HTML is diagnostic-only after recognized role adapters."
+    },
+    {
+      "path_or_pattern": "review_packages/**/metadata.json",
+      "artifact_type": "archive",
+      "format": "json",
+      "producer_component": "scripts.translation_quality_audit documented review-package adapter",
+      "producer_agent": null,
+      "producer_stage": "quality",
+      "storage_class": "review_archive",
+      "persistence_class": "immutable_archive",
+      "mutation_mode": "immutable",
+      "evidence_basis": "documented_legacy",
+      "lifecycle_status": "legacy",
+      "semantic_roles": [
+        "diagnostic_output",
+        "quality_review"
+      ],
+      "retention_summary": {
+        "mode": "unknown_legacy",
+        "value_source": "unknown_legacy"
+      },
+      "authority_claims": [
+        {
+          "purpose": "quality_review",
+          "level": "diagnostic",
+          "selector": "metadata only"
+        }
+      ],
+      "artifact_schema_status": "varies",
+      "notes": "Review-package metadata is diagnostic context and contains no final-material authority."
+    },
+    {
+      "path_or_pattern": "published_html_review/**/original.html",
+      "artifact_type": "archive",
+      "format": "html",
+      "producer_component": "scripts.translation_quality_audit documented adapter",
+      "producer_agent": null,
+      "producer_stage": "audit",
+      "storage_class": "published_material_archive",
+      "persistence_class": "immutable_archive",
+      "mutation_mode": "immutable",
+      "evidence_basis": "documented_legacy",
+      "lifecycle_status": "legacy",
+      "semantic_roles": [
+        "source_material"
+      ],
+      "retention_summary": {
+        "mode": "unknown_legacy",
+        "value_source": "unknown_legacy"
+      },
+      "authority_claims": [
+        {
+          "purpose": "source_material",
+          "level": "authoritative",
+          "selector": "nested v80.10 original.html with adapter provenance"
+        }
+      ],
+      "artifact_schema_status": "varies",
+      "notes": "Nested v80.10 source adapter; recognized rows take precedence over the diagnostic catch-all."
+    },
+    {
+      "path_or_pattern": "published_html_review/**/final.html",
+      "artifact_type": "archive",
+      "format": "html",
+      "producer_component": "scripts.translation_quality_audit documented adapter",
+      "producer_agent": null,
+      "producer_stage": "audit",
+      "storage_class": "published_material_archive",
+      "persistence_class": "immutable_archive",
+      "mutation_mode": "immutable",
+      "evidence_basis": "documented_legacy",
+      "lifecycle_status": "legacy",
+      "semantic_roles": [
+        "final_published_material"
+      ],
+      "retention_summary": {
+        "mode": "unknown_legacy",
+        "value_source": "unknown_legacy"
+      },
+      "authority_claims": [
+        {
+          "purpose": "final_published_material",
+          "level": "authoritative",
+          "selector": "nested v80.10 final.html verified by adapter"
+        }
+      ],
+      "artifact_schema_status": "varies",
+      "notes": "Nested v80.10 verified-final adapter; recognized rows take precedence over the diagnostic catch-all."
+    },
+    {
+      "path_or_pattern": "published_html_review/*_original.html",
+      "artifact_type": "archive",
+      "format": "html",
+      "producer_component": "scripts.translation_quality_audit documented adapter",
+      "producer_agent": null,
+      "producer_stage": "audit",
+      "storage_class": "published_material_archive",
+      "persistence_class": "immutable_archive",
+      "mutation_mode": "immutable",
+      "evidence_basis": "documented_legacy",
+      "lifecycle_status": "legacy",
+      "semantic_roles": [
+        "source_material"
+      ],
+      "retention_summary": {
+        "mode": "unknown_legacy",
+        "value_source": "unknown_legacy"
+      },
+      "authority_claims": [
+        {
+          "purpose": "source_material",
+          "level": "authoritative",
+          "selector": "flat v81 metadata-linked original HTML"
+        }
+      ],
+      "artifact_schema_status": "varies",
+      "notes": "Flat v81 source adapter; metadata-declared filenames are authoritative over suffix assumptions."
+    },
+    {
+      "path_or_pattern": "published_html_review/*_final.html",
+      "artifact_type": "archive",
+      "format": "html",
+      "producer_component": "scripts.translation_quality_audit documented adapter",
+      "producer_agent": null,
+      "producer_stage": "audit",
+      "storage_class": "published_material_archive",
+      "persistence_class": "immutable_archive",
+      "mutation_mode": "immutable",
+      "evidence_basis": "documented_legacy",
+      "lifecycle_status": "legacy",
+      "semantic_roles": [
+        "final_published_material"
+      ],
+      "retention_summary": {
+        "mode": "unknown_legacy",
+        "value_source": "unknown_legacy"
+      },
+      "authority_claims": [
+        {
+          "purpose": "final_published_material",
+          "level": "authoritative",
+          "selector": "flat v81 metadata-linked final HTML"
+        }
+      ],
+      "artifact_schema_status": "varies",
+      "notes": "Flat v81 verified-final adapter; metadata-declared filenames are authoritative over suffix assumptions."
+    },
+    {
+      "path_or_pattern": "published_html_review/v93[-_]news[-_]*.html",
+      "artifact_type": "archive",
+      "format": "html",
+      "producer_component": "scripts.translation_quality_audit documented adapter",
+      "producer_agent": null,
+      "producer_stage": "audit",
+      "storage_class": "published_material_archive",
+      "persistence_class": "immutable_archive",
+      "mutation_mode": "immutable",
+      "evidence_basis": "documented_legacy",
+      "lifecycle_status": "legacy",
+      "semantic_roles": [
+        "translated_candidate"
+      ],
+      "retention_summary": {
+        "mode": "unknown_legacy",
+        "value_source": "unknown_legacy"
+      },
+      "authority_claims": [
+        {
+          "purpose": "translated_candidate_material",
+          "level": "supporting",
+          "selector": "recognized modular v93-news HTML"
+        }
+      ],
+      "artifact_schema_status": "varies",
+      "notes": "Modular v93 news HTML is translated-candidate material, never final-published material."
+    },
+    {
+      "path_or_pattern": "published_html_review/v93[-_]publisher[-_]*.html",
+      "artifact_type": "archive",
+      "format": "html",
+      "producer_component": "scripts.translation_quality_audit documented adapter",
+      "producer_agent": null,
+      "producer_stage": "audit",
+      "storage_class": "published_material_archive",
+      "persistence_class": "immutable_archive",
+      "mutation_mode": "immutable",
+      "evidence_basis": "documented_legacy",
+      "lifecycle_status": "legacy",
+      "semantic_roles": [
+        "final_published_material"
+      ],
+      "retention_summary": {
+        "mode": "unknown_legacy",
+        "value_source": "unknown_legacy"
+      },
+      "authority_claims": [
+        {
+          "purpose": "final_published_material",
+          "level": "authoritative",
+          "selector": "recognized and matched modular v93-publisher HTML"
+        }
+      ],
+      "artifact_schema_status": "varies",
+      "notes": "Modular v93 Publisher HTML is verified final material when matched by the documented adapter."
+    },
+    {
+      "path_or_pattern": "published_html_review/**/*.html",
+      "artifact_type": "archive",
+      "format": "html",
+      "producer_component": "scripts.translation_quality_audit documented adapter",
+      "producer_agent": null,
+      "producer_stage": "audit",
+      "storage_class": "published_material_archive",
+      "persistence_class": "immutable_archive",
+      "mutation_mode": "immutable",
+      "evidence_basis": "documented_legacy",
+      "lifecycle_status": "legacy",
+      "semantic_roles": [
+        "diagnostic_output"
+      ],
+      "retention_summary": {
+        "mode": "unknown_legacy",
+        "value_source": "unknown_legacy"
+      },
+      "authority_claims": [
+        {
+          "purpose": "final_published_material",
+          "level": "diagnostic",
+          "selector": "only HTML not matched by a recognized adapter"
+        }
+      ],
+      "artifact_schema_status": "varies",
+      "notes": "Diagnostic catch-all applies only after recognized nested, flat, and modular adapters; it does not declassify their files."
+    },
+    {
+      "path_or_pattern": "logs/newsroom_master.log",
+      "artifact_type": "log",
+      "format": "text/log",
+      "producer_component": "agents.master_log_v93_19",
+      "producer_agent": "Jarvis",
+      "producer_stage": "runtime",
+      "storage_class": "runtime_log",
+      "persistence_class": "bounded_history",
+      "mutation_mode": "bounded_rewrite",
+      "evidence_basis": "code_declared",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "diagnostic_output"
+      ],
+      "retention_summary": {
+        "mode": "bounded_count",
+        "max_items": 300,
+        "value_source": "runtime_configurable"
+      },
+      "authority_claims": [
+        {
+          "purpose": "pipeline_observability",
+          "level": "diagnostic"
+        }
+      ],
+      "artifact_schema_status": "none_unknown",
+      "notes": "Primary human log rebuilt atomically from the bounded master-log records; MAX_RUNS defaults to 300 via V93_MASTER_LOG_MAX_RUNS."
+    },
+    {
+      "path_or_pattern": "published/**/*",
+      "artifact_type": "archive",
+      "format": "html",
+      "producer_component": "legacy publication archive",
+      "producer_agent": "Publisher",
+      "producer_stage": "publication",
+      "storage_class": "published_material_archive",
+      "persistence_class": "immutable_archive",
+      "mutation_mode": "immutable",
+      "evidence_basis": "documented_legacy",
+      "lifecycle_status": "legacy",
+      "semantic_roles": [
+        "diagnostic_output"
+      ],
+      "retention_summary": {
+        "mode": "unknown_legacy",
+        "value_source": "unknown_legacy"
+      },
+      "authority_claims": [
+        {
+          "purpose": "final_published_material",
+          "level": "legacy_context"
+        }
+      ],
+      "artifact_schema_status": "varies",
+      "notes": "Legacy published family requires a documented adapter before linguistic authority is claimed."
+    },
+    {
+      "path_or_pattern": "artifacts/newsroom/master_log_error.json",
+      "artifact_type": "report",
+      "format": "json",
+      "producer_component": "newsroom_runner",
+      "producer_agent": "Jarvis",
+      "producer_stage": "runtime",
+      "storage_class": "runtime_snapshot",
+      "persistence_class": "current_snapshot",
+      "mutation_mode": "atomic_overwrite",
+      "evidence_basis": "code_declared",
+      "lifecycle_status": "error_only",
+      "semantic_roles": [
+        "diagnostic_output"
+      ],
+      "retention_summary": {
+        "mode": "current_only",
+        "value_source": "fixed_contract"
+      },
+      "authority_claims": [
+        {
+          "purpose": "pipeline_observability",
+          "level": "diagnostic"
+        }
+      ],
+      "artifact_schema_status": "none_unknown",
+      "notes": "Error-only snapshot written by newsroom_runner.write_master_log_safe under ARTIFACT_DIR; not an ordinary run artifact."
+    },
+    {
+      "path_or_pattern": "state/newsroom/future_retained_source/**",
+      "artifact_type": "archive",
+      "format": "html",
+      "producer_component": "future Reform B retention",
+      "producer_agent": null,
+      "producer_stage": "intake",
+      "storage_class": "runtime_state",
+      "persistence_class": "immutable_archive",
+      "mutation_mode": "immutable",
+      "evidence_basis": "planned_canonical",
+      "lifecycle_status": "planned",
+      "semantic_roles": [
+        "source_material"
+      ],
+      "retention_summary": {
+        "mode": "unknown_legacy",
+        "value_source": "unknown_legacy"
+      },
+      "authority_claims": [
+        {
+          "purpose": "source_material",
+          "level": "authoritative",
+          "selector": "explicit content_id provenance"
+        }
+      ],
+      "artifact_schema_status": "none_unknown",
+      "notes": "Illustrative future source-retention family linked by content_id; A3 creates no directory, file, retention, or producer."
+    }
+  ],
+  "examples": [
+    {
+      "label": "Bob current-run snapshot",
+      "manifest": {
+        "schema_version": "owtv_artifact_manifest_schema_v1",
+        "policy_version": "v95.22_a3",
+        "artifact_id": "example:instance:001",
+        "artifact_type": "snapshot",
+        "path": "artifacts/newsroom/bob_articles.json",
+        "storage_class": "runtime_snapshot",
+        "format": "json",
+        "producer_agent": "Bob",
+        "producer_stage": "generation",
+        "producer_component": "newsroom_runner",
+        "manifested_at_utc": "2026-08-13T12:00:00Z",
+        "artifact_created_at_utc": "2026-08-13T11:59:59Z",
+        "run_id": "run-42",
+        "semantic_roles": [
+          "translated_candidate"
+        ],
+        "persistence_class": "current_snapshot",
+        "mutation_mode": "atomic_overwrite",
+        "retention_policy": {
+          "mode": "current_only",
+          "value_source": "fixed_contract"
+        },
+        "authority_claims": [
+          {
+            "purpose": "translated_candidate_material",
+            "level": "supporting",
+            "selector": "articles[].body_html"
+          }
+        ],
+        "artifact_schema_version": {
+          "status": "none_unknown"
+        }
+      }
+    },
+    {
+      "label": "master_log bounded history",
+      "manifest": {
+        "schema_version": "owtv_artifact_manifest_schema_v1",
+        "policy_version": "v95.22_a3",
+        "artifact_id": "example:master:001",
+        "artifact_type": "memory",
+        "path": "state/newsroom/master_log.jsonl",
+        "storage_class": "runtime_state",
+        "format": "jsonl",
+        "producer_agent": "Jarvis",
+        "producer_stage": "runtime",
+        "producer_component": "agents.master_log_v93_19",
+        "manifested_at_utc": "2026-08-13T12:00:00Z",
+        "artifact_created_at_utc": "2026-08-13T11:59:59Z",
+        "run_id": "run-42",
+        "semantic_roles": [
+          "state_memory",
+          "audit"
+        ],
+        "persistence_class": "bounded_history",
+        "mutation_mode": "bounded_rewrite",
+        "retention_policy": {
+          "mode": "bounded_count",
+          "max_items": 300,
+          "value_source": "runtime_configurable"
+        },
+        "authority_claims": [
+          {
+            "purpose": "pipeline_observability",
+            "level": "authoritative",
+            "selector": "complete run records"
+          }
+        ],
+        "artifact_schema_version": {
+          "status": "none_unknown"
+        }
+      }
+    },
+    {
+      "label": "Gemini append-only ledger",
+      "manifest": {
+        "schema_version": "owtv_artifact_manifest_schema_v1",
+        "policy_version": "v95.22_a3",
+        "artifact_id": "example:gemini-ledger:001",
+        "artifact_type": "ledger",
+        "path": "state/newsroom/gemini_call_ledger.jsonl",
+        "storage_class": "runtime_state",
+        "format": "jsonl",
+        "producer_agent": "Gemini",
+        "producer_stage": "model",
+        "producer_component": "agents.gemini_ledger",
+        "manifested_at_utc": "2026-08-13T12:00:00Z",
+        "artifact_created_at_utc": "2026-08-13T11:59:59Z",
+        "run_id": "run-42",
+        "semantic_roles": [
+          "model_call_telemetry"
+        ],
+        "persistence_class": "append_only_ledger",
+        "mutation_mode": "append_only",
+        "retention_policy": {
+          "mode": "persistent",
+          "value_source": "code_default"
+        },
+        "authority_claims": [
+          {
+            "purpose": "model_usage_cost",
+            "level": "authoritative"
+          }
+        ],
+        "artifact_schema_version": {
+          "status": "producer_version_only",
+          "version": "v2"
+        }
+      }
+    },
+    {
+      "label": "Gemini latest snapshot",
+      "manifest": {
+        "schema_version": "owtv_artifact_manifest_schema_v1",
+        "policy_version": "v95.22_a3",
+        "artifact_id": "example:gemini-latest:001",
+        "artifact_type": "snapshot",
+        "path": "artifacts/newsroom/gemini_call_ledger_latest.json",
+        "storage_class": "runtime_snapshot",
+        "format": "json",
+        "producer_agent": "Gemini",
+        "producer_stage": "model",
+        "producer_component": "agents.gemini_ledger",
+        "manifested_at_utc": "2026-08-13T12:00:00Z",
+        "artifact_created_at_utc": "2026-08-13T11:59:59Z",
+        "run_id": "run-42",
+        "semantic_roles": [
+          "model_call_telemetry"
+        ],
+        "persistence_class": "current_snapshot",
+        "mutation_mode": "atomic_overwrite",
+        "retention_policy": {
+          "mode": "current_only",
+          "value_source": "fixed_contract"
+        },
+        "authority_claims": [
+          {
+            "purpose": "model_usage_cost",
+            "level": "supporting"
+          }
+        ],
+        "artifact_schema_version": {
+          "status": "producer_version_only",
+          "version": "v2"
+        }
+      }
+    },
+    {
+      "label": "Menzo duplicate pair coverage",
+      "manifest": {
+        "schema_version": "owtv_artifact_manifest_schema_v1",
+        "policy_version": "v95.22_a3",
+        "artifact_id": "example:pair-coverage:001",
+        "artifact_type": "coverage",
+        "path": "artifacts/newsroom/menzo_duplicate_pair_coverage.json",
+        "storage_class": "runtime_snapshot",
+        "format": "json",
+        "producer_agent": "Menzo",
+        "producer_stage": "duplicate",
+        "producer_component": "agents.menzo_policy_v93_15",
+        "manifested_at_utc": "2026-08-13T12:00:00Z",
+        "artifact_created_at_utc": "2026-08-13T11:59:59Z",
+        "run_id": "run-42",
+        "semantic_roles": [
+          "duplicate_evidence"
+        ],
+        "persistence_class": "current_snapshot",
+        "mutation_mode": "atomic_overwrite",
+        "retention_policy": {
+          "mode": "current_only",
+          "value_source": "fixed_contract"
+        },
+        "authority_claims": [
+          {
+            "purpose": "duplicate_decision",
+            "level": "authoritative",
+            "selector": "producing latest run only"
+          }
+        ],
+        "artifact_schema_version": {
+          "status": "known",
+          "version": "owtv_duplicate_pair_coverage_v1"
+        },
+        "pair_id": "pair-1"
+      }
+    },
+    {
+      "label": "published_html_review verified final artifact",
+      "manifest": {
+        "schema_version": "owtv_artifact_manifest_schema_v1",
+        "policy_version": "v95.22_a3",
+        "artifact_id": "example:final:001",
+        "artifact_type": "archive",
+        "path": "published_html_review/run_1/item/final.html",
+        "storage_class": "published_material_archive",
+        "format": "html",
+        "producer_stage": "audit",
+        "producer_component": "scripts.translation_quality_audit documented adapter",
+        "manifested_at_utc": "2026-08-13T12:00:00Z",
+        "artifact_created_at_utc": "2026-08-13T11:59:59Z",
+        "run_id": "run-42",
+        "semantic_roles": [
+          "final_published_material"
+        ],
+        "persistence_class": "immutable_archive",
+        "mutation_mode": "immutable",
+        "retention_policy": {
+          "mode": "unknown_legacy",
+          "value_source": "unknown_legacy"
+        },
+        "authority_claims": [
+          {
+            "purpose": "final_published_material",
+            "level": "authoritative",
+            "selector": "documented verified adapter"
+          }
+        ],
+        "artifact_schema_version": {
+          "status": "varies"
+        },
+        "content_id": "content-1"
+      }
+    },
+    {
+      "label": "review package source/candidate material",
+      "manifest": {
+        "schema_version": "owtv_artifact_manifest_schema_v1",
+        "policy_version": "v95.22_a3",
+        "artifact_id": "example:review:001",
+        "artifact_type": "archive",
+        "path": "review_packages/run_1/item/source.html",
+        "storage_class": "review_archive",
+        "format": "html",
+        "producer_stage": "quality",
+        "producer_component": "scripts.translation_quality_audit documented review-package adapter",
+        "manifested_at_utc": "2026-08-13T12:00:00Z",
+        "artifact_created_at_utc": "2026-08-13T11:59:59Z",
+        "run_id": "run-42",
+        "semantic_roles": [
+          "source_material",
+          "quality_review"
+        ],
+        "persistence_class": "immutable_archive",
+        "mutation_mode": "immutable",
+        "retention_policy": {
+          "mode": "unknown_legacy",
+          "value_source": "unknown_legacy"
+        },
+        "authority_claims": [
+          {
+            "purpose": "source_material",
+            "level": "supporting",
+            "selector": "source.html"
+          }
+        ],
+        "artifact_schema_version": {
+          "status": "varies"
+        },
+        "content_id": "content-1"
+      }
+    },
+    {
+      "label": "future retained source artifact linked by content_id",
+      "manifest": {
+        "schema_version": "owtv_artifact_manifest_schema_v1",
+        "policy_version": "v95.22_a3",
+        "artifact_id": "example:source:001",
+        "artifact_type": "archive",
+        "path": "state/newsroom/future_retained_source/content-1/source.html",
+        "storage_class": "runtime_state",
+        "format": "html",
+        "producer_stage": "intake",
+        "producer_component": "future Reform B retention",
+        "manifested_at_utc": "2026-08-13T12:00:00Z",
+        "artifact_created_at_utc": "2026-08-13T11:59:59Z",
+        "run_id": "run-42",
+        "semantic_roles": [
+          "source_material"
+        ],
+        "persistence_class": "immutable_archive",
+        "mutation_mode": "immutable",
+        "retention_policy": {
+          "mode": "unknown_legacy",
+          "value_source": "unknown_legacy"
+        },
+        "authority_claims": [
+          {
+            "purpose": "source_material",
+            "level": "authoritative",
+            "selector": "explicit retained source"
+          }
+        ],
+        "artifact_schema_version": {
+          "status": "none_unknown"
+        },
+        "content_id": "content-1",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "size_bytes": 0
+      }
+    }
+  ],
+  "document_sync": {
+    "required_sections": [
+      "Purpose and scope",
+      "A1, A2, Phase 1 and Reform B",
+      "Artifact instance and family",
+      "Taxonomies",
+      "Retention policy",
+      "Purpose-scoped authority",
+      "Path-pattern dialect",
+      "Identity, path and integrity",
+      "A2 artifact_refs compatibility",
+      "Legacy artifact inventory",
+      "Examples",
+      "Null, missing and not applicable",
+      "Scope guard"
+    ]
+  },
+  "producer_agent_requirement": {
+    "required_for_components": [
+      "newsroom_runner",
+      "agents.master_log_v93_19",
+      "agents.gemini_ledger",
+      "agents.menzo_policy_v93_15",
+      "agents.publisher_history",
+      "agents.simone_publisher_v93_18",
+      "agents.menzo_duplicate_cache",
+      "agents.story_dedupe_v93_32"
+    ],
+    "exempt_components_may_omit": true,
+    "unknown_components_may_omit": true
+  },
+  "path_pattern_contract": {
+    "dialect": "python_glob_v1",
+    "separator": "/",
+    "supported_tokens": [
+      "*",
+      "**",
+      "?",
+      "[...]"
+    ],
+    "brace_expansion": false,
+    "absolute_paths_allowed": false,
+    "parent_traversal_allowed": false,
+    "filesystem_discovery": false
+  },
+  "artifact_schema_version_contract": {
+    "additional_fields_allowed": false,
+    "required_fields": [
+      "status"
+    ],
+    "optional_fields": [
+      "version"
+    ],
+    "status_rules": {
+      "known": {
+        "version": "required_non_empty_artifact_schema_version"
+      },
+      "producer_version_only": {
+        "version": "required_non_empty_producer_or_runtime_version_not_artifact_schema"
+      },
+      "none_unknown": {
+        "version": "forbidden"
+      },
+      "varies": {
+        "version": "forbidden"
+      }
+    }
+  }
+}
