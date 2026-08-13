@@ -245,3 +245,63 @@ def test_future_reform_component_may_omit_agent(bundle):
 def test_removing_known_inventory_component_requirement_fails(bundle):
  bundle[0]['producer_agent_requirement']['required_for_components'].remove('agents.publisher_history')
  assert any('producer_agent_requirement' in error for error in errors(bundle))
+
+def resolved(bundle,path):
+ from scripts.validate_artifact_manifest_schema import matching_families
+ return matching_families(path,bundle[0]['legacy_artifact_inventory'])
+
+def test_published_final_specific_family_beats_catch_all(bundle):
+ rows=resolved(bundle,'published_html_review/run/item/final.html')
+ assert [x['path_or_pattern'] for x in rows]==['published_html_review/**/final.html']
+ assert rows[0]['semantic_roles']==['final_published_material']
+
+def test_published_original_specific_family_beats_catch_all(bundle):
+ rows=resolved(bundle,'published_html_review/run/item/original.html')
+ assert [x['path_or_pattern'] for x in rows]==['published_html_review/**/original.html']
+ assert rows[0]['semantic_roles']==['source_material']
+
+def test_unknown_published_html_uses_diagnostic_catch_all(bundle):
+ rows=resolved(bundle,'published_html_review/unrecognized.html')
+ assert [x['path_or_pattern'] for x in rows]==['published_html_review/**/*.html']
+ assert rows[0]['semantic_roles']==['diagnostic_output']
+
+def test_review_source_specific_family_beats_catch_all(bundle):
+ rows=resolved(bundle,'review_packages/x/source.html')
+ assert [x['path_or_pattern'] for x in rows]==['review_packages/**/source.html']
+ assert 'source_material' in rows[0]['semantic_roles']
+
+def test_final_example_cannot_validate_as_diagnostic_catch_all(bundle):
+ ex=next(x['manifest'] for x in bundle[0]['examples'] if x['label']=='published_html_review verified final artifact')
+ ex['semantic_roles']=['diagnostic_output'];ex['authority_claims']=[{'purpose':'final_published_material','level':'diagnostic','selector':'only HTML not matched by a recognized adapter'}]
+ assert any('example/family contract mismatch' in error for error in errors(bundle))
+
+def test_family_resolution_contract_is_immutable(bundle):
+ bundle[0]['family_resolution_contract']['strategy']='inventory_order'
+ assert any('family_resolution_contract' in error for error in errors(bundle))
+
+def test_simone_latest_publication_state_family(bundle):
+ row=inventory(bundle[0],'state/newsroom/simone_report_publish_latest.json')
+ assert row['producer_component']=='agents.simone_publisher_v93_18' and row['producer_agent']=='Simone'
+ assert row['evidence_basis']=='code_declared' and row['artifact_type']=='snapshot'
+ assert row['persistence_class']=='current_snapshot' and row['mutation_mode']=='atomic_overwrite'
+ assert row['authority_claims']==[{'purpose':'report_publication_outcome','level':'authoritative','selector':'results[status=published]'}]
+ assert not any(x['purpose']=='final_published_material' for x in row['authority_claims'])
+
+def test_missing_simone_latest_publication_state_fails(bundle):
+ bundle[0]['legacy_artifact_inventory']=[x for x in bundle[0]['legacy_artifact_inventory'] if x['path_or_pattern']!='state/newsroom/simone_report_publish_latest.json']
+ assert any('missing required legacy inventory family' in error for error in errors(bundle))
+
+@pytest.mark.parametrize('pattern,paths',[('review_packages/**/source.html',['review_packages/source.html','review_packages/run/item/source.html']),('published_html_review/**/final.html',['published_html_review/final.html','published_html_review/run/item/final.html'])])
+def test_double_star_slash_matches_zero_or_more_directories(bundle,pattern,paths):
+ from scripts.validate_artifact_manifest_schema import glob_regex
+ import re
+ assert all(re.fullmatch(glob_regex(pattern),path) for path in paths)
+
+@pytest.mark.parametrize('field',[ 'artifact_created_at_utc','code_commit','content_id','producer_agent'])
+def test_optional_string_present_but_empty_fails(bundle,field):
+ bundle[0]['examples'][0]['manifest'][field]=''
+ assert any(field in error and 'non-empty' in error for error in errors(bundle))
+
+def test_optional_string_whitespace_only_fails(bundle):
+ bundle[0]['examples'][0]['manifest']['code_commit']='   '
+ assert any('code_commit' in error and 'non-empty' in error for error in errors(bundle))

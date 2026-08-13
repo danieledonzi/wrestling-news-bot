@@ -1058,6 +1058,36 @@
       "notes": "Latest Simone report-processing snapshot."
     },
     {
+      "path_or_pattern": "state/newsroom/simone_report_publish_latest.json",
+      "artifact_type": "snapshot",
+      "format": "json",
+      "producer_component": "agents.simone_publisher_v93_18",
+      "producer_agent": "Simone",
+      "producer_stage": "reporting",
+      "storage_class": "runtime_state",
+      "persistence_class": "current_snapshot",
+      "mutation_mode": "atomic_overwrite",
+      "evidence_basis": "code_declared",
+      "lifecycle_status": "active",
+      "semantic_roles": [
+        "report_lifecycle",
+        "publication_result"
+      ],
+      "retention_summary": {
+        "mode": "current_only",
+        "value_source": "fixed_contract"
+      },
+      "authority_claims": [
+        {
+          "purpose": "report_publication_outcome",
+          "level": "authoritative",
+          "selector": "results[status=published]"
+        }
+      ],
+      "artifact_schema_status": "none_unknown",
+      "notes": "Latest Simone report-publisher state snapshot atomically overwritten with the same result payload; Bob reads handoff counters for dynamic capacity. Only results[status=published] establishes report publication outcome; it contains no final linguistic material."
+    },
+    {
       "path_or_pattern": "state/newsroom/menzo_duplicate_arbitration_cache_v2.json",
       "artifact_type": "cache",
       "format": "json",
@@ -2342,5 +2372,12 @@
         "version": "forbidden"
       }
     }
+  },
+  "family_resolution_contract": {
+    "strategy": "specific_before_catch_all",
+    "catch_all_patterns": [
+      "review_packages/**/*.html",
+      "published_html_review/**/*.html"
+    ]
   }
 }

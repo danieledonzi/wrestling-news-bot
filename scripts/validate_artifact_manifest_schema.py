@@ -31,8 +31,9 @@ INTEGRITY_CONTRACT={'sha256_pattern':'^[0-9a-f]{64}$','size_bytes_minimum':0,'re
 EXT_FORMAT={'.json':'json','.jsonl':'jsonl','.md':'markdown','.html':'html','.zip':'zip','.log':'text/log'}
 PRODUCER_REQUIREMENT={'required_for_components':['newsroom_runner','agents.master_log_v93_19','agents.gemini_ledger','agents.menzo_policy_v93_15','agents.publisher_history','agents.simone_publisher_v93_18','agents.menzo_duplicate_cache','agents.story_dedupe_v93_32'],'exempt_components_may_omit':True,'unknown_components_may_omit':True}
 PATTERN_CONTRACT={'dialect':'python_glob_v1','separator':'/','supported_tokens':['*','**','?','[...]'],'brace_expansion':False,'absolute_paths_allowed':False,'parent_traversal_allowed':False,'filesystem_discovery':False}
+FAMILY_RESOLUTION_CONTRACT={'strategy':'specific_before_catch_all','catch_all_patterns':['review_packages/**/*.html','published_html_review/**/*.html']}
 SCHEMA_VERSION_CONTRACT={'additional_fields_allowed':False,'required_fields':['status'],'optional_fields':['version'],'status_rules':{'known':{'version':'required_non_empty_artifact_schema_version'},'producer_version_only':{'version':'required_non_empty_producer_or_runtime_version_not_artifact_schema'},'none_unknown':{'version':'forbidden'},'varies':{'version':'forbidden'}}}
-REQUIRED_PATHS={'artifacts/newsroom/jarvis_status.json','artifacts/newsroom/massy_board.json','artifacts/newsroom/simone_reports.json','artifacts/newsroom/simone_report_publish.json','artifacts/newsroom/menzo_decisions.json','artifacts/newsroom/andrea_pre_bob_latest.json','artifacts/newsroom/bob_articles.json','artifacts/newsroom/alfred_review.json','artifacts/newsroom/publisher_result.json','artifacts/newsroom/archivista_report.json','artifacts/newsroom/agent_timeline.json','artifacts/newsroom/run_summary.json','artifacts/newsroom/master_log_tail.jsonl','artifacts/newsroom/newsroom_master.log','artifacts/newsroom/gemini_call_ledger_latest.json','artifacts/newsroom/menzo_duplicate_pair_coverage.json','state/newsroom/master_log.jsonl','state/newsroom/gemini_call_ledger.jsonl','state/newsroom/publisher_history.json','state/newsroom/simone_report_history.json','state/newsroom/simone_reports_latest.json','state/newsroom/menzo_duplicate_arbitration_cache_v2.json','reports/*.json','reports/*.md','review_packages/**/original.html','review_packages/**/source.html','review_packages/**/translated.html','review_packages/**/candidate.html','review_packages/**/body.html','review_packages/**/*.html','published_html_review/**/original.html','published_html_review/**/final.html','published_html_review/*_original.html','published_html_review/*_final.html','published_html_review/v93[-_]news[-_]*.html','published_html_review/v93[-_]publisher[-_]*.html','published_html_review/**/*.html','logs/newsroom_master.log','artifacts/newsroom/master_log_error.json'}
+REQUIRED_PATHS={'artifacts/newsroom/jarvis_status.json','artifacts/newsroom/massy_board.json','artifacts/newsroom/simone_reports.json','artifacts/newsroom/simone_report_publish.json','artifacts/newsroom/menzo_decisions.json','artifacts/newsroom/andrea_pre_bob_latest.json','artifacts/newsroom/bob_articles.json','artifacts/newsroom/alfred_review.json','artifacts/newsroom/publisher_result.json','artifacts/newsroom/archivista_report.json','artifacts/newsroom/agent_timeline.json','artifacts/newsroom/run_summary.json','artifacts/newsroom/master_log_tail.jsonl','artifacts/newsroom/newsroom_master.log','artifacts/newsroom/gemini_call_ledger_latest.json','artifacts/newsroom/menzo_duplicate_pair_coverage.json','state/newsroom/master_log.jsonl','state/newsroom/gemini_call_ledger.jsonl','state/newsroom/publisher_history.json','state/newsroom/simone_report_history.json','state/newsroom/simone_reports_latest.json','state/newsroom/simone_report_publish_latest.json','state/newsroom/menzo_duplicate_arbitration_cache_v2.json','reports/*.json','reports/*.md','review_packages/**/original.html','review_packages/**/source.html','review_packages/**/translated.html','review_packages/**/candidate.html','review_packages/**/body.html','review_packages/**/*.html','published_html_review/**/original.html','published_html_review/**/final.html','published_html_review/*_original.html','published_html_review/*_final.html','published_html_review/v93[-_]news[-_]*.html','published_html_review/v93[-_]publisher[-_]*.html','published_html_review/**/*.html','logs/newsroom_master.log','artifacts/newsroom/master_log_error.json'}
 INV_KEYS={'path_or_pattern','artifact_type','format','producer_component','producer_agent','producer_stage','storage_class','persistence_class','mutation_mode','evidence_basis','lifecycle_status','semantic_roles','retention_summary','authority_claims','artifact_schema_status','notes'}
 def err(a,m): a.append(m)
 def safe_path(p):
@@ -59,6 +60,7 @@ def envelope(x,errors,where):
   expected=field_types.get(name)
   valid=(expected=='string' and isinstance(value,str)) or (expected=='integer' and isinstance(value,int) and not isinstance(value,bool)) or (expected=='array' and isinstance(value,list)) or (expected=='object' and isinstance(value,dict))
   if expected and not valid:err(errors,where+' field '+name+' must have canonical type '+expected)
+  if expected=='string' and isinstance(value,str) and not value.strip():err(errors,where+' field '+name+' must be non-empty when present')
  if x.get('schema_version')!=EXPECTED_SCHEMA or x.get('policy_version')!=EXPECTED_POLICY: err(errors,where+' version mismatch')
  if x.get('artifact_id') in [x.get(k) for k in ('path','artifact_type','content_id','run_id')]: err(errors,where+' artifact_id must not equal path/type/content_id/run_id')
  if not safe_path(x.get('path')): err(errors,where+' unsafe path')
@@ -101,7 +103,9 @@ def glob_regex(pattern):
  while i<len(pattern):
   c=pattern[i]
   if c=='*':
-   if i+1<len(pattern) and pattern[i+1]=='*': out+='.*'; i+=2
+   if i+1<len(pattern) and pattern[i+1]=='*':
+    if i+2<len(pattern) and pattern[i+2]=='/':out+='(?:[^/]+/)*';i+=3
+    else:out+='.*';i+=2
    else: out+='[^/]*'; i+=1
   elif c=='?':out+='[^/]';i+=1
   elif c=='[':
@@ -111,7 +115,9 @@ def glob_regex(pattern):
   else:out+=re.escape(c);i+=1
  return '^'+out+'$'
 def matching_families(path, inventory):
- return [row for row in inventory if re.fullmatch(glob_regex(row.get('path_or_pattern','')),path)]
+ matches=[row for row in inventory if re.fullmatch(glob_regex(row.get('path_or_pattern','')),path)]
+ specific=[row for row in matches if row.get('path_or_pattern') not in FAMILY_RESOLUTION_CONTRACT['catch_all_patterns']]
+ return specific or matches
 def markdown_examples(markdown, labels, errors):
  found=[]
  for label in labels:
@@ -147,6 +153,7 @@ def validate(data,markdown=None,a2=None):
  if data.get('producer_agent_requirement')!=PRODUCER_REQUIREMENT:err(errors,'producer_agent_requirement immutable contract mismatch')
  if data.get('path_pattern_contract')!=PATTERN_CONTRACT:err(errors,'path_pattern_contract immutable contract mismatch')
  if data.get('artifact_schema_version_contract')!=SCHEMA_VERSION_CONTRACT:err(errors,'artifact_schema_version_contract immutable contract mismatch')
+ if data.get('family_resolution_contract')!=FAMILY_RESOLUTION_CONTRACT:err(errors,'family_resolution_contract immutable contract mismatch')
  if data.get('document_sync',{}).get('required_sections')!=DOCUMENT_SECTIONS:err(errors,'document_sync.required_sections immutable contract mismatch')
  sem=env.get('artifact_id_semantics',{})
  if sem.get('not_equivalent_to')!=['path','artifact_type','content_id','run_id'] or not all(sem.get(k) is True for k in ['identifies_concrete_instance','stable_for_same_instance','unique_across_distinct_instances']):err(errors,'artifact_id/path identity semantics weakened')
@@ -196,6 +203,8 @@ def validate(data,markdown=None,a2=None):
   if row.get('producer_component')!='agents.master_log_v93_19' or row.get('persistence_class')!='bounded_history' or row.get('mutation_mode')!='bounded_rewrite' or row.get('retention_summary')!={'mode':'bounded_count','max_items':limit,'value_source':'runtime_configurable'}:err(errors,path+' bounded human-log contract mismatch')
  simone=by.get('artifacts/newsroom/simone_report_publish.json',{})
  if simone.get('authority_claims')!=[{'purpose':'report_publication_outcome','level':'authoritative','selector':'results[status=published]'}]:err(errors,'Simone raw artifact selector must use results[status=published]')
+ simone_latest=by.get('state/newsroom/simone_report_publish_latest.json',{})
+ if simone_latest.get('producer_component')!='agents.simone_publisher_v93_18' or simone_latest.get('authority_claims')!=[{'purpose':'report_publication_outcome','level':'authoritative','selector':'results[status=published]'}] or any(c.get('purpose')=='final_published_material' for c in simone_latest.get('authority_claims',[])):err(errors,'Simone latest publication state contract mismatch')
  coverage=by.get('artifacts/newsroom/menzo_duplicate_pair_coverage.json',{})
  if coverage.get('producer_component')!='agents.menzo_policy_v93_15':err(errors,'duplicate pair coverage producer mismatch')
  adapters={'published_html_review/**/original.html':('source_material','source_material'),'published_html_review/**/final.html':('final_published_material','final_published_material'),'published_html_review/*_original.html':('source_material','source_material'),'published_html_review/*_final.html':('final_published_material','final_published_material'),'published_html_review/v93[-_]news[-_]*.html':('translated_candidate','translated_candidate_material'),'published_html_review/v93[-_]publisher[-_]*.html':('final_published_material','final_published_material')}
