@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Validate the OWTV Canonical Event Schema v1 (Python 3.9 stdlib only)."""
 import argparse
+from collections import Counter
 import json
 import re
 import sys
@@ -23,11 +24,70 @@ REQUIRED_AGENTS = {"Jarvis", "Massy", "Simone", "Menzo", "Andrea", "Bob", "Alfre
 REQUIRED_IDENTITIES = {"run_id", "article_id", "operation_id", "attempt_index", "pair_id", "report_key", "event_key", "cluster_id", "source_id", "candidate_id", "correlation_id", "content_id", "story_id", "logical_request_id", "attempt_id"}
 REQUIRED_MODEL_ROLES = {"selection", "duplicate_arbitration", "translation_generation", "report_translation", "quote_resolution", "quality_review"}
 REQUIRED_ERROR_CLASSES = {"transient", "permanent", "validation", "upstream", "downstream", "invariant", "policy"}
+MANDATORY_CONDITIONS = {
+    "model_attempt_identity": {
+        "when_event_types": {"model_attempt_started", "model_attempt_completed", "model_attempt_failed"},
+        "require": {"logical_request_id", "attempt_id", "attempt_number", "model_name", "model_role"},
+        "forbid": set(),
+    },
+    "avoided_request_identity": {
+        "when_event_types": {"model_attempt_avoided"},
+        "require": {"logical_request_id", "model_role"},
+        "forbid": {"attempt_id", "attempt_number", "latency_ms"},
+    },
+    "fallback_models": {
+        "when_event_types": {"fallback_started"},
+        "require": {"logical_request_id", "fallback_from", "fallback_to"},
+        "forbid": set(),
+    },
+    "failed_error": {
+        "when_event_types": {"stage_failed", "model_attempt_failed", "publication_failed"},
+        "require": {"error_class", "error_terminal"},
+        "forbid": set(),
+    },
+    "duplicate_pair_identity": {
+        "when_event_types": {"duplicate_pair_evaluated", "duplicate_pair_resolved", "duplicate_pair_unresolved"},
+        "require": {"pair_id"},
+        "forbid": set(),
+    },
+}
 
 
 def unique(values, label, errors):
     if len(values) != len(set(values)):
         errors.append("%s values must be unique" % label)
+
+
+def markdown_table(markdown, heading, columns, errors):
+    """Return normalized table rows below a heading, retaining duplicates."""
+    match = re.search(r"^### " + re.escape(heading) + r"\s*$", markdown, re.MULTILINE)
+    if not match:
+        errors.append("Markdown missing legacy mapping table: %s" % heading)
+        return []
+    lines = markdown[match.end():].splitlines()
+    table_lines = []
+    started = False
+    for line in lines:
+        if line.startswith("|"):
+            started = True
+            table_lines.append(line)
+        elif started and line.strip():
+            break
+    if len(table_lines) < 2:
+        errors.append("Markdown legacy mapping table is malformed: %s" % heading)
+        return []
+    header = tuple(cell.strip() for cell in table_lines[0].strip().strip("|").split("|"))
+    if header != columns:
+        errors.append("Markdown legacy mapping table has unexpected columns: %s" % heading)
+        return []
+    rows = []
+    for line in table_lines[2:]:
+        row = tuple(cell.strip() for cell in line.strip().strip("|").split("|"))
+        if len(row) != len(columns):
+            errors.append("Markdown legacy mapping row is malformed: %s" % heading)
+        else:
+            rows.append(row)
+    return rows
 
 
 def validate(data, markdown=None):
@@ -45,6 +105,8 @@ def validate(data, markdown=None):
     if not isinstance(envelope, dict):
         errors.append("envelope must be an object")
         envelope = {}
+    if envelope.get("additional_fields_allowed") is not False:
+        errors.append("envelope.additional_fields_allowed must be exactly false")
     field_rows = envelope.get("fields") if isinstance(envelope.get("fields"), list) else []
     fields = [row.get("name") for row in field_rows if isinstance(row, dict)]
     unique(fields, "envelope field", errors)
@@ -107,9 +169,14 @@ def validate(data, markdown=None):
                 if name not in fields: errors.append("conditional requirement %s references unknown field %s" % (condition["id"], name))
         unique(ids, "conditional requirement id", errors)
         condition_map = {x.get("id"): x for x in conditions if isinstance(x, dict)}
-        pair_rule = condition_map.get("duplicate_pair_identity", {})
-        if set(pair_rule.get("when_event_types", [])) != {"duplicate_pair_evaluated", "duplicate_pair_resolved", "duplicate_pair_unresolved"} or "pair_id" not in pair_rule.get("require", []):
-            errors.append("duplicate_pair_* events must conditionally require pair_id")
+        for condition_id, expected in MANDATORY_CONDITIONS.items():
+            actual = condition_map.get(condition_id)
+            if actual is None:
+                errors.append("missing mandatory conditional requirement: %s" % condition_id)
+                continue
+            for key in ("when_event_types", "require", "forbid"):
+                if set(actual.get(key, [])) != expected[key]:
+                    errors.append("mandatory conditional requirement %s has incompatible %s" % (condition_id, key))
     for lifecycle in ("stage_started", "stage_completed", "stage_failed"):
         row = next((x for x in event_rows if isinstance(x, dict) and x.get("name") == lifecycle), {})
         if set(row.get("allowed_stages", [])) != set(stages):
@@ -203,13 +270,22 @@ def validate(data, markdown=None):
         for marker, values in marker_values.items():
             expected = "<!-- SYNC:%s %s -->" % (marker, "|".join(values))
             if expected not in markdown: errors.append("Markdown sync marker mismatch: %s" % marker)
-        for row in data.get("legacy_field_mappings", []):
-            canonical = row.get("canonical_field") or "—"
-            expected = "| %s | %s | %s | %s |" % (row.get("source"), row.get("legacy_field"), canonical, row.get("mapping_kind"))
-            if expected not in markdown: errors.append("Markdown legacy field mapping mismatch: %s.%s" % (row.get("source"), row.get("legacy_field")))
-        for row in phase_rows:
-            expected = "| %s | %s | %s | %s | %s | %s | %s |" % (row.get("source"), row.get("legacy_agent"), row.get("legacy_phase"), row.get("canonical_agent"), row.get("event_type"), row.get("stage"), row.get("mapping_kind"))
-            if expected not in markdown: errors.append("Markdown legacy phase mapping mismatch: %s:%s" % (row.get("legacy_agent"), row.get("legacy_phase")))
+        field_json = [tuple(str(value) if value is not None else "—" for value in
+                            (row.get("source"), row.get("legacy_field"), row.get("canonical_field"),
+                             row.get("mapping_kind"), row.get("note")))
+                      for row in data.get("legacy_field_mappings", [])]
+        field_md = markdown_table(markdown, "Field mapping inventory",
+                                  ("Source", "Legacy field", "Canonical field", "Kind", "Constraint"), errors)
+        if Counter(field_json) != Counter(field_md):
+            errors.append("Markdown legacy field mappings must exactly match JSON, including notes and duplicates")
+        phase_json = [tuple(str(row.get(key, "")) for key in
+                            ("source", "legacy_agent", "legacy_phase", "canonical_agent",
+                             "event_type", "stage", "mapping_kind", "note")) for row in phase_rows]
+        phase_md = markdown_table(markdown, "Source-aware observed master/Gemini phase mapping",
+                                  ("Source", "Legacy agent", "Legacy phase", "Canonical agent",
+                                   "Future event type", "Stage", "Kind", "Constraint"), errors)
+        if Counter(phase_json) != Counter(phase_md):
+            errors.append("Markdown legacy phase mappings must exactly match JSON, including notes and duplicates")
     return errors
 
 

@@ -214,7 +214,7 @@ Mapping kinds mean: **exact** copies compatible meaning; **derived** requires a 
 | Source | Legacy field | Canonical field | Kind | Constraint |
 |---|---|---|---|---|
 | gemini_call_ledger | run_id | run_id | exact |  |
-| gemini_call_ledger | agent | agent | partial | Raw agent is the editorial caller (Menzo, Bob, or Alfred); future model attempts use canonical agent Gemini. |
+| gemini_call_ledger | agent | agent | partial | Raw agent is the editorial caller (Menzo, Bob, or Alfred); future model-attempt events use canonical agent Gemini while retaining caller context through request/event mappings. |
 | gemini_call_ledger | status | status | partial | Legacy 'called' is not canonical: normalize with result/error evidence to started, success, or failed; avoided/failed still require event context. |
 | gemini_call_ledger | result | result | partial | Normalize known classifications; free-form provider/error text such as 503 UNAVAILABLE high demand is not copied as a canonical result. |
 | gemini_call_ledger | reason | reason_code | exact |  |

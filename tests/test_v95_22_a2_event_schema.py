@@ -155,7 +155,7 @@ def test_duplicate_pair_events_conditionally_require_pair_id():
     rule = next(x for x in data["envelope"]["conditional_requirements"] if x["id"] == "duplicate_pair_identity")
     assert set(rule["when_event_types"]) == {"duplicate_pair_evaluated", "duplicate_pair_resolved", "duplicate_pair_unresolved"}
     assert "pair_id" in rule["require"]
-    assert_rejected(lambda d: next(x for x in d["envelope"]["conditional_requirements"] if x["id"] == "duplicate_pair_identity")["require"].remove("pair_id"), "must conditionally require pair_id")
+    assert_rejected(lambda d: next(x for x in d["envelope"]["conditional_requirements"] if x["id"] == "duplicate_pair_identity")["require"].remove("pair_id"), "duplicate_pair_identity has incompatible require")
 
 
 def test_generic_lifecycle_events_preserve_pipeline_stage():
@@ -184,3 +184,96 @@ def test_report_decision_ready_does_not_imply_selected_report():
     assert row["event_type"] == "stage_completed"
     assert "does not prove" in row["note"]
     assert_rejected(lambda d: row if False else _legacy_phase(d, "Simone", "report_decision_ready").update(event_type="report_selected"), "cannot imply warning or selection")
+
+
+def _condition(data, condition_id):
+    return next(x for x in data["envelope"]["conditional_requirements"] if x["id"] == condition_id)
+
+
+def test_every_mandatory_conditional_rule_is_protected_against_deletion():
+    for condition_id in (
+        "model_attempt_identity", "avoided_request_identity", "fallback_models",
+        "failed_error", "duplicate_pair_identity",
+    ):
+        def mutate(data, target=condition_id):
+            data["envelope"]["conditional_requirements"] = [
+                row for row in data["envelope"]["conditional_requirements"] if row["id"] != target
+            ]
+        assert_rejected(mutate, "missing mandatory conditional requirement: %s" % condition_id)
+
+
+def test_mandatory_conditional_rules_reject_weakening_and_incompatible_mutation():
+    mutations = (
+        ("model_attempt_identity", "require", "attempt_id"),
+        ("model_attempt_identity", "when_event_types", "model_attempt_failed"),
+        ("avoided_request_identity", "require", "model_role"),
+        ("avoided_request_identity", "forbid", "attempt_number"),
+        ("fallback_models", "require", "fallback_to"),
+        ("failed_error", "require", "error_terminal"),
+        ("duplicate_pair_identity", "require", "pair_id"),
+    )
+    for condition_id, key, value in mutations:
+        assert_rejected(
+            lambda data, c=condition_id, k=key, v=value: _condition(data, c)[k].remove(v),
+            "mandatory conditional requirement %s has incompatible %s" % (condition_id, key),
+        )
+
+
+def test_closed_envelope_policy_is_mandatory():
+    assert load()["envelope"]["additional_fields_allowed"] is False
+    assert_rejected(lambda data: data["envelope"].pop("additional_fields_allowed"), "must be exactly false")
+    for invalid in (True, None, 0, "false"):
+        assert_rejected(lambda data, value=invalid: data["envelope"].update(additional_fields_allowed=value), "must be exactly false")
+
+
+def test_legacy_field_mapping_sync_is_bidirectional_and_includes_notes():
+    document = DOC.read_text(encoding="utf-8")
+    data = load()
+    data["legacy_field_mappings"].pop(0)
+    assert "legacy field mappings must exactly match JSON" in "\n".join(validator.validate(data, document))
+    data = load()
+    data["legacy_field_mappings"][0]["note"] = "stale changed constraint"
+    assert "legacy field mappings must exactly match JSON" in "\n".join(validator.validate(data, document))
+
+
+def test_legacy_phase_mapping_sync_is_bidirectional_and_includes_notes():
+    document = DOC.read_text(encoding="utf-8")
+    data = load()
+    data["legacy_phase_mappings"].pop(0)
+    assert "legacy phase mappings must exactly match JSON" in "\n".join(validator.validate(data, document))
+    data = load()
+    data["legacy_phase_mappings"][0]["note"] = "stale changed constraint"
+    assert "legacy phase mappings must exactly match JSON" in "\n".join(validator.validate(data, document))
+
+
+def test_legacy_markdown_duplicate_rows_are_rejected():
+    document = DOC.read_text(encoding="utf-8")
+    field_row = "| gemini_call_ledger | run_id | run_id | exact |  |"
+    assert "legacy field mappings must exactly match JSON" in "\n".join(
+        validator.validate(load(), document.replace(field_row, field_row + "\n" + field_row, 1))
+    )
+    phase_row = "| master_log.timeline | Jarvis | bootstrap_status_written | Jarvis | stage_completed | runtime | partial | Artifact write indicates orchestration completion in runtime. |"
+    assert "legacy phase mappings must exactly match JSON" in "\n".join(
+        validator.validate(load(), document.replace(phase_row, phase_row + "\n" + phase_row, 1))
+    )
+
+
+def test_legacy_markdown_target_kind_and_notes_cannot_drift():
+    document = DOC.read_text(encoding="utf-8")
+    field_row = "| gemini_call_ledger | operation_id | logical_request_id | partial | Use only after proving stable grouping; never automatic equivalence. |"
+    for changed in (
+        field_row.replace("logical_request_id", "attempt_id"),
+        field_row.replace("partial", "exact"),
+        field_row.replace("never automatic equivalence", "automatic equivalence"),
+    ):
+        mutated = document.replace(field_row, changed, 1)
+        assert "legacy field mappings must exactly match JSON" in "\n".join(validator.validate(load(), mutated))
+
+    phase_row = "| gemini_call_ledger | Bob | translate_article | Gemini | model_attempt_completed | model | partial | Observed raw caller; called/failed and result evidence determine canonical attempt event. |"
+    for changed in (
+        phase_row.replace("model_attempt_completed", "model_attempt_started"),
+        phase_row.replace("| partial |", "| exact |"),
+        phase_row.replace("canonical attempt event", "canonical request event"),
+    ):
+        mutated = document.replace(phase_row, changed, 1)
+        assert "legacy phase mappings must exactly match JSON" in "\n".join(validator.validate(load(), mutated))
