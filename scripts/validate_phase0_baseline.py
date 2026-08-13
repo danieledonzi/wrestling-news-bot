@@ -62,6 +62,14 @@ RAW_HANDOFF_METRICS = {
     "publisher.already_present_events", "publisher.dry_run_events",
     "publisher.wordpress_not_ready_events",
 }
+REQUIRED_LEGACY_CONSUMERS = {
+    "completed_successful_calls": {
+        ("scripts/observability_snapshot.py", "report"),
+    },
+    "gemini_3_5_completed_successful_calls": {
+        ("scripts/observability_snapshot.py", "report"),
+    },
+}
 SECTIONS = {
     "SOURCE_WINDOWS": "source_windows",
     "METRIC_BASELINES": "metric_baselines",
@@ -396,6 +404,10 @@ def validate(
             errors.append("metric {} available observation cannot use null".format(name))
         if availability == "exact" and row.get("source_coverage_status") != "full_target_window":
             errors.append("metric {} exact historical baseline requires full_target_window".format(name))
+        if availability == "exact" and (start != target or end != cutoff):
+            errors.append(
+                "metric {} exact baseline must use target_window_start_utc and baseline_cutoff_utc".format(name)
+            )
         if availability == "partial" and row.get("source_coverage_status") != "partial_target_window":
             errors.append("metric {} partial baseline requires partial_target_window".format(name))
         if availability == "current_snapshot_only":
@@ -457,14 +469,26 @@ def validate(
         if not replacements and row.get("deprecation_status") not in {"blocked_missing_exact_replacement", "retain_diagnostic_until_replacement", "already_non_authoritative"}:
             errors.append("legacy metric {} without replacement must be retained or blocked".format(name))
         consumers = row.get("known_consumers")
+        safe_consumers = consumers if isinstance(consumers, list) else []
         if not isinstance(consumers, list) or any(
             not isinstance(c, dict) or set(c) != {"path", "consumer_type"}
             or not isinstance(c.get("path"), str) or not c.get("path")
             or c.get("consumer_type") not in {"runtime", "report", "test", "documentation_only"}
-            for c in consumers
+            for c in safe_consumers
         ):
             errors.append("legacy metric {} has invalid consumers".format(name))
-        if any(isinstance(c, dict) and c.get("consumer_type") == "runtime" for c in consumers or []):
+        valid_consumer_pairs = {
+            (c.get("path"), c.get("consumer_type"))
+            for c in safe_consumers if isinstance(c, dict)
+        }
+        missing_consumers = REQUIRED_LEGACY_CONSUMERS.get(name, set()) - valid_consumer_pairs
+        if missing_consumers:
+            errors.append(
+                "legacy metric {} is missing required known consumer(s): {}".format(
+                    name, sorted(missing_consumers)
+                )
+            )
+        if any(isinstance(c, dict) and c.get("consumer_type") == "runtime" for c in safe_consumers):
             if row.get("earliest_removal_phase") in {"phase_0", "phase_1", "immediate", "now"}:
                 errors.append("runtime legacy metric {} cannot be removed immediately".format(name))
 

@@ -422,6 +422,10 @@
           "consumer_type": "runtime"
         },
         {
+          "path": "scripts/observability_snapshot.py",
+          "consumer_type": "report"
+        },
+        {
           "path": "tests/test_v95_gemini_ledger.py",
           "consumer_type": "test"
         }
@@ -447,6 +451,10 @@
         {
           "path": "agents/gemini_diagnostics.py",
           "consumer_type": "runtime"
+        },
+        {
+          "path": "scripts/observability_snapshot.py",
+          "consumer_type": "report"
         },
         {
           "path": "tests/test_v95_gemini_ledger.py",

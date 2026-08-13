@@ -62,6 +62,40 @@ def test_happy_path_cli_and_contract_count_is_derived_from_a1():
     assert "{} A1 metric rows".format(catalog_count) in result.stdout
 
 
+def test_root_target_window_matches_declared_days():
+    data = payload()
+    from datetime import datetime
+    start = datetime.fromisoformat(data["target_window_start_utc"])
+    cutoff = datetime.fromisoformat(data["baseline_cutoff_utc"])
+    assert (cutoff - start).total_seconds() == data["target_window_days"] * 86400
+
+
+@pytest.mark.parametrize("field,delta", [
+    ("observed_window_start_utc", "2026-07-14T14:53:54.829687+00:00"),
+    ("observed_window_end_utc", "2026-08-13T14:53:52.829687+00:00"),
+])
+def test_exact_metric_requires_exact_target_boundary(tmp_path, field, delta):
+    data = payload()
+    metric(data, "gemini.real_attempts")[field] = delta
+    assert any("must use target_window_start_utc" in error for error in errors_for(tmp_path, data=data))
+
+
+def test_exact_metric_rejects_one_second_interval_despite_full_coverage_label(tmp_path):
+    data = payload()
+    row = metric(data, "gemini.real_attempts")
+    row["observed_window_start_utc"] = "2026-08-13T14:53:52.829687+00:00"
+    assert row["source_coverage_status"] == "full_target_window"
+    assert any("must use target_window_start_utc" in error for error in errors_for(tmp_path, data=data))
+
+
+def test_exact_gemini_target_boundaries_are_valid():
+    data = payload()
+    row = metric(data, "gemini.real_attempts")
+    assert row["observed_window_start_utc"] == data["target_window_start_utc"]
+    assert row["observed_window_end_utc"] == data["baseline_cutoff_utc"]
+    assert validate() == []
+
+
 @pytest.mark.parametrize("mutation", ["omitted", "unknown", "duplicate"])
 def test_a1_metric_set_and_duplicates_are_rejected(tmp_path, mutation):
     data = payload()
@@ -234,6 +268,62 @@ def test_deprecation_row_primitive_types(tmp_path, field, value, needle):
     dep = registry()
     dep["entries"][0][field] = value
     assert any(needle in error for error in errors_for(tmp_path, dep=dep))
+
+
+@pytest.mark.parametrize("malformed", [123, {"path": "agents/example.py"}, "runtime"])
+def test_malformed_known_consumers_returns_error_without_exception(tmp_path, malformed):
+    dep = registry()
+    dep["entries"][0]["known_consumers"] = malformed
+    errors = errors_for(tmp_path, dep=dep)
+    assert any("invalid consumers" in error for error in errors)
+
+
+def test_empty_known_consumers_list_does_not_crash(tmp_path):
+    dep = registry()
+    dep["entries"][0]["known_consumers"] = []
+    errors = errors_for(tmp_path, dep=dep)
+    assert not any("invalid consumers" in error for error in errors)
+
+
+def test_malformed_consumer_item_returns_error_without_exception(tmp_path):
+    dep = registry()
+    dep["entries"][0]["known_consumers"] = [123]
+    assert any("invalid consumers" in error for error in errors_for(tmp_path, dep=dep))
+
+
+def test_cli_reports_malformed_consumers_without_traceback(tmp_path):
+    dep = registry()
+    dep["entries"][0]["known_consumers"] = 123
+    baseline_path = write_json(tmp_path, "baseline.json", payload())
+    registry_path = write_json(tmp_path, "registry.json", dep)
+    result = subprocess.run(
+        [sys.executable, str(VALIDATOR), str(baseline_path), str(registry_path)],
+        cwd=str(ROOT), text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        check=False,
+    )
+    assert result.returncode != 0
+    assert "invalid consumers" in result.stderr
+    assert "Traceback" not in result.stderr
+
+
+def test_gemini_success_aliases_include_observability_report_consumer():
+    entries = {row["legacy_metric_name"]: row for row in registry()["entries"]}
+    expected = {"path": "scripts/observability_snapshot.py", "consumer_type": "report"}
+    for name in ("completed_successful_calls", "gemini_3_5_completed_successful_calls"):
+        assert expected in entries[name]["known_consumers"]
+
+
+@pytest.mark.parametrize("name", [
+    "completed_successful_calls", "gemini_3_5_completed_successful_calls",
+])
+def test_removing_required_gemini_alias_consumer_fails(tmp_path, name):
+    dep = registry()
+    row = next(item for item in dep["entries"] if item["legacy_metric_name"] == name)
+    row["known_consumers"] = [
+        consumer for consumer in row["known_consumers"]
+        if consumer["path"] != "scripts/observability_snapshot.py"
+    ]
+    assert any("missing required known consumer" in error for error in errors_for(tmp_path, dep=dep))
 
 
 def test_reporting_scripts_are_not_classified_as_runtime_consumers():
