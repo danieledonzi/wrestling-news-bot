@@ -1,0 +1,1304 @@
+{
+  "schema_version": "owtv_event_schema_v1",
+  "policy_version": "v95.22_a2",
+  "contract_scope": "measurement_only_no_runtime_emission",
+  "envelope": {
+    "additional_fields_allowed": false,
+    "fields": [
+      {
+        "name": "schema_version",
+        "type": "string",
+        "presence": "required"
+      },
+      {
+        "name": "policy_version",
+        "type": "string",
+        "presence": "required"
+      },
+      {
+        "name": "timestamp_utc",
+        "type": "string",
+        "presence": "required"
+      },
+      {
+        "name": "run_id",
+        "type": "string",
+        "presence": "required"
+      },
+      {
+        "name": "article_id",
+        "type": "string",
+        "presence": "optional"
+      },
+      {
+        "name": "pair_id",
+        "type": "string",
+        "presence": "optional"
+      },
+      {
+        "name": "correlation_id",
+        "type": "string",
+        "presence": "optional"
+      },
+      {
+        "name": "content_id",
+        "type": "string",
+        "presence": "optional"
+      },
+      {
+        "name": "story_id",
+        "type": "string",
+        "presence": "optional"
+      },
+      {
+        "name": "report_key",
+        "type": "string",
+        "presence": "optional"
+      },
+      {
+        "name": "logical_request_id",
+        "type": "string",
+        "presence": "optional"
+      },
+      {
+        "name": "attempt_id",
+        "type": "string",
+        "presence": "optional"
+      },
+      {
+        "name": "stage",
+        "type": "string",
+        "presence": "required"
+      },
+      {
+        "name": "agent",
+        "type": "string",
+        "presence": "required"
+      },
+      {
+        "name": "event_type",
+        "type": "string",
+        "presence": "required"
+      },
+      {
+        "name": "attempt_number",
+        "type": "integer",
+        "presence": "optional"
+      },
+      {
+        "name": "status",
+        "type": "string",
+        "presence": "required"
+      },
+      {
+        "name": "result",
+        "type": "string",
+        "presence": "optional"
+      },
+      {
+        "name": "reason_code",
+        "type": "string",
+        "presence": "optional"
+      },
+      {
+        "name": "model_name",
+        "type": "string",
+        "presence": "optional"
+      },
+      {
+        "name": "model_role",
+        "type": "string",
+        "presence": "optional"
+      },
+      {
+        "name": "fallback_from",
+        "type": "string",
+        "presence": "optional"
+      },
+      {
+        "name": "fallback_to",
+        "type": "string",
+        "presence": "optional"
+      },
+      {
+        "name": "latency_ms",
+        "type": "integer",
+        "presence": "optional"
+      },
+      {
+        "name": "error_class",
+        "type": "string",
+        "presence": "optional"
+      },
+      {
+        "name": "error_terminal",
+        "type": "boolean_or_null",
+        "presence": "optional"
+      },
+      {
+        "name": "artifact_refs",
+        "type": "array",
+        "presence": "required"
+      },
+      {
+        "name": "code_commit",
+        "type": "string",
+        "presence": "optional"
+      }
+    ],
+    "required_fields": [
+      "schema_version",
+      "policy_version",
+      "timestamp_utc",
+      "run_id",
+      "stage",
+      "agent",
+      "event_type",
+      "status",
+      "artifact_refs"
+    ],
+    "optional_fields": [
+      "article_id",
+      "pair_id",
+      "correlation_id",
+      "content_id",
+      "story_id",
+      "report_key",
+      "logical_request_id",
+      "attempt_id",
+      "attempt_number",
+      "result",
+      "reason_code",
+      "model_name",
+      "model_role",
+      "fallback_from",
+      "fallback_to",
+      "latency_ms",
+      "error_class",
+      "error_terminal",
+      "code_commit"
+    ],
+    "conditional_requirements": [
+      {
+        "id": "model_attempt_identity",
+        "when_event_types": [
+          "model_attempt_started",
+          "model_attempt_completed",
+          "model_attempt_failed"
+        ],
+        "require": [
+          "logical_request_id",
+          "attempt_id",
+          "attempt_number",
+          "model_name",
+          "model_role"
+        ],
+        "rule": "Concrete model attempts require a logical parent, unique attempt identity, and 1-based ordinal."
+      },
+      {
+        "id": "avoided_request_identity",
+        "when_event_types": [
+          "model_attempt_avoided"
+        ],
+        "require": [
+          "logical_request_id",
+          "model_role"
+        ],
+        "forbid": [
+          "attempt_id",
+          "attempt_number",
+          "latency_ms"
+        ],
+        "rule": "Avoided means no concrete API attempt; no attempt identity, ordinal, or latency exists."
+      },
+      {
+        "id": "fallback_models",
+        "when_event_types": [
+          "fallback_started"
+        ],
+        "require": [
+          "logical_request_id",
+          "fallback_from",
+          "fallback_to"
+        ],
+        "rule": "Fallback transition names both models and retains the logical request."
+      },
+      {
+        "id": "failed_error",
+        "when_event_types": [
+          "stage_failed",
+          "model_attempt_failed",
+          "publication_failed"
+        ],
+        "require": [
+          "error_class",
+          "error_terminal"
+        ],
+        "rule": "Failure events classify the error and state terminality."
+      },
+      {
+        "id": "duplicate_pair_identity",
+        "when_event_types": [
+          "duplicate_pair_evaluated",
+          "duplicate_pair_resolved",
+          "duplicate_pair_unresolved"
+        ],
+        "require": [
+          "pair_id"
+        ],
+        "rule": "Every duplicate-pair outcome identifies the scoped pair; left/right article IDs remain legacy/artifact context."
+      }
+    ]
+  },
+  "stages": [
+    "runtime",
+    "intake",
+    "reporting",
+    "selection",
+    "duplicate",
+    "content_sufficiency",
+    "generation",
+    "quality",
+    "publication",
+    "audit",
+    "model"
+  ],
+  "agents": [
+    "Jarvis",
+    "Massy",
+    "Simone",
+    "Menzo",
+    "Andrea",
+    "Bob",
+    "Alfred",
+    "Publisher",
+    "Archivista",
+    "Gemini"
+  ],
+  "event_types": [
+    {
+      "name": "run_started",
+      "stage": "runtime",
+      "agents": [
+        "Jarvis"
+      ],
+      "description": "run started"
+    },
+    {
+      "name": "run_completed",
+      "stage": "runtime",
+      "agents": [
+        "Jarvis"
+      ],
+      "description": "run completed"
+    },
+    {
+      "name": "stage_started",
+      "agents": [
+        "Jarvis",
+        "Massy",
+        "Simone",
+        "Menzo",
+        "Andrea",
+        "Bob",
+        "Alfred",
+        "Publisher",
+        "Archivista",
+        "Gemini"
+      ],
+      "description": "stage started",
+      "allowed_stages": [
+        "runtime",
+        "intake",
+        "reporting",
+        "selection",
+        "duplicate",
+        "content_sufficiency",
+        "generation",
+        "quality",
+        "publication",
+        "audit",
+        "model"
+      ]
+    },
+    {
+      "name": "stage_completed",
+      "agents": [
+        "Jarvis",
+        "Massy",
+        "Simone",
+        "Menzo",
+        "Andrea",
+        "Bob",
+        "Alfred",
+        "Publisher",
+        "Archivista",
+        "Gemini"
+      ],
+      "description": "stage completed",
+      "allowed_stages": [
+        "runtime",
+        "intake",
+        "reporting",
+        "selection",
+        "duplicate",
+        "content_sufficiency",
+        "generation",
+        "quality",
+        "publication",
+        "audit",
+        "model"
+      ]
+    },
+    {
+      "name": "stage_failed",
+      "agents": [
+        "Jarvis",
+        "Massy",
+        "Simone",
+        "Menzo",
+        "Andrea",
+        "Bob",
+        "Alfred",
+        "Publisher",
+        "Archivista",
+        "Gemini"
+      ],
+      "description": "stage failed",
+      "allowed_stages": [
+        "runtime",
+        "intake",
+        "reporting",
+        "selection",
+        "duplicate",
+        "content_sufficiency",
+        "generation",
+        "quality",
+        "publication",
+        "audit",
+        "model"
+      ]
+    },
+    {
+      "name": "candidate_seen",
+      "stage": "intake",
+      "agents": [
+        "Massy"
+      ],
+      "description": "candidate seen"
+    },
+    {
+      "name": "candidate_selected",
+      "stage": "selection",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "candidate selected"
+    },
+    {
+      "name": "candidate_pending",
+      "stage": "selection",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "candidate pending"
+    },
+    {
+      "name": "candidate_skipped",
+      "stage": "selection",
+      "agents": [
+        "Massy",
+        "Menzo",
+        "Andrea"
+      ],
+      "description": "candidate skipped"
+    },
+    {
+      "name": "duplicate_check_requested",
+      "stage": "duplicate",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "duplicate check requested"
+    },
+    {
+      "name": "duplicate_pair_evaluated",
+      "stage": "duplicate",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "duplicate pair evaluated"
+    },
+    {
+      "name": "duplicate_pair_resolved",
+      "stage": "duplicate",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "duplicate pair resolved"
+    },
+    {
+      "name": "duplicate_pair_unresolved",
+      "stage": "duplicate",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "duplicate pair unresolved"
+    },
+    {
+      "name": "logical_ai_request_created",
+      "stage": "model",
+      "agents": [
+        "Menzo",
+        "Bob",
+        "Alfred",
+        "Simone",
+        "Gemini"
+      ],
+      "description": "logical ai request created"
+    },
+    {
+      "name": "model_attempt_started",
+      "stage": "model",
+      "agents": [
+        "Gemini"
+      ],
+      "description": "model attempt started"
+    },
+    {
+      "name": "model_attempt_completed",
+      "stage": "model",
+      "agents": [
+        "Gemini"
+      ],
+      "description": "model attempt completed"
+    },
+    {
+      "name": "model_attempt_failed",
+      "stage": "model",
+      "agents": [
+        "Gemini"
+      ],
+      "description": "model attempt failed"
+    },
+    {
+      "name": "model_attempt_avoided",
+      "stage": "model",
+      "agents": [
+        "Gemini"
+      ],
+      "description": "model attempt avoided"
+    },
+    {
+      "name": "fallback_started",
+      "stage": "model",
+      "agents": [
+        "Gemini"
+      ],
+      "description": "fallback started"
+    },
+    {
+      "name": "repair_started",
+      "stage": "model",
+      "agents": [
+        "Gemini"
+      ],
+      "description": "repair started"
+    },
+    {
+      "name": "article_generation_requested",
+      "stage": "generation",
+      "agents": [
+        "Bob"
+      ],
+      "description": "article generation requested"
+    },
+    {
+      "name": "article_generated",
+      "stage": "generation",
+      "agents": [
+        "Bob"
+      ],
+      "description": "article generated"
+    },
+    {
+      "name": "revision_requested",
+      "stage": "quality",
+      "agents": [
+        "Alfred"
+      ],
+      "description": "revision requested"
+    },
+    {
+      "name": "revision_completed",
+      "stage": "quality",
+      "agents": [
+        "Bob",
+        "Alfred"
+      ],
+      "description": "revision completed"
+    },
+    {
+      "name": "report_candidate_seen",
+      "stage": "reporting",
+      "agents": [
+        "Simone"
+      ],
+      "description": "report candidate seen"
+    },
+    {
+      "name": "report_selected",
+      "stage": "reporting",
+      "agents": [
+        "Simone"
+      ],
+      "description": "report selected"
+    },
+    {
+      "name": "report_published",
+      "stage": "reporting",
+      "agents": [
+        "Simone",
+        "Publisher"
+      ],
+      "description": "report published"
+    },
+    {
+      "name": "publication_attempted",
+      "stage": "publication",
+      "agents": [
+        "Publisher"
+      ],
+      "description": "publication attempted"
+    },
+    {
+      "name": "publication_completed",
+      "stage": "publication",
+      "agents": [
+        "Publisher"
+      ],
+      "description": "publication completed"
+    },
+    {
+      "name": "publication_failed",
+      "stage": "publication",
+      "agents": [
+        "Publisher"
+      ],
+      "description": "publication failed"
+    },
+    {
+      "name": "publication_already_present",
+      "stage": "publication",
+      "agents": [
+        "Publisher"
+      ],
+      "description": "publication already present"
+    },
+    {
+      "name": "content_sufficiency_checked",
+      "stage": "content_sufficiency",
+      "agents": [
+        "Andrea"
+      ],
+      "description": "content sufficiency checked"
+    },
+    {
+      "name": "quality_review_completed",
+      "stage": "quality",
+      "agents": [
+        "Alfred"
+      ],
+      "description": "quality review completed"
+    },
+    {
+      "name": "audit_completed",
+      "stage": "audit",
+      "agents": [
+        "Archivista"
+      ],
+      "description": "audit completed"
+    },
+    {
+      "name": "warning_recorded",
+      "stage": "audit",
+      "agents": [
+        "Alfred",
+        "Archivista",
+        "Jarvis"
+      ],
+      "description": "warning recorded"
+    },
+    {
+      "name": "blocker_recorded",
+      "stage": "audit",
+      "agents": [
+        "Alfred",
+        "Archivista"
+      ],
+      "description": "blocker recorded"
+    }
+  ],
+  "identities": {
+    "allowed_classifications": [
+      "existing_runtime",
+      "existing_partial",
+      "planned_canonical",
+      "derived",
+      "legacy_only"
+    ],
+    "fields": [
+      {
+        "name": "run_id",
+        "classification": "existing_runtime",
+        "description": "Observed run identity; one run may contain many correlations."
+      },
+      {
+        "name": "article_id",
+        "classification": "existing_runtime",
+        "description": "Stable SHA-256 identity derived by the duplicate subsystem from canonical source URL."
+      },
+      {
+        "name": "operation_id",
+        "classification": "existing_runtime",
+        "description": "Per-call-site Gemini operation token, normally UUID-bearing; grouping stability across every retry/fallback is not guaranteed. It is not a synonym of logical_request_id."
+      },
+      {
+        "name": "attempt_index",
+        "classification": "legacy_only",
+        "description": "Legacy Gemini zero-based attempt ordinal; canonical attempt_number = attempt_index + 1 only when the same logical operation grouping is established."
+      },
+      {
+        "name": "pair_id",
+        "classification": "existing_runtime",
+        "description": "Scoped identity for a duplicate article pair."
+      },
+      {
+        "name": "report_key",
+        "classification": "existing_runtime",
+        "description": "Simone report identity."
+      },
+      {
+        "name": "event_key",
+        "classification": "existing_partial",
+        "description": "Observed Simone event/night key, not universally populated."
+      },
+      {
+        "name": "cluster_id",
+        "classification": "existing_partial",
+        "description": "Observed cluster identity, not universally populated."
+      },
+      {
+        "name": "source_id",
+        "classification": "existing_partial",
+        "description": "Observed only on part of the pipeline."
+      },
+      {
+        "name": "candidate_id",
+        "classification": "existing_partial",
+        "description": "Field exists in the Gemini ledger but the production sample was null; not a reliably populated identity."
+      },
+      {
+        "name": "correlation_id",
+        "classification": "planned_canonical",
+        "description": "Planned end-to-end process/content correlation within a run."
+      },
+      {
+        "name": "content_id",
+        "classification": "planned_canonical",
+        "description": "Planned stable source/content item identity."
+      },
+      {
+        "name": "story_id",
+        "classification": "planned_canonical",
+        "description": "Planned editorial story identity that may group several content_id values."
+      },
+      {
+        "name": "logical_request_id",
+        "classification": "planned_canonical",
+        "description": "Planned ID for one pipeline intention; stable across all retries and fallbacks for that intention."
+      },
+      {
+        "name": "attempt_id",
+        "classification": "planned_canonical",
+        "description": "Planned unique ID for exactly one concrete attempt."
+      }
+    ],
+    "relationships": [
+      "run_id contains zero or more correlation_id values",
+      "correlation_id links end-to-end events for one content/process",
+      "story_id may group multiple content_id values",
+      "logical_request_id contains one or more attempt_id values when calls occur",
+      "pair_id identifies a duplicate-subsystem article pair",
+      "report_key identifies one Simone report"
+    ]
+  },
+  "attempt_contract": {
+    "logical_request_id_stable_across_retry_and_fallback": true,
+    "attempt_id_unique_per_concrete_attempt": true,
+    "attempt_number_base": 1,
+    "legacy_attempt_index_base": 0,
+    "legacy_conversion": "attempt_number = attempt_index + 1 only after operation grouping is proven",
+    "operation_id_equivalent_to_logical_request_id": false,
+    "avoided_is_concrete_attempt": false
+  },
+  "outcome_contract": {
+    "status_values": [
+      "started",
+      "success",
+      "failed",
+      "avoided",
+      "pending",
+      "skipped"
+    ],
+    "result_semantics": "Normalized immediate outcome payload/classification; optional and distinct from lifecycle and cause.",
+    "reason_code_semantics": "Stable machine cause/purpose code; optional and distinct from outcome.",
+    "namespaces_disjoint": true
+  },
+  "error_contract": {
+    "classes": [
+      "transient",
+      "permanent",
+      "validation",
+      "upstream",
+      "downstream",
+      "invariant",
+      "policy"
+    ],
+    "terminal_type": "boolean_or_null",
+    "null_semantics": "No error classification applies or terminality is unknown outside an error event.",
+    "non_error_requires_error_class": false
+  },
+  "model_contract": {
+    "roles": [
+      "selection",
+      "duplicate_arbitration",
+      "translation_generation",
+      "report_translation",
+      "quote_resolution",
+      "quality_review"
+    ],
+    "latency_ms_minimum": 0,
+    "fallback_same_logical_request": true
+  },
+  "artifact_refs_contract": {
+    "type": "array",
+    "item_type": "object",
+    "required_item_fields": [
+      "path",
+      "relation"
+    ],
+    "optional_item_fields": [
+      "artifact_type",
+      "schema_version",
+      "sha256"
+    ],
+    "relation_values": [
+      "input",
+      "output",
+      "evidence"
+    ],
+    "embed_content": false
+  },
+  "legacy_mapping_kinds": [
+    "exact",
+    "derived",
+    "partial",
+    "no_canonical_equivalent",
+    "planned_future_field"
+  ],
+  "legacy_field_mappings": [
+    {
+      "source": "gemini_call_ledger",
+      "legacy_field": "run_id",
+      "canonical_field": "run_id",
+      "mapping_kind": "exact",
+      "note": ""
+    },
+    {
+      "source": "gemini_call_ledger",
+      "legacy_field": "agent",
+      "canonical_field": "agent",
+      "mapping_kind": "partial",
+      "note": "Raw agent is the editorial caller (Menzo, Bob, or Alfred); future model-attempt events use canonical agent Gemini while retaining caller context through request/event mappings."
+    },
+    {
+      "source": "gemini_call_ledger",
+      "legacy_field": "status",
+      "canonical_field": "status",
+      "mapping_kind": "partial",
+      "note": "Legacy 'called' is not canonical: normalize with result/error evidence to started, success, or failed; avoided/failed still require event context."
+    },
+    {
+      "source": "gemini_call_ledger",
+      "legacy_field": "result",
+      "canonical_field": "result",
+      "mapping_kind": "partial",
+      "note": "Normalize known classifications; free-form provider/error text such as 503 UNAVAILABLE high demand is not copied as a canonical result."
+    },
+    {
+      "source": "gemini_call_ledger",
+      "legacy_field": "reason",
+      "canonical_field": "reason_code",
+      "mapping_kind": "exact",
+      "note": ""
+    },
+    {
+      "source": "gemini_call_ledger",
+      "legacy_field": "phase",
+      "canonical_field": "event_type",
+      "mapping_kind": "partial",
+      "note": "Requires phase table and outcome context."
+    },
+    {
+      "source": "gemini_call_ledger",
+      "legacy_field": "operation_id",
+      "canonical_field": "logical_request_id",
+      "mapping_kind": "partial",
+      "note": "Use only after proving stable grouping; never automatic equivalence."
+    },
+    {
+      "source": "gemini_call_ledger",
+      "legacy_field": "attempt_index",
+      "canonical_field": "attempt_number",
+      "mapping_kind": "derived",
+      "note": "Zero-based legacy index plus one, conditional on valid request grouping."
+    },
+    {
+      "source": "gemini_call_ledger",
+      "legacy_field": "model",
+      "canonical_field": "model_name",
+      "mapping_kind": "partial",
+      "note": "Precedence depends on requested-versus-actual analysis."
+    },
+    {
+      "source": "gemini_call_ledger",
+      "legacy_field": "model_requested",
+      "canonical_field": "model_name",
+      "mapping_kind": "partial",
+      "note": "Precedence depends on requested-versus-actual analysis."
+    },
+    {
+      "source": "gemini_call_ledger",
+      "legacy_field": "actual_model",
+      "canonical_field": "model_name",
+      "mapping_kind": "partial",
+      "note": "Precedence depends on requested-versus-actual analysis."
+    },
+    {
+      "source": "master_log.timeline",
+      "legacy_field": "agent",
+      "canonical_field": "agent",
+      "mapping_kind": "exact",
+      "note": ""
+    },
+    {
+      "source": "master_log.timeline",
+      "legacy_field": "phase",
+      "canonical_field": "event_type",
+      "mapping_kind": "partial",
+      "note": "Map raw phase using legacy_phase_mappings."
+    },
+    {
+      "source": "duplicate_subsystem",
+      "legacy_field": "article_id",
+      "canonical_field": "article_id",
+      "mapping_kind": "exact",
+      "note": "Observed identity is available in the optional canonical envelope."
+    },
+    {
+      "source": "duplicate_subsystem",
+      "legacy_field": "pair_id",
+      "canonical_field": "pair_id",
+      "mapping_kind": "exact",
+      "note": "Observed identity is available in the optional canonical envelope."
+    },
+    {
+      "source": "duplicate_subsystem",
+      "legacy_field": "left_article_id",
+      "canonical_field": null,
+      "mapping_kind": "no_canonical_equivalent",
+      "note": "Retained as identity/context metadata until envelope extension."
+    },
+    {
+      "source": "duplicate_subsystem",
+      "legacy_field": "right_article_id",
+      "canonical_field": null,
+      "mapping_kind": "no_canonical_equivalent",
+      "note": "Retained as identity/context metadata until envelope extension."
+    },
+    {
+      "source": "duplicate_subsystem",
+      "legacy_field": "scope",
+      "canonical_field": "result",
+      "mapping_kind": "partial",
+      "note": "Requires field-specific normalization; do not copy blindly."
+    },
+    {
+      "source": "duplicate_subsystem",
+      "legacy_field": "final_disposition",
+      "canonical_field": "result",
+      "mapping_kind": "partial",
+      "note": "Requires field-specific normalization; do not copy blindly."
+    },
+    {
+      "source": "duplicate_subsystem",
+      "legacy_field": "gemini_decision",
+      "canonical_field": "result",
+      "mapping_kind": "partial",
+      "note": "Requires field-specific normalization; do not copy blindly."
+    },
+    {
+      "source": "duplicate_subsystem",
+      "legacy_field": "cache_status",
+      "canonical_field": "result",
+      "mapping_kind": "partial",
+      "note": "Requires field-specific normalization; do not copy blindly."
+    },
+    {
+      "source": "simone",
+      "legacy_field": "report_key",
+      "canonical_field": "report_key",
+      "mapping_kind": "exact",
+      "note": ""
+    },
+    {
+      "source": "simone",
+      "legacy_field": "report_id",
+      "canonical_field": null,
+      "mapping_kind": "no_canonical_equivalent",
+      "note": "Legacy context identity; no envelope field in v1."
+    },
+    {
+      "source": "simone",
+      "legacy_field": "event_key",
+      "canonical_field": null,
+      "mapping_kind": "no_canonical_equivalent",
+      "note": "Legacy context identity; no envelope field in v1."
+    },
+    {
+      "source": "simone",
+      "legacy_field": "night_key",
+      "canonical_field": null,
+      "mapping_kind": "no_canonical_equivalent",
+      "note": "Legacy context identity; no envelope field in v1."
+    },
+    {
+      "source": "publisher",
+      "legacy_field": "source_url",
+      "canonical_field": null,
+      "mapping_kind": "no_canonical_equivalent",
+      "note": "May be represented by artifact metadata in a future contract, not artifact content."
+    },
+    {
+      "source": "publisher",
+      "legacy_field": "wp_link",
+      "canonical_field": null,
+      "mapping_kind": "no_canonical_equivalent",
+      "note": "May be represented by artifact metadata in a future contract, not artifact content."
+    },
+    {
+      "source": "publisher",
+      "legacy_field": "wp_post_id",
+      "canonical_field": null,
+      "mapping_kind": "no_canonical_equivalent",
+      "note": "May be represented by artifact metadata in a future contract, not artifact content."
+    },
+    {
+      "source": "future_canonical_ledger",
+      "legacy_field": "correlation_id",
+      "canonical_field": "correlation_id",
+      "mapping_kind": "planned_future_field",
+      "note": ""
+    },
+    {
+      "source": "future_canonical_ledger",
+      "legacy_field": "content_id",
+      "canonical_field": "content_id",
+      "mapping_kind": "planned_future_field",
+      "note": ""
+    },
+    {
+      "source": "future_canonical_ledger",
+      "legacy_field": "story_id",
+      "canonical_field": "story_id",
+      "mapping_kind": "planned_future_field",
+      "note": ""
+    },
+    {
+      "source": "future_canonical_ledger",
+      "legacy_field": "logical_request_id",
+      "canonical_field": "logical_request_id",
+      "mapping_kind": "planned_future_field",
+      "note": ""
+    },
+    {
+      "source": "future_canonical_ledger",
+      "legacy_field": "attempt_id",
+      "canonical_field": "attempt_id",
+      "mapping_kind": "planned_future_field",
+      "note": ""
+    }
+  ],
+  "legacy_phase_mappings": [
+    {
+      "source": "master_log.timeline",
+      "legacy_agent": "Jarvis",
+      "legacy_phase": "bootstrap_status_written",
+      "canonical_agent": "Jarvis",
+      "event_type": "stage_completed",
+      "stage": "runtime",
+      "mapping_kind": "partial",
+      "note": "Artifact write indicates orchestration completion in runtime."
+    },
+    {
+      "source": "master_log.timeline",
+      "legacy_agent": "Massy",
+      "legacy_phase": "sentinel_board_ready",
+      "canonical_agent": "Massy",
+      "event_type": "stage_completed",
+      "stage": "intake",
+      "mapping_kind": "partial",
+      "note": "Ready phase indicates intake stage completion, subject to timeline context."
+    },
+    {
+      "source": "master_log.timeline",
+      "legacy_agent": "Massy",
+      "legacy_phase": "forced_policy_active",
+      "canonical_agent": "Massy",
+      "event_type": "stage_completed",
+      "stage": "intake",
+      "mapping_kind": "partial",
+      "note": "Policy was applied; it does not imply a warning."
+    },
+    {
+      "source": "master_log.timeline",
+      "legacy_agent": "Simone",
+      "legacy_phase": "report_decision_ready",
+      "canonical_agent": "Simone",
+      "event_type": "stage_completed",
+      "stage": "reporting",
+      "mapping_kind": "partial",
+      "note": "Decision stage is ready; it does not prove that a report was selected."
+    },
+    {
+      "source": "master_log.timeline",
+      "legacy_agent": "Simone",
+      "legacy_phase": "report_publication_ready",
+      "canonical_agent": "Simone",
+      "event_type": "stage_completed",
+      "stage": "reporting",
+      "mapping_kind": "partial",
+      "note": "Publication handoff readiness is a stage lifecycle signal, not publication success."
+    },
+    {
+      "source": "master_log.timeline",
+      "legacy_agent": "Menzo",
+      "legacy_phase": "editorial_decision_ready",
+      "canonical_agent": "Menzo",
+      "event_type": "stage_completed",
+      "stage": "selection",
+      "mapping_kind": "partial",
+      "note": "Selection decision stage completed; item outcome remains in artifacts."
+    },
+    {
+      "source": "master_log.timeline",
+      "legacy_agent": "Menzo",
+      "legacy_phase": "forced_policy_active",
+      "canonical_agent": "Menzo",
+      "event_type": "stage_completed",
+      "stage": "selection",
+      "mapping_kind": "partial",
+      "note": "Policy was applied; it does not imply a warning."
+    },
+    {
+      "source": "master_log.timeline",
+      "legacy_agent": "Andrea",
+      "legacy_phase": "pre_bob_content_sufficiency_ready",
+      "canonical_agent": "Andrea",
+      "event_type": "content_sufficiency_checked",
+      "stage": "content_sufficiency",
+      "mapping_kind": "partial",
+      "note": "Ready artifact supports a check; item result needs artifact context."
+    },
+    {
+      "source": "master_log.timeline",
+      "legacy_agent": "Bob",
+      "legacy_phase": "article_packages_ready",
+      "canonical_agent": "Bob",
+      "event_type": "article_generated",
+      "stage": "generation",
+      "mapping_kind": "partial",
+      "note": "Packages may contain zero or more generated articles; inspect artifact context."
+    },
+    {
+      "source": "master_log.timeline",
+      "legacy_agent": "Bob",
+      "legacy_phase": "bob_brief_guard_applied",
+      "canonical_agent": "Bob",
+      "event_type": "stage_completed",
+      "stage": "generation",
+      "mapping_kind": "partial",
+      "note": "Guard application is a lifecycle signal and does not imply a warning."
+    },
+    {
+      "source": "master_log.timeline",
+      "legacy_agent": "Alfred",
+      "legacy_phase": "quality_review_ready",
+      "canonical_agent": "Alfred",
+      "event_type": "quality_review_completed",
+      "stage": "quality",
+      "mapping_kind": "partial",
+      "note": "Review readiness maps after inspecting review outcomes."
+    },
+    {
+      "source": "master_log.timeline",
+      "legacy_agent": "Alfred",
+      "legacy_phase": "bob_warning_guard_applied",
+      "canonical_agent": "Alfred",
+      "event_type": "stage_completed",
+      "stage": "quality",
+      "mapping_kind": "partial",
+      "note": "Guard application does not imply that a warning exists."
+    },
+    {
+      "source": "master_log.timeline",
+      "legacy_agent": "Publisher",
+      "legacy_phase": "publication_ready",
+      "canonical_agent": "Publisher",
+      "event_type": "stage_completed",
+      "stage": "publication",
+      "mapping_kind": "partial",
+      "note": "Publisher stage completion does not itself prove publication."
+    },
+    {
+      "source": "master_log.timeline",
+      "legacy_agent": "Jarvis",
+      "legacy_phase": "runtime_skipped",
+      "canonical_agent": "Jarvis",
+      "event_type": "stage_completed",
+      "stage": "runtime",
+      "mapping_kind": "partial",
+      "note": "Runtime lifecycle ended as skipped; status normalization supplies skipped."
+    },
+    {
+      "source": "master_log.timeline",
+      "legacy_agent": "Archivista",
+      "legacy_phase": "audit_ready",
+      "canonical_agent": "Archivista",
+      "event_type": "audit_completed",
+      "stage": "audit",
+      "mapping_kind": "partial",
+      "note": "Audit artifact readiness supports completion with artifact context."
+    },
+    {
+      "source": "gemini_call_ledger",
+      "legacy_agent": "Menzo",
+      "legacy_phase": "duplicate_arbitration",
+      "canonical_agent": "Gemini",
+      "event_type": "model_attempt_completed",
+      "stage": "model",
+      "mapping_kind": "partial",
+      "note": "Observed raw caller; status/result evidence selects completed, failed, or avoided."
+    },
+    {
+      "source": "gemini_call_ledger",
+      "legacy_agent": "Menzo",
+      "legacy_phase": "duplicate_arbitration_same_run_batch",
+      "canonical_agent": "Gemini",
+      "event_type": "model_attempt_completed",
+      "stage": "model",
+      "mapping_kind": "partial",
+      "note": "Observed raw caller; status/result evidence selects completed, failed, or avoided."
+    },
+    {
+      "source": "gemini_call_ledger",
+      "legacy_agent": "Menzo",
+      "legacy_phase": "duplicate_arbitration_recent_history_batch",
+      "canonical_agent": "Gemini",
+      "event_type": "model_attempt_completed",
+      "stage": "model",
+      "mapping_kind": "partial",
+      "note": "Observed raw caller; status/result evidence selects completed, failed, or avoided."
+    },
+    {
+      "source": "gemini_call_ledger",
+      "legacy_agent": "Menzo",
+      "legacy_phase": "duplicate_arbitration_recent_history_repair",
+      "canonical_agent": "Gemini",
+      "event_type": "repair_started",
+      "stage": "model",
+      "mapping_kind": "partial",
+      "note": "Repair flag/phase identifies repair; attempt outcome requires its ledger row."
+    },
+    {
+      "source": "gemini_call_ledger",
+      "legacy_agent": "Bob",
+      "legacy_phase": "translate_article",
+      "canonical_agent": "Gemini",
+      "event_type": "model_attempt_completed",
+      "stage": "model",
+      "mapping_kind": "partial",
+      "note": "Observed raw caller; called/failed and result evidence determine canonical attempt event."
+    },
+    {
+      "source": "gemini_call_ledger",
+      "legacy_agent": "Bob",
+      "legacy_phase": "report_blocks_legacy_prompt",
+      "canonical_agent": "Gemini",
+      "event_type": "model_attempt_completed",
+      "stage": "model",
+      "mapping_kind": "partial",
+      "note": "Report workshop records agent Bob; outcome evidence determines canonical attempt event."
+    },
+    {
+      "source": "gemini_call_ledger",
+      "legacy_agent": "Alfred",
+      "legacy_phase": "quote_resolver",
+      "canonical_agent": "Gemini",
+      "event_type": "model_attempt_completed",
+      "stage": "model",
+      "mapping_kind": "partial",
+      "note": "Observed raw caller; outcome evidence determines canonical attempt event."
+    },
+    {
+      "source": "gemini_call_ledger",
+      "legacy_agent": "Alfred",
+      "legacy_phase": "quote_ambiguity_resolver",
+      "canonical_agent": "Gemini",
+      "event_type": "model_attempt_avoided",
+      "stage": "model",
+      "mapping_kind": "partial",
+      "note": "Observed history-hit avoided row; verify status before mapping to avoided."
+    }
+  ],
+  "document_sync": {
+    "required_sections": [
+      "Purpose and scope",
+      "Envelope",
+      "Identity model",
+      "Logical request versus attempt",
+      "Stage taxonomy",
+      "Agent taxonomy",
+      "Event type taxonomy",
+      "Status, result, and reason",
+      "Error contract",
+      "Model contract",
+      "Artifact references",
+      "Legacy mappings",
+      "Null, zero, and non-applicable",
+      "Contractual examples",
+      "Future Reform D regression notes",
+      "Scope guard"
+    ],
+    "table_markers": [
+      "STAGES",
+      "AGENTS",
+      "EVENT_TYPES",
+      "IDENTITIES",
+      "LEGACY_PHASES",
+      "MODEL_ROLES",
+      "ERROR_CLASSES"
+    ]
+  }
+}
