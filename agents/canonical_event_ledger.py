@@ -44,6 +44,21 @@ def validate_event(event: Any) -> list[str]:
         errors.append("invalid schema_version")
     if event.get("policy_version") != spec["policy_version"]:
         errors.append("invalid policy_version")
+    timestamp = event.get("timestamp_utc")
+    if isinstance(timestamp, str):
+        timestamp_pattern = r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|\+00:00)"
+        try:
+            parsed_timestamp = datetime.fromisoformat(
+                timestamp[:-1] + "+00:00" if timestamp.endswith("Z") else timestamp
+            )
+            timestamp_valid = (
+                re.fullmatch(timestamp_pattern, timestamp) is not None
+                and parsed_timestamp.utcoffset() == timezone.utc.utcoffset(parsed_timestamp)
+            )
+        except ValueError:
+            timestamp_valid = False
+        if not timestamp_valid:
+            errors.append("timestamp_utc must be an RFC3339 UTC timestamp")
     if event.get("stage") not in spec["stages"]:
         errors.append("invalid stage")
     if event.get("agent") not in spec["agents"]:
@@ -233,7 +248,10 @@ class CanonicalEventLedger:
         self.observe_items(value, ("selected",), "article_generation_requested", "Bob", "generation", "started", "artifacts/newsroom/andrea_pre_bob_latest.json")
 
     def observe_bob_generated(self, value: Any) -> None:
-        self.observe_items(value, ("articles",), "article_generated", "Bob", "generation", "success", "artifacts/newsroom/bob_articles.json")
+        for item in _rows(value, ("articles",)):
+            if item.get("status") == "ready_for_alfred":
+                self.event("article_generated", "Bob", "generation", "success",
+                           "artifacts/newsroom/bob_articles.json", item)
 
     def observe_alfred(self, value: Any) -> None:
         for item in _rows(value, ("reviews",)):
@@ -242,12 +260,15 @@ class CanonicalEventLedger:
                        "artifacts/newsroom/alfred_review.json", item,
                        result=decision if decision in {"approved", "needs_revision"} else None)
 
-    def observe_publication_attempts(self, value: Any) -> None:
-        self.observe_items(value, ("approved_articles",), "publication_attempted", "Publisher", "publication", "started", "artifacts/newsroom/alfred_review.json")
-
     def observe_publisher(self, value: Any) -> None:
         for item in _rows(value, ("results",)):
             status = item.get("status")
+            reason = item.get("reason")
+            attempted = status in {"published", "already_published", "dry_run", "wp_not_ready", "publish_error"}
+            attempted = attempted or (status == "skipped" and reason == "missing_url_or_title")
+            if attempted:
+                self.event("publication_attempted", "Publisher", "publication", "started",
+                           "artifacts/newsroom/publisher_result.json", item)
             if status == "published":
                 self.event("publication_completed", "Publisher", "publication", "success", "artifacts/newsroom/publisher_result.json", item)
             elif status == "already_published":

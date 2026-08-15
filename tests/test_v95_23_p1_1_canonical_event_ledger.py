@@ -38,6 +38,27 @@ def test_schema_valid_and_mutations():
     assert validate_event(missing)
 
 
+@pytest.mark.parametrize("timestamp", [
+    "2026-08-15T19:30:00+00:00",
+    "2026-08-15T19:30:00Z",
+    "2026-08-15T19:30:00.123456+00:00",
+])
+def test_rfc3339_utc_timestamp_is_valid(timestamp):
+    assert validate_event(base_event(timestamp_utc=timestamp)) == []
+
+
+@pytest.mark.parametrize("timestamp", [
+    "not-a-date",
+    "2026-08-15",
+    "2026-08-15T19:30:00",
+    "2026-08-15 19:30:00",
+    "2026-08-15T19:30:00+02:00",
+    "2026-02-30T19:30:00+00:00",
+])
+def test_non_rfc3339_or_non_utc_timestamp_is_invalid(timestamp):
+    assert any("timestamp_utc" in error for error in validate_event(base_event(timestamp_utc=timestamp)))
+
+
 @pytest.mark.parametrize("extra", [
     {},
     {"artifact_type": "json"},
@@ -97,9 +118,8 @@ def test_end_to_end_observers_keep_one_identity_and_do_not_mutate(tmp_path):
     before = copy.deepcopy((massy, menzo))
     ledger.observe_massy(massy); ledger.observe_menzo(menzo)
     ledger.observe_bob_requested(menzo)
-    ledger.observe_bob_generated({"articles": [item]})
+    ledger.observe_bob_generated({"articles": [{**item, "status": "ready_for_alfred"}]})
     ledger.observe_alfred({"reviews": [{**item, "decision": "approved"}]})
-    ledger.observe_publication_attempts({"approved_articles": [item]})
     ledger.observe_publisher({"results": [{**item, "status": "published"}], "handoff": {"published": 50}})
     assert (massy, menzo) == before
     expected = {"candidate_seen", "candidate_selected", "article_generation_requested", "article_generated",
@@ -117,6 +137,30 @@ def test_pending_skipped_and_aggregate_guards(tmp_path):
     ledger.observe_bob_generated({"handoff": {"ready_for_alfred": 20}})
     ledger.observe_publisher({"handoff": {"published": 20}})
     assert [r["event_type"] for r in rows(ledger.path)] == ["candidate_pending", "candidate_skipped"]
+
+
+@pytest.mark.parametrize("status, expected", [
+    ("ready_for_alfred", 1),
+    ("extraction_empty", 0),
+    ("extraction_ready_translation_pending", 0),
+    ("error", 0),
+])
+def test_bob_generated_requires_ready_package(tmp_path, status, expected):
+    ledger = CanonicalEventLedger("r", tmp_path / "l")
+    ledger.observe_bob_generated({"articles": [{"url": URL, "status": status}]})
+    output = rows(ledger.path) if ledger.path.exists() else []
+    assert len(output) == expected
+    assert all(row["event_type"] == "article_generated" and row["status"] == "success" for row in output)
+
+
+def test_bob_mixed_articles_emit_only_ready_packages(tmp_path):
+    ledger = CanonicalEventLedger("r", tmp_path / "l")
+    statuses = ["ready_for_alfred", "extraction_empty", "ready_for_alfred", "error"]
+    ledger.observe_bob_generated({"articles": [
+        {"url": f"https://example.test/{index}", "status": status}
+        for index, status in enumerate(statuses)
+    ], "handoff": {"ready_for_alfred": 99}})
+    assert len(rows(ledger.path)) == 2
 
 
 def test_andrea_alfred_item_evidence_no_warning_normalization(tmp_path):
@@ -160,6 +204,67 @@ def test_bob_request_references_andrea_evidence(tmp_path):
     assert refs == [{"path": "artifacts/newsroom/andrea_pre_bob_latest.json", "relation": "evidence"}]
 
 
+def test_publisher_attempts_come_only_from_actual_result_rows(tmp_path):
+    ledger = CanonicalEventLedger("r", tmp_path / "l")
+    result = {
+        "results": [
+            {"source_url": "https://example.test/one", "status": "dry_run"},
+            {"source_url": "https://example.test/two", "status": "wp_not_ready"},
+        ],
+        "skipped_approved_articles": [
+            {"source_url": "https://example.test/capacity", "status": "skipped_capacity"},
+        ],
+        "handoff": {"approved": 3, "attempted_articles": 2},
+    }
+    ledger.observe_publisher(result)
+    output = rows(ledger.path)
+    assert len(output) == 2
+    assert all(row["event_type"] == "publication_attempted" for row in output)
+
+
+def test_publisher_safety_exclusions_are_not_attempts(tmp_path):
+    ledger = CanonicalEventLedger("r", tmp_path / "l")
+    ledger.observe_publisher({"results": [
+        {"source_url": "https://example.test/duplicate", "status": "skipped", "reason": "skip:duplicate_story"},
+        {"source_url": "https://example.test/unavailable", "status": "skipped", "reason": "skip:publisher_same_story_safety_unavailable"},
+    ]})
+    assert not ledger.path.exists()
+
+
+def test_publisher_missing_title_row_is_an_attempt_when_url_resolves(tmp_path):
+    ledger = CanonicalEventLedger("r", tmp_path / "l")
+    ledger.observe_publisher({"results": [{
+        "source_url": "https://example.test/missing-title",
+        "status": "skipped",
+        "reason": "missing_url_or_title",
+    }]})
+    assert [row["event_type"] for row in rows(ledger.path)] == ["publication_attempted"]
+
+
+def test_publisher_retry_and_success_outcomes_retain_identity(tmp_path):
+    ledger = CanonicalEventLedger("r", tmp_path / "l")
+    ledger.observe_publisher({"results": [
+        {"source_url": "https://example.test/retry", "status": "published"},
+        {"source_url": "https://example.test/already", "status": "already_published"},
+    ]})
+    output = rows(ledger.path)
+    assert [row["event_type"] for row in output] == [
+        "publication_attempted", "publication_completed",
+        "publication_attempted", "publication_already_present",
+    ]
+    for attempt, outcome in zip(output[::2], output[1::2]):
+        assert attempt["content_id"] == outcome["content_id"]
+        assert attempt["correlation_id"] == outcome["correlation_id"]
+        assert attempt["artifact_refs"][0]["path"] == "artifacts/newsroom/publisher_result.json"
+
+
+@pytest.mark.parametrize("status", ["publish_error", "wp_not_ready", "dry_run"])
+def test_publisher_non_success_attempt_has_no_invented_failure(tmp_path, status):
+    ledger = CanonicalEventLedger("r", tmp_path / status)
+    ledger.observe_publisher({"results": [{"source_url": URL, "status": status}]})
+    assert [row["event_type"] for row in rows(ledger.path)] == ["publication_attempted"]
+
+
 def test_append_only_flag_fail_open_and_invalid(tmp_path, monkeypatch):
     path = tmp_path / "l"; ledger = CanonicalEventLedger("r", path)
     assert ledger.event("run_started", "Jarvis", "runtime", "started")
@@ -194,6 +299,14 @@ def test_validator_accepts_storyless_ledger(tmp_path):
     assert code == 0 and summary["valid_rows"] == 1 and summary["distinct_content_ids"] == 1
 
 
+def test_validator_rejects_invalid_timestamp_without_bounds(tmp_path):
+    path = tmp_path / "l"
+    path.write_text(json.dumps(base_event(timestamp_utc="not-a-date")) + "\n")
+    code, summary = validate_ledger(path)
+    assert code == 1 and summary["invalid_rows"] == 1
+    assert summary["first_timestamp"] is summary["last_timestamp"] is None
+
+
 @pytest.mark.parametrize("kind", ["wrong_content", "missing_content", "wrong_report"])
 def test_validator_rejects_non_deterministic_single_row(tmp_path, kind):
     path = tmp_path / "l"
@@ -226,7 +339,7 @@ def test_newsroom_runner_integration_traces_item_without_network(tmp_path, monke
     monkeypatch.setattr(runner, "import_simone_report_publisher", lambda: lambda decision: {"results": [], "handoff": {}})
     monkeypatch.setattr(runner, "import_menzo", lambda: lambda board: {"selected": [item], "pending": [], "skipped": [], "handoff": {}})
     monkeypatch.setattr(runner, "import_andrea", lambda: lambda decision: {**decision, "andrea": {"items": [{**item, "ok": True, "decision": "pass_to_bob"}]}})
-    monkeypatch.setattr(runner, "import_bob", lambda: lambda decision: {"articles": [item], "handoff": {}})
+    monkeypatch.setattr(runner, "import_bob", lambda: lambda decision: {"articles": [{**item, "status": "ready_for_alfred"}], "handoff": {}})
     monkeypatch.setattr(runner, "import_alfred", lambda: lambda bob: {"reviews": [{**item, "decision": "approved"}], "approved_articles": [item], "handoff": {}})
     monkeypatch.setattr(runner, "import_publisher", lambda: lambda alfred: {"results": [{**item, "status": "published"}], "handoff": {}})
     monkeypatch.setattr(runner, "import_archivista", lambda: lambda **kwargs: {"overall_status": "ok", "summary": {}})
@@ -252,7 +365,7 @@ def test_newsroom_runner_initialization_failure_is_fail_open(tmp_path, monkeypat
     monkeypatch.setattr(runner, "import_simone_report_publisher", lambda: lambda decision: {"results": [], "handoff": {}})
     monkeypatch.setattr(runner, "import_menzo", lambda: lambda board: {"selected": [item], "handoff": {}})
     monkeypatch.setattr(runner, "import_andrea", lambda: lambda decision: decision)
-    monkeypatch.setattr(runner, "import_bob", lambda: lambda decision: {"articles": [item], "handoff": {}})
+    monkeypatch.setattr(runner, "import_bob", lambda: lambda decision: {"articles": [{**item, "status": "ready_for_alfred"}], "handoff": {}})
     monkeypatch.setattr(runner, "import_alfred", lambda: lambda bob: {"reviews": [], "approved_articles": [item], "handoff": {}})
     def publish(_alfred):
         reached["publisher"] = True

@@ -387,7 +387,6 @@ def main() -> int:
     alfred_result = safe_agent(timeline=timeline, agent="Alfred", phase="quality_review_ready", import_fn=import_alfred, call_args=(bob_result,), artifact_name="alfred_review.json", default_handoff={"approved": 0, "needs_revision": 0, "warnings": 0, "blockers": 0, "editorial_changes": 0}, note_fn=lambda r: "approved={approved} needs_revision={needs_revision} blockers={blockers} warnings={warnings} changes={editorial_changes}".format(**{**{"approved": 0, "needs_revision": 0, "warnings": 0, "blockers": 0, "editorial_changes": 0}, **handoff(r)}))
     alfred_result = surface_bob_warnings_in_alfred(alfred_result, bob_result)
     canonical.safely("observe_alfred", alfred_result)
-    canonical.safely("observe_publication_attempts", alfred_result)
     write_json(ARTIFACT_DIR / "alfred_review.json", alfred_result)
     add_timeline(timeline, "Alfred", "bob_warning_guard_applied", f"surfaced={alfred_result.get('postprocess', {}).get('bob_warnings_surfaced', 0)}")
 

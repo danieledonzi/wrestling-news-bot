@@ -44,10 +44,21 @@ Simone selections are observed from its production `ready_reports` rows rather
 than aggregate handoff counts. Bob request evidence references the immediate
 Andrea pre-Bob artifact.
 
+Bob emits `article_generated` only for item rows whose runtime status is
+`ready_for_alfred`; extraction-empty, translation-pending, and error packages
+remain intentionally without a successful generation event. Publisher attempts
+are reconstructed after Publisher returns from actual item rows in
+`publisher_result.json` (`published`, `already_published`, `dry_run`,
+`wp_not_ready`, `publish_error`, or `skipped/missing_url_or_title`). Duplicate
+safety and capacity exclusions are not attempts. P1.1 does not turn non-success
+outcomes into canonical failures.
+
 Artifact references require a non-empty `path` and an input/output/evidence
 `relation`; A2 optional `artifact_type`, `schema_version`, and lowercase
 SHA-256 fields are accepted. The standalone validator additionally proves that
 content and report-only correlations equal their deterministic P1.1 algorithms.
+Envelope validation requires `timestamp_utc` to be a valid RFC 3339 timestamp
+with an explicit UTC `Z` or `+00:00` timezone.
 
 ## Boundaries
 
