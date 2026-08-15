@@ -19,7 +19,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
 
-NEWSROOM_VERSION = "v95_19_2_archivista_single_pass"
+NEWSROOM_VERSION = "v95.23_p1_1_canonical_event_ledger_identity"
 ARTIFACT_DIR = Path("artifacts") / "newsroom"
 
 
@@ -313,10 +313,42 @@ def write_master_log_safe(timeline: list[dict[str, str]], **kwargs: Any) -> dict
         return error
 
 
+class UnavailableCanonicalLedger:
+    """No-op observer used when canonical telemetry cannot initialize."""
+
+    def __init__(self, error: Exception):
+        self._summary = {
+            "enabled": False,
+            "unavailable": True,
+            "initialization_error": str(error),
+        }
+
+    def safely(self, _method: str, *_args: Any, **_kwargs: Any) -> None:
+        return None
+
+    def summary(self) -> dict[str, Any]:
+        return dict(self._summary)
+
+
+def canonical_ledger_factory(run_id: str) -> Any:
+    from agents.canonical_event_ledger import CanonicalEventLedger
+    return CanonicalEventLedger(run_id)
+
+
+def initialize_canonical_ledger(run_id: str) -> Any:
+    try:
+        return canonical_ledger_factory(run_id)
+    except Exception as exc:
+        print(f"[CANONICAL LEDGER] initialization failed open: {exc}", flush=True)
+        return UnavailableCanonicalLedger(exc)
+
+
 def main() -> int:
     ensure_artifacts()
     started_at = utc_now()
     os.environ["NEWSROOM_RUN_ID"] = os.getenv("NEWSROOM_RUN_ID", "").strip() or started_at
+    canonical = initialize_canonical_ledger(os.environ["NEWSROOM_RUN_ID"])
+    canonical.safely("event", "run_started", "Jarvis", "runtime", "started")
     timeline: list[dict[str, str]] = []
     print(f"===== NEWSROOM RUN START [{started_at}] VERSION [{NEWSROOM_VERSION}] =====", flush=True)
     print("[NEWSROOM v93] Avvio Virtual Newsroom", flush=True)
@@ -329,28 +361,38 @@ def main() -> int:
     add_timeline(timeline, "Jarvis", "bootstrap_status_written", f"engine={engine}")
 
     massy_board = safe_agent(timeline=timeline, agent="Massy", phase="sentinel_board_ready", import_fn=import_massy, artifact_name="massy_board.json", default_handoff={"to_simone": 0, "to_menzo": 0, "hard_skipped": 0, "already_worked": 0}, note_fn=lambda r: "to_simone={to_simone} to_menzo={to_menzo} hard_skip={hard_skipped} already={already_worked}".format(**{**{"to_simone": 0, "to_menzo": 0, "hard_skipped": 0, "already_worked": 0}, **handoff(r)}))
+    canonical.safely("observe_massy", massy_board)
+    canonical.safely("observe_items", massy_board, ("report_candidates",), "report_candidate_seen", "Simone", "reporting", "success", "artifacts/newsroom/massy_board.json")
     add_timeline(timeline, "Massy", "forced_policy_active", f"version={massy_board.get('version')}")
 
     simone_decision = safe_agent(timeline=timeline, agent="Simone", phase="report_decision_ready", import_fn=import_simone, call_args=(massy_board,), artifact_name="simone_reports.json", default_handoff={"ready": 0, "waiting": 0, "skipped": 0}, note_fn=lambda r: "ready={ready} waiting={waiting} skipped={skipped}".format(**{**{"ready": 0, "waiting": 0, "skipped": 0}, **handoff(r)}))
     simone_publish = safe_agent(timeline=timeline, agent="Simone", phase="report_publication_ready", import_fn=import_simone_report_publisher, call_args=(simone_decision,), artifact_name="simone_report_publish.json", default_handoff={"published": 0, "already_published": 0, "wp_not_ready": 0, "dry_run": 0, "errors": 0}, note_fn=lambda r: "published={published} already={already_published} wp_not_ready={wp_not_ready} errors={errors}".format(**{**{"published": 0, "already_published": 0, "wp_not_ready": 0, "dry_run": 0, "errors": 0}, **handoff(r)}))
+    canonical.safely("observe_simone", simone_decision, simone_publish)
 
     menzo_decision = safe_agent(timeline=timeline, agent="Menzo", phase="editorial_decision_ready", import_fn=import_menzo, call_args=(massy_board,), artifact_name="menzo_decisions.json", default_handoff={"to_bob_or_v92": 0, "pending": 0, "skipped": 0}, note_fn=lambda r: "selected={to_bob_or_v92} pending={pending} skipped={skipped}".format(**{**{"to_bob_or_v92": 0, "pending": 0, "skipped": 0}, **handoff(r)}))
+    canonical.safely("observe_menzo", menzo_decision)
     add_timeline(timeline, "Menzo", "forced_policy_active", f"version={menzo_decision.get('version')}")
 
     andrea_handoff = safe_agent(timeline=timeline, agent="Andrea", phase="pre_bob_content_sufficiency_ready", import_fn=import_andrea, call_args=(menzo_decision,), artifact_name="andrea_pre_bob_latest.json", default_handoff={"to_bob": 0, "blocked_before_bob": 0, "saved_gemini_calls": 0}, note_fn=lambda r: "to_bob={to_bob_or_v92} checked={andrea_checked} blocked={andrea_blocked} saved_gemini={andrea_saved_gemini_calls}".format(**{**{"to_bob_or_v92": 0, "andrea_checked": 0, "andrea_blocked": 0, "andrea_saved_gemini_calls": 0}, **handoff(r)}))
     record_andrea_avoids_from_result(andrea_handoff)
+    canonical.safely("observe_andrea", andrea_handoff)
+    canonical.safely("observe_bob_requested", andrea_handoff)
 
     bob_result = safe_agent(timeline=timeline, agent="Bob", phase="article_packages_ready", import_fn=import_bob, call_args=(andrea_handoff,), artifact_name="bob_articles.json", default_handoff={"ready_for_alfred": 0, "translation_pending": 0, "errors": 0, "extraction_empty": 0}, note_fn=lambda r: "ready={ready_for_alfred} pending={translation_pending} empty={extraction_empty} errors={errors}".format(**{**{"ready_for_alfred": 0, "translation_pending": 0, "errors": 0, "extraction_empty": 0}, **handoff(r)}))
     bob_result = attach_bob_brief_warnings(bob_result, andrea_handoff)
+    canonical.safely("observe_bob_generated", bob_result)
     write_json(ARTIFACT_DIR / "bob_articles.json", bob_result)
     add_timeline(timeline, "Bob", "bob_brief_guard_applied", f"warnings={bob_result.get('postprocess', {}).get('bob_brief_warnings_added', 0)}")
 
     alfred_result = safe_agent(timeline=timeline, agent="Alfred", phase="quality_review_ready", import_fn=import_alfred, call_args=(bob_result,), artifact_name="alfred_review.json", default_handoff={"approved": 0, "needs_revision": 0, "warnings": 0, "blockers": 0, "editorial_changes": 0}, note_fn=lambda r: "approved={approved} needs_revision={needs_revision} blockers={blockers} warnings={warnings} changes={editorial_changes}".format(**{**{"approved": 0, "needs_revision": 0, "warnings": 0, "blockers": 0, "editorial_changes": 0}, **handoff(r)}))
     alfred_result = surface_bob_warnings_in_alfred(alfred_result, bob_result)
+    canonical.safely("observe_alfred", alfred_result)
+    canonical.safely("observe_publication_attempts", alfred_result)
     write_json(ARTIFACT_DIR / "alfred_review.json", alfred_result)
     add_timeline(timeline, "Alfred", "bob_warning_guard_applied", f"surfaced={alfred_result.get('postprocess', {}).get('bob_warnings_surfaced', 0)}")
 
     publisher_result = safe_agent(timeline=timeline, agent="Publisher", phase="publication_ready", import_fn=import_publisher, call_args=(alfred_result,), artifact_name="publisher_result.json", default_handoff={"published": 0, "already_published": 0, "dry_run": 0, "wp_not_ready": 0, "errors": 0}, note_fn=lambda r: "published={published} already={already_published} dry={dry_run} wp_not_ready={wp_not_ready} errors={errors}".format(**{**{"published": 0, "already_published": 0, "dry_run": 0, "wp_not_ready": 0, "errors": 0}, **handoff(r)}))
+    canonical.safely("observe_publisher", publisher_result)
 
     runtime_delegations = 0
     runtime_exit_code = 0
@@ -403,6 +445,11 @@ def main() -> int:
         })
     run_summary["archivista_handoff"] = archivista_result.get("summary", {}) if isinstance(archivista_result, dict) else {}
     run_summary["archivista_status"] = archivista_result.get("overall_status") if isinstance(archivista_result, dict) else "error"
+    if isinstance(archivista_result, dict) and archivista_result.get("status") != "error":
+        canonical.safely("event", "audit_completed", "Archivista", "audit", "success", "artifacts/newsroom/archivista_report.json")
+    if runtime_exit_code == 0:
+        canonical.safely("event", "run_completed", "Jarvis", "runtime", "success")
+    run_summary["canonical_event_ledger"] = canonical.summary()
 
     master_log_result = write_master_log_safe(
         timeline,
