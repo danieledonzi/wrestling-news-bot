@@ -19,7 +19,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
 
-NEWSROOM_VERSION = "v95.23_p1_1_canonical_event_ledger_identity"
+NEWSROOM_VERSION = "v95.24_p1_2_artifact_index_material_chain"
 ARTIFACT_DIR = Path("artifacts") / "newsroom"
 
 
@@ -343,11 +343,43 @@ def initialize_canonical_ledger(run_id: str) -> Any:
         return UnavailableCanonicalLedger(exc)
 
 
+def canonical_artifact_index_factory(run_id: str) -> Any:
+    from agents.canonical_artifact_index import CanonicalArtifactIndex
+    return CanonicalArtifactIndex(run_id)
+
+
+class UnavailableCanonicalArtifactIndex:
+    def __init__(self, error: Exception):
+        self._summary = {
+            "enabled": False, "index_path": os.getenv("OWTV_CANONICAL_ARTIFACT_INDEX_PATH", "state/newsroom/canonical_artifact_index.jsonl"),
+            "material_root": os.getenv("OWTV_MATERIAL_CHAIN_ROOT", "state/newsroom/material_chain"),
+            "artifacts_attempted": 0, "artifacts_archived": 0, "manifest_rows_written": 0,
+            "artifacts_reused": 0, "artifacts_skipped": 0, "validation_errors": 0,
+            "identity_unresolved": 0, "archive_write_errors": 0, "index_write_errors": 0,
+            "initialization_error": str(error),
+        }
+
+    def safely(self, _method: str, *_args: Any, **_kwargs: Any) -> None:
+        return None
+
+    def summary(self) -> dict[str, Any]:
+        return dict(self._summary)
+
+
+def initialize_canonical_artifact_index(run_id: str) -> Any:
+    try:
+        return canonical_artifact_index_factory(run_id)
+    except Exception as exc:
+        print(f"[ARTIFACT INDEX] initialization failed open: {exc}", flush=True)
+        return UnavailableCanonicalArtifactIndex(exc)
+
+
 def main() -> int:
     ensure_artifacts()
     started_at = utc_now()
     os.environ["NEWSROOM_RUN_ID"] = os.getenv("NEWSROOM_RUN_ID", "").strip() or started_at
     canonical = initialize_canonical_ledger(os.environ["NEWSROOM_RUN_ID"])
+    artifacts = initialize_canonical_artifact_index(os.environ["NEWSROOM_RUN_ID"])
     canonical.safely("event", "run_started", "Jarvis", "runtime", "started")
     timeline: list[dict[str, str]] = []
     print(f"===== NEWSROOM RUN START [{started_at}] VERSION [{NEWSROOM_VERSION}] =====", flush=True)
@@ -381,17 +413,20 @@ def main() -> int:
     bob_result = safe_agent(timeline=timeline, agent="Bob", phase="article_packages_ready", import_fn=import_bob, call_args=(andrea_handoff,), artifact_name="bob_articles.json", default_handoff={"ready_for_alfred": 0, "translation_pending": 0, "errors": 0, "extraction_empty": 0}, note_fn=lambda r: "ready={ready_for_alfred} pending={translation_pending} empty={extraction_empty} errors={errors}".format(**{**{"ready_for_alfred": 0, "translation_pending": 0, "errors": 0, "extraction_empty": 0}, **handoff(r)}))
     bob_result = attach_bob_brief_warnings(bob_result, andrea_handoff)
     canonical.safely("observe_bob_generated", bob_result)
+    artifacts.safely("observe_bob", bob_result)
     write_json(ARTIFACT_DIR / "bob_articles.json", bob_result)
     add_timeline(timeline, "Bob", "bob_brief_guard_applied", f"warnings={bob_result.get('postprocess', {}).get('bob_brief_warnings_added', 0)}")
 
     alfred_result = safe_agent(timeline=timeline, agent="Alfred", phase="quality_review_ready", import_fn=import_alfred, call_args=(bob_result,), artifact_name="alfred_review.json", default_handoff={"approved": 0, "needs_revision": 0, "warnings": 0, "blockers": 0, "editorial_changes": 0}, note_fn=lambda r: "approved={approved} needs_revision={needs_revision} blockers={blockers} warnings={warnings} changes={editorial_changes}".format(**{**{"approved": 0, "needs_revision": 0, "warnings": 0, "blockers": 0, "editorial_changes": 0}, **handoff(r)}))
     alfred_result = surface_bob_warnings_in_alfred(alfred_result, bob_result)
     canonical.safely("observe_alfred", alfred_result)
+    artifacts.safely("observe_alfred", alfred_result)
     write_json(ARTIFACT_DIR / "alfred_review.json", alfred_result)
     add_timeline(timeline, "Alfred", "bob_warning_guard_applied", f"surfaced={alfred_result.get('postprocess', {}).get('bob_warnings_surfaced', 0)}")
 
     publisher_result = safe_agent(timeline=timeline, agent="Publisher", phase="publication_ready", import_fn=import_publisher, call_args=(alfred_result,), artifact_name="publisher_result.json", default_handoff={"published": 0, "already_published": 0, "dry_run": 0, "wp_not_ready": 0, "errors": 0}, note_fn=lambda r: "published={published} already={already_published} dry={dry_run} wp_not_ready={wp_not_ready} errors={errors}".format(**{**{"published": 0, "already_published": 0, "dry_run": 0, "wp_not_ready": 0, "errors": 0}, **handoff(r)}))
     canonical.safely("observe_publisher", publisher_result)
+    artifacts.safely("observe_publisher", publisher_result)
 
     runtime_delegations = 0
     runtime_exit_code = 0
@@ -449,6 +484,7 @@ def main() -> int:
     if runtime_exit_code == 0:
         canonical.safely("event", "run_completed", "Jarvis", "runtime", "success")
     run_summary["canonical_event_ledger"] = canonical.summary()
+    run_summary["canonical_artifact_index"] = artifacts.summary()
 
     master_log_result = write_master_log_safe(
         timeline,
