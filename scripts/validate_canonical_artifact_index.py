@@ -5,14 +5,18 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
 from agents.canonical_artifact_index import artifact_id, validate_manifest_entry
 from agents.canonical_event_ledger import correlation_id
 
-ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_PATH = Path("state/newsroom/canonical_artifact_index.jsonl")
 
 
@@ -46,7 +50,10 @@ def validate_index(path: str | Path, repository_root: str | Path = ROOT) -> tupl
             summary["invalid_rows"] += 1
             continue
         errors = validate_manifest_entry(row)
-        aid = row.get("artifact_id") if isinstance(row, dict) else None
+        if not isinstance(row, dict):
+            summary["invalid_rows"] += 1
+            continue
+        aid = row.get("artifact_id")
         if aid in ids:
             summary["duplicate_artifact_ids"] += 1
             errors.append("duplicate artifact_id")
@@ -62,16 +69,17 @@ def validate_index(path: str | Path, repository_root: str | Path = ROOT) -> tupl
         else:
             runs.add(run_id)
             contents.add(cid)
-        for role in row.get("semantic_roles", []) if isinstance(row, dict) else []:
+        roles = row.get("semantic_roles", []) if isinstance(row.get("semantic_roles"), list) else []
+        coverage_markers: set[str] = set()
+        for role in roles:
             counts["semantic_role"][role] += 1
-            if isinstance(corr, str) and corr == correlation_id(run_id, cid):
-                coverage[corr].add(role)
-                if role == "translated_candidate" and row.get("producer_agent") == "Bob":
-                    coverage[corr].add("bob_candidate")
-                if role == "quality_review" and "translated_candidate" in row.get("semantic_roles", []):
-                    coverage[corr].add("alfred_approved_body")
-                elif role == "quality_review":
-                    coverage[corr].add("alfred_review")
+            coverage_markers.add(role)
+        if "translated_candidate" in roles and row.get("producer_agent") == "Bob":
+            coverage_markers.add("bob_candidate")
+        if "quality_review" in roles and "translated_candidate" in roles:
+            coverage_markers.add("alfred_approved_body")
+        elif "quality_review" in roles:
+            coverage_markers.add("alfred_review")
         for field in ("producer_agent", "producer_stage", "format"):
             if isinstance(row.get(field), str):
                 counts[field][row[field]] += 1
@@ -104,12 +112,13 @@ def validate_index(path: str | Path, repository_root: str | Path = ROOT) -> tupl
             summary["invalid_rows"] += 1
         else:
             summary["valid_rows"] += 1
+            coverage[corr].update(coverage_markers)
     summary.update(distinct_artifact_ids=len(ids), distinct_run_ids=len(runs), distinct_content_ids=len(contents))
     for key, counter in counts.items():
         summary["by_" + key] = dict(sorted(counter.items()))
     has_source = {cid for cid, roles in coverage.items() if "source_material" in roles}
     has_bob = {cid for cid, roles in coverage.items() if "bob_candidate" in roles}
-    has_review = {cid for cid, roles in coverage.items() if "alfred_review" in roles or "quality_review" in roles}
+    has_review = {cid for cid, roles in coverage.items() if "alfred_review" in roles}
     has_body = {cid for cid, roles in coverage.items() if "alfred_approved_body" in roles}
     has_final = {cid for cid, roles in coverage.items() if "final_published_material" in roles}
     summary["material_chain_coverage"] = {

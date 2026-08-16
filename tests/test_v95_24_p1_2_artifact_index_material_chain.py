@@ -1,6 +1,10 @@
 import copy
 import hashlib
 import json
+import os
+import subprocess
+import sys
+from pathlib import Path
 import pytest
 
 from agents import source_body
@@ -23,6 +27,36 @@ def make_index(tmp_path, enabled=True):
 
 def rows(tmp_path):
     return [json.loads(line) for line in (tmp_path / "index.jsonl").read_text().splitlines()]
+
+
+def test_standalone_validator_cli_bootstraps_repository_imports(tmp_path):
+    index = make_index(tmp_path)
+    index.observe_bob({"articles": [{"source_url": "https://example.com/a",
+                                      "status": "ready_for_alfred", "body_html": "x"}]})
+    repository = Path(__file__).resolve().parents[1]
+    environment = dict(os.environ)
+    environment.pop("PYTHONPATH", None)
+    result = subprocess.run(
+        [sys.executable, str(repository / "scripts/validate_canonical_artifact_index.py"),
+         str(tmp_path / "index.jsonl"), "--root", str(tmp_path)],
+        cwd=tmp_path, env=environment, text=True, capture_output=True, check=False,
+    )
+    assert result.returncode == 0, result.stderr
+    assert json.loads(result.stdout)["valid_rows"] == 1
+
+
+@pytest.mark.parametrize("non_object", [[], None])
+def test_validator_rejects_non_object_and_continues_later_rows(tmp_path, non_object):
+    index = make_index(tmp_path)
+    index.observe_bob({"articles": [
+        {"source_url": "https://example.com/a", "status": "ready_for_alfred", "body_html": "a"},
+        {"source_url": "https://example.com/b", "status": "ready_for_alfred", "body_html": "b"},
+    ]})
+    valid = (tmp_path / "index.jsonl").read_text().splitlines()
+    (tmp_path / "index.jsonl").write_text("\n".join((valid[0], json.dumps(non_object), valid[1])) + "\n")
+    report, code = validate_index(tmp_path / "index.jsonl", tmp_path)
+    assert code == 1
+    assert report["rows"] == 3 and report["valid_rows"] == 2 and report["invalid_rows"] == 1
 
 
 def test_artifact_id_deterministic_and_all_inputs_matter():
@@ -126,6 +160,63 @@ def test_coverage_never_mixes_runs_and_counts_complete_reruns(tmp_path):
     assert code == 0
     assert complete["material_chain_coverage"]["contents_with_source_bob_alfred_final"] == 2
     assert complete["distinct_content_ids"] == 1
+
+
+@pytest.mark.parametrize("failure", ["missing", "sha", "size", "artifact_id", "correlation", "manifest"])
+def test_invalid_artifact_never_completes_material_chain(tmp_path, failure):
+    index = make_index(tmp_path)
+    _observe_chain(index)
+    emitted = rows(tmp_path)
+    bob_row = next(row for row in emitted if row["producer_agent"] == "Bob" and
+                   row["semantic_roles"] == ["translated_candidate"])
+    if failure == "missing":
+        (tmp_path / bob_row["path"]).unlink()
+    elif failure == "sha":
+        bob_row["sha256"] = "0" * 64
+    elif failure == "size":
+        bob_row["size_bytes"] += 1
+    elif failure == "artifact_id":
+        bob_row["artifact_id"] = "afi_" + "0" * 64
+    elif failure == "correlation":
+        bob_row["correlation_id"] = "corr_" + "0" * 64
+    else:
+        bob_row["unexpected"] = True
+    if failure != "missing":
+        (tmp_path / "index.jsonl").write_text(
+            "".join(json.dumps(bob_row if row["artifact_id"] == emitted[1]["artifact_id"] else row) + "\n"
+                    for row in emitted)
+        )
+    report, code = validate_index(tmp_path / "index.jsonl", tmp_path)
+    assert code == 1
+    assert report["material_chain_coverage"]["contents_with_source_bob_alfred_final"] == 0
+
+
+def test_alfred_review_and_approved_body_coverage_are_separate(tmp_path):
+    index = make_index(tmp_path)
+    _observe_chain(index)
+    emitted = rows(tmp_path)
+    review = lambda row: row["producer_agent"] == "Alfred" and row["semantic_roles"] == ["quality_review"]
+    body = lambda row: row["producer_agent"] == "Alfred" and "translated_candidate" in row["semantic_roles"]
+
+    def coverage(name, include):
+        path = tmp_path / f"{name}.jsonl"
+        path.write_text("".join(json.dumps(row) + "\n" for row in emitted if include(row)))
+        report, code = validate_index(path, tmp_path)
+        assert code == 0
+        return report["material_chain_coverage"]
+
+    body_only = coverage("body-only", body)
+    assert body_only["contents_with_alfred_approved_body"] == 1
+    assert body_only["contents_with_alfred_review"] == 0
+    review_only = coverage("review-only", review)
+    assert review_only["contents_with_alfred_review"] == 1
+    assert review_only["contents_with_alfred_approved_body"] == 0
+    both = coverage("both", lambda row: review(row) or body(row))
+    assert both["contents_with_alfred_review"] == both["contents_with_alfred_approved_body"] == 1
+    without_review = coverage("chain-without-review", lambda row: not review(row))
+    assert without_review["contents_with_source_bob_alfred_final"] == 0
+    full = coverage("full", lambda row: True)
+    assert full["contents_with_source_bob_alfred_final"] == 1
 
 
 def test_filters_invalid_source_statuses_and_missing_alfred_body(tmp_path):
