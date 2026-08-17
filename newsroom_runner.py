@@ -19,7 +19,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
 
-NEWSROOM_VERSION = "v95.24_p1_2_artifact_index_material_chain"
+NEWSROOM_VERSION = "v95.25_p1_3_operational_event_semantics"
 ARTIFACT_DIR = Path("artifacts") / "newsroom"
 
 
@@ -379,6 +379,11 @@ def main() -> int:
     started_at = utc_now()
     os.environ["NEWSROOM_RUN_ID"] = os.getenv("NEWSROOM_RUN_ID", "").strip() or started_at
     canonical = initialize_canonical_ledger(os.environ["NEWSROOM_RUN_ID"])
+    try:
+        from agents.canonical_event_ledger import install_active_ledger
+        install_active_ledger(canonical)
+    except Exception:
+        pass
     artifacts = initialize_canonical_artifact_index(os.environ["NEWSROOM_RUN_ID"])
     canonical.safely("event", "run_started", "Jarvis", "runtime", "started")
     timeline: list[dict[str, str]] = []
@@ -502,6 +507,11 @@ def main() -> int:
 
     write_json(ARTIFACT_DIR / "agent_timeline.json", timeline)
     write_json(ARTIFACT_DIR / "run_summary.json", run_summary)
+    try:
+        from agents.canonical_event_ledger import clear_active_ledger
+        clear_active_ledger()
+    except Exception:
+        pass
     print(f"[ARCHIVISTA v93] Saved {ARTIFACT_DIR / 'run_summary.json'}", flush=True)
     print(f"===== NEWSROOM RUN END [{ended_at}] VERSION [{NEWSROOM_VERSION}] EXIT [{runtime_exit_code}] =====", flush=True)
     return runtime_exit_code

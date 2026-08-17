@@ -4,6 +4,7 @@ import hashlib
 import json
 import os
 import re
+import time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
@@ -1163,13 +1164,24 @@ def _is_cooldown_error(text: str) -> bool:
     return "503" in low or "high demand" in low or "resource_exhausted" in low or "unavailable" in low
 
 
-def call_gemini_json_model(prompt: str, model: str, *, ledger_context: dict[str, Any] | None = None, phase: str = "duplicate_arbitration", operation_id: Any = None, attempt_index: int = 0, fallback: bool = False) -> tuple[dict[str, Any] | None, str]:
+def call_gemini_json_model(prompt: str, model: str, *, ledger_context: dict[str, Any] | None = None, phase: str = "duplicate_arbitration", operation_id: Any = None, attempt_index: int = 0, fallback: bool = False,
+                           operational_request: Any = None, repair: bool = False,
+                           error_terminal: bool = True,
+                           defer_semantic_validation: bool = False) -> tuple[dict[str, Any] | None, str]:
+    from agents.canonical_event_ledger import OperationalAIRequest
+    request = operational_request or OperationalAIRequest(
+        "Menzo", "duplicate_arbitration", reason_code=phase)
     api_key = os.getenv("GEMINI_API_KEY", "").strip()
     if _cooldown_key(model, ledger_context) in MENZO_MODEL_COOLDOWN_FAILURES:
         record_gemini_event(ledger_schema_version="v2", agent="Menzo", phase=phase, model=model, status="avoided", reason="model_cooldown_after_failure", result="cooldown", saved_gemini_call=True, **(ledger_context or {}))
+        request.avoided("model_cooldown_after_failure")
         return None, f"model_cooldown_after_failure:{model}"
     if not api_key:
+        request.avoided("missing_api_key")
         return None, "missing_api_key"
+    attempt = request.start(model, fallback=fallback, repair=repair,
+                            reason_code="structured_output_validation")
+    started = time.monotonic()
     try:
         from google import genai  # type: ignore
         client = genai.Client(api_key=api_key)
@@ -1183,6 +1195,15 @@ def call_gemini_json_model(prompt: str, model: str, *, ledger_context: dict[str,
             parse_error = str(exc)[:500]
         event_reason = "ai_novelty_allow" if phase == "cross_run_novelty_gate" and data and str(data.get("decision") or "").lower() == "allow" else ("ai_no_novelty_skip" if phase == "cross_run_novelty_gate" and data and str(data.get("decision") or "").lower() == "skip" else ("ai_uncertain_pending" if phase == "cross_run_novelty_gate" else "ai_duplicate_arbitration"))
         record_gemini_attempt(response=response, agent="Menzo", phase=phase, model_requested=model, status="called", reason=event_reason, result="valid_json" if data else "invalid_json", operation_id=operation_id, attempt_index=attempt_index, fallback=fallback, **(ledger_context or {}))
+        latency_ms = max(0, int((time.monotonic() - started) * 1000))
+        if defer_semantic_validation:
+            request.defer(attempt, latency_ms)
+        elif data:
+            request.completed(attempt, latency_ms)
+        else:
+            request.failed(attempt, error_class="validation", error_terminal=error_terminal,
+                           latency_ms=max(0, int((time.monotonic() - started) * 1000)),
+                           reason_code="invalid_structured_output")
         return (data, model) if data else (None, f"invalid_json:{model}:{parse_error or 'json_not_object'}")
     except Exception as exc:
         err = str(exc)[:500]
@@ -1190,14 +1211,23 @@ def call_gemini_json_model(prompt: str, model: str, *, ledger_context: dict[str,
             MENZO_MODEL_COOLDOWN_FAILURES.add(_cooldown_key(model, ledger_context))
         operation_id = operation_id or make_operation_id("Menzo", phase, (ledger_context or {}).get("cluster_id") or (ledger_context or {}).get("url"))
         record_gemini_attempt(response=None, agent="Menzo", phase=phase, model_requested=model, status="failed", reason="ai_uncertain_pending" if phase == "cross_run_novelty_gate" else "ai_duplicate_arbitration", result=err, operation_id=operation_id, attempt_index=attempt_index, fallback=fallback, **(ledger_context or {}))
+        request.failed(attempt, error_class="transient" if _is_cooldown_error(err) else "upstream",
+                       error_terminal=error_terminal,
+                       latency_ms=max(0, int((time.monotonic() - started) * 1000)),
+                       reason_code="provider_failure")
         return None, f"gemini_unavailable:{model}:{exc}"
 
 
 def call_gemini_json(prompt: str) -> tuple[dict[str, Any] | None, str]:
+    from agents.canonical_event_ledger import OperationalAIRequest
     operation_id = make_operation_id("Menzo", "duplicate_arbitration", "model_chain")
+    request = OperationalAIRequest("Menzo", "duplicate_arbitration", reason_code="duplicate_arbitration")
     real_attempt_index = 0
-    for model in [m.strip() for m in os.getenv("GEMINI_MODEL_CHAIN", "gemini-3.1-flash-lite,gemini-2.5-flash-lite").split(",") if m.strip()]:
-        data, status = call_gemini_json_model(prompt, model, operation_id=operation_id, attempt_index=real_attempt_index, fallback=real_attempt_index > 0)
+    chain = [m.strip() for m in os.getenv("GEMINI_MODEL_CHAIN", "gemini-3.1-flash-lite,gemini-2.5-flash-lite").split(",") if m.strip()]
+    for chain_index, model in enumerate(chain):
+        data, status = call_gemini_json_model(prompt, model, operation_id=operation_id, attempt_index=real_attempt_index, fallback=real_attempt_index > 0,
+                                              operational_request=request,
+                                              error_terminal=chain_index == len(chain) - 1)
         if not (str(status).startswith("model_cooldown_after_failure") or status == "missing_api_key"):
             real_attempt_index += 1
         if data:
@@ -2014,6 +2044,16 @@ def _v2_avoided(pp: dict[str, Any], reason: str, count: int = 1) -> None:
             avoidance_reason=reason, avoided_index=avoided_index)
 
 
+def _canonical_duplicate_request(reason: str) -> Any:
+    from agents.canonical_event_ledger import OperationalAIRequest
+    return OperationalAIRequest("Menzo", "duplicate_arbitration", reason_code=reason)
+
+
+def _canonical_duplicate_cooldown_avoided() -> None:
+    """Record one real suppressed intention, never historical saved-call accounting."""
+    _canonical_duplicate_request("duplicate_failure_cooldown").avoided("duplicate_failure_cooldown")
+
+
 def _same_state_outcomes(items: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
     saved=_v2_decisions(items)
     return { _v2_identity(x): saved.get(_v2_identity(x), {"validated_no_match": True}) for x in items }
@@ -2622,19 +2662,22 @@ def apply_same_story_duplicate_guard(result: dict[str, Any], massy_board: dict[s
                 update_pair_coverage_record(result,"same_run",audit["pair_id"],gemini_decision="ARBITRATION_FAILED",cache_status="miss",final_disposition="component_fail_closed")
             continue
         if duplicate_cache_v2.failure_in_cooldown(cache,key):
-            pp["duplicate_failure_cooldown_hit"]+=1; _v2_avoided(pp,"duplicate_failure_cooldown",1)
+            pp["duplicate_failure_cooldown_hit"]+=1; _v2_avoided(pp,"duplicate_failure_cooldown",1); _canonical_duplicate_cooldown_avoided()
         else:
             pp["same_run_candidates_sent_to_gemini"]+=len(records)
             component_context={"scope":"same_run","cluster_id":key,"candidate_count":len(records)}
-            raw,status=call_gemini_json_model(build_same_run_batch_prompt(records),DUPLICATE_BATCH_MODEL,ledger_context=component_context,phase="duplicate_arbitration_same_run_batch")
+            canonical_request=_canonical_duplicate_request("duplicate_arbitration_same_run_batch")
+            raw,status=call_gemini_json_model(build_same_run_batch_prompt(records),DUPLICATE_BATCH_MODEL,ledger_context=component_context,phase="duplicate_arbitration_same_run_batch",operational_request=canonical_request,error_terminal=False,defer_semantic_validation=True)
             _record_duplicate_call(pp,"menzo_same_run_batch_calls",status)
             if _actual_gemini_call(status): actual_requests+=1
             groups,error=validate_same_run_batch(raw,ids)
+            canonical_request.resolve_deferred(groups is not None,error_terminal=False)
             if groups is None:
-                raw,status=call_gemini_json_model(build_same_run_batch_prompt(records,error),DUPLICATE_BATCH_MODEL,ledger_context={**component_context,"repair":True},phase="duplicate_arbitration_same_run_repair")
+                raw,status=call_gemini_json_model(build_same_run_batch_prompt(records,error),DUPLICATE_BATCH_MODEL,ledger_context={**component_context,"repair":True},phase="duplicate_arbitration_same_run_repair",operational_request=canonical_request,repair=True,error_terminal=True,defer_semantic_validation=True)
                 _record_duplicate_call(pp,"menzo_same_run_batch_repairs",status)
                 if _actual_gemini_call(status): actual_requests+=1
                 groups,_=validate_same_run_batch(raw,ids)
+                canonical_request.resolve_deferred(groups is not None,error_terminal=True)
             if groups is None:
                 # Micro fallback never sees a node outside this component.
                 groups=[]; survivors=[("c0",members[0])]; unresolved=[]; unresolved_article_ids:set[str]=set()
@@ -2779,19 +2822,22 @@ def apply_recent_published_duplicate_guard(result: dict[str, Any]) -> None:
                 update_pair_coverage_record(result,"recent_history",audit["pair_id"],gemini_decision="ARBITRATION_FAILED",cache_status="miss",final_disposition="candidate_fail_closed")
             continue
         if duplicate_cache_v2.failure_in_cooldown(cache,key):
-            pp["duplicate_failure_cooldown_hit"]+=1; _v2_avoided(pp,"duplicate_failure_cooldown",1)
+            pp["duplicate_failure_cooldown_hit"]+=1; _v2_avoided(pp,"duplicate_failure_cooldown",1); _canonical_duplicate_cooldown_avoided()
         else:
             pp["recent_history_candidates_sent_to_gemini"]+=1; pp["recent_history_publications_sent_to_gemini"]+=len(pubs)
             recent_context={"scope":"recent_history","cluster_id":key,"url":_v2_identity(item),"candidate_count":1,"published_count":len(pubs)}
-            raw,status=call_gemini_json_model(build_recent_history_batch_prompt([cur],pubs),DUPLICATE_BATCH_MODEL,ledger_context=recent_context,phase="duplicate_arbitration_recent_history_batch")
+            canonical_request=_canonical_duplicate_request("duplicate_arbitration_recent_history_batch")
+            raw,status=call_gemini_json_model(build_recent_history_batch_prompt([cur],pubs),DUPLICATE_BATCH_MODEL,ledger_context=recent_context,phase="duplicate_arbitration_recent_history_batch",operational_request=canonical_request,error_terminal=False,defer_semantic_validation=True)
             _record_duplicate_call(pp,"menzo_recent_history_batch_calls",status)
             if _actual_gemini_call(status): actual_requests+=1
             matches,error=validate_recent_history_batch(raw,{"c0":cur},{p["id"]:p for p in pubs})
+            canonical_request.resolve_deferred(matches is not None,error_terminal=False)
             if matches is None:
-                raw,status=call_gemini_json_model(build_recent_history_batch_prompt([cur],pubs,error),DUPLICATE_BATCH_MODEL,ledger_context={**recent_context,"repair":True},phase="duplicate_arbitration_recent_history_repair")
+                raw,status=call_gemini_json_model(build_recent_history_batch_prompt([cur],pubs,error),DUPLICATE_BATCH_MODEL,ledger_context={**recent_context,"repair":True},phase="duplicate_arbitration_recent_history_repair",operational_request=canonical_request,repair=True,error_terminal=True,defer_semantic_validation=True)
                 _record_duplicate_call(pp,"menzo_recent_history_batch_repairs",status)
                 if _actual_gemini_call(status): actual_requests+=1
                 matches,_=validate_recent_history_batch(raw,{"c0":cur},{p["id"]:p for p in pubs})
+                canonical_request.resolve_deferred(matches is not None,error_terminal=True)
             if matches is None:
                 # A per-candidate micro response cannot audit every suspicious pair.
                 # Two malformed batch attempts therefore fail closed rather than
