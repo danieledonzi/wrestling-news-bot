@@ -5,6 +5,7 @@ import html
 import json
 import os
 import re
+import time
 import traceback
 from datetime import datetime, timezone
 from pathlib import Path
@@ -676,28 +677,45 @@ def build_translation_units(elements: list[dict[str, Any]]) -> list[dict[str, st
 
 
 def call_gemini(prompt: str, *, ledger_context: dict[str, Any] | None = None, model_chain: list[str] | None = None) -> tuple[str, str, list[str]]:
+    from agents.canonical_event_ledger import OperationalAIRequest
+    request = OperationalAIRequest("Bob", "translation_generation", item=ledger_context,
+                                   reason_code="generate_translate_article")
     api_key = os.getenv("GEMINI_API_KEY", "").strip()
     attempts: list[str] = []
     if not api_key:
+        request.avoided("missing_api_key")
         return "", "missing_api_key", attempts
     last_error = ""
     try:
         from google import genai  # type: ignore
         client = genai.Client(api_key=api_key)
         operation_id = make_operation_id("Bob", "translate_article", (ledger_context or {}).get("candidate_id") or (ledger_context or {}).get("url"))
-        for attempt_index, model in enumerate(model_chain or MODEL_CHAIN):
+        chain = model_chain or MODEL_CHAIN
+        for attempt_index, model in enumerate(chain):
             attempts.append(model)
+            attempt = request.start(model, fallback=attempt_index > 0)
+            started = time.monotonic()
             try:
                 response = client.models.generate_content(model=model, contents=prompt)
                 text = getattr(response, "text", "") or ""
                 record_gemini_attempt(response=response, agent="Bob", phase="translate_article", model_requested=model, status="called", reason="generate_translate_article", result="text" if text.strip() else "empty_response", operation_id=operation_id, attempt_index=attempt_index, retry=False, fallback=attempt_index > 0, **(ledger_context or {}))
                 if text.strip():
+                    request.completed(attempt, max(0, int((time.monotonic() - started) * 1000)))
                     return text.strip(), model, attempts
+                request.failed(attempt, error_class="validation",
+                               error_terminal=attempt_index == len(chain) - 1,
+                               latency_ms=max(0, int((time.monotonic() - started) * 1000)),
+                               reason_code="empty_response")
             except Exception as exc:
                 last_error = f"{model}: {exc}"
                 record_gemini_attempt(response=None, agent="Bob", phase="translate_article", model_requested=model, status="failed", reason="generate_translate_article", result=str(exc)[:500], operation_id=operation_id, attempt_index=attempt_index, retry=False, fallback=attempt_index > 0, **(ledger_context or {}))
+                request.failed(attempt, error_class="upstream",
+                               error_terminal=attempt_index == len(chain) - 1,
+                               latency_ms=max(0, int((time.monotonic() - started) * 1000)),
+                               reason_code="provider_failure")
     except Exception as exc:
         last_error = f"genai_import_or_client_error: {exc}"
+        request.initialization_failed()
     return "", last_error or "empty_response", attempts
 
 

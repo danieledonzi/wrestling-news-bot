@@ -218,8 +218,8 @@ def test_publisher_attempts_come_only_from_actual_result_rows(tmp_path):
     }
     ledger.observe_publisher(result)
     output = rows(ledger.path)
-    assert len(output) == 2
-    assert all(row["event_type"] == "publication_attempted" for row in output)
+    assert [row["event_type"] for row in output] == ["stage_failed"]
+    assert output[0]["reason_code"] == "wp_not_ready"
 
 
 def test_publisher_safety_exclusions_are_not_attempts(tmp_path):
@@ -231,14 +231,16 @@ def test_publisher_safety_exclusions_are_not_attempts(tmp_path):
     assert not ledger.path.exists()
 
 
-def test_publisher_missing_title_row_is_an_attempt_when_url_resolves(tmp_path):
+def test_publisher_missing_title_row_is_validation_failure_not_write_attempt(tmp_path):
     ledger = CanonicalEventLedger("r", tmp_path / "l")
     ledger.observe_publisher({"results": [{
         "source_url": "https://example.test/missing-title",
         "status": "skipped",
         "reason": "missing_url_or_title",
     }]})
-    assert [row["event_type"] for row in rows(ledger.path)] == ["publication_attempted"]
+    output = rows(ledger.path)
+    assert [row["event_type"] for row in output] == ["stage_failed"]
+    assert output[0]["error_class"] == "validation"
 
 
 def test_publisher_retry_and_success_outcomes_retain_identity(tmp_path):
@@ -250,19 +252,22 @@ def test_publisher_retry_and_success_outcomes_retain_identity(tmp_path):
     output = rows(ledger.path)
     assert [row["event_type"] for row in output] == [
         "publication_attempted", "publication_completed",
-        "publication_attempted", "publication_already_present",
+        "publication_already_present",
     ]
-    for attempt, outcome in zip(output[::2], output[1::2]):
-        assert attempt["content_id"] == outcome["content_id"]
-        assert attempt["correlation_id"] == outcome["correlation_id"]
-        assert attempt["artifact_refs"][0]["path"] == "artifacts/newsroom/publisher_result.json"
+    assert output[0]["content_id"] == output[1]["content_id"]
+    assert output[0]["correlation_id"] == output[1]["correlation_id"]
 
 
-@pytest.mark.parametrize("status", ["publish_error", "wp_not_ready", "dry_run"])
-def test_publisher_non_success_attempt_has_no_invented_failure(tmp_path, status):
+@pytest.mark.parametrize("status,events", [
+    ("publish_error", ["publication_attempted", "publication_failed"]),
+    ("wp_not_ready", ["stage_failed"]),
+    ("dry_run", []),
+])
+def test_publisher_non_success_normalization(tmp_path, status, events):
     ledger = CanonicalEventLedger("r", tmp_path / status)
     ledger.observe_publisher({"results": [{"source_url": URL, "status": status}]})
-    assert [row["event_type"] for row in rows(ledger.path)] == ["publication_attempted"]
+    output = rows(ledger.path) if ledger.path.exists() else []
+    assert [row["event_type"] for row in output] == events
 
 
 def test_append_only_flag_fail_open_and_invalid(tmp_path, monkeypatch):

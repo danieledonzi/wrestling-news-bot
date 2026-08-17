@@ -6,6 +6,7 @@ import json
 import os
 import re
 import subprocess
+import uuid
 from datetime import datetime, timezone
 from functools import lru_cache
 from pathlib import Path
@@ -14,11 +15,113 @@ from typing import Any, Iterable, Mapping
 from agents.duplicate_pair_identity import article_id
 from agents.menzo_duplicate_scorer import canonical_source_url
 
-VERSION = "v95.23_p1_1_canonical_event_ledger_identity"
+VERSION = "v95.25_p1_3_operational_event_semantics"
 SCHEMA_VERSION = "owtv_event_schema_v1"
 POLICY_VERSION = "v95.22_a2"
 DEFAULT_PATH = "state/newsroom/canonical_event_ledger.jsonl"
 ROOT = Path(__file__).resolve().parents[1]
+_ACTIVE_LEDGER: Any = None
+
+
+def install_active_ledger(ledger: Any) -> None:
+    """Register the runner's writer; nested telemetry must never open a second ledger."""
+    global _ACTIVE_LEDGER
+    _ACTIVE_LEDGER = ledger
+
+
+def clear_active_ledger() -> None:
+    global _ACTIVE_LEDGER
+    _ACTIVE_LEDGER = None
+
+
+def active_event(*args: Any, **kwargs: Any) -> bool:
+    """Fail-open event emission for model call sites."""
+    try:
+        return bool(_ACTIVE_LEDGER and _ACTIVE_LEDGER.safely("event", *args, **kwargs))
+    except Exception:
+        return False
+
+
+def new_logical_request_id() -> str:
+    return "lrq_" + uuid.uuid4().hex
+
+
+def new_attempt_id() -> str:
+    return "att_" + uuid.uuid4().hex
+
+
+class OperationalAIRequest:
+    """Canonical identity for one AI intention and its concrete calls.
+
+    Callers, rather than legacy operation_id/attempt_index, own this object.
+    """
+    def __init__(self, owner: str, model_role: str, *, item: Mapping[str, Any] | None = None,
+                 reason_code: str = "", report_key: str = ""):
+        self.logical_request_id = new_logical_request_id()
+        self.owner, self.model_role, self.item = owner, model_role, item
+        self.attempt_number = 0
+        self.last_model = ""
+        self.pending_attempt: Mapping[str, Any] | None = None
+        self.pending_latency_ms: int | None = None
+        facts = {"logical_request_id": self.logical_request_id, "model_role": model_role,
+                 "reason_code": reason_code or None, "report_key": report_key or None}
+        active_event("logical_ai_request_created", owner, "model", "started", item=item, **facts)
+
+    def start(self, model_name: str, *, fallback: bool = False, repair: bool = False,
+              reason_code: str = "") -> dict[str, Any]:
+        if fallback and self.last_model:
+            active_event("fallback_started", "Gemini", "model", "started",
+                         logical_request_id=self.logical_request_id,
+                         fallback_from=self.last_model, fallback_to=model_name)
+        if repair:
+            active_event("repair_started", "Gemini", "model", "started",
+                         logical_request_id=self.logical_request_id, reason_code=reason_code or None)
+        self.attempt_number += 1
+        attempt = {"logical_request_id": self.logical_request_id,
+                   "attempt_id": new_attempt_id(), "attempt_number": self.attempt_number,
+                   "model_name": model_name, "model_role": self.model_role}
+        active_event("model_attempt_started", "Gemini", "model", "started", item=self.item, **attempt)
+        self.last_model = model_name
+        return attempt
+
+    def defer(self, attempt: Mapping[str, Any], latency_ms: int | None = None) -> None:
+        """Retain a provider result until the caller's domain validator decides it."""
+        self.pending_attempt = attempt
+        self.pending_latency_ms = latency_ms
+
+    def resolve_deferred(self, accepted: bool, *, error_terminal: bool) -> None:
+        attempt, latency = self.pending_attempt, self.pending_latency_ms
+        self.pending_attempt = None
+        self.pending_latency_ms = None
+        if not attempt:
+            return
+        if accepted:
+            self.completed(attempt, latency)
+        else:
+            self.failed(attempt, error_class="validation", error_terminal=error_terminal,
+                        latency_ms=latency, reason_code="invalid_semantic_output")
+
+    def completed(self, attempt: Mapping[str, Any], latency_ms: int | None = None) -> None:
+        active_event("model_attempt_completed", "Gemini", "model", "success", item=self.item,
+                     latency_ms=latency_ms, **dict(attempt))
+
+    def failed(self, attempt: Mapping[str, Any], *, error_class: str,
+               error_terminal: bool, latency_ms: int | None = None,
+               reason_code: str = "") -> None:
+        active_event("model_attempt_failed", "Gemini", "model", "failed", item=self.item,
+                     error_class=error_class, error_terminal=error_terminal,
+                     latency_ms=latency_ms, reason_code=reason_code or None, **dict(attempt))
+
+    def avoided(self, reason_code: str) -> None:
+        active_event("model_attempt_avoided", "Gemini", "model", "avoided", item=self.item,
+                     logical_request_id=self.logical_request_id, model_role=self.model_role,
+                     reason_code=reason_code)
+
+    def initialization_failed(self, reason_code: str = "model_client_initialization_failed") -> None:
+        """Close a request that failed before any concrete provider attempt existed."""
+        active_event("stage_failed", self.owner, "model", "failed", item=self.item,
+                     logical_request_id=self.logical_request_id, model_role=self.model_role,
+                     reason_code=reason_code, error_class="upstream", error_terminal=True)
 
 
 @lru_cache(maxsize=1)
@@ -259,13 +362,30 @@ class CanonicalEventLedger:
             self.event("quality_review_completed", "Alfred", "quality", "success",
                        "artifacts/newsroom/alfred_review.json", item,
                        result=decision if decision in {"approved", "needs_revision"} else None)
+            # Preserve occurrences: repeated codes are separate operational facts.
+            for warning in _rows(item, ("warnings",)):
+                code = str(warning.get("code") or "").strip()
+                severity = str(warning.get("severity") or "").strip().lower()
+                if not code:
+                    continue
+                self.event("warning_recorded", "Alfred", "audit", "success",
+                           "artifacts/newsroom/alfred_review.json", item,
+                           reason_code=code, result=severity or "warning")
+            for issue in _rows(item, ("issues",)):
+                code = str(issue.get("code") or "").strip()
+                severity = str(issue.get("severity") or "").strip().lower()
+                if severity == "blocker":
+                    self.event("blocker_recorded", "Alfred", "audit", "success",
+                               "artifacts/newsroom/alfred_review.json", item,
+                               reason_code=code, result="blocker")
 
     def observe_publisher(self, value: Any) -> None:
         for item in _rows(value, ("results",)):
             status = item.get("status")
             reason = item.get("reason")
-            attempted = status in {"published", "already_published", "dry_run", "wp_not_ready", "publish_error"}
-            attempted = attempted or (status == "skipped" and reason == "missing_url_or_title")
+            # A publication attempt means an actual write path, not a preflight,
+            # validation, dry-run, or already-present observation.
+            attempted = status in {"published", "publish_error"}
             if attempted:
                 self.event("publication_attempted", "Publisher", "publication", "started",
                            "artifacts/newsroom/publisher_result.json", item)
@@ -273,21 +393,41 @@ class CanonicalEventLedger:
                 self.event("publication_completed", "Publisher", "publication", "success", "artifacts/newsroom/publisher_result.json", item)
             elif status == "already_published":
                 self.event("publication_already_present", "Publisher", "publication", "skipped", "artifacts/newsroom/publisher_result.json", item)
+            elif status == "publish_error":
+                self.event("publication_failed", "Publisher", "publication", "failed",
+                           "artifacts/newsroom/publisher_result.json", item,
+                           reason_code="publish_error", error_class="downstream", error_terminal=True)
+            elif status == "wp_not_ready":
+                self.event("stage_failed", "Publisher", "publication", "failed",
+                           "artifacts/newsroom/publisher_result.json", item,
+                           reason_code="wp_not_ready", error_class="downstream", error_terminal=True)
+            elif status == "missing_url_or_title" or (status == "skipped" and reason == "missing_url_or_title"):
+                self.event("stage_failed", "Publisher", "publication", "failed",
+                           "artifacts/newsroom/publisher_result.json",
+                           item if content_id(item) else None,
+                           reason_code="missing_url_or_title", error_class="validation", error_terminal=True)
 
     def observe_simone(self, decision: Any, published: Any = None) -> None:
         self.observe_items(decision, ("candidates", "report_candidates"), "report_candidate_seen", "Simone", "reporting", "success", "artifacts/newsroom/simone_reports.json")
         for item in _rows(decision, ("ready_reports",)):
             self._report_event("report_selected", item, "success", "artifacts/newsroom/simone_reports.json")
         for item in _rows(published, ("results",)):
-            if item.get("status") == "published":
+            item_status = item.get("status")
+            if item_status == "published":
                 self._report_event("report_published", item, "success", "artifacts/newsroom/simone_report_publish.json")
+            elif item_status in {"publish_error", "wp_not_ready"}:
+                self._report_event("stage_failed", item, "failed", "artifacts/newsroom/simone_report_publish.json",
+                                   error_class="downstream", error_terminal=True,
+                                   reason_code=str(item_status))
 
-    def _report_event(self, kind: str, item: Mapping[str, Any], status: str, artifact: str) -> None:
+    def _report_event(self, kind: str, item: Mapping[str, Any], status: str, artifact: str,
+                      **extra: Any) -> None:
         key = str(item.get("report_key") or "")
         facts = {"report_key": key or None}
         has_content = bool(content_id(item))
         if key and not has_content:
             facts["correlation_id"] = report_correlation_id(self.run_id, key)
+        facts.update(extra)
         self.event(kind, "Simone", "reporting", status, artifact, item if has_content else None, **facts)
 
     def summary(self) -> dict[str, Any]:
