@@ -68,6 +68,44 @@ def test_validator_requires_creation_and_contiguous_attempt_numbers():
     starts_at_two=analyze([_native("logical_ai_request_created")]+attempt(2,"two"))
     assert any("contiguous" in error for error in starts_at_two["identity_errors"])
 
+def test_validator_rejects_duplicate_terminal_events():
+    facts={"attempt_id":"att_duplicate","attempt_number":1,
+           "model_name":"m","model_role":"translation_generation"}
+    created=_native("logical_ai_request_created")
+    started=_native("model_attempt_started",**facts)
+    completed=_native("model_attempt_completed",**facts)
+    duplicate_completed=analyze([created,started,completed,dict(completed)])
+    assert any("exactly one terminal event" in error for error in duplicate_completed["lifecycle_errors"])
+    failed=_native("model_attempt_failed",error_class="upstream",error_terminal=True,**facts)
+    duplicate_failed=analyze([created,started,failed,dict(failed)])
+    assert any("exactly one terminal event" in error for error in duplicate_failed["lifecycle_errors"])
+
+def test_publisher_missing_url_still_emits_identity_free_validation_failure(tmp_path):
+    ledger=CanonicalEventLedger("run",tmp_path/"events")
+    ledger.observe_publisher({"results":[{"title":"Present","status":"skipped",
+        "reason":"missing_url_or_title"}]})
+    rows=read(ledger.path)
+    assert len(rows)==1 and rows[0]["event_type"]=="stage_failed"
+    assert rows[0]["error_class"]=="validation" and rows[0]["error_terminal"] is True
+    assert rows[0]["reason_code"]=="missing_url_or_title"
+    assert "content_id" not in rows[0] and "correlation_id" not in rows[0]
+
+def test_bob_client_initialization_failure_closes_logical_request(monkeypatch,tmp_path):
+    from agents import bob
+    from google import genai
+    monkeypatch.setenv("GEMINI_API_KEY","fake")
+    monkeypatch.setattr(genai,"Client",lambda **kwargs:(_ for _ in ()).throw(RuntimeError("init")))
+    ledger=CanonicalEventLedger("run",tmp_path/"events"); install_active_ledger(ledger)
+    try:
+        text,status,attempted=bob.call_gemini("prompt",ledger_context=URL,model_chain=["model"])
+    finally: clear_active_ledger()
+    rows=read(ledger.path)
+    assert text=="" and status.startswith("genai_import_or_client_error:") and attempted==[]
+    assert [row["event_type"] for row in rows]==["logical_ai_request_created","stage_failed"]
+    assert rows[0]["logical_request_id"]==rows[1]["logical_request_id"]
+    assert rows[1]["error_class"]=="upstream" and rows[1]["error_terminal"] is True
+    assert not any(row["event_type"].startswith("model_attempt_") for row in rows)
+
 def test_deferred_semantic_validation_reuses_request_for_repair(tmp_path):
     ledger=CanonicalEventLedger("run",tmp_path/"events"); install_active_ledger(ledger)
     try:

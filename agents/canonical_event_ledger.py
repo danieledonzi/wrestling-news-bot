@@ -117,6 +117,12 @@ class OperationalAIRequest:
                      logical_request_id=self.logical_request_id, model_role=self.model_role,
                      reason_code=reason_code)
 
+    def initialization_failed(self, reason_code: str = "model_client_initialization_failed") -> None:
+        """Close a request that failed before any concrete provider attempt existed."""
+        active_event("stage_failed", self.owner, "model", "failed", item=self.item,
+                     logical_request_id=self.logical_request_id, model_role=self.model_role,
+                     reason_code=reason_code, error_class="upstream", error_terminal=True)
+
 
 @lru_cache(maxsize=1)
 def schema() -> dict[str, Any]:
@@ -397,7 +403,8 @@ class CanonicalEventLedger:
                            reason_code="wp_not_ready", error_class="downstream", error_terminal=True)
             elif status == "missing_url_or_title" or (status == "skipped" and reason == "missing_url_or_title"):
                 self.event("stage_failed", "Publisher", "publication", "failed",
-                           "artifacts/newsroom/publisher_result.json", item,
+                           "artifacts/newsroom/publisher_result.json",
+                           item if content_id(item) else None,
                            reason_code="missing_url_or_title", error_class="validation", error_terminal=True)
 
     def observe_simone(self, decision: Any, published: Any = None) -> None:

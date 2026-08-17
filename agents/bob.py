@@ -715,6 +715,7 @@ def call_gemini(prompt: str, *, ledger_context: dict[str, Any] | None = None, mo
                                reason_code="provider_failure")
     except Exception as exc:
         last_error = f"genai_import_or_client_error: {exc}"
+        request.initialization_failed()
     return "", last_error or "empty_response", attempts
 
 

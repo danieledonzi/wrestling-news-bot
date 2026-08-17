@@ -56,8 +56,8 @@ def analyze(rows: list[dict[str, Any]]) -> dict[str, Any]:
         if len(identities)!=1: identity.append(f"attempt {aid}: lifecycle identity mismatch")
         kinds=[r.get("event_type") for _,r in events]
         if kinds.count("model_attempt_started") != 1: lifecycle.append(f"attempt {aid}: requires exactly one started event")
-        outcomes=set(kinds)&{"model_attempt_completed","model_attempt_failed"}
-        if len(outcomes)!=1: lifecycle.append(f"attempt {aid}: requires exactly one terminal outcome")
+        outcomes=[kind for kind in kinds if kind in {"model_attempt_completed","model_attempt_failed"}]
+        if len(outcomes)!=1: lifecycle.append(f"attempt {aid}: requires exactly one terminal event")
     successful=first=recovered=terminal=avoided=0
     for lrq,events in requests.items():
         ordered=sorted(events); rs=[r for _,r in ordered]; concrete=[r for r in rs if r.get("event_type") in ATTEMPT_EVENTS]
