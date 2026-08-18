@@ -48,6 +48,12 @@ def _material_text(path: Path, row: dict[str, Any]) -> tuple[str | None, str | N
     return None, "indexed_json_role_representation_unsupported"
 
 
+def verify_artifact_row(root: Path, row: dict[str, Any]) -> tuple[bool, str | None]:
+    """Apply the reader's byte and representation checks to one validated manifest row."""
+    text, reason = _material_text(root / str(row.get("path") or ""), row)
+    return text is not None, reason
+
+
 def read_artifact_index(root: Path, index_path: Path | None = None) -> dict[str, Any]:
     """Return validated rows grouped by content identity; malformed rows stay diagnostic."""
     path = index_path or root / INDEX_PATH

@@ -623,7 +623,7 @@ def discover(root: Path, hours: int, limit: int | None) -> list[ArticleAudit]:
     except Exception:
         authoritative_keys = None
     if artifact_index.get("available"):
-        eligible_ids = published_content_ids if publication_authority_available else set(artifact_index["rows_by_content_id"])
+        eligible_ids = published_content_ids if publication_authority_available else set()
         for content_id in sorted(eligible_ids):
             manifest_rows = artifact_index["rows_by_content_id"].get(content_id, [])
             chain = resolve_material_chain(root, content_id, index=artifact_index)
@@ -646,6 +646,8 @@ def discover(root: Path, hours: int, limit: int | None) -> list[ArticleAudit]:
         if base.exists():
             candidates.extend([p for p in base.rglob("*.json*") if p.is_file()])
     for p in candidates:
+        if p.name == "canonical_artifact_index.jsonl":
+            continue
         if not p.exists() or (parse_dt(datetime.fromtimestamp(p.stat().st_mtime, timezone.utc).isoformat()) or utc_now()) < since:
             continue
         rel = str(p.relative_to(root)) if p.is_relative_to(root) else str(p)

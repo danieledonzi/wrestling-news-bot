@@ -787,11 +787,15 @@ def _canonical_event_sections(rows: list[dict[str, Any]], since: datetime, until
                  if row.get("event_type") in {"model_attempt_completed", "model_attempt_failed"}}
     lifecycle_complete = all(row.get("attempt_id") in terminals for row in starts)
     operational = analyze(owned_lifecycle)
+    terminal_request_ids = {row.get("logical_request_id") for row in owned_lifecycle
+                            if row.get("error_terminal") is True and row.get("event_type") in
+                            {"model_attempt_failed", "stage_failed"}}
     ai = {key: operational.get(source) for key, source in {
         "logical_requests": "logical_requests", "real_attempts": "model_attempts_started",
         "successful_attempts": "model_attempts_completed", "failed_attempts": "model_attempts_failed",
         "fallbacks_started": "fallbacks_started", "recovered_failures": "logical_requests_recovered",
         "terminal_failures": "logical_requests_terminal_failed"}.items()}
+    ai["terminal_failures"] = len({request_id for request_id in terminal_request_ids if request_id})
     if coverage["ai"] != "full" or not lifecycle_complete:
         ai = {key: None for key in ai}
     ai["lifecycle_complete"] = lifecycle_complete
@@ -824,8 +828,17 @@ def _canonical_event_sections(rows: list[dict[str, Any]], since: datetime, until
     }
 
 
+def _without_authoritative_numbers(value: Any) -> Any:
+    """Preserve diagnostic structure while suppressing totals from corrupt canonical input."""
+    if isinstance(value, dict):
+        return {key: _without_authoritative_numbers(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [_without_authoritative_numbers(item) for item in value]
+    return None if isinstance(value, (int, float)) and not isinstance(value, bool) else value
+
+
 def _artifact_snapshot(root: Path, since: datetime, until: datetime) -> tuple[dict[str, Any], dict[str, Any]]:
-    from agents.canonical_artifact_reader import read_artifact_index
+    from agents.canonical_artifact_reader import read_artifact_index, verify_artifact_row
     index = read_artifact_index(root)
     if not index.get("available"):
         return {"role_coverage": {}, "unavailability_reason": index.get("reason")}, section_metadata(
@@ -837,15 +850,23 @@ def _artifact_snapshot(root: Path, since: datetime, until: datetime) -> tuple[di
     coverage = "full" if dated and min(dated) <= since else ("partial" if dated else "unavailable")
     bounded = [row for row in rows if in_window_dt(parse_utc_datetime(row.get("manifested_at_utc")), since, until)]
     role_coverage = {}
+    integrity_mismatches = list(index.get("diagnostic_mismatches") or [])
     for role in ("source_material", "translated_candidate", "quality_review", "final_published_material"):
         selected = [row for row in bounded if role in row.get("semantic_roles", [])]
-        role_coverage[role] = {"artifact_count": len(selected),
-            "unique_content_count": len({row["content_id"] for row in selected}) if coverage == "full" else None}
+        verified = []
+        for row in selected:
+            valid, failure = verify_artifact_row(root, row)
+            if valid:
+                verified.append(row)
+            else:
+                integrity_mismatches.append(f"{row.get('artifact_id')}:{role}:{failure}")
+        role_coverage[role] = {"artifact_count": len(verified),
+            "unique_content_count": len({row["content_id"] for row in verified}) if coverage == "full" else None}
     reason = None if coverage == "full" else "canonical_artifact_index_cutover_inside_window"
     return {"role_coverage": role_coverage, "report_material": {"available": False,
         "reason": "p1_2_report_material_retention_out_of_scope"}}, section_metadata(
             available=coverage != "unavailable", source=index["source"], coverage=coverage,
-            warnings=index.get("diagnostic_mismatches"), reason=reason)
+            warnings=integrity_mismatches, reason=reason)
 
 
 def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow_tail_fallback: bool = True) -> dict[str, Any]:
@@ -885,7 +906,7 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
     warnings += gemini_warnings
     warnings += funnel.get("schema_warnings", []) + andrea.get("schema_warnings", []) + alfred.get("schema_warnings", []) + dup_warnings
     event_path = root / "state/newsroom/canonical_event_ledger.jsonl"
-    canonical_rows, canonical_warnings, canonical_readable, _canonical_malformed = load_jsonl_defensively(event_path)
+    canonical_rows, canonical_warnings, canonical_readable, canonical_malformed = load_jsonl_defensively(event_path)
     p1_1_coverage, p1_1_reason = _coverage_from_cutover(canonical_rows, canonical_readable, since, until)
     p1_3_coverage, p1_3_reason = _coverage_from_cutover(canonical_rows, canonical_readable, since, until,
                                                        family="p1_3_core")
@@ -893,7 +914,15 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
                                                                  family="full_active_ai")
     coverages = {"p1_1": p1_1_coverage, "ai": active_ai_coverage,
                  "warnings": p1_3_coverage, "failures": p1_3_coverage}
+    integrity_reason = None
+    if canonical_malformed:
+        integrity_reason = "canonical_event_ledger_malformed_json"
+        coverages = {family: "unavailable" for family in coverages}
+        p1_1_reason = p1_3_reason = active_ai_reason = integrity_reason
     canonical = _canonical_event_sections(canonical_rows, since, until, coverages)
+    if integrity_reason:
+        canonical = _without_authoritative_numbers(canonical)
+        canonical_warnings.append(f"{integrity_reason}:{canonical_malformed}")
     artifacts, artifact_metadata = _artifact_snapshot(root, since, until)
     def family_metadata(family: str, reason: str | None) -> dict[str, Any]:
         state = coverages[family]

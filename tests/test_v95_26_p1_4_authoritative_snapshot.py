@@ -7,7 +7,7 @@ from agents.canonical_artifact_index import CanonicalArtifactIndex
 from agents.canonical_artifact_reader import REPORT_SCOPE_REASON, read_artifact_index, resolve_material_chain
 from agents.canonical_event_ledger import CanonicalEventLedger, clear_active_ledger, install_active_ledger
 from agents import source_body
-from scripts.observability_snapshot import build_snapshot, _coverage_from_cutover
+from scripts.observability_snapshot import build_snapshot, _artifact_snapshot, _coverage_from_cutover
 from scripts.translation_quality_audit import discover
 
 
@@ -295,6 +295,86 @@ def test_warning_events_are_reviews_not_occurrences(tmp_path):
     assert alfred["articles_with_warnings"] == 2
     assert alfred["warning_events"] == 2
     assert alfred["warning_occurrences"] == 4
+
+
+def test_malformed_canonical_ledger_suppresses_all_authoritative_totals(tmp_path):
+    path = tmp_path / "state/newsroom/canonical_event_ledger.jsonl"; path.parent.mkdir(parents=True)
+    now = datetime.now(timezone.utc)
+    ledger = CanonicalEventLedger("run", path)
+    ledger.event("candidate_selected", "Menzo", "selection", "success", item={"source_url": "https://x/a"})
+    rows = _rows(path)
+    rows[0]["timestamp_utc"] = (now - timedelta(hours=2)).isoformat()
+    path.write_text(json.dumps(rows[0]) + "\n{malformed\n")
+    snap = build_snapshot(now - timedelta(hours=1), now, tmp_path)
+    assert snap["section_metadata"]["p1_1_lifecycle"]["available"] is False
+    assert snap["section_metadata"]["p1_1_lifecycle"]["unavailability_reason"] == "canonical_event_ledger_malformed_json"
+    assert snap["authoritative"]["publication"]["unique_news_publications"] is None
+    assert snap["authoritative"]["funnel"]["metrics"]["menzo_unique_selected"]["event_count"] is None
+
+
+@pytest.mark.parametrize("damage,expected", [("valid", 1), ("missing", 0), ("sha", 0)])
+def test_artifact_snapshot_counts_only_verified_bytes(tmp_path, damage, expected):
+    path = tmp_path / "state/newsroom/canonical_artifact_index.jsonl"
+    index = CanonicalArtifactIndex("run", path, tmp_path / "materials", repository_root=tmp_path)
+    url = "https://example.test/verified"
+    index.observe_bob({"articles": [{"source_url": url, "status": "ready_for_alfred",
+        "canonical_source_body": _contract(url), "body_html": "<p>candidate</p>"}]})
+    rows = _rows(path); candidate = next(row for row in rows if row["semantic_roles"] == ["translated_candidate"])
+    if damage == "missing":
+        (tmp_path / candidate["path"]).unlink()
+    elif damage == "sha":
+        (tmp_path / candidate["path"]).write_text("tampered")
+    now = datetime.now(timezone.utc)
+    snapshot, metadata = _artifact_snapshot(tmp_path, now - timedelta(hours=1), now + timedelta(hours=1))
+    assert snapshot["role_coverage"]["translated_candidate"]["artifact_count"] == expected
+    assert bool(metadata["diagnostic_mismatches"]) is (damage != "valid")
+
+
+def test_artifact_index_never_seeds_fallback_publication_population(tmp_path):
+    path = tmp_path / "state/newsroom/canonical_artifact_index.jsonl"
+    recent = CanonicalArtifactIndex("recent", path, tmp_path / "materials", repository_root=tmp_path)
+    old = CanonicalArtifactIndex("old", path, tmp_path / "materials", repository_root=tmp_path)
+    recent.observe_bob({"articles": [{"source_url": "https://x/unpublished", "status": "ready_for_alfred",
+        "canonical_source_body": _contract("https://x/unpublished"), "body_html": "<p>candidate</p>"}]})
+    old.observe_bob({"articles": [{"source_url": "https://x/old", "status": "ready_for_alfred",
+        "canonical_source_body": _contract("https://x/old"), "body_html": "<p>old</p>"}]})
+    assert [row for row in discover(tmp_path, 24, None) if row.key.startswith("cnt_")] == []
+
+
+def test_pre_attempt_and_model_terminal_requests_count_once(monkeypatch, tmp_path):
+    import modules.report_workshop_v92 as workshop
+    from agents.canonical_event_ledger import OperationalAIRequest
+    path = tmp_path / "state/newsroom/canonical_event_ledger.jsonl"; path.parent.mkdir(parents=True)
+    ledger = CanonicalEventLedger("run", path); install_active_ledger(ledger)
+    now = datetime.now(timezone.utc)
+    try:
+        cutover = OperationalAIRequest("Bob", "report_translation")
+        cutover.avoided("fixture_cutover")
+        monkeypatch.setattr(workshop, "GEMINI_API_KEY", "")
+        with pytest.raises(RuntimeError):
+            workshop.generate_json("prompt", "report_blocks_legacy_prompt")
+        monkeypatch.setattr(workshop, "GEMINI_API_KEY", "key")
+        monkeypatch.setattr(workshop.genai, "Client", lambda **kwargs: (_ for _ in ()).throw(RuntimeError("init")))
+        with pytest.raises(RuntimeError):
+            workshop.generate_json("prompt", "report_blocks_legacy_prompt")
+        ordinary = OperationalAIRequest("Bob", "report_translation")
+        attempt = ordinary.start("model"); ordinary.failed(attempt, error_class="upstream", error_terminal=True)
+        ledger.event("stage_failed", "Bob", "model", "failed", logical_request_id=ordinary.logical_request_id,
+                     model_role="report_translation", reason_code="duplicate_terminal_evidence",
+                     error_class="upstream", error_terminal=True)
+    finally:
+        clear_active_ledger()
+    rows = _rows(path)
+    creation_times = [row for row in rows if row["event_type"] == "logical_ai_request_created"]
+    cutover_time = now - timedelta(hours=2)
+    for row in rows:
+        row["timestamp_utc"] = (cutover_time if row.get("logical_request_id") == creation_times[0]["logical_request_id"]
+                                else now - timedelta(minutes=10)).isoformat()
+    path.write_text("\n".join(json.dumps(row) for row in rows) + "\n")
+    ai = build_snapshot(now - timedelta(hours=1), now, tmp_path)["authoritative"]["ai_operations"]
+    assert ai["logical_requests"] == 3
+    assert ai["real_attempts"] == 1
+    assert ai["terminal_failures"] == 3
 
 
 def test_final_blockers_resolve_only_after_later_approval_or_publication(tmp_path):
