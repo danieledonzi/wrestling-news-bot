@@ -753,6 +753,7 @@ def resolve_p1_4_canonical_payloads(section_metadata: dict[str, Any], authoritat
     resolved = dict(legacy)
     boundaries = {
         "menzo": ("p1_1_lifecycle",),
+        "andrea": ("p1_1_lifecycle",),
         "alfred": ("p1_3_warning_occurrences", "p1_3_failure_semantics"),
         "gemini": ("p1_3_ai_operations",),
         "simone": ("p1_1_lifecycle", "p1_3_failure_semantics"),
@@ -763,7 +764,14 @@ def resolve_p1_4_canonical_payloads(section_metadata: dict[str, Any], authoritat
         if not present:
             continue
         if any((section_metadata.get(family) or {}).get("complete_window") is True for family in present):
-            resolved[name] = authoritative.get(sources[name], {})
+            if name == "andrea":
+                funnel = authoritative.get("funnel", {})
+                metrics = funnel.get("metrics", {}) if isinstance(funnel.get("metrics"), dict) else {}
+                resolved[name] = {"metrics": {key: metrics[key] for key in
+                    ("andrea_unique_checked", "andrea_unique_blocked") if key in metrics},
+                    "metadata": funnel.get("metadata", {})}
+            else:
+                resolved[name] = authoritative.get(sources[name], {})
         else:
             resolved[name] = {}
     return resolved
@@ -912,9 +920,10 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
     if simone_authoritative:
         canonical_simone = observability.get("simone", {})
     canonical_payloads = resolve_p1_4_canonical_payloads(section_metadata, p14, {
-        "menzo": canonical_menzo, "alfred": canonical_alfred,
+        "menzo": canonical_menzo, "andrea": canonical_andrea, "alfred": canonical_alfred,
         "gemini": canonical_gemini, "simone": canonical_simone})
-    canonical_menzo, canonical_alfred = canonical_payloads["menzo"], canonical_payloads["alfred"]
+    canonical_menzo, canonical_andrea = canonical_payloads["menzo"], canonical_payloads["andrea"]
+    canonical_alfred = canonical_payloads["alfred"]
     canonical_gemini, canonical_simone = canonical_payloads["gemini"], canonical_payloads["simone"]
     if snapshot_authoritative:
         snap_pub = observability.get("publication", {})

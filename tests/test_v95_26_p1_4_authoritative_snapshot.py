@@ -359,9 +359,13 @@ def test_daily_headline_obeys_present_p1_1_authority_boundary():
 
 
 def test_canonical_payload_boundaries_and_classifications():
-    legacy = {name: {"legacy": 9} for name in ("menzo", "alfred", "gemini", "simone")}
+    legacy = {name: {"legacy": 9} for name in ("menzo", "andrea", "alfred", "gemini", "simone")}
     authoritative = {"funnel": {"p1": 1}, "alfred": {"p1": 2},
                      "ai_operations": {"p1": 3}, "simone": {"p1": 4}}
+    authoritative["funnel"] = {"p1": 1, "metrics": {
+        "andrea_unique_checked": {"event_count": 3, "unique_content_count": 2, "content_ids": ["a", "b"]},
+        "andrea_unique_blocked": {"event_count": 1, "unique_content_count": 1, "content_ids": ["b"]}},
+        "metadata": {"coverage": "full"}}
     assert resolve_p1_4_canonical_payloads({}, authoritative, legacy) == legacy
     full = {"p1_1_lifecycle": {"complete_window": True},
             "p1_3_warning_occurrences": {"complete_window": True},
@@ -369,10 +373,11 @@ def test_canonical_payload_boundaries_and_classifications():
             "p1_3_ai_operations": {"complete_window": True}}
     assert resolve_p1_4_canonical_payloads(full, authoritative, legacy) == {
         "menzo": authoritative["funnel"], "alfred": authoritative["alfred"],
+        "andrea": {"metrics": authoritative["funnel"]["metrics"], "metadata": {"coverage": "full"}},
         "gemini": authoritative["ai_operations"], "simone": authoritative["simone"]}
     incomplete = {family: {"complete_window": False} for family in full}
     assert resolve_p1_4_canonical_payloads(incomplete, authoritative, legacy) == {
-        "menzo": {}, "alfred": {}, "gemini": {}, "simone": {}}
+        "menzo": {}, "andrea": {}, "alfred": {}, "gemini": {}, "simone": {}}
     assert resolve_editorial_classifications({}, 20, 1, 12, 5, False) == ("post-show", "OTTIMO")
     assert resolve_editorial_classifications(incomplete, 20, 1, 12, 5, False) == (None, None)
 
