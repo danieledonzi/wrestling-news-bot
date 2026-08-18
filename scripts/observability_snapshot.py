@@ -22,8 +22,9 @@ from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
-SCHEMA_VERSION = "v95.19_observability_snapshot.v3"
+SCHEMA_VERSION = "v95.26_p1_4_authoritative_snapshot.v4"
 METRIC_CONTRACT_VERSION = "v95.19.0"
+POLICY_VERSION = "v95.26_p1_4"
 ACTIVE_DUPLICATE_COUNTERS = (
     "menzo_same_run_batch_calls",
     "menzo_same_run_batch_repairs",
@@ -44,9 +45,15 @@ EXPECTED_RUNTIME_PATHS = (".bot_exit_code", "logs/master_log.log", "reports/")
 
 def section_metadata(*, available: bool, source: str, coverage: Any = None,
                      warnings: list[str] | None = None, reason: str | None = None) -> dict[str, Any]:
-    return {"available": available, "coverage": coverage, "source": source,
-            "schema_version": SCHEMA_VERSION, "policy_version": METRIC_CONTRACT_VERSION,
-            "diagnostic_warnings": warnings or [], "unavailability_reason": reason if not available else None}
+    coverage_name = coverage if isinstance(coverage, str) else ((coverage or {}).get("status") if isinstance(coverage, dict) else None)
+    coverage_value = ({**coverage, "status": coverage_name or ("full" if available else "unavailable")}
+                      if isinstance(coverage, dict) else coverage_name or ("full" if available else "unavailable"))
+    return {"available": available, "coverage": coverage_value,
+            "complete_window": coverage_name == "full" if coverage_name else available, "source": source,
+            "schema_version": SCHEMA_VERSION, "policy_version": POLICY_VERSION,
+            "diagnostic_mismatches": warnings or [], "diagnostic_warnings": warnings or [],
+            "coverage_detail": coverage if isinstance(coverage, dict) else {},
+            "unavailability_reason": reason if not available else None}
 
 
 def parse_utc_datetime(value: Any) -> datetime | None:
@@ -658,6 +665,230 @@ def repository_diagnostics(root: Path = ROOT) -> dict[str, Any]:
     return {"expected_runtime_untracked_paths": expected, "actual_source_modifications": actual, "scheduler": {"systemd_timer": "separate_authority_if_configured", "cron_absence_is_anomaly": False}}
 
 
+P1_3_BOUNDARY_COMMIT = "ca0fdf1ca9a3d27e94f13570c754047c7203251f"
+P1_3_EVENT_TYPES = {"logical_ai_request_created", "model_attempt_started", "model_attempt_completed",
+                    "model_attempt_failed", "model_attempt_avoided", "fallback_started", "repair_started",
+                    "warning_recorded", "blocker_recorded"}
+
+
+def _coverage_from_cutover(rows: list[dict[str, Any]], readable: bool, since: datetime, until: datetime,
+                           *, family: str = "p1_1") -> tuple[str, str | None]:
+    evidence = rows
+    if family == "p1_3_core":
+        evidence = [row for row in rows if row.get("event_type") in P1_3_EVENT_TYPES or
+                    row.get("code_commit") == P1_3_BOUNDARY_COMMIT]
+    elif family == "full_active_ai":
+        evidence = [row for row in rows if row.get("event_type") == "logical_ai_request_created" and
+                    row.get("model_role") == "report_translation"]
+    dated = [parse_utc_datetime(row.get("timestamp_utc")) for row in evidence]
+    dated = [value for value in dated if value]
+    if not readable or not dated:
+        reason = "full_active_ai_cutover_not_observable" if family == "full_active_ai" else (
+            "p1_3_cutover_not_observable" if family == "p1_3_core" else "canonical_event_ledger_has_no_dated_coverage")
+        return "unavailable", reason
+    cutover = min(dated)
+    if cutover > until:
+        return "unavailable", f"{family}_cutover_after_window"
+    if cutover > since:
+        return "partial", "canonical_event_ledger_cutover_inside_window"
+    return "full", None
+
+
+def _canonical_event_sections(rows: list[dict[str, Any]], since: datetime, until: datetime,
+                              coverage: dict[str, str]) -> dict[str, Any]:
+    bounded = [row for row in rows if in_window_dt(parse_utc_datetime(row.get("timestamp_utc")), since, until)]
+    by_type: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in bounded:
+        by_type[str(row.get("event_type") or "")].append(row)
+
+    def metric(*types: str, agent: str | None = None, result: str | None = None) -> dict[str, Any]:
+        selected = [row for kind in types for row in by_type.get(kind, [])
+                    if (not agent or row.get("agent") == agent) and (result is None or row.get("result") == result)]
+        identities = {row["content_id"] for row in selected if row.get("content_id")}
+        return {"event_count": len(selected), "unique_content_count": len(identities),
+                "content_ids": sorted(identities)}
+
+    def value(item: dict[str, Any], key: str = "unique_content_count", family: str = "p1_1") -> int | None:
+        return item[key] if coverage[family] == "full" else None
+
+    publications = metric("publication_completed", agent="Publisher")
+    report_publications = metric("report_published", agent="Simone")
+    warning_occurrences = metric("warning_recorded", agent="Alfred")
+    warning_articles = warning_occurrences["unique_content_count"]
+    warning_review_events = len({(row.get("run_id"), row.get("content_id"))
+                                 for row in by_type.get("warning_recorded", [])
+                                 if row.get("agent") == "Alfred" and row.get("content_id")})
+    reviews = metric("quality_review_completed", agent="Alfred")
+    blocker_occurrences = metric("blocker_recorded", agent="Alfred")
+    pub_attempts = metric("publication_attempted", agent="Publisher")
+    pub_failures = [r for r in bounded if r.get("agent") == "Publisher" and r.get("error_terminal") is True]
+    simone_failures = [r for r in bounded if r.get("agent") == "Simone" and r.get("error_terminal") is True]
+    reason_codes: dict[str, dict[str, int]] = {}
+    for kind, items in by_type.items():
+        counts = Counter(str(x.get("reason_code")) for x in items if x.get("reason_code"))
+        if counts:
+            reason_codes[kind] = dict(sorted(counts.items()))
+
+    funnel_metrics = {
+        "massy_unique_universe_seen": metric("candidate_seen", agent="Massy"),
+        "massy_unique_skipped": metric("candidate_skipped", agent="Massy"),
+        "menzo_unique_selected": metric("candidate_selected", agent="Menzo"),
+        "menzo_unique_pending": metric("candidate_pending", agent="Menzo"),
+        "menzo_unique_skipped": metric("candidate_skipped", agent="Menzo"),
+        "menzo_unique_duplicate_arbitration_inputs": metric("duplicate_check_requested", agent="Menzo"),
+        "unique_downstream_handoffs": metric("article_generation_requested", agent="Bob"),
+        "andrea_unique_checked": metric("content_sufficiency_checked", agent="Andrea"),
+        "andrea_unique_blocked": metric("content_sufficiency_checked", agent="Andrea", result="blocked"),
+        "bob_unique_packages_generated": metric("article_generated", agent="Bob"),
+        "alfred_unique_reviewed": reviews,
+        "alfred_unique_approved": metric("quality_review_completed", agent="Alfred", result="approved"),
+        "alfred_unique_needs_revision": metric("quality_review_completed", agent="Alfred", result="needs_revision"),
+        "publisher_unique_publications": publications,
+        "simone_report_candidates": metric("report_candidate_seen", agent="Simone"),
+        "simone_report_selected": metric("report_selected", agent="Simone"),
+        "simone_report_publications": report_publications,
+    }
+    menzo_decision_ids = set().union(*(set(funnel_metrics[key]["content_ids"]) for key in
+        ("menzo_unique_selected", "menzo_unique_pending")))
+    unavailable = {
+        "unique_news_candidates_toward_menzo": "a2_candidate_seen_does_not_encode_massy_universe_component",
+        "unique_already_worked": "a2_candidate_seen_does_not_encode_massy_universe_component",
+        "unique_hard_skipped": "frozen_a2_does_not_distinguish_hard_skipped_from_already_worked",
+        "unique_report_candidates_from_massy": "a2_candidate_seen_does_not_encode_massy_universe_component",
+        "same_run_duplicates_blocked": "a2_pair_resolution_does_not_encode_duplicate_horizon",
+        "recent_history_duplicates_blocked": "a2_pair_resolution_does_not_encode_duplicate_horizon",
+        "material_updates": "a2_has_no_material_update_event",
+        "bob_unique_errors": "a2_has_no_item_level_bob_generation_failure_event",
+    }
+    lifecycle: dict[str, dict[str, list[dict[str, Any]]]] = defaultdict(lambda: defaultdict(list))
+    for row in bounded:
+        if row.get("content_id"):
+            lifecycle[row["content_id"]][row["event_type"]].append({
+                "timestamp_utc": row.get("timestamp_utc"), "run_id": row.get("run_id"),
+                "result": row.get("result"), "reason_code": row.get("reason_code")})
+    final_blocked_ids: set[str] = set()
+    for cid, events in lifecycle.items():
+        last_blocker = max((str(x.get("timestamp_utc") or "") for x in events.get("blocker_recorded", [])), default="")
+        resolved = any(str(x.get("timestamp_utc") or "") > last_blocker and x.get("result") == "approved"
+                       for x in events.get("quality_review_completed", []))
+        resolved = resolved or any(str(x.get("timestamp_utc") or "") > last_blocker
+                                   for x in events.get("publication_completed", []))
+        if last_blocker and not resolved:
+            final_blocked_ids.add(cid)
+    funnel_metrics["alfred_final_unique_blockers"] = {
+        "event_count": blocker_occurrences["event_count"], "unique_content_count": len(final_blocked_ids),
+        "content_ids": sorted(final_blocked_ids)}
+    from scripts.validate_canonical_operational_semantics import analyze
+    owned_ids = {row.get("logical_request_id") for row in bounded
+                 if row.get("event_type") == "logical_ai_request_created" and row.get("logical_request_id")}
+    owned_lifecycle = [row for row in rows if row.get("logical_request_id") in owned_ids]
+    starts = [row for row in owned_lifecycle if row.get("event_type") == "model_attempt_started"]
+    terminals = {row.get("attempt_id") for row in owned_lifecycle
+                 if row.get("event_type") in {"model_attempt_completed", "model_attempt_failed"}}
+    lifecycle_complete = all(row.get("attempt_id") in terminals for row in starts)
+    operational = analyze(owned_lifecycle)
+    terminal_request_ids = {row.get("logical_request_id") for row in owned_lifecycle
+                            if row.get("error_terminal") is True and row.get("event_type") in
+                            {"model_attempt_failed", "stage_failed"}}
+    ai = {key: operational.get(source) for key, source in {
+        "logical_requests": "logical_requests", "real_attempts": "model_attempts_started",
+        "successful_attempts": "model_attempts_completed", "failed_attempts": "model_attempts_failed",
+        "fallbacks_started": "fallbacks_started", "recovered_failures": "logical_requests_recovered",
+        "terminal_failures": "logical_requests_terminal_failed"}.items()}
+    ai["terminal_failures"] = len({request_id for request_id in terminal_request_ids if request_id})
+    if coverage["ai"] != "full" or not lifecycle_complete:
+        ai = {key: None for key in ai}
+        lifecycle_complete_value = None
+    else:
+        lifecycle_complete_value = True
+    ai["lifecycle_complete"] = lifecycle_complete_value
+    result = {
+        "bounded_event_count": len(bounded), "runs": {"event_count": len(by_type.get("run_completed", [])),
+            "unique_run_count": len({r.get("run_id") for r in by_type.get("run_completed", []) if r.get("run_id")}),
+            "value": value(metric("run_completed"), "event_count")},
+        "publication": {"news": publications, "reports": report_publications,
+            "unique_news_publications": value(publications), "unique_report_publications": value(report_publications)},
+        "funnel": {"metrics": funnel_metrics,
+            "unique_actionable_candidates": len(menzo_decision_ids) if coverage["p1_1"] == "full" else None,
+            "unique_downstream_handoffs": value(funnel_metrics["unique_downstream_handoffs"]),
+            "unique_final_publications": value(publications),
+            "handoff_to_publication_ratio": ((value(publications) / value(funnel_metrics["unique_downstream_handoffs"]))
+                if coverage["p1_1"] == "full" and value(funnel_metrics["unique_downstream_handoffs"]) else None),
+            "unavailable_metrics": unavailable,
+            "reason_code_distributions": reason_codes, "content_lifecycle": lifecycle},
+        "alfred": {"articles_reviewed": value(reviews),
+            "articles_with_warnings": warning_articles if coverage["warnings"] == "full" else None,
+            "warning_events": warning_review_events if coverage["warnings"] == "full" else None,
+            "warning_occurrences": value(warning_occurrences, "event_count", "warnings"),
+            "blocker_occurrences": value(blocker_occurrences, "event_count", "warnings"),
+            "final_blockers": len(final_blocked_ids) if coverage["failures"] == "full" else None},
+        "publisher": {"attempts": value(pub_attempts, "event_count"),
+            "publications": value(publications), "terminal_failures": len(pub_failures) if coverage["failures"] == "full" else None},
+        "simone": {"report_outcomes": value(report_publications),
+            "terminal_failures": len(simone_failures) if coverage["failures"] == "full" else None,
+            "legacy_errors_are_terminal": False},
+        "ai_operations": ai,
+    }
+    if coverage["p1_1"] != "full":
+        unavailable_metric = {"event_count": None, "unique_content_count": None, "content_ids": None}
+        result["bounded_event_count"] = None
+        result["runs"] = {"event_count": None, "unique_run_count": None, "value": None}
+        result["publication"]["news"] = dict(unavailable_metric)
+        result["publication"]["reports"] = dict(unavailable_metric)
+        result["publication"]["unique_news_publications"] = None
+        result["publication"]["unique_report_publications"] = None
+        result["funnel"]["metrics"] = {key: dict(unavailable_metric) for key in result["funnel"]["metrics"]}
+        for key in ("unique_actionable_candidates", "unique_downstream_handoffs",
+                    "unique_final_publications", "handoff_to_publication_ratio"):
+            result["funnel"][key] = None
+        result["funnel"]["reason_code_distributions"] = None
+        result["funnel"]["content_lifecycle"] = None
+    return result
+
+
+def _without_authoritative_numbers(value: Any) -> Any:
+    """Preserve diagnostic structure while suppressing totals from corrupt canonical input."""
+    if isinstance(value, dict):
+        return {key: _without_authoritative_numbers(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [_without_authoritative_numbers(item) for item in value]
+    return None if isinstance(value, (int, float)) and not isinstance(value, bool) else value
+
+
+def _artifact_snapshot(root: Path, since: datetime, until: datetime) -> tuple[dict[str, Any], dict[str, Any]]:
+    from agents.canonical_artifact_reader import read_artifact_index, verify_artifact_row
+    roles = ("source_material", "translated_candidate", "quality_review", "final_published_material")
+    index = read_artifact_index(root)
+    if not index.get("available"):
+        return {"role_coverage": {role: {"artifact_count": None, "unique_content_count": None}
+                                  for role in roles}, "unavailability_reason": index.get("reason")}, section_metadata(
+            available=False, source=index.get("source", "canonical_artifact_index"), coverage="unavailable",
+            warnings=index.get("diagnostic_mismatches"), reason=index.get("reason"))
+    rows = [row for values in index["rows_by_content_id"].values() for row in values]
+    dated = [parse_utc_datetime(row.get("manifested_at_utc")) for row in rows]
+    dated = [dt for dt in dated if dt]
+    coverage = "full" if dated and min(dated) <= since else ("partial" if dated else "unavailable")
+    bounded = [row for row in rows if in_window_dt(parse_utc_datetime(row.get("manifested_at_utc")), since, until)]
+    role_coverage = {}
+    integrity_mismatches = list(index.get("diagnostic_mismatches") or [])
+    for role in roles:
+        selected = [row for row in bounded if role in row.get("semantic_roles", [])]
+        verified = []
+        for row in selected:
+            valid, failure = verify_artifact_row(root, row)
+            if valid:
+                verified.append(row)
+            else:
+                integrity_mismatches.append(f"{row.get('artifact_id')}:{role}:{failure}")
+        role_coverage[role] = {"artifact_count": len(verified) if coverage == "full" else None,
+            "unique_content_count": len({row["content_id"] for row in verified}) if coverage == "full" else None}
+    reason = None if coverage == "full" else "canonical_artifact_index_cutover_inside_window"
+    return {"role_coverage": role_coverage, "report_material": {"available": False,
+        "reason": "p1_2_report_material_retention_out_of_scope"}}, section_metadata(
+            available=coverage != "unavailable", source=index["source"], coverage=coverage,
+            warnings=integrity_mismatches, reason=reason)
+
+
 def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow_tail_fallback: bool = True) -> dict[str, Any]:
     from agents.gemini_diagnostics import build_gemini_diagnostics, load_ledger
     runs, sources, warnings, authority_available, source_health = load_master_runs(
@@ -694,6 +925,54 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
             simone[key] = None
     warnings += gemini_warnings
     warnings += funnel.get("schema_warnings", []) + andrea.get("schema_warnings", []) + alfred.get("schema_warnings", []) + dup_warnings
+    event_path = root / "state/newsroom/canonical_event_ledger.jsonl"
+    canonical_rows, canonical_warnings, canonical_readable, canonical_malformed = load_jsonl_defensively(event_path)
+    p1_4_event_metadata_present = event_path.exists() and bool(canonical_rows or canonical_malformed)
+    from agents.canonical_event_ledger import validate_event
+    canonical_validation_errors = [(index, validate_event(row)) for index, row in enumerate(canonical_rows, 1)]
+    canonical_validation_errors = [(index, errors) for index, errors in canonical_validation_errors if errors]
+    p1_1_coverage, p1_1_reason = _coverage_from_cutover(canonical_rows, canonical_readable, since, until)
+    p1_3_coverage, p1_3_reason = _coverage_from_cutover(canonical_rows, canonical_readable, since, until,
+                                                       family="p1_3_core")
+    active_ai_coverage, active_ai_reason = _coverage_from_cutover(canonical_rows, canonical_readable, since, until,
+                                                                 family="full_active_ai")
+    coverages = {"p1_1": p1_1_coverage, "ai": active_ai_coverage,
+                 "warnings": p1_3_coverage, "failures": p1_3_coverage}
+    integrity_reason = None
+    if canonical_malformed or canonical_validation_errors:
+        integrity_reason = ("canonical_event_ledger_malformed_json" if canonical_malformed
+                            else "canonical_event_ledger_schema_invalid")
+        coverages = {family: "unavailable" for family in coverages}
+        p1_1_coverage = p1_3_coverage = active_ai_coverage = "unavailable"
+        p1_1_reason = p1_3_reason = active_ai_reason = integrity_reason
+    canonical = _canonical_event_sections(canonical_rows, since, until, coverages)
+    if integrity_reason:
+        canonical = _without_authoritative_numbers(canonical)
+        if canonical_malformed:
+            canonical_warnings.append(f"canonical_event_ledger_malformed_json:{canonical_malformed}")
+        for index, errors in canonical_validation_errors:
+            canonical_warnings.append(f"canonical_event_ledger_schema_invalid:{index}:{'|'.join(errors)}")
+    artifacts, artifact_metadata = _artifact_snapshot(root, since, until)
+    def family_metadata(family: str, reason: str | None) -> dict[str, Any]:
+        state = coverages[family]
+        return section_metadata(available=state != "unavailable", source="state/newsroom/canonical_event_ledger.jsonl",
+                                coverage=state, warnings=canonical_warnings, reason=reason)
+    p1_1_metadata = family_metadata("p1_1", p1_1_reason)
+    ai_metadata = family_metadata("ai", active_ai_reason)
+    p1_3_core_metadata = section_metadata(available=p1_3_coverage != "unavailable",
+        source="state/newsroom/canonical_event_ledger.jsonl", coverage=p1_3_coverage,
+        warnings=canonical_warnings, reason=p1_3_reason)
+    warning_metadata = family_metadata("warnings", p1_3_reason)
+    failure_metadata = family_metadata("failures", p1_3_reason)
+    for section_name in ("runs", "publication", "funnel"):
+        canonical[section_name]["metadata"] = dict(p1_1_metadata)
+    canonical["alfred"]["metadata"] = {"review_lifecycle": p1_1_metadata,
+                                       "warning_occurrences": warning_metadata,
+                                       "final_failures": failure_metadata}
+    canonical["publisher"]["metadata"] = {"lifecycle": p1_1_metadata, "terminal_failures": failure_metadata}
+    canonical["simone"]["metadata"] = {"lifecycle": p1_1_metadata, "terminal_failures": failure_metadata}
+    canonical["ai_operations"]["metadata"] = ai_metadata
+    artifacts["metadata"] = dict(artifact_metadata)
     return {
         "schema_version": SCHEMA_VERSION,
         "metric_contract_version": METRIC_CONTRACT_VERSION,
@@ -710,12 +989,21 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
         "alfred": alfred,
         "gemini": gemini,
         "simone": simone,
+        "authoritative": {**canonical, "artifacts": artifacts},
         "section_metadata": {
             "menzo": section_metadata(available=authority_available, source="master_log", coverage={"runs": len(in_window_runs)}, warnings=funnel.get("schema_warnings"), reason="master_log_authority_unavailable"),
             "andrea": section_metadata(available=authority_available and andrea.get("available") is True, source="master_log.andrea.handoff", coverage={"covered_runs": andrea.get("covered_runs", 0), "total_runs": andrea.get("total_runs", 0)}, warnings=andrea.get("schema_warnings"), reason="andrea_event_stream_unavailable"),
             "alfred": section_metadata(available=authority_available, source="master_log", coverage={"runs": len(in_window_runs)}, warnings=alfred.get("schema_warnings"), reason="master_log_authority_unavailable"),
             "gemini": section_metadata(available=gemini_available, source="state/newsroom/gemini_call_ledger.jsonl", coverage={**gemini_health, "bounded_records": len(gemini_records)}, warnings=gemini_warnings, reason="gemini_ledger_unavailable_for_bounded_metrics"),
             "simone": section_metadata(available=authority_available, source="master_log.simone", coverage={"runs": len(in_window_runs)}, reason="master_log_authority_unavailable"),
+            **({"canonical_events": p1_1_metadata,
+                "p1_1_lifecycle": p1_1_metadata,
+                "p1_3_ai_operations": ai_metadata,
+                "p1_3_core_ai_operations": p1_3_core_metadata,
+                "p1_3_warning_occurrences": warning_metadata,
+                "p1_3_failure_semantics": failure_metadata}
+               if p1_4_event_metadata_present else {}),
+            "artifacts": artifact_metadata,
         },
         "gemini_summary_if_available": {"duplicate_arbitration_calls": (dup.get("counters") or {}).get("gemini_calls_used_for_duplicate_arbitration") if dup.get("available") else None},
         "diagnostics": {"legacy_duplicate_signals": legacy, "master_runs_in_window": len(in_window_runs), **source_health, **repository_diagnostics(root)},

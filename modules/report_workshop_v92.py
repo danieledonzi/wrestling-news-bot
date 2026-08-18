@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 from agents.gemini_ledger import make_operation_id, record_gemini_attempt, record_gemini_event
+from agents.canonical_event_ledger import OperationalAIRequest
 from urllib.parse import parse_qs, urljoin, urlparse
 import time
 import base64
@@ -671,27 +672,45 @@ def is_temporary_gemini_error(exc: Exception) -> bool:
 
 
 def generate_json(prompt: str, chain_name: str = "unknown", cooldown_models: Optional[set[str]] = None, ledger_context: Optional[Dict[str, Any]] = None) -> Tuple[Dict[str, Any], str]:
-    if not GEMINI_API_KEY:
-        raise RuntimeError("GEMINI_API_KEY mancante")
     is_report_chain = chain_name.startswith("report_")
+    context = ledger_context or {}
+    operational_request = (OperationalAIRequest(
+        "Bob", "report_translation", item=None,
+        reason_code="report_translation", report_key=str(context.get("report_key") or ""),
+    ) if is_report_chain else None)
+    if not GEMINI_API_KEY:
+        if operational_request:
+            operational_request.initialization_failed("missing_api_key")
+        raise RuntimeError("GEMINI_API_KEY mancante")
     active_models = REPORT_MODEL_CHAIN if is_report_chain else MODEL_CHAIN
     print(f"[TRANSLATE v92] Chain attiva: {chain_name} | modelli={','.join(active_models)}", flush=True)
     if is_report_chain:
         print(f"[REPORT v95.2] Gemini chain attiva: {','.join(active_models)}", flush=True)
-    client = genai.Client(api_key=GEMINI_API_KEY)
+    try:
+        client = genai.Client(api_key=GEMINI_API_KEY)
+    except Exception:
+        if operational_request:
+            operational_request.initialization_failed()
+        raise
     last: Optional[Exception] = None
     cooldown_models = cooldown_models if cooldown_models is not None else set()
-    context = ledger_context or {}
     operation_id = make_operation_id("Bob", chain_name, context.get("report_id") or context.get("report_key") or context.get("batch") or "report")
     real_attempt_index = 0
     for model in active_models:
         if is_report_chain and model in cooldown_models:
+            if operational_request:
+                operational_request.avoided("report_translation_cooldown")
             record_gemini_event(agent="Bob", phase=chain_name, model=model, status="avoided", reason="report_translation_cooldown", result="cooldown_skipped", pipeline="report", cooldown_skipped=True, purpose=chain_name, **context)
             print(f"[REPORT v95.2] model cooldown skip model={model}", flush=True)
             continue
         print(f"[TRANSLATE v92] Provo modello: {model} | chain={chain_name}", flush=True)
         attempt_index = real_attempt_index
         real_attempt_index += 1
+        canonical_attempt = operational_request.start(
+            model, fallback=operational_request.attempt_number > 0,
+            reason_code="report_translation",
+        ) if operational_request else None
+        attempt_started_at = time.monotonic()
         try:
             res = client.models.generate_content(model=model, contents=prompt)
             data = None
@@ -703,10 +722,18 @@ def generate_json(prompt: str, chain_name: str = "unknown", cooldown_models: Opt
             record_gemini_attempt(response=res, agent="Bob", phase=chain_name, model_requested=model, status="called", reason="report_translation", result="valid_json" if data is not None else "invalid_json", pipeline="report" if is_report_chain else None, operation_id=operation_id, attempt_index=attempt_index, fallback=attempt_index > 0, retry=False, purpose=chain_name, **context)
             if data is None:
                 last = ValueError(parse_error or "invalid_json")
+                if operational_request and canonical_attempt:
+                    later_real_model = any(candidate not in cooldown_models for candidate in active_models[active_models.index(model) + 1:])
+                    operational_request.failed(canonical_attempt, error_class="validation",
+                                               error_terminal=not later_real_model,
+                                               latency_ms=int((time.monotonic() - attempt_started_at) * 1000),
+                                               reason_code="invalid_json")
                 print(f"[TRANSLATE v92] Modello fallito: {model} | chain={chain_name} | error={parse_error or 'invalid_json'}", flush=True)
                 continue
             if is_report_chain:
                 print(f"[REPORT v95.2] model selected model={model} purpose={chain_name}", flush=True)
+            if operational_request and canonical_attempt:
+                operational_request.completed(canonical_attempt, int((time.monotonic() - attempt_started_at) * 1000))
             print(f"[TRANSLATE v92] Modello scelto: {model} | chain={chain_name}", flush=True)
             return data, model
         except Exception as exc:
@@ -715,6 +742,12 @@ def generate_json(prompt: str, chain_name: str = "unknown", cooldown_models: Opt
             if temporary:
                 cooldown_models.add(model)
                 print(f"[REPORT v95.2] model cooldown set model={model} reason={str(exc)[:180]}", flush=True)
+            if operational_request and canonical_attempt:
+                later_real_model = any(candidate not in cooldown_models for candidate in active_models[active_models.index(model) + 1:])
+                operational_request.failed(canonical_attempt, error_class="upstream",
+                                           error_terminal=not later_real_model,
+                                           latency_ms=int((time.monotonic() - attempt_started_at) * 1000),
+                                           reason_code="report_translation_temporary" if temporary else "report_translation")
             record_gemini_attempt(response=None, agent="Bob", phase=chain_name, model_requested=model, status="failed", reason="report_translation_temporary" if temporary else "report_translation", result=str(exc)[:500], pipeline="report" if is_report_chain else None, cooldown_applied=temporary or None, operation_id=operation_id, attempt_index=attempt_index, retry=False, fallback=attempt_index > 0, purpose=chain_name, **context)
             print(f"[TRANSLATE v92] Modello fallito: {model} | chain={chain_name} | error={str(exc)[:220]}", flush=True)
             continue
