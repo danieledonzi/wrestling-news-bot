@@ -601,25 +601,42 @@ def discover(root: Path, hours: int, limit: int | None) -> list[ArticleAudit]:
     published_content_ids: set[str] = set()
     try:
         snap = build_observability_snapshot(since, until, root)
+        metadata = snap.get("section_metadata", {}) if isinstance(snap.get("section_metadata"), dict) else {}
+        p1_1_present = "p1_1_lifecycle" in metadata
+        publication_authority_available = ((metadata.get("p1_1_lifecycle") or {}).get("complete_window") is True
+                                           if p1_1_present else snap.get("authority_available", True) is True)
         authoritative_records = snap.get("publication", {}).get("records", [])
-        publication_authority_available = snap.get("authority_available", True) is True
-        if publication_authority_available:
-            authoritative_keys = authoritative_keys or set()
-        elif authoritative_keys is None:
-            authoritative_keys = None
-        for rec in authoritative_records:
-            aliases = identity_aliases(rec)
-            key = canonical_content_id(rec) or item_key(rec) or next(iter(sorted(aliases)), "")
-            if key:
-                if key.startswith("cnt_"):
-                    published_content_ids.add(key)
-                aliases.add(key)
+        if p1_1_present and publication_authority_available:
+            canonical_publication = (snap.get("authoritative", {}).get("publication", {}).get("news", {}))
+            published_content_ids = set(canonical_publication.get("content_ids") or [])
+            authoritative_keys = set(published_content_ids)
+            for content_id in published_content_ids:
+                articles.setdefault(content_id, ArticleAudit(key=content_id))
+                unmatched_authoritative[content_id] = "no_local_source_or_html_match_yet"
+            for rec in authoritative_records:
+                content_id = canonical_content_id(rec)
+                if content_id not in published_content_ids:
+                    continue
+                aliases = identity_aliases(rec) | {content_id}
                 for alias in aliases:
                     authoritative_keys.add(alias)
-                    alias_to_canonical_key[alias] = key
-                a = articles.setdefault(key, ArticleAudit(key=key))
-                merge_item(a, rec, "observability_snapshot.authoritative_publication")
-                unmatched_authoritative[key] = "no_local_source_or_html_match_yet"
+                    alias_to_canonical_key[alias] = content_id
+                merge_item(articles[content_id], rec, "observability_snapshot.legacy_publication_metadata")
+        elif not p1_1_present:
+            authoritative_keys = set() if publication_authority_available else None
+            for rec in authoritative_records:
+                aliases = identity_aliases(rec)
+                key = canonical_content_id(rec) or item_key(rec) or next(iter(sorted(aliases)), "")
+                if key:
+                    if key.startswith("cnt_"):
+                        published_content_ids.add(key)
+                    aliases.add(key)
+                    for alias in aliases:
+                        authoritative_keys.add(alias)
+                        alias_to_canonical_key[alias] = key
+                    merge_item(articles.setdefault(key, ArticleAudit(key=key)), rec,
+                               "observability_snapshot.pre_p1_4_publication")
+                    unmatched_authoritative[key] = "no_local_source_or_html_match_yet"
     except Exception:
         authoritative_keys = None
     if artifact_index.get("available"):

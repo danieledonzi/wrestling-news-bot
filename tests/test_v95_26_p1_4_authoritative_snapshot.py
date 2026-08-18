@@ -9,6 +9,7 @@ from agents.canonical_event_ledger import CanonicalEventLedger, clear_active_led
 from agents import source_body
 from scripts.observability_snapshot import build_snapshot, _artifact_snapshot, _coverage_from_cutover
 from scripts.translation_quality_audit import discover
+from scripts.daily_editorial_judgment import resolve_p1_1_headline
 
 
 def _rows(path):
@@ -181,6 +182,13 @@ def test_translation_audit_joins_publication_and_material_by_content_id(tmp_path
            "publisher": {"results": [{"source_url": url, "title": "Same title", "status": "published",
                                         "published_at": now.isoformat(), "wp_link": "https://wp.test/one"}]}}
     (state / "master_log.jsonl").write_text(json.dumps(run) + "\n")
+    events = CanonicalEventLedger("run", state / "canonical_event_ledger.jsonl")
+    events.event("run_started", "Jarvis", "runtime", "started")
+    events.event("publication_completed", "Publisher", "publication", "success", item={"source_url": url})
+    event_rows = _rows(events.path)
+    event_rows[0]["timestamp_utc"] = (now - timedelta(hours=25)).isoformat()
+    event_rows[1]["timestamp_utc"] = now.isoformat()
+    events.path.write_text("\n".join(json.dumps(row) for row in event_rows) + "\n")
     rows = discover(tmp_path, 24, None)
     canonical = [row for row in rows if row.key.startswith("cnt_")]
     assert len(canonical) == 1
@@ -197,7 +205,7 @@ def test_snapshot_unique_windowing_zero_and_partial(tmp_path):
     ledger.event("candidate_selected", "Menzo", "selection", "success", item={"source_url": "https://x/a"})
     rows = _rows(path)
     rows[0]["timestamp_utc"] = old.isoformat()
-    coverage_marker = dict(rows[0], event_type="run_started", agent="Runner", stage="run",
+    coverage_marker = dict(rows[0], event_type="run_started", agent="Jarvis", stage="runtime",
                            status="started", timestamp_utc=(old - timedelta(hours=10)).isoformat())
     coverage_marker.pop("content_id", None); coverage_marker.pop("correlation_id", None); coverage_marker.pop("article_id", None)
     duplicate = dict(rows[0], run_id="new", timestamp_utc=(old + timedelta(hours=40)).isoformat())
@@ -211,6 +219,10 @@ def test_snapshot_unique_windowing_zero_and_partial(tmp_path):
     partial = build_snapshot(until - timedelta(hours=72), until, tmp_path)
     assert partial["section_metadata"]["canonical_events"]["coverage"] == "partial"
     assert partial["authoritative"]["publication"]["unique_news_publications"] is None
+    assert partial["authoritative"]["publication"]["news"]["content_ids"] is None
+    assert partial["authoritative"]["runs"]["event_count"] is None
+    assert partial["authoritative"]["funnel"]["metrics"]["menzo_unique_selected"]["event_count"] is None
+    assert partial["authoritative"]["funnel"]["metrics"]["menzo_unique_selected"]["content_ids"] is None
 
 
 def test_section_specific_cutover_actionable_ai_and_final_blockers(tmp_path):
@@ -223,7 +235,7 @@ def test_section_specific_cutover_actionable_ai_and_final_blockers(tmp_path):
     rows = _rows(path)
     rows[0]["timestamp_utc"] = (since - timedelta(hours=1)).isoformat()
     rows[1]["timestamp_utc"] = (since + timedelta(hours=1)).isoformat()
-    marker = dict(rows[0], event_type="run_started", agent="Runner", stage="run", status="started",
+    marker = dict(rows[0], event_type="run_started", agent="Jarvis", stage="runtime", status="started",
                   timestamp_utc=(since + timedelta(hours=12)).isoformat(), code_commit="ca0fdf1ca9a3d27e94f13570c754047c7203251f")
     for key in ("content_id", "correlation_id", "article_id"):
         marker.pop(key, None)
@@ -286,7 +298,7 @@ def test_warning_events_are_reviews_not_occurrences(tmp_path):
     for number, row in enumerate(rows):
         row["timestamp_utc"] = (now - timedelta(minutes=30) + timedelta(seconds=number)).isoformat()
         row["code_commit"] = "ca0fdf1ca9a3d27e94f13570c754047c7203251f"
-    marker = dict(rows[0], event_type="run_started", agent="Runner", stage="run", status="started",
+    marker = dict(rows[0], event_type="run_started", agent="Jarvis", stage="runtime", status="started",
                   timestamp_utc=(now - timedelta(hours=2)).isoformat())
     for key in ("content_id", "correlation_id", "article_id", "reason_code", "result"):
         marker.pop(key, None)
@@ -310,6 +322,38 @@ def test_malformed_canonical_ledger_suppresses_all_authoritative_totals(tmp_path
     assert snap["section_metadata"]["p1_1_lifecycle"]["unavailability_reason"] == "canonical_event_ledger_malformed_json"
     assert snap["authoritative"]["publication"]["unique_news_publications"] is None
     assert snap["authoritative"]["funnel"]["metrics"]["menzo_unique_selected"]["event_count"] is None
+    assert snap["authoritative"]["funnel"]["metrics"]["menzo_unique_selected"]["content_ids"] is None
+
+
+@pytest.mark.parametrize("conditional", [False, True])
+def test_schema_invalid_canonical_event_invalidates_authority(tmp_path, conditional):
+    path = tmp_path / "state/newsroom/canonical_event_ledger.jsonl"; path.parent.mkdir(parents=True)
+    now = datetime.now(timezone.utc); ledger = CanonicalEventLedger("run", path)
+    ledger.event("run_started", "Jarvis", "runtime", "started")
+    rows = _rows(path); rows[0]["timestamp_utc"] = (now - timedelta(hours=2)).isoformat()
+    invalid = dict(rows[0]) if not conditional else {
+        **rows[0], "event_type": "model_attempt_started", "agent": "Gemini", "stage": "model", "status": "started"}
+    if conditional:
+        invalid.pop("content_id", None); invalid.pop("correlation_id", None)
+    else:
+        invalid.pop("run_id")
+    invalid["timestamp_utc"] = (now - timedelta(minutes=10)).isoformat()
+    path.write_text("\n".join(json.dumps(row) for row in [rows[0], invalid]) + "\n")
+    snap = build_snapshot(now - timedelta(hours=1), now, tmp_path)
+    metadata = snap["section_metadata"]["p1_1_lifecycle"]
+    assert metadata["available"] is False
+    assert metadata["unavailability_reason"] == "canonical_event_ledger_schema_invalid"
+    assert any("canonical_event_ledger_schema_invalid" in item for item in metadata["diagnostic_mismatches"])
+
+
+def test_daily_headline_obeys_present_p1_1_authority_boundary():
+    authoritative = {"runs": {"value": 2},
+        "publication": {"unique_news_publications": 3, "unique_report_publications": 1}}
+    legacy = (9, 10, 11)
+    assert resolve_p1_1_headline({}, authoritative, legacy) == legacy
+    assert resolve_p1_1_headline({"p1_1_lifecycle": {"complete_window": True}}, authoritative, legacy) == (2, 3, 1)
+    assert resolve_p1_1_headline({"p1_1_lifecycle": {"complete_window": False}}, authoritative, legacy) == (None, None, None)
+    assert resolve_p1_1_headline({"p1_1_lifecycle": {"available": False}}, authoritative, legacy) == (None, None, None)
 
 
 @pytest.mark.parametrize("damage,expected", [("valid", 1), ("missing", 0), ("sha", 0)])
@@ -320,14 +364,31 @@ def test_artifact_snapshot_counts_only_verified_bytes(tmp_path, damage, expected
     index.observe_bob({"articles": [{"source_url": url, "status": "ready_for_alfred",
         "canonical_source_body": _contract(url), "body_html": "<p>candidate</p>"}]})
     rows = _rows(path); candidate = next(row for row in rows if row["semantic_roles"] == ["translated_candidate"])
+    now = datetime.now(timezone.utc)
+    source = next(row for row in rows if row["semantic_roles"] == ["source_material"])
+    source["manifested_at_utc"] = (now - timedelta(hours=2)).isoformat()
+    path.write_text("\n".join(json.dumps(row) for row in rows) + "\n")
     if damage == "missing":
         (tmp_path / candidate["path"]).unlink()
     elif damage == "sha":
         (tmp_path / candidate["path"]).write_text("tampered")
-    now = datetime.now(timezone.utc)
     snapshot, metadata = _artifact_snapshot(tmp_path, now - timedelta(hours=1), now + timedelta(hours=1))
     assert snapshot["role_coverage"]["translated_candidate"]["artifact_count"] == expected
     assert bool(metadata["diagnostic_mismatches"]) is (damage != "valid")
+
+
+def test_artifact_counts_are_null_for_partial_and_unavailable_coverage(tmp_path):
+    path = tmp_path / "state/newsroom/canonical_artifact_index.jsonl"
+    index = CanonicalArtifactIndex("run", path, tmp_path / "materials", repository_root=tmp_path)
+    index.observe_bob({"articles": [{"source_url": "https://x/partial", "status": "ready_for_alfred",
+        "canonical_source_body": _contract("https://x/partial"), "body_html": "<p>candidate</p>"}]})
+    now = datetime.now(timezone.utc)
+    partial, partial_metadata = _artifact_snapshot(tmp_path, now - timedelta(hours=1), now + timedelta(hours=1))
+    assert partial_metadata["coverage"] == "partial"
+    assert partial["role_coverage"]["translated_candidate"] == {"artifact_count": None, "unique_content_count": None}
+    unavailable, unavailable_metadata = _artifact_snapshot(tmp_path / "missing", now - timedelta(hours=1), now)
+    assert unavailable_metadata["coverage"] == "unavailable"
+    assert unavailable["role_coverage"]["translated_candidate"] == {"artifact_count": None, "unique_content_count": None}
 
 
 def test_artifact_index_never_seeds_fallback_publication_population(tmp_path):
@@ -339,6 +400,38 @@ def test_artifact_index_never_seeds_fallback_publication_population(tmp_path):
     old.observe_bob({"articles": [{"source_url": "https://x/old", "status": "ready_for_alfred",
         "canonical_source_body": _contract("https://x/old"), "body_html": "<p>old</p>"}]})
     assert [row for row in discover(tmp_path, 24, None) if row.key.startswith("cnt_")] == []
+
+
+def test_translation_audit_rejects_legacy_publication_when_canonical_partial(tmp_path):
+    now = datetime.now(timezone.utc); state = tmp_path / "state/newsroom"; state.mkdir(parents=True)
+    url = "https://x/legacy-only"
+    run = {"schema_version": "v93_19_fixture", "recorded_at": now.isoformat(),
+           "run": {"run_id": "run", "started_at": now.isoformat(), "ended_at": now.isoformat(), "runtime_exit_code": 0},
+           "publisher": {"results": [{"source_url": url, "status": "published", "published_at": now.isoformat()}]}}
+    (state / "master_log.jsonl").write_text(json.dumps(run) + "\n")
+    events = CanonicalEventLedger("run", state / "canonical_event_ledger.jsonl")
+    events.event("publication_completed", "Publisher", "publication", "success", item={"source_url": url})
+    assert [row for row in discover(tmp_path, 24, None) if row.key.startswith("cnt_")] == []
+
+
+def test_translation_audit_uses_canonical_publication_without_master_log(tmp_path):
+    now = datetime.now(timezone.utc); state = tmp_path / "state/newsroom"; state.mkdir(parents=True)
+    url = "https://x/canonical-only"
+    index = CanonicalArtifactIndex("run", state / "canonical_artifact_index.jsonl",
+                                   tmp_path / "materials", repository_root=tmp_path)
+    index.observe_bob({"articles": [{"source_url": url, "status": "ready_for_alfred",
+        "canonical_source_body": _contract(url), "body_html": "<p>candidate</p>"}]})
+    index.observe_publisher({"results": [{"source_url": url, "status": "published",
+        "published_cleaned_full_text": "final"}]})
+    events = CanonicalEventLedger("run", state / "canonical_event_ledger.jsonl")
+    events.event("run_started", "Jarvis", "runtime", "started")
+    events.event("publication_completed", "Publisher", "publication", "success", item={"source_url": url})
+    rows = _rows(events.path); rows[0]["timestamp_utc"] = (now - timedelta(hours=25)).isoformat()
+    rows[1]["timestamp_utc"] = now.isoformat()
+    events.path.write_text("\n".join(json.dumps(row) for row in rows) + "\n")
+    audited = [row for row in discover(tmp_path, 24, None) if row.key.startswith("cnt_")]
+    assert len(audited) == 1
+    assert audited[0].source_material_available and audited[0].final_published_material_available
 
 
 def test_pre_attempt_and_model_terminal_requests_count_once(monkeypatch, tmp_path):
@@ -389,7 +482,7 @@ def test_final_blockers_resolve_only_after_later_approval_or_publication(tmp_pat
     for number, row in enumerate(rows):
         row["timestamp_utc"] = (now - timedelta(hours=1) + timedelta(minutes=number)).isoformat()
         row["code_commit"] = "ca0fdf1ca9a3d27e94f13570c754047c7203251f"
-    marker = dict(rows[0], event_type="run_started", agent="Runner", stage="run", status="started",
+    marker = dict(rows[0], event_type="run_started", agent="Jarvis", stage="runtime", status="started",
                   timestamp_utc=(now - timedelta(hours=3)).isoformat())
     for key in ("content_id", "correlation_id", "article_id", "reason_code", "result"):
         marker.pop(key, None)

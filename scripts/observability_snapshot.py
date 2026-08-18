@@ -798,8 +798,11 @@ def _canonical_event_sections(rows: list[dict[str, Any]], since: datetime, until
     ai["terminal_failures"] = len({request_id for request_id in terminal_request_ids if request_id})
     if coverage["ai"] != "full" or not lifecycle_complete:
         ai = {key: None for key in ai}
-    ai["lifecycle_complete"] = lifecycle_complete
-    return {
+        lifecycle_complete_value = None
+    else:
+        lifecycle_complete_value = True
+    ai["lifecycle_complete"] = lifecycle_complete_value
+    result = {
         "bounded_event_count": len(bounded), "runs": {"event_count": len(by_type.get("run_completed", [])),
             "unique_run_count": len({r.get("run_id") for r in by_type.get("run_completed", []) if r.get("run_id")}),
             "value": value(metric("run_completed"), "event_count")},
@@ -826,6 +829,21 @@ def _canonical_event_sections(rows: list[dict[str, Any]], since: datetime, until
             "legacy_errors_are_terminal": False},
         "ai_operations": ai,
     }
+    if coverage["p1_1"] != "full":
+        unavailable_metric = {"event_count": None, "unique_content_count": None, "content_ids": None}
+        result["bounded_event_count"] = None
+        result["runs"] = {"event_count": None, "unique_run_count": None, "value": None}
+        result["publication"]["news"] = dict(unavailable_metric)
+        result["publication"]["reports"] = dict(unavailable_metric)
+        result["publication"]["unique_news_publications"] = None
+        result["publication"]["unique_report_publications"] = None
+        result["funnel"]["metrics"] = {key: dict(unavailable_metric) for key in result["funnel"]["metrics"]}
+        for key in ("unique_actionable_candidates", "unique_downstream_handoffs",
+                    "unique_final_publications", "handoff_to_publication_ratio"):
+            result["funnel"][key] = None
+        result["funnel"]["reason_code_distributions"] = None
+        result["funnel"]["content_lifecycle"] = None
+    return result
 
 
 def _without_authoritative_numbers(value: Any) -> Any:
@@ -839,9 +857,11 @@ def _without_authoritative_numbers(value: Any) -> Any:
 
 def _artifact_snapshot(root: Path, since: datetime, until: datetime) -> tuple[dict[str, Any], dict[str, Any]]:
     from agents.canonical_artifact_reader import read_artifact_index, verify_artifact_row
+    roles = ("source_material", "translated_candidate", "quality_review", "final_published_material")
     index = read_artifact_index(root)
     if not index.get("available"):
-        return {"role_coverage": {}, "unavailability_reason": index.get("reason")}, section_metadata(
+        return {"role_coverage": {role: {"artifact_count": None, "unique_content_count": None}
+                                  for role in roles}, "unavailability_reason": index.get("reason")}, section_metadata(
             available=False, source=index.get("source", "canonical_artifact_index"), coverage="unavailable",
             warnings=index.get("diagnostic_mismatches"), reason=index.get("reason"))
     rows = [row for values in index["rows_by_content_id"].values() for row in values]
@@ -851,7 +871,7 @@ def _artifact_snapshot(root: Path, since: datetime, until: datetime) -> tuple[di
     bounded = [row for row in rows if in_window_dt(parse_utc_datetime(row.get("manifested_at_utc")), since, until)]
     role_coverage = {}
     integrity_mismatches = list(index.get("diagnostic_mismatches") or [])
-    for role in ("source_material", "translated_candidate", "quality_review", "final_published_material"):
+    for role in roles:
         selected = [row for row in bounded if role in row.get("semantic_roles", [])]
         verified = []
         for row in selected:
@@ -860,7 +880,7 @@ def _artifact_snapshot(root: Path, since: datetime, until: datetime) -> tuple[di
                 verified.append(row)
             else:
                 integrity_mismatches.append(f"{row.get('artifact_id')}:{role}:{failure}")
-        role_coverage[role] = {"artifact_count": len(verified),
+        role_coverage[role] = {"artifact_count": len(verified) if coverage == "full" else None,
             "unique_content_count": len({row["content_id"] for row in verified}) if coverage == "full" else None}
     reason = None if coverage == "full" else "canonical_artifact_index_cutover_inside_window"
     return {"role_coverage": role_coverage, "report_material": {"available": False,
@@ -907,6 +927,10 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
     warnings += funnel.get("schema_warnings", []) + andrea.get("schema_warnings", []) + alfred.get("schema_warnings", []) + dup_warnings
     event_path = root / "state/newsroom/canonical_event_ledger.jsonl"
     canonical_rows, canonical_warnings, canonical_readable, canonical_malformed = load_jsonl_defensively(event_path)
+    p1_4_event_metadata_present = event_path.exists() and bool(canonical_rows or canonical_malformed)
+    from agents.canonical_event_ledger import validate_event
+    canonical_validation_errors = [(index, validate_event(row)) for index, row in enumerate(canonical_rows, 1)]
+    canonical_validation_errors = [(index, errors) for index, errors in canonical_validation_errors if errors]
     p1_1_coverage, p1_1_reason = _coverage_from_cutover(canonical_rows, canonical_readable, since, until)
     p1_3_coverage, p1_3_reason = _coverage_from_cutover(canonical_rows, canonical_readable, since, until,
                                                        family="p1_3_core")
@@ -915,14 +939,19 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
     coverages = {"p1_1": p1_1_coverage, "ai": active_ai_coverage,
                  "warnings": p1_3_coverage, "failures": p1_3_coverage}
     integrity_reason = None
-    if canonical_malformed:
-        integrity_reason = "canonical_event_ledger_malformed_json"
+    if canonical_malformed or canonical_validation_errors:
+        integrity_reason = ("canonical_event_ledger_malformed_json" if canonical_malformed
+                            else "canonical_event_ledger_schema_invalid")
         coverages = {family: "unavailable" for family in coverages}
+        p1_1_coverage = p1_3_coverage = active_ai_coverage = "unavailable"
         p1_1_reason = p1_3_reason = active_ai_reason = integrity_reason
     canonical = _canonical_event_sections(canonical_rows, since, until, coverages)
     if integrity_reason:
         canonical = _without_authoritative_numbers(canonical)
-        canonical_warnings.append(f"{integrity_reason}:{canonical_malformed}")
+        if canonical_malformed:
+            canonical_warnings.append(f"canonical_event_ledger_malformed_json:{canonical_malformed}")
+        for index, errors in canonical_validation_errors:
+            canonical_warnings.append(f"canonical_event_ledger_schema_invalid:{index}:{'|'.join(errors)}")
     artifacts, artifact_metadata = _artifact_snapshot(root, since, until)
     def family_metadata(family: str, reason: str | None) -> dict[str, Any]:
         state = coverages[family]
@@ -967,12 +996,13 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
             "alfred": section_metadata(available=authority_available, source="master_log", coverage={"runs": len(in_window_runs)}, warnings=alfred.get("schema_warnings"), reason="master_log_authority_unavailable"),
             "gemini": section_metadata(available=gemini_available, source="state/newsroom/gemini_call_ledger.jsonl", coverage={**gemini_health, "bounded_records": len(gemini_records)}, warnings=gemini_warnings, reason="gemini_ledger_unavailable_for_bounded_metrics"),
             "simone": section_metadata(available=authority_available, source="master_log.simone", coverage={"runs": len(in_window_runs)}, reason="master_log_authority_unavailable"),
-            "canonical_events": p1_1_metadata,
-            "p1_1_lifecycle": p1_1_metadata,
-            "p1_3_ai_operations": ai_metadata,
-            "p1_3_core_ai_operations": p1_3_core_metadata,
-            "p1_3_warning_occurrences": warning_metadata,
-            "p1_3_failure_semantics": failure_metadata,
+            **({"canonical_events": p1_1_metadata,
+                "p1_1_lifecycle": p1_1_metadata,
+                "p1_3_ai_operations": ai_metadata,
+                "p1_3_core_ai_operations": p1_3_core_metadata,
+                "p1_3_warning_occurrences": warning_metadata,
+                "p1_3_failure_semantics": failure_metadata}
+               if p1_4_event_metadata_present else {}),
             "artifacts": artifact_metadata,
         },
         "gemini_summary_if_available": {"duplicate_arbitration_calls": (dup.get("counters") or {}).get("gemini_calls_used_for_duplicate_arbitration") if dup.get("available") else None},

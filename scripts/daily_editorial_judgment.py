@@ -735,6 +735,18 @@ def _gemini_35_calls(data: dict[str, Any]) -> int | str:
     return _nested(ledger, "models", "gemini-3.5", "called") or _nested(ledger, "gemini_3_5_called_total") or "n.d."
 
 
+def resolve_p1_1_headline(section_metadata: dict[str, Any], authoritative: dict[str, Any],
+                          legacy: tuple[Any, Any, Any]) -> tuple[Any, Any, Any]:
+    """Prevent legacy headline totals from crossing a present P1.4 authority boundary."""
+    if "p1_1_lifecycle" not in section_metadata:
+        return legacy
+    if (section_metadata.get("p1_1_lifecycle") or {}).get("complete_window") is not True:
+        return None, None, None
+    return (authoritative.get("runs", {}).get("value"),
+            authoritative.get("publication", {}).get("unique_news_publications"),
+            authoritative.get("publication", {}).get("unique_report_publications"))
+
+
 def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, source_artifacts_used: list[str] | None = None, missing_artifacts: list[str] | None = None) -> dict[str, Any]:
     generated_at = generated_at or datetime.now(timezone.utc)
     status = data.get("__artifact_status__", {}) if isinstance(data.get("__artifact_status__"), dict) else {}
@@ -899,10 +911,8 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
         runs_completed = parsed_md.get("runs_completed")
         news_published_count = (parsed_md.get("news_count") if markdown_news_available and official_counts_authoritative else (len(concrete_news) if concrete_news else (parsed_md.get("news_count") if markdown_news_available else (0 if news_stream_available else None))))
         reports_published_count = (parsed_md.get("reports_count") if markdown_reports_available and official_counts_authoritative else (len(concrete_reports) if concrete_reports else (parsed_md.get("reports_count") if markdown_reports_available else (0 if report_stream_available else None))))
-    if p14_p1_1_complete:
-        news_published_count = p14.get("publication", {}).get("unique_news_publications")
-        reports_published_count = p14.get("publication", {}).get("unique_report_publications")
-        runs_completed = p14.get("runs", {}).get("value")
+    runs_completed, news_published_count, reports_published_count = resolve_p1_1_headline(
+        section_metadata, p14, (runs_completed, news_published_count, reports_published_count))
     if p14_warning_complete:
         warnings = p14.get("alfred", {}).get("warning_occurrences")
     if p14_failure_complete:
