@@ -60,9 +60,15 @@ def read_artifact_index(root: Path, index_path: Path | None = None) -> dict[str,
     if not path.exists():
         return {"available": False, "rows_by_content_id": {}, "diagnostic_mismatches": [],
                 "reason": "canonical_artifact_index_unavailable", "source": INDEX_PATH}
+    try:
+        lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+    except (OSError, PermissionError) as exc:
+        return {"available": False, "rows_by_content_id": {},
+                "diagnostic_mismatches": [f"index_read_failed:{type(exc).__name__}"],
+                "reason": "canonical_artifact_index_unreadable", "source": INDEX_PATH}
     grouped: dict[str, list[dict[str, Any]]] = {}
     mismatches: list[str] = []
-    for number, line in enumerate(path.read_text(encoding="utf-8", errors="replace").splitlines(), 1):
+    for number, line in enumerate(lines, 1):
         if not line.strip():
             continue
         try:

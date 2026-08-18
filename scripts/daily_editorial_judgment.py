@@ -747,6 +747,41 @@ def resolve_p1_1_headline(section_metadata: dict[str, Any], authoritative: dict[
             authoritative.get("publication", {}).get("unique_report_publications"))
 
 
+def resolve_p1_4_canonical_payloads(section_metadata: dict[str, Any], authoritative: dict[str, Any],
+                                    legacy: dict[str, dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    """Apply present/full/incomplete P1.4 boundaries to serialized canonical payloads."""
+    resolved = dict(legacy)
+    boundaries = {
+        "menzo": ("p1_1_lifecycle",),
+        "alfred": ("p1_3_warning_occurrences", "p1_3_failure_semantics"),
+        "gemini": ("p1_3_ai_operations",),
+        "simone": ("p1_1_lifecycle", "p1_3_failure_semantics"),
+    }
+    sources = {"menzo": "funnel", "alfred": "alfred", "gemini": "ai_operations", "simone": "simone"}
+    for name, families in boundaries.items():
+        present = [family for family in families if family in section_metadata]
+        if not present:
+            continue
+        if any((section_metadata.get(family) or {}).get("complete_window") is True for family in present):
+            resolved[name] = authoritative.get(sources[name], {})
+        else:
+            resolved[name] = {}
+    return resolved
+
+
+def resolve_editorial_classifications(section_metadata: dict[str, Any], news_count: int | None,
+                                       report_count: int | None, hard_count: int | None,
+                                       story_reviews: int | None, has_top_discarded: bool) -> tuple[str | None, str | None]:
+    if ("p1_1_lifecycle" in section_metadata and
+            (section_metadata.get("p1_1_lifecycle") or {}).get("complete_window") is not True):
+        return None, None
+    dtype = day_type(news_count, report_count, hard_count, story_reviews)
+    published_total = (news_count or 0) + (report_count or 0)
+    judgment = ("OTTIMO" if (hard_count or 0) >= 8 and not has_top_discarded else
+                "BUONO" if published_total >= 8 else "DISCRETO" if published_total >= 3 else "DEBOLE")
+    return dtype, judgment
+
+
 def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, source_artifacts_used: list[str] | None = None, missing_artifacts: list[str] | None = None) -> dict[str, Any]:
     generated_at = generated_at or datetime.now(timezone.utc)
     status = data.get("__artifact_status__", {}) if isinstance(data.get("__artifact_status__"), dict) else {}
@@ -783,8 +818,6 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
     snapshot_authoritative = bool(snapshot_root is not None and observability and observability.get("authority_available") is True)
     section_metadata = observability.get("section_metadata", {}) if isinstance(observability, dict) else {}
     p14 = observability.get("authoritative", {}) if isinstance(observability, dict) else {}
-    p14_p1_1_complete = (section_metadata.get("p1_1_lifecycle") or {}).get("complete_window") is True
-    p14_ai_complete = (section_metadata.get("p1_3_ai_operations") or {}).get("complete_window") is True
     p14_warning_complete = (section_metadata.get("p1_3_warning_occurrences") or {}).get("complete_window") is True
     p14_failure_complete = (section_metadata.get("p1_3_failure_semantics") or {}).get("complete_window") is True
     menzo_authoritative = (section_metadata.get("menzo") or {}).get("available") is True
@@ -878,14 +911,11 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
         canonical_alfred = {**observability.get("alfred", {}).get("events", {}), **observability.get("alfred", {}).get("unique", {})}
     if simone_authoritative:
         canonical_simone = observability.get("simone", {})
-    if p14_p1_1_complete:
-        canonical_menzo = p14.get("funnel", {})
-    if p14_warning_complete or p14_failure_complete:
-        canonical_alfred = p14.get("alfred", {})
-    if p14_ai_complete:
-        canonical_gemini = p14.get("ai_operations", {})
-    if p14_p1_1_complete or p14_failure_complete:
-        canonical_simone = p14.get("simone", {})
+    canonical_payloads = resolve_p1_4_canonical_payloads(section_metadata, p14, {
+        "menzo": canonical_menzo, "alfred": canonical_alfred,
+        "gemini": canonical_gemini, "simone": canonical_simone})
+    canonical_menzo, canonical_alfred = canonical_payloads["menzo"], canonical_payloads["alfred"]
+    canonical_gemini, canonical_simone = canonical_payloads["gemini"], canonical_payloads["simone"]
     if snapshot_authoritative:
         snap_pub = observability.get("publication", {})
         news_published_count = snap_pub.get("news_unique")
@@ -921,14 +951,15 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
         schema_warnings.append("published_record_count_differs_from_official_count")
     if markdown_reports_available and concrete_reports and len(concrete_reports) != parsed_md.get("reports_count") and official_counts_authoritative:
         schema_warnings.append("published_record_count_differs_from_official_count")
-    published_total = (news_published_count or 0) + (reports_published_count or 0) if (news_published_count is not None or reports_published_count is not None) else None
-    judgment = "OTTIMO" if (hard_count or 0) >= 8 and len(top_discarded(menzo, 1)) == 0 else "BUONO" if (published_total or 0) >= 8 else "DISCRETO" if (published_total or 0) >= 3 else "DEBOLE"
     top = top_discarded(menzo)
+    dtype, judgment = resolve_editorial_classifications(
+        section_metadata, news_published_count, reports_published_count, hard_count,
+        story["story_reviews"], bool(top))
     published_items_for_review = _dedupe_editorial_aggregation_items([x for x in concrete_news if not _is_count_placeholder(x)])
     borderline = [x for x in published_items_for_review if _is_borderline_published(x)][:3]
     news_label = str(news_published_count) if news_published_count is not None else "n.d."
     reports_label = str(reports_published_count) if reports_published_count is not None else "n.d."
-    summary = f"Giornata {dtype} con {news_label} news e {reports_label} report show pubblicati. La copertura hard news è stimata a {hard_count if hard_count is not None else 'n.d.'} elementi e quella soft a {soft_count if soft_count is not None else 'n.d.'}; {'softpool usato' if softpool else 'softpool non usato'}."
+    summary = f"Giornata {dtype if dtype is not None else 'n.d.'} con {news_label} news e {reports_label} report show pubblicati. La copertura hard news è stimata a {hard_count if hard_count is not None else 'n.d.'} elementi e quella soft a {soft_count if soft_count is not None else 'n.d.'}; {'softpool usato' if softpool else 'softpool non usato'}."
     if top:
         summary += " Il principale controllo umano riguarda: " + _title(top[0]) + "."
     else:
@@ -1017,7 +1048,7 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- Andrea checked/passed/passed with exception/blocked events: {_num(andrea_events.get('checked'))}/{_num(andrea_events.get('passed'))}/{_num(andrea_events.get('passed_with_exception'))}/{_num(andrea_events.get('blocked'))}",
         f"- Andrea exception reason occurrences: {andrea_reason_label}",
     ]
-    lines = ["# OWTV Daily Editorial Judgment 24h", "", "## Daily Editorial Judgment", "", f"- Judgment: {report['judgment']}", f"- Day type: {report['day_type']}", "", report["summary"], "", "## Daily numbers", "", f"- runs completed: {_num(report.get('runs_completed'))}", f"- news published: {_num(report.get('news_published_count'))}", f"- reports published: {_num(report.get('reports_published_count'))}", f"- article types: {dict(report['article_types']) or 'n.d.'}", f"- Menzo unique actionable candidates: {_num(menzo_metrics.get('unique_actionable_candidates'))}", f"- Menzo unique downstream handoffs: {_num(menzo_metrics.get('unique_downstream_handoffs'))}", f"- Menzo unique final publications: {_num(menzo_metrics.get('unique_final_publications'))}", f"- hard news count: {_num(report['hard_count'])} (stima)", f"- soft news count: {_num(report['soft_count'])} (stima)", f"- softpool used: {'yes' if report['softpool'] else 'no'}", *andrea_lines, *alfred_lines, f"- v95.11 duplicate arbitration: {(report.get('observability_snapshot') or {}).get('duplicate_arbitration', {})}", f"- legacy duplicate signals (diagnostic): duplicate candidates / same story clusters / same event clusters / story reviews: {_num(story['duplicate_candidates'])} / {_num(story['same_story_clusters'])} / {_num(story['same_event_clusters'])} / {_num(story['story_reviews'])}", f"- suspicious pairs above threshold: {_num(story['pairs_above_threshold'])}", f"- Menzo handoff-to-publication ratio: {ratio_label}", *gemini_lines, f"- Simone legacy errors (diagnostic; not terminal): {_num(simone_metrics.get('legacy_errors_diagnostic'))}", "", "## Hard vs soft editorial balance", "", f"Stima: {_num(report['hard_count'])} hard news e {_num(report['soft_count'])} soft news. " + ("Il ricorso al softpool sembra giustificato solo se le hard news erano limitate." if report['softpool'] else "Softpool non usato: scelta coerente se la giornata aveva sufficiente materiale hard o nessun soft recuperabile."), "", "## Top 3 discarded URLs for human control", ""]
+    lines = ["# OWTV Daily Editorial Judgment 24h", "", "## Daily Editorial Judgment", "", f"- Judgment: {_num(report['judgment'])}", f"- Day type: {_num(report['day_type'])}", "", report["summary"], "", "## Daily numbers", "", f"- runs completed: {_num(report.get('runs_completed'))}", f"- news published: {_num(report.get('news_published_count'))}", f"- reports published: {_num(report.get('reports_published_count'))}", f"- article types: {dict(report['article_types']) or 'n.d.'}", f"- Menzo unique actionable candidates: {_num(menzo_metrics.get('unique_actionable_candidates'))}", f"- Menzo unique downstream handoffs: {_num(menzo_metrics.get('unique_downstream_handoffs'))}", f"- Menzo unique final publications: {_num(menzo_metrics.get('unique_final_publications'))}", f"- hard news count: {_num(report['hard_count'])} (stima)", f"- soft news count: {_num(report['soft_count'])} (stima)", f"- softpool used: {'yes' if report['softpool'] else 'no'}", *andrea_lines, *alfred_lines, f"- v95.11 duplicate arbitration: {(report.get('observability_snapshot') or {}).get('duplicate_arbitration', {})}", f"- legacy duplicate signals (diagnostic): duplicate candidates / same story clusters / same event clusters / story reviews: {_num(story['duplicate_candidates'])} / {_num(story['same_story_clusters'])} / {_num(story['same_event_clusters'])} / {_num(story['story_reviews'])}", f"- suspicious pairs above threshold: {_num(story['pairs_above_threshold'])}", f"- Menzo handoff-to-publication ratio: {ratio_label}", *gemini_lines, f"- Simone legacy errors (diagnostic; not terminal): {_num(simone_metrics.get('legacy_errors_diagnostic'))}", "", "## Hard vs soft editorial balance", "", f"Stima: {_num(report['hard_count'])} hard news e {_num(report['soft_count'])} soft news. " + ("Il ricorso al softpool sembra giustificato solo se le hard news erano limitate." if report['softpool'] else "Softpool non usato: scelta coerente se la giornata aveva sufficiente materiale hard o nessun soft recuperabile."), "", "## Top 3 discarded URLs for human control", ""]
     if not report["top_discarded"]:
         lines.append("Nessun forte candidato scartato/pending emerso dagli artefatti disponibili.")
     for item in report["top_discarded"]:
@@ -1075,7 +1106,7 @@ def email_summary(report: dict[str, Any]) -> str:
     top = report["top_discarded"][0] if report["top_discarded"] else None
     news_count = _num(report.get("news_published_count"))
     reports_count = _num(report.get("reports_published_count"))
-    return "\n".join(["Daily Editorial Judgment:", f"- Judgment: {report['judgment']}", f"- Day type: {report['day_type']}", f"- Published: {news_count} news / {reports_count} report", f"- Hard/soft balance: {_num(report['hard_count'])} hard vs {_num(report['soft_count'])} soft (stima)", f"- Top concern: {'controllare scarti/pending ad alta rilevanza' if top else 'nessun forte candidato scartato emerso'}", f"- Top discarded URL: {_url(top) if top else 'n.d.'}"])
+    return "\n".join(["Daily Editorial Judgment:", f"- Judgment: {_num(report['judgment'])}", f"- Day type: {_num(report['day_type'])}", f"- Published: {news_count} news / {reports_count} report", f"- Hard/soft balance: {_num(report['hard_count'])} hard vs {_num(report['soft_count'])} soft (stima)", f"- Top concern: {'controllare scarti/pending ad alta rilevanza' if top else 'nessun forte candidato scartato emerso'}", f"- Top discarded URL: {_url(top) if top else 'n.d.'}"])
 
 
 def generate_daily_editorial_judgment_outputs(paths: dict[str, Path] | None = None, output_dir: Path = REPORTS_DIR, state_dir: Path = STATE_REPORTS_DIR, now: datetime | None = None, hours: int = 24) -> dict[str, Path]:

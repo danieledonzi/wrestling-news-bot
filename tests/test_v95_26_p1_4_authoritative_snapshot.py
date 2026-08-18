@@ -1,5 +1,6 @@
 import json
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 
 import pytest
 
@@ -9,7 +10,8 @@ from agents.canonical_event_ledger import CanonicalEventLedger, clear_active_led
 from agents import source_body
 from scripts.observability_snapshot import build_snapshot, _artifact_snapshot, _coverage_from_cutover
 from scripts.translation_quality_audit import discover
-from scripts.daily_editorial_judgment import resolve_p1_1_headline
+from scripts.daily_editorial_judgment import (resolve_editorial_classifications, resolve_p1_1_headline,
+                                               resolve_p1_4_canonical_payloads)
 
 
 def _rows(path):
@@ -356,6 +358,25 @@ def test_daily_headline_obeys_present_p1_1_authority_boundary():
     assert resolve_p1_1_headline({"p1_1_lifecycle": {"available": False}}, authoritative, legacy) == (None, None, None)
 
 
+def test_canonical_payload_boundaries_and_classifications():
+    legacy = {name: {"legacy": 9} for name in ("menzo", "alfred", "gemini", "simone")}
+    authoritative = {"funnel": {"p1": 1}, "alfred": {"p1": 2},
+                     "ai_operations": {"p1": 3}, "simone": {"p1": 4}}
+    assert resolve_p1_4_canonical_payloads({}, authoritative, legacy) == legacy
+    full = {"p1_1_lifecycle": {"complete_window": True},
+            "p1_3_warning_occurrences": {"complete_window": True},
+            "p1_3_failure_semantics": {"complete_window": True},
+            "p1_3_ai_operations": {"complete_window": True}}
+    assert resolve_p1_4_canonical_payloads(full, authoritative, legacy) == {
+        "menzo": authoritative["funnel"], "alfred": authoritative["alfred"],
+        "gemini": authoritative["ai_operations"], "simone": authoritative["simone"]}
+    incomplete = {family: {"complete_window": False} for family in full}
+    assert resolve_p1_4_canonical_payloads(incomplete, authoritative, legacy) == {
+        "menzo": {}, "alfred": {}, "gemini": {}, "simone": {}}
+    assert resolve_editorial_classifications({}, 20, 1, 12, 5, False) == ("post-show", "OTTIMO")
+    assert resolve_editorial_classifications(incomplete, 20, 1, 12, 5, False) == (None, None)
+
+
 @pytest.mark.parametrize("damage,expected", [("valid", 1), ("missing", 0), ("sha", 0)])
 def test_artifact_snapshot_counts_only_verified_bytes(tmp_path, damage, expected):
     path = tmp_path / "state/newsroom/canonical_artifact_index.jsonl"
@@ -389,6 +410,34 @@ def test_artifact_counts_are_null_for_partial_and_unavailable_coverage(tmp_path)
     unavailable, unavailable_metadata = _artifact_snapshot(tmp_path / "missing", now - timedelta(hours=1), now)
     assert unavailable_metadata["coverage"] == "unavailable"
     assert unavailable["role_coverage"]["translated_candidate"] == {"artifact_count": None, "unique_content_count": None}
+
+
+def test_artifact_index_read_failures_are_fail_open(tmp_path, monkeypatch):
+    directory_root = tmp_path / "directory-case"
+    directory_index = directory_root / "state/newsroom/canonical_artifact_index.jsonl"
+    directory_index.mkdir(parents=True)
+    directory = read_artifact_index(directory_root)
+    assert directory["available"] is False and directory["reason"] == "canonical_artifact_index_unreadable"
+    snapshot, metadata = _artifact_snapshot(directory_root, datetime.now(timezone.utc) - timedelta(hours=1),
+                                            datetime.now(timezone.utc))
+    assert metadata["available"] is False and snapshot["role_coverage"]
+
+    index_path = tmp_path / "state/newsroom/canonical_artifact_index.jsonl"
+    index_path.parent.mkdir(parents=True); index_path.write_text("{}\n")
+    original = Path.read_text
+    def denied(self, *args, **kwargs):
+        if self == index_path:
+            raise PermissionError("denied")
+        return original(self, *args, **kwargs)
+    monkeypatch.setattr(Path, "read_text", denied)
+    unreadable = read_artifact_index(tmp_path)
+    assert unreadable["available"] is False
+    assert unreadable["reason"] == "canonical_artifact_index_unreadable"
+    assert unreadable["diagnostic_mismatches"] == ["index_read_failed:PermissionError"]
+    _snapshot, denied_metadata = _artifact_snapshot(tmp_path, datetime.now(timezone.utc) - timedelta(hours=1),
+                                                    datetime.now(timezone.utc))
+    assert denied_metadata["available"] is False
+    assert discover(tmp_path, 24, None) == []
 
 
 def test_artifact_index_never_seeds_fallback_publication_population(tmp_path):
