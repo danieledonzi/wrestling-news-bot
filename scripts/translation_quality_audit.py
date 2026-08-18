@@ -28,6 +28,8 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from scripts.observability_snapshot import build_snapshot as build_observability_snapshot, identity_aliases
+from agents.canonical_artifact_reader import read_artifact_index, resolve_material_chain
+from agents.canonical_event_ledger import content_id as canonical_content_id
 DEFAULT_REPORTS_DIR = ROOT / "reports"
 
 SOURCE_INTRO_RE = re.compile(r"\b(?:welcome to|thanks for (?:reading|watching)|follow us|subscribe|sign up|newsletter|our coverage|this article originally|according to (?:the|a) report below)\b", re.I)
@@ -594,14 +596,23 @@ def discover(root: Path, hours: int, limit: int | None) -> list[ArticleAudit]:
     authoritative_keys: set[str] | None = None
     alias_to_canonical_key: dict[str, str] = {}
     unmatched_authoritative: dict[str, str] = {}
+    artifact_index = read_artifact_index(root)
+    publication_authority_available = False
+    published_content_ids: set[str] = set()
     try:
         snap = build_observability_snapshot(since, until, root)
         authoritative_records = snap.get("publication", {}).get("records", [])
-        authoritative_keys = set() if snap.get("authority_available", True) else None
+        publication_authority_available = snap.get("authority_available", True) is True
+        if publication_authority_available:
+            authoritative_keys = authoritative_keys or set()
+        elif authoritative_keys is None:
+            authoritative_keys = None
         for rec in authoritative_records:
             aliases = identity_aliases(rec)
-            key = item_key(rec) or next(iter(sorted(aliases)), "")
+            key = canonical_content_id(rec) or item_key(rec) or next(iter(sorted(aliases)), "")
             if key:
+                if key.startswith("cnt_"):
+                    published_content_ids.add(key)
                 aliases.add(key)
                 for alias in aliases:
                     authoritative_keys.add(alias)
@@ -611,6 +622,25 @@ def discover(root: Path, hours: int, limit: int | None) -> list[ArticleAudit]:
                 unmatched_authoritative[key] = "no_local_source_or_html_match_yet"
     except Exception:
         authoritative_keys = None
+    if artifact_index.get("available"):
+        eligible_ids = published_content_ids if publication_authority_available else set(artifact_index["rows_by_content_id"])
+        for content_id in sorted(eligible_ids):
+            manifest_rows = artifact_index["rows_by_content_id"].get(content_id, [])
+            chain = resolve_material_chain(root, content_id, index=artifact_index)
+            a = articles.setdefault(content_id, ArticleAudit(key=content_id))
+            role = chain.get("roles", {})
+            source, candidate = role.get("source_material", {}), role.get("translated_candidate", {})
+            alfred_body, final = role.get("quality_review", {}), role.get("final_published_material", {})
+            if source.get("available"):
+                set_source_material(a, source["text"], 1000, f"canonical_artifact_index:{source['path']}")
+            preferred_candidate = candidate if candidate.get("available") else alfred_body
+            if preferred_candidate.get("available"):
+                set_translated_candidate_material(a, preferred_candidate["text"], 1000,
+                                                  f"canonical_artifact_index:{preferred_candidate['path']}")
+            if final.get("available"):
+                set_final_published_material(a, final["text"], 1000,
+                                             f"canonical_artifact_index:{final['path']}")
+            a.artifact_paths.extend(row["path"] for row in manifest_rows if row.get("path"))
     candidates = [root / "state" / "newsroom" / "master_log.jsonl"]
     for base in [root / "artifacts" / "newsroom", root / "artifacts" / "newsroom_runs", root / "review_packages", root / "state" / "newsroom"]:
         if base.exists():

@@ -770,6 +770,11 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
             schema_warnings.append(f"observability_snapshot_unavailable:{exc}")
     snapshot_authoritative = bool(snapshot_root is not None and observability and observability.get("authority_available") is True)
     section_metadata = observability.get("section_metadata", {}) if isinstance(observability, dict) else {}
+    p14 = observability.get("authoritative", {}) if isinstance(observability, dict) else {}
+    p14_p1_1_complete = (section_metadata.get("p1_1_lifecycle") or {}).get("complete_window") is True
+    p14_ai_complete = (section_metadata.get("p1_3_ai_operations") or {}).get("complete_window") is True
+    p14_warning_complete = (section_metadata.get("p1_3_warning_occurrences") or {}).get("complete_window") is True
+    p14_failure_complete = (section_metadata.get("p1_3_failure_semantics") or {}).get("complete_window") is True
     menzo_authoritative = (section_metadata.get("menzo") or {}).get("available") is True
     alfred_authoritative = (section_metadata.get("alfred") or {}).get("available") is True
     simone_authoritative = (section_metadata.get("simone") or {}).get("available") is True
@@ -861,6 +866,14 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
         canonical_alfred = {**observability.get("alfred", {}).get("events", {}), **observability.get("alfred", {}).get("unique", {})}
     if simone_authoritative:
         canonical_simone = observability.get("simone", {})
+    if p14_p1_1_complete:
+        canonical_menzo = p14.get("funnel", {})
+    if p14_warning_complete or p14_failure_complete:
+        canonical_alfred = p14.get("alfred", {})
+    if p14_ai_complete:
+        canonical_gemini = p14.get("ai_operations", {})
+    if p14_p1_1_complete or p14_failure_complete:
+        canonical_simone = p14.get("simone", {})
     if snapshot_authoritative:
         snap_pub = observability.get("publication", {})
         news_published_count = snap_pub.get("news_unique")
@@ -886,6 +899,14 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
         runs_completed = parsed_md.get("runs_completed")
         news_published_count = (parsed_md.get("news_count") if markdown_news_available and official_counts_authoritative else (len(concrete_news) if concrete_news else (parsed_md.get("news_count") if markdown_news_available else (0 if news_stream_available else None))))
         reports_published_count = (parsed_md.get("reports_count") if markdown_reports_available and official_counts_authoritative else (len(concrete_reports) if concrete_reports else (parsed_md.get("reports_count") if markdown_reports_available else (0 if report_stream_available else None))))
+    if p14_p1_1_complete:
+        news_published_count = p14.get("publication", {}).get("unique_news_publications")
+        reports_published_count = p14.get("publication", {}).get("unique_report_publications")
+        runs_completed = p14.get("runs", {}).get("value")
+    if p14_warning_complete:
+        warnings = p14.get("alfred", {}).get("warning_occurrences")
+    if p14_failure_complete:
+        blockers = p14.get("alfred", {}).get("final_blockers")
     if markdown_news_available and concrete_news and len(concrete_news) != parsed_md.get("news_count") and official_counts_authoritative:
         schema_warnings.append("published_record_count_differs_from_official_count")
     if markdown_reports_available and concrete_reports and len(concrete_reports) != parsed_md.get("reports_count") and official_counts_authoritative:
