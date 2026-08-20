@@ -40,7 +40,7 @@ def write_json(tmp_path, name, data):
     return path
 
 
-def errors_for(tmp_path, data=None, dep=None, markdown=None):
+def errors_for(tmp_path, data=None, dep=None, markdown=None, catalog=None):
     baseline_path = write_json(tmp_path, "baseline.json", data or payload())
     registry_path = write_json(tmp_path, "registry.json", dep or registry())
     markdown_path = tmp_path / "baseline.md"
@@ -48,7 +48,11 @@ def errors_for(tmp_path, data=None, dep=None, markdown=None):
         MARKDOWN.read_text(encoding="utf-8") if markdown is None else markdown,
         encoding="utf-8",
     )
-    return validate(baseline_path, registry_path, markdown_path=markdown_path)
+    catalog_path = write_json(tmp_path, "catalog.json", catalog) if catalog is not None else None
+    kwargs = {"markdown_path": markdown_path}
+    if catalog_path is not None:
+        kwargs["catalog_path"] = catalog_path
+    return validate(baseline_path, registry_path, **kwargs)
 
 
 def test_happy_path_cli_and_contract_count_is_derived_from_a1():
@@ -57,9 +61,28 @@ def test_happy_path_cli_and_contract_count_is_derived_from_a1():
         stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False,
     )
     assert result.returncode == 0, result.stderr
-    catalog_count = len(json.loads((ROOT / "config/metrics_catalog_v1.json").read_text())["metrics"])
-    assert len(payload()["metric_baselines"]) == catalog_count
-    assert "{} A1 metric rows".format(catalog_count) in result.stdout
+    catalog_rows = json.loads((ROOT / "config/metrics_catalog_v1.json").read_text())["metrics"]
+    # Phase 0 is a frozen pre-V96.1 observation. Later catalog additions must
+    # validate without pretending that they existed in the historical window.
+    baseline_catalog_count = sum(row.get("policy_version") == "v95.22_a1" for row in catalog_rows)
+    assert len(payload()["metric_baselines"]) == baseline_catalog_count
+    assert "{} A1 metric rows".format(baseline_catalog_count) in result.stdout
+
+
+def test_frozen_a1_metric_policy_selects_exact_baseline_and_ignores_future_metric(tmp_path):
+    catalog = json.loads((ROOT / "config/metrics_catalog_v1.json").read_text())
+    selected = {row["canonical_name"] for row in catalog["metrics"]
+                if row.get("policy_version") == "v95.22_a1"}
+    baseline_names = {row["metric_name"] for row in payload()["metric_baselines"]}
+    assert len(selected) == 99
+    assert selected == baseline_names
+
+    future = copy.deepcopy(catalog["metrics"][0])
+    future.update(canonical_name="future.synthetic_metric", domain="future",
+                  policy_version="v96.2", introduced_in="v96.2")
+    catalog["metrics"].append(future)
+    errors = errors_for(tmp_path, catalog=catalog)
+    assert not any("baseline metric set" in error for error in errors)
 
 
 def test_root_target_window_matches_declared_days():

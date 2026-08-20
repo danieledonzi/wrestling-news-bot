@@ -758,13 +758,15 @@ def resolve_p1_4_canonical_payloads(section_metadata: dict[str, Any], authoritat
         "gemini": ("p1_3_ai_operations",),
         "simone": ("p1_1_lifecycle", "p1_3_failure_semantics"),
     }
-    sources = {"menzo": "funnel", "alfred": "alfred", "gemini": "ai_operations", "simone": "simone"}
+    sources = {"menzo": "funnel", "andrea": "andrea", "alfred": "alfred", "gemini": "ai_operations", "simone": "simone"}
     for name, families in boundaries.items():
         present = [family for family in families if family in section_metadata]
         if not present:
             continue
         if any((section_metadata.get(family) or {}).get("complete_window") is True for family in present):
-            if name == "andrea":
+            if name == "andrea" and "andrea" not in authoritative:
+                # Compatibility for pre-V96.1 snapshots. New snapshots expose
+                # the normalized read model directly under ``andrea``.
                 funnel = authoritative.get("funnel", {})
                 metrics = funnel.get("metrics", {}) if isinstance(funnel.get("metrics"), dict) else {}
                 resolved[name] = {"metrics": {key: metrics[key] for key in
@@ -940,12 +942,6 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
             schema_warnings.append("observability_reports_count_differs_from_markdown")
         if parsed_md.get("runs_completed") is not None and parsed_md.get("runs_completed") != runs_completed:
             schema_warnings.append("observability_runs_completed_differs_from_markdown")
-        canonical_warning_occurrences = snap_events.get("warning_occurrences")
-        if (canonical_warning_occurrences is not None and parsed_md.get("warnings") is not None
-                and parsed_md.get("warnings") != canonical_warning_occurrences):
-            schema_warnings.append("observability_alfred_warning_occurrences_differs_from_markdown")
-        if parsed_md.get("blockers") is not None and parsed_md.get("blockers") != blockers:
-            schema_warnings.append("observability_alfred_final_blockers_differs_from_markdown")
     else:
         runs_completed = parsed_md.get("runs_completed")
         news_published_count = (parsed_md.get("news_count") if markdown_news_available and official_counts_authoritative else (len(concrete_news) if concrete_news else (parsed_md.get("news_count") if markdown_news_available else (0 if news_stream_available else None))))

@@ -3295,6 +3295,426 @@
       "replacement": "gemini.gemini_3_5_completed_calls",
       "used_by_reports": [],
       "notes": "Deprecated because status=called is not semantic success."
+    },
+    {
+      "canonical_name": "andrea.checked_occurrences",
+      "description": "Canonical Andrea checked occurrences.",
+      "domain": "andrea",
+      "entity_counted": "content-sufficiency events",
+      "unit": "count",
+      "cardinality": "one scalar per requested window",
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [],
+      "producer_paths": [
+        "agents/canonical_event_ledger.py",
+        "scripts/observability_snapshot.py"
+      ],
+      "consumer_paths": [
+        "scripts/daily_editorial_judgment.py"
+      ],
+      "formula": "count validated content_sufficiency_checked events at checked grain",
+      "aggregation": "event occurrence count",
+      "identity_key": "canonical event occurrence",
+      "time_window": "inclusive UTC [window_start, window_end]",
+      "zero_semantics": "Zero means a fully covered canonical window contains no qualifying facts.",
+      "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",
+      "availability": "available",
+      "schema_version": "owtv_metrics_catalog_v1",
+      "policy_version": "v96.1",
+      "introduced_in": "v96.1",
+      "status": "active",
+      "legacy_aliases": [],
+      "replacement": null,
+      "used_by_reports": [
+        "daily_editorial_judgment"
+      ],
+      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero."
+    },
+    {
+      "canonical_name": "andrea.checked_content",
+      "description": "Unique content at canonical Andrea checked grain.",
+      "domain": "andrea",
+      "entity_counted": "content identities",
+      "unit": "count",
+      "cardinality": "one scalar per requested window",
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [],
+      "producer_paths": [
+        "agents/canonical_event_ledger.py",
+        "scripts/observability_snapshot.py"
+      ],
+      "consumer_paths": [
+        "scripts/daily_editorial_judgment.py"
+      ],
+      "formula": "distinct content_id across validated checked events",
+      "aggregation": "distinct content_id count",
+      "identity_key": "canonical content_id",
+      "time_window": "inclusive UTC [window_start, window_end]",
+      "zero_semantics": "Zero means a fully covered canonical window contains no qualifying facts.",
+      "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",
+      "availability": "available",
+      "schema_version": "owtv_metrics_catalog_v1",
+      "policy_version": "v96.1",
+      "introduced_in": "v96.1",
+      "status": "active",
+      "legacy_aliases": [],
+      "replacement": null,
+      "used_by_reports": [
+        "daily_editorial_judgment"
+      ],
+      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero."
+    },
+    {
+      "canonical_name": "andrea.passed_occurrences",
+      "description": "Canonical Andrea passed occurrences.",
+      "domain": "andrea",
+      "entity_counted": "content-sufficiency events",
+      "unit": "count",
+      "cardinality": "one scalar per requested window",
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [],
+      "producer_paths": [
+        "agents/canonical_event_ledger.py",
+        "scripts/observability_snapshot.py"
+      ],
+      "consumer_paths": [
+        "scripts/daily_editorial_judgment.py"
+      ],
+      "formula": "count validated content_sufficiency_checked events at passed grain",
+      "aggregation": "event occurrence count",
+      "identity_key": "canonical event occurrence",
+      "time_window": "inclusive UTC [window_start, window_end]",
+      "zero_semantics": "Zero means a fully covered canonical window contains no qualifying facts.",
+      "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",
+      "availability": "available",
+      "schema_version": "owtv_metrics_catalog_v1",
+      "policy_version": "v96.1",
+      "introduced_in": "v96.1",
+      "status": "active",
+      "legacy_aliases": [],
+      "replacement": null,
+      "used_by_reports": [
+        "daily_editorial_judgment"
+      ],
+      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero."
+    },
+    {
+      "canonical_name": "andrea.passed_content",
+      "description": "Unique content at canonical Andrea passed grain.",
+      "domain": "andrea",
+      "entity_counted": "content identities",
+      "unit": "count",
+      "cardinality": "one scalar per requested window",
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [],
+      "producer_paths": [
+        "agents/canonical_event_ledger.py",
+        "scripts/observability_snapshot.py"
+      ],
+      "consumer_paths": [
+        "scripts/daily_editorial_judgment.py"
+      ],
+      "formula": "distinct content_id across validated passed events",
+      "aggregation": "distinct content_id count",
+      "identity_key": "canonical content_id",
+      "time_window": "inclusive UTC [window_start, window_end]",
+      "zero_semantics": "Zero means a fully covered canonical window contains no qualifying facts.",
+      "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",
+      "availability": "available",
+      "schema_version": "owtv_metrics_catalog_v1",
+      "policy_version": "v96.1",
+      "introduced_in": "v96.1",
+      "status": "active",
+      "legacy_aliases": [],
+      "replacement": null,
+      "used_by_reports": [
+        "daily_editorial_judgment"
+      ],
+      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero."
+    },
+    {
+      "canonical_name": "andrea.passed_with_exception_occurrences",
+      "description": "Canonical Andrea passed_with_exception occurrences.",
+      "domain": "andrea",
+      "entity_counted": "content-sufficiency events",
+      "unit": "count",
+      "cardinality": "one scalar per requested window",
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [],
+      "producer_paths": [
+        "agents/canonical_event_ledger.py",
+        "scripts/observability_snapshot.py"
+      ],
+      "consumer_paths": [
+        "scripts/daily_editorial_judgment.py"
+      ],
+      "formula": "count validated content_sufficiency_checked events at passed_with_exception grain",
+      "aggregation": "event occurrence count",
+      "identity_key": "canonical event occurrence",
+      "time_window": "inclusive UTC [window_start, window_end]",
+      "zero_semantics": "Zero means a fully covered canonical window contains no qualifying facts.",
+      "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",
+      "availability": "available",
+      "schema_version": "owtv_metrics_catalog_v1",
+      "policy_version": "v96.1",
+      "introduced_in": "v96.1",
+      "status": "active",
+      "legacy_aliases": [],
+      "replacement": null,
+      "used_by_reports": [
+        "daily_editorial_judgment"
+      ],
+      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero."
+    },
+    {
+      "canonical_name": "andrea.passed_with_exception_content",
+      "description": "Unique content at canonical Andrea passed_with_exception grain.",
+      "domain": "andrea",
+      "entity_counted": "content identities",
+      "unit": "count",
+      "cardinality": "one scalar per requested window",
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [],
+      "producer_paths": [
+        "agents/canonical_event_ledger.py",
+        "scripts/observability_snapshot.py"
+      ],
+      "consumer_paths": [
+        "scripts/daily_editorial_judgment.py"
+      ],
+      "formula": "distinct content_id across validated passed_with_exception events",
+      "aggregation": "distinct content_id count",
+      "identity_key": "canonical content_id",
+      "time_window": "inclusive UTC [window_start, window_end]",
+      "zero_semantics": "Zero means a fully covered canonical window contains no qualifying facts.",
+      "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",
+      "availability": "available",
+      "schema_version": "owtv_metrics_catalog_v1",
+      "policy_version": "v96.1",
+      "introduced_in": "v96.1",
+      "status": "active",
+      "legacy_aliases": [],
+      "replacement": null,
+      "used_by_reports": [
+        "daily_editorial_judgment"
+      ],
+      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero."
+    },
+    {
+      "canonical_name": "andrea.blocked_occurrences",
+      "description": "Canonical Andrea blocked occurrences.",
+      "domain": "andrea",
+      "entity_counted": "content-sufficiency events",
+      "unit": "count",
+      "cardinality": "one scalar per requested window",
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [],
+      "producer_paths": [
+        "agents/canonical_event_ledger.py",
+        "scripts/observability_snapshot.py"
+      ],
+      "consumer_paths": [
+        "scripts/daily_editorial_judgment.py"
+      ],
+      "formula": "count validated content_sufficiency_checked events at blocked grain",
+      "aggregation": "event occurrence count",
+      "identity_key": "canonical event occurrence",
+      "time_window": "inclusive UTC [window_start, window_end]",
+      "zero_semantics": "Zero means a fully covered canonical window contains no qualifying facts.",
+      "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",
+      "availability": "available",
+      "schema_version": "owtv_metrics_catalog_v1",
+      "policy_version": "v96.1",
+      "introduced_in": "v96.1",
+      "status": "active",
+      "legacy_aliases": [],
+      "replacement": null,
+      "used_by_reports": [
+        "daily_editorial_judgment"
+      ],
+      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero."
+    },
+    {
+      "canonical_name": "andrea.blocked_content",
+      "description": "Unique content at canonical Andrea blocked grain.",
+      "domain": "andrea",
+      "entity_counted": "content identities",
+      "unit": "count",
+      "cardinality": "one scalar per requested window",
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [],
+      "producer_paths": [
+        "agents/canonical_event_ledger.py",
+        "scripts/observability_snapshot.py"
+      ],
+      "consumer_paths": [
+        "scripts/daily_editorial_judgment.py"
+      ],
+      "formula": "distinct content_id across validated blocked events",
+      "aggregation": "distinct content_id count",
+      "identity_key": "canonical content_id",
+      "time_window": "inclusive UTC [window_start, window_end]",
+      "zero_semantics": "Zero means a fully covered canonical window contains no qualifying facts.",
+      "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",
+      "availability": "available",
+      "schema_version": "owtv_metrics_catalog_v1",
+      "policy_version": "v96.1",
+      "introduced_in": "v96.1",
+      "status": "active",
+      "legacy_aliases": [],
+      "replacement": null,
+      "used_by_reports": [
+        "daily_editorial_judgment"
+      ],
+      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero."
+    },
+    {
+      "canonical_name": "alfred.warning_bearing_reviews",
+      "description": "Canonical Alfred reviews bearing warnings.",
+      "domain": "alfred",
+      "entity_counted": "individual quality_review_completed occurrences",
+      "unit": "count",
+      "cardinality": "one scalar per requested window",
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [],
+      "producer_paths": [
+        "agents/canonical_event_ledger.py",
+        "scripts/observability_snapshot.py"
+      ],
+      "consumer_paths": [
+        "scripts/daily_editorial_judgment.py"
+      ],
+      "formula": "count individual quality_review_completed occurrences associated with at least one warning_recorded fact through canonical append order plus matching run/correlation context before the next review occurrence; repeated reviews of the same content in one run remain distinct",
+      "aggregation": "distinct review count",
+      "identity_key": "derived ordered canonical review occurrence (ephemeral read-model identity; no persisted review ID)",
+      "time_window": "inclusive UTC [window_start, window_end]",
+      "zero_semantics": "Zero means a fully covered canonical window contains no qualifying facts.",
+      "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",
+      "availability": "available",
+      "schema_version": "owtv_metrics_catalog_v1",
+      "policy_version": "v96.1",
+      "introduced_in": "v96.1",
+      "status": "active",
+      "legacy_aliases": [],
+      "replacement": null,
+      "used_by_reports": [
+        "daily_editorial_judgment"
+      ],
+      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero."
+    },
+    {
+      "canonical_name": "alfred.blocker_occurrences",
+      "description": "Historical Alfred blocker occurrences.",
+      "domain": "alfred",
+      "entity_counted": "blocker occurrences",
+      "unit": "count",
+      "cardinality": "one scalar per requested window",
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [],
+      "producer_paths": [
+        "agents/canonical_event_ledger.py",
+        "scripts/observability_snapshot.py"
+      ],
+      "consumer_paths": [
+        "scripts/daily_editorial_judgment.py"
+      ],
+      "formula": "count blocker_recorded events including later-resolved blockers",
+      "aggregation": "event occurrence count",
+      "identity_key": "canonical event occurrence",
+      "time_window": "inclusive UTC [window_start, window_end]",
+      "zero_semantics": "Zero means a fully covered canonical window contains no qualifying facts.",
+      "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",
+      "availability": "available",
+      "schema_version": "owtv_metrics_catalog_v1",
+      "policy_version": "v96.1",
+      "introduced_in": "v96.1",
+      "status": "active",
+      "legacy_aliases": [],
+      "replacement": null,
+      "used_by_reports": [
+        "daily_editorial_judgment"
+      ],
+      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero."
+    },
+    {
+      "canonical_name": "alfred.blocker_bearing_reviews",
+      "description": "Canonical Alfred reviews bearing blockers.",
+      "domain": "alfred",
+      "entity_counted": "individual quality_review_completed occurrences",
+      "unit": "count",
+      "cardinality": "one scalar per requested window",
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [],
+      "producer_paths": [
+        "agents/canonical_event_ledger.py",
+        "scripts/observability_snapshot.py"
+      ],
+      "consumer_paths": [
+        "scripts/daily_editorial_judgment.py"
+      ],
+      "formula": "count individual quality_review_completed occurrences associated with at least one blocker_recorded fact through canonical append order plus matching run/correlation context before the next review occurrence; repeated reviews of the same content in one run remain distinct",
+      "aggregation": "distinct review count",
+      "identity_key": "derived ordered canonical review occurrence (ephemeral read-model identity; no persisted review ID)",
+      "time_window": "inclusive UTC [window_start, window_end]",
+      "zero_semantics": "Zero means a fully covered canonical window contains no qualifying facts.",
+      "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",
+      "availability": "available",
+      "schema_version": "owtv_metrics_catalog_v1",
+      "policy_version": "v96.1",
+      "introduced_in": "v96.1",
+      "status": "active",
+      "legacy_aliases": [],
+      "replacement": null,
+      "used_by_reports": [
+        "daily_editorial_judgment"
+      ],
+      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero."
+    },
+    {
+      "canonical_name": "alfred.unique_articles_with_blockers",
+      "description": "Unique content with historical Alfred blockers.",
+      "domain": "alfred",
+      "entity_counted": "articles",
+      "unit": "count",
+      "cardinality": "one scalar per requested window",
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [],
+      "producer_paths": [
+        "agents/canonical_event_ledger.py",
+        "scripts/observability_snapshot.py"
+      ],
+      "consumer_paths": [
+        "scripts/daily_editorial_judgment.py"
+      ],
+      "formula": "distinct content_id among blocker_recorded events",
+      "aggregation": "distinct content_id count",
+      "identity_key": "canonical content_id",
+      "time_window": "inclusive UTC [window_start, window_end]",
+      "zero_semantics": "Zero means a fully covered canonical window contains no qualifying facts.",
+      "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",
+      "availability": "available",
+      "schema_version": "owtv_metrics_catalog_v1",
+      "policy_version": "v96.1",
+      "introduced_in": "v96.1",
+      "status": "active",
+      "legacy_aliases": [],
+      "replacement": null,
+      "used_by_reports": [
+        "daily_editorial_judgment"
+      ],
+      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero."
     }
   ]
 }

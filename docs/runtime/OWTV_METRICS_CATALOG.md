@@ -50,6 +50,19 @@ Each JSON row has exactly one `source_primary`. `source_secondary` entries are e
 | `simone.already_present_events` | Master-log report publication events marked already present. | `state/newsroom/master_log.jsonl: simone.publish_handoff.already_published` | sum in-window already_published event counters; count |
 | `publisher.publications_unique` | Unique successful news publications. | `state/newsroom/master_log.jsonl: publisher.published/results(status=published)` | cardinality of unique authoritative published identities; count |
 
+| `andrea.checked_occurrences` | Canonical Andrea checked occurrences. | `state/newsroom/canonical_event_ledger.jsonl` | count validated content_sufficiency_checked events at checked grain; count |
+| `andrea.checked_content` | Unique content at canonical Andrea checked grain. | `state/newsroom/canonical_event_ledger.jsonl` | distinct content_id across validated checked events; count |
+| `andrea.passed_occurrences` | Canonical Andrea passed occurrences. | `state/newsroom/canonical_event_ledger.jsonl` | count validated content_sufficiency_checked events at passed grain; count |
+| `andrea.passed_content` | Unique content at canonical Andrea passed grain. | `state/newsroom/canonical_event_ledger.jsonl` | distinct content_id across validated passed events; count |
+| `andrea.passed_with_exception_occurrences` | Canonical Andrea passed_with_exception occurrences. | `state/newsroom/canonical_event_ledger.jsonl` | count validated content_sufficiency_checked events at passed_with_exception grain; count |
+| `andrea.passed_with_exception_content` | Unique content at canonical Andrea passed_with_exception grain. | `state/newsroom/canonical_event_ledger.jsonl` | distinct content_id across validated passed_with_exception events; count |
+| `andrea.blocked_occurrences` | Canonical Andrea blocked occurrences. | `state/newsroom/canonical_event_ledger.jsonl` | count validated content_sufficiency_checked events at blocked grain; count |
+| `andrea.blocked_content` | Unique content at canonical Andrea blocked grain. | `state/newsroom/canonical_event_ledger.jsonl` | distinct content_id across validated blocked events; count |
+| `alfred.warning_bearing_reviews` | Canonical Alfred reviews bearing warnings. | `state/newsroom/canonical_event_ledger.jsonl` | count individual quality_review_completed occurrences associated with at least one warning_recorded fact through canonical append order plus matching run/correlation context before the next review occurrence; repeated reviews of the same content in one run remain distinct; count |
+| `alfred.blocker_occurrences` | Historical Alfred blocker occurrences. | `state/newsroom/canonical_event_ledger.jsonl` | count blocker_recorded events including later-resolved blockers; count |
+| `alfred.blocker_bearing_reviews` | Canonical Alfred reviews bearing blockers. | `state/newsroom/canonical_event_ledger.jsonl` | count individual quality_review_completed occurrences associated with at least one blocker_recorded fact through canonical append order plus matching run/correlation context before the next review occurrence; repeated reviews of the same content in one run remain distinct; count |
+| `alfred.unique_articles_with_blockers` | Unique content with historical Alfred blockers. | `state/newsroom/canonical_event_ledger.jsonl` | distinct content_id among blocker_recorded events; count |
+
 ## 5. Partially available and diagnostic metrics
 
 These rows expose real signals but not a complete authoritative editorial-window metric. Typical causes are per-run-only counters, incomplete stable identities, legacy caps, partial run coverage, or a latest-run artifact without retention.
