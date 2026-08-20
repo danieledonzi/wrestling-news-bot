@@ -720,6 +720,7 @@ def _canonical_event_sections(rows: list[dict[str, Any]], since: datetime, until
     # Ledger order is the review-occurrence identity available in schema v1:
     # observe_alfred emits a review followed immediately by its audit facts.
     latest_review: dict[tuple[Any, Any], int] = {}
+    in_window_review_instances: set[int] = set()
     warning_review_instances: set[int] = set()
     blocker_review_instances: set[int] = set()
     warning_review_association_complete = True
@@ -730,16 +731,19 @@ def _canonical_event_sections(rows: list[dict[str, Any]], since: datetime, until
             continue
         if row.get("event_type") == "quality_review_completed":
             latest_review[key] = ledger_index
-        elif row.get("event_type") in {"warning_recorded", "blocker_recorded"} and row in bounded:
+            if in_window_dt(parse_utc_datetime(row.get("timestamp_utc")), since, until):
+                in_window_review_instances.add(ledger_index)
+        elif row.get("event_type") in {"warning_recorded", "blocker_recorded"}:
             review_index = latest_review.get(key)
             if review_index is None:
-                if row.get("event_type") == "warning_recorded":
-                    warning_review_association_complete = False
-                else:
-                    blocker_review_association_complete = False
-            elif row.get("event_type") == "warning_recorded":
+                if in_window_dt(parse_utc_datetime(row.get("timestamp_utc")), since, until):
+                    if row.get("event_type") == "warning_recorded":
+                        warning_review_association_complete = False
+                    else:
+                        blocker_review_association_complete = False
+            elif review_index in in_window_review_instances and row.get("event_type") == "warning_recorded":
                 warning_review_instances.add(review_index)
-            else:
+            elif review_index in in_window_review_instances and row.get("event_type") == "blocker_recorded":
                 blocker_review_instances.add(review_index)
     warning_review_count = len(warning_review_instances) if warning_review_association_complete else None
     blocker_review_count = len(blocker_review_instances) if blocker_review_association_complete else None

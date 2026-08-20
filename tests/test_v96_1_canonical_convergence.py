@@ -171,6 +171,46 @@ def test_unassociated_alfred_audit_event_makes_review_grain_unavailable():
     assert result["warning_bearing_reviews"] is None
 
 
+def test_warning_review_grain_is_windowed_by_review_not_audit_event():
+    before = chain("warning-before", "passed") + [
+        event("quality_review_completed", "Alfred", "warning-before", result="approved"),
+        event("warning_recorded", "Alfred", "warning-before"),
+    ]
+    before[-2]["timestamp_utc"] = NOW.replace(day=19, hour=23, minute=59).isoformat()
+    result = canonical(before)["alfred"]
+    assert result["warning_occurrences"] == 1
+    assert result["warning_bearing_reviews"] == 0
+
+    after = chain("warning-after", "passed") + [
+        event("quality_review_completed", "Alfred", "warning-after", result="approved"),
+        event("warning_recorded", "Alfred", "warning-after"),
+    ]
+    after[-1]["timestamp_utc"] = NOW.replace(day=21, hour=0).isoformat()
+    result = canonical(after)["alfred"]
+    assert result["warning_occurrences"] == 0
+    assert result["warning_bearing_reviews"] == 1
+
+
+def test_blocker_review_grain_is_windowed_by_review_not_audit_event():
+    before = chain("blocker-before", "passed") + [
+        event("quality_review_completed", "Alfred", "blocker-before", result="needs_revision"),
+        event("blocker_recorded", "Alfred", "blocker-before"),
+    ]
+    before[-2]["timestamp_utc"] = NOW.replace(day=19, hour=23, minute=59).isoformat()
+    result = canonical(before)["alfred"]
+    assert result["blocker_occurrences"] == 1
+    assert result["blocker_bearing_reviews"] == 0
+
+    after = chain("blocker-after", "passed") + [
+        event("quality_review_completed", "Alfred", "blocker-after", result="needs_revision"),
+        event("blocker_recorded", "Alfred", "blocker-after"),
+    ]
+    after[-1]["timestamp_utc"] = NOW.replace(day=21, hour=0).isoformat()
+    result = canonical(after)["alfred"]
+    assert result["blocker_occurrences"] == 0
+    assert result["blocker_bearing_reviews"] == 1
+
+
 def test_blocker_only_never_becomes_warning_and_corrupt_evidence_is_null():
     rows = chain("blocked-review", "passed") + [event("blocker_recorded", "Alfred", "blocked-review")]
     result = canonical(rows)["alfred"]
