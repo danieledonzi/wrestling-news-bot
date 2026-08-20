@@ -3580,7 +3580,7 @@
       "canonical_name": "alfred.warning_bearing_reviews",
       "description": "Canonical Alfred reviews bearing warnings.",
       "domain": "alfred",
-      "entity_counted": "reviews",
+      "entity_counted": "individual quality_review_completed occurrences",
       "unit": "count",
       "cardinality": "one scalar per requested window",
       "authority_level": "canonical",
@@ -3593,9 +3593,9 @@
       "consumer_paths": [
         "scripts/daily_editorial_judgment.py"
       ],
-      "formula": "count distinct quality_review_completed review occurrences associated through canonical append order and matching run/correlation identity with at least one warning_recorded occurrence before the next review occurrence for that run/correlation",
+      "formula": "count individual quality_review_completed occurrences associated with at least one warning_recorded fact through canonical append order plus matching run/correlation context before the next review occurrence; repeated reviews of the same content in one run remain distinct",
       "aggregation": "distinct review count",
-      "identity_key": "derived canonical review occurrence (ordered ledger occurrence; not correlation_id)",
+      "identity_key": "derived ordered canonical review occurrence (ephemeral read-model identity; no persisted review ID)",
       "time_window": "inclusive UTC [window_start, window_end]",
       "zero_semantics": "Zero means a fully covered canonical window contains no qualifying facts.",
       "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",
@@ -3650,7 +3650,7 @@
       "canonical_name": "alfred.blocker_bearing_reviews",
       "description": "Canonical Alfred reviews bearing blockers.",
       "domain": "alfred",
-      "entity_counted": "reviews",
+      "entity_counted": "individual quality_review_completed occurrences",
       "unit": "count",
       "cardinality": "one scalar per requested window",
       "authority_level": "canonical",
@@ -3663,9 +3663,9 @@
       "consumer_paths": [
         "scripts/daily_editorial_judgment.py"
       ],
-      "formula": "count distinct quality_review_completed review occurrences associated through canonical append order and matching run/correlation identity with at least one blocker_recorded occurrence before the next review occurrence for that run/correlation",
+      "formula": "count individual quality_review_completed occurrences associated with at least one blocker_recorded fact through canonical append order plus matching run/correlation context before the next review occurrence; repeated reviews of the same content in one run remain distinct",
       "aggregation": "distinct review count",
-      "identity_key": "derived canonical review occurrence (ordered ledger occurrence; not correlation_id)",
+      "identity_key": "derived ordered canonical review occurrence (ephemeral read-model identity; no persisted review ID)",
       "time_window": "inclusive UTC [window_start, window_end]",
       "zero_semantics": "Zero means a fully covered canonical window contains no qualifying facts.",
       "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",

@@ -248,8 +248,11 @@ def test_catalog_has_unique_v96_1_grains():
     by_name = {metric["canonical_name"]: metric for metric in metrics}
     for name in ("alfred.warning_bearing_reviews", "alfred.blocker_bearing_reviews"):
         metric = by_name[name]
-        assert "quality_review_completed review occurrences" in metric["formula"]
+        assert metric["entity_counted"] == "individual quality_review_completed occurrences"
+        assert "quality_review_completed occurrences" in metric["formula"]
         assert "canonical append order" in metric["formula"]
         assert "before the next review occurrence" in metric["formula"]
-        assert "ordered ledger occurrence" in metric["identity_key"]
-        assert metric["identity_key"] != "canonical correlation_id"
+        assert "repeated reviews of the same content in one run remain distinct" in metric["formula"]
+        assert "distinct run_id plus correlation_id" not in metric["formula"]
+        assert "derived ordered canonical review occurrence" in metric["identity_key"]
+        assert "correlation_id" not in metric["identity_key"]
