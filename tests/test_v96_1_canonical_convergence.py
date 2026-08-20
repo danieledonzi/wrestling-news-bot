@@ -64,6 +64,34 @@ def test_andrea_missing_or_inconsistent_correlations_are_null():
     assert canonical([], "partial")["andrea"]["events"]["checked"] is None
 
 
+def test_andrea_lifecycle_may_span_window_start_without_expanding_counts():
+    rows = chain("start-boundary", "passed")
+    rows[0]["timestamp_utc"] = NOW.replace(day=19, hour=23, minute=59).isoformat()
+    result = canonical(rows)["andrea"]
+    assert result["available"] is True
+    assert result["events"] == {"checked": 1, "passed": 1,
+                                "passed_with_exception": 0, "blocked": 0}
+    blocked = chain("blocked-boundary", "blocked")
+    blocked[0]["timestamp_utc"] = NOW.replace(day=19, hour=23, minute=59).isoformat()
+    assert canonical(blocked)["andrea"]["blocked"]["event_count"] == 1
+
+
+def test_andrea_lifecycle_may_span_window_end_without_expanding_counts():
+    rows = chain("end-boundary", "passed")
+    rows[-1]["timestamp_utc"] = NOW.replace(day=21, hour=0).isoformat()
+    result = canonical(rows)["andrea"]
+    assert result["available"] is True
+    assert result["checked"]["event_count"] == 1
+    assert result["passed"]["event_count"] == 1
+
+
+def test_andrea_boundary_validation_still_rejects_genuinely_missing_selection():
+    result = canonical([event("content_sufficiency_checked", "Andrea", "still-orphan", result="passed"),
+                        event("article_generation_requested", "Bob", "still-orphan")])["andrea"]
+    assert result["available"] is False
+    assert result["checked"]["event_count"] is None
+
+
 def test_nested_real_andrea_blocks_keep_identity_and_avoids_are_attempt_free(monkeypatch):
     real = {"source_url": "https://example.test/real", "title": "Real",
             "decision": "blocked_before_bob"}
@@ -95,6 +123,52 @@ def test_alfred_explicit_warning_and_blocker_grains_preserve_history():
     assert result["blocker_bearing_reviews"] == 1
     assert result["articles_with_blockers"] == 1
     assert result["final_blockers"] == 0
+
+
+def test_repeated_same_run_reviews_keep_warning_review_occurrences_distinct():
+    rows = chain("repeat-warning", "passed") + [
+        event("quality_review_completed", "Alfred", "repeat-warning", result="approved"),
+        event("warning_recorded", "Alfred", "repeat-warning"),
+        event("quality_review_completed", "Alfred", "repeat-warning", result="approved"),
+        event("warning_recorded", "Alfred", "repeat-warning"),
+    ]
+    result = canonical(rows)["alfred"]
+    assert result["warning_occurrences"] == 2
+    assert result["warning_bearing_reviews"] == 2
+    assert result["articles_with_warnings"] == 1
+
+    clean_second = rows[:-1]
+    result = canonical(clean_second)["alfred"]
+    assert result["warning_bearing_reviews"] == 1
+    assert result["articles_with_warnings"] == 1
+
+
+def test_repeated_same_run_reviews_keep_blocker_review_occurrences_and_final_state():
+    rows = chain("repeat-blocker", "passed") + [
+        event("quality_review_completed", "Alfred", "repeat-blocker", result="needs_revision"),
+        event("blocker_recorded", "Alfred", "repeat-blocker"),
+        event("quality_review_completed", "Alfred", "repeat-blocker", result="needs_revision"),
+        event("blocker_recorded", "Alfred", "repeat-blocker"),
+    ]
+    result = canonical(rows)["alfred"]
+    assert result["blocker_occurrences"] == 2
+    assert result["blocker_bearing_reviews"] == 2
+    assert result["articles_with_blockers"] == 1
+    assert result["final_blockers"] == 1
+
+    clean_second = rows[:-1]
+    clean_second[-1] = dict(clean_second[-1], result="approved",
+                            timestamp_utc=NOW.replace(hour=13).isoformat())
+    result = canonical(clean_second)["alfred"]
+    assert result["blocker_bearing_reviews"] == 1
+    assert result["articles_with_blockers"] == 1
+    assert result["final_blockers"] == 0
+
+
+def test_unassociated_alfred_audit_event_makes_review_grain_unavailable():
+    result = canonical([event("warning_recorded", "Alfred", "no-review")])["alfred"]
+    assert result["warning_occurrences"] == 1
+    assert result["warning_bearing_reviews"] is None
 
 
 def test_blocker_only_never_becomes_warning_and_corrupt_evidence_is_null():
