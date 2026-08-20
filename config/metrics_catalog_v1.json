@@ -3593,9 +3593,9 @@
       "consumer_paths": [
         "scripts/daily_editorial_judgment.py"
       ],
-      "formula": "distinct run_id plus correlation_id among warning_recorded events",
+      "formula": "count distinct quality_review_completed review occurrences associated through canonical append order and matching run/correlation identity with at least one warning_recorded occurrence before the next review occurrence for that run/correlation",
       "aggregation": "distinct review count",
-      "identity_key": "canonical correlation_id",
+      "identity_key": "derived canonical review occurrence (ordered ledger occurrence; not correlation_id)",
       "time_window": "inclusive UTC [window_start, window_end]",
       "zero_semantics": "Zero means a fully covered canonical window contains no qualifying facts.",
       "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",
@@ -3663,9 +3663,9 @@
       "consumer_paths": [
         "scripts/daily_editorial_judgment.py"
       ],
-      "formula": "distinct run_id plus correlation_id among blocker_recorded events",
+      "formula": "count distinct quality_review_completed review occurrences associated through canonical append order and matching run/correlation identity with at least one blocker_recorded occurrence before the next review occurrence for that run/correlation",
       "aggregation": "distinct review count",
-      "identity_key": "canonical correlation_id",
+      "identity_key": "derived canonical review occurrence (ordered ledger occurrence; not correlation_id)",
       "time_window": "inclusive UTC [window_start, window_end]",
       "zero_semantics": "Zero means a fully covered canonical window contains no qualifying facts.",
       "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",

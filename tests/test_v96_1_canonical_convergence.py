@@ -205,3 +205,11 @@ def test_catalog_has_unique_v96_1_grains():
                 "alfred.warning_bearing_reviews", "alfred.blocker_occurrences",
                 "alfred.blocker_bearing_reviews", "alfred.unique_articles_with_blockers"}
     assert required <= set(names)
+    by_name = {metric["canonical_name"]: metric for metric in metrics}
+    for name in ("alfred.warning_bearing_reviews", "alfred.blocker_bearing_reviews"):
+        metric = by_name[name]
+        assert "quality_review_completed review occurrences" in metric["formula"]
+        assert "canonical append order" in metric["formula"]
+        assert "before the next review occurrence" in metric["formula"]
+        assert "ordered ledger occurrence" in metric["identity_key"]
+        assert metric["identity_key"] != "canonical correlation_id"

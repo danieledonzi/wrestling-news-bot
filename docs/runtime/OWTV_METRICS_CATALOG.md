@@ -58,9 +58,9 @@ Each JSON row has exactly one `source_primary`. `source_secondary` entries are e
 | `andrea.passed_with_exception_content` | Unique content at canonical Andrea passed_with_exception grain. | `state/newsroom/canonical_event_ledger.jsonl` | distinct content_id across validated passed_with_exception events; count |
 | `andrea.blocked_occurrences` | Canonical Andrea blocked occurrences. | `state/newsroom/canonical_event_ledger.jsonl` | count validated content_sufficiency_checked events at blocked grain; count |
 | `andrea.blocked_content` | Unique content at canonical Andrea blocked grain. | `state/newsroom/canonical_event_ledger.jsonl` | distinct content_id across validated blocked events; count |
-| `alfred.warning_bearing_reviews` | Canonical Alfred reviews bearing warnings. | `state/newsroom/canonical_event_ledger.jsonl` | distinct run_id plus correlation_id among warning_recorded events; count |
+| `alfred.warning_bearing_reviews` | Canonical Alfred reviews bearing warnings. | `state/newsroom/canonical_event_ledger.jsonl` | count distinct quality_review_completed review occurrences associated through canonical append order and matching run/correlation identity with at least one warning_recorded occurrence before the next review occurrence for that run/correlation; count |
 | `alfred.blocker_occurrences` | Historical Alfred blocker occurrences. | `state/newsroom/canonical_event_ledger.jsonl` | count blocker_recorded events including later-resolved blockers; count |
-| `alfred.blocker_bearing_reviews` | Canonical Alfred reviews bearing blockers. | `state/newsroom/canonical_event_ledger.jsonl` | distinct run_id plus correlation_id among blocker_recorded events; count |
+| `alfred.blocker_bearing_reviews` | Canonical Alfred reviews bearing blockers. | `state/newsroom/canonical_event_ledger.jsonl` | count distinct quality_review_completed review occurrences associated through canonical append order and matching run/correlation identity with at least one blocker_recorded occurrence before the next review occurrence for that run/correlation; count |
 | `alfred.unique_articles_with_blockers` | Unique content with historical Alfred blockers. | `state/newsroom/canonical_event_ledger.jsonl` | distinct content_id among blocker_recorded events; count |
 
 ## 5. Partially available and diagnostic metrics
