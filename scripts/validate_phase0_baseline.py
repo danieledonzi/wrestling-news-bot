@@ -325,8 +325,10 @@ def validate(
 
     catalog_rows = _unique(catalog.get("metrics"), "canonical_name", "catalog metric", errors)
     metric_rows = _unique(baseline.get("metric_baselines"), "metric_name", "baseline metric", errors)
-    if set(metric_rows) != set(catalog_rows):
-        errors.append("baseline metric set must exactly equal the A1 catalog metric set")
+    baseline_catalog_rows = {name: row for name, row in catalog_rows.items()
+                             if row.get("policy_version") == "v95.22_a1"}
+    if set(metric_rows) != set(baseline_catalog_rows):
+        errors.append("baseline metric set must exactly equal the frozen v95.22 A1 catalog metric set")
     for name, row in metric_rows.items():
         cat = catalog_rows.get(name)
         if cat is None:

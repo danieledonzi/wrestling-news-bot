@@ -715,11 +715,14 @@ def _canonical_event_sections(rows: list[dict[str, Any]], since: datetime, until
     report_publications = metric("report_published", agent="Simone")
     warning_occurrences = metric("warning_recorded", agent="Alfred")
     warning_articles = warning_occurrences["unique_content_count"]
-    warning_review_events = len({(row.get("run_id"), row.get("content_id"))
-                                 for row in by_type.get("warning_recorded", [])
-                                 if row.get("agent") == "Alfred" and row.get("content_id")})
     reviews = metric("quality_review_completed", agent="Alfred")
     blocker_occurrences = metric("blocker_recorded", agent="Alfred")
+    warning_review_count = len({(row.get("run_id"), row.get("correlation_id"))
+                                for row in by_type.get("warning_recorded", [])
+                                if row.get("agent") == "Alfred" and row.get("correlation_id")})
+    blocker_review_count = len({(row.get("run_id"), row.get("correlation_id"))
+                                for row in by_type.get("blocker_recorded", [])
+                                if row.get("agent") == "Alfred" and row.get("correlation_id")})
     pub_attempts = metric("publication_attempted", agent="Publisher")
     pub_failures = [r for r in bounded if r.get("agent") == "Publisher" and r.get("error_terminal") is True]
     simone_failures = [r for r in bounded if r.get("agent") == "Simone" and r.get("error_terminal") is True]
@@ -748,6 +751,52 @@ def _canonical_event_sections(rows: list[dict[str, Any]], since: datetime, until
         "simone_report_selected": metric("report_selected", agent="Simone"),
         "simone_report_publications": report_publications,
     }
+    selected_rows = [r for r in by_type.get("candidate_selected", []) if r.get("agent") == "Menzo"]
+    andrea_rows = [r for r in by_type.get("content_sufficiency_checked", []) if r.get("agent") == "Andrea"]
+    bob_rows = [r for r in by_type.get("article_generation_requested", []) if r.get("agent") == "Bob"]
+    allowed_andrea_results = {"passed", "passed_with_exception", "blocked"}
+    correlation = lambda r: (r.get("run_id"), r.get("correlation_id")) if r.get("run_id") and r.get("correlation_id") else None
+    selected_correlations = [correlation(r) for r in selected_rows]
+    check_correlations = [correlation(r) for r in andrea_rows]
+    bob_correlations = [correlation(r) for r in bob_rows]
+    andrea_complete = coverage["p1_1"] == "full" and all(selected_correlations + check_correlations + bob_correlations)
+    andrea_issues: list[str] = []
+    selected_counts, check_counts, bob_counts = map(Counter, (selected_correlations, check_correlations, bob_correlations))
+    if andrea_complete:
+        if any(count != 1 for count in selected_counts.values()):
+            andrea_issues.append("menzo_selection_correlation_not_unique")
+        if set(check_counts) != set(selected_counts) or any(count != 1 for count in check_counts.values()):
+            andrea_issues.append("andrea_check_correlation_incomplete")
+        for row in andrea_rows:
+            result_value, key = row.get("result"), correlation(row)
+            if result_value not in allowed_andrea_results:
+                andrea_issues.append("andrea_check_outcome_invalid")
+            expected = 0 if result_value == "blocked" else 1
+            if bob_counts.get(key, 0) != expected:
+                andrea_issues.append("andrea_bob_request_consistency_failed")
+        if set(bob_counts) - set(selected_counts):
+            andrea_issues.append("bob_request_without_menzo_selection")
+    andrea_complete = andrea_complete and not andrea_issues
+    def andrea_grain(result_value: str | None = None) -> dict[str, Any]:
+        chosen = [r for r in andrea_rows if result_value is None or r.get("result") == result_value]
+        if not andrea_complete:
+            return {"event_count": None, "unique_content_count": None, "content_ids": None}
+        ids = {r.get("content_id") for r in chosen if r.get("content_id")}
+        return {"event_count": len(chosen), "unique_content_count": len(ids), "content_ids": sorted(ids)}
+    andrea_read_model = {
+        "available": andrea_complete,
+        "checked": andrea_grain(),
+        "passed": andrea_grain("passed"),
+        "passed_with_exception": andrea_grain("passed_with_exception"),
+        "blocked": andrea_grain("blocked"),
+        "consistency_issues": list(dict.fromkeys(andrea_issues)),
+        "unavailability_reason": None if andrea_complete else
+            (andrea_issues[0] if andrea_issues else "canonical_lifecycle_coverage_incomplete"),
+    }
+    andrea_read_model["events"] = {key: andrea_read_model[key]["event_count"] for key in
+                                   ("checked", "passed", "passed_with_exception", "blocked")}
+    andrea_read_model["unique"] = {key: andrea_read_model[key]["unique_content_count"] for key in
+                                   ("checked", "passed", "passed_with_exception", "blocked")}
     menzo_decision_ids = set().union(*(set(funnel_metrics[key]["content_ids"]) for key in
         ("menzo_unique_selected", "menzo_unique_pending")))
     unavailable = {
@@ -816,11 +865,15 @@ def _canonical_event_sections(rows: list[dict[str, Any]], since: datetime, until
                 if coverage["p1_1"] == "full" and value(funnel_metrics["unique_downstream_handoffs"]) else None),
             "unavailable_metrics": unavailable,
             "reason_code_distributions": reason_codes, "content_lifecycle": lifecycle},
+        "andrea": andrea_read_model,
         "alfred": {"articles_reviewed": value(reviews),
             "articles_with_warnings": warning_articles if coverage["warnings"] == "full" else None,
-            "warning_events": warning_review_events if coverage["warnings"] == "full" else None,
+            "warning_events": warning_review_count if coverage["warnings"] == "full" else None,
+            "warning_bearing_reviews": warning_review_count if coverage["warnings"] == "full" else None,
             "warning_occurrences": value(warning_occurrences, "event_count", "warnings"),
             "blocker_occurrences": value(blocker_occurrences, "event_count", "warnings"),
+            "blocker_bearing_reviews": blocker_review_count if coverage["warnings"] == "full" else None,
+            "articles_with_blockers": value(blocker_occurrences, family="warnings"),
             "final_blockers": len(final_blocked_ids) if coverage["failures"] == "full" else None},
         "publisher": {"attempts": value(pub_attempts, "event_count"),
             "publications": value(publications), "terminal_failures": len(pub_failures) if coverage["failures"] == "full" else None},
@@ -843,6 +896,8 @@ def _canonical_event_sections(rows: list[dict[str, Any]], since: datetime, until
             result["funnel"][key] = None
         result["funnel"]["reason_code_distributions"] = None
         result["funnel"]["content_lifecycle"] = None
+        result["andrea"] = {**andrea_read_model, "available": False,
+                            "unavailability_reason": "canonical_lifecycle_coverage_incomplete"}
     return result
 
 
@@ -969,6 +1024,7 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
     canonical["alfred"]["metadata"] = {"review_lifecycle": p1_1_metadata,
                                        "warning_occurrences": warning_metadata,
                                        "final_failures": failure_metadata}
+    canonical["andrea"]["metadata"] = dict(p1_1_metadata)
     canonical["publisher"]["metadata"] = {"lifecycle": p1_1_metadata, "terminal_failures": failure_metadata}
     canonical["simone"]["metadata"] = {"lifecycle": p1_1_metadata, "terminal_failures": failure_metadata}
     canonical["ai_operations"]["metadata"] = ai_metadata

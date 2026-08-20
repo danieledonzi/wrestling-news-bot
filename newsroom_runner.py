@@ -91,6 +91,13 @@ def andrea_blocked_items(andrea: dict[str, Any]) -> list[dict[str, Any]]:
         if isinstance(items, list):
             return [item if isinstance(item, dict) else {"title": str(item)} for item in items]
     nested = andrea.get("andrea") if isinstance(andrea.get("andrea"), dict) else {}
+    # Current Andrea output keeps every real candidate in ``andrea.items``.
+    # Preserve its source identity and select only the terminal pre-Bob blocks;
+    # count-only legacy payloads deliberately continue to fall through.
+    items = nested.get("items")
+    if isinstance(items, list):
+        return [item for item in items
+                if isinstance(item, dict) and item.get("decision") == "blocked_before_bob"]
     for key in ("blocked_items", "blocked_candidates", "blocked"):
         items = nested.get(key)
         if isinstance(items, list):
