@@ -1031,27 +1031,41 @@ def render_markdown(report: dict[str, Any]) -> str:
             if isinstance(andrea_metrics.get("events"), dict)
             else {}
         )
-        andrea_reasons = (
-            andrea_metrics.get("exception_reasons")
-            if isinstance(andrea_metrics.get("exception_reasons"), dict)
+        andrea_metadata = (
+            andrea_metrics.get("metadata")
+            if isinstance(andrea_metrics.get("metadata"), dict)
             else {}
         )
+        coverage = andrea_metadata.get("coverage")
+        if isinstance(coverage, dict):
+            coverage = coverage.get("status")
         andrea_coverage = (
-            f"{andrea_metrics.get('covered_runs', 0)}/"
-            f"{andrea_metrics.get('total_runs', 0)} runs"
+            "full"
+            if coverage == "full" and andrea_metadata.get("complete_window") is True
+            else coverage if isinstance(coverage, str) and coverage != "full"
+            else "n.d."
         )
-        andrea_reason_label = ", ".join(
-            f"{reason} ({count})"
-            for reason, count in sorted(andrea_reasons.items())
-        ) or "none recorded"
     else:
         andrea_events = {}
         andrea_coverage = "unavailable"
-        andrea_reason_label = "unavailable"
+
+    canonical_andrea_reasons = andrea_metrics.get("exception_reasons")
+    legacy_andrea = (report.get("observability_snapshot") or {}).get("andrea") or {}
+    legacy_andrea_reasons = legacy_andrea.get("exception_reasons")
+    if isinstance(canonical_andrea_reasons, dict) and canonical_andrea_reasons:
+        andrea_reason_line = "- Andrea exception reason occurrences: " + ", ".join(
+            f"{reason} ({count})" for reason, count in sorted(canonical_andrea_reasons.items())
+        )
+    elif isinstance(legacy_andrea_reasons, dict) and legacy_andrea_reasons:
+        andrea_reason_line = "- Andrea exception reason occurrences (legacy diagnostic): " + ", ".join(
+            f"{reason} ({count})" for reason, count in sorted(legacy_andrea_reasons.items())
+        )
+    else:
+        andrea_reason_line = "- Andrea exception reason occurrences: n.d."
     andrea_lines = [
         f"- Andrea event coverage: {andrea_coverage}",
         f"- Andrea checked/passed/passed with exception/blocked events: {_num(andrea_events.get('checked'))}/{_num(andrea_events.get('passed'))}/{_num(andrea_events.get('passed_with_exception'))}/{_num(andrea_events.get('blocked'))}",
-        f"- Andrea exception reason occurrences: {andrea_reason_label}",
+        andrea_reason_line,
     ]
     lines = ["# OWTV Daily Editorial Judgment 24h", "", "## Daily Editorial Judgment", "", f"- Judgment: {_num(report['judgment'])}", f"- Day type: {_num(report['day_type'])}", "", report["summary"], "", "## Daily numbers", "", f"- runs completed: {_num(report.get('runs_completed'))}", f"- news published: {_num(report.get('news_published_count'))}", f"- reports published: {_num(report.get('reports_published_count'))}", f"- article types: {dict(report['article_types']) or 'n.d.'}", f"- Menzo unique actionable candidates: {_num(menzo_metrics.get('unique_actionable_candidates'))}", f"- Menzo unique downstream handoffs: {_num(menzo_metrics.get('unique_downstream_handoffs'))}", f"- Menzo unique final publications: {_num(menzo_metrics.get('unique_final_publications'))}", f"- hard news count: {_num(report['hard_count'])} (stima)", f"- soft news count: {_num(report['soft_count'])} (stima)", f"- softpool used: {'yes' if report['softpool'] else 'no'}", *andrea_lines, *alfred_lines, f"- v95.11 duplicate arbitration: {(report.get('observability_snapshot') or {}).get('duplicate_arbitration', {})}", f"- legacy duplicate signals (diagnostic): duplicate candidates / same story clusters / same event clusters / story reviews: {_num(story['duplicate_candidates'])} / {_num(story['same_story_clusters'])} / {_num(story['same_event_clusters'])} / {_num(story['story_reviews'])}", f"- suspicious pairs above threshold: {_num(story['pairs_above_threshold'])}", f"- Menzo handoff-to-publication ratio: {ratio_label}", *gemini_lines, f"- Simone legacy errors (diagnostic; not terminal): {_num(simone_metrics.get('legacy_errors_diagnostic'))}", "", "## Hard vs soft editorial balance", "", f"Stima: {_num(report['hard_count'])} hard news e {_num(report['soft_count'])} soft news. " + ("Il ricorso al softpool sembra giustificato solo se le hard news erano limitate." if report['softpool'] else "Softpool non usato: scelta coerente se la giornata aveva sufficiente materiale hard o nessun soft recuperabile."), "", "## Top 3 discarded URLs for human control", ""]
     if not report["top_discarded"]:

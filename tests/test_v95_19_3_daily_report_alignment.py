@@ -370,32 +370,49 @@ def test_markdown_reports_unavailable_andrea_as_unavailable():
         "n.d./n.d./n.d./n.d."
         in text
     )
-    assert "Andrea exception reason occurrences: unavailable" in text
+    assert "Andrea exception reason occurrences: n.d." in text
     assert "Andrea exception reason occurrences: none recorded" not in text
 
 
-def test_markdown_reports_authoritative_andrea_without_reasons_as_none_recorded():
+def test_markdown_reports_full_canonical_andrea_without_run_counts_or_reasons():
     text = render_markdown(
         _minimal_markdown_report(
             {
                 "available": True,
-                "covered_runs": 2,
-                "total_runs": 2,
+                "metadata": {"coverage": "full", "complete_window": True},
                 "events": {
                     "checked": 3,
                     "passed": 3,
                     "passed_with_exception": 0,
                     "blocked": 0,
                 },
-                "exception_reasons": {},
             }
         )
     )
 
-    assert "Andrea event coverage: 2/2 runs" in text
+    assert "Andrea event coverage: full" in text
+    assert "0/0 runs" not in text
     assert (
         "Andrea checked/passed/passed with exception/blocked events: "
         "3/3/0/0"
         in text
     )
-    assert "Andrea exception reason occurrences: none recorded" in text
+    assert "Andrea exception reason occurrences: n.d." in text
+    assert "Andrea exception reason occurrences: none recorded" not in text
+
+
+def test_markdown_labels_legacy_andrea_exception_reasons_as_diagnostic():
+    report = _minimal_markdown_report(
+        {
+            "available": True,
+            "metadata": {"coverage": "full", "complete_window": True},
+            "events": {},
+        }
+    )
+    report["observability_snapshot"] = {
+        "andrea": {"exception_reasons": {"missing_body": 2}}
+    }
+
+    text = render_markdown(report)
+
+    assert "Andrea exception reason occurrences (legacy diagnostic): missing_body (2)" in text
