@@ -250,7 +250,7 @@ def calculate_v96_2_cost(usage: dict[str, Any], actual_model: Any = None, model_
     if usage.get("economically_material_tool_usage") or (modality and modality != "text"):
         out["cost_resolution_reason"] = "mixed_or_unresolved_modality"; return out
     out["pricing_modality"] = "text"; out["pricing_modality_source"] = "provider_usage" if modality else "runtime_text_contract"
-    if timestamp:
+    if timestamp and table.get("valid_from"):
         valid_from = datetime.fromisoformat(str(table["valid_from"]).replace("Z", "+00:00"))
         row_time = datetime.fromisoformat(str(timestamp).replace("Z", "+00:00"))
         if row_time < valid_from:
@@ -327,11 +327,12 @@ def _merge_warning(a: Any, b: Any) -> Any:
 
 def record_gemini_attempt(*, response: Any = None, model_requested: Any = None, actual_model: Any = None, operation_id: Any = None, attempt_index: int = 0, retry: bool = False, fallback: bool = False, repair: bool = False, **kwargs: Any) -> None:
     try:
+        event_timestamp = kwargs.pop("timestamp", None) or utc_now()
         usage = extract_usage_metadata(response)
         response_actual_model = actual_model if actual_model is not None else extract_actual_model(response)
-        authoritative = calculate_v96_2_cost(usage, response_actual_model, model_requested)
+        authoritative = calculate_v96_2_cost(usage, response_actual_model, model_requested, timestamp=event_timestamp)
         model_value = response_actual_model or model_requested or kwargs.pop("model", None)
-        record_gemini_event(ledger_schema_version="v3", provider_attempt_id=str(uuid.uuid4()), legacy_estimated_cost_authoritative=False, legacy_cost_semantics="deprecated_non_authoritative_not_computed", operation_id=operation_id or make_operation_id(str(kwargs.get("agent") or "Gemini"), str(kwargs.get("phase") or "generation")), attempt_index=attempt_index, model_requested=model_requested, model=model_value, actual_model=response_actual_model, retry=bool(retry), fallback=bool(fallback), repair=bool(repair), **usage, **authoritative, **kwargs)
+        record_gemini_event(timestamp=event_timestamp, ledger_schema_version="v3", provider_attempt_id=str(uuid.uuid4()), legacy_estimated_cost_authoritative=False, legacy_cost_semantics="deprecated_non_authoritative_not_computed", operation_id=operation_id or make_operation_id(str(kwargs.get("agent") or "Gemini"), str(kwargs.get("phase") or "generation")), attempt_index=attempt_index, model_requested=model_requested, model=model_value, actual_model=response_actual_model, retry=bool(retry), fallback=bool(fallback), repair=bool(repair), **usage, **authoritative, **kwargs)
     except Exception:
         return
 

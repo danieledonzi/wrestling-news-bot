@@ -241,6 +241,18 @@ def _resolved_cost_row(record: dict[str, Any]) -> tuple[Decimal | None, str | No
         return None, "resolved_row_integrity_invalid_cost"
     if not value.is_finite() or value < 0:
         return None, "resolved_row_integrity_invalid_cost"
+    components: list[Decimal] = []
+    for field in ("computed_non_cached_input_cost", "computed_cached_input_cost",
+                  "computed_candidate_output_cost", "computed_thinking_cost"):
+        try:
+            component = Decimal(str(record.get(field)))
+        except (InvalidOperation, ValueError, TypeError):
+            return None, "resolved_row_integrity_invalid_component"
+        if not component.is_finite() or component < 0:
+            return None, "resolved_row_integrity_invalid_component"
+        components.append(component)
+    if value != sum(components, Decimal("0")):
+        return None, "resolved_row_integrity_component_mismatch"
     return value, None
 
 

@@ -221,6 +221,22 @@ def test_resolved_row_integrity_malformed_cost_and_versions_and_currency():
     assert mixed["currency"] == "mixed" and mixed["complete_window_computed_list_price_cost"] is None
 
 
+@pytest.mark.parametrize(("field", "value", "reason"), [
+    ("computed_non_cached_input_cost", "bad", "resolved_row_integrity_invalid_component"),
+    ("computed_cached_input_cost", "-0.1", "resolved_row_integrity_invalid_component"),
+    ("computed_candidate_output_cost", "NaN", "resolved_row_integrity_invalid_component"),
+    ("computed_list_price_cost", "1", "resolved_row_integrity_component_mismatch"),
+])
+def test_resolved_row_component_integrity(field, value, reason):
+    row = resolved_row(**{field: value})
+    truth = build_gemini_economic_truth([row], available=True)
+    assert truth["computed_cost_resolved_attempts"] == 0
+    assert truth["unknown_computed_cost_attempts"] == 1
+    assert truth["complete_window"] is False
+    assert truth["complete_window_computed_list_price_cost"] is None
+    assert truth["diagnostics"]["economic_row_integrity_reasons"] == {reason: 1}
+
+
 def test_breakdowns_reconcile_without_operation_id_deduplication():
     rows = [resolved_row(provider_attempt_id="a", operation_id="same", agent="Bob", reason="translate"),
             resolved_row(provider_attempt_id="b", operation_id="same", agent="Menzo", reason="repair", actual_model="gemini-3.1-flash-lite")]
@@ -389,3 +405,34 @@ def test_operational_renderer_caps_implicit_window_at_effective_now(tmp_path):
     expected = format(Decimal(inside["computed_list_price_cost"]) + Decimal(future["computed_list_price_cost"]), "f")
     assert "- real provider attempts: 2" in explicit
     assert f"complete-window computed list-price cost: {expected} USD" in explicit
+
+
+def test_attempt_timestamp_is_shared_by_validity_check_and_persisted_row(tmp_path, monkeypatch):
+    monkeypatch.setattr(gemini_ledger, "STATE_DIR", tmp_path / "state")
+    monkeypatch.setattr(gemini_ledger, "ARTIFACT_DIR", tmp_path / "artifacts")
+    monkeypatch.setattr(gemini_ledger, "LEDGER_FILE", tmp_path / "state/ledger.jsonl")
+    monkeypatch.setattr(gemini_ledger, "LATEST_FILE", tmp_path / "artifacts/latest.json")
+    monkeypatch.setattr(gemini_ledger, "write_latest_snapshot", lambda **_kwargs: {})
+    response = {"usage_metadata": {"prompt_token_count": 1, "candidates_token_count": 1,
+        "thoughts_token_count": 0, "total_token_count": 2}}
+
+    before = "2026-08-21T23:59:59+00:00"
+    valid = "2026-08-22T00:00:00+00:00"
+    gemini_ledger.record_gemini_attempt(response=response, model_requested="gemini-2.5-flash", status="called", timestamp=before)
+    gemini_ledger.record_gemini_attempt(response=response, model_requested="gemini-2.5-flash", status="called", timestamp=valid)
+
+    generated = "2026-08-23T12:34:56+00:00"
+    utc_calls = []
+    monkeypatch.setattr(gemini_ledger, "utc_now", lambda: utc_calls.append(generated) or generated)
+    seen_timestamps = []
+    original_calculate = gemini_ledger.calculate_v96_2_cost
+    monkeypatch.setattr(gemini_ledger, "calculate_v96_2_cost", lambda *args, **kwargs:
+        seen_timestamps.append(kwargs.get("timestamp")) or original_calculate(*args, **kwargs))
+    gemini_ledger.record_gemini_attempt(response=response, model_requested="gemini-2.5-flash", status="called")
+
+    rows = [json.loads(line) for line in gemini_ledger.LEDGER_FILE.read_text().splitlines()]
+    assert rows[0]["timestamp"] == before and rows[0]["cost_resolution_reason"] == "outside_price_validity"
+    assert rows[1]["timestamp"] == valid and rows[1]["cost_resolution_status"] == "resolved"
+    assert utc_calls == [generated]
+    assert seen_timestamps == [generated]
+    assert rows[2]["timestamp"] == generated and rows[2]["cost_resolution_status"] == "resolved"
