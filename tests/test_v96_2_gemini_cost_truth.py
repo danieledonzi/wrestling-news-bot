@@ -17,6 +17,7 @@ from agents.gemini_diagnostics import (
 from agents.gemini_ledger import calculate_v96_2_cost, extract_usage_metadata, load_pricing_table, resolve_pricing_model
 from owtv_report import render_gemini_detailed_ledger_24h
 from scripts.daily_editorial_judgment import _render_gemini_economic_lines
+from scripts import daily_editorial_judgment as daily_judgment
 from scripts.observability_snapshot import build_snapshot
 
 
@@ -311,3 +312,25 @@ def test_observability_snapshot_enforces_whole_ledger_integrity(tmp_path):
     assert empty["section_metadata"]["gemini"]["available"] is True
     assert empty["gemini"]["economic"]["real_attempts"] == 0
     assert empty["gemini"]["economic"]["complete_window_computed_list_price_cost"] == "0"
+
+
+def test_build_report_preserves_provider_economics_across_p1_4_resolution(monkeypatch):
+    economic = {"real_attempts": 2, "provider_usage_coverage": 1.0, "computed_cost_coverage": 1.0,
+        "known_computed_list_price_cost": "0.001", "complete_window_computed_list_price_cost": "0.001",
+        "unknown_computed_cost_attempts": 0, "currency": "USD", "price_table_version": "table-a"}
+    snapshot = {"authority_available": False,
+        "section_metadata": {"gemini": {"available": True}, "p1_3_ai_operations": {"complete_window": True}},
+        "authoritative": {"ai_operations": {"logical_requests": 7, "real_attempts": 3}},
+        "gemini": {"economic": economic}}
+    monkeypatch.setattr(daily_judgment, "build_observability_snapshot", lambda *_args, **_kwargs: snapshot)
+    report = daily_judgment.build_report({"__input_provenance__": {"discovery_mode": "default"}})
+    assert report["canonical_gemini"]["logical_requests"] == 7
+    assert report["canonical_gemini"]["economic"] == economic
+    rendered = daily_judgment.render_markdown(report)
+    assert "known computed paid-tier Standard list-price cost: 0.001 USD" in rendered
+    assert "complete-window computed list-price cost: 0.001 USD" in rendered
+
+    snapshot["section_metadata"]["gemini"]["available"] = False
+    unavailable = daily_judgment.build_report({"__input_provenance__": {"discovery_mode": "default"}})
+    assert "economic" not in unavailable["canonical_gemini"]
+    assert "known computed paid-tier Standard list-price cost: n.d. n.d." in daily_judgment.render_markdown(unavailable)

@@ -911,8 +911,12 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
     canonical_menzo: dict[str, Any] = {}
     canonical_andrea: dict[str, Any] = {}
     canonical_simone: dict[str, Any] = {}
+    ledger_economic: dict[str, Any] | None = None
     if (section_metadata.get("gemini") or {}).get("available") is True:
         canonical_gemini = observability.get("gemini", {})
+        candidate_economic = canonical_gemini.get("economic") if isinstance(canonical_gemini, dict) else None
+        if isinstance(candidate_economic, dict):
+            ledger_economic = candidate_economic
     if menzo_authoritative:
         canonical_menzo = observability.get("funnel", {}).get("canonical", {})
     if (section_metadata.get("andrea") or {}).get("available") is True:
@@ -927,6 +931,8 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
     canonical_menzo, canonical_andrea = canonical_payloads["menzo"], canonical_payloads["andrea"]
     canonical_alfred = canonical_payloads["alfred"]
     canonical_gemini, canonical_simone = canonical_payloads["gemini"], canonical_payloads["simone"]
+    if ledger_economic is not None:
+        canonical_gemini = {**canonical_gemini, "economic": ledger_economic}
     if snapshot_authoritative:
         snap_pub = observability.get("publication", {})
         news_published_count = snap_pub.get("news_unique")
