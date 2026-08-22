@@ -81,7 +81,7 @@ def main() -> int:
     runs = {r.get("run_id") for r in records if r.get("run_id")}
 
     print("")
-    print(f"## Gemini / AI Cost Ledger {hours}h")
+    print(f"## Gemini / AI Call and Usage Diagnostics (NON-AUTHORITATIVE) {hours}h")
     print(f"- Ledger file: {LEDGER}")
     print(f"- Ledger records: {len(records)}")
     print(f"- Runs with Gemini ledger activity: {len(runs)}")

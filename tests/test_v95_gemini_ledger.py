@@ -151,7 +151,7 @@ def test_v95_13a_records_attempts_avoided_fallback_retry_repair_and_v1(tmp_path,
     assert summary["gemini_calls_total"] == 3  # v1 called plus two successful v2 calls; failed and avoided excluded
     assert summary["v2_real_attempts"] == 4
     assert summary["real_attempts_with_usage"] == 3
-    assert summary["real_attempts_with_cost"] == 3
+    assert summary["real_attempts_with_cost"] == 0  # v3 monetary authority is computed_* only
 
 class ActualResponse:
     def __init__(self, text="ok", actual=None, usage=None):

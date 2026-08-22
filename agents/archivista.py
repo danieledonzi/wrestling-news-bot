@@ -257,6 +257,12 @@ def update_ledger(run_record: dict[str, Any]) -> list[dict[str, Any]]:
     return recent
 
 
+def _load_authoritative_gemini_diagnostics(menzo_context: dict[str, Any] | None = None) -> tuple[dict[str, Any], list[str]]:
+    records, warnings, metadata = load_ledger(return_metadata=True, strict_bounded=True)
+    available = bool(metadata["readable"] and metadata["malformed_rows"] == 0 and metadata["undated_rows"] == 0)
+    return build_gemini_diagnostics(records, menzo_context=menzo_context, economic_available=available), warnings
+
+
 def render_markdown(report: dict[str, Any]) -> str:
     lines: list[str] = []
     lines.append(f"# Archivista report - {report.get('generated_at')}")
@@ -267,7 +273,7 @@ def render_markdown(report: dict[str, Any]) -> str:
     lines.append("")
     ledger_summary = ((report.get("run_summary_input") or {}).get("gemini_ledger_summary") or {})
     calls_by_agent = ledger_summary.get("gemini_calls_by_agent") if isinstance(ledger_summary.get("gemini_calls_by_agent"), dict) else {}
-    lines.append("## Gemini / AI Cost Ledger")
+    lines.append("## Gemini / AI Call Diagnostics (non-authoritative)")
     lines.append(f"- Gemini calls total: {ledger_summary.get('gemini_calls_total', 0)}")
     lines.append(f"- Gemini calls by Menzo: {calls_by_agent.get('Menzo', 0)}")
     lines.append(f"- Gemini calls by Bob: {calls_by_agent.get('Bob', 0)}")
@@ -276,10 +282,9 @@ def render_markdown(report: dict[str, Any]) -> str:
     lines.append(f"- Gemini calls avoided by Andrea: {ledger_summary.get('gemini_calls_avoided_by_andrea', 0)}")
     lines.append(f"- Gemini calls failed: {ledger_summary.get('gemini_calls_failed', 0)}")
     lines.append("")
-    gemini_records, gemini_warnings = load_ledger()
     report_inputs = report.get("inputs", {}) if isinstance(report.get("inputs"), dict) else {}
     menzo_context = report_inputs.get("menzo") if isinstance(report_inputs.get("menzo"), dict) else None
-    gemini_diag = build_gemini_diagnostics(gemini_records, menzo_context=menzo_context)
+    gemini_diag, gemini_warnings = _load_authoritative_gemini_diagnostics(menzo_context)
     lines.append(render_gemini_diagnostics_markdown(gemini_diag).rstrip())
     if gemini_warnings:
         lines.append("### Gemini ledger warnings")

@@ -4,6 +4,7 @@ import sys
 from pathlib import Path
 
 from scripts import owtv_gemini_ledger_report as runtime_report
+from owtv_report import add_gemini_detailed_ledger_to_report
 
 
 def test_runtime_gemini_report_uses_requested_window(
@@ -24,7 +25,10 @@ def test_runtime_gemini_report_uses_requested_window(
     assert runtime_report.main() == 0
 
     output = capsys.readouterr().out
-    assert "## Gemini / AI Cost Ledger 6h" in output
-    assert "## Gemini / AI Detailed Ledger 6h" in output
+    assert "## Gemini / AI Call and Usage Diagnostics (NON-AUTHORITATIVE) 6h" in output
+    assert "## Gemini Economic Authority and Non-Authoritative Diagnostics 6h" in output
     assert "6h ledger duplicate_arbitration_cache_hit avoided records" in output
-    assert "## Gemini / AI Detailed Ledger 24h" not in output
+    assert "## Gemini Economic Authority and Non-Authoritative Diagnostics 24h" not in output
+    converged = add_gemini_detailed_ledger_to_report(output, ledger_path=ledger)
+    assert converged.count("## Gemini Economic Authority and Non-Authoritative Diagnostics 6h") == 1
+    assert "## Gemini / AI Cost Ledger" not in converged

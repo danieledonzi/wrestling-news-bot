@@ -995,6 +995,18 @@ def _num(value: Any) -> str:
     return str(value) if value is not None else "n.d."
 
 
+def _render_gemini_economic_lines(economy: dict[str, Any]) -> list[str]:
+    def pct(value: Any) -> str:
+        return f"{value:.1%}" if isinstance(value, (int, float)) else "n.d."
+    return [
+        f"- Gemini real provider attempts: {_num(economy.get('real_attempts'))}",
+        f"- Gemini provider usage coverage / computed cost coverage: {pct(economy.get('provider_usage_coverage'))} / {pct(economy.get('computed_cost_coverage'))}",
+        f"- Gemini known computed paid-tier Standard list-price cost: {_num(economy.get('known_computed_list_price_cost'))} {economy.get('currency') or 'n.d.'}",
+        f"- Gemini complete-window computed list-price cost: {_num(economy.get('complete_window_computed_list_price_cost'))} {economy.get('currency') or 'n.d.'}",
+        f"- Gemini unknown-cost attempts: {_num(economy.get('unknown_computed_cost_attempts'))}; price table: {economy.get('price_table_version') or 'n.d.'}",
+    ]
+
+
 def render_markdown(report: dict[str, Any]) -> str:
     story = report["story"]
     menzo_metrics = report.get("canonical_menzo") or {}
@@ -1011,6 +1023,8 @@ def render_markdown(report: dict[str, Any]) -> str:
         _num(gemini_metrics.get("gemini_3_5_avoided_calls")),
     )
     gemini_lines = [gemini_line]
+    economy = gemini_metrics.get("economic") or {}
+    gemini_lines += _render_gemini_economic_lines(economy)
     legacy_gemini_called = report.get("gemini_called")
     if legacy_gemini_called not in (None, "", "n.d."):
         gemini_lines.append(f"- Legacy Gemini 3.5 called total (diagnostic): {legacy_gemini_called}")

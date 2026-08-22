@@ -996,10 +996,12 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
     gemini_records, gemini_warnings, gemini_health = load_ledger(
         ledger_path, since=since, until=until, strict_bounded=True, return_metadata=True
     )
-    gemini = build_gemini_diagnostics(gemini_records, cache_path=root / "state/newsroom/menzo_duplicate_arbitration_cache.json", menzo_decisions_paths=())
-    gemini_available = bool(gemini_health["readable"] and
-                            (gemini_health["valid_rows"] > 0 or
-                             gemini_health["malformed_rows"] == 0 and gemini_health["undated_rows"] == 0))
+    gemini_available = bool(
+        gemini_health["readable"]
+        and gemini_health["malformed_rows"] == 0
+        and gemini_health["undated_rows"] == 0
+    )
+    gemini = build_gemini_diagnostics(gemini_records, cache_path=root / "state/newsroom/menzo_duplicate_arbitration_cache.json", menzo_decisions_paths=(), economic_available=gemini_available)
     if not gemini_available:
         for key in ("real_attempts", "completed_calls", "completed_successful_calls", "failures", "avoided_calls", "fallbacks",
                     "gemini_3_5_attempts", "gemini_3_5_completed_calls", "gemini_3_5_completed_successful_calls", "gemini_3_5_failures", "gemini_3_5_avoided_calls"):
