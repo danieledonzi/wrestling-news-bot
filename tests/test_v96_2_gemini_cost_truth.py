@@ -493,3 +493,38 @@ def test_v3_avoided_and_legacy_unknown_status_compatibility():
     assert truth["available"] is True and truth["coverage"] == "full"
     assert truth["real_attempts"] == 1 and truth["computed_cost_resolved_attempts"] == 1
     assert truth["diagnostics"]["invalid_v3_status_rows"] == 0
+
+
+def test_duplicate_provider_attempt_identity_fails_closed_without_deduplication():
+    first = resolved_row(provider_attempt_id="duplicate", operation_id="op-a")
+    second = resolved_row(provider_attempt_id="duplicate", operation_id="op-b")
+    truth = build_gemini_economic_truth([first, second], available=True)
+    assert truth["available"] is False and truth["coverage"] == "unavailable"
+    assert truth["real_attempts"] is None
+    assert truth["known_computed_list_price_cost"] is None
+    assert truth["complete_window_computed_list_price_cost"] is None
+    assert truth["diagnostics"]["duplicate_provider_attempt_ids"] == 1
+    assert truth["diagnostics"]["duplicate_provider_attempt_rows"] == 2
+
+
+def test_distinct_provider_attempt_ids_count_even_with_same_operation_and_content():
+    common = {"operation_id": "same", "title": "same", "url": "https://example.test/same",
+              "timestamp": "2026-08-24T00:00:00+00:00"}
+    first = resolved_row(provider_attempt_id="attempt-a", **common)
+    second = resolved_row(provider_attempt_id="attempt-b", **common)
+    truth = build_gemini_economic_truth([first, second], available=True)
+    assert truth["available"] is True and truth["coverage"] == "full"
+    assert truth["real_attempts"] == 2 and truth["computed_cost_resolved_attempts"] == 2
+    expected = format(Decimal(first["computed_list_price_cost"]) + Decimal(second["computed_list_price_cost"]), "f")
+    assert truth["known_computed_list_price_cost"] == expected
+    assert truth["diagnostics"]["duplicate_provider_attempt_ids"] == 0
+
+
+def test_single_v3_and_legacy_rows_do_not_trigger_duplicate_identity_contract():
+    current = resolved_row(provider_attempt_id="only")
+    legacy = {"ledger_schema_version": "v2", "status": "called", "provider_attempt_id": "only",
+              "usage_available": True, "input_tokens": 1, "output_tokens": 1}
+    truth = build_gemini_economic_truth([current, legacy], available=True)
+    assert truth["available"] is True
+    assert truth["real_attempts"] == 2
+    assert truth["diagnostics"]["duplicate_provider_attempt_ids"] == 0
