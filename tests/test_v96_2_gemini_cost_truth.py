@@ -4,6 +4,7 @@ from decimal import Decimal
 from pathlib import Path
 
 import pytest
+import send_daily_report
 
 from agents import gemini_ledger
 from agents import archivista
@@ -436,3 +437,59 @@ def test_attempt_timestamp_is_shared_by_validity_check_and_persisted_row(tmp_pat
     assert utc_calls == [generated]
     assert seen_timestamps == [generated]
     assert rows[2]["timestamp"] == generated and rows[2]["cost_resolution_status"] == "resolved"
+
+
+def test_email_and_archivista_cap_economics_at_one_report_time(tmp_path, monkeypatch):
+    report_now = datetime(2026, 8, 24, 12, tzinfo=timezone.utc)
+    inside = resolved_row(provider_attempt_id="inside", timestamp=(report_now - timedelta(hours=1)).isoformat())
+    future = resolved_row(provider_attempt_id="future", timestamp=(report_now + timedelta(minutes=1)).isoformat())
+    ledger = tmp_path / "gemini.jsonl"
+    ledger.write_text("\n".join(json.dumps(row) for row in (inside, future)) + "\n", encoding="utf-8")
+    original_load = load_ledger
+    seen_bounds = []
+
+    def bounded_load(**kwargs):
+        seen_bounds.append((kwargs.get("now"), kwargs.get("until")))
+        return original_load(ledger, **kwargs)
+
+    class FixedDateTime:
+        @classmethod
+        def now(cls, tz=None):
+            return report_now
+
+    monkeypatch.setattr(send_daily_report, "datetime", FixedDateTime)
+    monkeypatch.setattr(send_daily_report, "load_ledger", bounded_load)
+    email = send_daily_report.gemini_email_summary_24h()
+    assert "Real provider attempts: 1" in email
+    assert f"Known paid-tier Standard list-price cost: {inside['computed_list_price_cost']} USD" in email
+
+    monkeypatch.setattr(archivista, "utc_now_dt", lambda: report_now)
+    monkeypatch.setattr(archivista, "load_ledger", bounded_load)
+    diag, _ = archivista._load_authoritative_gemini_diagnostics()
+    assert diag["economic"]["real_attempts"] == 1
+    assert diag["economic"]["known_computed_list_price_cost"] == inside["computed_list_price_cost"]
+    assert len(seen_bounds) == 2
+    assert all(now is until is report_now for now, until in seen_bounds)
+
+
+@pytest.mark.parametrize("status", ["caleld", "", None])
+def test_invalid_v3_status_fails_closed(status):
+    invalid = {"ledger_schema_version": "v3", "timestamp": "2026-08-24T00:00:00+00:00"}
+    if status is not None:
+        invalid["status"] = status
+    truth = build_gemini_economic_truth([resolved_row(), invalid], available=True)
+    assert truth["available"] is False and truth["coverage"] == "unavailable"
+    assert truth["real_attempts"] is None
+    assert truth["complete_window_computed_list_price_cost"] is None
+    assert truth["known_computed_list_price_cost"] is None
+    assert truth["diagnostics"]["invalid_v3_status_rows"] == 1
+
+
+def test_v3_avoided_and_legacy_unknown_status_compatibility():
+    called = resolved_row()
+    avoided = {"ledger_schema_version": "v3", "status": "avoided", "timestamp": "2026-08-24T00:00:00+00:00"}
+    legacy_unknown = {"ledger_schema_version": "v2", "status": "legacy_unknown"}
+    truth = build_gemini_economic_truth([called, avoided, legacy_unknown], available=True)
+    assert truth["available"] is True and truth["coverage"] == "full"
+    assert truth["real_attempts"] == 1 and truth["computed_cost_resolved_attempts"] == 1
+    assert truth["diagnostics"]["invalid_v3_status_rows"] == 0

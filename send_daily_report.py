@@ -339,7 +339,8 @@ def generate_daily_diagnostics_24h() -> dict[str, tuple[Path | None, Path | None
 
 
 def gemini_email_summary_24h() -> str:
-    records, _warnings, metadata = load_ledger(return_metadata=True, strict_bounded=True)
+    report_now = datetime.now(timezone.utc)
+    records, _warnings, metadata = load_ledger(now=report_now, until=report_now, return_metadata=True, strict_bounded=True)
     available = bool(metadata["readable"] and metadata["malformed_rows"] == 0 and metadata["undated_rows"] == 0)
     return build_email_gemini_summary(build_gemini_diagnostics(records, economic_available=available))
 

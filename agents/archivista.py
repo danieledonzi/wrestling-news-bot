@@ -258,7 +258,8 @@ def update_ledger(run_record: dict[str, Any]) -> list[dict[str, Any]]:
 
 
 def _load_authoritative_gemini_diagnostics(menzo_context: dict[str, Any] | None = None) -> tuple[dict[str, Any], list[str]]:
-    records, warnings, metadata = load_ledger(return_metadata=True, strict_bounded=True)
+    report_now = utc_now_dt()
+    records, warnings, metadata = load_ledger(now=report_now, until=report_now, return_metadata=True, strict_bounded=True)
     available = bool(metadata["readable"] and metadata["malformed_rows"] == 0 and metadata["undated_rows"] == 0)
     return build_gemini_diagnostics(records, menzo_context=menzo_context, economic_available=available), warnings
 

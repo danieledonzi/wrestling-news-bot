@@ -258,6 +258,8 @@ def _resolved_cost_row(record: dict[str, Any]) -> tuple[Decimal | None, str | No
 
 def build_gemini_economic_truth(records: list[dict[str, Any]], *, available: bool = False) -> dict[str, Any]:
     """Canonical bounded provider-attempt economic read model (never deduplicated)."""
+    invalid_v3_status_rows = [r for r in records if r.get("ledger_schema_version") == "v3" and str(r.get("status") or "").strip().lower() not in {"called", "failed", "avoided"}]
+    available = bool(available and not invalid_v3_status_rows)
     real = [r for r in records if status_name(r) in {"called", "failed"}]
     usage_resolved = [r for r in real if _usage_evidence_resolved(r)]
     resolved_values: dict[int, Decimal] = {}
@@ -295,7 +297,8 @@ def build_gemini_economic_truth(records: list[dict[str, Any]], *, available: boo
         "failed_with_usage": sum(status_name(r)=="failed" and r.get("usage_resolution_status")=="resolved" for r in real), "failed_without_usage": sum(status_name(r)=="failed" and r.get("usage_resolution_status")!="resolved" for r in real),
         "retry_attempts": sum(r.get("retry") is True for r in real), "fallback_attempts": sum(r.get("fallback") is True for r in real), "repair_attempts": sum(r.get("repair") is True for r in real),
         "unknown_model_identities": sorted({model_name(r) for r in real if r.get("cost_resolution_reason") == "model_unresolved"}), "resolution_reasons": dict(sorted(reason_counts.items())),
-        "economic_row_integrity_reasons": dict(sorted(integrity_reasons.items()))}
+        "economic_row_integrity_reasons": dict(sorted(integrity_reasons.items())),
+        "invalid_v3_status_rows": len(invalid_v3_status_rows)}
     if not available:
         return {"available": False, "coverage": "unavailable", "complete_window": False, "source": "state/newsroom/gemini_call_ledger.jsonl",
                 "pricing_basis": "paid_tier_standard_list_price", "currency": None, "price_table_version": None, "price_table_versions": [],
