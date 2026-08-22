@@ -54,7 +54,8 @@ def test_cache_file_present_missing_and_markdown(tmp_path: Path) -> None:
     assert present["entries_valid"] == 1
     diag = build_gemini_diagnostics([{"status": "avoided", "agent": "Menzo", "reason": "duplicate_arbitration_cache_hit"}], cache)
     md = render_gemini_diagnostics_markdown(diag)
-    assert "## Gemini / AI Detailed Ledger 24h" in md
+    assert "## Gemini Economic Authority and Non-Authoritative Diagnostics 24h" in md
+    assert "### AUTHORITATIVE Gemini economic truth" in md
     assert "cache file present: yes" in md
 
 def test_menzo_postprocess_supplies_miss_expired_when_ledger_lacks_them(tmp_path: Path) -> None:

@@ -81,7 +81,7 @@ def main() -> int:
     runs = {r.get("run_id") for r in records if r.get("run_id")}
 
     print("")
-    print(f"## Gemini / AI Cost Ledger {hours}h")
+    print(f"## Gemini / AI Call and Usage Diagnostics (NON-AUTHORITATIVE) {hours}h")
     print(f"- Ledger file: {LEDGER}")
     print(f"- Ledger records: {len(records)}")
     print(f"- Runs with Gemini ledger activity: {len(runs)}")
@@ -114,10 +114,24 @@ def main() -> int:
     print("")
     if build_gemini_diagnostics and load_ledger and render_gemini_diagnostics_markdown:
         try:
-            detailed_records, warnings = load_ledger(LEDGER, since=cutoff, until=now)
+            detailed_records, warnings, metadata = load_ledger(
+                LEDGER,
+                since=cutoff,
+                until=now,
+                strict_bounded=True,
+                return_metadata=True,
+            )
+            economic_available = bool(
+                metadata["readable"]
+                and metadata["malformed_rows"] == 0
+                and metadata["undated_rows"] == 0
+            )
             print(
                 render_gemini_diagnostics_markdown(
-                    build_gemini_diagnostics(detailed_records),
+                    build_gemini_diagnostics(
+                        detailed_records,
+                        economic_available=economic_available,
+                    ),
                     hours=hours,
                 ).rstrip()
             )

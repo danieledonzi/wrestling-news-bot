@@ -1893,7 +1893,7 @@
       ],
       "formula": "count rows whose status is called or failed",
       "aggregation": "event count",
-      "identity_key": "ledger row; operation_id groups logical operations but does not collapse attempts",
+      "identity_key": "provider ledger row / provider_attempt_id when present; operation_id is diagnostic context only and is not a logical-request identifier",
       "time_window": "inclusive UTC [window_start, window_end]",
       "zero_semantics": "Zero means an available authoritative source contained no qualifying entities.",
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
@@ -3715,6 +3715,272 @@
         "daily_editorial_judgment"
       ],
       "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero."
+    },
+    {
+      "canonical_name": "gemini.provider_usage_resolved_attempts",
+      "description": "Real attempts with trustworthy provider usage under the V96.2 usage read contract, including integrity-valid retained v2 usage and resolved v3 usage.",
+      "domain": "gemini",
+      "entity_counted": "attempts",
+      "unit": "count",
+      "cardinality": "one scalar per requested window",
+      "authority_level": "contractual",
+      "source_primary": "state/newsroom/gemini_call_ledger.jsonl",
+      "source_secondary": [],
+      "producer_paths": [
+        "agents/gemini_ledger.py"
+      ],
+      "consumer_paths": [
+        "agents/gemini_diagnostics.py",
+        "scripts/observability_snapshot.py",
+        "scripts/daily_editorial_judgment.py",
+        "scripts/owtv_gemini_ledger_report.py"
+      ],
+      "formula": "count real attempts with trustworthy provider usage under the V96.2 usage read contract; includes integrity-valid retained v2 provider usage and resolved v3 usage",
+      "aggregation": "event count",
+      "identity_key": "provider attempt; provider_attempt_id on v3 rows; never operation_id",
+      "time_window": "inclusive UTC [window_start, window_end]",
+      "zero_semantics": "Zero means an available authoritative source contained no qualifying entities.",
+      "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
+      "availability": "available",
+      "schema_version": "owtv_metrics_catalog_v1",
+      "policy_version": "v96.2",
+      "introduced_in": "v96.2",
+      "status": "active",
+      "legacy_aliases": [],
+      "replacement": null,
+      "used_by_reports": [
+        "daily_editorial_judgment",
+        "operational_report"
+      ],
+      "notes": ""
+    },
+    {
+      "canonical_name": "gemini.provider_usage_coverage",
+      "description": "Resolved provider-usage attempts divided by real attempts.",
+      "domain": "gemini",
+      "entity_counted": "attempts",
+      "unit": "ratio",
+      "cardinality": "one scalar per requested window",
+      "authority_level": "contractual",
+      "source_primary": "state/newsroom/gemini_call_ledger.jsonl",
+      "source_secondary": [],
+      "producer_paths": [
+        "agents/gemini_ledger.py"
+      ],
+      "consumer_paths": [
+        "agents/gemini_diagnostics.py",
+        "scripts/observability_snapshot.py",
+        "scripts/daily_editorial_judgment.py",
+        "scripts/owtv_gemini_ledger_report.py"
+      ],
+      "formula": "provider_usage_resolved_attempts / real_attempts; null when real_attempts = 0",
+      "aggregation": "event count",
+      "identity_key": "provider attempt; provider_attempt_id on v3 rows; never operation_id",
+      "time_window": "inclusive UTC [window_start, window_end]",
+      "zero_semantics": "Zero means real_attempts > 0 and zero attempts have trustworthy provider usage; when real_attempts = 0 the ratio is null.",
+      "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
+      "availability": "available",
+      "schema_version": "owtv_metrics_catalog_v1",
+      "policy_version": "v96.2",
+      "introduced_in": "v96.2",
+      "status": "active",
+      "legacy_aliases": [],
+      "replacement": null,
+      "used_by_reports": [
+        "daily_editorial_judgment",
+        "operational_report"
+      ],
+      "notes": ""
+    },
+    {
+      "canonical_name": "gemini.computed_cost_resolved_attempts",
+      "description": "V96.2 real attempts with authoritative computed cost.",
+      "domain": "gemini",
+      "entity_counted": "attempts",
+      "unit": "count",
+      "cardinality": "one scalar per requested window",
+      "authority_level": "contractual",
+      "source_primary": "state/newsroom/gemini_call_ledger.jsonl",
+      "source_secondary": [],
+      "producer_paths": [
+        "agents/gemini_ledger.py"
+      ],
+      "consumer_paths": [
+        "agents/gemini_diagnostics.py",
+        "scripts/observability_snapshot.py",
+        "scripts/daily_editorial_judgment.py",
+        "scripts/owtv_gemini_ledger_report.py"
+      ],
+      "formula": "count V96.2 real-attempt rows whose cost_resolution_status is resolved",
+      "aggregation": "event count",
+      "identity_key": "provider attempt; provider_attempt_id on v3 rows; never operation_id",
+      "time_window": "inclusive UTC [window_start, window_end]",
+      "zero_semantics": "Zero means an available authoritative source contained no qualifying entities.",
+      "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
+      "availability": "available",
+      "schema_version": "owtv_metrics_catalog_v1",
+      "policy_version": "v96.2",
+      "introduced_in": "v96.2",
+      "status": "active",
+      "legacy_aliases": [],
+      "replacement": null,
+      "used_by_reports": [
+        "daily_editorial_judgment",
+        "operational_report"
+      ],
+      "notes": ""
+    },
+    {
+      "canonical_name": "gemini.computed_cost_coverage",
+      "description": "Authoritative computed-cost attempts divided by real attempts.",
+      "domain": "gemini",
+      "entity_counted": "attempts",
+      "unit": "ratio",
+      "cardinality": "one scalar per requested window",
+      "authority_level": "contractual",
+      "source_primary": "state/newsroom/gemini_call_ledger.jsonl",
+      "source_secondary": [],
+      "producer_paths": [
+        "agents/gemini_ledger.py"
+      ],
+      "consumer_paths": [
+        "agents/gemini_diagnostics.py",
+        "scripts/observability_snapshot.py",
+        "scripts/daily_editorial_judgment.py",
+        "scripts/owtv_gemini_ledger_report.py"
+      ],
+      "formula": "computed_cost_resolved_attempts / real_attempts; null when real_attempts = 0",
+      "aggregation": "event count",
+      "identity_key": "provider attempt; provider_attempt_id on v3 rows; never operation_id",
+      "time_window": "inclusive UTC [window_start, window_end]",
+      "zero_semantics": "Zero means real_attempts > 0 and zero attempts have resolved V96.2 cost; when real_attempts = 0 the ratio is null.",
+      "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
+      "availability": "available",
+      "schema_version": "owtv_metrics_catalog_v1",
+      "policy_version": "v96.2",
+      "introduced_in": "v96.2",
+      "status": "active",
+      "legacy_aliases": [],
+      "replacement": null,
+      "used_by_reports": [
+        "daily_editorial_judgment",
+        "operational_report"
+      ],
+      "notes": ""
+    },
+    {
+      "canonical_name": "gemini.known_computed_list_price_cost",
+      "description": "Sum of resolved paid-tier Standard list-price attempt costs.",
+      "domain": "gemini",
+      "entity_counted": "attempts",
+      "unit": "USD",
+      "cardinality": "one scalar per requested window",
+      "authority_level": "contractual",
+      "source_primary": "state/newsroom/gemini_call_ledger.jsonl",
+      "source_secondary": [],
+      "producer_paths": [
+        "agents/gemini_ledger.py"
+      ],
+      "consumer_paths": [
+        "agents/gemini_diagnostics.py",
+        "scripts/observability_snapshot.py",
+        "scripts/daily_editorial_judgment.py",
+        "scripts/owtv_gemini_ledger_report.py"
+      ],
+      "formula": "sum computed_list_price_cost for resolved V96.2 attempts",
+      "aggregation": "event count",
+      "identity_key": "provider attempt; provider_attempt_id on v3 rows; never operation_id",
+      "time_window": "inclusive UTC [window_start, window_end]",
+      "zero_semantics": "Zero means an available authoritative source contained no qualifying entities.",
+      "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
+      "availability": "available",
+      "schema_version": "owtv_metrics_catalog_v1",
+      "policy_version": "v96.2",
+      "introduced_in": "v96.2",
+      "status": "active",
+      "legacy_aliases": [],
+      "replacement": null,
+      "used_by_reports": [
+        "daily_editorial_judgment",
+        "operational_report"
+      ],
+      "notes": ""
+    },
+    {
+      "canonical_name": "gemini.complete_window_computed_list_price_cost",
+      "description": "Complete-window cost, only when every real attempt resolves homogeneously.",
+      "domain": "gemini",
+      "entity_counted": "attempts",
+      "unit": "USD",
+      "cardinality": "one scalar per requested window",
+      "authority_level": "contractual",
+      "source_primary": "state/newsroom/gemini_call_ledger.jsonl",
+      "source_secondary": [],
+      "producer_paths": [
+        "agents/gemini_ledger.py"
+      ],
+      "consumer_paths": [
+        "agents/gemini_diagnostics.py",
+        "scripts/observability_snapshot.py",
+        "scripts/daily_editorial_judgment.py",
+        "scripts/owtv_gemini_ledger_report.py"
+      ],
+      "formula": "known cost when every real attempt is resolved in one currency; otherwise null",
+      "aggregation": "event count",
+      "identity_key": "provider attempt; provider_attempt_id on v3 rows; never operation_id",
+      "time_window": "inclusive UTC [window_start, window_end]",
+      "zero_semantics": "Zero means an available authoritative source contained no qualifying entities.",
+      "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
+      "availability": "available",
+      "schema_version": "owtv_metrics_catalog_v1",
+      "policy_version": "v96.2",
+      "introduced_in": "v96.2",
+      "status": "active",
+      "legacy_aliases": [],
+      "replacement": null,
+      "used_by_reports": [
+        "daily_editorial_judgment",
+        "operational_report"
+      ],
+      "notes": ""
+    },
+    {
+      "canonical_name": "gemini.unknown_computed_cost_attempts",
+      "description": "Real attempts without authoritative V96.2 cost.",
+      "domain": "gemini",
+      "entity_counted": "attempts",
+      "unit": "count",
+      "cardinality": "one scalar per requested window",
+      "authority_level": "contractual",
+      "source_primary": "state/newsroom/gemini_call_ledger.jsonl",
+      "source_secondary": [],
+      "producer_paths": [
+        "agents/gemini_ledger.py"
+      ],
+      "consumer_paths": [
+        "agents/gemini_diagnostics.py",
+        "scripts/observability_snapshot.py",
+        "scripts/daily_editorial_judgment.py",
+        "scripts/owtv_gemini_ledger_report.py"
+      ],
+      "formula": "real_attempts - computed_cost_resolved_attempts",
+      "aggregation": "event count",
+      "identity_key": "provider attempt; provider_attempt_id on v3 rows; never operation_id",
+      "time_window": "inclusive UTC [window_start, window_end]",
+      "zero_semantics": "Zero means an available authoritative source contained no qualifying entities.",
+      "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
+      "availability": "available",
+      "schema_version": "owtv_metrics_catalog_v1",
+      "policy_version": "v96.2",
+      "introduced_in": "v96.2",
+      "status": "active",
+      "legacy_aliases": [],
+      "replacement": null,
+      "used_by_reports": [
+        "daily_editorial_judgment",
+        "operational_report"
+      ],
+      "notes": ""
     }
   ]
 }

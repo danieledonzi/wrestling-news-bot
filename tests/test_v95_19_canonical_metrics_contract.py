@@ -132,14 +132,15 @@ def test_undated_gemini_row_is_diagnostic_not_bounded_zero(tmp_path):
     assert snap["gemini"]["undated_rows_diagnostic"] == 1
 
 
-def test_partial_gemini_ledger_is_available_with_warning(tmp_path):
+def test_malformed_gemini_ledger_is_unavailable_with_warning(tmp_path):
     state = tmp_path / "state/newsroom"; state.mkdir(parents=True)
     (state / "master_log.jsonl").write_text("")
     (state / "gemini_call_ledger.jsonl").write_text(json.dumps({"timestamp": NOW.isoformat(), "model": "gemini-3.5-flash", "status": "called"}) + "\n{bad\n")
     snap = build_snapshot(NOW - timedelta(days=1), NOW, tmp_path)
-    assert snap["section_metadata"]["gemini"]["available"] is True
+    assert snap["section_metadata"]["gemini"]["available"] is False
     assert snap["section_metadata"]["gemini"]["coverage"]["malformed_rows"] == 1
-    assert snap["gemini"]["gemini_3_5_completed_calls"] == 1
+    assert snap["gemini"]["gemini_3_5_completed_calls"] is None
+    assert snap["gemini"]["economic"]["known_computed_list_price_cost"] is None
     assert snap["section_metadata"]["gemini"]["diagnostic_warnings"]
 
 

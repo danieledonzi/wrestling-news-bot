@@ -17,6 +17,8 @@ LATEST_FILE = ARTIFACT_DIR / "gemini_call_ledger_latest.json"
 PRICING_FILE = ROOT / "config" / "gemini_pricing.json"
 V2_TOKEN_FIELDS = ("input_tokens", "output_tokens", "total_tokens", "cached_input_tokens", "thinking_tokens")
 V2_COST_FIELDS = ("estimated_input_cost", "estimated_output_cost", "estimated_thinking_cost", "estimated_cached_input_cost", "estimated_cost")
+USAGE_CONTRACT_VERSION = "v96.2_usage.v1"
+PRICING_FORMULA_VERSION = "v96.2_cost.v1"
 
 
 def utc_now() -> str:
@@ -68,6 +70,23 @@ def _coerce_token(value: Any) -> Any:
     raise ValueError("invalid_token")
 
 
+def _normalize_service_tier(value: Any) -> str | None:
+    """Return stable Google UsageMetadata service-tier evidence."""
+    if value is None:
+        return None
+    underlying = getattr(value, "value", value)
+    if underlying is None:
+        return None
+    text = str(underlying).strip().lower()
+    if not text:
+        return None
+    if "." in text:
+        text = text.rsplit(".", 1)[-1]
+    if text.startswith("service_tier_"):
+        text = text[len("service_tier_"):]
+    return text or None
+
+
 def _metadata_with_source(response: Any) -> tuple[Any, Any]:
     if response is None:
         return None, None
@@ -92,7 +111,7 @@ def extract_actual_model(response: Any) -> Any:
 
 
 def extract_usage_metadata(response: Any) -> dict[str, Any]:
-    out = {"input_tokens": None, "output_tokens": None, "total_tokens": None, "cached_input_tokens": None, "thinking_tokens": None, "usage_available": False, "usage_source": None, "usage_warning": None}
+    out = {"input_tokens": None, "output_tokens": None, "total_tokens": None, "cached_input_tokens": None, "thinking_tokens": None, "token_field_states": {}, "total_tokens_provider_reported": False, "total_tokens_legacy_derived": False, "service_tier": None, "modality": None, "economically_material_tool_usage": False, "usage_available": False, "usage_source": None, "usage_warning": None}
     try:
         meta, source = _metadata_with_source(response)
         if meta is None:
@@ -108,17 +127,27 @@ def extract_usage_metadata(response: Any) -> dict[str, Any]:
             "thinking_tokens": ("thoughts_token_count", "thoughtsTokenCount", "thinking_token_count", "thinkingTokenCount"),
         }
         for field, names in aliases.items():
+            out["token_field_states"][field] = "absent_or_null"
             for name in names:
                 val = _get_value(meta, name)
                 if val is not None:
                     recognized += 1
                     try:
                         out[field] = _coerce_token(val)
+                        out["token_field_states"][field] = "present_valid"
                         parsed += 1
                     except Exception:
                         out[field] = None
+                        out["token_field_states"][field] = "present_malformed"
                         warnings.append(f"malformed_{name}")
                     break
+        out["total_tokens_provider_reported"] = out["token_field_states"].get("total_tokens") == "present_valid"
+        raw_service_tier = _get_value(meta, "service_tier")
+        if raw_service_tier is None:
+            raw_service_tier = _get_value(meta, "serviceTier")
+        out["service_tier"] = _normalize_service_tier(raw_service_tier)
+        out["modality"] = _get_value(meta, "modality")
+        out["economically_material_tool_usage"] = bool(_get_value(meta, "economically_material_tool_usage") or _get_value(meta, "economicallyMaterialToolUsage"))
         if recognized == 0:
             out["usage_warning"] = "usage_metadata_no_recognized_token_fields"
             return out
@@ -127,8 +156,9 @@ def extract_usage_metadata(response: Any) -> dict[str, Any]:
             return out
         out["usage_available"] = True
         out["usage_source"] = str(source)
-        if out["total_tokens"] is None and out["input_tokens"] is not None and out["output_tokens"] is not None:
+        if out["token_field_states"].get("total_tokens") == "absent_or_null" and out["input_tokens"] is not None and out["output_tokens"] is not None:
             out["total_tokens"] = int(out["input_tokens"]) + int(out["output_tokens"])
+            out["total_tokens_legacy_derived"] = True
             warnings.append("total_tokens_derived_from_input_output")
         if warnings:
             out["usage_warning"] = ";".join(warnings)[:240]
@@ -164,6 +194,80 @@ def _decimal_or_none(value: Any) -> Any:
     if value is None or value == "":
         return None
     return Decimal(str(value))
+
+
+def calculate_v96_2_cost(usage: dict[str, Any], actual_model: Any = None, model_requested: Any = None,
+                         pricing_table: Any = None, timestamp: Any = None) -> dict[str, Any]:
+    """Resolve authoritative Standard text list-price cost using Decimal arithmetic."""
+    table = pricing_table if isinstance(pricing_table, dict) else load_pricing_table()
+    out = {"usage_contract_version": USAGE_CONTRACT_VERSION, "pricing_formula_version": PRICING_FORMULA_VERSION,
+           "price_table_version": table.get("price_table_version"), "pricing_currency": table.get("currency"),
+           "pricing_model_key": None, "pricing_identity_source": None, "pricing_service_tier": None,
+           "pricing_service_tier_source": None, "pricing_modality": None, "pricing_modality_source": None,
+           "non_cached_input_tokens": None, "effective_cached_input_tokens": None, "effective_thinking_tokens": None,
+           "cached_input_tokens_zero_normalized": False, "thinking_tokens_derived": False,
+           "usage_resolution_status": "unresolved", "usage_resolution_reason": "usage_missing",
+           "computed_non_cached_input_cost": None, "computed_cached_input_cost": None,
+           "computed_candidate_output_cost": None, "computed_thinking_cost": None,
+           "computed_list_price_cost": None, "cost_resolution_status": "unresolved", "cost_resolution_reason": "usage_missing"}
+    if usage.get("usage_available") is not True:
+        return out
+    try:
+        states = usage.get("token_field_states") if isinstance(usage.get("token_field_states"), dict) else {}
+        if any(states.get(field) == "present_malformed" for field in ("input_tokens", "output_tokens", "total_tokens", "cached_input_tokens", "thinking_tokens")):
+            out["usage_resolution_reason"] = out["cost_resolution_reason"] = "usage_invalid"; return out
+        p, o, total = (_coerce_token(usage.get(k)) for k in ("input_tokens", "output_tokens", "total_tokens"))
+        if p is None or o is None:
+            return out
+        k = _coerce_token(usage.get("cached_input_tokens"))
+        if k is None:
+            k = 0; out["cached_input_tokens_zero_normalized"] = True
+        t = _coerce_token(usage.get("thinking_tokens"))
+        if t is None:
+            if total is None or usage.get("total_tokens_legacy_derived"):
+                return out
+            t = total - p - o; out["thinking_tokens_derived"] = True
+        provider_total = bool(usage.get("total_tokens_provider_reported")) or (total is not None and not usage.get("total_tokens_legacy_derived"))
+        if min(p, o, k, t) < 0 or k > p or (provider_total and total != p + o + t):
+            out["usage_resolution_reason"] = out["cost_resolution_reason"] = "usage_invalid"; return out
+        out.update(non_cached_input_tokens=p-k, effective_cached_input_tokens=k, effective_thinking_tokens=t,
+                   usage_resolution_status="resolved", usage_resolution_reason="resolved")
+    except Exception:
+        out["usage_resolution_reason"] = out["cost_resolution_reason"] = "usage_invalid"; return out
+    model = actual_model if actual_model is not None and str(actual_model).strip() else model_requested
+    out["pricing_identity_source"] = "actual_model" if actual_model is not None and str(actual_model).strip() else "model_requested"
+    key, conf, _ = resolve_pricing_model(model, table)
+    if not conf:
+        out["cost_resolution_reason"] = "model_unresolved"; return out
+    out["pricing_model_key"] = key
+    tier = _normalize_service_tier(usage.get("service_tier"))
+    if tier and tier not in {"standard", "unspecified", "paid_tier_standard", "paid-tier-standard"}:
+        out["pricing_service_tier"] = tier; out["pricing_service_tier_source"] = "provider_usage"
+        out["cost_resolution_reason"] = "price_class_unresolved"; return out
+    out["pricing_service_tier"] = "standard"
+    out["pricing_service_tier_source"] = "provider_usage_default_standard" if tier == "unspecified" else ("provider_usage" if tier else "runtime_default_standard")
+    modality = str(usage.get("modality") or "").strip().lower()
+    if usage.get("economically_material_tool_usage") or (modality and modality != "text"):
+        out["cost_resolution_reason"] = "mixed_or_unresolved_modality"; return out
+    out["pricing_modality"] = "text"; out["pricing_modality_source"] = "provider_usage" if modality else "runtime_text_contract"
+    if timestamp and table.get("valid_from"):
+        valid_from = datetime.fromisoformat(str(table["valid_from"]).replace("Z", "+00:00"))
+        row_time = datetime.fromisoformat(str(timestamp).replace("Z", "+00:00"))
+        if row_time < valid_from:
+            out["cost_resolution_reason"] = "outside_price_validity"; return out
+    if "tiers" in conf:
+        tiers = conf["tiers"]
+        conf = tiers[0] if p <= 200000 else tiers[1]
+    if any(conf.get(k) is None for k in ("input_price_per_million", "output_price_per_million", "cached_input_price_per_million")):
+        out["cost_resolution_reason"] = "price_class_unresolved"; return out
+    ip, op, kp = map(Decimal, (str(conf["input_price_per_million"]), str(conf["output_price_per_million"]), str(conf["cached_input_price_per_million"])))
+    million = Decimal(1000000)
+    components = ((Decimal(p-k)*ip/million), (Decimal(k)*kp/million), (Decimal(o)*op/million), (Decimal(t)*op/million))
+    names = ("computed_non_cached_input_cost", "computed_cached_input_cost", "computed_candidate_output_cost", "computed_thinking_cost")
+    out.update({n: format(v, "f") for n, v in zip(names, components)})
+    out["computed_list_price_cost"] = format(sum(components, Decimal(0)), "f")
+    out["cost_resolution_status"] = out["cost_resolution_reason"] = "resolved"
+    return out
 
 
 def calculate_estimated_cost(usage: dict[str, Any], model: Any, pricing_table: Any = None) -> dict[str, Any]:
@@ -223,14 +327,12 @@ def _merge_warning(a: Any, b: Any) -> Any:
 
 def record_gemini_attempt(*, response: Any = None, model_requested: Any = None, actual_model: Any = None, operation_id: Any = None, attempt_index: int = 0, retry: bool = False, fallback: bool = False, repair: bool = False, **kwargs: Any) -> None:
     try:
+        event_timestamp = kwargs.pop("timestamp", None) or utc_now()
         usage = extract_usage_metadata(response)
         response_actual_model = actual_model if actual_model is not None else extract_actual_model(response)
-        model_for_price = response_actual_model or model_requested or kwargs.get("model")
-        pricing = calculate_estimated_cost(usage, model_for_price)
-        warning = _merge_warning(usage.get("usage_warning"), pricing.pop("pricing_warning", None))
-        usage["usage_warning"] = warning
+        authoritative = calculate_v96_2_cost(usage, response_actual_model, model_requested, timestamp=event_timestamp)
         model_value = response_actual_model or model_requested or kwargs.pop("model", None)
-        record_gemini_event(ledger_schema_version="v2", operation_id=operation_id or make_operation_id(str(kwargs.get("agent") or "Gemini"), str(kwargs.get("phase") or "generation")), attempt_index=attempt_index, model_requested=model_requested, model=model_value, actual_model=response_actual_model, retry=bool(retry), fallback=bool(fallback), repair=bool(repair), **usage, **pricing, **kwargs)
+        record_gemini_event(timestamp=event_timestamp, ledger_schema_version="v3", provider_attempt_id=str(uuid.uuid4()), legacy_estimated_cost_authoritative=False, legacy_cost_semantics="deprecated_non_authoritative_not_computed", operation_id=operation_id or make_operation_id(str(kwargs.get("agent") or "Gemini"), str(kwargs.get("phase") or "generation")), attempt_index=attempt_index, model_requested=model_requested, model=model_value, actual_model=response_actual_model, retry=bool(retry), fallback=bool(fallback), repair=bool(repair), **usage, **authoritative, **kwargs)
     except Exception:
         return
 

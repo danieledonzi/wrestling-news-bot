@@ -15,14 +15,18 @@ from agents.gemini_diagnostics import (
     render_gemini_diagnostics_markdown,
 )
 
-DETAILED_LEDGER_HEADING = "## Gemini / AI Detailed Ledger 24h"
-DETAILED_LEDGER_HEADING_RE = re.compile(
+DETAILED_LEDGER_HEADING = "## Gemini Economic Authority and Non-Authoritative Diagnostics 24h"
+CURRENT_DETAILED_HEADING_RE = re.compile(
+    r"^## Gemini Economic Authority and Non-Authoritative Diagnostics(?: \d+h)?\s*$",
+    re.MULTILINE,
+)
+LEGACY_DETAILED_HEADING_RE = re.compile(
     r"^## Gemini / AI Detailed Ledger(?: \d+h)?\s*$",
     re.MULTILINE,
 )
-COST_LEDGER_HEADING = "## Gemini / AI Cost Ledger 24h"
+COST_LEDGER_HEADING = "## Gemini / AI Call and Usage Diagnostics (non-authoritative) 24h"
 COST_LEDGER_HEADING_RE = re.compile(
-    r"^## Gemini / AI Cost Ledger(?: \d+h)?\s*$",
+    r"^## Gemini / AI (?:Call and Usage Diagnostics \(NON-AUTHORITATIVE\)|Cost Ledger)(?: \d+h)?\s*$",
     re.MULTILINE,
 )
 H2_HEADING_RE = re.compile(r"^## ", re.MULTILINE)
@@ -68,21 +72,26 @@ def render_gemini_detailed_ledger_24h(
 ) -> str:
     """Render detailed Gemini diagnostics without failing report generation."""
     effective_now = now or datetime.now(timezone.utc)
-    hours = _window_hours(since, until, effective_now)
+    effective_until = until or effective_now
+    hours = _window_hours(since, effective_until, effective_now)
 
     try:
         if ledger_path is None:
-            records, warnings = load_ledger(
+            records, warnings, metadata = load_ledger(
                 since=since,
-                until=until,
+                until=effective_until,
                 now=effective_now,
+                strict_bounded=True,
+                return_metadata=True,
             )
         else:
-            records, warnings = load_ledger(
+            records, warnings, metadata = load_ledger(
                 ledger_path,
                 since=since,
-                until=until,
+                until=effective_until,
                 now=effective_now,
+                strict_bounded=True,
+                return_metadata=True,
             )
 
         context = (
@@ -94,6 +103,7 @@ def render_gemini_detailed_ledger_24h(
         diagnostics = build_gemini_diagnostics(
             records,
             menzo_context=context,
+            economic_available=bool(metadata["readable"] and metadata["malformed_rows"] == 0 and metadata["undated_rows"] == 0),
         )
         markdown = render_gemini_diagnostics_markdown(
             diagnostics,
@@ -110,7 +120,7 @@ def render_gemini_detailed_ledger_24h(
 
     except Exception as exc:
         return (
-            f"## Gemini / AI Detailed Ledger {hours}h\n\n"
+            f"## Gemini Economic Authority and Non-Authoritative Diagnostics {hours}h\n\n"
             f"- warning: Gemini detailed ledger unavailable: {exc}\n"
         )
 
@@ -126,8 +136,24 @@ def add_gemini_detailed_ledger_to_report(
     menzo_context: dict[str, Any] | None = None,
 ) -> str:
     """Insert detailed Gemini diagnostics after the aggregate cost section."""
-    if DETAILED_LEDGER_HEADING_RE.search(report_markdown):
-        return report_markdown
+    def relabel_legacy(text: str) -> str:
+        return COST_LEDGER_HEADING_RE.sub(
+            lambda match: match.group(0).replace("Gemini / AI Cost Ledger", "Gemini / AI Call and Usage Diagnostics (NON-AUTHORITATIVE)"), text
+        )
+
+    legacy_position: int | None = None
+    while legacy_match := LEGACY_DETAILED_HEADING_RE.search(report_markdown):
+        legacy_position = legacy_match.start() if legacy_position is None else min(legacy_position, legacy_match.start())
+        next_section = H2_HEADING_RE.search(report_markdown, legacy_match.end())
+        section_end = next_section.start() if next_section is not None else len(report_markdown)
+        report_markdown = (
+            report_markdown[:legacy_match.start()].rstrip()
+            + ("\n\n" if report_markdown[:legacy_match.start()].strip() and report_markdown[section_end:].strip() else "")
+            + report_markdown[section_end:].lstrip("\n")
+        )
+
+    if CURRENT_DETAILED_HEADING_RE.search(report_markdown):
+        return relabel_legacy(report_markdown)
 
     detailed = render_gemini_detailed_ledger_24h(
         ledger_path=ledger_path,
@@ -140,8 +166,13 @@ def add_gemini_detailed_ledger_to_report(
     cost_heading_match = COST_LEDGER_HEADING_RE.search(report_markdown)
 
     if cost_heading_match is None:
+        if legacy_position is not None:
+            insert_at = min(legacy_position, len(report_markdown))
+            before = report_markdown[:insert_at].rstrip()
+            after = report_markdown[insert_at:].lstrip("\n")
+            return relabel_legacy((before + "\n\n" if before else "") + detailed + ("\n" + after if after else "\n"))
         suffix = "" if report_markdown.endswith("\n") else "\n"
-        return report_markdown + suffix + "\n" + detailed + "\n"
+        return relabel_legacy(report_markdown + suffix + "\n" + detailed + "\n")
 
     next_section = H2_HEADING_RE.search(
         report_markdown,
@@ -156,7 +187,7 @@ def add_gemini_detailed_ledger_to_report(
     before = report_markdown[:insert_at].rstrip()
     after = report_markdown[insert_at:].lstrip("\n")
 
-    return before + "\n\n" + detailed + ("\n" + after if after else "\n")
+    return relabel_legacy(before + "\n\n" + detailed + ("\n" + after if after else "\n"))
 
 
 def _parse_arg_dt(value: str | None) -> datetime | None:

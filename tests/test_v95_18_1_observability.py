@@ -61,7 +61,7 @@ def test_v9518_latest_run_snapshot_is_exposed(tmp_path: Path) -> None:
     markdown = render_gemini_diagnostics_markdown(diag, hours=12)
 
     assert diag["menzo_v9518_available"] is True
-    assert "## Gemini / AI Detailed Ledger 12h" in markdown
+    assert "## Gemini Economic Authority and Non-Authoritative Diagnostics 12h" in markdown
     assert "### Menzo Duplicate Gate v95.18" in markdown
     assert "- theoretical pairs: 10" in markdown
     assert "- below threshold: 7" in markdown
@@ -128,8 +128,8 @@ def test_operational_report_uses_actual_12h_heading(tmp_path: Path) -> None:
         until=datetime(2026, 7, 24, 12, tzinfo=timezone.utc),
     )
 
-    assert "## Gemini / AI Detailed Ledger 12h" in out
-    assert "## Gemini / AI Detailed Ledger 24h" not in out
+    assert "## Gemini Economic Authority and Non-Authoritative Diagnostics 12h" in out
+    assert "## Gemini Economic Authority and Non-Authoritative Diagnostics 24h" not in out
 
 
 def test_existing_dynamic_detailed_heading_is_not_duplicated(
@@ -138,7 +138,7 @@ def test_existing_dynamic_detailed_heading_is_not_duplicated(
     report = (
         "## Gemini / AI Cost Ledger 12h\n"
         "- aggregate\n\n"
-        "## Gemini / AI Detailed Ledger 12h\n"
+        "## Gemini Economic Authority and Non-Authoritative Diagnostics 12h\n"
         "- existing\n"
     )
 
@@ -147,7 +147,7 @@ def test_existing_dynamic_detailed_heading_is_not_duplicated(
         ledger_path=tmp_path / "missing.jsonl",
     )
 
-    assert out.count("## Gemini / AI Detailed Ledger 12h") == 1
+    assert out.count("## Gemini Economic Authority and Non-Authoritative Diagnostics 12h") == 1
     assert "- existing" in out
 
 def test_since_only_uses_current_time_for_dynamic_heading(
@@ -162,4 +162,4 @@ def test_since_only_uses_current_time_for_dynamic_heading(
         since=since,
     )
 
-    assert "## Gemini / AI Detailed Ledger 6h" in output
+    assert "## Gemini Economic Authority and Non-Authoritative Diagnostics 6h" in output

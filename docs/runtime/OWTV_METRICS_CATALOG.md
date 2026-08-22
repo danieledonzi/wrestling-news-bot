@@ -38,6 +38,13 @@ Each JSON row has exactly one `source_primary`. `source_secondary` entries are e
 | `alfred.revised_then_approved` | Unique identities revised before a later approval. | `state/newsroom/master_log.jsonl: alfred.reviews (plus Publisher authority where required)` | chronological transition count by identity; count |
 | `alfred.revised_then_published` | Unique identities revised before a later authoritative publication. | `state/newsroom/master_log.jsonl: alfred.reviews (plus Publisher authority where required)` | chronological transition count joined to publications; count |
 | `gemini.real_attempts` | Ledger rows with status called or failed. | `state/newsroom/gemini_call_ledger.jsonl` | count rows whose status is called or failed; count |
+| `gemini.provider_usage_resolved_attempts` | Real attempts with trustworthy provider usage under the V96.2 usage read contract. | `state/newsroom/gemini_call_ledger.jsonl` | count integrity-valid retained v2 provider usage and resolved v3 usage; count |
+| `gemini.provider_usage_coverage` | Trustworthy usage attempts divided by real attempts. | `state/newsroom/gemini_call_ledger.jsonl` | provider_usage_resolved_attempts / real_attempts; 0 only with a positive denominator and zero qualifying attempts; null when real_attempts=0; ratio |
+| `gemini.computed_cost_resolved_attempts` | V96.2 attempts with resolved authoritative cost. | `state/newsroom/gemini_call_ledger.jsonl` | count cost_resolution_status=resolved; count |
+| `gemini.computed_cost_coverage` | Cost-resolved attempts divided by real attempts. | `state/newsroom/gemini_call_ledger.jsonl` | computed_cost_resolved_attempts / real_attempts; 0 only with a positive denominator and zero qualifying attempts; null when real_attempts=0; ratio |
+| `gemini.known_computed_list_price_cost` | Known paid-tier Standard list-price cost. | `state/newsroom/gemini_call_ledger.jsonl` | sum resolved computed_list_price_cost; USD |
+| `gemini.complete_window_computed_list_price_cost` | Complete-window homogeneous-currency cost. | `state/newsroom/gemini_call_ledger.jsonl` | known cost only when all real attempts resolve; USD |
+| `gemini.unknown_computed_cost_attempts` | Real attempts without resolved V96.2 cost. | `state/newsroom/gemini_call_ledger.jsonl` | real attempts minus cost-resolved attempts; count |
 | `gemini.completed_calls` | API calls that returned without an attempt exception; not semantic success. | `state/newsroom/gemini_call_ledger.jsonl` | count rows whose status is called; count |
 | `gemini.failures` | Attempt exceptions. | `state/newsroom/gemini_call_ledger.jsonl` | count rows whose status is failed; count |
 | `gemini.avoided_calls` | Explicitly saved calls that were not made. | `state/newsroom/gemini_call_ledger.jsonl` | count rows whose status is avoided; count |
@@ -202,3 +209,17 @@ No ambiguous counter is promoted to `active`. Bare `selected`, `pending`, `skipp
 5. Enum or required-field changes require a new catalog schema version; semantic policy changes require a new policy version.
 6. Removal follows deprecation and consumer migration; aliases must be collision-free.
 7. The validator remains offline and is not connected to newsroom runtime.
+
+## V96.2 Gemini economic metrics
+
+These additive metrics use each provider-attempt ledger row as their economic grain. `operation_id` is diagnostic context, never logical-request identity and never a cost-deduplication key. Historical v1/v2 attempts remain denominators but cannot become V96.2 cost-resolved rows.
+
+| Canonical name | Meaning |
+|---|---|
+| `gemini.provider_usage_resolved_attempts` | Real attempts with trustworthy usage: integrity-valid retained v2 provider usage plus resolved v3 usage. |
+| `gemini.provider_usage_coverage` | Trustworthy usage attempts / real attempts; 0 requires a positive denominator, and zero real attempts yields null. |
+| `gemini.computed_cost_resolved_attempts` | Real V96.2 attempts with resolved authoritative list-price cost. |
+| `gemini.computed_cost_coverage` | Cost-resolved attempts / real attempts; 0 requires a positive denominator, and zero real attempts yields null. |
+| `gemini.known_computed_list_price_cost` | Sum of resolved V96.2 paid-tier Standard list-price costs. |
+| `gemini.complete_window_computed_list_price_cost` | Known cost only for a completely resolved, homogeneous-currency window; otherwise null. |
+| `gemini.unknown_computed_cost_attempts` | Real attempts without resolved V96.2 cost. |
