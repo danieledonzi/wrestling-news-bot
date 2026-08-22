@@ -15,7 +15,7 @@ from agents.gemini_diagnostics import (
     render_gemini_diagnostics_markdown,
 )
 from agents.gemini_ledger import calculate_v96_2_cost, extract_usage_metadata, load_pricing_table, resolve_pricing_model
-from owtv_report import render_gemini_detailed_ledger_24h
+from owtv_report import add_gemini_detailed_ledger_to_report, render_gemini_detailed_ledger_24h
 from scripts.daily_editorial_judgment import _render_gemini_economic_lines
 from scripts import daily_editorial_judgment as daily_judgment
 from scripts.observability_snapshot import build_snapshot
@@ -334,3 +334,35 @@ def test_build_report_preserves_provider_economics_across_p1_4_resolution(monkey
     unavailable = daily_judgment.build_report({"__input_provenance__": {"discovery_mode": "default"}})
     assert "economic" not in unavailable["canonical_gemini"]
     assert "known computed paid-tier Standard list-price cost: n.d. n.d." in daily_judgment.render_markdown(unavailable)
+
+
+def test_legacy_v2_summary_and_v3_economic_authority_remain_separate():
+    legacy = {"status": "called", "ledger_schema_version": "v2", "usage_available": True,
+        "input_tokens": 10, "output_tokens": 2, "estimated_cost": "0.25"}
+    current = resolved_row(provider_attempt_id="current")
+    summary = gemini_ledger.summarize([legacy, current])
+    assert summary["v2_real_attempts"] == 1
+    assert summary["real_attempts_with_usage"] == 1
+    assert summary["real_attempts_with_cost"] == 1
+    assert summary["usage_coverage"] == 1 and summary["pricing_coverage"] == 1
+    economic = build_gemini_economic_truth([legacy, current], available=True)
+    assert economic["real_attempts"] == 2
+    assert economic["computed_cost_resolved_attempts"] == 1
+    assert economic["known_computed_list_price_cost"] == current["computed_list_price_cost"]
+
+
+def test_persisted_legacy_detailed_section_migrates_end_to_end(tmp_path):
+    now = datetime.now(timezone.utc)
+    ledger = tmp_path / "gemini.jsonl"
+    ledger.write_text(json.dumps(resolved_row(timestamp=now.isoformat())) + "\n", encoding="utf-8")
+    legacy_heading = "## Gemini / AI Detailed Ledger 24h"
+    current_heading = "## Gemini Economic Authority and Non-Authoritative Diagnostics 24h"
+    persisted = "# Daily\n\n## Gemini / AI Cost Ledger 24h\n- old calls\n\n" + legacy_heading + "\n- stale detail\n\n## Agent handoff\n- preserve me\n"
+    migrated = add_gemini_detailed_ledger_to_report(persisted, ledger_path=ledger, now=now)
+    assert legacy_heading not in migrated and "stale detail" not in migrated
+    assert migrated.count(current_heading) == 1
+    assert "known computed paid-tier Standard list-price cost:" in migrated
+    assert "## Agent handoff\n- preserve me" in migrated
+    rerun = add_gemini_detailed_ledger_to_report(migrated, ledger_path=ledger, now=now)
+    assert rerun.count(current_heading) == 1
+    assert rerun == migrated

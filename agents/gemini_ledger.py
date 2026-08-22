@@ -414,7 +414,7 @@ def summarize(records: list[dict[str, Any]]) -> dict[str, Any]:
     premium_calls = [r for r in calls if r.get("selected_model_chain_kind") == "premium" or str(r.get("model") or "") == "gemini-3.5-flash"]
     standard_calls = [r for r in calls if r.get("selected_model_chain_kind") == "standard" or str(r.get("model") or "") != "gemini-3.5-flash"]
     real_attempts = [r for r in records if r.get("status") in {"called", "failed"}]
-    v2_real = [r for r in real_attempts if r.get("ledger_schema_version") in {"v2", "v3"}]
+    v2_real = [r for r in real_attempts if r.get("ledger_schema_version") == "v2"]
     with_usage = [r for r in v2_real if r.get("usage_available") is True]
     with_cost = [r for r in v2_real if r.get("estimated_cost") is not None]
     return {

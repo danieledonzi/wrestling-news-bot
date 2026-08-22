@@ -16,8 +16,12 @@ from agents.gemini_diagnostics import (
 )
 
 DETAILED_LEDGER_HEADING = "## Gemini Economic Authority and Non-Authoritative Diagnostics 24h"
-DETAILED_LEDGER_HEADING_RE = re.compile(
-    r"^## Gemini (?:Economic Authority and Non-Authoritative Diagnostics|/ AI Detailed Ledger)(?: \d+h)?\s*$",
+CURRENT_DETAILED_HEADING_RE = re.compile(
+    r"^## Gemini Economic Authority and Non-Authoritative Diagnostics(?: \d+h)?\s*$",
+    re.MULTILINE,
+)
+LEGACY_DETAILED_HEADING_RE = re.compile(
+    r"^## Gemini / AI Detailed Ledger(?: \d+h)?\s*$",
     re.MULTILINE,
 )
 COST_LEDGER_HEADING = "## Gemini / AI Call and Usage Diagnostics (non-authoritative) 24h"
@@ -136,7 +140,18 @@ def add_gemini_detailed_ledger_to_report(
             lambda match: match.group(0).replace("Gemini / AI Cost Ledger", "Gemini / AI Call and Usage Diagnostics (NON-AUTHORITATIVE)"), text
         )
 
-    if DETAILED_LEDGER_HEADING_RE.search(report_markdown):
+    legacy_position: int | None = None
+    while legacy_match := LEGACY_DETAILED_HEADING_RE.search(report_markdown):
+        legacy_position = legacy_match.start() if legacy_position is None else min(legacy_position, legacy_match.start())
+        next_section = H2_HEADING_RE.search(report_markdown, legacy_match.end())
+        section_end = next_section.start() if next_section is not None else len(report_markdown)
+        report_markdown = (
+            report_markdown[:legacy_match.start()].rstrip()
+            + ("\n\n" if report_markdown[:legacy_match.start()].strip() and report_markdown[section_end:].strip() else "")
+            + report_markdown[section_end:].lstrip("\n")
+        )
+
+    if CURRENT_DETAILED_HEADING_RE.search(report_markdown):
         return relabel_legacy(report_markdown)
 
     detailed = render_gemini_detailed_ledger_24h(
@@ -150,6 +165,11 @@ def add_gemini_detailed_ledger_to_report(
     cost_heading_match = COST_LEDGER_HEADING_RE.search(report_markdown)
 
     if cost_heading_match is None:
+        if legacy_position is not None:
+            insert_at = min(legacy_position, len(report_markdown))
+            before = report_markdown[:insert_at].rstrip()
+            after = report_markdown[insert_at:].lstrip("\n")
+            return relabel_legacy((before + "\n\n" if before else "") + detailed + ("\n" + after if after else "\n"))
         suffix = "" if report_markdown.endswith("\n") else "\n"
         return relabel_legacy(report_markdown + suffix + "\n" + detailed + "\n")
 
