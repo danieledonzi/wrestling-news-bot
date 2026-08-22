@@ -366,3 +366,26 @@ def test_persisted_legacy_detailed_section_migrates_end_to_end(tmp_path):
     rerun = add_gemini_detailed_ledger_to_report(migrated, ledger_path=ledger, now=now)
     assert rerun.count(current_heading) == 1
     assert rerun == migrated
+
+
+def test_operational_renderer_caps_implicit_window_at_effective_now(tmp_path):
+    effective_now = datetime.now(timezone.utc)
+    inside = resolved_row(provider_attempt_id="inside", timestamp=(effective_now - timedelta(hours=1)).isoformat())
+    future = resolved_row(provider_attempt_id="future", timestamp=(effective_now + timedelta(hours=1)).isoformat())
+    ledger = tmp_path / "gemini.jsonl"
+    ledger.write_text("\n".join(json.dumps(row) for row in (inside, future)) + "\n", encoding="utf-8")
+
+    implicit = render_gemini_detailed_ledger_24h(ledger_path=ledger, now=effective_now)
+    assert "- real provider attempts: 1" in implicit
+    assert f"known computed paid-tier Standard list-price cost: {inside['computed_list_price_cost']} USD" in implicit
+    assert f"complete-window computed list-price cost: {inside['computed_list_price_cost']} USD" in implicit
+
+    explicit = render_gemini_detailed_ledger_24h(
+        ledger_path=ledger,
+        since=effective_now - timedelta(hours=24),
+        until=effective_now + timedelta(hours=2),
+        now=effective_now,
+    )
+    expected = format(Decimal(inside["computed_list_price_cost"]) + Decimal(future["computed_list_price_cost"]), "f")
+    assert "- real provider attempts: 2" in explicit
+    assert f"complete-window computed list-price cost: {expected} USD" in explicit

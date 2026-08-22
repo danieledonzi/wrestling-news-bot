@@ -72,13 +72,14 @@ def render_gemini_detailed_ledger_24h(
 ) -> str:
     """Render detailed Gemini diagnostics without failing report generation."""
     effective_now = now or datetime.now(timezone.utc)
-    hours = _window_hours(since, until, effective_now)
+    effective_until = until or effective_now
+    hours = _window_hours(since, effective_until, effective_now)
 
     try:
         if ledger_path is None:
             records, warnings, metadata = load_ledger(
                 since=since,
-                until=until,
+                until=effective_until,
                 now=effective_now,
                 strict_bounded=True,
                 return_metadata=True,
@@ -87,7 +88,7 @@ def render_gemini_detailed_ledger_24h(
             records, warnings, metadata = load_ledger(
                 ledger_path,
                 since=since,
-                until=until,
+                until=effective_until,
                 now=effective_now,
                 strict_bounded=True,
                 return_metadata=True,
