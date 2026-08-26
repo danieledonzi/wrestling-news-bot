@@ -17,7 +17,7 @@ from typing import Any, Callable
 ROOT = Path(__file__).resolve().parents[1]
 CACHE_FILE = ROOT / "state" / "newsroom" / "menzo_duplicate_arbitration_cache_v2.json"
 CACHE_SCHEMA_VERSION = "2"
-MENZO_DUPLICATE_ARBITRATION_CONTRACT_VERSION = "v95.20-grounded-temporal-audit-4"
+MENZO_DUPLICATE_ARBITRATION_CONTRACT_VERSION = "v96.3a-recent-history-temporal-material-5"
 PROMPT_BUILDER_VERSION = "v95.20-temporal-basis-comparisons-4"
 VALIDATOR_VERSION = "v95.20-grounded-temporal-validator-4"
 MODEL_NAME = "gemini-3.1-flash-lite"
@@ -66,6 +66,16 @@ def candidate_material_hash(compact_record: dict[str, Any]) -> str:
     # IDs are batch-local aliases. Scores and publication clocks do not inform
     # semantic duplicate policy and are intentionally absent from v95.17 keys.
     return content_hash({k: v for k, v in compact_record.items() if k not in {"id", "score", "published_at"}})
+
+
+def published_material_hash(compact_record: dict[str, Any]) -> str:
+    """Hash recent-history prompt material, including its semantic clock.
+
+    Same-run keys intentionally retain ``candidate_material_hash`` semantics.
+    Publisher history is different: ``published_at`` is supplied to Menzo and
+    validated as part of material-update ordering, so it must invalidate reuse.
+    """
+    return content_hash({k: v for k, v in compact_record.items() if k not in {"id", "score"}})
 
 
 def actionable_snapshot_hash(pairs: list[tuple[str, str]]) -> str:
@@ -153,6 +163,7 @@ def store(cache: dict[str, Any], key: str, scope: str, decisions: dict[str, dict
     if not valid_decisions(decisions): return False
     pairs = sorted(candidates or [])
     if not pairs or len({x[0] for x in pairs}) != len(pairs): return False
+    cache["contract_fingerprint"] = contract_fingerprint()
     cache.setdefault("entries", {})[key] = {"scope": scope, "contract_fingerprint": contract_fingerprint(),
         "stored_at": datetime.now(timezone.utc).isoformat(), "outcome": "validated_decisions" if decisions else "validated_no_matches",
         "evaluated_candidate_ids": [x[0] for x in pairs], "candidate_material_hashes": {x[0]: x[1] for x in pairs},

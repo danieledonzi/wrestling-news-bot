@@ -36,13 +36,32 @@ DUPLICATE_ARBITRATION_COUNTER_KEYS = (
     "menzo_recent_history_material_updates",
     "menzo_duplicate_arbitration_fail_closed",
     "gemini_calls_used_for_duplicate_arbitration",
+    "duplicate_cache_v2_hits",
+    "duplicate_cache_v2_misses",
+    "duplicate_cache_v2_calls_avoided",
+    "duplicate_failure_cooldown_hit",
+    "duplicate_failure_cooldown_calls_avoided",
+    "duplicate_cache_v2_contract_invalidations",
+    "duplicate_cache_v2_other_misses",
 )
 
 
 def compact_duplicate_arbitration(postprocess: dict[str, Any] | None) -> dict[str, Any]:
     if not isinstance(postprocess, dict):
         return {}
-    return {key: postprocess[key] for key in DUPLICATE_ARBITRATION_COUNTER_KEYS if isinstance(postprocess.get(key), int)}
+    compact = {key: postprocess[key] for key in DUPLICATE_ARBITRATION_COUNTER_KEYS if isinstance(postprocess.get(key), int)}
+    diagnostics = postprocess.get("menzo_duplicate_arbitration_diagnostics")
+    if isinstance(diagnostics, list):
+        # Already bounded at emission; retain only the measurement contract.
+        allowed = {"event", "scope", "cause", "grain", "unit_identity", "repair_trigger_reason",
+                   "primary_validation_result", "repair_attempted", "terminal_validation_result",
+                   "terminal_validation_reason", "candidate_count", "comparison_count", "published_count", "affected_unit_count",
+                   "contract_fingerprint"}
+        compact["diagnostics"] = [{k: row[k] for k in allowed if k in row}
+                                  for row in diagnostics if isinstance(row, dict)][:100]
+    omitted = postprocess.get("menzo_duplicate_arbitration_diagnostics_omitted")
+    if isinstance(omitted, int): compact["diagnostics_omitted"] = omitted
+    return compact
 
 
 def utc_now() -> str:
