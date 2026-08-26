@@ -12,7 +12,7 @@ from agents.gemini_ledger import PRICING_FORMULA_VERSION, USAGE_CONTRACT_VERSION
 
 ROOT = Path(__file__).resolve().parents[1]
 LEDGER_FILE = ROOT / "state" / "newsroom" / "gemini_call_ledger.jsonl"
-MENZO_CACHE_FILE = ROOT / "state" / "newsroom" / "menzo_duplicate_arbitration_cache.json"
+MENZO_CACHE_FILE = ROOT / "state" / "newsroom" / "menzo_duplicate_arbitration_cache_v2.json"
 MENZO_DECISIONS_FILES = (
     ROOT / "state" / "newsroom" / "menzo_decisions_latest.json",
     ROOT / "artifacts" / "newsroom" / "menzo_decisions.json",
@@ -377,7 +377,8 @@ def load_menzo_postprocess(
     return {"available": False, "source": "not_available", "counters": {}, "warnings": []}
 
 def load_menzo_cache(path: Path = MENZO_CACHE_FILE, *, now: datetime | None = None) -> dict[str, Any]:
-    out = {"present": path.exists(), "warnings": [], "entries_total": 0, "entries_expired": 0, "entries_valid": 0, "newest": []}
+    out = {"cache_contract": "active_v2", "present": path.exists(), "warnings": [], "entries_total": 0,
+           "failures_total": 0, "contract_fingerprint": "", "load_status": "missing", "newest": []}
     if not path.exists():
         return out
     try:
@@ -385,18 +386,17 @@ def load_menzo_cache(path: Path = MENZO_CACHE_FILE, *, now: datetime | None = No
     except Exception as exc:
         out["warnings"].append(f"cache read/parse warning: {exc}")
         return out
-    entries = data.values() if isinstance(data, dict) else data if isinstance(data, list) else []
+    if not isinstance(data, dict) or data.get("schema_version") != "2":
+        out["load_status"]="obsolete_or_invalid_schema"; return out
+    out["load_status"]="loaded"; out["contract_fingerprint"]=str(data.get("contract_fingerprint") or "")
+    out["failures_total"]=len(data.get("failures",{})) if isinstance(data.get("failures"),dict) else 0
+    entries = data.get("entries",{}).values() if isinstance(data.get("entries"),dict) else []
     rows = [e for e in entries if isinstance(e, dict)]
     out["entries_total"] = len(rows)
-    now_dt = now or datetime.now(timezone.utc)
-    for e in rows:
-        exp = parse_dt(e.get("expires_at") or e.get("expire_at"))
-        if exp and exp < now_dt:
-            out["entries_expired"] += 1
-        else:
-            out["entries_valid"] += 1
-    rows.sort(key=lambda e: str(e.get("created_at") or e.get("timestamp") or ""), reverse=True)
-    out["newest"] = [{k: str(e.get(k) or "")[:120] for k in ("created_at", "model_used", "decision", "candidate_title_normalized")} for e in rows[:5]]
+    # v2 is content/contract addressed. Legacy TTL labels are deliberately not
+    # emitted because they do not describe active reuse decisions.
+    rows.sort(key=lambda e: str(e.get("stored_at") or ""), reverse=True)
+    out["newest"] = [{k: str(e.get(k) or "")[:120] for k in ("stored_at", "scope", "outcome", "contract_fingerprint")} for e in rows[:5]]
     return out
 
 
@@ -771,11 +771,26 @@ def render_gemini_diagnostics_markdown(
 
     lines += [
         "",
-        "### Menzo duplicate arbitration cache",
+        "### Menzo duplicate arbitration cache (active v2)",
         f"- cache file present: {'yes' if cache.get('present') else 'no'}",
+        f"- cache contract: {cache.get('cache_contract', 'not_available')}",
+        f"- load status: {cache.get('load_status', 'not_available')}",
         f"- cache entries total: {cache.get('entries_total', 0)}",
-        f"- cache entries expired: {cache.get('entries_expired', 0)}",
-        f"- cache entries valid: {cache.get('entries_valid', 0)}",
+        f"- cache failures total: {cache.get('failures_total', 0)}",
+        f"- contract fingerprint: {cache.get('contract_fingerprint', 'not_available')}",
+    ]
+
+    for entry in cache.get("newest", []):
+        lines.append(
+            f"- newest: {entry.get('stored_at')} | "
+            f"{entry.get('scope')} | "
+            f"{entry.get('outcome')} | "
+            f"{entry.get('contract_fingerprint')}"
+        )
+
+    lines += [
+        "",
+        "### Legacy cache-counter compatibility diagnostics",
         f"- {hours}h ledger duplicate_arbitration_cache_hit avoided records: "
         f"{diag.get('ledger_duplicate_arbitration_cache_hit_window', 0)}",
         f"- latest Menzo run cache counters source: "
@@ -789,14 +804,6 @@ def render_gemini_diagnostics_markdown(
         f"- latest Menzo run gemini_calls_avoided_by_duplicate_arbitration_cache: "
         f"{diag.get('menzo_latest_cache_avoided', 'not_available')}",
     ]
-
-    for entry in cache.get("newest", []):
-        lines.append(
-            f"- newest: {entry.get('created_at')} | "
-            f"{entry.get('model_used')} | "
-            f"{entry.get('decision')} | "
-            f"{entry.get('candidate_title_normalized')}"
-        )
 
     for warning in cache.get("warnings", []):
         lines.append(f"- warning: {warning}")

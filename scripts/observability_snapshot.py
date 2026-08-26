@@ -38,6 +38,14 @@ ACTIVE_DUPLICATE_COUNTERS = (
     "menzo_recent_history_material_updates",
     "menzo_duplicate_arbitration_fail_closed",
     "gemini_calls_used_for_duplicate_arbitration",
+    "duplicate_cache_v2_hits", "duplicate_cache_v2_misses", "duplicate_cache_v2_calls_avoided",
+    "duplicate_failure_cooldown_hit", "duplicate_failure_cooldown_calls_avoided",
+    "duplicate_cache_v2_contract_invalidations", "duplicate_cache_v2_other_misses",
+)
+V96_3A_DUPLICATE_COUNTERS = (
+    "duplicate_cache_v2_hits", "duplicate_cache_v2_misses", "duplicate_cache_v2_calls_avoided",
+    "duplicate_failure_cooldown_calls_avoided", "duplicate_cache_v2_contract_invalidations",
+    "duplicate_cache_v2_other_misses",
 )
 LEGACY_DUPLICATE_KEYS = ("footprint", "fingerprint", "story_footprint", "story_fingerprint", "duplicate_candidates", "same_story_clusters")
 EXPECTED_RUNTIME_PATHS = (".bot_exit_code", "logs/master_log.log", "reports/")
@@ -533,23 +541,67 @@ def aggregate_duplicate_arbitration(runs: list[dict[str, Any]], since: datetime,
     counters: Counter[str] = Counter()
     legacy: Counter[str] = Counter()
     covered_runs = 0
+    diagnostic_covered_runs = 0
+    v96_3a_counter_covered_runs = 0
     total_runs = 0
+    repair_reasons: Counter[str] = Counter()
+    terminal_results: Counter[str] = Counter()
+    fail_closed_incidents: Counter[str] = Counter()
+    fail_closed_affected_units: Counter[str] = Counter()
+    diagnostics_omitted = 0
     for run in iter_master_runs_in_window(runs, since, until):
         total_runs += 1
         menzo = run.get("menzo") if isinstance(run.get("menzo"), dict) else {}
         payload = menzo.get("duplicate_arbitration") if isinstance(menzo.get("duplicate_arbitration"), dict) else None
         if payload:
             covered_runs += 1
+            if all(type(payload.get(key)) is int for key in V96_3A_DUPLICATE_COUNTERS):
+                v96_3a_counter_covered_runs += 1
+            diagnostic_contract_present=(isinstance(payload.get("diagnostics"),list)
+                                         and isinstance(payload.get("diagnostics_omitted"),int))
+            if diagnostic_contract_present:
+                diagnostic_covered_runs += 1
+                diagnostics_omitted += payload["diagnostics_omitted"]
             for key in ACTIVE_DUPLICATE_COUNTERS:
                 if isinstance(payload.get(key), int):
                     counters[key] += payload[key]
+            for row in payload["diagnostics"] if diagnostic_contract_present else []:
+                if not isinstance(row, dict): continue
+                scope=str(row.get("scope") or "unknown")
+                if row.get("event") == "repair":
+                    repair_reasons[f"{scope}:{row.get('repair_trigger_reason') or 'unknown'}"] += 1
+                    terminal_results[f"{scope}:{row.get('terminal_validation_result') or 'unknown'}"] += 1
+                elif row.get("event") == "fail_closed":
+                    key=f"{scope}:{row.get('grain') or 'unknown'}:{row.get('cause') or 'unknown'}"
+                    fail_closed_incidents[key] += 1
+                    affected=row.get("affected_unit_count")
+                    if isinstance(affected,int) and affected >= 0: fail_closed_affected_units[key] += affected
         for d in flatten_dicts(menzo):
             for key, value in d.items():
                 if any(token in str(key).lower() for token in LEGACY_DUPLICATE_KEYS) and isinstance(value, int):
                     legacy[str(key)] += value
     available = covered_runs > 0
     warnings = [] if available else ["menzo_duplicate_arbitration_counter_stream_not_available"]
-    return {"available": available, "covered_runs": covered_runs, "total_runs": total_runs, "counters": ({key: int(counters[key]) for key in ACTIVE_DUPLICATE_COUNTERS} if available else {})}, dict(legacy), warnings
+    result={"available": available, "covered_runs": covered_runs, "total_runs": total_runs,
+            "counters": ({key: int(counters[key]) for key in ACTIVE_DUPLICATE_COUNTERS} if available else {})}
+    if available:
+        diagnostic_total_runs=covered_runs
+        v96_3a_counter_total_runs=covered_runs
+        result.update(repair_trigger_reasons=dict(sorted(repair_reasons.items())),
+                      terminal_validation_results=dict(sorted(terminal_results.items())),
+                      fail_closed_incidents_by_scope_grain_cause=dict(sorted(fail_closed_incidents.items())),
+                      fail_closed_affected_units_by_scope_grain_cause=dict(sorted(fail_closed_affected_units.items())),
+                      diagnostic_covered_runs=diagnostic_covered_runs,
+                      diagnostic_total_runs=diagnostic_total_runs,
+                      diagnostics_omitted=diagnostics_omitted,
+                      diagnostic_distributions_complete=(diagnostic_total_runs > 0
+                          and diagnostic_covered_runs == diagnostic_total_runs
+                          and diagnostics_omitted == 0),
+                      v96_3a_counter_covered_runs=v96_3a_counter_covered_runs,
+                      v96_3a_counter_total_runs=v96_3a_counter_total_runs,
+                      v96_3a_counter_stream_complete=(v96_3a_counter_total_runs > 0
+                          and v96_3a_counter_covered_runs == v96_3a_counter_total_runs))
+    return result, dict(legacy), warnings
 
 
 def _warning_entries(review: dict[str, Any]) -> list[Any]:
@@ -1001,7 +1053,7 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
         and gemini_health["malformed_rows"] == 0
         and gemini_health["undated_rows"] == 0
     )
-    gemini = build_gemini_diagnostics(gemini_records, cache_path=root / "state/newsroom/menzo_duplicate_arbitration_cache.json", menzo_decisions_paths=(), economic_available=gemini_available)
+    gemini = build_gemini_diagnostics(gemini_records, cache_path=root / "state/newsroom/menzo_duplicate_arbitration_cache_v2.json", menzo_decisions_paths=(), economic_available=gemini_available)
     if not gemini_available:
         for key in ("real_attempts", "completed_calls", "completed_successful_calls", "failures", "avoided_calls", "fallbacks",
                     "gemini_3_5_attempts", "gemini_3_5_completed_calls", "gemini_3_5_completed_successful_calls", "gemini_3_5_failures", "gemini_3_5_avoided_calls"):

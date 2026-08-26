@@ -47,16 +47,23 @@ def test_cache_file_present_missing_and_markdown(tmp_path: Path) -> None:
     missing = load_menzo_cache(tmp_path / "missing.json")
     assert missing["present"] is False
     cache = tmp_path / "cache.json"
-    cache.write_text(json.dumps({"a": {"created_at": "2026-07-08T00:00:00+00:00", "expires_at": "2099-01-01T00:00:00+00:00", "model_used": "gemini-3.5-flash", "decision": "duplicate", "candidate_title_normalized": "sami zayn"}}), encoding="utf-8")
+    cache.write_text(json.dumps({"schema_version":"2","contract_fingerprint":"v96.3a-test",
+        "entries":{"a":{"stored_at":"2026-07-08T00:00:00+00:00","scope":"same_run_component",
+        "outcome":"validated_no_matches","contract_fingerprint":"v96.3a-test"}},"failures":{}}), encoding="utf-8")
     present = load_menzo_cache(cache)
     assert present["present"] is True
     assert present["entries_total"] == 1
-    assert present["entries_valid"] == 1
+    assert present["cache_contract"] == "active_v2"
+    assert "entries_valid" not in present and "entries_expired" not in present
     diag = build_gemini_diagnostics([{"status": "avoided", "agent": "Menzo", "reason": "duplicate_arbitration_cache_hit"}], cache)
     md = render_gemini_diagnostics_markdown(diag)
     assert "## Gemini Economic Authority and Non-Authoritative Diagnostics 24h" in md
     assert "### AUTHORITATIVE Gemini economic truth" in md
     assert "cache file present: yes" in md
+    assert "cache entries expired" not in md and "cache entries valid" not in md
+    assert "None | None | None | None" not in md
+    assert "2026-07-08T00:00:00+00:00 | same_run_component | validated_no_matches | v96.3a-test" in md
+    assert "cache contract: active_v2" in md and "load status: loaded" in md
 
 def test_menzo_postprocess_supplies_miss_expired_when_ledger_lacks_them(tmp_path: Path) -> None:
     decisions = tmp_path / "menzo_decisions_latest.json"
