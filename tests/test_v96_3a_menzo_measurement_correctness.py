@@ -226,3 +226,78 @@ def test_windowed_v96_3a_counter_coverage_full_nonzero_aggregates():
     aggregate,_,_=aggregate_duplicate_arbitration(runs,now-timedelta(minutes=1),now+timedelta(minutes=1))
     assert aggregate["v96_3a_counter_stream_complete"] is True
     assert all(aggregate["counters"][key]==3 for key in V96_3A_DUPLICATE_COUNTERS)
+
+
+def miss_counters():
+    return {"duplicate_cache_misses":0,"duplicate_cache_v2_misses":0,
+            "duplicate_cache_contract_changed":0,"duplicate_cache_v2_contract_invalidations":0,
+            "duplicate_cache_v2_other_misses":0}
+
+
+def historical_entry(scope,pairs,comparison,fingerprint="old-contract"):
+    pairs=sorted(pairs)
+    return {"scope":scope,"contract_fingerprint":fingerprint,
+            "evaluated_candidate_ids":[identity for identity,_ in pairs],
+            "candidate_material_hashes":dict(pairs),"comparison_hash":comparison}
+
+
+def classify(cache_state,scope,pairs,comparison):
+    pp=miss_counters()
+    menzo._cache_miss(pp,cache_state,scope=scope,candidates=pairs,comparisons=comparison)
+    return pp
+
+
+def test_contract_miss_old_root_without_corresponding_entry_is_other():
+    state=cache.empty_cache(); state["contract_fingerprint"]="old-root"
+    pp=classify(state,"same_run_component",[("candidate-a","material-a")],"comparison-a")
+    assert pp["duplicate_cache_v2_misses"]==1
+    assert pp["duplicate_cache_v2_contract_invalidations"]==0
+    assert pp["duplicate_cache_v2_other_misses"]==1
+
+
+def test_contract_miss_matching_old_entry_is_entry_evidenced():
+    pairs=[("candidate-a","material-a")]; comparison="comparison-a"; state=cache.empty_cache()
+    state["entries"]["old-key"]=historical_entry("same_run_component",pairs,comparison)
+    current_key=cache.request_key("same_run_component",pairs,comparison)
+    assert cache.lookup(state,current_key,candidates=pairs,comparisons=comparison) is None
+    pp=classify(state,"same_run_component",pairs,comparison)
+    assert pp["duplicate_cache_v2_contract_invalidations"]==1
+    assert pp["duplicate_cache_v2_other_misses"]==0
+    assert pp["duplicate_cache_contract_changed"]==1
+
+
+def test_contract_miss_old_entry_survives_root_update():
+    first=[("candidate-a","material-a")]; second=[("candidate-b","material-b")]; state=cache.empty_cache()
+    state["contract_fingerprint"]="old-root"
+    state["entries"]={"old-a":historical_entry("same_run_component",first,"comparison-a"),
+                      "old-b":historical_entry("same_run_component",second,"comparison-b")}
+    assert classify(state,"same_run_component",first,"comparison-a")["duplicate_cache_v2_contract_invalidations"]==1
+    assert cache.store(state,cache.request_key("same_run_component",first,"comparison-a"),
+                       "same_run_component",{},candidates=first,comparisons="comparison-a")
+    assert state["contract_fingerprint"]==cache.contract_fingerprint()
+    pp=classify(state,"same_run_component",second,"comparison-b")
+    assert pp["duplicate_cache_v2_contract_invalidations"]==1 and pp["duplicate_cache_v2_other_misses"]==0
+
+
+def test_contract_miss_classification_is_order_independent():
+    old=[("candidate-old","material-old")]; new=[("candidate-new","material-new")]
+    def evaluate(order):
+        state=cache.empty_cache(); state["contract_fingerprint"]="old-root"
+        state["entries"]["old-key"]=historical_entry("same_run_component",old,"old-comparison")
+        totals={"contract":0,"other":0}
+        for pairs,comparison in order:
+            pp=classify(state,"same_run_component",pairs,comparison)
+            totals["contract"]+=pp["duplicate_cache_v2_contract_invalidations"]
+            totals["other"]+=pp["duplicate_cache_v2_other_misses"]
+            cache.store(state,cache.request_key("same_run_component",pairs,comparison),
+                        "same_run_component",{},candidates=pairs,comparisons=comparison)
+        return totals
+    assert evaluate([(old,"old-comparison"),(new,"new-comparison")]) == evaluate([(new,"new-comparison"),(old,"old-comparison")]) == {"contract":1,"other":1}
+
+
+def test_contract_miss_genuinely_new_request_on_mixed_cache_is_other():
+    state=cache.empty_cache(); old=[("old","old-material")]; current=[("current","current-material")]
+    state["entries"]["old-key"]=historical_entry("same_run_component",old,"old-comparison")
+    state["entries"]["current-key"]=historical_entry("same_run_component",current,"current-comparison",cache.contract_fingerprint())
+    pp=classify(state,"recent_history_suspicious_set",[("new","new-material")],"new-comparison")
+    assert pp["duplicate_cache_v2_contract_invalidations"]==0 and pp["duplicate_cache_v2_other_misses"]==1

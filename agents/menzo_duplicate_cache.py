@@ -159,6 +159,36 @@ def lookup(cache: dict[str, Any], key: str, *, candidates: list[tuple[str, str]]
     return entry
 
 
+def matching_old_contract_entry(cache: dict[str, Any], scope: str,
+                                candidates: list[tuple[str, str]], comparisons: str) -> bool:
+    """Return entry-level evidence of the same unit under an old contract.
+
+    This is diagnostic-only and read-only.  The request key and mutable cache
+    root fingerprint are intentionally ignored because both encode writer
+    contract state rather than the semantic arbitration unit.
+    """
+    expected = sorted(candidates)
+    expected_ids = [identity for identity, _material in expected]
+    expected_material = {identity: material for identity, material in expected}
+    current = contract_fingerprint()
+    entries = cache.get("entries", {})
+    if not isinstance(entries, dict):
+        return False
+    for entry in entries.values():
+        if not isinstance(entry, dict) or entry.get("scope") != scope:
+            continue
+        if entry.get("evaluated_candidate_ids") != expected_ids:
+            continue
+        if entry.get("candidate_material_hashes") != expected_material:
+            continue
+        if entry.get("comparison_hash") != comparisons:
+            continue
+        fingerprint = entry.get("contract_fingerprint")
+        if isinstance(fingerprint, str) and fingerprint and fingerprint != current:
+            return True
+    return False
+
+
 def store(cache: dict[str, Any], key: str, scope: str, decisions: dict[str, dict[str, Any]], *, candidates: list[tuple[str, str]] | None = None, comparisons: str = "", actual_request_count: int = 0) -> bool:
     if not valid_decisions(decisions): return False
     pairs = sorted(candidates or [])

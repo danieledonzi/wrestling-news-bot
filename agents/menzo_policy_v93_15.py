@@ -2429,9 +2429,10 @@ def _normalized_validation(reason: Any, raw: Any, status: Any) -> tuple[str,str]
     return "validation_failed", stable or "validation_failed"
 
 
-def _cache_miss(pp: dict[str,Any], cache: dict[str,Any]) -> None:
+def _cache_miss(pp: dict[str,Any], cache: dict[str,Any], *, scope: str,
+                candidates: list[tuple[str,str]], comparisons: str) -> None:
     pp["duplicate_cache_misses"]+=1; pp["duplicate_cache_v2_misses"]+=1
-    if cache.get("contract_fingerprint") not in (None,duplicate_cache_v2.contract_fingerprint()):
+    if duplicate_cache_v2.matching_old_contract_entry(cache,scope,candidates,comparisons):
         pp["duplicate_cache_contract_changed"]=int(pp.get("duplicate_cache_contract_changed",0))+1
         pp["duplicate_cache_v2_contract_invalidations"]+=1
     else: pp["duplicate_cache_v2_other_misses"]+=1
@@ -2702,7 +2703,7 @@ def apply_same_story_duplicate_guard(result: dict[str, Any], massy_board: dict[s
             mini={"selected":members,"pending":[],"skipped":[],"postprocess":pp}; _v2_rehydrate(mini,decisions)
             _v9518_finalize_same_run_audit(result,audits,decisions,cache_status="hit")
             blocked.update(id(x) for x in mini["skipped"]); skipped.extend(mini["skipped"]); continue
-        _cache_miss(pp,cache); pp["gemini_duplicate_calls_planned"]+=1
+        _cache_miss(pp,cache,scope="same_run_component",candidates=pairs,comparisons=comparison); pp["gemini_duplicate_calls_planned"]+=1
         groups=None; component_failed=False; actual_requests=0; records=[compact_candidate_record(x,f"c{n}") for n,x in enumerate(members)]; ids={r["id"] for r in records}
         if not bodies_complete or any(not r["full_body"] for r in records):
             for article in members:
@@ -2886,7 +2887,7 @@ def apply_recent_published_duplicate_guard(result: dict[str, Any]) -> None:
             _v9518_finalize_recent_audit(result,audits,item,cache_status="hit")
             if mini["skipped"]: blocked.add(id(item)); skipped.extend(mini["skipped"])
             continue
-        _cache_miss(pp,cache); pp["gemini_duplicate_calls_planned"]+=1
+        _cache_miss(pp,cache,scope="recent_history_suspicious_set",candidates=pair,comparisons=comparison); pp["gemini_duplicate_calls_planned"]+=1
         cur=compact_candidate_record(item,"c0"); pubs=[compact_published_record(x,f"p{i}") for i,x in enumerate(suspicious)]; matches=None; actual_requests=0
         if not bodies_complete or not cur["full_body"] or any(not published["full_body"] for published in pubs):
             _skip_unresolved(item); mark_menzo_duplicate(item,checked=True,scope="recent_history",decision="ARBITRATION_FAILED",authorized=False,reason=item["reason"])
