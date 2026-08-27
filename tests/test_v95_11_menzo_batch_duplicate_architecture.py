@@ -441,7 +441,7 @@ def test_metadata_propagation_actual_andrea_bob_alfred_publisher(monkeypatch, tm
     andrea_out = andrea.run_andrea(menzo_out)
     assert andrea_out["selected"][0]["menzo_duplicate_scope"] == "same_run"
     monkeypatch.setattr(bob, "fetch_html", lambda url: "<html><head><title>Winner</title></head><body><article><p>" + ("Questo articolo contiene informazioni editoriali complete e verificate sulla notizia principale. " * 8) + "</p></article></body></html>")
-    monkeypatch.setattr(bob, "call_gemini", lambda *a, **k: (json.dumps({"title_it":"Titolo italiano valido completo", "excerpt_it":"Estratto completo", "translations":{"u0":"Questo articolo contiene informazioni editoriali complete e verificate sulla notizia principale. " * 8}, "notes":[]}), "gemini-test", ["gemini-test"]))
+    monkeypatch.setattr(bob, "call_gemini", lambda *a, **k: (json.dumps({"title_it":"Titolo italiano valido completo", "excerpt_it":"Estratto completo", "translations":{"b1":"Questo articolo contiene informazioni editoriali complete e verificate sulla notizia principale. " * 8}, "notes":[]}), "gemini-test", ["gemini-test"]))
     package = bob.article_package(andrea_out["selected"][0])
     assert package["menzo_duplicate_decision"] == "DUPLICATE"
     review = alfred.review_article(package)

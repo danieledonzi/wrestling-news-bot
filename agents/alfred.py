@@ -7,6 +7,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from agents.translation_validation import language_escape_evidence, plain_text
+
 ROOT = Path(__file__).resolve().parents[1]
 STATE_DIR = ROOT / "state"
 NEWSROOM_STATE_DIR = STATE_DIR / "newsroom"
@@ -169,6 +171,30 @@ def review_article(article: dict[str, Any]) -> dict[str, Any]:
     if "<script" in body_html.lower():
         issues.append(issue("unsafe_html", "blocker", "HTML non consentito nel corpo articolo."))
 
+    source_units = {}
+    for element in article.get("elements", []) if isinstance(article.get("elements"), list) else []:
+        if isinstance(element, dict) and element.get("block_id") and element.get("text"):
+            source_units[str(element["block_id"])] = str(element["text"])
+    meta = article.get("meta") if isinstance(article.get("meta"), dict) else {}
+    evidence = language_escape_evidence(
+        str(meta.get("source_title") or article.get("source_title") or ""),
+        title,
+        source_units,
+        {"body": plain_text(body_html)},
+    )
+    # Direct source comparison is possible when Bob retained ordered elements; the whole-body
+    # language check remains a safety net for older or synthetic Bob handoffs.
+    if source_units:
+        source_plain = " ".join(source_units.values())
+        direct = language_escape_evidence("", "", {"body": source_plain}, {"body": plain})
+        evidence.update({k: direct[k] for k in ("body_likely_untranslated", "body_substantially_unchanged", "residual_english_body")})
+    if evidence["body_substantially_unchanged"]:
+        issues.append(issue("untranslated_body", "blocker", "Corpo sostanzialmente invariato rispetto alla fonte inglese.", plain[:700]))
+    elif evidence["residual_english_body"]:
+        issues.append(issue("residual_english_body", "blocker", "Corpo composto macroscopicamente da prosa inglese.", plain[:700]))
+    if evidence["title_likely_untranslated"]:
+        issues.append(issue("untranslated_title", "blocker", "Titolo chiaramente inglese e invariato rispetto alla fonte.", title))
+
     for pattern in CTA_PATTERNS:
         match = pattern.search(plain)
         if match:
@@ -244,6 +270,8 @@ def review_article(article: dict[str, Any]) -> dict[str, Any]:
             "editorial_changes": len(editorial_changes),
             "quote_count": quote_count,
             "table_count": table_count,
+            "translation_escape_evidence": evidence,
+            "bob_translation_validation": article.get("translation_validation") if isinstance(article.get("translation_validation"), dict) else None,
         },
     }
 

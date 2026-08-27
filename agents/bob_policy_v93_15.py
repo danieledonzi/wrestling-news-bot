@@ -15,7 +15,7 @@ ARTIFACT_DIR = ROOT / "artifacts" / "newsroom"
 BOB_ARTICLES_FILE = NEWSROOM_STATE_DIR / "bob_articles_latest.json"
 ARTIFACT_BOB_FILE = ARTIFACT_DIR / "bob_articles.json"
 
-VERSION = "v94_14_translation_guardrails_from_v92"
+VERSION = "v96.4a_v94_14_translation_guardrails_with_validation_boundary"
 
 TRANSLATION_STYLE_GUARDRAILS_V94_14 = """
 GUARDRAIL LINGUISTICI OBBLIGATORI v94.14:
@@ -197,5 +197,5 @@ def run_bob(menzo_decision: dict[str, Any] | None = None) -> dict[str, Any]:
     result.setdefault("postprocess", {})["bob_v93_16_changes"] = total_changes
     write_json(ARTIFACT_BOB_FILE, result)
     write_json(BOB_ARTICLES_FILE, result)
-    print(f"[BOB v94.14] Cleanup finale + guardrail traduzione applicati | changes={total_changes}", flush=True)
+    print(f"[BOB V96.4A/v94.14] Validation boundary + cleanup finale applicati | changes={total_changes}", flush=True)
     return result
