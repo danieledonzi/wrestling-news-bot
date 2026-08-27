@@ -5,6 +5,7 @@ from __future__ import annotations
 import html
 import re
 import unicodedata
+from difflib import SequenceMatcher
 from typing import Any
 
 ENGLISH_MARKERS = {
@@ -47,16 +48,18 @@ def likely_english_title(value: str) -> bool:
     return len(words) >= 6 and english >= 2 and english >= italian + 2
 
 
-def likely_contextual_english_title(value: str) -> bool:
-    """Find sentence-like titles without classifying short official branding as prose.
-
-    This weaker branch requires nine title words and an English grammatical marker;
-    callers additionally require authoritative English-body context.
-    """
+def likely_prose_headline(value: str) -> bool:
+    """Separate long headline structure from short official names and branding."""
     words = re.findall(r"[a-zA-ZÀ-ÿ']+", plain_text(value).casefold())
-    english = sum(word in ENGLISH_MARKERS for word in words)
-    italian = sum(word in ITALIAN_MARKERS for word in words)
-    return len(words) >= 9 and english >= 1 and english > italian
+    return len(words) >= 8
+
+
+def token_similarity(source: str, output: str) -> float:
+    source_tokens = normalized(source).split()
+    output_tokens = normalized(output).split()
+    if not source_tokens or not output_tokens:
+        return 0.0
+    return SequenceMatcher(None, source_tokens, output_tokens, autojunk=False).ratio()
 
 
 def language_escape_evidence(
@@ -85,19 +88,26 @@ def language_escape_evidence(
         len(source_body_norm) >= 160
         and source_body_norm == normalized(aligned_output_body)
     )
+    source_output_similarity = token_similarity(source_body, aligned_output_body)
+    near_identical_body = bool(
+        len(source_body_norm) >= 160
+        and len(normalized(aligned_output_body)) >= 160
+        and not exact_body_unchanged
+        and source_output_similarity >= 0.94
+    )
     partial_overwhelmingly_unchanged = (
         source_chars >= 160
         and unchanged_chars / source_chars >= 0.75
         and likely_macroscopic_english(source_body)
     )
-    overwhelmingly_unchanged = exact_body_unchanged or partial_overwhelmingly_unchanged
+    overwhelmingly_unchanged = exact_body_unchanged or near_identical_body or partial_overwhelmingly_unchanged
     body_english = likely_macroscopic_english(output_body)
     title_unchanged = bool(
         len(normalized(source_title)) >= 20
         and normalized(source_title) == normalized(translated_title)
         and (
             likely_english_title(source_title)
-            or (likely_contextual_english_title(source_title) and likely_macroscopic_english(source_body))
+            or (likely_prose_headline(source_title) and likely_macroscopic_english(source_body))
         )
     )
     return {
@@ -106,6 +116,8 @@ def language_escape_evidence(
         "body_likely_untranslated": overwhelmingly_unchanged or body_english,
         "body_substantially_unchanged": overwhelmingly_unchanged,
         "exact_body_unchanged": exact_body_unchanged,
+        "near_identical_body": near_identical_body,
+        "source_output_similarity": round(source_output_similarity, 3),
         "residual_english_body": body_english,
         "title_likely_untranslated": title_unchanged,
     }
