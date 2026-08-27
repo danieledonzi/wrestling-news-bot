@@ -19,6 +19,13 @@ ITALIAN = (
     "aggiunto che gli atleti hanno lavorato con Paul Heyman prima dello show e potrebbero apparire "
     "insieme anche in futuro su Sunday Night's Main Event e a Busted Open Radio."
 )
+LOW_MARKER_ENGLISH = " ".join([
+    "John Cena defeated Cody Rhodes via pinfall.",
+    "Roman Reigns attacked Seth Rollins ringside.",
+    "Rhea Ripley challenged Bianca Belair backstage.",
+    "Gunther powerbombed Jey Uso onto steel steps.",
+    "Bron Breakker speared Oba Femi after interference.",
+] * 3)
 
 
 def units():
@@ -86,6 +93,26 @@ def test_unchanged_english_body_and_title_are_rejected():
     assert result["title_likely_untranslated"] is True
 
 
+def test_low_marker_exact_english_copy_is_rejected():
+    low_marker_units = [
+        {"id": "b1", "text": LOW_MARKER_ENGLISH[:150]},
+        {"id": "b2", "text": LOW_MARKER_ENGLISH[150:300]},
+        {"id": "b3", "text": LOW_MARKER_ENGLISH[300:]},
+    ]
+    translations = {unit["id"]: unit["text"] for unit in low_marker_units}
+    assert likely_macroscopic_english(LOW_MARKER_ENGLISH) is False
+    result = bob.validate_translation(
+        {"title_it": "Risultati completi dello show WWE", "translations": translations},
+        True,
+        low_marker_units,
+        "WWE Results",
+    )
+    assert result["exact_body_unchanged"] is True
+    assert result["body_substantially_unchanged"] is True
+    assert result["valid"] is False
+    assert "unchanged_source_body" in result["reasons"]
+
+
 def test_untranslated_english_title_rejected_with_translated_body():
     source_title = "What The WWE Stars Will Do After The Main Event"
     result = bob.validate_translation(valid_data() | {"title_it": source_title}, True, units(), source_title)
@@ -143,6 +170,15 @@ def test_alfred_blocks_english_escape():
     review = alfred.review_article(bob_article(ENGLISH, title="Bully Ray Explains What WWE Will Do After The Show"))
     assert review["decision"] == "needs_revision"
     assert {item["code"] for item in review["issues"]} & {"untranslated_body", "residual_english_body"}
+
+
+def test_alfred_blocks_low_marker_exact_body_escape():
+    article = bob_article(LOW_MARKER_ENGLISH, title="Risultati completi dello show WWE")
+    article["elements"] = [{"type": "text", "block_id": "b1", "text": LOW_MARKER_ENGLISH}]
+    review = alfred.review_article(article)
+    assert review["decision"] == "needs_revision"
+    assert "untranslated_body" in {item["code"] for item in review["issues"]}
+    assert review["diagnostics"]["translation_escape_evidence"]["exact_body_unchanged"] is True
 
 
 def test_alfred_approves_italian_with_legitimate_english_terms():

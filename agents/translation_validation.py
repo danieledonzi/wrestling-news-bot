@@ -77,13 +77,20 @@ def language_escape_evidence(
             unchanged.append(unit_id)
             unchanged_chars += len(source_norm)
 
-    output_body = " ".join(translated_units.values())
     source_body = " ".join(source_units.values())
-    overwhelmingly_unchanged = (
+    output_body = " ".join(translated_units.values())
+    aligned_output_body = " ".join(translated_units.get(unit_id, "") for unit_id in source_units)
+    source_body_norm = normalized(source_body)
+    exact_body_unchanged = bool(
+        len(source_body_norm) >= 160
+        and source_body_norm == normalized(aligned_output_body)
+    )
+    partial_overwhelmingly_unchanged = (
         source_chars >= 160
         and unchanged_chars / source_chars >= 0.75
         and likely_macroscopic_english(source_body)
     )
+    overwhelmingly_unchanged = exact_body_unchanged or partial_overwhelmingly_unchanged
     body_english = likely_macroscopic_english(output_body)
     title_unchanged = bool(
         len(normalized(source_title)) >= 20
@@ -98,6 +105,7 @@ def language_escape_evidence(
         "unchanged_source_ratio": round(unchanged_chars / source_chars, 3) if source_chars else None,
         "body_likely_untranslated": overwhelmingly_unchanged or body_english,
         "body_substantially_unchanged": overwhelmingly_unchanged,
+        "exact_body_unchanged": exact_body_unchanged,
         "residual_english_body": body_english,
         "title_likely_untranslated": title_unchanged,
     }
