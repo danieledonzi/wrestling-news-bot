@@ -67,6 +67,7 @@ def language_escape_evidence(
     translated_title: str,
     source_units: dict[str, str],
     translated_units: dict[str, str],
+    source_title_candidates: list[tuple[str, str]] | None = None,
 ) -> dict[str, Any]:
     unchanged: list[str] = []
     source_chars = unchanged_chars = 0
@@ -81,8 +82,8 @@ def language_escape_evidence(
             unchanged_chars += len(source_norm)
 
     source_body = " ".join(source_units.values())
-    output_body = " ".join(translated_units.values())
     aligned_output_body = " ".join(translated_units.get(unit_id, "") for unit_id in source_units)
+    output_body = aligned_output_body if source_units else " ".join(translated_units.values())
     source_body_norm = normalized(source_body)
     exact_body_unchanged = bool(
         len(source_body_norm) >= 160
@@ -102,14 +103,20 @@ def language_escape_evidence(
     )
     overwhelmingly_unchanged = exact_body_unchanged or near_identical_body or partial_overwhelmingly_unchanged
     body_english = likely_macroscopic_english(output_body)
-    title_unchanged = bool(
-        len(normalized(source_title)) >= 20
-        and normalized(source_title) == normalized(translated_title)
-        and (
-            likely_english_title(source_title)
-            or (likely_prose_headline(source_title) and likely_macroscopic_english(source_body))
-        )
-    )
+    candidates = source_title_candidates or [("source", source_title)]
+    title_source_match = None
+    for label, candidate in candidates[:3]:
+        if (
+            len(normalized(candidate)) >= 20
+            and normalized(candidate) == normalized(translated_title)
+            and (
+                likely_english_title(candidate)
+                or (likely_prose_headline(candidate) and likely_macroscopic_english(source_body))
+            )
+        ):
+            title_source_match = str(label)[:20]
+            break
+    title_unchanged = title_source_match is not None
     return {
         "unchanged_units": unchanged[:30],
         "unchanged_source_ratio": round(unchanged_chars / source_chars, 3) if source_chars else None,
@@ -120,4 +127,5 @@ def language_escape_evidence(
         "source_output_similarity": round(source_output_similarity, 3),
         "residual_english_body": body_english,
         "title_likely_untranslated": title_unchanged,
+        "title_source_match": title_source_match,
     }

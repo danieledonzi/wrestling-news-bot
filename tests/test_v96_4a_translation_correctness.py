@@ -173,6 +173,32 @@ def test_unchanged_prose_headline_is_rejected_without_marker_vocabulary():
     assert result["valid"] is False
 
 
+def test_bob_rejects_title_copied_from_feed_when_page_title_differs():
+    page_title = "Roman Reigns WWE Status After SmackDown"
+    feed_title = "Roman Reigns Returns To WWE SmackDown Following Injury Update"
+    result = bob.validate_translation(valid_data() | {"title_it": feed_title}, True, units(), page_title, feed_title)
+    assert result["title_likely_untranslated"] is True
+    assert result["title_source_match"] == "feed"
+    assert "untranslated_title" in result["reasons"]
+
+
+def test_bob_still_rejects_title_copied_from_page():
+    page_title = "Roman Reigns Returns To WWE SmackDown Following Injury Update"
+    result = bob.validate_translation(valid_data() | {"title_it": page_title}, True, units(), page_title, "Different Feed Headline")
+    assert result["title_likely_untranslated"] is True
+    assert result["title_source_match"] == "page"
+
+
+def test_bob_accepts_italian_title_different_from_page_and_feed():
+    result = bob.validate_translation(
+        valid_data(), True, units(), "Roman Reigns WWE Status After SmackDown",
+        "Roman Reigns Returns To WWE SmackDown Following Injury Update",
+    )
+    assert result["title_likely_untranslated"] is False
+    assert result["title_source_match"] is None
+    assert result["valid"] is True
+
+
 def assert_official_unchanged_title_is_accepted(title):
     result = bob.validate_translation(valid_data() | {"title_it": title}, True, units(), title)
     assert result["body_likely_untranslated"] is False
@@ -205,6 +231,27 @@ def test_proper_names_and_short_english_quote_do_not_trigger():
     text = ITALIAN + ' Bully Ray ha concluso: "The Vision".'
     evidence = language_escape_evidence("", "Titolo italiano", {}, {"b1": text})
     assert evidence["residual_english_body"] is False
+
+
+def test_unused_english_translation_key_does_not_contaminate_rendered_body():
+    translations = {"b1": LOW_MARKER_ITALIAN, "unused_debug": ENGLISH * 3}
+    result = bob.validate_translation(
+        {"title_it": "Risultati completi dello show WWE", "translations": translations},
+        True, [{"id": "b1", "text": LOW_MARKER_ENGLISH}], "WWE Results",
+    )
+    assert result["residual_english_body"] is False
+    assert result["valid"] is True
+    assert "unused_debug" not in bob.render_body([{"type": "text", "block_id": "b1", "text": LOW_MARKER_ENGLISH}], translations)
+    assert ENGLISH not in bob.render_body([{"type": "text", "block_id": "b1", "text": LOW_MARKER_ENGLISH}], translations)
+
+
+def test_required_english_unit_remains_rejected_with_foreign_key_present():
+    result = bob.validate_translation(
+        {"title_it": "Risultati completi dello show WWE", "translations": {"b1": ENGLISH * 2, "unused": LOW_MARKER_ITALIAN}},
+        True, [{"id": "b1", "text": LOW_MARKER_ENGLISH}], "WWE Results",
+    )
+    assert result["residual_english_body"] is True
+    assert result["valid"] is False
 
 
 def bob_article(body, title="Bully Ray commenta il ritorno in WWE", source_title="Bully Ray Explains What WWE Will Do After The Show"):
@@ -258,6 +305,24 @@ def test_alfred_prefers_page_title_like_bob():
     review = alfred.review_article(article)
     assert review["decision"] == "needs_revision"
     assert "untranslated_title" in {item["code"] for item in review["issues"]}
+
+
+def test_alfred_rejects_title_copied_from_feed_when_page_differs():
+    feed_title = "Roman Reigns Returns To WWE SmackDown Following Injury Update"
+    article = bob_article(ITALIAN, title=feed_title, source_title=feed_title)
+    article["meta"] = {"source_title": "Roman Reigns WWE Status After SmackDown"}
+    review = alfred.review_article(article)
+    assert review["decision"] == "needs_revision"
+    assert "untranslated_title" in {item["code"] for item in review["issues"]}
+    assert review["diagnostics"]["translation_escape_evidence"]["title_source_match"] == "feed"
+
+
+def test_alfred_without_source_units_keeps_whole_body_english_fallback():
+    article = bob_article(ENGLISH * 2, title="Titolo italiano valido")
+    article.pop("elements")
+    review = alfred.review_article(article)
+    assert review["decision"] == "needs_revision"
+    assert "residual_english_body" in {item["code"] for item in review["issues"]}
 
 
 def test_effective_runtime_versions_and_runner_summary_are_v96_4a():

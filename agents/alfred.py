@@ -181,6 +181,7 @@ def review_article(article: dict[str, Any]) -> dict[str, Any]:
         title,
         source_units,
         {"body": plain_text(body_html)},
+        [("page", str(meta.get("source_title") or "")), ("feed", str(article.get("source_title") or ""))],
     )
     # Direct source comparison is possible when Bob retained ordered elements; the whole-body
     # language check remains a safety net for older or synthetic Bob handoffs.

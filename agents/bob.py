@@ -772,7 +772,7 @@ def parse_bob_json(raw: str) -> dict[str, Any]:
     return parse_bob_json_with_validity(raw)[0]
 
 
-def validate_translation(data: dict[str, Any], parse_valid: bool, units: list[dict[str, str]], source_title: str) -> dict[str, Any]:
+def validate_translation(data: dict[str, Any], parse_valid: bool, units: list[dict[str, str]], source_title: str, alternate_source_title: str = "") -> dict[str, Any]:
     translations_object_valid = isinstance(data.get("translations"), dict)
     raw_translations = data.get("translations") if translations_object_valid else {}
     required = [str(unit["id"]) for unit in units]
@@ -784,7 +784,11 @@ def validate_translation(data: dict[str, Any], parse_valid: bool, units: list[di
     title_type_valid = isinstance(title_value, str)
     title = clean_text(title_value) if title_type_valid else ""
     evidence = language_escape_evidence(
-        source_title, title, {str(unit["id"]): str(unit.get("text") or "") for unit in units}, translations
+        source_title,
+        title,
+        {str(unit["id"]): str(unit.get("text") or "") for unit in units},
+        translations,
+        [("page", source_title), ("feed", alternate_source_title)],
     )
     reasons: list[str] = []
     if not parse_valid:
@@ -996,7 +1000,7 @@ def article_package(item: dict[str, Any]) -> dict[str, Any]:
             data, parse_valid = parse_bob_json_with_validity(translated)
             translations = data.get("translations") if isinstance(data.get("translations"), dict) else {}
             translations = {str(k): v for k, v in translations.items() if isinstance(v, str)}
-            validation = validate_translation(data, parse_valid, units, str(meta.get("source_title") or item.get("title") or ""))
+            validation = validate_translation(data, parse_valid, units, str(meta.get("source_title") or ""), str(item.get("title") or ""))
             package["translation_validation"] = validation
             package["bob_notes"] = data.get("notes") if isinstance(data.get("notes"), list) else []
             package["translation_missing_units"] = validation["missing_units"]
