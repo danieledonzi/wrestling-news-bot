@@ -1,4 +1,5 @@
 import json
+import re
 from pathlib import Path
 
 from agents import alfred, bob
@@ -43,11 +44,14 @@ ITALIAN_JUDGMENT_DAY = " ".join([
 SOURCE_DESCRIPTION = "Roman Reigns returned to WWE SmackDown after he was away from the show for several weeks."
 LOW_MARKER_DESCRIPTION = "John Cena defeated Cody Rhodes via pinfall backstage following SmackDown results."
 ITALIAN_EXCERPT = "Roman Reigns è tornato a WWE SmackDown dopo diverse settimane di assenza dallo show."
-MATCH_CARD_BLOCK = "\n".join([
-    "Cody Rhodes vs. John Cena — WWE Undisputed Championship Match",
-    "Roman Reigns vs. Seth Rollins — WrestleMania Main Event",
-    "CM Punk vs. Drew McIntyre — Steel Cage Grudge Match Special Attraction",
+MATCH_CARD_BLOCK = " ".join([
+    "• Cody Rhodes vs. John Cena — WWE Undisputed Championship Match",
+    "• Roman Reigns vs. Seth Rollins — WrestleMania Main Event",
+    "• CM Punk vs. Drew McIntyre — Steel Cage Grudge Match Special Attraction",
 ])
+MATCHUP_PROSE = (
+    "The championship opportunity between Cody Rhodes vs Seth Rollins determines whether the winner can challenge at the next premium live event while Roman Reigns vs CM Punk shapes another rivalry and the company evaluates every possible outcome for the roster without announcing a final decision"
+)
 TABLE_PROSE_CELLS = [
     f"John Cena defeated Cody Rhodes via pinfall backstage {index}"
     for index in range(12)
@@ -333,6 +337,25 @@ def test_long_match_card_block_is_exempt_from_substantive_unit_blocker():
     assert result["valid"] is True
 
 
+def test_single_prose_segment_with_multiple_matchups_is_not_card_structure():
+    assert len(normalized(MATCHUP_PROSE)) >= 160
+    assert len(re.findall(r"(?<!\w)(?:vs\.?|versus)(?!\w)", MATCHUP_PROSE, re.I)) >= 2
+    assert not re.search(r"[.!?]", MATCHUP_PROSE)
+    assert likely_clear_match_card(MATCHUP_PROSE) is False
+    units = [
+        {"id": "b1", "type": "text", "text": MATCHUP_PROSE},
+        {"id": "b2", "type": "text", "text": ENGLISH * 3},
+    ]
+    result = bob.validate_translation(
+        {"title_it": "Aggiornamento sul roster WWE", "translations": {"b1": MATCHUP_PROSE, "b2": ITALIAN * 3}},
+        True, units, "WWE Roster Update",
+    )
+    assert "b1" in result["substantive_unchanged_units"]
+    assert result["body_substantially_unchanged"] is True
+    assert "unchanged_source_body" in result["reasons"]
+    assert result["valid"] is False
+
+
 def test_unchanged_table_branding_does_not_form_prose_cluster():
     cells = ["Cody Rhodes", "John Cena", "WWE Undisputed Championship", "Cody Rhodes vs. John Cena"] * 3
     units = [
@@ -546,6 +569,19 @@ def test_alfred_does_not_block_clear_match_card_structure():
     review = alfred.review_article(article)
     assert review["decision"] == "approved"
     assert "untranslated_body" not in {item["code"] for item in review["issues"]}
+
+
+def test_alfred_blocks_untranslated_matchup_prose_without_card_boundaries():
+    elements = [
+        {"type": "text", "block_id": "b1", "text": MATCHUP_PROSE},
+        {"type": "text", "block_id": "b2", "text": ENGLISH * 3},
+    ]
+    article = bob_article(bob.render_body(elements, {"b1": MATCHUP_PROSE, "b2": ITALIAN * 3}), title="Aggiornamento sul roster WWE")
+    article["elements"] = elements
+    review = alfred.review_article(article)
+    assert review["decision"] == "needs_revision"
+    assert "untranslated_body" in {item["code"] for item in review["issues"]}
+    assert "b1" in review["diagnostics"]["translation_escape_evidence"]["substantive_unchanged_units"]
 
 
 def test_alfred_best_effort_blocks_copied_table_prose_cluster():

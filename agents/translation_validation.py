@@ -59,10 +59,19 @@ def likely_prose_headline(value: str) -> bool:
 
 def likely_clear_match_card(value: str) -> bool:
     text = plain_text(value)
-    separators = re.findall(r"(?<!\w)(?:vs\.?|versus)(?!\w)", text, re.I)
-    without_vs_dots = re.sub(r"(?<!\w)vs\.(?!\w)", "vs", text, flags=re.I)
-    words = re.findall(r"[A-Za-zÀ-ÿ]+", text)
-    return len(separators) >= 2 and not re.search(r"[.!?]", without_vs_dots) and len(words) <= 12 * len(separators)
+    # Bob flattens ordinary <p>/<li> whitespace, so only explicit bullet glyphs remain a
+    # trustworthy multi-entry boundary inside one translation unit. Separate <li> nodes
+    # already become separate (normally short) units and need no long-unit exemption.
+    entries = [entry.strip() for entry in re.split(r"[•●▪◦]", text) if entry.strip()]
+    if len(entries) < 2:
+        return False
+    for entry in entries:
+        separators = re.findall(r"(?<!\w)(?:vs\.?|versus)(?!\w)", entry, re.I)
+        without_vs_dots = re.sub(r"(?<!\w)vs\.(?!\w)", "vs", entry, flags=re.I)
+        words = re.findall(r"[A-Za-zÀ-ÿ]+", entry)
+        if not separators or re.search(r"[.!?]", without_vs_dots) or len(words) > 12 * len(separators):
+            return False
+    return True
 
 
 def prose_like_table_cell(value: str) -> bool:
