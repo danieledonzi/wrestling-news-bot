@@ -6,9 +6,9 @@ A non-empty Gemini response (`result=text`) could previously be treated as a suc
 
 ## Runtime boundary
 
-Bob now requires valid Bob JSON, a non-empty `title_it`, a translations object, and a non-empty value for every required unit. Deterministic, conservative evidence also rejects overwhelmingly unchanged source blocks, macroscopically English prose, and a clearly English title unchanged from its source. Failures use `translation_validation_failed`, retain bounded structured diagnostics, and expose neither source-fallback body nor source title as translated output.
+Bob now requires valid Bob JSON, a non-empty `title_it`, a translations object, and a non-empty value for every required unit. The deterministic boundary covers every user-visible translated field: title, rendered body units, and any non-empty excerpt. An absent or empty excerpt remains allowed; a supplied non-empty excerpt must be text and must not be unchanged/highly similar English source-description prose or conservatively detectable residual English. Failures use `translation_validation_failed`, retain bounded structured diagnostics, and expose neither source-fallback content nor invalid translated fields as successful output.
 
-Alfred independently blocks bodies substantially unchanged from retained source elements, macroscopically English prose, and clearly English unchanged titles. It reports stable blockers; it does not translate, broadly rewrite, change facts or quotations, or infer content.
+Alfred independently blocks bodies substantially unchanged from retained source elements, macroscopically English prose, clearly English unchanged titles, and obviously untranslated non-empty excerpts. It reports stable blockers; it does not translate, broadly rewrite, change facts or quotations, or infer content.
 
 This adds no provider calls, model changes, prompt changes, retries, fallback models, pricing changes, or Gemini-ledger semantic changes. `result=text` continues to mean only that non-empty provider text was received. Bob remains translation-only and Alfred remains a conservative local quality gate; Menzo, Publisher, Simone, and editorial authority are unchanged.
 

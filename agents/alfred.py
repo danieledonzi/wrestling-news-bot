@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from agents.translation_validation import language_escape_evidence, plain_text
+from agents.translation_validation import excerpt_translation_evidence, language_escape_evidence, plain_text
 
 ROOT = Path(__file__).resolve().parents[1]
 STATE_DIR = ROOT / "state"
@@ -176,6 +176,9 @@ def review_article(article: dict[str, Any]) -> dict[str, Any]:
         if isinstance(element, dict) and element.get("block_id") and element.get("text"):
             source_units[str(element["block_id"])] = str(element["text"])
     meta = article.get("meta") if isinstance(article.get("meta"), dict) else {}
+    excerpt_value = article.get("excerpt_it")
+    excerpt = clean_text(str(excerpt_value or ""))
+    excerpt_evidence = excerpt_translation_evidence(str(meta.get("description") or ""), excerpt)
     evidence = language_escape_evidence(
         str(meta.get("source_title") or article.get("source_title") or ""),
         title,
@@ -195,6 +198,10 @@ def review_article(article: dict[str, Any]) -> dict[str, Any]:
         issues.append(issue("residual_english_body", "blocker", "Corpo composto macroscopicamente da prosa inglese.", plain[:700]))
     if evidence["title_likely_untranslated"]:
         issues.append(issue("untranslated_title", "blocker", "Titolo chiaramente inglese e invariato rispetto alla fonte.", title))
+    if excerpt_evidence["excerpt_likely_untranslated"]:
+        issues.append(issue("untranslated_excerpt", "blocker", "Excerpt sostanzialmente invariato rispetto alla descrizione inglese.", excerpt))
+    elif excerpt_evidence["excerpt_residual_english"]:
+        issues.append(issue("residual_english_excerpt", "blocker", "Excerpt composto da prosa inglese.", excerpt))
 
     for pattern in CTA_PATTERNS:
         match = pattern.search(plain)
@@ -272,6 +279,7 @@ def review_article(article: dict[str, Any]) -> dict[str, Any]:
             "quote_count": quote_count,
             "table_count": table_count,
             "translation_escape_evidence": evidence,
+            "excerpt_translation_evidence": excerpt_evidence,
             "bob_translation_validation": article.get("translation_validation") if isinstance(article.get("translation_validation"), dict) else None,
         },
     }

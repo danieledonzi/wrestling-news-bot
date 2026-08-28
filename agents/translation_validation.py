@@ -63,6 +63,39 @@ def token_similarity(source: str, output: str) -> float:
     return SequenceMatcher(None, source_tokens, output_tokens, autojunk=False).ratio()
 
 
+def likely_short_english_prose(value: str) -> bool:
+    """Conservative English evidence for excerpts shorter than normal articles."""
+    words = re.findall(r"[a-zA-ZÀ-ÿ']+", plain_text(value).casefold())
+    if len(words) < 8:
+        return False
+    english_words = [word for word in words if word in ENGLISH_MARKERS]
+    italian = sum(word in ITALIAN_MARKERS for word in words)
+    return (
+        len(set(english_words)) >= 3
+        and len(english_words) >= 3
+        and len(english_words) / len(words) >= 0.2
+        and len(english_words) >= italian + 2
+    )
+
+
+def excerpt_translation_evidence(source_description: str, excerpt: str) -> dict[str, Any]:
+    source_norm = normalized(source_description)
+    excerpt_norm = normalized(excerpt)
+    similarity = token_similarity(source_description, excerpt)
+    substantive = len(source_norm) >= 50 and len(excerpt_norm) >= 50
+    source_english = likely_short_english_prose(source_description)
+    exact = bool(substantive and source_english and source_norm == excerpt_norm)
+    near = bool(substantive and source_english and not exact and similarity >= 0.9)
+    residual = likely_short_english_prose(excerpt)
+    return {
+        "excerpt_likely_untranslated": exact or near,
+        "excerpt_residual_english": residual,
+        "excerpt_exact_source": exact,
+        "excerpt_near_source": near,
+        "excerpt_source_similarity": round(similarity, 3),
+    }
+
+
 def language_escape_evidence(
     source_title: str,
     translated_title: str,

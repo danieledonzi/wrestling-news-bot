@@ -11,7 +11,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from agents.translation_validation import language_escape_evidence
+from agents.translation_validation import excerpt_translation_evidence, language_escape_evidence
 
 from agents.gemini_ledger import make_operation_id, record_gemini_attempt, record_gemini_event
 from urllib.parse import urljoin, urlparse
@@ -772,7 +772,7 @@ def parse_bob_json(raw: str) -> dict[str, Any]:
     return parse_bob_json_with_validity(raw)[0]
 
 
-def validate_translation(data: dict[str, Any], parse_valid: bool, units: list[dict[str, str]], source_title: str, alternate_source_title: str = "") -> dict[str, Any]:
+def validate_translation(data: dict[str, Any], parse_valid: bool, units: list[dict[str, str]], source_title: str, alternate_source_title: str = "", source_description: str = "") -> dict[str, Any]:
     translations_object_valid = isinstance(data.get("translations"), dict)
     raw_translations = data.get("translations") if translations_object_valid else {}
     required = [str(unit["id"]) for unit in units]
@@ -783,6 +783,18 @@ def validate_translation(data: dict[str, Any], parse_valid: bool, units: list[di
     title_value = data.get("title_it")
     title_type_valid = isinstance(title_value, str)
     title = clean_text(title_value) if title_type_valid else ""
+    excerpt_supplied = "excerpt_it" in data
+    excerpt_value = data.get("excerpt_it")
+    excerpt_type_valid = not excerpt_supplied or isinstance(excerpt_value, str)
+    excerpt = clean_text(excerpt_value) if isinstance(excerpt_value, str) else ""
+    excerpt_present = bool(excerpt)
+    excerpt_evidence = excerpt_translation_evidence(source_description, excerpt) if excerpt_present else {
+        "excerpt_likely_untranslated": False,
+        "excerpt_residual_english": False,
+        "excerpt_exact_source": False,
+        "excerpt_near_source": False,
+        "excerpt_source_similarity": None,
+    }
     evidence = language_escape_evidence(
         source_title,
         title,
@@ -797,6 +809,8 @@ def validate_translation(data: dict[str, Any], parse_valid: bool, units: list[di
         reasons.append("missing_title_it")
     if not title_type_valid:
         reasons.append("title_it_not_string")
+    if not excerpt_type_valid:
+        reasons.append("excerpt_it_not_string")
     if not translations_object_valid:
         reasons.append("translations_not_object")
     if missing:
@@ -811,11 +825,17 @@ def validate_translation(data: dict[str, Any], parse_valid: bool, units: list[di
         reasons.append("residual_english_body")
     if evidence["title_likely_untranslated"]:
         reasons.append("untranslated_title")
+    if excerpt_evidence["excerpt_likely_untranslated"]:
+        reasons.append("untranslated_excerpt")
+    elif excerpt_evidence["excerpt_residual_english"]:
+        reasons.append("residual_english_excerpt")
     return {
         "valid": not reasons,
         "parse_valid": parse_valid,
         "title_present": bool(title),
         "title_type_valid": title_type_valid,
+        "excerpt_present": excerpt_present,
+        "excerpt_type_valid": excerpt_type_valid,
         "translations_object_valid": translations_object_valid,
         "required_units": len(required),
         "translated_units": len(required) - len(missing) - len(empty) - len(invalid_value_types),
@@ -823,6 +843,7 @@ def validate_translation(data: dict[str, Any], parse_valid: bool, units: list[di
         "empty_units": empty[:30],
         "invalid_value_type_units": invalid_value_types[:30],
         **evidence,
+        **excerpt_evidence,
         "reasons": reasons,
     }
 
@@ -1000,7 +1021,7 @@ def article_package(item: dict[str, Any]) -> dict[str, Any]:
             data, parse_valid = parse_bob_json_with_validity(translated)
             translations = data.get("translations") if isinstance(data.get("translations"), dict) else {}
             translations = {str(k): v for k, v in translations.items() if isinstance(v, str)}
-            validation = validate_translation(data, parse_valid, units, str(meta.get("source_title") or ""), str(item.get("title") or ""))
+            validation = validate_translation(data, parse_valid, units, str(meta.get("source_title") or ""), str(item.get("title") or ""), str(meta.get("description") or ""))
             package["translation_validation"] = validation
             package["bob_notes"] = data.get("notes") if isinstance(data.get("notes"), list) else []
             package["translation_missing_units"] = validation["missing_units"]

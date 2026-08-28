@@ -40,6 +40,8 @@ ITALIAN_JUDGMENT_DAY = " ".join([
     "The Judgment Day controlla il match senza concedere spazio.",
     "The Judgment Day celebra la vittoria davanti al pubblico.",
 ] * 4)
+SOURCE_DESCRIPTION = "Roman Reigns returned to WWE SmackDown after he was away from the show for several weeks."
+ITALIAN_EXCERPT = "Roman Reigns è tornato a WWE SmackDown dopo diverse settimane di assenza dallo show."
 
 
 def units():
@@ -112,6 +114,67 @@ def test_title_must_be_nonempty_string():
     assert result["valid"] is False
     assert result["title_type_valid"] is False
     assert "title_it_not_string" in result["reasons"]
+
+
+def test_valid_italian_excerpt_is_accepted():
+    result = bob.validate_translation(
+        valid_data() | {"excerpt_it": ITALIAN_EXCERPT}, True, units(), "English source", "", SOURCE_DESCRIPTION,
+    )
+    assert result["excerpt_present"] is True
+    assert result["excerpt_type_valid"] is True
+    assert result["excerpt_likely_untranslated"] is False
+    assert result["excerpt_residual_english"] is False
+    assert result["valid"] is True
+
+
+def test_empty_excerpt_remains_optional():
+    result = bob.validate_translation(valid_data() | {"excerpt_it": ""}, True, units(), "English source", "", SOURCE_DESCRIPTION)
+    assert result["excerpt_present"] is False
+    assert result["excerpt_type_valid"] is True
+    assert result["valid"] is True
+
+
+def test_supplied_non_string_excerpt_is_rejected():
+    for invalid in (None, 123, {"text": "excerpt"}, ["excerpt"]):
+        result = bob.validate_translation(valid_data() | {"excerpt_it": invalid}, True, units(), "English source")
+        assert result["excerpt_type_valid"] is False
+        assert "excerpt_it_not_string" in result["reasons"]
+        assert result["valid"] is False
+
+
+def test_exact_english_source_description_excerpt_is_rejected():
+    result = bob.validate_translation(
+        valid_data() | {"excerpt_it": SOURCE_DESCRIPTION}, True, units(), "English source", "", SOURCE_DESCRIPTION,
+    )
+    assert result["excerpt_exact_source"] is True
+    assert result["excerpt_likely_untranslated"] is True
+    assert "untranslated_excerpt" in result["reasons"]
+    assert result["valid"] is False
+
+
+def test_rephrased_english_source_description_excerpt_is_rejected():
+    rephrased = SOURCE_DESCRIPTION.replace("returned", "appeared")
+    result = bob.validate_translation(
+        valid_data() | {"excerpt_it": rephrased}, True, units(), "English source", "", SOURCE_DESCRIPTION,
+    )
+    assert result["excerpt_near_source"] is True
+    assert result["excerpt_source_similarity"] >= 0.9
+    assert "untranslated_excerpt" in result["reasons"]
+    assert result["valid"] is False
+
+
+def test_italian_excerpt_with_wrestling_terms_is_accepted():
+    excerpt = "The Judgment Day ha attaccato Roman Reigns durante WWE RAW e tornerà a SmackDown dopo NXT."
+    result = bob.validate_translation(valid_data() | {"excerpt_it": excerpt}, True, units(), "English source")
+    assert result["excerpt_residual_english"] is False
+    assert result["valid"] is True
+
+
+def test_repeated_official_branding_does_not_invalidate_italian_excerpt():
+    excerpt = "The Judgment Day domina il match, The Judgment Day festeggia e The Judgment Day saluta il pubblico italiano."
+    result = bob.validate_translation(valid_data() | {"excerpt_it": excerpt}, True, units(), "English source")
+    assert result["excerpt_residual_english"] is False
+    assert result["valid"] is True
 
 
 def test_unchanged_english_body_and_title_are_rejected():
@@ -324,6 +387,33 @@ def test_alfred_blocks_low_marker_near_identical_body_escape():
 def test_alfred_approves_italian_with_legitimate_english_terms():
     review = alfred.review_article(bob_article(ITALIAN))
     assert review["decision"] == "approved"
+
+
+def test_alfred_blocks_english_excerpt_escape():
+    article = bob_article(ITALIAN, title="Titolo italiano valido")
+    article["excerpt_it"] = SOURCE_DESCRIPTION
+    review = alfred.review_article(article)
+    assert review["decision"] == "needs_revision"
+    assert "residual_english_excerpt" in {item["code"] for item in review["issues"]}
+    assert review["diagnostics"]["excerpt_translation_evidence"]["excerpt_residual_english"] is True
+
+
+def test_alfred_blocks_excerpt_unchanged_from_source_description():
+    article = bob_article(ITALIAN, title="Titolo italiano valido")
+    article["excerpt_it"] = SOURCE_DESCRIPTION
+    article["meta"] = {"description": SOURCE_DESCRIPTION}
+    review = alfred.review_article(article)
+    assert review["decision"] == "needs_revision"
+    assert "untranslated_excerpt" in {item["code"] for item in review["issues"]}
+
+
+def test_alfred_approves_valid_italian_excerpt():
+    article = bob_article(ITALIAN, title="Titolo italiano valido")
+    article["excerpt_it"] = ITALIAN_EXCERPT
+    article["meta"] = {"description": SOURCE_DESCRIPTION}
+    review = alfred.review_article(article)
+    assert review["decision"] == "approved"
+    assert review["diagnostics"]["excerpt_translation_evidence"]["excerpt_likely_untranslated"] is False
 
 
 def test_alfred_accepts_italian_with_repeated_official_name():
