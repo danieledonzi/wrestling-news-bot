@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 
 from agents import alfred, bob
-from agents.translation_validation import language_escape_evidence, likely_macroscopic_english
+from agents.translation_validation import language_escape_evidence, likely_macroscopic_english, likely_short_english_prose, normalized
 
 
 ENGLISH = (
@@ -41,6 +41,7 @@ ITALIAN_JUDGMENT_DAY = " ".join([
     "The Judgment Day celebra la vittoria davanti al pubblico.",
 ] * 4)
 SOURCE_DESCRIPTION = "Roman Reigns returned to WWE SmackDown after he was away from the show for several weeks."
+LOW_MARKER_DESCRIPTION = "John Cena defeated Cody Rhodes via pinfall backstage following SmackDown results."
 ITALIAN_EXCERPT = "Roman Reigns è tornato a WWE SmackDown dopo diverse settimane di assenza dallo show."
 
 
@@ -145,6 +146,21 @@ def test_supplied_non_string_excerpt_is_rejected():
 def test_exact_english_source_description_excerpt_is_rejected():
     result = bob.validate_translation(
         valid_data() | {"excerpt_it": SOURCE_DESCRIPTION}, True, units(), "English source", "", SOURCE_DESCRIPTION,
+    )
+    assert result["excerpt_exact_source"] is True
+    assert result["excerpt_likely_untranslated"] is True
+    assert "untranslated_excerpt" in result["reasons"]
+    assert result["valid"] is False
+
+
+def test_exact_marker_light_source_description_excerpt_is_rejected():
+    excerpt = LOW_MARKER_DESCRIPTION
+    assert normalized(LOW_MARKER_DESCRIPTION) == normalized(excerpt)
+    assert len(normalized(LOW_MARKER_DESCRIPTION)) >= 50
+    assert likely_short_english_prose(LOW_MARKER_DESCRIPTION) is False
+    result = bob.validate_translation(
+        valid_data() | {"excerpt_it": excerpt},
+        True, units(), "English source", "", LOW_MARKER_DESCRIPTION,
     )
     assert result["excerpt_exact_source"] is True
     assert result["excerpt_likely_untranslated"] is True
@@ -405,6 +421,16 @@ def test_alfred_blocks_excerpt_unchanged_from_source_description():
     review = alfred.review_article(article)
     assert review["decision"] == "needs_revision"
     assert "untranslated_excerpt" in {item["code"] for item in review["issues"]}
+
+
+def test_alfred_blocks_marker_light_exact_excerpt_identity():
+    article = bob_article(ITALIAN, title="Titolo italiano valido")
+    article["excerpt_it"] = LOW_MARKER_DESCRIPTION
+    article["meta"] = {"description": LOW_MARKER_DESCRIPTION}
+    review = alfred.review_article(article)
+    assert review["decision"] == "needs_revision"
+    assert "untranslated_excerpt" in {item["code"] for item in review["issues"]}
+    assert review["diagnostics"]["excerpt_translation_evidence"]["excerpt_exact_source"] is True
 
 
 def test_alfred_approves_valid_italian_excerpt():

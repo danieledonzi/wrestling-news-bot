@@ -84,7 +84,7 @@ def excerpt_translation_evidence(source_description: str, excerpt: str) -> dict[
     similarity = token_similarity(source_description, excerpt)
     substantive = len(source_norm) >= 50 and len(excerpt_norm) >= 50
     source_english = likely_short_english_prose(source_description)
-    exact = bool(substantive and source_english and source_norm == excerpt_norm)
+    exact = bool(substantive and source_norm == excerpt_norm)
     near = bool(substantive and source_english and not exact and similarity >= 0.9)
     residual = likely_short_english_prose(excerpt)
     return {
