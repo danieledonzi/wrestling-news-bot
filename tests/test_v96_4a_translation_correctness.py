@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 
 from agents import alfred, bob
-from agents.translation_validation import language_escape_evidence, likely_macroscopic_english, likely_short_english_prose, normalized
+from agents.translation_validation import language_escape_evidence, likely_macroscopic_english, likely_prose_headline, likely_short_english_prose, normalized
 
 
 ENGLISH = (
@@ -179,6 +179,23 @@ def test_rephrased_english_source_description_excerpt_is_rejected():
     assert result["valid"] is False
 
 
+def test_near_marker_light_source_description_excerpt_is_rejected():
+    rephrased = LOW_MARKER_DESCRIPTION.replace("defeated", "beat")
+    assert normalized(LOW_MARKER_DESCRIPTION) != normalized(rephrased)
+    assert likely_short_english_prose(LOW_MARKER_DESCRIPTION) is False
+    assert likely_short_english_prose(rephrased) is False
+    result = bob.validate_translation(
+        valid_data() | {"excerpt_it": rephrased},
+        True, units(), "English source", "", LOW_MARKER_DESCRIPTION,
+    )
+    assert result["excerpt_exact_source"] is False
+    assert result["excerpt_source_similarity"] >= 0.9
+    assert result["excerpt_near_source"] is True
+    assert result["excerpt_likely_untranslated"] is True
+    assert "untranslated_excerpt" in result["reasons"]
+    assert result["valid"] is False
+
+
 def test_italian_excerpt_with_wrestling_terms_is_accepted():
     excerpt = "The Judgment Day ha attaccato Roman Reigns durante WWE RAW e tornerà a SmackDown dopo NXT."
     result = bob.validate_translation(valid_data() | {"excerpt_it": excerpt}, True, units(), "English source")
@@ -336,6 +353,18 @@ def test_unchanged_nickname_branding_is_not_untranslated_title():
     assert_official_unchanged_title_is_accepted("The American Nightmare Cody Rhodes")
 
 
+def test_explicit_matchup_branding_is_not_prose_headline():
+    title = "Cody Rhodes vs. John Cena — WWE Undisputed Championship Match"
+    assert likely_prose_headline(title) is False
+    assert_official_unchanged_title_is_accepted(title)
+
+
+def test_multi_person_matchup_branding_is_not_prose_headline():
+    title = "Roman Reigns vs. Seth Rollins vs. CM Punk — WrestleMania Main Event"
+    assert likely_prose_headline(title) is False
+    assert_official_unchanged_title_is_accepted(title)
+
+
 def test_short_official_title_is_not_rejected():
     result = bob.validate_translation(valid_data() | {"title_it": "WWE RAW"}, True, units(), "WWE RAW")
     assert result["title_likely_untranslated"] is False
@@ -431,6 +460,17 @@ def test_alfred_blocks_marker_light_exact_excerpt_identity():
     assert review["decision"] == "needs_revision"
     assert "untranslated_excerpt" in {item["code"] for item in review["issues"]}
     assert review["diagnostics"]["excerpt_translation_evidence"]["excerpt_exact_source"] is True
+
+
+def test_alfred_blocks_marker_light_near_excerpt_identity():
+    rephrased = LOW_MARKER_DESCRIPTION.replace("defeated", "beat")
+    article = bob_article(ITALIAN, title="Titolo italiano valido")
+    article["excerpt_it"] = rephrased
+    article["meta"] = {"description": LOW_MARKER_DESCRIPTION}
+    review = alfred.review_article(article)
+    assert review["decision"] == "needs_revision"
+    assert "untranslated_excerpt" in {item["code"] for item in review["issues"]}
+    assert review["diagnostics"]["excerpt_translation_evidence"]["excerpt_near_source"] is True
 
 
 def test_alfred_approves_valid_italian_excerpt():

@@ -52,7 +52,9 @@ def likely_english_title(value: str) -> bool:
 def likely_prose_headline(value: str) -> bool:
     """Separate long headline structure from short official names and branding."""
     words = re.findall(r"[a-zA-ZÀ-ÿ']+", plain_text(value).casefold())
-    return len(words) >= 8
+    matchup_separator = re.search(r"(?<!\w)(?:vs\.?|versus)(?!\w)", plain_text(value), re.I)
+    has_english_marker = any(word in ENGLISH_MARKERS for word in words)
+    return len(words) >= 8 and (matchup_separator is None or has_english_marker)
 
 
 def token_similarity(source: str, output: str) -> float:
@@ -83,9 +85,8 @@ def excerpt_translation_evidence(source_description: str, excerpt: str) -> dict[
     excerpt_norm = normalized(excerpt)
     similarity = token_similarity(source_description, excerpt)
     substantive = len(source_norm) >= 50 and len(excerpt_norm) >= 50
-    source_english = likely_short_english_prose(source_description)
     exact = bool(substantive and source_norm == excerpt_norm)
-    near = bool(substantive and source_english and not exact and similarity >= 0.9)
+    near = bool(substantive and not exact and similarity >= 0.9)
     residual = likely_short_english_prose(excerpt)
     return {
         "excerpt_likely_untranslated": exact or near,
