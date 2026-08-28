@@ -57,6 +57,22 @@ def likely_prose_headline(value: str) -> bool:
     return len(words) >= 8 and (matchup_separator is None or has_english_marker)
 
 
+def likely_clear_match_card(value: str) -> bool:
+    text = plain_text(value)
+    separators = re.findall(r"(?<!\w)(?:vs\.?|versus)(?!\w)", text, re.I)
+    without_vs_dots = re.sub(r"(?<!\w)vs\.(?!\w)", "vs", text, flags=re.I)
+    words = re.findall(r"[A-Za-zÀ-ÿ]+", text)
+    return len(separators) >= 2 and not re.search(r"[.!?]", without_vs_dots) and len(words) <= 12 * len(separators)
+
+
+def prose_like_table_cell(value: str) -> bool:
+    text = plain_text(value)
+    words = re.findall(r"[A-Za-zÀ-ÿ]+", text)
+    lowercase = sum(token.islower() for token in words)
+    matchup = re.search(r"(?<!\w)(?:vs\.?|versus)(?!\w)", text, re.I)
+    return len(words) >= 5 and lowercase >= 2 and matchup is None
+
+
 def token_similarity(source: str, output: str) -> float:
     source_tokens = normalized(source).split()
     output_tokens = normalized(output).split()
@@ -103,9 +119,14 @@ def language_escape_evidence(
     source_units: dict[str, str],
     translated_units: dict[str, str],
     source_title_candidates: list[tuple[str, str]] | None = None,
+    source_unit_types: dict[str, str] | None = None,
 ) -> dict[str, Any]:
+    unit_types = source_unit_types or {}
     unchanged: list[str] = []
     substantive_unchanged: list[str] = []
+    unchanged_table_units: list[str] = []
+    prose_like_unchanged_table_units: list[str] = []
+    table_stats: dict[str, dict[str, int]] = {}
     fallback_output_norm = normalized(" ".join(translated_units.values()))
     source_chars = unchanged_chars = 0
     for unit_id, source in source_units.items():
@@ -117,11 +138,35 @@ def language_escape_evidence(
         if len(source_norm) >= 60 and source_norm == output_norm:
             unchanged.append(unit_id)
             unchanged_chars += len(source_norm)
-        if len(source_norm) >= 160 and (
-            source_norm == output_norm
-            or (unit_id not in translated_units and source_norm in fallback_output_norm)
+        exact_or_rendered = source_norm == output_norm or (unit_id not in translated_units and source_norm in fallback_output_norm)
+        unit_type = str(unit_types.get(unit_id) or "")
+        if unit_type == "table_cell":
+            match = re.match(r"^(b\d+)_r\d+_c\d+$", unit_id)
+            if match:
+                parent = match.group(1)
+                stats = table_stats.setdefault(parent, {"cells": 0, "source_chars": 0, "unchanged_cells": 0, "unchanged_chars": 0, "prose_like": 0})
+                stats["cells"] += 1
+                stats["source_chars"] += len(source_norm)
+                if exact_or_rendered:
+                    stats["unchanged_cells"] += 1
+                    stats["unchanged_chars"] += len(source_norm)
+                    unchanged_table_units.append(unit_id)
+                    if prose_like_table_cell(source):
+                        stats["prose_like"] += 1
+                        prose_like_unchanged_table_units.append(unit_id)
+        if len(source_norm) >= 160 and exact_or_rendered and (
+            (unit_type == "table_cell" and prose_like_table_cell(source))
+            or (unit_type != "table_cell" and not likely_clear_match_card(source))
         ):
             substantive_unchanged.append(unit_id)
+
+    substantive_tables: list[str] = []
+    table_coverage: dict[str, float] = {}
+    for parent, stats in list(table_stats.items())[:30]:
+        coverage = stats["unchanged_chars"] / stats["source_chars"] if stats["source_chars"] else 0.0
+        table_coverage[parent] = round(coverage, 3)
+        if stats["cells"] >= 3 and stats["unchanged_cells"] >= 3 and stats["source_chars"] >= 160 and coverage >= 0.75 and stats["prose_like"] >= 2:
+            substantive_tables.append(parent)
 
     source_body = " ".join(source_units.values())
     aligned_output_body = " ".join(translated_units.get(unit_id, "") for unit_id in source_units)
@@ -144,7 +189,7 @@ def language_escape_evidence(
         and likely_macroscopic_english(source_body)
     )
     substantive_unit_unchanged = bool(substantive_unchanged)
-    overwhelmingly_unchanged = exact_body_unchanged or near_identical_body or partial_overwhelmingly_unchanged or substantive_unit_unchanged
+    overwhelmingly_unchanged = exact_body_unchanged or near_identical_body or partial_overwhelmingly_unchanged or substantive_unit_unchanged or bool(substantive_tables)
     body_english = likely_macroscopic_english(output_body)
     candidates = source_title_candidates or [("source", source_title)]
     title_source_match = None
@@ -163,6 +208,10 @@ def language_escape_evidence(
     return {
         "unchanged_units": unchanged[:30],
         "substantive_unchanged_units": substantive_unchanged[:30],
+        "unchanged_table_units": unchanged_table_units[:30],
+        "prose_like_unchanged_table_units": prose_like_unchanged_table_units[:30],
+        "substantive_unchanged_table_blocks": substantive_tables[:30],
+        "unchanged_table_coverage": table_coverage,
         "unchanged_source_ratio": round(unchanged_chars / source_chars, 3) if source_chars else None,
         "body_likely_untranslated": overwhelmingly_unchanged or body_english,
         "body_substantially_unchanged": overwhelmingly_unchanged,

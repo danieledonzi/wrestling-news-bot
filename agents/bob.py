@@ -801,6 +801,7 @@ def validate_translation(data: dict[str, Any], parse_valid: bool, units: list[di
         {str(unit["id"]): str(unit.get("text") or "") for unit in units},
         translations,
         [("page", source_title), ("feed", alternate_source_title)],
+        {str(unit["id"]): str(unit.get("type") or "") for unit in units},
     )
     reasons: list[str] = []
     if not parse_valid:

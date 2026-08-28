@@ -172,9 +172,18 @@ def review_article(article: dict[str, Any]) -> dict[str, Any]:
         issues.append(issue("unsafe_html", "blocker", "HTML non consentito nel corpo articolo."))
 
     source_units = {}
+    source_unit_types = {}
     for element in article.get("elements", []) if isinstance(article.get("elements"), list) else []:
         if isinstance(element, dict) and element.get("block_id") and element.get("text"):
             source_units[str(element["block_id"])] = str(element["text"])
+            source_unit_types[str(element["block_id"])] = str(element.get("type") or "")
+        elif isinstance(element, dict) and element.get("type") == "table" and element.get("block_id"):
+            for row_index, row in enumerate(element.get("rows", []) if isinstance(element.get("rows"), list) else []):
+                for column_index, cell in enumerate(row if isinstance(row, list) else []):
+                    if clean_text(str(cell)):
+                        unit_id = f"{element['block_id']}_r{row_index}_c{column_index}"
+                        source_units[unit_id] = str(cell)
+                        source_unit_types[unit_id] = "table_cell"
     meta = article.get("meta") if isinstance(article.get("meta"), dict) else {}
     excerpt_value = article.get("excerpt_it")
     excerpt = clean_text(str(excerpt_value or ""))
@@ -185,6 +194,7 @@ def review_article(article: dict[str, Any]) -> dict[str, Any]:
         source_units,
         {"body": plain_text(body_html)},
         [("page", str(meta.get("source_title") or "")), ("feed", str(article.get("source_title") or ""))],
+        source_unit_types,
     )
     # Direct source comparison is possible when Bob retained ordered elements; the whole-body
     # language check remains a safety net for older or synthetic Bob handoffs.

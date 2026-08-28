@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 
 from agents import alfred, bob
-from agents.translation_validation import language_escape_evidence, likely_macroscopic_english, likely_prose_headline, likely_short_english_prose, normalized
+from agents.translation_validation import language_escape_evidence, likely_clear_match_card, likely_macroscopic_english, likely_prose_headline, likely_short_english_prose, normalized
 
 
 ENGLISH = (
@@ -43,6 +43,15 @@ ITALIAN_JUDGMENT_DAY = " ".join([
 SOURCE_DESCRIPTION = "Roman Reigns returned to WWE SmackDown after he was away from the show for several weeks."
 LOW_MARKER_DESCRIPTION = "John Cena defeated Cody Rhodes via pinfall backstage following SmackDown results."
 ITALIAN_EXCERPT = "Roman Reigns è tornato a WWE SmackDown dopo diverse settimane di assenza dallo show."
+MATCH_CARD_BLOCK = "\n".join([
+    "Cody Rhodes vs. John Cena — WWE Undisputed Championship Match",
+    "Roman Reigns vs. Seth Rollins — WrestleMania Main Event",
+    "CM Punk vs. Drew McIntyre — Steel Cage Grudge Match Special Attraction",
+])
+TABLE_PROSE_CELLS = [
+    f"John Cena defeated Cody Rhodes via pinfall backstage {index}"
+    for index in range(12)
+]
 
 
 def units():
@@ -289,6 +298,58 @@ def test_short_exact_unit_remains_diagnostic_not_independently_blocking():
     assert result["valid"] is True
 
 
+def test_copied_short_table_prose_cluster_blocks_locally():
+    units = [
+        {"id": f"b1_r{index // 3}_c{index % 3}", "type": "table_cell", "text": cell}
+        for index, cell in enumerate(TABLE_PROSE_CELLS)
+    ] + [{"id": "b2", "type": "text", "text": ENGLISH * 4}]
+    translations = {unit["id"]: unit["text"] for unit in units[:-1]}
+    translations["b2"] = ITALIAN * 4
+    result = bob.validate_translation(
+        {"title_it": "Risultati completi dello show WWE", "translations": translations}, True, units, "WWE Results",
+    )
+    assert not ({unit["id"] for unit in units[:-1]} & set(result["unchanged_units"]))
+    assert result["unchanged_table_coverage"]["b1"] >= 0.75
+    assert len(result["prose_like_unchanged_table_units"]) >= 2
+    assert result["substantive_unchanged_table_blocks"] == ["b1"]
+    assert result["body_substantially_unchanged"] is True
+    assert "unchanged_source_body" in result["reasons"]
+
+
+def test_long_match_card_block_is_exempt_from_substantive_unit_blocker():
+    assert len(normalized(MATCH_CARD_BLOCK)) >= 160
+    assert likely_clear_match_card(MATCH_CARD_BLOCK) is True
+    units = [
+        {"id": "b1", "type": "text", "text": MATCH_CARD_BLOCK},
+        {"id": "b2", "type": "text", "text": ENGLISH * 3},
+    ]
+    result = bob.validate_translation(
+        {"title_it": "Card completa dello show WWE", "translations": {"b1": MATCH_CARD_BLOCK, "b2": ITALIAN * 3}},
+        True, units, "WWE Match Card",
+    )
+    assert "b1" in result["unchanged_units"]
+    assert "b1" not in result["substantive_unchanged_units"]
+    assert result["body_substantially_unchanged"] is False
+    assert result["valid"] is True
+
+
+def test_unchanged_table_branding_does_not_form_prose_cluster():
+    cells = ["Cody Rhodes", "John Cena", "WWE Undisputed Championship", "Cody Rhodes vs. John Cena"] * 3
+    units = [
+        {"id": f"b1_r{index // 4}_c{index % 4}", "type": "table_cell", "text": cell}
+        for index, cell in enumerate(cells)
+    ] + [{"id": "b2", "type": "text", "text": ENGLISH * 3}]
+    translations = {unit["id"]: unit["text"] for unit in units[:-1]}
+    translations["b2"] = ITALIAN * 3
+    result = bob.validate_translation(
+        {"title_it": "Card completa dello show WWE", "translations": translations}, True, units, "WWE Match Card",
+    )
+    assert result["prose_like_unchanged_table_units"] == []
+    assert result["substantive_unchanged_table_blocks"] == []
+    assert result["body_substantially_unchanged"] is False
+    assert result["valid"] is True
+
+
 def test_italian_translation_of_low_marker_results_is_not_near_identical():
     result = bob.validate_translation(
         {"title_it": "Risultati completi dello show WWE", "translations": {"b1": LOW_MARKER_ITALIAN}},
@@ -473,6 +534,39 @@ def test_alfred_blocks_one_substantive_exact_untranslated_unit():
     assert review["decision"] == "needs_revision"
     assert "untranslated_body" in {item["code"] for item in review["issues"]}
     assert "b1" in review["diagnostics"]["translation_escape_evidence"]["substantive_unchanged_units"]
+
+
+def test_alfred_does_not_block_clear_match_card_structure():
+    elements = [
+        {"type": "text", "block_id": "b1", "text": MATCH_CARD_BLOCK},
+        {"type": "text", "block_id": "b2", "text": ENGLISH * 3},
+    ]
+    article = bob_article(bob.render_body(elements, {"b1": MATCH_CARD_BLOCK, "b2": ITALIAN * 3}), title="Card completa dello show WWE")
+    article["elements"] = elements
+    review = alfred.review_article(article)
+    assert review["decision"] == "approved"
+    assert "untranslated_body" not in {item["code"] for item in review["issues"]}
+
+
+def test_alfred_best_effort_blocks_copied_table_prose_cluster():
+    rows = [TABLE_PROSE_CELLS[index:index + 3] for index in range(0, 12, 3)]
+    elements = [
+        {"type": "table", "block_id": "b1", "rows": rows},
+        {"type": "text", "block_id": "b2", "text": ENGLISH * 4},
+    ]
+    translations = {
+        f"b1_r{row_index}_c{column_index}": cell
+        for row_index, row in enumerate(rows)
+        for column_index, cell in enumerate(row)
+    }
+    translations["b2"] = ITALIAN * 4
+    article = bob_article(bob.render_body(elements, translations), title="Risultati completi dello show WWE")
+    article["elements"] = elements
+    article["element_counts"] = {"text": 1, "quote": 0, "table": 1}
+    review = alfred.review_article(article)
+    assert review["decision"] == "needs_revision"
+    assert "untranslated_body" in {item["code"] for item in review["issues"]}
+    assert review["diagnostics"]["translation_escape_evidence"]["substantive_unchanged_table_blocks"] == ["b1"]
 
 
 def test_alfred_approves_italian_with_legitimate_english_terms():
