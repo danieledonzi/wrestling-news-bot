@@ -256,6 +256,39 @@ def test_low_marker_near_identical_english_copy_is_rejected():
     assert "unchanged_source_body" in result["reasons"]
 
 
+def test_substantive_exact_unit_blocks_despite_low_article_ratio():
+    unchanged = LOW_MARKER_ENGLISH[:365]
+    long_source = (ENGLISH + " ") * 3
+    long_italian = (ITALIAN + " ") * 3
+    source_units = [{"id": "b1", "text": unchanged}, {"id": "b2", "text": long_source}]
+    result = bob.validate_translation(
+        {"title_it": "Risultati completi dello show WWE", "translations": {"b1": unchanged, "b2": long_italian}},
+        True, source_units, "WWE Results",
+    )
+    assert "b1" in result["unchanged_units"]
+    assert "b1" in result["substantive_unchanged_units"]
+    assert result["unchanged_source_ratio"] < 0.75
+    assert result["exact_body_unchanged"] is False
+    assert result["near_identical_body"] is False
+    assert result["partial_overwhelmingly_unchanged"] is False
+    assert result["body_substantially_unchanged"] is True
+    assert "unchanged_source_body" in result["reasons"]
+    assert result["valid"] is False
+
+
+def test_short_exact_unit_remains_diagnostic_not_independently_blocking():
+    unchanged = LOW_MARKER_ENGLISH[:120]
+    source_units = [{"id": "b1", "text": unchanged}, {"id": "b2", "text": ENGLISH}]
+    result = bob.validate_translation(
+        {"title_it": "Risultati completi dello show WWE", "translations": {"b1": unchanged, "b2": ITALIAN}},
+        True, source_units, "WWE Results",
+    )
+    assert "b1" in result["unchanged_units"]
+    assert "b1" not in result["substantive_unchanged_units"]
+    assert result["body_substantially_unchanged"] is False
+    assert result["valid"] is True
+
+
 def test_italian_translation_of_low_marker_results_is_not_near_identical():
     result = bob.validate_translation(
         {"title_it": "Risultati completi dello show WWE", "translations": {"b1": LOW_MARKER_ITALIAN}},
@@ -427,6 +460,19 @@ def test_alfred_blocks_low_marker_near_identical_body_escape():
     assert review["decision"] == "needs_revision"
     assert "untranslated_body" in {item["code"] for item in review["issues"]}
     assert review["diagnostics"]["translation_escape_evidence"]["near_identical_body"] is True
+
+
+def test_alfred_blocks_one_substantive_exact_untranslated_unit():
+    unchanged = LOW_MARKER_ENGLISH[:365]
+    article = bob_article(f"{unchanged} {ITALIAN * 3}", title="Risultati completi dello show WWE")
+    article["elements"] = [
+        {"type": "text", "block_id": "b1", "text": unchanged},
+        {"type": "text", "block_id": "b2", "text": ENGLISH * 3},
+    ]
+    review = alfred.review_article(article)
+    assert review["decision"] == "needs_revision"
+    assert "untranslated_body" in {item["code"] for item in review["issues"]}
+    assert "b1" in review["diagnostics"]["translation_escape_evidence"]["substantive_unchanged_units"]
 
 
 def test_alfred_approves_italian_with_legitimate_english_terms():

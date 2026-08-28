@@ -191,7 +191,9 @@ def review_article(article: dict[str, Any]) -> dict[str, Any]:
     if source_units:
         source_plain = " ".join(source_units.values())
         direct = language_escape_evidence("", "", {"body": source_plain}, {"body": plain})
-        evidence.update({k: direct[k] for k in ("body_likely_untranslated", "body_substantially_unchanged", "exact_body_unchanged", "near_identical_body", "source_output_similarity", "residual_english_body")})
+        evidence["body_likely_untranslated"] = evidence["body_likely_untranslated"] or direct["body_likely_untranslated"]
+        evidence["body_substantially_unchanged"] = evidence["body_substantially_unchanged"] or direct["body_substantially_unchanged"]
+        evidence.update({k: direct[k] for k in ("exact_body_unchanged", "near_identical_body", "source_output_similarity", "residual_english_body")})
     if evidence["body_substantially_unchanged"]:
         issues.append(issue("untranslated_body", "blocker", "Corpo sostanzialmente invariato rispetto alla fonte inglese.", plain[:700]))
     elif evidence["residual_english_body"]:

@@ -105,6 +105,8 @@ def language_escape_evidence(
     source_title_candidates: list[tuple[str, str]] | None = None,
 ) -> dict[str, Any]:
     unchanged: list[str] = []
+    substantive_unchanged: list[str] = []
+    fallback_output_norm = normalized(" ".join(translated_units.values()))
     source_chars = unchanged_chars = 0
     for unit_id, source in source_units.items():
         source_norm = normalized(source)
@@ -115,6 +117,11 @@ def language_escape_evidence(
         if len(source_norm) >= 60 and source_norm == output_norm:
             unchanged.append(unit_id)
             unchanged_chars += len(source_norm)
+        if len(source_norm) >= 160 and (
+            source_norm == output_norm
+            or (unit_id not in translated_units and source_norm in fallback_output_norm)
+        ):
+            substantive_unchanged.append(unit_id)
 
     source_body = " ".join(source_units.values())
     aligned_output_body = " ".join(translated_units.get(unit_id, "") for unit_id in source_units)
@@ -136,7 +143,8 @@ def language_escape_evidence(
         and unchanged_chars / source_chars >= 0.75
         and likely_macroscopic_english(source_body)
     )
-    overwhelmingly_unchanged = exact_body_unchanged or near_identical_body or partial_overwhelmingly_unchanged
+    substantive_unit_unchanged = bool(substantive_unchanged)
+    overwhelmingly_unchanged = exact_body_unchanged or near_identical_body or partial_overwhelmingly_unchanged or substantive_unit_unchanged
     body_english = likely_macroscopic_english(output_body)
     candidates = source_title_candidates or [("source", source_title)]
     title_source_match = None
@@ -154,11 +162,13 @@ def language_escape_evidence(
     title_unchanged = title_source_match is not None
     return {
         "unchanged_units": unchanged[:30],
+        "substantive_unchanged_units": substantive_unchanged[:30],
         "unchanged_source_ratio": round(unchanged_chars / source_chars, 3) if source_chars else None,
         "body_likely_untranslated": overwhelmingly_unchanged or body_english,
         "body_substantially_unchanged": overwhelmingly_unchanged,
         "exact_body_unchanged": exact_body_unchanged,
         "near_identical_body": near_identical_body,
+        "partial_overwhelmingly_unchanged": partial_overwhelmingly_unchanged,
         "source_output_similarity": round(source_output_similarity, 3),
         "residual_english_body": body_english,
         "title_likely_untranslated": title_unchanged,
