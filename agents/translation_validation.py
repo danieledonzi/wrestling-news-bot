@@ -37,8 +37,9 @@ def likely_macroscopic_english(value: str, *, minimum_words: int = 40) -> bool:
     if len(words) < minimum_words:
         return False
     english = sum(word in ENGLISH_MARKERS for word in words)
+    distinct_english = len({word for word in words if word in ENGLISH_MARKERS})
     italian = sum(word in ITALIAN_MARKERS for word in words)
-    return english >= 8 and english / len(words) >= 0.12 and english >= (italian * 2 + 4)
+    return distinct_english >= 3 and english >= 8 and english / len(words) >= 0.12 and english >= (italian * 2 + 4)
 
 
 def likely_english_title(value: str) -> bool:
@@ -111,7 +112,7 @@ def language_escape_evidence(
             and normalized(candidate) == normalized(translated_title)
             and (
                 likely_english_title(candidate)
-                or (likely_prose_headline(candidate) and likely_macroscopic_english(source_body))
+                or likely_prose_headline(candidate)
             )
         ):
             title_source_match = str(label)[:20]

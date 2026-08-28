@@ -34,6 +34,12 @@ LOW_MARKER_ITALIAN = " ".join([
     "Gunther ha colpito Jey Uso con una powerbomb sui gradoni.",
     "Bron Breakker ha travolto Oba Femi con una Spear dopo un'interferenza.",
 ] * 3)
+ITALIAN_JUDGMENT_DAY = " ".join([
+    "The Judgment Day domina WWE Raw con una strategia aggressiva.",
+    "The Judgment Day attacca gli avversari vicino al ring.",
+    "The Judgment Day controlla il match senza concedere spazio.",
+    "The Judgment Day celebra la vittoria davanti al pubblico.",
+] * 4)
 
 
 def units():
@@ -48,6 +54,22 @@ def test_valid_italian_with_wrestling_terms_and_names_is_accepted():
     result = bob.validate_translation(valid_data(), True, units(), "Bully Ray Explains What WWE Will Do After The Show")
     assert result["valid"] is True
     assert likely_macroscopic_english(ITALIAN) is False
+
+
+def test_repeated_official_name_does_not_create_english_prose_evidence():
+    assert len(ITALIAN_JUDGMENT_DAY.split()) >= 40
+    assert ITALIAN_JUDGMENT_DAY.lower().split().count("the") >= 8
+    assert likely_macroscopic_english(ITALIAN_JUDGMENT_DAY) is False
+    result = bob.validate_translation(
+        {"title_it": "The Judgment Day domina WWE Raw", "translations": {"b1": ITALIAN_JUDGMENT_DAY}},
+        True, [{"id": "b1", "text": ENGLISH}], "Judgment Day WWE Raw News",
+    )
+    assert result["residual_english_body"] is False
+    assert result["valid"] is True
+
+
+def test_genuine_english_prose_still_has_diverse_marker_evidence():
+    assert likely_macroscopic_english(ENGLISH) is True
 
 
 def test_malformed_json_is_not_translation_success():
@@ -173,6 +195,19 @@ def test_unchanged_prose_headline_is_rejected_without_marker_vocabulary():
     assert result["valid"] is False
 
 
+def test_marker_light_source_still_rejects_unchanged_prose_headline():
+    source_title = "Roman Reigns Returns To WWE SmackDown Following Injury Update"
+    assert likely_macroscopic_english(LOW_MARKER_ENGLISH) is False
+    result = bob.validate_translation(
+        {"title_it": source_title, "translations": {"b1": LOW_MARKER_ITALIAN}},
+        True, [{"id": "b1", "text": LOW_MARKER_ENGLISH}], source_title,
+    )
+    assert result["body_likely_untranslated"] is False
+    assert result["title_likely_untranslated"] is True
+    assert result["title_source_match"] == "page"
+    assert result["reasons"] == ["untranslated_title"]
+
+
 def test_bob_rejects_title_copied_from_feed_when_page_title_differs():
     page_title = "Roman Reigns WWE Status After SmackDown"
     feed_title = "Roman Reigns Returns To WWE SmackDown Following Injury Update"
@@ -289,6 +324,24 @@ def test_alfred_blocks_low_marker_near_identical_body_escape():
 def test_alfred_approves_italian_with_legitimate_english_terms():
     review = alfred.review_article(bob_article(ITALIAN))
     assert review["decision"] == "approved"
+
+
+def test_alfred_accepts_italian_with_repeated_official_name():
+    article = bob_article(ITALIAN_JUDGMENT_DAY, title="The Judgment Day domina WWE Raw")
+    review = alfred.review_article(article)
+    assert review["decision"] == "approved"
+    assert "residual_english_body" not in {item["code"] for item in review["issues"]}
+
+
+def test_alfred_marker_light_source_rejects_unchanged_prose_headline():
+    source_title = "Roman Reigns Returns To WWE SmackDown Following Injury Update"
+    article = bob_article(LOW_MARKER_ITALIAN, title=source_title, source_title=source_title)
+    article["meta"] = {"source_title": source_title}
+    article["elements"] = [{"type": "text", "block_id": "b1", "text": LOW_MARKER_ENGLISH}]
+    review = alfred.review_article(article)
+    assert review["decision"] == "needs_revision"
+    assert "untranslated_title" in {item["code"] for item in review["issues"]}
+    assert review["diagnostics"]["translation_escape_evidence"]["title_source_match"] == "page"
 
 
 def test_alfred_retains_bob_validation_failure_reasons():
