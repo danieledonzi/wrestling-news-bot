@@ -270,15 +270,32 @@
       "event_name": "Heatwave",
       "event_type": "NXT PLE",
       "priority": "medium",
-      "status": "expected",
-      "coverage_policy": "await_manual_confirmation",
+      "status": "confirmed",
+      "coverage_policy": "report_and_post_event_freeze",
       "category_hint": "NXT",
       "aliases": [
         "Heatwave",
-        "NXT Heatwave"
+        "Heatwave 2026",
+        "NXT Heatwave",
+        "WWE Heatwave"
       ],
-      "nights": [],
-      "source": "expected_annual_nxt_event_no_confirmed_date"
+      "nights": [
+        {
+          "night_key": "nxt_heatwave_2026_main",
+          "label": "Main show",
+          "date_local": "2026-08-30",
+          "report_publish_after_local": "06:30",
+          "enabled": true,
+          "aliases": [
+            "Heatwave results",
+            "WWE Heatwave results"
+          ]
+        }
+      ],
+      "venue": "Bert Ogden Arena",
+      "location": "Edinburg, Texas",
+      "source": "wikipedia_schedule_auto_applied",
+      "last_verified_at_utc": "2026-08-29T08:00:04Z"
     },
     {
       "key": "nxt_no_mercy_2026",
