@@ -1,0 +1,125 @@
+{
+  "schema_version": "owtv_editorial_director_fixture_v1",
+  "cases": [
+    {
+      "id": "sentinel_01",
+      "description": "Dustin Rhodes pizza / fired-context",
+      "owner_adjudication": "UNRESOLVED",
+      "labels": null
+    },
+    {
+      "id": "sentinel_02",
+      "description": "Vince Russo / death-context",
+      "owner_adjudication": "UNRESOLVED",
+      "labels": null
+    },
+    {
+      "id": "sentinel_03",
+      "description": "Brie Bella / Netflix-context",
+      "owner_adjudication": "UNRESOLVED",
+      "labels": null
+    },
+    {
+      "id": "sentinel_04",
+      "description": "WWE Sunday Night's Main Event match addition",
+      "owner_adjudication": "UNRESOLVED",
+      "labels": null
+    },
+    {
+      "id": "sentinel_05",
+      "description": "WWE scraps planned AAA Hammerstein show",
+      "owner_adjudication": "UNRESOLVED",
+      "labels": null
+    },
+    {
+      "id": "sentinel_06",
+      "description": "WWE merger settlement/shareholders",
+      "owner_adjudication": "UNRESOLVED",
+      "labels": null
+    },
+    {
+      "id": "sentinel_07",
+      "description": "AEW All In gate approaching $6M",
+      "owner_adjudication": "UNRESOLVED",
+      "labels": null
+    },
+    {
+      "id": "sentinel_08",
+      "description": "routine ratings",
+      "owner_adjudication": "UNRESOLVED",
+      "labels": null
+    },
+    {
+      "id": "sentinel_09",
+      "description": "exceptional ratings",
+      "owner_adjudication": "UNRESOLVED",
+      "labels": null
+    },
+    {
+      "id": "sentinel_10",
+      "description": "hard injury",
+      "owner_adjudication": "UNRESOLVED",
+      "labels": null
+    },
+    {
+      "id": "sentinel_11",
+      "description": "contract/signing/release",
+      "owner_adjudication": "UNRESOLVED",
+      "labels": null
+    },
+    {
+      "id": "sentinel_12",
+      "description": "actual Business story",
+      "owner_adjudication": "UNRESOLVED",
+      "labels": null
+    },
+    {
+      "id": "sentinel_13",
+      "description": "card update",
+      "owner_adjudication": "UNRESOLVED",
+      "labels": null
+    },
+    {
+      "id": "sentinel_14",
+      "description": "soft anecdote",
+      "owner_adjudication": "UNRESOLVED",
+      "labels": null
+    },
+    {
+      "id": "sentinel_15",
+      "description": "same-person different-story",
+      "owner_adjudication": "UNRESOLVED",
+      "labels": null
+    },
+    {
+      "id": "sentinel_16",
+      "description": "same-event different-story",
+      "owner_adjudication": "UNRESOLVED",
+      "labels": null
+    },
+    {
+      "id": "sentinel_17",
+      "description": "true duplicate",
+      "owner_adjudication": "UNRESOLVED",
+      "labels": null
+    },
+    {
+      "id": "sentinel_18",
+      "description": "material update",
+      "owner_adjudication": "UNRESOLVED",
+      "labels": null
+    },
+    {
+      "id": "sentinel_19",
+      "description": "cross-source duplicate",
+      "owner_adjudication": "UNRESOLVED",
+      "labels": null
+    },
+    {
+      "id": "sentinel_20",
+      "description": "category ambiguity",
+      "owner_adjudication": "UNRESOLVED",
+      "labels": null
+    }
+  ]
+}

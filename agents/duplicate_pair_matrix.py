@@ -5,7 +5,7 @@ import math
 from collections import Counter
 from copy import deepcopy
 from dataclasses import dataclass
-from typing import Any, Callable, Iterable
+from typing import Any, Callable, Iterable, Iterator
 
 from agents.duplicate_pair_identity import article_id, recent_history_pair_id, same_run_pair_id
 from agents import menzo_duplicate_scorer
@@ -27,26 +27,34 @@ def _snapshot(item: dict[str, Any]) -> dict[str, Any]:
     return deepcopy(item)
 
 
-def build_same_run_pair_specs(items: Iterable[dict[str, Any]]) -> list[PairSpec]:
+def iter_same_run_pair_specs(items: Iterable[dict[str, Any]]) -> Iterator[PairSpec]:
     snapshots = sorted((_snapshot(x) for x in items), key=lambda x: article_id(x))
-    output: list[PairSpec] = []
     for index, left in enumerate(snapshots):
         left_id = article_id(left)
         for right in snapshots[index + 1:]:
             right_id = article_id(right)
             if not left_id or not right_id or left_id == right_id:
                 continue
-            output.append(PairSpec(same_run_pair_id(left_id, right_id), "same_run", left_id,
-                                   right_id, left, right, "candidate", "candidate"))
-    return output
+            yield PairSpec(same_run_pair_id(left_id, right_id), "same_run", left_id,
+                           right_id, left, right, "candidate", "candidate")
+
+
+def build_same_run_pair_specs(items: Iterable[dict[str, Any]]) -> list[PairSpec]:
+    return list(iter_same_run_pair_specs(items))
+
+
+def iter_recent_history_pair_specs(candidates: Iterable[dict[str, Any]], history: Iterable[dict[str, Any]]) -> Iterator[PairSpec]:
+    current = sorted((_snapshot(x) for x in candidates), key=lambda x: article_id(x))
+    published = sorted((_snapshot(x) for x in history), key=lambda x: article_id(x))
+    for candidate in current:
+        for old in published:
+            if article_id(candidate) and article_id(old):
+                yield PairSpec(recent_history_pair_id(article_id(candidate), article_id(old)), "recent_history",
+                               article_id(candidate), article_id(old), candidate, old, "candidate", "published")
 
 
 def build_recent_history_pair_specs(candidates: Iterable[dict[str, Any]], history: Iterable[dict[str, Any]]) -> list[PairSpec]:
-    current = sorted((_snapshot(x) for x in candidates), key=lambda x: article_id(x))
-    published = sorted((_snapshot(x) for x in history), key=lambda x: article_id(x))
-    return [PairSpec(recent_history_pair_id(article_id(candidate), article_id(old)), "recent_history",
-                     article_id(candidate), article_id(old), candidate, old, "candidate", "published")
-            for candidate in current for old in published if article_id(candidate) and article_id(old)]
+    return list(iter_recent_history_pair_specs(candidates, history))
 
 
 def _record(spec: PairSpec, scored: dict[str, Any], evaluation_pass: str) -> dict[str, Any]:
