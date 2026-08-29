@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "policy_version", "candidates", "relations"],
+  "properties": {
+    "schema_version": {"const": "owtv_editorial_director_output_v1"},
+    "policy_version": {"const": "owtv_editorial_director_policy_v1"},
+    "candidates": {"type": "array", "items": {"type": "object", "additionalProperties": false,
+      "required": ["candidate_id", "editorial_class", "recommended_action", "relative_rank", "category", "story_core", "confidence", "reason_codes"],
+      "properties": {"candidate_id": {"type": "string"}, "editorial_class": {"enum": ["MUST_PUBLISH", "SHOULD_PUBLISH", "PUBLISHABLE_SOFT", "SKIP"]}, "recommended_action": {"enum": ["SELECT", "DEFER", "SKIP"]}, "relative_rank": {"type": ["integer", "null"], "minimum": 1}, "category": {"enum": ["WWE", "AEW", "NXT", "TNA", "ROH", "World", "Business"]}, "story_core": {"type": "string", "minLength": 1, "maxLength": 500}, "confidence": {"enum": ["HIGH", "MEDIUM", "LOW"]}, "reason_codes": {"type": "array", "maxItems": 8, "items": {"type": "string", "minLength": 1, "maxLength": 64}}}}},
+    "relations": {"type": "array", "items": {"type": "object", "additionalProperties": false,
+      "required": ["pair_id", "scope", "left_id", "right_id", "decision", "new_fact", "temporal_basis", "confidence", "reason_codes"],
+      "properties": {"pair_id": {"type": "string"}, "scope": {"enum": ["same_run", "recent_history"]}, "left_id": {"type": "string"}, "right_id": {"type": "string"}, "decision": {"enum": ["DUPLICATE", "MATERIAL_UPDATE", "NO_MATCH"]}, "new_fact": {"type": ["string", "null"]}, "temporal_basis": {"type": ["string", "null"]}, "confidence": {"enum": ["HIGH", "MEDIUM", "LOW"]}, "reason_codes": {"type": "array", "maxItems": 8, "items": {"type": "string", "minLength": 1, "maxLength": 64}}}}}
+  }
+}

@@ -38,13 +38,6 @@ Each JSON row has exactly one `source_primary`. `source_secondary` entries are e
 | `alfred.revised_then_approved` | Unique identities revised before a later approval. | `state/newsroom/master_log.jsonl: alfred.reviews (plus Publisher authority where required)` | chronological transition count by identity; count |
 | `alfred.revised_then_published` | Unique identities revised before a later authoritative publication. | `state/newsroom/master_log.jsonl: alfred.reviews (plus Publisher authority where required)` | chronological transition count joined to publications; count |
 | `gemini.real_attempts` | Ledger rows with status called or failed. | `state/newsroom/gemini_call_ledger.jsonl` | count rows whose status is called or failed; count |
-| `gemini.provider_usage_resolved_attempts` | Real attempts with trustworthy provider usage under the V96.2 usage read contract. | `state/newsroom/gemini_call_ledger.jsonl` | count integrity-valid retained v2 provider usage and resolved v3 usage; count |
-| `gemini.provider_usage_coverage` | Trustworthy usage attempts divided by real attempts. | `state/newsroom/gemini_call_ledger.jsonl` | provider_usage_resolved_attempts / real_attempts; 0 only with a positive denominator and zero qualifying attempts; null when real_attempts=0; ratio |
-| `gemini.computed_cost_resolved_attempts` | V96.2 attempts with resolved authoritative cost. | `state/newsroom/gemini_call_ledger.jsonl` | count cost_resolution_status=resolved; count |
-| `gemini.computed_cost_coverage` | Cost-resolved attempts divided by real attempts. | `state/newsroom/gemini_call_ledger.jsonl` | computed_cost_resolved_attempts / real_attempts; 0 only with a positive denominator and zero qualifying attempts; null when real_attempts=0; ratio |
-| `gemini.known_computed_list_price_cost` | Known paid-tier Standard list-price cost. | `state/newsroom/gemini_call_ledger.jsonl` | sum resolved computed_list_price_cost; USD |
-| `gemini.complete_window_computed_list_price_cost` | Complete-window homogeneous-currency cost. | `state/newsroom/gemini_call_ledger.jsonl` | known cost only when all real attempts resolve; USD |
-| `gemini.unknown_computed_cost_attempts` | Real attempts without resolved V96.2 cost. | `state/newsroom/gemini_call_ledger.jsonl` | real attempts minus cost-resolved attempts; count |
 | `gemini.completed_calls` | API calls that returned without an attempt exception; not semantic success. | `state/newsroom/gemini_call_ledger.jsonl` | count rows whose status is called; count |
 | `gemini.failures` | Attempt exceptions. | `state/newsroom/gemini_call_ledger.jsonl` | count rows whose status is failed; count |
 | `gemini.avoided_calls` | Explicitly saved calls that were not made. | `state/newsroom/gemini_call_ledger.jsonl` | count rows whose status is avoided; count |
@@ -56,7 +49,6 @@ Each JSON row has exactly one `source_primary`. `source_secondary` entries are e
 | `simone.reports_published` | Unique authoritative published reports. | `state/newsroom/master_log.jsonl: simone.published_reports(status=published)` | cardinality of unique authoritative report publication identities; count |
 | `simone.already_present_events` | Master-log report publication events marked already present. | `state/newsroom/master_log.jsonl: simone.publish_handoff.already_published` | sum in-window already_published event counters; count |
 | `publisher.publications_unique` | Unique successful news publications. | `state/newsroom/master_log.jsonl: publisher.published/results(status=published)` | cardinality of unique authoritative published identities; count |
-
 | `andrea.checked_occurrences` | Canonical Andrea checked occurrences. | `state/newsroom/canonical_event_ledger.jsonl` | count validated content_sufficiency_checked events at checked grain; count |
 | `andrea.checked_content` | Unique content at canonical Andrea checked grain. | `state/newsroom/canonical_event_ledger.jsonl` | distinct content_id across validated checked events; count |
 | `andrea.passed_occurrences` | Canonical Andrea passed occurrences. | `state/newsroom/canonical_event_ledger.jsonl` | count validated content_sufficiency_checked events at passed grain; count |
@@ -69,6 +61,18 @@ Each JSON row has exactly one `source_primary`. `source_secondary` entries are e
 | `alfred.blocker_occurrences` | Historical Alfred blocker occurrences. | `state/newsroom/canonical_event_ledger.jsonl` | count blocker_recorded events including later-resolved blockers; count |
 | `alfred.blocker_bearing_reviews` | Canonical Alfred reviews bearing blockers. | `state/newsroom/canonical_event_ledger.jsonl` | count individual quality_review_completed occurrences associated with at least one blocker_recorded fact through canonical append order plus matching run/correlation context before the next review occurrence; repeated reviews of the same content in one run remain distinct; count |
 | `alfred.unique_articles_with_blockers` | Unique content with historical Alfred blockers. | `state/newsroom/canonical_event_ledger.jsonl` | distinct content_id among blocker_recorded events; count |
+| `gemini.provider_usage_resolved_attempts` | Real attempts with trustworthy provider usage under the V96.2 usage read contract, including integrity-valid retained v2 usage and resolved v3 usage. | `state/newsroom/gemini_call_ledger.jsonl` | count real attempts with trustworthy provider usage under the V96.2 usage read contract; includes integrity-valid retained v2 provider usage and resolved v3 usage; count |
+| `gemini.provider_usage_coverage` | Resolved provider-usage attempts divided by real attempts. | `state/newsroom/gemini_call_ledger.jsonl` | provider_usage_resolved_attempts / real_attempts; null when real_attempts = 0; ratio |
+| `gemini.computed_cost_resolved_attempts` | V96.2 real attempts with authoritative computed cost. | `state/newsroom/gemini_call_ledger.jsonl` | count V96.2 real-attempt rows whose cost_resolution_status is resolved; count |
+| `gemini.computed_cost_coverage` | Authoritative computed-cost attempts divided by real attempts. | `state/newsroom/gemini_call_ledger.jsonl` | computed_cost_resolved_attempts / real_attempts; null when real_attempts = 0; ratio |
+| `gemini.known_computed_list_price_cost` | Sum of resolved paid-tier Standard list-price attempt costs. | `state/newsroom/gemini_call_ledger.jsonl` | sum computed_list_price_cost for resolved V96.2 attempts; USD |
+| `gemini.complete_window_computed_list_price_cost` | Complete-window cost, only when every real attempt resolves homogeneously. | `state/newsroom/gemini_call_ledger.jsonl` | known cost when every real attempt is resolved in one currency; otherwise null; USD |
+| `gemini.unknown_computed_cost_attempts` | Real attempts without authoritative V96.2 cost. | `state/newsroom/gemini_call_ledger.jsonl` | real_attempts - computed_cost_resolved_attempts; count |
+| `editorial_director_shadow.logical_requests` | ED-1 Shadow diagnostic metric with explicit unknown and coverage semantics. | `state/newsroom/gemini_call_ledger.jsonl` | distinct logical_request_id for workload editorial_director_shadow; count |
+| `editorial_director_shadow.provider_attempts` | ED-1 Shadow diagnostic metric with explicit unknown and coverage semantics. | `state/newsroom/gemini_call_ledger.jsonl` | count v3 real attempts for workload editorial_director_shadow; count |
+| `editorial_director_shadow.cost_complete` | ED-1 Shadow diagnostic metric with explicit unknown and coverage semantics. | `state/newsroom/gemini_call_ledger.jsonl` | sum resolved v3 cost only when every attempt has cost coverage; currency |
+| `editorial_director_shadow.cost_per_logical_request` | ED-1 Shadow diagnostic metric with explicit unknown and coverage semantics. | `state/newsroom/gemini_call_ledger.jsonl` | complete cost divided by nonzero logical requests; currency/request |
+| `editorial_director_shadow.cost_per_evaluated_candidate_occurrence` | ED-1 Shadow diagnostic metric with explicit unknown and coverage semantics. | `state/newsroom/gemini_call_ledger.jsonl` | complete cost divided by nonzero primary candidate occurrences; currency/candidate occurrence |
 
 ## 5. Partially available and diagnostic metrics
 
@@ -86,6 +90,7 @@ For Menzo pair coverage, the sole primary authority is the nested producing-run 
 | `massy.hard_skips` | partially_available | The numeric handoff exists, but complete stable item identities and authoritative cross-run uniqueness do not. |
 | `massy.published_skips` | partially_available | The numeric handoff exists, but complete stable item identities and authoritative cross-run uniqueness do not. |
 | `massy.actionable_handoffs` | partially_available | The numeric handoff exists, but complete stable item identities and authoritative cross-run uniqueness do not. |
+| `editorial_director_shadow.bound_status` | partially_available | Latest/retained run evidence exists, but current master-log coverage cannot prove a complete arbitrary window; diagnostics return null with explicit partial availability. |
 | `menzo.same_run_expected_pairs` | partially_available | Authoritative for its producing run only; the artifact has no retained window series. The v95.21.1 matrix is unchanged. No authoritative series exists across the editorial window. |
 | `menzo.same_run_evaluated_pairs` | partially_available | Authoritative for its producing run only; the artifact has no retained window series. The v95.21.1 matrix is unchanged. No authoritative series exists across the editorial window. |
 | `menzo.recent_history_expected_pairs` | partially_available | Authoritative for its producing run only; the artifact has no retained window series. The v95.21.1 matrix is unchanged. No authoritative series exists across the editorial window. |

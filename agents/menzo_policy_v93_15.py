@@ -3610,8 +3610,11 @@ def _empty_menzo_when_wp_unready(reason: str) -> dict[str, Any]:
     return data
 
 
-def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
-    ok, why = _wp_ready_for_costly_work()
+def run_menzo(massy_board: dict[str, Any] | None = None, *,
+              costly_work_preflight: tuple[bool, str] | None = None) -> dict[str, Any]:
+    # ED-1 may perform this same check immediately before its read-only capture;
+    # consuming that result avoids a second WordPress check. Default behavior is unchanged.
+    ok, why = costly_work_preflight if costly_work_preflight is not None else _wp_ready_for_costly_work()
     if not ok:
         return _empty_menzo_when_wp_unready(why)
     board = augment_board_with_softpool(massy_board if isinstance(massy_board, dict) else base.load_json(base.MASSY_BOARD_FILE, {}))

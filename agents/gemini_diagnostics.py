@@ -459,8 +459,37 @@ def build_gemini_diagnostics(
     v9518_available = any(key in latest_counters for key in v9518_fields)
 
     economic = build_gemini_economic_truth(records, available=economic_available)
+    shadow_rows = [r for r in records if r.get("workload") == "editorial_director_shadow"]
+    shadow_real = [r for r in shadow_rows if status_name(r) in {"called", "failed"}]
+    shadow_logical = {str(r.get("logical_request_id")) for r in shadow_real if r.get("logical_request_id")}
+    shadow_cost_rows = [_resolved_cost_row(r)[0] for r in shadow_real]
+    shadow_cost_known = [x for x in shadow_cost_rows if x is not None]
+    evaluated_occurrences = sum(int(r.get("candidate_count") or 0) for r in shadow_real if int(r.get("attempt_index") or 0) == 0)
+    complete = economic_available and len(shadow_cost_known) == len(shadow_real)
+    shadow_cost = sum(shadow_cost_known, Decimal("0"))
+    available_value = lambda value: value if economic_available else None
+    shadow = {
+        "source_available": economic_available,
+        "logical_requests": available_value(len(shadow_logical)), "provider_attempts": available_value(len(shadow_real)),
+        "primary_attempts": available_value(sum(not bool(r.get("repair")) for r in shadow_real)),
+        "repairs": available_value(sum(bool(r.get("repair")) for r in shadow_real)),
+        "fallbacks": available_value(sum(bool(r.get("fallback")) for r in shadow_real)),
+        "input_tokens": (sum(int(r.get("input_tokens") or 0) for r in shadow_real)
+                         if economic_available and all(_usage_evidence_resolved(r) for r in shadow_real) else None),
+        "output_tokens": (sum(int(r.get("output_tokens") or 0) for r in shadow_real)
+                          if economic_available and all(_usage_evidence_resolved(r) for r in shadow_real) else None),
+        "known_cost": format(shadow_cost, "f") if economic_available else None,
+        "known_cost_semantics": "partial_known_cost" if economic_available and not complete else ("complete" if complete else None),
+        "complete_window_cost": format(shadow_cost, "f") if complete else None,
+        "cost_per_logical_request": format(shadow_cost / len(shadow_logical), "f") if complete and shadow_logical else None,
+        "cost_per_evaluated_candidate_occurrence": format(shadow_cost / evaluated_occurrences, "f") if complete and evaluated_occurrences else None,
+        "by_phase": dict(Counter(str(r.get("phase") or "unknown") for r in shadow_real)) if economic_available else None,
+        "bound_status": None,
+        "bound_status_availability": "partial_latest_run_only_not_authoritative_window",
+    }
     return {
         "economic": economic,
+        "editorial_director_shadow": shadow,
         **{k: economic[k] for k in ("provider_usage_resolved_attempts", "provider_usage_coverage", "computed_cost_resolved_attempts", "computed_cost_coverage", "unknown_computed_cost_attempts", "known_computed_list_price_cost", "complete_window_computed_list_price_cost")},
         "real_attempts": len(real_attempts),
         "completed_calls": len(called),
