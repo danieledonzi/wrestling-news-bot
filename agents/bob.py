@@ -11,6 +11,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from agents.translation_validation import excerpt_translation_evidence, language_escape_evidence
+
 from agents.gemini_ledger import make_operation_id, record_gemini_attempt, record_gemini_event
 from urllib.parse import urljoin, urlparse
 
@@ -754,15 +756,97 @@ BLOCCHI DA TRADURRE:
 """
 
 
-def parse_bob_json(raw: str) -> dict[str, Any]:
+def parse_bob_json_with_validity(raw: str) -> tuple[dict[str, Any], bool]:
     cleaned = re.sub(r"^```(?:json)?|```$", "", raw.strip(), flags=re.I).strip()
     try:
         data = json.loads(cleaned)
         if isinstance(data, dict):
-            return data
+            return data, True
     except Exception:
         pass
-    return {"title_it": "", "excerpt_it": "", "translations": {}, "notes": ["bob_json_parse_failed"], "raw": raw[:4000]}
+    return {"title_it": "", "excerpt_it": "", "translations": {}, "notes": ["bob_json_parse_failed"]}, False
+
+
+def parse_bob_json(raw: str) -> dict[str, Any]:
+    """Backward-compatible parser used by diagnostics and benchmark tooling."""
+    return parse_bob_json_with_validity(raw)[0]
+
+
+def validate_translation(data: dict[str, Any], parse_valid: bool, units: list[dict[str, str]], source_title: str, alternate_source_title: str = "", source_description: str = "") -> dict[str, Any]:
+    translations_object_valid = isinstance(data.get("translations"), dict)
+    raw_translations = data.get("translations") if translations_object_valid else {}
+    required = [str(unit["id"]) for unit in units]
+    missing = [unit_id for unit_id in required if unit_id not in raw_translations]
+    invalid_value_types = [unit_id for unit_id in required if unit_id in raw_translations and not isinstance(raw_translations[unit_id], str)]
+    empty = [unit_id for unit_id in required if isinstance(raw_translations.get(unit_id), str) and not raw_translations[unit_id].strip()]
+    translations = {str(k): v for k, v in raw_translations.items() if isinstance(v, str)}
+    title_value = data.get("title_it")
+    title_type_valid = isinstance(title_value, str)
+    title = clean_text(title_value) if title_type_valid else ""
+    excerpt_supplied = "excerpt_it" in data
+    excerpt_value = data.get("excerpt_it")
+    excerpt_type_valid = not excerpt_supplied or isinstance(excerpt_value, str)
+    excerpt = clean_text(excerpt_value) if isinstance(excerpt_value, str) else ""
+    excerpt_present = bool(excerpt)
+    excerpt_evidence = excerpt_translation_evidence(source_description, excerpt) if excerpt_present else {
+        "excerpt_likely_untranslated": False,
+        "excerpt_residual_english": False,
+        "excerpt_exact_source": False,
+        "excerpt_near_source": False,
+        "excerpt_source_similarity": None,
+    }
+    evidence = language_escape_evidence(
+        source_title,
+        title,
+        {str(unit["id"]): str(unit.get("text") or "") for unit in units},
+        translations,
+        [("page", source_title), ("feed", alternate_source_title)],
+        {str(unit["id"]): str(unit.get("type") or "") for unit in units},
+    )
+    reasons: list[str] = []
+    if not parse_valid:
+        reasons.append("invalid_bob_json")
+    if not title:
+        reasons.append("missing_title_it")
+    if not title_type_valid:
+        reasons.append("title_it_not_string")
+    if not excerpt_type_valid:
+        reasons.append("excerpt_it_not_string")
+    if not translations_object_valid:
+        reasons.append("translations_not_object")
+    if missing:
+        reasons.append("missing_translation_units")
+    if empty:
+        reasons.append("empty_translation_units")
+    if invalid_value_types:
+        reasons.append("translation_unit_not_string")
+    if evidence["body_substantially_unchanged"]:
+        reasons.append("unchanged_source_body")
+    elif evidence["residual_english_body"]:
+        reasons.append("residual_english_body")
+    if evidence["title_likely_untranslated"]:
+        reasons.append("untranslated_title")
+    if excerpt_evidence["excerpt_likely_untranslated"]:
+        reasons.append("untranslated_excerpt")
+    elif excerpt_evidence["excerpt_residual_english"]:
+        reasons.append("residual_english_excerpt")
+    return {
+        "valid": not reasons,
+        "parse_valid": parse_valid,
+        "title_present": bool(title),
+        "title_type_valid": title_type_valid,
+        "excerpt_present": excerpt_present,
+        "excerpt_type_valid": excerpt_type_valid,
+        "translations_object_valid": translations_object_valid,
+        "required_units": len(required),
+        "translated_units": len(required) - len(missing) - len(empty) - len(invalid_value_types),
+        "missing_units": missing[:30],
+        "empty_units": empty[:30],
+        "invalid_value_type_units": invalid_value_types[:30],
+        **evidence,
+        **excerpt_evidence,
+        "reasons": reasons,
+    }
 
 
 def render_body(elements: list[dict[str, Any]], translations: dict[str, str]) -> str:
@@ -935,16 +1019,25 @@ def article_package(item: dict[str, Any]) -> dict[str, Any]:
         package["translation_used"] = bool(translated)
         if translated:
             package["translation_raw_response_preview"] = translated[:AUDIT_CHARS]
-            data = parse_bob_json(translated)
+            data, parse_valid = parse_bob_json_with_validity(translated)
             translations = data.get("translations") if isinstance(data.get("translations"), dict) else {}
-            translations = {str(k): str(v) for k, v in translations.items()}
-            package["title_it"] = clean_text(data.get("title_it") or meta.get("source_title") or item.get("title") or "")
-            package["body_html"] = render_body(elements, translations)
-            package["excerpt_it"] = clean_text(data.get("excerpt_it") or meta.get("description") or "")
+            translations = {str(k): v for k, v in translations.items() if isinstance(v, str)}
+            validation = validate_translation(data, parse_valid, units, str(meta.get("source_title") or ""), str(item.get("title") or ""), str(meta.get("description") or ""))
+            package["translation_validation"] = validation
             package["bob_notes"] = data.get("notes") if isinstance(data.get("notes"), list) else []
-            package["translation_missing_units"] = [u["id"] for u in units if u["id"] not in translations]
-            package["status"] = "ready_for_alfred"
-            package["diagnostic_stage"] = "ready_for_alfred"
+            package["translation_missing_units"] = validation["missing_units"]
+            if validation["valid"]:
+                package["title_it"] = clean_text(str(data.get("title_it") or ""))
+                package["body_html"] = render_body(elements, translations)
+                package["excerpt_it"] = clean_text(str(data.get("excerpt_it") or ""))
+                package["status"] = "ready_for_alfred"
+                package["diagnostic_stage"] = "ready_for_alfred"
+            else:
+                package["title_it"] = ""
+                package["body_html"] = ""
+                package["excerpt_it"] = ""
+                package["status"] = "translation_validation_failed"
+                package["diagnostic_stage"] = "translation_validation_failed"
         else:
             fallback = {u["id"]: u["text"] for u in units}
             package["title_it"] = meta.get("source_title") or item.get("title") or ""
@@ -1013,6 +1106,7 @@ def run_bob(menzo_decision: dict[str, Any] | None = None) -> dict[str, Any]:
         "handoff": {
             "ready_for_alfred": sum(1 for a in articles if a.get("status") == "ready_for_alfred"),
             "translation_pending": sum(1 for a in articles if a.get("status") == "extraction_ready_translation_pending"),
+            "translation_validation_failed": sum(1 for a in articles if a.get("status") == "translation_validation_failed"),
             "errors": sum(1 for a in articles if a.get("status") == "error"),
             "extraction_empty": sum(1 for a in articles if a.get("status") == "extraction_empty"),
             "publishable_left_out_by_capacity": publishable_left_out_by_capacity,
@@ -1023,7 +1117,7 @@ def run_bob(menzo_decision: dict[str, Any] | None = None) -> dict[str, Any]:
     }
     write_json(ARTIFACT_BOB_FILE, result)
     write_json(BOB_ARTICLES_FILE, result)
-    print("[BOB v93.12] Pacchetti pronti | ready={ready} pending={pending} empty={empty} errors={errors}".format(ready=result["handoff"]["ready_for_alfred"], pending=result["handoff"]["translation_pending"], empty=result["handoff"]["extraction_empty"], errors=result["handoff"]["errors"]), flush=True)
+    print("[BOB V96.4A] Pacchetti pronti | ready={ready} pending={pending} validation_failed={validation_failed} empty={empty} errors={errors}".format(ready=result["handoff"]["ready_for_alfred"], pending=result["handoff"]["translation_pending"], validation_failed=result["handoff"]["translation_validation_failed"], empty=result["handoff"]["extraction_empty"], errors=result["handoff"]["errors"]), flush=True)
     return result
 
 

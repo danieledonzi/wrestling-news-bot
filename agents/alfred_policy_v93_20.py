@@ -17,7 +17,7 @@ ARTIFACT_DIR = ROOT / "artifacts" / "newsroom"
 ALFRED_REVIEW_FILE = NEWSROOM_STATE_DIR / "alfred_review_latest.json"
 ARTIFACT_ALFRED_FILE = ARTIFACT_DIR / "alfred_review.json"
 
-VERSION = "v95.3_alfred_quote_resolver_with_normalized_learned_history"
+VERSION = "v96.4a_v95.3_alfred_quote_resolver_with_translation_safety_gate"
 QUOTE_RESOLVER_HISTORY_FILE = NEWSROOM_STATE_DIR / "alfred_quote_resolver_history.json"
 ALFRED_QUOTE_RESOLVER_MODEL_CHAIN = [m.strip() for m in os.getenv("ALFRED_QUOTE_RESOLVER_MODEL_CHAIN", "gemini-2.5-flash-lite,gemini-3.1-flash-lite").split(",") if m.strip()]
 QUOTE_RESOLVER_ALLOWED_KINDS = {"nickname_or_catchphrase", "ring_name", "stable_name", "move_name", "event_name", "title_or_branding"}
@@ -494,5 +494,5 @@ def run_alfred(bob_result: dict[str, Any] | None = None) -> dict[str, Any]:
         result["handoff"]["blockers"] = sum(len([i for i in r.get("issues", []) if isinstance(i, dict) and i.get("severity") == "blocker"]) for r in result.get("reviews", []) if isinstance(r, dict))
     write_json(ARTIFACT_ALFRED_FILE, result)
     write_json(ALFRED_REVIEW_FILE, result)
-    print(f"[ALFRED v95.3] Quote resolver + translation guardrails | removed={total_removed} quote_allowed={quote_resolver_totals['allowed']}", flush=True)
+    print(f"[ALFRED V96.4A/v95.3] Translation safety gate + quote resolver | removed={total_removed} quote_allowed={quote_resolver_totals['allowed']}", flush=True)
     return result

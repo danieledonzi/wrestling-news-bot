@@ -422,7 +422,7 @@ def main() -> int:
     canonical.safely("observe_andrea", andrea_handoff)
     canonical.safely("observe_bob_requested", andrea_handoff)
 
-    bob_result = safe_agent(timeline=timeline, agent="Bob", phase="article_packages_ready", import_fn=import_bob, call_args=(andrea_handoff,), artifact_name="bob_articles.json", default_handoff={"ready_for_alfred": 0, "translation_pending": 0, "errors": 0, "extraction_empty": 0}, note_fn=lambda r: "ready={ready_for_alfred} pending={translation_pending} empty={extraction_empty} errors={errors}".format(**{**{"ready_for_alfred": 0, "translation_pending": 0, "errors": 0, "extraction_empty": 0}, **handoff(r)}))
+    bob_result = safe_agent(timeline=timeline, agent="Bob", phase="article_packages_ready", import_fn=import_bob, call_args=(andrea_handoff,), artifact_name="bob_articles.json", default_handoff={"ready_for_alfred": 0, "translation_pending": 0, "translation_validation_failed": 0, "errors": 0, "extraction_empty": 0}, note_fn=lambda r: "ready={ready_for_alfred} pending={translation_pending} validation_failed={translation_validation_failed} empty={extraction_empty} errors={errors}".format(**{**{"ready_for_alfred": 0, "translation_pending": 0, "translation_validation_failed": 0, "errors": 0, "extraction_empty": 0}, **handoff(r)}))
     bob_result = attach_bob_brief_warnings(bob_result, andrea_handoff)
     canonical.safely("observe_bob_generated", bob_result)
     artifacts.safely("observe_bob", bob_result)
