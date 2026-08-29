@@ -1,4 +1,5 @@
 import copy
+import json
 from pathlib import Path
 
 from agents import gemini_diagnostics
@@ -234,3 +235,75 @@ def test_shadow_economics_reject_invalid_v3_integrity_despite_available_flag():
     shadow=diag['editorial_director_shadow']; assert shadow['source_available'] is False
     for field in ('logical_requests','provider_attempts','primary_attempts','repairs','fallbacks','input_tokens','output_tokens','known_cost','complete_window_cost','cost_per_logical_request','cost_per_evaluated_candidate_occurrence','by_phase'):
         assert shadow[field] is None
+
+
+def test_final_decorated_snapshot_crossing_bound_is_oversize_and_zero_call(monkeypatch):
+    board={'news_candidates_for_menzo':[{'title':'A','url':'https://size.test/a','summary':'x'*2000}]}
+    baseline=ed.capture_opportunity(board,run_id='run',observation_timestamp='now',publisher_count_24h=0,history=[])
+    pre={k:v for k,v in baseline.items() if k not in {'observed','limits','limit_status','input_digest'}}
+    preliminary_size=len(json.dumps(pre,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode())
+    monkeypatch.setattr(ed,'MAX_INPUT_BYTES',preliminary_size+10)
+    result=ed.capture_opportunity(board,run_id='run',observation_timestamp='now',publisher_count_24h=0,history=[])
+    final_size=len(json.dumps(result,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode())
+    assert preliminary_size < ed.MAX_INPUT_BYTES < final_size
+    assert result['limit_status']=='exceeded' and result['observed']['serialized_input_bytes']==final_size
+    calls=[]; assert ed.evaluate(result,{},provider=lambda *_:calls.append(1))['status']=='OVERSIZE_NOT_EVALUATED'
+    assert calls==[]
+
+
+def test_final_snapshot_immediately_below_bound_remains_evaluable(monkeypatch):
+    board={'news_candidates_for_menzo':[{'title':'A','url':'https://size.test/b','summary':'x'*500}]}
+    baseline=ed.capture_opportunity(board,run_id='run',observation_timestamp='now',publisher_count_24h=0,history=[])
+    baseline_size=len(json.dumps(baseline,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode())
+    monkeypatch.setattr(ed,'MAX_INPUT_BYTES',baseline_size+32)
+    result=ed.capture_opportunity(board,run_id='run',observation_timestamp='now',publisher_count_24h=0,history=[])
+    final_size=len(json.dumps(result,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode())
+    assert final_size <= ed.MAX_INPUT_BYTES and result['limit_status']!='exceeded'
+    assert result['observed']['serialized_input_bytes']==final_size
+
+
+def test_missing_key_has_canonical_request_but_gemini_only_logical_metric_is_null(monkeypatch):
+    from agents.canonical_event_ledger import clear_active_ledger, install_active_ledger
+    events=[]
+    class Ledger:
+        def safely(self, method, *args, **kwargs):
+            events.append((method,args,kwargs)); return True
+    install_active_ledger(Ledger()); monkeypatch.delenv('GEMINI_API_KEY',raising=False)
+    ledger=[]; monkeypatch.setattr(ed,'record_gemini_attempt',lambda **kw:ledger.append(kw))
+    try: result=ed.evaluate(snapshot(),{})
+    finally: clear_active_ledger()
+    assert result['status']=='PROVIDER_UNAVAILABLE' and ledger==[]
+    assert any(args and args[0]=='logical_ai_request_created' for _method,args,_kwargs in events)
+    shadow=gemini_diagnostics.build_gemini_diagnostics([],economic_available=True)['editorial_director_shadow']
+    assert shadow['logical_requests'] is None and shadow['cost_per_logical_request'] is None
+    assert shadow['logical_requests_availability']=='requires_canonical_event_ledger_join'
+    assert shadow['provider_attempts']==0 and shadow['known_cost']=='0'
+
+
+def _resolved_shadow_row(attempt_id, currency):
+    from agents.gemini_ledger import calculate_v96_2_cost
+    usage={'usage_available':True,'input_tokens':100,'cached_input_tokens':0,'output_tokens':10,
+           'thinking_tokens':0,'total_tokens':110,'total_tokens_provider_reported':True}
+    cost=calculate_v96_2_cost(usage,'gemini-3.1-flash-lite')
+    return {'status':'called','ledger_schema_version':'v3','provider_attempt_id':attempt_id,
+            'actual_model':'gemini-3.1-flash-lite','model_requested':'gemini-3.1-flash-lite',
+            'agent':'Menzo','workload':'editorial_director_shadow','phase':'editorial_director_shadow_primary',
+            'logical_request_id':attempt_id,'attempt_index':0,'repair':False,'fallback':False,'candidate_count':1,
+            **cost,'pricing_currency':currency}
+
+
+def test_mixed_shadow_currencies_never_form_scalar_cost():
+    rows=[_resolved_shadow_row('usd','USD'),_resolved_shadow_row('eur','EUR')]
+    shadow=gemini_diagnostics.build_gemini_diagnostics(rows,economic_available=True)['editorial_director_shadow']
+    assert shadow['source_available'] is True and shadow['pricing_currency']=='mixed'
+    assert shadow['known_cost'] is shadow['complete_window_cost'] is None
+    assert shadow['cost_per_logical_request'] is shadow['cost_per_evaluated_candidate_occurrence'] is None
+
+
+def test_same_currency_shadow_rows_retain_complete_cost():
+    rows=[_resolved_shadow_row('usd-1','USD'),_resolved_shadow_row('usd-2','USD')]
+    shadow=gemini_diagnostics.build_gemini_diagnostics(rows,economic_available=True)['editorial_director_shadow']
+    assert shadow['source_available'] is True and shadow['pricing_currency']=='USD'
+    assert shadow['known_cost'] is not None and shadow['complete_window_cost']==shadow['known_cost']
+    assert shadow['cost_per_evaluated_candidate_occurrence'] is not None
+    assert shadow['cost_per_logical_request'] is None

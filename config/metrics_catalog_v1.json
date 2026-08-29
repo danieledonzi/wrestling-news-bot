@@ -3990,28 +3990,28 @@
       "unit": "count",
       "cardinality": "one scalar per requested window",
       "authority_level": "contractual",
-      "source_primary": "state/newsroom/gemini_call_ledger.jsonl",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
       "source_secondary": [],
       "producer_paths": [
         "agents/menzo_editorial_director_shadow.py",
         "agents/gemini_diagnostics.py"
       ],
       "consumer_paths": [],
-      "formula": "distinct logical_request_id for workload editorial_director_shadow",
-      "aggregation": "event count",
-      "identity_key": "logical_request_id or run_id as specified",
+      "formula": "count distinct logical_request_id where event_type=logical_ai_request_created, agent=Menzo, and model_role=editorial_director_shadow",
+      "aggregation": "distinct event identity count",
+      "identity_key": "logical_request_id",
       "time_window": "inclusive UTC [window_start, window_end]",
       "zero_semantics": "Zero only when authoritative complete evidence contains no qualifying entities.",
       "missing_semantics": "Null when coverage or a required denominator is unavailable.",
-      "availability": "available",
+      "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
       "policy_version": "owtv_editorial_director_policy_v1",
       "introduced_in": "ED-1",
-      "status": "active",
+      "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Additive non-binding Shadow evidence; workload and phase breakdowns are retained."
+      "notes": "Authoritative canonical event grain; the Gemini-only diagnostics reader returns null until an existing canonical-event input is joined."
     },
     {
       "canonical_name": "editorial_director_shadow.provider_attempts",
@@ -4084,27 +4084,29 @@
       "cardinality": "one scalar per requested window",
       "authority_level": "contractual",
       "source_primary": "state/newsroom/gemini_call_ledger.jsonl",
-      "source_secondary": [],
+      "source_secondary": [
+        "state/newsroom/canonical_event_ledger.jsonl"
+      ],
       "producer_paths": [
         "agents/menzo_editorial_director_shadow.py",
         "agents/gemini_diagnostics.py"
       ],
       "consumer_paths": [],
-      "formula": "complete cost divided by nonzero logical requests",
+      "formula": "complete homogeneous-currency Gemini cost divided by authoritative canonical logical-request count after a complete join",
       "aggregation": "event count",
       "identity_key": "logical_request_id or run_id as specified",
       "time_window": "inclusive UTC [window_start, window_end]",
       "zero_semantics": "Zero only when authoritative complete evidence contains no qualifying entities.",
       "missing_semantics": "Null when coverage or a required denominator is unavailable.",
-      "availability": "available",
+      "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
       "policy_version": "owtv_editorial_director_policy_v1",
       "introduced_in": "ED-1",
-      "status": "active",
+      "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Additive non-binding Shadow evidence; workload and phase breakdowns are retained."
+      "notes": "Gemini-only diagnostics returns null because authoritative logical-request denominator requires the canonical event ledger."
     },
     {
       "canonical_name": "editorial_director_shadow.cost_per_evaluated_candidate_occurrence",

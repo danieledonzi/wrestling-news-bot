@@ -68,10 +68,8 @@ Each JSON row has exactly one `source_primary`. `source_secondary` entries are e
 | `gemini.known_computed_list_price_cost` | Sum of resolved paid-tier Standard list-price attempt costs. | `state/newsroom/gemini_call_ledger.jsonl` | sum computed_list_price_cost for resolved V96.2 attempts; USD |
 | `gemini.complete_window_computed_list_price_cost` | Complete-window cost, only when every real attempt resolves homogeneously. | `state/newsroom/gemini_call_ledger.jsonl` | known cost when every real attempt is resolved in one currency; otherwise null; USD |
 | `gemini.unknown_computed_cost_attempts` | Real attempts without authoritative V96.2 cost. | `state/newsroom/gemini_call_ledger.jsonl` | real_attempts - computed_cost_resolved_attempts; count |
-| `editorial_director_shadow.logical_requests` | ED-1 Shadow diagnostic metric with explicit unknown and coverage semantics. | `state/newsroom/gemini_call_ledger.jsonl` | distinct logical_request_id for workload editorial_director_shadow; count |
 | `editorial_director_shadow.provider_attempts` | ED-1 Shadow diagnostic metric with explicit unknown and coverage semantics. | `state/newsroom/gemini_call_ledger.jsonl` | count v3 real attempts for workload editorial_director_shadow; count |
 | `editorial_director_shadow.cost_complete` | ED-1 Shadow diagnostic metric with explicit unknown and coverage semantics. | `state/newsroom/gemini_call_ledger.jsonl` | sum resolved v3 cost only when every attempt has cost coverage; currency |
-| `editorial_director_shadow.cost_per_logical_request` | ED-1 Shadow diagnostic metric with explicit unknown and coverage semantics. | `state/newsroom/gemini_call_ledger.jsonl` | complete cost divided by nonzero logical requests; currency/request |
 | `editorial_director_shadow.cost_per_evaluated_candidate_occurrence` | ED-1 Shadow diagnostic metric with explicit unknown and coverage semantics. | `state/newsroom/gemini_call_ledger.jsonl` | complete cost divided by nonzero primary candidate occurrences; currency/candidate occurrence |
 
 ## 5. Partially available and diagnostic metrics
@@ -90,6 +88,8 @@ For Menzo pair coverage, the sole primary authority is the nested producing-run 
 | `massy.hard_skips` | partially_available | The numeric handoff exists, but complete stable item identities and authoritative cross-run uniqueness do not. |
 | `massy.published_skips` | partially_available | The numeric handoff exists, but complete stable item identities and authoritative cross-run uniqueness do not. |
 | `massy.actionable_handoffs` | partially_available | The numeric handoff exists, but complete stable item identities and authoritative cross-run uniqueness do not. |
+| `editorial_director_shadow.logical_requests` | partially_available | Authoritative canonical event grain; the Gemini-only diagnostics reader returns null until an existing canonical-event input is joined. |
+| `editorial_director_shadow.cost_per_logical_request` | partially_available | Gemini-only diagnostics returns null because authoritative logical-request denominator requires the canonical event ledger. |
 | `editorial_director_shadow.bound_status` | partially_available | Latest/retained run evidence exists, but current master-log coverage cannot prove a complete arbitrary window; diagnostics return null with explicit partial availability. |
 | `menzo.same_run_expected_pairs` | partially_available | Authoritative for its producing run only; the artifact has no retained window series. The v95.21.1 matrix is unchanged. No authoritative series exists across the editorial window. |
 | `menzo.same_run_evaluated_pairs` | partially_available | Authoritative for its producing run only; the artifact has no retained window series. The v95.21.1 matrix is unchanged. No authoritative series exists across the editorial window. |

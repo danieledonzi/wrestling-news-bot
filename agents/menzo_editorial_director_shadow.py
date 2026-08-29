@@ -71,6 +71,40 @@ def costly_work_eligibility() -> tuple[bool, str]:
     return _wp_ready_for_costly_work()
 
 
+def _finalize_snapshot(envelope: dict[str, Any], *, forced_exceeded: bool = False) -> dict[str, Any]:
+    """Stabilize metadata against the exact JSON object passed to the provider."""
+    preinstrument = json.dumps(envelope, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
+    candidate_count = len(envelope["candidates"])
+    relation_count = len(envelope["authorized_relations"])
+    envelope["observed"] = {"candidate_count": candidate_count, "relation_count": relation_count,
+                            "serialized_input_bytes": 0}
+    envelope["limits"] = {"max_candidates": MAX_CANDIDATES, "max_relations": MAX_RELATIONS,
+                          "max_input_bytes": MAX_INPUT_BYTES, "max_output_tokens": MAX_OUTPUT_TOKENS}
+    envelope["limit_status"] = "exceeded" if forced_exceeded else "within"
+    # Digest identifies the canonical pre-instrumentation envelope; size measures
+    # the fully decorated snapshot serialized after this fixed digest is added.
+    envelope["input_digest"] = hashlib.sha256(preinstrument).hexdigest()
+    for _ in range(8):
+        size = len(json.dumps(envelope, ensure_ascii=False, sort_keys=True,
+                              separators=(",", ":")).encode("utf-8"))
+        exceeded = forced_exceeded or candidate_count > MAX_CANDIDATES or relation_count > MAX_RELATIONS or size > MAX_INPUT_BYTES
+        status = "exceeded" if exceeded else (
+            "approaching" if max(candidate_count / MAX_CANDIDATES, relation_count / MAX_RELATIONS,
+                                 size / MAX_INPUT_BYTES) >= APPROACH_RATIO else "within")
+        if envelope["observed"]["serialized_input_bytes"] == size and envelope["limit_status"] == status:
+            return copy.deepcopy(envelope)
+        envelope["observed"]["serialized_input_bytes"] = size
+        envelope["limit_status"] = status
+    envelope["limit_status"] = "exceeded"
+    for _ in range(4):
+        size = len(json.dumps(envelope, ensure_ascii=False, sort_keys=True,
+                              separators=(",", ":")).encode("utf-8"))
+        if envelope["observed"]["serialized_input_bytes"] == size:
+            break
+        envelope["observed"]["serialized_input_bytes"] = size
+    return copy.deepcopy(envelope)
+
+
 def capture_opportunity(massy_board: Mapping[str, Any], *, run_id: str, observation_timestamp: str,
                         publisher_count_24h: int, history: list[dict[str, Any]]) -> dict[str, Any]:
     """Deep-copy the factual pre-Menzo opportunity; it has no write-capable references."""
@@ -96,14 +130,7 @@ def capture_opportunity(massy_board: Mapping[str, Any], *, run_id: str, observat
                 "authorized_relations": [], "publisher_history_12h": safe_history}
     preliminary = json.dumps(envelope, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
     if len(candidates) > MAX_CANDIDATES or len(preliminary) > MAX_INPUT_BYTES:
-        encoded = preliminary
-        envelope["observed"] = {"candidate_count": len(candidates), "relation_count": 0,
-                                "serialized_input_bytes": len(encoded)}
-        envelope["limits"] = {"max_candidates": MAX_CANDIDATES, "max_relations": MAX_RELATIONS,
-                              "max_input_bytes": MAX_INPUT_BYTES, "max_output_tokens": MAX_OUTPUT_TOKENS}
-        envelope["limit_status"] = "exceeded"
-        envelope["input_digest"] = hashlib.sha256(encoded).hexdigest()
-        return copy.deepcopy(envelope)
+        return _finalize_snapshot(envelope, forced_exceeded=True)
     relations = []
     specs = chain(iter_same_run_pair_specs(candidates),
                   iter_recent_history_pair_specs(candidates, safe_history))
@@ -118,16 +145,7 @@ def capture_opportunity(massy_board: Mapping[str, Any], *, run_id: str, observat
         if len(relations) > MAX_RELATIONS:
             break
     envelope["authorized_relations"] = relations
-    encoded = json.dumps(envelope, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
-    envelope["observed"] = {"candidate_count": len(candidates), "relation_count": len(relations),
-                            "serialized_input_bytes": len(encoded)}
-    envelope["limits"] = {"max_candidates": MAX_CANDIDATES, "max_relations": MAX_RELATIONS,
-                          "max_input_bytes": MAX_INPUT_BYTES, "max_output_tokens": MAX_OUTPUT_TOKENS}
-    envelope["limit_status"] = "exceeded" if (len(candidates) > MAX_CANDIDATES or len(relations) > MAX_RELATIONS or len(encoded) > MAX_INPUT_BYTES) else (
-        "approaching" if max(len(candidates) / MAX_CANDIDATES, len(relations) / MAX_RELATIONS,
-                             len(encoded) / MAX_INPUT_BYTES) >= APPROACH_RATIO else "within")
-    envelope["input_digest"] = hashlib.sha256(encoded).hexdigest()
-    return copy.deepcopy(envelope)
+    return _finalize_snapshot(envelope, forced_exceeded=len(relations) > MAX_RELATIONS)
 
 
 def validate_output(value: Any, snapshot: Mapping[str, Any]) -> list[str]:
