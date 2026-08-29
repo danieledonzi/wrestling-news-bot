@@ -1,6 +1,4 @@
 import copy
-import threading
-import time
 from pathlib import Path
 
 from agents import gemini_diagnostics
@@ -66,13 +64,12 @@ def test_oversize_zero_attempts(monkeypatch):
     result=ed.evaluate(s,{},provider=lambda *x: called.append(1)); assert result['status']=='OVERSIZE_NOT_EVALUATED' and not called
 
 
-def test_blocking_provider_timeout_returns_without_join(monkeypatch):
-    release=threading.Event(); s=snapshot(); ledger=[]
-    monkeypatch.setattr(ed,'PROVIDER_TIMEOUT_SECONDS',.05); monkeypatch.setattr(ed,'record_gemini_attempt',lambda **kw:ledger.append(kw))
-    started=time.monotonic()
-    result=ed.evaluate(s,{},provider=lambda *_: release.wait(2))
-    elapsed=time.monotonic()-started; release.set()
-    assert result['error']=='TimeoutError' and elapsed < .5 and [x['status'] for x in ledger]==['failed']
+def test_native_provider_timeout_failure_is_one_attempt_without_repair(monkeypatch):
+    s=snapshot(); ledger=[]
+    monkeypatch.setattr(ed,'record_gemini_attempt',lambda **kw:ledger.append(kw))
+    result=ed.evaluate(s,{},provider=lambda *_: (_ for _ in ()).throw(TimeoutError('native transport timeout')))
+    assert result['error']=='TimeoutError' and result['attempts']==1
+    assert [x['status'] for x in ledger]==['failed'] and ledger[0]['repair'] is False
 
 
 def test_provider_exception_is_failed_and_no_repair(monkeypatch):
@@ -188,3 +185,52 @@ def test_runner_wp_ready_captures_using_existing_softpool_helper(monkeypatch):
     assert captured is not None and result is None and preflight==(True,'ready')
     assert {x['candidate_id'] for x in captured['candidates']}=={article_id(board['news_candidates_for_menzo'][0])}
     assert board==original
+
+
+def test_candidate_oversize_performs_zero_pair_scoring(monkeypatch):
+    board={'news_candidates_for_menzo':[{'title':f'Story {i}','url':f'https://oversize.test/{i}'} for i in range(ed.MAX_CANDIDATES+1)]}
+    scored=[]; monkeypatch.setattr(ed.menzo_duplicate_scorer,'score_pair',lambda *_a,**_k:scored.append(1))
+    result=ed.capture_opportunity(board,run_id='run',observation_timestamp='now',publisher_count_24h=0,history=[])
+    assert result['limit_status']=='exceeded' and result['observed']['candidate_count']==ed.MAX_CANDIDATES+1
+    assert scored==[]
+
+
+def test_relation_scan_stops_at_first_proven_oversize(monkeypatch):
+    monkeypatch.setattr(ed,'MAX_RELATIONS',3); scored=[]
+    monkeypatch.setattr(ed.menzo_duplicate_scorer,'score_pair',lambda *_a,**_k:(scored.append(1) or {'exact_duplicate':False,'above_threshold':True,'scorer_version':'test','score':.9,'threshold':.55,'components':{}}))
+    result=snapshot(4)
+    assert result['limit_status']=='exceeded' and len(result['authorized_relations'])==4
+    assert len(scored)==ed.MAX_RELATIONS+1
+    called=[]; evaluated=ed.evaluate(result,{},provider=lambda *_:called.append(1))
+    assert evaluated['status']=='OVERSIZE_NOT_EVALUATED' and called==[]
+
+
+def test_lazy_pair_builders_preserve_list_identity_and_order():
+    from agents.duplicate_pair_matrix import (build_recent_history_pair_specs, build_same_run_pair_specs,
+                                              iter_recent_history_pair_specs, iter_same_run_pair_specs)
+    candidates=[{'url':'https://pairs.test/b'},{'url':'https://pairs.test/a'},{'url':'https://pairs.test/c'}]
+    history=[{'url':'https://history.test/2'},{'url':'https://history.test/1'}]
+    assert build_same_run_pair_specs(candidates)==list(iter_same_run_pair_specs(candidates))
+    assert build_recent_history_pair_specs(candidates,history)==list(iter_recent_history_pair_specs(candidates,history))
+
+
+def test_closed_relation_scalar_and_reason_code_types():
+    s=snapshot(); supplied={'pair_id':'p','scope':'recent_history','left_id':'a','right_id':'b'}
+    s['authorized_relations']=[supplied]
+    base={'pair_id':'p','scope':'recent_history','left_id':'a','right_id':'b','decision':'NO_MATCH',
+          'new_fact':None,'temporal_basis':None,'confidence':'HIGH','reason_codes':['DISTINCT']}
+    invalid=[('new_fact',{}),('new_fact',[]),('temporal_basis',{}),('reason_codes',[123]),
+             ('reason_codes',['']),('reason_codes',['x'*65])]
+    for field,value in invalid:
+        output=valid(s); output['relations']=[{**base,field:value}]
+        assert ed.validate_output(output,s), (field,value)
+
+
+def test_shadow_economics_reject_invalid_v3_integrity_despite_available_flag():
+    row={'ledger_schema_version':'v3','status':'called','provider_attempt_id':'duplicate','workload':'editorial_director_shadow',
+         'logical_request_id':'lrq','attempt_index':0,'repair':False,'fallback':False,'candidate_count':1}
+    diag=gemini_diagnostics.build_gemini_diagnostics([row,dict(row)],economic_available=True)
+    assert diag['economic']['available'] is False
+    shadow=diag['editorial_director_shadow']; assert shadow['source_available'] is False
+    for field in ('logical_requests','provider_attempts','primary_attempts','repairs','fallbacks','input_tokens','output_tokens','known_cost','complete_window_cost','cost_per_logical_request','cost_per_evaluated_candidate_occurrence','by_phase'):
+        assert shadow[field] is None

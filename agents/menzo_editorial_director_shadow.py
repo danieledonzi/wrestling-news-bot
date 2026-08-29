@@ -6,13 +6,13 @@ import hashlib
 import json
 import os
 import time
-from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeout
+from itertools import chain
 from pathlib import Path
 from typing import Any, Callable, Mapping
 
 from agents.canonical_event_ledger import OperationalAIRequest, active_event
 from agents.duplicate_pair_identity import article_id
-from agents.duplicate_pair_matrix import build_recent_history_pair_specs, build_same_run_pair_specs
+from agents.duplicate_pair_matrix import iter_recent_history_pair_specs, iter_same_run_pair_specs
 from agents.gemini_ledger import record_gemini_attempt
 from agents import menzo_duplicate_scorer
 
@@ -90,8 +90,23 @@ def capture_opportunity(massy_board: Mapping[str, Any], *, run_id: str, observat
         kept["article_id"] = article_id(kept)
         if kept["article_id"]:
             safe_history.append(kept)
-    specs = build_same_run_pair_specs(candidates) + build_recent_history_pair_specs(candidates, safe_history)
+    envelope = {"run_id": run_id, "observation_timestamp": observation_timestamp,
+                "publisher_count_rolling_24h": int(publisher_count_24h), "policy_reference": 30,
+                "remaining_slots": max(0, 30 - int(publisher_count_24h)), "candidates": candidates,
+                "authorized_relations": [], "publisher_history_12h": safe_history}
+    preliminary = json.dumps(envelope, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
+    if len(candidates) > MAX_CANDIDATES or len(preliminary) > MAX_INPUT_BYTES:
+        encoded = preliminary
+        envelope["observed"] = {"candidate_count": len(candidates), "relation_count": 0,
+                                "serialized_input_bytes": len(encoded)}
+        envelope["limits"] = {"max_candidates": MAX_CANDIDATES, "max_relations": MAX_RELATIONS,
+                              "max_input_bytes": MAX_INPUT_BYTES, "max_output_tokens": MAX_OUTPUT_TOKENS}
+        envelope["limit_status"] = "exceeded"
+        envelope["input_digest"] = hashlib.sha256(encoded).hexdigest()
+        return copy.deepcopy(envelope)
     relations = []
+    specs = chain(iter_same_run_pair_specs(candidates),
+                  iter_recent_history_pair_specs(candidates, safe_history))
     for spec in specs:
         scored = menzo_duplicate_scorer.score_pair(spec.left, spec.right)
         if scored["exact_duplicate"] or not scored["above_threshold"]:
@@ -100,10 +115,9 @@ def capture_opportunity(massy_board: Mapping[str, Any], *, run_id: str, observat
                           "right_id": spec.right_article_id, "scorer_version": scored["scorer_version"],
                           "score": scored["score"], "threshold": scored["threshold"],
                           "components": scored["components"]})
-    envelope = {"run_id": run_id, "observation_timestamp": observation_timestamp,
-                "publisher_count_rolling_24h": int(publisher_count_24h), "policy_reference": 30,
-                "remaining_slots": max(0, 30 - int(publisher_count_24h)), "candidates": candidates,
-                "authorized_relations": relations, "publisher_history_12h": safe_history}
+        if len(relations) > MAX_RELATIONS:
+            break
+    envelope["authorized_relations"] = relations
     encoded = json.dumps(envelope, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
     envelope["observed"] = {"candidate_count": len(candidates), "relation_count": len(relations),
                             "serialized_input_bytes": len(encoded)}
@@ -157,9 +171,12 @@ def validate_output(value: Any, snapshot: Mapping[str, Any]) -> list[str]:
         supplied = expected_rel.get(row["pair_id"])
         if not supplied or any(row[k] != supplied[k] for k in ("scope", "left_id", "right_id")): errors.append("relation endpoints changed")
         if row["decision"] not in DECISIONS or row["confidence"] not in CONFIDENCE: errors.append("invalid relation enum")
+        if row["new_fact"] is not None and not isinstance(row["new_fact"], str): errors.append("relation new_fact is invalid")
+        if row["temporal_basis"] is not None and not isinstance(row["temporal_basis"], str): errors.append("relation temporal_basis is invalid")
         if row["decision"] == "MATERIAL_UPDATE" and (row["scope"] != "recent_history" or not str(row["new_fact"] or "").strip() or not str(row["temporal_basis"] or "").strip()):
             errors.append("MATERIAL_UPDATE requires recent history, grounded new_fact and temporal_basis")
-        if not isinstance(row["reason_codes"], list) or len(row["reason_codes"]) > 8: errors.append("relation reason_codes are invalid")
+        if (not isinstance(row["reason_codes"], list) or len(row["reason_codes"]) > 8 or
+                any(not isinstance(x, str) or not x or len(x) > 64 for x in row["reason_codes"])): errors.append("relation reason_codes are invalid")
     return errors[:20]
 
 
@@ -175,7 +192,8 @@ def _default_provider_factory() -> Callable[[str, dict[str, Any], float], Any]:
         from google import genai
         from google.genai import types
         client = genai.Client(api_key=api_key, http_options=types.HttpOptions(
-            timeout=max(1, int(PROVIDER_TIMEOUT_SECONDS * 1000))))
+            timeout=max(1, int(PROVIDER_TIMEOUT_SECONDS * 1000)),
+            retry_options=types.HttpRetryOptions(attempts=1)))
     except Exception as exc:
         raise ProviderInitializationError("sdk_or_client_unavailable") from exc
 
@@ -187,16 +205,8 @@ def _default_provider_factory() -> Callable[[str, dict[str, Any], float], Any]:
 
 
 def _invoke_provider(provider: Callable[..., Any], prompt: str, schema: dict[str, Any], timeout: float) -> Any:
-    """Bound caller wait without synchronously joining a timed-out provider worker."""
-    pool = ThreadPoolExecutor(max_workers=1, thread_name_prefix="owtv-ed1-shadow")
-    future = pool.submit(provider, prompt, schema, timeout)
-    try:
-        return future.result(timeout=timeout)
-    except FutureTimeout as exc:
-        future.cancel()
-        raise TimeoutError("Director provider timeout") from exc
-    finally:
-        pool.shutdown(wait=False, cancel_futures=True)
+    """Call synchronously; the production provider enforces its native HTTP timeout."""
+    return provider(prompt, schema, timeout)
 
 
 def _decode(response: Any) -> Any:
