@@ -17,6 +17,25 @@ def valid(s):
       'candidates':[{'candidate_id':x['candidate_id'],'editorial_class':'SHOULD_PUBLISH','recommended_action':'SELECT','relative_rank':i+1,'category':'WWE','story_core':'A factual event','confidence':'HIGH','reason_codes':['HARD_NEWS']} for i,x in enumerate(s['candidates'])], 'relations':[]}
 
 
+def test_provider_schema_uses_supported_exact_version_enums():
+    schema=json.loads(Path('config/editorial_director_output_schema_v1.json').read_text())
+    for field, expected in (
+        ('schema_version', 'owtv_editorial_director_output_v1'),
+        ('policy_version', 'owtv_editorial_director_policy_v1'),
+    ):
+        version_schema=schema['properties'][field]
+        assert version_schema == {'type': 'string', 'enum': [expected]}
+        assert 'const' not in version_schema
+
+
+def test_local_validation_still_rejects_inexact_versions():
+    s=snapshot()
+    for field in ('schema_version', 'policy_version'):
+        output=valid(s)
+        output[field]=f'wrong_{field}'
+        assert 'invalid schema or policy version' in ed.validate_output(output, s)
+
+
 def test_flag_defaults_false_and_capture_is_deep_copy(monkeypatch):
     monkeypatch.delenv('OWTV_EDITORIAL_DIRECTOR_SHADOW_ENABLED',raising=False); assert not ed.enabled()
     board={'news_candidates_for_menzo':[{'title':'A','url':'https://x.test/a','summary':'old'}]}; s=ed.capture_opportunity(board,run_id='r',observation_timestamp='t',publisher_count_24h=0,history=[])
