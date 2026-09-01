@@ -567,7 +567,7 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
                 "date": date_iso,
             })
             continue
-        ready.append({
+        item = {
             "report_id": report_id,
             "report_key": report_key,
             "title": title,
@@ -579,7 +579,12 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
             "source_title": chosen.get("title"),
             "categories": [x for x in [report.get("editorial_category", "Editoriali"), report.get("category")] if x],
             "counts_as_news": False,
-        })
+        }
+        if report_already_published(item, status if isinstance(status, dict) else {}, publication_registry if isinstance(publication_registry, dict) else {}, manual_runs if isinstance(manual_runs, list) else []):
+            item.update({"decision": "skip", "reason": "already_published"})
+            skipped.append(item)
+            continue
+        ready.append(item)
 
 
     for report in expected_special:
