@@ -238,9 +238,11 @@ def run_simone_report_publisher(simone_decision: dict[str, Any] | None = None) -
             continue
         key = report_key(report)
         stored = history.get(key) if key else None
-        if isinstance(stored, dict):
+        if isinstance(stored, dict) and stored.get("source_url") and normalize_url(str(stored.get("source_url"))) == normalize_url(str(report.get("source_url") or "")):
             already_results.append({"report_key": key, "status": "already_published", "wp_post_id": stored.get("wp_post_id"), "wp_link": stored.get("wp_link"), "title": report.get("title"), "source_url": report.get("source_url")})
         else:
+            # A stale/wrong URL attached to this key is not publication evidence
+            # for the current deterministic canonical Results identity.
             unresolved_reports.append(report)
 
     unresolved_reports, collision_results = source_url_conflicts(unresolved_reports, history)

@@ -8,6 +8,8 @@
 
 ## 1. Purpose and scope
 
+> **Higher-order authority:** [`OWTV_TOTEM_INVARIANTS.md`](OWTV_TOTEM_INVARIANTS.md) governs ratified TOTEM behavior. Where interpretation is ambiguous, a TOTEM takes precedence over this guardrail catalog.
+
 This document preserves the architectural and editorial knowledge that would otherwise be lost when legacy notes are retired. It is not a version history and does not replace detailed implementation contracts. It records active guardrails, accepted trade-offs, rejected approaches, historical context and unresolved questions.
 
 It must be consulted before proposing any reform. A technically cleaner design is not automatically preferable: API cost, Gemini use, VPS resources, operational complexity, reliability, maintenance burden and editorial risk must be evaluated together.

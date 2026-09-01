@@ -57,7 +57,7 @@ def test_malformed_night_is_fail_soft_and_valid_night_is_still_evaluated():
 
 def test_explicit_weekly_identity_wins_over_supporting_event_mention():
     candidate = {"title": "AEW Collision Results 7/25 - Two Ladder Match Qualifiers, Trios Titles On The Line", "url": COLLISION_URL, "summary": "Tomorrow is Redemption..."}
-    assert simone.candidate_matches_special_report(candidate, special_report()) == (False, "conflicting_explicit_show_identity")
+    assert simone.candidate_matches_special_report(candidate, special_report()) == (False, "rejected_conflicting_weekly_identity")
 
 
 def test_contextual_explicit_event_alias_does_not_cancel_weekly_results_identity():
@@ -66,43 +66,43 @@ def test_contextual_explicit_event_alias_does_not_cancel_weekly_results_identity
         "title": "AEW Collision Results 7/25 - Final Stop Before Redemption",
         "url": COLLISION_URL,
     }
-    assert simone.candidate_matches_special_report(candidate, report) == (False, "conflicting_explicit_show_identity")
+    assert simone.candidate_matches_special_report(candidate, report) == (False, "rejected_conflicting_weekly_identity")
     candidate["special_event_match"] = {"report_key": report["report_key"]}
-    assert simone.candidate_matches_special_report(candidate, report) == (False, "conflicting_explicit_show_identity")
+    assert simone.candidate_matches_special_report(candidate, report) == (False, "rejected_conflicting_weekly_identity")
 
 
 def test_brand_name_alone_does_not_block_genuine_branded_special_event():
-    report = {"report_key": "special_event_nxt_heatwave_main_2026_08_22", "aliases": ["NXT Heatwave", "Heatwave"]}
-    candidate = {"title": "WWE NXT Heatwave Results - Championship Main Event", "url": "https://example.test/wwe-nxt-heatwave-results"}
-    assert simone.candidate_matches_special_report(candidate, report) == (True, "special_report_match")
+    report = {"report_key": "special_event_nxt_heatwave_main_2026_08_22", "aliases": ["NXT Heatwave", "Heatwave"], "date": "2026-08-22"}
+    candidate = {"title": "WWE NXT Heatwave Results 8/22 - Championship Main Event", "url": "https://wrestlinginc.test/wwe-nxt-heatwave-results-8-22"}
+    assert simone.candidate_matches_special_report(candidate, report) == (True, "canonical_results_match")
     candidate["special_event_match"] = {"report_key": report["report_key"]}
-    assert simone.candidate_matches_special_report(candidate, report) == (True, "structured_special_event_match")
+    assert simone.candidate_matches_special_report(candidate, report) == (True, "canonical_results_match")
 
 
 def test_results_oriented_nxt_keyword_still_wins_over_contextual_heatwave_alias():
-    report = {"report_key": "special_event_nxt_heatwave_main_2026_08_22", "aliases": ["NXT Heatwave", "Heatwave"]}
-    candidate = {"title": "WWE NXT Results - Final Stop Before Heatwave", "url": "https://example.test/wwe-nxt-results-before-heatwave"}
-    assert simone.candidate_matches_special_report(candidate, report) == (False, "conflicting_explicit_show_identity")
+    report = {"report_key": "special_event_nxt_heatwave_main_2026_08_22", "aliases": ["NXT Heatwave", "Heatwave"], "date": "2026-08-22"}
+    candidate = {"title": "WWE NXT Results 8/22 - Final Stop Before Heatwave", "url": "https://wrestlinginc.test/wwe-nxt-results-before-heatwave-8-22"}
+    assert simone.candidate_matches_special_report(candidate, report) == (False, "rejected_conflicting_weekly_identity")
 
 
 def test_structured_special_match_contract_respects_explicit_identity():
     report = special_report()
-    exact = {"title": "AEW Redemption Results", "url": REDEMPTION_URL, "special_event_match": {"report_key": report["report_key"]}}
-    assert simone.candidate_matches_special_report(exact, report) == (True, "structured_special_event_match")
+    exact = {"title": "AEW Redemption Results 7/26", "url": REDEMPTION_URL, "special_event_match": {"report_key": report["report_key"]}}
+    assert simone.candidate_matches_special_report(exact, report) == (True, "canonical_results_match")
     collision = {"title": "AEW Collision Results 7/25", "url": COLLISION_URL, "special_event_match": {"report_key": report["report_key"]}}
-    assert simone.candidate_matches_special_report(collision, report) == (False, "conflicting_explicit_show_identity")
+    assert simone.candidate_matches_special_report(collision, report) == (False, "rejected_conflicting_weekly_identity")
     different = {"title": "Unidentified live coverage", "url": "https://example.test/live", "special_event_match": {"report_key": "another_report"}}
-    assert simone.candidate_matches_special_report(different, report) == (False, "event_alias_not_found")
-    different_with_generic_evidence = {"title": "AEW Redemption Results", "url": REDEMPTION_URL, "special_event_match": {"report_key": "another_report"}}
-    assert simone.candidate_matches_special_report(different_with_generic_evidence, report) == (True, "special_report_match")
+    assert simone.candidate_matches_special_report(different, report) == (False, "rejected_non_results_event_article")
+    different_with_generic_evidence = {"title": "AEW Redemption Results 7/26", "url": REDEMPTION_URL, "special_event_match": {"report_key": "another_report"}}
+    assert simone.candidate_matches_special_report(different_with_generic_evidence, report) == (True, "canonical_results_match")
 
 
 def test_genuine_special_and_normal_collision_sources_still_match():
     genuine = {"title": "AEW Redemption Results 7/26 - Six Championships On The Line", "url": REDEMPTION_URL}
-    assert simone.candidate_matches_special_report(genuine, special_report()) == (True, "special_report_match")
+    assert simone.candidate_matches_special_report(genuine, special_report()) == (True, "canonical_results_match")
     collision = next(item for item in json.loads(simone.REPORTS_CONFIG.read_text())["reports"] if item["id"] == "aew_collision")
     chosen, reason = simone.choose_report_candidate([{"title": "AEW Collision Results 7/25", "url": COLLISION_URL, "source": "wrestlinginc"}], collision, "2026-07-25")
-    assert chosen is not None and reason == "preferred_source"
+    assert chosen is not None and reason == "canonical_results_match"
 
 
 def publisher_paths(tmp_path, monkeypatch):
