@@ -214,7 +214,7 @@ def candidate_date_evidence(entry: dict[str, Any], expected_date: str) -> dict[s
         explicit.add(f"{int(year):04d}-{int(month):02d}-{int(day):02d}")
     for month, day, year in re.findall(r"(?<!\d)(\d{1,2})/(\d{1,2})/(20\d{2})(?!\d)", content):
         explicit.add(f"{int(year):04d}-{int(month):02d}-{int(day):02d}")
-    for month, day in re.findall(r"(?<![\d/])(\d{1,2})[/-](\d{1,2})(?![/\d])", content):
+    for month, day in re.findall(r"(?<!\d[-/])(?<![\d/])(\d{1,2})[/-](\d{1,2})(?![/\d])", content):
         explicit.add(f"{expected.year:04d}-{int(month):02d}-{int(day):02d}")
     month_pattern = "|".join(sorted(MONTH_NUMBERS, key=len, reverse=True))
     for month, day, year in re.findall(rf"\b({month_pattern})\s+(\d{{1,2}})(?:,?\s+(20\d{{2}}))?\b", content, re.I):
