@@ -111,6 +111,9 @@ def test_published_weekly_canonical_url_skips_once_without_reservation(tmp_path,
 
 def test_published_structured_special_skips_once_without_reservation(tmp_path, monkeypatch):
     paths, cfg = _isolated_simone(tmp_path, monkeypatch, datetime(2026, 8, 31, 6, 30, tzinfo=ROME))
+    reports_path = tmp_path / "reports.json"
+    reports_path.write_text(json.dumps({"reports": []}))
+    monkeypatch.setattr(simone, "REPORTS_CONFIG", reports_path)
     canonical = _with_structured_match(candidate("AEW All In 2026 Results", ALL_IN_URL), cfg)
     paths["REPORT_REGISTRY_FILE"].write_text(json.dumps({"items": [
         {"source_url": "https://www.wrestlinginc.com/stale-all-in-preview", "wp_post_id": 40, "wp_link": "https://oww.test/40"},
