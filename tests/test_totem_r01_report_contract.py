@@ -109,6 +109,25 @@ def test_published_weekly_canonical_url_skips_once_without_reservation(tmp_path,
     assert pending["reports"] == []
 
 
+def test_published_structured_special_skips_once_without_reservation(tmp_path, monkeypatch):
+    paths, cfg = _isolated_simone(tmp_path, monkeypatch, datetime(2026, 8, 31, 6, 30, tzinfo=ROME))
+    canonical = _with_structured_match(candidate("AEW All In 2026 Results", ALL_IN_URL), cfg)
+    paths["REPORT_REGISTRY_FILE"].write_text(json.dumps({"items": [
+        {"source_url": "https://www.wrestlinginc.com/stale-all-in-preview", "wp_post_id": 40, "wp_link": "https://oww.test/40"},
+        {"source_url": ALL_IN_URL + "/?utm_source=test", "wp_post_id": 41, "wp_link": "https://oww.test/41"},
+    ]}))
+
+    result = simone.run_simone({"report_candidates": [canonical]})
+
+    assert result["special_ready"] == []
+    assert len(result["special_already_published"]) == 1
+    assert [item["reason"] for item in result["skipped_reports"]] == ["already_published"]
+    assert result["handoff"]["skipped"] == 1
+    assert result["handoff"]["special_already_published"] == 1
+    pending = json.loads(paths["PENDING_REPORTS"].read_text()) if paths["PENDING_REPORTS"].exists() else {"reports": []}
+    assert pending["reports"] == []
+
+
 def test_two_distinct_reports_same_morning_are_both_canonical():
     all_in = event_report("aew_all_in_2026")
     heatwave = event_report("nxt_heatwave_2026")
