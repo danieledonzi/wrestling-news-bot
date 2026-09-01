@@ -21,7 +21,7 @@ def full_wwe_registry():
 
 
 def test_dynamic_special_report_is_reserved_not_menzo(tmp_path: Path):
-    item = {"source": "wrestlinginc", "title": "WWE Saturday Night's Main Event live coverage/results", "url": "https://wrestlinginc.test/snme-results", "normalized_url": "https://wrestlinginc.test/snme-results", "summary": "July 18, 2026"}
+    item = {"source": "wrestlinginc", "title": "WWE Saturday Night's Main Event live coverage/results July 18, 2026", "url": "https://wrestlinginc.test/snme-results", "normalized_url": "https://wrestlinginc.test/snme-results", "summary": "July 18, 2026"}
     classified = massy.classify_entries([item], set(), set(), registry())
     assert len(classified["report_candidates"]) == 1
     assert classified["news_candidates_for_menzo"] == []
@@ -35,7 +35,7 @@ def test_dynamic_special_report_is_reserved_not_menzo(tmp_path: Path):
 def test_snme_resolves_uniquely_with_multiple_wwe_events():
     item = {"title": "WWE Saturday Night's Main Event live coverage/results July 18, 2026", "url": "https://wrestlinginc.test/snme-results-2026-07-18", "summary": "", "published": "Sat, 18 Jul 2026 23:00:00 GMT"}
     match, reason = dynamic_special_event_match(item, full_wwe_registry())
-    assert reason == "dynamic_confirmed_special_event_report"
+    assert reason == "canonical_results_match"
     assert match["event_key"] == "snme" and match["night_key"] == "snme_main"
     assert match["report_key"] == "special_event_snme_main_2026_07_18"
     assert match["match_evidence"]["strong_alias"] != "WWE"
@@ -49,7 +49,7 @@ def test_real_wrestlinginc_snme_date_pattern_crosses_utc_midnight():
         "published": "2026-07-19T02:15:00Z",
     }
     match, reason = dynamic_special_event_match(item, full_wwe_registry())
-    assert reason == "dynamic_confirmed_special_event_report"
+    assert reason == "canonical_results_match"
     assert (match["event_key"], match["night_key"], match["date_local"]) == ("snme", "snme_main", "2026-07-18")
     assert match["report_key"] == "special_event_snme_main_2026_07_18"
     assert match["match_evidence"]["explicit_content_dates"] == ["2026-07-18"]
@@ -90,8 +90,8 @@ def test_pending_queue_replays_with_empty_feed_after_publish_time(tmp_path, monk
     monkeypatch.setattr(simone, "load_effective_registry", lambda: ({"events": []}, {"effective_registry_source": "test"}))
     monkeypatch.setattr(simone, "REPORTS_CONFIG", tmp_path / "reports.json"); (tmp_path / "reports.json").write_text('{"reports": []}', encoding="utf-8")
     result = simone.run_simone({"report_candidates": []})
-    assert result["ready_reports"][0]["source_url"] == "https://wrestlinginc.test/snme"
-    assert result["ready_reports"][0]["reason"] == "pending_queue_replay"
+    assert result["ready_reports"] == []
+    assert result["skipped_reports"][0]["reason"] == "invalid_canonical_identity"
 
 
 def test_massy_to_simone_creates_special_reservation_before_0630(tmp_path, monkeypatch):
@@ -126,11 +126,11 @@ def test_raw_source_date_is_event_date_and_ambiguous_candidates_are_rejected():
     key, show_date, _publish_date = simone.discovery_report_identity(raw, datetime(2026, 7, 21, 7, 0))
     candidate = {"source": "wrestlinginc", "title": "WWE Raw Results 7/20 - Jacob Fatu Collides With LA Knight", "url": "https://www.wrestlinginc.com/2219333/wwe-raw-july-20-jacob-fatu-la-knight-two-tag-team-matches-more/"}
     chosen, reason = simone.choose_report_candidate([candidate], raw, show_date)
-    assert (show_date, key, chosen, reason) == ("2026-07-20", "wwe_raw_2026_07_20", candidate, "preferred_source")
+    assert (show_date, key, chosen, reason) == ("2026-07-20", "wwe_raw_2026_07_20", candidate, "canonical_results_match")
     unrelated = {"source": "wrestlinginc", "title": "WWE SmackDown Results 7/20", "url": "https://www.wrestlinginc.com/wwe-smackdown-july-20/"}
-    assert simone.choose_report_candidate([unrelated], raw, show_date) == (None, "no_candidate")
+    assert simone.choose_report_candidate([unrelated], raw, show_date) == (None, "rejected_conflicting_weekly_identity")
     duplicate_match = {**candidate, "url": "https://www.wrestlinginc.com/a-second-wwe-raw-results-july-20/"}
-    assert simone.choose_report_candidate([candidate, duplicate_match], raw, show_date) == (None, "ambiguous_preferred_candidates")
+    assert simone.choose_report_candidate([candidate, duplicate_match], raw, show_date) == (candidate, "canonical_results_match")
 
 
 def test_collision_and_ple_and_two_nights_have_distinct_keys():
@@ -325,8 +325,8 @@ def test_history_known_reports_skip_scrape_preflight_and_preserve_published_pend
     monkeypatch.setattr(publisher, "jarvis_wp_preflight", lambda: (_ for _ in ()).throw(AssertionError("no preflight")))
     result = publisher.run_simone_report_publisher({"ready_reports": [{"report_key": "known", "source_url": "broken"}, {"report_key": "known2", "source_url": "broken"}]})
     rows = {row["report_key"]: row for row in json.loads(pending.read_text())["reports"]}
-    assert result["handoff"]["already_published"] == 2 and all(x["status"] == "already_published" for x in result["results"])
-    assert rows["known"]["status"] == "published" and rows["known2"]["status"] == "already_published"
+    assert result["handoff"]["already_published"] == 0
+    assert rows["known"]["status"] == "published" and rows["known2"]["status"] == "waiting_source_completion"
 
 
 def test_history_reports_do_not_consume_cap_and_due_diagnostic_is_processed(tmp_path, monkeypatch):
@@ -343,5 +343,5 @@ def test_history_reports_do_not_consume_cap_and_due_diagnostic_is_processed(tmp_
     reports = [{"report_key": key, "source_url": "broken"} for key in history_data] + [{"report_key": "new", "source_url": "https://x.test/new"}]
     result = publisher.run_simone_report_publisher({"ready_reports": reports})
     assert scrape_calls == ["https://x.test/new"] and result["handoff"]["deferred_by_safety_cap"] == 0
-    assert result["handoff"]["already_published"] == 4
-    assert {x["status"] for x in result["results"]} == {"already_published", "published"}
+    assert result["handoff"]["already_published"] == 0
+    assert {x["status"] for x in result["results"]} == {"identity_collision", "published"}

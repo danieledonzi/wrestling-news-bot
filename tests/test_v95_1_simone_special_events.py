@@ -86,6 +86,7 @@ def test_forbidden_door_manual_report_status_is_already_published(tmp_path, monk
                 "source": "WrestlingInc",
                 "title": "AEW x NJPW Forbidden Door 2026 Results: Full results and recap",
                 "url": "https://www.wrestlinginc.com/aew-forbidden-door-2026-results-full-results-recap/",
+                "published": "2026-06-29T05:00:00Z",
                 "show_hint": "Forbidden Door results",
             }
         ]
@@ -120,6 +121,7 @@ def test_great_american_bash_manual_run_is_already_published(tmp_path, monkeypat
                 "source": "WrestlingInc",
                 "title": "WWE NXT The Great American Bash 2026 Results And Recap",
                 "url": "https://www.wrestlinginc.com/nxt-great-american-bash-2026-results-recap/",
+                "published": "2026-06-29T05:00:00Z",
                 "show_hint": "NXT Great American Bash results",
             }
         ]
@@ -131,7 +133,7 @@ def test_great_american_bash_manual_run_is_already_published(tmp_path, monkeypat
     assert not [item for item in result["special_missing"] if item["night_key"] == "nxt_great_american_bash_2026_main"]
 
 
-def test_wrestlinginc_report_hint_without_results_word_becomes_ready(tmp_path, monkeypatch):
+def test_wrestlinginc_report_hint_without_results_word_is_rejected(tmp_path, monkeypatch):
     configure_isolated_simone(tmp_path, monkeypatch)
 
     result = run_with_candidates(
@@ -147,10 +149,9 @@ def test_wrestlinginc_report_hint_without_results_word_becomes_ready(tmp_path, m
         ]
     )
 
-    ready = [item for item in result["special_ready"] if item["night_key"] == "nxt_great_american_bash_2026_main"]
-    assert len(ready) == 1
-    assert ready[0]["report_type"] == "special_event"
-    assert ready[0]["counts_as_news"] is False
+    assert not [item for item in result["special_ready"] if item["night_key"] == "nxt_great_american_bash_2026_main"]
+    missing = [item for item in result["special_missing"] if item["night_key"] == "nxt_great_american_bash_2026_main"]
+    assert missing[0]["reason"] == "rejected_non_results_event_article"
 
 
 def test_preview_card_odds_candidate_does_not_become_ready(tmp_path, monkeypatch):
@@ -172,4 +173,4 @@ def test_preview_card_odds_candidate_does_not_become_ready(tmp_path, monkeypatch
     assert not [item for item in result["special_ready"] if item["night_key"] == "nxt_great_american_bash_2026_main"]
     missing = [item for item in result["special_missing"] if item["night_key"] == "nxt_great_american_bash_2026_main"]
     assert len(missing) == 1
-    assert missing[0]["reason"] == "only_non_report_event_news_found"
+    assert missing[0]["reason"] == "rejected_non_results_event_article"

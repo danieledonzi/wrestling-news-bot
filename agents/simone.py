@@ -8,7 +8,7 @@ from zoneinfo import ZoneInfo
 from pathlib import Path
 from typing import Any
 
-from modules.simone_report_integrity import PENDING_REPORTS, load_effective_registry, reserve_report
+from modules.simone_report_integrity import PENDING_REPORTS, candidate_date_evidence, dynamic_special_event_match, load_effective_registry, normalize_url, reserve_report
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_DIR = ROOT / "config"
@@ -49,13 +49,20 @@ def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
+ROME = ZoneInfo("Europe/Rome")
+
+
+def rome_time(value: datetime) -> datetime:
+    """Return an aware Europe/Rome time; naive scheduler inputs are local Rome."""
+    return value.replace(tzinfo=ROME) if value.tzinfo is None else value.astimezone(ROME)
+
+
 def local_now() -> datetime:
-    # GitHub runner is UTC; for the report scheduler we only need date/day stability.
-    return datetime.utcnow() + timedelta(hours=2)
+    return datetime.now(ROME)
 
 
 def rome_now() -> datetime:
-    return datetime.now(ZoneInfo("Europe/Rome"))
+    return datetime.now(ROME)
 
 
 def load_json(path: Path, default: Any) -> Any:
@@ -96,6 +103,7 @@ def build_report_title(report: dict[str, Any], date_iso: str) -> str:
 
 
 def report_due_today(report: dict[str, Any], now: datetime) -> bool:
+    now = rome_time(now)
     if not report.get("enabled", True):
         return False
     expected_day = str(report.get("expected_day_after") or "").strip().lower()
@@ -111,13 +119,15 @@ def report_due_today(report: dict[str, Any], now: datetime) -> bool:
 
 
 def report_key_and_date(report: dict[str, Any], now: datetime) -> tuple[str, str]:
+    now = rome_time(now)
     show_date = now.date() - timedelta(days=int(report.get("show_date_offset_days", 1)))
     date_iso = show_date.isoformat()
     return f"{report.get('id')}_{date_iso.replace('-', '_')}", date_iso
 
 
 def discovery_report_identity(report: dict[str, Any], now: datetime) -> tuple[str, str, str]:
-    """Key an evening discovery to that show and its next-morning report day."""
+    """Key an evening discovery using the Europe/Rome calendar."""
+    now = rome_time(now)
     expected = DAY_NAMES.get(str(report.get("expected_day_after") or "").lower())
     if expected is not None and now.weekday() == (expected - 1) % 7:
         show_date = now.date(); publish_date = show_date + timedelta(days=1)
@@ -133,7 +143,8 @@ def pending_due(row: dict[str, Any], now: datetime) -> bool:
         hour, minute = [int(x) for x in str(row.get("publish_after") or "06:30").split(":", 1)]
         publish_date = str(row.get("publish_date_local") or row.get("date_local"))
         y, m, d = [int(x) for x in publish_date.split("-")]
-        return now >= datetime(y, m, d, hour, minute)
+        due_at = datetime(y, m, d, hour, minute, tzinfo=ROME)
+        return rome_time(now) >= due_at
     except Exception:
         return False
 
@@ -179,7 +190,7 @@ def special_display_name(event: dict[str, Any]) -> str:
 
 
 def build_expected_special_reports(cfg: dict[str, Any], now: datetime | None = None) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    now = now or rome_now()
+    now = rome_time(now or rome_now())
     lookback = int(cfg.get("default_lookback_hours") or 18) if isinstance(cfg, dict) else 18
     # Prudential rescue window keeps just-confirmed weekend PLE/PPV diagnosable across a missed daily run.
     window_hours = max(lookback, int(cfg.get("simone_special_report_window_hours") or 72) if isinstance(cfg, dict) else 72)
@@ -234,93 +245,51 @@ def build_expected_special_reports(cfg: dict[str, Any], now: datetime | None = N
     return expected, blocked
 
 
-REPORT_SIGNAL_RE = re.compile(r"\b(results?|risultati|recap|report|full\s+results?|live\s+results?|highlights?)\b", re.I)
-NON_REPORT_RE = re.compile(r"\b(preview|card|betting|odds|rumou?rs?|spoilers?|spoiler\s+lineup|lineup|reaction|post[-\s]?show|media scrum|press conference|appears|returns|wins|retains|defeats|title change)\b", re.I)
-REPORT_HINT_VALUES = {"report", "results", "results_report", "full_results", "live_results", "recap"}
+REPORT_SIGNAL_RE = re.compile(r"\b(results|risultati)\b", re.I)
+def _is_wrestlinginc(candidate: dict[str, Any]) -> bool:
+    source = f"{candidate.get('source', '')} {candidate.get('url', '')} {candidate.get('source_url', '')}".lower()
+    return "wrestlinginc" in source.replace(" ", "")
 
 
-def candidate_report_hint(candidate: dict[str, Any], report: dict[str, Any], raw: str) -> bool:
-    for key in ["kind_hint", "kind", "article_type", "content_type", "candidate_type", "classification", "bucket"]:
-        value = normalize(str(candidate.get(key) or ""))
-        if value in REPORT_HINT_VALUES or "results report" in value or "report candidate" in value:
-            return True
-    for key in ["report_candidate", "is_report_candidate", "assigned_to_simone"]:
-        if candidate.get(key) is True:
-            return True
-    if str(candidate.get("assigned_to") or "").lower() == "simone":
-        return True
-    show_hint = normalize(str(candidate.get("show_hint") or ""))
-    source_blob = normalize(f"{candidate.get('source', '')} {candidate.get('url', '')} {candidate.get('source_url', '')}")
-    aliases = [normalize(x) for x in report.get("aliases", []) if x]
-    if "wrestlinginc" in source_blob and show_hint and any(alias and alias in show_hint for alias in aliases):
-        return True
-    blob = normalize(raw)
-    return any(token in blob for token in ["results report", "full results", "live results", "complete results"])
+def _candidate_date_matches(candidate: dict[str, Any], date_iso: str) -> bool:
+    return bool(candidate_date_evidence(candidate, date_iso)["matches"])
 
 
 def candidate_matches_special_report(candidate: dict[str, Any], report: dict[str, Any]) -> tuple[bool, str]:
     explicit_raw = " ".join(str(candidate.get(k) or "") for k in ["title", "url", "source_url"])
-    supporting_raw = " ".join(str(candidate.get(k) or "") for k in ["show_hint", "summary", "description", "reason"])
-    raw = f"{explicit_raw} {supporting_raw}"
-    blob = normalize(raw)
-    aliases = [normalize(x) for x in report.get("aliases", []) if x]
     explicit_blob = normalize(explicit_raw)
-    special_identity_explicit = any(alias and alias in explicit_blob for alias in aliases)
+    aliases = [normalize(x) for x in report.get("aliases", []) if x]
+    if not _is_wrestlinginc(candidate):
+        return False, "rejected_non_results_event_article"
+    if not REPORT_SIGNAL_RE.search(explicit_raw):
+        return False, "rejected_non_results_event_article"
     reports_cfg = load_json(REPORTS_CONFIG, {"reports": []})
-    weekly_reports = reports_cfg.get("reports", []) if isinstance(reports_cfg, dict) else []
-    for weekly in weekly_reports if isinstance(weekly_reports, list) else []:
-        if not isinstance(weekly, dict):
-            continue
-        show_identity = normalize(str(weekly.get("show_name") or ""))
-        result_identities = [
-            term for value in (weekly.get("match_keywords") or [])
-            if (term := normalize(str(value or ""))) and REPORT_SIGNAL_RE.search(str(value or ""))
-        ]
-        results_keyword_identity = any(term in explicit_blob for term in result_identities)
-        generic_show_report_identity = bool(
-            show_identity
-            and show_identity in explicit_blob
-            and REPORT_SIGNAL_RE.search(explicit_raw)
-            and not special_identity_explicit
-        )
-        strong_weekly_identity = results_keyword_identity or generic_show_report_identity
-        if strong_weekly_identity:
-            return False, "conflicting_explicit_show_identity"
-    structured = candidate.get("special_event_match")
-    structured_key = str(structured.get("report_key") or "") if isinstance(structured, dict) else ""
-    if structured_key and structured_key == str(report.get("report_key") or ""):
-        return True, "structured_special_event_match"
-    event_hit = any(alias and alias in blob for alias in aliases)
-    if not event_hit:
+    for weekly in reports_cfg.get("reports", []) if isinstance(reports_cfg, dict) else []:
+        show = normalize(str(weekly.get("show_name") or "")) if isinstance(weekly, dict) else ""
+        if show and re.search(rf"\b{re.escape(show)}\s+results?\b", explicit_blob) and not any(show in alias for alias in aliases):
+            return False, "rejected_conflicting_weekly_identity"
+    if not any(alias and alias in explicit_blob for alias in aliases):
         return False, "event_alias_not_found"
-    if NON_REPORT_RE.search(raw):
-        return False, "only_non_report_event_news_found"
-    if REPORT_SIGNAL_RE.search(raw) or candidate_report_hint(candidate, report, raw):
-        return True, "special_report_match"
-    return False, "missing_report_results_signal"
-
+    date_iso = str(report.get("date") or report.get("date_local") or "")
+    if not _candidate_date_matches(candidate, date_iso):
+        return False, "rejected_non_results_event_article"
+    return True, "canonical_results_match"
 
 def choose_special_report_candidate(candidates: list[dict[str, Any]], report: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
-    rejected_reasons: list[str] = []
-    event_related_rejections: list[str] = []
     matches = []
+    rejections: list[str] = []
     for c in candidates:
         ok, reason = candidate_matches_special_report(c, report)
         if ok:
             matches.append(c)
-        else:
-            rejected_reasons.append(reason)
-            if reason != "event_alias_not_found":
-                event_related_rejections.append(reason)
+        elif reason != "event_alias_not_found":
+            rejections.append(reason)
     if not matches:
-        if event_related_rejections and all(r in {"missing_report_results_signal", "only_non_report_event_news_found"} for r in event_related_rejections):
-            return None, "only_non_report_event_news_found"
-        return None, "missing_report_source_not_found"
-    def rank(c: dict[str, Any]) -> tuple[int, str]:
-        source = str(c.get("source") or "").lower()
-        return (0 if "wrestlinginc" in source or "wrestlinginc" in str(c.get("url") or "").lower() else 1, candidate_published_score(c))
-    matches.sort(key=rank)
-    return matches[0], "preferred_wrestlinginc" if rank(matches[0])[0] == 0 else "fallback_source"
+        for reason in ["rejected_conflicting_weekly_identity", "rejected_non_results_event_article"]:
+            if reason in rejections:
+                return None, reason
+        return None, "waiting_for_canonical_results_source"
+    return matches[0], "canonical_results_match"
 
 
 PUBLISHED_STATUS_VALUES = {"", "published", "already_published", "completed", "dry_run"}
@@ -378,57 +347,79 @@ def title_fallback_matches(report: dict[str, Any], record: dict[str, Any]) -> bo
     return any(report_title and normalize(title) == report_title for title in titles if title)
 
 
+def _record_source_url(record: dict[str, Any]) -> str:
+    job = record.get("job") if isinstance(record.get("job"), dict) else {}
+    return str(record.get("source_url") or record.get("url") or job.get("source_url") or job.get("url") or "")
+
+
 def report_already_published(report: dict[str, Any], status: dict[str, Any], registry: dict[str, Any], manual_runs: list[Any]) -> bool:
-    expected_ids = report_identity_values(report)
-    if not expected_ids:
-        return False
+    """Publication evidence is valid only for the same canonical source URL."""
+    expected_raw_url = str(report.get("source_url") or "")
+    expected_url = normalize_url(expected_raw_url) if expected_raw_url else ""
+    records: list[tuple[dict[str, Any], bool]] = []
     if isinstance(status, dict):
-        for key, value in status.items():
-            if not isinstance(value, dict) or not published_record_compatible(value):
-                continue
-            if expected_ids & record_identity_values(value, keyed_report_key=str(key)) or title_fallback_matches(report, value):
-                return True
+        records.extend((value, False) for value in status.values() if isinstance(value, dict))
     items = registry.get("items", []) if isinstance(registry, dict) else []
-    for item in items if isinstance(items, list) else []:
-        if not isinstance(item, dict) or not published_record_compatible(item, require_evidence=True):
+    records.extend((item, True) for item in items if isinstance(item, dict))
+    records.extend((run, True) for run in manual_runs if isinstance(run, dict))
+    for record, require_evidence in records:
+        if not published_record_compatible(record, require_evidence=require_evidence):
             continue
-        if expected_ids & record_identity_values(item) or title_fallback_matches(report, item):
-            return True
-    for run in manual_runs if isinstance(manual_runs, list) else []:
-        if not isinstance(run, dict):
+        recorded_raw_url = _record_source_url(record)
+        recorded_url = normalize_url(recorded_raw_url) if recorded_raw_url else ""
+        if expected_url and recorded_url:
+            if recorded_url == expected_url:
+                return True
             continue
-        job = run.get("job") if isinstance(run.get("job"), dict) else {}
-        merged = {**job, **{k: v for k, v in run.items() if k != "job"}}
-        if not published_record_compatible(merged, require_evidence=True):
-            continue
-        if expected_ids & record_identity_values(merged) or title_fallback_matches(report, merged):
+        # With no canonical URL available, explicit event/night identity plus
+        # publication evidence remains valid; a report_key alone is insufficient.
+        shared = report_identity_values(report) & record_identity_values(record)
+        non_key = {str(report.get("event_key") or ""), str(report.get("night_key") or ""), f"manual:{report.get('event_key') or ''}", f"manual:{report.get('night_key') or ''}"}
+        if shared & {value for value in non_key if value and value != "manual:"}:
             return True
     return False
 
 def source_rank(source: str, report: dict[str, Any]) -> int:
-    if source == report.get("preferred_source"):
+    if source.lower() == str(report.get("preferred_source") or "").lower():
         return 0
-    if source == report.get("fallback_source"):
+    if source.lower() == str(report.get("fallback_source") or "").lower():
         return 1
     return 9
 
 
-def candidate_matches_report(candidate: dict[str, Any], report: dict[str, Any], date_iso: str) -> bool:
-    blob = normalize(f"{candidate.get('title', '')} {candidate.get('url', '')} {candidate.get('show_hint', '')}")
-    if "results" not in blob and "risultati" not in blob and "highlights" not in blob:
+def _canonical_structured_special_match(candidate: dict[str, Any]) -> bool:
+    match = candidate.get("special_event_match")
+    if not isinstance(match, dict) or match.get("canonical_identity") != "wrestlinginc_results":
         return False
-    keywords = [normalize(x) for x in report.get("match_keywords", []) if x]
-    if keywords and not any(keyword in blob for keyword in keywords):
-        return False
-    # Date matching is intentionally permissive in Simone v93.3 because Massy
-    # already isolated report-like URLs and some feeds use slugs without dates.
-    date_tokens = date_iso.split("-")
-    year, month, day = date_tokens[0], int(date_tokens[1]), int(date_tokens[2])
-    raw = f"{candidate.get('title', '')} {candidate.get('url', '')}".lower()
-    if str(year) in raw or f"{month}/{day}" in raw or f"{month:02d}/{day:02d}" in raw or f"{month}-{day}" in raw:
-        return True
-    return True
+    report = {
+        "report_key": match.get("report_key"),
+        "aliases": match.get("aliases") or (match.get("match_evidence") or {}).get("alias_hits") or [],
+        "date": match.get("date_local"),
+    }
+    return candidate_matches_special_report(candidate, report)[0]
 
+
+def candidate_report_identity(candidate: dict[str, Any], report: dict[str, Any], date_iso: str) -> tuple[bool, str]:
+    explicit = f"{candidate.get('title', '')} {candidate.get('url', '')} {candidate.get('source_url', '')}"
+    blob = normalize(explicit)
+    if not _is_wrestlinginc(candidate) or not re.search(r"\b(results|risultati)\b", explicit, re.I):
+        return False, "waiting_for_canonical_results_source"
+    if _canonical_structured_special_match(candidate):
+        return False, "rejected_special_event_as_weekly"
+    special_cfg = load_json(SPECIAL_EVENTS_CONFIG, {"events": []})
+    special, _reason = dynamic_special_event_match(candidate, special_cfg)
+    if special:
+        return False, "rejected_special_event_as_weekly"
+    show = normalize(str(report.get("show_name") or ""))
+    if not show or not re.search(rf"\b{re.escape(show)}\s+results\b", blob):
+        return False, "rejected_conflicting_weekly_identity"
+    if not _candidate_date_matches(candidate, date_iso):
+        return False, "rejected_conflicting_weekly_identity"
+    return True, "canonical_results_match"
+
+
+def candidate_matches_report(candidate: dict[str, Any], report: dict[str, Any], date_iso: str) -> bool:
+    return candidate_report_identity(candidate, report, date_iso)[0]
 
 def candidate_published_score(candidate: dict[str, Any]) -> str:
     raw = str(candidate.get("published") or candidate.get("published_at") or "")
@@ -441,20 +432,32 @@ def candidate_published_score(candidate: dict[str, Any]) -> str:
 
 
 def choose_report_candidate(candidates: list[dict[str, Any]], report: dict[str, Any], date_iso: str) -> tuple[dict[str, Any] | None, str]:
-    matches = [c for c in candidates if candidate_matches_report(c, report, date_iso)]
+    evaluated = [(c, *candidate_report_identity(c, report, date_iso)) for c in candidates]
+    matches = [c for c, matched, _reason in evaluated if matched]
     if not matches:
-        return None, "no_candidate"
-    matches.sort(key=lambda c: (source_rank(str(c.get("source") or ""), report), candidate_published_score(c)))
-    preferred = [c for c in matches if c.get("source") == report.get("preferred_source")]
-    if preferred:
-        preferred_urls = {str(c.get("normalized_url") or c.get("url") or c.get("source_url") or "").rstrip("/") for c in preferred}
-        if len(preferred_urls) != 1:
-            return None, "ambiguous_preferred_candidates"
-        return preferred[0], "preferred_source"
-    fallback = [c for c in matches if c.get("source") == report.get("fallback_source")]
-    if fallback:
-        return fallback[0], "fallback_source"
-    return matches[0], "other_source"
+        reasons = [reason for _c, _matched, reason in evaluated]
+        for reason in ["rejected_special_event_as_weekly", "rejected_conflicting_weekly_identity"]:
+            if reason in reasons:
+                return None, reason
+        return None, "waiting_for_canonical_results_source"
+    preferred = [c for c in matches if str(c.get("source") or "").lower() == str(report.get("preferred_source") or "").lower()]
+    return (preferred[0], "canonical_results_match") if preferred else (None, "waiting_for_canonical_results_source")
+
+
+def _pending_lock(report_key: str) -> dict[str, Any] | None:
+    state = load_json(PENDING_REPORTS, {"reports": []})
+    rows = state.get("reports", []) if isinstance(state, dict) else []
+    return next((
+        row for row in rows
+        if isinstance(row, dict)
+        and row.get("report_key") == report_key
+        and row.get("canonical_source_locked") is True
+        and row.get("status") not in {"published", "already_published"}
+    ), None)
+
+
+def _pending_candidate(row: dict[str, Any]) -> dict[str, Any]:
+    return {**row, "url": row.get("source_url"), "title": row.get("source_title")}
 
 
 def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
@@ -470,6 +473,35 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     manual_runs = load_json(MANUAL_RUNS_FILE, [])
     reports = reports_cfg.get("reports", []) if isinstance(reports_cfg, dict) else []
     now = local_now()
+    expected_special, special_blocked = build_expected_special_reports(special_cfg)
+
+    # Validate legacy pending rows and establish a lock only from canonical identity.
+    pending_seed = load_json(PENDING_REPORTS, {"reports": []})
+    pending_seed_rows = pending_seed.get("reports", []) if isinstance(pending_seed, dict) else []
+    locked_keys = {str(row.get("report_key")) for row in pending_seed_rows if isinstance(row, dict) and row.get("canonical_source_locked") is True}
+    for row in pending_seed_rows:
+        if not isinstance(row, dict) or row.get("status") in {"published", "already_published"}:
+            continue
+        key = str(row.get("report_key") or "")
+        weekly_cfg = next((x for x in reports if isinstance(x, dict) and str(x.get("id")) == str(row.get("report_id"))), None)
+        special_report = next((x for x in expected_special if str(x.get("report_key")) == key), None)
+        candidate = _pending_candidate(row)
+        valid = candidate_matches_report(candidate, weekly_cfg, str(row.get("date_local") or "")) if weekly_cfg else bool(special_report and candidate_matches_special_report(candidate, special_report)[0])
+        if not valid and (weekly_cfg or special_report):
+            row["status"] = "invalid_canonical_identity"
+            row["identity_reason"] = "invalid_canonical_identity"
+            if row.get("canonical_source_locked") is True:
+                row["canonical_source_locked"] = False
+                locked_keys.discard(key)
+        elif valid and key not in locked_keys:
+            row["canonical_source_locked"] = True
+            row["identity_reason"] = "canonical_source_locked"
+            locked_keys.add(key)
+        elif valid and row.get("canonical_source_locked") is not True:
+            row["status"] = "later_canonical_candidate_ignored"
+            row["identity_reason"] = "later_canonical_candidate_ignored"
+    if isinstance(pending_seed, dict):
+        pending_seed["reports"] = pending_seed_rows; pending_seed["updated_at"] = utc_now(); write_json(PENDING_REPORTS, pending_seed)
 
     # Reserve special-event candidates immediately from Massy's authoritative
     # structured match, including discoveries before the event becomes due.
@@ -477,16 +509,26 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
         match = candidate.get("special_event_match") if isinstance(candidate, dict) else None
         if not isinstance(match, dict) or not match.get("report_key"):
             continue
+        validation_report = {
+            "report_key": match.get("report_key"),
+            "aliases": match.get("aliases") or (match.get("match_evidence") or {}).get("alias_hits") or [],
+            "date": match.get("date_local"),
+        }
+        valid_special, _validation_reason = candidate_matches_special_report(candidate, validation_report)
+        if not valid_special:
+            continue
         try:
             publish_date = (datetime.strptime(str(match.get("date_local")), "%Y-%m-%d").date() + timedelta(days=1)).isoformat()
         except Exception:
             publish_date = str(match.get("date_local") or "")
-        reserve_report(candidate, {**match, "report_id": match.get("night_key"), "event_identity": match.get("event_name"), "event_name": match.get("event_name"), "aliases": match.get("aliases") or [], "publish_date_local": publish_date, "category": match.get("category_hint"), "title": candidate.get("title"), "categories": [x for x in ["Editoriali", match.get("category_hint")] if x], "counts_as_news": False}, now=now, pending_path=PENDING_REPORTS)
+        canonical_report = {**match, "report_id": match.get("night_key"), "event_identity": match.get("event_name"), "event_name": match.get("event_name"), "aliases": match.get("aliases") or [], "publish_date_local": publish_date, "category": match.get("category_hint"), "title": candidate.get("title"), "source_url": candidate.get("normalized_url") or candidate.get("url") or candidate.get("source_url"), "categories": [x for x in ["Editoriali", match.get("category_hint")] if x], "counts_as_news": False}
+        if report_already_published(canonical_report, status if isinstance(status, dict) else {}, publication_registry if isinstance(publication_registry, dict) else {}, manual_runs if isinstance(manual_runs, list) else []):
+            continue
+        reserve_report(candidate, canonical_report, now=now, pending_path=PENDING_REPORTS)
 
     ready: list[dict[str, Any]] = []
     waiting: list[dict[str, Any]] = []
     skipped: list[dict[str, Any]] = []
-    expected_special, special_blocked = build_expected_special_reports(special_cfg)
     special_ready: list[dict[str, Any]] = []
     special_missing: list[dict[str, Any]] = []
     special_already: list[dict[str, Any]] = []
@@ -499,20 +541,35 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
         report_id = str(report.get("id") or "")
         report_key, date_iso, publish_date_iso = discovery_report_identity(report, now)
         title = build_report_title(report, date_iso)
-        current = status.get(report_key, {}) if isinstance(status, dict) else {}
-        if current.get("status") == "published":
-            skipped.append({
+        locked = _pending_lock(report_key)
+        if locked:
+            locked_candidate = _pending_candidate(locked)
+            if candidate_matches_report(locked_candidate, report, date_iso):
+                chosen, reason = locked_candidate, "canonical_source_locked"
+            else:
+                chosen, reason = None, "invalid_canonical_identity"
+        else:
+            chosen, reason = choose_report_candidate(report_candidates, report, date_iso)
+        if chosen:
+            item = {
                 "report_id": report_id,
                 "report_key": report_key,
                 "title": title,
-                "decision": "skip",
-                "reason": "already_published",
-            })
-            continue
-        chosen, reason = choose_report_candidate(report_candidates, report, date_iso)
-        if chosen:
+                "decision": "ready_for_bob_or_v92",
+                "reason": reason,
+                "date": date_iso,
+                "source": chosen.get("source"),
+                "source_url": chosen.get("url") or chosen.get("source_url"),
+                "source_title": chosen.get("title"),
+                "categories": [x for x in [report.get("editorial_category", "Editoriali"), report.get("category")] if x],
+                "counts_as_news": False,
+            }
+            if report_already_published(item, status if isinstance(status, dict) else {}, publication_registry if isinstance(publication_registry, dict) else {}, manual_runs if isinstance(manual_runs, list) else []):
+                item.update({"decision": "skip", "reason": "already_published"})
+                skipped.append(item)
+                continue
             reservation = reserve_report(chosen, {
-                "report_key": report_key, "report_id": report_id, "event_identity": report.get("show_name"),
+                "report_key": report_key, "report_id": report_id, "event_identity": report.get("show_name"), "canonical_identity": "wrestlinginc_results",
                 "date_local": date_iso, "publish_after": report.get("publish_after") or "06:30",
                 "publish_date_local": publish_date_iso, "category": report.get("category"), "title": title,
                 "categories": [x for x in [report.get("editorial_category", "Editoriali"), report.get("category")] if x], "counts_as_news": False,
@@ -539,29 +596,19 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
                 "date": date_iso,
             })
             continue
-        ready.append({
-            "report_id": report_id,
-            "report_key": report_key,
-            "title": title,
-            "decision": "ready_for_bob_or_v92",
-            "reason": reason,
-            "date": date_iso,
-            "source": chosen.get("source"),
-            "source_url": chosen.get("url") or chosen.get("source_url"),
-            "source_title": chosen.get("title"),
-            "categories": [x for x in [report.get("editorial_category", "Editoriali"), report.get("category")] if x],
-            "counts_as_news": False,
-        })
+        ready.append(item)
 
 
-    special_publish_slots = 1
     for report in expected_special:
-        if report_already_published(report, status if isinstance(status, dict) else {}, publication_registry if isinstance(publication_registry, dict) else {}, manual_runs if isinstance(manual_runs, list) else []):
-            item = {**report, "decision": "skip", "reason": "already_published"}
-            special_already.append(item)
-            skipped.append(item)
-            continue
-        chosen, reason = choose_special_report_candidate(report_candidates, report)
+        locked = _pending_lock(str(report.get("report_key") or ""))
+        if locked:
+            locked_candidate = _pending_candidate(locked)
+            if candidate_matches_special_report(locked_candidate, report)[0]:
+                chosen, reason = locked_candidate, "canonical_source_locked"
+            else:
+                chosen, reason = None, "invalid_canonical_identity"
+        else:
+            chosen, reason = choose_special_report_candidate(report_candidates, report)
         if not chosen:
             item = {**report, "decision": "missing", "reason": reason}
             special_missing.append(item)
@@ -578,7 +625,11 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
             "categories": [x for x in ["Editoriali", report.get("category_hint")] if x],
             "counts_as_news": False,
         }
-        reserve_report(chosen, {"report_key": report.get("report_key"), "report_id": report.get("night_key"), "night_key": report.get("night_key"), "event_identity": report.get("event_name"), "event_name": report.get("event_name"), "aliases": report.get("aliases") or [], "date_local": report.get("date"), "publish_after": "06:30", "category": report.get("category_hint")}, now=now, pending_path=PENDING_REPORTS)
+        if report_already_published(item, status if isinstance(status, dict) else {}, publication_registry if isinstance(publication_registry, dict) else {}, manual_runs if isinstance(manual_runs, list) else []):
+            item.update({"decision": "skip", "reason": "already_published"})
+            special_already.append(item); skipped.append(item)
+            continue
+        reserve_report(chosen, {"report_key": report.get("report_key"), "report_id": report.get("night_key"), "night_key": report.get("night_key"), "event_identity": report.get("event_name"), "event_name": report.get("event_name"), "canonical_identity": "wrestlinginc_results", "aliases": report.get("aliases") or [], "date_local": report.get("date"), "publish_after": "06:30", "category": report.get("category_hint")}, now=now, pending_path=PENDING_REPORTS)
         special_ready.append(item)
         ready.append(item)
 
@@ -586,10 +637,40 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     # feed no longer contains its URL.
     pending_state = load_json(PENDING_REPORTS, {"reports": []})
     pending_rows = pending_state.get("reports", []) if isinstance(pending_state, dict) else []
-    for row in pending_rows:
-        if not isinstance(row, dict) or row.get("status") in {"published", "already_published"}:
+    for pending_row in pending_rows:
+        if not isinstance(pending_row, dict) or pending_row.get("status") in {"published", "already_published"}:
             continue
-        report = {**row, "source_url": row.get("source_url"), "source_title": row.get("source_title"), "report_id": row.get("report_id") or row.get("night_key"), "title": row.get("title") or row.get("source_title"), "categories": row.get("categories") or [x for x in ["Editoriali", row.get("category")] if x], "counts_as_news": False, "decision": "ready_for_bob_or_v92", "reason": "pending_queue_replay"}
+        key = str(pending_row.get("report_key") or "")
+        weekly_cfg = next((x for x in reports if isinstance(x, dict) and str(x.get("id")) == str(pending_row.get("report_id"))), None)
+        special_expected_row = next((x for x in expected_special if str(x.get("report_key")) == key), None)
+        candidate = _pending_candidate(pending_row)
+        valid = candidate_matches_report(candidate, weekly_cfg, str(pending_row.get("date_local") or "")) if weekly_cfg else bool(special_expected_row and candidate_matches_special_report(candidate, special_expected_row)[0])
+        if not valid and (weekly_cfg or special_expected_row):
+            pending_row["status"] = "invalid_canonical_identity"
+            pending_row["identity_reason"] = "invalid_canonical_identity"
+            if pending_row.get("canonical_source_locked") is True:
+                pending_row["canonical_source_locked"] = False
+        elif valid and pending_row.get("canonical_source_locked") is not True:
+            pending_row["status"] = "later_canonical_candidate_ignored"
+            pending_row["identity_reason"] = "later_canonical_candidate_ignored"
+    for row in pending_rows:
+        if not isinstance(row, dict) or row.get("status") in {"published", "already_published", "invalid_canonical_identity", "later_canonical_candidate_ignored"}:
+            continue
+        report = {**row, "source_url": row.get("source_url"), "url": row.get("source_url"), "source_title": row.get("source_title"), "report_id": row.get("report_id") or row.get("night_key"), "categories": row.get("categories") or [x for x in ["Editoriali", row.get("category")] if x], "counts_as_news": False, "decision": "ready_for_bob_or_v92", "reason": "pending_queue_replay"}
+        weekly_cfg = next((x for x in reports if isinstance(x, dict) and str(x.get("id")) == str(row.get("report_id"))), None)
+        special_expected = next((x for x in expected_special if str(x.get("report_key")) == str(row.get("report_key"))), None)
+        if weekly_cfg:
+            report["title"] = build_report_title(weekly_cfg, str(row.get("date_local") or ""))
+        elif special_expected:
+            report["title"] = special_expected["title"]
+        if not pending_due(row, now):
+            row["status"] = "waiting_publish_after"; waiting.append({**report, "decision": "waiting", "reason": "waiting_publish_after"})
+            continue
+        valid_pending = candidate_matches_report(report, weekly_cfg, str(row.get("date_local") or "")) if weekly_cfg else bool(special_expected and candidate_matches_special_report(report, special_expected)[0])
+        if not valid_pending:
+            row["status"] = "invalid_canonical_identity"
+            skipped.append({**report, "decision": "skip", "reason": "invalid_canonical_identity"})
+            continue
         if report_already_published(report, status if isinstance(status, dict) else {}, publication_registry if isinstance(publication_registry, dict) else {}, manual_runs if isinstance(manual_runs, list) else []):
             row["status"] = "already_published"; skipped.append({**report, "reason": "already_published"}); continue
         if pending_due(row, now):

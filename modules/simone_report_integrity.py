@@ -16,6 +16,7 @@ from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
 SEED_REGISTRY = ROOT / "config" / "special_events.json"
+REPORTS_CONFIG = ROOT / "config" / "reports_v92.json"
 EFFECTIVE_REGISTRY = ROOT / "state" / "newsroom" / "special_events_effective.json"
 PENDING_REPORTS = ROOT / "state" / "newsroom" / "simone_pending_reports.json"
 SCHEDULE_REPORT_DIR = ROOT / "reports"
@@ -186,9 +187,7 @@ def load_effective_registry(now: datetime | None = None) -> tuple[dict[str, Any]
     return seed, {"effective_registry_source": "static_fallback", "refresh_status": "refresh_failed_using_static_fallback", "refresh_error": "invalid_schedule_artifact", "artifact_generated_at_utc": artifact_generated_at.isoformat() if artifact_generated_at else None}
 
 
-REPORT_WORDS = re.compile(r"\b(results?|risultati|recap|report|live[\s-]+coverage|live[\s-]+results?|highlights?)\b", re.I)
-FACTUAL_NEWS = re.compile(r"\b(injur(?:y|ed)|debut|returns?|backstage|controversy|comments?|interference|wins?|won|defeats?|retains?|title[s]? (?:change|win)|new champion)\b", re.I)
-
+REPORT_WORDS = re.compile(r"\b(results?|risultati|live[\s-]+results?)\b", re.I)
 
 MONTH_NUMBERS = {name.lower(): number for number, names in enumerate(((), ("january", "jan"), ("february", "feb"), ("march", "mar"), ("april", "apr"), ("may",), ("june", "jun"), ("july", "jul"), ("august", "aug"), ("september", "sep", "sept"), ("october", "oct"), ("november", "nov"), ("december", "dec"))) for name in names}
 
@@ -203,37 +202,48 @@ def _parse_timestamp(value: str) -> datetime | None:
             return None
 
 
-def _candidate_dates(entry: dict[str, Any], registry: dict[str, Any]) -> dict[str, set[str]]:
-    content = " ".join(str(entry.get(k) or "") for k in ("title", "url", "summary", "description", "metadata"))
-    timestamps = {_parse_timestamp(str(entry.get(k) or "")) for k in ("published", "published_at", "updated")}
-    timestamps.discard(None)
-    feed_dates = {stamp.date().isoformat() for stamp in timestamps if stamp is not None}
-    years = {int(n.get("date_local", "")[:4]) for e in registry.get("events", []) if isinstance(e, dict) for n in e.get("nights", []) if isinstance(n, dict) and re.match(r"^20\d{2}", str(n.get("date_local") or ""))}
-    years.update(stamp.year for stamp in timestamps if stamp is not None)
+def candidate_date_evidence(entry: dict[str, Any], expected_date: str) -> dict[str, Any]:
+    """Apply the single canonical explicit-date-then-timestamp contract."""
+    try:
+        expected = datetime.strptime(expected_date, "%Y-%m-%d").date()
+    except (TypeError, ValueError):
+        return {"matches": False, "explicit_content_dates": set(), "feed_timestamp_dates": set()}
+    content = " ".join(str(entry.get(k) or "") for k in ("title", "url", "source_url"))
     explicit: set[str] = set()
     for year, month, day in re.findall(r"\b(20\d{2})[-/](\d{1,2})[-/](\d{1,2})\b", content):
         explicit.add(f"{int(year):04d}-{int(month):02d}-{int(day):02d}")
     for month, day, year in re.findall(r"(?<!\d)(\d{1,2})/(\d{1,2})/(20\d{2})(?!\d)", content):
         explicit.add(f"{int(year):04d}-{int(month):02d}-{int(day):02d}")
+    for month, day in re.findall(r"(?<!\d[-/])(?<![\d/])(\d{1,2})[/-](\d{1,2})(?![/\d])", content):
+        explicit.add(f"{expected.year:04d}-{int(month):02d}-{int(day):02d}")
     month_pattern = "|".join(sorted(MONTH_NUMBERS, key=len, reverse=True))
-    for month, day, year in re.findall(rf"\b({month_pattern})[\s_-]+(\d{{1,2}})(?:,?[\s_-]+(20\d{{2}}))?\b", content, re.I):
-        for resolved_year in ([int(year)] if year else years):
-            explicit.add(f"{resolved_year:04d}-{MONTH_NUMBERS[month.lower()]:02d}-{int(day):02d}")
-    for month, day in re.findall(r"(?<![\d/])(\d{1,2})/(\d{1,2})(?![/\d])", content):
-        for resolved_year in years:
-            explicit.add(f"{resolved_year:04d}-{int(month):02d}-{int(day):02d}")
-    return {"explicit_content_dates": explicit, "feed_timestamp_dates": feed_dates}
+    for month, day, year in re.findall(rf"\b({month_pattern})\s+(\d{{1,2}})(?:,?\s+(20\d{{2}}))?\b", content, re.I):
+        explicit.add(f"{int(year) if year else expected.year:04d}-{MONTH_NUMBERS[month.lower()]:02d}-{int(day):02d}")
+    stamps = {_parse_timestamp(str(entry.get(k) or "")) for k in ("published", "published_at", "updated")}
+    feed_dates = {stamp.date().isoformat() for stamp in stamps if stamp is not None}
+    if explicit:
+        matches = expected.isoformat() in explicit
+    else:
+        next_date = (expected + timedelta(days=1)).isoformat()
+        matches = bool(feed_dates & {expected.isoformat(), next_date})
+    return {"matches": matches, "explicit_content_dates": explicit, "feed_timestamp_dates": feed_dates}
 
 
 def dynamic_special_event_match(entry: dict[str, Any], registry: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
-    raw = " ".join(str(entry.get(k) or "") for k in ("title", "url", "summary", "published", "metadata"))
-    explicit_report = bool(re.search(r"\b(?:full\s+)?results?|live[\s-]+coverage|live[\s-]+results?|complete\s+recap\b", raw, re.I))
-    if not REPORT_WORDS.search(raw) or (not explicit_report and FACTUAL_NEWS.search(str(entry.get("title") or ""))):
-        return None, "distinct_factual_news_or_missing_report_wording"
-    blob = _slug(raw).replace("_", " ")
-    candidate_dates = _candidate_dates(entry, registry)
-    explicit_dates = candidate_dates["explicit_content_dates"]
-    feed_dates = candidate_dates["feed_timestamp_dates"]
+    raw = " ".join(str(entry.get(k) or "") for k in ("title", "url", "source_url"))
+    source_blob = f"{entry.get('source', '')} {entry.get('url', '')} {entry.get('source_url', '')}".lower().replace(" ", "")
+    if "wrestlinginc" not in source_blob:
+        return None, "waiting_for_canonical_results_source"
+    explicit_report = bool(re.search(r"\bresults\b|\brisultati\b", raw, re.I))
+    if not explicit_report:
+        return None, "rejected_non_results_event_article"
+    normalized_raw = _slug(raw).replace("_", " ")
+    weekly_cfg = _load(REPORTS_CONFIG, {"reports": []})
+    for weekly in weekly_cfg.get("reports", []) if isinstance(weekly_cfg, dict) else []:
+        show = _slug(str(weekly.get("show_name") or "")).replace("_", " ") if isinstance(weekly, dict) else ""
+        if show and re.search(rf"\b{re.escape(show)}\s+results\b", normalized_raw):
+            return None, "rejected_conflicting_weekly_identity"
+    blob = normalized_raw
     matches: list[tuple[int, dict[str, Any]]] = []
     for event in registry.get("events", []):
         if not isinstance(event, dict) or str(event.get("status") or "").lower() not in {"confirmed", "active"}:
@@ -248,14 +258,16 @@ def dynamic_special_event_match(entry: dict[str, Any], registry: dict[str, Any])
             if not hits:
                 continue
             night_date = str(night.get("date_local") or "")
-            explicit_match = not explicit_dates or night_date in explicit_dates
-            if not explicit_match:
+            date_evidence = candidate_date_evidence(entry, night_date)
+            if not date_evidence["matches"]:
                 continue
+            explicit_dates = date_evidence["explicit_content_dates"]
+            feed_dates = date_evidence["feed_timestamp_dates"]
             try:
                 next_date = (datetime.strptime(night_date, "%Y-%m-%d").date() + timedelta(days=1)).isoformat()
-            except Exception:
+            except ValueError:
                 next_date = ""
-            timestamp_compatible = not feed_dates or night_date in feed_dates or next_date in feed_dates
+            timestamp_compatible = bool(feed_dates & {night_date, next_date})
             night_alias_hit = next((hit for hit in hits if hit in night_aliases), None)
             score = len(_slug(hits[0])) + (200 if night_date in explicit_dates else 0) + (100 if timestamp_compatible and feed_dates else 0) + (50 if night_alias_hit else 0)
             metadata = {
@@ -265,28 +277,40 @@ def dynamic_special_event_match(entry: dict[str, Any], registry: dict[str, Any])
                 "publish_after": night.get("report_publish_after_local") or registry.get("default_report_publish_after_local") or "06:30",
                 "category_hint": event.get("category_hint") or event.get("promotion"),
                 "event_name": event.get("event_name"), "promotion": event.get("promotion"),
+                "aliases": sorted({str(alias) for alias in aliases if alias}),
+                "canonical_identity": "wrestlinginc_results",
                 "match_evidence": {"strong_alias": hits[0], "night_alias": night_alias_hit, "alias_hits": hits, "explicit_content_dates": sorted(explicit_dates), "feed_timestamp_dates": sorted(feed_dates), "explicit_date_match": night_date in explicit_dates, "feed_timestamp_compatible": timestamp_compatible, "promotion_support": str(event.get("promotion") or "").lower() in blob},
             }
             matches.append((score, metadata))
     matches.sort(key=lambda item: item[0], reverse=True)
     if not matches or (len(matches) > 1 and matches[0][0] == matches[1][0]):
         return None, "ambiguous_event_match" if matches else "event_alias_not_found"
-    return matches[0][1], "dynamic_confirmed_special_event_report"
+    return matches[0][1], "canonical_results_match"
 
 
 def reserve_report(candidate: dict[str, Any], identity: dict[str, Any], *, now: datetime, pending_path: Path = PENDING_REPORTS) -> dict[str, Any]:
+    """Reserve a validated source without allowing later URLs to reopen selection."""
     state = _load(pending_path, {"reports": []}); rows = state.get("reports", []) if isinstance(state, dict) else []
     url = normalize_url(str(candidate.get("url") or candidate.get("source_url") or "")); key = str(identity.get("report_key") or "")
+    locked = next((r for r in rows if isinstance(r, dict) and r.get("report_key") == key and r.get("canonical_source_locked") is True and r.get("status") not in {"published", "already_published"}), None)
     existing = next((r for r in rows if isinstance(r, dict) and r.get("report_key") == key and r.get("normalized_url") == url), None)
     if existing is None:
-        existing = {**identity, "source_url": url, "normalized_url": url, "source": candidate.get("source"), "source_title": candidate.get("title"), "discovered_at": now.isoformat(), "status": "waiting_publish_after", "last_checked_at": None, "readiness": None, "retry_count": 0}
+        existing = {**identity, "source_url": url, "normalized_url": url, "source": candidate.get("source"), "source_title": candidate.get("title"), "published": candidate.get("published"), "published_at": candidate.get("published_at"), "updated": candidate.get("updated"), "discovered_at": now.isoformat(), "status": "waiting_publish_after", "last_checked_at": None, "readiness": None, "retry_count": 0}
         rows.append(existing)
     else:
-        for key, value in identity.items():
+        for field, value in identity.items():
             if value is not None:
-                existing[key] = value
+                existing[field] = value
+    if locked is None:
+        existing["canonical_source_locked"] = True
+        existing["identity_reason"] = "canonical_source_locked"
+    elif locked is not existing:
+        existing["canonical_source_locked"] = False
+        existing["status"] = "later_canonical_candidate_ignored"
+        existing["identity_reason"] = "later_canonical_candidate_ignored"
+        existing["locked_source_url"] = locked.get("source_url")
     state = {"updated_at": now.isoformat(), "reports": rows}; _write(pending_path, state)
-    return existing
+    return locked or existing
 
 
 OUTCOME_RE = re.compile(r"\b(defeated|defeats|winner|won|retained|retains|pinfall|submission|disqualification|via pin|via submission|new champion)\b", re.I)
