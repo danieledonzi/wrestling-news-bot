@@ -289,13 +289,17 @@ def test_invalid_old_pending_url_does_not_veto_current_canonical(tmp_path, monke
         "source_title": "Tony Khan Downplays Report About Restricted Pyro At Wembley Stadium For AEW All In",
         "date_local": "2026-08-30", "publish_date_local": "2026-08-31",
         "publish_after": "06:30", "status": "waiting_publish_after",
+        "canonical_source_locked": True, "identity_reason": "canonical_source_locked",
     }
     paths["PENDING_REPORTS"].write_text(json.dumps({"reports": [pyro]}))
     result = simone.run_simone({"report_candidates": [canonical]})
     assert [row["source_url"] for row in result["ready_reports"] if row["report_key"] == key] == [ALL_IN_URL]
     rows = json.loads(paths["PENDING_REPORTS"].read_text())["reports"]
-    assert next(row for row in rows if "pyro" in row["source_url"])["status"] == "invalid_canonical_identity"
-    assert next(row for row in rows if row["source_url"] == ALL_IN_URL)["status"] != "canonical_identity_collision"
+    stale = next(row for row in rows if "pyro" in row["source_url"])
+    replacement = next(row for row in rows if row["source_url"] == ALL_IN_URL)
+    assert stale["status"] == "invalid_canonical_identity"
+    assert stale["canonical_source_locked"] is False
+    assert replacement["canonical_source_locked"] is True
 
 
 def test_terminal_pending_row_is_never_rewritten_by_collision_scan(tmp_path, monkeypatch):
@@ -305,11 +309,24 @@ def test_terminal_pending_row_is_never_rewritten_by_collision_scan(tmp_path, mon
     terminal = {
         "report_key": key, "source_url": "https://www.wrestlinginc.com/old",
         "normalized_url": "https://www.wrestlinginc.com/old", "status": "published",
+        "canonical_source_locked": True,
     }
     paths["PENDING_REPORTS"].write_text(json.dumps({"reports": [terminal]}))
     simone.run_simone({"report_candidates": [canonical]})
     rows = json.loads(paths["PENDING_REPORTS"].read_text())["reports"]
-    assert next(row for row in rows if row["source_url"].endswith("/old"))["status"] == "published"
+    old = next(row for row in rows if row["source_url"].endswith("/old"))
+    replacement = next(row for row in rows if row["source_url"] == ALL_IN_URL)
+    assert old["status"] == "published" and old["canonical_source_locked"] is True
+    assert replacement["canonical_source_locked"] is True
+
+
+def test_pending_lock_ignores_terminal_rows(tmp_path, monkeypatch):
+    monkeypatch.setattr(simone, "PENDING_REPORTS", tmp_path / "pending.json")
+    for status in ["published", "already_published"]:
+        row = {"report_key": "all_in", "status": status, "canonical_source_locked": True}
+        simone.PENDING_REPORTS.write_text(json.dumps({"reports": [row]}))
+        assert simone._pending_lock("all_in") is None
+        assert json.loads(simone.PENDING_REPORTS.read_text())["reports"][0] == row
 
 
 def test_publisher_history_requires_matching_canonical_url(tmp_path, monkeypatch):

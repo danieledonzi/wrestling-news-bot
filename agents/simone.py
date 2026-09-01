@@ -447,7 +447,13 @@ def choose_report_candidate(candidates: list[dict[str, Any]], report: dict[str, 
 def _pending_lock(report_key: str) -> dict[str, Any] | None:
     state = load_json(PENDING_REPORTS, {"reports": []})
     rows = state.get("reports", []) if isinstance(state, dict) else []
-    return next((row for row in rows if isinstance(row, dict) and row.get("report_key") == report_key and row.get("canonical_source_locked") is True), None)
+    return next((
+        row for row in rows
+        if isinstance(row, dict)
+        and row.get("report_key") == report_key
+        and row.get("canonical_source_locked") is True
+        and row.get("status") not in {"published", "already_published"}
+    ), None)
 
 
 def _pending_candidate(row: dict[str, Any]) -> dict[str, Any]:
@@ -484,6 +490,9 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
         if not valid and (weekly_cfg or special_report):
             row["status"] = "invalid_canonical_identity"
             row["identity_reason"] = "invalid_canonical_identity"
+            if row.get("canonical_source_locked") is True:
+                row["canonical_source_locked"] = False
+                locked_keys.discard(key)
         elif valid and key not in locked_keys:
             row["canonical_source_locked"] = True
             row["identity_reason"] = "canonical_source_locked"
@@ -636,6 +645,8 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
         if not valid and (weekly_cfg or special_expected_row):
             pending_row["status"] = "invalid_canonical_identity"
             pending_row["identity_reason"] = "invalid_canonical_identity"
+            if pending_row.get("canonical_source_locked") is True:
+                pending_row["canonical_source_locked"] = False
         elif valid and pending_row.get("canonical_source_locked") is not True:
             pending_row["status"] = "later_canonical_candidate_ignored"
             pending_row["identity_reason"] = "later_canonical_candidate_ignored"

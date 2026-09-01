@@ -292,7 +292,7 @@ def reserve_report(candidate: dict[str, Any], identity: dict[str, Any], *, now: 
     """Reserve a validated source without allowing later URLs to reopen selection."""
     state = _load(pending_path, {"reports": []}); rows = state.get("reports", []) if isinstance(state, dict) else []
     url = normalize_url(str(candidate.get("url") or candidate.get("source_url") or "")); key = str(identity.get("report_key") or "")
-    locked = next((r for r in rows if isinstance(r, dict) and r.get("report_key") == key and r.get("canonical_source_locked") is True), None)
+    locked = next((r for r in rows if isinstance(r, dict) and r.get("report_key") == key and r.get("canonical_source_locked") is True and r.get("status") not in {"published", "already_published"}), None)
     existing = next((r for r in rows if isinstance(r, dict) and r.get("report_key") == key and r.get("normalized_url") == url), None)
     if existing is None:
         existing = {**identity, "source_url": url, "normalized_url": url, "source": candidate.get("source"), "source_title": candidate.get("title"), "published": candidate.get("published"), "published_at": candidate.get("published_at"), "updated": candidate.get("updated"), "discovered_at": now.isoformat(), "status": "waiting_publish_after", "last_checked_at": None, "readiness": None, "retry_count": 0}
