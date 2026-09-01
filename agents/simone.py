@@ -539,6 +539,23 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
         else:
             chosen, reason = choose_report_candidate(report_candidates, report, date_iso)
         if chosen:
+            item = {
+                "report_id": report_id,
+                "report_key": report_key,
+                "title": title,
+                "decision": "ready_for_bob_or_v92",
+                "reason": reason,
+                "date": date_iso,
+                "source": chosen.get("source"),
+                "source_url": chosen.get("url") or chosen.get("source_url"),
+                "source_title": chosen.get("title"),
+                "categories": [x for x in [report.get("editorial_category", "Editoriali"), report.get("category")] if x],
+                "counts_as_news": False,
+            }
+            if report_already_published(item, status if isinstance(status, dict) else {}, publication_registry if isinstance(publication_registry, dict) else {}, manual_runs if isinstance(manual_runs, list) else []):
+                item.update({"decision": "skip", "reason": "already_published"})
+                skipped.append(item)
+                continue
             reservation = reserve_report(chosen, {
                 "report_key": report_key, "report_id": report_id, "event_identity": report.get("show_name"), "canonical_identity": "wrestlinginc_results",
                 "date_local": date_iso, "publish_after": report.get("publish_after") or "06:30",
@@ -566,23 +583,6 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
                 "reason": reason,
                 "date": date_iso,
             })
-            continue
-        item = {
-            "report_id": report_id,
-            "report_key": report_key,
-            "title": title,
-            "decision": "ready_for_bob_or_v92",
-            "reason": reason,
-            "date": date_iso,
-            "source": chosen.get("source"),
-            "source_url": chosen.get("url") or chosen.get("source_url"),
-            "source_title": chosen.get("title"),
-            "categories": [x for x in [report.get("editorial_category", "Editoriali"), report.get("category")] if x],
-            "counts_as_news": False,
-        }
-        if report_already_published(item, status if isinstance(status, dict) else {}, publication_registry if isinstance(publication_registry, dict) else {}, manual_runs if isinstance(manual_runs, list) else []):
-            item.update({"decision": "skip", "reason": "already_published"})
-            skipped.append(item)
             continue
         ready.append(item)
 

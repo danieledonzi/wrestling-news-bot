@@ -93,6 +93,22 @@ def test_unrelated_url_does_not_prove_report_key_published():
     assert simone.report_already_published(report, correct, {"items": []}, [])
 
 
+def test_published_weekly_canonical_url_skips_once_without_reservation(tmp_path, monkeypatch):
+    paths, _ = _isolated_simone(tmp_path, monkeypatch, datetime(2026, 8, 25, 6, 30, tzinfo=ROME))
+    report = weekly("wwe_raw")
+    reports_path = tmp_path / "reports.json"
+    reports_path.write_text(json.dumps({"reports": [report]}))
+    monkeypatch.setattr(simone, "REPORTS_CONFIG", reports_path)
+    source_url = "https://www.wrestlinginc.com/wwe-raw-results-8-24"
+    paths["REPORT_STATUS_FILE"].write_text(json.dumps({"wwe_raw_2026_08_24": {"status": "published", "source_url": source_url}}))
+
+    result = simone.run_simone({"report_candidates": [candidate("WWE Raw Results 8/24 - Main Event", source_url)]})
+
+    assert [row["reason"] for row in result["skipped_reports"]] == ["already_published"]
+    pending = json.loads(paths["PENDING_REPORTS"].read_text()) if paths["PENDING_REPORTS"].exists() else {"reports": []}
+    assert pending["reports"] == []
+
+
 def test_two_distinct_reports_same_morning_are_both_canonical():
     all_in = event_report("aew_all_in_2026")
     heatwave = event_report("nxt_heatwave_2026")
