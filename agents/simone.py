@@ -521,7 +521,10 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
             publish_date = (datetime.strptime(str(match.get("date_local")), "%Y-%m-%d").date() + timedelta(days=1)).isoformat()
         except Exception:
             publish_date = str(match.get("date_local") or "")
-        reserve_report(candidate, {**match, "report_id": match.get("night_key"), "event_identity": match.get("event_name"), "event_name": match.get("event_name"), "aliases": match.get("aliases") or [], "publish_date_local": publish_date, "category": match.get("category_hint"), "title": candidate.get("title"), "categories": [x for x in ["Editoriali", match.get("category_hint")] if x], "counts_as_news": False}, now=now, pending_path=PENDING_REPORTS)
+        canonical_report = {**match, "report_id": match.get("night_key"), "event_identity": match.get("event_name"), "event_name": match.get("event_name"), "aliases": match.get("aliases") or [], "publish_date_local": publish_date, "category": match.get("category_hint"), "title": candidate.get("title"), "source_url": candidate.get("normalized_url") or candidate.get("url") or candidate.get("source_url"), "categories": [x for x in ["Editoriali", match.get("category_hint")] if x], "counts_as_news": False}
+        if report_already_published(canonical_report, status if isinstance(status, dict) else {}, publication_registry if isinstance(publication_registry, dict) else {}, manual_runs if isinstance(manual_runs, list) else []):
+            continue
+        reserve_report(candidate, canonical_report, now=now, pending_path=PENDING_REPORTS)
 
     ready: list[dict[str, Any]] = []
     waiting: list[dict[str, Any]] = []
