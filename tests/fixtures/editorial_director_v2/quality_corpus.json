@@ -1,0 +1,61 @@
+{
+  "schema_version": "owtv_editorial_director_fixture_v2",
+  "provenance": "Canonical ED-1 48-hour Shadow evidence bundle",
+  "semantic_invariants": [
+    "important_title_change_high_valuation",
+    "consequential_return_debut_signing",
+    "meaningful_injury_development",
+    "weak_reaction_anecdote_demotion",
+    "ospreay_song_soft_curiosity",
+    "big_e_reaction_weak",
+    "bret_hart_retrospective_weak",
+    "central_fact_over_incidental_entity",
+    "current_story_promotion_category",
+    "death_context_negative",
+    "incidental_netflix_not_business",
+    "meaningful_ple_card_change"
+  ],
+  "relations": [
+    {
+      "fixture_id": "kofi_creed_vs_casino_gauntlet",
+      "pair_id": "pair_sr_1bc1bcbb0219342701eb38561590255fa1a0b19bf206cabf12c26cbd67a0808b",
+      "left_title": "Kofi Kingston and Austin Creed Make AEW Debut at All In 2026 as The New Level",
+      "right_title": "Spoiler on the Planned Winner for Casino Gauntlet Match at AEW All In",
+      "expected_decision": "NO_MATCH",
+      "gold_duplicate": false
+    },
+    {
+      "fixture_id": "bischoff_sting_son_vs_moxley",
+      "pair_id": "pair_sr_3f134723d4baafa8af06c7e369d4ba3d9226d2af1e619ba16ad641a518e645d5",
+      "left_title": "Eric Bischoff Warns AEW Is Pushing Sting’s Son Before He’s Ready",
+      "right_title": "Eric Bischoff Calls Jon Moxley a Stone Cold Steve Austin Wannabe",
+      "expected_decision": "NO_MATCH",
+      "gold_duplicate": false
+    },
+    {
+      "fixture_id": "bischoff_sting_son_vs_omega_ospreay",
+      "pair_id": "pair_sr_9ca31840129301fdfc15a4848584c9384ee81fb782534305b38f08a9b7a97058",
+      "left_title": "Eric Bischoff Warns AEW Is Pushing Sting’s Son Before He’s Ready",
+      "right_title": "Eric Bischoff Compares Kenny Omega vs. Will Ospreay to a Nasty Boys Match",
+      "expected_decision": "NO_MATCH",
+      "gold_duplicate": false
+    },
+    {
+      "fixture_id": "bischoff_moxley_vs_omega_ospreay",
+      "pair_id": "pair_sr_08f427e3dcde2a4ae54ebdc7607fe78042198e4c5611335d8464317d60b6b420",
+      "left_title": "Eric Bischoff Calls Jon Moxley a Stone Cold Steve Austin Wannabe",
+      "right_title": "Eric Bischoff Compares Kenny Omega vs. Will Ospreay to a Nasty Boys Match",
+      "expected_decision": "NO_MATCH",
+      "gold_duplicate": false
+    },
+    {
+      "fixture_id": "okada_international_title_change",
+      "pair_id": "pair_sr_e650f32f6add6337b4c8a193aebf1f098c182971c6fd3d5ed78ccd5455bc67c6",
+      "left_title": "Kazuchika Okada Wins AEW International Championship at All In 2026",
+      "right_title": "Kazuchika Okada Wins Three-Way At AEW All In 2026 To Become New International Champ",
+      "expected_decision": "DUPLICATE",
+      "gold_duplicate": true
+    }
+  ],
+  "owner_adjudication_required": ["soft_select_precision", "business_breadth_exact_labels"]
+}

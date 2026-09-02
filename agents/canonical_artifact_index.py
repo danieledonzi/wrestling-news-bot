@@ -335,18 +335,20 @@ class CanonicalArtifactIndex:
         artifact_by_candidate: dict[str, str] = {}
         for candidate in snapshot.get("candidates", []):
             cid = candidate.get("candidate_id")
-            package = {"artifact_schema_version": "owtv_editorial_director_shadow_v1",
+            package = {"artifact_schema_version": "owtv_editorial_director_shadow_v2",
                 "candidate": {k: candidate.get(k) for k in ("candidate_id", "title", "summary", "source", "feed_url", "url", "published", "origin")},
                 "input_coverage": candidate.get("input_coverage"), "director_output": rows.get(cid),
                 "relations": [x for x in relations if x.get("left_id") == cid or x.get("right_id") == cid],
                 "run_id": snapshot.get("run_id"), "logical_request_id": result.get("logical_request_id"),
                 "input_digest": snapshot.get("input_digest"), "validation_status": result.get("status"),
+                "validation_attempts": result.get("validation_attempts", []),
+                "policy_version": result.get("policy_version"),
                 "legacy_menzo": legacy.get(cid)}
             data = json.dumps(package, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
             identity = {"url": candidate.get("url"), "source_url": candidate.get("url"), "title": candidate.get("title")}
             retained = self._retain(identity, data, stem="editorial-director-shadow", extension="json", fmt="json",
                 agent="Menzo", stage="selection", roles=["diagnostic_output"], purpose="pipeline_observability",
-                authority="diagnostic", artifact_schema={"status": "known", "version": "owtv_editorial_director_shadow_v1"})
+                authority="diagnostic", artifact_schema={"status": "known", "version": "owtv_editorial_director_shadow_v2"})
             if retained:
                 stable_cid = content_id(identity)
                 run_token = hashlib.sha256(self.run_id.encode("utf-8")).hexdigest()[:20]
@@ -354,12 +356,13 @@ class CanonicalArtifactIndex:
                         f"editorial-director-shadow-{hashlib.sha256(data).hexdigest()[:20]}.json")
                 artifact_path = path.resolve().relative_to(self.repository_root).as_posix()
                 artifact_by_candidate[str(cid)] = artifact_path
-                from agents.canonical_event_ledger import active_event
-                active_event("stage_completed", "Menzo", "selection", "success", item=identity,
-                             result="editorial_director_shadow_evaluated",
-                             reason_code="editorial_director_shadow", artifact=artifact_path)
+                if result.get("status") == "VALIDATED":
+                    from agents.canonical_event_ledger import active_event
+                    active_event("stage_completed", "Menzo", "selection", "success", item=identity,
+                                 result="editorial_director_shadow_evaluated",
+                                 reason_code="editorial_director_shadow", artifact=artifact_path)
         from agents.canonical_event_ledger import active_event
-        for relation in relations:
+        for relation in relations if result.get("status") == "VALIDATED" else []:
             paths = [artifact_by_candidate.get(str(relation.get(key))) for key in ("left_id", "right_id")]
             path = next((value for value in paths if value), "")
             if path:
