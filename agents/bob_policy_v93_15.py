@@ -84,7 +84,7 @@ TRANSCRIPTION_CREDIT_FOOTER_PATTERNS = [
     ),
 ]
 P_RE = re.compile(r"<p>(.*?)</p>", re.S | re.I)
-TERMINAL_P_RE = re.compile(r"(<p(?:\s+[^>]*)?>(.*?)</p>)\s*$", re.S | re.I)
+TERMINAL_P_RE = re.compile(r"<p(?:\s+[^>]*)?>(.*?)</p>", re.S | re.I)
 BLOCKQUOTE_RE = re.compile(r"<blockquote>(.*?)</blockquote>", re.S | re.I)
 EMBED_LINE_RE = re.compile(r"(?m)^\s*(https?://(?:www\.)?(?:x\.com|twitter\.com|instagram\.com|youtube\.com|youtu\.be|tiktok\.com|threads\.net|facebook\.com|bsky\.app)/\S+)\s*$", re.I)
 
@@ -123,10 +123,13 @@ def should_remove_paragraph(inner: str) -> str:
 def strip_terminal_transcription_credit(body_html: str) -> tuple[str, list[dict[str, str]]]:
     """Remove only a terminal standalone source-transcription credit footer."""
     text = body_html or ""
-    match = TERMINAL_P_RE.search(text)
-    if not match:
+    matches = list(TERMINAL_P_RE.finditer(text))
+    if not matches:
         return body_html, []
-    footer = clean_text(match.group(2))
+    match = matches[-1]
+    if text[match.end():].strip():
+        return body_html, []
+    footer = clean_text(match.group(1))
     if not any(pattern.fullmatch(footer) for pattern in TRANSCRIPTION_CREDIT_FOOTER_PATTERNS):
         return body_html, []
     cleaned = (text[:match.start()] + text[match.end():]).rstrip()
