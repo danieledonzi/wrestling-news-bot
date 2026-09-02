@@ -175,6 +175,30 @@ def test_scope_specific_endpoint_maps_cannot_collide():
     assert relations[1] == {"ref":"r1", "scope":"recent_history", "left_ref":"c0", "right_ref":"h0"}
 
 
+def test_canonical_candidate_url_variants_collapse_before_refs_relations_and_artifacts(tmp_path, monkeypatch):
+    from agents.canonical_artifact_index import CanonicalArtifactIndex
+    board={"news_candidates_for_menzo":[
+        {"source":"feed", "title":"First occurrence", "url":"https://www.example.com/a", "summary":"fact"},
+        {"source":"feed", "title":"Duplicate occurrence", "url":"https://example.com/a", "summary":"fact"},
+        {"source":"feed", "title":"Other", "url":"https://example.com/b", "summary":"other"},
+    ]}
+    monkeypatch.setattr(ed.menzo_duplicate_scorer, "score_pair", lambda *_: {
+        "exact_duplicate":False, "above_threshold":True, "scorer_version":"test", "score":.7,
+        "threshold":.55, "components":{}})
+    s=ed.capture_opportunity(board, run_id="run", observation_timestamp="now", publisher_count_24h=0, history=[])
+    assert len(s["candidates"]) == 2
+    assert len({row["candidate_id"] for row in s["candidates"]}) == 2
+    assert s["observed"]["canonical_candidate_duplicates_collapsed"] == 1
+    assert [row["ref"] for row in ed.provider_input(s)["candidates"]] == ["c0", "c1"]
+    assert ed.provider_input(s)["authorized_relations"][0]["left_ref"] != ed.provider_input(s)["authorized_relations"][0]["right_ref"]
+    index=CanonicalArtifactIndex("run", index_path=tmp_path/"index.jsonl", material_root=tmp_path/"material",
+                                 repository_root=tmp_path, enabled=True)
+    monkeypatch.setattr(ed, "record_gemini_attempt", lambda **kw: None)
+    result=ed.evaluate(s, {}, provider=lambda *_: valid(s), artifact_index=index)
+    assert result["status"] == "VALIDATED" and len(result["output"]["candidates"]) == 2
+    assert len(list((tmp_path/"material").rglob("editorial-director-shadow-*.json"))) == 2
+
+
 def test_unresolved_internal_relation_avoids_provider_call():
     s=snapshot(1)
     s["authorized_relations"]=[{"pair_id":"broken", "scope":"same_run",
@@ -209,6 +233,25 @@ def test_material_update_accepts_natural_language_temporal_grounding_without_inv
         output["relations"][0]["temporal_basis"]=absent
         canonical,failures,_=ed.canonicalize_output(output,s)
         assert canonical is None and any(x["family"] == "material_update_temporal_basis" for x in failures)
+
+
+def test_provider_output_bytes_measure_exact_raw_text_for_sdk_string_unicode_and_parse_failure(monkeypatch):
+    s=snapshot(1); monkeypatch.setattr(ed, "record_gemini_attempt", lambda **kw: None)
+    raw=json.dumps(valid(s), ensure_ascii=False)
+    class SDKResponse:
+        text=raw
+    sdk=ed.evaluate(s, {}, provider=lambda *_: SDKResponse())
+    assert sdk["validation_attempts"][0]["provider_output_bytes"] == len(raw.encode("utf-8"))
+    unicode_raw=raw.replace("A fact", "Fatto: è così")
+    direct=ed.evaluate(s, {}, provider=lambda *_: unicode_raw)
+    assert direct["validation_attempts"][0]["provider_output_bytes"] == len(unicode_raw.encode("utf-8"))
+    malformed="{malformed: è"
+    failed=ed.evaluate(s, {}, provider=lambda *_: malformed)
+    assert len(failed["validation_attempts"]) == 2
+    assert all(row["provider_output_bytes"] == len(malformed.encode("utf-8")) for row in failed["validation_attempts"])
+    mapping=ed.evaluate(s, {}, provider=lambda *_: valid(s))
+    assert mapping["validation_attempts"][0]["provider_output_bytes"] is None
+    assert mapping["validation_attempts"][0]["provider_output_bytes_available"] is False
 
 
 def test_frozen_quality_corpus_has_required_exact_duplicate_evidence():

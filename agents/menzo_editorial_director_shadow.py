@@ -78,7 +78,10 @@ def costly_work_eligibility() -> tuple[bool, str]:
 def _finalize_snapshot(envelope: dict[str, Any], *, forced_exceeded: bool = False) -> dict[str, Any]:
     canonical = json.dumps(envelope, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
     counts = (len(envelope["candidates"]), len(envelope["authorized_relations"]))
-    envelope["observed"] = {"candidate_count": counts[0], "relation_count": counts[1], "serialized_input_bytes": 0}
+    duplicate_ids = envelope.get("canonical_candidate_duplicates_collapsed", [])
+    envelope["observed"] = {"candidate_count": counts[0], "relation_count": counts[1], "serialized_input_bytes": 0,
+                            "canonical_candidate_duplicates_collapsed": len(duplicate_ids),
+                            "canonical_candidate_duplicate_ids": copy.deepcopy(duplicate_ids)}
     envelope["limits"] = {"max_candidates": MAX_CANDIDATES, "max_relations": MAX_RELATIONS,
                           "max_input_bytes": MAX_INPUT_BYTES, "max_output_tokens": MAX_OUTPUT_TOKENS}
     envelope["input_digest"] = hashlib.sha256(canonical).hexdigest()
@@ -102,7 +105,17 @@ def _finalize_snapshot(envelope: dict[str, Any], *, forced_exceeded: bool = Fals
 def capture_opportunity(massy_board: Mapping[str, Any], *, run_id: str, observation_timestamp: str,
                         publisher_count_24h: int, history: list[dict[str, Any]]) -> dict[str, Any]:
     raw = massy_board.get("news_candidates_for_menzo", [])
-    candidates = [c for item in raw if isinstance(item, Mapping) and (c := _candidate(item))]
+    captured = [c for item in raw if isinstance(item, Mapping) and (c := _candidate(item))]
+    candidates = []
+    seen_candidate_ids: set[str] = set()
+    duplicate_candidate_ids = []
+    for candidate in captured:
+        candidate_id = candidate["candidate_id"]
+        if candidate_id in seen_candidate_ids:
+            duplicate_candidate_ids.append(candidate_id)
+            continue
+        seen_candidate_ids.add(candidate_id)
+        candidates.append(candidate)
     safe_history = []
     for item in history:
         if not isinstance(item, Mapping):
@@ -119,7 +132,8 @@ def capture_opportunity(massy_board: Mapping[str, Any], *, run_id: str, observat
     envelope = {"run_id": run_id, "observation_timestamp": observation_timestamp,
                 "publisher_count_rolling_24h": int(publisher_count_24h), "policy_reference": 30,
                 "remaining_slots": max(0, 30 - int(publisher_count_24h)), "candidates": candidates,
-                "authorized_relations": [], "publisher_history_12h": safe_history}
+                "authorized_relations": [], "publisher_history_12h": safe_history,
+                "canonical_candidate_duplicates_collapsed": duplicate_candidate_ids}
     if len(candidates) > MAX_CANDIDATES:
         return _finalize_snapshot(envelope, forced_exceeded=True)
     relations = []
@@ -307,6 +321,14 @@ def _decode(response: Any) -> Any:
     return json.loads(text) if isinstance(text, str) else text
 
 
+def _raw_provider_output_bytes(response: Any) -> int | None:
+    """Measure only provider text actually consumed by ``_decode``; mappings have no raw text."""
+    if isinstance(response, str):
+        return len(response.encode("utf-8"))
+    text = getattr(response, "text", None)
+    return len(text.encode("utf-8")) if isinstance(text, str) else None
+
+
 def build_prompt(snapshot: Mapping[str, Any], validation_errors: list[dict[str, Any]] | None = None) -> str:
     policy = POLICY_PATH.read_text(encoding="utf-8")
     prompt = (f"FROZEN_POLICY_VERSION={POLICY_VERSION}\nFROZEN_POLICY_SHA256={hashlib.sha256(policy.encode()).hexdigest()}\n"
@@ -367,10 +389,12 @@ def evaluate(snapshot: Mapping[str, Any], legacy_menzo: Mapping[str, Any], *, pr
         except Exception as exc:
             decoded = None
             output, failures, canonicalized = None, [{"family": "parse_json", "detail": type(exc).__name__}], []
+        raw_output_bytes = _raw_provider_output_bytes(response)
         attempt_telemetry = {"attempt": "repair" if repair else "primary", "attempt_index": index,
                              "valid": not failures, "validation_families": failures,
                              "canonicalizations": canonicalized,
-                             "provider_output_bytes": len(response.encode()) if isinstance(response, str) else len(json.dumps(decoded, default=str).encode())}
+                             "provider_output_bytes": raw_output_bytes,
+                             "provider_output_bytes_available": raw_output_bytes is not None}
         base["validation_attempts"].append(attempt_telemetry)
         if failures:
             request.resolve_deferred(False, error_terminal=repair)
