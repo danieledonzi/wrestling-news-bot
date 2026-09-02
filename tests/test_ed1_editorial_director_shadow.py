@@ -13,27 +13,21 @@ def snapshot(count=1, history=None):
 
 
 def valid(s):
-    return {'schema_version':ed.SCHEMA_VERSION,'policy_version':ed.POLICY_VERSION,
-      'candidates':[{'candidate_id':x['candidate_id'],'editorial_class':'SHOULD_PUBLISH','recommended_action':'SELECT','relative_rank':i+1,'category':'WWE','story_core':'A factual event','confidence':'HIGH','reason_codes':['HARD_NEWS']} for i,x in enumerate(s['candidates'])], 'relations':[]}
+    return {'candidates':[{'ref':f'c{i}','editorial_class':'SHOULD_PUBLISH','recommended_action':'SELECT','category':'WWE','story_core':'A factual event'} for i,_x in enumerate(s['candidates'])],
+            'relations':[{'ref':f'r{i}','decision':'NO_MATCH'} for i,_x in enumerate(s['authorized_relations'])]}
 
 
 def test_provider_schema_uses_supported_exact_version_enums():
-    schema=json.loads(Path('config/editorial_director_output_schema_v1.json').read_text())
-    for field, expected in (
-        ('schema_version', 'owtv_editorial_director_output_v1'),
-        ('policy_version', 'owtv_editorial_director_policy_v1'),
-    ):
-        version_schema=schema['properties'][field]
-        assert version_schema == {'type': 'string', 'enum': [expected]}
-        assert 'const' not in version_schema
+    schema=json.loads(Path('config/editorial_director_output_schema_v2.json').read_text())
+    assert set(schema['required']) == {'candidates', 'relations'}
+    assert 'schema_version' not in schema['properties'] and 'policy_version' not in schema['properties']
 
 
-def test_local_validation_still_rejects_inexact_versions():
+def test_local_canonical_result_owns_exact_versions():
     s=snapshot()
-    for field in ('schema_version', 'policy_version'):
-        output=valid(s)
-        output[field]=f'wrong_{field}'
-        assert 'invalid schema or policy version' in ed.validate_output(output, s)
+    output, failures, _ = ed.canonicalize_output(valid(s), s)
+    assert not failures and output['schema_version'] == ed.SCHEMA_VERSION
+    assert output['policy_version'] == ed.POLICY_VERSION
 
 
 def test_flag_defaults_false_and_capture_is_deep_copy(monkeypatch):
@@ -58,7 +52,7 @@ def test_prompt_is_frozen_policy_and_input_excludes_legacy_editorial_fields():
     board={'news_candidates_for_menzo':[{'title':'A','url':'https://x.test/a','summary':'fact','score':99,'category_hint':'Business','reason':'legacy'}]}
     s=ed.capture_opportunity(board,run_id='r',observation_timestamp='t',publisher_count_24h=0,history=[])
     prompt=ed.build_prompt(s); input_text=prompt.split('INPUT=',1)[1]
-    assert ed.POLICY_VERSION in prompt and 'keyword present ≠ central fact' in prompt and 'same person != duplicate' in prompt
+    assert ed.POLICY_VERSION in prompt and 'Incidental people' in prompt and 'same commentator != duplicate' in prompt
     assert all(token not in input_text for token in ('"score"','category_hint','"reason"'))
 
 
@@ -75,8 +69,8 @@ def test_validation_coverage_and_material_update():
     s=snapshot(); value=valid(s); value['candidates']=[]
     assert any('coverage' in x for x in ed.validate_output(value,s))
     s['authorized_relations']=[{'pair_id':'p','scope':'same_run','left_id':'a','right_id':'b'}]
-    value=valid(s); value['relations']=[{'pair_id':'p','scope':'same_run','left_id':'a','right_id':'b','decision':'MATERIAL_UPDATE','new_fact':'x','temporal_basis':'today','confidence':'HIGH','reason_codes':[]}]
-    assert any('MATERIAL_UPDATE' in x for x in ed.validate_output(value,s))
+    value=valid(s); value['relations']=[{'ref':'r0','decision':'MATERIAL_UPDATE','new_fact':'x','temporal_basis':'BECAME_KNOWN_AFTER'}]
+    assert 'material_update_scope' in ed.validate_output(value,s)
 
 
 def test_oversize_zero_attempts(monkeypatch):
@@ -142,8 +136,8 @@ def test_relation_event_has_pair_id_and_joinable_artifact(tmp_path):
     from agents.canonical_artifact_index import CanonicalArtifactIndex
     from agents.canonical_event_ledger import CanonicalEventLedger, clear_active_ledger, install_active_ledger
     s=snapshot(2); left,right=[x['candidate_id'] for x in s['candidates']]
-    relation={'pair_id':'pair_sr_test','scope':'same_run','left_id':left,'right_id':right,'decision':'NO_MATCH','new_fact':None,'temporal_basis':None,'confidence':'HIGH','reason_codes':['DISTINCT_FACT']}
-    out=valid(s); out['relations']=[relation]
+    s['authorized_relations']=[{'pair_id':'pair_sr_test','scope':'same_run','left_id':left,'right_id':right}]
+    provider=valid(s); out,failures,_=ed.canonicalize_output(provider,s); assert not failures
     ledger_path=tmp_path/'events.jsonl'; install_active_ledger(CanonicalEventLedger('run',path=ledger_path,enabled=True))
     index=CanonicalArtifactIndex('run',index_path=tmp_path/'index.jsonl',material_root=tmp_path/'material',repository_root=tmp_path,enabled=True)
     try: index.observe_editorial_director_shadow(s,out,{}, {'logical_request_id':'lrq_test','status':'VALIDATED'})
@@ -234,16 +228,13 @@ def test_lazy_pair_builders_preserve_list_identity_and_order():
     assert build_recent_history_pair_specs(candidates,history)==list(iter_recent_history_pair_specs(candidates,history))
 
 
-def test_closed_relation_scalar_and_reason_code_types():
+def test_relation_semantic_scalar_types_and_removed_fields():
     s=snapshot(); supplied={'pair_id':'p','scope':'recent_history','left_id':'a','right_id':'b'}
     s['authorized_relations']=[supplied]
-    base={'pair_id':'p','scope':'recent_history','left_id':'a','right_id':'b','decision':'NO_MATCH',
-          'new_fact':None,'temporal_basis':None,'confidence':'HIGH','reason_codes':['DISTINCT']}
-    invalid=[('new_fact',{}),('new_fact',[]),('temporal_basis',{}),('reason_codes',[123]),
-             ('reason_codes',['']),('reason_codes',['x'*65])]
-    for field,value in invalid:
-        output=valid(s); output['relations']=[{**base,field:value}]
-        assert ed.validate_output(output,s), (field,value)
+    output=valid(s); output['relations']=[{'ref':'r0','decision':'NO_MATCH','confidence':'BAD','reason_codes':[123]}]
+    canonical,failures,telemetry=ed.canonicalize_output(output,s)
+    assert not failures and canonical['relations'][0]['decision']=='NO_MATCH'
+    assert sum(x['family']=='locally_canonicalized_extra_field' for x in telemetry)==2
 
 
 def test_shadow_economics_reject_invalid_v3_integrity_despite_available_flag():
@@ -259,12 +250,10 @@ def test_shadow_economics_reject_invalid_v3_integrity_despite_available_flag():
 def test_final_decorated_snapshot_crossing_bound_is_oversize_and_zero_call(monkeypatch):
     board={'news_candidates_for_menzo':[{'title':'A','url':'https://size.test/a','summary':'x'*2000}]}
     baseline=ed.capture_opportunity(board,run_id='run',observation_timestamp='now',publisher_count_24h=0,history=[])
-    pre={k:v for k,v in baseline.items() if k not in {'observed','limits','limit_status','input_digest'}}
-    preliminary_size=len(json.dumps(pre,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode())
-    monkeypatch.setattr(ed,'MAX_INPUT_BYTES',preliminary_size+10)
+    provider_size=len(json.dumps(ed.provider_input(baseline),ensure_ascii=False,sort_keys=True,separators=(',',':')).encode())
+    monkeypatch.setattr(ed,'MAX_INPUT_BYTES',provider_size-1)
     result=ed.capture_opportunity(board,run_id='run',observation_timestamp='now',publisher_count_24h=0,history=[])
-    final_size=len(json.dumps(result,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode())
-    assert preliminary_size < ed.MAX_INPUT_BYTES < final_size
+    final_size=len(json.dumps(ed.provider_input(result),ensure_ascii=False,sort_keys=True,separators=(',',':')).encode())
     assert result['limit_status']=='exceeded' and result['observed']['serialized_input_bytes']==final_size
     calls=[]; assert ed.evaluate(result,{},provider=lambda *_:calls.append(1))['status']=='OVERSIZE_NOT_EVALUATED'
     assert calls==[]
@@ -273,10 +262,10 @@ def test_final_decorated_snapshot_crossing_bound_is_oversize_and_zero_call(monke
 def test_final_snapshot_immediately_below_bound_remains_evaluable(monkeypatch):
     board={'news_candidates_for_menzo':[{'title':'A','url':'https://size.test/b','summary':'x'*500}]}
     baseline=ed.capture_opportunity(board,run_id='run',observation_timestamp='now',publisher_count_24h=0,history=[])
-    baseline_size=len(json.dumps(baseline,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode())
+    baseline_size=len(json.dumps(ed.provider_input(baseline),ensure_ascii=False,sort_keys=True,separators=(',',':')).encode())
     monkeypatch.setattr(ed,'MAX_INPUT_BYTES',baseline_size+32)
     result=ed.capture_opportunity(board,run_id='run',observation_timestamp='now',publisher_count_24h=0,history=[])
-    final_size=len(json.dumps(result,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode())
+    final_size=len(json.dumps(ed.provider_input(result),ensure_ascii=False,sort_keys=True,separators=(',',':')).encode())
     assert final_size <= ed.MAX_INPUT_BYTES and result['limit_status']!='exceeded'
     assert result['observed']['serialized_input_bytes']==final_size
 
