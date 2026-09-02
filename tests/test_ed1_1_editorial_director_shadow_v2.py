@@ -221,6 +221,40 @@ def test_actual_projected_provider_bytes_control_oversize_and_zero_calls(monkeyp
     assert result["status"] == "OVERSIZE_NOT_EVALUATED" and calls == []
 
 
+def test_base_projection_oversize_skips_scoring_without_truncating_facts(monkeypatch):
+    board = {"news_candidates_for_menzo": [
+        {"source": "feed", "title": f"Candidate {i}", "url": f"https://preflight.test/candidate/{i}",
+         "summary": f"candidate fact {i}"}
+        for i in range(2)]}
+    history = [
+        {"source": "archive", "title": f"History {i}", "url": f"https://preflight.test/history/{i}",
+         "summary": f"authoritative history fact {i} " + "x" * 500}
+        for i in range(4)]
+    baseline = ed.capture_opportunity(board, run_id="run", observation_timestamp="now",
+                                      publisher_count_24h=0, history=history)
+    base_projection = copy.deepcopy(baseline)
+    base_projection["authorized_relations"] = []
+    base_size = ed._projected_provider_input_bytes(base_projection)
+    assert len(baseline["candidates"]) <= ed.MAX_CANDIDATES
+    monkeypatch.setattr(ed, "MAX_INPUT_BYTES", base_size - 1)
+    calls = []
+
+    def forbidden_score_pair(*_args):
+        calls.append(1)
+        raise AssertionError("score_pair must not run for an oversized base projection")
+
+    monkeypatch.setattr(ed.menzo_duplicate_scorer, "score_pair", forbidden_score_pair)
+    result = ed.capture_opportunity(board, run_id="run", observation_timestamp="now",
+                                    publisher_count_24h=0, history=history)
+
+    assert result["limit_status"] == "exceeded"
+    assert calls == []
+    assert result["authorized_relations"] == []
+    assert [row["summary"] for row in result["candidates"]] == [row["summary"] for row in board["news_candidates_for_menzo"]]
+    assert [row["summary"] for row in result["publisher_history_12h"]] == [row["summary"] for row in history]
+    assert ed._projected_provider_input_bytes(result) == base_size > ed.MAX_INPUT_BYTES
+
+
 def test_material_update_accepts_natural_language_temporal_grounding_without_invention():
     s=relation_snapshot("recent_history")
     natural="The promotion officially confirmed the change after the earlier article was published."

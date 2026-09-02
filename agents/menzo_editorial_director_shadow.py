@@ -75,6 +75,12 @@ def costly_work_eligibility() -> tuple[bool, str]:
     return _wp_ready_for_costly_work()
 
 
+def _projected_provider_input_bytes(snapshot: Mapping[str, Any]) -> int:
+    """Return the canonical serialized UTF-8 size of the provider projection."""
+    projected = provider_input(snapshot)
+    return len(json.dumps(projected, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8"))
+
+
 def _finalize_snapshot(envelope: dict[str, Any], *, forced_exceeded: bool = False) -> dict[str, Any]:
     canonical = json.dumps(envelope, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
     counts = (len(envelope["candidates"]), len(envelope["authorized_relations"]))
@@ -87,8 +93,7 @@ def _finalize_snapshot(envelope: dict[str, Any], *, forced_exceeded: bool = Fals
     envelope["input_digest"] = hashlib.sha256(canonical).hexdigest()
     for _ in range(8):
         try:
-            size = len(json.dumps(provider_input(envelope), ensure_ascii=False, sort_keys=True,
-                                  separators=(",", ":")).encode())
+            size = _projected_provider_input_bytes(envelope)
         except ProviderProjectionError as exc:
             envelope["projection_error"] = str(exc)
             envelope["limit_status"] = "projection_failed"
@@ -135,6 +140,8 @@ def capture_opportunity(massy_board: Mapping[str, Any], *, run_id: str, observat
                 "authorized_relations": [], "publisher_history_12h": safe_history,
                 "canonical_candidate_duplicates_collapsed": duplicate_candidate_ids}
     if len(candidates) > MAX_CANDIDATES:
+        return _finalize_snapshot(envelope, forced_exceeded=True)
+    if _projected_provider_input_bytes(envelope) > MAX_INPUT_BYTES:
         return _finalize_snapshot(envelope, forced_exceeded=True)
     relations = []
     for spec in chain(iter_same_run_pair_specs(candidates), iter_recent_history_pair_specs(candidates, safe_history)):
