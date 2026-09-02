@@ -70,7 +70,21 @@ CTA_PATTERNS = [
     re.compile(r"\blet\s+us\s+know\b.*\bcomments?\b", re.I),
     re.compile(r"\bsound\s+off\b.*\bcomments?\b", re.I),
 ]
+TRANSCRIPTION_CREDIT_FOOTER_PATTERNS = [
+    re.compile(
+        r"^(?:(?:questa|la(?:\s+presente)?)\s+)?trascrizione\s+(?:è\s+stata|e\s+stata)\s+"
+        r"(?:prodotta|creata|realizzata)\s+esclusivamente\s+per\s+ringside\s+news\s+"
+        r"(?:dalla|a\s+partire\s+dalla)\s+(?:registrazione|audio|video)\s+originale[.!]?$",
+        re.I,
+    ),
+    re.compile(
+        r"^(?:this\s+)?transcript(?:ion)?\s+(?:was\s+)?(?:produced|created|made)\s+exclusively\s+"
+        r"for\s+ringside\s+news\s+from\s+the\s+original\s+(?:recording|audio|video)[.!]?$",
+        re.I,
+    ),
+]
 P_RE = re.compile(r"<p>(.*?)</p>", re.S | re.I)
+TERMINAL_P_RE = re.compile(r"(<p(?:\s+[^>]*)?>(.*?)</p>)\s*$", re.S | re.I)
 BLOCKQUOTE_RE = re.compile(r"<blockquote>(.*?)</blockquote>", re.S | re.I)
 EMBED_LINE_RE = re.compile(r"(?m)^\s*(https?://(?:www\.)?(?:x\.com|twitter\.com|instagram\.com|youtube\.com|youtu\.be|tiktok\.com|threads\.net|facebook\.com|bsky\.app)/\S+)\s*$", re.I)
 
@@ -104,6 +118,24 @@ def should_remove_paragraph(inner: str) -> str:
         if pattern.search(text):
             return "residual_cta"
     return ""
+
+
+def strip_terminal_transcription_credit(body_html: str) -> tuple[str, list[dict[str, str]]]:
+    """Remove only a terminal standalone source-transcription credit footer."""
+    text = body_html or ""
+    match = TERMINAL_P_RE.search(text)
+    if not match:
+        return body_html, []
+    footer = clean_text(match.group(2))
+    if not any(pattern.fullmatch(footer) for pattern in TRANSCRIPTION_CREDIT_FOOTER_PATTERNS):
+        return body_html, []
+    cleaned = (text[:match.start()] + text[match.end():]).rstrip()
+    return cleaned, [{
+        "code": "residual_transcription_credit_footer",
+        "severity": "info",
+        "message": "Nota terminale di proprietà/provenienza della trascrizione rimossa.",
+        "evidence": footer[:300],
+    }]
 
 
 def move_leading_embeds_after_first_paragraph(body_html: str) -> tuple[str, list[dict[str, str]]]:
@@ -165,6 +197,8 @@ def postprocess_body(body_html: str) -> tuple[str, list[dict[str, str]]]:
         return match.group(0)
 
     body_html = P_RE.sub(repl, body_html or "")
+    body_html, footer_changes = strip_terminal_transcription_credit(body_html)
+    changes.extend(footer_changes)
     body_html = re.sub(r"\n{3,}", "\n\n", body_html).strip()
     return body_html, changes
 
@@ -187,6 +221,7 @@ def run_bob(menzo_decision: dict[str, Any] | None = None) -> dict[str, Any]:
     result.setdefault("policy", {})["residual_author_bio_cleanup"] = True
     result.setdefault("policy", {})["generic_ringside_author_bio_cleanup"] = True
     result.setdefault("policy", {})["residual_cta_cleanup"] = True
+    result.setdefault("policy", {})["residual_transcription_credit_footer_cleanup"] = True
     result.setdefault("policy", {})["split_inline_quoted_text"] = False
     result.setdefault("policy", {})["source_blockquote_only"] = True
     result.setdefault("policy", {})["move_leading_embeds_after_first_paragraph"] = True
