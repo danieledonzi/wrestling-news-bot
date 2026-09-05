@@ -78,6 +78,14 @@ def _categories(text: str) -> Set[str]:
         categories.add("entertainment_casting")
     return categories
 
+def _casting_subject_bigrams(text: str) -> Set[str]:
+    capitals = re.findall(r"\b[A-Z][A-Za-z]+\b", text)
+    return {f"{capitals[i]} {capitals[i+1]}".lower() for i in range(len(capitals)-1)
+            if capitals[i].lower() not in _ENTERTAINMENT_CASTING_TERMS
+            and capitals[i+1].lower() not in _ENTERTAINMENT_CASTING_TERMS
+            and (len(capitals[i]) > 2 or capitals[i].isupper())
+            and (len(capitals[i+1]) > 2 or capitals[i+1].isupper())}
+
 def _named_subjects(text: str) -> Set[str]:
     # Consecutive capitalized words are stable subject signals; lower-case tokens
     # still provide a conservative fallback for normalized feeds.
@@ -112,6 +120,10 @@ def score_pair(a: Dict[str, Any], b: Dict[str, Any], threshold: float | None = N
     subject_text_b=_field_text(b,("title","source_title","title_it","summary","entities","wrestlers"))
     subjects_a, subjects_b = _named_subjects(subject_text_a), _named_subjects(subject_text_b)
     actions_a, actions_b = _categories(full_a), _categories(full_b)
+    shared_subjects = subjects_a & subjects_b
+    if "entertainment_casting" in actions_a & actions_b:
+        shared_subjects = (_casting_subject_bigrams(subject_text_a)
+                           & _casting_subject_bigrams(subject_text_b))
     event_a=(full_a+" "+_field_text(a,("event","show","event_name","match","event_key")).lower())
     event_b=(full_b+" "+_field_text(b,("event","show","event_name","match","event_key")).lower())
     shows_a = {x for x in _SHOWS if x in event_a}; shows_b = {x for x in _SHOWS if x in event_b}
@@ -120,7 +132,7 @@ def score_pair(a: Dict[str, Any], b: Dict[str, Any], threshold: float | None = N
     dates_a = set(re.findall(date_re, full_a)); dates_b = set(re.findall(date_re, full_b))
     title_tokens_a = _tokens(title_a + " " + (urlsplit(ua).path if ua else "")); title_tokens_b = _tokens(title_b + " " + (urlsplit(ub).path if ub else ""))
     components = {
-        "entity_subject": 1.0 if subjects_a & subjects_b else 0.0,
+        "entity_subject": 1.0 if shared_subjects else 0.0,
         "central_fact_action": 1.0 if actions_a & actions_b else 0.0,
         "event_show_match": 1.0 if shows_a & shows_b else 0.0,
         "promotion": 1.0 if promos_a & promos_b else 0.0,

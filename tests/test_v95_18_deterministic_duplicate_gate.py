@@ -168,6 +168,12 @@ def test_shared_production_scorer_admits_contextual_entertainment_casting_withou
     assert title_case["components"]["central_fact_action"] == 1.0
     assert title_case["components"]["entity_subject"] == 0.0
     assert title_case["score"] < scorer.DEFAULT_THRESHOLD
+    shared_platform=scorer.score_pair(
+        article("https://casting.test/g", "John Cena Lands Role In Netflix Series"),
+        article("https://casting.test/h", "Daria Rae Lands Role In Netflix Series"))
+    assert shared_platform["components"]["central_fact_action"] == 1.0
+    assert shared_platform["components"]["entity_subject"] == 0.0
+    assert shared_platform["score"] < scorer.DEFAULT_THRESHOLD
 
 
 def test_same_run_failure_cooldown_avoids_retry(monkeypatch,tmp_path):
