@@ -179,6 +179,15 @@ def test_publisher_history_title_fields_are_preserved_and_ground_relation_endpoi
         payload=ed.provider_input(captured)
         assert payload["history"][0][field] == title
         assert payload["authorized_relations"][0]["right_title"] == title
+    bilingual={"source_url":"https://history.test/bilingual",
+               "source_title":"Daria Rae Lands Pro Wrestler Role In Netflix Series",
+               "title_it":"Daria Rae ottiene un ruolo da wrestler in una serie Netflix",
+               "published_at":"2026-09-01T00:00:00Z"}
+    captured=ed.capture_opportunity({"news_candidates_for_menzo":[candidate_row]}, run_id="run",
+        observation_timestamp="now", publisher_count_24h=1, history=[bilingual])
+    payload=ed.provider_input(captured)
+    assert payload["history"][0]["title_it"] == bilingual["title_it"]
+    assert payload["authorized_relations"][0]["right_title"] == bilingual["source_title"]
 
 
 def test_scope_specific_endpoint_maps_cannot_collide():

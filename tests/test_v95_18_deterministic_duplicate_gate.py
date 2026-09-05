@@ -152,6 +152,18 @@ def test_non_casting_subject_grounding_uses_full_titles():
     assert value["above_threshold"]
 
 
+def test_recent_bilingual_history_uses_preserved_source_title_for_scoring():
+    current={"source_url":"https://current.test/daria",
+             "title":"Daria Rae Lands Pro Wrestler Role In Netflix Series"}
+    history={"source_url":"https://history.test/daria",
+             "source_title":"Daria Rae Lands Pro Wrestler Role In Netflix Series",
+             "title_it":"Daria Rae ottiene un ruolo da wrestler in una serie Netflix"}
+    value=scorer.score_pair(current, history)
+    assert value["components"]["entity_subject"] == 1.0
+    assert value["components"]["central_fact_action"] == 1.0
+    assert value["above_threshold"]
+
+
 def test_shared_production_scorer_admits_contextual_entertainment_casting_without_broad_bonus():
     left=article("https://casting.test/one",
         "TNA's Daria Rae (Fka WWE's Sonya Deville) Reportedly Lands Role In Netflix Series")

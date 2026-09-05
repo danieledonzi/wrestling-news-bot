@@ -1081,6 +1081,22 @@ def test_v95_8_6_trace_write_failure_does_not_block_publish_article(tmp_path, mo
     assert duplicate["status"] == "already_published"
 
 
+def test_publisher_success_history_preserves_source_and_published_titles(tmp_path, monkeypatch):
+    from agents import publisher
+    monkeypatch.setattr(publisher, "PUBLISHED_DIR", tmp_path / "published")
+    monkeypatch.setattr(publisher, "REVIEW_DIR", tmp_path / "published_html_review")
+    _publisher_wp_success(monkeypatch, publisher)
+    history = {}
+    article = {"source_url":"https://wrestlinginc.com/bilingual-title", "source":"WrestlingInc",
+               "source_title":"Daria Rae Lands Pro Wrestler Role In Netflix Series",
+               "title_it":"Daria Rae ottiene un ruolo da wrestler in una serie Netflix",
+               "body_html":"<p>Body</p>"}
+    assert publisher.publish_article(article, history, True)["status"] == "published"
+    saved = history[publisher.source_key(article["source_url"])]
+    assert saved["source_title"] == article["source_title"]
+    assert saved["title_it"] == article["title_it"]
+
+
 def test_v95_8_6_run_publisher_persists_history_and_status_when_trace_write_fails(tmp_path, monkeypatch):
     from agents import publisher
     monkeypatch.setattr(publisher, "NEWSROOM_STATE_DIR", tmp_path / "state" / "newsroom")
