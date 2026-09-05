@@ -1,0 +1,24 @@
+{
+  "schema_version": "owtv_editorial_director_duplicate_fix_fixture_v1",
+  "provenance": "Final ED-1.1 Shadow review adjudications; descriptive labels are used where frozen endpoint text was not present in the repository",
+  "relations": [
+    {"fixture_id":"all_out_tlc_challenge","label":"AEW All Out TLC challenge variants","adjudication":"DUPLICATE","status":"CONFIRMED","semantic_authority":"fixture_only"},
+    {"fixture_id":"ospreay_moxley_all_out","label":"Will Ospreay vs Jon Moxley All Out title-match variants","adjudication":"DUPLICATE","status":"CONFIRMED","semantic_authority":"fixture_only"},
+    {"fixture_id":"ridge_holland_pay_cut","label":"Ridge Holland 56% pay-cut variants","adjudication":"DUPLICATE","status":"CONFIRMED","semantic_authority":"fixture_only"},
+    {"fixture_id":"bayley_contract_update","label":"Bayley re-sign / contract-update variants","adjudication":"DUPLICATE","status":"CONFIRMED","semantic_authority":"fixture_only"},
+    {"fixture_id":"kc_navarro_qualification","label":"KC Navarro Bound For Glory qualification variants","adjudication":"DUPLICATE","status":"CONFIRMED","semantic_authority":"fixture_only"},
+    {"fixture_id":"rusev_absence","label":"Rusev absence-explanation variants","adjudication":"DUPLICATE","status":"CONFIRMED","semantic_authority":"fixture_only"},
+    {"fixture_id":"daria_rae_netflix_casting","left_title":"TNA's Daria Rae (Fka WWE's Sonya Deville) Reportedly Lands Role In Netflix Series","right_title":"TNA’s Daria Rae Lands Pro Wrestler Role in Netflix Series ‘Myron Bolitar’","adjudication":"DUPLICATE","status":"OWNER_CONFIRMED","owner_confirmed":true,"semantic_authority":"fixture_only"},
+    {"fixture_id":"darby_davis_vs_cope_cage","label":"Darby/Mark Davis title-match announcement vs Cope/Cage TLC challenge","adjudication":"NO_MATCH","status":"CLEAR","semantic_authority":"fixture_only"},
+    {"fixture_id":"darby_davis_vs_borden","label":"Darby/Mark Davis title match vs Steven Borden intervention/attack story","adjudication":"NO_MATCH","status":"CLEAR","semantic_authority":"fixture_only"},
+    {"fixture_id":"booker_vanity_vs_waller","label":"Booker T / Vanity Project praise vs Grayson Waller current face of NXT","adjudication":"NO_MATCH","status":"CLEAR","semantic_authority":"fixture_only"},
+    {"fixture_id":"tko_music_vs_waller","label":"TKO musical performances vs Grayson Waller current face of NXT","adjudication":"NO_MATCH","status":"CLEAR","semantic_authority":"fixture_only"},
+    {"fixture_id":"cena_turn_vs_management","label":"Cena heel-turn reflection vs Cena management-frustration denial","adjudication":"NO_MATCH","status":"CLEAR","semantic_authority":"fixture_only"},
+    {"fixture_id":"cena_turn_vs_rvd","label":"Cena heel-turn reflection vs Rob Van Dam Mexico return","adjudication":"NO_MATCH","status":"CLEAR","semantic_authority":"fixture_only"},
+    {"fixture_id":"cena_turn_vs_retirement","label":"Cena heel-turn reflection vs Cena body-forced retirement","adjudication":"NO_MATCH","status":"CLEAR","semantic_authority":"fixture_only"},
+    {"fixture_id":"cena_management_vs_rvd","label":"Cena management-frustration denial vs Rob Van Dam Mexico return","adjudication":"NO_MATCH","status":"CLEAR","semantic_authority":"fixture_only"},
+    {"fixture_id":"rvd_vs_cena_retirement","label":"Rob Van Dam Mexico return vs Cena body-forced retirement","adjudication":"NO_MATCH","status":"CLEAR","semantic_authority":"fixture_only"},
+    {"fixture_id":"cena_management_vs_retirement","label":"Cena management-frustration denial vs Cena body-forced retirement","adjudication":"NO_MATCH","status":"CLEAR","semantic_authority":"fixture_only"},
+    {"fixture_id":"bronson_reed_return","label":"Bronson Reed imminent return vs possible SNME return spoiler","adjudication":null,"status":"UNRESOLVED","semantic_authority":"fixture_only"}
+  ]
+}

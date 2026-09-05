@@ -1,4 +1,4 @@
-"""Pure deterministic admission gate for Menzo duplicate arbitration."""
+"""Canonical shared deterministic admission gate for production Menzo and Director Shadow."""
 from __future__ import annotations
 
 import hashlib
@@ -8,7 +8,7 @@ import re
 from typing import Any, Dict, Iterable, Set
 from urllib.parse import urlsplit, urlunsplit
 
-SCORER_VERSION = "v95.18-deterministic-suspicion-2"
+SCORER_VERSION = "v95.18-deterministic-suspicion-3-casting-action"
 DEFAULT_THRESHOLD = 0.55
 WEIGHTS = {"entity_subject": .30, "central_fact_action": .25,
            "event_show_match": .20, "promotion": .10,
@@ -66,7 +66,15 @@ def _jaccard(a: Set[str], b: Set[str]) -> float:
 
 def _categories(text: str) -> Set[str]:
     words = _tokens(text)
-    return {name for name, terms in _ACTIONS.items() if words & terms}
+    categories = {name for name, terms in _ACTIONS.items() if words & terms}
+    # A role is too generic by itself.  Treat it as a central action only when
+    # an assignment/casting verb and an entertainment-role noun are both
+    # present; this captures casting developments without a person/platform
+    # special case or a broad same-subject bonus.
+    if (words & {"cast", "casting", "casted", "lands", "landed", "portrays", "portray", "joins"}
+            and words & {"role", "actor", "actress", "character", "series", "film", "movie"}):
+        categories.add("entertainment_casting")
+    return categories
 
 def _named_subjects(text: str) -> Set[str]:
     # Consecutive capitalized words are stable subject signals; lower-case tokens

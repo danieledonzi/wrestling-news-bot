@@ -143,6 +143,21 @@ def test_scorer_calibration_structured_and_surname():
         assert set(value["components"])==set(scorer.WEIGHTS) and value["above_threshold"] is expected
 
 
+def test_shared_production_scorer_admits_contextual_entertainment_casting_without_broad_bonus():
+    left=article("https://casting.test/one",
+        "TNA's Daria Rae (Fka WWE's Sonya Deville) Reportedly Lands Role In Netflix Series")
+    right=article("https://casting.test/two",
+        "TNA’s Daria Rae Lands Pro Wrestler Role in Netflix Series ‘Myron Bolitar’")
+    value=scorer.score_pair(left,right)
+    assert scorer.DEFAULT_THRESHOLD == .55
+    assert value["components"]["central_fact_action"] == 1.0
+    assert value["score"] >= scorer.DEFAULT_THRESHOLD and value["above_threshold"]
+    assert scorer is menzo.duplicate_scorer
+    unrelated=scorer.score_pair(article("https://casting.test/a", "Alex Smith lands wrestling role backstage"),
+                                article("https://casting.test/b", "Alex Smith discusses contract in interview"))
+    assert unrelated["score"] < scorer.DEFAULT_THRESHOLD
+
+
 def test_same_run_failure_cooldown_avoids_retry(monkeypatch,tmp_path):
     isolate(monkeypatch,tmp_path); calls=[]
     monkeypatch.setattr(menzo,"call_gemini_json_model",lambda p,m,**k:calls.append(k["phase"]) or ({"bad":True},m))
