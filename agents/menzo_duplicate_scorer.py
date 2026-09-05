@@ -32,11 +32,13 @@ _ACTIONS = {
     "confirmation":{"rumor","rumour","confirmed","confirmation","officially","denies","denied","indiscrezione","voce","confermato","confermata","conferma","ufficiale","ufficialmente","smentisce","smentito","smentita"},
 }
 _ENTERTAINMENT_CASTING_VERBS = {"cast", "casting", "casted", "lands", "landed", "portrays", "portray", "joins"}
-_ENTERTAINMENT_CASTING_NOUNS = {"role", "actor", "actress", "character", "series", "film", "movie"}
+_ENTERTAINMENT_CASTING_NOUNS = {"role", "actor", "actress", "character", "film", "movie"}
 _ENTERTAINMENT_CASTING_TERMS = _ENTERTAINMENT_CASTING_VERBS | _ENTERTAINMENT_CASTING_NOUNS
 _PROMOTIONS = {"wwe","aew","tna","roh","nxt","njpw","mlw","gcw"}
 _SHOWS = {"raw","smackdown","dynamite","collision","nxt","wrestlemania","summerslam","all out",
           "double or nothing","royal rumble","survivor series","wrestledream"}
+_SUBJECT_BOUNDARY_TERMS = set().union(*_ACTIONS.values()) | _ENTERTAINMENT_CASTING_VERBS
+_NON_SUBJECT_TERMS = _SUBJECT_BOUNDARY_TERMS | _ENTERTAINMENT_CASTING_NOUNS | _PROMOTIONS | _STOP | _GENERIC_ENTITY
 
 def effective_threshold(environ: Dict[str, str] | None = None) -> float:
     env = os.environ if environ is None else environ
@@ -83,14 +85,12 @@ def _named_subjects(text: str) -> Set[str]:
     # still provide a conservative fallback for normalized feeds.
     capitals = re.findall(r"\b[A-Z][A-Za-z]+\b", text)
     names = {f"{capitals[i]} {capitals[i+1]}".lower() for i in range(len(capitals)-1)
-             if capitals[i].lower() not in _ENTERTAINMENT_CASTING_TERMS
-             and capitals[i+1].lower() not in _ENTERTAINMENT_CASTING_TERMS}
+             if capitals[i].lower() not in _NON_SUBJECT_TERMS
+             and capitals[i+1].lower() not in _NON_SUBJECT_TERMS}
     # Surnames permit "CM Punk" vs "Punk", without treating arbitrary shared
     # generic words as entities.
-    names.update(x.lower() for x in capitals if len(x) >= 4 and x.lower() not in _GENERIC_ENTITY
-                 and x.lower() not in _ENTERTAINMENT_CASTING_TERMS)
-    return names or (_tokens(text.lower()) - set().union(*_ACTIONS.values()) - _ENTERTAINMENT_CASTING_TERMS
-                     - _PROMOTIONS - _STOP - _GENERIC_ENTITY)
+    names.update(x.lower() for x in capitals if len(x) >= 4 and x.lower() not in _NON_SUBJECT_TERMS)
+    return names or (_tokens(text.lower()) - _NON_SUBJECT_TERMS)
 
 def _field_text(record: Dict[str, Any], keys: Iterable[str]) -> str:
     values=[]
@@ -100,14 +100,19 @@ def _field_text(record: Dict[str, Any], keys: Iterable[str]) -> str:
         elif value: values.append(str(value))
     return " ".join(values)
 
-def _casting_subjects(record: Dict[str, Any]) -> Set[str]:
+def _subject_evidence(record: Dict[str, Any]) -> Set[str]:
     structured = _field_text(record, ("wrestlers", "entities"))
     if structured:
         return _named_subjects(structured)
-    title = _field_text(record, ("title", "source_title", "title_it"))
-    matches = list(re.finditer(r"\b(?:" + "|".join(sorted(_ENTERTAINMENT_CASTING_VERBS)) + r")\b",
+    title = _field_text(record, ("title", "source_title", "title_it", "summary"))
+    matches = list(re.finditer(r"\b(?:" + "|".join(sorted(_SUBJECT_BOUNDARY_TERMS)) + r")\b",
                                title, flags=re.IGNORECASE))
-    return _named_subjects(title[:matches[0].start()] if matches else title)
+    prefix = title[:matches[0].start()] if matches else ""
+    leading = _named_subjects(prefix) if prefix else set()
+    prefix_words = re.findall(r"[A-Za-z]+", prefix)
+    if leading and (len(_tokens(prefix) - _NON_SUBJECT_TERMS) >= 2 or len(prefix_words) == 1):
+        return leading
+    return _named_subjects(title)
 
 def score_pair(a: Dict[str, Any], b: Dict[str, Any], threshold: float | None = None) -> Dict[str, Any]:
     threshold = effective_threshold() if threshold is None else float(threshold)
@@ -119,11 +124,9 @@ def score_pair(a: Dict[str, Any], b: Dict[str, Any], threshold: float | None = N
     full_a = _field_text(a,soft).lower(); full_b = _field_text(b,soft).lower()
     subject_text_a=_field_text(a,("title","source_title","title_it","summary","entities","wrestlers"))
     subject_text_b=_field_text(b,("title","source_title","title_it","summary","entities","wrestlers"))
-    subjects_a, subjects_b = _named_subjects(subject_text_a), _named_subjects(subject_text_b)
+    subjects_a, subjects_b = _subject_evidence(a), _subject_evidence(b)
     actions_a, actions_b = _categories(full_a), _categories(full_b)
     shared_subjects = subjects_a & subjects_b
-    if "entertainment_casting" in actions_a & actions_b:
-        shared_subjects = _casting_subjects(a) & _casting_subjects(b)
     event_a=(full_a+" "+_field_text(a,("event","show","event_name","match","event_key")).lower())
     event_b=(full_b+" "+_field_text(b,("event","show","event_name","match","event_key")).lower())
     shows_a = {x for x in _SHOWS if x in event_a}; shows_b = {x for x in _SHOWS if x in event_b}
@@ -140,12 +143,14 @@ def score_pair(a: Dict[str, Any], b: Dict[str, Any], threshold: float | None = N
         "title_slug_lexical": round(_jaccard(title_tokens_a, title_tokens_b), 6),
     }
     penalties = {"incompatible_event": .20 if shows_a and shows_b and shows_a.isdisjoint(shows_b) else 0.0,
-                 "incompatible_promotion": .15 if promos_a and promos_b and promos_a.isdisjoint(promos_b) and not subjects_a & subjects_b else 0.0,
+                 "incompatible_promotion": .15 if promos_a and promos_b and promos_a.isdisjoint(promos_b) else 0.0,
                  "different_central_fact": .15 if actions_a and actions_b and actions_a.isdisjoint(actions_b) else 0.0,
                  "incompatible_time": .10 if dates_a and dates_b and dates_a.isdisjoint(dates_b) and shows_a and shows_b else 0.0}
     value = sum(WEIGHTS[k] * components[k] for k in WEIGHTS) - sum(penalties.values())
     value = round(min(1.0, max(0.0, value)), 6)
     reasons = [k for k,v in components.items() if v] + ["penalty:"+k for k,v in penalties.items() if v]
+    incompatible = any(penalties[k] for k in ("incompatible_event", "incompatible_promotion", "different_central_fact"))
     return {"scorer_version": SCORER_VERSION, "score": value, "threshold": threshold,
-            "above_threshold": value >= threshold, "exact_duplicate": bool(exact_reason),
-            "exact_reason": exact_reason, "components": components, "penalties": penalties, "reasons": reasons}
+            "above_threshold": value >= threshold and bool(shared_subjects) and not incompatible,
+            "exact_duplicate": bool(exact_reason), "exact_reason": exact_reason,
+            "components": components, "penalties": penalties, "reasons": reasons}

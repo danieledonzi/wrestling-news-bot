@@ -188,6 +188,28 @@ def test_shared_production_scorer_admits_contextual_entertainment_casting_withou
     assert post_action_context["components"]["central_fact_action"] == 1.0
     assert post_action_context["components"]["entity_subject"] == 0.0
     assert post_action_context["score"] < scorer.DEFAULT_THRESHOLD
+    casing=scorer.score_pair(
+        article("https://casting.test/k", "John Cena Lands Role In Netflix Film"),
+        article("https://casting.test/l", "john cena lands role in netflix film"))
+    assert casing["components"]["entity_subject"] == 1.0 and casing["above_threshold"]
+    different_action=scorer.score_pair(
+        article("https://casting.test/m", "John Cena Joins Survivor Series Match"),
+        article("https://casting.test/n", "John Cena Lands Role In Netflix Series"))
+    assert not different_action["above_threshold"]
+    generic_context=scorer.score_pair(
+        article("https://casting.test/o", "Former WWE Superstar John Cena Lands Role In Netflix Series"),
+        article("https://casting.test/p", "Former WWE Superstar Daria Rae Lands Role In Amazon Series"))
+    assert generic_context["components"]["entity_subject"] == 0.0
+    assert not generic_context["above_threshold"]
+
+
+def test_subject_anchor_and_explicit_incompatibility_bound_non_exact_suspicion():
+    incompatible=scorer.score_pair({"title":"CM Punk suffers injury at WWE Raw"},
+                                   {"title":"CM Punk suffers injury at AEW Dynamite"})
+    assert incompatible["components"]["entity_subject"] == 1.0
+    assert incompatible["penalties"]["incompatible_promotion"] > 0
+    assert incompatible["penalties"]["incompatible_event"] > 0
+    assert not incompatible["above_threshold"]
 
 
 def test_same_run_failure_cooldown_avoids_retry(monkeypatch,tmp_path):
