@@ -1081,6 +1081,21 @@ def test_v95_8_6_trace_write_failure_does_not_block_publish_article(tmp_path, mo
     assert duplicate["status"] == "already_published"
 
 
+def test_ed2_publisher_story_signature_is_diagnostic_not_a_semantic_veto(tmp_path, monkeypatch):
+    from agents import publisher
+    monkeypatch.setattr(publisher, "PUBLISHED_DIR", tmp_path / "published")
+    monkeypatch.setattr(publisher, "REVIEW_DIR", tmp_path / "review")
+    _publisher_wp_success(monkeypatch, publisher)
+    signature = "story:aew:mjf:indie_injury"
+    history = {"old": {"source_url": "https://old.test/mjf", "story_signature": signature,
+                       "wp_post_id": 1}}
+    article = {"source_url": "https://new.test/mjf", "source": "Test",
+               "title_it": "MJF rimosso da un evento indie per infortunio", "body_html": "<p>Body</p>"}
+    result = publisher.publish_article(article, history, True)
+    assert publisher.story_signature(article) == signature
+    assert result["status"] == "published"
+
+
 def test_publisher_success_history_preserves_source_and_published_titles(tmp_path, monkeypatch):
     from agents import publisher
     monkeypatch.setattr(publisher, "PUBLISHED_DIR", tmp_path / "published")

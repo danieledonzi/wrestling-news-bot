@@ -370,3 +370,26 @@ class CanonicalArtifactIndex:
                              result="editorial_director_shadow_evaluated",
                              pair_id=relation.get("pair_id"), logical_request_id=result.get("logical_request_id"),
                              reason_code="editorial_director_shadow", artifact=path)
+
+    def observe_editorial_director_active(self, snapshot: Mapping[str, Any], output: Mapping[str, Any],
+                                          result: Mapping[str, Any]) -> None:
+        """Retain binding ED-2 decisions separately from frozen Shadow evidence."""
+        rows = {x.get("candidate_id"): x for x in output.get("candidates", []) if isinstance(x, Mapping)}
+        relations = output.get("relations", []) if isinstance(output.get("relations"), list) else []
+        for candidate in snapshot.get("candidates", []):
+            cid = candidate.get("candidate_id")
+            package = {"artifact_schema_version": "owtv_editorial_director_active_v3",
+                "schema_version": result.get("schema_version"), "policy_version": result.get("policy_version"),
+                "decision_authority": "editorial_director", "candidate": dict(candidate),
+                "director_output": rows.get(cid),
+                "relations": [x for x in relations if x.get("left_id") == cid or x.get("right_id") == cid],
+                "run_id": snapshot.get("run_id"), "logical_request_id": result.get("logical_request_id"),
+                "input_digest": snapshot.get("input_digest"), "validation_status": result.get("status"),
+                "validation_attempts": result.get("validation_attempts", [])}
+            data = json.dumps(package, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
+            identity = {"url": candidate.get("url"), "source_url": candidate.get("url"),
+                        "title": candidate.get("title")}
+            self._retain(identity, data, stem="editorial-director-active", extension="json", fmt="json",
+                agent="Menzo", stage="selection", roles=["selection_decision"], purpose="pipeline_observability",
+                authority="authoritative",
+                artifact_schema={"status": "known", "version": "owtv_editorial_director_active_v3"})

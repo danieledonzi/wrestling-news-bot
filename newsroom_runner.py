@@ -397,6 +397,26 @@ def capture_editorial_director_opportunity(massy_board: dict[str, Any], *, run_i
     return snapshot, None, preflight
 
 
+def persist_active_fallback(decision: dict[str, Any], reason: str) -> dict[str, Any]:
+    """Attach and persist Active-fallback provenance before downstream readers run."""
+    from agents.menzo_policy_v93_15 import (ARTIFACT_DECISIONS_FILE, MENZO_DECISIONS_FILE,
+        V92_ALLOWED_URLS_FILE, utc_now, write_json)
+    decision["decision_authority"] = "legacy_menzo_fallback"
+    decision["fallback_reason"] = reason
+    decision.setdefault("handoff", {})["decision_authority"] = "legacy_menzo_fallback"
+    for section in ("selected", "pending", "skipped"):
+        for item in decision.get(section, []) if isinstance(decision.get(section), list) else []:
+            if isinstance(item, dict):
+                item["decision_authority"] = "legacy_menzo_fallback"
+                item["fallback_reason"] = reason
+    write_json(MENZO_DECISIONS_FILE, decision)
+    write_json(ARTIFACT_DECISIONS_FILE, decision)
+    write_json(V92_ALLOWED_URLS_FILE, {"generated_at": utc_now(), "version": decision.get("version"),
+        "decision_authority": "legacy_menzo_fallback", "fallback_reason": reason,
+        "allowed_urls": decision.get("allowed_urls_for_v92", [])})
+    return decision
+
+
 def main() -> int:
     ensure_artifacts()
     started_at = utc_now()
@@ -429,21 +449,40 @@ def main() -> int:
     simone_publish = safe_agent(timeline=timeline, agent="Simone", phase="report_publication_ready", import_fn=import_simone_report_publisher, call_args=(simone_decision,), artifact_name="simone_report_publish.json", default_handoff={"published": 0, "already_published": 0, "wp_not_ready": 0, "dry_run": 0, "errors": 0}, note_fn=lambda r: "published={published} already={already_published} wp_not_ready={wp_not_ready} errors={errors}".format(**{**{"published": 0, "already_published": 0, "wp_not_ready": 0, "dry_run": 0, "errors": 0}, **handoff(r)}))
     canonical.safely("observe_simone", simone_decision, simone_publish)
 
-    # ED-1 capture is gated and read-only. It performs no provider call.
+    # Active wins over Shadow. Capture includes the existing bounded softpool and duplicate gate.
     director_snapshot = None
     director_result = None
     menzo_preflight = None
+    active_director = False
     try:
-        from agents.menzo_editorial_director_shadow import enabled as director_enabled
-        if director_enabled():
+        from agents.menzo_editorial_director_active import enabled as active_enabled
+        from agents.menzo_editorial_director_shadow import enabled as shadow_enabled
+        active_director = active_enabled()
+        if active_director or shadow_enabled():
             director_snapshot, director_result, menzo_preflight = capture_editorial_director_opportunity(
                 massy_board, run_id=os.environ["NEWSROOM_RUN_ID"], observation_timestamp=utc_now())
-            if director_result is not None:
-                add_timeline(timeline, "Menzo", "editorial_director_shadow_not_eligible", menzo_preflight[1])
     except Exception as exc:
-        add_timeline(timeline, "Menzo", "editorial_director_shadow_capture_failed_open", type(exc).__name__)
+        director_result = {"status": "CAPTURE_FAILED", "fallback_reason": type(exc).__name__}
+        add_timeline(timeline, "Menzo", "editorial_director_capture_failed_open", type(exc).__name__)
 
-    menzo_decision = safe_agent(timeline=timeline, agent="Menzo", phase="editorial_decision_ready", import_fn=import_menzo, call_args=(massy_board,), call_kwargs=({"costly_work_preflight": menzo_preflight} if menzo_preflight is not None else {}), artifact_name="menzo_decisions.json", default_handoff={"to_bob_or_v92": 0, "pending": 0, "skipped": 0}, note_fn=lambda r: "selected={to_bob_or_v92} pending={pending} skipped={skipped}".format(**{**{"to_bob_or_v92": 0, "pending": 0, "skipped": 0}, **handoff(r)}))
+    if active_director:
+        try:
+            if director_snapshot is None or director_result is not None:
+                raise RuntimeError(str((director_result or {}).get("fallback_reason") or
+                                       (director_result or {}).get("status") or "capture_unavailable"))
+            from agents.menzo_editorial_director_active import evaluate as evaluate_active, project as project_active
+            director_result = evaluate_active(director_snapshot, artifact_index=artifacts)
+            if director_result.get("status") == "VALIDATED":
+                menzo_decision = project_active(director_snapshot, director_result)
+                add_timeline(timeline, "Menzo", "editorial_director_active_authoritative", "VALIDATED")
+            else:
+                raise RuntimeError(str(director_result.get("fallback_reason") or director_result.get("status")))
+        except Exception as exc:
+            reason = (director_result or {}).get("fallback_reason") or type(exc).__name__
+            menzo_decision = safe_agent(timeline=timeline, agent="Menzo", phase="legacy_menzo_fallback", import_fn=import_menzo, call_args=(massy_board,), call_kwargs=({"costly_work_preflight": menzo_preflight} if menzo_preflight is not None else {}), artifact_name="menzo_decisions.json", default_handoff={"to_bob_or_v92": 0, "pending": 0, "skipped": 0}, note_fn=lambda r: f"decision_authority=legacy_menzo_fallback reason={reason}")
+            menzo_decision = persist_active_fallback(menzo_decision, reason)
+    else:
+        menzo_decision = safe_agent(timeline=timeline, agent="Menzo", phase="editorial_decision_ready", import_fn=import_menzo, call_args=(massy_board,), call_kwargs=({"costly_work_preflight": menzo_preflight} if menzo_preflight is not None else {}), artifact_name="menzo_decisions.json", default_handoff={"to_bob_or_v92": 0, "pending": 0, "skipped": 0}, note_fn=lambda r: "selected={to_bob_or_v92} pending={pending} skipped={skipped}".format(**{**{"to_bob_or_v92": 0, "pending": 0, "skipped": 0}, **handoff(r)}))
     canonical.safely("observe_menzo", menzo_decision)
     add_timeline(timeline, "Menzo", "forced_policy_active", f"version={menzo_decision.get('version')}")
 
@@ -471,7 +510,7 @@ def main() -> int:
     artifacts.safely("observe_publisher", publisher_result)
 
     # The observer runs only after Publisher and its value has no production consumer.
-    if director_snapshot is not None:
+    if director_snapshot is not None and not active_director:
         try:
             from agents.menzo_editorial_director_shadow import evaluate
             director_result = evaluate(director_snapshot, menzo_decision, artifact_index=artifacts)
@@ -497,7 +536,7 @@ def main() -> int:
     ended_at = utc_now()
     run_summary = {"version": NEWSROOM_VERSION, "started_at": started_at, "ended_at": ended_at, "engine": engine, "newsroom_engine_override": is_test_override, "runtime_delegations": runtime_delegations, "runtime_exit_code": runtime_exit_code, "agents": {"jarvis": "real_orchestrator", "massy": "real_sentinel_control", "simone": "real_report_director_and_autonomous_report_publisher", "menzo": "real_editorial_director", "andrea": "real_pre_bob_content_sufficiency_guard", "bob": "real_article_writer", "alfred": "real_quality_editor", "publisher": "real_wordpress_publisher", "archivista": "real_audit_agent", "master_log": "real_structured_run_memory"}, "massy_handoff": handoff(massy_board), "simone_handoff": handoff(simone_decision), "simone_publish_handoff": handoff(simone_publish), "menzo_handoff": handoff(menzo_decision), "andrea_handoff": handoff(andrea_handoff), "bob_handoff": handoff(bob_result), "alfred_handoff": handoff(alfred_result), "publisher_handoff": handoff(publisher_result), "gemini_ledger_summary": gemini_ledger_summary()}
     if director_result is not None:
-        run_summary["editorial_director_shadow"] = director_result
+        run_summary["editorial_director_active" if active_director else "editorial_director_shadow"] = director_result
 
     archivista_result = safe_agent(
         timeline=timeline,
