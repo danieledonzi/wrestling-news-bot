@@ -127,6 +127,14 @@ def bob_model_routing(item: dict[str, Any]) -> dict[str, Any]:
     if LEGACY_BOB_MODEL_CHAIN_OVERRIDE:
         reason = "BOB_GEMINI_MODEL_CHAIN explicitly set" if BOB_GEMINI_MODEL_CHAIN_SET else "GEMINI_MODEL_CHAIN explicitly set"
         return {"kind": "legacy_override", "chain": MODEL_CHAIN, "reason": reason, "native_score": score, "priority_label": priority_label, "article_type": article_type, "category_hint": category_hint}
+    director = item.get("editorial_director") if isinstance(item.get("editorial_director"), dict) else {}
+    if (item.get("decision_authority") == "editorial_director" and
+            director.get("editorial_class") == "MUST_PUBLISH" and
+            director.get("recommended_action") == "SELECT"):
+        return {"kind": "premium", "chain": BOB_PREMIUM_MODEL_CHAIN,
+                "reason": "editorial_director_must_publish", "native_score": score,
+                "priority_label": priority_label, "article_type": article_type,
+                "category_hint": category_hint}
     if score is not None and score >= BOB_PREMIUM_MIN_SCORE:
         return {"kind": "premium", "chain": BOB_PREMIUM_MODEL_CHAIN, "reason": f"score>={BOB_PREMIUM_MIN_SCORE}", "native_score": score, "priority_label": priority_label, "article_type": article_type, "category_hint": category_hint}
     if priority_label in BOB_PREMIUM_PRIORITY_LABELS and article_type in BOB_PREMIUM_ARTICLE_TYPES:
