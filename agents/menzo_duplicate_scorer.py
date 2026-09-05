@@ -78,14 +78,6 @@ def _categories(text: str) -> Set[str]:
         categories.add("entertainment_casting")
     return categories
 
-def _casting_subject_bigrams(text: str) -> Set[str]:
-    capitals = re.findall(r"\b[A-Z][A-Za-z]+\b", text)
-    return {f"{capitals[i]} {capitals[i+1]}".lower() for i in range(len(capitals)-1)
-            if capitals[i].lower() not in _ENTERTAINMENT_CASTING_TERMS
-            and capitals[i+1].lower() not in _ENTERTAINMENT_CASTING_TERMS
-            and (len(capitals[i]) > 2 or capitals[i].isupper())
-            and (len(capitals[i+1]) > 2 or capitals[i+1].isupper())}
-
 def _named_subjects(text: str) -> Set[str]:
     # Consecutive capitalized words are stable subject signals; lower-case tokens
     # still provide a conservative fallback for normalized feeds.
@@ -108,6 +100,15 @@ def _field_text(record: Dict[str, Any], keys: Iterable[str]) -> str:
         elif value: values.append(str(value))
     return " ".join(values)
 
+def _casting_subjects(record: Dict[str, Any]) -> Set[str]:
+    structured = _field_text(record, ("wrestlers", "entities"))
+    if structured:
+        return _named_subjects(structured)
+    title = _field_text(record, ("title", "source_title", "title_it"))
+    matches = list(re.finditer(r"\b(?:" + "|".join(sorted(_ENTERTAINMENT_CASTING_VERBS)) + r")\b",
+                               title, flags=re.IGNORECASE))
+    return _named_subjects(title[:matches[0].start()] if matches else title)
+
 def score_pair(a: Dict[str, Any], b: Dict[str, Any], threshold: float | None = None) -> Dict[str, Any]:
     threshold = effective_threshold() if threshold is None else float(threshold)
     ua, ub = canonical_source_url(a), canonical_source_url(b)
@@ -122,8 +123,7 @@ def score_pair(a: Dict[str, Any], b: Dict[str, Any], threshold: float | None = N
     actions_a, actions_b = _categories(full_a), _categories(full_b)
     shared_subjects = subjects_a & subjects_b
     if "entertainment_casting" in actions_a & actions_b:
-        shared_subjects = (_casting_subject_bigrams(subject_text_a)
-                           & _casting_subject_bigrams(subject_text_b))
+        shared_subjects = _casting_subjects(a) & _casting_subjects(b)
     event_a=(full_a+" "+_field_text(a,("event","show","event_name","match","event_key")).lower())
     event_b=(full_b+" "+_field_text(b,("event","show","event_name","match","event_key")).lower())
     shows_a = {x for x in _SHOWS if x in event_a}; shows_b = {x for x in _SHOWS if x in event_b}

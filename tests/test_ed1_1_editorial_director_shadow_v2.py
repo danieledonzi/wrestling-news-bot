@@ -165,6 +165,22 @@ def test_provider_input_history_has_short_refs_and_facts_exactly_once():
     assert serialized.count("Unique retained body") == 1
 
 
+def test_publisher_history_title_fields_are_preserved_and_ground_relation_endpoint(monkeypatch):
+    candidate_row={"source":"feed", "title":"Current title", "url":"https://current.test/a",
+                   "summary":"same central fact"}
+    monkeypatch.setattr(ed.menzo_duplicate_scorer, "score_pair", lambda *_: {
+        "exact_duplicate":False, "above_threshold":True, "scorer_version":"test", "score":.7,
+        "threshold":.55, "components":{}})
+    for field, title in (("title_it", "Titolo Publisher"), ("source_title", "Source title")):
+        history={"source_url":f"https://history.test/{field}", field:title,
+                 "published_at":"2026-09-01T00:00:00Z"}
+        captured=ed.capture_opportunity({"news_candidates_for_menzo":[candidate_row]}, run_id="run",
+            observation_timestamp="now", publisher_count_24h=1, history=[history])
+        payload=ed.provider_input(captured)
+        assert payload["history"][0][field] == title
+        assert payload["authorized_relations"][0]["right_title"] == title
+
+
 def test_scope_specific_endpoint_maps_cannot_collide():
     s=snapshot(2)
     shared_id=s["candidates"][0]["candidate_id"]

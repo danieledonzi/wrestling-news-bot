@@ -153,6 +153,14 @@ def test_shared_production_scorer_admits_contextual_entertainment_casting_withou
     assert value["components"]["central_fact_action"] == 1.0
     assert value["score"] >= scorer.DEFAULT_THRESHOLD and value["above_threshold"]
     assert scorer is menzo.duplicate_scorer
+    lowercase=scorer.score_pair(
+        article("https://casting.test/lower-a", "daria rae lands role in streaming series"),
+        article("https://casting.test/lower-b", "daria rae cast in pro wrestler role for streaming series"))
+    assert lowercase["components"]["entity_subject"] == 1.0 and lowercase["above_threshold"]
+    mononym=scorer.score_pair(
+        article("https://casting.test/sting-a", "Sting Lands Role In Drama Series"),
+        article("https://casting.test/sting-b", "Sting Cast In Wrestler Role For Drama Series"))
+    assert mononym["components"]["entity_subject"] == 1.0 and mononym["above_threshold"]
     unrelated=scorer.score_pair(article("https://casting.test/a", "Alex Smith lands wrestling role backstage"),
                                 article("https://casting.test/b", "Alex Smith discusses contract in interview"))
     assert unrelated["score"] < scorer.DEFAULT_THRESHOLD
@@ -174,6 +182,12 @@ def test_shared_production_scorer_admits_contextual_entertainment_casting_withou
     assert shared_platform["components"]["central_fact_action"] == 1.0
     assert shared_platform["components"]["entity_subject"] == 0.0
     assert shared_platform["score"] < scorer.DEFAULT_THRESHOLD
+    post_action_context=scorer.score_pair(
+        article("https://casting.test/i", "John Cena Lands Role In Netflix Original Series"),
+        article("https://casting.test/j", "Daria Rae Lands Role In Netflix Original Film"))
+    assert post_action_context["components"]["central_fact_action"] == 1.0
+    assert post_action_context["components"]["entity_subject"] == 0.0
+    assert post_action_context["score"] < scorer.DEFAULT_THRESHOLD
 
 
 def test_same_run_failure_cooldown_avoids_retry(monkeypatch,tmp_path):
