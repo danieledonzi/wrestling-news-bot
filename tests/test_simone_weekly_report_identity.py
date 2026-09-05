@@ -7,6 +7,7 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from agents import simone
+from modules import simone_report_integrity
 
 
 REPORTS = {
@@ -91,3 +92,45 @@ def test_empty_show_name_with_generic_keywords_fails_closed():
         False,
         "rejected_conflicting_weekly_identity",
     )
+
+
+def no_mercy_registry():
+    return {
+        "events": [{
+            "key": "nxt_no_mercy_2026",
+            "promotion": "WWE",
+            "event_name": "No Mercy",
+            "status": "confirmed",
+            "aliases": ["NXT No Mercy", "No Mercy"],
+            "nights": [{"night_key": "nxt_no_mercy_main", "date_local": "2026-09-01", "enabled": True}],
+        }],
+    }
+
+
+def test_structured_special_match_cannot_steal_modified_weekly_results():
+    item = candidate("WWE Tuesday Night NXT Results 9/1 - Final Stop Before No Mercy")
+    item["special_event_match"] = {
+        "canonical_identity": "wrestlinginc_results",
+        "report_key": "special_event_nxt_no_mercy_main_2026_09_01",
+        "aliases": ["NXT No Mercy", "No Mercy"],
+        "date_local": "2026-09-01",
+    }
+    assert simone.candidate_report_identity(item, REPORTS["wwe_nxt"], "2026-09-01") == (
+        True,
+        "canonical_results_match",
+    )
+
+
+def test_dynamic_special_match_cannot_steal_modified_weekly_results():
+    item = candidate("WWE Tuesday Night NXT Results 9/1 - Final Stop Before No Mercy")
+    assert simone_report_integrity.dynamic_special_event_match(item, no_mercy_registry()) == (
+        None,
+        "rejected_conflicting_weekly_identity",
+    )
+
+
+def test_genuine_special_event_still_matches_without_weekly_results_identity():
+    item = candidate("NXT No Mercy Results 9/1 - Championship Match")
+    match, reason = simone_report_integrity.dynamic_special_event_match(item, no_mercy_registry())
+    assert reason == "canonical_results_match"
+    assert match is not None and match["event_key"] == "nxt_no_mercy_2026"

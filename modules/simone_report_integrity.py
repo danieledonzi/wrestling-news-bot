@@ -51,6 +51,25 @@ def _slug(value: str) -> str:
     return re.sub(r"_+", "_", re.sub(r"[^a-z0-9]+", "_", value.lower())).strip("_")
 
 
+def weekly_result_identities(report: dict[str, Any]) -> set[str]:
+    """Build the configured, explicitly result-oriented identities for a weekly show."""
+    identities: set[str] = set()
+    show_name = _slug(str(report.get("show_name") or "")).replace("_", " ")
+    if show_name:
+        identities.add(f"{show_name} results")
+    for keyword in report.get("match_keywords", []):
+        phrase = _slug(str(keyword or "")).replace("_", " ")
+        if re.search(r"\b(results|risultati)\b", phrase, re.I):
+            identities.add(phrase)
+    return {phrase for phrase in identities if phrase}
+
+
+def matches_weekly_result_identity(explicit: str, report: dict[str, Any]) -> bool:
+    """Match a weekly results identity only against explicit title/URL material."""
+    blob = _slug(explicit).replace("_", " ")
+    return any(re.search(rf"\b{re.escape(identity)}\b", blob) for identity in weekly_result_identities(report))
+
+
 def _nights(key: str, dates: list[str], promotion: str, name: str) -> list[dict[str, Any]]:
     dates = sorted(set(dates))
     many = len(dates) > 1
@@ -237,13 +256,11 @@ def dynamic_special_event_match(entry: dict[str, Any], registry: dict[str, Any])
     explicit_report = bool(re.search(r"\bresults\b|\brisultati\b", raw, re.I))
     if not explicit_report:
         return None, "rejected_non_results_event_article"
-    normalized_raw = _slug(raw).replace("_", " ")
     weekly_cfg = _load(REPORTS_CONFIG, {"reports": []})
     for weekly in weekly_cfg.get("reports", []) if isinstance(weekly_cfg, dict) else []:
-        show = _slug(str(weekly.get("show_name") or "")).replace("_", " ") if isinstance(weekly, dict) else ""
-        if show and re.search(rf"\b{re.escape(show)}\s+results\b", normalized_raw):
+        if isinstance(weekly, dict) and matches_weekly_result_identity(raw, weekly):
             return None, "rejected_conflicting_weekly_identity"
-    blob = normalized_raw
+    blob = _slug(raw).replace("_", " ")
     matches: list[tuple[int, dict[str, Any]]] = []
     for event in registry.get("events", []):
         if not isinstance(event, dict) or str(event.get("status") or "").lower() not in {"confirmed", "active"}:

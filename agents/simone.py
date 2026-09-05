@@ -8,7 +8,7 @@ from zoneinfo import ZoneInfo
 from pathlib import Path
 from typing import Any
 
-from modules.simone_report_integrity import PENDING_REPORTS, candidate_date_evidence, dynamic_special_event_match, load_effective_registry, normalize_url, reserve_report
+from modules.simone_report_integrity import PENDING_REPORTS, candidate_date_evidence, dynamic_special_event_match, load_effective_registry, matches_weekly_result_identity, normalize_url, reserve_report
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_DIR = ROOT / "config"
@@ -265,8 +265,7 @@ def candidate_matches_special_report(candidate: dict[str, Any], report: dict[str
         return False, "rejected_non_results_event_article"
     reports_cfg = load_json(REPORTS_CONFIG, {"reports": []})
     for weekly in reports_cfg.get("reports", []) if isinstance(reports_cfg, dict) else []:
-        show = normalize(str(weekly.get("show_name") or "")) if isinstance(weekly, dict) else ""
-        if show and re.search(rf"\b{re.escape(show)}\s+results?\b", explicit_blob) and not any(show in alias for alias in aliases):
+        if isinstance(weekly, dict) and matches_weekly_result_identity(explicit_raw, weekly):
             return False, "rejected_conflicting_weekly_identity"
     if not any(alias and alias in explicit_blob for alias in aliases):
         return False, "event_alias_not_found"
@@ -399,22 +398,8 @@ def _canonical_structured_special_match(candidate: dict[str, Any]) -> bool:
     return candidate_matches_special_report(candidate, report)[0]
 
 
-def _weekly_result_identities(report: dict[str, Any]) -> set[str]:
-    """Return only configured identities that explicitly denote a results item."""
-    identities: set[str] = set()
-    show_name = normalize(str(report.get("show_name") or ""))
-    if show_name:
-        identities.add(f"{show_name} results")
-    for keyword in report.get("match_keywords", []):
-        phrase = normalize(str(keyword or ""))
-        if REPORT_SIGNAL_RE.search(phrase):
-            identities.add(phrase)
-    return {phrase for phrase in identities if phrase}
-
-
 def candidate_report_identity(candidate: dict[str, Any], report: dict[str, Any], date_iso: str) -> tuple[bool, str]:
     explicit = f"{candidate.get('title', '')} {candidate.get('url', '')} {candidate.get('source_url', '')}"
-    blob = normalize(explicit)
     if not _is_wrestlinginc(candidate) or not re.search(r"\b(results|risultati)\b", explicit, re.I):
         return False, "waiting_for_canonical_results_source"
     if _canonical_structured_special_match(candidate):
@@ -423,8 +408,7 @@ def candidate_report_identity(candidate: dict[str, Any], report: dict[str, Any],
     special, _reason = dynamic_special_event_match(candidate, special_cfg)
     if special:
         return False, "rejected_special_event_as_weekly"
-    identities = _weekly_result_identities(report)
-    if not any(re.search(rf"\b{re.escape(identity)}\b", blob) for identity in identities):
+    if not matches_weekly_result_identity(explicit, report):
         return False, "rejected_conflicting_weekly_identity"
     if not _candidate_date_matches(candidate, date_iso):
         return False, "rejected_conflicting_weekly_identity"
