@@ -7,6 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from agents import bob_policy_v93_15 as bob_policy
 from agents import menzo_policy_v93_15 as menzo
 from modules import report_workshop_v92 as report
 
@@ -69,3 +70,30 @@ def test_betting_odds_policy_moves_selected_and_preserves_quote_articles():
     reasons = [item["reason"] for item in result["skipped"]]
     assert reasons == [menzo.BETTING_ODDS_SKIP_REASON, menzo.BETTING_ODDS_SKIP_REASON]
     assert result["postprocess"]["betting_odds_low_editorial_value_skipped"] == 2
+
+
+def test_bob_removes_terminal_ringside_transcription_credit_footer():
+    body = (
+        "<p>Il wrestler ha spiegato il motivo della sua decisione.</p>\n"
+        "<p>Questa trascrizione è stata prodotta esclusivamente per Ringside News dalla registrazione originale.</p>"
+    )
+
+    cleaned, changes = bob_policy.postprocess_body(body)
+
+    assert "Il wrestler ha spiegato" in cleaned
+    assert "Questa trascrizione" not in cleaned
+    assert [change["code"] for change in changes] == ["residual_transcription_credit_footer"]
+
+
+def test_bob_keeps_same_transcription_credit_when_not_terminal():
+    body = (
+        "<p>Introduzione.</p>\n"
+        "<p>This transcription was produced exclusively for Ringside News from the original recording.</p>\n"
+        "<p>Un ultimo paragrafo editoriale chiude davvero l'articolo.</p>"
+    )
+
+    cleaned, changes = bob_policy.postprocess_body(body)
+
+    assert "This transcription was produced exclusively for Ringside News" in cleaned
+    assert "Un ultimo paragrafo editoriale" in cleaned
+    assert not any(change["code"] == "residual_transcription_credit_footer" for change in changes)
