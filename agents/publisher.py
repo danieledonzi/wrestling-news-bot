@@ -483,6 +483,8 @@ def write_published_trace(article: dict[str, Any], result: dict[str, Any], slug:
         "alfred_status": ("alfred_status", "alfred_decision", "decision"),
         "run_id": ("run_id",),
         "pipeline_version": ("pipeline_version", "version"),
+        "decision_authority": ("decision_authority",),
+        "fallback_reason": ("fallback_reason",),
     }
     for key, candidates in optional_map.items():
         if key == "wp_post_id":

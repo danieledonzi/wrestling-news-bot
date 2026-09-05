@@ -31,6 +31,7 @@ def prepare_snapshot(snapshot: dict[str, Any]) -> dict[str, Any]:
     from agents.menzo_policy_v93_15 import canonical_richer_winner, hydrate_complete_article_bodies
     from agents.bob import dynamic_article_capacity
 
+    relations_were_complete = bool(snapshot.get("authorized_relations_complete", True))
     candidates = list(snapshot.get("candidates", []))
     history = list(snapshot.get("publisher_history_12h", []))
     deterministic_skips: list[dict[str, Any]] = []
@@ -79,6 +80,10 @@ def prepare_snapshot(snapshot: dict[str, Any]) -> dict[str, Any]:
     snapshot["authorized_relations"] = [relation for relation in snapshot.get("authorized_relations", [])
         if relation.get("left_id") in winner_ids and
         (relation.get("scope") != "same_run" or relation.get("right_id") in winner_ids)]
+    if not relations_were_complete:
+        rebuilt, complete = shadow.build_authorized_relations(winners, history)
+        snapshot["authorized_relations"] = rebuilt
+        snapshot["authorized_relations_complete"] = complete
     snapshot["deterministic_exact_skips"] = deterministic_skips
     capacity, reason = dynamic_article_capacity({"selected": winners}, winners)
     snapshot["downstream_capacity"] = max(0, capacity)

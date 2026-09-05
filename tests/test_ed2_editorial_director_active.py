@@ -182,6 +182,33 @@ def test_active_refinalizes_effective_provider_evidence(monkeypatch):
     assert s["limit_status"] == "exceeded"
 
 
+def test_oversize_exact_collapse_rebuilds_nonexact_suspicion_relations(monkeypatch):
+    rows = [{"source": "feed", "title": f"Story {i}", "summary": f"Fact {i}",
+             "url": f"https://rebuild.test/{i}"} for i in range(shadow.MAX_CANDIDATES + 1)]
+    def score(left, right):
+        pair = {left.get("url"), right.get("url")}
+        exact = pair == {"https://rebuild.test/0", "https://rebuild.test/1"}
+        suspicious = pair == {"https://rebuild.test/2", "https://rebuild.test/3"}
+        return {"exact_duplicate": exact, "above_threshold": exact or suspicious,
+                "scorer_version": "test", "score": .9 if exact or suspicious else 0,
+                "threshold": .55, "components": {"central_fact_action": 1 if suspicious else 0}}
+    monkeypatch.setattr(shadow.menzo_duplicate_scorer, "score_pair", score)
+    monkeypatch.setattr(menzo, "hydrate_complete_article_bodies", lambda items: (True, []))
+    s = shadow.capture_opportunity({"news_candidates_for_menzo": rows}, run_id="run",
+        observation_timestamp="now", publisher_count_24h=0, history=[])
+    assert s["limit_status"] == "exceeded" and not s["authorized_relations_complete"]
+    active.prepare_snapshot(s)
+    assert s["limit_status"] != "exceeded" and s["observed"]["candidate_count"] == shadow.MAX_CANDIDATES
+    assert len(s["deterministic_exact_skips"]) == 1
+    assert len(s["authorized_relations"]) == 1
+    relation = s["authorized_relations"][0]
+    retained = {item["candidate_id"]: item["url"] for item in s["candidates"]}
+    assert {retained[relation["left_id"]], retained[relation["right_id"]]} == {
+        "https://rebuild.test/2", "https://rebuild.test/3"}
+    provider_relations = active.active_provider_input(s)["authorized_relations"]
+    assert len(provider_relations) == 1 and provider_relations[0]["ref"] == "r0"
+
+
 def test_effective_bob_capacity_is_an_active_validation_bound(monkeypatch):
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     monkeypatch.setattr("agents.bob.dynamic_article_capacity", lambda *_: (1, "test_capacity"))

@@ -139,12 +139,22 @@ def capture_opportunity(massy_board: Mapping[str, Any], *, run_id: str, observat
     envelope = {"run_id": run_id, "observation_timestamp": observation_timestamp,
                 "publisher_count_rolling_24h": int(publisher_count_24h), "policy_reference": 30,
                 "remaining_slots": max(0, 30 - int(publisher_count_24h)), "candidates": candidates,
-                "authorized_relations": [], "publisher_history_12h": safe_history,
+                "authorized_relations": [], "authorized_relations_complete": False,
+                "publisher_history_12h": safe_history,
                 "canonical_candidate_duplicates_collapsed": duplicate_candidate_ids}
     if len(candidates) > MAX_CANDIDATES:
         return _finalize_snapshot(envelope, forced_exceeded=True)
     if _projected_provider_input_bytes(envelope) > MAX_INPUT_BYTES:
         return _finalize_snapshot(envelope, forced_exceeded=True)
+    relations, relations_complete = build_authorized_relations(candidates, safe_history)
+    envelope["authorized_relations"] = relations
+    envelope["authorized_relations_complete"] = relations_complete
+    return _finalize_snapshot(envelope, forced_exceeded=not relations_complete)
+
+
+def build_authorized_relations(candidates: list[dict[str, Any]],
+                               safe_history: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], bool]:
+    """Build the frozen bounded non-exact suspicion matrix for either execution mode."""
     relations = []
     for spec in chain(iter_same_run_pair_specs(candidates), iter_recent_history_pair_specs(candidates, safe_history)):
         scored = menzo_duplicate_scorer.score_pair(spec.left, spec.right)
@@ -155,8 +165,7 @@ def capture_opportunity(massy_board: Mapping[str, Any], *, run_id: str, observat
                           "score": scored["score"], "threshold": scored["threshold"], "components": scored["components"]})
         if len(relations) > MAX_RELATIONS:
             break
-    envelope["authorized_relations"] = relations
-    return _finalize_snapshot(envelope, forced_exceeded=len(relations) > MAX_RELATIONS)
+    return relations, len(relations) <= MAX_RELATIONS
 
 
 def short_ref_maps(snapshot: Mapping[str, Any]) -> tuple[Mapping[str, Mapping[str, Any]], Mapping[str, Mapping[str, Any]]]:
