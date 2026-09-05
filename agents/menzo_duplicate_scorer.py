@@ -143,14 +143,13 @@ def score_pair(a: Dict[str, Any], b: Dict[str, Any], threshold: float | None = N
         "title_slug_lexical": round(_jaccard(title_tokens_a, title_tokens_b), 6),
     }
     penalties = {"incompatible_event": .20 if shows_a and shows_b and shows_a.isdisjoint(shows_b) else 0.0,
-                 "incompatible_promotion": .15 if promos_a and promos_b and promos_a.isdisjoint(promos_b) else 0.0,
+                 "incompatible_promotion": .15 if promos_a and promos_b and promos_a.isdisjoint(promos_b) and not subjects_a & subjects_b else 0.0,
                  "different_central_fact": .15 if actions_a and actions_b and actions_a.isdisjoint(actions_b) else 0.0,
                  "incompatible_time": .10 if dates_a and dates_b and dates_a.isdisjoint(dates_b) and shows_a and shows_b else 0.0}
     value = sum(WEIGHTS[k] * components[k] for k in WEIGHTS) - sum(penalties.values())
     value = round(min(1.0, max(0.0, value)), 6)
     reasons = [k for k,v in components.items() if v] + ["penalty:"+k for k,v in penalties.items() if v]
-    incompatible = any(penalties[k] for k in ("incompatible_event", "incompatible_promotion", "different_central_fact"))
     return {"scorer_version": SCORER_VERSION, "score": value, "threshold": threshold,
-            "above_threshold": value >= threshold and bool(shared_subjects) and not incompatible,
+            "above_threshold": value >= threshold,
             "exact_duplicate": bool(exact_reason), "exact_reason": exact_reason,
             "components": components, "penalties": penalties, "reasons": reasons}

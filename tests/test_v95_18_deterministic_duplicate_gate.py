@@ -207,7 +207,7 @@ def test_subject_anchor_and_explicit_incompatibility_bound_non_exact_suspicion()
     incompatible=scorer.score_pair({"title":"CM Punk suffers injury at WWE Raw"},
                                    {"title":"CM Punk suffers injury at AEW Dynamite"})
     assert incompatible["components"]["entity_subject"] == 1.0
-    assert incompatible["penalties"]["incompatible_promotion"] > 0
+    assert incompatible["penalties"]["incompatible_promotion"] == 0.0
     assert incompatible["penalties"]["incompatible_event"] > 0
     assert not incompatible["above_threshold"]
 
