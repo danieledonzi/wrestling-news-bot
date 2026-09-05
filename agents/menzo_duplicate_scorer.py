@@ -31,6 +31,9 @@ _ACTIONS = {
     "schedule":{"cancelled","canceled","postponed","venue","date","location","cancellato","cancellata","rinviato","rinviata","sede","data","luogo"},
     "confirmation":{"rumor","rumour","confirmed","confirmation","officially","denies","denied","indiscrezione","voce","confermato","confermata","conferma","ufficiale","ufficialmente","smentisce","smentito","smentita"},
 }
+_ENTERTAINMENT_CASTING_VERBS = {"cast", "casting", "casted", "lands", "landed", "portrays", "portray", "joins"}
+_ENTERTAINMENT_CASTING_NOUNS = {"role", "actor", "actress", "character", "series", "film", "movie"}
+_ENTERTAINMENT_CASTING_TERMS = _ENTERTAINMENT_CASTING_VERBS | _ENTERTAINMENT_CASTING_NOUNS
 _PROMOTIONS = {"wwe","aew","tna","roh","nxt","njpw","mlw","gcw"}
 _SHOWS = {"raw","smackdown","dynamite","collision","nxt","wrestlemania","summerslam","all out",
           "double or nothing","royal rumble","survivor series","wrestledream"}
@@ -71,8 +74,7 @@ def _categories(text: str) -> Set[str]:
     # an assignment/casting verb and an entertainment-role noun are both
     # present; this captures casting developments without a person/platform
     # special case or a broad same-subject bonus.
-    if (words & {"cast", "casting", "casted", "lands", "landed", "portrays", "portray", "joins"}
-            and words & {"role", "actor", "actress", "character", "series", "film", "movie"}):
+    if words & _ENTERTAINMENT_CASTING_VERBS and words & _ENTERTAINMENT_CASTING_NOUNS:
         categories.add("entertainment_casting")
     return categories
 
@@ -84,7 +86,8 @@ def _named_subjects(text: str) -> Set[str]:
     # Surnames permit "CM Punk" vs "Punk", without treating arbitrary shared
     # generic words as entities.
     names.update(x.lower() for x in capitals if len(x) >= 4 and x.lower() not in _GENERIC_ENTITY)
-    return names or (_tokens(text.lower()) - set().union(*_ACTIONS.values()) - _PROMOTIONS - _STOP - _GENERIC_ENTITY)
+    return names or (_tokens(text.lower()) - set().union(*_ACTIONS.values()) - _ENTERTAINMENT_CASTING_TERMS
+                     - _PROMOTIONS - _STOP - _GENERIC_ENTITY)
 
 def _field_text(record: Dict[str, Any], keys: Iterable[str]) -> str:
     values=[]

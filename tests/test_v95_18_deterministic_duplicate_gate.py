@@ -156,6 +156,12 @@ def test_shared_production_scorer_admits_contextual_entertainment_casting_withou
     unrelated=scorer.score_pair(article("https://casting.test/a", "Alex Smith lands wrestling role backstage"),
                                 article("https://casting.test/b", "Alex Smith discusses contract in interview"))
     assert unrelated["score"] < scorer.DEFAULT_THRESHOLD
+    different_subjects=scorer.score_pair(
+        article("https://casting.test/c", "john cena lands role in netflix series"),
+        article("https://casting.test/d", "daria rae lands role in amazon series"))
+    assert different_subjects["components"]["central_fact_action"] == 1.0
+    assert different_subjects["components"]["entity_subject"] == 0.0
+    assert different_subjects["score"] < scorer.DEFAULT_THRESHOLD
 
 
 def test_same_run_failure_cooldown_avoids_retry(monkeypatch,tmp_path):
