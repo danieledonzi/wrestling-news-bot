@@ -27,7 +27,7 @@ REPORT_REGISTRY_FILE = NEWSROOM_STATE_DIR / "report_publication_registry.json"
 SIMONE_EXPECTED_EVENTS_FILE = NEWSROOM_STATE_DIR / "simone_expected_events_latest.json"
 ARTIFACT_EXPECTED_EVENTS_FILE = ARTIFACT_DIR / "simone_expected_events_latest.json"
 
-SIMONE_VERSION = "v95.19.1_simone_report_identity_guard"
+SIMONE_VERSION = "v95.19.2_weekly_result_identity_aliases"
 
 DAY_NAMES = {
     "monday": 0,
@@ -399,6 +399,19 @@ def _canonical_structured_special_match(candidate: dict[str, Any]) -> bool:
     return candidate_matches_special_report(candidate, report)[0]
 
 
+def _weekly_result_identities(report: dict[str, Any]) -> set[str]:
+    """Return only configured identities that explicitly denote a results item."""
+    identities: set[str] = set()
+    show_name = normalize(str(report.get("show_name") or ""))
+    if show_name:
+        identities.add(f"{show_name} results")
+    for keyword in report.get("match_keywords", []):
+        phrase = normalize(str(keyword or ""))
+        if REPORT_SIGNAL_RE.search(phrase):
+            identities.add(phrase)
+    return {phrase for phrase in identities if phrase}
+
+
 def candidate_report_identity(candidate: dict[str, Any], report: dict[str, Any], date_iso: str) -> tuple[bool, str]:
     explicit = f"{candidate.get('title', '')} {candidate.get('url', '')} {candidate.get('source_url', '')}"
     blob = normalize(explicit)
@@ -410,8 +423,8 @@ def candidate_report_identity(candidate: dict[str, Any], report: dict[str, Any],
     special, _reason = dynamic_special_event_match(candidate, special_cfg)
     if special:
         return False, "rejected_special_event_as_weekly"
-    show = normalize(str(report.get("show_name") or ""))
-    if not show or not re.search(rf"\b{re.escape(show)}\s+results\b", blob):
+    identities = _weekly_result_identities(report)
+    if not any(re.search(rf"\b{re.escape(identity)}\b", blob) for identity in identities):
         return False, "rejected_conflicting_weekly_identity"
     if not _candidate_date_matches(candidate, date_iso):
         return False, "rejected_conflicting_weekly_identity"
