@@ -143,6 +143,15 @@ def test_scorer_calibration_structured_and_surname():
         assert set(value["components"])==set(scorer.WEIGHTS) and value["above_threshold"] is expected
 
 
+def test_non_casting_subject_grounding_uses_full_titles():
+    value=scorer.score_pair(
+        {"title":"Paul Heyman Reacts To Roman Reigns Injury"},
+        {"title":"Roman Reigns Injury Draws Reaction From Paul Heyman"})
+    assert value["components"]["entity_subject"] == 1.0
+    assert value["components"]["central_fact_action"] == 1.0
+    assert value["above_threshold"]
+
+
 def test_shared_production_scorer_admits_contextual_entertainment_casting_without_broad_bonus():
     left=article("https://casting.test/one",
         "TNA's Daria Rae (Fka WWE's Sonya Deville) Reportedly Lands Role In Netflix Series")

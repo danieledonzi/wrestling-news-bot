@@ -124,8 +124,11 @@ def score_pair(a: Dict[str, Any], b: Dict[str, Any], threshold: float | None = N
     full_a = _field_text(a,soft).lower(); full_b = _field_text(b,soft).lower()
     subject_text_a=_field_text(a,("title","source_title","title_it","summary","entities","wrestlers"))
     subject_text_b=_field_text(b,("title","source_title","title_it","summary","entities","wrestlers"))
-    subjects_a, subjects_b = _subject_evidence(a), _subject_evidence(b)
     actions_a, actions_b = _categories(full_a), _categories(full_b)
+    if "entertainment_casting" in actions_a & actions_b:
+        subjects_a, subjects_b = _subject_evidence(a), _subject_evidence(b)
+    else:
+        subjects_a, subjects_b = _named_subjects(subject_text_a), _named_subjects(subject_text_b)
     shared_subjects = subjects_a & subjects_b
     event_a=(full_a+" "+_field_text(a,("event","show","event_name","match","event_key")).lower())
     event_b=(full_b+" "+_field_text(b,("event","show","event_name","match","event_key")).lower())
