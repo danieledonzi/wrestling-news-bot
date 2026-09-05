@@ -82,10 +82,13 @@ def _named_subjects(text: str) -> Set[str]:
     # Consecutive capitalized words are stable subject signals; lower-case tokens
     # still provide a conservative fallback for normalized feeds.
     capitals = re.findall(r"\b[A-Z][A-Za-z]+\b", text)
-    names = {f"{capitals[i]} {capitals[i+1]}".lower() for i in range(len(capitals)-1)}
+    names = {f"{capitals[i]} {capitals[i+1]}".lower() for i in range(len(capitals)-1)
+             if capitals[i].lower() not in _ENTERTAINMENT_CASTING_TERMS
+             and capitals[i+1].lower() not in _ENTERTAINMENT_CASTING_TERMS}
     # Surnames permit "CM Punk" vs "Punk", without treating arbitrary shared
     # generic words as entities.
-    names.update(x.lower() for x in capitals if len(x) >= 4 and x.lower() not in _GENERIC_ENTITY)
+    names.update(x.lower() for x in capitals if len(x) >= 4 and x.lower() not in _GENERIC_ENTITY
+                 and x.lower() not in _ENTERTAINMENT_CASTING_TERMS)
     return names or (_tokens(text.lower()) - set().union(*_ACTIONS.values()) - _ENTERTAINMENT_CASTING_TERMS
                      - _PROMOTIONS - _STOP - _GENERIC_ENTITY)
 
