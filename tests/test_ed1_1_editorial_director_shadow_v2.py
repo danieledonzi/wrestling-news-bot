@@ -144,7 +144,12 @@ def test_provider_input_preserves_facts_and_removes_machine_redundancy():
     assert "Central fact" in serialized and "history" in payload
     assert "pair_canonical" not in serialized and '"threshold"' not in serialized and '"components"' not in serialized
     assert [x["ref"] for x in payload["candidates"]] == ["c0", "c1"]
-    assert set(payload["authorized_relations"][0]) == {"ref", "scope", "left_ref", "right_ref"}
+    assert set(payload["authorized_relations"][0]) == {
+        "ref", "scope", "left_ref", "right_ref", "left_title", "right_title"}
+    relation = payload["authorized_relations"][0]
+    by_ref = {row["ref"]: row for row in payload["candidates"]}
+    assert relation["left_title"] == by_ref[relation["left_ref"]]["title"]
+    assert relation["right_title"] == by_ref[relation["right_ref"]]["title"]
     assert "left" not in payload["authorized_relations"][0] and "right" not in payload["authorized_relations"][0]
 
 
@@ -160,6 +165,31 @@ def test_provider_input_history_has_short_refs_and_facts_exactly_once():
     assert serialized.count("Unique retained body") == 1
 
 
+def test_publisher_history_title_fields_are_preserved_and_ground_relation_endpoint(monkeypatch):
+    candidate_row={"source":"feed", "title":"Current title", "url":"https://current.test/a",
+                   "summary":"same central fact"}
+    monkeypatch.setattr(ed.menzo_duplicate_scorer, "score_pair", lambda *_: {
+        "exact_duplicate":False, "above_threshold":True, "scorer_version":"test", "score":.7,
+        "threshold":.55, "components":{}})
+    for field, title in (("title_it", "Titolo Publisher"), ("source_title", "Source title")):
+        history={"source_url":f"https://history.test/{field}", field:title,
+                 "published_at":"2026-09-01T00:00:00Z"}
+        captured=ed.capture_opportunity({"news_candidates_for_menzo":[candidate_row]}, run_id="run",
+            observation_timestamp="now", publisher_count_24h=1, history=[history])
+        payload=ed.provider_input(captured)
+        assert payload["history"][0][field] == title
+        assert payload["authorized_relations"][0]["right_title"] == title
+    bilingual={"source_url":"https://history.test/bilingual",
+               "source_title":"Daria Rae Lands Pro Wrestler Role In Netflix Series",
+               "title_it":"Daria Rae ottiene un ruolo da wrestler in una serie Netflix",
+               "published_at":"2026-09-01T00:00:00Z"}
+    captured=ed.capture_opportunity({"news_candidates_for_menzo":[candidate_row]}, run_id="run",
+        observation_timestamp="now", publisher_count_24h=1, history=[bilingual])
+    payload=ed.provider_input(captured)
+    assert payload["history"][0]["title_it"] == bilingual["title_it"]
+    assert payload["authorized_relations"][0]["right_title"] == bilingual["source_title"]
+
+
 def test_scope_specific_endpoint_maps_cannot_collide():
     s=snapshot(2)
     shared_id=s["candidates"][0]["candidate_id"]
@@ -171,8 +201,10 @@ def test_scope_specific_endpoint_maps_cannot_collide():
         {"pair_id":"history", "scope":"recent_history", "left_id":shared_id, "right_id":shared_id},
     ]
     relations=ed.provider_input(s)["authorized_relations"]
-    assert relations[0] == {"ref":"r0", "scope":"same_run", "left_ref":"c0", "right_ref":"c1"}
-    assert relations[1] == {"ref":"r1", "scope":"recent_history", "left_ref":"c0", "right_ref":"h0"}
+    assert relations[0] == {"ref":"r0", "scope":"same_run", "left_ref":"c0", "right_ref":"c1",
+                            "left_title":"Story 0", "right_title":"Story 1"}
+    assert relations[1] == {"ref":"r1", "scope":"recent_history", "left_ref":"c0", "right_ref":"h0",
+                            "left_title":"Story 0", "right_title":"Historical copy"}
 
 
 def test_canonical_candidate_url_variants_collapse_before_refs_relations_and_artifacts(tmp_path, monkeypatch):
@@ -299,6 +331,32 @@ def test_frozen_quality_corpus_has_required_exact_duplicate_evidence():
     assert relations["okada_international_title_change"]["gold_duplicate"] is True
     assert relations["okada_international_title_change"]["expected_decision"] == "DUPLICATE"
     assert "business_breadth_exact_labels" in corpus["owner_adjudication_required"]
+
+
+def test_bounded_duplicate_fix_corpus_preserves_all_adjudications():
+    corpus=json.loads(Path("tests/fixtures/editorial_director_v2/duplicate_fix_corpus.json").read_text())
+    rows={row["fixture_id"]: row for row in corpus["relations"]}
+    assert len([row for row in rows.values() if row["adjudication"] == "DUPLICATE"]) == 7
+    assert len([row for row in rows.values() if row["adjudication"] == "NO_MATCH"]) == 10
+    assert rows["daria_rae_netflix_casting"]["owner_confirmed"] is True
+    assert rows["bronson_reed_return"]["adjudication"] is None
+    assert rows["bronson_reed_return"]["status"] == "UNRESOLVED"
+    assert all(row.get("semantic_authority") == "fixture_only" for row in rows.values())
+
+
+def test_daria_pair_is_admitted_by_capture_opportunity_for_semantic_arbitration():
+    titles=[
+        "TNA's Daria Rae (Fka WWE's Sonya Deville) Reportedly Lands Role In Netflix Series",
+        "TNA’s Daria Rae Lands Pro Wrestler Role in Netflix Series ‘Myron Bolitar’",
+    ]
+    board={"news_candidates_for_menzo":[
+        {"source":"fixture", "title":title, "url":f"https://daria.test/{index}", "summary":title}
+        for index,title in enumerate(titles)]}
+    captured=ed.capture_opportunity(board, run_id="run", observation_timestamp="now",
+                                    publisher_count_24h=0, history=[])
+    assert len(captured["authorized_relations"]) == 1
+    relation=ed.provider_input(captured)["authorized_relations"][0]
+    assert {relation["left_title"], relation["right_title"]} == set(titles)
 
 
 def test_shadow_does_not_mutate_snapshot_or_legacy_and_model_is_fixed(monkeypatch):

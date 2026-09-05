@@ -615,7 +615,10 @@ def publish_article(article: dict[str, Any], history: dict[str, Any], wp_ok: boo
     published_cleaned_full_text = re.sub(r"\s+", " ", html.unescape(re.sub(r"<[^>]+>", " ", cleaned_body))).strip()
     canonical_source_body = article.get("canonical_source_body") if source_body.valid_contract(article.get("canonical_source_body")) else {}
     source_cleaned_full_text = source_body.contract_text(article)
-    history[key] = {"source_url": url, "title_it": title, "wp_post_id": post_id, "wp_link": post_link, "published_at": published_at, "status": POST_STATUS, "source": source, "story_signature": story_signature(article), "canonical_source_body": canonical_source_body}
+    history[key] = {"source_url": url, "source_title": str(article.get("source_title") or ""),
+                    "title_it": title, "wp_post_id": post_id, "wp_link": post_link,
+                    "published_at": published_at, "status": POST_STATUS, "source": source,
+                    "story_signature": story_signature(article), "canonical_source_body": canonical_source_body}
     PUBLISHED_DIR.mkdir(parents=True, exist_ok=True)
     (PUBLISHED_DIR / f"v93_news_{review_slug}.html").write_text(content, encoding="utf-8")
     result = {"source_url": url, "title_it": title, "status": "published", "wp_post_id": post_id, "wp_link": post_link, "featured_media": media_id, "categories": categories, "cleaned_full_text": published_cleaned_full_text, "published_cleaned_full_text": published_cleaned_full_text, "source_cleaned_full_text": source_cleaned_full_text, "canonical_source_body": canonical_source_body}

@@ -20,8 +20,8 @@ from agents.gemini_ledger import record_gemini_attempt
 ROOT = Path(__file__).resolve().parents[1]
 MODEL = "gemini-3.1-flash-lite"
 SCHEMA_VERSION = "owtv_editorial_director_output_v2"
-POLICY_VERSION = "owtv_editorial_director_policy_v2"
-POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V2.md"
+POLICY_VERSION = "owtv_editorial_director_policy_v2_1"
+POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V2_1.md"
 SCHEMA_PATH = ROOT / "config/editorial_director_output_schema_v2.json"
 MAX_CANDIDATES = int(os.getenv("OWTV_ED_SHADOW_MAX_CANDIDATES", "40"))
 MAX_RELATIONS = int(os.getenv("OWTV_ED_SHADOW_MAX_RELATIONS", "80"))
@@ -32,6 +32,7 @@ APPROACH_RATIO = .80
 
 INPUT_FIELDS = ("source", "feed_url", "title", "url", "normalized_url", "published", "summary",
                 "from_softpool", "softpool_added_at", "last_seen_at", "softpool_ttl_hours", "softpool_deferrals")
+HISTORY_TITLE_FIELDS = ("source_title", "title_it")
 CATEGORIES = {"WWE", "AEW", "NXT", "TNA", "ROH", "World", "Business"}
 CLASSES = ("MUST_PUBLISH", "SHOULD_PUBLISH", "PUBLISHABLE_SOFT", "SKIP")
 ACTIONS = {"SELECT", "DEFER", "SKIP"}
@@ -125,7 +126,8 @@ def capture_opportunity(massy_board: Mapping[str, Any], *, run_id: str, observat
     for item in history:
         if not isinstance(item, Mapping):
             continue
-        kept = {k: copy.deepcopy(item[k]) for k in INPUT_FIELDS + ("source_url", "published_at") if k in item}
+        kept = {k: copy.deepcopy(item[k]) for k in INPUT_FIELDS + HISTORY_TITLE_FIELDS +
+                ("source_url", "published_at") if k in item}
         retained = item.get("canonical_source_body")
         if isinstance(retained, Mapping) and isinstance(retained.get("text"), str) and retained["text"]:
             kept.update(retained_body=retained["text"], input_coverage="RETAINED_BODY_AVAILABLE")
@@ -163,9 +165,12 @@ def short_ref_maps(snapshot: Mapping[str, Any]) -> tuple[Mapping[str, Mapping[st
     relations = {f"r{i}": item for i, item in enumerate(snapshot.get("authorized_relations", []))}
     return MappingProxyType(candidates), MappingProxyType(relations)
 
+def _endpoint_title(item: Mapping[str, Any]) -> str:
+    return str(item.get("title") or item.get("source_title") or item.get("title_it") or "")
+
 
 def provider_input(snapshot: Mapping[str, Any]) -> dict[str, Any]:
-    """Project factual tables once; relations contain only compact references."""
+    """Project factual tables once; relations add only endpoint title anchors."""
     candidates, relations = short_ref_maps(snapshot)
     candidate_rows = [{"ref": ref, **{k: copy.deepcopy(v) for k, v in item.items()
                        if k not in {"candidate_id"}}} for ref, item in candidates.items()]
@@ -178,6 +183,8 @@ def provider_input(snapshot: Mapping[str, Any]) -> dict[str, Any]:
         history_rows.append({"ref": ref, **{k: copy.deepcopy(v) for k, v in item.items()
                             if k != "article_id"}})
     history_refs = MappingProxyType(mutable_history_refs)
+    history_by_ref = MappingProxyType({f"h{i}": item for i, item in
+                                       enumerate(snapshot.get("publisher_history_12h", []))})
     relation_rows = []
     for ref, relation in relations.items():
         scope = relation.get("scope")
@@ -186,7 +193,12 @@ def provider_input(snapshot: Mapping[str, Any]) -> dict[str, Any]:
         right_ref = right_map.get(relation.get("right_id"))
         if left_ref is None or right_ref is None:
             raise ProviderProjectionError(f"unresolved_relation_endpoint:{ref}:{scope}")
-        relation_rows.append({"ref": ref, "scope": scope, "left_ref": left_ref, "right_ref": right_ref})
+        left_item = candidates[left_ref]
+        right_items = candidates if scope == "same_run" else history_by_ref
+        right_item = right_items[right_ref]
+        relation_rows.append({"ref": ref, "scope": scope, "left_ref": left_ref, "right_ref": right_ref,
+                              "left_title": _endpoint_title(left_item),
+                              "right_title": _endpoint_title(right_item)})
     return {"publication_context": {"publisher_count_rolling_24h": snapshot.get("publisher_count_rolling_24h"),
                                     "policy_reference_ceiling_not_target": snapshot.get("policy_reference")},
             "candidates": candidate_rows, "authorized_relations": relation_rows,

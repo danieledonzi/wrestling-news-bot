@@ -143,6 +143,96 @@ def test_scorer_calibration_structured_and_surname():
         assert set(value["components"])==set(scorer.WEIGHTS) and value["above_threshold"] is expected
 
 
+def test_non_casting_subject_grounding_uses_full_titles():
+    value=scorer.score_pair(
+        {"title":"Paul Heyman Reacts To Roman Reigns Injury"},
+        {"title":"Roman Reigns Injury Draws Reaction From Paul Heyman"})
+    assert value["components"]["entity_subject"] == 1.0
+    assert value["components"]["central_fact_action"] == 1.0
+    assert value["above_threshold"]
+
+
+def test_recent_bilingual_history_uses_preserved_source_title_for_scoring():
+    current={"source_url":"https://current.test/daria",
+             "title":"Daria Rae Lands Pro Wrestler Role In Netflix Series"}
+    history={"source_url":"https://history.test/daria",
+             "source_title":"Daria Rae Lands Pro Wrestler Role In Netflix Series",
+             "title_it":"Daria Rae ottiene un ruolo da wrestler in una serie Netflix"}
+    value=scorer.score_pair(current, history)
+    assert value["components"]["entity_subject"] == 1.0
+    assert value["components"]["central_fact_action"] == 1.0
+    assert value["above_threshold"]
+
+
+def test_shared_production_scorer_admits_contextual_entertainment_casting_without_broad_bonus():
+    left=article("https://casting.test/one",
+        "TNA's Daria Rae (Fka WWE's Sonya Deville) Reportedly Lands Role In Netflix Series")
+    right=article("https://casting.test/two",
+        "TNA’s Daria Rae Lands Pro Wrestler Role in Netflix Series ‘Myron Bolitar’")
+    value=scorer.score_pair(left,right)
+    assert scorer.DEFAULT_THRESHOLD == .55
+    assert value["components"]["central_fact_action"] == 1.0
+    assert value["score"] >= scorer.DEFAULT_THRESHOLD and value["above_threshold"]
+    assert scorer is menzo.duplicate_scorer
+    lowercase=scorer.score_pair(
+        article("https://casting.test/lower-a", "daria rae lands role in streaming series"),
+        article("https://casting.test/lower-b", "daria rae cast in pro wrestler role for streaming series"))
+    assert lowercase["components"]["entity_subject"] == 1.0 and lowercase["above_threshold"]
+    mononym=scorer.score_pair(
+        article("https://casting.test/sting-a", "Sting Lands Role In Drama Series"),
+        article("https://casting.test/sting-b", "Sting Cast In Wrestler Role For Drama Series"))
+    assert mononym["components"]["entity_subject"] == 1.0 and mononym["above_threshold"]
+    unrelated=scorer.score_pair(article("https://casting.test/a", "Alex Smith lands wrestling role backstage"),
+                                article("https://casting.test/b", "Alex Smith discusses contract in interview"))
+    assert unrelated["score"] < scorer.DEFAULT_THRESHOLD
+    different_subjects=scorer.score_pair(
+        article("https://casting.test/c", "john cena lands role in netflix series"),
+        article("https://casting.test/d", "daria rae lands role in amazon series"))
+    assert different_subjects["components"]["central_fact_action"] == 1.0
+    assert different_subjects["components"]["entity_subject"] == 0.0
+    assert different_subjects["score"] < scorer.DEFAULT_THRESHOLD
+    title_case=scorer.score_pair(
+        article("https://casting.test/e", "John Cena Lands Role In Netflix Series"),
+        article("https://casting.test/f", "Daria Rae Lands Role In Amazon Series"))
+    assert title_case["components"]["central_fact_action"] == 1.0
+    assert title_case["components"]["entity_subject"] == 0.0
+    assert title_case["score"] < scorer.DEFAULT_THRESHOLD
+    shared_platform=scorer.score_pair(
+        article("https://casting.test/g", "John Cena Lands Role In Netflix Series"),
+        article("https://casting.test/h", "Daria Rae Lands Role In Netflix Series"))
+    assert shared_platform["components"]["central_fact_action"] == 1.0
+    assert shared_platform["components"]["entity_subject"] == 0.0
+    assert shared_platform["score"] < scorer.DEFAULT_THRESHOLD
+    post_action_context=scorer.score_pair(
+        article("https://casting.test/i", "John Cena Lands Role In Netflix Original Series"),
+        article("https://casting.test/j", "Daria Rae Lands Role In Netflix Original Film"))
+    assert post_action_context["components"]["central_fact_action"] == 1.0
+    assert post_action_context["components"]["entity_subject"] == 0.0
+    assert post_action_context["score"] < scorer.DEFAULT_THRESHOLD
+    casing=scorer.score_pair(
+        article("https://casting.test/k", "John Cena Lands Role In Netflix Film"),
+        article("https://casting.test/l", "john cena lands role in netflix film"))
+    assert casing["components"]["entity_subject"] == 1.0 and casing["above_threshold"]
+    different_action=scorer.score_pair(
+        article("https://casting.test/m", "John Cena Joins Survivor Series Match"),
+        article("https://casting.test/n", "John Cena Lands Role In Netflix Series"))
+    assert not different_action["above_threshold"]
+    generic_context=scorer.score_pair(
+        article("https://casting.test/o", "Former WWE Superstar John Cena Lands Role In Netflix Series"),
+        article("https://casting.test/p", "Former WWE Superstar Daria Rae Lands Role In Amazon Series"))
+    assert generic_context["components"]["entity_subject"] == 0.0
+    assert not generic_context["above_threshold"]
+
+
+def test_subject_anchor_and_explicit_incompatibility_bound_non_exact_suspicion():
+    incompatible=scorer.score_pair({"title":"CM Punk suffers injury at WWE Raw"},
+                                   {"title":"CM Punk suffers injury at AEW Dynamite"})
+    assert incompatible["components"]["entity_subject"] == 1.0
+    assert incompatible["penalties"]["incompatible_promotion"] == 0.0
+    assert incompatible["penalties"]["incompatible_event"] > 0
+    assert not incompatible["above_threshold"]
+
+
 def test_same_run_failure_cooldown_avoids_retry(monkeypatch,tmp_path):
     isolate(monkeypatch,tmp_path); calls=[]
     monkeypatch.setattr(menzo,"call_gemini_json_model",lambda p,m,**k:calls.append(k["phase"]) or ({"bad":True},m))

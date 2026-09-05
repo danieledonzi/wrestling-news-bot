@@ -1,4 +1,4 @@
-"""Pure deterministic admission gate for Menzo duplicate arbitration."""
+"""Canonical shared deterministic admission gate for production Menzo and Director Shadow."""
 from __future__ import annotations
 
 import hashlib
@@ -8,7 +8,7 @@ import re
 from typing import Any, Dict, Iterable, Set
 from urllib.parse import urlsplit, urlunsplit
 
-SCORER_VERSION = "v95.18-deterministic-suspicion-2"
+SCORER_VERSION = "v95.18-deterministic-suspicion-3-casting-action"
 DEFAULT_THRESHOLD = 0.55
 WEIGHTS = {"entity_subject": .30, "central_fact_action": .25,
            "event_show_match": .20, "promotion": .10,
@@ -31,9 +31,14 @@ _ACTIONS = {
     "schedule":{"cancelled","canceled","postponed","venue","date","location","cancellato","cancellata","rinviato","rinviata","sede","data","luogo"},
     "confirmation":{"rumor","rumour","confirmed","confirmation","officially","denies","denied","indiscrezione","voce","confermato","confermata","conferma","ufficiale","ufficialmente","smentisce","smentito","smentita"},
 }
+_ENTERTAINMENT_CASTING_VERBS = {"cast", "casting", "casted", "lands", "landed", "portrays", "portray", "joins"}
+_ENTERTAINMENT_CASTING_NOUNS = {"role", "actor", "actress", "character", "film", "movie"}
+_ENTERTAINMENT_CASTING_TERMS = _ENTERTAINMENT_CASTING_VERBS | _ENTERTAINMENT_CASTING_NOUNS
 _PROMOTIONS = {"wwe","aew","tna","roh","nxt","njpw","mlw","gcw"}
 _SHOWS = {"raw","smackdown","dynamite","collision","nxt","wrestlemania","summerslam","all out",
           "double or nothing","royal rumble","survivor series","wrestledream"}
+_SUBJECT_BOUNDARY_TERMS = set().union(*_ACTIONS.values()) | _ENTERTAINMENT_CASTING_VERBS
+_NON_SUBJECT_TERMS = _SUBJECT_BOUNDARY_TERMS | _ENTERTAINMENT_CASTING_NOUNS | _PROMOTIONS | _STOP | _GENERIC_ENTITY
 
 def effective_threshold(environ: Dict[str, str] | None = None) -> float:
     env = os.environ if environ is None else environ
@@ -66,17 +71,26 @@ def _jaccard(a: Set[str], b: Set[str]) -> float:
 
 def _categories(text: str) -> Set[str]:
     words = _tokens(text)
-    return {name for name, terms in _ACTIONS.items() if words & terms}
+    categories = {name for name, terms in _ACTIONS.items() if words & terms}
+    # A role is too generic by itself.  Treat it as a central action only when
+    # an assignment/casting verb and an entertainment-role noun are both
+    # present; this captures casting developments without a person/platform
+    # special case or a broad same-subject bonus.
+    if words & _ENTERTAINMENT_CASTING_VERBS and words & _ENTERTAINMENT_CASTING_NOUNS:
+        categories.add("entertainment_casting")
+    return categories
 
 def _named_subjects(text: str) -> Set[str]:
     # Consecutive capitalized words are stable subject signals; lower-case tokens
     # still provide a conservative fallback for normalized feeds.
     capitals = re.findall(r"\b[A-Z][A-Za-z]+\b", text)
-    names = {f"{capitals[i]} {capitals[i+1]}".lower() for i in range(len(capitals)-1)}
+    names = {f"{capitals[i]} {capitals[i+1]}".lower() for i in range(len(capitals)-1)
+             if capitals[i].lower() not in _NON_SUBJECT_TERMS
+             and capitals[i+1].lower() not in _NON_SUBJECT_TERMS}
     # Surnames permit "CM Punk" vs "Punk", without treating arbitrary shared
     # generic words as entities.
-    names.update(x.lower() for x in capitals if len(x) >= 4 and x.lower() not in _GENERIC_ENTITY)
-    return names or (_tokens(text.lower()) - set().union(*_ACTIONS.values()) - _PROMOTIONS - _STOP - _GENERIC_ENTITY)
+    names.update(x.lower() for x in capitals if len(x) >= 4 and x.lower() not in _NON_SUBJECT_TERMS)
+    return names or (_tokens(text.lower()) - _NON_SUBJECT_TERMS)
 
 def _field_text(record: Dict[str, Any], keys: Iterable[str]) -> str:
     values=[]
@@ -85,6 +99,20 @@ def _field_text(record: Dict[str, Any], keys: Iterable[str]) -> str:
         if isinstance(value,(list,tuple,set)): values.extend(str(x) for x in value)
         elif value: values.append(str(value))
     return " ".join(values)
+
+def _subject_evidence(record: Dict[str, Any]) -> Set[str]:
+    structured = _field_text(record, ("wrestlers", "entities"))
+    if structured:
+        return _named_subjects(structured)
+    title = _field_text(record, ("title", "source_title", "title_it", "summary"))
+    matches = list(re.finditer(r"\b(?:" + "|".join(sorted(_SUBJECT_BOUNDARY_TERMS)) + r")\b",
+                               title, flags=re.IGNORECASE))
+    prefix = title[:matches[0].start()] if matches else ""
+    leading = _named_subjects(prefix) if prefix else set()
+    prefix_words = re.findall(r"[A-Za-z]+", prefix)
+    if leading and (len(_tokens(prefix) - _NON_SUBJECT_TERMS) >= 2 or len(prefix_words) == 1):
+        return leading
+    return _named_subjects(title)
 
 def score_pair(a: Dict[str, Any], b: Dict[str, Any], threshold: float | None = None) -> Dict[str, Any]:
     threshold = effective_threshold() if threshold is None else float(threshold)
@@ -96,8 +124,12 @@ def score_pair(a: Dict[str, Any], b: Dict[str, Any], threshold: float | None = N
     full_a = _field_text(a,soft).lower(); full_b = _field_text(b,soft).lower()
     subject_text_a=_field_text(a,("title","source_title","title_it","summary","entities","wrestlers"))
     subject_text_b=_field_text(b,("title","source_title","title_it","summary","entities","wrestlers"))
-    subjects_a, subjects_b = _named_subjects(subject_text_a), _named_subjects(subject_text_b)
     actions_a, actions_b = _categories(full_a), _categories(full_b)
+    if "entertainment_casting" in actions_a & actions_b:
+        subjects_a, subjects_b = _subject_evidence(a), _subject_evidence(b)
+    else:
+        subjects_a, subjects_b = _named_subjects(subject_text_a), _named_subjects(subject_text_b)
+    shared_subjects = subjects_a & subjects_b
     event_a=(full_a+" "+_field_text(a,("event","show","event_name","match","event_key")).lower())
     event_b=(full_b+" "+_field_text(b,("event","show","event_name","match","event_key")).lower())
     shows_a = {x for x in _SHOWS if x in event_a}; shows_b = {x for x in _SHOWS if x in event_b}
@@ -106,7 +138,7 @@ def score_pair(a: Dict[str, Any], b: Dict[str, Any], threshold: float | None = N
     dates_a = set(re.findall(date_re, full_a)); dates_b = set(re.findall(date_re, full_b))
     title_tokens_a = _tokens(title_a + " " + (urlsplit(ua).path if ua else "")); title_tokens_b = _tokens(title_b + " " + (urlsplit(ub).path if ub else ""))
     components = {
-        "entity_subject": 1.0 if subjects_a & subjects_b else 0.0,
+        "entity_subject": 1.0 if shared_subjects else 0.0,
         "central_fact_action": 1.0 if actions_a & actions_b else 0.0,
         "event_show_match": 1.0 if shows_a & shows_b else 0.0,
         "promotion": 1.0 if promos_a & promos_b else 0.0,
@@ -121,5 +153,6 @@ def score_pair(a: Dict[str, Any], b: Dict[str, Any], threshold: float | None = N
     value = round(min(1.0, max(0.0, value)), 6)
     reasons = [k for k,v in components.items() if v] + ["penalty:"+k for k,v in penalties.items() if v]
     return {"scorer_version": SCORER_VERSION, "score": value, "threshold": threshold,
-            "above_threshold": value >= threshold, "exact_duplicate": bool(exact_reason),
-            "exact_reason": exact_reason, "components": components, "penalties": penalties, "reasons": reasons}
+            "above_threshold": value >= threshold,
+            "exact_duplicate": bool(exact_reason), "exact_reason": exact_reason,
+            "components": components, "penalties": penalties, "reasons": reasons}
