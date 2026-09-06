@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Any, Callable, Mapping
 
 from agents import menzo_editorial_director_shadow as shadow
-from agents.canonical_event_ledger import OperationalAIRequest, active_event
+from agents.canonical_event_ledger import OperationalAIRequest
 from agents.gemini_ledger import record_gemini_attempt
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -230,10 +230,6 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
             result = {**base, "status": "VALIDATED", "attempts": index + 1,
                       "logical_request_id": request.logical_request_id, "policy_digest": digest,
                       "input_digest": snapshot["input_digest"], "output": output, "validation_errors": []}
-            active_event("stage_completed", "Menzo", "selection", "success",
-                         result="editorial_director_active_authorized", reason_code="editorial_director_active")
-            if artifact_index is not None:
-                artifact_index.safely("observe_editorial_director_active", snapshot, output, result)
             return result
     return {**base, "attempts": 2, "logical_request_id": request.logical_request_id,
             "validation_errors": failures, "fallback_reason": failures[0]["family"] if failures else "validation_failed"}
@@ -276,13 +272,27 @@ def project(snapshot: Mapping[str, Any], result: Mapping[str, Any]) -> dict[str,
                              "skipped": len(projected["skipped"]), "decision_authority": "editorial_director"}
     projected["allowed_urls_for_v92"] = [str(item.get("url") or item.get("source_url"))
         for item in projected["selected"] if item.get("url") or item.get("source_url")]
-    from agents.menzo_policy_v93_15 import (ARTIFACT_DECISIONS_FILE, MENZO_DECISIONS_FILE,
-        V92_ALLOWED_URLS_FILE, save_hard_skips, save_softpool, utc_now, write_json)
-    save_softpool(projected)
-    save_hard_skips(projected)
-    write_json(MENZO_DECISIONS_FILE, projected)
-    write_json(ARTIFACT_DECISIONS_FILE, projected)
-    write_json(V92_ALLOWED_URLS_FILE, {"generated_at": utc_now(), "version": POLICY_VERSION,
-                                      "decision_authority": "editorial_director",
-                                      "allowed_urls": projected["allowed_urls_for_v92"]})
+    from agents.menzo_policy_v93_15 import (ARTIFACT_DECISIONS_FILE, HARD_SKIP_FILE, MENZO_DECISIONS_FILE,
+        SOFTPOOL_FILE, V92_ALLOWED_URLS_FILE, save_hard_skips, save_softpool, utc_now, write_json)
+    paths = tuple(Path(path) for path in (SOFTPOOL_FILE, HARD_SKIP_FILE, MENZO_DECISIONS_FILE,
+                                         ARTIFACT_DECISIONS_FILE, V92_ALLOWED_URLS_FILE))
+    before = {path: path.read_bytes() if path.exists() else None for path in paths}
+    try:
+        save_softpool(projected)
+        save_hard_skips(projected)
+        write_json(MENZO_DECISIONS_FILE, projected)
+        write_json(ARTIFACT_DECISIONS_FILE, projected)
+        write_json(V92_ALLOWED_URLS_FILE, {"generated_at": utc_now(), "version": POLICY_VERSION,
+                                          "decision_authority": "editorial_director",
+                                          "allowed_urls": projected["allowed_urls_for_v92"]})
+    except Exception:
+        for path, content in before.items():
+            if content is None:
+                path.unlink(missing_ok=True)
+            else:
+                path.parent.mkdir(parents=True, exist_ok=True)
+                temporary = path.with_suffix(path.suffix + ".active-rollback")
+                temporary.write_bytes(content)
+                temporary.replace(path)
+        raise
     return projected

@@ -424,6 +424,20 @@ def active_fallback_reason(director_result: Any, exc: Exception) -> str:
                type(exc).__name__)
 
 
+def observe_applied_active_authority(artifacts: Any, snapshot: dict[str, Any], result: dict[str, Any]) -> None:
+    """Record authority only after projection commits; telemetry remains fail-open."""
+    try:
+        from agents.canonical_event_ledger import active_event
+        active_event("stage_completed", "Menzo", "selection", "success",
+                     result="editorial_director_active_authorized", reason_code="editorial_director_active")
+    except Exception:
+        pass
+    try:
+        artifacts.safely("observe_editorial_director_active", snapshot, result["output"], result)
+    except Exception:
+        pass
+
+
 def main() -> int:
     ensure_artifacts()
     started_at = utc_now()
@@ -481,6 +495,7 @@ def main() -> int:
             director_result = evaluate_active(director_snapshot, artifact_index=artifacts)
             if director_result.get("status") == "VALIDATED":
                 menzo_decision = project_active(director_snapshot, director_result)
+                observe_applied_active_authority(artifacts, director_snapshot, director_result)
                 add_timeline(timeline, "Menzo", "editorial_director_active_authoritative", "VALIDATED")
             else:
                 raise RuntimeError(str(director_result.get("fallback_reason") or director_result.get("status")))

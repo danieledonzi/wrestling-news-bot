@@ -210,6 +210,33 @@ def test_active_defer_uses_bounded_softpool_decay_without_overriding_select(monk
     assert len(skipped["skipped"]) == 1 and not skipped["pending"] and not skipped_pool
 
 
+def test_failed_late_active_persistence_restores_every_state_file(monkeypatch, tmp_path):
+    s = snapshot(); monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    result = active.evaluate(s, provider=lambda *_: response(s))
+    fields = ("SOFTPOOL_FILE", "HARD_SKIP_FILE", "MENZO_DECISIONS_FILE",
+              "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE")
+    before = {}
+    for index, field in enumerate(fields):
+        path = tmp_path / f"{field}.json"
+        monkeypatch.setattr(menzo, field, path)
+        if field != "V92_ALLOWED_URLS_FILE":
+            content = f"pre-active-{index}".encode()
+            path.write_bytes(content); before[path] = content
+        else:
+            before[path] = None
+    original_write = menzo.write_json
+    def fail_late(path, value):
+        if path == menzo.V92_ALLOWED_URLS_FILE:
+            raise OSError("late allowed-url failure")
+        return original_write(path, value)
+    monkeypatch.setattr(menzo, "write_json", fail_late)
+    import pytest
+    with pytest.raises(OSError, match="late allowed-url failure"):
+        active.project(s, result)
+    for path, content in before.items():
+        assert (path.read_bytes() if path.exists() else None) == content
+
+
 def test_exact_winner_uses_legacy_hydration_then_canonical_winner(monkeypatch):
     same = {"source": "feed", "title": "Exact", "summary": "Same material"}
     s = shadow.capture_opportunity({"news_candidates_for_menzo": [
@@ -340,8 +367,12 @@ def test_active_fallback_reason_preserves_structured_specificity():
 def test_runner_routes_active_success_without_legacy_and_failure_once(monkeypatch, tmp_path):
     import newsroom_runner
     from agents import menzo_editorial_director_shadow as shadow_module
+    observed = []; authority_events = []
+    from agents import canonical_event_ledger
+    monkeypatch.setattr(canonical_event_ledger, "active_event",
+                        lambda *args, **kwargs: authority_events.append((args, kwargs)))
     class Observer:
-        def safely(self, *_a, **_k): pass
+        def safely(self, *args, **_k): observed.append(args[0] if args else "")
         def summary(self): return {}
     monkeypatch.chdir(tmp_path)
     monkeypatch.setenv("OWTV_EDITORIAL_DIRECTOR_ACTIVE_ENABLED", "true")
@@ -367,6 +398,25 @@ def test_runner_routes_active_success_without_legacy_and_failure_once(monkeypatc
     monkeypatch.setattr(active, "project", lambda *_a, **_k: {"version": "active", "selected": [],
         "pending": [], "skipped": [], "handoff": {"decision_authority": "editorial_director"}})
     assert newsroom_runner.main() == 0 and legacy_calls == []
+    assert "observe_editorial_director_active" in observed
+    assert any(kwargs.get("result") == "editorial_director_active_authorized" for _, kwargs in authority_events)
+    observed.clear(); authority_events.clear()
+    monkeypatch.setattr(active, "project", lambda *_a, **_k:
+                        (_ for _ in ()).throw(OSError("projection failed")))
+    persisted = []
+    def persist_projection_fallback(decision, reason):
+        decision["decision_authority"] = "legacy_menzo_fallback"
+        persisted.append((decision, reason))
+        return decision
+    monkeypatch.setattr(newsroom_runner, "persist_active_fallback", persist_projection_fallback)
+    assert newsroom_runner.main() == 0
+    assert legacy_calls == ["legacy_menzo_fallback"]
+    assert persisted[0][0]["decision_authority"] == "legacy_menzo_fallback"
+    assert "observe_editorial_director_active" not in observed
+    assert not any(kwargs.get("result") == "editorial_director_active_authorized" for _, kwargs in authority_events)
+    legacy_calls.clear(); observed.clear(); authority_events.clear()
+    monkeypatch.setattr(active, "project", lambda *_a, **_k: {"version": "active", "selected": [],
+        "pending": [], "skipped": [], "handoff": {"decision_authority": "editorial_director"}})
     monkeypatch.setattr(active, "evaluate", lambda *_a, **_k:
                         {"status": "failed", "fallback_reason": "invalid"})
     persisted = []
