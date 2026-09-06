@@ -214,9 +214,10 @@ def call_quote_resolver_gemini(prompt: str, *, article_context: dict[str, Any] |
                 decision_result = None
                 if data is not None:
                     kind = str(data.get("kind") or "uncertain")
+                    allowed_kinds = QUOTE_RESOLVER_ALLOWED_KINDS if is_short_ambiguous_quote(expression) else {TRANSLATED_PROSE_KIND}
                     if not isinstance(data.get("allow"), bool):
                         decision_result = "malformed_allow"
-                    elif data.get("allow") is True and kind in QUOTE_RESOLVER_ALLOWED_KINDS | {TRANSLATED_PROSE_KIND}:
+                    elif data.get("allow") is True and kind in allowed_kinds:
                         decision_result = "allow"
                     else:
                         decision_result = "uncertain" if kind == "uncertain" else "block"

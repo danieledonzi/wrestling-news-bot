@@ -350,3 +350,44 @@ def test_alfred_valid_json_real_response_writes_one_decision_row(tmp_path, monke
     assert rows[0]["result"] == "valid_json"
     assert rows[0]["decision_result"] == "allow"
     assert rows[0]["usage_available"] is True
+
+
+def resolver_response_with_ledger(monkeypatch, decision):
+    class Resp:
+        text = json.dumps(decision)
+        usage_metadata = type("Meta", (), {"prompt_token_count": 4, "candidates_token_count": 2, "total_token_count": 6})()
+
+    class Models:
+        def generate_content(self, *, model, contents):
+            return Resp()
+
+    class Client:
+        def __init__(self, api_key):
+            self.models = Models()
+
+    import google.genai as real_genai
+    monkeypatch.setattr(real_genai, "Client", Client)
+
+
+def test_short_translated_prose_kind_is_blocked_in_decision_and_ledger(tmp_path, monkeypatch):
+    patch_paths(tmp_path, monkeypatch)
+    monkeypatch.setenv("GEMINI_API_KEY", "test-key")
+    monkeypatch.setattr(alfred, "ALFRED_QUOTE_RESOLVER_MODEL_CHAIN", ["m1"])
+    resolver_response_with_ledger(monkeypatch, {"allow": True, "kind": "translated_italian_prose"})
+
+    out = alfred.resolve_possible_untranslated_quote("Final Boss", {"title": "Article"}, history={"entries": {}})
+
+    assert out["allow"] is False
+    assert ledger_records()[0]["decision_result"] == "block"
+
+
+def test_long_branding_kind_is_blocked_in_decision_and_ledger(tmp_path, monkeypatch):
+    patch_paths(tmp_path, monkeypatch)
+    monkeypatch.setenv("GEMINI_API_KEY", "test-key")
+    monkeypatch.setattr(alfred, "ALFRED_QUOTE_RESOLVER_MODEL_CHAIN", ["m1"])
+    resolver_response_with_ledger(monkeypatch, {"allow": True, "kind": "title_or_branding"})
+
+    out = alfred.resolve_possible_untranslated_quote("Cena suffered serious injuries following Saturday's attack", {"title": "Article"}, history={"entries": {}})
+
+    assert out["allow"] is False
+    assert ledger_records()[0]["decision_result"] == "block"
