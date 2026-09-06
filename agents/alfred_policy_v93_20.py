@@ -111,7 +111,7 @@ def has_positive_english_narrative_evidence(expression: str) -> bool:
 
 def is_clearly_italian_quote(expression: str) -> bool:
     words = re.findall(r"[a-zA-ZÀ-ÿ']+", expression.casefold())
-    italian = sum(word in ITALIAN_MARKERS and word != "i" for word in words)
+    italian = len({word for word in words if word in ITALIAN_MARKERS})
     english = sum(word in ENGLISH_MARKERS for word in words)
     return len(words) >= 8 and italian >= 3 and italian >= english + 2
 

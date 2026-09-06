@@ -197,6 +197,17 @@ def test_repeated_english_i_does_not_count_as_italian_evidence(tmp_path, monkeyp
     assert result["postprocess"]["quote_resolver_calls"] == 0
 
 
+def test_repeated_italian_marker_does_not_create_italian_evidence(tmp_path, monkeypatch):
+    patch_paths(tmp_path, monkeypatch)
+    monkeypatch.setattr(alfred, "call_quote_resolver_gemini", lambda *a, **k: (_ for _ in ()).throw(AssertionError("should not call Gemini")))
+    expression = "Injury recovery takes time; work improves per day, per week, per month"
+
+    result = run_with_base_review(monkeypatch, article_with_quote(expression), base_review_for(expression))
+
+    assert [i for i in issues(result) if i.get("code") == "untranslated_quote"]
+    assert result["postprocess"]["quote_resolver_calls"] == 0
+
+
 def test_invalid_json_or_gemini_error_remains_blocker_and_failed_ledger(tmp_path, monkeypatch):
     patch_paths(tmp_path, monkeypatch)
     monkeypatch.setattr(alfred, "call_quote_resolver_gemini", lambda *a, **k: (None, "gemini-2.5-flash-lite", "invalid_json"))
