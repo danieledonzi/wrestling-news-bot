@@ -19,11 +19,33 @@ SCHEMA_VERSION = "owtv_editorial_director_output_v3"
 POLICY_VERSION = "owtv_editorial_director_policy_v3_active"
 SCHEMA_PATH = ROOT / "config/editorial_director_output_schema_v3.json"
 POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V3_ACTIVE.md"
+BOB_CAPACITY_FIELDS = ("article_type", "source_title", "category_hint", "reason",
+                       "ai_editorial_reason", "event_key")
 
 
 def enabled(environ: Mapping[str, str] | None = None) -> bool:
     value = (environ or os.environ).get("OWTV_EDITORIAL_DIRECTOR_ACTIVE_ENABLED", "false")
     return str(value).strip().lower() in {"1", "true", "yes", "on"}
+
+
+def preserve_bob_capacity_metadata(snapshot: dict[str, Any], candidates: list[Mapping[str, Any]]) -> None:
+    """Attach an Active-local sidecar which is never part of provider projection."""
+    from agents.duplicate_pair_identity import article_id
+    known = {row.get("candidate_id") for row in snapshot.get("candidates", [])}
+    sidecar = {}
+    for item in candidates:
+        candidate_id = article_id(item)
+        if candidate_id in known:
+            metadata = {field: copy.deepcopy(item[field]) for field in BOB_CAPACITY_FIELDS if field in item}
+            if metadata:
+                sidecar[candidate_id] = metadata
+    snapshot["_active_bob_capacity_metadata"] = sidecar
+
+
+def _capacity_candidate(snapshot: Mapping[str, Any], candidate: Mapping[str, Any]) -> dict[str, Any]:
+    sidecar = snapshot.get("_active_bob_capacity_metadata", {})
+    metadata = sidecar.get(candidate.get("candidate_id"), {}) if isinstance(sidecar, Mapping) else {}
+    return {**copy.deepcopy(dict(candidate)), **copy.deepcopy(dict(metadata))}
 
 
 def prepare_snapshot(snapshot: dict[str, Any]) -> dict[str, Any]:
@@ -85,6 +107,8 @@ def prepare_snapshot(snapshot: dict[str, Any]) -> dict[str, Any]:
         snapshot["authorized_relations"] = rebuilt
         snapshot["authorized_relations_complete"] = complete
     snapshot["deterministic_exact_skips"] = deterministic_skips
+    # This pre-provider value remains only the existing compact-pool hint. The
+    # authoritative capacity is recomputed from sidecar-restored SELECT rows.
     capacity, reason = dynamic_article_capacity({"selected": winners}, winners)
     snapshot["downstream_capacity"] = max(0, capacity)
     snapshot["downstream_capacity_reason"] = reason
@@ -134,7 +158,7 @@ def _validate_active(value: Any, snapshot: Mapping[str, Any]):
     if selected > int(snapshot.get("remaining_slots", 0)):
         failures.append({"family": "publication_capacity", "selected": selected,
                          "remaining_slots": int(snapshot.get("remaining_slots", 0))})
-    selected_candidates = [refs[ref] for ref, raw in raw_by_ref.items()
+    selected_candidates = [_capacity_candidate(snapshot, refs[ref]) for ref, raw in raw_by_ref.items()
                            if raw.get("recommended_action") == "SELECT" and ref in refs]
     from agents.bob import dynamic_article_capacity
     downstream_capacity, capacity_reason = dynamic_article_capacity({"selected": selected_candidates}, selected_candidates)
@@ -245,6 +269,9 @@ def project(snapshot: Mapping[str, Any], result: Mapping[str, Any]) -> dict[str,
     for decision in result["output"]["candidates"]:
         item = copy.deepcopy(originals[decision["candidate_id"]])
         item.pop("candidate_id", None)
+        sidecar = snapshot.get("_active_bob_capacity_metadata", {})
+        if isinstance(sidecar, Mapping):
+            item.update(copy.deepcopy(sidecar.get(decision["candidate_id"], {})))
         item["editorial_director"] = {"policy_version": POLICY_VERSION, **copy.deepcopy(decision),
                                       "decision_authority": "editorial_director"}
         item["decision_authority"] = "editorial_director"

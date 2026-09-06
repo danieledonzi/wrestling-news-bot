@@ -382,7 +382,8 @@ def initialize_canonical_artifact_index(run_id: str) -> Any:
 
 
 def capture_editorial_director_opportunity(massy_board: dict[str, Any], *, run_id: str,
-                                            observation_timestamp: str) -> tuple[Any, Any, Any]:
+                                            observation_timestamp: str,
+                                            preserve_active_metadata: bool = False) -> tuple[Any, Any, Any]:
     """Return snapshot, diagnostic result and the single Menzo preflight result."""
     from agents.menzo_editorial_director_shadow import (capture_opportunity, costly_work_eligibility,
                                                         softpool_augmented_board)
@@ -390,10 +391,15 @@ def capture_editorial_director_opportunity(massy_board: dict[str, Any], *, run_i
     if not preflight[0]:
         return None, {"status": "NOT_ELIGIBLE_WP_NOT_READY", "reason": preflight[1], "attempts": 0}, preflight
     from agents.menzo_policy_v93_15 import load_authoritative_publisher_history
+    augmented = softpool_augmented_board(massy_board)
     snapshot = capture_opportunity(
-        softpool_augmented_board(massy_board), run_id=run_id, observation_timestamp=observation_timestamp,
+        augmented, run_id=run_id, observation_timestamp=observation_timestamp,
         publisher_count_24h=len(load_authoritative_publisher_history(24)),
         history=load_authoritative_publisher_history(12))
+    if preserve_active_metadata:
+        from agents.menzo_editorial_director_active import preserve_bob_capacity_metadata
+        preserve_bob_capacity_metadata(snapshot, [item for item in augmented.get("news_candidates_for_menzo", [])
+                                                   if isinstance(item, dict)])
     return snapshot, None, preflight
 
 
@@ -420,8 +426,9 @@ def persist_active_fallback(decision: dict[str, Any], reason: str) -> dict[str, 
 def active_fallback_reason(director_result: Any, exc: Exception) -> str:
     """Return the most specific structured Active failure provenance available."""
     result = director_result if isinstance(director_result, dict) else {}
-    return str(result.get("fallback_reason") or result.get("reason") or result.get("status") or
-               type(exc).__name__)
+    status = result.get("status")
+    return str(result.get("fallback_reason") or result.get("reason") or
+               (status if status and status != "VALIDATED" else None) or type(exc).__name__)
 
 
 def observe_applied_active_authority(artifacts: Any, snapshot: dict[str, Any], result: dict[str, Any]) -> None:
@@ -481,7 +488,8 @@ def main() -> int:
         active_director = active_enabled()
         if active_director or shadow_enabled():
             director_snapshot, director_result, menzo_preflight = capture_editorial_director_opportunity(
-                massy_board, run_id=os.environ["NEWSROOM_RUN_ID"], observation_timestamp=utc_now())
+                massy_board, run_id=os.environ["NEWSROOM_RUN_ID"], observation_timestamp=utc_now(),
+                preserve_active_metadata=active_director)
     except Exception as exc:
         director_result = {"status": "CAPTURE_FAILED", "fallback_reason": type(exc).__name__}
         add_timeline(timeline, "Menzo", "editorial_director_capture_failed_open", type(exc).__name__)

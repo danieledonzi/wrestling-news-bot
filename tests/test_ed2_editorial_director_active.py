@@ -330,6 +330,41 @@ def test_actual_selected_set_not_pool_controls_post_show_capacity(monkeypatch):
     assert len(calls) == 2 and result["validation_errors"][0]["family"] == "downstream_capacity"
 
 
+def test_hidden_capacity_metadata_preserves_six_hard_news_selects(monkeypatch, tmp_path):
+    from agents import bob
+    monkeypatch.setattr(bob, "report_was_published_or_attempted", lambda: False)
+    rows = [{"source": "feed", "title": f"Distinct {i}", "url": f"https://six.test/{i}",
+             "summary": f"fact {i}", "article_type": "hard_news",
+             "source_title": f"Capacity source marker {i}", "reason": "factual",
+             "ai_editorial_reason": "retained", "event_key": f"event-{i}",
+             "category_hint": "old-category"} for i in range(6)]
+    s = shadow.capture_opportunity({"news_candidates_for_menzo": rows}, run_id="run",
+        observation_timestamp="now", publisher_count_24h=0, history=[])
+    without_sidecar = __import__("copy").deepcopy(s)
+    active.preserve_bob_capacity_metadata(s, rows)
+    active.prepare_snapshot(s); active.prepare_snapshot(without_sidecar)
+    assert s["input_digest"] == without_sidecar["input_digest"]
+    assert s["observed"]["serialized_input_bytes"] == without_sidecar["observed"]["serialized_input_bytes"]
+    provider = active.active_provider_input(s)
+    serialized = __import__("json").dumps(provider)
+    assert "_active_bob_capacity_metadata" not in provider
+    assert "hard_news" not in serialized and "Capacity source marker" not in serialized
+    out = {"candidates": [{"ref": f"c{i}", "editorial_class": "MUST_PUBLISH",
+        "recommended_action": "SELECT", "category": "WWE", "story_core": f"core {i}"}
+        for i in range(6)], "relations": [{"ref": f"r{i}", "decision": "NO_MATCH"}
+        for i in range(len(s["authorized_relations"]))]}
+    result = active.evaluate(s, provider=lambda *_: out)
+    assert result["status"] == "VALIDATED"
+    for field in ("SOFTPOOL_FILE", "HARD_SKIP_FILE", "MENZO_DECISIONS_FILE",
+                  "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE"):
+        monkeypatch.setattr(menzo, field, tmp_path / f"{field}.json")
+    projected = active.project(s, result)
+    capacity, reason = bob.dynamic_article_capacity(projected, projected["selected"])
+    assert len(projected["selected"]) == 6 and (capacity, reason) == (6, "post_show_event_heavy")
+    assert all(item["article_type"] == "hard_news" and item["source_title"].startswith("Capacity source")
+               and item["category_hint"] == "WWE" for item in projected["selected"])
+
+
 def test_skip_class_action_contradiction_is_not_rewritten(monkeypatch):
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     for action, valid in (("SELECT", False), ("DEFER", False), ("SKIP", True)):
@@ -361,6 +396,8 @@ def test_active_fallback_reason_preserves_structured_specificity():
         {"status": "NOT_ELIGIBLE_WP_NOT_READY", "reason": "wp_not_ready"}, error) == "wp_not_ready"
     assert newsroom_runner.active_fallback_reason(
         {"status": "failed", "reason": "less_specific", "fallback_reason": "provider_failed"}, error) == "provider_failed"
+    assert newsroom_runner.active_fallback_reason({"status": "failed"}, error) == "failed"
+    assert newsroom_runner.active_fallback_reason({"status": "VALIDATED"}, OSError("projection")) == "OSError"
     assert newsroom_runner.active_fallback_reason(None, ValueError("unexpected")) == "ValueError"
 
 
@@ -412,6 +449,7 @@ def test_runner_routes_active_success_without_legacy_and_failure_once(monkeypatc
     assert newsroom_runner.main() == 0
     assert legacy_calls == ["legacy_menzo_fallback"]
     assert persisted[0][0]["decision_authority"] == "legacy_menzo_fallback"
+    assert persisted[0][1] == "OSError" and persisted[0][1] != "VALIDATED"
     assert "observe_editorial_director_active" not in observed
     assert not any(kwargs.get("result") == "editorial_director_active_authorized" for _, kwargs in authority_events)
     legacy_calls.clear(); observed.clear(); authority_events.clear()
