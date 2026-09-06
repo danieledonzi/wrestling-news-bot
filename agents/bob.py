@@ -88,6 +88,7 @@ CTA_PATTERNS = [
     re.compile(r"\bstay\s+tuned\b", re.I),
     re.compile(r"\bsubscribe\b|\bnewsletter\b|\bclick\s+here\b", re.I),
 ]
+SOURCE_SELF_REFERENCE_SITE_RE = r"(?:ringside\s+news|wrestling\s*inc\.?|fightful|pwinsider|f4wonline|wrestling\s+observer|sescoops|ewrestlingnews|411mania|bodyslam\.net)"
 FOOTER_START_PATTERNS = [
     re.compile(r"\babout\s+the\s+author\b", re.I),
     re.compile(r"\bfounder\s+of\s+ringside\s+news\b", re.I),
@@ -99,9 +100,21 @@ FOOTER_START_PATTERNS = [
     re.compile(r"\bspotlight\s+(wwe|aew|nxt|tna|roh)?\s*(videos|news)?\b", re.I),
     re.compile(r"\brelated\s+(articles|posts|news)\b", re.I),
     re.compile(r"\bmore\s+(wwe|aew|nxt|tna|roh)\s+news\b", re.I),
+    re.compile(
+        rf"(?=.*\b{SOURCE_SELF_REFERENCE_SITE_RE}\b)"
+        r"(?=.*\btranscript(?:ion)?\b)"
+        r"(?=.*\b(?:produced|prepared)\s+exclusively\b|.*\boriginal\s+(?:recording|audio|video)\b|.*\brepublish(?:ing|ed)?\b)"
+        r"(?=.*\b(?:credit|excerpt|attribution|link)\b)",
+        re.I,
+    ),
+    re.compile(
+        rf"(?=.*\b{SOURCE_SELF_REFERENCE_SITE_RE}\b)"
+        r"(?=.*\bhas\s+(?:been\s+)?(?:breaking|covering|covered|reporting)\b.{0,40}\b(?:wrestling|news)\b)"
+        r"(?=.*(?:\b(?:years?|decade|experience)\b|\b(?:reports?|reporting|work|stories|articles)\b.{0,50}\b(?:featured|appeared|published|picked\s+up)\b))",
+        re.I,
+    ),
 ]
 SOURCE_INTRO_PATTERNS = [re.compile(r"^\s*according\s+to\s+.+?:\s*$", re.I), re.compile(r"^\s*per\s+.+?:\s*$", re.I)]
-SOURCE_SELF_REFERENCE_SITE_RE = r"(?:ringside\s+news|wrestling\s*inc\.?|fightful|pwinsider|f4wonline|wrestling\s+observer|sescoops|ewrestlingnews|411mania|bodyslam\.net)"
 SOURCE_SELF_REFERENCE_PATTERNS = [
     re.compile(rf"\b{SOURCE_SELF_REFERENCE_SITE_RE}\s+(?:will\s+)?(?:continue|continuerà|continueranno)\s+(?:(?:to|a)\s+)?(?:monitor|follow|cover|provide|seguire|monitorare|fornire)\b", re.I),
     re.compile(rf"\bstay\s+tuned\s+(?:to\s+)?{SOURCE_SELF_REFERENCE_SITE_RE}\b", re.I),
@@ -521,7 +534,11 @@ def element_from_node(node: Tag, base_url: str) -> dict[str, Any] | None:
         return {"type": "embed", "url": embed_url, "source_tag": name}
     if name in {"p", "li"}:
         text = clean_text(node.get_text(" "))
-        if is_bio_or_footer_text(text) or is_source_self_reference_text(text) or any(p.search(text) for p in SOURCE_INTRO_PATTERNS):
+        # Keep high-confidence terminal markers until sanitize_elements(), where
+        # they can terminate the footer rather than merely disappearing alone.
+        if ((is_bio_or_footer_text(text) and not is_footer_start_text(text))
+                or is_source_self_reference_text(text)
+                or any(p.search(text) for p in SOURCE_INTRO_PATTERNS)):
             return None
         # v93.26: do not infer quote blocks from quotation marks in normal paragraphs.
         # Only original source <blockquote> nodes are rendered as blockquotes.
