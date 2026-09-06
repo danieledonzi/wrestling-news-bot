@@ -93,6 +93,14 @@ def test_transcript_signals_without_recognized_source_do_not_truncate():
     assert cleaned_texts(first, second) == [first, second]
 
 
+def test_editorial_transcript_report_does_not_trigger_truncation():
+    first = "Fightful's report includes a transcript of the original audio and a link to the complete interview."
+    second = "The wrestler then explained why the complete interview provided important context."
+    extracted = extracted_paragraphs(first, second)
+    cleaned, _ = bob.sanitize_elements(extracted, "")
+    assert [item["text"] for item in cleaned] == [first, second]
+
+
 def test_source_reporting_and_bare_tenure_do_not_trigger_truncation():
     first = "For years, Fightful has been covering WWE news, and its latest report says that plans changed."
     second = "The promotion will announce the revised match before Friday's event."
@@ -111,6 +119,20 @@ def test_new_source_terminal_marker_reaches_sanitize_and_truncates():
     trailing = "This terminal material must not become a translation unit."
     extracted = extracted_paragraphs(TRANSCRIPT_BOILERPLATE, trailing)
     assert [item["text"] for item in extracted] == [TRANSCRIPT_BOILERPLATE, trailing]
+    cleaned, removed = bob.sanitize_elements(extracted, "")
+    assert cleaned == []
+    assert removed[0]["reason"] == "footer_start"
+
+
+def test_first_person_source_terminal_marker_survives_source_self_reference_filter():
+    marker = (
+        "We at Wrestling Inc. prepared this transcript exclusively from the original recording; "
+        "please credit this article when using excerpts."
+    )
+    trailing = "This later terminal material must also be removed."
+    assert bob.is_high_confidence_source_terminal_boilerplate(marker) is True
+    extracted = extracted_paragraphs(marker, trailing)
+    assert [item["text"] for item in extracted] == [marker, trailing]
     cleaned, removed = bob.sanitize_elements(extracted, "")
     assert cleaned == []
     assert removed[0]["reason"] == "footer_start"

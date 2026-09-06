@@ -93,8 +93,8 @@ SOURCE_TERMINAL_BOILERPLATE_PATTERNS = [
     re.compile(
         rf"(?=.*\b{SOURCE_SELF_REFERENCE_SITE_RE}\b)"
         r"(?=.*\btranscript(?:ion)?\b)"
-        r"(?=.*\b(?:produced|prepared)\s+exclusively\b|.*\boriginal\s+(?:recording|audio|video)\b|.*\brepublish(?:ing|ed)?\b)"
-        r"(?=.*\b(?:credit|excerpt|attribution|link)\b)",
+        r"(?:(?=.*\b(?:republish(?:ing|ed)?|republication)\b)(?=.*\b(?:prohibited|not\s+permitted|restriction|may\s+not|cannot)\b)"
+        r"|(?=.*\b(?:produced|prepared)(?:\s+\w+){0,3}\s+exclusively\b)(?=.*\b(?:credit|attribution)\b)(?=.*\bexcerpts?\b))",
         re.I,
     ),
     re.compile(
@@ -541,10 +541,10 @@ def element_from_node(node: Tag, base_url: str) -> dict[str, Any] | None:
         return {"type": "embed", "url": embed_url, "source_tag": name}
     if name in {"p", "li"}:
         text = clean_text(node.get_text(" "))
+        terminal = is_high_confidence_source_terminal_boilerplate(text)
         # Keep high-confidence terminal markers until sanitize_elements(), where
         # they can terminate the footer rather than merely disappearing alone.
-        if ((is_bio_or_footer_text(text) and not is_high_confidence_source_terminal_boilerplate(text))
-                or is_source_self_reference_text(text)
+        if (((is_bio_or_footer_text(text) or is_source_self_reference_text(text)) and not terminal)
                 or any(p.search(text) for p in SOURCE_INTRO_PATTERNS)):
             return None
         # v93.26: do not infer quote blocks from quotation marks in normal paragraphs.
