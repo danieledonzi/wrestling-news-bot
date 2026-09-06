@@ -181,7 +181,7 @@ def test_death_action_recognizes_legitimate_italian_title_input():
     assert value["components"]["central_fact_action"] == 1.0
     euphemism = scorer.score_pair(
         {"title": "Andy Williams Has Passed Away"},
-        {"title": "The Passing Of Andy Williams Confirmed"},
+        {"title": "Andy Williams Confirmed To Be Passing Away"},
     )
     assert euphemism["components"]["central_fact_action"] == 1.0
 
@@ -204,6 +204,19 @@ def test_bare_passing_is_not_death_action_evidence():
     assert passing_medicals["components"]["central_fact_action"] == 0.0
     assert not passing_torch["above_threshold"]
     assert not passing_medicals["above_threshold"]
+
+
+def test_ambiguous_mortality_phrases_are_not_death_action_evidence():
+    ambiguous_titles = [
+        "Jon Moxley Competes In A Death Match",
+        "Jon Moxley Leads The Death Riders",
+        "ROH Announces Death Before Dishonor",
+        "Andy Williams Is Passing The Torch To A New Wrestler",
+        "Andy Williams Is Passing Medical Tests Before His Return",
+    ]
+
+    assert all("death" not in scorer._categories(title.lower())
+               for title in ambiguous_titles)
 
 
 def test_non_casting_subject_grounding_uses_full_titles():

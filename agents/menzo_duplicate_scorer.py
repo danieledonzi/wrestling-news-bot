@@ -20,7 +20,7 @@ _STOP = {"the","and","for","with","from","that","this","after","before","into","
 _GENERIC_ENTITY = {"backstage","major","former","breaking","source","details","reason","future","status",
                    "possible","reportedly","report","news","update","exclusive","plans","latest"}
 _ACTIONS = {
-    "death":{"death","dead","deceased","died","dies","morte","morto","morta","decesso","deceduto","deceduta","muore"},
+    "death":{"dead","deceased","died","dies","morte","morto","morta","decesso","deceduto","deceduta","muore"},
     "injury":{"injury","injured","surgery","medical","clearance","cleared","infortunio","infortunato","infortunata","lesione","operazione","chirurgia","medico","medica","idoneo","idonea"},
     "contract":{"contract","signed","signs","signing","renewal","expires","released","release","contratto","firma","firmato","firmata","rinnovo","rinnovato","scadenza","scade","rilasciato","rilasciata","licenziato","licenziata"},
     "return":{"return","returns","debut","absence","ritorno","rientro","torna","debutto","assenza"},
@@ -73,11 +73,10 @@ def _jaccard(a: Set[str], b: Set[str]) -> float:
 def _categories(text: str) -> Set[str]:
     words = _tokens(text)
     categories = {name for name, terms in _ACTIONS.items() if words & terms}
-    # Keep passing euphemisms phrase-bound so generic uses such as "passing
-    # the torch" or "passing medical tests" do not become death evidence.
+    # Keep ambiguous mortality words phrase-bound so wrestling names and
+    # non-fatal uses of "passing" do not become death evidence.
     if re.search(
-        r"\b(?:passing|passed|passes) away\b|\bthe passing of\b|"
-        r"\b(?:his|her|their) passing\b|\b[a-z]+(?:['’]s|['’]) passing\b",
+        r"\bdeath of\b|\b(?:passing|passed|passes) away\b",
         text,
     ):
         categories.add("death")
