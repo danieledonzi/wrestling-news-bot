@@ -143,6 +143,93 @@ def test_scorer_calibration_structured_and_surname():
         assert set(value["components"])==set(scorer.WEIGHTS) and value["above_threshold"] is expected
 
 
+def test_death_action_admits_real_andy_williams_pair_without_subject_only_false_positives():
+    candidate = {
+        "title": "TMZ Confirms The Butcher Andy Williams Died After Collapsing at Wrestling Show"
+    }
+    published = {
+        "title": "New Details Emerge After The Death of The Butcher Andy Williams"
+    }
+
+    value = scorer.score_pair(candidate, published)
+
+    assert scorer.DEFAULT_THRESHOLD == .55
+    assert value["components"]["entity_subject"] == 1.0
+    assert value["components"]["central_fact_action"] == 1.0
+    assert value["score"] >= scorer.DEFAULT_THRESHOLD
+    assert value["above_threshold"]
+
+    unrelated = [
+        scorer.score_pair(
+            published,
+            {"title": "The Butcher Andy Williams Discusses His Wrestling Career In Interview"},
+        ),
+        scorer.score_pair(
+            {"title": "The Butcher Andy Williams Backstage Photos"},
+            {"title": "The Butcher Andy Williams Wrestling Profile"},
+        ),
+    ]
+    assert all(pair["components"]["entity_subject"] == 1.0 for pair in unrelated)
+    assert all(not pair["above_threshold"] for pair in unrelated)
+
+
+def test_possessive_death_headlines_are_admitted_with_either_apostrophe():
+    value = scorer.score_pair(
+        {"title": "John Cena's Death Confirmed"},
+        {"title": "Cause of John Cena’s Death Revealed"},
+    )
+
+    assert value["components"]["central_fact_action"] == 1.0
+    assert value["score"] >= scorer.DEFAULT_THRESHOLD
+    assert value["above_threshold"]
+
+
+def test_death_action_recognizes_legitimate_italian_title_input():
+    value = scorer.score_pair(
+        {"title": "Andy Williams Died After Collapsing at Wrestling Show"},
+        {"title_it": "Andy Williams è morto dopo il malore durante lo show di wrestling"},
+    )
+    assert value["components"]["central_fact_action"] == 1.0
+    euphemism = scorer.score_pair(
+        {"title": "Andy Williams Has Passed Away"},
+        {"title": "Andy Williams Confirmed To Be Passing Away"},
+    )
+    assert euphemism["components"]["central_fact_action"] == 1.0
+
+
+def test_bare_passing_is_not_death_action_evidence():
+    torch_title = "Andy Williams Is Passing The Torch To A New Wrestler"
+    medical_title = "Andy Williams Is Passing Medical Tests Before His Return"
+    passing_torch = scorer.score_pair(
+        {"title": torch_title},
+        {"title": "Andy Williams Discusses Passing The Torch Backstage"},
+    )
+    passing_medicals = scorer.score_pair(
+        {"title": medical_title},
+        {"title": "Andy Williams Died After Collapsing At A Wrestling Show"},
+    )
+
+    assert "death" not in scorer._categories(torch_title.lower())
+    assert "death" not in scorer._categories(medical_title.lower())
+    assert passing_torch["components"]["central_fact_action"] == 0.0
+    assert passing_medicals["components"]["central_fact_action"] == 0.0
+    assert not passing_torch["above_threshold"]
+    assert not passing_medicals["above_threshold"]
+
+
+def test_ambiguous_mortality_phrases_are_not_death_action_evidence():
+    ambiguous_titles = [
+        "Jon Moxley Competes In A Death Match",
+        "Jon Moxley Leads The Death Riders",
+        "ROH Announces Death Before Dishonor",
+        "Andy Williams Is Passing The Torch To A New Wrestler",
+        "Andy Williams Is Passing Medical Tests Before His Return",
+    ]
+
+    assert all("death" not in scorer._categories(title.lower())
+               for title in ambiguous_titles)
+
+
 def test_non_casting_subject_grounding_uses_full_titles():
     value=scorer.score_pair(
         {"title":"Paul Heyman Reacts To Roman Reigns Injury"},

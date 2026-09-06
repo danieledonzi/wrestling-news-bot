@@ -8,7 +8,7 @@ import re
 from typing import Any, Dict, Iterable, Set
 from urllib.parse import urlsplit, urlunsplit
 
-SCORER_VERSION = "v95.18-deterministic-suspicion-3-casting-action"
+SCORER_VERSION = "v95.18-deterministic-suspicion-4-death-action"
 DEFAULT_THRESHOLD = 0.55
 WEIGHTS = {"entity_subject": .30, "central_fact_action": .25,
            "event_show_match": .20, "promotion": .10,
@@ -20,6 +20,7 @@ _STOP = {"the","and","for","with","from","that","this","after","before","into","
 _GENERIC_ENTITY = {"backstage","major","former","breaking","source","details","reason","future","status",
                    "possible","reportedly","report","news","update","exclusive","plans","latest"}
 _ACTIONS = {
+    "death":{"dead","deceased","died","dies","morte","morto","morta","decesso","deceduto","deceduta","muore"},
     "injury":{"injury","injured","surgery","medical","clearance","cleared","infortunio","infortunato","infortunata","lesione","operazione","chirurgia","medico","medica","idoneo","idonea"},
     "contract":{"contract","signed","signs","signing","renewal","expires","released","release","contratto","firma","firmato","firmata","rinnovo","rinnovato","scadenza","scade","rilasciato","rilasciata","licenziato","licenziata"},
     "return":{"return","returns","debut","absence","ritorno","rientro","torna","debutto","assenza"},
@@ -72,6 +73,14 @@ def _jaccard(a: Set[str], b: Set[str]) -> float:
 def _categories(text: str) -> Set[str]:
     words = _tokens(text)
     categories = {name for name, terms in _ACTIONS.items() if words & terms}
+    # Keep ambiguous mortality words phrase-bound so wrestling names and
+    # non-fatal uses of "passing" do not become death evidence.
+    if re.search(
+        r"\bdeath of\b|\b[a-z]+(?:'s|’s) death\b|"
+        r"\b(?:passing|passed|passes) away\b",
+        text,
+    ):
+        categories.add("death")
     # A role is too generic by itself.  Treat it as a central action only when
     # an assignment/casting verb and an entertainment-role noun are both
     # present; this captures casting developments without a person/platform
