@@ -263,6 +263,14 @@ def project(snapshot: Mapping[str, Any], result: Mapping[str, Any]) -> dict[str,
         item.update(decision="skip", priority="skip", decision_authority="deterministic_exact_duplicate",
                     reason="exact_duplicate")
         projected["skipped"].append(item)
+    # Reuse legacy bounded reconsideration only for candidates the Director has
+    # just deferred again. A recovered SELECT remains authoritative.
+    from agents.menzo_policy_v93_15 import apply_softpool_decay
+    decay_view = {"selected": [], "pending": projected["pending"], "skipped": []}
+    apply_softpool_decay(decay_view)
+    projected["pending"] = decay_view["pending"]
+    projected["skipped"].extend(decay_view["skipped"])
+    projected["postprocess"] = decay_view.get("postprocess", {})
     projected["relations"] = copy.deepcopy(result["output"]["relations"])
     projected["handoff"] = {"to_bob_or_v92": len(projected["selected"]), "pending": len(projected["pending"]),
                              "skipped": len(projected["skipped"]), "decision_authority": "editorial_director"}

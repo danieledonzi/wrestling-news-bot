@@ -175,6 +175,41 @@ def test_deterministic_exact_skip_is_persisted_to_existing_hard_memory(monkeypat
     assert memory[0]["reason"] == "exact_duplicate"
 
 
+def test_active_defer_uses_bounded_softpool_decay_without_overriding_select(monkeypatch, tmp_path):
+    from datetime import datetime, timezone
+    def project_action(action, deferrals, name):
+        row = {"source": "feed", "title": f"Candidate {name}", "summary": "fact",
+               "url": f"https://decay.test/{name}", "from_softpool": True,
+               "softpool_added_at": datetime.now(timezone.utc).isoformat(),
+               "softpool_deferrals": deferrals, "decision_authority": "editorial_director",
+               "editorial_director": {"recommended_action": "DEFER"}}
+        s = shadow.capture_opportunity({"news_candidates_for_menzo": [row]}, run_id="run",
+            observation_timestamp="now", publisher_count_24h=0, history=[])
+        result = active.evaluate(s, provider=lambda *_: response(s, (action,)))
+        root = tmp_path / name
+        for field in ("SOFTPOOL_FILE", "HARD_SKIP_FILE", "MENZO_DECISIONS_FILE",
+                      "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE"):
+            monkeypatch.setattr(menzo, field, root / f"{field}.json")
+        menzo.write_json(menzo.SOFTPOOL_FILE, {"items": [row]})
+        return active.project(s, result), menzo.load_json(menzo.SOFTPOOL_FILE, {"items": []})["items"]
+
+    below, below_pool = project_action("DEFER", menzo.SOFTPOOL_OUTRANKED_DEFERRALS - 1, "below")
+    assert len(below["pending"]) == 1 and not below["skipped"]
+    assert below_pool[0]["softpool_deferrals"] == menzo.SOFTPOOL_OUTRANKED_DEFERRALS
+
+    bounded, bounded_pool = project_action("DEFER", menzo.SOFTPOOL_OUTRANKED_DEFERRALS, "bounded")
+    assert not bounded["pending"] and not bounded_pool and len(bounded["skipped"]) == 1
+    ended = bounded["skipped"][0]
+    assert ended["editorial_director"]["recommended_action"] == "DEFER"
+    assert ended["menzo_policy"]["softpool_repeatedly_outranked"] is True
+    assert bounded["handoff"]["pending"] == 0 and bounded["handoff"]["skipped"] == 1
+
+    selected, selected_pool = project_action("SELECT", menzo.SOFTPOOL_OUTRANKED_DEFERRALS, "selected")
+    assert len(selected["selected"]) == 1 and not selected["skipped"] and not selected_pool
+    skipped, skipped_pool = project_action("SKIP", menzo.SOFTPOOL_OUTRANKED_DEFERRALS, "skipped")
+    assert len(skipped["skipped"]) == 1 and not skipped["pending"] and not skipped_pool
+
+
 def test_exact_winner_uses_legacy_hydration_then_canonical_winner(monkeypatch):
     same = {"source": "feed", "title": "Exact", "summary": "Same material"}
     s = shadow.capture_opportunity({"news_candidates_for_menzo": [
