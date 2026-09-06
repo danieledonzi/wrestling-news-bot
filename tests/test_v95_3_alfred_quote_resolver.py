@@ -147,7 +147,11 @@ def test_narrative_quote_remains_blocker_without_gemini(tmp_path, monkeypatch):
 
 def test_long_italian_expression_is_not_blocked_as_untranslated(tmp_path, monkeypatch):
     patch_paths(tmp_path, monkeypatch)
-    monkeypatch.setattr(alfred, "call_quote_resolver_gemini", lambda *a, **k: (_ for _ in ()).throw(AssertionError("should not call Gemini")))
+    calls = {"count": 0}
+    def fake_call(*args, **kwargs):
+        calls["count"] += 1
+        return {"allow": True, "kind": "translated_italian_prose", "reason": "already Italian"}, "gemini-2.5-flash-lite", "called"
+    monkeypatch.setattr(alfred, "call_quote_resolver_gemini", fake_call)
     expression = (
         "Williams era noto al pubblico del wrestling soprattutto come The Butcher. "
         "Al di fuori del wrestling, la sua vita era rimasta privata. "
@@ -165,14 +169,20 @@ def test_long_italian_expression_is_not_blocked_as_untranslated(tmp_path, monkey
     result = run_with_base_review(monkeypatch, article, base_review_for(expression))
 
     assert not [i for i in issues(result) if i.get("code") == "untranslated_quote"]
-    assert result["postprocess"]["quote_resolver_calls"] == 0
+    assert calls["count"] == 1
+    assert result["postprocess"]["quote_resolver_calls"] == 1
     resolver = result["reviews"][0]["diagnostics"]["quote_resolver"][0]
-    assert resolver["source"] == "deterministic_translation_evidence"
+    assert resolver["source"] == "gemini"
+    assert not alfred.QUOTE_RESOLVER_HISTORY_FILE.exists()
 
 
 def test_healthy_article_diagnostics_do_not_clear_long_english_expression(tmp_path, monkeypatch):
     patch_paths(tmp_path, monkeypatch)
-    monkeypatch.setattr(alfred, "call_quote_resolver_gemini", lambda *a, **k: (_ for _ in ()).throw(AssertionError("should not call Gemini")))
+    calls = {"count": 0}
+    def fake_call(*args, **kwargs):
+        calls["count"] += 1
+        return {"allow": False, "kind": "ordinary_untranslated_sentence", "reason": "English prose"}, "gemini-2.5-flash-lite", "called"
+    monkeypatch.setattr(alfred, "call_quote_resolver_gemini", fake_call)
     expression = "Cena suffered serious injuries following Saturday's attack"
     article = article_with_quote(expression)
     article["translation_validation"] = {
@@ -183,29 +193,59 @@ def test_healthy_article_diagnostics_do_not_clear_long_english_expression(tmp_pa
     result = run_with_base_review(monkeypatch, article, base_review_for(expression))
 
     assert [i for i in issues(result) if i.get("code") == "untranslated_quote"]
-    assert result["postprocess"]["quote_resolver_calls"] == 0
+    assert calls["count"] == 1
 
 
 def test_repeated_english_i_does_not_count_as_italian_evidence(tmp_path, monkeypatch):
     patch_paths(tmp_path, monkeypatch)
-    monkeypatch.setattr(alfred, "call_quote_resolver_gemini", lambda *a, **k: (_ for _ in ()).throw(AssertionError("should not call Gemini")))
+    monkeypatch.setattr(alfred, "call_quote_resolver_gemini", lambda *a, **k: ({"allow": False, "kind": "ordinary_untranslated_sentence"}, "gemini-2.5-flash-lite", "called"))
     expression = "I got the injury and I came back while I trained; I worked, I fought, I won"
 
     result = run_with_base_review(monkeypatch, article_with_quote(expression), base_review_for(expression))
 
     assert [i for i in issues(result) if i.get("code") == "untranslated_quote"]
-    assert result["postprocess"]["quote_resolver_calls"] == 0
+    assert result["postprocess"]["quote_resolver_calls"] == 1
 
 
 def test_repeated_italian_marker_does_not_create_italian_evidence(tmp_path, monkeypatch):
     patch_paths(tmp_path, monkeypatch)
-    monkeypatch.setattr(alfred, "call_quote_resolver_gemini", lambda *a, **k: (_ for _ in ()).throw(AssertionError("should not call Gemini")))
+    monkeypatch.setattr(alfred, "call_quote_resolver_gemini", lambda *a, **k: ({"allow": False, "kind": "ordinary_untranslated_sentence"}, "gemini-2.5-flash-lite", "called"))
     expression = "Injury recovery takes time; work improves per day, per week, per month"
 
     result = run_with_base_review(monkeypatch, article_with_quote(expression), base_review_for(expression))
 
     assert [i for i in issues(result) if i.get("code") == "untranslated_quote"]
-    assert result["postprocess"]["quote_resolver_calls"] == 0
+    assert result["postprocess"]["quote_resolver_calls"] == 1
+
+
+def test_ambiguous_marker_names_remain_blocked(tmp_path, monkeypatch):
+    patch_paths(tmp_path, monkeypatch)
+    monkeypatch.setattr(alfred, "call_quote_resolver_gemini", lambda *a, **k: ({"allow": False, "kind": "ordinary_untranslated_sentence"}, "gemini-2.5-flash-lite", "called"))
+    expression = "Working alongside Del Rio in LA per request felt good at the time"
+
+    result = run_with_base_review(monkeypatch, article_with_quote(expression), base_review_for(expression))
+
+    assert [i for i in issues(result) if i.get("code") == "untranslated_quote"]
+
+
+def test_short_and_long_issues_share_call_budget(tmp_path, monkeypatch):
+    patch_paths(tmp_path, monkeypatch)
+    monkeypatch.setattr(alfred, "MAX_QUOTE_RESOLVER_CALLS_PER_ARTICLE", 1)
+    calls = {"count": 0}
+    def fake_call(*args, **kwargs):
+        calls["count"] += 1
+        return {"allow": False, "kind": "uncertain"}, "gemini-2.5-flash-lite", "called"
+    monkeypatch.setattr(alfred, "call_quote_resolver_gemini", fake_call)
+    review = base_review_for(issues=[
+        {"code": "untranslated_quote", "severity": "blocker", "evidence": "The Final Boss"},
+        {"code": "untranslated_quote", "severity": "blocker", "evidence": "Cena suffered serious injuries following Saturday's attack"},
+    ])
+
+    result = run_with_base_review(monkeypatch, article_with_quote("The Final Boss"), review)
+
+    assert calls["count"] == 1
+    assert len([i for i in issues(result) if i.get("code") == "untranslated_quote"]) == 2
+    assert result["postprocess"]["quote_resolver_calls"] == 1
 
 
 def test_invalid_json_or_gemini_error_remains_blocker_and_failed_ledger(tmp_path, monkeypatch):

@@ -10,7 +10,7 @@ from typing import Any
 
 from agents.alfred import normalize_placeholders, normalize_quote_paragraphs, apply_style_normalizations, run_alfred as base_run_alfred
 from agents.gemini_ledger import make_operation_id, record_gemini_attempt, record_gemini_event
-from agents.translation_validation import ENGLISH_MARKERS, ITALIAN_MARKERS, likely_english_title, likely_short_english_prose
+from agents.translation_validation import likely_english_title, likely_short_english_prose
 
 ROOT = Path(__file__).resolve().parents[1]
 NEWSROOM_STATE_DIR = ROOT / "state" / "newsroom"
@@ -22,6 +22,7 @@ VERSION = "v96.4a_v95.3_alfred_quote_resolver_with_translation_safety_gate"
 QUOTE_RESOLVER_HISTORY_FILE = NEWSROOM_STATE_DIR / "alfred_quote_resolver_history.json"
 ALFRED_QUOTE_RESOLVER_MODEL_CHAIN = [m.strip() for m in os.getenv("ALFRED_QUOTE_RESOLVER_MODEL_CHAIN", "gemini-2.5-flash-lite,gemini-3.1-flash-lite").split(",") if m.strip()]
 QUOTE_RESOLVER_ALLOWED_KINDS = {"nickname_or_catchphrase", "ring_name", "stable_name", "move_name", "event_name", "title_or_branding"}
+TRANSLATED_PROSE_KIND = "translated_italian_prose"
 MAX_QUOTE_RESOLVER_CALLS_PER_ARTICLE = 3
 
 TRANSLATION_GUARDRAIL_PATTERNS = [
@@ -109,13 +110,6 @@ def has_positive_english_narrative_evidence(expression: str) -> bool:
     ))
 
 
-def is_clearly_italian_quote(expression: str) -> bool:
-    words = re.findall(r"[a-zA-ZÀ-ÿ']+", expression.casefold())
-    italian = len({word for word in words if word in ITALIAN_MARKERS})
-    english = sum(word in ENGLISH_MARKERS for word in words)
-    return len(words) >= 8 and italian >= 3 and italian >= english + 2
-
-
 def is_short_ambiguous_quote(expression: str) -> bool:
     return 1 <= len(re.findall(r"[a-z0-9']+", normalize_quote_expression(expression))) <= 6 and not is_clearly_narrative_quote(expression)
 
@@ -187,10 +181,10 @@ Source/context:
 "{context}"
 
 Question:
-In professional wrestling context, is this expression likely a nickname, catchphrase, ring name, stable name, move name, event name, title, or brand phrase that can reasonably remain in English in an Italian article?
+In professional wrestling context, is this expression either already-translated Italian prose, or a nickname, catchphrase, ring name, stable name, move name, event name, title, or brand phrase that can reasonably remain in English in an Italian article?
 
 Answer only strict JSON:
-{{"allow": true, "kind": "nickname_or_catchphrase|ring_name|stable_name|move_name|event_name|title_or_branding|ordinary_untranslated_sentence|uncertain", "canonical": "lowercase canonical expression", "variants": ["variant 1", "variant 2"], "reason": "short reason"}}"""
+{{"allow": true, "kind": "translated_italian_prose|nickname_or_catchphrase|ring_name|stable_name|move_name|event_name|title_or_branding|ordinary_untranslated_sentence|uncertain", "canonical": "lowercase canonical expression", "variants": ["variant 1", "variant 2"], "reason": "short reason"}}"""
 
 
 def call_quote_resolver_gemini(prompt: str, *, article_context: dict[str, Any] | None = None, expression: str = "", canonical: str = "") -> tuple[dict[str, Any] | None, str, str]:
@@ -222,7 +216,7 @@ def call_quote_resolver_gemini(prompt: str, *, article_context: dict[str, Any] |
                     kind = str(data.get("kind") or "uncertain")
                     if not isinstance(data.get("allow"), bool):
                         decision_result = "malformed_allow"
-                    elif data.get("allow") is True and kind in QUOTE_RESOLVER_ALLOWED_KINDS:
+                    elif data.get("allow") is True and kind in QUOTE_RESOLVER_ALLOWED_KINDS | {TRANSLATED_PROSE_KIND}:
                         decision_result = "allow"
                     else:
                         decision_result = "uncertain" if kind == "uncertain" else "block"
@@ -243,14 +237,12 @@ def resolve_possible_untranslated_quote(expression: str, article_context: dict[s
     canonical = canonical_quote_key(expression)
     ctx = article_context or {}
     ledger_context = {"title": ctx.get("title") or ctx.get("title_it") or ctx.get("source_title"), "url": ctx.get("url") or ctx.get("source_url"), "expression": expression, "canonical": canonical}
-    if not is_short_ambiguous_quote(expression):
-        english_evidence = has_positive_english_narrative_evidence(expression)
-        if is_clearly_italian_quote(expression) and not english_evidence:
-            return {"allow": True, "kind": "translated_prose", "canonical": canonical, "variants": quote_aliases(normalized), "source": "deterministic_translation_evidence", "reason": "Positive expression-level Italian evidence; length alone is not evidence of untranslated English."}
-        return {"allow": False, "kind": "ordinary_untranslated_sentence", "canonical": canonical, "variants": quote_aliases(normalized), "source": "deterministic_skip", "reason": "Positive English narrative evidence, or insufficient translation evidence; keep untranslated_quote blocker."}
+    short_ambiguous = is_short_ambiguous_quote(expression)
+    if not short_ambiguous and has_positive_english_narrative_evidence(expression):
+        return {"allow": False, "kind": "ordinary_untranslated_sentence", "canonical": canonical, "variants": quote_aliases(normalized), "source": "deterministic_skip", "reason": "Positive English narrative evidence; keep untranslated_quote blocker."}
     history = history if history is not None else load_quote_history()
-    hit_key, hit = history_lookup(history, expression)
-    if hit:
+    hit_key, hit = history_lookup(history, expression) if short_ambiguous else (None, None)
+    if short_ambiguous and hit:
         hit["last_seen"] = utc_now()
         hit["hits"] = int(hit.get("hits", 0) or 0) + 1
         save_quote_history(history)
@@ -262,10 +254,12 @@ def resolve_possible_untranslated_quote(expression: str, article_context: dict[s
         return {"allow": False, "kind": "uncertain", "canonical": canonical, "variants": quote_aliases(normalized), "source": "error", "reason": status or "invalid_json"}
     kind = str(data.get("kind") or "uncertain")
     malformed_allow = not isinstance(data.get("allow"), bool)
-    allow = data.get("allow") is True and kind in QUOTE_RESOLVER_ALLOWED_KINDS
+    allowed_kinds = QUOTE_RESOLVER_ALLOWED_KINDS if short_ambiguous else {TRANSLATED_PROSE_KIND}
+    allow = data.get("allow") is True and kind in allowed_kinds
     decision = {"allow": allow, "kind": kind, "canonical": data.get("canonical") or canonical, "variants": data.get("variants") if isinstance(data.get("variants"), list) else [], "reason": str(data.get("reason") or "")[:300]}
-    update_quote_history(history, decision, expression=expression, article_context=ctx, model=model)
-    save_quote_history(history)
+    if short_ambiguous:
+        update_quote_history(history, decision, expression=expression, article_context=ctx, model=model)
+        save_quote_history(history)
     return {**decision, "allow": allow, "canonical": canonical_quote_key(str(decision.get("canonical") or canonical)), "source": "gemini"}
 
 
@@ -372,16 +366,20 @@ def resolve_untranslated_quote_issues(review: dict[str, Any], article: dict[str,
             continue
         expression = str(item.get("evidence") or "")
         before_source = None
-        if is_short_ambiguous_quote(expression):
+        short_ambiguous = is_short_ambiguous_quote(expression)
+        if short_ambiguous:
             hit_key, hit = history_lookup(history, expression)
             before_source = "history_hit" if hit else None
-            if not hit:
-                if call_budget <= 0:
-                    kept.append(item)
-                    stats["blocked"] += 1
-                    continue
-                call_budget -= 1
-                stats["calls"] += 1
+        else:
+            hit = None
+        needs_call = (short_ambiguous and not hit) or (not short_ambiguous and not has_positive_english_narrative_evidence(expression))
+        if needs_call:
+            if call_budget <= 0:
+                kept.append(item)
+                stats["blocked"] += 1
+                continue
+            call_budget -= 1
+            stats["calls"] += 1
         resolution = resolve_possible_untranslated_quote(expression, article or review, history=history)
         resolvers.append({"expression": expression, "canonical": resolution.get("canonical"), "allow": resolution.get("allow"), "source": resolution.get("source"), "reason": resolution.get("reason")})
         if resolution.get("source") == "history_hit" or before_source == "history_hit":
