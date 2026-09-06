@@ -181,9 +181,29 @@ def test_death_action_recognizes_legitimate_italian_title_input():
     assert value["components"]["central_fact_action"] == 1.0
     euphemism = scorer.score_pair(
         {"title": "Andy Williams Has Passed Away"},
-        {"title": "Andy Williams Passing Confirmed"},
+        {"title": "The Passing Of Andy Williams Confirmed"},
     )
     assert euphemism["components"]["central_fact_action"] == 1.0
+
+
+def test_bare_passing_is_not_death_action_evidence():
+    torch_title = "Andy Williams Is Passing The Torch To A New Wrestler"
+    medical_title = "Andy Williams Is Passing Medical Tests Before His Return"
+    passing_torch = scorer.score_pair(
+        {"title": torch_title},
+        {"title": "Andy Williams Discusses Passing The Torch Backstage"},
+    )
+    passing_medicals = scorer.score_pair(
+        {"title": medical_title},
+        {"title": "Andy Williams Died After Collapsing At A Wrestling Show"},
+    )
+
+    assert "death" not in scorer._categories(torch_title.lower())
+    assert "death" not in scorer._categories(medical_title.lower())
+    assert passing_torch["components"]["central_fact_action"] == 0.0
+    assert passing_medicals["components"]["central_fact_action"] == 0.0
+    assert not passing_torch["above_threshold"]
+    assert not passing_medicals["above_threshold"]
 
 
 def test_non_casting_subject_grounding_uses_full_titles():
