@@ -367,6 +367,8 @@ def merge_trace_metadata(target: dict[str, Any], source: dict[str, Any]) -> None
         "feed_published_at": ("feed_published_at", "published", "published_at"),
         "run_id": ("run_id",),
         "pipeline_version": ("pipeline_version", "version"),
+        "decision_authority": ("decision_authority",),
+        "fallback_reason": ("fallback_reason",),
     }
     for out_key, keys in mapping.items():
         if target.get(out_key) not in (None, ""):
@@ -481,6 +483,8 @@ def write_published_trace(article: dict[str, Any], result: dict[str, Any], slug:
         "alfred_status": ("alfred_status", "alfred_decision", "decision"),
         "run_id": ("run_id",),
         "pipeline_version": ("pipeline_version", "version"),
+        "decision_authority": ("decision_authority",),
+        "fallback_reason": ("fallback_reason",),
     }
     for key, candidates in optional_map.items():
         if key == "wp_post_id":
@@ -574,10 +578,9 @@ def publish_article(article: dict[str, Any], history: dict[str, Any], wp_ok: boo
         return {"source_url": url, "status": "skipped", "reason": "missing_url_or_title"}
     if key in history:
         return {"source_url": url, "status": "already_published", "wp_post_id": history[key].get("wp_post_id"), "title_it": title}
+    # ED-2: story signatures remain diagnostic metadata only. Semantic duplicate
+    # authority belongs to the Menzo stage; Publisher enforces exact URL/idempotency.
     sig = story_signature(article)
-    duplicate = existing_story_duplicate(history, sig)
-    if duplicate:
-        return {"source_url": url, "title_it": title, "status": "already_published", "reason": "semantic_story_duplicate", "story_signature": sig, "duplicate_of": duplicate.get("source_url"), "wp_post_id": duplicate.get("wp_post_id")}
 
     cleaned_body = clean_body_for_wordpress(str(article.get("body_html") or ""), wp_ok=wp_ok)
     content = append_source(cleaned_body, source, url)

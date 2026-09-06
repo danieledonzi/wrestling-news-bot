@@ -1066,6 +1066,27 @@ def test_v95_8_6_direct_fields_only_article_still_writes_available_trace(tmp_pat
     assert "menzo_reason" not in trace
 
 
+def test_ed2_durable_trace_serializes_only_supplied_authority_provenance(tmp_path, monkeypatch):
+    from agents import publisher
+    monkeypatch.setattr(publisher, "PUBLISHED_TRACE_DIR", tmp_path)
+    base = {"source_url": "https://trace.test/story", "source": "Test", "title_it": "Title"}
+    cases = [
+        ({**base, "decision_authority": "editorial_director"},
+         {"decision_authority": "editorial_director"}),
+        ({**base, "decision_authority": "legacy_menzo_fallback", "fallback_reason": "provider_failed"},
+         {"decision_authority": "legacy_menzo_fallback", "fallback_reason": "provider_failed"}),
+        (base, {}),
+    ]
+    for index, (article, expected) in enumerate(cases):
+        publisher.write_published_trace(article, {"status": "published"}, f"case-{index}", "2026-09-05T00:00:00Z")
+        trace = json.loads((tmp_path / f"case-{index}.published_trace.json").read_text())
+        assert {key: trace[key] for key in expected} == expected
+        if "fallback_reason" not in expected:
+            assert "fallback_reason" not in trace
+        if "decision_authority" not in expected:
+            assert "decision_authority" not in trace
+
+
 def test_v95_8_6_trace_write_failure_does_not_block_publish_article(tmp_path, monkeypatch):
     from agents import publisher
     monkeypatch.setattr(publisher, "PUBLISHED_DIR", tmp_path / "published")
@@ -1079,6 +1100,21 @@ def test_v95_8_6_trace_write_failure_does_not_block_publish_article(tmp_path, mo
     assert publisher.source_key(article["source_url"]) in history
     duplicate = publisher.publish_article(article, history, True)
     assert duplicate["status"] == "already_published"
+
+
+def test_ed2_publisher_story_signature_is_diagnostic_not_a_semantic_veto(tmp_path, monkeypatch):
+    from agents import publisher
+    monkeypatch.setattr(publisher, "PUBLISHED_DIR", tmp_path / "published")
+    monkeypatch.setattr(publisher, "REVIEW_DIR", tmp_path / "review")
+    _publisher_wp_success(monkeypatch, publisher)
+    signature = "story:aew:mjf:indie_injury"
+    history = {"old": {"source_url": "https://old.test/mjf", "story_signature": signature,
+                       "wp_post_id": 1}}
+    article = {"source_url": "https://new.test/mjf", "source": "Test",
+               "title_it": "MJF rimosso da un evento indie per infortunio", "body_html": "<p>Body</p>"}
+    result = publisher.publish_article(article, history, True)
+    assert publisher.story_signature(article) == signature
+    assert result["status"] == "published"
 
 
 def test_publisher_success_history_preserves_source_and_published_titles(tmp_path, monkeypatch):

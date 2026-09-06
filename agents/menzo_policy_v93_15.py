@@ -578,11 +578,15 @@ def normalize_ai_fields(result: dict[str, Any]) -> None:
 
 
 def is_softpool_eligible(item: dict[str, Any]) -> bool:
-    label = str(item.get("ai_priority_label") or "").lower()
     article_type = str(item.get("article_type") or "")
-    score = int(item.get("score", 0) or 0)
     if article_type in EXCLUDED_SOFTPOOL_TYPES:
         return False
+    director = item.get("editorial_director") if isinstance(item.get("editorial_director"), dict) else {}
+    if (item.get("decision_authority") == "editorial_director" and
+            director.get("recommended_action") == "DEFER"):
+        return True
+    label = str(item.get("ai_priority_label") or "").lower()
+    score = int(item.get("score", 0) or 0)
     if label != "medium":
         return False
     if score < MIN_SOFTPOOL_SCORE:

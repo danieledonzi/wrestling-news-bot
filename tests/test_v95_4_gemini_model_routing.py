@@ -42,6 +42,26 @@ def test_bob_uses_premium_chain_for_high_score_or_high_important_type(monkeypatc
     assert "gemini-3.5-flash" in by_score["chain"]
 
 
+def test_bob_routes_only_authoritative_selected_director_must_to_premium(monkeypatch):
+    monkeypatch.setattr(bob, "LEGACY_BOB_MODEL_CHAIN_OVERRIDE", False)
+    must = {"editorial_class": "MUST_PUBLISH", "recommended_action": "SELECT"}
+    routed = bob.bob_model_routing({"decision_authority": "editorial_director",
+                                    "editorial_director": must})
+    assert routed["kind"] == "premium"
+    assert routed["chain"] == bob.BOB_PREMIUM_MODEL_CHAIN
+    assert routed["reason"] == "editorial_director_must_publish"
+
+    should = bob.bob_model_routing({"decision_authority": "editorial_director",
+        "editorial_director": {"editorial_class": "SHOULD_PUBLISH", "recommended_action": "SELECT"}})
+    assert should["kind"] == "standard"
+    for action in ("DEFER", "SKIP"):
+        non_selected = bob.bob_model_routing({"decision_authority": "editorial_director",
+            "editorial_director": {"editorial_class": "MUST_PUBLISH", "recommended_action": action}})
+        assert non_selected["kind"] == "standard"
+    spoofed = bob.bob_model_routing({"editorial_director": must})
+    assert spoofed["kind"] == "standard"
+
+
 def test_bob_legacy_override_uses_bob_specific_chain(monkeypatch):
     monkeypatch.setattr(bob, "BOB_GEMINI_MODEL_CHAIN_SET", True)
     monkeypatch.setattr(bob, "GEMINI_MODEL_CHAIN_SET", False)

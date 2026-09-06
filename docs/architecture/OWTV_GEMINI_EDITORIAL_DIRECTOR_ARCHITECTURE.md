@@ -18,4 +18,4 @@ The closed Phase-1 event schema supports `artifact_refs` and `pair_id`, but not 
 
 ## Existing Publisher semantic blockers
 
-The three independent Publisher `story_signature` semantic blockers are **NON-BLOCKER FOR ED-1** and **BLOCKER BEFORE ED-2 AUTHORITY CLOSURE**. They remain unchanged to preserve the baseline. Before ED-2 authority closure Publisher must retain only Menzo-authorization validation plus factual publication/idempotency constraints.
+The three former Publisher `story_signature` semantic blockers were **NON-BLOCKER FOR ED-1** and **BLOCKER BEFORE ED-2 AUTHORITY CLOSURE**. ED-2 removes them from the blocking path: signatures may remain diagnostic, while semantic duplicate authority stays in the Menzo stage and Publisher retains exact URL/idempotency enforcement.
