@@ -89,17 +89,7 @@ CTA_PATTERNS = [
     re.compile(r"\bsubscribe\b|\bnewsletter\b|\bclick\s+here\b", re.I),
 ]
 SOURCE_SELF_REFERENCE_SITE_RE = r"(?:ringside\s+news|wrestling\s*inc\.?|fightful|pwinsider|f4wonline|wrestling\s+observer|sescoops|ewrestlingnews|411mania|bodyslam\.net)"
-FOOTER_START_PATTERNS = [
-    re.compile(r"\babout\s+the\s+author\b", re.I),
-    re.compile(r"\bfounder\s+of\s+ringside\s+news\b", re.I),
-    re.compile(r"\badd\s+as\s+a\s+preferred\s+source\s+on\s+google\b", re.I),
-    re.compile(r"\bhas\s+(over\s+)?\d+\s+years\s+of\s+experience\b", re.I),
-    re.compile(r"\bhas\s+been\s+(reporting\s+on|covering)\s+(pro\s+)?wrestling\b", re.I),
-    re.compile(r"\bhis\s+(stories|work)\s+(have\s+been\s+featured|at|on)\b", re.I),
-    re.compile(r"^\s*spotlight\b", re.I),
-    re.compile(r"\bspotlight\s+(wwe|aew|nxt|tna|roh)?\s*(videos|news)?\b", re.I),
-    re.compile(r"\brelated\s+(articles|posts|news)\b", re.I),
-    re.compile(r"\bmore\s+(wwe|aew|nxt|tna|roh)\s+news\b", re.I),
+SOURCE_TERMINAL_BOILERPLATE_PATTERNS = [
     re.compile(
         rf"(?=.*\b{SOURCE_SELF_REFERENCE_SITE_RE}\b)"
         r"(?=.*\btranscript(?:ion)?\b)"
@@ -113,6 +103,19 @@ FOOTER_START_PATTERNS = [
         r"(?=.*\b(?:reports?|reporting|work|stories|articles)\b.{0,50}\b(?:featured|appeared|published|picked\s+up)\b)",
         re.I,
     ),
+]
+FOOTER_START_PATTERNS = [
+    re.compile(r"\babout\s+the\s+author\b", re.I),
+    re.compile(r"\bfounder\s+of\s+ringside\s+news\b", re.I),
+    re.compile(r"\badd\s+as\s+a\s+preferred\s+source\s+on\s+google\b", re.I),
+    re.compile(r"\bhas\s+(over\s+)?\d+\s+years\s+of\s+experience\b", re.I),
+    re.compile(r"\bhas\s+been\s+(reporting\s+on|covering)\s+(pro\s+)?wrestling\b", re.I),
+    re.compile(r"\bhis\s+(stories|work)\s+(have\s+been\s+featured|at|on)\b", re.I),
+    re.compile(r"^\s*spotlight\b", re.I),
+    re.compile(r"\bspotlight\s+(wwe|aew|nxt|tna|roh)?\s*(videos|news)?\b", re.I),
+    re.compile(r"\brelated\s+(articles|posts|news)\b", re.I),
+    re.compile(r"\bmore\s+(wwe|aew|nxt|tna|roh)\s+news\b", re.I),
+    *SOURCE_TERMINAL_BOILERPLATE_PATTERNS,
 ]
 SOURCE_INTRO_PATTERNS = [re.compile(r"^\s*according\s+to\s+.+?:\s*$", re.I), re.compile(r"^\s*per\s+.+?:\s*$", re.I)]
 SOURCE_SELF_REFERENCE_PATTERNS = [
@@ -380,6 +383,10 @@ def is_footer_start_text(text: str) -> bool:
     return any(p.search(text or "") for p in FOOTER_START_PATTERNS)
 
 
+def is_high_confidence_source_terminal_boilerplate(text: str) -> bool:
+    return any(p.search(text or "") for p in SOURCE_TERMINAL_BOILERPLATE_PATTERNS)
+
+
 def is_bio_or_footer_text(text: str) -> bool:
     text = clean_text(text)
     if not text or len(text) < 20:
@@ -536,7 +543,7 @@ def element_from_node(node: Tag, base_url: str) -> dict[str, Any] | None:
         text = clean_text(node.get_text(" "))
         # Keep high-confidence terminal markers until sanitize_elements(), where
         # they can terminate the footer rather than merely disappearing alone.
-        if ((is_bio_or_footer_text(text) and not is_footer_start_text(text))
+        if ((is_bio_or_footer_text(text) and not is_high_confidence_source_terminal_boilerplate(text))
                 or is_source_self_reference_text(text)
                 or any(p.search(text) for p in SOURCE_INTRO_PATTERNS)):
             return None

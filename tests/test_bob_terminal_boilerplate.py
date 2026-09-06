@@ -3,6 +3,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+from bs4 import BeautifulSoup
+
 from agents import bob
 
 
@@ -24,6 +26,11 @@ def text_elements(*texts):
 def cleaned_texts(*texts):
     cleaned, _ = bob.sanitize_elements(text_elements(*texts), "")
     return [item["text"] for item in cleaned]
+
+
+def extracted_paragraphs(*texts):
+    soup = BeautifulSoup("".join(f"<p>{text}</p>" for text in texts), "html.parser")
+    return [item for node in soup.find_all("p") if (item := bob.element_from_node(node, "https://example.test"))]
 
 
 def test_exact_production_boilerplate_never_becomes_translation_units():
@@ -90,6 +97,23 @@ def test_source_reporting_and_bare_tenure_do_not_trigger_truncation():
     first = "For years, Fightful has been covering WWE news, and its latest report says that plans changed."
     second = "The promotion will announce the revised match before Friday's event."
     assert cleaned_texts(first, second) == [first, second]
+
+
+def test_legacy_bio_filter_does_not_gain_terminal_authority():
+    legacy_bio = "John Cena has over 20 years of experience in professional wrestling."
+    editorial = "He then explained why his recent match was especially important."
+    extracted = extracted_paragraphs(legacy_bio, editorial)
+    cleaned, _ = bob.sanitize_elements(extracted, "")
+    assert [item["text"] for item in cleaned] == [editorial]
+
+
+def test_new_source_terminal_marker_reaches_sanitize_and_truncates():
+    trailing = "This terminal material must not become a translation unit."
+    extracted = extracted_paragraphs(TRANSCRIPT_BOILERPLATE, trailing)
+    assert [item["text"] for item in extracted] == [TRANSCRIPT_BOILERPLATE, trailing]
+    cleaned, removed = bob.sanitize_elements(extracted, "")
+    assert cleaned == []
+    assert removed[0]["reason"] == "footer_start"
 
 
 def test_empty_genuine_editorial_translation_remains_invalid():
