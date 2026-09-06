@@ -76,7 +76,8 @@ def _categories(text: str) -> Set[str]:
     # Keep ambiguous mortality words phrase-bound so wrestling names and
     # non-fatal uses of "passing" do not become death evidence.
     if re.search(
-        r"\bdeath of\b|\b(?:passing|passed|passes) away\b",
+        r"\bdeath of\b|\b[a-z]+(?:'s|’s) death\b|"
+        r"\b(?:passing|passed|passes) away\b",
         text,
     ):
         categories.add("death")

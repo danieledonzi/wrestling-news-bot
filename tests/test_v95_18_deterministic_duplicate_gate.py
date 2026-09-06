@@ -173,6 +173,17 @@ def test_death_action_admits_real_andy_williams_pair_without_subject_only_false_
     assert all(not pair["above_threshold"] for pair in unrelated)
 
 
+def test_possessive_death_headlines_are_admitted_with_either_apostrophe():
+    value = scorer.score_pair(
+        {"title": "John Cena's Death Confirmed"},
+        {"title": "Cause of John Cena’s Death Revealed"},
+    )
+
+    assert value["components"]["central_fact_action"] == 1.0
+    assert value["score"] >= scorer.DEFAULT_THRESHOLD
+    assert value["above_threshold"]
+
+
 def test_death_action_recognizes_legitimate_italian_title_input():
     value = scorer.score_pair(
         {"title": "Andy Williams Died After Collapsing at Wrestling Show"},
