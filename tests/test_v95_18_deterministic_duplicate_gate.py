@@ -143,6 +143,49 @@ def test_scorer_calibration_structured_and_surname():
         assert set(value["components"])==set(scorer.WEIGHTS) and value["above_threshold"] is expected
 
 
+def test_death_action_admits_real_andy_williams_pair_without_subject_only_false_positives():
+    candidate = {
+        "title": "TMZ Confirms The Butcher Andy Williams Died After Collapsing at Wrestling Show"
+    }
+    published = {
+        "title": "New Details Emerge After The Death of The Butcher Andy Williams"
+    }
+
+    value = scorer.score_pair(candidate, published)
+
+    assert scorer.DEFAULT_THRESHOLD == .55
+    assert value["components"]["entity_subject"] == 1.0
+    assert value["components"]["central_fact_action"] == 1.0
+    assert value["score"] >= scorer.DEFAULT_THRESHOLD
+    assert value["above_threshold"]
+
+    unrelated = [
+        scorer.score_pair(
+            published,
+            {"title": "The Butcher Andy Williams Discusses His Wrestling Career In Interview"},
+        ),
+        scorer.score_pair(
+            {"title": "The Butcher Andy Williams Backstage Photos"},
+            {"title": "The Butcher Andy Williams Wrestling Profile"},
+        ),
+    ]
+    assert all(pair["components"]["entity_subject"] == 1.0 for pair in unrelated)
+    assert all(not pair["above_threshold"] for pair in unrelated)
+
+
+def test_death_action_recognizes_legitimate_italian_title_input():
+    value = scorer.score_pair(
+        {"title": "Andy Williams Died After Collapsing at Wrestling Show"},
+        {"title_it": "Andy Williams è morto dopo il malore durante lo show di wrestling"},
+    )
+    assert value["components"]["central_fact_action"] == 1.0
+    euphemism = scorer.score_pair(
+        {"title": "Andy Williams Has Passed Away"},
+        {"title": "Andy Williams Passing Confirmed"},
+    )
+    assert euphemism["components"]["central_fact_action"] == 1.0
+
+
 def test_non_casting_subject_grounding_uses_full_titles():
     value=scorer.score_pair(
         {"title":"Paul Heyman Reacts To Roman Reigns Injury"},
