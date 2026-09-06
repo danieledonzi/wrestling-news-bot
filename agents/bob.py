@@ -110,7 +110,7 @@ FOOTER_START_PATTERNS = [
     re.compile(
         rf"(?=.*\b{SOURCE_SELF_REFERENCE_SITE_RE}\b)"
         r"(?=.*\bhas\s+(?:been\s+)?(?:breaking|covering|covered|reporting)\b.{0,40}\b(?:wrestling|news)\b)"
-        r"(?=.*(?:\b(?:years?|decade|experience)\b|\b(?:reports?|reporting|work|stories|articles)\b.{0,50}\b(?:featured|appeared|published|picked\s+up)\b))",
+        r"(?=.*\b(?:reports?|reporting|work|stories|articles)\b.{0,50}\b(?:featured|appeared|published|picked\s+up)\b)",
         re.I,
     ),
 ]

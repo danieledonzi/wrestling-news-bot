@@ -86,6 +86,12 @@ def test_transcript_signals_without_recognized_source_do_not_truncate():
     assert cleaned_texts(first, second) == [first, second]
 
 
+def test_source_reporting_and_bare_tenure_do_not_trigger_truncation():
+    first = "For years, Fightful has been covering WWE news, and its latest report says that plans changed."
+    second = "The promotion will announce the revised match before Friday's event."
+    assert cleaned_texts(first, second) == [first, second]
+
+
 def test_empty_genuine_editorial_translation_remains_invalid():
     units = [{"id": "b1", "type": "text", "text": "The wrestler discussed her injury after the match."}]
     validation = bob.validate_translation(
