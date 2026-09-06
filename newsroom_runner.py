@@ -417,6 +417,13 @@ def persist_active_fallback(decision: dict[str, Any], reason: str) -> dict[str, 
     return decision
 
 
+def active_fallback_reason(director_result: Any, exc: Exception) -> str:
+    """Return the most specific structured Active failure provenance available."""
+    result = director_result if isinstance(director_result, dict) else {}
+    return str(result.get("fallback_reason") or result.get("reason") or result.get("status") or
+               type(exc).__name__)
+
+
 def main() -> int:
     ensure_artifacts()
     started_at = utc_now()
@@ -478,7 +485,7 @@ def main() -> int:
             else:
                 raise RuntimeError(str(director_result.get("fallback_reason") or director_result.get("status")))
         except Exception as exc:
-            reason = (director_result or {}).get("fallback_reason") or type(exc).__name__
+            reason = active_fallback_reason(director_result, exc)
             menzo_decision = safe_agent(timeline=timeline, agent="Menzo", phase="legacy_menzo_fallback", import_fn=import_menzo, call_args=(massy_board,), call_kwargs=({"costly_work_preflight": menzo_preflight} if menzo_preflight is not None else {}), artifact_name="menzo_decisions.json", default_handoff={"to_bob_or_v92": 0, "pending": 0, "skipped": 0}, note_fn=lambda r: f"decision_authority=legacy_menzo_fallback reason={reason}")
             menzo_decision = persist_active_fallback(menzo_decision, reason)
     else:

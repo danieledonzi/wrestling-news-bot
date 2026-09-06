@@ -43,6 +43,7 @@ def test_valid_active_result_projects_jasper_fixture_without_legacy_scoring(monk
     monkeypatch.setattr(menzo, "MENZO_DECISIONS_FILE", tmp_path / "menzo.json")
     monkeypatch.setattr(menzo, "ARTIFACT_DECISIONS_FILE", tmp_path / "artifact.json")
     monkeypatch.setattr(menzo, "V92_ALLOWED_URLS_FILE", tmp_path / "allowed.json")
+    monkeypatch.setattr(menzo, "HARD_SKIP_FILE", tmp_path / "hard-skips.json")
     (tmp_path / "menzo.json").write_text('{"decision_authority":"legacy_menzo","selected":[{"url":"https://stale"}]}')
     result = active.evaluate(s, provider=lambda *_: response(s))
     handoff = active.project(s, result)
@@ -61,11 +62,26 @@ def test_valid_active_result_projects_jasper_fixture_without_legacy_scoring(monk
     assert menzo.load_json(tmp_path / "menzo.json", {})["decision_authority"] == "editorial_director"
     assert menzo.load_json(tmp_path / "allowed.json", {})["allowed_urls"] == ["https://ed2.test/0"]
     assert handoff["allowed_urls_for_v92"] == ["https://ed2.test/0"]
+    hard_skips = menzo.load_json(tmp_path / "hard-skips.json", {})["items"]
+    assert [item["url"] for item in hard_skips] == ["https://ed2.test/2"]
     from agents import publisher
     monkeypatch.setattr(publisher, "MENZO_DECISIONS_FILE", tmp_path / "menzo.json")
     monkeypatch.setattr(publisher, "BOB_ARTICLES_FILE", tmp_path / "missing-bob.json")
     trace = publisher.build_trace_metadata_index({})[publisher.source_key("https://ed2.test/0")]
     assert trace["pipeline_version"] == active.POLICY_VERSION and trace["menzo_decision"] == "select"
+
+    from agents import massy_policy_v93_24 as massy
+    monkeypatch.setattr(massy, "MENZO_HARD_SKIP_FILE", tmp_path / "hard-skips.json")
+    monkeypatch.setattr(massy, "base_run_massy", lambda: {"news_candidates_for_menzo": [
+        {"url": "https://ed2.test/2", "title": "repeat"}], "report_candidates": [],
+        "hard_skipped": [], "handoff": {}})
+    monkeypatch.setattr(massy, "report_coverage", lambda *_: ([], [], []))
+    monkeypatch.setattr(massy, "configured_reports", lambda: [])
+    monkeypatch.setattr(massy, "ARTIFACT_MASSY_FILE", tmp_path / "massy-artifact.json")
+    monkeypatch.setattr(massy, "MASSY_BOARD_FILE", tmp_path / "massy-state.json")
+    massy_result = massy.run_massy()
+    assert massy_result["news_candidates_for_menzo"] == []
+    assert massy_result["hard_skipped"][0]["reason"] == "menzo_hard_skip_memory"
 
 
 def test_missing_action_and_capacity_violation_each_repair_once(monkeypatch):
@@ -141,6 +157,22 @@ def test_exact_duplicates_are_removed_before_gemini_relations(monkeypatch):
     assert s["authorized_relations"] == []
     result = active.evaluate(s, provider=lambda *_: (_ for _ in ()).throw(AssertionError("no provider call")))
     assert result["status"] == "VALIDATED" and result["attempts"] == 0
+
+
+def test_deterministic_exact_skip_is_persisted_to_existing_hard_memory(monkeypatch, tmp_path):
+    same = {"source": "feed", "title": "Identical", "summary": "same"}
+    s = shadow.capture_opportunity({"news_candidates_for_menzo": [
+        {**same, "url": "https://exact.test/one"}, {**same, "url": "https://exact.test/two"}]},
+        run_id="run", observation_timestamp="now", publisher_count_24h=0, history=[])
+    monkeypatch.setattr(menzo, "hydrate_complete_article_bodies", lambda items: (True, []))
+    result = active.evaluate(s, provider=lambda *_: response(s, ("SELECT",)))
+    for name in ("SOFTPOOL_FILE", "HARD_SKIP_FILE", "MENZO_DECISIONS_FILE",
+                 "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE"):
+        monkeypatch.setattr(menzo, name, tmp_path / f"{name}.json")
+    projected = active.project(s, result)
+    memory = menzo.load_json(menzo.HARD_SKIP_FILE, {})["items"]
+    assert len(projected["skipped"]) == 1 and len(memory) == 1
+    assert memory[0]["reason"] == "exact_duplicate"
 
 
 def test_exact_winner_uses_legacy_hydration_then_canonical_winner(monkeypatch):
@@ -260,6 +292,16 @@ def test_fallback_provenance_is_persisted_for_publisher(monkeypatch, tmp_path):
     assert trace["decision_authority"] == "legacy_menzo_fallback" and trace["fallback_reason"] == "provider_failed"
 
 
+def test_active_fallback_reason_preserves_structured_specificity():
+    import newsroom_runner
+    error = RuntimeError("fallback")
+    assert newsroom_runner.active_fallback_reason(
+        {"status": "NOT_ELIGIBLE_WP_NOT_READY", "reason": "wp_not_ready"}, error) == "wp_not_ready"
+    assert newsroom_runner.active_fallback_reason(
+        {"status": "failed", "reason": "less_specific", "fallback_reason": "provider_failed"}, error) == "provider_failed"
+    assert newsroom_runner.active_fallback_reason(None, ValueError("unexpected")) == "ValueError"
+
+
 def test_runner_routes_active_success_without_legacy_and_failure_once(monkeypatch, tmp_path):
     import newsroom_runner
     from agents import menzo_editorial_director_shadow as shadow_module
@@ -297,6 +339,12 @@ def test_runner_routes_active_success_without_legacy_and_failure_once(monkeypatc
                         lambda decision, reason: persisted.append((decision, reason)) or decision)
     assert newsroom_runner.main() == 0
     assert legacy_calls == ["legacy_menzo_fallback"] and persisted[0][1] == "invalid"
+    monkeypatch.setattr(newsroom_runner, "capture_editorial_director_opportunity", lambda *_a, **_k:
+        (None, {"status": "NOT_ELIGIBLE_WP_NOT_READY", "reason": "wp_not_ready", "attempts": 0},
+         (False, "wp_not_ready")))
+    legacy_calls.clear(); persisted.clear()
+    assert newsroom_runner.main() == 0
+    assert legacy_calls == ["legacy_menzo_fallback"] and persisted[0][1] == "wp_not_ready"
 
 
 def test_active_artifact_is_authoritative_and_not_shadow_labelled(monkeypatch, tmp_path):

@@ -269,8 +269,9 @@ def project(snapshot: Mapping[str, Any], result: Mapping[str, Any]) -> dict[str,
     projected["allowed_urls_for_v92"] = [str(item.get("url") or item.get("source_url"))
         for item in projected["selected"] if item.get("url") or item.get("source_url")]
     from agents.menzo_policy_v93_15 import (ARTIFACT_DECISIONS_FILE, MENZO_DECISIONS_FILE,
-        V92_ALLOWED_URLS_FILE, save_softpool, utc_now, write_json)
+        V92_ALLOWED_URLS_FILE, save_hard_skips, save_softpool, utc_now, write_json)
     save_softpool(projected)
+    save_hard_skips(projected)
     write_json(MENZO_DECISIONS_FILE, projected)
     write_json(ARTIFACT_DECISIONS_FILE, projected)
     write_json(V92_ALLOWED_URLS_FILE, {"generated_at": utc_now(), "version": POLICY_VERSION,
