@@ -10,6 +10,7 @@ from typing import Any
 
 from agents.alfred import normalize_placeholders, normalize_quote_paragraphs, apply_style_normalizations, run_alfred as base_run_alfred
 from agents.gemini_ledger import make_operation_id, record_gemini_attempt, record_gemini_event
+from agents.translation_validation import ENGLISH_MARKERS, ITALIAN_MARKERS, likely_english_title, likely_short_english_prose
 
 ROOT = Path(__file__).resolve().parents[1]
 NEWSROOM_STATE_DIR = ROOT / "state" / "newsroom"
@@ -97,6 +98,22 @@ def is_clearly_narrative_quote(expression: str) -> bool:
         r"\b(this|that|it)\s+(was|is|will|would)\b",
         r"\b(wanted|ready|return|leave|explain|prove)\b",
     ])
+
+
+def has_positive_english_narrative_evidence(expression: str) -> bool:
+    """Identify English prose without treating sentence length as language evidence."""
+    normalized = normalize_quote_expression(expression)
+    return likely_short_english_prose(expression) or likely_english_title(expression) or bool(re.search(
+        r"\b(?:i|he|she|they|we|you)\s+(?:am|are|is|was|were|will|would|said|never|wanted|want|think|thought|feel|felt|prove|explain)\b",
+        normalized,
+    ))
+
+
+def is_clearly_italian_quote(expression: str) -> bool:
+    words = re.findall(r"[a-zA-ZÀ-ÿ']+", expression.casefold())
+    italian = sum(word in ITALIAN_MARKERS for word in words)
+    english = sum(word in ENGLISH_MARKERS for word in words)
+    return len(words) >= 8 and italian >= 3 and italian >= english + 2
 
 
 def is_short_ambiguous_quote(expression: str) -> bool:
@@ -227,7 +244,10 @@ def resolve_possible_untranslated_quote(expression: str, article_context: dict[s
     ctx = article_context or {}
     ledger_context = {"title": ctx.get("title") or ctx.get("title_it") or ctx.get("source_title"), "url": ctx.get("url") or ctx.get("source_url"), "expression": expression, "canonical": canonical}
     if not is_short_ambiguous_quote(expression):
-        return {"allow": False, "kind": "ordinary_untranslated_sentence", "canonical": canonical, "variants": quote_aliases(normalized), "source": "deterministic_skip", "reason": "Long or narrative English quote; keep untranslated_quote blocker."}
+        english_evidence = has_positive_english_narrative_evidence(expression)
+        if is_clearly_italian_quote(expression) and not english_evidence:
+            return {"allow": True, "kind": "translated_prose", "canonical": canonical, "variants": quote_aliases(normalized), "source": "deterministic_translation_evidence", "reason": "Positive expression-level Italian evidence; length alone is not evidence of untranslated English."}
+        return {"allow": False, "kind": "ordinary_untranslated_sentence", "canonical": canonical, "variants": quote_aliases(normalized), "source": "deterministic_skip", "reason": "Positive English narrative evidence, or insufficient translation evidence; keep untranslated_quote blocker."}
     history = history if history is not None else load_quote_history()
     hit_key, hit = history_lookup(history, expression)
     if hit:

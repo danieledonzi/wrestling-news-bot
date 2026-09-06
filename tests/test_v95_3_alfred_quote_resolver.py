@@ -145,6 +145,47 @@ def test_narrative_quote_remains_blocker_without_gemini(tmp_path, monkeypatch):
     assert [i for i in issues(result) if i.get("code") == "untranslated_quote"]
 
 
+def test_long_italian_expression_is_not_blocked_as_untranslated(tmp_path, monkeypatch):
+    patch_paths(tmp_path, monkeypatch)
+    monkeypatch.setattr(alfred, "call_quote_resolver_gemini", lambda *a, **k: (_ for _ in ()).throw(AssertionError("should not call Gemini")))
+    expression = (
+        "Williams era noto al pubblico del wrestling soprattutto come The Butcher. "
+        "Al di fuori del wrestling, la sua vita era rimasta privata. "
+        "Abbiamo contattato direttamente Davis per avere ulteriori informazioni."
+    )
+    article = article_with_quote(expression)
+    article["translation_validation"] = {
+        "residual_english_body": False,
+        "body_likely_untranslated": False,
+        "unchanged_source_ratio": 0.0,
+        "translated_units": 7,
+        "required_units": 7,
+    }
+
+    result = run_with_base_review(monkeypatch, article, base_review_for(expression))
+
+    assert not [i for i in issues(result) if i.get("code") == "untranslated_quote"]
+    assert result["postprocess"]["quote_resolver_calls"] == 0
+    resolver = result["reviews"][0]["diagnostics"]["quote_resolver"][0]
+    assert resolver["source"] == "deterministic_translation_evidence"
+
+
+def test_healthy_article_diagnostics_do_not_clear_long_english_expression(tmp_path, monkeypatch):
+    patch_paths(tmp_path, monkeypatch)
+    monkeypatch.setattr(alfred, "call_quote_resolver_gemini", lambda *a, **k: (_ for _ in ()).throw(AssertionError("should not call Gemini")))
+    expression = "Cena suffered serious injuries following Saturday's attack"
+    article = article_with_quote(expression)
+    article["translation_validation"] = {
+        "residual_english_body": False,
+        "body_likely_untranslated": False,
+    }
+
+    result = run_with_base_review(monkeypatch, article, base_review_for(expression))
+
+    assert [i for i in issues(result) if i.get("code") == "untranslated_quote"]
+    assert result["postprocess"]["quote_resolver_calls"] == 0
+
+
 def test_invalid_json_or_gemini_error_remains_blocker_and_failed_ledger(tmp_path, monkeypatch):
     patch_paths(tmp_path, monkeypatch)
     monkeypatch.setattr(alfred, "call_quote_resolver_gemini", lambda *a, **k: (None, "gemini-2.5-flash-lite", "invalid_json"))
