@@ -101,10 +101,32 @@ def test_editorial_transcript_report_does_not_trigger_truncation():
     assert [item["text"] for item in cleaned] == [first, second]
 
 
+def test_legal_dispute_transcript_does_not_trigger_truncation():
+    first = (
+        "Fightful obtained the transcript of the hearing, which says the court prohibited "
+        "republication of the confidential exhibit."
+    )
+    second = "The parties will return to court next week for another hearing."
+    extracted = extracted_paragraphs(first, second)
+    cleaned, _ = bob.sanitize_elements(extracted, "")
+    assert [item["text"] for item in cleaned] == [first, second]
+
+
 def test_source_reporting_and_bare_tenure_do_not_trigger_truncation():
     first = "For years, Fightful has been covering WWE news, and its latest report says that plans changed."
     second = "The promotion will announce the revised match before Friday's event."
     assert cleaned_texts(first, second) == [first, second]
+
+
+def test_transitive_reports_featured_does_not_trigger_truncation():
+    first = (
+        "Fightful has been covering WWE news, and its reports featured several contradictory "
+        "accounts from talent."
+    )
+    second = "The promotion has not yet clarified which account is accurate."
+    extracted = extracted_paragraphs(first, second)
+    cleaned, _ = bob.sanitize_elements(extracted, "")
+    assert [item["text"] for item in cleaned] == [first, second]
 
 
 def test_legacy_bio_filter_does_not_gain_terminal_authority():

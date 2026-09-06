@@ -93,14 +93,14 @@ SOURCE_TERMINAL_BOILERPLATE_PATTERNS = [
     re.compile(
         rf"(?=.*\b{SOURCE_SELF_REFERENCE_SITE_RE}\b)"
         r"(?=.*\btranscript(?:ion)?\b)"
-        r"(?:(?=.*\b(?:republish(?:ing|ed)?|republication)\b)(?=.*\b(?:prohibited|not\s+permitted|restriction|may\s+not|cannot)\b)"
-        r"|(?=.*\b(?:produced|prepared)(?:\s+\w+){0,3}\s+exclusively\b)(?=.*\b(?:credit|attribution)\b)(?=.*\bexcerpts?\b))",
+        r"(?=.*\b(?:produced|prepared)(?:\s+\w+){0,3}\s+exclusively\b)"
+        r"(?=.*\b(?:credit|attribution)\b)(?=.*\bexcerpts?\b)",
         re.I,
     ),
     re.compile(
         rf"(?=.*\b{SOURCE_SELF_REFERENCE_SITE_RE}\b)"
         r"(?=.*\bhas\s+(?:been\s+)?(?:breaking|covering|covered|reporting)\b.{0,40}\b(?:wrestling|news)\b)"
-        r"(?=.*\b(?:reports?|reporting|work|stories|articles)\b.{0,50}\b(?:featured|appeared|published|picked\s+up)\b)",
+        r"(?=.*\b(?:his|her)\s+(?:reports?|reporting|work|stories|articles)\b.{0,10}\b(?:featured\s+(?:by|in|on)|(?:has|have)\s+appeared\s+(?:in|on)|published\s+(?:by|in|on)|picked\s+up\s+by)\b)",
         re.I,
     ),
 ]
