@@ -54,6 +54,8 @@ MODEL_CHAIN = [
 ]
 BOB_PREMIUM_MODEL_CHAIN = [m.strip() for m in os.getenv("BOB_PREMIUM_MODEL_CHAIN", DEFAULT_BOB_PREMIUM_MODEL_CHAIN).split(",") if m.strip()]
 BOB_STANDARD_MODEL_CHAIN = [m.strip() for m in os.getenv("BOB_STANDARD_MODEL_CHAIN", DEFAULT_BOB_STANDARD_MODEL_CHAIN).split(",") if m.strip()]
+BOB_TERMINAL_TAIL_MODEL = os.getenv("BOB_TERMINAL_TAIL_MODEL", "gemini-3.1-flash-lite").strip() or "gemini-3.1-flash-lite"
+TERMINAL_TAIL_WINDOW = 5
 
 ARTICLE_SELECTORS = ["article", "main article", ".article-body", ".post-content", ".entry-content", ".content", "main"]
 TRANSLATABLE_TYPES = {"text", "heading", "quote"}
@@ -555,8 +557,6 @@ def element_from_node(node: Tag, base_url: str) -> dict[str, Any] | None:
     if name in {"p", "li"}:
         text = clean_text(node.get_text(" "))
         terminal = is_high_confidence_source_terminal_boilerplate(text)
-        # Keep high-confidence terminal markers until sanitize_elements(), where
-        # they can terminate the footer rather than merely disappearing alone.
         if (((is_bio_or_footer_text(text) or is_source_self_reference_text(text)) and not terminal)
                 or any(p.search(text) for p in SOURCE_INTRO_PATTERNS)):
             return None
@@ -709,6 +709,158 @@ def extract_elements(source_url: str, raw_html: str) -> tuple[dict[str, str], li
     })
     diagnostics.update(assess_body_completeness(root, clean_elements, soup))
     return meta, raw_elements, clean_elements, removed_by_node + removed_by_sanitize + recovered_x_embeds, diagnostics
+
+
+TERMINAL_TAIL_CATEGORIES = {
+    "EDITORIAL", "BIO", "CTA", "TRANSCRIPT_NOTICE", "CREDIT_COPYRIGHT", "OTHER_BOILERPLATE",
+}
+
+
+def build_terminal_tail_prompt(title: str, source: str, blocks: list[dict[str, str]]) -> str:
+    return f"""Classify the terminal article blocks below. Decide whether each block is actual editorial
+content an OpenWrestlingTV reader should read (KEEP), or terminal publisher/author boilerplate (DROP).
+
+KEEP conclusions, wrestler quotes, news facts, analysis, match information, and genuine legal or
+editorial discussion. DROP only terminal author biographies, calls to action, transcript-production or
+republication/credit notices, copyright/attribution boilerplate, and clearly promotional source footers.
+Never DROP merely because words such as transcript, recording, copyright, credit, author, or source appear.
+
+Return JSON only, with exactly one entry per supplied id and no other ids:
+{{"decisions":[{{"id":"tail_1","decision":"KEEP","category":"EDITORIAL"}}]}}
+decision must be KEEP or DROP; category must be one of EDITORIAL, BIO, CTA, TRANSCRIPT_NOTICE,
+CREDIT_COPYRIGHT, OTHER_BOILERPLATE.
+
+Article title: {title}
+Source/domain: {source}
+Terminal blocks:
+{json.dumps(blocks, ensure_ascii=False, indent=2)}
+"""
+
+
+def call_terminal_tail_classifier(prompt: str, *, ledger_context: dict[str, Any]) -> tuple[str | None, str]:
+    """Make the sanitizer's single, non-retrying inexpensive provider request."""
+    api_key = os.getenv("GEMINI_API_KEY", "").strip()
+    model = BOB_TERMINAL_TAIL_MODEL
+    if not api_key:
+        return None, model
+    from google import genai  # type: ignore
+    from google.genai import types  # type: ignore
+
+    operation_id = make_operation_id("Bob", "terminal_tail_sanitizer", ledger_context.get("candidate_id") or ledger_context.get("url"))
+    started = time.monotonic()
+    try:
+        http_options = types.HttpOptions(
+            timeout=REQUEST_TIMEOUT * 1000,
+            retry_options=types.HttpRetryOptions(attempts=1),
+        )
+        response = genai.Client(api_key=api_key, http_options=http_options).models.generate_content(
+            model=model, contents=prompt,
+        )
+        raw = getattr(response, "text", "") or ""
+        record_gemini_attempt(
+            response=response, agent="Bob", phase="terminal_tail_sanitizer", model_requested=model,
+            status="called", reason="bob_terminal_tail_sanitizer", purpose="bob_terminal_tail_sanitizer",
+            result="text" if raw.strip() else "empty_response", operation_id=operation_id,
+            attempt_index=0, retry=False, fallback=False,
+            latency_ms=max(0, int((time.monotonic() - started) * 1000)), **ledger_context,
+        )
+        return raw.strip(), model
+    except Exception as exc:
+        record_gemini_attempt(
+            response=None, agent="Bob", phase="terminal_tail_sanitizer", model_requested=model,
+            status="failed", reason="bob_terminal_tail_sanitizer", purpose="bob_terminal_tail_sanitizer",
+            result=str(exc)[:500],
+            operation_id=operation_id, attempt_index=0, retry=False, fallback=False,
+            latency_ms=max(0, int((time.monotonic() - started) * 1000)), **ledger_context,
+        )
+        return None, model
+
+
+def _parse_terminal_tail_decisions(raw: str, expected_ids: list[str]) -> dict[str, dict[str, str]] | None:
+    cleaned = re.sub(r"^```(?:json)?|```$", "", raw.strip(), flags=re.I).strip()
+    try:
+        payload = json.loads(cleaned)
+    except Exception:
+        return None
+    rows = payload.get("decisions") if isinstance(payload, dict) else None
+    if not isinstance(rows, list) or len(rows) != len(expected_ids):
+        return None
+    decisions: dict[str, dict[str, str]] = {}
+    for row in rows:
+        if not isinstance(row, dict):
+            return None
+        block_id = str(row.get("id") or "")
+        decision = str(row.get("decision") or "").upper()
+        category = str(row.get("category") or "").upper()
+        if block_id not in expected_ids or block_id in decisions:
+            return None
+        if decision not in {"KEEP", "DROP"} or category not in TERMINAL_TAIL_CATEGORIES:
+            return None
+        if (decision == "KEEP") != (category == "EDITORIAL"):
+            return None
+        decisions[block_id] = {"decision": decision, "category": category}
+    return decisions if set(decisions) == set(expected_ids) else None
+
+
+def sanitize_terminal_tail(
+    elements: list[dict[str, Any]], *, title: str = "", source: str = "",
+    ledger_context: dict[str, Any] | None = None,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Fail-open semantic classification followed by deterministic suffix removal."""
+    textual = [(index, item) for index, item in enumerate(elements) if item.get("type") in TRANSLATABLE_TYPES and clean_text(str(item.get("text") or ""))]
+    tail = textual[-TERMINAL_TAIL_WINDOW:]
+    telemetry: dict[str, Any] = {
+        "semantic_tail_sanitizer_attempted": False,
+        "semantic_tail_sanitizer_model": BOB_TERMINAL_TAIL_MODEL,
+        "semantic_tail_blocks_examined": len(tail),
+        "semantic_tail_blocks_removed": 0,
+        "semantic_tail_removed_blocks": [],
+        "semantic_tail_sanitizer_status": "no_tail" if not tail else "provider_failed",
+        "semantic_tail_fail_open_used": False,
+        "fail_open_used": False,
+    }
+    if not tail:
+        return elements, telemetry
+    request_blocks = [
+        {"id": f"tail_{offset}", "type": str(item.get("type")), "text": clean_text(str(item.get("text") or ""))}
+        for offset, (_, item) in enumerate(tail, start=1)
+    ]
+    telemetry["semantic_tail_sanitizer_attempted"] = True
+    try:
+        raw, model = call_terminal_tail_classifier(
+            build_terminal_tail_prompt(title, source, request_blocks), ledger_context=ledger_context or {},
+        )
+    except Exception:
+        raw, model = None, BOB_TERMINAL_TAIL_MODEL
+    telemetry["semantic_tail_sanitizer_model"] = model
+    if raw is None:
+        telemetry["semantic_tail_fail_open_used"] = True
+        telemetry["fail_open_used"] = True
+        return elements, telemetry
+    decisions = _parse_terminal_tail_decisions(raw, [block["id"] for block in request_blocks])
+    if decisions is None:
+        telemetry["semantic_tail_sanitizer_status"] = "malformed_response"
+        telemetry["semantic_tail_fail_open_used"] = True
+        telemetry["fail_open_used"] = True
+        return elements, telemetry
+
+    removable: list[tuple[int, str, str]] = []
+    for (element_index, _), block in zip(reversed(tail), reversed(request_blocks)):
+        result = decisions[block["id"]]
+        if result["decision"] == "KEEP":
+            break
+        removable.append((element_index, block["id"], result["category"]))
+    telemetry.update({
+        "semantic_tail_blocks_removed": len(removable),
+        "semantic_tail_removed_blocks": [
+            {"id": block_id, "category": category} for _, block_id, category in reversed(removable)
+        ],
+        "semantic_tail_sanitizer_status": "validated",
+    })
+    if not removable:
+        return elements, telemetry
+    terminal_cutoff = min(row[0] for row in removable)
+    return elements[:terminal_cutoff], telemetry
 
 
 def build_translation_units(elements: list[dict[str, Any]]) -> list[dict[str, str]]:
@@ -1039,7 +1191,30 @@ def article_package(item: dict[str, Any]) -> dict[str, Any]:
         package["fetched_html_chars"] = len(raw)
         package["source_html_contains_embed_hint"] = bool(re.search(r"twitter-tweet|x\.com/.+?/status|twitter\.com/.+?/status|instagram\.com/(p|reel)|youtube\.com/(watch|embed|shorts)|youtu\.be/|iframe|youtube-nocookie", raw, re.I))
         meta, raw_elements, elements, removed, extraction_diag = extract_elements(url, raw)
-        canonical_source_body = source_body.contract_from_elements(url, elements, extraction_diag)
+        sanitizer_context = {
+            "url": url,
+            "title": item.get("title") or meta.get("source_title"),
+            "candidate_id": item.get("candidate_id") or item.get("id") or item.get("semantic_id"),
+            "source_id": item.get("source_id") or item.get("source"),
+        }
+        elements, semantic_tail_telemetry = sanitize_terminal_tail(
+            elements,
+            title=str(item.get("title") or meta.get("source_title") or ""),
+            source=str(item.get("source") or urlparse(url).netloc),
+            ledger_context=sanitizer_context,
+        )
+        package.update(semantic_tail_telemetry)
+        contract_diag = extraction_diag
+        if semantic_tail_telemetry["semantic_tail_blocks_removed"] > 0:
+            contract_diag = dict(extraction_diag)
+            contract_diag.update({
+                "clean_element_count": len(elements),
+                "structured_article_body": "",
+                "structured_article_body_chars": 0,
+                "structured_coverage_ratio": None,
+                "structured_token_overlap_ratio": None,
+            })
+        canonical_source_body = source_body.contract_from_elements(url, elements, contract_diag)
         if canonical_source_body:
             package["canonical_source_body"] = canonical_source_body
         units = build_translation_units(elements)
