@@ -174,6 +174,49 @@ def test_provider_client_has_bounded_timeout_and_no_sdk_retry(monkeypatch):
     assert ledger[0]["fallback"] is False
 
 
+def test_provider_client_remains_alive_through_request_and_cleanup_is_safe(monkeypatch):
+    import weakref
+
+    from google import genai
+
+    ledger = []
+    lifecycle = {"generated": False, "close_called": False}
+
+    class FakeModels:
+        def __init__(self, client):
+            self.client = weakref.ref(client)
+            self.closed = False
+
+        def generate_content(self, *, model, contents):
+            assert self.client() is not None
+            assert self.closed is False
+            lifecycle["generated"] = True
+            return type("Response", (), {"text": response(("KEEP", "EDITORIAL"))})()
+
+    class FakeClient:
+        def __init__(self, **kwargs):
+            self.models = FakeModels(self)
+
+        def close(self):
+            lifecycle["close_called"] = True
+            raise RuntimeError("cleanup failed")
+
+        def __del__(self):
+            self.models.closed = True
+
+    monkeypatch.setenv("GEMINI_API_KEY", "test-key")
+    monkeypatch.setattr(genai, "Client", FakeClient)
+    monkeypatch.setattr(bob, "record_gemini_attempt", lambda **kwargs: ledger.append(kwargs))
+
+    cleaned, telemetry = bob.sanitize_terminal_tail(elements(EDITORIAL))
+
+    assert cleaned == elements(EDITORIAL)
+    assert telemetry["semantic_tail_sanitizer_status"] == "validated"
+    assert lifecycle == {"generated": True, "close_called": True}
+    assert len(ledger) == 1
+    assert ledger[0]["status"] == "called"
+
+
 def test_only_last_five_textual_blocks_are_supplied(monkeypatch):
     calls = []
     install_response(monkeypatch, response(*[("KEEP", "EDITORIAL")] * 5), calls)
