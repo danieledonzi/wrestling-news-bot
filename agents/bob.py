@@ -116,7 +116,6 @@ FOOTER_START_PATTERNS = [
     re.compile(r"\bspotlight\s+(wwe|aew|nxt|tna|roh)?\s*(videos|news)?\b", re.I),
     re.compile(r"\brelated\s+(articles|posts|news)\b", re.I),
     re.compile(r"\bmore\s+(wwe|aew|nxt|tna|roh)\s+news\b", re.I),
-    *SOURCE_TERMINAL_BOILERPLATE_PATTERNS,
 ]
 SOURCE_INTRO_PATTERNS = [re.compile(r"^\s*according\s+to\s+.+?:\s*$", re.I), re.compile(r"^\s*per\s+.+?:\s*$", re.I)]
 SOURCE_SELF_REFERENCE_PATTERNS = [
@@ -388,6 +387,19 @@ def is_high_confidence_source_terminal_boilerplate(text: str) -> bool:
     return any(p.search(text or "") for p in SOURCE_TERMINAL_BOILERPLATE_PATTERNS)
 
 
+def is_terminal_source_boilerplate_position(elements: list[dict[str, Any]], index: int) -> bool:
+    for item in elements[index + 1:]:
+        kind = item.get("type")
+        text = clean_text(item.get("text", "")) if kind in {"text", "heading", "quote"} else ""
+        if text and (is_high_confidence_source_terminal_boilerplate(text)
+                     or any(p.search(text) for p in BIO_PATTERNS)
+                     or is_footer_start_text(text)
+                     or is_cta_text(text)):
+            continue
+        return False
+    return True
+
+
 def is_bio_or_footer_text(text: str) -> bool:
     text = clean_text(text)
     if not text or len(text) < 20:
@@ -578,7 +590,8 @@ def sanitize_elements(elements: list[dict[str, Any]], featured_image: str) -> tu
     removed: list[dict[str, Any]] = []
     first_image_seen = False
     seen_embeds: set[str] = set()
-    for idx, item in enumerate(elements, start=1):
+    for element_index, item in enumerate(elements):
+        idx = element_index + 1
         kind = item.get("type")
         text = clean_text(item.get("text", "")) if kind in {"text", "heading", "quote"} else ""
         reason = ""
@@ -592,6 +605,10 @@ def sanitize_elements(elements: list[dict[str, Any]], featured_image: str) -> tu
                 reason = "non_editorial_embed_or_social_bar"
             else:
                 seen_embeds.add(url)
+        elif text and is_high_confidence_source_terminal_boilerplate(text):
+            if is_terminal_source_boilerplate_position(elements, element_index):
+                reason = "footer_start"
+                stop_after = True
         elif text and is_footer_start_text(text):
             reason = "footer_start"
             stop_after = True

@@ -149,7 +149,7 @@ def test_legacy_bio_filter_does_not_gain_terminal_authority():
 
 
 def test_new_source_terminal_marker_reaches_sanitize_and_truncates():
-    trailing = "This terminal material must not become a translation unit."
+    trailing = AUTHOR_BIO
     extracted = extracted_paragraphs(TRANSCRIPT_BOILERPLATE, trailing)
     assert [item["text"] for item in extracted] == [TRANSCRIPT_BOILERPLATE, trailing]
     cleaned, removed = bob.sanitize_elements(extracted, "")
@@ -162,13 +162,27 @@ def test_first_person_source_terminal_marker_survives_source_self_reference_filt
         "We at Wrestling Inc. prepared this transcript exclusively from the original recording; "
         "please credit this article when using excerpts."
     )
-    trailing = "This later terminal material must also be removed."
+    trailing = AUTHOR_BIO
     assert bob.is_high_confidence_source_terminal_boilerplate(marker) is True
     extracted = extracted_paragraphs(marker, trailing)
     assert [item["text"] for item in extracted] == [marker, trailing]
     cleaned, removed = bob.sanitize_elements(extracted, "")
     assert cleaned == []
     assert removed[0]["reason"] == "footer_start"
+
+
+def test_recognized_source_boilerplate_does_not_truncate_later_editorial_content():
+    introduction = "Introduzione."
+    marker = (
+        "This transcript was produced exclusively for Ringside News from the original recording. "
+        "When using excerpts, provide prominent credit to Ringside News."
+    )
+    conclusion = "Un ultimo paragrafo editoriale chiude davvero l'articolo."
+    assert bob.is_high_confidence_source_terminal_boilerplate(marker) is True
+    extracted = extracted_paragraphs(introduction, marker, conclusion)
+    cleaned, removed = bob.sanitize_elements(extracted, "")
+    assert [item["text"] for item in cleaned] == [marker, conclusion]
+    assert removed == []
 
 
 def test_plural_passive_author_credential_is_terminal():
