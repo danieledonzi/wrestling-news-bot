@@ -91,16 +91,17 @@ CTA_PATTERNS = [
 SOURCE_SELF_REFERENCE_SITE_RE = r"(?:ringside\s+news|wrestling\s*inc\.?|fightful|pwinsider|f4wonline|wrestling\s+observer|sescoops|ewrestlingnews|411mania|bodyslam\.net)"
 SOURCE_TERMINAL_BOILERPLATE_PATTERNS = [
     re.compile(
-        rf"(?=.*\b{SOURCE_SELF_REFERENCE_SITE_RE}\b)"
         r"(?=.*\btranscript(?:ion)?\b)"
-        r"(?=.*\b(?:produced|prepared)(?:\s+\w+){0,3}\s+exclusively\b)"
+        rf"(?=.*(?:\b(?:produced|prepared)(?:\s+\w+){{0,3}}\s+exclusively\s+(?:for|by)\s+{SOURCE_SELF_REFERENCE_SITE_RE}\b"
+        rf"|\b(?:produced|prepared)(?:\s+\w+){{0,3}}\s+exclusively\s+from.{{0,40}}\b{SOURCE_SELF_REFERENCE_SITE_RE}\b.{{0,20}}\b(?:recording|audio|video)\b"
+        rf"|\bwe\s+at\s+{SOURCE_SELF_REFERENCE_SITE_RE}\b.{{0,80}}\b(?:produced|prepared)(?:\s+\w+){{0,3}}\s+exclusively\b))"
         r"(?=.*\b(?:credit|attribution)\b)(?=.*\bexcerpts?\b)",
         re.I,
     ),
     re.compile(
         rf"(?=.*\b{SOURCE_SELF_REFERENCE_SITE_RE}\b)"
         r"(?=.*\bhas\s+(?:been\s+)?(?:breaking|covering|covered|reporting)\b.{0,40}\b(?:wrestling|news)\b)"
-        r"(?=.*\b(?:his|her)\s+(?:reports?|reporting|work|stories|articles)\b.{0,10}\b(?:featured\s+(?:by|in|on)|(?:has|have)\s+appeared\s+(?:in|on)|published\s+(?:by|in|on)|picked\s+up\s+by)\b)",
+        r"(?=.*\b(?:his|her)\s+(?:reports?|reporting|work|stories|articles)\b.{0,10}\b(?:(?:has|have)\s+been\s+featured\s+(?:by|in|on)|featured\s+(?:by|in|on)|(?:has|have)\s+appeared\s+(?:in|on)|published\s+(?:by|in|on)|picked\s+up\s+by)\b)",
         re.I,
     ),
 ]

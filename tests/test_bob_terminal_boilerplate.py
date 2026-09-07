@@ -112,6 +112,17 @@ def test_legal_dispute_transcript_does_not_trigger_truncation():
     assert [item["text"] for item in cleaned] == [first, second]
 
 
+def test_reporting_source_is_not_mistaken_for_transcript_owner():
+    first = (
+        "Fightful reported that WWE prepared the hearing transcript exclusively for the court, "
+        "while excerpts require attribution to the witness."
+    )
+    second = "The court will consider the witness's objections at the next hearing."
+    extracted = extracted_paragraphs(first, second)
+    cleaned, _ = bob.sanitize_elements(extracted, "")
+    assert [item["text"] for item in cleaned] == [first, second]
+
+
 def test_source_reporting_and_bare_tenure_do_not_trigger_truncation():
     first = "For years, Fightful has been covering WWE news, and its latest report says that plans changed."
     second = "The promotion will announce the revised match before Friday's event."
@@ -158,6 +169,17 @@ def test_first_person_source_terminal_marker_survives_source_self_reference_filt
     cleaned, removed = bob.sanitize_elements(extracted, "")
     assert cleaned == []
     assert removed[0]["reason"] == "footer_start"
+
+
+def test_plural_passive_author_credential_is_terminal():
+    bio = (
+        "H Jenkins has been breaking pro wrestling news on Ringside News, and his reports have "
+        "been featured by TMZ."
+    )
+    cleaned, removed = bob.sanitize_elements(text_elements(bio), "")
+    assert cleaned == []
+    assert removed[0]["reason"] == "footer_start"
+    assert bob.build_translation_units(cleaned) == []
 
 
 def test_empty_genuine_editorial_translation_remains_invalid():
