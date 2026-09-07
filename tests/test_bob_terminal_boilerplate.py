@@ -1,199 +1,236 @@
+import json
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+import pytest
 
-from bs4 import BeautifulSoup
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from agents import bob
 
 
-TRANSCRIPT_BOILERPLATE = (
+AJ_NOTICE = (
     "This transcript was produced exclusively for Ringside News from the original recording. "
-    "Republishing the transcription in full is prohibited. When using excerpts, provide "
-    "prominent credit and a link to this article."
+    "Republishing the full transcript is prohibited. When using excerpts, prominent credit and "
+    "a link to this article are required."
 )
+SHORT_NOTICE = "This transcript was produced from the original recording."
 AUTHOR_BIO = (
     "H Jenkins has been breaking pro wrestling news on Ringside News for nearly a decade, "
     "with his reports featured by TMZ, Forbes, The Sun, and more."
 )
+CTA = "Follow Ringside News and add us as a preferred source for more wrestling updates."
+EDITORIAL = "AJ Styles explained why the final match was important to his career."
 
 
-def text_elements(*texts):
-    return [{"type": "text", "text": text} for text in texts]
+def elements(*texts, kinds=None):
+    kinds = kinds or ["text"] * len(texts)
+    return [{"type": kind, "text": text} for kind, text in zip(kinds, texts)]
 
 
-def cleaned_texts(*texts):
-    cleaned, _ = bob.sanitize_elements(text_elements(*texts), "")
-    return [item["text"] for item in cleaned]
+def response(*rows):
+    return json.dumps({"decisions": [
+        {"id": f"tail_{index}", "decision": decision, "category": category}
+        for index, (decision, category) in enumerate(rows, start=1)
+    ]})
 
 
-def extracted_paragraphs(*texts):
-    soup = BeautifulSoup("".join(f"<p>{text}</p>" for text in texts), "html.parser")
-    return [item for node in soup.find_all("p") if (item := bob.element_from_node(node, "https://example.test"))]
+def install_response(monkeypatch, raw, calls=None):
+    def fake(prompt, *, ledger_context):
+        if calls is not None:
+            calls.append((prompt, ledger_context))
+        return raw, "gemini-3.1-flash-lite"
+    monkeypatch.setattr(bob, "call_terminal_tail_classifier", fake)
 
 
-def test_exact_production_boilerplate_never_becomes_translation_units():
-    for boilerplate in (TRANSCRIPT_BOILERPLATE, AUTHOR_BIO):
-        cleaned, removed = bob.sanitize_elements(text_elements(boilerplate), "")
-        assert bob.build_translation_units(cleaned) == []
-        assert removed[0]["reason"] == "footer_start"
+@pytest.mark.parametrize(
+    ("footer", "category"),
+    [
+        (AJ_NOTICE, "CREDIT_COPYRIGHT"),
+        (SHORT_NOTICE, "TRANSCRIPT_NOTICE"),
+        (AUTHOR_BIO, "BIO"),
+        (CTA, "CTA"),
+    ],
+)
+def test_real_terminal_residue_removed_before_translation(monkeypatch, footer, category):
+    install_response(monkeypatch, response(("KEEP", "EDITORIAL"), ("DROP", category)))
+    cleaned, telemetry = bob.sanitize_terminal_tail(elements(EDITORIAL, footer))
+
+    assert [item["text"] for item in cleaned] == [EDITORIAL]
+    units = bob.build_translation_units(cleaned)
+    assert [unit["text"] for unit in units] == [EDITORIAL]
+    assert all(footer not in unit["text"] for unit in units)
+    assert telemetry["semantic_tail_blocks_removed"] == 1
+    assert telemetry["semantic_tail_removed_blocks"] == [{"id": "tail_2", "category": category}]
+    assert telemetry["semantic_tail_sanitizer_status"] == "validated"
+    assert telemetry["semantic_tail_fail_open_used"] is False
 
 
-def test_bounded_signal_combinations_cover_wording_variants():
-    transcript_variant = (
-        "This transcription was prepared exclusively from the original Ringside News recording. "
-        "Please credit this article when using excerpts."
-    )
-    bio_variant = (
-        "H Jenkins has covered professional wrestling for Ringside News for many years and his "
-        "reporting has appeared in major publications."
-    )
-    assert cleaned_texts(transcript_variant) == []
-    assert cleaned_texts(bio_variant) == []
+def test_multi_block_footer_removed_in_one_request(monkeypatch):
+    calls = []
+    install_response(monkeypatch, response(
+        ("KEEP", "EDITORIAL"),
+        ("DROP", "TRANSCRIPT_NOTICE"),
+        ("DROP", "BIO"),
+        ("DROP", "CTA"),
+    ), calls)
+    cleaned, telemetry = bob.sanitize_terminal_tail(elements(EDITORIAL, SHORT_NOTICE, AUTHOR_BIO, CTA))
+
+    assert [item["text"] for item in cleaned] == [EDITORIAL]
+    assert len(calls) == 1
+    assert calls[0][0].count('"id": "tail_') == 4
+    assert telemetry["semantic_tail_blocks_removed"] == 3
 
 
-def test_individual_keywords_and_legitimate_quoted_transcript_survive():
-    editorial = [
-        "Ringside News reported that Rhea Ripley discussed the injuries she has accumulated during her career.",
-        "TMZ and Forbes previously covered the wrestler’s mainstream media appearances.",
-        'Rhea Ripley said in the transcript, "My shoulder hurt, but I kept wrestling and finished the match."',
-    ]
-    assert cleaned_texts(*editorial) == editorial
+@pytest.mark.parametrize(
+    "closing",
+    [
+        'Rhea Ripley said, "I kept fighting because this championship means everything to me."',
+        "The court transcript is central to the genuine copyright and source-credit dispute in this case.",
+    ],
+)
+def test_legitimate_final_editorial_content_is_retained(monkeypatch, closing):
+    install_response(monkeypatch, response(("KEEP", "EDITORIAL"), ("KEEP", "EDITORIAL")))
+    original = elements(EDITORIAL, closing, kinds=["text", "quote"])
+    cleaned, telemetry = bob.sanitize_terminal_tail(original)
+    assert cleaned == original
+    assert telemetry["semantic_tail_blocks_removed"] == 0
 
 
-def test_terminal_marker_truncates_only_footer_material_in_production_sequence():
-    editorial = [
-        "Rhea Ripley described the physical toll of wrestling for nearly fourteen years.",
-        "She explained that several injuries continued to affect her in recent matches.",
-    ]
-    trailing_footer = "Subscribe to the site for more wrestling updates."
-    cleaned, removed = bob.sanitize_elements(
-        text_elements(*editorial, TRANSCRIPT_BOILERPLATE, AUTHOR_BIO, trailing_footer), ""
-    )
-    assert [item["text"] for item in cleaned] == editorial
-    assert removed == [
-        {"index": 3, "reason": "footer_start", "item": {"type": "text", "text": TRANSCRIPT_BOILERPLATE}}
-    ]
-    assert [unit["text"] for unit in bob.build_translation_units(cleaned)] == editorial
+def test_interior_drop_cannot_be_removed_past_terminal_keep(monkeypatch):
+    install_response(monkeypatch, response(("DROP", "OTHER_BOILERPLATE"), ("KEEP", "EDITORIAL")))
+    original = elements("A possible footer-looking sentence.", "A genuine closing quote.")
+    cleaned, telemetry = bob.sanitize_terminal_tail(original)
+    assert cleaned == original
+    assert telemetry["semantic_tail_blocks_removed"] == 0
 
 
-def test_ordinary_source_mention_does_not_trigger_terminal_truncation():
-    first = "Ringside News reported that the wrestler discussed her recovery timetable."
-    second = "The champion then described the treatment she received after the match."
-    assert cleaned_texts(first, second) == [first, second]
+@pytest.mark.parametrize("raw", ["", "not json", json.dumps({"decisions": []}), response(("KEEP", "EDITORIAL"))])
+def test_malformed_or_missing_decisions_fail_open(monkeypatch, raw):
+    install_response(monkeypatch, raw)
+    original = elements(EDITORIAL, SHORT_NOTICE)
+    cleaned, telemetry = bob.sanitize_terminal_tail(original)
+    assert cleaned == original
+    assert telemetry["semantic_tail_sanitizer_status"] == "malformed_response"
+    assert telemetry["semantic_tail_fail_open_used"] is True
 
 
-def test_transcript_signals_without_recognized_source_do_not_truncate():
-    first = (
-        "During the interview, the wrestler reviewed the transcript from the original recording "
-        "and asked for credit whenever excerpts were quoted."
-    )
-    second = "She then explained why preserving the context of her remarks mattered."
-    assert cleaned_texts(first, second) == [first, second]
+def test_provider_failure_fails_open_and_one_call_maximum(monkeypatch):
+    calls = []
+    install_response(monkeypatch, None, calls)
+    original = elements(EDITORIAL, SHORT_NOTICE)
+    cleaned, telemetry = bob.sanitize_terminal_tail(original)
+    assert cleaned == original
+    assert len(calls) == 1
+    assert telemetry["semantic_tail_sanitizer_status"] == "provider_failed"
+    assert telemetry["semantic_tail_fail_open_used"] is True
 
 
-def test_editorial_transcript_report_does_not_trigger_truncation():
-    first = "Fightful's report includes a transcript of the original audio and a link to the complete interview."
-    second = "The wrestler then explained why the complete interview provided important context."
-    extracted = extracted_paragraphs(first, second)
-    cleaned, _ = bob.sanitize_elements(extracted, "")
-    assert [item["text"] for item in cleaned] == [first, second]
+def test_provider_exception_fails_open(monkeypatch):
+    calls = 0
+    def fail(prompt, *, ledger_context):
+        nonlocal calls
+        calls += 1
+        raise TimeoutError("timed out")
+    monkeypatch.setattr(bob, "call_terminal_tail_classifier", fail)
+    original = elements(EDITORIAL, SHORT_NOTICE)
+    cleaned, telemetry = bob.sanitize_terminal_tail(original)
+    assert cleaned == original
+    assert calls == 1
+    assert telemetry["semantic_tail_sanitizer_status"] == "provider_failed"
 
 
-def test_legal_dispute_transcript_does_not_trigger_truncation():
-    first = (
-        "Fightful obtained the transcript of the hearing, which says the court prohibited "
-        "republication of the confidential exhibit."
-    )
-    second = "The parties will return to court next week for another hearing."
-    extracted = extracted_paragraphs(first, second)
-    cleaned, _ = bob.sanitize_elements(extracted, "")
-    assert [item["text"] for item in cleaned] == [first, second]
+def test_provider_client_has_bounded_timeout_and_no_sdk_retry(monkeypatch):
+    from google import genai
+
+    clients = []
+    ledger = []
+
+    class FakeModels:
+        def generate_content(self, *, model, contents):
+            return type("Response", (), {"text": response(("KEEP", "EDITORIAL"))})()
+
+    class FakeClient:
+        def __init__(self, **kwargs):
+            clients.append(kwargs)
+            self.models = FakeModels()
+
+    monkeypatch.setenv("GEMINI_API_KEY", "test-key")
+    monkeypatch.setattr(genai, "Client", FakeClient)
+    monkeypatch.setattr(bob, "record_gemini_attempt", lambda **kwargs: ledger.append(kwargs))
+
+    cleaned, telemetry = bob.sanitize_terminal_tail(elements(EDITORIAL))
+
+    assert cleaned == elements(EDITORIAL)
+    assert telemetry["semantic_tail_sanitizer_status"] == "validated"
+    assert len(clients) == 1
+    http_options = clients[0]["http_options"]
+    assert http_options.timeout == bob.REQUEST_TIMEOUT * 1000
+    assert http_options.retry_options.attempts == 1
+    assert len(ledger) == 1
+    assert ledger[0]["purpose"] == "bob_terminal_tail_sanitizer"
+    assert ledger[0]["retry"] is False
+    assert ledger[0]["fallback"] is False
 
 
-def test_reporting_source_is_not_mistaken_for_transcript_owner():
-    first = (
-        "Fightful reported that WWE prepared the hearing transcript exclusively for the court, "
-        "while excerpts require attribution to the witness."
-    )
-    second = "The court will consider the witness's objections at the next hearing."
-    extracted = extracted_paragraphs(first, second)
-    cleaned, _ = bob.sanitize_elements(extracted, "")
-    assert [item["text"] for item in cleaned] == [first, second]
+def test_only_last_five_textual_blocks_are_supplied(monkeypatch):
+    calls = []
+    install_response(monkeypatch, response(*[("KEEP", "EDITORIAL")] * 5), calls)
+    original = elements(*[f"paragraph {index}" for index in range(7)])
+    cleaned, telemetry = bob.sanitize_terminal_tail(original, title="Title", source="example.test")
+    assert cleaned == original
+    assert telemetry["semantic_tail_blocks_examined"] == 5
+    assert "paragraph 0" not in calls[0][0]
+    assert "paragraph 2" in calls[0][0]
 
 
-def test_source_reporting_and_bare_tenure_do_not_trigger_truncation():
-    first = "For years, Fightful has been covering WWE news, and its latest report says that plans changed."
-    second = "The promotion will announce the revised match before Friday's event."
-    assert cleaned_texts(first, second) == [first, second]
+def test_no_textual_tail_does_not_call_provider(monkeypatch):
+    monkeypatch.setattr(bob, "call_terminal_tail_classifier", lambda *args, **kwargs: pytest.fail("unexpected call"))
+    original = [{"type": "image", "url": "https://example.test/image.jpg"}]
+    cleaned, telemetry = bob.sanitize_terminal_tail(original)
+    assert cleaned == original
+    assert telemetry["semantic_tail_sanitizer_attempted"] is False
+    assert telemetry["semantic_tail_sanitizer_status"] == "no_tail"
 
 
-def test_transitive_reports_featured_does_not_trigger_truncation():
-    first = (
-        "Fightful has been covering WWE news, and its reports featured several contradictory "
-        "accounts from talent."
-    )
-    second = "The promotion has not yet clarified which account is accurate."
-    extracted = extracted_paragraphs(first, second)
-    cleaned, _ = bob.sanitize_elements(extracted, "")
-    assert [item["text"] for item in cleaned] == [first, second]
-
-
-def test_legacy_bio_filter_does_not_gain_terminal_authority():
-    legacy_bio = "John Cena has over 20 years of experience in professional wrestling."
-    editorial = "He then explained why his recent match was especially important."
-    extracted = extracted_paragraphs(legacy_bio, editorial)
-    cleaned, _ = bob.sanitize_elements(extracted, "")
-    assert [item["text"] for item in cleaned] == [editorial]
-
-
-def test_new_source_terminal_marker_reaches_sanitize_and_truncates():
-    trailing = AUTHOR_BIO
-    extracted = extracted_paragraphs(TRANSCRIPT_BOILERPLATE, trailing)
-    assert [item["text"] for item in extracted] == [TRANSCRIPT_BOILERPLATE, trailing]
-    cleaned, removed = bob.sanitize_elements(extracted, "")
-    assert cleaned == []
-    assert removed[0]["reason"] == "footer_start"
-
-
-def test_first_person_source_terminal_marker_survives_source_self_reference_filter():
-    marker = (
-        "We at Wrestling Inc. prepared this transcript exclusively from the original recording; "
-        "please credit this article when using excerpts."
-    )
-    trailing = AUTHOR_BIO
-    assert bob.is_high_confidence_source_terminal_boilerplate(marker) is True
-    extracted = extracted_paragraphs(marker, trailing)
-    assert [item["text"] for item in extracted] == [marker, trailing]
-    cleaned, removed = bob.sanitize_elements(extracted, "")
-    assert cleaned == []
-    assert removed[0]["reason"] == "footer_start"
-
-
-def test_recognized_source_boilerplate_does_not_truncate_later_editorial_content():
-    introduction = "Introduzione."
-    marker = (
-        "This transcript was produced exclusively for Ringside News from the original recording. "
-        "When using excerpts, provide prominent credit to Ringside News."
-    )
-    conclusion = "Un ultimo paragrafo editoriale chiude davvero l'articolo."
-    assert bob.is_high_confidence_source_terminal_boilerplate(marker) is True
-    extracted = extracted_paragraphs(introduction, marker, conclusion)
-    cleaned, removed = bob.sanitize_elements(extracted, "")
-    assert [item["text"] for item in cleaned] == [marker, conclusion]
+def test_semantic_footer_survives_structural_cleanup_for_classification():
+    cleaned, removed = bob.sanitize_elements(elements(AJ_NOTICE, AUTHOR_BIO, CTA), "")
+    assert [item["text"] for item in cleaned] == [AJ_NOTICE, AUTHOR_BIO, CTA]
     assert removed == []
 
 
-def test_plural_passive_author_credential_is_terminal():
-    bio = (
-        "H Jenkins has been breaking pro wrestling news on Ringside News, and his reports have "
-        "been featured by TMZ."
+def test_article_package_sanitizes_before_translation_units(monkeypatch):
+    install_response(monkeypatch, response(("KEEP", "EDITORIAL"), ("DROP", "CREDIT_COPYRIGHT")))
+    monkeypatch.setattr(bob, "fetch_html", lambda url: "<html></html>")
+    monkeypatch.setattr(
+        bob,
+        "extract_elements",
+        lambda url, raw: (
+            {"source_title": "AJ Styles interview", "description": "AJ Styles parla del suo futuro.", "featured_image": ""},
+            elements(EDITORIAL, AJ_NOTICE),
+            elements(EDITORIAL, AJ_NOTICE),
+            [],
+            {"stage": "extraction_finished"},
+        ),
     )
-    cleaned, removed = bob.sanitize_elements(text_elements(bio), "")
-    assert cleaned == []
-    assert removed[0]["reason"] == "footer_start"
-    assert bob.build_translation_units(cleaned) == []
+    translation_prompts = []
+    def translate(prompt, **kwargs):
+        translation_prompts.append(prompt)
+        return json.dumps({
+            "title_it": "AJ Styles parla del suo ultimo match",
+            "excerpt_it": "AJ Styles riflette sulla sua carriera.",
+            "translations": {"b1": "AJ Styles ha spiegato perché l'ultimo match era importante per la sua carriera."},
+            "notes": [],
+        }), "gemini-3.1-flash-lite", ["gemini-3.1-flash-lite"]
+    monkeypatch.setattr(bob, "call_gemini", translate)
+
+    package = bob.article_package({"url": "https://www.ringsidenews.com/story", "title": "AJ Styles interview"})
+
+    assert package["status"] == "ready_for_alfred"
+    assert package["translation_unit_count"] == 1
+    assert [item["block_id"] for item in package["elements"]] == ["b1"]
+    assert AJ_NOTICE not in translation_prompts[0]
+    assert package["semantic_tail_blocks_removed"] == 1
 
 
 def test_empty_genuine_editorial_translation_remains_invalid():

@@ -54,69 +54,14 @@ MODEL_CHAIN = [
 ]
 BOB_PREMIUM_MODEL_CHAIN = [m.strip() for m in os.getenv("BOB_PREMIUM_MODEL_CHAIN", DEFAULT_BOB_PREMIUM_MODEL_CHAIN).split(",") if m.strip()]
 BOB_STANDARD_MODEL_CHAIN = [m.strip() for m in os.getenv("BOB_STANDARD_MODEL_CHAIN", DEFAULT_BOB_STANDARD_MODEL_CHAIN).split(",") if m.strip()]
+BOB_TERMINAL_TAIL_MODEL = os.getenv("BOB_TERMINAL_TAIL_MODEL", "gemini-3.1-flash-lite").strip() or "gemini-3.1-flash-lite"
+TERMINAL_TAIL_WINDOW = 5
 
 ARTICLE_SELECTORS = ["article", "main article", ".article-body", ".post-content", ".entry-content", ".content", "main"]
 TRANSLATABLE_TYPES = {"text", "heading", "quote"}
 EMBED_DOMAINS = ["x.com", "twitter.com", "instagram.com", "youtube.com", "youtube-nocookie.com", "youtu.be", "tiktok.com", "threads.net", "facebook.com", "bsky.app"]
 
-BIO_PATTERNS = [
-    re.compile(r"\babout\s+the\s+author\b", re.I),
-    re.compile(r"\bfounder\s+of\s+ringside\s+news\b", re.I),
-    re.compile(r"\bfelix\s+upton\b.*\bringside\s+news\b", re.I),
-    re.compile(r"\bsteve\s+carrier\b.*\bringside\s+news\b", re.I),
-    re.compile(r"\bfollow\s+.+\s+on\s+(twitter|x|instagram|facebook|bluesky)\b", re.I),
-    re.compile(r"\bhas\s+(over\s+)?\d+\s+years\s+of\s+experience\b", re.I),
-    re.compile(r"\bhas\s+been\s+(reporting\s+on|covering)\s+(pro\s+)?wrestling\b", re.I),
-    re.compile(r"\bhis\s+(stories|work)\s+(have\s+been\s+featured|at|on)\b", re.I),
-    re.compile(r"\bher\s+(stories|work)\s+(have\s+been\s+featured|at|on)\b", re.I),
-    re.compile(r"\b(tmz|forbes|bleacher\s+report)\b.*\b(ringside\s+news|featured)\b", re.I),
-    re.compile(r"\bdelivering\s+trusted\s+news\s+and\s+backstage\s+updates\b", re.I),
-    re.compile(r"\b(more|read more)\s+from\s+[A-Z][a-z]+", re.I),
-    re.compile(r"\bthanks\s+to\s+.+\s+for\s+the\s+transcription\b", re.I),
-    re.compile(r"\bplease\s+credit\b", re.I),
-    re.compile(r"\bh/?t\s+to\b", re.I),
-    re.compile(r"\bfor\s+the\s+transcription\b", re.I),
-    re.compile(r"\bwe\s+at\s+wrestling\s+inc\.?\s+wish\b", re.I),
-]
-CTA_PATTERNS = [
-    re.compile(r"\bconnect\s+with\s+us\s+on\s+(bluesky|twitter|x|facebook|instagram)\b", re.I),
-    re.compile(r"\badd\s+as\s+a\s+preferred\s+source\s+on\s+google\b", re.I),
-    re.compile(r"\bsound\s+off\s+in\s+the\s+comments\b", re.I),
-    re.compile(r"\b(let\s+us\s+know|share\s+your\s+thoughts|please\s+share\s+your\s+thoughts)\b", re.I),
-    re.compile(r"^\s*what\s+do\s+you\s+think\b", re.I),
-    re.compile(r"\bso\s+it\s+remains\s+to\s+be\s+seen\b", re.I),
-    re.compile(r"\bstay\s+tuned\b", re.I),
-    re.compile(r"\bsubscribe\b|\bnewsletter\b|\bclick\s+here\b", re.I),
-]
 SOURCE_SELF_REFERENCE_SITE_RE = r"(?:ringside\s+news|wrestling\s*inc\.?|fightful|pwinsider|f4wonline|wrestling\s+observer|sescoops|ewrestlingnews|411mania|bodyslam\.net)"
-SOURCE_TERMINAL_BOILERPLATE_PATTERNS = [
-    re.compile(
-        r"(?=.*\btranscript(?:ion)?\b)"
-        rf"(?=.*(?:\b(?:produced|prepared)(?:\s+\w+){{0,3}}\s+exclusively\s+(?:for|by)\s+{SOURCE_SELF_REFERENCE_SITE_RE}\b"
-        rf"|\b(?:produced|prepared)(?:\s+\w+){{0,3}}\s+exclusively\s+from.{{0,40}}\b{SOURCE_SELF_REFERENCE_SITE_RE}\b.{{0,20}}\b(?:recording|audio|video)\b"
-        rf"|\bwe\s+at\s+{SOURCE_SELF_REFERENCE_SITE_RE}\b.{{0,80}}\b(?:produced|prepared)(?:\s+\w+){{0,3}}\s+exclusively\b))"
-        r"(?=.*\b(?:credit|attribution)\b)(?=.*\bexcerpts?\b)",
-        re.I,
-    ),
-    re.compile(
-        rf"(?=.*\b{SOURCE_SELF_REFERENCE_SITE_RE}\b)"
-        r"(?=.*\bhas\s+(?:been\s+)?(?:breaking|covering|covered|reporting)\b.{0,40}\b(?:wrestling|news)\b)"
-        r"(?=.*\b(?:his|her)\s+(?:reports?|reporting|work|stories|articles)\b.{0,10}\b(?:(?:has|have)\s+been\s+featured\s+(?:by|in|on)|featured\s+(?:by|in|on)|(?:has|have)\s+appeared\s+(?:in|on)|published\s+(?:by|in|on)|picked\s+up\s+by)\b)",
-        re.I,
-    ),
-]
-FOOTER_START_PATTERNS = [
-    re.compile(r"\babout\s+the\s+author\b", re.I),
-    re.compile(r"\bfounder\s+of\s+ringside\s+news\b", re.I),
-    re.compile(r"\badd\s+as\s+a\s+preferred\s+source\s+on\s+google\b", re.I),
-    re.compile(r"\bhas\s+(over\s+)?\d+\s+years\s+of\s+experience\b", re.I),
-    re.compile(r"\bhas\s+been\s+(reporting\s+on|covering)\s+(pro\s+)?wrestling\b", re.I),
-    re.compile(r"\bhis\s+(stories|work)\s+(have\s+been\s+featured|at|on)\b", re.I),
-    re.compile(r"^\s*spotlight\b", re.I),
-    re.compile(r"\bspotlight\s+(wwe|aew|nxt|tna|roh)?\s*(videos|news)?\b", re.I),
-    re.compile(r"\brelated\s+(articles|posts|news)\b", re.I),
-    re.compile(r"\bmore\s+(wwe|aew|nxt|tna|roh)\s+news\b", re.I),
-]
 SOURCE_INTRO_PATTERNS = [re.compile(r"^\s*according\s+to\s+.+?:\s*$", re.I), re.compile(r"^\s*per\s+.+?:\s*$", re.I)]
 SOURCE_SELF_REFERENCE_PATTERNS = [
     re.compile(rf"\b{SOURCE_SELF_REFERENCE_SITE_RE}\s+(?:will\s+)?(?:continue|continuerà|continueranno)\s+(?:(?:to|a)\s+)?(?:monitor|follow|cover|provide|seguire|monitorare|fornire)\b", re.I),
@@ -375,38 +320,6 @@ def is_valid_editorial_embed_url(url: str) -> bool:
     return False
 
 
-def is_cta_text(text: str) -> bool:
-    return any(p.search(text or "") for p in CTA_PATTERNS)
-
-
-def is_footer_start_text(text: str) -> bool:
-    return any(p.search(text or "") for p in FOOTER_START_PATTERNS)
-
-
-def is_high_confidence_source_terminal_boilerplate(text: str) -> bool:
-    return any(p.search(text or "") for p in SOURCE_TERMINAL_BOILERPLATE_PATTERNS)
-
-
-def is_terminal_source_boilerplate_position(elements: list[dict[str, Any]], index: int) -> bool:
-    for item in elements[index + 1:]:
-        kind = item.get("type")
-        text = clean_text(item.get("text", "")) if kind in {"text", "heading", "quote"} else ""
-        if text and (is_high_confidence_source_terminal_boilerplate(text)
-                     or any(p.search(text) for p in BIO_PATTERNS)
-                     or is_footer_start_text(text)
-                     or is_cta_text(text)):
-            continue
-        return False
-    return True
-
-
-def is_bio_or_footer_text(text: str) -> bool:
-    text = clean_text(text)
-    if not text or len(text) < 20:
-        return True
-    return is_cta_text(text) or any(p.search(text) for p in BIO_PATTERNS)
-
-
 def is_probable_long_quote(text: str) -> bool:
     text = clean_text(text)
     return len(text) >= 90 and (text.startswith(("\"", "“", "'")) or bool(QUOTE_RE.search(text)))
@@ -554,23 +467,19 @@ def element_from_node(node: Tag, base_url: str) -> dict[str, Any] | None:
         return {"type": "embed", "url": embed_url, "source_tag": name}
     if name in {"p", "li"}:
         text = clean_text(node.get_text(" "))
-        terminal = is_high_confidence_source_terminal_boilerplate(text)
-        # Keep high-confidence terminal markers until sanitize_elements(), where
-        # they can terminate the footer rather than merely disappearing alone.
-        if (((is_bio_or_footer_text(text) or is_source_self_reference_text(text)) and not terminal)
-                or any(p.search(text) for p in SOURCE_INTRO_PATTERNS)):
+        if is_source_self_reference_text(text) or any(p.search(text) for p in SOURCE_INTRO_PATTERNS):
             return None
         # v93.26: do not infer quote blocks from quotation marks in normal paragraphs.
         # Only original source <blockquote> nodes are rendered as blockquotes.
         return {"type": "text", "text": text}
     if name in {"h2", "h3", "h4"}:
         text = clean_text(node.get_text(" "))
-        if not text or is_bio_or_footer_text(text) or is_source_self_reference_text(text) or is_footer_start_text(text):
+        if not text or is_source_self_reference_text(text):
             return None
         return {"type": "heading", "level": int(name[1]), "text": text}
     if name == "blockquote":
         text = clean_text(node.get_text(" "))
-        if len(text) < 8 or is_cta_text(text) or is_source_self_reference_text(text):
+        if len(text) < 8 or is_source_self_reference_text(text):
             return None
         return {"type": "quote", "text": text, "source_tag": "blockquote"}
     if name == "table":
@@ -590,12 +499,9 @@ def sanitize_elements(elements: list[dict[str, Any]], featured_image: str) -> tu
     removed: list[dict[str, Any]] = []
     first_image_seen = False
     seen_embeds: set[str] = set()
-    for element_index, item in enumerate(elements):
-        idx = element_index + 1
+    for idx, item in enumerate(elements, start=1):
         kind = item.get("type")
-        text = clean_text(item.get("text", "")) if kind in {"text", "heading", "quote"} else ""
         reason = ""
-        stop_after = False
         if kind == "embed":
             url = canonical_embed_url(str(item.get("url") or ""))
             item["url"] = url
@@ -605,18 +511,6 @@ def sanitize_elements(elements: list[dict[str, Any]], featured_image: str) -> tu
                 reason = "non_editorial_embed_or_social_bar"
             else:
                 seen_embeds.add(url)
-        elif text and is_high_confidence_source_terminal_boilerplate(text):
-            if is_terminal_source_boilerplate_position(elements, element_index):
-                reason = "footer_start"
-                stop_after = True
-        elif text and is_footer_start_text(text):
-            reason = "footer_start"
-            stop_after = True
-        elif text and any(p.search(text) for p in BIO_PATTERNS):
-            reason = "bio_or_credit"
-            stop_after = True
-        elif text and is_cta_text(text):
-            reason = "cta_or_comment_bait"
         elif kind == "image" and not first_image_seen:
             first_image_seen = True
             if same_image(item.get("url", ""), featured_image):
@@ -625,8 +519,6 @@ def sanitize_elements(elements: list[dict[str, Any]], featured_image: str) -> tu
             reason = "duplicate_featured_image"
         if reason:
             removed.append({"index": idx, "reason": reason, "item": item})
-            if stop_after:
-                break
             continue
         cleaned.append(item)
     return cleaned, removed
@@ -709,6 +601,156 @@ def extract_elements(source_url: str, raw_html: str) -> tuple[dict[str, str], li
     })
     diagnostics.update(assess_body_completeness(root, clean_elements, soup))
     return meta, raw_elements, clean_elements, removed_by_node + removed_by_sanitize + recovered_x_embeds, diagnostics
+
+
+TERMINAL_TAIL_CATEGORIES = {
+    "EDITORIAL", "BIO", "CTA", "TRANSCRIPT_NOTICE", "CREDIT_COPYRIGHT", "OTHER_BOILERPLATE",
+}
+
+
+def build_terminal_tail_prompt(title: str, source: str, blocks: list[dict[str, str]]) -> str:
+    return f"""Classify the terminal article blocks below. Decide whether each block is actual editorial
+content an OpenWrestlingTV reader should read (KEEP), or terminal publisher/author boilerplate (DROP).
+
+KEEP conclusions, wrestler quotes, news facts, analysis, match information, and genuine legal or
+editorial discussion. DROP only terminal author biographies, calls to action, transcript-production or
+republication/credit notices, copyright/attribution boilerplate, and clearly promotional source footers.
+Never DROP merely because words such as transcript, recording, copyright, credit, author, or source appear.
+
+Return JSON only, with exactly one entry per supplied id and no other ids:
+{{"decisions":[{{"id":"tail_1","decision":"KEEP","category":"EDITORIAL"}}]}}
+decision must be KEEP or DROP; category must be one of EDITORIAL, BIO, CTA, TRANSCRIPT_NOTICE,
+CREDIT_COPYRIGHT, OTHER_BOILERPLATE.
+
+Article title: {title}
+Source/domain: {source}
+Terminal blocks:
+{json.dumps(blocks, ensure_ascii=False, indent=2)}
+"""
+
+
+def call_terminal_tail_classifier(prompt: str, *, ledger_context: dict[str, Any]) -> tuple[str | None, str]:
+    """Make the sanitizer's single, non-retrying inexpensive provider request."""
+    api_key = os.getenv("GEMINI_API_KEY", "").strip()
+    model = BOB_TERMINAL_TAIL_MODEL
+    if not api_key:
+        return None, model
+    from google import genai  # type: ignore
+    from google.genai import types  # type: ignore
+
+    operation_id = make_operation_id("Bob", "terminal_tail_sanitizer", ledger_context.get("candidate_id") or ledger_context.get("url"))
+    started = time.monotonic()
+    try:
+        http_options = types.HttpOptions(
+            timeout=REQUEST_TIMEOUT * 1000,
+            retry_options=types.HttpRetryOptions(attempts=1),
+        )
+        response = genai.Client(api_key=api_key, http_options=http_options).models.generate_content(
+            model=model, contents=prompt,
+        )
+        raw = getattr(response, "text", "") or ""
+        record_gemini_attempt(
+            response=response, agent="Bob", phase="terminal_tail_sanitizer", model_requested=model,
+            status="called", reason="bob_terminal_tail_sanitizer", purpose="bob_terminal_tail_sanitizer",
+            result="text" if raw.strip() else "empty_response", operation_id=operation_id,
+            attempt_index=0, retry=False, fallback=False,
+            latency_ms=max(0, int((time.monotonic() - started) * 1000)), **ledger_context,
+        )
+        return raw.strip(), model
+    except Exception as exc:
+        record_gemini_attempt(
+            response=None, agent="Bob", phase="terminal_tail_sanitizer", model_requested=model,
+            status="failed", reason="bob_terminal_tail_sanitizer", purpose="bob_terminal_tail_sanitizer",
+            result=str(exc)[:500],
+            operation_id=operation_id, attempt_index=0, retry=False, fallback=False,
+            latency_ms=max(0, int((time.monotonic() - started) * 1000)), **ledger_context,
+        )
+        return None, model
+
+
+def _parse_terminal_tail_decisions(raw: str, expected_ids: list[str]) -> dict[str, dict[str, str]] | None:
+    cleaned = re.sub(r"^```(?:json)?|```$", "", raw.strip(), flags=re.I).strip()
+    try:
+        payload = json.loads(cleaned)
+    except Exception:
+        return None
+    rows = payload.get("decisions") if isinstance(payload, dict) else None
+    if not isinstance(rows, list) or len(rows) != len(expected_ids):
+        return None
+    decisions: dict[str, dict[str, str]] = {}
+    for row in rows:
+        if not isinstance(row, dict):
+            return None
+        block_id = str(row.get("id") or "")
+        decision = str(row.get("decision") or "").upper()
+        category = str(row.get("category") or "").upper()
+        if block_id not in expected_ids or block_id in decisions:
+            return None
+        if decision not in {"KEEP", "DROP"} or category not in TERMINAL_TAIL_CATEGORIES:
+            return None
+        if (decision == "KEEP") != (category == "EDITORIAL"):
+            return None
+        decisions[block_id] = {"decision": decision, "category": category}
+    return decisions if set(decisions) == set(expected_ids) else None
+
+
+def sanitize_terminal_tail(
+    elements: list[dict[str, Any]], *, title: str = "", source: str = "",
+    ledger_context: dict[str, Any] | None = None,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    """Fail-open semantic classification followed by deterministic suffix removal."""
+    textual = [(index, item) for index, item in enumerate(elements) if item.get("type") in TRANSLATABLE_TYPES and clean_text(str(item.get("text") or ""))]
+    tail = textual[-TERMINAL_TAIL_WINDOW:]
+    telemetry: dict[str, Any] = {
+        "semantic_tail_sanitizer_attempted": False,
+        "semantic_tail_sanitizer_model": BOB_TERMINAL_TAIL_MODEL,
+        "semantic_tail_blocks_examined": len(tail),
+        "semantic_tail_blocks_removed": 0,
+        "semantic_tail_removed_blocks": [],
+        "semantic_tail_sanitizer_status": "no_tail" if not tail else "provider_failed",
+        "semantic_tail_fail_open_used": False,
+        "fail_open_used": False,
+    }
+    if not tail:
+        return elements, telemetry
+    request_blocks = [
+        {"id": f"tail_{offset}", "type": str(item.get("type")), "text": clean_text(str(item.get("text") or ""))}
+        for offset, (_, item) in enumerate(tail, start=1)
+    ]
+    telemetry["semantic_tail_sanitizer_attempted"] = True
+    try:
+        raw, model = call_terminal_tail_classifier(
+            build_terminal_tail_prompt(title, source, request_blocks), ledger_context=ledger_context or {},
+        )
+    except Exception:
+        raw, model = None, BOB_TERMINAL_TAIL_MODEL
+    telemetry["semantic_tail_sanitizer_model"] = model
+    if raw is None:
+        telemetry["semantic_tail_fail_open_used"] = True
+        telemetry["fail_open_used"] = True
+        return elements, telemetry
+    decisions = _parse_terminal_tail_decisions(raw, [block["id"] for block in request_blocks])
+    if decisions is None:
+        telemetry["semantic_tail_sanitizer_status"] = "malformed_response"
+        telemetry["semantic_tail_fail_open_used"] = True
+        telemetry["fail_open_used"] = True
+        return elements, telemetry
+
+    removable: list[tuple[int, str, str]] = []
+    for (element_index, _), block in zip(reversed(tail), reversed(request_blocks)):
+        result = decisions[block["id"]]
+        if result["decision"] == "KEEP":
+            break
+        removable.append((element_index, block["id"], result["category"]))
+    remove_indexes = {row[0] for row in removable}
+    telemetry.update({
+        "semantic_tail_blocks_removed": len(removable),
+        "semantic_tail_removed_blocks": [
+            {"id": block_id, "category": category} for _, block_id, category in reversed(removable)
+        ],
+        "semantic_tail_sanitizer_status": "validated",
+    })
+    return [item for index, item in enumerate(elements) if index not in remove_indexes], telemetry
 
 
 def build_translation_units(elements: list[dict[str, Any]]) -> list[dict[str, str]]:
@@ -1039,6 +1081,19 @@ def article_package(item: dict[str, Any]) -> dict[str, Any]:
         package["fetched_html_chars"] = len(raw)
         package["source_html_contains_embed_hint"] = bool(re.search(r"twitter-tweet|x\.com/.+?/status|twitter\.com/.+?/status|instagram\.com/(p|reel)|youtube\.com/(watch|embed|shorts)|youtu\.be/|iframe|youtube-nocookie", raw, re.I))
         meta, raw_elements, elements, removed, extraction_diag = extract_elements(url, raw)
+        sanitizer_context = {
+            "url": url,
+            "title": item.get("title") or meta.get("source_title"),
+            "candidate_id": item.get("candidate_id") or item.get("id") or item.get("semantic_id"),
+            "source_id": item.get("source_id") or item.get("source"),
+        }
+        elements, semantic_tail_telemetry = sanitize_terminal_tail(
+            elements,
+            title=str(item.get("title") or meta.get("source_title") or ""),
+            source=str(item.get("source") or urlparse(url).netloc),
+            ledger_context=sanitizer_context,
+        )
+        package.update(semantic_tail_telemetry)
         canonical_source_body = source_body.contract_from_elements(url, elements, extraction_diag)
         if canonical_source_body:
             package["canonical_source_body"] = canonical_source_body
