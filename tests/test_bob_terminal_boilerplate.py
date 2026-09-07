@@ -7,6 +7,7 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from agents import bob
+from agents import source_body
 
 
 AJ_NOTICE = (
@@ -193,10 +194,82 @@ def test_no_textual_tail_does_not_call_provider(monkeypatch):
     assert telemetry["semantic_tail_sanitizer_status"] == "no_tail"
 
 
-def test_semantic_footer_survives_structural_cleanup_for_classification():
-    cleaned, removed = bob.sanitize_elements(elements(AJ_NOTICE, AUTHOR_BIO, CTA), "")
-    assert [item["text"] for item in cleaned] == [AJ_NOTICE, AUTHOR_BIO, CTA]
-    assert removed == []
+def test_shared_extractor_keeps_base_terminal_prefilter():
+    base_cta = "Subscribe to the site for more wrestling updates."
+    cleaned, removed = bob.sanitize_elements(elements(AJ_NOTICE, AUTHOR_BIO, base_cta), "")
+    assert cleaned == []
+    assert removed[0]["reason"] == "footer_start"
+
+
+def test_source_body_hydration_filters_footer_without_semantic_provider_call(monkeypatch):
+    article = (
+        "AJ Styles explained the match result, the decisive sequence, and what the conclusion "
+        "means for his wrestling career and future championship plans. " * 3
+    )
+    html = f"<html><body><article><p>{article}</p><p>{AUTHOR_BIO}</p></article></body></html>"
+    calls = []
+    monkeypatch.setattr(bob, "fetch_html", lambda url: html)
+    monkeypatch.setattr(
+        bob,
+        "call_terminal_tail_classifier",
+        lambda *args, **kwargs: calls.append((args, kwargs)) or pytest.fail("unexpected semantic call"),
+    )
+    item = {"source_url": "https://www.ringsidenews.com/story"}
+
+    hydrated, reason = source_body.hydrate(item)
+
+    assert (hydrated, reason) == (True, "bob_source_extraction")
+    assert source_body.valid_contract(item["canonical_source_body"])
+    assert AUTHOR_BIO not in item["canonical_source_body"]["cleaned_full_text"]
+    assert calls == []
+
+
+def test_terminal_cutoff_removes_bio_and_later_avatar(monkeypatch):
+    install_response(monkeypatch, response(("KEEP", "EDITORIAL"), ("DROP", "BIO")))
+    original = elements(EDITORIAL, AUTHOR_BIO) + [{"type": "image", "url": "https://example.test/avatar.jpg"}]
+    cleaned, _ = bob.sanitize_terminal_tail(original)
+    assert cleaned == elements(EDITORIAL)
+
+
+def test_terminal_cutoff_removes_notice_and_later_promotional_embed(monkeypatch):
+    install_response(monkeypatch, response(("KEEP", "EDITORIAL"), ("DROP", "TRANSCRIPT_NOTICE")))
+    original = elements(EDITORIAL, SHORT_NOTICE) + [{"type": "embed", "url": "https://youtube.com/watch?v=promo"}]
+    cleaned, _ = bob.sanitize_terminal_tail(original)
+    assert cleaned == elements(EDITORIAL)
+
+
+def test_terminal_cutoff_retains_earlier_editorial_image(monkeypatch):
+    install_response(monkeypatch, response(("KEEP", "EDITORIAL"), ("DROP", "BIO")))
+    image = {"type": "image", "url": "https://example.test/editorial.jpg"}
+    original = [image] + elements(EDITORIAL, AUTHOR_BIO)
+    cleaned, _ = bob.sanitize_terminal_tail(original)
+    assert cleaned == [image, {"type": "text", "text": EDITORIAL}]
+
+
+def test_terminal_keep_after_drop_retains_later_non_text_element(monkeypatch):
+    install_response(monkeypatch, response(("DROP", "OTHER_BOILERPLATE"), ("KEEP", "EDITORIAL")))
+    image = {"type": "image", "url": "https://example.test/closing.jpg"}
+    original = elements("Possible boilerplate.", EDITORIAL) + [image]
+    cleaned, telemetry = bob.sanitize_terminal_tail(original)
+    assert cleaned == original
+    assert telemetry["semantic_tail_blocks_removed"] == 0
+
+
+def test_terminal_cutoff_removes_interleaved_footer_media(monkeypatch):
+    install_response(monkeypatch, response(
+        ("KEEP", "EDITORIAL"),
+        ("DROP", "TRANSCRIPT_NOTICE"),
+        ("DROP", "BIO"),
+    ))
+    original = (
+        elements(EDITORIAL, SHORT_NOTICE)
+        + [{"type": "image", "url": "https://example.test/footer.jpg"}]
+        + elements(AUTHOR_BIO)
+        + [{"type": "embed", "url": "https://youtube.com/watch?v=promo"}]
+    )
+    cleaned, telemetry = bob.sanitize_terminal_tail(original)
+    assert cleaned == elements(EDITORIAL)
+    assert telemetry["semantic_tail_blocks_removed"] == 2
 
 
 def test_article_package_sanitizes_before_translation_units(monkeypatch):
