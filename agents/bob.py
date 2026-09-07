@@ -748,12 +748,14 @@ def call_terminal_tail_classifier(prompt: str, *, ledger_context: dict[str, Any]
 
     operation_id = make_operation_id("Bob", "terminal_tail_sanitizer", ledger_context.get("candidate_id") or ledger_context.get("url"))
     started = time.monotonic()
+    client = None
     try:
         http_options = types.HttpOptions(
             timeout=REQUEST_TIMEOUT * 1000,
             retry_options=types.HttpRetryOptions(attempts=1),
         )
-        response = genai.Client(api_key=api_key, http_options=http_options).models.generate_content(
+        client = genai.Client(api_key=api_key, http_options=http_options)
+        response = client.models.generate_content(
             model=model, contents=prompt,
         )
         raw = getattr(response, "text", "") or ""
@@ -774,6 +776,13 @@ def call_terminal_tail_classifier(prompt: str, *, ledger_context: dict[str, Any]
             latency_ms=max(0, int((time.monotonic() - started) * 1000)), **ledger_context,
         )
         return None, model
+    finally:
+        try:
+            close = getattr(client, "close", None)
+            if callable(close):
+                close()
+        except Exception:
+            pass
 
 
 def _parse_terminal_tail_decisions(raw: str, expected_ids: list[str]) -> dict[str, dict[str, str]] | None:
