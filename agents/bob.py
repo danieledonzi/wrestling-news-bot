@@ -1204,7 +1204,17 @@ def article_package(item: dict[str, Any]) -> dict[str, Any]:
             ledger_context=sanitizer_context,
         )
         package.update(semantic_tail_telemetry)
-        canonical_source_body = source_body.contract_from_elements(url, elements, extraction_diag)
+        contract_diag = extraction_diag
+        if semantic_tail_telemetry["semantic_tail_blocks_removed"] > 0:
+            contract_diag = dict(extraction_diag)
+            contract_diag.update({
+                "clean_element_count": len(elements),
+                "structured_article_body": "",
+                "structured_article_body_chars": 0,
+                "structured_coverage_ratio": None,
+                "structured_token_overlap_ratio": None,
+            })
+        canonical_source_body = source_body.contract_from_elements(url, elements, contract_diag)
         if canonical_source_body:
             package["canonical_source_body"] = canonical_source_body
         units = build_translation_units(elements)

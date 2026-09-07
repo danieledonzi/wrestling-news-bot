@@ -306,6 +306,52 @@ def test_article_package_sanitizes_before_translation_units(monkeypatch):
     assert package["semantic_tail_blocks_removed"] == 1
 
 
+def schema_article_html(editorial, footer, structured_suffix=""):
+    article_body = f"{editorial} {footer} {structured_suffix}".strip()
+    schema = json.dumps({"@context": "https://schema.org", "@type": "NewsArticle", "articleBody": article_body})
+    return f"<html><head><script type='application/ld+json'>{schema}</script></head><body><article><p>{editorial}</p><p>{footer}</p></article></body></html>"
+
+
+def test_article_package_contract_does_not_reintroduce_trimmed_structured_footer(monkeypatch):
+    editorial = (
+        "AJ Styles explained the match result, the decisive sequence, and the importance of the "
+        "conclusion for his wrestling career and future championship plans. " * 5
+    )
+    calls = []
+    install_response(monkeypatch, response(("KEEP", "EDITORIAL"), ("DROP", "TRANSCRIPT_NOTICE")), calls)
+    monkeypatch.setattr(bob, "fetch_html", lambda url: schema_article_html(editorial, SHORT_NOTICE))
+    monkeypatch.setattr(bob, "call_gemini", lambda *args, **kwargs: ("", "unavailable", []))
+
+    package = bob.article_package({"url": "https://example.test/schema-story", "title": "AJ Styles interview"})
+
+    assert [item["text"] for item in package["elements"]] == [bob.clean_text(editorial)]
+    contract_text = package["canonical_source_body"]["cleaned_full_text"]
+    assert SHORT_NOTICE not in contract_text
+    assert "AJ Styles explained the match result" in contract_text
+    assert len(calls) == 1
+
+
+def test_article_package_keeps_structured_body_preference_when_tail_not_removed(monkeypatch):
+    editorial = (
+        "Rhea Ripley described the match result, the decisive sequence, and the importance of the "
+        "conclusion for her wrestling career and future championship plans. " * 5
+    )
+    closing = "She said the final decision belongs to the champion."
+    structured_only = "Verified structured-only source context."
+    calls = []
+    install_response(monkeypatch, response(("KEEP", "EDITORIAL"), ("KEEP", "EDITORIAL")), calls)
+    monkeypatch.setattr(
+        bob, "fetch_html", lambda url: schema_article_html(editorial, closing, structured_only),
+    )
+    monkeypatch.setattr(bob, "call_gemini", lambda *args, **kwargs: ("", "unavailable", []))
+
+    package = bob.article_package({"url": "https://example.test/schema-keep", "title": "Rhea Ripley interview"})
+
+    assert package["semantic_tail_blocks_removed"] == 0
+    assert structured_only in package["canonical_source_body"]["cleaned_full_text"]
+    assert len(calls) == 1
+
+
 def test_empty_genuine_editorial_translation_remains_invalid():
     units = [{"id": "b1", "type": "text", "text": "The wrestler discussed her injury after the match."}]
     validation = bob.validate_translation(
