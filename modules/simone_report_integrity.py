@@ -248,11 +248,9 @@ def candidate_date_evidence(entry: dict[str, Any], expected_date: str) -> dict[s
     return {"matches": matches, "explicit_content_dates": explicit, "feed_timestamp_dates": feed_dates}
 
 
-def dynamic_special_event_match(entry: dict[str, Any], registry: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
+def special_event_report_identity(entry: dict[str, Any], registry: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
+    """Identify a configured special-event results page, regardless of source."""
     raw = " ".join(str(entry.get(k) or "") for k in ("title", "url", "source_url"))
-    source_blob = f"{entry.get('source', '')} {entry.get('url', '')} {entry.get('source_url', '')}".lower().replace(" ", "")
-    if "wrestlinginc" not in source_blob:
-        return None, "waiting_for_canonical_results_source"
     explicit_report = bool(re.search(r"\bresults\b|\brisultati\b", raw, re.I))
     if not explicit_report:
         return None, "rejected_non_results_event_article"
@@ -295,14 +293,24 @@ def dynamic_special_event_match(entry: dict[str, Any], registry: dict[str, Any])
                 "category_hint": event.get("category_hint") or event.get("promotion"),
                 "event_name": event.get("event_name"), "promotion": event.get("promotion"),
                 "aliases": sorted({str(alias) for alias in aliases if alias}),
-                "canonical_identity": "wrestlinginc_results",
                 "match_evidence": {"strong_alias": hits[0], "night_alias": night_alias_hit, "alias_hits": hits, "explicit_content_dates": sorted(explicit_dates), "feed_timestamp_dates": sorted(feed_dates), "explicit_date_match": night_date in explicit_dates, "feed_timestamp_compatible": timestamp_compatible, "promotion_support": str(event.get("promotion") or "").lower() in blob},
             }
             matches.append((score, metadata))
     matches.sort(key=lambda item: item[0], reverse=True)
     if not matches or (len(matches) > 1 and matches[0][0] == matches[1][0]):
         return None, "ambiguous_event_match" if matches else "event_alias_not_found"
-    return matches[0][1], "canonical_results_match"
+    return matches[0][1], "special_event_report_identity_match"
+
+
+def dynamic_special_event_match(entry: dict[str, Any], registry: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
+    """Return a configured special-event match only for the canonical source."""
+    source_blob = f"{entry.get('source', '')} {entry.get('url', '')} {entry.get('source_url', '')}".lower().replace(" ", "")
+    if "wrestlinginc" not in source_blob:
+        return None, "waiting_for_canonical_results_source"
+    match, reason = special_event_report_identity(entry, registry)
+    if match is None:
+        return None, reason
+    return {**match, "canonical_identity": "wrestlinginc_results"}, "canonical_results_match"
 
 
 def reserve_report(candidate: dict[str, Any], identity: dict[str, Any], *, now: datetime, pending_path: Path = PENDING_REPORTS) -> dict[str, Any]:
