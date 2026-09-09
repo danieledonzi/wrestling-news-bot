@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
-from modules.simone_report_integrity import dynamic_special_event_match, load_effective_registry
+from modules.simone_report_integrity import dynamic_special_event_match, load_effective_registry, special_event_report_identity
 
 try:
     import feedparser  # type: ignore
@@ -230,8 +230,10 @@ def report_hint(entry: dict[str, Any], special_registry: dict[str, Any] | None =
     blob = f"{title_url_blob} {entry.get('summary', '')}"
     title_url_normalized = normalize_text(title_url_blob)
     normalized = normalize_text(blob)
-    event_match, dynamic_reason = dynamic_special_event_match(entry, special_registry or {})
+    event_match, dynamic_reason = special_event_report_identity(entry, special_registry or {})
     if event_match:
+        if is_preferred_report_source(entry):
+            event_match, dynamic_reason = dynamic_special_event_match(entry, special_registry or {})
         entry["special_event_match"] = event_match
         return str(event_match.get("event_name") or event_match.get("event_key")), dynamic_reason
     title_url_has_results_hint = (
@@ -326,6 +328,7 @@ def classify_entries(entries: list[dict[str, Any]], already_worked_urls: set[str
                     original_report_reason=report_reason or "report_like_title",
                     show_hint=show_hint,
                     preferred_report_source="wrestlinginc",
+                    special_event_match=entry.get("special_event_match"),
                 ))
                 continue
             report_candidates.append(compact_entry(entry, "report_candidate", report_reason or "report_like_title", assigned_to="Simone", show_hint=show_hint, special_event_match=entry.get("special_event_match")))

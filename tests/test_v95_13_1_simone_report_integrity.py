@@ -20,6 +20,82 @@ def full_wwe_registry():
     return {"default_report_publish_after_local": "06:30", "events": events}
 
 
+def sunday_night_main_event_registry():
+    return {"events": [{
+        "key": "wwe_sunday_night_main_event_2026",
+        "promotion": "WWE",
+        "event_name": "WWE Sunday Night Main Event",
+        "status": "confirmed",
+        "aliases": ["Sunday Night Main Event"],
+        "nights": [{
+            "night_key": "wwe_sunday_night_main_event_2026_main",
+            "date_local": "2026-09-06",
+            "aliases": ["Sunday Night Main Event Results"],
+        }],
+    }]}
+
+
+def test_noncanonical_snme_results_is_binding_hard_skip_not_news():
+    item = {
+        "source": "ringsidenews",
+        "title": "Sunday Night Main Event Results, Highlights and Key Moments for September 6, 2026",
+        "url": "https://www.ringsidenews.com/sunday-night-main-event-results-september-6-2026/",
+    }
+    classified = massy.classify_entries([item], set(), set(), sunday_night_main_event_registry())
+
+    assert classified["report_candidates"] == []
+    assert classified["news_candidates_for_menzo"] == []
+    assert len(classified["hard_skipped"]) == 1
+    skipped = classified["hard_skipped"][0]
+    assert skipped["reason"] == "report_source_not_preferred"
+    assert skipped["original_report_reason"] == "special_event_report_identity_match"
+    assert skipped["special_event_match"]["event_key"] == "wwe_sunday_night_main_event_2026"
+
+
+def test_canonical_snme_results_routes_to_simone_with_structured_identity():
+    item = {
+        "source": "wrestlinginc",
+        "title": "Sunday Night Main Event Results, Highlights and Key Moments for September 6, 2026",
+        "url": "https://www.wrestlinginc.com/sunday-night-main-event-results-september-6-2026/",
+    }
+    classified = massy.classify_entries([item], set(), set(), sunday_night_main_event_registry())
+
+    assert classified["news_candidates_for_menzo"] == []
+    assert classified["hard_skipped"] == []
+    assert len(classified["report_candidates"]) == 1
+    match = classified["report_candidates"][0]["special_event_match"]
+    assert match["canonical_identity"] == "wrestlinginc_results"
+    assert match["report_key"] == "special_event_wwe_sunday_night_main_event_2026_main_2026_09_06"
+
+
+def test_standalone_snme_news_remains_news_candidate():
+    item = {
+        "source": "ringsidenews",
+        "title": "Randy Orton explains his actions after Sunday Night Main Event",
+        "url": "https://www.ringsidenews.com/randy-orton-explains-actions-after-snme/",
+        "published": "2026-09-07T01:00:00Z",
+    }
+    classified = massy.classify_entries([item], set(), set(), sunday_night_main_event_registry())
+
+    assert len(classified["news_candidates_for_menzo"]) == 1
+    assert classified["report_candidates"] == []
+    assert classified["hard_skipped"] == []
+
+
+def test_commentary_about_snme_results_without_matching_date_remains_news():
+    item = {
+        "source": "ringsidenews",
+        "title": "What the Sunday Night Main Event results mean for WWE's future",
+        "url": "https://www.ringsidenews.com/analysis/snme-results-future/",
+        "published": "2026-09-09T12:00:00Z",
+    }
+    classified = massy.classify_entries([item], set(), set(), sunday_night_main_event_registry())
+
+    assert len(classified["news_candidates_for_menzo"]) == 1
+    assert classified["report_candidates"] == []
+    assert classified["hard_skipped"] == []
+
+
 def test_dynamic_special_report_is_reserved_not_menzo(tmp_path: Path):
     item = {"source": "wrestlinginc", "title": "WWE Saturday Night's Main Event live coverage/results July 18, 2026", "url": "https://wrestlinginc.test/snme-results", "normalized_url": "https://wrestlinginc.test/snme-results", "summary": "July 18, 2026"}
     classified = massy.classify_entries([item], set(), set(), registry())
