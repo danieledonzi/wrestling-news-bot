@@ -22,6 +22,7 @@ STATE_DIR = ROOT / "state"
 ARTIFACT_DIR = ROOT / "artifacts" / "newsroom"
 NEWSROOM_STATE_DIR = STATE_DIR / "newsroom"
 FEEDS_CONFIG = CONFIG_DIR / "feeds_v92.json"
+REPORTS_CONFIG = CONFIG_DIR / "reports_v92.json"
 
 MASSY_VERSION = "v95_13_1_simone_report_integrity"
 
@@ -208,6 +209,20 @@ def is_preferred_report_source(entry: dict[str, Any]) -> bool:
     return is_wrestlinginc_source(str(entry.get("source", "") or ""))
 
 
+def is_configured_weekly_report_source(entry: dict[str, Any]) -> bool:
+    source = normalize_text(str(entry.get("source") or "")).replace(" ", "")
+    config = load_json(REPORTS_CONFIG, {"reports": []})
+    reports = config.get("reports", []) if isinstance(config, dict) else []
+    return any(
+        source
+        and source in {
+            normalize_text(str(report.get("preferred_source") or "")).replace(" ", ""),
+            normalize_text(str(report.get("fallback_source") or "")).replace(" ", ""),
+        }
+        for report in reports if isinstance(report, dict)
+    )
+
+
 def has_date_hint(text: str) -> bool:
     return bool(DATE_HINT_PATTERN.search(text or ""))
 
@@ -320,7 +335,8 @@ def classify_entries(entries: list[dict[str, Any]], already_worked_urls: set[str
             continue
         show_hint, report_reason = report_hint(entry, special_registry)
         if show_hint:
-            if not is_preferred_report_source(entry):
+            weekly_source_allowed = report_reason == "weekly_show_results" and is_configured_weekly_report_source(entry)
+            if not is_preferred_report_source(entry) and not weekly_source_allowed:
                 hard_skipped.append(compact_entry(
                     entry,
                     "hard_skip",

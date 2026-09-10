@@ -82,6 +82,20 @@ def test_standalone_snme_news_remains_news_candidate():
     assert classified["hard_skipped"] == []
 
 
+def test_ringside_weekly_results_routes_to_simone_and_never_normal_news():
+    item = {
+        "source": "ringsidenews",
+        "title": "AEW Dynamite Results 9/9/2026",
+        "url": "https://www.ringsidenews.com/aew-dynamite-results-september-9-2026/",
+    }
+    classified = massy.classify_entries([item], set(), set(), {"events": []})
+
+    assert len(classified["report_candidates"]) == 1
+    assert classified["report_candidates"][0]["assigned_to"] == "Simone"
+    assert classified["news_candidates_for_menzo"] == []
+    assert classified["hard_skipped"] == []
+
+
 def test_commentary_about_snme_results_without_matching_date_remains_news():
     item = {
         "source": "ringsidenews",

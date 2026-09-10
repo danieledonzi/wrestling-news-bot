@@ -1,6 +1,8 @@
 import json
+from datetime import datetime
 from pathlib import Path
 import sys
+from zoneinfo import ZoneInfo
 
 import pytest
 
@@ -25,10 +27,11 @@ def no_dynamic_special_events(tmp_path, monkeypatch):
 
 def candidate(title, *, source="wrestlinginc", summary=""):
     slug = simone.normalize(title).replace(" ", "-")
+    domain = "www.ringsidenews.com" if source == "ringsidenews" else "www.wrestlinginc.com"
     return {
         "source": source,
         "title": title,
-        "url": f"https://www.wrestlinginc.com/{slug}/",
+        "url": f"https://{domain}/{slug}/",
         "summary": summary,
     }
 
@@ -43,6 +46,9 @@ def candidate(title, *, source="wrestlinginc", summary=""):
         ("wwe_smackdown", "WWE Friday Night SmackDown Results 9/4/2026", "2026-09-04"),
         ("wwe_smackdown", "WWE Friday Night SmackDown Results 9/4 - Undisputed Title Match & More", "2026-09-04"),
         ("aew_dynamite", "AEW Wednesday Night Dynamite Results 9/2/2026", "2026-09-02"),
+        ("aew_dynamite", "AEW Dynamite Rebel Heart Results 9/9/2026", "2026-09-09"),
+        ("aew_dynamite", "AEW Dynamite Grand Slam Mexico Results 8/5/2026", "2026-08-05"),
+        ("aew_dynamite", "AEW Dynamite Results 9/9/2026", "2026-09-09"),
     ],
 )
 def test_configured_result_identity_accepts_normal_and_modified_titles(report_id, title, date_iso):
@@ -134,3 +140,58 @@ def test_genuine_special_event_still_matches_without_weekly_results_identity():
     match, reason = simone_report_integrity.dynamic_special_event_match(item, no_mercy_registry())
     assert reason == "canonical_results_match"
     assert match is not None and match["event_key"] == "nxt_no_mercy_2026"
+
+
+def test_bounded_modifier_does_not_turn_special_event_into_weekly_identity():
+    assert not simone_report_integrity.matches_weekly_result_identity(
+        "NXT No Mercy Results 9/1/2026", REPORTS["wwe_nxt"]
+    )
+
+
+def test_weekly_fallback_waits_before_cutoff_and_is_selected_after_cutoff():
+    fallback = candidate("AEW Dynamite Results 9/9/2026", source="ringsidenews")
+    report = REPORTS["aew_dynamite"]
+    before = datetime(2026, 9, 10, 8, 29, tzinfo=ZoneInfo("Europe/Rome"))
+    after = datetime(2026, 9, 10, 8, 30, tzinfo=ZoneInfo("Europe/Rome"))
+
+    assert simone.choose_report_candidate([fallback], report, "2026-09-09", now=before) == (
+        None, "waiting_for_canonical_results_source"
+    )
+    assert simone.choose_report_candidate([fallback], report, "2026-09-09", now=after) == (
+        fallback, "fallback_results_match"
+    )
+
+
+def test_preferred_weekly_source_wins_over_fallback_after_cutoff():
+    preferred = candidate("AEW Dynamite Rebel Heart Results 9/9/2026")
+    fallback = candidate("AEW Dynamite Results 9/9/2026", source="ringsidenews")
+    after = datetime(2026, 9, 10, 9, 0, tzinfo=ZoneInfo("Europe/Rome"))
+
+    assert simone.choose_report_candidate(
+        [fallback, preferred], REPORTS["aew_dynamite"], "2026-09-09", now=after
+    ) == (preferred, "canonical_results_match")
+
+
+def test_wrong_show_and_date_remain_rejected_with_branded_identity():
+    item = candidate("AEW Dynamite Rebel Heart Results 9/9/2026")
+    assert simone.candidate_report_identity(item, REPORTS["aew_collision"], "2026-09-09")[0] is False
+    assert simone.candidate_report_identity(item, REPORTS["aew_dynamite"], "2026-09-02")[0] is False
+
+
+def test_existing_weekly_source_lock_cannot_be_replaced_by_later_fallback(tmp_path):
+    path = tmp_path / "pending.json"
+    identity = {
+        "report_key": "aew_dynamite_2026_09_09",
+        "report_id": "aew_dynamite",
+        "date_local": "2026-09-09",
+    }
+    now = datetime(2026, 9, 10, 9, 0, tzinfo=ZoneInfo("Europe/Rome"))
+    preferred = candidate("AEW Dynamite Rebel Heart Results 9/9/2026")
+    fallback = candidate("AEW Dynamite Results 9/9/2026", source="ringsidenews")
+
+    first = simone_report_integrity.reserve_report(preferred, identity, now=now, pending_path=path)
+    retained = simone_report_integrity.reserve_report(fallback, identity, now=now, pending_path=path)
+    rows = json.loads(path.read_text())["reports"]
+
+    assert retained["source_url"] == first["source_url"] == preferred["url"].rstrip("/")
+    assert next(row for row in rows if row["source"] == "ringsidenews")["status"] == "later_canonical_candidate_ignored"
