@@ -27,7 +27,7 @@ REPORT_REGISTRY_FILE = NEWSROOM_STATE_DIR / "report_publication_registry.json"
 SIMONE_EXPECTED_EVENTS_FILE = NEWSROOM_STATE_DIR / "simone_expected_events_latest.json"
 ARTIFACT_EXPECTED_EVENTS_FILE = ARTIFACT_DIR / "simone_expected_events_latest.json"
 
-SIMONE_VERSION = "v95.19.2_weekly_result_identity_aliases"
+SIMONE_VERSION = "v95.19.3_weekly_fallback_reliability"
 
 DAY_NAMES = {
     "monday": 0,
@@ -265,7 +265,7 @@ def candidate_matches_special_report(candidate: dict[str, Any], report: dict[str
         return False, "rejected_non_results_event_article"
     reports_cfg = load_json(REPORTS_CONFIG, {"reports": []})
     for weekly in reports_cfg.get("reports", []) if isinstance(reports_cfg, dict) else []:
-        if isinstance(weekly, dict) and matches_weekly_result_identity(explicit_raw, weekly):
+        if isinstance(weekly, dict) and matches_weekly_result_identity(explicit_raw, weekly, allow_branded_modifier=False):
             return False, "rejected_conflicting_weekly_identity"
     if not any(alias and alias in explicit_blob for alias in aliases):
         return False, "event_alias_not_found"
@@ -400,7 +400,12 @@ def _canonical_structured_special_match(candidate: dict[str, Any]) -> bool:
 
 def candidate_report_identity(candidate: dict[str, Any], report: dict[str, Any], date_iso: str) -> tuple[bool, str]:
     explicit = f"{candidate.get('title', '')} {candidate.get('url', '')} {candidate.get('source_url', '')}"
-    if not _is_wrestlinginc(candidate) or not re.search(r"\b(results|risultati)\b", explicit, re.I):
+    source = str(candidate.get("source") or "").lower()
+    configured_sources = {str(report.get(key) or "").lower() for key in ("preferred_source", "fallback_source")}
+    configured_sources.discard("")
+    if not configured_sources:
+        configured_sources.add("wrestlinginc")
+    if source not in configured_sources or not re.search(r"\b(results|risultati)\b", explicit, re.I):
         return False, "waiting_for_canonical_results_source"
     if _canonical_structured_special_match(candidate):
         return False, "rejected_special_event_as_weekly"
@@ -428,7 +433,7 @@ def candidate_published_score(candidate: dict[str, Any]) -> str:
         return raw
 
 
-def choose_report_candidate(candidates: list[dict[str, Any]], report: dict[str, Any], date_iso: str) -> tuple[dict[str, Any] | None, str]:
+def choose_report_candidate(candidates: list[dict[str, Any]], report: dict[str, Any], date_iso: str, now: datetime | None = None, publish_date_iso: str | None = None) -> tuple[dict[str, Any] | None, str]:
     evaluated = [(c, *candidate_report_identity(c, report, date_iso)) for c in candidates]
     matches = [c for c, matched, _reason in evaluated if matched]
     if not matches:
@@ -438,7 +443,18 @@ def choose_report_candidate(candidates: list[dict[str, Any]], report: dict[str, 
                 return None, reason
         return None, "waiting_for_canonical_results_source"
     preferred = [c for c in matches if str(c.get("source") or "").lower() == str(report.get("preferred_source") or "").lower()]
-    return (preferred[0], "canonical_results_match") if preferred else (None, "waiting_for_canonical_results_source")
+    if preferred:
+        return preferred[0], "canonical_results_match"
+    fallback = [c for c in matches if str(c.get("source") or "").lower() == str(report.get("fallback_source") or "").lower()]
+    current = rome_time(now or local_now())
+    try:
+        hour, minute = [int(x) for x in str(report.get("wait_for_preferred_until") or "23:59").split(":", 1)]
+        publication_date = datetime.strptime(str(publish_date_iso), "%Y-%m-%d").date()
+        cutoff = datetime(publication_date.year, publication_date.month, publication_date.day, hour, minute, tzinfo=ROME)
+        cutoff_reached = current >= cutoff
+    except (TypeError, ValueError):
+        cutoff_reached = False
+    return (fallback[0], "fallback_results_match") if fallback and cutoff_reached else (None, "waiting_for_canonical_results_source")
 
 
 def _pending_lock(report_key: str) -> dict[str, Any] | None:
@@ -470,7 +486,7 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     manual_runs = load_json(MANUAL_RUNS_FILE, [])
     reports = reports_cfg.get("reports", []) if isinstance(reports_cfg, dict) else []
     now = local_now()
-    expected_special, special_blocked = build_expected_special_reports(special_cfg)
+    expected_special, special_blocked = build_expected_special_reports(special_cfg, now)
 
     # Validate legacy pending rows and establish a lock only from canonical identity.
     pending_seed = load_json(PENDING_REPORTS, {"reports": []})
@@ -546,7 +562,7 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
             else:
                 chosen, reason = None, "invalid_canonical_identity"
         else:
-            chosen, reason = choose_report_candidate(report_candidates, report, date_iso)
+            chosen, reason = choose_report_candidate(report_candidates, report, date_iso, now=now, publish_date_iso=publish_date_iso)
         if chosen:
             item = {
                 "report_id": report_id,
@@ -566,7 +582,7 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
                 skipped.append(item)
                 continue
             reservation = reserve_report(chosen, {
-                "report_key": report_key, "report_id": report_id, "event_identity": report.get("show_name"), "canonical_identity": "wrestlinginc_results",
+                "report_key": report_key, "report_id": report_id, "event_identity": report.get("show_name"), "canonical_identity": f"{chosen.get('source')}_results",
                 "date_local": date_iso, "publish_after": report.get("publish_after") or "06:30",
                 "publish_date_local": publish_date_iso, "category": report.get("category"), "title": title,
                 "categories": [x for x in [report.get("editorial_category", "Editoriali"), report.get("category")] if x], "counts_as_news": False,

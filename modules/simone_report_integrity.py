@@ -64,10 +64,24 @@ def weekly_result_identities(report: dict[str, Any]) -> set[str]:
     return {phrase for phrase in identities if phrase}
 
 
-def matches_weekly_result_identity(explicit: str, report: dict[str, Any]) -> bool:
+def matches_full_show_branded_weekly_identity(explicit: str, report: dict[str, Any]) -> bool:
+    """Match a bounded branded edition only after the complete show name."""
+    blob = _slug(explicit).replace("_", " ")
+    show_name = _slug(str(report.get("show_name") or "")).replace("_", " ")
+    return bool(show_name and re.search(rf"\b{re.escape(show_name)}(?:\s+[a-z0-9]+){{1,3}}\s+(?:results?|risultati)\b", blob))
+
+
+def matches_weekly_result_identity(explicit: str, report: dict[str, Any], *, allow_branded_modifier: bool = True) -> bool:
     """Match a weekly results identity only against explicit title/URL material."""
     blob = _slug(explicit).replace("_", " ")
-    return any(re.search(rf"\b{re.escape(identity)}\b", blob) for identity in weekly_result_identities(report))
+    if any(re.search(rf"\b{re.escape(identity)}\b", blob) for identity in weekly_result_identities(report)):
+        return True
+    if not allow_branded_modifier:
+        return False
+    # Branded editions retain the full configured show identity but can place a
+    # short event modifier before "Results" (for example, "Rebel Heart").  Keep
+    # this deliberately bounded and do not apply it to broad keyword aliases.
+    return matches_full_show_branded_weekly_identity(explicit, report)
 
 
 def _nights(key: str, dates: list[str], promotion: str, name: str) -> list[dict[str, Any]]:
@@ -256,7 +270,7 @@ def special_event_report_identity(entry: dict[str, Any], registry: dict[str, Any
         return None, "rejected_non_results_event_article"
     weekly_cfg = _load(REPORTS_CONFIG, {"reports": []})
     for weekly in weekly_cfg.get("reports", []) if isinstance(weekly_cfg, dict) else []:
-        if isinstance(weekly, dict) and matches_weekly_result_identity(raw, weekly):
+        if isinstance(weekly, dict) and matches_weekly_result_identity(raw, weekly, allow_branded_modifier=False):
             return None, "rejected_conflicting_weekly_identity"
     blob = _slug(raw).replace("_", " ")
     matches: list[tuple[int, dict[str, Any]]] = []
