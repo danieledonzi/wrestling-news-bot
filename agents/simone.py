@@ -8,7 +8,7 @@ from zoneinfo import ZoneInfo
 from pathlib import Path
 from typing import Any
 
-from modules.simone_report_integrity import PENDING_REPORTS, candidate_date_evidence, dynamic_special_event_match, load_effective_registry, matches_weekly_result_identity, normalize_url, reserve_report
+from modules.simone_report_integrity import PENDING_REPORTS, candidate_date_evidence, dynamic_special_event_match, load_effective_registry, matches_full_show_branded_weekly_identity, matches_weekly_result_identity, normalize_url, reserve_report
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_DIR = ROOT / "config"
@@ -265,7 +265,10 @@ def candidate_matches_special_report(candidate: dict[str, Any], report: dict[str
         return False, "rejected_non_results_event_article"
     reports_cfg = load_json(REPORTS_CONFIG, {"reports": []})
     for weekly in reports_cfg.get("reports", []) if isinstance(reports_cfg, dict) else []:
-        if isinstance(weekly, dict) and matches_weekly_result_identity(explicit_raw, weekly, allow_branded_modifier=False):
+        if isinstance(weekly, dict) and (
+            matches_weekly_result_identity(explicit_raw, weekly, allow_branded_modifier=False)
+            or matches_full_show_branded_weekly_identity(explicit_raw, weekly, minimum_modifier_tokens=3)
+        ):
             return False, "rejected_conflicting_weekly_identity"
     if not any(alias and alias in explicit_blob for alias in aliases):
         return False, "event_alias_not_found"
@@ -433,7 +436,7 @@ def candidate_published_score(candidate: dict[str, Any]) -> str:
         return raw
 
 
-def choose_report_candidate(candidates: list[dict[str, Any]], report: dict[str, Any], date_iso: str, now: datetime | None = None) -> tuple[dict[str, Any] | None, str]:
+def choose_report_candidate(candidates: list[dict[str, Any]], report: dict[str, Any], date_iso: str, now: datetime | None = None, publish_date_iso: str | None = None) -> tuple[dict[str, Any] | None, str]:
     evaluated = [(c, *candidate_report_identity(c, report, date_iso)) for c in candidates]
     matches = [c for c, matched, _reason in evaluated if matched]
     if not matches:
@@ -449,7 +452,9 @@ def choose_report_candidate(candidates: list[dict[str, Any]], report: dict[str, 
     current = rome_time(now or local_now())
     try:
         hour, minute = [int(x) for x in str(report.get("wait_for_preferred_until") or "23:59").split(":", 1)]
-        cutoff_reached = current.time() >= current.replace(hour=hour, minute=minute, second=0, microsecond=0).time()
+        publication_date = datetime.strptime(str(publish_date_iso), "%Y-%m-%d").date()
+        cutoff = datetime(publication_date.year, publication_date.month, publication_date.day, hour, minute, tzinfo=ROME)
+        cutoff_reached = current >= cutoff
     except (TypeError, ValueError):
         cutoff_reached = False
     return (fallback[0], "fallback_results_match") if fallback and cutoff_reached else (None, "waiting_for_canonical_results_source")
@@ -560,7 +565,7 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
             else:
                 chosen, reason = None, "invalid_canonical_identity"
         else:
-            chosen, reason = choose_report_candidate(report_candidates, report, date_iso, now=now)
+            chosen, reason = choose_report_candidate(report_candidates, report, date_iso, now=now, publish_date_iso=publish_date_iso)
         if chosen:
             item = {
                 "report_id": report_id,

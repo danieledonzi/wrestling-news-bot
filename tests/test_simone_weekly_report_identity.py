@@ -154,10 +154,10 @@ def test_weekly_fallback_waits_before_cutoff_and_is_selected_after_cutoff():
     before = datetime(2026, 9, 10, 8, 29, tzinfo=ZoneInfo("Europe/Rome"))
     after = datetime(2026, 9, 10, 8, 30, tzinfo=ZoneInfo("Europe/Rome"))
 
-    assert simone.choose_report_candidate([fallback], report, "2026-09-09", now=before) == (
+    assert simone.choose_report_candidate([fallback], report, "2026-09-09", now=before, publish_date_iso="2026-09-10") == (
         None, "waiting_for_canonical_results_source"
     )
-    assert simone.choose_report_candidate([fallback], report, "2026-09-09", now=after) == (
+    assert simone.choose_report_candidate([fallback], report, "2026-09-09", now=after, publish_date_iso="2026-09-10") == (
         fallback, "fallback_results_match"
     )
 
@@ -168,8 +168,31 @@ def test_preferred_weekly_source_wins_over_fallback_after_cutoff():
     after = datetime(2026, 9, 10, 9, 0, tzinfo=ZoneInfo("Europe/Rome"))
 
     assert simone.choose_report_candidate(
-        [fallback, preferred], REPORTS["aew_dynamite"], "2026-09-09", now=after
+        [fallback, preferred], REPORTS["aew_dynamite"], "2026-09-09", now=after, publish_date_iso="2026-09-10"
     ) == (preferred, "canonical_results_match")
+
+
+def test_evening_discovery_waits_for_next_morning_absolute_cutoff():
+    fallback = candidate("AEW Dynamite Results 9/9/2026", source="ringsidenews")
+    preferred = candidate("AEW Dynamite Rebel Heart Results 9/9/2026")
+    evening = datetime(2026, 9, 9, 21, 0, tzinfo=ZoneInfo("Europe/Rome"))
+
+    assert simone.choose_report_candidate(
+        [fallback], REPORTS["aew_dynamite"], "2026-09-09", now=evening, publish_date_iso="2026-09-10"
+    ) == (None, "waiting_for_canonical_results_source")
+    assert simone.choose_report_candidate(
+        [fallback, preferred], REPORTS["aew_dynamite"], "2026-09-09", now=evening, publish_date_iso="2026-09-10"
+    ) == (preferred, "canonical_results_match")
+
+
+def test_weekly_fallback_fails_closed_without_valid_cutoff_datetime():
+    fallback = candidate("AEW Dynamite Results 9/9/2026", source="ringsidenews")
+    report = {**REPORTS["aew_dynamite"], "wait_for_preferred_until": "invalid"}
+    after = datetime(2026, 9, 10, 9, 0, tzinfo=ZoneInfo("Europe/Rome"))
+
+    assert simone.choose_report_candidate(
+        [fallback], report, "2026-09-09", now=after, publish_date_iso="2026-09-10"
+    ) == (None, "waiting_for_canonical_results_source")
 
 
 def test_wrong_show_and_date_remain_rejected_with_branded_identity():
@@ -195,3 +218,22 @@ def test_existing_weekly_source_lock_cannot_be_replaced_by_later_fallback(tmp_pa
 
     assert retained["source_url"] == first["source_url"] == preferred["url"].rstrip("/")
     assert next(row for row in rows if row["source"] == "ringsidenews")["status"] == "later_canonical_candidate_ignored"
+
+
+def test_full_show_branded_weekly_wins_over_matching_special_event_alias():
+    item = candidate("AEW Dynamite Grand Slam Mexico Results 8/5/2026")
+    registry = {"events": [{
+        "key": "aew_grand_slam_mexico_2026",
+        "promotion": "AEW",
+        "event_name": "Grand Slam Mexico",
+        "status": "confirmed",
+        "aliases": ["Grand Slam Mexico"],
+        "nights": [{"night_key": "grand_slam_mexico_main", "date_local": "2026-08-05", "enabled": True}],
+    }]}
+
+    assert simone_report_integrity.dynamic_special_event_match(item, registry) == (
+        None, "rejected_conflicting_weekly_identity"
+    )
+    assert simone.candidate_report_identity(item, REPORTS["aew_dynamite"], "2026-08-05") == (
+        True, "canonical_results_match"
+    )
