@@ -220,20 +220,37 @@ def test_existing_weekly_source_lock_cannot_be_replaced_by_later_fallback(tmp_pa
     assert next(row for row in rows if row["source"] == "ringsidenews")["status"] == "later_canonical_candidate_ignored"
 
 
-def test_full_show_branded_weekly_wins_over_matching_special_event_alias():
+def test_full_show_branded_weekly_remains_weekly_without_configured_special_event():
     item = candidate("AEW Dynamite Grand Slam Mexico Results 8/5/2026")
-    registry = {"events": [{
-        "key": "aew_grand_slam_mexico_2026",
-        "promotion": "AEW",
-        "event_name": "Grand Slam Mexico",
-        "status": "confirmed",
-        "aliases": ["Grand Slam Mexico"],
-        "nights": [{"night_key": "grand_slam_mexico_main", "date_local": "2026-08-05", "enabled": True}],
-    }]}
-
-    assert simone_report_integrity.dynamic_special_event_match(item, registry) == (
-        None, "rejected_conflicting_weekly_identity"
-    )
+    assert simone_report_integrity.dynamic_special_event_match(item, {"events": []})[0] is None
     assert simone.candidate_report_identity(item, REPORTS["aew_dynamite"], "2026-08-05") == (
+        True, "canonical_results_match"
+    )
+
+
+@pytest.mark.parametrize("title", [
+    "WWE NXT Great American Bash Results 6/28/2026",
+    "NXT Great American Bash Results 6/28/2026",
+])
+def test_confirmed_great_american_bash_identity_is_authoritative(title):
+    registry = json.loads(simone_report_integrity.SEED_REGISTRY.read_text())
+    item = candidate(title)
+
+    match, reason = simone_report_integrity.dynamic_special_event_match(item, registry)
+
+    assert reason == "canonical_results_match"
+    assert match is not None and match["event_key"] == "nxt_great_american_bash_2026"
+    item["special_event_match"] = match
+    assert simone.candidate_report_identity(item, REPORTS["wwe_nxt"], "2026-06-28") == (
+        False, "rejected_special_event_as_weekly"
+    )
+
+
+def test_special_event_alias_on_wrong_date_does_not_steal_branded_weekly():
+    registry = json.loads(simone_report_integrity.SEED_REGISTRY.read_text())
+    item = candidate("WWE NXT Great American Bash Results 7/1/2026")
+
+    assert simone_report_integrity.dynamic_special_event_match(item, registry)[0] is None
+    assert simone.candidate_report_identity(item, REPORTS["wwe_nxt"], "2026-07-01") == (
         True, "canonical_results_match"
     )

@@ -64,11 +64,11 @@ def weekly_result_identities(report: dict[str, Any]) -> set[str]:
     return {phrase for phrase in identities if phrase}
 
 
-def matches_full_show_branded_weekly_identity(explicit: str, report: dict[str, Any], *, minimum_modifier_tokens: int = 2) -> bool:
+def matches_full_show_branded_weekly_identity(explicit: str, report: dict[str, Any]) -> bool:
     """Match a bounded branded edition only after the complete show name."""
     blob = _slug(explicit).replace("_", " ")
     show_name = _slug(str(report.get("show_name") or "")).replace("_", " ")
-    return bool(show_name and re.search(rf"\b{re.escape(show_name)}(?:\s+[a-z0-9]+){{{minimum_modifier_tokens},3}}\s+(?:results?|risultati)\b", blob))
+    return bool(show_name and re.search(rf"\b{re.escape(show_name)}(?:\s+[a-z0-9]+){{1,3}}\s+(?:results?|risultati)\b", blob))
 
 
 def matches_weekly_result_identity(explicit: str, report: dict[str, Any], *, allow_branded_modifier: bool = True) -> bool:
@@ -270,10 +270,7 @@ def special_event_report_identity(entry: dict[str, Any], registry: dict[str, Any
         return None, "rejected_non_results_event_article"
     weekly_cfg = _load(REPORTS_CONFIG, {"reports": []})
     for weekly in weekly_cfg.get("reports", []) if isinstance(weekly_cfg, dict) else []:
-        if isinstance(weekly, dict) and (
-            matches_weekly_result_identity(raw, weekly, allow_branded_modifier=False)
-            or matches_full_show_branded_weekly_identity(raw, weekly, minimum_modifier_tokens=3)
-        ):
+        if isinstance(weekly, dict) and matches_weekly_result_identity(raw, weekly, allow_branded_modifier=False):
             return None, "rejected_conflicting_weekly_identity"
     blob = _slug(raw).replace("_", " ")
     matches: list[tuple[int, dict[str, Any]]] = []
