@@ -376,17 +376,31 @@ class CanonicalArtifactIndex:
         """Retain binding ED-2 decisions separately from frozen Shadow evidence."""
         rows = {x.get("candidate_id"): x for x in output.get("candidates", []) if isinstance(x, Mapping)}
         relations = output.get("relations", []) if isinstance(output.get("relations"), list) else []
-        for candidate in snapshot.get("candidates", []):
-            cid = candidate.get("candidate_id")
+        survivors = [x for x in snapshot.get("candidates", []) if isinstance(x, Mapping)]
+        duplicate_skips = [x for x in snapshot.get("semantic_duplicate_skips", []) if isinstance(x, Mapping)]
+        observation_candidates = {x.get("candidate_id"): x for x in survivors + duplicate_skips
+                                  if x.get("candidate_id")}
+        duplicate_ids = {x.get("candidate_id") for x in duplicate_skips}
+        for cid, candidate in observation_candidates.items():
+            duplicate_eliminated = cid in duplicate_ids
+            evidence_pair_ids = set(candidate.get("semantic_duplicate_evidence_pair_ids", []))
             package = {"artifact_schema_version": "owtv_editorial_director_active_v3",
                 "schema_version": result.get("schema_version"), "policy_version": result.get("policy_version"),
-                "decision_authority": "editorial_director", "candidate": dict(candidate),
-                "director_output": rows.get(cid),
-                "relations": [x for x in relations if x.get("left_id") == cid or x.get("right_id") == cid],
-                "run_id": snapshot.get("run_id"), "logical_request_id": result.get("logical_request_id"),
-                "input_digest": result.get("input_digest", snapshot.get("input_digest")),
+                "decision_authority": "semantic_duplicate_gate" if duplicate_eliminated else "editorial_director",
+                "candidate": dict(candidate), "director_output": None if duplicate_eliminated else rows.get(cid),
+                "relations": [x for x in relations if (x.get("pair_id") in evidence_pair_ids if duplicate_eliminated
+                              else x.get("left_id") == cid or x.get("right_id") == cid)],
+                "run_id": snapshot.get("run_id"),
                 "validation_status": result.get("status"),
                 "validation_attempts": result.get("validation_attempts", [])}
+            if duplicate_eliminated:
+                package["semantic_duplicate_scope"] = candidate.get("semantic_duplicate_scope")
+                package["semantic_duplicate_of"] = candidate.get("semantic_duplicate_of")
+                if candidate.get("semantic_duplicate_component_ids"):
+                    package["semantic_duplicate_component_ids"] = candidate["semantic_duplicate_component_ids"]
+            else:
+                package["logical_request_id"] = result.get("logical_request_id")
+                package["input_digest"] = result.get("input_digest", snapshot.get("input_digest"))
             if result.get("duplicate_gate_logical_request_id"):
                 package["duplicate_gate_logical_request_id"] = result["duplicate_gate_logical_request_id"]
                 package["duplicate_gate_input_digest"] = result.get("duplicate_gate_input_digest")

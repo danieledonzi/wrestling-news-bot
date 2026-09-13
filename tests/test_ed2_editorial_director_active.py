@@ -206,7 +206,7 @@ def test_duplicate_gate_provider_failure_has_terminal_lifecycle_and_no_classific
                    kwargs.get("model_role") == "editorial_director_active" for event, kwargs in events)
 
 
-def test_gate_eliminates_all_without_creating_classification_request(monkeypatch):
+def test_gate_eliminates_all_without_creating_classification_request(monkeypatch, tmp_path):
     from agents import canonical_event_ledger
     events, ledger = [], []
     monkeypatch.setattr(canonical_event_ledger, "active_event",
@@ -227,6 +227,21 @@ def test_gate_eliminates_all_without_creating_classification_request(monkeypatch
     assert any(event == "model_attempt_completed" for event, _ in events)
     assert not any(event == "logical_ai_request_created" and
                    kwargs.get("model_role") == "editorial_director_active" for event, kwargs in events)
+    from agents.canonical_artifact_index import CanonicalArtifactIndex
+    index = CanonicalArtifactIndex("run", index_path=tmp_path / "index.jsonl",
+        material_root=tmp_path / "materials", repository_root=tmp_path, enabled=True)
+    index.observe_editorial_director_active(s, result["output"], result)
+    rows = [__import__("json").loads(line) for line in (tmp_path / "index.jsonl").read_text().splitlines()]
+    assert len(rows) == 1
+    package = __import__("json").loads((tmp_path / rows[0]["path"]).read_text())
+    assert package["decision_authority"] == "semantic_duplicate_gate"
+    assert package["director_output"] is None
+    assert package["semantic_duplicate_scope"] == "recent_history"
+    assert package["semantic_duplicate_of"] == "published"
+    assert package["duplicate_gate_logical_request_id"] == result["duplicate_gate_logical_request_id"]
+    assert package["duplicate_gate_input_digest"] == result["duplicate_gate_input_digest"]
+    assert "logical_request_id" not in package and "input_digest" not in package
+    assert package["relations"][0]["pair_id"] == "p"
 
 
 def test_class_action_matrix_is_a_validator_invariant():
@@ -331,7 +346,7 @@ def test_recent_duplicate_material_update_and_no_match_gate_states():
         assert s["duplicate_gate_relations"][0]["decision"] == decision
 
 
-def test_recent_history_duplicate_eliminates_entire_same_run_component(monkeypatch):
+def test_recent_history_duplicate_eliminates_entire_same_run_component(monkeypatch, tmp_path):
     def run_case(edges, history_member, winner_id, history_decision="DUPLICATE"):
         candidates = [{"candidate_id": candidate_id, "url": f"https://component.test/{candidate_id}",
                        "title": candidate_id} for candidate_id in sorted({x for edge in edges for x in edge})]
@@ -352,9 +367,10 @@ def test_recent_history_duplicate_eliminates_entire_same_run_component(monkeypat
         active._apply_duplicate_gate(s, relations)
         return s
 
-    for edges, history_member, winner in [([("A", "B")], "A", "B"),
-                                           ([("A", "B")], "B", "A"),
-                                           ([("A", "B"), ("B", "C")], "A", "C")]:
+    cases = [([("A", "B")], "A", "B"),
+             ([("A", "B")], "B", "A"),
+             ([("A", "B"), ("B", "C")], "A", "C")]
+    for case_index, (edges, history_member, winner) in enumerate(cases):
         s = run_case(edges, history_member, winner)
         assert s["candidates"] == []
         eliminated = {row["candidate_id"]: row for row in s["semantic_duplicate_skips"]}
@@ -362,6 +378,27 @@ def test_recent_history_duplicate_eliminates_entire_same_run_component(monkeypat
         assert eliminated[winner]["semantic_duplicate_of"] == "published"
         assert all(row["semantic_duplicate_scope"] == "same_run"
                    for candidate_id, row in eliminated.items() if candidate_id != winner)
+        from agents.canonical_artifact_index import CanonicalArtifactIndex
+        root = tmp_path / str(case_index)
+        index = CanonicalArtifactIndex("run", index_path=root / "index.jsonl",
+            material_root=root / "materials", repository_root=tmp_path, enabled=True)
+        result = {"schema_version": active.SCHEMA_VERSION, "policy_version": active.POLICY_VERSION,
+                  "status": "VALIDATED", "validation_attempts": [],
+                  "duplicate_gate_logical_request_id": "gate", "duplicate_gate_input_digest": "gate-digest"}
+        index.observe_editorial_director_active(s, {"candidates": [],
+            "relations": s["duplicate_gate_relations"]}, result)
+        artifact_rows = [__import__("json").loads(line) for line in (root / "index.jsonl").read_text().splitlines()]
+        assert len(artifact_rows) == len(eliminated)
+        packages = [__import__("json").loads((tmp_path / row["path"]).read_text()) for row in artifact_rows]
+        assert all(package["decision_authority"] == "semantic_duplicate_gate" and
+                   package["director_output"] is None for package in packages)
+        representative = next(package for package in packages
+                              if package["candidate"]["candidate_id"] == winner)
+        assert {relation["pair_id"] for relation in representative["relations"]} == {
+            relation["pair_id"] for relation in s["duplicate_gate_relations"]}
+        history_relation = next(relation for relation in representative["relations"]
+                                if relation["scope"] == "recent_history")
+        assert history_relation["left_id"] == history_member
 
     for decision in ("NO_MATCH", "MATERIAL_UPDATE"):
         s = run_case([("A", "B")], "A", "B", decision)
@@ -846,10 +883,18 @@ def test_active_artifact_preserves_gate_and_classification_provenance(monkeypatc
     index = CanonicalArtifactIndex("run", index_path=tmp_path / "index.jsonl",
         material_root=tmp_path / "materials", repository_root=tmp_path, enabled=True)
     index.observe_editorial_director_active(s, result["output"], result)
-    row = __import__("json").loads((tmp_path / "index.jsonl").read_text().splitlines()[0])
-    package = __import__("json").loads((tmp_path / row["path"]).read_text())
-    assert package["logical_request_id"] == result["logical_request_id"]
-    assert package["input_digest"] == result["input_digest"]
-    assert package["duplicate_gate_logical_request_id"] == result["duplicate_gate_logical_request_id"]
-    assert package["duplicate_gate_input_digest"] == pre_gate_digest
-    assert package["relations"][0]["decision"] == "DUPLICATE"
+    rows = [__import__("json").loads(line) for line in (tmp_path / "index.jsonl").read_text().splitlines()]
+    assert len(rows) == 2
+    packages = [__import__("json").loads((tmp_path / row["path"]).read_text()) for row in rows]
+    survivor = next(package for package in packages if package["decision_authority"] == "editorial_director")
+    eliminated = next(package for package in packages if package["decision_authority"] == "semantic_duplicate_gate")
+    assert survivor["logical_request_id"] == result["logical_request_id"]
+    assert survivor["input_digest"] == result["input_digest"]
+    assert survivor["director_output"] is not None
+    assert eliminated["director_output"] is None
+    assert eliminated["semantic_duplicate_scope"] == "same_run"
+    assert eliminated["semantic_duplicate_of"] == survivor["candidate"]["candidate_id"]
+    assert eliminated["duplicate_gate_logical_request_id"] == result["duplicate_gate_logical_request_id"]
+    assert eliminated["duplicate_gate_input_digest"] == pre_gate_digest
+    assert "logical_request_id" not in eliminated and "input_digest" not in eliminated
+    assert eliminated["relations"][0]["decision"] == "DUPLICATE"

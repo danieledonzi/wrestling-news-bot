@@ -249,6 +249,7 @@ def _apply_duplicate_gate(snapshot: dict[str, Any], relations: list[dict[str, An
         groups.setdefault(find(candidate_id), []).append(candidate)
     eliminated: dict[str, dict[str, Any]] = {}
     representative_by_member: dict[str, str] = {}
+    component_members: dict[str, set[str]] = {}
     for group in groups.values():
         if len(group) > 1:
             hydrated = copy.deepcopy(group)
@@ -257,18 +258,35 @@ def _apply_duplicate_gate(snapshot: dict[str, Any], relations: list[dict[str, An
         else:
             winner = group[0]
         representative_id = winner["candidate_id"]
+        member_ids = {candidate["candidate_id"] for candidate in group}
+        component_members[representative_id] = member_ids
+        same_run_evidence = [relation["pair_id"] for relation in relations
+            if relation["decision"] == "DUPLICATE" and relation["scope"] == "same_run" and
+            relation["left_id"] in member_ids and relation["right_id"] in member_ids]
         for candidate in group:
             representative_by_member[candidate["candidate_id"]] = representative_id
             if candidate["candidate_id"] != representative_id:
                 eliminated[candidate["candidate_id"]] = {**copy.deepcopy(candidate),
-                    "semantic_duplicate_scope": "same_run", "semantic_duplicate_of": representative_id}
+                    "semantic_duplicate_scope": "same_run", "semantic_duplicate_of": representative_id,
+                    "semantic_duplicate_evidence_pair_ids": copy.deepcopy(same_run_evidence)}
     for relation in relations:
         if relation["decision"] == "DUPLICATE" and relation["scope"] == "recent_history":
             representative_id = representative_by_member.get(relation["left_id"])
             representative = by_id.get(representative_id)
             if representative:
+                member_ids = component_members[representative_id]
+                evidence_pair_ids = [candidate_relation["pair_id"] for candidate_relation in relations
+                    if ((candidate_relation["scope"] == "same_run" and
+                         candidate_relation["decision"] == "DUPLICATE" and
+                         candidate_relation["left_id"] in member_ids and
+                         candidate_relation["right_id"] in member_ids) or
+                        (candidate_relation["scope"] == "recent_history" and
+                         candidate_relation["decision"] == "DUPLICATE" and
+                         candidate_relation["left_id"] in member_ids))]
                 eliminated[representative_id] = {**copy.deepcopy(representative),
-                    "semantic_duplicate_scope": "recent_history", "semantic_duplicate_of": relation["right_id"]}
+                    "semantic_duplicate_scope": "recent_history", "semantic_duplicate_of": relation["right_id"],
+                    "semantic_duplicate_component_ids": sorted(member_ids),
+                    "semantic_duplicate_evidence_pair_ids": evidence_pair_ids}
     snapshot["semantic_duplicate_skips"] = list(eliminated.values())
     snapshot["duplicate_gate_relations"] = copy.deepcopy(relations)
     snapshot["candidates"] = [row for row in snapshot.get("candidates", [])
