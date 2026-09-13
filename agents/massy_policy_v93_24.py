@@ -175,6 +175,8 @@ def menzo_skip_memory() -> dict[str, dict[str, Any]]:
     for item in items:
         if not isinstance(item, dict):
             continue
+        if item.get("reason") == "requires_menzo_classification":
+            continue
         key = source_key(item.get("url") or item.get("source_url") or item.get("normalized_url") or "")
         if not key:
             continue

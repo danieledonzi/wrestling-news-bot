@@ -11,12 +11,16 @@ def snapshot(count=3, published=0):
             "Report: WWE Releasing NXT Talents",
             "Jasper Troy Sparks WWE Release Speculation With Cryptic ‘30 Days’ Message",
         ][:count])]}
-    return shadow.capture_opportunity(board, run_id="run", observation_timestamp="now",
-                                      publisher_count_24h=published, history=[])
+    value = shadow.capture_opportunity(board, run_id="run", observation_timestamp="now",
+                                       publisher_count_24h=published, history=[])
+    value["authorized_relations"] = []
+    value["authorized_relations_complete"] = True
+    return value
 
 
 def response(s, actions=("SELECT", "DEFER", "SKIP")):
-    classes = ("MUST_PUBLISH", "PUBLISHABLE_SOFT", "SKIP")
+    classes = tuple("MUST_PUBLISH" if action == "SELECT" else
+                    "PUBLISHABLE_SOFT" if action == "DEFER" else "SKIP" for action in actions)
     return {"candidates": [{"ref": f"c{i}", "editorial_class": classes[i],
              "recommended_action": actions[i], "category": "NXT", "story_core": f"core {i}"}
             for i in range(len(s["candidates"]))], "relations": [{"ref": f"r{i}", "decision": "NO_MATCH"}
@@ -64,6 +68,7 @@ def test_valid_active_result_projects_jasper_fixture_without_legacy_scoring(monk
     assert handoff["allowed_urls_for_v92"] == ["https://ed2.test/0"]
     hard_skips = menzo.load_json(tmp_path / "hard-skips.json", {})["items"]
     assert [item["url"] for item in hard_skips] == ["https://ed2.test/2"]
+    assert hard_skips[0]["reason"] == "editorial_class_skip"
     from agents import publisher
     monkeypatch.setattr(publisher, "MENZO_DECISIONS_FILE", tmp_path / "menzo.json")
     monkeypatch.setattr(publisher, "BOB_ARTICLES_FILE", tmp_path / "missing-bob.json")
@@ -84,15 +89,14 @@ def test_valid_active_result_projects_jasper_fixture_without_legacy_scoring(monk
     assert massy_result["hard_skipped"][0]["reason"] == "menzo_hard_skip_memory"
 
 
-def test_missing_action_and_capacity_violation_each_repair_once(monkeypatch):
+def test_missing_action_repairs_and_must_select_survives_daily_reference(monkeypatch):
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     s = snapshot(1); bad = response(s, ("SELECT",)); del bad["candidates"][0]["recommended_action"]
     calls = []; result = active.evaluate(s, provider=lambda *_: calls.append(1) or bad)
     assert result["status"] == "failed" and len(calls) == 2
     s = snapshot(1, published=30); calls = []
     result = active.evaluate(s, provider=lambda *_: calls.append(1) or response(s, ("SELECT",)))
-    assert result["status"] == "failed" and len(calls) == 2
-    assert result["validation_errors"][0]["family"] == "publication_capacity"
+    assert result["status"] == "VALIDATED" and len(calls) == 1
 
 
 def test_provider_failure_and_oversize_are_whole_result_failures(monkeypatch):
@@ -104,40 +108,306 @@ def test_provider_failure_and_oversize_are_whole_result_failures(monkeypatch):
     assert active.evaluate(s, provider=lambda *_: None)["status"] == "OVERSIZE_NOT_EVALUATED"
 
 
-def test_contradictory_duplicate_actions_repair_then_fail(monkeypatch):
+def test_same_run_duplicate_is_removed_before_editorial_classification(monkeypatch):
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     s = snapshot(2)
     left, right = [x["candidate_id"] for x in s["candidates"]]
     s["authorized_relations"] = [{"pair_id": "p", "scope": "same_run", "left_id": left,
         "right_id": right, "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
-    out = response(s, ("SELECT", "SELECT")); out["relations"] = [
-        {"ref": "r0", "decision": "DUPLICATE", "shared_fact": "same confirmed release"}]
-    calls = []; result = active.evaluate(s, provider=lambda *_: calls.append(1) or out)
-    assert len(calls) == 2 and result["validation_errors"][0]["family"] == "same_run_duplicate_action"
+    calls = []
+    def provider(prompt, *_):
+        calls.append(prompt)
+        if "DUPLICATE GATE PHASE ONLY" in prompt:
+            return {"relations": [{"ref": "r0", "decision": "DUPLICATE",
+                                    "shared_fact": "same confirmed release"}]}
+        return response(s, ("SELECT",))
+    result = active.evaluate(s, provider=provider)
+    assert result["status"] == "VALIDATED" and len(calls) == 2
+    assert len(result["output"]["candidates"]) == 1
+    assert len(s["semantic_duplicate_skips"]) == 1
 
 
-def test_duplicate_requires_only_one_same_run_eligible_endpoint(monkeypatch):
-    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
-    s = snapshot(2); s["downstream_capacity"] = 5
-    left, right = [x["candidate_id"] for x in s["candidates"]]
+def test_duplicate_gate_lifecycle_and_cost_precede_classification(monkeypatch):
+    from agents import canonical_event_ledger
+    events, ledger, calls = [], [], []
+    monkeypatch.setattr(canonical_event_ledger, "active_event",
+                        lambda event, *args, **kwargs: events.append((event, kwargs)))
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **kwargs: ledger.append(kwargs))
+    s = snapshot(2); left, right = [row["candidate_id"] for row in s["candidates"]]
     s["authorized_relations"] = [{"pair_id": "p", "scope": "same_run", "left_id": left,
         "right_id": right, "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
-    for actions, valid in ((('SELECT', 'SKIP'), True), (('DEFER', 'SKIP'), True),
-                           (('SKIP', 'SKIP'), True), (('SELECT', 'DEFER'), False),
-                           (('DEFER', 'DEFER'), False), (('DEFER', 'SELECT'), False)):
-        out = response(s, actions); out["relations"] = [{"ref": "r0", "decision": "DUPLICATE", "shared_fact": "same"}]
-        canonical, failures, _ = active._validate_active(out, s)
+    replies = iter([
+        {"relations": [{"ref": "r0", "decision": "NO_MATCH"}]},
+        response(s, ("SELECT", "DEFER")),
+    ])
+    result = active.evaluate(s, provider=lambda *_: calls.append(1) or next(replies))
+    assert result["status"] == "VALIDATED" and len(calls) == 2
+    assert [row["workload"] for row in ledger] == [
+        "editorial_director_duplicate_gate", "editorial_director_active"]
+    roles = [kwargs.get("model_role") for event, kwargs in events if event == "logical_ai_request_created"]
+    assert roles == ["editorial_director_duplicate_gate", "editorial_director_active"]
+    gate_completed = next(i for i, row in enumerate(events) if row[0] == "model_attempt_completed")
+    classification_created = next(i for i, row in enumerate(events)
+                                  if row[0] == "logical_ai_request_created" and
+                                  row[1].get("model_role") == "editorial_director_active")
+    assert gate_completed < classification_created
+
+
+def test_empty_relation_matrix_creates_no_duplicate_gate_attempt(monkeypatch):
+    from agents import canonical_event_ledger
+    events, ledger = [], []
+    monkeypatch.setattr(canonical_event_ledger, "active_event",
+                        lambda event, *args, **kwargs: events.append((event, kwargs)))
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **kwargs: ledger.append(kwargs))
+    s = snapshot(1)
+    result = active.evaluate(s, provider=lambda *_: response(s, ("SELECT",)))
+    assert result["status"] == "VALIDATED" and len(ledger) == 1
+    assert ledger[0]["workload"] == "editorial_director_active"
+    assert not any(kwargs.get("model_role") == "editorial_director_duplicate_gate"
+                   for _, kwargs in events)
+
+
+def test_duplicate_gate_invalid_then_repair_records_two_attempts(monkeypatch):
+    from agents import canonical_event_ledger
+    events, ledger = [], []
+    monkeypatch.setattr(canonical_event_ledger, "active_event",
+                        lambda event, *args, **kwargs: events.append((event, kwargs)))
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **kwargs: ledger.append(kwargs))
+    s = snapshot(2); left, right = [row["candidate_id"] for row in s["candidates"]]
+    s["authorized_relations"] = [{"pair_id": "p", "scope": "same_run", "left_id": left,
+        "right_id": right, "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
+    replies = iter([{"relations": []}, {"relations": [{"ref": "r0", "decision": "NO_MATCH"}]},
+                    response(s, ("SELECT", "DEFER"))])
+    result = active.evaluate(s, provider=lambda *_: next(replies))
+    gate_ledger = [row for row in ledger if row["workload"] == "editorial_director_duplicate_gate"]
+    assert result["status"] == "VALIDATED" and len(gate_ledger) == 2
+    assert [row["repair"] for row in gate_ledger] == [False, True]
+    gate_events = [(event, kwargs) for event, kwargs in events
+                   if kwargs.get("model_role") == "editorial_director_duplicate_gate"]
+    failed = [kwargs for event, kwargs in gate_events if event == "model_attempt_failed"]
+    assert failed[0]["error_class"] == "validation" and failed[0]["error_terminal"] is False
+    assert any(event == "model_attempt_completed" for event, _ in gate_events)
+
+
+def test_duplicate_gate_provider_failure_has_terminal_lifecycle_and_no_classification(monkeypatch):
+    from agents import canonical_event_ledger
+    events, ledger = [], []
+    monkeypatch.setattr(canonical_event_ledger, "active_event",
+                        lambda event, *args, **kwargs: events.append((event, kwargs)))
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **kwargs: ledger.append(kwargs))
+    s = snapshot(2); left, right = [row["candidate_id"] for row in s["candidates"]]
+    s["authorized_relations"] = [{"pair_id": "p", "scope": "same_run", "left_id": left,
+        "right_id": right, "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
+    result = active.evaluate(s, provider=lambda *_: (_ for _ in ()).throw(TimeoutError()))
+    assert result["status"] == "PROVIDER_FAILED" and ledger[0]["status"] == "failed"
+    failed = [kwargs for event, kwargs in events if event == "model_attempt_failed"]
+    assert len(failed) == 1 and failed[0]["error_terminal"] is True
+    assert not any(event == "logical_ai_request_created" and
+                   kwargs.get("model_role") == "editorial_director_active" for event, kwargs in events)
+
+
+def test_gate_eliminates_all_without_creating_classification_request(monkeypatch, tmp_path):
+    from agents import canonical_event_ledger
+    events, ledger = [], []
+    monkeypatch.setattr(canonical_event_ledger, "active_event",
+                        lambda event, *args, **kwargs: events.append((event, kwargs)))
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **kwargs: ledger.append(kwargs))
+    s = snapshot(1); candidate_id = s["candidates"][0]["candidate_id"]
+    history = {"article_id": "published", "source_url": "https://history.test/old",
+               "title": "Earlier title change", "input_coverage": "RSS_SUMMARY_ONLY"}
+    s["publisher_history_12h"] = [history]
+    s["authorized_relations"] = [{"pair_id": "p", "scope": "recent_history",
+        "left_id": candidate_id, "right_id": "published", "scorer_version": "v", "score": .7,
+        "threshold": .55, "components": {}}]
+    result = active.evaluate(s, provider=lambda *_: {"relations": [
+        {"ref": "r0", "decision": "DUPLICATE", "shared_fact": "same title change"}]})
+    assert result["status"] == "VALIDATED" and len(ledger) == 1
+    assert result["duplicate_gate_input_digest"]
+    assert "logical_request_id" not in result
+    assert any(event == "model_attempt_completed" for event, _ in events)
+    assert not any(event == "logical_ai_request_created" and
+                   kwargs.get("model_role") == "editorial_director_active" for event, kwargs in events)
+    from agents.canonical_artifact_index import CanonicalArtifactIndex
+    index = CanonicalArtifactIndex("run", index_path=tmp_path / "index.jsonl",
+        material_root=tmp_path / "materials", repository_root=tmp_path, enabled=True)
+    index.observe_editorial_director_active(s, result["output"], result)
+    rows = [__import__("json").loads(line) for line in (tmp_path / "index.jsonl").read_text().splitlines()]
+    assert len(rows) == 1
+    package = __import__("json").loads((tmp_path / rows[0]["path"]).read_text())
+    assert package["decision_authority"] == "semantic_duplicate_gate"
+    assert package["director_output"] is None
+    assert package["semantic_duplicate_scope"] == "recent_history"
+    assert package["semantic_duplicate_of"] == "published"
+    assert package["duplicate_gate_logical_request_id"] == result["duplicate_gate_logical_request_id"]
+    assert package["duplicate_gate_input_digest"] == result["duplicate_gate_input_digest"]
+    assert "logical_request_id" not in package and "input_digest" not in package
+    assert package["relations"][0]["pair_id"] == "p"
+
+
+def test_class_action_matrix_is_a_validator_invariant():
+    allowed = {"MUST_PUBLISH": {"SELECT"}, "SHOULD_PUBLISH": {"SELECT", "DEFER"},
+               "PUBLISHABLE_SOFT": {"SELECT", "DEFER"}, "SKIP": {"SKIP"}}
+    for editorial_class, valid_actions in allowed.items():
+        for action in ("SELECT", "DEFER", "SKIP"):
+            s = snapshot(1); out = response(s, (action,))
+            out["candidates"][0]["editorial_class"] = editorial_class
+            canonical, failures, _ = active._validate_active(out, active.prepare_snapshot(s))
+            assert bool(canonical) is (action in valid_actions)
+            assert bool(failures) is (action not in valid_actions)
+
+
+def test_active_contract_uses_canonicalized_enum_values(monkeypatch):
+    monkeypatch.setattr("agents.bob.dynamic_article_capacity", lambda *_: (0, "test"))
+    cases = [
+        ("must_publish", "DEFER", False, "class_action_incompatibility"),
+        ("must_publish", "SKIP", False, "class_action_incompatibility"),
+        ("must_publish", "select", True, None),
+        ("should_publish", "SKIP", False, "class_action_incompatibility"),
+        ("publishable_soft", "defer", True, None),
+        ("skip", "SELECT", False, "skip_action_invariant"),
+    ]
+    for editorial_class, action, valid, family in cases:
+        s = snapshot(1); out = response(s, ("SELECT",))
+        out["candidates"][0].update(editorial_class=editorial_class, recommended_action=action)
+        canonical, failures, _ = active._validate_active(out, active.prepare_snapshot(s))
+        assert bool(canonical) is valid
+        if family:
+            assert family in {row["family"] for row in failures}
+
+
+def test_preclassification_capacity_hint_is_conservative(monkeypatch):
+    from agents import bob
+    monkeypatch.setattr(bob, "report_was_published_or_attempted", lambda: False)
+    def make_snapshot(post_show_count, ordinary_count):
+        rows = [{"source": "feed", "title": f"Post {i}", "url": f"https://hint.test/p{i}",
+                 "summary": "distinct", "article_type": "hard_news"}
+                for i in range(post_show_count)] + [
+               {"source": "feed", "title": f"Other {i}", "url": f"https://hint.test/o{i}",
+                "summary": "distinct"} for i in range(ordinary_count)]
+        s = shadow.capture_opportunity({"news_candidates_for_menzo": rows}, run_id="run",
+            observation_timestamp="now", publisher_count_24h=0, history=[])
+        s["authorized_relations"] = []
+        active.preserve_bob_capacity_metadata(s, rows)
+        active.prepare_snapshot(s)
+        return s
+
+    raw_post_show_pool = make_snapshot(3, 3)
+    assert (raw_post_show_pool["downstream_capacity"],
+            raw_post_show_pool["downstream_capacity_reason"]) == (5, "normal")
+    provider_input = active.active_provider_input(raw_post_show_pool)
+    assert provider_input["publication_context"]["downstream_capacity_hint"] == 5
+
+    monkeypatch.setattr(bob, "report_was_published_or_attempted", lambda: True)
+    report_run = make_snapshot(3, 3)
+    assert (report_run["downstream_capacity"], report_run["downstream_capacity_reason"]) == (4, "report_run")
+
+    monkeypatch.setattr(bob, "report_was_published_or_attempted", lambda: False)
+    limited = make_snapshot(3, 3)
+    limited["remaining_slots"] = 2
+    active._refresh_capacity_hint(limited)
+    assert limited["downstream_capacity"] == 2
+
+
+def test_vaquer_title_change_must_rejects_skip_and_defer():
+    for action, valid in (("SKIP", False), ("DEFER", False), ("SELECT", True)):
+        s = snapshot(1)
+        s["candidates"][0]["title"] = ("Stephanie Vaquer defeats Liv Morgan to win the WWE Women's "
+                                        "World Championship")
+        out = response(s, (action,))
+        out["candidates"][0].update(editorial_class="MUST_PUBLISH",
+                                    story_core="Vaquer defeats Morgan to win the championship")
+        canonical, failures, _ = active._validate_active(out, active.prepare_snapshot(s))
         assert bool(canonical) is valid and bool(failures) is not valid
 
 
-def test_recent_duplicate_requires_skip_not_defer():
-    s = snapshot(1); s["downstream_capacity"] = 5; candidate_id = s["candidates"][0]["candidate_id"]
-    s["authorized_relations"] = [{"pair_id": "p", "scope": "recent_history", "left_id": candidate_id,
-        "right_id": "history", "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
-    for action, valid in (("SKIP", True), ("SELECT", False), ("DEFER", False)):
-        out = response(s, (action,)); out["relations"] = [{"ref": "r0", "decision": "DUPLICATE", "shared_fact": "same"}]
-        canonical, failures, _ = active._validate_active(out, s)
-        assert bool(canonical) is valid and bool(failures) is not valid
+def test_recent_duplicate_material_update_and_no_match_gate_states():
+    for decision, eliminated in (("DUPLICATE", True), ("MATERIAL_UPDATE", False), ("NO_MATCH", False)):
+        s = snapshot(1)
+        candidate_id = s["candidates"][0]["candidate_id"]
+        relation = {"pair_id": "p", "scope": "recent_history", "left_id": candidate_id,
+                    "right_id": "published", "decision": decision, "shared_fact": None,
+                    "new_fact": "new autonomous fact" if decision == "MATERIAL_UPDATE" else None,
+                    "temporal_basis": "officially confirmed after publication" if decision == "MATERIAL_UPDATE" else None,
+                    "scorer": {}}
+        active._apply_duplicate_gate(s, [relation])
+        assert bool(s["semantic_duplicate_skips"]) is eliminated
+        assert bool(s["candidates"]) is not eliminated
+        assert s["duplicate_gate_relations"][0]["decision"] == decision
+
+
+def test_recent_history_duplicate_eliminates_entire_same_run_component(monkeypatch, tmp_path):
+    def run_case(edges, history_member, winner_id, history_decision="DUPLICATE"):
+        candidates = [{"candidate_id": candidate_id, "url": f"https://component.test/{candidate_id}",
+                       "title": candidate_id} for candidate_id in sorted({x for edge in edges for x in edge})]
+        s = {"candidates": candidates, "authorized_relations": [], "publisher_history_12h": [],
+             "remaining_slots": 30, "publisher_count_rolling_24h": 0, "policy_reference": 30,
+             "observed": {}, "deterministic_exact_skips": []}
+        relations = [{"pair_id": f"{left}-{right}", "scope": "same_run", "left_id": left,
+                      "right_id": right, "decision": "DUPLICATE", "scorer": {}}
+                     for left, right in edges]
+        relations.append({"pair_id": "history", "scope": "recent_history", "left_id": history_member,
+                          "right_id": "published", "decision": history_decision,
+                          "new_fact": "new fact" if history_decision == "MATERIAL_UPDATE" else None,
+                          "temporal_basis": "confirmed later" if history_decision == "MATERIAL_UPDATE" else None,
+                          "scorer": {}})
+        monkeypatch.setattr(menzo, "hydrate_complete_article_bodies", lambda *_: (True, []))
+        monkeypatch.setattr(menzo, "canonical_richer_winner",
+                            lambda items: (next(row for row in items if row["candidate_id"] == winner_id), "test"))
+        active._apply_duplicate_gate(s, relations)
+        return s
+
+    cases = [([("A", "B")], "A", "B"),
+             ([("A", "B")], "B", "A"),
+             ([("A", "B"), ("B", "C")], "A", "C")]
+    for case_index, (edges, history_member, winner) in enumerate(cases):
+        s = run_case(edges, history_member, winner)
+        assert s["candidates"] == []
+        eliminated = {row["candidate_id"]: row for row in s["semantic_duplicate_skips"]}
+        assert eliminated[winner]["semantic_duplicate_scope"] == "recent_history"
+        assert eliminated[winner]["semantic_duplicate_of"] == "published"
+        assert all(row["semantic_duplicate_scope"] == "same_run"
+                   for candidate_id, row in eliminated.items() if candidate_id != winner)
+        from agents.canonical_artifact_index import CanonicalArtifactIndex
+        root = tmp_path / str(case_index)
+        index = CanonicalArtifactIndex("run", index_path=root / "index.jsonl",
+            material_root=root / "materials", repository_root=tmp_path, enabled=True)
+        result = {"schema_version": active.SCHEMA_VERSION, "policy_version": active.POLICY_VERSION,
+                  "status": "VALIDATED", "validation_attempts": [],
+                  "duplicate_gate_logical_request_id": "gate", "duplicate_gate_input_digest": "gate-digest"}
+        index.observe_editorial_director_active(s, {"candidates": [],
+            "relations": s["duplicate_gate_relations"]}, result)
+        artifact_rows = [__import__("json").loads(line) for line in (root / "index.jsonl").read_text().splitlines()]
+        assert len(artifact_rows) == len(eliminated)
+        packages = [__import__("json").loads((tmp_path / row["path"]).read_text()) for row in artifact_rows]
+        assert all(package["decision_authority"] == "semantic_duplicate_gate" and
+                   package["director_output"] is None for package in packages)
+        representative = next(package for package in packages
+                              if package["candidate"]["candidate_id"] == winner)
+        assert {relation["pair_id"] for relation in representative["relations"]} == {
+            relation["pair_id"] for relation in s["duplicate_gate_relations"]}
+        history_relation = next(relation for relation in representative["relations"]
+                                if relation["scope"] == "recent_history")
+        assert history_relation["left_id"] == history_member
+
+    for decision in ("NO_MATCH", "MATERIAL_UPDATE"):
+        s = run_case([("A", "B")], "A", "B", decision)
+        assert [row["candidate_id"] for row in s["candidates"]] == ["B"]
+
+
+def test_legacy_routing_marker_memory_is_not_binding(monkeypatch, tmp_path):
+    from agents import massy_policy_v93_24 as massy
+    memory = tmp_path / "hard-skips.json"
+    memory.write_text('{"ttl_hours":168,"items":[{"url":"https://poison.test/a",'
+                      '"reason":"requires_menzo_classification","added_at":"2099-01-01T00:00:00+00:00"}]}')
+    monkeypatch.setattr(massy, "MENZO_HARD_SKIP_FILE", memory)
+    assert massy.menzo_skip_memory() == {}
+
+
+def test_policy_keeps_central_fact_negative_controls_explicit():
+    policy = active.POLICY_PATH.read_text().lower()
+    assert "title change" in policy and "title retention" in policy
+    assert "mentioned as background is not a death story" in policy
+    assert "weak social reactions" in policy
 
 
 def test_exact_duplicates_are_removed_before_gemini_relations(monkeypatch):
@@ -191,23 +461,58 @@ def test_active_defer_uses_bounded_softpool_decay_without_overriding_select(monk
                       "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE"):
             monkeypatch.setattr(menzo, field, root / f"{field}.json")
         menzo.write_json(menzo.SOFTPOOL_FILE, {"items": [row]})
-        return active.project(s, result), menzo.load_json(menzo.SOFTPOOL_FILE, {"items": []})["items"]
+        projected = active.project(s, result)
+        return (projected, menzo.load_json(menzo.SOFTPOOL_FILE, {"items": []})["items"],
+                menzo.load_json(menzo.HARD_SKIP_FILE, {"items": []})["items"])
 
-    below, below_pool = project_action("DEFER", menzo.SOFTPOOL_OUTRANKED_DEFERRALS - 1, "below")
+    below, below_pool, below_memory = project_action(
+        "DEFER", menzo.SOFTPOOL_OUTRANKED_DEFERRALS - 1, "below")
     assert len(below["pending"]) == 1 and not below["skipped"]
     assert below_pool[0]["softpool_deferrals"] == menzo.SOFTPOOL_OUTRANKED_DEFERRALS
+    assert below_memory == []
 
-    bounded, bounded_pool = project_action("DEFER", menzo.SOFTPOOL_OUTRANKED_DEFERRALS, "bounded")
+    bounded, bounded_pool, bounded_memory = project_action(
+        "DEFER", menzo.SOFTPOOL_OUTRANKED_DEFERRALS, "bounded")
     assert not bounded["pending"] and not bounded_pool and len(bounded["skipped"]) == 1
     ended = bounded["skipped"][0]
     assert ended["editorial_director"]["recommended_action"] == "DEFER"
+    assert ended["editorial_director"]["editorial_class"] == "PUBLISHABLE_SOFT"
+    assert ended["decision_authority"] == "softpool_decay"
     assert ended["menzo_policy"]["softpool_repeatedly_outranked"] is True
+    assert bounded_memory[0]["reason"] == "softpool_repeatedly_outranked"
+    assert bounded_memory[0]["decision_authority"] == "softpool_decay"
     assert bounded["handoff"]["pending"] == 0 and bounded["handoff"]["skipped"] == 1
 
-    selected, selected_pool = project_action("SELECT", menzo.SOFTPOOL_OUTRANKED_DEFERRALS, "selected")
+    selected, selected_pool, _ = project_action("SELECT", menzo.SOFTPOOL_OUTRANKED_DEFERRALS, "selected")
     assert len(selected["selected"]) == 1 and not selected["skipped"] and not selected_pool
-    skipped, skipped_pool = project_action("SKIP", menzo.SOFTPOOL_OUTRANKED_DEFERRALS, "skipped")
+    skipped, skipped_pool, skipped_memory = project_action(
+        "SKIP", menzo.SOFTPOOL_OUTRANKED_DEFERRALS, "skipped")
     assert len(skipped["skipped"]) == 1 and not skipped["pending"] and not skipped_pool
+    assert skipped_memory[0]["reason"] == "editorial_class_skip"
+
+
+def test_active_defer_expiry_persists_binding_softpool_decay(monkeypatch, tmp_path):
+    from datetime import datetime, timedelta, timezone
+    from agents import massy_policy_v93_24 as massy
+    row = {"source": "feed", "title": "Expired candidate", "summary": "fact",
+           "url": "https://decay.test/expired", "from_softpool": True,
+           "softpool_added_at": (datetime.now(timezone.utc) - timedelta(
+               hours=menzo.SOFTNEWS_TTL_HOURS + 1)).isoformat(), "softpool_deferrals": 0}
+    s = shadow.capture_opportunity({"news_candidates_for_menzo": [row]}, run_id="run",
+        observation_timestamp="now", publisher_count_24h=0, history=[])
+    result = active.evaluate(s, provider=lambda *_: response(s, ("DEFER",)))
+    for field in ("SOFTPOOL_FILE", "HARD_SKIP_FILE", "MENZO_DECISIONS_FILE",
+                  "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE"):
+        monkeypatch.setattr(menzo, field, tmp_path / f"{field}.json")
+    projected = active.project(s, result)
+    ended = projected["skipped"][0]
+    assert ended["reason"] == "softpool_expired_not_fresh"
+    assert ended["decision_authority"] == "softpool_decay"
+    assert ended["editorial_director"]["editorial_class"] == "PUBLISHABLE_SOFT"
+    memory = menzo.load_json(menzo.HARD_SKIP_FILE, {})["items"]
+    assert memory[0]["reason"] == "softpool_expired_not_fresh"
+    monkeypatch.setattr(massy, "MENZO_HARD_SKIP_FILE", menzo.HARD_SKIP_FILE)
+    assert massy.source_key(row["url"]) in massy.menzo_skip_memory()
 
 
 def test_failed_late_active_persistence_restores_every_state_file(monkeypatch, tmp_path):
@@ -307,8 +612,29 @@ def test_effective_bob_capacity_is_an_active_validation_bound(monkeypatch):
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     monkeypatch.setattr("agents.bob.dynamic_article_capacity", lambda *_: (1, "test_capacity"))
     s = snapshot(2); out = response(s, ("SELECT", "SELECT")); calls = []
+    for row in out["candidates"]:
+        row["editorial_class"] = "SHOULD_PUBLISH"
     result = active.evaluate(s, provider=lambda *_: calls.append(1) or out)
     assert len(calls) == 2 and result["validation_errors"][0]["family"] == "downstream_capacity"
+
+
+def test_active_validation_counts_only_ordinary_against_bob_capacity(monkeypatch):
+    monkeypatch.setattr("agents.bob.dynamic_article_capacity", lambda *_: (5, "normal"))
+    for ordinary_count, valid in ((1, True), (5, True), (6, False)):
+        s = snapshot(5 + ordinary_count)
+        # snapshot() has only three fixtures, so construct the requested distinct survivor set.
+        template = s["candidates"][0]
+        s["candidates"] = [{**template, "candidate_id": f"id-{i}", "url": f"https://mixed.test/{i}"}
+                           for i in range(5 + ordinary_count)]
+        s["remaining_slots"] = 30
+        out = {"candidates": [{"ref": f"c{i}",
+            "editorial_class": "MUST_PUBLISH" if i < 5 else "SHOULD_PUBLISH",
+            "recommended_action": "SELECT", "category": "WWE", "story_core": str(i)}
+            for i in range(5 + ordinary_count)], "relations": []}
+        canonical, failures, _ = active._validate_active(out, s)
+        assert bool(canonical) is valid
+        if not valid:
+            assert failures[0]["ordinary_selected"] == 6
 
 
 def test_actual_selected_set_not_pool_controls_post_show_capacity(monkeypatch):
@@ -319,8 +645,9 @@ def test_actual_selected_set_not_pool_controls_post_show_capacity(monkeypatch):
                      "url": f"https://capacity.test/{i}", "summary": "distinct"})
     s = shadow.capture_opportunity({"news_candidates_for_menzo": rows}, run_id="run",
         observation_timestamp="now", publisher_count_24h=0, history=[])
+    s["authorized_relations"] = []
     out = {"candidates": [{"ref": f"c{i}", "editorial_class": "SHOULD_PUBLISH",
-        "recommended_action": "SKIP" if i < 3 else "SELECT", "category": "WWE", "story_core": str(i)}
+        "recommended_action": "DEFER" if i < 3 else "SELECT", "category": "WWE", "story_core": str(i)}
         for i in range(7)], "relations": [{"ref": f"r{i}", "decision": "NO_MATCH"}
         for i in range(len(s["authorized_relations"]))]}
     # Add two non-post-show selections while retaining fewer than three selected post-show items.
@@ -340,11 +667,13 @@ def test_hidden_capacity_metadata_preserves_six_hard_news_selects(monkeypatch, t
              "category_hint": "old-category"} for i in range(6)]
     s = shadow.capture_opportunity({"news_candidates_for_menzo": rows}, run_id="run",
         observation_timestamp="now", publisher_count_24h=0, history=[])
+    s["authorized_relations"] = []
     without_sidecar = __import__("copy").deepcopy(s)
     active.preserve_bob_capacity_metadata(s, rows)
     active.prepare_snapshot(s); active.prepare_snapshot(without_sidecar)
+    assert (s["downstream_capacity"], s["downstream_capacity_reason"]) == (5, "normal")
+    assert (without_sidecar["downstream_capacity"], without_sidecar["downstream_capacity_reason"]) == (5, "normal")
     assert s["input_digest"] == without_sidecar["input_digest"]
-    assert s["observed"]["serialized_input_bytes"] == without_sidecar["observed"]["serialized_input_bytes"]
     provider = active.active_provider_input(s)
     serialized = __import__("json").dumps(provider)
     assert "_active_bob_capacity_metadata" not in provider
@@ -363,6 +692,39 @@ def test_hidden_capacity_metadata_preserves_six_hard_news_selects(monkeypatch, t
     assert len(projected["selected"]) == 6 and (capacity, reason) == (6, "post_show_event_heavy")
     assert all(item["article_type"] == "hard_news" and item["source_title"].startswith("Capacity source")
                and item["category_hint"] == "WWE" for item in projected["selected"])
+
+
+def test_bob_active_capacity_keeps_all_must_plus_ordinary_capacity(monkeypatch):
+    from agents import bob
+    monkeypatch.setattr(bob, "article_package", lambda item: {"id": item["id"], "status": "ready_for_alfred"})
+    monkeypatch.setattr(bob, "dynamic_article_capacity", lambda *_: (5, "normal"))
+    must = lambda i: {"id": f"m{i}", "editorial_director": {"editorial_class": "MUST_PUBLISH"}}
+    ordinary = lambda i: {"id": f"o{i}", "editorial_director": {"editorial_class": "SHOULD_PUBLISH"}}
+
+    six = bob.run_bob({"decision_authority": "editorial_director",
+                       "selected": [must(i) for i in range(5)] + [ordinary(0)]})
+    assert [row["id"] for row in six["articles"]] == [f"m{i}" for i in range(5)] + ["o0"]
+    assert six["handoff"]["publishable_left_out_by_capacity"] == 0
+
+    eleven = bob.run_bob({"decision_authority": "editorial_director",
+                          "selected": [must(i) for i in range(5)] + [ordinary(i) for i in range(6)]})
+    assert [row["id"] for row in eleven["articles"]] == [f"m{i}" for i in range(5)] + [f"o{i}" for i in range(5)]
+    assert eleven["handoff"]["ordinary_left_out_by_capacity"] == 1
+    assert eleven["handoff"]["must_left_out_by_capacity"] == 0
+
+
+def test_bob_report_capacity_and_order_never_slice_late_must(monkeypatch):
+    from agents import bob
+    monkeypatch.setattr(bob, "article_package", lambda item: {"id": item["id"], "status": "ready_for_alfred"})
+    monkeypatch.setattr(bob, "dynamic_article_capacity", lambda *_: (4, "report_run"))
+    must = {"id": "must", "editorial_director": {"editorial_class": "MUST_PUBLISH"}}
+    ordinary = [{"id": f"o{i}", "editorial_director": {"editorial_class": "SHOULD_PUBLISH"}}
+                for i in range(6)]
+    result = bob.run_bob({"decision_authority": "editorial_director",
+                          "selected": ordinary + [must]})
+    assert [row["id"] for row in result["articles"]] == ["o0", "o1", "o2", "o3", "must"]
+    assert result["handoff"]["ordinary_left_out_by_capacity"] == 2
+    assert result["handoff"]["must_left_out_by_capacity"] == 0
 
 
 def test_skip_class_action_contradiction_is_not_rewritten(monkeypatch):
@@ -486,3 +848,42 @@ def test_active_artifact_is_authoritative_and_not_shadow_labelled(monkeypatch, t
     assert "editorial-director-active" in row["path"] and "shadow" not in row["path"]
     assert row["authority_claims"] == [{"purpose": "pipeline_observability", "level": "authoritative"}]
     assert package["decision_authority"] == "editorial_director"
+    assert package["logical_request_id"] == "lrq"
+    assert "duplicate_gate_logical_request_id" not in package
+
+
+def test_active_artifact_preserves_gate_and_classification_provenance(monkeypatch, tmp_path):
+    from agents.canonical_artifact_index import CanonicalArtifactIndex
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    s = snapshot(2); left, right = [row["candidate_id"] for row in s["candidates"]]
+    s["authorized_relations"] = [{"pair_id": "p", "scope": "same_run", "left_id": left,
+        "right_id": right, "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
+    active.prepare_snapshot(s)
+    pre_gate_digest = s["input_digest"]
+    def provider(prompt, *_):
+        if "DUPLICATE GATE PHASE ONLY" in prompt:
+            return {"relations": [{"ref": "r0", "decision": "DUPLICATE", "shared_fact": "same release"}]}
+        return response(s, ("SELECT",))
+    result = active.evaluate(s, provider=provider)
+    assert result["status"] == "VALIDATED"
+    assert result["duplicate_gate_input_digest"] == pre_gate_digest
+    assert result["input_digest"] == s["input_digest"] != pre_gate_digest
+    assert result["logical_request_id"] != result["duplicate_gate_logical_request_id"]
+    index = CanonicalArtifactIndex("run", index_path=tmp_path / "index.jsonl",
+        material_root=tmp_path / "materials", repository_root=tmp_path, enabled=True)
+    index.observe_editorial_director_active(s, result["output"], result)
+    rows = [__import__("json").loads(line) for line in (tmp_path / "index.jsonl").read_text().splitlines()]
+    assert len(rows) == 2
+    packages = [__import__("json").loads((tmp_path / row["path"]).read_text()) for row in rows]
+    survivor = next(package for package in packages if package["decision_authority"] == "editorial_director")
+    eliminated = next(package for package in packages if package["decision_authority"] == "semantic_duplicate_gate")
+    assert survivor["logical_request_id"] == result["logical_request_id"]
+    assert survivor["input_digest"] == result["input_digest"]
+    assert survivor["director_output"] is not None
+    assert eliminated["director_output"] is None
+    assert eliminated["semantic_duplicate_scope"] == "same_run"
+    assert eliminated["semantic_duplicate_of"] == survivor["candidate"]["candidate_id"]
+    assert eliminated["duplicate_gate_logical_request_id"] == result["duplicate_gate_logical_request_id"]
+    assert eliminated["duplicate_gate_input_digest"] == pre_gate_digest
+    assert "logical_request_id" not in eliminated and "input_digest" not in eliminated
+    assert eliminated["relations"][0]["decision"] == "DUPLICATE"

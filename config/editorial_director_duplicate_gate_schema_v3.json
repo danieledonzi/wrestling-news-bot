@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["relations"],
+  "properties": {
+    "relations": {"type": "array", "items": {"type": "object", "additionalProperties": false,
+      "required": ["ref", "decision"], "properties": {
+        "ref": {"type": "string", "pattern": "^r[0-9]+$"},
+        "decision": {"enum": ["DUPLICATE", "MATERIAL_UPDATE", "NO_MATCH"]},
+        "shared_fact": {"type": ["string", "null"]},
+        "new_fact": {"type": ["string", "null"]},
+        "temporal_basis": {"type": ["string", "null"]}
+      }}
+    }
+  }
+}

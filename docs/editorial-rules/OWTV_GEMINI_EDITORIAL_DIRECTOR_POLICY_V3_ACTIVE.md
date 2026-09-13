@@ -13,6 +13,9 @@ material consequence; arrest or major legal development; signing, release, or de
 important return or debut; major business, corporate, or media-rights development; significant cancellation; or
 significant PLE/PPV/card development.
 
+An important title change may be MUST; a champion's title retention is not a title change and must not become MUST
+merely because championship words occur in the context.
+
 `SHOULD_PUBLISH` is clearly relevant news which normally deserves coverage but is not essential in every opportunity
 set: meaningful updates, relevant business developments, credible backstage information with consequence, useful card
 updates, exceptional audience/business data, and interviews containing concrete new facts.
@@ -31,12 +34,17 @@ news. Incidental people, promotions, platforms, commentators, shows, and setting
 
 ## Value, authoritative action, pacing, and softpool
 
-`editorial_class != recommended_action`. An outranked item retains its value: `SHOULD_PUBLISH + DEFER` and
-`PUBLISHABLE_SOFT + DEFER` are valid. `PUBLISHABLE_SOFT` does not imply `SELECT`. Do not redefine an outranked story as
-low value.
+Duplicate eligibility is decided first, in a separate gate. A semantic duplicate is removed before editorial
+classification and therefore never receives an editorial class or publication action. `NO_MATCH` and grounded
+`MATERIAL_UPDATE` candidates survive and are classified on their own central fact.
 
-Use publication context authoritatively as a hard upper bound. `30 = ceiling/reference, not fill target`; never exceed
-the supplied `remaining_slots` or downstream per-run capacity. On quieter days relevant and strong soft items may merit `SELECT`; on busy boards apply stronger
+For survivors the class/action contract is exact: `MUST_PUBLISH -> SELECT`; `SHOULD_PUBLISH -> SELECT | DEFER`;
+`PUBLISHABLE_SOFT -> SELECT | DEFER`; and `SKIP -> SKIP`. `DEFER`, not `SKIP`, is the scheduling state for a legitimate
+candidate that loses current-board competition. MUST means the publication decision is already made and cannot be
+deferred for pacing or ordinary capacity.
+
+Use publication context for dynamic pacing. `30 = reference, not a hard cap or fill target`. The supplied
+`remaining_slots` restricts ordinary SHOULD/SOFT selections, but never blocks a surviving MUST. On quieter days relevant and strong soft items may merit `SELECT`; on busy boards apply stronger
 competition; near 30 increasingly prioritize MUST and strong SHOULD. Never manufacture publications to fill capacity,
 and do not invent numerical pacing bands, category quotas, person caps, or rigid publication targets.
 
@@ -66,7 +74,8 @@ not automatically news because a major wrestler or brand appears.
 
 ## Duplicate and material-update relations
 
-Only supplied authorized relation refs may receive semantic decisions. Evaluate every relation independently, using
+Only supplied authorized relation refs may receive semantic decisions in the duplicate-gate phase. Do not emit an
+editorial class or action in that phase. Evaluate every relation independently, using
 the exact `left_title` and `right_title` endpoints supplied on that relation row. Never copy or reuse a `shared_fact`
 from another relation ref. Decide `DUPLICATE`, `MATERIAL_UPDATE`, or `NO_MATCH` from the central factual development.
 
@@ -89,4 +98,11 @@ telemetry, and normalized ranks. Terminal Active failure remains fail-open: lega
 
 ## ED-2 Active authority contract
 
-When `OWTV_EDITORIAL_DIRECTOR_ACTIVE_ENABLED=true`, this decision is authoritative for the normal-news Menzo stage. `recommended_action` is mandatory for every candidate. SELECT, DEFER and SKIP project mechanically to the existing selected, pending and skipped sets; local code does not re-rank or reinterpret them. SELECT count must not exceed `remaining_slots`. Contradictory DUPLICATE/action combinations are invalid and receive at most one same-model repair before whole-run legacy fallback. Active wins over Shadow and no second Shadow request is made. Disable the Active flag for migration-free rollback.
+When `OWTV_EDITORIAL_DIRECTOR_ACTIVE_ENABLED=true`, this decision is authoritative for the normal-news Menzo stage.
+The same Gemini model is called first for semantic relations only when the authorized relation matrix is non-empty;
+after validated duplicate removal it is called for survivor classification. Each phase has at most one same-model
+repair before whole-run legacy fallback. `recommended_action` is mandatory for every survivor and the class/action
+matrix above is a deterministic validation invariant. Ordinary SELECT count must not exceed `remaining_slots` or Bob's
+ordinary per-run capacity. MUST selections do not consume that ordinary capacity and Bob retains every MUST plus at
+most the dynamically allowed number of ordinary selections.
+Active wins over Shadow and no Shadow request is made. Disable the Active flag for migration-free rollback.
