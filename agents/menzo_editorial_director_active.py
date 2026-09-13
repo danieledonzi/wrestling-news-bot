@@ -49,10 +49,18 @@ def _capacity_candidate(snapshot: Mapping[str, Any], candidate: Mapping[str, Any
     return {**copy.deepcopy(dict(candidate)), **copy.deepcopy(dict(metadata))}
 
 
+def _refresh_capacity_hint(snapshot: dict[str, Any]) -> None:
+    """Recompute Bob's ordinary hint from the current opportunity set and local sidecar."""
+    from agents.bob import dynamic_article_capacity
+    candidates = [_capacity_candidate(snapshot, row) for row in snapshot.get("candidates", [])]
+    capacity, reason = dynamic_article_capacity({"selected": candidates}, candidates)
+    snapshot["downstream_capacity"] = max(0, capacity)
+    snapshot["downstream_capacity_reason"] = reason
+
+
 def prepare_snapshot(snapshot: dict[str, Any]) -> dict[str, Any]:
     """Apply only frozen exact-duplicate authority and expose Bob's live capacity."""
     from agents.menzo_policy_v93_15 import canonical_richer_winner, hydrate_complete_article_bodies
-    from agents.bob import dynamic_article_capacity
 
     relations_were_complete = bool(snapshot.get("authorized_relations_complete", True))
     candidates = list(snapshot.get("candidates", []))
@@ -110,9 +118,7 @@ def prepare_snapshot(snapshot: dict[str, Any]) -> dict[str, Any]:
     snapshot["deterministic_exact_skips"] = deterministic_skips
     # This pre-provider value remains only the existing compact-pool hint. The
     # authoritative capacity is recomputed from sidecar-restored SELECT rows.
-    capacity, reason = dynamic_article_capacity({"selected": winners}, winners)
-    snapshot["downstream_capacity"] = max(0, capacity)
-    snapshot["downstream_capacity_reason"] = reason
+    _refresh_capacity_hint(snapshot)
     _finalize_active_input(snapshot)
     return snapshot
 
@@ -146,31 +152,31 @@ def _validate_active(value: Any, snapshot: Mapping[str, Any]):
     output, failures, telemetry = shadow.canonicalize_output(value, snapshot)
     if failures or output is None:
         return None, failures, telemetry
-    raw_by_ref = {row.get("ref"): row for row in value.get("candidates", []) if isinstance(row, Mapping)}
     refs, relations = shadow.short_ref_maps(snapshot)
+    canonical_by_id = {row["candidate_id"]: row for row in output["candidates"]}
     actions: dict[str, str | None] = {}
     classes: dict[str, str | None] = {}
     for ref, candidate in refs.items():
-        raw = raw_by_ref.get(ref, {})
-        action = raw.get("recommended_action")
+        canonical = canonical_by_id.get(candidate["candidate_id"], {})
+        action = canonical.get("recommended_action")
         if action not in shadow.ACTIONS:
             failures.append({"family": "recommended_action", "ref": ref, "detail": "mandatory_active_field"})
         actions[candidate["candidate_id"]] = action
-        classes[candidate["candidate_id"]] = raw.get("editorial_class")
+        classes[candidate["candidate_id"]] = canonical.get("editorial_class")
         allowed = {"MUST_PUBLISH": {"SELECT"}, "SHOULD_PUBLISH": {"SELECT", "DEFER"},
                    "PUBLISHABLE_SOFT": {"SELECT", "DEFER"}, "SKIP": {"SKIP"}}
-        if raw.get("editorial_class") in allowed and action not in allowed[raw["editorial_class"]]:
+        if canonical.get("editorial_class") in allowed and action not in allowed[canonical["editorial_class"]]:
             failures.append({"family": "class_action_incompatibility", "ref": ref,
-                             "editorial_class": raw.get("editorial_class"), "recommended_action": action})
+                             "editorial_class": canonical.get("editorial_class"), "recommended_action": action})
     selected = sum(action == "SELECT" for action in actions.values())
     must_selected = sum(actions[cid] == "SELECT" and classes[cid] == "MUST_PUBLISH" for cid in actions)
     ordinary_selected = selected - must_selected
     if ordinary_selected > int(snapshot.get("remaining_slots", 0)):
         failures.append({"family": "publication_capacity", "selected_ordinary": ordinary_selected,
                          "remaining_slots": int(snapshot.get("remaining_slots", 0))})
-    ordinary_candidates = [_capacity_candidate(snapshot, refs[ref]) for ref, raw in raw_by_ref.items()
-                           if raw.get("recommended_action") == "SELECT" and ref in refs and
-                           raw.get("editorial_class") != "MUST_PUBLISH"]
+    ordinary_candidates = [_capacity_candidate(snapshot, candidate) for candidate in refs.values()
+                           if actions.get(candidate["candidate_id"]) == "SELECT" and
+                           classes.get(candidate["candidate_id"]) != "MUST_PUBLISH"]
     from agents.bob import dynamic_article_capacity
     ordinary_capacity, capacity_reason = dynamic_article_capacity(
         {"selected": ordinary_candidates}, ordinary_candidates)
@@ -268,6 +274,7 @@ def _apply_duplicate_gate(snapshot: dict[str, Any], relations: list[dict[str, An
     snapshot["candidates"] = [row for row in snapshot.get("candidates", [])
                               if row["candidate_id"] not in eliminated]
     snapshot["authorized_relations"] = []
+    _refresh_capacity_hint(snapshot)
     _finalize_active_input(snapshot)
 
 
@@ -302,6 +309,7 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
     gate_logical_request_id = None
     if has_relations:
         gate_logical_request_id = gate_request.logical_request_id
+        gate_input_digest = snapshot["input_digest"]
         gate_schema = json.loads(RELATION_SCHEMA_PATH.read_text())
         relations = None
         for index in range(2):
@@ -328,7 +336,8 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                     latency_ms=int((time.monotonic() - started) * 1000))
                 return {**base, "attempts": gate_attempts, "status": "PROVIDER_FAILED",
                         "fallback_reason": type(exc).__name__,
-                        "duplicate_gate_logical_request_id": gate_logical_request_id}
+                        "duplicate_gate_logical_request_id": gate_logical_request_id,
+                        "duplicate_gate_input_digest": gate_input_digest}
             record_gemini_attempt(response=gate_response, model_requested=MODEL,
                 operation_id=gate_request.logical_request_id, attempt_index=index, repair=repair,
                 fallback=False, agent="Menzo", workload="editorial_director_duplicate_gate",
@@ -352,11 +361,13 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
         if failures or relations is None:
             return {**base, "attempts": gate_attempts, "validation_errors": failures,
                     "fallback_reason": failures[0]["family"] if failures else "duplicate_gate_validation_failed",
-                    "duplicate_gate_logical_request_id": gate_logical_request_id}
+                    "duplicate_gate_logical_request_id": gate_logical_request_id,
+                    "duplicate_gate_input_digest": gate_input_digest}
         _apply_duplicate_gate(snapshot, relations)
         if not snapshot.get("candidates"):
             return {**base, "status": "VALIDATED", "attempts": gate_attempts,
                     "duplicate_gate_logical_request_id": gate_logical_request_id,
+                    "duplicate_gate_input_digest": gate_input_digest,
                     "output": {"schema_version": SCHEMA_VERSION, "policy_version": POLICY_VERSION,
                                "candidates": [], "relations": relations}, "validation_errors": []}
         request = OperationalAIRequest("Menzo", "editorial_director_active",
@@ -400,6 +411,7 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                       "input_digest": snapshot["input_digest"], "output": output, "validation_errors": []}
             if gate_logical_request_id:
                 result["duplicate_gate_logical_request_id"] = gate_logical_request_id
+                result["duplicate_gate_input_digest"] = gate_input_digest
             return result
     return {**base, "attempts": gate_attempts + 2, "logical_request_id": request.logical_request_id,
             "validation_errors": failures, "fallback_reason": failures[0]["family"] if failures else "validation_failed"}

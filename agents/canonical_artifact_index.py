@@ -384,8 +384,12 @@ class CanonicalArtifactIndex:
                 "director_output": rows.get(cid),
                 "relations": [x for x in relations if x.get("left_id") == cid or x.get("right_id") == cid],
                 "run_id": snapshot.get("run_id"), "logical_request_id": result.get("logical_request_id"),
-                "input_digest": snapshot.get("input_digest"), "validation_status": result.get("status"),
+                "input_digest": result.get("input_digest", snapshot.get("input_digest")),
+                "validation_status": result.get("status"),
                 "validation_attempts": result.get("validation_attempts", [])}
+            if result.get("duplicate_gate_logical_request_id"):
+                package["duplicate_gate_logical_request_id"] = result["duplicate_gate_logical_request_id"]
+                package["duplicate_gate_input_digest"] = result.get("duplicate_gate_input_digest")
             data = json.dumps(package, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
             identity = {"url": candidate.get("url"), "source_url": candidate.get("url"),
                         "title": candidate.get("title")}

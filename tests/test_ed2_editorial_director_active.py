@@ -222,6 +222,8 @@ def test_gate_eliminates_all_without_creating_classification_request(monkeypatch
     result = active.evaluate(s, provider=lambda *_: {"relations": [
         {"ref": "r0", "decision": "DUPLICATE", "shared_fact": "same title change"}]})
     assert result["status"] == "VALIDATED" and len(ledger) == 1
+    assert result["duplicate_gate_input_digest"]
+    assert "logical_request_id" not in result
     assert any(event == "model_attempt_completed" for event, _ in events)
     assert not any(event == "logical_ai_request_created" and
                    kwargs.get("model_role") == "editorial_director_active" for event, kwargs in events)
@@ -237,6 +239,69 @@ def test_class_action_matrix_is_a_validator_invariant():
             canonical, failures, _ = active._validate_active(out, active.prepare_snapshot(s))
             assert bool(canonical) is (action in valid_actions)
             assert bool(failures) is (action not in valid_actions)
+
+
+def test_active_contract_uses_canonicalized_enum_values(monkeypatch):
+    monkeypatch.setattr("agents.bob.dynamic_article_capacity", lambda *_: (0, "test"))
+    cases = [
+        ("must_publish", "DEFER", False, "class_action_incompatibility"),
+        ("must_publish", "SKIP", False, "class_action_incompatibility"),
+        ("must_publish", "select", True, None),
+        ("should_publish", "SKIP", False, "class_action_incompatibility"),
+        ("publishable_soft", "defer", True, None),
+        ("skip", "SELECT", False, "skip_action_invariant"),
+    ]
+    for editorial_class, action, valid, family in cases:
+        s = snapshot(1); out = response(s, ("SELECT",))
+        out["candidates"][0].update(editorial_class=editorial_class, recommended_action=action)
+        canonical, failures, _ = active._validate_active(out, active.prepare_snapshot(s))
+        assert bool(canonical) is valid
+        if family:
+            assert family in {row["family"] for row in failures}
+
+
+def test_capacity_hint_refreshes_from_post_gate_survivors(monkeypatch):
+    from agents import bob
+    monkeypatch.setattr(bob, "report_was_published_or_attempted", lambda: False)
+    def make_snapshot(post_show_count, ordinary_count):
+        rows = [{"source": "feed", "title": f"Post {i}", "url": f"https://hint.test/p{i}",
+                 "summary": "distinct", "article_type": "hard_news"}
+                for i in range(post_show_count)] + [
+               {"source": "feed", "title": f"Other {i}", "url": f"https://hint.test/o{i}",
+                "summary": "distinct"} for i in range(ordinary_count)]
+        s = shadow.capture_opportunity({"news_candidates_for_menzo": rows}, run_id="run",
+            observation_timestamp="now", publisher_count_24h=0, history=[])
+        s["authorized_relations"] = []
+        active.preserve_bob_capacity_metadata(s, rows)
+        active.prepare_snapshot(s)
+        return s
+
+    reduced = make_snapshot(3, 3)
+    ids = [row["candidate_id"] for row in reduced["candidates"][:3]]
+    assert reduced["downstream_capacity"] == 6
+    active._apply_duplicate_gate(reduced, [
+        {"pair_id": "a", "scope": "same_run", "left_id": ids[0], "right_id": ids[1],
+         "decision": "DUPLICATE", "scorer": {}},
+        {"pair_id": "b", "scope": "same_run", "left_id": ids[1], "right_id": ids[2],
+         "decision": "DUPLICATE", "scorer": {}},
+    ])
+    assert (reduced["downstream_capacity"], reduced["downstream_capacity_reason"]) == (5, "normal")
+    provider_input = active.active_provider_input(reduced)
+    assert provider_input["publication_context"]["downstream_capacity_hint"] == 5
+    encoded = __import__("json").dumps(provider_input, ensure_ascii=False, sort_keys=True,
+        separators=(",", ":")).encode()
+    assert reduced["input_digest"] == __import__("hashlib").sha256(encoded).hexdigest()
+
+    expanded = make_snapshot(4, 2)
+    ids = [row["candidate_id"] for row in expanded["candidates"][:2]]
+    active._apply_duplicate_gate(expanded, [{"pair_id": "a", "scope": "same_run",
+        "left_id": ids[0], "right_id": ids[1], "decision": "DUPLICATE", "scorer": {}}])
+    assert (expanded["downstream_capacity"], expanded["downstream_capacity_reason"]) == (
+        6, "post_show_event_heavy")
+
+    monkeypatch.setattr(bob, "report_was_published_or_attempted", lambda: True)
+    active._refresh_capacity_hint(expanded)
+    assert (expanded["downstream_capacity"], expanded["downstream_capacity_reason"]) == (4, "report_run")
 
 
 def test_vaquer_title_change_must_rejects_skip_and_defer():
@@ -580,8 +645,9 @@ def test_hidden_capacity_metadata_preserves_six_hard_news_selects(monkeypatch, t
     without_sidecar = __import__("copy").deepcopy(s)
     active.preserve_bob_capacity_metadata(s, rows)
     active.prepare_snapshot(s); active.prepare_snapshot(without_sidecar)
-    assert s["input_digest"] == without_sidecar["input_digest"]
-    assert s["observed"]["serialized_input_bytes"] == without_sidecar["observed"]["serialized_input_bytes"]
+    assert (s["downstream_capacity"], s["downstream_capacity_reason"]) == (6, "post_show_event_heavy")
+    assert (without_sidecar["downstream_capacity"], without_sidecar["downstream_capacity_reason"]) == (5, "normal")
+    assert s["input_digest"] != without_sidecar["input_digest"]
     provider = active.active_provider_input(s)
     serialized = __import__("json").dumps(provider)
     assert "_active_bob_capacity_metadata" not in provider
@@ -756,3 +822,34 @@ def test_active_artifact_is_authoritative_and_not_shadow_labelled(monkeypatch, t
     assert "editorial-director-active" in row["path"] and "shadow" not in row["path"]
     assert row["authority_claims"] == [{"purpose": "pipeline_observability", "level": "authoritative"}]
     assert package["decision_authority"] == "editorial_director"
+    assert package["logical_request_id"] == "lrq"
+    assert "duplicate_gate_logical_request_id" not in package
+
+
+def test_active_artifact_preserves_gate_and_classification_provenance(monkeypatch, tmp_path):
+    from agents.canonical_artifact_index import CanonicalArtifactIndex
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    s = snapshot(2); left, right = [row["candidate_id"] for row in s["candidates"]]
+    s["authorized_relations"] = [{"pair_id": "p", "scope": "same_run", "left_id": left,
+        "right_id": right, "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
+    active.prepare_snapshot(s)
+    pre_gate_digest = s["input_digest"]
+    def provider(prompt, *_):
+        if "DUPLICATE GATE PHASE ONLY" in prompt:
+            return {"relations": [{"ref": "r0", "decision": "DUPLICATE", "shared_fact": "same release"}]}
+        return response(s, ("SELECT",))
+    result = active.evaluate(s, provider=provider)
+    assert result["status"] == "VALIDATED"
+    assert result["duplicate_gate_input_digest"] == pre_gate_digest
+    assert result["input_digest"] == s["input_digest"] != pre_gate_digest
+    assert result["logical_request_id"] != result["duplicate_gate_logical_request_id"]
+    index = CanonicalArtifactIndex("run", index_path=tmp_path / "index.jsonl",
+        material_root=tmp_path / "materials", repository_root=tmp_path, enabled=True)
+    index.observe_editorial_director_active(s, result["output"], result)
+    row = __import__("json").loads((tmp_path / "index.jsonl").read_text().splitlines()[0])
+    package = __import__("json").loads((tmp_path / row["path"]).read_text())
+    assert package["logical_request_id"] == result["logical_request_id"]
+    assert package["input_digest"] == result["input_digest"]
+    assert package["duplicate_gate_logical_request_id"] == result["duplicate_gate_logical_request_id"]
+    assert package["duplicate_gate_input_digest"] == pre_gate_digest
+    assert package["relations"][0]["decision"] == "DUPLICATE"
