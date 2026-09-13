@@ -127,6 +127,106 @@ def test_same_run_duplicate_is_removed_before_editorial_classification(monkeypat
     assert len(s["semantic_duplicate_skips"]) == 1
 
 
+def test_duplicate_gate_lifecycle_and_cost_precede_classification(monkeypatch):
+    from agents import canonical_event_ledger
+    events, ledger, calls = [], [], []
+    monkeypatch.setattr(canonical_event_ledger, "active_event",
+                        lambda event, *args, **kwargs: events.append((event, kwargs)))
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **kwargs: ledger.append(kwargs))
+    s = snapshot(2); left, right = [row["candidate_id"] for row in s["candidates"]]
+    s["authorized_relations"] = [{"pair_id": "p", "scope": "same_run", "left_id": left,
+        "right_id": right, "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
+    replies = iter([
+        {"relations": [{"ref": "r0", "decision": "NO_MATCH"}]},
+        response(s, ("SELECT", "DEFER")),
+    ])
+    result = active.evaluate(s, provider=lambda *_: calls.append(1) or next(replies))
+    assert result["status"] == "VALIDATED" and len(calls) == 2
+    assert [row["workload"] for row in ledger] == [
+        "editorial_director_duplicate_gate", "editorial_director_active"]
+    roles = [kwargs.get("model_role") for event, kwargs in events if event == "logical_ai_request_created"]
+    assert roles == ["editorial_director_duplicate_gate", "editorial_director_active"]
+    gate_completed = next(i for i, row in enumerate(events) if row[0] == "model_attempt_completed")
+    classification_created = next(i for i, row in enumerate(events)
+                                  if row[0] == "logical_ai_request_created" and
+                                  row[1].get("model_role") == "editorial_director_active")
+    assert gate_completed < classification_created
+
+
+def test_empty_relation_matrix_creates_no_duplicate_gate_attempt(monkeypatch):
+    from agents import canonical_event_ledger
+    events, ledger = [], []
+    monkeypatch.setattr(canonical_event_ledger, "active_event",
+                        lambda event, *args, **kwargs: events.append((event, kwargs)))
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **kwargs: ledger.append(kwargs))
+    s = snapshot(1)
+    result = active.evaluate(s, provider=lambda *_: response(s, ("SELECT",)))
+    assert result["status"] == "VALIDATED" and len(ledger) == 1
+    assert ledger[0]["workload"] == "editorial_director_active"
+    assert not any(kwargs.get("model_role") == "editorial_director_duplicate_gate"
+                   for _, kwargs in events)
+
+
+def test_duplicate_gate_invalid_then_repair_records_two_attempts(monkeypatch):
+    from agents import canonical_event_ledger
+    events, ledger = [], []
+    monkeypatch.setattr(canonical_event_ledger, "active_event",
+                        lambda event, *args, **kwargs: events.append((event, kwargs)))
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **kwargs: ledger.append(kwargs))
+    s = snapshot(2); left, right = [row["candidate_id"] for row in s["candidates"]]
+    s["authorized_relations"] = [{"pair_id": "p", "scope": "same_run", "left_id": left,
+        "right_id": right, "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
+    replies = iter([{"relations": []}, {"relations": [{"ref": "r0", "decision": "NO_MATCH"}]},
+                    response(s, ("SELECT", "DEFER"))])
+    result = active.evaluate(s, provider=lambda *_: next(replies))
+    gate_ledger = [row for row in ledger if row["workload"] == "editorial_director_duplicate_gate"]
+    assert result["status"] == "VALIDATED" and len(gate_ledger) == 2
+    assert [row["repair"] for row in gate_ledger] == [False, True]
+    gate_events = [(event, kwargs) for event, kwargs in events
+                   if kwargs.get("model_role") == "editorial_director_duplicate_gate"]
+    failed = [kwargs for event, kwargs in gate_events if event == "model_attempt_failed"]
+    assert failed[0]["error_class"] == "validation" and failed[0]["error_terminal"] is False
+    assert any(event == "model_attempt_completed" for event, _ in gate_events)
+
+
+def test_duplicate_gate_provider_failure_has_terminal_lifecycle_and_no_classification(monkeypatch):
+    from agents import canonical_event_ledger
+    events, ledger = [], []
+    monkeypatch.setattr(canonical_event_ledger, "active_event",
+                        lambda event, *args, **kwargs: events.append((event, kwargs)))
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **kwargs: ledger.append(kwargs))
+    s = snapshot(2); left, right = [row["candidate_id"] for row in s["candidates"]]
+    s["authorized_relations"] = [{"pair_id": "p", "scope": "same_run", "left_id": left,
+        "right_id": right, "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
+    result = active.evaluate(s, provider=lambda *_: (_ for _ in ()).throw(TimeoutError()))
+    assert result["status"] == "PROVIDER_FAILED" and ledger[0]["status"] == "failed"
+    failed = [kwargs for event, kwargs in events if event == "model_attempt_failed"]
+    assert len(failed) == 1 and failed[0]["error_terminal"] is True
+    assert not any(event == "logical_ai_request_created" and
+                   kwargs.get("model_role") == "editorial_director_active" for event, kwargs in events)
+
+
+def test_gate_eliminates_all_without_creating_classification_request(monkeypatch):
+    from agents import canonical_event_ledger
+    events, ledger = [], []
+    monkeypatch.setattr(canonical_event_ledger, "active_event",
+                        lambda event, *args, **kwargs: events.append((event, kwargs)))
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **kwargs: ledger.append(kwargs))
+    s = snapshot(1); candidate_id = s["candidates"][0]["candidate_id"]
+    history = {"article_id": "published", "source_url": "https://history.test/old",
+               "title": "Earlier title change", "input_coverage": "RSS_SUMMARY_ONLY"}
+    s["publisher_history_12h"] = [history]
+    s["authorized_relations"] = [{"pair_id": "p", "scope": "recent_history",
+        "left_id": candidate_id, "right_id": "published", "scorer_version": "v", "score": .7,
+        "threshold": .55, "components": {}}]
+    result = active.evaluate(s, provider=lambda *_: {"relations": [
+        {"ref": "r0", "decision": "DUPLICATE", "shared_fact": "same title change"}]})
+    assert result["status"] == "VALIDATED" and len(ledger) == 1
+    assert any(event == "model_attempt_completed" for event, _ in events)
+    assert not any(event == "logical_ai_request_created" and
+                   kwargs.get("model_role") == "editorial_director_active" for event, kwargs in events)
+
+
 def test_class_action_matrix_is_a_validator_invariant():
     allowed = {"MUST_PUBLISH": {"SELECT"}, "SHOULD_PUBLISH": {"SELECT", "DEFER"},
                "PUBLISHABLE_SOFT": {"SELECT", "DEFER"}, "SKIP": {"SKIP"}}
@@ -355,6 +455,25 @@ def test_effective_bob_capacity_is_an_active_validation_bound(monkeypatch):
     assert len(calls) == 2 and result["validation_errors"][0]["family"] == "downstream_capacity"
 
 
+def test_active_validation_counts_only_ordinary_against_bob_capacity(monkeypatch):
+    monkeypatch.setattr("agents.bob.dynamic_article_capacity", lambda *_: (5, "normal"))
+    for ordinary_count, valid in ((1, True), (5, True), (6, False)):
+        s = snapshot(5 + ordinary_count)
+        # snapshot() has only three fixtures, so construct the requested distinct survivor set.
+        template = s["candidates"][0]
+        s["candidates"] = [{**template, "candidate_id": f"id-{i}", "url": f"https://mixed.test/{i}"}
+                           for i in range(5 + ordinary_count)]
+        s["remaining_slots"] = 30
+        out = {"candidates": [{"ref": f"c{i}",
+            "editorial_class": "MUST_PUBLISH" if i < 5 else "SHOULD_PUBLISH",
+            "recommended_action": "SELECT", "category": "WWE", "story_core": str(i)}
+            for i in range(5 + ordinary_count)], "relations": []}
+        canonical, failures, _ = active._validate_active(out, s)
+        assert bool(canonical) is valid
+        if not valid:
+            assert failures[0]["ordinary_selected"] == 6
+
+
 def test_actual_selected_set_not_pool_controls_post_show_capacity(monkeypatch):
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     rows = []
@@ -411,11 +530,37 @@ def test_hidden_capacity_metadata_preserves_six_hard_news_selects(monkeypatch, t
                and item["category_hint"] == "WWE" for item in projected["selected"])
 
 
-def test_bob_effective_capacity_expands_for_multiple_active_must(monkeypatch):
+def test_bob_active_capacity_keeps_all_must_plus_ordinary_capacity(monkeypatch):
     from agents import bob
-    monkeypatch.setattr(bob, "report_was_published_or_attempted", lambda: True)
-    selected = [{"editorial_director": {"editorial_class": "MUST_PUBLISH"}} for _ in range(6)]
-    assert bob.dynamic_article_capacity({"selected": selected}, selected) == (6, "report_run_must_expanded")
+    monkeypatch.setattr(bob, "article_package", lambda item: {"id": item["id"], "status": "ready_for_alfred"})
+    monkeypatch.setattr(bob, "dynamic_article_capacity", lambda *_: (5, "normal"))
+    must = lambda i: {"id": f"m{i}", "editorial_director": {"editorial_class": "MUST_PUBLISH"}}
+    ordinary = lambda i: {"id": f"o{i}", "editorial_director": {"editorial_class": "SHOULD_PUBLISH"}}
+
+    six = bob.run_bob({"decision_authority": "editorial_director",
+                       "selected": [must(i) for i in range(5)] + [ordinary(0)]})
+    assert [row["id"] for row in six["articles"]] == [f"m{i}" for i in range(5)] + ["o0"]
+    assert six["handoff"]["publishable_left_out_by_capacity"] == 0
+
+    eleven = bob.run_bob({"decision_authority": "editorial_director",
+                          "selected": [must(i) for i in range(5)] + [ordinary(i) for i in range(6)]})
+    assert [row["id"] for row in eleven["articles"]] == [f"m{i}" for i in range(5)] + [f"o{i}" for i in range(5)]
+    assert eleven["handoff"]["ordinary_left_out_by_capacity"] == 1
+    assert eleven["handoff"]["must_left_out_by_capacity"] == 0
+
+
+def test_bob_report_capacity_and_order_never_slice_late_must(monkeypatch):
+    from agents import bob
+    monkeypatch.setattr(bob, "article_package", lambda item: {"id": item["id"], "status": "ready_for_alfred"})
+    monkeypatch.setattr(bob, "dynamic_article_capacity", lambda *_: (4, "report_run"))
+    must = {"id": "must", "editorial_director": {"editorial_class": "MUST_PUBLISH"}}
+    ordinary = [{"id": f"o{i}", "editorial_director": {"editorial_class": "SHOULD_PUBLISH"}}
+                for i in range(6)]
+    result = bob.run_bob({"decision_authority": "editorial_director",
+                          "selected": ordinary + [must]})
+    assert [row["id"] for row in result["articles"]] == ["o0", "o1", "o2", "o3", "must"]
+    assert result["handoff"]["ordinary_left_out_by_capacity"] == 2
+    assert result["handoff"]["must_left_out_by_capacity"] == 0
 
 
 def test_skip_class_action_contradiction_is_not_rewritten(monkeypatch):

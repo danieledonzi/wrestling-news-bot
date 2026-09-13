@@ -1111,19 +1111,12 @@ def is_post_show_candidate(item: dict[str, Any]) -> bool:
 
 
 def dynamic_article_capacity(decision: dict[str, Any], selected: list[dict[str, Any]]) -> tuple[int, str]:
-    must_count = sum(1 for item in selected if isinstance(item, dict) and
-                     isinstance(item.get("editorial_director"), dict) and
-                     item["editorial_director"].get("editorial_class") == "MUST_PUBLISH")
     if report_was_published_or_attempted():
-        capacity = max(0, MAX_ARTICLES_WITH_REPORT)
-        return (max(capacity, must_count), "report_run_must_expanded" if must_count > capacity else "report_run")
+        return max(0, MAX_ARTICLES_WITH_REPORT), "report_run"
     post_show_count = sum(1 for item in selected if isinstance(item, dict) and is_post_show_candidate(item))
     if post_show_count >= 3:
-        capacity = max(MAX_ARTICLES_PER_RUN, POST_SHOW_MAX_ARTICLES)
-        return (max(capacity, must_count),
-                "post_show_must_expanded" if must_count > capacity else "post_show_event_heavy")
-    return (max(MAX_ARTICLES_PER_RUN, must_count),
-            "normal_must_expanded" if must_count > MAX_ARTICLES_PER_RUN else "normal")
+        return max(MAX_ARTICLES_PER_RUN, POST_SHOW_MAX_ARTICLES), "post_show_event_heavy"
+    return MAX_ARTICLES_PER_RUN, "normal"
 
 
 def report_was_published_or_attempted() -> bool:
@@ -1188,19 +1181,12 @@ def is_post_show_candidate(item: dict[str, Any]) -> bool:
 
 
 def dynamic_article_capacity(decision: dict[str, Any], selected: list[dict[str, Any]]) -> tuple[int, str]:
-    must_count = sum(1 for item in selected if isinstance(item, dict) and
-                     isinstance(item.get("editorial_director"), dict) and
-                     item["editorial_director"].get("editorial_class") == "MUST_PUBLISH")
     if report_was_published_or_attempted():
-        capacity = max(0, MAX_ARTICLES_WITH_REPORT)
-        return (max(capacity, must_count), "report_run_must_expanded" if must_count > capacity else "report_run")
+        return max(0, MAX_ARTICLES_WITH_REPORT), "report_run"
     post_show_count = sum(1 for item in selected if isinstance(item, dict) and is_post_show_candidate(item))
     if post_show_count >= 3:
-        capacity = max(MAX_ARTICLES_PER_RUN, POST_SHOW_MAX_ARTICLES)
-        return (max(capacity, must_count),
-                "post_show_must_expanded" if must_count > capacity else "post_show_event_heavy")
-    return (max(MAX_ARTICLES_PER_RUN, must_count),
-            "normal_must_expanded" if must_count > MAX_ARTICLES_PER_RUN else "normal")
+        return max(MAX_ARTICLES_PER_RUN, POST_SHOW_MAX_ARTICLES), "post_show_event_heavy"
+    return MAX_ARTICLES_PER_RUN, "normal"
 
 
 def article_package(item: dict[str, Any]) -> dict[str, Any]:
@@ -1307,9 +1293,32 @@ def run_bob(menzo_decision: dict[str, Any] | None = None) -> dict[str, Any]:
     if not isinstance(selected, list):
         selected = []
     selected_total = len(selected)
-    capacity, capacity_reason = dynamic_article_capacity(decision if isinstance(decision, dict) else {}, selected)
-    selected = selected[:capacity]
-    publishable_left_out_by_capacity = max(0, selected_total - len(selected))
+    active_selection = decision.get("decision_authority") == "editorial_director"
+    def active_must(item: Any) -> bool:
+        editorial = item.get("editorial_director") if isinstance(item, dict) else None
+        return bool(active_selection and isinstance(editorial, dict) and
+                    editorial.get("editorial_class") == "MUST_PUBLISH")
+    ordinary = [item for item in selected if not active_must(item)]
+    capacity_input = ordinary if active_selection else selected
+    capacity, capacity_reason = dynamic_article_capacity(
+        decision if isinstance(decision, dict) else {}, capacity_input)
+    if active_selection:
+        ordinary_kept = 0
+        capacity_selected = []
+        for item in selected:
+            if active_must(item):
+                capacity_selected.append(item)
+            elif ordinary_kept < capacity:
+                capacity_selected.append(item)
+                ordinary_kept += 1
+        selected = capacity_selected
+        ordinary_left_out_by_capacity = max(0, len(ordinary) - capacity)
+        must_left_out_by_capacity = 0
+    else:
+        selected = selected[:capacity]
+        ordinary_left_out_by_capacity = max(0, selected_total - len(selected))
+        must_left_out_by_capacity = 0
+    publishable_left_out_by_capacity = ordinary_left_out_by_capacity
     print(f"[BOB v93.39] Avvio traduzione a blocchi | selected={len(selected)}/{selected_total} capacity={capacity} reason={capacity_reason} left_out={publishable_left_out_by_capacity}", flush=True)
     articles = [article_package(item) for item in selected if isinstance(item, dict)]
     result = {
@@ -1349,7 +1358,11 @@ def run_bob(menzo_decision: dict[str, Any] | None = None) -> dict[str, Any]:
             "diagnostic_mode": True,
             "fallback_mode": False,
         },
-        "input": {"menzo_version": decision.get("version") if isinstance(decision, dict) else None, "selected_count": selected_total, "selected_processed": len(selected), "capacity": capacity, "capacity_reason": capacity_reason},
+        "input": {"menzo_version": decision.get("version") if isinstance(decision, dict) else None,
+                  "selected_count": selected_total, "selected_processed": len(selected),
+                  "ordinary_capacity": capacity, "capacity": capacity, "capacity_reason": capacity_reason,
+                  "ordinary_left_out_by_capacity": ordinary_left_out_by_capacity,
+                  "must_left_out_by_capacity": must_left_out_by_capacity},
         "articles": articles,
         "handoff": {
             "ready_for_alfred": sum(1 for a in articles if a.get("status") == "ready_for_alfred"),
@@ -1358,10 +1371,17 @@ def run_bob(menzo_decision: dict[str, Any] | None = None) -> dict[str, Any]:
             "errors": sum(1 for a in articles if a.get("status") == "error"),
             "extraction_empty": sum(1 for a in articles if a.get("status") == "extraction_empty"),
             "publishable_left_out_by_capacity": publishable_left_out_by_capacity,
+            "ordinary_left_out_by_capacity": ordinary_left_out_by_capacity,
+            "must_left_out_by_capacity": must_left_out_by_capacity,
             "bob_premium_articles": sum(1 for a in articles if a.get("selected_model_chain_kind") == "premium"),
             "bob_standard_articles": sum(1 for a in articles if a.get("selected_model_chain_kind") == "standard"),
         },
-        "postprocess": {"capacity": capacity, "capacity_reason": capacity_reason, "selected_total_before_capacity": selected_total, "selected_processed": len(selected), "publishable_left_out_by_capacity": publishable_left_out_by_capacity},
+        "postprocess": {"capacity": capacity, "ordinary_capacity": capacity,
+                        "capacity_reason": capacity_reason, "selected_total_before_capacity": selected_total,
+                        "selected_processed": len(selected),
+                        "publishable_left_out_by_capacity": publishable_left_out_by_capacity,
+                        "ordinary_left_out_by_capacity": ordinary_left_out_by_capacity,
+                        "must_left_out_by_capacity": must_left_out_by_capacity},
     }
     write_json(ARTIFACT_BOB_FILE, result)
     write_json(BOB_ARTICLES_FILE, result)

@@ -168,15 +168,16 @@ def _validate_active(value: Any, snapshot: Mapping[str, Any]):
     if ordinary_selected > int(snapshot.get("remaining_slots", 0)):
         failures.append({"family": "publication_capacity", "selected_ordinary": ordinary_selected,
                          "remaining_slots": int(snapshot.get("remaining_slots", 0))})
-    selected_candidates = [_capacity_candidate(snapshot, refs[ref]) for ref, raw in raw_by_ref.items()
-                           if raw.get("recommended_action") == "SELECT" and ref in refs]
+    ordinary_candidates = [_capacity_candidate(snapshot, refs[ref]) for ref, raw in raw_by_ref.items()
+                           if raw.get("recommended_action") == "SELECT" and ref in refs and
+                           raw.get("editorial_class") != "MUST_PUBLISH"]
     from agents.bob import dynamic_article_capacity
-    downstream_capacity, capacity_reason = dynamic_article_capacity({"selected": selected_candidates}, selected_candidates)
-    effective_capacity = max(downstream_capacity, must_selected)
-    if selected > effective_capacity:
-        failures.append({"family": "downstream_capacity", "selected": selected,
-                         "capacity": effective_capacity, "base_capacity": downstream_capacity,
-                         "must_selected": must_selected, "capacity_reason": capacity_reason})
+    ordinary_capacity, capacity_reason = dynamic_article_capacity(
+        {"selected": ordinary_candidates}, ordinary_candidates)
+    if ordinary_selected > ordinary_capacity:
+        failures.append({"family": "downstream_capacity", "ordinary_selected": ordinary_selected,
+                         "ordinary_capacity": ordinary_capacity, "must_selected": must_selected,
+                         "capacity_reason": capacity_reason})
     if any(row.get("detail") == "skip_invariant_overridden" for row in telemetry):
         failures.append({"family": "skip_action_invariant", "detail": "active_semantic_rewrite_forbidden"})
     if failures:
@@ -279,40 +280,82 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
         return {**base, "status": "VALIDATED", "attempts": 0,
                 "output": {"schema_version": SCHEMA_VERSION, "policy_version": POLICY_VERSION,
                            "candidates": [], "relations": []}, "validation_errors": []}
-    request = OperationalAIRequest("Menzo", "editorial_director_active", reason_code="editorial_director_active")
     schema = json.loads(SCHEMA_PATH.read_text())
     digest = hashlib.sha256(POLICY_PATH.read_bytes()).hexdigest()
+    has_relations = bool(snapshot.get("authorized_relations"))
+    gate_request = (OperationalAIRequest("Menzo", "editorial_director_duplicate_gate",
+                    reason_code="editorial_director_duplicate_gate") if has_relations else None)
+    request = (None if has_relations else OperationalAIRequest(
+        "Menzo", "editorial_director_active", reason_code="editorial_director_active"))
     try:
         call = provider or shadow._default_provider_factory()
     except Exception as exc:
-        request.initialization_failed(str(exc))
+        (gate_request or request).initialization_failed(str(exc))
         return {**base, "status": "PROVIDER_UNAVAILABLE", "fallback_reason": type(exc).__name__}
     failures: list[dict[str, Any]] = []
     gate_attempts = 0
-    if snapshot.get("authorized_relations"):
+    gate_logical_request_id = None
+    if has_relations:
+        gate_logical_request_id = gate_request.logical_request_id
         gate_schema = json.loads(RELATION_SCHEMA_PATH.read_text())
         relations = None
         for index in range(2):
             gate_attempts += 1
+            repair = index == 1
+            attempt = gate_request.start(MODEL, repair=repair,
+                reason_code="duplicate_gate_validation_failed" if repair else "")
+            started = time.monotonic(); gate_response = None
             try:
                 gate_response = call(_duplicate_prompt(snapshot, failures if index else None), gate_schema,
                                      shadow.PROVIDER_TIMEOUT_SECONDS)
+            except Exception as exc:
+                record_gemini_attempt(response=gate_response, model_requested=MODEL,
+                    operation_id=gate_request.logical_request_id, attempt_index=index, repair=repair,
+                    fallback=False, agent="Menzo", workload="editorial_director_duplicate_gate",
+                    phase="editorial_director_duplicate_gate_repair" if repair else
+                          "editorial_director_duplicate_gate_primary",
+                    shadow=False, logical_request_id=gate_request.logical_request_id,
+                    canonical_attempt_id=attempt["attempt_id"], candidate_count=len(snapshot["candidates"]),
+                    relation_count=len(snapshot["authorized_relations"]), input_digest=snapshot["input_digest"],
+                    policy_version=POLICY_VERSION, policy_digest=digest, status="failed",
+                    error_class=type(exc).__name__)
+                gate_request.failed(attempt, error_class="upstream", error_terminal=True,
+                    latency_ms=int((time.monotonic() - started) * 1000))
+                return {**base, "attempts": gate_attempts, "status": "PROVIDER_FAILED",
+                        "fallback_reason": type(exc).__name__,
+                        "duplicate_gate_logical_request_id": gate_logical_request_id}
+            record_gemini_attempt(response=gate_response, model_requested=MODEL,
+                operation_id=gate_request.logical_request_id, attempt_index=index, repair=repair,
+                fallback=False, agent="Menzo", workload="editorial_director_duplicate_gate",
+                phase="editorial_director_duplicate_gate_repair" if repair else
+                      "editorial_director_duplicate_gate_primary",
+                shadow=False, logical_request_id=gate_request.logical_request_id,
+                canonical_attempt_id=attempt["attempt_id"], candidate_count=len(snapshot["candidates"]),
+                relation_count=len(snapshot["authorized_relations"]), input_digest=snapshot["input_digest"],
+                policy_version=POLICY_VERSION, policy_digest=digest, status="called")
+            gate_request.defer(attempt, int((time.monotonic() - started) * 1000))
+            try:
                 relations, failures, telemetry = _validate_duplicate_gate(shadow._decode(gate_response), snapshot)
             except Exception as exc:
-                return {**base, "attempts": gate_attempts, "status": "PROVIDER_FAILED",
-                        "fallback_reason": type(exc).__name__}
+                relations, failures, telemetry = None, [
+                    {"family": "parse_json", "detail": type(exc).__name__}], []
             base["validation_attempts"].append({"phase": "duplicate_gate", "attempt_index": index,
                 "valid": not failures, "validation_families": failures, "canonicalizations": telemetry})
+            gate_request.resolve_deferred(not failures, error_terminal=repair and bool(failures))
             if not failures:
                 break
         if failures or relations is None:
             return {**base, "attempts": gate_attempts, "validation_errors": failures,
-                    "fallback_reason": failures[0]["family"] if failures else "duplicate_gate_validation_failed"}
+                    "fallback_reason": failures[0]["family"] if failures else "duplicate_gate_validation_failed",
+                    "duplicate_gate_logical_request_id": gate_logical_request_id}
         _apply_duplicate_gate(snapshot, relations)
         if not snapshot.get("candidates"):
             return {**base, "status": "VALIDATED", "attempts": gate_attempts,
+                    "duplicate_gate_logical_request_id": gate_logical_request_id,
                     "output": {"schema_version": SCHEMA_VERSION, "policy_version": POLICY_VERSION,
                                "candidates": [], "relations": relations}, "validation_errors": []}
+        request = OperationalAIRequest("Menzo", "editorial_director_active",
+            reason_code="editorial_director_active")
     for index in range(2):
         repair = index == 1
         attempt = request.start(MODEL, repair=repair, reason_code="active_validation_failed" if repair else "")
@@ -350,6 +393,8 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
             result = {**base, "status": "VALIDATED", "attempts": gate_attempts + index + 1,
                       "logical_request_id": request.logical_request_id, "policy_digest": digest,
                       "input_digest": snapshot["input_digest"], "output": output, "validation_errors": []}
+            if gate_logical_request_id:
+                result["duplicate_gate_logical_request_id"] = gate_logical_request_id
             return result
     return {**base, "attempts": gate_attempts + 2, "logical_request_id": request.logical_request_id,
             "validation_errors": failures, "fallback_reason": failures[0]["family"] if failures else "validation_failed"}

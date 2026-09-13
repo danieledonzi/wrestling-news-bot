@@ -103,5 +103,6 @@ The same Gemini model is called first for semantic relations only when the autho
 after validated duplicate removal it is called for survivor classification. Each phase has at most one same-model
 repair before whole-run legacy fallback. `recommended_action` is mandatory for every survivor and the class/action
 matrix above is a deterministic validation invariant. Ordinary SELECT count must not exceed `remaining_slots` or Bob's
-ordinary per-run capacity; effective capacity expands to the number of surviving MUST selections when necessary.
+ordinary per-run capacity. MUST selections do not consume that ordinary capacity and Bob retains every MUST plus at
+most the dynamically allowed number of ordinary selections.
 Active wins over Shadow and no Shadow request is made. Disable the Active flag for migration-free rollback.
