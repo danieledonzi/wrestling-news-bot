@@ -501,11 +501,13 @@ def apply_softpool_decay(result: dict[str, Any]) -> None:
                 item["softpool_age_hours"] = round(softpool_age_hours(item), 3)
                 item["softpool_deferrals"] = softpool_deferrals(item)
                 if item["softpool_age_hours"] > SOFTNEWS_TTL_HOURS:
-                    item = dict(item, decision="skip", priority="skip", reason="softpool_expired_not_fresh")
+                    item = dict(item, decision="skip", priority="skip", reason="softpool_expired_not_fresh",
+                                decision_authority="softpool_decay")
                     item.setdefault("menzo_policy", {})["softpool_expired_not_fresh"] = True
                     expired.append(item); continue
                 if item["softpool_deferrals"] >= SOFTPOOL_OUTRANKED_DEFERRALS:
-                    item = dict(item, decision="skip", priority="skip", reason="softpool_repeatedly_outranked")
+                    item = dict(item, decision="skip", priority="skip", reason="softpool_repeatedly_outranked",
+                                decision_authority="softpool_decay")
                     item.setdefault("menzo_policy", {})["softpool_repeatedly_outranked"] = True
                     outranked.append(item); continue
             kept.append(item)
@@ -3568,7 +3570,8 @@ def save_hard_skips(result: dict[str, Any]) -> None:
             key = source_key(item.get("url") or item.get("source_url") or "")
             if key:
                 by_url[key] = item
-    terminal_authorities = {"editorial_director", "deterministic_exact_duplicate", "semantic_duplicate_gate"}
+    terminal_authorities = {"editorial_director", "deterministic_exact_duplicate",
+                            "semantic_duplicate_gate", "softpool_decay"}
     for item in result.get("skipped", []) if isinstance(result.get("skipped"), list) else []:
         key = source_key(item.get("url") or item.get("source_url") or "")
         authority = str(item.get("decision_authority") or "")

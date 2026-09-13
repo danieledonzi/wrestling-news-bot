@@ -266,6 +266,43 @@ def test_recent_duplicate_material_update_and_no_match_gate_states():
         assert s["duplicate_gate_relations"][0]["decision"] == decision
 
 
+def test_recent_history_duplicate_eliminates_entire_same_run_component(monkeypatch):
+    def run_case(edges, history_member, winner_id, history_decision="DUPLICATE"):
+        candidates = [{"candidate_id": candidate_id, "url": f"https://component.test/{candidate_id}",
+                       "title": candidate_id} for candidate_id in sorted({x for edge in edges for x in edge})]
+        s = {"candidates": candidates, "authorized_relations": [], "publisher_history_12h": [],
+             "remaining_slots": 30, "publisher_count_rolling_24h": 0, "policy_reference": 30,
+             "observed": {}, "deterministic_exact_skips": []}
+        relations = [{"pair_id": f"{left}-{right}", "scope": "same_run", "left_id": left,
+                      "right_id": right, "decision": "DUPLICATE", "scorer": {}}
+                     for left, right in edges]
+        relations.append({"pair_id": "history", "scope": "recent_history", "left_id": history_member,
+                          "right_id": "published", "decision": history_decision,
+                          "new_fact": "new fact" if history_decision == "MATERIAL_UPDATE" else None,
+                          "temporal_basis": "confirmed later" if history_decision == "MATERIAL_UPDATE" else None,
+                          "scorer": {}})
+        monkeypatch.setattr(menzo, "hydrate_complete_article_bodies", lambda *_: (True, []))
+        monkeypatch.setattr(menzo, "canonical_richer_winner",
+                            lambda items: (next(row for row in items if row["candidate_id"] == winner_id), "test"))
+        active._apply_duplicate_gate(s, relations)
+        return s
+
+    for edges, history_member, winner in [([("A", "B")], "A", "B"),
+                                           ([("A", "B")], "B", "A"),
+                                           ([("A", "B"), ("B", "C")], "A", "C")]:
+        s = run_case(edges, history_member, winner)
+        assert s["candidates"] == []
+        eliminated = {row["candidate_id"]: row for row in s["semantic_duplicate_skips"]}
+        assert eliminated[winner]["semantic_duplicate_scope"] == "recent_history"
+        assert eliminated[winner]["semantic_duplicate_of"] == "published"
+        assert all(row["semantic_duplicate_scope"] == "same_run"
+                   for candidate_id, row in eliminated.items() if candidate_id != winner)
+
+    for decision in ("NO_MATCH", "MATERIAL_UPDATE"):
+        s = run_case([("A", "B")], "A", "B", decision)
+        assert [row["candidate_id"] for row in s["candidates"]] == ["B"]
+
+
 def test_legacy_routing_marker_memory_is_not_binding(monkeypatch, tmp_path):
     from agents import massy_policy_v93_24 as massy
     memory = tmp_path / "hard-skips.json"
@@ -333,23 +370,58 @@ def test_active_defer_uses_bounded_softpool_decay_without_overriding_select(monk
                       "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE"):
             monkeypatch.setattr(menzo, field, root / f"{field}.json")
         menzo.write_json(menzo.SOFTPOOL_FILE, {"items": [row]})
-        return active.project(s, result), menzo.load_json(menzo.SOFTPOOL_FILE, {"items": []})["items"]
+        projected = active.project(s, result)
+        return (projected, menzo.load_json(menzo.SOFTPOOL_FILE, {"items": []})["items"],
+                menzo.load_json(menzo.HARD_SKIP_FILE, {"items": []})["items"])
 
-    below, below_pool = project_action("DEFER", menzo.SOFTPOOL_OUTRANKED_DEFERRALS - 1, "below")
+    below, below_pool, below_memory = project_action(
+        "DEFER", menzo.SOFTPOOL_OUTRANKED_DEFERRALS - 1, "below")
     assert len(below["pending"]) == 1 and not below["skipped"]
     assert below_pool[0]["softpool_deferrals"] == menzo.SOFTPOOL_OUTRANKED_DEFERRALS
+    assert below_memory == []
 
-    bounded, bounded_pool = project_action("DEFER", menzo.SOFTPOOL_OUTRANKED_DEFERRALS, "bounded")
+    bounded, bounded_pool, bounded_memory = project_action(
+        "DEFER", menzo.SOFTPOOL_OUTRANKED_DEFERRALS, "bounded")
     assert not bounded["pending"] and not bounded_pool and len(bounded["skipped"]) == 1
     ended = bounded["skipped"][0]
     assert ended["editorial_director"]["recommended_action"] == "DEFER"
+    assert ended["editorial_director"]["editorial_class"] == "PUBLISHABLE_SOFT"
+    assert ended["decision_authority"] == "softpool_decay"
     assert ended["menzo_policy"]["softpool_repeatedly_outranked"] is True
+    assert bounded_memory[0]["reason"] == "softpool_repeatedly_outranked"
+    assert bounded_memory[0]["decision_authority"] == "softpool_decay"
     assert bounded["handoff"]["pending"] == 0 and bounded["handoff"]["skipped"] == 1
 
-    selected, selected_pool = project_action("SELECT", menzo.SOFTPOOL_OUTRANKED_DEFERRALS, "selected")
+    selected, selected_pool, _ = project_action("SELECT", menzo.SOFTPOOL_OUTRANKED_DEFERRALS, "selected")
     assert len(selected["selected"]) == 1 and not selected["skipped"] and not selected_pool
-    skipped, skipped_pool = project_action("SKIP", menzo.SOFTPOOL_OUTRANKED_DEFERRALS, "skipped")
+    skipped, skipped_pool, skipped_memory = project_action(
+        "SKIP", menzo.SOFTPOOL_OUTRANKED_DEFERRALS, "skipped")
     assert len(skipped["skipped"]) == 1 and not skipped["pending"] and not skipped_pool
+    assert skipped_memory[0]["reason"] == "editorial_class_skip"
+
+
+def test_active_defer_expiry_persists_binding_softpool_decay(monkeypatch, tmp_path):
+    from datetime import datetime, timedelta, timezone
+    from agents import massy_policy_v93_24 as massy
+    row = {"source": "feed", "title": "Expired candidate", "summary": "fact",
+           "url": "https://decay.test/expired", "from_softpool": True,
+           "softpool_added_at": (datetime.now(timezone.utc) - timedelta(
+               hours=menzo.SOFTNEWS_TTL_HOURS + 1)).isoformat(), "softpool_deferrals": 0}
+    s = shadow.capture_opportunity({"news_candidates_for_menzo": [row]}, run_id="run",
+        observation_timestamp="now", publisher_count_24h=0, history=[])
+    result = active.evaluate(s, provider=lambda *_: response(s, ("DEFER",)))
+    for field in ("SOFTPOOL_FILE", "HARD_SKIP_FILE", "MENZO_DECISIONS_FILE",
+                  "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE"):
+        monkeypatch.setattr(menzo, field, tmp_path / f"{field}.json")
+    projected = active.project(s, result)
+    ended = projected["skipped"][0]
+    assert ended["reason"] == "softpool_expired_not_fresh"
+    assert ended["decision_authority"] == "softpool_decay"
+    assert ended["editorial_director"]["editorial_class"] == "PUBLISHABLE_SOFT"
+    memory = menzo.load_json(menzo.HARD_SKIP_FILE, {})["items"]
+    assert memory[0]["reason"] == "softpool_expired_not_fresh"
+    monkeypatch.setattr(massy, "MENZO_HARD_SKIP_FILE", menzo.HARD_SKIP_FILE)
+    assert massy.source_key(row["url"]) in massy.menzo_skip_memory()
 
 
 def test_failed_late_active_persistence_restores_every_state_file(monkeypatch, tmp_path):

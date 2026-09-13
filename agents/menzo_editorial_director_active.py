@@ -242,21 +242,26 @@ def _apply_duplicate_gate(snapshot: dict[str, Any], relations: list[dict[str, An
     for candidate_id, candidate in by_id.items():
         groups.setdefault(find(candidate_id), []).append(candidate)
     eliminated: dict[str, dict[str, Any]] = {}
+    representative_by_member: dict[str, str] = {}
     for group in groups.values():
-        if len(group) < 2:
-            continue
-        hydrated = copy.deepcopy(group)
-        hydrate_complete_article_bodies(hydrated)
-        winner, _ = canonical_richer_winner(hydrated)
+        if len(group) > 1:
+            hydrated = copy.deepcopy(group)
+            hydrate_complete_article_bodies(hydrated)
+            winner, _ = canonical_richer_winner(hydrated)
+        else:
+            winner = group[0]
+        representative_id = winner["candidate_id"]
         for candidate in group:
-            if candidate["candidate_id"] != winner["candidate_id"]:
+            representative_by_member[candidate["candidate_id"]] = representative_id
+            if candidate["candidate_id"] != representative_id:
                 eliminated[candidate["candidate_id"]] = {**copy.deepcopy(candidate),
-                    "semantic_duplicate_scope": "same_run", "semantic_duplicate_of": winner["candidate_id"]}
+                    "semantic_duplicate_scope": "same_run", "semantic_duplicate_of": representative_id}
     for relation in relations:
         if relation["decision"] == "DUPLICATE" and relation["scope"] == "recent_history":
-            candidate = by_id.get(relation["left_id"])
-            if candidate:
-                eliminated[relation["left_id"]] = {**copy.deepcopy(candidate),
+            representative_id = representative_by_member.get(relation["left_id"])
+            representative = by_id.get(representative_id)
+            if representative:
+                eliminated[representative_id] = {**copy.deepcopy(representative),
                     "semantic_duplicate_scope": "recent_history", "semantic_duplicate_of": relation["right_id"]}
     snapshot["semantic_duplicate_skips"] = list(eliminated.values())
     snapshot["duplicate_gate_relations"] = copy.deepcopy(relations)
