@@ -19,6 +19,7 @@ SCHEMA_VERSION = "owtv_editorial_director_output_v3"
 POLICY_VERSION = "owtv_editorial_director_policy_v3_active"
 SCHEMA_PATH = ROOT / "config/editorial_director_output_schema_v3.json"
 POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V3_ACTIVE.md"
+RELATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_gate_schema_v3.json"
 BOB_CAPACITY_FIELDS = ("article_type", "source_title", "category_hint", "reason",
                        "ai_editorial_reason", "event_key")
 
@@ -148,34 +149,36 @@ def _validate_active(value: Any, snapshot: Mapping[str, Any]):
     raw_by_ref = {row.get("ref"): row for row in value.get("candidates", []) if isinstance(row, Mapping)}
     refs, relations = shadow.short_ref_maps(snapshot)
     actions: dict[str, str | None] = {}
+    classes: dict[str, str | None] = {}
     for ref, candidate in refs.items():
         raw = raw_by_ref.get(ref, {})
         action = raw.get("recommended_action")
         if action not in shadow.ACTIONS:
             failures.append({"family": "recommended_action", "ref": ref, "detail": "mandatory_active_field"})
         actions[candidate["candidate_id"]] = action
+        classes[candidate["candidate_id"]] = raw.get("editorial_class")
+        allowed = {"MUST_PUBLISH": {"SELECT"}, "SHOULD_PUBLISH": {"SELECT", "DEFER"},
+                   "PUBLISHABLE_SOFT": {"SELECT", "DEFER"}, "SKIP": {"SKIP"}}
+        if raw.get("editorial_class") in allowed and action not in allowed[raw["editorial_class"]]:
+            failures.append({"family": "class_action_incompatibility", "ref": ref,
+                             "editorial_class": raw.get("editorial_class"), "recommended_action": action})
     selected = sum(action == "SELECT" for action in actions.values())
-    if selected > int(snapshot.get("remaining_slots", 0)):
-        failures.append({"family": "publication_capacity", "selected": selected,
+    must_selected = sum(actions[cid] == "SELECT" and classes[cid] == "MUST_PUBLISH" for cid in actions)
+    ordinary_selected = selected - must_selected
+    if ordinary_selected > int(snapshot.get("remaining_slots", 0)):
+        failures.append({"family": "publication_capacity", "selected_ordinary": ordinary_selected,
                          "remaining_slots": int(snapshot.get("remaining_slots", 0))})
     selected_candidates = [_capacity_candidate(snapshot, refs[ref]) for ref, raw in raw_by_ref.items()
                            if raw.get("recommended_action") == "SELECT" and ref in refs]
     from agents.bob import dynamic_article_capacity
     downstream_capacity, capacity_reason = dynamic_article_capacity({"selected": selected_candidates}, selected_candidates)
-    if selected > downstream_capacity:
+    effective_capacity = max(downstream_capacity, must_selected)
+    if selected > effective_capacity:
         failures.append({"family": "downstream_capacity", "selected": selected,
-                         "capacity": downstream_capacity, "capacity_reason": capacity_reason})
+                         "capacity": effective_capacity, "base_capacity": downstream_capacity,
+                         "must_selected": must_selected, "capacity_reason": capacity_reason})
     if any(row.get("detail") == "skip_invariant_overridden" for row in telemetry):
         failures.append({"family": "skip_action_invariant", "detail": "active_semantic_rewrite_forbidden"})
-    for relation in output["relations"]:
-        if relation["decision"] != "DUPLICATE":
-            continue
-        left_action = actions.get(relation["left_id"])
-        right_action = actions.get(relation["right_id"])
-        if relation["scope"] == "recent_history" and left_action != "SKIP":
-            failures.append({"family": "recent_history_duplicate_action", "pair_id": relation["pair_id"]})
-        if relation["scope"] == "same_run" and left_action != "SKIP" and right_action != "SKIP":
-            failures.append({"family": "same_run_duplicate_action", "pair_id": relation["pair_id"]})
     if failures:
         return None, failures, telemetry
     output["schema_version"] = SCHEMA_VERSION
@@ -193,6 +196,73 @@ def _prompt(snapshot: Mapping[str, Any], failures: list[dict[str, Any]] | None =
     if failures is not None:
         prompt += "\nREPAIR ONLY THESE VALIDATION FAMILIES=" + json.dumps(failures[:20], separators=(",", ":"))
     return prompt
+
+
+def _validate_duplicate_gate(value: Any, snapshot: Mapping[str, Any]):
+    """Validate only relation semantics; candidates do not exist in this phase's output."""
+    if not isinstance(value, Mapping):
+        return None, [{"family": "parse_json", "detail": "output_not_object"}], []
+    synthetic = {"candidates": [
+        {"ref": ref, "editorial_class": "SKIP", "recommended_action": "SKIP",
+         "category": "World", "story_core": "duplicate gate placeholder"}
+        for ref in shadow.short_ref_maps(snapshot)[0]], "relations": value.get("relations")}
+    output, failures, telemetry = shadow.canonicalize_output(synthetic, snapshot)
+    return (output.get("relations") if output else None), failures, telemetry
+
+
+def _duplicate_prompt(snapshot: Mapping[str, Any], failures: list[dict[str, Any]] | None = None) -> str:
+    policy = POLICY_PATH.read_text(encoding="utf-8")
+    data = active_provider_input(snapshot)
+    prompt = (f"ACTIVE_POLICY_VERSION={POLICY_VERSION}\n<ACTIVE_POLICY>\n{policy}\n</ACTIVE_POLICY>\n"
+              "DUPLICATE GATE PHASE ONLY. Return only JSON with relations. Do not classify candidates. "
+              "Evaluate every authorized relation once. INPUT=" +
+              json.dumps(data, ensure_ascii=False, sort_keys=True, separators=(",", ":")))
+    if failures is not None:
+        prompt += "\nREPAIR ONLY THESE VALIDATION FAMILIES=" + json.dumps(failures[:20], separators=(",", ":"))
+    return prompt
+
+
+def _apply_duplicate_gate(snapshot: dict[str, Any], relations: list[dict[str, Any]]) -> None:
+    """Remove semantic duplicates before any survivor receives an editorial class."""
+    from agents.menzo_policy_v93_15 import canonical_richer_winner, hydrate_complete_article_bodies
+    by_id = {row["candidate_id"]: row for row in snapshot.get("candidates", [])}
+    parent = {candidate_id: candidate_id for candidate_id in by_id}
+    def find(candidate_id: str) -> str:
+        while parent[candidate_id] != candidate_id:
+            parent[candidate_id] = parent[parent[candidate_id]]
+            candidate_id = parent[candidate_id]
+        return candidate_id
+    for relation in relations:
+        if relation["decision"] == "DUPLICATE" and relation["scope"] == "same_run":
+            left, right = relation["left_id"], relation["right_id"]
+            if left in parent and right in parent:
+                parent[find(right)] = find(left)
+    groups: dict[str, list[dict[str, Any]]] = {}
+    for candidate_id, candidate in by_id.items():
+        groups.setdefault(find(candidate_id), []).append(candidate)
+    eliminated: dict[str, dict[str, Any]] = {}
+    for group in groups.values():
+        if len(group) < 2:
+            continue
+        hydrated = copy.deepcopy(group)
+        hydrate_complete_article_bodies(hydrated)
+        winner, _ = canonical_richer_winner(hydrated)
+        for candidate in group:
+            if candidate["candidate_id"] != winner["candidate_id"]:
+                eliminated[candidate["candidate_id"]] = {**copy.deepcopy(candidate),
+                    "semantic_duplicate_scope": "same_run", "semantic_duplicate_of": winner["candidate_id"]}
+    for relation in relations:
+        if relation["decision"] == "DUPLICATE" and relation["scope"] == "recent_history":
+            candidate = by_id.get(relation["left_id"])
+            if candidate:
+                eliminated[relation["left_id"]] = {**copy.deepcopy(candidate),
+                    "semantic_duplicate_scope": "recent_history", "semantic_duplicate_of": relation["right_id"]}
+    snapshot["semantic_duplicate_skips"] = list(eliminated.values())
+    snapshot["duplicate_gate_relations"] = copy.deepcopy(relations)
+    snapshot["candidates"] = [row for row in snapshot.get("candidates", [])
+                              if row["candidate_id"] not in eliminated]
+    snapshot["authorized_relations"] = []
+    _finalize_active_input(snapshot)
 
 
 def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None = None,
@@ -218,6 +288,31 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
         request.initialization_failed(str(exc))
         return {**base, "status": "PROVIDER_UNAVAILABLE", "fallback_reason": type(exc).__name__}
     failures: list[dict[str, Any]] = []
+    gate_attempts = 0
+    if snapshot.get("authorized_relations"):
+        gate_schema = json.loads(RELATION_SCHEMA_PATH.read_text())
+        relations = None
+        for index in range(2):
+            gate_attempts += 1
+            try:
+                gate_response = call(_duplicate_prompt(snapshot, failures if index else None), gate_schema,
+                                     shadow.PROVIDER_TIMEOUT_SECONDS)
+                relations, failures, telemetry = _validate_duplicate_gate(shadow._decode(gate_response), snapshot)
+            except Exception as exc:
+                return {**base, "attempts": gate_attempts, "status": "PROVIDER_FAILED",
+                        "fallback_reason": type(exc).__name__}
+            base["validation_attempts"].append({"phase": "duplicate_gate", "attempt_index": index,
+                "valid": not failures, "validation_families": failures, "canonicalizations": telemetry})
+            if not failures:
+                break
+        if failures or relations is None:
+            return {**base, "attempts": gate_attempts, "validation_errors": failures,
+                    "fallback_reason": failures[0]["family"] if failures else "duplicate_gate_validation_failed"}
+        _apply_duplicate_gate(snapshot, relations)
+        if not snapshot.get("candidates"):
+            return {**base, "status": "VALIDATED", "attempts": gate_attempts,
+                    "output": {"schema_version": SCHEMA_VERSION, "policy_version": POLICY_VERSION,
+                               "candidates": [], "relations": relations}, "validation_errors": []}
     for index in range(2):
         repair = index == 1
         attempt = request.start(MODEL, repair=repair, reason_code="active_validation_failed" if repair else "")
@@ -234,7 +329,7 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                 status="failed", error_class=type(exc).__name__)
             request.failed(attempt, error_class="upstream", error_terminal=True,
                            latency_ms=int((time.monotonic() - started) * 1000))
-            return {**base, "attempts": index + 1, "status": "PROVIDER_FAILED",
+            return {**base, "attempts": gate_attempts + index + 1, "status": "PROVIDER_FAILED",
                     "fallback_reason": type(exc).__name__, "logical_request_id": request.logical_request_id}
         record_gemini_attempt(response=response, model_requested=MODEL, operation_id=request.logical_request_id,
             attempt_index=index, repair=repair, fallback=False, agent="Menzo", workload="editorial_director_active",
@@ -251,11 +346,12 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
             "validation_families": failures, "canonicalizations": canonicalized})
         request.resolve_deferred(not failures, error_terminal=repair and bool(failures))
         if not failures:
-            result = {**base, "status": "VALIDATED", "attempts": index + 1,
+            output["relations"] = copy.deepcopy(snapshot.get("duplicate_gate_relations", []))
+            result = {**base, "status": "VALIDATED", "attempts": gate_attempts + index + 1,
                       "logical_request_id": request.logical_request_id, "policy_digest": digest,
                       "input_digest": snapshot["input_digest"], "output": output, "validation_errors": []}
             return result
-    return {**base, "attempts": 2, "logical_request_id": request.logical_request_id,
+    return {**base, "attempts": gate_attempts + 2, "logical_request_id": request.logical_request_id,
             "validation_errors": failures, "fallback_reason": failures[0]["family"] if failures else "validation_failed"}
 
 
@@ -285,6 +381,13 @@ def project(snapshot: Mapping[str, Any], result: Mapping[str, Any]) -> dict[str,
         item = copy.deepcopy(exact); item.pop("candidate_id", None)
         item.update(decision="skip", priority="skip", decision_authority="deterministic_exact_duplicate",
                     reason="exact_duplicate")
+        projected["skipped"].append(item)
+    for duplicate in snapshot.get("semantic_duplicate_skips", []):
+        item = copy.deepcopy(duplicate); item.pop("candidate_id", None)
+        scope = item.pop("semantic_duplicate_scope")
+        item.update(decision="skip", priority="skip", article_type="duplicate",
+                    decision_authority="semantic_duplicate_gate",
+                    reason=f"semantic_{scope}_duplicate")
         projected["skipped"].append(item)
     # Reuse legacy bounded reconsideration only for candidates the Director has
     # just deferred again. A recovered SELECT remains authoritative.

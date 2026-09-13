@@ -3568,15 +3568,25 @@ def save_hard_skips(result: dict[str, Any]) -> None:
             key = source_key(item.get("url") or item.get("source_url") or "")
             if key:
                 by_url[key] = item
+    terminal_authorities = {"editorial_director", "deterministic_exact_duplicate", "semantic_duplicate_gate"}
     for item in result.get("skipped", []) if isinstance(result.get("skipped"), list) else []:
         key = source_key(item.get("url") or item.get("source_url") or "")
-        if not key:
+        authority = str(item.get("decision_authority") or "")
+        if not key or (authority and authority not in terminal_authorities):
+            continue
+        editorial = item.get("editorial_director") if isinstance(item.get("editorial_director"), dict) else {}
+        reason = item.get("reason")
+        if authority == "editorial_director":
+            reason = "editorial_class_skip" if editorial.get("editorial_class") == "SKIP" else None
+        if reason == "requires_menzo_classification" or not reason:
             continue
         by_url[key] = {
             "url": item.get("url") or item.get("source_url"),
             "normalized_url": key,
             "title": item.get("title", ""),
-            "reason": item.get("reason", "menzo_skip"),
+            "reason": reason,
+            "decision_authority": authority or "legacy_menzo",
+            "editorial_class": editorial.get("editorial_class"),
             "article_type": item.get("article_type"),
             "added_at": now,
             "expires_after_hours": HARD_SKIP_TTL_HOURS,

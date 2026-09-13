@@ -1111,12 +1111,19 @@ def is_post_show_candidate(item: dict[str, Any]) -> bool:
 
 
 def dynamic_article_capacity(decision: dict[str, Any], selected: list[dict[str, Any]]) -> tuple[int, str]:
+    must_count = sum(1 for item in selected if isinstance(item, dict) and
+                     isinstance(item.get("editorial_director"), dict) and
+                     item["editorial_director"].get("editorial_class") == "MUST_PUBLISH")
     if report_was_published_or_attempted():
-        return max(0, MAX_ARTICLES_WITH_REPORT), "report_run"
+        capacity = max(0, MAX_ARTICLES_WITH_REPORT)
+        return (max(capacity, must_count), "report_run_must_expanded" if must_count > capacity else "report_run")
     post_show_count = sum(1 for item in selected if isinstance(item, dict) and is_post_show_candidate(item))
     if post_show_count >= 3:
-        return max(MAX_ARTICLES_PER_RUN, POST_SHOW_MAX_ARTICLES), "post_show_event_heavy"
-    return MAX_ARTICLES_PER_RUN, "normal"
+        capacity = max(MAX_ARTICLES_PER_RUN, POST_SHOW_MAX_ARTICLES)
+        return (max(capacity, must_count),
+                "post_show_must_expanded" if must_count > capacity else "post_show_event_heavy")
+    return (max(MAX_ARTICLES_PER_RUN, must_count),
+            "normal_must_expanded" if must_count > MAX_ARTICLES_PER_RUN else "normal")
 
 
 def report_was_published_or_attempted() -> bool:
@@ -1181,12 +1188,19 @@ def is_post_show_candidate(item: dict[str, Any]) -> bool:
 
 
 def dynamic_article_capacity(decision: dict[str, Any], selected: list[dict[str, Any]]) -> tuple[int, str]:
+    must_count = sum(1 for item in selected if isinstance(item, dict) and
+                     isinstance(item.get("editorial_director"), dict) and
+                     item["editorial_director"].get("editorial_class") == "MUST_PUBLISH")
     if report_was_published_or_attempted():
-        return max(0, MAX_ARTICLES_WITH_REPORT), "report_run"
+        capacity = max(0, MAX_ARTICLES_WITH_REPORT)
+        return (max(capacity, must_count), "report_run_must_expanded" if must_count > capacity else "report_run")
     post_show_count = sum(1 for item in selected if isinstance(item, dict) and is_post_show_candidate(item))
     if post_show_count >= 3:
-        return max(MAX_ARTICLES_PER_RUN, POST_SHOW_MAX_ARTICLES), "post_show_event_heavy"
-    return MAX_ARTICLES_PER_RUN, "normal"
+        capacity = max(MAX_ARTICLES_PER_RUN, POST_SHOW_MAX_ARTICLES)
+        return (max(capacity, must_count),
+                "post_show_must_expanded" if must_count > capacity else "post_show_event_heavy")
+    return (max(MAX_ARTICLES_PER_RUN, must_count),
+            "normal_must_expanded" if must_count > MAX_ARTICLES_PER_RUN else "normal")
 
 
 def article_package(item: dict[str, Any]) -> dict[str, Any]:

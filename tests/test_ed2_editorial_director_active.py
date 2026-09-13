@@ -11,12 +11,16 @@ def snapshot(count=3, published=0):
             "Report: WWE Releasing NXT Talents",
             "Jasper Troy Sparks WWE Release Speculation With Cryptic ‘30 Days’ Message",
         ][:count])]}
-    return shadow.capture_opportunity(board, run_id="run", observation_timestamp="now",
-                                      publisher_count_24h=published, history=[])
+    value = shadow.capture_opportunity(board, run_id="run", observation_timestamp="now",
+                                       publisher_count_24h=published, history=[])
+    value["authorized_relations"] = []
+    value["authorized_relations_complete"] = True
+    return value
 
 
 def response(s, actions=("SELECT", "DEFER", "SKIP")):
-    classes = ("MUST_PUBLISH", "PUBLISHABLE_SOFT", "SKIP")
+    classes = tuple("MUST_PUBLISH" if action == "SELECT" else
+                    "PUBLISHABLE_SOFT" if action == "DEFER" else "SKIP" for action in actions)
     return {"candidates": [{"ref": f"c{i}", "editorial_class": classes[i],
              "recommended_action": actions[i], "category": "NXT", "story_core": f"core {i}"}
             for i in range(len(s["candidates"]))], "relations": [{"ref": f"r{i}", "decision": "NO_MATCH"}
@@ -64,6 +68,7 @@ def test_valid_active_result_projects_jasper_fixture_without_legacy_scoring(monk
     assert handoff["allowed_urls_for_v92"] == ["https://ed2.test/0"]
     hard_skips = menzo.load_json(tmp_path / "hard-skips.json", {})["items"]
     assert [item["url"] for item in hard_skips] == ["https://ed2.test/2"]
+    assert hard_skips[0]["reason"] == "editorial_class_skip"
     from agents import publisher
     monkeypatch.setattr(publisher, "MENZO_DECISIONS_FILE", tmp_path / "menzo.json")
     monkeypatch.setattr(publisher, "BOB_ARTICLES_FILE", tmp_path / "missing-bob.json")
@@ -84,15 +89,14 @@ def test_valid_active_result_projects_jasper_fixture_without_legacy_scoring(monk
     assert massy_result["hard_skipped"][0]["reason"] == "menzo_hard_skip_memory"
 
 
-def test_missing_action_and_capacity_violation_each_repair_once(monkeypatch):
+def test_missing_action_repairs_and_must_select_survives_daily_reference(monkeypatch):
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     s = snapshot(1); bad = response(s, ("SELECT",)); del bad["candidates"][0]["recommended_action"]
     calls = []; result = active.evaluate(s, provider=lambda *_: calls.append(1) or bad)
     assert result["status"] == "failed" and len(calls) == 2
     s = snapshot(1, published=30); calls = []
     result = active.evaluate(s, provider=lambda *_: calls.append(1) or response(s, ("SELECT",)))
-    assert result["status"] == "failed" and len(calls) == 2
-    assert result["validation_errors"][0]["family"] == "publication_capacity"
+    assert result["status"] == "VALIDATED" and len(calls) == 1
 
 
 def test_provider_failure_and_oversize_are_whole_result_failures(monkeypatch):
@@ -104,40 +108,78 @@ def test_provider_failure_and_oversize_are_whole_result_failures(monkeypatch):
     assert active.evaluate(s, provider=lambda *_: None)["status"] == "OVERSIZE_NOT_EVALUATED"
 
 
-def test_contradictory_duplicate_actions_repair_then_fail(monkeypatch):
+def test_same_run_duplicate_is_removed_before_editorial_classification(monkeypatch):
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     s = snapshot(2)
     left, right = [x["candidate_id"] for x in s["candidates"]]
     s["authorized_relations"] = [{"pair_id": "p", "scope": "same_run", "left_id": left,
         "right_id": right, "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
-    out = response(s, ("SELECT", "SELECT")); out["relations"] = [
-        {"ref": "r0", "decision": "DUPLICATE", "shared_fact": "same confirmed release"}]
-    calls = []; result = active.evaluate(s, provider=lambda *_: calls.append(1) or out)
-    assert len(calls) == 2 and result["validation_errors"][0]["family"] == "same_run_duplicate_action"
+    calls = []
+    def provider(prompt, *_):
+        calls.append(prompt)
+        if "DUPLICATE GATE PHASE ONLY" in prompt:
+            return {"relations": [{"ref": "r0", "decision": "DUPLICATE",
+                                    "shared_fact": "same confirmed release"}]}
+        return response(s, ("SELECT",))
+    result = active.evaluate(s, provider=provider)
+    assert result["status"] == "VALIDATED" and len(calls) == 2
+    assert len(result["output"]["candidates"]) == 1
+    assert len(s["semantic_duplicate_skips"]) == 1
 
 
-def test_duplicate_requires_only_one_same_run_eligible_endpoint(monkeypatch):
-    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
-    s = snapshot(2); s["downstream_capacity"] = 5
-    left, right = [x["candidate_id"] for x in s["candidates"]]
-    s["authorized_relations"] = [{"pair_id": "p", "scope": "same_run", "left_id": left,
-        "right_id": right, "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
-    for actions, valid in ((('SELECT', 'SKIP'), True), (('DEFER', 'SKIP'), True),
-                           (('SKIP', 'SKIP'), True), (('SELECT', 'DEFER'), False),
-                           (('DEFER', 'DEFER'), False), (('DEFER', 'SELECT'), False)):
-        out = response(s, actions); out["relations"] = [{"ref": "r0", "decision": "DUPLICATE", "shared_fact": "same"}]
-        canonical, failures, _ = active._validate_active(out, s)
+def test_class_action_matrix_is_a_validator_invariant():
+    allowed = {"MUST_PUBLISH": {"SELECT"}, "SHOULD_PUBLISH": {"SELECT", "DEFER"},
+               "PUBLISHABLE_SOFT": {"SELECT", "DEFER"}, "SKIP": {"SKIP"}}
+    for editorial_class, valid_actions in allowed.items():
+        for action in ("SELECT", "DEFER", "SKIP"):
+            s = snapshot(1); out = response(s, (action,))
+            out["candidates"][0]["editorial_class"] = editorial_class
+            canonical, failures, _ = active._validate_active(out, active.prepare_snapshot(s))
+            assert bool(canonical) is (action in valid_actions)
+            assert bool(failures) is (action not in valid_actions)
+
+
+def test_vaquer_title_change_must_rejects_skip_and_defer():
+    for action, valid in (("SKIP", False), ("DEFER", False), ("SELECT", True)):
+        s = snapshot(1)
+        s["candidates"][0]["title"] = ("Stephanie Vaquer defeats Liv Morgan to win the WWE Women's "
+                                        "World Championship")
+        out = response(s, (action,))
+        out["candidates"][0].update(editorial_class="MUST_PUBLISH",
+                                    story_core="Vaquer defeats Morgan to win the championship")
+        canonical, failures, _ = active._validate_active(out, active.prepare_snapshot(s))
         assert bool(canonical) is valid and bool(failures) is not valid
 
 
-def test_recent_duplicate_requires_skip_not_defer():
-    s = snapshot(1); s["downstream_capacity"] = 5; candidate_id = s["candidates"][0]["candidate_id"]
-    s["authorized_relations"] = [{"pair_id": "p", "scope": "recent_history", "left_id": candidate_id,
-        "right_id": "history", "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
-    for action, valid in (("SKIP", True), ("SELECT", False), ("DEFER", False)):
-        out = response(s, (action,)); out["relations"] = [{"ref": "r0", "decision": "DUPLICATE", "shared_fact": "same"}]
-        canonical, failures, _ = active._validate_active(out, s)
-        assert bool(canonical) is valid and bool(failures) is not valid
+def test_recent_duplicate_material_update_and_no_match_gate_states():
+    for decision, eliminated in (("DUPLICATE", True), ("MATERIAL_UPDATE", False), ("NO_MATCH", False)):
+        s = snapshot(1)
+        candidate_id = s["candidates"][0]["candidate_id"]
+        relation = {"pair_id": "p", "scope": "recent_history", "left_id": candidate_id,
+                    "right_id": "published", "decision": decision, "shared_fact": None,
+                    "new_fact": "new autonomous fact" if decision == "MATERIAL_UPDATE" else None,
+                    "temporal_basis": "officially confirmed after publication" if decision == "MATERIAL_UPDATE" else None,
+                    "scorer": {}}
+        active._apply_duplicate_gate(s, [relation])
+        assert bool(s["semantic_duplicate_skips"]) is eliminated
+        assert bool(s["candidates"]) is not eliminated
+        assert s["duplicate_gate_relations"][0]["decision"] == decision
+
+
+def test_legacy_routing_marker_memory_is_not_binding(monkeypatch, tmp_path):
+    from agents import massy_policy_v93_24 as massy
+    memory = tmp_path / "hard-skips.json"
+    memory.write_text('{"ttl_hours":168,"items":[{"url":"https://poison.test/a",'
+                      '"reason":"requires_menzo_classification","added_at":"2099-01-01T00:00:00+00:00"}]}')
+    monkeypatch.setattr(massy, "MENZO_HARD_SKIP_FILE", memory)
+    assert massy.menzo_skip_memory() == {}
+
+
+def test_policy_keeps_central_fact_negative_controls_explicit():
+    policy = active.POLICY_PATH.read_text().lower()
+    assert "title change" in policy and "title retention" in policy
+    assert "mentioned as background is not a death story" in policy
+    assert "weak social reactions" in policy
 
 
 def test_exact_duplicates_are_removed_before_gemini_relations(monkeypatch):
@@ -307,6 +349,8 @@ def test_effective_bob_capacity_is_an_active_validation_bound(monkeypatch):
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     monkeypatch.setattr("agents.bob.dynamic_article_capacity", lambda *_: (1, "test_capacity"))
     s = snapshot(2); out = response(s, ("SELECT", "SELECT")); calls = []
+    for row in out["candidates"]:
+        row["editorial_class"] = "SHOULD_PUBLISH"
     result = active.evaluate(s, provider=lambda *_: calls.append(1) or out)
     assert len(calls) == 2 and result["validation_errors"][0]["family"] == "downstream_capacity"
 
@@ -319,8 +363,9 @@ def test_actual_selected_set_not_pool_controls_post_show_capacity(monkeypatch):
                      "url": f"https://capacity.test/{i}", "summary": "distinct"})
     s = shadow.capture_opportunity({"news_candidates_for_menzo": rows}, run_id="run",
         observation_timestamp="now", publisher_count_24h=0, history=[])
+    s["authorized_relations"] = []
     out = {"candidates": [{"ref": f"c{i}", "editorial_class": "SHOULD_PUBLISH",
-        "recommended_action": "SKIP" if i < 3 else "SELECT", "category": "WWE", "story_core": str(i)}
+        "recommended_action": "DEFER" if i < 3 else "SELECT", "category": "WWE", "story_core": str(i)}
         for i in range(7)], "relations": [{"ref": f"r{i}", "decision": "NO_MATCH"}
         for i in range(len(s["authorized_relations"]))]}
     # Add two non-post-show selections while retaining fewer than three selected post-show items.
@@ -340,6 +385,7 @@ def test_hidden_capacity_metadata_preserves_six_hard_news_selects(monkeypatch, t
              "category_hint": "old-category"} for i in range(6)]
     s = shadow.capture_opportunity({"news_candidates_for_menzo": rows}, run_id="run",
         observation_timestamp="now", publisher_count_24h=0, history=[])
+    s["authorized_relations"] = []
     without_sidecar = __import__("copy").deepcopy(s)
     active.preserve_bob_capacity_metadata(s, rows)
     active.prepare_snapshot(s); active.prepare_snapshot(without_sidecar)
@@ -363,6 +409,13 @@ def test_hidden_capacity_metadata_preserves_six_hard_news_selects(monkeypatch, t
     assert len(projected["selected"]) == 6 and (capacity, reason) == (6, "post_show_event_heavy")
     assert all(item["article_type"] == "hard_news" and item["source_title"].startswith("Capacity source")
                and item["category_hint"] == "WWE" for item in projected["selected"])
+
+
+def test_bob_effective_capacity_expands_for_multiple_active_must(monkeypatch):
+    from agents import bob
+    monkeypatch.setattr(bob, "report_was_published_or_attempted", lambda: True)
+    selected = [{"editorial_director": {"editorial_class": "MUST_PUBLISH"}} for _ in range(6)]
+    assert bob.dynamic_article_capacity({"selected": selected}, selected) == (6, "report_run_must_expanded")
 
 
 def test_skip_class_action_contradiction_is_not_rewritten(monkeypatch):
