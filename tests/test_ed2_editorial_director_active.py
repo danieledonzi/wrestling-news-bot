@@ -275,7 +275,7 @@ def test_active_contract_uses_canonicalized_enum_values(monkeypatch):
             assert family in {row["family"] for row in failures}
 
 
-def test_capacity_hint_refreshes_from_post_gate_survivors(monkeypatch):
+def test_preclassification_capacity_hint_is_conservative(monkeypatch):
     from agents import bob
     monkeypatch.setattr(bob, "report_was_published_or_attempted", lambda: False)
     def make_snapshot(post_show_count, ordinary_count):
@@ -291,32 +291,21 @@ def test_capacity_hint_refreshes_from_post_gate_survivors(monkeypatch):
         active.prepare_snapshot(s)
         return s
 
-    reduced = make_snapshot(3, 3)
-    ids = [row["candidate_id"] for row in reduced["candidates"][:3]]
-    assert reduced["downstream_capacity"] == 6
-    active._apply_duplicate_gate(reduced, [
-        {"pair_id": "a", "scope": "same_run", "left_id": ids[0], "right_id": ids[1],
-         "decision": "DUPLICATE", "scorer": {}},
-        {"pair_id": "b", "scope": "same_run", "left_id": ids[1], "right_id": ids[2],
-         "decision": "DUPLICATE", "scorer": {}},
-    ])
-    assert (reduced["downstream_capacity"], reduced["downstream_capacity_reason"]) == (5, "normal")
-    provider_input = active.active_provider_input(reduced)
+    raw_post_show_pool = make_snapshot(3, 3)
+    assert (raw_post_show_pool["downstream_capacity"],
+            raw_post_show_pool["downstream_capacity_reason"]) == (5, "normal")
+    provider_input = active.active_provider_input(raw_post_show_pool)
     assert provider_input["publication_context"]["downstream_capacity_hint"] == 5
-    encoded = __import__("json").dumps(provider_input, ensure_ascii=False, sort_keys=True,
-        separators=(",", ":")).encode()
-    assert reduced["input_digest"] == __import__("hashlib").sha256(encoded).hexdigest()
-
-    expanded = make_snapshot(4, 2)
-    ids = [row["candidate_id"] for row in expanded["candidates"][:2]]
-    active._apply_duplicate_gate(expanded, [{"pair_id": "a", "scope": "same_run",
-        "left_id": ids[0], "right_id": ids[1], "decision": "DUPLICATE", "scorer": {}}])
-    assert (expanded["downstream_capacity"], expanded["downstream_capacity_reason"]) == (
-        6, "post_show_event_heavy")
 
     monkeypatch.setattr(bob, "report_was_published_or_attempted", lambda: True)
-    active._refresh_capacity_hint(expanded)
-    assert (expanded["downstream_capacity"], expanded["downstream_capacity_reason"]) == (4, "report_run")
+    report_run = make_snapshot(3, 3)
+    assert (report_run["downstream_capacity"], report_run["downstream_capacity_reason"]) == (4, "report_run")
+
+    monkeypatch.setattr(bob, "report_was_published_or_attempted", lambda: False)
+    limited = make_snapshot(3, 3)
+    limited["remaining_slots"] = 2
+    active._refresh_capacity_hint(limited)
+    assert limited["downstream_capacity"] == 2
 
 
 def test_vaquer_title_change_must_rejects_skip_and_defer():
@@ -682,9 +671,9 @@ def test_hidden_capacity_metadata_preserves_six_hard_news_selects(monkeypatch, t
     without_sidecar = __import__("copy").deepcopy(s)
     active.preserve_bob_capacity_metadata(s, rows)
     active.prepare_snapshot(s); active.prepare_snapshot(without_sidecar)
-    assert (s["downstream_capacity"], s["downstream_capacity_reason"]) == (6, "post_show_event_heavy")
+    assert (s["downstream_capacity"], s["downstream_capacity_reason"]) == (5, "normal")
     assert (without_sidecar["downstream_capacity"], without_sidecar["downstream_capacity_reason"]) == (5, "normal")
-    assert s["input_digest"] != without_sidecar["input_digest"]
+    assert s["input_digest"] == without_sidecar["input_digest"]
     provider = active.active_provider_input(s)
     serialized = __import__("json").dumps(provider)
     assert "_active_bob_capacity_metadata" not in provider

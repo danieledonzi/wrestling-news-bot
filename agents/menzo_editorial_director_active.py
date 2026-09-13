@@ -50,11 +50,11 @@ def _capacity_candidate(snapshot: Mapping[str, Any], candidate: Mapping[str, Any
 
 
 def _refresh_capacity_hint(snapshot: dict[str, Any]) -> None:
-    """Recompute Bob's ordinary hint from the current opportunity set and local sidecar."""
+    """Advertise only ordinary capacity guaranteed before classes/actions exist."""
     from agents.bob import dynamic_article_capacity
-    candidates = [_capacity_candidate(snapshot, row) for row in snapshot.get("candidates", [])]
-    capacity, reason = dynamic_article_capacity({"selected": candidates}, candidates)
-    snapshot["downstream_capacity"] = max(0, capacity)
+    base_capacity, reason = dynamic_article_capacity({"selected": []}, [])
+    remaining_slots = max(0, int(snapshot.get("remaining_slots", 0)))
+    snapshot["downstream_capacity"] = min(remaining_slots, max(0, base_capacity))
     snapshot["downstream_capacity_reason"] = reason
 
 
