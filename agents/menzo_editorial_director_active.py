@@ -31,6 +31,8 @@ DUPLICATE_RELATION_FIELDS = {"ref", "decision", "shared_fact", "new_fact", "temp
                              *DUPLICATE_EVIDENCE_FIELDS, *DUPLICATE_CENTRALITY_FIELDS}
 GROUNDING_SOURCE_FIELDS = ("title", "source_title", "title_it", "summary", "retained_body")
 MAX_DUPLICATE_SEMANTIC_FIELD_LENGTH = 500
+MIN_DUPLICATE_EVIDENCE_TOKENS = 2
+MIN_DUPLICATE_EVIDENCE_ALNUM_CHARS = 8
 
 
 def enabled(environ: Mapping[str, str] | None = None) -> bool:
@@ -247,10 +249,26 @@ def _grounded_evidence(value: Any, endpoint: Mapping[str, Any]) -> tuple[bool, s
     evidence = _normalize_grounding_text(value)
     if not evidence:
         return False, "missing_or_empty"
+    tokens = re.findall(r"[^\W_]+", evidence, flags=re.UNICODE)
+    if (len(tokens) < MIN_DUPLICATE_EVIDENCE_TOKENS or
+            sum(len(token) for token in tokens) < MIN_DUPLICATE_EVIDENCE_ALNUM_CHARS):
+        return False, "insufficient_meaningful_span"
+    first_alnum = next(index for index, character in enumerate(evidence) if character.isalnum())
+    last_alnum = max(index for index, character in enumerate(evidence) if character.isalnum())
+    contained_without_boundary = False
     for field in GROUNDING_SOURCE_FIELDS:
         source = endpoint.get(field)
-        if isinstance(source, str) and evidence in _normalize_grounding_text(source):
-            return True, field
+        if not isinstance(source, str):
+            continue
+        normalized_source = _normalize_grounding_text(source)
+        for match in re.finditer(re.escape(evidence), normalized_source):
+            contained_without_boundary = True
+            start, end = match.start() + first_alnum, match.start() + last_alnum + 1
+            if ((start == 0 or not normalized_source[start - 1].isalnum()) and
+                    (end == len(normalized_source) or not normalized_source[end].isalnum())):
+                return True, field
+    if contained_without_boundary:
+        return False, "not_token_boundary_aligned"
     return False, "not_contained_in_exact_endpoint"
 
 

@@ -90,8 +90,8 @@ development** of each exact endpoint. If a common fact is central to only one en
 context in the other, do not return `DUPLICATE`. For recent history, return `MATERIAL_UPDATE` only when its contract
 below is genuinely satisfied; otherwise return `NO_MATCH`.
 
-For every `DUPLICATE`, provide a concise `shared_fact`, quote one short exact supporting `left_evidence` span and one
-short exact supporting `right_evidence` span from their respective supplied endpoint title, summary, or retained body,
+For every `DUPLICATE`, provide a concise `shared_fact`, quote one short meaningful multi-token exact supporting
+`left_evidence` span and one short meaningful multi-token exact supporting `right_evidence` span from their respective supplied endpoint title, summary, or retained body,
 identify `left_central_development` and `right_central_development` independently, and provide a concise
 `centrality_basis` explaining why the shared fact is central to both rather than background in either. Evidence from a
 different candidate, history item, endpoint, or relation is invalid. Never copy or reuse evidence, central-development

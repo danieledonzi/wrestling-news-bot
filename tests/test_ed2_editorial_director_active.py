@@ -346,6 +346,14 @@ def test_grounding_normalization_is_formatting_only():
     assert active._grounded_evidence("confirmed return by a synonym", endpoint)[0] is False
 
 
+def test_grounding_rejects_trivial_and_partial_token_spans():
+    endpoint = {"title": "Alpha title announcement confirms a major return"}
+    assert active._grounded_evidence("a", endpoint) == (False, "insufficient_meaningful_span")
+    assert active._grounded_evidence("title", endpoint) == (False, "insufficient_meaningful_span")
+    assert active._grounded_evidence("pha title", endpoint) == (False, "not_token_boundary_aligned")
+    assert active._grounded_evidence("Alpha title", endpoint) == (True, "title")
+
+
 def test_duplicate_gate_provider_failure_has_terminal_lifecycle_and_no_classification(monkeypatch):
     from agents import canonical_event_ledger
     events, ledger = [], []
