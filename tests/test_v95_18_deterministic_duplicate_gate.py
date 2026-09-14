@@ -49,11 +49,15 @@ def test_world_is_not_singleton_identity_but_maya_world_compound_survives():
     assert scorer.explicit_named_subjects("Maya World") == {"maya world"}
     assert scorer.explicit_named_subjects("Mercedes Moné") == {"mercedes moné"}
     assert scorer.explicit_named_subjects("Kevin O'Reilly") == {"kevin o'reilly"}
+    assert scorer.explicit_named_subjects("Kevin O’Reilly") == {"kevin o'reilly"}
+    assert scorer.explicit_named_subjects("Kevin O'Reilly") == scorer.explicit_named_subjects("Kevin O’Reilly")
     assert scorer.explicit_named_subjects("Big E") == {"big e"}
     assert scorer.explicit_named_subjects("Punk") == set()
     assert scorer.explicit_named_subjects("R-Truth") == set()
     for generic in ("Women's World", "Women’s World", "Tag Team", "World Heavyweight", "United States"):
         assert scorer.explicit_named_subjects(generic) == set()
+    for event_context in ("Night One", "Night Two", "Day One", "Part One"):
+        assert scorer.explicit_named_subjects(event_context) == set()
     assert "wrestlemania main" not in scorer.explicit_named_subjects("WrestleMania Main Event")
     assert "summerslam main" not in scorer.explicit_named_subjects("SummerSlam Main Event")
     maya = article("https://www.wrestlinginc.com/2254395/aew-maya-world-dave-meltzer-not-rating-match-mercedes-mone/",

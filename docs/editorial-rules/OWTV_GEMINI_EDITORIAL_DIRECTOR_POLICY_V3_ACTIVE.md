@@ -107,6 +107,7 @@ capitalized singleton. If no such shared anchor is available, validation may req
 Menzo; this intentional recall tradeoff is safer than terminal false elimination.
 Compounds made entirely of generic championship, division, or category descriptor tokens are not named-subject
 anchors; one generic component may remain valid when paired with a non-generic name component.
+The same fully-generic exclusion applies to event-segmentation compounds such as numbered nights, days, or parts.
 
 `MATERIAL_UPDATE` is valid only for recent authoritative history and requires a concrete model-supplied `new_fact` plus
 a model-supplied `temporal_basis` showing the fact occurred, became known, or was officially confirmed after

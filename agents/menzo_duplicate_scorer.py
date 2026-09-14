@@ -47,6 +47,9 @@ _BINDING_GENERIC_DESCRIPTOR_TOKENS = _GENERIC_SINGLE_SUBJECT | {
     "united", "states", "heavyweight", "cruiserweight", "intercontinental", "continental",
     "universal", "undisputed", "global", "international", "national", "television",
 }
+_BINDING_EVENT_DESCRIPTOR_TOKENS = {
+    "night", "day", "one", "two", "three", "part", "week", "weekend", "session", "finale", "opener",
+}
 
 def effective_threshold(environ: Dict[str, str] | None = None) -> float:
     env = os.environ if environ is None else environ
@@ -128,9 +131,10 @@ def explicit_named_subjects(text: str) -> Set[str]:
                 and left.lower() not in _BINDING_SHOW_TOKENS
                 and right.lower() not in _BINDING_SHOW_TOKENS
                 and not ({left_key, right_key} <= _BINDING_GENERIC_DESCRIPTOR_TOKENS)
+                and not ({left_key, right_key} <= _BINDING_EVENT_DESCRIPTOR_TOKENS)
                 and (len(right) >= 3 or short_upper_identity)
                 and left[0].isupper() and right[0].isupper()):
-            names.add(pair.lower())
+            names.add(f"{left_key} {right_key}")
     return names
 
 

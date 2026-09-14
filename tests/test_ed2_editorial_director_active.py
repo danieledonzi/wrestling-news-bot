@@ -387,6 +387,11 @@ def test_generic_common_evidence_has_no_binding_subject_anchor():
          "WrestleMania Main Event Announces Roman Reigns Match", "WrestleMania Main"),
         ("SummerSlam Main Event Adds Seth Rollins Match",
          "SummerSlam Main Event Announces Roman Reigns Match", "SummerSlam Main"),
+        ("WrestleMania Night One Adds Seth Rollins Match",
+         "WrestleMania Night One Announces Roman Reigns Match", "Night One"),
+        ("Night Two Update On CM Punk", "Night Two Update On Rhea Ripley", "Night Two"),
+        ("Day One Update On CM Punk", "Day One Update On Rhea Ripley", "Day One"),
+        ("Part One Update On CM Punk", "Part One Update On Rhea Ripley", "Part One"),
     ]
     for left, right, phrase in fixtures:
         s = _anchor_contract_snapshot(left, right)
@@ -409,6 +414,15 @@ def test_generic_championship_compound_cannot_bind_full_title_evidence():
     assert any(row["family"] == "duplicate_relation_anchor_grounding" and
                row["detail"] == "no_shared_explicit_subject" for row in failures)
     assert not s.get("semantic_duplicate_skips")
+
+
+def test_canonical_apostrophe_anchor_validates_across_endpoint_forms():
+    left = "Kevin O'Reilly signs a new WWE contract"
+    right = "Kevin O’Reilly signs a new WWE contract"
+    s = _anchor_contract_snapshot(left, right)
+    canonical, failures, _ = _validate_anchor_relation(s, left_evidence=left,
+        right_evidence=right, shared_fact="Kevin O'Reilly signs a new contract")
+    assert canonical is not None and not failures
 
 
 def test_retained_body_capitalization_cannot_supply_binding_anchor():
