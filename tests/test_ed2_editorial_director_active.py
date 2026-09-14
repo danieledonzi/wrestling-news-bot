@@ -397,6 +397,20 @@ def test_generic_common_evidence_has_no_binding_subject_anchor():
                    row["detail"] == "no_shared_explicit_subject" for row in failures)
 
 
+def test_generic_championship_compound_cannot_bind_full_title_evidence():
+    left = "Women's World Championship: Rhea Ripley wins title"
+    right = "Women's World Championship: Iyo Sky wins title"
+    s = _anchor_contract_snapshot(left, right)
+    canonical, failures, _ = _validate_anchor_relation(s, left_evidence=left,
+        right_evidence=right, shared_fact="Women's World Championship title win",
+        left_central="Women's World Championship Rhea Ripley title win",
+        right_central="Women's World Championship Iyo Sky title win")
+    assert canonical is None
+    assert any(row["family"] == "duplicate_relation_anchor_grounding" and
+               row["detail"] == "no_shared_explicit_subject" for row in failures)
+    assert not s.get("semantic_duplicate_skips")
+
+
 def test_retained_body_capitalization_cannot_supply_binding_anchor():
     s = _anchor_contract_snapshot("CM Punk Signs New WWE Contract", "Rhea Ripley Suffers New Injury")
     for candidate, body in zip(s["candidates"], (

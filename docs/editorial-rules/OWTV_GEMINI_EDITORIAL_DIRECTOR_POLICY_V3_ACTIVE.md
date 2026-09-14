@@ -105,6 +105,8 @@ not ground a binding duplicate. Binding subject anchors are conservatively deriv
 in the supplied headline identity fields (`title`, `source_title`, or `title_it`), never from summary/body prose or a
 capitalized singleton. If no such shared anchor is available, validation may require repair or fail open to legacy
 Menzo; this intentional recall tradeoff is safer than terminal false elimination.
+Compounds made entirely of generic championship, division, or category descriptor tokens are not named-subject
+anchors; one generic component may remain valid when paired with a non-generic name component.
 
 `MATERIAL_UPDATE` is valid only for recent authoritative history and requires a concrete model-supplied `new_fact` plus
 a model-supplied `temporal_basis` showing the fact occurred, became known, or was officially confirmed after

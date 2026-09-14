@@ -42,6 +42,11 @@ _BINDING_SHOW_TOKENS = {token for show in _SHOWS for token in re.findall(r"[a-z0
 _SUBJECT_BOUNDARY_TERMS = set().union(*_ACTIONS.values()) | _ENTERTAINMENT_CASTING_VERBS
 _NON_SUBJECT_TERMS = _SUBJECT_BOUNDARY_TERMS | _ENTERTAINMENT_CASTING_NOUNS | _PROMOTIONS | _STOP | _GENERIC_ENTITY
 _GENERIC_SINGLE_SUBJECT = {"world"}
+_BINDING_GENERIC_DESCRIPTOR_TOKENS = _GENERIC_SINGLE_SUBJECT | {
+    "woman", "women", "women's", "womens", "man", "men", "men's", "mens", "tag", "team",
+    "united", "states", "heavyweight", "cruiserweight", "intercontinental", "continental",
+    "universal", "undisputed", "global", "international", "national", "television",
+}
 
 def effective_threshold(environ: Dict[str, str] | None = None) -> float:
     env = os.environ if environ is None else environ
@@ -117,9 +122,13 @@ def explicit_named_subjects(text: str) -> Set[str]:
     names = set()
     for pair in pairs:
         left, right = pair.split(maxsplit=1)
+        left_key, right_key = (value.casefold().replace("’", "'") for value in (left, right))
+        short_upper_identity = 1 <= len(right) <= 2 and right.isalpha() and right.isupper()
         if (left.lower() not in _NON_SUBJECT_TERMS and right.lower() not in _NON_SUBJECT_TERMS
                 and left.lower() not in _BINDING_SHOW_TOKENS
-                and right.lower() not in _BINDING_SHOW_TOKENS and len(right) >= 3
+                and right.lower() not in _BINDING_SHOW_TOKENS
+                and not ({left_key, right_key} <= _BINDING_GENERIC_DESCRIPTOR_TOKENS)
+                and (len(right) >= 3 or short_upper_identity)
                 and left[0].isupper() and right[0].isupper()):
             names.add(pair.lower())
     return names
