@@ -97,6 +97,11 @@ identify `left_central_development` and `right_central_development` independentl
 different candidate, history item, endpoint, or relation is invalid. Never copy or reuse evidence, central-development
 statements, or centrality reasoning from another relation row.
 
+The two evidence spans must contain the same explicit named subject, and that shared subject must also appear in
+`shared_fact`, `left_central_development`, and `right_central_development`. Each central-development statement and the
+shared fact must be lexically linked to its endpoint evidence; generic common phrases without that shared subject do
+not ground a binding duplicate.
+
 `MATERIAL_UPDATE` is valid only for recent authoritative history and requires a concrete model-supplied `new_fact` plus
 a model-supplied `temporal_basis` showing the fact occurred, became known, or was officially confirmed after
 publication. Rewording is not a new fact. Local code must never invent relation semantics.

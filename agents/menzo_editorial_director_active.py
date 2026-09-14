@@ -276,6 +276,79 @@ def _bounded_text(value: Any) -> bool:
     return isinstance(value, str) and bool(value.strip()) and len(value) <= MAX_DUPLICATE_SEMANTIC_FIELD_LENGTH
 
 
+def _lexical_tokens(value: str) -> list[str]:
+    return re.findall(r"[^\W_]+", _normalize_grounding_text(value), flags=re.UNICODE)
+
+
+def _contains_aligned_anchor(value: Any, anchor: str) -> bool:
+    if not isinstance(value, str):
+        return False
+    tokens = _lexical_tokens(value)
+    anchor_tokens = _lexical_tokens(anchor)
+    width = len(anchor_tokens)
+    return bool(width and any(tokens[index:index + width] == anchor_tokens
+                              for index in range(len(tokens) - width + 1)))
+
+
+def _explicit_endpoint_subjects(endpoint: Mapping[str, Any]) -> set[str]:
+    return set().union(*(shadow.menzo_duplicate_scorer.explicit_named_subjects(value)
+                         for field in GROUNDING_SOURCE_FIELDS
+                         if isinstance((value := endpoint.get(field)), str)))
+
+
+def _validate_duplicate_anchor_contract(ref: Any, duplicate_values: Mapping[str, Any],
+                                        shared_fact: Any, endpoints: Mapping[str, Mapping[str, Any]],
+                                        failures: list[dict[str, Any]]) -> None:
+    """Bind grounded claims to one shared explicit subject without judging semantics."""
+    shared_anchors = (_explicit_endpoint_subjects(endpoints.get("left", {})) &
+                      _explicit_endpoint_subjects(endpoints.get("right", {})))
+    if not shared_anchors:
+        failures.append({"family": "duplicate_relation_anchor_grounding", "ref": ref,
+                         "detail": "no_shared_explicit_subject"})
+        return
+    ordered = sorted(shared_anchors, key=lambda anchor: (-len(_lexical_tokens(anchor)), -len(anchor), anchor))
+    left_evidence, right_evidence = duplicate_values["left_evidence"], duplicate_values["right_evidence"]
+    left_anchors = {anchor for anchor in ordered if _contains_aligned_anchor(left_evidence, anchor)}
+    right_anchors = {anchor for anchor in ordered if _contains_aligned_anchor(right_evidence, anchor)}
+    evidence_anchors = left_anchors & right_anchors
+    if not evidence_anchors:
+        if not left_anchors or right_anchors:
+            failures.append({"family": "duplicate_left_evidence_grounding", "ref": ref,
+                             "detail": "missing_shared_subject_anchor"})
+        if not right_anchors or left_anchors:
+            failures.append({"family": "duplicate_right_evidence_grounding", "ref": ref,
+                             "detail": "missing_shared_subject_anchor"})
+        return
+    claims = {"shared_fact": shared_fact,
+              "left_central_development": duplicate_values["left_central_development"],
+              "right_central_development": duplicate_values["right_central_development"]}
+    fully_linked = [anchor for anchor in ordered if anchor in evidence_anchors and
+                    all(_contains_aligned_anchor(value, anchor) for value in claims.values())]
+    selected = fully_linked[0] if fully_linked else next(anchor for anchor in ordered if anchor in evidence_anchors)
+    if not _contains_aligned_anchor(shared_fact, selected):
+        failures.append({"family": "duplicate_claim_anchor_grounding", "ref": ref,
+                         "detail": "missing_shared_subject_anchor"})
+    for side in ("left", "right"):
+        central = duplicate_values[f"{side}_central_development"]
+        evidence = duplicate_values[f"{side}_evidence"]
+        details = []
+        if not _contains_aligned_anchor(central, selected):
+            details.append("missing_shared_subject_anchor")
+        if isinstance(central, str) and isinstance(evidence, str):
+            if len(set(_lexical_tokens(central)) & set(_lexical_tokens(evidence))) < 2:
+                details.append("insufficient_evidence_lexical_linkage")
+        if details:
+            failures.append({"family": "duplicate_centrality_contract", "ref": ref,
+                             "field": f"{side}_central_development", "details": details})
+    if isinstance(shared_fact, str):
+        for side in ("left", "right"):
+            evidence = duplicate_values[f"{side}_evidence"]
+            if isinstance(evidence, str) and len(
+                    set(_lexical_tokens(shared_fact)) & set(_lexical_tokens(evidence))) < 2:
+                failures.append({"family": "duplicate_claim_anchor_grounding", "ref": ref,
+                                 "detail": f"insufficient_{side}_evidence_lexical_linkage"})
+
+
 def _validate_duplicate_gate(value: Any, snapshot: Mapping[str, Any]):
     """Active-local E04V: validate complete relation semantics and exact endpoint evidence."""
     failures: list[dict[str, Any]] = []
@@ -326,6 +399,8 @@ def _validate_duplicate_gate(value: Any, snapshot: Mapping[str, Any]):
             if invalid_centrality:
                 failures.append({"family": "duplicate_centrality_contract", "ref": ref,
                                  "fields": invalid_centrality})
+            if _bounded_text(shared) and not invalid_centrality:
+                _validate_duplicate_anchor_contract(ref, duplicate_values, shared, endpoints, failures)
         if decision == "MATERIAL_UPDATE":
             if supplied.get("scope") != "recent_history":
                 failures.append({"family": "material_update_scope", "ref": ref})

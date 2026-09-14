@@ -42,6 +42,8 @@ def test_world_is_not_singleton_identity_but_maya_world_compound_survives():
     assert "world" not in scorer._named_subjects("World Championship")
     assert "maya world" in scorer._named_subjects("Maya World")
     assert "punk" in scorer._named_subjects("Punk")
+    assert scorer.explicit_named_subjects("lowercase normalized subject") == set()
+    assert scorer._named_subjects("lowercase normalized subject")
     maya = article("https://www.wrestlinginc.com/2254395/aew-maya-world-dave-meltzer-not-rating-match-mercedes-mone/",
         "AEW's Maya World Addresses Dave Meltzer Not Rating Her PPV Match With Mercedes Mone",
         "Former AEW TBS Champion Maya World addressed Dave Meltzer not rating her AEW x NJPW Forbidden Door bout against Mercedes Mone.")

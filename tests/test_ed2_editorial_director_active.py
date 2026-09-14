@@ -119,6 +119,7 @@ def test_provider_failure_and_oversize_are_whole_result_failures(monkeypatch):
 def test_same_run_duplicate_is_removed_before_editorial_classification(monkeypatch):
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     s = snapshot(2)
+    s["candidates"][1]["title"] = "Jasper Troy release reported by WWE"
     left, right = [x["candidate_id"] for x in s["candidates"]]
     s["authorized_relations"] = [{"pair_id": "p", "scope": "same_run", "left_id": left,
         "right_id": right, "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
@@ -128,7 +129,7 @@ def test_same_run_duplicate_is_removed_before_editorial_classification(monkeypat
         if "DUPLICATE GATE PHASE ONLY" in prompt:
             return {"relations": [grounded_duplicate("r0", s["candidates"][0]["title"],
                                                        s["candidates"][1]["title"],
-                                                       "same confirmed release")]}
+                                                       "Jasper Troy confirmed release")]}
         return response(s, ("SELECT",))
     result = active.evaluate(s, provider=provider)
     assert result["status"] == "VALIDATED" and len(calls) == 2
@@ -281,8 +282,8 @@ def test_duplicate_evidence_cannot_cross_relation_endpoints():
          "right_id": history_ids[0], "scorer_version": "v", "score": .7, "threshold": .55, "components": {}},
         {"pair_id": "p1", "scope": "recent_history", "left_id": candidate_ids[1],
          "right_id": history_ids[1], "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
-    rows = [grounded_duplicate("r0", "Alpha signs", "Alpha signs"),
-            grounded_duplicate("r1", "Alpha signs", "Beta returns")]
+    rows = [grounded_duplicate("r0", "Alpha signs", "Alpha signs", "Alpha signs contract"),
+            grounded_duplicate("r1", "Alpha signs", "Beta returns", "Beta returns arena")]
     canonical, failures, _ = active._validate_duplicate_gate({"relations": rows}, s)
     assert canonical is None
     assert {row["family"] for row in failures} == {"duplicate_left_evidence_grounding"}
@@ -354,6 +355,73 @@ def test_grounding_rejects_trivial_and_partial_token_spans():
     assert active._grounded_evidence("Alpha title", endpoint) == (True, "title")
 
 
+def _anchor_contract_snapshot(left_title, right_title):
+    s = shadow.capture_opportunity({"news_candidates_for_menzo": [
+        {"title": left_title, "summary": left_title, "url": "https://anchor.test/left"},
+        {"title": right_title, "summary": right_title, "url": "https://anchor.test/right"}]},
+        run_id="anchor", observation_timestamp="now", publisher_count_24h=0, history=[])
+    left_id, right_id = [row["candidate_id"] for row in s["candidates"]]
+    s["authorized_relations"] = [{"pair_id": "anchor-pair", "scope": "same_run",
+        "left_id": left_id, "right_id": right_id, "scorer_version": "test", "score": .9,
+        "threshold": .55, "components": {}}]
+    return s
+
+
+def _validate_anchor_relation(s, *, left_evidence, right_evidence, shared_fact,
+                              left_central=None, right_central=None):
+    relation = grounded_duplicate("r0", left_evidence, right_evidence, shared_fact)
+    relation["left_central_development"] = left_central or shared_fact
+    relation["right_central_development"] = right_central or shared_fact
+    return active._validate_duplicate_gate({"relations": [relation]}, s)
+
+
+def test_generic_common_evidence_has_no_binding_subject_anchor():
+    for phrase in ("world title", "more details"):
+        s = _anchor_contract_snapshot(f"Alice Alpha discusses {phrase}", f"Bob Beta reports {phrase}")
+        canonical, failures, _ = _validate_anchor_relation(s, left_evidence=phrase,
+            right_evidence=phrase, shared_fact=f"Unrelated claim about {phrase}")
+        assert canonical is None
+        assert any(row["family"] == "duplicate_relation_anchor_grounding" and
+                   row["detail"] == "no_shared_explicit_subject" for row in failures)
+
+
+def test_shared_subject_elsewhere_does_not_rescue_generic_evidence():
+    s = _anchor_contract_snapshot(
+        "Stephanie Vaquer wins the world title", "Stephanie Vaquer captures the world title")
+    canonical, failures, _ = _validate_anchor_relation(s, left_evidence="world title",
+        right_evidence="world title", shared_fact="Stephanie Vaquer wins the title")
+    assert canonical is None
+    grounding = {(row["family"], row.get("detail")) for row in failures}
+    assert ("duplicate_left_evidence_grounding", "missing_shared_subject_anchor") in grounding
+    assert ("duplicate_right_evidence_grounding", "missing_shared_subject_anchor") in grounding
+
+
+def test_shared_fact_and_central_developments_link_to_evidence_anchor():
+    s = _anchor_contract_snapshot(
+        "Stephanie Vaquer won the championship", "Stephanie Vaquer captured the championship")
+    valid, failures, _ = _validate_anchor_relation(s,
+        left_evidence="Stephanie Vaquer won the championship",
+        right_evidence="Stephanie Vaquer captured the championship",
+        shared_fact="Stephanie Vaquer won the championship")
+    assert valid is not None and not failures
+
+    invalid_claim, failures, _ = _validate_anchor_relation(s,
+        left_evidence="Stephanie Vaquer won the championship",
+        right_evidence="Stephanie Vaquer captured the championship",
+        shared_fact="An unrelated championship claim")
+    assert invalid_claim is None
+    assert any(row["family"] == "duplicate_claim_anchor_grounding" and
+               row["detail"] == "missing_shared_subject_anchor" for row in failures)
+
+    punk = _anchor_contract_snapshot("Punk won the championship", "Punk captured the championship")
+    invalid_central, failures, _ = _validate_anchor_relation(punk,
+        left_evidence="Punk won the championship", right_evidence="Punk captured the championship",
+        shared_fact="Punk won the championship", right_central="Punk controversy")
+    assert invalid_central is None
+    assert any(row["family"] == "duplicate_centrality_contract" and
+               "insufficient_evidence_lexical_linkage" in row.get("details", []) for row in failures)
+
+
 def test_duplicate_gate_provider_failure_has_terminal_lifecycle_and_no_classification(monkeypatch):
     from agents import canonical_event_ledger
     events, ledger = [], []
@@ -379,13 +447,13 @@ def test_gate_eliminates_all_without_creating_classification_request(monkeypatch
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **kwargs: ledger.append(kwargs))
     s = snapshot(1); candidate_id = s["candidates"][0]["candidate_id"]
     history = {"article_id": "published", "source_url": "https://history.test/old",
-               "title": "Earlier title change", "input_coverage": "RSS_SUMMARY_ONLY"}
+               "title": "Jasper Troy release confirmed earlier", "input_coverage": "RSS_SUMMARY_ONLY"}
     s["publisher_history_12h"] = [history]
     s["authorized_relations"] = [{"pair_id": "p", "scope": "recent_history",
         "left_id": candidate_id, "right_id": "published", "scorer_version": "v", "score": .7,
         "threshold": .55, "components": {}}]
     result = active.evaluate(s, provider=lambda *_: {"relations": [grounded_duplicate(
-        "r0", s["candidates"][0]["title"], history["title"], "same title change")]})
+        "r0", s["candidates"][0]["title"], history["title"], "Jasper Troy release confirmed")]})
     assert result["status"] == "VALIDATED" and len(ledger) == 1
     assert result["duplicate_gate_input_digest"]
     assert "logical_request_id" not in result
@@ -1021,6 +1089,7 @@ def test_active_artifact_preserves_gate_and_classification_provenance(monkeypatc
     from agents.canonical_artifact_index import CanonicalArtifactIndex
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     s = snapshot(2); left, right = [row["candidate_id"] for row in s["candidates"]]
+    s["candidates"][1]["title"] = "Jasper Troy release reported by WWE"
     s["authorized_relations"] = [{"pair_id": "p", "scope": "same_run", "left_id": left,
         "right_id": right, "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
     active.prepare_snapshot(s)
@@ -1028,7 +1097,8 @@ def test_active_artifact_preserves_gate_and_classification_provenance(monkeypatc
     def provider(prompt, *_):
         if "DUPLICATE GATE PHASE ONLY" in prompt:
             return {"relations": [grounded_duplicate("r0", s["candidates"][0]["title"],
-                                                       s["candidates"][1]["title"], "same release")]}
+                                                       s["candidates"][1]["title"],
+                                                       "Jasper Troy confirmed release")]}
         return response(s, ("SELECT",))
     result = active.evaluate(s, provider=provider)
     assert result["status"] == "VALIDATED"
