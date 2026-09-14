@@ -100,7 +100,10 @@ statements, or centrality reasoning from another relation row.
 The two evidence spans must contain the same explicit named subject, and that shared subject must also appear in
 `shared_fact`, `left_central_development`, and `right_central_development`. Each central-development statement and the
 shared fact must be lexically linked to its endpoint evidence; generic common phrases without that shared subject do
-not ground a binding duplicate.
+not ground a binding duplicate. Binding subject anchors are conservatively derived only from explicit compound names
+in the supplied headline identity fields (`title`, `source_title`, or `title_it`), never from summary/body prose or a
+capitalized singleton. If no such shared anchor is available, validation may require repair or fail open to legacy
+Menzo; this intentional recall tradeoff is safer than terminal false elimination.
 
 `MATERIAL_UPDATE` is valid only for recent authoritative history and requires a concrete model-supplied `new_fact` plus
 a model-supplied `temporal_basis` showing the fact occurred, became known, or was officially confirmed after

@@ -268,11 +268,11 @@ def test_case_a_repeated_ungrounded_duplicate_fails_atomically_without_artifact(
 
 def test_duplicate_evidence_cannot_cross_relation_endpoints():
     board = {"news_candidates_for_menzo": [
-        {"title": "Alpha signs a new contract", "url": "https://cross.test/a", "summary": "Alpha signs"},
-        {"title": "Beta returns at the arena", "url": "https://cross.test/b", "summary": "Beta returns"}]}
+        {"title": "Alpha Wrestler signs a new contract", "url": "https://cross.test/a", "summary": "Alpha Wrestler signs"},
+        {"title": "Beta Wrestler returns at the arena", "url": "https://cross.test/b", "summary": "Beta Wrestler returns"}]}
     history = [
-        {"source_title": "Alpha signs a new contract", "source_url": "https://cross.test/ha"},
-        {"source_title": "Beta returns at the arena", "source_url": "https://cross.test/hb"}]
+        {"source_title": "Alpha Wrestler signs a new contract", "source_url": "https://cross.test/ha"},
+        {"source_title": "Beta Wrestler returns at the arena", "source_url": "https://cross.test/hb"}]
     s = shadow.capture_opportunity(board, run_id="cross", observation_timestamp="now",
         publisher_count_24h=0, history=history)
     candidate_ids = [row["candidate_id"] for row in s["candidates"]]
@@ -282,8 +282,10 @@ def test_duplicate_evidence_cannot_cross_relation_endpoints():
          "right_id": history_ids[0], "scorer_version": "v", "score": .7, "threshold": .55, "components": {}},
         {"pair_id": "p1", "scope": "recent_history", "left_id": candidate_ids[1],
          "right_id": history_ids[1], "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
-    rows = [grounded_duplicate("r0", "Alpha signs", "Alpha signs", "Alpha signs contract"),
-            grounded_duplicate("r1", "Alpha signs", "Beta returns", "Beta returns arena")]
+    rows = [grounded_duplicate("r0", "Alpha Wrestler signs", "Alpha Wrestler signs",
+                               "Alpha Wrestler signs contract"),
+            grounded_duplicate("r1", "Alpha Wrestler signs", "Beta Wrestler returns",
+                               "Beta Wrestler returns arena")]
     canonical, failures, _ = active._validate_duplicate_gate({"relations": rows}, s)
     assert canonical is None
     assert {row["family"] for row in failures} == {"duplicate_left_evidence_grounding"}
@@ -376,13 +378,33 @@ def _validate_anchor_relation(s, *, left_evidence, right_evidence, shared_fact,
 
 
 def test_generic_common_evidence_has_no_binding_subject_anchor():
-    for phrase in ("world title", "more details"):
-        s = _anchor_contract_snapshot(f"Alice Alpha discusses {phrase}", f"Bob Beta reports {phrase}")
+    fixtures = [
+        ("More Details On CM Punk Contract Talks", "More Details On Rhea Ripley Injury Status", "More Details"),
+        ("Live Event Update On CM Punk", "Live Event Update On Rhea Ripley", "Live Event"),
+    ]
+    for left, right, phrase in fixtures:
+        s = _anchor_contract_snapshot(left, right)
         canonical, failures, _ = _validate_anchor_relation(s, left_evidence=phrase,
-            right_evidence=phrase, shared_fact=f"Unrelated claim about {phrase}")
+            right_evidence=phrase, shared_fact=f"{phrase} reported")
         assert canonical is None
         assert any(row["family"] == "duplicate_relation_anchor_grounding" and
                    row["detail"] == "no_shared_explicit_subject" for row in failures)
+
+
+def test_retained_body_capitalization_cannot_supply_binding_anchor():
+    s = _anchor_contract_snapshot("CM Punk Signs New WWE Contract", "Rhea Ripley Suffers New Injury")
+    for candidate, body in zip(s["candidates"], (
+            "According to sources, the agreement was finalized yesterday.",
+            "According to sources, medical tests were performed yesterday.")):
+        candidate["retained_body"] = body
+    canonical, failures, _ = _validate_anchor_relation(s,
+        left_evidence="According to sources", right_evidence="According to sources",
+        shared_fact="According to sources reported")
+    assert canonical is None
+    assert any(row["family"] == "duplicate_relation_anchor_grounding" and
+               row["detail"] == "no_shared_explicit_subject" for row in failures)
+    assert "according to" not in active._explicit_endpoint_subjects(
+        {"title": "CM Punk Signs New WWE Contract", "retained_body": "According to sources"})
 
 
 def test_shared_subject_elsewhere_does_not_rescue_generic_evidence():
@@ -413,13 +435,13 @@ def test_shared_fact_and_central_developments_link_to_evidence_anchor():
     assert any(row["family"] == "duplicate_claim_anchor_grounding" and
                row["detail"] == "missing_shared_subject_anchor" for row in failures)
 
-    punk = _anchor_contract_snapshot("Punk won the championship", "Punk captured the championship")
+    punk = _anchor_contract_snapshot("CM Punk won the championship", "CM Punk captured the championship")
     invalid_central, failures, _ = _validate_anchor_relation(punk,
-        left_evidence="Punk won the championship", right_evidence="Punk captured the championship",
-        shared_fact="Punk won the championship", right_central="Punk controversy")
+        left_evidence="CM Punk won the championship", right_evidence="CM Punk captured the championship",
+        shared_fact="CM Punk won the championship", right_central="Unrelated controversy")
     assert invalid_central is None
     assert any(row["family"] == "duplicate_centrality_contract" and
-               "insufficient_evidence_lexical_linkage" in row.get("details", []) for row in failures)
+               "missing_shared_subject_anchor" in row.get("details", []) for row in failures)
 
 
 def test_duplicate_gate_provider_failure_has_terminal_lifecycle_and_no_classification(monkeypatch):

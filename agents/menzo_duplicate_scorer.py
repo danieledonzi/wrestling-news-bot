@@ -90,8 +90,8 @@ def _categories(text: str) -> Set[str]:
         categories.add("entertainment_casting")
     return categories
 
-def explicit_named_subjects(text: str) -> Set[str]:
-    """Return only explicit capitalized subject signals, without token fallback."""
+def _capitalized_subject_signals(text: str) -> Set[str]:
+    """Return the established capitalized signals used by suspicion scoring."""
     capitals = re.findall(r"\b[A-Z][A-Za-z]+\b", text)
     names = {f"{capitals[i]} {capitals[i+1]}".lower() for i in range(len(capitals)-1)
              if capitals[i].lower() not in _NON_SUBJECT_TERMS
@@ -103,10 +103,27 @@ def explicit_named_subjects(text: str) -> Set[str]:
     return names
 
 
+def explicit_named_subjects(text: str) -> Set[str]:
+    """Return conservative compound headline subjects for binding validation.
+
+    Singleton capitalization is intentionally insufficient here. This binding
+    primitive favors repair/fallback over treating headline prose as identity.
+    """
+    token = r"[A-Z][A-Za-z]+"
+    pairs = re.findall(rf"(?=(\b{token}\b\s+\b{token}\b))", text)
+    names = set()
+    for pair in pairs:
+        left, right = pair.split()
+        if (left.lower() not in _NON_SUBJECT_TERMS and right.lower() not in _NON_SUBJECT_TERMS
+                and len(right) >= 3):
+            names.add(pair.lower())
+    return names
+
+
 def _named_subjects(text: str) -> Set[str]:
-    # Explicit capitalized subjects are preferred; lower-case tokens retain the
-    # existing conservative fallback for normalized suspicion-scoring feeds.
-    names = explicit_named_subjects(text)
+    # Preserve E03B's established singleton signals and lower-case fallback;
+    # E04V alone uses the stricter explicit_named_subjects binding primitive.
+    names = _capitalized_subject_signals(text)
     return names or (_tokens(text.lower()) - _NON_SUBJECT_TERMS - _GENERIC_SINGLE_SUBJECT)
 
 def _field_text(record: Dict[str, Any], keys: Iterable[str]) -> str:

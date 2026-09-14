@@ -30,6 +30,7 @@ DUPLICATE_CENTRALITY_FIELDS = ("left_central_development", "right_central_develo
 DUPLICATE_RELATION_FIELDS = {"ref", "decision", "shared_fact", "new_fact", "temporal_basis",
                              *DUPLICATE_EVIDENCE_FIELDS, *DUPLICATE_CENTRALITY_FIELDS}
 GROUNDING_SOURCE_FIELDS = ("title", "source_title", "title_it", "summary", "retained_body")
+ANCHOR_SOURCE_FIELDS = ("title", "source_title", "title_it")
 MAX_DUPLICATE_SEMANTIC_FIELD_LENGTH = 500
 MIN_DUPLICATE_EVIDENCE_TOKENS = 2
 MIN_DUPLICATE_EVIDENCE_ALNUM_CHARS = 8
@@ -292,7 +293,7 @@ def _contains_aligned_anchor(value: Any, anchor: str) -> bool:
 
 def _explicit_endpoint_subjects(endpoint: Mapping[str, Any]) -> set[str]:
     return set().union(*(shadow.menzo_duplicate_scorer.explicit_named_subjects(value)
-                         for field in GROUNDING_SOURCE_FIELDS
+                         for field in ANCHOR_SOURCE_FIELDS
                          if isinstance((value := endpoint.get(field)), str)))
 
 
