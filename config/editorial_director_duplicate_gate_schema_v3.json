@@ -1,17 +1,65 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "additionalProperties": false,
   "required": ["relations"],
   "properties": {
-    "relations": {"type": "array", "items": {"type": "object", "additionalProperties": false,
-      "required": ["ref", "decision"], "properties": {
-        "ref": {"type": "string", "pattern": "^r[0-9]+$"},
-        "decision": {"enum": ["DUPLICATE", "MATERIAL_UPDATE", "NO_MATCH"]},
-        "shared_fact": {"type": ["string", "null"]},
-        "new_fact": {"type": ["string", "null"]},
-        "temporal_basis": {"type": ["string", "null"]}
-      }}
+    "relations": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["ref", "decision", "shared_fact", "left_evidence", "right_evidence", "left_central_development", "right_central_development", "centrality_basis"],
+            "properties": {
+              "ref": {"type": "string"},
+              "decision": {"enum": ["DUPLICATE"]},
+              "shared_fact": {"type": "string"},
+              "left_evidence": {"type": "string"},
+              "right_evidence": {"type": "string"},
+              "left_central_development": {"type": "string"},
+              "right_central_development": {"type": "string"},
+              "centrality_basis": {"type": "string"},
+              "new_fact": {"type": "null"},
+              "temporal_basis": {"type": "null"}
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["ref", "decision", "new_fact", "temporal_basis"],
+            "properties": {
+              "ref": {"type": "string"},
+              "decision": {"enum": ["MATERIAL_UPDATE"]},
+              "shared_fact": {"type": "null"},
+              "left_evidence": {"type": "null"},
+              "right_evidence": {"type": "null"},
+              "left_central_development": {"type": "null"},
+              "right_central_development": {"type": "null"},
+              "centrality_basis": {"type": "null"},
+              "new_fact": {"type": "string"},
+              "temporal_basis": {"type": "string"}
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["ref", "decision"],
+            "properties": {
+              "ref": {"type": "string"},
+              "decision": {"enum": ["NO_MATCH"]},
+              "shared_fact": {"type": "null"},
+              "left_evidence": {"type": "null"},
+              "right_evidence": {"type": "null"},
+              "left_central_development": {"type": "null"},
+              "right_central_development": {"type": "null"},
+              "centrality_basis": {"type": "null"},
+              "new_fact": {"type": "null"},
+              "temporal_basis": {"type": "null"}
+            }
+          }
+        ]
+      }
     }
   }
 }

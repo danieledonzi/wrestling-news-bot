@@ -27,6 +27,14 @@ def response(s, actions=("SELECT", "DEFER", "SKIP")):
             for i in range(len(s["authorized_relations"]))]}
 
 
+def grounded_duplicate(ref, left_evidence, right_evidence, shared_fact="same confirmed development"):
+    return {"ref": ref, "decision": "DUPLICATE", "shared_fact": shared_fact,
+            "left_evidence": left_evidence, "right_evidence": right_evidence,
+            "left_central_development": shared_fact,
+            "right_central_development": shared_fact,
+            "centrality_basis": "The supported shared fact is the autonomous central development of both endpoints."}
+
+
 def test_active_flag_is_separate_and_defaults_off():
     assert not active.enabled({})
     assert not active.enabled({"OWTV_EDITORIAL_DIRECTOR_ACTIVE_ENABLED": "false",
@@ -118,8 +126,9 @@ def test_same_run_duplicate_is_removed_before_editorial_classification(monkeypat
     def provider(prompt, *_):
         calls.append(prompt)
         if "DUPLICATE GATE PHASE ONLY" in prompt:
-            return {"relations": [{"ref": "r0", "decision": "DUPLICATE",
-                                    "shared_fact": "same confirmed release"}]}
+            return {"relations": [grounded_duplicate("r0", s["candidates"][0]["title"],
+                                                       s["candidates"][1]["title"],
+                                                       "same confirmed release")]}
         return response(s, ("SELECT",))
     result = active.evaluate(s, provider=provider)
     assert result["status"] == "VALIDATED" and len(calls) == 2
@@ -189,6 +198,154 @@ def test_duplicate_gate_invalid_then_repair_records_two_attempts(monkeypatch):
     assert any(event == "model_attempt_completed" for event, _ in gate_events)
 
 
+def _production_incident_snapshot(title, summary=""):
+    board = {"news_candidates_for_menzo": [{"source": "feed", "title": title,
+        "url": "https://incident.test/current", "summary": summary}]}
+    history = [{"source_url": "https://incident.test/history", "source_title":
+        "Stephanie Vaquer wins WWE Women's World Championship at live event in Chile"}]
+    value = shadow.capture_opportunity(board, run_id="incident", observation_timestamp="now",
+        publisher_count_24h=0, history=history)
+    candidate_id = value["candidates"][0]["candidate_id"]
+    history_id = value["publisher_history_12h"][0]["article_id"]
+    value["authorized_relations"] = [{"pair_id": "incident-pair", "scope": "recent_history",
+        "left_id": candidate_id, "right_id": history_id, "scorer_version": "test", "score": .9,
+        "threshold": .55, "components": {}}]
+    value["authorized_relations_complete"] = True
+    return value
+
+
+def _ungrounded_vaquer_duplicate():
+    return {"relations": [{"ref": "r0", "decision": "DUPLICATE",
+        "shared_fact": "Stephanie Vaquer title win",
+        "left_evidence": "Stephanie Vaquer title win",
+        "right_evidence": "Stephanie Vaquer wins WWE Women's World Championship",
+        "left_central_development": "Stephanie Vaquer won the title",
+        "right_central_development": "Stephanie Vaquer won the title",
+        "centrality_basis": "The title win is central to both endpoints."}]}
+
+
+def test_case_a_ungrounded_duplicate_repairs_to_no_match_before_binding(monkeypatch):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    s = _production_incident_snapshot(
+        "AEW's Maya World Addresses Dave Meltzer Not Rating Her PPV Match With Mercedes Mone",
+        "Former AEW TBS Champion Maya World addressed Dave Meltzer not rating her "
+        "AEW x NJPW Forbidden Door bout against Mercedes Mone.")
+    calls = []
+    def provider(prompt, *_):
+        calls.append(prompt)
+        if len(calls) == 1:
+            assert "DUPLICATE GATE PHASE ONLY" in prompt
+            return _ungrounded_vaquer_duplicate()
+        if len(calls) == 2:
+            assert "duplicate_left_evidence_grounding" in prompt
+            assert not s.get("semantic_duplicate_skips")
+            return {"relations": [{"ref": "r0", "decision": "NO_MATCH"}]}
+        return response(s, ("SELECT",))
+    result = active.evaluate(s, provider=provider)
+    assert result["status"] == "VALIDATED" and len(calls) == 3
+    gate_attempts = [row for row in result["validation_attempts"] if row.get("phase") == "duplicate_gate"]
+    assert [row["valid"] for row in gate_attempts] == [False, True]
+    assert gate_attempts[0]["validation_families"][0]["family"] == "duplicate_left_evidence_grounding"
+    assert not s["semantic_duplicate_skips"] and len(s["candidates"]) == 1
+
+
+def test_case_a_repeated_ungrounded_duplicate_fails_atomically_without_artifact(monkeypatch, tmp_path):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    s = _production_incident_snapshot(
+        "AEW's Maya World Addresses Dave Meltzer Not Rating Her PPV Match With Mercedes Mone",
+        "Former AEW TBS Champion Maya World addressed Dave Meltzer not rating her match.")
+    calls = []
+    result = active.evaluate(s, provider=lambda *_: calls.append(1) or _ungrounded_vaquer_duplicate())
+    assert result["status"] == "failed" and len(calls) == 2
+    assert result["fallback_reason"] == "duplicate_left_evidence_grounding"
+    assert "semantic_duplicate_skips" not in s and len(s["candidates"]) == 1
+    from agents.canonical_artifact_index import CanonicalArtifactIndex
+    index = CanonicalArtifactIndex("incident", index_path=tmp_path / "index.jsonl",
+        material_root=tmp_path / "materials", repository_root=tmp_path, enabled=True)
+    assert index.summary()["artifacts_archived"] == 0 and not (tmp_path / "index.jsonl").exists()
+
+
+def test_duplicate_evidence_cannot_cross_relation_endpoints():
+    board = {"news_candidates_for_menzo": [
+        {"title": "Alpha signs a new contract", "url": "https://cross.test/a", "summary": "Alpha signs"},
+        {"title": "Beta returns at the arena", "url": "https://cross.test/b", "summary": "Beta returns"}]}
+    history = [
+        {"source_title": "Alpha signs a new contract", "source_url": "https://cross.test/ha"},
+        {"source_title": "Beta returns at the arena", "source_url": "https://cross.test/hb"}]
+    s = shadow.capture_opportunity(board, run_id="cross", observation_timestamp="now",
+        publisher_count_24h=0, history=history)
+    candidate_ids = [row["candidate_id"] for row in s["candidates"]]
+    history_ids = [row["article_id"] for row in s["publisher_history_12h"]]
+    s["authorized_relations"] = [
+        {"pair_id": "p0", "scope": "recent_history", "left_id": candidate_ids[0],
+         "right_id": history_ids[0], "scorer_version": "v", "score": .7, "threshold": .55, "components": {}},
+        {"pair_id": "p1", "scope": "recent_history", "left_id": candidate_ids[1],
+         "right_id": history_ids[1], "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
+    rows = [grounded_duplicate("r0", "Alpha signs", "Alpha signs"),
+            grounded_duplicate("r1", "Alpha signs", "Beta returns")]
+    canonical, failures, _ = active._validate_duplicate_gate({"relations": rows}, s)
+    assert canonical is None
+    assert {row["family"] for row in failures} == {"duplicate_left_evidence_grounding"}
+    assert failures[0]["ref"] == "r1"
+
+
+def test_case_b_policy_schema_and_no_match_survival(monkeypatch):
+    import json
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    policy = active.POLICY_PATH.read_text().casefold()
+    assert "reaction, criticism, comment, response, controversy, consequence, or follow-up" in policy
+    assert "cause, background, or" in policy and "central new" in policy
+    schema = json.loads(active.RELATION_SCHEMA_PATH.read_text())
+    branches = schema["properties"]["relations"]["items"]["anyOf"]
+    by_decision = {branch["properties"]["decision"]["enum"][0]: branch for branch in branches}
+    duplicate_then = by_decision["DUPLICATE"]
+    assert set(("left_evidence", "right_evidence", "left_central_development",
+                "right_central_development", "centrality_basis")) <= set(duplicate_then["required"])
+    s = _production_incident_snapshot(
+        "Triple H Gets Dragged Over Stephanie Vaquer Winning Women’s World Title at WWE Live Event")
+    replies = iter([{"relations": [{"ref": "r0", "decision": "NO_MATCH"}]}, response(s, ("SELECT",))])
+    result = active.evaluate(s, provider=lambda *_: next(replies))
+    assert result["status"] == "VALIDATED" and not s["semantic_duplicate_skips"]
+
+
+def test_duplicate_gate_provider_schema_uses_supported_union_keywords_only():
+    import json
+    schema = json.loads(active.RELATION_SCHEMA_PATH.read_text())
+    unsupported = {"allOf", "if", "then", "const", "pattern", "minLength", "maxLength"}
+
+    def schema_keywords(value):
+        found = set()
+        if isinstance(value, dict):
+            for key, child in value.items():
+                found.add(key)
+                if key == "properties" and isinstance(child, dict):
+                    for property_schema in child.values():
+                        found.update(schema_keywords(property_schema))
+                else:
+                    found.update(schema_keywords(child))
+        elif isinstance(value, list):
+            for child in value:
+                found.update(schema_keywords(child))
+        return found
+
+    assert schema_keywords(schema).isdisjoint(unsupported)
+    branches = schema["properties"]["relations"]["items"]["anyOf"]
+    assert len(branches) == 3
+    by_decision = {branch["properties"]["decision"]["enum"][0]: branch for branch in branches}
+    assert set(by_decision) == {"DUPLICATE", "MATERIAL_UPDATE", "NO_MATCH"}
+    assert all(len(branch["properties"]["decision"]["enum"]) == 1 for branch in branches)
+    assert {"left_evidence", "right_evidence", "left_central_development",
+            "right_central_development", "centrality_basis"} <= set(by_decision["DUPLICATE"]["required"])
+    assert {"new_fact", "temporal_basis"} <= set(by_decision["MATERIAL_UPDATE"]["required"])
+    assert set(by_decision["NO_MATCH"]["required"]) == {"ref", "decision"}
+
+
+def test_grounding_normalization_is_formatting_only():
+    endpoint = {"title": "Wrestler’s return — officially confirmed"}
+    assert active._grounded_evidence("  WRESTLER'S   RETURN - officially ", endpoint) == (True, "title")
+    assert active._grounded_evidence("confirmed return by a synonym", endpoint)[0] is False
+
+
 def test_duplicate_gate_provider_failure_has_terminal_lifecycle_and_no_classification(monkeypatch):
     from agents import canonical_event_ledger
     events, ledger = [], []
@@ -219,8 +376,8 @@ def test_gate_eliminates_all_without_creating_classification_request(monkeypatch
     s["authorized_relations"] = [{"pair_id": "p", "scope": "recent_history",
         "left_id": candidate_id, "right_id": "published", "scorer_version": "v", "score": .7,
         "threshold": .55, "components": {}}]
-    result = active.evaluate(s, provider=lambda *_: {"relations": [
-        {"ref": "r0", "decision": "DUPLICATE", "shared_fact": "same title change"}]})
+    result = active.evaluate(s, provider=lambda *_: {"relations": [grounded_duplicate(
+        "r0", s["candidates"][0]["title"], history["title"], "same title change")]})
     assert result["status"] == "VALIDATED" and len(ledger) == 1
     assert result["duplicate_gate_input_digest"]
     assert "logical_request_id" not in result
@@ -862,7 +1019,8 @@ def test_active_artifact_preserves_gate_and_classification_provenance(monkeypatc
     pre_gate_digest = s["input_digest"]
     def provider(prompt, *_):
         if "DUPLICATE GATE PHASE ONLY" in prompt:
-            return {"relations": [{"ref": "r0", "decision": "DUPLICATE", "shared_fact": "same release"}]}
+            return {"relations": [grounded_duplicate("r0", s["candidates"][0]["title"],
+                                                       s["candidates"][1]["title"], "same release")]}
         return response(s, ("SELECT",))
     result = active.evaluate(s, provider=provider)
     assert result["status"] == "VALIDATED"
@@ -887,3 +1045,6 @@ def test_active_artifact_preserves_gate_and_classification_provenance(monkeypatc
     assert eliminated["duplicate_gate_input_digest"] == pre_gate_digest
     assert "logical_request_id" not in eliminated and "input_digest" not in eliminated
     assert eliminated["relations"][0]["decision"] == "DUPLICATE"
+    assert eliminated["relations"][0]["left_evidence"]
+    assert eliminated["relations"][0]["right_evidence"]
+    assert eliminated["relations"][0]["centrality_basis"]

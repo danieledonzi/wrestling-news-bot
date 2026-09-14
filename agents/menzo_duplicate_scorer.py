@@ -8,7 +8,7 @@ import re
 from typing import Any, Dict, Iterable, Set
 from urllib.parse import urlsplit, urlunsplit
 
-SCORER_VERSION = "v95.18-deterministic-suspicion-4-death-action"
+SCORER_VERSION = "v95.18-deterministic-suspicion-5-generic-single-subject"
 DEFAULT_THRESHOLD = 0.55
 WEIGHTS = {"entity_subject": .30, "central_fact_action": .25,
            "event_show_match": .20, "promotion": .10,
@@ -40,6 +40,7 @@ _SHOWS = {"raw","smackdown","dynamite","collision","nxt","wrestlemania","summers
           "double or nothing","royal rumble","survivor series","wrestledream"}
 _SUBJECT_BOUNDARY_TERMS = set().union(*_ACTIONS.values()) | _ENTERTAINMENT_CASTING_VERBS
 _NON_SUBJECT_TERMS = _SUBJECT_BOUNDARY_TERMS | _ENTERTAINMENT_CASTING_NOUNS | _PROMOTIONS | _STOP | _GENERIC_ENTITY
+_GENERIC_SINGLE_SUBJECT = {"world"}
 
 def effective_threshold(environ: Dict[str, str] | None = None) -> float:
     env = os.environ if environ is None else environ
@@ -98,8 +99,9 @@ def _named_subjects(text: str) -> Set[str]:
              and capitals[i+1].lower() not in _NON_SUBJECT_TERMS}
     # Surnames permit "CM Punk" vs "Punk", without treating arbitrary shared
     # generic words as entities.
-    names.update(x.lower() for x in capitals if len(x) >= 4 and x.lower() not in _NON_SUBJECT_TERMS)
-    return names or (_tokens(text.lower()) - _NON_SUBJECT_TERMS)
+    names.update(x.lower() for x in capitals if len(x) >= 4 and x.lower() not in _NON_SUBJECT_TERMS
+                 and x.lower() not in _GENERIC_SINGLE_SUBJECT)
+    return names or (_tokens(text.lower()) - _NON_SUBJECT_TERMS - _GENERIC_SINGLE_SUBJECT)
 
 def _field_text(record: Dict[str, Any], keys: Iterable[str]) -> str:
     values=[]

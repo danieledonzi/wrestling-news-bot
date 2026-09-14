@@ -5,7 +5,9 @@ import copy
 import hashlib
 import json
 import os
+import re
 import time
+import unicodedata
 from pathlib import Path
 from typing import Any, Callable, Mapping
 
@@ -22,6 +24,13 @@ POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY
 RELATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_gate_schema_v3.json"
 BOB_CAPACITY_FIELDS = ("article_type", "source_title", "category_hint", "reason",
                        "ai_editorial_reason", "event_key")
+DUPLICATE_EVIDENCE_FIELDS = ("left_evidence", "right_evidence")
+DUPLICATE_CENTRALITY_FIELDS = ("left_central_development", "right_central_development",
+                               "centrality_basis")
+DUPLICATE_RELATION_FIELDS = {"ref", "decision", "shared_fact", "new_fact", "temporal_basis",
+                             *DUPLICATE_EVIDENCE_FIELDS, *DUPLICATE_CENTRALITY_FIELDS}
+GROUNDING_SOURCE_FIELDS = ("title", "source_title", "title_it", "summary", "retained_body")
+MAX_DUPLICATE_SEMANTIC_FIELD_LENGTH = 500
 
 
 def enabled(environ: Mapping[str, str] | None = None) -> bool:
@@ -205,16 +214,129 @@ def _prompt(snapshot: Mapping[str, Any], failures: list[dict[str, Any]] | None =
     return prompt
 
 
+def _normalize_grounding_text(value: str) -> str:
+    """Normalize formatting only; this deliberately performs no semantic matching."""
+    value = unicodedata.normalize("NFKC", value).casefold()
+    value = value.translate(str.maketrans({"‘": "'", "’": "'", "‚": "'", "‛": "'",
+                                           "“": '"', "”": '"', "„": '"', "‟": '"',
+                                           "‐": "-", "‑": "-", "‒": "-", "–": "-", "—": "-", "―": "-"}))
+    return re.sub(r"\s+", " ", value).strip()
+
+
+def _duplicate_gate_endpoint_maps(snapshot: Mapping[str, Any]) -> tuple[dict[str, Mapping[str, Any]],
+                                                                          dict[str, Mapping[str, Any]]]:
+    """Resolve each request-local relation ref to its exact provider-visible endpoints."""
+    provider_data = active_provider_input(snapshot)
+    endpoints = {str(row.get("ref")): row for table in ("candidates", "history")
+                 for row in provider_data.get(table, []) if isinstance(row, Mapping)}
+    relations = {}
+    for relation in provider_data.get("authorized_relations", []):
+        if not isinstance(relation, Mapping):
+            continue
+        left, right = endpoints.get(str(relation.get("left_ref"))), endpoints.get(str(relation.get("right_ref")))
+        if left is not None and right is not None:
+            relations[str(relation.get("ref"))] = {"left": left, "right": right}
+    return endpoints, relations
+
+
+def _grounded_evidence(value: Any, endpoint: Mapping[str, Any]) -> tuple[bool, str]:
+    if not isinstance(value, str) or not value.strip():
+        return False, "missing_or_empty"
+    if len(value) > MAX_DUPLICATE_SEMANTIC_FIELD_LENGTH:
+        return False, "too_long"
+    evidence = _normalize_grounding_text(value)
+    if not evidence:
+        return False, "missing_or_empty"
+    for field in GROUNDING_SOURCE_FIELDS:
+        source = endpoint.get(field)
+        if isinstance(source, str) and evidence in _normalize_grounding_text(source):
+            return True, field
+    return False, "not_contained_in_exact_endpoint"
+
+
+def _bounded_text(value: Any) -> bool:
+    return isinstance(value, str) and bool(value.strip()) and len(value) <= MAX_DUPLICATE_SEMANTIC_FIELD_LENGTH
+
+
 def _validate_duplicate_gate(value: Any, snapshot: Mapping[str, Any]):
-    """Validate only relation semantics; candidates do not exist in this phase's output."""
+    """Active-local E04V: validate complete relation semantics and exact endpoint evidence."""
+    failures: list[dict[str, Any]] = []
+    telemetry: list[dict[str, Any]] = []
     if not isinstance(value, Mapping):
-        return None, [{"family": "parse_json", "detail": "output_not_object"}], []
-    synthetic = {"candidates": [
-        {"ref": ref, "editorial_class": "SKIP", "recommended_action": "SKIP",
-         "category": "World", "story_core": "duplicate gate placeholder"}
-        for ref in shadow.short_ref_maps(snapshot)[0]], "relations": value.get("relations")}
-    output, failures, telemetry = shadow.canonicalize_output(synthetic, snapshot)
-    return (output.get("relations") if output else None), failures, telemetry
+        return None, [{"family": "parse_json", "detail": "output_not_object"}], telemetry
+    for field in set(value) - {"relations"}:
+        telemetry.append({"family": "locally_canonicalized_extra_field", "field": field})
+    rows = value.get("relations")
+    if not isinstance(rows, list):
+        return None, [{"family": "other", "detail": "relations_array_required"}], telemetry
+    _, relation_map = shadow.short_ref_maps(snapshot)
+    _, endpoints_by_relation = _duplicate_gate_endpoint_maps(snapshot)
+    seen: set[str] = set()
+    canonical = []
+    for row in rows:
+        if not isinstance(row, Mapping):
+            failures.append({"family": "relation_ref", "detail": "row_not_object"}); continue
+        ref = row.get("ref")
+        for field in set(row) - DUPLICATE_RELATION_FIELDS:
+            telemetry.append({"family": "locally_canonicalized_extra_field", "ref": ref, "field": field})
+        if ref not in relation_map:
+            telemetry.append({"family": "relation_ref", "ref": ref, "detail": "unauthorized_dropped"}); continue
+        if ref in seen:
+            failures.append({"family": "relation_ref", "ref": ref, "detail": "duplicate"}); continue
+        seen.add(ref)
+        supplied = relation_map[ref]
+        decision = shadow._enum(row.get("decision"), shadow.DECISIONS, "relation_decision", telemetry, ref)
+        if decision is None:
+            failures.append({"family": "relation_decision", "ref": ref}); continue
+        shared, new, temporal = row.get("shared_fact"), row.get("new_fact"), row.get("temporal_basis")
+        duplicate_values = {field: row.get(field) for field in
+                            (*DUPLICATE_EVIDENCE_FIELDS, *DUPLICATE_CENTRALITY_FIELDS)}
+        if decision == "DUPLICATE":
+            if not _bounded_text(shared):
+                failures.append({"family": "duplicate_shared_fact", "ref": ref})
+            endpoints = endpoints_by_relation.get(str(ref), {})
+            for side in ("left", "right"):
+                valid, detail = _grounded_evidence(duplicate_values[f"{side}_evidence"], endpoints.get(side, {}))
+                if not valid:
+                    failures.append({"family": f"duplicate_{side}_evidence_grounding", "ref": ref,
+                                     "detail": detail})
+                else:
+                    telemetry.append({"family": f"duplicate_{side}_evidence_grounded", "ref": ref,
+                                      "source_field": detail})
+            invalid_centrality = [field for field in DUPLICATE_CENTRALITY_FIELDS
+                                  if not _bounded_text(duplicate_values[field])]
+            if invalid_centrality:
+                failures.append({"family": "duplicate_centrality_contract", "ref": ref,
+                                 "fields": invalid_centrality})
+        if decision == "MATERIAL_UPDATE":
+            if supplied.get("scope") != "recent_history":
+                failures.append({"family": "material_update_scope", "ref": ref})
+            if not isinstance(new, str) or not new.strip():
+                failures.append({"family": "material_update_new_fact", "ref": ref})
+            if not isinstance(temporal, str) or not temporal.strip():
+                failures.append({"family": "material_update_temporal_basis", "ref": ref})
+        duplicate_extras = decision != "DUPLICATE" and any(
+            value is not None for value in duplicate_values.values())
+        semantic_extras = ((decision != "DUPLICATE" and shared is not None) or
+                           (decision != "MATERIAL_UPDATE" and (new is not None or temporal is not None)) or
+                           (decision == "MATERIAL_UPDATE" and shared is not None) or
+                           duplicate_extras)
+        if semantic_extras:
+            failures.append({"family": "material_update_grounding", "ref": ref,
+                             "detail": "conditional_semantic_fields_contradict_decision"})
+        canonical.append({"pair_id": supplied["pair_id"], "scope": supplied["scope"],
+            "left_id": supplied["left_id"], "right_id": supplied["right_id"], "decision": decision,
+            "shared_fact": shared.strip() if isinstance(shared, str) and shared.strip() else None,
+            "new_fact": new.strip() if isinstance(new, str) and new.strip() else None,
+            "temporal_basis": temporal.strip() if isinstance(temporal, str) and temporal.strip() else None,
+            **{field: (value.strip() if isinstance(value, str) and value.strip() else None)
+               for field, value in duplicate_values.items()},
+            "scorer": {key: copy.deepcopy(supplied.get(key))
+                       for key in ("scorer_version", "score", "threshold", "components")}})
+    missing = sorted(set(relation_map) - seen)
+    if missing:
+        failures.append({"family": "relation_coverage", "missing_refs": missing})
+    return (None if failures else canonical), failures, telemetry
 
 
 def _duplicate_prompt(snapshot: Mapping[str, Any], failures: list[dict[str, Any]] | None = None) -> str:

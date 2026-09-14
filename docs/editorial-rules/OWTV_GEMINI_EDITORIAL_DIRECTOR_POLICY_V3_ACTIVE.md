@@ -84,6 +84,19 @@ concrete `shared_fact` naming that common development. `same person != duplicate
 the same interview/source conversation, promotion, show, or event is insufficient. Generic labels such as “John Cena interview comments” are not a shared
 central fact when the two articles report different claims.
 
+A reaction, criticism, comment, response, controversy, consequence, or follow-up caused by an earlier event is **not**
+a duplicate of that event merely because the earlier event is mentioned. Compare the autonomous **central new
+development** of each exact endpoint. If a common fact is central to only one endpoint and is cause, background, or
+context in the other, do not return `DUPLICATE`. For recent history, return `MATERIAL_UPDATE` only when its contract
+below is genuinely satisfied; otherwise return `NO_MATCH`.
+
+For every `DUPLICATE`, provide a concise `shared_fact`, quote one short exact supporting `left_evidence` span and one
+short exact supporting `right_evidence` span from their respective supplied endpoint title, summary, or retained body,
+identify `left_central_development` and `right_central_development` independently, and provide a concise
+`centrality_basis` explaining why the shared fact is central to both rather than background in either. Evidence from a
+different candidate, history item, endpoint, or relation is invalid. Never copy or reuse evidence, central-development
+statements, or centrality reasoning from another relation row.
+
 `MATERIAL_UPDATE` is valid only for recent authoritative history and requires a concrete model-supplied `new_fact` plus
 a model-supplied `temporal_basis` showing the fact occurred, became known, or was officially confirmed after
 publication. Rewording is not a new fact. Local code must never invent relation semantics.
