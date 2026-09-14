@@ -425,6 +425,15 @@ def test_canonical_apostrophe_anchor_validates_across_endpoint_forms():
     assert canonical is not None and not failures
 
 
+def test_leading_article_stage_name_validates_grounded_duplicate():
+    left = "The Rock returns to WWE after long absence"
+    right = "The Rock returns to WWE after long absence"
+    s = _anchor_contract_snapshot(left, right)
+    canonical, failures, _ = _validate_anchor_relation(s, left_evidence=left,
+        right_evidence=right, shared_fact="The Rock returns to WWE after long absence")
+    assert canonical is not None and not failures
+
+
 def test_retained_body_capitalization_cannot_supply_binding_anchor():
     s = _anchor_contract_snapshot("CM Punk Signs New WWE Contract", "Rhea Ripley Suffers New Injury")
     for candidate, body in zip(s["candidates"], (
