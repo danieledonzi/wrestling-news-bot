@@ -119,7 +119,7 @@ def test_provider_failure_and_oversize_are_whole_result_failures(monkeypatch):
 def test_same_run_duplicate_is_removed_before_editorial_classification(monkeypatch):
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     s = snapshot(2)
-    s["candidates"][1]["title"] = "Jasper Troy release reported by WWE"
+    s["candidates"][1]["title"] = "Jasper Troy Becomes First Confirmed Release"
     left, right = [x["candidate_id"] for x in s["candidates"]]
     s["authorized_relations"] = [{"pair_id": "p", "scope": "same_run", "left_id": left,
         "right_id": right, "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
@@ -129,7 +129,7 @@ def test_same_run_duplicate_is_removed_before_editorial_classification(monkeypat
         if "DUPLICATE GATE PHASE ONLY" in prompt:
             return {"relations": [grounded_duplicate("r0", s["candidates"][0]["title"],
                                                        s["candidates"][1]["title"],
-                                                       "Jasper Troy confirmed release")]}
+                                                       "Jasper Troy Becomes First Confirmed Release")]}
         return response(s, ("SELECT",))
     result = active.evaluate(s, provider=provider)
     assert result["status"] == "VALIDATED" and len(calls) == 2
@@ -282,10 +282,12 @@ def test_duplicate_evidence_cannot_cross_relation_endpoints():
          "right_id": history_ids[0], "scorer_version": "v", "score": .7, "threshold": .55, "components": {}},
         {"pair_id": "p1", "scope": "recent_history", "left_id": candidate_ids[1],
          "right_id": history_ids[1], "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
-    rows = [grounded_duplicate("r0", "Alpha Wrestler signs", "Alpha Wrestler signs",
-                               "Alpha Wrestler signs contract"),
-            grounded_duplicate("r1", "Alpha Wrestler signs", "Beta Wrestler returns",
-                               "Beta Wrestler returns arena")]
+    rows = [grounded_duplicate("r0", "Alpha Wrestler signs a new contract",
+                               "Alpha Wrestler signs a new contract",
+                               "Alpha Wrestler signs a new contract"),
+            grounded_duplicate("r1", "Alpha Wrestler signs a new contract",
+                               "Beta Wrestler returns at the arena",
+                               "Beta Wrestler returns at the arena")]
     canonical, failures, _ = active._validate_duplicate_gate({"relations": rows}, s)
     assert canonical is None
     assert {row["family"] for row in failures} == {"duplicate_left_evidence_grounding"}
@@ -381,6 +383,10 @@ def test_generic_common_evidence_has_no_binding_subject_anchor():
     fixtures = [
         ("More Details On CM Punk Contract Talks", "More Details On Rhea Ripley Injury Status", "More Details"),
         ("Live Event Update On CM Punk", "Live Event Update On Rhea Ripley", "Live Event"),
+        ("WrestleMania Main Event Adds Seth Rollins Match",
+         "WrestleMania Main Event Announces Roman Reigns Match", "WrestleMania Main"),
+        ("SummerSlam Main Event Adds Seth Rollins Match",
+         "SummerSlam Main Event Announces Roman Reigns Match", "SummerSlam Main"),
     ]
     for left, right, phrase in fixtures:
         s = _anchor_contract_snapshot(left, right)
@@ -442,6 +448,31 @@ def test_shared_fact_and_central_developments_link_to_evidence_anchor():
     assert invalid_central is None
     assert any(row["family"] == "duplicate_centrality_contract" and
                "missing_shared_subject_anchor" in row.get("details", []) for row in failures)
+
+
+def test_anchor_tokens_do_not_count_as_factual_linkage():
+    s = _anchor_contract_snapshot(
+        "John Cena criticizes his retirement match", "John Cena praises Cody Rhodes")
+    canonical, failures, _ = _validate_anchor_relation(s,
+        left_evidence="John Cena criticizes his retirement match",
+        right_evidence="John Cena praises Cody Rhodes", shared_fact="John Cena makes comments")
+    assert canonical is None
+    details = {(row["family"], row.get("detail")) for row in failures}
+    assert ("duplicate_claim_anchor_grounding",
+            "insufficient_left_evidence_factual_linkage") in details
+    assert ("duplicate_claim_anchor_grounding",
+            "insufficient_right_evidence_factual_linkage") in details
+
+    central_snapshot = _anchor_contract_snapshot(
+        "John Cena discusses his retirement match", "John Cena discusses his retirement match")
+    canonical, failures, _ = _validate_anchor_relation(central_snapshot,
+        left_evidence="John Cena discusses his retirement match",
+        right_evidence="John Cena discusses his retirement match",
+        shared_fact="John Cena discusses retirement match",
+        right_central="John Cena unrelated statement")
+    assert canonical is None
+    assert any(row["family"] == "duplicate_centrality_contract" and
+               "insufficient_evidence_factual_linkage" in row.get("details", []) for row in failures)
 
 
 def test_duplicate_gate_provider_failure_has_terminal_lifecycle_and_no_classification(monkeypatch):
@@ -1111,7 +1142,7 @@ def test_active_artifact_preserves_gate_and_classification_provenance(monkeypatc
     from agents.canonical_artifact_index import CanonicalArtifactIndex
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     s = snapshot(2); left, right = [row["candidate_id"] for row in s["candidates"]]
-    s["candidates"][1]["title"] = "Jasper Troy release reported by WWE"
+    s["candidates"][1]["title"] = "Jasper Troy Becomes First Confirmed Release"
     s["authorized_relations"] = [{"pair_id": "p", "scope": "same_run", "left_id": left,
         "right_id": right, "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
     active.prepare_snapshot(s)
@@ -1120,7 +1151,7 @@ def test_active_artifact_preserves_gate_and_classification_provenance(monkeypatc
         if "DUPLICATE GATE PHASE ONLY" in prompt:
             return {"relations": [grounded_duplicate("r0", s["candidates"][0]["title"],
                                                        s["candidates"][1]["title"],
-                                                       "Jasper Troy confirmed release")]}
+                                                       "Jasper Troy Becomes First Confirmed Release")]}
         return response(s, ("SELECT",))
     result = active.evaluate(s, provider=provider)
     assert result["status"] == "VALIDATED"

@@ -38,6 +38,7 @@ _ENTERTAINMENT_CASTING_TERMS = _ENTERTAINMENT_CASTING_VERBS | _ENTERTAINMENT_CAS
 _PROMOTIONS = {"wwe","aew","tna","roh","nxt","njpw","mlw","gcw"}
 _SHOWS = {"raw","smackdown","dynamite","collision","nxt","wrestlemania","summerslam","all out",
           "double or nothing","royal rumble","survivor series","wrestledream"}
+_BINDING_SHOW_TOKENS = {token for show in _SHOWS for token in re.findall(r"[a-z0-9]+", show)}
 _SUBJECT_BOUNDARY_TERMS = set().union(*_ACTIONS.values()) | _ENTERTAINMENT_CASTING_VERBS
 _NON_SUBJECT_TERMS = _SUBJECT_BOUNDARY_TERMS | _ENTERTAINMENT_CASTING_NOUNS | _PROMOTIONS | _STOP | _GENERIC_ENTITY
 _GENERIC_SINGLE_SUBJECT = {"world"}
@@ -109,13 +110,17 @@ def explicit_named_subjects(text: str) -> Set[str]:
     Singleton capitalization is intentionally insufficient here. This binding
     primitive favors repair/fallback over treating headline prose as identity.
     """
-    token = r"[A-Z][A-Za-z]+"
-    pairs = re.findall(rf"(?=(\b{token}\b\s+\b{token}\b))", text)
+    letter = r"[^\W\d_]"
+    token = rf"{letter}+(?:['’-]{letter}+)*"
+    pairs = re.findall(rf"(?<![\w'’-])(?=({token}\s+{token})(?![\w'’-]))", text,
+                       flags=re.UNICODE)
     names = set()
     for pair in pairs:
-        left, right = pair.split()
+        left, right = pair.split(maxsplit=1)
         if (left.lower() not in _NON_SUBJECT_TERMS and right.lower() not in _NON_SUBJECT_TERMS
-                and len(right) >= 3):
+                and left.lower() not in _BINDING_SHOW_TOKENS
+                and right.lower() not in _BINDING_SHOW_TOKENS and len(right) >= 3
+                and left[0].isupper() and right[0].isupper()):
             names.add(pair.lower())
     return names
 

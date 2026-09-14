@@ -291,6 +291,12 @@ def _contains_aligned_anchor(value: Any, anchor: str) -> bool:
                               for index in range(len(tokens) - width + 1)))
 
 
+def _non_anchor_lexical_overlap(left: str, right: str, anchor: str) -> int:
+    anchor_tokens = set(_lexical_tokens(anchor))
+    return len((set(_lexical_tokens(left)) - anchor_tokens) &
+               (set(_lexical_tokens(right)) - anchor_tokens))
+
+
 def _explicit_endpoint_subjects(endpoint: Mapping[str, Any]) -> set[str]:
     return set().union(*(shadow.menzo_duplicate_scorer.explicit_named_subjects(value)
                          for field in ANCHOR_SOURCE_FIELDS
@@ -336,18 +342,18 @@ def _validate_duplicate_anchor_contract(ref: Any, duplicate_values: Mapping[str,
         if not _contains_aligned_anchor(central, selected):
             details.append("missing_shared_subject_anchor")
         if isinstance(central, str) and isinstance(evidence, str):
-            if len(set(_lexical_tokens(central)) & set(_lexical_tokens(evidence))) < 2:
-                details.append("insufficient_evidence_lexical_linkage")
+            if _non_anchor_lexical_overlap(central, evidence, selected) < 2:
+                details.append("insufficient_evidence_factual_linkage")
         if details:
             failures.append({"family": "duplicate_centrality_contract", "ref": ref,
                              "field": f"{side}_central_development", "details": details})
     if isinstance(shared_fact, str):
         for side in ("left", "right"):
             evidence = duplicate_values[f"{side}_evidence"]
-            if isinstance(evidence, str) and len(
-                    set(_lexical_tokens(shared_fact)) & set(_lexical_tokens(evidence))) < 2:
+            if isinstance(evidence, str) and _non_anchor_lexical_overlap(
+                    shared_fact, evidence, selected) < 2:
                 failures.append({"family": "duplicate_claim_anchor_grounding", "ref": ref,
-                                 "detail": f"insufficient_{side}_evidence_lexical_linkage"})
+                                 "detail": f"insufficient_{side}_evidence_factual_linkage"})
 
 
 def _validate_duplicate_gate(value: Any, snapshot: Mapping[str, Any]):

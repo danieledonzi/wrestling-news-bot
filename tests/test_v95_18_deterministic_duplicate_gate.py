@@ -47,7 +47,12 @@ def test_world_is_not_singleton_identity_but_maya_world_compound_survives():
     assert scorer.explicit_named_subjects("Stephanie Vaquer") == {"stephanie vaquer"}
     assert scorer.explicit_named_subjects("CM Punk") == {"cm punk"}
     assert scorer.explicit_named_subjects("Maya World") == {"maya world"}
+    assert scorer.explicit_named_subjects("Mercedes Moné") == {"mercedes moné"}
+    assert scorer.explicit_named_subjects("Kevin O'Reilly") == {"kevin o'reilly"}
     assert scorer.explicit_named_subjects("Punk") == set()
+    assert scorer.explicit_named_subjects("R-Truth") == set()
+    assert "wrestlemania main" not in scorer.explicit_named_subjects("WrestleMania Main Event")
+    assert "summerslam main" not in scorer.explicit_named_subjects("SummerSlam Main Event")
     maya = article("https://www.wrestlinginc.com/2254395/aew-maya-world-dave-meltzer-not-rating-match-mercedes-mone/",
         "AEW's Maya World Addresses Dave Meltzer Not Rating Her PPV Match With Mercedes Mone",
         "Former AEW TBS Champion Maya World addressed Dave Meltzer not rating her AEW x NJPW Forbidden Door bout against Mercedes Mone.")

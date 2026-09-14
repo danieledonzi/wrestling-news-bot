@@ -99,7 +99,8 @@ statements, or centrality reasoning from another relation row.
 
 The two evidence spans must contain the same explicit named subject, and that shared subject must also appear in
 `shared_fact`, `left_central_development`, and `right_central_development`. Each central-development statement and the
-shared fact must be lexically linked to its endpoint evidence; generic common phrases without that shared subject do
+shared fact must share factual wording with its endpoint evidence beyond the subject's own name; identity tokens do not
+count as factual linkage. Generic common phrases without that shared subject do
 not ground a binding duplicate. Binding subject anchors are conservatively derived only from explicit compound names
 in the supplied headline identity fields (`title`, `source_title`, or `title_it`), never from summary/body prose or a
 capitalized singleton. If no such shared anchor is available, validation may require repair or fail open to legacy
