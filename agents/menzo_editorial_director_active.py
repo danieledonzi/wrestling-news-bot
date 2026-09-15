@@ -284,17 +284,22 @@ def _lexical_tokens(value: str) -> list[str]:
 def _contains_aligned_anchor(value: Any, anchor: str) -> bool:
     if not isinstance(value, str):
         return False
-    tokens = _lexical_tokens(value)
-    anchor_tokens = _lexical_tokens(anchor)
+    tokens = _binding_subject_tokens(value)
+    anchor_tokens = _binding_subject_tokens(anchor)
     width = len(anchor_tokens)
     return bool(width and any(tokens[index:index + width] == anchor_tokens
                               for index in range(len(tokens) - width + 1)))
 
 
+def _binding_subject_tokens(value: str) -> list[str]:
+    canonical = shadow.menzo_duplicate_scorer.canonical_binding_subject_text(value)
+    return re.findall(r"[^\W_]+", canonical, flags=re.UNICODE)
+
+
 def _non_anchor_lexical_overlap(left: str, right: str, anchor: str) -> int:
-    anchor_tokens = set(_lexical_tokens(anchor))
-    return len((set(_lexical_tokens(left)) - anchor_tokens) &
-               (set(_lexical_tokens(right)) - anchor_tokens))
+    anchor_tokens = set(_binding_subject_tokens(anchor))
+    return len((set(_binding_subject_tokens(left)) - anchor_tokens) &
+               (set(_binding_subject_tokens(right)) - anchor_tokens))
 
 
 def _explicit_endpoint_subjects(endpoint: Mapping[str, Any]) -> set[str]:

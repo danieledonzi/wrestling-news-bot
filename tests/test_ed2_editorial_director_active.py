@@ -425,6 +425,30 @@ def test_canonical_apostrophe_anchor_validates_across_endpoint_forms():
     assert canonical is not None and not failures
 
 
+def test_connector_boilerplate_cannot_bind_unrelated_headlines():
+    left = "WWE Hall Of Famer Trish Stratus Comments On Becky Lynch"
+    right = "WWE Hall Of Famer Hulk Hogan Comments On Donald Trump"
+    s = _anchor_contract_snapshot(left, right)
+    canonical, failures, _ = _validate_anchor_relation(s, left_evidence=left,
+        right_evidence=right, shared_fact="Hall Of Famer comments on public figures",
+        left_central="Hall Of Famer Trish Stratus comments on Becky Lynch",
+        right_central="Hall Of Famer Hulk Hogan comments on Donald Trump")
+    assert canonical is None
+    assert any(row["family"] == "duplicate_relation_anchor_grounding" and
+               row["detail"] == "no_shared_explicit_subject" for row in failures)
+
+
+def test_diacritic_canonical_anchor_validates_and_is_fully_subtracted():
+    left = "Mercedes Moné wins the world championship tonight"
+    right = "Mercedes Mone wins the world championship tonight"
+    s = _anchor_contract_snapshot(left, right)
+    canonical, failures, _ = _validate_anchor_relation(s, left_evidence=left,
+        right_evidence=right, shared_fact="Mercedes Mone wins the world championship tonight")
+    assert canonical is not None and not failures
+    assert active._non_anchor_lexical_overlap(
+        "Mercedes Moné alpha", "Mercedes Mone beta", "mercedes mone") == 0
+
+
 def test_leading_article_stage_name_validates_grounded_duplicate():
     left = "The Rock returns to WWE after long absence"
     right = "The Rock returns to WWE after long absence"

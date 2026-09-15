@@ -5,6 +5,7 @@ import hashlib
 import json
 import os
 import re
+import unicodedata
 from typing import Any, Dict, Iterable, Set
 from urllib.parse import urlsplit, urlunsplit
 
@@ -45,11 +46,13 @@ _GENERIC_SINGLE_SUBJECT = {"world"}
 _BINDING_GENERIC_DESCRIPTOR_TOKENS = _GENERIC_SINGLE_SUBJECT | {
     "woman", "women", "women's", "womens", "man", "men", "men's", "mens", "tag", "team",
     "united", "states", "heavyweight", "cruiserweight", "intercontinental", "continental",
-    "universal", "undisputed", "global", "international", "national", "television",
+    "universal", "undisputed", "global", "international", "national", "television", "hall", "famer",
 }
 _BINDING_EVENT_DESCRIPTOR_TOKENS = {
     "night", "day", "one", "two", "three", "part", "week", "weekend", "session", "finale", "opener",
 }
+_BINDING_CONNECTOR_TOKENS = {"of", "on", "in", "at", "to", "by", "or"} | (
+    _STOP & {"and", "for", "with", "from"})
 
 def effective_threshold(environ: Dict[str, str] | None = None) -> float:
     env = os.environ if environ is None else environ
@@ -112,6 +115,14 @@ def _capitalized_subject_signals(text: str) -> Set[str]:
     return names
 
 
+def canonical_binding_subject_text(value: str) -> str:
+    """Canonicalize binding identity only; provider evidence remains untouched."""
+    value = unicodedata.normalize("NFKC", value).casefold().replace("’", "'")
+    decomposed = unicodedata.normalize("NFKD", value)
+    return unicodedata.normalize("NFC", "".join(
+        character for character in decomposed if not unicodedata.combining(character)))
+
+
 def explicit_named_subjects(text: str) -> Set[str]:
     """Return conservative compound headline subjects for binding validation.
 
@@ -125,10 +136,12 @@ def explicit_named_subjects(text: str) -> Set[str]:
     names = set()
     for pair in pairs:
         left, right = pair.split(maxsplit=1)
-        left_key, right_key = (value.casefold().replace("’", "'") for value in (left, right))
+        left_key, right_key = (canonical_binding_subject_text(value) for value in (left, right))
         short_upper_identity = 1 <= len(right) <= 2 and right.isalpha() and right.isupper()
         left_is_allowed = left_key == "the" or left.lower() not in _NON_SUBJECT_TERMS
         if (left_is_allowed and right.lower() not in _NON_SUBJECT_TERMS
+                and left_key not in _BINDING_CONNECTOR_TOKENS
+                and right_key not in _BINDING_CONNECTOR_TOKENS
                 and left.lower() not in _BINDING_SHOW_TOKENS
                 and right.lower() not in _BINDING_SHOW_TOKENS
                 and not ({left_key, right_key} <= _BINDING_GENERIC_DESCRIPTOR_TOKENS)

@@ -47,7 +47,9 @@ def test_world_is_not_singleton_identity_but_maya_world_compound_survives():
     assert scorer.explicit_named_subjects("Stephanie Vaquer") == {"stephanie vaquer"}
     assert scorer.explicit_named_subjects("CM Punk") == {"cm punk"}
     assert scorer.explicit_named_subjects("Maya World") == {"maya world"}
-    assert scorer.explicit_named_subjects("Mercedes Moné") == {"mercedes moné"}
+    assert scorer.explicit_named_subjects("Mercedes Moné") == {"mercedes mone"}
+    assert scorer.explicit_named_subjects("Mercedes Mone") == {"mercedes mone"}
+    assert scorer.explicit_named_subjects("Mercedes Moné") == scorer.explicit_named_subjects("Mercedes Mone")
     assert scorer.explicit_named_subjects("Kevin O'Reilly") == {"kevin o'reilly"}
     assert scorer.explicit_named_subjects("Kevin O’Reilly") == {"kevin o'reilly"}
     assert scorer.explicit_named_subjects("Kevin O'Reilly") == scorer.explicit_named_subjects("Kevin O’Reilly")
@@ -58,6 +60,15 @@ def test_world_is_not_singleton_identity_but_maya_world_compound_survives():
     assert scorer.explicit_named_subjects("R-Truth") == set()
     for generic_article in ("The Title", "The Match", "The Event", "The Latest", "The Future"):
         assert scorer.explicit_named_subjects(generic_article) == set()
+    for boilerplate in ("Hall Of", "Of Famer", "Hall Famer"):
+        assert scorer.explicit_named_subjects(boilerplate) == set()
+    left_subjects = scorer.explicit_named_subjects(
+        "WWE Hall Of Famer Trish Stratus Comments On Becky Lynch")
+    right_subjects = scorer.explicit_named_subjects(
+        "WWE Hall Of Famer Hulk Hogan Comments On Donald Trump")
+    assert {"trish stratus", "becky lynch"} <= left_subjects
+    assert {"hulk hogan", "donald trump"} <= right_subjects
+    assert not left_subjects & right_subjects
     for generic in ("Women's World", "Women’s World", "Tag Team", "World Heavyweight", "United States"):
         assert scorer.explicit_named_subjects(generic) == set()
     for event_context in ("Night One", "Night Two", "Day One", "Part One"):
