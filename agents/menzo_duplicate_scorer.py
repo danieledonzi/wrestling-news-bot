@@ -127,10 +127,13 @@ def _binding_phrase_tokens(value: str) -> list[str]:
     return re.findall(r"[^\W_]+", canonical_binding_subject_text(value), flags=re.UNICODE)
 
 
-def _contains_token_span(tokens: list[str], span: list[str]) -> bool:
+def _token_span_ranges(tokens: list[str], span: list[str]) -> list[range]:
+    """Return exact token-position ranges for a canonical phrase."""
     width = len(span)
-    return bool(width and any(tokens[index:index + width] == span
-                              for index in range(len(tokens) - width + 1)))
+    if not width:
+        return []
+    return [range(index, index + width) for index in range(len(tokens) - width + 1)
+            if tokens[index:index + width] == span]
 
 
 def explicit_named_subjects(text: str, registered_event_phrases: Iterable[str] = ()) -> Set[str]:
@@ -141,16 +144,21 @@ def explicit_named_subjects(text: str, registered_event_phrases: Iterable[str] =
     """
     letter = r"[^\W\d_]"
     token = rf"{letter}+(?:['’-]{letter}+)*"
-    pairs = re.findall(rf"(?<![\w'’-])(?=({token}\s+{token})(?![\w'’-]))", text,
-                       flags=re.UNICODE)
+    pairs = re.finditer(rf"(?<![\w'’-])(?=({token}\s+{token})(?![\w'’-]))", text,
+                        flags=re.UNICODE)
     headline_tokens = _binding_phrase_tokens(text)
-    matched_event_spans = [tokens for phrase in registered_event_phrases
-                           if (tokens := _binding_phrase_tokens(phrase)) and
-                           _contains_token_span(headline_tokens, tokens)]
+    matched_event_ranges = [event_range for phrase in registered_event_phrases
+                            for event_range in _token_span_ranges(
+                                headline_tokens, _binding_phrase_tokens(phrase))]
     names = set()
-    for pair in pairs:
+    for match in pairs:
+        pair = match.group(1)
         left, right = pair.split(maxsplit=1)
         left_key, right_key = (canonical_binding_subject_text(value) for value in (left, right))
+        pair_start = len(_binding_phrase_tokens(text[:match.start(1)]))
+        pair_positions = {pair_start, pair_start + 1}
+        overlaps_registered_event = any(pair_positions.intersection(event_range)
+                                        for event_range in matched_event_ranges)
         short_upper_identity = 1 <= len(right) <= 2 and right.isalpha() and right.isupper()
         if (left.lower() not in _NON_SUBJECT_TERMS and right.lower() not in _NON_SUBJECT_TERMS
                 and left_key not in _BINDING_CONNECTOR_TOKENS
@@ -159,8 +167,7 @@ def explicit_named_subjects(text: str, registered_event_phrases: Iterable[str] =
                 and right.lower() not in _BINDING_SHOW_TOKENS
                 and not ({left_key, right_key} <= _BINDING_GENERIC_DESCRIPTOR_TOKENS)
                 and not ({left_key, right_key} <= _BINDING_EVENT_DESCRIPTOR_TOKENS)
-                and not any(_contains_token_span(span, _binding_phrase_tokens(pair))
-                            for span in matched_event_spans)
+                and not overlaps_registered_event
                 and (len(right) >= 3 or short_upper_identity)
                 and left[0].isupper() and right[0].isupper()):
             names.add(f"{left_key} {right_key}")

@@ -433,6 +433,28 @@ def test_registered_event_span_preserves_wrestler_subjects():
     assert "kenny omega" in subjects
 
 
+def test_registered_event_boundary_compounds_cannot_bind():
+    phrases = active._registered_event_phrases()
+    left = "AEW Grand Slam Results: Kenny Omega Wins Title"
+    right = "AEW Grand Slam Results: Jon Moxley Wins Match"
+    left_subjects = active._explicit_endpoint_subjects({"title": left}, phrases)
+    right_subjects = active._explicit_endpoint_subjects({"title": right}, phrases)
+    assert "grand slam" not in left_subjects
+    assert "slam results" not in left_subjects
+    assert "kenny omega" in left_subjects
+    assert "jon moxley" in right_subjects
+
+    snapshot = _anchor_contract_snapshot(left, right)
+    canonical, failures, _ = _validate_anchor_relation(
+        snapshot, left_evidence=left, right_evidence=right,
+        shared_fact="Grand Slam Results report wrestling wins",
+        left_central="Grand Slam Results report Kenny Omega wins",
+        right_central="Grand Slam Results report Jon Moxley wins")
+    assert canonical is None
+    assert any(row["family"] == "duplicate_relation_anchor_grounding" and
+               row["detail"] == "no_shared_explicit_subject" for row in failures)
+
+
 def test_event_registry_failure_rejects_duplicate_binding(monkeypatch, tmp_path):
     monkeypatch.setattr(active, "EVENT_REGISTRY_PATH", tmp_path / "missing-event-registry.json")
     left = "Stephanie Vaquer wins the championship tonight"
