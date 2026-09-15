@@ -402,6 +402,50 @@ def test_generic_common_evidence_has_no_binding_subject_anchor():
                    row["detail"] == "no_shared_explicit_subject" for row in failures)
 
 
+def test_registered_event_aliases_cannot_bind_as_subjects():
+    fixtures = (
+        ("AEW Grand Slam", "Grand Slam"),
+        ("AEW Forbidden Door", "Forbidden Door"),
+        ("AEW Full Gear", "Full Gear"),
+        ("AEW Beach Break", "Beach Break"),
+        ("TNA Victory Road", "Victory Road"),
+        ("ROH Final Battle", "Final Battle"),
+    )
+    for event_prefix, event_anchor in fixtures:
+        left = f"{event_prefix} Adds Kenny Omega Match"
+        right = f"{event_prefix} Announces Jon Moxley Match"
+        s = _anchor_contract_snapshot(left, right)
+        canonical, failures, _ = _validate_anchor_relation(
+            s, left_evidence=left, right_evidence=right,
+            shared_fact=f"{event_anchor} announces a wrestling match",
+            left_central=f"{event_anchor} adds a wrestling match",
+            right_central=f"{event_anchor} announces a wrestling match")
+        assert canonical is None
+        assert any(row["family"] == "duplicate_relation_anchor_grounding" and
+                   row["detail"] == "no_shared_explicit_subject" for row in failures)
+
+
+def test_registered_event_span_preserves_wrestler_subjects():
+    phrases = active._registered_event_phrases()
+    subjects = active._explicit_endpoint_subjects(
+        {"title": "AEW Grand Slam Adds Kenny Omega Match"}, phrases)
+    assert "grand slam" not in subjects
+    assert "kenny omega" in subjects
+
+
+def test_event_registry_failure_rejects_duplicate_binding(monkeypatch, tmp_path):
+    monkeypatch.setattr(active, "EVENT_REGISTRY_PATH", tmp_path / "missing-event-registry.json")
+    left = "Stephanie Vaquer wins the championship tonight"
+    right = "Stephanie Vaquer wins the championship tonight in Chile"
+    s = _anchor_contract_snapshot(left, right)
+    canonical, failures, _ = _validate_anchor_relation(
+        s, left_evidence=left, right_evidence=right,
+        shared_fact="Stephanie Vaquer wins the championship tonight")
+    assert canonical is None
+    assert ("duplicate_event_registry_grounding", "registry_unavailable") in {
+        (row["family"], row.get("detail")) for row in failures}
+
+
 def test_generic_championship_compound_cannot_bind_full_title_evidence():
     left = "Women's World Championship: Rhea Ripley wins title"
     right = "Women's World Championship: Iyo Sky wins title"

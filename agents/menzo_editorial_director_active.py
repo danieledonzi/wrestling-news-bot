@@ -22,6 +22,7 @@ POLICY_VERSION = "owtv_editorial_director_policy_v3_active"
 SCHEMA_PATH = ROOT / "config/editorial_director_output_schema_v3.json"
 POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V3_ACTIVE.md"
 RELATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_gate_schema_v3.json"
+EVENT_REGISTRY_PATH = ROOT / "config/event_registry.json"
 BOB_CAPACITY_FIELDS = ("article_type", "source_title", "category_hint", "reason",
                        "ai_editorial_reason", "event_key")
 DUPLICATE_EVIDENCE_FIELDS = ("left_evidence", "right_evidence")
@@ -302,18 +303,48 @@ def _non_anchor_lexical_overlap(left: str, right: str, anchor: str) -> int:
                (set(_binding_subject_tokens(right)) - anchor_tokens))
 
 
-def _explicit_endpoint_subjects(endpoint: Mapping[str, Any]) -> set[str]:
-    return set().union(*(shadow.menzo_duplicate_scorer.explicit_named_subjects(value)
+def _registered_event_phrases() -> tuple[str, ...]:
+    """Load canonical event identity for binding validation; malformed data is unsafe."""
+    registry = json.loads(EVENT_REGISTRY_PATH.read_text(encoding="utf-8"))
+    promotions = registry.get("promotions") if isinstance(registry, Mapping) else None
+    if not isinstance(promotions, Mapping):
+        raise ValueError("invalid_event_registry_promotions")
+    phrases = set()
+    for promotion in promotions.values():
+        events = promotion.get("events") if isinstance(promotion, Mapping) else None
+        if not isinstance(events, Mapping):
+            raise ValueError("invalid_event_registry_events")
+        for event in events.values():
+            if (not isinstance(event, Mapping) or
+                    not isinstance(event.get("canonical"), str) or
+                    not event["canonical"].strip()):
+                raise ValueError("invalid_event_registry_event")
+            phrases.add(event["canonical"].strip())
+            aliases = event.get("aliases")
+            if (not isinstance(aliases, list) or
+                    any(not isinstance(alias, str) or not alias.strip() for alias in aliases)):
+                raise ValueError("invalid_event_registry_aliases")
+            phrases.update(alias.strip() for alias in aliases)
+    if not phrases:
+        raise ValueError("empty_event_registry")
+    return tuple(sorted(phrases))
+
+
+def _explicit_endpoint_subjects(endpoint: Mapping[str, Any],
+                                registered_event_phrases: tuple[str, ...] = ()) -> set[str]:
+    return set().union(*(shadow.menzo_duplicate_scorer.explicit_named_subjects(
+                         value, registered_event_phrases)
                          for field in ANCHOR_SOURCE_FIELDS
                          if isinstance((value := endpoint.get(field)), str)))
 
 
 def _validate_duplicate_anchor_contract(ref: Any, duplicate_values: Mapping[str, Any],
                                         shared_fact: Any, endpoints: Mapping[str, Mapping[str, Any]],
-                                        failures: list[dict[str, Any]]) -> None:
+                                        failures: list[dict[str, Any]],
+                                        registered_event_phrases: tuple[str, ...]) -> None:
     """Bind grounded claims to one shared explicit subject without judging semantics."""
-    shared_anchors = (_explicit_endpoint_subjects(endpoints.get("left", {})) &
-                      _explicit_endpoint_subjects(endpoints.get("right", {})))
+    shared_anchors = (_explicit_endpoint_subjects(endpoints.get("left", {}), registered_event_phrases) &
+                      _explicit_endpoint_subjects(endpoints.get("right", {}), registered_event_phrases))
     if not shared_anchors:
         failures.append({"family": "duplicate_relation_anchor_grounding", "ref": ref,
                          "detail": "no_shared_explicit_subject"})
@@ -374,6 +405,8 @@ def _validate_duplicate_gate(value: Any, snapshot: Mapping[str, Any]):
         return None, [{"family": "other", "detail": "relations_array_required"}], telemetry
     _, relation_map = shadow.short_ref_maps(snapshot)
     _, endpoints_by_relation = _duplicate_gate_endpoint_maps(snapshot)
+    registered_event_phrases: tuple[str, ...] | None = None
+    event_registry_unavailable = False
     seen: set[str] = set()
     canonical = []
     for row in rows:
@@ -412,7 +445,18 @@ def _validate_duplicate_gate(value: Any, snapshot: Mapping[str, Any]):
                 failures.append({"family": "duplicate_centrality_contract", "ref": ref,
                                  "fields": invalid_centrality})
             if _bounded_text(shared) and not invalid_centrality:
-                _validate_duplicate_anchor_contract(ref, duplicate_values, shared, endpoints, failures)
+                if registered_event_phrases is None and not event_registry_unavailable:
+                    try:
+                        registered_event_phrases = _registered_event_phrases()
+                    except (OSError, ValueError, TypeError, json.JSONDecodeError):
+                        event_registry_unavailable = True
+                if event_registry_unavailable:
+                    failures.append({"family": "duplicate_event_registry_grounding", "ref": ref,
+                                     "detail": "registry_unavailable"})
+                else:
+                    _validate_duplicate_anchor_contract(
+                        ref, duplicate_values, shared, endpoints, failures,
+                        registered_event_phrases or ())
         if decision == "MATERIAL_UPDATE":
             if supplied.get("scope") != "recent_history":
                 failures.append({"family": "material_update_scope", "ref": ref})

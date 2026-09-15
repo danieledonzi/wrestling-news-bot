@@ -123,7 +123,17 @@ def canonical_binding_subject_text(value: str) -> str:
         character for character in decomposed if not unicodedata.combining(character)))
 
 
-def explicit_named_subjects(text: str) -> Set[str]:
+def _binding_phrase_tokens(value: str) -> list[str]:
+    return re.findall(r"[^\W_]+", canonical_binding_subject_text(value), flags=re.UNICODE)
+
+
+def _contains_token_span(tokens: list[str], span: list[str]) -> bool:
+    width = len(span)
+    return bool(width and any(tokens[index:index + width] == span
+                              for index in range(len(tokens) - width + 1)))
+
+
+def explicit_named_subjects(text: str, registered_event_phrases: Iterable[str] = ()) -> Set[str]:
     """Return conservative compound headline subjects for binding validation.
 
     Singleton capitalization is intentionally insufficient here. This binding
@@ -133,6 +143,10 @@ def explicit_named_subjects(text: str) -> Set[str]:
     token = rf"{letter}+(?:['’-]{letter}+)*"
     pairs = re.findall(rf"(?<![\w'’-])(?=({token}\s+{token})(?![\w'’-]))", text,
                        flags=re.UNICODE)
+    headline_tokens = _binding_phrase_tokens(text)
+    matched_event_spans = [tokens for phrase in registered_event_phrases
+                           if (tokens := _binding_phrase_tokens(phrase)) and
+                           _contains_token_span(headline_tokens, tokens)]
     names = set()
     for pair in pairs:
         left, right = pair.split(maxsplit=1)
@@ -145,6 +159,8 @@ def explicit_named_subjects(text: str) -> Set[str]:
                 and right.lower() not in _BINDING_SHOW_TOKENS
                 and not ({left_key, right_key} <= _BINDING_GENERIC_DESCRIPTOR_TOKENS)
                 and not ({left_key, right_key} <= _BINDING_EVENT_DESCRIPTOR_TOKENS)
+                and not any(_contains_token_span(span, _binding_phrase_tokens(pair))
+                            for span in matched_event_spans)
                 and (len(right) >= 3 or short_upper_identity)
                 and left[0].isupper() and right[0].isupper()):
             names.add(f"{left_key} {right_key}")

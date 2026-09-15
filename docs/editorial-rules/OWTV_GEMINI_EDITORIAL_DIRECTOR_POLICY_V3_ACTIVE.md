@@ -114,6 +114,10 @@ Stage names whose identity depends on a leading article may therefore lack deter
 bounded repair and whole-Active legacy fallback are preferred to adding local identity exceptions. If this conservative
 rule causes material fallback volume, identity ambiguity belongs in a separate bounded Gemini operation whose output is
 strictly validated, not in additional Python pseudo-NER heuristics.
+Canonical event names and aliases come from `config/event_registry.json`. When a token-aligned registered event span is
+present in a headline, a prospective compound wholly inside that span is event identity, not a binding subject anchor;
+valid named subjects elsewhere in the headline remain eligible. If the registry is unavailable or malformed, E04V must
+reject `DUPLICATE` binding and use bounded repair/whole-Active fallback rather than permit an event-derived anchor.
 
 `MATERIAL_UPDATE` is valid only for recent authoritative history and requires a concrete model-supplied `new_fact` plus
 a model-supplied `temporal_basis` showing the fact occurred, became known, or was officially confirmed after
