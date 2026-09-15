@@ -404,6 +404,11 @@ class CanonicalArtifactIndex:
             if result.get("duplicate_gate_logical_request_id"):
                 package["duplicate_gate_logical_request_id"] = result["duplicate_gate_logical_request_id"]
                 package["duplicate_gate_input_digest"] = result.get("duplicate_gate_input_digest")
+            if result.get("duplicate_confirmation_logical_request_id"):
+                package["duplicate_confirmation_logical_request_id"] = (
+                    result["duplicate_confirmation_logical_request_id"])
+                package["duplicate_confirmation_input_digest"] = result.get(
+                    "duplicate_confirmation_input_digest")
             data = json.dumps(package, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
             identity = {"url": candidate.get("url"), "source_url": candidate.get("url"),
                         "title": candidate.get("title")}

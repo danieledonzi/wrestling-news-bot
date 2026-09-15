@@ -5,7 +5,9 @@ import copy
 import hashlib
 import json
 import os
+import re
 import time
+import unicodedata
 from pathlib import Path
 from typing import Any, Callable, Mapping
 
@@ -20,8 +22,23 @@ POLICY_VERSION = "owtv_editorial_director_policy_v3_active"
 SCHEMA_PATH = ROOT / "config/editorial_director_output_schema_v3.json"
 POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V3_ACTIVE.md"
 RELATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_gate_schema_v3.json"
+CONFIRMATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_confirmation_schema_v3.json"
+EVENT_REGISTRY_PATH = ROOT / "config/event_registry.json"
 BOB_CAPACITY_FIELDS = ("article_type", "source_title", "category_hint", "reason",
                        "ai_editorial_reason", "event_key")
+DUPLICATE_EVIDENCE_FIELDS = ("left_evidence", "right_evidence")
+DUPLICATE_CENTRALITY_FIELDS = ("left_central_development", "right_central_development",
+                               "centrality_basis")
+CONFIRMATION_FIELDS = ("left_central_subject", "right_central_subject",
+                       "left_central_development", "right_central_development",
+                       "left_evidence", "right_evidence", "confirmation_basis")
+DUPLICATE_RELATION_FIELDS = {"ref", "decision", "shared_fact", "new_fact", "temporal_basis",
+                             *DUPLICATE_EVIDENCE_FIELDS, *DUPLICATE_CENTRALITY_FIELDS}
+GROUNDING_SOURCE_FIELDS = ("title", "source_title", "title_it", "summary", "retained_body")
+ANCHOR_SOURCE_FIELDS = ("title", "source_title", "title_it")
+MAX_DUPLICATE_SEMANTIC_FIELD_LENGTH = 500
+MIN_DUPLICATE_EVIDENCE_TOKENS = 2
+MIN_DUPLICATE_EVIDENCE_ALNUM_CHARS = 8
 
 
 def enabled(environ: Mapping[str, str] | None = None) -> bool:
@@ -205,16 +222,274 @@ def _prompt(snapshot: Mapping[str, Any], failures: list[dict[str, Any]] | None =
     return prompt
 
 
+def _normalize_grounding_text(value: str) -> str:
+    """Normalize formatting only; this deliberately performs no semantic matching."""
+    value = unicodedata.normalize("NFKC", value).casefold()
+    value = value.translate(str.maketrans({"‘": "'", "’": "'", "‚": "'", "‛": "'",
+                                           "“": '"', "”": '"', "„": '"', "‟": '"',
+                                           "‐": "-", "‑": "-", "‒": "-", "–": "-", "—": "-", "―": "-"}))
+    return re.sub(r"\s+", " ", value).strip()
+
+
+def _duplicate_gate_endpoint_maps(snapshot: Mapping[str, Any]) -> tuple[dict[str, Mapping[str, Any]],
+                                                                          dict[str, Mapping[str, Any]]]:
+    """Resolve each request-local relation ref to its exact provider-visible endpoints."""
+    provider_data = active_provider_input(snapshot)
+    endpoints = {str(row.get("ref")): row for table in ("candidates", "history")
+                 for row in provider_data.get(table, []) if isinstance(row, Mapping)}
+    relations = {}
+    for relation in provider_data.get("authorized_relations", []):
+        if not isinstance(relation, Mapping):
+            continue
+        left, right = endpoints.get(str(relation.get("left_ref"))), endpoints.get(str(relation.get("right_ref")))
+        if left is not None and right is not None:
+            relations[str(relation.get("ref"))] = {"left": left, "right": right}
+    return endpoints, relations
+
+
+def _grounded_evidence(value: Any, endpoint: Mapping[str, Any]) -> tuple[bool, str]:
+    if not isinstance(value, str) or not value.strip():
+        return False, "missing_or_empty"
+    if len(value) > MAX_DUPLICATE_SEMANTIC_FIELD_LENGTH:
+        return False, "too_long"
+    evidence = _normalize_grounding_text(value)
+    if not evidence:
+        return False, "missing_or_empty"
+    tokens = re.findall(r"[^\W_]+", evidence, flags=re.UNICODE)
+    if (len(tokens) < MIN_DUPLICATE_EVIDENCE_TOKENS or
+            sum(len(token) for token in tokens) < MIN_DUPLICATE_EVIDENCE_ALNUM_CHARS):
+        return False, "insufficient_meaningful_span"
+    first_alnum = next(index for index, character in enumerate(evidence) if character.isalnum())
+    last_alnum = max(index for index, character in enumerate(evidence) if character.isalnum())
+    contained_without_boundary = False
+    for field in GROUNDING_SOURCE_FIELDS:
+        source = endpoint.get(field)
+        if not isinstance(source, str):
+            continue
+        normalized_source = _normalize_grounding_text(source)
+        for match in re.finditer(re.escape(evidence), normalized_source):
+            contained_without_boundary = True
+            start, end = match.start() + first_alnum, match.start() + last_alnum + 1
+            if ((start == 0 or not normalized_source[start - 1].isalnum()) and
+                    (end == len(normalized_source) or not normalized_source[end].isalnum())):
+                return True, field
+    if contained_without_boundary:
+        return False, "not_token_boundary_aligned"
+    return False, "not_contained_in_exact_endpoint"
+
+
+def _bounded_text(value: Any) -> bool:
+    return isinstance(value, str) and bool(value.strip()) and len(value) <= MAX_DUPLICATE_SEMANTIC_FIELD_LENGTH
+
+
+def _lexical_tokens(value: str) -> list[str]:
+    return re.findall(r"[^\W_]+", _normalize_grounding_text(value), flags=re.UNICODE)
+
+
+def _contains_aligned_anchor(value: Any, anchor: str) -> bool:
+    if not isinstance(value, str):
+        return False
+    tokens = _binding_subject_tokens(value)
+    anchor_tokens = _binding_subject_tokens(anchor)
+    width = len(anchor_tokens)
+    return bool(width and any(tokens[index:index + width] == anchor_tokens
+                              for index in range(len(tokens) - width + 1)))
+
+
+def _binding_subject_tokens(value: str) -> list[str]:
+    canonical = shadow.menzo_duplicate_scorer.canonical_binding_subject_text(value)
+    return re.findall(r"[^\W_]+", canonical, flags=re.UNICODE)
+
+
+def _non_anchor_lexical_overlap(left: str, right: str, anchor: str) -> int:
+    anchor_tokens = set(_binding_subject_tokens(anchor))
+    return len((set(_binding_subject_tokens(left)) - anchor_tokens) &
+               (set(_binding_subject_tokens(right)) - anchor_tokens))
+
+
+def _registered_event_phrases() -> tuple[str, ...]:
+    """Load canonical event identity for binding validation; malformed data is unsafe."""
+    registry = json.loads(EVENT_REGISTRY_PATH.read_text(encoding="utf-8"))
+    promotions = registry.get("promotions") if isinstance(registry, Mapping) else None
+    if not isinstance(promotions, Mapping):
+        raise ValueError("invalid_event_registry_promotions")
+    phrases = set()
+    for promotion in promotions.values():
+        events = promotion.get("events") if isinstance(promotion, Mapping) else None
+        if not isinstance(events, Mapping):
+            raise ValueError("invalid_event_registry_events")
+        for event in events.values():
+            if (not isinstance(event, Mapping) or
+                    not isinstance(event.get("canonical"), str) or
+                    not event["canonical"].strip()):
+                raise ValueError("invalid_event_registry_event")
+            phrases.add(event["canonical"].strip())
+            aliases = event.get("aliases")
+            if (not isinstance(aliases, list) or
+                    any(not isinstance(alias, str) or not alias.strip() for alias in aliases)):
+                raise ValueError("invalid_event_registry_aliases")
+            phrases.update(alias.strip() for alias in aliases)
+    if not phrases:
+        raise ValueError("empty_event_registry")
+    return tuple(sorted(phrases))
+
+
+def _explicit_endpoint_subjects(endpoint: Mapping[str, Any],
+                                registered_event_phrases: tuple[str, ...] = ()) -> set[str]:
+    return set().union(*(shadow.menzo_duplicate_scorer.explicit_named_subjects(
+                         value, registered_event_phrases)
+                         for field in ANCHOR_SOURCE_FIELDS
+                         if isinstance((value := endpoint.get(field)), str)))
+
+
+def _validate_duplicate_anchor_contract(ref: Any, duplicate_values: Mapping[str, Any],
+                                        shared_fact: Any, endpoints: Mapping[str, Mapping[str, Any]],
+                                        failures: list[dict[str, Any]],
+                                        registered_event_phrases: tuple[str, ...]) -> None:
+    """Bind grounded claims to one shared explicit subject without judging semantics."""
+    shared_anchors = (_explicit_endpoint_subjects(endpoints.get("left", {}), registered_event_phrases) &
+                      _explicit_endpoint_subjects(endpoints.get("right", {}), registered_event_phrases))
+    if not shared_anchors:
+        failures.append({"family": "duplicate_relation_anchor_grounding", "ref": ref,
+                         "detail": "no_shared_explicit_subject"})
+        return
+    ordered = sorted(shared_anchors, key=lambda anchor: (-len(_lexical_tokens(anchor)), -len(anchor), anchor))
+    left_evidence, right_evidence = duplicate_values["left_evidence"], duplicate_values["right_evidence"]
+    left_anchors = {anchor for anchor in ordered if _contains_aligned_anchor(left_evidence, anchor)}
+    right_anchors = {anchor for anchor in ordered if _contains_aligned_anchor(right_evidence, anchor)}
+    evidence_anchors = left_anchors & right_anchors
+    if not evidence_anchors:
+        if not left_anchors or right_anchors:
+            failures.append({"family": "duplicate_left_evidence_grounding", "ref": ref,
+                             "detail": "missing_shared_subject_anchor"})
+        if not right_anchors or left_anchors:
+            failures.append({"family": "duplicate_right_evidence_grounding", "ref": ref,
+                             "detail": "missing_shared_subject_anchor"})
+        return
+    claims = {"shared_fact": shared_fact,
+              "left_central_development": duplicate_values["left_central_development"],
+              "right_central_development": duplicate_values["right_central_development"]}
+    fully_linked = [anchor for anchor in ordered if anchor in evidence_anchors and
+                    all(_contains_aligned_anchor(value, anchor) for value in claims.values())]
+    selected = fully_linked[0] if fully_linked else next(anchor for anchor in ordered if anchor in evidence_anchors)
+    if not _contains_aligned_anchor(shared_fact, selected):
+        failures.append({"family": "duplicate_claim_anchor_grounding", "ref": ref,
+                         "detail": "missing_shared_subject_anchor"})
+    for side in ("left", "right"):
+        central = duplicate_values[f"{side}_central_development"]
+        evidence = duplicate_values[f"{side}_evidence"]
+        details = []
+        if not _contains_aligned_anchor(central, selected):
+            details.append("missing_shared_subject_anchor")
+        if isinstance(central, str) and isinstance(evidence, str):
+            if _non_anchor_lexical_overlap(central, evidence, selected) < 2:
+                details.append("insufficient_evidence_factual_linkage")
+        if details:
+            failures.append({"family": "duplicate_centrality_contract", "ref": ref,
+                             "field": f"{side}_central_development", "details": details})
+    if isinstance(shared_fact, str):
+        for side in ("left", "right"):
+            evidence = duplicate_values[f"{side}_evidence"]
+            if isinstance(evidence, str) and _non_anchor_lexical_overlap(
+                    shared_fact, evidence, selected) < 2:
+                failures.append({"family": "duplicate_claim_anchor_grounding", "ref": ref,
+                                 "detail": f"insufficient_{side}_evidence_factual_linkage"})
+
+
 def _validate_duplicate_gate(value: Any, snapshot: Mapping[str, Any]):
-    """Validate only relation semantics; candidates do not exist in this phase's output."""
+    """Active-local E04V: validate complete relation semantics and exact endpoint evidence."""
+    failures: list[dict[str, Any]] = []
+    telemetry: list[dict[str, Any]] = []
     if not isinstance(value, Mapping):
-        return None, [{"family": "parse_json", "detail": "output_not_object"}], []
-    synthetic = {"candidates": [
-        {"ref": ref, "editorial_class": "SKIP", "recommended_action": "SKIP",
-         "category": "World", "story_core": "duplicate gate placeholder"}
-        for ref in shadow.short_ref_maps(snapshot)[0]], "relations": value.get("relations")}
-    output, failures, telemetry = shadow.canonicalize_output(synthetic, snapshot)
-    return (output.get("relations") if output else None), failures, telemetry
+        return None, [{"family": "parse_json", "detail": "output_not_object"}], telemetry
+    for field in set(value) - {"relations"}:
+        telemetry.append({"family": "locally_canonicalized_extra_field", "field": field})
+    rows = value.get("relations")
+    if not isinstance(rows, list):
+        return None, [{"family": "other", "detail": "relations_array_required"}], telemetry
+    _, relation_map = shadow.short_ref_maps(snapshot)
+    _, endpoints_by_relation = _duplicate_gate_endpoint_maps(snapshot)
+    registered_event_phrases: tuple[str, ...] | None = None
+    event_registry_unavailable = False
+    seen: set[str] = set()
+    canonical = []
+    for row in rows:
+        if not isinstance(row, Mapping):
+            failures.append({"family": "relation_ref", "detail": "row_not_object"}); continue
+        ref = row.get("ref")
+        for field in set(row) - DUPLICATE_RELATION_FIELDS:
+            telemetry.append({"family": "locally_canonicalized_extra_field", "ref": ref, "field": field})
+        if ref not in relation_map:
+            telemetry.append({"family": "relation_ref", "ref": ref, "detail": "unauthorized_dropped"}); continue
+        if ref in seen:
+            failures.append({"family": "relation_ref", "ref": ref, "detail": "duplicate"}); continue
+        seen.add(ref)
+        supplied = relation_map[ref]
+        decision = shadow._enum(row.get("decision"), shadow.DECISIONS, "relation_decision", telemetry, ref)
+        if decision is None:
+            failures.append({"family": "relation_decision", "ref": ref}); continue
+        shared, new, temporal = row.get("shared_fact"), row.get("new_fact"), row.get("temporal_basis")
+        duplicate_values = {field: row.get(field) for field in
+                            (*DUPLICATE_EVIDENCE_FIELDS, *DUPLICATE_CENTRALITY_FIELDS)}
+        if decision == "DUPLICATE":
+            if not _bounded_text(shared):
+                failures.append({"family": "duplicate_shared_fact", "ref": ref})
+            endpoints = endpoints_by_relation.get(str(ref), {})
+            for side in ("left", "right"):
+                valid, detail = _grounded_evidence(duplicate_values[f"{side}_evidence"], endpoints.get(side, {}))
+                if not valid:
+                    failures.append({"family": f"duplicate_{side}_evidence_grounding", "ref": ref,
+                                     "detail": detail})
+                else:
+                    telemetry.append({"family": f"duplicate_{side}_evidence_grounded", "ref": ref,
+                                      "source_field": detail})
+            invalid_centrality = [field for field in DUPLICATE_CENTRALITY_FIELDS
+                                  if not _bounded_text(duplicate_values[field])]
+            if invalid_centrality:
+                failures.append({"family": "duplicate_centrality_contract", "ref": ref,
+                                 "fields": invalid_centrality})
+            if _bounded_text(shared) and not invalid_centrality:
+                if registered_event_phrases is None and not event_registry_unavailable:
+                    try:
+                        registered_event_phrases = _registered_event_phrases()
+                    except (OSError, ValueError, TypeError, json.JSONDecodeError):
+                        event_registry_unavailable = True
+                if event_registry_unavailable:
+                    failures.append({"family": "duplicate_event_registry_grounding", "ref": ref,
+                                     "detail": "registry_unavailable"})
+                else:
+                    _validate_duplicate_anchor_contract(
+                        ref, duplicate_values, shared, endpoints, failures,
+                        registered_event_phrases or ())
+        if decision == "MATERIAL_UPDATE":
+            if supplied.get("scope") != "recent_history":
+                failures.append({"family": "material_update_scope", "ref": ref})
+            if not isinstance(new, str) or not new.strip():
+                failures.append({"family": "material_update_new_fact", "ref": ref})
+            if not isinstance(temporal, str) or not temporal.strip():
+                failures.append({"family": "material_update_temporal_basis", "ref": ref})
+        duplicate_extras = decision != "DUPLICATE" and any(
+            value is not None for value in duplicate_values.values())
+        semantic_extras = ((decision != "DUPLICATE" and shared is not None) or
+                           (decision != "MATERIAL_UPDATE" and (new is not None or temporal is not None)) or
+                           (decision == "MATERIAL_UPDATE" and shared is not None) or
+                           duplicate_extras)
+        if semantic_extras:
+            failures.append({"family": "material_update_grounding", "ref": ref,
+                             "detail": "conditional_semantic_fields_contradict_decision"})
+        canonical.append({"pair_id": supplied["pair_id"], "scope": supplied["scope"],
+            "left_id": supplied["left_id"], "right_id": supplied["right_id"], "decision": decision,
+            "shared_fact": shared.strip() if isinstance(shared, str) and shared.strip() else None,
+            "new_fact": new.strip() if isinstance(new, str) and new.strip() else None,
+            "temporal_basis": temporal.strip() if isinstance(temporal, str) and temporal.strip() else None,
+            **{field: (value.strip() if isinstance(value, str) and value.strip() else None)
+               for field, value in duplicate_values.items()},
+            "scorer": {key: copy.deepcopy(supplied.get(key))
+                       for key in ("scorer_version", "score", "threshold", "components")}})
+    missing = sorted(set(relation_map) - seen)
+    if missing:
+        failures.append({"family": "relation_coverage", "missing_refs": missing})
+    return (None if failures else canonical), failures, telemetry
 
 
 def _duplicate_prompt(snapshot: Mapping[str, Any], failures: list[dict[str, Any]] | None = None) -> str:
@@ -227,6 +502,111 @@ def _duplicate_prompt(snapshot: Mapping[str, Any], failures: list[dict[str, Any]
     if failures is not None:
         prompt += "\nREPAIR ONLY THESE VALIDATION FAMILIES=" + json.dumps(failures[:20], separators=(",", ":"))
     return prompt
+
+
+def _duplicate_confirmation_input(snapshot: Mapping[str, Any],
+                                  relations: list[dict[str, Any]]) -> tuple[dict[str, Any], dict[str, int]]:
+    """Build an independent, scorer-free batch from exact provider-visible endpoints."""
+    _, endpoint_relations = _duplicate_gate_endpoint_maps(snapshot)
+    _, relation_map = shadow.short_ref_maps(snapshot)
+    endpoint_by_pair = {relation_map[ref]["pair_id"]: endpoints
+                        for ref, endpoints in endpoint_relations.items() if ref in relation_map}
+    rows, relation_indexes = [], {}
+    for index, relation in enumerate(relations):
+        if relation.get("decision") != "DUPLICATE":
+            continue
+        ref = f"d{len(rows)}"
+        endpoints = endpoint_by_pair.get(relation.get("pair_id"), {})
+        row = {"ref": ref}
+        for side in ("left", "right"):
+            endpoint = endpoints.get(side, {})
+            row[side] = {field: endpoint[field] for field in GROUNDING_SOURCE_FIELDS
+                         if isinstance(endpoint.get(field), str) and endpoint[field].strip()}
+        rows.append(row)
+        relation_indexes[ref] = index
+    return {"relations": rows}, relation_indexes
+
+
+def _duplicate_confirmation_prompt(payload: Mapping[str, Any],
+                                   failures: list[dict[str, Any]] | None = None) -> str:
+    prompt = (
+        "DUPLICATE CONFIRMATION PHASE ONLY. Independently evaluate every relation. "
+        "Return CONFIRM_DUPLICATE only when both exact endpoints concern the same central subject "
+        "and report the same central development or concrete fact. Shared promotion, show, event, "
+        "championship, category, action verb, or background context is insufficient. Otherwise return "
+        "REJECT_DUPLICATE. Quote one short meaningful exact evidence span from each endpoint and provide "
+        "concise central subjects, central developments, and confirmation_basis. Return only JSON. INPUT=" +
+        json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")))
+    if failures is not None:
+        prompt += "\nREPAIR ONLY THESE VALIDATION FAMILIES=" + json.dumps(failures[:20], separators=(",", ":"))
+    return prompt
+
+
+def _validate_duplicate_confirmation(value: Any, payload: Mapping[str, Any]):
+    """Validate confirmation structure and endpoint-local evidence, never semantics."""
+    failures: list[dict[str, Any]] = []
+    telemetry: list[dict[str, Any]] = []
+    if not isinstance(value, Mapping):
+        return None, [{"family": "parse_json", "detail": "output_not_object"}], telemetry
+    for field in set(value) - {"confirmations"}:
+        telemetry.append({"family": "locally_canonicalized_extra_field", "field": field})
+    rows = value.get("confirmations")
+    if not isinstance(rows, list):
+        return None, [{"family": "duplicate_confirmation_coverage",
+                       "detail": "confirmations_array_required"}], telemetry
+    authorized = {str(row.get("ref")): row for row in payload.get("relations", [])
+                  if isinstance(row, Mapping)}
+    seen: set[str] = set()
+    canonical = []
+    allowed_fields = {"ref", "decision", *CONFIRMATION_FIELDS}
+    for row in rows:
+        if not isinstance(row, Mapping):
+            failures.append({"family": "duplicate_confirmation_ref", "detail": "row_not_object"})
+            continue
+        ref = row.get("ref")
+        if ref not in authorized:
+            failures.append({"family": "duplicate_confirmation_ref", "ref": ref,
+                             "detail": "unauthorized"})
+            continue
+        if ref in seen:
+            failures.append({"family": "duplicate_confirmation_ref", "ref": ref,
+                             "detail": "duplicate"})
+            continue
+        seen.add(ref)
+        extras = set(row) - allowed_fields
+        if extras:
+            failures.append({"family": "duplicate_confirmation_contract", "ref": ref,
+                             "fields": sorted(extras)})
+        decision = row.get("decision")
+        if decision not in {"CONFIRM_DUPLICATE", "REJECT_DUPLICATE"}:
+            failures.append({"family": "duplicate_confirmation_decision", "ref": ref})
+        invalid = [field for field in CONFIRMATION_FIELDS if not _bounded_text(row.get(field))]
+        if invalid:
+            failures.append({"family": "duplicate_confirmation_contract", "ref": ref,
+                             "fields": invalid})
+        for side in ("left", "right"):
+            valid, detail = _grounded_evidence(row.get(f"{side}_evidence"), authorized[ref].get(side, {}))
+            if not valid:
+                failures.append({"family": f"duplicate_confirmation_{side}_evidence_grounding",
+                                 "ref": ref, "detail": detail})
+        canonical.append({"ref": ref, "decision": decision,
+                          **{field: (row[field].strip() if isinstance(row.get(field), str) else None)
+                             for field in CONFIRMATION_FIELDS}})
+    missing = sorted(set(authorized) - seen)
+    if missing:
+        failures.append({"family": "duplicate_confirmation_coverage", "missing_refs": missing})
+    return (None if failures else canonical), failures, telemetry
+
+
+def _apply_duplicate_confirmation(relations: list[dict[str, Any]], confirmations: list[dict[str, Any]],
+                                  relation_indexes: Mapping[str, int]) -> None:
+    """Apply Gemini's confirmation verdict without locally inventing relation semantics."""
+    for confirmation in confirmations:
+        relation = relations[relation_indexes[confirmation["ref"]]]
+        relation["duplicate_confirmation"] = copy.deepcopy(confirmation)
+        relation["primary_decision"] = "DUPLICATE"
+        if confirmation["decision"] == "REJECT_DUPLICATE":
+            relation["decision"] = "NO_MATCH"
 
 
 def _apply_duplicate_gate(snapshot: dict[str, Any], relations: list[dict[str, Any]]) -> None:
@@ -325,6 +705,9 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
     failures: list[dict[str, Any]] = []
     gate_attempts = 0
     gate_logical_request_id = None
+    confirmation_attempts = 0
+    confirmation_logical_request_id = None
+    confirmation_input_digest = None
     if has_relations:
         gate_logical_request_id = gate_request.logical_request_id
         gate_input_digest = snapshot["input_digest"]
@@ -381,11 +764,108 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                     "fallback_reason": failures[0]["family"] if failures else "duplicate_gate_validation_failed",
                     "duplicate_gate_logical_request_id": gate_logical_request_id,
                     "duplicate_gate_input_digest": gate_input_digest}
+        confirmation_payload, confirmation_relation_indexes = _duplicate_confirmation_input(snapshot, relations)
+        if confirmation_payload["relations"]:
+            confirmation_request = OperationalAIRequest(
+                "Menzo", "editorial_director_duplicate_confirmation",
+                reason_code="editorial_director_duplicate_confirmation")
+            confirmation_logical_request_id = confirmation_request.logical_request_id
+            confirmation_serialized = json.dumps(
+                confirmation_payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+            confirmation_input_digest = hashlib.sha256(confirmation_serialized.encode("utf-8")).hexdigest()
+            confirmation_schema = json.loads(CONFIRMATION_SCHEMA_PATH.read_text(encoding="utf-8"))
+            confirmations = None
+            confirmation_failures: list[dict[str, Any]] = []
+            for index in range(2):
+                confirmation_attempts += 1
+                repair = index == 1
+                attempt = confirmation_request.start(
+                    MODEL, repair=repair,
+                    reason_code="duplicate_confirmation_validation_failed" if repair else "")
+                started = time.monotonic()
+                confirmation_response = None
+                try:
+                    confirmation_response = call(
+                        _duplicate_confirmation_prompt(
+                            confirmation_payload, confirmation_failures if repair else None),
+                        confirmation_schema, shadow.PROVIDER_TIMEOUT_SECONDS)
+                except Exception as exc:
+                    record_gemini_attempt(
+                        response=confirmation_response, model_requested=MODEL,
+                        operation_id=confirmation_request.logical_request_id, attempt_index=index,
+                        repair=repair, fallback=False, agent="Menzo",
+                        workload="editorial_director_duplicate_confirmation",
+                        phase="editorial_director_duplicate_confirmation_repair" if repair else
+                              "editorial_director_duplicate_confirmation_primary",
+                        shadow=False, logical_request_id=confirmation_request.logical_request_id,
+                        canonical_attempt_id=attempt["attempt_id"],
+                        candidate_count=len(snapshot["candidates"]),
+                        relation_count=len(confirmation_payload["relations"]),
+                        input_digest=confirmation_input_digest, policy_version=POLICY_VERSION,
+                        policy_digest=digest, status="failed", error_class=type(exc).__name__)
+                    confirmation_request.failed(
+                        attempt, error_class="upstream", error_terminal=True,
+                        latency_ms=int((time.monotonic() - started) * 1000))
+                    return {**base, "attempts": gate_attempts + confirmation_attempts,
+                            "status": "PROVIDER_FAILED", "fallback_reason": type(exc).__name__,
+                            "duplicate_gate_logical_request_id": gate_logical_request_id,
+                            "duplicate_gate_input_digest": gate_input_digest,
+                            "duplicate_confirmation_logical_request_id": confirmation_logical_request_id,
+                            "duplicate_confirmation_input_digest": confirmation_input_digest}
+                record_gemini_attempt(
+                    response=confirmation_response, model_requested=MODEL,
+                    operation_id=confirmation_request.logical_request_id, attempt_index=index,
+                    repair=repair, fallback=False, agent="Menzo",
+                    workload="editorial_director_duplicate_confirmation",
+                    phase="editorial_director_duplicate_confirmation_repair" if repair else
+                          "editorial_director_duplicate_confirmation_primary",
+                    shadow=False, logical_request_id=confirmation_request.logical_request_id,
+                    canonical_attempt_id=attempt["attempt_id"], candidate_count=len(snapshot["candidates"]),
+                    relation_count=len(confirmation_payload["relations"]),
+                    input_digest=confirmation_input_digest, policy_version=POLICY_VERSION,
+                    policy_digest=digest, status="called")
+                confirmation_request.defer(attempt, int((time.monotonic() - started) * 1000))
+                try:
+                    confirmations, confirmation_failures, confirmation_telemetry = (
+                        _validate_duplicate_confirmation(
+                            shadow._decode(confirmation_response), confirmation_payload))
+                except Exception as exc:
+                    confirmations, confirmation_failures, confirmation_telemetry = None, [
+                        {"family": "parse_json", "detail": type(exc).__name__}], []
+                base["validation_attempts"].append({
+                    "phase": "duplicate_confirmation", "attempt_index": index,
+                    "valid": not confirmation_failures,
+                    "validation_families": confirmation_failures,
+                    "canonicalizations": confirmation_telemetry})
+                confirmation_request.resolve_deferred(
+                    not confirmation_failures,
+                    error_terminal=repair and bool(confirmation_failures))
+                if not confirmation_failures:
+                    break
+            if confirmation_failures or confirmations is None:
+                return {**base, "attempts": gate_attempts + confirmation_attempts,
+                        "validation_errors": confirmation_failures,
+                        "fallback_reason": (confirmation_failures[0]["family"]
+                                            if confirmation_failures else
+                                            "duplicate_confirmation_validation_failed"),
+                        "duplicate_gate_logical_request_id": gate_logical_request_id,
+                        "duplicate_gate_input_digest": gate_input_digest,
+                        "duplicate_confirmation_logical_request_id": confirmation_logical_request_id,
+                        "duplicate_confirmation_input_digest": confirmation_input_digest}
+            _apply_duplicate_confirmation(relations, confirmations, confirmation_relation_indexes)
+            for relation in relations:
+                if relation.get("primary_decision") == "DUPLICATE":
+                    relation["duplicate_confirmation_provenance"] = {
+                        "logical_request_id": confirmation_logical_request_id,
+                        "input_digest": confirmation_input_digest}
         _apply_duplicate_gate(snapshot, relations)
         if not snapshot.get("candidates"):
-            return {**base, "status": "VALIDATED", "attempts": gate_attempts,
+            return {**base, "status": "VALIDATED",
+                    "attempts": gate_attempts + confirmation_attempts,
                     "duplicate_gate_logical_request_id": gate_logical_request_id,
                     "duplicate_gate_input_digest": gate_input_digest,
+                    "duplicate_confirmation_logical_request_id": confirmation_logical_request_id,
+                    "duplicate_confirmation_input_digest": confirmation_input_digest,
                     "output": {"schema_version": SCHEMA_VERSION, "policy_version": POLICY_VERSION,
                                "candidates": [], "relations": relations}, "validation_errors": []}
         request = OperationalAIRequest("Menzo", "editorial_director_active",
@@ -424,14 +904,19 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
         request.resolve_deferred(not failures, error_terminal=repair and bool(failures))
         if not failures:
             output["relations"] = copy.deepcopy(snapshot.get("duplicate_gate_relations", []))
-            result = {**base, "status": "VALIDATED", "attempts": gate_attempts + index + 1,
+            result = {**base, "status": "VALIDATED",
+                      "attempts": gate_attempts + confirmation_attempts + index + 1,
                       "logical_request_id": request.logical_request_id, "policy_digest": digest,
                       "input_digest": snapshot["input_digest"], "output": output, "validation_errors": []}
             if gate_logical_request_id:
                 result["duplicate_gate_logical_request_id"] = gate_logical_request_id
                 result["duplicate_gate_input_digest"] = gate_input_digest
+            if confirmation_logical_request_id:
+                result["duplicate_confirmation_logical_request_id"] = confirmation_logical_request_id
+                result["duplicate_confirmation_input_digest"] = confirmation_input_digest
             return result
-    return {**base, "attempts": gate_attempts + 2, "logical_request_id": request.logical_request_id,
+    return {**base, "attempts": gate_attempts + confirmation_attempts + 2,
+            "logical_request_id": request.logical_request_id,
             "validation_errors": failures, "fallback_reason": failures[0]["family"] if failures else "validation_failed"}
 
 

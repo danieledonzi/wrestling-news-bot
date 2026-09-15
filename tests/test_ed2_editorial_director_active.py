@@ -27,6 +27,24 @@ def response(s, actions=("SELECT", "DEFER", "SKIP")):
             for i in range(len(s["authorized_relations"]))]}
 
 
+def grounded_duplicate(ref, left_evidence, right_evidence, shared_fact="same confirmed development"):
+    return {"ref": ref, "decision": "DUPLICATE", "shared_fact": shared_fact,
+            "left_evidence": left_evidence, "right_evidence": right_evidence,
+            "left_central_development": shared_fact,
+            "right_central_development": shared_fact,
+            "centrality_basis": "The supported shared fact is the autonomous central development of both endpoints."}
+
+
+def duplicate_confirmation(ref, left_evidence, right_evidence, decision="CONFIRM_DUPLICATE"):
+    return {"ref": ref, "decision": decision,
+            "left_central_subject": "the central subject in the left endpoint",
+            "right_central_subject": "the central subject in the right endpoint",
+            "left_central_development": "the concrete development reported by the left endpoint",
+            "right_central_development": "the concrete development reported by the right endpoint",
+            "left_evidence": left_evidence, "right_evidence": right_evidence,
+            "confirmation_basis": "The endpoints were independently compared for subject and development."}
+
+
 def test_active_flag_is_separate_and_defaults_off():
     assert not active.enabled({})
     assert not active.enabled({"OWTV_EDITORIAL_DIRECTOR_ACTIVE_ENABLED": "false",
@@ -111,6 +129,7 @@ def test_provider_failure_and_oversize_are_whole_result_failures(monkeypatch):
 def test_same_run_duplicate_is_removed_before_editorial_classification(monkeypatch):
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     s = snapshot(2)
+    s["candidates"][1]["title"] = "Jasper Troy Becomes First Confirmed Release"
     left, right = [x["candidate_id"] for x in s["candidates"]]
     s["authorized_relations"] = [{"pair_id": "p", "scope": "same_run", "left_id": left,
         "right_id": right, "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
@@ -118,11 +137,15 @@ def test_same_run_duplicate_is_removed_before_editorial_classification(monkeypat
     def provider(prompt, *_):
         calls.append(prompt)
         if "DUPLICATE GATE PHASE ONLY" in prompt:
-            return {"relations": [{"ref": "r0", "decision": "DUPLICATE",
-                                    "shared_fact": "same confirmed release"}]}
+            return {"relations": [grounded_duplicate("r0", s["candidates"][0]["title"],
+                                                       s["candidates"][1]["title"],
+                                                       "Jasper Troy Becomes First Confirmed Release")]}
+        if "DUPLICATE CONFIRMATION PHASE ONLY" in prompt:
+            return {"confirmations": [duplicate_confirmation(
+                "d0", s["candidates"][0]["title"], s["candidates"][1]["title"])]}
         return response(s, ("SELECT",))
     result = active.evaluate(s, provider=provider)
-    assert result["status"] == "VALIDATED" and len(calls) == 2
+    assert result["status"] == "VALIDATED" and len(calls) == 3
     assert len(result["output"]["candidates"]) == 1
     assert len(s["semantic_duplicate_skips"]) == 1
 
@@ -165,6 +188,174 @@ def test_empty_relation_matrix_creates_no_duplicate_gate_attempt(monkeypatch):
     assert ledger[0]["workload"] == "editorial_director_active"
     assert not any(kwargs.get("model_role") == "editorial_director_duplicate_gate"
                    for _, kwargs in events)
+    assert not any(kwargs.get("model_role") == "editorial_director_duplicate_confirmation"
+                   for _, kwargs in events)
+
+
+def _two_candidate_relation_snapshot(left_title, right_title):
+    s = _anchor_contract_snapshot(left_title, right_title)
+    s["authorized_relations_complete"] = True
+    return s
+
+
+def test_confirmation_rejects_shared_promotion_wording_without_binding(monkeypatch):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    left = "New Japan Pro Wrestling Signs Mercedes Mone"
+    right = "New Japan Pro Wrestling Signs Kazuchika Okada"
+    s = _two_candidate_relation_snapshot(left, right)
+    calls = []
+
+    def provider(prompt, *_):
+        calls.append(prompt)
+        if "DUPLICATE GATE PHASE ONLY" in prompt:
+            return {"relations": [grounded_duplicate(
+                "r0", left, right, "New Japan Pro Wrestling signs a wrestler")]}
+        if "DUPLICATE CONFIRMATION PHASE ONLY" in prompt:
+            assert "score" not in prompt and "threshold" not in prompt
+            return {"confirmations": [duplicate_confirmation(
+                "d0", left, right, "REJECT_DUPLICATE")]}
+        return response(s, ("SELECT", "DEFER"))
+
+    result = active.evaluate(s, provider=provider)
+    assert result["status"] == "VALIDATED" and len(calls) == 3
+    assert len(s["candidates"]) == 2 and not s["semantic_duplicate_skips"]
+    relation = result["output"]["relations"][0]
+    assert relation["primary_decision"] == "DUPLICATE"
+    assert relation["decision"] == "NO_MATCH"
+    assert relation["duplicate_confirmation"]["decision"] == "REJECT_DUPLICATE"
+    assert result["duplicate_confirmation_logical_request_id"] != result["duplicate_gate_logical_request_id"]
+    assert result["duplicate_confirmation_input_digest"] != result["duplicate_gate_input_digest"]
+
+
+def test_confirmation_rejects_background_title_change_reaction(monkeypatch):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    left = "Triple H Reacts To Stephanie Vaquer Winning Women's World Title"
+    right = "Stephanie Vaquer Wins Women's World Title At WWE Live Event"
+    s = _two_candidate_relation_snapshot(left, right)
+
+    def provider(prompt, *_):
+        if "DUPLICATE GATE PHASE ONLY" in prompt:
+            return {"relations": [grounded_duplicate(
+                "r0", left, right, "Stephanie Vaquer winning Women's World Title")]}
+        if "DUPLICATE CONFIRMATION PHASE ONLY" in prompt:
+            return {"confirmations": [duplicate_confirmation(
+                "d0", left, right, "REJECT_DUPLICATE")]}
+        return response(s, ("SELECT", "DEFER"))
+
+    result = active.evaluate(s, provider=provider)
+    assert result["status"] == "VALIDATED"
+    assert len(s["candidates"]) == 2 and not s["semantic_duplicate_skips"]
+
+
+def test_confirmation_provider_failure_is_atomic(monkeypatch):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    left = "Jasper Troy signs a new WWE contract today"
+    right = "Jasper Troy signs a new WWE contract today again"
+    s = _two_candidate_relation_snapshot(left, right)
+
+    def provider(prompt, *_):
+        if "DUPLICATE GATE PHASE ONLY" in prompt:
+            return {"relations": [grounded_duplicate(
+                "r0", left, right, "Jasper Troy signs a new WWE contract today")]}
+        raise TimeoutError("confirmation unavailable")
+
+    result = active.evaluate(s, provider=provider)
+    assert result["status"] == "PROVIDER_FAILED"
+    assert result["duplicate_confirmation_logical_request_id"]
+    assert len(s["candidates"]) == 2 and "semantic_duplicate_skips" not in s
+
+
+def test_invalid_confirmation_repairs_once_then_confirms(monkeypatch):
+    ledger = []
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **kwargs: ledger.append(kwargs))
+    left = "Jasper Troy signs a new WWE contract today"
+    right = "Jasper Troy signs a new WWE contract today again"
+    s = _two_candidate_relation_snapshot(left, right)
+    confirmation_attempt = 0
+
+    def provider(prompt, *_):
+        nonlocal confirmation_attempt
+        if "DUPLICATE GATE PHASE ONLY" in prompt:
+            return {"relations": [grounded_duplicate(
+                "r0", left, right, "Jasper Troy signs a new WWE contract today")]}
+        if "DUPLICATE CONFIRMATION PHASE ONLY" in prompt:
+            confirmation_attempt += 1
+            if confirmation_attempt == 1:
+                return {"confirmations": []}
+            return {"confirmations": [duplicate_confirmation("d0", left, right)]}
+        return response(s, ("SELECT",))
+
+    result = active.evaluate(s, provider=provider)
+    assert result["status"] == "VALIDATED" and confirmation_attempt == 2
+    confirmation_ledger = [row for row in ledger
+                           if row["workload"] == "editorial_director_duplicate_confirmation"]
+    assert [row["repair"] for row in confirmation_ledger] == [False, True]
+    attempts = [row for row in result["validation_attempts"]
+                if row.get("phase") == "duplicate_confirmation"]
+    assert [row["valid"] for row in attempts] == [False, True]
+
+
+def test_repeated_invalid_confirmation_fails_atomically(monkeypatch):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    left = "Jasper Troy signs a new WWE contract today"
+    right = "Jasper Troy signs a new WWE contract today again"
+    s = _two_candidate_relation_snapshot(left, right)
+    confirmation_calls = 0
+
+    def provider(prompt, *_):
+        nonlocal confirmation_calls
+        if "DUPLICATE GATE PHASE ONLY" in prompt:
+            return {"relations": [grounded_duplicate(
+                "r0", left, right, "Jasper Troy signs a new WWE contract today")]}
+        confirmation_calls += 1
+        return {"confirmations": []}
+
+    result = active.evaluate(s, provider=provider)
+    assert result["status"] == "failed" and confirmation_calls == 2
+    assert result["fallback_reason"] == "duplicate_confirmation_coverage"
+    assert len(s["candidates"]) == 2 and "semantic_duplicate_skips" not in s
+
+
+def test_multiple_duplicates_use_one_batched_confirmation_request(monkeypatch):
+    ledger = []
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **kwargs: ledger.append(kwargs))
+    titles = [
+        "Jasper Troy signs a new WWE contract today",
+        "Jasper Troy signs a new WWE contract today again",
+        "Stephanie Vaquer wins the WWE championship tonight",
+        "Stephanie Vaquer wins the WWE championship tonight in Chile",
+    ]
+    s = shadow.capture_opportunity({"news_candidates_for_menzo": [
+        {"title": title, "summary": title, "url": f"https://batch.test/{index}"}
+        for index, title in enumerate(titles)]}, run_id="confirmation-batch",
+        observation_timestamp="now", publisher_count_24h=0, history=[])
+    ids = [row["candidate_id"] for row in s["candidates"]]
+    s["authorized_relations"] = [
+        {"pair_id": f"batch-{index}", "scope": "same_run", "left_id": ids[index * 2],
+         "right_id": ids[index * 2 + 1], "scorer_version": "test", "score": .9,
+         "threshold": .55, "components": {}} for index in range(2)]
+    s["authorized_relations_complete"] = True
+
+    def provider(prompt, *_):
+        if "DUPLICATE GATE PHASE ONLY" in prompt:
+            return {"relations": [
+                grounded_duplicate("r0", titles[0], titles[1],
+                                   "Jasper Troy signs a new WWE contract today"),
+                grounded_duplicate("r1", titles[2], titles[3],
+                                   "Stephanie Vaquer wins the WWE championship tonight"),
+            ]}
+        if "DUPLICATE CONFIRMATION PHASE ONLY" in prompt:
+            return {"confirmations": [
+                duplicate_confirmation("d0", titles[0], titles[1]),
+                duplicate_confirmation("d1", titles[2], titles[3]),
+            ]}
+        return response(s, ("SELECT", "DEFER"))
+
+    result = active.evaluate(s, provider=provider)
+    assert result["status"] == "VALIDATED" and len(s["candidates"]) == 2
+    confirmation_calls = [row for row in ledger
+                          if row["workload"] == "editorial_director_duplicate_confirmation"]
+    assert len(confirmation_calls) == 1 and confirmation_calls[0]["relation_count"] == 2
 
 
 def test_duplicate_gate_invalid_then_repair_records_two_attempts(monkeypatch):
@@ -187,6 +378,419 @@ def test_duplicate_gate_invalid_then_repair_records_two_attempts(monkeypatch):
     failed = [kwargs for event, kwargs in gate_events if event == "model_attempt_failed"]
     assert failed[0]["error_class"] == "validation" and failed[0]["error_terminal"] is False
     assert any(event == "model_attempt_completed" for event, _ in gate_events)
+
+
+def _production_incident_snapshot(title, summary=""):
+    board = {"news_candidates_for_menzo": [{"source": "feed", "title": title,
+        "url": "https://incident.test/current", "summary": summary}]}
+    history = [{"source_url": "https://incident.test/history", "source_title":
+        "Stephanie Vaquer wins WWE Women's World Championship at live event in Chile"}]
+    value = shadow.capture_opportunity(board, run_id="incident", observation_timestamp="now",
+        publisher_count_24h=0, history=history)
+    candidate_id = value["candidates"][0]["candidate_id"]
+    history_id = value["publisher_history_12h"][0]["article_id"]
+    value["authorized_relations"] = [{"pair_id": "incident-pair", "scope": "recent_history",
+        "left_id": candidate_id, "right_id": history_id, "scorer_version": "test", "score": .9,
+        "threshold": .55, "components": {}}]
+    value["authorized_relations_complete"] = True
+    return value
+
+
+def _ungrounded_vaquer_duplicate():
+    return {"relations": [{"ref": "r0", "decision": "DUPLICATE",
+        "shared_fact": "Stephanie Vaquer title win",
+        "left_evidence": "Stephanie Vaquer title win",
+        "right_evidence": "Stephanie Vaquer wins WWE Women's World Championship",
+        "left_central_development": "Stephanie Vaquer won the title",
+        "right_central_development": "Stephanie Vaquer won the title",
+        "centrality_basis": "The title win is central to both endpoints."}]}
+
+
+def test_case_a_ungrounded_duplicate_repairs_to_no_match_before_binding(monkeypatch):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    s = _production_incident_snapshot(
+        "AEW's Maya World Addresses Dave Meltzer Not Rating Her PPV Match With Mercedes Mone",
+        "Former AEW TBS Champion Maya World addressed Dave Meltzer not rating her "
+        "AEW x NJPW Forbidden Door bout against Mercedes Mone.")
+    calls = []
+    def provider(prompt, *_):
+        calls.append(prompt)
+        if len(calls) == 1:
+            assert "DUPLICATE GATE PHASE ONLY" in prompt
+            return _ungrounded_vaquer_duplicate()
+        if len(calls) == 2:
+            assert "duplicate_left_evidence_grounding" in prompt
+            assert not s.get("semantic_duplicate_skips")
+            return {"relations": [{"ref": "r0", "decision": "NO_MATCH"}]}
+        return response(s, ("SELECT",))
+    result = active.evaluate(s, provider=provider)
+    assert result["status"] == "VALIDATED" and len(calls) == 3
+    gate_attempts = [row for row in result["validation_attempts"] if row.get("phase") == "duplicate_gate"]
+    assert [row["valid"] for row in gate_attempts] == [False, True]
+    assert gate_attempts[0]["validation_families"][0]["family"] == "duplicate_left_evidence_grounding"
+    assert not s["semantic_duplicate_skips"] and len(s["candidates"]) == 1
+
+
+def test_case_a_repeated_ungrounded_duplicate_fails_atomically_without_artifact(monkeypatch, tmp_path):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    s = _production_incident_snapshot(
+        "AEW's Maya World Addresses Dave Meltzer Not Rating Her PPV Match With Mercedes Mone",
+        "Former AEW TBS Champion Maya World addressed Dave Meltzer not rating her match.")
+    calls = []
+    result = active.evaluate(s, provider=lambda *_: calls.append(1) or _ungrounded_vaquer_duplicate())
+    assert result["status"] == "failed" and len(calls) == 2
+    assert result["fallback_reason"] == "duplicate_left_evidence_grounding"
+    assert "semantic_duplicate_skips" not in s and len(s["candidates"]) == 1
+    from agents.canonical_artifact_index import CanonicalArtifactIndex
+    index = CanonicalArtifactIndex("incident", index_path=tmp_path / "index.jsonl",
+        material_root=tmp_path / "materials", repository_root=tmp_path, enabled=True)
+    assert index.summary()["artifacts_archived"] == 0 and not (tmp_path / "index.jsonl").exists()
+
+
+def test_duplicate_evidence_cannot_cross_relation_endpoints():
+    board = {"news_candidates_for_menzo": [
+        {"title": "Alpha Wrestler signs a new contract", "url": "https://cross.test/a", "summary": "Alpha Wrestler signs"},
+        {"title": "Beta Wrestler returns at the arena", "url": "https://cross.test/b", "summary": "Beta Wrestler returns"}]}
+    history = [
+        {"source_title": "Alpha Wrestler signs a new contract", "source_url": "https://cross.test/ha"},
+        {"source_title": "Beta Wrestler returns at the arena", "source_url": "https://cross.test/hb"}]
+    s = shadow.capture_opportunity(board, run_id="cross", observation_timestamp="now",
+        publisher_count_24h=0, history=history)
+    candidate_ids = [row["candidate_id"] for row in s["candidates"]]
+    history_ids = [row["article_id"] for row in s["publisher_history_12h"]]
+    s["authorized_relations"] = [
+        {"pair_id": "p0", "scope": "recent_history", "left_id": candidate_ids[0],
+         "right_id": history_ids[0], "scorer_version": "v", "score": .7, "threshold": .55, "components": {}},
+        {"pair_id": "p1", "scope": "recent_history", "left_id": candidate_ids[1],
+         "right_id": history_ids[1], "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
+    rows = [grounded_duplicate("r0", "Alpha Wrestler signs a new contract",
+                               "Alpha Wrestler signs a new contract",
+                               "Alpha Wrestler signs a new contract"),
+            grounded_duplicate("r1", "Alpha Wrestler signs a new contract",
+                               "Beta Wrestler returns at the arena",
+                               "Beta Wrestler returns at the arena")]
+    canonical, failures, _ = active._validate_duplicate_gate({"relations": rows}, s)
+    assert canonical is None
+    assert {row["family"] for row in failures} == {"duplicate_left_evidence_grounding"}
+    assert failures[0]["ref"] == "r1"
+
+
+def test_case_b_policy_schema_and_no_match_survival(monkeypatch):
+    import json
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    policy = active.POLICY_PATH.read_text().casefold()
+    assert "reaction, criticism, comment, response, controversy, consequence, or follow-up" in policy
+    assert "cause, background, or" in policy and "central new" in policy
+    schema = json.loads(active.RELATION_SCHEMA_PATH.read_text())
+    branches = schema["properties"]["relations"]["items"]["anyOf"]
+    by_decision = {branch["properties"]["decision"]["enum"][0]: branch for branch in branches}
+    duplicate_then = by_decision["DUPLICATE"]
+    assert set(("left_evidence", "right_evidence", "left_central_development",
+                "right_central_development", "centrality_basis")) <= set(duplicate_then["required"])
+    s = _production_incident_snapshot(
+        "Triple H Gets Dragged Over Stephanie Vaquer Winning Women’s World Title at WWE Live Event")
+    replies = iter([{"relations": [{"ref": "r0", "decision": "NO_MATCH"}]}, response(s, ("SELECT",))])
+    result = active.evaluate(s, provider=lambda *_: next(replies))
+    assert result["status"] == "VALIDATED" and not s["semantic_duplicate_skips"]
+
+
+def test_duplicate_gate_provider_schema_uses_supported_union_keywords_only():
+    import json
+    schema = json.loads(active.RELATION_SCHEMA_PATH.read_text())
+    unsupported = {"allOf", "if", "then", "const", "pattern", "minLength", "maxLength"}
+
+    def schema_keywords(value):
+        found = set()
+        if isinstance(value, dict):
+            for key, child in value.items():
+                found.add(key)
+                if key == "properties" and isinstance(child, dict):
+                    for property_schema in child.values():
+                        found.update(schema_keywords(property_schema))
+                else:
+                    found.update(schema_keywords(child))
+        elif isinstance(value, list):
+            for child in value:
+                found.update(schema_keywords(child))
+        return found
+
+    assert schema_keywords(schema).isdisjoint(unsupported)
+    branches = schema["properties"]["relations"]["items"]["anyOf"]
+    assert len(branches) == 3
+    by_decision = {branch["properties"]["decision"]["enum"][0]: branch for branch in branches}
+    assert set(by_decision) == {"DUPLICATE", "MATERIAL_UPDATE", "NO_MATCH"}
+    assert all(len(branch["properties"]["decision"]["enum"]) == 1 for branch in branches)
+    assert {"left_evidence", "right_evidence", "left_central_development",
+            "right_central_development", "centrality_basis"} <= set(by_decision["DUPLICATE"]["required"])
+    assert {"new_fact", "temporal_basis"} <= set(by_decision["MATERIAL_UPDATE"]["required"])
+    assert set(by_decision["NO_MATCH"]["required"]) == {"ref", "decision"}
+
+    confirmation_schema = json.loads(active.CONFIRMATION_SCHEMA_PATH.read_text())
+    assert schema_keywords(confirmation_schema).isdisjoint(unsupported)
+    item = confirmation_schema["properties"]["confirmations"]["items"]
+    assert item["additionalProperties"] is False
+    assert set(item["properties"]["decision"]["enum"]) == {
+        "CONFIRM_DUPLICATE", "REJECT_DUPLICATE"}
+    assert {"ref", "decision", *active.CONFIRMATION_FIELDS} == set(item["required"])
+
+
+def test_grounding_normalization_is_formatting_only():
+    endpoint = {"title": "Wrestler’s return — officially confirmed"}
+    assert active._grounded_evidence("  WRESTLER'S   RETURN - officially ", endpoint) == (True, "title")
+    assert active._grounded_evidence("confirmed return by a synonym", endpoint)[0] is False
+
+
+def test_grounding_rejects_trivial_and_partial_token_spans():
+    endpoint = {"title": "Alpha title announcement confirms a major return"}
+    assert active._grounded_evidence("a", endpoint) == (False, "insufficient_meaningful_span")
+    assert active._grounded_evidence("title", endpoint) == (False, "insufficient_meaningful_span")
+    assert active._grounded_evidence("pha title", endpoint) == (False, "not_token_boundary_aligned")
+    assert active._grounded_evidence("Alpha title", endpoint) == (True, "title")
+
+
+def _anchor_contract_snapshot(left_title, right_title):
+    s = shadow.capture_opportunity({"news_candidates_for_menzo": [
+        {"title": left_title, "summary": left_title, "url": "https://anchor.test/left"},
+        {"title": right_title, "summary": right_title, "url": "https://anchor.test/right"}]},
+        run_id="anchor", observation_timestamp="now", publisher_count_24h=0, history=[])
+    left_id, right_id = [row["candidate_id"] for row in s["candidates"]]
+    s["authorized_relations"] = [{"pair_id": "anchor-pair", "scope": "same_run",
+        "left_id": left_id, "right_id": right_id, "scorer_version": "test", "score": .9,
+        "threshold": .55, "components": {}}]
+    return s
+
+
+def _validate_anchor_relation(s, *, left_evidence, right_evidence, shared_fact,
+                              left_central=None, right_central=None):
+    relation = grounded_duplicate("r0", left_evidence, right_evidence, shared_fact)
+    relation["left_central_development"] = left_central or shared_fact
+    relation["right_central_development"] = right_central or shared_fact
+    return active._validate_duplicate_gate({"relations": [relation]}, s)
+
+
+def test_generic_common_evidence_has_no_binding_subject_anchor():
+    fixtures = [
+        ("More Details On CM Punk Contract Talks", "More Details On Rhea Ripley Injury Status", "More Details"),
+        ("Live Event Update On CM Punk", "Live Event Update On Rhea Ripley", "Live Event"),
+        ("WrestleMania Main Event Adds Seth Rollins Match",
+         "WrestleMania Main Event Announces Roman Reigns Match", "WrestleMania Main"),
+        ("SummerSlam Main Event Adds Seth Rollins Match",
+         "SummerSlam Main Event Announces Roman Reigns Match", "SummerSlam Main"),
+        ("WrestleMania Night One Adds Seth Rollins Match",
+         "WrestleMania Night One Announces Roman Reigns Match", "Night One"),
+        ("Night Two Update On CM Punk", "Night Two Update On Rhea Ripley", "Night Two"),
+        ("Day One Update On CM Punk", "Day One Update On Rhea Ripley", "Day One"),
+        ("Part One Update On CM Punk", "Part One Update On Rhea Ripley", "Part One"),
+    ]
+    for left, right, phrase in fixtures:
+        s = _anchor_contract_snapshot(left, right)
+        canonical, failures, _ = _validate_anchor_relation(s, left_evidence=phrase,
+            right_evidence=phrase, shared_fact=f"{phrase} reported")
+        assert canonical is None
+        assert any(row["family"] == "duplicate_relation_anchor_grounding" and
+                   row["detail"] == "no_shared_explicit_subject" for row in failures)
+
+
+def test_registered_event_aliases_cannot_bind_as_subjects():
+    fixtures = (
+        ("AEW Grand Slam", "Grand Slam"),
+        ("AEW Forbidden Door", "Forbidden Door"),
+        ("AEW Full Gear", "Full Gear"),
+        ("AEW Beach Break", "Beach Break"),
+        ("TNA Victory Road", "Victory Road"),
+        ("ROH Final Battle", "Final Battle"),
+    )
+    for event_prefix, event_anchor in fixtures:
+        left = f"{event_prefix} Adds Kenny Omega Match"
+        right = f"{event_prefix} Announces Jon Moxley Match"
+        s = _anchor_contract_snapshot(left, right)
+        canonical, failures, _ = _validate_anchor_relation(
+            s, left_evidence=left, right_evidence=right,
+            shared_fact=f"{event_anchor} announces a wrestling match",
+            left_central=f"{event_anchor} adds a wrestling match",
+            right_central=f"{event_anchor} announces a wrestling match")
+        assert canonical is None
+        assert any(row["family"] == "duplicate_relation_anchor_grounding" and
+                   row["detail"] == "no_shared_explicit_subject" for row in failures)
+
+
+def test_registered_event_span_preserves_wrestler_subjects():
+    phrases = active._registered_event_phrases()
+    subjects = active._explicit_endpoint_subjects(
+        {"title": "AEW Grand Slam Adds Kenny Omega Match"}, phrases)
+    assert "grand slam" not in subjects
+    assert "kenny omega" in subjects
+
+
+def test_registered_event_boundary_compounds_cannot_bind():
+    phrases = active._registered_event_phrases()
+    left = "AEW Grand Slam Results: Kenny Omega Wins Title"
+    right = "AEW Grand Slam Results: Jon Moxley Wins Match"
+    left_subjects = active._explicit_endpoint_subjects({"title": left}, phrases)
+    right_subjects = active._explicit_endpoint_subjects({"title": right}, phrases)
+    assert "grand slam" not in left_subjects
+    assert "slam results" not in left_subjects
+    assert "kenny omega" in left_subjects
+    assert "jon moxley" in right_subjects
+
+    snapshot = _anchor_contract_snapshot(left, right)
+    canonical, failures, _ = _validate_anchor_relation(
+        snapshot, left_evidence=left, right_evidence=right,
+        shared_fact="Grand Slam Results report wrestling wins",
+        left_central="Grand Slam Results report Kenny Omega wins",
+        right_central="Grand Slam Results report Jon Moxley wins")
+    assert canonical is None
+    assert any(row["family"] == "duplicate_relation_anchor_grounding" and
+               row["detail"] == "no_shared_explicit_subject" for row in failures)
+
+
+def test_event_registry_failure_rejects_duplicate_binding(monkeypatch, tmp_path):
+    monkeypatch.setattr(active, "EVENT_REGISTRY_PATH", tmp_path / "missing-event-registry.json")
+    left = "Stephanie Vaquer wins the championship tonight"
+    right = "Stephanie Vaquer wins the championship tonight in Chile"
+    s = _anchor_contract_snapshot(left, right)
+    canonical, failures, _ = _validate_anchor_relation(
+        s, left_evidence=left, right_evidence=right,
+        shared_fact="Stephanie Vaquer wins the championship tonight")
+    assert canonical is None
+    assert ("duplicate_event_registry_grounding", "registry_unavailable") in {
+        (row["family"], row.get("detail")) for row in failures}
+
+
+def test_generic_championship_compound_cannot_bind_full_title_evidence():
+    left = "Women's World Championship: Rhea Ripley wins title"
+    right = "Women's World Championship: Iyo Sky wins title"
+    s = _anchor_contract_snapshot(left, right)
+    canonical, failures, _ = _validate_anchor_relation(s, left_evidence=left,
+        right_evidence=right, shared_fact="Women's World Championship title win",
+        left_central="Women's World Championship Rhea Ripley title win",
+        right_central="Women's World Championship Iyo Sky title win")
+    assert canonical is None
+    assert any(row["family"] == "duplicate_relation_anchor_grounding" and
+               row["detail"] == "no_shared_explicit_subject" for row in failures)
+    assert not s.get("semantic_duplicate_skips")
+
+
+def test_canonical_apostrophe_anchor_validates_across_endpoint_forms():
+    left = "Kevin O'Reilly signs a new WWE contract"
+    right = "Kevin O’Reilly signs a new WWE contract"
+    s = _anchor_contract_snapshot(left, right)
+    canonical, failures, _ = _validate_anchor_relation(s, left_evidence=left,
+        right_evidence=right, shared_fact="Kevin O'Reilly signs a new contract")
+    assert canonical is not None and not failures
+
+
+def test_connector_boilerplate_cannot_bind_unrelated_headlines():
+    left = "WWE Hall Of Famer Trish Stratus Comments On Becky Lynch"
+    right = "WWE Hall Of Famer Hulk Hogan Comments On Donald Trump"
+    s = _anchor_contract_snapshot(left, right)
+    canonical, failures, _ = _validate_anchor_relation(s, left_evidence=left,
+        right_evidence=right, shared_fact="Hall Of Famer comments on public figures",
+        left_central="Hall Of Famer Trish Stratus comments on Becky Lynch",
+        right_central="Hall Of Famer Hulk Hogan comments on Donald Trump")
+    assert canonical is None
+    assert any(row["family"] == "duplicate_relation_anchor_grounding" and
+               row["detail"] == "no_shared_explicit_subject" for row in failures)
+
+
+def test_diacritic_canonical_anchor_validates_and_is_fully_subtracted():
+    left = "Mercedes Moné wins the world championship tonight"
+    right = "Mercedes Mone wins the world championship tonight"
+    s = _anchor_contract_snapshot(left, right)
+    canonical, failures, _ = _validate_anchor_relation(s, left_evidence=left,
+        right_evidence=right, shared_fact="Mercedes Mone wins the world championship tonight")
+    assert canonical is not None and not failures
+    assert active._non_anchor_lexical_overlap(
+        "Mercedes Moné alpha", "Mercedes Mone beta", "mercedes mone") == 0
+
+
+def test_leading_article_stage_name_fails_open_without_identity_exception():
+    left = "The Rock returns to WWE after long absence"
+    right = "The Rock returns to WWE after long absence"
+    s = _anchor_contract_snapshot(left, right)
+    canonical, failures, _ = _validate_anchor_relation(s, left_evidence=left,
+        right_evidence=right, shared_fact="The Rock returns to WWE after long absence")
+    assert canonical is None
+    assert any(row["family"] == "duplicate_relation_anchor_grounding" and
+               row["detail"] == "no_shared_explicit_subject" for row in failures)
+
+
+def test_retained_body_capitalization_cannot_supply_binding_anchor():
+    s = _anchor_contract_snapshot("CM Punk Signs New WWE Contract", "Rhea Ripley Suffers New Injury")
+    for candidate, body in zip(s["candidates"], (
+            "According to sources, the agreement was finalized yesterday.",
+            "According to sources, medical tests were performed yesterday.")):
+        candidate["retained_body"] = body
+    canonical, failures, _ = _validate_anchor_relation(s,
+        left_evidence="According to sources", right_evidence="According to sources",
+        shared_fact="According to sources reported")
+    assert canonical is None
+    assert any(row["family"] == "duplicate_relation_anchor_grounding" and
+               row["detail"] == "no_shared_explicit_subject" for row in failures)
+    assert "according to" not in active._explicit_endpoint_subjects(
+        {"title": "CM Punk Signs New WWE Contract", "retained_body": "According to sources"})
+
+
+def test_shared_subject_elsewhere_does_not_rescue_generic_evidence():
+    s = _anchor_contract_snapshot(
+        "Stephanie Vaquer wins the world title", "Stephanie Vaquer captures the world title")
+    canonical, failures, _ = _validate_anchor_relation(s, left_evidence="world title",
+        right_evidence="world title", shared_fact="Stephanie Vaquer wins the title")
+    assert canonical is None
+    grounding = {(row["family"], row.get("detail")) for row in failures}
+    assert ("duplicate_left_evidence_grounding", "missing_shared_subject_anchor") in grounding
+    assert ("duplicate_right_evidence_grounding", "missing_shared_subject_anchor") in grounding
+
+
+def test_shared_fact_and_central_developments_link_to_evidence_anchor():
+    s = _anchor_contract_snapshot(
+        "Stephanie Vaquer won the championship", "Stephanie Vaquer captured the championship")
+    valid, failures, _ = _validate_anchor_relation(s,
+        left_evidence="Stephanie Vaquer won the championship",
+        right_evidence="Stephanie Vaquer captured the championship",
+        shared_fact="Stephanie Vaquer won the championship")
+    assert valid is not None and not failures
+
+    invalid_claim, failures, _ = _validate_anchor_relation(s,
+        left_evidence="Stephanie Vaquer won the championship",
+        right_evidence="Stephanie Vaquer captured the championship",
+        shared_fact="An unrelated championship claim")
+    assert invalid_claim is None
+    assert any(row["family"] == "duplicate_claim_anchor_grounding" and
+               row["detail"] == "missing_shared_subject_anchor" for row in failures)
+
+    punk = _anchor_contract_snapshot("CM Punk won the championship", "CM Punk captured the championship")
+    invalid_central, failures, _ = _validate_anchor_relation(punk,
+        left_evidence="CM Punk won the championship", right_evidence="CM Punk captured the championship",
+        shared_fact="CM Punk won the championship", right_central="Unrelated controversy")
+    assert invalid_central is None
+    assert any(row["family"] == "duplicate_centrality_contract" and
+               "missing_shared_subject_anchor" in row.get("details", []) for row in failures)
+
+
+def test_anchor_tokens_do_not_count_as_factual_linkage():
+    s = _anchor_contract_snapshot(
+        "John Cena criticizes his retirement match", "John Cena praises Cody Rhodes")
+    canonical, failures, _ = _validate_anchor_relation(s,
+        left_evidence="John Cena criticizes his retirement match",
+        right_evidence="John Cena praises Cody Rhodes", shared_fact="John Cena makes comments")
+    assert canonical is None
+    details = {(row["family"], row.get("detail")) for row in failures}
+    assert ("duplicate_claim_anchor_grounding",
+            "insufficient_left_evidence_factual_linkage") in details
+    assert ("duplicate_claim_anchor_grounding",
+            "insufficient_right_evidence_factual_linkage") in details
+
+    central_snapshot = _anchor_contract_snapshot(
+        "John Cena discusses his retirement match", "John Cena discusses his retirement match")
+    canonical, failures, _ = _validate_anchor_relation(central_snapshot,
+        left_evidence="John Cena discusses his retirement match",
+        right_evidence="John Cena discusses his retirement match",
+        shared_fact="John Cena discusses retirement match",
+        right_central="John Cena unrelated statement")
+    assert canonical is None
+    assert any(row["family"] == "duplicate_centrality_contract" and
+               "insufficient_evidence_factual_linkage" in row.get("details", []) for row in failures)
 
 
 def test_duplicate_gate_provider_failure_has_terminal_lifecycle_and_no_classification(monkeypatch):
@@ -214,14 +818,19 @@ def test_gate_eliminates_all_without_creating_classification_request(monkeypatch
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **kwargs: ledger.append(kwargs))
     s = snapshot(1); candidate_id = s["candidates"][0]["candidate_id"]
     history = {"article_id": "published", "source_url": "https://history.test/old",
-               "title": "Earlier title change", "input_coverage": "RSS_SUMMARY_ONLY"}
+               "title": "Jasper Troy release confirmed earlier", "input_coverage": "RSS_SUMMARY_ONLY"}
     s["publisher_history_12h"] = [history]
     s["authorized_relations"] = [{"pair_id": "p", "scope": "recent_history",
         "left_id": candidate_id, "right_id": "published", "scorer_version": "v", "score": .7,
         "threshold": .55, "components": {}}]
-    result = active.evaluate(s, provider=lambda *_: {"relations": [
-        {"ref": "r0", "decision": "DUPLICATE", "shared_fact": "same title change"}]})
-    assert result["status"] == "VALIDATED" and len(ledger) == 1
+    def provider(prompt, *_):
+        if "DUPLICATE CONFIRMATION PHASE ONLY" in prompt:
+            return {"confirmations": [duplicate_confirmation(
+                "d0", s["candidates"][0]["title"], history["title"])]}
+        return {"relations": [grounded_duplicate(
+            "r0", s["candidates"][0]["title"], history["title"], "Jasper Troy release confirmed")]}
+    result = active.evaluate(s, provider=provider)
+    assert result["status"] == "VALIDATED" and len(ledger) == 2
     assert result["duplicate_gate_input_digest"]
     assert "logical_request_id" not in result
     assert any(event == "model_attempt_completed" for event, _ in events)
@@ -856,13 +1465,19 @@ def test_active_artifact_preserves_gate_and_classification_provenance(monkeypatc
     from agents.canonical_artifact_index import CanonicalArtifactIndex
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     s = snapshot(2); left, right = [row["candidate_id"] for row in s["candidates"]]
+    s["candidates"][1]["title"] = "Jasper Troy Becomes First Confirmed Release"
     s["authorized_relations"] = [{"pair_id": "p", "scope": "same_run", "left_id": left,
         "right_id": right, "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
     active.prepare_snapshot(s)
     pre_gate_digest = s["input_digest"]
     def provider(prompt, *_):
         if "DUPLICATE GATE PHASE ONLY" in prompt:
-            return {"relations": [{"ref": "r0", "decision": "DUPLICATE", "shared_fact": "same release"}]}
+            return {"relations": [grounded_duplicate("r0", s["candidates"][0]["title"],
+                                                       s["candidates"][1]["title"],
+                                                       "Jasper Troy Becomes First Confirmed Release")]}
+        if "DUPLICATE CONFIRMATION PHASE ONLY" in prompt:
+            return {"confirmations": [duplicate_confirmation(
+                "d0", s["candidates"][0]["title"], s["candidates"][1]["title"])]}
         return response(s, ("SELECT",))
     result = active.evaluate(s, provider=provider)
     assert result["status"] == "VALIDATED"
@@ -885,5 +1500,15 @@ def test_active_artifact_preserves_gate_and_classification_provenance(monkeypatc
     assert eliminated["semantic_duplicate_of"] == survivor["candidate"]["candidate_id"]
     assert eliminated["duplicate_gate_logical_request_id"] == result["duplicate_gate_logical_request_id"]
     assert eliminated["duplicate_gate_input_digest"] == pre_gate_digest
+    assert eliminated["duplicate_confirmation_logical_request_id"] == (
+        result["duplicate_confirmation_logical_request_id"])
+    assert eliminated["duplicate_confirmation_input_digest"] == (
+        result["duplicate_confirmation_input_digest"])
     assert "logical_request_id" not in eliminated and "input_digest" not in eliminated
     assert eliminated["relations"][0]["decision"] == "DUPLICATE"
+    assert eliminated["relations"][0]["left_evidence"]
+    assert eliminated["relations"][0]["right_evidence"]
+    assert eliminated["relations"][0]["centrality_basis"]
+    assert eliminated["relations"][0]["duplicate_confirmation"]["decision"] == "CONFIRM_DUPLICATE"
+    assert eliminated["relations"][0]["duplicate_confirmation_provenance"]["logical_request_id"] == (
+        result["duplicate_confirmation_logical_request_id"])

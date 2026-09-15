@@ -84,6 +84,50 @@ concrete `shared_fact` naming that common development. `same person != duplicate
 the same interview/source conversation, promotion, show, or event is insufficient. Generic labels such as “John Cena interview comments” are not a shared
 central fact when the two articles report different claims.
 
+A reaction, criticism, comment, response, controversy, consequence, or follow-up caused by an earlier event is **not**
+a duplicate of that event merely because the earlier event is mentioned. Compare the autonomous **central new
+development** of each exact endpoint. If a common fact is central to only one endpoint and is cause, background, or
+context in the other, do not return `DUPLICATE`. For recent history, return `MATERIAL_UPDATE` only when its contract
+below is genuinely satisfied; otherwise return `NO_MATCH`.
+
+For every `DUPLICATE`, provide a concise `shared_fact`, quote one short meaningful multi-token exact supporting
+`left_evidence` span and one short meaningful multi-token exact supporting `right_evidence` span from their respective supplied endpoint title, summary, or retained body,
+identify `left_central_development` and `right_central_development` independently, and provide a concise
+`centrality_basis` explaining why the shared fact is central to both rather than background in either. Evidence from a
+different candidate, history item, endpoint, or relation is invalid. Never copy or reuse evidence, central-development
+statements, or centrality reasoning from another relation row.
+
+The two evidence spans must contain the same explicit named subject, and that shared subject must also appear in
+`shared_fact`, `left_central_development`, and `right_central_development`. Each central-development statement and the
+shared fact must share factual wording with its endpoint evidence beyond the subject's own name; identity tokens do not
+count as factual linkage. Generic common phrases without that shared subject do
+not ground a binding duplicate. Binding subject anchors are conservatively derived only from explicit compound names
+in the supplied headline identity fields (`title`, `source_title`, or `title_it`), never from summary/body prose or a
+capitalized singleton. If no such shared anchor is available, validation may require repair or fail open to legacy
+Menzo; this intentional recall tradeoff is safer than terminal false elimination.
+Compounds made entirely of generic championship, division, or category descriptor tokens are not named-subject
+anchors; one generic component may remain valid when paired with a non-generic name component.
+The same fully-generic exclusion applies to event-segmentation compounds such as numbered nights, days, or parts.
+Headline connectors cannot form either component of a binding anchor, and stable generic accolade compounds are
+excluded. Binding identity comparison canonicalizes apostrophe variants and diacritics without altering source evidence.
+Stage names whose identity depends on a leading article may therefore lack deterministic binding authority in ED-2.1.1;
+bounded repair and whole-Active legacy fallback are preferred to adding local identity exceptions. If this conservative
+rule causes material fallback volume, identity ambiguity belongs in a separate bounded Gemini operation whose output is
+strictly validated, not in additional Python pseudo-NER heuristics.
+Canonical event names and aliases come from `config/event_registry.json`. When a token-aligned registered event span is
+present in a headline, a prospective compound that intersects that span—including a compound crossing its boundary—is
+not a binding subject anchor; valid named subjects elsewhere in the headline remain eligible. If the registry is
+unavailable or malformed, E04V must reject `DUPLICATE` binding and use bounded repair/whole-Active fallback rather than
+permit an event-derived anchor.
+
+Every `DUPLICATE` that passes local grounding remains a proposal until the batched
+`editorial_director_duplicate_confirmation` operation independently confirms that both exact endpoints concern the
+same central subject **and** report the same central development or concrete fact. Shared promotion, show, event,
+championship, category, action wording, or background context is insufficient. A valid `REJECT_DUPLICATE` leaves the
+relation non-binding; missing, malformed, incomplete, or ungrounded confirmation fails the whole Active result through
+the bounded repair/fallback lifecycle. Confirmation receives exact endpoint facts, not scorer scores, thresholds, or
+Python-selected anchors.
+
 `MATERIAL_UPDATE` is valid only for recent authoritative history and requires a concrete model-supplied `new_fact` plus
 a model-supplied `temporal_basis` showing the fact occurred, became known, or was officially confirmed after
 publication. Rewording is not a new fact. Local code must never invent relation semantics.

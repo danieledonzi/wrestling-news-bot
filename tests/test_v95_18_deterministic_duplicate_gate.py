@@ -38,6 +38,61 @@ def test_formula_threshold_and_same_subject_different_fact(monkeypatch):
     assert value["score"]==round(max(0,min(1,expected)),6) and not value["above_threshold"]
 
 
+def test_world_is_not_singleton_identity_but_maya_world_compound_survives():
+    assert "world" not in scorer._named_subjects("World Championship")
+    assert "maya world" in scorer._named_subjects("Maya World")
+    assert "punk" in scorer._named_subjects("Punk")
+    assert scorer.explicit_named_subjects("lowercase normalized subject") == set()
+    assert scorer._named_subjects("lowercase normalized subject")
+    assert scorer.explicit_named_subjects("Stephanie Vaquer") == {"stephanie vaquer"}
+    assert scorer.explicit_named_subjects("CM Punk") == {"cm punk"}
+    assert scorer.explicit_named_subjects("Maya World") == {"maya world"}
+    assert scorer.explicit_named_subjects("Mercedes Moné") == {"mercedes mone"}
+    assert scorer.explicit_named_subjects("Mercedes Mone") == {"mercedes mone"}
+    assert scorer.explicit_named_subjects("Mercedes Moné") == scorer.explicit_named_subjects("Mercedes Mone")
+    assert scorer.explicit_named_subjects("Kevin O'Reilly") == {"kevin o'reilly"}
+    assert scorer.explicit_named_subjects("Kevin O’Reilly") == {"kevin o'reilly"}
+    assert scorer.explicit_named_subjects("Kevin O'Reilly") == scorer.explicit_named_subjects("Kevin O’Reilly")
+    assert scorer.explicit_named_subjects("Big E") == {"big e"}
+    for stage_name in ("The Rock", "The Miz", "The Bloodline"):
+        assert scorer.explicit_named_subjects(stage_name) == set()
+    assert scorer.explicit_named_subjects("Punk") == set()
+    assert scorer.explicit_named_subjects("R-Truth") == set()
+    for generic_article in ("The Title", "The Match", "The Event", "The Latest", "The Future"):
+        assert scorer.explicit_named_subjects(generic_article) == set()
+    for boilerplate in ("Hall Of", "Of Famer", "Hall Famer"):
+        assert scorer.explicit_named_subjects(boilerplate) == set()
+    left_subjects = scorer.explicit_named_subjects(
+        "WWE Hall Of Famer Trish Stratus Comments On Becky Lynch")
+    right_subjects = scorer.explicit_named_subjects(
+        "WWE Hall Of Famer Hulk Hogan Comments On Donald Trump")
+    assert {"trish stratus", "becky lynch"} <= left_subjects
+    assert {"hulk hogan", "donald trump"} <= right_subjects
+    assert not left_subjects & right_subjects
+    for generic in ("Women's World", "Women’s World", "Tag Team", "World Heavyweight", "United States"):
+        assert scorer.explicit_named_subjects(generic) == set()
+    for event_context in ("Night One", "Night Two", "Day One", "Part One"):
+        assert scorer.explicit_named_subjects(event_context) == set()
+    assert "wrestlemania main" not in scorer.explicit_named_subjects("WrestleMania Main Event")
+    assert "summerslam main" not in scorer.explicit_named_subjects("SummerSlam Main Event")
+    maya = article("https://www.wrestlinginc.com/2254395/aew-maya-world-dave-meltzer-not-rating-match-mercedes-mone/",
+        "AEW's Maya World Addresses Dave Meltzer Not Rating Her PPV Match With Mercedes Mone",
+        "Former AEW TBS Champion Maya World addressed Dave Meltzer not rating her AEW x NJPW Forbidden Door bout against Mercedes Mone.")
+    vaquer = article("https://history.test/vaquer",
+        "Stephanie Vaquer wins WWE Women's World Championship at live event in Chile")
+    value = scorer.score_pair(maya, vaquer)
+    assert value["components"]["entity_subject"] == 0
+    assert not value["above_threshold"]
+
+
+def test_valid_singleton_surname_scorer_pair_still_admits():
+    value = scorer.score_pair(
+        article("https://valid.test/1", "CM Punk suffers knee injury WWE"),
+        article("https://valid.test/2", "Punk knee injury confirmed by WWE"))
+    assert value["components"]["entity_subject"] == 1
+    assert value["above_threshold"]
+
+
 def test_distinct_trio_never_calls_gemini(monkeypatch,tmp_path):
     isolate(monkeypatch,tmp_path); calls=[]; monkeypatch.setattr(menzo,"call_gemini_json_model",lambda *a,**k:calls.append(a) or ({},"model"))
     out=board(article("https://x/a","CM Punk signs contract"),article("https://x/b","Rhea Ripley suffers injury"),article("https://x/c","Cody Rhodes comments in interview"))

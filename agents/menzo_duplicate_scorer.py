@@ -5,10 +5,11 @@ import hashlib
 import json
 import os
 import re
+import unicodedata
 from typing import Any, Dict, Iterable, Set
 from urllib.parse import urlsplit, urlunsplit
 
-SCORER_VERSION = "v95.18-deterministic-suspicion-4-death-action"
+SCORER_VERSION = "v95.18-deterministic-suspicion-5-generic-single-subject"
 DEFAULT_THRESHOLD = 0.55
 WEIGHTS = {"entity_subject": .30, "central_fact_action": .25,
            "event_show_match": .20, "promotion": .10,
@@ -38,8 +39,20 @@ _ENTERTAINMENT_CASTING_TERMS = _ENTERTAINMENT_CASTING_VERBS | _ENTERTAINMENT_CAS
 _PROMOTIONS = {"wwe","aew","tna","roh","nxt","njpw","mlw","gcw"}
 _SHOWS = {"raw","smackdown","dynamite","collision","nxt","wrestlemania","summerslam","all out",
           "double or nothing","royal rumble","survivor series","wrestledream"}
+_BINDING_SHOW_TOKENS = {token for show in _SHOWS for token in re.findall(r"[a-z0-9]+", show)}
 _SUBJECT_BOUNDARY_TERMS = set().union(*_ACTIONS.values()) | _ENTERTAINMENT_CASTING_VERBS
 _NON_SUBJECT_TERMS = _SUBJECT_BOUNDARY_TERMS | _ENTERTAINMENT_CASTING_NOUNS | _PROMOTIONS | _STOP | _GENERIC_ENTITY
+_GENERIC_SINGLE_SUBJECT = {"world"}
+_BINDING_GENERIC_DESCRIPTOR_TOKENS = _GENERIC_SINGLE_SUBJECT | {
+    "woman", "women", "women's", "womens", "man", "men", "men's", "mens", "tag", "team",
+    "united", "states", "heavyweight", "cruiserweight", "intercontinental", "continental",
+    "universal", "undisputed", "global", "international", "national", "television", "hall", "famer",
+}
+_BINDING_EVENT_DESCRIPTOR_TOKENS = {
+    "night", "day", "one", "two", "three", "part", "week", "weekend", "session", "finale", "opener",
+}
+_BINDING_CONNECTOR_TOKENS = {"of", "on", "in", "at", "to", "by", "or"} | (
+    _STOP & {"and", "for", "with", "from"})
 
 def effective_threshold(environ: Dict[str, str] | None = None) -> float:
     env = os.environ if environ is None else environ
@@ -89,17 +102,83 @@ def _categories(text: str) -> Set[str]:
         categories.add("entertainment_casting")
     return categories
 
-def _named_subjects(text: str) -> Set[str]:
-    # Consecutive capitalized words are stable subject signals; lower-case tokens
-    # still provide a conservative fallback for normalized feeds.
+def _capitalized_subject_signals(text: str) -> Set[str]:
+    """Return the established capitalized signals used by suspicion scoring."""
     capitals = re.findall(r"\b[A-Z][A-Za-z]+\b", text)
     names = {f"{capitals[i]} {capitals[i+1]}".lower() for i in range(len(capitals)-1)
              if capitals[i].lower() not in _NON_SUBJECT_TERMS
              and capitals[i+1].lower() not in _NON_SUBJECT_TERMS}
     # Surnames permit "CM Punk" vs "Punk", without treating arbitrary shared
     # generic words as entities.
-    names.update(x.lower() for x in capitals if len(x) >= 4 and x.lower() not in _NON_SUBJECT_TERMS)
-    return names or (_tokens(text.lower()) - _NON_SUBJECT_TERMS)
+    names.update(x.lower() for x in capitals if len(x) >= 4 and x.lower() not in _NON_SUBJECT_TERMS
+                 and x.lower() not in _GENERIC_SINGLE_SUBJECT)
+    return names
+
+
+def canonical_binding_subject_text(value: str) -> str:
+    """Canonicalize binding identity only; provider evidence remains untouched."""
+    value = unicodedata.normalize("NFKC", value).casefold().replace("’", "'")
+    decomposed = unicodedata.normalize("NFKD", value)
+    return unicodedata.normalize("NFC", "".join(
+        character for character in decomposed if not unicodedata.combining(character)))
+
+
+def _binding_phrase_tokens(value: str) -> list[str]:
+    return re.findall(r"[^\W_]+", canonical_binding_subject_text(value), flags=re.UNICODE)
+
+
+def _token_span_ranges(tokens: list[str], span: list[str]) -> list[range]:
+    """Return exact token-position ranges for a canonical phrase."""
+    width = len(span)
+    if not width:
+        return []
+    return [range(index, index + width) for index in range(len(tokens) - width + 1)
+            if tokens[index:index + width] == span]
+
+
+def explicit_named_subjects(text: str, registered_event_phrases: Iterable[str] = ()) -> Set[str]:
+    """Return conservative compound headline subjects for binding validation.
+
+    Singleton capitalization is intentionally insufficient here. This binding
+    primitive favors repair/fallback over treating headline prose as identity.
+    """
+    letter = r"[^\W\d_]"
+    token = rf"{letter}+(?:['’-]{letter}+)*"
+    pairs = re.finditer(rf"(?<![\w'’-])(?=({token}\s+{token})(?![\w'’-]))", text,
+                        flags=re.UNICODE)
+    headline_tokens = _binding_phrase_tokens(text)
+    matched_event_ranges = [event_range for phrase in registered_event_phrases
+                            for event_range in _token_span_ranges(
+                                headline_tokens, _binding_phrase_tokens(phrase))]
+    names = set()
+    for match in pairs:
+        pair = match.group(1)
+        left, right = pair.split(maxsplit=1)
+        left_key, right_key = (canonical_binding_subject_text(value) for value in (left, right))
+        pair_start = len(_binding_phrase_tokens(text[:match.start(1)]))
+        pair_positions = {pair_start, pair_start + 1}
+        overlaps_registered_event = any(pair_positions.intersection(event_range)
+                                        for event_range in matched_event_ranges)
+        short_upper_identity = 1 <= len(right) <= 2 and right.isalpha() and right.isupper()
+        if (left.lower() not in _NON_SUBJECT_TERMS and right.lower() not in _NON_SUBJECT_TERMS
+                and left_key not in _BINDING_CONNECTOR_TOKENS
+                and right_key not in _BINDING_CONNECTOR_TOKENS
+                and left.lower() not in _BINDING_SHOW_TOKENS
+                and right.lower() not in _BINDING_SHOW_TOKENS
+                and not ({left_key, right_key} <= _BINDING_GENERIC_DESCRIPTOR_TOKENS)
+                and not ({left_key, right_key} <= _BINDING_EVENT_DESCRIPTOR_TOKENS)
+                and not overlaps_registered_event
+                and (len(right) >= 3 or short_upper_identity)
+                and left[0].isupper() and right[0].isupper()):
+            names.add(f"{left_key} {right_key}")
+    return names
+
+
+def _named_subjects(text: str) -> Set[str]:
+    # Preserve E03B's established singleton signals and lower-case fallback;
+    # E04V alone uses the stricter explicit_named_subjects binding primitive.
+    names = _capitalized_subject_signals(text)
+    return names or (_tokens(text.lower()) - _NON_SUBJECT_TERMS - _GENERIC_SINGLE_SUBJECT)
 
 def _field_text(record: Dict[str, Any], keys: Iterable[str]) -> str:
     values=[]
