@@ -35,6 +35,16 @@ def grounded_duplicate(ref, left_evidence, right_evidence, shared_fact="same con
             "centrality_basis": "The supported shared fact is the autonomous central development of both endpoints."}
 
 
+def duplicate_confirmation(ref, left_evidence, right_evidence, decision="CONFIRM_DUPLICATE"):
+    return {"ref": ref, "decision": decision,
+            "left_central_subject": "the central subject in the left endpoint",
+            "right_central_subject": "the central subject in the right endpoint",
+            "left_central_development": "the concrete development reported by the left endpoint",
+            "right_central_development": "the concrete development reported by the right endpoint",
+            "left_evidence": left_evidence, "right_evidence": right_evidence,
+            "confirmation_basis": "The endpoints were independently compared for subject and development."}
+
+
 def test_active_flag_is_separate_and_defaults_off():
     assert not active.enabled({})
     assert not active.enabled({"OWTV_EDITORIAL_DIRECTOR_ACTIVE_ENABLED": "false",
@@ -130,9 +140,12 @@ def test_same_run_duplicate_is_removed_before_editorial_classification(monkeypat
             return {"relations": [grounded_duplicate("r0", s["candidates"][0]["title"],
                                                        s["candidates"][1]["title"],
                                                        "Jasper Troy Becomes First Confirmed Release")]}
+        if "DUPLICATE CONFIRMATION PHASE ONLY" in prompt:
+            return {"confirmations": [duplicate_confirmation(
+                "d0", s["candidates"][0]["title"], s["candidates"][1]["title"])]}
         return response(s, ("SELECT",))
     result = active.evaluate(s, provider=provider)
-    assert result["status"] == "VALIDATED" and len(calls) == 2
+    assert result["status"] == "VALIDATED" and len(calls) == 3
     assert len(result["output"]["candidates"]) == 1
     assert len(s["semantic_duplicate_skips"]) == 1
 
@@ -175,6 +188,174 @@ def test_empty_relation_matrix_creates_no_duplicate_gate_attempt(monkeypatch):
     assert ledger[0]["workload"] == "editorial_director_active"
     assert not any(kwargs.get("model_role") == "editorial_director_duplicate_gate"
                    for _, kwargs in events)
+    assert not any(kwargs.get("model_role") == "editorial_director_duplicate_confirmation"
+                   for _, kwargs in events)
+
+
+def _two_candidate_relation_snapshot(left_title, right_title):
+    s = _anchor_contract_snapshot(left_title, right_title)
+    s["authorized_relations_complete"] = True
+    return s
+
+
+def test_confirmation_rejects_shared_promotion_wording_without_binding(monkeypatch):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    left = "New Japan Pro Wrestling Signs Mercedes Mone"
+    right = "New Japan Pro Wrestling Signs Kazuchika Okada"
+    s = _two_candidate_relation_snapshot(left, right)
+    calls = []
+
+    def provider(prompt, *_):
+        calls.append(prompt)
+        if "DUPLICATE GATE PHASE ONLY" in prompt:
+            return {"relations": [grounded_duplicate(
+                "r0", left, right, "New Japan Pro Wrestling signs a wrestler")]}
+        if "DUPLICATE CONFIRMATION PHASE ONLY" in prompt:
+            assert "score" not in prompt and "threshold" not in prompt
+            return {"confirmations": [duplicate_confirmation(
+                "d0", left, right, "REJECT_DUPLICATE")]}
+        return response(s, ("SELECT", "DEFER"))
+
+    result = active.evaluate(s, provider=provider)
+    assert result["status"] == "VALIDATED" and len(calls) == 3
+    assert len(s["candidates"]) == 2 and not s["semantic_duplicate_skips"]
+    relation = result["output"]["relations"][0]
+    assert relation["primary_decision"] == "DUPLICATE"
+    assert relation["decision"] == "NO_MATCH"
+    assert relation["duplicate_confirmation"]["decision"] == "REJECT_DUPLICATE"
+    assert result["duplicate_confirmation_logical_request_id"] != result["duplicate_gate_logical_request_id"]
+    assert result["duplicate_confirmation_input_digest"] != result["duplicate_gate_input_digest"]
+
+
+def test_confirmation_rejects_background_title_change_reaction(monkeypatch):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    left = "Triple H Reacts To Stephanie Vaquer Winning Women's World Title"
+    right = "Stephanie Vaquer Wins Women's World Title At WWE Live Event"
+    s = _two_candidate_relation_snapshot(left, right)
+
+    def provider(prompt, *_):
+        if "DUPLICATE GATE PHASE ONLY" in prompt:
+            return {"relations": [grounded_duplicate(
+                "r0", left, right, "Stephanie Vaquer winning Women's World Title")]}
+        if "DUPLICATE CONFIRMATION PHASE ONLY" in prompt:
+            return {"confirmations": [duplicate_confirmation(
+                "d0", left, right, "REJECT_DUPLICATE")]}
+        return response(s, ("SELECT", "DEFER"))
+
+    result = active.evaluate(s, provider=provider)
+    assert result["status"] == "VALIDATED"
+    assert len(s["candidates"]) == 2 and not s["semantic_duplicate_skips"]
+
+
+def test_confirmation_provider_failure_is_atomic(monkeypatch):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    left = "Jasper Troy signs a new WWE contract today"
+    right = "Jasper Troy signs a new WWE contract today again"
+    s = _two_candidate_relation_snapshot(left, right)
+
+    def provider(prompt, *_):
+        if "DUPLICATE GATE PHASE ONLY" in prompt:
+            return {"relations": [grounded_duplicate(
+                "r0", left, right, "Jasper Troy signs a new WWE contract today")]}
+        raise TimeoutError("confirmation unavailable")
+
+    result = active.evaluate(s, provider=provider)
+    assert result["status"] == "PROVIDER_FAILED"
+    assert result["duplicate_confirmation_logical_request_id"]
+    assert len(s["candidates"]) == 2 and "semantic_duplicate_skips" not in s
+
+
+def test_invalid_confirmation_repairs_once_then_confirms(monkeypatch):
+    ledger = []
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **kwargs: ledger.append(kwargs))
+    left = "Jasper Troy signs a new WWE contract today"
+    right = "Jasper Troy signs a new WWE contract today again"
+    s = _two_candidate_relation_snapshot(left, right)
+    confirmation_attempt = 0
+
+    def provider(prompt, *_):
+        nonlocal confirmation_attempt
+        if "DUPLICATE GATE PHASE ONLY" in prompt:
+            return {"relations": [grounded_duplicate(
+                "r0", left, right, "Jasper Troy signs a new WWE contract today")]}
+        if "DUPLICATE CONFIRMATION PHASE ONLY" in prompt:
+            confirmation_attempt += 1
+            if confirmation_attempt == 1:
+                return {"confirmations": []}
+            return {"confirmations": [duplicate_confirmation("d0", left, right)]}
+        return response(s, ("SELECT",))
+
+    result = active.evaluate(s, provider=provider)
+    assert result["status"] == "VALIDATED" and confirmation_attempt == 2
+    confirmation_ledger = [row for row in ledger
+                           if row["workload"] == "editorial_director_duplicate_confirmation"]
+    assert [row["repair"] for row in confirmation_ledger] == [False, True]
+    attempts = [row for row in result["validation_attempts"]
+                if row.get("phase") == "duplicate_confirmation"]
+    assert [row["valid"] for row in attempts] == [False, True]
+
+
+def test_repeated_invalid_confirmation_fails_atomically(monkeypatch):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    left = "Jasper Troy signs a new WWE contract today"
+    right = "Jasper Troy signs a new WWE contract today again"
+    s = _two_candidate_relation_snapshot(left, right)
+    confirmation_calls = 0
+
+    def provider(prompt, *_):
+        nonlocal confirmation_calls
+        if "DUPLICATE GATE PHASE ONLY" in prompt:
+            return {"relations": [grounded_duplicate(
+                "r0", left, right, "Jasper Troy signs a new WWE contract today")]}
+        confirmation_calls += 1
+        return {"confirmations": []}
+
+    result = active.evaluate(s, provider=provider)
+    assert result["status"] == "failed" and confirmation_calls == 2
+    assert result["fallback_reason"] == "duplicate_confirmation_coverage"
+    assert len(s["candidates"]) == 2 and "semantic_duplicate_skips" not in s
+
+
+def test_multiple_duplicates_use_one_batched_confirmation_request(monkeypatch):
+    ledger = []
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **kwargs: ledger.append(kwargs))
+    titles = [
+        "Jasper Troy signs a new WWE contract today",
+        "Jasper Troy signs a new WWE contract today again",
+        "Stephanie Vaquer wins the WWE championship tonight",
+        "Stephanie Vaquer wins the WWE championship tonight in Chile",
+    ]
+    s = shadow.capture_opportunity({"news_candidates_for_menzo": [
+        {"title": title, "summary": title, "url": f"https://batch.test/{index}"}
+        for index, title in enumerate(titles)]}, run_id="confirmation-batch",
+        observation_timestamp="now", publisher_count_24h=0, history=[])
+    ids = [row["candidate_id"] for row in s["candidates"]]
+    s["authorized_relations"] = [
+        {"pair_id": f"batch-{index}", "scope": "same_run", "left_id": ids[index * 2],
+         "right_id": ids[index * 2 + 1], "scorer_version": "test", "score": .9,
+         "threshold": .55, "components": {}} for index in range(2)]
+    s["authorized_relations_complete"] = True
+
+    def provider(prompt, *_):
+        if "DUPLICATE GATE PHASE ONLY" in prompt:
+            return {"relations": [
+                grounded_duplicate("r0", titles[0], titles[1],
+                                   "Jasper Troy signs a new WWE contract today"),
+                grounded_duplicate("r1", titles[2], titles[3],
+                                   "Stephanie Vaquer wins the WWE championship tonight"),
+            ]}
+        if "DUPLICATE CONFIRMATION PHASE ONLY" in prompt:
+            return {"confirmations": [
+                duplicate_confirmation("d0", titles[0], titles[1]),
+                duplicate_confirmation("d1", titles[2], titles[3]),
+            ]}
+        return response(s, ("SELECT", "DEFER"))
+
+    result = active.evaluate(s, provider=provider)
+    assert result["status"] == "VALIDATED" and len(s["candidates"]) == 2
+    confirmation_calls = [row for row in ledger
+                          if row["workload"] == "editorial_director_duplicate_confirmation"]
+    assert len(confirmation_calls) == 1 and confirmation_calls[0]["relation_count"] == 2
 
 
 def test_duplicate_gate_invalid_then_repair_records_two_attempts(monkeypatch):
@@ -343,6 +524,14 @@ def test_duplicate_gate_provider_schema_uses_supported_union_keywords_only():
             "right_central_development", "centrality_basis"} <= set(by_decision["DUPLICATE"]["required"])
     assert {"new_fact", "temporal_basis"} <= set(by_decision["MATERIAL_UPDATE"]["required"])
     assert set(by_decision["NO_MATCH"]["required"]) == {"ref", "decision"}
+
+    confirmation_schema = json.loads(active.CONFIRMATION_SCHEMA_PATH.read_text())
+    assert schema_keywords(confirmation_schema).isdisjoint(unsupported)
+    item = confirmation_schema["properties"]["confirmations"]["items"]
+    assert item["additionalProperties"] is False
+    assert set(item["properties"]["decision"]["enum"]) == {
+        "CONFIRM_DUPLICATE", "REJECT_DUPLICATE"}
+    assert {"ref", "decision", *active.CONFIRMATION_FIELDS} == set(item["required"])
 
 
 def test_grounding_normalization_is_formatting_only():
@@ -634,9 +823,14 @@ def test_gate_eliminates_all_without_creating_classification_request(monkeypatch
     s["authorized_relations"] = [{"pair_id": "p", "scope": "recent_history",
         "left_id": candidate_id, "right_id": "published", "scorer_version": "v", "score": .7,
         "threshold": .55, "components": {}}]
-    result = active.evaluate(s, provider=lambda *_: {"relations": [grounded_duplicate(
-        "r0", s["candidates"][0]["title"], history["title"], "Jasper Troy release confirmed")]})
-    assert result["status"] == "VALIDATED" and len(ledger) == 1
+    def provider(prompt, *_):
+        if "DUPLICATE CONFIRMATION PHASE ONLY" in prompt:
+            return {"confirmations": [duplicate_confirmation(
+                "d0", s["candidates"][0]["title"], history["title"])]}
+        return {"relations": [grounded_duplicate(
+            "r0", s["candidates"][0]["title"], history["title"], "Jasper Troy release confirmed")]}
+    result = active.evaluate(s, provider=provider)
+    assert result["status"] == "VALIDATED" and len(ledger) == 2
     assert result["duplicate_gate_input_digest"]
     assert "logical_request_id" not in result
     assert any(event == "model_attempt_completed" for event, _ in events)
@@ -1281,6 +1475,9 @@ def test_active_artifact_preserves_gate_and_classification_provenance(monkeypatc
             return {"relations": [grounded_duplicate("r0", s["candidates"][0]["title"],
                                                        s["candidates"][1]["title"],
                                                        "Jasper Troy Becomes First Confirmed Release")]}
+        if "DUPLICATE CONFIRMATION PHASE ONLY" in prompt:
+            return {"confirmations": [duplicate_confirmation(
+                "d0", s["candidates"][0]["title"], s["candidates"][1]["title"])]}
         return response(s, ("SELECT",))
     result = active.evaluate(s, provider=provider)
     assert result["status"] == "VALIDATED"
@@ -1303,8 +1500,15 @@ def test_active_artifact_preserves_gate_and_classification_provenance(monkeypatc
     assert eliminated["semantic_duplicate_of"] == survivor["candidate"]["candidate_id"]
     assert eliminated["duplicate_gate_logical_request_id"] == result["duplicate_gate_logical_request_id"]
     assert eliminated["duplicate_gate_input_digest"] == pre_gate_digest
+    assert eliminated["duplicate_confirmation_logical_request_id"] == (
+        result["duplicate_confirmation_logical_request_id"])
+    assert eliminated["duplicate_confirmation_input_digest"] == (
+        result["duplicate_confirmation_input_digest"])
     assert "logical_request_id" not in eliminated and "input_digest" not in eliminated
     assert eliminated["relations"][0]["decision"] == "DUPLICATE"
     assert eliminated["relations"][0]["left_evidence"]
     assert eliminated["relations"][0]["right_evidence"]
     assert eliminated["relations"][0]["centrality_basis"]
+    assert eliminated["relations"][0]["duplicate_confirmation"]["decision"] == "CONFIRM_DUPLICATE"
+    assert eliminated["relations"][0]["duplicate_confirmation_provenance"]["logical_request_id"] == (
+        result["duplicate_confirmation_logical_request_id"])

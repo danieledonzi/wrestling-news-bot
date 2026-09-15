@@ -1,0 +1,36 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["confirmations"],
+  "properties": {
+    "confirmations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "ref",
+          "decision",
+          "left_central_subject",
+          "right_central_subject",
+          "left_central_development",
+          "right_central_development",
+          "left_evidence",
+          "right_evidence",
+          "confirmation_basis"
+        ],
+        "properties": {
+          "ref": {"type": "string"},
+          "decision": {"type": "string", "enum": ["CONFIRM_DUPLICATE", "REJECT_DUPLICATE"]},
+          "left_central_subject": {"type": "string"},
+          "right_central_subject": {"type": "string"},
+          "left_central_development": {"type": "string"},
+          "right_central_development": {"type": "string"},
+          "left_evidence": {"type": "string"},
+          "right_evidence": {"type": "string"},
+          "confirmation_basis": {"type": "string"}
+        }
+      }
+    }
+  }
+}

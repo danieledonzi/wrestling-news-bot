@@ -120,6 +120,14 @@ not a binding subject anchor; valid named subjects elsewhere in the headline rem
 unavailable or malformed, E04V must reject `DUPLICATE` binding and use bounded repair/whole-Active fallback rather than
 permit an event-derived anchor.
 
+Every `DUPLICATE` that passes local grounding remains a proposal until the batched
+`editorial_director_duplicate_confirmation` operation independently confirms that both exact endpoints concern the
+same central subject **and** report the same central development or concrete fact. Shared promotion, show, event,
+championship, category, action wording, or background context is insufficient. A valid `REJECT_DUPLICATE` leaves the
+relation non-binding; missing, malformed, incomplete, or ungrounded confirmation fails the whole Active result through
+the bounded repair/fallback lifecycle. Confirmation receives exact endpoint facts, not scorer scores, thresholds, or
+Python-selected anchors.
+
 `MATERIAL_UPDATE` is valid only for recent authoritative history and requires a concrete model-supplied `new_fact` plus
 a model-supplied `temporal_basis` showing the fact occurred, became known, or was officially confirmed after
 publication. Rewording is not a new fact. Local code must never invent relation semantics.

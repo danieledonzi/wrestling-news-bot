@@ -22,12 +22,16 @@ POLICY_VERSION = "owtv_editorial_director_policy_v3_active"
 SCHEMA_PATH = ROOT / "config/editorial_director_output_schema_v3.json"
 POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V3_ACTIVE.md"
 RELATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_gate_schema_v3.json"
+CONFIRMATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_confirmation_schema_v3.json"
 EVENT_REGISTRY_PATH = ROOT / "config/event_registry.json"
 BOB_CAPACITY_FIELDS = ("article_type", "source_title", "category_hint", "reason",
                        "ai_editorial_reason", "event_key")
 DUPLICATE_EVIDENCE_FIELDS = ("left_evidence", "right_evidence")
 DUPLICATE_CENTRALITY_FIELDS = ("left_central_development", "right_central_development",
                                "centrality_basis")
+CONFIRMATION_FIELDS = ("left_central_subject", "right_central_subject",
+                       "left_central_development", "right_central_development",
+                       "left_evidence", "right_evidence", "confirmation_basis")
 DUPLICATE_RELATION_FIELDS = {"ref", "decision", "shared_fact", "new_fact", "temporal_basis",
                              *DUPLICATE_EVIDENCE_FIELDS, *DUPLICATE_CENTRALITY_FIELDS}
 GROUNDING_SOURCE_FIELDS = ("title", "source_title", "title_it", "summary", "retained_body")
@@ -500,6 +504,111 @@ def _duplicate_prompt(snapshot: Mapping[str, Any], failures: list[dict[str, Any]
     return prompt
 
 
+def _duplicate_confirmation_input(snapshot: Mapping[str, Any],
+                                  relations: list[dict[str, Any]]) -> tuple[dict[str, Any], dict[str, int]]:
+    """Build an independent, scorer-free batch from exact provider-visible endpoints."""
+    _, endpoint_relations = _duplicate_gate_endpoint_maps(snapshot)
+    _, relation_map = shadow.short_ref_maps(snapshot)
+    endpoint_by_pair = {relation_map[ref]["pair_id"]: endpoints
+                        for ref, endpoints in endpoint_relations.items() if ref in relation_map}
+    rows, relation_indexes = [], {}
+    for index, relation in enumerate(relations):
+        if relation.get("decision") != "DUPLICATE":
+            continue
+        ref = f"d{len(rows)}"
+        endpoints = endpoint_by_pair.get(relation.get("pair_id"), {})
+        row = {"ref": ref}
+        for side in ("left", "right"):
+            endpoint = endpoints.get(side, {})
+            row[side] = {field: endpoint[field] for field in GROUNDING_SOURCE_FIELDS
+                         if isinstance(endpoint.get(field), str) and endpoint[field].strip()}
+        rows.append(row)
+        relation_indexes[ref] = index
+    return {"relations": rows}, relation_indexes
+
+
+def _duplicate_confirmation_prompt(payload: Mapping[str, Any],
+                                   failures: list[dict[str, Any]] | None = None) -> str:
+    prompt = (
+        "DUPLICATE CONFIRMATION PHASE ONLY. Independently evaluate every relation. "
+        "Return CONFIRM_DUPLICATE only when both exact endpoints concern the same central subject "
+        "and report the same central development or concrete fact. Shared promotion, show, event, "
+        "championship, category, action verb, or background context is insufficient. Otherwise return "
+        "REJECT_DUPLICATE. Quote one short meaningful exact evidence span from each endpoint and provide "
+        "concise central subjects, central developments, and confirmation_basis. Return only JSON. INPUT=" +
+        json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")))
+    if failures is not None:
+        prompt += "\nREPAIR ONLY THESE VALIDATION FAMILIES=" + json.dumps(failures[:20], separators=(",", ":"))
+    return prompt
+
+
+def _validate_duplicate_confirmation(value: Any, payload: Mapping[str, Any]):
+    """Validate confirmation structure and endpoint-local evidence, never semantics."""
+    failures: list[dict[str, Any]] = []
+    telemetry: list[dict[str, Any]] = []
+    if not isinstance(value, Mapping):
+        return None, [{"family": "parse_json", "detail": "output_not_object"}], telemetry
+    for field in set(value) - {"confirmations"}:
+        telemetry.append({"family": "locally_canonicalized_extra_field", "field": field})
+    rows = value.get("confirmations")
+    if not isinstance(rows, list):
+        return None, [{"family": "duplicate_confirmation_coverage",
+                       "detail": "confirmations_array_required"}], telemetry
+    authorized = {str(row.get("ref")): row for row in payload.get("relations", [])
+                  if isinstance(row, Mapping)}
+    seen: set[str] = set()
+    canonical = []
+    allowed_fields = {"ref", "decision", *CONFIRMATION_FIELDS}
+    for row in rows:
+        if not isinstance(row, Mapping):
+            failures.append({"family": "duplicate_confirmation_ref", "detail": "row_not_object"})
+            continue
+        ref = row.get("ref")
+        if ref not in authorized:
+            failures.append({"family": "duplicate_confirmation_ref", "ref": ref,
+                             "detail": "unauthorized"})
+            continue
+        if ref in seen:
+            failures.append({"family": "duplicate_confirmation_ref", "ref": ref,
+                             "detail": "duplicate"})
+            continue
+        seen.add(ref)
+        extras = set(row) - allowed_fields
+        if extras:
+            failures.append({"family": "duplicate_confirmation_contract", "ref": ref,
+                             "fields": sorted(extras)})
+        decision = row.get("decision")
+        if decision not in {"CONFIRM_DUPLICATE", "REJECT_DUPLICATE"}:
+            failures.append({"family": "duplicate_confirmation_decision", "ref": ref})
+        invalid = [field for field in CONFIRMATION_FIELDS if not _bounded_text(row.get(field))]
+        if invalid:
+            failures.append({"family": "duplicate_confirmation_contract", "ref": ref,
+                             "fields": invalid})
+        for side in ("left", "right"):
+            valid, detail = _grounded_evidence(row.get(f"{side}_evidence"), authorized[ref].get(side, {}))
+            if not valid:
+                failures.append({"family": f"duplicate_confirmation_{side}_evidence_grounding",
+                                 "ref": ref, "detail": detail})
+        canonical.append({"ref": ref, "decision": decision,
+                          **{field: (row[field].strip() if isinstance(row.get(field), str) else None)
+                             for field in CONFIRMATION_FIELDS}})
+    missing = sorted(set(authorized) - seen)
+    if missing:
+        failures.append({"family": "duplicate_confirmation_coverage", "missing_refs": missing})
+    return (None if failures else canonical), failures, telemetry
+
+
+def _apply_duplicate_confirmation(relations: list[dict[str, Any]], confirmations: list[dict[str, Any]],
+                                  relation_indexes: Mapping[str, int]) -> None:
+    """Apply Gemini's confirmation verdict without locally inventing relation semantics."""
+    for confirmation in confirmations:
+        relation = relations[relation_indexes[confirmation["ref"]]]
+        relation["duplicate_confirmation"] = copy.deepcopy(confirmation)
+        relation["primary_decision"] = "DUPLICATE"
+        if confirmation["decision"] == "REJECT_DUPLICATE":
+            relation["decision"] = "NO_MATCH"
+
+
 def _apply_duplicate_gate(snapshot: dict[str, Any], relations: list[dict[str, Any]]) -> None:
     """Remove semantic duplicates before any survivor receives an editorial class."""
     from agents.menzo_policy_v93_15 import canonical_richer_winner, hydrate_complete_article_bodies
@@ -596,6 +705,9 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
     failures: list[dict[str, Any]] = []
     gate_attempts = 0
     gate_logical_request_id = None
+    confirmation_attempts = 0
+    confirmation_logical_request_id = None
+    confirmation_input_digest = None
     if has_relations:
         gate_logical_request_id = gate_request.logical_request_id
         gate_input_digest = snapshot["input_digest"]
@@ -652,11 +764,108 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                     "fallback_reason": failures[0]["family"] if failures else "duplicate_gate_validation_failed",
                     "duplicate_gate_logical_request_id": gate_logical_request_id,
                     "duplicate_gate_input_digest": gate_input_digest}
+        confirmation_payload, confirmation_relation_indexes = _duplicate_confirmation_input(snapshot, relations)
+        if confirmation_payload["relations"]:
+            confirmation_request = OperationalAIRequest(
+                "Menzo", "editorial_director_duplicate_confirmation",
+                reason_code="editorial_director_duplicate_confirmation")
+            confirmation_logical_request_id = confirmation_request.logical_request_id
+            confirmation_serialized = json.dumps(
+                confirmation_payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+            confirmation_input_digest = hashlib.sha256(confirmation_serialized.encode("utf-8")).hexdigest()
+            confirmation_schema = json.loads(CONFIRMATION_SCHEMA_PATH.read_text(encoding="utf-8"))
+            confirmations = None
+            confirmation_failures: list[dict[str, Any]] = []
+            for index in range(2):
+                confirmation_attempts += 1
+                repair = index == 1
+                attempt = confirmation_request.start(
+                    MODEL, repair=repair,
+                    reason_code="duplicate_confirmation_validation_failed" if repair else "")
+                started = time.monotonic()
+                confirmation_response = None
+                try:
+                    confirmation_response = call(
+                        _duplicate_confirmation_prompt(
+                            confirmation_payload, confirmation_failures if repair else None),
+                        confirmation_schema, shadow.PROVIDER_TIMEOUT_SECONDS)
+                except Exception as exc:
+                    record_gemini_attempt(
+                        response=confirmation_response, model_requested=MODEL,
+                        operation_id=confirmation_request.logical_request_id, attempt_index=index,
+                        repair=repair, fallback=False, agent="Menzo",
+                        workload="editorial_director_duplicate_confirmation",
+                        phase="editorial_director_duplicate_confirmation_repair" if repair else
+                              "editorial_director_duplicate_confirmation_primary",
+                        shadow=False, logical_request_id=confirmation_request.logical_request_id,
+                        canonical_attempt_id=attempt["attempt_id"],
+                        candidate_count=len(snapshot["candidates"]),
+                        relation_count=len(confirmation_payload["relations"]),
+                        input_digest=confirmation_input_digest, policy_version=POLICY_VERSION,
+                        policy_digest=digest, status="failed", error_class=type(exc).__name__)
+                    confirmation_request.failed(
+                        attempt, error_class="upstream", error_terminal=True,
+                        latency_ms=int((time.monotonic() - started) * 1000))
+                    return {**base, "attempts": gate_attempts + confirmation_attempts,
+                            "status": "PROVIDER_FAILED", "fallback_reason": type(exc).__name__,
+                            "duplicate_gate_logical_request_id": gate_logical_request_id,
+                            "duplicate_gate_input_digest": gate_input_digest,
+                            "duplicate_confirmation_logical_request_id": confirmation_logical_request_id,
+                            "duplicate_confirmation_input_digest": confirmation_input_digest}
+                record_gemini_attempt(
+                    response=confirmation_response, model_requested=MODEL,
+                    operation_id=confirmation_request.logical_request_id, attempt_index=index,
+                    repair=repair, fallback=False, agent="Menzo",
+                    workload="editorial_director_duplicate_confirmation",
+                    phase="editorial_director_duplicate_confirmation_repair" if repair else
+                          "editorial_director_duplicate_confirmation_primary",
+                    shadow=False, logical_request_id=confirmation_request.logical_request_id,
+                    canonical_attempt_id=attempt["attempt_id"], candidate_count=len(snapshot["candidates"]),
+                    relation_count=len(confirmation_payload["relations"]),
+                    input_digest=confirmation_input_digest, policy_version=POLICY_VERSION,
+                    policy_digest=digest, status="called")
+                confirmation_request.defer(attempt, int((time.monotonic() - started) * 1000))
+                try:
+                    confirmations, confirmation_failures, confirmation_telemetry = (
+                        _validate_duplicate_confirmation(
+                            shadow._decode(confirmation_response), confirmation_payload))
+                except Exception as exc:
+                    confirmations, confirmation_failures, confirmation_telemetry = None, [
+                        {"family": "parse_json", "detail": type(exc).__name__}], []
+                base["validation_attempts"].append({
+                    "phase": "duplicate_confirmation", "attempt_index": index,
+                    "valid": not confirmation_failures,
+                    "validation_families": confirmation_failures,
+                    "canonicalizations": confirmation_telemetry})
+                confirmation_request.resolve_deferred(
+                    not confirmation_failures,
+                    error_terminal=repair and bool(confirmation_failures))
+                if not confirmation_failures:
+                    break
+            if confirmation_failures or confirmations is None:
+                return {**base, "attempts": gate_attempts + confirmation_attempts,
+                        "validation_errors": confirmation_failures,
+                        "fallback_reason": (confirmation_failures[0]["family"]
+                                            if confirmation_failures else
+                                            "duplicate_confirmation_validation_failed"),
+                        "duplicate_gate_logical_request_id": gate_logical_request_id,
+                        "duplicate_gate_input_digest": gate_input_digest,
+                        "duplicate_confirmation_logical_request_id": confirmation_logical_request_id,
+                        "duplicate_confirmation_input_digest": confirmation_input_digest}
+            _apply_duplicate_confirmation(relations, confirmations, confirmation_relation_indexes)
+            for relation in relations:
+                if relation.get("primary_decision") == "DUPLICATE":
+                    relation["duplicate_confirmation_provenance"] = {
+                        "logical_request_id": confirmation_logical_request_id,
+                        "input_digest": confirmation_input_digest}
         _apply_duplicate_gate(snapshot, relations)
         if not snapshot.get("candidates"):
-            return {**base, "status": "VALIDATED", "attempts": gate_attempts,
+            return {**base, "status": "VALIDATED",
+                    "attempts": gate_attempts + confirmation_attempts,
                     "duplicate_gate_logical_request_id": gate_logical_request_id,
                     "duplicate_gate_input_digest": gate_input_digest,
+                    "duplicate_confirmation_logical_request_id": confirmation_logical_request_id,
+                    "duplicate_confirmation_input_digest": confirmation_input_digest,
                     "output": {"schema_version": SCHEMA_VERSION, "policy_version": POLICY_VERSION,
                                "candidates": [], "relations": relations}, "validation_errors": []}
         request = OperationalAIRequest("Menzo", "editorial_director_active",
@@ -695,14 +904,19 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
         request.resolve_deferred(not failures, error_terminal=repair and bool(failures))
         if not failures:
             output["relations"] = copy.deepcopy(snapshot.get("duplicate_gate_relations", []))
-            result = {**base, "status": "VALIDATED", "attempts": gate_attempts + index + 1,
+            result = {**base, "status": "VALIDATED",
+                      "attempts": gate_attempts + confirmation_attempts + index + 1,
                       "logical_request_id": request.logical_request_id, "policy_digest": digest,
                       "input_digest": snapshot["input_digest"], "output": output, "validation_errors": []}
             if gate_logical_request_id:
                 result["duplicate_gate_logical_request_id"] = gate_logical_request_id
                 result["duplicate_gate_input_digest"] = gate_input_digest
+            if confirmation_logical_request_id:
+                result["duplicate_confirmation_logical_request_id"] = confirmation_logical_request_id
+                result["duplicate_confirmation_input_digest"] = confirmation_input_digest
             return result
-    return {**base, "attempts": gate_attempts + 2, "logical_request_id": request.logical_request_id,
+    return {**base, "attempts": gate_attempts + confirmation_attempts + 2,
+            "logical_request_id": request.logical_request_id,
             "validation_errors": failures, "fallback_reason": failures[0]["family"] if failures else "validation_failed"}
 
 
