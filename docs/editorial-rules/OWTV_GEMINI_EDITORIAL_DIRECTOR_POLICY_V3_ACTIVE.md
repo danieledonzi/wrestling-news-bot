@@ -108,10 +108,12 @@ Menzo; this intentional recall tradeoff is safer than terminal false elimination
 Compounds made entirely of generic championship, division, or category descriptor tokens are not named-subject
 anchors; one generic component may remain valid when paired with a non-generic name component.
 The same fully-generic exclusion applies to event-segmentation compounds such as numbered nights, days, or parts.
-The leading article `The` may anchor a two-component stage name only when its second component passes every normal
-binding-subject safeguard; this exception never creates singleton authority or permits a generic second component.
 Headline connectors cannot form either component of a binding anchor, and stable generic accolade compounds are
 excluded. Binding identity comparison canonicalizes apostrophe variants and diacritics without altering source evidence.
+Stage names whose identity depends on a leading article may therefore lack deterministic binding authority in ED-2.1.1;
+bounded repair and whole-Active legacy fallback are preferred to adding local identity exceptions. If this conservative
+rule causes material fallback volume, identity ambiguity belongs in a separate bounded Gemini operation whose output is
+strictly validated, not in additional Python pseudo-NER heuristics.
 
 `MATERIAL_UPDATE` is valid only for recent authoritative history and requires a concrete model-supplied `new_fact` plus
 a model-supplied `temporal_basis` showing the fact occurred, became known, or was officially confirmed after

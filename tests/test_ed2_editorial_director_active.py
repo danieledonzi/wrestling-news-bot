@@ -449,13 +449,15 @@ def test_diacritic_canonical_anchor_validates_and_is_fully_subtracted():
         "Mercedes Moné alpha", "Mercedes Mone beta", "mercedes mone") == 0
 
 
-def test_leading_article_stage_name_validates_grounded_duplicate():
+def test_leading_article_stage_name_fails_open_without_identity_exception():
     left = "The Rock returns to WWE after long absence"
     right = "The Rock returns to WWE after long absence"
     s = _anchor_contract_snapshot(left, right)
     canonical, failures, _ = _validate_anchor_relation(s, left_evidence=left,
         right_evidence=right, shared_fact="The Rock returns to WWE after long absence")
-    assert canonical is not None and not failures
+    assert canonical is None
+    assert any(row["family"] == "duplicate_relation_anchor_grounding" and
+               row["detail"] == "no_shared_explicit_subject" for row in failures)
 
 
 def test_retained_body_capitalization_cannot_supply_binding_anchor():

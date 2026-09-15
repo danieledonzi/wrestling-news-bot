@@ -55,7 +55,7 @@ def test_world_is_not_singleton_identity_but_maya_world_compound_survives():
     assert scorer.explicit_named_subjects("Kevin O'Reilly") == scorer.explicit_named_subjects("Kevin O’Reilly")
     assert scorer.explicit_named_subjects("Big E") == {"big e"}
     for stage_name in ("The Rock", "The Miz", "The Bloodline"):
-        assert scorer.explicit_named_subjects(stage_name) == {stage_name.casefold()}
+        assert scorer.explicit_named_subjects(stage_name) == set()
     assert scorer.explicit_named_subjects("Punk") == set()
     assert scorer.explicit_named_subjects("R-Truth") == set()
     for generic_article in ("The Title", "The Match", "The Event", "The Latest", "The Future"):

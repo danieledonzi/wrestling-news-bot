@@ -138,8 +138,7 @@ def explicit_named_subjects(text: str) -> Set[str]:
         left, right = pair.split(maxsplit=1)
         left_key, right_key = (canonical_binding_subject_text(value) for value in (left, right))
         short_upper_identity = 1 <= len(right) <= 2 and right.isalpha() and right.isupper()
-        left_is_allowed = left_key == "the" or left.lower() not in _NON_SUBJECT_TERMS
-        if (left_is_allowed and right.lower() not in _NON_SUBJECT_TERMS
+        if (left.lower() not in _NON_SUBJECT_TERMS and right.lower() not in _NON_SUBJECT_TERMS
                 and left_key not in _BINDING_CONNECTOR_TOKENS
                 and right_key not in _BINDING_CONNECTOR_TOKENS
                 and left.lower() not in _BINDING_SHOW_TOKENS
