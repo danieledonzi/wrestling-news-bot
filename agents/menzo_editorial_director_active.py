@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any, Callable, Mapping
 
 from agents import menzo_editorial_director_shadow as shadow
+from agents import menzo_active_duplicate_pair_cache as pair_cache
 from agents.canonical_event_ledger import OperationalAIRequest
 from agents.gemini_ledger import record_gemini_attempt
 
@@ -692,11 +693,57 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                            "candidates": [], "relations": []}, "validation_errors": []}
     schema = json.loads(SCHEMA_PATH.read_text())
     digest = hashlib.sha256(POLICY_PATH.read_bytes()).hexdigest()
-    has_relations = bool(snapshot.get("authorized_relations"))
+    authorized = list(snapshot.get("authorized_relations", []))
+    contract = pair_cache.contract_fingerprint(
+        policy_version=POLICY_VERSION, model=MODEL, policy_path=POLICY_PATH,
+        gate_schema_path=RELATION_SCHEMA_PATH,
+        confirmation_schema_path=CONFIRMATION_SCHEMA_PATH,
+        event_registry_path=EVENT_REGISTRY_PATH)
+    cache = pair_cache.load()
+    _, endpoint_relations = _duplicate_gate_endpoint_maps(snapshot)
+    _, relation_refs = shadow.short_ref_maps(snapshot)
+    endpoint_by_pair = {relation_refs[ref]["pair_id"]: endpoints
+                        for ref, endpoints in endpoint_relations.items() if ref in relation_refs}
+    materials: dict[str, dict[str, Any]] = {}
+    cached_relations: dict[str, dict[str, Any]] = {}
+    misses = []
+    for relation in authorized:
+        endpoints = endpoint_by_pair.get(relation.get("pair_id"))
+        if endpoints is None:
+            misses.append(relation)
+            continue
+        material = pair_cache.pair_material(relation, endpoints, contract)
+        materials[str(relation.get("pair_id"))] = material
+        hit = pair_cache.lookup(cache, material)
+        if hit is None:
+            misses.append(relation)
+        else:
+            cached_relations[str(relation.get("pair_id"))] = hit
+    base.update(duplicate_pair_cache_hits=len(cached_relations),
+                duplicate_pair_cache_misses=len(misses),
+                duplicate_pair_cache_entries_stored=0,
+                duplicate_pair_cache_load_status=cache.get("load_status", "unknown"),
+                duplicate_pair_cache_contract_version=pair_cache.CONTRACT_VERSION)
+    has_relations = bool(misses)
+    phase_snapshot = snapshot
+    if has_relations and isinstance(snapshot, dict):
+        phase_snapshot = copy.deepcopy(snapshot)
+        phase_snapshot["authorized_relations"] = copy.deepcopy(misses)
+        _finalize_active_input(phase_snapshot)
     gate_request = (OperationalAIRequest("Menzo", "editorial_director_duplicate_gate",
                     reason_code="editorial_director_duplicate_gate") if has_relations else None)
-    request = (None if has_relations else OperationalAIRequest(
-        "Menzo", "editorial_director_active", reason_code="editorial_director_active"))
+    request = None
+    if authorized and not has_relations:
+        _apply_duplicate_gate(snapshot, [cached_relations[str(row["pair_id"])] for row in authorized])
+        if not snapshot.get("candidates"):
+            return {**base, "status": "VALIDATED", "attempts": 0,
+                    "output": {"schema_version": SCHEMA_VERSION, "policy_version": POLICY_VERSION,
+                               "candidates": [], "relations": copy.deepcopy(
+                                   snapshot.get("duplicate_gate_relations", []))},
+                    "validation_errors": []}
+    if not has_relations:
+        request = OperationalAIRequest("Menzo", "editorial_director_active",
+            reason_code="editorial_director_active")
     try:
         call = provider or shadow._default_provider_factory()
     except Exception as exc:
@@ -710,7 +757,7 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
     confirmation_input_digest = None
     if has_relations:
         gate_logical_request_id = gate_request.logical_request_id
-        gate_input_digest = snapshot["input_digest"]
+        gate_input_digest = phase_snapshot["input_digest"]
         gate_schema = json.loads(RELATION_SCHEMA_PATH.read_text())
         relations = None
         for index in range(2):
@@ -720,7 +767,7 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                 reason_code="duplicate_gate_validation_failed" if repair else "")
             started = time.monotonic(); gate_response = None
             try:
-                gate_response = call(_duplicate_prompt(snapshot, failures if index else None), gate_schema,
+                gate_response = call(_duplicate_prompt(phase_snapshot, failures if index else None), gate_schema,
                                      shadow.PROVIDER_TIMEOUT_SECONDS)
             except Exception as exc:
                 record_gemini_attempt(response=gate_response, model_requested=MODEL,
@@ -729,8 +776,8 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                     phase="editorial_director_duplicate_gate_repair" if repair else
                           "editorial_director_duplicate_gate_primary",
                     shadow=False, logical_request_id=gate_request.logical_request_id,
-                    canonical_attempt_id=attempt["attempt_id"], candidate_count=len(snapshot["candidates"]),
-                    relation_count=len(snapshot["authorized_relations"]), input_digest=snapshot["input_digest"],
+                    canonical_attempt_id=attempt["attempt_id"], candidate_count=len(phase_snapshot["candidates"]),
+                    relation_count=len(phase_snapshot["authorized_relations"]), input_digest=phase_snapshot["input_digest"],
                     policy_version=POLICY_VERSION, policy_digest=digest, status="failed",
                     error_class=type(exc).__name__)
                 gate_request.failed(attempt, error_class="upstream", error_terminal=True,
@@ -745,12 +792,12 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                 phase="editorial_director_duplicate_gate_repair" if repair else
                       "editorial_director_duplicate_gate_primary",
                 shadow=False, logical_request_id=gate_request.logical_request_id,
-                canonical_attempt_id=attempt["attempt_id"], candidate_count=len(snapshot["candidates"]),
-                relation_count=len(snapshot["authorized_relations"]), input_digest=snapshot["input_digest"],
+                canonical_attempt_id=attempt["attempt_id"], candidate_count=len(phase_snapshot["candidates"]),
+                relation_count=len(phase_snapshot["authorized_relations"]), input_digest=phase_snapshot["input_digest"],
                 policy_version=POLICY_VERSION, policy_digest=digest, status="called")
             gate_request.defer(attempt, int((time.monotonic() - started) * 1000))
             try:
-                relations, failures, telemetry = _validate_duplicate_gate(shadow._decode(gate_response), snapshot)
+                relations, failures, telemetry = _validate_duplicate_gate(shadow._decode(gate_response), phase_snapshot)
             except Exception as exc:
                 relations, failures, telemetry = None, [
                     {"family": "parse_json", "detail": type(exc).__name__}], []
@@ -764,7 +811,7 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                     "fallback_reason": failures[0]["family"] if failures else "duplicate_gate_validation_failed",
                     "duplicate_gate_logical_request_id": gate_logical_request_id,
                     "duplicate_gate_input_digest": gate_input_digest}
-        confirmation_payload, confirmation_relation_indexes = _duplicate_confirmation_input(snapshot, relations)
+        confirmation_payload, confirmation_relation_indexes = _duplicate_confirmation_input(phase_snapshot, relations)
         if confirmation_payload["relations"]:
             confirmation_request = OperationalAIRequest(
                 "Menzo", "editorial_director_duplicate_confirmation",
@@ -799,7 +846,7 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                               "editorial_director_duplicate_confirmation_primary",
                         shadow=False, logical_request_id=confirmation_request.logical_request_id,
                         canonical_attempt_id=attempt["attempt_id"],
-                        candidate_count=len(snapshot["candidates"]),
+                        candidate_count=len(phase_snapshot["candidates"]),
                         relation_count=len(confirmation_payload["relations"]),
                         input_digest=confirmation_input_digest, policy_version=POLICY_VERSION,
                         policy_digest=digest, status="failed", error_class=type(exc).__name__)
@@ -820,7 +867,7 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                     phase="editorial_director_duplicate_confirmation_repair" if repair else
                           "editorial_director_duplicate_confirmation_primary",
                     shadow=False, logical_request_id=confirmation_request.logical_request_id,
-                    canonical_attempt_id=attempt["attempt_id"], candidate_count=len(snapshot["candidates"]),
+                    canonical_attempt_id=attempt["attempt_id"], candidate_count=len(phase_snapshot["candidates"]),
                     relation_count=len(confirmation_payload["relations"]),
                     input_digest=confirmation_input_digest, policy_version=POLICY_VERSION,
                     policy_digest=digest, status="called")
@@ -858,7 +905,22 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                     relation["duplicate_confirmation_provenance"] = {
                         "logical_request_id": confirmation_logical_request_id,
                         "input_digest": confirmation_input_digest}
-        _apply_duplicate_gate(snapshot, relations)
+        for relation in relations:
+            relation["validated_provenance"] = {
+                "duplicate_gate_logical_request_id": gate_logical_request_id,
+                "duplicate_gate_input_digest": gate_input_digest,
+                "duplicate_confirmation_logical_request_id": confirmation_logical_request_id,
+                "duplicate_confirmation_input_digest": confirmation_input_digest}
+        new_by_pair = {str(row["pair_id"]): row for row in relations}
+        final_relations = [copy.deepcopy(cached_relations.get(str(row["pair_id"])) or
+                                        new_by_pair[str(row["pair_id"])]) for row in authorized]
+        _apply_duplicate_gate(snapshot, final_relations)
+        try:
+            stored = pair_cache.store(cache, [(materials[str(row["pair_id"])], new_by_pair[str(row["pair_id"])])
+                                               for row in misses if str(row["pair_id"]) in materials])
+            base["duplicate_pair_cache_entries_stored"] = stored
+        except Exception:
+            base["duplicate_pair_cache_entries_stored"] = 0
         if not snapshot.get("candidates"):
             return {**base, "status": "VALIDATED",
                     "attempts": gate_attempts + confirmation_attempts,
@@ -867,7 +929,7 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                     "duplicate_confirmation_logical_request_id": confirmation_logical_request_id,
                     "duplicate_confirmation_input_digest": confirmation_input_digest,
                     "output": {"schema_version": SCHEMA_VERSION, "policy_version": POLICY_VERSION,
-                               "candidates": [], "relations": relations}, "validation_errors": []}
+                               "candidates": [], "relations": final_relations}, "validation_errors": []}
         request = OperationalAIRequest("Menzo", "editorial_director_active",
             reason_code="editorial_director_active")
     for index in range(2):
