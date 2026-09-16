@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CACHE_FILE = ROOT / "state/newsroom/menzo_active_duplicate_pair_cache_v1.json"
 SCHEMA_VERSION = "owtv_active_duplicate_pair_cache_v1"
 CONTRACT_VERSION = "ed-2.1.2-active-final-pair-result-v1"
+MAX_ENTRIES = 4096
 
 
 def _json(value: Any) -> str:
@@ -96,11 +97,14 @@ def lookup(cache: Mapping[str, Any], material: Mapping[str, Any]) -> dict[str, A
     if not isinstance(relation, Mapping) or relation.get("decision") not in {
             "NO_MATCH", "MATERIAL_UPDATE", "DUPLICATE"}:
         return None
+    confirmation = relation.get("duplicate_confirmation")
     if relation.get("decision") == "DUPLICATE" and (
-            relation.get("duplicate_confirmation", {}).get("decision") != "CONFIRM_DUPLICATE"):
+            not isinstance(confirmation, Mapping) or
+            confirmation.get("decision") != "CONFIRM_DUPLICATE"):
         return None
     if relation.get("primary_decision") == "DUPLICATE" and relation.get("decision") == "NO_MATCH" and (
-            relation.get("duplicate_confirmation", {}).get("decision") != "REJECT_DUPLICATE"):
+            not isinstance(confirmation, Mapping) or
+            confirmation.get("decision") != "REJECT_DUPLICATE"):
         return None
     result = copy.deepcopy(dict(relation))
     result["duplicate_pair_cache"] = {
@@ -121,6 +125,17 @@ def store(cache: dict[str, Any], rows: list[tuple[Mapping[str, Any], Mapping[str
         entries[key] = {**copy.deepcopy(dict(material)), "stored_at": now,
                         "original_provenance": copy.deepcopy(relation.get("validated_provenance", {})),
                         "final_relation": copy.deepcopy(dict(relation))}
+    def retention_key(key: str) -> tuple[int, float, str]:
+        try:
+            stored_at = datetime.fromisoformat(str(entries[key].get("stored_at")))
+            if stored_at.tzinfo is None:
+                raise ValueError("timezone required")
+            return 1, stored_at.timestamp(), key
+        except (AttributeError, OSError, TypeError, ValueError):
+            return 0, 0.0, key
+    retained = sorted(entries, key=retention_key)[-MAX_ENTRIES:]
+    entries = {key: entries[key] for key in retained}
+    cache["entries"] = entries
     payload = {"schema_version": SCHEMA_VERSION, "entries": entries}
     target = Path(path or CACHE_FILE)
     target.parent.mkdir(parents=True, exist_ok=True)
