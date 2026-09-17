@@ -263,10 +263,12 @@ def test_active_pair_cache_missing_registry_misses_then_restore_hits(monkeypatch
     ("DUPLICATE", None), ("NO_MATCH", "DUPLICATE")])
 def test_active_pair_cache_malformed_confirmation_is_a_miss(
         confirmation, decision, primary):
-    material = {"identity": {"pair_id": "malformed", "scope": "same_run"},
+    material = {"identity": {"pair_id": "malformed", "scope": "same_run",
+                             "left_id": "left", "right_id": "right"},
                 "endpoint_material_hash": "endpoint", "relation_contract_hash": "relation",
                 "contract_fingerprint": "contract"}
-    relation = {"pair_id": "malformed", "scope": "same_run", "decision": decision,
+    relation = {"pair_id": "malformed", "scope": "same_run", "left_id": "left",
+                "right_id": "right", "decision": decision,
                 "duplicate_confirmation": confirmation}
     if primary is not None:
         relation["primary_decision"] = primary
@@ -274,12 +276,49 @@ def test_active_pair_cache_malformed_confirmation_is_a_miss(
     assert pair_cache.lookup(cache, material) is None
 
 
+@pytest.mark.parametrize("field", ["pair_id", "scope", "left_id", "right_id"])
+def test_active_pair_cache_missing_final_relation_identity_is_a_miss(field):
+    material, relation = _cache_identity_fixture()
+    relation.pop(field)
+    cache = {"entries": {"pair": {**material, "final_relation": relation}}}
+    assert pair_cache.lookup(cache, material) is None
+
+
+@pytest.mark.parametrize("field,value", [
+    ("pair_id", "other-pair"), ("scope", "recent_history"),
+    ("left_id", "other-left"), ("right_id", "other-right"),
+    ("left_id", None)])
+def test_active_pair_cache_mismatched_or_malformed_final_relation_identity_is_a_miss(
+        field, value):
+    material, relation = _cache_identity_fixture()
+    relation[field] = value
+    cache = {"entries": {"pair": {**material, "final_relation": relation}}}
+    assert pair_cache.lookup(cache, material) is None
+
+
+def _cache_identity_fixture():
+    identity = {"pair_id": "pair", "scope": "same_run",
+                "left_id": "left", "right_id": "right"}
+    material = {"identity": identity, "endpoint_material_hash": "endpoint",
+                "relation_contract_hash": "relation", "contract_fingerprint": "contract"}
+    relation = {**identity, "decision": "NO_MATCH"}
+    return material, relation
+
+
+def test_active_pair_cache_matching_final_relation_identity_is_a_hit():
+    material, relation = _cache_identity_fixture()
+    cache = {"entries": {"pair": {**material, "final_relation": relation}}}
+    assert pair_cache.lookup(cache, material)["decision"] == "NO_MATCH"
+
+
 def test_active_pair_cache_store_caps_oldest_and_retains_recent_hit(monkeypatch, tmp_path):
     monkeypatch.setattr(pair_cache, "MAX_ENTRIES", 2)
-    recent_material = {"identity": {"pair_id": "recent", "scope": "same_run"},
+    recent_material = {"identity": {"pair_id": "recent", "scope": "same_run",
+                                    "left_id": "left", "right_id": "right"},
                        "endpoint_material_hash": "endpoint", "relation_contract_hash": "relation",
                        "contract_fingerprint": "contract"}
-    recent_relation = {"pair_id": "recent", "scope": "same_run", "decision": "NO_MATCH"}
+    recent_relation = {"pair_id": "recent", "scope": "same_run", "left_id": "left",
+                       "right_id": "right", "decision": "NO_MATCH"}
     cache = {"schema_version": pair_cache.SCHEMA_VERSION, "entries": {
         "missing-time": {"final_relation": {"decision": "NO_MATCH"}},
         "invalid-time": {"stored_at": "not-a-time", "final_relation": {"decision": "NO_MATCH"}},
@@ -287,12 +326,14 @@ def test_active_pair_cache_store_caps_oldest_and_retains_recent_hit(monkeypatch,
         "recent": {**recent_material, "stored_at": "2026-01-01T00:00:00+00:00",
                    "final_relation": recent_relation},
     }}
-    new_material = {"identity": {"pair_id": "new", "scope": "same_run"},
+    new_material = {"identity": {"pair_id": "new", "scope": "same_run",
+                                 "left_id": "new-left", "right_id": "new-right"},
                     "endpoint_material_hash": "new-endpoint", "relation_contract_hash": "new-relation",
                     "contract_fingerprint": "contract"}
     target = tmp_path / "bounded-cache.json"
     pair_cache.store(cache, [(new_material, {
-        "pair_id": "new", "scope": "same_run", "decision": "NO_MATCH"})], target)
+        "pair_id": "new", "scope": "same_run", "left_id": "new-left",
+        "right_id": "new-right", "decision": "NO_MATCH"})], target)
     serialized = __import__("json").loads(target.read_text(encoding="utf-8"))
     assert len(serialized["entries"]) == pair_cache.MAX_ENTRIES
     assert set(serialized["entries"]) == {"recent", "new"}

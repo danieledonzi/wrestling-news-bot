@@ -61,7 +61,7 @@ def pair_material(relation: Mapping[str, Any], endpoints: Mapping[str, Mapping[s
     }
     scorer = {key: copy.deepcopy(relation.get(key))
               for key in ("scorer_version", "score", "threshold", "components")}
-    identity = {"pair_id": relation.get("pair_id"), "scope": relation.get("scope")}
+    identity = {key: relation.get(key) for key in ("pair_id", "scope", "left_id", "right_id")}
     return {"identity": identity, "endpoint_material_hash": _hash(endpoint_material),
             "relation_contract_hash": _hash(scorer), "contract_fingerprint": contract}
 
@@ -96,6 +96,14 @@ def lookup(cache: Mapping[str, Any], material: Mapping[str, Any]) -> dict[str, A
     relation = entry.get("final_relation")
     if not isinstance(relation, Mapping) or relation.get("decision") not in {
             "NO_MATCH", "MATERIAL_UPDATE", "DUPLICATE"}:
+        return None
+    expected_identity = material.get("identity")
+    identity_fields = ("pair_id", "scope", "left_id", "right_id")
+    if (not isinstance(expected_identity, Mapping) or
+            any(not isinstance(expected_identity.get(field), str) or
+                not expected_identity[field] or
+                relation.get(field) != expected_identity[field]
+                for field in identity_fields)):
         return None
     confirmation = relation.get("duplicate_confirmation")
     if relation.get("decision") == "DUPLICATE" and (
