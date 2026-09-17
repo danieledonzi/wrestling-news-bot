@@ -1,6 +1,13 @@
 from agents import menzo_editorial_director_active as active
 from agents import menzo_editorial_director_shadow as shadow
 from agents import menzo_policy_v93_15 as menzo
+from agents import menzo_active_duplicate_pair_cache as pair_cache
+import pytest
+
+
+@pytest.fixture(autouse=True)
+def isolated_active_pair_cache(monkeypatch, tmp_path):
+    monkeypatch.setattr(pair_cache, "CACHE_FILE", tmp_path / "active-pair-cache.json")
 
 
 def snapshot(count=3, published=0):
@@ -43,6 +50,294 @@ def duplicate_confirmation(ref, left_evidence, right_evidence, decision="CONFIRM
             "right_central_development": "the concrete development reported by the right endpoint",
             "left_evidence": left_evidence, "right_evidence": right_evidence,
             "confirmation_basis": "The endpoints were independently compared for subject and development."}
+
+
+def suspicious_relation(s, left=0, right=1, *, scope="same_run", pair_id="pair-ab"):
+    right_id = (s["candidates"][right]["candidate_id"] if scope == "same_run" else
+                s["publisher_history_12h"][right]["article_id"])
+    return {"pair_id": pair_id, "scope": scope,
+            "left_id": s["candidates"][left]["candidate_id"], "right_id": right_id,
+            "scorer_version": shadow.menzo_duplicate_scorer.SCORER_VERSION,
+            "score": .75, "threshold": shadow.menzo_duplicate_scorer.effective_threshold(),
+            "components": {"entity_subject": 1.0}}
+
+
+def no_match_relations(count):
+    return {"relations": [{"ref": f"r{i}", "decision": "NO_MATCH"} for i in range(count)]}
+
+
+def test_active_pair_cache_reuses_final_no_match_and_material_update(monkeypatch):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    for decision in ("NO_MATCH", "MATERIAL_UPDATE"):
+        pair_cache.CACHE_FILE.unlink(missing_ok=True)
+        first = snapshot(2); first["authorized_relations"] = [suspicious_relation(first)]
+        gate_calls = []
+        def provider_one(prompt, *_):
+            if "DUPLICATE GATE" in prompt:
+                gate_calls.append(prompt)
+                row = {"ref": "r0", "decision": decision}
+                if decision == "MATERIAL_UPDATE":
+                    row.update(new_fact="a later confirmed development", temporal_basis="published later")
+                return {"relations": [row]}
+            return response(first, ("SELECT", "DEFER"))
+        if decision == "MATERIAL_UPDATE":
+            first["publisher_history_12h"] = [{"article_id": "history", "title": first["candidates"][1]["title"],
+                                                "published_at": "2026-01-01T00:00:00Z"}]
+            first["authorized_relations"] = [suspicious_relation(first, right=0, scope="recent_history")]
+        assert active.evaluate(first, provider=provider_one)["status"] == "VALIDATED"
+        # evaluate mutates the first snapshot after the gate, so rebuild the equivalent input.
+        second = snapshot(2)
+        if decision == "MATERIAL_UPDATE":
+            second["publisher_history_12h"] = [{"article_id": "history", "title": second["candidates"][1]["title"],
+                                                 "published_at": "2026-01-01T00:00:00Z"}]
+            second["authorized_relations"] = [suspicious_relation(second, right=0, scope="recent_history")]
+        else:
+            second["authorized_relations"] = [suspicious_relation(second)]
+        second_calls = []
+        result = active.evaluate(second, provider=lambda prompt, *_:
+            second_calls.append(prompt) or response(second, ("SELECT", "DEFER")))
+        assert result["status"] == "VALIDATED" and result["duplicate_pair_cache_hits"] == 1
+        assert not any("DUPLICATE GATE" in prompt for prompt in second_calls)
+
+
+def test_active_pair_cache_confirmed_and_rejected_duplicate_are_final(monkeypatch):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    for confirmation_decision, expected_candidates in (("CONFIRM_DUPLICATE", 1), ("REJECT_DUPLICATE", 2)):
+        pair_cache.CACHE_FILE.unlink(missing_ok=True)
+        first = snapshot(2)
+        first["candidates"][1]["title"] = "Jasper Troy Becomes First Confirmed Release"
+        first["authorized_relations"] = [suspicious_relation(first)]
+        left, right = first["candidates"][0]["title"], first["candidates"][1]["title"]
+        def provider(prompt, *_):
+            if "CONFIRMATION PHASE" in prompt:
+                return {"confirmations": [duplicate_confirmation("d0", left, right, confirmation_decision)]}
+            if "DUPLICATE GATE" in prompt:
+                return {"relations": [grounded_duplicate(
+                    "r0", left, right, "Jasper Troy Becomes First Confirmed Release")]}
+            return response(first, tuple("SELECT" for _ in first["candidates"]))
+        assert active.evaluate(first, provider=provider)["status"] == "VALIDATED"
+        second = snapshot(2)
+        second["candidates"][1]["title"] = "Jasper Troy Becomes First Confirmed Release"
+        second["authorized_relations"] = [suspicious_relation(second)]
+        prompts = []
+        result = active.evaluate(second, provider=lambda prompt, *_:
+            prompts.append(prompt) or response(second, tuple("SELECT" for _ in second["candidates"])))
+        assert result["status"] == "VALIDATED" and len(second["candidates"]) == expected_candidates
+        assert not any("DUPLICATE GATE" in prompt or "CONFIRMATION PHASE" in prompt for prompt in prompts)
+        relation = result["output"]["relations"][0]
+        assert relation["duplicate_confirmation"]["decision"] == confirmation_decision
+        if confirmation_decision == "REJECT_DUPLICATE":
+            assert relation["primary_decision"] == "DUPLICATE" and relation["decision"] == "NO_MATCH"
+
+
+def test_active_pair_cache_mixed_batch_sends_only_misses_and_failure_is_atomic(monkeypatch):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    first = snapshot(3); first["authorized_relations"] = [suspicious_relation(first)]
+    active.evaluate(first, provider=lambda prompt, *_:
+        no_match_relations(1) if "DUPLICATE GATE" in prompt else response(first))
+    mixed = snapshot(3)
+    mixed["authorized_relations"] = [suspicious_relation(mixed),
+        suspicious_relation(mixed, left=0, right=2, pair_id="pair-ac")]
+    gate_prompts = []
+    result = active.evaluate(mixed, provider=lambda prompt, *_:
+        (gate_prompts.append(prompt) or no_match_relations(1)) if "DUPLICATE GATE" in prompt else response(mixed))
+    assert result["status"] == "VALIDATED" and result["duplicate_pair_cache_hits"] == 1
+    assert len(gate_prompts) == 1 and '"ref":"r0"' in gate_prompts[0] and '"ref":"r1"' not in gate_prompts[0]
+
+    failing = snapshot(3); failing["authorized_relations"] = [suspicious_relation(failing),
+        suspicious_relation(failing, left=0, right=2, pair_id="pair-ad")]
+    before = [row["candidate_id"] for row in failing["candidates"]]
+    failed = active.evaluate(failing, provider=lambda *_: (_ for _ in ()).throw(RuntimeError("down")))
+    assert failed["status"] == "PROVIDER_FAILED"
+    assert [row["candidate_id"] for row in failing["candidates"]] == before
+    assert "semantic_duplicate_skips" not in failing
+
+
+def test_active_pair_cache_material_contract_ignores_aliases_but_not_evidence_or_contract():
+    relation = {"pair_id": "p", "scope": "recent_history", "scorer_version": "s",
+                "score": .7, "threshold": .55, "components": {"x": 1}}
+    endpoints = {"left": {"ref": "c0", "title": "A", "summary": "fact"},
+                 "right": {"ref": "h0", "title": "B", "published_at": "2026-01-01"}}
+    base = pair_cache.pair_material(relation, endpoints, "contract-a")
+    aliases = {"left": {**endpoints["left"], "ref": "c9"},
+               "right": {**endpoints["right"], "ref": "h7"}}
+    assert pair_cache.pair_material(relation, aliases, "contract-a") == base
+    changed = __import__("copy").deepcopy(endpoints); changed["right"]["published_at"] = "2026-01-02"
+    assert pair_cache.pair_material(relation, changed, "contract-a") != base
+    assert pair_cache.pair_material(relation, endpoints, "contract-b") != base
+
+
+def test_active_pair_cache_malformed_and_write_failure_fail_open(monkeypatch):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    pair_cache.CACHE_FILE.write_text("{broken", encoding="utf-8")
+    malformed = snapshot(2); malformed["authorized_relations"] = [suspicious_relation(malformed)]
+    gate_calls = []
+    result = active.evaluate(malformed, provider=lambda prompt, *_:
+        (gate_calls.append(prompt) or no_match_relations(1))
+        if "DUPLICATE GATE" in prompt else response(malformed, ("SELECT", "DEFER")))
+    assert result["status"] == "VALIDATED" and result["duplicate_pair_cache_load_status"] == "malformed"
+    assert len(gate_calls) == 1
+
+    pair_cache.CACHE_FILE.unlink(missing_ok=True)
+    monkeypatch.setattr(pair_cache, "store", lambda *_args, **_kwargs: (_ for _ in ()).throw(OSError("disk")))
+    write_failure = snapshot(2)
+    write_failure["authorized_relations"] = [suspicious_relation(write_failure)]
+    result = active.evaluate(write_failure, provider=lambda prompt, *_:
+        no_match_relations(1) if "DUPLICATE GATE" in prompt else response(write_failure, ("SELECT", "DEFER")))
+    assert result["status"] == "VALIDATED" and result["duplicate_pair_cache_entries_stored"] == 0
+
+
+def _confirmed_duplicate_provider(s, calls, confirmation_decision="CONFIRM_DUPLICATE"):
+    left, right = s["candidates"][0]["title"], s["candidates"][1]["title"]
+    def provider(prompt, *_):
+        if "DUPLICATE CONFIRMATION PHASE ONLY" in prompt:
+            calls.append("confirmation")
+            return {"confirmations": [duplicate_confirmation(
+                "d0", left, right, confirmation_decision)]}
+        if "DUPLICATE GATE PHASE ONLY" in prompt:
+            calls.append("gate")
+            return {"relations": [grounded_duplicate(
+                "r0", left, right, "Jasper Troy Becomes First Confirmed Release")]}
+        calls.append("classification")
+        return response(s, tuple("SELECT" for _ in s["candidates"]))
+    return provider
+
+
+def _duplicate_cache_snapshot():
+    value = snapshot(2)
+    value["candidates"][1]["title"] = "Jasper Troy Becomes First Confirmed Release"
+    value["authorized_relations"] = [suspicious_relation(value)]
+    return value
+
+
+def test_active_pair_cache_event_registry_change_invalidates_confirmed_duplicate(
+        monkeypatch, tmp_path):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    registry = tmp_path / "event_registry.json"
+    original = active.EVENT_REGISTRY_PATH.read_bytes()
+    registry.write_bytes(original)
+    monkeypatch.setattr(active, "EVENT_REGISTRY_PATH", registry)
+
+    first = _duplicate_cache_snapshot(); first_calls = []
+    assert active.evaluate(first, provider=_confirmed_duplicate_provider(first, first_calls))["status"] == "VALIDATED"
+    unchanged = _duplicate_cache_snapshot(); unchanged_calls = []
+    unchanged_result = active.evaluate(
+        unchanged, provider=_confirmed_duplicate_provider(unchanged, unchanged_calls))
+    assert unchanged_result["duplicate_pair_cache_hits"] == 1
+    assert "gate" not in unchanged_calls and "confirmation" not in unchanged_calls
+
+    registry.write_bytes(original + b"\n")
+    changed = _duplicate_cache_snapshot(); changed_calls = []
+    changed_result = active.evaluate(changed, provider=_confirmed_duplicate_provider(changed, changed_calls))
+    assert changed_result["status"] == "VALIDATED" and changed_result["duplicate_pair_cache_hits"] == 0
+    assert changed_calls.count("gate") == 1 and changed_calls.count("confirmation") == 1
+
+
+def test_active_pair_cache_missing_registry_misses_then_restore_hits(monkeypatch, tmp_path):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    registry = tmp_path / "event_registry.json"
+    original = active.EVENT_REGISTRY_PATH.read_bytes()
+    registry.write_bytes(original)
+    monkeypatch.setattr(active, "EVENT_REGISTRY_PATH", registry)
+
+    first = _duplicate_cache_snapshot(); first_calls = []
+    assert active.evaluate(first, provider=_confirmed_duplicate_provider(first, first_calls))["status"] == "VALIDATED"
+    registry.unlink()
+    unavailable = _duplicate_cache_snapshot(); unavailable_calls = []
+    unavailable_result = active.evaluate(
+        unavailable, provider=_confirmed_duplicate_provider(unavailable, unavailable_calls))
+    assert unavailable_result["status"] == "failed"
+    assert unavailable_result["duplicate_pair_cache_hits"] == 0
+    assert unavailable_calls.count("gate") == 2
+
+    registry.write_bytes(original)
+    restored = _duplicate_cache_snapshot(); restored_calls = []
+    restored_result = active.evaluate(
+        restored, provider=_confirmed_duplicate_provider(restored, restored_calls))
+    assert restored_result["status"] == "VALIDATED" and restored_result["duplicate_pair_cache_hits"] == 1
+    assert "gate" not in restored_calls and "confirmation" not in restored_calls
+
+
+@pytest.mark.parametrize("confirmation", [None, [], "CONFIRM_DUPLICATE", 1])
+@pytest.mark.parametrize("decision,primary", [
+    ("DUPLICATE", None), ("NO_MATCH", "DUPLICATE")])
+def test_active_pair_cache_malformed_confirmation_is_a_miss(
+        confirmation, decision, primary):
+    material = {"identity": {"pair_id": "malformed", "scope": "same_run",
+                             "left_id": "left", "right_id": "right"},
+                "endpoint_material_hash": "endpoint", "relation_contract_hash": "relation",
+                "contract_fingerprint": "contract"}
+    relation = {"pair_id": "malformed", "scope": "same_run", "left_id": "left",
+                "right_id": "right", "decision": decision,
+                "duplicate_confirmation": confirmation}
+    if primary is not None:
+        relation["primary_decision"] = primary
+    cache = {"entries": {"malformed": {**material, "final_relation": relation}}}
+    assert pair_cache.lookup(cache, material) is None
+
+
+@pytest.mark.parametrize("field", ["pair_id", "scope", "left_id", "right_id"])
+def test_active_pair_cache_missing_final_relation_identity_is_a_miss(field):
+    material, relation = _cache_identity_fixture()
+    relation.pop(field)
+    cache = {"entries": {"pair": {**material, "final_relation": relation}}}
+    assert pair_cache.lookup(cache, material) is None
+
+
+@pytest.mark.parametrize("field,value", [
+    ("pair_id", "other-pair"), ("scope", "recent_history"),
+    ("left_id", "other-left"), ("right_id", "other-right"),
+    ("left_id", None)])
+def test_active_pair_cache_mismatched_or_malformed_final_relation_identity_is_a_miss(
+        field, value):
+    material, relation = _cache_identity_fixture()
+    relation[field] = value
+    cache = {"entries": {"pair": {**material, "final_relation": relation}}}
+    assert pair_cache.lookup(cache, material) is None
+
+
+def _cache_identity_fixture():
+    identity = {"pair_id": "pair", "scope": "same_run",
+                "left_id": "left", "right_id": "right"}
+    material = {"identity": identity, "endpoint_material_hash": "endpoint",
+                "relation_contract_hash": "relation", "contract_fingerprint": "contract"}
+    relation = {**identity, "decision": "NO_MATCH"}
+    return material, relation
+
+
+def test_active_pair_cache_matching_final_relation_identity_is_a_hit():
+    material, relation = _cache_identity_fixture()
+    cache = {"entries": {"pair": {**material, "final_relation": relation}}}
+    assert pair_cache.lookup(cache, material)["decision"] == "NO_MATCH"
+
+
+def test_active_pair_cache_store_caps_oldest_and_retains_recent_hit(monkeypatch, tmp_path):
+    monkeypatch.setattr(pair_cache, "MAX_ENTRIES", 2)
+    recent_material = {"identity": {"pair_id": "recent", "scope": "same_run",
+                                    "left_id": "left", "right_id": "right"},
+                       "endpoint_material_hash": "endpoint", "relation_contract_hash": "relation",
+                       "contract_fingerprint": "contract"}
+    recent_relation = {"pair_id": "recent", "scope": "same_run", "left_id": "left",
+                       "right_id": "right", "decision": "NO_MATCH"}
+    cache = {"schema_version": pair_cache.SCHEMA_VERSION, "entries": {
+        "missing-time": {"final_relation": {"decision": "NO_MATCH"}},
+        "invalid-time": {"stored_at": "not-a-time", "final_relation": {"decision": "NO_MATCH"}},
+        "old": {"stored_at": "2020-01-01T00:00:00+00:00", "final_relation": {"decision": "NO_MATCH"}},
+        "recent": {**recent_material, "stored_at": "2026-01-01T00:00:00+00:00",
+                   "final_relation": recent_relation},
+    }}
+    new_material = {"identity": {"pair_id": "new", "scope": "same_run",
+                                 "left_id": "new-left", "right_id": "new-right"},
+                    "endpoint_material_hash": "new-endpoint", "relation_contract_hash": "new-relation",
+                    "contract_fingerprint": "contract"}
+    target = tmp_path / "bounded-cache.json"
+    pair_cache.store(cache, [(new_material, {
+        "pair_id": "new", "scope": "same_run", "left_id": "new-left",
+        "right_id": "new-right", "decision": "NO_MATCH"})], target)
+    serialized = __import__("json").loads(target.read_text(encoding="utf-8"))
+    assert len(serialized["entries"]) == pair_cache.MAX_ENTRIES
+    assert set(serialized["entries"]) == {"recent", "new"}
+    assert pair_cache.lookup(serialized, recent_material)["decision"] == "NO_MATCH"
 
 
 def test_active_flag_is_separate_and_defaults_off():
