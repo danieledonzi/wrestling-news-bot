@@ -1426,6 +1426,30 @@ def test_duplicate_recovery_hold_is_nonterminal_and_preserves_existing_softpool(
                                     "decision_authority": "editorial_director"}
 
 
+@pytest.mark.parametrize("scope", ["same_run_recovery", "recent_history_recovery"])
+def test_validated_recovery_duplicate_is_terminal_hard_skip_with_distinct_authority(
+        monkeypatch, tmp_path, scope):
+    duplicate = {"candidate_id": "duplicate-id", "source": "feed", "title": "Validated duplicate",
+        "summary": "same central development", "url": f"https://recovery-skip.test/{scope}",
+        "semantic_duplicate_scope": scope, "semantic_duplicate_of": "covered-id",
+        "semantic_duplicate_authority": "validated_jury"}
+    s = {"candidates": [], "duplicate_recovery_holds": [], "deterministic_exact_skips": [],
+         "semantic_duplicate_skips": [duplicate]}
+    result = {"output": {"candidates": [], "relations": []}}
+    for field in ("SOFTPOOL_FILE", "HARD_SKIP_FILE", "MENZO_DECISIONS_FILE",
+                  "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE"):
+        monkeypatch.setattr(menzo, field, tmp_path / f"{field}.json")
+    projected = active.project(s, result)
+    assert projected["skipped"][0]["decision_authority"] == "semantic_duplicate_recovery"
+    memory_file = menzo.load_json(menzo.HARD_SKIP_FILE, {})
+    assert memory_file["ttl_hours"] == menzo.HARD_SKIP_TTL_HOURS
+    assert len(memory_file["items"]) == 1
+    stored = memory_file["items"][0]
+    assert stored["decision_authority"] == "semantic_duplicate_recovery"
+    assert stored["expires_after_hours"] == menzo.HARD_SKIP_TTL_HOURS
+    assert stored["reason"] == f"semantic_{scope}_duplicate"
+
+
 def test_active_defer_uses_bounded_softpool_decay_without_overriding_select(monkeypatch, tmp_path):
     from datetime import datetime, timezone
     def project_action(action, deferrals, name):

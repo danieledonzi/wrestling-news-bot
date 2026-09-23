@@ -379,6 +379,13 @@ def test_failed_recovery_diagnostic_is_persisted_without_editorial_authority(tmp
     package = json.loads(files[0].read_text())
     assert package["authority"] == "diagnostic_supporting"
     assert package["component"]["whole_run_legacy_fallback_used"] is True
+    manifest_rows = [json.loads(line) for line in (tmp_path / "index.jsonl").read_text().splitlines()]
+    assert len(manifest_rows) == 1
+    manifest = manifest_rows[0]
+    assert manifest["semantic_roles"] == ["diagnostic_output"]
+    assert manifest["authority_claims"] == [{"purpose": "pipeline_observability", "level": "diagnostic"}]
+    assert manifest["mutation_mode"] == "immutable"
+    assert index.summary()["validation_errors"] == 0
 
 
 def test_recent_history_jury_uses_captured_canonical_body(monkeypatch):

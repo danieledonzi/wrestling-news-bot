@@ -444,7 +444,7 @@ class CanonicalArtifactIndex:
                 identity = {"url": "duplicate-recovery:" + str(component.get("component_id")),
                             "title": "duplicate recovery " + str(component.get("component_id"))}
                 self._retain(identity, data, stem="duplicate-recovery", extension="json", fmt="json",
-                    agent="Menzo", stage="selection", roles=["pipeline_observability"],
+                    agent="Menzo", stage="selection", roles=["diagnostic_output"],
                     purpose="pipeline_observability", authority="diagnostic",
                     artifact_schema={"status": "known", "version":
                                      "owtv_duplicate_recovery_diagnostic_v1"})
