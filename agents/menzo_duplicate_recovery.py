@@ -336,6 +336,30 @@ def recover(snapshot: dict[str, Any], unresolved: list[dict[str, Any]], call: Ca
                 continue
             root = find(member)
             if root not in selected_classes or root not in representative:
+                unresolved_risk = set()
+                stack = [root] if root in adjacency else []
+                while stack:
+                    node = stack.pop()
+                    if node in unresolved_risk:
+                        continue
+                    unresolved_risk.add(node); stack.extend(adjacency[node] - unresolved_risk)
+                if unresolved_risk & must_classes:
+                    diagnostics.append({"component_id": component_id, "candidate_ids": current_ids,
+                        "relation_pair_ids": [x["pair_id"] for x in relations], "must_triage": triage,
+                        "jury_votes": votes_by_pair, "jury_results": verdict_by_pair,
+                        "unsafe_history_relation": {"pair_id": relation.get("pair_id"),
+                            "current_member": member, "history_endpoint": hid, "class_root": root},
+                        "unresolved_class_edges": sorted(unresolved_class_edges),
+                        "final_component_reconciliation": "unsafe_unresolved_history_remap_global_fallback",
+                        "duplicate_layer_whole_run_fallback_avoided": False,
+                        "whole_run_legacy_fallback_used": True})
+                    return {"status": "GLOBAL_FALLBACK_REQUIRED",
+                        "reason": "duplicate_recovery_unresolved_history_remap_unsafe",
+                        "schema_version": SCHEMA_VERSION,
+                        "recovery_contract_version": CONTRACT_VERSION, "components": diagnostics,
+                        "additional_calls": counters["additional_calls"],
+                        "duplicate_layer_whole_run_fallback_avoided": False,
+                        "whole_run_legacy_fallback_used": True}
                 continue
             key = (root, hid)
             provenance = {"original_pair_id": relation.get("pair_id"), "original_ref": relation.get("ref"),

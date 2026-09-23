@@ -152,6 +152,25 @@ def test_mixed_component_single_must_triaged_once_and_history_checked(monkeypatc
     assert state["_recovery_must_ids"] == ["a"]
 
 
+def test_history_risk_cannot_cross_unresolved_same_run_class(monkeypatch):
+    monkeypatch.setenv("OWTV_DUPLICATE_RECOVERY_JURY_MODELS", "one,two")
+    monkeypatch.setattr("agents.menzo_policy_v93_15.hydrate_complete_article_bodies", lambda items: (False, []))
+    old = {**candidate("h"), "article_id": "h"}
+    state = snapshot("a", "b", history=(old,))
+    result = recovery.recover(state,
+        [relation("ab", "a", "b"), relation("bh", "b", "h", "recent_history")],
+        provider({"a": "MUST_PUBLISH", "b": "NOT_MUST"}, ("UNCERTAIN", "UNCERTAIN")), "policy")
+    assert result["status"] == "GLOBAL_FALLBACK_REQUIRED"
+    assert result["reason"] == "duplicate_recovery_unresolved_history_remap_unsafe"
+    component = result["components"][0]
+    assert component["final_component_reconciliation"] == "unsafe_unresolved_history_remap_global_fallback"
+    assert component["unsafe_history_relation"] == {
+        "pair_id": "bh", "current_member": "b", "history_endpoint": "h", "class_root": "b"}
+    assert component["jury_results"] == {"ab": "UNRESOLVED"}
+    assert [row["candidate_id"] for row in state["candidates"]] == ["a", "b"]
+    assert "_recovery_must_ids" not in state
+
+
 def test_not_duplicate_constraints_survive_unresolved_paths(monkeypatch):
     monkeypatch.setenv("OWTV_DUPLICATE_RECOVERY_JURY_MODELS", "one,two")
     monkeypatch.setattr("agents.menzo_policy_v93_15.hydrate_complete_article_bodies", lambda items: (False, []))
