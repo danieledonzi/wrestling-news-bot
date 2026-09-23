@@ -214,7 +214,7 @@ def _richer(ids: set[str], current: Mapping[str, dict[str, Any]], hydrate: Calla
 
 
 def recover(snapshot: dict[str, Any], unresolved: list[dict[str, Any]], call: Callable[..., Any],
-            policy_text: str, validated_distinct: list[dict[str, Any]] | None = None) -> dict[str, Any]:
+            policy_text: str, validated_no_match: list[dict[str, Any]] | None = None) -> dict[str, Any]:
     from agents.menzo_policy_v93_15 import canonical_richer_winner, hydrate_complete_article_bodies
     current_state = {str(x["candidate_id"]): x for x in snapshot.get("candidates", [])}
     current = {cid: copy.deepcopy(item) for cid, item in current_state.items()}
@@ -229,10 +229,18 @@ def recover(snapshot: dict[str, Any], unresolved: list[dict[str, Any]], call: Ca
     diagnostics = []; held: dict[str, dict[str, Any]] = {}; suppressed: dict[str, dict[str, Any]] = {}
     must_survivors: set[str] = set(); survivor_provenance: dict[str, dict[str, Any]] = {}
     counters = {"additional_calls": 0}; jury_attempts = 0
-    validated_distinct = validated_distinct or []
+    validated_no_match = validated_no_match or []
     for relations in connected_components(unresolved):
         ids = {str(x[k]) for x in relations for k in ("left_id", "right_id")}
         current_ids = sorted(ids & set(current)); history_ids = sorted(ids & set(history))
+        applicable_no_match = [row for row in validated_no_match
+                               if str(row.get("left_id")) in ids and str(row.get("right_id")) in ids]
+        covered_no_match_keys = set()
+        for row in applicable_no_match:
+            left, right, scope = str(row["left_id"]), str(row["right_id"]), str(row["scope"])
+            covered_no_match_keys.add((scope, *sorted((left, right))) if scope == "same_run"
+                                      else (scope, left, right))
+        satisfied_by_no_match = []
         component_id = hashlib.sha256("|".join(sorted(str(x["pair_id"]) for x in relations)).encode()).hexdigest()[:16]
         # Hydrate only this affected component. Existing complete bodies are reused.
         hydration = []
@@ -262,6 +270,10 @@ def recover(snapshot: dict[str, Any], unresolved: list[dict[str, Any]], call: Ca
         for relation in relations:
             left, right, key, scope = str(relation["left_id"]), str(relation["right_id"]), str(relation["pair_id"]), str(relation["scope"])
             if scope == "same_run" and same_run_needed and left in current and right in current:
+                if (scope, *sorted((left, right))) in covered_no_match_keys:
+                    satisfied_by_no_match.append({"unresolved_pair_id": key, "scope": scope,
+                        "left_id": left, "right_id": right})
+                    continue
                 verdict, votes = _jury(call, current[left], current[right], scope, models, counters)
                 jury_attempts += len(votes); same_edges.append((left, right, key, verdict))
             else:
@@ -311,8 +323,7 @@ def recover(snapshot: dict[str, Any], unresolved: list[dict[str, Any]], call: Ca
             edge = tuple(sorted((a, b)))
             if verdict == "NOT_DUPLICATE": notdup.add(edge)
             elif verdict == "UNRESOLVED": unresolved_class_edges.add(edge)
-        applicable_distinct = [row for row in validated_distinct
-                               if str(row.get("left_id")) in ids and str(row.get("right_id")) in ids]
+        applicable_distinct = [row for row in applicable_no_match if row.get("scope") == "same_run"]
         for constraint in applicable_distinct:
             left, right = str(constraint["left_id"]), str(constraint["right_id"])
             if left not in parent or right not in parent:
@@ -402,6 +413,15 @@ def recover(snapshot: dict[str, Any], unresolved: list[dict[str, Any]], call: Ca
         history_remaps = []
         for (root, hid), inherited in inherited_history.items():
             winner = representative[root]
+            if ("recent_history", winner, hid) in covered_no_match_keys:
+                row = {"history_id": hid, "pair_id": str(inherited["relation"]["pair_id"]),
+                       "verdict": "NO_MATCH", "representative": winner,
+                       "resolution_authority": "validated_no_match",
+                       "original_relations": inherited["provenance"]}
+                history_by_class[root].append(row); history_remaps.append(row)
+                satisfied_by_no_match.append({"unresolved_pair_id": row["pair_id"],
+                    "scope": "recent_history", "left_id": winner, "right_id": hid})
+                continue
             verdict, votes = _jury(call, current[winner], history[hid], "recent_history", models, counters)
             jury_attempts += len(votes)
             diagnostic_key = str(inherited["relation"]["pair_id"])
@@ -445,6 +465,7 @@ def recover(snapshot: dict[str, Any], unresolved: list[dict[str, Any]], call: Ca
             "hydration": hydration, "jury_invoked": bool(votes_by_pair), "configured_jury_models": models,
             "jury_votes": votes_by_pair, "jury_results": verdict_by_pair, "quorum": quorum(len(models)),
             "history_class_remaps": history_remaps,
+            "relations_satisfied_by_validated_no_match": satisfied_by_no_match,
             "validated_distinct_constraints": copy.deepcopy(applicable_distinct),
             "validated_not_duplicate_class_constraints": sorted(notdup), "unresolved_class_edges": sorted(unresolved_class_edges),
             "final_component_reconciliation": final, "held_candidate_ids": sorted(set(current_ids) & set(held)),

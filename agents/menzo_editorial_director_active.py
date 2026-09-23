@@ -1048,19 +1048,19 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
             recovery_call = call if provider is None else (
                 lambda prompt, recovery_schema, timeout, _model:
                     call(prompt, recovery_schema, timeout))
-            validated_distinct = []
+            validated_no_match = []
             for relation in final_relations:
-                if relation.get("scope") != "same_run" or relation.get("decision") != "NO_MATCH":
+                if relation.get("scope") not in {"same_run", "recent_history"} or relation.get("decision") != "NO_MATCH":
                     continue
                 distinct = copy.deepcopy(relation)
                 distinct["left_id"] = representative_by_member.get(
                     str(relation.get("left_id")), str(relation.get("left_id")))
                 distinct["right_id"] = representative_by_member.get(
                     str(relation.get("right_id")), str(relation.get("right_id")))
-                validated_distinct.append(distinct)
+                validated_no_match.append(distinct)
             recovery_result = menzo_duplicate_recovery.recover(
                 snapshot, local_unresolved, recovery_call, POLICY_PATH.read_text(encoding="utf-8"),
-                validated_distinct)
+                validated_no_match)
             for component in recovery_result.get("components", []):
                 component["normal_validation_attempts"] = copy.deepcopy(base["validation_attempts"])
                 component["duplicate_gate_logical_request_id"] = gate_logical_request_id

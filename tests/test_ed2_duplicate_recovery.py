@@ -203,14 +203,53 @@ def test_validated_no_match_preserves_distinct_musts_without_rejury(monkeypatch)
     assert component["validated_distinct_constraints"] == distinct
 
 
+def test_remapped_same_run_no_match_is_not_rejuried(monkeypatch):
+    monkeypatch.setenv("OWTV_DUPLICATE_RECOVERY_JURY_MODELS", "one,two")
+    monkeypatch.setattr("agents.menzo_policy_v93_15.hydrate_complete_article_bodies", lambda items: (False, []))
+    unresolved, failure = recovery.remap_unresolved_relations(
+        [relation("bc", "b", "c")], {"a": "a", "b": "a", "c": "c"}, {"a", "c"}, set())
+    assert failure is None and [(row["left_id"], row["right_id"]) for row in unresolved] == [("a", "c")]
+    state = snapshot("a", "c")
+    distinct = [{"pair_id": "ac-final", "scope": "same_run", "left_id": "a", "right_id": "c",
+                 "decision": "NO_MATCH"}]
+    result = recovery.recover(state, unresolved,
+        provider({"a": "MUST_PUBLISH", "c": "MUST_PUBLISH"}), "policy", distinct)
+    assert result["status"] == "RECOVERED" and result["additional_calls"] == 2
+    assert set(state["_recovery_must_ids"]) == {"a", "c"}
+    component = result["components"][0]
+    assert component["jury_results"] == {}
+    assert component["relations_satisfied_by_validated_no_match"] == [{
+        "unresolved_pair_id": "bc", "scope": "same_run", "left_id": "a", "right_id": "c"}]
+
+
+def test_remapped_history_no_match_is_not_rejuried_or_suppressed(monkeypatch):
+    monkeypatch.setenv("OWTV_DUPLICATE_RECOVERY_JURY_MODELS", "one,two")
+    monkeypatch.setattr("agents.menzo_policy_v93_15.hydrate_complete_article_bodies", lambda items: (False, []))
+    unresolved, failure = recovery.remap_unresolved_relations(
+        [relation("bh", "b", "h", "recent_history")], {"a": "a", "b": "a"}, {"a"}, {"h"})
+    assert failure is None and unresolved[0]["left_id"] == "a"
+    state = snapshot("a", history=({**candidate("h"), "article_id": "h"},))
+    distinct = [{"pair_id": "ah-final", "scope": "recent_history", "left_id": "a", "right_id": "h",
+                 "decision": "NO_MATCH", "cache_status": "hit"}]
+    result = recovery.recover(state, unresolved, provider({"a": "MUST_PUBLISH"}), "policy", distinct)
+    assert result["status"] == "RECOVERED" and result["additional_calls"] == 1
+    assert state["_recovery_must_ids"] == ["a"] and not state["semantic_duplicate_skips"]
+    component = result["components"][0]
+    assert component["jury_results"] == {}
+    assert component["history_class_remaps"][0]["resolution_authority"] == "validated_no_match"
+    assert component["relations_satisfied_by_validated_no_match"] == [{
+        "unresolved_pair_id": "bh", "scope": "recent_history", "left_id": "a", "right_id": "h"}]
+
+
 def test_validated_no_match_contradiction_after_duplicate_contraction_falls_back(monkeypatch):
     monkeypatch.setenv("OWTV_DUPLICATE_RECOVERY_JURY_MODELS", "one,two")
     monkeypatch.setattr("agents.menzo_policy_v93_15.hydrate_complete_article_bodies", lambda items: (False, []))
-    state = snapshot("a", "b")
-    distinct = [{"pair_id": "ab-final", "scope": "same_run", "left_id": "a", "right_id": "b",
+    state = snapshot("a", "b", "c")
+    distinct = [{"pair_id": "ac-final", "scope": "same_run", "left_id": "a", "right_id": "c",
                  "decision": "NO_MATCH"}]
-    result = recovery.recover(state, [relation("ab", "a", "b")],
-        provider({"a": "MUST_PUBLISH", "b": "MUST_PUBLISH"}, ("DUPLICATE", "DUPLICATE")),
+    result = recovery.recover(state, [relation("ab", "a", "b"), relation("bc", "b", "c")],
+        provider({"a": "MUST_PUBLISH", "b": "MUST_PUBLISH", "c": "MUST_PUBLISH"},
+                 ("DUPLICATE",) * 4),
         "policy", distinct)
     assert result["status"] == "GLOBAL_FALLBACK_REQUIRED"
     assert result["reason"] == "duplicate_recovery_component_invariant"
