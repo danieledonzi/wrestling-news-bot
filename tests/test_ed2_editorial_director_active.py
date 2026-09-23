@@ -177,6 +177,44 @@ def test_active_pair_cache_mixed_batch_sends_only_misses_and_failure_is_atomic(m
     assert "semantic_duplicate_skips" not in failing
 
 
+def test_cached_no_match_constrains_local_recovery_without_rejury(monkeypatch):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    monkeypatch.setenv("OWTV_DUPLICATE_RECOVERY_JURY_MODELS", "one,two")
+    monkeypatch.setattr(menzo, "hydrate_complete_article_bodies", lambda items: (False, []))
+    seed = snapshot(3)
+    seed["authorized_relations"] = [suspicious_relation(seed, left=0, right=2, pair_id="pair-ac")]
+    assert active.evaluate(seed, provider=lambda prompt, *_:
+        no_match_relations(1) if "DUPLICATE GATE" in prompt else response(seed, ("SELECT",) * 3))["status"] == "VALIDATED"
+
+    state = snapshot(3)
+    state["authorized_relations"] = [
+        suspicious_relation(state, left=0, right=1, pair_id="pair-ab"),
+        suspicious_relation(state, left=1, right=2, pair_id="pair-bc"),
+        suspicious_relation(state, left=0, right=2, pair_id="pair-ac")]
+    ids = [row["candidate_id"] for row in state["candidates"]]
+    def provider_call(prompt, *_):
+        if "DUPLICATE GATE PHASE ONLY" in prompt:
+            return {"relations": [grounded_duplicate("r0", "fabricated", "fabricated"),
+                                  grounded_duplicate("r1", "fabricated", "fabricated")]}
+        if "MUST TRIAGE ONLY" in prompt:
+            return {"decision": "NOT_MUST" if f'"candidate_id": "{ids[1]}"' in prompt else "MUST_PUBLISH",
+                    "reason": "binding policy"}
+        if "PAIR-ONLY DUPLICATE RECOVERY JURY" in prompt:
+            payload = json.loads(prompt.split("<UNTRUSTED_SOURCE_DATA>\n", 1)[1].split(
+                "\n</UNTRUSTED_SOURCE_DATA>", 1)[0])
+            return {"decision": "UNCERTAIN", "reason": "cannot resolve",
+                    "left_evidence": payload["left"]["title"],
+                    "right_evidence": payload["right"]["title"]}
+        return response(state, ("SELECT",) * len(state["candidates"]))
+    result = active.evaluate(state, provider=provider_call)
+    assert result["status"] == "VALIDATED" and result["duplicate_pair_cache_hits"] == 1
+    assert set(state["_recovery_must_ids"]) == {ids[0], ids[2]}
+    component = result["duplicate_recovery"]["components"][0]
+    assert set(component["jury_results"]) == {"pair-ab", "pair-bc"}
+    assert [row["pair_id"] for row in component["validated_distinct_constraints"]] == ["pair-ac"]
+    assert result["duplicate_recovery"]["additional_calls"] == 7
+
+
 def test_mixed_local_failure_stores_only_independently_final_pr131_relations(monkeypatch):
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     s = snapshot(3)

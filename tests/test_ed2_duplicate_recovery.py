@@ -182,6 +182,42 @@ def test_not_duplicate_constraints_survive_unresolved_paths(monkeypatch):
     assert {"a", "c"} <= set(state["_recovery_must_ids"])
 
 
+def test_validated_no_match_preserves_distinct_musts_without_rejury(monkeypatch):
+    monkeypatch.setenv("OWTV_DUPLICATE_RECOVERY_JURY_MODELS", "one,two")
+    monkeypatch.setattr("agents.menzo_policy_v93_15.hydrate_complete_article_bodies", lambda items: (False, []))
+    state = snapshot("a", "b", "c")
+    rows = [relation("ab", "a", "b"), relation("bc", "b", "c")]
+    distinct = [{"pair_id": "ac-final", "scope": "same_run", "left_id": "a", "right_id": "c",
+                 "decision": "NO_MATCH", "cache_status": "hit"}]
+    calls = []
+    wrapped = provider({"a": "MUST_PUBLISH", "b": "NOT_MUST", "c": "MUST_PUBLISH"},
+                       ("UNCERTAIN",) * 4)
+    def recording(prompt, *args): calls.append(prompt); return wrapped(prompt, *args)
+    result = recovery.recover(state, rows, recording, "policy", distinct)
+    assert result["status"] == "RECOVERED"
+    assert set(state["_recovery_must_ids"]) == {"a", "c"}
+    assert result["additional_calls"] == 7
+    assert len([prompt for prompt in calls if "PAIR-ONLY DUPLICATE RECOVERY JURY" in prompt]) == 4
+    component = result["components"][0]
+    assert set(component["jury_results"]) == {"ab", "bc"}
+    assert component["validated_distinct_constraints"] == distinct
+
+
+def test_validated_no_match_contradiction_after_duplicate_contraction_falls_back(monkeypatch):
+    monkeypatch.setenv("OWTV_DUPLICATE_RECOVERY_JURY_MODELS", "one,two")
+    monkeypatch.setattr("agents.menzo_policy_v93_15.hydrate_complete_article_bodies", lambda items: (False, []))
+    state = snapshot("a", "b")
+    distinct = [{"pair_id": "ab-final", "scope": "same_run", "left_id": "a", "right_id": "b",
+                 "decision": "NO_MATCH"}]
+    result = recovery.recover(state, [relation("ab", "a", "b")],
+        provider({"a": "MUST_PUBLISH", "b": "MUST_PUBLISH"}, ("DUPLICATE", "DUPLICATE")),
+        "policy", distinct)
+    assert result["status"] == "GLOBAL_FALLBACK_REQUIRED"
+    assert result["reason"] == "duplicate_recovery_component_invariant"
+    assert result["components"][0]["final_component_reconciliation"] == (
+        "validated_distinct_contradiction_global_fallback")
+
+
 def test_duplicate_class_and_proven_autonomous_class_both_survive(monkeypatch):
     monkeypatch.setenv("OWTV_DUPLICATE_RECOVERY_JURY_MODELS", "one,two")
     monkeypatch.setattr("agents.menzo_policy_v93_15.hydrate_complete_article_bodies", lambda items: (False, []))

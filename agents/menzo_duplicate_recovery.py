@@ -214,7 +214,7 @@ def _richer(ids: set[str], current: Mapping[str, dict[str, Any]], hydrate: Calla
 
 
 def recover(snapshot: dict[str, Any], unresolved: list[dict[str, Any]], call: Callable[..., Any],
-            policy_text: str) -> dict[str, Any]:
+            policy_text: str, validated_distinct: list[dict[str, Any]] | None = None) -> dict[str, Any]:
     from agents.menzo_policy_v93_15 import canonical_richer_winner, hydrate_complete_article_bodies
     current_state = {str(x["candidate_id"]): x for x in snapshot.get("candidates", [])}
     current = {cid: copy.deepcopy(item) for cid, item in current_state.items()}
@@ -229,6 +229,7 @@ def recover(snapshot: dict[str, Any], unresolved: list[dict[str, Any]], call: Ca
     diagnostics = []; held: dict[str, dict[str, Any]] = {}; suppressed: dict[str, dict[str, Any]] = {}
     must_survivors: set[str] = set(); survivor_provenance: dict[str, dict[str, Any]] = {}
     counters = {"additional_calls": 0}; jury_attempts = 0
+    validated_distinct = validated_distinct or []
     for relations in connected_components(unresolved):
         ids = {str(x[k]) for x in relations for k in ("left_id", "right_id")}
         current_ids = sorted(ids & set(current)); history_ids = sorted(ids & set(history))
@@ -310,6 +311,28 @@ def recover(snapshot: dict[str, Any], unresolved: list[dict[str, Any]], call: Ca
             edge = tuple(sorted((a, b)))
             if verdict == "NOT_DUPLICATE": notdup.add(edge)
             elif verdict == "UNRESOLVED": unresolved_class_edges.add(edge)
+        applicable_distinct = [row for row in validated_distinct
+                               if str(row.get("left_id")) in ids and str(row.get("right_id")) in ids]
+        for constraint in applicable_distinct:
+            left, right = str(constraint["left_id"]), str(constraint["right_id"])
+            if left not in parent or right not in parent:
+                continue
+            a, b = find(left), find(right)
+            if a == b:
+                diagnostics.append({"component_id": component_id, "candidate_ids": current_ids,
+                    "relation_pair_ids": [x["pair_id"] for x in relations], "must_triage": triage,
+                    "jury_votes": votes_by_pair, "jury_results": verdict_by_pair,
+                    "validated_distinct_constraints": copy.deepcopy(applicable_distinct),
+                    "final_component_reconciliation": "validated_distinct_contradiction_global_fallback",
+                    "duplicate_layer_whole_run_fallback_avoided": False,
+                    "whole_run_legacy_fallback_used": True})
+                return {"status": "GLOBAL_FALLBACK_REQUIRED",
+                    "reason": "duplicate_recovery_component_invariant", "schema_version": SCHEMA_VERSION,
+                    "recovery_contract_version": CONTRACT_VERSION, "components": diagnostics,
+                    "additional_calls": counters["additional_calls"],
+                    "duplicate_layer_whole_run_fallback_avoided": False,
+                    "whole_run_legacy_fallback_used": True}
+            notdup.add(tuple(sorted((a, b))))
         # Risk components choose one class only when no proven-distinct class is present.
         adjacency: dict[str, set[str]] = defaultdict(set)
         for a, b in unresolved_class_edges: adjacency[a].add(b); adjacency[b].add(a)
@@ -422,6 +445,7 @@ def recover(snapshot: dict[str, Any], unresolved: list[dict[str, Any]], call: Ca
             "hydration": hydration, "jury_invoked": bool(votes_by_pair), "configured_jury_models": models,
             "jury_votes": votes_by_pair, "jury_results": verdict_by_pair, "quorum": quorum(len(models)),
             "history_class_remaps": history_remaps,
+            "validated_distinct_constraints": copy.deepcopy(applicable_distinct),
             "validated_not_duplicate_class_constraints": sorted(notdup), "unresolved_class_edges": sorted(unresolved_class_edges),
             "final_component_reconciliation": final, "held_candidate_ids": sorted(set(current_ids) & set(held)),
             "allowed_candidate_ids": sorted(set(current_ids) & must_survivors),
