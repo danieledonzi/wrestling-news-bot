@@ -384,10 +384,13 @@ class CanonicalArtifactIndex:
         duplicate_ids = {x.get("candidate_id") for x in duplicate_skips}
         for cid, candidate in observation_candidates.items():
             duplicate_eliminated = cid in duplicate_ids
+            duplicate_authority = ("semantic_duplicate_recovery"
+                                   if candidate.get("semantic_duplicate_authority")
+                                   else "semantic_duplicate_gate")
             evidence_pair_ids = set(candidate.get("semantic_duplicate_evidence_pair_ids", []))
             package = {"artifact_schema_version": "owtv_editorial_director_active_v3",
                 "schema_version": result.get("schema_version"), "policy_version": result.get("policy_version"),
-                "decision_authority": "semantic_duplicate_gate" if duplicate_eliminated else "editorial_director",
+                "decision_authority": duplicate_authority if duplicate_eliminated else "editorial_director",
                 "candidate": dict(candidate), "director_output": None if duplicate_eliminated else rows.get(cid),
                 "relations": [x for x in relations if (x.get("pair_id") in evidence_pair_ids if duplicate_eliminated
                               else x.get("left_id") == cid or x.get("right_id") == cid)],

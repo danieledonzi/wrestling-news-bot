@@ -2,6 +2,7 @@ from agents import menzo_editorial_director_active as active
 from agents import menzo_editorial_director_shadow as shadow
 from agents import menzo_policy_v93_15 as menzo
 from agents import menzo_active_duplicate_pair_cache as pair_cache
+import json
 import pytest
 
 
@@ -1424,6 +1425,27 @@ def test_duplicate_recovery_hold_is_nonterminal_and_preserves_existing_softpool(
     assert not any(row["event_type"] == "candidate_skipped" for row in events)
     assert projected["handoff"] == {"to_bob_or_v92": 0, "pending": 0, "skipped": 0,
                                     "decision_authority": "editorial_director"}
+
+
+def test_active_artifacts_preserve_duplicate_gate_and_recovery_authority(tmp_path):
+    from agents.canonical_artifact_index import CanonicalArtifactIndex
+    ordinary = {"candidate_id": "gate-id", "url": "https://duplicate.test/gate",
+                "title": "Ordinary duplicate", "semantic_duplicate_scope": "same_run"}
+    recovered = {"candidate_id": "recovery-id", "url": "https://duplicate.test/recovery",
+                 "title": "Recovery duplicate", "semantic_duplicate_scope": "same_run_recovery",
+                 "semantic_duplicate_authority": "validated_jury"}
+    snapshot = {"candidates": [], "semantic_duplicate_skips": [ordinary, recovered]}
+    result = {"schema_version": active.SCHEMA_VERSION, "policy_version": active.POLICY_VERSION,
+              "status": "VALIDATED", "validation_attempts": []}
+    index = CanonicalArtifactIndex("run", index_path=tmp_path / "index.jsonl",
+        material_root=tmp_path / "materials", repository_root=tmp_path, enabled=True)
+    index.observe_editorial_director_active(snapshot, {"candidates": [], "relations": []}, result)
+    rows = [json.loads(line) for line in (tmp_path / "index.jsonl").read_text().splitlines()]
+    packages = [json.loads((tmp_path / row["path"]).read_text()) for row in rows]
+    authority_by_id = {package["candidate"]["candidate_id"]: package["decision_authority"]
+                       for package in packages}
+    assert authority_by_id == {"gate-id": "semantic_duplicate_gate",
+                               "recovery-id": "semantic_duplicate_recovery"}
 
 
 @pytest.mark.parametrize("scope", ["same_run_recovery", "recent_history_recovery"])
