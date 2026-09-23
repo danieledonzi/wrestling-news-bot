@@ -66,6 +66,10 @@ def _recovery_body(item: Mapping[str, Any]) -> dict[str, str] | None:
     """Return bounded body material for the private recovery sidecar only."""
     retained_text = source_body.contract_text(dict(item))
     if not retained_text:
+        legacy = item.get("canonical_source_body")
+        if isinstance(legacy, Mapping) and isinstance(legacy.get("text"), str):
+            retained_text = legacy["text"]
+    if not retained_text:
         return None
     return {"retained_body": retained_text[:MAX_RETAINED_BODY_CHARS],
             "body_coverage": "RETAINED_BODY"}
@@ -143,7 +147,11 @@ def capture_opportunity(massy_board: Mapping[str, Any], *, run_id: str, observat
             continue
         kept = {k: copy.deepcopy(item[k]) for k in INPUT_FIELDS + HISTORY_TITLE_FIELDS +
                 ("source_url", "published_at") if k in item}
-        kept["input_coverage"] = "RSS_SUMMARY_ONLY"
+        legacy = item.get("canonical_source_body")
+        if isinstance(legacy, Mapping) and isinstance(legacy.get("text"), str) and legacy["text"]:
+            kept.update(retained_body=legacy["text"], input_coverage="RETAINED_BODY_AVAILABLE")
+        else:
+            kept["input_coverage"] = "RSS_SUMMARY_ONLY"
         kept["article_id"] = article_id(kept)
         if kept["article_id"]:
             safe_history.append(kept)

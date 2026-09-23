@@ -110,6 +110,8 @@ def test_retained_history_body_survives_capture():
     history={'source_url':'https://old.test/a','title':'Old','published_at':'2026-01-01T00:00:00+00:00','canonical_source_body':{'text':'retained factual body'}}
     s=snapshot(history=[history]); assert s['publisher_history_12h'][0]['retained_body']=='retained factual body'
     assert s['publisher_history_12h'][0]['input_coverage']=='RETAINED_BODY_AVAILABLE'
+    history_id=s['publisher_history_12h'][0]['article_id']
+    assert s['_duplicate_recovery_body_by_id'][history_id]['retained_body']=='retained factual body'
 
 
 def test_artifact_uses_category_hint_and_event_links_exact_package(tmp_path):
