@@ -1,6 +1,7 @@
 """Fail-open P1.2 canonical artifact index and immutable material archive."""
 from __future__ import annotations
 
+import copy
 import hashlib
 import json
 import os
@@ -416,3 +417,34 @@ class CanonicalArtifactIndex:
                 agent="Menzo", stage="selection", roles=["selection_decision"], purpose="pipeline_observability",
                 authority="authoritative",
                 artifact_schema={"status": "known", "version": "owtv_editorial_director_active_v3"})
+        self.observe_duplicate_recovery(snapshot, result)
+
+    def observe_duplicate_recovery(self, snapshot: Mapping[str, Any], result: Mapping[str, Any]) -> None:
+        """Persist supporting recovery evidence even when final Active authority fails."""
+        recovery = result.get("duplicate_recovery")
+        if isinstance(recovery, Mapping):
+            for component in recovery.get("components", []):
+                if not isinstance(component, Mapping):
+                    continue
+                package = {"artifact_schema_version": "owtv_duplicate_recovery_diagnostic_v1",
+                    "run_id": snapshot.get("run_id"), "timestamp": snapshot.get("observation_timestamp"),
+                    "code_commit": self.code_commit, "policy_version": result.get("policy_version"),
+                    "normal_duplicate_contract_version": result.get("duplicate_pair_cache_contract_version"),
+                    "recovery_contract_version": recovery.get("recovery_contract_version"),
+                    "component": copy.deepcopy(dict(component)),
+                    "additional_gemini_calls": recovery.get("additional_calls", 0),
+                    "incremental_tokens": recovery.get("incremental_tokens", {}),
+                    "authoritative_incremental_cost": recovery.get("authoritative_incremental_cost"),
+                    "pr131_cache": {"hits": result.get("duplicate_pair_cache_hits", 0),
+                                    "misses": result.get("duplicate_pair_cache_misses", 0),
+                                    "stored": result.get("duplicate_pair_cache_entries_stored", 0)},
+                    "recovery_cache": recovery.get("recovery_cache", {"status": "not_implemented"}),
+                    "authority": "diagnostic_supporting"}
+                data = json.dumps(package, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
+                identity = {"url": "duplicate-recovery:" + str(component.get("component_id")),
+                            "title": "duplicate recovery " + str(component.get("component_id"))}
+                self._retain(identity, data, stem="duplicate-recovery", extension="json", fmt="json",
+                    agent="Menzo", stage="selection", roles=["pipeline_observability"],
+                    purpose="pipeline_observability", authority="diagnostic",
+                    artifact_schema={"status": "known", "version":
+                                     "owtv_duplicate_recovery_diagnostic_v1"})

@@ -66,6 +66,29 @@ def no_match_relations(count):
     return {"relations": [{"ref": f"r{i}", "decision": "NO_MATCH"} for i in range(count)]}
 
 
+@pytest.mark.parametrize("invalid_index", [0, 2])
+def test_partition_duplicate_gate_reindexes_each_original_ref_without_losing_provenance(invalid_index):
+    s = snapshot(3)
+    # Three authorized rows need four endpoints, so reuse directional pairs;
+    # pair identity remains authoritative and unique.
+    s["authorized_relations"] = [
+        suspicious_relation(s, left=0, right=1, pair_id="pair-0"),
+        suspicious_relation(s, left=0, right=2, pair_id="pair-1"),
+        suspicious_relation(s, left=1, right=2, pair_id="pair-2")]
+    rows = [{"ref": f"r{i}", "decision": "NO_MATCH"} for i in range(3)]
+    bad = s["authorized_relations"][invalid_index]
+    rows[invalid_index] = grounded_duplicate(
+        f"r{invalid_index}", "fabricated left evidence", "fabricated right evidence")
+    valid, unresolved, global_failures = active._partition_duplicate_gate({"relations": rows}, s)
+    assert global_failures == []
+    assert {row["pair_id"] for row in valid} == {
+        row["pair_id"] for index, row in enumerate(s["authorized_relations"]) if index != invalid_index}
+    assert len(unresolved) == 1 and unresolved[0]["pair_id"] == bad["pair_id"]
+    assert unresolved[0]["ref"] == f"r{invalid_index}"
+    assert all(failure.get("ref") in {None, f"r{invalid_index}"}
+               for failure in unresolved[0]["failures"])
+
+
 def test_active_pair_cache_reuses_final_no_match_and_material_update(monkeypatch):
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     for decision in ("NO_MATCH", "MATERIAL_UPDATE"):
@@ -151,6 +174,32 @@ def test_active_pair_cache_mixed_batch_sends_only_misses_and_failure_is_atomic(m
     assert failed["status"] == "PROVIDER_FAILED"
     assert [row["candidate_id"] for row in failing["candidates"]] == before
     assert "semantic_duplicate_skips" not in failing
+
+
+def test_mixed_local_failure_stores_only_independently_final_pr131_relations(monkeypatch):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    s = snapshot(3)
+    s["authorized_relations"] = [
+        suspicious_relation(s, left=0, right=1, pair_id="pair-valid-0"),
+        suspicious_relation(s, left=0, right=2, pair_id="pair-valid-1"),
+        suspicious_relation(s, left=1, right=2, pair_id="pair-unresolved")]
+    stored = []
+    monkeypatch.setattr(pair_cache, "store", lambda _cache, rows: stored.extend(rows) or len(rows))
+    def provider(prompt, *_):
+        if "DUPLICATE GATE PHASE ONLY" in prompt:
+            return {"relations": [{"ref": "r0", "decision": "NO_MATCH"},
+                {"ref": "r1", "decision": "NO_MATCH"},
+                grounded_duplicate("r2", "fabricated left evidence", "fabricated right evidence")]}
+        if "MUST TRIAGE ONLY" in prompt:
+            return {"decision": "NOT_MUST", "reason": "not binding MUST"}
+        return response(s, tuple("SELECT" for _ in s["candidates"]))
+    result = active.evaluate(s, provider=provider)
+    assert result["status"] == "VALIDATED"
+    assert result["duplicate_pair_cache_entries_stored"] == 2
+    assert {material["identity"]["pair_id"] for material, _relation in stored} == {
+        "pair-valid-0", "pair-valid-1"}
+    assert "pair-unresolved" not in {material["identity"]["pair_id"] for material, _ in stored}
+    assert result["duplicate_recovery"]["status"] == "RECOVERED"
 
 
 def test_active_pair_cache_material_contract_ignores_aliases_but_not_evidence_or_contract():
@@ -606,8 +655,8 @@ def test_repeated_invalid_confirmation_fails_atomically(monkeypatch):
         return {"confirmations": []}
 
     result = active.evaluate(s, provider=provider)
-    assert result["status"] == "failed" and confirmation_calls == 2
-    assert result["fallback_reason"] == "duplicate_confirmation_coverage"
+    assert result["status"] == "failed" and confirmation_calls == 4
+    assert result["fallback_reason"] == "duplicate_recovery_triage_failed"
     assert len(s["candidates"]) == 2 and "semantic_duplicate_skips" not in s
 
 
@@ -733,8 +782,8 @@ def test_case_a_repeated_ungrounded_duplicate_fails_atomically_without_artifact(
         "Former AEW TBS Champion Maya World addressed Dave Meltzer not rating her match.")
     calls = []
     result = active.evaluate(s, provider=lambda *_: calls.append(1) or _ungrounded_vaquer_duplicate())
-    assert result["status"] == "failed" and len(calls) == 2
-    assert result["fallback_reason"] == "duplicate_left_evidence_grounding"
+    assert result["status"] == "failed" and len(calls) == 3
+    assert result["fallback_reason"] == "duplicate_recovery_triage_failed"
     assert "semantic_duplicate_skips" not in s and len(s["candidates"]) == 1
     from agents.canonical_artifact_index import CanonicalArtifactIndex
     index = CanonicalArtifactIndex("incident", index_path=tmp_path / "index.jsonl",
@@ -1347,6 +1396,34 @@ def test_deterministic_exact_skip_is_persisted_to_existing_hard_memory(monkeypat
     memory = menzo.load_json(menzo.HARD_SKIP_FILE, {})["items"]
     assert len(projected["skipped"]) == 1 and len(memory) == 1
     assert memory[0]["reason"] == "exact_duplicate"
+
+
+def test_duplicate_recovery_hold_is_nonterminal_and_preserves_existing_softpool(monkeypatch, tmp_path):
+    from agents.canonical_event_ledger import CanonicalEventLedger
+    held = {"source": "feed", "title": "Temporarily held", "summary": "Central factual development",
+        "url": "https://hold.test/story", "from_softpool": True,
+        "decision_authority": "editorial_director",
+        "editorial_director": {"recommended_action": "DEFER"}}
+    s = {"candidates": [], "duplicate_recovery_holds": [{**held, "candidate_id": "held-id"}],
+         "deterministic_exact_skips": [], "semantic_duplicate_skips": []}
+    result = {"output": {"candidates": [], "relations": []}}
+    for field in ("SOFTPOOL_FILE", "HARD_SKIP_FILE", "MENZO_DECISIONS_FILE",
+                  "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE"):
+        monkeypatch.setattr(menzo, field, tmp_path / f"{field}.json")
+    menzo.write_json(menzo.SOFTPOOL_FILE, {"items": [held]})
+    projected = active.project(s, result)
+    assert not projected["selected"] and not projected["pending"] and not projected["skipped"]
+    assert projected["held"][0]["decision"] == "hold"
+    assert held["url"] not in projected["allowed_urls_for_v92"]
+    assert menzo.load_json(menzo.HARD_SKIP_FILE, {"items": []})["items"] == []
+    assert [row["url"] for row in menzo.load_json(menzo.SOFTPOOL_FILE, {"items": []})["items"]] == [held["url"]]
+    ledger = CanonicalEventLedger("run", path=tmp_path / "events.jsonl", enabled=True)
+    ledger.observe_menzo(projected)
+    events = [__import__("json").loads(line) for line in (tmp_path / "events.jsonl").read_text().splitlines()] \
+        if (tmp_path / "events.jsonl").exists() else []
+    assert not any(row["event_type"] == "candidate_skipped" for row in events)
+    assert projected["handoff"] == {"to_bob_or_v92": 0, "pending": 0, "skipped": 0,
+                                    "decision_authority": "editorial_director"}
 
 
 def test_active_defer_uses_bounded_softpool_decay_without_overriding_select(monkeypatch, tmp_path):

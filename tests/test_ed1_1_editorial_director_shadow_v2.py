@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 
 from agents import menzo_editorial_director_shadow as ed
+from agents import source_body
 
 
 def snapshot(count=3):
@@ -154,15 +155,43 @@ def test_provider_input_preserves_facts_and_removes_machine_redundancy():
 
 
 def test_provider_input_history_has_short_refs_and_facts_exactly_once():
+    retained = ("Unique retained body with complete historical facts and exact grounded evidence. " +
+                "Additional factual context for semantic history comparison without repeated marker. " * 3)
     history={"source_url":"https://history.test/a", "title":"Unique historical fact", "summary":"Only once",
-             "published_at":"2026-09-01T00:00:00Z", "canonical_source_body":{"text":"Unique retained body"}}
+             "published_at":"2026-09-01T00:00:00Z", "canonical_source_body":
+                 source_body.contract_from_elements("https://history.test/a", [{"type":"text", "text":retained}],
+                    {"stage":"test", "extraction_finished":True, "body_complete":True, "clean_element_count":1})}
     s=snapshot(1)
     captured=ed.capture_opportunity({"news_candidates_for_menzo":[s["candidates"][0]]}, run_id="run",
         observation_timestamp="now", publisher_count_24h=1, history=[history])
     payload=ed.provider_input(captured); serialized=json.dumps(payload)
     assert payload["history"][0]["ref"] == "h0" and "article_id" not in payload["history"][0]
     assert serialized.count("Unique historical fact") == 1
-    assert serialized.count("Unique retained body") == 1
+    assert serialized.count("Unique retained body") == 0
+    hid = captured["publisher_history_12h"][0]["article_id"]
+    assert captured["_duplicate_recovery_body_by_id"][hid]["retained_body"] == retained.strip()
+    assert "retained_body" not in captured["publisher_history_12h"][0]
+    assert retained.strip() not in serialized
+
+
+def test_recovery_body_sidecar_does_not_change_normal_projection_size_or_digest():
+    body = "Recovery-only full factual body marker. " * 650
+    contract = source_body.contract_from_elements("https://history.test/sidecar",
+        [{"type":"text", "text":body}], {"stage":"test", "extraction_finished":True,
+         "body_complete":True, "clean_element_count":1})
+    candidate = {"source":"feed", "title":"Current", "url":"https://current.test/sidecar", "summary":"fact"}
+    history = {"source_url":"https://history.test/sidecar", "title":"History", "summary":"old fact",
+               "published_at":"2026-09-01T00:00:00Z"}
+    plain = ed.capture_opportunity({"news_candidates_for_menzo":[candidate]}, run_id="run",
+        observation_timestamp="now", publisher_count_24h=1, history=[history])
+    rich = ed.capture_opportunity({"news_candidates_for_menzo":[{**candidate, "canonical_source_body":contract}]},
+        run_id="run", observation_timestamp="now", publisher_count_24h=1,
+        history=[{**history, "canonical_source_body":contract}])
+    assert ed.provider_input(plain) == ed.provider_input(rich)
+    assert plain["observed"]["serialized_input_bytes"] == rich["observed"]["serialized_input_bytes"]
+    assert plain["input_digest"] == rich["input_digest"]
+    assert len(rich["_duplicate_recovery_body_by_id"]) == 2
+    assert "Recovery-only full factual body marker" not in json.dumps(ed.provider_input(rich))
 
 
 def test_publisher_history_title_fields_are_preserved_and_ground_relation_endpoint(monkeypatch):

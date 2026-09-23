@@ -47,6 +47,23 @@ def enabled(environ: Mapping[str, str] | None = None) -> bool:
     return str(value).strip().lower() in {"1", "true", "yes", "on"}
 
 
+def _active_provider_factory() -> Callable[..., Any]:
+    """Provider adapter supporting exceptional per-call jury model selection."""
+    api_key = os.getenv("GEMINI_API_KEY", "").strip()
+    if not api_key:
+        raise shadow.ProviderInitializationError("missing_gemini_api_key")
+    from google import genai
+    from google.genai import types
+    client = genai.Client(api_key=api_key, http_options=types.HttpOptions(
+        timeout=max(1, int(shadow.PROVIDER_TIMEOUT_SECONDS * 1000)),
+        retry_options=types.HttpRetryOptions(attempts=1)))
+    def invoke(prompt: str, schema: dict[str, Any], _timeout: float, model: str = MODEL) -> Any:
+        return client.models.generate_content(model=model, contents=prompt,
+            config={"response_mime_type": "application/json", "response_json_schema": schema,
+                    "max_output_tokens": shadow.MAX_OUTPUT_TOKENS})
+    return invoke
+
+
 def preserve_bob_capacity_metadata(snapshot: dict[str, Any], candidates: list[Mapping[str, Any]]) -> None:
     """Attach an Active-local sidecar which is never part of provider projection."""
     from agents.duplicate_pair_identity import article_id
@@ -186,6 +203,10 @@ def _validate_active(value: Any, snapshot: Mapping[str, Any]):
         if canonical.get("editorial_class") in allowed and action not in allowed[canonical["editorial_class"]]:
             failures.append({"family": "class_action_incompatibility", "ref": ref,
                              "editorial_class": canonical.get("editorial_class"), "recommended_action": action})
+        if candidate["candidate_id"] in set(snapshot.get("_recovery_must_ids", [])) and (
+                canonical.get("editorial_class") != "MUST_PUBLISH" or action != "SELECT"):
+            failures.append({"family": "recovered_must_invariant", "ref": ref,
+                             "detail": "recovery_must_requires_must_select"})
     selected = sum(action == "SELECT" for action in actions.values())
     must_selected = sum(actions[cid] == "SELECT" and classes[cid] == "MUST_PUBLISH" for cid in actions)
     ordinary_selected = selected - must_selected
@@ -493,6 +514,50 @@ def _validate_duplicate_gate(value: Any, snapshot: Mapping[str, Any]):
     return (None if failures else canonical), failures, telemetry
 
 
+def _partition_duplicate_gate(value: Any, snapshot: Mapping[str, Any]):
+    """Salvage only independently complete rows and localize attributable failures.
+
+    The strict validator remains the sole semantic validator.  Each authorized
+    relation is replayed through it in a one-relation snapshot; malformed roots,
+    duplicate/unknown identities, and other ambiguous accounting remain global.
+    """
+    if not isinstance(value, Mapping) or not isinstance(value.get("relations"), list):
+        return None, None, [{"family": "parse_json", "detail": "unpartitionable_root"}]
+    _, relation_map = shadow.short_ref_maps(snapshot)
+    rows: dict[str, Mapping[str, Any]] = {}
+    for row in value["relations"]:
+        if not isinstance(row, Mapping) or not isinstance(row.get("ref"), str):
+            return None, None, [{"family": "relation_ref", "detail": "unattributable"}]
+        ref = row["ref"]
+        if ref not in relation_map or ref in rows:
+            return None, None, [{"family": "relation_ref", "ref": ref, "detail": "ambiguous_identity"}]
+        rows[ref] = row
+    valid, unresolved = [], []
+    for ref, supplied in relation_map.items():
+        relation = copy.deepcopy(supplied)
+        relation["ref"] = ref
+        if ref not in rows:
+            relation["failures"] = [{"family": "relation_coverage", "ref": ref}]
+            unresolved.append(relation); continue
+        local = copy.deepcopy(dict(snapshot)); local["authorized_relations"] = [copy.deepcopy(supplied)]
+        # short_ref_maps() correctly reindexes a one-relation snapshot as r0.
+        # Rewrite only the request-local alias, then restore original batch refs
+        # in diagnostics; canonical identity still comes from ``supplied``.
+        local_row = copy.deepcopy(dict(rows[ref])); local_row["ref"] = "r0"
+        canonical, failures, _ = _validate_duplicate_gate({"relations": [local_row]}, local)
+        for failure in failures:
+            if failure.get("ref") == "r0":
+                failure["ref"] = ref
+            if isinstance(failure.get("missing_refs"), list):
+                failure["missing_refs"] = [ref if item == "r0" else item
+                                           for item in failure["missing_refs"]]
+        if failures or canonical is None:
+            relation["failures"] = copy.deepcopy(failures); unresolved.append(relation)
+        else:
+            valid.extend(canonical)
+    return valid, unresolved, []
+
+
 def _duplicate_prompt(snapshot: Mapping[str, Any], failures: list[dict[str, Any]] | None = None) -> str:
     policy = POLICY_PATH.read_text(encoding="utf-8")
     data = active_provider_input(snapshot)
@@ -599,6 +664,29 @@ def _validate_duplicate_confirmation(value: Any, payload: Mapping[str, Any]):
     return (None if failures else canonical), failures, telemetry
 
 
+def _partition_duplicate_confirmation(value: Any, payload: Mapping[str, Any]):
+    if not isinstance(value, Mapping) or not isinstance(value.get("confirmations"), list):
+        return None, None, [{"family": "parse_json", "detail": "unpartitionable_confirmation_root"}]
+    authorized = {str(row["ref"]): row for row in payload.get("relations", [])}
+    rows = {}
+    for row in value["confirmations"]:
+        if not isinstance(row, Mapping) or row.get("ref") not in authorized or row.get("ref") in rows:
+            return None, None, [{"family": "duplicate_confirmation_ref", "detail": "ambiguous_identity"}]
+        rows[row["ref"]] = row
+    valid, failed = [], []
+    for ref, endpoint in authorized.items():
+        if ref not in rows:
+            failed.append({"ref": ref, "failures": [{"family": "duplicate_confirmation_coverage", "ref": ref}]})
+            continue
+        canonical, failures, _ = _validate_duplicate_confirmation(
+            {"confirmations": [rows[ref]]}, {"relations": [endpoint]})
+        if failures or canonical is None:
+            failed.append({"ref": ref, "failures": failures})
+        else:
+            valid.extend(canonical)
+    return valid, failed, []
+
+
 def _apply_duplicate_confirmation(relations: list[dict[str, Any]], confirmations: list[dict[str, Any]],
                                   relation_indexes: Mapping[str, int]) -> None:
     """Apply Gemini's confirmation verdict without locally inventing relation semantics."""
@@ -610,7 +698,7 @@ def _apply_duplicate_confirmation(relations: list[dict[str, Any]], confirmations
             relation["decision"] = "NO_MATCH"
 
 
-def _apply_duplicate_gate(snapshot: dict[str, Any], relations: list[dict[str, Any]]) -> None:
+def _apply_duplicate_gate(snapshot: dict[str, Any], relations: list[dict[str, Any]]) -> dict[str, str]:
     """Remove semantic duplicates before any survivor receives an editorial class."""
     from agents.menzo_policy_v93_15 import canonical_richer_winner, hydrate_complete_article_bodies
     by_id = {row["candidate_id"]: row for row in snapshot.get("candidates", [])}
@@ -669,12 +757,14 @@ def _apply_duplicate_gate(snapshot: dict[str, Any], relations: list[dict[str, An
                     "semantic_duplicate_component_ids": sorted(member_ids),
                     "semantic_duplicate_evidence_pair_ids": evidence_pair_ids}
     snapshot["semantic_duplicate_skips"] = list(eliminated.values())
+    snapshot["duplicate_representative_by_member"] = copy.deepcopy(representative_by_member)
     snapshot["duplicate_gate_relations"] = copy.deepcopy(relations)
     snapshot["candidates"] = [row for row in snapshot.get("candidates", [])
                               if row["candidate_id"] not in eliminated]
     snapshot["authorized_relations"] = []
     _refresh_capacity_hint(snapshot)
     _finalize_active_input(snapshot)
+    return representative_by_member
 
 
 def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None = None,
@@ -745,7 +835,7 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
         request = OperationalAIRequest("Menzo", "editorial_director_active",
             reason_code="editorial_director_active")
     try:
-        call = provider or shadow._default_provider_factory()
+        call = provider or _active_provider_factory()
     except Exception as exc:
         (gate_request or request).initialization_failed(str(exc))
         return {**base, "status": "PROVIDER_UNAVAILABLE", "fallback_reason": type(exc).__name__}
@@ -755,6 +845,7 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
     confirmation_attempts = 0
     confirmation_logical_request_id = None
     confirmation_input_digest = None
+    recovery_result = None
     if has_relations:
         gate_logical_request_id = gate_request.logical_request_id
         gate_input_digest = phase_snapshot["input_digest"]
@@ -806,11 +897,18 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
             gate_request.resolve_deferred(not failures, error_terminal=repair and bool(failures))
             if not failures:
                 break
+        local_unresolved: list[dict[str, Any]] = []
         if failures or relations is None:
-            return {**base, "attempts": gate_attempts, "validation_errors": failures,
-                    "fallback_reason": failures[0]["family"] if failures else "duplicate_gate_validation_failed",
-                    "duplicate_gate_logical_request_id": gate_logical_request_id,
-                    "duplicate_gate_input_digest": gate_input_digest}
+            try:
+                decoded = shadow._decode(gate_response)
+                relations, local_unresolved, global_failures = _partition_duplicate_gate(decoded, phase_snapshot)
+            except Exception as exc:
+                global_failures = [{"family": "parse_json", "detail": type(exc).__name__}]
+            if global_failures or relations is None:
+                return {**base, "attempts": gate_attempts, "validation_errors": global_failures or failures,
+                        "fallback_reason": (global_failures or failures)[0]["family"],
+                        "duplicate_gate_logical_request_id": gate_logical_request_id,
+                        "duplicate_gate_input_digest": gate_input_digest}
         confirmation_payload, confirmation_relation_indexes = _duplicate_confirmation_input(phase_snapshot, relations)
         if confirmation_payload["relations"]:
             confirmation_request = OperationalAIRequest(
@@ -890,15 +988,28 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                 if not confirmation_failures:
                     break
             if confirmation_failures or confirmations is None:
-                return {**base, "attempts": gate_attempts + confirmation_attempts,
-                        "validation_errors": confirmation_failures,
-                        "fallback_reason": (confirmation_failures[0]["family"]
-                                            if confirmation_failures else
-                                            "duplicate_confirmation_validation_failed"),
-                        "duplicate_gate_logical_request_id": gate_logical_request_id,
-                        "duplicate_gate_input_digest": gate_input_digest,
-                        "duplicate_confirmation_logical_request_id": confirmation_logical_request_id,
-                        "duplicate_confirmation_input_digest": confirmation_input_digest}
+                confirmations, locally_failed, global_failures = _partition_duplicate_confirmation(
+                    shadow._decode(confirmation_response), confirmation_payload)
+                if global_failures or confirmations is None:
+                    return {**base, "attempts": gate_attempts + confirmation_attempts,
+                            "validation_errors": global_failures or confirmation_failures,
+                            "fallback_reason": (global_failures or confirmation_failures)[0]["family"],
+                            "duplicate_gate_logical_request_id": gate_logical_request_id,
+                            "duplicate_gate_input_digest": gate_input_digest,
+                            "duplicate_confirmation_logical_request_id": confirmation_logical_request_id,
+                            "duplicate_confirmation_input_digest": confirmation_input_digest}
+                failed_refs = {row["ref"]: row["failures"] for row in locally_failed}
+                for ref, relation_index in confirmation_relation_indexes.items():
+                    if ref in failed_refs:
+                        unresolved_relation = copy.deepcopy(relations[relation_index])
+                        unresolved_relation["failures"] = failed_refs[ref]
+                        local_unresolved.append(unresolved_relation)
+                _apply_duplicate_confirmation(relations, confirmations,
+                                              {ref: index for ref, index in confirmation_relation_indexes.items()
+                                               if ref not in failed_refs})
+                failed_indexes = {confirmation_relation_indexes[ref] for ref in failed_refs}
+                relations = [row for index, row in enumerate(relations) if index not in failed_indexes]
+                confirmations = []
             _apply_duplicate_confirmation(relations, confirmations, confirmation_relation_indexes)
             for relation in relations:
                 if relation.get("primary_decision") == "DUPLICATE":
@@ -913,14 +1024,43 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                 "duplicate_confirmation_input_digest": confirmation_input_digest}
         new_by_pair = {str(row["pair_id"]): row for row in relations}
         final_relations = [copy.deepcopy(cached_relations.get(str(row["pair_id"])) or
-                                        new_by_pair[str(row["pair_id"])]) for row in authorized]
-        _apply_duplicate_gate(snapshot, final_relations)
+                                        new_by_pair.get(str(row["pair_id"]))) for row in authorized
+                           if cached_relations.get(str(row["pair_id"])) or new_by_pair.get(str(row["pair_id"]))]
+        representative_by_member = _apply_duplicate_gate(snapshot, final_relations)
         try:
             stored = pair_cache.store(cache, [(materials[str(row["pair_id"])], new_by_pair[str(row["pair_id"])])
-                                               for row in misses if str(row["pair_id"]) in materials])
+                                               for row in misses if str(row["pair_id"]) in materials and
+                                               str(row["pair_id"]) in new_by_pair])
             base["duplicate_pair_cache_entries_stored"] = stored
         except Exception:
             base["duplicate_pair_cache_entries_stored"] = 0
+        if local_unresolved:
+            from agents import menzo_duplicate_recovery
+            local_unresolved, remap_failure = menzo_duplicate_recovery.remap_unresolved_relations(
+                local_unresolved, representative_by_member,
+                {str(row["candidate_id"]) for row in snapshot.get("candidates", [])},
+                {str(row["article_id"]) for row in snapshot.get("publisher_history_12h", [])})
+            if remap_failure:
+                return {**base, "attempts": gate_attempts + confirmation_attempts,
+                        "validation_errors": failures, "fallback_reason": remap_failure}
+            # Injected legacy providers are adapted explicitly once. Internal
+            # provider TypeError is never interpreted as signature detection.
+            recovery_call = call if provider is None else (
+                lambda prompt, recovery_schema, timeout, _model:
+                    call(prompt, recovery_schema, timeout))
+            recovery_result = menzo_duplicate_recovery.recover(
+                snapshot, local_unresolved, recovery_call, POLICY_PATH.read_text(encoding="utf-8"))
+            for component in recovery_result.get("components", []):
+                component["normal_validation_attempts"] = copy.deepcopy(base["validation_attempts"])
+                component["duplicate_gate_logical_request_id"] = gate_logical_request_id
+                component["duplicate_confirmation_logical_request_id"] = confirmation_logical_request_id
+            base["duplicate_recovery"] = copy.deepcopy(recovery_result)
+            if recovery_result.get("status") != "RECOVERED":
+                if not snapshot.get("semantic_duplicate_skips"):
+                    snapshot.pop("semantic_duplicate_skips", None)
+                return {**base, "attempts": gate_attempts + confirmation_attempts,
+                        "validation_errors": failures, "fallback_reason": recovery_result.get("reason")}
+            _refresh_capacity_hint(snapshot); _finalize_active_input(snapshot)
         if not snapshot.get("candidates"):
             return {**base, "status": "VALIDATED",
                     "attempts": gate_attempts + confirmation_attempts,
@@ -976,6 +1116,8 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
             if confirmation_logical_request_id:
                 result["duplicate_confirmation_logical_request_id"] = confirmation_logical_request_id
                 result["duplicate_confirmation_input_digest"] = confirmation_input_digest
+            if recovery_result:
+                result["duplicate_recovery"] = copy.deepcopy(recovery_result)
             return result
     return {**base, "attempts": gate_attempts + confirmation_attempts + 2,
             "logical_request_id": request.logical_request_id,
@@ -986,7 +1128,7 @@ def project(snapshot: Mapping[str, Any], result: Mapping[str, Any]) -> dict[str,
     """Mechanically project one wholly validated Active decision into Menzo's handoff."""
     originals = {row["candidate_id"]: row for row in snapshot.get("candidates", [])}
     sections = {"SELECT": "selected", "DEFER": "pending", "SKIP": "skipped"}
-    projected: dict[str, Any] = {"selected": [], "pending": [], "skipped": [], "version": POLICY_VERSION,
+    projected: dict[str, Any] = {"selected": [], "pending": [], "skipped": [], "held": [], "version": POLICY_VERSION,
         "policy_version": POLICY_VERSION, "mode": "editorial_director_active",
         "decision_authority": "editorial_director"}
     for decision in result["output"]["candidates"]:
@@ -997,6 +1139,9 @@ def project(snapshot: Mapping[str, Any], result: Mapping[str, Any]) -> dict[str,
             item.update(copy.deepcopy(sidecar.get(decision["candidate_id"], {})))
         item["editorial_director"] = {"policy_version": POLICY_VERSION, **copy.deepcopy(decision),
                                       "decision_authority": "editorial_director"}
+        recovery_provenance = snapshot.get("_recovery_provenance_by_id", {}).get(decision["candidate_id"])
+        if recovery_provenance:
+            item["duplicate_recovery"] = copy.deepcopy(recovery_provenance)
         item["decision_authority"] = "editorial_director"
         item["pipeline_version"] = POLICY_VERSION
         item["decision"] = decision["recommended_action"].lower()
@@ -1012,10 +1157,18 @@ def project(snapshot: Mapping[str, Any], result: Mapping[str, Any]) -> dict[str,
     for duplicate in snapshot.get("semantic_duplicate_skips", []):
         item = copy.deepcopy(duplicate); item.pop("candidate_id", None)
         scope = item.pop("semantic_duplicate_scope")
+        recovery_authority = item.pop("semantic_duplicate_authority", None)
         item.update(decision="skip", priority="skip", article_type="duplicate",
-                    decision_authority="semantic_duplicate_gate",
+                    decision_authority=("semantic_duplicate_recovery" if recovery_authority else
+                                        "semantic_duplicate_gate"),
                     reason=f"semantic_{scope}_duplicate")
         projected["skipped"].append(item)
+    for held in snapshot.get("duplicate_recovery_holds", []):
+        item = copy.deepcopy(held); item.pop("candidate_id", None)
+        item.update(decision="hold", priority="hold", article_type="duplicate_unresolved",
+                    decision_authority="semantic_duplicate_recovery",
+                    reason="duplicate_unresolved_nonmust_hold")
+        projected["held"].append(item)
     # Reuse legacy bounded reconsideration only for candidates the Director has
     # just deferred again. A recovered SELECT remains authoritative.
     from agents.menzo_policy_v93_15 import apply_softpool_decay

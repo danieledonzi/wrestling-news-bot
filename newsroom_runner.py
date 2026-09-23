@@ -509,6 +509,14 @@ def main() -> int:
                 raise RuntimeError(str(director_result.get("fallback_reason") or director_result.get("status")))
         except Exception as exc:
             reason = active_fallback_reason(director_result, exc)
+            if isinstance(director_result, dict) and isinstance(
+                    director_result.get("duplicate_recovery"), dict):
+                recovery = director_result["duplicate_recovery"]
+                recovery["whole_run_legacy_fallback_used"] = True
+                for component in recovery.get("components", []):
+                    if isinstance(component, dict):
+                        component["whole_run_legacy_fallback_used"] = True
+                artifacts.safely("observe_duplicate_recovery", director_snapshot, director_result)
             menzo_decision = safe_agent(timeline=timeline, agent="Menzo", phase="legacy_menzo_fallback", import_fn=import_menzo, call_args=(massy_board,), call_kwargs=({"costly_work_preflight": menzo_preflight} if menzo_preflight is not None else {}), artifact_name="menzo_decisions.json", default_handoff={"to_bob_or_v92": 0, "pending": 0, "skipped": 0}, note_fn=lambda r: f"decision_authority=legacy_menzo_fallback reason={reason}")
             menzo_decision = persist_active_fallback(menzo_decision, reason)
     else:

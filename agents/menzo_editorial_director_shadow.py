@@ -11,7 +11,7 @@ from pathlib import Path
 from types import MappingProxyType
 from typing import Any, Callable, Mapping
 
-from agents import menzo_duplicate_scorer
+from agents import menzo_duplicate_scorer, source_body
 from agents.canonical_event_ledger import OperationalAIRequest, active_event
 from agents.duplicate_pair_identity import article_id
 from agents.duplicate_pair_matrix import iter_recent_history_pair_specs, iter_same_run_pair_specs
@@ -29,6 +29,7 @@ MAX_INPUT_BYTES = int(os.getenv("OWTV_ED_SHADOW_MAX_INPUT_BYTES", "120000"))
 MAX_OUTPUT_TOKENS = int(os.getenv("OWTV_ED_SHADOW_MAX_OUTPUT_TOKENS", "12000"))
 PROVIDER_TIMEOUT_SECONDS = float(os.getenv("OWTV_ED_SHADOW_TIMEOUT_SECONDS", "45"))
 APPROACH_RATIO = .80
+MAX_RETAINED_BODY_CHARS = 24000
 
 INPUT_FIELDS = ("source", "feed_url", "title", "url", "normalized_url", "published", "summary",
                 "from_softpool", "softpool_added_at", "last_seen_at", "softpool_ttl_hours", "softpool_deferrals")
@@ -57,13 +58,17 @@ def _candidate(item: Mapping[str, Any]) -> dict[str, Any] | None:
         return None
     value["candidate_id"] = cid
     value["origin"] = "softpool" if value.get("from_softpool") else "fresh"
-    retained = item.get("canonical_source_body")
-    if isinstance(retained, Mapping) and isinstance(retained.get("text"), str) and retained["text"]:
-        value["retained_body"] = retained["text"]
-        value["input_coverage"] = "RETAINED_BODY_AVAILABLE"
-    else:
-        value["input_coverage"] = "RSS_SUMMARY_ONLY"
+    value["input_coverage"] = "RSS_SUMMARY_ONLY"
     return value
+
+
+def _recovery_body(item: Mapping[str, Any]) -> dict[str, str] | None:
+    """Return bounded body material for the private recovery sidecar only."""
+    retained_text = source_body.contract_text(dict(item))
+    if not retained_text:
+        return None
+    return {"retained_body": retained_text[:MAX_RETAINED_BODY_CHARS],
+            "body_coverage": "RETAINED_BODY"}
 
 
 def softpool_augmented_board(massy_board: Mapping[str, Any]) -> dict[str, Any]:
@@ -83,7 +88,9 @@ def _projected_provider_input_bytes(snapshot: Mapping[str, Any]) -> int:
 
 
 def _finalize_snapshot(envelope: dict[str, Any], *, forced_exceeded: bool = False) -> dict[str, Any]:
-    canonical = json.dumps(envelope, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
+    digest_envelope = {key: value for key, value in envelope.items()
+                       if key != "_duplicate_recovery_body_by_id"}
+    canonical = json.dumps(digest_envelope, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
     counts = (len(envelope["candidates"]), len(envelope["authorized_relations"]))
     duplicate_ids = envelope.get("canonical_candidate_duplicates_collapsed", [])
     envelope["observed"] = {"candidate_count": counts[0], "relation_count": counts[1], "serialized_input_bytes": 0,
@@ -122,25 +129,33 @@ def capture_opportunity(massy_board: Mapping[str, Any], *, run_id: str, observat
             continue
         seen_candidate_ids.add(candidate_id)
         candidates.append(candidate)
+    recovery_bodies = {}
+    for item in raw:
+        if not isinstance(item, Mapping):
+            continue
+        candidate = _candidate(item)
+        body = _recovery_body(item)
+        if candidate and body:
+            recovery_bodies[candidate["candidate_id"]] = body
     safe_history = []
     for item in history:
         if not isinstance(item, Mapping):
             continue
         kept = {k: copy.deepcopy(item[k]) for k in INPUT_FIELDS + HISTORY_TITLE_FIELDS +
                 ("source_url", "published_at") if k in item}
-        retained = item.get("canonical_source_body")
-        if isinstance(retained, Mapping) and isinstance(retained.get("text"), str) and retained["text"]:
-            kept.update(retained_body=retained["text"], input_coverage="RETAINED_BODY_AVAILABLE")
-        else:
-            kept["input_coverage"] = "RSS_SUMMARY_ONLY"
+        kept["input_coverage"] = "RSS_SUMMARY_ONLY"
         kept["article_id"] = article_id(kept)
         if kept["article_id"]:
             safe_history.append(kept)
+            body = _recovery_body(item)
+            if body:
+                recovery_bodies[kept["article_id"]] = body
     envelope = {"run_id": run_id, "observation_timestamp": observation_timestamp,
                 "publisher_count_rolling_24h": int(publisher_count_24h), "policy_reference": 30,
                 "remaining_slots": max(0, 30 - int(publisher_count_24h)), "candidates": candidates,
                 "authorized_relations": [], "authorized_relations_complete": False,
                 "publisher_history_12h": safe_history,
+                "_duplicate_recovery_body_by_id": recovery_bodies,
                 "canonical_candidate_duplicates_collapsed": duplicate_candidate_ids}
     if len(candidates) > MAX_CANDIDATES:
         return _finalize_snapshot(envelope, forced_exceeded=True)
