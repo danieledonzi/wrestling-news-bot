@@ -1,4 +1,5 @@
 import json
+from datetime import datetime, timedelta, timezone
 import pytest
 import sys
 from pathlib import Path
@@ -46,6 +47,68 @@ def isolate_wrapper_state(monkeypatch, tmp_path):
     monkeypatch.setattr(menzo, "SOFTPOOL_FILE", tmp_path / "softpool.json")
     monkeypatch.setattr(menzo, "HARD_SKIP_FILE", tmp_path / "hard_skips.json")
 
+
+
+@pytest.mark.parametrize("authority", ["semantic_duplicate_gate", "editorial_director"])
+def test_unresolved_skip_does_not_create_hard_skip_or_change_current_run(monkeypatch, tmp_path, authority):
+    isolate_wrapper_state(monkeypatch, tmp_path)
+    selected = item("https://t/winner", "Winner")
+    unresolved = item("https://t/unresolved", "Unresolved", section="skip")
+    unresolved.update({"reason": "skip:duplicate_arbitration_unresolved",
+                       "decision_authority": authority,
+                       "editorial_director": {"editorial_class": "SKIP"}})
+    current = {"selected": [selected], "skipped": [unresolved],
+               "allowed_urls_for_v92": [selected["url"]]}
+    before = json.loads(json.dumps(current))
+
+    menzo.save_hard_skips(current)
+
+    assert json.loads(menzo.HARD_SKIP_FILE.read_text(encoding="utf-8"))["items"] == []
+    assert current == before
+
+
+def test_unresolved_skip_does_not_renew_existing_hard_skip(monkeypatch, tmp_path):
+    isolate_wrapper_state(monkeypatch, tmp_path)
+    added_at = (datetime.now(timezone.utc) - timedelta(hours=1)).isoformat()
+    prior = {"url": "https://t/same", "normalized_url": menzo.source_key("https://t/same"),
+             "reason": "skip:duplicate_recently_published", "added_at": added_at,
+             "decision_authority": "semantic_duplicate_gate"}
+    menzo.HARD_SKIP_FILE.write_text(json.dumps({"items": [prior]}), encoding="utf-8")
+    unresolved = {"url": "https://t/same", "reason": "skip:duplicate_arbitration_unresolved",
+                  "decision_authority": "editorial_director",
+                  "editorial_director": {"editorial_class": "SKIP"}}
+
+    menzo.save_hard_skips({"skipped": [unresolved]})
+
+    assert json.loads(menzo.HARD_SKIP_FILE.read_text(encoding="utf-8"))["items"] == [prior]
+
+
+def test_expired_hard_skip_stays_expired_when_unresolved(monkeypatch, tmp_path):
+    isolate_wrapper_state(monkeypatch, tmp_path)
+    expired_at = (datetime.now(timezone.utc) - timedelta(hours=menzo.HARD_SKIP_TTL_HOURS + 1)).isoformat()
+    prior = {"url": "https://t/expired", "reason": "skip:duplicate_same_run", "added_at": expired_at}
+    menzo.HARD_SKIP_FILE.write_text(json.dumps({"items": [prior]}), encoding="utf-8")
+
+    menzo.save_hard_skips({"skipped": [{"url": "https://t/expired",
+                                        "reason": "skip:duplicate_arbitration_unresolved",
+                                        "decision_authority": "editorial_director",
+                                        "editorial_director": {"editorial_class": "SKIP"}}]})
+
+    assert json.loads(menzo.HARD_SKIP_FILE.read_text(encoding="utf-8"))["items"] == []
+
+
+def test_confirmed_duplicate_still_persists_as_hard_skip(monkeypatch, tmp_path):
+    isolate_wrapper_state(monkeypatch, tmp_path)
+    duplicate = {"url": "https://t/duplicate", "reason": "skip:duplicate_same_run",
+                 "decision_authority": "semantic_duplicate_gate"}
+
+    menzo.save_hard_skips({"skipped": [duplicate]})
+
+    saved = json.loads(menzo.HARD_SKIP_FILE.read_text(encoding="utf-8"))["items"]
+    assert len(saved) == 1
+    assert saved[0]["url"] == duplicate["url"]
+    assert saved[0]["reason"] == duplicate["reason"]
+    assert saved[0]["added_at"]
 
 
 def test_base_menzo_default_persistence_compatibility(monkeypatch, tmp_path):
