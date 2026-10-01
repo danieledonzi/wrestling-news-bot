@@ -1303,15 +1303,13 @@ def run_bob(menzo_decision: dict[str, Any] | None = None) -> dict[str, Any]:
     capacity, capacity_reason = dynamic_article_capacity(
         decision if isinstance(decision, dict) else {}, capacity_input)
     if active_selection:
-        ordinary_kept = 0
-        capacity_selected = []
-        for item in selected:
-            if active_must(item):
-                capacity_selected.append(item)
-            elif ordinary_kept < capacity:
-                capacity_selected.append(item)
-                ordinary_kept += 1
-        selected = capacity_selected
+        must_selected = [item for item in selected if active_must(item)]
+        urgency_selected = [item for item in ordinary if
+            isinstance(item.get("scheduling_override"), dict) and
+            item["scheduling_override"].get("reason") == "show_news_urgency_pre_report"]
+        urgency_ids = {id(item) for item in urgency_selected}
+        remaining_ordinary = [item for item in ordinary if id(item) not in urgency_ids]
+        selected = must_selected + (urgency_selected + remaining_ordinary)[:capacity]
         ordinary_left_out_by_capacity = max(0, len(ordinary) - capacity)
         must_left_out_by_capacity = 0
     else:

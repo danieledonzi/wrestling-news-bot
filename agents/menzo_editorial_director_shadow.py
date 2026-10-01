@@ -109,7 +109,11 @@ def _finalize_snapshot(envelope: dict[str, Any], *, forced_exceeded: bool = Fals
 
 
 def capture_opportunity(massy_board: Mapping[str, Any], *, run_id: str, observation_timestamp: str,
-                        publisher_count_24h: int, history: list[dict[str, Any]]) -> dict[str, Any]:
+                        published_news_today_local: int | None = None, history: list[dict[str, Any]],
+                        publisher_count_24h: int | None = None) -> dict[str, Any]:
+    # The legacy keyword remains input-compatible for older callers, but is not
+    # exposed as a rolling metric because those callers supply a local-day count.
+    local_count = int(published_news_today_local if published_news_today_local is not None else publisher_count_24h or 0)
     raw = massy_board.get("news_candidates_for_menzo", [])
     captured = [c for item in raw if isinstance(item, Mapping) and (c := _candidate(item))]
     candidates = []
@@ -137,8 +141,10 @@ def capture_opportunity(massy_board: Mapping[str, Any], *, run_id: str, observat
         if kept["article_id"]:
             safe_history.append(kept)
     envelope = {"run_id": run_id, "observation_timestamp": observation_timestamp,
-                "publisher_count_rolling_24h": int(publisher_count_24h), "policy_reference": 30,
-                "remaining_slots": max(0, 30 - int(publisher_count_24h)), "candidates": candidates,
+                "policy_reference": 30,
+                "published_news_today_local": local_count,
+                "daily_news_ceiling": 30,
+                "remaining_slots": max(0, 30 - local_count), "candidates": candidates,
                 "authorized_relations": [], "authorized_relations_complete": False,
                 "publisher_history_12h": safe_history,
                 "canonical_candidate_duplicates_collapsed": duplicate_candidate_ids}
@@ -208,7 +214,9 @@ def provider_input(snapshot: Mapping[str, Any]) -> dict[str, Any]:
         relation_rows.append({"ref": ref, "scope": scope, "left_ref": left_ref, "right_ref": right_ref,
                               "left_title": _endpoint_title(left_item),
                               "right_title": _endpoint_title(right_item)})
-    return {"publication_context": {"publisher_count_rolling_24h": snapshot.get("publisher_count_rolling_24h"),
+    return {"publication_context": {"published_news_today_local": snapshot.get("published_news_today_local"),
+                                    "daily_news_ceiling": snapshot.get("daily_news_ceiling"),
+                                    "remaining_news_slots_today": snapshot.get("remaining_slots"),
                                     "policy_reference_ceiling_not_target": snapshot.get("policy_reference")},
             "candidates": candidate_rows, "authorized_relations": relation_rows,
             "history": history_rows}

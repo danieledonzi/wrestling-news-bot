@@ -262,11 +262,11 @@ def candidate_date_evidence(entry: dict[str, Any], expected_date: str) -> dict[s
     return {"matches": matches, "explicit_content_dates": explicit, "feed_timestamp_dates": feed_dates}
 
 
-def special_event_report_identity(entry: dict[str, Any], registry: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
-    """Identify a configured special-event results page, regardless of source."""
+def configured_special_event_identity(entry: dict[str, Any], registry: dict[str, Any], *, results_required: bool = False) -> tuple[dict[str, Any] | None, str]:
+    """Identify an event solely through the configured registry identity contract."""
     raw = " ".join(str(entry.get(k) or "") for k in ("title", "url", "source_url"))
     explicit_report = bool(re.search(r"\bresults\b|\brisultati\b", raw, re.I))
-    if not explicit_report:
+    if results_required and not explicit_report:
         return None, "rejected_non_results_event_article"
     weekly_cfg = _load(REPORTS_CONFIG, {"reports": []})
     for weekly in weekly_cfg.get("reports", []) if isinstance(weekly_cfg, dict) else []:
@@ -313,7 +313,13 @@ def special_event_report_identity(entry: dict[str, Any], registry: dict[str, Any
     matches.sort(key=lambda item: item[0], reverse=True)
     if not matches or (len(matches) > 1 and matches[0][0] == matches[1][0]):
         return None, "ambiguous_event_match" if matches else "event_alias_not_found"
-    return matches[0][1], "special_event_report_identity_match"
+    return matches[0][1], ("special_event_report_identity_match" if results_required else
+                           "configured_special_event_identity_match")
+
+
+def special_event_report_identity(entry: dict[str, Any], registry: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
+    """Identify a configured special-event results page, regardless of source."""
+    return configured_special_event_identity(entry, registry, results_required=True)
 
 
 def dynamic_special_event_match(entry: dict[str, Any], registry: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:

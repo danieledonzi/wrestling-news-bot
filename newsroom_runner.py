@@ -390,12 +390,31 @@ def capture_editorial_director_opportunity(massy_board: dict[str, Any], *, run_i
     preflight = costly_work_eligibility()
     if not preflight[0]:
         return None, {"status": "NOT_ELIGIBLE_WP_NOT_READY", "reason": preflight[1], "attempts": 0}, preflight
-    from agents.menzo_policy_v93_15 import load_authoritative_publisher_history
+    from agents.menzo_policy_v93_15 import load_authoritative_publisher_history, load_json
     augmented = softpool_augmented_board(massy_board)
+    from agents.menzo_policy_v93_15 import published_today_count
+    published_weekly = augmented.get("published_due_reports", {})
+    published_weekly_ids = set(published_weekly) if isinstance(published_weekly, dict) else set()
+    from modules.simone_report_integrity import PENDING_REPORTS
+    from agents.simone_publisher_v93_18 import SIMONE_REPORT_HISTORY_FILE
+    special_rows = load_json(PENDING_REPORTS, {"reports": []}).get("reports", [])
+    special_history = load_json(SIMONE_REPORT_HISTORY_FILE, {})
+    published_report_keys = set(special_history) if isinstance(special_history, dict) else set()
+    published_report_keys.update(str(row.get("report_key")) for row in special_rows
+                                 if isinstance(row, dict) and row.get("status") in {"published", "already_published"})
+    for candidate in augmented.get("news_candidates_for_menzo", []):
+        if not isinstance(candidate, dict):
+            continue
+        special = candidate.get("special_event_match") if isinstance(candidate.get("special_event_match"), dict) else {}
+        report_key = str(special.get("report_key") or candidate.get("event_report_key") or "")
+        candidate["corresponding_report_published"] = bool(
+            str(candidate.get("show_report_id") or "") in published_weekly_ids or
+            (report_key and report_key in published_report_keys))
     snapshot = capture_opportunity(
         augmented, run_id=run_id, observation_timestamp=observation_timestamp,
-        publisher_count_24h=len(load_authoritative_publisher_history(24)),
+        published_news_today_local=published_today_count(),
         history=load_authoritative_publisher_history(12))
+    snapshot["publisher_count_label"] = "published_news_today_local"
     if preserve_active_metadata:
         from agents.menzo_editorial_director_active import preserve_bob_capacity_metadata
         preserve_bob_capacity_metadata(snapshot, [item for item in augmented.get("news_candidates_for_menzo", [])

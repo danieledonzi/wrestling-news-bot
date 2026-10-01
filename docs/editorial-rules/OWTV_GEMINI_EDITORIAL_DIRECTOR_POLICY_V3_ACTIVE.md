@@ -43,8 +43,9 @@ For survivors the class/action contract is exact: `MUST_PUBLISH -> SELECT`; `SHO
 candidate that loses current-board competition. MUST means the publication decision is already made and cannot be
 deferred for pacing or ordinary capacity.
 
-Use publication context for dynamic pacing. `30 = reference, not a hard cap or fill target`. The supplied
-`remaining_slots` restricts ordinary SHOULD/SOFT selections, but never blocks a surviving MUST. On quieter days relevant and strong soft items may merit `SELECT`; on busy boards apply stronger
+Use `published_news_today_local`, the news published since 00:00 Europe/Rome, for dynamic pacing. `30` is a hard
+publication ceiling, not a fill target. The supplied `remaining_news_slots_today` / `remaining_slots` restricts
+ordinary SHOULD/SOFT selections; final Publisher authorization enforces the ceiling independently. On quieter days relevant and strong soft items may merit `SELECT`; on busy boards apply stronger
 competition; near 30 increasingly prioritize MUST and strong SHOULD. Never manufacture publications to fill capacity,
 and do not invent numerical pacing bands, category quotas, person caps, or rigid publication targets.
 

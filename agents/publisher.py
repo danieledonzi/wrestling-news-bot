@@ -743,18 +743,34 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
             for article in valid_articles
         ]
         valid_articles = []
+    from agents.news_scheduling import published_news_today_local, remaining_news_slots
+    published_today = published_news_today_local(history.values())
+    daily_slots = remaining_news_slots(published_today)
+    new_publication_limit = min(MAX_POSTS_PER_RUN, daily_slots)
     approved_total = len(valid_articles) + len(safety_skipped)
-    articles = valid_articles[:MAX_POSTS_PER_RUN]
-    overflow_articles = valid_articles[MAX_POSTS_PER_RUN:]
+    articles: list[dict[str, Any]] = []
+    overflow_articles: list[dict[str, Any]] = []
+    new_articles_selected = 0
+    for article in valid_articles:
+        key = source_key(str(article.get("source_url") or article.get("url") or ""))
+        if key and key in history:
+            articles.append(article)
+        elif new_articles_selected < new_publication_limit:
+            articles.append(article)
+            new_articles_selected += 1
+        else:
+            overflow_articles.append(article)
 
     print(f"[PUBLISHER v93.40] Avvio pubblicazione | approved_total={approved_total} attempted={len(articles)} max={MAX_POSTS_PER_RUN} wp_ok={wp_ok} dry_run={DRY_RUN}", flush=True)
     results = [publish_article(article, history, wp_ok) for article in articles if isinstance(article, dict)]
     capacity_skipped = [
         {
-            "source_url": str(article.get("source_url") or ""),
+            **article,
+            "source_url": str(article.get("source_url") or article.get("url") or ""),
             "title_it": str(article.get("title_it") or ""),
             "status": "skipped_capacity",
-            "reason": f"publisher_max_posts_per_run:{MAX_POSTS_PER_RUN}",
+            "reason": ("daily_news_ceiling:30" if daily_slots <= MAX_POSTS_PER_RUN
+                       else f"publisher_max_posts_per_run:{MAX_POSTS_PER_RUN}"),
         }
         for article in overflow_articles
     ]
@@ -768,7 +784,7 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
         "version": PUBLISHER_VERSION,
         "generated_at": utc_now(),
         "mode": "wordpress_publisher_mixed_embed_blocks",
-        "input": {"alfred_version": alfred.get("version") if isinstance(alfred, dict) else None, "approved_articles": approved_total, "attempted_articles": len(articles), "max_posts_per_run": MAX_POSTS_PER_RUN, "capacity_skipped": len(capacity_skipped)},
+        "input": {"alfred_version": alfred.get("version") if isinstance(alfred, dict) else None, "approved_articles": approved_total, "attempted_articles": len(articles), "max_posts_per_run": MAX_POSTS_PER_RUN, "published_news_today_local": published_today, "remaining_news_slots_today": daily_slots, "daily_news_ceiling": 30, "capacity_skipped": len(capacity_skipped)},
         "wp": {"ready": wp_ok, "reason": wp_reason, "post_status": POST_STATUS, "dry_run": DRY_RUN},
         "publisher_safety_error": safety_error,
         "results": results + safety_skipped,

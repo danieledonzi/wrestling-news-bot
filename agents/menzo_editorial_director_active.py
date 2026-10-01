@@ -26,7 +26,8 @@ RELATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_gate_schema_v
 CONFIRMATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_confirmation_schema_v3.json"
 EVENT_REGISTRY_PATH = ROOT / "config/event_registry.json"
 BOB_CAPACITY_FIELDS = ("article_type", "source_title", "category_hint", "reason",
-                       "ai_editorial_reason", "event_key")
+                       "ai_editorial_reason", "event_key", "show_report_id", "show_name",
+                       "special_event_match", "event_report_key", "corresponding_report_published")
 DUPLICATE_EVIDENCE_FIELDS = ("left_evidence", "right_evidence")
 DUPLICATE_CENTRALITY_FIELDS = ("left_central_development", "right_central_development",
                                "centrality_basis")
@@ -147,7 +148,8 @@ def active_provider_input(snapshot: Mapping[str, Any]) -> dict[str, Any]:
     provider_data["publication_context"].update(
         downstream_capacity_hint=snapshot.get("downstream_capacity"),
         downstream_capacity_hint_reason=snapshot.get("downstream_capacity_reason"),
-        remaining_slots=snapshot.get("remaining_slots"))
+        remaining_slots=snapshot.get("remaining_slots"),
+        remaining_news_slots_today=snapshot.get("remaining_slots"))
     return provider_data
 
 
@@ -1016,6 +1018,9 @@ def project(snapshot: Mapping[str, Any], result: Mapping[str, Any]) -> dict[str,
                     decision_authority="semantic_duplicate_gate",
                     reason=f"semantic_{scope}_duplicate")
         projected["skipped"].append(item)
+    from agents.news_scheduling import apply_show_news_urgency
+    promoted = apply_show_news_urgency(
+        projected, remaining_slots_today=int(snapshot.get("remaining_slots", 0)))
     # Reuse legacy bounded reconsideration only for candidates the Director has
     # just deferred again. A recovered SELECT remains authoritative.
     from agents.menzo_policy_v93_15 import apply_softpool_decay
@@ -1024,6 +1029,7 @@ def project(snapshot: Mapping[str, Any], result: Mapping[str, Any]) -> dict[str,
     projected["pending"] = decay_view["pending"]
     projected["skipped"].extend(decay_view["skipped"])
     projected["postprocess"] = decay_view.get("postprocess", {})
+    projected["postprocess"]["show_news_urgency_promoted"] = promoted
     projected["relations"] = copy.deepcopy(result["output"]["relations"])
     projected["handoff"] = {"to_bob_or_v92": len(projected["selected"]), "pending": len(projected["pending"]),
                              "skipped": len(projected["skipped"]), "decision_authority": "editorial_director"}
