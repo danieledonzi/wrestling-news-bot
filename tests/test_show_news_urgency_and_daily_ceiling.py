@@ -58,6 +58,65 @@ def test_configured_ple_identity_flows_from_massy_to_director_projection(monkeyp
     assert projected["selected"][0]["scheduling_override"]["reason"] == "show_news_urgency_pre_report"
 
 
+def test_expired_or_outranked_softpool_show_news_is_not_promoted(monkeypatch, tmp_path):
+    base = {
+        "source": "feed",
+        "summary": "fact",
+        "show_report_id": "aew_collision",
+        "from_softpool": True,
+    }
+    snapshot = shadow.capture_opportunity(
+        {"news_candidates_for_menzo": []},
+        run_id="run",
+        observation_timestamp="now",
+        published_news_today_local=0,
+        history=[],
+    )
+    snapshot["remaining_slots"] = 2
+    snapshot["candidates"] = []
+    snapshot["_active_bob_capacity_metadata"] = {}
+
+    for index, extra in enumerate((
+        {"softpool_added_at": "2000-01-01T00:00:00+00:00"},
+        {"softpool_deferrals": menzo.SOFTPOOL_OUTRANKED_DEFERRALS},
+    )):
+        row = dict(base, title=f"Softpool {index}", url=f"https://example.test/soft-{index}", **extra)
+        cid = f"soft-{index}"
+        snapshot["candidates"].append({"candidate_id": cid, **row})
+        snapshot["_active_bob_capacity_metadata"][cid] = row
+
+    for name in ("SOFTPOOL_FILE", "HARD_SKIP_FILE", "MENZO_DECISIONS_FILE", "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE"):
+        monkeypatch.setattr(menzo, name, tmp_path / f"{name}.json")
+
+    projected = active.project(snapshot, {"output": {
+        "candidates": [
+            {
+                "candidate_id": "soft-0",
+                "editorial_class": "PUBLISHABLE_SOFT",
+                "recommended_action": "DEFER",
+                "category": "AEW",
+                "story_core": "Old Collision item",
+            },
+            {
+                "candidate_id": "soft-1",
+                "editorial_class": "PUBLISHABLE_SOFT",
+                "recommended_action": "DEFER",
+                "category": "AEW",
+                "story_core": "Repeatedly outranked Collision item",
+            },
+        ],
+        "relations": [],
+    }})
+
+    assert projected["selected"] == []
+    assert projected["pending"] == []
+    assert {item["reason"] for item in projected["skipped"]} == {
+        "softpool_expired_not_fresh",
+        "softpool_repeatedly_outranked",
+    }
+    assert projected["postprocess"]["show_news_urgency_promoted"] == 0
+
+
 def test_unrelated_defer_and_post_report_show_defer_remain_pending():
     unrelated = candidate("Other")
     published = candidate("Raw", show_report_id="wwe_raw", corresponding_report_published=True)
