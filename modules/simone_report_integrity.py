@@ -11,6 +11,7 @@ from email.utils import parsedate_to_datetime
 from pathlib import Path
 from typing import Any, Iterable
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
+from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
 
@@ -235,8 +236,8 @@ def _parse_timestamp(value: str) -> datetime | None:
             return None
 
 
-def candidate_date_evidence(entry: dict[str, Any], expected_date: str) -> dict[str, Any]:
-    """Apply the single canonical explicit-date-then-timestamp contract."""
+def candidate_date_evidence(entry: dict[str, Any], expected_date: str, *, timezone_name: str | None = None, allow_utc_fallback: bool = True) -> dict[str, Any]:
+    """Apply explicit-date evidence first, then timezone-normalized feed timestamps."""
     try:
         expected = datetime.strptime(expected_date, "%Y-%m-%d").date()
     except (TypeError, ValueError):
@@ -253,7 +254,18 @@ def candidate_date_evidence(entry: dict[str, Any], expected_date: str) -> dict[s
     for month, day, year in re.findall(rf"\b({month_pattern})\s+(\d{{1,2}})(?:,?\s+(20\d{{2}}))?\b", content, re.I):
         explicit.add(f"{int(year) if year else expected.year:04d}-{MONTH_NUMBERS[month.lower()]:02d}-{int(day):02d}")
     stamps = {_parse_timestamp(str(entry.get(k) or "")) for k in ("published", "published_at", "updated")}
-    feed_dates = {stamp.date().isoformat() for stamp in stamps if stamp is not None}
+    event_tz = None
+    if timezone_name:
+        try:
+            event_tz = ZoneInfo(timezone_name)
+        except Exception:
+            event_tz = None
+    if event_tz is not None:
+        feed_dates = {stamp.astimezone(event_tz).date().isoformat() for stamp in stamps if stamp is not None}
+    elif allow_utc_fallback:
+        feed_dates = {stamp.date().isoformat() for stamp in stamps if stamp is not None}
+    else:
+        feed_dates = set()
     if explicit:
         matches = expected.isoformat() in explicit
     else:
@@ -262,11 +274,11 @@ def candidate_date_evidence(entry: dict[str, Any], expected_date: str) -> dict[s
     return {"matches": matches, "explicit_content_dates": explicit, "feed_timestamp_dates": feed_dates}
 
 
-def special_event_report_identity(entry: dict[str, Any], registry: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
-    """Identify a configured special-event results page, regardless of source."""
+def configured_special_event_identity(entry: dict[str, Any], registry: dict[str, Any], *, results_required: bool = False) -> tuple[dict[str, Any] | None, str]:
+    """Identify an event solely through the configured registry identity contract."""
     raw = " ".join(str(entry.get(k) or "") for k in ("title", "url", "source_url"))
     explicit_report = bool(re.search(r"\bresults\b|\brisultati\b", raw, re.I))
-    if not explicit_report:
+    if results_required and not explicit_report:
         return None, "rejected_non_results_event_article"
     weekly_cfg = _load(REPORTS_CONFIG, {"reports": []})
     for weekly in weekly_cfg.get("reports", []) if isinstance(weekly_cfg, dict) else []:
@@ -278,6 +290,10 @@ def special_event_report_identity(entry: dict[str, Any], registry: dict[str, Any
         if not isinstance(event, dict) or str(event.get("status") or "").lower() not in {"confirmed", "active"}:
             continue
         event_aliases = [event.get("event_name")] + list(event.get("aliases") or [])
+        enabled_nights = [night for night in event.get("nights", [])
+                          if isinstance(night, dict) and night.get("enabled", True)]
+        multi_night = len(enabled_nights) > 1
+        event_timezone = str(event.get("timezone") or "").strip() or None
         for night in event.get("nights", []):
             if not isinstance(night, dict) or not night.get("enabled", True):
                 continue
@@ -287,7 +303,12 @@ def special_event_report_identity(entry: dict[str, Any], registry: dict[str, Any
             if not hits:
                 continue
             night_date = str(night.get("date_local") or "")
-            date_evidence = candidate_date_evidence(entry, night_date)
+            date_evidence = candidate_date_evidence(
+                entry,
+                night_date,
+                timezone_name=event_timezone,
+                allow_utc_fallback=not multi_night,
+            )
             if not date_evidence["matches"]:
                 continue
             explicit_dates = date_evidence["explicit_content_dates"]
@@ -296,9 +317,12 @@ def special_event_report_identity(entry: dict[str, Any], registry: dict[str, Any
                 next_date = (datetime.strptime(night_date, "%Y-%m-%d").date() + timedelta(days=1)).isoformat()
             except ValueError:
                 next_date = ""
-            timestamp_compatible = bool(feed_dates & {night_date, next_date})
+            exact_feed_date = night_date in feed_dates
+            next_day_feed_date = bool(next_date and next_date in feed_dates)
+            timestamp_compatible = exact_feed_date or next_day_feed_date
             night_alias_hit = next((hit for hit in hits if hit in night_aliases), None)
-            score = len(_slug(hits[0])) + (200 if night_date in explicit_dates else 0) + (100 if timestamp_compatible and feed_dates else 0) + (50 if night_alias_hit else 0)
+            timestamp_score = 120 if exact_feed_date else (100 if next_day_feed_date else 0)
+            score = len(_slug(hits[0])) + (200 if night_date in explicit_dates else 0) + timestamp_score + (50 if night_alias_hit else 0)
             metadata = {
                 "event_key": event.get("key"), "night_key": night.get("night_key"),
                 "report_key": f"special_event_{night.get('night_key')}_{night_date.replace('-', '_')}",
@@ -307,13 +331,19 @@ def special_event_report_identity(entry: dict[str, Any], registry: dict[str, Any
                 "category_hint": event.get("category_hint") or event.get("promotion"),
                 "event_name": event.get("event_name"), "promotion": event.get("promotion"),
                 "aliases": sorted({str(alias) for alias in aliases if alias}),
-                "match_evidence": {"strong_alias": hits[0], "night_alias": night_alias_hit, "alias_hits": hits, "explicit_content_dates": sorted(explicit_dates), "feed_timestamp_dates": sorted(feed_dates), "explicit_date_match": night_date in explicit_dates, "feed_timestamp_compatible": timestamp_compatible, "promotion_support": str(event.get("promotion") or "").lower() in blob},
+                "match_evidence": {"strong_alias": hits[0], "night_alias": night_alias_hit, "alias_hits": hits, "explicit_content_dates": sorted(explicit_dates), "feed_timestamp_dates": sorted(feed_dates), "explicit_date_match": night_date in explicit_dates, "feed_timestamp_compatible": timestamp_compatible, "feed_timestamp_exact_date": exact_feed_date, "promotion_support": str(event.get("promotion") or "").lower() in blob},
             }
             matches.append((score, metadata))
     matches.sort(key=lambda item: item[0], reverse=True)
     if not matches or (len(matches) > 1 and matches[0][0] == matches[1][0]):
         return None, "ambiguous_event_match" if matches else "event_alias_not_found"
-    return matches[0][1], "special_event_report_identity_match"
+    return matches[0][1], ("special_event_report_identity_match" if results_required else
+                           "configured_special_event_identity_match")
+
+
+def special_event_report_identity(entry: dict[str, Any], registry: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
+    """Identify a configured special-event results page, regardless of source."""
+    return configured_special_event_identity(entry, registry, results_required=True)
 
 
 def dynamic_special_event_match(entry: dict[str, Any], registry: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:

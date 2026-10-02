@@ -428,19 +428,11 @@ def publisher_history_file() -> Path:
 
 
 def published_today_count(now: datetime | None = None) -> int:
+    from agents.news_scheduling import published_news_today_local
     now = now or datetime.now(timezone.utc)
     raw = load_json(publisher_history_file(), {})
     records = raw.values() if isinstance(raw, dict) else (raw if isinstance(raw, list) else [])
-    count = 0
-    for item in records:
-        if not isinstance(item, dict):
-            continue
-        if str(item.get("status") or "publish").lower() not in {"publish", "published"}:
-            continue
-        dt = parse_dt(item.get("published_at") or item.get("updated_at") or item.get("created_at"))
-        if dt and now - dt <= timedelta(hours=24):
-            count += 1
-    return count
+    return published_news_today_local(records, now=now)
 
 
 def dynamic_soft_threshold(base_threshold: int = MIN_SELECTED_SCORE, published_count: int | None = None) -> tuple[int, dict[str, Any]]:
@@ -460,6 +452,7 @@ def dynamic_soft_threshold(base_threshold: int = MIN_SELECTED_SCORE, published_c
     meta = {
         "daily_news_target": DAILY_NEWS_TARGET,
         "published_today_count": count,
+        "published_news_today_local": count,
         "published_today_percent": round(percent, 4),
         "dynamic_soft_threshold": threshold,
         "dynamic_soft_threshold_multiplier": "hard_only" if multiplier == float("inf") else multiplier,

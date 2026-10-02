@@ -1617,6 +1617,26 @@ def test_bob_active_capacity_keeps_all_must_plus_ordinary_capacity(monkeypatch):
     assert eleven["handoff"]["must_left_out_by_capacity"] == 0
 
 
+def test_bob_prioritizes_urgency_within_ordinary_capacity_after_must(monkeypatch):
+    from agents import bob
+    monkeypatch.setattr(bob, "article_package", lambda item: {"id": item["id"], "status": "ready_for_alfred"})
+    monkeypatch.setattr(bob, "dynamic_article_capacity", lambda *_: (5, "normal"))
+    must = {"id": "must", "editorial_director": {"editorial_class": "MUST_PUBLISH"}}
+    ordinary = [{"id": f"o{i}", "editorial_director": {"editorial_class": "SHOULD_PUBLISH"}}
+                for i in range(5)]
+    urgency = {"id": "urgent", "editorial_director": {
+        "editorial_class": "SHOULD_PUBLISH", "recommended_action": "DEFER"},
+        "scheduling_override": {"reason": "show_news_urgency_pre_report"}}
+
+    result = bob.run_bob({"decision_authority": "editorial_director",
+                          "selected": ordinary + [urgency, must]})
+
+    assert [row["id"] for row in result["articles"]] == ["must", "urgent", "o0", "o1", "o2", "o3"]
+    assert result["input"]["ordinary_capacity"] == 5
+    assert result["handoff"]["ordinary_left_out_by_capacity"] == 1
+    assert result["handoff"]["must_left_out_by_capacity"] == 0
+
+
 def test_bob_report_capacity_and_order_never_slice_late_must(monkeypatch):
     from agents import bob
     monkeypatch.setattr(bob, "article_package", lambda item: {"id": item["id"], "status": "ready_for_alfred"})
@@ -1626,7 +1646,7 @@ def test_bob_report_capacity_and_order_never_slice_late_must(monkeypatch):
                 for i in range(6)]
     result = bob.run_bob({"decision_authority": "editorial_director",
                           "selected": ordinary + [must]})
-    assert [row["id"] for row in result["articles"]] == ["o0", "o1", "o2", "o3", "must"]
+    assert [row["id"] for row in result["articles"]] == ["must", "o0", "o1", "o2", "o3"]
     assert result["handoff"]["ordinary_left_out_by_capacity"] == 2
     assert result["handoff"]["must_left_out_by_capacity"] == 0
 

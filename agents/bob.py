@@ -1192,6 +1192,8 @@ def dynamic_article_capacity(decision: dict[str, Any], selected: list[dict[str, 
 def article_package(item: dict[str, Any]) -> dict[str, Any]:
     url = str(item.get("url") or item.get("source_url") or "")
     package: dict[str, Any] = {"source_url": url, "source": item.get("source"), "source_title": item.get("title"), "category_hint": item.get("category_hint"), "menzo_score": item.get("score"), "status": "error", "created_at": utc_now(), "diagnostic_stage": "start"}
+    if isinstance(item.get("scheduling_override"), dict):
+        package["scheduling_override"] = dict(item["scheduling_override"])
     for _field in ["menzo_duplicate_checked", "menzo_duplicate_scope", "menzo_duplicate_decision", "menzo_authorized", "menzo_compared_with_url", "menzo_duplicate_reason", "menzo_new_fact", "menzo_winner_url", "menzo_duplicate_audit", "menzo_duplicate_comparisons"]:
         if _field in item:
             package[_field] = item[_field]
@@ -1303,15 +1305,13 @@ def run_bob(menzo_decision: dict[str, Any] | None = None) -> dict[str, Any]:
     capacity, capacity_reason = dynamic_article_capacity(
         decision if isinstance(decision, dict) else {}, capacity_input)
     if active_selection:
-        ordinary_kept = 0
-        capacity_selected = []
-        for item in selected:
-            if active_must(item):
-                capacity_selected.append(item)
-            elif ordinary_kept < capacity:
-                capacity_selected.append(item)
-                ordinary_kept += 1
-        selected = capacity_selected
+        must_selected = [item for item in selected if active_must(item)]
+        urgency_selected = [item for item in ordinary if
+            isinstance(item.get("scheduling_override"), dict) and
+            item["scheduling_override"].get("reason") == "show_news_urgency_pre_report"]
+        urgency_ids = {id(item) for item in urgency_selected}
+        remaining_ordinary = [item for item in ordinary if id(item) not in urgency_ids]
+        selected = must_selected + (urgency_selected + remaining_ordinary)[:capacity]
         ordinary_left_out_by_capacity = max(0, len(ordinary) - capacity)
         must_left_out_by_capacity = 0
     else:

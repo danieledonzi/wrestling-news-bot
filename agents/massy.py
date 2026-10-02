@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
-from modules.simone_report_integrity import dynamic_special_event_match, load_effective_registry, special_event_report_identity
+from modules.simone_report_integrity import configured_special_event_identity, dynamic_special_event_match, load_effective_registry, special_event_report_identity
 
 try:
     import feedparser  # type: ignore
@@ -141,7 +141,16 @@ def worked_urls() -> set[str]:
 def published_urls() -> set[str]:
     found: set[str] = set()
     for path in PUBLISHED_HISTORY_FILES:
-        collect_urls(load_json(path, {}), found)
+        value = load_json(path, {})
+        if isinstance(value, dict) and isinstance(value.get("results"), list):
+            records = value["results"]
+        elif isinstance(value, dict):
+            records = value.values()
+        else:
+            records = value if isinstance(value, list) else []
+        for record in records:
+            if isinstance(record, dict) and str(record.get("status") or "").lower() in {"published", "already_published", "publish", "success", "succeeded"}:
+                collect_urls(record, found)
     return found
 
 
@@ -333,6 +342,7 @@ def classify_entries(entries: list[dict[str, Any]], already_worked_urls: set[str
         if lv_reason:
             hard_skipped.append(compact_entry(entry, "hard_skip", lv_reason))
             continue
+        event_news_identity, _ = configured_special_event_identity(entry, special_registry or {})
         show_hint, report_reason = report_hint(entry, special_registry)
         if show_hint:
             weekly_source_allowed = report_reason == "weekly_show_results" and is_configured_weekly_report_source(entry)
@@ -349,7 +359,9 @@ def classify_entries(entries: list[dict[str, Any]], already_worked_urls: set[str
                 continue
             report_candidates.append(compact_entry(entry, "report_candidate", report_reason or "report_like_title", assigned_to="Simone", show_hint=show_hint, special_event_match=entry.get("special_event_match")))
             continue
-        news_candidates.append(compact_entry(entry, "news_candidate", "requires_menzo_classification", assigned_to="Menzo"))
+        metadata = {"special_event_match": event_news_identity} if event_news_identity else {}
+        news_candidates.append(compact_entry(
+            entry, "news_candidate", "requires_menzo_classification", assigned_to="Menzo", **metadata))
 
     suspicious = suspicious_duplicate_clusters(news_candidates)
     return {"already_worked": already_worked, "hard_skipped": hard_skipped, "report_candidates": report_candidates, "news_candidates_for_menzo": news_candidates, "suspicious_story_clusters": suspicious, "massy_suspicious_duplicate_pairs": len(suspicious)}

@@ -383,19 +383,43 @@ def initialize_canonical_artifact_index(run_id: str) -> Any:
 
 def capture_editorial_director_opportunity(massy_board: dict[str, Any], *, run_id: str,
                                             observation_timestamp: str,
-                                            preserve_active_metadata: bool = False) -> tuple[Any, Any, Any]:
+                                            preserve_active_metadata: bool = False,
+                                            same_run_published_weekly_ids: set[str] | None = None) -> tuple[Any, Any, Any]:
     """Return snapshot, diagnostic result and the single Menzo preflight result."""
     from agents.menzo_editorial_director_shadow import (capture_opportunity, costly_work_eligibility,
                                                         softpool_augmented_board)
     preflight = costly_work_eligibility()
     if not preflight[0]:
         return None, {"status": "NOT_ELIGIBLE_WP_NOT_READY", "reason": preflight[1], "attempts": 0}, preflight
-    from agents.menzo_policy_v93_15 import load_authoritative_publisher_history
+    from agents.menzo_policy_v93_15 import load_authoritative_publisher_history, load_json
     augmented = softpool_augmented_board(massy_board)
+    from agents.menzo_policy_v93_15 import published_today_count
+    published_weekly = augmented.get("published_due_reports", {})
+    published_weekly_ids = set(published_weekly) if isinstance(published_weekly, dict) else set()
+    from modules.simone_report_integrity import PENDING_REPORTS
+    from agents.simone_publisher_v93_18 import SIMONE_REPORT_HISTORY_FILE
+    special_rows = load_json(PENDING_REPORTS, {"reports": []}).get("reports", [])
+    # Massy's weekly snapshot predates Simone in this run. Refresh only from
+    # Simone publications produced by this run; persisted weekly rows are dated
+    # occurrences and must not be collapsed to their stable report_id.
+    published_weekly_ids.update(str(value) for value in (same_run_published_weekly_ids or set()) if value)
+    special_history = load_json(SIMONE_REPORT_HISTORY_FILE, {})
+    published_report_keys = set(special_history) if isinstance(special_history, dict) else set()
+    published_report_keys.update(str(row.get("report_key")) for row in special_rows
+                                 if isinstance(row, dict) and row.get("status") in {"published", "already_published"})
+    for candidate in augmented.get("news_candidates_for_menzo", []):
+        if not isinstance(candidate, dict):
+            continue
+        special = candidate.get("special_event_match") if isinstance(candidate.get("special_event_match"), dict) else {}
+        report_key = str(special.get("report_key") or candidate.get("event_report_key") or "")
+        candidate["corresponding_report_published"] = bool(
+            str(candidate.get("show_report_id") or "") in published_weekly_ids or
+            (report_key and report_key in published_report_keys))
     snapshot = capture_opportunity(
         augmented, run_id=run_id, observation_timestamp=observation_timestamp,
-        publisher_count_24h=len(load_authoritative_publisher_history(24)),
+        published_news_today_local=published_today_count(),
         history=load_authoritative_publisher_history(12))
+    snapshot["publisher_count_label"] = "published_news_today_local"
     if preserve_active_metadata:
         from agents.menzo_editorial_director_active import preserve_bob_capacity_metadata
         preserve_bob_capacity_metadata(snapshot, [item for item in augmented.get("news_candidates_for_menzo", [])
@@ -487,9 +511,24 @@ def main() -> int:
         from agents.menzo_editorial_director_shadow import enabled as shadow_enabled
         active_director = active_enabled()
         if active_director or shadow_enabled():
+            published_report_keys_this_run = {
+                str(row.get("report_key"))
+                for row in simone_publish.get("results", [])
+                if isinstance(row, dict)
+                and row.get("report_key")
+                and row.get("status") in {"published", "already_published"}
+            }
+            same_run_published_weekly_ids = {
+                str(report.get("report_id"))
+                for report in simone_decision.get("ready_reports", [])
+                if isinstance(report, dict)
+                and report.get("report_id")
+                and str(report.get("report_key") or "") in published_report_keys_this_run
+            }
             director_snapshot, director_result, menzo_preflight = capture_editorial_director_opportunity(
                 massy_board, run_id=os.environ["NEWSROOM_RUN_ID"], observation_timestamp=utc_now(),
-                preserve_active_metadata=active_director)
+                preserve_active_metadata=active_director,
+                same_run_published_weekly_ids=same_run_published_weekly_ids)
     except Exception as exc:
         director_result = {"status": "CAPTURE_FAILED", "fallback_reason": type(exc).__name__}
         add_timeline(timeline, "Menzo", "editorial_director_capture_failed_open", type(exc).__name__)
