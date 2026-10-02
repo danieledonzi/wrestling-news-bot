@@ -1018,17 +1018,19 @@ def project(snapshot: Mapping[str, Any], result: Mapping[str, Any]) -> dict[str,
                     decision_authority="semantic_duplicate_gate",
                     reason=f"semantic_{scope}_duplicate")
         projected["skipped"].append(item)
-    from agents.news_scheduling import apply_show_news_urgency
-    promoted = apply_show_news_urgency(
-        projected, remaining_slots_today=int(snapshot.get("remaining_slots", 0)))
     # Reuse legacy bounded reconsideration only for candidates the Director has
-    # just deferred again. A recovered SELECT remains authoritative.
+    # just deferred again. A recovered SELECT remains authoritative. Apply decay
+    # before show-news urgency so expired or repeatedly outranked soft-pool items
+    # cannot bypass those guards merely because they carry show identity.
     from agents.menzo_policy_v93_15 import apply_softpool_decay
     decay_view = {"selected": [], "pending": projected["pending"], "skipped": []}
     apply_softpool_decay(decay_view)
     projected["pending"] = decay_view["pending"]
     projected["skipped"].extend(decay_view["skipped"])
     projected["postprocess"] = decay_view.get("postprocess", {})
+    from agents.news_scheduling import apply_show_news_urgency
+    promoted = apply_show_news_urgency(
+        projected, remaining_slots_today=int(snapshot.get("remaining_slots", 0)))
     projected["postprocess"]["show_news_urgency_promoted"] = promoted
     projected["relations"] = copy.deepcopy(result["output"]["relations"])
     projected["handoff"] = {"to_bob_or_v92": len(projected["selected"]), "pending": len(projected["pending"]),
