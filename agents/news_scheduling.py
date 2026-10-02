@@ -44,9 +44,11 @@ def remaining_news_slots(published_today: int) -> int:
     return max(0, DAILY_NEWS_CEILING - max(0, int(published_today)))
 
 
-def apply_show_news_urgency(projected: dict[str, Any], *, remaining_slots_today: int) -> int:
+def apply_show_news_urgency(projected: dict[str, Any], *, remaining_slots_today: int, max_promotions: int | None = None) -> int:
     """Promote eligible Director deferrals, preserving Director order and provenance."""
     slots = max(0, int(remaining_slots_today)) - len(projected.get("selected", []))
+    if max_promotions is not None:
+        slots = min(slots, max(0, int(max_promotions)))
     if slots <= 0:
         return 0
     promoted: list[dict[str, Any]] = []
