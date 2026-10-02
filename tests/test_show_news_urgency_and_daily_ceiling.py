@@ -117,6 +117,23 @@ def test_expired_or_outranked_softpool_show_news_is_not_promoted(monkeypatch, tm
     assert projected["postprocess"]["show_news_urgency_promoted"] == 0
 
 
+def test_consecutive_event_results_use_event_local_date_not_utc_date():
+    registry, _ = load_effective_registry(now=datetime(2026, 8, 2, tzinfo=timezone.utc))
+    entry = {
+        "source": "RingsideNews",
+        "title": "SummerSlam Results",
+        "url": "https://ringsidenews.test/summerslam-results-generic",
+        "published": "2026-08-02T02:00:00Z",
+    }
+
+    board = massy.classify_entries([entry], set(), set(), registry)
+    produced = board["report_candidates"][0]
+
+    assert produced["special_event_match"]["night_key"] == "wwe_summerslam_2026_night_1"
+    assert produced["special_event_match"]["date_local"] == "2026-08-01"
+    assert produced["special_event_match"]["match_evidence"]["feed_timestamp_exact_date"] is True
+
+
 def test_generic_consecutive_event_news_prefers_matching_publication_date():
     registry, _ = load_effective_registry(now=datetime(2026, 8, 2, tzinfo=timezone.utc))
     entry = {
