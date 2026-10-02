@@ -117,6 +117,23 @@ def test_expired_or_outranked_softpool_show_news_is_not_promoted(monkeypatch, tm
     assert projected["postprocess"]["show_news_urgency_promoted"] == 0
 
 
+def test_generic_consecutive_event_news_prefers_matching_publication_date():
+    registry, _ = load_effective_registry(now=datetime(2026, 8, 2, tzinfo=timezone.utc))
+    entry = {
+        "source": "RingsideNews",
+        "title": "SummerSlam injury update",
+        "url": "https://ringsidenews.test/summerslam-injury-generic",
+        "published": "2026-08-02T12:00:00Z",
+    }
+
+    board = massy.classify_entries([entry], set(), set(), registry)
+    produced = board["news_candidates_for_menzo"][0]
+
+    assert produced["special_event_match"]["night_key"] == "wwe_summerslam_2026_night_2"
+    assert produced["special_event_match"]["date_local"] == "2026-08-02"
+    assert produced["special_event_match"]["match_evidence"]["feed_timestamp_exact_date"] is True
+
+
 def test_unrelated_defer_and_post_report_show_defer_remain_pending():
     unrelated = candidate("Other")
     published = candidate("Raw", show_report_id="wwe_raw", corresponding_report_published=True)
