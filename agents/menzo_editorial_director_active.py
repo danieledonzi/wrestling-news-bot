@@ -1028,9 +1028,23 @@ def project(snapshot: Mapping[str, Any], result: Mapping[str, Any]) -> dict[str,
     projected["pending"] = decay_view["pending"]
     projected["skipped"].extend(decay_view["skipped"])
     projected["postprocess"] = decay_view.get("postprocess", {})
+    from agents.bob import dynamic_article_capacity
+    current_ordinary = [
+        item for item in projected["selected"]
+        if not (
+            isinstance(item.get("editorial_director"), dict)
+            and item["editorial_director"].get("editorial_class") == "MUST_PUBLISH"
+        )
+    ]
+    ordinary_capacity, _capacity_reason = dynamic_article_capacity(
+        {"selected": current_ordinary}, current_ordinary)
+    residual_bob_capacity = max(0, ordinary_capacity - len(current_ordinary))
     from agents.news_scheduling import apply_show_news_urgency
     promoted = apply_show_news_urgency(
-        projected, remaining_slots_today=int(snapshot.get("remaining_slots", 0)))
+        projected,
+        remaining_slots_today=int(snapshot.get("remaining_slots", 0)),
+        max_promotions=residual_bob_capacity,
+    )
     projected["postprocess"]["show_news_urgency_promoted"] = promoted
     projected["relations"] = copy.deepcopy(result["output"]["relations"])
     projected["handoff"] = {"to_bob_or_v92": len(projected["selected"]), "pending": len(projected["pending"]),
