@@ -11,6 +11,7 @@ from email.utils import parsedate_to_datetime
 from pathlib import Path
 from typing import Any, Iterable
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
+from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
 
@@ -235,8 +236,8 @@ def _parse_timestamp(value: str) -> datetime | None:
             return None
 
 
-def candidate_date_evidence(entry: dict[str, Any], expected_date: str) -> dict[str, Any]:
-    """Apply the single canonical explicit-date-then-timestamp contract."""
+def candidate_date_evidence(entry: dict[str, Any], expected_date: str, *, timezone_name: str | None = None, allow_utc_fallback: bool = True) -> dict[str, Any]:
+    """Apply explicit-date evidence first, then timezone-normalized feed timestamps."""
     try:
         expected = datetime.strptime(expected_date, "%Y-%m-%d").date()
     except (TypeError, ValueError):
@@ -253,7 +254,18 @@ def candidate_date_evidence(entry: dict[str, Any], expected_date: str) -> dict[s
     for month, day, year in re.findall(rf"\b({month_pattern})\s+(\d{{1,2}})(?:,?\s+(20\d{{2}}))?\b", content, re.I):
         explicit.add(f"{int(year) if year else expected.year:04d}-{MONTH_NUMBERS[month.lower()]:02d}-{int(day):02d}")
     stamps = {_parse_timestamp(str(entry.get(k) or "")) for k in ("published", "published_at", "updated")}
-    feed_dates = {stamp.date().isoformat() for stamp in stamps if stamp is not None}
+    event_tz = None
+    if timezone_name:
+        try:
+            event_tz = ZoneInfo(timezone_name)
+        except Exception:
+            event_tz = None
+    if event_tz is not None:
+        feed_dates = {stamp.astimezone(event_tz).date().isoformat() for stamp in stamps if stamp is not None}
+    elif allow_utc_fallback:
+        feed_dates = {stamp.date().isoformat() for stamp in stamps if stamp is not None}
+    else:
+        feed_dates = set()
     if explicit:
         matches = expected.isoformat() in explicit
     else:
@@ -278,6 +290,10 @@ def configured_special_event_identity(entry: dict[str, Any], registry: dict[str,
         if not isinstance(event, dict) or str(event.get("status") or "").lower() not in {"confirmed", "active"}:
             continue
         event_aliases = [event.get("event_name")] + list(event.get("aliases") or [])
+        enabled_nights = [night for night in event.get("nights", [])
+                          if isinstance(night, dict) and night.get("enabled", True)]
+        multi_night = len(enabled_nights) > 1
+        event_timezone = str(event.get("timezone") or "").strip() or None
         for night in event.get("nights", []):
             if not isinstance(night, dict) or not night.get("enabled", True):
                 continue
@@ -287,7 +303,12 @@ def configured_special_event_identity(entry: dict[str, Any], registry: dict[str,
             if not hits:
                 continue
             night_date = str(night.get("date_local") or "")
-            date_evidence = candidate_date_evidence(entry, night_date)
+            date_evidence = candidate_date_evidence(
+                entry,
+                night_date,
+                timezone_name=event_timezone,
+                allow_utc_fallback=not multi_night,
+            )
             if not date_evidence["matches"]:
                 continue
             explicit_dates = date_evidence["explicit_content_dates"]
