@@ -9,6 +9,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from agents.news_scheduling import apply_show_news_urgency, published_news_today_local, remaining_news_slots
 from agents import menzo_policy_v93_15 as menzo
 from agents import publisher
+from agents import bob
 from agents import massy
 from agents import menzo_editorial_director_active as active
 from agents import menzo_editorial_director_shadow as shadow
@@ -135,6 +136,21 @@ def test_publisher_hard_ceiling_attempts_no_news_at_thirty(monkeypatch):
     assert blocked["status"] == "skipped_capacity"
     assert blocked["editorial_director"] == provenance["editorial_director"]
     assert blocked["scheduling_override"] == provenance["scheduling_override"]
+
+
+
+def test_bob_package_preserves_show_news_urgency_override(monkeypatch):
+    override = {"reason": "show_news_urgency_pre_report"}
+    monkeypatch.setattr(bob, "fetch_html", lambda url: (_ for _ in ()).throw(RuntimeError("stop after package init")))
+
+    packaged = bob.article_package({
+        "url": "https://example.test/urgent",
+        "title": "Urgent show news",
+        "scheduling_override": override,
+    })
+
+    assert packaged["scheduling_override"] == override
+    assert packaged["scheduling_override"] is not override
 
 
 def test_already_published_does_not_consume_last_daily_slot(monkeypatch):
