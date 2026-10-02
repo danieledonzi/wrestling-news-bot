@@ -197,3 +197,72 @@ def test_provider_context_names_local_calendar_day_truthfully():
     assert context["published_news_today_local"] == 7
     assert context["remaining_news_slots_today"] == 23
     assert "publisher_count_rolling_24h" not in context
+
+
+def test_same_run_weekly_report_publication_disables_urgency(monkeypatch, tmp_path):
+    import newsroom_runner
+    from modules import simone_report_integrity
+    from agents import simone_publisher_v93_18
+
+    pending = tmp_path / "pending_reports.json"
+    pending.write_text(json.dumps({"reports": [{
+        "report_key": "aew_dynamite_2026_10_01",
+        "report_id": "aew_dynamite",
+        "status": "published",
+    }]}), encoding="utf-8")
+    history = tmp_path / "simone_report_history.json"
+    history.write_text("{}", encoding="utf-8")
+
+    monkeypatch.setattr(simone_report_integrity, "PENDING_REPORTS", pending)
+    monkeypatch.setattr(simone_publisher_v93_18, "SIMONE_REPORT_HISTORY_FILE", history)
+    monkeypatch.setattr(
+        shadow, "costly_work_eligibility", lambda: (True, "ok")
+    )
+    monkeypatch.setattr(
+        menzo, "published_today_count", lambda: 0
+    )
+    monkeypatch.setattr(
+        menzo, "load_authoritative_publisher_history", lambda hours: []
+    )
+
+    stale_massy_board = {
+        "news_candidates_for_menzo": [{
+            "source": "feed",
+            "title": "Dynamite standalone development",
+            "url": "https://example.test/dynamite-story",
+            "summary": "fact",
+            "show_report_id": "aew_dynamite",
+            "corresponding_report_published": False,
+        }],
+        "published_due_reports": {},
+    }
+
+    snapshot, diagnostic, _ = newsroom_runner.capture_editorial_director_opportunity(
+        stale_massy_board,
+        run_id="run",
+        observation_timestamp="2026-10-02T05:40:00+00:00",
+        preserve_active_metadata=True,
+    )
+
+    assert diagnostic is None
+    assert snapshot["candidates"][0]["candidate_id"]
+    sidecar = snapshot["_active_bob_capacity_metadata"][snapshot["candidates"][0]["candidate_id"]]
+    assert sidecar["show_report_id"] == "aew_dynamite"
+    assert sidecar["corresponding_report_published"] is True
+
+    cid = snapshot["candidates"][0]["candidate_id"]
+    for name in ("SOFTPOOL_FILE", "HARD_SKIP_FILE", "MENZO_DECISIONS_FILE", "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE"):
+        monkeypatch.setattr(menzo, name, tmp_path / f"{name}.json")
+
+    projected = active.project(snapshot, {"output": {"candidates": [{
+        "candidate_id": cid,
+        "editorial_class": "SHOULD_PUBLISH",
+        "recommended_action": "DEFER",
+        "category": "AEW",
+        "story_core": "Standalone Dynamite development",
+    }], "relations": []}})
+
+    assert projected["selected"] == []
+    assert len(projected["pending"]) == 1
+    assert projected["pending"][0]["editorial_director"]["recommended_action"] == "DEFER"
+    assert "scheduling_override" not in projected["pending"][0]
