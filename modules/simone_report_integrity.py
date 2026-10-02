@@ -296,9 +296,12 @@ def configured_special_event_identity(entry: dict[str, Any], registry: dict[str,
                 next_date = (datetime.strptime(night_date, "%Y-%m-%d").date() + timedelta(days=1)).isoformat()
             except ValueError:
                 next_date = ""
-            timestamp_compatible = bool(feed_dates & {night_date, next_date})
+            exact_feed_date = night_date in feed_dates
+            next_day_feed_date = bool(next_date and next_date in feed_dates)
+            timestamp_compatible = exact_feed_date or next_day_feed_date
             night_alias_hit = next((hit for hit in hits if hit in night_aliases), None)
-            score = len(_slug(hits[0])) + (200 if night_date in explicit_dates else 0) + (100 if timestamp_compatible and feed_dates else 0) + (50 if night_alias_hit else 0)
+            timestamp_score = 120 if exact_feed_date else (100 if next_day_feed_date else 0)
+            score = len(_slug(hits[0])) + (200 if night_date in explicit_dates else 0) + timestamp_score + (50 if night_alias_hit else 0)
             metadata = {
                 "event_key": event.get("key"), "night_key": night.get("night_key"),
                 "report_key": f"special_event_{night.get('night_key')}_{night_date.replace('-', '_')}",
@@ -307,7 +310,7 @@ def configured_special_event_identity(entry: dict[str, Any], registry: dict[str,
                 "category_hint": event.get("category_hint") or event.get("promotion"),
                 "event_name": event.get("event_name"), "promotion": event.get("promotion"),
                 "aliases": sorted({str(alias) for alias in aliases if alias}),
-                "match_evidence": {"strong_alias": hits[0], "night_alias": night_alias_hit, "alias_hits": hits, "explicit_content_dates": sorted(explicit_dates), "feed_timestamp_dates": sorted(feed_dates), "explicit_date_match": night_date in explicit_dates, "feed_timestamp_compatible": timestamp_compatible, "promotion_support": str(event.get("promotion") or "").lower() in blob},
+                "match_evidence": {"strong_alias": hits[0], "night_alias": night_alias_hit, "alias_hits": hits, "explicit_content_dates": sorted(explicit_dates), "feed_timestamp_dates": sorted(feed_dates), "explicit_date_match": night_date in explicit_dates, "feed_timestamp_compatible": timestamp_compatible, "feed_timestamp_exact_date": exact_feed_date, "promotion_support": str(event.get("promotion") or "").lower() in blob},
             }
             matches.append((score, metadata))
     matches.sort(key=lambda item: item[0], reverse=True)
