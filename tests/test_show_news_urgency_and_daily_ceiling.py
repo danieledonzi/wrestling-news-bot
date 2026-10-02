@@ -242,6 +242,7 @@ def test_same_run_weekly_report_publication_disables_urgency(monkeypatch, tmp_pa
         run_id="run",
         observation_timestamp="2026-10-02T05:40:00+00:00",
         preserve_active_metadata=True,
+        same_run_published_weekly_ids={"aew_dynamite"},
     )
 
     assert diagnostic is None
