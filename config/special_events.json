@@ -87,6 +87,7 @@
       "promotion": "WWE",
       "brand": "Raw/SmackDown",
       "event_name": "SummerSlam",
+      "timezone": "America/Chicago",
       "event_type": "PLE",
       "priority": "major",
       "status": "confirmed",
