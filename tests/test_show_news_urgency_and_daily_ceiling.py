@@ -120,9 +120,9 @@ def test_expired_or_outranked_softpool_show_news_is_not_promoted(monkeypatch, tm
 def test_consecutive_event_results_use_event_local_date_not_utc_date():
     registry, _ = load_effective_registry(now=datetime(2026, 8, 2, tzinfo=timezone.utc))
     entry = {
-        "source": "RingsideNews",
+        "source": "WrestlingInc",
         "title": "SummerSlam Results",
-        "url": "https://ringsidenews.test/summerslam-results-generic",
+        "url": "https://wrestlinginc.test/summerslam-results-generic",
         "published": "2026-08-02T02:00:00Z",
     }
 
@@ -230,6 +230,41 @@ def test_publisher_hard_ceiling_attempts_no_news_at_thirty(monkeypatch):
     assert blocked["editorial_director"] == provenance["editorial_director"]
     assert blocked["scheduling_override"] == provenance["scheduling_override"]
 
+
+
+def test_alfred_preserves_show_news_urgency_override(monkeypatch):
+    override = {"reason": "show_news_urgency_pre_report"}
+    monkeypatch.setattr("agents.alfred.language_escape_evidence", lambda *args, **kwargs: {
+        "body_likely_untranslated": False,
+        "body_substantially_unchanged": False,
+        "title_likely_untranslated": False,
+        "exact_body_unchanged": False,
+        "near_identical_body": False,
+        "source_output_similarity": 0.0,
+        "residual_english_body": False,
+    })
+    monkeypatch.setattr("agents.alfred.excerpt_translation_evidence", lambda *args, **kwargs: {
+        "excerpt_likely_untranslated": False,
+        "excerpt_residual_english": False,
+    })
+    article = {
+        "status": "ready_for_alfred",
+        "source_url": "https://example.test/urgent",
+        "source": "feed",
+        "source_title": "Source",
+        "title_it": "Titolo italiano",
+        "body_html": "<p>" + ("Testo italiano " * 40) + "</p>",
+        "excerpt_it": "Estratto italiano",
+        "category_hint": "AEW",
+        "elements": [{"block_id": "p1", "type": "text", "text": "Source body"}],
+        "element_counts": {"text": 1, "quote": 0, "table": 0},
+        "scheduling_override": override,
+    }
+
+    reviewed = __import__("agents.alfred", fromlist=["review_article"]).review_article(article)
+
+    assert reviewed["decision"] == "approved"
+    assert reviewed["approved_article"]["scheduling_override"] == override
 
 
 def test_bob_package_preserves_show_news_urgency_override(monkeypatch):
