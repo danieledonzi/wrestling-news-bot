@@ -178,6 +178,52 @@ def test_rome_calendar_day_not_rolling_24_hours_and_reports_excluded():
     assert published_news_today_local(records, now=now) == 1
 
 
+def test_active_projection_keeps_urgency_overflow_pending_at_bob_capacity(monkeypatch, tmp_path):
+    snapshot = shadow.capture_opportunity(
+        {"news_candidates_for_menzo": []},
+        run_id="run",
+        observation_timestamp="now",
+        published_news_today_local=0,
+        history=[],
+    )
+    snapshot["remaining_slots"] = 30
+    snapshot["candidates"] = []
+    snapshot["_active_bob_capacity_metadata"] = {}
+    decisions = []
+    for index in range(6):
+        cid = f"urgent-{index}"
+        row = {
+            "candidate_id": cid,
+            "source": "feed",
+            "title": f"Urgent {index}",
+            "url": f"https://example.test/urgent-{index}",
+            "summary": "fact",
+            "show_report_id": "aew_dynamite",
+            "corresponding_report_published": False,
+        }
+        snapshot["candidates"].append(row)
+        snapshot["_active_bob_capacity_metadata"][cid] = {
+            "show_report_id": "aew_dynamite",
+            "corresponding_report_published": False,
+        }
+        decisions.append({
+            "candidate_id": cid,
+            "editorial_class": "SHOULD_PUBLISH",
+            "recommended_action": "DEFER",
+            "category": "AEW",
+            "story_core": f"Urgent {index}",
+        })
+
+    for name in ("SOFTPOOL_FILE", "HARD_SKIP_FILE", "MENZO_DECISIONS_FILE", "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE"):
+        monkeypatch.setattr(menzo, name, tmp_path / f"{name}.json")
+
+    projected = active.project(snapshot, {"output": {"candidates": decisions, "relations": []}})
+
+    assert len(projected["selected"]) == 5
+    assert len(projected["pending"]) == 1
+    assert projected["postprocess"]["show_news_urgency_promoted"] == 5
+
+
 def test_ceiling_and_urgency_share_available_slots_in_director_order():
     assert remaining_news_slots(30) == 0
     result = projection(candidate("First", show_report_id="aew_dynamite"),
