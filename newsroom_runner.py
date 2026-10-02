@@ -398,6 +398,16 @@ def capture_editorial_director_opportunity(massy_board: dict[str, Any], *, run_i
     from modules.simone_report_integrity import PENDING_REPORTS
     from agents.simone_publisher_v93_18 import SIMONE_REPORT_HISTORY_FILE
     special_rows = load_json(PENDING_REPORTS, {"reports": []}).get("reports", [])
+    # Massy's published_due_reports snapshot predates Simone in this run. Refresh
+    # weekly publication identity from Simone's persisted queue after publication
+    # so same-run reports cannot leave stale pre-report urgency enabled.
+    published_weekly_ids.update(
+        str(row.get("report_id"))
+        for row in special_rows
+        if isinstance(row, dict)
+        and row.get("report_id")
+        and row.get("status") in {"published", "already_published"}
+    )
     special_history = load_json(SIMONE_REPORT_HISTORY_FILE, {})
     published_report_keys = set(special_history) if isinstance(special_history, dict) else set()
     published_report_keys.update(str(row.get("report_key")) for row in special_rows
