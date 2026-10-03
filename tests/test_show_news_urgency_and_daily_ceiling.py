@@ -117,6 +117,43 @@ def test_expired_or_outranked_softpool_show_news_is_not_promoted(monkeypatch, tm
     assert projected["postprocess"]["show_news_urgency_promoted"] == 0
 
 
+def test_fresh_runtime_registry_rehydrates_missing_curated_timezone(monkeypatch, tmp_path):
+    from modules import simone_report_integrity as sri
+
+    seed_path = tmp_path / "special_events.json"
+    effective_path = tmp_path / "special_events_registry_runtime.json"
+    seed_path.write_text(json.dumps({
+        "events": [{
+            "key": "wwe_summerslam_2026",
+            "event_name": "SummerSlam",
+            "timezone": "America/Chicago",
+            "status": "confirmed",
+            "nights": [{"night_key": "night1", "date_local": "2026-08-01", "enabled": True}],
+        }]
+    }), encoding="utf-8")
+    effective_path.write_text(json.dumps({
+        "refreshed_at_utc": "2026-08-02T00:00:00+00:00",
+        "events": [{
+            "key": "wwe_summerslam_2026",
+            "event_name": "SummerSlam",
+            "status": "confirmed",
+            "nights": [{"night_key": "night1", "date_local": "2026-08-01", "enabled": True}],
+        }]
+    }), encoding="utf-8")
+
+    monkeypatch.setattr(sri, "SEED_REGISTRY", seed_path)
+    monkeypatch.setattr(sri, "EFFECTIVE_REGISTRY", effective_path)
+
+    registry, diag = sri.load_effective_registry(
+        now=datetime(2026, 8, 2, 0, 5, tzinfo=timezone.utc)
+    )
+
+    assert diag["refresh_status"] == "fresh_cache"
+    assert registry["events"][0]["timezone"] == "America/Chicago"
+    persisted = json.loads(effective_path.read_text(encoding="utf-8"))
+    assert persisted["events"][0]["timezone"] == "America/Chicago"
+
+
 def test_consecutive_event_results_use_event_local_date_not_utc_date():
     registry, _ = load_effective_registry(now=datetime(2026, 8, 2, tzinfo=timezone.utc))
     entry = {
@@ -179,6 +216,7 @@ def test_rome_calendar_day_not_rolling_24_hours_and_reports_excluded():
 
 
 def test_active_projection_keeps_urgency_overflow_pending_at_bob_capacity(monkeypatch, tmp_path):
+    monkeypatch.setattr(bob, "report_was_published_or_attempted", lambda: False)
     snapshot = shadow.capture_opportunity(
         {"news_candidates_for_menzo": []},
         run_id="run",
