@@ -179,6 +179,7 @@ def _generate_schedule_artifact() -> Path:
 
 def load_effective_registry(now: datetime | None = None) -> tuple[dict[str, Any], dict[str, Any]]:
     now = now or datetime.now(timezone.utc)
+    seed = _load(SEED_REGISTRY, {})
     prior = _load(EFFECTIVE_REGISTRY, {})
     refreshed = str(prior.get("refreshed_at_utc") or "") if isinstance(prior, dict) else ""
     try:
@@ -186,8 +187,30 @@ def load_effective_registry(now: datetime | None = None) -> tuple[dict[str, Any]
     except Exception:
         age = REFRESH_INTERVAL + timedelta(seconds=1)
     if isinstance(prior, dict) and prior.get("events") and age < REFRESH_INTERVAL:
+        # A fresh runtime cache can predate newly curated static metadata (for example
+        # an event timezone). Rehydrate only missing non-runtime fields from the seed
+        # so cached schedule/state remains authoritative while new curated metadata is
+        # immediately available after a deploy.
+        seed_events = {
+            str(event.get("key")): event
+            for event in seed.get("events", []) if isinstance(event, dict) and event.get("key")
+        } if isinstance(seed, dict) else {}
+        runtime_owned = {"status", "nights", "venue", "location", "source", "last_verified_at_utc"}
+        changed = False
+        for event in prior.get("events", []):
+            if not isinstance(event, dict):
+                continue
+            curated = seed_events.get(str(event.get("key") or ""))
+            if not isinstance(curated, dict):
+                continue
+            for field, value in curated.items():
+                if field in runtime_owned or value is None or field in event:
+                    continue
+                event[field] = copy.deepcopy(value)
+                changed = True
+        if changed:
+            _write(EFFECTIVE_REGISTRY, prior)
         return prior, {"effective_registry_source": "prior_runtime_state", "refresh_status": "fresh_cache", "artifact_generated_at_utc": prior.get("artifact_generated_at_utc")}
-    seed = _load(SEED_REGISTRY, {})
     files = _schedule_files()
     artifact: Path | None = None
     artifact_generated_at: datetime | None = None
