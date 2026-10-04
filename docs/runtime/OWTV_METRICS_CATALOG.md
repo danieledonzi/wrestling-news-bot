@@ -2,13 +2,15 @@
 
 ## 1. General contract
 
-This measurement-only contract inventories the semantics that already exist; it does not change newsroom decisions, prompts, routing, scoring, thresholds, retries, publishing, scheduling, state, retention, or the v95.21.1 pair matrix. The normative machine-readable representation is `config/metrics_catalog_v1.json` (`owtv_metrics_catalog_v1`, policy `v96.4_telemetry_authority_convergence`). The frozen v95.19 names and meanings remain intact. A dotted name identifies a semantic metric, not every numeric runtime field.
+This measurement-only contract inventories the semantics that already exist; it does not change newsroom decisions, prompts, routing, scoring, thresholds, retries, publishing, scheduling, state, retention, or the v95.21.1 pair matrix. The normative machine-readable representation is `config/metrics_catalog_v1.json` (`owtv_metrics_catalog_v1`, policy `v96.5_pr2_missing_telemetry_closure`). The frozen v95.19 names and meanings remain intact. A dotted name identifies a semantic metric, not every numeric runtime field.
 
 ### Authority convergence
 
 Active telemetry has exactly one primary authority family. Newsroom/run/editorial/publication lifecycle metrics use `state/newsroom/canonical_event_ledger.jsonl`; provider usage/token/model/price/cost metrics use `state/newsroom/gemini_call_ledger.jsonl`; retained-material authority belongs to `state/newsroom/canonical_artifact_index.jsonl`. `master_log.jsonl`, latest snapshots, handoff counters, and specialized one-run artifacts remain diagnostic/compatibility evidence and may not be promoted to primary authority for an active metric. Incomplete canonical coverage is `null`/`n.d.`, never replaced by a legacy zero or fallback total.
 
 The machine catalog records this boundary in each metric's `authority_family`. The validator rejects active metrics assigned to `diagnostic_legacy` or backed by `master_log` as primary authority.
+
+PR2 closes retained telemetry for the PR131 duplicate-pair cache, Bob item-level terminal generation failures, and Simone already-present report outcomes. PR131 cache behavior is authoritative at pair grain in the canonical event ledger; real provider attempts, exact avoided logical calls, and observed cost remain authoritative in the Gemini ledger. A pair cache hit is never interpreted as one provider call saved, and counterfactual dollar savings are not synthesized.
 
 Runtime data, events, attempts, final results, diagnostic aggregates, canonical metrics, and legacy aliases are distinct classes. `active` means the current architecture supports the stated formula and authority. `diagnostic_only` is observable but unsuitable as an authoritative editorial-window outcome. `planned` is intentionally not synthesized.
 
@@ -51,6 +53,7 @@ Each JSON row has exactly one `source_primary`. `source_secondary` entries are e
 | `gemini.gemini_3_5_failures` | Gemini 3.5 ledger rows with status failed; completed does not imply semantic success. | `state/newsroom/gemini_call_ledger.jsonl` | filter bounded rows to model name containing 3.5 and status failed; count |
 | `gemini.gemini_3_5_avoided_calls` | Gemini 3.5 ledger rows with status avoided; completed does not imply semantic success. | `state/newsroom/gemini_call_ledger.jsonl` | filter bounded rows to model name containing 3.5 and status avoided; count |
 | `simone.reports_published` | Unique authoritative published reports. | `state/newsroom/canonical_event_ledger.jsonl` | distinct canonical report identity across validated Simone report_published events in the requested window; count |
+| `simone.already_present_events` | Reports observed as already present by Simone publication flow. | `state/newsroom/canonical_event_ledger.jsonl` | count validated Simone report_already_present events; count |
 | `publisher.publications_unique` | Unique successful news publications. | `state/newsroom/canonical_event_ledger.jsonl` | distinct content_id across validated Publisher publication_completed events in the requested window; count |
 | `andrea.checked_occurrences` | Canonical Andrea checked occurrences. | `state/newsroom/canonical_event_ledger.jsonl` | count validated content_sufficiency_checked events at checked grain; count |
 | `andrea.checked_content` | Unique content at canonical Andrea checked grain. | `state/newsroom/canonical_event_ledger.jsonl` | distinct content_id across validated checked events; count |
@@ -74,6 +77,16 @@ Each JSON row has exactly one `source_primary`. `source_secondary` entries are e
 | `editorial_director_shadow.provider_attempts` | ED-1 Shadow diagnostic metric with explicit unknown and coverage semantics. | `state/newsroom/gemini_call_ledger.jsonl` | count v3 real attempts for workload editorial_director_shadow; count |
 | `editorial_director_shadow.cost_complete` | ED-1 Shadow diagnostic metric with explicit unknown and coverage semantics. | `state/newsroom/gemini_call_ledger.jsonl` | sum resolved v3 cost only when every attempt has cost coverage; currency |
 | `editorial_director_shadow.cost_per_evaluated_candidate_occurrence` | ED-1 Shadow diagnostic metric with explicit unknown and coverage semantics. | `state/newsroom/gemini_call_ledger.jsonl` | complete cost divided by nonzero primary candidate occurrences; currency/candidate occurrence |
+| `pr131.cache_lookups` | PR131 persistent duplicate-pair cache lookup volume. | `state/newsroom/canonical_event_ledger.jsonl` | count validated Menzo duplicate_pair_cache_lookup events; count |
+| `pr131.cache_hits` | PR131 validated pair-result cache hits. | `state/newsroom/canonical_event_ledger.jsonl` | count validated Menzo duplicate_pair_cache_lookup events where result == hit; count |
+| `pr131.cache_misses` | PR131 cache misses requiring fresh duplicate-pair evaluation. | `state/newsroom/canonical_event_ledger.jsonl` | count validated Menzo duplicate_pair_cache_lookup events where result == miss; count |
+| `pr131.cache_hit_rate` | PR131 pair-level hit rate; not a provider-call avoidance rate. | `state/newsroom/canonical_event_ledger.jsonl` | pr131.cache_hits / pr131.cache_lookups; null when lookups == 0 or PR131 coverage is incomplete; ratio |
+| `pr131.entries_stored` | Validated PR131 pair results successfully persisted. | `state/newsroom/canonical_event_ledger.jsonl` | count validated Menzo duplicate_pair_cache_stored events; count |
+| `pr131.store_failures` | Fail-open persistent-cache write failures. | `state/newsroom/canonical_event_ledger.jsonl` | count Menzo duplicate_pair_cache_store_failed events; count |
+| `pr131.gemini_calls_avoided` | Exact logical provider calls avoided by PR131; pair hits are not treated as calls. | `state/newsroom/gemini_call_ledger.jsonl` | count Gemini ledger rows where agent == Menzo and status == avoided and reason starts with pr131_duplicate_pair_cache_; count |
+| `pr131.duplicate_workload_real_attempts` | Actual duplicate gate + confirmation provider attempts. | `state/newsroom/gemini_call_ledger.jsonl` | count Gemini ledger called/failed rows for editorial_director_duplicate_gate or editorial_director_duplicate_confirmation workload; count |
+| `pr131.duplicate_workload_actual_cost` | Actual observed duplicate-workload cost; counterfactual dollars saved are intentionally not estimated. | `state/newsroom/gemini_call_ledger.jsonl` | sum authoritative estimated_cost for duplicate gate/confirmation real attempts only when every such attempt has computed cost; USD |
+| `bob.item_failures` | Canonical Bob item-level failures with typed reason codes. | `state/newsroom/canonical_event_ledger.jsonl` | count validated Bob article_generation_failed events; count |
 
 ## 5. Partially available and diagnostic metrics
 
@@ -122,7 +135,6 @@ These rows expose real signals but not a complete authoritative editorial-window
 | `gemini.cost_coverage` | source_dependent | Coverage describes metadata availability, not token or cost completeness for legacy rows. |
 | `simone.report_candidates_found` | partially_available | Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic. |
 | `simone.reports_ready` | partially_available | Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic. |
-| `simone.already_present_events` | partially_available | Report already-present outcomes are not encoded by event schema v1; master handoff counters remain diagnostic until telemetry closure. |
 | `simone.legacy_errors_diagnostic` | partially_available | Never substitute for simone.terminal_errors. |
 | `publisher.publication_attempts` | partially_available | Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic. |
 | `publisher.already_present_events` | partially_available | Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic. |
