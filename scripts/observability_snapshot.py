@@ -874,6 +874,10 @@ def _canonical_event_sections(rows: list[dict[str, Any]], since: datetime, until
 
     bob_item_coverage, bob_item_reason = event_cutover_coverage("bob_generation_cycle")
     bob_failures = [r for r in by_type.get("article_generation_failed", []) if r.get("agent") == "Bob"]
+    bob_cycle_failures = [
+        r for r in by_type.get("bob_generation_cycle", [])
+        if r.get("agent") == "Bob" and r.get("status") == "failed"
+    ]
     bob_reason_counts = Counter(str(r.get("reason_code") or "unknown") for r in bob_failures)
     bob_logical = [
         r for r in by_type.get("logical_ai_request_created", [])
@@ -1149,7 +1153,8 @@ def _canonical_event_sections(rows: list[dict[str, Any]], since: datetime, until
                 bob_reason_counts.get("extraction_empty", 0) if bob_item_coverage == "full" else None
             ),
             "packages_errors": (
-                bob_reason_counts.get("bob_package_error", 0) if bob_item_coverage == "full" else None
+                bob_reason_counts.get("bob_package_error", 0) + len(bob_cycle_failures)
+                if bob_item_coverage == "full" else None
             ),
             "recoverable_item_failures": (
                 sum(1 for r in bob_failures if r.get("error_terminal") is False)
@@ -1212,7 +1217,11 @@ def _canonical_event_sections(rows: list[dict[str, Any]], since: datetime, until
             "preflight_successes": len(wordpress_completed) if wordpress_coverage == "full" else None,
             "endpoint_probes": len(wordpress_probes) if wordpress_coverage == "full" else None,
             "terminal_failures": len(wordpress_failed) if wordpress_coverage == "full" else None,
-            "timeouts": wordpress_reason_counts.get("wordpress_timeout", 0) if wordpress_coverage == "full" else None,
+            "timeouts": sum(
+                1 for row in wordpress_probes
+                if row.get("status") == "failed"
+                and row.get("reason_code") == "wordpress_timeout"
+            ) if wordpress_coverage == "full" else None,
             "http_errors": sum(
                 1 for row in wordpress_probes
                 if row.get("status") == "failed"
@@ -1221,7 +1230,11 @@ def _canonical_event_sections(rows: list[dict[str, Any]], since: datetime, until
                     or str(row.get("reason_code") or "").startswith("wp_status_")
                 )
             ) if wordpress_coverage == "full" else None,
-            "dns_errors": wordpress_reason_counts.get("wordpress_dns_error", 0) if wordpress_coverage == "full" else None,
+            "dns_errors": sum(
+                1 for row in wordpress_probes
+                if row.get("status") == "failed"
+                and row.get("reason_code") == "wordpress_dns_error"
+            ) if wordpress_coverage == "full" else None,
             "reason_codes": dict(sorted(wordpress_reason_counts.items())) if wordpress_coverage != "unavailable" else {},
         },
         "ai_operations": ai,
