@@ -133,13 +133,35 @@ def test_pr131_read_model_full_coverage_keeps_pair_and_call_grains_distinct():
             "timestamp": (NOW - timedelta(minutes=40)).isoformat(),
             "agent": "Menzo", "status": "called",
             "workload": "editorial_director_duplicate_gate",
-            "provider_attempt_id": "a1", "estimated_cost": "0.0012",
+            "ledger_schema_version": "v3",
+            "provider_attempt_id": "a1",
+            "usage_contract_version": "v96.2",
+            "pricing_formula_version": "v96.2",
+            "pricing_currency": "USD",
+            "price_table_version": "test",
+            "cost_resolution_status": "resolved",
+            "computed_list_price_cost": "0.0012",
+            "computed_non_cached_input_cost": "0.0012",
+            "computed_cached_input_cost": "0",
+            "computed_candidate_output_cost": "0",
+            "computed_thinking_cost": "0",
         },
         {
             "timestamp": (NOW - timedelta(minutes=30)).isoformat(),
             "agent": "Menzo", "status": "called",
             "workload": "editorial_director_duplicate_confirmation",
-            "provider_attempt_id": "a2", "estimated_cost": "0.0008",
+            "ledger_schema_version": "v3",
+            "provider_attempt_id": "a2",
+            "usage_contract_version": "v96.2",
+            "pricing_formula_version": "v96.2",
+            "pricing_currency": "USD",
+            "price_table_version": "test",
+            "cost_resolution_status": "resolved",
+            "computed_list_price_cost": "0.0008",
+            "computed_non_cached_input_cost": "0.0008",
+            "computed_cached_input_cost": "0",
+            "computed_candidate_output_cost": "0",
+            "computed_thinking_cost": "0",
         },
     ]
     result, meta = build_pr131_cache_metrics(
@@ -159,6 +181,24 @@ def test_pr131_read_model_full_coverage_keeps_pair_and_call_grains_distinct():
     assert result["provider"]["duplicate_confirmation_real_attempts"] == 1
     assert result["provider"]["known_actual_cost"] == "0.0020"
     assert result["diagnostic_mismatches"] == []
+
+
+def test_pr131_legacy_estimated_cost_is_not_promoted_to_authoritative_cost():
+    rows = [event("duplicate_pair_cache_observed", ts=SINCE - timedelta(minutes=1), result="loaded")]
+    gemini = [{
+        "timestamp": (NOW - timedelta(minutes=30)).isoformat(),
+        "agent": "Menzo", "status": "called",
+        "workload": "editorial_director_duplicate_gate",
+        "provider_attempt_id": "legacy",
+        "estimated_cost": "0.0042",
+    }]
+    result, _ = build_pr131_cache_metrics(
+        rows, gemini, SINCE, NOW,
+        pr2_coverage="full", pr2_reason=None, gemini_available=True,
+    )
+    assert result["provider"]["known_actual_cost"] is None
+    assert result["provider"]["known_cost_attempts"] == 0
+    assert result["provider"]["cost_coverage"] == 0.0
 
 
 def test_pr131_partial_coverage_never_turns_observed_counts_into_authoritative_zeroes():
