@@ -384,3 +384,72 @@ def test_newsroom_runner_initialization_failure_is_fail_open(tmp_path, monkeypat
     diagnostic = summary["canonical_event_ledger"]
     assert diagnostic["enabled"] is False and diagnostic["unavailable"] is True
     assert "forced init failure" in diagnostic["initialization_error"]
+
+
+def test_pr2_cache_observer_emits_pair_grain_and_store_failure(tmp_path):
+    ledger = CanonicalEventLedger("run-pr2", tmp_path / "ledger.jsonl")
+    ledger.observe_pr131_cache({
+        "duplicate_pair_cache_load_status": "loaded",
+        "duplicate_pair_cache_hit_pair_ids": ["pair-hit"],
+        "duplicate_pair_cache_miss_pair_ids": ["pair-miss"],
+        "duplicate_pair_cache_stored_pair_ids": ["pair-miss"],
+        "duplicate_pair_cache_store_status": "failed",
+    })
+    output = rows(ledger.path)
+    assert [row["event_type"] for row in output] == [
+        "duplicate_pair_cache_observed",
+        "duplicate_pair_cache_lookup",
+        "duplicate_pair_cache_lookup",
+        "duplicate_pair_cache_stored",
+        "duplicate_pair_cache_store_failed",
+    ]
+    lookups = [row for row in output if row["event_type"] == "duplicate_pair_cache_lookup"]
+    assert {(row["pair_id"], row["result"]) for row in lookups} == {
+        ("pair-hit", "hit"), ("pair-miss", "miss")
+    }
+    stored = next(row for row in output if row["event_type"] == "duplicate_pair_cache_stored")
+    assert stored["pair_id"] == "pair-miss"
+    failed = output[-1]
+    assert failed["error_class"] == "storage"
+    assert failed["error_terminal"] is False
+
+
+@pytest.mark.parametrize("status,reason,error_class", [
+    ("translation_validation_failed", "translation_validation_failed", "validation"),
+    ("extraction_empty", "extraction_empty", "validation"),
+    ("error", "bob_generation_error", "internal"),
+])
+def test_pr2_bob_item_failure_events_are_typed(tmp_path, status, reason, error_class):
+    ledger = CanonicalEventLedger("run-pr2", tmp_path / f"{status}.jsonl")
+    ledger.observe_bob_generated({"articles": [{
+        "source_url": f"https://example.test/{status}",
+        "status": status,
+    }]})
+    output = rows(ledger.path)
+    assert len(output) == 1
+    assert output[0]["event_type"] == "article_generation_failed"
+    assert output[0]["reason_code"] == reason
+    assert output[0]["error_class"] == error_class
+    assert output[0]["error_terminal"] is True
+
+
+def test_pr2_bob_translation_pending_is_not_misclassified_as_failure(tmp_path):
+    ledger = CanonicalEventLedger("run-pr2", tmp_path / "pending.jsonl")
+    ledger.observe_bob_generated({"articles": [{
+        "source_url": "https://example.test/pending",
+        "status": "extraction_ready_translation_pending",
+    }]})
+    assert not ledger.path.exists()
+
+
+def test_pr2_simone_already_present_is_canonical_report_event(tmp_path):
+    ledger = CanonicalEventLedger("run-pr2", tmp_path / "simone.jsonl")
+    ledger.observe_simone({}, {"results": [{
+        "report_key": "wwe_raw_2026_10_04",
+        "status": "already_published",
+    }]})
+    output = rows(ledger.path)
+    assert len(output) == 1
+    assert output[0]["event_type"] == "report_already_present"
+    assert output[0]["report_key"] == "wwe_raw_2026_10_04"
+    assert output[0]["reason_code"] == "already_published"
