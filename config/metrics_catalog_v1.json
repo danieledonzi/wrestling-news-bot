@@ -4120,7 +4120,7 @@
       "entity_counted": "logical AI requests",
       "unit": "count",
       "cardinality": "one scalar per requested window",
-      "authority_level": "contractual",
+      "authority_level": "canonical",
       "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
       "source_secondary": [],
       "producer_paths": [
