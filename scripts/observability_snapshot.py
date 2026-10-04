@@ -15,6 +15,7 @@ import subprocess
 import sys
 from collections import Counter, defaultdict
 from datetime import datetime, timedelta, timezone
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Any, Iterable
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
@@ -1313,6 +1314,91 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
         and gemini_health["undated_rows"] == 0
     )
     gemini = build_gemini_diagnostics(gemini_records, cache_path=root / "state/newsroom/menzo_duplicate_arbitration_cache_v2.json", menzo_decisions_paths=(), economic_available=gemini_available)
+
+    pr131_workloads = {
+        "editorial_director_duplicate_gate",
+        "editorial_director_duplicate_confirmation",
+    }
+    pr131_provider_rows = [
+        row for row in gemini_records
+        if row.get("agent") == "Menzo" and row.get("workload") in pr131_workloads
+    ]
+    pr131_provider_real = [
+        row for row in pr131_provider_rows if row.get("status") in {"called", "failed"}
+    ]
+    pr131_provider_called = [row for row in pr131_provider_rows if row.get("status") == "called"]
+    pr131_provider_failed = [row for row in pr131_provider_rows if row.get("status") == "failed"]
+    pr131_provider_avoided = [
+        row for row in pr131_provider_rows
+        if row.get("status") == "avoided"
+        and row.get("reason") in {
+            "pr131_duplicate_pair_cache_all_hit",
+            "pr131_duplicate_confirmation_cache_all_hit",
+        }
+    ]
+    pr131_gate_called = [
+        row for row in pr131_provider_called
+        if row.get("workload") == "editorial_director_duplicate_gate"
+    ]
+    pr131_confirmation_called = [
+        row for row in pr131_provider_called
+        if row.get("workload") == "editorial_director_duplicate_confirmation"
+    ]
+    pr131_resolved_cost_rows = [
+        row for row in pr131_provider_real
+        if row.get("cost_resolution_status") == "resolved"
+        and row.get("computed_list_price_cost") is not None
+    ]
+    pr131_known_cost = Decimal(0)
+    pr131_cost_parse_errors = 0
+    for row in pr131_resolved_cost_rows:
+        try:
+            pr131_known_cost += Decimal(str(row.get("computed_list_price_cost")))
+        except (InvalidOperation, TypeError, ValueError):
+            pr131_cost_parse_errors += 1
+    pr131_cost_resolved = (
+        len(pr131_resolved_cost_rows) - pr131_cost_parse_errors
+    )
+    pr131_cost_coverage = (
+        pr131_cost_resolved / len(pr131_provider_real)
+        if pr131_provider_real else (1.0 if gemini_available else None)
+    )
+    pr131_complete_cost = (
+        format(pr131_known_cost, "f")
+        if gemini_available
+        and pr131_cost_coverage == 1.0
+        else None
+    )
+    pr131_provider = {
+        "available": gemini_available,
+        "source": "state/newsroom/gemini_call_ledger.jsonl",
+        "real_attempts": len(pr131_provider_real) if gemini_available else None,
+        "called": len(pr131_provider_called) if gemini_available else None,
+        "failed": len(pr131_provider_failed) if gemini_available else None,
+        "gate_calls_executed": len(pr131_gate_called) if gemini_available else None,
+        "confirmation_calls_executed": len(pr131_confirmation_called) if gemini_available else None,
+        "explicit_avoided_rows": len(pr131_provider_avoided) if gemini_available else None,
+        "known_computed_list_price_cost": (
+            format(pr131_known_cost, "f") if gemini_available else None
+        ),
+        "complete_window_computed_list_price_cost": pr131_complete_cost,
+        "computed_cost_coverage": pr131_cost_coverage,
+        "currency": (
+            next(
+                (
+                    row.get("pricing_currency")
+                    for row in pr131_resolved_cost_rows
+                    if row.get("pricing_currency")
+                ),
+                (gemini.get("economic") or {}).get("currency")
+                if isinstance(gemini.get("economic"), dict)
+                else None,
+            )
+            if gemini_available else None
+        ),
+        "counterfactual_cost_avoided": None,
+        "counterfactual_cost_note": "not_computed_calls_avoided_are_exact_cost_avoided_is_counterfactual",
+    }
     if not gemini_available:
         for key in ("real_attempts", "completed_calls", "completed_successful_calls", "failures", "avoided_calls", "fallbacks",
                     "gemini_3_5_attempts", "gemini_3_5_completed_calls", "gemini_3_5_completed_successful_calls", "gemini_3_5_failures", "gemini_3_5_avoided_calls"):
@@ -1349,6 +1435,7 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
         p1_1_coverage = p1_3_coverage = active_ai_coverage = "unavailable"
         p1_1_reason = p1_3_reason = active_ai_reason = integrity_reason
     canonical = _canonical_event_sections(canonical_rows, since, until, coverages)
+    canonical.setdefault("pr131_duplicate_pair_cache", {})["provider"] = pr131_provider
     if integrity_reason:
         canonical = _without_authoritative_numbers(canonical)
         if canonical_malformed:
