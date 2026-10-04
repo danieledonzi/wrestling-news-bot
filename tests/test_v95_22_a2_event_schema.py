@@ -149,11 +149,17 @@ def test_legacy_gemini_phases_use_observed_callers_not_gemini():
     assert_rejected(lambda d: _legacy_phase(d, "Menzo", "duplicate_arbitration").update(legacy_agent="Gemini"), "observed runtime callers")
 
 
+def test_pr2_failure_events_use_typed_error_contract():
+    data = load()
+    rule = next(x for x in data["envelope"]["conditional_requirements"] if x["id"] == "failed_error")
+    assert {"article_generation_failed", "duplicate_pair_cache_store_failed"} <= set(rule["when_event_types"])
+
+
 def test_duplicate_pair_events_conditionally_require_pair_id():
     data = load()
     assert {"article_id", "pair_id"} <= {x["name"] for x in data["envelope"]["fields"]}
     rule = next(x for x in data["envelope"]["conditional_requirements"] if x["id"] == "duplicate_pair_identity")
-    assert set(rule["when_event_types"]) == {"duplicate_pair_evaluated", "duplicate_pair_resolved", "duplicate_pair_unresolved"}
+    assert set(rule["when_event_types"]) == {"duplicate_pair_evaluated", "duplicate_pair_resolved", "duplicate_pair_unresolved", "duplicate_pair_cache_lookup", "duplicate_pair_cache_stored"}
     assert "pair_id" in rule["require"]
     assert_rejected(lambda d: next(x for x in d["envelope"]["conditional_requirements"] if x["id"] == "duplicate_pair_identity")["require"].remove("pair_id"), "duplicate_pair_identity has incompatible require")
 
