@@ -183,6 +183,44 @@ def test_pr131_read_model_full_coverage_keeps_pair_and_call_grains_distinct():
     assert result["diagnostic_mismatches"] == []
 
 
+def test_pr131_duplicate_provider_attempt_ids_fail_closed_for_attempts_and_cost():
+    rows = [event("duplicate_pair_cache_observed", ts=SINCE - timedelta(minutes=1), result="loaded")]
+    base = {
+        "timestamp": (NOW - timedelta(minutes=30)).isoformat(),
+        "agent": "Menzo",
+        "status": "called",
+        "workload": "editorial_director_duplicate_gate",
+        "ledger_schema_version": "v3",
+        "provider_attempt_id": "dup-attempt",
+        "usage_contract_version": "v96.2_usage.v1",
+        "pricing_formula_version": "v96.2_cost.v1",
+        "pricing_currency": "USD",
+        "price_table_version": "test",
+        "cost_resolution_status": "resolved",
+        "computed_list_price_cost": "0.0010",
+        "computed_non_cached_input_cost": "0.0010",
+        "computed_cached_input_cost": "0",
+        "computed_candidate_output_cost": "0",
+        "computed_thinking_cost": "0",
+    }
+    result, meta = build_pr131_cache_metrics(
+        rows, [dict(base), dict(base)], SINCE, NOW,
+        pr2_coverage="full", pr2_reason=None, gemini_available=True,
+    )
+    provider = result["provider"]
+    assert meta["complete_window"] is True
+    assert provider["provider_integrity_available"] is False
+    assert provider["duplicate_provider_attempt_ids"] == {"dup-attempt": 2}
+    assert provider["duplicate_gate_real_attempts"] is None
+    assert provider["duplicate_workload_real_attempts"] is None
+    assert provider["known_actual_cost"] is None
+    assert provider["cost_coverage"] is None
+    assert provider["observed_duplicate_workload_real_attempts"] == 2
+    assert result["diagnostic_mismatches"] == [
+        "pr131_duplicate_provider_attempt_ids:dup-attempt=2"
+    ]
+
+
 def test_pr131_legacy_estimated_cost_is_not_promoted_to_authoritative_cost():
     rows = [event("duplicate_pair_cache_observed", ts=SINCE - timedelta(minutes=1), result="loaded")]
     gemini = [{
