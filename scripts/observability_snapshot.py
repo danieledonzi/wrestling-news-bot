@@ -1362,7 +1362,7 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
     pr131_cost_coverage = (
         (pr131_cost_resolved / len(pr131_provider_real))
         if gemini_available and pr131_provider_real
-        else (1.0 if gemini_available else None)
+        else (1.0 if gemini_available and not pr131_provider_real else None)
     )
     pr131_complete_cost = (
         format(pr131_known_cost, "f")
