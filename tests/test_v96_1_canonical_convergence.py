@@ -362,3 +362,23 @@ def test_pr131_all_hit_cycle_counts_explicit_logical_request_avoidance_separatel
     assert result["gate_logical_requests_avoided"] == 1
     assert result["confirmation_logical_requests_avoided"] == 1
     assert result["duplicate_stage_logical_requests_avoided"] == 2
+
+
+def test_wordpress_http_errors_exclude_successful_endpoint_statuses():
+    marker = event("wordpress_preflight_attempted", "Publisher", "preflight")
+    marker["timestamp_utc"] = NOW.replace(day=19, hour=23, minute=59).isoformat()
+    rows = [
+        marker,
+        {**event("wordpress_endpoint_probe", "Simone", "ok-200"),
+         "status": "success", "reason_code": "wp_status_200"},
+        {**event("wordpress_endpoint_probe", "Simone", "ok-401"),
+         "status": "success", "reason_code": "wp_status_401"},
+        {**event("wordpress_endpoint_probe", "Simone", "bad-500"),
+         "status": "failed", "reason_code": "wp_status_500"},
+    ]
+
+    result = canonical(rows)["wordpress"]
+
+    assert result["coverage"] == "full"
+    assert result["endpoint_probes"] == 3
+    assert result["http_errors"] == 1
