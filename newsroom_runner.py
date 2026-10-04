@@ -499,8 +499,16 @@ def main() -> int:
 
     simone_decision = safe_agent(timeline=timeline, agent="Simone", phase="report_decision_ready", import_fn=import_simone, call_args=(massy_board,), artifact_name="simone_reports.json", default_handoff={"ready": 0, "waiting": 0, "skipped": 0}, note_fn=lambda r: "ready={ready} waiting={waiting} skipped={skipped}".format(**{**{"ready": 0, "waiting": 0, "skipped": 0}, **handoff(r)}))
     simone_publish = safe_agent(timeline=timeline, agent="Simone", phase="report_publication_ready", import_fn=import_simone_report_publisher, call_args=(simone_decision,), artifact_name="simone_report_publish.json", default_handoff={"published": 0, "already_published": 0, "wp_not_ready": 0, "dry_run": 0, "errors": 0}, note_fn=lambda r: "published={published} already={already_published} wp_not_ready={wp_not_ready} errors={errors}".format(**{**{"published": 0, "already_published": 0, "wp_not_ready": 0, "dry_run": 0, "errors": 0}, **handoff(r)}))
-    canonical.safely("event", "simone_publication_cycle", "Simone", "reporting", "success",
-                     "artifacts/newsroom/simone_report_publish.json")
+    simone_cycle_status = str(simone_publish.get("status") or "")
+    if simone_cycle_status in {"error", "invalid_result"}:
+        canonical.safely("event", "simone_publication_cycle", "Simone", "reporting", "failed",
+                         "artifacts/newsroom/simone_report_publish.json",
+                         reason_code="simone_publication_cycle_failed",
+                         error_class="invariant", error_terminal=True,
+                         result=simone_cycle_status)
+    else:
+        canonical.safely("event", "simone_publication_cycle", "Simone", "reporting", "success",
+                         "artifacts/newsroom/simone_report_publish.json")
     canonical.safely("observe_simone", simone_decision, simone_publish)
 
     # Active wins over Shadow. Capture includes the existing bounded softpool and duplicate gate.
@@ -564,8 +572,16 @@ def main() -> int:
 
     bob_result = safe_agent(timeline=timeline, agent="Bob", phase="article_packages_ready", import_fn=import_bob, call_args=(andrea_handoff,), artifact_name="bob_articles.json", default_handoff={"ready_for_alfred": 0, "translation_pending": 0, "translation_validation_failed": 0, "errors": 0, "extraction_empty": 0}, note_fn=lambda r: "ready={ready_for_alfred} pending={translation_pending} validation_failed={translation_validation_failed} empty={extraction_empty} errors={errors}".format(**{**{"ready_for_alfred": 0, "translation_pending": 0, "translation_validation_failed": 0, "errors": 0, "extraction_empty": 0}, **handoff(r)}))
     bob_result = attach_bob_brief_warnings(bob_result, andrea_handoff)
-    canonical.safely("event", "bob_generation_cycle", "Bob", "generation", "success",
-                     "artifacts/newsroom/bob_articles.json")
+    bob_cycle_status = str(bob_result.get("status") or "")
+    if bob_cycle_status in {"error", "invalid_result"}:
+        canonical.safely("event", "bob_generation_cycle", "Bob", "generation", "failed",
+                         "artifacts/newsroom/bob_articles.json",
+                         reason_code="bob_package_error",
+                         error_class="invariant", error_terminal=True,
+                         result=bob_cycle_status)
+    else:
+        canonical.safely("event", "bob_generation_cycle", "Bob", "generation", "success",
+                         "artifacts/newsroom/bob_articles.json")
     canonical.safely("observe_bob_generated", bob_result)
     artifacts.safely("observe_bob", bob_result)
     write_json(ARTIFACT_DIR / "bob_articles.json", bob_result)
@@ -579,8 +595,16 @@ def main() -> int:
     add_timeline(timeline, "Alfred", "bob_warning_guard_applied", f"surfaced={alfred_result.get('postprocess', {}).get('bob_warnings_surfaced', 0)}")
 
     publisher_result = safe_agent(timeline=timeline, agent="Publisher", phase="publication_ready", import_fn=import_publisher, call_args=(alfred_result,), artifact_name="publisher_result.json", default_handoff={"published": 0, "already_published": 0, "dry_run": 0, "wp_not_ready": 0, "errors": 0}, note_fn=lambda r: "published={published} already={already_published} dry={dry_run} wp_not_ready={wp_not_ready} errors={errors}".format(**{**{"published": 0, "already_published": 0, "dry_run": 0, "wp_not_ready": 0, "errors": 0}, **handoff(r)}))
-    canonical.safely("event", "publisher_observation_cycle", "Publisher", "publication", "success",
-                     "artifacts/newsroom/publisher_result.json")
+    publisher_cycle_status = str(publisher_result.get("status") or "")
+    if publisher_cycle_status in {"error", "invalid_result"}:
+        canonical.safely("event", "publisher_observation_cycle", "Publisher", "publication", "failed",
+                         "artifacts/newsroom/publisher_result.json",
+                         reason_code="publisher_observation_cycle_failed",
+                         error_class="invariant", error_terminal=True,
+                         result=publisher_cycle_status)
+    else:
+        canonical.safely("event", "publisher_observation_cycle", "Publisher", "publication", "success",
+                         "artifacts/newsroom/publisher_result.json")
     canonical.safely("observe_publisher", publisher_result)
     artifacts.safely("observe_publisher", publisher_result)
 
