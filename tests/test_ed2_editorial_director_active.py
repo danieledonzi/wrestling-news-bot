@@ -8,6 +8,9 @@ import pytest
 @pytest.fixture(autouse=True)
 def isolated_active_pair_cache(monkeypatch, tmp_path):
     monkeypatch.setattr(pair_cache, "CACHE_FILE", tmp_path / "active-pair-cache.json")
+    # Fixture URLs are not external evidence. Tests needing hydration override
+    # the extractor explicitly; failure/recovery tests must never perform HTTP.
+    monkeypatch.setattr(active.source_body, "hydrate", lambda _: (False, "offline_test_fixture"))
 
 
 def snapshot(count=3, published=0):

@@ -11,7 +11,7 @@ from pathlib import Path
 from types import MappingProxyType
 from typing import Any, Callable, Mapping
 
-from agents import menzo_duplicate_scorer
+from agents import menzo_duplicate_scorer, source_body
 from agents.canonical_event_ledger import OperationalAIRequest, active_event
 from agents.duplicate_pair_identity import article_id
 from agents.duplicate_pair_matrix import iter_recent_history_pair_specs, iter_same_run_pair_specs
@@ -29,6 +29,7 @@ MAX_INPUT_BYTES = int(os.getenv("OWTV_ED_SHADOW_MAX_INPUT_BYTES", "120000"))
 MAX_OUTPUT_TOKENS = int(os.getenv("OWTV_ED_SHADOW_MAX_OUTPUT_TOKENS", "12000"))
 PROVIDER_TIMEOUT_SECONDS = float(os.getenv("OWTV_ED_SHADOW_TIMEOUT_SECONDS", "45"))
 APPROACH_RATIO = .80
+REVALIDATION_MAX_BODY_CHARS = 24000
 
 INPUT_FIELDS = ("source", "feed_url", "title", "url", "normalized_url", "published", "summary",
                 "from_softpool", "softpool_added_at", "last_seen_at", "softpool_ttl_hours", "softpool_deferrals")
@@ -83,7 +84,8 @@ def _projected_provider_input_bytes(snapshot: Mapping[str, Any]) -> int:
 
 
 def _finalize_snapshot(envelope: dict[str, Any], *, forced_exceeded: bool = False) -> dict[str, Any]:
-    canonical = json.dumps(envelope, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
+    canonical = json.dumps({k: v for k, v in envelope.items() if k != "_duplicate_revalidation_bodies"},
+                           ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
     counts = (len(envelope["candidates"]), len(envelope["authorized_relations"]))
     duplicate_ids = envelope.get("canonical_candidate_duplicates_collapsed", [])
     envelope["observed"] = {"candidate_count": counts[0], "relation_count": counts[1], "serialized_input_bytes": 0,
@@ -115,7 +117,22 @@ def capture_opportunity(massy_board: Mapping[str, Any], *, run_id: str, observat
     # exposed as a rolling metric because those callers supply a local-day count.
     local_count = int(published_news_today_local if published_news_today_local is not None else publisher_count_24h or 0)
     raw = massy_board.get("news_candidates_for_menzo", [])
-    captured = [c for item in raw if isinstance(item, Mapping) and (c := _candidate(item))]
+    captured = []
+    recovery_bodies = {}
+    captured_ids = set()
+    def retain_body(endpoint_id: str, item: Mapping[str, Any]) -> None:
+        text = source_body.contract_text(dict(item))
+        if text:
+            bounded = text[:REVALIDATION_MAX_BODY_CHARS]
+            recovery_bodies[endpoint_id] = {
+                "text": bounded, "sha256": hashlib.sha256(bounded.encode("utf-8")).hexdigest(),
+                "coverage": "FULL_BODY" if bounded == text else "TRUNCATED_CANONICAL_BODY"}
+    for item in raw:
+        if isinstance(item, Mapping) and (candidate := _candidate(item)):
+            captured.append(candidate)
+            if candidate["candidate_id"] not in captured_ids:
+                retain_body(candidate["candidate_id"], item)
+                captured_ids.add(candidate["candidate_id"])
     candidates = []
     seen_candidate_ids: set[str] = set()
     duplicate_candidate_ids = []
@@ -140,6 +157,7 @@ def capture_opportunity(massy_board: Mapping[str, Any], *, run_id: str, observat
         kept["article_id"] = article_id(kept)
         if kept["article_id"]:
             safe_history.append(kept)
+            retain_body(kept["article_id"], item)
     envelope = {"run_id": run_id, "observation_timestamp": observation_timestamp,
                 "policy_reference": 30,
                 "published_news_today_local": local_count,
@@ -147,7 +165,8 @@ def capture_opportunity(massy_board: Mapping[str, Any], *, run_id: str, observat
                 "remaining_slots": max(0, 30 - local_count), "candidates": candidates,
                 "authorized_relations": [], "authorized_relations_complete": False,
                 "publisher_history_12h": safe_history,
-                "canonical_candidate_duplicates_collapsed": duplicate_candidate_ids}
+                "canonical_candidate_duplicates_collapsed": duplicate_candidate_ids,
+                "_duplicate_revalidation_bodies": recovery_bodies}
     if len(candidates) > MAX_CANDIDATES:
         return _finalize_snapshot(envelope, forced_exceeded=True)
     if _projected_provider_input_bytes(envelope) > MAX_INPUT_BYTES:
