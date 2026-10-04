@@ -2,7 +2,13 @@
 
 ## 1. General contract
 
-This measurement-only contract inventories the semantics that already exist; it does not change newsroom decisions, prompts, routing, scoring, thresholds, retries, publishing, scheduling, state, retention, or the v95.21.1 pair matrix. The normative machine-readable representation is `config/metrics_catalog_v1.json` (`owtv_metrics_catalog_v1`, policy `v95.22_a1`). The frozen v95.19 names and meanings remain intact. A dotted name identifies a semantic metric, not every numeric runtime field.
+This measurement-only contract inventories the semantics that already exist; it does not change newsroom decisions, prompts, routing, scoring, thresholds, retries, publishing, scheduling, state, retention, or the v95.21.1 pair matrix. The normative machine-readable representation is `config/metrics_catalog_v1.json` (`owtv_metrics_catalog_v1`, policy `v96.4_telemetry_authority_convergence`). The frozen v95.19 names and meanings remain intact. A dotted name identifies a semantic metric, not every numeric runtime field.
+
+### Authority convergence
+
+Active telemetry has exactly one primary authority family. Newsroom/run/editorial/publication lifecycle metrics use `state/newsroom/canonical_event_ledger.jsonl`; provider usage/token/model/price/cost metrics use `state/newsroom/gemini_call_ledger.jsonl`; retained-material authority belongs to `state/newsroom/canonical_artifact_index.jsonl`. `master_log.jsonl`, latest snapshots, handoff counters, and specialized one-run artifacts remain diagnostic/compatibility evidence and may not be promoted to primary authority for an active metric. Incomplete canonical coverage is `null`/`n.d.`, never replaced by a legacy zero or fallback total.
+
+The machine catalog records this boundary in each metric's `authority_family`. The validator rejects active metrics assigned to `diagnostic_legacy` or backed by `master_log` as primary authority.
 
 Runtime data, events, attempts, final results, diagnostic aggregates, canonical metrics, and legacy aliases are distinct classes. `active` means the current architecture supports the stated formula and authority. `diagnostic_only` is observable but unsuitable as an authoritative editorial-window outcome. `planned` is intentionally not synthesized.
 
@@ -21,22 +27,20 @@ Each JSON row has exactly one `source_primary`. `source_secondary` entries are e
 
 | Canonical name | Meaning | Primary authority | Formula / unit |
 |---|---|---|---|
-| `runtime.runs_started` | Production-shaped master run records whose start timestamp is in the window. | `state/newsroom/master_log.jsonl: run.started_at` | count production-shaped run records with an in-window parseable run.started_at; count |
-| `runtime.runs_completed` | Production-shaped master run records with an end timestamp in the window. | `state/newsroom/master_log.jsonl: run.ended_at` | count production-shaped run records with an in-window parseable run.ended_at; count |
-| `runtime.runs_exit_zero` | Completed runs whose recorded runtime exit code equals zero. | `state/newsroom/master_log.jsonl: run.runtime_exit_code` | count completed in-window run records where runtime_exit_code == 0; count |
-| `runtime.run_failures` | Completed runs whose recorded runtime exit code is non-zero. | `state/newsroom/master_log.jsonl: run.runtime_exit_code` | count completed in-window run records where runtime_exit_code is an integer other than 0; count |
-| `menzo.unique_actionable_candidates` | Unique content identities selected or pending. | `state/newsroom/master_log.jsonl: menzo.actionable_identity_keys` | cardinality of the union of actionable identity keys across in-window runs; count |
-| `menzo.unique_downstream_handoffs` | Unique selected identities handed downstream. | `state/newsroom/master_log.jsonl: menzo.selected` | cardinality of unique stable identities in selected rows across in-window runs; count |
-| `menzo.unique_final_publications` | Unique final news publications. | `state/newsroom/master_log.jsonl: publisher.published/results(status=published)` | cardinality of authoritative unique Publisher publication identities; count |
-| `menzo.linked_handoff_publication_overlap` | Unique handoff identities linked to final news publications. | `state/newsroom/master_log.jsonl: menzo.selected and authoritative Publisher publication set` | cardinality of the intersection in a namespace shared by every compared record; count |
-| `menzo.handoff_to_publication_ratio` | Linked handoff/publication overlap divided by unique downstream handoffs. | `scripts/observability_snapshot.py canonical funnel` | menzo.linked_handoff_publication_overlap / menzo.unique_downstream_handoffs; ratio |
-| `alfred.unique_articles_reviewed` | Unique identities with a review. | `state/newsroom/master_log.jsonl: alfred.reviews (plus Publisher authority where required)` | cardinality of unique identities in alfred.reviews; count |
-| `alfred.unique_articles_with_warnings` | Unique reviewed identities having at least one warning entry. | `state/newsroom/master_log.jsonl: alfred.reviews (plus Publisher authority where required)` | cardinality of unique warning-bearing review identities; count |
-| `alfred.warning_events` | Review events whose warning list is non-empty. | `state/newsroom/master_log.jsonl: alfred.reviews (plus Publisher authority where required)` | count warning-bearing review rows; count |
-| `alfred.warning_occurrences` | Individual entries across warning lists. | `state/newsroom/master_log.jsonl: alfred.reviews (plus Publisher authority where required)` | sum warning_occurrences_total; legacy lists at the ten-entry cap are unavailable; count |
-| `alfred.unique_final_blockers` | Unique identities whose latest unresolved review remains blocked without later approval/publication. | `state/newsroom/master_log.jsonl: alfred.reviews (plus Publisher authority where required)` | chronological latest-outcome computation joined to authoritative publications; count |
-| `alfred.revised_then_approved` | Unique identities revised before a later approval. | `state/newsroom/master_log.jsonl: alfred.reviews (plus Publisher authority where required)` | chronological transition count by identity; count |
-| `alfred.revised_then_published` | Unique identities revised before a later authoritative publication. | `state/newsroom/master_log.jsonl: alfred.reviews (plus Publisher authority where required)` | chronological transition count joined to publications; count |
+| `runtime.runs_started` | Canonical run starts in the requested window. | `state/newsroom/canonical_event_ledger.jsonl` | count validated run_started events from Jarvis in the requested window; count |
+| `runtime.runs_exit_zero` | Successful canonical run completions; run_completed is emitted only when runtime_exit_code equals zero. | `state/newsroom/canonical_event_ledger.jsonl` | count validated run_completed events from Jarvis in the requested window; count |
+| `menzo.unique_actionable_candidates` | Unique content identities selected or pending. | `state/newsroom/canonical_event_ledger.jsonl` | distinct content_id across validated Menzo candidate_selected and candidate_pending events in the requested window; count |
+| `menzo.unique_downstream_handoffs` | Unique selected identities handed downstream. | `state/newsroom/canonical_event_ledger.jsonl` | distinct content_id across validated Bob article_generation_requested events in the requested window; count |
+| `menzo.unique_final_publications` | Unique final news publications. | `state/newsroom/canonical_event_ledger.jsonl` | distinct content_id across validated Publisher publication_completed events in the requested window; count |
+| `menzo.linked_handoff_publication_overlap` | Unique handoff identities linked to final news publications. | `state/newsroom/canonical_event_ledger.jsonl` | cardinality of content_id intersection between Bob article_generation_requested and Publisher publication_completed events in the requested window; count |
+| `menzo.handoff_to_publication_ratio` | Linked handoff/publication overlap divided by unique downstream handoffs. | `state/newsroom/canonical_event_ledger.jsonl` | menzo.linked_handoff_publication_overlap / menzo.unique_downstream_handoffs; null when the denominator is zero or canonical coverage is incomplete; ratio |
+| `alfred.unique_articles_reviewed` | Unique identities with a review. | `state/newsroom/canonical_event_ledger.jsonl` | distinct content_id across validated Alfred quality_review_completed events; count |
+| `alfred.unique_articles_with_warnings` | Unique reviewed identities having at least one warning entry. | `state/newsroom/canonical_event_ledger.jsonl` | distinct content_id across validated Alfred warning_recorded events; count |
+| `alfred.warning_events` | Review events whose warning list is non-empty. | `state/newsroom/canonical_event_ledger.jsonl` | count quality_review_completed occurrences associated with at least one warning_recorded event by canonical append order and matching run/correlation context; count |
+| `alfred.warning_occurrences` | Individual entries across warning lists. | `state/newsroom/canonical_event_ledger.jsonl` | count validated Alfred warning_recorded events; count |
+| `alfred.unique_final_blockers` | Unique identities whose latest unresolved review remains blocked without later approval/publication. | `state/newsroom/canonical_event_ledger.jsonl` | distinct content_id whose latest blocker_recorded fact has no later approved quality_review_completed or publication_completed event; count |
+| `alfred.revised_then_approved` | Unique identities revised before a later approval. | `state/newsroom/canonical_event_ledger.jsonl` | distinct content_id with a needs_revision quality_review_completed event before a later approved quality_review_completed event in the requested window; count |
+| `alfred.revised_then_published` | Unique identities revised before a later authoritative publication. | `state/newsroom/canonical_event_ledger.jsonl` | distinct content_id with a needs_revision quality_review_completed event before a later Publisher publication_completed event in the requested window; count |
 | `gemini.real_attempts` | Ledger rows with status called or failed. | `state/newsroom/gemini_call_ledger.jsonl` | count rows whose status is called or failed; count |
 | `gemini.completed_calls` | API calls that returned without an attempt exception; not semantic success. | `state/newsroom/gemini_call_ledger.jsonl` | count rows whose status is called; count |
 | `gemini.failures` | Attempt exceptions. | `state/newsroom/gemini_call_ledger.jsonl` | count rows whose status is failed; count |
@@ -46,9 +50,8 @@ Each JSON row has exactly one `source_primary`. `source_secondary` entries are e
 | `gemini.gemini_3_5_completed_calls` | Gemini 3.5 ledger rows with status called; completed does not imply semantic success. | `state/newsroom/gemini_call_ledger.jsonl` | filter bounded rows to model name containing 3.5 and status called; count |
 | `gemini.gemini_3_5_failures` | Gemini 3.5 ledger rows with status failed; completed does not imply semantic success. | `state/newsroom/gemini_call_ledger.jsonl` | filter bounded rows to model name containing 3.5 and status failed; count |
 | `gemini.gemini_3_5_avoided_calls` | Gemini 3.5 ledger rows with status avoided; completed does not imply semantic success. | `state/newsroom/gemini_call_ledger.jsonl` | filter bounded rows to model name containing 3.5 and status avoided; count |
-| `simone.reports_published` | Unique authoritative published reports. | `state/newsroom/master_log.jsonl: simone.published_reports(status=published)` | cardinality of unique authoritative report publication identities; count |
-| `simone.already_present_events` | Master-log report publication events marked already present. | `state/newsroom/master_log.jsonl: simone.publish_handoff.already_published` | sum in-window already_published event counters; count |
-| `publisher.publications_unique` | Unique successful news publications. | `state/newsroom/master_log.jsonl: publisher.published/results(status=published)` | cardinality of unique authoritative published identities; count |
+| `simone.reports_published` | Unique authoritative published reports. | `state/newsroom/canonical_event_ledger.jsonl` | distinct canonical report identity across validated Simone report_published events in the requested window; count |
+| `publisher.publications_unique` | Unique successful news publications. | `state/newsroom/canonical_event_ledger.jsonl` | distinct content_id across validated Publisher publication_completed events in the requested window; count |
 | `andrea.checked_occurrences` | Canonical Andrea checked occurrences. | `state/newsroom/canonical_event_ledger.jsonl` | count validated content_sufficiency_checked events at checked grain; count |
 | `andrea.checked_content` | Unique content at canonical Andrea checked grain. | `state/newsroom/canonical_event_ledger.jsonl` | distinct content_id across validated checked events; count |
 | `andrea.passed_occurrences` | Canonical Andrea passed occurrences. | `state/newsroom/canonical_event_ledger.jsonl` | count validated content_sufficiency_checked events at passed grain; count |
@@ -74,12 +77,12 @@ Each JSON row has exactly one `source_primary`. `source_secondary` entries are e
 
 ## 5. Partially available and diagnostic metrics
 
-These rows expose real signals but not a complete authoritative editorial-window metric. Typical causes are per-run-only counters, incomplete stable identities, legacy caps, partial run coverage, or a latest-run artifact without retention.
-
-For Menzo pair coverage, the sole primary authority is the nested producing-run artifact: `same_run.expected_pair_count`, `same_run.authoritative_evaluated_pair_count`, `recent_history.expected_pair_count`, `recent_history.authoritative_evaluated_pair_count`, and `total.coverage_complete` under `artifacts/newsroom/menzo_duplicate_pair_coverage.json`. The corresponding flat `postprocess.duplicate_pair_coverage.*` fields are reconciliation sources only.
+These rows expose real signals but not a complete authoritative editorial-window metric. They may be useful for diagnosis or reconciliation, but they cannot override a canonical authority family.
 
 | Name | Availability | Limitation |
 |---|---|---|
+| `runtime.runs_completed` | partially_available | The legacy snapshot field run_health.runs_completed does not consume this metric; despite its name, that field is the exit-zero bucket and corresponds to runtime.runs_exit_zero. Exact all-ended-run semantics are not encoded by event schema v1 because run_completed is emitted only for exit-zero runs; retained master rows remain diagnostic until terminal run telemetry is closed. |
+| `runtime.run_failures` | partially_available | Event schema v1 has no canonical terminal failed-run event; master-log runtime_exit_code remains legacy diagnostic evidence only. |
 | `runtime.expected_dirt_paths` | source_dependent | Expected paths are limited to .bot_exit_code, logs/master_log.log, and reports/. This is repository diagnostics, not a newsroom outcome. |
 | `runtime.unexpected_dirt_paths` | source_dependent | Expected paths are limited to .bot_exit_code, logs/master_log.log, and reports/. This is repository diagnostics, not a newsroom outcome. |
 | `massy.urls_found` | partially_available | The numeric handoff exists, but complete stable item identities and authoritative cross-run uniqueness do not. |
@@ -88,9 +91,6 @@ For Menzo pair coverage, the sole primary authority is the nested producing-run 
 | `massy.hard_skips` | partially_available | The numeric handoff exists, but complete stable item identities and authoritative cross-run uniqueness do not. |
 | `massy.published_skips` | partially_available | The numeric handoff exists, but complete stable item identities and authoritative cross-run uniqueness do not. |
 | `massy.actionable_handoffs` | partially_available | The numeric handoff exists, but complete stable item identities and authoritative cross-run uniqueness do not. |
-| `editorial_director_shadow.logical_requests` | partially_available | Authoritative canonical event grain; the Gemini-only diagnostics reader returns null until an existing canonical-event input is joined. |
-| `editorial_director_shadow.cost_per_logical_request` | partially_available | Gemini-only diagnostics returns null because authoritative logical-request denominator requires the canonical event ledger. |
-| `editorial_director_shadow.bound_status` | partially_available | Latest/retained run evidence exists, but current master-log coverage cannot prove a complete arbitrary window; diagnostics return null with explicit partial availability. |
 | `menzo.same_run_expected_pairs` | partially_available | Authoritative for its producing run only; the artifact has no retained window series. The v95.21.1 matrix is unchanged. No authoritative series exists across the editorial window. |
 | `menzo.same_run_evaluated_pairs` | partially_available | Authoritative for its producing run only; the artifact has no retained window series. The v95.21.1 matrix is unchanged. No authoritative series exists across the editorial window. |
 | `menzo.recent_history_expected_pairs` | partially_available | Authoritative for its producing run only; the artifact has no retained window series. The v95.21.1 matrix is unchanged. No authoritative series exists across the editorial window. |
@@ -122,6 +122,7 @@ For Menzo pair coverage, the sole primary authority is the nested producing-run 
 | `gemini.cost_coverage` | source_dependent | Coverage describes metadata availability, not token or cost completeness for legacy rows. |
 | `simone.report_candidates_found` | partially_available | Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic. |
 | `simone.reports_ready` | partially_available | Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic. |
+| `simone.already_present_events` | partially_available | Report already-present outcomes are not encoded by event schema v1; master handoff counters remain diagnostic until telemetry closure. |
 | `simone.legacy_errors_diagnostic` | partially_available | Never substitute for simone.terminal_errors. |
 | `publisher.publication_attempts` | partially_available | Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic. |
 | `publisher.already_present_events` | partially_available | Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic. |
@@ -132,10 +133,13 @@ For Menzo pair coverage, the sole primary authority is the nested producing-run 
 | `artifact_coverage.alfred_reviewed_coverage` | source_dependent | No retention or new artifact is introduced by A1. |
 | `artifact_coverage.final_published_coverage` | source_dependent | No retention or new artifact is introduced by A1. |
 | `artifact_coverage.end_to_end_comparative_coverage` | source_dependent | No retention or new artifact is introduced by A1. |
+| `editorial_director_shadow.logical_requests` | partially_available | Authoritative canonical event grain; the Gemini-only diagnostics reader returns null until an existing canonical-event input is joined. |
+| `editorial_director_shadow.cost_per_logical_request` | partially_available | Gemini-only diagnostics returns null because authoritative logical-request denominator requires the canonical event ledger. |
+| `editorial_director_shadow.bound_status` | partially_available | Latest/retained run evidence exists, but current master-log coverage cannot prove a complete arbitrary window; diagnostics return null with explicit partial availability. |
 
 ## 6. Planned metrics
 
-Planned rows are contract placeholders, not fabricated measurements. Simone lifecycle/SLA and typed errors wait for lifecycle telemetry; Publisher error terminality waits for typed outcomes; WordPress waits for structured probe/error telemetry; Bob semantic success and logical-request accounting wait for a stable operation taxonomy.
+Planned rows are contract placeholders, not fabricated measurements. Missing canonical telemetry remains unavailable until the relevant producer/semantic closure exists.
 
 | Name | Availability | Why unavailable |
 |---|---|---|

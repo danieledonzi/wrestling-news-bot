@@ -22,7 +22,7 @@ def by_name():
 def test_json_is_valid_and_validator_accepts_contract():
     payload = catalog()
     assert payload["schema_version"] == "owtv_metrics_catalog_v1"
-    assert payload["policy_version"] == "v95.22_a1"
+    assert payload["policy_version"] == "v96.4_telemetry_authority_convergence"
     assert validate(CATALOG_PATH, MARKDOWN_PATH) == []
 
 
@@ -61,21 +61,34 @@ def test_active_metrics_have_authority_formula_and_distinct_zero_missing():
         assert "Null" in row["missing_semantics"]
 
 
-def test_frozen_v9519_boundary_semantics_are_explicit():
+def test_migrated_v9519_boundary_semantics_match_canonical_authority():
     rows = by_name()
     ratio = rows["menzo.handoff_to_publication_ratio"]
-    assert "greater than zero" in ratio["zero_semantics"]
-    assert "overlap equals zero" in ratio["zero_semantics"]
-    assert "denominator is zero or absent" in ratio["missing_semantics"]
-    assert "identity linkage is not supported" in ratio["missing_semantics"]
+    assert "nonzero downstream-handoff denominator" in ratio["zero_semantics"]
+    assert "canonical content_id overlap" in ratio["zero_semantics"]
+    assert "denominator is zero" in ratio["missing_semantics"]
+    assert "canonical lifecycle coverage" in ratio["missing_semantics"]
 
     actionable = rows["menzo.unique_actionable_candidates"]
-    assert "pending sample ambiguously truncated" in actionable["missing_semantics"]
+    assert "canonical lifecycle coverage" in actionable["missing_semantics"]
     warnings = rows["alfred.warning_occurrences"]
-    assert "exactly ten entries" in warnings["missing_semantics"]
-    assert "without an authoritative warning_occurrences_total" in warnings["missing_semantics"]
+    assert "canonical warning coverage" in warnings["missing_semantics"]
     overlap = rows["menzo.linked_handoff_publication_overlap"]
-    assert "no identity namespace is shared by all" in overlap["missing_semantics"]
+    assert "authoritative content_id linkage" in overlap["missing_semantics"]
+
+    for name in (
+        "menzo.unique_actionable_candidates",
+        "menzo.linked_handoff_publication_overlap",
+        "menzo.handoff_to_publication_ratio",
+        "alfred.warning_occurrences",
+    ):
+        semantics = (rows[name]["zero_semantics"] + " " + rows[name]["missing_semantics"]).lower()
+        assert "master" not in semantics
+        assert "legacy" not in semantics
+    assert "namespace" not in (
+        overlap["zero_semantics"] + " " + overlap["missing_semantics"]
+        + ratio["zero_semantics"] + " " + ratio["missing_semantics"]
+    ).lower()
 
 
 def test_duplicate_coverage_complete_has_boolean_coverage_semantics():
@@ -174,7 +187,10 @@ def test_v9519_canonical_names_are_preserved():
         "gemini.fallbacks", "simone.reports_published", "simone.already_present_events",
     }
     assert frozen <= names.keys()
-    assert all(names[name]["status"] == "active" for name in frozen)
+    authoritative = frozen - {"simone.already_present_events"}
+    assert all(names[name]["status"] == "active" for name in authoritative)
+    assert names["simone.already_present_events"]["status"] == "diagnostic_only"
+    assert names["simone.already_present_events"]["authority_family"] == "diagnostic_legacy"
 
 
 def test_markdown_lists_every_active_metric():
@@ -227,23 +243,59 @@ def test_markdown_contract_tables_match_json_exactly():
     assert "menzo.selected` is instead the authoritative source field" in markdown
 
 
-def test_runtime_completed_is_not_the_legacy_exit_zero_report_bucket():
+def test_runtime_authority_is_explicit_and_does_not_fake_failed_runs():
     rows = by_name()
-    completed = rows["runtime.runs_completed"]
-    assert completed["formula"] == (
-        "count production-shaped run records with an in-window parseable "
-        "run.ended_at"
-    )
-    assert completed["consumer_paths"] == []
-    assert completed["used_by_reports"] == []
-    assert "run_health.runs_completed" in completed["notes"]
-    assert "runtime.runs_exit_zero" in completed["notes"]
+    started = rows["runtime.runs_started"]
     exit_zero = rows["runtime.runs_exit_zero"]
-    assert exit_zero["used_by_reports"] == [
-        "daily_editorial_judgment", "operational_report"
-    ]
-    assert "scripts/observability_snapshot.py" in exit_zero["consumer_paths"]
-    assert "scripts/daily_editorial_judgment.py" in exit_zero["consumer_paths"]
+    for row in (started, exit_zero):
+        assert row["status"] == "active"
+        assert row["authority_level"] == "canonical"
+        assert row["authority_family"] == "newsroom_lifecycle"
+        assert row["source_primary"] == "state/newsroom/canonical_event_ledger.jsonl"
+    assert "run_started" in started["formula"]
+    assert "run_completed" in exit_zero["formula"]
+
+    completed = rows["runtime.runs_completed"]
+    failures = rows["runtime.run_failures"]
+    for row in (completed, failures):
+        assert row["status"] == "diagnostic_only"
+        assert row["authority_family"] == "diagnostic_legacy"
+        assert "master_log" in row["source_primary"]
+    assert "not encoded by event schema v1" in completed["notes"]
+    assert "no canonical terminal failed-run event" in failures["notes"]
+
+
+def test_active_metrics_have_one_canonical_authority_family_and_never_master_log():
+    payload = catalog()
+    families = payload["authority_families"]
+    assert families["newsroom_lifecycle"]["primary_source"] == "state/newsroom/canonical_event_ledger.jsonl"
+    assert families["provider_economics"]["primary_source"] == "state/newsroom/gemini_call_ledger.jsonl"
+    assert families["artifact_material"]["primary_source"] == "state/newsroom/canonical_artifact_index.jsonl"
+    for row in payload["metrics"]:
+        if row["status"] != "active":
+            continue
+        assert row["authority_family"] in {"newsroom_lifecycle", "provider_economics", "artifact_material"}
+        assert "master_log" not in row["source_primary"].lower()
+
+
+def test_migrated_lifecycle_metrics_use_canonical_event_authority():
+    rows = by_name()
+    migrated = {
+        "runtime.runs_started", "runtime.runs_exit_zero",
+        "menzo.unique_actionable_candidates", "menzo.unique_downstream_handoffs",
+        "menzo.unique_final_publications", "menzo.linked_handoff_publication_overlap",
+        "menzo.handoff_to_publication_ratio", "alfred.unique_articles_reviewed",
+        "alfred.unique_articles_with_warnings", "alfred.warning_events",
+        "alfred.warning_occurrences", "alfred.unique_final_blockers",
+        "alfred.revised_then_approved", "alfred.revised_then_published",
+        "simone.reports_published", "publisher.publications_unique",
+    }
+    for name in migrated:
+        row = rows[name]
+        assert row["status"] == "active"
+        assert row["authority_family"] == "newsroom_lifecycle"
+        assert row["authority_level"] == "canonical"
+        assert row["source_primary"] == "state/newsroom/canonical_event_ledger.jsonl"
 
 
 def test_composite_pair_coverage_object_is_not_a_scalar_alias():

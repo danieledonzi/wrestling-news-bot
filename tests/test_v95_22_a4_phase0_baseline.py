@@ -55,34 +55,81 @@ def errors_for(tmp_path, data=None, dep=None, markdown=None, catalog=None):
     return validate(baseline_path, registry_path, **kwargs)
 
 
-def test_happy_path_cli_and_contract_count_is_derived_from_a1():
+def test_happy_path_cli_and_frozen_baseline_survives_live_policy_migration():
     result = subprocess.run(
         [sys.executable, str(VALIDATOR)], cwd=str(ROOT), text=True,
         stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False,
     )
     assert result.returncode == 0, result.stderr
-    catalog_rows = json.loads((ROOT / "config/metrics_catalog_v1.json").read_text())["metrics"]
-    # Phase 0 is a frozen pre-V96.1 observation. Later catalog additions must
-    # validate without pretending that they existed in the historical window.
-    baseline_catalog_count = sum(row.get("policy_version") == "v95.22_a1" for row in catalog_rows)
-    assert len(payload()["metric_baselines"]) == baseline_catalog_count
-    assert "{} A1 metric rows".format(baseline_catalog_count) in result.stdout
-
-
-def test_frozen_a1_metric_policy_selects_exact_baseline_and_ignores_future_metric(tmp_path):
     catalog = json.loads((ROOT / "config/metrics_catalog_v1.json").read_text())
-    selected = {row["canonical_name"] for row in catalog["metrics"]
-                if row.get("policy_version") == "v95.22_a1"}
+    assert catalog["policy_version"] == "v96.4_telemetry_authority_convergence"
     baseline_names = {row["metric_name"] for row in payload()["metric_baselines"]}
-    assert len(selected) == 99
-    assert selected == baseline_names
+    current_names = {row["canonical_name"] for row in catalog["metrics"]}
+    assert len(baseline_names) == 99
+    assert baseline_names <= current_names
+    assert "99 A1 metric rows" in result.stdout
 
+
+def test_phase0_frozen_metric_contract_rejects_coordinated_field_drift(tmp_path):
+    data = payload()
+    row = metric(data, "runtime.runs_started")
+    original = row["catalog_unit"]
+    row["catalog_unit"] = "widgets"
+    markdown = MARKDOWN.read_text(encoding="utf-8")
+    original_line = json.dumps(
+        next(item for item in payload()["metric_baselines"]
+             if item["metric_name"] == "runtime.runs_started"),
+        sort_keys=True, separators=(",", ":"),
+    )
+    changed_line = json.dumps(row, sort_keys=True, separators=(",", ":"))
+    assert original == "count"
+    assert original_line in markdown
+    markdown = markdown.replace(original_line, changed_line, 1)
+    errors = errors_for(tmp_path, data=data, markdown=markdown)
+    assert any("frozen Phase 0 metric contract changed" in error for error in errors)
+
+
+def test_phase0_frozen_metric_set_survives_coordinated_json_and_markdown_deletion(tmp_path):
+    data = payload()
+    removed = data["metric_baselines"].pop()
+    markdown = MARKDOWN.read_text(encoding="utf-8")
+    encoded = json.dumps(removed, sort_keys=True, separators=(",", ":"))
+    assert encoded in markdown
+    markdown = markdown.replace(encoded + "\n", "", 1)
+    errors = errors_for(tmp_path, data=data, markdown=markdown)
+    assert any("frozen Phase 0 metric set changed" in error for error in errors)
+
+
+def test_phase0_does_not_retroactively_follow_live_metric_availability(tmp_path):
+    catalog = json.loads((ROOT / "config/metrics_catalog_v1.json").read_text())
+    row = next(item for item in catalog["metrics"] if item["canonical_name"] == "andrea.checked_unique")
+    row.update(
+        status="active",
+        availability="available",
+        authority_level="canonical",
+        authority_family="newsroom_lifecycle",
+        source_primary="state/newsroom/canonical_event_ledger.jsonl",
+        formula="future canonical formula",
+    )
+    errors = errors_for(tmp_path, catalog=catalog)
+    assert not any("A1-unavailable" in error for error in errors)
+    assert errors == []
+
+
+def test_phase0_requires_historical_names_but_ignores_future_catalog_metrics(tmp_path):
+    catalog = json.loads((ROOT / "config/metrics_catalog_v1.json").read_text())
     future = copy.deepcopy(catalog["metrics"][0])
     future.update(canonical_name="future.synthetic_metric", domain="future",
-                  policy_version="v96.2", introduced_in="v96.2")
+                  policy_version="v96.5", introduced_in="v96.5",
+                  authority_family="diagnostic_legacy", status="diagnostic_only")
     catalog["metrics"].append(future)
     errors = errors_for(tmp_path, catalog=catalog)
-    assert not any("baseline metric set" in error for error in errors)
+    assert not any("Phase 0 metric names" in error for error in errors)
+
+    baseline_name = payload()["metric_baselines"][0]["metric_name"]
+    catalog["metrics"] = [row for row in catalog["metrics"] if row["canonical_name"] != baseline_name]
+    errors = errors_for(tmp_path, catalog=catalog)
+    assert any("no longer preserves Phase 0 metric names" in error for error in errors)
 
 
 def test_root_target_window_matches_declared_days():
@@ -129,13 +176,19 @@ def test_a1_metric_set_and_duplicates_are_rejected(tmp_path, mutation):
     else:
         data["metric_baselines"].append(copy.deepcopy(data["metric_baselines"][0]))
     errors = errors_for(tmp_path, data=data)
-    assert any("metric set" in error or "duplicate baseline metric" in error for error in errors)
+    assert errors
+    if mutation == "duplicate":
+        assert any("duplicate baseline metric" in error for error in errors)
+    else:
+        assert any("Markdown METRIC_BASELINES block does not exactly match JSON" in error
+                   or "no longer preserves Phase 0 metric names" in error for error in errors)
 
 
-def test_unit_drift_is_rejected(tmp_path):
+def test_historical_unit_mutation_breaks_frozen_baseline_sync(tmp_path):
     data = payload()
     metric(data, "runtime.runs_started")["catalog_unit"] = "ratio"
-    assert any("catalog_unit drifts" in error for error in errors_for(tmp_path, data=data))
+    assert any("Markdown METRIC_BASELINES block does not exactly match JSON" in error
+               for error in errors_for(tmp_path, data=data))
 
 
 @pytest.mark.parametrize("bad_value", [0, 300])
@@ -184,10 +237,14 @@ def test_raw_handoff_value_cannot_claim_canonical_snapshot_provenance(tmp_path):
     assert any("raw handoff metric" in error for error in errors_for(tmp_path, data=data))
 
 
-def test_metric_source_primary_is_bound_exactly_to_a1(tmp_path):
-    data = payload()
-    metric(data, "runtime.runs_exit_zero")["source_primary"] = "state/newsroom/master_log.jsonl"
-    assert any("source_primary drifts" in error for error in errors_for(tmp_path, data=data))
+def test_current_catalog_authority_migration_does_not_rewrite_phase0(tmp_path):
+    catalog = json.loads((ROOT / "config/metrics_catalog_v1.json").read_text())
+    row = next(item for item in catalog["metrics"] if item["canonical_name"] == "runtime.runs_exit_zero")
+    assert row["source_primary"] == "state/newsroom/canonical_event_ledger.jsonl"
+    # Historical evidence remains the source recorded at the Phase 0 cutoff.
+    baseline_row = metric(payload(), "runtime.runs_exit_zero")
+    assert "master_log" in baseline_row["source_primary"]
+    assert errors_for(tmp_path, catalog=catalog) == []
 
 
 def test_metric_source_window_reference_must_exist(tmp_path):

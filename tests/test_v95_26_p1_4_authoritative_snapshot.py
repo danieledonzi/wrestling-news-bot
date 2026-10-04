@@ -293,6 +293,8 @@ def test_warning_events_are_reviews_not_occurrences(tmp_path):
     path = tmp_path / "state/newsroom/canonical_event_ledger.jsonl"; now = datetime.now(timezone.utc)
     ledger = CanonicalEventLedger("run", path)
     for item, count in (({"source_url": "https://x/a"}, 3), ({"source_url": "https://x/b"}, 1)):
+        ledger.event("quality_review_completed", "Alfred", "quality", "success",
+                     item=item, result="approved")
         for number in range(count):
             ledger.event("warning_recorded", "Alfred", "audit", "success", item=item,
                          reason_code=f"w{number}", result="warning")

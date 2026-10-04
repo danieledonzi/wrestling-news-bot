@@ -256,3 +256,61 @@ def test_catalog_has_unique_v96_1_grains():
         assert "distinct run_id plus correlation_id" not in metric["formula"]
         assert "derived ordered canonical review occurrence" in metric["identity_key"]
         assert "correlation_id" not in metric["identity_key"]
+
+
+def test_canonical_run_authority_exposes_started_success_and_unknown_failures():
+    rows = [
+        event("run_started", "Jarvis", "", run="run-a"),
+        event("run_completed", "Jarvis", "", run="run-a"),
+        event("run_started", "Jarvis", "", run="run-b"),
+    ]
+    for row in rows:
+        row.pop("content_id", None)
+        row.pop("correlation_id", None)
+    result = canonical(rows)["runs"]
+    assert result["started_event_count"] == 2
+    assert result["started_unique_run_count"] == 2
+    assert result["completed_event_count"] == 1
+    assert result["completed_unique_run_count"] == 1
+    assert result["exit_zero"] == 1
+    assert result["failures"] is None
+    assert result["failure_unavailability_reason"] == "event_schema_v1_has_no_terminal_failed_run_event"
+
+
+def test_canonical_handoff_publication_ratio_uses_content_linkage_not_raw_totals():
+    rows = [
+        event("article_generation_requested", "Bob", "handoff-a"),
+        event("article_generation_requested", "Bob", "handoff-b"),
+        event("publication_completed", "Publisher", "handoff-a"),
+        event("publication_completed", "Publisher", "unrelated"),
+    ]
+    result = canonical(rows)["funnel"]
+    assert result["unique_downstream_handoffs"] == 2
+    assert result["unique_final_publications"] == 2
+    assert result["linked_handoff_publication_overlap"] == 1
+    assert result["handoff_to_publication_ratio"] == 0.5
+
+
+def test_canonical_alfred_revision_transitions_are_content_linked_and_ordered():
+    rows = [
+        event("quality_review_completed", "Alfred", "approved", result="needs_revision"),
+        dict(event("quality_review_completed", "Alfred", "approved", result="approved"),
+             timestamp_utc=NOW.replace(hour=13).isoformat()),
+        event("quality_review_completed", "Alfred", "published", result="needs_revision"),
+        dict(event("publication_completed", "Publisher", "published"),
+             timestamp_utc=NOW.replace(hour=14).isoformat()),
+        event("quality_review_completed", "Alfred", "wrong-order", result="approved"),
+        dict(event("quality_review_completed", "Alfred", "wrong-order", result="needs_revision"),
+             timestamp_utc=NOW.replace(hour=15).isoformat()),
+    ]
+    result = canonical(rows)["alfred"]
+    assert result["revised_then_approved"] == 1
+    assert result["revised_then_published"] == 1
+
+
+def test_canonical_report_publications_use_report_key_without_content_id():
+    row = event("report_published", "Simone", "placeholder")
+    row.pop("content_id", None)
+    row["report_key"] = "wwe_raw_2026_08_20"
+    result = canonical([row])["publication"]
+    assert result["unique_report_publications"] == 1

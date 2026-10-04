@@ -19,9 +19,12 @@ REQUIRED_FIELDS = {
     "authority_level", "source_primary", "source_secondary", "producer_paths", "consumer_paths",
     "formula", "aggregation", "identity_key", "time_window", "zero_semantics",
     "missing_semantics", "availability", "schema_version", "policy_version", "introduced_in",
-    "status", "legacy_aliases", "replacement", "used_by_reports", "notes",
+    "status", "legacy_aliases", "replacement", "used_by_reports", "notes", "authority_family",
 }
 LIST_FIELDS = {"source_secondary", "producer_paths", "consumer_paths", "legacy_aliases", "used_by_reports"}
+AUTHORITY_FAMILIES = {"newsroom_lifecycle", "provider_economics", "artifact_material", "diagnostic_legacy", "unavailable"}
+AUTHORITATIVE_FAMILIES = {"newsroom_lifecycle", "provider_economics", "artifact_material"}
+POLICY_VERSION = "v96.4_telemetry_authority_convergence"
 ACTIVE_TEXT_FIELDS = {"source_primary", "formula", "zero_semantics", "missing_semantics", "time_window"}
 
 
@@ -57,8 +60,25 @@ def validate(catalog_path: Path = DEFAULT_CATALOG, markdown_path: Path = DEFAULT
         return ["catalog root must be an object"]
     if payload.get("schema_version") != "owtv_metrics_catalog_v1":
         errors.append("schema_version must equal owtv_metrics_catalog_v1")
-    if payload.get("policy_version") != "v95.22_a1":
-        errors.append("policy_version must equal v95.22_a1")
+    if payload.get("policy_version") != POLICY_VERSION:
+        errors.append(f"policy_version must equal {POLICY_VERSION}")
+    registry = payload.get("authority_families")
+    if not isinstance(registry, dict) or set(registry) != AUTHORITY_FAMILIES:
+        errors.append("authority_families must define the five frozen telemetry authority families")
+    else:
+        expected_sources = {
+            "newsroom_lifecycle": "state/newsroom/canonical_event_ledger.jsonl",
+            "provider_economics": "state/newsroom/gemini_call_ledger.jsonl",
+            "artifact_material": "state/newsroom/canonical_artifact_index.jsonl",
+        }
+        for family, source in expected_sources.items():
+            row = registry.get(family)
+            if not isinstance(row, dict) or row.get("primary_source") != source or row.get("authoritative") is not True:
+                errors.append(f"authority family {family} must retain primary source {source}")
+        for family in ("diagnostic_legacy", "unavailable"):
+            row = registry.get(family)
+            if not isinstance(row, dict) or row.get("authoritative") is not False:
+                errors.append(f"authority family {family} must remain non-authoritative")
     metrics = payload.get("metrics")
     if not isinstance(metrics, list) or not metrics:
         return errors + ["metrics must be a non-empty array"]
@@ -88,6 +108,25 @@ def validate(catalog_path: Path = DEFAULT_CATALOG, markdown_path: Path = DEFAULT
                 errors.append(f"{name}: {field} must be an array")
         status = metric.get("status")
         availability = metric.get("availability")
+        authority_family = metric.get("authority_family")
+        if authority_family not in AUTHORITY_FAMILIES:
+            errors.append(f"{name}: invalid authority_family {authority_family!r}")
+        source_primary = str(metric.get("source_primary") or "")
+        if authority_family == "newsroom_lifecycle":
+            if not source_primary.startswith("state/newsroom/canonical_event_ledger.jsonl"):
+                errors.append(f"{name}: newsroom_lifecycle must use canonical_event_ledger as primary source")
+            if metric.get("authority_level") != "canonical":
+                errors.append(f"{name}: newsroom_lifecycle must use authority_level=canonical")
+        elif authority_family == "provider_economics":
+            if not source_primary.startswith("state/newsroom/gemini_call_ledger.jsonl"):
+                errors.append(f"{name}: provider_economics must use gemini_call_ledger as primary source")
+        elif authority_family == "artifact_material":
+            if not source_primary.startswith("state/newsroom/canonical_artifact_index.jsonl"):
+                errors.append(f"{name}: artifact_material must use canonical_artifact_index as primary source")
+        elif authority_family == "diagnostic_legacy" and status == "active":
+            errors.append(f"{name}: active metric cannot use diagnostic_legacy authority")
+        elif authority_family == "unavailable" and status not in {"planned", "deprecated", "removed_candidate"}:
+            errors.append(f"{name}: unavailable authority_family requires non-active unavailable/deprecated status")
         if status not in STATUSES:
             errors.append(f"{name}: invalid status {status!r}")
         if availability not in AVAILABILITIES:
@@ -98,6 +137,10 @@ def validate(catalog_path: Path = DEFAULT_CATALOG, markdown_path: Path = DEFAULT
             errors.append(f"{name}: {status} metric requires replacement or an explicit notes rationale")
         if status == "active":
             active_names.append(name)
+            if authority_family not in AUTHORITATIVE_FAMILIES:
+                errors.append(f"{name}: active metric requires an authoritative authority_family")
+            if "master_log" in source_primary.lower():
+                errors.append(f"{name}: active metric cannot use master_log as primary authority")
             for field in ACTIVE_TEXT_FIELDS:
                 value = metric.get(field)
                 if not isinstance(value, str) or not value.strip() or value == "not_available":

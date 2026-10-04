@@ -1,31 +1,36 @@
 {
   "schema_version": "owtv_metrics_catalog_v1",
-  "policy_version": "v95.22_a1",
+  "policy_version": "v96.4_telemetry_authority_convergence",
   "metrics": [
     {
       "canonical_name": "runtime.runs_started",
-      "description": "Production-shaped master run records whose start timestamp is in the window.",
+      "description": "Canonical run starts in the requested window.",
       "domain": "runtime",
       "entity_counted": "runs",
       "unit": "count",
       "cardinality": "one scalar per requested window",
-      "authority_level": "contractual",
-      "source_primary": "state/newsroom/master_log.jsonl: run.started_at",
-      "source_secondary": [],
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [
+        "legacy diagnostic only: state/newsroom/master_log.jsonl: run.started_at"
+      ],
       "producer_paths": [
-        "agents/master_log_v93_19.py",
+        "agents/canonical_event_ledger.py",
         "newsroom_runner.py"
       ],
-      "consumer_paths": [],
-      "formula": "count production-shaped run records with an in-window parseable run.started_at",
+      "consumer_paths": [
+        "scripts/observability_snapshot.py",
+        "scripts/daily_editorial_judgment.py"
+      ],
+      "formula": "count validated run_started events from Jarvis in the requested window",
       "aggregation": "event count",
-      "identity_key": "run.github_run_id when present; otherwise master-row identity",
+      "identity_key": "run_id",
       "time_window": "inclusive UTC [window_start, window_end]",
       "zero_semantics": "Zero means an available authoritative source contained no qualifying entities.",
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
       "status": "active",
       "legacy_aliases": [],
@@ -34,7 +39,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "Canonical event authority; master-log run.started_at is legacy diagnostic evidence only.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "runtime.runs_completed",
@@ -43,7 +49,7 @@
       "entity_counted": "runs",
       "unit": "count",
       "cardinality": "one scalar per requested window",
-      "authority_level": "contractual",
+      "authority_level": "diagnostic",
       "source_primary": "state/newsroom/master_log.jsonl: run.ended_at",
       "source_secondary": [],
       "producer_paths": [
@@ -57,43 +63,46 @@
       "time_window": "inclusive UTC [window_start, window_end]",
       "zero_semantics": "Zero means an available authoritative source contained no qualifying entities.",
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
-      "availability": "available",
+      "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
-      "status": "active",
+      "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "The legacy snapshot field run_health.runs_completed does not consume this metric; despite its name, that field is the exit-zero bucket and corresponds to runtime.runs_exit_zero."
+      "notes": "The legacy snapshot field run_health.runs_completed does not consume this metric; despite its name, that field is the exit-zero bucket and corresponds to runtime.runs_exit_zero. Exact all-ended-run semantics are not encoded by event schema v1 because run_completed is emitted only for exit-zero runs; retained master rows remain diagnostic until terminal run telemetry is closed.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "runtime.runs_exit_zero",
-      "description": "Completed runs whose recorded runtime exit code equals zero.",
+      "description": "Successful canonical run completions; run_completed is emitted only when runtime_exit_code equals zero.",
       "domain": "runtime",
       "entity_counted": "runs",
       "unit": "count",
       "cardinality": "one scalar per requested window",
-      "authority_level": "contractual",
-      "source_primary": "state/newsroom/master_log.jsonl: run.runtime_exit_code",
-      "source_secondary": [],
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [
+        "legacy diagnostic only: state/newsroom/master_log.jsonl: run.runtime_exit_code"
+      ],
       "producer_paths": [
-        "agents/master_log_v93_19.py",
+        "agents/canonical_event_ledger.py",
         "newsroom_runner.py"
       ],
       "consumer_paths": [
         "scripts/observability_snapshot.py",
         "scripts/daily_editorial_judgment.py"
       ],
-      "formula": "count completed in-window run records where runtime_exit_code == 0",
+      "formula": "count validated run_completed events from Jarvis in the requested window",
       "aggregation": "event count",
-      "identity_key": "run identity",
+      "identity_key": "run_id",
       "time_window": "inclusive UTC [window_start, window_end]",
       "zero_semantics": "Zero means an available authoritative source contained no qualifying entities.",
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
       "status": "active",
       "legacy_aliases": [],
@@ -102,7 +111,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "Canonical event authority. Failed-run counts are not inferred from missing run_completed events.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "runtime.run_failures",
@@ -111,7 +121,7 @@
       "entity_counted": "runs",
       "unit": "count",
       "cardinality": "one scalar per requested window",
-      "authority_level": "contractual",
+      "authority_level": "diagnostic",
       "source_primary": "state/newsroom/master_log.jsonl: run.runtime_exit_code",
       "source_secondary": [],
       "producer_paths": [
@@ -125,18 +135,19 @@
       "time_window": "inclusive UTC [window_start, window_end]",
       "zero_semantics": "Zero means an available authoritative source contained no qualifying entities.",
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
-      "availability": "available",
+      "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
-      "status": "active",
+      "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "Event schema v1 has no canonical terminal failed-run event; master-log runtime_exit_code remains legacy diagnostic evidence only.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "runtime.expected_dirt_paths",
@@ -160,7 +171,7 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "source_dependent",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
@@ -168,7 +179,8 @@
       "used_by_reports": [
         "daily_editorial_judgment"
       ],
-      "notes": "Expected paths are limited to .bot_exit_code, logs/master_log.log, and reports/. This is repository diagnostics, not a newsroom outcome."
+      "notes": "Expected paths are limited to .bot_exit_code, logs/master_log.log, and reports/. This is repository diagnostics, not a newsroom outcome.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "runtime.unexpected_dirt_paths",
@@ -192,7 +204,7 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "source_dependent",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
@@ -200,7 +212,8 @@
       "used_by_reports": [
         "daily_editorial_judgment"
       ],
-      "notes": "Expected paths are limited to .bot_exit_code, logs/master_log.log, and reports/. This is repository diagnostics, not a newsroom outcome."
+      "notes": "Expected paths are limited to .bot_exit_code, logs/master_log.log, and reports/. This is repository diagnostics, not a newsroom outcome.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "massy.urls_found",
@@ -227,13 +240,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "The numeric handoff exists, but complete stable item identities and authoritative cross-run uniqueness do not."
+      "notes": "The numeric handoff exists, but complete stable item identities and authoritative cross-run uniqueness do not.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "massy.candidate_news",
@@ -260,13 +274,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "The numeric handoff exists, but complete stable item identities and authoritative cross-run uniqueness do not."
+      "notes": "The numeric handoff exists, but complete stable item identities and authoritative cross-run uniqueness do not.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "massy.candidate_reports",
@@ -293,13 +308,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "The numeric handoff exists, but complete stable item identities and authoritative cross-run uniqueness do not."
+      "notes": "The numeric handoff exists, but complete stable item identities and authoritative cross-run uniqueness do not.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "massy.hard_skips",
@@ -326,13 +342,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "The numeric handoff exists, but complete stable item identities and authoritative cross-run uniqueness do not."
+      "notes": "The numeric handoff exists, but complete stable item identities and authoritative cross-run uniqueness do not.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "massy.published_skips",
@@ -359,13 +376,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "The numeric handoff exists, but complete stable item identities and authoritative cross-run uniqueness do not."
+      "notes": "The numeric handoff exists, but complete stable item identities and authoritative cross-run uniqueness do not.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "massy.actionable_handoffs",
@@ -392,13 +410,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "The numeric handoff exists, but complete stable item identities and authoritative cross-run uniqueness do not."
+      "notes": "The numeric handoff exists, but complete stable item identities and authoritative cross-run uniqueness do not.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "menzo.unique_actionable_candidates",
@@ -407,26 +426,28 @@
       "entity_counted": "articles",
       "unit": "count",
       "cardinality": "one scalar per requested window",
-      "authority_level": "contractual",
-      "source_primary": "state/newsroom/master_log.jsonl: menzo.actionable_identity_keys",
-      "source_secondary": [],
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [
+        "legacy diagnostic only: state/newsroom/master_log.jsonl: menzo.actionable_identity_keys"
+      ],
       "producer_paths": [
-        "agents/master_log_v93_19.py",
-        "scripts/observability_snapshot.py"
+        "agents/canonical_event_ledger.py",
+        "newsroom_runner.py"
       ],
       "consumer_paths": [
         "scripts/daily_editorial_judgment.py",
         "send_daily_report.py"
       ],
-      "formula": "cardinality of the union of actionable identity keys across in-window runs",
-      "aggregation": "distinct identity count",
-      "identity_key": "stable content identity: source URL, then published URL, then normalized title",
+      "formula": "distinct content_id across validated Menzo candidate_selected and candidate_pending events in the requested window",
+      "aggregation": "distinct content count",
+      "identity_key": "content_id",
       "time_window": "inclusive UTC [window_start, window_end]",
-      "zero_semantics": "Zero means the authoritative actionable identity stream is available and contains no selected or pending identity in the window.",
-      "missing_semantics": "Null means master authority is unavailable, or legacy reconstruction depends on a pending sample ambiguously truncated at the historical cap.",
+      "zero_semantics": "Zero means full canonical lifecycle coverage contains no distinct content_id across Menzo candidate_selected or candidate_pending events in the requested window.",
+      "missing_semantics": "Null means canonical lifecycle coverage is incomplete, unavailable, malformed, or cannot support the requested window.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
       "status": "active",
       "legacy_aliases": [],
@@ -435,7 +456,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "Canonical event authority; requires full canonical lifecycle coverage.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "menzo.unique_downstream_handoffs",
@@ -444,26 +466,28 @@
       "entity_counted": "articles",
       "unit": "count",
       "cardinality": "one scalar per requested window",
-      "authority_level": "contractual",
-      "source_primary": "state/newsroom/master_log.jsonl: menzo.selected",
-      "source_secondary": [],
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [
+        "legacy diagnostic only: state/newsroom/master_log.jsonl: menzo.selected"
+      ],
       "producer_paths": [
-        "agents/master_log_v93_19.py",
-        "scripts/observability_snapshot.py"
+        "agents/canonical_event_ledger.py",
+        "newsroom_runner.py"
       ],
       "consumer_paths": [
         "scripts/daily_editorial_judgment.py",
         "send_daily_report.py"
       ],
-      "formula": "cardinality of unique stable identities in selected rows across in-window runs",
-      "aggregation": "distinct identity count",
-      "identity_key": "stable content identity: source URL, then published URL, then normalized title",
+      "formula": "distinct content_id across validated Bob article_generation_requested events in the requested window",
+      "aggregation": "distinct content count",
+      "identity_key": "content_id",
       "time_window": "inclusive UTC [window_start, window_end]",
       "zero_semantics": "Zero means an available authoritative source contained no qualifying entities.",
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
       "status": "active",
       "legacy_aliases": [],
@@ -472,7 +496,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "Measures actual downstream handoff requests, not an intermediate Menzo selected counter.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "menzo.unique_final_publications",
@@ -481,26 +506,28 @@
       "entity_counted": "articles",
       "unit": "count",
       "cardinality": "one scalar per requested window",
-      "authority_level": "contractual",
-      "source_primary": "state/newsroom/master_log.jsonl: publisher.published/results(status=published)",
-      "source_secondary": [],
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [
+        "legacy diagnostic only: state/newsroom/master_log.jsonl: publisher.published/results(status=published)"
+      ],
       "producer_paths": [
-        "agents/master_log_v93_19.py",
-        "scripts/observability_snapshot.py"
+        "agents/canonical_event_ledger.py",
+        "newsroom_runner.py"
       ],
       "consumer_paths": [
         "scripts/daily_editorial_judgment.py",
         "send_daily_report.py"
       ],
-      "formula": "cardinality of authoritative unique Publisher publication identities",
-      "aggregation": "distinct identity count",
-      "identity_key": "stable publication identity: source URL, then WordPress URL, then normalized title",
+      "formula": "distinct content_id across validated Publisher publication_completed events in the requested window",
+      "aggregation": "distinct content count",
+      "identity_key": "content_id",
       "time_window": "inclusive UTC [window_start, window_end]",
       "zero_semantics": "Zero means an available authoritative source contained no qualifying entities.",
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
       "status": "active",
       "legacy_aliases": [],
@@ -509,7 +536,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "Canonical Publisher publication authority.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "menzo.linked_handoff_publication_overlap",
@@ -518,26 +546,27 @@
       "entity_counted": "articles",
       "unit": "count",
       "cardinality": "one scalar per requested window",
-      "authority_level": "contractual",
-      "source_primary": "state/newsroom/master_log.jsonl: menzo.selected and authoritative Publisher publication set",
-      "source_secondary": [],
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [
+        "legacy diagnostic only: state/newsroom/master_log.jsonl: menzo.selected and authoritative Publisher publication set"
+      ],
       "producer_paths": [
-        "agents/master_log_v93_19.py",
         "scripts/observability_snapshot.py"
       ],
       "consumer_paths": [
         "scripts/daily_editorial_judgment.py",
         "send_daily_report.py"
       ],
-      "formula": "cardinality of the intersection in a namespace shared by every compared record",
-      "aggregation": "distinct identity count",
-      "identity_key": "shared source URL, WordPress URL, or normalized-title namespace",
+      "formula": "cardinality of content_id intersection between Bob article_generation_requested and Publisher publication_completed events in the requested window",
+      "aggregation": "distinct content intersection count",
+      "identity_key": "content_id",
       "time_window": "inclusive UTC [window_start, window_end]",
-      "zero_semantics": "Zero means identity linkage is supported in one namespace shared by all compared records and no handoff identity overlaps a final publication.",
-      "missing_semantics": "Null means authority is unavailable or no identity namespace is shared by all handoff and publication records being compared.",
+      "zero_semantics": "Zero means full canonical lifecycle coverage contains downstream handoff content_ids and publication content_ids but their content_id intersection is empty.",
+      "missing_semantics": "Null means canonical lifecycle coverage is incomplete, unavailable, malformed, or cannot support authoritative content_id linkage for the requested window.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
       "status": "active",
       "legacy_aliases": [],
@@ -546,7 +575,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "Canonical correlation replaces legacy alias matching.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "menzo.handoff_to_publication_ratio",
@@ -555,26 +585,27 @@
       "entity_counted": "ratio",
       "unit": "ratio",
       "cardinality": "one scalar per requested window",
-      "authority_level": "contractual",
-      "source_primary": "scripts/observability_snapshot.py canonical funnel",
-      "source_secondary": [],
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [
+        "legacy diagnostic only: scripts/observability_snapshot.py canonical funnel"
+      ],
       "producer_paths": [
-        "agents/master_log_v93_19.py",
         "scripts/observability_snapshot.py"
       ],
       "consumer_paths": [
         "scripts/daily_editorial_judgment.py",
         "send_daily_report.py"
       ],
-      "formula": "menzo.linked_handoff_publication_overlap / menzo.unique_downstream_handoffs",
+      "formula": "menzo.linked_handoff_publication_overlap / menzo.unique_downstream_handoffs; null when the denominator is zero or canonical coverage is incomplete",
       "aggregation": "ratio",
-      "identity_key": "not applicable",
+      "identity_key": "content_id",
       "time_window": "inclusive UTC [window_start, window_end]",
-      "zero_semantics": "Zero means unique downstream handoffs is authoritatively greater than zero, identity linkage is supported, and linked handoff/publication overlap equals zero.",
-      "missing_semantics": "Null means the handoff denominator is zero or absent, an input authority is unavailable, or identity linkage is not supported.",
+      "zero_semantics": "Zero means full canonical lifecycle coverage has a nonzero downstream-handoff denominator and the canonical content_id overlap with final publications is zero.",
+      "missing_semantics": "Null means canonical lifecycle coverage is incomplete or unavailable, or the downstream-handoff denominator is zero.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
       "status": "active",
       "legacy_aliases": [],
@@ -583,7 +614,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "Derived only from canonical content_id linkage.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "menzo.same_run_expected_pairs",
@@ -609,7 +641,7 @@
       "missing_semantics": "Null means the artifact is absent or unreadable, or its membership in the observed producing run cannot be verified.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [
@@ -617,7 +649,8 @@
       ],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Authoritative for its producing run only; the artifact has no retained window series. The v95.21.1 matrix is unchanged. No authoritative series exists across the editorial window."
+      "notes": "Authoritative for its producing run only; the artifact has no retained window series. The v95.21.1 matrix is unchanged. No authoritative series exists across the editorial window.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "menzo.same_run_evaluated_pairs",
@@ -643,7 +676,7 @@
       "missing_semantics": "Null means the artifact is absent or unreadable, or its membership in the observed producing run cannot be verified.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [
@@ -651,7 +684,8 @@
       ],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Authoritative for its producing run only; the artifact has no retained window series. The v95.21.1 matrix is unchanged. No authoritative series exists across the editorial window."
+      "notes": "Authoritative for its producing run only; the artifact has no retained window series. The v95.21.1 matrix is unchanged. No authoritative series exists across the editorial window.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "menzo.recent_history_expected_pairs",
@@ -677,7 +711,7 @@
       "missing_semantics": "Null means the artifact is absent or unreadable, or its membership in the observed producing run cannot be verified.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [
@@ -685,7 +719,8 @@
       ],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Authoritative for its producing run only; the artifact has no retained window series. The v95.21.1 matrix is unchanged. No authoritative series exists across the editorial window."
+      "notes": "Authoritative for its producing run only; the artifact has no retained window series. The v95.21.1 matrix is unchanged. No authoritative series exists across the editorial window.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "menzo.recent_history_evaluated_pairs",
@@ -711,7 +746,7 @@
       "missing_semantics": "Null means the artifact is absent or unreadable, or its membership in the observed producing run cannot be verified.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [
@@ -719,7 +754,8 @@
       ],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Authoritative for its producing run only; the artifact has no retained window series. The v95.21.1 matrix is unchanged. No authoritative series exists across the editorial window."
+      "notes": "Authoritative for its producing run only; the artifact has no retained window series. The v95.21.1 matrix is unchanged. No authoritative series exists across the editorial window.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "menzo.duplicate_coverage_complete",
@@ -745,7 +781,7 @@
       "missing_semantics": "Null means the artifact is absent or unreadable, or its membership in the observed producing run cannot be verified.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [
@@ -753,7 +789,8 @@
       ],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Not promoted to an editorial-window active metric because only latest-run detail is retained. No authoritative series exists across the editorial window."
+      "notes": "Not promoted to an editorial-window active metric because only latest-run detail is retained. No authoritative series exists across the editorial window.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "menzo.exact_duplicate_pairs",
@@ -777,13 +814,14 @@
       "missing_semantics": "Null means the artifact is absent or unreadable, or its membership in the observed producing run cannot be verified.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Not promoted to an editorial-window active metric because only latest-run detail is retained. No authoritative series exists across the editorial window."
+      "notes": "Not promoted to an editorial-window active metric because only latest-run detail is retained. No authoritative series exists across the editorial window.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "menzo.suspicious_pairs",
@@ -807,13 +845,14 @@
       "missing_semantics": "Null means the artifact is absent or unreadable, or its membership in the observed producing run cannot be verified.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Not promoted to an editorial-window active metric because only latest-run detail is retained. No authoritative series exists across the editorial window."
+      "notes": "Not promoted to an editorial-window active metric because only latest-run detail is retained. No authoritative series exists across the editorial window.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "menzo.pairs_below_threshold",
@@ -837,13 +876,14 @@
       "missing_semantics": "Null means the artifact is absent or unreadable, or its membership in the observed producing run cannot be verified.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Not promoted to an editorial-window active metric because only latest-run detail is retained. No authoritative series exists across the editorial window."
+      "notes": "Not promoted to an editorial-window active metric because only latest-run detail is retained. No authoritative series exists across the editorial window.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "menzo.duplicates_blocked",
@@ -867,13 +907,14 @@
       "missing_semantics": "Null means the artifact is absent or unreadable, or its membership in the observed producing run cannot be verified.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Not promoted to an editorial-window active metric because only latest-run detail is retained. No authoritative series exists across the editorial window."
+      "notes": "Not promoted to an editorial-window active metric because only latest-run detail is retained. No authoritative series exists across the editorial window.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "menzo.arbitration_failures",
@@ -897,13 +938,14 @@
       "missing_semantics": "Null means the artifact is absent or unreadable, or its membership in the observed producing run cannot be verified.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Not promoted to an editorial-window active metric because only latest-run detail is retained. No authoritative series exists across the editorial window."
+      "notes": "Not promoted to an editorial-window active metric because only latest-run detail is retained. No authoritative series exists across the editorial window.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "menzo.terminal_invariant_failures",
@@ -927,7 +969,7 @@
       "missing_semantics": "Null means the artifact is absent or unreadable, or its membership in the observed producing run cannot be verified.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [
@@ -935,7 +977,8 @@
       ],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Not promoted to an editorial-window active metric because only latest-run detail is retained. No authoritative series exists across the editorial window."
+      "notes": "Not promoted to an editorial-window active metric because only latest-run detail is retained. No authoritative series exists across the editorial window.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "menzo.material_updates",
@@ -959,13 +1002,14 @@
       "missing_semantics": "Null means the artifact is absent or unreadable, or its membership in the observed producing run cannot be verified.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Not promoted to an editorial-window active metric because only latest-run detail is retained. No authoritative series exists across the editorial window."
+      "notes": "Not promoted to an editorial-window active metric because only latest-run detail is retained. No authoritative series exists across the editorial window.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "menzo.selected_after_budget",
@@ -991,7 +1035,7 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [
@@ -999,7 +1043,8 @@
       ],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Final handoff count is not interchangeable with intermediate selected values printed during policy postprocessing."
+      "notes": "Final handoff count is not interchangeable with intermediate selected values printed during policy postprocessing.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "menzo.pending",
@@ -1025,7 +1070,7 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [
@@ -1033,7 +1078,8 @@
       ],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Final handoff count is not interchangeable with intermediate selected values printed during policy postprocessing."
+      "notes": "Final handoff count is not interchangeable with intermediate selected values printed during policy postprocessing.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "menzo.skipped",
@@ -1059,7 +1105,7 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [
@@ -1067,7 +1113,8 @@
       ],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Final handoff count is not interchangeable with intermediate selected values printed during policy postprocessing."
+      "notes": "Final handoff count is not interchangeable with intermediate selected values printed during policy postprocessing.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "andrea.checked_unique",
@@ -1092,13 +1139,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "unavailable",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "planned",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Existing andrea.handoff counters support only per-run events; they cannot authoritatively deduplicate articles across runs."
+      "notes": "Existing andrea.handoff counters support only per-run events; they cannot authoritatively deduplicate articles across runs.",
+      "authority_family": "unavailable"
     },
     {
       "canonical_name": "andrea.passed_unique",
@@ -1123,13 +1171,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "unavailable",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "planned",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Existing andrea.handoff counters support only per-run events; they cannot authoritatively deduplicate articles across runs."
+      "notes": "Existing andrea.handoff counters support only per-run events; they cannot authoritatively deduplicate articles across runs.",
+      "authority_family": "unavailable"
     },
     {
       "canonical_name": "andrea.blocked_unique",
@@ -1154,13 +1203,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "unavailable",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "planned",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Existing andrea.handoff counters support only per-run events; they cannot authoritatively deduplicate articles across runs."
+      "notes": "Existing andrea.handoff counters support only per-run events; they cannot authoritatively deduplicate articles across runs.",
+      "authority_family": "unavailable"
     },
     {
       "canonical_name": "andrea.gemini_calls_saved",
@@ -1185,13 +1235,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Name describes the desired metric; current source supports event counts only, so it is not active."
+      "notes": "Name describes the desired metric; current source supports event counts only, so it is not active.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "andrea.fetches_performed",
@@ -1216,13 +1267,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Name describes the desired metric; current source supports event counts only, so it is not active."
+      "notes": "Name describes the desired metric; current source supports event counts only, so it is not active.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "andrea.checked_events",
@@ -1247,13 +1299,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "This measures events only and must not substitute for the corresponding planned unique metric."
+      "notes": "This measures events only and must not substitute for the corresponding planned unique metric.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "andrea.passed_events",
@@ -1278,13 +1331,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "This measures events only and must not substitute for the corresponding planned unique metric."
+      "notes": "This measures events only and must not substitute for the corresponding planned unique metric.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "andrea.blocked_events",
@@ -1309,13 +1363,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "This measures events only and must not substitute for the corresponding planned unique metric."
+      "notes": "This measures events only and must not substitute for the corresponding planned unique metric.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "bob.logical_translation_requests",
@@ -1340,13 +1395,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "unavailable",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "planned",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": ""
+      "notes": "",
+      "authority_family": "unavailable"
     },
     {
       "canonical_name": "bob.model_attempts",
@@ -1356,7 +1412,7 @@
       "unit": "count",
       "cardinality": "one scalar per requested window",
       "authority_level": "contractual",
-      "source_primary": "Gemini ledger filtered to agent=Bob and translation reason",
+      "source_primary": "state/newsroom/gemini_call_ledger.jsonl: agent=Bob and translation workload",
       "source_secondary": [],
       "producer_paths": [
         "agents/bob.py",
@@ -1371,13 +1427,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": ""
+      "notes": "",
+      "authority_family": "provider_economics"
     },
     {
       "canonical_name": "bob.model_successes",
@@ -1402,13 +1459,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "unavailable",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "planned",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": ""
+      "notes": "",
+      "authority_family": "unavailable"
     },
     {
       "canonical_name": "bob.model_failures",
@@ -1418,7 +1476,7 @@
       "unit": "count",
       "cardinality": "one scalar per requested window",
       "authority_level": "contractual",
-      "source_primary": "Gemini ledger filtered to agent=Bob and status=failed",
+      "source_primary": "state/newsroom/gemini_call_ledger.jsonl: agent=Bob and status=failed",
       "source_secondary": [],
       "producer_paths": [
         "agents/bob.py",
@@ -1433,13 +1491,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": ""
+      "notes": "",
+      "authority_family": "provider_economics"
     },
     {
       "canonical_name": "bob.fallbacks",
@@ -1449,7 +1508,7 @@
       "unit": "count",
       "cardinality": "one scalar per requested window",
       "authority_level": "contractual",
-      "source_primary": "Gemini ledger filtered to agent=Bob and fallback=true",
+      "source_primary": "state/newsroom/gemini_call_ledger.jsonl: agent=Bob and fallback=true",
       "source_secondary": [],
       "producer_paths": [
         "agents/bob.py",
@@ -1464,13 +1523,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": ""
+      "notes": "",
+      "authority_family": "provider_economics"
     },
     {
       "canonical_name": "bob.packages_ready",
@@ -1495,13 +1555,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": ""
+      "notes": "",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "bob.packages_pending",
@@ -1526,13 +1587,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": ""
+      "notes": "",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "bob.packages_empty",
@@ -1557,13 +1619,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": ""
+      "notes": "",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "bob.packages_errors",
@@ -1588,13 +1651,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Generic errors do not distinguish recoverable from terminal outcomes."
+      "notes": "Generic errors do not distinguish recoverable from terminal outcomes.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "alfred.unique_articles_reviewed",
@@ -1603,28 +1667,28 @@
       "entity_counted": "articles",
       "unit": "count",
       "cardinality": "one scalar per requested window",
-      "authority_level": "contractual",
-      "source_primary": "state/newsroom/master_log.jsonl: alfred.reviews (plus Publisher authority where required)",
-      "source_secondary": [],
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [
+        "legacy diagnostic only: state/newsroom/master_log.jsonl: alfred.reviews (plus Publisher authority where required)"
+      ],
       "producer_paths": [
-        "agents/alfred.py",
-        "agents/alfred_policy_v93_20.py",
-        "agents/master_log_v93_19.py",
+        "agents/canonical_event_ledger.py",
         "scripts/observability_snapshot.py"
       ],
       "consumer_paths": [
         "scripts/daily_editorial_judgment.py",
         "send_daily_report.py"
       ],
-      "formula": "cardinality of unique identities in alfred.reviews",
-      "aggregation": "distinct identity count",
-      "identity_key": "stable article identity",
+      "formula": "distinct content_id across validated Alfred quality_review_completed events",
+      "aggregation": "distinct content count",
+      "identity_key": "content_id",
       "time_window": "inclusive UTC [window_start, window_end]",
       "zero_semantics": "Zero means an available authoritative source contained no qualifying entities.",
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
       "status": "active",
       "legacy_aliases": [],
@@ -1633,7 +1697,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "Canonical Alfred review authority.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "alfred.unique_articles_with_warnings",
@@ -1642,28 +1707,28 @@
       "entity_counted": "articles",
       "unit": "count",
       "cardinality": "one scalar per requested window",
-      "authority_level": "contractual",
-      "source_primary": "state/newsroom/master_log.jsonl: alfred.reviews (plus Publisher authority where required)",
-      "source_secondary": [],
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [
+        "legacy diagnostic only: state/newsroom/master_log.jsonl: alfred.reviews (plus Publisher authority where required)"
+      ],
       "producer_paths": [
-        "agents/alfred.py",
-        "agents/alfred_policy_v93_20.py",
-        "agents/master_log_v93_19.py",
+        "agents/canonical_event_ledger.py",
         "scripts/observability_snapshot.py"
       ],
       "consumer_paths": [
         "scripts/daily_editorial_judgment.py",
         "send_daily_report.py"
       ],
-      "formula": "cardinality of unique warning-bearing review identities",
-      "aggregation": "distinct identity count",
-      "identity_key": "stable article identity",
+      "formula": "distinct content_id across validated Alfred warning_recorded events",
+      "aggregation": "distinct content count",
+      "identity_key": "content_id",
       "time_window": "inclusive UTC [window_start, window_end]",
       "zero_semantics": "Zero means an available authoritative source contained no qualifying entities.",
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
       "status": "active",
       "legacy_aliases": [],
@@ -1672,7 +1737,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "Canonical warning facts; legacy warning lists are diagnostic only.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "alfred.warning_events",
@@ -1681,28 +1747,27 @@
       "entity_counted": "review events",
       "unit": "count",
       "cardinality": "one scalar per requested window",
-      "authority_level": "contractual",
-      "source_primary": "state/newsroom/master_log.jsonl: alfred.reviews (plus Publisher authority where required)",
-      "source_secondary": [],
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [
+        "legacy diagnostic only: state/newsroom/master_log.jsonl: alfred.reviews (plus Publisher authority where required)"
+      ],
       "producer_paths": [
-        "agents/alfred.py",
-        "agents/alfred_policy_v93_20.py",
-        "agents/master_log_v93_19.py",
         "scripts/observability_snapshot.py"
       ],
       "consumer_paths": [
         "scripts/daily_editorial_judgment.py",
         "send_daily_report.py"
       ],
-      "formula": "count warning-bearing review rows",
-      "aggregation": "event/occurrence sum",
-      "identity_key": "stable article identity",
+      "formula": "count quality_review_completed occurrences associated with at least one warning_recorded event by canonical append order and matching run/correlation context",
+      "aggregation": "review occurrence count",
+      "identity_key": "derived ordered canonical review occurrence",
       "time_window": "inclusive UTC [window_start, window_end]",
       "zero_semantics": "Zero means an available authoritative source contained no qualifying entities.",
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
       "status": "active",
       "legacy_aliases": [],
@@ -1711,7 +1776,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "Canonical warning-bearing review occurrence grain.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "alfred.warning_occurrences",
@@ -1720,28 +1786,28 @@
       "entity_counted": "warning occurrences",
       "unit": "count",
       "cardinality": "one scalar per requested window",
-      "authority_level": "contractual",
-      "source_primary": "state/newsroom/master_log.jsonl: alfred.reviews (plus Publisher authority where required)",
-      "source_secondary": [],
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [
+        "legacy diagnostic only: state/newsroom/master_log.jsonl: alfred.reviews (plus Publisher authority where required)"
+      ],
       "producer_paths": [
-        "agents/alfred.py",
-        "agents/alfred_policy_v93_20.py",
-        "agents/master_log_v93_19.py",
+        "agents/canonical_event_ledger.py",
         "scripts/observability_snapshot.py"
       ],
       "consumer_paths": [
         "scripts/daily_editorial_judgment.py",
         "send_daily_report.py"
       ],
-      "formula": "sum warning_occurrences_total; legacy lists at the ten-entry cap are unavailable",
-      "aggregation": "event/occurrence sum",
-      "identity_key": "stable article identity",
+      "formula": "count validated Alfred warning_recorded events",
+      "aggregation": "event count",
+      "identity_key": "warning event occurrence",
       "time_window": "inclusive UTC [window_start, window_end]",
-      "zero_semantics": "Zero means the authoritative review stream is available and contains no individual warning occurrence in the window.",
-      "missing_semantics": "Null means review authority is unavailable, or a legacy warning list has exactly ten entries without an authoritative warning_occurrences_total and may be truncated.",
+      "zero_semantics": "Zero means full canonical warning coverage contains no Alfred warning_recorded event in the requested window.",
+      "missing_semantics": "Null means canonical warning coverage is incomplete, unavailable, malformed, or cannot support the requested window.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
       "status": "active",
       "legacy_aliases": [
@@ -1753,7 +1819,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "Canonical warning occurrence authority.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "alfred.unique_final_blockers",
@@ -1762,28 +1829,27 @@
       "entity_counted": "articles",
       "unit": "count",
       "cardinality": "one scalar per requested window",
-      "authority_level": "contractual",
-      "source_primary": "state/newsroom/master_log.jsonl: alfred.reviews (plus Publisher authority where required)",
-      "source_secondary": [],
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [
+        "legacy diagnostic only: state/newsroom/master_log.jsonl: alfred.reviews (plus Publisher authority where required)"
+      ],
       "producer_paths": [
-        "agents/alfred.py",
-        "agents/alfred_policy_v93_20.py",
-        "agents/master_log_v93_19.py",
         "scripts/observability_snapshot.py"
       ],
       "consumer_paths": [
         "scripts/daily_editorial_judgment.py",
         "send_daily_report.py"
       ],
-      "formula": "chronological latest-outcome computation joined to authoritative publications",
-      "aggregation": "distinct identity count",
-      "identity_key": "stable article identity",
+      "formula": "distinct content_id whose latest blocker_recorded fact has no later approved quality_review_completed or publication_completed event",
+      "aggregation": "distinct final blocked content count",
+      "identity_key": "content_id",
       "time_window": "inclusive UTC [window_start, window_end]",
       "zero_semantics": "Zero means an available authoritative source contained no qualifying entities.",
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
       "status": "active",
       "legacy_aliases": [],
@@ -1792,7 +1858,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "Derived from canonical ordered lifecycle evidence.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "alfred.revised_then_approved",
@@ -1801,28 +1868,27 @@
       "entity_counted": "articles",
       "unit": "count",
       "cardinality": "one scalar per requested window",
-      "authority_level": "contractual",
-      "source_primary": "state/newsroom/master_log.jsonl: alfred.reviews (plus Publisher authority where required)",
-      "source_secondary": [],
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [
+        "legacy diagnostic only: state/newsroom/master_log.jsonl: alfred.reviews (plus Publisher authority where required)"
+      ],
       "producer_paths": [
-        "agents/alfred.py",
-        "agents/alfred_policy_v93_20.py",
-        "agents/master_log_v93_19.py",
         "scripts/observability_snapshot.py"
       ],
       "consumer_paths": [
         "scripts/daily_editorial_judgment.py",
         "send_daily_report.py"
       ],
-      "formula": "chronological transition count by identity",
-      "aggregation": "distinct identity count",
-      "identity_key": "stable article identity",
+      "formula": "distinct content_id with a needs_revision quality_review_completed event before a later approved quality_review_completed event in the requested window",
+      "aggregation": "distinct transition content count",
+      "identity_key": "content_id",
       "time_window": "inclusive UTC [window_start, window_end]",
       "zero_semantics": "Zero means an available authoritative source contained no qualifying entities.",
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
       "status": "active",
       "legacy_aliases": [],
@@ -1831,7 +1897,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "Derived from canonical ordered Alfred review events.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "alfred.revised_then_published",
@@ -1840,28 +1907,27 @@
       "entity_counted": "articles",
       "unit": "count",
       "cardinality": "one scalar per requested window",
-      "authority_level": "contractual",
-      "source_primary": "state/newsroom/master_log.jsonl: alfred.reviews (plus Publisher authority where required)",
-      "source_secondary": [],
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [
+        "legacy diagnostic only: state/newsroom/master_log.jsonl: alfred.reviews (plus Publisher authority where required)"
+      ],
       "producer_paths": [
-        "agents/alfred.py",
-        "agents/alfred_policy_v93_20.py",
-        "agents/master_log_v93_19.py",
         "scripts/observability_snapshot.py"
       ],
       "consumer_paths": [
         "scripts/daily_editorial_judgment.py",
         "send_daily_report.py"
       ],
-      "formula": "chronological transition count joined to publications",
-      "aggregation": "distinct identity count",
-      "identity_key": "stable article identity",
+      "formula": "distinct content_id with a needs_revision quality_review_completed event before a later Publisher publication_completed event in the requested window",
+      "aggregation": "distinct transition content count",
+      "identity_key": "content_id",
       "time_window": "inclusive UTC [window_start, window_end]",
       "zero_semantics": "Zero means an available authoritative source contained no qualifying entities.",
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
       "status": "active",
       "legacy_aliases": [],
@@ -1870,7 +1936,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "Derived from canonical ordered Alfred/Publisher lifecycle events.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "gemini.real_attempts",
@@ -1899,7 +1966,7 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
       "status": "active",
       "legacy_aliases": [],
@@ -1908,7 +1975,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "",
+      "authority_family": "provider_economics"
     },
     {
       "canonical_name": "gemini.completed_calls",
@@ -1937,7 +2005,7 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
       "status": "active",
       "legacy_aliases": [
@@ -1948,7 +2016,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "",
+      "authority_family": "provider_economics"
     },
     {
       "canonical_name": "gemini.failures",
@@ -1977,7 +2046,7 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
       "status": "active",
       "legacy_aliases": [],
@@ -1986,7 +2055,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "",
+      "authority_family": "provider_economics"
     },
     {
       "canonical_name": "gemini.avoided_calls",
@@ -2015,7 +2085,7 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
       "status": "active",
       "legacy_aliases": [
@@ -2026,7 +2096,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "",
+      "authority_family": "provider_economics"
     },
     {
       "canonical_name": "gemini.fallbacks",
@@ -2055,7 +2126,7 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
       "status": "active",
       "legacy_aliases": [],
@@ -2064,7 +2135,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "",
+      "authority_family": "provider_economics"
     },
     {
       "canonical_name": "gemini.gemini_3_5_attempts",
@@ -2092,7 +2164,7 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
       "status": "active",
       "legacy_aliases": [],
@@ -2101,7 +2173,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "",
+      "authority_family": "provider_economics"
     },
     {
       "canonical_name": "gemini.gemini_3_5_completed_calls",
@@ -2129,7 +2202,7 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
       "status": "active",
       "legacy_aliases": [
@@ -2141,7 +2214,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "",
+      "authority_family": "provider_economics"
     },
     {
       "canonical_name": "gemini.gemini_3_5_failures",
@@ -2169,7 +2243,7 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
       "status": "active",
       "legacy_aliases": [],
@@ -2178,7 +2252,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "",
+      "authority_family": "provider_economics"
     },
     {
       "canonical_name": "gemini.gemini_3_5_avoided_calls",
@@ -2206,7 +2281,7 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
       "status": "active",
       "legacy_aliases": [],
@@ -2215,7 +2290,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "",
+      "authority_family": "provider_economics"
     },
     {
       "canonical_name": "gemini.token_usage_coverage",
@@ -2240,13 +2316,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "source_dependent",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Coverage describes metadata availability, not token or cost completeness for legacy rows."
+      "notes": "Coverage describes metadata availability, not token or cost completeness for legacy rows.",
+      "authority_family": "provider_economics"
     },
     {
       "canonical_name": "gemini.cost_coverage",
@@ -2271,13 +2348,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "source_dependent",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Coverage describes metadata availability, not token or cost completeness for legacy rows."
+      "notes": "Coverage describes metadata availability, not token or cost completeness for legacy rows.",
+      "authority_family": "provider_economics"
     },
     {
       "canonical_name": "simone.reports_due",
@@ -2303,13 +2381,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "unavailable",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "planned",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": ""
+      "notes": "",
+      "authority_family": "unavailable"
     },
     {
       "canonical_name": "simone.report_candidates_found",
@@ -2335,13 +2414,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": ""
+      "notes": "",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "simone.reports_ready",
@@ -2367,13 +2447,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": ""
+      "notes": "",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "simone.reports_published",
@@ -2382,27 +2463,28 @@
       "entity_counted": "reports",
       "unit": "count",
       "cardinality": "one scalar per requested window",
-      "authority_level": "contractual",
-      "source_primary": "state/newsroom/master_log.jsonl: simone.published_reports(status=published)",
-      "source_secondary": [],
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [
+        "legacy diagnostic only: state/newsroom/master_log.jsonl: simone.published_reports(status=published)"
+      ],
       "producer_paths": [
-        "agents/simone.py",
-        "agents/simone_publisher_v93_18.py",
-        "agents/master_log_v93_19.py"
+        "agents/canonical_event_ledger.py",
+        "scripts/observability_snapshot.py"
       ],
       "consumer_paths": [
         "scripts/observability_snapshot.py",
         "scripts/daily_editorial_judgment.py"
       ],
-      "formula": "cardinality of unique authoritative report publication identities",
-      "aggregation": "distinct identity count",
-      "identity_key": "stable report/source identity",
+      "formula": "distinct canonical report identity across validated Simone report_published events in the requested window",
+      "aggregation": "distinct report count",
+      "identity_key": "report_key when present; otherwise content_id or correlation_id",
       "time_window": "inclusive UTC [window_start, window_end]",
       "zero_semantics": "Zero means an available authoritative source contained no qualifying entities.",
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
       "status": "active",
       "legacy_aliases": [],
@@ -2411,7 +2493,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "Canonical report publication authority.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "simone.already_present_events",
@@ -2420,7 +2503,7 @@
       "entity_counted": "reports",
       "unit": "count",
       "cardinality": "one scalar per requested window",
-      "authority_level": "contractual",
+      "authority_level": "diagnostic",
       "source_primary": "state/newsroom/master_log.jsonl: simone.publish_handoff.already_published",
       "source_secondary": [],
       "producer_paths": [
@@ -2438,18 +2521,19 @@
       "time_window": "inclusive UTC [window_start, window_end]",
       "zero_semantics": "Zero means an available authoritative source contained no qualifying entities.",
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
-      "availability": "available",
+      "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
-      "status": "active",
+      "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "Report already-present outcomes are not encoded by event schema v1; master handoff counters remain diagnostic until telemetry closure.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "simone.reports_missing",
@@ -2475,13 +2559,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "unavailable",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "planned",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": ""
+      "notes": "",
+      "authority_family": "unavailable"
     },
     {
       "canonical_name": "simone.reports_ambiguous",
@@ -2507,13 +2592,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "unavailable",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "planned",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": ""
+      "notes": "",
+      "authority_family": "unavailable"
     },
     {
       "canonical_name": "simone.errors_recovered",
@@ -2539,13 +2625,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "unavailable",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "planned",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Generic handoff errors are diagnostic and MUST NOT be interpreted as terminal errors."
+      "notes": "Generic handoff errors are diagnostic and MUST NOT be interpreted as terminal errors.",
+      "authority_family": "unavailable"
     },
     {
       "canonical_name": "simone.terminal_errors",
@@ -2571,13 +2658,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "unavailable",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "planned",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Generic handoff errors are diagnostic and MUST NOT be interpreted as terminal errors."
+      "notes": "Generic handoff errors are diagnostic and MUST NOT be interpreted as terminal errors.",
+      "authority_family": "unavailable"
     },
     {
       "canonical_name": "simone.sla_violations",
@@ -2603,13 +2691,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "unavailable",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "planned",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": ""
+      "notes": "",
+      "authority_family": "unavailable"
     },
     {
       "canonical_name": "simone.legacy_errors_diagnostic",
@@ -2634,7 +2723,7 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [
@@ -2642,7 +2731,8 @@
       ],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Never substitute for simone.terminal_errors."
+      "notes": "Never substitute for simone.terminal_errors.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "publisher.publication_attempts",
@@ -2668,13 +2758,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": ""
+      "notes": "",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "publisher.publications_unique",
@@ -2683,26 +2774,27 @@
       "entity_counted": "articles",
       "unit": "count",
       "cardinality": "one scalar per requested window",
-      "authority_level": "contractual",
-      "source_primary": "state/newsroom/master_log.jsonl: publisher.published/results(status=published)",
-      "source_secondary": [],
+      "authority_level": "canonical",
+      "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
+      "source_secondary": [
+        "legacy diagnostic only: state/newsroom/master_log.jsonl: publisher.published/results(status=published)"
+      ],
       "producer_paths": [
-        "agents/publisher.py",
-        "agents/master_log_v93_19.py",
-        "agents/publisher_history.py"
+        "agents/canonical_event_ledger.py",
+        "scripts/observability_snapshot.py"
       ],
       "consumer_paths": [
         "scripts/observability_snapshot.py"
       ],
-      "formula": "cardinality of unique authoritative published identities",
-      "aggregation": "distinct identity count",
-      "identity_key": "stable publication identity",
+      "formula": "distinct content_id across validated Publisher publication_completed events in the requested window",
+      "aggregation": "distinct content count",
+      "identity_key": "content_id",
       "time_window": "inclusive UTC [window_start, window_end]",
       "zero_semantics": "Zero means an available authoritative source contained no qualifying entities.",
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.19.0",
       "status": "active",
       "legacy_aliases": [],
@@ -2711,7 +2803,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "Canonical publication authority.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "publisher.already_present_events",
@@ -2737,13 +2830,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": ""
+      "notes": "",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "publisher.dry_run_events",
@@ -2769,13 +2863,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": ""
+      "notes": "",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "publisher.wordpress_not_ready_events",
@@ -2801,13 +2896,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": ""
+      "notes": "",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "publisher.recoverable_errors",
@@ -2833,13 +2929,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "unavailable",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "planned",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Generic publisher.handoff.errors cannot establish recovery or terminality."
+      "notes": "Generic publisher.handoff.errors cannot establish recovery or terminality.",
+      "authority_family": "unavailable"
     },
     {
       "canonical_name": "publisher.terminal_errors",
@@ -2865,13 +2962,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "unavailable",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "planned",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Generic publisher.handoff.errors cannot establish recovery or terminality."
+      "notes": "Generic publisher.handoff.errors cannot establish recovery or terminality.",
+      "authority_family": "unavailable"
     },
     {
       "canonical_name": "wordpress.preflight_attempts",
@@ -2896,13 +2994,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "unavailable",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "planned",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Text diagnostics and generic counters are insufficient for an authoritative typed metric."
+      "notes": "Text diagnostics and generic counters are insufficient for an authoritative typed metric.",
+      "authority_family": "unavailable"
     },
     {
       "canonical_name": "wordpress.endpoint_probes",
@@ -2927,13 +3026,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "unavailable",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "planned",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Text diagnostics and generic counters are insufficient for an authoritative typed metric."
+      "notes": "Text diagnostics and generic counters are insufficient for an authoritative typed metric.",
+      "authority_family": "unavailable"
     },
     {
       "canonical_name": "wordpress.recovered_failures",
@@ -2958,13 +3058,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "unavailable",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "planned",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Text diagnostics and generic counters are insufficient for an authoritative typed metric."
+      "notes": "Text diagnostics and generic counters are insufficient for an authoritative typed metric.",
+      "authority_family": "unavailable"
     },
     {
       "canonical_name": "wordpress.terminal_failures",
@@ -2989,13 +3090,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "unavailable",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "planned",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Text diagnostics and generic counters are insufficient for an authoritative typed metric."
+      "notes": "Text diagnostics and generic counters are insufficient for an authoritative typed metric.",
+      "authority_family": "unavailable"
     },
     {
       "canonical_name": "wordpress.timeouts",
@@ -3020,13 +3122,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "unavailable",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "planned",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Text diagnostics and generic counters are insufficient for an authoritative typed metric."
+      "notes": "Text diagnostics and generic counters are insufficient for an authoritative typed metric.",
+      "authority_family": "unavailable"
     },
     {
       "canonical_name": "wordpress.http_errors",
@@ -3051,13 +3154,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "unavailable",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "planned",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Text diagnostics and generic counters are insufficient for an authoritative typed metric."
+      "notes": "Text diagnostics and generic counters are insufficient for an authoritative typed metric.",
+      "authority_family": "unavailable"
     },
     {
       "canonical_name": "wordpress.dns_errors",
@@ -3082,13 +3186,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "unavailable",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "planned",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Text diagnostics and generic counters are insufficient for an authoritative typed metric."
+      "notes": "Text diagnostics and generic counters are insufficient for an authoritative typed metric.",
+      "authority_family": "unavailable"
     },
     {
       "canonical_name": "artifact_coverage.source_material_coverage",
@@ -3112,13 +3217,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "source_dependent",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "No retention or new artifact is introduced by A1."
+      "notes": "No retention or new artifact is introduced by A1.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "artifact_coverage.translated_candidate_coverage",
@@ -3142,13 +3248,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "source_dependent",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "No retention or new artifact is introduced by A1."
+      "notes": "No retention or new artifact is introduced by A1.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "artifact_coverage.alfred_reviewed_coverage",
@@ -3172,13 +3279,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "source_dependent",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "No retention or new artifact is introduced by A1."
+      "notes": "No retention or new artifact is introduced by A1.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "artifact_coverage.final_published_coverage",
@@ -3202,13 +3310,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "source_dependent",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "No retention or new artifact is introduced by A1."
+      "notes": "No retention or new artifact is introduced by A1.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "artifact_coverage.end_to_end_comparative_coverage",
@@ -3232,13 +3341,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "source_dependent",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "No retention or new artifact is introduced by A1."
+      "notes": "No retention or new artifact is introduced by A1.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "gemini.completed_successful_calls",
@@ -3260,13 +3370,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "deprecated",
       "legacy_aliases": [],
       "replacement": "gemini.completed_calls",
       "used_by_reports": [],
-      "notes": "Deprecated because status=called is not semantic success."
+      "notes": "Deprecated because status=called is not semantic success.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "gemini.gemini_3_5_completed_successful_calls",
@@ -3288,13 +3399,14 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v95.22_a1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v95.22_a1",
       "status": "deprecated",
       "legacy_aliases": [],
       "replacement": "gemini.gemini_3_5_completed_calls",
       "used_by_reports": [],
-      "notes": "Deprecated because status=called is not semantic success."
+      "notes": "Deprecated because status=called is not semantic success.",
+      "authority_family": "diagnostic_legacy"
     },
     {
       "canonical_name": "andrea.checked_occurrences",
@@ -3321,7 +3433,7 @@
       "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v96.1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v96.1",
       "status": "active",
       "legacy_aliases": [],
@@ -3329,7 +3441,8 @@
       "used_by_reports": [
         "daily_editorial_judgment"
       ],
-      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero."
+      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "andrea.checked_content",
@@ -3356,7 +3469,7 @@
       "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v96.1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v96.1",
       "status": "active",
       "legacy_aliases": [],
@@ -3364,7 +3477,8 @@
       "used_by_reports": [
         "daily_editorial_judgment"
       ],
-      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero."
+      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "andrea.passed_occurrences",
@@ -3391,7 +3505,7 @@
       "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v96.1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v96.1",
       "status": "active",
       "legacy_aliases": [],
@@ -3399,7 +3513,8 @@
       "used_by_reports": [
         "daily_editorial_judgment"
       ],
-      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero."
+      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "andrea.passed_content",
@@ -3426,7 +3541,7 @@
       "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v96.1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v96.1",
       "status": "active",
       "legacy_aliases": [],
@@ -3434,7 +3549,8 @@
       "used_by_reports": [
         "daily_editorial_judgment"
       ],
-      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero."
+      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "andrea.passed_with_exception_occurrences",
@@ -3461,7 +3577,7 @@
       "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v96.1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v96.1",
       "status": "active",
       "legacy_aliases": [],
@@ -3469,7 +3585,8 @@
       "used_by_reports": [
         "daily_editorial_judgment"
       ],
-      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero."
+      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "andrea.passed_with_exception_content",
@@ -3496,7 +3613,7 @@
       "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v96.1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v96.1",
       "status": "active",
       "legacy_aliases": [],
@@ -3504,7 +3621,8 @@
       "used_by_reports": [
         "daily_editorial_judgment"
       ],
-      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero."
+      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "andrea.blocked_occurrences",
@@ -3531,7 +3649,7 @@
       "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v96.1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v96.1",
       "status": "active",
       "legacy_aliases": [],
@@ -3539,7 +3657,8 @@
       "used_by_reports": [
         "daily_editorial_judgment"
       ],
-      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero."
+      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "andrea.blocked_content",
@@ -3566,7 +3685,7 @@
       "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v96.1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v96.1",
       "status": "active",
       "legacy_aliases": [],
@@ -3574,7 +3693,8 @@
       "used_by_reports": [
         "daily_editorial_judgment"
       ],
-      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero."
+      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "alfred.warning_bearing_reviews",
@@ -3601,7 +3721,7 @@
       "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v96.1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v96.1",
       "status": "active",
       "legacy_aliases": [],
@@ -3609,7 +3729,8 @@
       "used_by_reports": [
         "daily_editorial_judgment"
       ],
-      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero."
+      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "alfred.blocker_occurrences",
@@ -3636,7 +3757,7 @@
       "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v96.1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v96.1",
       "status": "active",
       "legacy_aliases": [],
@@ -3644,7 +3765,8 @@
       "used_by_reports": [
         "daily_editorial_judgment"
       ],
-      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero."
+      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "alfred.blocker_bearing_reviews",
@@ -3671,7 +3793,7 @@
       "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v96.1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v96.1",
       "status": "active",
       "legacy_aliases": [],
@@ -3679,7 +3801,8 @@
       "used_by_reports": [
         "daily_editorial_judgment"
       ],
-      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero."
+      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "alfred.unique_articles_with_blockers",
@@ -3706,7 +3829,7 @@
       "missing_semantics": "Null means canonical evidence is absent, partial, corrupt, or lifecycle-inconsistent.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v96.1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v96.1",
       "status": "active",
       "legacy_aliases": [],
@@ -3714,7 +3837,8 @@
       "used_by_reports": [
         "daily_editorial_judgment"
       ],
-      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero."
+      "notes": "V96.1 normalized read model; incomplete correlation evidence is null, never inferred zero.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "gemini.provider_usage_resolved_attempts",
@@ -3743,7 +3867,7 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v96.2",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v96.2",
       "status": "active",
       "legacy_aliases": [],
@@ -3752,7 +3876,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "",
+      "authority_family": "provider_economics"
     },
     {
       "canonical_name": "gemini.provider_usage_coverage",
@@ -3781,7 +3906,7 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v96.2",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v96.2",
       "status": "active",
       "legacy_aliases": [],
@@ -3790,7 +3915,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "",
+      "authority_family": "provider_economics"
     },
     {
       "canonical_name": "gemini.computed_cost_resolved_attempts",
@@ -3819,7 +3945,7 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v96.2",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v96.2",
       "status": "active",
       "legacy_aliases": [],
@@ -3828,7 +3954,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "",
+      "authority_family": "provider_economics"
     },
     {
       "canonical_name": "gemini.computed_cost_coverage",
@@ -3857,7 +3984,7 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v96.2",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v96.2",
       "status": "active",
       "legacy_aliases": [],
@@ -3866,7 +3993,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "",
+      "authority_family": "provider_economics"
     },
     {
       "canonical_name": "gemini.known_computed_list_price_cost",
@@ -3895,7 +4023,7 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v96.2",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v96.2",
       "status": "active",
       "legacy_aliases": [],
@@ -3904,7 +4032,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "",
+      "authority_family": "provider_economics"
     },
     {
       "canonical_name": "gemini.complete_window_computed_list_price_cost",
@@ -3933,7 +4062,7 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v96.2",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v96.2",
       "status": "active",
       "legacy_aliases": [],
@@ -3942,7 +4071,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "",
+      "authority_family": "provider_economics"
     },
     {
       "canonical_name": "gemini.unknown_computed_cost_attempts",
@@ -3971,7 +4101,7 @@
       "missing_semantics": "Null means the authoritative source is absent, unreadable, incomplete, or cannot support this semantic.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "v96.2",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "v96.2",
       "status": "active",
       "legacy_aliases": [],
@@ -3980,7 +4110,8 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": ""
+      "notes": "",
+      "authority_family": "provider_economics"
     },
     {
       "canonical_name": "editorial_director_shadow.logical_requests",
@@ -3989,7 +4120,7 @@
       "entity_counted": "logical AI requests",
       "unit": "count",
       "cardinality": "one scalar per requested window",
-      "authority_level": "contractual",
+      "authority_level": "canonical",
       "source_primary": "state/newsroom/canonical_event_ledger.jsonl",
       "source_secondary": [],
       "producer_paths": [
@@ -4005,13 +4136,14 @@
       "missing_semantics": "Null when coverage or a required denominator is unavailable.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "owtv_editorial_director_policy_v1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "ED-1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Authoritative canonical event grain; the Gemini-only diagnostics reader returns null until an existing canonical-event input is joined."
+      "notes": "Authoritative canonical event grain; the Gemini-only diagnostics reader returns null until an existing canonical-event input is joined.",
+      "authority_family": "newsroom_lifecycle"
     },
     {
       "canonical_name": "editorial_director_shadow.provider_attempts",
@@ -4036,13 +4168,14 @@
       "missing_semantics": "Null when coverage or a required denominator is unavailable.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "owtv_editorial_director_policy_v1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "ED-1",
       "status": "active",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Additive non-binding Shadow evidence; workload and phase breakdowns are retained."
+      "notes": "Additive non-binding Shadow evidence; workload and phase breakdowns are retained.",
+      "authority_family": "provider_economics"
     },
     {
       "canonical_name": "editorial_director_shadow.cost_complete",
@@ -4067,13 +4200,14 @@
       "missing_semantics": "Null when coverage or a required denominator is unavailable.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "owtv_editorial_director_policy_v1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "ED-1",
       "status": "active",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Additive non-binding Shadow evidence; workload and phase breakdowns are retained."
+      "notes": "Additive non-binding Shadow evidence; workload and phase breakdowns are retained.",
+      "authority_family": "provider_economics"
     },
     {
       "canonical_name": "editorial_director_shadow.cost_per_logical_request",
@@ -4100,13 +4234,14 @@
       "missing_semantics": "Null when coverage or a required denominator is unavailable.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "owtv_editorial_director_policy_v1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "ED-1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Gemini-only diagnostics returns null because authoritative logical-request denominator requires the canonical event ledger."
+      "notes": "Gemini-only diagnostics returns null because authoritative logical-request denominator requires the canonical event ledger.",
+      "authority_family": "provider_economics"
     },
     {
       "canonical_name": "editorial_director_shadow.cost_per_evaluated_candidate_occurrence",
@@ -4131,13 +4266,14 @@
       "missing_semantics": "Null when coverage or a required denominator is unavailable.",
       "availability": "available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "owtv_editorial_director_policy_v1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "ED-1",
       "status": "active",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Additive non-binding Shadow evidence; workload and phase breakdowns are retained."
+      "notes": "Additive non-binding Shadow evidence; workload and phase breakdowns are retained.",
+      "authority_family": "provider_economics"
     },
     {
       "canonical_name": "editorial_director_shadow.bound_status",
@@ -4162,13 +4298,41 @@
       "missing_semantics": "Null when coverage or a required denominator is unavailable.",
       "availability": "partially_available",
       "schema_version": "owtv_metrics_catalog_v1",
-      "policy_version": "owtv_editorial_director_policy_v1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
       "introduced_in": "ED-1",
       "status": "diagnostic_only",
       "legacy_aliases": [],
       "replacement": null,
       "used_by_reports": [],
-      "notes": "Latest/retained run evidence exists, but current master-log coverage cannot prove a complete arbitrary window; diagnostics return null with explicit partial availability."
+      "notes": "Latest/retained run evidence exists, but current master-log coverage cannot prove a complete arbitrary window; diagnostics return null with explicit partial availability.",
+      "authority_family": "diagnostic_legacy"
     }
-  ]
+  ],
+  "authority_families": {
+    "newsroom_lifecycle": {
+      "primary_source": "state/newsroom/canonical_event_ledger.jsonl",
+      "purpose": "run/content/editorial/publication lifecycle and derived canonical operational metrics",
+      "authoritative": true
+    },
+    "provider_economics": {
+      "primary_source": "state/newsroom/gemini_call_ledger.jsonl",
+      "purpose": "provider attempts, usage, token, model, pricing and cost evidence",
+      "authoritative": true
+    },
+    "artifact_material": {
+      "primary_source": "state/newsroom/canonical_artifact_index.jsonl",
+      "purpose": "retained material existence, representation, provenance and integrity",
+      "authoritative": true
+    },
+    "diagnostic_legacy": {
+      "primary_source": null,
+      "purpose": "legacy/current-run/specialized diagnostics; never a canonical editorial-window authority",
+      "authoritative": false
+    },
+    "unavailable": {
+      "primary_source": null,
+      "purpose": "planned or intentionally unavailable measurement",
+      "authoritative": false
+    }
+  }
 }
