@@ -358,7 +358,7 @@ class CanonicalEventLedger:
                            "artifacts/newsroom/bob_articles.json", item)
             elif status in {"translation_validation_failed", "extraction_empty", "error"}:
                 reason = status if status != "error" else "bob_generation_error"
-                error_class = "validation" if status in {"translation_validation_failed", "extraction_empty"} else "internal"
+                error_class = "validation" if status in {"translation_validation_failed", "extraction_empty"} else "permanent"
                 self.event("article_generation_failed", "Bob", "generation", "failed",
                            "artifacts/newsroom/bob_articles.json", item,
                            reason_code=reason, error_class=error_class, error_terminal=True)
@@ -387,7 +387,7 @@ class CanonicalEventLedger:
             self.event("duplicate_pair_cache_store_failed", "Menzo", "duplicate", "failed",
                        "state/newsroom/menzo_active_duplicate_pair_cache_v1.json",
                        result="failed", reason_code="pr131_duplicate_pair_cache_store_failed",
-                       error_class="storage", error_terminal=False)
+                       error_class="invariant", error_terminal=False)
 
     def observe_alfred(self, value: Any) -> None:
         for item in _rows(value, ("reviews",)):
