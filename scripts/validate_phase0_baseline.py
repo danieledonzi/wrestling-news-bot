@@ -73,6 +73,7 @@ REQUIRED_LEGACY_CONSUMERS = {
 }
 FROZEN_PHASE0_METRIC_COUNT = 99
 FROZEN_PHASE0_METRIC_NAMES_SHA256 = "0b080ab3ecff528f9c2e6e710b8fa06257839c0fae2716f35ba852556bb97ec4"
+FROZEN_PHASE0_METRIC_ROWS_SHA256 = "2a6ad841197d96a2c39ace62fcbc07715fe4675646682583c0386e0e58212f5f"
 
 SECTIONS = {
     "SOURCE_WINDOWS": "source_windows",
@@ -340,6 +341,20 @@ def validate(
             errors.append(
                 "frozen Phase 0 metric set changed: expected {} names with digest {}".format(
                     FROZEN_PHASE0_METRIC_COUNT, FROZEN_PHASE0_METRIC_NAMES_SHA256
+                )
+            )
+        canonical_rows = sorted(
+            (row for row in raw_metric_rows if isinstance(row, dict)),
+            key=lambda row: str(row.get("metric_name") or ""),
+        )
+        rows_payload = json.dumps(
+            canonical_rows, sort_keys=True, separators=(",", ":"), ensure_ascii=False
+        ).encode("utf-8")
+        rows_digest = hashlib.sha256(rows_payload).hexdigest()
+        if rows_digest != FROZEN_PHASE0_METRIC_ROWS_SHA256:
+            errors.append(
+                "frozen Phase 0 metric contract changed: expected digest {}".format(
+                    FROZEN_PHASE0_METRIC_ROWS_SHA256
                 )
             )
     # Phase 0 is an immutable historical observation. The live catalog may evolve
