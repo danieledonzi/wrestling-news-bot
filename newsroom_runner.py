@@ -540,6 +540,7 @@ def main() -> int:
                                        (director_result or {}).get("status") or "capture_unavailable"))
             from agents.menzo_editorial_director_active import evaluate as evaluate_active, project as project_active
             director_result = evaluate_active(director_snapshot, artifact_index=artifacts)
+            canonical.safely("observe_pr131_cache", director_result)
             if director_result.get("status") == "VALIDATED":
                 menzo_decision = project_active(director_snapshot, director_result)
                 observe_applied_active_authority(artifacts, director_snapshot, director_result)
