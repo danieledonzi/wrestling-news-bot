@@ -1360,8 +1360,9 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
         len(pr131_resolved_cost_rows) - pr131_cost_parse_errors
     )
     pr131_cost_coverage = (
-        pr131_cost_resolved / len(pr131_provider_real)
-        if pr131_provider_real else (1.0 if gemini_available else None)
+        (pr131_cost_resolved / len(pr131_provider_real))
+        if gemini_available and pr131_provider_real
+        else (1.0 if gemini_available else None)
     )
     pr131_complete_cost = (
         format(pr131_known_cost, "f")
