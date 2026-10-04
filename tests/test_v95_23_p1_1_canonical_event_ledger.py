@@ -139,28 +139,32 @@ def test_pending_skipped_and_aggregate_guards(tmp_path):
     assert [r["event_type"] for r in rows(ledger.path)] == ["candidate_pending", "candidate_skipped"]
 
 
-@pytest.mark.parametrize("status, expected", [
-    ("ready_for_alfred", 1),
-    ("extraction_empty", 0),
-    ("extraction_ready_translation_pending", 0),
-    ("error", 0),
+@pytest.mark.parametrize("status, expected_event", [
+    ("ready_for_alfred", "article_generated"),
+    ("extraction_empty", "article_generation_failed"),
+    ("extraction_ready_translation_pending", None),
+    ("error", "article_generation_failed"),
 ])
-def test_bob_generated_requires_ready_package(tmp_path, status, expected):
+def test_bob_generated_normalizes_ready_failure_and_pending(tmp_path, status, expected_event):
     ledger = CanonicalEventLedger("r", tmp_path / "l")
     ledger.observe_bob_generated({"articles": [{"url": URL, "status": status}]})
     output = rows(ledger.path) if ledger.path.exists() else []
-    assert len(output) == expected
+    assert [row["event_type"] for row in output] == ([expected_event] if expected_event else [])
     assert all(row["event_type"] == "article_generated" and row["status"] == "success" for row in output)
 
 
-def test_bob_mixed_articles_emit_only_ready_packages(tmp_path):
+def test_bob_mixed_articles_emit_ready_and_typed_terminal_failures(tmp_path):
     ledger = CanonicalEventLedger("r", tmp_path / "l")
     statuses = ["ready_for_alfred", "extraction_empty", "ready_for_alfred", "error"]
     ledger.observe_bob_generated({"articles": [
         {"url": f"https://example.test/{index}", "status": status}
         for index, status in enumerate(statuses)
     ], "handoff": {"ready_for_alfred": 99}})
-    assert len(rows(ledger.path)) == 2
+    output = rows(ledger.path)
+    assert [row["event_type"] for row in output] == [
+        "article_generated", "article_generation_failed",
+        "article_generated", "article_generation_failed",
+    ]
 
 
 def test_andrea_alfred_item_evidence_no_warning_normalization(tmp_path):
