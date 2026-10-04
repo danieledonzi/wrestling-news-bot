@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
+import json
 
 from scripts.daily_editorial_judgment import _render_pr131_lines, email_summary
-from scripts.observability_snapshot import build_pr131_cache_metrics, build_pr2_telemetry_coverage
+from agents.canonical_event_ledger import CanonicalEventLedger
+from scripts.observability_snapshot import build_pr131_cache_metrics, build_pr2_telemetry_coverage, build_snapshot
 
 NOW = datetime(2026, 10, 4, 12, 0, tzinfo=timezone.utc)
 SINCE = NOW - timedelta(hours=24)
@@ -72,6 +74,42 @@ def test_pr2_marker_inside_window_is_partial_even_with_no_tracked_outcomes():
     assert coverage == "partial"
     assert reason == "pr2_telemetry_cutover_inside_window"
     assert meta["complete_window"] is False
+
+
+def test_bob_and_simone_pr2_zero_or_failure_metrics_do_not_depend_on_cache_activity(tmp_path):
+    path = tmp_path / "state" / "newsroom" / "canonical_event_ledger.jsonl"
+    ledger = CanonicalEventLedger("run-pr2", path)
+    assert ledger.event(
+        "telemetry_contract_observed", "Jarvis", "runtime", "success",
+        result="v96_5_pr2", reason_code="pr2_missing_telemetry_closure",
+    )
+    ledger.observe_bob_generated({"articles": [{
+        "source_url": "https://example.test/bob-failure",
+        "status": "extraction_empty",
+    }]})
+    ledger.observe_simone({}, {"results": [{
+        "report_key": "wwe_raw_2026_10_04",
+        "status": "already_published",
+    }]})
+
+    rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
+    rows[0]["timestamp_utc"] = (SINCE - timedelta(minutes=1)).isoformat()
+    for row in rows[1:]:
+        row["timestamp_utc"] = (NOW - timedelta(hours=1)).isoformat()
+    path.write_text(
+        "".join(json.dumps(row, separators=(",", ":")) + "\n" for row in rows),
+        encoding="utf-8",
+    )
+
+    snapshot = build_snapshot(SINCE, NOW, tmp_path)
+    authoritative = snapshot["authoritative"]
+    assert snapshot["section_metadata"]["pr2_telemetry"]["complete_window"] is True
+    assert snapshot["pr131_cache"]["coverage"] == "full"
+    assert snapshot["pr131_cache"]["lookups"] == 0
+    assert authoritative["bob"]["item_failures"] == 1
+    assert authoritative["bob"]["failure_reasons"] == {"extraction_empty": 1}
+    assert authoritative["simone"]["already_present_events"] == 1
+    assert authoritative["bob"]["metadata"]["complete_window"] is True
 
 
 def test_pr131_read_model_full_coverage_keeps_pair_and_call_grains_distinct():
