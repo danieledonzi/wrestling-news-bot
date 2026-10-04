@@ -6,7 +6,7 @@ from pathlib import Path
 
 from agents import andrea_policy_v94_15 as andrea_policy
 from agents.master_log_v93_19 import build_master_record
-from scripts.daily_editorial_judgment import render_markdown
+from scripts.daily_editorial_judgment import render_markdown, _render_pr131_lines
 from scripts.observability_snapshot import build_snapshot
 from scripts.patch_runtime_daily_report_v95_19_3 import transform
 from send_daily_report import daily_editorial_judgment_body_section
@@ -416,3 +416,66 @@ def test_markdown_labels_legacy_andrea_exception_reasons_as_diagnostic():
     text = render_markdown(report)
 
     assert "Andrea exception reason occurrences (legacy diagnostic): missing_body (2)" in text
+
+
+def test_pr131_report_separates_cache_reuse_provider_calls_and_actual_cost():
+    lines = _render_pr131_lines({
+        "coverage": "full",
+        "pair_lookups": 4,
+        "pair_hits": 3,
+        "pair_misses": 1,
+        "pair_hit_rate": 0.75,
+        "entries_stored": 1,
+        "gate_logical_requests_avoided": 0,
+        "confirmation_logical_requests_avoided": 0,
+        "duplicate_stage_logical_requests_avoided": 0,
+        "provider": {
+            "available": True,
+            "real_attempts": 1,
+            "called": 1,
+            "failed": 0,
+            "gate_calls_executed": 1,
+            "confirmation_calls_executed": 0,
+            "known_computed_list_price_cost": "0.00125",
+            "complete_window_computed_list_price_cost": "0.00125",
+            "computed_cost_coverage": 1.0,
+            "currency": "USD",
+            "counterfactual_cost_avoided": None,
+        },
+    })
+    text = "\n".join(lines)
+    assert "Cache hits / misses: 3 / 1" in text
+    assert "Pair hit rate: 75.0%" in text
+    assert "Duplicate-gate logical requests avoided: 0" in text
+    assert "Gate / confirmation calls executed: 1 / 0" in text
+    assert "Duplicate-stage actual Gemini cost (complete-window): 0.00125 USD; cost coverage=100.0%" in text
+    assert "Counterfactual dollars avoided: n.d." in text
+    assert "calls avoided: 3" not in text.lower()
+
+
+def test_pr131_report_never_turns_incomplete_cost_coverage_into_zero():
+    text = "\n".join(_render_pr131_lines({
+        "coverage": "full",
+        "pair_lookups": 0,
+        "pair_hits": 0,
+        "pair_misses": 0,
+        "pair_hit_rate": None,
+        "entries_stored": 0,
+        "gate_logical_requests_avoided": 0,
+        "confirmation_logical_requests_avoided": 0,
+        "duplicate_stage_logical_requests_avoided": 0,
+        "provider": {
+            "available": True,
+            "real_attempts": 2,
+            "called": 2,
+            "failed": 0,
+            "gate_calls_executed": 2,
+            "confirmation_calls_executed": 0,
+            "known_computed_list_price_cost": "0.0008",
+            "complete_window_computed_list_price_cost": None,
+            "computed_cost_coverage": 0.5,
+            "currency": "USD",
+        },
+    }))
+    assert "actual Gemini cost (known-partial): 0.0008 USD; cost coverage=50.0%" in text
+    assert "complete-window): 0" not in text
