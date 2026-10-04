@@ -230,6 +230,41 @@ def test_email_body_uses_canonical_metrics_and_classified_warnings(tmp_path):
     assert "PR131 costo controfattuale evitato: n.d." in text
 
 
+def test_email_body_never_presents_partial_pr131_cost_as_real_cost(tmp_path):
+    path = tmp_path / "judgment_partial_pr131_cost.json"
+    path.write_text(
+        json.dumps({
+            "daily_numbers": {
+                "canonical_metrics": {
+                    "pr131_duplicate_pair_cache": {
+                        "coverage": "full",
+                        "pair_lookups": 2,
+                        "pair_hits": 0,
+                        "pair_misses": 2,
+                        "pair_hit_rate": 0.0,
+                        "duplicate_stage_logical_requests_avoided": 0,
+                        "provider": {
+                            "available": True,
+                            "gate_calls_executed": 2,
+                            "confirmation_calls_executed": 0,
+                            "known_computed_list_price_cost": "0.0008",
+                            "complete_window_computed_list_price_cost": None,
+                            "computed_cost_coverage": 0.5,
+                            "currency": "USD",
+                        },
+                    }
+                }
+            }
+        }),
+        encoding="utf-8",
+    )
+
+    text = daily_editorial_judgment_body_section(path)
+
+    assert "PR131 costo Gemini reale duplicate stage: n.d. USD" in text
+    assert "0.0008 USD" not in text
+
+
 def _runtime_fixture() -> str:
     return '''def main():
     repository_report, diagnostics = run_repository_diagnostics()
@@ -506,7 +541,8 @@ def test_pr131_report_never_turns_incomplete_cost_coverage_into_zero():
             "currency": "USD",
         },
     }))
-    assert "actual Gemini cost (known-partial): 0.0008 USD; cost coverage=50.0%" in text
+    assert "actual Gemini cost (complete-window): n.d. USD; cost coverage=50.0%" in text
+    assert "0.0008 USD" not in text
     assert "complete-window): 0" not in text
 
 
