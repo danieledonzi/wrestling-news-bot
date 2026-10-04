@@ -351,8 +351,6 @@ class CanonicalEventLedger:
         self.observe_items(value, ("selected",), "article_generation_requested", "Bob", "generation", "started", "artifacts/newsroom/andrea_pre_bob_latest.json")
 
     def observe_bob_generated(self, value: Any) -> None:
-        self.event("bob_generation_cycle", "Bob", "generation", "success",
-                   "artifacts/newsroom/bob_articles.json")
         for item in _rows(value, ("articles",)):
             status = str(item.get("status") or "")
             if status == "ready_for_alfred":
@@ -403,8 +401,6 @@ class CanonicalEventLedger:
                                reason_code=code, result="blocker")
 
     def observe_publisher(self, value: Any) -> None:
-        self.event("publisher_observation_cycle", "Publisher", "publication", "success",
-                   "artifacts/newsroom/publisher_result.json")
         for item in _rows(value, ("results",)):
             status = item.get("status")
             reason = item.get("reason")
@@ -437,8 +433,6 @@ class CanonicalEventLedger:
                            reason_code="missing_url_or_title", error_class="validation", error_terminal=True)
 
     def observe_simone(self, decision: Any, published: Any = None) -> None:
-        self.event("simone_publication_cycle", "Simone", "reporting", "success",
-                   "artifacts/newsroom/simone_report_publish.json")
         self.observe_items(decision, ("candidates", "report_candidates"), "report_candidate_seen", "Simone", "reporting", "success", "artifacts/newsroom/simone_reports.json")
         for item in _rows(decision, ("ready_reports",)):
             self._report_event("report_selected", item, "success", "artifacts/newsroom/simone_reports.json")
