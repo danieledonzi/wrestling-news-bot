@@ -1122,13 +1122,53 @@ def _artifact_snapshot(root: Path, since: datetime, until: datetime) -> tuple[di
             warnings=integrity_mismatches, reason=reason)
 
 
+def build_pr2_telemetry_coverage(
+    canonical_rows: list[dict[str, Any]],
+    since: datetime,
+    until: datetime,
+    *,
+    canonical_healthy: bool,
+) -> tuple[str, str | None, dict[str, Any]]:
+    """Coverage for telemetry introduced by PR2, independent of whether any tracked outcome occurs."""
+    markers = [
+        row for row in canonical_rows
+        if row.get("event_type") == "telemetry_contract_observed"
+        and row.get("agent") == "Jarvis"
+        and row.get("result") == "v96_5_pr2"
+        and row.get("reason_code") == "pr2_missing_telemetry_closure"
+    ]
+    dated = [parse_utc_datetime(row.get("timestamp_utc")) for row in markers]
+    dated = [dt for dt in dated if dt]
+    if not canonical_healthy:
+        coverage, reason = "unavailable", "canonical_event_ledger_integrity_unavailable"
+    elif not dated:
+        coverage, reason = "unavailable", "pr2_telemetry_cutover_not_observable"
+    else:
+        cutover = min(dated)
+        if cutover > until:
+            coverage, reason = "unavailable", "pr2_telemetry_cutover_after_window"
+        elif cutover > since:
+            coverage, reason = "partial", "pr2_telemetry_cutover_inside_window"
+        else:
+            coverage, reason = "full", None
+    metadata = section_metadata(
+        available=coverage != "unavailable",
+        source="state/newsroom/canonical_event_ledger.jsonl",
+        coverage=coverage,
+        reason=reason,
+    )
+    metadata["cutover_timestamp_utc"] = min(dated).isoformat() if dated else None
+    return coverage, reason, metadata
+
+
 def build_pr131_cache_metrics(
     canonical_rows: list[dict[str, Any]],
     gemini_records: list[dict[str, Any]],
     since: datetime,
     until: datetime,
     *,
-    canonical_healthy: bool,
+    pr2_coverage: str,
+    pr2_reason: str | None,
     gemini_available: bool,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Join PR131 cache behavior with provider attempts/cost without counterfactual dollars."""
@@ -1141,25 +1181,7 @@ def build_pr131_cache_metrics(
         if row.get("event_type") == "duplicate_pair_cache_observed"
         and row.get("agent") == "Menzo"
     ]
-    dated_all = [
-        parse_utc_datetime(row.get("timestamp_utc"))
-        for row in canonical_rows
-        if row.get("event_type") == "duplicate_pair_cache_observed"
-        and row.get("agent") == "Menzo"
-    ]
-    dated_all = [dt for dt in dated_all if dt]
-    if not canonical_healthy:
-        cache_coverage, cache_reason = "unavailable", "canonical_event_ledger_integrity_unavailable"
-    elif not dated_all:
-        cache_coverage, cache_reason = "unavailable", "pr131_cache_cutover_not_observable"
-    else:
-        cutover = min(dated_all)
-        if cutover > until:
-            cache_coverage, cache_reason = "unavailable", "pr131_cache_cutover_after_window"
-        elif cutover > since:
-            cache_coverage, cache_reason = "partial", "pr131_cache_cutover_inside_window"
-        else:
-            cache_coverage, cache_reason = "full", None
+    cache_coverage, cache_reason = pr2_coverage, pr2_reason
 
     lookup_rows = [
         row for row in bounded
@@ -1328,12 +1350,17 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
         p1_1_coverage = p1_3_coverage = active_ai_coverage = "unavailable"
         p1_1_reason = p1_3_reason = active_ai_reason = integrity_reason
     canonical = _canonical_event_sections(canonical_rows, since, until, coverages)
+    pr2_coverage, pr2_reason, pr2_metadata = build_pr2_telemetry_coverage(
+        canonical_rows, since, until,
+        canonical_healthy=integrity_reason is None and canonical_readable,
+    )
     pr131_cache, pr131_metadata = build_pr131_cache_metrics(
         canonical_rows, gemini_records, since, until,
-        canonical_healthy=integrity_reason is None and canonical_readable,
+        pr2_coverage=pr2_coverage,
+        pr2_reason=pr2_reason,
         gemini_available=gemini_available,
     )
-    pr2_complete = pr131_metadata.get("complete_window") is True
+    pr2_complete = pr2_metadata.get("complete_window") is True
     pr2_bounded = [
         row for row in canonical_rows
         if in_window_dt(parse_utc_datetime(row.get("timestamp_utc")), since, until)
@@ -1395,7 +1422,7 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
                                        "warning_occurrences": warning_metadata,
                                        "final_failures": failure_metadata}
     canonical["andrea"]["metadata"] = dict(p1_1_metadata)
-    canonical["bob"]["metadata"] = dict(pr131_metadata)
+    canonical["bob"]["metadata"] = dict(pr2_metadata)
     canonical["publisher"]["metadata"] = {"lifecycle": p1_1_metadata, "terminal_failures": failure_metadata}
     canonical["simone"]["metadata"] = {"lifecycle": p1_1_metadata, "terminal_failures": failure_metadata}
     canonical["ai_operations"]["metadata"] = ai_metadata
@@ -1430,6 +1457,7 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
                 "p1_3_core_ai_operations": p1_3_core_metadata,
                 "p1_3_warning_occurrences": warning_metadata,
                 "p1_3_failure_semantics": failure_metadata,
+                "pr2_telemetry": pr2_metadata,
                 "pr131_cache": pr131_metadata}
                if p1_4_event_metadata_present else {}),
             "artifacts": artifact_metadata,
