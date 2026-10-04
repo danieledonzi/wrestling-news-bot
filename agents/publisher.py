@@ -40,6 +40,7 @@ session.headers.update({"User-Agent": "OpenWrestlingTV-v93-Publisher/1.0"})
 from agents import same_story_guard as same_story_safety
 from agents import source_body
 from agents import publisher_history as publisher_history_retention
+from agents.canonical_event_ledger import active_event
 _category_cache: dict[str, int | None] = {}
 _media_cache: dict[str, tuple[int | None, str | None]] = {}
 
@@ -121,15 +122,44 @@ def wp_categories_url() -> str:
     return f"{wp_root()}/wp-json/wp/v2/categories"
 
 
+def _wordpress_error_reason(exc: Exception) -> str:
+    if isinstance(exc, requests.exceptions.Timeout):
+        return "wordpress_timeout"
+    if isinstance(exc, requests.exceptions.ConnectionError):
+        text = str(exc).lower()
+        if any(token in text for token in ("name resolution", "nameresolution", "getaddrinfo", "nodename nor servname")):
+            return "wordpress_dns_error"
+        return "wordpress_connection_error"
+    return "wordpress_request_error"
+
+
 def wp_ready() -> tuple[bool, str]:
+    active_event("wordpress_preflight_attempted", "Publisher", "publication", "started",
+                 reason_code="wordpress_readiness_preflight")
     if not wp_root() or not all(wp_auth()):
+        active_event("wordpress_preflight_failed", "Publisher", "publication", "failed",
+                     reason_code="missing_wp_env", error_class="configuration", error_terminal=True)
         return False, "missing_wp_env"
     try:
         res = session.get(f"{wp_root()}/wp-json/", timeout=REQUEST_TIMEOUT)
         if res.status_code == 200:
+            active_event("wordpress_endpoint_probe", "Publisher", "publication", "success",
+                         reason_code="wp_json_200")
+            active_event("wordpress_preflight_completed", "Publisher", "publication", "success",
+                         reason_code="wordpress_ready")
             return True, "ok"
-        return False, f"wp_json_status_{res.status_code}"
+        reason = f"wp_json_status_{res.status_code}"
+        active_event("wordpress_endpoint_probe", "Publisher", "publication", "failed",
+                     reason_code=reason)
+        active_event("wordpress_preflight_failed", "Publisher", "publication", "failed",
+                     reason_code=reason, error_class="http", error_terminal=True)
+        return False, reason
     except Exception as exc:
+        reason = _wordpress_error_reason(exc)
+        active_event("wordpress_endpoint_probe", "Publisher", "publication", "failed",
+                     reason_code=reason)
+        active_event("wordpress_preflight_failed", "Publisher", "publication", "failed",
+                     reason_code=reason, error_class=type(exc).__name__, error_terminal=True)
         return False, f"wp_json_error:{exc}"
 
 
