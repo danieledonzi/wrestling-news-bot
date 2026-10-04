@@ -20,6 +20,7 @@ SHOW_NEWS_URGENCY_LATEST_JSON = BOT_DIR / "state" / "reports" / "owtv_show_news_
 SHOW_NEWS_URGENCY_MARKDOWN_GLOB = "owtv_show_news_urgency_audit_24h_*.md"
 TRANSLATION_QUALITY_BLOCKER_WARNING_CODES = {"untranslated_quote"}
 TRANSLATION_QUALITY_CURRENT_FAILED = False
+SHOW_NEWS_URGENCY_CURRENT_FAILED = False
 
 
 def generate_translation_quality_audit_24h() -> tuple[Path | None, Path | None, str | None]:
@@ -133,6 +134,7 @@ def newest_show_news_urgency_audit_markdown() -> Path | None:
 
 def generate_show_news_urgency_audit_24h() -> tuple[Path | None, Path | None, str | None]:
     """Generate the read-only show-news urgency / daily-ceiling audit."""
+    global SHOW_NEWS_URGENCY_CURRENT_FAILED
     try:
         subprocess.run(
             [
@@ -146,9 +148,11 @@ def generate_show_news_urgency_audit_24h() -> tuple[Path | None, Path | None, st
         )
         markdown = newest_show_news_urgency_audit_markdown()
         latest = SHOW_NEWS_URGENCY_LATEST_JSON if SHOW_NEWS_URGENCY_LATEST_JSON.exists() else None
+        SHOW_NEWS_URGENCY_CURRENT_FAILED = False
         print(f"[SHOW NEWS URGENCY] generated {markdown or 'no markdown found'}")
         return markdown, latest, None
     except Exception as exc:
+        SHOW_NEWS_URGENCY_CURRENT_FAILED = True
         warning = f"Show News Urgency Audit skipped/error: {exc}"
         print(f"[SHOW NEWS URGENCY] skipped/error {exc}")
         return None, None, warning
@@ -204,7 +208,9 @@ def show_news_urgency_audit_body_section(
 
 
 def append_show_news_urgency_audit_attachments(attachments: list[Path]) -> list[Path]:
-    """Append the urgency audit Markdown and latest JSON to the email attachments."""
+    """Append only current-run urgency artifacts; never attach stale output after failure."""
+    if SHOW_NEWS_URGENCY_CURRENT_FAILED:
+        return attachments
     markdown = newest_show_news_urgency_audit_markdown()
     for path in (markdown, SHOW_NEWS_URGENCY_LATEST_JSON if SHOW_NEWS_URGENCY_LATEST_JSON.exists() else None):
         if path and path.exists() and path not in attachments:
