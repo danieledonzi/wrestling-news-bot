@@ -180,11 +180,21 @@ def test_active_pair_cache_malformed_and_write_failure_fail_open(monkeypatch):
 
     pair_cache.CACHE_FILE.unlink(missing_ok=True)
     monkeypatch.setattr(pair_cache, "store", lambda *_args, **_kwargs: (_ for _ in ()).throw(OSError("disk")))
+    emitted = []
+    monkeypatch.setattr(active, "active_event",
+                        lambda event, *args, **kwargs: emitted.append((event, kwargs)))
     write_failure = snapshot(2)
     write_failure["authorized_relations"] = [suspicious_relation(write_failure)]
     result = active.evaluate(write_failure, provider=lambda prompt, *_:
         no_match_relations(1) if "DUPLICATE GATE" in prompt else response(write_failure, ("SELECT", "DEFER")))
     assert result["status"] == "VALIDATED" and result["duplicate_pair_cache_entries_stored"] == 0
+    store_failures = [kwargs for event, kwargs in emitted
+                      if event == "stage_failed"
+                      and kwargs.get("reason_code") == "duplicate_pair_cache_store_failed"]
+    assert len(store_failures) == 1
+    assert store_failures[0]["error_class"] == "invariant"
+    assert store_failures[0]["error_terminal"] is False
+    assert store_failures[0]["result"] == "OSError"
 
 
 def _confirmed_duplicate_provider(s, calls, confirmation_decision="CONFIRM_DUPLICATE"):
