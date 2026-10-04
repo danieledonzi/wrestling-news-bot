@@ -211,3 +211,24 @@ def test_old_and_new_special_reservation_identity_shapes_are_explicit():
     base = {"source_url": REDEMPTION_URL, "source_title": "AEW Redemption Results"}
     assert publisher.source_identity_is_explicit({**base, "event_identity": "Redemption"})
     assert publisher.source_identity_is_explicit({**base, "event_identity": "Redemption", "event_name": "Redemption", "aliases": ["AEW Redemption"]})
+
+
+@pytest.mark.parametrize("reason", ["missing_wp_url", "missing_wp_auth", "missing_wp_env"])
+def test_jarvis_wordpress_missing_configuration_is_policy(monkeypatch, reason):
+    from agents import wp_preflight_v93_25
+
+    events = []
+    monkeypatch.setattr(wp_preflight_v93_25, "run_wp_preflight",
+                        lambda: {"ready": False, "reason": reason})
+    monkeypatch.setattr(publisher, "active_event",
+                        lambda event, *args, **kwargs: events.append((event, kwargs)))
+
+    ready, observed_reason, _ = publisher.jarvis_wp_preflight()
+
+    assert ready is False
+    assert observed_reason == reason
+    failures = [kwargs for event, kwargs in events
+                if event == "wordpress_preflight_failed"]
+    assert len(failures) == 1
+    assert failures[0]["error_class"] == "policy"
+    assert failures[0]["error_terminal"] is True
