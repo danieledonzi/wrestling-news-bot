@@ -55,34 +55,35 @@ def errors_for(tmp_path, data=None, dep=None, markdown=None, catalog=None):
     return validate(baseline_path, registry_path, **kwargs)
 
 
-def test_happy_path_cli_and_contract_count_is_derived_from_a1():
+def test_happy_path_cli_and_frozen_baseline_survives_live_policy_migration():
     result = subprocess.run(
         [sys.executable, str(VALIDATOR)], cwd=str(ROOT), text=True,
         stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False,
     )
     assert result.returncode == 0, result.stderr
-    catalog_rows = json.loads((ROOT / "config/metrics_catalog_v1.json").read_text())["metrics"]
-    # Phase 0 is a frozen pre-V96.1 observation. Later catalog additions must
-    # validate without pretending that they existed in the historical window.
-    baseline_catalog_count = sum(row.get("policy_version") == "v95.22_a1" for row in catalog_rows)
-    assert len(payload()["metric_baselines"]) == baseline_catalog_count
-    assert "{} A1 metric rows".format(baseline_catalog_count) in result.stdout
-
-
-def test_frozen_a1_metric_policy_selects_exact_baseline_and_ignores_future_metric(tmp_path):
     catalog = json.loads((ROOT / "config/metrics_catalog_v1.json").read_text())
-    selected = {row["canonical_name"] for row in catalog["metrics"]
-                if row.get("policy_version") == "v95.22_a1"}
+    assert catalog["policy_version"] == "v96.4_telemetry_authority_convergence"
     baseline_names = {row["metric_name"] for row in payload()["metric_baselines"]}
-    assert len(selected) == 99
-    assert selected == baseline_names
+    current_names = {row["canonical_name"] for row in catalog["metrics"]}
+    assert len(baseline_names) == 99
+    assert baseline_names <= current_names
+    assert "99 A1 metric rows" in result.stdout
 
+
+def test_phase0_requires_historical_names_but_ignores_future_catalog_metrics(tmp_path):
+    catalog = json.loads((ROOT / "config/metrics_catalog_v1.json").read_text())
     future = copy.deepcopy(catalog["metrics"][0])
     future.update(canonical_name="future.synthetic_metric", domain="future",
-                  policy_version="v96.2", introduced_in="v96.2")
+                  policy_version="v96.5", introduced_in="v96.5",
+                  authority_family="diagnostic_legacy", status="diagnostic_only")
     catalog["metrics"].append(future)
     errors = errors_for(tmp_path, catalog=catalog)
-    assert not any("baseline metric set" in error for error in errors)
+    assert not any("Phase 0 metric names" in error for error in errors)
+
+    baseline_name = payload()["metric_baselines"][0]["metric_name"]
+    catalog["metrics"] = [row for row in catalog["metrics"] if row["canonical_name"] != baseline_name]
+    errors = errors_for(tmp_path, catalog=catalog)
+    assert any("no longer preserves Phase 0 metric names" in error for error in errors)
 
 
 def test_root_target_window_matches_declared_days():
@@ -184,10 +185,14 @@ def test_raw_handoff_value_cannot_claim_canonical_snapshot_provenance(tmp_path):
     assert any("raw handoff metric" in error for error in errors_for(tmp_path, data=data))
 
 
-def test_metric_source_primary_is_bound_exactly_to_a1(tmp_path):
-    data = payload()
-    metric(data, "runtime.runs_exit_zero")["source_primary"] = "state/newsroom/master_log.jsonl"
-    assert any("source_primary drifts" in error for error in errors_for(tmp_path, data=data))
+def test_current_catalog_authority_migration_does_not_rewrite_phase0(tmp_path):
+    catalog = json.loads((ROOT / "config/metrics_catalog_v1.json").read_text())
+    row = next(item for item in catalog["metrics"] if item["canonical_name"] == "runtime.runs_exit_zero")
+    assert row["source_primary"] == "state/newsroom/canonical_event_ledger.jsonl"
+    # Historical evidence remains the source recorded at the Phase 0 cutoff.
+    baseline_row = metric(payload(), "runtime.runs_exit_zero")
+    assert "master_log" in baseline_row["source_primary"]
+    assert errors_for(tmp_path, catalog=catalog) == []
 
 
 def test_metric_source_window_reference_must_exist(tmp_path):
