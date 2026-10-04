@@ -593,3 +593,61 @@ def test_pr131_provider_cost_is_nd_when_gemini_ledger_integrity_is_incomplete(tm
     assert provider["complete_window_computed_list_price_cost"] is None
     assert provider["computed_cost_coverage"] is None
     assert provider["counterfactual_cost_avoided"] is None
+
+
+def test_pr131_provider_fails_closed_on_duplicate_provider_attempt_identity(tmp_path):
+    now = datetime.now(timezone.utc)
+    ledger = tmp_path / "state/newsroom/gemini_call_ledger.jsonl"
+    ledger.parent.mkdir(parents=True)
+    first = resolved_row(
+        timestamp=now.isoformat(),
+        provider_attempt_id="duplicate-pr131",
+        operation_id="gate-a",
+        agent="Menzo",
+        workload="editorial_director_duplicate_gate",
+    )
+    second = resolved_row(
+        timestamp=now.isoformat(),
+        provider_attempt_id="duplicate-pr131",
+        operation_id="gate-b",
+        agent="Menzo",
+        workload="editorial_director_duplicate_gate",
+    )
+    ledger.write_text(
+        "\n".join(json.dumps(row) for row in (first, second)) + "\n",
+        encoding="utf-8",
+    )
+
+    snapshot = build_snapshot(now - timedelta(hours=1), now + timedelta(seconds=1), tmp_path)
+    provider = snapshot["authoritative"]["pr131_duplicate_pair_cache"]["provider"]
+
+    assert provider["available"] is False
+    assert provider["real_attempts"] is None
+    assert provider["gate_calls_executed"] is None
+    assert provider["complete_window_computed_list_price_cost"] is None
+    assert provider["computed_cost_coverage"] is None
+    assert provider["economic_diagnostics"]["duplicate_provider_attempt_ids"] == 1
+
+
+def test_pr131_failed_provider_request_counts_as_executed_call(tmp_path):
+    now = datetime.now(timezone.utc)
+    ledger = tmp_path / "state/newsroom/gemini_call_ledger.jsonl"
+    ledger.parent.mkdir(parents=True)
+    failed = resolved_row(
+        timestamp=now.isoformat(),
+        provider_attempt_id="pr131-gate-failed",
+        status="failed",
+        agent="Menzo",
+        workload="editorial_director_duplicate_gate",
+    )
+    ledger.write_text(json.dumps(failed) + "\n", encoding="utf-8")
+
+    snapshot = build_snapshot(now - timedelta(hours=1), now + timedelta(seconds=1), tmp_path)
+    provider = snapshot["authoritative"]["pr131_duplicate_pair_cache"]["provider"]
+
+    assert provider["available"] is True
+    assert provider["real_attempts"] == 1
+    assert provider["called"] == 0
+    assert provider["failed"] == 1
+    assert provider["gate_calls_executed"] == 1
+    assert provider["confirmation_calls_executed"] == 0
