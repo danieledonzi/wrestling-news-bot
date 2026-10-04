@@ -689,6 +689,14 @@
         "Simone"
       ],
       "description": "Simone report publication skipped because authoritative report already exists"
+    },
+    {
+      "name": "telemetry_contract_observed",
+      "stage": "runtime",
+      "agents": [
+        "Jarvis"
+      ],
+      "description": "Production run observed under the active PR2 telemetry contract"
     }
   ],
   "identities": {
