@@ -140,3 +140,44 @@ def test_generate_outputs_writes_latest_json_and_markdown(tmp_path: Path) -> Non
     latest = json.loads(outputs["latest_json"].read_text(encoding="utf-8"))
     assert latest["schema_version"] == "show_news_urgency_audit_v1"
     assert "Show News Urgency Audit" in outputs["markdown"].read_text(encoding="utf-8")
+
+
+def test_email_body_section_marks_no_opportunity(tmp_path: Path, monkeypatch) -> None:
+    import send_daily_report as daily
+
+    state = tmp_path / "state" / "reports"
+    state.mkdir(parents=True)
+    payload = {
+        "status": "no_opportunity",
+        "runs": 48,
+        "daily_ceiling": {
+            "timezone": "Europe/Rome",
+            "published_today_local": 20,
+            "published_unique_last_window": 42,
+            "limit": 30,
+            "skipped_capacity_unique_urls": 0,
+            "daily_ceiling_skips_unique_urls": 0,
+        },
+        "show_news_urgency": {
+            "opportunity_observed": False,
+            "show_identity_unique_urls": 0,
+            "promoted_unique_urls": 0,
+            "published_with_provenance_unique_urls": 0,
+            "pending_eligible_unique_urls": 0,
+        },
+        "checks": {
+            "daily_ceiling_respected": True,
+            "no_post_report_urgency": True,
+            "urgency_provenance_preserved": True,
+        },
+    }
+    path = state / "owtv_show_news_urgency_audit_latest.json"
+    path.write_text(json.dumps(payload), encoding="utf-8")
+    monkeypatch.setattr(daily, "SHOW_NEWS_URGENCY_LATEST_JSON", path)
+
+    body = daily.show_news_urgency_audit_body_section(path)
+
+    assert "20 / 30" in body
+    assert "Stato audit: no_opportunity" in body
+    assert "non è stata esercitata" in body
+    assert body.count("OK") == 3
