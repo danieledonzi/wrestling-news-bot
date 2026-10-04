@@ -24,7 +24,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 SCHEMA_VERSION = "v95.26_p1_4_authoritative_snapshot.v4"
 METRIC_CONTRACT_VERSION = "v95.19.0"
-POLICY_VERSION = "v95.26_p1_4"
+POLICY_VERSION = "v96.4_telemetry_authority_convergence"
 ACTIVE_DUPLICATE_COUNTERS = (
     "menzo_same_run_batch_calls",
     "menzo_same_run_batch_repairs",
@@ -760,11 +760,30 @@ def _canonical_event_sections(rows: list[dict[str, Any]], since: datetime, until
         return {"event_count": len(selected), "unique_content_count": len(identities),
                 "content_ids": sorted(identities)}
 
+    def report_metric(*types: str, agent: str = "Simone") -> dict[str, Any]:
+        selected = [row for kind in types for row in by_type.get(kind, []) if row.get("agent") == agent]
+        identities = {
+            str(row.get("report_key") or row.get("content_id") or row.get("correlation_id") or "").strip()
+            for row in selected
+        }
+        identities.discard("")
+        return {"event_count": len(selected), "unique_content_count": len(identities),
+                "content_ids": sorted(identities)}
+
+    def run_metric(kind: str) -> dict[str, Any]:
+        selected = [row for row in by_type.get(kind, []) if row.get("agent") == "Jarvis"]
+        identities = {str(row.get("run_id") or "").strip() for row in selected}
+        identities.discard("")
+        return {"event_count": len(selected), "unique_run_count": len(identities),
+                "run_ids": sorted(identities)}
+
     def value(item: dict[str, Any], key: str = "unique_content_count", family: str = "p1_1") -> int | None:
         return item[key] if coverage[family] == "full" else None
 
+    run_starts = run_metric("run_started")
+    run_completions = run_metric("run_completed")
     publications = metric("publication_completed", agent="Publisher")
-    report_publications = metric("report_published", agent="Simone")
+    report_publications = report_metric("report_published")
     warning_occurrences = metric("warning_recorded", agent="Alfred")
     warning_articles = warning_occurrences["unique_content_count"]
     reviews = metric("quality_review_completed", agent="Alfred")
@@ -826,10 +845,13 @@ def _canonical_event_sections(rows: list[dict[str, Any]], since: datetime, until
         "alfred_unique_approved": metric("quality_review_completed", agent="Alfred", result="approved"),
         "alfred_unique_needs_revision": metric("quality_review_completed", agent="Alfred", result="needs_revision"),
         "publisher_unique_publications": publications,
-        "simone_report_candidates": metric("report_candidate_seen", agent="Simone"),
-        "simone_report_selected": metric("report_selected", agent="Simone"),
+        "simone_report_candidates": report_metric("report_candidate_seen"),
+        "simone_report_selected": report_metric("report_selected"),
         "simone_report_publications": report_publications,
     }
+    downstream_ids = set(funnel_metrics["unique_downstream_handoffs"]["content_ids"])
+    publication_ids = set(publications["content_ids"])
+    linked_handoff_publication_ids = downstream_ids & publication_ids
     selected_rows = [r for r in by_type.get("candidate_selected", []) if r.get("agent") == "Menzo"]
     andrea_rows = [r for r in by_type.get("content_sufficiency_checked", []) if r.get("agent") == "Andrea"]
     bob_rows = [r for r in by_type.get("article_generation_requested", []) if r.get("agent") == "Bob"]
@@ -914,6 +936,36 @@ def _canonical_event_sections(rows: list[dict[str, Any]], since: datetime, until
     funnel_metrics["alfred_final_unique_blockers"] = {
         "event_count": blocker_occurrences["event_count"], "unique_content_count": len(final_blocked_ids),
         "content_ids": sorted(final_blocked_ids)}
+    review_rows_by_content: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    publication_rows_by_content: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for row in bounded:
+        cid = str(row.get("content_id") or "")
+        if not cid:
+            continue
+        if row.get("event_type") == "quality_review_completed" and row.get("agent") == "Alfred":
+            review_rows_by_content[cid].append(row)
+        elif row.get("event_type") == "publication_completed" and row.get("agent") == "Publisher":
+            publication_rows_by_content[cid].append(row)
+
+    revised_then_approved_ids: set[str] = set()
+    revised_then_published_ids: set[str] = set()
+    for cid, review_rows in review_rows_by_content.items():
+        revisions = [parse_utc_datetime(row.get("timestamp_utc")) for row in review_rows
+                     if row.get("result") == "needs_revision"]
+        approvals = [parse_utc_datetime(row.get("timestamp_utc")) for row in review_rows
+                     if row.get("result") == "approved"]
+        revisions = [dt for dt in revisions if dt]
+        approvals = [dt for dt in approvals if dt]
+        publications_for_content = [parse_utc_datetime(row.get("timestamp_utc"))
+                                    for row in publication_rows_by_content.get(cid, [])]
+        publications_for_content = [dt for dt in publications_for_content if dt]
+        if revisions and approvals and any(approved > revised for revised in revisions for approved in approvals):
+            revised_then_approved_ids.add(cid)
+        if revisions and publications_for_content and any(
+            published > revised for revised in revisions for published in publications_for_content
+        ):
+            revised_then_published_ids.add(cid)
+
     from scripts.validate_canonical_operational_semantics import analyze
     owned_ids = {row.get("logical_request_id") for row in bounded
                  if row.get("event_type") == "logical_ai_request_created" and row.get("logical_request_id")}
@@ -939,47 +991,85 @@ def _canonical_event_sections(rows: list[dict[str, Any]], since: datetime, until
         lifecycle_complete_value = True
     ai["lifecycle_complete"] = lifecycle_complete_value
     result = {
-        "bounded_event_count": len(bounded), "runs": {"event_count": len(by_type.get("run_completed", [])),
-            "unique_run_count": len({r.get("run_id") for r in by_type.get("run_completed", []) if r.get("run_id")}),
-            "value": value(metric("run_completed"), "event_count")},
-        "publication": {"news": publications, "reports": report_publications,
-            "unique_news_publications": value(publications), "unique_report_publications": value(report_publications)},
-        "funnel": {"metrics": funnel_metrics,
+        "bounded_event_count": len(bounded),
+        "runs": {
+            "started_event_count": run_starts["event_count"] if coverage["p1_1"] == "full" else None,
+            "started_unique_run_count": run_starts["unique_run_count"] if coverage["p1_1"] == "full" else None,
+            "completed_event_count": run_completions["event_count"] if coverage["p1_1"] == "full" else None,
+            "completed_unique_run_count": run_completions["unique_run_count"] if coverage["p1_1"] == "full" else None,
+            "exit_zero": run_completions["event_count"] if coverage["p1_1"] == "full" else None,
+            "failures": None,
+            "failure_unavailability_reason": "event_schema_v1_has_no_terminal_failed_run_event",
+            "event_count": run_completions["event_count"] if coverage["p1_1"] == "full" else None,
+            "unique_run_count": run_completions["unique_run_count"] if coverage["p1_1"] == "full" else None,
+            "value": run_completions["event_count"] if coverage["p1_1"] == "full" else None,
+        },
+        "publication": {
+            "news": publications,
+            "reports": report_publications,
+            "unique_news_publications": value(publications),
+            "unique_report_publications": value(report_publications),
+        },
+        "funnel": {
+            "metrics": funnel_metrics,
             "unique_actionable_candidates": len(menzo_decision_ids) if coverage["p1_1"] == "full" else None,
             "unique_downstream_handoffs": value(funnel_metrics["unique_downstream_handoffs"]),
             "unique_final_publications": value(publications),
-            "handoff_to_publication_ratio": ((value(publications) / value(funnel_metrics["unique_downstream_handoffs"]))
-                if coverage["p1_1"] == "full" and value(funnel_metrics["unique_downstream_handoffs"]) else None),
+            "linked_handoff_publication_overlap": (
+                len(linked_handoff_publication_ids) if coverage["p1_1"] == "full" else None
+            ),
+            "handoff_to_publication_ratio": (
+                len(linked_handoff_publication_ids) / len(downstream_ids)
+                if coverage["p1_1"] == "full" and downstream_ids else None
+            ),
             "unavailable_metrics": unavailable,
-            "reason_code_distributions": reason_codes, "content_lifecycle": lifecycle},
+            "reason_code_distributions": reason_codes,
+            "content_lifecycle": lifecycle,
+        },
         "andrea": andrea_read_model,
-        "alfred": {"articles_reviewed": value(reviews),
+        "alfred": {
+            "articles_reviewed": value(reviews),
             "articles_with_warnings": warning_articles if coverage["warnings"] == "full" else None,
-            "warning_events": legacy_warning_event_count if coverage["warnings"] == "full" else None,
+            "warning_events": warning_review_count if coverage["warnings"] == "full" else None,
             "warning_bearing_reviews": warning_review_count if coverage["warnings"] == "full" else None,
             "warning_occurrences": value(warning_occurrences, "event_count", "warnings"),
             "blocker_occurrences": value(blocker_occurrences, "event_count", "warnings"),
             "blocker_bearing_reviews": blocker_review_count if coverage["warnings"] == "full" else None,
             "articles_with_blockers": value(blocker_occurrences, family="warnings"),
-            "final_blockers": len(final_blocked_ids) if coverage["failures"] == "full" else None},
-        "publisher": {"attempts": value(pub_attempts, "event_count"),
-            "publications": value(publications), "terminal_failures": len(pub_failures) if coverage["failures"] == "full" else None},
-        "simone": {"report_outcomes": value(report_publications),
+            "final_blockers": len(final_blocked_ids) if coverage["failures"] == "full" else None,
+            "revised_then_approved": len(revised_then_approved_ids) if coverage["p1_1"] == "full" else None,
+            "revised_then_published": len(revised_then_published_ids) if coverage["p1_1"] == "full" else None,
+        },
+        "publisher": {
+            "attempts": value(pub_attempts, "event_count"),
+            "publications": value(publications),
+            "terminal_failures": len(pub_failures) if coverage["failures"] == "full" else None,
+        },
+        "simone": {
+            "report_outcomes": value(report_publications),
             "terminal_failures": len(simone_failures) if coverage["failures"] == "full" else None,
-            "legacy_errors_are_terminal": False},
+            "legacy_errors_are_terminal": False,
+        },
         "ai_operations": ai,
     }
     if coverage["p1_1"] != "full":
         unavailable_metric = {"event_count": None, "unique_content_count": None, "content_ids": None}
         result["bounded_event_count"] = None
-        result["runs"] = {"event_count": None, "unique_run_count": None, "value": None}
+        result["runs"] = {
+            "started_event_count": None, "started_unique_run_count": None,
+            "completed_event_count": None, "completed_unique_run_count": None,
+            "exit_zero": None, "failures": None,
+            "failure_unavailability_reason": "canonical_lifecycle_coverage_incomplete",
+            "event_count": None, "unique_run_count": None, "value": None,
+        }
         result["publication"]["news"] = dict(unavailable_metric)
         result["publication"]["reports"] = dict(unavailable_metric)
         result["publication"]["unique_news_publications"] = None
         result["publication"]["unique_report_publications"] = None
         result["funnel"]["metrics"] = {key: dict(unavailable_metric) for key in result["funnel"]["metrics"]}
         for key in ("unique_actionable_candidates", "unique_downstream_handoffs",
-                    "unique_final_publications", "handoff_to_publication_ratio"):
+                    "unique_final_publications", "linked_handoff_publication_overlap",
+                    "handoff_to_publication_ratio"):
             result["funnel"][key] = None
         result["funnel"]["reason_code_distributions"] = None
         result["funnel"]["content_lifecycle"] = None
