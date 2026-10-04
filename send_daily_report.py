@@ -179,20 +179,6 @@ def show_news_urgency_audit_body_section(
     opportunity_value = urgency.get("opportunity_observed")
     opportunity = "sì" if opportunity_value is True else ("no" if opportunity_value is False else "n.d.")
     status = str(payload.get("status") or "n.d.")
-    pr131_observed = pr131 if pr131.get("coverage") == "full" else (
-        pr131.get("observed_window") if isinstance(pr131.get("observed_window"), dict) else {}
-    )
-    pr131_provider = pr131.get("provider") if isinstance(pr131.get("provider"), dict) else {}
-    pr131_hit_rate = pr131_observed.get("hit_rate")
-    pr131_hit_rate_label = (
-        f"{pr131_hit_rate:.1%}" if isinstance(pr131_hit_rate, (int, float)) else "n.d."
-    )
-    pr131_avoided = (
-        pr131_provider.get("gemini_calls_avoided")
-        if pr131.get("coverage") == "full"
-        else pr131_provider.get("observed_gemini_calls_avoided")
-    )
-
     lines = [
         "",
         "SHOW NEWS URGENCY / DAILY CEILING",
@@ -548,6 +534,20 @@ def daily_editorial_judgment_body_section(
         andrea_coverage = "non ancora disponibile"
         andrea_counts = "n.d."
         reasons_label = "n.d."
+
+    pr131_observed = pr131 if pr131.get("coverage") == "full" else (
+        pr131.get("observed_window") if isinstance(pr131.get("observed_window"), dict) else {}
+    )
+    pr131_provider = pr131.get("provider") if isinstance(pr131.get("provider"), dict) else {}
+    pr131_hit_rate = pr131_observed.get("hit_rate")
+    pr131_hit_rate_label = (
+        f"{pr131_hit_rate:.1%}" if isinstance(pr131_hit_rate, (int, float)) else "n.d."
+    )
+    pr131_avoided = (
+        pr131_provider.get("gemini_calls_avoided")
+        if pr131.get("coverage") == "full"
+        else pr131_provider.get("observed_gemini_calls_avoided")
+    )
 
     lines = [
         "",
