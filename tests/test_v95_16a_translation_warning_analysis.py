@@ -159,8 +159,9 @@ def test_required_execution_order(monkeypatch, tmp_path: Path) -> None:
     monkeypatch.setattr(daily, "generate_translation_quality_audit_24h", lambda: (calls.append("audit") or (None, audit_json, None)))
     monkeypatch.setattr(daily, "generate_translation_warning_analysis_24h", lambda path: (calls.append("analysis") or (None, None, None)))
     monkeypatch.setattr(daily, "generate_daily_editorial_judgment_24h", lambda: (calls.append("judgment") or (None, None, None)))
+    monkeypatch.setattr(daily, "generate_show_news_urgency_audit_24h", lambda: (calls.append("urgency") or (None, None, None)))
     daily.generate_daily_diagnostics_24h()
-    assert calls == ["audit", "analysis", "judgment"]
+    assert calls == ["audit", "analysis", "judgment", "urgency"]
 
 
 def test_existing_attachment_helper_includes_audit_and_current_analysis(tmp_path: Path, monkeypatch) -> None:
