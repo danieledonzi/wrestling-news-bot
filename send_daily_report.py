@@ -547,11 +547,9 @@ def daily_editorial_judgment_body_section(
     )
     pr131_provider = pr131.get("provider") if isinstance(pr131.get("provider"), dict) else {}
     pr131_provider_available = pr131_provider.get("available") is True
-    pr131_cost = (
-        pr131_provider.get("complete_window_computed_list_price_cost")
-        if pr131_provider.get("complete_window_computed_list_price_cost") is not None
-        else pr131_provider.get("known_computed_list_price_cost")
-    )
+    # Email is authoritative: partial known cost must never masquerade as a
+    # complete 24h cost. Render complete-window cost or n.d.
+    pr131_cost = pr131_provider.get("complete_window_computed_list_price_cost")
     pr131_currency = pr131_provider.get("currency") or "n.d."
 
     lines = [
