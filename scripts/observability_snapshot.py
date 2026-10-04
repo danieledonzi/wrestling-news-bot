@@ -1214,8 +1214,12 @@ def _canonical_event_sections(rows: list[dict[str, Any]], since: datetime, until
             "terminal_failures": len(wordpress_failed) if wordpress_coverage == "full" else None,
             "timeouts": wordpress_reason_counts.get("wordpress_timeout", 0) if wordpress_coverage == "full" else None,
             "http_errors": sum(
-                count for reason, count in wordpress_reason_counts.items()
-                if reason.startswith("wp_json_status_") or reason.startswith("wp_status_")
+                1 for row in wordpress_probes
+                if row.get("status") == "failed"
+                and (
+                    str(row.get("reason_code") or "").startswith("wp_json_status_")
+                    or str(row.get("reason_code") or "").startswith("wp_status_")
+                )
             ) if wordpress_coverage == "full" else None,
             "dns_errors": wordpress_reason_counts.get("wordpress_dns_error", 0) if wordpress_coverage == "full" else None,
             "reason_codes": dict(sorted(wordpress_reason_counts.items())) if wordpress_coverage != "unavailable" else {},
