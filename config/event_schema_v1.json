@@ -703,7 +703,8 @@
       "name": "wordpress_preflight_attempted",
       "stage": "publication",
       "agents": [
-        "Publisher"
+        "Publisher",
+        "Simone"
       ],
       "description": "WordPress readiness preflight attempted"
     },
@@ -711,7 +712,8 @@
       "name": "wordpress_preflight_completed",
       "stage": "publication",
       "agents": [
-        "Publisher"
+        "Publisher",
+        "Simone"
       ],
       "description": "WordPress readiness preflight succeeded"
     },
@@ -719,7 +721,8 @@
       "name": "wordpress_preflight_failed",
       "stage": "publication",
       "agents": [
-        "Publisher"
+        "Publisher",
+        "Simone"
       ],
       "description": "WordPress readiness preflight failed"
     },
@@ -727,7 +730,8 @@
       "name": "wordpress_endpoint_probe",
       "stage": "publication",
       "agents": [
-        "Publisher"
+        "Publisher",
+        "Simone"
       ],
       "description": "WordPress REST endpoint readiness probe"
     }
