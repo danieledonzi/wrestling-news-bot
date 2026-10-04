@@ -15,6 +15,7 @@ import subprocess
 import sys
 from collections import Counter, defaultdict
 from datetime import datetime, timedelta, timezone
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Any, Iterable
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
@@ -1121,6 +1122,153 @@ def _artifact_snapshot(root: Path, since: datetime, until: datetime) -> tuple[di
             warnings=integrity_mismatches, reason=reason)
 
 
+def build_pr131_cache_metrics(
+    canonical_rows: list[dict[str, Any]],
+    gemini_records: list[dict[str, Any]],
+    since: datetime,
+    until: datetime,
+    *,
+    canonical_healthy: bool,
+    gemini_available: bool,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Join PR131 cache behavior with provider attempts/cost without counterfactual dollars."""
+    bounded = [
+        row for row in canonical_rows
+        if in_window_dt(parse_utc_datetime(row.get("timestamp_utc")), since, until)
+    ]
+    observed_rows = [
+        row for row in bounded
+        if row.get("event_type") == "duplicate_pair_cache_observed"
+        and row.get("agent") == "Menzo"
+    ]
+    dated_all = [
+        parse_utc_datetime(row.get("timestamp_utc"))
+        for row in canonical_rows
+        if row.get("event_type") == "duplicate_pair_cache_observed"
+        and row.get("agent") == "Menzo"
+    ]
+    dated_all = [dt for dt in dated_all if dt]
+    if not canonical_healthy:
+        cache_coverage, cache_reason = "unavailable", "canonical_event_ledger_integrity_unavailable"
+    elif not dated_all:
+        cache_coverage, cache_reason = "unavailable", "pr131_cache_cutover_not_observable"
+    else:
+        cutover = min(dated_all)
+        if cutover > until:
+            cache_coverage, cache_reason = "unavailable", "pr131_cache_cutover_after_window"
+        elif cutover > since:
+            cache_coverage, cache_reason = "partial", "pr131_cache_cutover_inside_window"
+        else:
+            cache_coverage, cache_reason = "full", None
+
+    lookup_rows = [
+        row for row in bounded
+        if row.get("event_type") == "duplicate_pair_cache_lookup"
+        and row.get("agent") == "Menzo"
+    ]
+    hit_rows = [row for row in lookup_rows if row.get("result") == "hit"]
+    miss_rows = [row for row in lookup_rows if row.get("result") == "miss"]
+    stored_rows = [
+        row for row in bounded
+        if row.get("event_type") == "duplicate_pair_cache_stored"
+        and row.get("agent") == "Menzo"
+    ]
+    store_failures = [
+        row for row in bounded
+        if row.get("event_type") == "duplicate_pair_cache_store_failed"
+        and row.get("agent") == "Menzo"
+    ]
+    load_status_counts = Counter(str(row.get("result") or "unknown") for row in observed_rows)
+    raw_cache = {
+        "evaluations_observed": len(observed_rows),
+        "lookups": len(lookup_rows),
+        "hits": len(hit_rows),
+        "misses": len(miss_rows),
+        "hit_rate": (len(hit_rows) / len(lookup_rows)) if lookup_rows else None,
+        "entries_stored": len(stored_rows),
+        "store_failures": len(store_failures),
+        "load_status_counts": dict(sorted(load_status_counts.items())),
+    }
+
+    pr131_avoided = [
+        row for row in gemini_records
+        if row.get("status") == "avoided"
+        and row.get("agent") == "Menzo"
+        and str(row.get("reason") or "").startswith("pr131_duplicate_pair_cache_")
+    ]
+    real_gate = [
+        row for row in gemini_records
+        if row.get("agent") == "Menzo"
+        and row.get("status") in {"called", "failed"}
+        and row.get("workload") == "editorial_director_duplicate_gate"
+    ]
+    real_confirmation = [
+        row for row in gemini_records
+        if row.get("agent") == "Menzo"
+        and row.get("status") in {"called", "failed"}
+        and row.get("workload") == "editorial_director_duplicate_confirmation"
+    ]
+    real_duplicate = real_gate + real_confirmation
+    cost_known = []
+    for row in real_duplicate:
+        value = row.get("estimated_cost")
+        if value is None:
+            continue
+        try:
+            cost_known.append(Decimal(str(value)))
+        except (InvalidOperation, ValueError):
+            continue
+    provider = {
+        "gemini_calls_avoided": len(pr131_avoided) if gemini_available and cache_coverage == "full" else None,
+        "observed_gemini_calls_avoided": len(pr131_avoided),
+        "duplicate_gate_real_attempts": len(real_gate) if gemini_available else None,
+        "duplicate_confirmation_real_attempts": len(real_confirmation) if gemini_available else None,
+        "duplicate_workload_real_attempts": len(real_duplicate) if gemini_available else None,
+        "known_actual_cost": (
+            format(sum(cost_known, Decimal("0")), "f")
+            if gemini_available and len(cost_known) == len(real_duplicate) else None
+        ),
+        "known_cost_attempts": len(cost_known),
+        "total_real_attempts": len(real_duplicate),
+        "cost_coverage": (len(cost_known) / len(real_duplicate)) if real_duplicate else None,
+        "currency": "USD",
+    }
+    canonical_avoided = [
+        row for row in bounded
+        if row.get("event_type") == "model_attempt_avoided"
+        and row.get("agent") == "Gemini"
+        and str(row.get("reason_code") or "").startswith("pr131_duplicate_pair_cache_")
+    ]
+    mismatches = []
+    if gemini_available and len(canonical_avoided) != len(pr131_avoided):
+        mismatches.append(
+            f"pr131_avoided_call_ledger_mismatch:canonical={len(canonical_avoided)}:gemini={len(pr131_avoided)}"
+        )
+
+    metrics = {
+        key: (value if cache_coverage == "full" else None)
+        for key, value in raw_cache.items()
+        if key != "load_status_counts"
+    }
+    metrics["load_status_counts"] = raw_cache["load_status_counts"] if cache_coverage == "full" else None
+    result = {
+        **metrics,
+        "observed_window": raw_cache,
+        "provider": provider,
+        "coverage": cache_coverage,
+        "coverage_reason": cache_reason,
+        "diagnostic_mismatches": mismatches,
+    }
+    metadata = section_metadata(
+        available=cache_coverage != "unavailable",
+        source="state/newsroom/canonical_event_ledger.jsonl + state/newsroom/gemini_call_ledger.jsonl",
+        coverage=cache_coverage,
+        warnings=mismatches,
+        reason=cache_reason,
+    )
+    return result, metadata
+
+
 def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow_tail_fallback: bool = True) -> dict[str, Any]:
     from agents.gemini_diagnostics import build_gemini_diagnostics, load_ledger
     runs, sources, warnings, authority_available, source_health = load_master_runs(
@@ -1180,6 +1328,11 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
         p1_1_coverage = p1_3_coverage = active_ai_coverage = "unavailable"
         p1_1_reason = p1_3_reason = active_ai_reason = integrity_reason
     canonical = _canonical_event_sections(canonical_rows, since, until, coverages)
+    pr131_cache, pr131_metadata = build_pr131_cache_metrics(
+        canonical_rows, gemini_records, since, until,
+        canonical_healthy=integrity_reason is None and canonical_readable,
+        gemini_available=gemini_available,
+    )
     if integrity_reason:
         canonical = _without_authoritative_numbers(canonical)
         if canonical_malformed:
@@ -1224,6 +1377,7 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
         "alfred": alfred,
         "gemini": gemini,
         "simone": simone,
+        "pr131_cache": pr131_cache,
         "authoritative": {**canonical, "artifacts": artifacts},
         "section_metadata": {
             "menzo": section_metadata(available=authority_available, source="master_log", coverage={"runs": len(in_window_runs)}, warnings=funnel.get("schema_warnings"), reason="master_log_authority_unavailable"),
@@ -1236,7 +1390,8 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
                 "p1_3_ai_operations": ai_metadata,
                 "p1_3_core_ai_operations": p1_3_core_metadata,
                 "p1_3_warning_occurrences": warning_metadata,
-                "p1_3_failure_semantics": failure_metadata}
+                "p1_3_failure_semantics": failure_metadata,
+                "pr131_cache": pr131_metadata}
                if p1_4_event_metadata_present else {}),
             "artifacts": artifact_metadata,
         },
