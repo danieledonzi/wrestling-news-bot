@@ -70,6 +70,17 @@ def test_happy_path_cli_and_frozen_baseline_survives_live_policy_migration():
     assert "99 A1 metric rows" in result.stdout
 
 
+def test_phase0_frozen_metric_set_survives_coordinated_json_and_markdown_deletion(tmp_path):
+    data = payload()
+    removed = data["metric_baselines"].pop()
+    markdown = MARKDOWN.read_text(encoding="utf-8")
+    encoded = json.dumps(removed, sort_keys=True, separators=(",", ":"))
+    assert encoded in markdown
+    markdown = markdown.replace(encoded + "\n", "", 1)
+    errors = errors_for(tmp_path, data=data, markdown=markdown)
+    assert any("frozen Phase 0 metric set changed" in error for error in errors)
+
+
 def test_phase0_does_not_retroactively_follow_live_metric_availability(tmp_path):
     catalog = json.loads((ROOT / "config/metrics_catalog_v1.json").read_text())
     row = next(item for item in catalog["metrics"] if item["canonical_name"] == "andrea.checked_unique")
