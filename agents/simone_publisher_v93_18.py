@@ -162,8 +162,13 @@ def jarvis_wp_preflight() -> tuple[bool, str, dict[str, Any]]:
             active_event("wordpress_preflight_completed", "Simone", "publication", "success",
                          reason_code=reason)
         else:
+            error_class = (
+                "policy"
+                if reason in {"missing_wp_url", "missing_wp_auth", "missing_wp_env"}
+                else "downstream"
+            )
             active_event("wordpress_preflight_failed", "Simone", "publication", "failed",
-                         reason_code=reason, error_class="downstream", error_terminal=True)
+                         reason_code=reason, error_class=error_class, error_terminal=True)
         return ready, reason, data
     except Exception as exc:
         # Non-blocking fallback: if Jarvis preflight itself has a technical issue,
