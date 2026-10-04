@@ -1040,9 +1040,10 @@ def _render_pr131_lines(pr131: dict[str, Any]) -> list[str]:
     )
     currency = provider.get("currency") or "n.d."
     complete_cost = provider.get("complete_window_computed_list_price_cost")
-    known_cost = provider.get("known_computed_list_price_cost")
-    cost_label = complete_cost if complete_cost is not None else known_cost
-    cost_kind = "complete-window" if complete_cost is not None else "known-partial"
+    # Never present a partial known amount as the real 24h duplicate-stage cost.
+    # Exact monetary reporting is complete-window or n.d.
+    cost_label = complete_cost
+    cost_kind = "complete-window"
 
     return [
         f"- Coverage: {coverage}",
