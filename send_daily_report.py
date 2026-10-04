@@ -169,14 +169,18 @@ def show_news_urgency_audit_body_section(
     ceiling = payload.get("daily_ceiling") if isinstance(payload.get("daily_ceiling"), dict) else {}
     urgency = payload.get("show_news_urgency") if isinstance(payload.get("show_news_urgency"), dict) else {}
     checks = payload.get("checks") if isinstance(payload.get("checks"), dict) else {}
+    coverage = payload.get("source_coverage") if isinstance(payload.get("source_coverage"), dict) else {}
+    master_coverage = coverage.get("master_log") if isinstance(coverage.get("master_log"), dict) else {}
     check_label = lambda value: "OK" if value is True else ("ATTENZIONE" if value is False else "n.d.")
-    opportunity = "sì" if urgency.get("opportunity_observed") else "no"
+    opportunity_value = urgency.get("opportunity_observed")
+    opportunity = "sì" if opportunity_value is True else ("no" if opportunity_value is False else "n.d.")
     status = str(payload.get("status") or "n.d.")
     lines = [
         "",
         "SHOW NEWS URGENCY / DAILY CEILING",
         f"- Stato audit: {status}",
         f"- Run osservate: {payload.get('runs', 'n.d.')}",
+        f"- Copertura osservabilità urgency: {master_coverage.get('urgency_supported_runs', 0)}/{master_coverage.get('runs_in_window', payload.get('runs', 0))} run",
         f"- News pubblicate oggi ({ceiling.get('timezone', 'Europe/Rome')}): {ceiling.get('published_today_local', 'n.d.')} / {ceiling.get('limit', 30)}",
         f"- News uniche pubblicate nella finestra: {ceiling.get('published_unique_last_window', 'n.d.')}",
         f"- Opportunità show/evento osservata: {opportunity}",
@@ -190,6 +194,10 @@ def show_news_urgency_audit_body_section(
     ]
     if status == "no_opportunity":
         lines.append("- Nota: nessun caso show/evento eleggibile nella finestra; la logica urgency non è stata esercitata.")
+    elif status == "partial_coverage":
+        lines.append("- Nota: finestra ancora parzialmente coperta dal nuovo schema; i check urgency diventano conclusivi a copertura completa.")
+    elif status == "unavailable":
+        lines.append("- Nota: una fonte autorevole dell'audit non è disponibile; nessun esito positivo viene inferito.")
     if warning:
         lines.append(f"- Avviso diagnostico: {warning}")
     return "\n".join(lines) + "\n"
