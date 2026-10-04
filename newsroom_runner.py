@@ -481,6 +481,10 @@ def main() -> int:
         pass
     artifacts = initialize_canonical_artifact_index(os.environ["NEWSROOM_RUN_ID"])
     canonical.safely("event", "run_started", "Jarvis", "runtime", "started")
+    canonical.safely(
+        "event", "telemetry_contract_observed", "Jarvis", "runtime", "success",
+        result="v96_5_pr2", reason_code="pr2_missing_telemetry_closure",
+    )
     timeline: list[dict[str, str]] = []
     print(f"===== NEWSROOM RUN START [{started_at}] VERSION [{NEWSROOM_VERSION}] =====", flush=True)
     print("[NEWSROOM v93] Avvio Virtual Newsroom", flush=True)
