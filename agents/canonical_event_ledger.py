@@ -352,9 +352,42 @@ class CanonicalEventLedger:
 
     def observe_bob_generated(self, value: Any) -> None:
         for item in _rows(value, ("articles",)):
-            if item.get("status") == "ready_for_alfred":
+            status = str(item.get("status") or "")
+            if status == "ready_for_alfred":
                 self.event("article_generated", "Bob", "generation", "success",
                            "artifacts/newsroom/bob_articles.json", item)
+            elif status in {"translation_validation_failed", "extraction_empty", "error"}:
+                reason = status if status != "error" else "bob_generation_error"
+                error_class = "validation" if status in {"translation_validation_failed", "extraction_empty"} else "internal"
+                self.event("article_generation_failed", "Bob", "generation", "failed",
+                           "artifacts/newsroom/bob_articles.json", item,
+                           reason_code=reason, error_class=error_class, error_terminal=True)
+
+    def observe_pr131_cache(self, result: Any) -> None:
+        """Persist PR131 cache behavior at pair grain without affecting decisions."""
+        if not isinstance(result, Mapping):
+            return
+        load_status = str(result.get("duplicate_pair_cache_load_status") or "unknown")
+        self.event("duplicate_pair_cache_observed", "Menzo", "duplicate", "success",
+                   "state/newsroom/menzo_active_duplicate_pair_cache_v1.json",
+                   result=load_status, reason_code="pr131_duplicate_pair_cache")
+        for pair_id in result.get("duplicate_pair_cache_hit_pair_ids", []) or []:
+            self.event("duplicate_pair_cache_lookup", "Menzo", "duplicate", "success",
+                       "state/newsroom/menzo_active_duplicate_pair_cache_v1.json",
+                       pair_id=str(pair_id), result="hit", reason_code="pr131_duplicate_pair_cache")
+        for pair_id in result.get("duplicate_pair_cache_miss_pair_ids", []) or []:
+            self.event("duplicate_pair_cache_lookup", "Menzo", "duplicate", "success",
+                       "state/newsroom/menzo_active_duplicate_pair_cache_v1.json",
+                       pair_id=str(pair_id), result="miss", reason_code="pr131_duplicate_pair_cache")
+        for pair_id in result.get("duplicate_pair_cache_stored_pair_ids", []) or []:
+            self.event("duplicate_pair_cache_stored", "Menzo", "duplicate", "success",
+                       "state/newsroom/menzo_active_duplicate_pair_cache_v1.json",
+                       pair_id=str(pair_id), result="stored", reason_code="pr131_duplicate_pair_cache")
+        if result.get("duplicate_pair_cache_store_status") == "failed":
+            self.event("duplicate_pair_cache_store_failed", "Menzo", "duplicate", "failed",
+                       "state/newsroom/menzo_active_duplicate_pair_cache_v1.json",
+                       result="failed", reason_code="pr131_duplicate_pair_cache_store_failed",
+                       error_class="storage", error_terminal=False)
 
     def observe_alfred(self, value: Any) -> None:
         for item in _rows(value, ("reviews",)):
@@ -415,6 +448,10 @@ class CanonicalEventLedger:
             item_status = item.get("status")
             if item_status == "published":
                 self._report_event("report_published", item, "success", "artifacts/newsroom/simone_report_publish.json")
+            elif item_status == "already_published":
+                self._report_event("report_already_present", item, "skipped",
+                                   "artifacts/newsroom/simone_report_publish.json",
+                                   reason_code="already_published")
             elif item_status in {"publish_error", "wp_not_ready"}:
                 self._report_event("stage_failed", item, "failed", "artifacts/newsroom/simone_report_publish.json",
                                    error_class="downstream", error_terminal=True,
