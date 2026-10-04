@@ -1001,7 +1001,8 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                 "stage_failed", "Menzo", "duplicate", "failed",
                 "state/newsroom/menzo_active_duplicate_pair_cache_v1.json",
                 reason_code="duplicate_pair_cache_store_failed",
-                error_class=type(exc).__name__, error_terminal=False,
+                result=type(exc).__name__,
+                error_class="invariant", error_terminal=False,
             )
         if not snapshot.get("candidates"):
             return {**base, "status": "VALIDATED",
