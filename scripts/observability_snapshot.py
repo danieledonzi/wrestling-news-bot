@@ -1218,16 +1218,26 @@ def build_pr131_cache_metrics(
         and row.get("agent") == "Menzo"
         and str(row.get("reason") or "").startswith("pr131_duplicate_pair_cache_")
     ]
-    real_gate = [
+    duplicate_workload_rows = [
         row for row in gemini_records
         if row.get("agent") == "Menzo"
-        and row.get("status") in {"called", "failed"}
+        and row.get("workload") in {
+            "editorial_director_duplicate_gate",
+            "editorial_director_duplicate_confirmation",
+        }
+    ]
+    invalid_duplicate_status_rows = [
+        row for row in duplicate_workload_rows
+        if str(row.get("status") or "").strip().lower() not in {"called", "failed", "avoided"}
+    ]
+    real_gate = [
+        row for row in duplicate_workload_rows
+        if str(row.get("status") or "").strip().lower() in {"called", "failed"}
         and row.get("workload") == "editorial_director_duplicate_gate"
     ]
     real_confirmation = [
-        row for row in gemini_records
-        if row.get("agent") == "Menzo"
-        and row.get("status") in {"called", "failed"}
+        row for row in duplicate_workload_rows
+        if str(row.get("status") or "").strip().lower() in {"called", "failed"}
         and row.get("workload") == "editorial_director_duplicate_confirmation"
     ]
     real_duplicate = real_gate + real_confirmation
@@ -1239,7 +1249,11 @@ def build_pr131_cache_metrics(
     duplicate_provider_attempt_ids = {
         key: count for key, count in provider_attempt_counts.items() if count > 1
     }
-    provider_integrity_available = bool(gemini_available and not duplicate_provider_attempt_ids)
+    provider_integrity_available = bool(
+        gemini_available
+        and not duplicate_provider_attempt_ids
+        and not invalid_duplicate_status_rows
+    )
     from agents.gemini_diagnostics import _resolved_cost_row
     resolved_costs: list[tuple[Decimal, dict[str, Any]]] = []
     cost_integrity_reasons: Counter[str] = Counter()
@@ -1261,9 +1275,16 @@ def build_pr131_cache_metrics(
     )
     known_cost = sum((value for value, _row in resolved_costs), Decimal("0"))
     provider = {
-        "gemini_calls_avoided": len(pr131_avoided) if gemini_available and cache_coverage == "full" else None,
+        "gemini_calls_avoided": (
+            len(pr131_avoided)
+            if gemini_available and cache_coverage == "full" and avoided_cross_ledger_match
+            else None
+        ),
         "observed_gemini_calls_avoided": len(pr131_avoided),
+        "canonical_gemini_calls_avoided": len(canonical_avoided),
+        "avoided_cross_ledger_match": avoided_cross_ledger_match,
         "provider_integrity_available": provider_integrity_available,
+        "invalid_duplicate_status_rows": len(invalid_duplicate_status_rows),
         "duplicate_provider_attempt_ids": dict(sorted(duplicate_provider_attempt_ids.items())),
         "duplicate_gate_real_attempts": len(real_gate) if provider_integrity_available else None,
         "duplicate_confirmation_real_attempts": len(real_confirmation) if provider_integrity_available else None,
@@ -1290,7 +1311,17 @@ def build_pr131_cache_metrics(
         and row.get("agent") == "Gemini"
         and str(row.get("reason_code") or "").startswith("pr131_duplicate_pair_cache_")
     ]
+    avoided_cross_ledger_match = len(canonical_avoided) == len(pr131_avoided)
     mismatches = []
+    if invalid_duplicate_status_rows:
+        invalid_statuses = Counter(
+            str(row.get("status") or "").strip().lower() or "<missing>"
+            for row in invalid_duplicate_status_rows
+        )
+        mismatches.append(
+            "pr131_invalid_duplicate_workload_statuses:"
+            + ",".join(f"{key}={count}" for key, count in sorted(invalid_statuses.items()))
+        )
     if duplicate_provider_attempt_ids:
         mismatches.append(
             "pr131_duplicate_provider_attempt_ids:"
