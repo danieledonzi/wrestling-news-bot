@@ -1333,6 +1333,44 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
         canonical_healthy=integrity_reason is None and canonical_readable,
         gemini_available=gemini_available,
     )
+    pr2_complete = pr131_metadata.get("complete_window") is True
+    pr2_bounded = [
+        row for row in canonical_rows
+        if in_window_dt(parse_utc_datetime(row.get("timestamp_utc")), since, until)
+    ]
+    bob_failure_rows = [
+        row for row in pr2_bounded
+        if row.get("event_type") == "article_generation_failed" and row.get("agent") == "Bob"
+    ]
+    bob_failure_reasons = Counter(str(row.get("reason_code") or "unknown") for row in bob_failure_rows)
+    canonical["bob"] = {
+        "item_failures": len(bob_failure_rows) if pr2_complete else None,
+        "failure_reasons": dict(sorted(bob_failure_reasons.items())) if pr2_complete else None,
+        "observed_item_failures": len(bob_failure_rows),
+        "observed_failure_reasons": dict(sorted(bob_failure_reasons.items())),
+    }
+    simone_already_rows = [
+        row for row in pr2_bounded
+        if row.get("event_type") == "report_already_present" and row.get("agent") == "Simone"
+    ]
+    canonical["simone"]["already_present_events"] = len(simone_already_rows) if pr2_complete else None
+    canonical["simone"]["observed_already_present_events"] = len(simone_already_rows)
+    canonical["simone"]["failure_reasons"] = (
+        dict(sorted(Counter(
+            str(row.get("reason_code") or "unknown")
+            for row in pr2_bounded
+            if row.get("agent") == "Simone" and row.get("error_terminal") is True
+        ).items()))
+        if pr2_complete else None
+    )
+    canonical["publisher"]["failure_reasons"] = (
+        dict(sorted(Counter(
+            str(row.get("reason_code") or "unknown")
+            for row in pr2_bounded
+            if row.get("agent") == "Publisher" and row.get("error_terminal") is True
+        ).items()))
+        if coverage["failures"] == "full" else None
+    )
     if integrity_reason:
         canonical = _without_authoritative_numbers(canonical)
         if canonical_malformed:
@@ -1357,6 +1395,7 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
                                        "warning_occurrences": warning_metadata,
                                        "final_failures": failure_metadata}
     canonical["andrea"]["metadata"] = dict(p1_1_metadata)
+    canonical["bob"]["metadata"] = dict(pr131_metadata)
     canonical["publisher"]["metadata"] = {"lifecycle": p1_1_metadata, "terminal_failures": failure_metadata}
     canonical["simone"]["metadata"] = {"lifecycle": p1_1_metadata, "terminal_failures": failure_metadata}
     canonical["ai_operations"]["metadata"] = ai_metadata
