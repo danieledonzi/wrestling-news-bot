@@ -911,6 +911,9 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
     canonical_menzo: dict[str, Any] = {}
     canonical_andrea: dict[str, Any] = {}
     canonical_simone: dict[str, Any] = {}
+    canonical_bob: dict[str, Any] = {}
+    canonical_publisher: dict[str, Any] = {}
+    pr131_cache: dict[str, Any] = {}
     ledger_economic: dict[str, Any] | None = None
     if (section_metadata.get("gemini") or {}).get("available") is True:
         canonical_gemini = observability.get("gemini", {})
@@ -925,6 +928,12 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
         canonical_alfred = {**observability.get("alfred", {}).get("events", {}), **observability.get("alfred", {}).get("unique", {})}
     if simone_authoritative:
         canonical_simone = observability.get("simone", {})
+    if isinstance(p14.get("bob"), dict):
+        canonical_bob = p14.get("bob", {})
+    if isinstance(p14.get("publisher"), dict):
+        canonical_publisher = p14.get("publisher", {})
+    if isinstance(observability, dict) and isinstance(observability.get("pr131_cache"), dict):
+        pr131_cache = observability.get("pr131_cache", {})
     canonical_payloads = resolve_p1_4_canonical_payloads(section_metadata, p14, {
         "menzo": canonical_menzo, "andrea": canonical_andrea, "alfred": canonical_alfred,
         "gemini": canonical_gemini, "simone": canonical_simone})
@@ -994,7 +1003,7 @@ def build_report(data: dict[str, Any], *, generated_at: datetime | None = None, 
         "top_investigations": sorted((item for item in investigations if isinstance(item, dict)), key=lambda item: (-priority.get(str(item.get("original_severity", "warning")), 1), str(item.get("title", ""))))[:3],
         "diagnostic_errors": list(analysis.get("errors") or []),
     }
-    return {"generated_at": generated_at, "observability_snapshot": observability, "canonical_menzo": canonical_menzo, "canonical_andrea": canonical_andrea, "canonical_alfred": canonical_alfred, "canonical_gemini": canonical_gemini, "canonical_simone": canonical_simone, "source_artifacts_used": used, "missing_artifacts": missing, "schema_warnings": list(dict.fromkeys(schema_warnings)), "published_available": news_count_available or reports_count_available, "report_status_counts": published_meta["report_status_counts"], "published_records_source": published_meta.get("published_records_source"), "official_news_published_count": parsed_md.get("news_count") if markdown_news_available else None, "concrete_news_record_count": len(concrete_news), "menzo": menzo, "news": news, "reports": reports, "news_records": concrete_news, "report_records": concrete_reports, "selected": selected, "pending": pending, "skipped": skipped, "runs_completed": runs_completed, "news_published_count": news_published_count, "reports_published_count": reports_published_count, "news_count_available": news_count_available, "reports_count_available": reports_count_available, "hard_count": hard_count, "soft_count": soft_count, "hard_soft_source": hard_soft_source, "story": story, "day_type": dtype, "softpool": bool(softpool), "warnings": warnings, "legacy_warnings": legacy_warnings, "blockers": blockers, "gemini_called": gemini_called, "article_types": article_types, "judgment": judgment, "top_discarded": top, "borderline": borderline, "summary": summary, "translation_warning_analysis": warning_analysis}
+    return {"generated_at": generated_at, "observability_snapshot": observability, "canonical_menzo": canonical_menzo, "canonical_andrea": canonical_andrea, "canonical_alfred": canonical_alfred, "canonical_gemini": canonical_gemini, "canonical_simone": canonical_simone, "canonical_bob": canonical_bob, "canonical_publisher": canonical_publisher, "pr131_cache": pr131_cache, "source_artifacts_used": used, "missing_artifacts": missing, "schema_warnings": list(dict.fromkeys(schema_warnings)), "published_available": news_count_available or reports_count_available, "report_status_counts": published_meta["report_status_counts"], "published_records_source": published_meta.get("published_records_source"), "official_news_published_count": parsed_md.get("news_count") if markdown_news_available else None, "concrete_news_record_count": len(concrete_news), "menzo": menzo, "news": news, "reports": reports, "news_records": concrete_news, "report_records": concrete_reports, "selected": selected, "pending": pending, "skipped": skipped, "runs_completed": runs_completed, "news_published_count": news_published_count, "reports_published_count": reports_published_count, "news_count_available": news_count_available, "reports_count_available": reports_count_available, "hard_count": hard_count, "soft_count": soft_count, "hard_soft_source": hard_soft_source, "story": story, "day_type": dtype, "softpool": bool(softpool), "warnings": warnings, "legacy_warnings": legacy_warnings, "blockers": blockers, "gemini_called": gemini_called, "article_types": article_types, "judgment": judgment, "top_discarded": top, "borderline": borderline, "summary": summary, "translation_warning_analysis": warning_analysis}
 
 
 def _num(value: Any) -> str:
@@ -1013,6 +1022,33 @@ def _render_gemini_economic_lines(economy: dict[str, Any]) -> list[str]:
     ]
 
 
+def _render_pr131_lines(pr131: dict[str, Any]) -> list[str]:
+    coverage = str(pr131.get("coverage") or "unavailable")
+    full = coverage == "full"
+    cache = pr131 if full else (pr131.get("observed_window") or {})
+    provider = pr131.get("provider") or {}
+    hit_rate = cache.get("hit_rate")
+    hit_rate_label = f"{hit_rate:.1%}" if isinstance(hit_rate, (int, float)) else "n.d."
+    avoided = provider.get("gemini_calls_avoided") if full else provider.get("observed_gemini_calls_avoided")
+    avoided_label = _num(avoided) + ("" if full else " (osservato; copertura non completa)")
+    cost_coverage = provider.get("cost_coverage")
+    cost_coverage_label = f"{cost_coverage:.1%}" if isinstance(cost_coverage, (int, float)) else "n.d."
+    return [
+        "## PR131 duplicate-pair cache",
+        "",
+        f"- Telemetry coverage: {coverage}",
+        f"- Cache evaluations / lookups: {_num(cache.get('evaluations_observed'))} / {_num(cache.get('lookups'))}",
+        f"- Hits / misses / hit rate: {_num(cache.get('hits'))} / {_num(cache.get('misses'))} / {hit_rate_label}",
+        f"- Validated pair results stored / store failures: {_num(cache.get('entries_stored'))} / {_num(cache.get('store_failures'))}",
+        f"- Cache load states: {cache.get('load_status_counts') or 'n.d.'}",
+        f"- Gemini calls avoided by PR131: {avoided_label}",
+        f"- Duplicate-gate / confirmation provider attempts executed: {_num(provider.get('duplicate_gate_real_attempts'))} / {_num(provider.get('duplicate_confirmation_real_attempts'))}",
+        f"- Actual duplicate workload cost: {_num(provider.get('known_actual_cost'))} {provider.get('currency') or 'USD'} (cost coverage {cost_coverage_label})",
+        "- Counterfactual dollars saved are intentionally not estimated; avoided calls are exact call-level telemetry.",
+        "",
+    ]
+
+
 def render_markdown(report: dict[str, Any]) -> str:
     story = report["story"]
     menzo_metrics = report.get("canonical_menzo") or {}
@@ -1020,6 +1056,9 @@ def render_markdown(report: dict[str, Any]) -> str:
     andrea_metrics = report.get("canonical_andrea") or {}
     gemini_metrics = report.get("canonical_gemini") or {}
     simone_metrics = report.get("canonical_simone") or {}
+    bob_metrics = report.get("canonical_bob") or {}
+    publisher_metrics = report.get("canonical_publisher") or {}
+    pr131 = report.get("pr131_cache") or {}
     ratio = menzo_metrics.get("handoff_to_publication_ratio")
     ratio_label = f"{ratio:.1%}" if isinstance(ratio, (int, float)) else "unavailable"
     gemini_line = "- Gemini 3.5 attempts/completed/failed/avoided: {}/{}/{}/{}".format(
@@ -1087,7 +1126,7 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"- Andrea checked/passed/passed with exception/blocked events: {_num(andrea_events.get('checked'))}/{_num(andrea_events.get('passed'))}/{_num(andrea_events.get('passed_with_exception'))}/{_num(andrea_events.get('blocked'))}",
         andrea_reason_line,
     ]
-    lines = ["# OWTV Daily Editorial Judgment 24h", "", "## Daily Editorial Judgment", "", f"- Judgment: {_num(report['judgment'])}", f"- Day type: {_num(report['day_type'])}", "", report["summary"], "", "## Daily numbers", "", f"- runs completed: {_num(report.get('runs_completed'))}", f"- news published: {_num(report.get('news_published_count'))}", f"- reports published: {_num(report.get('reports_published_count'))}", f"- article types: {dict(report['article_types']) or 'n.d.'}", f"- Menzo unique actionable candidates: {_num(menzo_metrics.get('unique_actionable_candidates'))}", f"- Menzo unique downstream handoffs: {_num(menzo_metrics.get('unique_downstream_handoffs'))}", f"- Menzo unique final publications: {_num(menzo_metrics.get('unique_final_publications'))}", f"- hard news count: {_num(report['hard_count'])} (stima)", f"- soft news count: {_num(report['soft_count'])} (stima)", f"- softpool used: {'yes' if report['softpool'] else 'no'}", *andrea_lines, *alfred_lines, f"- v95.11 duplicate arbitration: {(report.get('observability_snapshot') or {}).get('duplicate_arbitration', {})}", f"- legacy duplicate signals (diagnostic): duplicate candidates / same story clusters / same event clusters / story reviews: {_num(story['duplicate_candidates'])} / {_num(story['same_story_clusters'])} / {_num(story['same_event_clusters'])} / {_num(story['story_reviews'])}", f"- suspicious pairs above threshold: {_num(story['pairs_above_threshold'])}", f"- Menzo handoff-to-publication ratio: {ratio_label}", *gemini_lines, f"- Simone legacy errors (diagnostic; not terminal): {_num(simone_metrics.get('legacy_errors_diagnostic'))}", "", "## Hard vs soft editorial balance", "", f"Stima: {_num(report['hard_count'])} hard news e {_num(report['soft_count'])} soft news. " + ("Il ricorso al softpool sembra giustificato solo se le hard news erano limitate." if report['softpool'] else "Softpool non usato: scelta coerente se la giornata aveva sufficiente materiale hard o nessun soft recuperabile."), "", "## Top 3 discarded URLs for human control", ""]
+    lines = ["# OWTV Daily Editorial Judgment 24h", "", "## Daily Editorial Judgment", "", f"- Judgment: {_num(report['judgment'])}", f"- Day type: {_num(report['day_type'])}", "", report["summary"], "", "## Daily numbers", "", f"- runs completed: {_num(report.get('runs_completed'))}", f"- news published: {_num(report.get('news_published_count'))}", f"- reports published: {_num(report.get('reports_published_count'))}", f"- article types: {dict(report['article_types']) or 'n.d.'}", f"- Menzo unique actionable candidates: {_num(menzo_metrics.get('unique_actionable_candidates'))}", f"- Menzo unique downstream handoffs: {_num(menzo_metrics.get('unique_downstream_handoffs'))}", f"- Menzo unique final publications: {_num(menzo_metrics.get('unique_final_publications'))}", f"- hard news count: {_num(report['hard_count'])} (stima)", f"- soft news count: {_num(report['soft_count'])} (stima)", f"- softpool used: {'yes' if report['softpool'] else 'no'}", *andrea_lines, *alfred_lines, f"- v95.11 duplicate arbitration: {(report.get('observability_snapshot') or {}).get('duplicate_arbitration', {})}", f"- legacy duplicate signals (diagnostic): duplicate candidates / same story clusters / same event clusters / story reviews: {_num(story['duplicate_candidates'])} / {_num(story['same_story_clusters'])} / {_num(story['same_event_clusters'])} / {_num(story['story_reviews'])}", f"- suspicious pairs above threshold: {_num(story['pairs_above_threshold'])}", f"- Menzo handoff-to-publication ratio: {ratio_label}", *gemini_lines, f"- Bob item failures: {_num(bob_metrics.get('item_failures'))}; reasons: {bob_metrics.get('failure_reasons') or 'n.d.'}", f"- Publisher terminal failures: {_num(publisher_metrics.get('terminal_failures'))}; reasons: {publisher_metrics.get('failure_reasons') or 'n.d.'}", f"- Simone reports already present / terminal failures: {_num(simone_metrics.get('already_present_events'))} / {_num(simone_metrics.get('terminal_failures'))}; reasons: {simone_metrics.get('failure_reasons') or 'n.d.'}", f"- Simone legacy errors (diagnostic; not terminal): {_num(simone_metrics.get('legacy_errors_diagnostic'))}", "", *_render_pr131_lines(pr131), "## Hard vs soft editorial balance", "", f"Stima: {_num(report['hard_count'])} hard news e {_num(report['soft_count'])} soft news. " + ("Il ricorso al softpool sembra giustificato solo se le hard news erano limitate." if report['softpool'] else "Softpool non usato: scelta coerente se la giornata aveva sufficiente materiale hard o nessun soft recuperabile."), "", "## Top 3 discarded URLs for human control", ""]
     if not report["top_discarded"]:
         lines.append("Nessun forte candidato scartato/pending emerso dagli artefatti disponibili.")
     for item in report["top_discarded"]:
@@ -1145,7 +1184,13 @@ def email_summary(report: dict[str, Any]) -> str:
     top = report["top_discarded"][0] if report["top_discarded"] else None
     news_count = _num(report.get("news_published_count"))
     reports_count = _num(report.get("reports_published_count"))
-    return "\n".join(["Daily Editorial Judgment:", f"- Judgment: {_num(report['judgment'])}", f"- Day type: {_num(report['day_type'])}", f"- Published: {news_count} news / {reports_count} report", f"- Hard/soft balance: {_num(report['hard_count'])} hard vs {_num(report['soft_count'])} soft (stima)", f"- Top concern: {'controllare scarti/pending ad alta rilevanza' if top else 'nessun forte candidato scartato emerso'}", f"- Top discarded URL: {_url(top) if top else 'n.d.'}"])
+    pr131 = report.get("pr131_cache") or {}
+    observed = pr131 if pr131.get("coverage") == "full" else (pr131.get("observed_window") or {})
+    provider = pr131.get("provider") or {}
+    hit_rate = observed.get("hit_rate")
+    hit_rate_label = f"{hit_rate:.1%}" if isinstance(hit_rate, (int, float)) else "n.d."
+    avoided = provider.get("gemini_calls_avoided") if pr131.get("coverage") == "full" else provider.get("observed_gemini_calls_avoided")
+    return "\n".join(["Daily Editorial Judgment:", f"- Judgment: {_num(report['judgment'])}", f"- Day type: {_num(report['day_type'])}", f"- Published: {news_count} news / {reports_count} report", f"- Hard/soft balance: {_num(report['hard_count'])} hard vs {_num(report['soft_count'])} soft (stima)", f"- PR131 cache: coverage={pr131.get('coverage') or 'unavailable'}, hits/misses={_num(observed.get('hits'))}/{_num(observed.get('misses'))}, hit-rate={hit_rate_label}, Gemini calls avoided={_num(avoided)}, actual duplicate cost={_num(provider.get('known_actual_cost'))} {provider.get('currency') or 'USD'}", f"- Top concern: {'controllare scarti/pending ad alta rilevanza' if top else 'nessun forte candidato scartato emerso'}", f"- Top discarded URL: {_url(top) if top else 'n.d.'}"])
 
 
 def generate_daily_editorial_judgment_outputs(paths: dict[str, Path] | None = None, output_dir: Path = REPORTS_DIR, state_dir: Path = STATE_REPORTS_DIR, now: datetime | None = None, hours: int = 24) -> dict[str, Path]:
