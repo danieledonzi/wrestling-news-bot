@@ -138,7 +138,7 @@ def wp_ready() -> tuple[bool, str]:
                  reason_code="wordpress_readiness_preflight")
     if not wp_root() or not all(wp_auth()):
         active_event("wordpress_preflight_failed", "Publisher", "publication", "failed",
-                     reason_code="missing_wp_env", error_class="configuration", error_terminal=True)
+                     reason_code="missing_wp_env", error_class="policy", error_terminal=True)
         return False, "missing_wp_env"
     try:
         res = session.get(f"{wp_root()}/wp-json/", timeout=REQUEST_TIMEOUT)
@@ -152,14 +152,14 @@ def wp_ready() -> tuple[bool, str]:
         active_event("wordpress_endpoint_probe", "Publisher", "publication", "failed",
                      reason_code=reason)
         active_event("wordpress_preflight_failed", "Publisher", "publication", "failed",
-                     reason_code=reason, error_class="http", error_terminal=True)
+                     reason_code=reason, error_class="downstream", error_terminal=True)
         return False, reason
     except Exception as exc:
         reason = _wordpress_error_reason(exc)
         active_event("wordpress_endpoint_probe", "Publisher", "publication", "failed",
                      reason_code=reason)
         active_event("wordpress_preflight_failed", "Publisher", "publication", "failed",
-                     reason_code=reason, error_class=type(exc).__name__, error_terminal=True)
+                     reason_code=reason, error_class="downstream", error_terminal=True)
         return False, f"wp_json_error:{exc}"
 
 
