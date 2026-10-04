@@ -36,7 +36,7 @@ def assert_rejected(mutator, phrase):
 def test_happy_path_validator_cli():
     completed = subprocess.run([sys.executable, str(VALIDATOR), str(SCHEMA)], cwd=str(ROOT), text=True, capture_output=True)
     assert completed.returncode == 0, completed.stderr
-    assert "36 event types" in completed.stdout
+    assert f"{len(load()['event_types'])} event types" in completed.stdout
 
 
 def test_json_markdown_sync():
