@@ -71,6 +71,41 @@ def test_capture_private_canonical_body_preserves_ordinary_digest_and_legacy():
     assert base["input_digest"] == enriched["input_digest"]
 
 
+def test_capture_later_duplicate_row_retains_available_canonical_body(monkeypatch):
+    raw = {"url": "https://dr1.test/a", "title": "New WWE release", "summary": "RSS facts"}
+    text = "Complete independently extracted source article facts. " * 8
+    other = {"url": "https://dr1.test/b", "title": "Another report",
+             "canonical_source_body": canonical_body(text)}
+    state = shadow.capture_opportunity({"news_candidates_for_menzo": [
+        raw, {**raw, "canonical_source_body": canonical_body(text)}, other]},
+        run_id="r", observation_timestamp="now", history=[])
+    assert len(state["candidates"]) == 2
+    cid = state["candidates"][0]["candidate_id"]
+    assert state["_duplicate_revalidation_bodies"][cid]["text"] == text.strip()
+    monkeypatch.setattr(source_body, "hydrate", lambda _: pytest.fail("available bodies must not fetch"))
+    local, _ = active._body_pair_snapshot(state, suspicious_relation(state))
+    assert local["candidates"][0]["retained_body"] == text.strip()
+
+
+@pytest.mark.parametrize("scope", ["recent_history", "same_run"])
+def test_equivalence_provenance_excludes_disconnected_duplicate_classes(scope):
+    def relation(pair_id, left, right, decision, row_scope="same_run", confirmed=True):
+        row = {"pair_id": pair_id, "left_id": left, "right_id": right,
+               "scope": row_scope, "decision": decision}
+        if decision == "DUPLICATE" and confirmed:
+            row["duplicate_confirmation"] = {"decision": "CONFIRM_DUPLICATE"}
+        return row
+    final = [relation("ab", "a", "b", "DUPLICATE"),
+             relation("xy", "x", "y", "DUPLICATE"),
+             relation("az", "a", "z", "DUPLICATE", confirmed=False),
+             relation("ah", "a", "h", "NO_MATCH", scope)]
+    target = relation("bh", "b", "h", "UNCERTAIN", scope)
+    resolved = active._covered_no_match(target, final)
+    assert resolved["decision"] == "NO_MATCH"
+    assert resolved["validated_equivalence"]["source_pair_id"] == "ah"
+    assert resolved["validated_equivalence"]["duplicate_class_pair_ids"] == ["ab"]
+
+
 def test_capture_history_body_is_private_and_not_recrawled(monkeypatch):
     text = "Retained full historical source material. " * 9
     raw = {"url": "https://dr1.test/current", "title": "Current development"}

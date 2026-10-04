@@ -683,11 +683,15 @@ def _covered_no_match(target: Mapping[str, Any], final: list[dict[str, Any]]) ->
             row["scope"], left, right)
     for row in final:
         if row["decision"] == "NO_MATCH" and key(row) == key(target):
+            relevant_roots = {find(target["left_id"])}
+            if target["scope"] == "same_run":
+                relevant_roots.add(find(target["right_id"]))
             resolved = {**copy.deepcopy(dict(target)), "decision": "NO_MATCH", "shared_fact": None,
                     "new_fact": None, "temporal_basis": None,
                     "validated_equivalence": {"source_pair_id": row["pair_id"],
                         "duplicate_class_pair_ids": [x["pair_id"] for x in final if
-                            x["scope"] == "same_run" and x["decision"] == "DUPLICATE"],
+                            x["scope"] == "same_run" and x["decision"] == "DUPLICATE"
+                            and x.get("duplicate_confirmation") and find(x["left_id"]) in relevant_roots],
                         "source_provenance": copy.deepcopy(row.get("validated_provenance", {}))}}
             for field in (*DUPLICATE_EVIDENCE_FIELDS, *DUPLICATE_CENTRALITY_FIELDS,
                           "primary_decision", "duplicate_confirmation"):

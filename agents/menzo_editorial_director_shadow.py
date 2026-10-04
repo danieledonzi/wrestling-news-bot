@@ -119,7 +119,6 @@ def capture_opportunity(massy_board: Mapping[str, Any], *, run_id: str, observat
     raw = massy_board.get("news_candidates_for_menzo", [])
     captured = []
     recovery_bodies = {}
-    captured_ids = set()
     def retain_body(endpoint_id: str, item: Mapping[str, Any]) -> None:
         text = source_body.contract_text(dict(item))
         if text:
@@ -130,9 +129,8 @@ def capture_opportunity(massy_board: Mapping[str, Any], *, run_id: str, observat
     for item in raw:
         if isinstance(item, Mapping) and (candidate := _candidate(item)):
             captured.append(candidate)
-            if candidate["candidate_id"] not in captured_ids:
+            if candidate["candidate_id"] not in recovery_bodies:
                 retain_body(candidate["candidate_id"], item)
-                captured_ids.add(candidate["candidate_id"])
     candidates = []
     seen_candidate_ids: set[str] = set()
     duplicate_candidate_ids = []
