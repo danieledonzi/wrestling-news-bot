@@ -241,7 +241,10 @@
         "when_event_types": [
           "duplicate_pair_evaluated",
           "duplicate_pair_resolved",
-          "duplicate_pair_unresolved"
+          "duplicate_pair_unresolved",
+          "duplicate_pair_cache_hit",
+          "duplicate_pair_cache_miss",
+          "duplicate_pair_cache_stored"
         ],
         "require": [
           "pair_id"
@@ -637,6 +640,38 @@
         "Archivista"
       ],
       "description": "blocker recorded"
+    },
+    {
+      "name": "duplicate_pair_cache_cycle",
+      "stage": "duplicate",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "PR131 duplicate-pair cache evaluation cycle"
+    },
+    {
+      "name": "duplicate_pair_cache_hit",
+      "stage": "duplicate",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "PR131 duplicate-pair cache hit"
+    },
+    {
+      "name": "duplicate_pair_cache_miss",
+      "stage": "duplicate",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "PR131 duplicate-pair cache miss"
+    },
+    {
+      "name": "duplicate_pair_cache_stored",
+      "stage": "duplicate",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "PR131 validated duplicate-pair result stored in cache"
     }
   ],
   "identities": {
