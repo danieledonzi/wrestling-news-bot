@@ -319,3 +319,18 @@ def test_email_summary_surfaces_pr131_at_a_glance():
     assert "hit-rate=62.5%" in text
     assert "Gemini calls avoided=2" in text
     assert "actual duplicate cost=0.0100 USD" in text
+
+def test_pr131_markdown_catalog_uses_authoritative_v3_cost_field() -> None:
+    from pathlib import Path
+
+    markdown = (Path(__file__).resolve().parents[1] / "docs/runtime/OWTV_METRICS_CATALOG.md").read_text(
+        encoding="utf-8"
+    )
+    row = next(
+        line for line in markdown.splitlines()
+        if "pr131.duplicate_workload_actual_cost" in line
+    )
+    assert "computed_list_price_cost" in row
+    assert "unique provider_attempt_id" in row
+    assert "estimated_cost" not in row
+
