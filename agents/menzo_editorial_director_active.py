@@ -14,7 +14,7 @@ from typing import Any, Callable, Mapping
 from agents import menzo_editorial_director_shadow as shadow
 from agents import menzo_active_duplicate_pair_cache as pair_cache
 from agents.canonical_event_ledger import OperationalAIRequest
-from agents.gemini_ledger import record_gemini_attempt
+from agents.gemini_ledger import record_gemini_attempt, record_gemini_event
 
 ROOT = Path(__file__).resolve().parents[1]
 MODEL = shadow.MODEL
@@ -41,6 +41,27 @@ ANCHOR_SOURCE_FIELDS = ("title", "source_title", "title_it")
 MAX_DUPLICATE_SEMANTIC_FIELD_LENGTH = 500
 MIN_DUPLICATE_EVIDENCE_TOKENS = 2
 MIN_DUPLICATE_EVIDENCE_ALNUM_CHARS = 8
+
+
+def _record_pr131_avoided_call(model_role: str, phase: str, reason: str,
+                               relation_count: int) -> int:
+    """Record one provider call that PR131 prevented at logical-request grain."""
+    request = OperationalAIRequest("Menzo", model_role, reason_code=reason)
+    request.avoided(reason)
+    record_gemini_event(
+        ledger_schema_version="v2",
+        agent="Menzo",
+        phase=phase,
+        model=MODEL,
+        status="avoided",
+        reason=reason,
+        saved_gemini_call=True,
+        workload=model_role,
+        relation_count=max(0, int(relation_count)),
+        pr131_duplicate_pair_cache=True,
+        logical_request_id=request.logical_request_id,
+    )
+    return 1
 
 
 def enabled(environ: Mapping[str, str] | None = None) -> bool:
@@ -721,9 +742,17 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
             misses.append(relation)
         else:
             cached_relations[str(relation.get("pair_id"))] = hit
+    hit_pair_ids = sorted(cached_relations)
+    miss_pair_ids = [str(row.get("pair_id")) for row in misses if row.get("pair_id")]
     base.update(duplicate_pair_cache_hits=len(cached_relations),
                 duplicate_pair_cache_misses=len(misses),
                 duplicate_pair_cache_entries_stored=0,
+                duplicate_pair_cache_hit_pair_ids=hit_pair_ids,
+                duplicate_pair_cache_miss_pair_ids=miss_pair_ids,
+                duplicate_pair_cache_stored_pair_ids=[],
+                duplicate_pair_cache_store_status="not_attempted",
+                duplicate_pair_cache_gate_calls_avoided=0,
+                duplicate_pair_cache_confirmation_calls_avoided=0,
                 duplicate_pair_cache_load_status=cache.get("load_status", "unknown"),
                 duplicate_pair_cache_contract_version=pair_cache.CONTRACT_VERSION)
     has_relations = bool(misses)
@@ -735,7 +764,24 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
     gate_request = (OperationalAIRequest("Menzo", "editorial_director_duplicate_gate",
                     reason_code="editorial_director_duplicate_gate") if has_relations else None)
     request = None
+    cached_confirmation_needed = any(
+        relation.get("primary_decision") == "DUPLICATE"
+        for relation in cached_relations.values()
+    )
     if authorized and not has_relations:
+        base["duplicate_pair_cache_gate_calls_avoided"] = _record_pr131_avoided_call(
+            "editorial_director_duplicate_gate",
+            "editorial_director_duplicate_gate_primary",
+            "pr131_duplicate_pair_cache_gate_full_hit",
+            len(authorized),
+        )
+        if cached_confirmation_needed:
+            base["duplicate_pair_cache_confirmation_calls_avoided"] = _record_pr131_avoided_call(
+                "editorial_director_duplicate_confirmation",
+                "editorial_director_duplicate_confirmation_primary",
+                "pr131_duplicate_pair_cache_confirmation_avoided",
+                len(authorized),
+            )
         _apply_duplicate_gate(snapshot, [cached_relations[str(row["pair_id"])] for row in authorized])
         if not snapshot.get("candidates"):
             return {**base, "status": "VALIDATED", "attempts": 0,
@@ -814,6 +860,13 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                     "duplicate_gate_logical_request_id": gate_logical_request_id,
                     "duplicate_gate_input_digest": gate_input_digest}
         confirmation_payload, confirmation_relation_indexes = _duplicate_confirmation_input(phase_snapshot, relations)
+        if cached_confirmation_needed and not confirmation_payload["relations"]:
+            base["duplicate_pair_cache_confirmation_calls_avoided"] = _record_pr131_avoided_call(
+                "editorial_director_duplicate_confirmation",
+                "editorial_director_duplicate_confirmation_primary",
+                "pr131_duplicate_pair_cache_confirmation_avoided",
+                len(cached_relations),
+            )
         if confirmation_payload["relations"]:
             confirmation_request = OperationalAIRequest(
                 "Menzo", "editorial_director_duplicate_confirmation",
@@ -917,12 +970,24 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
         final_relations = [copy.deepcopy(cached_relations.get(str(row["pair_id"])) or
                                         new_by_pair[str(row["pair_id"])]) for row in authorized]
         _apply_duplicate_gate(snapshot, final_relations)
+        store_rows = [
+            (materials[str(row["pair_id"])], new_by_pair[str(row["pair_id"])])
+            for row in misses
+            if str(row.get("pair_id")) in materials and str(row.get("pair_id")) in new_by_pair
+        ]
+        stored_pair_ids = [
+            str(row.get("pair_id")) for row in misses
+            if str(row.get("pair_id")) in materials and str(row.get("pair_id")) in new_by_pair
+        ]
         try:
-            stored = pair_cache.store(cache, [(materials[str(row["pair_id"])], new_by_pair[str(row["pair_id"])])
-                                               for row in misses if str(row["pair_id"]) in materials])
+            stored = pair_cache.store(cache, store_rows)
             base["duplicate_pair_cache_entries_stored"] = stored
+            base["duplicate_pair_cache_stored_pair_ids"] = stored_pair_ids[:stored]
+            base["duplicate_pair_cache_store_status"] = "success"
         except Exception:
             base["duplicate_pair_cache_entries_stored"] = 0
+            base["duplicate_pair_cache_stored_pair_ids"] = []
+            base["duplicate_pair_cache_store_status"] = "failed"
         if not snapshot.get("candidates"):
             return {**base, "status": "VALIDATED",
                     "attempts": gate_attempts + confirmation_attempts,
