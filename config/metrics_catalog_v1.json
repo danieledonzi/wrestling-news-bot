@@ -4640,7 +4640,7 @@
         "scripts/daily_editorial_judgment.py",
         "send_daily_report.py"
       ],
-      "formula": "sum authoritative estimated_cost for duplicate gate/confirmation real attempts only when every such attempt has computed cost",
+      "formula": "sum validated v3 computed_list_price_cost for duplicate gate/confirmation real attempts only when every attempt has resolved cost, matching usage/pricing contracts, component-sum integrity, homogeneous currency, and unique provider_attempt_id",
       "aggregation": "currency amount",
       "identity_key": "provider_attempt_id",
       "time_window": "inclusive UTC [window_start, window_end]",
@@ -4657,7 +4657,7 @@
         "daily_editorial_judgment",
         "operational_report"
       ],
-      "notes": "Actual observed duplicate-workload cost; counterfactual dollars saved are intentionally not estimated.",
+      "notes": "Actual observed duplicate-workload paid-tier Standard list-price cost from authoritative v3 rows; counterfactual dollars saved are intentionally not estimated. Duplicate provider_attempt_id values make the authoritative value unavailable.",
       "authority_family": "provider_economics"
     },
     {
