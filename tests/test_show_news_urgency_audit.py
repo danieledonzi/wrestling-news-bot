@@ -276,6 +276,46 @@ def test_record_level_corrupt_publisher_history_is_unavailable(tmp_path: Path) -
     assert "publisher_history_malformed_records:1" in result["warnings"]
 
 
+def test_incomplete_dictionary_history_record_is_unavailable(tmp_path: Path) -> None:
+    write_master(tmp_path, [{
+        "run": {"started_at": "2026-10-04T07:30:00+00:00"},
+        "menzo": {"selected": [], "pending": []},
+        "publisher": {"results": []},
+    }])
+    write_json(
+        tmp_path / "state" / "newsroom" / "publisher_history.json",
+        {"broken": {"status": "publish"}},
+    )
+
+    result = audit.build_audit(root=tmp_path, now=NOW)
+
+    assert result["status"] == "unavailable"
+    assert result["checks"]["daily_ceiling_respected"] is None
+    assert result["source_coverage"]["publisher_history"]["malformed_records"] == 1
+
+
+def test_audit_uses_same_legacy_success_status_and_timestamp_as_ceiling(tmp_path: Path) -> None:
+    write_master(tmp_path, [{
+        "run": {"started_at": "2026-10-04T07:30:00+00:00"},
+        "menzo": {"selected": [], "pending": []},
+        "publisher": {"results": []},
+    }])
+    history = {}
+    for index in range(30):
+        history[str(index)] = {
+            "source_url": f"https://legacy.test/{index}",
+            "status": "succeeded" if index == 0 else "publish",
+            "updated_at": "2026-10-04T05:00:00+00:00" if index == 0 else None,
+            "published_at": None if index == 0 else "2026-10-04T05:00:00+00:00",
+        }
+    write_json(tmp_path / "state" / "newsroom" / "publisher_history.json", history)
+
+    result = audit.build_audit(root=tmp_path, now=NOW)
+
+    assert result["daily_ceiling"]["published_today_local"] == 30
+    assert result["checks"]["daily_ceiling_respected"] is True
+
+
 def test_legacy_master_rows_report_partial_coverage(tmp_path: Path) -> None:
     write_master(tmp_path, [{
         "schema_version": "v93_19_newsroom_master_log",
