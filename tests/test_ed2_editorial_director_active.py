@@ -1828,3 +1828,123 @@ def test_active_artifact_preserves_gate_and_classification_provenance(monkeypatc
     assert eliminated["relations"][0]["duplicate_confirmation"]["decision"] == "CONFIRM_DUPLICATE"
     assert eliminated["relations"][0]["duplicate_confirmation_provenance"]["logical_request_id"] == (
         result["duplicate_confirmation_logical_request_id"])
+
+
+def test_pr131_full_hit_batch_records_one_gate_call_avoided_not_one_per_pair(monkeypatch):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    events = []
+    monkeypatch.setattr(active, "record_gemini_event", lambda **row: events.append(row))
+
+    first = snapshot(3)
+    first["authorized_relations"] = [
+        suspicious_relation(first, pair_id="pair-ab"),
+        suspicious_relation(first, left=0, right=2, pair_id="pair-ac"),
+    ]
+    result1 = active.evaluate(
+        first,
+        provider=lambda prompt, *_:
+            no_match_relations(2) if "DUPLICATE GATE" in prompt else response(first),
+    )
+    assert result1["status"] == "VALIDATED"
+    assert result1["duplicate_pair_cache_entries_stored"] == 2
+
+    second = snapshot(3)
+    second["authorized_relations"] = [
+        suspicious_relation(second, pair_id="pair-ab"),
+        suspicious_relation(second, left=0, right=2, pair_id="pair-ac"),
+    ]
+    prompts = []
+    result2 = active.evaluate(
+        second,
+        provider=lambda prompt, *_: prompts.append(prompt) or response(second),
+    )
+
+    assert result2["status"] == "VALIDATED"
+    assert result2["duplicate_pair_cache_hits"] == 2
+    assert result2["duplicate_pair_cache_misses"] == 0
+    assert result2["duplicate_pair_cache_hit_pair_ids"] == ["pair-ab", "pair-ac"]
+    assert result2["duplicate_pair_cache_gate_calls_avoided"] == 1
+    assert result2["duplicate_pair_cache_confirmation_calls_avoided"] == 0
+    assert not any("DUPLICATE GATE" in prompt for prompt in prompts)
+    avoided = [row for row in events if row.get("status") == "avoided"]
+    assert len(avoided) == 1
+    assert avoided[0]["reason"] == "pr131_duplicate_pair_cache_gate_full_hit"
+    assert avoided[0]["relation_count"] == 2
+
+
+def test_pr131_mixed_hit_miss_does_not_claim_gate_call_avoidance(monkeypatch):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    events = []
+    monkeypatch.setattr(active, "record_gemini_event", lambda **row: events.append(row))
+
+    first = snapshot(3)
+    first["authorized_relations"] = [suspicious_relation(first, pair_id="pair-ab")]
+    active.evaluate(
+        first,
+        provider=lambda prompt, *_:
+            no_match_relations(1) if "DUPLICATE GATE" in prompt else response(first),
+    )
+    events.clear()
+
+    mixed = snapshot(3)
+    mixed["authorized_relations"] = [
+        suspicious_relation(mixed, pair_id="pair-ab"),
+        suspicious_relation(mixed, left=0, right=2, pair_id="pair-ac"),
+    ]
+    result = active.evaluate(
+        mixed,
+        provider=lambda prompt, *_:
+            no_match_relations(1) if "DUPLICATE GATE" in prompt else response(mixed),
+    )
+
+    assert result["status"] == "VALIDATED"
+    assert result["duplicate_pair_cache_hits"] == 1
+    assert result["duplicate_pair_cache_misses"] == 1
+    assert result["duplicate_pair_cache_gate_calls_avoided"] == 0
+    assert not [row for row in events if row.get("reason") == "pr131_duplicate_pair_cache_gate_full_hit"]
+
+
+def test_pr131_full_cached_duplicate_records_gate_and_confirmation_calls_avoided(monkeypatch):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    events = []
+    monkeypatch.setattr(active, "record_gemini_event", lambda **row: events.append(row))
+
+    first = _duplicate_cache_snapshot()
+    calls = []
+    assert active.evaluate(first, provider=_confirmed_duplicate_provider(first, calls))["status"] == "VALIDATED"
+    events.clear()
+
+    second = _duplicate_cache_snapshot()
+    prompts = []
+    result = active.evaluate(
+        second,
+        provider=lambda prompt, *_: prompts.append(prompt) or
+            response(second, tuple("SELECT" for _ in second["candidates"])),
+    )
+
+    assert result["duplicate_pair_cache_hits"] == 1
+    assert result["duplicate_pair_cache_gate_calls_avoided"] == 1
+    assert result["duplicate_pair_cache_confirmation_calls_avoided"] == 1
+    reasons = [row.get("reason") for row in events if row.get("status") == "avoided"]
+    assert reasons == [
+        "pr131_duplicate_pair_cache_gate_full_hit",
+        "pr131_duplicate_pair_cache_confirmation_avoided",
+    ]
+    assert not any("DUPLICATE GATE" in prompt or "CONFIRMATION PHASE" in prompt for prompt in prompts)
+
+
+def test_pr131_store_failure_is_explicit_telemetry(monkeypatch):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    monkeypatch.setattr(pair_cache, "store", lambda *_args, **_kwargs:
+                        (_ for _ in ()).throw(OSError("disk full")))
+    value = snapshot(2)
+    value["authorized_relations"] = [suspicious_relation(value)]
+    result = active.evaluate(
+        value,
+        provider=lambda prompt, *_:
+            no_match_relations(1) if "DUPLICATE GATE" in prompt else response(value, ("SELECT", "DEFER")),
+    )
+    assert result["status"] == "VALIDATED"
+    assert result["duplicate_pair_cache_entries_stored"] == 0
+    assert result["duplicate_pair_cache_stored_pair_ids"] == []
+    assert result["duplicate_pair_cache_store_status"] == "failed"
