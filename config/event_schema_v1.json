@@ -722,6 +722,14 @@
         "Publisher"
       ],
       "description": "WordPress readiness preflight failed"
+    },
+    {
+      "name": "wordpress_endpoint_probe",
+      "stage": "publication",
+      "agents": [
+        "Publisher"
+      ],
+      "description": "WordPress REST endpoint readiness probe"
     }
   ],
   "identities": {
