@@ -1231,29 +1231,44 @@ def build_pr131_cache_metrics(
         and row.get("workload") == "editorial_director_duplicate_confirmation"
     ]
     real_duplicate = real_gate + real_confirmation
-    cost_known = []
+    from agents.gemini_diagnostics import _resolved_cost_row
+    resolved_costs: list[tuple[Decimal, dict[str, Any]]] = []
+    cost_integrity_reasons: Counter[str] = Counter()
     for row in real_duplicate:
-        value = row.get("estimated_cost")
-        if value is None:
-            continue
-        try:
-            cost_known.append(Decimal(str(value)))
-        except (InvalidOperation, ValueError):
-            continue
+        value, integrity_reason = _resolved_cost_row(row)
+        if value is not None:
+            resolved_costs.append((value, row))
+        elif integrity_reason:
+            cost_integrity_reasons[integrity_reason] += 1
+    resolved_currencies = {
+        str(row.get("pricing_currency"))
+        for _value, row in resolved_costs
+        if row.get("pricing_currency")
+    }
+    cost_complete = bool(
+        gemini_available
+        and len(resolved_costs) == len(real_duplicate)
+        and len(resolved_currencies) <= 1
+    )
+    known_cost = sum((value for value, _row in resolved_costs), Decimal("0"))
     provider = {
         "gemini_calls_avoided": len(pr131_avoided) if gemini_available and cache_coverage == "full" else None,
         "observed_gemini_calls_avoided": len(pr131_avoided),
         "duplicate_gate_real_attempts": len(real_gate) if gemini_available else None,
         "duplicate_confirmation_real_attempts": len(real_confirmation) if gemini_available else None,
         "duplicate_workload_real_attempts": len(real_duplicate) if gemini_available else None,
-        "known_actual_cost": (
-            format(sum(cost_known, Decimal("0")), "f")
-            if gemini_available and len(cost_known) == len(real_duplicate) else None
-        ),
-        "known_cost_attempts": len(cost_known),
+        "known_actual_cost": format(known_cost, "f") if cost_complete else None,
+        "known_cost_attempts": len(resolved_costs),
         "total_real_attempts": len(real_duplicate),
-        "cost_coverage": (len(cost_known) / len(real_duplicate)) if real_duplicate else None,
-        "currency": "USD",
+        "cost_coverage": (
+            len(resolved_costs) / len(real_duplicate)
+            if gemini_available and real_duplicate else (None if real_duplicate else None)
+        ),
+        "currency": (
+            next(iter(resolved_currencies))
+            if len(resolved_currencies) == 1 else ("mixed" if resolved_currencies else "USD")
+        ),
+        "cost_integrity_reasons": dict(sorted(cost_integrity_reasons.items())),
     }
     canonical_avoided = [
         row for row in bounded
