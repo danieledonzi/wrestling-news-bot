@@ -174,7 +174,10 @@ def test_v9519_canonical_names_are_preserved():
         "gemini.fallbacks", "simone.reports_published", "simone.already_present_events",
     }
     assert frozen <= names.keys()
-    assert all(names[name]["status"] == "active" for name in frozen)
+    authoritative = frozen - {"simone.already_present_events"}
+    assert all(names[name]["status"] == "active" for name in authoritative)
+    assert names["simone.already_present_events"]["status"] == "diagnostic_only"
+    assert names["simone.already_present_events"]["authority_family"] == "diagnostic_legacy"
 
 
 def test_markdown_lists_every_active_metric():
