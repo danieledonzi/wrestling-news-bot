@@ -41,12 +41,15 @@ MANDATORY_CONDITIONS = {
         "forbid": set(),
     },
     "failed_error": {
-        "when_event_types": {"stage_failed", "model_attempt_failed", "publication_failed"},
+        "when_event_types": {"stage_failed", "model_attempt_failed", "publication_failed",
+                             "article_generation_failed", "wordpress_preflight_failed"},
         "require": {"error_class", "error_terminal"},
         "forbid": set(),
     },
     "duplicate_pair_identity": {
-        "when_event_types": {"duplicate_pair_evaluated", "duplicate_pair_resolved", "duplicate_pair_unresolved"},
+        "when_event_types": {"duplicate_pair_evaluated", "duplicate_pair_resolved", "duplicate_pair_unresolved",
+                             "duplicate_pair_cache_hit", "duplicate_pair_cache_miss",
+                             "duplicate_pair_cache_stored"},
         "require": {"pair_id"},
         "forbid": set(),
     },
