@@ -351,6 +351,8 @@ class CanonicalEventLedger:
         self.observe_items(value, ("selected",), "article_generation_requested", "Bob", "generation", "started", "artifacts/newsroom/andrea_pre_bob_latest.json")
 
     def observe_bob_generated(self, value: Any) -> None:
+        self.event("bob_generation_cycle", "Bob", "generation", "success",
+                   "artifacts/newsroom/bob_articles.json")
         for item in _rows(value, ("articles",)):
             status = str(item.get("status") or "")
             if status == "ready_for_alfred":
