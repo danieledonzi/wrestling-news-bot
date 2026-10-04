@@ -2,7 +2,7 @@
 
 ## Purpose and scope
 
-A2 is the **Phase 0, measurement-only** contract for future OpenWrestlingTV events. It exists to stop counts from confusing pipeline intentions, API attempts, outcomes, and legacy rows. It follows A1 Metrics Catalog v1: A1 defines what is measured; A2 defines the future event facts from which those measurements may be computed. A future Phase 1 may implement an append-only canonical ledger against this contract. This change neither creates that ledger nor changes any producer.
+A2 originated as the **Phase 0, measurement-only** contract for OpenWrestlingTV events and is now the frozen envelope consumed by the append-only canonical event ledger. It exists to stop counts from confusing pipeline intentions, API attempts, outcomes, and legacy rows. Later telemetry reforms may add backward-compatible event types and producers while preserving the v1 envelope, identity semantics, and editorial behavior.
 
 The production observation of roughly 26 `generate_translate_article` calls for one content item across runs motivates the identity split. It is not fixed here: the contract merely makes `logical_requests = 1` and `model_attempts = N` representable.
 
@@ -93,9 +93,9 @@ Stages are stable semantic pipeline areas, not raw phases.
 
 ## Event type taxonomy
 
-Each name has one meaning. Raw `phase` values are mapped separately and may need outcome context. Generic `stage_started`, `stage_completed`, and `stage_failed` accept every canonical stage so the event retains its real pipeline area; they are not forced into `runtime`.
+Each name has one meaning. Raw `phase` values are mapped separately and may need outcome context. Generic `stage_started`, `stage_completed`, and `stage_failed` accept every canonical stage so the event retains its real pipeline area; they are not forced into `runtime`. PR2 extends the existing append-only production ledger with cache/failure observation events only; it does not change editorial decisions.
 
-<!-- SYNC:EVENT_TYPES run_started|run_completed|stage_started|stage_completed|stage_failed|candidate_seen|candidate_selected|candidate_pending|candidate_skipped|duplicate_check_requested|duplicate_pair_evaluated|duplicate_pair_resolved|duplicate_pair_unresolved|logical_ai_request_created|model_attempt_started|model_attempt_completed|model_attempt_failed|model_attempt_avoided|fallback_started|repair_started|article_generation_requested|article_generated|revision_requested|revision_completed|report_candidate_seen|report_selected|report_published|publication_attempted|publication_completed|publication_failed|publication_already_present|content_sufficiency_checked|quality_review_completed|audit_completed|warning_recorded|blocker_recorded -->
+<!-- SYNC:EVENT_TYPES run_started|run_completed|stage_started|stage_completed|stage_failed|candidate_seen|candidate_selected|candidate_pending|candidate_skipped|duplicate_check_requested|duplicate_pair_evaluated|duplicate_pair_resolved|duplicate_pair_unresolved|logical_ai_request_created|model_attempt_started|model_attempt_completed|model_attempt_failed|model_attempt_avoided|fallback_started|repair_started|article_generation_requested|article_generated|revision_requested|revision_completed|report_candidate_seen|report_selected|report_published|publication_attempted|publication_completed|publication_failed|publication_already_present|content_sufficiency_checked|quality_review_completed|audit_completed|warning_recorded|blocker_recorded|duplicate_pair_cache_observed|duplicate_pair_cache_lookup|duplicate_pair_cache_stored|duplicate_pair_cache_store_failed|article_generation_failed|report_already_present -->
 
 | Event type | Default stage | Allowed agents |
 |---|---|---|
@@ -135,6 +135,12 @@ Each name has one meaning. Raw `phase` values are mapped separately and may need
 | audit_completed | audit | Archivista |
 | warning_recorded | audit | Alfred, Archivista, Jarvis |
 | blocker_recorded | audit | Alfred, Archivista |
+| duplicate_pair_cache_observed | duplicate | Menzo |
+| duplicate_pair_cache_lookup | duplicate | Menzo |
+| duplicate_pair_cache_stored | duplicate | Menzo |
+| duplicate_pair_cache_store_failed | duplicate | Menzo |
+| article_generation_failed | generation | Bob |
+| report_already_present | reporting | Simone |
 
 ## Status, result, and reason
 
