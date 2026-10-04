@@ -528,3 +528,68 @@ def test_single_v3_and_legacy_rows_do_not_trigger_duplicate_identity_contract():
     assert truth["available"] is True
     assert truth["real_attempts"] == 2
     assert truth["diagnostics"]["duplicate_provider_attempt_ids"] == 0
+
+
+def test_pr131_provider_cost_truth_is_filtered_to_duplicate_stage_workloads(tmp_path):
+    now = datetime.now(timezone.utc)
+    ledger = tmp_path / "state/newsroom/gemini_call_ledger.jsonl"
+    ledger.parent.mkdir(parents=True)
+    gate = resolved_row(
+        timestamp=now.isoformat(),
+        provider_attempt_id="pr131-gate-1",
+        agent="Menzo",
+        workload="editorial_director_duplicate_gate",
+    )
+    confirmation = resolved_row(
+        timestamp=now.isoformat(),
+        provider_attempt_id="pr131-confirm-1",
+        agent="Menzo",
+        workload="editorial_director_duplicate_confirmation",
+    )
+    unrelated = resolved_row(
+        timestamp=now.isoformat(),
+        provider_attempt_id="bob-1",
+        agent="Bob",
+        workload="translate_article",
+    )
+    ledger.write_text(
+        "\n".join(json.dumps(row) for row in (gate, confirmation, unrelated)) + "\n",
+        encoding="utf-8",
+    )
+
+    snapshot = build_snapshot(now - timedelta(hours=1), now + timedelta(seconds=1), tmp_path)
+    provider = snapshot["authoritative"]["pr131_duplicate_pair_cache"]["provider"]
+
+    expected = Decimal(gate["computed_list_price_cost"]) + Decimal(
+        confirmation["computed_list_price_cost"]
+    )
+    assert provider["available"] is True
+    assert provider["real_attempts"] == 2
+    assert provider["called"] == 2
+    assert provider["gate_calls_executed"] == 1
+    assert provider["confirmation_calls_executed"] == 1
+    assert Decimal(provider["complete_window_computed_list_price_cost"]) == expected
+    assert provider["computed_cost_coverage"] == 1.0
+    assert provider["counterfactual_cost_avoided"] is None
+
+
+def test_pr131_provider_cost_is_nd_when_gemini_ledger_integrity_is_incomplete(tmp_path):
+    now = datetime.now(timezone.utc)
+    ledger = tmp_path / "state/newsroom/gemini_call_ledger.jsonl"
+    ledger.parent.mkdir(parents=True)
+    row = resolved_row(
+        timestamp=now.isoformat(),
+        provider_attempt_id="pr131-gate-1",
+        agent="Menzo",
+        workload="editorial_director_duplicate_gate",
+    )
+    ledger.write_text(json.dumps(row) + "\n{malformed}\n", encoding="utf-8")
+
+    snapshot = build_snapshot(now - timedelta(hours=1), now + timedelta(seconds=1), tmp_path)
+    provider = snapshot["authoritative"]["pr131_duplicate_pair_cache"]["provider"]
+
+    assert provider["available"] is False
+    assert provider["real_attempts"] is None
+    assert provider["complete_window_computed_list_price_cost"] is None
+    assert provider["computed_cost_coverage"] is None
+    assert provider["counterfactual_cost_avoided"] is None
