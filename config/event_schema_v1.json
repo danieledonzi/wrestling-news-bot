@@ -228,7 +228,9 @@
         "when_event_types": [
           "stage_failed",
           "model_attempt_failed",
-          "publication_failed"
+          "publication_failed",
+          "article_generation_failed",
+          "duplicate_pair_cache_store_failed"
         ],
         "require": [
           "error_class",
