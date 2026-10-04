@@ -219,6 +219,36 @@ def test_malformed_publisher_history_is_unavailable(tmp_path: Path) -> None:
     assert any(str(w).startswith("publisher_history_read_failed:") for w in result["warnings"])
 
 
+def test_undated_master_row_makes_urgency_coverage_partial(tmp_path: Path) -> None:
+    master = tmp_path / "state" / "newsroom" / "master_log.jsonl"
+    master.parent.mkdir(parents=True, exist_ok=True)
+    rows = [
+        {
+            "schema_version": audit.MASTER_SCHEMA_VERSION,
+            "run": {"started_at": "2026-10-04T07:30:00+00:00"},
+            "menzo": {"selected": [], "pending": []},
+            "publisher": {"results": []},
+        },
+        {
+            "schema_version": audit.MASTER_SCHEMA_VERSION,
+            "menzo": {"selected": [{"source_url": "https://news.test/hidden-opportunity", "show_report_id": "wwe_raw"}], "pending": []},
+            "publisher": {"results": []},
+        },
+    ]
+    master.write_text("\n".join(json.dumps(row) for row in rows) + "\n", encoding="utf-8")
+    write_json(tmp_path / "state" / "newsroom" / "publisher_history.json", {})
+
+    result = audit.build_audit(root=tmp_path, now=NOW)
+
+    assert result["status"] == "partial_coverage"
+    assert result["source_coverage"]["master_log"]["undated_rows"] == 1
+    assert result["source_coverage"]["master_log"]["urgency_complete_window"] is False
+    assert result["show_news_urgency"]["opportunity_observed"] is None
+    assert result["checks"]["no_post_report_urgency"] is None
+    assert result["checks"]["urgency_provenance_preserved"] is None
+    assert "master_log_undated_rows:1" in result["warnings"]
+
+
 def test_malformed_master_log_is_unavailable(tmp_path: Path) -> None:
     master = tmp_path / "state" / "newsroom" / "master_log.jsonl"
     master.parent.mkdir(parents=True, exist_ok=True)
