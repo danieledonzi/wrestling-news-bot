@@ -70,6 +70,22 @@ def test_happy_path_cli_and_frozen_baseline_survives_live_policy_migration():
     assert "99 A1 metric rows" in result.stdout
 
 
+def test_phase0_does_not_retroactively_follow_live_metric_availability(tmp_path):
+    catalog = json.loads((ROOT / "config/metrics_catalog_v1.json").read_text())
+    row = next(item for item in catalog["metrics"] if item["canonical_name"] == "andrea.checked_unique")
+    row.update(
+        status="active",
+        availability="available",
+        authority_level="canonical",
+        authority_family="newsroom_lifecycle",
+        source_primary="state/newsroom/canonical_event_ledger.jsonl",
+        formula="future canonical formula",
+    )
+    errors = errors_for(tmp_path, catalog=catalog)
+    assert not any("A1-unavailable" in error for error in errors)
+    assert errors == []
+
+
 def test_phase0_requires_historical_names_but_ignores_future_catalog_metrics(tmp_path):
     catalog = json.loads((ROOT / "config/metrics_catalog_v1.json").read_text())
     future = copy.deepcopy(catalog["metrics"][0])
