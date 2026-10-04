@@ -1369,7 +1369,7 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
             for row in pr2_bounded
             if row.get("agent") == "Publisher" and row.get("error_terminal") is True
         ).items()))
-        if coverage["failures"] == "full" else None
+        if coverages["failures"] == "full" else None
     )
     if integrity_reason:
         canonical = _without_authoritative_numbers(canonical)
