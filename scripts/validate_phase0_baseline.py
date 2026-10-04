@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import sys
@@ -70,6 +71,9 @@ REQUIRED_LEGACY_CONSUMERS = {
         ("scripts/observability_snapshot.py", "report"),
     },
 }
+FROZEN_PHASE0_METRIC_COUNT = 99
+FROZEN_PHASE0_METRIC_NAMES_SHA256 = "0b080ab3ecff528f9c2e6e710b8fa06257839c0fae2716f35ba852556bb97ec4"
+
 SECTIONS = {
     "SOURCE_WINDOWS": "source_windows",
     "METRIC_BASELINES": "metric_baselines",
@@ -324,7 +328,20 @@ def validate(
                 errors.append("source {} semantic_roles disagree with A3".format(path))
 
     catalog_rows = _unique(catalog.get("metrics"), "canonical_name", "catalog metric", errors)
-    metric_rows = _unique(baseline.get("metric_baselines"), "metric_name", "baseline metric", errors)
+    raw_metric_rows = baseline.get("metric_baselines")
+    metric_rows = _unique(raw_metric_rows, "metric_name", "baseline metric", errors)
+    if isinstance(raw_metric_rows, list):
+        frozen_names = sorted(
+            row.get("metric_name") for row in raw_metric_rows
+            if isinstance(row, dict) and isinstance(row.get("metric_name"), str)
+        )
+        frozen_digest = hashlib.sha256("\n".join(frozen_names).encode("utf-8")).hexdigest()
+        if len(frozen_names) != FROZEN_PHASE0_METRIC_COUNT or frozen_digest != FROZEN_PHASE0_METRIC_NAMES_SHA256:
+            errors.append(
+                "frozen Phase 0 metric set changed: expected {} names with digest {}".format(
+                    FROZEN_PHASE0_METRIC_COUNT, FROZEN_PHASE0_METRIC_NAMES_SHA256
+                )
+            )
     # Phase 0 is an immutable historical observation. The live catalog may evolve
     # to a newer authority policy, so validate that historical names are still
     # represented without forcing today's source/status semantics back onto A1.
