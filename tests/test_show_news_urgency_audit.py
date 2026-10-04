@@ -346,6 +346,58 @@ def test_audit_uses_same_legacy_success_status_and_timestamp_as_ceiling(tmp_path
     assert result["checks"]["daily_ceiling_respected"] is True
 
 
+def test_daily_ceiling_counts_successful_records_not_unique_urls(tmp_path: Path) -> None:
+    write_master(tmp_path, [{
+        "run": {"started_at": "2026-10-04T07:30:00+00:00"},
+        "menzo": {"selected": [], "pending": []},
+        "publisher": {"results": []},
+    }])
+    history = [
+        {
+            "source_url": f"https://published.test/{min(index, 29)}",
+            "status": "publish",
+            "published_at": "2026-10-04T05:00:00+00:00",
+        }
+        for index in range(31)
+    ]
+    write_json(tmp_path / "state" / "newsroom" / "publisher_history.json", history)
+
+    result = audit.build_audit(root=tmp_path, now=NOW)
+
+    assert result["daily_ceiling"]["published_today_local"] == 31
+    assert result["daily_ceiling"]["published_unique_last_window"] == 30
+    assert result["checks"]["daily_ceiling_respected"] is False
+    assert result["status"] == "attention"
+
+
+def test_show_identity_without_eligible_urgency_remains_no_opportunity(tmp_path: Path) -> None:
+    write_master(tmp_path, [{
+        "run": {"started_at": "2026-10-04T07:30:00+00:00"},
+        "menzo": {
+            "selected": [{
+                "source_url": "https://news.test/normal-show-selection",
+                "show_report_id": "wwe_raw",
+                "corresponding_report_published": False,
+                "editorial_director": {
+                    "editorial_class": "MUST_PUBLISH",
+                    "recommended_action": "SELECT",
+                },
+            }],
+            "pending": [],
+        },
+        "publisher": {"results": []},
+    }])
+    write_json(tmp_path / "state" / "newsroom" / "publisher_history.json", {})
+
+    result = audit.build_audit(root=tmp_path, now=NOW)
+
+    assert result["show_news_urgency"]["show_identity_unique_urls"] == 1
+    assert result["show_news_urgency"]["promoted_unique_urls"] == 0
+    assert result["show_news_urgency"]["pending_eligible_unique_urls"] == 0
+    assert result["show_news_urgency"]["opportunity_observed"] is False
+    assert result["status"] == "no_opportunity"
+
+
 def test_legacy_master_rows_report_partial_coverage(tmp_path: Path) -> None:
     write_master(tmp_path, [{
         "schema_version": "v93_19_newsroom_master_log",
