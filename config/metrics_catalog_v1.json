@@ -1412,7 +1412,7 @@
       "unit": "count",
       "cardinality": "one scalar per requested window",
       "authority_level": "contractual",
-      "source_primary": "Gemini ledger filtered to agent=Bob and translation reason",
+      "source_primary": "state/newsroom/gemini_call_ledger.jsonl: agent=Bob and translation workload",
       "source_secondary": [],
       "producer_paths": [
         "agents/bob.py",
@@ -1476,7 +1476,7 @@
       "unit": "count",
       "cardinality": "one scalar per requested window",
       "authority_level": "contractual",
-      "source_primary": "Gemini ledger filtered to agent=Bob and status=failed",
+      "source_primary": "state/newsroom/gemini_call_ledger.jsonl: agent=Bob and status=failed",
       "source_secondary": [],
       "producer_paths": [
         "agents/bob.py",
@@ -1508,7 +1508,7 @@
       "unit": "count",
       "cardinality": "one scalar per requested window",
       "authority_level": "contractual",
-      "source_primary": "Gemini ledger filtered to agent=Bob and fallback=true",
+      "source_primary": "state/newsroom/gemini_call_ledger.jsonl: agent=Bob and fallback=true",
       "source_secondary": [],
       "producer_paths": [
         "agents/bob.py",
