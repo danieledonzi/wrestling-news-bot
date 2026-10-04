@@ -416,3 +416,56 @@ def test_markdown_labels_legacy_andrea_exception_reasons_as_diagnostic():
     text = render_markdown(report)
 
     assert "Andrea exception reason occurrences (legacy diagnostic): missing_body (2)" in text
+
+
+def test_daily_email_body_surfaces_pr131_and_pr2_canonical_metrics(tmp_path):
+    path = tmp_path / "pr2.json"
+    path.write_text(json.dumps({
+        "judgment": "BUONO",
+        "day_type": "normale",
+        "summary": "PR2 telemetry.",
+        "daily_numbers": {
+            "news_published": 10,
+            "reports_published": 1,
+            "canonical_metrics": {
+                "menzo": {},
+                "andrea": {},
+                "alfred": {},
+                "pr131": {
+                    "coverage": "full",
+                    "hits": 6,
+                    "misses": 4,
+                    "hit_rate": 0.6,
+                    "provider": {
+                        "gemini_calls_avoided": 3,
+                        "duplicate_gate_real_attempts": 4,
+                        "duplicate_confirmation_real_attempts": 2,
+                        "known_actual_cost": "0.0142",
+                        "currency": "USD",
+                    },
+                },
+                "bob": {
+                    "item_failures": 2,
+                    "failure_reasons": {"extraction_empty": 1, "translation_validation_failed": 1},
+                },
+                "publisher": {
+                    "terminal_failures": 1,
+                    "failure_reasons": {"publish_error": 1},
+                },
+                "simone": {
+                    "already_present_events": 1,
+                    "terminal_failures": 0,
+                    "failure_reasons": {},
+                },
+            },
+        },
+    }), encoding="utf-8")
+
+    text = daily_editorial_judgment_body_section(path)
+
+    assert "PR131 cache: copertura=full; hit/miss=6/4; hit rate=60.0%" in text
+    assert "PR131 Gemini: chiamate evitate=3" in text
+    assert "costo reale=0.0142 USD" in text
+    assert "Bob failure item-level: 2" in text
+    assert "Publisher failure terminali: 1" in text
+    assert "Simone già presenti / failure terminali: 1/0" in text
