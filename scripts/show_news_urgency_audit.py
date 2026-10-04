@@ -266,6 +266,7 @@ def build_audit(
                 if item.get("corresponding_report_published") is True and item not in urgency_after_report:
                     urgency_after_report.append(item)
 
+    per_day_record_counts: dict[str, int] = defaultdict(int)
     per_day_urls: dict[str, set[str]] = defaultdict(set)
     published_24h_urls: set[str] = set()
     if history_clean:
@@ -277,12 +278,15 @@ def build_audit(
             if stamp is None or not url or stamp > current + timedelta(minutes=5):
                 continue
             local_date = stamp.astimezone(local_tz).date().isoformat()
+            # Match enforcement semantics exactly: every successful history
+            # record consumes one daily slot, even if a source URL repeats.
+            per_day_record_counts[local_date] += 1
             per_day_urls[local_date].add(url)
             if cutoff <= stamp <= current + timedelta(minutes=5):
                 published_24h_urls.add(url)
 
     today_local = current.astimezone(local_tz).date().isoformat()
-    daily_counts = {date: len(urls) for date, urls in sorted(per_day_urls.items())}
+    daily_counts = dict(sorted(per_day_record_counts.items()))
     relevant_daily_counts = {
         date: count
         for date, count in daily_counts.items()
@@ -299,7 +303,9 @@ def build_audit(
     )
     show_urls = set(_dedupe_urls(show_objects))
     pending_eligible_urls = set(_dedupe_urls(pending_eligible))
-    opportunity_observed = bool(show_urls or urgency_urls or pending_eligible_urls)
+    # A show identity alone is not an urgency opportunity: normally selected
+    # or otherwise ineligible show news should keep the audit at no_opportunity.
+    opportunity_observed = bool(urgency_urls or pending_eligible_urls)
 
     warnings: list[str] = []
     if not master_meta["available"]:
