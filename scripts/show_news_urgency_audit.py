@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -9,6 +10,11 @@ from typing import Any, Iterable
 from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from agents.news_scheduling import is_successful_news_publication, publication_timestamp
+
 MASTER_LOG = ROOT / "state" / "newsroom" / "master_log.jsonl"
 PUBLISHER_HISTORY = ROOT / "state" / "newsroom" / "publisher_history.json"
 LATEST_JSON = ROOT / "state" / "reports" / "owtv_show_news_urgency_audit_latest.json"
@@ -123,11 +129,28 @@ def _load_history(path: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     else:
         meta["reason"] = "publisher_history_invalid_shape"
         return [], meta
-    rows = [item for item in values if isinstance(item, dict)]
-    meta["malformed_records"] = len(values) - len(rows)
+
+    rows: list[dict[str, Any]] = []
+    malformed = 0
+    for item in values:
+        if not isinstance(item, dict):
+            malformed += 1
+            continue
+        # Publisher history is an idempotency ledger: every record must retain
+        # an identity, status and a timestamp understood by the ceiling logic.
+        if (
+            not _source_url(item)
+            or not str(item.get("status") or "").strip()
+            or publication_timestamp(item) is None
+        ):
+            malformed += 1
+            continue
+        rows.append(item)
+
+    meta["malformed_records"] = malformed
     meta["records"] = len(rows)
-    if meta["malformed_records"]:
-        meta["reason"] = f"publisher_history_malformed_records:{meta['malformed_records']}"
+    if malformed:
+        meta["reason"] = f"publisher_history_malformed_records:{malformed}"
         return rows, meta
     meta["available"] = True
     return rows, meta
@@ -239,9 +262,9 @@ def build_audit(
     published_24h_urls: set[str] = set()
     if history_clean:
         for item in history:
-            if str(item.get("status") or "").lower() not in {"publish", "published"}:
+            if not is_successful_news_publication(item):
                 continue
-            stamp = _parse_datetime(item.get("published_at") or item.get("publication_timestamp"))
+            stamp = publication_timestamp(item)
             url = _source_url(item)
             if stamp is None or not url or stamp > current + timedelta(minutes=5):
                 continue
