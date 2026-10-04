@@ -17,6 +17,7 @@ REPORTS_DIR = ROOT / "reports"
 LOCAL_TIMEZONE = "Europe/Rome"
 DAILY_NEWS_CEILING = 30
 URGENCY_REASON = "show_news_urgency_pre_report"
+MASTER_SCHEMA_VERSION = "v93_19_1_show_news_urgency_audit"
 
 
 def _parse_datetime(value: Any) -> datetime | None:
@@ -55,37 +56,76 @@ def _show_identity(item: dict[str, Any]) -> str:
     ).strip()
 
 
-def _load_master_rows(path: Path, *, now: datetime, hours: int) -> list[tuple[datetime, dict[str, Any]]]:
+def _load_master_rows(
+    path: Path,
+    *,
+    now: datetime,
+    hours: int,
+) -> tuple[list[tuple[datetime, dict[str, Any]]], dict[str, Any]]:
+    meta = {
+        "available": False,
+        "reason": None,
+        "nonempty_rows": 0,
+        "malformed_rows": 0,
+        "parseable_rows": 0,
+    }
     if not path.exists():
-        return []
+        meta["reason"] = "missing_master_log"
+        return [], meta
+    try:
+        lines = path.read_text(encoding="utf-8", errors="ignore").splitlines()
+    except OSError as exc:
+        meta["reason"] = f"master_log_read_failed:{type(exc).__name__}"
+        return [], meta
+
     cutoff = now - timedelta(hours=max(1, int(hours)))
     rows: list[tuple[datetime, dict[str, Any]]] = []
-    for line in path.read_text(encoding="utf-8", errors="ignore").splitlines():
+    for raw in lines:
+        line = raw.strip()
+        if not line:
+            continue
+        meta["nonempty_rows"] += 1
         try:
             payload = json.loads(line)
         except json.JSONDecodeError:
+            meta["malformed_rows"] += 1
             continue
         if not isinstance(payload, dict):
+            meta["malformed_rows"] += 1
             continue
+        meta["parseable_rows"] += 1
         run = payload.get("run") if isinstance(payload.get("run"), dict) else {}
         stamp = _parse_datetime(run.get("started_at")) or _parse_datetime(payload.get("recorded_at"))
         if stamp is not None and cutoff <= stamp <= now + timedelta(minutes=5):
             rows.append((stamp, payload))
-    return rows
+
+    if meta["nonempty_rows"] and meta["parseable_rows"] == 0:
+        meta["reason"] = "master_log_no_parseable_rows"
+        return [], meta
+    meta["available"] = True
+    return rows, meta
 
 
-def _load_history(path: Path) -> list[dict[str, Any]]:
+def _load_history(path: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    meta = {"available": False, "reason": None, "records": 0}
     if not path.exists():
-        return []
+        meta["reason"] = "missing_publisher_history"
+        return [], meta
     try:
         payload = json.loads(path.read_text(encoding="utf-8"))
-    except (json.JSONDecodeError, OSError):
-        return []
+    except (json.JSONDecodeError, OSError) as exc:
+        meta["reason"] = f"publisher_history_read_failed:{type(exc).__name__}"
+        return [], meta
     if isinstance(payload, dict):
-        return [item for item in payload.values() if isinstance(item, dict)]
-    if isinstance(payload, list):
-        return [item for item in payload if isinstance(item, dict)]
-    return []
+        rows = [item for item in payload.values() if isinstance(item, dict)]
+    elif isinstance(payload, list):
+        rows = [item for item in payload if isinstance(item, dict)]
+    else:
+        meta["reason"] = "publisher_history_invalid_shape"
+        return [], meta
+    meta["available"] = True
+    meta["records"] = len(rows)
+    return rows, meta
 
 
 def _dedupe_urls(items: Iterable[dict[str, Any]]) -> list[str]:
@@ -103,10 +143,15 @@ def build_audit(
     current = (now or datetime.now(timezone.utc)).astimezone(timezone.utc)
     master_path = root / "state" / "newsroom" / "master_log.jsonl"
     history_path = root / "state" / "newsroom" / "publisher_history.json"
-    rows = _load_master_rows(master_path, now=current, hours=hours)
-    history = _load_history(history_path)
+    rows, master_meta = _load_master_rows(master_path, now=current, hours=hours)
+    history, history_meta = _load_history(history_path)
     local_tz = ZoneInfo(timezone_name)
     cutoff = current - timedelta(hours=max(1, int(hours)))
+
+    supported_runs = sum(1 for _stamp, row in rows if row.get("schema_version") == MASTER_SCHEMA_VERSION)
+    master_clean = bool(master_meta["available"] and master_meta["malformed_rows"] == 0)
+    urgency_coverage_complete = bool(rows) and master_clean and supported_runs == len(rows)
+    history_clean = bool(history_meta["available"])
 
     show_objects: list[dict[str, Any]] = []
     urgency_objects: list[dict[str, Any]] = []
@@ -177,17 +222,18 @@ def build_audit(
 
     per_day_urls: dict[str, set[str]] = defaultdict(set)
     published_24h_urls: set[str] = set()
-    for item in history:
-        if str(item.get("status") or "").lower() not in {"publish", "published"}:
-            continue
-        stamp = _parse_datetime(item.get("published_at") or item.get("publication_timestamp"))
-        url = _source_url(item)
-        if stamp is None or not url or stamp > current + timedelta(minutes=5):
-            continue
-        local_date = stamp.astimezone(local_tz).date().isoformat()
-        per_day_urls[local_date].add(url)
-        if cutoff <= stamp <= current + timedelta(minutes=5):
-            published_24h_urls.add(url)
+    if history_clean:
+        for item in history:
+            if str(item.get("status") or "").lower() not in {"publish", "published"}:
+                continue
+            stamp = _parse_datetime(item.get("published_at") or item.get("publication_timestamp"))
+            url = _source_url(item)
+            if stamp is None or not url or stamp > current + timedelta(minutes=5):
+                continue
+            local_date = stamp.astimezone(local_tz).date().isoformat()
+            per_day_urls[local_date].add(url)
+            if cutoff <= stamp <= current + timedelta(minutes=5):
+                published_24h_urls.add(url)
 
     today_local = current.astimezone(local_tz).date().isoformat()
     daily_counts = {date: len(urls) for date, urls in sorted(per_day_urls.items())}
@@ -198,7 +244,7 @@ def build_audit(
     }
     ceiling_violations = {
         date: count for date, count in relevant_daily_counts.items() if count > daily_ceiling
-    }
+    } if history_clean else {}
 
     urgency_urls = set(_dedupe_urls(urgency_objects))
     lost_provenance_urls = sorted(
@@ -207,11 +253,31 @@ def build_audit(
     )
     show_urls = set(_dedupe_urls(show_objects))
     pending_eligible_urls = set(_dedupe_urls(pending_eligible))
-
     opportunity_observed = bool(show_urls or urgency_urls or pending_eligible_urls)
-    hard_ok = not ceiling_violations and not urgency_after_report and not lost_provenance_urls
-    if not hard_ok:
+
+    warnings: list[str] = []
+    if not master_meta["available"]:
+        warnings.append(str(master_meta["reason"] or "master_log_unavailable"))
+    if master_meta["malformed_rows"]:
+        warnings.append(f"master_log_malformed_rows:{master_meta['malformed_rows']}")
+    if not history_meta["available"]:
+        warnings.append(str(history_meta["reason"] or "publisher_history_unavailable"))
+    if master_meta["available"] and not urgency_coverage_complete:
+        warnings.append(f"urgency_master_coverage_partial:{supported_runs}/{len(rows)}")
+
+    daily_check: bool | None = (not bool(ceiling_violations)) if history_clean else None
+    master_checks_available = urgency_coverage_complete
+    post_report_check: bool | None = (not bool(urgency_after_report)) if master_checks_available else None
+    provenance_check: bool | None = (not bool(lost_provenance_urls)) if master_checks_available else None
+
+    if not master_meta["available"] or not history_meta["available"]:
+        status = "unavailable"
+    elif master_meta["malformed_rows"]:
         status = "attention"
+    elif daily_check is False or post_report_check is False or provenance_check is False:
+        status = "attention"
+    elif not urgency_coverage_complete:
+        status = "partial_coverage"
     elif not opportunity_observed:
         status = "no_opportunity"
     else:
@@ -225,19 +291,29 @@ def build_audit(
         "window_end_utc": current.isoformat(),
         "status": status,
         "runs": len(rows),
+        "source_coverage": {
+            "master_log": {
+                **master_meta,
+                "runs_in_window": len(rows),
+                "urgency_schema_version": MASTER_SCHEMA_VERSION,
+                "urgency_supported_runs": supported_runs,
+                "urgency_complete_window": urgency_coverage_complete,
+            },
+            "publisher_history": history_meta,
+        },
         "daily_ceiling": {
             "limit": int(daily_ceiling),
             "timezone": timezone_name,
             "today_local": today_local,
-            "published_today_local": daily_counts.get(today_local, 0),
-            "published_unique_last_window": len(published_24h_urls),
-            "per_day_counts": relevant_daily_counts,
+            "published_today_local": daily_counts.get(today_local) if history_clean else None,
+            "published_unique_last_window": len(published_24h_urls) if history_clean else None,
+            "per_day_counts": relevant_daily_counts if history_clean else {},
             "skipped_capacity_unique_urls": len(set(_dedupe_urls(capacity_skips))),
             "daily_ceiling_skips_unique_urls": len(set(_dedupe_urls(daily_ceiling_skips))),
             "violations": ceiling_violations,
         },
         "show_news_urgency": {
-            "opportunity_observed": opportunity_observed,
+            "opportunity_observed": opportunity_observed if master_checks_available else None,
             "show_identity_unique_urls": len(show_urls),
             "promoted_unique_urls": len(urgency_urls),
             "published_with_provenance_unique_urls": len(urgency_published_with_provenance),
@@ -248,11 +324,11 @@ def build_audit(
             "pending_eligible_urls": sorted(pending_eligible_urls),
         },
         "checks": {
-            "daily_ceiling_respected": not bool(ceiling_violations),
-            "no_post_report_urgency": not bool(urgency_after_report),
-            "urgency_provenance_preserved": not bool(lost_provenance_urls),
+            "daily_ceiling_respected": daily_check,
+            "no_post_report_urgency": post_report_check,
+            "urgency_provenance_preserved": provenance_check,
         },
-        "warnings": [],
+        "warnings": warnings,
     }
 
 
@@ -260,8 +336,15 @@ def render_markdown(payload: dict[str, Any]) -> str:
     ceiling = payload["daily_ceiling"]
     urgency = payload["show_news_urgency"]
     checks = payload["checks"]
-    mark = lambda value: "OK" if value else "ATTENTION"
-    opportunity = "yes" if urgency["opportunity_observed"] else "no"
+    coverage = payload.get("source_coverage", {}).get("master_log", {})
+    def mark(value: Any) -> str:
+        if value is True:
+            return "OK"
+        if value is False:
+            return "ATTENTION"
+        return "N.D."
+    opportunity_value = urgency.get("opportunity_observed")
+    opportunity = "yes" if opportunity_value is True else ("no" if opportunity_value is False else "n.d.")
     lines = [
         "# OWTV Show News Urgency Audit",
         "",
@@ -272,8 +355,9 @@ def render_markdown(payload: dict[str, Any]) -> str:
         "## Summary",
         "",
         f"- Runs observed: {payload['runs']}",
-        f"- News published in window: {ceiling['published_unique_last_window']}",
-        f"- News published today ({ceiling['timezone']}): {ceiling['published_today_local']} / {ceiling['limit']}",
+        f"- Urgency observability coverage: {coverage.get('urgency_supported_runs', 0)}/{coverage.get('runs_in_window', 0)} runs",
+        f"- News published in window: {ceiling['published_unique_last_window'] if ceiling['published_unique_last_window'] is not None else 'n.d.'}",
+        f"- News published today ({ceiling['timezone']}): {ceiling['published_today_local'] if ceiling['published_today_local'] is not None else 'n.d.'} / {ceiling['limit']}",
         f"- Show/event opportunity observed: {opportunity}",
         f"- Show/event identities: {urgency['show_identity_unique_urls']}",
         f"- Urgency promotions: {urgency['promoted_unique_urls']}",
@@ -288,6 +372,8 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- No urgency after corresponding report: {mark(checks['no_post_report_urgency'])}",
         f"- Urgency provenance preserved to Publisher: {mark(checks['urgency_provenance_preserved'])}",
     ]
+    if payload.get("warnings"):
+        lines += ["", "## Diagnostic warnings", ""] + [f"- {warning}" for warning in payload["warnings"]]
     if urgency["urgency_after_report_urls"]:
         lines += ["", "## Urgency after report", ""] + [f"- {url}" for url in urgency["urgency_after_report_urls"]]
     if urgency["lost_provenance_urls"]:
