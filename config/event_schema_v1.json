@@ -228,7 +228,9 @@
         "when_event_types": [
           "stage_failed",
           "model_attempt_failed",
-          "publication_failed"
+          "publication_failed",
+          "article_generation_failed",
+          "wordpress_preflight_failed"
         ],
         "require": [
           "error_class",
@@ -672,6 +674,54 @@
         "Menzo"
       ],
       "description": "PR131 validated duplicate-pair result stored in cache"
+    },
+    {
+      "name": "article_generation_failed",
+      "stage": "generation",
+      "agents": [
+        "Bob"
+      ],
+      "description": "item-level Bob package generation failure or deferred generation outcome"
+    },
+    {
+      "name": "publication_dry_run",
+      "stage": "publication",
+      "agents": [
+        "Publisher"
+      ],
+      "description": "publication intentionally evaluated in dry-run mode"
+    },
+    {
+      "name": "report_already_present",
+      "stage": "reporting",
+      "agents": [
+        "Simone"
+      ],
+      "description": "report publication skipped because authoritative publication already exists"
+    },
+    {
+      "name": "wordpress_preflight_attempted",
+      "stage": "publication",
+      "agents": [
+        "Publisher"
+      ],
+      "description": "WordPress readiness preflight attempted"
+    },
+    {
+      "name": "wordpress_preflight_completed",
+      "stage": "publication",
+      "agents": [
+        "Publisher"
+      ],
+      "description": "WordPress readiness preflight succeeded"
+    },
+    {
+      "name": "wordpress_preflight_failed",
+      "stage": "publication",
+      "agents": [
+        "Publisher"
+      ],
+      "description": "WordPress readiness preflight failed"
     }
   ],
   "identities": {
