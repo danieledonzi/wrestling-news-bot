@@ -1274,6 +1274,13 @@ def build_pr131_cache_metrics(
         and len(resolved_currencies) <= 1
     )
     known_cost = sum((value for value, _row in resolved_costs), Decimal("0"))
+    canonical_avoided = [
+        row for row in bounded
+        if row.get("event_type") == "model_attempt_avoided"
+        and row.get("agent") == "Gemini"
+        and str(row.get("reason_code") or "").startswith("pr131_duplicate_pair_cache_")
+    ]
+    avoided_cross_ledger_match = len(canonical_avoided) == len(pr131_avoided)
     provider = {
         "gemini_calls_avoided": (
             len(pr131_avoided)
@@ -1305,13 +1312,6 @@ def build_pr131_cache_metrics(
         ),
         "cost_integrity_reasons": dict(sorted(cost_integrity_reasons.items())),
     }
-    canonical_avoided = [
-        row for row in bounded
-        if row.get("event_type") == "model_attempt_avoided"
-        and row.get("agent") == "Gemini"
-        and str(row.get("reason_code") or "").startswith("pr131_duplicate_pair_cache_")
-    ]
-    avoided_cross_ledger_match = len(canonical_avoided) == len(pr131_avoided)
     mismatches = []
     if invalid_duplicate_status_rows:
         invalid_statuses = Counter(
