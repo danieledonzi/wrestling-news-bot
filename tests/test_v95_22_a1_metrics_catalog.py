@@ -22,7 +22,7 @@ def by_name():
 def test_json_is_valid_and_validator_accepts_contract():
     payload = catalog()
     assert payload["schema_version"] == "owtv_metrics_catalog_v1"
-    assert payload["policy_version"] == "v96.4_telemetry_authority_convergence"
+    assert payload["policy_version"] == "v96.5_pr2_missing_telemetry_closure"
     assert validate(CATALOG_PATH, MARKDOWN_PATH) == []
 
 
@@ -89,6 +89,34 @@ def test_migrated_v9519_boundary_semantics_match_canonical_authority():
         overlap["zero_semantics"] + " " + overlap["missing_semantics"]
         + ratio["zero_semantics"] + " " + ratio["missing_semantics"]
     ).lower()
+
+
+def test_pr2_pr131_metrics_have_explicit_authorities_and_units():
+    rows = by_name()
+    event_metrics = {
+        "pr131.cache_lookups", "pr131.cache_hits", "pr131.cache_misses",
+        "pr131.cache_hit_rate", "pr131.entries_stored", "pr131.store_failures",
+        "bob.item_failures", "simone.already_present_events",
+    }
+    provider_metrics = {
+        "pr131.gemini_calls_avoided",
+        "pr131.duplicate_workload_real_attempts",
+        "pr131.duplicate_workload_actual_cost",
+    }
+    for name in event_metrics:
+        row = rows[name]
+        assert row["status"] == "active"
+        assert row["authority_family"] == "newsroom_lifecycle"
+        assert row["source_primary"] == "state/newsroom/canonical_event_ledger.jsonl"
+    for name in provider_metrics:
+        row = rows[name]
+        assert row["status"] == "active"
+        assert row["authority_family"] == "provider_economics"
+        assert row["source_primary"] == "state/newsroom/gemini_call_ledger.jsonl"
+    assert rows["pr131.cache_hit_rate"]["unit"] == "ratio"
+    assert rows["pr131.duplicate_workload_actual_cost"]["unit"] == "USD"
+    assert "pair hits are not treated as calls" in rows["pr131.gemini_calls_avoided"]["notes"]
+    assert "counterfactual dollars saved" in rows["pr131.duplicate_workload_actual_cost"]["notes"]
 
 
 def test_duplicate_coverage_complete_has_boolean_coverage_semantics():
