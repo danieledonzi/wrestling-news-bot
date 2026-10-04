@@ -8,6 +8,7 @@ import pytest
 @pytest.fixture(autouse=True)
 def isolated_active_pair_cache(monkeypatch, tmp_path):
     monkeypatch.setattr(pair_cache, "CACHE_FILE", tmp_path / "active-pair-cache.json")
+    monkeypatch.setattr(active, "record_gemini_event", lambda **_: None)
 
 
 def snapshot(count=3, published=0):
