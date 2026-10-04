@@ -182,7 +182,7 @@ def build_audit(
             continue
         stamp = _parse_datetime(item.get("published_at") or item.get("publication_timestamp"))
         url = _source_url(item)
-        if stamp is None or not url:
+        if stamp is None or not url or stamp > current + timedelta(minutes=5):
             continue
         local_date = stamp.astimezone(local_tz).date().isoformat()
         per_day_urls[local_date].add(url)
