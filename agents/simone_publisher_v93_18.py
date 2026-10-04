@@ -120,11 +120,11 @@ def wp_ready() -> tuple[bool, str, dict[str, Any]]:
     root = wp_root()
     if not root:
         active_event("wordpress_preflight_failed", "Simone", "publication", "failed",
-                     reason_code="missing_wp_url", error_class="configuration", error_terminal=True)
+                     reason_code="missing_wp_url", error_class="policy", error_terminal=True)
         return False, "missing_wp_url", {}
     if not all(wp_auth()):
         active_event("wordpress_preflight_failed", "Simone", "publication", "failed",
-                     reason_code="missing_wp_auth", error_class="configuration", error_terminal=True)
+                     reason_code="missing_wp_auth", error_class="policy", error_terminal=True)
         return False, "missing_wp_auth", {"root": root}
     diagnostics = {"root": root, "dns": log_dns_diagnostics(root), "attempts": []}
     endpoints = [(f"{root}/wp-json/", False, "rest_root"), (f"{root}/wp-json/wp/v2/posts?per_page=1", True, "posts_auth")]
@@ -170,7 +170,7 @@ def jarvis_wp_preflight() -> tuple[bool, str, dict[str, Any]]:
         # use the old internal check rather than incorrectly skipping reports.
         active_event("stage_failed", "Simone", "publication", "failed",
                      reason_code="jarvis_wp_preflight_observer_error",
-                     error_class=type(exc).__name__, error_terminal=False)
+                     error_class="invariant", error_terminal=False)
         return True, f"preflight_error_non_blocking:{exc}", {"error": str(exc)}
 
 
