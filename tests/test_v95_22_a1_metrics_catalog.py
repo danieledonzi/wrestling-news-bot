@@ -215,10 +215,8 @@ def test_v9519_canonical_names_are_preserved():
         "gemini.fallbacks", "simone.reports_published", "simone.already_present_events",
     }
     assert frozen <= names.keys()
-    authoritative = frozen - {"simone.already_present_events"}
-    assert all(names[name]["status"] == "active" for name in authoritative)
-    assert names["simone.already_present_events"]["status"] == "diagnostic_only"
-    assert names["simone.already_present_events"]["authority_family"] == "diagnostic_legacy"
+    assert all(names[name]["status"] == "active" for name in frozen)
+    assert names["simone.already_present_events"]["authority_family"] == "newsroom_lifecycle"
 
 
 def test_markdown_lists_every_active_metric():
@@ -259,7 +257,10 @@ def test_massy_handoffs_and_simone_event_identity_are_not_unique_errors():
     assert "Unique" not in rows["massy.actionable_handoffs"]["description"]
     assert "Per-run" in rows["massy.actionable_handoffs"]["description"]
     assert rows["simone.already_present_events"]["identity_key"] == (
-        "report publication event row; stable report/source identity when available"
+        "report_key when present; otherwise content_id or correlation_id"
+    )
+    assert rows["simone.already_present_events"]["source_primary"] == (
+        "state/newsroom/canonical_event_ledger.jsonl"
     )
 
 
