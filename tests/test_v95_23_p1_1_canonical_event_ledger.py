@@ -150,7 +150,10 @@ def test_bob_generated_normalizes_ready_failure_and_pending(tmp_path, status, ex
     ledger.observe_bob_generated({"articles": [{"url": URL, "status": status}]})
     output = rows(ledger.path) if ledger.path.exists() else []
     assert [row["event_type"] for row in output] == ([expected_event] if expected_event else [])
-    assert all(row["event_type"] == "article_generated" and row["status"] == "success" for row in output)
+    if expected_event == "article_generated":
+        assert output[0]["status"] == "success"
+    elif expected_event == "article_generation_failed":
+        assert output[0]["status"] == "failed"
 
 
 def test_bob_mixed_articles_emit_ready_and_typed_terminal_failures(tmp_path):
