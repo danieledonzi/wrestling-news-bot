@@ -179,6 +179,20 @@ def show_news_urgency_audit_body_section(
     opportunity_value = urgency.get("opportunity_observed")
     opportunity = "sì" if opportunity_value is True else ("no" if opportunity_value is False else "n.d.")
     status = str(payload.get("status") or "n.d.")
+    pr131_observed = pr131 if pr131.get("coverage") == "full" else (
+        pr131.get("observed_window") if isinstance(pr131.get("observed_window"), dict) else {}
+    )
+    pr131_provider = pr131.get("provider") if isinstance(pr131.get("provider"), dict) else {}
+    pr131_hit_rate = pr131_observed.get("hit_rate")
+    pr131_hit_rate_label = (
+        f"{pr131_hit_rate:.1%}" if isinstance(pr131_hit_rate, (int, float)) else "n.d."
+    )
+    pr131_avoided = (
+        pr131_provider.get("gemini_calls_avoided")
+        if pr131.get("coverage") == "full"
+        else pr131_provider.get("observed_gemini_calls_avoided")
+    )
+
     lines = [
         "",
         "SHOW NEWS URGENCY / DAILY CEILING",
@@ -499,6 +513,10 @@ def daily_editorial_judgment_body_section(
     menzo = canonical.get("menzo") if isinstance(canonical.get("menzo"), dict) else {}
     andrea = canonical.get("andrea") if isinstance(canonical.get("andrea"), dict) else {}
     alfred = canonical.get("alfred") if isinstance(canonical.get("alfred"), dict) else {}
+    bob = canonical.get("bob") if isinstance(canonical.get("bob"), dict) else {}
+    publisher = canonical.get("publisher") if isinstance(canonical.get("publisher"), dict) else {}
+    simone = canonical.get("simone") if isinstance(canonical.get("simone"), dict) else {}
+    pr131 = canonical.get("pr131") if isinstance(canonical.get("pr131"), dict) else {}
     analysis = payload.get("translation_warning_analysis") if isinstance(payload.get("translation_warning_analysis"), dict) else {}
     analysis_available = analysis.get("available")
     if analysis_available is None:
@@ -548,6 +566,11 @@ def daily_editorial_judgment_body_section(
         f"- Andrea copertura: {andrea_coverage}",
         f"- Andrea checked/passed/con eccezione/blocked: {andrea_counts}",
         f"- Ragioni eccezioni Andrea: {reasons_label}",
+        f"- PR131 cache: copertura={pr131.get('coverage', 'unavailable')}; hit/miss={_daily_metric_label(pr131_observed.get('hits'))}/{_daily_metric_label(pr131_observed.get('misses'))}; hit rate={pr131_hit_rate_label}",
+        f"- PR131 Gemini: chiamate evitate={_daily_metric_label(pr131_avoided)}; tentativi duplicate gate/confirmation={_daily_metric_label(pr131_provider.get('duplicate_gate_real_attempts'))}/{_daily_metric_label(pr131_provider.get('duplicate_confirmation_real_attempts'))}; costo reale={_daily_metric_label(pr131_provider.get('known_actual_cost'))} {pr131_provider.get('currency') or 'USD'}",
+        f"- Bob failure item-level: {_daily_metric_label(bob.get('item_failures'))}; ragioni={bob.get('failure_reasons') or 'n.d.'}",
+        f"- Publisher failure terminali: {_daily_metric_label(publisher.get('terminal_failures'))}; ragioni={publisher.get('failure_reasons') or 'n.d.'}",
+        f"- Simone già presenti / failure terminali: {_daily_metric_label(simone.get('already_present_events'))}/{_daily_metric_label(simone.get('terminal_failures'))}; ragioni={simone.get('failure_reasons') or 'n.d.'}",
     ]
     if warning:
         lines.append(f"- Avviso diagnostico: {warning}")
