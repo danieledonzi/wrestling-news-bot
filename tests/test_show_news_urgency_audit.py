@@ -36,9 +36,11 @@ def test_no_opportunity_distinguishes_inactive_feature_from_failure(tmp_path: Pa
         "menzo": {"selected": [], "pending": []},
         "publisher": {"results": []},
     }])
+    history = {str(i): history_row(i, "2026-10-04T05:00:00+00:00") for i in range(30)}
+    history["future"] = history_row(999, "2026-10-05T05:00:00+00:00")
     write_json(
         tmp_path / "state" / "newsroom" / "publisher_history.json",
-        {str(i): history_row(i, "2026-10-04T05:00:00+00:00") for i in range(30)},
+        history,
     )
 
     result = audit.build_audit(root=tmp_path, now=NOW)
