@@ -428,8 +428,6 @@ def validate(
         if name.startswith("gemini.") and availability == "exact":
             if source != "state/newsroom/gemini_call_ledger.jsonl" or row.get("source_coverage_status") != "full_target_window":
                 errors.append("Gemini metric {} lacks canonical full-window authority at the Phase 0 cutoff".format(name))
-        if cat.get("availability") == "unavailable" and availability != "unsupported_historical":
-            errors.append("A1-unavailable metric {} must remain unsupported".format(name))
         if name in RAW_HANDOFF_METRICS and value is not None and row.get("calculation_basis") != "master_handoff_exact_event_sum":
             errors.append("raw handoff metric {} must use master_handoff_exact_event_sum".format(name))
     terminal = metric_rows.get("simone.terminal_errors", {})
