@@ -61,21 +61,34 @@ def test_active_metrics_have_authority_formula_and_distinct_zero_missing():
         assert "Null" in row["missing_semantics"]
 
 
-def test_frozen_v9519_boundary_semantics_are_explicit():
+def test_migrated_v9519_boundary_semantics_match_canonical_authority():
     rows = by_name()
     ratio = rows["menzo.handoff_to_publication_ratio"]
-    assert "greater than zero" in ratio["zero_semantics"]
-    assert "overlap equals zero" in ratio["zero_semantics"]
-    assert "denominator is zero or absent" in ratio["missing_semantics"]
-    assert "identity linkage is not supported" in ratio["missing_semantics"]
+    assert "nonzero downstream-handoff denominator" in ratio["zero_semantics"]
+    assert "canonical content_id overlap" in ratio["zero_semantics"]
+    assert "denominator is zero" in ratio["missing_semantics"]
+    assert "canonical lifecycle coverage" in ratio["missing_semantics"]
 
     actionable = rows["menzo.unique_actionable_candidates"]
-    assert "pending sample ambiguously truncated" in actionable["missing_semantics"]
+    assert "canonical lifecycle coverage" in actionable["missing_semantics"]
     warnings = rows["alfred.warning_occurrences"]
-    assert "exactly ten entries" in warnings["missing_semantics"]
-    assert "without an authoritative warning_occurrences_total" in warnings["missing_semantics"]
+    assert "canonical warning coverage" in warnings["missing_semantics"]
     overlap = rows["menzo.linked_handoff_publication_overlap"]
-    assert "no identity namespace is shared by all" in overlap["missing_semantics"]
+    assert "authoritative content_id linkage" in overlap["missing_semantics"]
+
+    for name in (
+        "menzo.unique_actionable_candidates",
+        "menzo.linked_handoff_publication_overlap",
+        "menzo.handoff_to_publication_ratio",
+        "alfred.warning_occurrences",
+    ):
+        semantics = (rows[name]["zero_semantics"] + " " + rows[name]["missing_semantics"]).lower()
+        assert "master" not in semantics
+        assert "legacy" not in semantics
+    assert "namespace" not in (
+        overlap["zero_semantics"] + " " + overlap["missing_semantics"]
+        + ratio["zero_semantics"] + " " + ratio["missing_semantics"]
+    ).lower()
 
 
 def test_duplicate_coverage_complete_has_boolean_coverage_semantics():
