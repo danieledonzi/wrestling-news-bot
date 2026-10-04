@@ -24,7 +24,7 @@ REQUIRED_FIELDS = {
 LIST_FIELDS = {"source_secondary", "producer_paths", "consumer_paths", "legacy_aliases", "used_by_reports"}
 AUTHORITY_FAMILIES = {"newsroom_lifecycle", "provider_economics", "artifact_material", "diagnostic_legacy", "unavailable"}
 AUTHORITATIVE_FAMILIES = {"newsroom_lifecycle", "provider_economics", "artifact_material"}
-POLICY_VERSION = "v96.4_telemetry_authority_convergence"
+POLICY_VERSION = "v96.5_pr2_missing_telemetry_closure"
 ACTIVE_TEXT_FIELDS = {"source_primary", "formula", "zero_semantics", "missing_semantics", "time_window"}
 
 
