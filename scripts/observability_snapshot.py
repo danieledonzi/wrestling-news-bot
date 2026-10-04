@@ -1292,7 +1292,7 @@ def _artifact_snapshot(root: Path, since: datetime, until: datetime) -> tuple[di
 
 
 def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow_tail_fallback: bool = True) -> dict[str, Any]:
-    from agents.gemini_diagnostics import build_gemini_diagnostics, load_ledger
+    from agents.gemini_diagnostics import build_gemini_diagnostics, build_gemini_economic_truth, load_ledger
     runs, sources, warnings, authority_available, source_health = load_master_runs(
         root, allow_tail_fallback=allow_tail_fallback
     )
@@ -1323,6 +1323,16 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
         row for row in gemini_records
         if row.get("agent") == "Menzo" and row.get("workload") in pr131_workloads
     ]
+    # Provider/cost authority must inherit the same integrity contract as the
+    # canonical Gemini economic read model. A readable JSONL is not sufficient:
+    # duplicate provider_attempt_id values, invalid statuses, or cost-component
+    # mismatches make economic telemetry unavailable.
+    overall_economic = gemini.get("economic") if isinstance(gemini.get("economic"), dict) else {}
+    pr131_economic = build_gemini_economic_truth(
+        pr131_provider_rows,
+        available=bool(gemini_available and overall_economic.get("available") is True),
+    )
+    pr131_provider_authoritative = pr131_economic.get("available") is True
     pr131_provider_real = [
         row for row in pr131_provider_rows if row.get("status") in {"called", "failed"}
     ]
@@ -1336,67 +1346,44 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
             "pr131_duplicate_confirmation_cache_all_hit",
         }
     ]
-    pr131_gate_called = [
-        row for row in pr131_provider_called
+    # Executed means a provider request was sent, regardless of whether it
+    # succeeded. Failed attempts therefore belong in these workload totals.
+    pr131_gate_executed = [
+        row for row in pr131_provider_real
         if row.get("workload") == "editorial_director_duplicate_gate"
     ]
-    pr131_confirmation_called = [
-        row for row in pr131_provider_called
+    pr131_confirmation_executed = [
+        row for row in pr131_provider_real
         if row.get("workload") == "editorial_director_duplicate_confirmation"
     ]
-    pr131_resolved_cost_rows = [
-        row for row in pr131_provider_real
-        if row.get("cost_resolution_status") == "resolved"
-        and row.get("computed_list_price_cost") is not None
-    ]
-    pr131_known_cost = Decimal(0)
-    pr131_cost_parse_errors = 0
-    for row in pr131_resolved_cost_rows:
-        try:
-            pr131_known_cost += Decimal(str(row.get("computed_list_price_cost")))
-        except (InvalidOperation, TypeError, ValueError):
-            pr131_cost_parse_errors += 1
-    pr131_cost_resolved = (
-        len(pr131_resolved_cost_rows) - pr131_cost_parse_errors
-    )
-    pr131_cost_coverage = (
-        (pr131_cost_resolved / len(pr131_provider_real))
-        if gemini_available and pr131_provider_real
-        else (1.0 if gemini_available and not pr131_provider_real else None)
-    )
-    pr131_complete_cost = (
-        format(pr131_known_cost, "f")
-        if gemini_available
-        and pr131_cost_coverage == 1.0
-        else None
-    )
     pr131_provider = {
-        "available": gemini_available,
+        "available": pr131_provider_authoritative,
         "source": "state/newsroom/gemini_call_ledger.jsonl",
-        "real_attempts": len(pr131_provider_real) if gemini_available else None,
-        "called": len(pr131_provider_called) if gemini_available else None,
-        "failed": len(pr131_provider_failed) if gemini_available else None,
-        "gate_calls_executed": len(pr131_gate_called) if gemini_available else None,
-        "confirmation_calls_executed": len(pr131_confirmation_called) if gemini_available else None,
-        "explicit_avoided_rows": len(pr131_provider_avoided) if gemini_available else None,
+        "real_attempts": pr131_economic.get("real_attempts") if pr131_provider_authoritative else None,
+        "called": len(pr131_provider_called) if pr131_provider_authoritative else None,
+        "failed": len(pr131_provider_failed) if pr131_provider_authoritative else None,
+        "gate_calls_executed": len(pr131_gate_executed) if pr131_provider_authoritative else None,
+        "confirmation_calls_executed": (
+            len(pr131_confirmation_executed) if pr131_provider_authoritative else None
+        ),
+        "explicit_avoided_rows": len(pr131_provider_avoided) if pr131_provider_authoritative else None,
         "known_computed_list_price_cost": (
-            format(pr131_known_cost, "f") if gemini_available else None
+            pr131_economic.get("known_computed_list_price_cost")
+            if pr131_provider_authoritative else None
         ),
-        "complete_window_computed_list_price_cost": pr131_complete_cost,
-        "computed_cost_coverage": pr131_cost_coverage,
-        "currency": (
-            next(
-                (
-                    row.get("pricing_currency")
-                    for row in pr131_resolved_cost_rows
-                    if row.get("pricing_currency")
-                ),
-                (gemini.get("economic") or {}).get("currency")
-                if isinstance(gemini.get("economic"), dict)
-                else None,
-            )
-            if gemini_available else None
+        "complete_window_computed_list_price_cost": (
+            pr131_economic.get("complete_window_computed_list_price_cost")
+            if pr131_provider_authoritative else None
         ),
+        "computed_cost_coverage": (
+            pr131_economic.get("computed_cost_coverage")
+            if pr131_provider_authoritative else None
+        ),
+        "currency": pr131_economic.get("currency") if pr131_provider_authoritative else None,
+        "economic_coverage": (
+            pr131_economic.get("coverage") if pr131_provider_authoritative else "unavailable"
+        ),
+        "economic_diagnostics": pr131_economic.get("diagnostics", {}),
         "counterfactual_cost_avoided": None,
         "counterfactual_cost_note": "not_computed_calls_avoided_are_exact_cost_avoided_is_counterfactual",
     }
