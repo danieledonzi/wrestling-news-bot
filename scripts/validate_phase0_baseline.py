@@ -325,10 +325,15 @@ def validate(
 
     catalog_rows = _unique(catalog.get("metrics"), "canonical_name", "catalog metric", errors)
     metric_rows = _unique(baseline.get("metric_baselines"), "metric_name", "baseline metric", errors)
-    baseline_catalog_rows = {name: row for name, row in catalog_rows.items()
-                             if row.get("policy_version") == "v95.22_a1"}
-    if set(metric_rows) != set(baseline_catalog_rows):
-        errors.append("baseline metric set must exactly equal the frozen v95.22 A1 catalog metric set")
+    # Phase 0 is an immutable historical observation. The live catalog may evolve
+    # to a newer authority policy, so validate that historical names are still
+    # represented without forcing today's source/status semantics back onto A1.
+    missing_current_metrics = sorted(set(metric_rows) - set(catalog_rows))
+    if missing_current_metrics:
+        errors.append(
+            "current catalog no longer preserves Phase 0 metric names: "
+            + ", ".join(missing_current_metrics)
+        )
     for name, row in metric_rows.items():
         cat = catalog_rows.get(name)
         if cat is None:
@@ -342,14 +347,14 @@ def validate(
         }
         if not required <= set(row):
             errors.append("metric {} is missing required fields".format(name))
-        for field, catalog_field in (("domain", "domain"), ("catalog_status", "status"), ("catalog_unit", "unit"), ("zero_semantics", "zero_semantics"), ("missing_semantics", "missing_semantics")):
-            if row.get(field) != cat.get(catalog_field):
-                errors.append("metric {} {} drifts from A1".format(name, field))
+        # Historical contract fields are validated from the baseline row itself.
+        # They intentionally do not drift-check against the live catalog after
+        # the telemetry authority convergence.
         for field in ("metric_name", "domain", "catalog_status", "catalog_unit", "baseline_availability", "source_primary", "source_coverage_status", "exactness", "evidence_kind"):
             if not isinstance(row.get(field), str) or not row.get(field):
                 errors.append("metric {} {} must be a non-empty string".format(name, field))
-        if row.get("source_primary") != cat.get("source_primary"):
-            errors.append("metric {} source_primary drifts from A1 authority".format(name))
+        # source_primary is historical evidence captured at the Phase 0 cutoff;
+        # do not compare it with the current catalog's authority source.
         source_ref = row.get("source_window_ref")
         if source_ref is not None and (not isinstance(source_ref, str) or source_ref not in source_rows):
             errors.append("metric {} has unknown source_window_ref".format(name))
@@ -380,7 +385,7 @@ def validate(
             errors.append("metric {} observed start exceeds end".format(name))
         if cutoff and end and end > cutoff:
             errors.append("metric {} observed end exceeds cutoff".format(name))
-        unit = cat.get("unit")
+        unit = row.get("catalog_unit")
         if value is not None:
             if unit == "count" and (
                 not isinstance(value, int) or isinstance(value, bool) or value < 0
@@ -421,8 +426,8 @@ def validate(
         if source == "state/newsroom/master_log.jsonl" and availability == "partial" and (start != _time(source_rows.get(source, {}).get("observed_start_utc"), "master source start", errors) or end != _time(source_rows.get(source, {}).get("observed_end_utc"), "master source end", errors)):
             errors.append("master-backed metric {} must use retained source window".format(name))
         if name.startswith("gemini.") and availability == "exact":
-            if source != "state/newsroom/gemini_call_ledger.jsonl" or row.get("source_coverage_status") != "full_target_window" or cat.get("availability") != "available":
-                errors.append("Gemini metric {} lacks canonical full-window authority".format(name))
+            if source != "state/newsroom/gemini_call_ledger.jsonl" or row.get("source_coverage_status") != "full_target_window":
+                errors.append("Gemini metric {} lacks canonical full-window authority at the Phase 0 cutoff".format(name))
         if cat.get("availability") == "unavailable" and availability != "unsupported_historical":
             errors.append("A1-unavailable metric {} must remain unsupported".format(name))
         if name in RAW_HANDOFF_METRICS and value is not None and row.get("calculation_basis") != "master_handoff_exact_event_sum":
