@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
+from contextvars import ContextVar
 from typing import Any, Iterable, Mapping
 from zoneinfo import ZoneInfo
 
@@ -9,6 +10,9 @@ ROME = ZoneInfo("Europe/Rome")
 DAILY_NEWS_CEILING = 30
 SUCCESSFUL_NEWS_STATUSES = {"publish", "published", "success", "succeeded"}
 REPORT_ARTICLE_TYPES = {"report", "show_report", "weekly_report"}
+# Scoped to one runner invocation; planned reports reserve existing Bob capacity
+# without pretending that their publication has already happened.
+REPORT_PUBLICATION_PLANNED: ContextVar[bool | None] = ContextVar("report_publication_planned", default=None)
 
 
 def _timestamp(record: Mapping[str, Any]) -> datetime | None:
