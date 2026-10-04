@@ -162,7 +162,6 @@ def test_master_log_persists_urgency_and_capacity_observability(tmp_path: Path) 
         publisher={
             "results": [{**item, "status": "published"}],
             "skipped_approved_articles": [{
-                **item,
                 "source_url": "https://news.test/capacity",
                 "status": "skipped_capacity",
                 "reason": "daily_news_ceiling:30",
@@ -202,6 +201,36 @@ def test_missing_authoritative_sources_are_unavailable(tmp_path: Path) -> None:
     assert result["checks"]["urgency_provenance_preserved"] is None
     assert "missing_master_log" in result["warnings"]
     assert "missing_publisher_history" in result["warnings"]
+
+
+def test_malformed_publisher_history_is_unavailable(tmp_path: Path) -> None:
+    write_master(tmp_path, [{
+        "run": {"started_at": "2026-10-04T07:30:00+00:00"},
+        "menzo": {"selected": [], "pending": []},
+        "publisher": {"results": []},
+    }])
+    history = tmp_path / "state" / "newsroom" / "publisher_history.json"
+    history.write_text("{", encoding="utf-8")
+
+    result = audit.build_audit(root=tmp_path, now=NOW)
+
+    assert result["status"] == "unavailable"
+    assert result["checks"]["daily_ceiling_respected"] is None
+    assert any(str(w).startswith("publisher_history_read_failed:") for w in result["warnings"])
+
+
+def test_malformed_master_log_is_unavailable(tmp_path: Path) -> None:
+    master = tmp_path / "state" / "newsroom" / "master_log.jsonl"
+    master.parent.mkdir(parents=True, exist_ok=True)
+    master.write_text("{not-json}\n", encoding="utf-8")
+    write_json(tmp_path / "state" / "newsroom" / "publisher_history.json", {})
+
+    result = audit.build_audit(root=tmp_path, now=NOW)
+
+    assert result["status"] == "unavailable"
+    assert result["checks"]["no_post_report_urgency"] is None
+    assert result["checks"]["urgency_provenance_preserved"] is None
+    assert "master_log_no_parseable_rows" in result["warnings"]
 
 
 def test_legacy_master_rows_report_partial_coverage(tmp_path: Path) -> None:
