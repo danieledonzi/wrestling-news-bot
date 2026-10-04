@@ -287,6 +287,21 @@ def test_publisher_non_success_normalization(tmp_path, status, events):
     assert [row["event_type"] for row in output] == events
 
 
+def test_event_validator_rejects_error_class_outside_canonical_enum(tmp_path):
+    ledger = CanonicalEventLedger("r", tmp_path / "l")
+    assert not ledger.event(
+        "stage_failed",
+        "Publisher",
+        "publication",
+        "failed",
+        reason_code="bad_taxonomy",
+        error_class="configuration",
+        error_terminal=True,
+    )
+    assert not ledger.path.exists()
+    assert ledger.summary()["validation_errors"] == 1
+
+
 def test_append_only_flag_fail_open_and_invalid(tmp_path, monkeypatch):
     path = tmp_path / "l"; ledger = CanonicalEventLedger("r", path)
     assert ledger.event("run_started", "Jarvis", "runtime", "started")
