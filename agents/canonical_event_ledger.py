@@ -179,6 +179,9 @@ def validate_event(event: Any) -> list[str]:
     statuses = spec.get("outcome_contract", {}).get("status_values", [])
     if statuses and event.get("status") not in statuses:
         errors.append("invalid status")
+    error_classes = spec.get("error_contract", {}).get("classes", [])
+    if event.get("error_class") is not None and error_classes and event.get("error_class") not in error_classes:
+        errors.append("invalid error_class")
     refs = event.get("artifact_refs")
     if isinstance(refs, list):
         required_ref_fields = {"path", "relation"}
