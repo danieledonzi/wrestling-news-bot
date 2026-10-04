@@ -179,6 +179,9 @@ def validate_event(event: Any) -> list[str]:
     statuses = spec.get("outcome_contract", {}).get("status_values", [])
     if statuses and event.get("status") not in statuses:
         errors.append("invalid status")
+    error_classes = spec.get("error_contract", {}).get("classes", [])
+    if event.get("error_class") is not None and error_classes and event.get("error_class") not in error_classes:
+        errors.append("invalid error_class")
     refs = event.get("artifact_refs")
     if isinstance(refs, list):
         required_ref_fields = {"path", "relation"}
@@ -352,9 +355,30 @@ class CanonicalEventLedger:
 
     def observe_bob_generated(self, value: Any) -> None:
         for item in _rows(value, ("articles",)):
-            if item.get("status") == "ready_for_alfred":
+            status = str(item.get("status") or "")
+            if status == "ready_for_alfred":
                 self.event("article_generated", "Bob", "generation", "success",
                            "artifacts/newsroom/bob_articles.json", item)
+            elif status == "extraction_ready_translation_pending":
+                self.event("article_generation_failed", "Bob", "generation", "failed",
+                           "artifacts/newsroom/bob_articles.json", item,
+                           reason_code="translation_pending", error_class="upstream",
+                           error_terminal=False)
+            elif status == "translation_validation_failed":
+                self.event("article_generation_failed", "Bob", "generation", "failed",
+                           "artifacts/newsroom/bob_articles.json", item,
+                           reason_code="translation_validation_failed", error_class="validation",
+                           error_terminal=False)
+            elif status == "extraction_empty":
+                self.event("article_generation_failed", "Bob", "generation", "failed",
+                           "artifacts/newsroom/bob_articles.json", item,
+                           reason_code="extraction_empty", error_class="upstream",
+                           error_terminal=True)
+            elif status == "error":
+                self.event("article_generation_failed", "Bob", "generation", "failed",
+                           "artifacts/newsroom/bob_articles.json", item,
+                           reason_code="bob_package_error", error_class="invariant",
+                           error_terminal=True)
 
     def observe_alfred(self, value: Any) -> None:
         for item in _rows(value, ("reviews",)):
@@ -393,6 +417,10 @@ class CanonicalEventLedger:
                 self.event("publication_completed", "Publisher", "publication", "success", "artifacts/newsroom/publisher_result.json", item)
             elif status == "already_published":
                 self.event("publication_already_present", "Publisher", "publication", "skipped", "artifacts/newsroom/publisher_result.json", item)
+            elif status == "dry_run":
+                self.event("publication_dry_run", "Publisher", "publication", "skipped",
+                           "artifacts/newsroom/publisher_result.json", item,
+                           reason_code="dry_run")
             elif status == "publish_error":
                 self.event("publication_failed", "Publisher", "publication", "failed",
                            "artifacts/newsroom/publisher_result.json", item,
@@ -415,6 +443,10 @@ class CanonicalEventLedger:
             item_status = item.get("status")
             if item_status == "published":
                 self._report_event("report_published", item, "success", "artifacts/newsroom/simone_report_publish.json")
+            elif item_status == "already_published":
+                self._report_event("report_already_present", item, "skipped",
+                                   "artifacts/newsroom/simone_report_publish.json",
+                                   reason_code="already_published")
             elif item_status in {"publish_error", "wp_not_ready"}:
                 self._report_event("stage_failed", item, "failed", "artifacts/newsroom/simone_report_publish.json",
                                    error_class="downstream", error_terminal=True,

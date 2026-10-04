@@ -139,28 +139,43 @@ def test_pending_skipped_and_aggregate_guards(tmp_path):
     assert [r["event_type"] for r in rows(ledger.path)] == ["candidate_pending", "candidate_skipped"]
 
 
-@pytest.mark.parametrize("status, expected", [
-    ("ready_for_alfred", 1),
-    ("extraction_empty", 0),
-    ("extraction_ready_translation_pending", 0),
-    ("error", 0),
+@pytest.mark.parametrize("status,event_type,event_status,reason,error_terminal", [
+    ("ready_for_alfred", "article_generated", "success", None, None),
+    ("extraction_empty", "article_generation_failed", "failed", "extraction_empty", True),
+    ("extraction_ready_translation_pending", "article_generation_failed", "failed", "translation_pending", False),
+    ("translation_validation_failed", "article_generation_failed", "failed", "translation_validation_failed", False),
+    ("error", "article_generation_failed", "failed", "bob_package_error", True),
 ])
-def test_bob_generated_requires_ready_package(tmp_path, status, expected):
+def test_bob_generated_emits_typed_item_outcome(
+        tmp_path, status, event_type, event_status, reason, error_terminal):
     ledger = CanonicalEventLedger("r", tmp_path / "l")
     ledger.observe_bob_generated({"articles": [{"url": URL, "status": status}]})
-    output = rows(ledger.path) if ledger.path.exists() else []
-    assert len(output) == expected
-    assert all(row["event_type"] == "article_generated" and row["status"] == "success" for row in output)
+    output = rows(ledger.path)
+    assert len(output) == 1
+    assert output[0]["event_type"] == event_type
+    assert output[0]["status"] == event_status
+    if reason is None:
+        assert "reason_code" not in output[0]
+    else:
+        assert output[0]["reason_code"] == reason
+        assert output[0]["error_terminal"] is error_terminal
 
 
-def test_bob_mixed_articles_emit_only_ready_packages(tmp_path):
+def test_bob_mixed_articles_emit_typed_successes_and_failures(tmp_path):
     ledger = CanonicalEventLedger("r", tmp_path / "l")
     statuses = ["ready_for_alfred", "extraction_empty", "ready_for_alfred", "error"]
     ledger.observe_bob_generated({"articles": [
         {"url": f"https://example.test/{index}", "status": status}
         for index, status in enumerate(statuses)
     ], "handoff": {"ready_for_alfred": 99}})
-    assert len(rows(ledger.path)) == 2
+    output = rows(ledger.path)
+    assert [row["event_type"] for row in output] == [
+        "article_generated", "article_generation_failed",
+        "article_generated", "article_generation_failed",
+    ]
+    assert [row.get("reason_code") for row in output] == [
+        None, "extraction_empty", None, "bob_package_error",
+    ]
 
 
 def test_andrea_alfred_item_evidence_no_warning_normalization(tmp_path):
@@ -218,8 +233,10 @@ def test_publisher_attempts_come_only_from_actual_result_rows(tmp_path):
     }
     ledger.observe_publisher(result)
     output = rows(ledger.path)
-    assert [row["event_type"] for row in output] == ["stage_failed"]
-    assert output[0]["reason_code"] == "wp_not_ready"
+    assert [row["event_type"] for row in output] == ["publication_dry_run", "stage_failed"]
+    assert output[0]["reason_code"] == "dry_run"
+    assert output[1]["reason_code"] == "wp_not_ready"
+    assert all(row["event_type"] != "publication_attempted" for row in output)
 
 
 def test_publisher_safety_exclusions_are_not_attempts(tmp_path):
@@ -261,13 +278,28 @@ def test_publisher_retry_and_success_outcomes_retain_identity(tmp_path):
 @pytest.mark.parametrize("status,events", [
     ("publish_error", ["publication_attempted", "publication_failed"]),
     ("wp_not_ready", ["stage_failed"]),
-    ("dry_run", []),
+    ("dry_run", ["publication_dry_run"]),
 ])
 def test_publisher_non_success_normalization(tmp_path, status, events):
     ledger = CanonicalEventLedger("r", tmp_path / status)
     ledger.observe_publisher({"results": [{"source_url": URL, "status": status}]})
     output = rows(ledger.path) if ledger.path.exists() else []
     assert [row["event_type"] for row in output] == events
+
+
+def test_event_validator_rejects_error_class_outside_canonical_enum(tmp_path):
+    ledger = CanonicalEventLedger("r", tmp_path / "l")
+    assert not ledger.event(
+        "stage_failed",
+        "Publisher",
+        "publication",
+        "failed",
+        reason_code="bad_taxonomy",
+        error_class="configuration",
+        error_terminal=True,
+    )
+    assert not ledger.path.exists()
+    assert ledger.summary()["validation_errors"] == 1
 
 
 def test_append_only_flag_fail_open_and_invalid(tmp_path, monkeypatch):

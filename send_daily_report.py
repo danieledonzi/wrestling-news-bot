@@ -499,6 +499,11 @@ def daily_editorial_judgment_body_section(
     menzo = canonical.get("menzo") if isinstance(canonical.get("menzo"), dict) else {}
     andrea = canonical.get("andrea") if isinstance(canonical.get("andrea"), dict) else {}
     alfred = canonical.get("alfred") if isinstance(canonical.get("alfred"), dict) else {}
+    pr131 = (
+        canonical.get("pr131_duplicate_pair_cache")
+        if isinstance(canonical.get("pr131_duplicate_pair_cache"), dict)
+        else {}
+    )
     analysis = payload.get("translation_warning_analysis") if isinstance(payload.get("translation_warning_analysis"), dict) else {}
     analysis_available = analysis.get("available")
     if analysis_available is None:
@@ -531,6 +536,22 @@ def daily_editorial_judgment_body_section(
         andrea_counts = "n.d."
         reasons_label = "n.d."
 
+    pr131_coverage = str(pr131.get("coverage") or "unavailable")
+    pr131_observed = pr131.get("observed") if isinstance(pr131.get("observed"), dict) else {}
+    pr131_values = pr131 if pr131_coverage == "full" else (
+        pr131_observed if pr131_coverage == "partial" else {}
+    )
+    pr131_hit_rate = pr131_values.get("pair_hit_rate")
+    pr131_hit_rate_label = (
+        f"{pr131_hit_rate:.1%}" if isinstance(pr131_hit_rate, (int, float)) else "n.d."
+    )
+    pr131_provider = pr131.get("provider") if isinstance(pr131.get("provider"), dict) else {}
+    pr131_provider_available = pr131_provider.get("available") is True
+    # Email is authoritative: partial known cost must never masquerade as a
+    # complete 24h cost. Render complete-window cost or n.d.
+    pr131_cost = pr131_provider.get("complete_window_computed_list_price_cost")
+    pr131_currency = pr131_provider.get("currency") or "n.d."
+
     lines = [
         "",
         "SINTESI EDITORIALE AUTOREVOLE",
@@ -548,6 +569,20 @@ def daily_editorial_judgment_body_section(
         f"- Andrea copertura: {andrea_coverage}",
         f"- Andrea checked/passed/con eccezione/blocked: {andrea_counts}",
         f"- Ragioni eccezioni Andrea: {reasons_label}",
+        f"- PR131 cache coverage: {pr131_coverage}",
+        "- PR131 pair lookups / hit / miss: "
+        f"{_daily_metric_label(pr131_values.get('pair_lookups'))}/"
+        f"{_daily_metric_label(pr131_values.get('pair_hits'))}/"
+        f"{_daily_metric_label(pr131_values.get('pair_misses'))}",
+        f"- PR131 pair hit rate: {pr131_hit_rate_label}",
+        "- PR131 duplicate-stage logical requests evitati: "
+        f"{_daily_metric_label(pr131_values.get('duplicate_stage_logical_requests_avoided'))}",
+        "- PR131 gate / confirmation Gemini calls eseguite: "
+        f"{_daily_metric_label(pr131_provider.get('gate_calls_executed') if pr131_provider_available else None)}/"
+        f"{_daily_metric_label(pr131_provider.get('confirmation_calls_executed') if pr131_provider_available else None)}",
+        "- PR131 costo Gemini reale duplicate stage: "
+        f"{_daily_metric_label(pr131_cost if pr131_provider_available else None)} {pr131_currency}",
+        "- PR131 costo controfattuale evitato: n.d. (le chiamate evitate sono esatte; il costo non eseguito non viene stimato)",
     ]
     if warning:
         lines.append(f"- Avviso diagnostico: {warning}")

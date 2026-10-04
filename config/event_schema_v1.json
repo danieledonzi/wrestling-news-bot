@@ -228,7 +228,9 @@
         "when_event_types": [
           "stage_failed",
           "model_attempt_failed",
-          "publication_failed"
+          "publication_failed",
+          "article_generation_failed",
+          "wordpress_preflight_failed"
         ],
         "require": [
           "error_class",
@@ -241,7 +243,10 @@
         "when_event_types": [
           "duplicate_pair_evaluated",
           "duplicate_pair_resolved",
-          "duplicate_pair_unresolved"
+          "duplicate_pair_unresolved",
+          "duplicate_pair_cache_hit",
+          "duplicate_pair_cache_miss",
+          "duplicate_pair_cache_stored"
         ],
         "require": [
           "pair_id"
@@ -637,6 +642,122 @@
         "Archivista"
       ],
       "description": "blocker recorded"
+    },
+    {
+      "name": "duplicate_pair_cache_cycle",
+      "stage": "duplicate",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "PR131 duplicate-pair cache evaluation cycle"
+    },
+    {
+      "name": "duplicate_pair_cache_hit",
+      "stage": "duplicate",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "PR131 duplicate-pair cache hit"
+    },
+    {
+      "name": "duplicate_pair_cache_miss",
+      "stage": "duplicate",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "PR131 duplicate-pair cache miss"
+    },
+    {
+      "name": "duplicate_pair_cache_stored",
+      "stage": "duplicate",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "PR131 validated duplicate-pair result stored in cache"
+    },
+    {
+      "name": "article_generation_failed",
+      "stage": "generation",
+      "agents": [
+        "Bob"
+      ],
+      "description": "item-level Bob package generation failure or deferred generation outcome"
+    },
+    {
+      "name": "publication_dry_run",
+      "stage": "publication",
+      "agents": [
+        "Publisher"
+      ],
+      "description": "publication intentionally evaluated in dry-run mode"
+    },
+    {
+      "name": "report_already_present",
+      "stage": "reporting",
+      "agents": [
+        "Simone"
+      ],
+      "description": "report publication skipped because authoritative publication already exists"
+    },
+    {
+      "name": "wordpress_preflight_attempted",
+      "stage": "publication",
+      "agents": [
+        "Publisher",
+        "Simone"
+      ],
+      "description": "WordPress readiness preflight attempted"
+    },
+    {
+      "name": "wordpress_preflight_completed",
+      "stage": "publication",
+      "agents": [
+        "Publisher",
+        "Simone"
+      ],
+      "description": "WordPress readiness preflight succeeded"
+    },
+    {
+      "name": "wordpress_preflight_failed",
+      "stage": "publication",
+      "agents": [
+        "Publisher",
+        "Simone"
+      ],
+      "description": "WordPress readiness preflight failed"
+    },
+    {
+      "name": "wordpress_endpoint_probe",
+      "stage": "publication",
+      "agents": [
+        "Publisher",
+        "Simone"
+      ],
+      "description": "WordPress REST endpoint readiness probe"
+    },
+    {
+      "name": "bob_generation_cycle",
+      "stage": "generation",
+      "agents": [
+        "Bob"
+      ],
+      "description": "Bob package-generation telemetry cycle"
+    },
+    {
+      "name": "publisher_observation_cycle",
+      "stage": "publication",
+      "agents": [
+        "Publisher"
+      ],
+      "description": "Publisher result telemetry observation cycle"
+    },
+    {
+      "name": "simone_publication_cycle",
+      "stage": "reporting",
+      "agents": [
+        "Simone"
+      ],
+      "description": "Simone report publication telemetry observation cycle"
     }
   ],
   "identities": {

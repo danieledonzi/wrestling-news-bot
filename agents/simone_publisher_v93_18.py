@@ -13,6 +13,7 @@ import requests
 
 from modules.report_workshop_v92 import run_report_workshop, scrape_article
 from modules.simone_report_integrity import PENDING_REPORTS, normalize_url, report_readiness
+from agents.canonical_event_ledger import active_event
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLISHED_DIR = ROOT / "published"
@@ -79,24 +80,51 @@ def log_dns_diagnostics(root: str) -> str:
         return f"dns_error:{exc}"
 
 
+def _wordpress_error_reason(exc: Exception) -> str:
+    if isinstance(exc, requests.exceptions.Timeout):
+        return "wordpress_timeout"
+    if isinstance(exc, requests.exceptions.ConnectionError):
+        text = str(exc).lower()
+        if any(token in text for token in ("name resolution", "nameresolution", "getaddrinfo", "nodename nor servname")):
+            return "wordpress_dns_error"
+        return "wordpress_connection_error"
+    return "wordpress_request_error"
+
+
 def probe_endpoint(endpoint: str, *, use_auth: bool = False) -> tuple[bool, str]:
     try:
         kwargs: dict[str, Any] = {"headers": HEADERS, "timeout": REQUEST_TIMEOUT}
         if use_auth:
             kwargs["auth"] = wp_auth()
         res = requests.get(endpoint, **kwargs)
-        if res.status_code in {200, 401, 403}:
+        ok = res.status_code in {200, 401, 403}
+        active_event(
+            "wordpress_endpoint_probe", "Simone", "publication",
+            "success" if ok else "failed",
+            reason_code=f"wp_status_{res.status_code}",
+        )
+        if ok:
             return True, f"status_{res.status_code}"
         return False, f"status_{res.status_code}"
     except Exception as exc:
+        active_event(
+            "wordpress_endpoint_probe", "Simone", "publication", "failed",
+            reason_code=_wordpress_error_reason(exc),
+        )
         return False, f"wp_error:{exc}"
 
 
 def wp_ready() -> tuple[bool, str, dict[str, Any]]:
+    active_event("wordpress_preflight_attempted", "Simone", "publication", "started",
+                 reason_code="simone_internal_wordpress_preflight")
     root = wp_root()
     if not root:
+        active_event("wordpress_preflight_failed", "Simone", "publication", "failed",
+                     reason_code="missing_wp_url", error_class="policy", error_terminal=True)
         return False, "missing_wp_url", {}
     if not all(wp_auth()):
+        active_event("wordpress_preflight_failed", "Simone", "publication", "failed",
+                     reason_code="missing_wp_auth", error_class="policy", error_terminal=True)
         return False, "missing_wp_auth", {"root": root}
     diagnostics = {"root": root, "dns": log_dns_diagnostics(root), "attempts": []}
     endpoints = [(f"{root}/wp-json/", False, "rest_root"), (f"{root}/wp-json/wp/v2/posts?per_page=1", True, "posts_auth")]
@@ -107,9 +135,13 @@ def wp_ready() -> tuple[bool, str, dict[str, Any]]:
             diagnostics["attempts"].append({"attempt": attempt, "label": label, "status": status})
             last = status
             if ok:
+                active_event("wordpress_preflight_completed", "Simone", "publication", "success",
+                             reason_code=status)
                 return True, status, diagnostics
         if attempt < WP_RETRIES:
             time.sleep(3)
+    active_event("wordpress_preflight_failed", "Simone", "publication", "failed",
+                 reason_code=last, error_class="downstream", error_terminal=True)
     return False, last, diagnostics
 
 
@@ -119,13 +151,31 @@ def jarvis_wp_preflight() -> tuple[bool, str, dict[str, Any]]:
     This avoids Simone doing its slower internal two-pass WP probe when WordPress
     is already unreachable, and keeps the run cheap before report translation.
     """
+    active_event("wordpress_preflight_attempted", "Simone", "publication", "started",
+                 reason_code="jarvis_wordpress_preflight")
     try:
         from agents.wp_preflight_v93_25 import run_wp_preflight
         data = run_wp_preflight()
-        return bool(data.get("ready")), str(data.get("reason") or "unknown"), data
+        ready = bool(data.get("ready"))
+        reason = str(data.get("reason") or "unknown")
+        if ready:
+            active_event("wordpress_preflight_completed", "Simone", "publication", "success",
+                         reason_code=reason)
+        else:
+            error_class = (
+                "policy"
+                if reason in {"missing_wp_url", "missing_wp_auth", "missing_wp_env"}
+                else "downstream"
+            )
+            active_event("wordpress_preflight_failed", "Simone", "publication", "failed",
+                         reason_code=reason, error_class=error_class, error_terminal=True)
+        return ready, reason, data
     except Exception as exc:
         # Non-blocking fallback: if Jarvis preflight itself has a technical issue,
         # use the old internal check rather than incorrectly skipping reports.
+        active_event("stage_failed", "Simone", "publication", "failed",
+                     reason_code="jarvis_wp_preflight_observer_error",
+                     error_class="invariant", error_terminal=False)
         return True, f"preflight_error_non_blocking:{exc}", {"error": str(exc)}
 
 

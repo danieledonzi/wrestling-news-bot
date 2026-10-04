@@ -15,6 +15,7 @@ import subprocess
 import sys
 from collections import Counter, defaultdict
 from datetime import datetime, timedelta, timezone
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Any, Iterable
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
@@ -780,6 +781,21 @@ def _canonical_event_sections(rows: list[dict[str, Any]], since: datetime, until
     def value(item: dict[str, Any], key: str = "unique_content_count", family: str = "p1_1") -> int | None:
         return item[key] if coverage[family] == "full" else None
 
+    def event_cutover_coverage(event_type: str) -> tuple[str, str | None]:
+        dated = [
+            parse_utc_datetime(row.get("timestamp_utc"))
+            for row in rows if row.get("event_type") == event_type
+        ]
+        dated = [stamp for stamp in dated if stamp]
+        if not dated:
+            return "unavailable", f"{event_type}_cutover_not_observable"
+        cutover = min(dated)
+        if cutover > until:
+            return "unavailable", f"{event_type}_cutover_after_window"
+        if cutover > since:
+            return "partial", f"{event_type}_cutover_inside_window"
+        return "full", None
+
     run_starts = run_metric("run_started")
     run_completions = run_metric("run_completed")
     publications = metric("publication_completed", agent="Publisher")
@@ -823,7 +839,75 @@ def _canonical_event_sections(rows: list[dict[str, Any]], since: datetime, until
                                       if row.get("agent") == "Alfred" and row.get("correlation_id")})
     pub_attempts = metric("publication_attempted", agent="Publisher")
     pub_failures = [r for r in bounded if r.get("agent") == "Publisher" and r.get("error_terminal") is True]
+    pub_recoverable = [r for r in bounded if r.get("agent") == "Publisher" and r.get("error_terminal") is False]
     simone_failures = [r for r in bounded if r.get("agent") == "Simone" and r.get("error_terminal") is True]
+    simone_recoverable = [r for r in bounded if r.get("agent") == "Simone" and r.get("error_terminal") is False]
+
+    pr131_coverage, pr131_reason = event_cutover_coverage("duplicate_pair_cache_cycle")
+    pr131_cycles = [r for r in by_type.get("duplicate_pair_cache_cycle", []) if r.get("agent") == "Menzo"]
+    pr131_hits = [r for r in by_type.get("duplicate_pair_cache_hit", []) if r.get("agent") == "Menzo"]
+    pr131_misses = [r for r in by_type.get("duplicate_pair_cache_miss", []) if r.get("agent") == "Menzo"]
+    pr131_stores = [r for r in by_type.get("duplicate_pair_cache_stored", []) if r.get("agent") == "Menzo"]
+    pr131_gate_avoided = [
+        r for r in by_type.get("model_attempt_avoided", [])
+        if r.get("reason_code") == "pr131_duplicate_pair_cache_all_hit"
+    ]
+    pr131_confirmation_avoided = [
+        r for r in by_type.get("model_attempt_avoided", [])
+        if r.get("reason_code") == "pr131_duplicate_confirmation_cache_all_hit"
+    ]
+    pr131_lookups = len(pr131_hits) + len(pr131_misses)
+    pr131_hit_rate = (len(pr131_hits) / pr131_lookups) if pr131_lookups else None
+    pr131_observed = {
+        "cycles": len(pr131_cycles),
+        "pair_lookups": pr131_lookups,
+        "pair_hits": len(pr131_hits),
+        "pair_misses": len(pr131_misses),
+        "pair_hit_rate": pr131_hit_rate,
+        "entries_stored": len(pr131_stores),
+        "gate_logical_requests_avoided": len(pr131_gate_avoided),
+        "confirmation_logical_requests_avoided": len(pr131_confirmation_avoided),
+        "duplicate_stage_logical_requests_avoided": len(pr131_gate_avoided) + len(pr131_confirmation_avoided),
+        "unique_hit_pairs": len({r.get("pair_id") for r in pr131_hits if r.get("pair_id")}),
+        "unique_miss_pairs": len({r.get("pair_id") for r in pr131_misses if r.get("pair_id")}),
+    }
+
+    bob_item_coverage, bob_item_reason = event_cutover_coverage("bob_generation_cycle")
+    bob_failures = [r for r in by_type.get("article_generation_failed", []) if r.get("agent") == "Bob"]
+    bob_cycle_failures = [
+        r for r in by_type.get("bob_generation_cycle", [])
+        if r.get("agent") == "Bob" and r.get("status") == "failed"
+    ]
+    bob_reason_counts = Counter(str(r.get("reason_code") or "unknown") for r in bob_failures)
+    bob_logical = [
+        r for r in by_type.get("logical_ai_request_created", [])
+        if r.get("agent") == "Bob" and r.get("model_role") == "translation_generation"
+    ]
+    bob_attempts = [
+        r for r in by_type.get("model_attempt_started", [])
+        if r.get("model_role") == "translation_generation"
+    ]
+    bob_successes = [
+        r for r in by_type.get("model_attempt_completed", [])
+        if r.get("model_role") == "translation_generation"
+    ]
+    bob_model_failures = [
+        r for r in by_type.get("model_attempt_failed", [])
+        if r.get("model_role") == "translation_generation"
+    ]
+    bob_fallbacks = [
+        r for r in by_type.get("fallback_started", [])
+        if r.get("logical_request_id") in {x.get("logical_request_id") for x in bob_logical}
+    ]
+
+    publisher_cycle_coverage, publisher_cycle_reason = event_cutover_coverage("publisher_observation_cycle")
+    simone_cycle_coverage, simone_cycle_reason = event_cutover_coverage("simone_publication_cycle")
+    wordpress_coverage, wordpress_reason = event_cutover_coverage("wordpress_preflight_attempted")
+    wordpress_attempts = by_type.get("wordpress_preflight_attempted", [])
+    wordpress_completed = by_type.get("wordpress_preflight_completed", [])
+    wordpress_failed = by_type.get("wordpress_preflight_failed", [])
+    wordpress_probes = by_type.get("wordpress_endpoint_probe", [])
+    wordpress_reason_counts = Counter(str(r.get("reason_code") or "unknown") for r in wordpress_failed + wordpress_probes)
     reason_codes: dict[str, dict[str, int]] = {}
     for kind, items in by_type.items():
         counts = Counter(str(x.get("reason_code")) for x in items if x.get("reason_code"))
@@ -1026,6 +1110,61 @@ def _canonical_event_sections(rows: list[dict[str, Any]], since: datetime, until
             "reason_code_distributions": reason_codes,
             "content_lifecycle": lifecycle,
         },
+        "pr131_duplicate_pair_cache": {
+            "coverage": pr131_coverage,
+            "unavailability_reason": pr131_reason,
+            "observed": pr131_observed,
+            "cycles": pr131_observed["cycles"] if pr131_coverage == "full" else None,
+            "pair_lookups": pr131_observed["pair_lookups"] if pr131_coverage == "full" else None,
+            "pair_hits": pr131_observed["pair_hits"] if pr131_coverage == "full" else None,
+            "pair_misses": pr131_observed["pair_misses"] if pr131_coverage == "full" else None,
+            "pair_hit_rate": pr131_observed["pair_hit_rate"] if pr131_coverage == "full" else None,
+            "entries_stored": pr131_observed["entries_stored"] if pr131_coverage == "full" else None,
+            "gate_logical_requests_avoided": (
+                pr131_observed["gate_logical_requests_avoided"] if pr131_coverage == "full" else None
+            ),
+            "confirmation_logical_requests_avoided": (
+                pr131_observed["confirmation_logical_requests_avoided"] if pr131_coverage == "full" else None
+            ),
+            "duplicate_stage_logical_requests_avoided": (
+                pr131_observed["duplicate_stage_logical_requests_avoided"] if pr131_coverage == "full" else None
+            ),
+        },
+        "bob": {
+            "item_coverage": bob_item_coverage,
+            "item_unavailability_reason": bob_item_reason,
+            "logical_translation_requests": len(bob_logical) if coverage["failures"] == "full" else None,
+            "model_attempts": len(bob_attempts) if coverage["failures"] == "full" else None,
+            "model_successes": len(bob_successes) if coverage["failures"] == "full" else None,
+            "model_failures": len(bob_model_failures) if coverage["failures"] == "full" else None,
+            "fallbacks": len(bob_fallbacks) if coverage["failures"] == "full" else None,
+            "packages_ready": (
+                funnel_metrics["bob_unique_packages_generated"]["event_count"]
+                if bob_item_coverage == "full" else None
+            ),
+            "packages_pending": (
+                bob_reason_counts.get("translation_pending", 0) if bob_item_coverage == "full" else None
+            ),
+            "packages_validation_failed": (
+                bob_reason_counts.get("translation_validation_failed", 0)
+                if bob_item_coverage == "full" else None
+            ),
+            "packages_empty": (
+                bob_reason_counts.get("extraction_empty", 0) if bob_item_coverage == "full" else None
+            ),
+            "packages_errors": (
+                bob_reason_counts.get("bob_package_error", 0) + len(bob_cycle_failures)
+                if bob_item_coverage == "full" else None
+            ),
+            "recoverable_item_failures": (
+                sum(1 for r in bob_failures if r.get("error_terminal") is False)
+                if bob_item_coverage == "full" else None
+            ),
+            "terminal_item_failures": (
+                sum(1 for r in bob_failures if r.get("error_terminal") is True)
+                if bob_item_coverage == "full" else None
+            ),
+        },
         "andrea": andrea_read_model,
         "alfred": {
             "articles_reviewed": value(reviews),
@@ -1043,12 +1182,60 @@ def _canonical_event_sections(rows: list[dict[str, Any]], since: datetime, until
         "publisher": {
             "attempts": value(pub_attempts, "event_count"),
             "publications": value(publications),
+            "already_present": value(metric("publication_already_present", agent="Publisher"), "event_count"),
+            "dry_run_events": (
+                metric("publication_dry_run", agent="Publisher")["event_count"]
+                if publisher_cycle_coverage == "full" else None
+            ),
+            "wordpress_not_ready_events": sum(
+                1 for r in bounded
+                if r.get("agent") == "Publisher" and r.get("reason_code") == "wp_not_ready"
+            ) if coverage["failures"] == "full" else None,
+            "recoverable_failures": len(pub_recoverable) if coverage["failures"] == "full" else None,
             "terminal_failures": len(pub_failures) if coverage["failures"] == "full" else None,
+            "extended_coverage": publisher_cycle_coverage,
+            "extended_unavailability_reason": publisher_cycle_reason,
         },
         "simone": {
+            "report_candidates_found": value(report_metric("report_candidate_seen"), "event_count"),
+            "reports_ready": value(report_metric("report_selected"), "event_count"),
             "report_outcomes": value(report_publications),
+            "already_present": (
+                report_metric("report_already_present")["event_count"]
+                if simone_cycle_coverage == "full" else None
+            ),
+            "recoverable_failures": len(simone_recoverable) if coverage["failures"] == "full" else None,
             "terminal_failures": len(simone_failures) if coverage["failures"] == "full" else None,
             "legacy_errors_are_terminal": False,
+            "extended_coverage": simone_cycle_coverage,
+            "extended_unavailability_reason": simone_cycle_reason,
+        },
+        "wordpress": {
+            "coverage": wordpress_coverage,
+            "unavailability_reason": wordpress_reason,
+            "preflight_attempts": len(wordpress_attempts) if wordpress_coverage == "full" else None,
+            "preflight_successes": len(wordpress_completed) if wordpress_coverage == "full" else None,
+            "endpoint_probes": len(wordpress_probes) if wordpress_coverage == "full" else None,
+            "terminal_failures": len(wordpress_failed) if wordpress_coverage == "full" else None,
+            "timeouts": sum(
+                1 for row in wordpress_probes
+                if row.get("status") == "failed"
+                and row.get("reason_code") == "wordpress_timeout"
+            ) if wordpress_coverage == "full" else None,
+            "http_errors": sum(
+                1 for row in wordpress_probes
+                if row.get("status") == "failed"
+                and (
+                    str(row.get("reason_code") or "").startswith("wp_json_status_")
+                    or str(row.get("reason_code") or "").startswith("wp_status_")
+                )
+            ) if wordpress_coverage == "full" else None,
+            "dns_errors": sum(
+                1 for row in wordpress_probes
+                if row.get("status") == "failed"
+                and row.get("reason_code") == "wordpress_dns_error"
+            ) if wordpress_coverage == "full" else None,
+            "reason_codes": dict(sorted(wordpress_reason_counts.items())) if wordpress_coverage != "unavailable" else {},
         },
         "ai_operations": ai,
     }
@@ -1122,7 +1309,7 @@ def _artifact_snapshot(root: Path, since: datetime, until: datetime) -> tuple[di
 
 
 def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow_tail_fallback: bool = True) -> dict[str, Any]:
-    from agents.gemini_diagnostics import build_gemini_diagnostics, load_ledger
+    from agents.gemini_diagnostics import build_gemini_diagnostics, build_gemini_economic_truth, load_ledger
     runs, sources, warnings, authority_available, source_health = load_master_runs(
         root, allow_tail_fallback=allow_tail_fallback
     )
@@ -1144,6 +1331,79 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
         and gemini_health["undated_rows"] == 0
     )
     gemini = build_gemini_diagnostics(gemini_records, cache_path=root / "state/newsroom/menzo_duplicate_arbitration_cache_v2.json", menzo_decisions_paths=(), economic_available=gemini_available)
+
+    pr131_workloads = {
+        "editorial_director_duplicate_gate",
+        "editorial_director_duplicate_confirmation",
+    }
+    pr131_provider_rows = [
+        row for row in gemini_records
+        if row.get("agent") == "Menzo" and row.get("workload") in pr131_workloads
+    ]
+    # Provider/cost authority must inherit the same integrity contract as the
+    # canonical Gemini economic read model. A readable JSONL is not sufficient:
+    # duplicate provider_attempt_id values, invalid statuses, or cost-component
+    # mismatches make economic telemetry unavailable.
+    overall_economic = gemini.get("economic") if isinstance(gemini.get("economic"), dict) else {}
+    pr131_economic = build_gemini_economic_truth(
+        pr131_provider_rows,
+        available=bool(gemini_available and overall_economic.get("available") is True),
+    )
+    pr131_provider_authoritative = pr131_economic.get("available") is True
+    pr131_provider_real = [
+        row for row in pr131_provider_rows if row.get("status") in {"called", "failed"}
+    ]
+    pr131_provider_called = [row for row in pr131_provider_rows if row.get("status") == "called"]
+    pr131_provider_failed = [row for row in pr131_provider_rows if row.get("status") == "failed"]
+    pr131_provider_avoided = [
+        row for row in pr131_provider_rows
+        if row.get("status") == "avoided"
+        and row.get("reason") in {
+            "pr131_duplicate_pair_cache_all_hit",
+            "pr131_duplicate_confirmation_cache_all_hit",
+        }
+    ]
+    # Executed means a provider request was sent, regardless of whether it
+    # succeeded. Failed attempts therefore belong in these workload totals.
+    pr131_gate_executed = [
+        row for row in pr131_provider_real
+        if row.get("workload") == "editorial_director_duplicate_gate"
+    ]
+    pr131_confirmation_executed = [
+        row for row in pr131_provider_real
+        if row.get("workload") == "editorial_director_duplicate_confirmation"
+    ]
+    pr131_provider = {
+        "available": pr131_provider_authoritative,
+        "source": "state/newsroom/gemini_call_ledger.jsonl",
+        "real_attempts": pr131_economic.get("real_attempts") if pr131_provider_authoritative else None,
+        "called": len(pr131_provider_called) if pr131_provider_authoritative else None,
+        "failed": len(pr131_provider_failed) if pr131_provider_authoritative else None,
+        "gate_calls_executed": len(pr131_gate_executed) if pr131_provider_authoritative else None,
+        "confirmation_calls_executed": (
+            len(pr131_confirmation_executed) if pr131_provider_authoritative else None
+        ),
+        "explicit_avoided_rows": len(pr131_provider_avoided) if pr131_provider_authoritative else None,
+        "known_computed_list_price_cost": (
+            pr131_economic.get("known_computed_list_price_cost")
+            if pr131_provider_authoritative else None
+        ),
+        "complete_window_computed_list_price_cost": (
+            pr131_economic.get("complete_window_computed_list_price_cost")
+            if pr131_provider_authoritative else None
+        ),
+        "computed_cost_coverage": (
+            pr131_economic.get("computed_cost_coverage")
+            if pr131_provider_authoritative else None
+        ),
+        "currency": pr131_economic.get("currency") if pr131_provider_authoritative else None,
+        "economic_coverage": (
+            pr131_economic.get("coverage") if pr131_provider_authoritative else "unavailable"
+        ),
+        "economic_diagnostics": pr131_economic.get("diagnostics", {}),
+        "counterfactual_cost_avoided": None,
+        "counterfactual_cost_note": "not_computed_calls_avoided_are_exact_cost_avoided_is_counterfactual",
+    }
     if not gemini_available:
         for key in ("real_attempts", "completed_calls", "completed_successful_calls", "failures", "avoided_calls", "fallbacks",
                     "gemini_3_5_attempts", "gemini_3_5_completed_calls", "gemini_3_5_completed_successful_calls", "gemini_3_5_failures", "gemini_3_5_avoided_calls"):
@@ -1180,6 +1440,7 @@ def build_snapshot(since: datetime, until: datetime, root: Path = ROOT, *, allow
         p1_1_coverage = p1_3_coverage = active_ai_coverage = "unavailable"
         p1_1_reason = p1_3_reason = active_ai_reason = integrity_reason
     canonical = _canonical_event_sections(canonical_rows, since, until, coverages)
+    canonical.setdefault("pr131_duplicate_pair_cache", {})["provider"] = pr131_provider
     if integrity_reason:
         canonical = _without_authoritative_numbers(canonical)
         if canonical_malformed:

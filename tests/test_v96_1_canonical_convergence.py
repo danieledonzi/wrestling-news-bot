@@ -314,3 +314,71 @@ def test_canonical_report_publications_use_report_key_without_content_id():
     row["report_key"] = "wwe_raw_2026_08_20"
     result = canonical([row])["publication"]
     assert result["unique_report_publications"] == 1
+
+
+def test_pr131_pair_cache_metrics_do_not_equate_pair_hits_with_avoided_requests():
+    rows = [
+        {**event("duplicate_pair_cache_cycle", "Menzo", ""), "pair_id": None},
+        {**event("duplicate_pair_cache_hit", "Menzo", ""), "pair_id": "pair-a"},
+        {**event("duplicate_pair_cache_hit", "Menzo", ""), "pair_id": "pair-b"},
+        {**event("duplicate_pair_cache_hit", "Menzo", ""), "pair_id": "pair-c"},
+        {**event("duplicate_pair_cache_miss", "Menzo", ""), "pair_id": "pair-d"},
+        {**event("duplicate_pair_cache_stored", "Menzo", ""), "pair_id": "pair-d"},
+    ]
+    # The cycle marker predates the requested window, proving complete PR131
+    # coverage while the pair facts remain inside it.
+    rows[0]["timestamp_utc"] = NOW.replace(day=19, hour=23, minute=59).isoformat()
+    result = canonical(rows)["pr131_duplicate_pair_cache"]
+    assert result["coverage"] == "full"
+    assert result["pair_lookups"] == 4
+    assert result["pair_hits"] == 3
+    assert result["pair_misses"] == 1
+    assert result["pair_hit_rate"] == 0.75
+    assert result["entries_stored"] == 1
+    # Three reused pair evaluations do not imply three provider requests avoided:
+    # the remaining miss can still be evaluated in one batched gate request.
+    assert result["gate_logical_requests_avoided"] == 0
+    assert result["duplicate_stage_logical_requests_avoided"] == 0
+
+
+def test_pr131_all_hit_cycle_counts_explicit_logical_request_avoidance_separately():
+    rows = [
+        {**event("duplicate_pair_cache_cycle", "Menzo", ""), "pair_id": None},
+        {**event("duplicate_pair_cache_hit", "Menzo", ""), "pair_id": "pair-a"},
+        {**event("duplicate_pair_cache_hit", "Menzo", ""), "pair_id": "pair-b"},
+        {
+            **event("model_attempt_avoided", "Gemini", ""),
+            "reason_code": "pr131_duplicate_pair_cache_all_hit",
+        },
+        {
+            **event("model_attempt_avoided", "Gemini", ""),
+            "reason_code": "pr131_duplicate_confirmation_cache_all_hit",
+        },
+    ]
+    rows[0]["timestamp_utc"] = NOW.replace(day=19, hour=23, minute=59).isoformat()
+    result = canonical(rows)["pr131_duplicate_pair_cache"]
+    assert result["pair_hits"] == 2
+    assert result["pair_hit_rate"] == 1.0
+    assert result["gate_logical_requests_avoided"] == 1
+    assert result["confirmation_logical_requests_avoided"] == 1
+    assert result["duplicate_stage_logical_requests_avoided"] == 2
+
+
+def test_wordpress_http_errors_exclude_successful_endpoint_statuses():
+    marker = event("wordpress_preflight_attempted", "Publisher", "preflight")
+    marker["timestamp_utc"] = NOW.replace(day=19, hour=23, minute=59).isoformat()
+    rows = [
+        marker,
+        {**event("wordpress_endpoint_probe", "Simone", "ok-200"),
+         "status": "success", "reason_code": "wp_status_200"},
+        {**event("wordpress_endpoint_probe", "Simone", "ok-401"),
+         "status": "success", "reason_code": "wp_status_401"},
+        {**event("wordpress_endpoint_probe", "Simone", "bad-500"),
+         "status": "failed", "reason_code": "wp_status_500"},
+    ]
+
+    result = canonical(rows)["wordpress"]
+
+    assert result["coverage"] == "full"
+    assert result["endpoint_probes"] == 3
+    assert result["http_errors"] == 1

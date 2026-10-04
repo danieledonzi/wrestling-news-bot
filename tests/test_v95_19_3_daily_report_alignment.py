@@ -6,7 +6,7 @@ from pathlib import Path
 
 from agents import andrea_policy_v94_15 as andrea_policy
 from agents.master_log_v93_19 import build_master_record
-from scripts.daily_editorial_judgment import render_markdown
+from scripts.daily_editorial_judgment import render_markdown, _render_pr131_lines
 from scripts.observability_snapshot import build_snapshot
 from scripts.patch_runtime_daily_report_v95_19_3 import transform
 from send_daily_report import daily_editorial_judgment_body_section
@@ -180,6 +180,24 @@ def test_email_body_uses_canonical_metrics_and_classified_warnings(tmp_path):
                             "articles_with_warnings": 21,
                             "final_blockers": 0,
                         },
+                        "pr131_duplicate_pair_cache": {
+                            "coverage": "full",
+                            "pair_lookups": 40,
+                            "pair_hits": 16,
+                            "pair_misses": 24,
+                            "pair_hit_rate": 0.4,
+                            "entries_stored": 22,
+                            "duplicate_stage_logical_requests_avoided": 9,
+                            "provider": {
+                                "available": True,
+                                "gate_calls_executed": 24,
+                                "confirmation_calls_executed": 5,
+                                "known_computed_list_price_cost": "0.0123",
+                                "complete_window_computed_list_price_cost": "0.0123",
+                                "computed_cost_coverage": 1.0,
+                                "currency": "USD",
+                            },
+                        },
                     },
                 },
                 "translation_warning_analysis": {
@@ -203,6 +221,48 @@ def test_email_body_uses_canonical_metrics_and_classified_warnings(tmp_path):
     assert "breaking_exception (5)" in text
     assert "Alfred warnings/blockers" not in text
     assert "193" not in text
+    assert "PR131 cache coverage: full" in text
+    assert "PR131 pair lookups / hit / miss: 40/16/24" in text
+    assert "PR131 pair hit rate: 40.0%" in text
+    assert "PR131 duplicate-stage logical requests evitati: 9" in text
+    assert "PR131 gate / confirmation Gemini calls eseguite: 24/5" in text
+    assert "PR131 costo Gemini reale duplicate stage: 0.0123 USD" in text
+    assert "PR131 costo controfattuale evitato: n.d." in text
+
+
+def test_email_body_never_presents_partial_pr131_cost_as_real_cost(tmp_path):
+    path = tmp_path / "judgment_partial_pr131_cost.json"
+    path.write_text(
+        json.dumps({
+            "daily_numbers": {
+                "canonical_metrics": {
+                    "pr131_duplicate_pair_cache": {
+                        "coverage": "full",
+                        "pair_lookups": 2,
+                        "pair_hits": 0,
+                        "pair_misses": 2,
+                        "pair_hit_rate": 0.0,
+                        "duplicate_stage_logical_requests_avoided": 0,
+                        "provider": {
+                            "available": True,
+                            "gate_calls_executed": 2,
+                            "confirmation_calls_executed": 0,
+                            "known_computed_list_price_cost": "0.0008",
+                            "complete_window_computed_list_price_cost": None,
+                            "computed_cost_coverage": 0.5,
+                            "currency": "USD",
+                        },
+                    }
+                }
+            }
+        }),
+        encoding="utf-8",
+    )
+
+    text = daily_editorial_judgment_body_section(path)
+
+    assert "PR131 costo Gemini reale duplicate stage: n.d. USD" in text
+    assert "0.0008 USD" not in text
 
 
 def _runtime_fixture() -> str:
@@ -332,6 +392,10 @@ def _minimal_markdown_report(canonical_andrea):
         "canonical_alfred": {},
         "canonical_gemini": {},
         "canonical_simone": {},
+        "canonical_pr131": {},
+        "canonical_bob": {},
+        "canonical_publisher": {},
+        "canonical_wordpress": {},
         "translation_warning_analysis": {
             "available": False,
             "top_warning_codes": [],
@@ -416,3 +480,133 @@ def test_markdown_labels_legacy_andrea_exception_reasons_as_diagnostic():
     text = render_markdown(report)
 
     assert "Andrea exception reason occurrences (legacy diagnostic): missing_body (2)" in text
+
+
+def test_pr131_report_separates_cache_reuse_provider_calls_and_actual_cost():
+    lines = _render_pr131_lines({
+        "coverage": "full",
+        "pair_lookups": 4,
+        "pair_hits": 3,
+        "pair_misses": 1,
+        "pair_hit_rate": 0.75,
+        "entries_stored": 1,
+        "gate_logical_requests_avoided": 0,
+        "confirmation_logical_requests_avoided": 0,
+        "duplicate_stage_logical_requests_avoided": 0,
+        "provider": {
+            "available": True,
+            "real_attempts": 1,
+            "called": 1,
+            "failed": 0,
+            "gate_calls_executed": 1,
+            "confirmation_calls_executed": 0,
+            "known_computed_list_price_cost": "0.00125",
+            "complete_window_computed_list_price_cost": "0.00125",
+            "computed_cost_coverage": 1.0,
+            "currency": "USD",
+            "counterfactual_cost_avoided": None,
+        },
+    })
+    text = "\n".join(lines)
+    assert "Cache hits / misses: 3 / 1" in text
+    assert "Pair hit rate: 75.0%" in text
+    assert "Duplicate-gate logical requests avoided: 0" in text
+    assert "Gate / confirmation calls executed: 1 / 0" in text
+    assert "Duplicate-stage actual Gemini cost (complete-window): 0.00125 USD; cost coverage=100.0%" in text
+    assert "Counterfactual dollars avoided: n.d." in text
+    assert "calls avoided: 3" not in text.lower()
+
+
+def test_pr131_report_never_turns_incomplete_cost_coverage_into_zero():
+    text = "\n".join(_render_pr131_lines({
+        "coverage": "full",
+        "pair_lookups": 0,
+        "pair_hits": 0,
+        "pair_misses": 0,
+        "pair_hit_rate": None,
+        "entries_stored": 0,
+        "gate_logical_requests_avoided": 0,
+        "confirmation_logical_requests_avoided": 0,
+        "duplicate_stage_logical_requests_avoided": 0,
+        "provider": {
+            "available": True,
+            "real_attempts": 2,
+            "called": 2,
+            "failed": 0,
+            "gate_calls_executed": 2,
+            "confirmation_calls_executed": 0,
+            "known_computed_list_price_cost": "0.0008",
+            "complete_window_computed_list_price_cost": None,
+            "computed_cost_coverage": 0.5,
+            "currency": "USD",
+        },
+    }))
+    assert "actual Gemini cost (complete-window): n.d. USD; cost coverage=50.0%" in text
+    assert "0.0008 USD" not in text
+    assert "complete-window): 0" not in text
+
+
+def test_markdown_renders_pr131_cache_effectiveness_and_real_cost():
+    report = _minimal_markdown_report({})
+    report["canonical_pr131"] = {
+        "coverage": "full",
+        "pair_lookups": 42,
+        "pair_hits": 17,
+        "pair_misses": 25,
+        "pair_hit_rate": 17 / 42,
+        "entries_stored": 21,
+        "gate_logical_requests_avoided": 8,
+        "confirmation_logical_requests_avoided": 2,
+        "duplicate_stage_logical_requests_avoided": 10,
+        "provider": {
+            "available": True,
+            "real_attempts": 31,
+            "called": 29,
+            "failed": 2,
+            "gate_calls_executed": 24,
+            "confirmation_calls_executed": 5,
+            "known_computed_list_price_cost": "0.0145",
+            "complete_window_computed_list_price_cost": "0.0145",
+            "computed_cost_coverage": 1.0,
+            "currency": "USD",
+            "counterfactual_cost_avoided": None,
+        },
+    }
+
+    text = render_markdown(report)
+
+    assert "## PR131 Duplicate Pair Cache" in text
+    assert "Pair lookups: 42" in text
+    assert "Cache hits / misses: 17 / 25" in text
+    assert "Pair hit rate: 40.5%" in text
+    assert "Validated entries stored: 21" in text
+    assert "Duplicate-stage logical requests avoided total: 10" in text
+    assert "Duplicate-stage Gemini real attempts: 31 (called=29, failed=2)" in text
+    assert "Gate / confirmation calls executed: 24 / 5" in text
+    assert "Duplicate-stage actual Gemini cost (complete-window): 0.0145 USD" in text
+    assert "Counterfactual dollars avoided: n.d." in text
+
+
+def test_markdown_labels_pr131_partial_window_without_promoting_observed_values_to_full():
+    report = _minimal_markdown_report({})
+    report["canonical_pr131"] = {
+        "coverage": "partial",
+        "observed": {
+            "pair_lookups": 5,
+            "pair_hits": 2,
+            "pair_misses": 3,
+            "pair_hit_rate": 0.4,
+            "entries_stored": 3,
+            "gate_logical_requests_avoided": 1,
+            "confirmation_logical_requests_avoided": 0,
+            "duplicate_stage_logical_requests_avoided": 1,
+        },
+        "provider": {"available": False},
+    }
+
+    text = render_markdown(report)
+
+    assert "Coverage: partial" in text
+    assert "Pair lookups (observed since telemetry cutover): 5" in text
+    assert "Cache hits / misses (observed since telemetry cutover): 2 / 3" in text
+    assert "Duplicate-stage Gemini real attempts: n.d." in text
