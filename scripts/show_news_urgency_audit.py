@@ -73,6 +73,7 @@ def _load_master_rows(
         "reason": None,
         "nonempty_rows": 0,
         "malformed_rows": 0,
+        "undated_rows": 0,
         "parseable_rows": 0,
     }
     if not path.exists():
@@ -102,7 +103,10 @@ def _load_master_rows(
         meta["parseable_rows"] += 1
         run = payload.get("run") if isinstance(payload.get("run"), dict) else {}
         stamp = _parse_datetime(run.get("started_at")) or _parse_datetime(payload.get("recorded_at"))
-        if stamp is not None and cutoff <= stamp <= now + timedelta(minutes=5):
+        if stamp is None:
+            meta["undated_rows"] += 1
+            continue
+        if cutoff <= stamp <= now + timedelta(minutes=5):
             rows.append((stamp, payload))
 
     if meta["nonempty_rows"] and meta["parseable_rows"] == 0:
@@ -182,7 +186,11 @@ def build_audit(
         for _stamp, row in rows
         if isinstance(row.get("menzo"), dict) and row["menzo"].get("pending_sample_truncated") is True
     )
-    master_clean = bool(master_meta["available"] and master_meta["malformed_rows"] == 0)
+    master_clean = bool(
+        master_meta["available"]
+        and master_meta["malformed_rows"] == 0
+        and master_meta["undated_rows"] == 0
+    )
     urgency_coverage_complete = bool(
         rows
         and master_clean
@@ -298,6 +306,8 @@ def build_audit(
         warnings.append(str(master_meta["reason"] or "master_log_unavailable"))
     if master_meta["malformed_rows"]:
         warnings.append(f"master_log_malformed_rows:{master_meta['malformed_rows']}")
+    if master_meta["undated_rows"]:
+        warnings.append(f"master_log_undated_rows:{master_meta['undated_rows']}")
     if not history_meta["available"]:
         warnings.append(str(history_meta["reason"] or "publisher_history_unavailable"))
     if master_meta["available"] and not urgency_coverage_complete:
