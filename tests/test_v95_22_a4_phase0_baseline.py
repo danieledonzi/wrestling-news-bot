@@ -70,6 +70,25 @@ def test_happy_path_cli_and_frozen_baseline_survives_live_policy_migration():
     assert "99 A1 metric rows" in result.stdout
 
 
+def test_phase0_frozen_metric_contract_rejects_coordinated_field_drift(tmp_path):
+    data = payload()
+    row = metric(data, "runtime.runs_started")
+    original = row["catalog_unit"]
+    row["catalog_unit"] = "widgets"
+    markdown = MARKDOWN.read_text(encoding="utf-8")
+    original_line = json.dumps(
+        next(item for item in payload()["metric_baselines"]
+             if item["metric_name"] == "runtime.runs_started"),
+        sort_keys=True, separators=(",", ":"),
+    )
+    changed_line = json.dumps(row, sort_keys=True, separators=(",", ":"))
+    assert original == "count"
+    assert original_line in markdown
+    markdown = markdown.replace(original_line, changed_line, 1)
+    errors = errors_for(tmp_path, data=data, markdown=markdown)
+    assert any("frozen Phase 0 metric contract changed" in error for error in errors)
+
+
 def test_phase0_frozen_metric_set_survives_coordinated_json_and_markdown_deletion(tmp_path):
     data = payload()
     removed = data["metric_baselines"].pop()
