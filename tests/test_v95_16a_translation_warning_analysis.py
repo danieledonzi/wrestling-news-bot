@@ -152,6 +152,31 @@ def test_real_module_cli_from_repository_root(tmp_path: Path) -> None:
     assert (tmp_path / "state/owtv_translation_warning_analysis_latest.json").is_file()
 
 
+def test_urgency_failure_does_not_attach_stale_artifacts(tmp_path: Path, monkeypatch) -> None:
+    import send_daily_report as daily
+
+    reports = tmp_path / "reports"
+    state = tmp_path / "state/reports"
+    reports.mkdir(parents=True)
+    state.mkdir(parents=True)
+    stale_md = reports / "owtv_show_news_urgency_audit_24h_20200101_000000.md"
+    stale_md.write_text("stale urgency", encoding="utf-8")
+    stale_json = state / "owtv_show_news_urgency_audit_latest.json"
+    stale_json.write_text(json.dumps({"status": "ok"}), encoding="utf-8")
+
+    monkeypatch.setattr(daily, "BOT_DIR", tmp_path)
+    monkeypatch.setattr(daily, "SHOW_NEWS_URGENCY_LATEST_JSON", stale_json)
+    monkeypatch.setattr(daily, "SHOW_NEWS_URGENCY_CURRENT_FAILED", False)
+    monkeypatch.setattr(daily.subprocess, "run", lambda *args, **kwargs: (_ for _ in ()).throw(RuntimeError("urgency boom")))
+
+    markdown, latest, warning = daily.generate_show_news_urgency_audit_24h()
+
+    assert markdown is None and latest is None
+    assert "urgency boom" in warning
+    assert daily.SHOW_NEWS_URGENCY_CURRENT_FAILED is True
+    assert daily.append_show_news_urgency_audit_attachments([]) == []
+
+
 def test_required_execution_order(monkeypatch, tmp_path: Path) -> None:
     import send_daily_report as daily
     calls: list[str] = []
@@ -159,8 +184,9 @@ def test_required_execution_order(monkeypatch, tmp_path: Path) -> None:
     monkeypatch.setattr(daily, "generate_translation_quality_audit_24h", lambda: (calls.append("audit") or (None, audit_json, None)))
     monkeypatch.setattr(daily, "generate_translation_warning_analysis_24h", lambda path: (calls.append("analysis") or (None, None, None)))
     monkeypatch.setattr(daily, "generate_daily_editorial_judgment_24h", lambda: (calls.append("judgment") or (None, None, None)))
+    monkeypatch.setattr(daily, "generate_show_news_urgency_audit_24h", lambda: (calls.append("urgency") or (None, None, None)))
     daily.generate_daily_diagnostics_24h()
-    assert calls == ["audit", "analysis", "judgment"]
+    assert calls == ["audit", "analysis", "judgment", "urgency"]
 
 
 def test_existing_attachment_helper_includes_audit_and_current_analysis(tmp_path: Path, monkeypatch) -> None:

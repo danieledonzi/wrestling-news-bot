@@ -365,6 +365,48 @@ def test_bob_package_preserves_show_news_urgency_override(monkeypatch):
     assert packaged["scheduling_override"] is not override
 
 
+def test_publisher_actual_result_preserves_show_news_urgency_provenance(monkeypatch, tmp_path):
+    override = {
+        "reason": "show_news_urgency_pre_report",
+        "original_recommended_action": "DEFER",
+    }
+    director = {"editorial_class": "SHOULD_PUBLISH", "recommended_action": "DEFER"}
+
+    class Response:
+        status_code = 201
+        text = ""
+        def json(self):
+            return {"id": 321, "link": "https://owtv.test/urgent"}
+
+    monkeypatch.setattr(publisher, "DRY_RUN", False)
+    monkeypatch.setattr(publisher, "POST_STATUS", "publish")
+    monkeypatch.setattr(publisher, "PUBLISHED_DIR", tmp_path / "published")
+    monkeypatch.setattr(publisher, "REVIEW_DIR", tmp_path / "review")
+    monkeypatch.setattr(publisher, "PUBLISHED_TRACE_DIR", tmp_path / "traces")
+    monkeypatch.setattr(publisher, "resolve_category_ids", lambda _hint: [])
+    monkeypatch.setattr(publisher, "wp_request", lambda *_a, **_k: Response())
+    monkeypatch.setattr(publisher, "write_published_trace", lambda *_a, **_k: None)
+
+    result = publisher.publish_article({
+        "source_url": "https://example.test/urgent-published",
+        "source": "feed",
+        "source_title": "Urgent source",
+        "title_it": "Notizia urgente",
+        "body_html": "<p>Corpo della notizia.</p>",
+        "show_report_id": "aew_dynamite",
+        "corresponding_report_published": False,
+        "editorial_director": director,
+        "scheduling_override": override,
+    }, {}, True)
+
+    assert result["status"] == "published"
+    assert result["scheduling_override"] == override
+    assert result["scheduling_override"] is not override
+    assert result["editorial_director"] == director
+    assert result["show_report_id"] == "aew_dynamite"
+    assert result["corresponding_report_published"] is False
+
+
 def test_already_published_does_not_consume_last_daily_slot(monkeypatch):
     old_url = "https://example.test/already"
     new_url = "https://example.test/new"

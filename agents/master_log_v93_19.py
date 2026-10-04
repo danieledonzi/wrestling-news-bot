@@ -19,7 +19,7 @@ MASTER_HUMAN = LOG_DIR / "newsroom_master.log"
 ARTIFACT_MASTER_JSONL = ARTIFACT_DIR / "master_log_tail.jsonl"
 ARTIFACT_MASTER_HUMAN = ARTIFACT_DIR / "newsroom_master.log"
 
-VERSION = "v93_19_newsroom_master_log"
+VERSION = "v93_19_1_show_news_urgency_audit"
 MAX_RUNS = int(os.getenv("V93_MASTER_LOG_MAX_RUNS", "300"))
 TAIL_RUNS = int(os.getenv("V93_MASTER_LOG_ARTIFACT_TAIL", "40"))
 
@@ -109,6 +109,30 @@ def actionable_identity_key(item: dict[str, Any]) -> str:
     return "unknown:" + hashlib.sha1(payload).hexdigest()[:12]
 
 
+def compact_editorial_director(value: Any) -> dict[str, Any] | None:
+    if not isinstance(value, dict):
+        return None
+    fields = ("editorial_class", "recommended_action", "reason", "policy_reason")
+    compact = {field: value.get(field) for field in fields if value.get(field) not in (None, "")}
+    return compact or None
+
+
+def compact_scheduling_override(value: Any) -> dict[str, Any] | None:
+    if not isinstance(value, dict):
+        return None
+    fields = ("reason", "original_recommended_action", "promoted_at", "report_id", "event_report_key")
+    compact = {field: value.get(field) for field in fields if value.get(field) not in (None, "")}
+    return compact or None
+
+
+def compact_special_event_match(value: Any) -> dict[str, Any] | None:
+    if not isinstance(value, dict):
+        return None
+    fields = ("event_key", "night_key", "report_key", "date_local", "event_name", "promotion")
+    compact = {field: value.get(field) for field in fields if value.get(field) not in (None, "")}
+    return compact or None
+
+
 def compact_item(item: dict[str, Any] | None) -> dict[str, Any]:
     if not isinstance(item, dict):
         return {}
@@ -131,6 +155,13 @@ def compact_item(item: dict[str, Any] | None) -> dict[str, Any]:
         "expected_embeds": brief.get("expected_embeds", []) if isinstance(brief.get("expected_embeds"), list) else [],
         "expected_tables": brief.get("expected_tables") if "expected_tables" in brief else None,
         "published": scalar(item.get("published"), ""),
+        "show_report_id": scalar(item.get("show_report_id"), ""),
+        "event_report_key": scalar(item.get("event_report_key"), ""),
+        "special_event_match": compact_special_event_match(item.get("special_event_match")),
+        "corresponding_report_published": item.get("corresponding_report_published")
+        if isinstance(item.get("corresponding_report_published"), bool) else None,
+        "editorial_director": compact_editorial_director(item.get("editorial_director")),
+        "scheduling_override": compact_scheduling_override(item.get("scheduling_override")),
     }
 
 
@@ -145,6 +176,14 @@ def compact_published(item: dict[str, Any] | None) -> dict[str, Any]:
         "status": scalar(item.get("status"), ""),
         "categories": item.get("categories") or item.get("category_names_priority") or item.get("publisher_category_names") or [],
         "category_hint": scalar(item.get("category_hint"), ""),
+        "reason": scalar(item.get("reason"), ""),
+        "show_report_id": scalar(item.get("show_report_id"), ""),
+        "event_report_key": scalar(item.get("event_report_key"), ""),
+        "special_event_match": compact_special_event_match(item.get("special_event_match")),
+        "corresponding_report_published": item.get("corresponding_report_published")
+        if isinstance(item.get("corresponding_report_published"), bool) else None,
+        "editorial_director": compact_editorial_director(item.get("editorial_director")),
+        "scheduling_override": compact_scheduling_override(item.get("scheduling_override")),
     }
 
 
@@ -244,6 +283,7 @@ def build_master_record(
     bob_articles = [compact_article_diagnostics(x) for x in bob.get("articles", []) if isinstance(x, dict)] if isinstance(bob.get("articles"), list) else []
     alfred_reviews = [compact_alfred_review(x) for x in alfred.get("reviews", []) if isinstance(x, dict)] if isinstance(alfred.get("reviews"), list) else []
     pub_results = [compact_published(x) for x in publisher.get("results", []) if isinstance(x, dict)] if isinstance(publisher.get("results"), list) else []
+    pub_skipped = [compact_published(x) for x in publisher.get("skipped_approved_articles", []) if isinstance(x, dict)] if isinstance(publisher.get("skipped_approved_articles"), list) else []
     report_results = [compact_published(x) for x in simone_publish.get("results", []) if isinstance(x, dict)] if isinstance(simone_publish.get("results"), list) else []
 
     return {
@@ -325,6 +365,7 @@ def build_master_record(
             "policy": publisher.get("policy", {}),
             "published": [x for x in pub_results if x.get("status") == "published"],
             "results": pub_results,
+            "skipped_approved_articles": pub_skipped,
         },
         "archivista": {
             "version": archivista.get("version"),

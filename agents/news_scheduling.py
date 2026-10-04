@@ -7,6 +7,8 @@ from zoneinfo import ZoneInfo
 
 ROME = ZoneInfo("Europe/Rome")
 DAILY_NEWS_CEILING = 30
+SUCCESSFUL_NEWS_STATUSES = {"publish", "published", "success", "succeeded"}
+REPORT_ARTICLE_TYPES = {"report", "show_report", "weekly_report"}
 
 
 def _timestamp(record: Mapping[str, Any]) -> datetime | None:
@@ -20,6 +22,23 @@ def _timestamp(record: Mapping[str, Any]) -> datetime | None:
         return None
 
 
+def publication_timestamp(record: Mapping[str, Any]) -> datetime | None:
+    """Return the publication timestamp using the ceiling's accepted legacy fields."""
+    return _timestamp(record)
+
+
+def is_successful_news_publication(record: Mapping[str, Any]) -> bool:
+    """Return whether a history record consumes a news-publication slot."""
+    if not isinstance(record, Mapping):
+        return False
+    if str(record.get("status") or "").lower() not in SUCCESSFUL_NEWS_STATUSES:
+        return False
+    # Publisher history is news-only. Be defensive if a mixed fixture is supplied.
+    if str(record.get("content_type") or record.get("article_type") or "").lower() in REPORT_ARTICLE_TYPES:
+        return False
+    return True
+
+
 def published_news_today_local(records: Iterable[Mapping[str, Any]], *, now: datetime | None = None) -> int:
     """Count successful news publications since local midnight in Europe/Rome."""
     current = now or datetime.now(timezone.utc)
@@ -27,14 +46,9 @@ def published_news_today_local(records: Iterable[Mapping[str, Any]], *, now: dat
     today = current_local.date()
     count = 0
     for record in records:
-        if not isinstance(record, Mapping):
+        if not is_successful_news_publication(record):
             continue
-        if str(record.get("status") or "").lower() not in {"publish", "published", "success", "succeeded"}:
-            continue
-        # Publisher history is news-only. Be defensive if a mixed fixture is supplied.
-        if str(record.get("content_type") or record.get("article_type") or "").lower() in {"report", "show_report", "weekly_report"}:
-            continue
-        stamp = _timestamp(record)
+        stamp = publication_timestamp(record)
         if stamp and stamp <= current and stamp.astimezone(ROME).date() == today:
             count += 1
     return count

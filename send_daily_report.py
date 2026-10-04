@@ -16,8 +16,11 @@ TRANSLATION_QUALITY_LATEST_JSON = BOT_DIR / "state" / "reports" / "owtv_translat
 TRANSLATION_QUALITY_MARKDOWN_GLOB = "owtv_translation_quality_audit_24h_*.md"
 TRANSLATION_WARNING_LATEST_JSON = BOT_DIR / "state" / "reports" / "owtv_translation_warning_analysis_latest.json"
 TRANSLATION_WARNING_MARKDOWN_GLOB = "owtv_translation_warning_analysis_24h_*.md"
+SHOW_NEWS_URGENCY_LATEST_JSON = BOT_DIR / "state" / "reports" / "owtv_show_news_urgency_audit_latest.json"
+SHOW_NEWS_URGENCY_MARKDOWN_GLOB = "owtv_show_news_urgency_audit_24h_*.md"
 TRANSLATION_QUALITY_BLOCKER_WARNING_CODES = {"untranslated_quote"}
 TRANSLATION_QUALITY_CURRENT_FAILED = False
+SHOW_NEWS_URGENCY_CURRENT_FAILED = False
 
 
 def generate_translation_quality_audit_24h() -> tuple[Path | None, Path | None, str | None]:
@@ -121,6 +124,99 @@ def generate_translation_warning_analysis_24h(audit_json: Path) -> tuple[Path | 
         print(f"[WARNING INVESTIGATION] skipped/error {exc}")
         markdown, latest = _write_translation_warning_failure(audit_json, exc)
         return markdown, latest, warning
+
+
+def newest_show_news_urgency_audit_markdown() -> Path | None:
+    reports_dir = BOT_DIR / "reports"
+    matches = [path for path in reports_dir.glob(SHOW_NEWS_URGENCY_MARKDOWN_GLOB) if path.is_file()]
+    return max(matches, key=lambda path: (path.stat().st_mtime, path.name)) if matches else None
+
+
+def generate_show_news_urgency_audit_24h() -> tuple[Path | None, Path | None, str | None]:
+    """Generate the read-only show-news urgency / daily-ceiling audit."""
+    global SHOW_NEWS_URGENCY_CURRENT_FAILED
+    try:
+        subprocess.run(
+            [
+                "python3",
+                str(BOT_DIR / "scripts" / "show_news_urgency_audit.py"),
+                "--hours",
+                "24",
+            ],
+            cwd=BOT_DIR,
+            check=True,
+        )
+        markdown = newest_show_news_urgency_audit_markdown()
+        latest = SHOW_NEWS_URGENCY_LATEST_JSON if SHOW_NEWS_URGENCY_LATEST_JSON.exists() else None
+        SHOW_NEWS_URGENCY_CURRENT_FAILED = False
+        print(f"[SHOW NEWS URGENCY] generated {markdown or 'no markdown found'}")
+        return markdown, latest, None
+    except Exception as exc:
+        SHOW_NEWS_URGENCY_CURRENT_FAILED = True
+        warning = f"Show News Urgency Audit skipped/error: {exc}"
+        print(f"[SHOW NEWS URGENCY] skipped/error {exc}")
+        return None, None, warning
+
+
+def show_news_urgency_audit_body_section(
+    json_path: Path | None = SHOW_NEWS_URGENCY_LATEST_JSON,
+    warning: str | None = None,
+) -> str:
+    """Build the compact daily-email section for urgency and the daily ceiling."""
+    if json_path is None or not json_path.exists():
+        return f"\nSHOW NEWS URGENCY / DAILY CEILING\n- Stato: non disponibile\n- Avviso: {warning or 'latest JSON not available'}\n"
+    try:
+        payload: dict[str, Any] = json.loads(json_path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        return f"\nSHOW NEWS URGENCY / DAILY CEILING\n- JSON non leggibile: {exc}\n"
+
+    ceiling = payload.get("daily_ceiling") if isinstance(payload.get("daily_ceiling"), dict) else {}
+    urgency = payload.get("show_news_urgency") if isinstance(payload.get("show_news_urgency"), dict) else {}
+    checks = payload.get("checks") if isinstance(payload.get("checks"), dict) else {}
+    coverage = payload.get("source_coverage") if isinstance(payload.get("source_coverage"), dict) else {}
+    master_coverage = coverage.get("master_log") if isinstance(coverage.get("master_log"), dict) else {}
+    check_label = lambda value: "OK" if value is True else ("ATTENZIONE" if value is False else "n.d.")
+    opportunity_value = urgency.get("opportunity_observed")
+    opportunity = "sì" if opportunity_value is True else ("no" if opportunity_value is False else "n.d.")
+    status = str(payload.get("status") or "n.d.")
+    lines = [
+        "",
+        "SHOW NEWS URGENCY / DAILY CEILING",
+        f"- Stato audit: {status}",
+        f"- Run osservate: {payload.get('runs', 'n.d.')}",
+        f"- Copertura osservabilità urgency: {master_coverage.get('urgency_supported_runs', 0)}/{master_coverage.get('runs_in_window', payload.get('runs', 0))} run",
+        f"- News pubblicate oggi ({ceiling.get('timezone', 'Europe/Rome')}): {ceiling.get('published_today_local', 'n.d.')} / {ceiling.get('limit', 30)}",
+        f"- News uniche pubblicate nella finestra: {ceiling.get('published_unique_last_window', 'n.d.')}",
+        f"- Opportunità show/evento osservata: {opportunity}",
+        f"- Identità show/evento: {urgency.get('show_identity_unique_urls', 0)}",
+        f"- Promozioni urgency / pubblicate con provenance: {urgency.get('promoted_unique_urls', 0)}/{urgency.get('published_with_provenance_unique_urls', 0)}",
+        f"- Pending eleggibili: {urgency.get('pending_eligible_unique_urls', 0)}",
+        f"- Skip capacità / ceiling giornaliero: {ceiling.get('skipped_capacity_unique_urls', 0)}/{ceiling.get('daily_ceiling_skips_unique_urls', 0)}",
+        f"- Ceiling rispettato: {check_label(checks.get('daily_ceiling_respected'))}",
+        f"- Nessuna urgency dopo il report: {check_label(checks.get('no_post_report_urgency'))}",
+        f"- Provenance conservata fino al Publisher: {check_label(checks.get('urgency_provenance_preserved'))}",
+    ]
+    if status == "no_opportunity":
+        lines.append("- Nota: nessun caso show/evento eleggibile nella finestra; la logica urgency non è stata esercitata.")
+    elif status == "partial_coverage":
+        lines.append("- Nota: finestra ancora parzialmente coperta dal nuovo schema; i check urgency diventano conclusivi a copertura completa.")
+    elif status == "unavailable":
+        lines.append("- Nota: una fonte autorevole dell'audit non è disponibile; nessun esito positivo viene inferito.")
+    if warning:
+        lines.append(f"- Avviso diagnostico: {warning}")
+    return "\n".join(lines) + "\n"
+
+
+def append_show_news_urgency_audit_attachments(attachments: list[Path]) -> list[Path]:
+    """Append only current-run urgency artifacts; never attach stale output after failure."""
+    if SHOW_NEWS_URGENCY_CURRENT_FAILED:
+        return attachments
+    markdown = newest_show_news_urgency_audit_markdown()
+    for path in (markdown, SHOW_NEWS_URGENCY_LATEST_JSON if SHOW_NEWS_URGENCY_LATEST_JSON.exists() else None):
+        if path and path.exists() and path not in attachments:
+            attachments.append(path)
+            print(f"[SHOW NEWS URGENCY] attached {path}")
+    return attachments
 
 
 def translation_warning_analysis_body_section(json_path: Path | None, warning: str | None = None) -> str:
@@ -335,7 +431,13 @@ def generate_daily_diagnostics_24h() -> dict[str, tuple[Path | None, Path | None
     audit_result = generate_translation_quality_audit_24h()
     analysis_result = _analysis_after_audit(audit_result)
     judgment_result = generate_daily_editorial_judgment_24h()
-    return {"translation_quality_audit": audit_result, "translation_warning_analysis": analysis_result, "daily_editorial_judgment": judgment_result}
+    urgency_result = generate_show_news_urgency_audit_24h()
+    return {
+        "translation_quality_audit": audit_result,
+        "translation_warning_analysis": analysis_result,
+        "daily_editorial_judgment": judgment_result,
+        "show_news_urgency_audit": urgency_result,
+    }
 
 
 def gemini_email_summary_24h() -> str:
