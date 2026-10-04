@@ -241,7 +241,9 @@
         "when_event_types": [
           "duplicate_pair_evaluated",
           "duplicate_pair_resolved",
-          "duplicate_pair_unresolved"
+          "duplicate_pair_unresolved",
+          "duplicate_pair_cache_lookup",
+          "duplicate_pair_cache_stored"
         ],
         "require": [
           "pair_id"
@@ -637,6 +639,54 @@
         "Archivista"
       ],
       "description": "blocker recorded"
+    },
+    {
+      "name": "duplicate_pair_cache_observed",
+      "stage": "duplicate",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "PR131 duplicate-pair cache observed for one Active evaluation"
+    },
+    {
+      "name": "duplicate_pair_cache_lookup",
+      "stage": "duplicate",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "PR131 duplicate-pair cache lookup outcome"
+    },
+    {
+      "name": "duplicate_pair_cache_stored",
+      "stage": "duplicate",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "PR131 validated duplicate-pair result stored in persistent cache"
+    },
+    {
+      "name": "duplicate_pair_cache_store_failed",
+      "stage": "duplicate",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "PR131 duplicate-pair cache write failed open"
+    },
+    {
+      "name": "article_generation_failed",
+      "stage": "generation",
+      "agents": [
+        "Bob"
+      ],
+      "description": "Bob item-level article generation did not reach ready_for_alfred"
+    },
+    {
+      "name": "report_already_present",
+      "stage": "reporting",
+      "agents": [
+        "Simone"
+      ],
+      "description": "Simone report publication skipped because authoritative report already exists"
     }
   ],
   "identities": {
