@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime, timedelta, timezone
 
 from scripts.daily_editorial_judgment import _render_pr131_lines, email_summary
-from scripts.observability_snapshot import build_pr131_cache_metrics
+from scripts.observability_snapshot import build_pr131_cache_metrics, build_pr2_telemetry_coverage
 
 NOW = datetime(2026, 10, 4, 12, 0, tzinfo=timezone.utc)
 SINCE = NOW - timedelta(hours=24)
@@ -15,7 +15,10 @@ def event(kind, *, ts=None, result=None, reason=None, pair_id=None, agent="Menzo
         "run_id": "run",
         "event_type": kind,
         "agent": agent,
-        "stage": "duplicate" if kind.startswith("duplicate_pair_cache") else "model",
+        "stage": (
+            "runtime" if kind == "telemetry_contract_observed"
+            else ("duplicate" if kind.startswith("duplicate_pair_cache") else "model")
+        ),
         "status": "success",
         "artifact_refs": [],
     }
@@ -26,6 +29,49 @@ def event(kind, *, ts=None, result=None, reason=None, pair_id=None, agent="Menzo
     if pair_id is not None:
         row["pair_id"] = pair_id
     return row
+
+
+def pr2_marker(ts):
+    return event(
+        "telemetry_contract_observed", ts=ts, result="v96_5_pr2",
+        reason="pr2_missing_telemetry_closure", agent="Jarvis",
+    )
+
+
+def test_pr2_marker_makes_zero_activity_authoritative_after_full_window():
+    rows = [pr2_marker(SINCE - timedelta(minutes=1))]
+    coverage, reason, meta = build_pr2_telemetry_coverage(
+        rows, SINCE, NOW, canonical_healthy=True
+    )
+    assert coverage == "full"
+    assert reason is None
+    assert meta["complete_window"] is True
+
+    result, result_meta = build_pr131_cache_metrics(
+        rows, [], SINCE, NOW,
+        pr2_coverage=coverage, pr2_reason=reason, gemini_available=True,
+    )
+    assert result_meta["complete_window"] is True
+    assert result["coverage"] == "full"
+    assert result["evaluations_observed"] == 0
+    assert result["lookups"] == 0
+    assert result["hits"] == 0
+    assert result["misses"] == 0
+    assert result["hit_rate"] is None
+    assert result["entries_stored"] == 0
+    assert result["store_failures"] == 0
+    assert result["load_status_counts"] == {}
+    assert result["provider"]["gemini_calls_avoided"] == 0
+
+
+def test_pr2_marker_inside_window_is_partial_even_with_no_tracked_outcomes():
+    rows = [pr2_marker(NOW - timedelta(hours=2))]
+    coverage, reason, meta = build_pr2_telemetry_coverage(
+        rows, SINCE, NOW, canonical_healthy=True
+    )
+    assert coverage == "partial"
+    assert reason == "pr2_telemetry_cutover_inside_window"
+    assert meta["complete_window"] is False
 
 
 def test_pr131_read_model_full_coverage_keeps_pair_and_call_grains_distinct():
@@ -59,7 +105,8 @@ def test_pr131_read_model_full_coverage_keeps_pair_and_call_grains_distinct():
         },
     ]
     result, meta = build_pr131_cache_metrics(
-        rows, gemini, SINCE, NOW, canonical_healthy=True, gemini_available=True
+        rows, gemini, SINCE, NOW,
+        pr2_coverage="full", pr2_reason=None, gemini_available=True
     )
     assert meta["complete_window"] is True
     assert result["coverage"] == "full"
@@ -82,7 +129,9 @@ def test_pr131_partial_coverage_never_turns_observed_counts_into_authoritative_z
         event("duplicate_pair_cache_lookup", result="hit", pair_id="p1"),
     ]
     result, meta = build_pr131_cache_metrics(
-        rows, [], SINCE, NOW, canonical_healthy=True, gemini_available=True
+        rows, [], SINCE, NOW,
+        pr2_coverage="partial", pr2_reason="pr2_telemetry_cutover_inside_window",
+        gemini_available=True
     )
     assert meta["complete_window"] is False
     assert result["coverage"] == "partial"
@@ -99,7 +148,8 @@ def test_pr131_cross_ledger_avoided_call_mismatch_is_diagnostic():
         event("model_attempt_avoided", reason="pr131_duplicate_pair_cache_gate_full_hit", agent="Gemini"),
     ]
     result, _ = build_pr131_cache_metrics(
-        rows, [], SINCE, NOW, canonical_healthy=True, gemini_available=True
+        rows, [], SINCE, NOW,
+        pr2_coverage="full", pr2_reason=None, gemini_available=True
     )
     assert result["diagnostic_mismatches"] == [
         "pr131_avoided_call_ledger_mismatch:canonical=1:gemini=0"
