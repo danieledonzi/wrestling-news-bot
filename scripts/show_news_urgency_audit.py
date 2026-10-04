@@ -107,7 +107,7 @@ def _load_master_rows(
 
 
 def _load_history(path: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
-    meta = {"available": False, "reason": None, "records": 0}
+    meta = {"available": False, "reason": None, "records": 0, "malformed_records": 0}
     if not path.exists():
         meta["reason"] = "missing_publisher_history"
         return [], meta
@@ -117,14 +117,19 @@ def _load_history(path: Path) -> tuple[list[dict[str, Any]], dict[str, Any]]:
         meta["reason"] = f"publisher_history_read_failed:{type(exc).__name__}"
         return [], meta
     if isinstance(payload, dict):
-        rows = [item for item in payload.values() if isinstance(item, dict)]
+        values = list(payload.values())
     elif isinstance(payload, list):
-        rows = [item for item in payload if isinstance(item, dict)]
+        values = list(payload)
     else:
         meta["reason"] = "publisher_history_invalid_shape"
         return [], meta
-    meta["available"] = True
+    rows = [item for item in values if isinstance(item, dict)]
+    meta["malformed_records"] = len(values) - len(rows)
     meta["records"] = len(rows)
+    if meta["malformed_records"]:
+        meta["reason"] = f"publisher_history_malformed_records:{meta['malformed_records']}"
+        return rows, meta
+    meta["available"] = True
     return rows, meta
 
 
@@ -149,8 +154,18 @@ def build_audit(
     cutoff = current - timedelta(hours=max(1, int(hours)))
 
     supported_runs = sum(1 for _stamp, row in rows if row.get("schema_version") == MASTER_SCHEMA_VERSION)
+    pending_truncated_runs = sum(
+        1
+        for _stamp, row in rows
+        if isinstance(row.get("menzo"), dict) and row["menzo"].get("pending_sample_truncated") is True
+    )
     master_clean = bool(master_meta["available"] and master_meta["malformed_rows"] == 0)
-    urgency_coverage_complete = bool(rows) and master_clean and supported_runs == len(rows)
+    urgency_coverage_complete = bool(
+        rows
+        and master_clean
+        and supported_runs == len(rows)
+        and pending_truncated_runs == 0
+    )
     history_clean = bool(history_meta["available"])
 
     show_objects: list[dict[str, Any]] = []
@@ -264,6 +279,8 @@ def build_audit(
         warnings.append(str(history_meta["reason"] or "publisher_history_unavailable"))
     if master_meta["available"] and not urgency_coverage_complete:
         warnings.append(f"urgency_master_coverage_partial:{supported_runs}/{len(rows)}")
+    if pending_truncated_runs:
+        warnings.append(f"urgency_pending_sample_truncated_runs:{pending_truncated_runs}")
 
     daily_check: bool | None = (not bool(ceiling_violations)) if history_clean else None
     master_checks_available = urgency_coverage_complete
@@ -297,6 +314,7 @@ def build_audit(
                 "runs_in_window": len(rows),
                 "urgency_schema_version": MASTER_SCHEMA_VERSION,
                 "urgency_supported_runs": supported_runs,
+                "pending_truncated_runs": pending_truncated_runs,
                 "urgency_complete_window": urgency_coverage_complete,
             },
             "publisher_history": history_meta,
