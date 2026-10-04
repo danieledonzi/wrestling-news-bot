@@ -130,13 +130,19 @@ def test_a1_metric_set_and_duplicates_are_rejected(tmp_path, mutation):
     else:
         data["metric_baselines"].append(copy.deepcopy(data["metric_baselines"][0]))
     errors = errors_for(tmp_path, data=data)
-    assert any("metric set" in error or "duplicate baseline metric" in error for error in errors)
+    assert errors
+    if mutation == "duplicate":
+        assert any("duplicate baseline metric" in error for error in errors)
+    else:
+        assert any("Markdown METRIC_BASELINES block does not exactly match JSON" in error
+                   or "no longer preserves Phase 0 metric names" in error for error in errors)
 
 
-def test_unit_drift_is_rejected(tmp_path):
+def test_historical_unit_mutation_breaks_frozen_baseline_sync(tmp_path):
     data = payload()
     metric(data, "runtime.runs_started")["catalog_unit"] = "ratio"
-    assert any("catalog_unit drifts" in error for error in errors_for(tmp_path, data=data))
+    assert any("Markdown METRIC_BASELINES block does not exactly match JSON" in error
+               for error in errors_for(tmp_path, data=data))
 
 
 @pytest.mark.parametrize("bad_value", [0, 300])
