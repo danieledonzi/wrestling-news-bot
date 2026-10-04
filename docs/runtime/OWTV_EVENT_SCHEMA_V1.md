@@ -93,9 +93,9 @@ Stages are stable semantic pipeline areas, not raw phases.
 
 ## Event type taxonomy
 
-Each name has one meaning. Raw `phase` values are mapped separately and may need outcome context. Generic `stage_started`, `stage_completed`, and `stage_failed` accept every canonical stage so the event retains its real pipeline area; they are not forced into `runtime`. PR2 extends the existing append-only production ledger with cache/failure observation events only; it does not change editorial decisions.
+Each name has one meaning. Raw `phase` values are mapped separately and may need outcome context. Generic `stage_started`, `stage_completed`, and `stage_failed` accept every canonical stage so the event retains its real pipeline area; they are not forced into `runtime`. PR2 extends the existing append-only production ledger with cache/failure observation events and a per-run telemetry cutover marker only; it does not change editorial decisions.
 
-<!-- SYNC:EVENT_TYPES run_started|run_completed|stage_started|stage_completed|stage_failed|candidate_seen|candidate_selected|candidate_pending|candidate_skipped|duplicate_check_requested|duplicate_pair_evaluated|duplicate_pair_resolved|duplicate_pair_unresolved|logical_ai_request_created|model_attempt_started|model_attempt_completed|model_attempt_failed|model_attempt_avoided|fallback_started|repair_started|article_generation_requested|article_generated|revision_requested|revision_completed|report_candidate_seen|report_selected|report_published|publication_attempted|publication_completed|publication_failed|publication_already_present|content_sufficiency_checked|quality_review_completed|audit_completed|warning_recorded|blocker_recorded|duplicate_pair_cache_observed|duplicate_pair_cache_lookup|duplicate_pair_cache_stored|duplicate_pair_cache_store_failed|article_generation_failed|report_already_present -->
+<!-- SYNC:EVENT_TYPES run_started|run_completed|stage_started|stage_completed|stage_failed|candidate_seen|candidate_selected|candidate_pending|candidate_skipped|duplicate_check_requested|duplicate_pair_evaluated|duplicate_pair_resolved|duplicate_pair_unresolved|logical_ai_request_created|model_attempt_started|model_attempt_completed|model_attempt_failed|model_attempt_avoided|fallback_started|repair_started|article_generation_requested|article_generated|revision_requested|revision_completed|report_candidate_seen|report_selected|report_published|publication_attempted|publication_completed|publication_failed|publication_already_present|content_sufficiency_checked|quality_review_completed|audit_completed|warning_recorded|blocker_recorded|duplicate_pair_cache_observed|duplicate_pair_cache_lookup|duplicate_pair_cache_stored|duplicate_pair_cache_store_failed|article_generation_failed|report_already_present|telemetry_contract_observed -->
 
 | Event type | Default stage | Allowed agents |
 |---|---|---|
@@ -141,6 +141,7 @@ Each name has one meaning. Raw `phase` values are mapped separately and may need
 | duplicate_pair_cache_store_failed | duplicate | Menzo |
 | article_generation_failed | generation | Bob |
 | report_already_present | reporting | Simone |
+| telemetry_contract_observed | runtime | Jarvis |
 
 ## Status, result, and reason
 
