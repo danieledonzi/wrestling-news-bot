@@ -183,6 +183,54 @@ def test_pr131_read_model_full_coverage_keeps_pair_and_call_grains_distinct():
     assert result["diagnostic_mismatches"] == []
 
 
+def test_pr131_invalid_duplicate_workload_status_fails_closed() -> None:
+    rows = [event("duplicate_pair_cache_observed", ts=SINCE - timedelta(minutes=1), result="loaded")]
+    gemini = [{
+        "timestamp": (NOW - timedelta(minutes=30)).isoformat(),
+        "agent": "Menzo",
+        "status": "mystery",
+        "workload": "editorial_director_duplicate_gate",
+        "ledger_schema_version": "v3",
+        "provider_attempt_id": "bad-status",
+    }]
+    result, _ = build_pr131_cache_metrics(
+        rows, gemini, SINCE, NOW,
+        pr2_coverage="full", pr2_reason=None, gemini_available=True,
+    )
+    provider = result["provider"]
+    assert provider["provider_integrity_available"] is False
+    assert provider["invalid_duplicate_status_rows"] == 1
+    assert provider["duplicate_gate_real_attempts"] is None
+    assert provider["duplicate_workload_real_attempts"] is None
+    assert provider["known_actual_cost"] is None
+    assert result["diagnostic_mismatches"] == [
+        "pr131_invalid_duplicate_workload_statuses:mystery=1"
+    ]
+
+
+def test_pr131_avoided_total_fails_closed_on_cross_ledger_loss() -> None:
+    rows = [
+        event("duplicate_pair_cache_observed", ts=SINCE - timedelta(minutes=1), result="loaded"),
+        event(
+            "model_attempt_avoided",
+            reason="pr131_duplicate_pair_cache_gate_full_hit",
+            agent="Gemini",
+        ),
+    ]
+    result, _ = build_pr131_cache_metrics(
+        rows, [], SINCE, NOW,
+        pr2_coverage="full", pr2_reason=None, gemini_available=True,
+    )
+    provider = result["provider"]
+    assert provider["gemini_calls_avoided"] is None
+    assert provider["observed_gemini_calls_avoided"] == 0
+    assert provider["canonical_gemini_calls_avoided"] == 1
+    assert provider["avoided_cross_ledger_match"] is False
+    assert result["diagnostic_mismatches"] == [
+        "pr131_avoided_call_ledger_mismatch:canonical=1:gemini=0"
+    ]
+
+
 def test_pr131_duplicate_provider_attempt_ids_fail_closed_for_attempts_and_cost():
     rows = [event("duplicate_pair_cache_observed", ts=SINCE - timedelta(minutes=1), result="loaded")]
     base = {
