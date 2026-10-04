@@ -18,7 +18,8 @@ def write_json(path: Path, payload) -> None:
 def write_master(root: Path, rows: list[dict]) -> None:
     path = root / "state" / "newsroom" / "master_log.jsonl"
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text("\n".join(json.dumps(row) for row in rows) + "\n", encoding="utf-8")
+    normalized = [{"schema_version": audit.MASTER_SCHEMA_VERSION, **row} for row in rows]
+    path.write_text("\n".join(json.dumps(row) for row in normalized) + "\n", encoding="utf-8")
 
 
 def history_row(index: int, published_at: str) -> dict:
@@ -128,6 +129,99 @@ def test_audit_flags_ceiling_post_report_and_lost_provenance(tmp_path: Path) -> 
     assert result["daily_ceiling"]["published_today_local"] == 31
     assert result["show_news_urgency"]["urgency_after_report_urls"] == [url]
     assert result["show_news_urgency"]["lost_provenance_urls"] == [url]
+
+
+def test_master_log_persists_urgency_and_capacity_observability(tmp_path: Path) -> None:
+    from agents.master_log_v93_19 import build_master_record
+
+    url = "https://news.test/persisted-urgency"
+    item = {
+        "source_url": url,
+        "show_report_id": "wwe_raw",
+        "event_report_key": "wwe_raw_2026_10_04",
+        "special_event_match": {"report_key": "special_raw", "event_key": "raw"},
+        "corresponding_report_published": False,
+        "editorial_director": {
+            "editorial_class": "SHOULD_PUBLISH",
+            "recommended_action": "DEFER",
+        },
+        "scheduling_override": {
+            "reason": audit.URGENCY_REASON,
+            "original_recommended_action": "DEFER",
+        },
+    }
+    record = build_master_record(
+        run_summary={"started_at": NOW.isoformat(), "ended_at": NOW.isoformat()},
+        timeline=[],
+        massy={},
+        simone={},
+        simone_publish={},
+        menzo={"selected": [item], "pending": []},
+        bob={},
+        alfred={},
+        publisher={
+            "results": [{**item, "status": "published"}],
+            "skipped_approved_articles": [{
+                **item,
+                "source_url": "https://news.test/capacity",
+                "status": "skipped_capacity",
+                "reason": "daily_news_ceiling:30",
+            }],
+        },
+        archivista={},
+    )
+
+    assert record["schema_version"] == audit.MASTER_SCHEMA_VERSION
+    selected = record["menzo"]["selected"][0]
+    assert selected["show_report_id"] == "wwe_raw"
+    assert selected["editorial_director"]["recommended_action"] == "DEFER"
+    assert selected["scheduling_override"]["reason"] == audit.URGENCY_REASON
+    assert record["publisher"]["results"][0]["scheduling_override"]["reason"] == audit.URGENCY_REASON
+    skipped = record["publisher"]["skipped_approved_articles"][0]
+    assert skipped["status"] == "skipped_capacity"
+    assert skipped["reason"] == "daily_news_ceiling:30"
+
+    write_master(tmp_path, [record])
+    write_json(
+        tmp_path / "state" / "newsroom" / "publisher_history.json",
+        {url: {"source_url": url, "status": "publish", "published_at": NOW.isoformat()}},
+    )
+    result = audit.build_audit(root=tmp_path, now=NOW)
+    assert result["daily_ceiling"]["skipped_capacity_unique_urls"] == 1
+    assert result["daily_ceiling"]["daily_ceiling_skips_unique_urls"] == 1
+    assert result["show_news_urgency"]["promoted_unique_urls"] == 1
+    assert result["show_news_urgency"]["published_with_provenance_unique_urls"] == 1
+
+
+def test_missing_authoritative_sources_are_unavailable(tmp_path: Path) -> None:
+    result = audit.build_audit(root=tmp_path, now=NOW)
+
+    assert result["status"] == "unavailable"
+    assert result["checks"]["daily_ceiling_respected"] is None
+    assert result["checks"]["no_post_report_urgency"] is None
+    assert result["checks"]["urgency_provenance_preserved"] is None
+    assert "missing_master_log" in result["warnings"]
+    assert "missing_publisher_history" in result["warnings"]
+
+
+def test_legacy_master_rows_report_partial_coverage(tmp_path: Path) -> None:
+    write_master(tmp_path, [{
+        "schema_version": "v93_19_newsroom_master_log",
+        "run": {"started_at": "2026-10-04T07:30:00+00:00"},
+        "menzo": {"selected": [], "pending": []},
+        "publisher": {"results": []},
+    }])
+    write_json(tmp_path / "state" / "newsroom" / "publisher_history.json", {})
+
+    result = audit.build_audit(root=tmp_path, now=NOW)
+
+    assert result["status"] == "partial_coverage"
+    assert result["source_coverage"]["master_log"]["urgency_supported_runs"] == 0
+    assert result["source_coverage"]["master_log"]["urgency_complete_window"] is False
+    assert result["checks"]["daily_ceiling_respected"] is True
+    assert result["checks"]["no_post_report_urgency"] is None
+    assert result["checks"]["urgency_provenance_preserved"] is None
+    assert result["show_news_urgency"]["opportunity_observed"] is None
 
 
 def test_generate_outputs_writes_latest_json_and_markdown(tmp_path: Path) -> None:
