@@ -734,6 +734,14 @@
         "Simone"
       ],
       "description": "WordPress REST endpoint readiness probe"
+    },
+    {
+      "name": "bob_generation_cycle",
+      "stage": "generation",
+      "agents": [
+        "Bob"
+      ],
+      "description": "Bob package-generation telemetry cycle"
     }
   ],
   "identities": {
