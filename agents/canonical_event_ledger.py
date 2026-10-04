@@ -369,12 +369,12 @@ class CanonicalEventLedger:
             elif status == "extraction_empty":
                 self.event("article_generation_failed", "Bob", "generation", "failed",
                            "artifacts/newsroom/bob_articles.json", item,
-                           reason_code="extraction_empty", error_class="extraction",
+                           reason_code="extraction_empty", error_class="upstream",
                            error_terminal=True)
             elif status == "error":
                 self.event("article_generation_failed", "Bob", "generation", "failed",
                            "artifacts/newsroom/bob_articles.json", item,
-                           reason_code="bob_package_error", error_class="generation",
+                           reason_code="bob_package_error", error_class="invariant",
                            error_terminal=True)
 
     def observe_alfred(self, value: Any) -> None:
