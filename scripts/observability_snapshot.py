@@ -1037,7 +1037,7 @@ def _canonical_event_sections(rows: list[dict[str, Any]], since: datetime, until
             "blocker_occurrences": value(blocker_occurrences, "event_count", "warnings"),
             "blocker_bearing_reviews": blocker_review_count if coverage["warnings"] == "full" else None,
             "articles_with_blockers": value(blocker_occurrences, family="warnings"),
-            "final_blockers": len(final_blocked_ids) if coverages["failures"] == "full" else None,
+            "final_blockers": len(final_blocked_ids) if coverage["failures"] == "full" else None,
             "revised_then_approved": len(revised_then_approved_ids) if coverage["p1_1"] == "full" else None,
             "revised_then_published": len(revised_then_published_ids) if coverage["p1_1"] == "full" else None,
         },
