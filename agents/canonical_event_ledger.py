@@ -403,6 +403,8 @@ class CanonicalEventLedger:
                                reason_code=code, result="blocker")
 
     def observe_publisher(self, value: Any) -> None:
+        self.event("publisher_observation_cycle", "Publisher", "publication", "success",
+                   "artifacts/newsroom/publisher_result.json")
         for item in _rows(value, ("results",)):
             status = item.get("status")
             reason = item.get("reason")
@@ -435,6 +437,8 @@ class CanonicalEventLedger:
                            reason_code="missing_url_or_title", error_class="validation", error_terminal=True)
 
     def observe_simone(self, decision: Any, published: Any = None) -> None:
+        self.event("simone_publication_cycle", "Simone", "reporting", "success",
+                   "artifacts/newsroom/simone_report_publish.json")
         self.observe_items(decision, ("candidates", "report_candidates"), "report_candidate_seen", "Simone", "reporting", "success", "artifacts/newsroom/simone_reports.json")
         for item in _rows(decision, ("ready_reports",)):
             self._report_event("report_selected", item, "success", "artifacts/newsroom/simone_reports.json")
