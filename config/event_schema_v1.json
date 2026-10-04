@@ -742,6 +742,22 @@
         "Bob"
       ],
       "description": "Bob package-generation telemetry cycle"
+    },
+    {
+      "name": "publisher_observation_cycle",
+      "stage": "publication",
+      "agents": [
+        "Publisher"
+      ],
+      "description": "Publisher result telemetry observation cycle"
+    },
+    {
+      "name": "simone_publication_cycle",
+      "stage": "reporting",
+      "agents": [
+        "Simone"
+      ],
+      "description": "Simone report publication telemetry observation cycle"
     }
   ],
   "identities": {
