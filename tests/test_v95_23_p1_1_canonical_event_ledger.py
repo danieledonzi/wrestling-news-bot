@@ -417,14 +417,14 @@ def test_pr2_cache_observer_emits_pair_grain_and_store_failure(tmp_path):
     stored = next(row for row in output if row["event_type"] == "duplicate_pair_cache_stored")
     assert stored["pair_id"] == "pair-miss"
     failed = output[-1]
-    assert failed["error_class"] == "storage"
+    assert failed["error_class"] == "invariant"
     assert failed["error_terminal"] is False
 
 
 @pytest.mark.parametrize("status,reason,error_class", [
     ("translation_validation_failed", "translation_validation_failed", "validation"),
     ("extraction_empty", "extraction_empty", "validation"),
-    ("error", "bob_generation_error", "internal"),
+    ("error", "bob_generation_error", "permanent"),
 ])
 def test_pr2_bob_item_failure_events_are_typed(tmp_path, status, reason, error_class):
     ledger = CanonicalEventLedger("run-pr2", tmp_path / f"{status}.jsonl")
