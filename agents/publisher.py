@@ -625,6 +625,23 @@ def publish_article(article: dict[str, Any], history: dict[str, Any], wp_ok: boo
     PUBLISHED_DIR.mkdir(parents=True, exist_ok=True)
     (PUBLISHED_DIR / f"v93_news_{review_slug}.html").write_text(content, encoding="utf-8")
     result = {"source_url": url, "title_it": title, "status": "published", "wp_post_id": post_id, "wp_link": post_link, "featured_media": media_id, "categories": categories, "cleaned_full_text": published_cleaned_full_text, "published_cleaned_full_text": published_cleaned_full_text, "source_cleaned_full_text": source_cleaned_full_text, "canonical_source_body": canonical_source_body}
+    # Preserve scheduling/editorial provenance in the actual Publisher result so
+    # the authoritative master log can audit an urgency promotion end-to-end.
+    for field in (
+        "show_report_id",
+        "event_report_key",
+        "special_event_match",
+        "corresponding_report_published",
+        "editorial_director",
+        "scheduling_override",
+    ):
+        if field not in article:
+            continue
+        value = article.get(field)
+        if isinstance(value, dict):
+            result[field] = dict(value)
+        elif value is not None:
+            result[field] = value
     try:
         write_published_trace(article, result, review_slug, published_at)
     except Exception as exc:
