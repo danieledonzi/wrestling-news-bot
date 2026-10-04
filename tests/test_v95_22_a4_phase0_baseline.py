@@ -62,7 +62,7 @@ def test_happy_path_cli_and_frozen_baseline_survives_live_policy_migration():
     )
     assert result.returncode == 0, result.stderr
     catalog = json.loads((ROOT / "config/metrics_catalog_v1.json").read_text())
-    assert catalog["policy_version"] == "v96.4_telemetry_authority_convergence"
+    assert catalog["policy_version"] == "v96.5_pr2_missing_telemetry_closure"
     baseline_names = {row["metric_name"] for row in payload()["metric_baselines"]}
     current_names = {row["canonical_name"] for row in catalog["metrics"]}
     assert len(baseline_names) == 99
