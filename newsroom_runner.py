@@ -19,7 +19,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
 
-NEWSROOM_VERSION = "v95.25_p1_3_operational_event_semantics"
+NEWSROOM_VERSION = "v95.25_ps1_pre_report_news_sequencing"
 ARTIFACT_DIR = Path("artifacts") / "newsroom"
 
 
@@ -381,10 +381,24 @@ def initialize_canonical_artifact_index(run_id: str) -> Any:
         return UnavailableCanonicalArtifactIndex(exc)
 
 
+def weekly_report_keys_at(observation_timestamp: str) -> dict[str, str]:
+    """Reuse Simone's dated discovery identity even after a report leaves ready."""
+    from agents.simone import REPORTS_CONFIG, discovery_report_identity, load_json
+    try:
+        now = datetime.fromisoformat(observation_timestamp.replace("Z", "+00:00"))
+    except (TypeError, ValueError):
+        return {}
+    config = load_json(REPORTS_CONFIG, {"reports": []})
+    reports = config.get("reports", []) if isinstance(config, dict) else []
+    return {str(row["id"]): discovery_report_identity(row, now)[0]
+            for row in reports if isinstance(row, dict) and row.get("id") and row.get("enabled", True)}
+
+
 def capture_editorial_director_opportunity(massy_board: dict[str, Any], *, run_id: str,
                                             observation_timestamp: str,
                                             preserve_active_metadata: bool = False,
-                                            same_run_published_weekly_ids: set[str] | None = None) -> tuple[Any, Any, Any]:
+                                            same_run_published_weekly_ids: set[str] | None = None,
+                                            ready_weekly_report_keys: dict[str, str] | None = None) -> tuple[Any, Any, Any]:
     """Return snapshot, diagnostic result and the single Menzo preflight result."""
     from agents.menzo_editorial_director_shadow import (capture_opportunity, costly_work_eligibility,
                                                         softpool_augmented_board)
@@ -407,14 +421,26 @@ def capture_editorial_director_opportunity(massy_board: dict[str, Any], *, run_i
     published_report_keys = set(special_history) if isinstance(special_history, dict) else set()
     published_report_keys.update(str(row.get("report_key")) for row in special_rows
                                  if isinstance(row, dict) and row.get("status") in {"published", "already_published"})
+    weekly_keys = weekly_report_keys_at(observation_timestamp)
+    for report_id, key in (ready_weekly_report_keys or {}).items():
+        # A replayed older reservation must not replace the current occurrence.
+        weekly_keys.setdefault(report_id, key)
     for candidate in augmented.get("news_candidates_for_menzo", []):
         if not isinstance(candidate, dict):
             continue
         special = candidate.get("special_event_match") if isinstance(candidate.get("special_event_match"), dict) else {}
-        report_key = str(special.get("report_key") or candidate.get("event_report_key") or "")
+        report_id = str(candidate.get("show_report_id") or "")
+        report_key = str(special.get("report_key") or candidate.get("event_report_key") or
+                         weekly_keys.get(report_id) or "")
+        if report_key:
+            candidate["event_report_key"] = report_key
+        manual = published_weekly.get(report_id, {}) if isinstance(published_weekly, dict) else {}
+        manual_key = str(manual.get("report_key") or "") if isinstance(manual, dict) else ""
+        legacy_current_scope = not report_key or report_key == weekly_keys.get(report_id)
         candidate["corresponding_report_published"] = bool(
-            str(candidate.get("show_report_id") or "") in published_weekly_ids or
-            (report_key and report_key in published_report_keys))
+            (report_key and report_key in published_report_keys) or
+            (report_id in published_weekly_ids and
+             ((manual_key and manual_key == report_key) or (not manual_key and legacy_current_scope))))
     snapshot = capture_opportunity(
         augmented, run_id=run_id, observation_timestamp=observation_timestamp,
         published_news_today_local=published_today_count(),
@@ -469,7 +495,49 @@ def observe_applied_active_authority(artifacts: Any, snapshot: dict[str, Any], r
         pass
 
 
+def publish_simone_reports(simone_decision: dict[str, Any], timeline: list[dict[str, str]], canonical: Any) -> dict[str, Any]:
+    simone_publish = safe_agent(timeline=timeline, agent="Simone", phase="report_publication_ready", import_fn=import_simone_report_publisher, call_args=(simone_decision,), artifact_name="simone_report_publish.json", default_handoff={"published": 0, "already_published": 0, "wp_not_ready": 0, "dry_run": 0, "errors": 0}, note_fn=lambda r: "published={published} already={already_published} wp_not_ready={wp_not_ready} errors={errors}".format(**{**{"published": 0, "already_published": 0, "wp_not_ready": 0, "dry_run": 0, "errors": 0}, **handoff(r)}))
+    simone_cycle_status = str(simone_publish.get("status") or "")
+    if simone_cycle_status in {"error", "invalid_result"}:
+        canonical.safely("event", "simone_publication_cycle", "Simone", "reporting", "failed",
+                         "artifacts/newsroom/simone_report_publish.json",
+                         reason_code="simone_publication_cycle_failed",
+                         error_class="invariant", error_terminal=True,
+                         result=simone_cycle_status)
+    else:
+        canonical.safely("event", "simone_publication_cycle", "Simone", "reporting", "success",
+                         "artifacts/newsroom/simone_report_publish.json")
+    canonical.safely("observe_simone", simone_decision, simone_publish)
+
+    return simone_publish
+
+
+def selected_news_precede_report(menzo: dict[str, Any], simone: dict[str, Any]) -> bool:
+    """Sequence a selected show story before its ready report, never using title keywords."""
+    ready = [row for row in simone.get("ready_reports", []) if isinstance(row, dict)]
+    keys = {str(row["report_key"]) for row in ready if row.get("report_key")}
+    weekly_ids = {str(row["report_id"]) for row in ready if row.get("report_id")}
+    for item in menzo.get("selected", []):
+        if not isinstance(item, dict) or item.get("corresponding_report_published"):
+            continue
+        special = item.get("special_event_match") if isinstance(item.get("special_event_match"), dict) else {}
+        key = str(special.get("report_key") or item.get("event_report_key") or "")
+        if (key and key in keys) or (not key and str(item.get("show_report_id") or "") in weekly_ids):
+            return True
+    return False
+
+
 def main() -> int:
+    from agents.news_scheduling import REPORT_PUBLICATION_PLANNED
+    token = REPORT_PUBLICATION_PLANNED.set(False)
+    try:
+        return _run_newsroom()
+    finally:
+        REPORT_PUBLICATION_PLANNED.reset(token)
+
+
+
+def _run_newsroom() -> int:
     ensure_artifacts()
     started_at = utc_now()
     os.environ["NEWSROOM_RUN_ID"] = os.getenv("NEWSROOM_RUN_ID", "").strip() or started_at
@@ -498,18 +566,13 @@ def main() -> int:
     add_timeline(timeline, "Massy", "forced_policy_active", f"version={massy_board.get('version')}")
 
     simone_decision = safe_agent(timeline=timeline, agent="Simone", phase="report_decision_ready", import_fn=import_simone, call_args=(massy_board,), artifact_name="simone_reports.json", default_handoff={"ready": 0, "waiting": 0, "skipped": 0}, note_fn=lambda r: "ready={ready} waiting={waiting} skipped={skipped}".format(**{**{"ready": 0, "waiting": 0, "skipped": 0}, **handoff(r)}))
-    simone_publish = safe_agent(timeline=timeline, agent="Simone", phase="report_publication_ready", import_fn=import_simone_report_publisher, call_args=(simone_decision,), artifact_name="simone_report_publish.json", default_handoff={"published": 0, "already_published": 0, "wp_not_ready": 0, "dry_run": 0, "errors": 0}, note_fn=lambda r: "published={published} already={already_published} wp_not_ready={wp_not_ready} errors={errors}".format(**{**{"published": 0, "already_published": 0, "wp_not_ready": 0, "dry_run": 0, "errors": 0}, **handoff(r)}))
-    simone_cycle_status = str(simone_publish.get("status") or "")
-    if simone_cycle_status in {"error", "invalid_result"}:
-        canonical.safely("event", "simone_publication_cycle", "Simone", "reporting", "failed",
-                         "artifacts/newsroom/simone_report_publish.json",
-                         reason_code="simone_publication_cycle_failed",
-                         error_class="invariant", error_terminal=True,
-                         result=simone_cycle_status)
-    else:
-        canonical.safely("event", "simone_publication_cycle", "Simone", "reporting", "success",
-                         "artifacts/newsroom/simone_report_publish.json")
-    canonical.safely("observe_simone", simone_decision, simone_publish)
+    from agents.news_scheduling import REPORT_PUBLICATION_PLANNED
+    REPORT_PUBLICATION_PLANNED.set(bool(simone_decision.get("ready_reports")))
+    ready_weekly_report_keys = {
+        str(row["report_id"]): str(row["report_key"])
+        for row in simone_decision.get("ready_reports", [])
+        if isinstance(row, dict) and row.get("report_id") and row.get("report_key")
+    }
 
     # Active wins over Shadow. Capture includes the existing bounded softpool and duplicate gate.
     director_snapshot = None
@@ -521,24 +584,10 @@ def main() -> int:
         from agents.menzo_editorial_director_shadow import enabled as shadow_enabled
         active_director = active_enabled()
         if active_director or shadow_enabled():
-            published_report_keys_this_run = {
-                str(row.get("report_key"))
-                for row in simone_publish.get("results", [])
-                if isinstance(row, dict)
-                and row.get("report_key")
-                and row.get("status") in {"published", "already_published"}
-            }
-            same_run_published_weekly_ids = {
-                str(report.get("report_id"))
-                for report in simone_decision.get("ready_reports", [])
-                if isinstance(report, dict)
-                and report.get("report_id")
-                and str(report.get("report_key") or "") in published_report_keys_this_run
-            }
             director_snapshot, director_result, menzo_preflight = capture_editorial_director_opportunity(
                 massy_board, run_id=os.environ["NEWSROOM_RUN_ID"], observation_timestamp=utc_now(),
                 preserve_active_metadata=active_director,
-                same_run_published_weekly_ids=same_run_published_weekly_ids)
+                ready_weekly_report_keys=ready_weekly_report_keys)
     except Exception as exc:
         director_result = {"status": "CAPTURE_FAILED", "fallback_reason": type(exc).__name__}
         add_timeline(timeline, "Menzo", "editorial_director_capture_failed_open", type(exc).__name__)
@@ -564,6 +613,12 @@ def main() -> int:
         menzo_decision = safe_agent(timeline=timeline, agent="Menzo", phase="editorial_decision_ready", import_fn=import_menzo, call_args=(massy_board,), call_kwargs=({"costly_work_preflight": menzo_preflight} if menzo_preflight is not None else {}), artifact_name="menzo_decisions.json", default_handoff={"to_bob_or_v92": 0, "pending": 0, "skipped": 0}, note_fn=lambda r: "selected={to_bob_or_v92} pending={pending} skipped={skipped}".format(**{**{"to_bob_or_v92": 0, "pending": 0, "skipped": 0}, **handoff(r)}))
     canonical.safely("observe_menzo", menzo_decision)
     add_timeline(timeline, "Menzo", "forced_policy_active", f"version={menzo_decision.get('version')}")
+
+    news_before_report = selected_news_precede_report(menzo_decision, simone_decision)
+    add_timeline(timeline, "Jarvis", "news_report_sequence",
+                 "selected_show_news_first" if news_before_report else "report_before_news_generation")
+    if not news_before_report:
+        simone_publish = publish_simone_reports(simone_decision, timeline, canonical)
 
     andrea_handoff = safe_agent(timeline=timeline, agent="Andrea", phase="pre_bob_content_sufficiency_ready", import_fn=import_andrea, call_args=(menzo_decision,), artifact_name="andrea_pre_bob_latest.json", default_handoff={"to_bob": 0, "blocked_before_bob": 0, "saved_gemini_calls": 0}, note_fn=lambda r: "to_bob={to_bob_or_v92} checked={andrea_checked} blocked={andrea_blocked} saved_gemini={andrea_saved_gemini_calls}".format(**{**{"to_bob_or_v92": 0, "andrea_checked": 0, "andrea_blocked": 0, "andrea_saved_gemini_calls": 0}, **handoff(r)}))
     record_andrea_avoids_from_result(andrea_handoff)
@@ -608,6 +663,11 @@ def main() -> int:
     canonical.safely("observe_publisher", publisher_result)
     artifacts.safely("observe_publisher", publisher_result)
 
+    # Always finish the ready report pass in this run, including news errors or
+    # an empty downstream handoff. No waiting for more feed candidates or retries.
+    if news_before_report:
+        simone_publish = publish_simone_reports(simone_decision, timeline, canonical)
+
     # The observer runs only after Publisher and its value has no production consumer.
     if director_snapshot is not None and not active_director:
         try:
@@ -633,7 +693,7 @@ def main() -> int:
         add_timeline(timeline, "Publisher", "runtime_finished", f"exit_code={runtime_exit_code}")
 
     ended_at = utc_now()
-    run_summary = {"version": NEWSROOM_VERSION, "started_at": started_at, "ended_at": ended_at, "engine": engine, "newsroom_engine_override": is_test_override, "runtime_delegations": runtime_delegations, "runtime_exit_code": runtime_exit_code, "agents": {"jarvis": "real_orchestrator", "massy": "real_sentinel_control", "simone": "real_report_director_and_autonomous_report_publisher", "menzo": "real_editorial_director", "andrea": "real_pre_bob_content_sufficiency_guard", "bob": "real_article_writer", "alfred": "real_quality_editor", "publisher": "real_wordpress_publisher", "archivista": "real_audit_agent", "master_log": "real_structured_run_memory"}, "massy_handoff": handoff(massy_board), "simone_handoff": handoff(simone_decision), "simone_publish_handoff": handoff(simone_publish), "menzo_handoff": handoff(menzo_decision), "andrea_handoff": handoff(andrea_handoff), "bob_handoff": handoff(bob_result), "alfred_handoff": handoff(alfred_result), "publisher_handoff": handoff(publisher_result), "gemini_ledger_summary": gemini_ledger_summary()}
+    run_summary = {"version": NEWSROOM_VERSION, "started_at": started_at, "ended_at": ended_at, "engine": engine, "newsroom_engine_override": is_test_override, "runtime_delegations": runtime_delegations, "runtime_exit_code": runtime_exit_code, "news_report_sequence": "selected_show_news_first" if news_before_report else "report_before_news_generation", "agents": {"jarvis": "real_orchestrator", "massy": "real_sentinel_control", "simone": "real_report_director_and_autonomous_report_publisher", "menzo": "real_editorial_director", "andrea": "real_pre_bob_content_sufficiency_guard", "bob": "real_article_writer", "alfred": "real_quality_editor", "publisher": "real_wordpress_publisher", "archivista": "real_audit_agent", "master_log": "real_structured_run_memory"}, "massy_handoff": handoff(massy_board), "simone_handoff": handoff(simone_decision), "simone_publish_handoff": handoff(simone_publish), "menzo_handoff": handoff(menzo_decision), "andrea_handoff": handoff(andrea_handoff), "bob_handoff": handoff(bob_result), "alfred_handoff": handoff(alfred_result), "publisher_handoff": handoff(publisher_result), "gemini_ledger_summary": gemini_ledger_summary()}
     if director_result is not None:
         run_summary["editorial_director_active" if active_director else "editorial_director_shadow"] = director_result
 
@@ -702,6 +762,8 @@ def main() -> int:
     print(f"[ARCHIVISTA v93] Saved {ARTIFACT_DIR / 'run_summary.json'}", flush=True)
     print(f"===== NEWSROOM RUN END [{ended_at}] VERSION [{NEWSROOM_VERSION}] EXIT [{runtime_exit_code}] =====", flush=True)
     return runtime_exit_code
+
+
 
 
 if __name__ == "__main__":

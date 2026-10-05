@@ -20,7 +20,7 @@ import re
 bob_path = Path('agents/bob.py')
 text = bob_path.read_text(encoding='utf-8')
 
-if 'v93_39_dynamic_article_capacity' not in text:
+if 'v93_39_dynamic_article_capacity' not in text and 'ps1_planned_report_capacity' not in text:
     text = re.sub(r'BOB_VERSION = "[^"]+"', 'BOB_VERSION = "v93_39_dynamic_article_capacity"', text, count=1)
 
     text = text.replace(

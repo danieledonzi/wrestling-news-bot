@@ -1181,7 +1181,12 @@ def is_post_show_candidate(item: dict[str, Any]) -> bool:
 
 
 def dynamic_article_capacity(decision: dict[str, Any], selected: list[dict[str, Any]]) -> tuple[int, str]:
-    if report_was_published_or_attempted():
+    # ps1_planned_report_capacity: consolidated contract; legacy patches must preserve it.
+    from agents.news_scheduling import REPORT_PUBLICATION_PLANNED
+    report_run = REPORT_PUBLICATION_PLANNED.get()
+    if report_run is None:
+        report_run = report_was_published_or_attempted()
+    if report_run:
         return max(0, MAX_ARTICLES_WITH_REPORT), "report_run"
     post_show_count = sum(1 for item in selected if isinstance(item, dict) and is_post_show_candidate(item))
     if post_show_count >= 3:
