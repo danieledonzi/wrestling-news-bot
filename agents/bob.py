@@ -1181,6 +1181,7 @@ def is_post_show_candidate(item: dict[str, Any]) -> bool:
 
 
 def dynamic_article_capacity(decision: dict[str, Any], selected: list[dict[str, Any]]) -> tuple[int, str]:
+    # ps1_planned_report_capacity: consolidated contract; legacy patches must preserve it.
     from agents.news_scheduling import REPORT_PUBLICATION_PLANNED
     report_run = REPORT_PUBLICATION_PLANNED.get()
     if report_run is None:

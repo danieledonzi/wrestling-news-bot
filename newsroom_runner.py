@@ -381,6 +381,19 @@ def initialize_canonical_artifact_index(run_id: str) -> Any:
         return UnavailableCanonicalArtifactIndex(exc)
 
 
+def weekly_report_keys_at(observation_timestamp: str) -> dict[str, str]:
+    """Reuse Simone's dated discovery identity even after a report leaves ready."""
+    from agents.simone import REPORTS_CONFIG, discovery_report_identity, load_json
+    try:
+        now = datetime.fromisoformat(observation_timestamp.replace("Z", "+00:00"))
+    except (TypeError, ValueError):
+        return {}
+    config = load_json(REPORTS_CONFIG, {"reports": []})
+    reports = config.get("reports", []) if isinstance(config, dict) else []
+    return {str(row["id"]): discovery_report_identity(row, now)[0]
+            for row in reports if isinstance(row, dict) and row.get("id") and row.get("enabled", True)}
+
+
 def capture_editorial_director_opportunity(massy_board: dict[str, Any], *, run_id: str,
                                             observation_timestamp: str,
                                             preserve_active_metadata: bool = False,
@@ -408,17 +421,26 @@ def capture_editorial_director_opportunity(massy_board: dict[str, Any], *, run_i
     published_report_keys = set(special_history) if isinstance(special_history, dict) else set()
     published_report_keys.update(str(row.get("report_key")) for row in special_rows
                                  if isinstance(row, dict) and row.get("status") in {"published", "already_published"})
+    weekly_keys = weekly_report_keys_at(observation_timestamp)
+    for report_id, key in (ready_weekly_report_keys or {}).items():
+        # A replayed older reservation must not replace the current occurrence.
+        weekly_keys.setdefault(report_id, key)
     for candidate in augmented.get("news_candidates_for_menzo", []):
         if not isinstance(candidate, dict):
             continue
         special = candidate.get("special_event_match") if isinstance(candidate.get("special_event_match"), dict) else {}
+        report_id = str(candidate.get("show_report_id") or "")
         report_key = str(special.get("report_key") or candidate.get("event_report_key") or
-                         (ready_weekly_report_keys or {}).get(str(candidate.get("show_report_id") or "")) or "")
+                         weekly_keys.get(report_id) or "")
         if report_key:
             candidate["event_report_key"] = report_key
+        manual = published_weekly.get(report_id, {}) if isinstance(published_weekly, dict) else {}
+        manual_key = str(manual.get("report_key") or "") if isinstance(manual, dict) else ""
+        legacy_current_scope = not report_key or report_key == weekly_keys.get(report_id)
         candidate["corresponding_report_published"] = bool(
-            str(candidate.get("show_report_id") or "") in published_weekly_ids or
-            (report_key and report_key in published_report_keys))
+            (report_key and report_key in published_report_keys) or
+            (report_id in published_weekly_ids and
+             ((manual_key and manual_key == report_key) or (not manual_key and legacy_current_scope))))
     snapshot = capture_opportunity(
         augmented, run_id=run_id, observation_timestamp=observation_timestamp,
         published_news_today_local=published_today_count(),

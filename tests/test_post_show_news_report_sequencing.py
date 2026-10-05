@@ -1,6 +1,11 @@
 """Offline runner regressions for the existing pre-report scheduling contract."""
 import copy
+import importlib.util
 import json
+from pathlib import Path
+import shutil
+import subprocess
+import sys
 
 import pytest
 
@@ -182,7 +187,8 @@ def test_planned_capacity_is_reset_even_when_runner_exits_unexpectedly(monkeypat
 
 
 @pytest.mark.parametrize("published_key,published", [(KEY, True), ("aew_dynamite_2026_09_23", False)])
-def test_capture_reads_publication_for_ready_weekly_occurrence(monkeypatch, tmp_path, published_key, published):
+@pytest.mark.parametrize("report_ready", [True, False, "older_replay"])
+def test_capture_reads_publication_for_weekly_occurrence(monkeypatch, tmp_path, published_key, published, report_ready):
     from agents import menzo_editorial_director_shadow as shadow
     from agents import simone_publisher_v93_18 as publisher
     from modules import simone_report_integrity as integrity
@@ -202,7 +208,60 @@ def test_capture_reads_publication_for_ready_weekly_occurrence(monkeypatch, tmp_
     runner.capture_editorial_director_opportunity(
         {"news_candidates_for_menzo": [{"show_report_id": "aew_dynamite"}], "published_due_reports": {}},
         run_id="capture-test", observation_timestamp="2026-10-01T04:30:00+00:00",
-        ready_weekly_report_keys={"aew_dynamite": KEY})
+        ready_weekly_report_keys=({"aew_dynamite": "aew_dynamite_2026_09_23"}
+                                  if report_ready == "older_replay" else
+                                  {"aew_dynamite": KEY} if report_ready else None))
     row = observed[0]["news_candidates_for_menzo"][0]
     assert row["event_report_key"] == KEY
     assert row["corresponding_report_published"] is published
+
+
+@pytest.mark.parametrize("manual", [None, {}, {"report_key": KEY}])
+def test_future_explicit_occurrence_is_not_covered_by_current_weekly_report(monkeypatch, tmp_path, manual):
+    from agents import menzo_editorial_director_shadow as shadow
+    from agents import simone_publisher_v93_18 as publisher
+    from modules import simone_report_integrity as integrity
+
+    pending = tmp_path / "pending.json"
+    history = tmp_path / "history.json"
+    pending.write_text(json.dumps({"reports": []}))
+    history.write_text(json.dumps({KEY: {"wp_post_id": 12}}))
+    monkeypatch.setattr(integrity, "PENDING_REPORTS", pending)
+    monkeypatch.setattr(publisher, "SIMONE_REPORT_HISTORY_FILE", history)
+    monkeypatch.setattr(shadow, "costly_work_eligibility", lambda: (True, "ready"))
+    monkeypatch.setattr(shadow, "softpool_augmented_board", copy.deepcopy)
+    monkeypatch.setattr(menzo, "published_today_count", lambda: 0)
+    monkeypatch.setattr(menzo, "load_authoritative_publisher_history", lambda *_: [])
+    observed = []
+    monkeypatch.setattr(shadow, "capture_opportunity", lambda board, **_k: observed.append(board) or {})
+    future_key = "aew_dynamite_2026_10_07"
+    runner.capture_editorial_director_opportunity(
+        {"news_candidates_for_menzo": [{"show_report_id": "aew_dynamite", "event_report_key": future_key}],
+         "published_due_reports": {} if manual is None else {"aew_dynamite": manual}},
+        run_id="future-test", observation_timestamp="2026-10-01T04:30:00+00:00")
+    row = observed[0]["news_candidates_for_menzo"][0]
+    assert row["event_report_key"] == future_key
+    assert row["corresponding_report_published"] is False
+
+
+@pytest.mark.parametrize("planned", [True, False])
+def test_runtime_capacity_patch_preserves_consolidated_planned_capacity(tmp_path, monkeypatch, planned):
+    root = Path(runner.__file__).resolve().parent
+    (tmp_path / "agents").mkdir()
+    for name in ("bob.py", "menzo_policy_v93_15.py"):
+        shutil.copyfile(root / "agents" / name, tmp_path / "agents" / name)
+    original = (tmp_path / "agents/bob.py").read_bytes()
+    patch = root / "scripts/apply_v93_capacity_patch.py"
+    for _ in range(2):
+        subprocess.run([sys.executable, str(patch)], cwd=tmp_path, check=True, capture_output=True)
+        assert (tmp_path / "agents/bob.py").read_bytes() == original
+    spec = importlib.util.spec_from_file_location("ps1_patched_bob", tmp_path / "agents/bob.py")
+    patched_bob = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(patched_bob)
+    monkeypatch.setattr(patched_bob, "report_was_published_or_attempted", lambda: not planned)
+    token = REPORT_PUBLICATION_PLANNED.set(planned)
+    try:
+        expected = patched_bob.MAX_ARTICLES_WITH_REPORT if planned else patched_bob.MAX_ARTICLES_PER_RUN
+        assert patched_bob.dynamic_article_capacity({}, [])[0] == expected
+    finally:
+        REPORT_PUBLICATION_PLANNED.reset(token)

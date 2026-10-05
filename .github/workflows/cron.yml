@@ -71,11 +71,6 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Apply v92 report workshop
-        run: |
-          set -e
-          python scripts/apply_v92_report_workshop.py
-
       - name: Verify v92/v93 source
         run: |
           set -e
@@ -85,6 +80,7 @@ jobs:
           python -m py_compile bot_v92.py
           python -m py_compile manual_v92.py
           python -m py_compile newsroom_runner.py
+          python -m py_compile agents/bob.py agents/news_scheduling.py
           python -m py_compile modules/report_workshop_v92.py
           python - <<'PY'
           from pathlib import Path
