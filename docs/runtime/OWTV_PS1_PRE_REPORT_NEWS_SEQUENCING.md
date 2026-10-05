@@ -16,6 +16,10 @@ duplicate authority, MUST handling and softpool decay retain their contracts.
 After the report, this promotion ends. Ordinary selection remains possible;
 report coverage is not itself a semantic duplicate or a reason to discard news.
 
+The GitHub newsroom execution step explicitly enables Active, matching the VPS
+deployment. Active's global default remains disabled for other callers; legacy
+fallback authority remains unchanged.
+
 ## Runner order
 
 1. Massy discovers candidates; Simone decides which canonical reports are ready.

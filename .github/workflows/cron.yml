@@ -152,6 +152,7 @@ jobs:
         if: ${{ github.event.inputs.manual_url == '' }}
         id: run_bot
         env:
+          OWTV_EDITORIAL_DIRECTOR_ACTIVE_ENABLED: "true"
           WP_USER: ${{ secrets.WP_USER }}
           WP_PASSWORD: ${{ secrets.WP_PASSWORD }}
           WP_URL: ${{ secrets.WP_URL }}
