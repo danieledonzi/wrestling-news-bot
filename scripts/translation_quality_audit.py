@@ -167,6 +167,12 @@ class ArticleAudit:
     original_text: str = ""
     published_text: str = ""
     translated_candidate_text: str = ""
+    alfred_approved_text: str = ""
+    alfred_approved_provenance: str = ""
+    alfred_approved_material_available: bool = False
+    source_markup_available: bool | None = None
+    final_markup_available: bool | None = None
+    material_chain_correlation_id: str = ""
     original_text_length: int = 0
     published_text_length: int = 0
     original_paragraph_count: int = 0
@@ -353,6 +359,7 @@ def set_source_material(a: ArticleAudit, text: str, rank: int, provenance: str, 
     a.original_text = text
     a.source_material_rank = rank
     a.source_material_provenance = provenance
+    a.source_markup_available = stats is not None or "\n\n" in text
     if stats is not None:
         a.original_text_length = int(stats.get("text_length", len(text)))
         a.original_paragraph_count = int(stats.get("paragraph_count", 0))
@@ -364,7 +371,7 @@ def set_source_material(a: ArticleAudit, text: str, rank: int, provenance: str, 
 
 
 def set_translated_candidate_material(a: ArticleAudit, text: str, rank: int, provenance: str) -> bool:
-    if not choose_material(a.translated_candidate_text, a.translated_candidate_rank, text, rank):
+    if (a.material_chain_correlation_id and rank < 1000) or not choose_material(a.translated_candidate_text, a.translated_candidate_rank, text, rank):
         refresh_material_flags(a)
         return False
     a.translated_candidate_text = text
@@ -381,6 +388,7 @@ def set_final_published_material(a: ArticleAudit, text: str, rank: int, provenan
     a.published_text = text
     a.final_published_material_rank = rank
     a.final_published_material_provenance = provenance
+    a.final_markup_available = stats is not None
     if stats is not None:
         a.published_text_length = int(stats.get("text_length", len(text)))
         a.published_paragraph_count = int(stats.get("paragraph_count", 0))
@@ -423,9 +431,11 @@ def merge_item(a: ArticleAudit, item: dict[str, Any], relpath: str) -> tuple[boo
         set_translated_candidate_material(a, candidate, 250, f"translated_candidate_field:{relpath}")
     published = first_text(item, FINAL_PUBLISHED_MATERIAL_KEYS)
     if published:
+        stats = None
         if "<" in published and ">" in published:
-            published = html_stats(published)["text"]
-        published_added = set_final_published_material(a, published, 250, f"explicit_final_field:{relpath}")
+            stats = html_stats(published)
+            published = stats["text"]
+        published_added = set_final_published_material(a, published, 250, f"explicit_final_field:{relpath}", stats)
     a.article_type = a.article_type or str(first(item, "article_type", "type", "kind"))
     a.priority = a.priority or str(first(item, "priority", "priority_label"))
     a.score = a.score or first(item, "score", "quality_score", "news_score")
@@ -646,14 +656,29 @@ def discover(root: Path, hours: int, limit: int | None) -> list[ArticleAudit]:
             chain = resolve_material_chain(root, content_id, index=artifact_index)
             a = articles.setdefault(content_id, ArticleAudit(key=content_id))
             role = chain.get("roles", {})
-            source, candidate = role.get("source_material", {}), role.get("translated_candidate", {})
-            alfred_body, final = role.get("quality_review", {}), role.get("final_published_material", {})
+            a.material_chain_correlation_id = chain.get("correlation_id", "")
+            # A role can be shared by Bob and Alfred. Resolve each producer within
+            # the selected publication instance, never mix bodies across runs.
+            def producer_chain(producer):
+                selected = [row for row in manifest_rows if row.get("producer_agent") == producer
+                            and row.get("correlation_id") == a.material_chain_correlation_id]
+                return resolve_material_chain(root, content_id, index={
+                    "available": True, "rows_by_content_id": {content_id: selected},
+                    "diagnostic_mismatches": []}).get("roles", {})
+            source = role.get("source_material", {})
+            candidate = producer_chain("Bob").get("translated_candidate", {})
+            alfred_roles = producer_chain("Alfred")
+            alfred_body = alfred_roles.get("translated_candidate", {})
+            final = role.get("final_published_material", {})
             if source.get("available"):
                 set_source_material(a, source["text"], 1000, f"canonical_artifact_index:{source['path']}")
-            preferred_candidate = candidate if candidate.get("available") else alfred_body
-            if preferred_candidate.get("available"):
-                set_translated_candidate_material(a, preferred_candidate["text"], 1000,
-                                                  f"canonical_artifact_index:{preferred_candidate['path']}")
+            if candidate.get("available"):
+                set_translated_candidate_material(a, html_stats(candidate["text"])["text"], 1000,
+                                                  f"canonical_artifact_index:{candidate['path']}")
+            if alfred_body.get("available"):
+                a.alfred_approved_text = html_stats(alfred_body["text"])["text"]
+                a.alfred_approved_provenance = f"canonical_artifact_index:{alfred_body['path']}"
+                a.alfred_approved_material_available = bool(a.alfred_approved_text)
             if final.get("available"):
                 set_final_published_material(a, final["text"], 1000,
                                              f"canonical_artifact_index:{final['path']}")
@@ -788,7 +813,8 @@ def discover(root: Path, hours: int, limit: int | None) -> list[ArticleAudit]:
         run_checks(a)
     rows.sort(key=lambda x: (len(x.issues), x.published_text_length), reverse=True)
     out_rows = rows[:limit] if limit else rows
-    discover.last_metadata = {"publication_authority_available": authoritative_keys is not None}
+    discover.last_metadata = {"publication_authority_available": authoritative_keys is not None,
+                              "window_since": since.isoformat(), "window_until": until.isoformat()}
     return out_rows
 
 
@@ -796,11 +822,11 @@ def run_checks(a: ArticleAudit) -> None:
     issues: list[str] = []
     if a.original_text_length >= 800 and a.published_text_length and a.published_text_length < a.original_text_length * 0.45:
         issues.append("published_text_too_short_vs_original")
-    if a.original_paragraph_count >= 5 and a.published_paragraph_count and a.published_paragraph_count <= max(1, a.original_paragraph_count // 2):
+    if a.source_markup_available is not False and a.final_markup_available is not False and a.original_paragraph_count >= 5 and a.published_paragraph_count and a.published_paragraph_count <= max(1, a.original_paragraph_count // 2):
         issues.append("paragraph_count_drop")
     if a.original_text.count('"') >= 4 and a.blockquote_count == 0 and a.published_text.count('"') < a.original_text.count('"') / 2:
         issues.append("quote_count_mismatch")
-    if has_unblocked_long_direct_quote(a.published_text) and a.blockquote_count == 0:
+    if a.final_markup_available is not False and has_unblocked_long_direct_quote(a.published_text) and a.blockquote_count == 0:
         issues.append("blockquote_missing_for_long_quotes")
     text = a.published_text
     if SOURCE_INTRO_RE.search(text): issues.append("source_intro_leaked")
@@ -933,6 +959,8 @@ def audit_coverage(rows: list[ArticleAudit], authority_available: bool = True, d
         "legacy_artifacts_inspected": 0 if authority_available else population_total,
         "source_material_available": sum(1 for a in rows if a.source_material_available),
         "translated_candidate_material_available": sum(1 for a in rows if a.translated_candidate_material_available),
+        "alfred_approved_material_available": sum(1 for a in rows if a.alfred_approved_material_available),
+        "final_markup_available": sum(1 for a in rows if a.final_markup_available is True),
         "final_published_material_available": sum(1 for a in rows if a.final_published_material_available),
         "published_material_available": sum(1 for a in rows if a.published_material_available),
         "comparative_pairs_available": sum(1 for a in rows if a.comparative_pair_available),
@@ -970,7 +998,7 @@ def markdown_report(rows: list[ArticleAudit], hours: int, generated_at: str, aut
     fp = [(a, w) for a in detail_rows for w in a.possible_false_positive_warnings]
     lines += ["", "## 6. Possible false-positive warning candidates", ""]
     lines += [f"- {esc(a.title)}: {render_alfred_warning(w)}" for a, w in fp[:30]] or ["- None detected."]
-    lines += ["", "## 7. Suggested prompt/guardrail refinements", ""]
+    lines += ["", "## 7. Recurring hypotheses for manual review", ""]
     suggestions = {
         "source_intro_leaked": "Add a deterministic strip-list for source boilerplate intros and newsletter/subscription language before translation.",
         "source_promo_leaked": "Strengthen prompt language and post-processing filters against ads, affiliate, merch, app, and promo-code copy.",
@@ -981,9 +1009,9 @@ def markdown_report(rows: list[ArticleAudit], hours: int, generated_at: str, aut
         "betting_odds_article_published": "Consider a hard diagnostic guardrail for sportsbook/odds-only stories unless editorially approved.",
     }
     for issue, text in suggestions.items():
-        if issue in issue_counts:
-            lines.append(f"- {issue}: {text}")
-    if not any(issue in issue_counts for issue in suggestions):
+        if issue_counts.get(issue, 0) >= 3:
+            lines.append(f"- {issue}: hypothesis only; confirm source/stage evidence and false positives before any prompt or guardrail change. {text}")
+    if not any(issue_counts.get(issue, 0) >= 3 for issue in suggestions):
         lines.append("- No recurring deterministic issue exceeded the available-artifact threshold.")
     return "\n".join(lines) + "\n"
 
@@ -992,14 +1020,15 @@ def esc(v: Any) -> str:
     return str(v or "").replace("|", "\\|").replace("\n", " ")[:300]
 
 
-def build_audit(hours: int = 24, limit: int | None = None, output_dir: str | Path | None = None, root: Path = ROOT) -> tuple[dict[str, Any], Path, Path]:
+def build_audit(hours: int = 24, limit: int | None = None, output_dir: str | Path | None = None, root: Path = ROOT, latest_path: Path | None = None) -> tuple[dict[str, Any], Path, Path]:
     rows = discover(root, hours, None)
     detail_rows = rows[:limit] if limit else rows
     metadata = getattr(discover, "last_metadata", {"publication_authority_available": True})
     authority_available = bool(metadata.get("publication_authority_available"))
     generated_at = utc_now().isoformat()
-    payload = {"artifact_marker": "owtv_translation_quality_audit_v1", "generated_at": generated_at, "hours": hours, "count": len(detail_rows), "coverage": audit_coverage(rows, authority_available, len(detail_rows), limit), "articles": [article_payload(a) for a in detail_rows]}
-    latest = root / "state" / "reports" / "owtv_translation_quality_audit_latest.json"
+    payload = {"artifact_marker": "owtv_translation_quality_audit_v1", "schema_version": "owtv_tq1_audit_v1", "generated_at": generated_at, "hours": hours, "count": len(detail_rows), "coverage": audit_coverage(rows, authority_available, len(detail_rows), limit), "articles": [article_payload(a) for a in detail_rows]}
+    payload.update({key: metadata.get(key) for key in ("window_since", "window_until")})
+    latest = latest_path or root / "state" / "reports" / "owtv_translation_quality_audit_latest.json"
     latest.parent.mkdir(parents=True, exist_ok=True)
     latest.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     outdir = Path(output_dir) if output_dir else DEFAULT_REPORTS_DIR

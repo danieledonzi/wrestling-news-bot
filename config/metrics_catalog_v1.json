@@ -4306,6 +4306,286 @@
       "used_by_reports": [],
       "notes": "Latest/retained run evidence exists, but current master-log coverage cannot prove a complete arbitrary window; diagnostics return null with explicit partial availability.",
       "authority_family": "diagnostic_legacy"
+    },
+    {
+      "canonical_name": "translation_quality.publication_population_unique",
+      "description": "Distinct published news content identities from one complete rolling audit.",
+      "domain": "translation_quality",
+      "entity_counted": "articles",
+      "unit": "count",
+      "cardinality": "per code/window or per reason/window as field declares",
+      "authority_level": "contractual",
+      "source_primary": "state/reports/owtv_weekly_quality_patterns_latest.json: publication_population_unique",
+      "source_secondary": [
+        "state/newsroom/canonical_event_ledger.jsonl: publication population",
+        "state/newsroom/canonical_artifact_index.jsonl: retained materials"
+      ],
+      "producer_paths": [
+        "scripts/build_weekly_pattern_report.py",
+        "scripts/translation_warning_analysis.py"
+      ],
+      "consumer_paths": [
+        "send_daily_report.py"
+      ],
+      "formula": "Distinct published news content identities from one complete rolling audit.",
+      "aggregation": "unique article/code diagnostic",
+      "identity_key": "canonical article key + warning code",
+      "time_window": "rolling 168h UTC; one population, never sum daily snapshots",
+      "zero_semantics": "Zero is an observed diagnostic count; inspect report.available for population coverage. Ratio zero requires a nonzero evaluated denominator.",
+      "missing_semantics": "Null for unavailable population/denominator or absent human labels; not evidence of correctness.",
+      "availability": "source_dependent",
+      "schema_version": "owtv_metrics_catalog_v1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
+      "introduced_in": "TQ-1",
+      "status": "diagnostic_only",
+      "legacy_aliases": [],
+      "replacement": null,
+      "used_by_reports": [
+        "weekly_quality_patterns",
+        "daily_report"
+      ],
+      "notes": "Diagnostic only under owtv_tq1_rules_v1; never replaces active canonical counters or semantic editorial authority.",
+      "authority_family": "diagnostic_legacy"
+    },
+    {
+      "canonical_name": "translation_quality.patterns.articles_unique",
+      "description": "Distinct article identities with the warning code.",
+      "domain": "translation_quality",
+      "entity_counted": "articles",
+      "unit": "count",
+      "cardinality": "per code/window or per reason/window as field declares",
+      "authority_level": "contractual",
+      "source_primary": "state/reports/owtv_weekly_quality_patterns_latest.json: patterns.articles_unique",
+      "source_secondary": [
+        "state/newsroom/canonical_event_ledger.jsonl: publication population",
+        "state/newsroom/canonical_artifact_index.jsonl: retained materials"
+      ],
+      "producer_paths": [
+        "scripts/build_weekly_pattern_report.py",
+        "scripts/translation_warning_analysis.py"
+      ],
+      "consumer_paths": [
+        "send_daily_report.py"
+      ],
+      "formula": "Distinct article identities with the warning code.",
+      "aggregation": "unique article/code diagnostic",
+      "identity_key": "canonical article key + warning code",
+      "time_window": "rolling 168h UTC; one population, never sum daily snapshots",
+      "zero_semantics": "Zero is an observed diagnostic count; inspect report.available for population coverage. Ratio zero requires a nonzero evaluated denominator.",
+      "missing_semantics": "Null for unavailable population/denominator or absent human labels; not evidence of correctness.",
+      "availability": "source_dependent",
+      "schema_version": "owtv_metrics_catalog_v1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
+      "introduced_in": "TQ-1",
+      "status": "diagnostic_only",
+      "legacy_aliases": [],
+      "replacement": null,
+      "used_by_reports": [
+        "weekly_quality_patterns",
+        "daily_report"
+      ],
+      "notes": "Diagnostic only under owtv_tq1_rules_v1; never replaces active canonical counters or semantic editorial authority.",
+      "authority_family": "diagnostic_legacy"
+    },
+    {
+      "canonical_name": "translation_quality.patterns.evaluated_articles",
+      "description": "reproduced + not_reproduced at unique article/code grain.",
+      "domain": "translation_quality",
+      "entity_counted": "articles",
+      "unit": "count",
+      "cardinality": "per code/window or per reason/window as field declares",
+      "authority_level": "contractual",
+      "source_primary": "state/reports/owtv_weekly_quality_patterns_latest.json: patterns.evaluated_articles",
+      "source_secondary": [
+        "state/newsroom/canonical_event_ledger.jsonl: publication population",
+        "state/newsroom/canonical_artifact_index.jsonl: retained materials"
+      ],
+      "producer_paths": [
+        "scripts/build_weekly_pattern_report.py",
+        "scripts/translation_warning_analysis.py"
+      ],
+      "consumer_paths": [
+        "send_daily_report.py"
+      ],
+      "formula": "reproduced + not_reproduced at unique article/code grain.",
+      "aggregation": "unique article/code diagnostic",
+      "identity_key": "canonical article key + warning code",
+      "time_window": "rolling 168h UTC; one population, never sum daily snapshots",
+      "zero_semantics": "Zero is an observed diagnostic count; inspect report.available for population coverage. Ratio zero requires a nonzero evaluated denominator.",
+      "missing_semantics": "Null for unavailable population/denominator or absent human labels; not evidence of correctness.",
+      "availability": "source_dependent",
+      "schema_version": "owtv_metrics_catalog_v1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
+      "introduced_in": "TQ-1",
+      "status": "diagnostic_only",
+      "legacy_aliases": [],
+      "replacement": null,
+      "used_by_reports": [
+        "weekly_quality_patterns",
+        "daily_report"
+      ],
+      "notes": "Diagnostic only under owtv_tq1_rules_v1; never replaces active canonical counters or semantic editorial authority.",
+      "authority_family": "diagnostic_legacy"
+    },
+    {
+      "canonical_name": "translation_quality.patterns.reproduction_rate",
+      "description": "reproduced / evaluated_articles; null at zero denominator; local predicate, not semantic-error prevalence.",
+      "domain": "translation_quality",
+      "entity_counted": "articles",
+      "unit": "ratio",
+      "cardinality": "per code/window or per reason/window as field declares",
+      "authority_level": "contractual",
+      "source_primary": "state/reports/owtv_weekly_quality_patterns_latest.json: patterns.reproduction_rate",
+      "source_secondary": [
+        "state/newsroom/canonical_event_ledger.jsonl: publication population",
+        "state/newsroom/canonical_artifact_index.jsonl: retained materials"
+      ],
+      "producer_paths": [
+        "scripts/build_weekly_pattern_report.py",
+        "scripts/translation_warning_analysis.py"
+      ],
+      "consumer_paths": [
+        "send_daily_report.py"
+      ],
+      "formula": "reproduced / evaluated_articles; null at zero denominator; local predicate, not semantic-error prevalence.",
+      "aggregation": "unique article/code diagnostic",
+      "identity_key": "canonical article key + warning code",
+      "time_window": "rolling 168h UTC; one population, never sum daily snapshots",
+      "zero_semantics": "Zero is an observed diagnostic count; inspect report.available for population coverage. Ratio zero requires a nonzero evaluated denominator.",
+      "missing_semantics": "Null for unavailable population/denominator or absent human labels; not evidence of correctness.",
+      "availability": "source_dependent",
+      "schema_version": "owtv_metrics_catalog_v1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
+      "introduced_in": "TQ-1",
+      "status": "diagnostic_only",
+      "legacy_aliases": [],
+      "replacement": null,
+      "used_by_reports": [
+        "weekly_quality_patterns",
+        "daily_report"
+      ],
+      "notes": "Diagnostic only under owtv_tq1_rules_v1; never replaces active canonical counters or semantic editorial authority.",
+      "authority_family": "diagnostic_legacy"
+    },
+    {
+      "canonical_name": "translation_quality.patterns.possible_false_positive_candidates",
+      "description": "Count explicit possible_false_positive diagnostic candidates; not human labels.",
+      "domain": "translation_quality",
+      "entity_counted": "articles",
+      "unit": "count",
+      "cardinality": "per code/window or per reason/window as field declares",
+      "authority_level": "contractual",
+      "source_primary": "state/reports/owtv_weekly_quality_patterns_latest.json: patterns.possible_false_positive_candidates",
+      "source_secondary": [
+        "state/newsroom/canonical_event_ledger.jsonl: publication population",
+        "state/newsroom/canonical_artifact_index.jsonl: retained materials"
+      ],
+      "producer_paths": [
+        "scripts/build_weekly_pattern_report.py",
+        "scripts/translation_warning_analysis.py"
+      ],
+      "consumer_paths": [
+        "send_daily_report.py"
+      ],
+      "formula": "Count explicit possible_false_positive diagnostic candidates; not human labels.",
+      "aggregation": "unique article/code diagnostic",
+      "identity_key": "canonical article key + warning code",
+      "time_window": "rolling 168h UTC; one population, never sum daily snapshots",
+      "zero_semantics": "Zero is an observed diagnostic count; inspect report.available for population coverage. Ratio zero requires a nonzero evaluated denominator.",
+      "missing_semantics": "Null for unavailable population/denominator or absent human labels; not evidence of correctness.",
+      "availability": "source_dependent",
+      "schema_version": "owtv_metrics_catalog_v1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
+      "introduced_in": "TQ-1",
+      "status": "diagnostic_only",
+      "legacy_aliases": [],
+      "replacement": null,
+      "used_by_reports": [
+        "weekly_quality_patterns",
+        "daily_report"
+      ],
+      "notes": "Diagnostic only under owtv_tq1_rules_v1; never replaces active canonical counters or semantic editorial authority.",
+      "authority_family": "diagnostic_legacy"
+    },
+    {
+      "canonical_name": "translation_quality.patterns.confirmed_false_positive_rate",
+      "description": "Always null pending human adjudication; no inferred false-positive rate.",
+      "domain": "translation_quality",
+      "entity_counted": "articles",
+      "unit": "ratio",
+      "cardinality": "per code/window or per reason/window as field declares",
+      "authority_level": "contractual",
+      "source_primary": "state/reports/owtv_weekly_quality_patterns_latest.json: patterns.confirmed_false_positive_rate",
+      "source_secondary": [
+        "state/newsroom/canonical_event_ledger.jsonl: publication population",
+        "state/newsroom/canonical_artifact_index.jsonl: retained materials"
+      ],
+      "producer_paths": [
+        "scripts/build_weekly_pattern_report.py",
+        "scripts/translation_warning_analysis.py"
+      ],
+      "consumer_paths": [
+        "send_daily_report.py"
+      ],
+      "formula": "Always null pending human adjudication; no inferred false-positive rate.",
+      "aggregation": "unique article/code diagnostic",
+      "identity_key": "canonical article key + warning code",
+      "time_window": "rolling 168h UTC; one population, never sum daily snapshots",
+      "zero_semantics": "Zero is an observed diagnostic count; inspect report.available for population coverage. Ratio zero requires a nonzero evaluated denominator.",
+      "missing_semantics": "Null for unavailable population/denominator or absent human labels; not evidence of correctness.",
+      "availability": "source_dependent",
+      "schema_version": "owtv_metrics_catalog_v1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
+      "introduced_in": "TQ-1",
+      "status": "diagnostic_only",
+      "legacy_aliases": [],
+      "replacement": null,
+      "used_by_reports": [
+        "weekly_quality_patterns",
+        "daily_report"
+      ],
+      "notes": "Diagnostic only under owtv_tq1_rules_v1; never replaces active canonical counters or semantic editorial authority.",
+      "authority_family": "diagnostic_legacy"
+    },
+    {
+      "canonical_name": "translation_quality.unavailable_reason_counts",
+      "description": "Count unique article/code investigations by missing text, structure or evaluator reason.",
+      "domain": "translation_quality",
+      "entity_counted": "articles",
+      "unit": "count",
+      "cardinality": "per code/window or per reason/window as field declares",
+      "authority_level": "contractual",
+      "source_primary": "state/reports/owtv_weekly_quality_patterns_latest.json: unavailable_reason_counts",
+      "source_secondary": [
+        "state/newsroom/canonical_event_ledger.jsonl: publication population",
+        "state/newsroom/canonical_artifact_index.jsonl: retained materials"
+      ],
+      "producer_paths": [
+        "scripts/build_weekly_pattern_report.py",
+        "scripts/translation_warning_analysis.py"
+      ],
+      "consumer_paths": [
+        "send_daily_report.py"
+      ],
+      "formula": "Count unique article/code investigations by missing text, structure or evaluator reason.",
+      "aggregation": "unique article/code diagnostic",
+      "identity_key": "canonical article key + warning code",
+      "time_window": "rolling 168h UTC; one population, never sum daily snapshots",
+      "zero_semantics": "Zero is an observed diagnostic count; inspect report.available for population coverage. Ratio zero requires a nonzero evaluated denominator.",
+      "missing_semantics": "Null for unavailable population/denominator or absent human labels; not evidence of correctness.",
+      "availability": "source_dependent",
+      "schema_version": "owtv_metrics_catalog_v1",
+      "policy_version": "v96.4_telemetry_authority_convergence",
+      "introduced_in": "TQ-1",
+      "status": "diagnostic_only",
+      "legacy_aliases": [],
+      "replacement": null,
+      "used_by_reports": [
+        "weekly_quality_patterns",
+        "daily_report"
+      ],
+      "notes": "Diagnostic only under owtv_tq1_rules_v1; never replaces active canonical counters or semantic editorial authority.",
+      "authority_family": "diagnostic_legacy"
     }
   ],
   "authority_families": {

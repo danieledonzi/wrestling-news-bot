@@ -17,6 +17,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from scripts import translation_quality_audit as audit
+from scripts import translation_quality_rules as rules
 
 LATEST_AUDIT = ROOT / "state/reports/owtv_translation_quality_audit_latest.json"
 LATEST_ANALYSIS = ROOT / "state/reports/owtv_translation_warning_analysis_latest.json"
@@ -116,6 +117,11 @@ def investigate_article(article: Dict[str, Any]) -> List[Dict[str, Any]]:
     source_available = bool(article.get("source_material_available", bool(source_text))) and bool(source_text)
     candidate_available = bool(article.get("translated_candidate_material_available", bool(candidate_text))) and bool(candidate_text)
     comparative = bool(article.get("comparative_pair_available", source_available and final_available))
+    normalized_article = dict(article, original_text=source_text, published_text=final_text,
+                              translated_candidate_text=candidate_text,
+                              source_material_available=source_available,
+                              final_published_material_available=final_available,
+                              translated_candidate_material_available=candidate_available)
     results: List[Dict[str, Any]] = []
     rank = {"blocker": 5, "high": 4, "medium": 3, "low": 2, "warning": 1, "technical": 0}
     for code, meta in instances.items():
@@ -126,27 +132,29 @@ def investigate_article(article: Dict[str, Any]) -> List[Dict[str, Any]]:
             status, reason = "possible_false_positive", "The audit explicitly marked this warning as a possible false positive."
         elif code in TECHNICAL_CODES or severity == "technical" or any(token in code for token in ("image", "media")):
             status, reason = "technical", "This is a technical/media-only warning; no editorial conclusion is drawn."
-        elif code in COMPARATIVE_CODES and not comparative:
-            status, reason = "insufficient_material", "Authoritative source and final published material are both required for this comparison."
-        elif code in FINAL_RULES and not final_available:
-            status, reason = "insufficient_material", "Authoritative final published material is unavailable."
-        elif code in FINAL_RULES:
-            matched = _rule_match(code, title, final_text)
-            if matched:
-                material, match = matched
-                evidence_text = title if material == "title" else final_text
-                status, reason = "reproduced", "The existing audit rule directly matches the same available material searched by the audit."
-                evidence.append({"material": material, "excerpt": _excerpt(evidence_text, match)})
-            else:
-                status, reason = "not_reproduced", "The authoritative final material is available and the existing audit rule does not match it."
         else:
-            status, reason = "insufficient_material", "No deterministic local reproduction rule with the required authoritative material is available for this warning."
+            evaluation = rules.evaluate(code, normalized_article, FINAL_RULES)
+            if evaluation.get("missing"):
+                status, reason = "insufficient_material", evaluation["missing"]
+            else:
+                status = "reproduced" if evaluation["matched"] else "not_reproduced"
+                reason = evaluation["reason"]
+                evidence = evaluation["evidence"]
         results.append({
             "article_key": _article_key(article), "title": str(article.get("title") or ""),
             "source_url": str(article.get("source_url") or ""), "wp_link": str(article.get("wp_link") or ""),
             "warning_code": code, "warning_origins": sorted(meta["origins"]), "original_severity": severity,
             "investigation_status": status, "evidence": evidence, "reason": reason,
-            "recommended_action": "Review the cited material manually; this diagnostic does not alter publication state.",
+            "recommended_action": "Review source and stage evidence; a rule match is not a confirmed editorial error.",
+            "policy_version": rules.POLICY_VERSION,
+            "diagnostic_category": "technical" if status == "technical" else (
+                "structural" if code in rules.STRUCTURAL_CODES else "linguistic"),
+            "unavailable_reason": reason if status == "insufficient_material" else None,
+            "stage_trace": rules.stage_trace(code, normalized_article, FINAL_RULES),
+            "semantic_verdict": "not_assessed",
+            "translated_candidate_provenance": str(article.get("translated_candidate_provenance") or ""),
+            "alfred_approved_provenance": str(article.get("alfred_approved_provenance") or ""),
+            "material_chain_correlation_id": str(article.get("material_chain_correlation_id") or ""),
             "source_material_available": source_available, "translated_candidate_material_available": candidate_available,
             "final_published_material_available": final_available, "comparative_pair_available": comparative,
             "source_material_provenance": str(article.get("source_material_provenance") or ""),
@@ -173,12 +181,14 @@ def build_analysis(audit_path: Path, hours: int = 24, now: Optional[datetime] = 
     for status in STATUSES:
         status_counts.setdefault(status, 0)
     return {
-        "schema_version": "v95.16a-1", "generated_at": generated.isoformat(), "hours": hours,
+        "schema_version": "owtv_tq1_analysis_v1", "policy_version": rules.POLICY_VERSION, "generated_at": generated.isoformat(), "hours": hours,
         "source_audit_path": str(audit_path), "source_audit_generated_at": payload.get("generated_at"),
         "total_investigations": len(investigations), "status_counts": dict(sorted(status_counts.items())),
         "severity_counts": dict(Counter(x["original_severity"] for x in investigations)),
         "warning_code_counts": dict(Counter(x["warning_code"] for x in investigations)),
         "articles_with_investigations": len({x["article_key"] for x in investigations}),
+        "unavailable_reason_counts": dict(Counter(x["unavailable_reason"] for x in investigations if x.get("unavailable_reason"))),
+        "source_audit_coverage": payload.get("coverage", {}),
         "investigations": investigations, "warnings": warnings, "errors": errors,
     }
 
@@ -192,7 +202,7 @@ def render_markdown(report: Dict[str, Any]) -> str:
         lines.append("- No warnings to investigate.")
     for item in report["investigations"]:
         evidence = "; ".join("%s: %s" % (x["material"], x["excerpt"]) for x in item["evidence"]) or "none"
-        lines += ["### %s — %s" % (item["title"] or item["article_key"], item["warning_code"]), "- Status: %s" % item["investigation_status"], "- Origins: %s" % ", ".join(item["warning_origins"]), "- Evidence: %s" % evidence, "- Reason: %s" % item["reason"], "- Recommended action: %s" % item["recommended_action"], ""]
+        lines += ["### %s — %s" % (item["title"] or item["article_key"], item["warning_code"]), "- Status: %s" % item["investigation_status"], "- Origins: %s" % ", ".join(item["warning_origins"]), "- Evidence: %s" % evidence, "- Reason: %s" % item["reason"], "- Stage triggers (not causal attribution): %s" % json.dumps(item.get("stage_trace", {}), ensure_ascii=False), "- Recommended action: %s" % item["recommended_action"], ""]
     if report["errors"]:
         lines += ["## Diagnostic errors", ""] + ["- %s" % value for value in report["errors"]]
     return "\n".join(lines) + "\n"
