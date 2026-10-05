@@ -21,6 +21,37 @@ SHOW_NEWS_URGENCY_MARKDOWN_GLOB = "owtv_show_news_urgency_audit_24h_*.md"
 TRANSLATION_QUALITY_BLOCKER_WARNING_CODES = {"untranslated_quote"}
 TRANSLATION_QUALITY_CURRENT_FAILED = False
 SHOW_NEWS_URGENCY_CURRENT_FAILED = False
+WEEKLY_QUALITY_CURRENT_RESULT = (None, None, "not generated in this process")
+
+
+def generate_weekly_quality_patterns() -> tuple[Path | None, Path | None, str | None]:
+    """Refresh rolling patterns through the existing daily reporting entry point."""
+    global WEEKLY_QUALITY_CURRENT_RESULT
+    try:
+        from scripts.build_weekly_pattern_report import generate_outputs
+        outputs = generate_outputs(root=BOT_DIR)
+        payload = json.loads(outputs["latest_json"].read_text(encoding="utf-8"))
+        warning = "; ".join(payload.get("errors", [])) or None
+        WEEKLY_QUALITY_CURRENT_RESULT = (outputs["markdown"], outputs["latest_json"], warning)
+    except Exception as exc:
+        WEEKLY_QUALITY_CURRENT_RESULT = (None, None, f"Weekly quality patterns unavailable: {exc}")
+    return WEEKLY_QUALITY_CURRENT_RESULT
+
+
+def weekly_quality_patterns_body_section() -> str:
+    markdown, path, warning = WEEKLY_QUALITY_CURRENT_RESULT
+    if path is None:
+        return "\nWEEKLY QUALITY PATTERNS (168h)\n- Diagnostic warning: %s\n" % warning
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        return "\nWEEKLY QUALITY PATTERNS (168h)\n- Diagnostic warning: %s\n" % exc
+    if not payload.get("available"):
+        return "\nWEEKLY QUALITY PATTERNS (168h)\n- Not available: %s\n" % (warning or "population incomplete")
+    recurring = [p for p in payload["patterns"] if p["recommended_action"] == "review_pattern"]
+    top = ", ".join("%s:%s" % (p["warning_code"], p["articles_unique"]) for p in recurring[:3]) or "none"
+    return ("\nWEEKLY QUALITY PATTERNS (168h)\n- Unique published news: %s\n"
+            "- Recurring review patterns: %s\n- Rule matches require editorial review.\n") % (payload["publication_population_unique"], top)
 
 
 def generate_translation_quality_audit_24h() -> tuple[Path | None, Path | None, str | None]:
@@ -239,7 +270,7 @@ def translation_warning_analysis_body_section(json_path: Path | None, warning: s
         lines.append("- Diagnostic warning: " + "; ".join(str(value) for value in diagnostic_errors))
     if warning:
         lines.append("- Diagnostic warning: %s" % warning)
-    return "\n".join(lines) + "\n"
+    return "\n".join(lines) + "\n" + weekly_quality_patterns_body_section()
 
 
 def _parse_translation_quality_alfred_warning(warning: Any) -> Any:
@@ -404,6 +435,9 @@ def append_translation_warning_analysis_attachments(attachments: list[Path]) -> 
         if path and path.exists() and path not in attachments:
             attachments.append(path)
             print(f"[WARNING INVESTIGATION] attached {path}")
+    for path in WEEKLY_QUALITY_CURRENT_RESULT[:2]:
+        if path is not None and path.is_file() and path not in attachments:
+            attachments.append(path)
     return attachments
 
 
@@ -432,11 +466,13 @@ def generate_daily_diagnostics_24h() -> dict[str, tuple[Path | None, Path | None
     analysis_result = _analysis_after_audit(audit_result)
     judgment_result = generate_daily_editorial_judgment_24h()
     urgency_result = generate_show_news_urgency_audit_24h()
+    weekly_result = generate_weekly_quality_patterns()
     return {
         "translation_quality_audit": audit_result,
         "translation_warning_analysis": analysis_result,
         "daily_editorial_judgment": judgment_result,
         "show_news_urgency_audit": urgency_result,
+        "weekly_quality_patterns": weekly_result,
     }
 
 

@@ -1,0 +1,10 @@
+[
+  {"id":"ryback_idiom_minimized", "source":"He was ready to step back into the ring.", "final":"È pronto a rimettersi in gioco.", "code":"possible_match_mistranslation", "status":"reproduced", "editorial_label":"requires_context_not_confirmed_error"},
+  {"id":"ryback_statement_minimized", "source":"He never made the comments attributed to him.", "final":"Non ha mai rilasciato quelle dichiarazioni.", "code":"possible_release_mistranslation", "status":"reproduced", "editorial_label":"requires_context_not_confirmed_error"},
+  {"id":"actual_match_calque", "source":"He won the match.", "final":"Ha vinto la partita.", "code":"possible_match_mistranslation", "status":"reproduced", "editorial_label":"synthetic_positive"},
+  {"id":"correct_match", "source":"He won the match.", "final":"Ha vinto il match.", "code":"possible_match_mistranslation", "status":"not_reproduced", "editorial_label":"synthetic_negative"},
+  {"id":"protected_wrestling_terms", "source":"A title shot at the pay-per-view.", "final":"Una title shot al pay-per-view, con un promo nel backstage.", "code":"untranslated_quote_or_residual_english", "status":"not_reproduced", "editorial_label":"synthetic_negative"},
+  {"id":"residual_prose", "source":"The sources told the newsletter of creative plans for the main event.", "final":"The sources told the newsletter of creative plans for the main event.", "code":"untranslated_quote_or_residual_english", "status":"reproduced", "editorial_label":"synthetic_positive"},
+  {"id":"promo_leak_minimized", "source":"Use promo code SAVE for merchandise.", "final":"Use promo code SAVE per il merchandising.", "code":"source_promo_leaked", "status":"reproduced", "editorial_label":"synthetic_positive"},
+  {"id":"normal_promo", "source":"He cut a promo in the ring.", "final":"Ha tenuto un promo sul ring.", "code":"source_promo_leaked", "status":"not_reproduced", "editorial_label":"synthetic_negative"}
+]

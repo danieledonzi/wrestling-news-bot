@@ -1,5 +1,22 @@
 # OWTV canonical metrics catalog — v95.22 A1
 
+## TQ-1 derived quality diagnostics (owtv_tq1_rules_v1)
+
+These are diagnostic_only fields, not replacements for active canonical counters.
+Population comes from the bounded canonical publication ledger through the audit;
+retained texts come from the canonical artifact index. Rule verdicts are derived
+diagnostics. Window: rolling 168h, unique article/code grain, no daily sums.
+
+| Diagnostic field | Formula / unit | Zero / unavailable |
+|---|---|---|
+| publication_population_unique | Distinct published news content identities in one audit; count | Zero only with complete authority; null when population unavailable/truncated |
+| patterns.articles_unique | Distinct article identities with this warning code; count | Observed diagnostic count; inspect report.available before interpreting window coverage |
+| patterns.evaluated_articles | reproduced + not_reproduced; count | Zero means no evaluable cases, not no errors |
+| patterns.reproduction_rate | reproduced / evaluated_articles; ratio | Null when denominator is zero; local rule signal, not error prevalence |
+| patterns.possible_false_positive_candidates | Explicit possible_false_positive cases; count | Candidates, not confirmed labels |
+| patterns.confirmed_false_positive_rate | Requires human adjudication; ratio | Null until labeled evidence exists |
+| unavailable_reason_counts | Cases by missing text, structure or evaluator; count | Separate data absence from unsupported evaluation |
+
 ## 1. General contract
 
 This measurement-only contract inventories the semantics that already exist; it does not change newsroom decisions, prompts, routing, scoring, thresholds, retries, publishing, scheduling, state, retention, or the v95.21.1 pair matrix. The normative machine-readable representation is `config/metrics_catalog_v1.json` (`owtv_metrics_catalog_v1`, policy `v96.4_telemetry_authority_convergence`). The frozen v95.19 names and meanings remain intact. A dotted name identifies a semantic metric, not every numeric runtime field.
@@ -136,6 +153,14 @@ These rows expose real signals but not a complete authoritative editorial-window
 | `editorial_director_shadow.logical_requests` | partially_available | Authoritative canonical event grain; the Gemini-only diagnostics reader returns null until an existing canonical-event input is joined. |
 | `editorial_director_shadow.cost_per_logical_request` | partially_available | Gemini-only diagnostics returns null because authoritative logical-request denominator requires the canonical event ledger. |
 | `editorial_director_shadow.bound_status` | partially_available | Latest/retained run evidence exists, but current master-log coverage cannot prove a complete arbitrary window; diagnostics return null with explicit partial availability. |
+
+| `translation_quality.publication_population_unique` | source_dependent | Distinct published news content identities from one complete rolling audit. |
+| `translation_quality.patterns.articles_unique` | source_dependent | Distinct article identities with the warning code. |
+| `translation_quality.patterns.evaluated_articles` | source_dependent | reproduced + not_reproduced at unique article/code grain. |
+| `translation_quality.patterns.reproduction_rate` | source_dependent | reproduced / evaluated_articles; null at zero denominator; local predicate, not semantic-error prevalence. |
+| `translation_quality.patterns.possible_false_positive_candidates` | source_dependent | Count explicit possible_false_positive diagnostic candidates; not human labels. |
+| `translation_quality.patterns.confirmed_false_positive_rate` | source_dependent | Always null pending human adjudication; no inferred false-positive rate. |
+| `translation_quality.unavailable_reason_counts` | source_dependent | Count unique article/code investigations by missing text, structure or evaluator reason. |
 
 ## 6. Planned metrics
 
