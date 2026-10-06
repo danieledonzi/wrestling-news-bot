@@ -360,7 +360,7 @@ def test_active_flag_is_separate_and_defaults_off():
 
 
 def test_active_provider_policy_contains_no_shadow_authority_language():
-    policy = active.POLICY_PATH.read_text().lower()
+    policy = active.POLICY_PATH.read_text(encoding="utf-8").lower()
     forbidden = ("policy v2.1", "non-binding ed-1.1", "non-binding diagnostic evidence",
                  "does not alter production", "diagnostic action")
     assert not any(term in policy for term in forbidden)
@@ -788,7 +788,7 @@ def test_duplicate_evidence_cannot_cross_relation_endpoints():
 def test_case_b_policy_schema_and_no_match_survival(monkeypatch):
     import json
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
-    policy = active.POLICY_PATH.read_text().casefold()
+    policy = active.POLICY_PATH.read_text(encoding="utf-8").casefold()
     assert "reaction, criticism, comment, response, controversy, consequence, or follow-up" in policy
     assert "cause, background, or" in policy and "central new" in policy
     schema = json.loads(active.RELATION_SCHEMA_PATH.read_text())
@@ -1325,7 +1325,7 @@ def test_legacy_routing_marker_memory_is_not_binding(monkeypatch, tmp_path):
 
 
 def test_policy_keeps_central_fact_negative_controls_explicit():
-    policy = active.POLICY_PATH.read_text().lower()
+    policy = active.POLICY_PATH.read_text(encoding="utf-8").lower()
     assert "title change" in policy and "title retention" in policy
     assert "mentioned as background is not a death story" in policy
     assert "weak social reactions" in policy
