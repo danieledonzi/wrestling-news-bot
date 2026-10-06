@@ -52,69 +52,41 @@ def test_configured_ple_identity_flows_from_massy_to_director_projection(monkeyp
     for name in ("SOFTPOOL_FILE", "HARD_SKIP_FILE", "MENZO_DECISIONS_FILE", "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE"):
         monkeypatch.setattr(menzo, name, tmp_path / f"{name}.json")
     projected = active.project(snapshot, {"output": {"candidates": [{
-        "candidate_id": cid, "editorial_class": "SHOULD_PUBLISH", "recommended_action": "DEFER",
+        "candidate_id": cid, "editorial_class": "SHOULD_PUBLISH", "recommended_action": "SELECT",
         "category": "WWE", "story_core": "Injury at SummerSlam"}], "relations": []}})
     assert projected["selected"][0]["special_event_match"]["event_key"] == "wwe_summerslam_2026"
-    assert projected["selected"][0]["scheduling_override"]["reason"] == "show_news_urgency_pre_report"
+    assert projected["selected"][0]["editorial_director"]["recommended_action"] == "SELECT"
+    assert "scheduling_override" not in projected["selected"][0]
 
 
-def test_expired_or_outranked_softpool_show_news_is_not_promoted(monkeypatch, tmp_path):
-    base = {
-        "source": "feed",
-        "summary": "fact",
-        "show_report_id": "aew_collision",
-        "from_softpool": True,
-    }
+def test_soft_show_news_uses_ed3_pool_not_local_urgency(monkeypatch, tmp_path):
     snapshot = shadow.capture_opportunity(
-        {"news_candidates_for_menzo": []},
-        run_id="run",
-        observation_timestamp="now",
-        published_news_today_local=0,
-        history=[],
-    )
-    snapshot["remaining_slots"] = 2
-    snapshot["candidates"] = []
-    snapshot["_active_bob_capacity_metadata"] = {}
-
-    for index, extra in enumerate((
-        {"softpool_added_at": "2000-01-01T00:00:00+00:00"},
-        {"softpool_deferrals": menzo.SOFTPOOL_OUTRANKED_DEFERRALS},
-    )):
-        row = dict(base, title=f"Softpool {index}", url=f"https://example.test/soft-{index}", **extra)
-        cid = f"soft-{index}"
-        snapshot["candidates"].append({"candidate_id": cid, **row})
-        snapshot["_active_bob_capacity_metadata"][cid] = row
-
-    for name in ("SOFTPOOL_FILE", "HARD_SKIP_FILE", "MENZO_DECISIONS_FILE", "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE"):
+        {"news_candidates_for_menzo": []}, run_id="run",
+        observation_timestamp="2026-10-07T07:00:00+00:00",
+        published_news_today_local=0, history=[])
+    snapshot["remaining_slots"] = 30
+    snapshot["candidates"] = [{
+        "candidate_id": "soft-0", "source": "feed", "title": "Soft Collision reaction",
+        "url": "https://example.test/soft-0", "summary": "reaction",
+    }]
+    snapshot["_active_bob_capacity_metadata"] = {
+        "soft-0": {"show_report_id": "aew_collision", "corresponding_report_published": False}
+    }
+    for name in ("SOFTPOOL_FILE", "HARD_SKIP_FILE", "MENZO_DECISIONS_FILE",
+                 "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE"):
         monkeypatch.setattr(menzo, name, tmp_path / f"{name}.json")
 
-    projected = active.project(snapshot, {"output": {
-        "candidates": [
-            {
-                "candidate_id": "soft-0",
-                "editorial_class": "PUBLISHABLE_SOFT",
-                "recommended_action": "DEFER",
-                "category": "AEW",
-                "story_core": "Old Collision item",
-            },
-            {
-                "candidate_id": "soft-1",
-                "editorial_class": "PUBLISHABLE_SOFT",
-                "recommended_action": "DEFER",
-                "category": "AEW",
-                "story_core": "Repeatedly outranked Collision item",
-            },
-        ],
-        "relations": [],
-    }})
+    projected = active.project(snapshot, {"output": {"candidates": [{
+        "candidate_id": "soft-0", "editorial_class": "PUBLISHABLE_SOFT",
+        "recommended_action": "DEFER", "category": "AEW",
+        "story_core": "A secondary Collision reaction",
+    }], "relations": []}})
 
     assert projected["selected"] == []
-    assert projected["pending"] == []
-    assert {item["reason"] for item in projected["skipped"]} == {
-        "softpool_expired_not_fresh",
-        "softpool_repeatedly_outranked",
-    }
-    assert projected["postprocess"]["show_news_urgency_promoted"] == 0
+    assert len(projected["pending"]) == 1
+    assert projected["pending"][0]["soft_board"]["disposition"] == "MORNING_HOLD"
+    assert projected["pending"][0]["soft_board_review_count"] == 0
+    assert "scheduling_override" not in projected["pending"][0]
 
 
 def test_fresh_runtime_registry_rehydrates_missing_curated_timezone(monkeypatch, tmp_path):
@@ -215,51 +187,31 @@ def test_rome_calendar_day_not_rolling_24_hours_and_reports_excluded():
     assert published_news_today_local(records, now=now) == 1
 
 
-def test_active_projection_keeps_urgency_overflow_pending_at_bob_capacity(monkeypatch, tmp_path):
-    monkeypatch.setattr(bob, "report_was_published_or_attempted", lambda: False)
+def test_active_projection_keeps_all_should_for_downstream_capacity(monkeypatch, tmp_path):
     snapshot = shadow.capture_opportunity(
-        {"news_candidates_for_menzo": []},
-        run_id="run",
-        observation_timestamp="now",
-        published_news_today_local=0,
-        history=[],
-    )
+        {"news_candidates_for_menzo": []}, run_id="run",
+        observation_timestamp="2026-10-07T12:00:00+00:00",
+        published_news_today_local=0, history=[])
     snapshot["remaining_slots"] = 30
     snapshot["candidates"] = []
     snapshot["_active_bob_capacity_metadata"] = {}
     decisions = []
     for index in range(6):
-        cid = f"urgent-{index}"
-        row = {
-            "candidate_id": cid,
-            "source": "feed",
-            "title": f"Urgent {index}",
-            "url": f"https://example.test/urgent-{index}",
-            "summary": "fact",
-            "show_report_id": "aew_dynamite",
-            "corresponding_report_published": False,
-        }
+        cid = f"strong-{index}"
+        row = {"candidate_id": cid, "source": "feed", "title": f"Strong {index}",
+               "url": f"https://example.test/strong-{index}", "summary": "fact"}
         snapshot["candidates"].append(row)
-        snapshot["_active_bob_capacity_metadata"][cid] = {
-            "show_report_id": "aew_dynamite",
-            "corresponding_report_published": False,
-        }
         decisions.append({
-            "candidate_id": cid,
-            "editorial_class": "SHOULD_PUBLISH",
-            "recommended_action": "DEFER",
-            "category": "AEW",
-            "story_core": f"Urgent {index}",
+            "candidate_id": cid, "editorial_class": "SHOULD_PUBLISH",
+            "recommended_action": "SELECT", "category": "AEW", "story_core": f"Strong {index}",
         })
-
-    for name in ("SOFTPOOL_FILE", "HARD_SKIP_FILE", "MENZO_DECISIONS_FILE", "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE"):
+    for name in ("SOFTPOOL_FILE", "HARD_SKIP_FILE", "MENZO_DECISIONS_FILE",
+                 "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE"):
         monkeypatch.setattr(menzo, name, tmp_path / f"{name}.json")
 
     projected = active.project(snapshot, {"output": {"candidates": decisions, "relations": []}})
-
-    assert len(projected["selected"]) == 5
-    assert len(projected["pending"]) == 1
-    assert projected["postprocess"]["show_news_urgency_promoted"] == 5
+    assert len(projected["selected"]) == 6
+    assert projected["pending"] == []
 
 
 def test_ceiling_and_urgency_share_available_slots_in_director_order():
@@ -289,7 +241,7 @@ def test_all_weekly_reports_publish_at_0730():
     assert {report["publish_after"] for report in config["reports"]} == {"07:30"}
 
 
-def test_publisher_hard_ceiling_attempts_no_news_at_thirty(monkeypatch):
+def test_publisher_ceiling_is_soft_only_at_thirty(monkeypatch):
     monkeypatch.setattr(publisher, "wp_ready", lambda: (True, "ok"))
     monkeypatch.setattr(publisher, "publisher_duplicate_safety_filter", lambda articles, history: (articles, []))
     monkeypatch.setattr(publisher, "load_json", lambda path, default: (
@@ -300,19 +252,20 @@ def test_publisher_hard_ceiling_attempts_no_news_at_thirty(monkeypatch):
         "fromisoformat": staticmethod(datetime.fromisoformat),
     }))
     calls = []
-    monkeypatch.setattr(publisher, "publish_article", lambda *args: calls.append(args) or {"status": "published"})
+    monkeypatch.setattr(publisher, "publish_article", lambda article, *_args:
+                        calls.append(article["source_url"]) or {"status": "published"})
     monkeypatch.setattr(publisher, "write_json", lambda *args: None)
-    provenance = {"source_url": "https://example.test/new", "editorial_director": {
-        "editorial_class": "SHOULD_PUBLISH", "recommended_action": "DEFER"},
-        "scheduling_override": {"reason": "show_news_urgency_pre_report"}}
-    result = publisher.run_publisher({"approved_articles": [provenance]})
-    assert calls == []
+    strong = {"source_url": "https://example.test/should", "editorial_director": {
+        "editorial_class": "SHOULD_PUBLISH", "recommended_action": "SELECT"}}
+    soft_item = {"source_url": "https://example.test/soft", "editorial_director": {
+        "editorial_class": "PUBLISHABLE_SOFT", "recommended_action": "DEFER"},
+        "soft_board": {"disposition": "SOFT_MUST"}}
+    result = publisher.run_publisher({"approved_articles": [soft_item, strong]})
+    assert calls == ["https://example.test/should"]
     assert result["input"]["published_news_today_local"] == 30
     assert result["handoff"]["skipped_capacity"] == 1
-    blocked = result["skipped_approved_articles"][0]
-    assert blocked["status"] == "skipped_capacity"
-    assert blocked["editorial_director"] == provenance["editorial_director"]
-    assert blocked["scheduling_override"] == provenance["scheduling_override"]
+    assert result["skipped_approved_articles"][0]["source_url"] == "https://example.test/soft"
+    assert result["skipped_approved_articles"][0]["reason"] == "daily_news_ceiling:30_soft_only"
 
 
 
@@ -528,12 +481,12 @@ def test_same_run_weekly_report_publication_disables_urgency(monkeypatch, tmp_pa
     projected = active.project(snapshot, {"output": {"candidates": [{
         "candidate_id": cid,
         "editorial_class": "SHOULD_PUBLISH",
-        "recommended_action": "DEFER",
+        "recommended_action": "SELECT",
         "category": "AEW",
         "story_core": "Standalone Dynamite development",
     }], "relations": []}})
 
-    assert projected["selected"] == []
-    assert len(projected["pending"]) == 1
-    assert projected["pending"][0]["editorial_director"]["recommended_action"] == "DEFER"
-    assert "scheduling_override" not in projected["pending"][0]
+    assert len(projected["selected"]) == 1
+    assert projected["pending"] == []
+    assert projected["selected"][0]["editorial_director"]["recommended_action"] == "SELECT"
+    assert "scheduling_override" not in projected["selected"][0]
