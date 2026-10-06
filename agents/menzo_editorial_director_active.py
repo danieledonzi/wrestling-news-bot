@@ -144,13 +144,23 @@ def prepare_snapshot(snapshot: dict[str, Any]) -> dict[str, Any]:
 
 
 def active_provider_input(snapshot: Mapping[str, Any]) -> dict[str, Any]:
-    """Single canonical ED-2 provider projection used by bounds, digest and prompt."""
+    """Canonical Active projection used by duplicate phases and input bounds."""
     provider_data = shadow.provider_input(snapshot)
     provider_data["publication_context"].update(
         downstream_capacity_hint=snapshot.get("downstream_capacity"),
         downstream_capacity_hint_reason=snapshot.get("downstream_capacity_reason"),
         remaining_slots=snapshot.get("remaining_slots"),
         remaining_news_slots_today=snapshot.get("remaining_slots"))
+    return provider_data
+
+
+def primary_provider_input(snapshot: Mapping[str, Any]) -> dict[str, Any]:
+    """Intrinsic classification input: deliberately hide pacing/day-load signals."""
+    provider_data = active_provider_input(snapshot)
+    provider_data["publication_context"] = {
+        "classification_contract": "intrinsic_editorial_value_only",
+        "day_load_must_not_change_primary_class": True,
+    }
     return provider_data
 
 
@@ -173,50 +183,39 @@ def _validate_active(value: Any, snapshot: Mapping[str, Any]):
     output, failures, telemetry = shadow.canonicalize_output(value, snapshot)
     if failures or output is None:
         return None, failures, telemetry
-    refs, relations = shadow.short_ref_maps(snapshot)
+    refs, _relations = shadow.short_ref_maps(snapshot)
     canonical_by_id = {row["candidate_id"]: row for row in output["candidates"]}
-    actions: dict[str, str | None] = {}
-    classes: dict[str, str | None] = {}
+    required_action = {
+        "MUST_PUBLISH": "SELECT",
+        "SHOULD_PUBLISH": "SELECT",
+        "PUBLISHABLE_SOFT": "DEFER",
+        "SKIP": "SKIP",
+    }
     for ref, candidate in refs.items():
         canonical = canonical_by_id.get(candidate["candidate_id"], {})
+        cls = canonical.get("editorial_class")
         action = canonical.get("recommended_action")
         if action not in shadow.ACTIONS:
-            failures.append({"family": "recommended_action", "ref": ref, "detail": "mandatory_active_field"})
-        actions[candidate["candidate_id"]] = action
-        classes[candidate["candidate_id"]] = canonical.get("editorial_class")
-        allowed = {"MUST_PUBLISH": {"SELECT"}, "SHOULD_PUBLISH": {"SELECT", "DEFER"},
-                   "PUBLISHABLE_SOFT": {"SELECT", "DEFER"}, "SKIP": {"SKIP"}}
-        if canonical.get("editorial_class") in allowed and action not in allowed[canonical["editorial_class"]]:
+            failures.append({"family": "recommended_action", "ref": ref,
+                             "detail": "mandatory_active_field"})
+            continue
+        expected = required_action.get(cls)
+        if expected is not None and action != expected:
             failures.append({"family": "class_action_incompatibility", "ref": ref,
-                             "editorial_class": canonical.get("editorial_class"), "recommended_action": action})
-    selected = sum(action == "SELECT" for action in actions.values())
-    must_selected = sum(actions[cid] == "SELECT" and classes[cid] == "MUST_PUBLISH" for cid in actions)
-    ordinary_selected = selected - must_selected
-    if ordinary_selected > int(snapshot.get("remaining_slots", 0)):
-        failures.append({"family": "publication_capacity", "selected_ordinary": ordinary_selected,
-                         "remaining_slots": int(snapshot.get("remaining_slots", 0))})
-    ordinary_candidates = [_capacity_candidate(snapshot, candidate) for candidate in refs.values()
-                           if actions.get(candidate["candidate_id"]) == "SELECT" and
-                           classes.get(candidate["candidate_id"]) != "MUST_PUBLISH"]
-    from agents.bob import dynamic_article_capacity
-    ordinary_capacity, capacity_reason = dynamic_article_capacity(
-        {"selected": ordinary_candidates}, ordinary_candidates)
-    if ordinary_selected > ordinary_capacity:
-        failures.append({"family": "downstream_capacity", "ordinary_selected": ordinary_selected,
-                         "ordinary_capacity": ordinary_capacity, "must_selected": must_selected,
-                         "capacity_reason": capacity_reason})
+                             "editorial_class": cls, "recommended_action": action,
+                             "required_action": expected})
     if any(row.get("detail") == "skip_invariant_overridden" for row in telemetry):
-        failures.append({"family": "skip_action_invariant", "detail": "active_semantic_rewrite_forbidden"})
+        failures.append({"family": "skip_action_invariant",
+                         "detail": "active_semantic_rewrite_forbidden"})
     if failures:
         return None, failures, telemetry
     output["schema_version"] = SCHEMA_VERSION
     output["policy_version"] = POLICY_VERSION
     return output, [], telemetry
 
-
 def _prompt(snapshot: Mapping[str, Any], failures: list[dict[str, Any]] | None = None) -> str:
     policy = POLICY_PATH.read_text(encoding="utf-8")
-    provider_data = active_provider_input(snapshot)
+    provider_data = primary_provider_input(snapshot)
     prompt = (f"ACTIVE_POLICY_VERSION={POLICY_VERSION}\nACTIVE_POLICY_SHA256={hashlib.sha256(policy.encode()).hexdigest()}\n"
               f"<ACTIVE_POLICY>\n{policy}\n</ACTIVE_POLICY>\nReturn only JSON. Evaluate every candidate and authorized relation once. "
               "Candidate order expresses preference within class. INPUT=" +
@@ -900,13 +899,13 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
         prepare_snapshot(snapshot)
     base = {"status": "failed", "schema_version": SCHEMA_VERSION, "policy_version": POLICY_VERSION,
             "observed": copy.deepcopy(snapshot.get("observed")), "limit_status": snapshot.get("limit_status"),
-            "attempts": 0, "validation_attempts": []}
+            "attempts": 0, "validation_attempts": [], "duplicate_clearance_complete": False}
     stored_pairs: set[str] = set()
     if snapshot.get("limit_status") in {"projection_failed", "exceeded"}:
         status = "PROJECTION_FAILED" if snapshot.get("limit_status") == "projection_failed" else "OVERSIZE_NOT_EVALUATED"
         return {**base, "status": status, "fallback_reason": status}
     if not snapshot.get("candidates"):
-        return {**base, "status": "VALIDATED", "attempts": 0,
+        return {**base, "status": "VALIDATED", "attempts": 0, "duplicate_clearance_complete": True,
                 "output": {"schema_version": SCHEMA_VERSION, "policy_version": POLICY_VERSION,
                            "candidates": [], "relations": []}, "validation_errors": []}
     schema = json.loads(SCHEMA_PATH.read_text())
@@ -1024,6 +1023,7 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                                    snapshot.get("duplicate_gate_relations", []))},
                     "validation_errors": []}
     if not has_relations:
+        base["duplicate_clearance_complete"] = True
         request = OperationalAIRequest("Menzo", "editorial_director_active",
             reason_code="editorial_director_active")
     try:
@@ -1257,6 +1257,7 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
         final_relations = [copy.deepcopy(cached_relations.get(str(row["pair_id"])) or
                                         new_by_pair[str(row["pair_id"])]) for row in authorized]
         _apply_duplicate_gate(snapshot, final_relations)
+        base["duplicate_clearance_complete"] = True
         _store_ordinary_pairs(cache, materials, relations, base, stored_pairs)
         if not snapshot.get("candidates"):
             return {**base, "status": "VALIDATED",
@@ -1353,34 +1354,12 @@ def project(snapshot: Mapping[str, Any], result: Mapping[str, Any]) -> dict[str,
                     decision_authority="semantic_duplicate_gate",
                     reason=f"semantic_{scope}_duplicate")
         projected["skipped"].append(item)
-    # Reuse legacy bounded reconsideration only for candidates the Director has
-    # just deferred again. A recovered SELECT remains authoritative. Apply decay
-    # before show-news urgency so expired or repeatedly outranked soft-pool items
-    # cannot bypass those guards merely because they carry show identity.
-    from agents.menzo_policy_v93_15 import apply_softpool_decay
-    decay_view = {"selected": [], "pending": projected["pending"], "skipped": []}
-    apply_softpool_decay(decay_view)
-    projected["pending"] = decay_view["pending"]
-    projected["skipped"].extend(decay_view["skipped"])
-    projected["postprocess"] = decay_view.get("postprocess", {})
-    from agents.bob import dynamic_article_capacity
-    current_ordinary = [
-        item for item in projected["selected"]
-        if not (
-            isinstance(item.get("editorial_director"), dict)
-            and item["editorial_director"].get("editorial_class") == "MUST_PUBLISH"
-        )
-    ]
-    ordinary_capacity, _capacity_reason = dynamic_article_capacity(
-        {"selected": current_ordinary}, current_ordinary)
-    residual_bob_capacity = max(0, ordinary_capacity - len(current_ordinary))
-    from agents.news_scheduling import apply_show_news_urgency
-    promoted = apply_show_news_urgency(
-        projected,
-        remaining_slots_today=int(snapshot.get("remaining_slots", 0)),
-        max_promotions=residual_bob_capacity,
-    )
-    projected["postprocess"]["show_news_urgency_promoted"] = promoted
+    # ED-3 owns soft reconsideration. Primary SOFT is always DEFER and cannot
+    # be promoted by legacy show-urgency or legacy score/deferral decay.
+    projected["postprocess"] = {}
+    from agents.menzo_soft_board import apply as apply_soft_board
+    apply_soft_board(projected, snapshot)
+    projected["postprocess"]["show_news_urgency_promoted"] = 0
     projected["relations"] = copy.deepcopy(result["output"]["relations"])
     projected["handoff"] = {"to_bob_or_v92": len(projected["selected"]), "pending": len(projected["pending"]),
                              "skipped": len(projected["skipped"]), "decision_authority": "editorial_director"}
