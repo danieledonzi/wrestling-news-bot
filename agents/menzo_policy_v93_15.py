@@ -3586,6 +3586,9 @@ def save_hard_skips(result: dict[str, Any]) -> None:
             "decision_authority": authority or "legacy_menzo",
             "editorial_class": editorial.get("editorial_class"),
             "article_type": item.get("article_type"),
+            "soft_board_content_fingerprint": (
+                item.get("soft_board_content_fingerprint") if authority == "soft_board" else None
+            ),
             "added_at": now,
             "expires_after_hours": HARD_SKIP_TTL_HOURS,
         }
