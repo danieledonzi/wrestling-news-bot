@@ -364,7 +364,9 @@ def test_active_provider_policy_contains_no_shadow_authority_language():
     forbidden = ("policy v2.1", "non-binding ed-1.1", "non-binding diagnostic evidence",
                  "does not alter production", "diagnostic action")
     assert not any(term in policy for term in forbidden)
-    assert "mandatory and authoritative" in policy and "remaining_slots" in policy
+    assert "duplicate beats must" in policy
+    assert "primary classification receives no day-pacing context" in policy
+    assert "remaining_slots" not in policy
 
 
 def test_valid_active_result_projects_jasper_fixture_without_legacy_scoring(monkeypatch, tmp_path):
@@ -1162,8 +1164,8 @@ def test_gate_eliminates_all_without_creating_classification_request(monkeypatch
 
 
 def test_class_action_matrix_is_a_validator_invariant():
-    allowed = {"MUST_PUBLISH": {"SELECT"}, "SHOULD_PUBLISH": {"SELECT", "DEFER"},
-               "PUBLISHABLE_SOFT": {"SELECT", "DEFER"}, "SKIP": {"SKIP"}}
+    allowed = {"MUST_PUBLISH": {"SELECT"}, "SHOULD_PUBLISH": {"SELECT"},
+               "PUBLISHABLE_SOFT": {"DEFER"}, "SKIP": {"SKIP"}}
     for editorial_class, valid_actions in allowed.items():
         for action in ("SELECT", "DEFER", "SKIP"):
             s = snapshot(1); out = response(s, (action,))
@@ -1179,7 +1181,9 @@ def test_active_contract_uses_canonicalized_enum_values(monkeypatch):
         ("must_publish", "DEFER", False, "class_action_incompatibility"),
         ("must_publish", "SKIP", False, "class_action_incompatibility"),
         ("must_publish", "select", True, None),
-        ("should_publish", "SKIP", False, "class_action_incompatibility"),
+        ("should_publish", "DEFER", False, "class_action_incompatibility"),
+        ("should_publish", "select", True, None),
+        ("publishable_soft", "SELECT", False, "class_action_incompatibility"),
         ("publishable_soft", "defer", True, None),
         ("skip", "SELECT", False, "skip_action_invariant"),
     ]
@@ -1212,7 +1216,7 @@ def test_preclassification_capacity_hint_is_conservative(monkeypatch):
     assert (raw_post_show_pool["downstream_capacity"],
             raw_post_show_pool["downstream_capacity_reason"]) == (5, "normal")
     provider_input = active.active_provider_input(raw_post_show_pool)
-    assert provider_input["publication_context"]["downstream_capacity_hint"] == 5
+    assert "publication_context" not in provider_input
 
     monkeypatch.setattr(bob, "report_was_published_or_attempted", lambda: True)
     report_run = make_snapshot(3, 3)
@@ -1362,74 +1366,20 @@ def test_deterministic_exact_skip_is_persisted_to_existing_hard_memory(monkeypat
     assert memory[0]["reason"] == "exact_duplicate"
 
 
-def test_active_defer_uses_bounded_softpool_decay_without_overriding_select(monkeypatch, tmp_path):
-    from datetime import datetime, timezone
-    def project_action(action, deferrals, name):
-        row = {"source": "feed", "title": f"Candidate {name}", "summary": "fact",
-               "url": f"https://decay.test/{name}", "from_softpool": True,
-               "softpool_added_at": datetime.now(timezone.utc).isoformat(),
-               "softpool_deferrals": deferrals, "decision_authority": "editorial_director",
-               "editorial_director": {"recommended_action": "DEFER"}}
-        s = shadow.capture_opportunity({"news_candidates_for_menzo": [row]}, run_id="run",
-            observation_timestamp="now", publisher_count_24h=0, history=[])
-        result = active.evaluate(s, provider=lambda *_: response(s, (action,)))
-        root = tmp_path / name
-        for field in ("SOFTPOOL_FILE", "HARD_SKIP_FILE", "MENZO_DECISIONS_FILE",
-                      "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE"):
-            monkeypatch.setattr(menzo, field, root / f"{field}.json")
-        menzo.write_json(menzo.SOFTPOOL_FILE, {"items": [row]})
-        projected = active.project(s, result)
-        return (projected, menzo.load_json(menzo.SOFTPOOL_FILE, {"items": []})["items"],
-                menzo.load_json(menzo.HARD_SKIP_FILE, {"items": []})["items"])
-
-    below, below_pool, below_memory = project_action(
-        "DEFER", menzo.SOFTPOOL_OUTRANKED_DEFERRALS - 1, "below")
-    assert len(below["pending"]) == 1 and not below["skipped"]
-    assert below_pool[0]["softpool_deferrals"] == menzo.SOFTPOOL_OUTRANKED_DEFERRALS
-    assert below_memory == []
-
-    bounded, bounded_pool, bounded_memory = project_action(
-        "DEFER", menzo.SOFTPOOL_OUTRANKED_DEFERRALS, "bounded")
-    assert not bounded["pending"] and not bounded_pool and len(bounded["skipped"]) == 1
-    ended = bounded["skipped"][0]
-    assert ended["editorial_director"]["recommended_action"] == "DEFER"
-    assert ended["editorial_director"]["editorial_class"] == "PUBLISHABLE_SOFT"
-    assert ended["decision_authority"] == "softpool_decay"
-    assert ended["menzo_policy"]["softpool_repeatedly_outranked"] is True
-    assert bounded_memory[0]["reason"] == "softpool_repeatedly_outranked"
-    assert bounded_memory[0]["decision_authority"] == "softpool_decay"
-    assert bounded["handoff"]["pending"] == 0 and bounded["handoff"]["skipped"] == 1
-
-    selected, selected_pool, _ = project_action("SELECT", menzo.SOFTPOOL_OUTRANKED_DEFERRALS, "selected")
-    assert len(selected["selected"]) == 1 and not selected["skipped"] and not selected_pool
-    skipped, skipped_pool, skipped_memory = project_action(
-        "SKIP", menzo.SOFTPOOL_OUTRANKED_DEFERRALS, "skipped")
-    assert len(skipped["skipped"]) == 1 and not skipped["pending"] and not skipped_pool
-    assert skipped_memory[0]["reason"] == "editorial_class_skip"
-
-
-def test_active_defer_expiry_persists_binding_softpool_decay(monkeypatch, tmp_path):
-    from datetime import datetime, timedelta, timezone
-    from agents import massy_policy_v93_24 as massy
-    row = {"source": "feed", "title": "Expired candidate", "summary": "fact",
-           "url": "https://decay.test/expired", "from_softpool": True,
-           "softpool_added_at": (datetime.now(timezone.utc) - timedelta(
-               hours=menzo.SOFTNEWS_TTL_HOURS + 1)).isoformat(), "softpool_deferrals": 0}
+def test_active_soft_defer_is_owned_by_ed3_soft_board(monkeypatch, tmp_path):
+    row = {"source": "feed", "title": "Soft candidate", "summary": "fact",
+           "url": "https://decay.test/soft"}
     s = shadow.capture_opportunity({"news_candidates_for_menzo": [row]}, run_id="run",
-        observation_timestamp="now", publisher_count_24h=0, history=[])
+        observation_timestamp="2026-10-07T07:00:00+00:00", published_news_today_local=0, history=[])
     result = active.evaluate(s, provider=lambda *_: response(s, ("DEFER",)))
     for field in ("SOFTPOOL_FILE", "HARD_SKIP_FILE", "MENZO_DECISIONS_FILE",
                   "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE"):
         monkeypatch.setattr(menzo, field, tmp_path / f"{field}.json")
     projected = active.project(s, result)
-    ended = projected["skipped"][0]
-    assert ended["reason"] == "softpool_expired_not_fresh"
-    assert ended["decision_authority"] == "softpool_decay"
-    assert ended["editorial_director"]["editorial_class"] == "PUBLISHABLE_SOFT"
-    memory = menzo.load_json(menzo.HARD_SKIP_FILE, {})["items"]
-    assert memory[0]["reason"] == "softpool_expired_not_fresh"
-    monkeypatch.setattr(massy, "MENZO_HARD_SKIP_FILE", menzo.HARD_SKIP_FILE)
-    assert massy.source_key(row["url"]) in massy.menzo_skip_memory()
+    assert projected["selected"] == []
+    assert len(projected["pending"]) == 1
+    assert projected["pending"][0]["soft_board"]["disposition"] == "MORNING_HOLD"
+    assert projected["pending"][0]["soft_board_review_count"] == 0
 
 
 def test_failed_late_active_persistence_restores_every_state_file(monkeypatch, tmp_path):
@@ -1525,53 +1475,32 @@ def test_oversize_exact_collapse_rebuilds_nonexact_suspicion_relations(monkeypat
     assert len(provider_relations) == 1 and provider_relations[0]["ref"] == "r0"
 
 
-def test_effective_bob_capacity_is_an_active_validation_bound(monkeypatch):
+def test_primary_validation_is_not_a_pacing_capacity_bound(monkeypatch):
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     monkeypatch.setattr("agents.bob.dynamic_article_capacity", lambda *_: (1, "test_capacity"))
-    s = snapshot(2); out = response(s, ("SELECT", "SELECT")); calls = []
+    s = snapshot(2)
+    out = response(s, ("SELECT", "SELECT"))
     for row in out["candidates"]:
         row["editorial_class"] = "SHOULD_PUBLISH"
+    calls = []
     result = active.evaluate(s, provider=lambda *_: calls.append(1) or out)
-    assert len(calls) == 2 and result["validation_errors"][0]["family"] == "downstream_capacity"
+    assert len(calls) == 1
+    assert result["status"] == "VALIDATED"
 
 
-def test_active_validation_counts_only_ordinary_against_bob_capacity(monkeypatch):
+def test_primary_validation_accepts_strong_demand_beyond_ordinary_capacity(monkeypatch):
     monkeypatch.setattr("agents.bob.dynamic_article_capacity", lambda *_: (5, "normal"))
-    for ordinary_count, valid in ((1, True), (5, True), (6, False)):
-        s = snapshot(5 + ordinary_count)
-        # snapshot() has only three fixtures, so construct the requested distinct survivor set.
-        template = s["candidates"][0]
-        s["candidates"] = [{**template, "candidate_id": f"id-{i}", "url": f"https://mixed.test/{i}"}
-                           for i in range(5 + ordinary_count)]
-        s["remaining_slots"] = 30
-        out = {"candidates": [{"ref": f"c{i}",
-            "editorial_class": "MUST_PUBLISH" if i < 5 else "SHOULD_PUBLISH",
-            "recommended_action": "SELECT", "category": "WWE", "story_core": str(i)}
-            for i in range(5 + ordinary_count)], "relations": []}
-        canonical, failures, _ = active._validate_active(out, s)
-        assert bool(canonical) is valid
-        if not valid:
-            assert failures[0]["ordinary_selected"] == 6
-
-
-def test_actual_selected_set_not_pool_controls_post_show_capacity(monkeypatch):
-    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
-    rows = []
-    for i in range(7):
-        rows.append({"source": "feed", "title": (f"Raw result {i}" if i < 3 else f"General item {i}"),
-                     "url": f"https://capacity.test/{i}", "summary": "distinct"})
-    s = shadow.capture_opportunity({"news_candidates_for_menzo": rows}, run_id="run",
-        observation_timestamp="now", publisher_count_24h=0, history=[])
-    s["authorized_relations"] = []
-    out = {"candidates": [{"ref": f"c{i}", "editorial_class": "SHOULD_PUBLISH",
-        "recommended_action": "DEFER" if i < 3 else "SELECT", "category": "WWE", "story_core": str(i)}
-        for i in range(7)], "relations": [{"ref": f"r{i}", "decision": "NO_MATCH"}
-        for i in range(len(s["authorized_relations"]))]}
-    # Add two non-post-show selections while retaining fewer than three selected post-show items.
-    out["candidates"][0]["recommended_action"] = "SELECT"
-    out["candidates"][1]["recommended_action"] = "SELECT"
-    calls = []; result = active.evaluate(s, provider=lambda *_: calls.append(1) or out)
-    assert len(calls) == 2 and result["validation_errors"][0]["family"] == "downstream_capacity"
+    ordinary_count = 6
+    s = snapshot(5 + ordinary_count)
+    template = s["candidates"][0]
+    s["candidates"] = [{**template, "candidate_id": f"id-{i}", "url": f"https://mixed.test/{i}"}
+                       for i in range(5 + ordinary_count)]
+    out = {"candidates": [{"ref": f"c{i}",
+        "editorial_class": "MUST_PUBLISH" if i < 5 else "SHOULD_PUBLISH",
+        "recommended_action": "SELECT", "category": "WWE", "story_core": str(i)}
+        for i in range(5 + ordinary_count)], "relations": []}
+    canonical, failures, _ = active._validate_active(out, s)
+    assert canonical and not failures
 
 
 def test_hidden_capacity_metadata_preserves_six_hard_news_selects(monkeypatch, tmp_path):
@@ -1739,34 +1668,30 @@ def test_runner_routes_active_success_without_legacy_and_failure_once(monkeypatc
     observed.clear(); authority_events.clear()
     monkeypatch.setattr(active, "project", lambda *_a, **_k:
                         (_ for _ in ()).throw(OSError("projection failed")))
-    persisted = []
-    def persist_projection_fallback(decision, reason):
-        decision["decision_authority"] = "legacy_menzo_fallback"
-        persisted.append((decision, reason))
-        return decision
-    monkeypatch.setattr(newsroom_runner, "persist_active_fallback", persist_projection_fallback)
+    fail_closed = []
+    monkeypatch.setattr(newsroom_runner, "persist_active_fail_closed",
+                        lambda snapshot, reason: fail_closed.append((snapshot, reason)) or {
+                            "version": active.POLICY_VERSION, "selected": [], "pending": [], "skipped": [],
+                            "allowed_urls_for_v92": [], "handoff": {
+                                "decision_authority": "editorial_director_fail_closed"}})
     assert newsroom_runner.main() == 0
-    assert legacy_calls == ["legacy_menzo_fallback"]
-    assert persisted[0][0]["decision_authority"] == "legacy_menzo_fallback"
-    assert persisted[0][1] == "OSError" and persisted[0][1] != "VALIDATED"
+    assert legacy_calls == []
+    assert fail_closed[0][1] == "OSError"
     assert "observe_editorial_director_active" not in observed
     assert not any(kwargs.get("result") == "editorial_director_active_authorized" for _, kwargs in authority_events)
-    legacy_calls.clear(); observed.clear(); authority_events.clear()
+    legacy_calls.clear(); observed.clear(); authority_events.clear(); fail_closed.clear()
     monkeypatch.setattr(active, "project", lambda *_a, **_k: {"version": "active", "selected": [],
         "pending": [], "skipped": [], "handoff": {"decision_authority": "editorial_director"}})
     monkeypatch.setattr(active, "evaluate", lambda *_a, **_k:
                         {"status": "failed", "fallback_reason": "invalid"})
-    persisted = []
-    monkeypatch.setattr(newsroom_runner, "persist_active_fallback",
-                        lambda decision, reason: persisted.append((decision, reason)) or decision)
     assert newsroom_runner.main() == 0
-    assert legacy_calls == ["legacy_menzo_fallback"] and persisted[0][1] == "invalid"
+    assert legacy_calls == [] and fail_closed[0][1] == "invalid"
     monkeypatch.setattr(newsroom_runner, "capture_editorial_director_opportunity", lambda *_a, **_k:
         (None, {"status": "NOT_ELIGIBLE_WP_NOT_READY", "reason": "wp_not_ready", "attempts": 0},
          (False, "wp_not_ready")))
-    legacy_calls.clear(); persisted.clear()
+    legacy_calls.clear(); fail_closed.clear()
     assert newsroom_runner.main() == 0
-    assert legacy_calls == ["legacy_menzo_fallback"] and persisted[0][1] == "wp_not_ready"
+    assert legacy_calls == [] and fail_closed[0][1] == "wp_not_ready"
 
 
 def test_active_artifact_is_authoritative_and_not_shadow_labelled(monkeypatch, tmp_path):
