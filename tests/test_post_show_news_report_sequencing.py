@@ -137,16 +137,12 @@ def test_soft_morning_hold_does_not_preempt_ready_report(run_cycle):
     assert calls.index("report") < calls.index("news")
     assert summary["news_report_sequence"] == "report_before_news_generation"
 
+@pytest.mark.parametrize("fail", ["andrea", "bob", "alfred", "news"])
 def test_news_stage_failure_does_not_cancel_or_retry_report(run_cycle, fail):
     calls, _, _, _ = run_cycle(fail=fail)
     assert calls.index("news") < calls.index("report")
     assert calls.count("report") == 1
 
-
-@pytest.mark.parametrize("options", [
-    {"published": True}, {"related": False}, {"editorial_class": "SKIP", "action": "SKIP"},
-    {"slots": 0},
-])
 
 @pytest.mark.parametrize("options", [
     {"editorial_class": "SKIP", "action": "SKIP"},
