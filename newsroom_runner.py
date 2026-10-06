@@ -406,7 +406,11 @@ def capture_editorial_director_opportunity(massy_board: dict[str, Any], *, run_i
     if not preflight[0]:
         return None, {"status": "NOT_ELIGIBLE_WP_NOT_READY", "reason": preflight[1], "attempts": 0}, preflight
     from agents.menzo_policy_v93_15 import load_authoritative_publisher_history, load_json
-    augmented = softpool_augmented_board(massy_board)
+    if preserve_active_metadata:
+        from agents.menzo_soft_board import filter_rediscovered_pool_candidates
+        augmented = filter_rediscovered_pool_candidates(massy_board)
+    else:
+        augmented = softpool_augmented_board(massy_board)
     from agents.menzo_policy_v93_15 import published_today_count
     published_weekly = augmented.get("published_due_reports", {})
     published_weekly_ids = set(published_weekly) if isinstance(published_weekly, dict) else set()
@@ -470,6 +474,53 @@ def persist_active_fallback(decision: dict[str, Any], reason: str) -> dict[str, 
     write_json(V92_ALLOWED_URLS_FILE, {"generated_at": utc_now(), "version": decision.get("version"),
         "decision_authority": "legacy_menzo_fallback", "fallback_reason": reason,
         "allowed_urls": decision.get("allowed_urls_for_v92", [])})
+    return decision
+
+
+def persist_active_fail_closed(snapshot: dict[str, Any] | None, reason: str) -> dict[str, Any]:
+    """ED-3 safety: Active failure never bypasses duplicate authority through legacy publication."""
+    from agents.menzo_policy_v93_15 import (ARTIFACT_DECISIONS_FILE, MENZO_DECISIONS_FILE,
+        V92_ALLOWED_URLS_FILE, utc_now, write_json)
+    source = snapshot if isinstance(snapshot, dict) else {}
+    skipped = []
+    seen = set()
+    for row in list(source.get("candidates", [])) + list(source.get("deterministic_exact_skips", [])) + list(source.get("semantic_duplicate_skips", [])):
+        if not isinstance(row, dict):
+            continue
+        item = dict(row)
+        item.pop("candidate_id", None)
+        key = str(item.get("url") or item.get("source_url") or "")
+        if key and key in seen:
+            continue
+        if key:
+            seen.add(key)
+        if item.get("exact_duplicate_scope"):
+            authority = "deterministic_exact_duplicate"
+            why = "exact_duplicate"
+        elif item.get("semantic_duplicate_scope"):
+            authority = "semantic_duplicate_gate"
+            why = "semantic_duplicate"
+        else:
+            authority = "editorial_director_fail_closed"
+            why = "active_fail_closed:" + reason
+        item.update(decision="skip", priority="skip", decision_authority=authority, reason=why)
+        skipped.append(item)
+    decision = {
+        "version": "owtv_editorial_director_policy_v4_active",
+        "policy_version": "owtv_editorial_director_policy_v4_active",
+        "mode": "editorial_director_active_fail_closed",
+        "decision_authority": "editorial_director_fail_closed",
+        "fallback_reason": reason,
+        "selected": [], "pending": [], "skipped": skipped,
+        "allowed_urls_for_v92": [],
+        "handoff": {"to_bob_or_v92": 0, "pending": 0, "skipped": len(skipped),
+                    "decision_authority": "editorial_director_fail_closed"},
+    }
+    write_json(MENZO_DECISIONS_FILE, decision)
+    write_json(ARTIFACT_DECISIONS_FILE, decision)
+    write_json(V92_ALLOWED_URLS_FILE, {"generated_at": utc_now(), "version": decision["version"],
+        "decision_authority": "editorial_director_fail_closed", "fallback_reason": reason,
+        "allowed_urls": []})
     return decision
 
 
@@ -607,8 +658,8 @@ def _run_newsroom() -> int:
                 raise RuntimeError(str(director_result.get("fallback_reason") or director_result.get("status")))
         except Exception as exc:
             reason = active_fallback_reason(director_result, exc)
-            menzo_decision = safe_agent(timeline=timeline, agent="Menzo", phase="legacy_menzo_fallback", import_fn=import_menzo, call_args=(massy_board,), call_kwargs=({"costly_work_preflight": menzo_preflight} if menzo_preflight is not None else {}), artifact_name="menzo_decisions.json", default_handoff={"to_bob_or_v92": 0, "pending": 0, "skipped": 0}, note_fn=lambda r: f"decision_authority=legacy_menzo_fallback reason={reason}")
-            menzo_decision = persist_active_fallback(menzo_decision, reason)
+            menzo_decision = persist_active_fail_closed(director_snapshot, reason)
+            add_timeline(timeline, "Menzo", "editorial_director_active_fail_closed", reason)
     else:
         menzo_decision = safe_agent(timeline=timeline, agent="Menzo", phase="editorial_decision_ready", import_fn=import_menzo, call_args=(massy_board,), call_kwargs=({"costly_work_preflight": menzo_preflight} if menzo_preflight is not None else {}), artifact_name="menzo_decisions.json", default_handoff={"to_bob_or_v92": 0, "pending": 0, "skipped": 0}, note_fn=lambda r: "selected={to_bob_or_v92} pending={pending} skipped={skipped}".format(**{**{"to_bob_or_v92": 0, "pending": 0, "skipped": 0}, **handoff(r)}))
     canonical.safely("observe_menzo", menzo_decision)
