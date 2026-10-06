@@ -302,9 +302,17 @@ def run_massy() -> dict[str, Any]:
         key = source_key(item.get("url") or item.get("normalized_url") or "")
         if key in memory:
             mem = memory[key]
-            moved.append(hard_skip_entry(item, "menzo_hard_skip_memory", menzo_reason=mem.get("reason", ""), menzo_article_type=mem.get("article_type", "")))
-            menzo_memory_count += 1
-            continue
+            memory_applies = True
+            if str(mem.get("decision_authority") or "") == "soft_board":
+                stored_fingerprint = str(mem.get("soft_board_content_fingerprint") or "")
+                if stored_fingerprint:
+                    from agents.menzo_soft_board import _content_fingerprint
+                    memory_applies = stored_fingerprint == _content_fingerprint(item)
+            if memory_applies:
+                moved.append(hard_skip_entry(item, "menzo_hard_skip_memory",
+                    menzo_reason=mem.get("reason", ""), menzo_article_type=mem.get("article_type", "")))
+                menzo_memory_count += 1
+                continue
         reason = old_news_reason(item)
         if reason:
             moved.append(hard_skip_entry(item, reason, age_guard="massy_7_day_window"))
