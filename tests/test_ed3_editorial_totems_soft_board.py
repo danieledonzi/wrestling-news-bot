@@ -197,7 +197,7 @@ def test_midnight_tombstone_kills_previous_day_pool(isolated_state):
     assert result["skipped"][0]["reason"] == "soft_board_midnight_tombstone"
 
 
-def test_unchanged_pool_rediscovery_is_not_reclassified(isolated_state):
+def test_unchanged_pool_rediscovery_still_crosses_duplicate_gate(isolated_state):
     row = _soft("https://ed3.test/repeat")
     fingerprint = soft._content_fingerprint(row)
     row.update({"soft_board_day": "2026-10-07",
@@ -206,6 +206,28 @@ def test_unchanged_pool_rediscovery_is_not_reclassified(isolated_state):
                 "softpool_added_at": "2026-10-07T02:00:00+00:00"})
     menzo.write_json(menzo.SOFTPOOL_FILE, {"items": [row]})
     fresh = {"url": row["url"], "title": row["title"], "summary": row["summary"]}
-    board = soft.filter_rediscovered_pool_candidates({"news_candidates_for_menzo": [fresh]})
-    assert board["news_candidates_for_menzo"] == []
-    assert board["soft_board"]["unchanged_pool_rediscoveries_suppressed"] == 1
+    board = soft.mark_rediscovered_pool_candidates({"news_candidates_for_menzo": [fresh]})
+    assert len(board["news_candidates_for_menzo"]) == 1
+    assert board["news_candidates_for_menzo"][0]["_soft_board_existing"] is True
+    assert board["soft_board"]["unchanged_pool_rediscoveries_marked"] == 1
+
+
+def test_unchanged_soft_cannot_be_promoted_by_primary_reclassification(isolated_state):
+    row = _soft("https://ed3.test/repeat-promote")
+    row.update({"soft_board_day": "2026-10-07",
+                "soft_board_content_fingerprint": soft._content_fingerprint(row),
+                "soft_board_first_seen_at": "2026-10-07T02:00:00+00:00",
+                "softpool_added_at": "2026-10-07T02:00:00+00:00",
+                "soft_board_review_count": 1})
+    menzo.write_json(menzo.SOFTPOOL_FILE, {"items": [row]})
+    promoted = _strong(row["url"], "SHOULD_PUBLISH")
+    promoted.update({"title": row["title"], "summary": row["summary"], "_soft_board_existing": True})
+    result = soft.apply(
+        {"selected": [promoted], "pending": [], "skipped": [], "postprocess": {}},
+        {"observation_timestamp": "2026-10-07T07:00:00+00:00", "remaining_slots": 20},
+        provider=lambda *_: pytest.fail("morning carried soft must not invoke review"))
+    assert result["selected"] == []
+    assert len(result["pending"]) == 1
+    assert result["pending"][0]["editorial_director"]["editorial_class"] == "PUBLISHABLE_SOFT"
+    assert result["pending"][0]["soft_board"]["disposition"] == "MORNING_HOLD"
+    assert result["pending"][0]["soft_board_review_count"] == 1
