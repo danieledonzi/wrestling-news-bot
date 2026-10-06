@@ -3564,7 +3564,7 @@ def save_hard_skips(result: dict[str, Any]) -> None:
             if key:
                 by_url[key] = item
     terminal_authorities = {"editorial_director", "deterministic_exact_duplicate",
-                            "semantic_duplicate_gate", "softpool_decay"}
+                            "semantic_duplicate_gate", "softpool_decay", "soft_board"}
     for item in result.get("skipped", []) if isinstance(result.get("skipped"), list) else []:
         if item.get("reason") == "skip:duplicate_arbitration_unresolved":
             continue
