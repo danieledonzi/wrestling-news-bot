@@ -793,16 +793,35 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
     from agents.news_scheduling import published_news_today_local, remaining_news_slots
     published_today = published_news_today_local(history.values())
     daily_slots = remaining_news_slots(published_today)
-    new_publication_limit = min(MAX_POSTS_PER_RUN, daily_slots)
     approved_total = len(valid_articles) + len(safety_skipped)
     articles: list[dict[str, Any]] = []
     overflow_articles: list[dict[str, Any]] = []
+
+    def hard_editorial(article: dict[str, Any]) -> bool:
+        director = article.get("editorial_director") if isinstance(article.get("editorial_director"), dict) else {}
+        return director.get("editorial_class") in {"MUST_PUBLISH", "SHOULD_PUBLISH"}
+
+    # Hard coverage has precedence and may exceed the nominal daily ceiling.
+    # Soft can use only residual per-run capacity and only while the day is below 30.
+    ordered_articles = sorted(valid_articles, key=lambda article: 0 if hard_editorial(article) else 1)
     new_articles_selected = 0
-    for article in valid_articles:
+    hard_new_selected = 0
+    for article in ordered_articles:
         key = source_key(str(article.get("source_url") or article.get("url") or ""))
         if key and key in history:
             articles.append(article)
-        elif new_articles_selected < new_publication_limit:
+            continue
+        if new_articles_selected >= MAX_POSTS_PER_RUN:
+            overflow_articles.append(article)
+            continue
+        if hard_editorial(article):
+            articles.append(article)
+            new_articles_selected += 1
+            hard_new_selected += 1
+            continue
+        soft_slots_after_hard = max(0, 30 - published_today - hard_new_selected)
+        soft_new_selected = new_articles_selected - hard_new_selected
+        if soft_new_selected < soft_slots_after_hard:
             articles.append(article)
             new_articles_selected += 1
         else:
@@ -816,8 +835,9 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
             "source_url": str(article.get("source_url") or article.get("url") or ""),
             "title_it": str(article.get("title_it") or ""),
             "status": "skipped_capacity",
-            "reason": ("daily_news_ceiling:30" if daily_slots <= MAX_POSTS_PER_RUN
-                       else f"publisher_max_posts_per_run:{MAX_POSTS_PER_RUN}"),
+            "reason": (f"publisher_max_posts_per_run:{MAX_POSTS_PER_RUN}"
+                       if new_articles_selected >= MAX_POSTS_PER_RUN
+                       else "daily_news_ceiling:30_soft_only"),
         }
         for article in overflow_articles
     ]
