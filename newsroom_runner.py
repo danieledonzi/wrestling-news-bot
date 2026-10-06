@@ -407,8 +407,8 @@ def capture_editorial_director_opportunity(massy_board: dict[str, Any], *, run_i
         return None, {"status": "NOT_ELIGIBLE_WP_NOT_READY", "reason": preflight[1], "attempts": 0}, preflight
     from agents.menzo_policy_v93_15 import load_authoritative_publisher_history, load_json
     if preserve_active_metadata:
-        from agents.menzo_soft_board import filter_rediscovered_pool_candidates
-        augmented = filter_rediscovered_pool_candidates(massy_board)
+        from agents.menzo_soft_board import mark_rediscovered_pool_candidates
+        augmented = mark_rediscovered_pool_candidates(massy_board)
     else:
         augmented = softpool_augmented_board(massy_board)
     from agents.menzo_policy_v93_15 import published_today_count
