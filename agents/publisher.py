@@ -523,6 +523,10 @@ def write_published_trace(article: dict[str, Any], result: dict[str, Any], slug:
             value = trace_first(article, *candidates)
         if value not in (None, ""):
             trace[key] = value
+    for field in ("editorial_director", "soft_board"):
+        value = article.get(field)
+        if isinstance(value, dict):
+            trace[field] = dict(value)
     PUBLISHED_TRACE_DIR.mkdir(parents=True, exist_ok=True)
     write_json(PUBLISHED_TRACE_DIR / f"{slug}.published_trace.json", trace)
 
@@ -652,6 +656,12 @@ def publish_article(article: dict[str, Any], history: dict[str, Any], wp_ok: boo
                     "title_it": title, "wp_post_id": post_id, "wp_link": post_link,
                     "published_at": published_at, "status": POST_STATUS, "source": source,
                     "story_signature": story_signature(article), "canonical_source_body": canonical_source_body}
+    if isinstance(article.get("editorial_director"), dict):
+        history[key]["editorial_director"] = dict(article["editorial_director"])
+    if isinstance(article.get("soft_board"), dict):
+        history[key]["soft_board"] = dict(article["soft_board"])
+    if article.get("decision_authority"):
+        history[key]["decision_authority"] = article.get("decision_authority")
     PUBLISHED_DIR.mkdir(parents=True, exist_ok=True)
     (PUBLISHED_DIR / f"v93_news_{review_slug}.html").write_text(content, encoding="utf-8")
     result = {"source_url": url, "title_it": title, "status": "published", "wp_post_id": post_id, "wp_link": post_link, "featured_media": media_id, "categories": categories, "cleaned_full_text": published_cleaned_full_text, "published_cleaned_full_text": published_cleaned_full_text, "source_cleaned_full_text": source_cleaned_full_text, "canonical_source_body": canonical_source_body}
@@ -663,6 +673,7 @@ def publish_article(article: dict[str, Any], history: dict[str, Any], wp_ok: boo
         "special_event_match",
         "corresponding_report_published",
         "editorial_director",
+        "soft_board",
         "scheduling_override",
     ):
         if field not in article:
@@ -793,31 +804,53 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
     from agents.news_scheduling import published_news_today_local, remaining_news_slots
     published_today = published_news_today_local(history.values())
     daily_slots = remaining_news_slots(published_today)
-    new_publication_limit = min(MAX_POSTS_PER_RUN, daily_slots)
     approved_total = len(valid_articles) + len(safety_skipped)
+
+    def primary_class(article: dict[str, Any]) -> str:
+        director = article.get("editorial_director") if isinstance(article.get("editorial_director"), dict) else {}
+        return str(director.get("editorial_class") or "")
+
+    # ED-3 totem order: MUST, then SHOULD, then soft/other while preserving
+    # the upstream order inside each class.
+    valid_articles = (
+        [a for a in valid_articles if primary_class(a) == "MUST_PUBLISH"] +
+        [a for a in valid_articles if primary_class(a) == "SHOULD_PUBLISH"] +
+        [a for a in valid_articles if primary_class(a) not in {"MUST_PUBLISH", "SHOULD_PUBLISH"}]
+    )
     articles: list[dict[str, Any]] = []
     overflow_articles: list[dict[str, Any]] = []
     new_articles_selected = 0
+    projected_today = published_today
     for article in valid_articles:
         key = source_key(str(article.get("source_url") or article.get("url") or ""))
         if key and key in history:
             articles.append(article)
-        elif new_articles_selected < new_publication_limit:
+            continue
+        if new_articles_selected >= MAX_POSTS_PER_RUN:
+            overflow_articles.append({**article, "_publisher_capacity_reason": f"publisher_max_posts_per_run:{MAX_POSTS_PER_RUN}"})
+            continue
+        cls = primary_class(article)
+        if cls in {"MUST_PUBLISH", "SHOULD_PUBLISH"}:
             articles.append(article)
             new_articles_selected += 1
+            projected_today += 1
+            continue
+        if projected_today < 30:
+            articles.append(article)
+            new_articles_selected += 1
+            projected_today += 1
         else:
-            overflow_articles.append(article)
+            overflow_articles.append({**article, "_publisher_capacity_reason": "daily_news_ceiling:30_soft_only"})
 
     print(f"[PUBLISHER v93.40] Avvio pubblicazione | approved_total={approved_total} attempted={len(articles)} max={MAX_POSTS_PER_RUN} wp_ok={wp_ok} dry_run={DRY_RUN}", flush=True)
     results = [publish_article(article, history, wp_ok) for article in articles if isinstance(article, dict)]
     capacity_skipped = [
         {
-            **article,
+            **{k: v for k, v in article.items() if k != "_publisher_capacity_reason"},
             "source_url": str(article.get("source_url") or article.get("url") or ""),
             "title_it": str(article.get("title_it") or ""),
             "status": "skipped_capacity",
-            "reason": ("daily_news_ceiling:30" if daily_slots <= MAX_POSTS_PER_RUN
-                       else f"publisher_max_posts_per_run:{MAX_POSTS_PER_RUN}"),
+            "reason": str(article.get("_publisher_capacity_reason") or f"publisher_max_posts_per_run:{MAX_POSTS_PER_RUN}"),
         }
         for article in overflow_articles
     ]
