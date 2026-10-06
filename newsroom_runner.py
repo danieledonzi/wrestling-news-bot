@@ -604,11 +604,22 @@ def _run_newsroom() -> int:
                 observe_applied_active_authority(artifacts, director_snapshot, director_result)
                 add_timeline(timeline, "Menzo", "editorial_director_active_authoritative", "VALIDATED")
             else:
-                raise RuntimeError(str(director_result.get("fallback_reason") or director_result.get("status")))
+                reason = str(director_result.get("fallback_reason") or director_result.get("status"))
+                if not director_result.get("duplicate_clearance_complete"):
+                    from agents.menzo_editorial_director_active import project_duplicate_fail_closed
+                    menzo_decision = project_duplicate_fail_closed(director_snapshot, reason)
+                    add_timeline(timeline, "Menzo", "duplicate_gate_fail_closed", reason)
+                else:
+                    raise RuntimeError(reason)
         except Exception as exc:
             reason = active_fallback_reason(director_result, exc)
-            menzo_decision = safe_agent(timeline=timeline, agent="Menzo", phase="legacy_menzo_fallback", import_fn=import_menzo, call_args=(massy_board,), call_kwargs=({"costly_work_preflight": menzo_preflight} if menzo_preflight is not None else {}), artifact_name="menzo_decisions.json", default_handoff={"to_bob_or_v92": 0, "pending": 0, "skipped": 0}, note_fn=lambda r: f"decision_authority=legacy_menzo_fallback reason={reason}")
-            menzo_decision = persist_active_fallback(menzo_decision, reason)
+            if isinstance(director_result, dict) and not director_result.get("duplicate_clearance_complete"):
+                from agents.menzo_editorial_director_active import project_duplicate_fail_closed
+                menzo_decision = project_duplicate_fail_closed(director_snapshot or {}, reason)
+                add_timeline(timeline, "Menzo", "duplicate_gate_fail_closed", reason)
+            else:
+                menzo_decision = safe_agent(timeline=timeline, agent="Menzo", phase="legacy_menzo_fallback", import_fn=import_menzo, call_args=(massy_board,), call_kwargs=({"costly_work_preflight": menzo_preflight} if menzo_preflight is not None else {}), artifact_name="menzo_decisions.json", default_handoff={"to_bob_or_v92": 0, "pending": 0, "skipped": 0}, note_fn=lambda r: f"decision_authority=legacy_menzo_fallback reason={reason}")
+                menzo_decision = persist_active_fallback(menzo_decision, reason)
     else:
         menzo_decision = safe_agent(timeline=timeline, agent="Menzo", phase="editorial_decision_ready", import_fn=import_menzo, call_args=(massy_board,), call_kwargs=({"costly_work_preflight": menzo_preflight} if menzo_preflight is not None else {}), artifact_name="menzo_decisions.json", default_handoff={"to_bob_or_v92": 0, "pending": 0, "skipped": 0}, note_fn=lambda r: "selected={to_bob_or_v92} pending={pending} skipped={skipped}".format(**{**{"to_bob_or_v92": 0, "pending": 0, "skipped": 0}, **handoff(r)}))
     canonical.safely("observe_menzo", menzo_decision)
