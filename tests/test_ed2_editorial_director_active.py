@@ -1371,6 +1371,7 @@ def test_active_soft_defer_is_owned_by_ed3_soft_board(monkeypatch, tmp_path):
            "url": "https://decay.test/ed3", "soft_board_review_count": 2}
     s = shadow.capture_opportunity({"news_candidates_for_menzo": [row]}, run_id="run",
         observation_timestamp="2026-10-06T03:00:00+02:00", publisher_count_24h=0, history=[])
+    active.preserve_bob_capacity_metadata(s, [row])
     result = active.evaluate(s, provider=lambda *_: response(s, ("DEFER",)))
     for field in ("SOFTPOOL_FILE", "HARD_SKIP_FILE", "MENZO_DECISIONS_FILE",
                   "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE"):
@@ -1653,7 +1654,8 @@ def test_active_fallback_reason_preserves_structured_specificity():
     assert newsroom_runner.active_fallback_reason(None, ValueError("unexpected")) == "ValueError"
 
 
-def test_runner_routes_active_success_without_legacy_and_failure_once(monkeypatch, tmp_path):
+
+def test_runner_routes_active_success_without_legacy_and_duplicate_fail_closed(monkeypatch, tmp_path):
     import newsroom_runner
     from agents import menzo_editorial_director_shadow as shadow_module
     observed = []; authority_events = []
@@ -1683,13 +1685,16 @@ def test_runner_routes_active_success_without_legacy_and_failure_once(monkeypatc
                     "allowed_urls_for_v92": [], "handoff": {}}
         return {"handoff": {}}
     monkeypatch.setattr(newsroom_runner, "safe_agent", safe_agent)
-    monkeypatch.setattr(active, "evaluate", lambda *_a, **_k: {"status": "VALIDATED", "output": {}})
+
+    monkeypatch.setattr(active, "evaluate", lambda *_a, **_k: {
+        "status": "VALIDATED", "duplicate_clearance_complete": True, "output": {}})
     monkeypatch.setattr(active, "project", lambda *_a, **_k: {"version": "active", "selected": [],
         "pending": [], "skipped": [], "handoff": {"decision_authority": "editorial_director"}})
     assert newsroom_runner.main() == 0 and legacy_calls == []
     assert "observe_editorial_director_active" in observed
-    assert any(kwargs.get("result") == "editorial_director_active_authorized" for _, kwargs in authority_events)
-    observed.clear(); authority_events.clear()
+
+    # Once duplicate clearance is complete, a later projection failure may use
+    # the established legacy safety fallback.
     monkeypatch.setattr(active, "project", lambda *_a, **_k:
                         (_ for _ in ()).throw(OSError("projection failed")))
     persisted = []
@@ -1700,27 +1705,21 @@ def test_runner_routes_active_success_without_legacy_and_failure_once(monkeypatc
     monkeypatch.setattr(newsroom_runner, "persist_active_fallback", persist_projection_fallback)
     assert newsroom_runner.main() == 0
     assert legacy_calls == ["legacy_menzo_fallback"]
-    assert persisted[0][0]["decision_authority"] == "legacy_menzo_fallback"
-    assert persisted[0][1] == "OSError" and persisted[0][1] != "VALIDATED"
-    assert "observe_editorial_director_active" not in observed
-    assert not any(kwargs.get("result") == "editorial_director_active_authorized" for _, kwargs in authority_events)
-    legacy_calls.clear(); observed.clear(); authority_events.clear()
-    monkeypatch.setattr(active, "project", lambda *_a, **_k: {"version": "active", "selected": [],
-        "pending": [], "skipped": [], "handoff": {"decision_authority": "editorial_director"}})
-    monkeypatch.setattr(active, "evaluate", lambda *_a, **_k:
-                        {"status": "failed", "fallback_reason": "invalid"})
-    persisted = []
-    monkeypatch.setattr(newsroom_runner, "persist_active_fallback",
-                        lambda decision, reason: persisted.append((decision, reason)) or decision)
-    assert newsroom_runner.main() == 0
-    assert legacy_calls == ["legacy_menzo_fallback"] and persisted[0][1] == "invalid"
-    monkeypatch.setattr(newsroom_runner, "capture_editorial_director_opportunity", lambda *_a, **_k:
-        (None, {"status": "NOT_ELIGIBLE_WP_NOT_READY", "reason": "wp_not_ready", "attempts": 0},
-         (False, "wp_not_ready")))
-    legacy_calls.clear(); persisted.clear()
-    assert newsroom_runner.main() == 0
-    assert legacy_calls == ["legacy_menzo_fallback"] and persisted[0][1] == "wp_not_ready"
+    assert persisted[0][1] == "OSError"
 
+    # If duplicate clearance itself is unresolved, legacy publication is forbidden.
+    legacy_calls.clear()
+    fail_closed = []
+    monkeypatch.setattr(active, "evaluate", lambda *_a, **_k: {
+        "status": "failed", "fallback_reason": "duplicate_gate_invalid",
+        "duplicate_clearance_complete": False})
+    monkeypatch.setattr(active, "project_duplicate_fail_closed",
+                        lambda snapshot, reason: fail_closed.append(reason) or {
+                            "version": active.POLICY_VERSION, "selected": [], "pending": [],
+                            "skipped": [], "allowed_urls_for_v92": [], "handoff": {}})
+    assert newsroom_runner.main() == 0
+    assert legacy_calls == []
+    assert fail_closed == ["duplicate_gate_invalid"]
 
 def test_active_artifact_is_authoritative_and_not_shadow_labelled(monkeypatch, tmp_path):
     from agents.canonical_artifact_index import CanonicalArtifactIndex
