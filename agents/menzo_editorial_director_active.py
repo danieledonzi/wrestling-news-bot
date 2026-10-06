@@ -28,7 +28,10 @@ CONFIRMATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_confirmat
 EVENT_REGISTRY_PATH = ROOT / "config/event_registry.json"
 BOB_CAPACITY_FIELDS = ("article_type", "source_title", "category_hint", "reason",
                        "ai_editorial_reason", "event_key", "show_report_id", "show_name",
-                       "special_event_match", "event_report_key", "corresponding_report_published")
+                       "special_event_match", "event_report_key", "corresponding_report_published",
+                       "softpool_added_at", "softpool_day_local", "softpool_deferrals",
+                       "soft_board_review_count", "last_soft_board_disposition", "soft_board",
+                       "from_softpool", "last_seen_at", "softpool_ttl_hours")
 DUPLICATE_EVIDENCE_FIELDS = ("left_evidence", "right_evidence")
 DUPLICATE_CENTRALITY_FIELDS = ("left_central_development", "right_central_development",
                                "centrality_basis")
