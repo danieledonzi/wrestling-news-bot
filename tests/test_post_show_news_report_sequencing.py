@@ -138,14 +138,27 @@ def test_news_stage_failure_does_not_cancel_or_retry_report(run_cycle, fail):
 
 
 @pytest.mark.parametrize("options", [
-    {"published": True}, {"related": False}, {"editorial_class": "SKIP", "action": "SKIP"},
-    {"slots": 0},
+    {"published": True}, {"related": False},
 ])
-def test_no_selected_pre_report_news_leaves_report_before_generation(run_cycle, options):
+def test_selected_strong_news_not_tied_to_ready_report_leaves_report_first(run_cycle, options):
     calls, _, decisions, summary = run_cycle(**options)
-    assert not decisions[0]["selected"]
+    assert len(decisions[0]["selected"]) == 1
     assert calls.index("report") < calls.index("bob")
     assert summary["news_report_sequence"] == "report_before_news_generation"
+
+
+def test_skip_leaves_report_before_generation(run_cycle):
+    calls, _, decisions, summary = run_cycle(editorial_class="SKIP", action="SKIP")
+    assert decisions[0]["selected"] == []
+    assert calls.index("report") < calls.index("bob")
+    assert summary["news_report_sequence"] == "report_before_news_generation"
+
+
+def test_strong_news_is_not_suppressed_by_zero_daily_slots(run_cycle):
+    calls, _, decisions, summary = run_cycle(slots=0)
+    assert len(decisions[0]["selected"]) == 1
+    assert calls.index("news") < calls.index("report")
+    assert summary["news_report_sequence"] == "selected_show_news_first"
 
 
 def test_normally_selected_post_report_story_remains_selected(run_cycle):
