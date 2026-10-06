@@ -1,0 +1,225 @@
+# OpenWrestlingTV — Editorial Totems and Soft Board Contract
+
+**Status:** FROZEN
+**Scope:** Editorial Director authority, duplicate safety, soft-pool lifecycle, daily pacing
+**Timezone authority:** Europe/Rome
+**Frozen on:** 2026-10-07
+
+This document freezes the editorial invariants that MUST survive any implementation reform. Operational parameters may still be tuned, but the invariants below are non-negotiable unless explicitly superseded by a later owner-approved architecture decision.
+
+## 1. Duplicate authority is above every editorial class
+
+Every URL admitted from the feed MUST receive an authoritative duplicate decision before it can become editorially eligible.
+
+- `DUPLICATE` -> terminal hard skip.
+- duplicate check unresolved / invalid / failed -> terminal hard skip for that opportunity.
+- `MATERIAL_UPDATE` -> survives as a new editorial opportunity grounded in the new fact.
+- `NO_MATCH` / unique -> may proceed to editorial classification.
+
+There is no exception for breaking, MUST or SHOULD content. A duplicate MUST is still a duplicate and MUST NOT publish.
+
+Duplicate memory and relation history persist across the midnight boundary.
+
+## 2. Primary classification measures intrinsic editorial value
+
+Only duplicate-cleared candidates may receive one of:
+
+- `MUST_PUBLISH`
+- `SHOULD_PUBLISH`
+- `PUBLISHABLE_SOFT`
+- `SKIP`
+
+Primary class MUST be based on the story's intrinsic editorial value and central development. It MUST NOT be promoted or demoted merely because the day is quiet, because many slots remain, or because the soft pool is weak.
+
+Primary classification and publication pacing are separate decisions.
+
+## 3. MUST_PUBLISH is a totem
+
+A duplicate-cleared MUST:
+
+- publishes;
+- never competes with other candidates;
+- is never deferred for ordinary pacing;
+- never enters the soft pool;
+- may exceed the nominal daily ceiling if genuine MUST/SHOULD demand requires it.
+
+The daily ceiling exists to prevent filler inflation, not to suppress genuinely mandatory coverage.
+
+## 4. SHOULD_PUBLISH is demand-driven
+
+A duplicate-cleared SHOULD:
+
+- publishes after MUST within the run;
+- does not compete with soft content;
+- is not deferred merely to reserve capacity for soft content;
+- may contribute to exceeding the nominal daily ceiling if genuine editorial demand requires it.
+
+A day with 30 genuine MUST+SHOULD items is an exceptional strong-news day, not a pacing failure.
+
+## 5. PUBLISHABLE_SOFT is the only competitive editorial class
+
+A soft candidate has no publication entitlement.
+
+Soft content may:
+
+- be held;
+- compete with other soft content;
+- be selected when publication adds real value;
+- decay through repeated meaningful non-selection;
+- be dropped immediately when freshness or editorial usefulness is gone;
+- expire at midnight.
+
+Unused publication capacity has zero editorial value.
+
+A run with zero publications is a valid editorial outcome. Consecutive empty runs are also valid.
+
+## 6. 00:00 Europe/Rome is a tombstone boundary
+
+At 00:00 Europe/Rome, ordinary unresolved editorial opportunities from the previous day lose eligibility.
+
+In particular:
+
+- residual soft-pool candidates expire;
+- prior-day soft candidates MUST NOT become eligible again merely because the daily counter reset;
+- same-story rediscovery MUST NOT revive an expired opportunity.
+
+Exceptions are limited to:
+
+- a genuinely fresh breaking / MUST development that emerges across the boundary;
+- a grounded MATERIAL_UPDATE after midnight;
+- continuity of a live event already in progress when the new development itself is fresh.
+
+The memory of duplicates, tombstones, history and canonical identity survives midnight.
+
+## 7. 00:00–12:00 is the morning accumulation window
+
+Before 12:00 Europe/Rome, the system MUST NOT infer that the day is quiet from low publication count.
+
+The wrestling news cycle is strongly US-driven. Weekly shows commonly air during the Italian night and generate live news, post-show news, reports and follow-up material through the morning.
+
+During 00:00–12:00:
+
+- MUST publishes;
+- SHOULD publishes;
+- SKIP dies;
+- PUBLISHABLE_SOFT enters the morning soft pool;
+- soft candidates do not compete;
+- morning hold does not count as a competitive loss;
+- low `published_news_today_local` MUST NOT justify soft admission.
+
+## 8. From 12:00, every run may perform a contextual Soft Board Review
+
+After 12:00 Europe/Rome, remaining run capacity is calculated only after MUST and SHOULD have taken precedence.
+
+Gemini MUST receive day context for the soft review, including at minimum:
+
+- current Europe/Rome time;
+- MUST published today;
+- SHOULD published today;
+- soft published today;
+- total news published today;
+- current run ordinary capacity and residual soft capacity;
+- daily residual capacity;
+- report/show publication context where relevant;
+- all currently eligible soft candidates;
+- first-seen time and age;
+- prior meaningful soft reviews / competitive losses;
+- title, story core, concise factual description and source.
+
+The review asks whether each soft candidate adds enough value **now, in the context of what OWTV has already published today**.
+
+## 9. Secondary soft-board labels are not primary editorial classes
+
+The Soft Board Review may use these secondary dispositions:
+
+- `SOFT_MUST`: publish now if residual soft capacity permits.
+- `SOFT_SHOULD`: keep in the pool for bounded reconsideration.
+- `SOFT_SKIP`: terminal soft tombstone.
+
+These labels do not rewrite the primary class. A `SOFT_MUST` remains primary `PUBLISHABLE_SOFT`; it is only the current best soft-board choice.
+
+Soft-board selection MUST NOT promote a soft candidate into primary `MUST_PUBLISH` or `SHOULD_PUBLISH`.
+
+## 10. Soft capacity is a maximum, never a target
+
+For every run after 12:00:
+
+1. duplicate-cleared MUST publishes;
+2. duplicate-cleared SHOULD publishes;
+3. residual run capacity becomes the maximum available for soft content;
+4. the Soft Board Review may select anywhere from zero to that maximum.
+
+If three soft slots remain, publishing zero, one, two or three are all valid outcomes.
+
+The system MUST NOT manufacture soft publications to fill unused slots.
+
+## 11. Soft-pool memory follows story identity, not the current feed instance
+
+The soft state belongs to the canonical story/opportunity identity.
+
+Rediscovery by Massy or the feed MUST NOT reset:
+
+- first-seen time;
+- soft-pool age;
+- meaningful review count;
+- competitive-loss count;
+- tombstone status.
+
+A fresh MATERIAL_UPDATE may create a new editorial opportunity; mere rediscovery or rewording may not.
+
+## 12. Competitive decay begins only when competition begins
+
+Morning HOLD is not a loss.
+
+After 12:00, a `SOFT_SHOULD` may accumulate a bounded number of **meaningful soft-board reviews**. Repeated meaningful non-selection eventually expires the opportunity as repeatedly outranked/stale.
+
+`SOFT_SKIP` expires immediately.
+
+The exact review limit is an implementation parameter and is not frozen by this document.
+
+## 13. Fail-closed duplicate safety, fail-safe editorial restraint
+
+No URL may bypass duplicate authority.
+
+When duplicate authority cannot establish uniqueness safely, the opportunity is hard-skipped rather than published speculatively.
+
+When soft-board judgment is unavailable or invalid, the safe editorial default is to publish no soft content for that run. MUST/SHOULD behavior remains governed by their validated primary classification and duplicate clearance.
+
+## 14. Observability requirements
+
+Implementation MUST make it possible to audit, per candidate:
+
+- duplicate decision and authority;
+- primary editorial class;
+- first seen;
+- current local day;
+- morning HOLD vs competitive review;
+- soft-board disposition;
+- meaningful review count;
+- tombstone / expiry reason;
+- publication outcome;
+- day-context values supplied to the soft review.
+
+Reports MUST distinguish primary class from secondary soft-board disposition.
+
+## Frozen summary
+
+`DUPLICATE` beats everything.
+
+`MUST_PUBLISH` does not compete.
+
+`SHOULD_PUBLISH` does not compete.
+
+`PUBLISHABLE_SOFT` is the only competitive class.
+
+Before 12:00, soft content accumulates but does not compete.
+
+From 12:00, Gemini evaluates the entire soft board in day context.
+
+Soft capacity is optional capacity, never a fill target.
+
+Repeatedly outranked or stale soft content dies.
+
+Midnight is a tombstone boundary for unresolved ordinary opportunities.
+
+Zero-publication runs are valid editorial decisions.
