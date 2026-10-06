@@ -52,7 +52,7 @@ def test_configured_ple_identity_flows_from_massy_to_director_projection(monkeyp
     for name in ("SOFTPOOL_FILE", "HARD_SKIP_FILE", "MENZO_DECISIONS_FILE", "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE"):
         monkeypatch.setattr(menzo, name, tmp_path / f"{name}.json")
     projected = active.project(snapshot, {"output": {"candidates": [{
-        "candidate_id": cid, "editorial_class": "SHOULD_PUBLISH", "recommended_action": "DEFER",
+        "candidate_id": cid, "editorial_class": "SHOULD_PUBLISH", "recommended_action": "SELECT",
         "category": "WWE", "story_core": "Injury at SummerSlam"}], "relations": []}})
     assert projected["selected"][0]["special_event_match"]["event_key"] == "wwe_summerslam_2026"
     assert projected["selected"][0]["scheduling_override"]["reason"] == "show_news_urgency_pre_report"
