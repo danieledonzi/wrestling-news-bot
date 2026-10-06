@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import hashlib
 import json
 import os
@@ -389,6 +390,41 @@ def _softpool_local_day(now: datetime | None = None) -> str:
     return current.astimezone(ROME).date().isoformat()
 
 
+def expire_previous_day_softpool() -> set[str]:
+    """Tombstone ED-3 soft opportunities at local midnight before augmentation."""
+    raw = load_json(SOFTPOOL_FILE, {"items": []})
+    items = raw.get("items", []) if isinstance(raw, dict) else []
+    if not isinstance(items, list):
+        return set()
+    local_day = _softpool_local_day()
+    stale = [dict(item) for item in items if isinstance(item, dict)
+             and item.get("softpool_day_local") and str(item.get("softpool_day_local")) != local_day]
+    if not stale:
+        return set()
+    stale_keys = {source_key(item.get("url") or item.get("source_url") or "") for item in stale}
+    stale_keys.discard("")
+    tombstones = []
+    for item in stale:
+        item.update(decision="skip", priority="skip", decision_authority="soft_board",
+                    reason="soft_board_midnight_tombstone")
+        item.setdefault("soft_board", {}).update({
+            "phase": "midnight_tombstone",
+            "disposition": "SOFT_SKIP",
+            "meaningful_review": False,
+            "local_day": local_day,
+        })
+        tombstones.append(item)
+    save_hard_skips({"skipped": tombstones})
+    kept = [item for item in items if not (isinstance(item, dict) and
+            item.get("softpool_day_local") and str(item.get("softpool_day_local")) != local_day)]
+    write_json(SOFTPOOL_FILE, {
+        **(raw if isinstance(raw, dict) else {}),
+        "updated_at": utc_now(),
+        "items": kept,
+    })
+    return stale_keys
+
+
 def load_softpool() -> list[dict[str, Any]]:
     raw = load_json(SOFTPOOL_FILE, {"items": []})
     items = raw.get("items", []) if isinstance(raw, dict) else []
@@ -413,7 +449,9 @@ def load_softpool() -> list[dict[str, Any]]:
 
 def augment_board_with_softpool(board: dict[str, Any]) -> dict[str, Any]:
     cloned = dict(board or {})
-    candidates = [dict(x) for x in list(cloned.get("news_candidates_for_menzo", []) or []) if isinstance(x, dict)]
+    stale_keys = expire_previous_day_softpool()
+    candidates = [dict(x) for x in list(cloned.get("news_candidates_for_menzo", []) or [])
+                  if isinstance(x, dict) and source_key(x.get("url") or x.get("source_url") or "") not in stale_keys]
     pooled = load_softpool()
     by_key = {source_key(x.get("url") or x.get("source_url") or ""): x for x in pooled if isinstance(x, dict)}
     seen = set()
@@ -430,7 +468,7 @@ def augment_board_with_softpool(board: dict[str, Any]) -> dict[str, Any]:
         for field in ("softpool_added_at", "softpool_day_local", "softpool_deferrals",
                       "soft_board_review_count", "last_soft_board_disposition", "soft_board"):
             if field in prior:
-                candidate[field] = copy.deepcopy(prior[field]) if "copy" in globals() else prior[field]
+                candidate[field] = copy.deepcopy(prior[field])
         candidate["from_softpool"] = True
         merged += 1
     added = 0
@@ -443,6 +481,7 @@ def augment_board_with_softpool(board: dict[str, Any]) -> dict[str, Any]:
     cloned["news_candidates_for_menzo"] = candidates
     cloned.setdefault("softpool", {})["injected_candidates"] = added
     cloned.setdefault("softpool", {})["rediscovered_state_merged"] = merged
+    cloned.setdefault("softpool", {})["midnight_tombstoned_candidates"] = len(stale_keys)
     return cloned
 
 
