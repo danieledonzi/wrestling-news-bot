@@ -55,7 +55,8 @@ def test_configured_ple_identity_flows_from_massy_to_director_projection(monkeyp
         "candidate_id": cid, "editorial_class": "SHOULD_PUBLISH", "recommended_action": "SELECT",
         "category": "WWE", "story_core": "Injury at SummerSlam"}], "relations": []}})
     assert projected["selected"][0]["special_event_match"]["event_key"] == "wwe_summerslam_2026"
-    assert projected["selected"][0]["scheduling_override"]["reason"] == "show_news_urgency_pre_report"
+    assert "scheduling_override" not in projected["selected"][0]
+    assert projected["postprocess"]["show_news_urgency_promoted"] == 0
 
 
 
