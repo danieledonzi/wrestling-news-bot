@@ -364,10 +364,14 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
         if not key:
             continue
         row_day = str(row.get("soft_board_day") or "")
-        if row_day and row_day != today:
+        if not row_day:
+            legacy_first = _first_seen(row, now)
+            row_day = legacy_first.astimezone(ROME).date().isoformat()
+        if row_day != today:
             expired_keys.add(key)
             terminal.append(_terminal_skip(row, "soft_board_midnight_tombstone", "MIDNIGHT_TOMBSTONE", now))
             continue
+        row["soft_board_day"] = today
         pool_by_key[key] = row
 
     # Remove anything that primary authority has now resolved strong/skip.
