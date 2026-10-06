@@ -38,25 +38,24 @@ Duplicate eligibility is decided first, in a separate gate. A semantic duplicate
 classification and therefore never receives an editorial class or publication action. `NO_MATCH` and grounded
 `MATERIAL_UPDATE` candidates survive and are classified on their own central fact.
 
-For survivors the class/action contract is exact: `MUST_PUBLISH -> SELECT`; `SHOULD_PUBLISH -> SELECT | DEFER`;
-`PUBLISHABLE_SOFT -> SELECT | DEFER`; and `SKIP -> SKIP`. `DEFER`, not `SKIP`, is the scheduling state for a legitimate
-candidate that loses current-board competition. MUST means the publication decision is already made and cannot be
-deferred for pacing or ordinary capacity.
+For survivors the primary class/action contract is exact and deliberately context-free:
+`MUST_PUBLISH -> SELECT`; `SHOULD_PUBLISH -> SELECT`; `PUBLISHABLE_SOFT -> DEFER`; and `SKIP -> SKIP`.
 
-Use `published_news_today_local`, the news published since 00:00 Europe/Rome, for dynamic pacing. `30` is a hard
-publication ceiling, not a fill target. The supplied `remaining_news_slots_today` / `remaining_slots` restricts
-ordinary SHOULD/SOFT selections; final Publisher authorization enforces the ceiling independently. On quieter days relevant and strong soft items may merit `SELECT`; on busy boards apply stronger
-competition; near 30 increasingly prioritize MUST and strong SHOULD. Never manufacture publications to fill capacity,
-and do not invent numerical pacing bands, category quotas, person caps, or rigid publication targets.
+The primary classification pass decides intrinsic editorial value only. Publication count, remaining slots, soft-pool size,
+time-of-day load, or a quiet/busy day MUST NOT promote a soft story into SHOULD/MUST or demote genuine hard news.
+MUST and SHOULD do not compete with soft material.
 
-`DEFER = legitimate candidate worth bounded reconsideration`. Reconsider softpool candidates against the current
-opportunity set; do not carry forward an old legacy value automatically. Gemini expresses comparative preference by
-ordering candidates **within the same class**, not through an absolute universal score.
+`PUBLISHABLE_SOFT -> DEFER` means "send to the bounded soft lifecycle", not "lost a competition". Before 12:00
+Europe/Rome soft candidates accumulate without competitive losses. From 12:00 onward a separate contextual Soft Board
+authority evaluates the whole eligible soft pool against the state of the day and may publish zero or more candidates
+within residual run/day capacity. The Soft Board never rewrites the primary editorial class.
 
-For ED-2 Active, `recommended_action` is mandatory and authoritative. `SELECT` authorizes the candidate for the existing
-downstream path, `DEFER` preserves legitimate bounded softpool eligibility, and `SKIP` ends eligibility. Local code validates
-but never invents a replacement semantic action or deterministic `SELECT`/`DEFER` threshold. Local code normalizes rank using class precedence:
-`MUST_PUBLISH`, `SHOULD_PUBLISH`, `PUBLISHABLE_SOFT`; `SKIP` is unranked. Within each class it preserves Gemini order.
+The nominal daily ceiling exists to prevent soft inflation, not to suppress a genuinely exceptional hard-news day.
+Unused capacity has no editorial value and never creates pressure to publish.
+
+For Active mode, `recommended_action` is mandatory and locally validated against the exact primary mapping above.
+Local code normalizes rank using class precedence: `MUST_PUBLISH`, `SHOULD_PUBLISH`, `PUBLISHABLE_SOFT`; `SKIP`
+is unranked. Any contextual soft disposition is recorded separately and cannot change this primary class.
 
 ## Categories
 
@@ -147,7 +146,7 @@ When `OWTV_EDITORIAL_DIRECTOR_ACTIVE_ENABLED=true`, this decision is authoritati
 The same Gemini model is called first for semantic relations only when the authorized relation matrix is non-empty;
 after validated duplicate removal it is called for survivor classification. Each phase has at most one same-model
 repair before whole-run legacy fallback. `recommended_action` is mandatory for every survivor and the class/action
-matrix above is a deterministic validation invariant. Ordinary SELECT count must not exceed `remaining_slots` or Bob's
-ordinary per-run capacity. MUST selections do not consume that ordinary capacity and Bob retains every MUST plus at
-most the dynamically allowed number of ordinary selections.
+matrix above is a deterministic validation invariant. Primary MUST/SHOULD selections are hard-news demand, not soft pacing decisions. Residual run/day capacity is computed
+after hard selections and is consumed only by the contextual Soft Board. A duplicate-clearance failure is fail-closed:
+unverified candidates receive terminal hard skip rather than legacy publication eligibility.
 Active wins over Shadow and no Shadow request is made. Disable the Active flag for migration-free rollback.
