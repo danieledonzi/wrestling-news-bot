@@ -82,23 +82,31 @@ def _write_pool(rows: list[dict[str, Any]]) -> None:
     })
 
 
-def filter_rediscovered_pool_candidates(board: Mapping[str, Any]) -> dict[str, Any]:
-    """Do not re-run primary classification for unchanged candidates already owned by the soft board."""
+def mark_rediscovered_pool_candidates(board: Mapping[str, Any]) -> dict[str, Any]:
+    """Keep rediscovered soft URLs in the duplicate gate while preserving their soft-board identity.
+
+    The URL is deliberately NOT suppressed before Active evaluation: every feed appearance must
+    still cross duplicate authority. Downstream, unchanged carried opportunities retain their
+    original primary PUBLISHABLE_SOFT state instead of being reclassified by pacing noise.
+    """
     cloned = copy.deepcopy(dict(board))
     pool_by_key = {_source_key(row): row for row in _load_pool_rows() if _source_key(row)}
     kept = []
-    suppressed = 0
+    marked = 0
     for item in cloned.get("news_candidates_for_menzo", []) if isinstance(cloned.get("news_candidates_for_menzo"), list) else []:
         if not isinstance(item, dict):
             continue
-        key = _source_key(item)
+        row = copy.deepcopy(item)
+        key = _source_key(row)
         prior = pool_by_key.get(key)
-        if prior and str(prior.get("soft_board_content_fingerprint") or "") == _content_fingerprint(item):
-            suppressed += 1
-            continue
-        kept.append(item)
+        if prior and str(prior.get("soft_board_content_fingerprint") or "") == _content_fingerprint(row):
+            row["_soft_board_existing"] = True
+            row["_soft_board_existing_day"] = prior.get("soft_board_day")
+            row["_soft_board_existing_review_count"] = int(prior.get("soft_board_review_count", 0) or 0)
+            marked += 1
+        kept.append(row)
     cloned["news_candidates_for_menzo"] = kept
-    cloned.setdefault("soft_board", {})["unchanged_pool_rediscoveries_suppressed"] = suppressed
+    cloned.setdefault("soft_board", {})["unchanged_pool_rediscoveries_marked"] = marked
     return cloned
 
 
@@ -374,11 +382,58 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
         row["soft_board_day"] = today
         pool_by_key[key] = row
 
-    # Remove anything that primary authority has now resolved strong/skip.
-    for section in ("selected", "skipped"):
-        for row in projected.get(section, []) if isinstance(projected.get(section), list) else []:
-            if isinstance(row, Mapping):
-                pool_by_key.pop(_source_key(row), None)
+    # Unchanged soft-pool rediscoveries still pass duplicate authority every run, but
+    # primary reclassification cannot promote/demote the same unchanged opportunity.
+    # Duplicate-authority skips remain terminal and beat the soft-board state.
+    carried_keys: set[str] = set()
+    selected_kept = []
+    for row in projected.get("selected", []) if isinstance(projected.get("selected"), list) else []:
+        if not isinstance(row, dict):
+            continue
+        key = _source_key(row)
+        prior = pool_by_key.get(key)
+        unchanged_carried = bool(
+            prior and row.get("_soft_board_existing") and
+            str(prior.get("soft_board_content_fingerprint") or "") == _content_fingerprint(row))
+        if unchanged_carried:
+            carried_keys.add(key)
+            continue
+        pool_by_key.pop(key, None)
+        selected_kept.append(row)
+    projected["selected"] = selected_kept
+
+    skipped_kept = []
+    duplicate_authorities = {"deterministic_exact_duplicate", "semantic_duplicate_gate",
+                             "semantic_duplicate_recovery"}
+    for row in projected.get("skipped", []) if isinstance(projected.get("skipped"), list) else []:
+        if not isinstance(row, dict):
+            continue
+        key = _source_key(row)
+        authority = str(row.get("decision_authority") or "")
+        prior = pool_by_key.get(key)
+        unchanged_carried = bool(
+            prior and row.get("_soft_board_existing") and
+            str(prior.get("soft_board_content_fingerprint") or "") == _content_fingerprint(row))
+        if unchanged_carried and authority not in duplicate_authorities:
+            carried_keys.add(key)
+            continue
+        pool_by_key.pop(key, None)
+        skipped_kept.append(row)
+    projected["skipped"] = skipped_kept
+
+    # Restore the frozen primary soft identity for carried unchanged opportunities.
+    for key in carried_keys:
+        prior = pool_by_key.get(key)
+        if prior:
+            director = prior.get("editorial_director") if isinstance(prior.get("editorial_director"), dict) else {}
+            if director:
+                director = dict(director)
+                director["editorial_class"] = "PUBLISHABLE_SOFT"
+                director["recommended_action"] = "DEFER"
+                prior["editorial_director"] = director
+            prior["decision"] = "defer"
+            prior["priority"] = "medium"
+            prior["decision_authority"] = "editorial_director"
 
     primary_soft = []
     primary_nonsoft_pending = []
