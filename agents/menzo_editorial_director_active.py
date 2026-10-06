@@ -1320,6 +1320,58 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
             "validation_errors": failures, "fallback_reason": failures[0]["family"] if failures else "validation_failed"}
 
 
+
+def project_duplicate_fail_closed(snapshot: Mapping[str, Any], reason: str) -> dict[str, Any]:
+    """Terminally block candidates whose universal duplicate clearance did not complete."""
+    projected: dict[str, Any] = {
+        "selected": [], "pending": [], "skipped": [],
+        "version": POLICY_VERSION, "policy_version": POLICY_VERSION,
+        "mode": "editorial_director_active_duplicate_fail_closed",
+        "decision_authority": "duplicate_gate_fail_closed",
+        "fallback_reason": reason,
+        "postprocess": {"duplicate_clearance_complete": False},
+    }
+    sidecar = snapshot.get("_active_bob_capacity_metadata", {})
+    for candidate in snapshot.get("candidates", []):
+        if not isinstance(candidate, Mapping):
+            continue
+        item = copy.deepcopy(dict(candidate))
+        candidate_id = item.pop("candidate_id", None)
+        if isinstance(sidecar, Mapping) and candidate_id:
+            item.update(copy.deepcopy(sidecar.get(candidate_id, {})))
+        item.update(
+            decision="skip", priority="skip",
+            decision_authority="duplicate_gate_fail_closed",
+            reason="duplicate_clearance_unresolved:" + str(reason),
+        )
+        projected["skipped"].append(item)
+    for exact in snapshot.get("deterministic_exact_skips", []):
+        item = copy.deepcopy(exact)
+        item.pop("candidate_id", None)
+        item.update(decision="skip", priority="skip",
+                    decision_authority="deterministic_exact_duplicate",
+                    reason="exact_duplicate")
+        projected["skipped"].append(item)
+    projected["handoff"] = {
+        "to_bob_or_v92": 0, "pending": 0, "skipped": len(projected["skipped"]),
+        "decision_authority": "duplicate_gate_fail_closed",
+    }
+    projected["allowed_urls_for_v92"] = []
+    from agents.menzo_policy_v93_15 import (
+        ARTIFACT_DECISIONS_FILE, MENZO_DECISIONS_FILE, V92_ALLOWED_URLS_FILE,
+        save_hard_skips, utc_now, write_json,
+    )
+    save_hard_skips(projected)
+    write_json(MENZO_DECISIONS_FILE, projected)
+    write_json(ARTIFACT_DECISIONS_FILE, projected)
+    write_json(V92_ALLOWED_URLS_FILE, {
+        "generated_at": utc_now(), "version": POLICY_VERSION,
+        "decision_authority": "duplicate_gate_fail_closed",
+        "fallback_reason": reason, "allowed_urls": [],
+    })
+    return projected
+
+
 def project(snapshot: Mapping[str, Any], result: Mapping[str, Any]) -> dict[str, Any]:
     """Mechanically project one wholly validated Active decision into Menzo's handoff."""
     originals = {row["candidate_id"]: row for row in snapshot.get("candidates", [])}
