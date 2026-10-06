@@ -406,6 +406,9 @@ def merge_trace_metadata(target: dict[str, Any], source: dict[str, Any]) -> None
         value = metadata_first(source, *keys)
         if value not in (None, ""):
             target[out_key] = value
+    for field in ("editorial_director", "soft_board"):
+        if field not in target and isinstance(source.get(field), dict):
+            target[field] = dict(source[field])
 
 
 def iter_stage_items(obj: Any, keys: list[str]) -> list[dict[str, Any]]:
@@ -461,6 +464,14 @@ def enrich_article_trace_metadata(article: dict[str, Any], metadata_index: dict[
         return article
     enriched = dict(article)
     enriched["trace_metadata"] = {**indexed, **existing}
+    for field in ("editorial_director", "soft_board"):
+        value = enriched.get(field)
+        if not isinstance(value, dict):
+            traced = enriched["trace_metadata"].get(field)
+            if isinstance(traced, dict):
+                enriched[field] = dict(traced)
+    if not enriched.get("decision_authority") and enriched["trace_metadata"].get("decision_authority"):
+        enriched["decision_authority"] = enriched["trace_metadata"]["decision_authority"]
     return enriched
 
 def article_first(article: dict[str, Any], *keys: str) -> Any:
