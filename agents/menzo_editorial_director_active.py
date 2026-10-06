@@ -1018,6 +1018,7 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
         _apply_duplicate_gate(snapshot, [cached_relations[str(row["pair_id"])] for row in authorized])
         if not snapshot.get("candidates"):
             return {**base, "status": "VALIDATED", "attempts": 0,
+                    "duplicate_clearance_complete": True,
                     "output": {"schema_version": SCHEMA_VERSION, "policy_version": POLICY_VERSION,
                                "candidates": [], "relations": copy.deepcopy(
                                    snapshot.get("duplicate_gate_relations", []))},
