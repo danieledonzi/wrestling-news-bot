@@ -8,6 +8,7 @@ import time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
+from zoneinfo import ZoneInfo
 
 from agents.gemini_ledger import make_operation_id, record_gemini_attempt, record_gemini_event
 from agents import menzo_duplicate_cache as duplicate_cache_v2
@@ -18,6 +19,7 @@ from agents.duplicate_pair_identity import article_id
 from agents.duplicate_pair_matrix import build_recent_history_pair_specs, build_same_run_pair_specs, evaluate_pair_matrix
 
 from agents import menzo as base
+ROME = ZoneInfo("Europe/Rome")
 from agents.story_dedupe_v93_32 import (
     build_generalized_fingerprint,
     dedupe_within_batch,
@@ -382,13 +384,23 @@ def item_ttl_hours(item: dict[str, Any]) -> int:
     return SOFTPOOL_TTL_HOURS
 
 
+def _softpool_local_day(now: datetime | None = None) -> str:
+    current = now or datetime.now(timezone.utc)
+    return current.astimezone(ROME).date().isoformat()
+
+
 def load_softpool() -> list[dict[str, Any]]:
     raw = load_json(SOFTPOOL_FILE, {"items": []})
     items = raw.get("items", []) if isinstance(raw, dict) else []
     now = datetime.now(timezone.utc)
+    local_day = _softpool_local_day(now)
     active: list[dict[str, Any]] = []
     for item in items:
         if not isinstance(item, dict):
+            continue
+        # ED-3 soft-board entries never cross local midnight.
+        item_day = str(item.get("softpool_day_local") or "")
+        if item_day and item_day != local_day:
             continue
         added = parse_dt(item.get("softpool_added_at")) or now
         ttl = int(item.get("softpool_ttl_hours") or item_ttl_hours(item))
@@ -401,17 +413,36 @@ def load_softpool() -> list[dict[str, Any]]:
 
 def augment_board_with_softpool(board: dict[str, Any]) -> dict[str, Any]:
     cloned = dict(board or {})
-    candidates = list(cloned.get("news_candidates_for_menzo", []) or [])
-    seen = {source_key(x.get("url") or x.get("source_url") or "") for x in candidates if isinstance(x, dict)}
+    candidates = [dict(x) for x in list(cloned.get("news_candidates_for_menzo", []) or []) if isinstance(x, dict)]
+    pooled = load_softpool()
+    by_key = {source_key(x.get("url") or x.get("source_url") or ""): x for x in pooled if isinstance(x, dict)}
+    seen = set()
+    merged = 0
+    for candidate in candidates:
+        key = source_key(candidate.get("url") or candidate.get("source_url") or "")
+        if not key:
+            continue
+        seen.add(key)
+        prior = by_key.get(key)
+        if not isinstance(prior, dict):
+            continue
+        # Story identity owns soft state. Rediscovery must not reset age/reviews.
+        for field in ("softpool_added_at", "softpool_day_local", "softpool_deferrals",
+                      "soft_board_review_count", "last_soft_board_disposition", "soft_board"):
+            if field in prior:
+                candidate[field] = copy.deepcopy(prior[field]) if "copy" in globals() else prior[field]
+        candidate["from_softpool"] = True
+        merged += 1
     added = 0
-    for item in load_softpool():
+    for item in pooled:
         key = source_key(item.get("url") or item.get("source_url") or "")
         if key and key not in seen:
-            candidates.append(item)
+            candidates.append(dict(item))
             seen.add(key)
             added += 1
     cloned["news_candidates_for_menzo"] = candidates
     cloned.setdefault("softpool", {})["injected_candidates"] = added
+    cloned.setdefault("softpool", {})["rediscovered_state_merged"] = merged
     return cloned
 
 
@@ -3527,7 +3558,14 @@ def save_softpool(result: dict[str, Any]) -> None:
         clone["last_seen_at"] = now
         clone["softpool_reason"] = "medium_candidate_above_quality_threshold"
         clone["softpool_ttl_hours"] = item_ttl_hours(clone)
-        if clone.get("from_softpool") or previous_item:
+        soft_board = clone.get("soft_board") if isinstance(clone.get("soft_board"), dict) else {}
+        if soft_board:
+            # ED-3 counts only meaningful contextual soft-board reviews.
+            review_count = int(clone.get("soft_board_review_count", soft_board.get("review_count", 0)) or 0)
+            clone["soft_board_review_count"] = review_count
+            clone["softpool_deferrals"] = review_count
+            clone["softpool_day_local"] = clone.get("softpool_day_local") or _softpool_local_day()
+        elif clone.get("from_softpool") or previous_item:
             clone["softpool_deferrals"] = softpool_deferrals(previous_item) + 1
         else:
             clone.setdefault("softpool_deferrals", 0)
@@ -3564,7 +3602,8 @@ def save_hard_skips(result: dict[str, Any]) -> None:
             if key:
                 by_url[key] = item
     terminal_authorities = {"editorial_director", "deterministic_exact_duplicate",
-                            "semantic_duplicate_gate", "softpool_decay"}
+                            "semantic_duplicate_gate", "softpool_decay", "soft_board",
+                            "duplicate_gate_fail_closed"}
     for item in result.get("skipped", []) if isinstance(result.get("skipped"), list) else []:
         if item.get("reason") == "skip:duplicate_arbitration_unresolved":
             continue
