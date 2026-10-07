@@ -11,6 +11,11 @@ The soft board is a separate persistent container from the primary Active candid
 not re-injected into primary classification on every run and do not count toward the primary `MAX_CANDIDATES`
 capture limit. At an eligible review, evaluate the entire currently eligible soft container as one board.
 
+Before any post-noon Soft Board selection, run duplicate revalidation on that isolated container: first among the
+currently eligible soft rows, then against the latest published-history authority. Duplicate or unresolved rows
+are removed before Gemini receives the Soft Board. Duplicate revalidation is a prerequisite to soft selection,
+not another primary classification pass.
+
 ## Contextual judgment
 
 Judge the entire supplied soft board in the context of what OpenWrestlingTV has already published today.
