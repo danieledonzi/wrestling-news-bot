@@ -259,36 +259,77 @@ def test_rediscovery_marker_survives_capture_via_active_sidecar(isolated_state):
     assert sidecar["_soft_board_existing_fingerprint"] == row["soft_board_content_fingerprint"]
 
 
-def test_carried_pool_entry_absent_from_feed_still_crosses_duplicate_authority(isolated_state):
-    row = _soft("https://ed3.test/carried")
-    row.update({
-        "soft_board_day": "2026-10-07",
-        "soft_board_content_fingerprint": soft._content_fingerprint(row),
-        "soft_board_first_seen_at": "2026-10-07T02:00:00+00:00",
-        "softpool_added_at": "2026-10-07T02:00:00+00:00",
-    })
-    menzo.write_json(menzo.SOFTPOOL_FILE, {"items": [row]})
-    augmented = soft.mark_rediscovered_pool_candidates(
-        menzo.augment_board_with_softpool({"news_candidates_for_menzo": []})
-    )
-    assert [x["url"] for x in augmented["news_candidates_for_menzo"]] == [row["url"]]
-    assert augmented["news_candidates_for_menzo"][0]["_soft_board_existing"] is True
+def test_active_capture_keeps_soft_pool_outside_candidate_limit(isolated_state, monkeypatch):
+    import newsroom_runner as runner
 
-    history = [{
-        "source_url": row["url"],
-        "source_title": row["title"],
-        "title_it": row["title"],
-        "summary": row["summary"],
-        "published_at": "2026-10-07T07:30:00+00:00",
-    }]
-    snapshot = shadow.capture_opportunity(
-        augmented, run_id="run", observation_timestamp="2026-10-07T08:00:00+00:00",
-        published_news_today_local=1, history=history)
-    active.preserve_bob_capacity_metadata(snapshot, augmented["news_candidates_for_menzo"])
-    active.prepare_snapshot(snapshot)
-    assert snapshot["candidates"] == []
-    assert len(snapshot["deterministic_exact_skips"]) == 1
-    assert snapshot["deterministic_exact_skips"][0]["exact_duplicate_scope"] == "recent_history"
+    rows = []
+    for index in range(45):
+        row = _soft(f"https://ed3.test/pool-{index}", title=f"Pool soft {index}")
+        row.update({
+            "soft_board_day": "2026-10-07",
+            "soft_board_first_seen_at": "2026-10-07T02:00:00+00:00",
+            "softpool_added_at": "2026-10-07T02:00:00+00:00",
+            "soft_board_content_fingerprint": soft._content_fingerprint(row),
+        })
+        rows.append(row)
+    menzo.write_json(menzo.SOFTPOOL_FILE, {"items": rows})
+
+    monkeypatch.setattr(shadow, "costly_work_eligibility", lambda: (True, "ready"))
+    monkeypatch.setattr(menzo, "load_authoritative_publisher_history", lambda *_a, **_k: [])
+    monkeypatch.setattr(menzo, "load_soft_tombstone_duplicate_history", lambda *_a, **_k: [])
+    monkeypatch.setattr(menzo, "published_today_count", lambda: 0)
+
+    board = {
+        "news_candidates_for_menzo": [{
+            "url": "https://ed3.test/fresh",
+            "title": "Fresh feed candidate",
+            "summary": "A current feed development.",
+        }],
+        "published_due_reports": {},
+    }
+    snapshot, diagnostic, _ = runner.capture_editorial_director_opportunity(
+        board, run_id="run", observation_timestamp="2026-10-07T08:00:00+00:00",
+        preserve_active_metadata=True)
+
+    assert diagnostic is None
+    assert len(snapshot["candidates"]) == 1
+    assert snapshot["candidates"][0]["url"] == "https://ed3.test/fresh"
+    assert snapshot["limit_status"] != "exceeded"
+
+
+def test_noon_soft_board_can_review_pool_larger_than_active_candidate_limit(isolated_state):
+    rows = []
+    for index in range(45):
+        row = _soft(f"https://ed3.test/noon-{index}", title=f"Noon soft {index}")
+        row.update({
+            "soft_board_day": "2026-10-07",
+            "soft_board_first_seen_at": "2026-10-07T02:00:00+00:00",
+            "softpool_added_at": "2026-10-07T02:00:00+00:00",
+            "soft_board_content_fingerprint": soft._content_fingerprint(row),
+            "soft_board_review_count": 0,
+        })
+        rows.append(row)
+    menzo.write_json(menzo.SOFTPOOL_FILE, {"items": rows})
+    prompts = []
+
+    def provider(prompt, *_):
+        prompts.append(prompt)
+        return {"candidates": [
+            {"ref": f"s{index}", "disposition": "SOFT_SHOULD",
+             "reason": "Still eligible but not worth publishing now."}
+            for index in range(45)
+        ]}
+
+    result = soft.apply(
+        {"selected": [], "pending": [], "skipped": [], "postprocess": {}},
+        {"observation_timestamp": "2026-10-07T11:00:00+00:00", "remaining_slots": 30},
+        provider=provider)
+
+    assert len(prompts) == 1
+    assert '"ref":"s44"' in prompts[0]
+    assert len(result["pending"]) == 45
+    assert result["postprocess"]["soft_board_pool_size"] == 45
+    assert result["postprocess"]["soft_board_meaningful_review"] is True
 
 
 def test_changed_same_url_after_midnight_remains_tombstoned(isolated_state):
