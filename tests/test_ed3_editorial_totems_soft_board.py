@@ -231,3 +231,88 @@ def test_unchanged_soft_cannot_be_promoted_by_primary_reclassification(isolated_
     assert result["pending"][0]["editorial_director"]["editorial_class"] == "PUBLISHABLE_SOFT"
     assert result["pending"][0]["soft_board"]["disposition"] == "MORNING_HOLD"
     assert result["pending"][0]["soft_board_review_count"] == 1
+
+
+def test_rediscovery_marker_survives_capture_via_active_sidecar(isolated_state):
+    row = _soft("https://ed3.test/sidecar")
+    row.update({
+        "soft_board_day": "2026-10-07",
+        "soft_board_content_fingerprint": soft._content_fingerprint(row),
+        "soft_board_first_seen_at": "2026-10-07T02:00:00+00:00",
+        "softpool_added_at": "2026-10-07T02:00:00+00:00",
+        "soft_board_review_count": 1,
+    })
+    menzo.write_json(menzo.SOFTPOOL_FILE, {"items": [row]})
+    fresh = {"url": row["url"], "title": row["title"], "summary": row["summary"]}
+    augmented = soft.mark_rediscovered_pool_candidates(
+        menzo.augment_board_with_softpool({"news_candidates_for_menzo": [fresh]})
+    )
+    snapshot = shadow.capture_opportunity(
+        augmented, run_id="run", observation_timestamp="2026-10-07T08:00:00+00:00",
+        published_news_today_local=0, history=[])
+    active.preserve_bob_capacity_metadata(snapshot, augmented["news_candidates_for_menzo"])
+    cid = snapshot["candidates"][0]["candidate_id"]
+    sidecar = snapshot["_active_bob_capacity_metadata"][cid]
+    assert sidecar["_soft_board_existing"] is True
+    assert sidecar["_soft_board_existing_review_count"] == 1
+    assert sidecar["_soft_board_existing_fingerprint"] == row["soft_board_content_fingerprint"]
+
+
+def test_carried_pool_entry_absent_from_feed_still_crosses_duplicate_authority(isolated_state):
+    row = _soft("https://ed3.test/carried")
+    row.update({
+        "soft_board_day": "2026-10-07",
+        "soft_board_content_fingerprint": soft._content_fingerprint(row),
+        "soft_board_first_seen_at": "2026-10-07T02:00:00+00:00",
+        "softpool_added_at": "2026-10-07T02:00:00+00:00",
+    })
+    menzo.write_json(menzo.SOFTPOOL_FILE, {"items": [row]})
+    augmented = soft.mark_rediscovered_pool_candidates(
+        menzo.augment_board_with_softpool({"news_candidates_for_menzo": []})
+    )
+    assert [x["url"] for x in augmented["news_candidates_for_menzo"]] == [row["url"]]
+    assert augmented["news_candidates_for_menzo"][0]["_soft_board_existing"] is True
+
+    history = [{
+        "source_url": "https://published.test/same-story",
+        "source_title": row["title"],
+        "title_it": row["title"],
+        "summary": row["summary"],
+        "published_at": "2026-10-07T07:30:00+00:00",
+    }]
+    snapshot = shadow.capture_opportunity(
+        augmented, run_id="run", observation_timestamp="2026-10-07T08:00:00+00:00",
+        published_news_today_local=1, history=history)
+    active.preserve_bob_capacity_metadata(snapshot, augmented["news_candidates_for_menzo"])
+    active.prepare_snapshot(snapshot)
+    assert snapshot["candidates"] == []
+    assert len(snapshot["deterministic_exact_skips"]) == 1
+    assert snapshot["deterministic_exact_skips"][0]["exact_duplicate_scope"] == "recent_history"
+
+
+def test_changed_same_url_after_midnight_is_new_opportunity_not_tombstoned(isolated_state):
+    prior = _soft("https://ed3.test/midnight-change", title="Original soft story")
+    prior["summary"] = "Original secondary detail."
+    prior.update({
+        "soft_board_day": "2026-10-06",
+        "soft_board_first_seen_at": "2026-10-06T15:00:00+00:00",
+        "softpool_added_at": "2026-10-06T15:00:00+00:00",
+    })
+    prior["soft_board_content_fingerprint"] = soft._content_fingerprint(prior)
+    menzo.write_json(menzo.SOFTPOOL_FILE, {"items": [prior]})
+
+    changed = _soft(prior["url"], title="Original soft story")
+    changed["summary"] = "A genuinely new factual development after midnight."
+    result = soft.apply(
+        {"selected": [], "pending": [changed], "skipped": [], "postprocess": {}},
+        {"observation_timestamp": "2026-10-06T22:05:00+00:00", "remaining_slots": 30},
+        provider=lambda *_: pytest.fail("morning changed opportunity should HOLD without review"))
+
+    assert len(result["pending"]) == 1
+    assert result["pending"][0]["summary"] == changed["summary"]
+    assert result["pending"][0]["soft_board"]["disposition"] == "MORNING_HOLD"
+    tombstones = [x for x in result["skipped"] if x.get("reason") == "soft_board_midnight_tombstone"]
+    assert len(tombstones) == 1
+    assert tombstones[0]["summary"] == prior["summary"]
+    memory = menzo.load_json(menzo.HARD_SKIP_FILE, {"items": []})["items"]
+    assert memory[0]["soft_board_content_fingerprint"] == prior["soft_board_content_fingerprint"]
