@@ -1304,6 +1304,11 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
 def project(snapshot: Mapping[str, Any], result: Mapping[str, Any], *, soft_board_provider: Callable[..., Any] | None = None) -> dict[str, Any]:
     """Mechanically project one wholly validated Active decision into Menzo's handoff."""
     originals = {row["candidate_id"]: row for row in snapshot.get("candidates", [])}
+    material_update_ids = {
+        str(row.get("left_id") or "")
+        for row in snapshot.get("duplicate_gate_relations", [])
+        if isinstance(row, Mapping) and row.get("decision") == "MATERIAL_UPDATE"
+    }
     sections = {"SELECT": "selected", "DEFER": "pending", "SKIP": "skipped"}
     projected: dict[str, Any] = {"selected": [], "pending": [], "skipped": [], "version": POLICY_VERSION,
         "policy_version": POLICY_VERSION, "mode": "editorial_director_active",
@@ -1314,6 +1319,7 @@ def project(snapshot: Mapping[str, Any], result: Mapping[str, Any], *, soft_boar
         sidecar = snapshot.get("_active_bob_capacity_metadata", {})
         if isinstance(sidecar, Mapping):
             item.update(copy.deepcopy(sidecar.get(decision["candidate_id"], {})))
+        item["_soft_board_material_update_authorized"] = decision["candidate_id"] in material_update_ids
         item["editorial_director"] = {"policy_version": POLICY_VERSION, **copy.deepcopy(decision),
                                       "decision_authority": "editorial_director"}
         item["decision_authority"] = "editorial_director"
