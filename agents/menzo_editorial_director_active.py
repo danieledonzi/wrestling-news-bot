@@ -1099,6 +1099,21 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                            "candidates": [], "relations": []}, "validation_errors": []}
     schema = json.loads(SCHEMA_PATH.read_text())
     digest = hashlib.sha256(POLICY_PATH.read_bytes()).hexdigest()
+    call = provider
+    tombstone_attempts = 0
+    if _soft_tombstone_rows(snapshot):
+        try:
+            call = call or shadow._default_provider_factory()
+        except Exception as exc:
+            return {**base, "status": "PROVIDER_UNAVAILABLE", "fallback_reason": type(exc).__name__,
+                    "soft_tombstone_gate": {"status": "PROVIDER_UNAVAILABLE", "attempts": 0}}
+        tombstone_meta = _apply_soft_tombstone_material_update_gate(snapshot, call, digest)
+        tombstone_attempts = int(tombstone_meta.get("attempts", 0) or 0)
+        base["soft_tombstone_gate"] = tombstone_meta
+        if not snapshot.get("candidates"):
+            return {**base, "status": "VALIDATED", "attempts": tombstone_attempts,
+                    "output": {"schema_version": SCHEMA_VERSION, "policy_version": POLICY_VERSION,
+                               "candidates": [], "relations": []}, "validation_errors": []}
     authorized = list(snapshot.get("authorized_relations", []))
     contract = pair_cache.contract_fingerprint(
         policy_version=POLICY_VERSION, model=MODEL, policy_path=POLICY_PATH,
@@ -1206,7 +1221,7 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
     if authorized and not has_relations:
         _apply_duplicate_gate(snapshot, [cached_relations[str(row["pair_id"])] for row in authorized])
         if not snapshot.get("candidates"):
-            return {**base, "status": "VALIDATED", "attempts": 0,
+            return {**base, "status": "VALIDATED", "attempts": tombstone_attempts,
                     "output": {"schema_version": SCHEMA_VERSION, "policy_version": POLICY_VERSION,
                                "candidates": [], "relations": copy.deepcopy(
                                    snapshot.get("duplicate_gate_relations", []))},
@@ -1214,11 +1229,13 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
     if not has_relations:
         request = OperationalAIRequest("Menzo", "editorial_director_active",
             reason_code="editorial_director_active")
-    try:
-        call = provider or shadow._default_provider_factory()
-    except Exception as exc:
-        (gate_request or request).initialization_failed(str(exc))
-        return {**base, "status": "PROVIDER_UNAVAILABLE", "fallback_reason": type(exc).__name__}
+    if call is None:
+        try:
+            call = provider or shadow._default_provider_factory()
+        except Exception as exc:
+            (gate_request or request).initialization_failed(str(exc))
+            return {**base, "attempts": tombstone_attempts,
+                    "status": "PROVIDER_UNAVAILABLE", "fallback_reason": type(exc).__name__}
     failures: list[dict[str, Any]] = []
     gate_attempts = 0
     gate_logical_request_id = None
@@ -1353,7 +1370,7 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                     confirmation_request.failed(
                         attempt, error_class="upstream", error_terminal=True,
                         latency_ms=int((time.monotonic() - started) * 1000))
-                    return {**base, "attempts": gate_attempts + confirmation_attempts,
+                    return {**base, "attempts": tombstone_attempts + gate_attempts + confirmation_attempts,
                             "status": "PROVIDER_FAILED", "fallback_reason": type(exc).__name__,
                             "duplicate_gate_logical_request_id": gate_logical_request_id,
                             "duplicate_gate_input_digest": gate_input_digest,
@@ -1473,7 +1490,7 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                 status="failed", error_class=type(exc).__name__)
             request.failed(attempt, error_class="upstream", error_terminal=True,
                            latency_ms=int((time.monotonic() - started) * 1000))
-            return {**base, "attempts": gate_attempts + index + 1, "status": "PROVIDER_FAILED",
+            return {**base, "attempts": tombstone_attempts + gate_attempts + index + 1, "status": "PROVIDER_FAILED",
                     "fallback_reason": type(exc).__name__, "logical_request_id": request.logical_request_id}
         record_gemini_attempt(response=response, model_requested=MODEL, operation_id=request.logical_request_id,
             attempt_index=index, repair=repair, fallback=False, agent="Menzo", workload="editorial_director_active",
@@ -1492,7 +1509,7 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
         if not failures:
             output["relations"] = copy.deepcopy(snapshot.get("duplicate_gate_relations", []))
             result = {**base, "status": "VALIDATED",
-                      "attempts": gate_attempts + confirmation_attempts + index + 1,
+                      "attempts": tombstone_attempts + gate_attempts + confirmation_attempts + index + 1,
                       "logical_request_id": request.logical_request_id, "policy_digest": digest,
                       "input_digest": snapshot["input_digest"], "output": output, "validation_errors": []}
             if gate_logical_request_id:
@@ -1502,7 +1519,7 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                 result["duplicate_confirmation_logical_request_id"] = confirmation_logical_request_id
                 result["duplicate_confirmation_input_digest"] = confirmation_input_digest
             return result
-    return {**base, "attempts": gate_attempts + confirmation_attempts + 2,
+    return {**base, "attempts": tombstone_attempts + gate_attempts + confirmation_attempts + 2,
             "logical_request_id": request.logical_request_id,
             "validation_errors": failures, "fallback_reason": failures[0]["family"] if failures else "validation_failed"}
 
