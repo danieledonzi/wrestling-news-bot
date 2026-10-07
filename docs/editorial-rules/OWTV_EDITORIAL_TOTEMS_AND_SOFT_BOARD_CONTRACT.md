@@ -165,7 +165,16 @@ Rediscovery by Massy or the feed MUST NOT reset:
 - competitive-loss count;
 - tombstone status.
 
-A fresh MATERIAL_UPDATE may create a new editorial opportunity; mere rediscovery or rewording may not.
+The canonical URL is immutable for the lifetime of a soft opportunity. Feed-text drift on the same URL
+(headline rewrite, summary rewrite, refreshed timestamp or other metadata change) MUST NOT create a new opportunity,
+MUST NOT reset soft state, and MUST NOT promote the item to MUST/SHOULD.
+
+In OWTV's source environment, a genuinely new development is represented by a new URL. That new URL is a new candidate,
+but it still MUST pass duplicate/material-update authority against published history and relevant soft tombstones.
+If it is the same old story under another URL, it dies as DUPLICATE. If it contains a genuinely new development,
+MATERIAL_UPDATE may authorize it as a new editorial opportunity.
+
+No implementation should invent a same-URL material-update path.
 
 ## 12. Competitive decay begins only when competition begins
 
