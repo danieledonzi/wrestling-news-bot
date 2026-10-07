@@ -1569,6 +1569,8 @@ def project(snapshot: Mapping[str, Any], result: Mapping[str, Any], *, soft_boar
     for tombstoned in snapshot.get("soft_tombstone_skips", []):
         item = copy.deepcopy(tombstoned); item.pop("candidate_id", None)
         reason = str(item.pop("soft_board_tombstone_reason", "authority_unresolved") or "authority_unresolved")
+        from agents.menzo_soft_board import _content_fingerprint
+        item["soft_board_content_fingerprint"] = _content_fingerprint(item)
         item.update(decision="skip", priority="skip", decision_authority="soft_board",
                     reason=f"soft_board_tombstone_{reason}")
         projected["skipped"].append(item)
