@@ -504,6 +504,9 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
         else:
             rows, review = _review(pool, snapshot, capacity, now, provider)
             telemetry["soft_board_review"] = {k: v for k, v in review.items() if k != "payload"}
+            payload = review.get("payload") if isinstance(review.get("payload"), Mapping) else {}
+            if isinstance(payload.get("day_context"), Mapping):
+                telemetry["soft_board_review_day_context"] = copy.deepcopy(dict(payload["day_context"]))
             if rows is None:
                 held = [_pending_state(row, "REVIEW_UNAVAILABLE", now,
                                        reason=str(review.get("status") or "review_unavailable")) for row in pool]
