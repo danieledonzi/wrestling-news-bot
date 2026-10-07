@@ -7,6 +7,10 @@ This operation evaluates only candidates already classified primary `PUBLISHABLE
 
 It never changes a primary editorial class.
 
+The soft board is a separate persistent container from the primary Active candidate list. Morning-held rows are
+not re-injected into primary classification on every run and do not count toward the primary `MAX_CANDIDATES`
+capture limit. At an eligible review, evaluate the entire currently eligible soft container as one board.
+
 ## Contextual judgment
 
 Judge the entire supplied soft board in the context of what OpenWrestlingTV has already published today.
