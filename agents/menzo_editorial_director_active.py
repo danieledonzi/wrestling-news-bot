@@ -1542,7 +1542,9 @@ def project(snapshot: Mapping[str, Any], result: Mapping[str, Any], *, soft_boar
         sidecar = snapshot.get("_active_bob_capacity_metadata", {})
         if isinstance(sidecar, Mapping):
             item.update(copy.deepcopy(sidecar.get(decision["candidate_id"], {})))
-        item["_soft_board_material_update_authorized"] = decision["candidate_id"] in material_update_ids
+        item["_soft_board_material_update_authorized"] = bool(
+            item.get("_soft_board_material_update_authorized") or
+            decision["candidate_id"] in material_update_ids)
         item["editorial_director"] = {"policy_version": POLICY_VERSION, **copy.deepcopy(decision),
                                       "decision_authority": "editorial_director"}
         item["decision_authority"] = "editorial_director"
@@ -1563,6 +1565,12 @@ def project(snapshot: Mapping[str, Any], result: Mapping[str, Any], *, soft_boar
         item.update(decision="skip", priority="skip", article_type="duplicate",
                     decision_authority="semantic_duplicate_gate",
                     reason=f"semantic_{scope}_duplicate")
+        projected["skipped"].append(item)
+    for tombstoned in snapshot.get("soft_tombstone_skips", []):
+        item = copy.deepcopy(tombstoned); item.pop("candidate_id", None)
+        reason = str(item.pop("soft_board_tombstone_reason", "authority_unresolved") or "authority_unresolved")
+        item.update(decision="skip", priority="skip", decision_authority="soft_board",
+                    reason=f"soft_board_tombstone_{reason}")
         projected["skipped"].append(item)
     # ED-3: primary PUBLISHABLE_SOFT never competes here. The contextual
     # soft-board owns morning HOLD, post-noon competition, decay and tombstones.
