@@ -321,6 +321,30 @@ def _review(pool: list[dict[str, Any]], snapshot: Mapping[str, Any], capacity: M
                   "logical_request_id": request.logical_request_id, "input_digest": input_digest}
 
 
+def _revalidate_pool_duplicates(pool: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
+    """Re-run duplicate authority on the isolated soft container before contextual selection.
+
+    This is intentionally separate from primary Active capture and therefore has no
+    MAX_CANDIDATES coupling. It checks duplicates inside the current pool first and
+    then against the latest published history. Any unresolved arbitration fails closed
+    through the existing duplicate guards.
+    """
+    if not pool:
+        return [], [], {}
+    from agents.menzo_policy_v93_15 import apply_same_story_duplicate_guard, apply_recent_published_duplicate_guard
+    work = {
+        "selected": [copy.deepcopy(row) for row in pool],
+        "pending": [],
+        "skipped": [],
+        "postprocess": {},
+    }
+    apply_same_story_duplicate_guard(work, {})
+    apply_recent_published_duplicate_guard(work)
+    survivors = [row for row in work.get("selected", []) if isinstance(row, dict)]
+    skipped = [row for row in work.get("skipped", []) if isinstance(row, dict)]
+    return survivors, skipped, copy.deepcopy(work.get("postprocess", {}))
+
+
 def _terminal_skip(row: Mapping[str, Any], reason: str, disposition: str, now: datetime) -> dict[str, Any]:
     item = copy.deepcopy(dict(row))
     item["decision"] = "skip"
@@ -503,6 +527,32 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
             telemetry["soft_board_meaningful_review"] = False
             _write_pool(held)
         else:
+            pool, duplicate_skips, duplicate_meta = _revalidate_pool_duplicates(pool)
+            telemetry["soft_board_duplicate_revalidation"] = duplicate_meta
+            telemetry["soft_board_duplicates_removed"] = len(duplicate_skips)
+            for skipped in duplicate_skips:
+                item = copy.deepcopy(skipped)
+                item["decision_authority"] = item.get("decision_authority") or "soft_board_duplicate_revalidation"
+                projected["skipped"].append(item)
+            if not pool:
+                telemetry["soft_board_status"] = "EMPTY_AFTER_DUPLICATE_REVALIDATION"
+                telemetry["soft_board_meaningful_review"] = False
+                _write_pool([])
+                projected["handoff"] = {
+                    "to_bob_or_v92": len(projected.get("selected", [])),
+                    "pending": len(projected.get("pending", [])),
+                    "skipped": len(projected.get("skipped", [])),
+                    "decision_authority": "editorial_director",
+                }
+                projected["allowed_urls_for_v92"] = [
+                    str(item.get("url") or item.get("source_url"))
+                    for item in projected.get("selected", [])
+                    if isinstance(item, Mapping) and (item.get("url") or item.get("source_url"))
+                ]
+                save_hard_skips({"selected": projected.get("selected", []),
+                                 "pending": projected.get("pending", []),
+                                 "skipped": projected.get("skipped", [])})
+                return projected
             rows, review = _review(pool, snapshot, capacity, now, provider)
             telemetry["soft_board_review"] = {k: v for k, v in review.items() if k != "payload"}
             payload = review.get("payload") if isinstance(review.get("payload"), Mapping) else {}
