@@ -34,6 +34,7 @@ REVALIDATION_MAX_BODY_CHARS = 24000
 INPUT_FIELDS = ("source", "feed_url", "title", "url", "normalized_url", "published", "summary",
                 "from_softpool", "softpool_added_at", "last_seen_at", "softpool_ttl_hours", "softpool_deferrals")
 HISTORY_TITLE_FIELDS = ("source_title", "title_it")
+HISTORY_META_FIELDS = ("history_state", "tombstoned_at", "first_seen_at", "soft_board_day")
 CATEGORIES = {"WWE", "AEW", "NXT", "TNA", "ROH", "World", "Business"}
 CLASSES = ("MUST_PUBLISH", "SHOULD_PUBLISH", "PUBLISHABLE_SOFT", "SKIP")
 ACTIONS = {"SELECT", "DEFER", "SKIP"}
@@ -145,7 +146,7 @@ def capture_opportunity(massy_board: Mapping[str, Any], *, run_id: str, observat
     for item in history:
         if not isinstance(item, Mapping):
             continue
-        kept = {k: copy.deepcopy(item[k]) for k in INPUT_FIELDS + HISTORY_TITLE_FIELDS +
+        kept = {k: copy.deepcopy(item[k]) for k in INPUT_FIELDS + HISTORY_TITLE_FIELDS + HISTORY_META_FIELDS +
                 ("source_url", "published_at") if k in item}
         retained = item.get("canonical_source_body")
         if isinstance(retained, Mapping) and isinstance(retained.get("text"), str) and retained["text"]:
