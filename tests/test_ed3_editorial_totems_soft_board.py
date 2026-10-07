@@ -291,7 +291,7 @@ def test_carried_pool_entry_absent_from_feed_still_crosses_duplicate_authority(i
     assert snapshot["deterministic_exact_skips"][0]["exact_duplicate_scope"] == "recent_history"
 
 
-def test_changed_same_url_after_midnight_is_new_opportunity_not_tombstoned(isolated_state):
+def test_changed_same_url_after_midnight_remains_tombstoned(isolated_state):
     prior = _soft("https://ed3.test/midnight-change", title="Original soft story")
     prior["summary"] = "Original secondary detail."
     prior.update({
@@ -303,23 +303,15 @@ def test_changed_same_url_after_midnight_is_new_opportunity_not_tombstoned(isola
     menzo.write_json(menzo.SOFTPOOL_FILE, {"items": [prior]})
 
     changed = _soft(prior["url"], title="Original soft story")
-    changed["summary"] = "A genuinely new factual development after midnight."
-    changed["_soft_board_existing"] = True
-    changed["_soft_board_material_update_authorized"] = True
+    changed["summary"] = "Edited or refreshed text on the same canonical URL."
     result = soft.apply(
         {"selected": [], "pending": [changed], "skipped": [], "postprocess": {}},
         {"observation_timestamp": "2026-10-06T22:05:00+00:00", "remaining_slots": 30},
-        provider=lambda *_: pytest.fail("morning changed opportunity should HOLD without review"))
+        provider=lambda *_: pytest.fail("same-URL tombstone must not invoke review"))
 
-    assert len(result["pending"]) == 1
-    assert result["pending"][0]["summary"] == changed["summary"]
-    assert result["pending"][0]["soft_board"]["disposition"] == "MORNING_HOLD"
+    assert result["pending"] == []
     tombstones = [x for x in result["skipped"] if x.get("reason") == "soft_board_midnight_tombstone"]
-    assert len(tombstones) == 1
-    assert tombstones[0]["summary"] == prior["summary"]
-    memory = menzo.load_json(menzo.HARD_SKIP_FILE, {"items": []})["items"]
-    assert memory[0]["soft_board_content_fingerprint"] == prior["soft_board_content_fingerprint"]
-
+    assert len(tombstones) >= 1
 
 def test_fingerprint_drift_without_material_update_keeps_soft_identity(isolated_state):
     prior = _soft("https://ed3.test/drift", title="Soft interview")
@@ -337,7 +329,6 @@ def test_fingerprint_drift_without_material_update_keeps_soft_identity(isolated_
     refreshed["title"] = prior["title"]
     refreshed["summary"] = "Edited feed wording only."
     refreshed["_soft_board_existing"] = True
-    refreshed["_soft_board_material_update_authorized"] = False
 
     result = soft.apply(
         {"selected": [refreshed], "pending": [], "skipped": [], "postprocess": {}},
@@ -351,16 +342,16 @@ def test_fingerprint_drift_without_material_update_keeps_soft_identity(isolated_
     assert result["pending"][0]["soft_board"]["disposition"] == "MORNING_HOLD"
 
 
-def test_massy_keeps_changed_tombstone_blocked_pending_material_update(monkeypatch):
+def test_massy_same_url_tombstone_is_unconditional(monkeypatch):
     candidate = {
         "url": "https://ed3.test/tombstone-reworded",
-        "title": "Same story, rewritten headline",
+        "title": "Same URL, rewritten headline",
         "summary": "Edited wording only.",
     }
     stored = {
         "decision_authority": "soft_board",
         "reason": "soft_board_midnight_tombstone",
-        "soft_board_content_fingerprint": "different-prior-fingerprint",
+        "soft_board_content_fingerprint": "prior-fingerprint",
         "added_at": "2026-10-07T00:00:00+00:00",
         "soft_board_tombstone_snapshot": {
             "title": "Original headline",
@@ -372,9 +363,7 @@ def test_massy_keeps_changed_tombstone_blocked_pending_material_update(monkeypat
     key = massy.source_key(candidate["url"])
     monkeypatch.setattr(massy, "base_run_massy", lambda: {
         "news_candidates_for_menzo": [dict(candidate)],
-        "report_candidates": [],
-        "hard_skipped": [],
-        "handoff": {},
+        "report_candidates": [], "hard_skipped": [], "handoff": {},
     })
     monkeypatch.setattr(massy, "report_coverage", lambda *_: ({}, set(), set()))
     monkeypatch.setattr(massy, "build_suspicious_story_clusters", lambda *_: [])
@@ -383,88 +372,54 @@ def test_massy_keeps_changed_tombstone_blocked_pending_material_update(monkeypat
     monkeypatch.setattr(massy, "old_news_reason", lambda *_: None)
 
     board = massy.run_massy()
-    assert len(board["news_candidates_for_menzo"]) == 1
-    routed = board["news_candidates_for_menzo"][0]
-    assert routed["_soft_board_tombstone"]["snapshot"]["title"] == "Original headline"
-    assert board["handoff"]["menzo_memory_hard_skipped"] == 0
+    assert board["news_candidates_for_menzo"] == []
+    assert board["handoff"]["menzo_memory_hard_skipped"] == 1
 
 
-def _tombstone_snapshot(current_summary: str):
-    item = {
-        "url": "https://ed3.test/tombstone-gate",
-        "title": "Same URL story",
-        "summary": current_summary,
-        "_soft_board_tombstone": {
-            "reason": "soft_board_midnight_tombstone",
-            "added_at": "2026-10-07T00:00:00+00:00",
-            "fingerprint": "prior-fingerprint",
-            "snapshot": {
-                "title": "Same URL story",
-                "summary": "Original secondary detail.",
-                "story_core": "Original soft opportunity.",
-                "published": "2026-10-06T20:00:00+00:00",
-                "first_seen_at": "2026-10-06T20:00:00+00:00",
-                "soft_board_day": "2026-10-06",
-            },
-        },
+def test_soft_tombstone_history_is_available_to_duplicate_gate(isolated_state):
+    row = _soft("https://ed3.test/old-soft", title="Wrestler discusses contract status")
+    row["summary"] = "The wrestler says there is no signed deal yet."
+    row.update({
+        "soft_board_day": "2026-10-06",
+        "soft_board_first_seen_at": "2026-10-06T15:00:00+00:00",
+        "softpool_added_at": "2026-10-06T15:00:00+00:00",
+    })
+    row["soft_board_content_fingerprint"] = soft._content_fingerprint(row)
+    skipped = soft._terminal_skip(row, "soft_board_midnight_tombstone", "MIDNIGHT_TOMBSTONE",
+                                  soft._parse_dt("2026-10-07T00:05:00+00:00"))
+    menzo.save_hard_skips({"selected": [], "pending": [], "skipped": [skipped]})
+
+    history = menzo.load_soft_tombstone_duplicate_history(
+        now=soft._parse_dt("2026-10-07T01:00:00+00:00"))
+    assert len(history) == 1
+    assert history[0]["source_url"] == row["url"]
+    assert history[0]["history_state"] == "soft_tombstone"
+    assert "no signed deal" in history[0]["summary"]
+
+
+def test_new_url_can_be_compared_with_tombstoned_story(isolated_state):
+    old = {
+        "source_url": "https://ed3.test/old-soft",
+        "source_title": "Wrestler contract status update",
+        "title_it": "Wrestler contract status update",
+        "summary": "Wrestler says there is no signed deal yet.",
+        "published_at": "2026-10-06T20:00:00+00:00",
+        "history_state": "soft_tombstone",
+    }
+    new = {
+        "url": "https://ed3.test/new-development",
+        "title": "Wrestler contract status update",
+        "summary": "Wrestler says there is no signed deal yet.",
     }
     snapshot = shadow.capture_opportunity(
-        {"news_candidates_for_menzo": [item]},
+        {"news_candidates_for_menzo": [new]},
         run_id="run", observation_timestamp="2026-10-07T08:00:00+00:00",
-        published_news_today_local=0, history=[])
-    active.preserve_bob_capacity_metadata(snapshot, [item])
-    return snapshot
-
-
-def test_tombstone_gate_rejects_feed_rewording(monkeypatch):
-    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
-    snapshot = _tombstone_snapshot("The same old story with refreshed feed wording.")
-
-    def provider(prompt, *_):
-        assert "SOFT TOMBSTONE MATERIAL-UPDATE GATE" in prompt
-        return {"candidates": [{
-            "ref": "t0", "decision": "NO_MATERIAL_UPDATE",
-            "new_fact": None, "temporal_basis": None,
-        }]}
-
-    result = active.evaluate(snapshot, provider=provider)
-    assert result["status"] == "VALIDATED"
-    assert result["soft_tombstone_gate"]["tombstoned"] == 1
+        published_news_today_local=0, history=[old])
+    active.prepare_snapshot(snapshot)
+    # Same story under a new URL is still covered by duplicate authority;
+    # exact material is removed before primary classification.
     assert snapshot["candidates"] == []
-    assert snapshot["soft_tombstone_skips"][0]["soft_board_tombstone_reason"] == "no_material_update"
-
-
-def test_tombstone_gate_releases_only_grounded_material_update(monkeypatch, isolated_state):
-    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
-    snapshot = _tombstone_snapshot("A new contract signing was officially announced after midnight.")
-    calls = []
-
-    def provider(prompt, *_):
-        calls.append(prompt)
-        if "SOFT TOMBSTONE MATERIAL-UPDATE GATE" in prompt:
-            return {"candidates": [{
-                "ref": "t0", "decision": "MATERIAL_UPDATE",
-                "new_fact": "The wrestler officially signed a new contract.",
-                "temporal_basis": "The signing announcement occurred after the prior opportunity was tombstoned.",
-            }]}
-        return {"candidates": [{
-            "ref": "c0", "editorial_class": "PUBLISHABLE_SOFT",
-            "recommended_action": "DEFER", "category": "WWE",
-            "story_core": "A secondary but genuinely new contract-related follow-up.",
-        }], "relations": []}
-
-    result = active.evaluate(snapshot, provider=provider)
-    assert result["status"] == "VALIDATED"
-    cid = snapshot["candidates"][0]["candidate_id"]
-    assert snapshot["_active_bob_capacity_metadata"][cid]["_soft_board_material_update_authorized"] is True
-    assert len(calls) == 2
-
-    projected = active.project(snapshot, result)
-    assert projected["selected"] == []
-    assert len(projected["pending"]) == 1
-    assert projected["pending"][0]["soft_board"]["disposition"] == "MORNING_HOLD"
-    assert projected["pending"][0]["_soft_board_material_update_authorized"] is True
-
+    assert snapshot["deterministic_exact_skips"][0]["exact_duplicate_scope"] == "recent_history"
 
 def test_soft_board_review_retains_exact_day_context(isolated_state):
     projected = {
