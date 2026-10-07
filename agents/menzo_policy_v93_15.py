@@ -3578,6 +3578,17 @@ def save_hard_skips(result: dict[str, Any]) -> None:
             reason = "editorial_class_skip" if editorial.get("editorial_class") == "SKIP" else None
         if reason == "requires_menzo_classification" or not reason:
             continue
+        tombstone_snapshot = None
+        if authority == "soft_board":
+            tombstone_snapshot = {
+                "title": str(item.get("title") or item.get("source_title") or "")[:500],
+                "summary": str(item.get("summary") or item.get("description") or "")[:2000],
+                "story_core": str(editorial.get("story_core") or "")[:1000],
+                "source": str(item.get("source") or "")[:300],
+                "published": str(item.get("published") or item.get("published_at") or ""),
+                "first_seen_at": str(item.get("soft_board_first_seen_at") or item.get("first_seen_at") or ""),
+                "soft_board_day": str(item.get("soft_board_day") or ""),
+            }
         by_url[key] = {
             "url": item.get("url") or item.get("source_url"),
             "normalized_url": key,
@@ -3589,6 +3600,7 @@ def save_hard_skips(result: dict[str, Any]) -> None:
             "soft_board_content_fingerprint": (
                 item.get("soft_board_content_fingerprint") if authority == "soft_board" else None
             ),
+            "soft_board_tombstone_snapshot": tombstone_snapshot,
             "added_at": now,
             "expires_after_hours": HARD_SKIP_TTL_HOURS,
         }
