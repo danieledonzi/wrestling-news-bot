@@ -274,7 +274,7 @@ def test_carried_pool_entry_absent_from_feed_still_crosses_duplicate_authority(i
     assert augmented["news_candidates_for_menzo"][0]["_soft_board_existing"] is True
 
     history = [{
-        "source_url": "https://published.test/same-story",
+        "source_url": row["url"],
         "source_title": row["title"],
         "title_it": row["title"],
         "summary": row["summary"],
