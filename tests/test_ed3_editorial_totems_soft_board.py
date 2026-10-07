@@ -389,8 +389,7 @@ def test_soft_tombstone_history_is_available_to_duplicate_gate(isolated_state):
                                   soft._parse_dt("2026-10-07T00:05:00+00:00"))
     menzo.save_hard_skips({"selected": [], "pending": [], "skipped": [skipped]})
 
-    history = menzo.load_soft_tombstone_duplicate_history(
-        now=soft._parse_dt("2026-10-07T01:00:00+00:00"))
+    history = menzo.load_soft_tombstone_duplicate_history()
     assert len(history) == 1
     assert history[0]["source_url"] == row["url"]
     assert history[0]["history_state"] == "soft_tombstone"
@@ -415,11 +414,11 @@ def test_new_url_can_be_compared_with_tombstoned_story(isolated_state):
         {"news_candidates_for_menzo": [new]},
         run_id="run", observation_timestamp="2026-10-07T08:00:00+00:00",
         published_news_today_local=0, history=[old])
+    assert snapshot["publisher_history_12h"][0]["history_state"] == "soft_tombstone"
+    assert snapshot["authorized_relations"]
+    assert snapshot["authorized_relations"][0]["scope"] == "recent_history"
     active.prepare_snapshot(snapshot)
-    # Same story under a new URL is still covered by duplicate authority;
-    # exact material is removed before primary classification.
-    assert snapshot["candidates"] == []
-    assert snapshot["deterministic_exact_skips"][0]["exact_duplicate_scope"] == "recent_history"
+    assert snapshot["candidates"]  # semantic gate, not URL identity, decides the different-URL relation
 
 def test_soft_board_review_retains_exact_day_context(isolated_state):
     projected = {
