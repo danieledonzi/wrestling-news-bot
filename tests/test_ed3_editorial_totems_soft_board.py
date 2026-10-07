@@ -445,3 +445,32 @@ def test_soft_board_review_retains_exact_day_context(isolated_state):
     assert context["soft_capacity_this_run"] >= 0
     assert context["unused_capacity_is_not_a_target"] is True
     assert context["zero_soft_publications_is_valid"] is True
+
+
+def test_first_post_midnight_primary_select_cannot_revive_expired_soft(isolated_state):
+    prior = _soft("https://ed3.test/midnight-selected", title="Expired soft")
+    prior.update({
+        "soft_board_day": "2026-10-06",
+        "soft_board_first_seen_at": "2026-10-06T18:00:00+00:00",
+        "softpool_added_at": "2026-10-06T18:00:00+00:00",
+        "soft_board_content_fingerprint": soft._content_fingerprint(prior),
+    })
+    menzo.write_json(menzo.SOFTPOOL_FILE, {"items": [prior]})
+
+    promoted = _strong(prior["url"], "SHOULD_PUBLISH")
+    promoted["title"] = prior["title"]
+    promoted["_soft_board_existing"] = True
+
+    result = soft.apply(
+        {"selected": [promoted], "pending": [], "skipped": [], "postprocess": {}},
+        {"observation_timestamp": "2026-10-06T22:05:00+00:00", "remaining_slots": 30},
+        provider=lambda *_: pytest.fail("expired carried URL must not reach soft review"))
+
+    assert result["selected"] == []
+    assert result["pending"] == []
+    assert any(item.get("reason") == "soft_board_midnight_tombstone"
+               for item in result["skipped"])
+
+
+def test_active_input_safety_ceiling_is_one_megabyte():
+    assert shadow.MAX_INPUT_BYTES == 1_000_000
