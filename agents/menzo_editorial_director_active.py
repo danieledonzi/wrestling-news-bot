@@ -26,11 +26,13 @@ POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY
 RELATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_gate_schema_v3.json"
 CONFIRMATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_confirmation_schema_v3.json"
 EVENT_REGISTRY_PATH = ROOT / "config/event_registry.json"
+SOFT_TOMBSTONE_SCHEMA_PATH = ROOT / "config/editorial_soft_tombstone_material_update_schema_v1.json"
 BOB_CAPACITY_FIELDS = ("article_type", "source_title", "category_hint", "reason",
                        "ai_editorial_reason", "event_key", "show_report_id", "show_name",
                        "special_event_match", "event_report_key", "corresponding_report_published",
                        "_soft_board_existing", "_soft_board_existing_day",
-                       "_soft_board_existing_review_count", "_soft_board_existing_fingerprint")
+                       "_soft_board_existing_review_count", "_soft_board_existing_fingerprint",
+                       "_soft_board_fingerprint_changed", "_soft_board_tombstone")
 DUPLICATE_EVIDENCE_FIELDS = ("left_evidence", "right_evidence")
 DUPLICATE_CENTRALITY_FIELDS = ("left_central_development", "right_central_development",
                                "centrality_basis")
