@@ -837,11 +837,18 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
         if key and key in history:
             articles.append(article)
             continue
+        cls = primary_class(article)
+        # MUST is a totem and does not consume the ordinary per-run budget.
+        # This mirrors Bob's MUST exemption and prevents validated mandatory
+        # coverage from being discarded at Publisher.
+        if cls == "MUST_PUBLISH":
+            articles.append(article)
+            projected_today += 1
+            continue
         if new_articles_selected >= MAX_POSTS_PER_RUN:
             overflow_articles.append({**article, "_publisher_capacity_reason": f"publisher_max_posts_per_run:{MAX_POSTS_PER_RUN}"})
             continue
-        cls = primary_class(article)
-        if cls in {"MUST_PUBLISH", "SHOULD_PUBLISH"}:
+        if cls == "SHOULD_PUBLISH":
             articles.append(article)
             new_articles_selected += 1
             projected_today += 1
