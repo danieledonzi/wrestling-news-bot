@@ -107,9 +107,23 @@ During 00:00–12:00:
 - morning hold does not count as a competitive loss;
 - low `published_news_today_local` MUST NOT justify soft admission.
 
+The morning soft pool is a **separate persistent container**. It MUST NOT be injected back into the
+primary Active candidate list on later runs merely because it is waiting. `MAX_CANDIDATES` and other
+primary-capture limits apply to the current feed candidate board, not to the accumulated soft pool.
+
+A soft URL enters this container only after it has already passed the duplicate gate and primary classification.
+If the same URL appears again in a later feed run, that feed appearance still follows normal duplicate/tombstone
+rules; the stored pool row itself does not need to be reclassified every 30 minutes.
+
+The soft pool may grow independently during the morning. Its size is not an editorial candidate-count cap.
+
 ## 8. From 12:00, every run may perform a contextual Soft Board Review
 
 After 12:00 Europe/Rome, remaining run capacity is calculated only after MUST and SHOULD have taken precedence.
+
+At the first eligible Soft Board Review, Gemini receives the **entire currently eligible soft pool as its own board**,
+independent of the primary Active candidate list. New PUBLISHABLE_SOFT items arriving after 12:00 join that same
+container before the contextual review.
 
 Gemini MUST receive day context for the soft review, including at minimum:
 
