@@ -408,9 +408,9 @@ def capture_editorial_director_opportunity(massy_board: dict[str, Any], *, run_i
     from agents.menzo_policy_v93_15 import load_authoritative_publisher_history, load_json
     if preserve_active_metadata:
         from agents.menzo_soft_board import mark_rediscovered_pool_candidates
-        # Every carried soft opportunity must be present in the Active snapshot so it
-        # crosses the current duplicate gate even when it is absent from this feed run.
-        augmented = mark_rediscovered_pool_candidates(softpool_augmented_board(massy_board))
+        # Active classifies only URLs present in the current feed board.
+        # The persistent soft pool is a separate container and is never injected into Active candidates.
+        augmented = mark_rediscovered_pool_candidates(massy_board)
     else:
         augmented = softpool_augmented_board(massy_board)
     from agents.menzo_policy_v93_15 import published_today_count
