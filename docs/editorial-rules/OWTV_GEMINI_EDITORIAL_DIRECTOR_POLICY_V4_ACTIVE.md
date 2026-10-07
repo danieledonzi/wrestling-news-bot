@@ -77,6 +77,16 @@ exceptional, record, materially surprising, or strategically meaningful audience
 Anecdotes, appearance/lifestyle content, nostalgia, declarations without major new facts, and weak social reactions are
 not automatically news because a major wrestler or brand appears.
 
+## Soft opportunity URL identity
+
+For the soft lifecycle, canonical URL identity is immutable. The same URL cannot become a new material update merely
+because its feed title, summary, timestamp or metadata changed. Same-URL rediscovery retains the existing soft/tombstone
+state.
+
+A genuinely new development arrives under a new URL. That new URL still crosses duplicate authority against recent
+published history and active soft-tombstone history. A syndicated/reworded copy of the old story is DUPLICATE; a
+genuinely new development may be MATERIAL_UPDATE.
+
 ## Duplicate and material-update relations
 
 Only supplied authorized relation refs may receive semantic decisions in the duplicate-gate phase. Do not emit an
