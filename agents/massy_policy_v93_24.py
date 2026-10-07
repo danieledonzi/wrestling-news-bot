@@ -302,13 +302,31 @@ def run_massy() -> dict[str, Any]:
         key = source_key(item.get("url") or item.get("normalized_url") or "")
         if key in memory:
             mem = memory[key]
-            memory_applies = True
-            if str(mem.get("decision_authority") or "") == "soft_board":
+            authority = str(mem.get("decision_authority") or "")
+            if authority == "soft_board":
                 stored_fingerprint = str(mem.get("soft_board_content_fingerprint") or "")
-                if stored_fingerprint:
-                    from agents.menzo_soft_board import _content_fingerprint
-                    memory_applies = stored_fingerprint == _content_fingerprint(item)
-            if memory_applies:
+                from agents.menzo_soft_board import _content_fingerprint
+                current_fingerprint = _content_fingerprint(item)
+                if not stored_fingerprint or stored_fingerprint == current_fingerprint:
+                    moved.append(hard_skip_entry(item, "menzo_hard_skip_memory",
+                        menzo_reason=mem.get("reason", ""), menzo_article_type=mem.get("article_type", "")))
+                    menzo_memory_count += 1
+                    continue
+                # Fingerprint drift is not sufficient to revive a tombstoned story.
+                # Route the changed same-URL opportunity to Active with the prior
+                # tombstone evidence so only grounded MATERIAL_UPDATE authority can release it.
+                item = dict(item)
+                item["_soft_board_tombstone"] = {
+                    "reason": mem.get("reason"),
+                    "added_at": mem.get("added_at"),
+                    "fingerprint": stored_fingerprint,
+                    "snapshot": mem.get("soft_board_tombstone_snapshot") or {
+                        "title": mem.get("title", ""),
+                        "summary": "",
+                        "story_core": "",
+                    },
+                }
+            else:
                 moved.append(hard_skip_entry(item, "menzo_hard_skip_memory",
                     menzo_reason=mem.get("reason", ""), menzo_article_type=mem.get("article_type", "")))
                 menzo_memory_count += 1
