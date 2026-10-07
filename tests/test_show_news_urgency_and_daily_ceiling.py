@@ -490,3 +490,29 @@ def test_same_run_weekly_report_publication_disables_urgency(monkeypatch, tmp_pa
     assert projected["pending"] == []
     assert projected["selected"][0]["editorial_director"]["recommended_action"] == "SELECT"
     assert "scheduling_override" not in projected["selected"][0]
+
+
+def test_publisher_must_is_exempt_from_per_run_cap(monkeypatch):
+    monkeypatch.setattr(publisher, "wp_ready", lambda: (True, "ok"))
+    monkeypatch.setattr(publisher, "publisher_duplicate_safety_filter", lambda articles, history: (articles, []))
+    monkeypatch.setattr(publisher, "load_json", lambda path, default: default)
+    calls = []
+    monkeypatch.setattr(publisher, "publish_article", lambda article, *_args:
+                        calls.append(article["source_url"]) or {"status": "published"})
+    monkeypatch.setattr(publisher, "write_json", lambda *args: None)
+
+    must = [
+        {"source_url": f"https://example.test/must-{i}",
+         "editorial_director": {"editorial_class": "MUST_PUBLISH", "recommended_action": "SELECT"}}
+        for i in range(publisher.MAX_POSTS_PER_RUN + 2)
+    ]
+    ordinary = {
+        "source_url": "https://example.test/should",
+        "editorial_director": {"editorial_class": "SHOULD_PUBLISH", "recommended_action": "SELECT"},
+    }
+
+    result = publisher.run_publisher({"approved_articles": must + [ordinary]})
+
+    assert calls[:len(must)] == [item["source_url"] for item in must]
+    assert "https://example.test/should" in calls
+    assert result["handoff"]["skipped_capacity"] == 0
