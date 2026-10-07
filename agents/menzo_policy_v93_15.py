@@ -1637,6 +1637,58 @@ def apply_same_story_duplicate_guard(result: dict[str, Any], massy_board: dict[s
     result["handoff"] = {"to_bob_or_v92": len(result["selected"]), "pending": len(result.get("pending", [])), "skipped": len(result["skipped"])}
 
 
+def load_soft_tombstone_duplicate_history(*, now: datetime | None = None,
+                                         path: Path | None = None) -> list[dict[str, Any]]:
+    """Expose active soft tombstones as recent editorial-history endpoints.
+
+    A soft opportunity is immutable by URL. The same URL remains blocked locally.
+    A genuinely new development must arrive under a new URL and is then compared
+    semantically against these tombstoned story endpoints by the ordinary
+    duplicate/material-update authority.
+    """
+    now = now or datetime.now(timezone.utc)
+    raw = load_json(Path(path or HARD_SKIP_FILE), {"items": []})
+    items = raw.get("items", []) if isinstance(raw, dict) else []
+    rows: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        if str(item.get("decision_authority") or "") != "soft_board":
+            continue
+        added = parse_dt(item.get("added_at")) or now
+        ttl = int(item.get("expires_after_hours") or raw.get("ttl_hours") or HARD_SKIP_TTL_HOURS)
+        if added > now or now - added > timedelta(hours=ttl):
+            continue
+        snapshot = item.get("soft_board_tombstone_snapshot")
+        if not isinstance(snapshot, dict):
+            continue
+        url = duplicate_scorer.canonical_source_url({"source_url": item.get("url") or item.get("normalized_url")})
+        if not url or url in seen:
+            continue
+        seen.add(url)
+        title = str(snapshot.get("title") or item.get("title") or "")
+        summary_parts = [
+            str(snapshot.get("summary") or "").strip(),
+            str(snapshot.get("story_core") or "").strip(),
+        ]
+        summary = " | ".join(part for part in summary_parts if part)
+        rows.append({
+            "source_url": url,
+            "source_title": title,
+            "title_it": title,
+            "summary": summary,
+            "published": str(snapshot.get("published") or ""),
+            "published_at": str(snapshot.get("published") or added.isoformat()),
+            "first_seen_at": str(snapshot.get("first_seen_at") or ""),
+            "tombstoned_at": added.isoformat(),
+            "soft_board_day": str(snapshot.get("soft_board_day") or ""),
+            "history_state": "soft_tombstone",
+            "article_id": article_id({"source_url": url}),
+        })
+    return rows
+
+
 def apply_recent_published_duplicate_guard(result: dict[str, Any]) -> None:
     pp = result.setdefault("postprocess", {})
     for key in ["menzo_recent_history_duplicate_calls", "menzo_duplicates_blocked_recent_history", "menzo_real_updates_allowed", "menzo_distinct_stories_allowed", "menzo_duplicate_arbitration_fail_closed"]:
