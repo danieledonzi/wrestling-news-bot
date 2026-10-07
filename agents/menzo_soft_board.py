@@ -392,6 +392,14 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
         if not isinstance(row, dict):
             continue
         key = _source_key(row)
+        # A prior-day soft URL is already expired for the new editorial day.
+        # The first post-midnight run may still carry that row in the in-memory
+        # pool before its tombstone is persisted; never allow that boundary row
+        # to survive a fresh primary SELECT.
+        if key in expired_by_key:
+            terminal.append(_terminal_skip(
+                row, "soft_board_midnight_tombstone", "MIDNIGHT_TOMBSTONE", now))
+            continue
         prior = pool_by_key.get(key)
         carried_same_url = bool(prior and row.get("_soft_board_existing"))
         if carried_same_url:
