@@ -447,10 +447,16 @@ def capture_editorial_director_opportunity(massy_board: dict[str, Any], *, run_i
             (report_key and report_key in published_report_keys) or
             (report_id in published_weekly_ids and
              ((manual_key and manual_key == report_key) or (not manual_key and legacy_current_scope))))
+    history = load_authoritative_publisher_history(12)
+    if preserve_active_metadata:
+        from agents.menzo_policy_v93_15 import load_soft_tombstone_duplicate_history
+        tombstones = load_soft_tombstone_duplicate_history()
+        published_urls = {str(row.get("source_url") or row.get("url") or "") for row in history if isinstance(row, dict)}
+        history.extend(row for row in tombstones if str(row.get("source_url") or "") not in published_urls)
     snapshot = capture_opportunity(
         augmented, run_id=run_id, observation_timestamp=observation_timestamp,
         published_news_today_local=published_today_count(),
-        history=load_authoritative_publisher_history(12))
+        history=history)
     snapshot["publisher_count_label"] = "published_news_today_local"
     if preserve_active_metadata:
         from agents.menzo_editorial_director_active import preserve_bob_capacity_metadata
