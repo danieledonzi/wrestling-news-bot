@@ -104,7 +104,9 @@ def test_morning_soft_is_held_without_competition(isolated_state):
     assert result["selected"][0]["editorial_director"]["editorial_class"] == "MUST_PUBLISH"
 
 
-def test_post_noon_board_can_publish_none(isolated_state):
+def test_post_noon_board_can_publish_none(isolated_state, monkeypatch):
+    monkeypatch.setattr(soft, "_revalidate_pool_duplicates",
+                        lambda pool: (pool, [], {}))
     projected = {"selected": [_strong("https://ed3.test/sh", "SHOULD_PUBLISH")],
                  "pending": [_soft("https://ed3.test/a"), _soft("https://ed3.test/b")],
                  "skipped": [], "postprocess": {}}
@@ -123,7 +125,9 @@ def test_post_noon_board_can_publish_none(isolated_state):
     assert any(x.get("decision_authority") == "soft_board" for x in result["skipped"])
 
 
-def test_post_noon_soft_must_uses_only_residual_capacity(isolated_state):
+def test_post_noon_soft_must_uses_only_residual_capacity(isolated_state, monkeypatch):
+    monkeypatch.setattr(soft, "_revalidate_pool_duplicates",
+                        lambda pool: (pool, [], {}))
     projected = {"selected": [_strong("https://ed3.test/sh1", "SHOULD_PUBLISH"),
                               _strong("https://ed3.test/sh2", "SHOULD_PUBLISH")],
                  "pending": [_soft("https://ed3.test/a"), _soft("https://ed3.test/b")],
@@ -515,3 +519,41 @@ def test_first_post_midnight_primary_select_cannot_revive_expired_soft(isolated_
 
 def test_active_input_safety_ceiling_is_one_megabyte():
     assert shadow.MAX_INPUT_BYTES == 1_000_000
+
+
+def test_duplicate_revalidation_runs_before_soft_board_review(isolated_state, monkeypatch):
+    row = _soft("https://ed3.test/pool-duplicate", title="Already covered story")
+    row.update({
+        "soft_board_day": "2026-10-07",
+        "soft_board_first_seen_at": "2026-10-07T02:00:00+00:00",
+        "softpool_added_at": "2026-10-07T02:00:00+00:00",
+        "soft_board_content_fingerprint": soft._content_fingerprint(row),
+    })
+    menzo.write_json(menzo.SOFTPOOL_FILE, {"items": [row]})
+
+    def same_run_guard(work, _board):
+        return None
+
+    def recent_guard(work):
+        item = work["selected"].pop()
+        item["decision"] = "skip"
+        item["priority"] = "skip"
+        item["article_type"] = "duplicate"
+        item["reason"] = "skip:duplicate_recently_published"
+        item["decision_authority"] = "semantic_duplicate_gate"
+        work["skipped"].append(item)
+
+    monkeypatch.setattr(menzo, "apply_same_story_duplicate_guard", same_run_guard)
+    monkeypatch.setattr(menzo, "apply_recent_published_duplicate_guard", recent_guard)
+
+    result = soft.apply(
+        {"selected": [], "pending": [], "skipped": [], "postprocess": {}},
+        {"observation_timestamp": "2026-10-07T11:00:00+00:00", "remaining_slots": 30},
+        provider=lambda *_: pytest.fail("duplicate row must be removed before Soft Board Gemini"))
+
+    assert result["selected"] == []
+    assert result["pending"] == []
+    assert result["postprocess"]["soft_board_duplicates_removed"] == 1
+    assert result["postprocess"]["soft_board_status"] == "EMPTY_AFTER_DUPLICATE_REVALIDATION"
+    assert any(item.get("reason") == "skip:duplicate_recently_published"
+               for item in result["skipped"])
