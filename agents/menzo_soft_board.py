@@ -103,6 +103,7 @@ def mark_rediscovered_pool_candidates(board: Mapping[str, Any]) -> dict[str, Any
             row["_soft_board_existing"] = True
             row["_soft_board_existing_day"] = prior.get("soft_board_day")
             row["_soft_board_existing_review_count"] = int(prior.get("soft_board_review_count", 0) or 0)
+            row["_soft_board_existing_fingerprint"] = str(prior.get("soft_board_content_fingerprint") or "")
             marked += 1
         kept.append(row)
     cloned["news_candidates_for_menzo"] = kept
@@ -364,7 +365,7 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
     today = local.date().isoformat()
     existing = _load_pool_rows()
     pool_by_key: dict[str, dict[str, Any]] = {}
-    expired_keys: set[str] = set()
+    expired_by_key: dict[str, dict[str, Any]] = {}
     terminal: list[dict[str, Any]] = []
 
     for row in existing:
@@ -376,7 +377,7 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
             legacy_first = _first_seen(row, now)
             row_day = legacy_first.astimezone(ROME).date().isoformat()
         if row_day != today:
-            expired_keys.add(key)
+            expired_by_key[key] = row
             terminal.append(_terminal_skip(row, "soft_board_midnight_tombstone", "MIDNIGHT_TOMBSTONE", now))
             continue
         row["soft_board_day"] = today
@@ -450,9 +451,13 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
         if not key:
             terminal.append(_terminal_skip(row, "soft_board_missing_identity", "SOFT_SKIP", now))
             continue
-        if key in expired_keys:
-            terminal.append(_terminal_skip(row, "soft_board_midnight_tombstone", "MIDNIGHT_TOMBSTONE", now))
-            continue
+        expired_prior = expired_by_key.get(key)
+        if expired_prior is not None:
+            expired_fingerprint = str(expired_prior.get("soft_board_content_fingerprint") or "")
+            current_fingerprint = _content_fingerprint(row)
+            if not expired_fingerprint or expired_fingerprint == current_fingerprint:
+                terminal.append(_terminal_skip(row, "soft_board_midnight_tombstone", "MIDNIGHT_TOMBSTONE", now))
+                continue
         prior = pool_by_key.get(key, {})
         merged = {**copy.deepcopy(prior), **copy.deepcopy(row)}
         first = _first_seen(prior or row, now)
