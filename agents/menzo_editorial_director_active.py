@@ -19,16 +19,18 @@ from agents.gemini_ledger import record_gemini_attempt
 
 ROOT = Path(__file__).resolve().parents[1]
 MODEL = shadow.MODEL
-SCHEMA_VERSION = "owtv_editorial_director_output_v3"
-POLICY_VERSION = "owtv_editorial_director_policy_v3_active"
-SCHEMA_PATH = ROOT / "config/editorial_director_output_schema_v3.json"
-POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V3_ACTIVE.md"
+SCHEMA_VERSION = "owtv_editorial_director_output_v4"
+POLICY_VERSION = "owtv_editorial_director_policy_v4_active"
+SCHEMA_PATH = ROOT / "config/editorial_director_output_schema_v4.json"
+POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V4_ACTIVE.md"
 RELATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_gate_schema_v3.json"
 CONFIRMATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_confirmation_schema_v3.json"
 EVENT_REGISTRY_PATH = ROOT / "config/event_registry.json"
 BOB_CAPACITY_FIELDS = ("article_type", "source_title", "category_hint", "reason",
                        "ai_editorial_reason", "event_key", "show_report_id", "show_name",
-                       "special_event_match", "event_report_key", "corresponding_report_published")
+                       "special_event_match", "event_report_key", "corresponding_report_published",
+                       "_soft_board_existing", "_soft_board_existing_day",
+                       "_soft_board_existing_review_count", "_soft_board_existing_fingerprint")
 DUPLICATE_EVIDENCE_FIELDS = ("left_evidence", "right_evidence")
 DUPLICATE_CENTRALITY_FIELDS = ("left_central_development", "right_central_development",
                                "centrality_basis")
@@ -144,13 +146,9 @@ def prepare_snapshot(snapshot: dict[str, Any]) -> dict[str, Any]:
 
 
 def active_provider_input(snapshot: Mapping[str, Any]) -> dict[str, Any]:
-    """Single canonical ED-2 provider projection used by bounds, digest and prompt."""
+    """Canonical ED-3 primary projection: intrinsic classification sees no pacing context."""
     provider_data = shadow.provider_input(snapshot)
-    provider_data["publication_context"].update(
-        downstream_capacity_hint=snapshot.get("downstream_capacity"),
-        downstream_capacity_hint_reason=snapshot.get("downstream_capacity_reason"),
-        remaining_slots=snapshot.get("remaining_slots"),
-        remaining_news_slots_today=snapshot.get("remaining_slots"))
+    provider_data.pop("publication_context", None)
     return provider_data
 
 
@@ -184,27 +182,11 @@ def _validate_active(value: Any, snapshot: Mapping[str, Any]):
             failures.append({"family": "recommended_action", "ref": ref, "detail": "mandatory_active_field"})
         actions[candidate["candidate_id"]] = action
         classes[candidate["candidate_id"]] = canonical.get("editorial_class")
-        allowed = {"MUST_PUBLISH": {"SELECT"}, "SHOULD_PUBLISH": {"SELECT", "DEFER"},
-                   "PUBLISHABLE_SOFT": {"SELECT", "DEFER"}, "SKIP": {"SKIP"}}
+        allowed = {"MUST_PUBLISH": {"SELECT"}, "SHOULD_PUBLISH": {"SELECT"},
+                   "PUBLISHABLE_SOFT": {"DEFER"}, "SKIP": {"SKIP"}}
         if canonical.get("editorial_class") in allowed and action not in allowed[canonical["editorial_class"]]:
             failures.append({"family": "class_action_incompatibility", "ref": ref,
                              "editorial_class": canonical.get("editorial_class"), "recommended_action": action})
-    selected = sum(action == "SELECT" for action in actions.values())
-    must_selected = sum(actions[cid] == "SELECT" and classes[cid] == "MUST_PUBLISH" for cid in actions)
-    ordinary_selected = selected - must_selected
-    if ordinary_selected > int(snapshot.get("remaining_slots", 0)):
-        failures.append({"family": "publication_capacity", "selected_ordinary": ordinary_selected,
-                         "remaining_slots": int(snapshot.get("remaining_slots", 0))})
-    ordinary_candidates = [_capacity_candidate(snapshot, candidate) for candidate in refs.values()
-                           if actions.get(candidate["candidate_id"]) == "SELECT" and
-                           classes.get(candidate["candidate_id"]) != "MUST_PUBLISH"]
-    from agents.bob import dynamic_article_capacity
-    ordinary_capacity, capacity_reason = dynamic_article_capacity(
-        {"selected": ordinary_candidates}, ordinary_candidates)
-    if ordinary_selected > ordinary_capacity:
-        failures.append({"family": "downstream_capacity", "ordinary_selected": ordinary_selected,
-                         "ordinary_capacity": ordinary_capacity, "must_selected": must_selected,
-                         "capacity_reason": capacity_reason})
     if any(row.get("detail") == "skip_invariant_overridden" for row in telemetry):
         failures.append({"family": "skip_action_invariant", "detail": "active_semantic_rewrite_forbidden"})
     if failures:
@@ -911,6 +893,7 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                            "candidates": [], "relations": []}, "validation_errors": []}
     schema = json.loads(SCHEMA_PATH.read_text())
     digest = hashlib.sha256(POLICY_PATH.read_bytes()).hexdigest()
+    call = provider
     authorized = list(snapshot.get("authorized_relations", []))
     contract = pair_cache.contract_fingerprint(
         policy_version=POLICY_VERSION, model=MODEL, policy_path=POLICY_PATH,
@@ -1026,11 +1009,12 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
     if not has_relations:
         request = OperationalAIRequest("Menzo", "editorial_director_active",
             reason_code="editorial_director_active")
-    try:
-        call = provider or shadow._default_provider_factory()
-    except Exception as exc:
-        (gate_request or request).initialization_failed(str(exc))
-        return {**base, "status": "PROVIDER_UNAVAILABLE", "fallback_reason": type(exc).__name__}
+    if call is None:
+        try:
+            call = provider or shadow._default_provider_factory()
+        except Exception as exc:
+            (gate_request or request).initialization_failed(str(exc))
+            return {**base, "status": "PROVIDER_UNAVAILABLE", "fallback_reason": type(exc).__name__}
     failures: list[dict[str, Any]] = []
     gate_attempts = 0
     gate_logical_request_id = None
@@ -1319,7 +1303,7 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
             "validation_errors": failures, "fallback_reason": failures[0]["family"] if failures else "validation_failed"}
 
 
-def project(snapshot: Mapping[str, Any], result: Mapping[str, Any]) -> dict[str, Any]:
+def project(snapshot: Mapping[str, Any], result: Mapping[str, Any], *, soft_board_provider: Callable[..., Any] | None = None) -> dict[str, Any]:
     """Mechanically project one wholly validated Active decision into Menzo's handoff."""
     originals = {row["candidate_id"]: row for row in snapshot.get("candidates", [])}
     sections = {"SELECT": "selected", "DEFER": "pending", "SKIP": "skipped"}
@@ -1353,47 +1337,16 @@ def project(snapshot: Mapping[str, Any], result: Mapping[str, Any]) -> dict[str,
                     decision_authority="semantic_duplicate_gate",
                     reason=f"semantic_{scope}_duplicate")
         projected["skipped"].append(item)
-    # Reuse legacy bounded reconsideration only for candidates the Director has
-    # just deferred again. A recovered SELECT remains authoritative. Apply decay
-    # before show-news urgency so expired or repeatedly outranked soft-pool items
-    # cannot bypass those guards merely because they carry show identity.
-    from agents.menzo_policy_v93_15 import apply_softpool_decay
-    decay_view = {"selected": [], "pending": projected["pending"], "skipped": []}
-    apply_softpool_decay(decay_view)
-    projected["pending"] = decay_view["pending"]
-    projected["skipped"].extend(decay_view["skipped"])
-    projected["postprocess"] = decay_view.get("postprocess", {})
-    from agents.bob import dynamic_article_capacity
-    current_ordinary = [
-        item for item in projected["selected"]
-        if not (
-            isinstance(item.get("editorial_director"), dict)
-            and item["editorial_director"].get("editorial_class") == "MUST_PUBLISH"
-        )
-    ]
-    ordinary_capacity, _capacity_reason = dynamic_article_capacity(
-        {"selected": current_ordinary}, current_ordinary)
-    residual_bob_capacity = max(0, ordinary_capacity - len(current_ordinary))
-    from agents.news_scheduling import apply_show_news_urgency
-    promoted = apply_show_news_urgency(
-        projected,
-        remaining_slots_today=int(snapshot.get("remaining_slots", 0)),
-        max_promotions=residual_bob_capacity,
-    )
-    projected["postprocess"]["show_news_urgency_promoted"] = promoted
-    projected["relations"] = copy.deepcopy(result["output"]["relations"])
-    projected["handoff"] = {"to_bob_or_v92": len(projected["selected"]), "pending": len(projected["pending"]),
-                             "skipped": len(projected["skipped"]), "decision_authority": "editorial_director"}
-    projected["allowed_urls_for_v92"] = [str(item.get("url") or item.get("source_url"))
-        for item in projected["selected"] if item.get("url") or item.get("source_url")]
+    # ED-3: primary PUBLISHABLE_SOFT never competes here. The contextual
+    # soft-board owns morning HOLD, post-noon competition, decay and tombstones.
     from agents.menzo_policy_v93_15 import (ARTIFACT_DECISIONS_FILE, HARD_SKIP_FILE, MENZO_DECISIONS_FILE,
-        SOFTPOOL_FILE, V92_ALLOWED_URLS_FILE, save_hard_skips, save_softpool, utc_now, write_json)
+        SOFTPOOL_FILE, V92_ALLOWED_URLS_FILE, utc_now, write_json)
     paths = tuple(Path(path) for path in (SOFTPOOL_FILE, HARD_SKIP_FILE, MENZO_DECISIONS_FILE,
                                          ARTIFACT_DECISIONS_FILE, V92_ALLOWED_URLS_FILE))
     before = {path: path.read_bytes() if path.exists() else None for path in paths}
     try:
-        save_softpool(projected)
-        save_hard_skips(projected)
+        from agents.menzo_soft_board import apply as apply_soft_board
+        projected = apply_soft_board(projected, snapshot, provider=soft_board_provider)
         write_json(MENZO_DECISIONS_FILE, projected)
         write_json(ARTIFACT_DECISIONS_FILE, projected)
         write_json(V92_ALLOWED_URLS_FILE, {"generated_at": utc_now(), "version": POLICY_VERSION,

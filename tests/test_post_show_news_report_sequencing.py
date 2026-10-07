@@ -46,7 +46,7 @@ def run_cycle(monkeypatch, tmp_path):
                  "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE"):
         monkeypatch.setattr(menzo, name, tmp_path / (name + ".json"))
 
-    def run(*, editorial_class="SHOULD_PUBLISH", action="DEFER", published=False,
+    def run(*, editorial_class="SHOULD_PUBLISH", action="SELECT", published=False,
             related=True, ready=True, fail=None, slots=30, fallback=False,
             stale_report_status=False):
         calls = []
@@ -112,17 +112,22 @@ def run_cycle(monkeypatch, tmp_path):
     return run
 
 
-@pytest.mark.parametrize("editorial_class", ["SHOULD_PUBLISH", "PUBLISHABLE_SOFT"])
-def test_same_run_defer_is_selected_and_news_pass_precedes_ready_report(run_cycle, editorial_class):
-    calls, captured, decisions, summary = run_cycle(editorial_class=editorial_class)
+def test_same_run_should_select_precedes_ready_report(run_cycle):
+    calls, captured, decisions, summary = run_cycle(editorial_class="SHOULD_PUBLISH", action="SELECT")
     assert calls.index("evaluate") < calls.index("news") < calls.index("report")
     assert calls.count("evaluate") == calls.count("report") == calls.count("news") == 1
     selected = decisions[0]["selected"][0]
-    assert selected["scheduling_override"]["final_action"] == "SELECT"
-    assert selected["editorial_director"]["recommended_action"] == "DEFER"
-    assert selected["editorial_director"]["editorial_class"] == editorial_class
+    assert selected["editorial_director"]["recommended_action"] == "SELECT"
+    assert selected["editorial_director"]["editorial_class"] == "SHOULD_PUBLISH"
     assert captured[0]["ready_weekly_report_keys"] == {"aew_dynamite": KEY}
     assert summary["news_report_sequence"] == "selected_show_news_first"
+
+
+def test_same_run_soft_is_held_and_does_not_delay_ready_report(run_cycle):
+    calls, _, decisions, summary = run_cycle(editorial_class="PUBLISHABLE_SOFT", action="DEFER")
+    assert decisions[0]["selected"] == []
+    assert calls.index("report") < calls.index("news")
+    assert summary["news_report_sequence"] == "report_before_news_generation"
 
 
 @pytest.mark.parametrize("fail", ["andrea", "bob", "alfred", "news"])
@@ -133,14 +138,27 @@ def test_news_stage_failure_does_not_cancel_or_retry_report(run_cycle, fail):
 
 
 @pytest.mark.parametrize("options", [
-    {"published": True}, {"related": False}, {"editorial_class": "SKIP", "action": "SKIP"},
-    {"slots": 0},
+    {"published": True}, {"related": False},
 ])
-def test_no_selected_pre_report_news_leaves_report_before_generation(run_cycle, options):
+def test_selected_strong_news_not_tied_to_ready_report_leaves_report_first(run_cycle, options):
     calls, _, decisions, summary = run_cycle(**options)
-    assert not decisions[0]["selected"]
+    assert len(decisions[0]["selected"]) == 1
     assert calls.index("report") < calls.index("bob")
     assert summary["news_report_sequence"] == "report_before_news_generation"
+
+
+def test_skip_leaves_report_before_generation(run_cycle):
+    calls, _, decisions, summary = run_cycle(editorial_class="SKIP", action="SKIP")
+    assert decisions[0]["selected"] == []
+    assert calls.index("report") < calls.index("bob")
+    assert summary["news_report_sequence"] == "report_before_news_generation"
+
+
+def test_strong_news_is_not_suppressed_by_zero_daily_slots(run_cycle):
+    calls, _, decisions, summary = run_cycle(slots=0)
+    assert len(decisions[0]["selected"]) == 1
+    assert calls.index("news") < calls.index("report")
+    assert summary["news_report_sequence"] == "selected_show_news_first"
 
 
 def test_normally_selected_post_report_story_remains_selected(run_cycle):
@@ -150,10 +168,13 @@ def test_normally_selected_post_report_story_remains_selected(run_cycle):
     assert calls.index("report") < calls.index("bob")
 
 
-def test_legacy_fallback_retains_same_run_report_and_one_news_pass(run_cycle):
-    calls, _, _, _ = run_cycle(fallback=True)
-    assert calls.index("legacy") < calls.index("news") < calls.index("report")
-    assert calls.count("legacy") == calls.count("report") == 1
+def test_active_failure_is_fail_closed_and_report_still_runs_once(run_cycle):
+    calls, _, decisions, summary = run_cycle(fallback=True)
+    assert "legacy" not in calls
+    assert calls.index("report") < calls.index("news")
+    assert calls.count("report") == 1
+    assert decisions[0]["selected"] == []
+    assert summary["news_report_sequence"] == "report_before_news_generation"
 
 
 @pytest.mark.parametrize("stale_report_status", [False, True])

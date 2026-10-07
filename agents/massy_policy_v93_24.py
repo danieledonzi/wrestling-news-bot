@@ -302,7 +302,12 @@ def run_massy() -> dict[str, Any]:
         key = source_key(item.get("url") or item.get("normalized_url") or "")
         if key in memory:
             mem = memory[key]
-            moved.append(hard_skip_entry(item, "menzo_hard_skip_memory", menzo_reason=mem.get("reason", ""), menzo_article_type=mem.get("article_type", "")))
+            # Canonical URL identifies one immutable editorial opportunity.
+            # Feed-text drift on the same URL never creates a material update:
+            # a genuine new development arrives under a new URL and is evaluated
+            # against tombstoned story history by the duplicate gate.
+            moved.append(hard_skip_entry(item, "menzo_hard_skip_memory",
+                menzo_reason=mem.get("reason", ""), menzo_article_type=mem.get("article_type", "")))
             menzo_memory_count += 1
             continue
         reason = old_news_reason(item)
