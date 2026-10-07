@@ -302,35 +302,14 @@ def run_massy() -> dict[str, Any]:
         key = source_key(item.get("url") or item.get("normalized_url") or "")
         if key in memory:
             mem = memory[key]
-            authority = str(mem.get("decision_authority") or "")
-            if authority == "soft_board":
-                stored_fingerprint = str(mem.get("soft_board_content_fingerprint") or "")
-                from agents.menzo_soft_board import _content_fingerprint
-                current_fingerprint = _content_fingerprint(item)
-                if not stored_fingerprint or stored_fingerprint == current_fingerprint:
-                    moved.append(hard_skip_entry(item, "menzo_hard_skip_memory",
-                        menzo_reason=mem.get("reason", ""), menzo_article_type=mem.get("article_type", "")))
-                    menzo_memory_count += 1
-                    continue
-                # Fingerprint drift is not sufficient to revive a tombstoned story.
-                # Route the changed same-URL opportunity to Active with the prior
-                # tombstone evidence so only grounded MATERIAL_UPDATE authority can release it.
-                item = dict(item)
-                item["_soft_board_tombstone"] = {
-                    "reason": mem.get("reason"),
-                    "added_at": mem.get("added_at"),
-                    "fingerprint": stored_fingerprint,
-                    "snapshot": mem.get("soft_board_tombstone_snapshot") or {
-                        "title": mem.get("title", ""),
-                        "summary": "",
-                        "story_core": "",
-                    },
-                }
-            else:
-                moved.append(hard_skip_entry(item, "menzo_hard_skip_memory",
-                    menzo_reason=mem.get("reason", ""), menzo_article_type=mem.get("article_type", "")))
-                menzo_memory_count += 1
-                continue
+            # Canonical URL identifies one immutable editorial opportunity.
+            # Feed-text drift on the same URL never creates a material update:
+            # a genuine new development arrives under a new URL and is evaluated
+            # against tombstoned story history by the duplicate gate.
+            moved.append(hard_skip_entry(item, "menzo_hard_skip_memory",
+                menzo_reason=mem.get("reason", ""), menzo_article_type=mem.get("article_type", "")))
+            menzo_memory_count += 1
+            continue
         reason = old_news_reason(item)
         if reason:
             moved.append(hard_skip_entry(item, reason, age_guard="massy_7_day_window"))
