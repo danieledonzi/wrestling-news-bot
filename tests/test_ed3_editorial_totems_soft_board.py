@@ -7,6 +7,7 @@ from agents import menzo_editorial_director_active as active
 from agents import menzo_editorial_director_shadow as shadow
 from agents import menzo_policy_v93_15 as menzo
 from agents import menzo_soft_board as soft
+from agents import massy_policy_v93_24 as massy
 
 
 def _soft(url: str, title: str = "Soft story"):
@@ -348,3 +349,145 @@ def test_fingerprint_drift_without_material_update_keeps_soft_identity(isolated_
     assert result["pending"][0]["editorial_director"]["editorial_class"] == "PUBLISHABLE_SOFT"
     assert result["pending"][0]["soft_board_review_count"] == 1
     assert result["pending"][0]["soft_board"]["disposition"] == "MORNING_HOLD"
+
+
+def test_massy_keeps_changed_tombstone_blocked_pending_material_update(monkeypatch):
+    candidate = {
+        "url": "https://ed3.test/tombstone-reworded",
+        "title": "Same story, rewritten headline",
+        "summary": "Edited wording only.",
+    }
+    stored = {
+        "decision_authority": "soft_board",
+        "reason": "soft_board_midnight_tombstone",
+        "soft_board_content_fingerprint": "different-prior-fingerprint",
+        "added_at": "2026-10-07T00:00:00+00:00",
+        "soft_board_tombstone_snapshot": {
+            "title": "Original headline",
+            "summary": "Original wording.",
+            "story_core": "Same secondary story.",
+            "soft_board_day": "2026-10-06",
+        },
+    }
+    key = massy.source_key(candidate["url"])
+    monkeypatch.setattr(massy, "base_run_massy", lambda: {
+        "news_candidates_for_menzo": [dict(candidate)],
+        "report_candidates": [],
+        "hard_skipped": [],
+        "handoff": {},
+    })
+    monkeypatch.setattr(massy, "report_coverage", lambda *_: ({}, set(), set()))
+    monkeypatch.setattr(massy, "build_suspicious_story_clusters", lambda *_: [])
+    monkeypatch.setattr(massy, "menzo_skip_memory", lambda: {key: stored})
+    monkeypatch.setattr(massy, "configured_reports", lambda: [])
+    monkeypatch.setattr(massy, "old_news_reason", lambda *_: None)
+
+    board = massy.run_massy()
+    assert len(board["news_candidates_for_menzo"]) == 1
+    routed = board["news_candidates_for_menzo"][0]
+    assert routed["_soft_board_tombstone"]["snapshot"]["title"] == "Original headline"
+    assert board["handoff"]["menzo_memory_hard_skipped"] == 0
+
+
+def _tombstone_snapshot(current_summary: str):
+    item = {
+        "url": "https://ed3.test/tombstone-gate",
+        "title": "Same URL story",
+        "summary": current_summary,
+        "_soft_board_tombstone": {
+            "reason": "soft_board_midnight_tombstone",
+            "added_at": "2026-10-07T00:00:00+00:00",
+            "fingerprint": "prior-fingerprint",
+            "snapshot": {
+                "title": "Same URL story",
+                "summary": "Original secondary detail.",
+                "story_core": "Original soft opportunity.",
+                "published": "2026-10-06T20:00:00+00:00",
+                "first_seen_at": "2026-10-06T20:00:00+00:00",
+                "soft_board_day": "2026-10-06",
+            },
+        },
+    }
+    snapshot = shadow.capture_opportunity(
+        {"news_candidates_for_menzo": [item]},
+        run_id="run", observation_timestamp="2026-10-07T08:00:00+00:00",
+        published_news_today_local=0, history=[])
+    active.preserve_bob_capacity_metadata(snapshot, [item])
+    return snapshot
+
+
+def test_tombstone_gate_rejects_feed_rewording(monkeypatch):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    snapshot = _tombstone_snapshot("The same old story with refreshed feed wording.")
+
+    def provider(prompt, *_):
+        assert "SOFT TOMBSTONE MATERIAL-UPDATE GATE" in prompt
+        return {"candidates": [{
+            "ref": "t0", "decision": "NO_MATERIAL_UPDATE",
+            "new_fact": None, "temporal_basis": None,
+        }]}
+
+    result = active.evaluate(snapshot, provider=provider)
+    assert result["status"] == "VALIDATED"
+    assert result["soft_tombstone_gate"]["tombstoned"] == 1
+    assert snapshot["candidates"] == []
+    assert snapshot["soft_tombstone_skips"][0]["soft_board_tombstone_reason"] == "no_material_update"
+
+
+def test_tombstone_gate_releases_only_grounded_material_update(monkeypatch, isolated_state):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    snapshot = _tombstone_snapshot("A new contract signing was officially announced after midnight.")
+    calls = []
+
+    def provider(prompt, *_):
+        calls.append(prompt)
+        if "SOFT TOMBSTONE MATERIAL-UPDATE GATE" in prompt:
+            return {"candidates": [{
+                "ref": "t0", "decision": "MATERIAL_UPDATE",
+                "new_fact": "The wrestler officially signed a new contract.",
+                "temporal_basis": "The signing announcement occurred after the prior opportunity was tombstoned.",
+            }]}
+        return {"candidates": [{
+            "ref": "c0", "editorial_class": "PUBLISHABLE_SOFT",
+            "recommended_action": "DEFER", "category": "WWE",
+            "story_core": "A secondary but genuinely new contract-related follow-up.",
+        }], "relations": []}
+
+    result = active.evaluate(snapshot, provider=provider)
+    assert result["status"] == "VALIDATED"
+    cid = snapshot["candidates"][0]["candidate_id"]
+    assert snapshot["_active_bob_capacity_metadata"][cid]["_soft_board_material_update_authorized"] is True
+    assert len(calls) == 2
+
+    projected = active.project(snapshot, result)
+    assert projected["selected"] == []
+    assert len(projected["pending"]) == 1
+    assert projected["pending"][0]["soft_board"]["disposition"] == "MORNING_HOLD"
+    assert projected["pending"][0]["_soft_board_material_update_authorized"] is True
+
+
+def test_soft_board_review_retains_exact_day_context(isolated_state):
+    projected = {
+        "selected": [_strong("https://ed3.test/should-context", "SHOULD_PUBLISH")],
+        "pending": [_soft("https://ed3.test/soft-context")],
+        "skipped": [],
+        "postprocess": {},
+    }
+    snapshot = {
+        "observation_timestamp": "2026-10-07T11:00:00+00:00",
+        "remaining_slots": 20,
+    }
+
+    def provider(*_):
+        return {"candidates": [{
+            "ref": "s0", "disposition": "SOFT_SHOULD",
+            "reason": "Still useful but not worth publishing in this run.",
+        }]}
+
+    result = soft.apply(projected, snapshot, provider=provider)
+    context = result["postprocess"]["soft_board_review_day_context"]
+    assert context["local_time"].startswith("2026-10-07T13:00:00")
+    assert context["published_total_today"] == 0
+    assert context["soft_capacity_this_run"] >= 0
+    assert context["unused_capacity_is_not_a_target"] is True
+    assert context["zero_soft_publications_is_valid"] is True
