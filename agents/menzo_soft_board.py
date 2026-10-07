@@ -104,9 +104,6 @@ def mark_rediscovered_pool_candidates(board: Mapping[str, Any]) -> dict[str, Any
             row["_soft_board_existing_day"] = prior.get("soft_board_day")
             row["_soft_board_existing_review_count"] = int(prior.get("soft_board_review_count", 0) or 0)
             row["_soft_board_existing_fingerprint"] = str(prior.get("soft_board_content_fingerprint") or "")
-            row["_soft_board_fingerprint_changed"] = (
-                str(prior.get("soft_board_content_fingerprint") or "") != _content_fingerprint(row)
-            )
             marked += 1
         kept.append(row)
     cloned["news_candidates_for_menzo"] = kept
@@ -396,10 +393,8 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
             continue
         key = _source_key(row)
         prior = pool_by_key.get(key)
-        carried_without_update = bool(
-            prior and row.get("_soft_board_existing") and
-            not row.get("_soft_board_material_update_authorized"))
-        if carried_without_update:
+        carried_same_url = bool(prior and row.get("_soft_board_existing"))
+        if carried_same_url:
             carried_keys.add(key)
             continue
         pool_by_key.pop(key, None)
@@ -415,10 +410,8 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
         key = _source_key(row)
         authority = str(row.get("decision_authority") or "")
         prior = pool_by_key.get(key)
-        carried_without_update = bool(
-            prior and row.get("_soft_board_existing") and
-            not row.get("_soft_board_material_update_authorized"))
-        if carried_without_update and authority not in duplicate_authorities:
+        carried_same_url = bool(prior and row.get("_soft_board_existing"))
+        if carried_same_url and authority not in duplicate_authorities:
             carried_keys.add(key)
             continue
         pool_by_key.pop(key, None)
@@ -455,7 +448,7 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
             terminal.append(_terminal_skip(row, "soft_board_missing_identity", "SOFT_SKIP", now))
             continue
         expired_prior = expired_by_key.get(key)
-        if expired_prior is not None and not row.get("_soft_board_material_update_authorized"):
+        if expired_prior is not None:
             terminal.append(_terminal_skip(row, "soft_board_midnight_tombstone", "MIDNIGHT_TOMBSTONE", now))
             continue
         prior = pool_by_key.get(key, {})
