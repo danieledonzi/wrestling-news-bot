@@ -303,6 +303,8 @@ def test_changed_same_url_after_midnight_is_new_opportunity_not_tombstoned(isola
 
     changed = _soft(prior["url"], title="Original soft story")
     changed["summary"] = "A genuinely new factual development after midnight."
+    changed["_soft_board_existing"] = True
+    changed["_soft_board_material_update_authorized"] = True
     result = soft.apply(
         {"selected": [], "pending": [changed], "skipped": [], "postprocess": {}},
         {"observation_timestamp": "2026-10-06T22:05:00+00:00", "remaining_slots": 30},
@@ -316,3 +318,33 @@ def test_changed_same_url_after_midnight_is_new_opportunity_not_tombstoned(isola
     assert tombstones[0]["summary"] == prior["summary"]
     memory = menzo.load_json(menzo.HARD_SKIP_FILE, {"items": []})["items"]
     assert memory[0]["soft_board_content_fingerprint"] == prior["soft_board_content_fingerprint"]
+
+
+def test_fingerprint_drift_without_material_update_keeps_soft_identity(isolated_state):
+    prior = _soft("https://ed3.test/drift", title="Soft interview")
+    prior["summary"] = "Original wording."
+    prior.update({
+        "soft_board_day": "2026-10-07",
+        "soft_board_first_seen_at": "2026-10-07T02:00:00+00:00",
+        "softpool_added_at": "2026-10-07T02:00:00+00:00",
+        "soft_board_review_count": 1,
+    })
+    prior["soft_board_content_fingerprint"] = soft._content_fingerprint(prior)
+    menzo.write_json(menzo.SOFTPOOL_FILE, {"items": [prior]})
+
+    refreshed = _strong(prior["url"], "SHOULD_PUBLISH")
+    refreshed["title"] = prior["title"]
+    refreshed["summary"] = "Edited feed wording only."
+    refreshed["_soft_board_existing"] = True
+    refreshed["_soft_board_material_update_authorized"] = False
+
+    result = soft.apply(
+        {"selected": [refreshed], "pending": [], "skipped": [], "postprocess": {}},
+        {"observation_timestamp": "2026-10-07T07:00:00+00:00", "remaining_slots": 20},
+        provider=lambda *_: pytest.fail("morning carried soft must not invoke review"))
+
+    assert result["selected"] == []
+    assert len(result["pending"]) == 1
+    assert result["pending"][0]["editorial_director"]["editorial_class"] == "PUBLISHABLE_SOFT"
+    assert result["pending"][0]["soft_board_review_count"] == 1
+    assert result["pending"][0]["soft_board"]["disposition"] == "MORNING_HOLD"
