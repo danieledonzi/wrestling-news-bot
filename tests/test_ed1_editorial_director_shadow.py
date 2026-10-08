@@ -216,7 +216,7 @@ def test_default_relation_ceiling_accepts_complete_25_candidate_dense_board(monk
                                         'scorer_version':'test','score':.9,'threshold':.55,
                                         'components':{}})
     result=snapshot(25)
-    assert result['limit_status']=='within'
+    assert result['limit_status']=='approaching'
     assert result['observed']['candidate_count']==25
     assert result['observed']['relation_count']==300
     assert result['authorized_relations_complete'] is True
