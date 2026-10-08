@@ -482,15 +482,23 @@ def _validate_duplicate_gate(value: Any, snapshot: Mapping[str, Any], *, preserv
     return (canonical if preserve_valid and not ambiguous else None if failures else canonical), failures, telemetry
 
 
-def _duplicate_prompt(snapshot: Mapping[str, Any], failures: list[dict[str, Any]] | None = None) -> str:
+def _duplicate_prompt(snapshot: Mapping[str, Any], failures: list[dict[str, Any]] | None = None,
+                      *, relation_refs: set[str] | None = None) -> str:
     policy = POLICY_PATH.read_text(encoding="utf-8")
     data = active_provider_input(snapshot)
+    if relation_refs is not None:
+        data["authorized_relations"] = [
+            row for row in data.get("authorized_relations", [])
+            if str(row.get("ref")) in relation_refs
+        ]
     prompt = (f"ACTIVE_POLICY_VERSION={POLICY_VERSION}\n<ACTIVE_POLICY>\n{policy}\n</ACTIVE_POLICY>\n"
               "DUPLICATE GATE PHASE ONLY. Return only JSON with relations. Do not classify candidates. "
               "Evaluate every authorized relation once. INPUT=" +
               json.dumps(data, ensure_ascii=False, sort_keys=True, separators=(",", ":")))
     if failures is not None:
         prompt += "\nREPAIR ONLY THESE VALIDATION FAMILIES=" + json.dumps(failures[:20], separators=(",", ":"))
+    if relation_refs is not None:
+        prompt += "\nREPAIR ONLY THESE RELATION REFS=" + json.dumps(sorted(relation_refs), separators=(",", ":"))
     return prompt
 
 
@@ -896,6 +904,7 @@ def _evaluate_duplicate_gate_batch(
     gate_ref_ids = {ref: row["pair_id"] for ref, row in relation_refs.items()}
     attempts = 0
     batch_specs = list(batch_snapshot.get("authorized_relations", []))
+    repair_refs: set[str] | None = None
     for index in range(2):
         attempts += 1
         repair = index == 1
@@ -904,9 +913,21 @@ def _evaluate_duplicate_gate_batch(
             reason_code="duplicate_gate_validation_failed" if repair else "")
         started = time.monotonic()
         gate_response = None
+        attempt_relation_count = len(repair_refs) if repair_refs is not None else len(batch_specs)
+        attempt_data = active_provider_input(batch_snapshot)
+        if repair_refs is not None:
+            attempt_data["authorized_relations"] = [
+                row for row in attempt_data.get("authorized_relations", [])
+                if str(row.get("ref")) in repair_refs
+            ]
+        attempt_serialized = json.dumps(
+            attempt_data, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+        attempt_input_digest = hashlib.sha256(attempt_serialized).hexdigest()
         try:
             gate_response = call(
-                _duplicate_prompt(batch_snapshot, failures if index else None),
+                _duplicate_prompt(
+                    batch_snapshot, failures if repair else None,
+                    relation_refs=repair_refs if repair else None),
                 gate_schema, shadow.PROVIDER_TIMEOUT_SECONDS)
         except Exception as exc:
             record_gemini_attempt(
@@ -919,8 +940,8 @@ def _evaluate_duplicate_gate_batch(
                 shadow=False, logical_request_id=gate_request.logical_request_id,
                 canonical_attempt_id=attempt["attempt_id"],
                 candidate_count=len(batch_snapshot["candidates"]),
-                relation_count=len(batch_snapshot["authorized_relations"]),
-                input_digest=batch_snapshot["input_digest"],
+                relation_count=attempt_relation_count,
+                input_digest=attempt_input_digest,
                 policy_version=POLICY_VERSION, policy_digest=digest, status="failed",
                 error_class=type(exc).__name__)
             gate_request.failed(
@@ -939,28 +960,56 @@ def _evaluate_duplicate_gate_batch(
             shadow=False, logical_request_id=gate_request.logical_request_id,
             canonical_attempt_id=attempt["attempt_id"],
             candidate_count=len(batch_snapshot["candidates"]),
-            relation_count=len(batch_snapshot["authorized_relations"]),
-            input_digest=batch_snapshot["input_digest"],
+            relation_count=attempt_relation_count,
+            input_digest=attempt_input_digest,
             policy_version=POLICY_VERSION, policy_digest=digest, status="called")
         gate_request.defer(attempt, int((time.monotonic() - started) * 1000))
         try:
-            relations, failures, telemetry = _validate_duplicate_gate(
+            current_rows, current_failures, telemetry = _validate_duplicate_gate(
                 shadow._decode(gate_response), batch_snapshot, preserve_valid=True)
             relations, failures = _preserve_phase_rows(
-                relations, failures, known_gate_rows, gate_ref_ids, "pair_id")
+                current_rows, current_failures, known_gate_rows, gate_ref_ids, "pair_id")
         except Exception as exc:
             relations, failures, telemetry = None, [
                 {"family": "parse_json", "detail": type(exc).__name__}], []
+        known_pair_ids = set(known_gate_rows)
+        unresolved_refs = {
+            ref for ref, pair_id in gate_ref_ids.items() if pair_id not in known_pair_ids
+        }
         base["validation_attempts"].append({
             "phase": "duplicate_gate", "batch_index": batch_index,
-            "attempt_index": index, "valid": not failures,
+            "attempt_index": index, "valid": not failures and not unresolved_refs,
+            "attempt_relation_count": attempt_relation_count,
+            "remaining_relation_count": len(unresolved_refs),
             "validation_families": failures, "canonicalizations": telemetry})
         gate_request.resolve_deferred(
-            not failures, error_terminal=repair and bool(failures))
-        if not failures:
+            not failures and not unresolved_refs,
+            error_terminal=repair and bool(failures or unresolved_refs))
+        if not failures and not unresolved_refs:
             break
+        if not repair and relations is not None and unresolved_refs:
+            repair_refs = unresolved_refs
+            families = []
+            seen_families = set()
+            for failure in failures:
+                family = str(failure.get("family") or "other")
+                if family in seen_families:
+                    continue
+                seen_families.add(family)
+                families.append(family)
+            base.setdefault("duplicate_gate_targeted_repairs", []).append({
+                "batch_index": batch_index,
+                "relation_count": len(repair_refs),
+                "relation_refs": sorted(repair_refs),
+                "failure_families": families[:20],
+            })
+    if relations is not None and unresolved_refs and not failures:
+        failures = [{"family": "relation_coverage",
+                     "missing_refs": sorted(unresolved_refs)}]
     if failures and relations is not None:
-        final = [row for row in relations if row["decision"] != "DUPLICATE"]
+        # Valid DUPLICATE proposals remain in-memory for the independent confirmation
+        # phase; _store_ordinary_pairs still refuses to persist them before confirmation.
+        final = list(relations)
         provenance = {"duplicate_gate_logical_request_id": logical_request_id,
                       "duplicate_gate_input_digest": input_digest}
         for row in final:

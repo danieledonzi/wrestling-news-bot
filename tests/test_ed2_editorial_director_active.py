@@ -2,6 +2,7 @@ from agents import menzo_editorial_director_active as active
 from agents import menzo_editorial_director_shadow as shadow
 from agents import menzo_policy_v93_15 as menzo
 from agents import menzo_active_duplicate_pair_cache as pair_cache
+import json
 import pytest
 
 
@@ -233,6 +234,102 @@ def test_active_relation_batch_failure_keeps_snapshot_atomic(monkeypatch):
     assert [row["candidate_id"] for row in value["candidates"]] == before
     assert "semantic_duplicate_skips" not in value
 
+
+
+def test_duplicate_gate_repair_targets_only_unresolved_relations(monkeypatch):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    monkeypatch.setattr(pair_cache, "lookup", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(pair_cache, "store", lambda *_args, **_kwargs: 0)
+    value = snapshot(2)
+    value["authorized_relations"] = _dense_relations(value, 3)
+    validation_calls = []
+
+    def canonical(spec):
+        return {"pair_id": spec["pair_id"], "scope": spec["scope"],
+                "left_id": spec["left_id"], "right_id": spec["right_id"],
+                "decision": "NO_MATCH", "shared_fact": None, "new_fact": None,
+                "temporal_basis": None, "left_evidence": None, "right_evidence": None,
+                "left_central_development": None, "right_central_development": None,
+                "centrality_basis": None, "scorer": {}}
+
+    def validate(_value, snap, preserve_valid=False):
+        specs = list(snap["authorized_relations"])
+        validation_calls.append(len(validation_calls))
+        if len(validation_calls) == 1:
+            return [canonical(row) for row in specs[:2]], [
+                {"family": "duplicate_centrality_contract", "ref": "r2"}], []
+        return [canonical(specs[2])], [
+            {"family": "relation_coverage", "missing_refs": ["r0", "r1"]}], []
+
+    monkeypatch.setattr(active, "_validate_duplicate_gate", validate)
+    gate_prompts = []
+
+    def provider(prompt, *_):
+        if "DUPLICATE GATE PHASE ONLY" in prompt:
+            gate_prompts.append(prompt)
+            return {"relations": []}
+        return response(value, ("SELECT", "DEFER"))
+
+    result = active.evaluate(value, provider=provider)
+
+    assert result["status"] == "VALIDATED"
+    assert validation_calls == [0, 1]
+    assert len(gate_prompts) == 2
+    assert gate_prompts[0].count('"ref":"r') == 3
+    assert "REPAIR ONLY THESE RELATION REFS=[\"r2\"]" in gate_prompts[1]
+    repair_input = json.loads(gate_prompts[1].split("INPUT=", 1)[1].split("\nREPAIR", 1)[0])
+    assert [row["ref"] for row in repair_input["authorized_relations"]] == ["r2"]
+    assert result["duplicate_gate_targeted_repairs"] == [{
+        "batch_index": 0, "relation_count": 1, "relation_refs": ["r2"],
+        "failure_families": ["duplicate_centrality_contract"]}]
+    attempts = [row for row in result["validation_attempts"]
+                if row.get("phase") == "duplicate_gate"]
+    assert [row["attempt_relation_count"] for row in attempts] == [3, 1]
+    assert [row["remaining_relation_count"] for row in attempts] == [1, 0]
+
+
+def test_duplicate_gate_fallback_preserves_valid_duplicate_proposals(monkeypatch):
+    value = snapshot(2)
+    value["authorized_relations"] = _dense_relations(value, 2)
+    base = {"validation_attempts": [], "duplicate_pair_cache_entries_stored": 0}
+    first = value["authorized_relations"][0]
+
+    valid_duplicate = {
+        "pair_id": first["pair_id"], "scope": first["scope"],
+        "left_id": first["left_id"], "right_id": first["right_id"],
+        "decision": "DUPLICATE", "shared_fact": "shared",
+        "left_evidence": "left evidence", "right_evidence": "right evidence",
+        "left_central_development": "shared", "right_central_development": "shared",
+        "centrality_basis": "central", "new_fact": None, "temporal_basis": None,
+        "scorer": {},
+    }
+    calls = 0
+
+    def validate(_value, snap, preserve_valid=False):
+        nonlocal calls
+        calls += 1
+        if calls == 1:
+            return [valid_duplicate], [{"family": "duplicate_centrality_contract", "ref": "r1"}], []
+        return [], [{"family": "duplicate_centrality_contract", "ref": "r0"}], []
+
+    def recover(_snapshot, spec, _call, local_base, _digest, **_kwargs):
+        local_base["duplicate_body_revalidation"] = {"attempts": 1}
+        return {"pair_id": spec["pair_id"], "scope": spec["scope"],
+                "left_id": spec["left_id"], "right_id": spec["right_id"],
+                "decision": "NO_MATCH", "shared_fact": None, "new_fact": None,
+                "temporal_basis": None}
+
+    monkeypatch.setattr(active, "_validate_duplicate_gate", validate)
+    monkeypatch.setattr(active, "_revalidate_body_pair", recover)
+    monkeypatch.setattr(pair_cache, "store", lambda *_args, **_kwargs: 0)
+    outcome = active._evaluate_duplicate_gate_batch(
+        value, call=lambda *_: {"relations": []}, digest="digest",
+        cache=pair_cache.empty(), materials={}, cached_relations={},
+        base=base, stored_pairs=set(), batch_index=0)
+
+    assert outcome["ok"] is True
+    assert {row["pair_id"] for row in outcome["relations"]} == {"dense-0", "dense-1"}
+    assert next(row for row in outcome["relations"] if row["pair_id"] == "dense-0")["decision"] == "DUPLICATE"
 
 
 def test_active_pair_cache_mixed_batch_sends_only_misses_and_failure_is_atomic(monkeypatch):
