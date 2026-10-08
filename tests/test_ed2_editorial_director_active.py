@@ -176,21 +176,63 @@ def test_active_relation_ceiling_applies_after_pr131_hits(monkeypatch):
     assert len(gate_prompts) == 1
 
 
-def test_active_relation_ceiling_still_fail_closes_on_provider_bound_misses(monkeypatch):
+def test_active_relation_ceiling_batches_provider_bound_misses_atomically(monkeypatch):
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     monkeypatch.setattr(pair_cache, "lookup", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(shadow, "MAX_RELATIONS", 2)
     value = snapshot(2)
-    value["authorized_relations"] = _dense_relations(value, shadow.MAX_RELATIONS + 1)
-    calls = []
+    value["authorized_relations"] = _dense_relations(value, 5)
+    gate_sizes = []
 
-    result = active.evaluate(value, provider=lambda *_: calls.append(1))
+    def provider(prompt, *_):
+        if "DUPLICATE GATE PHASE ONLY" in prompt:
+            size = prompt.count('"ref":"r')
+            gate_sizes.append(size)
+            return no_match_relations(size)
+        return response(value, ("SELECT", "DEFER"))
 
-    assert result["status"] == "OVERSIZE_NOT_EVALUATED"
-    assert result["fallback_reason"] == "OVERSIZE_NOT_EVALUATED"
+    result = active.evaluate(value, provider=provider)
+
+    assert result["status"] == "VALIDATED"
     assert result["relation_limit_deferred_to_pr131"] is True
-    assert result["provider_bound_relation_count"] == shadow.MAX_RELATIONS + 1
-    assert result["observed"]["relation_count"] == shadow.MAX_RELATIONS + 1
-    assert calls == []
+    assert result["provider_bound_relation_count"] == 5
+    assert result["provider_bound_limit_status"] == "exceeded"
+    assert result["duplicate_gate_batched"] is True
+    assert result["duplicate_gate_batch_count"] == 3
+    assert gate_sizes == [2, 2, 1]
+    assert [row["relation_count"] for row in result["duplicate_gate_batches"]] == [2, 2, 1]
+    assert all(row["limit_status"] != "exceeded" for row in result["duplicate_gate_batches"])
+    assert len(result["duplicate_gate_logical_request_ids"]) == 3
+    assert len(result["duplicate_gate_input_digests"]) == 3
+
+
+def test_active_relation_batch_failure_keeps_snapshot_atomic(monkeypatch):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    monkeypatch.setattr(pair_cache, "lookup", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(shadow, "MAX_RELATIONS", 2)
+    value = snapshot(2)
+    value["authorized_relations"] = _dense_relations(value, 5)
+    before = [row["candidate_id"] for row in value["candidates"]]
+    gate_call = 0
+
+    def provider(prompt, *_):
+        nonlocal gate_call
+        if "DUPLICATE GATE PHASE ONLY" in prompt:
+            gate_call += 1
+            if gate_call == 2:
+                raise TimeoutError("second batch unavailable")
+            return no_match_relations(prompt.count('"ref":"r'))
+        return response(value, ("SELECT", "DEFER"))
+
+    result = active.evaluate(value, provider=provider)
+
+    assert result["status"] == "PROVIDER_FAILED"
+    assert result["duplicate_gate_batched"] is True
+    assert result["duplicate_gate_batch_count"] == 3
+    assert gate_call == 2
+    assert [row["candidate_id"] for row in value["candidates"]] == before
+    assert "semantic_duplicate_skips" not in value
+
 
 
 def test_active_pair_cache_mixed_batch_sends_only_misses_and_failure_is_atomic(monkeypatch):
