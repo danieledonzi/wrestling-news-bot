@@ -456,7 +456,8 @@ def capture_editorial_director_opportunity(massy_board: dict[str, Any], *, run_i
     snapshot = capture_opportunity(
         augmented, run_id=run_id, observation_timestamp=observation_timestamp,
         published_news_today_local=published_today_count(),
-        history=history)
+        history=history,
+        enforce_relation_limit=not preserve_active_metadata)
     snapshot["publisher_count_label"] = "published_news_today_local"
     if preserve_active_metadata:
         from agents.menzo_editorial_director_active import preserve_bob_capacity_metadata
