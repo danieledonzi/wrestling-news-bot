@@ -118,6 +118,9 @@ def _capitalized_subject_signals(text: str) -> Set[str]:
 def canonical_binding_subject_text(value: str) -> str:
     """Canonicalize binding identity only; provider evidence remains untouched."""
     value = unicodedata.normalize("NFKC", value).casefold().replace("’", "'")
+    # English possessive morphology is grammatical, not part of the named subject.
+    # Keep internal apostrophes (e.g. O'Reilly) while normalizing a trailing 's.
+    value = re.sub(r"(?<=[^\\W_])'s\\b", "", value, flags=re.UNICODE)
     decomposed = unicodedata.normalize("NFKD", value)
     return unicodedata.normalize("NFC", "".join(
         character for character in decomposed if not unicodedata.combining(character)))
