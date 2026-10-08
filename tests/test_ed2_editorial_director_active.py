@@ -253,11 +253,12 @@ def test_duplicate_gate_repair_targets_only_unresolved_relations(monkeypatch):
 
     def validate(_value, snap, preserve_valid=False):
         specs = list(snap["authorized_relations"])
-        validation_calls.append([row["pair_id"] for row in specs])
+        validation_calls.append(len(validation_calls))
         if len(validation_calls) == 1:
             return [canonical(row) for row in specs[:2]], [
                 {"family": "duplicate_centrality_contract", "ref": "r2"}], []
-        return [canonical(row) for row in specs], [], []
+        return [canonical(specs[2])], [
+            {"family": "relation_coverage", "missing_refs": ["r0", "r1"]}], []
 
     monkeypatch.setattr(active, "_validate_duplicate_gate", validate)
     gate_prompts = []
@@ -271,10 +272,13 @@ def test_duplicate_gate_repair_targets_only_unresolved_relations(monkeypatch):
     result = active.evaluate(value, provider=provider)
 
     assert result["status"] == "VALIDATED"
-    assert validation_calls == [["dense-0", "dense-1", "dense-2"], ["dense-2"]]
+    assert validation_calls == [0, 1]
     assert len(gate_prompts) == 2
+    assert gate_prompts[0].count('"ref":"r') == 3
+    assert gate_prompts[1].count('"ref":"r') == 1
+    assert "REPAIR ONLY THESE RELATION REFS=[\"r2\"]" in gate_prompts[1]
     assert result["duplicate_gate_targeted_repairs"] == [{
-        "batch_index": 0, "relation_count": 1,
+        "batch_index": 0, "relation_count": 1, "relation_refs": ["r2"],
         "failure_families": ["duplicate_centrality_contract"]}]
     attempts = [row for row in result["validation_attempts"]
                 if row.get("phase") == "duplicate_gate"]
