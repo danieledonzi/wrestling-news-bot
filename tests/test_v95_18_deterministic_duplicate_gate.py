@@ -228,6 +228,15 @@ def test_death_action_admits_real_andy_williams_pair_without_subject_only_false_
     assert all(not pair["above_threshold"] for pair in unrelated)
 
 
+def test_binding_subject_identity_strips_only_trailing_english_possessive():
+    assert scorer.canonical_binding_subject_text("Chris Jericho's") == "chris jericho"
+    assert scorer.canonical_binding_subject_text("Chris Jericho’s") == "chris jericho"
+    assert scorer.canonical_binding_subject_text("Kyle O'Reilly") == "kyle o'reilly"
+    assert "chris jericho" in scorer.explicit_named_subjects(
+        "Former WWE Star Kairi Announced For Chris Jericho's Rock N Wrestling Rager At Sea"
+    )
+
+
 def test_possessive_death_headlines_are_admitted_with_either_apostrophe():
     value = scorer.score_pair(
         {"title": "John Cena's Death Confirmed"},

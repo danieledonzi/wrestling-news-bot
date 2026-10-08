@@ -1077,6 +1077,25 @@ def _validate_anchor_relation(s, *, left_evidence, right_evidence, shared_fact,
     return active._validate_duplicate_gate({"relations": [relation]}, s)
 
 
+def test_possessive_binding_anchor_accepts_real_jericho_kairi_duplicate():
+    left = "Chris Jericho Adds KAIRI to Rock ‘N’ Wrestling Rager at Sea Cruise"
+    right = "Former WWE Star Kairi Announced For Chris Jericho's Rock N Wrestling Rager At Sea"
+    snapshot = _anchor_contract_snapshot(left, right)
+    shared = "Chris Jericho adds KAIRI to the Rock N Wrestling Rager at Sea"
+    canonical, failures, _ = _validate_anchor_relation(
+        snapshot,
+        left_evidence=left,
+        right_evidence=right,
+        shared_fact=shared,
+        left_central=shared,
+        right_central=shared,
+    )
+
+    assert failures == []
+    assert canonical is not None
+    assert canonical[0]["decision"] == "DUPLICATE"
+
+
 def test_generic_common_evidence_has_no_binding_subject_anchor():
     fixtures = [
         ("More Details On CM Punk Contract Talks", "More Details On Rhea Ripley Injury Status", "More Details"),
