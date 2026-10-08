@@ -177,8 +177,9 @@ def capture_opportunity(massy_board: Mapping[str, Any], *, run_id: str, observat
 
 
 def build_authorized_relations(candidates: list[dict[str, Any]],
-                               safe_history: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], bool]:
-    """Build the frozen bounded non-exact suspicion matrix for either execution mode."""
+                               safe_history: list[dict[str, Any]], *,
+                               enforce_limit: bool = True) -> tuple[list[dict[str, Any]], bool]:
+    """Build the non-exact suspicion matrix; callers may defer the provider bound."""
     relations = []
     for spec in chain(iter_same_run_pair_specs(candidates), iter_recent_history_pair_specs(candidates, safe_history)):
         scored = menzo_duplicate_scorer.score_pair(spec.left, spec.right)
@@ -187,9 +188,9 @@ def build_authorized_relations(candidates: list[dict[str, Any]],
         relations.append({"pair_id": spec.pair_id, "scope": spec.scope, "left_id": spec.left_article_id,
                           "right_id": spec.right_article_id, "scorer_version": scored["scorer_version"],
                           "score": scored["score"], "threshold": scored["threshold"], "components": scored["components"]})
-        if len(relations) > MAX_RELATIONS:
+        if enforce_limit and len(relations) > MAX_RELATIONS:
             break
-    return relations, len(relations) <= MAX_RELATIONS
+    return relations, (not enforce_limit) or len(relations) <= MAX_RELATIONS
 
 
 def short_ref_maps(snapshot: Mapping[str, Any]) -> tuple[Mapping[str, Mapping[str, Any]], Mapping[str, Mapping[str, Any]]]:
