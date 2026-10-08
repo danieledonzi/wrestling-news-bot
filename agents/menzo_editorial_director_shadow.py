@@ -113,7 +113,8 @@ def _finalize_snapshot(envelope: dict[str, Any], *, forced_exceeded: bool = Fals
 
 def capture_opportunity(massy_board: Mapping[str, Any], *, run_id: str, observation_timestamp: str,
                         published_news_today_local: int | None = None, history: list[dict[str, Any]],
-                        publisher_count_24h: int | None = None) -> dict[str, Any]:
+                        publisher_count_24h: int | None = None,
+                        enforce_relation_limit: bool = True) -> dict[str, Any]:
     # The legacy keyword remains input-compatible for older callers, but is not
     # exposed as a rolling metric because those callers supply a local-day count.
     local_count = int(published_news_today_local if published_news_today_local is not None else publisher_count_24h or 0)
@@ -170,7 +171,8 @@ def capture_opportunity(massy_board: Mapping[str, Any], *, run_id: str, observat
         return _finalize_snapshot(envelope, forced_exceeded=True)
     if _projected_provider_input_bytes(envelope) > MAX_INPUT_BYTES:
         return _finalize_snapshot(envelope, forced_exceeded=True)
-    relations, relations_complete = build_authorized_relations(candidates, safe_history)
+    relations, relations_complete = build_authorized_relations(
+        candidates, safe_history, enforce_limit=enforce_relation_limit)
     envelope["authorized_relations"] = relations
     envelope["authorized_relations_complete"] = relations_complete
     return _finalize_snapshot(envelope, forced_exceeded=not relations_complete)
