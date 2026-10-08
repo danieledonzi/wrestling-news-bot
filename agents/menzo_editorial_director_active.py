@@ -876,6 +876,130 @@ def _apply_duplicate_gate(snapshot: dict[str, Any], relations: list[dict[str, An
     _finalize_active_input(snapshot)
 
 
+
+def _evaluate_duplicate_gate_batch(
+        batch_snapshot: dict[str, Any], *, call: Callable[..., Any], digest: str,
+        cache: dict[str, Any], materials: Mapping[str, Any],
+        cached_relations: Mapping[str, dict[str, Any]], base: dict[str, Any],
+        stored_pairs: set[str], batch_index: int) -> dict[str, Any]:
+    """Evaluate one bounded duplicate-gate batch without mutating the authoritative snapshot."""
+    gate_request = OperationalAIRequest(
+        "Menzo", "editorial_director_duplicate_gate",
+        reason_code="editorial_director_duplicate_gate")
+    logical_request_id = gate_request.logical_request_id
+    input_digest = batch_snapshot["input_digest"]
+    gate_schema = json.loads(RELATION_SCHEMA_PATH.read_text())
+    relations = None
+    failures: list[dict[str, Any]] = []
+    known_gate_rows: dict[str, Any] = {}
+    _, relation_refs = shadow.short_ref_maps(batch_snapshot)
+    gate_ref_ids = {ref: row["pair_id"] for ref, row in relation_refs.items()}
+    attempts = 0
+    batch_specs = list(batch_snapshot.get("authorized_relations", []))
+    for index in range(2):
+        attempts += 1
+        repair = index == 1
+        attempt = gate_request.start(
+            MODEL, repair=repair,
+            reason_code="duplicate_gate_validation_failed" if repair else "")
+        started = time.monotonic()
+        gate_response = None
+        try:
+            gate_response = call(
+                _duplicate_prompt(batch_snapshot, failures if index else None),
+                gate_schema, shadow.PROVIDER_TIMEOUT_SECONDS)
+        except Exception as exc:
+            record_gemini_attempt(
+                response=gate_response, model_requested=MODEL,
+                operation_id=gate_request.logical_request_id, attempt_index=index,
+                repair=repair, fallback=False, agent="Menzo",
+                workload="editorial_director_duplicate_gate",
+                phase="editorial_director_duplicate_gate_repair" if repair else
+                      "editorial_director_duplicate_gate_primary",
+                shadow=False, logical_request_id=gate_request.logical_request_id,
+                canonical_attempt_id=attempt["attempt_id"],
+                candidate_count=len(batch_snapshot["candidates"]),
+                relation_count=len(batch_snapshot["authorized_relations"]),
+                input_digest=batch_snapshot["input_digest"],
+                policy_version=POLICY_VERSION, policy_digest=digest, status="failed",
+                error_class=type(exc).__name__)
+            gate_request.failed(
+                attempt, error_class="upstream", error_terminal=True,
+                latency_ms=int((time.monotonic() - started) * 1000))
+            return {"ok": False, "attempts": attempts,
+                    "logical_request_id": logical_request_id, "input_digest": input_digest,
+                    "result": {"status": "PROVIDER_FAILED", "fallback_reason": type(exc).__name__}}
+        record_gemini_attempt(
+            response=gate_response, model_requested=MODEL,
+            operation_id=gate_request.logical_request_id, attempt_index=index,
+            repair=repair, fallback=False, agent="Menzo",
+            workload="editorial_director_duplicate_gate",
+            phase="editorial_director_duplicate_gate_repair" if repair else
+                  "editorial_director_duplicate_gate_primary",
+            shadow=False, logical_request_id=gate_request.logical_request_id,
+            canonical_attempt_id=attempt["attempt_id"],
+            candidate_count=len(batch_snapshot["candidates"]),
+            relation_count=len(batch_snapshot["authorized_relations"]),
+            input_digest=batch_snapshot["input_digest"],
+            policy_version=POLICY_VERSION, policy_digest=digest, status="called")
+        gate_request.defer(attempt, int((time.monotonic() - started) * 1000))
+        try:
+            relations, failures, telemetry = _validate_duplicate_gate(
+                shadow._decode(gate_response), batch_snapshot, preserve_valid=True)
+            relations, failures = _preserve_phase_rows(
+                relations, failures, known_gate_rows, gate_ref_ids, "pair_id")
+        except Exception as exc:
+            relations, failures, telemetry = None, [
+                {"family": "parse_json", "detail": type(exc).__name__}], []
+        base["validation_attempts"].append({
+            "phase": "duplicate_gate", "batch_index": batch_index,
+            "attempt_index": index, "valid": not failures,
+            "validation_families": failures, "canonicalizations": telemetry})
+        gate_request.resolve_deferred(
+            not failures, error_terminal=repair and bool(failures))
+        if not failures:
+            break
+    if failures and relations is not None:
+        final = [row for row in relations if row["decision"] != "DUPLICATE"]
+        provenance = {"duplicate_gate_logical_request_id": logical_request_id,
+                      "duplicate_gate_input_digest": input_digest}
+        for row in final:
+            row["validated_provenance"] = copy.deepcopy(provenance)
+        _store_ordinary_pairs(cache, materials, final, base, stored_pairs)
+        final_ids = {row["pair_id"] for row in final}
+        unresolved = []
+        for spec in batch_specs:
+            if spec["pair_id"] in final_ids:
+                continue
+            covered = _covered_no_match(spec, list(cached_relations.values()) + final)
+            if covered is not None:
+                final.append(covered)
+            else:
+                unresolved.append(spec)
+        if len(unresolved) == 1:
+            recovered = _revalidate_body_pair(
+                batch_snapshot, unresolved[0], call, base, digest)
+            attempts += base["duplicate_body_revalidation"]["attempts"]
+            if recovered is not None:
+                final.append(recovered)
+                unresolved = []
+        if not unresolved:
+            relations, failures = final, []
+    if failures or relations is None:
+        return {"ok": False, "attempts": attempts,
+                "logical_request_id": logical_request_id, "input_digest": input_digest,
+                "result": {"status": "failed",
+                           "validation_errors": failures,
+                           "fallback_reason": (failures[0]["family"] if failures
+                                               else "duplicate_gate_validation_failed")}}
+    provenance = {"duplicate_gate_logical_request_id": logical_request_id,
+                  "duplicate_gate_input_digest": input_digest}
+    for relation in relations:
+        relation.setdefault("validated_provenance", copy.deepcopy(provenance))
+    return {"ok": True, "attempts": attempts, "relations": relations,
+            "logical_request_id": logical_request_id, "input_digest": input_digest}
+
+
 def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None = None,
              artifact_index: Any = None) -> dict[str, Any]:
     if isinstance(snapshot, dict):
