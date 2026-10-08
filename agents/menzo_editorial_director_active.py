@@ -1003,6 +1003,9 @@ def _evaluate_duplicate_gate_batch(
                 "relation_refs": sorted(repair_refs),
                 "failure_families": families[:20],
             })
+    if relations is not None and unresolved_refs and not failures:
+        failures = [{"family": "relation_coverage",
+                     "missing_refs": sorted(unresolved_refs)}]
     if failures and relations is not None:
         # Valid DUPLICATE proposals remain in-memory for the independent confirmation
         # phase; _store_ordinary_pairs still refuses to persist them before confirmation.
