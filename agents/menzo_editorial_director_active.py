@@ -1310,10 +1310,12 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
             if confirmation_failures and confirmations is not None:
                 final = [row for row in relations if row["decision"] != "DUPLICATE" or row.get("duplicate_confirmation")]
                 for row in final:
-                    row["validated_provenance"] = {"duplicate_gate_logical_request_id": gate_logical_request_id,
-                        "duplicate_gate_input_digest": gate_input_digest,
+                    provenance = dict(row.get("validated_provenance") or {})
+                    provenance.update({
                         "duplicate_confirmation_logical_request_id": confirmation_logical_request_id,
-                        "duplicate_confirmation_input_digest": confirmation_input_digest}
+                        "duplicate_confirmation_input_digest": confirmation_input_digest,
+                    })
+                    row["validated_provenance"] = provenance
                 _store_ordinary_pairs(cache, materials, final, base, stored_pairs)
                 unresolved = []
                 for row in relations:
@@ -1349,11 +1351,12 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                         "logical_request_id": confirmation_logical_request_id,
                         "input_digest": confirmation_input_digest})
         for relation in relations:
-            relation["validated_provenance"] = {
-                "duplicate_gate_logical_request_id": gate_logical_request_id,
-                "duplicate_gate_input_digest": gate_input_digest,
+            provenance = dict(relation.get("validated_provenance") or {})
+            provenance.update({
                 "duplicate_confirmation_logical_request_id": confirmation_logical_request_id,
-                "duplicate_confirmation_input_digest": confirmation_input_digest}
+                "duplicate_confirmation_input_digest": confirmation_input_digest,
+            })
+            relation["validated_provenance"] = provenance
         new_by_pair = {str(row["pair_id"]): row for row in relations}
         final_relations = [copy.deepcopy(cached_relations.get(str(row["pair_id"])) or
                                         new_by_pair[str(row["pair_id"])]) for row in authorized]
