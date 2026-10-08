@@ -2,6 +2,7 @@ from agents import menzo_editorial_director_active as active
 from agents import menzo_editorial_director_shadow as shadow
 from agents import menzo_policy_v93_15 as menzo
 from agents import menzo_active_duplicate_pair_cache as pair_cache
+import json
 import pytest
 
 
@@ -276,9 +277,8 @@ def test_duplicate_gate_repair_targets_only_unresolved_relations(monkeypatch):
     assert len(gate_prompts) == 2
     assert gate_prompts[0].count('"ref":"r') == 3
     assert "REPAIR ONLY THESE RELATION REFS=[\"r2\"]" in gate_prompts[1]
-    assert '"ref":"r2","scope":"same_run"' in gate_prompts[1]
-    assert '"ref":"r0","scope":"same_run"' not in gate_prompts[1]
-    assert '"ref":"r1","scope":"same_run"' not in gate_prompts[1]
+    repair_input = json.loads(gate_prompts[1].split("INPUT=", 1)[1].split("\nREPAIR", 1)[0])
+    assert [row["ref"] for row in repair_input["authorized_relations"]] == ["r2"]
     assert result["duplicate_gate_targeted_repairs"] == [{
         "batch_index": 0, "relation_count": 1, "relation_refs": ["r2"],
         "failure_families": ["duplicate_centrality_contract"]}]
