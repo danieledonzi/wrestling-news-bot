@@ -884,9 +884,20 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
             "observed": copy.deepcopy(snapshot.get("observed")), "limit_status": snapshot.get("limit_status"),
             "attempts": 0, "validation_attempts": []}
     stored_pairs: set[str] = set()
-    if snapshot.get("limit_status") in {"projection_failed", "exceeded"}:
-        status = "PROJECTION_FAILED" if snapshot.get("limit_status") == "projection_failed" else "OVERSIZE_NOT_EVALUATED"
-        return {**base, "status": status, "fallback_reason": status}
+    if snapshot.get("limit_status") == "projection_failed":
+        return {**base, "status": "PROJECTION_FAILED", "fallback_reason": "PROJECTION_FAILED"}
+    if snapshot.get("limit_status") == "exceeded":
+        # PR131 can reduce only the duplicate-relation payload. Candidate count and
+        # the relation-free provider projection remain hard pre-cache bounds.
+        pre_cache_probe = copy.deepcopy(snapshot)
+        pre_cache_probe["authorized_relations"] = []
+        _finalize_active_input(pre_cache_probe)
+        if pre_cache_probe.get("limit_status") == "exceeded":
+            return {**base, "status": "OVERSIZE_NOT_EVALUATED",
+                    "fallback_reason": "OVERSIZE_NOT_EVALUATED"}
+        base["capture_observed"] = copy.deepcopy(snapshot.get("observed"))
+        base["capture_limit_status"] = snapshot.get("limit_status")
+        base["relation_limit_deferred_to_pr131"] = True
     if not snapshot.get("candidates"):
         return {**base, "status": "VALIDATED", "attempts": 0,
                 "output": {"schema_version": SCHEMA_VERSION, "policy_version": POLICY_VERSION,
@@ -948,6 +959,21 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                 duplicate_pair_cache_load_status=cache.get("load_status", "unknown"),
                 duplicate_pair_cache_contract_version=pair_cache.CONTRACT_VERSION)
     has_relations = bool(misses)
+    phase_snapshot = snapshot
+    if isinstance(snapshot, dict):
+        phase_snapshot = copy.deepcopy(snapshot)
+        phase_snapshot["authorized_relations"] = copy.deepcopy(misses)
+        _finalize_active_input(phase_snapshot)
+        base["provider_bound_observed"] = copy.deepcopy(phase_snapshot.get("observed"))
+        base["provider_bound_limit_status"] = phase_snapshot.get("limit_status")
+        base["provider_bound_relation_count"] = len(misses)
+        if phase_snapshot.get("limit_status") == "exceeded":
+            return {**base, "status": "OVERSIZE_NOT_EVALUATED",
+                    "fallback_reason": "OVERSIZE_NOT_EVALUATED",
+                    "observed": copy.deepcopy(phase_snapshot.get("observed")),
+                    "limit_status": phase_snapshot.get("limit_status")}
+        base["observed"] = copy.deepcopy(phase_snapshot.get("observed"))
+        base["limit_status"] = phase_snapshot.get("limit_status")
     if authorized and not has_relations:
         gate_avoided = OperationalAIRequest(
             "Menzo", "editorial_director_duplicate_gate",
@@ -990,11 +1016,6 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                 policy_version=POLICY_VERSION, policy_digest=digest, status="avoided",
                 reason="pr131_duplicate_confirmation_cache_all_hit",
             )
-    phase_snapshot = snapshot
-    if has_relations and isinstance(snapshot, dict):
-        phase_snapshot = copy.deepcopy(snapshot)
-        phase_snapshot["authorized_relations"] = copy.deepcopy(misses)
-        _finalize_active_input(phase_snapshot)
     gate_request = (OperationalAIRequest("Menzo", "editorial_director_duplicate_gate",
                     reason_code="editorial_director_duplicate_gate") if has_relations else None)
     request = None

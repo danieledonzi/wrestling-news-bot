@@ -133,6 +133,66 @@ def test_active_pair_cache_confirmed_and_rejected_duplicate_are_final(monkeypatc
             assert relation["primary_decision"] == "DUPLICATE" and relation["decision"] == "NO_MATCH"
 
 
+def _dense_relations(value, count):
+    left = value["candidates"][0]["candidate_id"]
+    right = value["candidates"][1]["candidate_id"]
+    return [{
+        "pair_id": f"dense-{index}", "scope": "same_run", "left_id": left, "right_id": right,
+        "scorer_version": shadow.menzo_duplicate_scorer.SCORER_VERSION,
+        "score": .75, "threshold": shadow.menzo_duplicate_scorer.effective_threshold(),
+        "components": {"entity_subject": 1.0},
+    } for index in range(count)]
+
+
+def test_active_relation_ceiling_applies_after_pr131_hits(monkeypatch):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    monkeypatch.setattr(pair_cache, "store", lambda *_args, **_kwargs: None)
+    value = snapshot(2)
+    value["authorized_relations"] = _dense_relations(value, shadow.MAX_RELATIONS + 2)
+
+    def lookup(_cache, material):
+        identity = material["identity"]
+        if identity["pair_id"] == f"dense-{shadow.MAX_RELATIONS + 1}":
+            return None
+        return {**identity, "decision": "NO_MATCH"}
+
+    monkeypatch.setattr(pair_cache, "lookup", lookup)
+    prompts = []
+
+    def provider(prompt, *_):
+        prompts.append(prompt)
+        if "DUPLICATE GATE PHASE ONLY" in prompt:
+            return no_match_relations(1)
+        return response(value, ("SELECT", "DEFER"))
+
+    result = active.evaluate(value, provider=provider)
+
+    assert result["status"] == "VALIDATED"
+    assert result["relation_limit_deferred_to_pr131"] is True
+    assert result["capture_observed"]["relation_count"] == shadow.MAX_RELATIONS + 2
+    assert result["provider_bound_relation_count"] == 1
+    assert result["observed"]["relation_count"] == 1
+    gate_prompts = [prompt for prompt in prompts if "DUPLICATE GATE PHASE ONLY" in prompt]
+    assert len(gate_prompts) == 1
+
+
+def test_active_relation_ceiling_still_fail_closes_on_provider_bound_misses(monkeypatch):
+    monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
+    monkeypatch.setattr(pair_cache, "lookup", lambda *_args, **_kwargs: None)
+    value = snapshot(2)
+    value["authorized_relations"] = _dense_relations(value, shadow.MAX_RELATIONS + 1)
+    calls = []
+
+    result = active.evaluate(value, provider=lambda *_: calls.append(1))
+
+    assert result["status"] == "OVERSIZE_NOT_EVALUATED"
+    assert result["fallback_reason"] == "OVERSIZE_NOT_EVALUATED"
+    assert result["relation_limit_deferred_to_pr131"] is True
+    assert result["provider_bound_relation_count"] == shadow.MAX_RELATIONS + 1
+    assert result["observed"]["relation_count"] == shadow.MAX_RELATIONS + 1
+    assert calls == []
+
+
 def test_active_pair_cache_mixed_batch_sends_only_misses_and_failure_is_atomic(monkeypatch):
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     first = snapshot(3); first["authorized_relations"] = [suspicious_relation(first)]

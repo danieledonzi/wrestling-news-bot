@@ -223,6 +223,25 @@ def test_default_relation_ceiling_accepts_complete_25_candidate_dense_board(monk
     assert len(result['authorized_relations'])==300
 
 
+def test_capture_can_defer_relation_limit_for_active_cache_lookup(monkeypatch):
+    monkeypatch.setattr(ed.menzo_duplicate_scorer, "score_pair",
+                        lambda *_a, **_k: {"exact_duplicate": False, "above_threshold": True,
+                                         "scorer_version": "test", "score": .9,
+                                         "threshold": .55, "components": {}})
+    board = {"news_candidates_for_menzo": [
+        {"source": "x", "title": f"Story {i}", "url": f"https://dense-active.test/{i}",
+         "summary": "fact"} for i in range(26)
+    ]}
+    result = ed.capture_opportunity(
+        board, run_id="run", observation_timestamp="now", publisher_count_24h=0,
+        history=[], enforce_relation_limit=False)
+
+    assert len(result["authorized_relations"]) == 325
+    assert result["authorized_relations_complete"] is True
+    assert result["observed"]["relation_count"] == 325
+    assert result["limit_status"] == "exceeded"
+
+
 def test_relation_scan_stops_at_first_proven_oversize(monkeypatch):
     monkeypatch.setattr(ed,'MAX_RELATIONS',3); scored=[]
     monkeypatch.setattr(ed.menzo_duplicate_scorer,'score_pair',lambda *_a,**_k:(scored.append(1) or {'exact_duplicate':False,'above_threshold':True,'scorer_version':'test','score':.9,'threshold':.55,'components':{}}))

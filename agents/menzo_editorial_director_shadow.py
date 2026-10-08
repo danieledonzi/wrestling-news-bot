@@ -113,7 +113,8 @@ def _finalize_snapshot(envelope: dict[str, Any], *, forced_exceeded: bool = Fals
 
 def capture_opportunity(massy_board: Mapping[str, Any], *, run_id: str, observation_timestamp: str,
                         published_news_today_local: int | None = None, history: list[dict[str, Any]],
-                        publisher_count_24h: int | None = None) -> dict[str, Any]:
+                        publisher_count_24h: int | None = None,
+                        enforce_relation_limit: bool = True) -> dict[str, Any]:
     # The legacy keyword remains input-compatible for older callers, but is not
     # exposed as a rolling metric because those callers supply a local-day count.
     local_count = int(published_news_today_local if published_news_today_local is not None else publisher_count_24h or 0)
@@ -170,15 +171,17 @@ def capture_opportunity(massy_board: Mapping[str, Any], *, run_id: str, observat
         return _finalize_snapshot(envelope, forced_exceeded=True)
     if _projected_provider_input_bytes(envelope) > MAX_INPUT_BYTES:
         return _finalize_snapshot(envelope, forced_exceeded=True)
-    relations, relations_complete = build_authorized_relations(candidates, safe_history)
+    relations, relations_complete = build_authorized_relations(
+        candidates, safe_history, enforce_limit=enforce_relation_limit)
     envelope["authorized_relations"] = relations
     envelope["authorized_relations_complete"] = relations_complete
     return _finalize_snapshot(envelope, forced_exceeded=not relations_complete)
 
 
 def build_authorized_relations(candidates: list[dict[str, Any]],
-                               safe_history: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], bool]:
-    """Build the frozen bounded non-exact suspicion matrix for either execution mode."""
+                               safe_history: list[dict[str, Any]], *,
+                               enforce_limit: bool = True) -> tuple[list[dict[str, Any]], bool]:
+    """Build the non-exact suspicion matrix; callers may defer the provider bound."""
     relations = []
     for spec in chain(iter_same_run_pair_specs(candidates), iter_recent_history_pair_specs(candidates, safe_history)):
         scored = menzo_duplicate_scorer.score_pair(spec.left, spec.right)
@@ -187,9 +190,9 @@ def build_authorized_relations(candidates: list[dict[str, Any]],
         relations.append({"pair_id": spec.pair_id, "scope": spec.scope, "left_id": spec.left_article_id,
                           "right_id": spec.right_article_id, "scorer_version": scored["scorer_version"],
                           "score": scored["score"], "threshold": scored["threshold"], "components": scored["components"]})
-        if len(relations) > MAX_RELATIONS:
+        if enforce_limit and len(relations) > MAX_RELATIONS:
             break
-    return relations, len(relations) <= MAX_RELATIONS
+    return relations, (not enforce_limit) or len(relations) <= MAX_RELATIONS
 
 
 def short_ref_maps(snapshot: Mapping[str, Any]) -> tuple[Mapping[str, Mapping[str, Any]], Mapping[str, Mapping[str, Any]]]:
