@@ -53,6 +53,14 @@ def _primary_class(item: Mapping[str, Any]) -> str:
     return str(director.get("editorial_class") or "")
 
 
+def _current_primary_soft(item: Mapping[str, Any]) -> bool:
+    from agents.menzo_editorial_director_active import POLICY_VERSION as primary_policy
+    director = item.get("editorial_director") if isinstance(item.get("editorial_director"), Mapping) else {}
+    return (director.get("policy_version") == primary_policy and
+            director.get("editorial_class") == "PUBLISHABLE_SOFT" and
+            director.get("recommended_action") == "DEFER")
+
+
 def _content_fingerprint(item: Mapping[str, Any]) -> str:
     material = {
         "url": _source_key(item),
@@ -97,9 +105,12 @@ def mark_rediscovered_pool_candidates(board: Mapping[str, Any]) -> dict[str, Any
         if not isinstance(item, dict):
             continue
         row = copy.deepcopy(item)
+        for field in ("_soft_board_existing", "_soft_board_existing_day",
+                      "_soft_board_existing_review_count", "_soft_board_existing_fingerprint"):
+            row.pop(field, None)
         key = _source_key(row)
         prior = pool_by_key.get(key)
-        if prior and (prior.get("editorial_director") or {}).get("policy_version") == "owtv_editorial_director_policy_v5_active":
+        if prior and _current_primary_soft(prior):
             row["_soft_board_existing"] = True
             row["_soft_board_existing_day"] = prior.get("soft_board_day")
             row["_soft_board_existing_review_count"] = int(prior.get("soft_board_review_count", 0) or 0)
@@ -503,36 +514,47 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
         merged["softpool_reason"] = "ed3_contextual_soft_board"
         pool_by_key[key] = merged
 
-    pool = list(pool_by_key.values())
+    # A policy change invalidates admission, not URL identity or the midnight
+    # boundary. Old rows wait for a fresh primary feed decision; they are never
+    # injected into Active merely to migrate the separate soft container.
+    policy_held = [_pending_state(row, "WAIT_PRIMARY_POLICY", now,
+                                reason="primary_policy_reclassification_required")
+                   for row in pool_by_key.values() if not _current_primary_soft(row)]
+    pool = [row for row in pool_by_key.values() if _current_primary_soft(row)]
     projected["pending"] = primary_nonsoft_pending
+    projected["pending"].extend(policy_held)
     projected.setdefault("skipped", []).extend(terminal)
     telemetry = projected.setdefault("postprocess", {})
     telemetry["soft_board_admitted_items"] = admitted
     telemetry["soft_board_policy_version"] = POLICY_VERSION
     telemetry["soft_board_local_time"] = local.isoformat()
-    telemetry["soft_board_pool_size"] = len(pool)
+    telemetry["soft_board_pool_size"] = len(pool) + len(policy_held)
+    telemetry["soft_board_waiting_primary_policy"] = len(policy_held)
     telemetry["soft_board_midnight_tombstones"] = len(terminal)
+
+    def persist_pool(rows: list[dict[str, Any]]) -> None:
+        _write_pool(policy_held + rows)
 
     if local.hour < REVIEW_HOUR_LOCAL:
         held = [_pending_state(row, "MORNING_HOLD", now) for row in pool]
         projected["pending"].extend(held)
         telemetry["soft_board_status"] = "MORNING_HOLD"
         telemetry["soft_board_meaningful_review"] = False
-        _write_pool(held)
+        persist_pool(held)
     else:
         capacity = _capacity(projected, snapshot)
         telemetry.update({f"soft_board_{key}": value for key, value in capacity.items()})
         soft_capacity = int(capacity["soft_capacity_this_run"])
         if not pool:
-            telemetry["soft_board_status"] = "EMPTY"
+            telemetry["soft_board_status"] = "WAIT_PRIMARY_POLICY" if policy_held else "EMPTY"
             telemetry["soft_board_meaningful_review"] = False
-            _write_pool([])
+            persist_pool([])
         elif soft_capacity <= 0:
             held = [_pending_state(row, "WAIT_CAPACITY", now) for row in pool]
             projected["pending"].extend(held)
             telemetry["soft_board_status"] = "WAIT_CAPACITY"
             telemetry["soft_board_meaningful_review"] = False
-            _write_pool(held)
+            persist_pool(held)
         else:
             pool, duplicate_skips, duplicate_meta = _revalidate_pool_duplicates(pool)
             telemetry["soft_board_duplicate_revalidation"] = duplicate_meta
@@ -544,7 +566,7 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
             if not pool:
                 telemetry["soft_board_status"] = "EMPTY_AFTER_DUPLICATE_REVALIDATION"
                 telemetry["soft_board_meaningful_review"] = False
-                _write_pool([])
+                persist_pool([])
                 projected["handoff"] = {
                     "to_bob_or_v92": len(projected.get("selected", [])),
                     "pending": len(projected.get("pending", [])),
@@ -571,7 +593,7 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
                 projected["pending"].extend(held)
                 telemetry["soft_board_status"] = str(review.get("status") or "REVIEW_UNAVAILABLE")
                 telemetry["soft_board_meaningful_review"] = False
-                _write_pool(held)
+                persist_pool(held)
             else:
                 _, refs = _provider_payload(pool, snapshot, capacity, now)
                 kept = []
@@ -618,7 +640,7 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
                 telemetry["soft_board_selected"] = selected_soft
                 telemetry["soft_board_skipped"] = skipped_soft
                 telemetry["soft_board_repeatedly_outranked"] = expired_soft
-                _write_pool(kept)
+                persist_pool(kept)
 
     projected["handoff"] = {
         "to_bob_or_v92": len(projected.get("selected", [])),

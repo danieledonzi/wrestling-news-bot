@@ -20,9 +20,9 @@ from agents.gemini_ledger import record_gemini_attempt
 ROOT = Path(__file__).resolve().parents[1]
 MODEL = shadow.MODEL
 SCHEMA_VERSION = "owtv_editorial_director_output_v4"
-POLICY_VERSION = "owtv_editorial_director_policy_v5_active"
+POLICY_VERSION = "owtv_editorial_director_policy_v6_active"
 SCHEMA_PATH = ROOT / "config/editorial_director_output_schema_v4.json"
-POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V5_ACTIVE.md"
+POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V6_ACTIVE.md"
 RELATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_gate_schema_v3.json"
 CONFIRMATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_confirmation_schema_v3.json"
 EVENT_REGISTRY_PATH = ROOT / "config/event_registry.json"
