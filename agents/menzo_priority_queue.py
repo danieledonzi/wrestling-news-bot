@@ -55,10 +55,12 @@ def augment_board(board: Mapping[str, Any]) -> dict[str, Any]:
     queued = [row for row in _read() if _key(row) not in published]
     _write(queued)
     by_key = {_key(row): copy.deepcopy(row) for row in queued}
+    feed_keys = set()
     for row in board.get('news_candidates_for_menzo', []):
         if not isinstance(row, dict) or _key(row) in published:
             continue
         key = _key(row)
+        feed_keys.add(key)
         prior = by_key.get(key, {})
         by_key[key] = {**prior, **copy.deepcopy(row)}
         if prior.get('priority_queue_first_seen_at'):
@@ -70,8 +72,15 @@ def augment_board(board: Mapping[str, Any]) -> dict[str, Any]:
             row['_priority_queue_editorial'] = copy.deepcopy(prior.get('editorial_director', {}))
         else:
             row.pop('_priority_queue_editorial', None)
-    result['news_candidates_for_menzo'] = list(by_key.values())
-    result['priority_queue_reintroduced'] = len(queued)
+    # A downstream outage must not let queue growth permanently exceed Active's
+    # candidate guard. Keep overflow on disk and retry within current headroom.
+    from agents.menzo_editorial_director_shadow import MAX_CANDIDATES
+    headroom = max(0, MAX_CANDIDATES - len(feed_keys))
+    retry_keys = [key for key in by_key if key not in feed_keys][:headroom]
+    admitted_keys = feed_keys | set(retry_keys)
+    result['news_candidates_for_menzo'] = [row for key, row in by_key.items() if key in admitted_keys]
+    result['priority_queue_reintroduced'] = sum(key in queued_by_key for key in admitted_keys)
+    result['priority_queue_waiting_capture_capacity'] = len(queued_by_key.keys() - admitted_keys)
     return result
 
 

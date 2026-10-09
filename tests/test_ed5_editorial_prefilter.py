@@ -214,3 +214,15 @@ def test_observation_counts_unique_pairs_separately_from_repeated_evaluations(tm
     assert result['unique_duplicate_pairs'] == 1
     assert result['unique_candidates_by_latest_class'] == {'PUBLISHABLE_SOFT': 1}
     assert result['cost_by_phase']['duplicate'] == {'calls': 2, 'repairs': 1, 'unpriced_calls': 1, 'known_cost_usd': '0.012'}
+
+
+def test_large_backlog_cannot_deadlock_active_candidate_guard(monkeypatch):
+    monkeypatch.setattr(shadow, 'MAX_CANDIDATES', 3)
+    queued = [strong(f'https://ed5.test/{i}') for i in range(5)]
+    queue.schedule({'selected': queued, 'pending': [], 'skipped': []}, {})
+    board = queue.augment_board({'news_candidates_for_menzo': [
+        {'url': 'https://ed5.test/fresh', 'title': 'A fresh development'}]})
+    assert len(board['news_candidates_for_menzo']) == 3
+    assert any(row['url'].endswith('/fresh') for row in board['news_candidates_for_menzo'])
+    assert board['priority_queue_waiting_capture_capacity'] == 3
+    assert len(json.loads(queue.queue_path().read_text())['items']) == 5
