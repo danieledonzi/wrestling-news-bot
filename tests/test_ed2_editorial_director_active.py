@@ -30,6 +30,7 @@ def snapshot(count=3, published=0):
 
 
 def response(s, actions=("SELECT", "DEFER", "SKIP")):
+    actions = actions + (actions[-1],) * max(0, len(s["candidates"]) - len(actions))
     classes = tuple("MUST_PUBLISH" if action == "SELECT" else
                     "PUBLISHABLE_SOFT" if action == "DEFER" else "SKIP" for action in actions)
     return {"candidates": [{"ref": f"c{i}", "editorial_class": classes[i],
@@ -336,13 +337,13 @@ def test_active_pair_cache_mixed_batch_sends_only_misses_and_failure_is_atomic(m
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     first = snapshot(3); first["authorized_relations"] = [suspicious_relation(first)]
     active.evaluate(first, provider=lambda prompt, *_:
-        no_match_relations(1) if "DUPLICATE GATE" in prompt else response(first))
+        no_match_relations(1) if "DUPLICATE GATE" in prompt else response(first, ("SELECT", "DEFER", "DEFER")))
     mixed = snapshot(3)
     mixed["authorized_relations"] = [suspicious_relation(mixed),
         suspicious_relation(mixed, left=0, right=2, pair_id="pair-ac")]
     gate_prompts = []
     result = active.evaluate(mixed, provider=lambda prompt, *_:
-        (gate_prompts.append(prompt) or no_match_relations(1)) if "DUPLICATE GATE" in prompt else response(mixed))
+        (gate_prompts.append(prompt) or no_match_relations(1)) if "DUPLICATE GATE" in prompt else response(mixed, ("SELECT", "DEFER", "DEFER")))
     assert result["status"] == "VALIDATED" and result["duplicate_pair_cache_hits"] == 1
     assert len(gate_prompts) == 1 and '"ref":"r0"' in gate_prompts[0] and '"ref":"r1"' not in gate_prompts[0]
 
@@ -585,7 +586,8 @@ def test_valid_active_result_projects_jasper_fixture_without_legacy_scoring(monk
     assert handoff["selected"][0]["editorial_director"] == {
         "policy_version": active.POLICY_VERSION, "candidate_id": s["candidates"][0]["candidate_id"],
         "editorial_class": "MUST_PUBLISH", "recommended_action": "SELECT", "relative_rank": 1,
-        "category": "NXT", "story_core": "core 0", "decision_authority": "editorial_director"}
+        "category": "NXT", "story_core": "core 0", "decision_authority": "editorial_director",
+        "classified_at": "now", "first_seen_at": "now"}
     assert handoff["pending"][0]["decision"] == "defer"
     persisted = menzo.load_json(tmp_path / "softpool.json", {})["items"]
     assert [item["url"] for item in persisted] == ["https://ed2.test/1"]
@@ -635,7 +637,7 @@ def test_provider_failure_and_oversize_are_whole_result_failures(monkeypatch):
     assert active.evaluate(s, provider=lambda *_: None)["status"] == "OVERSIZE_NOT_EVALUATED"
 
 
-def test_same_run_duplicate_is_removed_before_editorial_classification(monkeypatch):
+def test_same_run_duplicate_is_removed_after_classification_before_publication(monkeypatch):
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     s = snapshot(2)
     s["candidates"][1]["title"] = "Jasper Troy Becomes First Confirmed Release"
@@ -659,7 +661,7 @@ def test_same_run_duplicate_is_removed_before_editorial_classification(monkeypat
     assert len(s["semantic_duplicate_skips"]) == 1
 
 
-def test_duplicate_gate_lifecycle_and_cost_precede_classification(monkeypatch):
+def test_classification_lifecycle_and_cost_precede_duplicate_gate(monkeypatch):
     from agents import canonical_event_ledger
     events, ledger, calls = [], [], []
     monkeypatch.setattr(canonical_event_ledger, "active_event",
@@ -669,20 +671,20 @@ def test_duplicate_gate_lifecycle_and_cost_precede_classification(monkeypatch):
     s["authorized_relations"] = [{"pair_id": "p", "scope": "same_run", "left_id": left,
         "right_id": right, "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
     replies = iter([
-        {"relations": [{"ref": "r0", "decision": "NO_MATCH"}]},
         response(s, ("SELECT", "DEFER")),
+        {"relations": [{"ref": "r0", "decision": "NO_MATCH"}]},
     ])
     result = active.evaluate(s, provider=lambda *_: calls.append(1) or next(replies))
     assert result["status"] == "VALIDATED" and len(calls) == 2
     assert [row["workload"] for row in ledger] == [
-        "editorial_director_duplicate_gate", "editorial_director_active"]
+        "editorial_director_active", "editorial_director_duplicate_gate"]
     roles = [kwargs.get("model_role") for event, kwargs in events if event == "logical_ai_request_created"]
-    assert roles == ["editorial_director_duplicate_gate", "editorial_director_active"]
-    gate_completed = next(i for i, row in enumerate(events) if row[0] == "model_attempt_completed")
-    classification_created = next(i for i, row in enumerate(events)
-                                  if row[0] == "logical_ai_request_created" and
-                                  row[1].get("model_role") == "editorial_director_active")
-    assert gate_completed < classification_created
+    assert roles == ["editorial_director_active", "editorial_director_duplicate_gate"]
+    classification_completed = next(i for i, row in enumerate(events) if row[0] == "model_attempt_completed")
+    gate_created = next(i for i, row in enumerate(events)
+                        if row[0] == "logical_ai_request_created" and
+                        row[1].get("model_role") == "editorial_director_duplicate_gate")
+    assert classification_completed < gate_created
 
 
 def test_empty_relation_matrix_creates_no_duplicate_gate_attempt(monkeypatch):
@@ -763,6 +765,8 @@ def test_confirmation_provider_failure_is_atomic(monkeypatch):
     s = _two_candidate_relation_snapshot(left, right)
 
     def provider(prompt, *_):
+        if "PHASE ONLY" not in prompt:
+            return response(s, ("SELECT",))
         if "DUPLICATE GATE PHASE ONLY" in prompt:
             return {"relations": [grounded_duplicate(
                 "r0", left, right, "Jasper Troy signs a new WWE contract today")]}
@@ -812,6 +816,8 @@ def test_repeated_invalid_confirmation_fails_atomically(monkeypatch):
     confirmation_calls = 0
 
     def provider(prompt, *_):
+        if "PHASE ONLY" not in prompt:
+            return response(s, ("SELECT",))
         nonlocal confirmation_calls
         if "DUPLICATE GATE PHASE ONLY" in prompt:
             return {"relations": [grounded_duplicate(
@@ -876,8 +882,8 @@ def test_duplicate_gate_invalid_then_repair_records_two_attempts(monkeypatch):
     s = snapshot(2); left, right = [row["candidate_id"] for row in s["candidates"]]
     s["authorized_relations"] = [{"pair_id": "p", "scope": "same_run", "left_id": left,
         "right_id": right, "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
-    replies = iter([{"relations": []}, {"relations": [{"ref": "r0", "decision": "NO_MATCH"}]},
-                    response(s, ("SELECT", "DEFER"))])
+    replies = iter([response(s, ("SELECT", "DEFER")), {"relations": []},
+                    {"relations": [{"ref": "r0", "decision": "NO_MATCH"}]}])
     result = active.evaluate(s, provider=lambda *_: next(replies))
     gate_ledger = [row for row in ledger if row["workload"] == "editorial_director_duplicate_gate"]
     assert result["status"] == "VALIDATED" and len(gate_ledger) == 2
@@ -925,9 +931,11 @@ def test_case_a_ungrounded_duplicate_repairs_to_no_match_before_binding(monkeypa
     def provider(prompt, *_):
         calls.append(prompt)
         if len(calls) == 1:
+            return response(s, ("SELECT",))
+        if len(calls) == 2:
             assert "DUPLICATE GATE PHASE ONLY" in prompt
             return _ungrounded_vaquer_duplicate()
-        if len(calls) == 2:
+        if len(calls) == 3:
             assert "duplicate_left_evidence_grounding" in prompt
             assert not s.get("semantic_duplicate_skips")
             return {"relations": [{"ref": "r0", "decision": "NO_MATCH"}]}
@@ -946,7 +954,8 @@ def test_case_a_repeated_ungrounded_duplicate_fails_atomically_without_artifact(
         "AEW's Maya World Addresses Dave Meltzer Not Rating Her PPV Match With Mercedes Mone",
         "Former AEW TBS Champion Maya World addressed Dave Meltzer not rating her match.")
     calls = []
-    result = active.evaluate(s, provider=lambda *_: calls.append(1) or _ungrounded_vaquer_duplicate())
+    result = active.evaluate(s, provider=lambda prompt, *_: (calls.append(1) or _ungrounded_vaquer_duplicate())
+                             if "PHASE ONLY" in prompt else response(s, ("SELECT",)))
     assert result["status"] == "failed" and len(calls) == 2
     assert result["fallback_reason"] == "duplicate_left_evidence_grounding"
     assert "semantic_duplicate_skips" not in s and len(s["candidates"]) == 1
@@ -998,7 +1007,7 @@ def test_case_b_policy_schema_and_no_match_survival(monkeypatch):
                 "right_central_development", "centrality_basis")) <= set(duplicate_then["required"])
     s = _production_incident_snapshot(
         "Triple H Gets Dragged Over Stephanie Vaquer Winning Women’s World Title at WWE Live Event")
-    replies = iter([{"relations": [{"ref": "r0", "decision": "NO_MATCH"}]}, response(s, ("SELECT",))])
+    replies = iter([response(s, ("SELECT",)), {"relations": [{"ref": "r0", "decision": "NO_MATCH"}]}])
     result = active.evaluate(s, provider=lambda *_: next(replies))
     assert result["status"] == "VALIDATED" and not s["semantic_duplicate_skips"]
 
@@ -1330,15 +1339,16 @@ def test_duplicate_gate_provider_failure_has_terminal_lifecycle_and_no_classific
     s = snapshot(2); left, right = [row["candidate_id"] for row in s["candidates"]]
     s["authorized_relations"] = [{"pair_id": "p", "scope": "same_run", "left_id": left,
         "right_id": right, "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
-    result = active.evaluate(s, provider=lambda *_: (_ for _ in ()).throw(TimeoutError()))
-    assert result["status"] == "PROVIDER_FAILED" and ledger[0]["status"] == "failed"
+    result = active.evaluate(s, provider=lambda prompt, *_: (_ for _ in ()).throw(TimeoutError())
+                             if "PHASE ONLY" in prompt else response(s, ("SELECT",)))
+    assert result["status"] == "PROVIDER_FAILED" and ledger[-1]["status"] == "failed"
     failed = [kwargs for event, kwargs in events if event == "model_attempt_failed"]
     assert len(failed) == 1 and failed[0]["error_terminal"] is True
-    assert not any(event == "logical_ai_request_created" and
-                   kwargs.get("model_role") == "editorial_director_active" for event, kwargs in events)
+    assert sum(event == "logical_ai_request_created" and
+                   kwargs.get("model_role") == "editorial_director_active" for event, kwargs in events) == 1
 
 
-def test_gate_eliminates_all_without_creating_classification_request(monkeypatch, tmp_path):
+def test_gate_eliminates_all_after_one_classification_request(monkeypatch, tmp_path):
     from agents import canonical_event_ledger
     events, ledger = [], []
     monkeypatch.setattr(canonical_event_ledger, "active_event",
@@ -1352,18 +1362,20 @@ def test_gate_eliminates_all_without_creating_classification_request(monkeypatch
         "left_id": candidate_id, "right_id": "published", "scorer_version": "v", "score": .7,
         "threshold": .55, "components": {}}]
     def provider(prompt, *_):
+        if "PHASE ONLY" not in prompt:
+            return response(s, ("SELECT",))
         if "DUPLICATE CONFIRMATION PHASE ONLY" in prompt:
             return {"confirmations": [duplicate_confirmation(
                 "d0", s["candidates"][0]["title"], history["title"])]}
         return {"relations": [grounded_duplicate(
             "r0", s["candidates"][0]["title"], history["title"], "Jasper Troy release confirmed")]}
     result = active.evaluate(s, provider=provider)
-    assert result["status"] == "VALIDATED" and len(ledger) == 2
+    assert result["status"] == "VALIDATED" and len(ledger) == 3
     assert result["duplicate_gate_input_digest"]
-    assert "logical_request_id" not in result
+    assert result["logical_request_id"]
     assert any(event == "model_attempt_completed" for event, _ in events)
-    assert not any(event == "logical_ai_request_created" and
-                   kwargs.get("model_role") == "editorial_director_active" for event, kwargs in events)
+    assert sum(event == "logical_ai_request_created" and
+                   kwargs.get("model_role") == "editorial_director_active" for event, kwargs in events) == 1
     from agents.canonical_artifact_index import CanonicalArtifactIndex
     index = CanonicalArtifactIndex("run", index_path=tmp_path / "index.jsonl",
         material_root=tmp_path / "materials", repository_root=tmp_path, enabled=True)
@@ -1953,7 +1965,8 @@ def test_active_artifact_preserves_gate_and_classification_provenance(monkeypatc
     result = active.evaluate(s, provider=provider)
     assert result["status"] == "VALIDATED"
     assert result["duplicate_gate_input_digest"] == pre_gate_digest
-    assert result["input_digest"] == s["input_digest"] != pre_gate_digest
+    assert result["input_digest"] != pre_gate_digest
+    assert result["editorial_prefilter"]["classified"] == 2
     assert result["logical_request_id"] != result["duplicate_gate_logical_request_id"]
     index = CanonicalArtifactIndex("run", index_path=tmp_path / "index.jsonl",
         material_root=tmp_path / "materials", repository_root=tmp_path, enabled=True)

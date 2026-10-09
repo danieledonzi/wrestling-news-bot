@@ -99,7 +99,7 @@ def mark_rediscovered_pool_candidates(board: Mapping[str, Any]) -> dict[str, Any
         row = copy.deepcopy(item)
         key = _source_key(row)
         prior = pool_by_key.get(key)
-        if prior:
+        if prior and (prior.get("editorial_director") or {}).get("policy_version") == "owtv_editorial_director_policy_v5_active":
             row["_soft_board_existing"] = True
             row["_soft_board_existing_day"] = prior.get("soft_board_day")
             row["_soft_board_existing_review_count"] = int(prior.get("soft_board_review_count", 0) or 0)
@@ -474,6 +474,7 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
             continue
         primary_soft.append(row)
 
+    admitted = []
     for row in primary_soft:
         key = _source_key(row)
         if not key:
@@ -484,6 +485,11 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
             terminal.append(_terminal_skip(row, "soft_board_midnight_tombstone", "MIDNIGHT_TOMBSTONE", now))
             continue
         prior = pool_by_key.get(key, {})
+        if not prior:
+            admitted.append({"url": row.get("url") or row.get("source_url"), "title": row.get("title"),
+                             "story_core": (row.get("editorial_director") or {}).get("story_core"),
+                             "category": (row.get("editorial_director") or {}).get("category"),
+                             "admitted_at": now.isoformat()})
         merged = {**copy.deepcopy(prior), **copy.deepcopy(row)}
         first = _first_seen(prior or row, now)
         merged["soft_board_first_seen_at"] = first.isoformat()
@@ -501,6 +507,7 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
     projected["pending"] = primary_nonsoft_pending
     projected.setdefault("skipped", []).extend(terminal)
     telemetry = projected.setdefault("postprocess", {})
+    telemetry["soft_board_admitted_items"] = admitted
     telemetry["soft_board_policy_version"] = POLICY_VERSION
     telemetry["soft_board_local_time"] = local.isoformat()
     telemetry["soft_board_pool_size"] = len(pool)

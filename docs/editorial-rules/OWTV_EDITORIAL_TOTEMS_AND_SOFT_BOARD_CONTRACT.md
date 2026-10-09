@@ -4,17 +4,19 @@
 **Scope:** Editorial Director authority, duplicate safety, soft-pool lifecycle, daily pacing
 **Timezone authority:** Europe/Rome
 **Frozen on:** 2026-10-07
+**Owner-approved revision:** 2026-10-09 — primary eligibility before semantic duplicates; persistent SHOULD overflow; live show coverage.
 
 This document freezes the editorial invariants that MUST survive any implementation reform. Operational parameters may still be tuned, but the invariants below are non-negotiable unless explicitly superseded by a later owner-approved architecture decision.
 
 ## 1. Duplicate authority is above every editorial class
 
-Every URL admitted from the feed MUST receive an authoritative duplicate decision before it can become editorially eligible.
+Primary editorial classification precedes semantic duplicate work. SKIP is discarded before semantic comparisons.
+Every MUST, SHOULD or PUBLISHABLE_SOFT candidate MUST receive authoritative duplicate clearance before publication or soft-pool admission.
 
 - `DUPLICATE` -> terminal hard skip.
 - duplicate check unresolved / invalid / failed -> terminal hard skip for that opportunity.
 - `MATERIAL_UPDATE` -> survives as a new editorial opportunity grounded in the new fact.
-- `NO_MATCH` / unique -> may proceed to editorial classification.
+- `NO_MATCH` / unique -> may proceed to scheduling according to its already assigned class.
 
 There is no exception for breaking, MUST or SHOULD content. A duplicate MUST is still a duplicate and MUST NOT publish.
 
@@ -22,7 +24,7 @@ Duplicate memory and relation history persist across the midnight boundary.
 
 ## 2. Primary classification measures intrinsic editorial value
 
-Only duplicate-cleared candidates may receive one of:
+Candidates receive one of these classes before semantic duplicate work:
 
 - `MUST_PUBLISH`
 - `SHOULD_PUBLISH`
@@ -52,6 +54,8 @@ A duplicate-cleared SHOULD:
 - publishes after MUST within the run;
 - does not compete with soft content;
 - is not deferred merely to reserve capacity for soft content;
+- when ordinary run capacity is exhausted, persists in the strong-news queue and is retried next run even without feed rediscovery;
+- remains in that queue until confirmed publication or a validated terminal decision;
 - may contribute to exceeding the nominal daily ceiling if genuine editorial demand requires it.
 
 A day with 30 genuine MUST+SHOULD items is an exceptional strong-news day, not a pacing failure.
@@ -246,3 +250,10 @@ Repeatedly outranked or stale soft content dies.
 Midnight is a tombstone boundary for unresolved ordinary opportunities.
 
 Zero-publication runs are valid editorial decisions.
+
+## 12. Live coverage and ED-5 observation
+
+Concrete match results and events of followed shows are at least SHOULD, with important developments MUST.
+Publish during the show as source availability permits. The full report is autonomous. Four or five items is a
+planning reference, not a quota. Retain primary class/reason, post-filter relation counts, phase-level cost,
+soft-pool admissions, queue overflow and first-seen/publication timestamps for the 24 hours after verified deployment.
