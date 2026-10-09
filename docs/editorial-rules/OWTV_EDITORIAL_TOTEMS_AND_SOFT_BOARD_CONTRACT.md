@@ -62,6 +62,11 @@ A day with 30 genuine MUST+SHOULD items is an exceptional strong-news day, not a
 
 ## 5. PUBLISHABLE_SOFT is the only competitive editorial class
 
+Owner-approved category reform: PUBLISHABLE_SOFT requires all four of professional wrestling
+relevance, informative substance, recognizable OWTV audience interest and standalone value. Weak SOFT maps to the
+existing terminal SKIP class and is removed before semantic comparisons. The binding definitions and calibrated
+examples are in `OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V6_ACTIVE.md`.
+
 A soft candidate has no publication entitlement.
 
 Soft content may:
@@ -120,6 +125,12 @@ If the same URL appears again in a later feed run, that feed appearance still fo
 rules; the stored pool row itself does not need to be reclassified every 30 minutes.
 
 The soft pool may grow independently during the morning. Its size is not an editorial candidate-count cap.
+
+A primary policy change invalidates an older pool row's admission. Such a row waits in WAIT_PRIMARY_POLICY until a
+feed rediscovery receives a validated current-policy primary decision and duplicate clearance. It cannot enter a
+soft review or publish using the old class, does not accrue competitive losses while waiting, and still expires at
+the original midnight boundary. It is not injected into Active just for migration. Same-policy carried soft URLs
+retain the existing lifecycle.
 
 ## 8. From 12:00, every run may perform a contextual Soft Board Review
 
