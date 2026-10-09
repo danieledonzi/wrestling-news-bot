@@ -255,3 +255,25 @@ def test_reused_strong_queue_only_needs_provider_for_uncached_relations(monkeypa
     assert initialized == ([] if cached else [True])
     if cached:
         assert len(result['output']['candidates']) == 2
+
+
+def test_reclassified_queue_skip_cannot_return_after_sibling_gate_failure(monkeypatch):
+    import newsroom_runner as runner
+    rows = [strong('https://ed5.test/obsolete'), strong('https://ed5.test/sibling')]
+    for row in rows:
+        row['editorial_director'].update(category='WWE', story_core='Confirmed old story')
+    queue.schedule({'selected': rows, 'pending': [], 'skipped': []}, {})
+    board = queue.augment_board({'news_candidates_for_menzo': [
+        {'url': rows[0]['url'], 'title': 'Changed facts no longer justify publication'}]})
+    snapshot = shadow.capture_opportunity(board, run_id='changed',
+        observation_timestamp='2026-10-09T06:30:00Z', history=[], defer_relation_build=True)
+    active.preserve_bob_capacity_metadata(snapshot, board['news_candidates_for_menzo'])
+    monkeypatch.setattr(active, '_evaluate_duplicate_stage', lambda *_args, **_kw:
+                        {'status': 'PROVIDER_FAILED', 'attempts': 1})
+    result = active.evaluate(snapshot, provider=lambda *_: classify(['SKIP']))
+    assert result['status'] == 'PROVIDER_FAILED'
+    runner.persist_active_fail_closed(snapshot, 'gate_unavailable')
+    recovered = queue.augment_board({'news_candidates_for_menzo': []})
+    assert [row['url'] for row in recovered['news_candidates_for_menzo']] == [rows[1]['url']]
+    assert recovered['news_candidates_for_menzo'][0]['_priority_queue_editorial']['editorial_class'] == 'SHOULD_PUBLISH'
+    assert menzo.load_json(menzo.HARD_SKIP_FILE, {})['items'][0]['url'] == rows[0]['url']

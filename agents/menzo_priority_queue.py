@@ -48,6 +48,18 @@ def _write(rows: list[dict[str, Any]]) -> None:
     temporary.replace(path)
 
 
+def discard_terminal(rows: list[dict[str, Any]]) -> None:
+    """Persist validated terminal decisions even when sibling processing fails."""
+    terminal = {_key(row) for row in rows if row.get('decision_authority') in
+                {'editorial_director', 'deterministic_exact_duplicate', 'semantic_duplicate_gate'}}
+    if not terminal:
+        return
+    queued = _read()
+    remaining = [row for row in queued if _key(row) not in terminal]
+    if len(remaining) != len(queued):
+        _write(remaining)
+
+
 def augment_board(board: Mapping[str, Any]) -> dict[str, Any]:
     """Retry strong candidates even when the feed no longer contains their URL."""
     result = copy.deepcopy(dict(board))

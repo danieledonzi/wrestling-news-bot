@@ -529,6 +529,8 @@ def persist_active_fail_closed(snapshot: dict[str, Any] | None, reason: str) -> 
     if prefilter_skips:
         save_hard_skips({"skipped": prefilter_skips})
         skipped.extend(prefilter_skips)
+    from agents.menzo_priority_queue import discard_terminal
+    discard_terminal(skipped)
     decision = {
         "version": POLICY_VERSION,
         "policy_version": POLICY_VERSION,
