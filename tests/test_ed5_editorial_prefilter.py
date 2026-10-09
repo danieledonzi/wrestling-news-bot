@@ -178,7 +178,9 @@ def test_unchanged_queued_should_reuses_class_but_still_passes_duplicate_stage(m
         called.append(True)
         return original(*args, **kwargs)
     monkeypatch.setattr(active, '_evaluate_duplicate_stage', gate)
-    result = active.evaluate(s, provider=lambda *_: pytest.fail('unchanged primary class must be reused'))
+    monkeypatch.setattr(shadow, '_default_provider_factory',
+                        lambda: pytest.fail('no model operation requires a provider'))
+    result = active.evaluate(s)
     assert result['status'] == 'VALIDATED' and called == [True]
     assert result['editorial_prefilter']['reused_strong_classes'] == 1
     assert result['output']['candidates'][0]['editorial_class'] == 'SHOULD_PUBLISH'
@@ -226,3 +228,30 @@ def test_large_backlog_cannot_deadlock_active_candidate_guard(monkeypatch):
     assert any(row['url'].endswith('/fresh') for row in board['news_candidates_for_menzo'])
     assert board['priority_queue_waiting_capture_capacity'] == 3
     assert len(json.loads(queue.queue_path().read_text())['items']) == 5
+
+
+@pytest.mark.parametrize('cached', [True, False])
+def test_reused_strong_queue_only_needs_provider_for_uncached_relations(monkeypatch, cached):
+    rows = [strong('https://ed5.test/a'), strong('https://ed5.test/b')]
+    for row in rows:
+        row.update(title='John Cena discusses his confirmed match ' + row['url'][-1], summary='Match news')
+        row['editorial_director'].update(category='WWE', story_core='Confirmed match news')
+    queue.schedule({'selected': rows, 'pending': [], 'skipped': []}, {})
+    board = queue.augment_board({'news_candidates_for_menzo': []})
+    snapshot = shadow.capture_opportunity(board, run_id='cached',
+        observation_timestamp='2026-10-09T06:30:00Z', history=[], defer_relation_build=True)
+    active.preserve_bob_capacity_metadata(snapshot, board['news_candidates_for_menzo'])
+    relations, _ = shadow.build_authorized_relations(snapshot['candidates'], [], enforce_limit=False)
+    assert len(relations) == 1
+    monkeypatch.setattr(cache, 'lookup', lambda *_:
+                        {**relations[0], 'decision': 'NO_MATCH'} if cached else None)
+    initialized = []
+    def unavailable():
+        initialized.append(True)
+        raise RuntimeError('provider unavailable')
+    monkeypatch.setattr(shadow, '_default_provider_factory', unavailable)
+    result = active.evaluate(snapshot)
+    assert result['status'] == ('VALIDATED' if cached else 'PROVIDER_UNAVAILABLE')
+    assert initialized == ([] if cached else [True])
+    if cached:
+        assert len(result['output']['candidates']) == 2

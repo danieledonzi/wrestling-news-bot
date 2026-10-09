@@ -1193,7 +1193,7 @@ def _evaluate_duplicate_stage(snapshot: Mapping[str, Any], *, provider: Callable
                                "candidates": [], "relations": copy.deepcopy(
                                    snapshot.get("duplicate_gate_relations", []))},
                     "validation_errors": []}
-    if call is None:
+    if has_relations and call is None:
         try:
             call = provider or shadow._default_provider_factory()
         except Exception as exc:
