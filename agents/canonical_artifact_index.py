@@ -378,7 +378,7 @@ class CanonicalArtifactIndex:
         relations = output.get("relations", []) if isinstance(output.get("relations"), list) else []
         survivors = [x for x in snapshot.get("candidates", []) if isinstance(x, Mapping)]
         duplicate_skips = [x for x in snapshot.get("semantic_duplicate_skips", []) if isinstance(x, Mapping)]
-        observation_candidates = {x.get("candidate_id"): x for x in survivors + duplicate_skips
+        observation_candidates = {x.get("candidate_id"): x for x in survivors + duplicate_skips + list(snapshot.get("editorial_prefilter_skips", []))
                                   if x.get("candidate_id")}
         duplicate_ids = {x.get("candidate_id") for x in duplicate_skips}
         for cid, candidate in observation_candidates.items():

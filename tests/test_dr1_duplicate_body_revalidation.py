@@ -170,6 +170,8 @@ def test_failed_local_confirmation_does_not_suppress_or_cache(failure, isolated)
     state["authorized_relations"] = [suspicious_relation(state)]; add_bodies(state)
     before = copy.deepcopy(state["candidates"]); left, right = [r["title"] for r in before]
     def provider(prompt, *_):
+        if "PHASE ONLY" not in prompt and "DR1 BODY-AWARE" not in prompt:
+            return select_all(state)
         if "DR1 BODY-AWARE" in prompt:
             if "CONFIRMATION PHASE" in prompt:
                 if failure == "exception":
@@ -191,7 +193,7 @@ def test_partial_ordinary_no_match_is_cached_on_remaining_fallback():
     state["authorized_relations"] = [suspicious_relation(state), suspicious_relation(state, right=2, pair_id="ac")]
     before = copy.deepcopy(state["candidates"])
     gate = {"relations": [{"ref": "r0", "decision": "NO_MATCH"}, {"ref": "r1", "decision": "UNCERTAIN"}]}
-    result = active.evaluate(state, provider=lambda *_: gate)
+    result = active.evaluate(state, provider=lambda prompt, *_: gate if "PHASE ONLY" in prompt else select_all(state))
     assert result["status"] != "VALIDATED"
     assert state["candidates"] == before and "semantic_duplicate_skips" not in state
     assert set(cache.load()["entries"]) == {"pair-ab"}

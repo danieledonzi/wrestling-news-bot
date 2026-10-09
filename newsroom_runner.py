@@ -410,7 +410,8 @@ def capture_editorial_director_opportunity(massy_board: dict[str, Any], *, run_i
         from agents.menzo_soft_board import mark_rediscovered_pool_candidates
         # Active classifies only URLs present in the current feed board.
         # The persistent soft pool is a separate container and is never injected into Active candidates.
-        augmented = mark_rediscovered_pool_candidates(massy_board)
+        from agents.menzo_priority_queue import augment_board
+        augmented = mark_rediscovered_pool_candidates(augment_board(massy_board))
     else:
         augmented = softpool_augmented_board(massy_board)
     from agents.menzo_policy_v93_15 import published_today_count
@@ -457,7 +458,8 @@ def capture_editorial_director_opportunity(massy_board: dict[str, Any], *, run_i
         augmented, run_id=run_id, observation_timestamp=observation_timestamp,
         published_news_today_local=published_today_count(),
         history=history,
-        enforce_relation_limit=not preserve_active_metadata)
+        enforce_relation_limit=not preserve_active_metadata,
+        defer_relation_build=preserve_active_metadata)
     snapshot["publisher_count_label"] = "published_news_today_local"
     if preserve_active_metadata:
         from agents.menzo_editorial_director_active import preserve_bob_capacity_metadata
@@ -490,6 +492,8 @@ def persist_active_fail_closed(snapshot: dict[str, Any] | None, reason: str) -> 
     """ED-3 safety: Active failure never bypasses duplicate authority through legacy publication."""
     from agents.menzo_policy_v93_15 import (ARTIFACT_DECISIONS_FILE, MENZO_DECISIONS_FILE,
         V92_ALLOWED_URLS_FILE, utc_now, write_json)
+    from agents.menzo_editorial_director_active import POLICY_VERSION
+    from agents.menzo_policy_v93_15 import save_hard_skips
     source = snapshot if isinstance(snapshot, dict) else {}
     skipped = []
     seen = set()
@@ -514,9 +518,20 @@ def persist_active_fail_closed(snapshot: dict[str, Any] | None, reason: str) -> 
             why = "active_fail_closed:" + reason
         item.update(decision="skip", priority="skip", decision_authority=authority, reason=why)
         skipped.append(item)
+    primary_by_id = {row["candidate_id"]: row for row in source.get("editorial_prefilter_decisions", [])}
+    prefilter_skips = []
+    for row in source.get("editorial_prefilter_skips", []):
+        primary = primary_by_id.get(row.get("candidate_id"), {})
+        if primary.get("editorial_class") == "SKIP":
+            prefilter_skips.append({**row, "decision": "skip", "priority": "skip",
+                                   "decision_authority": "editorial_director", "editorial_director": primary,
+                                   "reason": "editorial_class_skip"})
+    if prefilter_skips:
+        save_hard_skips({"skipped": prefilter_skips})
+        skipped.extend(prefilter_skips)
     decision = {
-        "version": "owtv_editorial_director_policy_v4_active",
-        "policy_version": "owtv_editorial_director_policy_v4_active",
+        "version": POLICY_VERSION,
+        "policy_version": POLICY_VERSION,
         "mode": "editorial_director_active_fail_closed",
         "decision_authority": "editorial_director_fail_closed",
         "fallback_reason": reason,

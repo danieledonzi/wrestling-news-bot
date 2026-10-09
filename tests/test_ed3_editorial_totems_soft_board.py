@@ -19,6 +19,7 @@ def _soft(url: str, title: str = "Soft story"):
         "priority": "medium",
         "decision_authority": "editorial_director",
         "editorial_director": {
+            "policy_version": active.POLICY_VERSION,
             "editorial_class": "PUBLISHABLE_SOFT",
             "recommended_action": "DEFER",
             "category": "WWE",

@@ -187,7 +187,7 @@ def test_rome_calendar_day_not_rolling_24_hours_and_reports_excluded():
     assert published_news_today_local(records, now=now) == 1
 
 
-def test_active_projection_keeps_all_should_for_downstream_capacity(monkeypatch, tmp_path):
+def test_active_projection_queues_should_overflow_before_soft_selection(monkeypatch, tmp_path):
     snapshot = shadow.capture_opportunity(
         {"news_candidates_for_menzo": []}, run_id="run",
         observation_timestamp="2026-10-07T12:00:00+00:00",
@@ -209,9 +209,13 @@ def test_active_projection_keeps_all_should_for_downstream_capacity(monkeypatch,
                  "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE"):
         monkeypatch.setattr(menzo, name, tmp_path / f"{name}.json")
 
+    monkeypatch.setattr(bob, 'dynamic_article_capacity', lambda *_: (5, 'test'))
     projected = active.project(snapshot, {"output": {"candidates": decisions, "relations": []}})
-    assert len(projected["selected"]) == 6
-    assert projected["pending"] == []
+    assert len(projected["selected"]) == 5
+    assert len(projected["pending"]) == 1
+    assert projected["pending"][0]["scheduling_override"]["reason"] == "should_wait_capacity"
+    from agents.menzo_priority_queue import augment_board
+    assert len(augment_board({"news_candidates_for_menzo": []})["news_candidates_for_menzo"]) == 6
 
 
 def test_ceiling_and_urgency_share_available_slots_in_director_order():

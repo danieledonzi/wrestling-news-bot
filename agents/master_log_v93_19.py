@@ -112,7 +112,8 @@ def actionable_identity_key(item: dict[str, Any]) -> str:
 def compact_editorial_director(value: Any) -> dict[str, Any] | None:
     if not isinstance(value, dict):
         return None
-    fields = ("editorial_class", "recommended_action", "reason", "policy_reason")
+    fields = ("editorial_class", "recommended_action", "reason", "policy_reason", "story_core",
+              "policy_version", "first_seen_at", "classified_at")
     compact = {field: value.get(field) for field in fields if value.get(field) not in (None, "")}
     return compact or None
 
@@ -303,6 +304,17 @@ def build_master_record(
             "runtime_exit_code": run_summary.get("runtime_exit_code"),
         },
         "agents": run_summary.get("agents", {}),
+        "editorial_pipeline": {
+            "status": (run_summary.get("editorial_director_active") or {}).get("status"),
+            "policy_version": (run_summary.get("editorial_director_active") or {}).get("policy_version"),
+            "prefilter": (run_summary.get("editorial_director_active") or {}).get("editorial_prefilter", {}),
+            "duplicate_cache_hits": (run_summary.get("editorial_director_active") or {}).get("duplicate_pair_cache_hits", 0),
+            "duplicate_cache_misses": (run_summary.get("editorial_director_active") or {}).get("duplicate_pair_cache_misses", 0),
+            "scheduling": {key: value for key, value in (menzo.get("postprocess") or {}).items()
+                           if key.startswith(("priority_queue", "should_deferred", "strong_", "soft_board"))},
+            "strong_pending": [compact_item(row) for row in pending_items
+                               if (row.get("editorial_director") or {}).get("editorial_class") in {"MUST_PUBLISH", "SHOULD_PUBLISH"}],
+        },
         "massy": {
             "version": massy.get("version"),
             "handoff": massy_h,

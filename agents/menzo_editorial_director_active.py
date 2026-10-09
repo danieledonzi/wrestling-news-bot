@@ -20,9 +20,9 @@ from agents.gemini_ledger import record_gemini_attempt
 ROOT = Path(__file__).resolve().parents[1]
 MODEL = shadow.MODEL
 SCHEMA_VERSION = "owtv_editorial_director_output_v4"
-POLICY_VERSION = "owtv_editorial_director_policy_v4_active"
+POLICY_VERSION = "owtv_editorial_director_policy_v5_active"
 SCHEMA_PATH = ROOT / "config/editorial_director_output_schema_v4.json"
-POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V4_ACTIVE.md"
+POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V5_ACTIVE.md"
 RELATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_gate_schema_v3.json"
 CONFIRMATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_confirmation_schema_v3.json"
 EVENT_REGISTRY_PATH = ROOT / "config/event_registry.json"
@@ -30,7 +30,8 @@ BOB_CAPACITY_FIELDS = ("article_type", "source_title", "category_hint", "reason"
                        "ai_editorial_reason", "event_key", "show_report_id", "show_name",
                        "special_event_match", "event_report_key", "corresponding_report_published",
                        "_soft_board_existing", "_soft_board_existing_day",
-                       "_soft_board_existing_review_count", "_soft_board_existing_fingerprint")
+                       "_soft_board_existing_review_count", "_soft_board_existing_fingerprint",
+                       "first_seen_at", "priority_queue_first_seen_at", "_priority_queue_editorial")
 DUPLICATE_EVIDENCE_FIELDS = ("left_evidence", "right_evidence")
 DUPLICATE_CENTRALITY_FIELDS = ("left_central_development", "right_central_development",
                                "centrality_basis")
@@ -133,7 +134,7 @@ def prepare_snapshot(snapshot: dict[str, Any]) -> dict[str, Any]:
     snapshot["authorized_relations"] = [relation for relation in snapshot.get("authorized_relations", [])
         if relation.get("left_id") in winner_ids and
         (relation.get("scope") != "same_run" or relation.get("right_id") in winner_ids)]
-    if not relations_were_complete:
+    if not relations_were_complete and not snapshot.get("defer_relation_build"):
         rebuilt, complete = shadow.build_authorized_relations(winners, history)
         snapshot["authorized_relations"] = rebuilt
         snapshot["authorized_relations_complete"] = complete
@@ -818,7 +819,7 @@ def _revalidate_body_pair(snapshot: Mapping[str, Any], target: Mapping[str, Any]
 
 
 def _apply_duplicate_gate(snapshot: dict[str, Any], relations: list[dict[str, Any]]) -> None:
-    """Remove semantic duplicates before any survivor receives an editorial class."""
+    """Remove semantic duplicates before any classified survivor can be published."""
     from agents.menzo_policy_v93_15 import canonical_richer_winner, hydrate_complete_article_bodies
     by_id = {row["candidate_id"]: row for row in snapshot.get("candidates", [])}
     parent = {candidate_id: candidate_id for candidate_id in by_id}
@@ -1049,10 +1050,8 @@ def _evaluate_duplicate_gate_batch(
             "logical_request_id": logical_request_id, "input_digest": input_digest}
 
 
-def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None = None,
-             artifact_index: Any = None) -> dict[str, Any]:
-    if isinstance(snapshot, dict):
-        prepare_snapshot(snapshot)
+def _evaluate_duplicate_stage(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None = None,
+                              artifact_index: Any = None) -> dict[str, Any]:
     base = {"status": "failed", "schema_version": SCHEMA_VERSION, "policy_version": POLICY_VERSION,
             "observed": copy.deepcopy(snapshot.get("observed")), "limit_status": snapshot.get("limit_status"),
             "attempts": 0, "validation_attempts": []}
@@ -1194,9 +1193,6 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                                "candidates": [], "relations": copy.deepcopy(
                                    snapshot.get("duplicate_gate_relations", []))},
                     "validation_errors": []}
-    if not has_relations:
-        request = OperationalAIRequest("Menzo", "editorial_director_active",
-            reason_code="editorial_director_active")
     if call is None:
         try:
             call = provider or shadow._default_provider_factory()
@@ -1420,8 +1416,26 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                     "duplicate_confirmation_input_digest": confirmation_input_digest,
                     "output": {"schema_version": SCHEMA_VERSION, "policy_version": POLICY_VERSION,
                                "candidates": [], "relations": final_relations}, "validation_errors": []}
-        request = OperationalAIRequest("Menzo", "editorial_director_active",
-            reason_code="editorial_director_active")
+    return {**base, "status": "VALIDATED", "attempts": gate_attempts + confirmation_attempts,
+            "duplicate_gate_logical_request_id": gate_logical_request_id,
+            "duplicate_gate_input_digest": gate_input_digest,
+            "duplicate_confirmation_logical_request_id": confirmation_logical_request_id,
+            "duplicate_confirmation_input_digest": confirmation_input_digest,
+            "output": {"candidates": [], "relations": copy.deepcopy(snapshot.get("duplicate_gate_relations", []))},
+            "validation_errors": []}
+
+
+def _classify(snapshot: dict[str, Any], call: Callable[..., Any]) -> dict[str, Any]:
+    """One primary operation, without duplicate relations/history or pacing context."""
+    base = {"status": "failed", "schema_version": SCHEMA_VERSION, "policy_version": POLICY_VERSION,
+            "validation_attempts": [], "attempts": 0}
+    if not snapshot.get("candidates"):
+        return {**base, "status": "VALIDATED", "output": {"candidates": [], "relations": []}}
+    schema = json.loads(SCHEMA_PATH.read_text())
+    digest = hashlib.sha256(POLICY_PATH.read_bytes()).hexdigest()
+    request = OperationalAIRequest("Menzo", "editorial_director_active",
+                                  reason_code="editorial_prefilter")
+    failures = []
     for index in range(2):
         repair = index == 1
         attempt = request.start(MODEL, repair=repair, reason_code="active_validation_failed" if repair else "")
@@ -1438,7 +1452,7 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
                 status="failed", error_class=type(exc).__name__)
             request.failed(attempt, error_class="upstream", error_terminal=True,
                            latency_ms=int((time.monotonic() - started) * 1000))
-            return {**base, "attempts": gate_attempts + index + 1, "status": "PROVIDER_FAILED",
+            return {**base, "attempts": index + 1, "status": "PROVIDER_FAILED",
                     "fallback_reason": type(exc).__name__, "logical_request_id": request.logical_request_id}
         record_gemini_attempt(response=response, model_requested=MODEL, operation_id=request.logical_request_id,
             attempt_index=index, repair=repair, fallback=False, agent="Menzo", workload="editorial_director_active",
@@ -1455,26 +1469,113 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
             "validation_families": failures, "canonicalizations": canonicalized})
         request.resolve_deferred(not failures, error_terminal=repair and bool(failures))
         if not failures:
-            output["relations"] = copy.deepcopy(snapshot.get("duplicate_gate_relations", []))
             result = {**base, "status": "VALIDATED",
-                      "attempts": gate_attempts + confirmation_attempts + index + 1,
+                      "attempts": index + 1,
                       "logical_request_id": request.logical_request_id, "policy_digest": digest,
                       "input_digest": snapshot["input_digest"], "output": output, "validation_errors": []}
-            if gate_logical_request_id:
-                result["duplicate_gate_logical_request_id"] = gate_logical_request_id
-                result["duplicate_gate_input_digest"] = gate_input_digest
-            if confirmation_logical_request_id:
-                result["duplicate_confirmation_logical_request_id"] = confirmation_logical_request_id
-                result["duplicate_confirmation_input_digest"] = confirmation_input_digest
             return result
-    return {**base, "attempts": gate_attempts + confirmation_attempts + 2,
+    return {**base, "attempts": 2,
             "logical_request_id": request.logical_request_id,
             "validation_errors": failures, "fallback_reason": failures[0]["family"] if failures else "validation_failed"}
 
 
+def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None = None,
+             artifact_index: Any = None) -> dict[str, Any]:
+    """ED-5: primary eligibility -> duplicate clearance -> projection/soft board."""
+    if not isinstance(snapshot, dict):
+        snapshot = copy.deepcopy(dict(snapshot))
+    prepare_snapshot(snapshot)
+    primary_snapshot = copy.deepcopy(snapshot)
+    primary_snapshot["authorized_relations"] = []
+    primary_snapshot["authorized_relations_complete"] = True
+    primary_snapshot["publisher_history_12h"] = []
+    # Supply factual show identity without leaking capacity or local class guesses.
+    for candidate in primary_snapshot.get("candidates", []):
+        metadata = _capacity_candidate(snapshot, candidate)
+        for field in ("show_report_id", "show_name", "event_report_key", "corresponding_report_published"):
+            if field in metadata:
+                candidate[field] = copy.deepcopy(metadata[field])
+    all_primary_candidates = copy.deepcopy(primary_snapshot.get("candidates", []))
+    reused = []
+    fresh = []
+    for candidate in primary_snapshot.get("candidates", []):
+        prior = _capacity_candidate(snapshot, candidate).get("_priority_queue_editorial", {})
+        if (isinstance(prior, dict) and prior.get("policy_version") == POLICY_VERSION and
+                prior.get("editorial_class") in {"MUST_PUBLISH", "SHOULD_PUBLISH"} and
+                prior.get("recommended_action") == "SELECT" and prior.get("category") in shadow.CATEGORIES and
+                isinstance(prior.get("story_core"), str) and prior["story_core"].strip()):
+            reused.append({key: copy.deepcopy(prior.get(key)) for key in
+                           ("editorial_class", "recommended_action", "category", "story_core", "relative_rank")})
+            reused[-1]["candidate_id"] = candidate["candidate_id"]
+        else:
+            fresh.append(candidate)
+    primary_snapshot["candidates"] = fresh
+    _finalize_active_input(primary_snapshot)
+    if primary_snapshot.get("limit_status") in {"exceeded", "projection_failed"}:
+        return {"status": "OVERSIZE_NOT_EVALUATED", "attempts": 0,
+                "fallback_reason": "primary_input_limit"}
+    try:
+        call = provider or (shadow._default_provider_factory() if primary_snapshot.get("candidates") else None)
+    except Exception as exc:
+        return {"status": "PROVIDER_UNAVAILABLE", "attempts": 0, "fallback_reason": type(exc).__name__}
+    primary = _classify(primary_snapshot, call)
+    if primary.get("status") != "VALIDATED":
+        return {**primary, "failure_stage": "editorial_prefilter"}
+    decisions = reused + primary["output"]["candidates"]
+    decisions.sort(key=lambda row: shadow.CLASSES.index(row["editorial_class"]))
+    by_id = {row["candidate_id"]: row for row in decisions}
+    skipped = [row for row in snapshot.get("candidates", [])
+               if by_id[row["candidate_id"]]["editorial_class"] == "SKIP"]
+    snapshot["editorial_prefilter_skips"] = copy.deepcopy(skipped)
+    snapshot["editorial_prefilter_decisions"] = copy.deepcopy(decisions)
+    snapshot["candidates"] = [row for row in snapshot.get("candidates", [])
+                              if by_id[row["candidate_id"]]["editorial_class"] != "SKIP"]
+    eligible = {row["candidate_id"] for row in snapshot["candidates"]}
+    if snapshot.get("defer_relation_build"):
+        relations, complete = shadow.build_authorized_relations(
+            snapshot["candidates"], snapshot.get("publisher_history_12h", []), enforce_limit=False)
+        snapshot["authorized_relations"], snapshot["authorized_relations_complete"] = relations, complete
+    else:
+        snapshot["authorized_relations"] = [row for row in snapshot.get("authorized_relations", [])
+            if row["left_id"] in eligible and (row["scope"] != "same_run" or row["right_id"] in eligible)]
+    _finalize_active_input(snapshot)
+    endpoints = {row.get("candidate_id") or row.get("article_id"): row
+                 for row in snapshot["candidates"] + snapshot.get("publisher_history_12h", [])}
+    counts = {cls: sum(row["editorial_class"] == cls for row in decisions) for cls in shadow.CLASSES}
+    telemetry = {"policy_version": POLICY_VERSION, "order": "classify_then_duplicate",
+                 "classified": len(decisions), "newly_classified": len(fresh), "reused_strong_classes": len(reused), "classes": counts, "skipped_before_duplicate": len(skipped),
+                 "duplicate_candidates": len(eligible), "duplicate_relations": len(snapshot["authorized_relations"]),
+                 "relations": [{"pair_id": row["pair_id"], "scope": row["scope"],
+                                "left_url": endpoints[row["left_id"]].get("url") or endpoints[row["left_id"]].get("source_url"),
+                                "right_url": endpoints[row["right_id"]].get("url") or endpoints[row["right_id"]].get("source_url"),
+                                "left_title": endpoints[row["left_id"]].get("title") or endpoints[row["left_id"]].get("source_title"),
+                                "right_title": endpoints[row["right_id"]].get("title") or endpoints[row["right_id"]].get("source_title")}
+                               for row in snapshot["authorized_relations"]],
+                 "candidates": [{"candidate_id": row["candidate_id"], "title": row.get("title"),
+                                  "url": row.get("url"), "source": row.get("source"),
+                                  "show_report_id": row.get("show_report_id"),
+                                  "event_report_key": row.get("event_report_key"),
+                                  "observed_at": snapshot.get("observation_timestamp"), **by_id[row["candidate_id"]]}
+                                for row in all_primary_candidates]}
+    gate = _evaluate_duplicate_stage(snapshot, provider=call, artifact_index=artifact_index)
+    result = {**gate, "editorial_prefilter": telemetry,
+              "attempts": int(primary.get("attempts", 0)) + int(gate.get("attempts", 0)),
+              "logical_request_id": primary.get("logical_request_id"),
+              "input_digest": primary.get("input_digest"), "policy_digest": primary.get("policy_digest"),
+              "validation_attempts": primary.get("validation_attempts", []) + gate.get("validation_attempts", []),
+              "schema_version": SCHEMA_VERSION, "policy_version": POLICY_VERSION}
+    if gate.get("status") == "VALIDATED":
+        survivors = {row["candidate_id"] for row in snapshot["candidates"]}
+        result["output"] = {"schema_version": SCHEMA_VERSION, "policy_version": POLICY_VERSION,
+            "candidates": [row for row in decisions if row["candidate_id"] in survivors or row["editorial_class"] == "SKIP"],
+            "relations": gate["output"].get("relations", [])}
+    return result
+
+
 def project(snapshot: Mapping[str, Any], result: Mapping[str, Any], *, soft_board_provider: Callable[..., Any] | None = None) -> dict[str, Any]:
     """Mechanically project one wholly validated Active decision into Menzo's handoff."""
-    originals = {row["candidate_id"]: row for row in snapshot.get("candidates", [])}
+    originals = {row["candidate_id"]: row for row in
+                 list(snapshot.get("candidates", [])) + list(snapshot.get("editorial_prefilter_skips", []))}
     sections = {"SELECT": "selected", "DEFER": "pending", "SKIP": "skipped"}
     projected: dict[str, Any] = {"selected": [], "pending": [], "skipped": [], "version": POLICY_VERSION,
         "policy_version": POLICY_VERSION, "mode": "editorial_director_active",
@@ -1487,6 +1588,9 @@ def project(snapshot: Mapping[str, Any], result: Mapping[str, Any], *, soft_boar
             item.update(copy.deepcopy(sidecar.get(decision["candidate_id"], {})))
         item["editorial_director"] = {"policy_version": POLICY_VERSION, **copy.deepcopy(decision),
                                       "decision_authority": "editorial_director"}
+        prior_editorial = item.pop("_priority_queue_editorial", {})
+        item["editorial_director"]["classified_at"] = prior_editorial.get("classified_at") or snapshot.get("observation_timestamp")
+        item["editorial_director"]["first_seen_at"] = item.get("priority_queue_first_seen_at") or item.get("first_seen_at") or snapshot.get("observation_timestamp")
         item["decision_authority"] = "editorial_director"
         item["pipeline_version"] = POLICY_VERSION
         item["decision"] = decision["recommended_action"].lower()
@@ -1510,11 +1614,14 @@ def project(snapshot: Mapping[str, Any], result: Mapping[str, Any], *, soft_boar
     # soft-board owns morning HOLD, post-noon competition, decay and tombstones.
     from agents.menzo_policy_v93_15 import (ARTIFACT_DECISIONS_FILE, HARD_SKIP_FILE, MENZO_DECISIONS_FILE,
         SOFTPOOL_FILE, V92_ALLOWED_URLS_FILE, utc_now, write_json)
+    from agents import menzo_priority_queue as priority_queue
     paths = tuple(Path(path) for path in (SOFTPOOL_FILE, HARD_SKIP_FILE, MENZO_DECISIONS_FILE,
-                                         ARTIFACT_DECISIONS_FILE, V92_ALLOWED_URLS_FILE))
+                                         ARTIFACT_DECISIONS_FILE, V92_ALLOWED_URLS_FILE, priority_queue.queue_path()))
     before = {path: path.read_bytes() if path.exists() else None for path in paths}
     try:
         from agents.menzo_soft_board import apply as apply_soft_board
+        projected["editorial_prefilter"] = copy.deepcopy(result.get("editorial_prefilter", {}))
+        priority_queue.schedule(projected, snapshot)
         projected = apply_soft_board(projected, snapshot, provider=soft_board_provider)
         write_json(MENZO_DECISIONS_FILE, projected)
         write_json(ARTIFACT_DECISIONS_FILE, projected)
