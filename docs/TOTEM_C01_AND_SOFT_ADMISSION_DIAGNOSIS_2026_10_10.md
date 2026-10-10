@@ -1,7 +1,8 @@
 # TOTEM-C01 and soft duplicate-admission diagnosis
 
 Owner instruction: 2026-10-10, after the first-hours V8 observation. This document records evidence and a
-proposed implementation. It does not claim that runtime fixes have been released.
+historical proposed implementation. Its repair proposal is superseded by the owner-approved no-repair V9 release
+described in `TOTEM_C01_INDEPENDENT_DUPLICATE_RELEASE_2026_10_10.md`; historical findings below remain unchanged.
 
 ## Confirmed production boundary
 

@@ -74,18 +74,21 @@ def test_mixed_categories_remove_weak_soft_before_relation_work(monkeypatch):
     def provider(prompt, *_):
         prompts.append(prompt)
         payload = json.loads(prompt.split("INPUT=", 1)[1])
+        if "contract_version" in payload:
+            assert all("editorial_class" not in row for row in payload["candidates"])
+            return {"admission_complete": True, "suspected_duplicates": []}
         assert payload["history"] == payload["authorized_relations"] == []
         assert "publication_context" not in payload
         return classification(["MUST_PUBLISH", "SHOULD_PUBLISH", "PUBLISHABLE_SOFT", "SKIP"])
     result = active.evaluate(snapshot, provider=provider)
     assert result["status"] == "VALIDATED"
     assert observed == [row["url"] for row in rows[:3]]
-    assert len(prompts) == 1
+    assert len(prompts) == 2
     assert result["editorial_prefilter"]["skipped_before_duplicate"] == 1
     assert result["output"]["policy_version"] == active.POLICY_VERSION != OLD_POLICY
 
 
-def test_old_strong_queue_class_is_reclassified_then_current_decision_reused(monkeypatch):
+def test_old_strong_queue_first_class_survives_policy_change(monkeypatch):
     row = candidate("https://ed6.test/queued", "MUST_PUBLISH", OLD_POLICY)
     queue.schedule({"selected": [row], "pending": [], "skipped": []}, {"observation_timestamp": NOW})
     board = queue.augment_board({"news_candidates_for_menzo": []})
@@ -94,8 +97,9 @@ def test_old_strong_queue_class_is_reclassified_then_current_decision_reused(mon
     active.preserve_bob_capacity_metadata(snapshot, board["news_candidates_for_menzo"])
     calls = []
     result = active.evaluate(snapshot, provider=lambda *_: calls.append(True) or classification(["SHOULD_PUBLISH"]))
-    assert result["status"] == "VALIDATED" and calls == [True]
-    assert result["editorial_prefilter"]["reused_strong_classes"] == 0
+    assert result["status"] == "VALIDATED" and calls == []
+    assert result["editorial_prefilter"]["reused_strong_classes"] == 1
+    assert result["output"]["candidates"][0]["editorial_class"] == "MUST_PUBLISH"
     active.project(snapshot, result)
     board = queue.augment_board({"news_candidates_for_menzo": []})
     later = shadow.capture_opportunity(board, run_id="same-policy", observation_timestamp=NOW,
@@ -108,44 +112,43 @@ def test_old_strong_queue_class_is_reclassified_then_current_decision_reused(mon
 
 def test_old_pool_waits_without_model_work_or_review_loss():
     row = candidate("https://ed6.test/old", policy=OLD_POLICY)
+    row["editorial_director"]["category"] = ""
     menzo.write_json(menzo.SOFTPOOL_FILE, {"items": [row]})
     board = soft.mark_rediscovered_pool_candidates({"news_candidates_for_menzo": []})
     assert board["news_candidates_for_menzo"] == []
     result = soft.apply(empty(), {"observation_timestamp": NOW, "remaining_slots": 20},
                         provider=lambda *_: pytest.fail("old admission cannot enter soft review"))
     assert result["selected"] == result["skipped"] == []
-    assert result["pending"][0]["soft_board"]["disposition"] == "WAIT_PRIMARY_POLICY"
+    assert result["pending"][0]["soft_board"]["disposition"] == "WAIT_PRIMARY_DECISION"
     stored = menzo.load_json(menzo.SOFTPOOL_FILE, {})["items"][0]
     assert stored["soft_board_review_count"] == 1 and stored["soft_board_day"] == row["soft_board_day"]
     assert result["postprocess"]["soft_board_meaningful_review"] is False
 
 
 @pytest.mark.parametrize("new_class", ["SKIP", "SHOULD_PUBLISH", "PUBLISHABLE_SOFT"])
-def test_feed_rediscovery_applies_current_policy_instead_of_restoring_old_soft(monkeypatch, new_class):
+def test_feed_rediscovery_reuses_first_soft_class_despite_changed_policy(monkeypatch, new_class):
     old = candidate("https://ed6.test/old", policy=OLD_POLICY)
     menzo.write_json(menzo.SOFTPOOL_FILE, {"items": [old]})
     feed = copy.deepcopy(old)
     feed["_soft_board_existing"] = True
     board = soft.mark_rediscovered_pool_candidates({"news_candidates_for_menzo": [feed]})
-    assert "_soft_board_existing" not in board["news_candidates_for_menzo"][0]
+    assert board["news_candidates_for_menzo"][0]["_soft_board_existing"] is True
     snapshot = shadow.capture_opportunity(board, run_id="rediscovered",
         observation_timestamp="2026-10-10T08:00:00Z", history=[], defer_relation_build=True)
     active.preserve_bob_capacity_metadata(snapshot, board["news_candidates_for_menzo"])
-    result = active.evaluate(snapshot, provider=lambda *_: classification([new_class]))
+    result = active.evaluate(snapshot, provider=lambda *_: pytest.fail("valid first class cannot be changed"))
+    assert result["output"]["candidates"][0]["editorial_class"] == "PUBLISHABLE_SOFT"
     projected = active.project(snapshot, result)
     stored = menzo.load_json(menzo.SOFTPOOL_FILE, {})["items"]
-    if new_class == "SKIP":
-        assert stored == [] and len(projected["skipped"]) == 1
-    elif new_class == "SHOULD_PUBLISH":
-        assert stored == [] and len(projected["selected"]) == 1
-    else:
-        assert len(stored) == 1 and stored[0]["editorial_director"]["policy_version"] == active.POLICY_VERSION
-        assert stored[0]["soft_board_review_count"] == 1
-        assert stored[0]["soft_board_first_seen_at"] == "2026-10-10T08:00:00+00:00"
+    assert len(stored) == 1 and len(projected["pending"]) == 1
+    assert stored[0]["editorial_director"]["editorial_class"] == "PUBLISHABLE_SOFT"
+    assert stored[0]["soft_board_review_count"] == 1
+    assert stored[0]["soft_board_first_seen_at"] == "2026-10-10T08:00:00+00:00"
 
 
 def test_current_review_preserves_old_policy_rows_that_are_waiting(monkeypatch):
     old = candidate("https://ed6.test/old", policy=OLD_POLICY)
+    old["editorial_director"]["category"] = ""
     current = candidate("https://ed6.test/current")
     menzo.write_json(menzo.SOFTPOOL_FILE, {"items": [old, current]})
     def revalidate(rows):
@@ -177,6 +180,7 @@ def test_waiting_old_policy_row_still_expires_at_original_midnight():
 @pytest.mark.parametrize("path", ["all_duplicates", "review_unavailable", "no_capacity", "morning"])
 def test_waiting_policy_rows_survive_other_pool_exit_paths(monkeypatch, path):
     old = candidate("https://ed6.test/old", policy=OLD_POLICY)
+    old["editorial_director"]["category"] = ""
     current = candidate("https://ed6.test/current")
     menzo.write_json(menzo.SOFTPOOL_FILE, {"items": [old, current]})
     monkeypatch.setattr(soft, "_revalidate_pool_duplicates",
@@ -187,7 +191,7 @@ def test_waiting_policy_rows_survive_other_pool_exit_paths(monkeypatch, path):
     result = soft.apply(empty(), snapshot)
     stored = menzo.load_json(menzo.SOFTPOOL_FILE, {})["items"]
     held = next(row for row in stored if row["url"] == old["url"])
-    assert held["soft_board"]["disposition"] == "WAIT_PRIMARY_POLICY"
+    assert held["soft_board"]["disposition"] == "WAIT_PRIMARY_DECISION"
     assert held["soft_board_review_count"] == 1
     assert result["postprocess"]["soft_board_meaningful_review"] is False
     assert result["selected"] == []

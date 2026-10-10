@@ -44,20 +44,19 @@ def test_opening_announcement_without_headline_names_is_final_and_cached(scope):
                 "World championship bout opens the show", "The same opening bout was announced")]}
         return response(first, ("SELECT", "SELECT"))
     result = active.evaluate(first, provider=provider)
-    assert result["status"] == "VALIDATED" and len(calls) == 2
+    assert result["status"] == "VALIDATED" and len(calls) == 3
     assert len(first["semantic_duplicate_skips"]) == 1
     relation = result["output"]["relations"][0]
     assert relation["decision"] == "DUPLICATE" and relation["semantic_authority"] == "gemini_final"
     assert not any("CONFIRMATION" in prompt or "REPAIR" in prompt for prompt in calls)
-    observations = result["validation_attempts"][-1]["canonicalizations"]
-    assert any(row.get("locally_grounded") is False and row["binding"] is False for row in observations)
     second = state()
     def cached_provider(prompt, *_):
         assert "DUPLICATE GATE" not in prompt and "CONFIRMATION" not in prompt
         return response(second, ("SELECT", "SELECT"))
     replay = active.evaluate(second, provider=cached_provider)
-    assert replay["status"] == "VALIDATED" and replay["duplicate_pair_cache_hits"] == 1
-    assert replay["output"]["relations"][0]["decision"] == "DUPLICATE"
+    assert replay["status"] == "VALIDATED"
+    assert replay["output"]["relations"] == []
+    assert menzo.terminal_skip_memory()
 
 
 @pytest.mark.parametrize("decision", ["NO_MATCH", "MATERIAL_UPDATE"])
@@ -73,7 +72,7 @@ def test_nonduplicate_verdict_never_gets_semantic_repair(decision):
         calls.append(prompt)
         return {"relations": [row]} if "DUPLICATE GATE" in prompt else response(value, ("SELECT",))
     result = active.evaluate(value, provider=provider)
-    assert result["status"] == "VALIDATED" and len(calls) == 2
+    assert result["status"] == "VALIDATED" and len(calls) == 3
     assert len(value["candidates"]) == 1 and value["semantic_duplicate_skips"] == []
 
 
@@ -83,7 +82,7 @@ def test_actual_technical_errors_still_fail_closed(fault):
     value["authorized_relations"] = [suspicious_relation(value)]
     row = grounded_duplicate("r0", "left factual span", "right factual span")
     if fault == "invalid_decision": row["decision"] = "UNCERTAIN"
-    if fault == "missing_field": row.pop("centrality_basis")
+    if fault == "missing_field": row.pop("decision")
     if fault == "wrong_ref": row["ref"] = "r99"
     if fault == "malformed_ref": row["ref"] = []
     rows = [] if fault == "missing_row" else [row, copy.deepcopy(row)] if fault == "duplicate_ref" else [row]
@@ -94,11 +93,11 @@ def test_actual_technical_errors_still_fail_closed(fault):
     result = active.evaluate(value, provider=provider)
     assert result["status"] != "VALIDATED"
     assert len(value["candidates"]) == 2 and not value.get("semantic_duplicate_skips")
-    assert len([prompt for prompt in calls if "DUPLICATE GATE" in prompt]) == 2
+    assert len([prompt for prompt in calls if "DUPLICATE GATE" in prompt]) == 1
     assert cache.load()["entries"] == {}
 
 
-def test_repair_cannot_revoke_a_valid_primary_duplicate():
+def test_invalid_sibling_cannot_revoke_a_valid_duplicate():
     value = snapshot(3)
     value["authorized_relations"] = [suspicious_relation(value), suspicious_relation(value, right=2, pair_id="ac")]
     attempts = []
@@ -112,8 +111,10 @@ def test_repair_cannot_revoke_a_valid_primary_duplicate():
         assert 'REPAIR ONLY THESE RELATION REFS=["r1"]' in prompt
         return {"relations": [{"ref": "r0", "decision": "NO_MATCH"}, {"ref": "r1", "decision": "NO_MATCH"}]}
     result = active.evaluate(value, provider=provider)
-    assert result["status"] == "VALIDATED"
-    assert {row["pair_id"]: row["decision"] for row in result["output"]["relations"]} == {"pair-ab": "DUPLICATE", "ac": "NO_MATCH"}
+    assert result["status"] != "VALIDATED"
+    assert len(attempts) == 1
+    assert cache.load()["entries"]["pair-ab"]["final_relation"]["decision"] == "DUPLICATE"
+    assert len(value["semantic_duplicate_skips"]) == 1
 
 
 def test_canonical_bodies_are_projected_only_for_authorized_endpoints():
@@ -143,8 +144,7 @@ def test_invalid_reply_with_already_supplied_bodies_does_not_trigger_another_bod
         return {"relations": [{"ref": "r0", "decision": "UNCERTAIN"}]} if "DUPLICATE GATE" in prompt else response(value, ("SELECT", "SELECT"))
     result = active.evaluate(value, provider=provider)
     assert result["status"] != "VALIDATED" and len(calls) == 3
-    assert result["duplicate_body_revalidation"]["attempts"] == 0
-    assert result["duplicate_body_revalidation"]["reason"] == "no_new_body_evidence"
+    assert "duplicate_body_revalidation" not in result
 
 
 def test_active_report_presence_cannot_drop_feed_news_at_massy(monkeypatch):
@@ -187,10 +187,11 @@ def test_live_feed_strong_news_is_selected_independently_of_report(cls, publishe
 
 def test_v6_primary_admissions_survive_v7_release():
     row = {"editorial_director": {"policy_version": "owtv_editorial_director_policy_v6_active",
-        "editorial_class": "PUBLISHABLE_SOFT", "recommended_action": "DEFER"}}
+        "editorial_class": "PUBLISHABLE_SOFT", "recommended_action": "DEFER",
+        "category": "WWE", "story_core": "A valid original fact"}}
     assert soft._current_primary_soft(row)
     row["editorial_director"]["policy_version"] = "owtv_editorial_director_policy_v5_active"
-    assert not soft._current_primary_soft(row)
+    assert soft._current_primary_soft(row)
 
 
 def test_soft_duplicate_validator_trusts_semantics_but_requires_technical_fields():

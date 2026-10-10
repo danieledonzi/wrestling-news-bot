@@ -104,7 +104,7 @@ def test_capture_history_body_is_private_and_not_recrawled(monkeypatch):
     assert coverage[hid]["coverage"] == "FULL_BODY"
 
 
-def test_single_pair_body_revalidation_recovers_without_cache_pollution(isolated, monkeypatch):
+def test_invalid_single_pair_holds_without_body_repair_or_cache_pollution(isolated, monkeypatch):
     state = snapshot(2); state["authorized_relations"] = [suspicious_relation(state)]
     calls = []
     def hydrate(row):
@@ -118,14 +118,12 @@ def test_single_pair_body_revalidation_recovers_without_cache_pollution(isolated
             return no_match_relations(1)
         return invalid_gate() if "DUPLICATE GATE" in prompt else select_all(state)
     result = active.evaluate(state, provider=provider)
-    assert result["status"] == "VALIDATED"
-    assert result["duplicate_body_revalidation"]["attempts"] == 1
-    assert len([p for p in calls if "DR1 BODY-AWARE" in p]) == 1
-    assert result["attempts"] == len(calls) == 4
+    assert result["status"] != "VALIDATED"
+    assert not any("DR1 BODY-AWARE" in p for p in calls)
+    assert result["attempts"] == len(calls) == 3
     assert cache.load()["entries"] == {}
     assert len(state["candidates"]) == 2
-    rows = [row for row in isolated if row["workload"] == "editorial_director_duplicate_body_revalidation"]
-    assert len(rows) == 1 and rows[0]["logical_request_id"] == result["duplicate_body_revalidation"]["requests"][0]["logical_request_id"]
+    assert not any(row["workload"] == "editorial_director_duplicate_body_revalidation" for row in isolated)
 
 
 def test_partial_ordinary_no_match_is_cached_on_remaining_fallback():
@@ -140,7 +138,7 @@ def test_partial_ordinary_no_match_is_cached_on_remaining_fallback():
     assert result["duplicate_pair_cache_entries_stored"] == 1
 
 
-def test_local_refs_keep_invalid_pair_identity_and_valid_row_is_not_revoked_by_repair(monkeypatch):
+def test_local_refs_keep_valid_row_when_sibling_is_invalid_without_repair(monkeypatch):
     state = snapshot(3)
     def hydrate(row):
         row["canonical_source_body"] = canonical_body("New pair-local source facts for bounded recovery. " * 10)
@@ -161,9 +159,9 @@ def test_local_refs_keep_invalid_pair_identity_and_valid_row_is_not_revoked_by_r
                                   {"ref": "r1", "decision": "UNCERTAIN"}]}
         return select_all(state)
     result = active.evaluate(state, provider=provider)
-    assert result["status"] == "VALIDATED"
-    assert result["duplicate_body_revalidation"]["pair_id"] == "ac"
-    assert {r["pair_id"] for r in result["output"]["relations"]} == {"pair-ab", "ac"}
+    assert result["status"] != "VALIDATED"
+    assert normal_calls == 1
+    assert "duplicate_body_revalidation" not in result
     assert set(cache.load()["entries"]) == {"pair-ab"}
     assert result["duplicate_pair_cache_entries_stored"] == 1
 

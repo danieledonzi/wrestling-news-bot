@@ -65,7 +65,34 @@ def augment_board(board: Mapping[str, Any]) -> dict[str, Any]:
     result = copy.deepcopy(dict(board))
     published = _published_keys()
     closed = menzo.terminal_skip_memory()
+    from agents import menzo_primary_classification_store as primary
+    frozen = primary.load()
     queued = [row for row in _read() if _key(row) not in published and _key(row) not in closed]
+    # Reconcile historical promotions against the first primary authority without
+    # reviving closed/published URLs or discarding an eligible original soft item.
+    restored_soft = []
+    retained = []
+    for row in queued:
+        entry = frozen.get(_key(row))
+        if entry:
+            row['editorial_director'] = {**row.get('editorial_director', {}),
+                **primary.decision(entry, row.get('candidate_id')), 'policy_version': entry.get('policy_version'),
+                'classified_at': entry.get('classified_at'), 'first_seen_at': entry.get('first_seen_at')}
+        if _class(row) in {'MUST_PUBLISH', 'SHOULD_PUBLISH'}:
+            retained.append(row)
+        elif _class(row) == 'PUBLISHABLE_SOFT' and entry:
+            row.update(decision='defer', priority='medium')
+            row.setdefault('soft_board_first_seen_at', entry.get('first_seen_at') or menzo.utc_now())
+            restored_soft.append(row)
+    if restored_soft:
+        pool = json.loads(Path(menzo.SOFTPOOL_FILE).read_text(encoding='utf-8')) if Path(menzo.SOFTPOOL_FILE).exists() else {'items': []}
+        if not isinstance(pool, dict) or not isinstance(pool.get('items'), list):
+            raise ValueError('invalid_soft_pool')
+        items = {_key(row): row for row in pool['items'] if _key(row) not in closed}
+        for row in restored_soft:
+            items.setdefault(_key(row), row)
+        menzo.write_json(Path(menzo.SOFTPOOL_FILE), {**pool, 'items': list(items.values())})
+    queued = retained
     _write(queued)
     by_key = {_key(row): copy.deepcopy(row) for row in queued}
     feed_keys = set()
