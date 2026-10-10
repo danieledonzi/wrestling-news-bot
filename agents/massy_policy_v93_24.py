@@ -267,6 +267,8 @@ def annotate_show_candidate(item: dict[str, Any], report: dict[str, Any], news_c
 
 
 def run_massy() -> dict[str, Any]:
+    from agents.menzo_editorial_director_active import enabled as active_enabled
+    director_active = active_enabled()
     board = base_run_massy()
     candidates = [x for x in board.get("news_candidates_for_menzo", []) if isinstance(x, dict)]
     report_candidates = [x for x in board.get("report_candidates", []) if isinstance(x, dict)]
@@ -318,7 +320,8 @@ def run_massy() -> dict[str, Any]:
         covering = next((r for r in show_context_reports if show_related(item, r)), None)
         if covering:
             news_class = classify_show_news(item, covering)
-            if str(covering.get("id") or "") in active_report_ids and news_class == "event_recap_duplicate":
+            if (not director_active and str(covering.get("id") or "") in active_report_ids
+                    and news_class == "event_recap_duplicate"):
                 moved.append(hard_skip_entry(item, "covered_by_report_recap_duplicate", report_id=covering.get("id"), show_name=covering.get("show_name"), event_news_class=news_class, report_coverage_guard="report_closes_only_recap_duplicates"))
                 recap_skip_count += 1
                 continue
@@ -339,7 +342,8 @@ def run_massy() -> dict[str, Any]:
     board["version"] = VERSION
     board.setdefault("binding", {})["manual_or_existing_reports_block_simone"] = True
     board.setdefault("binding", {})["report_publish_after_respected"] = True
-    board.setdefault("binding", {})["report_closes_only_recap_duplicates"] = True
+    board.setdefault("binding", {})["report_closes_only_recap_duplicates"] = not director_active
+    board["binding"]["feed_news_independent_of_report"] = director_active
     board.setdefault("binding", {})["show_factual_news_allowed_before_report"] = True
     board.setdefault("binding", {})["menzo_hard_skip_memory_is_binding"] = True
     board.setdefault("binding", {})["news_older_than_7_days_are_hard_skips"] = True

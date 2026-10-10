@@ -5,6 +5,7 @@
 **Timezone authority:** Europe/Rome
 **Frozen on:** 2026-10-07
 **Owner-approved revision:** 2026-10-09 — primary eligibility before semantic duplicates; persistent SHOULD overflow; live show coverage.
+**Owner-approved clarification:** 2026-10-10 — feed-URL news only, autonomous reports, and final Gemini semantic decisions.
 
 This document freezes the editorial invariants that MUST survive any implementation reform. Operational parameters may still be tuned, but the invariants below are non-negotiable unless explicitly superseded by a later owner-approved architecture decision.
 
@@ -14,13 +15,18 @@ Primary editorial classification precedes semantic duplicate work. SKIP is disca
 Every MUST, SHOULD or PUBLISHABLE_SOFT candidate MUST receive authoritative duplicate clearance before publication or soft-pool admission.
 
 - `DUPLICATE` -> terminal hard skip.
-- duplicate check unresolved / invalid / failed -> terminal hard skip for that opportunity.
+- duplicate check technically unresolved / invalid / failed -> terminal hard skip for that opportunity.
 - `MATERIAL_UPDATE` -> survives as a new editorial opportunity grounded in the new fact.
 - `NO_MATCH` / unique -> may proceed to scheduling according to its already assigned class.
 
 There is no exception for breaking, MUST or SHOULD content. A duplicate MUST is still a duplicate and MUST NOT publish.
 
 Duplicate memory and relation history persist across the midnight boundary.
+
+Gemini owns relation semantics under `docs/OWTV_TOTEM_INVARIANTS.md`, TOTEM-D01. A well-formed decision bound to
+the supplied exact endpoints is effective and final for the same material and contract. Insufficient local semantic
+evidence, including missing headline subject anchors, must not invalidate that decision or cause a semantic reversal
+through repair. Technical schema, reference, scope and coverage failures remain subject to bounded repair/fail-closed.
 
 ## 2. Primary classification measures intrinsic editorial value
 
@@ -65,7 +71,7 @@ A day with 30 genuine MUST+SHOULD items is an exceptional strong-news day, not a
 Owner-approved category reform: PUBLISHABLE_SOFT requires all four of professional wrestling
 relevance, informative substance, recognizable OWTV audience interest and standalone value. Weak SOFT maps to the
 existing terminal SKIP class and is removed before semantic comparisons. The binding definitions and calibrated
-examples are in `OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V6_ACTIVE.md`.
+examples are in `OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V7_ACTIVE.md`.
 
 A soft candidate has no publication entitlement.
 
@@ -219,7 +225,9 @@ The exact review limit is an implementation parameter and is not frozen by this 
 
 No URL may bypass duplicate authority.
 
-When duplicate authority cannot establish uniqueness safely, the opportunity is hard-skipped rather than published speculatively.
+When no technically valid, endpoint-bound Gemini duplicate decision can be obtained, the opportunity is hard-skipped
+rather than published speculatively. A local validator's inability to independently establish semantic evidence does
+not make an otherwise well-formed Gemini decision unresolved; TOTEM-D01 governs that distinction.
 
 When soft-board judgment is unavailable or invalid, the safe editorial default is to publish no soft content for that run. MUST/SHOULD behavior remains governed by their validated primary classification and duplicate clearance.
 
@@ -265,6 +273,12 @@ Zero-publication runs are valid editorial decisions.
 ## 12. Live coverage and ED-5 observation
 
 Concrete match results and events of followed shows are at least SHOULD, with important developments MUST.
-Publish during the show as source availability permits. The full report is autonomous. Four or five items is a
-planning reference, not a quota. Retain primary class/reason, post-filter relation counts, phase-level cost,
+Here news means an individual article URL received through a configured feed. Do not extract, split or manufacture
+news from the full Results report or its live-update body. Publish duplicate-cleared MUST/SHOULD feed URLs during
+the live coverage period as source availability permits; do not wait for the report or send them to soft competition.
+Ordinary SHOULD overflow retains the existing strong-news queue. The full report is autonomous and does not replace
+individual feed news. Its expected, pending or published state is not, by itself, a reason to suppress such a URL or
+declare it a semantic duplicate. Later feed URLs still follow the applicable post-show freshness policy on their own
+central development. See TOTEM-N01 in `docs/OWTV_TOTEM_INVARIANTS.md`.
+Four or five items is a planning reference, not a quota. Retain primary class/reason, post-filter relation counts, phase-level cost,
 soft-pool admissions, queue overflow and first-seen/publication timestamps for the 24 hours after verified deployment.
