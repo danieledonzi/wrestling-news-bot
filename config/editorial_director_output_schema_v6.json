@@ -1,0 +1,59 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "candidates"
+  ],
+  "properties": {
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "ref",
+          "editorial_class",
+          "recommended_action",
+          "category",
+          "story_core"
+        ],
+        "properties": {
+          "ref": {
+            "type": "string",
+            "pattern": "^c[0-9]+$"
+          },
+          "editorial_class": {
+            "enum": [
+              "MUST_PUBLISH",
+              "SHOULD_PUBLISH",
+              "PUBLISHABLE_SOFT",
+              "SKIP"
+            ]
+          },
+          "recommended_action": {
+            "enum": [
+              "SELECT",
+              "DEFER",
+              "SKIP"
+            ]
+          },
+          "category": {
+            "enum": [
+              "WWE",
+              "AEW",
+              "NXT",
+              "TNA",
+              "ROH",
+              "World",
+              "Business"
+            ]
+          },
+          "story_core": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

@@ -224,7 +224,7 @@ def test_active_relation_batch_failure_keeps_snapshot_atomic(monkeypatch):
     assert "semantic_duplicate_skips" not in value
 
 
-def test_duplicate_gate_repair_targets_only_unresolved_relations(monkeypatch):
+def test_duplicate_gate_preserves_valid_rows_without_targeted_repair(monkeypatch):
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     monkeypatch.setattr(pair_cache, "lookup", lambda *_args, **_kwargs: None)
     monkeypatch.setattr(pair_cache, "store", lambda *_args, **_kwargs: 0)
@@ -260,20 +260,12 @@ def test_duplicate_gate_repair_targets_only_unresolved_relations(monkeypatch):
 
     result = active.evaluate(value, provider=provider)
 
-    assert result["status"] == "VALIDATED"
-    assert validation_calls == [0, 1]
-    assert len(gate_prompts) == 2
+    assert result["status"] != "VALIDATED"
+    assert validation_calls == [0]
+    assert len(gate_prompts) == 1
     assert gate_prompts[0].count('"ref":"r') == 3
-    assert "REPAIR ONLY THESE RELATION REFS=[\"r2\"]" in gate_prompts[1]
-    repair_input = json.loads(gate_prompts[1].split("INPUT=", 1)[1].split("\nREPAIR", 1)[0])
-    assert [row["ref"] for row in repair_input["authorized_relations"]] == ["r2"]
-    assert result["duplicate_gate_targeted_repairs"] == [{
-        "batch_index": 0, "relation_count": 1, "relation_refs": ["r2"],
-        "failure_families": ["duplicate_centrality_contract"]}]
-    attempts = [row for row in result["validation_attempts"]
-                if row.get("phase") == "duplicate_gate"]
-    assert [row["attempt_relation_count"] for row in attempts] == [3, 1]
-    assert [row["remaining_relation_count"] for row in attempts] == [1, 0]
+    assert "REPAIR" not in gate_prompts[0]
+    assert result["duplicate_pair_cache_entries_stored"] == 0 # this fixture disables persistence
 
 
 def test_duplicate_gate_fallback_preserves_valid_duplicate_proposals(monkeypatch):
@@ -308,16 +300,14 @@ def test_duplicate_gate_fallback_preserves_valid_duplicate_proposals(monkeypatch
                 "temporal_basis": None}
 
     monkeypatch.setattr(active, "_validate_duplicate_gate", validate)
-    monkeypatch.setattr(active, "_revalidate_body_pair", recover)
     monkeypatch.setattr(pair_cache, "store", lambda *_args, **_kwargs: 0)
     outcome = active._evaluate_duplicate_gate_batch(
         value, call=lambda *_: {"relations": []}, digest="digest",
         cache=pair_cache.empty(), materials={}, cached_relations={},
         base=base, stored_pairs=set(), batch_index=0)
 
-    assert outcome["ok"] is True
-    assert {row["pair_id"] for row in outcome["relations"]} == {"dense-0", "dense-1"}
-    assert next(row for row in outcome["relations"] if row["pair_id"] == "dense-0")["decision"] == "DUPLICATE"
+    assert outcome["ok"] is False and calls == 1
+    assert outcome["valid_relations"][0]["decision"] == "DUPLICATE"
 
 
 def test_active_pair_cache_mixed_batch_sends_only_misses_and_failure_is_atomic(monkeypatch):
@@ -325,6 +315,8 @@ def test_active_pair_cache_mixed_batch_sends_only_misses_and_failure_is_atomic(m
     first = snapshot(3); first["authorized_relations"] = [suspicious_relation(first)]
     active.evaluate(first, provider=lambda prompt, *_:
         no_match_relations(1) if "DUPLICATE GATE" in prompt else response(first, ("SELECT", "DEFER", "DEFER")))
+    from agents import menzo_editorial_recovery as recovery
+    recovery.CACHE_FILE.unlink() # distinct mocked election on the same factual fixture
     mixed = snapshot(3)
     mixed["authorized_relations"] = [suspicious_relation(mixed),
         suspicious_relation(mixed, left=0, right=2, pair_id="pair-ac")]
@@ -334,6 +326,7 @@ def test_active_pair_cache_mixed_batch_sends_only_misses_and_failure_is_atomic(m
     assert result["status"] == "VALIDATED" and result["duplicate_pair_cache_hits"] == 1
     assert len(gate_prompts) == 1 and '"ref":"r0"' in gate_prompts[0] and '"ref":"r1"' not in gate_prompts[0]
 
+    recovery.CACHE_FILE.unlink() # request a deliberately different mocked election
     failing = snapshot(3); failing["authorized_relations"] = [suspicious_relation(failing),
         suspicious_relation(failing, left=0, right=2, pair_id="pair-ad")]
     before = [row["candidate_id"] for row in failing["candidates"]]
@@ -410,7 +403,7 @@ def _duplicate_cache_snapshot():
     return value
 
 
-def test_active_pair_cache_event_registry_change_invalidates_confirmed_duplicate(
+def test_event_registry_change_cannot_reopen_a_terminal_duplicate(
         monkeypatch, tmp_path):
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     registry = tmp_path / "event_registry.json"
@@ -423,17 +416,18 @@ def test_active_pair_cache_event_registry_change_invalidates_confirmed_duplicate
     unchanged = _duplicate_cache_snapshot(); unchanged_calls = []
     unchanged_result = active.evaluate(
         unchanged, provider=_confirmed_duplicate_provider(unchanged, unchanged_calls))
-    assert unchanged_result["duplicate_pair_cache_hits"] == 1
+    assert unchanged_result["duplicate_pair_cache_hits"] == 0
+    assert len(unchanged["terminal_policy_skips"]) == 1
     assert "gate" not in unchanged_calls and "confirmation" not in unchanged_calls
 
     registry.write_bytes(original + b"\n")
     changed = _duplicate_cache_snapshot(); changed_calls = []
     changed_result = active.evaluate(changed, provider=_confirmed_duplicate_provider(changed, changed_calls))
     assert changed_result["status"] == "VALIDATED" and changed_result["duplicate_pair_cache_hits"] == 0
-    assert changed_calls.count("gate") == 1 and changed_calls.count("confirmation") == 0
+    assert changed_calls.count("gate") == 0 and changed_calls.count("confirmation") == 0
 
 
-def test_active_pair_cache_missing_registry_misses_then_restore_hits(monkeypatch, tmp_path):
+def test_missing_registry_and_restore_cannot_reopen_a_terminal_duplicate(monkeypatch, tmp_path):
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     registry = tmp_path / "event_registry.json"
     original = active.EVENT_REGISTRY_PATH.read_bytes()
@@ -448,14 +442,14 @@ def test_active_pair_cache_missing_registry_misses_then_restore_hits(monkeypatch
         unavailable, provider=_confirmed_duplicate_provider(unavailable, unavailable_calls))
     assert unavailable_result["status"] == "VALIDATED"
     assert unavailable_result["duplicate_pair_cache_hits"] == 0
-    assert unavailable_calls.count("gate") == 1
+    assert unavailable_calls.count("gate") == 0
 
     registry.write_bytes(original)
     restored = _duplicate_cache_snapshot(); restored_calls = []
     restored_result = active.evaluate(
         restored, provider=_confirmed_duplicate_provider(restored, restored_calls))
     assert restored_result["status"] == "VALIDATED" and restored_result["duplicate_pair_cache_hits"] == 0
-    assert restored_calls.count("gate") == 1 and "confirmation" not in restored_calls
+    assert restored_calls.count("gate") == 0 and "confirmation" not in restored_calls
 
 
 @pytest.mark.parametrize("confirmation", [None, [], "CONFIRM_DUPLICATE", 1])
@@ -566,7 +560,7 @@ def test_valid_active_result_projects_jasper_fixture_without_legacy_scoring(monk
     (tmp_path / "menzo.json").write_text('{"decision_authority":"legacy_menzo","selected":[{"url":"https://stale"}]}')
     result = active.evaluate(s, provider=lambda *_: response(s))
     handoff = active.project(s, result)
-    assert result["status"] == "VALIDATED" and result["attempts"] == 1
+    assert result["status"] == "VALIDATED" and result["attempts"] == 2
     assert [len(handoff[x]) for x in ("selected", "pending", "skipped")] == [1, 1, 1]
     assert handoff["selected"][0]["title"].startswith("WWE Starts Cutting")
     assert handoff["skipped"][0]["title"].startswith("Jasper Troy Sparks")
@@ -605,11 +599,13 @@ def test_valid_active_result_projects_jasper_fixture_without_legacy_scoring(monk
     assert massy_result["hard_skipped"][0]["reason"] == "menzo_hard_skip_memory"
 
 
-def test_missing_action_repairs_and_must_select_survives_daily_reference(monkeypatch):
+def test_missing_action_holds_without_repair_and_must_survives_daily_reference(monkeypatch):
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     s = snapshot(1); bad = response(s, ("SELECT",)); del bad["candidates"][0]["recommended_action"]
     calls = []; result = active.evaluate(s, provider=lambda *_: calls.append(1) or bad)
-    assert result["status"] == "failed" and len(calls) == 2
+    assert result["status"] == "failed" and len(calls) == 1
+    from agents import menzo_editorial_recovery as recovery
+    recovery.CACHE_FILE.unlink() # simulate expiry of the declared recovery delay
     s = snapshot(1, published=30); calls = []
     result = active.evaluate(s, provider=lambda *_: calls.append(1) or response(s, ("SELECT",)))
     assert result["status"] == "VALIDATED" and len(calls) == 1
@@ -643,7 +639,7 @@ def test_same_run_duplicate_is_removed_after_classification_before_publication(m
                 "d0", s["candidates"][0]["title"], s["candidates"][1]["title"])]}
         return response(s, ("SELECT",))
     result = active.evaluate(s, provider=provider)
-    assert result["status"] == "VALIDATED" and len(calls) == 2
+    assert result["status"] == "VALIDATED" and len(calls) == 3
     assert len(result["output"]["candidates"]) == 1
     assert len(s["semantic_duplicate_skips"]) == 1
 
@@ -659,14 +655,15 @@ def test_classification_lifecycle_and_cost_precede_duplicate_gate(monkeypatch):
         "right_id": right, "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
     replies = iter([
         response(s, ("SELECT", "DEFER")),
+        response(s, ("SELECT", "DEFER")),
         {"relations": [{"ref": "r0", "decision": "NO_MATCH"}]},
     ])
     result = active.evaluate(s, provider=lambda *_: calls.append(1) or next(replies))
-    assert result["status"] == "VALIDATED" and len(calls) == 2
+    assert result["status"] == "VALIDATED" and len(calls) == 3
     assert [row["workload"] for row in ledger] == [
-        "editorial_director_active", "editorial_director_duplicate_gate"]
+        "editorial_director_active", "editorial_duplicate_admission", "editorial_director_duplicate_gate"]
     roles = [kwargs.get("model_role") for event, kwargs in events if event == "logical_ai_request_created"]
-    assert roles == ["editorial_director_active", "editorial_director_duplicate_gate"]
+    assert roles == ["editorial_director_active", "editorial_duplicate_admission", "editorial_director_duplicate_gate"]
     classification_completed = next(i for i, row in enumerate(events) if row[0] == "model_attempt_completed")
     gate_created = next(i for i, row in enumerate(events)
                         if row[0] == "logical_ai_request_created" and
@@ -696,7 +693,7 @@ def _two_candidate_relation_snapshot(left_title, right_title):
     return s
 
 
-def test_duplicate_gate_invalid_then_repair_records_two_attempts(monkeypatch):
+def test_duplicate_gate_invalid_records_one_terminal_technical_attempt(monkeypatch):
     from agents import canonical_event_ledger
     events, ledger = [], []
     monkeypatch.setattr(canonical_event_ledger, "active_event",
@@ -705,17 +702,17 @@ def test_duplicate_gate_invalid_then_repair_records_two_attempts(monkeypatch):
     s = snapshot(2); left, right = [row["candidate_id"] for row in s["candidates"]]
     s["authorized_relations"] = [{"pair_id": "p", "scope": "same_run", "left_id": left,
         "right_id": right, "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
-    replies = iter([response(s, ("SELECT", "DEFER")), {"relations": []},
+    replies = iter([response(s, ("SELECT", "DEFER")), response(s, ("SELECT", "DEFER")), {"relations": []},
                     {"relations": [{"ref": "r0", "decision": "NO_MATCH"}]}])
     result = active.evaluate(s, provider=lambda *_: next(replies))
     gate_ledger = [row for row in ledger if row["workload"] == "editorial_director_duplicate_gate"]
-    assert result["status"] == "VALIDATED" and len(gate_ledger) == 2
-    assert [row["repair"] for row in gate_ledger] == [False, True]
+    assert result["status"] != "VALIDATED" and len(gate_ledger) == 1
+    assert [row["repair"] for row in gate_ledger] == [False]
     gate_events = [(event, kwargs) for event, kwargs in events
                    if kwargs.get("model_role") == "editorial_director_duplicate_gate"]
     failed = [kwargs for event, kwargs in gate_events if event == "model_attempt_failed"]
-    assert failed[0]["error_class"] == "validation" and failed[0]["error_terminal"] is False
-    assert any(event == "model_attempt_completed" for event, _ in gate_events)
+    assert failed[0]["error_class"] == "validation" and failed[0]["error_terminal"] is True
+    assert not any(event == "model_attempt_completed" for event, _ in gate_events)
 
 
 def _production_incident_snapshot(title, summary=""):
@@ -747,18 +744,13 @@ def _ungrounded_vaquer_duplicate():
 def test_case_b_policy_schema_and_no_match_survival(monkeypatch):
     import json
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
-    policy = active.POLICY_PATH.read_text(encoding="utf-8").casefold()
-    assert "reaction, criticism, comment, response, controversy, consequence, or follow-up" in policy
-    assert "cause, background, or" in policy and "central new" in policy
+    policy = active.RELATION_POLICY_PATH.read_text(encoding="utf-8").casefold()
+    assert "autonomous central factual" in policy and "distinct developments" in policy
     schema = json.loads(active.RELATION_SCHEMA_PATH.read_text())
-    branches = schema["properties"]["relations"]["items"]["anyOf"]
-    by_decision = {branch["properties"]["decision"]["enum"][0]: branch for branch in branches}
-    duplicate_then = by_decision["DUPLICATE"]
-    assert set(("left_evidence", "right_evidence", "left_central_development",
-                "right_central_development", "centrality_basis")) <= set(duplicate_then["required"])
+    assert set(schema["properties"]["relations"]["items"]["required"]) == {"ref", "decision"}
     s = _production_incident_snapshot(
         "Triple H Gets Dragged Over Stephanie Vaquer Winning Women’s World Title at WWE Live Event")
-    replies = iter([response(s, ("SELECT",)), {"relations": [{"ref": "r0", "decision": "NO_MATCH"}]}])
+    replies = iter([response(s, ("SELECT",)), response(s, ("SELECT",)), {"relations": [{"ref": "r0", "decision": "NO_MATCH"}]}])
     result = active.evaluate(s, provider=lambda *_: next(replies))
     assert result["status"] == "VALIDATED" and not s["semantic_duplicate_skips"]
 
@@ -784,15 +776,9 @@ def test_duplicate_gate_provider_schema_uses_supported_union_keywords_only():
         return found
 
     assert schema_keywords(schema).isdisjoint(unsupported)
-    branches = schema["properties"]["relations"]["items"]["anyOf"]
-    assert len(branches) == 3
-    by_decision = {branch["properties"]["decision"]["enum"][0]: branch for branch in branches}
-    assert set(by_decision) == {"DUPLICATE", "MATERIAL_UPDATE", "NO_MATCH"}
-    assert all(len(branch["properties"]["decision"]["enum"]) == 1 for branch in branches)
-    assert {"left_evidence", "right_evidence", "left_central_development",
-            "right_central_development", "centrality_basis"} <= set(by_decision["DUPLICATE"]["required"])
-    assert {"new_fact", "temporal_basis"} <= set(by_decision["MATERIAL_UPDATE"]["required"])
-    assert set(by_decision["NO_MATCH"]["required"]) == {"ref", "decision"}
+    item = schema["properties"]["relations"]["items"]
+    assert set(item["properties"]["decision"]["enum"]) == {"DUPLICATE", "MATERIAL_UPDATE", "NO_MATCH"}
+    assert set(item["required"]) == {"ref", "decision"}
 
 
 
@@ -898,7 +884,7 @@ def test_gate_eliminates_all_after_one_classification_request(monkeypatch, tmp_p
         return {"relations": [grounded_duplicate(
             "r0", s["candidates"][0]["title"], history["title"], "Jasper Troy release confirmed")]}
     result = active.evaluate(s, provider=provider)
-    assert result["status"] == "VALIDATED" and len(ledger) == 2
+    assert result["status"] == "VALIDATED" and len(ledger) == 3
     assert result["duplicate_gate_input_digest"]
     assert result["logical_request_id"]
     assert any(event == "model_attempt_completed" for event, _ in events)
@@ -1031,7 +1017,7 @@ def test_recent_history_duplicate_eliminates_entire_same_run_component(monkeypat
                           "scorer": {}})
         monkeypatch.setattr(menzo, "hydrate_complete_article_bodies", lambda *_: (True, []))
         monkeypatch.setattr(menzo, "canonical_richer_winner",
-                            lambda items: (next(row for row in items if row["candidate_id"] == winner_id), "test"))
+                            lambda items, **_: (next(row for row in items if row["candidate_id"] == winner_id), "test"))
         active._apply_duplicate_gate(s, relations)
         return s
 
@@ -1241,7 +1227,7 @@ def test_primary_validation_is_not_a_pacing_capacity_bound(monkeypatch):
         row["editorial_class"] = "SHOULD_PUBLISH"
     calls = []
     result = active.evaluate(s, provider=lambda *_: calls.append(1) or out)
-    assert len(calls) == 1
+    assert len(calls) == 2
     assert result["status"] == "VALIDATED"
 
 

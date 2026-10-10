@@ -1810,7 +1810,7 @@ def hydrate_complete_article_bodies(items: list[dict[str, Any]]) -> tuple[bool, 
     return complete, outcomes
 
 
-def canonical_richer_winner(items: list[dict[str, Any]]) -> tuple[dict[str, Any], str]:
+def canonical_richer_winner(items: list[dict[str, Any]], *, earliest_arrival: bool = False) -> tuple[dict[str, Any], str]:
     """Use the exact canonical bodies sent to Gemini as the primary richness signal."""
     def quality(item: dict[str, Any]) -> tuple[int,int,int,int,int,str]:
         text=complete_cleaned_article_body(item)
@@ -1818,6 +1818,19 @@ def canonical_richer_winner(items: list[dict[str, Any]]) -> tuple[dict[str, Any]
         terms=generalized_story_terms(canonical_item)
         factual=len(terms["entities"])+len(terms["actions"])+len(terms["shows"])+len(terms["events"])+len(terms["titles"])
         return (len(terms["words"]),factual,len(text),unique_media_count(item),source_reliability_score(item),source_key(item.get("url") or item.get("source_url") or ""))
+    if earliest_arrival:
+        from agents import menzo_primary_classification_store as primary
+        stored = primary.load()
+        # URL ordering is only the final deterministic fallback; list arrival
+        # order remains stable when legacy observations have no valid timestamp.
+        def arrival(item):
+            value = stored.get(source_key(item.get("url") or item.get("source_url") or ""), {}).get("first_seen_at") or item.get("first_seen_at")
+            try:
+                return datetime.fromisoformat(str(value).replace("Z", "+00:00")).timestamp()
+            except (ValueError, TypeError):
+                return float("inf")
+        ranked = sorted(items, key=arrival)
+        return max(ranked, key=lambda item: quality(item)[:-1]), "canonical_richness_then_earliest_arrival"
     return max(items,key=quality),"canonical_meaningful_words_then_factual_detail_then_length_media_source_tiebreak"
 
 

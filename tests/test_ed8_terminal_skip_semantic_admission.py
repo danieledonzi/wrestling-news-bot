@@ -114,7 +114,7 @@ def test_shared_wwe_final_match_words_do_not_admit_a_pair(monkeypatch):
     prompts = []
     result = active.evaluate(snapshot(rows), provider=lambda prompt, *_:
         prompts.append(prompt) or classes(['SHOULD_PUBLISH', 'SHOULD_PUBLISH']))
-    assert result['status'] == 'VALIDATED' and len(prompts) == 1
+    assert result['status'] == 'VALIDATED' and len(prompts) == 2
     assert result['editorial_prefilter']['duplicate_relations'] == 0
 
 
@@ -216,19 +216,20 @@ def test_full_gate_sees_only_semantically_admitted_pair_and_cached_final_cannot_
         return classes(['SHOULD_PUBLISH'] * 3, [suspect])
     first = snapshot(rows)
     result = active.evaluate(first, provider=provider)
-    assert result['status'] == 'VALIDATED' and len(calls) == 2
+    assert result['status'] == 'VALIDATED' and len(calls) == 3
     assert len(first['semantic_duplicate_skips']) == 1
-    gate = json.loads(calls[1].rsplit('INPUT=', 1)[1])
+    gate = json.loads(calls[2].rsplit('INPUT=', 1)[1])
     assert len(gate['authorized_relations']) == 1
     # The gate may retain the candidate table but only the suspected pair has
     # authorized full-material endpoints and decision refs.
-    assert gate['authorized_relations'][0]['admission_basis'] == suspect['basis']
+    assert set(gate['authorized_relations'][0]) == {'ref', 'scope', 'left_ref', 'right_ref'}
     second = snapshot(rows)
     later_calls = []
     later = active.evaluate(second, provider=lambda prompt, *_:
         later_calls.append(prompt) or classes(['SHOULD_PUBLISH'] * 3))
     assert later['status'] == 'VALIDATED' and len(later_calls) == 1
-    assert later['duplicate_pair_cache_hits'] == 1 and len(second['semantic_duplicate_skips']) == 1
+    assert later['output']['relations'] == []
+    assert len(second['terminal_policy_skips']) == 1
 
 
 @pytest.mark.parametrize('bad', [

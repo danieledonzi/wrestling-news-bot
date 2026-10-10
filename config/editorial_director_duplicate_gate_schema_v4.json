@@ -1,0 +1,50 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "relations"
+  ],
+  "properties": {
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "ref",
+          "decision"
+        ],
+        "properties": {
+          "ref": {
+            "type": "string"
+          },
+          "decision": {
+            "enum": [
+              "DUPLICATE",
+              "NO_MATCH",
+              "MATERIAL_UPDATE"
+            ]
+          },
+          "shared_fact": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "new_fact": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "temporal_basis": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

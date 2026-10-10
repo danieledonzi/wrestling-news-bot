@@ -89,7 +89,7 @@ class OperationalAIRequest:
         self.pending_attempt = attempt
         self.pending_latency_ms = latency_ms
 
-    def resolve_deferred(self, accepted: bool, *, error_terminal: bool) -> None:
+    def resolve_deferred(self, accepted: bool, *, error_terminal: bool, validation_reason: str = "") -> None:
         attempt, latency = self.pending_attempt, self.pending_latency_ms
         self.pending_attempt = None
         self.pending_latency_ms = None
@@ -99,7 +99,7 @@ class OperationalAIRequest:
             self.completed(attempt, latency)
         else:
             self.failed(attempt, error_class="validation", error_terminal=error_terminal,
-                        latency_ms=latency, reason_code="invalid_semantic_output")
+                        latency_ms=latency, reason_code=validation_reason or "invalid_semantic_output")
 
     def completed(self, attempt: Mapping[str, Any], latency_ms: int | None = None) -> None:
         active_event("model_attempt_completed", "Gemini", "model", "success", item=self.item,

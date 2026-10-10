@@ -95,7 +95,10 @@ or locally recognizable wording — must not invalidate or reverse Gemini's sema
 is not proof that Gemini is wrong, and must not trigger a repair that replaces the decision merely to satisfy a local heuristic.
 
 Actual provider failure, malformed output, missing decisions, or invalid endpoint binding remain technical failures
-under the bounded repair/fail-closed contract. Semantic decisions must not be invented locally to resolve them.
+under the single-attempt technical recovery/fail-closed contract. There are no model repair or second
+confirmation calls in primary classification, pair admission, duplicate judgment or soft competition. Valid individual
+classes/verdicts survive an invalid sibling. Identical failed input waits under an explicit recovery backoff;
+changed factual material or contract can retry. A technical HOLD never becomes an invented semantic SKIP.
 
 Owner decision, 2026-10-10: this rule supersedes earlier requirements that made local semantic anchoring a veto over
 an otherwise well-formed, endpoint-bound Gemini decision. Runtime changes implementing it require their own reviewed release.
@@ -148,8 +151,8 @@ and reused, not requested again because of a later run, feed rediscovery, change
 timestamp, elapsed time, midnight, cache expiry, policy-version change, or movement between queues and pools.
 
 A duplicate-admission request, a full duplicate judgment, a scheduling decision, or a soft-board review cannot
-promote or demote that primary class. A repair is allowed to obtain a missing or technically invalid decision;
-it cannot reconsider an already valid classification, including a valid row in a partially invalid batch.
+promote or demote that primary class. Only a missing or technically invalid initial decision may be requested
+in a subsequent eligible operation; there is no repair call and no reconsideration of an already valid row.
 Once accepted, classes survive an unrelated admission, duplicate, projection, or handoff failure.
 
 Downstream authority may still terminate eligibility: a final DUPLICATE, a meaningful soft-board SKIP,
@@ -167,4 +170,24 @@ Examples: weak SOFT at 19:00 remains SKIP at 20:00; PUBLISHABLE_SOFT at 19:00 re
 
 Owner decision, 2026-10-10: this supersedes any primary reclassification mechanism, including reuse limited to
 strong queues, reclassification on policy/cache changes, or reclassification of rediscovered pool URLs. The V8
-runtime does not yet implement this invariant completely; implementation requires a reviewed release.
+runtime did not implement this invariant completely. V9 implements it with permanent first-class storage and
+independent primary/admission/judgment contracts; see `TOTEM_C01_INDEPENDENT_DUPLICATE_RELEASE_2026_10_10.md`.
+
+## Independent pair election and judgment
+
+After immutable primary classification and terminal URL exclusions, a dedicated semantic admission operation
+interprets eligible articles' central factual developments and elects plausible pairs. It receives factual article
+context only, no editorial classes, ranks or classifier story_core. Lexical scorer thresholds, shared promotion/show
+names and broad action labels cannot authorize a semantic comparison. This operation sends compact article tables,
+not an all-against-all pair matrix. An explicitly complete empty suspicion list is valid clearance.
+
+Only admitted exact pairs reach the independent duplicate judge, using their titles, summaries and available
+canonical bodies. A technically valid exact ref plus DUPLICATE/NO_MATCH/MATERIAL_UPDATE suffices; optional
+explanations and local headline/evidence heuristics cannot veto Gemini. MATERIAL_UPDATE requires a published
+history endpoint and preserves eligibility without rewriting primary class. Successful Publisher history stays 12h.
+Published duplicates prevail; unpublished duplicates retain richer factual content/media, with earliest arrival as
+the informational tie-break. A losing URL is terminal SKIP under TOTEM-S01.
+
+Owner-approved implementation, 2026-10-10: this supersedes combined primary/admission schemas and every model
+repair path in these Active operations. Technical recovery is a subsequent operation under the explicit backoff,
+not a request to revise an accepted classification or duplicate verdict.

@@ -1,4 +1,4 @@
-"""Sparse Gemini pair admission from article meaning, folded into primary classification.
+"""Sparse Gemini pair admission from article meaning, independent of primary classification.
 
 No pair matrix is sent to the provider. Technical ref binding cannot decide whether
 articles share a central development; Gemini supplies that suspicion and its basis.
@@ -10,15 +10,13 @@ from typing import Any, Mapping
 
 from agents.duplicate_pair_identity import recent_history_pair_id, same_run_pair_id
 
-VERSION = 'totem-d01-semantic-admission-v1'
+VERSION = 'totem-d01-independent-semantic-admission-v2'
 
 
 def compact(row: Mapping[str, Any]) -> dict[str, Any]:
-    editorial = row.get('editorial_director') or {}
     return {key: copy.deepcopy(value) for key, value in {
         'title': row.get('title') or row.get('source_title') or row.get('title_it') or '',
         'summary': str(row.get('summary') or '')[:2500],
-        'story_core': str(editorial.get('story_core') or row.get('story_core') or '')[:1500],
         'source': row.get('source'), 'published_at': row.get('published_at'),
         'show_report_id': row.get('show_report_id'), 'event_report_key': row.get('event_report_key'),
     }.items() if value not in (None, '')}
@@ -26,12 +24,9 @@ def compact(row: Mapping[str, Any]) -> dict[str, Any]:
 
 def attach(primary: dict[str, Any], all_candidates: list[dict[str, Any]],
            history: list[dict[str, Any]], known: list[dict[str, Any]]) -> None:
-    fresh_refs = {row['candidate_id']: f'c{i}' for i, row in enumerate(primary.get('candidates', []))}
     fixed = {row['candidate_id']: row for row in known}
     primary['_semantic_admission'] = {
-        'candidates': [{**compact({**row, 'story_core': fixed.get(row['candidate_id'], {}).get('story_core') or row.get('story_core')}), 'ref': f'a{i}',
-                        'classification_ref': fresh_refs.get(row['candidate_id']),
-                        'fixed_class': fixed.get(row['candidate_id'], {}).get('editorial_class')}
+        'candidates': [{**compact(row), 'ref': f'a{i}'}
                        for i, row in enumerate(all_candidates)],
         'history': [{**compact(row), 'ref': f'h{i}'} for i, row in enumerate(history)],
         'contract_version': VERSION,
@@ -47,7 +42,7 @@ def validate(raw: Any, primary: Mapping[str, Any], decisions: list[dict[str, Any
     old_ids = primary.get('_admission_history_ids', [])
     classes = {**primary.get('_admission_fixed_classes', {}),
                **{row['candidate_id']: row['editorial_class'] for row in decisions}}
-    eligible = {key for key, cls in classes.items() if cls != 'SKIP'}
+    eligible = {key for key in ids if classes.get(key) != 'SKIP'}
     # An empty or one-endpoint universe needs no semantic comparison decision.
     if not eligible or (len(eligible) == 1 and not old_ids):
         if raw.get('suspected_duplicates') not in (None, []):
@@ -90,21 +85,3 @@ def make_relation(scope: str, left_id: str, right_id: str, basis: str) -> dict[s
     return {'pair_id': pair_id, 'scope': scope, 'left_id': left_id, 'right_id': right_id,
             'scorer_version': VERSION, 'score': 1.0, 'threshold': 1.0,
             'components': {'gemini_semantic_suspicion': 1.0}, 'admission_basis': basis}
-
-
-def repair_snapshot(primary: Mapping[str, Any], decisions: list[dict[str, Any]]) -> dict[str, Any]:
-    """Once classes are accepted, repair admission using only still eligible URLs."""
-    repair = copy.deepcopy(dict(primary))
-    context = primary['_semantic_admission']
-    classes = {**primary.get('_admission_fixed_classes', {}),
-               **{row['candidate_id']: row['editorial_class'] for row in decisions}}
-    current = [{**row, 'candidate_id': key} for row, key in
-               zip(context['candidates'], primary['_admission_candidate_ids']) if classes[key] != 'SKIP']
-    history = [{**row, 'article_id': key} for row, key in
-               zip(context['history'], primary['_admission_history_ids'])]
-    known = [{'candidate_id': row['candidate_id'], 'editorial_class': classes[row['candidate_id']],
-              'story_core': row.get('story_core')} for row in current]
-    repair['candidates'] = []
-    repair['authorized_relations'] = []
-    attach(repair, current, history, known)
-    return repair

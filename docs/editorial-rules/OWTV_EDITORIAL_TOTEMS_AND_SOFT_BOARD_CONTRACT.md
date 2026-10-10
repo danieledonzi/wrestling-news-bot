@@ -31,7 +31,8 @@ Duplicate memory and relation history persist across the midnight boundary.
 Gemini owns relation semantics under `docs/OWTV_TOTEM_INVARIANTS.md`, TOTEM-D01. A well-formed decision bound to
 the supplied exact endpoints is effective and final for the same material and contract. Insufficient local semantic
 evidence, including missing headline subject anchors, must not invalidate that decision or cause a semantic reversal
-through repair. Technical schema, reference, scope and coverage failures remain subject to bounded repair/fail-closed.
+through repair. Technical schema, reference, scope and coverage failures cause a recoverable fail-closed HOLD after one attempt.
+Primary, pair admission, duplicate judgment and competition have separate contracts; no model repair calls occur.
 
 ## 2. Primary classification measures intrinsic editorial value
 
@@ -50,7 +51,8 @@ Under TOTEM-C01, the first technically valid primary classification for a canoni
 must be durably reused in every later run. It precedes semantic duplicate work and entry into any editorial pool.
 Rediscovery, elapsed time, source metadata changes, policy/cache changes, or queue/pool transitions must not
 trigger primary reclassification. Valid rows remain fixed even when a sibling row or duplicate admission needs
-technical repair. A technical failure after classification does not erase the accepted primary decision.
+a subsequent eligible technical recovery operation. No repair request occurs and a technical failure after
+classification does not erase the accepted primary decision.
 
 Weak owner-facing SOFT is primary SKIP and is discarded before duplicate work. PUBLISHABLE_SOFT remains
 eligible only for optional soft competition; it can never be promoted into MUST/SHOULD. A valid downstream
@@ -91,8 +93,9 @@ A day with 30 genuine MUST+SHOULD items is an exceptional strong-news day, not a
 Owner-approved category reform: PUBLISHABLE_SOFT requires all four of professional wrestling
 relevance, informative substance, recognizable OWTV audience interest and standalone value. Weak SOFT maps to the
 existing terminal SKIP class and is removed before semantic comparisons. The binding definitions and calibrated
-examples are in `OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V8_ACTIVE.md`, which adds terminal SKIP isolation,
-bookmaker exclusion and sparse semantic admission under the owner's 2026-10-10 corrections.
+examples are in `OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V9_ACTIVE.md`, dedicated solely to immutable primary classification.
+Pair election and judgment use `OWTV_DUPLICATE_ADMISSION_POLICY_V1.md` and
+`OWTV_DUPLICATE_JUDGMENT_POLICY_V1.md`, with no classification fields or repair mechanism.
 
 A soft candidate has no publication entitlement.
 
