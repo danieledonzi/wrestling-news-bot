@@ -6,16 +6,20 @@
 **Frozen on:** 2026-10-07
 **Owner-approved revision:** 2026-10-09 — primary eligibility before semantic duplicates; persistent SHOULD overflow; live show coverage.
 **Owner-approved clarification:** 2026-10-10 — feed-URL news only, autonomous reports, and final Gemini semantic decisions.
+**Additional owner-approved clarification:** 2026-10-10 — terminal SKIP isolation and bookmaker exclusion, under TOTEM-S01/N02.
 
 This document freezes the editorial invariants that MUST survive any implementation reform. Operational parameters may still be tuned, but the invariants below are non-negotiable unless explicitly superseded by a later owner-approved architecture decision.
 
 ## 1. Duplicate authority is above every editorial class
 
 Primary editorial classification precedes semantic duplicate work. SKIP is discarded before semantic comparisons.
+Under TOTEM-S01 this applies at every editorial stage and permanently to the canonical URL: skipped URLs must
+never be injected as semantic comparison history for fresh URLs. Retaining their audit/URL-blocking memory does
+not authorize further semantic comparisons. This supersedes the earlier soft-tombstone history exception.
 Every MUST, SHOULD or PUBLISHABLE_SOFT candidate MUST receive authoritative duplicate clearance before publication or soft-pool admission.
 
 - `DUPLICATE` -> terminal hard skip.
-- duplicate check technically unresolved / invalid / failed -> terminal hard skip for that opportunity.
+- duplicate check technically unresolved / invalid / failed -> technical fail-closed publication block under its recovery contract; no invented final editorial SKIP.
 - `MATERIAL_UPDATE` -> survives as a new editorial opportunity grounded in the new fact.
 - `NO_MATCH` / unique -> may proceed to scheduling according to its already assigned class.
 
@@ -40,6 +44,10 @@ Candidates receive one of these classes before semantic duplicate work:
 Primary class MUST be based on the story's intrinsic editorial value and central development. It MUST NOT be promoted or demoted merely because the day is quiet, because many slots remain, or because the soft pool is weak.
 
 Primary classification and publication pacing are separate decisions.
+
+Under TOTEM-N02, articles centrally reporting bookmaker odds, betting-market movements or favorites/predictions
+derived from odds are SKIP, including immediately before a major event. Confirmed complete/updated event cards
+remain a distinct type. This supersedes the older v92 favorable betting-odds example; it is not an event-coverage exception.
 
 ## 3. MUST_PUBLISH is a totem
 
@@ -205,9 +213,14 @@ The canonical URL is immutable for the lifetime of a soft opportunity. Feed-text
 MUST NOT reset soft state, and MUST NOT promote the item to MUST/SHOULD.
 
 In OWTV's source environment, a genuinely new development is represented by a new URL. That new URL is a new candidate,
-but it still MUST pass duplicate/material-update authority against published history and relevant soft tombstones.
-If it is the same old story under another URL, it dies as DUPLICATE. If it contains a genuinely new development,
-MATERIAL_UPDATE may authorize it as a new editorial opportunity.
+but it still MUST pass duplicate/material-update authority against successful published history under the current lookback.
+Terminal soft tombstones and all other skipped URLs are excluded from comparisons under TOTEM-S01. A validated duplicate
+of published news dies as DUPLICATE; a genuinely new development may survive as MATERIAL_UPDATE. A previous SKIP of
+another URL is not semantic evidence against this fresh candidate.
+
+Any valid new editorial SKIP takes precedence over a previous soft admission for the same URL. Neither preserving the
+old pool state nor expiry of skip-memory retention may revive that URL. V7 runtime behavior that contradicts this owner
+clarification requires a reviewed implementation release; this document update alone does not deploy those changes.
 
 No implementation should invent a same-URL material-update path.
 
@@ -225,9 +238,10 @@ The exact review limit is an implementation parameter and is not frozen by this 
 
 No URL may bypass duplicate authority.
 
-When no technically valid, endpoint-bound Gemini duplicate decision can be obtained, the opportunity is hard-skipped
-rather than published speculatively. A local validator's inability to independently establish semantic evidence does
-not make an otherwise well-formed Gemini decision unresolved; TOTEM-D01 governs that distinction.
+When no technically valid, endpoint-bound Gemini duplicate decision can be obtained, publication fails closed under
+the technical recovery contract. This does not invent a terminal editorial SKIP under TOTEM-S01. A local validator's
+inability to independently establish semantic evidence does not make an otherwise well-formed Gemini decision
+unresolved; TOTEM-D01 governs that distinction.
 
 When soft-board judgment is unavailable or invalid, the safe editorial default is to publish no soft content for that run. MUST/SHOULD behavior remains governed by their validated primary classification and duplicate clearance.
 
