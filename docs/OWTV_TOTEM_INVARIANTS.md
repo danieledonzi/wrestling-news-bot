@@ -3,6 +3,7 @@
 **Status:** OWNER-ratified, canonical normative authority  
 **Scope:** OpenWrestlingTV
 **Owner-approved clarification:** 2026-10-10 — feed-URL news coverage and Gemini semantic authority.
+**Additional owner-approved clarification:** 2026-10-10 — bookmaker exclusions and terminal SKIP isolation.
 
 ## TOTEM supremacy
 
@@ -97,3 +98,41 @@ under the bounded repair/fail-closed contract. Semantic decisions must not be in
 
 Owner decision, 2026-10-10: this rule supersedes earlier requirements that made local semantic anchoring a veto over
 an otherwise well-formed, endpoint-bound Gemini decision. Runtime changes implementing it require their own reviewed release.
+
+Semantic duplication means the same autonomous central factual development in both articles. Shared words,
+capitalization, promotion, show, person, or broad action category are not sufficient evidence of that relationship.
+Pair-admission heuristics do not establish semantic suspicion or a duplicate verdict merely by adding these signals.
+Gemini must interpret the meaning of the supplied articles; quoting a word from each endpoint does not establish
+that they report the same development.
+
+## TOTEM-N02 — Bookmaker odds are excluded news
+
+An article whose central content is bookmaker odds, betting-market movements, favorites or predictions derived
+from those odds is SKIP. Event proximity, a major promotion, and available publication capacity do not provide
+an exception. Such an article must not publish or enter the soft pool or semantic duplicate work.
+
+This exclusion concerns the article's central content, not incidental betting vocabulary in an otherwise distinct
+factual development. A complete or materially updated confirmed event card remains a separate news type.
+
+Owner decision, 2026-10-10: this reinstates the bookmaker exclusion present in the legacy Menzo policy and
+supersedes the older `NEWS_EDITORIAL_DECISIONS_v92.md` example that favored betting odds close to an event.
+
+## TOTEM-S01 — Terminal SKIP closes an individual URL
+
+Whenever a valid editorial SKIP is decided for an individual news URL — primary classification, soft-board review,
+competitive expiry, or a final duplicate decision — that canonical URL permanently leaves editorial eligibility.
+It must not be reclassified, revived, or retained in the pool because of feed rediscovery, changed title/summary,
+refreshed source timestamp, a previous soft admission, midnight, or expiration of a runtime cache or TTL.
+
+A terminally skipped URL must not be either endpoint of a later semantic duplicate/material-update comparison
+and must not be injected as comparison history or semantic context for another URL. Its archived decision may
+remain for audit and deterministic rejection of that same canonical URL only. A fresh different URL is evaluated
+on its own; the skipped article is not its semantic comparison target. Successful publication history remains
+the authoritative cross-run duplicate comparison source under the existing lookback contract.
+
+Technical inability to obtain a decision is not a valid editorial SKIP: retain the separate technical fail-closed
+publication behavior and its declared recovery contract without inventing a terminal semantic judgment.
+
+Owner decision, 2026-10-10: this explicitly supersedes soft-tombstone comparison history, restoration of prior
+soft state over a valid new SKIP, and time-limited semantic finality. The current V7 implementation still requires
+a reviewed implementation release for these newly clarified rules.

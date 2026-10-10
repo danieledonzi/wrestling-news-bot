@@ -166,8 +166,10 @@ Examples that should receive useful scoring:
 - final card;
 - match added;
 - title match added;
-- betting odds close to event;
 - official card update.
+
+Owner clarification, 2026-10-10: bookmaker/betting-odds articles are excluded under TOTEM-N02, even close to an event.
+The former favorable betting-odds example is superseded. Confirmed full/updated cards remain independently valuable.
 
 Generic preview without changes remains low value.
 
