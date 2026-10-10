@@ -332,28 +332,101 @@ def _review(pool: list[dict[str, Any]], snapshot: Mapping[str, Any], capacity: M
                   "logical_request_id": request.logical_request_id, "input_digest": input_digest}
 
 
-def _revalidate_pool_duplicates(pool: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
-    """Re-run duplicate authority on the isolated soft container before contextual selection.
-
-    This is intentionally separate from primary Active capture and therefore has no
-    MAX_CANDIDATES coupling. It checks duplicates inside the current pool first and
-    then against the latest published history. Any unresolved arbitration fails closed
-    through the existing duplicate guards.
-    """
+def _revalidate_pool_duplicates(pool: list[dict[str, Any]], *, provider=None) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
+    """Reuse exact clearance, otherwise use sparse semantic admission for the isolated pool."""
     if not pool:
         return [], [], {}
-    from agents.menzo_policy_v93_15 import apply_same_story_duplicate_guard, apply_recent_published_duplicate_guard
-    work = {
-        "selected": [copy.deepcopy(row) for row in pool],
-        "pending": [],
-        "skipped": [],
-        "postprocess": {},
-    }
-    apply_same_story_duplicate_guard(work, {})
-    apply_recent_published_duplicate_guard(work)
-    survivors = [row for row in work.get("selected", []) if isinstance(row, dict)]
-    skipped = [row for row in work.get("skipped", []) if isinstance(row, dict)]
-    return survivors, skipped, copy.deepcopy(work.get("postprocess", {}))
+    from agents import menzo_editorial_director_active as active
+    from agents import menzo_editorial_director_shadow as shadow
+    from agents import menzo_semantic_admission as admission
+    from agents.menzo_policy_v93_15 import load_authoritative_publisher_history, utc_now, save_hard_skips
+    history = load_authoritative_publisher_history(12)
+    snapshot = shadow.capture_opportunity({'news_candidates_for_menzo': pool}, run_id='soft-duplicate-review',
+        observation_timestamp=utc_now(), history=history, defer_relation_build=True)
+    active.prepare_snapshot(snapshot)
+    originals = {shadow.article_id(row): row for row in pool}
+    contract = active.pair_cache.contract_fingerprint(policy_version=active.POLICY_VERSION, model=active.MODEL,
+        policy_path=active.POLICY_PATH, gate_schema_path=active.RELATION_SCHEMA_PATH,
+        event_registry_path=active.EVENT_REGISTRY_PATH)
+    eligible_ids = {row['candidate_id'] for row in snapshot['candidates']} | {
+        row['article_id'] for row in snapshot['publisher_history_12h']}
+    signature = hashlib.sha256(json.dumps({
+        'policy': contract, 'contract': admission.VERSION,
+        'current': [{'id': row['candidate_id'], **admission.compact({**row,
+            'story_core': (originals[row['candidate_id']].get('editorial_director') or {}).get('story_core')})}
+            for row in snapshot['candidates']],
+        'history': [{'id': row['article_id'], **admission.compact(row)} for row in snapshot['publisher_history_12h']],
+        'bodies': {key: value.get('sha256') for key, value in snapshot.get('_duplicate_revalidation_bodies', {}).items()
+                   if key in eligible_ids},
+    }, ensure_ascii=False, sort_keys=True, default=str).encode()).hexdigest()
+    blocked = list(snapshot.get('terminal_policy_skips', [])) + list(snapshot.get('deterministic_exact_skips', []))
+    def skip_rows(rows):
+        return [{**copy.deepcopy(originals[row['candidate_id']]), 'decision': 'skip', 'priority': 'skip',
+                 'decision_authority': 'semantic_duplicate_gate' if row.get('semantic_duplicate_scope') else
+                     ('editorial_director' if row.get('terminal_skip_reason') else 'deterministic_exact_duplicate'),
+                 'reason': row.get('terminal_skip_reason') or
+                     ('semantic_duplicate' if row.get('semantic_duplicate_scope') else 'exact_duplicate'),
+                 'editorial_director': {**originals[row['candidate_id']].get('editorial_director', {}),
+                     'editorial_class': 'SKIP'}} for row in rows]
+    # Already valid local SKIPs survive an unrelated provider outage.
+    if blocked:
+        save_hard_skips({'skipped': skip_rows(blocked)})
+    if not blocked and all(row.get('semantic_duplicate_clearance') == signature for row in pool):
+        return pool, [], {'semantic_admission_status': 'UNCHANGED_CLEARANCE', 'gemini_duplicate_calls_executed': 0}
+    current = snapshot['candidates']
+    known = [{**copy.deepcopy(originals[row['candidate_id']]['editorial_director']), 'candidate_id': row['candidate_id']}
+             for row in current]
+    primary = copy.deepcopy(snapshot); primary['candidates'] = []; primary['authorized_relations'] = []
+    primary['publisher_history_12h'] = []
+    primary['_semantic_admission_only'] = True
+    admission.attach(primary, current, snapshot['publisher_history_12h'], known)
+    active._finalize_active_input(primary)
+    meta = {'semantic_admission_version': admission.VERSION, 'gemini_duplicate_calls_executed': 0}
+    try:
+        if primary.get('limit_status') == 'exceeded':
+            raise ValueError('semantic_admission_input_limit')
+        needs_call = bool(current and (len(current) > 1 or snapshot['publisher_history_12h']))
+        call = provider or (shadow._default_provider_factory() if needs_call else None)
+        selection = active._classify(primary, call)
+        meta['semantic_admission_status'] = selection['status']
+        meta['gemini_duplicate_calls_executed'] += selection.get('attempts', 0)
+        if selection['status'] != 'VALIDATED':
+            raise ValueError('semantic_admission_failed')
+        relations = selection['admitted_relations']
+        active._preserve_cached_duplicate_admissions(snapshot, relations)
+        # The pool has no primary MAX_CANDIDATES cap. Only the exact endpoints of
+        # each authorized sparse batch enter the bounded full-material gate.
+        final = []
+        batches, batch, endpoint_ids = [], [], set()
+        for relation in relations:
+            involved = {relation['left_id']}
+            if relation['scope'] == 'same_run': involved.add(relation['right_id'])
+            if batch and (len(batch) >= shadow.MAX_RELATIONS or len(endpoint_ids | involved) > shadow.MAX_CANDIDATES):
+                batches.append((batch, endpoint_ids)); batch, endpoint_ids = [], set()
+            batch.append(relation); endpoint_ids.update(involved)
+        if batch: batches.append((batch, endpoint_ids))
+        for rows, ids in batches:
+            part = copy.deepcopy(snapshot)
+            part['candidates'] = [row for row in current if row['candidate_id'] in ids]
+            part['authorized_relations'] = rows
+            active._finalize_active_input(part)
+            result = active._evaluate_duplicate_stage(part, provider=call)
+            meta['gemini_duplicate_calls_executed'] += result.get('attempts', 0)
+            if result['status'] != 'VALIDATED': raise ValueError('duplicate_gate_failed')
+            final.extend(result['output']['relations'])
+        active._apply_duplicate_gate(snapshot, final)
+        blocked.extend(snapshot.get('semantic_duplicate_skips', []))
+        blocked_ids = {row['candidate_id'] for row in blocked}
+        survivors = [{**copy.deepcopy(row), 'semantic_duplicate_clearance': signature}
+                     for key, row in originals.items() if key not in blocked_ids]
+        skipped = skip_rows(blocked)
+        return survivors, skipped, meta
+    except Exception as exc:
+        # Temporary unavailability is a technical publication block, not an
+        # invented editorial SKIP/tombstone. Keep every recoverable pool URL.
+        meta.update(semantic_admission_status='TECHNICAL_BLOCK', technical_block_reason=type(exc).__name__)
+        blocked_ids = {row['candidate_id'] for row in blocked}
+        return [row for key, row in originals.items() if key not in blocked_ids], skip_rows(blocked), meta
 
 
 def _terminal_skip(row: Mapping[str, Any], reason: str, disposition: str, now: datetime) -> dict[str, Any]:
@@ -393,12 +466,13 @@ def _pending_state(row: Mapping[str, Any], state: str, now: datetime, *, reason:
 def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
           *, provider: Callable[..., Any] | None = None) -> dict[str, Any]:
     """Apply the frozen ED-3 soft lifecycle to a validated primary Active projection."""
-    from agents.menzo_policy_v93_15 import save_hard_skips, utc_now
+    from agents.menzo_policy_v93_15 import save_hard_skips, utc_now, terminal_skip_memory
 
     now = _now(snapshot)
     local = now.astimezone(ROME)
     today = local.date().isoformat()
-    existing = _load_pool_rows()
+    closed = terminal_skip_memory()
+    existing = [row for row in _load_pool_rows() if _source_key(row) not in closed]
     pool_by_key: dict[str, dict[str, Any]] = {}
     expired_by_key: dict[str, dict[str, Any]] = {}
     terminal: list[dict[str, Any]] = []
@@ -406,6 +480,10 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
     for row in existing:
         key = _source_key(row)
         if not key:
+            continue
+        from agents.menzo_policy_v93_15 import is_bookmaker_odds_news
+        if is_bookmaker_odds_news(row):
+            terminal.append(_terminal_skip(row, 'skip:betting_odds_low_editorial_value', 'SOFT_SKIP', now))
             continue
         row_day = str(row.get("soft_board_day") or "")
         if not row_day:
@@ -445,18 +523,12 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
     projected["selected"] = selected_kept
 
     skipped_kept = []
-    duplicate_authorities = {"deterministic_exact_duplicate", "semantic_duplicate_gate",
-                             "semantic_duplicate_recovery"}
     for row in projected.get("skipped", []) if isinstance(projected.get("skipped"), list) else []:
         if not isinstance(row, dict):
             continue
         key = _source_key(row)
-        authority = str(row.get("decision_authority") or "")
-        prior = pool_by_key.get(key)
-        carried_same_url = bool(prior and row.get("_soft_board_existing"))
-        if carried_same_url and authority not in duplicate_authorities:
-            carried_keys.add(key)
-            continue
+        # TOTEM-S01: any new validated editorial SKIP closes the URL, including
+        # a Director SKIP of an opportunity that was previously admitted as soft.
         pool_by_key.pop(key, None)
         skipped_kept.append(row)
     projected["skipped"] = skipped_kept
@@ -479,6 +551,9 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
     primary_nonsoft_pending = []
     for row in projected.get("pending", []) if isinstance(projected.get("pending"), list) else []:
         if not isinstance(row, dict):
+            continue
+        if _source_key(row) in closed:
+            terminal.append(_terminal_skip(row, "terminal_skip_memory", "SOFT_SKIP", now))
             continue
         if _primary_class(row) != "PUBLISHABLE_SOFT":
             primary_nonsoft_pending.append(row)
@@ -524,6 +599,7 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
     projected["pending"] = primary_nonsoft_pending
     projected["pending"].extend(policy_held)
     projected.setdefault("skipped", []).extend(terminal)
+    save_hard_skips({'skipped': projected['skipped']})
     telemetry = projected.setdefault("postprocess", {})
     telemetry["soft_board_admitted_items"] = admitted
     telemetry["soft_board_policy_version"] = POLICY_VERSION
@@ -533,6 +609,7 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
     telemetry["soft_board_midnight_tombstones"] = len(terminal)
 
     def persist_pool(rows: list[dict[str, Any]]) -> None:
+        save_hard_skips({'skipped': projected['skipped']})
         _write_pool(policy_held + rows)
 
     if local.hour < REVIEW_HOUR_LOCAL:
@@ -563,6 +640,19 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
                 item = copy.deepcopy(skipped)
                 item["decision_authority"] = item.get("decision_authority") or "soft_board_duplicate_revalidation"
                 projected["skipped"].append(item)
+            if duplicate_meta.get("semantic_admission_status") == "TECHNICAL_BLOCK":
+                held = [_pending_state(row, "WAIT_DUPLICATE_CLEARANCE", now,
+                                       reason="technical_duplicate_block") for row in pool]
+                projected["pending"].extend(held)
+                telemetry["soft_board_status"] = "WAIT_DUPLICATE_CLEARANCE"
+                telemetry["soft_board_meaningful_review"] = False
+                persist_pool(held)
+                projected["handoff"] = {"to_bob_or_v92": len(projected.get("selected", [])),
+                    "pending": len(projected.get("pending", [])), "skipped": len(projected.get("skipped", [])),
+                    "decision_authority": "editorial_director"}
+                projected["allowed_urls_for_v92"] = [row.get("url") or row.get("source_url") for row in projected.get("selected", [])]
+                save_hard_skips({"skipped": projected.get("skipped", [])})
+                return projected
             if not pool:
                 telemetry["soft_board_status"] = "EMPTY_AFTER_DUPLICATE_REVALIDATION"
                 telemetry["soft_board_meaningful_review"] = False
@@ -596,6 +686,9 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
                 persist_pool(held)
             else:
                 _, refs = _provider_payload(pool, snapshot, capacity, now)
+                # Accepted editorial SKIPs precede every downstream pool write.
+                save_hard_skips({'skipped': [_terminal_skip(refs[row['ref']], 'soft_board_competition_skip',
+                    'SOFT_SKIP', now) for row in rows if row['disposition'] == 'SOFT_SKIP']})
                 kept = []
                 selected_soft = 0
                 skipped_soft = 0

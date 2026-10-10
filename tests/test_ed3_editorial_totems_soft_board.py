@@ -302,7 +302,9 @@ def test_active_capture_keeps_soft_pool_outside_candidate_limit(isolated_state, 
     assert snapshot["limit_status"] != "exceeded"
 
 
-def test_noon_soft_board_can_review_pool_larger_than_active_candidate_limit(isolated_state):
+def test_noon_soft_board_can_review_pool_larger_than_active_candidate_limit(isolated_state, monkeypatch):
+    monkeypatch.setattr(shadow, "_default_provider_factory", lambda: lambda *_: {
+        "candidates": [], "relations": [], "admission_complete": True, "suspected_duplicates": []})
     rows = []
     for index in range(45):
         row = _soft(f"https://ed3.test/noon-{index}", title=f"Noon soft {index}")
@@ -422,7 +424,7 @@ def test_massy_same_url_tombstone_is_unconditional(monkeypatch):
     assert board["handoff"]["menzo_memory_hard_skipped"] == 1
 
 
-def test_soft_tombstone_history_is_available_to_duplicate_gate(isolated_state):
+def test_soft_tombstone_is_only_same_url_memory(isolated_state):
     row = _soft("https://ed3.test/old-soft", title="Wrestler discusses contract status")
     row["summary"] = "The wrestler says there is no signed deal yet."
     row.update({
@@ -436,13 +438,11 @@ def test_soft_tombstone_history_is_available_to_duplicate_gate(isolated_state):
     menzo.save_hard_skips({"selected": [], "pending": [], "skipped": [skipped]})
 
     history = menzo.load_soft_tombstone_duplicate_history()
-    assert len(history) == 1
-    assert history[0]["source_url"] == row["url"]
-    assert history[0]["history_state"] == "soft_tombstone"
-    assert "no signed deal" in history[0]["summary"]
+    assert history == []
+    assert menzo.source_key(row["url"]) in menzo.terminal_skip_memory()
 
 
-def test_new_url_can_be_compared_with_tombstoned_story(isolated_state):
+def test_new_url_cannot_be_compared_with_tombstoned_story(isolated_state):
     old = {
         "source_url": "https://ed3.test/old-soft",
         "source_title": "Wrestler contract status update",
@@ -464,7 +464,9 @@ def test_new_url_can_be_compared_with_tombstoned_story(isolated_state):
     assert snapshot["authorized_relations"]
     assert snapshot["authorized_relations"][0]["scope"] == "recent_history"
     active.prepare_snapshot(snapshot)
-    assert snapshot["candidates"]  # semantic gate, not URL identity, decides the different-URL relation
+    assert snapshot["candidates"]
+    assert snapshot["publisher_history_12h"] == []
+    assert snapshot["authorized_relations"] == []
 
 def test_soft_board_review_retains_exact_day_context(isolated_state):
     projected = {
@@ -532,20 +534,16 @@ def test_duplicate_revalidation_runs_before_soft_board_review(isolated_state, mo
     })
     menzo.write_json(menzo.SOFTPOOL_FILE, {"items": [row]})
 
-    def same_run_guard(work, _board):
-        return None
-
-    def recent_guard(work):
-        item = work["selected"].pop()
+    def revalidate(pool):
+        item = pool[0].copy()
         item["decision"] = "skip"
         item["priority"] = "skip"
         item["article_type"] = "duplicate"
         item["reason"] = "skip:duplicate_recently_published"
         item["decision_authority"] = "semantic_duplicate_gate"
-        work["skipped"].append(item)
+        return [], [item], {"semantic_admission_status": "VALIDATED"}
 
-    monkeypatch.setattr(menzo, "apply_same_story_duplicate_guard", same_run_guard)
-    monkeypatch.setattr(menzo, "apply_recent_published_duplicate_guard", recent_guard)
+    monkeypatch.setattr(soft, "_revalidate_pool_duplicates", revalidate)
 
     result = soft.apply(
         {"selected": [], "pending": [], "skipped": [], "postprocess": {}},

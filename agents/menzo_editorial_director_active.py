@@ -14,17 +14,19 @@ from typing import Any, Callable, Mapping
 from agents import menzo_editorial_director_shadow as shadow
 from agents import menzo_active_duplicate_pair_cache as pair_cache
 from agents import source_body
+from agents import menzo_semantic_admission as admission
 from agents.canonical_event_ledger import OperationalAIRequest, active_event
 from agents.gemini_ledger import record_gemini_attempt
 
 ROOT = Path(__file__).resolve().parents[1]
 MODEL = shadow.MODEL
-SCHEMA_VERSION = "owtv_editorial_director_output_v4"
-POLICY_VERSION = "owtv_editorial_director_policy_v7_active"
-# V7 changes duplicate authority and clarifies feed scope, retaining V6 primary classes.
-COMPATIBLE_PRIMARY_POLICIES = {POLICY_VERSION, "owtv_editorial_director_policy_v6_active"}
-SCHEMA_PATH = ROOT / "config/editorial_director_output_schema_v4.json"
-POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V7_ACTIVE.md"
+SCHEMA_VERSION = "owtv_editorial_director_output_v5"
+POLICY_VERSION = "owtv_editorial_director_policy_v8_active"
+# V8 preserves prior class definitions; the owner odds exclusion is applied before reuse.
+COMPATIBLE_PRIMARY_POLICIES = {POLICY_VERSION, "owtv_editorial_director_policy_v7_active",
+                               "owtv_editorial_director_policy_v6_active"}
+SCHEMA_PATH = ROOT / "config/editorial_director_output_schema_v5.json"
+POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V8_ACTIVE.md"
 RELATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_gate_schema_v3.json"
 EVENT_REGISTRY_PATH = ROOT / "config/event_registry.json"
 BOB_CAPACITY_FIELDS = ("article_type", "source_title", "category_hint", "reason",
@@ -82,9 +84,28 @@ def prepare_snapshot(snapshot: dict[str, Any]) -> dict[str, Any]:
     """Apply only frozen exact-duplicate authority and expose Bob's live capacity."""
     from agents.menzo_policy_v93_15 import canonical_richer_winner, hydrate_complete_article_bodies
 
-    relations_were_complete = bool(snapshot.get("authorized_relations_complete", True))
-    candidates = list(snapshot.get("candidates", []))
-    history = list(snapshot.get("publisher_history_12h", []))
+    from agents.menzo_policy_v93_15 import terminal_skip_memory, source_key, is_bookmaker_odds_news
+    closed = terminal_skip_memory()
+    def key(row):
+        return source_key(str(row.get("url") or row.get("source_url") or ""))
+    original = list(snapshot.get("candidates", []))
+    memory_skips = [{**copy.deepcopy(row), "terminal_skip_reason": "terminal_skip_memory"}
+                    for row in original if key(row) in closed]
+    odds_skips = [{**copy.deepcopy(row), "terminal_skip_reason": "skip:betting_odds_low_editorial_value"}
+                  for row in original if key(row) not in closed and is_bookmaker_odds_news(row)]
+    snapshot["terminal_policy_skips"] = list({row['candidate_id']: row for row in
+        snapshot.get('terminal_policy_skips', []) + memory_skips + odds_skips}.values())
+    if odds_skips:
+        from agents.menzo_policy_v93_15 import save_hard_skips
+        save_hard_skips({"skipped": [{**row, "decision_authority": "editorial_director",
+            "reason": row["terminal_skip_reason"], "editorial_director": {"editorial_class": "SKIP"}}
+            for row in odds_skips]})
+    candidates = [row for row in original if key(row) not in closed and not is_bookmaker_odds_news(row)]
+    history = [row for row in snapshot.get("publisher_history_12h", [])
+               if row.get("history_state") != "soft_tombstone" and key(row) not in closed
+               and row.get("status", "published") in {"published", "publish", "success", "succeeded"}
+               and row.get("dry_run") is not True]
+    snapshot["publisher_history_12h"] = history
     deterministic_skips: list[dict[str, Any]] = []
 
     # Published exact matches have no continuing eligibility.
@@ -130,12 +151,16 @@ def prepare_snapshot(snapshot: dict[str, Any]) -> dict[str, Any]:
     winner_ids = {item["candidate_id"] for item in winners}
     snapshot["authorized_relations"] = [relation for relation in snapshot.get("authorized_relations", [])
         if relation.get("left_id") in winner_ids and
-        (relation.get("scope") != "same_run" or relation.get("right_id") in winner_ids)]
-    if not relations_were_complete and not snapshot.get("defer_relation_build"):
-        rebuilt, complete = shadow.build_authorized_relations(winners, history)
-        snapshot["authorized_relations"] = rebuilt
-        snapshot["authorized_relations_complete"] = complete
-    snapshot["deterministic_exact_skips"] = deterministic_skips
+        ((relation.get("scope") == "same_run" and relation.get("right_id") in winner_ids) or
+         (relation.get("scope") == "recent_history" and relation.get("right_id") in
+          {row['article_id'] for row in history}))]
+    # Active admission never rebuilds semantic pairs from lexical scores.
+    snapshot["deterministic_exact_skips"] = list({row['candidate_id']: row for row in
+        snapshot.get('deterministic_exact_skips', []) + deterministic_skips}.values())
+    if deterministic_skips:
+        from agents.menzo_policy_v93_15 import save_hard_skips
+        save_hard_skips({'skipped': [{**row, 'decision_authority': 'deterministic_exact_duplicate',
+                                    'reason': 'exact_duplicate'} for row in deterministic_skips]})
     # This pre-provider value remains only the existing compact-pool hint. The
     # authoritative capacity is recomputed from sidecar-restored SELECT rows.
     _refresh_capacity_hint(snapshot)
@@ -159,6 +184,11 @@ def active_provider_input(snapshot: Mapping[str, Any]) -> dict[str, Any]:
             if endpoint_id in involved and retained.get("text"):
                 row["retained_body"] = retained["text"][:shadow.REVALIDATION_MAX_BODY_CHARS]
                 row["input_coverage"] = retained.get("coverage", "RETAINED_BODY")
+    if snapshot.get("_semantic_admission") is not None:
+        provider_data["duplicate_admission"] = copy.deepcopy(snapshot["_semantic_admission"])
+    for row, relation in zip(provider_data["authorized_relations"], snapshot.get("authorized_relations", [])):
+        if relation.get("admission_basis"):
+            row["admission_basis"] = relation["admission_basis"]
     return provider_data
 
 
@@ -991,17 +1021,51 @@ def _evaluate_duplicate_stage(snapshot: Mapping[str, Any], *, provider: Callable
             "validation_errors": []}
 
 
+def _preserve_cached_duplicate_admissions(snapshot: Mapping[str, Any], relations: list[dict[str, Any]]) -> None:
+    """A later admission response cannot bypass a final, same-contract cached DUPLICATE.
+
+    The full gate still checks exact endpoint material before applying/reusing it.
+    """
+    contract = pair_cache.contract_fingerprint(policy_version=POLICY_VERSION, model=MODEL,
+        policy_path=POLICY_PATH, gate_schema_path=RELATION_SCHEMA_PATH, event_registry_path=EVENT_REGISTRY_PATH)
+    current = {row['candidate_id'] for row in snapshot.get('candidates', [])}
+    history = {row['article_id'] for row in snapshot.get('publisher_history_12h', [])}
+    included = {row['pair_id'] for row in relations}
+    for entry in pair_cache.load().get('entries', {}).values():
+        if not isinstance(entry, Mapping):
+            continue
+        identity = entry.get('identity', {})
+        final = entry.get('final_relation', {})
+        if not isinstance(identity, Mapping) or not isinstance(final, Mapping):
+            continue
+        scope, left, right = (identity.get(k) for k in ('scope', 'left_id', 'right_id'))
+        if (scope not in {'same_run', 'recent_history'} or not isinstance(identity.get('pair_id'), str) or
+                not isinstance(left, str) or not isinstance(right, str) or left == right or
+                any(final.get(key) != identity.get(key) for key in ('pair_id', 'scope', 'left_id', 'right_id')) or
+                entry.get('contract_fingerprint') != contract or final.get('decision') != 'DUPLICATE' or
+                final.get('semantic_authority') != 'gemini_final' or identity.get('pair_id') in included or
+                left not in current or right not in (current if scope == 'same_run' else history)):
+            continue
+        row = admission.make_relation(scope, left, right, 'Preserve a final cached Gemini decision for exact material validation.')
+        row['pair_id'] = identity['pair_id']
+        relations.append(row); included.add(row['pair_id'])
+
+
 def _classify(snapshot: dict[str, Any], call: Callable[..., Any]) -> dict[str, Any]:
-    """One primary operation, without duplicate relations/history or pacing context."""
+    """Primary classes plus sparse semantic admission, without pacing or pair matrices."""
     base = {"status": "failed", "schema_version": SCHEMA_VERSION, "policy_version": POLICY_VERSION,
             "validation_attempts": [], "attempts": 0}
-    if not snapshot.get("candidates"):
-        return {**base, "status": "VALIDATED", "output": {"candidates": [], "relations": []}}
+    if (not snapshot.get("candidates") and (not snapshot.get("_admission_candidate_ids") or
+            (not snapshot.get("_admission_history_ids") and len(snapshot.get("_admission_candidate_ids", [])) < 2))):
+        return {**base, "status": "VALIDATED", "output": {"candidates": [], "relations": []},
+                "admitted_relations": []}
     schema = json.loads(SCHEMA_PATH.read_text())
     digest = hashlib.sha256(POLICY_PATH.read_bytes()).hexdigest()
-    request = OperationalAIRequest("Menzo", "editorial_director_active",
+    phase = "editorial_soft_duplicate_admission" if snapshot.get("_semantic_admission_only") else "editorial_director_active"
+    request = OperationalAIRequest("Menzo", phase,
                                   reason_code="editorial_prefilter")
     failures = []
+    fixed_primary = None
     for index in range(2):
         repair = index == 1
         attempt = request.start(MODEL, repair=repair, reason_code="active_validation_failed" if repair else "")
@@ -1010,8 +1074,8 @@ def _classify(snapshot: dict[str, Any], call: Callable[..., Any]) -> dict[str, A
             response = call(_prompt(snapshot, failures if repair else None), schema, shadow.PROVIDER_TIMEOUT_SECONDS)
         except Exception as exc:
             record_gemini_attempt(response=response, model_requested=MODEL, operation_id=request.logical_request_id,
-                attempt_index=index, repair=repair, fallback=False, agent="Menzo", workload="editorial_director_active",
-                phase="editorial_director_active_repair" if repair else "editorial_director_active_primary", shadow=False,
+                attempt_index=index, repair=repair, fallback=False, agent="Menzo", workload=phase,
+                phase=phase + ("_repair" if repair else "_primary"), shadow=False,
                 logical_request_id=request.logical_request_id, canonical_attempt_id=attempt["attempt_id"],
                 candidate_count=len(snapshot["candidates"]), relation_count=len(snapshot["authorized_relations"]),
                 input_digest=snapshot["input_digest"], policy_version=POLICY_VERSION, policy_digest=digest,
@@ -1021,24 +1085,46 @@ def _classify(snapshot: dict[str, Any], call: Callable[..., Any]) -> dict[str, A
             return {**base, "attempts": index + 1, "status": "PROVIDER_FAILED",
                     "fallback_reason": type(exc).__name__, "logical_request_id": request.logical_request_id}
         record_gemini_attempt(response=response, model_requested=MODEL, operation_id=request.logical_request_id,
-            attempt_index=index, repair=repair, fallback=False, agent="Menzo", workload="editorial_director_active",
-            phase="editorial_director_active_repair" if repair else "editorial_director_active_primary", shadow=False,
+            attempt_index=index, repair=repair, fallback=False, agent="Menzo", workload=phase,
+            phase=phase + ("_repair" if repair else "_primary"), shadow=False,
             logical_request_id=request.logical_request_id, canonical_attempt_id=attempt["attempt_id"],
             candidate_count=len(snapshot["candidates"]), relation_count=len(snapshot["authorized_relations"]),
             input_digest=snapshot["input_digest"], policy_version=POLICY_VERSION, policy_digest=digest, status="called")
         request.defer(attempt, int((time.monotonic() - started) * 1000))
         try:
-            output, failures, canonicalized = _validate_active(shadow._decode(response), snapshot)
+            raw = shadow._decode(response)
+            if fixed_primary is None:
+                output, failures, canonicalized = _validate_active(raw, snapshot)
+            else:
+                # A repair of pair admission cannot reclassify accepted articles.
+                output = {'candidates': copy.deepcopy(fixed_primary), 'relations': []}
+                failures, canonicalized = [], []
+            if output is not None and not failures:
+                if fixed_primary is None:
+                    from agents.menzo_policy_v93_15 import save_hard_skips
+                    candidates_by_id = {row['candidate_id']: row for row in snapshot.get('candidates', [])}
+                    skips = [{**candidates_by_id[row['candidate_id']], 'decision_authority': 'editorial_director',
+                              'editorial_director': row, 'reason': 'editorial_class_skip'}
+                             for row in output['candidates'] if row['editorial_class'] == 'SKIP']
+                    if skips: save_hard_skips({'skipped': skips})
+                    fixed_primary = copy.deepcopy(output["candidates"])
+                output["candidates"] = copy.deepcopy(fixed_primary)
+                admitted, admission_failures = admission.validate(raw, snapshot, output["candidates"], max(300, shadow.MAX_RELATIONS))
+                failures.extend(admission_failures)
         except Exception as exc:
             output, failures, canonicalized = None, [{"family": "parse_json", "detail": type(exc).__name__}], []
         base["validation_attempts"].append({"attempt_index": index, "valid": not failures,
             "validation_families": failures, "canonicalizations": canonicalized})
         request.resolve_deferred(not failures, error_terminal=repair and bool(failures))
+        if failures and fixed_primary is not None and not repair:
+            snapshot = admission.repair_snapshot(snapshot, fixed_primary)
+            _finalize_active_input(snapshot)
         if not failures:
             result = {**base, "status": "VALIDATED",
                       "attempts": index + 1,
                       "logical_request_id": request.logical_request_id, "policy_digest": digest,
-                      "input_digest": snapshot["input_digest"], "output": output, "validation_errors": []}
+                      "input_digest": snapshot["input_digest"], "output": output, "validation_errors": [],
+                      "admitted_relations": admitted}
             return result
     return {**base, "attempts": 2,
             "logical_request_id": request.logical_request_id,
@@ -1076,12 +1162,14 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
         else:
             fresh.append(candidate)
     primary_snapshot["candidates"] = fresh
+    admission.attach(primary_snapshot, all_primary_candidates, snapshot.get("publisher_history_12h", []), reused)
     _finalize_active_input(primary_snapshot)
     if primary_snapshot.get("limit_status") in {"exceeded", "projection_failed"}:
         return {"status": "OVERSIZE_NOT_EVALUATED", "attempts": 0,
                 "fallback_reason": "primary_input_limit"}
     try:
-        call = provider or (shadow._default_provider_factory() if primary_snapshot.get("candidates") else None)
+        call = provider or (shadow._default_provider_factory() if (primary_snapshot.get("candidates") or
+            (all_primary_candidates and (primary_snapshot.get("_admission_history_ids") or len(all_primary_candidates) > 1))) else None)
     except Exception as exc:
         return {"status": "PROVIDER_UNAVAILABLE", "attempts": 0, "fallback_reason": type(exc).__name__}
     primary = _classify(primary_snapshot, call)
@@ -1097,13 +1185,24 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
     snapshot["candidates"] = [row for row in snapshot.get("candidates", [])
                               if by_id[row["candidate_id"]]["editorial_class"] != "SKIP"]
     eligible = {row["candidate_id"] for row in snapshot["candidates"]}
-    if snapshot.get("defer_relation_build"):
-        relations, complete = shadow.build_authorized_relations(
-            snapshot["candidates"], snapshot.get("publisher_history_12h", []), enforce_limit=False)
-        snapshot["authorized_relations"], snapshot["authorized_relations_complete"] = relations, complete
-    else:
-        snapshot["authorized_relations"] = [row for row in snapshot.get("authorized_relations", [])
-            if row["left_id"] in eligible and (row["scope"] != "same_run" or row["right_id"] in eligible)]
+    # Gemini chooses sparse plausible pairs; lexical score/threshold cannot authorize one.
+    supplied = list(snapshot.get("authorized_relations", []))
+    relations = copy.deepcopy(primary.get("admitted_relations", []))
+    for row in relations:
+        alias = next((old for old in supplied if old.get("scope") == row["scope"] and
+            ((old.get("left_id"), old.get("right_id")) == (row["left_id"], row["right_id"]) or
+             (row["scope"] == "same_run" and {old.get("left_id"), old.get("right_id")} ==
+              {row["left_id"], row["right_id"]}))), None)
+        if alias:
+            row.update({key: alias[key] for key in ("pair_id", "left_id", "right_id")})
+    _preserve_cached_duplicate_admissions(snapshot, relations)
+    snapshot["authorized_relations"] = relations
+    snapshot["authorized_relations_complete"] = True
+    # Primary SKIP persists even if a sibling's duplicate provider later fails.
+    from agents.menzo_policy_v93_15 import save_hard_skips
+    if skipped:
+        save_hard_skips({"skipped": [{**row, "decision_authority": "editorial_director",
+            "editorial_director": by_id[row["candidate_id"]], "reason": "editorial_class_skip"} for row in skipped]})
     _finalize_active_input(snapshot)
     endpoints = {row.get("candidate_id") or row.get("article_id"): row
                  for row in snapshot["candidates"] + snapshot.get("publisher_history_12h", [])}
@@ -1111,11 +1210,15 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
     telemetry = {"policy_version": POLICY_VERSION, "order": "classify_then_duplicate",
                  "classified": len(decisions), "newly_classified": len(fresh), "reused_strong_classes": len(reused), "classes": counts, "skipped_before_duplicate": len(skipped),
                  "duplicate_candidates": len(eligible), "duplicate_relations": len(snapshot["authorized_relations"]),
+                 "duplicate_admission_version": admission.VERSION,
+                 "terminal_policy_skips": len(snapshot.get("terminal_policy_skips", [])),
                  "relations": [{"pair_id": row["pair_id"], "scope": row["scope"],
                                 "left_url": endpoints[row["left_id"]].get("url") or endpoints[row["left_id"]].get("source_url"),
                                 "right_url": endpoints[row["right_id"]].get("url") or endpoints[row["right_id"]].get("source_url"),
                                 "left_title": endpoints[row["left_id"]].get("title") or endpoints[row["left_id"]].get("source_title"),
-                                "right_title": endpoints[row["right_id"]].get("title") or endpoints[row["right_id"]].get("source_title")}
+                                "right_title": endpoints[row["right_id"]].get("title") or endpoints[row["right_id"]].get("source_title"),
+                                "admission_version": row.get('scorer_version'),
+                                "admission_basis": row.get('admission_basis')}
                                for row in snapshot["authorized_relations"]],
                  "candidates": [{"candidate_id": row["candidate_id"], "title": row.get("title"),
                                   "url": row.get("url"), "source": row.get("source"),
@@ -1164,6 +1267,11 @@ def project(snapshot: Mapping[str, Any], result: Mapping[str, Any], *, soft_boar
         item["priority"] = {"MUST_PUBLISH": "high", "SHOULD_PUBLISH": "high",
                             "PUBLISHABLE_SOFT": "medium", "SKIP": "skip"}[decision["editorial_class"]]
         projected[sections[decision["recommended_action"]]].append(item)
+    for closed in snapshot.get("terminal_policy_skips", []):
+        item = copy.deepcopy(closed); item.pop("candidate_id", None)
+        item.update(decision="skip", priority="skip", decision_authority="editorial_director",
+                    reason=item.pop("terminal_skip_reason"), editorial_director={"editorial_class": "SKIP"})
+        projected["skipped"].append(item)
     for exact in snapshot.get("deterministic_exact_skips", []):
         item = copy.deepcopy(exact); item.pop("candidate_id", None)
         item.update(decision="skip", priority="skip", decision_authority="deterministic_exact_duplicate",
@@ -1178,10 +1286,12 @@ def project(snapshot: Mapping[str, Any], result: Mapping[str, Any], *, soft_boar
         projected["skipped"].append(item)
     # ED-3: primary PUBLISHABLE_SOFT never competes here. The contextual
     # soft-board owns morning HOLD, post-noon competition, decay and tombstones.
-    from agents.menzo_policy_v93_15 import (ARTIFACT_DECISIONS_FILE, HARD_SKIP_FILE, MENZO_DECISIONS_FILE,
-        SOFTPOOL_FILE, V92_ALLOWED_URLS_FILE, utc_now, write_json)
+    from agents.menzo_policy_v93_15 import (ARTIFACT_DECISIONS_FILE, MENZO_DECISIONS_FILE,
+        SOFTPOOL_FILE, V92_ALLOWED_URLS_FILE, utc_now, write_json, save_hard_skips)
     from agents import menzo_priority_queue as priority_queue
-    paths = tuple(Path(path) for path in (SOFTPOOL_FILE, HARD_SKIP_FILE, MENZO_DECISIONS_FILE,
+    # Valid terminal decisions are irreversible even if a later handoff write fails.
+    save_hard_skips({'skipped': projected['skipped']})
+    paths = tuple(Path(path) for path in (SOFTPOOL_FILE, MENZO_DECISIONS_FILE,
                                          ARTIFACT_DECISIONS_FILE, V92_ALLOWED_URLS_FILE, priority_queue.queue_path()))
     before = {path: path.read_bytes() if path.exists() else None for path in paths}
     try:

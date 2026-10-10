@@ -168,23 +168,8 @@ def configured_reports() -> list[dict[str, Any]]:
 
 
 def menzo_skip_memory() -> dict[str, dict[str, Any]]:
-    data = load_json(MENZO_HARD_SKIP_FILE, {"items": []})
-    items = data.get("items", []) if isinstance(data, dict) else []
-    out: dict[str, dict[str, Any]] = {}
-    now = datetime.now(timezone.utc)
-    for item in items:
-        if not isinstance(item, dict):
-            continue
-        if item.get("reason") == "requires_menzo_classification":
-            continue
-        key = source_key(item.get("url") or item.get("source_url") or item.get("normalized_url") or "")
-        if not key:
-            continue
-        added = parse_published(item.get("added_at")) or now
-        ttl = int(item.get("expires_after_hours") or data.get("ttl_hours") or 168)
-        if now - added <= timedelta(hours=ttl):
-            out[key] = item
-    return out
+    from agents.menzo_policy_v93_15 import terminal_skip_memory
+    return terminal_skip_memory(path=MENZO_HARD_SKIP_FILE)
 
 
 def old_news_reason(candidate: dict[str, Any]) -> str | None:
@@ -306,8 +291,8 @@ def run_massy() -> dict[str, Any]:
             mem = memory[key]
             # Canonical URL identifies one immutable editorial opportunity.
             # Feed-text drift on the same URL never creates a material update:
-            # a genuine new development arrives under a new URL and is evaluated
-            # against tombstoned story history by the duplicate gate.
+            # a genuine new development arrives under a new URL. The skipped
+            # URL never becomes semantic comparison history for that new URL.
             moved.append(hard_skip_entry(item, "menzo_hard_skip_memory",
                 menzo_reason=mem.get("reason", ""), menzo_article_type=mem.get("article_type", "")))
             menzo_memory_count += 1

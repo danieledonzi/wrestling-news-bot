@@ -449,11 +449,6 @@ def capture_editorial_director_opportunity(massy_board: dict[str, Any], *, run_i
             (report_id in published_weekly_ids and
              ((manual_key and manual_key == report_key) or (not manual_key and legacy_current_scope))))
     history = load_authoritative_publisher_history(12)
-    if preserve_active_metadata:
-        from agents.menzo_policy_v93_15 import load_soft_tombstone_duplicate_history
-        tombstones = load_soft_tombstone_duplicate_history()
-        published_urls = {str(row.get("source_url") or row.get("url") or "") for row in history if isinstance(row, dict)}
-        history.extend(row for row in tombstones if str(row.get("source_url") or "") not in published_urls)
     snapshot = capture_opportunity(
         augmented, run_id=run_id, observation_timestamp=observation_timestamp,
         published_news_today_local=published_today_count(),
@@ -497,7 +492,8 @@ def persist_active_fail_closed(snapshot: dict[str, Any] | None, reason: str) -> 
     source = snapshot if isinstance(snapshot, dict) else {}
     skipped = []
     seen = set()
-    for row in list(source.get("candidates", [])) + list(source.get("deterministic_exact_skips", [])) + list(source.get("semantic_duplicate_skips", [])):
+    for row in (list(source.get("candidates", [])) + list(source.get("terminal_policy_skips", [])) +
+                list(source.get("deterministic_exact_skips", [])) + list(source.get("semantic_duplicate_skips", []))):
         if not isinstance(row, dict):
             continue
         item = dict(row)
@@ -507,7 +503,11 @@ def persist_active_fail_closed(snapshot: dict[str, Any] | None, reason: str) -> 
             continue
         if key:
             seen.add(key)
-        if item.get("exact_duplicate_scope"):
+        if item.get('terminal_skip_reason'):
+            authority = 'editorial_director'
+            why = item.pop('terminal_skip_reason')
+            item['editorial_director'] = {'editorial_class': 'SKIP'}
+        elif item.get("exact_duplicate_scope"):
             authority = "deterministic_exact_duplicate"
             why = "exact_duplicate"
         elif item.get("semantic_duplicate_scope"):
@@ -530,6 +530,7 @@ def persist_active_fail_closed(snapshot: dict[str, Any] | None, reason: str) -> 
         save_hard_skips({"skipped": prefilter_skips})
         skipped.extend(prefilter_skips)
     from agents.menzo_priority_queue import discard_terminal
+    save_hard_skips({'skipped': skipped})
     discard_terminal(skipped)
     decision = {
         "version": POLICY_VERSION,
