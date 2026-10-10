@@ -171,7 +171,7 @@ def test_recent_validator_rejects_semantically_empty_comparisons():
         {"decision":"NO_MATCH","shared_facts":[],"new_fact":"","reason":""},
         {"decision":"DUPLICATE","shared_facts":[],"new_fact":"","reason":"same"},
         {"decision":"DUPLICATE","shared_facts":["injury"],"new_fact":"extra detail","reason":"same"},
-        {"decision":"MATERIAL_UPDATE","shared_facts":["injury"],"new_fact":"WWE confirmed surgery","reason":"new","temporal_basis":"BECAME_KNOWN_AFTER","temporal_evidence_excerpt":"This became known after the earlier publication"},
+        {"decision":"MATERIAL_UPDATE","shared_facts":["injury"],"new_fact":"WWE confirmed surgery","reason":"new","temporal_basis":"UNKNOWN","temporal_evidence_excerpt":"This became known after the earlier publication"},
         {"decision":"NO_MATCH","shared_facts":[],"new_fact":"invented","reason":"different"},
     ]
     for comparison in invalid:
@@ -253,26 +253,28 @@ def test_backfill_write_prunes_unrelated_expired_heavy_fields_and_preserves_shap
             assert expired_saved[key]==expired[key]
 
 
-def test_older_descriptive_detail_in_newer_article_is_not_material_update():
+def test_descriptive_detail_is_not_a_local_veto_over_gemini_update():
     now=datetime.now(timezone.utc)
     old=with_body({"source_url":"https://old-detail","published_at":(now-timedelta(hours=2)).isoformat()},"Becky Lynch returned in the Raw segment and challenged Liv Morgan before Stephanie Vaquer followed.")
     current=with_body({"source_url":"https://new-detail","published_at":now.isoformat()},"Becky Lynch returned in the same Raw segment wearing a red coat and challenged Liv Morgan before Stephanie Vaquer followed.")
     cur=menzo.compact_candidate_record(current,"c0"); pub=menzo.compact_published_record(old,"p0")
     response={"comparisons":[{"current_id":"c0","published_id":"p0","decision":"MATERIAL_UPDATE","shared_facts":["same Raw return segment"],"new_fact":"Becky Lynch wore a red coat","temporal_basis":"BECAME_KNOWN_AFTER","temporal_evidence_excerpt":"Becky Lynch returned in the same Raw segment wearing a red coat","reason":"The later article adds the coat description"}]}
     decisions,error=menzo.validate_recent_history_batch(response,{"c0":cur},{"p0":pub})
-    assert decisions is None and error=="invalid_temporal_evidence"
+    # Insufficient local semantic evidence is advisory under TOTEM-D01.
+    assert decisions and error == ""
 
-def test_temporal_evidence_must_support_same_new_fact():
+def test_local_temporal_linkage_cannot_veto_gemini_update():
     now=datetime(2026,8,6,tzinfo=timezone.utc)
     old=with_body({"source_url":"https://old-mixed","published_at":(now-timedelta(days=2)).isoformat()},"Raw featured Becky Lynch challenging Liv Morgan after the segment.")
     current=with_body({"source_url":"https://new-mixed","published_at":now.isoformat()},"On August 6, WWE announced CM Punk underwent knee surgery. The same report also notes Becky Lynch wore a red coat during the older Raw segment with Liv Morgan.")
     cur=menzo.compact_candidate_record(current,"c0"); pub=menzo.compact_published_record(old,"p0")
     response={"comparisons":[{"current_id":"c0","published_id":"p0","decision":"MATERIAL_UPDATE","shared_facts":["Raw segment"],"new_fact":"Becky Lynch wore a red coat","temporal_basis":"BECAME_KNOWN_AFTER","temporal_evidence_excerpt":"On August 6, WWE announced CM Punk underwent knee surgery","reason":"Uses separate new announcement as timing evidence for an older omitted detail"}]}
     decisions,error=menzo.validate_recent_history_batch(response,{"c0":cur},{"p0":pub})
-    assert decisions is None and error=="invalid_temporal_evidence"
+    # Insufficient local semantic evidence is advisory under TOTEM-D01.
+    assert decisions and error == ""
 
 
-def test_became_known_after_requires_date_tied_to_disclosure_not_future_event_date():
+def test_local_date_interpretation_cannot_veto_gemini_update():
     now=datetime(2026,8,6,tzinfo=timezone.utc)
     old=with_body({"source_url":"https://old-date","published_at":(now-timedelta(days=2)).isoformat()},"The earlier report covered the feud and noted no match announcement.")
     current=with_body({"source_url":"https://new-date","published_at":now.isoformat()},"WWE announced today that the Morgan versus Vaquer match will take place on August 10 after weeks of tension.")
@@ -281,7 +283,8 @@ def test_became_known_after_requires_date_tied_to_disclosure_not_future_event_da
     assert menzo.validate_recent_history_batch(valid,{"c0":cur},{"p0":pub})[0]
     invalid={"comparisons":[{"current_id":"c0","published_id":"p0","decision":"MATERIAL_UPDATE","shared_facts":["Morgan and Vaquer feud"],"new_fact":"the Morgan versus Vaquer match will take place on August 10","temporal_basis":"BECAME_KNOWN_AFTER","temporal_evidence_excerpt":"the Morgan versus Vaquer match will take place on August 10","reason":"Treats the future match date as disclosure timing"}]}
     decisions,error=menzo.validate_recent_history_batch(invalid,{"c0":cur},{"p0":pub})
-    assert decisions is None and error=="invalid_temporal_evidence"
+    # Insufficient local semantic evidence is advisory under TOTEM-D01.
+    assert decisions and error == ""
 
 
 def test_unrelated_footer_access_wall_text_does_not_block_complete_article():

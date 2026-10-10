@@ -20,11 +20,12 @@ from agents.gemini_ledger import record_gemini_attempt
 ROOT = Path(__file__).resolve().parents[1]
 MODEL = shadow.MODEL
 SCHEMA_VERSION = "owtv_editorial_director_output_v4"
-POLICY_VERSION = "owtv_editorial_director_policy_v6_active"
+POLICY_VERSION = "owtv_editorial_director_policy_v7_active"
+# V7 changes duplicate authority and clarifies feed scope, retaining V6 primary classes.
+COMPATIBLE_PRIMARY_POLICIES = {POLICY_VERSION, "owtv_editorial_director_policy_v6_active"}
 SCHEMA_PATH = ROOT / "config/editorial_director_output_schema_v4.json"
-POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V6_ACTIVE.md"
+POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V7_ACTIVE.md"
 RELATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_gate_schema_v3.json"
-CONFIRMATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_confirmation_schema_v3.json"
 EVENT_REGISTRY_PATH = ROOT / "config/event_registry.json"
 BOB_CAPACITY_FIELDS = ("article_type", "source_title", "category_hint", "reason",
                        "ai_editorial_reason", "event_key", "show_report_id", "show_name",
@@ -35,13 +36,9 @@ BOB_CAPACITY_FIELDS = ("article_type", "source_title", "category_hint", "reason"
 DUPLICATE_EVIDENCE_FIELDS = ("left_evidence", "right_evidence")
 DUPLICATE_CENTRALITY_FIELDS = ("left_central_development", "right_central_development",
                                "centrality_basis")
-CONFIRMATION_FIELDS = ("left_central_subject", "right_central_subject",
-                       "left_central_development", "right_central_development",
-                       "left_evidence", "right_evidence", "confirmation_basis")
 DUPLICATE_RELATION_FIELDS = {"ref", "decision", "shared_fact", "new_fact", "temporal_basis",
                              *DUPLICATE_EVIDENCE_FIELDS, *DUPLICATE_CENTRALITY_FIELDS}
 GROUNDING_SOURCE_FIELDS = ("title", "source_title", "title_it", "summary", "retained_body")
-ANCHOR_SOURCE_FIELDS = ("title", "source_title", "title_it")
 MAX_DUPLICATE_SEMANTIC_FIELD_LENGTH = 500
 MIN_DUPLICATE_EVIDENCE_TOKENS = 2
 MIN_DUPLICATE_EVIDENCE_ALNUM_CHARS = 8
@@ -147,9 +144,21 @@ def prepare_snapshot(snapshot: dict[str, Any]) -> dict[str, Any]:
 
 
 def active_provider_input(snapshot: Mapping[str, Any]) -> dict[str, Any]:
-    """Canonical ED-3 primary projection: intrinsic classification sees no pacing context."""
+    """No pacing context; canonical bodies are exposed only for authorized endpoints."""
     provider_data = shadow.provider_input(snapshot)
     provider_data.pop("publication_context", None)
+    involved = {relation[key] for relation in snapshot.get("authorized_relations", [])
+                for key in ("left_id", "right_id")}
+    bodies = snapshot.get("_duplicate_revalidation_bodies", {})
+    for table, source_table, identity in (
+            ("candidates", "candidates", "candidate_id"),
+            ("history", "publisher_history_12h", "article_id")):
+        for row, endpoint in zip(provider_data[table], snapshot.get(source_table, [])):
+            endpoint_id = endpoint[identity]
+            retained = bodies.get(endpoint_id, {})
+            if endpoint_id in involved and retained.get("text"):
+                row["retained_body"] = retained["text"][:shadow.REVALIDATION_MAX_BODY_CHARS]
+                row["input_coverage"] = retained.get("coverage", "RETAINED_BODY")
     return provider_data
 
 
@@ -269,122 +278,8 @@ def _bounded_text(value: Any) -> bool:
     return isinstance(value, str) and bool(value.strip()) and len(value) <= MAX_DUPLICATE_SEMANTIC_FIELD_LENGTH
 
 
-def _lexical_tokens(value: str) -> list[str]:
-    return re.findall(r"[^\W_]+", _normalize_grounding_text(value), flags=re.UNICODE)
-
-
-def _contains_aligned_anchor(value: Any, anchor: str) -> bool:
-    if not isinstance(value, str):
-        return False
-    tokens = _binding_subject_tokens(value)
-    anchor_tokens = _binding_subject_tokens(anchor)
-    width = len(anchor_tokens)
-    return bool(width and any(tokens[index:index + width] == anchor_tokens
-                              for index in range(len(tokens) - width + 1)))
-
-
-def _binding_subject_tokens(value: str) -> list[str]:
-    canonical = shadow.menzo_duplicate_scorer.canonical_binding_subject_text(value)
-    return re.findall(r"[^\W_]+", canonical, flags=re.UNICODE)
-
-
-def _non_anchor_lexical_overlap(left: str, right: str, anchor: str) -> int:
-    anchor_tokens = set(_binding_subject_tokens(anchor))
-    return len((set(_binding_subject_tokens(left)) - anchor_tokens) &
-               (set(_binding_subject_tokens(right)) - anchor_tokens))
-
-
-def _registered_event_phrases() -> tuple[str, ...]:
-    """Load canonical event identity for binding validation; malformed data is unsafe."""
-    registry = json.loads(EVENT_REGISTRY_PATH.read_text(encoding="utf-8"))
-    promotions = registry.get("promotions") if isinstance(registry, Mapping) else None
-    if not isinstance(promotions, Mapping):
-        raise ValueError("invalid_event_registry_promotions")
-    phrases = set()
-    for promotion in promotions.values():
-        events = promotion.get("events") if isinstance(promotion, Mapping) else None
-        if not isinstance(events, Mapping):
-            raise ValueError("invalid_event_registry_events")
-        for event in events.values():
-            if (not isinstance(event, Mapping) or
-                    not isinstance(event.get("canonical"), str) or
-                    not event["canonical"].strip()):
-                raise ValueError("invalid_event_registry_event")
-            phrases.add(event["canonical"].strip())
-            aliases = event.get("aliases")
-            if (not isinstance(aliases, list) or
-                    any(not isinstance(alias, str) or not alias.strip() for alias in aliases)):
-                raise ValueError("invalid_event_registry_aliases")
-            phrases.update(alias.strip() for alias in aliases)
-    if not phrases:
-        raise ValueError("empty_event_registry")
-    return tuple(sorted(phrases))
-
-
-def _explicit_endpoint_subjects(endpoint: Mapping[str, Any],
-                                registered_event_phrases: tuple[str, ...] = ()) -> set[str]:
-    return set().union(*(shadow.menzo_duplicate_scorer.explicit_named_subjects(
-                         value, registered_event_phrases)
-                         for field in ANCHOR_SOURCE_FIELDS
-                         if isinstance((value := endpoint.get(field)), str)))
-
-
-def _validate_duplicate_anchor_contract(ref: Any, duplicate_values: Mapping[str, Any],
-                                        shared_fact: Any, endpoints: Mapping[str, Mapping[str, Any]],
-                                        failures: list[dict[str, Any]],
-                                        registered_event_phrases: tuple[str, ...]) -> None:
-    """Bind grounded claims to one shared explicit subject without judging semantics."""
-    shared_anchors = (_explicit_endpoint_subjects(endpoints.get("left", {}), registered_event_phrases) &
-                      _explicit_endpoint_subjects(endpoints.get("right", {}), registered_event_phrases))
-    if not shared_anchors:
-        failures.append({"family": "duplicate_relation_anchor_grounding", "ref": ref,
-                         "detail": "no_shared_explicit_subject"})
-        return
-    ordered = sorted(shared_anchors, key=lambda anchor: (-len(_lexical_tokens(anchor)), -len(anchor), anchor))
-    left_evidence, right_evidence = duplicate_values["left_evidence"], duplicate_values["right_evidence"]
-    left_anchors = {anchor for anchor in ordered if _contains_aligned_anchor(left_evidence, anchor)}
-    right_anchors = {anchor for anchor in ordered if _contains_aligned_anchor(right_evidence, anchor)}
-    evidence_anchors = left_anchors & right_anchors
-    if not evidence_anchors:
-        if not left_anchors or right_anchors:
-            failures.append({"family": "duplicate_left_evidence_grounding", "ref": ref,
-                             "detail": "missing_shared_subject_anchor"})
-        if not right_anchors or left_anchors:
-            failures.append({"family": "duplicate_right_evidence_grounding", "ref": ref,
-                             "detail": "missing_shared_subject_anchor"})
-        return
-    claims = {"shared_fact": shared_fact,
-              "left_central_development": duplicate_values["left_central_development"],
-              "right_central_development": duplicate_values["right_central_development"]}
-    fully_linked = [anchor for anchor in ordered if anchor in evidence_anchors and
-                    all(_contains_aligned_anchor(value, anchor) for value in claims.values())]
-    selected = fully_linked[0] if fully_linked else next(anchor for anchor in ordered if anchor in evidence_anchors)
-    if not _contains_aligned_anchor(shared_fact, selected):
-        failures.append({"family": "duplicate_claim_anchor_grounding", "ref": ref,
-                         "detail": "missing_shared_subject_anchor"})
-    for side in ("left", "right"):
-        central = duplicate_values[f"{side}_central_development"]
-        evidence = duplicate_values[f"{side}_evidence"]
-        details = []
-        if not _contains_aligned_anchor(central, selected):
-            details.append("missing_shared_subject_anchor")
-        if isinstance(central, str) and isinstance(evidence, str):
-            if _non_anchor_lexical_overlap(central, evidence, selected) < 2:
-                details.append("insufficient_evidence_factual_linkage")
-        if details:
-            failures.append({"family": "duplicate_centrality_contract", "ref": ref,
-                             "field": f"{side}_central_development", "details": details})
-    if isinstance(shared_fact, str):
-        for side in ("left", "right"):
-            evidence = duplicate_values[f"{side}_evidence"]
-            if isinstance(evidence, str) and _non_anchor_lexical_overlap(
-                    shared_fact, evidence, selected) < 2:
-                failures.append({"family": "duplicate_claim_anchor_grounding", "ref": ref,
-                                 "detail": f"insufficient_{side}_evidence_factual_linkage"})
-
-
 def _validate_duplicate_gate(value: Any, snapshot: Mapping[str, Any], *, preserve_valid: bool = False):
-    """Active-local E04V: validate complete relation semantics and exact endpoint evidence."""
+    """TOTEM-D01: validate structure/binding; semantic evidence is advisory only."""
     failures: list[dict[str, Any]] = []
     telemetry: list[dict[str, Any]] = []
     if not isinstance(value, Mapping):
@@ -396,8 +291,6 @@ def _validate_duplicate_gate(value: Any, snapshot: Mapping[str, Any], *, preserv
         return None, [{"family": "other", "detail": "relations_array_required"}], telemetry
     _, relation_map = shadow.short_ref_maps(snapshot)
     _, endpoints_by_relation = _duplicate_gate_endpoint_maps(snapshot)
-    registered_event_phrases: tuple[str, ...] | None = None
-    event_registry_unavailable = False
     seen: set[str] = set()
     canonical = []
     for row in rows:
@@ -407,7 +300,7 @@ def _validate_duplicate_gate(value: Any, snapshot: Mapping[str, Any], *, preserv
         ref = row.get("ref")
         for field in set(row) - DUPLICATE_RELATION_FIELDS:
             telemetry.append({"family": "locally_canonicalized_extra_field", "ref": ref, "field": field})
-        if ref not in relation_map:
+        if not isinstance(ref, str) or ref not in relation_map:
             telemetry.append({"family": "relation_ref", "ref": ref, "detail": "unauthorized_dropped"}); continue
         if ref in seen:
             failures.append({"family": "relation_ref", "ref": ref, "detail": "duplicate"}); continue
@@ -425,30 +318,17 @@ def _validate_duplicate_gate(value: Any, snapshot: Mapping[str, Any], *, preserv
             endpoints = endpoints_by_relation.get(str(ref), {})
             for side in ("left", "right"):
                 valid, detail = _grounded_evidence(duplicate_values[f"{side}_evidence"], endpoints.get(side, {}))
-                if not valid:
-                    failures.append({"family": f"duplicate_{side}_evidence_grounding", "ref": ref,
-                                     "detail": detail})
-                else:
-                    telemetry.append({"family": f"duplicate_{side}_evidence_grounded", "ref": ref,
-                                      "source_field": detail})
+                evidence = duplicate_values[f"{side}_evidence"]
+                if not _bounded_text(evidence):
+                    failures.append({"family": f"duplicate_{side}_evidence_contract", "ref": ref})
+                telemetry.append({"family": f"duplicate_{side}_evidence_observation", "ref": ref,
+                                  "locally_grounded": valid, "detail": detail,
+                                  "binding": False})
             invalid_centrality = [field for field in DUPLICATE_CENTRALITY_FIELDS
                                   if not _bounded_text(duplicate_values[field])]
             if invalid_centrality:
                 failures.append({"family": "duplicate_centrality_contract", "ref": ref,
                                  "fields": invalid_centrality})
-            if _bounded_text(shared) and not invalid_centrality:
-                if registered_event_phrases is None and not event_registry_unavailable:
-                    try:
-                        registered_event_phrases = _registered_event_phrases()
-                    except (OSError, ValueError, TypeError, json.JSONDecodeError):
-                        event_registry_unavailable = True
-                if event_registry_unavailable:
-                    failures.append({"family": "duplicate_event_registry_grounding", "ref": ref,
-                                     "detail": "registry_unavailable"})
-                else:
-                    _validate_duplicate_anchor_contract(
-                        ref, duplicate_values, shared, endpoints, failures,
-                        registered_event_phrases or ())
         if decision == "MATERIAL_UPDATE":
             if supplied.get("scope") != "recent_history":
                 failures.append({"family": "material_update_scope", "ref": ref})
@@ -469,6 +349,7 @@ def _validate_duplicate_gate(value: Any, snapshot: Mapping[str, Any], *, preserv
             continue
         canonical.append({"pair_id": supplied["pair_id"], "scope": supplied["scope"],
             "left_id": supplied["left_id"], "right_id": supplied["right_id"], "decision": decision,
+            "semantic_authority": "gemini_final",
             "shared_fact": shared.strip() if isinstance(shared, str) and shared.strip() else None,
             "new_fact": new.strip() if isinstance(new, str) and new.strip() else None,
             "temporal_basis": temporal.strip() if isinstance(temporal, str) and temporal.strip() else None,
@@ -503,122 +384,13 @@ def _duplicate_prompt(snapshot: Mapping[str, Any], failures: list[dict[str, Any]
     return prompt
 
 
-def _duplicate_confirmation_input(snapshot: Mapping[str, Any],
-                                  relations: list[dict[str, Any]]) -> tuple[dict[str, Any], dict[str, int]]:
-    """Build an independent, scorer-free batch from exact provider-visible endpoints."""
-    _, endpoint_relations = _duplicate_gate_endpoint_maps(snapshot)
-    _, relation_map = shadow.short_ref_maps(snapshot)
-    endpoint_by_pair = {relation_map[ref]["pair_id"]: endpoints
-                        for ref, endpoints in endpoint_relations.items() if ref in relation_map}
-    rows, relation_indexes = [], {}
-    for index, relation in enumerate(relations):
-        if relation.get("decision") != "DUPLICATE" or relation.get("duplicate_confirmation"):
-            continue
-        ref = f"d{len(rows)}"
-        endpoints = endpoint_by_pair.get(relation.get("pair_id"), {})
-        row = {"ref": ref}
-        for side in ("left", "right"):
-            endpoint = endpoints.get(side, {})
-            row[side] = {field: endpoint[field] for field in GROUNDING_SOURCE_FIELDS
-                         if isinstance(endpoint.get(field), str) and endpoint[field].strip()}
-        rows.append(row)
-        relation_indexes[ref] = index
-    return {"relations": rows}, relation_indexes
-
-
-def _duplicate_confirmation_prompt(payload: Mapping[str, Any],
-                                   failures: list[dict[str, Any]] | None = None) -> str:
-    prompt = (
-        "DUPLICATE CONFIRMATION PHASE ONLY. Independently evaluate every relation. "
-        "Return CONFIRM_DUPLICATE only when both exact endpoints concern the same central subject "
-        "and report the same central development or concrete fact. Shared promotion, show, event, "
-        "championship, category, action verb, or background context is insufficient. Otherwise return "
-        "REJECT_DUPLICATE. Quote one short meaningful exact evidence span from each endpoint and provide "
-        "concise central subjects, central developments, and confirmation_basis. Return only JSON. INPUT=" +
-        json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")))
-    if failures is not None:
-        prompt += "\nREPAIR ONLY THESE VALIDATION FAMILIES=" + json.dumps(failures[:20], separators=(",", ":"))
-    return prompt
-
-
-def _validate_duplicate_confirmation(value: Any, payload: Mapping[str, Any], *, preserve_valid: bool = False):
-    """Validate confirmation structure and endpoint-local evidence, never semantics."""
-    failures: list[dict[str, Any]] = []
-    telemetry: list[dict[str, Any]] = []
-    if not isinstance(value, Mapping):
-        return None, [{"family": "parse_json", "detail": "output_not_object"}], telemetry
-    for field in set(value) - {"confirmations"}:
-        telemetry.append({"family": "locally_canonicalized_extra_field", "field": field})
-    rows = value.get("confirmations")
-    if not isinstance(rows, list):
-        return None, [{"family": "duplicate_confirmation_coverage",
-                       "detail": "confirmations_array_required"}], telemetry
-    authorized = {str(row.get("ref")): row for row in payload.get("relations", [])
-                  if isinstance(row, Mapping)}
-    seen: set[str] = set()
-    canonical = []
-    allowed_fields = {"ref", "decision", *CONFIRMATION_FIELDS}
-    for row in rows:
-        failures_before_row = len(failures)
-        if not isinstance(row, Mapping):
-            failures.append({"family": "duplicate_confirmation_ref", "detail": "row_not_object"})
-            continue
-        ref = row.get("ref")
-        if ref not in authorized:
-            failures.append({"family": "duplicate_confirmation_ref", "ref": ref,
-                             "detail": "unauthorized"})
-            continue
-        if ref in seen:
-            failures.append({"family": "duplicate_confirmation_ref", "ref": ref,
-                             "detail": "duplicate"})
-            continue
-        seen.add(ref)
-        extras = set(row) - allowed_fields
-        if extras:
-            failures.append({"family": "duplicate_confirmation_contract", "ref": ref,
-                             "fields": sorted(extras)})
-        decision = row.get("decision")
-        if decision not in {"CONFIRM_DUPLICATE", "REJECT_DUPLICATE"}:
-            failures.append({"family": "duplicate_confirmation_decision", "ref": ref})
-        invalid = [field for field in CONFIRMATION_FIELDS if not _bounded_text(row.get(field))]
-        if invalid:
-            failures.append({"family": "duplicate_confirmation_contract", "ref": ref,
-                             "fields": invalid})
-        for side in ("left", "right"):
-            valid, detail = _grounded_evidence(row.get(f"{side}_evidence"), authorized[ref].get(side, {}))
-            if not valid:
-                failures.append({"family": f"duplicate_confirmation_{side}_evidence_grounding",
-                                 "ref": ref, "detail": detail})
-        if preserve_valid and len(failures) != failures_before_row:
-            continue
-        canonical.append({"ref": ref, "decision": decision,
-                          **{field: (row[field].strip() if isinstance(row.get(field), str) else None)
-                             for field in CONFIRMATION_FIELDS}})
-    missing = sorted(set(authorized) - seen)
-    if missing:
-        failures.append({"family": "duplicate_confirmation_coverage", "missing_refs": missing})
-    ambiguous = any(f.get("family") == "duplicate_confirmation_ref" for f in failures)
-    return (canonical if preserve_valid and not ambiguous else None if failures else canonical), failures, telemetry
-
-
-def _apply_duplicate_confirmation(relations: list[dict[str, Any]], confirmations: list[dict[str, Any]],
-                                  relation_indexes: Mapping[str, int]) -> None:
-    """Apply Gemini's confirmation verdict without locally inventing relation semantics."""
-    for confirmation in confirmations:
-        relation = relations[relation_indexes[confirmation["ref"]]]
-        relation["duplicate_confirmation"] = copy.deepcopy(confirmation)
-        relation["primary_decision"] = "DUPLICATE"
-        if confirmation["decision"] == "REJECT_DUPLICATE":
-            relation["decision"] = "NO_MATCH"
-
-
 def _store_ordinary_pairs(cache: dict[str, Any], materials: Mapping[str, Any],
                           relations: list[dict[str, Any]], base: dict[str, Any], stored_pairs: set[str]) -> None:
-    """Partial persistence never promotes an unconfirmed or body-enriched verdict."""
+    """Persist final Gemini decisions only against their exact provider material."""
     rows = [(materials[row["pair_id"]], row) for row in relations
             if row["pair_id"] in materials and row["pair_id"] not in stored_pairs and not row.get("body_revalidation")
             and not row.get("validated_equivalence")
-            and (row["decision"] != "DUPLICATE" or row.get("duplicate_confirmation"))]
+            and row.get("semantic_authority") == "gemini_final"]
     if not rows:
         return
     try:
@@ -657,40 +429,6 @@ def _preserve_phase_rows(rows, failures, known, ref_to_id, identity_field):
     return list(known.values()), remaining
 
 
-def _covered_no_match(target: Mapping[str, Any], final: list[dict[str, Any]]) -> dict[str, Any] | None:
-    """Only proven same-run duplicate classes can carry an existing distinctness constraint."""
-    parent: dict[str, str] = {}
-    def find(value: str) -> str:
-        parent.setdefault(value, value)
-        while parent[value] != value:
-            value = parent[value]
-        return value
-    for row in final:
-        if row["scope"] == "same_run" and row["decision"] == "DUPLICATE" and row.get("duplicate_confirmation"):
-            parent[find(row["right_id"])] = find(row["left_id"])
-    def key(row: Mapping[str, Any]):
-        left, right = find(row["left_id"]), row["right_id"]
-        return (row["scope"], *sorted((left, find(right)))) if row["scope"] == "same_run" else (
-            row["scope"], left, right)
-    for row in final:
-        if row["decision"] == "NO_MATCH" and key(row) == key(target):
-            relevant_roots = {find(target["left_id"])}
-            if target["scope"] == "same_run":
-                relevant_roots.add(find(target["right_id"]))
-            resolved = {**copy.deepcopy(dict(target)), "decision": "NO_MATCH", "shared_fact": None,
-                    "new_fact": None, "temporal_basis": None,
-                    "validated_equivalence": {"source_pair_id": row["pair_id"],
-                        "duplicate_class_pair_ids": [x["pair_id"] for x in final if
-                            x["scope"] == "same_run" and x["decision"] == "DUPLICATE"
-                            and x.get("duplicate_confirmation") and find(x["left_id"]) in relevant_roots],
-                        "source_provenance": copy.deepcopy(row.get("validated_provenance", {}))}}
-            for field in (*DUPLICATE_EVIDENCE_FIELDS, *DUPLICATE_CENTRALITY_FIELDS,
-                          "primary_decision", "duplicate_confirmation"):
-                resolved.pop(field, None)
-            return resolved
-    return None
-
-
 def _body_pair_snapshot(snapshot: Mapping[str, Any], relation: Mapping[str, Any]):
     """Build a private, bounded two-endpoint projection without changing ordinary inputs."""
     current = {row["candidate_id"]: row for row in snapshot.get("candidates", [])}
@@ -701,6 +439,11 @@ def _body_pair_snapshot(snapshot: Mapping[str, Any], relation: Mapping[str, Any]
     left = copy.deepcopy(current[relation["left_id"]])
     right = copy.deepcopy(right_table[relation["right_id"]])
     bodies = snapshot.get("_duplicate_revalidation_bodies", {})
+    provider_rows = active_provider_input(snapshot)
+    seen_bodies = {endpoint[identity]: row.get("retained_body")
+        for table, source_table, identity in (("candidates", "candidates", "candidate_id"),
+            ("history", "publisher_history_12h", "article_id"))
+        for row, endpoint in zip(provider_rows[table], snapshot.get(source_table, []))}
     changed = False
     coverage = {}
     for endpoint_id, endpoint, is_current in (
@@ -719,7 +462,7 @@ def _body_pair_snapshot(snapshot: Mapping[str, Any], relation: Mapping[str, Any]
             label = "RETAINED_BODY" if text else "METADATA_ONLY"
         if not text:
             return None, "body_unavailable"
-        changed |= text != endpoint.get("retained_body")
+        changed |= text != seen_bodies.get(endpoint_id)
         endpoint["retained_body"] = text
         endpoint.pop("canonical_source_body", None)
         coverage[endpoint_id] = {"coverage": label, "sha256": hashlib.sha256(text.encode("utf-8")).hexdigest()}
@@ -804,15 +547,6 @@ def _revalidate_body_pair(snapshot: Mapping[str, Any], target: Mapping[str, Any]
         row = rows[0]
     else:
         row = copy.deepcopy(gate_relation)
-    if row["decision"] == "DUPLICATE":
-        payload, indexes = _duplicate_confirmation_input(local, [row])
-        confirmations = invoke(prefix + _duplicate_confirmation_prompt(payload), CONFIRMATION_SCHEMA_PATH,
-            lambda value: _validate_duplicate_confirmation(value, payload),
-            "editorial_director_duplicate_body_confirmation")
-        if confirmations is None:
-            return None
-        _apply_duplicate_confirmation([row], confirmations, indexes)
-        row["duplicate_confirmation_provenance"] = diagnostic["requests"][-1]
     diagnostic["status"] = "validated"
     row["body_revalidation"] = copy.deepcopy(diagnostic)
     return row
@@ -883,7 +617,6 @@ def _apply_duplicate_gate(snapshot: dict[str, Any], relations: list[dict[str, An
     snapshot["authorized_relations"] = []
     _refresh_capacity_hint(snapshot)
     _finalize_active_input(snapshot)
-
 
 
 def _evaluate_duplicate_gate_batch(
@@ -1008,8 +741,7 @@ def _evaluate_duplicate_gate_batch(
         failures = [{"family": "relation_coverage",
                      "missing_refs": sorted(unresolved_refs)}]
     if failures and relations is not None:
-        # Valid DUPLICATE proposals remain in-memory for the independent confirmation
-        # phase; _store_ordinary_pairs still refuses to persist them before confirmation.
+        # Each technically valid decision is final even if another relation needs repair.
         final = list(relations)
         provenance = {"duplicate_gate_logical_request_id": logical_request_id,
                       "duplicate_gate_input_digest": input_digest}
@@ -1021,11 +753,7 @@ def _evaluate_duplicate_gate_batch(
         for spec in batch_specs:
             if spec["pair_id"] in final_ids:
                 continue
-            covered = _covered_no_match(spec, list(cached_relations.values()) + final)
-            if covered is not None:
-                final.append(covered)
-            else:
-                unresolved.append(spec)
+            unresolved.append(spec)
         if len(unresolved) == 1:
             recovered = _revalidate_body_pair(
                 batch_snapshot, unresolved[0], call, base, digest)
@@ -1081,7 +809,6 @@ def _evaluate_duplicate_stage(snapshot: Mapping[str, Any], *, provider: Callable
     contract = pair_cache.contract_fingerprint(
         policy_version=POLICY_VERSION, model=MODEL, policy_path=POLICY_PATH,
         gate_schema_path=RELATION_SCHEMA_PATH,
-        confirmation_schema_path=CONFIRMATION_SCHEMA_PATH,
         event_registry_path=EVENT_REGISTRY_PATH)
     cache = pair_cache.load()
     active_event(
@@ -1159,31 +886,6 @@ def _evaluate_duplicate_stage(snapshot: Mapping[str, Any], *, provider: Callable
             policy_version=POLICY_VERSION, policy_digest=digest, status="avoided",
             reason="pr131_duplicate_pair_cache_all_hit",
         )
-        if any(
-            (cached_relations.get(str(row.get("pair_id") or "")) or {}).get("primary_decision") == "DUPLICATE"
-            for row in authorized
-        ):
-            confirmation_avoided = OperationalAIRequest(
-                "Menzo", "editorial_director_duplicate_confirmation",
-                reason_code="pr131_duplicate_confirmation_cache_all_hit",
-            )
-            confirmation_avoided.avoided("pr131_duplicate_confirmation_cache_all_hit")
-            record_gemini_attempt(
-                response=None, model_requested=MODEL,
-                operation_id=confirmation_avoided.logical_request_id,
-                attempt_index=0, repair=False, fallback=False, agent="Menzo",
-                workload="editorial_director_duplicate_confirmation",
-                phase="editorial_director_duplicate_confirmation_cache_avoided",
-                shadow=False, logical_request_id=confirmation_avoided.logical_request_id,
-                candidate_count=len(snapshot.get("candidates", [])),
-                relation_count=sum(
-                    1 for row in authorized
-                    if (cached_relations.get(str(row.get("pair_id") or "")) or {}).get("primary_decision") == "DUPLICATE"
-                ),
-                input_digest=snapshot.get("input_digest"),
-                policy_version=POLICY_VERSION, policy_digest=digest, status="avoided",
-                reason="pr131_duplicate_confirmation_cache_all_hit",
-            )
     request = None
     if authorized and not has_relations:
         _apply_duplicate_gate(snapshot, [cached_relations[str(row["pair_id"])] for row in authorized])
@@ -1208,9 +910,6 @@ def _evaluate_duplicate_stage(snapshot: Mapping[str, Any], *, provider: Callable
     gate_input_digest = None
     gate_logical_request_ids: list[str] = []
     gate_input_digests: list[str] = []
-    confirmation_attempts = 0
-    confirmation_logical_request_id = None
-    confirmation_input_digest = None
     relations: list[dict[str, Any]] = []
     if has_relations:
         batch_size = max(1, shadow.MAX_RELATIONS)
@@ -1268,138 +967,9 @@ def _evaluate_duplicate_stage(snapshot: Mapping[str, Any], *, provider: Callable
             relations.extend(copy.deepcopy(outcome.get("relations") or []))
         base["duplicate_gate_logical_request_ids"] = copy.deepcopy(gate_logical_request_ids)
         base["duplicate_gate_input_digests"] = copy.deepcopy(gate_input_digests)
-        confirmation_payload, confirmation_relation_indexes = _duplicate_confirmation_input(phase_snapshot, relations)
-        if confirmation_payload["relations"]:
-            confirmation_request = OperationalAIRequest(
-                "Menzo", "editorial_director_duplicate_confirmation",
-                reason_code="editorial_director_duplicate_confirmation")
-            confirmation_logical_request_id = confirmation_request.logical_request_id
-            confirmation_serialized = json.dumps(
-                confirmation_payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
-            confirmation_input_digest = hashlib.sha256(confirmation_serialized.encode("utf-8")).hexdigest()
-            confirmation_schema = json.loads(CONFIRMATION_SCHEMA_PATH.read_text(encoding="utf-8"))
-            confirmations = None
-            known_confirmations: dict[str, Any] = {}
-            confirmation_failures: list[dict[str, Any]] = []
-            for index in range(2):
-                confirmation_attempts += 1
-                repair = index == 1
-                attempt = confirmation_request.start(
-                    MODEL, repair=repair,
-                    reason_code="duplicate_confirmation_validation_failed" if repair else "")
-                started = time.monotonic()
-                confirmation_response = None
-                try:
-                    confirmation_response = call(
-                        _duplicate_confirmation_prompt(
-                            confirmation_payload, confirmation_failures if repair else None),
-                        confirmation_schema, shadow.PROVIDER_TIMEOUT_SECONDS)
-                except Exception as exc:
-                    record_gemini_attempt(
-                        response=confirmation_response, model_requested=MODEL,
-                        operation_id=confirmation_request.logical_request_id, attempt_index=index,
-                        repair=repair, fallback=False, agent="Menzo",
-                        workload="editorial_director_duplicate_confirmation",
-                        phase="editorial_director_duplicate_confirmation_repair" if repair else
-                              "editorial_director_duplicate_confirmation_primary",
-                        shadow=False, logical_request_id=confirmation_request.logical_request_id,
-                        canonical_attempt_id=attempt["attempt_id"],
-                        candidate_count=len(phase_snapshot["candidates"]),
-                        relation_count=len(confirmation_payload["relations"]),
-                        input_digest=confirmation_input_digest, policy_version=POLICY_VERSION,
-                        policy_digest=digest, status="failed", error_class=type(exc).__name__)
-                    confirmation_request.failed(
-                        attempt, error_class="upstream", error_terminal=True,
-                        latency_ms=int((time.monotonic() - started) * 1000))
-                    return {**base, "attempts": gate_attempts + confirmation_attempts,
-                            "status": "PROVIDER_FAILED", "fallback_reason": type(exc).__name__,
-                            "duplicate_gate_logical_request_id": gate_logical_request_id,
-                            "duplicate_gate_input_digest": gate_input_digest,
-                            "duplicate_confirmation_logical_request_id": confirmation_logical_request_id,
-                            "duplicate_confirmation_input_digest": confirmation_input_digest}
-                record_gemini_attempt(
-                    response=confirmation_response, model_requested=MODEL,
-                    operation_id=confirmation_request.logical_request_id, attempt_index=index,
-                    repair=repair, fallback=False, agent="Menzo",
-                    workload="editorial_director_duplicate_confirmation",
-                    phase="editorial_director_duplicate_confirmation_repair" if repair else
-                          "editorial_director_duplicate_confirmation_primary",
-                    shadow=False, logical_request_id=confirmation_request.logical_request_id,
-                    canonical_attempt_id=attempt["attempt_id"], candidate_count=len(phase_snapshot["candidates"]),
-                    relation_count=len(confirmation_payload["relations"]),
-                    input_digest=confirmation_input_digest, policy_version=POLICY_VERSION,
-                    policy_digest=digest, status="called")
-                confirmation_request.defer(attempt, int((time.monotonic() - started) * 1000))
-                try:
-                    confirmations, confirmation_failures, confirmation_telemetry = (
-                        _validate_duplicate_confirmation(
-                            shadow._decode(confirmation_response), confirmation_payload, preserve_valid=True))
-                    confirmations, confirmation_failures = _preserve_phase_rows(
-                        confirmations, confirmation_failures, known_confirmations,
-                        {row["ref"]: row["ref"] for row in confirmation_payload["relations"]}, "ref")
-                except Exception as exc:
-                    confirmations, confirmation_failures, confirmation_telemetry = None, [
-                        {"family": "parse_json", "detail": type(exc).__name__}], []
-                base["validation_attempts"].append({
-                    "phase": "duplicate_confirmation", "attempt_index": index,
-                    "valid": not confirmation_failures,
-                    "validation_families": confirmation_failures,
-                    "canonicalizations": confirmation_telemetry})
-                confirmation_request.resolve_deferred(
-                    not confirmation_failures,
-                    error_terminal=repair and bool(confirmation_failures))
-                if not confirmation_failures:
-                    break
-            if confirmations is not None:
-                _apply_duplicate_confirmation(relations, confirmations, confirmation_relation_indexes)
-            if confirmation_failures and confirmations is not None:
-                final = [row for row in relations if row["decision"] != "DUPLICATE" or row.get("duplicate_confirmation")]
-                for row in final:
-                    provenance = dict(row.get("validated_provenance") or {})
-                    provenance.update({
-                        "duplicate_confirmation_logical_request_id": confirmation_logical_request_id,
-                        "duplicate_confirmation_input_digest": confirmation_input_digest,
-                    })
-                    row["validated_provenance"] = provenance
-                _store_ordinary_pairs(cache, materials, final, base, stored_pairs)
-                unresolved = []
-                for row in relations:
-                    if row["decision"] != "DUPLICATE" or row.get("duplicate_confirmation"):
-                        continue
-                    covered = _covered_no_match(row, list(cached_relations.values()) + final)
-                    if covered is not None:
-                        row.clear(); row.update(covered)
-                    else:
-                        unresolved.append(row)
-                if len(unresolved) == 1:
-                    target = unresolved[0]
-                    recovered = _revalidate_body_pair(snapshot, target, call, base, digest, gate_relation=target)
-                    confirmation_attempts += base["duplicate_body_revalidation"]["attempts"]
-                    if recovered is not None:
-                        target.clear(); target.update(recovered)
-                        unresolved = []
-                if not unresolved:
-                    confirmation_failures = []
-            if confirmation_failures or confirmations is None:
-                return {**base, "attempts": gate_attempts + confirmation_attempts,
-                        "validation_errors": confirmation_failures,
-                        "fallback_reason": (confirmation_failures[0]["family"]
-                                            if confirmation_failures else
-                                            "duplicate_confirmation_validation_failed"),
-                        "duplicate_gate_logical_request_id": gate_logical_request_id,
-                        "duplicate_gate_input_digest": gate_input_digest,
-                        "duplicate_confirmation_logical_request_id": confirmation_logical_request_id,
-                        "duplicate_confirmation_input_digest": confirmation_input_digest}
-            for relation in relations:
-                if relation.get("primary_decision") == "DUPLICATE":
-                    relation.setdefault("duplicate_confirmation_provenance", {
-                        "logical_request_id": confirmation_logical_request_id,
-                        "input_digest": confirmation_input_digest})
         for relation in relations:
             provenance = dict(relation.get("validated_provenance") or {})
             provenance.update({
-                "duplicate_confirmation_logical_request_id": confirmation_logical_request_id,
-                "duplicate_confirmation_input_digest": confirmation_input_digest,
             })
             relation["validated_provenance"] = provenance
         new_by_pair = {str(row["pair_id"]): row for row in relations}
@@ -1409,18 +979,14 @@ def _evaluate_duplicate_stage(snapshot: Mapping[str, Any], *, provider: Callable
         _store_ordinary_pairs(cache, materials, relations, base, stored_pairs)
         if not snapshot.get("candidates"):
             return {**base, "status": "VALIDATED",
-                    "attempts": gate_attempts + confirmation_attempts,
+                    "attempts": gate_attempts,
                     "duplicate_gate_logical_request_id": gate_logical_request_id,
                     "duplicate_gate_input_digest": gate_input_digest,
-                    "duplicate_confirmation_logical_request_id": confirmation_logical_request_id,
-                    "duplicate_confirmation_input_digest": confirmation_input_digest,
                     "output": {"schema_version": SCHEMA_VERSION, "policy_version": POLICY_VERSION,
                                "candidates": [], "relations": final_relations}, "validation_errors": []}
-    return {**base, "status": "VALIDATED", "attempts": gate_attempts + confirmation_attempts,
+    return {**base, "status": "VALIDATED", "attempts": gate_attempts,
             "duplicate_gate_logical_request_id": gate_logical_request_id,
             "duplicate_gate_input_digest": gate_input_digest,
-            "duplicate_confirmation_logical_request_id": confirmation_logical_request_id,
-            "duplicate_confirmation_input_digest": confirmation_input_digest,
             "output": {"candidates": [], "relations": copy.deepcopy(snapshot.get("duplicate_gate_relations", []))},
             "validation_errors": []}
 
@@ -1500,7 +1066,7 @@ def evaluate(snapshot: Mapping[str, Any], *, provider: Callable[..., Any] | None
     fresh = []
     for candidate in primary_snapshot.get("candidates", []):
         prior = _capacity_candidate(snapshot, candidate).get("_priority_queue_editorial", {})
-        if (isinstance(prior, dict) and prior.get("policy_version") == POLICY_VERSION and
+        if (isinstance(prior, dict) and prior.get("policy_version") in COMPATIBLE_PRIMARY_POLICIES and
                 prior.get("editorial_class") in {"MUST_PUBLISH", "SHOULD_PUBLISH"} and
                 prior.get("recommended_action") == "SELECT" and prior.get("category") in shadow.CATEGORIES and
                 isinstance(prior.get("story_core"), str) and prior["story_core"].strip()):

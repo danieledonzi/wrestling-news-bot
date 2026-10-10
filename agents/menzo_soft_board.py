@@ -54,9 +54,9 @@ def _primary_class(item: Mapping[str, Any]) -> str:
 
 
 def _current_primary_soft(item: Mapping[str, Any]) -> bool:
-    from agents.menzo_editorial_director_active import POLICY_VERSION as primary_policy
+    from agents.menzo_editorial_director_active import COMPATIBLE_PRIMARY_POLICIES
     director = item.get("editorial_director") if isinstance(item.get("editorial_director"), Mapping) else {}
-    return (director.get("policy_version") == primary_policy and
+    return (director.get("policy_version") in COMPATIBLE_PRIMARY_POLICIES and
             director.get("editorial_class") == "PUBLISHABLE_SOFT" and
             director.get("recommended_action") == "DEFER")
 

@@ -1,4 +1,4 @@
-"""Persistent reuse of fully validated Active E04/E04C pair results."""
+"""Persistent reuse of final Gemini decisions for exact Active pair material."""
 from __future__ import annotations
 
 import copy
@@ -13,7 +13,7 @@ from typing import Any, Mapping
 ROOT = Path(__file__).resolve().parents[1]
 CACHE_FILE = ROOT / "state/newsroom/menzo_active_duplicate_pair_cache_v1.json"
 SCHEMA_VERSION = "owtv_active_duplicate_pair_cache_v1"
-CONTRACT_VERSION = "ed-2.1.2-active-final-pair-result-v1"
+CONTRACT_VERSION = "totem-d01-gemini-final-pair-result-v2"
 MAX_ENTRIES = 4096
 
 
@@ -26,7 +26,7 @@ def _hash(value: Any) -> str:
 
 
 def contract_fingerprint(*, policy_version: str, model: str, policy_path: Path,
-                         gate_schema_path: Path, confirmation_schema_path: Path,
+                         gate_schema_path: Path,
                          event_registry_path: Path) -> str:
     from agents.menzo_duplicate_scorer import SCORER_VERSION, effective_threshold
     try:
@@ -34,7 +34,7 @@ def contract_fingerprint(*, policy_version: str, model: str, policy_path: Path,
             event_registry_path.read_bytes()).hexdigest()}
     except (OSError, ValueError):
         # Cache lookup must fail open.  This stable marker cannot match an entry
-        # created while the registry was readable; E04V remains authoritative.
+        # created while the registry was readable; Gemini remains authoritative.
         event_registry = {"status": "unavailable"}
     material = {
         "cache_contract_version": CONTRACT_VERSION,
@@ -43,8 +43,6 @@ def contract_fingerprint(*, policy_version: str, model: str, policy_path: Path,
         "active_policy_sha256": hashlib.sha256(policy_path.read_bytes()).hexdigest(),
         "model": model,
         "duplicate_gate_schema_sha256": hashlib.sha256(gate_schema_path.read_bytes()).hexdigest(),
-        "duplicate_confirmation_schema_sha256": hashlib.sha256(
-            confirmation_schema_path.read_bytes()).hexdigest(),
         "event_registry": event_registry,
         "duplicate_scorer_version": SCORER_VERSION,
         "duplicate_effective_threshold": effective_threshold(),
@@ -105,14 +103,7 @@ def lookup(cache: Mapping[str, Any], material: Mapping[str, Any]) -> dict[str, A
                 relation.get(field) != expected_identity[field]
                 for field in identity_fields)):
         return None
-    confirmation = relation.get("duplicate_confirmation")
-    if relation.get("decision") == "DUPLICATE" and (
-            not isinstance(confirmation, Mapping) or
-            confirmation.get("decision") != "CONFIRM_DUPLICATE"):
-        return None
-    if relation.get("primary_decision") == "DUPLICATE" and relation.get("decision") == "NO_MATCH" and (
-            not isinstance(confirmation, Mapping) or
-            confirmation.get("decision") != "REJECT_DUPLICATE"):
+    if relation.get("semantic_authority") != "gemini_final":
         return None
     result = copy.deepcopy(dict(relation))
     result["duplicate_pair_cache"] = {

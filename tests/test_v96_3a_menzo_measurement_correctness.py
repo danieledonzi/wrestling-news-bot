@@ -82,7 +82,7 @@ def test_contract_transition_and_same_run_hash_stability():
     changed={**record,"published_at":"2026-01-01T01:00:00+00:00"}
     assert cache.candidate_material_hash(record)==cache.candidate_material_hash(changed)
     assert cache.published_material_hash(record)!=cache.published_material_hash(changed)
-    assert cache.MENZO_DUPLICATE_ARBITRATION_CONTRACT_VERSION.startswith("v96.3a")
+    assert cache.MENZO_DUPLICATE_ARBITRATION_CONTRACT_VERSION.startswith("totem-d01")
     c=cache.empty_cache(); pairs=[("candidate","material")]; key=cache.request_key("same_run_component",pairs)
     decision={field:"" for field in cache.REQUIRED_DECISION_FIELDS}; decision["disposition"]={field:"" for field in cache.REQUIRED_DISPOSITION_FIELDS}
     assert cache.store(c,key,"same_run_component",{"candidate":decision},candidates=pairs)

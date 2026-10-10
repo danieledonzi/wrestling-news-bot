@@ -87,25 +87,6 @@ def test_capture_later_duplicate_row_retains_available_canonical_body(monkeypatc
     assert local["candidates"][0]["retained_body"] == text.strip()
 
 
-@pytest.mark.parametrize("scope", ["recent_history", "same_run"])
-def test_equivalence_provenance_excludes_disconnected_duplicate_classes(scope):
-    def relation(pair_id, left, right, decision, row_scope="same_run", confirmed=True):
-        row = {"pair_id": pair_id, "left_id": left, "right_id": right,
-               "scope": row_scope, "decision": decision}
-        if decision == "DUPLICATE" and confirmed:
-            row["duplicate_confirmation"] = {"decision": "CONFIRM_DUPLICATE"}
-        return row
-    final = [relation("ab", "a", "b", "DUPLICATE"),
-             relation("xy", "x", "y", "DUPLICATE"),
-             relation("az", "a", "z", "DUPLICATE", confirmed=False),
-             relation("ah", "a", "h", "NO_MATCH", scope)]
-    target = relation("bh", "b", "h", "UNCERTAIN", scope)
-    resolved = active._covered_no_match(target, final)
-    assert resolved["decision"] == "NO_MATCH"
-    assert resolved["validated_equivalence"]["source_pair_id"] == "ah"
-    assert resolved["validated_equivalence"]["duplicate_class_pair_ids"] == ["ab"]
-
-
 def test_capture_history_body_is_private_and_not_recrawled(monkeypatch):
     text = "Retained full historical source material. " * 9
     raw = {"url": "https://dr1.test/current", "title": "Current development"}
@@ -123,9 +104,13 @@ def test_capture_history_body_is_private_and_not_recrawled(monkeypatch):
     assert coverage[hid]["coverage"] == "FULL_BODY"
 
 
-def test_single_pair_body_revalidation_recovers_without_cache_pollution(isolated):
+def test_single_pair_body_revalidation_recovers_without_cache_pollution(isolated, monkeypatch):
     state = snapshot(2); state["authorized_relations"] = [suspicious_relation(state)]
-    add_bodies(state); calls = []
+    calls = []
+    def hydrate(row):
+        row["canonical_source_body"] = canonical_body("New full source facts available for bounded recovery. " * 10)
+        return True, "offline recovery fixture"
+    monkeypatch.setattr(source_body, "hydrate", hydrate)
     def provider(prompt, *_):
         calls.append(prompt)
         if "DR1 BODY-AWARE" in prompt:
@@ -143,51 +128,6 @@ def test_single_pair_body_revalidation_recovers_without_cache_pollution(isolated
     assert len(rows) == 1 and rows[0]["logical_request_id"] == result["duplicate_body_revalidation"]["requests"][0]["logical_request_id"]
 
 
-@pytest.mark.parametrize("confirmation", ["CONFIRM_DUPLICATE", "REJECT_DUPLICATE"])
-def test_body_duplicate_requires_independent_confirmation(confirmation):
-    state = snapshot(2); state["candidates"][1]["title"] = "Jasper Troy Becomes First Confirmed Release"
-    state["authorized_relations"] = [suspicious_relation(state)]; add_bodies(state)
-    left, right = [row["title"] for row in state["candidates"]]
-    calls = []
-    def provider(prompt, *_):
-        calls.append(prompt)
-        if "DR1 BODY-AWARE" in prompt:
-            if "CONFIRMATION PHASE" in prompt:
-                return {"confirmations": [duplicate_confirmation("d0", left, right, confirmation)]}
-            return {"relations": [grounded_duplicate("r0", left, right, "Jasper Troy Becomes First Confirmed Release")]}
-        return invalid_gate() if "DUPLICATE GATE" in prompt else select_all(state)
-    result = active.evaluate(state, provider=provider)
-    assert result["status"] == "VALIDATED"
-    assert result["duplicate_body_revalidation"]["attempts"] == 2
-    assert len(state["candidates"]) == (1 if confirmation == "CONFIRM_DUPLICATE" else 2)
-    assert len([p for p in calls if "CONFIRMATION PHASE" in p]) == 1
-    assert cache.load()["entries"] == {}
-
-
-@pytest.mark.parametrize("failure", ["invalid", "exception"])
-def test_failed_local_confirmation_does_not_suppress_or_cache(failure, isolated):
-    state = snapshot(2); state["candidates"][1]["title"] = "Jasper Troy Becomes First Confirmed Release"
-    state["authorized_relations"] = [suspicious_relation(state)]; add_bodies(state)
-    before = copy.deepcopy(state["candidates"]); left, right = [r["title"] for r in before]
-    def provider(prompt, *_):
-        if "PHASE ONLY" not in prompt and "DR1 BODY-AWARE" not in prompt:
-            return select_all(state)
-        if "DR1 BODY-AWARE" in prompt:
-            if "CONFIRMATION PHASE" in prompt:
-                if failure == "exception":
-                    raise RuntimeError("offline provider error")
-                return {"confirmations": []}
-            return {"relations": [grounded_duplicate("r0", left, right, "Jasper Troy Becomes First Confirmed Release")]}
-        return invalid_gate()
-    result = active.evaluate(state, provider=provider)
-    assert result["status"] != "VALIDATED" and state["candidates"] == before
-    assert "semantic_duplicate_skips" not in state
-    assert cache.load()["entries"] == {}
-    assert result["duplicate_body_revalidation"]["attempts"] == 2
-    assert len(result["duplicate_body_revalidation"]["requests"]) == 2
-    assert len([r for r in isolated if "body_" in r["workload"]]) == 2
-
-
 def test_partial_ordinary_no_match_is_cached_on_remaining_fallback():
     state = snapshot(3)
     state["authorized_relations"] = [suspicious_relation(state), suspicious_relation(state, right=2, pair_id="ac")]
@@ -200,58 +140,12 @@ def test_partial_ordinary_no_match_is_cached_on_remaining_fallback():
     assert result["duplicate_pair_cache_entries_stored"] == 1
 
 
-@pytest.mark.parametrize("decision", ["CONFIRM_DUPLICATE", "REJECT_DUPLICATE"])
-def test_failed_ordinary_confirmation_gets_one_local_attempt(decision):
-    state = snapshot(2); state["candidates"][1]["title"] = "Jasper Troy Becomes First Confirmed Release"
-    state["authorized_relations"] = [suspicious_relation(state)]; add_bodies(state)
-    left, right = [r["title"] for r in state["candidates"]]
-    def provider(prompt, *_):
-        if "CONFIRMATION PHASE" in prompt:
-            return {"confirmations": [duplicate_confirmation("d0", left, right, decision)]} if "DR1 BODY-AWARE" in prompt else {"confirmations": []}
-        if "DUPLICATE GATE" in prompt:
-            return {"relations": [grounded_duplicate("r0", left, right, "Jasper Troy Becomes First Confirmed Release")]}
-        return select_all(state)
-    result = active.evaluate(state, provider=provider)
-    assert result["status"] == "VALIDATED" and result["duplicate_body_revalidation"]["attempts"] == 1
-    assert len(state["candidates"]) == (1 if decision == "CONFIRM_DUPLICATE" else 2)
-    assert result["output"]["relations"][0]["duplicate_confirmation_provenance"]["phase"] == "editorial_director_duplicate_body_confirmation"
-    assert cache.load()["entries"] == {}
-
-
-def test_cached_duplicate_class_and_history_no_match_bypass_local_attempt():
-    def make():
-        state = snapshot(2)
-        state["candidates"][1]["title"] = "Jasper Troy Becomes First Confirmed Release"
-        state["publisher_history_12h"] = [{"article_id": "h", "title": "An unrelated historical development"}]
-        return state
-    first = make()
-    first["authorized_relations"] = [suspicious_relation(first), suspicious_relation(first, right=0, scope="recent_history", pair_id="ah")]
-    left, right = [r["title"] for r in first["candidates"]]
-    def seed(prompt, *_):
-        if "CONFIRMATION PHASE" in prompt:
-            return {"confirmations": [duplicate_confirmation("d0", left, right)]}
-        if "DUPLICATE GATE" in prompt:
-            return {"relations": [grounded_duplicate("r0", left, right, "Jasper Troy Becomes First Confirmed Release"),
-                                  {"ref": "r1", "decision": "NO_MATCH"}]}
-        return select_all(first)
-    assert active.evaluate(first, provider=seed)["status"] == "VALIDATED"
-    second = make(); add_bodies(second)
-    second["authorized_relations"] = [suspicious_relation(second),
-        suspicious_relation(second, right=0, scope="recent_history", pair_id="ah"),
-        suspicious_relation(second, left=1, right=0, scope="recent_history", pair_id="bh")]
-    prompts = []
-    def provider(prompt, *_):
-        prompts.append(prompt)
-        return invalid_gate() if "DUPLICATE GATE" in prompt else select_all(second)
-    result = active.evaluate(second, provider=provider)
-    assert result["status"] == "VALIDATED" and result["duplicate_pair_cache_hits"] == 2
-    assert not any("DR1 BODY-AWARE" in p for p in prompts)
-    assert next(r for r in result["output"]["relations"] if r["pair_id"] == "bh")["validated_equivalence"]["source_pair_id"] == "ah"
-    assert "bh" not in cache.load()["entries"]
-
-
-def test_local_refs_keep_invalid_pair_identity_and_valid_row_is_not_revoked_by_repair():
-    state = snapshot(3); add_bodies(state)
+def test_local_refs_keep_invalid_pair_identity_and_valid_row_is_not_revoked_by_repair(monkeypatch):
+    state = snapshot(3)
+    def hydrate(row):
+        row["canonical_source_body"] = canonical_body("New pair-local source facts for bounded recovery. " * 10)
+        return True, "offline recovery fixture"
+    monkeypatch.setattr(source_body, "hydrate", hydrate)
     state["authorized_relations"] = [suspicious_relation(state), suspicious_relation(state, right=2, pair_id="ac")]
     normal_calls = 0
     def provider(prompt, *_):
@@ -295,18 +189,6 @@ def test_unsupported_failures_keep_atomic_fallback(kind):
     assert result["status"] != "VALIDATED" and state["candidates"] == before
     assert not any("DR1 BODY-AWARE" in p for p in calls)
     assert cache.load()["entries"] == {}
-
-
-def test_no_match_constraint_follows_every_member_of_validated_class():
-    duplicate = {"pair_id": "ab", "scope": "same_run", "left_id": "a", "right_id": "b", "decision": "DUPLICATE",
-                 "duplicate_confirmation": {"decision": "CONFIRM_DUPLICATE"}}
-    distinct = {"pair_id": "ah", "scope": "recent_history", "left_id": "a", "right_id": "h", "decision": "NO_MATCH"}
-    target = {"pair_id": "bh", "scope": "recent_history", "left_id": "b", "right_id": "h", "decision": "DUPLICATE"}
-    covered = active._covered_no_match(target, [duplicate, distinct])
-    assert covered["decision"] == "NO_MATCH" and covered["pair_id"] == "bh"
-    assert covered["validated_equivalence"]["source_pair_id"] == "ah"
-    assert "duplicate_confirmation" not in covered
-    assert active._covered_no_match(target, [{**duplicate, "decision": "UNRESOLVED"}, distinct]) is None
 
 
 def test_only_affected_current_endpoints_are_hydrated(monkeypatch):
