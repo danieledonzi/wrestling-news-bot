@@ -7,6 +7,7 @@
 **Owner-approved revision:** 2026-10-09 — primary eligibility before semantic duplicates; persistent SHOULD overflow; live show coverage.
 **Owner-approved clarification:** 2026-10-10 — feed-URL news only, autonomous reports, and final Gemini semantic decisions.
 **Additional owner-approved clarification:** 2026-10-10 — terminal SKIP isolation and bookmaker exclusion, under TOTEM-S01/N02.
+**Additional owner-approved clarification:** 2026-10-10 — immutable first valid primary class, under TOTEM-C01.
 
 This document freezes the editorial invariants that MUST survive any implementation reform. Operational parameters may still be tuned, but the invariants below are non-negotiable unless explicitly superseded by a later owner-approved architecture decision.
 
@@ -44,6 +45,17 @@ Candidates receive one of these classes before semantic duplicate work:
 Primary class MUST be based on the story's intrinsic editorial value and central development. It MUST NOT be promoted or demoted merely because the day is quiet, because many slots remain, or because the soft pool is weak.
 
 Primary classification and publication pacing are separate decisions.
+
+Under TOTEM-C01, the first technically valid primary classification for a canonical feed URL is immutable and
+must be durably reused in every later run. It precedes semantic duplicate work and entry into any editorial pool.
+Rediscovery, elapsed time, source metadata changes, policy/cache changes, or queue/pool transitions must not
+trigger primary reclassification. Valid rows remain fixed even when a sibling row or duplicate admission needs
+technical repair. A technical failure after classification does not erase the accepted primary decision.
+
+Weak owner-facing SOFT is primary SKIP and is discarded before duplicate work. PUBLISHABLE_SOFT remains
+eligible only for optional soft competition; it can never be promoted into MUST/SHOULD. A valid downstream
+terminal decision may close eligibility under TOTEM-S01 while preserving the original primary class for audit.
+This supersedes older wording permitting a new Director primary SKIP to reclassify a previously admitted URL.
 
 Under TOTEM-N02, articles centrally reporting bookmaker odds, betting-market movements or favorites/predictions
 derived from odds are SKIP, including immediately before a major event. Confirmed complete/updated event cards
@@ -137,7 +149,8 @@ primary-capture limits apply to the current feed candidate board, not to the acc
 
 A soft URL enters this container only after it has already passed the duplicate gate and primary classification.
 If the same URL appears again in a later feed run, that feed appearance still follows normal duplicate/tombstone
-rules; the stored pool row itself does not need to be reclassified every 30 minutes.
+rules and reuses its first valid primary class under TOTEM-C01. Neither the stored pool row nor its rediscovered
+feed representation may be reclassified every 30 minutes.
 
 The soft pool may grow independently during the morning. Its size is not an editorial candidate-count cap.
 

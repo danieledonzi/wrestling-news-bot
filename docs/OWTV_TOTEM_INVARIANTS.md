@@ -4,6 +4,7 @@
 **Scope:** OpenWrestlingTV
 **Owner-approved clarification:** 2026-10-10 — feed-URL news coverage and Gemini semantic authority.
 **Additional owner-approved clarification:** 2026-10-10 — bookmaker exclusions and terminal SKIP isolation.
+**Additional owner-approved clarification:** 2026-10-10 — immutable first valid primary classification, under TOTEM-C01.
 
 ## TOTEM supremacy
 
@@ -134,5 +135,36 @@ Technical inability to obtain a decision is not a valid editorial SKIP: retain t
 publication behavior and its declared recovery contract without inventing a terminal semantic judgment.
 
 Owner decision, 2026-10-10: this explicitly supersedes soft-tombstone comparison history, restoration of prior
-soft state over a valid new SKIP, and time-limited semantic finality. The current V7 implementation still requires
-a reviewed implementation release for these newly clarified rules.
+soft state over a valid downstream SKIP, and time-limited semantic finality. This does not authorize a new primary
+classification of an already classified URL; TOTEM-C01 governs that authority. Terminal downstream decisions
+must remain distinguishable from the original primary classification in the audit trail.
+
+## TOTEM-C01 — The first valid primary classification is immutable
+
+Every individual feed news URL receives its primary editorial classification before semantic duplicate work or
+entry into an editorial pool. The first technically valid classification for the canonical URL is final:
+`MUST_PUBLISH`, `SHOULD_PUBLISH`, `PUBLISHABLE_SOFT`, or `SKIP`. That classification must be durably retained
+and reused, not requested again because of a later run, feed rediscovery, changed title/summary, refreshed source
+timestamp, elapsed time, midnight, cache expiry, policy-version change, or movement between queues and pools.
+
+A duplicate-admission request, a full duplicate judgment, a scheduling decision, or a soft-board review cannot
+promote or demote that primary class. A repair is allowed to obtain a missing or technically invalid decision;
+it cannot reconsider an already valid classification, including a valid row in a partially invalid batch.
+Once accepted, classes survive an unrelated admission, duplicate, projection, or handoff failure.
+
+Downstream authority may still terminate eligibility: a final DUPLICATE, a meaningful soft-board SKIP,
+competitive expiry, or the applicable midnight boundary closes the URL under TOTEM-S01. This is a terminal
+disposition, not a new primary classification. Technical failure remains a recoverable hold, not editorial SKIP.
+
+The owner-facing weak SOFT category maps to primary `SKIP`, as already defined by the category reform; it is
+discarded before duplicate work and never enters the pool. `PUBLISHABLE_SOFT` is a distinct eligible class,
+which may compete for residual slots but can never turn into SHOULD or MUST. Improvements to classification
+apply to as-yet unclassified URLs. A different fresh feed URL has its own first classification; a same-URL
+MATERIAL_UPDATE verdict cannot reopen primary classification or revive a terminally skipped URL.
+
+Examples: weak SOFT at 19:00 remains SKIP at 20:00; PUBLISHABLE_SOFT at 19:00 remains PUBLISHABLE_SOFT at
+20:00 and cannot enter the strong-news queue; SHOULD awaiting duplicate recovery remains SHOULD.
+
+Owner decision, 2026-10-10: this supersedes any primary reclassification mechanism, including reuse limited to
+strong queues, reclassification on policy/cache changes, or reclassification of rediscovered pool URLs. The V8
+runtime does not yet implement this invariant completely; implementation requires a reviewed release.
