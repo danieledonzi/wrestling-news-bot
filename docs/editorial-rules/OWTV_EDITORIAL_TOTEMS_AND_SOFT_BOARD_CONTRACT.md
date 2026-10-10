@@ -79,7 +79,8 @@ A day with 30 genuine MUST+SHOULD items is an exceptional strong-news day, not a
 Owner-approved category reform: PUBLISHABLE_SOFT requires all four of professional wrestling
 relevance, informative substance, recognizable OWTV audience interest and standalone value. Weak SOFT maps to the
 existing terminal SKIP class and is removed before semantic comparisons. The binding definitions and calibrated
-examples are in `OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V7_ACTIVE.md`.
+examples are in `OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V8_ACTIVE.md`, which adds terminal SKIP isolation,
+bookmaker exclusion and sparse semantic admission under the owner's 2026-10-10 corrections.
 
 A soft candidate has no publication entitlement.
 

@@ -83,7 +83,7 @@ def test_unresolved_skip_does_not_renew_existing_hard_skip(monkeypatch, tmp_path
     assert json.loads(menzo.HARD_SKIP_FILE.read_text(encoding="utf-8"))["items"] == [prior]
 
 
-def test_expired_hard_skip_stays_expired_when_unresolved(monkeypatch, tmp_path):
+def test_old_valid_hard_skip_remains_terminal_when_unresolved(monkeypatch, tmp_path):
     isolate_wrapper_state(monkeypatch, tmp_path)
     expired_at = (datetime.now(timezone.utc) - timedelta(hours=menzo.HARD_SKIP_TTL_HOURS + 1)).isoformat()
     prior = {"url": "https://t/expired", "reason": "skip:duplicate_same_run", "added_at": expired_at}
@@ -94,7 +94,7 @@ def test_expired_hard_skip_stays_expired_when_unresolved(monkeypatch, tmp_path):
                                         "decision_authority": "editorial_director",
                                         "editorial_director": {"editorial_class": "SKIP"}}]})
 
-    assert json.loads(menzo.HARD_SKIP_FILE.read_text(encoding="utf-8"))["items"] == []
+    assert json.loads(menzo.HARD_SKIP_FILE.read_text(encoding="utf-8"))["items"] == [prior]
 
 
 def test_confirmed_duplicate_still_persists_as_hard_skip(monkeypatch, tmp_path):

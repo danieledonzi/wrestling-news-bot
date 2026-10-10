@@ -64,12 +64,13 @@ def augment_board(board: Mapping[str, Any]) -> dict[str, Any]:
     """Retry strong candidates even when the feed no longer contains their URL."""
     result = copy.deepcopy(dict(board))
     published = _published_keys()
-    queued = [row for row in _read() if _key(row) not in published]
+    closed = menzo.terminal_skip_memory()
+    queued = [row for row in _read() if _key(row) not in published and _key(row) not in closed]
     _write(queued)
     by_key = {_key(row): copy.deepcopy(row) for row in queued}
     feed_keys = set()
     for row in board.get('news_candidates_for_menzo', []):
-        if not isinstance(row, dict) or _key(row) in published:
+        if not isinstance(row, dict) or _key(row) in published or _key(row) in closed:
             continue
         key = _key(row)
         feed_keys.add(key)
@@ -101,7 +102,8 @@ def schedule(projected: dict[str, Any], snapshot: Mapping[str, Any]) -> None:
     from agents.bob import dynamic_article_capacity
     now = str(snapshot.get('observation_timestamp') or menzo.utc_now())
     published = _published_keys()
-    by_key = {_key(row): copy.deepcopy(row) for row in _read() if _key(row) not in published}
+    closed = menzo.terminal_skip_memory()
+    by_key = {_key(row): copy.deepcopy(row) for row in _read() if _key(row) not in published and _key(row) not in closed}
     for section in ('skipped', 'pending'):
         for row in projected.get(section, []):
             # New validated primary decisions supersede an old queue entry.
@@ -109,6 +111,7 @@ def schedule(projected: dict[str, Any], snapshot: Mapping[str, Any]) -> None:
                                                 'semantic_duplicate_gate'}:
                 by_key.pop(_key(row), None)
     selected = projected.get('selected', [])
+    selected = [row for row in selected if _key(row) not in closed]
     strong = [row for row in selected if _class(row) in {'MUST_PUBLISH', 'SHOULD_PUBLISH'}]
     for row in strong:
         key = _key(row)

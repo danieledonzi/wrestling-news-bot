@@ -56,15 +56,17 @@ def test_all_skips_never_construct_or_send_semantic_relations(monkeypatch):
     assert projected['selected'] == projected['pending'] == []
 
 
-def test_only_eligible_endpoints_reach_relation_builder(monkeypatch):
+def test_only_eligible_endpoints_reach_semantic_gate(monkeypatch):
     s = state()
-    candidates = []
-    def build(rows, history, **_):
-        candidates.extend(rows)
-        return [], True
-    monkeypatch.setattr(shadow, 'build_authorized_relations', build)
+    seen = []
+    original = active._evaluate_duplicate_stage
+    def gate(rows, **kwargs):
+        seen.extend(rows['candidates'])
+        return original(rows, **kwargs)
+    monkeypatch.setattr(active, '_evaluate_duplicate_stage', gate)
+    monkeypatch.setattr(shadow, 'build_authorized_relations', lambda *_a, **_k: pytest.fail('lexical builder used'))
     result = active.evaluate(s, provider=lambda *_: classify(['SKIP', 'PUBLISHABLE_SOFT']))
-    assert [row['url'] for row in candidates] == ['https://ed5.test/b']
+    assert [row['url'] for row in seen] == ['https://ed5.test/b']
     projected = active.project(s, result)
     assert projected['pending'][0]['url'] == 'https://ed5.test/b'
     assert projected['pending'][0]['soft_board']['disposition'] == 'MORNING_HOLD'
@@ -251,10 +253,9 @@ def test_reused_strong_queue_only_needs_provider_for_uncached_relations(monkeypa
         raise RuntimeError('provider unavailable')
     monkeypatch.setattr(shadow, '_default_provider_factory', unavailable)
     result = active.evaluate(snapshot)
-    assert result['status'] == ('VALIDATED' if cached else 'PROVIDER_UNAVAILABLE')
-    assert initialized == ([] if cached else [True])
-    if cached:
-        assert len(result['output']['candidates']) == 2
+    # A partial old pair cache is not a complete sparse-admission decision.
+    assert result['status'] == 'PROVIDER_UNAVAILABLE'
+    assert initialized == [True]
 
 
 def test_reclassified_queue_skip_cannot_return_after_sibling_gate_failure(monkeypatch):

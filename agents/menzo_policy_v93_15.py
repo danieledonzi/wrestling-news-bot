@@ -1639,54 +1639,47 @@ def apply_same_story_duplicate_guard(result: dict[str, Any], massy_board: dict[s
 
 def load_soft_tombstone_duplicate_history(*, now: datetime | None = None,
                                          path: Path | None = None) -> list[dict[str, Any]]:
-    """Expose active soft tombstones as recent editorial-history endpoints.
+    """TOTEM-S01: skipped URLs are never semantic comparison history."""
+    return []
 
-    A soft opportunity is immutable by URL. The same URL remains blocked locally.
-    A genuinely new development must arrive under a new URL and is then compared
-    semantically against these tombstoned story endpoints by the ordinary
-    duplicate/material-update authority.
-    """
-    now = now or datetime.now(timezone.utc)
-    raw = load_json(Path(path or HARD_SKIP_FILE), {"items": []})
-    items = raw.get("items", []) if isinstance(raw, dict) else []
-    rows: list[dict[str, Any]] = []
-    seen: set[str] = set()
-    for item in items:
-        if not isinstance(item, dict):
+
+def terminal_skip_memory(*, path: Path | None = None) -> dict[str, dict[str, Any]]:
+    """Permanent canonical URL blocks; TTL/cache expiry cannot revive editorial SKIPs."""
+    target = Path(path or HARD_SKIP_FILE)
+    if not target.exists():
+        return {}
+    # A corrupt permanent blocklist is a technical failure, never an empty memory.
+    raw = json.loads(target.read_text(encoding="utf-8"))
+    if not isinstance(raw, dict) or not isinstance(raw.get("items"), list):
+        raise ValueError("invalid_terminal_skip_memory")
+    result = {}
+    for row in raw["items"]:
+        if not isinstance(row, dict):
+            raise ValueError("invalid_terminal_skip_record")
+        reason = str(row.get("reason") or "")
+        authority = str(row.get("decision_authority") or "")
+        if (not reason or reason == "requires_menzo_classification" or
+                reason.startswith(("active_fail_closed:", "skip:duplicate_arbitration_unresolved",
+                                   "skip:duplicate_pair_identity_unresolved")) or
+                authority in {"editorial_director_fail_closed", "technical_duplicate_block"}):
             continue
-        if str(item.get("decision_authority") or "") != "soft_board":
-            continue
-        added = parse_dt(item.get("added_at")) or now
-        ttl = int(item.get("expires_after_hours") or raw.get("ttl_hours") or HARD_SKIP_TTL_HOURS)
-        if added > now or now - added > timedelta(hours=ttl):
-            continue
-        snapshot = item.get("soft_board_tombstone_snapshot")
-        if not isinstance(snapshot, dict):
-            continue
-        url = duplicate_scorer.canonical_source_url({"source_url": item.get("url") or item.get("normalized_url")})
-        if not url or url in seen:
-            continue
-        seen.add(url)
-        title = str(snapshot.get("title") or item.get("title") or "")
-        summary_parts = [
-            str(snapshot.get("summary") or "").strip(),
-            str(snapshot.get("story_core") or "").strip(),
-        ]
-        summary = " | ".join(part for part in summary_parts if part)
-        rows.append({
-            "source_url": url,
-            "source_title": title,
-            "title_it": title,
-            "summary": summary,
-            "published": str(snapshot.get("published") or ""),
-            "published_at": str(snapshot.get("published") or added.isoformat()),
-            "first_seen_at": str(snapshot.get("first_seen_at") or ""),
-            "tombstoned_at": added.isoformat(),
-            "soft_board_day": str(snapshot.get("soft_board_day") or ""),
-            "history_state": "soft_tombstone",
-            "article_id": article_id({"source_url": url}),
-        })
-    return rows
+        key = source_key(row.get("url") or row.get("source_url") or row.get("normalized_url") or "")
+        if key:
+            result[key] = row
+    return result
+
+
+def is_bookmaker_odds_news(item: dict[str, Any]) -> bool:
+    """Explicit odds-news identity, without excluding incidental betting context."""
+    title = normalize_text(str(item.get("title") or item.get("source_title") or ""))
+    # A legal/business development mentioning odds needs Gemini's central-fact
+    # interpretation; the deterministic exclusion is deliberately conservative.
+    if re.search(r'\b(?:lawsuit|investigat\w*|arrest\w*|scandal|bans?|banned|suspend\w*|'
+                 r'partnership|media rights|business deal|accus\w*|judicial|tribunal\w*)\b', title):
+        return False
+    return bool(re.search(r"\bbetting odds\b|\b(?:bookmaker|sportsbook) (?:odds|favorites|favourites)\b|"
+                          r"\bquote (?:dei )?(?:bookmaker|scommesse)\b|"
+                          r"\bodds\b.{0,100}\b(?:favorites?|favourites?|underdogs?|favou?red)\b", title))
 
 
 def apply_recent_published_duplicate_guard(result: dict[str, Any]) -> None:
@@ -3605,22 +3598,12 @@ def save_softpool(result: dict[str, Any]) -> None:
 
 def save_hard_skips(result: dict[str, Any]) -> None:
     now = utc_now()
-    old = load_json(HARD_SKIP_FILE, {"items": []})
-    items = old.get("items", []) if isinstance(old, dict) else []
-    by_url: dict[str, dict[str, Any]] = {}
-    now_dt = datetime.now(timezone.utc)
-    for item in items:
-        if not isinstance(item, dict):
-            continue
-        added = parse_dt(item.get("added_at")) or now_dt
-        if now_dt - added <= timedelta(hours=HARD_SKIP_TTL_HOURS):
-            key = source_key(item.get("url") or item.get("source_url") or "")
-            if key:
-                by_url[key] = item
+    by_url = {key: dict(row) for key, row in terminal_skip_memory().items()}
     terminal_authorities = {"editorial_director", "deterministic_exact_duplicate",
                             "semantic_duplicate_gate", "softpool_decay", "soft_board"}
     for item in result.get("skipped", []) if isinstance(result.get("skipped"), list) else []:
-        if item.get("reason") == "skip:duplicate_arbitration_unresolved":
+        if str(item.get("reason") or "").startswith(("skip:duplicate_arbitration_unresolved",
+                "skip:duplicate_pair_identity_unresolved", "active_fail_closed:")):
             continue
         key = source_key(item.get("url") or item.get("source_url") or "")
         authority = str(item.get("decision_authority") or "")
@@ -3655,10 +3638,11 @@ def save_hard_skips(result: dict[str, Any]) -> None:
                 item.get("soft_board_content_fingerprint") if authority == "soft_board" else None
             ),
             "soft_board_tombstone_snapshot": tombstone_snapshot,
-            "added_at": now,
-            "expires_after_hours": HARD_SKIP_TTL_HOURS,
+            "added_at": by_url.get(key, {}).get("added_at") or now,
+            "terminal": True,
+            "expires_after_hours": None,
         }
-    write_json(HARD_SKIP_FILE, {"version": MENZO_VERSION, "updated_at": now, "ttl_hours": HARD_SKIP_TTL_HOURS, "items": list(by_url.values())})
+    write_json(HARD_SKIP_FILE, {"version": MENZO_VERSION, "updated_at": now, "terminal_skip_contract": "totem-s01-permanent-url-v1", "ttl_hours": None, "items": list(by_url.values())})
 
 
 def _wp_ready_for_costly_work() -> tuple[bool, str]:

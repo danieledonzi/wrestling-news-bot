@@ -33,10 +33,22 @@ def response(s, actions=("SELECT", "DEFER", "SKIP")):
     actions = actions + (actions[-1],) * max(0, len(s["candidates"]) - len(actions))
     classes = tuple("MUST_PUBLISH" if action == "SELECT" else
                     "PUBLISHABLE_SOFT" if action == "DEFER" else "SKIP" for action in actions)
+    candidate_ids = {row['candidate_id']: i for i, row in enumerate(s['candidates'])}
+    history_ids = {row['article_id']: i for i, row in enumerate(s.get('publisher_history_12h', []))}
+    suspects = []
+    for relation in s['authorized_relations']:
+        left = candidate_ids.get(relation['left_id'])
+        right_map = candidate_ids if relation['scope'] == 'same_run' else history_ids
+        right = right_map.get(relation['right_id'])
+        if left is None or right is None or classes[left] == 'SKIP': continue
+        if relation['scope'] == 'same_run' and classes[right] == 'SKIP': continue
+        suspects.append({'left_ref': f'a{left}',
+            'right_ref': f"{'a' if relation['scope'] == 'same_run' else 'h'}{right}",
+            'basis': 'The two supplied stories may report the same central factual development.'})
     return {"candidates": [{"ref": f"c{i}", "editorial_class": classes[i],
              "recommended_action": actions[i], "category": "NXT", "story_core": f"core {i}"}
-            for i in range(len(s["candidates"]))], "relations": [{"ref": f"r{i}", "decision": "NO_MATCH"}
-            for i in range(len(s["authorized_relations"]))]}
+            for i in range(len(s["candidates"]))], "relations": [],
+            'admission_complete': True, 'suspected_duplicates': suspects}
 
 
 def grounded_duplicate(ref, left_evidence, right_evidence, shared_fact="same confirmed development"):
@@ -107,9 +119,14 @@ def test_active_pair_cache_reuses_final_no_match_and_material_update(monkeypatch
 
 def _dense_relations(value, count):
     left = value["candidates"][0]["candidate_id"]
-    right = value["candidates"][1]["candidate_id"]
+    # Every relation represents a distinct pair, never duplicate aliases for
+    # the same two endpoints (forbidden by sparse admission).
+    value["publisher_history_12h"] = [{"article_id": f"dense-history-{index}",
+        "title": f"Confirmed release development {index}", "summary": "Confirmed release fact"}
+        for index in range(count)]
     return [{
-        "pair_id": f"dense-{index}", "scope": "same_run", "left_id": left, "right_id": right,
+        "pair_id": f"dense-{index}", "scope": "recent_history", "left_id": left,
+        "right_id": f"dense-history-{index}",
         "scorer_version": shadow.menzo_duplicate_scorer.SCORER_VERSION,
         "score": .75, "threshold": shadow.menzo_duplicate_scorer.effective_threshold(),
         "components": {"entity_subject": 1.0},
@@ -119,6 +136,7 @@ def _dense_relations(value, count):
 def test_active_relation_ceiling_applies_after_pr131_hits(monkeypatch):
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     monkeypatch.setattr(pair_cache, "store", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(shadow, "MAX_RELATIONS", 2)
     value = snapshot(2)
     value["authorized_relations"] = _dense_relations(value, shadow.MAX_RELATIONS + 2)
 
@@ -1122,7 +1140,7 @@ def test_active_soft_defer_is_owned_by_ed3_soft_board(monkeypatch, tmp_path):
     assert projected["pending"][0]["soft_board_review_count"] == 0
 
 
-def test_failed_late_active_persistence_restores_every_state_file(monkeypatch, tmp_path):
+def test_failed_late_active_persistence_restores_handoff_but_preserves_skips(monkeypatch, tmp_path):
     s = snapshot(); monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     result = active.evaluate(s, provider=lambda *_: response(s))
     fields = ("SOFTPOOL_FILE", "HARD_SKIP_FILE", "MENZO_DECISIONS_FILE",
@@ -1132,7 +1150,7 @@ def test_failed_late_active_persistence_restores_every_state_file(monkeypatch, t
         path = tmp_path / f"{field}.json"
         monkeypatch.setattr(menzo, field, path)
         if field != "V92_ALLOWED_URLS_FILE":
-            content = f"pre-active-{index}".encode()
+            content = b'{"items": []}' if field == "HARD_SKIP_FILE" else f"pre-active-{index}".encode()
             path.write_bytes(content); before[path] = content
         else:
             before[path] = None
@@ -1146,6 +1164,9 @@ def test_failed_late_active_persistence_restores_every_state_file(monkeypatch, t
     with pytest.raises(OSError, match="late allowed-url failure"):
         active.project(s, result)
     for path, content in before.items():
+        if path == menzo.HARD_SKIP_FILE:
+            assert menzo.source_key('https://ed2.test/2') in menzo.terminal_skip_memory()
+            continue
         assert (path.read_bytes() if path.exists() else None) == content
 
 
@@ -1188,7 +1209,7 @@ def test_active_refinalizes_effective_provider_evidence(monkeypatch):
     assert s["limit_status"] == "exceeded"
 
 
-def test_oversize_exact_collapse_rebuilds_nonexact_suspicion_relations(monkeypatch):
+def test_oversize_exact_collapse_waits_for_semantic_admission(monkeypatch):
     rows = [{"source": "feed", "title": f"Story {i}", "summary": f"Fact {i}",
              "url": f"https://rebuild.test/{i}"} for i in range(shadow.MAX_CANDIDATES + 1)]
     def score(left, right):
@@ -1206,13 +1227,9 @@ def test_oversize_exact_collapse_rebuilds_nonexact_suspicion_relations(monkeypat
     active.prepare_snapshot(s)
     assert s["limit_status"] != "exceeded" and s["observed"]["candidate_count"] == shadow.MAX_CANDIDATES
     assert len(s["deterministic_exact_skips"]) == 1
-    assert len(s["authorized_relations"]) == 1
-    relation = s["authorized_relations"][0]
-    retained = {item["candidate_id"]: item["url"] for item in s["candidates"]}
-    assert {retained[relation["left_id"]], retained[relation["right_id"]]} == {
-        "https://rebuild.test/2", "https://rebuild.test/3"}
+    assert s["authorized_relations"] == []
     provider_relations = active.active_provider_input(s)["authorized_relations"]
-    assert len(provider_relations) == 1 and provider_relations[0]["ref"] == "r0"
+    assert provider_relations == []
 
 
 def test_primary_validation_is_not_a_pacing_capacity_bound(monkeypatch):
@@ -1268,6 +1285,7 @@ def test_hidden_capacity_metadata_preserves_six_hard_news_selects(monkeypatch, t
         "recommended_action": "SELECT", "category": "WWE", "story_core": f"core {i}"}
         for i in range(6)], "relations": [{"ref": f"r{i}", "decision": "NO_MATCH"}
         for i in range(len(s["authorized_relations"]))]}
+    out.update(admission_complete=True, suspected_duplicates=[])
     result = active.evaluate(s, provider=lambda *_: out)
     assert result["status"] == "VALIDATED"
     for field in ("SOFTPOOL_FILE", "HARD_SKIP_FILE", "MENZO_DECISIONS_FILE",
@@ -1474,7 +1492,7 @@ def test_active_artifact_preserves_gate_and_classification_provenance(monkeypatc
         return response(s, ("SELECT",))
     result = active.evaluate(s, provider=provider)
     assert result["status"] == "VALIDATED"
-    assert result["duplicate_gate_input_digest"] == pre_gate_digest
+    assert result["duplicate_gate_input_digest"] != pre_gate_digest
     assert result["input_digest"] != pre_gate_digest
     assert result["editorial_prefilter"]["classified"] == 2
     assert result["logical_request_id"] != result["duplicate_gate_logical_request_id"]
@@ -1493,7 +1511,7 @@ def test_active_artifact_preserves_gate_and_classification_provenance(monkeypatc
     assert eliminated["semantic_duplicate_scope"] == "same_run"
     assert eliminated["semantic_duplicate_of"] == survivor["candidate"]["candidate_id"]
     assert eliminated["duplicate_gate_logical_request_id"] == result["duplicate_gate_logical_request_id"]
-    assert eliminated["duplicate_gate_input_digest"] == pre_gate_digest
+    assert eliminated["duplicate_gate_input_digest"] == result["duplicate_gate_input_digest"]
     assert "logical_request_id" not in eliminated and "input_digest" not in eliminated
     assert eliminated["relations"][0]["decision"] == "DUPLICATE"
     assert eliminated["relations"][0]["left_evidence"]

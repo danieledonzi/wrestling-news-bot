@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "candidates",
+    "relations",
+    "admission_complete",
+    "suspected_duplicates"
+  ],
+  "properties": {
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "ref",
+          "editorial_class",
+          "recommended_action",
+          "category",
+          "story_core"
+        ],
+        "properties": {
+          "ref": {
+            "type": "string",
+            "pattern": "^c[0-9]+$"
+          },
+          "editorial_class": {
+            "enum": [
+              "MUST_PUBLISH",
+              "SHOULD_PUBLISH",
+              "PUBLISHABLE_SOFT",
+              "SKIP"
+            ]
+          },
+          "recommended_action": {
+            "enum": [
+              "SELECT",
+              "DEFER",
+              "SKIP"
+            ]
+          },
+          "category": {
+            "enum": [
+              "WWE",
+              "AEW",
+              "NXT",
+              "TNA",
+              "ROH",
+              "World",
+              "Business"
+            ]
+          },
+          "story_core": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "ref",
+          "decision"
+        ],
+        "properties": {
+          "ref": {
+            "type": "string",
+            "pattern": "^r[0-9]+$"
+          },
+          "decision": {
+            "enum": [
+              "DUPLICATE",
+              "MATERIAL_UPDATE",
+              "NO_MATCH"
+            ]
+          },
+          "shared_fact": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "new_fact": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "temporal_basis": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "admission_complete": {
+      "type": "boolean"
+    },
+    "suspected_duplicates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "left_ref",
+          "right_ref",
+          "basis"
+        ],
+        "properties": {
+          "left_ref": {
+            "type": "string",
+            "pattern": "^a[0-9]+$"
+          },
+          "right_ref": {
+            "type": "string",
+            "pattern": "^[ah][0-9]+$"
+          },
+          "basis": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          }
+        }
+      }
+    }
+  }
+}

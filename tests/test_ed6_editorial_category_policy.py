@@ -47,7 +47,8 @@ def classification(classes):
     return {"candidates": [{"ref": f"c{i}", "editorial_class": cls,
              "recommended_action": {"SKIP": "SKIP", "PUBLISHABLE_SOFT": "DEFER"}.get(cls, "SELECT"),
              "category": "WWE", "story_core": "Central fact and its editorial value"}
-            for i, cls in enumerate(classes)], "relations": []}
+            for i, cls in enumerate(classes)], "relations": [],
+            "admission_complete": True, "suspected_duplicates": []}
 
 
 def test_mixed_categories_remove_weak_soft_before_relation_work(monkeypatch):
@@ -62,10 +63,13 @@ def test_mixed_categories_remove_weak_soft_before_relation_work(monkeypatch):
     snapshot = shadow.capture_opportunity({"news_candidates_for_menzo": rows}, run_id="ed6",
         observation_timestamp="2026-10-10T08:00:00Z", history=[], defer_relation_build=True)
     observed = []
-    def relations(eligible, history, **_):
-        observed.extend(row["url"] for row in eligible)
-        return [], True
-    monkeypatch.setattr(shadow, "build_authorized_relations", relations)
+    original_gate = active._evaluate_duplicate_stage
+    def gate(snapshot, **kwargs):
+        observed.extend(row['url'] for row in snapshot['candidates'])
+        return original_gate(snapshot, **kwargs)
+    monkeypatch.setattr(active, '_evaluate_duplicate_stage', gate)
+    monkeypatch.setattr(shadow, 'build_authorized_relations', lambda *_args, **_kwargs:
+                        pytest.fail('lexical overlap cannot admit Active pairs'))
     prompts = []
     def provider(prompt, *_):
         prompts.append(prompt)
