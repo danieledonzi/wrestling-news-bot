@@ -42,6 +42,11 @@ def primary_class(row: dict) -> str | None:
     return (director.get("editorial_class") if isinstance(director, dict) else None) or row.get("editorial_class")
 
 
+def run_time(row: dict) -> datetime | None:
+    from scripts.observability_snapshot import master_run_timestamp
+    return master_run_timestamp(row)
+
+
 def state_rows(data: dict | None, field: str, errors: list[str], name: str) -> Any:
     """An absent or malformed collection is unavailable, not an empty pool."""
     value = (data or {}).get(field)
@@ -117,10 +122,8 @@ def economic_sections(root: Path, since: datetime, until: datetime) -> dict:
 def analyze_runs(runs: list[dict], frozen: dict, closed: dict, since: datetime, until: datetime,
                  *, complete: bool) -> dict:
     """Counts are URL sets or explicitly labelled run observations, never their sum."""
-    bounded = sorted((r for r in runs if stamp(r.get("run", {}).get("started_at")) and
-                      since <= stamp(r["run"]["started_at"]) <= until), key=lambda r: r["run"]["started_at"])
-    before = [r for r in runs if stamp(r.get("run", {}).get("started_at")) and
-              stamp(r["run"]["started_at"]) < since]
+    bounded = sorted((r for r in runs if run_time(r) and since <= run_time(r) <= until), key=run_time)
+    before = [r for r in runs if run_time(r) and run_time(r) < since]
     articles: dict[str, dict] = {}
     observations = Counter()
     mismatches = []
@@ -137,8 +140,14 @@ def analyze_runs(runs: list[dict], frozen: dict, closed: dict, since: datetime, 
     concentration = Counter()
     sample_incomplete = False
     primary_observations = 0
+    skip_chronology_unavailable = 0
     for r in bounded:
-        at = r["run"]["started_at"]
+        # Windowing and ordering share the master contract. Skip chronology
+        # additionally needs the phase start: a tombstone written inside this
+        # run must not look like a reintroduction when only its end is known.
+        phase_start = stamp((r.get("run") or {}).get("started_at"))
+        skip_chronology_unavailable += phase_start is None
+        at = (phase_start or run_time(r)).isoformat()
         ep = r.get("editorial_pipeline") or {}
         pf = ep.get("prefilter") or {}
         sc = ep.get("scheduling") or {}
@@ -171,7 +180,7 @@ def analyze_runs(runs: list[dict], frozen: dict, closed: dict, since: datetime, 
                                        "observed_class": cl, "stage": stage, "policy_version": version})
                 tomb = closed.get(key)
                 closed_at = stamp((tomb or {}).get("added_at"))
-                if stage in {"primary", "selected", "pending"} and closed_at and closed_at < stamp(at):
+                if stage in {"primary", "selected", "pending"} and closed_at and phase_start and closed_at < phase_start:
                     resurrected.append({"url": key, "at": at, "stage": stage, "closed_at": closed_at.isoformat(),
                                         "policy_version": version})
                 if stage == "published":
@@ -194,7 +203,7 @@ def analyze_runs(runs: list[dict], frozen: dict, closed: dict, since: datetime, 
                 if key:
                     concentration[key] += 1
                     closed_at = stamp((closed.get(key) or {}).get("added_at"))
-                    if closed_at and closed_at < stamp(at):
+                    if closed_at and phase_start and closed_at < phase_start:
                         skipped_endpoints.append({"url": key, "at": at, "pair_id": pair, "policy_version": version})
         if "soft_board_status" in sc:
             status = sc["soft_board_status"]
@@ -242,6 +251,7 @@ def analyze_runs(runs: list[dict], frozen: dict, closed: dict, since: datetime, 
             "verdict": "violations_observed" if mismatches else ("no_violation_observed" if complete else "unavailable")},
         "terminal_skip": {"resurrections": resurrected, "skipped_pair_endpoints": skipped_endpoints,
             "endpoint_coverage": "primary_path_url_endpoints; softpool pairs not retained in master projection",
+            "run_chronology_unavailable": skip_chronology_unavailable,
             "undated_tombstones": sum(not stamp(r.get('added_at')) for r in closed.values())},
         "duplicates": {"unique_admitted_pairs_observed": len(relations),
             "admission_records": list(relations.values()),
@@ -252,7 +262,7 @@ def analyze_runs(runs: list[dict], frozen: dict, closed: dict, since: datetime, 
                 if stamp(v.get('added_at')) and since <= stamp(v['added_at']) <= until and
                 (v.get('decision_authority') in {'semantic_duplicate_gate', 'soft_board_duplicate_revalidation', 'deterministic_exact_duplicate'} or 'duplicate' in str(v.get('reason', '')))],
             "concentration_observations": [{"url": u, "endpoint_observations": n} for u, n in concentration.most_common(5)]},
-        "softpool": {"opening_last_observed": pool_rows(max(before, key=lambda r: r["run"]["started_at"]) if before else None),
+        "softpool": {"opening_last_observed": pool_rows(max(before, key=run_time) if before else None),
             "opening_available": bool(before), "closing_last_observed": pool_rows(bounded[-1] if bounded else None),
             "closing_available": bool(bounded) and not bool((bounded[-1].get("menzo") or {}).get("pending_sample_truncated")),
             "admitted_unique": len(soft_admitted), "selected_unique": len(soft_selected),
@@ -300,7 +310,7 @@ def build_report(root: Path = ROOT, *, until: datetime | None = None, hours: int
     skip_items = state_rows(skip_raw, "items", errors, "terminal_skips")
     frozen = {url_key(r): r for r in (frozen_entries or {}).values()}
     closed = {url_key(r): r for r in skip_items or [] if r.get("terminal") is True}
-    dated = [stamp(r.get("run", {}).get("started_at")) for r in runs]
+    dated = [run_time(r) for r in runs]
     dated = [d for d in dated if d and d <= until]
     complete = bool(available and not health.get("master_log_malformed_lines") and dated and min(dated) <= since
                     and frozen_entries is not None and skip_items is not None)
@@ -322,7 +332,7 @@ def build_report(root: Path = ROOT, *, until: datetime | None = None, hours: int
     # Published entries may still exist in the persisted priority queue until its
     # next consumer run; don't turn them into fictitious waiting publications.
     all_published_keys = {url_key(row) for run in runs for row in (run.get("publisher") or {}).get("published", [])
-                          if stamp(run.get("run", {}).get("started_at")) and stamp(run["run"]["started_at"]) <= until}
+                          if run_time(run) and run_time(run) <= until}
     current_state = {}
     for name in ("menzo_softpool", "menzo_priority_queue"):
         data = read_json(root / f"state/newsroom/{name}.json", dict, errors)
@@ -337,8 +347,8 @@ def build_report(root: Path = ROOT, *, until: datetime | None = None, hours: int
             "snapshot_only": True, "items": [{**compact(r), "review_count": r.get("soft_board_review_count"),
                 "soft_board": r.get("soft_board"), "first_seen_at": r.get("soft_board_first_seen_at") or r.get("priority_queue_first_seen_at")}
                 for r in effective]}
-    latest = next((r for r in reversed(sorted(runs, key=lambda r: r["run"]["started_at"]))
-                   if stamp(r["run"]["started_at"]) and stamp(r["run"]["started_at"]) <= until), {})
+    ordered_runs = sorted((r for r in runs if run_time(r) and run_time(r) <= until), key=run_time)
+    latest = ordered_runs[-1] if ordered_runs else {}
     current_version = ((latest.get("editorial_pipeline") or {}).get("prefilter") or {}).get("policy_version")
     analysis['immutability']['current_policy_version'] = current_version
     analysis['immutability']['current_violations'] = [v for v in analysis['immutability']['violations'] if current_version and v['policy_version'] == current_version]
@@ -430,6 +440,7 @@ def render_summary(r: dict) -> str:
         f"Softpool stati per run: {soft['status_run_observations']}",
         f"Variazioni di classe osservate nella policy attuale: {len(life['immutability']['current_violations']) if life['available'] else 'n.d.'}; osservazioni di variazioni storiche: {life['immutability']['historical_violation_observations']}; URL osservati più volte {life['immutability']['urls_observed_multiple_runs']}",
         f"Violazioni osservate skip tombale: rientri {len(life['terminal_skip']['resurrections'])}; endpoint confrontati nel percorso primario {len(life['terminal_skip']['skipped_pair_endpoints'])}",
+        f"Controllo cronologia skip non disponibile per {life['terminal_skip']['run_chronology_unavailable']} run senza ora d'inizio.",
         "Qualità semantica delle classificazioni: richiede verifica delle fonti; non certificata automaticamente.",
         f"Versioni policy nella finestra: {life['policy_versions']}",
         f"Copertura percorso URL settimanale: {r['coverage']['weekly_lifecycle']}; i conteggi incompleti non certificano assenza di problemi."]

@@ -152,6 +152,35 @@ def test_missing_or_truncated_windows_cannot_certify_zeros(tmp_path, monkeypatch
     assert data["daily_note"]["text"] == report.NO_ACTION
 
 
+@pytest.mark.parametrize("start", [None, "absent"])
+def test_accepted_fallback_run_timestamps_do_not_break_report(tmp_path, monkeypatch, start):
+    a = article()
+    rows = [run(SINCE - timedelta(minutes=1)), run(SINCE + timedelta(hours=1), candidates=[a]),
+        run(UNTIL - timedelta(minutes=10), published=[a])]
+    for row in rows:
+        if start == "absent": row["run"].pop("started_at")
+        else: row["run"]["started_at"] = None
+    rows[-1]["recorded_at"] = (UNTIL - timedelta(minutes=5)).isoformat()
+    rows.append({"run": {}, "recorded_at": "invalid"})
+    data = build(tmp_path, sources(tmp_path, monkeypatch, rows, [a], published=[a]))
+    assert data["lifecycle"]["runs_observed"] == 2
+    assert data["lifecycle"]["cohorts"]["PUBLISHABLE_SOFT"]["outcomes"] == {"published": 1}
+    assert data["lifecycle"]["terminal_skip"]["run_chronology_unavailable"] == 2
+    assert data["publications"]["news_unique"] == 1
+
+
+def test_fallback_end_timestamp_does_not_invent_same_run_skip_violation(tmp_path, monkeypatch):
+    a = article("a", "SKIP")
+    row = run(SINCE + timedelta(hours=1), candidates=[a], skipped=[a])
+    tomb = {**a, "terminal": True, "added_at": (SINCE + timedelta(hours=1, seconds=5)).isoformat()}
+    row["run"]["started_at"] = None
+    rows = [run(SINCE - timedelta(minutes=1)), row]
+    data = build(tmp_path, sources(tmp_path, monkeypatch, rows, [a], skips=[tomb]))
+    assert data["lifecycle"]["terminal_skip"]["resurrections"] == []
+    assert data["lifecycle"]["terminal_skip"]["run_chronology_unavailable"] == 1
+    assert data["daily_note"]["text"] == report.NO_ACTION
+
+
 def test_unknown_publication_class_is_not_estimated_from_volume(tmp_path, monkeypatch):
     a = article()
     rows = [run(SINCE - timedelta(minutes=1)), run(SINCE + timedelta(hours=1), published=[a])]

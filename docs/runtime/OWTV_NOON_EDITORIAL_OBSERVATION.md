@@ -32,6 +32,12 @@ duplicate/pool; skip definitivo escluso dalle valutazioni successive; quote
 bookmaker escluse; news del feed MUST/SHOULD autonome durante il live. Il report
 show non sostituisce le news e non viene usato per estrarre nuove notizie.
 
+La finestra e l'ordinamento delle run usano il timestamp canonico master
+(`recorded_at`, poi `run.ended_at`, poi `run.started_at`). Il controllo degli
+skip successivi richiede inoltre l'ora d'inizio: se manca, la cronologia di
+quella run è indisponibile, per evitare falsi rientri causati da uno skip
+registrato durante la stessa esecuzione.
+
 Il corpo mail contiene la sintesi corrente. Allegati: osservazione MD/JSON,
 audit traduzione MD/JSON, indagini MD/JSON, pattern traduzione settimanali
 MD/JSON. Sono allegati solo i risultati della stessa esecuzione: nessun recupero
