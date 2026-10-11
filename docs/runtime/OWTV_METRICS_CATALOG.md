@@ -1,5 +1,14 @@
 # OWTV canonical metrics catalog — v95.22 A1
 
+## Current noon report (11 October 2026)
+
+The production email uses `owtv_editorial_observation_v1`. Its current metric
+contract, coverage limits and dated proposal journal are documented in
+[OWTV_NOON_EDITORIAL_OBSERVATION.md](OWTV_NOON_EDITORIAL_OBSERVATION.md).
+Legacy hard/soft estimates, volume judgments and lexical story clusters are no
+longer part of the noon email. Canonical event and economic authorities below
+remain unchanged.
+
 ## TQ-1 derived quality diagnostics (owtv_tq1_rules_v1)
 
 These are diagnostic_only fields, not replacements for active canonical counters.

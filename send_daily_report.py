@@ -530,6 +530,10 @@ def daily_editorial_judgment_body_section(
         print(f"[DAILY JUDGMENT] skipped/error JSON read failed: {exc}")
         return f"\nSINTESI EDITORIALE AUTOREVOLE\n- JSON non leggibile: {exc}\n"
 
+    if payload.get("schema_version") == "owtv_editorial_observation_v1":
+        from scripts.current_editorial_report import render_summary
+        return "\n" + render_summary(payload) + (f"\nAvviso: {warning}" if warning else "") + "\n"
+
     daily_numbers = payload.get("daily_numbers") if isinstance(payload.get("daily_numbers"), dict) else {}
     canonical = daily_numbers.get("canonical_metrics") if isinstance(daily_numbers.get("canonical_metrics"), dict) else {}
     menzo = canonical.get("menzo") if isinstance(canonical.get("menzo"), dict) else {}
