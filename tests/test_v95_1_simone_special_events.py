@@ -47,9 +47,9 @@ def test_forbidden_door_special_event_candidate_becomes_ready(tmp_path, monkeypa
     result = run_with_candidates(
         [
             {
-                "source": "WrestlingInc",
+                "source": "RingsideNews",
                 "title": "AEW x NJPW Forbidden Door 2026 Results: Full results and recap",
-                "url": "https://www.wrestlinginc.com/aew-forbidden-door-2026-results-full-results-recap/",
+                "url": "https://www.ringsidenews.com/aew-forbidden-door-2026-results-full-results-recap/",
                 "published": "2026-06-29T05:00:00Z",
                 "show_hint": "Forbidden Door results",
             }
@@ -83,9 +83,9 @@ def test_forbidden_door_manual_report_status_is_already_published(tmp_path, monk
     result = run_with_candidates(
         [
             {
-                "source": "WrestlingInc",
+                "source": "RingsideNews",
                 "title": "AEW x NJPW Forbidden Door 2026 Results: Full results and recap",
-                "url": "https://www.wrestlinginc.com/aew-forbidden-door-2026-results-full-results-recap/",
+                "url": "https://www.ringsidenews.com/aew-forbidden-door-2026-results-full-results-recap/",
                 "published": "2026-06-29T05:00:00Z",
                 "show_hint": "Forbidden Door results",
             }
@@ -118,9 +118,9 @@ def test_great_american_bash_manual_run_is_already_published(tmp_path, monkeypat
     result = run_with_candidates(
         [
             {
-                "source": "WrestlingInc",
+                "source": "RingsideNews",
                 "title": "WWE NXT The Great American Bash 2026 Results And Recap",
-                "url": "https://www.wrestlinginc.com/nxt-great-american-bash-2026-results-recap/",
+                "url": "https://www.ringsidenews.com/nxt-great-american-bash-2026-results-recap/",
                 "published": "2026-06-29T05:00:00Z",
                 "show_hint": "NXT Great American Bash results",
             }
@@ -139,9 +139,9 @@ def test_wrestlinginc_report_hint_without_results_word_is_rejected(tmp_path, mon
     result = run_with_candidates(
         [
             {
-                "source": "WrestlingInc",
+                "source": "RingsideNews",
                 "title": "WWE NXT The Great American Bash 2026: Five Championships On The Line & More",
-                "url": "https://www.wrestlinginc.com/2203101/wwe-nxt-the-great-american-bash-2026-five-championships-on-line-more/",
+                "url": "https://www.ringsidenews.com/2203101/wwe-nxt-the-great-american-bash-2026-five-championships-on-line-more/",
                 "kind_hint": "report",
                 "show_hint": "NXT Great American Bash",
                 "article_type": "RESULTS_REPORT",
@@ -160,9 +160,9 @@ def test_preview_card_odds_candidate_does_not_become_ready(tmp_path, monkeypatch
     result = run_with_candidates(
         [
             {
-                "source": "WrestlingInc",
+                "source": "RingsideNews",
                 "title": "WWE NXT Great American Bash 2026 Preview, Card, Start Time And How To Watch",
-                "url": "https://www.wrestlinginc.com/nxt-great-american-bash-2026-preview-card-start-time/",
+                "url": "https://www.ringsidenews.com/nxt-great-american-bash-2026-preview-card-start-time/",
                 "kind_hint": "report",
                 "show_hint": "NXT Great American Bash",
                 "article_type": "RESULTS_REPORT",

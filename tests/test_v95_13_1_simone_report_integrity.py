@@ -37,9 +37,9 @@ def sunday_night_main_event_registry():
 
 def test_noncanonical_snme_results_is_binding_hard_skip_not_news():
     item = {
-        "source": "ringsidenews",
+        "source": "wrestlinginc",
         "title": "Sunday Night Main Event Results, Highlights and Key Moments for September 6, 2026",
-        "url": "https://www.ringsidenews.com/sunday-night-main-event-results-september-6-2026/",
+        "url": "https://www.wrestlinginc.com/sunday-night-main-event-results-september-6-2026/",
     }
     classified = massy.classify_entries([item], set(), set(), sunday_night_main_event_registry())
 
@@ -54,9 +54,9 @@ def test_noncanonical_snme_results_is_binding_hard_skip_not_news():
 
 def test_canonical_snme_results_routes_to_simone_with_structured_identity():
     item = {
-        "source": "wrestlinginc",
+        "source": "ringsidenews",
         "title": "Sunday Night Main Event Results, Highlights and Key Moments for September 6, 2026",
-        "url": "https://www.wrestlinginc.com/sunday-night-main-event-results-september-6-2026/",
+        "url": "https://www.ringsidenews.com/sunday-night-main-event-results-september-6-2026/",
     }
     classified = massy.classify_entries([item], set(), set(), sunday_night_main_event_registry())
 
@@ -64,7 +64,7 @@ def test_canonical_snme_results_routes_to_simone_with_structured_identity():
     assert classified["hard_skipped"] == []
     assert len(classified["report_candidates"]) == 1
     match = classified["report_candidates"][0]["special_event_match"]
-    assert match["canonical_identity"] == "wrestlinginc_results"
+    assert match["canonical_identity"] == "ringsidenews_results"
     assert match["report_key"] == "special_event_wwe_sunday_night_main_event_2026_main_2026_09_06"
 
 
@@ -111,7 +111,7 @@ def test_commentary_about_snme_results_without_matching_date_remains_news():
 
 
 def test_dynamic_special_report_is_reserved_not_menzo(tmp_path: Path):
-    item = {"source": "wrestlinginc", "title": "WWE Saturday Night's Main Event live coverage/results July 18, 2026", "url": "https://wrestlinginc.test/snme-results", "normalized_url": "https://wrestlinginc.test/snme-results", "summary": "July 18, 2026"}
+    item = {"source": "ringsidenews", "title": "WWE Saturday Night's Main Event live coverage/results July 18, 2026", "url": "https://www.ringsidenews.com/snme-results", "normalized_url": "https://www.ringsidenews.com/snme-results", "summary": "July 18, 2026"}
     classified = massy.classify_entries([item], set(), set(), registry())
     assert len(classified["report_candidates"]) == 1
     assert classified["news_candidates_for_menzo"] == []
@@ -123,7 +123,7 @@ def test_dynamic_special_report_is_reserved_not_menzo(tmp_path: Path):
 
 
 def test_snme_resolves_uniquely_with_multiple_wwe_events():
-    item = {"title": "WWE Saturday Night's Main Event live coverage/results July 18, 2026", "url": "https://wrestlinginc.test/snme-results-2026-07-18", "summary": "", "published": "Sat, 18 Jul 2026 23:00:00 GMT"}
+    item = {"title": "WWE Saturday Night's Main Event live coverage/results July 18, 2026", "url": "https://www.ringsidenews.com/snme-results-2026-07-18", "summary": "", "published": "Sat, 18 Jul 2026 23:00:00 GMT"}
     match, reason = dynamic_special_event_match(item, full_wwe_registry())
     assert reason == "canonical_results_match"
     assert match["event_key"] == "snme" and match["night_key"] == "snme_main"
@@ -131,10 +131,10 @@ def test_snme_resolves_uniquely_with_multiple_wwe_events():
     assert match["match_evidence"]["strong_alias"] != "WWE"
 
 
-def test_real_wrestlinginc_snme_date_pattern_crosses_utc_midnight():
+def test_real_ringsidenews_snme_date_pattern_crosses_utc_midnight():
     item = {
         "title": "WWE Saturday Night's Main Event Results 7/18 - Women's Tag Team Title On The Line & More",
-        "url": "https://www.wrestlinginc.com/wwe-saturday-nights-main-event-july-18-results/",
+        "url": "https://www.ringsidenews.com/wwe-saturday-nights-main-event-july-18-results/",
         "summary": "July 18, 2026",
         "published": "2026-07-19T02:15:00Z",
     }
@@ -175,7 +175,7 @@ def test_pending_queue_replays_with_empty_feed_after_publish_time(tmp_path, monk
     import agents.simone as simone
     paths = {name: tmp_path / f"{name}.json" for name in ["PENDING_REPORTS", "SIMONE_DECISIONS_FILE", "ARTIFACT_SIMONE_FILE", "SIMONE_EXPECTED_EVENTS_FILE", "ARTIFACT_EXPECTED_EVENTS_FILE", "REPORT_STATUS_FILE", "REPORT_REGISTRY_FILE", "MANUAL_RUNS_FILE"]}
     for name, path in paths.items(): monkeypatch.setattr(simone, name, path)
-    paths["PENDING_REPORTS"].write_text(json.dumps({"reports": [{"report_key": "special_event_snme_main_2026_07_18", "night_key": "snme_main", "source_url": "https://wrestlinginc.test/snme", "source": "wrestlinginc", "source_title": "SNME results", "title": "SNME results", "date_local": "2026-07-18", "publish_date_local": "2026-07-19", "publish_after": "06:30", "status": "waiting_publish_after", "category": "WWE"}]}), encoding="utf-8")
+    paths["PENDING_REPORTS"].write_text(json.dumps({"reports": [{"report_key": "special_event_snme_main_2026_07_18", "night_key": "snme_main", "source_url": "https://www.ringsidenews.com/snme", "source": "ringsidenews", "source_title": "SNME results", "title": "SNME results", "date_local": "2026-07-18", "publish_date_local": "2026-07-19", "publish_after": "06:30", "status": "waiting_publish_after", "category": "WWE"}]}), encoding="utf-8")
     monkeypatch.setattr(simone, "local_now", lambda: datetime(2026, 7, 19, 7, 0))
     monkeypatch.setattr(simone, "load_effective_registry", lambda: ({"events": []}, {"effective_registry_source": "test"}))
     monkeypatch.setattr(simone, "REPORTS_CONFIG", tmp_path / "reports.json"); (tmp_path / "reports.json").write_text('{"reports": []}', encoding="utf-8")
@@ -187,7 +187,7 @@ def test_pending_queue_replays_with_empty_feed_after_publish_time(tmp_path, monk
 def test_massy_to_simone_creates_special_reservation_before_0630(tmp_path, monkeypatch):
     import json
     import agents.simone as simone
-    item = {"source": "wrestlinginc", "title": "WWE Saturday Night's Main Event live coverage/results", "url": "https://wrestlinginc.test/snme", "normalized_url": "https://wrestlinginc.test/snme", "published": "2026-07-18T23:00:00Z", "summary": ""}
+    item = {"source": "ringsidenews", "title": "WWE Saturday Night's Main Event live coverage/results", "url": "https://www.ringsidenews.com/snme", "normalized_url": "https://www.ringsidenews.com/snme", "published": "2026-07-18T23:00:00Z", "summary": ""}
     board = massy.classify_entries([item], set(), set(), full_wwe_registry())
     paths = {name: tmp_path / f"{name}.json" for name in ["PENDING_REPORTS", "SIMONE_DECISIONS_FILE", "ARTIFACT_SIMONE_FILE", "SIMONE_EXPECTED_EVENTS_FILE", "ARTIFACT_EXPECTED_EVENTS_FILE", "REPORT_STATUS_FILE", "REPORT_REGISTRY_FILE", "MANUAL_RUNS_FILE"]}
     for name, path in paths.items(): monkeypatch.setattr(simone, name, path)
@@ -214,12 +214,12 @@ def test_raw_source_date_is_event_date_and_ambiguous_candidates_are_rejected():
     import agents.simone as simone
     raw = next(row for row in json.loads((Path(__file__).parents[1] / "config" / "reports_v92.json").read_text())["reports"] if row["id"] == "wwe_raw")
     key, show_date, _publish_date = simone.discovery_report_identity(raw, datetime(2026, 7, 21, 7, 0))
-    candidate = {"source": "wrestlinginc", "title": "WWE Raw Results 7/20 - Jacob Fatu Collides With LA Knight", "url": "https://www.wrestlinginc.com/2219333/wwe-raw-july-20-jacob-fatu-la-knight-two-tag-team-matches-more/"}
+    candidate = {"source": "ringsidenews", "title": "WWE Raw Results 7/20 - Jacob Fatu Collides With LA Knight", "url": "https://www.ringsidenews.com/2219333/wwe-raw-july-20-jacob-fatu-la-knight-two-tag-team-matches-more/"}
     chosen, reason = simone.choose_report_candidate([candidate], raw, show_date)
     assert (show_date, key, chosen, reason) == ("2026-07-20", "wwe_raw_2026_07_20", candidate, "canonical_results_match")
-    unrelated = {"source": "wrestlinginc", "title": "WWE SmackDown Results 7/20", "url": "https://www.wrestlinginc.com/wwe-smackdown-july-20/"}
+    unrelated = {"source": "ringsidenews", "title": "WWE SmackDown Results 7/20", "url": "https://www.ringsidenews.com/wwe-smackdown-july-20/"}
     assert simone.choose_report_candidate([unrelated], raw, show_date) == (None, "rejected_conflicting_weekly_identity")
-    duplicate_match = {**candidate, "url": "https://www.wrestlinginc.com/a-second-wwe-raw-results-july-20/"}
+    duplicate_match = {**candidate, "url": "https://www.ringsidenews.com/a-second-wwe-raw-results-july-20/"}
     assert simone.choose_report_candidate([candidate, duplicate_match], raw, show_date) == (candidate, "canonical_results_match")
 
 
@@ -229,7 +229,7 @@ def test_collision_and_ple_and_two_nights_have_distinct_keys():
 
 
 def test_factual_event_news_stays_with_menzo():
-    result = massy.classify_entries([{"source": "wrestlinginc", "title": "Fatal Influence wins the Women's Tag Team Titles at Saturday Night's Main Event", "url": "https://x.test/title-change", "normalized_url": "https://x.test/title-change", "summary": ""}], set(), set(), registry())
+    result = massy.classify_entries([{"source": "ringsidenews", "title": "Fatal Influence wins the Women's Tag Team Titles at Saturday Night's Main Event", "url": "https://x.test/title-change", "normalized_url": "https://x.test/title-change", "summary": ""}], set(), set(), registry())
     assert len(result["news_candidates_for_menzo"]) == 1
 
 
@@ -353,14 +353,14 @@ def test_due_incomplete_page_reaches_workshop_with_readiness_as_diagnostic(tmp_p
         assert job["readiness"]["reason"] == "waiting_source_completion"
         return 42, {"link": "https://wp.test/snme"}
     monkeypatch.setattr(publisher, "run_report_workshop", publish)
-    result = publisher.run_simone_report_publisher({"ready_reports": [{"report_key": "snme", "source_url": "https://x.test/snme", "title": "SNME", "source": "wrestlinginc"}]})
+    result = publisher.run_simone_report_publisher({"ready_reports": [{"report_key": "snme", "source_url": "https://x.test/snme", "title": "SNME", "source": "ringsidenews"}]})
     assert result["results"][0]["status"] == "published"
     assert calls["workshop"] == 1
 
 
 def test_real_raw_zero_unit_candidate_is_processed_after_publish_after(tmp_path, monkeypatch):
     from agents import simone_publisher_v93_18 as publisher
-    url = "https://www.wrestlinginc.com/2219333/wwe-raw-july-20-jacob-fatu-la-knight-two-tag-team-matches-more/"
+    url = "https://www.ringsidenews.com/2219333/wwe-raw-july-20-jacob-fatu-la-knight-two-tag-team-matches-more/"
     pending = tmp_path / "pending.json"
     monkeypatch.setattr(publisher, "PENDING_REPORTS", pending)
     monkeypatch.setattr(publisher, "ARTIFACT_SIMONE_PUBLISH_FILE", tmp_path / "artifact.json")
@@ -372,7 +372,7 @@ def test_real_raw_zero_unit_candidate_is_processed_after_publish_after(tmp_path,
     monkeypatch.setattr(publisher, "wp_ready", lambda: (True, "mock_ok", {}))
     seen = []
     monkeypatch.setattr(publisher, "run_report_workshop", lambda job, *_args: (seen.append(job) or (99, {"link": "https://wp.test/raw"})))
-    report = {"report_key": "wwe_raw_2026_07_20", "date": "2026-07-20", "source_url": url, "source_title": "WWE Raw Results 7/20 - Jacob Fatu Collides With LA Knight", "title": "WWE Raw 20/07/2026", "source": "wrestlinginc"}
+    report = {"report_key": "wwe_raw_2026_07_20", "date": "2026-07-20", "source_url": url, "source_title": "WWE Raw Results 7/20 - Jacob Fatu Collides With LA Knight", "title": "WWE Raw 20/07/2026", "source": "ringsidenews"}
     result = publisher.run_simone_report_publisher({"ready_reports": [report]})
     assert result["results"][0]["status"] == "published"
     assert seen[0]["report_key"] == "wwe_raw_2026_07_20"
@@ -397,7 +397,7 @@ def test_collision_and_ple_are_attempted_independently(tmp_path, monkeypatch):
             raise RuntimeError("isolated failure")
         return 42, {"link": "https://wp.test/ple"}
     monkeypatch.setattr(publisher, "run_report_workshop", publish)
-    reports = [{"report_key": "collision", "source_url": "https://x.test/collision", "title": "Collision", "source": "wrestlinginc"}, {"report_key": "ple", "source_url": "https://x.test/ple", "title": "PLE", "source": "wrestlinginc"}]
+    reports = [{"report_key": "collision", "source_url": "https://x.test/collision", "title": "Collision", "source": "ringsidenews"}, {"report_key": "ple", "source_url": "https://x.test/ple", "title": "PLE", "source": "ringsidenews"}]
     result = publisher.run_simone_report_publisher({"ready_reports": reports})
     assert attempted == ["collision", "ple"]
     assert {x["status"] for x in result["results"]} == {"publish_error", "published"}

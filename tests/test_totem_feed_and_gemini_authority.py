@@ -163,7 +163,7 @@ def test_active_report_presence_cannot_drop_feed_news_at_massy(monkeypatch):
 
 
 def test_report_body_cannot_manufacture_news_urls():
-    report = {"source": "wrestlinginc", "url": "https://www.wrestlinginc.com/smackdown-results-10-9-2026/",
+    report = {"source": "ringsidenews", "url": "https://www.ringsidenews.com/smackdown-results-10-9-2026/",
         "title": "WWE SmackDown Results 10/9/2026", "summary": "Trick Williams wins. GUNTHER attacks Finn Balor. Women's titles change hands."}
     result = massy.classify_entries([report], set(), set())
     assert len(result["report_candidates"]) == 1 and result["news_candidates_for_menzo"] == []

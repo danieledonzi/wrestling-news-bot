@@ -11,7 +11,7 @@ from urllib.parse import urlparse
 
 import requests
 
-from modules.report_workshop_v92 import run_report_workshop, scrape_article
+from modules.report_workshop_v92 import run_report_workshop, scrape_report_article as scrape_article
 from modules.simone_report_integrity import PENDING_REPORTS, normalize_url, report_readiness
 from agents.canonical_event_ledger import active_event
 

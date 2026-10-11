@@ -7,7 +7,7 @@ from modules.simone_report_integrity import candidate_date_evidence, dynamic_spe
 from agents import simone_publisher_v93_18 as report_publisher
 
 ROME = ZoneInfo("Europe/Rome")
-ALL_IN_URL = "https://www.wrestlinginc.com/2247073/aew-all-in-2026-results"
+ALL_IN_URL = "https://www.ringsidenews.com/2247073/aew-all-in-2026-results"
 
 
 def registry():
@@ -24,7 +24,7 @@ def event_report(key, now=datetime(2026, 8, 31, 6, 30, tzinfo=ROME)):
 
 
 def candidate(title, url=ALL_IN_URL, published="Sun, 30 Aug 2026 23:00:00 GMT"):
-    return {"source": "wrestlinginc", "title": title, "url": url, "published": published}
+    return {"source": "ringsidenews", "title": title, "url": url, "published": published}
 
 
 def weekly(report_id):
@@ -36,8 +36,8 @@ def test_all_in_accepts_only_canonical_results_identity():
     report = event_report("aew_all_in_2026")
     canonical = candidate("AEW All In 2026 Results - Ospreay Vs. Omega, Mone Vs. Nightingale, Casino Gauntlet")
     assert simone.candidate_matches_special_report(canonical, report) == (True, "canonical_results_match")
-    pyro = candidate("Tony Khan Downplays Report About Restricted Pyro At Wembley Stadium For AEW All In", "https://www.wrestlinginc.com/pyro-all-in")
-    spoiler = candidate("Backstage Spoiler On Major AEW All In 2026 Expected Match Result", "https://www.wrestlinginc.com/all-in-spoiler")
+    pyro = candidate("Tony Khan Downplays Report About Restricted Pyro At Wembley Stadium For AEW All In", "https://www.ringsidenews.com/pyro-all-in")
+    spoiler = candidate("Backstage Spoiler On Major AEW All In 2026 Expected Match Result", "https://www.ringsidenews.com/all-in-spoiler")
     assert simone.candidate_matches_special_report(pyro, report) == (False, "rejected_non_results_event_article")
     assert simone.candidate_matches_special_report(spoiler, report) == (False, "rejected_non_results_event_article")
     chosen, reason = simone.choose_special_report_candidate([pyro, spoiler], report)
@@ -46,7 +46,7 @@ def test_all_in_accepts_only_canonical_results_identity():
 
 def test_heatwave_identity_date_due_time_and_weekly_conflict():
     report = event_report("nxt_heatwave_2026")
-    heatwave = candidate("WWE NXT Heatwave Results 8/30 - Several Championships Up For Grabs, Submission Match", "https://www.wrestlinginc.com/nxt-heatwave-results-8-30")
+    heatwave = candidate("WWE NXT Heatwave Results 8/30 - Several Championships Up For Grabs, Submission Match", "https://www.ringsidenews.com/nxt-heatwave-results-8-30")
     assert report["date"] == "2026-08-30"
     assert report["due_at_local"] == "2026-08-31T06:30:00+02:00"
     assert simone.candidate_matches_special_report(heatwave, report) == (True, "canonical_results_match")
@@ -71,13 +71,13 @@ def test_weekly_legitimate_nxt_dynamite_and_collision_continue():
         ("aew_collision", "AEW Collision Results 8/29 - Main Event", "2026-08-29"),
     ]
     for report_id, title, date_iso in cases:
-        item = candidate(title, f"https://www.wrestlinginc.com/{report_id}-results", published=f"{date_iso}T23:00:00+00:00")
+        item = candidate(title, f"https://www.ringsidenews.com/{report_id}-results", published=f"{date_iso}T23:00:00+00:00")
         assert simone.candidate_matches_report(item, weekly(report_id), date_iso)
 
 
 def test_canonical_reservation_displaces_wrong_pending_identity(tmp_path):
     path = tmp_path / "pending.json"
-    path.write_text(json.dumps({"reports": [{"report_key": "special_event_all_in", "normalized_url": "https://www.wrestlinginc.com/pyro", "source_url": "https://www.wrestlinginc.com/pyro", "status": "waiting_publish_after"}]}))
+    path.write_text(json.dumps({"reports": [{"report_key": "special_event_all_in", "normalized_url": "https://www.ringsidenews.com/pyro", "source_url": "https://www.ringsidenews.com/pyro", "status": "waiting_publish_after"}]}))
     row = reserve_report(candidate("AEW All In 2026 Results", ALL_IN_URL), {"report_key": "special_event_all_in"}, now=datetime(2026, 8, 30, 23, tzinfo=ROME), pending_path=path)
     state = json.loads(path.read_text())["reports"]
     assert row["normalized_url"] == ALL_IN_URL
@@ -87,7 +87,7 @@ def test_canonical_reservation_displaces_wrong_pending_identity(tmp_path):
 
 def test_unrelated_url_does_not_prove_report_key_published():
     report = {**event_report("aew_all_in_2026"), "source_url": ALL_IN_URL}
-    wrong = {report["report_key"]: {"status": "published", "source_url": "https://www.wrestlinginc.com/pyro", "wp_post_id": 1}}
+    wrong = {report["report_key"]: {"status": "published", "source_url": "https://www.ringsidenews.com/pyro", "wp_post_id": 1}}
     correct = {report["report_key"]: {"status": "published", "source_url": ALL_IN_URL, "wp_post_id": 2}}
     assert not simone.report_already_published(report, wrong, {"items": []}, [])
     assert simone.report_already_published(report, correct, {"items": []}, [])
@@ -99,7 +99,7 @@ def test_published_weekly_canonical_url_skips_once_without_reservation(tmp_path,
     reports_path = tmp_path / "reports.json"
     reports_path.write_text(json.dumps({"reports": [report]}))
     monkeypatch.setattr(simone, "REPORTS_CONFIG", reports_path)
-    source_url = "https://www.wrestlinginc.com/wwe-raw-results-8-24"
+    source_url = "https://www.ringsidenews.com/wwe-raw-results-8-24"
     paths["REPORT_STATUS_FILE"].write_text(json.dumps({"wwe_raw_2026_08_24": {"status": "published", "source_url": source_url}}))
 
     result = simone.run_simone({"report_candidates": [candidate("WWE Raw Results 8/24 - Main Event", source_url)]})
@@ -116,7 +116,7 @@ def test_published_structured_special_skips_once_without_reservation(tmp_path, m
     monkeypatch.setattr(simone, "REPORTS_CONFIG", reports_path)
     canonical = _with_structured_match(candidate("AEW All In 2026 Results", ALL_IN_URL), cfg)
     paths["REPORT_REGISTRY_FILE"].write_text(json.dumps({"items": [
-        {"source_url": "https://www.wrestlinginc.com/stale-all-in-preview", "wp_post_id": 40, "wp_link": "https://oww.test/40"},
+        {"source_url": "https://www.ringsidenews.com/stale-all-in-preview", "wp_post_id": 40, "wp_link": "https://oww.test/40"},
         {"source_url": ALL_IN_URL + "/?utm_source=test", "wp_post_id": 41, "wp_link": "https://oww.test/41"},
     ]}))
 
@@ -136,7 +136,7 @@ def test_two_distinct_reports_same_morning_are_both_canonical():
     heatwave = event_report("nxt_heatwave_2026")
     assert all_in["report_key"] != heatwave["report_key"]
     assert simone.candidate_matches_special_report(candidate("AEW All In 2026 Results"), all_in)[0]
-    assert simone.candidate_matches_special_report(candidate("WWE NXT Heatwave Results 8/30", "https://www.wrestlinginc.com/heatwave-results"), heatwave)[0]
+    assert simone.candidate_matches_special_report(candidate("WWE NXT Heatwave Results 8/30", "https://www.ringsidenews.com/heatwave-results"), heatwave)[0]
 
 
 def test_rome_0630_boundary_in_cest_and_cet_including_pending():
@@ -157,7 +157,7 @@ def test_explicit_wrong_date_cannot_be_overridden_by_feed_timestamp():
     report = event_report("nxt_heatwave_2026")
     wrong = candidate(
         "WWE NXT Heatwave Results 8/29 - Championships On The Line",
-        "https://www.wrestlinginc.com/nxt-heatwave-results-8-29",
+        "https://www.ringsidenews.com/nxt-heatwave-results-8-29",
         published="Sun, 30 Aug 2026 23:00:00 GMT",
     )
     assert simone.candidate_matches_special_report(wrong, report) == (False, "rejected_non_results_event_article")
@@ -167,12 +167,12 @@ def test_plural_results_identity_is_not_vetoed_by_outcome_words():
     report = {"aliases": ["SummerSlam", "WWE SummerSlam"], "date": "2026-08-30"}
     genuine = candidate(
         "WWE SummerSlam Results 8/30 - Cody Rhodes Wins, Roman Reigns Returns",
-        "https://www.wrestlinginc.com/wwe-summerslam-results-8-30",
+        "https://www.ringsidenews.com/wwe-summerslam-results-8-30",
     )
     assert simone.candidate_matches_special_report(genuine, report) == (True, "canonical_results_match")
     singular = candidate(
         "Backstage Spoiler On Major SummerSlam Expected Match Result 8/30",
-        "https://www.wrestlinginc.com/summerslam-expected-result-8-30",
+        "https://www.ringsidenews.com/summerslam-expected-result-8-30",
     )
     assert simone.candidate_matches_special_report(singular, report) == (False, "rejected_non_results_event_article")
 
@@ -200,7 +200,7 @@ def _with_structured_match(item, cfg):
 def test_first_canonical_url_wins_same_run(tmp_path, monkeypatch):
     paths, cfg = _isolated_simone(tmp_path, monkeypatch, datetime(2026, 8, 31, 6, 30, tzinfo=ROME))
     one = _with_structured_match(candidate("AEW All In 2026 Results", ALL_IN_URL), cfg)
-    two_url = "https://www.wrestlinginc.com/another-all-in-2026-results"
+    two_url = "https://www.ringsidenews.com/another-all-in-2026-results"
     two = _with_structured_match(candidate("AEW All In 2026 Results - Live", two_url), cfg)
     result = simone.run_simone({"report_candidates": [one, two]})
     key = one["special_event_match"]["report_key"]
@@ -217,7 +217,7 @@ def test_first_canonical_url_wins_same_run(tmp_path, monkeypatch):
 def test_pending_heatwave_replay_preserves_owtv_title(tmp_path, monkeypatch):
     paths, cfg = _isolated_simone(tmp_path, monkeypatch, datetime(2026, 8, 31, 6, 0, tzinfo=ROME))
     source_title = "WWE NXT Heatwave Results 8/30 - Several Championships Up For Grabs, Submission Match"
-    heatwave = _with_structured_match(candidate(source_title, "https://www.wrestlinginc.com/nxt-heatwave-results-8-30"), cfg)
+    heatwave = _with_structured_match(candidate(source_title, "https://www.ringsidenews.com/nxt-heatwave-results-8-30"), cfg)
     before = simone.run_simone({"report_candidates": [heatwave]})
     assert not before["ready_reports"]
     monkeypatch.setattr(simone, "local_now", lambda: datetime(2026, 8, 31, 6, 30, tzinfo=ROME))
@@ -229,7 +229,7 @@ def test_pending_heatwave_replay_preserves_owtv_title(tmp_path, monkeypatch):
 
 def test_summary_cannot_create_results_or_event_identity():
     report = event_report("aew_all_in_2026")
-    item = candidate("Tony Khan Discusses Wembley Pyro", "https://www.wrestlinginc.com/tony-khan-pyro")
+    item = candidate("Tony Khan Discusses Wembley Pyro", "https://www.ringsidenews.com/tony-khan-pyro")
     item["summary"] = "AEW All In 2026 Results 8/30 full report"
     match, reason = dynamic_special_event_match(item, config())
     assert match is None and reason == "rejected_non_results_event_article"
@@ -250,7 +250,7 @@ def test_pending_replay_uses_rome_boundary_in_summer_and_winter(tmp_path, monkey
         report_cfg = {
             "id": "wwe_raw", "enabled": True, "show_name": "WWE Raw",
             "expected_day_after": expected_day, "show_date_offset_days": 1,
-            "publish_after": "06:30", "preferred_source": "wrestlinginc",
+            "publish_after": "06:30", "preferred_source": "ringsidenews",
             "category": "WWE", "editorial_category": "Editoriali",
             "title_template": "WWE Raw del {date_it} - risultati e momenti salienti",
         }
@@ -265,9 +265,9 @@ def test_pending_replay_uses_rome_boundary_in_summer_and_winter(tmp_path, monkey
         source_title = f"WWE Raw Results {int(show_date[5:7])}/{int(show_date[8:])} - Main Event"
         row = {
             "report_key": f"wwe_raw_{show_date.replace('-', '_')}", "report_id": "wwe_raw",
-            "source_url": f"https://www.wrestlinginc.com/wwe-raw-results-{show_date}",
-            "normalized_url": f"https://www.wrestlinginc.com/wwe-raw-results-{show_date}",
-            "source": "wrestlinginc", "source_title": source_title,
+            "source_url": f"https://www.ringsidenews.com/wwe-raw-results-{show_date}",
+            "normalized_url": f"https://www.ringsidenews.com/wwe-raw-results-{show_date}",
+            "source": "ringsidenews", "source_title": source_title,
             "date_local": show_date, "publish_date_local": publish_date,
             "publish_after": "06:30", "status": "waiting_publish_after",
         }
@@ -305,9 +305,9 @@ def test_invalid_old_pending_url_does_not_veto_current_canonical(tmp_path, monke
     key = canonical["special_event_match"]["report_key"]
     pyro = {
         "report_key": key, "report_id": canonical["special_event_match"]["night_key"],
-        "night_key": canonical["special_event_match"]["night_key"], "source": "wrestlinginc",
-        "source_url": "https://www.wrestlinginc.com/tony-khan-pyro-all-in",
-        "normalized_url": "https://www.wrestlinginc.com/tony-khan-pyro-all-in",
+        "night_key": canonical["special_event_match"]["night_key"], "source": "ringsidenews",
+        "source_url": "https://www.ringsidenews.com/tony-khan-pyro-all-in",
+        "normalized_url": "https://www.ringsidenews.com/tony-khan-pyro-all-in",
         "source_title": "Tony Khan Downplays Report About Restricted Pyro At Wembley Stadium For AEW All In",
         "date_local": "2026-08-30", "publish_date_local": "2026-08-31",
         "publish_after": "06:30", "status": "waiting_publish_after",
@@ -329,8 +329,8 @@ def test_terminal_pending_row_is_never_rewritten_by_collision_scan(tmp_path, mon
     canonical = _with_structured_match(candidate("AEW All In 2026 Results", ALL_IN_URL), cfg)
     key = canonical["special_event_match"]["report_key"]
     terminal = {
-        "report_key": key, "source_url": "https://www.wrestlinginc.com/old",
-        "normalized_url": "https://www.wrestlinginc.com/old", "status": "published",
+        "report_key": key, "source_url": "https://www.ringsidenews.com/old",
+        "normalized_url": "https://www.ringsidenews.com/old", "status": "published",
         "canonical_source_locked": True,
     }
     paths["PENDING_REPORTS"].write_text(json.dumps({"reports": [terminal]}))
@@ -362,7 +362,7 @@ def test_publisher_history_requires_matching_canonical_url(tmp_path, monkeypatch
     incoming = {"report_key": "all_in", "source_url": ALL_IN_URL, "title": "AEW All In"}
     for stored, expected_already in [
         ({"report_key": "all_in", "wp_post_id": 1}, 0),
-        ({"report_key": "all_in", "source_url": "https://www.wrestlinginc.com/wrong", "wp_post_id": 1}, 0),
+        ({"report_key": "all_in", "source_url": "https://www.ringsidenews.com/wrong", "wp_post_id": 1}, 0),
         ({"report_key": "all_in", "source_url": ALL_IN_URL + "/?utm_source=x", "wp_post_id": 1}, 1),
     ]:
         report_publisher.SIMONE_REPORT_HISTORY_FILE.write_text(json.dumps({"all_in": stored}))
@@ -380,7 +380,7 @@ def test_structured_match_cannot_override_explicit_weekly_identity(tmp_path, mon
     }
     weekly_item = candidate(
         "WWE NXT Results 9/12 - No Mercy Championship Matches",
-        "https://www.wrestlinginc.com/wwe-nxt-results-no-mercy-9-12",
+        "https://www.ringsidenews.com/wwe-nxt-results-no-mercy-9-12",
         published="2026-09-13T01:00:00Z",
     )
     match, reason = dynamic_special_event_match(weekly_item, effective)
@@ -389,7 +389,7 @@ def test_structured_match_cannot_override_explicit_weekly_identity(tmp_path, mon
     weekly_item["special_event_match"] = {
         "report_key": "special_event_nxt_no_mercy_2026_main_2026_09_12",
         "night_key": "nxt_no_mercy_2026_main", "date_local": "2026-09-12",
-        "canonical_identity": "wrestlinginc_results", "aliases": ["NXT No Mercy", "No Mercy"],
+        "canonical_identity": "ringsidenews_results", "aliases": ["NXT No Mercy", "No Mercy"],
         "match_evidence": {"strong_alias": "No Mercy", "alias_hits": ["No Mercy"]},
     }
     weekly_nxt = weekly("wwe_nxt")
@@ -410,7 +410,7 @@ def test_structured_match_cannot_override_explicit_weekly_identity(tmp_path, mon
 
     genuine = candidate(
         "WWE NXT No Mercy Results 9/12 - Championship Matches",
-        "https://www.wrestlinginc.com/wwe-nxt-no-mercy-results-9-12",
+        "https://www.ringsidenews.com/wwe-nxt-no-mercy-results-9-12",
         published="2026-09-13T01:00:00Z",
     )
     genuine_match, genuine_reason = dynamic_special_event_match(genuine, effective)
@@ -425,7 +425,7 @@ def test_structured_match_cannot_override_explicit_weekly_identity(tmp_path, mon
 def test_existing_special_lock_survives_later_candidate_and_empty_feed(tmp_path, monkeypatch):
     paths, cfg = _isolated_simone(tmp_path, monkeypatch, datetime(2026, 8, 31, 6, 0, tzinfo=ROME))
     first = _with_structured_match(candidate("AEW All In 2026 Results", ALL_IN_URL), cfg)
-    alternate_url = "https://www.wrestlinginc.com/later-all-in-2026-results"
+    alternate_url = "https://www.ringsidenews.com/later-all-in-2026-results"
     later = _with_structured_match(candidate("AEW All In 2026 Results - Alternate", alternate_url), cfg)
     assert simone.run_simone({"report_candidates": [first]})["ready_reports"] == []
     monkeypatch.setattr(simone, "local_now", lambda: datetime(2026, 8, 31, 6, 30, tzinfo=ROME))
@@ -448,7 +448,7 @@ def test_weekly_first_valid_source_lock_wins_over_later_alternate(tmp_path, monk
     report_cfg = {
         "id": "wwe_raw", "enabled": True, "show_name": "WWE Raw",
         "expected_day_after": "Tuesday", "show_date_offset_days": 1,
-        "publish_after": "06:30", "preferred_source": "wrestlinginc",
+        "publish_after": "06:30", "preferred_source": "ringsidenews",
         "category": "WWE", "editorial_category": "Editoriali",
         "title_template": "WWE Raw del {date_it} - risultati e momenti salienti",
     }
@@ -460,11 +460,11 @@ def test_weekly_first_valid_source_lock_wins_over_later_alternate(tmp_path, monk
     simone.REPORT_STATUS_FILE.write_text("{}")
     simone.REPORT_REGISTRY_FILE.write_text('{"items": []}')
     simone.MANUAL_RUNS_FILE.write_text("[]")
-    first_url = "https://www.wrestlinginc.com/wwe-raw-results-8-24"
-    alternate_url = "https://www.wrestlinginc.com/alternate-wwe-raw-results-8-24"
+    first_url = "https://www.ringsidenews.com/wwe-raw-results-8-24"
+    alternate_url = "https://www.ringsidenews.com/alternate-wwe-raw-results-8-24"
     identity = {
         "report_key": "wwe_raw_2026_08_24", "report_id": "wwe_raw",
-        "event_identity": "WWE Raw", "canonical_identity": "wrestlinginc_results",
+        "event_identity": "WWE Raw", "canonical_identity": "ringsidenews_results",
         "date_local": "2026-08-24", "publish_date_local": "2026-08-25", "publish_after": "06:30",
     }
     reserve_report(candidate("WWE Raw Results 8/24 - Main Event", first_url), identity, now=now, pending_path=simone.PENDING_REPORTS)

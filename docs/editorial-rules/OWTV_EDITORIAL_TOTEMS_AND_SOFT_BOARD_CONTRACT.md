@@ -4,6 +4,7 @@
 **Scope:** Editorial Director authority, duplicate safety, soft-pool lifecycle, daily pacing
 **Timezone authority:** Europe/Rome
 **Frozen on:** 2026-10-07
+**Owner-approved report amendment:** 2026-10-11 — TOTEM-R01/R02 in `docs/OWTV_TOTEM_INVARIANTS.md`: Ringside source, complete ordered reports and PLE/PPV-only pre-show collapse.
 **Owner-approved revision:** 2026-10-09 — primary eligibility before semantic duplicates; persistent SHOULD overflow; live show coverage.
 **Owner-approved clarification:** 2026-10-10 — feed-URL news only, autonomous reports, and final Gemini semantic decisions.
 **Additional owner-approved clarification:** 2026-10-10 — terminal SKIP isolation and bookmaker exclusion, under TOTEM-S01/N02.
