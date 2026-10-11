@@ -1206,6 +1206,11 @@ def email_summary(report: dict[str, Any]) -> str:
 
 
 def generate_daily_editorial_judgment_outputs(paths: dict[str, Path] | None = None, output_dir: Path = REPORTS_DIR, state_dir: Path = STATE_REPORTS_DIR, now: datetime | None = None, hours: int = 24) -> dict[str, Path]:
+    if paths is None:
+        # Explicit historical fixtures retain their legacy parser. Production
+        # generation reads the current newsroom contract directly.
+        from scripts.current_editorial_report import generate_outputs
+        return generate_outputs(ROOT, until=now, hours=hours, output_dir=output_dir, state_dir=state_dir)
     data = load_inputs(paths, hours=hours, now=now)
     status = data.get("__artifact_status__", {})
     report = build_report(data, generated_at=now, source_artifacts_used=list(status.get("used") or []), missing_artifacts=list(status.get("missing") or []))

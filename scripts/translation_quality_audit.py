@@ -1006,7 +1006,7 @@ def markdown_report(rows: list[ArticleAudit], hours: int, generated_at: str, aut
         "official_title_translated": "Maintain a protected glossary of WWE/AEW/TNA/ROH championship and event names that must remain official.",
         "mojibake_or_broken_accents": "Add UTF-8 normalization/repair checks before review packaging and before WordPress publication.",
         "published_text_too_short_vs_original": "Review summarization thresholds for long source items; require preserving all material facts when adapting.",
-        "betting_odds_article_published": "Consider a hard diagnostic guardrail for sportsbook/odds-only stories unless editorially approved.",
+        "betting_odds_article_published": "Review source evidence against TOTEM-N02: bookmaker odds articles are excluded; a lexical match alone does not establish a violation.",
     }
     for issue, text in suggestions.items():
         if issue_counts.get(issue, 0) >= 3:
