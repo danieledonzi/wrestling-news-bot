@@ -23,6 +23,7 @@ PENDING_REPORTS = ROOT / "state" / "newsroom" / "simone_pending_reports.json"
 SCHEDULE_REPORT_DIR = ROOT / "reports"
 SCHEDULE_RUNTIME_DIR = ROOT / "state" / "newsroom" / "special_events_schedule_runtime"
 TRUSTED_PROMOTIONS = {"WWE", "AEW", "TNA", "ROH"}
+CANONICAL_REPORT_SOURCE = "ringsidenews"
 REFRESH_INTERVAL = timedelta(hours=20)
 REFRESH_TIMEOUT_SECONDS = 75
 ARTIFACT_CLOCK_SKEW = timedelta(minutes=10)
@@ -50,6 +51,14 @@ def normalize_url(url: str) -> str:
 
 def _slug(value: str) -> str:
     return re.sub(r"_+", "_", re.sub(r"[^a-z0-9]+", "_", value.lower())).strip("_")
+
+
+def is_canonical_report_source(entry: dict[str, Any], *, legacy_lock: bool = False) -> bool:
+    source = CANONICAL_REPORT_SOURCE
+    if legacy_lock and entry.get("canonical_source_locked") is True and entry.get("canonical_identity") == "wrestlinginc_results":
+        source = "wrestlinginc"
+    host = (urlsplit(str(entry.get("url") or entry.get("source_url") or "")).hostname or "").lower().removeprefix("www.")
+    return host == f"{source}.com" and str(entry.get("source") or source).lower() == source
 
 
 def weekly_result_identities(report: dict[str, Any]) -> set[str]:
@@ -353,6 +362,7 @@ def configured_special_event_identity(entry: dict[str, Any], registry: dict[str,
                 "publish_after": night.get("report_publish_after_local") or registry.get("default_report_publish_after_local") or "06:30",
                 "category_hint": event.get("category_hint") or event.get("promotion"),
                 "event_name": event.get("event_name"), "promotion": event.get("promotion"),
+                "event_type": event.get("event_type"), "report_type": "special_event",
                 "aliases": sorted({str(alias) for alias in aliases if alias}),
                 "match_evidence": {"strong_alias": hits[0], "night_alias": night_alias_hit, "alias_hits": hits, "explicit_content_dates": sorted(explicit_dates), "feed_timestamp_dates": sorted(feed_dates), "explicit_date_match": night_date in explicit_dates, "feed_timestamp_compatible": timestamp_compatible, "feed_timestamp_exact_date": exact_feed_date, "promotion_support": str(event.get("promotion") or "").lower() in blob},
             }
@@ -371,13 +381,12 @@ def special_event_report_identity(entry: dict[str, Any], registry: dict[str, Any
 
 def dynamic_special_event_match(entry: dict[str, Any], registry: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
     """Return a configured special-event match only for the canonical source."""
-    source_blob = f"{entry.get('source', '')} {entry.get('url', '')} {entry.get('source_url', '')}".lower().replace(" ", "")
-    if "wrestlinginc" not in source_blob:
+    if not is_canonical_report_source(entry):
         return None, "waiting_for_canonical_results_source"
     match, reason = special_event_report_identity(entry, registry)
     if match is None:
         return None, reason
-    return {**match, "canonical_identity": "wrestlinginc_results"}, "canonical_results_match"
+    return {**match, "canonical_identity": f"{CANONICAL_REPORT_SOURCE}_results"}, "canonical_results_match"
 
 
 def reserve_report(candidate: dict[str, Any], identity: dict[str, Any], *, now: datetime, pending_path: Path = PENDING_REPORTS) -> dict[str, Any]:

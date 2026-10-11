@@ -109,7 +109,10 @@ def test_report_cooldown_skips_failed_model_on_next_batch(monkeypatch):
             calls.append(model)
             if model == "gemini-3.5-flash":
                 raise RuntimeError("503 UNAVAILABLE high demand")
-            return FakeResponse()
+            response = FakeResponse()
+            batch = json.loads(contents.split("BLOCCHI JSON:\n", 1)[1])
+            response.text = json.dumps({"items": [{"i": item["i"], "text": "ok"} for item in batch]})
+            return response
 
     class FakeClient:
         def __init__(self, api_key):

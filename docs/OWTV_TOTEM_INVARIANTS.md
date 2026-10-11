@@ -2,6 +2,7 @@
 
 **Status:** OWNER-ratified, canonical normative authority  
 **Scope:** OpenWrestlingTV
+**Owner-approved amendment:** 2026-10-11 — Ringside canonical source and complete ordered Simone reports.
 **Owner-approved clarification:** 2026-10-10 — feed-URL news coverage and Gemini semantic authority.
 **Additional owner-approved clarification:** 2026-10-10 — bookmaker exclusions and terminal SKIP isolation.
 **Additional owner-approved clarification:** 2026-10-10 — immutable first valid primary classification, under TOTEM-C01.
@@ -30,7 +31,7 @@ Before 06:30 the canonical source URL may be discovered and reserved, but must n
 
 ### C. Canonical source and identity
 
-The canonical source is **WrestlingInc**. Its title/source metadata must deterministically establish all of:
+For new report identities the canonical source is **Ringside News**. Its title/source metadata must deterministically establish all of:
 
 1. the correct show/event identity;
 2. the correct event/show date;
@@ -44,7 +45,7 @@ A preview, card article, spoiler, expected result, rumor, backstage article, rea
 
 ### E. Fail-safe behavior
 
-When the expected canonical WrestlingInc Results source is absent: **WAIT / RETRY**. Do not select another event article, publish an incomplete semantic substitute, mark the report published because another URL was associated with the event, or let stale pending state supply another identity.
+When the expected canonical Ringside News Results source is absent: **WAIT / RETRY**. Do not select another event article, publish an incomplete semantic substitute, mark the report published because another URL was associated with the event, or let stale pending state supply another identity.
 
 ### F. Identity immutability
 
@@ -52,9 +53,11 @@ Once the canonical Results URL is identified for a `report_key`, another URL mus
 
 ### Canonical source lock
 
-Canonical report identity is monotonic. The first source URL that successfully satisfies the deterministic canonical WrestlingInc Results identity for a `report_key` becomes the immutable canonical source for that report.
+Canonical report identity is monotonic. The first source URL that successfully satisfies the deterministic canonical Ringside News Results identity for a `report_key` becomes the immutable canonical source for that report.
 
 Later candidate URLs cannot reopen source selection, replace the canonical source, or block publication of the locked source. A stale or invalid pre-existing URL is not a canonical lock merely because it exists in pending/runtime state; only a URL that itself satisfies TOTEM-R01 canonical identity may establish the lock.
+
+Owner amendment, 2026-10-11: new identities use Ringside News for every report type. There is no automatic WrestlingInc fallback. Already validated and locked WrestlingInc URLs remain locked to preserve identity immutability; this exception does not admit new WrestlingInc reservations. Published records are not reopened.
 
 ### G. Downstream freedom
 
@@ -66,6 +69,18 @@ After the canonical Results URL is identified and the 06:30 boundary is reached,
 - “Backstage Spoiler On Major AEW All In 2026 Expected Match Result” must **never** satisfy the All In Results identity.
 - “AEW All In 2026 Results - ...” is the kind of explicit canonical identity required.
 - “WWE NXT Heatwave Results 8/30 - ...” must be identified as Heatwave, not transformed into a fictional generic WWE NXT weekly show dated 8/29.
+
+## TOTEM-R02 — Complete report and ordered media
+
+Every report uses the same complete translation and ordered rendering contract: weekly shows, PLE, PPV and confirmed special events. Translate all substantive source paragraphs, headings, card items, match actions, results, segments, quotes and details; never summarize or compress the report. Preserve the original sequence of text, images and embedded media, including lazy embeds. Source scripts are not published; verified media permalinks use native WordPress embeds.
+
+Remove the source website’s greetings, author biographies, advertising and calls to action. Actual show greetings and wrestlers discussing their careers remain substantive content. One linked source attribution is retained.
+
+A pre-show may be collapsed only when the configured event type is PLE or PPV and its boundaries are identifiable. Its heading must be prominent and explicitly invite the reader to click to expand and read the complete pre-show. Weekly reports never use this collapse. The main show remains expanded, and all pre-show text and media remain available.
+
+Missing text translations, invalid media recovery or an obviously condensed translation fail publication technically; they do not become a successful report or an editorial SKIP. The full block manifest remains available for review. Technical coverage checks cannot prove every semantic detail, so an apparent omission remains a report-quality defect.
+
+Owner decision, 2026-10-11: approved Ringside proof adopted as the production Simone contract. TOTEM-N01 remains unchanged: no individual news is extracted from a report.
 
 ## TOTEM-N01 — Feed news and autonomous live coverage
 

@@ -12,8 +12,8 @@ from agents import simone_publisher_v93_18 as publisher
 
 
 ROME = ZoneInfo("Europe/Rome")
-COLLISION_URL = "https://www.wrestlinginc.com/2223339/aew-collision-july-25-results/"
-REDEMPTION_URL = "https://www.wrestlinginc.com/2223102/aew-redemption-2026-six-championships-on-line-double-chain-match-more/"
+COLLISION_URL = "https://www.ringsidenews.com/2223339/aew-collision-july-25-results/"
+REDEMPTION_URL = "https://www.ringsidenews.com/2223102/aew-redemption-2026-six-championships-on-line-double-chain-match-more/"
 
 
 def registry(dates=("2026-07-26",)):
@@ -74,7 +74,7 @@ def test_contextual_explicit_event_alias_does_not_cancel_weekly_results_identity
 
 def test_brand_name_alone_does_not_block_genuine_branded_special_event():
     report = {"report_key": "special_event_nxt_heatwave_main_2026_08_22", "aliases": ["NXT Heatwave", "Heatwave"], "date": "2026-08-22"}
-    candidate = {"title": "WWE NXT Heatwave Results 8/22 - Championship Main Event", "url": "https://wrestlinginc.test/wwe-nxt-heatwave-results-8-22"}
+    candidate = {"title": "WWE NXT Heatwave Results 8/22 - Championship Main Event", "url": "https://www.ringsidenews.com/wwe-nxt-heatwave-results-8-22"}
     assert simone.candidate_matches_special_report(candidate, report) == (True, "canonical_results_match")
     candidate["special_event_match"] = {"report_key": report["report_key"]}
     assert simone.candidate_matches_special_report(candidate, report) == (True, "canonical_results_match")
@@ -82,7 +82,7 @@ def test_brand_name_alone_does_not_block_genuine_branded_special_event():
 
 def test_results_oriented_nxt_keyword_still_wins_over_contextual_heatwave_alias():
     report = {"report_key": "special_event_nxt_heatwave_main_2026_08_22", "aliases": ["NXT Heatwave", "Heatwave"], "date": "2026-08-22"}
-    candidate = {"title": "WWE NXT Results 8/22 - Final Stop Before Heatwave", "url": "https://wrestlinginc.test/wwe-nxt-results-before-heatwave-8-22"}
+    candidate = {"title": "WWE NXT Results 8/22 - Final Stop Before Heatwave", "url": "https://www.ringsidenews.com/wwe-nxt-results-before-heatwave-8-22"}
     assert simone.candidate_matches_special_report(candidate, report) == (False, "rejected_conflicting_weekly_identity")
 
 
@@ -102,7 +102,7 @@ def test_genuine_special_and_normal_collision_sources_still_match():
     genuine = {"title": "AEW Redemption Results 7/26 - Six Championships On The Line", "url": REDEMPTION_URL}
     assert simone.candidate_matches_special_report(genuine, special_report()) == (True, "canonical_results_match")
     collision = next(item for item in json.loads(simone.REPORTS_CONFIG.read_text())["reports"] if item["id"] == "aew_collision")
-    chosen, reason = simone.choose_report_candidate([{"title": "AEW Collision Results 7/25", "url": COLLISION_URL, "source": "wrestlinginc"}], collision, "2026-07-25")
+    chosen, reason = simone.choose_report_candidate([{"title": "AEW Collision Results 7/25", "url": COLLISION_URL, "source": "ringsidenews"}], collision, "2026-07-25")
     assert chosen is not None and reason == "canonical_results_match"
 
 

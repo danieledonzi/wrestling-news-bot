@@ -652,6 +652,14 @@ def scrape_article(url: str) -> Tuple[List[Dict[str, str]], str, Optional[str]]:
     return blocks, html, featured
 
 
+def scrape_report_article(url: str) -> Tuple[List[Dict[str, str]], str, Optional[str]]:
+    from modules.report_content import extract_report_blocks
+    res = session.get(url, timeout=REQUEST_TIMEOUT)
+    res.raise_for_status()
+    soup = BeautifulSoup(res.text, "html.parser")
+    return extract_report_blocks(res.text, url), res.text, extract_meta_image(soup, url)
+
+
 def extract_json_object(raw_text: str) -> Dict[str, Any]:
     raw = (raw_text or "").strip().replace("```json", "").replace("```", "").strip()
     start = raw.find("{")
@@ -783,6 +791,11 @@ def translate_report_blocks(source_title: str, blocks: List[Dict[str, str]], det
         prompt = f"""
 Sei un giornalista italiano esperto di wrestling.
 Non fare una traduzione letterale: devi trasformare il materiale in italiano giornalistico naturale, mantenendo fatti e citazioni.
+TRADUZIONE INTEGRALE, MAI UN RIASSUNTO: rendi ogni frase e ogni proposizione.
+Conserva tutte le azioni, sequenze di mosse, tentativi di schienamento, transizioni,
+dettagli, soprannomi, numeri e citazioni, anche se ripetitivi. Non comprimere il racconto.
+Il benvenuto dei commentatori allo show e le dichiarazioni sulla carriera dei wrestler
+sono contenuto dello show: traducili integralmente, non confonderli con il saluto del sito o la biografia dell'autore.
 
 Stai lavorando su un report risultati/recap di uno show, non su una news breve.
 Il titolo del report e' gia' deterministico e NON deve essere riscritto.
@@ -844,15 +857,22 @@ BLOCCHI JSON:
         print(f"[TRANSLATE v92] Batch report_blocks_legacy_prompt {batch_no}/{batch_total} | items={len(batch)} | indici={batch_indexes[0]}-{batch_indexes[-1]}", flush=True)
         data, model = generate_json(prompt, chain_name="report_blocks_legacy_prompt", cooldown_models=cooldown_models, ledger_context={"report_id": deterministic_title or source_title, "report_key": deterministic_title or source_title, "source_url": None, "title": deterministic_title or source_title, "batch": f"{batch_no}/{batch_total}", "batch_no": batch_no, "batch_total": batch_total})
         arr = data.get("items") or []
+        if not isinstance(arr, list) or len(arr) != len(batch):
+            raise ValueError("Traduzione: numero di blocchi incompatibile")
         batch_translated: Dict[int, str] = {}
         for item in arr:
-            try:
-                i = int(item.get("i"))
-                txt = clean_text(str(item.get("text") or ""))
-                if txt:
-                    batch_translated[i] = txt
-            except Exception:
-                continue
+            if not isinstance(item, dict) or type(item.get("i")) is not int or not isinstance(item.get("text"), str):
+                raise ValueError("Traduzione: blocco non valido")
+            i = item["i"]
+            txt = clean_text(item["text"])
+            if i not in batch_indexes or i in batch_translated or not txt:
+                raise ValueError("Traduzione: indice estraneo, duplicato o testo vuoto")
+            original = next(b["text"] for b in batch if b["i"] == i)
+            # A coarse technical tripwire, not a proof of semantic completeness.
+            # Reject obvious summaries without a paid repair/rewrite request.
+            if len(original.split()) >= 80 and len(txt.split()) < len(original.split()) * 0.65:
+                raise ValueError(f"Traduzione apparentemente sintetica: blocco={i}")
+            batch_translated[i] = txt
         expected_batch = set(batch_indexes)
         missing_batch = expected_batch.difference(batch_translated)
         if missing_batch:
@@ -920,10 +940,26 @@ def normalize_media_identity(url: Optional[str]) -> str:
     return raw
 
 
-def render_blocks(blocks: List[Dict[str, str]], translated: Dict[int, str], featured_image_url: Optional[str] = None) -> str:
+def render_blocks(blocks: List[Dict[str, str]], translated: Dict[int, str], featured_image_url: Optional[str] = None, *, job: Optional[Dict[str, Any]] = None) -> str:
+    from modules.report_content import preshow_open, preshow_range
     parts: List[str] = []
-    first_inline_image_seen = False
+    collapsible = preshow_range(blocks, job or {})
+    if job is not None and any(i not in translated for i, b in enumerate(blocks) if b["type"] in {"heading", "paragraph", "quote"}):
+        raise ValueError("Report rendering requires every translated text block")
+    list_type = None
     for idx, block in enumerate(blocks):
+        next_list = block.get("list_type")
+        if list_type != next_list:
+            if list_type:
+                parts.append(f"</{list_type}>")
+            if next_list:
+                parts.append(f"<{next_list}>")
+            list_type = next_list
+        if collapsible and idx == collapsible[1]:
+            parts.append("</div></details>")
+        if collapsible and idx == collapsible[0]:
+            parts.append(preshow_open(translated[idx]))
+            continue
         btype = block["type"]
         if btype == "heading":
             level = block.get("level") or "h2"
@@ -931,17 +967,13 @@ def render_blocks(blocks: List[Dict[str, str]], translated: Dict[int, str], feat
             parts.append(f"<{level}>{txt}</{level}>")
         elif btype == "paragraph":
             txt = html_lib.escape(translated.get(idx) or block.get("text", ""))
-            parts.append(f"<p>{txt}</p>")
+            tag = "li" if next_list else "p"
+            parts.append(f"<{tag}>{txt}</{tag}>")
         elif btype == "quote":
             txt = html_lib.escape(translated.get(idx) or block.get("text", ""))
             parts.append(f"<blockquote>{txt}</blockquote>")
         elif btype == "image":
             raw_src = block.get("src")
-            if featured_image_url and not first_inline_image_seen:
-                first_inline_image_seen = True
-                print(f"[MEDIA v92] Skip prima immagine inline per featured attiva: {raw_src}", flush=True)
-                continue
-            first_inline_image_seen = True
             if featured_image_url and normalize_media_identity(raw_src) == normalize_media_identity(featured_image_url):
                 print(f"[MEDIA v92] Skip immagine inline gia usata come featured: {raw_src}", flush=True)
                 continue
@@ -949,15 +981,23 @@ def render_blocks(blocks: List[Dict[str, str]], translated: Dict[int, str], feat
             if src:
                 alt = html_lib.escape(block.get("alt") or "")
                 parts.append(f'<figure class="wp-block-image owtv-inline-image"><img src="{html_lib.escape(src)}" alt="{alt}" /></figure>')
+            elif raw_src:
+                raise ValueError("Report image upload failed; refusing silent omission")
         elif btype == "embed":
             url = normalize_social_url(block.get("url", ""))
             if url:
-                parts.append(f"\n\n{url}\n\n")
+                parts.append(f'<div class="owtv-report-media">\n[embed]{html_lib.escape(url)}[/embed]\n</div>')
+    if list_type:
+        parts.append(f"</{list_type}>")
     return "\n".join(parts)
 
 
 def content_with_embeds(html: str) -> str:
     content = re.sub(r"https?://x\.com/", "https://twitter.com/", html or "", flags=re.I)
+    # Native report shortcodes already have the required layout. Do not inject
+    # blank lines inside their URLs; legacy news still uses bare URL handling.
+    if "[embed]" in content:
+        return content
     for domain in SOCIAL_DOMAINS:
         pattern = rf'(?<!["\'>])(https?://[^\s<"]*{re.escape(domain)}[^\s<"]*)'
         content = re.sub(pattern, r"\n\n\1\n\n", content)
@@ -1116,13 +1156,13 @@ def publish_report(job: Dict[str, Any], content: str, featured_image_url: Option
 
 
 def run_report_workshop(job: Dict[str, Any], published_dir: Path, review_dir: Path) -> Tuple[int, Dict[str, Any]]:
-    blocks, _html, featured_image = scrape_article(job["source_url"])
+    blocks, _html, featured_image = scrape_report_article(job["source_url"])
     from modules.simone_report_integrity import cleanup_blocks
     blocks, cleanup_diagnostics = cleanup_blocks(blocks, str(job.get("source") or ""))
     print(f"[REPORT CLEAN v95.13.1] {json.dumps(cleanup_diagnostics, sort_keys=True)}", flush=True)
     print(f"[REPORT v92] Blocchi estratti: total={len(blocks)} text={len([b for b in blocks if b.get('type') in {'heading','paragraph','quote'}])} images={len([b for b in blocks if b.get('type') == 'image'])} embeds={len([b for b in blocks if b.get('type') == 'embed'])} featured={bool(featured_image)}", flush=True)
     translated = translate_report_blocks(job.get("source_title") or job.get("title") or "", blocks, job["title"])
-    content = render_blocks(blocks, translated, featured_image)
+    content = render_blocks(blocks, translated, featured_image, job=job)
     published_dir.mkdir(parents=True, exist_ok=True)
     review_dir.mkdir(parents=True, exist_ok=True)
     slug = slugify(job.get("title") or job.get("report_key") or "report")
@@ -1133,7 +1173,10 @@ def run_report_workshop(job: Dict[str, Any], published_dir: Path, review_dir: Pa
     (review_dir / f"{slug}.json").write_text(json.dumps({
         "job": job,
         "post": post_json,
-        "blocks": blocks[:120],
+        "blocks": blocks,
+        "content_contract": "simone_full_ordered_report_v1",
+        "source_text_blocks": len(text_blocks(blocks)),
+        "source_embed_urls": [b["url"] for b in blocks if b["type"] == "embed"],
         "featured_image": featured_image,
         "translated_indexes": sorted(translated.keys()),
         "report_model_routing_v95_4": REPORT_MODEL_ROUTING_V95_4,

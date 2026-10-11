@@ -129,9 +129,9 @@ def test_fresh_runtime_registry_rehydrates_missing_curated_timezone(monkeypatch,
 def test_consecutive_event_results_use_event_local_date_not_utc_date():
     registry, _ = load_effective_registry(now=datetime(2026, 8, 2, tzinfo=timezone.utc))
     entry = {
-        "source": "WrestlingInc",
+        "source": "RingsideNews",
         "title": "SummerSlam Results",
-        "url": "https://wrestlinginc.test/summerslam-results-generic",
+        "url": "https://www.ringsidenews.com/summerslam-results-generic",
         "published": "2026-08-02T02:00:00Z",
     }
 
@@ -239,10 +239,10 @@ def test_dynamic_threshold_uses_current_local_day(monkeypatch, tmp_path):
     assert metadata["published_news_today_local"] == 1
 
 
-def test_all_weekly_reports_publish_at_0730():
+def test_all_weekly_reports_follow_totem_0630():
     config = json.loads((menzo.ROOT / "config/reports_v92.json").read_text())
     assert len(config["reports"]) == 6
-    assert {report["publish_after"] for report in config["reports"]} == {"07:30"}
+    assert {report["publish_after"] for report in config["reports"]} == {"06:30"}
 
 
 def test_publisher_ceiling_is_soft_only_at_thirty(monkeypatch):

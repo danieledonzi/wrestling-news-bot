@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
-from modules.simone_report_integrity import configured_special_event_identity, dynamic_special_event_match, load_effective_registry, special_event_report_identity
+from modules.simone_report_integrity import configured_special_event_identity, dynamic_special_event_match, is_canonical_report_source, load_effective_registry, special_event_report_identity
 
 try:
     import feedparser  # type: ignore
@@ -212,13 +212,13 @@ def is_wrestlinginc_source(source: str) -> bool:
 
 
 def is_preferred_report_source(entry: dict[str, Any]) -> bool:
-    # Editorial rule: automatic show reports must come from WrestlingInc only.
-    # Other sources may still feed normal news to Menzo, but report-like items
-    # must not be routed to Simone or fall through as normal news.
-    return is_wrestlinginc_source(str(entry.get("source", "") or ""))
+    # Owner amendment 2026-10-11: new canonical reports use Ringside.
+    return is_canonical_report_source(entry)
 
 
 def is_configured_weekly_report_source(entry: dict[str, Any]) -> bool:
+    if not is_canonical_report_source(entry):
+        return False
     source = normalize_text(str(entry.get("source") or "")).replace(" ", "")
     config = load_json(REPORTS_CONFIG, {"reports": []})
     reports = config.get("reports", []) if isinstance(config, dict) else []
@@ -353,7 +353,7 @@ def classify_entries(entries: list[dict[str, Any]], already_worked_urls: set[str
                     "report_source_not_preferred",
                     original_report_reason=report_reason or "report_like_title",
                     show_hint=show_hint,
-                    preferred_report_source="wrestlinginc",
+                    preferred_report_source="ringsidenews",
                     special_event_match=entry.get("special_event_match"),
                 ))
                 continue
