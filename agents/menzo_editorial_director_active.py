@@ -8,6 +8,7 @@ import os
 import re
 import time
 import unicodedata
+import uuid
 from pathlib import Path
 from typing import Any, Callable, Mapping
 
@@ -406,17 +407,19 @@ def _store_ordinary_pairs(cache: dict[str, Any], materials: Mapping[str, Any],
                      error_class="invariant", error_terminal=False)
 
 
-def _observe_final_relations(snapshot, rows, materials):
+def _observe_final_relations(snapshot, rows, materials, *, logical_request_id=None):
     """Record final authority, including reuse; never recompute semantics in reporting."""
     endpoints = {r.get('candidate_id') or r.get('article_id'): r
                  for r in snapshot.get('candidates', []) + snapshot.get('publisher_history_12h', [])}
+    observation_id = uuid.uuid4().hex
     for relation in rows:
         left, right = endpoints.get(relation['left_id'], {}), endpoints.get(relation['right_id'], {})
         material = materials.get(relation['pair_id'], {})
         payload = {k: copy.deepcopy(relation.get(k)) for k in
                    ('pair_id', 'scope', 'left_id', 'right_id', 'decision', 'semantic_authority',
                     'shared_fact', 'new_fact', 'temporal_basis', 'validated_provenance')}
-        payload.update(path=snapshot.get('_editorial_path', 'primary'),
+        payload.update(verdict_observation_id=observation_id,
+                       path=snapshot.get('_editorial_path', 'primary'),
                        left={**source_material.profile(left), 'title': left.get('title') or left.get('source_title')},
                        right={**source_material.profile(right), 'title': right.get('title') or right.get('source_title')},
                        material_digest=material.get('endpoint_material_hash'),
@@ -424,6 +427,9 @@ def _observe_final_relations(snapshot, rows, materials):
                        cache_hit=bool(relation.get('duplicate_pair_cache')))
         source_material.emit('editorial_duplicate_verdict', 'duplicate', 'success', payload,
                              pair_id=relation['pair_id'])
+    source_material.emit('editorial_full_material_cycle', 'selection', 'success',
+                         {'verdict_observation_id': observation_id, 'verdict_observations': len(rows)},
+                         logical_request_id=logical_request_id)
 
 
 def _body_pair_snapshot(snapshot: Mapping[str, Any], relation: Mapping[str, Any]):
@@ -565,7 +571,8 @@ def _evaluate_duplicate_gate_batch(batch_snapshot, *, call, digest, cache, mater
                   'duplicate_gate_input_digest': result.get('input_digest')}
     for row in relations:
         row['validated_provenance'] = copy.deepcopy(provenance)
-    _observe_final_relations(batch_snapshot, relations, materials)
+    _observe_final_relations(batch_snapshot, relations, materials,
+                             logical_request_id=result.get('logical_request_id'))
     # Individually valid Gemini decisions are final even if another row is invalid.
     _store_ordinary_pairs(cache, materials, relations, base, stored_pairs)
     return {'ok': result['status'] == 'VALIDATED', 'attempts': result.get('attempts', 0),

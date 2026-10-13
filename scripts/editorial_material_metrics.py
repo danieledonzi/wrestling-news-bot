@@ -31,6 +31,10 @@ def _whole(value):
     return isinstance(value, int) and not isinstance(value, bool) and value >= 0
 
 
+def _identity(value):
+    return isinstance(value, str) and bool(value)
+
+
 def _endpoint(value):
     return (isinstance(value, dict) and isinstance(value.get('url'), str) and bool(value['url']) and
             isinstance(value.get('input_coverage'), str) and _whole(value.get('body_chars')) and
@@ -68,9 +72,16 @@ def _graph(records):
 def build_metrics(root: Path, since, until, cache_metrics=None):
     path = root / 'state/newsroom/canonical_event_ledger.jsonl'
     rows, warnings, readable, malformed = load_jsonl_defensively(path)
-    invalid = sum(bool(validate_event(row)) for row in rows)
+    invalid, valid_rows = 0, []
+    for row in rows:
+        if validate_event(row):
+            invalid += 1
+        else:
+            valid_rows.append(row)
+    rows = valid_rows
     cycles = [row for row in rows if row.get('event_type') == 'editorial_full_material_cycle'
-              and row.get('agent') == 'Menzo' and _payload(row) and _stamp(row.get('timestamp_utc'))
+              and row.get('agent') == 'Menzo' and _payload(row) and
+              _identity(_payload(row).get('observation_id')) and _stamp(row.get('timestamp_utc'))
               and _stamp(row['timestamp_utc']) <= until]
     cutover = min((_stamp(row['timestamp_utc']) for row in cycles), default=None)
     coverage = ('unavailable' if not readable or malformed or invalid or cutover is None else
@@ -98,18 +109,18 @@ def build_metrics(root: Path, since, until, cache_metrics=None):
             else:
                 profiles.append(data)
         elif kind == 'editorial_source_material':
-            if (data.get('status') not in {'COMPLETE', 'TECHNICAL_HOLD'} or not _endpoint(data) or
-                    data.get('origin') not in {'canonical_reuse', 'source_fetch', 'backoff'} or
-                    not isinstance(data.get('stage'), str) or not data.get('observation_id')):
+            if (data.get('status') not in ('COMPLETE', 'TECHNICAL_HOLD') or not _endpoint(data) or
+                    data.get('origin') not in ('canonical_reuse', 'source_fetch', 'backoff') or
+                    not isinstance(data.get('stage'), str) or not _identity(data.get('observation_id'))):
                 payload_errors.append('invalid_source_observation')
             else:
                 sources.append(data)
         else:
-            if (data.get('decision') not in {'DUPLICATE', 'NO_MATCH', 'MATERIAL_UPDATE'} or
+            if (data.get('decision') not in ('DUPLICATE', 'NO_MATCH', 'MATERIAL_UPDATE') or
                     data.get('semantic_authority') != 'gemini_final' or
-                    not all(data.get(k) for k in ('pair_id', 'left_id', 'right_id', 'material_digest', 'contract_fingerprint')) or
+                    not all(_identity(data.get(k)) for k in ('pair_id', 'left_id', 'right_id', 'material_digest', 'contract_fingerprint')) or
                     not _endpoint(data.get('left')) or not _endpoint(data.get('right')) or
-                    data.get('path') not in {'primary', 'softpool'}):
+                    data.get('path') not in ('primary', 'softpool') or not _identity(data.get('verdict_observation_id'))):
                 payload_errors.append('invalid_final_verdict')
             else:
                 verdicts.append(data)
@@ -117,15 +128,20 @@ def build_metrics(root: Path, since, until, cache_metrics=None):
     # source sessions and actual model attempts before certifying any totals.
     all_sources = defaultdict(list)
     session_starts, session_ends = {}, {}
+    verdict_ends, all_verdicts = {}, defaultdict(list)
     attempts, requests, avoided = {}, {}, {}
     for row in rows:
         at = _stamp(row.get('timestamp_utc'))
         if not at or at > until:
             continue
         data = _payload(row)
-        if data and row.get('event_type') == 'editorial_source_material':
+        if data and row.get('event_type') == 'editorial_source_material' and _identity(data.get('observation_id')):
             all_sources[data.get('observation_id')].append(data)
-        if data and row.get('event_type') == 'editorial_full_material_cycle' and data.get('observation_id'):
+        if data and row.get('event_type') == 'editorial_duplicate_verdict' and _identity(data.get('verdict_observation_id')):
+            all_verdicts[data.get('verdict_observation_id')].append(data)
+        if data and row.get('event_type') == 'editorial_full_material_cycle' and _identity(data.get('verdict_observation_id')):
+            verdict_ends[data['verdict_observation_id']] = (at, data, row.get('logical_request_id'))
+        if data and row.get('event_type') == 'editorial_full_material_cycle' and _identity(data.get('observation_id')):
             target = session_starts if row.get('status') == 'started' else session_ends
             target[data['observation_id']] = (at, data)
         if since <= at and row.get('model_role') in EDITORIAL_PHASES:
@@ -153,6 +169,17 @@ def build_metrics(root: Path, since, until, cache_metrics=None):
     attempt_requests = {r.get('logical_request_id') for r in attempts.values()}
     if attempt_requests != set(unique_profiles):
         payload_errors.append('provider_input_profile_coverage_incomplete')
+    for observation_id in set(verdict_ends) | {r.get('verdict_observation_id') for r in verdicts}:
+        end = verdict_ends.get(observation_id)
+        if end and end[0] < since:
+            continue
+        if (not end or not _whole(end[1].get('verdict_observations')) or
+                end[1]['verdict_observations'] != len(all_verdicts[observation_id])):
+            payload_errors.append('final_verdict_coverage_incomplete')
+    gate_requests = {r.get('logical_request_id') for r in attempts.values()
+                     if r.get('model_role') == 'editorial_director_duplicate_gate'}
+    if not gate_requests.issubset({end[2] for end in verdict_ends.values()}):
+        payload_errors.append('final_verdict_operation_incomplete')
     inputs = {}
     for phase in sorted({r['phase'] for r in profiles}):
         selected = [r for r in unique_profiles.values() if r['phase'] == phase]

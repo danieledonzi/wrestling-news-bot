@@ -174,7 +174,7 @@ def test_coverage_before_cutover_and_missing_ledger_never_means_zero(tmp_path):
     assert missing['coverage'] == 'unavailable' and missing['duplicates']['window_metrics'] is None
     ledger = CanonicalEventLedger('cutover', path=tmp_path / 'state/newsroom/canonical_event_ledger.jsonl')
     install_active_ledger(ledger)
-    material.emit('editorial_full_material_cycle', 'selection', 'started', {})
+    material.Session({}).finish()
     partial = build_metrics(tmp_path, until - timedelta(hours=24), datetime.now(timezone.utc))
     assert partial['coverage'] == 'partial' and partial['sources']['window_metrics'] is None
     assert partial['duplicates']['observed']['verdict_observations'] == 0

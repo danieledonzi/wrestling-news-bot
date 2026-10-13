@@ -115,3 +115,124 @@ def test_unknown_workload_is_not_attributed_to_news(tmp_path):
     economic = report.economic_sections(tmp_path, now - timedelta(hours=24), now)
     assert economic['partitions']['news_and_editorial']['real_attempts'] == 0
     assert economic['partitions']['unattributed']['real_attempts'] == 1
+
+
+def test_wrong_archived_contract_is_discarded_before_fresh_source_extraction(monkeypatch):
+    row = {**article('current'), 'candidate_id': 'current', 'canonical_source_body': body('https://full.test/other')}
+    def fetch(item):
+        assert 'canonical_source_body' not in item
+        item['canonical_source_body'] = body(item['url'])
+        return True, 'complete'
+    monkeypatch.setattr(material, '_fetch_body', fetch)
+    session = material.Session({})
+    assert session.hydrate(row, 'primary_classification')
+    assert material.valid_for(session.data['bodies'][material.key(row)]['contract'], row)
+
+
+def test_corrupt_source_cache_is_preserved_and_does_not_invent_skip(monkeypatch):
+    material.CACHE_FILE.write_text('{corrupt')
+    original = material.CACHE_FILE.read_bytes()
+    monkeypatch.setattr(material, '_fetch_body', lambda *_: (False, 'offline'))
+    session = material.Session({})
+    assert not session.hydrate({**article('held'), 'candidate_id': 'held'}, 'primary_classification')
+    assert session.finish()['cache_error'] == 'source_material_cache_unavailable'
+    assert material.CACHE_FILE.read_bytes() == original and not menzo.terminal_skip_memory()
+
+
+def test_soft_missing_history_holds_only_its_connected_component(monkeypatch):
+    rows = [article(name) for name in ('affected', 'connected', 'independent')]
+    for row in rows:
+        row['editorial_director'] = {'editorial_class': 'PUBLISHABLE_SOFT', 'recommended_action': 'DEFER',
+            'category': 'WWE', 'story_core': 'Professional facts'}
+    history = {**article('history'), 'status': 'published'}
+    monkeypatch.setattr(menzo, 'load_authoritative_publisher_history', lambda *_: [history])
+    def fetch(row):
+        if row['url'] == history['url']:
+            return False, 'offline'
+        row['canonical_source_body'] = body(row['url'])
+        return True, 'complete'
+    monkeypatch.setattr(material, '_fetch_body', fetch)
+    calls = []
+    def admission_only(prompt, schema, *_):
+        calls.append(prompt)
+        assert 'suspected_duplicates' in schema['properties']
+        return {'admission_complete': True, 'suspected_duplicates': [
+            {'left_ref': 'a0', 'right_ref': 'h0', 'basis': 'Potential same development'},
+            {'left_ref': 'a0', 'right_ref': 'a1', 'basis': 'Potential connected development'}]}
+    survivors, skipped, meta = soft._revalidate_pool_duplicates(rows, provider=admission_only)
+    assert [row['url'] for row in survivors] == [rows[2]['url']]
+    assert {row['url'] for row in meta['source_material_held_items']} == {row['url'] for row in rows[:2]}
+    assert len(calls) == 1 and not skipped and not menzo.terminal_skip_memory()
+
+
+def test_soft_source_hold_is_persisted_without_consuming_meaningful_review(monkeypatch):
+    now = datetime(2026, 10, 13, 12, tzinfo=timezone.utc)
+    rows = [article('good'), article('offline')]
+    for row in rows:
+        row.update(soft_board_day='2026-10-13', soft_board_review_count=1,
+            soft_board_first_seen_at=now.isoformat(), editorial_director={
+                'editorial_class': 'PUBLISHABLE_SOFT', 'recommended_action': 'DEFER',
+                'category': 'WWE', 'story_core': 'Professional facts'})
+    soft._write_pool(rows)
+    def fetch(row):
+        if row['url'].endswith('/offline'):
+            return False, 'offline'
+        row['canonical_source_body'] = body(row['url'])
+        return True, 'complete'
+    monkeypatch.setattr(material, '_fetch_body', fetch)
+    monkeypatch.setattr(soft, '_capacity', lambda *_: {'soft_capacity_this_run': 1})
+    monkeypatch.setattr(soft, '_published_day_context', lambda *_: {})
+    def review(prompt, schema, *_):
+        data = json.loads(prompt.split('INPUT=', 1)[1])
+        assert [r['url'] for r in data['candidates']] == [rows[0]['url']]
+        return {'candidates': [{'ref': 's0', 'disposition': 'SOFT_MUST', 'reason': 'Substantial professional facts'}]}
+    projected = soft.apply({'selected': [], 'pending': [], 'skipped': []},
+        {'observation_timestamp': now.isoformat()}, provider=review)
+    assert [row['url'] for row in projected['selected']] == [rows[0]['url']]
+    assert [row['url'] for row in projected['pending']] == [rows[1]['url']]
+    remaining = soft._load_pool_rows()
+    assert len(remaining) == 1 and remaining[0]['soft_board_review_count'] == 1
+    assert remaining[0]['editorial_director']['editorial_class'] == 'PUBLISHABLE_SOFT'
+
+
+def test_missing_final_verdict_event_makes_window_unavailable(tmp_path):
+    ledger = CanonicalEventLedger('review-verdict', path=tmp_path / 'state/newsroom/canonical_event_ledger.jsonl')
+    install_active_ledger(ledger)
+    def provider(prompt, schema, *_):
+        if 'suspected_duplicates' in schema['properties']:
+            return {'admission_complete': True, 'suspected_duplicates': [
+                {'left_ref': 'a0', 'right_ref': 'a1', 'basis': 'Possible shared fact'}]}
+        if 'relations' in schema['properties']:
+            return {'relations': [{'ref': 'r0', 'decision': 'NO_MATCH'}]}
+        return classify(2)
+    active.evaluate(snapshot([article('left'), article('right')]), provider=provider)
+    rows = [json.loads(line) for line in ledger.path.read_text().splitlines()]
+    start = datetime.fromisoformat(rows[0]['timestamp_utc'])
+    ledger.path.write_text('\n'.join(json.dumps(row) for row in rows if row['event_type'] != 'editorial_duplicate_verdict'))
+    metrics = build_metrics(tmp_path, start, datetime.now(timezone.utc) + timedelta(seconds=1))
+    assert metrics['coverage'] == 'unavailable' and metrics['duplicates']['window_metrics'] is None
+
+
+def test_installed_report_producer_without_workload_is_still_report_cost(tmp_path):
+    now = datetime.now(timezone.utc)
+    path = tmp_path / 'state/newsroom/gemini_call_ledger.jsonl'
+    path.parent.mkdir(parents=True)
+    path.write_text(json.dumps({'timestamp': now.isoformat(), 'status': 'called', 'agent': 'Bob',
+        'ledger_schema_version': 'v3', 'provider_attempt_id': 'report-attempt',
+        'pipeline': 'report', 'phase': 'report_blocks_legacy_prompt', 'reason': 'report_translation'}))
+    economic = report.economic_sections(tmp_path, now - timedelta(hours=24), now)
+    assert economic['partitions']['reports']['real_attempts'] == 1
+    assert economic['partitions']['news_and_editorial']['real_attempts'] == 0
+    assert economic['attribution_complete'] is True
+
+
+@pytest.mark.parametrize('field,value', [('observation_id', ['invalid']), ('origin', ['invalid']), ('status', {})])
+def test_non_scalar_payload_identities_do_not_crash_reporting(tmp_path, field, value):
+    path, rows, start = observed_cycle(tmp_path)
+    row = next(row for row in rows if row['event_type'] == 'editorial_source_material')
+    payload = json.loads(row['result'])
+    payload[field] = value
+    row['result'] = json.dumps(payload)
+    path.write_text('\n'.join(json.dumps(row) for row in rows))
+    metrics = build_metrics(tmp_path, start, datetime.now(timezone.utc) + timedelta(seconds=1))
+    assert metrics['coverage'] == 'unavailable' and metrics['sources']['window_metrics'] is None

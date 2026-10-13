@@ -64,3 +64,28 @@ All profiles/records and economic breakdowns are attached in the current report 
 evidence yields unavailable window totals, with the observed sample retained separately. Source caches do not become
 historical authorities. The existing dated observation journal and owner-approval gate remain unchanged. No legacy
 lexical cluster recommendations or report-versus-news suppression metrics are reinstated.
+
+## Consolidated pre-PR review
+
+The recovered implementation was reviewed against the production baseline without new provider calls or replay
+generation. Four concrete P1 families were reproduced offline and corrected together:
+
+- Complete-source contracts must also bind to the endpoint's canonical source URL. A mismatched archive is discarded
+  before extraction; a corrupt source cache is preserved and cannot manufacture an editorial SKIP.
+- Source failure in soft competition holds only affected URLs and admitted connected components. Complete independent
+  URLs can compete; held URLs persist without consuming meaningful reviews or changing their primary class.
+- Source sessions and verdict batches have explicit observation identities and closure counts. Missing/malformed
+  evidence produces unavailable totals. Repeated input observations are distinct from unique logical requests,
+  attempts and pair/material verdicts. No observer failure can veto a valid editorial decision.
+- Missing economic evidence is unavailable rather than a known zero. Actual report producers are recognized from
+  explicit pipeline/phase evidence when workload is absent. Unattributed work remains separate and prevents a complete
+  news-cost-per-publication claim. Retry/fallback totals require valid economic evidence.
+
+The existing same-run winner fix reuses extracted canonical bodies; all-primary-SKIP cycles avoid irrelevant history
+extraction. Classification policy, single-attempt semantics, optional nullable rationale fields, tombstones, live-show
+coverage, bookmaker exclusion, report autonomy and the 12-hour Publisher window are unchanged.
+
+Pre-PR regression coverage is in `tests/test_complete_editorial_material_review.py`, including source URL mismatch,
+corrupt cache preservation, scoped soft holds and persistence, missing source/input/verdict events, repeated profiles,
+malformed payloads and report/unknown-workload cost attribution. Controlled replay outcomes remain case-specific
+diagnostic evidence. Neither full-body coverage nor these offline tests certify universal editorial accuracy or savings.

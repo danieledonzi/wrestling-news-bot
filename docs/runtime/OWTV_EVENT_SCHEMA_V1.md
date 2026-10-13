@@ -160,6 +160,11 @@ events describe extraction/reuse/technical holds; input profiles bind endpoint c
 bytes to a logical request; verdict events retain exact pair/material/contract identity, path, cache reuse and final
 Gemini semantics. Article bodies are not duplicated into the event stream. These are observations, not local vetoes.
 Readers must distinguish pre-cutover unknown coverage from observed zero and repeated events from unique decisions.
+Pre-PR reconciliation adds source-session start/end markers (`observation_id`, `source_observations`) and final-verdict
+batch completion markers (`verdict_observation_id`, `verdict_observations`) inside `editorial_full_material_cycle`.
+Source/verdict observations carry the corresponding identity. These counts certify emission coverage only;
+missing markers or observations make window totals unavailable without blocking editorial work. Input profiles are
+deduplicated by logical request and reconciled with actual canonical attempt identities, including zero-verdict failures.
 
 ## Status, result, and reason
 
