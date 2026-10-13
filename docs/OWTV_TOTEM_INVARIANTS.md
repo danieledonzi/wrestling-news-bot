@@ -6,6 +6,7 @@
 **Owner-approved clarification:** 2026-10-10 — feed-URL news coverage and Gemini semantic authority.
 **Additional owner-approved clarification:** 2026-10-10 — bookmaker exclusions and terminal SKIP isolation.
 **Additional owner-approved clarification:** 2026-10-10 — immutable first valid primary classification, under TOTEM-C01.
+**Owner-approved conditional reform, confirmed by isolated replay:** 2026-10-13 — complete editorial source material, under TOTEM-F01.
 
 ## TOTEM supremacy
 
@@ -206,3 +207,29 @@ the informational tie-break. A losing URL is terminal SKIP under TOTEM-S01.
 Owner-approved implementation, 2026-10-10: this supersedes combined primary/admission schemas and every model
 repair path in these Active operations. Technical recovery is a subsequent operation under the explicit backoff,
 not a request to revise an accepted classification or duplicate verdict.
+
+## TOTEM-F01 — Complete source material before irreversible editorial decisions
+
+Owner authorization, 2026-10-13: implement after an isolated RSS-versus-complete-body replay demonstrates
+improvement; see `docs/implementation-notes/COMPLETE_EDITORIAL_MATERIAL_2026_10_13.md`.
+
+For an eligible, as-yet unclassified feed URL, primary classification receives the entire cleaned, extraction-verified
+article body. RSS metadata remains context, never an unlabelled substitute for a complete body. Terminal URL,
+bookmaker and already-published exact exclusions remain before source work. Reports remain independent under R01/N01.
+
+The body is reusable factual material across primary classification, independent pair admission, final duplicate
+judgment and optional soft competition. It must not be silently truncated or require another semantic classification.
+Body acquisition or transport-limit failure is a technical HOLD, not a primary SKIP. A failed candidate cannot
+suppress an independent candidate whose input is complete. Missing published-body material may be visible as
+explicitly unavailable metadata during suspicion election; an admitted comparison against it cannot issue a final
+semantic verdict or clear its affected component until that body is available.
+
+An article may contain multiple substantial autonomous factual developments. DUPLICATE cannot discard an entire
+article merely because one development, one person or its opening recap is shared with an earlier article. A substantial
+uncovered development against successful published history is MATERIAL_UPDATE. The judge is asked to identify
+shared facts and uncovered facts before its verdict. Those explanatory fields remain nullable; local validation must
+still accept a correctly bound final decision when local semantic evidence is insufficient. No repair is introduced.
+
+This improves the input and execution of D01; it does not rewrite accepted classes, resurrect skipped URLs, extract
+news from reports, alter pacing, or grant soft content an entitlement to publication. Cache expiry and body-cache
+eviction never undo C01/S01. Diagnostic replays never apply their alternative decisions to production.

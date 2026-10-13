@@ -95,7 +95,7 @@ Stages are stable semantic pipeline areas, not raw phases.
 
 Each name has one meaning. Raw `phase` values are mapped separately and may need outcome context. Generic `stage_started`, `stage_completed`, and `stage_failed` accept every canonical stage so the event retains its real pipeline area; they are not forced into `runtime`.
 
-<!-- SYNC:EVENT_TYPES run_started|run_completed|stage_started|stage_completed|stage_failed|candidate_seen|candidate_selected|candidate_pending|candidate_skipped|duplicate_check_requested|duplicate_pair_evaluated|duplicate_pair_resolved|duplicate_pair_unresolved|logical_ai_request_created|model_attempt_started|model_attempt_completed|model_attempt_failed|model_attempt_avoided|fallback_started|repair_started|article_generation_requested|article_generated|revision_requested|revision_completed|report_candidate_seen|report_selected|report_published|publication_attempted|publication_completed|publication_failed|publication_already_present|content_sufficiency_checked|quality_review_completed|audit_completed|warning_recorded|blocker_recorded|duplicate_pair_cache_cycle|duplicate_pair_cache_hit|duplicate_pair_cache_miss|duplicate_pair_cache_stored|article_generation_failed|publication_dry_run|report_already_present|wordpress_preflight_attempted|wordpress_preflight_completed|wordpress_preflight_failed|wordpress_endpoint_probe|bob_generation_cycle|publisher_observation_cycle|simone_publication_cycle -->
+<!-- SYNC:EVENT_TYPES run_started|run_completed|stage_started|stage_completed|stage_failed|candidate_seen|candidate_selected|candidate_pending|candidate_skipped|duplicate_check_requested|duplicate_pair_evaluated|duplicate_pair_resolved|duplicate_pair_unresolved|logical_ai_request_created|model_attempt_started|model_attempt_completed|model_attempt_failed|model_attempt_avoided|fallback_started|repair_started|article_generation_requested|article_generated|revision_requested|revision_completed|report_candidate_seen|report_selected|report_published|publication_attempted|publication_completed|publication_failed|publication_already_present|content_sufficiency_checked|quality_review_completed|audit_completed|warning_recorded|blocker_recorded|duplicate_pair_cache_cycle|duplicate_pair_cache_hit|duplicate_pair_cache_miss|duplicate_pair_cache_stored|article_generation_failed|publication_dry_run|report_already_present|wordpress_preflight_attempted|wordpress_preflight_completed|wordpress_preflight_failed|wordpress_endpoint_probe|bob_generation_cycle|publisher_observation_cycle|simone_publication_cycle|editorial_full_material_cycle|editorial_source_material|editorial_input_profile|editorial_duplicate_verdict -->
 
 | Event type | Default stage | Allowed agents |
 |---|---|---|
@@ -149,6 +149,17 @@ Each name has one meaning. Raw `phase` values are mapped separately and may need
 | bob_generation_cycle | generation | Bob |
 | publisher_observation_cycle | publication | Publisher |
 | simone_publication_cycle | reporting | Simone |
+| editorial_full_material_cycle | selection | Menzo |
+| editorial_source_material | selection | Menzo |
+| editorial_input_profile | model | Menzo |
+| editorial_duplicate_verdict | duplicate | Menzo |
+
+The four complete-material events are an additive extension approved on 2026-10-13. They use the existing closed
+envelope, with a versioned JSON object in `result` (`input_contract=owtv_complete_editorial_material_v1`). Source
+events describe extraction/reuse/technical holds; input profiles bind endpoint coverage, hashes, lengths and prompt
+bytes to a logical request; verdict events retain exact pair/material/contract identity, path, cache reuse and final
+Gemini semantics. Article bodies are not duplicated into the event stream. These are observations, not local vetoes.
+Readers must distinguish pre-cutover unknown coverage from observed zero and repeated events from unique decisions.
 
 ## Status, result, and reason
 

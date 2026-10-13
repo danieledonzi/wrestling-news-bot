@@ -411,7 +411,8 @@ def capture_editorial_director_opportunity(massy_board: dict[str, Any], *, run_i
         # Active classifies only URLs present in the current feed board.
         # The persistent soft pool is a separate container and is never injected into Active candidates.
         from agents.menzo_priority_queue import augment_board
-        augmented = mark_rediscovered_pool_candidates(augment_board(massy_board))
+        from agents.menzo_source_material import augment_board as augment_source_holds
+        augmented = mark_rediscovered_pool_candidates(augment_source_holds(augment_board(massy_board)))
     else:
         augmented = softpool_augmented_board(massy_board)
     from agents.menzo_policy_v93_15 import published_today_count
@@ -460,6 +461,8 @@ def capture_editorial_director_opportunity(massy_board: dict[str, Any], *, run_i
         from agents.menzo_editorial_director_active import preserve_bob_capacity_metadata
         preserve_bob_capacity_metadata(snapshot, [item for item in augmented.get("news_candidates_for_menzo", [])
                                                    if isinstance(item, dict)])
+        from agents.menzo_source_material import attach_contracts
+        attach_contracts(snapshot, augmented.get('news_candidates_for_menzo', []) + history)
     return snapshot, None, preflight
 
 

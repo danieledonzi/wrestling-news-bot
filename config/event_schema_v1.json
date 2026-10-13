@@ -758,6 +758,38 @@
         "Simone"
       ],
       "description": "Simone report publication telemetry observation cycle"
+    },
+    {
+      "name": "editorial_full_material_cycle",
+      "stage": "selection",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "Complete-material editorial observation; versioned factual payload in result; never semantic authority."
+    },
+    {
+      "name": "editorial_source_material",
+      "stage": "selection",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "Complete-material editorial observation; versioned factual payload in result; never semantic authority."
+    },
+    {
+      "name": "editorial_input_profile",
+      "stage": "model",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "Complete-material editorial observation; versioned factual payload in result; never semantic authority."
+    },
+    {
+      "name": "editorial_duplicate_verdict",
+      "stage": "duplicate",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "Complete-material editorial observation; versioned factual payload in result; never semantic authority."
     }
   ],
   "identities": {

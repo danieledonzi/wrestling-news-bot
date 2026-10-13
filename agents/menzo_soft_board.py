@@ -196,7 +196,10 @@ def _provider_payload(pool: list[dict[str, Any]], snapshot: Mapping[str, Any],
         director = row.get("editorial_director") if isinstance(row.get("editorial_director"), Mapping) else {}
         candidates.append({
             "ref": ref,
+            "url": row.get('url') or row.get('source_url'),
             "title": str(row.get("title") or row.get("source_title") or ""),
+            "retained_body": str(row.get('retained_body') or ''),
+            "input_coverage": row.get('input_coverage') or 'BODY_UNAVAILABLE',
             "story_core": str(director.get("story_core") or ""),
             "factual_description": _candidate_description(row),
             "source": str(row.get("source") or ""),
@@ -275,6 +278,8 @@ def _review(pool: list[dict[str, Any]], snapshot: Mapping[str, Any], capacity: M
             now: datetime, provider: Callable[..., Any] | None) -> tuple[list[dict[str, Any]] | None, dict[str, Any]]:
     from agents import menzo_editorial_director_active as active
     payload, refs = _provider_payload(pool, snapshot, capacity, now)
+    if len(json.dumps(payload, ensure_ascii=False).encode()) > shadow.MAX_INPUT_BYTES:
+        return None, {'status': 'TECHNICAL_HOLD', 'fallback_reason': 'complete_soft_input_limit', 'attempts': 0}
     call = provider
     accepted_skips = []
     def validate(raw):
@@ -318,7 +323,25 @@ def _revalidate_pool_duplicates(pool: list[dict[str, Any]], *, provider=None) ->
     snapshot = shadow.capture_opportunity({'news_candidates_for_menzo': pool}, run_id='soft-duplicate-review',
         observation_timestamp=utc_now(), history=history, defer_relation_build=True)
     active.prepare_snapshot(snapshot)
+    from agents import menzo_source_material as source_material
+    source_material.attach_contracts(snapshot, pool + history)
+    material = source_material.Session(snapshot)
+    available = [material.hydrate(row, 'soft_duplicate_admission') for row in snapshot['candidates']]
+    for row in snapshot['publisher_history_12h']:
+        material.hydrate(row, 'soft_duplicate_admission_history')
+    body_observation = material.finish()
+    if not all(available):
+        return pool, [], {'semantic_admission_status': 'TECHNICAL_BLOCK',
+                          'technical_block_reason': 'complete_soft_body_unavailable',
+                          'source_material': body_observation, 'gemini_duplicate_calls_executed': 0}
+    snapshot['_editorial_path'] = 'softpool'
     originals = {shadow.article_id(row): row for row in pool}
+    for row in snapshot['candidates']:
+        original = originals[row['candidate_id']]
+        original.update(retained_body=row['retained_body'], input_coverage=row['input_coverage'])
+        contract = snapshot.get('_active_source_contracts', {}).get(row['candidate_id'])
+        if contract:
+            original['canonical_source_body'] = copy.deepcopy(contract)
     contract = active.pair_cache.contract_fingerprint(policy_version=active.POLICY_VERSION, model=active.MODEL,
         policy_path=active.RELATION_POLICY_PATH, gate_schema_path=active.RELATION_SCHEMA_PATH,
         event_registry_path=active.EVENT_REGISTRY_PATH)
@@ -371,6 +394,10 @@ def _revalidate_pool_duplicates(pool: list[dict[str, Any]], *, provider=None) ->
             raise ValueError('semantic_admission_failed')
         relations = selection['admitted_relations']
         active._preserve_cached_duplicate_admissions(snapshot, relations)
+        missing_history = {r['article_id'] for r in snapshot['publisher_history_12h'] if r.get('input_coverage') != 'FULL_BODY'}
+        if any(r['scope'] == 'recent_history' and r['right_id'] in missing_history for r in relations):
+            meta['technical_block_reason'] = 'complete_duplicate_history_body_unavailable'
+            raise ValueError('complete_duplicate_history_body_unavailable')
         # The pool has no primary MAX_CANDIDATES cap. Only the exact endpoints of
         # each authorized sparse batch enter the bounded full-material gate.
         final = []

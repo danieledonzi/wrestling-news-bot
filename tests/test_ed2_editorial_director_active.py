@@ -747,7 +747,7 @@ def test_case_b_policy_schema_and_no_match_survival(monkeypatch):
     policy = active.RELATION_POLICY_PATH.read_text(encoding="utf-8").casefold()
     assert "autonomous central factual" in policy and "distinct developments" in policy
     schema = json.loads(active.RELATION_SCHEMA_PATH.read_text())
-    assert set(schema["properties"]["relations"]["items"]["required"]) == {"ref", "decision"}
+    assert set(schema["properties"]["relations"]["items"]["required"]) == {"ref", "shared_fact", "new_fact", "decision"}
     s = _production_incident_snapshot(
         "Triple H Gets Dragged Over Stephanie Vaquer Winning Women’s World Title at WWE Live Event")
     replies = iter([response(s, ("SELECT",)), response(s, ("SELECT",)), {"relations": [{"ref": "r0", "decision": "NO_MATCH"}]}])
@@ -778,7 +778,7 @@ def test_duplicate_gate_provider_schema_uses_supported_union_keywords_only():
     assert schema_keywords(schema).isdisjoint(unsupported)
     item = schema["properties"]["relations"]["items"]
     assert set(item["properties"]["decision"]["enum"]) == {"DUPLICATE", "MATERIAL_UPDATE", "NO_MATCH"}
-    assert set(item["required"]) == {"ref", "decision"}
+    assert set(item["required"]) == {"ref", "shared_fact", "new_fact", "decision"}
 
 
 

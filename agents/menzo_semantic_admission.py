@@ -10,13 +10,16 @@ from typing import Any, Mapping
 
 from agents.duplicate_pair_identity import recent_history_pair_id, same_run_pair_id
 
-VERSION = 'totem-d01-independent-semantic-admission-v2'
+VERSION = 'totem-d01-complete-material-admission-v3'
 
 
 def compact(row: Mapping[str, Any]) -> dict[str, Any]:
     return {key: copy.deepcopy(value) for key, value in {
         'title': row.get('title') or row.get('source_title') or row.get('title_it') or '',
+        'url': row.get('url') or row.get('source_url'),
         'summary': str(row.get('summary') or '')[:2500],
+        'retained_body': row.get('retained_body'),
+        'input_coverage': row.get('input_coverage'),
         'source': row.get('source'), 'published_at': row.get('published_at'),
         'show_report_id': row.get('show_report_id'), 'event_report_key': row.get('event_report_key'),
     }.items() if value not in (None, '')}
