@@ -493,6 +493,10 @@ def _apply_duplicate_gate(snapshot: dict[str, Any], relations: list[dict[str, An
     for group in groups.values():
         if len(group) > 1:
             hydrated = copy.deepcopy(group)
+            for row in hydrated:
+                contract = snapshot.get('_active_source_contracts', {}).get(row['candidate_id'])
+                if source_body.valid_contract(contract):
+                    row['canonical_source_body'] = copy.deepcopy(contract)
             hydrate_complete_article_bodies(hydrated)
             winner, _ = canonical_richer_winner(hydrated, earliest_arrival=True)
         else:
@@ -1022,8 +1026,11 @@ def _evaluate_complete(snapshot: dict[str, Any], material: Any, *, provider=None
     snapshot.setdefault('source_material_holds', []).extend(unavailable)
     unavailable_ids = {r['candidate_id'] for r in unavailable}
     snapshot['candidates'] = [r for r in snapshot['candidates'] if r['candidate_id'] not in unavailable_ids]
-    for row in snapshot.get('publisher_history_12h', []):
-        material.hydrate(row, 'duplicate_admission_history')
+    if snapshot['candidates']:
+        for row in snapshot.get('publisher_history_12h', []):
+            material.hydrate(row, 'duplicate_admission_history')
+    else:
+        snapshot['publisher_history_12h'] = []  # No eligible endpoint needs history/source work.
     eligible = {row["candidate_id"] for row in snapshot["candidates"]}
     # Pair election sees only eligible facts, never classes or SKIP context.
     supplied = list(snapshot.get('authorized_relations', []))

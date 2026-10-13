@@ -216,3 +216,32 @@ def test_new_observer_write_failure_is_fail_open(monkeypatch):
     result = active.evaluate(value, provider=lambda *_: classify(1))
     assert result['status'] == 'VALIDATED'
     assert primary.load()[material.key(article('good'))]['editorial_class'] == 'SHOULD_PUBLISH'
+
+
+def test_same_run_richer_winner_reuses_the_already_extracted_canonical_body(monkeypatch):
+    def reuse(row):
+        assert source_body.valid_contract(row.get('canonical_source_body'))
+        return True, 'canonical_cache'
+    monkeypatch.setattr(source_body, 'hydrate', reuse)
+    def provider(prompt, schema, *_):
+        if 'suspected_duplicates' in schema['properties']:
+            return {'admission_complete': True, 'suspected_duplicates': [
+                {'left_ref': 'a0', 'right_ref': 'a1', 'basis': 'Same factual outcome'}]}
+        if 'relations' in schema['properties']:
+            return {'relations': [{'ref': 'r0', 'decision': 'DUPLICATE'}]}
+        return classify(2)
+    result = active.evaluate(snapshot([article('left'), article('right')]), provider=provider)
+    assert result['status'] == 'VALIDATED'
+    assert len(result['output']['candidates']) == 1
+
+
+def test_all_primary_skips_do_not_fetch_unneeded_published_history(monkeypatch):
+    def fetch(row):
+        assert row['url'] != 'https://full.test/history'
+        row['canonical_source_body'] = contract('Complete factual source material. ' * 20)
+        return True, 'complete'
+    monkeypatch.setattr(material, '_fetch_body', fetch)
+    value = snapshot([article('weak')], [{**article('history'), 'status': 'published'}])
+    result = active.evaluate(value, provider=lambda *_: classify(1, 'SKIP'))
+    assert result['status'] == 'VALIDATED' and result['attempts'] == 1
+    assert len(result['source_material']['observations']) == 1
