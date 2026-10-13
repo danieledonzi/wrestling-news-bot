@@ -40,8 +40,8 @@ def snapshot(rows, history=()):
         observation_timestamp=NOW.isoformat(), history=list(history), defer_relation_build=True)
 
 
-def contract(text):
-    return source_body.contract_from_elements('https://full.test/article', [{'type': 'text', 'text': text}],
+def contract(text, url="https://full.test/article"):
+    return source_body.contract_from_elements(url, [{'type': 'text', 'text': text}],
         {'extraction_finished': True, 'body_complete': True, 'clean_element_count': 1})
 
 
@@ -56,7 +56,7 @@ def test_complete_tail_reaches_classification_admission_and_gate_once_per_url(mo
     calls = []
     def fetch(row):
         calls.append(row['url'])
-        row['canonical_source_body'] = contract(body)
+        row['canonical_source_body'] = contract(body, row["url"])
         return True, 'complete'
     monkeypatch.setattr(material, '_fetch_body', fetch)
     value = snapshot([article('combined'), article('earlier')])
@@ -88,7 +88,7 @@ def test_missing_body_holds_only_its_url_without_freezing_class_or_skip(monkeypa
     def fetch(row):
         if row['url'] == unavailable['url']:
             return False, 'incomplete_extraction'
-        row['canonical_source_body'] = contract('Complete professional source details. ' * 20)
+        row['canonical_source_body'] = contract('Complete professional source details. ' * 20, row['url'])
         return True, 'complete'
     monkeypatch.setattr(material, '_fetch_body', fetch)
     value = snapshot([good, unavailable])
@@ -122,7 +122,7 @@ def test_history_body_unavailable_blocks_only_admitted_component(monkeypatch):
     def fetch(row):
         if row['url'] == earlier['url']:
             return False, 'offline'
-        row['canonical_source_body'] = contract('Concrete professional source details. ' * 20)
+        row['canonical_source_body'] = contract('Concrete professional source details. ' * 20, row['url'])
         return True, 'complete'
     monkeypatch.setattr(material, '_fetch_body', fetch)
     value = snapshot([article('potential_duplicate'), article('independent')], [earlier])
@@ -238,7 +238,7 @@ def test_same_run_richer_winner_reuses_the_already_extracted_canonical_body(monk
 def test_all_primary_skips_do_not_fetch_unneeded_published_history(monkeypatch):
     def fetch(row):
         assert row['url'] != 'https://full.test/history'
-        row['canonical_source_body'] = contract('Complete factual source material. ' * 20)
+        row['canonical_source_body'] = contract('Complete factual source material. ' * 20, row['url'])
         return True, 'complete'
     monkeypatch.setattr(material, '_fetch_body', fetch)
     value = snapshot([article('weak')], [{**article('history'), 'status': 'published'}])

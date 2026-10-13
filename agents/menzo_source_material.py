@@ -4,6 +4,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import uuid
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Mapping
@@ -19,7 +20,15 @@ HOLD_HOURS = 24
 
 def key(row):
     from agents.menzo_policy_v93_15 import source_key
-    return source_key(str(row.get('url') or row.get('source_url') or ''))
+    return source_key(str(row.get('source_url') or row.get('url') or ''))
+
+
+def valid_for(contract, row):
+    """Completeness and source identity are independent requirements."""
+    from agents.menzo_duplicate_scorer import canonical_source_url
+    return bool(source_body.valid_contract(contract) and canonical_source_url(dict(row)) and
+                canonical_source_url({'source_url': contract['provenance'].get('source_url')}) ==
+                canonical_source_url(dict(row)))
 
 
 def _stamp(value):
@@ -36,7 +45,8 @@ def _read():
     value = json.loads(CACHE_FILE.read_text(encoding='utf-8'))
     if (not isinstance(value, dict) or value.get('version') != CONTRACT_VERSION or
             not isinstance(value.get('bodies'), dict) or not isinstance(value.get('holds'), dict) or
-            any(not isinstance(v, dict) for v in value['bodies'].values()) or
+            any(not isinstance(v, dict) or not isinstance(v.get('stored_at'), str)
+                for v in value['bodies'].values()) or
             any(not isinstance(v, dict) or not isinstance(v.get('item'), dict) for v in value['holds'].values())):
         raise ValueError('invalid_source_material_cache')
     return value
@@ -55,7 +65,7 @@ def _fetch_body(row):
 
 def profile(row):
     body = str(row.get('retained_body') or '')
-    return {'url': row.get('url') or row.get('source_url'),
+    return {'url': row.get('source_url') or row.get('url'),
             'input_coverage': row.get('input_coverage') or 'RSS_SUMMARY_ONLY',
             'body_chars': len(body), 'body_sha256': hashlib.sha256(body.encode()).hexdigest() if body else None}
 
@@ -78,6 +88,10 @@ class Session:
         self.rows = []
         self.changed = False
         self.cache_error = None
+        self.observation_id = uuid.uuid4().hex
+        self.finished = False
+        emit('editorial_full_material_cycle', 'selection', 'started',
+             {'observation_id': self.observation_id})
         try:
             self.data = _read()
         except (OSError, ValueError):
@@ -102,7 +116,7 @@ class Session:
         trusted = self.snapshot.get('_active_source_contracts', {}).get(endpoint_id)
         cached = self.data['bodies'].get(url_key, {})
         contract = next((c for c in (row.get('canonical_source_body'), trusted, cached.get('contract'))
-                         if source_body.valid_contract(c)), None)
+                         if valid_for(c, row)), None)
         origin = 'canonical_reuse'
         reason = None
         if contract is None:
@@ -110,15 +124,18 @@ class Session:
             retry = _stamp(prior.get('retry_after'))
             if retry and retry > self.now:
                 reason = 'source_fetch_backoff'
+                origin = 'backoff'
             else:
                 item = copy.deepcopy(dict(row))
+                if not valid_for(item.get('canonical_source_body'), row):
+                    item.pop('canonical_source_body', None)
                 try:
                     ok, reason = _fetch_body(item)
                 except Exception as exc:
                     ok, reason = False, 'source_extraction_error:' + type(exc).__name__
                 contract = item.get('canonical_source_body') if ok else None
                 origin = 'source_fetch'
-                if not source_body.valid_contract(contract):
+                if not valid_for(contract, row):
                     contract = None
         if contract is None:
             row.pop('retained_body', None)
@@ -136,13 +153,16 @@ class Session:
             if cached.get('contract') != contract:
                 self.data['bodies'][url_key] = {'contract': copy.deepcopy(contract), 'stored_at': self.now.isoformat()}
                 self.changed = True
-            result = {**profile(row), 'stage': stage, 'origin': origin, 'status': 'COMPLETE'}
+            result = {**profile(row), 'stage': stage, 'origin': origin, 'status': 'COMPLETE',
+                      'provenance': copy.deepcopy(contract['provenance'])}
         self.rows.append(result)
         emit('editorial_source_material', 'selection', 'success' if contract else 'pending',
-             result, item=row, model_role=stage)
+             {**result, 'observation_id': self.observation_id}, item=row, model_role=stage)
         return contract is not None
 
     def finish(self):
+        if self.finished:
+            return self.snapshot['source_material']
         if self.changed and not self.cache_error:
             bodies = self.data['bodies']
             self.data['bodies'] = dict(sorted(bodies.items(), key=lambda kv: kv[1].get('stored_at', ''))[-MAX_ENTRIES:])
@@ -155,6 +175,10 @@ class Session:
         result = {'contract_version': CONTRACT_VERSION, 'observations': self.rows,
                   'cache_error': self.cache_error}
         self.snapshot['source_material'] = result
+        self.finished = True
+        emit('editorial_full_material_cycle', 'selection', 'success',
+             {'observation_id': self.observation_id, 'source_observations': len(self.rows),
+              'cache_error': self.cache_error})
         return result
 
 
@@ -163,7 +187,7 @@ def attach_contracts(snapshot, rows):
     contracts = snapshot.setdefault('_active_source_contracts', {})
     for row in rows:
         contract = row.get('canonical_source_body')
-        if source_body.valid_contract(contract):
+        if valid_for(contract, row):
             contracts[article_id(row)] = copy.deepcopy(contract)
 
 

@@ -98,14 +98,14 @@ def test_active_pair_cache_reuses_final_no_match_and_material_update(monkeypatch
                 return {"relations": [row]}
             return response(first, ("SELECT", "DEFER"))
         if decision == "MATERIAL_UPDATE":
-            first["publisher_history_12h"] = [{"article_id": "history", "title": first["candidates"][1]["title"],
+            first["publisher_history_12h"] = [{"article_id": "history", "source_url": "https://history.test/earlier", "title": first["candidates"][1]["title"],
                                                 "published_at": "2026-01-01T00:00:00Z"}]
             first["authorized_relations"] = [suspicious_relation(first, right=0, scope="recent_history")]
         assert active.evaluate(first, provider=provider_one)["status"] == "VALIDATED"
         # evaluate mutates the first snapshot after the gate, so rebuild the equivalent input.
         second = snapshot(2)
         if decision == "MATERIAL_UPDATE":
-            second["publisher_history_12h"] = [{"article_id": "history", "title": second["candidates"][1]["title"],
+            second["publisher_history_12h"] = [{"article_id": "history", "source_url": "https://history.test/earlier", "title": second["candidates"][1]["title"],
                                                  "published_at": "2026-01-01T00:00:00Z"}]
             second["authorized_relations"] = [suspicious_relation(second, right=0, scope="recent_history")]
         else:
@@ -121,7 +121,7 @@ def _dense_relations(value, count):
     left = value["candidates"][0]["candidate_id"]
     # Every relation represents a distinct pair, never duplicate aliases for
     # the same two endpoints (forbidden by sparse admission).
-    value["publisher_history_12h"] = [{"article_id": f"dense-history-{index}",
+    value["publisher_history_12h"] = [{"article_id": f"dense-history-{index}", "source_url": f"https://history.test/dense/{index}",
         "title": f"Confirmed release development {index}", "summary": "Confirmed release fact"}
         for index in range(count)]
     return [{

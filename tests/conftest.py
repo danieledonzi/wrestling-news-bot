@@ -20,7 +20,7 @@ def isolated_terminal_memory(tmp_path, monkeypatch):
         text = str(item.get('retained_body') or item.get('summary') or item.get('title') or 'Offline factual fixture')
         if len(text) < 200:
             text = (text + ' ') * (201 // max(1, len(text)) + 1)
-        contract = source_body.contract_from_elements(item.get('url', ''), [{'type': 'text', 'text': text}],
+        contract = source_body.contract_from_elements(item.get('source_url') or item.get('source_url') or item.get('url', ''), [{'type': 'text', 'text': text}],
             {'extraction_finished': True, 'body_complete': True, 'clean_element_count': 1})
         item['canonical_source_body'] = contract
         return True, 'offline_fixture'

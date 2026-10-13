@@ -27,6 +27,23 @@ def _payload(row):
         return None
 
 
+def _whole(value):
+    return isinstance(value, int) and not isinstance(value, bool) and value >= 0
+
+
+def _endpoint(value):
+    return (isinstance(value, dict) and isinstance(value.get('url'), str) and bool(value['url']) and
+            isinstance(value.get('input_coverage'), str) and _whole(value.get('body_chars')) and
+            (value.get('input_coverage') != 'FULL_BODY' or
+             (value['body_chars'] >= 200 and isinstance(value.get('body_sha256'), str) and
+              len(value['body_sha256']) == 64)))
+
+
+EDITORIAL_PHASES = {'editorial_director_active', 'editorial_duplicate_admission',
+                    'editorial_soft_duplicate_admission', 'editorial_director_duplicate_gate',
+                    'editorial_soft_board'}
+
+
 def _graph(records):
     """Only recorded DUPLICATE edges form components; show/name similarity never does."""
     parent = {}
@@ -73,13 +90,17 @@ def build_metrics(root: Path, since, until, cache_metrics=None):
                 'logical_request_id': row.get('logical_request_id'), 'phase': row.get('model_role')}
         kind = row['event_type']
         if kind == 'editorial_input_profile':
-            if (not isinstance(data.get('phase'), str) or data.get('coverage') != 'full' or not isinstance(data.get('endpoints'), list) or
-                    any(not isinstance(r, dict) for r in data['endpoints'])):
+            if (data.get('phase') not in EDITORIAL_PHASES or not row.get('logical_request_id') or
+                    data.get('coverage') != 'full' or not isinstance(data.get('endpoints'), list) or
+                    not _whole(data.get('prompt_bytes')) or
+                    any(not _endpoint(r) for r in data['endpoints'])):
                 payload_errors.append('invalid_input_profile')
             else:
                 profiles.append(data)
         elif kind == 'editorial_source_material':
-            if data.get('status') not in {'COMPLETE', 'TECHNICAL_HOLD'} or not data.get('url'):
+            if (data.get('status') not in {'COMPLETE', 'TECHNICAL_HOLD'} or not _endpoint(data) or
+                    data.get('origin') not in {'canonical_reuse', 'source_fetch', 'backoff'} or
+                    not isinstance(data.get('stage'), str) or not data.get('observation_id')):
                 payload_errors.append('invalid_source_observation')
             else:
                 sources.append(data)
@@ -87,23 +108,64 @@ def build_metrics(root: Path, since, until, cache_metrics=None):
             if (data.get('decision') not in {'DUPLICATE', 'NO_MATCH', 'MATERIAL_UPDATE'} or
                     data.get('semantic_authority') != 'gemini_final' or
                     not all(data.get(k) for k in ('pair_id', 'left_id', 'right_id', 'material_digest', 'contract_fingerprint')) or
-                    not isinstance(data.get('left'), dict) or not isinstance(data.get('right'), dict)):
+                    not _endpoint(data.get('left')) or not _endpoint(data.get('right')) or
+                    data.get('path') not in {'primary', 'softpool'}):
                 payload_errors.append('invalid_final_verdict')
             else:
                 verdicts.append(data)
-    if payload_errors:
-        coverage = 'unavailable'
-    complete = coverage == 'full'
+    # A cutover marker proves installation, not complete emission. Reconcile
+    # source sessions and actual model attempts before certifying any totals.
+    all_sources = defaultdict(list)
+    session_starts, session_ends = {}, {}
+    attempts, requests, avoided = {}, {}, {}
+    for row in rows:
+        at = _stamp(row.get('timestamp_utc'))
+        if not at or at > until:
+            continue
+        data = _payload(row)
+        if data and row.get('event_type') == 'editorial_source_material':
+            all_sources[data.get('observation_id')].append(data)
+        if data and row.get('event_type') == 'editorial_full_material_cycle' and data.get('observation_id'):
+            target = session_starts if row.get('status') == 'started' else session_ends
+            target[data['observation_id']] = (at, data)
+        if since <= at and row.get('model_role') in EDITORIAL_PHASES:
+            if row.get('event_type') == 'model_attempt_started' and row.get('attempt_id'):
+                attempts[row['attempt_id']] = row
+            elif row.get('event_type') == 'logical_ai_request_created' and row.get('logical_request_id'):
+                requests[row['logical_request_id']] = row
+            elif row.get('event_type') == 'model_attempt_avoided' and row.get('logical_request_id'):
+                avoided[row['logical_request_id']] = row
+    for observation_id in set(session_starts) | set(session_ends):
+        start = session_starts.get(observation_id)
+        end = session_ends.get(observation_id)
+        if not ((start and start[0] >= since) or (end and end[0] >= since)):
+            continue
+        if (not start or not end or not _whole(end[1].get('source_observations')) or
+                end[1]['source_observations'] != len(all_sources[observation_id])):
+            payload_errors.append('source_observation_coverage_incomplete')
+    unique_profiles = {}
+    for row in profiles:
+        request_id = row['logical_request_id']
+        previous = unique_profiles.get(request_id)
+        if previous and any(previous[k] != row[k] for k in ('phase', 'endpoints', 'prompt_bytes')):
+            payload_errors.append('conflicting_input_profiles')
+        unique_profiles[request_id] = row
+    attempt_requests = {r.get('logical_request_id') for r in attempts.values()}
+    if attempt_requests != set(unique_profiles):
+        payload_errors.append('provider_input_profile_coverage_incomplete')
     inputs = {}
     for phase in sorted({r['phase'] for r in profiles}):
-        selected = [r for r in profiles if r['phase'] == phase]
+        selected = [r for r in unique_profiles.values() if r['phase'] == phase]
         endpoints = [e for r in selected for e in r['endpoints']]
         counts = Counter(e.get('input_coverage') or 'UNKNOWN' for e in endpoints)
-        observed = {'provider_requests': len(selected), 'endpoint_occurrences': len(endpoints),
+        observed = {'input_profile_observations': sum(r['phase'] == phase for r in profiles),
+                    'logical_requests': len(selected),
+                    'provider_attempts': sum(r.get('model_role') == phase for r in attempts.values()),
+                    'endpoint_occurrences': len(endpoints),
                     'unique_endpoint_urls': len({e['url'] for e in endpoints if e.get('url')}),
                     'coverage_counts': dict(counts), 'prompt_bytes': sum(r.get('prompt_bytes', 0) for r in selected),
                     'full_body_ratio': counts['FULL_BODY'] / len(endpoints) if endpoints else None}
-        inputs[phase] = {'observed': observed, 'window_metrics': observed if complete else None}
+        inputs[phase] = {'observed': observed}
     final = {}
     conflicts = []
     for row in sorted(verdicts, key=lambda r: r['at']):
@@ -112,6 +174,18 @@ def build_metrics(root: Path, since, until, cache_metrics=None):
             conflicts.append({'pair_id': row['pair_id'], 'at': row['at']})
         final[identity] = row
     records = list(final.values())
+    if conflicts:
+        payload_errors.append('conflicting_final_verdicts')
+    lookup_hits = [r for r in rows if r.get('event_type') == 'duplicate_pair_cache_hit' and
+                   since <= (_stamp(r.get('timestamp_utc')) or datetime.min.replace(tzinfo=timezone.utc)) <= until]
+    if any(not any(v['run_id'] == hit.get('run_id') and v['pair_id'] == hit.get('pair_id') and
+                   v.get('cache_hit') for v in verdicts) for hit in lookup_hits):
+        payload_errors.append('cached_verdict_coverage_incomplete')
+    if payload_errors:
+        coverage = 'unavailable'
+    complete = coverage == 'full'
+    for metrics in inputs.values():
+        metrics['window_metrics'] = metrics['observed'] if complete else None
     observed_verdicts = {'verdict_observations': len(verdicts), 'unique_pair_material_decisions': len(records),
         'unique_pair_ids': len({r['pair_id'] for r in records}),
         'decisions': dict(Counter(r['decision'] for r in records)),
@@ -172,6 +246,10 @@ def build_metrics(root: Path, since, until, cache_metrics=None):
         'cutover_at': cutover.isoformat() if cutover else None,
         'source': str(path.relative_to(root)), 'warnings': warnings + payload_errors,
         'invalid_event_rows': invalid, 'malformed_rows': malformed,
+        'ai_requests': {'observed': {'logical_requests': len(requests), 'provider_attempts': len(attempts),
+                                    'avoided_logical_requests': len(avoided)},
+                        'window_metrics': {'logical_requests': len(requests), 'provider_attempts': len(attempts),
+                                           'avoided_logical_requests': len(avoided)} if complete else None},
         'inputs': inputs, 'input_profiles': profiles,
         'sources': {'observed': source_counts, 'window_metrics': source_counts if complete else None,
                     'records': sources},
@@ -185,6 +263,8 @@ def build_metrics(root: Path, since, until, cache_metrics=None):
         'interpretation': [
             'FULL_BODY certifica il materiale fornito, non la correttezza editoriale del verdetto.',
             'Endpoint e verdetti osservati possono ripetersi; coppie/materiali unici e URL chiusi sono grani diversi.',
+            'Profili ripetuti non sono nuove richieste; le richieste logiche e i tentativi provider hanno identità distinte.',
+            'source_fetches conta operazioni di estrazione osservate, non richieste HTTP interne o risparmi monetari.',
             'Hit per coppia non equivale a chiamata evitata: un batch con miss richiede ancora Gemini.',
             'MATERIAL_UPDATE collega aggiornamenti; non unisce notizie in un cluster duplicate.',
             'I componenti DUPLICATE riportano decisioni registrate, non errori semantici confermati.',

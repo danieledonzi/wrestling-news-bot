@@ -326,16 +326,18 @@ def _revalidate_pool_duplicates(pool: list[dict[str, Any]], *, provider=None) ->
     from agents import menzo_source_material as source_material
     source_material.attach_contracts(snapshot, pool + history)
     material = source_material.Session(snapshot)
-    available = [material.hydrate(row, 'soft_duplicate_admission') for row in snapshot['candidates']]
-    for row in snapshot['publisher_history_12h']:
-        material.hydrate(row, 'soft_duplicate_admission_history')
+    unavailable_ids = {row['candidate_id'] for row in snapshot['candidates']
+                       if not material.hydrate(row, 'soft_duplicate_admission')}
+    snapshot['candidates'] = [row for row in snapshot['candidates'] if row['candidate_id'] not in unavailable_ids]
+    if snapshot['candidates']:
+        for row in snapshot['publisher_history_12h']:
+            material.hydrate(row, 'soft_duplicate_admission_history')
+    else:
+        snapshot['publisher_history_12h'] = []
     body_observation = material.finish()
-    if not all(available):
-        return pool, [], {'semantic_admission_status': 'TECHNICAL_BLOCK',
-                          'technical_block_reason': 'complete_soft_body_unavailable',
-                          'source_material': body_observation, 'gemini_duplicate_calls_executed': 0}
     snapshot['_editorial_path'] = 'softpool'
     originals = {shadow.article_id(row): row for row in pool}
+    source_held = [row for candidate_id, row in originals.items() if candidate_id in unavailable_ids]
     for row in snapshot['candidates']:
         original = originals[row['candidate_id']]
         original.update(retained_body=row['retained_body'], input_coverage=row['input_coverage'])
@@ -377,7 +379,8 @@ def _revalidate_pool_duplicates(pool: list[dict[str, Any]], *, provider=None) ->
     primary['_semantic_admission_only'] = True
     admission.attach(primary, current, snapshot['publisher_history_12h'], known)
     active._finalize_active_input(primary)
-    meta = {'semantic_admission_version': admission.VERSION, 'gemini_duplicate_calls_executed': 0}
+    meta = {'semantic_admission_version': admission.VERSION, 'gemini_duplicate_calls_executed': 0,
+            'source_material': body_observation, 'source_material_held_items': source_held}
     try:
         if primary.get('limit_status') == 'exceeded':
             raise ValueError('semantic_admission_input_limit')
@@ -395,9 +398,21 @@ def _revalidate_pool_duplicates(pool: list[dict[str, Any]], *, provider=None) ->
         relations = selection['admitted_relations']
         active._preserve_cached_duplicate_admissions(snapshot, relations)
         missing_history = {r['article_id'] for r in snapshot['publisher_history_12h'] if r.get('input_coverage') != 'FULL_BODY'}
-        if any(r['scope'] == 'recent_history' and r['right_id'] in missing_history for r in relations):
-            meta['technical_block_reason'] = 'complete_duplicate_history_body_unavailable'
-            raise ValueError('complete_duplicate_history_body_unavailable')
+        history_held_ids = {r['left_id'] for r in relations
+                            if r['scope'] == 'recent_history' and r['right_id'] in missing_history}
+        changed = True
+        while changed:
+            before = len(history_held_ids)
+            for row in relations:
+                if row['scope'] == 'same_run' and history_held_ids.intersection({row['left_id'], row['right_id']}):
+                    history_held_ids.update((row['left_id'], row['right_id']))
+            changed = len(history_held_ids) != before
+        unavailable_ids.update(history_held_ids)
+        source_held.extend(row for candidate_id, row in originals.items() if candidate_id in history_held_ids)
+        current = [row for row in current if row['candidate_id'] not in history_held_ids]
+        snapshot['candidates'] = current
+        relations = [row for row in relations if row['left_id'] not in history_held_ids and
+                     not (row['scope'] == 'same_run' and row['right_id'] in history_held_ids)]
         # The pool has no primary MAX_CANDIDATES cap. Only the exact endpoints of
         # each authorized sparse batch enter the bounded full-material gate.
         final = []
@@ -430,7 +445,7 @@ def _revalidate_pool_duplicates(pool: list[dict[str, Any]], *, provider=None) ->
         blocked.extend(snapshot.get('semantic_duplicate_skips', []))
         blocked_ids = {row['candidate_id'] for row in blocked}
         survivors = [{**copy.deepcopy(row), 'semantic_duplicate_clearance': signature}
-                     for key, row in originals.items() if key not in blocked_ids]
+                     for key, row in originals.items() if key not in blocked_ids and key not in unavailable_ids]
         skipped = skip_rows(blocked)
         return survivors, skipped, meta
     except Exception as exc:
@@ -444,7 +459,7 @@ def _revalidate_pool_duplicates(pool: list[dict[str, Any]], *, provider=None) ->
         blocked.extend({**row, 'candidate_id': key, 'terminal_skip_reason': closed[source_key(row.get('url') or row.get('source_url'))]['reason']}
             for key, row in originals.items() if key not in blocked_ids and source_key(row.get('url') or row.get('source_url')) in closed)
         blocked_ids = {row['candidate_id'] for row in blocked}
-        return [row for key, row in originals.items() if key not in blocked_ids], skip_rows(blocked), meta
+        return [row for key, row in originals.items() if key not in blocked_ids and key not in unavailable_ids], skip_rows(blocked), meta
 
 
 def _terminal_skip(row: Mapping[str, Any], reason: str, disposition: str, now: datetime) -> dict[str, Any]:
@@ -632,10 +647,11 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
     telemetry["soft_board_pool_size"] = len(pool) + len(policy_held)
     telemetry["soft_board_waiting_primary_policy"] = len(policy_held)
     telemetry["soft_board_midnight_tombstones"] = len(terminal)
+    source_held = []
 
     def persist_pool(rows: list[dict[str, Any]]) -> None:
         save_hard_skips({'skipped': projected['skipped']})
-        _write_pool(policy_held + rows)
+        _write_pool(policy_held + source_held + rows)
 
     if local.hour < REVIEW_HOUR_LOCAL:
         held = [_pending_state(row, "MORNING_HOLD", now) for row in pool]
@@ -659,6 +675,11 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
             persist_pool(held)
         else:
             pool, duplicate_skips, duplicate_meta = _revalidate_pool_duplicates(pool)
+            source_held = [_pending_state(row, 'WAIT_DUPLICATE_CLEARANCE', now,
+                           reason='complete_source_material_unavailable')
+                           for row in duplicate_meta.pop('source_material_held_items', [])]
+            projected['pending'].extend(source_held)
+            telemetry['soft_board_source_material_holds'] = len(source_held)
             telemetry["soft_board_duplicate_revalidation"] = duplicate_meta
             telemetry["soft_board_duplicates_removed"] = len(duplicate_skips)
             for skipped in duplicate_skips:
@@ -679,7 +700,7 @@ def apply(projected: dict[str, Any], snapshot: Mapping[str, Any],
                 save_hard_skips({"skipped": projected.get("skipped", [])})
                 return projected
             if not pool:
-                telemetry["soft_board_status"] = "EMPTY_AFTER_DUPLICATE_REVALIDATION"
+                telemetry["soft_board_status"] = "WAIT_DUPLICATE_CLEARANCE" if source_held else "EMPTY_AFTER_DUPLICATE_REVALIDATION"
                 telemetry["soft_board_meaningful_review"] = False
                 persist_pool([])
                 projected["handoff"] = {

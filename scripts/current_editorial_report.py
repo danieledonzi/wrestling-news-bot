@@ -115,11 +115,24 @@ def economic_sections(root: Path, since: datetime, until: datetime) -> dict:
     for name, accepted in names.items():
         selected = [r for r in rows if r.get("workload") in accepted]
         workloads[name] = build_gemini_economic_truth(selected, available=valid)
-    partitions = {
-        'news_and_editorial': build_gemini_economic_truth([r for r in rows if r.get('workload') != 'report_translation'], available=valid),
-        'reports': build_gemini_economic_truth([r for r in rows if r.get('workload') == 'report_translation'], available=valid),
-    }
-    real = [r for r in rows if str(r.get('status') or '').casefold() in {'called', 'failed'}]
+    news_workloads = set().union(*names.values()) | {'translation_generation', 'quote_resolution',
+                     'duplicate_arbitration', 'selection'}
+    def partition(row):
+        # Installed report producers also use pipeline/phase evidence, without
+        # a workload field. Unknown work never silently becomes news cost.
+        if (row.get('workload') == 'report_translation' or row.get('model_role') == 'report_translation' or
+                row.get('pipeline') == 'report' or str(row.get('reason') or '').startswith('report_translation') or
+                str(row.get('phase') or '').startswith('report_blocks')):
+            return 'reports'
+        if (row.get('workload') in news_workloads or row.get('model_role') in news_workloads or
+                row.get('phase') in {'translate_article', 'quote_resolver', 'ai_editorial_review',
+                    'same_run_duplicate_arbitration', 'recent_history_duplicate_arbitration'} or
+                str(row.get('purpose') or '').startswith('news_translate')):
+            return 'news_and_editorial'
+        return 'unattributed'
+    partitions = {name: build_gemini_economic_truth([r for r in rows if partition(r) == name], available=valid)
+                  for name in ('news_and_editorial', 'reports', 'unattributed')}
+    real = [r for r in rows if str(r.get('status') or '').strip().casefold() in {'called', 'failed'}]
     token_fields = ('input_tokens', 'output_tokens', 'total_tokens', 'non_cached_input_tokens',
                     'effective_cached_input_tokens', 'effective_thinking_tokens')
     def token_summary(selected):
@@ -127,20 +140,27 @@ def economic_sections(root: Path, since: datetime, until: datetime) -> dict:
         for field in token_fields:
             values = [r.get(field) if r.get('usage_resolution_status') == 'resolved' else None for r in selected]
             known = [v for v in values if isinstance(v, int) and not isinstance(v, bool) and v >= 0]
-            totals[field] = {'known_sum': sum(known) if known or not selected else None,
+            totals[field] = {'known_sum': sum(known) if known or (valid and not selected) else None,
                 'resolved_attempts': len(known), 'attempts': len(selected),
                 'window_total': sum(known) if valid and len(known) == len(selected) else None}
         return totals
     usage = {'overall': token_summary(real), 'by_workload': {
         phase: token_summary([r for r in real if (r.get('workload') or 'UNKNOWN') == phase])
         for phase in sorted({r.get('workload') or 'UNKNOWN' for r in real})}}
-    cost_records = [{k: r.get(k) for k in ('timestamp', 'provider_attempt_id', 'logical_request_id', 'workload',
+    cost_records = [{**{k: r.get(k) for k in ('timestamp', 'provider_attempt_id', 'logical_request_id', 'workload',
         'status', 'actual_model', 'model_requested', 'input_tokens', 'output_tokens', 'total_tokens',
         'effective_cached_input_tokens', 'effective_thinking_tokens', 'computed_list_price_cost',
         'pricing_currency', 'price_table_version', 'usage_resolution_status', 'cost_resolution_status',
-        'retry', 'repair', 'fallback', 'error_class', 'validation_families')} for r in real]
+        'retry', 'repair', 'fallback', 'error_class', 'validation_families', 'phase', 'pipeline', 'reason')},
+        'attributed_partition': partition(r)} for r in real]
+    logical_ids = {r['logical_request_id'] for r in rows if r.get('logical_request_id')}
+    uncorrelated = sum(not r.get('logical_request_id') for r in real)
     return {"overall": overall, "workloads": workloads, "warnings": warnings,
             'partitions': partitions,
+            'attribution_complete': bool(valid and not any(partition(r) == 'unattributed' for r in real)),
+            'request_identity': {'observed_logical_requests': len(logical_ids),
+                'uncorrelated_provider_attempts': uncorrelated,
+                'complete_logical_requests': len(logical_ids) if valid and not uncorrelated else None},
             'usage': usage, 'provider_attempt_records': cost_records,
             'validation_failed_attempts': sum(bool(r.get('validation_families')) for r in real) if valid else None,
             "repairs": sum(r.get("repair") is True for r in rows if r.get("status") in {"called", "failed"}) if valid else None,
@@ -396,8 +416,8 @@ def build_report(root: Path = ROOT, *, until: datetime | None = None, hours: int
         return str((Decimal(str(value)) / denominator).quantize(Decimal('0.00000001'))) if value is not None and denominator else None
     news_econ = econ['partitions']['news_and_editorial']
     econ['per_news'] = {
-        'news_and_editorial_cost': per_news(news_econ.get('complete_window_computed_list_price_cost')),
-        'news_and_editorial_attempts': per_news(news_econ.get('real_attempts')),
+        'news_and_editorial_cost': per_news(news_econ.get('complete_window_computed_list_price_cost')) if econ['attribution_complete'] else None,
+        'news_and_editorial_attempts': per_news(news_econ.get('real_attempts')) if econ['attribution_complete'] else None,
         'meaning': 'Rapporto dei consumi osservati alle news pubblicate nella finestra; include selezione/scarti/attese, non costo marginale della singola news. Report esclusi.',
     }
     quality_errors: list[str] = []
@@ -502,6 +522,7 @@ def render_summary(r: dict) -> str:
     lines.append(f"Input completo e verdetti: copertura {material['coverage']}; cutover {num(material['cutover_at'])}; fonti {material['sources']['window_metrics'] if material['sources']['window_metrics'] is not None else 'n.d.'}")
     for phase, metrics in material['inputs'].items():
         lines.append(f"Input {phase}: {metrics['window_metrics'] if metrics['window_metrics'] is not None else 'n.d. (campione negli allegati)'}")
+    lines.append(f"Richieste editoriali canoniche, tentativi e chiamate evitate: {material['ai_requests']['window_metrics'] if material['ai_requests']['window_metrics'] is not None else 'n.d. (campione negli allegati)'}. Profili ripetuti non sono nuove richieste.")
     finals = material['duplicates']
     lines.append(f"Verdetti finali canonici (primario + softpool): {finals['window_metrics'] if finals['window_metrics'] is not None else 'n.d. (campione negli allegati)'}. La correttezza semantica richiede review delle fonti.")
     cache = material['pair_cache']
@@ -514,7 +535,8 @@ def render_summary(r: dict) -> str:
         lines.append(f"{name}: chiamate {num(econ['real_attempts'])}; costo {num(econ['complete_window_computed_list_price_cost'])} {econ.get('currency') or 'n.d.'}")
     lines.append(f"Tentativi provider falliti Gemini: {num(r['economics']['failed_attempts'])}; tentativi con output non validato {num(r['economics']['validation_failed_attempts'])}; repair osservati: {num(r['economics']['repairs'])}")
     diagnostics = overall.get('diagnostics') or {}
-    lines.append(f"Retry/fallback Gemini osservati: {num(diagnostics.get('retry_attempts'))}/{num(diagnostics.get('fallback_attempts'))}; modelli effettivi: {json.dumps((overall.get('breakdowns') or {}).get('by_model', {}), ensure_ascii=False)}")
+    lines.append(f"Retry/fallback Gemini, conteggi di finestra: {num(diagnostics.get('retry_attempts') if overall['available'] else None)}/{num(diagnostics.get('fallback_attempts') if overall['available'] else None)}; modelli effettivi: {json.dumps((overall.get('breakdowns') or {}).get('by_model', {}), ensure_ascii=False)}")
+    lines.append(f"Attribuzione costi news/report completa: {r['economics']['attribution_complete']}; lavoro non attribuito resta separato. Richieste logiche nel ledger economico: {num(r['economics']['request_identity']['complete_logical_requests'])}.")
     lines.append('Totali token input/output/cached/thinking, versioni di prezzo e associazioni alle richieste sono negli allegati; valori non risolti restano n.d.')
     operational = r['operational']
     lines.append(f"Run completate (fonte canonica): {num((operational.get('runs') or {}).get('completed_unique_run_count'))}")

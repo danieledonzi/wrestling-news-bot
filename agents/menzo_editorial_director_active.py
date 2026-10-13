@@ -141,7 +141,15 @@ def prepare_snapshot(snapshot: dict[str, Any]) -> dict[str, Any]:
     for group in groups.values():
         if len(group) > 1:
             local_group = copy.deepcopy(group)
+            for row in local_group:
+                contract = snapshot.get('_active_source_contracts', {}).get(row['candidate_id'])
+                if source_material.valid_for(contract, row):
+                    row['canonical_source_body'] = copy.deepcopy(contract)
             hydrate_complete_article_bodies(local_group)
+            for row in local_group:
+                contract = row.get('canonical_source_body')
+                if source_material.valid_for(contract, row):
+                    snapshot.setdefault('_active_source_contracts', {})[row['candidate_id']] = copy.deepcopy(contract)
             local_winner, _ = canonical_richer_winner(local_group, earliest_arrival=True)
             winner = next(item for item in group if item["candidate_id"] == local_winner["candidate_id"])
         else:
@@ -495,7 +503,7 @@ def _apply_duplicate_gate(snapshot: dict[str, Any], relations: list[dict[str, An
             hydrated = copy.deepcopy(group)
             for row in hydrated:
                 contract = snapshot.get('_active_source_contracts', {}).get(row['candidate_id'])
-                if source_body.valid_contract(contract):
+                if source_material.valid_for(contract, row):
                     row['canonical_source_body'] = copy.deepcopy(contract)
             hydrate_complete_article_bodies(hydrated)
             winner, _ = canonical_richer_winner(hydrated, earliest_arrival=True)
@@ -1125,7 +1133,6 @@ def evaluate(snapshot: Mapping[str, Any], *, provider=None, artifact_index=None)
     """Complete-body input; first classes and terminal decisions remain immutable."""
     if not isinstance(snapshot, dict):
         snapshot = copy.deepcopy(dict(snapshot))
-    source_material.emit('editorial_full_material_cycle', 'selection', 'started', {})
     material = source_material.Session(snapshot)
     try:
         result = _evaluate_complete(snapshot, material, provider=provider, artifact_index=artifact_index)
