@@ -308,6 +308,8 @@ def build_master_record(
             "status": (run_summary.get("editorial_director_active") or {}).get("status"),
             "policy_version": (run_summary.get("editorial_director_active") or {}).get("policy_version"),
             "prefilter": (run_summary.get("editorial_director_active") or {}).get("editorial_prefilter", {}),
+            "source_material": (run_summary.get("editorial_director_active") or {}).get("source_material"),
+            "source_material_holds": (run_summary.get("editorial_director_active") or {}).get("source_material_holds"),
             "duplicate_cache_hits": (run_summary.get("editorial_director_active") or {}).get("duplicate_pair_cache_hits", 0),
             "duplicate_cache_misses": (run_summary.get("editorial_director_active") or {}).get("duplicate_pair_cache_misses", 0),
             "scheduling": {key: value for key, value in (menzo.get("postprocess") or {}).items()

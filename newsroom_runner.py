@@ -411,7 +411,8 @@ def capture_editorial_director_opportunity(massy_board: dict[str, Any], *, run_i
         # Active classifies only URLs present in the current feed board.
         # The persistent soft pool is a separate container and is never injected into Active candidates.
         from agents.menzo_priority_queue import augment_board
-        augmented = mark_rediscovered_pool_candidates(augment_board(massy_board))
+        from agents.menzo_source_material import augment_board as augment_source_holds
+        augmented = mark_rediscovered_pool_candidates(augment_source_holds(augment_board(massy_board)))
     else:
         augmented = softpool_augmented_board(massy_board)
     from agents.menzo_policy_v93_15 import published_today_count
@@ -460,6 +461,8 @@ def capture_editorial_director_opportunity(massy_board: dict[str, Any], *, run_i
         from agents.menzo_editorial_director_active import preserve_bob_capacity_metadata
         preserve_bob_capacity_metadata(snapshot, [item for item in augmented.get("news_candidates_for_menzo", [])
                                                    if isinstance(item, dict)])
+        from agents.menzo_source_material import attach_contracts
+        attach_contracts(snapshot, augmented.get('news_candidates_for_menzo', []) + history)
     return snapshot, None, preflight
 
 
@@ -483,7 +486,8 @@ def persist_active_fallback(decision: dict[str, Any], reason: str) -> dict[str, 
     return decision
 
 
-def persist_active_fail_closed(snapshot: dict[str, Any] | None, reason: str) -> dict[str, Any]:
+def persist_active_fail_closed(snapshot: dict[str, Any] | None, reason: str, *,
+                               technical_hold: bool = False) -> dict[str, Any]:
     """ED-3 safety: Active failure never bypasses duplicate authority through legacy publication."""
     from agents.menzo_policy_v93_15 import (ARTIFACT_DECISIONS_FILE, MENZO_DECISIONS_FILE,
         V92_ALLOWED_URLS_FILE, utc_now, write_json)
@@ -491,8 +495,12 @@ def persist_active_fail_closed(snapshot: dict[str, Any] | None, reason: str) -> 
     from agents.menzo_policy_v93_15 import save_hard_skips
     source = snapshot if isinstance(snapshot, dict) else {}
     skipped = []
+    pending = []
+    primary_by_id = {row['candidate_id']: row for row in source.get('editorial_prefilter_decisions', [])}
     seen = set()
-    for row in (list(source.get("candidates", [])) + list(source.get("terminal_policy_skips", [])) +
+    for row in (list(source.get("candidates", [])) +
+                (list(source.get('source_material_holds', [])) if technical_hold else []) +
+                list(source.get("terminal_policy_skips", [])) +
                 list(source.get("deterministic_exact_skips", [])) + list(source.get("semantic_duplicate_skips", []))):
         if not isinstance(row, dict):
             continue
@@ -513,12 +521,19 @@ def persist_active_fail_closed(snapshot: dict[str, Any] | None, reason: str) -> 
         elif item.get("semantic_duplicate_scope"):
             authority = "semantic_duplicate_gate"
             why = "semantic_duplicate"
+        elif technical_hold:
+            item.update(decision='defer', decision_authority='editorial_director_technical_hold',
+                        reason=reason)
+            primary = primary_by_id.get(row.get('candidate_id'))
+            if primary:
+                item['editorial_director'] = dict(primary)
+            pending.append(item)
+            continue
         else:
             authority = "editorial_director_fail_closed"
             why = "active_fail_closed:" + reason
         item.update(decision="skip", priority="skip", decision_authority=authority, reason=why)
         skipped.append(item)
-    primary_by_id = {row["candidate_id"]: row for row in source.get("editorial_prefilter_decisions", [])}
     prefilter_skips = []
     for row in source.get("editorial_prefilter_skips", []):
         primary = primary_by_id.get(row.get("candidate_id"), {})
@@ -532,21 +547,22 @@ def persist_active_fail_closed(snapshot: dict[str, Any] | None, reason: str) -> 
     from agents.menzo_priority_queue import discard_terminal
     save_hard_skips({'skipped': skipped})
     discard_terminal(skipped)
+    authority = 'editorial_director_technical_hold' if technical_hold else 'editorial_director_fail_closed'
     decision = {
         "version": POLICY_VERSION,
         "policy_version": POLICY_VERSION,
-        "mode": "editorial_director_active_fail_closed",
-        "decision_authority": "editorial_director_fail_closed",
+        "mode": "editorial_director_active_technical_hold" if technical_hold else "editorial_director_active_fail_closed",
+        "decision_authority": authority,
         "fallback_reason": reason,
-        "selected": [], "pending": [], "skipped": skipped,
+        "selected": [], "pending": pending, "skipped": skipped,
         "allowed_urls_for_v92": [],
-        "handoff": {"to_bob_or_v92": 0, "pending": 0, "skipped": len(skipped),
-                    "decision_authority": "editorial_director_fail_closed"},
+        "handoff": {"to_bob_or_v92": 0, "pending": len(pending), "skipped": len(skipped),
+                    "decision_authority": authority},
     }
     write_json(MENZO_DECISIONS_FILE, decision)
     write_json(ARTIFACT_DECISIONS_FILE, decision)
     write_json(V92_ALLOWED_URLS_FILE, {"generated_at": utc_now(), "version": decision["version"],
-        "decision_authority": "editorial_director_fail_closed", "fallback_reason": reason,
+        "decision_authority": authority, "fallback_reason": reason,
         "allowed_urls": []})
     return decision
 
@@ -681,6 +697,10 @@ def _run_newsroom() -> int:
                 menzo_decision = project_active(director_snapshot, director_result)
                 observe_applied_active_authority(artifacts, director_snapshot, director_result)
                 add_timeline(timeline, "Menzo", "editorial_director_active_authoritative", "VALIDATED")
+            elif director_result.get('status') == 'OVERSIZE_NOT_EVALUATED':
+                reason = active_fallback_reason(director_result, RuntimeError('editorial_input_limit'))
+                menzo_decision = persist_active_fail_closed(director_snapshot, reason, technical_hold=True)
+                add_timeline(timeline, 'Menzo', 'editorial_director_active_technical_hold', reason)
             else:
                 raise RuntimeError(str(director_result.get("fallback_reason") or director_result.get("status")))
         except Exception as exc:

@@ -218,6 +218,41 @@ def test_costs_keep_admission_and_final_judgment_separate(tmp_path):
     assert Decimal(economics["overall"]["complete_window_computed_list_price_cost"]) == sum(Decimal(v["complete_window_computed_list_price_cost"]) for v in economics["workloads"].values())
 
 
+def test_report_costs_and_cached_provider_tokens_do_not_become_news_or_pair_hits(tmp_path):
+    from agents.gemini_ledger import calculate_v96_2_cost
+    from decimal import Decimal
+    usage = {'usage_available': True, 'input_tokens': 1000, 'output_tokens': 100,
+        'cached_input_tokens': 200, 'thinking_tokens': 20, 'total_tokens': 1120,
+        'total_tokens_provider_reported': True}
+    price = calculate_v96_2_cost(usage, 'gemini-3.1-flash-lite')
+    rows = [{'timestamp': UNTIL.isoformat(), 'workload': phase, 'status': 'called',
+        'ledger_schema_version': 'v3', 'provider_attempt_id': str(i),
+        'actual_model': 'gemini-3.1-flash-lite', **usage, **price}
+        for i, phase in enumerate(('editorial_director_active', 'report_translation'))]
+    path = tmp_path / 'state/newsroom/gemini_call_ledger.jsonl'
+    path.parent.mkdir(parents=True)
+    path.write_text('\n'.join(json.dumps(r) for r in rows))
+    economics = report.economic_sections(tmp_path, SINCE, UNTIL)
+    assert economics['partitions']['news_and_editorial']['real_attempts'] == 1
+    assert economics['partitions']['reports']['real_attempts'] == 1
+    assert Decimal(economics['overall']['complete_window_computed_list_price_cost']) == 2 * Decimal(
+        economics['partitions']['news_and_editorial']['complete_window_computed_list_price_cost'])
+    tokens = economics['usage']['overall']
+    assert tokens['input_tokens']['window_total'] == 2000
+    assert tokens['effective_cached_input_tokens']['window_total'] == 400
+    assert tokens['effective_thinking_tokens']['window_total'] == 40
+
+
+def test_unresolved_usage_is_not_a_zero_token_total(tmp_path):
+    path = tmp_path / 'state/newsroom/gemini_call_ledger.jsonl'
+    path.parent.mkdir(parents=True)
+    path.write_text(json.dumps({'timestamp': UNTIL.isoformat(), 'status': 'failed',
+        'ledger_schema_version': 'v3', 'provider_attempt_id': 'unknown', 'workload': 'editorial_director_active'}))
+    economics = report.economic_sections(tmp_path, SINCE, UNTIL)
+    assert economics['usage']['overall']['input_tokens']['window_total'] is None
+    assert economics['usage']['overall']['effective_cached_input_tokens']['window_total'] is None
+
+
 def test_daily_note_append_preserves_prior_release_and_deduplicates(tmp_path, monkeypatch):
     rows = [run(SINCE - timedelta(minutes=1)), run(SINCE + timedelta(hours=1))]
     data = build(tmp_path, sources(tmp_path, monkeypatch, rows, []))

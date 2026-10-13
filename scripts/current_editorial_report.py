@@ -15,9 +15,10 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
 from typing import Any
+from decimal import Decimal
 
 ROOT = Path(__file__).resolve().parents[1]
-SCHEMA = "owtv_editorial_observation_v1"
+SCHEMA = "owtv_editorial_observation_v2"
 CLASSES = ("MUST_PUBLISH", "SHOULD_PUBLISH", "PUBLISHABLE_SOFT", "SKIP")
 ROME = ZoneInfo("Europe/Rome")
 BLOCKS = {"WAIT_DUPLICATE_CLEARANCE", "TECHNICAL_BLOCK", "REVIEW_UNAVAILABLE", "WAIT_PRIMARY_DECISION"}
@@ -114,7 +115,54 @@ def economic_sections(root: Path, since: datetime, until: datetime) -> dict:
     for name, accepted in names.items():
         selected = [r for r in rows if r.get("workload") in accepted]
         workloads[name] = build_gemini_economic_truth(selected, available=valid)
+    news_workloads = set().union(*names.values()) | {'translation_generation', 'quote_resolution',
+                     'duplicate_arbitration', 'selection'}
+    def partition(row):
+        # Installed report producers also use pipeline/phase evidence, without
+        # a workload field. Unknown work never silently becomes news cost.
+        if (row.get('workload') == 'report_translation' or row.get('model_role') == 'report_translation' or
+                row.get('pipeline') == 'report' or str(row.get('reason') or '').startswith('report_translation') or
+                str(row.get('phase') or '').startswith('report_blocks')):
+            return 'reports'
+        if (row.get('workload') in news_workloads or row.get('model_role') in news_workloads or
+                row.get('phase') in {'translate_article', 'quote_resolver', 'ai_editorial_review',
+                    'same_run_duplicate_arbitration', 'recent_history_duplicate_arbitration'} or
+                str(row.get('purpose') or '').startswith('news_translate')):
+            return 'news_and_editorial'
+        return 'unattributed'
+    partitions = {name: build_gemini_economic_truth([r for r in rows if partition(r) == name], available=valid)
+                  for name in ('news_and_editorial', 'reports', 'unattributed')}
+    real = [r for r in rows if str(r.get('status') or '').strip().casefold() in {'called', 'failed'}]
+    token_fields = ('input_tokens', 'output_tokens', 'total_tokens', 'non_cached_input_tokens',
+                    'effective_cached_input_tokens', 'effective_thinking_tokens')
+    def token_summary(selected):
+        totals = {}
+        for field in token_fields:
+            values = [r.get(field) if r.get('usage_resolution_status') == 'resolved' else None for r in selected]
+            known = [v for v in values if isinstance(v, int) and not isinstance(v, bool) and v >= 0]
+            totals[field] = {'known_sum': sum(known) if known or (valid and not selected) else None,
+                'resolved_attempts': len(known), 'attempts': len(selected),
+                'window_total': sum(known) if valid and len(known) == len(selected) else None}
+        return totals
+    usage = {'overall': token_summary(real), 'by_workload': {
+        phase: token_summary([r for r in real if (r.get('workload') or 'UNKNOWN') == phase])
+        for phase in sorted({r.get('workload') or 'UNKNOWN' for r in real})}}
+    cost_records = [{**{k: r.get(k) for k in ('timestamp', 'provider_attempt_id', 'logical_request_id', 'workload',
+        'status', 'actual_model', 'model_requested', 'input_tokens', 'output_tokens', 'total_tokens',
+        'effective_cached_input_tokens', 'effective_thinking_tokens', 'computed_list_price_cost',
+        'pricing_currency', 'price_table_version', 'usage_resolution_status', 'cost_resolution_status',
+        'retry', 'repair', 'fallback', 'error_class', 'validation_families', 'phase', 'pipeline', 'reason')},
+        'attributed_partition': partition(r)} for r in real]
+    logical_ids = {r['logical_request_id'] for r in rows if r.get('logical_request_id')}
+    uncorrelated = sum(not r.get('logical_request_id') for r in real)
     return {"overall": overall, "workloads": workloads, "warnings": warnings,
+            'partitions': partitions,
+            'attribution_complete': bool(valid and not any(partition(r) == 'unattributed' for r in real)),
+            'request_identity': {'observed_logical_requests': len(logical_ids),
+                'uncorrelated_provider_attempts': uncorrelated,
+                'complete_logical_requests': len(logical_ids) if valid and not uncorrelated else None},
+            'usage': usage, 'provider_attempt_records': cost_records,
+            'validation_failed_attempts': sum(bool(r.get('validation_families')) for r in real) if valid else None,
             "repairs": sum(r.get("repair") is True for r in rows if r.get("status") in {"called", "failed"}) if valid else None,
             "failed_attempts": sum(r.get("status") == "failed" for r in rows) if valid else None}
 
@@ -167,6 +215,8 @@ def analyze_runs(runs: list[dict], frozen: dict, closed: dict, since: datetime, 
                 first = frozen.get(key)
                 cl = primary_class(row)
                 article = articles.setdefault(key, {**compact(row), "first_class": (first or {}).get("editorial_class"),
+                    'first_input_coverage': (first or {}).get('first_input_coverage'),
+                    'first_body_sha256': (first or {}).get('first_body_sha256'),
                     "classified_at": (first or {}).get("classified_at"), "story_core": (first or {}).get("story_core"),
                     "events": [], "published": False})
                 event = {"at": at, "stage": stage, "class": cl, "reason": row.get("reason"),
@@ -228,6 +278,8 @@ def analyze_runs(runs: list[dict], frozen: dict, closed: dict, since: datetime, 
         states = Counter()
         for key, first in members.items():
             a = articles.setdefault(key, {**compact(first), "first_class": cl,
+                'first_input_coverage': first.get('first_input_coverage'),
+                'first_body_sha256': first.get('first_body_sha256'),
                 "classified_at": first.get("classified_at"), "story_core": first.get("story_core"),
                 "events": [], "published": False})
             closed_at = stamp((closed.get(key) or {}).get("added_at"))
@@ -356,6 +408,18 @@ def build_report(root: Path = ROOT, *, until: datetime | None = None, hours: int
     patterns = observed_patterns(analysis, weekly, current_version)
     proposals = [p for p in patterns if p["status"] == "proposal_requires_owner_approval"]
     econ = economic_sections(root, since, until)
+    from scripts.editorial_material_metrics import build_metrics
+    material_metrics = build_metrics(root, since, until,
+        snapshot.get('authoritative', {}).get('pr131_duplicate_pair_cache'))
+    def per_news(value):
+        denominator = pub.get('unique_news_publications') if publication_complete else None
+        return str((Decimal(str(value)) / denominator).quantize(Decimal('0.00000001'))) if value is not None and denominator else None
+    news_econ = econ['partitions']['news_and_editorial']
+    econ['per_news'] = {
+        'news_and_editorial_cost': per_news(news_econ.get('complete_window_computed_list_price_cost')) if econ['attribution_complete'] else None,
+        'news_and_editorial_attempts': per_news(news_econ.get('real_attempts')) if econ['attribution_complete'] else None,
+        'meaning': 'Rapporto dei consumi osservati alle news pubblicate nella finestra; include selezione/scarti/attese, non costo marginale della singola news. Report esclusi.',
+    }
     quality_errors: list[str] = []
     quality = quality_report if quality_report is not None else read_json(root / "state/reports/owtv_translation_warning_analysis_latest.json", dict, quality_errors)
     quality_at = stamp((quality or {}).get("generated_at"))
@@ -385,6 +449,7 @@ def build_report(root: Path = ROOT, *, until: datetime | None = None, hours: int
             "policy_versions": weekly["policy_versions"], "cohorts": weekly["cohorts"],
             "soft_status_run_observations": weekly["softpool"]["status_run_observations"]},
         "current_snapshots": current_state, "patterns": patterns, "economics": econ,
+        'complete_material_observation': material_metrics,
         "operational": {"runs": snapshot.get("authoritative", {}).get("runs"),
             "publisher": snapshot.get("authoritative", {}).get("publisher"),
             "andrea": snapshot.get("authoritative", {}).get("andrea"),
@@ -446,13 +511,33 @@ def render_summary(r: dict) -> str:
         f"Copertura percorso URL settimanale: {r['coverage']['weekly_lifecycle']}; i conteggi incompleti non certificano assenza di problemi."]
     current_patterns = [p for p in r['patterns'] if p['status'] == 'proposal_requires_owner_approval']
     lines += [f"Violazioni candidate nella versione attuale: {len(current_patterns)} pattern (vedi evidenze e limiti negli allegati).",
-        f"Duplicate nel percorso primario: coppie uniche osservate {life['duplicates']['unique_admitted_pairs_observed']}; esiti {num(life['duplicates']['decisions_observed'])}; URL chiusi per duplicate {len(life['duplicates']['terminal_duplicate_urls'])}",
+        f"Duplicate nel percorso primario: coppie ammesse uniche osservate {life['duplicates']['unique_admitted_pairs_observed']}; URL chiusi per duplicate {len(life['duplicates']['terminal_duplicate_urls'])}",
         f"Controlli di traduzione: {r['translation_signals']['status_counts'] if r['translation_signals']['available'] else 'n.d.'}; riprodotto non significa errore semantico."]
     overall = r["economics"]["overall"]
     lines.append(f"Costo Gemini calcolato a listino: {num(overall.get('complete_window_computed_list_price_cost'))} {overall.get('currency') or 'n.d.'}; copertura {overall['coverage']}")
+    for name, partition in r['economics']['partitions'].items():
+        lines.append(f"{name}: chiamate {num(partition['real_attempts'])}; costo {num(partition['complete_window_computed_list_price_cost'])} {partition.get('currency') or 'n.d.'}")
+    lines.append(f"Costo news/decisioni per news pubblicata: {num(r['economics']['per_news']['news_and_editorial_cost'])}; tentativi per news {num(r['economics']['per_news']['news_and_editorial_attempts'])}. Report esclusi; rapporti di finestra, non costi marginali.")
+    material = r['complete_material_observation']
+    lines.append(f"Input completo e verdetti: copertura {material['coverage']}; cutover {num(material['cutover_at'])}; fonti {material['sources']['window_metrics'] if material['sources']['window_metrics'] is not None else 'n.d.'}")
+    for phase, metrics in material['inputs'].items():
+        lines.append(f"Input {phase}: {metrics['window_metrics'] if metrics['window_metrics'] is not None else 'n.d. (campione negli allegati)'}")
+    lines.append(f"Richieste editoriali canoniche, tentativi e chiamate evitate: {material['ai_requests']['window_metrics'] if material['ai_requests']['window_metrics'] is not None else 'n.d. (campione negli allegati)'}. Profili ripetuti non sono nuove richieste.")
+    finals = material['duplicates']
+    lines.append(f"Verdetti finali canonici (primario + softpool): {finals['window_metrics'] if finals['window_metrics'] is not None else 'n.d. (campione negli allegati)'}. La correttezza semantica richiede review delle fonti.")
+    cache = material['pair_cache']
+    hit_rate = f"{cache['pair_hit_rate']:.1%}" if isinstance(cache.get('pair_hit_rate'), (int, float)) else 'n.d.'
+    lines.append(f"Cache coppie PR131: copertura {cache.get('coverage', 'unavailable')}; lookup/hit/miss {num(cache.get('pair_lookups'))}/{num(cache.get('pair_hits'))}/{num(cache.get('pair_misses'))}; hit rate {hit_rate}; richieste gate evitate {num(cache.get('gate_logical_requests_avoided'))}.")
+    lines.append('Un hit per coppia non equivale a una chiamata evitata; un batch con miss richiede ancora Gemini. Cache e token cached del provider sono distinti.')
+    source_cache = material['source_cache_current']
+    lines.append(f"Memoria sorgenti, snapshot corrente: corpi {num(source_cache.get('body_entries'))}; record candidate in attesa {num(source_cache.get('candidate_holds'))}, effettivi {num(source_cache.get('effective_candidate_holds'))}; record corpi storici {num(source_cache.get('history_holds'))}. Non sono ingressi nel softpool.")
     for name, econ in r["economics"]["workloads"].items():
         lines.append(f"{name}: chiamate {num(econ['real_attempts'])}; costo {num(econ['complete_window_computed_list_price_cost'])} {econ.get('currency') or 'n.d.'}")
-    lines.append(f"Tentativi falliti Gemini: {num(r['economics']['failed_attempts'])}; repair osservati: {num(r['economics']['repairs'])}")
+    lines.append(f"Tentativi provider falliti Gemini: {num(r['economics']['failed_attempts'])}; tentativi con output non validato {num(r['economics']['validation_failed_attempts'])}; repair osservati: {num(r['economics']['repairs'])}")
+    diagnostics = overall.get('diagnostics') or {}
+    lines.append(f"Retry/fallback Gemini, conteggi di finestra: {num(diagnostics.get('retry_attempts') if overall['available'] else None)}/{num(diagnostics.get('fallback_attempts') if overall['available'] else None)}; modelli effettivi: {json.dumps((overall.get('breakdowns') or {}).get('by_model', {}), ensure_ascii=False)}")
+    lines.append(f"Attribuzione costi news/report completa: {r['economics']['attribution_complete']}; lavoro non attribuito resta separato. Richieste logiche nel ledger economico: {num(r['economics']['request_identity']['complete_logical_requests'])}.")
+    lines.append('Totali token input/output/cached/thinking, versioni di prezzo e associazioni alle richieste sono negli allegati; valori non risolti restano n.d.')
     operational = r['operational']
     lines.append(f"Run completate (fonte canonica): {num((operational.get('runs') or {}).get('completed_unique_run_count'))}")
     andrea = operational.get('andrea') or {}
@@ -495,6 +580,38 @@ def render_markdown(r: dict) -> str:
             lines.append(f"- {s['at']}: {json.dumps(decisions, ensure_ascii=False)}; capacità: {s['capacity_context']}")
         if s.get("technical_details"):
             lines.append(f"- {s['at']}: attesa tecnica — {json.dumps(s['technical_details'], ensure_ascii=False)}")
+    material = r['complete_material_observation']
+    lines += ['', '## Input completo, cache e verdetti semantici', '',
+        f"Copertura: {material['coverage']}; cutover: {num(material['cutover_at'])}.",
+        *material['interpretation'], '', '### Profili di input per richiesta', '',
+        '| Ora UTC | Fase | Endpoint | Corpo completo | Non completo | Byte del prompt |',
+        '|---|---|---:|---:|---:|---:|']
+    for p in material['input_profiles']:
+        lines.append(f"| {p['at']} | {p['phase']} | {len(p['endpoints'])} | {num(p.get('full_body_endpoints'))} | {num(p.get('body_unavailable_endpoints'))} | {num(p.get('prompt_bytes'))} |")
+    lines += ['', '### Coppie e decisioni finali registrate', '',
+        '| Ora UTC | Percorso | Articolo corrente | Confronto | Verdetto | Fatto nuovo | Cache |',
+        '|---|---|---|---|---|---|---|']
+    def cell(value):
+        return str(value or '').replace('|', '\\|').replace('\n', ' ')
+    for p in material['duplicates']['records']:
+        lines.append('| ' + ' | '.join(cell(v) for v in (p['at'], p.get('path'), p['left'].get('title'),
+            p['right'].get('title'), p['decision'], p.get('new_fact'), p.get('cache_hit'))) + ' |')
+    lines += ['', '### Relazioni semanticamente dichiarate (non cluster lessicali)', '',
+        f"Componenti DUPLICATE osservati: {json.dumps(material['duplicates']['duplicate_components'], ensure_ascii=False)}",
+        f"Aggiornamenti MATERIAL_UPDATE osservati: {len(material['duplicates']['material_update_links'])}",
+        f"Cache PR131, metriche di finestra: {json.dumps(material['pair_cache'], ensure_ascii=False)}",
+        f"Cache PR131, snapshot corrente separato: {json.dumps(material['pair_cache_current'], ensure_ascii=False)}",
+        f"Memoria sorgenti, snapshot corrente separato: {json.dumps(material['source_cache_current'], ensure_ascii=False)}",
+        f"Avvisi input/verdetti: {material['warnings']}"]
+    lines += ['', '## Consumi per fase e copertura economica', '',
+        r['economics']['per_news']['meaning'], '',
+        '| Workload | Input | Output | Input cached effettivo | Thinking effettivo |',
+        '|---|---:|---:|---:|---:|']
+    for phase, fields in r['economics']['usage']['by_workload'].items():
+        lines.append('| ' + phase + ' | ' + ' | '.join(num(fields[k]['window_total']) for k in
+            ('input_tokens', 'output_tokens', 'effective_cached_input_tokens', 'effective_thinking_tokens')) + ' |')
+    lines += ['', 'I token cached sono quelli normalizzati dal contratto usage del provider. Non sono hit della cache PR131.',
+        'Ogni tentativo reale, con modello e costo risolto o indisponibile, è esposto nel JSON; le chiamate diagnostiche isolate non vengono attribuite alla produzione.']
     lines += ["", "## Pattern e limiti", "",
         "Contratto osservato: classificazione primaria immutabile prima di duplicate/pool; skip definitivo escluso da nuovi confronti; quote bookmaker escluse; MUST/SHOULD durante la copertura live pubblicabili autonomamente; il report non sostituisce le news e non alimenta il feed.",
         "Una somiglianza fra titoli, una regola lessicale riprodotta o zero soft pubblicate non dimostrano un errore editoriale.",

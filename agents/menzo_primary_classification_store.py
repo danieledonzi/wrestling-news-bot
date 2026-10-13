@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 from pathlib import Path
 from typing import Any, Mapping
@@ -28,7 +29,12 @@ def key(row: Mapping[str, Any]) -> str:
 
 
 def _entry(article, decision, when, policy):
+    from agents.menzo_source_material import CONTRACT_VERSION
+    body = str(article.get('retained_body') or '')
     return {'url': article.get('url') or article.get('source_url'), 'title': article.get('title'),
+            'first_input_coverage': article.get('input_coverage'),
+            'first_input_contract': CONTRACT_VERSION if article.get('input_coverage') == 'FULL_BODY' else None,
+            'first_body_sha256': hashlib.sha256(body.encode()).hexdigest() if body else None,
             'classified_at': decision.get('classified_at') or when,
             'first_seen_at': decision.get('first_seen_at') or when,
             'policy_version': decision.get('policy_version') or policy,

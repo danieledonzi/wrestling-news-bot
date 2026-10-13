@@ -133,7 +133,9 @@ def test_partial_ordinary_no_match_is_cached_on_remaining_fallback():
     gate = {"relations": [{"ref": "r0", "decision": "NO_MATCH"}, {"ref": "r1", "decision": "UNCERTAIN"}]}
     result = active.evaluate(state, provider=lambda prompt, *_: gate if "PHASE ONLY" in prompt else select_all(state))
     assert result["status"] != "VALIDATED"
-    assert state["candidates"] == before and "semantic_duplicate_skips" not in state
+    assert [{k: v for k, v in r.items() if k not in {'retained_body', 'input_coverage'}} for r in state['candidates']] == [
+        {k: v for k, v in r.items() if k not in {'retained_body', 'input_coverage'}} for r in before]
+    assert "semantic_duplicate_skips" not in state
     assert set(cache.load()["entries"]) == {"pair-ab"}
     assert result["duplicate_pair_cache_entries_stored"] == 1
 
@@ -184,7 +186,9 @@ def test_unsupported_failures_keep_atomic_fallback(kind):
             raise RuntimeError("provider offline")
         return {"relations": [{"ref": f"r{i}", "decision": "UNCERTAIN"} for i in range(len(state["authorized_relations"]))]}
     result = active.evaluate(state, provider=provider)
-    assert result["status"] != "VALIDATED" and state["candidates"] == before
+    assert result["status"] != "VALIDATED"
+    assert [{k: v for k, v in r.items() if k not in {'retained_body', 'input_coverage'}} for r in state['candidates']] == [
+        {k: v for k, v in r.items() if k not in {'retained_body', 'input_coverage'}} for r in before]
     assert not any("DR1 BODY-AWARE" in p for p in calls)
     assert cache.load()["entries"] == {}
 

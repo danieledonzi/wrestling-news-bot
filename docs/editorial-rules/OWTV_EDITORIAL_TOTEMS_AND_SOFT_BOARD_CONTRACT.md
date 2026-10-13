@@ -9,8 +9,15 @@
 **Owner-approved clarification:** 2026-10-10 — feed-URL news only, autonomous reports, and final Gemini semantic decisions.
 **Additional owner-approved clarification:** 2026-10-10 — terminal SKIP isolation and bookmaker exclusion, under TOTEM-S01/N02.
 **Additional owner-approved clarification:** 2026-10-10 — immutable first valid primary class, under TOTEM-C01.
+**Owner-approved conditional reform:** 2026-10-13 — complete source material under TOTEM-F01, confirmed by isolated replay.
 
 This document freezes the editorial invariants that MUST survive any implementation reform. Operational parameters may still be tuned, but the invariants below are non-negotiable unless explicitly superseded by a later owner-approved architecture decision.
+
+TOTEM-F01 in `docs/OWTV_TOTEM_INVARIANTS.md` now governs source input: first classification and final duplicate
+decisions use the full extraction-verified article body. Source failures are technical holds, never inferred editorial
+SKIPs. Pair admission uses full material where available and explicitly labels unavailable history bodies; an admitted
+pair with missing full material cannot reach a final verdict. The original C01/S01 memories remain authoritative.
+Full soft input remains optional competition under this contract, with no change to classes, slots or review limits.
 
 ## 1. Duplicate authority is above every editorial class
 
