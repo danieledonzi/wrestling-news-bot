@@ -1021,6 +1021,12 @@ def _evaluate_complete(snapshot: dict[str, Any], material: Any, *, provider=None
     primary_snapshot['candidates'] = fresh
     _finalize_active_input(primary_snapshot)
     if primary_snapshot.get('limit_status') in {'exceeded', 'projection_failed'}:
+        snapshot['editorial_prefilter_decisions'] = copy.deepcopy(reused)
+        skipped_ids = {row['candidate_id'] for row in reused if row['editorial_class'] == 'SKIP'}
+        snapshot['editorial_prefilter_skips'] = [row for row in snapshot['candidates']
+                                                if row['candidate_id'] in skipped_ids]
+        snapshot['candidates'] = [row for row in snapshot['candidates']
+                                  if row['candidate_id'] not in skipped_ids]
         return {'status': 'OVERSIZE_NOT_EVALUATED', 'attempts': 0, 'fallback_reason': 'primary_input_limit'}
     call = provider
     primary = _classify(primary_snapshot, call)
@@ -1143,6 +1149,16 @@ def evaluate(snapshot: Mapping[str, Any], *, provider=None, artifact_index=None)
     material = source_material.Session(snapshot)
     try:
         result = _evaluate_complete(snapshot, material, provider=provider, artifact_index=artifact_index)
+        if result.get('status') == 'OVERSIZE_NOT_EVALUATED':
+            # Transport bounds cannot decide editorial value or lose a feed URL.
+            # Reuse the existing bounded source-hold container, without truncation,
+            # reclassification, provider repair or admission into the soft board.
+            held = {source_material.key(r) for r in snapshot.get('source_material_holds', [])}
+            for row in snapshot.get('candidates', []):
+                if source_material.key(row) not in held:
+                    material.hold(row, result.get('fallback_reason') or 'editorial_input_limit')
+                    snapshot.setdefault('source_material_holds', []).append(row)
+                    held.add(source_material.key(row))
         if result.get('status') == 'VALIDATED':
             held = {source_material.key(r) for r in snapshot.get('source_material_holds', [])}
             for row in (result.get('editorial_prefilter') or {}).get('candidates', []):

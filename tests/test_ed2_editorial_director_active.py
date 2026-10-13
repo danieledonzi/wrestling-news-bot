@@ -1436,6 +1436,19 @@ def test_runner_routes_active_success_without_legacy_and_failure_once(monkeypatc
     legacy_calls.clear(); fail_closed.clear()
     assert newsroom_runner.main() == 0
     assert legacy_calls == [] and fail_closed[0][1] == "wp_not_ready"
+    monkeypatch.setattr(newsroom_runner, 'capture_editorial_director_opportunity', lambda *_a, **_k:
+        ({'candidates': [{'url': 'https://transport.test/a'}]}, None, (True, 'ready')))
+    monkeypatch.setattr(active, 'evaluate', lambda *_a, **_k:
+        {'status': 'OVERSIZE_NOT_EVALUATED', 'fallback_reason': 'primary_input_limit'})
+    technical_calls = []
+    monkeypatch.setattr(newsroom_runner, 'persist_active_fail_closed',
+        lambda snapshot, reason, **kwargs: technical_calls.append((reason, kwargs)) or {
+            'version': active.POLICY_VERSION, 'selected': [], 'pending': [], 'skipped': [],
+            'allowed_urls_for_v92': [], 'handoff': {'decision_authority': 'editorial_director_technical_hold'}})
+    legacy_calls.clear(); authority_events.clear()
+    assert newsroom_runner.main() == 0
+    assert technical_calls == [('primary_input_limit', {'technical_hold': True})] and not legacy_calls
+    assert not any(kwargs.get('result') == 'editorial_director_active_authorized' for _, kwargs in authority_events)
 
 
 def test_active_artifact_is_authoritative_and_not_shadow_labelled(monkeypatch, tmp_path):

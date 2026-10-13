@@ -236,3 +236,94 @@ def test_non_scalar_payload_identities_do_not_crash_reporting(tmp_path, field, v
     path.write_text('\n'.join(json.dumps(row) for row in rows))
     metrics = build_metrics(tmp_path, start, datetime.now(timezone.utc) + timedelta(seconds=1))
     assert metrics['coverage'] == 'unavailable' and metrics['sources']['window_metrics'] is None
+
+
+def test_oversized_full_body_is_retryable_without_classification_or_truncation(monkeypatch):
+    from agents import menzo_editorial_director_shadow as shadow
+    import newsroom_runner as runner
+    complete = ('Complete autonomous source facts. ' * (shadow.MAX_INPUT_BYTES // 20)).strip()
+    def fetch(row):
+        row['canonical_source_body'] = source_body.contract_from_elements(row['url'],
+            [{'type': 'text', 'text': complete}],
+            {'extraction_finished': True, 'body_complete': True, 'clean_element_count': 1})
+        return True, 'complete'
+    monkeypatch.setattr(material, '_fetch_body', fetch)
+    value = snapshot([article('oversized')])
+    result = active.evaluate(value, provider=lambda *_: pytest.fail('oversize cannot call provider'))
+    assert result['status'] == 'OVERSIZE_NOT_EVALUATED' and result['attempts'] == 0
+    assert not active.primary_store.load()
+    held = material._read()['holds']
+    row = held[material.key(article('oversized'))]
+    assert row['reason'] == 'primary_input_limit' and row['item']['retained_body'] == complete
+    decision = runner.persist_active_fail_closed(value, result['fallback_reason'], technical_hold=True)
+    assert decision['selected'] == decision['skipped'] == decision['allowed_urls_for_v92'] == []
+    assert [r['url'] for r in decision['pending']] == [article('oversized')['url']]
+    assert not menzo.terminal_skip_memory() and not menzo.SOFTPOOL_FILE.exists()
+    assert menzo.load_json(menzo.V92_ALLOWED_URLS_FILE, {})['allowed_urls'] == []
+    monkeypatch.setattr('agents.menzo_priority_queue._published_keys', lambda: set())
+    recovered = material.augment_board({'news_candidates_for_menzo': []})
+    assert recovered['news_candidates_for_menzo'][0]['url'] == article('oversized')['url']
+
+
+@pytest.mark.parametrize('phase', ['admission', 'duplicate_gate'])
+def test_input_bounds_after_classification_preserve_classes_and_true_skips(monkeypatch, phase):
+    import newsroom_runner as runner
+    value = snapshot([article('terminal'), article('left'), article('right')])
+    finalize = active._finalize_active_input
+    def bound(row):
+        finalize(row)
+        if ((phase == 'admission' and row.get('_semantic_admission')) or
+                (phase == 'duplicate_gate' and row.get('authorized_relations'))):
+            row['limit_status'] = 'exceeded'
+    monkeypatch.setattr(active, '_finalize_active_input', bound)
+    calls = []
+    def provider(_prompt, schema, *_):
+        calls.append(list(schema['properties']))
+        if 'suspected_duplicates' in schema['properties']:
+            return {'admission_complete': True, 'suspected_duplicates': [
+                {'left_ref': 'a0', 'right_ref': 'a1', 'basis': 'Possible shared facts'}]}
+        assert 'relations' not in schema['properties'] or 'candidates' in schema['properties']
+        rows = classify(3)['candidates']
+        rows[0].update(editorial_class='SKIP', recommended_action='SKIP')
+        return {'candidates': rows}
+    result = active.evaluate(value, provider=provider)
+    assert result['status'] == 'OVERSIZE_NOT_EVALUATED'
+    assert len(calls) == (1 if phase == 'admission' else 2)
+    frozen = copy.deepcopy(active.primary_store.load())
+    decision = runner.persist_active_fail_closed(value, result['fallback_reason'], technical_hold=True)
+    assert len(decision['pending']) == 2 and len(decision['skipped']) == 1
+    assert {r['editorial_director']['editorial_class'] for r in decision['pending']} == {'SHOULD_PUBLISH'}
+    assert active.primary_store.load() == frozen
+    assert set(menzo.terminal_skip_memory()) == {material.key(article('terminal'))}
+    assert set(material._read()['holds']) == {material.key(article('left')), material.key(article('right'))}
+    assert not menzo.SOFTPOOL_FILE.exists()
+    monkeypatch.setattr(active, '_finalize_active_input', finalize)
+    def retry_provider(_prompt, schema, *_):
+        assert 'candidates' not in schema['properties'], 'First classes cannot be reevaluated'
+        if 'relations' in schema['properties']:
+            return {'relations': [{'ref': 'r0', 'decision': 'NO_MATCH'}]}
+        return {'admission_complete': True, 'suspected_duplicates': []}
+    retried = active.evaluate(snapshot([article('left'), article('right')]), provider=retry_provider)
+    assert retried['status'] == 'VALIDATED'
+    assert retried['editorial_prefilter']['reused_primary_classes'] == 2
+    assert active.primary_store.load() == frozen and material._read()['holds'] == {}
+
+
+def test_primary_input_bound_keeps_reused_skip_terminal(monkeypatch):
+    import newsroom_runner as runner
+    rows = [article('prior_skip'), article('oversized_sibling')]
+    value = snapshot(rows)
+    frozen = {**classify(1, 'SKIP')['candidates'][0], 'candidate_id': value['candidates'][0]['candidate_id']}
+    active.primary_store.remember(value['candidates'][:1], [frozen], when=value['observation_timestamp'],
+                                  policy=active.POLICY_VERSION)
+    finalize = active._finalize_active_input
+    def bound(row):
+        finalize(row)
+        row['limit_status'] = 'exceeded'
+    monkeypatch.setattr(active, '_finalize_active_input', bound)
+    result = active.evaluate(value, provider=lambda *_: pytest.fail('transport hold has no provider call'))
+    decision = runner.persist_active_fail_closed(value, result['fallback_reason'], technical_hold=True)
+    assert [r['url'] for r in decision['skipped']] == [rows[0]['url']]
+    assert [r['url'] for r in decision['pending']] == [rows[1]['url']]
+    assert set(material._read()['holds']) == {material.key(rows[1])}
+    assert set(menzo.terminal_skip_memory()) == {material.key(rows[0])}

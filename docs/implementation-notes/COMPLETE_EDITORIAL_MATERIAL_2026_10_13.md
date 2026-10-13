@@ -67,6 +67,14 @@ lexical cluster recommendations or report-versus-news suppression metrics are re
 
 ## Consolidated pre-PR review
 
+PR158 identified a transport-bound handoff gap. Existing terminal-memory guards already reject
+technical fail-closed skips, but oversized complete-body batches did not retain fresh feed URLs
+for retry. Primary, admission and duplicate input bounds now persist the affected candidates in
+the existing bounded technical-hold container and expose a pending handoff with no publication
+authorization. Independently final primary SKIPs and duplicate decisions remain terminal; reused
+primary classes survive retries. Bodies are not truncated, soft-board reviews are not consumed,
+and no provider repair or confirmation call is added.
+
 The recovered implementation was reviewed against the production baseline without new provider calls or replay
 generation. Four concrete P1 families were reproduced offline and corrected together:
 
