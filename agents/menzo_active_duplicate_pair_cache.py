@@ -13,7 +13,7 @@ from typing import Any, Mapping
 ROOT = Path(__file__).resolve().parents[1]
 CACHE_FILE = ROOT / "state/newsroom/menzo_active_duplicate_pair_cache_v1.json"
 SCHEMA_VERSION = "owtv_active_duplicate_pair_cache_v1"
-CONTRACT_VERSION = "totem-c01-complete-material-final-pair-v5"
+CONTRACT_VERSION = "totem-d01-covered-update-final-pair-v6"
 MAX_ENTRIES = 4096
 
 
@@ -43,7 +43,7 @@ def contract_fingerprint(*, policy_version: str, model: str, policy_path: Path,
         "active_policy_sha256": hashlib.sha256(policy_path.read_bytes()).hexdigest(),
         "model": model,
         "duplicate_gate_schema_sha256": hashlib.sha256(gate_schema_path.read_bytes()).hexdigest(),
-        "semantic_admission_contract": "totem-d01-complete-material-admission-v3",
+        "semantic_admission_contract": "totem-d01-bound-material-admission-v4",
         "event_registry": event_registry,
         "duplicate_scorer_version": SCORER_VERSION,
         "duplicate_effective_threshold": effective_threshold(),

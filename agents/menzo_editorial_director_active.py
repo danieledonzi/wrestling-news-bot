@@ -30,8 +30,8 @@ SCHEMA_PATH = ROOT / "config/editorial_director_output_schema_v6.json"
 POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V9_ACTIVE.md"
 ADMISSION_SCHEMA_PATH = ROOT / "config/editorial_duplicate_admission_schema_v1.json"
 ADMISSION_POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_DUPLICATE_ADMISSION_POLICY_V1.md"
-RELATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_gate_schema_v5.json"
-RELATION_POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_DUPLICATE_JUDGMENT_POLICY_V2.md"
+RELATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_gate_schema_v6.json"
+RELATION_POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_DUPLICATE_JUDGMENT_POLICY_V3.md"
 EVENT_REGISTRY_PATH = ROOT / "config/event_registry.json"
 BOB_CAPACITY_FIELDS = ("article_type", "source_title", "category_hint", "reason",
                        "ai_editorial_reason", "event_key", "show_report_id", "show_name",
@@ -356,12 +356,19 @@ def _validate_duplicate_gate(value, snapshot, *, preserve_valid=False):
             failures.append({'family': 'relation_decision', 'ref': ref}); continue
         supplied = mapping[ref]
         provider_decision = decision
+        covering_side = None
         if decision == 'MATERIAL_UPDATE' and supplied['scope'] == 'same_run':
-            # MATERIAL_UPDATE is reserved for published history. The provider's
-            # nonduplicate clearance also retains both unpublished endpoints;
-            # normalize its label without another semantic decision or repair.
-            decision = 'NO_MATCH'
-            telemetry.append({'family': 'same_run_material_update_nonduplicate', 'ref': ref})
+            value = row.get('covering_side')
+            if value is not None:
+                covering_side = shadow._enum(value, ('left', 'right', 'neither'),
+                                              'covering_side', telemetry, ref)
+                if covering_side is None:
+                    failures.append({'family': 'material_update_covering_side', 'ref': ref}); continue
+            if covering_side not in {'left', 'right'}:
+                # Without an explicit A+B body, keep both eligible. No synthesis,
+                # semantic veto, reclassification or provider repair is allowed.
+                decision = 'NO_MATCH'
+                telemetry.append({'family': 'same_run_material_update_nonduplicate', 'ref': ref})
         seen.add(ref)
         entry = {key: supplied[key] for key in ('pair_id', 'scope', 'left_id', 'right_id')}
         entry.update(decision=decision, semantic_authority='gemini_final',
@@ -369,6 +376,10 @@ def _validate_duplicate_gate(value, snapshot, *, preserve_valid=False):
                     ('scorer_version', 'score', 'threshold', 'components')})
         if provider_decision != decision:
             entry['provider_decision'] = provider_decision
+        if decision == 'MATERIAL_UPDATE' and supplied['scope'] == 'same_run':
+            entry['material_update_covering_id'] = supplied[covering_side + '_id']
+            entry['material_update_covered_id'] = supplied[
+                ('right' if covering_side == 'left' else 'left') + '_id']
         for field in ('shared_fact', 'new_fact', 'temporal_basis', *DUPLICATE_EVIDENCE_FIELDS, *DUPLICATE_CENTRALITY_FIELDS):
             value = row.get(field)
             entry[field] = value.strip()[:500] if isinstance(value, str) and value.strip() else None
@@ -424,7 +435,8 @@ def _observe_final_relations(snapshot, rows, materials, *, logical_request_id=No
         material = materials.get(relation['pair_id'], {})
         payload = {k: copy.deepcopy(relation.get(k)) for k in
                    ('pair_id', 'scope', 'left_id', 'right_id', 'decision', 'semantic_authority',
-                    'shared_fact', 'new_fact', 'temporal_basis', 'validated_provenance')}
+                    'shared_fact', 'new_fact', 'temporal_basis', 'validated_provenance',
+                    'provider_decision', 'material_update_covering_id', 'material_update_covered_id')}
         payload.update(verdict_observation_id=observation_id,
                        path=snapshot.get('_editorial_path', 'primary'),
                        left={**source_material.profile(left), 'title': left.get('title') or left.get('source_title')},
@@ -490,6 +502,53 @@ def _body_pair_snapshot(snapshot: Mapping[str, Any], relation: Mapping[str, Any]
     return local, coverage
 
 
+def _covered_same_run_updates(candidates, relations, decisions):
+    """Only an eligible complete A+B source can replace A; cycles retain all facts."""
+    current = {row['candidate_id']: row for row in candidates}
+    classes = {row['candidate_id']: row['editorial_class'] for row in decisions}
+    priority = {'MUST_PUBLISH': 0, 'SHOULD_PUBLISH': 1, 'PUBLISHABLE_SOFT': 2}
+    edges = {}
+    for row in relations:
+        covered, covering = row.get('material_update_covered_id'), row.get('material_update_covering_id')
+        if (row.get('decision') != 'MATERIAL_UPDATE' or row.get('scope') != 'same_run' or
+                covered not in current or covering not in current or covered == covering or
+                {covered, covering} != {row['left_id'], row['right_id']}):
+            continue
+        if not all(current[key].get('input_coverage') == 'FULL_BODY' and
+                   current[key].get('retained_body') for key in (covered, covering)):
+            continue
+        # Coverage must not silently demote a hard publication into soft
+        # competition. Preserve both rather than change a frozen primary class.
+        if (classes.get(covered) not in priority or classes.get(covering) not in priority or
+                priority[classes[covering]] > priority[classes[covered]]):
+            continue
+        edges.setdefault(covered, {})[covering] = row['pair_id']
+
+    def final_source(key):
+        stack, visited = [(key, [])], set()
+        while stack:
+            node, evidence = stack.pop()
+            if node in visited:
+                continue
+            visited.add(node)
+            if node not in edges:
+                return node, evidence
+            stack.extend((target, evidence + [pair_id])
+                         for target, pair_id in sorted(edges[node].items()))
+        # Never eliminate a circular component without a covering survivor.
+        return None
+
+    eliminated = []
+    for key in sorted(edges):
+        final = final_source(key)
+        if final is not None:
+            eliminated.append({**copy.deepcopy(current[key]),
+                'semantic_duplicate_scope': 'same_run', 'semantic_duplicate_of': final[0],
+                'semantic_duplicate_reason': 'semantic_same_run_duplicate_covered_by_update',
+                'semantic_duplicate_evidence_pair_ids': final[1]})
+    return eliminated
+
+
 def _apply_duplicate_gate(snapshot: dict[str, Any], relations: list[dict[str, Any]]) -> None:
     """Remove semantic duplicates before any classified survivor can be published."""
     from agents.menzo_policy_v93_15 import canonical_richer_winner, hydrate_complete_article_bodies
@@ -552,10 +611,14 @@ def _apply_duplicate_gate(snapshot: dict[str, Any], relations: list[dict[str, An
                     "semantic_duplicate_scope": "recent_history", "semantic_duplicate_of": relation["right_id"],
                     "semantic_duplicate_component_ids": sorted(member_ids),
                     "semantic_duplicate_evidence_pair_ids": evidence_pair_ids}
+    survivors = [row for row in snapshot.get('candidates', []) if row['candidate_id'] not in eliminated]
+    for row in _covered_same_run_updates(survivors, relations,
+                                       snapshot.get('editorial_prefilter_decisions', [])):
+        eliminated[row['candidate_id']] = row
     if eliminated:
         from agents.menzo_policy_v93_15 import save_hard_skips
         save_hard_skips({'skipped': [{**row, 'decision_authority': 'semantic_duplicate_gate',
-            'reason': 'semantic_duplicate'} for row in eliminated.values()]})
+            'reason': row.get('semantic_duplicate_reason') or 'semantic_duplicate'} for row in eliminated.values()]})
     snapshot["semantic_duplicate_skips"] = list(eliminated.values())
     snapshot["duplicate_gate_relations"] = copy.deepcopy(relations)
     snapshot["candidates"] = [row for row in snapshot.get("candidates", [])
@@ -761,7 +824,7 @@ def _evaluate_duplicate_stage(snapshot: Mapping[str, Any], *, provider: Callable
             gate_input_digest = gate_input_digest or outcome.get("input_digest")
             if not outcome.get("ok"):
                 finals = list(cached_relations.values()) + relations + outcome.get('valid_relations', [])
-                if any(row['decision'] == 'DUPLICATE' for row in finals):
+                if any(row['decision'] == 'DUPLICATE' or row.get('material_update_covering_id') for row in finals):
                     _apply_duplicate_gate(snapshot, finals)
                 failure_result = dict(outcome.get("result") or {})
                 return {**base, **failure_result, "attempts": gate_attempts,
@@ -830,7 +893,8 @@ def _technical_failures(failures):
     """Persist technical structure only, never model rationale or article bodies."""
     return [{key: (value[:80] if isinstance(value, str) else value)
              for key, value in row.items() if key in
-             {'family', 'detail', 'ref', 'missing_refs', 'fields'}} for row in failures]
+             {'family', 'detail', 'ref', 'missing_refs', 'fields', 'left_ref', 'right_ref',
+              'candidate_count', 'history_count'}} for row in failures]
 
 
 def _run_once(snapshot, call, prompt, schema, phase, policy_path, validate, *, cache_success=False,
@@ -986,7 +1050,8 @@ def _admit(snapshot, call):
         rows, errors = admission.validate(raw, snapshot, [], max(300, shadow.MAX_RELATIONS))
         return rows, errors, []
     phase = 'editorial_soft_duplicate_admission' if snapshot.get('_semantic_admission_only') else 'editorial_duplicate_admission'
-    result = _run_once(snapshot, call, prompt, json.loads(ADMISSION_SCHEMA_PATH.read_text()), phase,
+    schema = admission.bound_schema(json.loads(ADMISSION_SCHEMA_PATH.read_text()), snapshot)
+    result = _run_once(snapshot, call, prompt, schema, phase,
                        ADMISSION_POLICY_PATH, validate, cache_success=True)
     result['admitted_relations'] = result.get('output') or []
     return result
@@ -1259,7 +1324,7 @@ def project(snapshot: Mapping[str, Any], result: Mapping[str, Any], *, soft_boar
         scope = item.pop("semantic_duplicate_scope")
         item.update(decision="skip", priority="skip", article_type="duplicate",
                     decision_authority="semantic_duplicate_gate",
-                    reason=f"semantic_{scope}_duplicate")
+                    reason=item.pop('semantic_duplicate_reason', None) or f"semantic_{scope}_duplicate")
         projected["skipped"].append(item)
     for item in projected['skipped']:
         entry = frozen_primary.get(primary_store.key(item))

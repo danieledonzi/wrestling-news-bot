@@ -13,3 +13,7 @@ Return admission_complete=true and suspected_duplicates, possibly an empty array
 left_ref=aN, right_ref=aN or hN and a concise basis <=1000 characters. Use exact supplied refs, no self-pairs,
 and no repeated unordered pair. This operation has one attempt; an invalid response causes technical HOLD,
 not a corrective model call or editorial SKIP. The separate full-material operation owns final relation semantics.
+
+The response schema enumerates the exact refs available for this request. Copy those literal refs; never invent
+an index, renumber either table, use c/r refs from another phase, or put a history ref on the left. History rows
+are comparison targets only: do not compare two history articles. Every pair must contain a current a ref.

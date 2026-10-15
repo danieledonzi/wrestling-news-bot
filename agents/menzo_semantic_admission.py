@@ -10,7 +10,18 @@ from typing import Any, Mapping
 
 from agents.duplicate_pair_identity import recent_history_pair_id, same_run_pair_id
 
-VERSION = 'totem-d01-complete-material-admission-v3'
+VERSION = 'totem-d01-bound-material-admission-v4'
+
+
+def bound_schema(template: Mapping[str, Any], primary: Mapping[str, Any]) -> dict[str, Any]:
+    """Make invented/out-of-range refs unrepresentable in the provider contract."""
+    schema = copy.deepcopy(dict(template))
+    current = [row['ref'] for row in primary['_semantic_admission']['candidates']]
+    history = [row['ref'] for row in primary['_semantic_admission']['history']]
+    properties = schema['properties']['suspected_duplicates']['items']['properties']
+    properties['left_ref'] = {'type': 'string', 'enum': current}
+    properties['right_ref'] = {'type': 'string', 'enum': current + history}
+    return schema
 
 
 def compact(row: Mapping[str, Any]) -> dict[str, Any]:
@@ -59,13 +70,17 @@ def validate(raw: Any, primary: Mapping[str, Any], decisions: list[dict[str, Any
     current = {f'a{i}': key for i, key in enumerate(ids)}
     history = {f'h{i}': key for i, key in enumerate(old_ids)}
     relations, seen, failures = [], set(), []
-    for row in suspects:
+    for index, row in enumerate(suspects):
         if not isinstance(row, Mapping):
             failures.append({'family': 'semantic_admission_contract', 'detail': 'object_required'}); continue
         left, right, basis = row.get('left_ref'), row.get('right_ref'), row.get('basis')
         if (not isinstance(left, str) or not isinstance(right, str) or left not in current or
                 right not in {**current, **history} or left == right):
-            failures.append({'family': 'semantic_admission_ref', 'detail': 'invalid_endpoint'}); continue
+            failures.append({'family': 'semantic_admission_ref', 'detail': 'invalid_endpoint',
+                'ref': f'p{index}',
+                'left_ref': left[:80] if isinstance(left, str) else None,
+                'right_ref': right[:80] if isinstance(right, str) else None,
+                'candidate_count': len(current), 'history_count': len(history)}); continue
         left_id = current[left]
         right_id = current.get(right) or history.get(right)
         scope = 'same_run' if right in current else 'recent_history'
