@@ -196,7 +196,7 @@ def test_active_relation_ceiling_batches_provider_bound_misses_atomically(monkey
     assert len(result["duplicate_gate_input_digests"]) == 3
 
 
-def test_active_relation_batch_failure_keeps_snapshot_atomic(monkeypatch):
+def test_active_relation_batch_failure_holds_only_suspicious_candidate(monkeypatch):
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     monkeypatch.setattr(pair_cache, "lookup", lambda *_args, **_kwargs: None)
     monkeypatch.setattr(shadow, "MAX_RELATIONS", 2)
@@ -216,11 +216,13 @@ def test_active_relation_batch_failure_keeps_snapshot_atomic(monkeypatch):
 
     result = active.evaluate(value, provider=provider)
 
-    assert result["status"] == "PROVIDER_FAILED"
+    assert result["status"] == "VALIDATED"
+    assert result['duplicate_technical_failure']['status'] == 'PROVIDER_FAILED'
     assert result["duplicate_gate_batched"] is True
     assert result["duplicate_gate_batch_count"] == 3
     assert gate_call == 2
-    assert [row["candidate_id"] for row in value["candidates"]] == before
+    assert [row["candidate_id"] for row in value["candidates"]] == before[1:]
+    assert [row['candidate_id'] for row in value['source_material_holds']] == before[:1]
     assert "semantic_duplicate_skips" not in value
 
 
@@ -260,7 +262,8 @@ def test_duplicate_gate_preserves_valid_rows_without_targeted_repair(monkeypatch
 
     result = active.evaluate(value, provider=provider)
 
-    assert result["status"] != "VALIDATED"
+    assert result["status"] == "VALIDATED" and result['duplicate_partial_clearance']
+    assert len(value['source_material_holds']) == 1
     assert validation_calls == [0]
     assert len(gate_prompts) == 1
     assert gate_prompts[0].count('"ref":"r') == 3

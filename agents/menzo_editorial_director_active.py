@@ -355,13 +355,20 @@ def _validate_duplicate_gate(value, snapshot, *, preserve_valid=False):
         if decision is None:
             failures.append({'family': 'relation_decision', 'ref': ref}); continue
         supplied = mapping[ref]
-        if decision == 'MATERIAL_UPDATE' and supplied['scope'] != 'recent_history':
-            failures.append({'family': 'material_update_scope', 'ref': ref}); continue
+        provider_decision = decision
+        if decision == 'MATERIAL_UPDATE' and supplied['scope'] == 'same_run':
+            # MATERIAL_UPDATE is reserved for published history. The provider's
+            # nonduplicate clearance also retains both unpublished endpoints;
+            # normalize its label without another semantic decision or repair.
+            decision = 'NO_MATCH'
+            telemetry.append({'family': 'same_run_material_update_nonduplicate', 'ref': ref})
         seen.add(ref)
         entry = {key: supplied[key] for key in ('pair_id', 'scope', 'left_id', 'right_id')}
         entry.update(decision=decision, semantic_authority='gemini_final',
             scorer={key: copy.deepcopy(supplied.get(key)) for key in
                     ('scorer_version', 'score', 'threshold', 'components')})
+        if provider_decision != decision:
+            entry['provider_decision'] = provider_decision
         for field in ('shared_fact', 'new_fact', 'temporal_basis', *DUPLICATE_EVIDENCE_FIELDS, *DUPLICATE_CENTRALITY_FIELDS):
             value = row.get(field)
             entry[field] = value.strip()[:500] if isinstance(value, str) and value.strip() else None
@@ -758,6 +765,9 @@ def _evaluate_duplicate_stage(snapshot: Mapping[str, Any], *, provider: Callable
                     _apply_duplicate_gate(snapshot, finals)
                 failure_result = dict(outcome.get("result") or {})
                 return {**base, **failure_result, "attempts": gate_attempts,
+                        "duplicate_valid_relations": copy.deepcopy(finals),
+                        "duplicate_unresolved_relations": [copy.deepcopy(row) for row in authorized
+                            if row['pair_id'] not in {final['pair_id'] for final in finals}],
                         "validation_attempts": base["validation_attempts"],
                         "duplicate_gate_logical_request_id": gate_logical_request_id,
                         "duplicate_gate_input_digest": gate_input_digest,
@@ -1128,6 +1138,37 @@ def _evaluate_complete(snapshot: dict[str, Any], material: Any, *, provider=None
                                   "observed_at": snapshot.get("observation_timestamp"), **by_id[row["candidate_id"]]}
                                 for row in all_primary_candidates]}
     gate = _evaluate_duplicate_stage(snapshot, provider=call, artifact_index=artifact_index)
+    unresolved = gate.get('duplicate_unresolved_relations')
+    if gate.get('status') != 'VALIDATED' and unresolved is not None:
+        # Admission is complete here. Only unresolved suspicious components need
+        # HOLD; no new semantic decision or provider retry is made for siblings.
+        held_ids = {row['left_id'] for row in unresolved}
+        held_ids.update(row['right_id'] for row in unresolved if row['scope'] == 'same_run')
+        changed = True
+        while changed:
+            before = len(held_ids)
+            for row in relations:
+                if row['scope'] == 'same_run' and held_ids.intersection({row['left_id'], row['right_id']}):
+                    held_ids.update((row['left_id'], row['right_id']))
+            changed = len(held_ids) != before
+        for row in snapshot['candidates']:
+            if row['candidate_id'] in held_ids:
+                held_row = {**copy.deepcopy(row), '_duplicate_technical_hold': True}
+                material.hold(held_row, 'duplicate_gate_technical_hold', retry_after=gate.get('retry_after'))
+                snapshot.setdefault('source_material_holds', []).append(held_row)
+        survivors = [row for row in snapshot['candidates'] if row['candidate_id'] not in held_ids]
+        telemetry['duplicate_technical_hold_count'] = len([
+            row for row in snapshot['candidates'] if row['candidate_id'] in held_ids])
+        if survivors:
+            failure = {key: copy.deepcopy(gate.get(key)) for key in
+                       ('status', 'validation_errors', 'fallback_reason', 'retry_after')}
+            snapshot['candidates'] = survivors
+            snapshot['authorized_relations'] = []
+            _finalize_active_input(snapshot)
+            gate = {**gate, 'status': 'VALIDATED', 'validation_errors': [],
+                    'duplicate_partial_clearance': True, 'duplicate_technical_failure': failure,
+                    'output': {'candidates': [], 'relations': gate.get('duplicate_valid_relations', [])}}
+            telemetry['duplicate_partial_clearance'] = True
     result = {**gate, "editorial_prefilter": telemetry,
               "attempts": int(primary.get("attempts", 0)) + int(admission_result.get("attempts", 0)) + int(gate.get("attempts", 0)),
               "logical_request_id": primary.get("logical_request_id"),
@@ -1244,10 +1285,12 @@ def project(snapshot: Mapping[str, Any], result: Mapping[str, Any], *, soft_boar
         projected = apply_soft_board(projected, snapshot, provider=soft_board_provider)
         for row in snapshot.get('source_material_holds', []):
             item = copy.deepcopy(row)
+            duplicate_hold = item.pop('_duplicate_technical_hold', False)
             entry = frozen_primary.get(primary_store.key(item))
             item.pop('candidate_id', None)
-            item.update(decision='defer', decision_authority='source_material_technical_hold',
-                        reason='complete_source_material_unavailable')
+            item.update(decision='defer',
+                        decision_authority='duplicate_technical_hold' if duplicate_hold else 'source_material_technical_hold',
+                        reason='duplicate_gate_technical_hold' if duplicate_hold else 'complete_source_material_unavailable')
             if entry:
                 item['editorial_director'] = {**copy.deepcopy(entry), 'decision_authority': 'editorial_director'}
             projected['pending'].append(item)
