@@ -7,6 +7,7 @@
 **Additional owner-approved clarification:** 2026-10-10 — bookmaker exclusions and terminal SKIP isolation.
 **Additional owner-approved clarification:** 2026-10-10 — immutable first valid primary classification, under TOTEM-C01.
 **Owner-approved conditional reform, confirmed by isolated replay:** 2026-10-13 — complete editorial source material, under TOTEM-F01.
+**Owner-approved clarification:** 2026-10-15 — same-run material updates may replace the initial article only when their own complete body contains both the initial fact and the update.
 
 ## TOTEM supremacy
 
@@ -199,10 +200,21 @@ not an all-against-all pair matrix. An explicitly complete empty suspicion list 
 
 Only admitted exact pairs reach the independent duplicate judge, using their titles, summaries and available
 canonical bodies. A technically valid exact ref plus DUPLICATE/NO_MATCH/MATERIAL_UPDATE suffices; optional
-explanations and local headline/evidence heuristics cannot veto Gemini. MATERIAL_UPDATE requires a published
-history endpoint and preserves eligibility without rewriting primary class. Successful Publisher history stays 12h.
+explanations and local headline/evidence heuristics cannot veto Gemini. Against a published history endpoint,
+MATERIAL_UPDATE preserves eligibility without rewriting primary class. Successful Publisher history stays 12h.
 Published duplicates prevail; unpublished duplicates retain richer factual content/media, with earliest arrival as
 the informational tie-break. A losing URL is terminal SKIP under TOTEM-S01.
+
+Owner clarification, 2026-10-15: for two unpublished articles in the same run, Gemini may designate B as the
+sole surviving source of a MATERIAL_UPDATE only when B's own complete supplied body already covers the
+substantive initial fact A (a faithful summary suffices) AND the update B. Arrival order, text length and shared
+names alone do not establish coverage. No automatic article merging, stitching or invented recap is authorized.
+If coverage is missing, uncertain, or neither source contains A+B, retain both eligible articles. The covered
+initial URL may become terminal only with an eligible complete covering survivor. An update must not move
+a MUST/SHOULD obligation into a lower frozen class or soft competition: retain both rather than reclassify.
+The recent-history MATERIAL_UPDATE policy remains unchanged; this clarification does not tighten its
+editorial threshold, reopen prior decisions or resurrect terminal URLs. Cyclic or unresolved replacement
+directions must never eliminate every available source of the facts.
 
 Owner-approved implementation, 2026-10-10: this supersedes combined primary/admission schemas and every model
 repair path in these Active operations. Technical recovery is a subsequent operation under the explicit backoff,

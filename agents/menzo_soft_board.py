@@ -363,7 +363,7 @@ def _revalidate_pool_duplicates(pool: list[dict[str, Any]], *, provider=None) ->
         return [{**copy.deepcopy(originals[row['candidate_id']]), 'decision': 'skip', 'priority': 'skip',
                  'decision_authority': 'semantic_duplicate_gate' if row.get('semantic_duplicate_scope') else
                      ('editorial_director' if row.get('terminal_skip_reason') else 'deterministic_exact_duplicate'),
-                 'reason': row.get('terminal_skip_reason') or
+                 'reason': row.get('terminal_skip_reason') or row.get('semantic_duplicate_reason') or
                      ('semantic_duplicate' if row.get('semantic_duplicate_scope') else 'exact_duplicate'),
                  'editorial_director': copy.deepcopy(originals[row['candidate_id']].get('editorial_director', {}))} for row in rows]
     # Already valid local SKIPs survive an unrelated provider outage.
@@ -374,6 +374,7 @@ def _revalidate_pool_duplicates(pool: list[dict[str, Any]], *, provider=None) ->
     current = snapshot['candidates']
     known = [{**copy.deepcopy(originals[row['candidate_id']]['editorial_director']), 'candidate_id': row['candidate_id']}
              for row in current]
+    snapshot['editorial_prefilter_decisions'] = copy.deepcopy(known)
     primary = copy.deepcopy(snapshot); primary['candidates'] = []; primary['authorized_relations'] = []
     primary['publisher_history_12h'] = []
     primary['_semantic_admission_only'] = True
