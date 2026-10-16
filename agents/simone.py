@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from modules.simone_report_integrity import PENDING_REPORTS, candidate_date_evidence, dynamic_special_event_match, is_canonical_report_source, load_effective_registry, matches_weekly_result_identity, normalize_url, reserve_report
+from modules.simone_report_integrity import choose_report_source, report_source_name, REPORT_SOURCE_POLICY, REPORT_FALLBACK_AFTER_LOCAL
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_DIR = ROOT / "config"
@@ -27,7 +28,7 @@ REPORT_REGISTRY_FILE = NEWSROOM_STATE_DIR / "report_publication_registry.json"
 SIMONE_EXPECTED_EVENTS_FILE = NEWSROOM_STATE_DIR / "simone_expected_events_latest.json"
 ARTIFACT_EXPECTED_EVENTS_FILE = ARTIFACT_DIR / "simone_expected_events_latest.json"
 
-SIMONE_VERSION = "v95.20_full_ordered_ringside_reports"
+SIMONE_VERSION = "v95.21_wrestleview_0830_fallback"
 
 DAY_NAMES = {
     "monday": 0,
@@ -275,7 +276,7 @@ def candidate_matches_special_report(candidate: dict[str, Any], report: dict[str
         return False, "rejected_non_results_event_article"
     return True, "canonical_results_match"
 
-def choose_special_report_candidate(candidates: list[dict[str, Any]], report: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
+def choose_special_report_candidate(candidates: list[dict[str, Any]], report: dict[str, Any], now: datetime | None = None) -> tuple[dict[str, Any] | None, str]:
     matches = []
     rejections: list[str] = []
     for c in candidates:
@@ -289,7 +290,8 @@ def choose_special_report_candidate(candidates: list[dict[str, Any]], report: di
             if reason in rejections:
                 return None, reason
         return None, "waiting_for_canonical_results_source"
-    return matches[0], "canonical_results_match"
+    chosen = choose_report_source(matches, str(report.get("date") or report.get("date_local") or ""), now)
+    return chosen, "canonical_results_match" if chosen else "waiting_for_canonical_results_source"
 
 
 PUBLISHED_STATUS_VALUES = {"", "published", "already_published", "completed", "dry_run"}
@@ -389,7 +391,7 @@ def source_rank(source: str, report: dict[str, Any]) -> int:
 
 def _canonical_structured_special_match(candidate: dict[str, Any]) -> bool:
     match = candidate.get("special_event_match")
-    if not isinstance(match, dict) or match.get("canonical_identity") not in {"wrestlinginc_results", "ringsidenews_results"}:
+    if not isinstance(match, dict) or match.get("canonical_identity") not in {"wrestlinginc_results", "ringsidenews_results", "wrestleview_results"}:
         return False
     report = {
         "report_key": match.get("report_key"),
@@ -438,7 +440,8 @@ def choose_report_candidate(candidates: list[dict[str, Any]], report: dict[str, 
             if reason in reasons:
                 return None, reason
         return None, "waiting_for_canonical_results_source"
-    return matches[0], "canonical_results_match"
+    chosen = choose_report_source(matches, date_iso, now)
+    return chosen, "canonical_results_match" if chosen else "waiting_for_canonical_results_source"
 
 
 def _pending_lock(report_key: str) -> dict[str, Any] | None:
@@ -449,7 +452,7 @@ def _pending_lock(report_key: str) -> dict[str, Any] | None:
         if isinstance(row, dict)
         and row.get("report_key") == report_key
         and row.get("canonical_source_locked") is True
-        and row.get("status") not in {"published", "already_published"}
+        and row.get("source_url")
     ), None)
 
 
@@ -513,6 +516,11 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
         }
         valid_special, _validation_reason = candidate_matches_special_report(candidate, validation_report)
         if not valid_special:
+            continue
+        # A fallback feed can arrive first or before the deadline. Discovery
+        # must not reserve it ahead of a timely Ringside URL for this identity.
+        elected, _ = choose_special_report_candidate(report_candidates, validation_report, now=now)
+        if elected is None or report_source_name(elected) != report_source_name(candidate):
             continue
         try:
             publish_date = (datetime.strptime(str(match.get("date_local")), "%Y-%m-%d").date() + timedelta(days=1)).isoformat()
@@ -606,7 +614,7 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
             else:
                 chosen, reason = None, "invalid_canonical_identity"
         else:
-            chosen, reason = choose_special_report_candidate(report_candidates, report)
+            chosen, reason = choose_special_report_candidate(report_candidates, report, now=now)
         if not chosen:
             item = {**report, "decision": "missing", "reason": reason}
             special_missing.append(item)
@@ -700,6 +708,7 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
         "version": SIMONE_VERSION,
         "generated_at": utc_now(),
         "mode": "report_director",
+        "source_policy": {"version": REPORT_SOURCE_POLICY, "primary": "ringsidenews", "fallback": "wrestleview", "fallback_after_local": REPORT_FALLBACK_AFTER_LOCAL, "timezone": "Europe/Rome", "locked_source_is_final": True},
         "input": {
             "massy_version": board.get("version") if isinstance(board, dict) else None,
             "report_candidates": len(report_candidates),

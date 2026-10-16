@@ -160,10 +160,10 @@ def test_legacy_special_lock_is_replayed_and_never_replaced(tmp_path, monkeypatc
         assert [r["source_url"] for r in result["ready_reports"] if r["report_key"] == identity["report_key"]] == [old_url]
 
 
-def test_all_weekly_configs_use_only_ringside():
+def test_all_weekly_configs_use_ringside_with_approved_wrestleview_fallback():
     for report in json.loads(simone.REPORTS_CONFIG.read_text())["reports"]:
         assert report["preferred_source"] == "ringsidenews"
-        assert not report["fallback_source"]
+        assert report["fallback_source"] == "wrestleview"
 
 
 def test_legacy_weekly_lock_survives_new_source_and_empty_feed(tmp_path, monkeypatch):

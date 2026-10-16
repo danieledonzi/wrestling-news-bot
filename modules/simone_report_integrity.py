@@ -24,6 +24,9 @@ SCHEDULE_REPORT_DIR = ROOT / "reports"
 SCHEDULE_RUNTIME_DIR = ROOT / "state" / "newsroom" / "special_events_schedule_runtime"
 TRUSTED_PROMOTIONS = {"WWE", "AEW", "TNA", "ROH"}
 CANONICAL_REPORT_SOURCE = "ringsidenews"
+FALLBACK_REPORT_SOURCE = "wrestleview"
+REPORT_FALLBACK_AFTER_LOCAL = "08:30"
+REPORT_SOURCE_POLICY = "ringside_until_0830_wrestleview_v1"
 REFRESH_INTERVAL = timedelta(hours=20)
 REFRESH_TIMEOUT_SECONDS = 75
 ARTIFACT_CLOCK_SKEW = timedelta(minutes=10)
@@ -54,11 +57,72 @@ def _slug(value: str) -> str:
 
 
 def is_canonical_report_source(entry: dict[str, Any], *, legacy_lock: bool = False) -> bool:
-    source = CANONICAL_REPORT_SOURCE
+    sources = {CANONICAL_REPORT_SOURCE, FALLBACK_REPORT_SOURCE}
     if legacy_lock and entry.get("canonical_source_locked") is True and entry.get("canonical_identity") == "wrestlinginc_results":
-        source = "wrestlinginc"
+        sources.add("wrestlinginc")
     host = (urlsplit(str(entry.get("url") or entry.get("source_url") or "")).hostname or "").lower().removeprefix("www.")
-    return host == f"{source}.com" and str(entry.get("source") or source).lower() == source
+    source = host.removesuffix(".com")
+    if source not in sources or host != f"{source}.com" or str(entry.get("source") or source).lower() != source:
+        return False
+    if legacy_lock and source == FALLBACK_REPORT_SOURCE:
+        # An old pending row is not proof that fallback was elected on time.
+        # Only our durable, deadline-bound reservation can establish this lock.
+        try:
+            selected_at = _parse_timestamp(str(entry.get("discovered_at") or ""))
+            deadline = report_fallback_deadline(str(entry.get("date_local") or entry.get("date") or ""))
+            if (entry.get("canonical_source_locked") is not True or
+                    entry.get("source_selection_policy") != REPORT_SOURCE_POLICY or
+                    selected_at is None or selected_at.tzinfo is None or selected_at < deadline):
+                return False
+        except (ValueError, TypeError):
+            return False
+    # Discovery is independent of election time. A quick list or taping spoiler
+    # must never become the fallback complete report.
+    explicit = _slug(" ".join(str(entry.get(k) or "") for k in ("title", "source_title", "url", "source_url"))).replace("_", " ")
+    return not (source == FALLBACK_REPORT_SOURCE and re.search(r"\b(?:spoilers?|quick results|preview|predictions?)\b", explicit))
+
+
+def report_source_name(entry: dict[str, Any]) -> str:
+    return (urlsplit(str(entry.get("url") or entry.get("source_url") or "")).hostname or "").lower().removeprefix("www.").removesuffix(".com")
+
+
+def report_fallback_deadline(date_iso: str) -> datetime:
+    day = datetime.strptime(date_iso, "%Y-%m-%d").date() + timedelta(days=1)
+    hour, minute = map(int, REPORT_FALLBACK_AFTER_LOCAL.split(":"))
+    return datetime(day.year, day.month, day.day, hour, minute, tzinfo=ZoneInfo("Europe/Rome"))
+
+
+def choose_report_source(candidates: list[dict[str, Any]], date_iso: str,
+                         now: datetime | None = None) -> dict[str, Any] | None:
+    """Elect once: Ringside by the deadline, otherwise Wrestleview after it.
+
+    Callers pass already identity-validated candidates. Existing locks are handled
+    before this election. A timestamp proves timely Ringside publication even if
+    the next scheduled scan occurs after 08:30. Missing dates cannot prove that.
+    With no clock this is an identity-only query, never fallback authorization.
+    """
+    primary = [c for c in candidates if report_source_name(c) == CANONICAL_REPORT_SOURCE]
+    if now is None:
+        return next(iter(primary), None)
+    rome = ZoneInfo("Europe/Rome")
+    now = now.replace(tzinfo=rome) if now.tzinfo is None else now.astimezone(rome)
+    deadline = report_fallback_deadline(date_iso)
+    if now <= deadline and primary:
+        return primary[0]
+    for candidate in primary:
+        raw = candidate.get("published") or candidate.get("published_at")
+        try:
+            published = datetime.fromisoformat(str(raw).replace("Z", "+00:00"))
+        except (TypeError, ValueError):
+            try:
+                published = parsedate_to_datetime(str(raw))
+            except (TypeError, ValueError, IndexError):
+                continue
+        if published.tzinfo is not None and published <= deadline:
+            return candidate
+    if now >= deadline:
+        return next((c for c in candidates if report_source_name(c) == FALLBACK_REPORT_SOURCE), None)
+    return None
 
 
 def weekly_result_identities(report: dict[str, Any]) -> set[str]:
@@ -278,8 +342,8 @@ def candidate_date_evidence(entry: dict[str, Any], expected_date: str, *, timezo
     explicit: set[str] = set()
     for year, month, day in re.findall(r"\b(20\d{2})[-/](\d{1,2})[-/](\d{1,2})\b", content):
         explicit.add(f"{int(year):04d}-{int(month):02d}-{int(day):02d}")
-    for month, day, year in re.findall(r"(?<!\d)(\d{1,2})/(\d{1,2})/(20\d{2})(?!\d)", content):
-        explicit.add(f"{int(year):04d}-{int(month):02d}-{int(day):02d}")
+    for month, day, year in re.findall(r"(?<!\d)(\d{1,2})/(\d{1,2})/(20\d{2}|\d{2})(?!\d)", content):
+        explicit.add(f"{int(year) if len(year) == 4 else 2000 + int(year):04d}-{int(month):02d}-{int(day):02d}")
     for month, day in re.findall(r"(?<!\d[-/])(?<![\d/])(\d{1,2})[/-](\d{1,2})(?![/\d])", content):
         explicit.add(f"{expected.year:04d}-{int(month):02d}-{int(day):02d}")
     month_pattern = "|".join(sorted(MONTH_NUMBERS, key=len, reverse=True))
@@ -300,6 +364,8 @@ def candidate_date_evidence(entry: dict[str, Any], expected_date: str, *, timezo
         feed_dates = set()
     if explicit:
         matches = expected.isoformat() in explicit
+        if report_source_name(entry) == FALLBACK_REPORT_SOURCE:
+            matches = matches and explicit == {expected.isoformat()}
     else:
         next_date = (expected + timedelta(days=1)).isoformat()
         matches = bool(feed_dates & {expected.isoformat(), next_date})
@@ -386,7 +452,7 @@ def dynamic_special_event_match(entry: dict[str, Any], registry: dict[str, Any])
     match, reason = special_event_report_identity(entry, registry)
     if match is None:
         return None, reason
-    return {**match, "canonical_identity": f"{CANONICAL_REPORT_SOURCE}_results"}, "canonical_results_match"
+    return {**match, "canonical_identity": f"{report_source_name(entry)}_results"}, "canonical_results_match"
 
 
 def reserve_report(candidate: dict[str, Any], identity: dict[str, Any], *, now: datetime, pending_path: Path = PENDING_REPORTS) -> dict[str, Any]:
@@ -394,15 +460,23 @@ def reserve_report(candidate: dict[str, Any], identity: dict[str, Any], *, now: 
     state = _load(pending_path, {"reports": []}); rows = state.get("reports", []) if isinstance(state, dict) else []
     url = normalize_url(str(candidate.get("url") or candidate.get("source_url") or "")); key = str(identity.get("report_key") or "")
     locked = next((r for r in rows if isinstance(r, dict) and r.get("report_key") == key and r.get("canonical_source_locked") is True and r.get("status") not in {"published", "already_published"}), None)
+    if locked is None and report_source_name(candidate) == FALLBACK_REPORT_SOURCE:
+        day = str(identity.get("date_local") or identity.get("date") or "")
+        rome = ZoneInfo("Europe/Rome")
+        local = now.replace(tzinfo=rome) if now.tzinfo is None else now.astimezone(rome)
+        if local < report_fallback_deadline(day):
+            raise ValueError("Wrestleview report cannot be reserved before 08:30 Europe/Rome")
     existing = next((r for r in rows if isinstance(r, dict) and r.get("report_key") == key and r.get("normalized_url") == url), None)
     if existing is None:
-        existing = {**identity, "source_url": url, "normalized_url": url, "source": candidate.get("source"), "source_title": candidate.get("title"), "published": candidate.get("published"), "published_at": candidate.get("published_at"), "updated": candidate.get("updated"), "discovered_at": now.isoformat(), "status": "waiting_publish_after", "last_checked_at": None, "readiness": None, "retry_count": 0}
+        existing = {**identity, "source_url": url, "normalized_url": url, "source": candidate.get("source"), "source_title": candidate.get("title"), "published": candidate.get("published"), "published_at": candidate.get("published_at"), "updated": candidate.get("updated"), "discovered_at": now.isoformat(), "source_selection_policy": REPORT_SOURCE_POLICY, "status": "waiting_publish_after", "last_checked_at": None, "readiness": None, "retry_count": 0}
         rows.append(existing)
     else:
         for field, value in identity.items():
             if value is not None:
                 existing[field] = value
     if locked is None:
+        if existing.get("status") not in {"published", "already_published"}:
+            existing["status"] = "waiting_publish_after"
         existing["canonical_source_locked"] = True
         existing["identity_reason"] = "canonical_source_locked"
     elif locked is not existing:

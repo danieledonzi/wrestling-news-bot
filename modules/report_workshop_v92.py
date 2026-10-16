@@ -1058,6 +1058,8 @@ def source_label(job: Dict[str, Any]) -> str:
         return "Wrestling Inc."
     if src == "ringsidenews":
         return "Ringside News"
+    if src == "wrestleview":
+        return "Wrestleview"
     return str(job.get("source") or "fonte originale")
 
 
