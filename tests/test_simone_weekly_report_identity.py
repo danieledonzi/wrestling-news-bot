@@ -157,6 +157,7 @@ def test_missing_ringside_waits_without_wrestlinginc_fallback():
 
 def test_ringside_is_selected_without_old_preferred_wait():
     selected = candidate("AEW Dynamite Rebel Heart Results 9/9/2026")
+    selected['published'] = '2026-09-09T20:00:00Z'
     old_source = candidate("AEW Dynamite Results 9/9/2026", source="wrestlinginc")
     for day, hour in ((9, 21), (10, 6), (10, 9)):
         now = datetime(2026, 9, day, hour, 0, tzinfo=ZoneInfo("Europe/Rome"))

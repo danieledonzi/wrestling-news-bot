@@ -23,7 +23,7 @@ NOISE_SELECTOR = (
     ".advertisement,.connatix,.rsn-google-preferred-source"
 )
 SERVICE_SENTENCE = re.compile(
-    r"^(?:welcome to (?:ringside news|wrestling\s*inc)|"
+    r"^(?:welcome to (?:ringside news|wrestling\s*inc|wrestleview)|"
     r"(?:ringside news|wrestling\s*inc) (?:will provide|brings you|provides|has you covered)|"
     r"(?:keep|be sure to|make sure to|please) (?:refresh|check back|follow|leave|subscribe)|"
     r"refresh (?:this|the) page|follow (?:us|along with (?:ringside|wrestling))|"
@@ -81,9 +81,14 @@ def extract_report_blocks(source_html: str, source_url: str) -> list[dict]:
     for node in root.select(NOISE_SELECTOR):
         node.decompose()
     blocks: list[dict] = []
+    is_wrestleview = (urlsplit(source_url).hostname or "").lower().removeprefix("www.") == "wrestleview.com"
 
     def emit_text(node: Tag, kind: str, **metadata) -> None:
         text = clean_source_prose(node.get_text(" ", strip=True))
+        if is_wrestleview:
+            if re.match(r"^(?:Results for .*? courtesy of|E-?mail\s*[–—:-]\s*\S+@wrestleview\.com|X\s*[–—:-]\s*@\w+\s*$|Check out our retro recaps)", text, re.I):
+                return
+            text = re.sub(r"\bResults by:\s*[^.]*?\bof Wrestleview\.com\s*", "", text, flags=re.I).strip()
         if text:
             blocks.append({"type": kind, "text": text, **metadata})
 

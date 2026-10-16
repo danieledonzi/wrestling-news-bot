@@ -2,6 +2,7 @@
 
 **Status:** OWNER-ratified, canonical normative authority  
 **Scope:** OpenWrestlingTV
+**Owner-approved amendment:** 2026-10-16 — Wrestleview fallback from 08:30 Europe/Rome and important material updates.
 **Owner-approved amendment:** 2026-10-11 — Ringside canonical source and complete ordered Simone reports.
 **Owner-approved clarification:** 2026-10-10 — feed-URL news coverage and Gemini semantic authority.
 **Additional owner-approved clarification:** 2026-10-10 — bookmaker exclusions and terminal SKIP isolation.
@@ -29,11 +30,13 @@ This single rule applies to every configured report-producing event: weekly show
 
 For an event/show dated **D**, its report is due at **06:30 Europe/Rome on calendar day D+1**.
 
-Before 06:30 the canonical source URL may be discovered and reserved, but must not be published as the report. At or after 06:30 the canonical source may be processed. If it is unavailable, the system waits and retries; it must not substitute another article.
+Before 06:30 the canonical source URL may be discovered and reserved, but must not be published as the report. At or after 06:30 the canonical source may be processed. If it is unavailable, the system waits and retries under the source election below; it must not substitute an ordinary event article.
 
 ### C. Canonical source and identity
 
-For new report identities the canonical source is **Ringside News**. Its title/source metadata must deterministically establish all of:
+For new report identities **Ringside News is preferred until 08:30 Europe/Rome on D+1**. From 08:30, when no Ringside source published by that deadline has been selected or is available, a complete **Wrestleview Results report** may become canonical. Timely source publication timestamps can establish Ringside eligibility when discovery occurs in the next scheduled scan. Unknown timestamps do not prove timely publication after the cutoff. A Wrestleview URL is discoverable earlier but cannot be reserved or published before 08:30.
+
+For either source, title/source metadata must deterministically establish all of:
 
 1. the correct show/event identity;
 2. the correct event/show date;
@@ -47,7 +50,7 @@ A preview, card article, spoiler, expected result, rumor, backstage article, rea
 
 ### E. Fail-safe behavior
 
-When the expected canonical Ringside News Results source is absent: **WAIT / RETRY**. Do not select another event article, publish an incomplete semantic substitute, mark the report published because another URL was associated with the event, or let stale pending state supply another identity.
+Before 08:30, when Ringside is absent: **WAIT / RETRY**. From 08:30, use an eligible complete Wrestleview Results source; if neither source is eligible, **WAIT / RETRY**. Quick results lists, previews and taping spoilers are not the complete fallback report. Do not select another event article, publish an incomplete semantic substitute, mark the report published because another URL was associated with the event, or let stale pending state supply another identity.
 
 ### F. Identity immutability
 
@@ -55,11 +58,13 @@ Once the canonical Results URL is identified for a `report_key`, another URL mus
 
 ### Canonical source lock
 
-Canonical report identity is monotonic. The first source URL that successfully satisfies the deterministic canonical Ringside News Results identity for a `report_key` becomes the immutable canonical source for that report.
+Canonical report identity is monotonic. The first elected URL that satisfies deterministic Results identity and the source deadline policy for a `report_key` becomes the immutable canonical source for that report. Discovery of an ineligible early fallback cannot establish a lock.
 
 Later candidate URLs cannot reopen source selection, replace the canonical source, or block publication of the locked source. A stale or invalid pre-existing URL is not a canonical lock merely because it exists in pending/runtime state; only a URL that itself satisfies TOTEM-R01 canonical identity may establish the lock.
 
-Owner amendment, 2026-10-11: new identities use Ringside News for every report type. There is no automatic WrestlingInc fallback. Already validated and locked WrestlingInc URLs remain locked to preserve identity immutability; this exception does not admit new WrestlingInc reservations. Published records are not reopened.
+Owner amendment, 2026-10-16: this source policy applies to weekly shows, PLE/PPV and confirmed special events. Once Wrestleview is selected, later Ringside URLs are ignored even if translation or publication is still pending or the report has already published. No source replacement or second report is allowed. The Wrestleview feed is report-only and must not supply new ordinary news opportunities.
+
+Owner amendment, 2026-10-11, amended above: new identities originally used Ringside News for every report type. There is no automatic WrestlingInc fallback. Already validated and locked WrestlingInc URLs remain locked to preserve identity immutability; this exception does not admit new WrestlingInc reservations. Published records are not reopened.
 
 ### G. Downstream freedom
 
@@ -102,6 +107,8 @@ This rule creates no minimum article quota and does not authorize new report-der
 change post-show freshness rules: a later feed URL is judged on its own central development under the applicable policy.
 
 ## TOTEM-D01 — Gemini owns semantic duplicate decisions
+
+Owner clarification, 2026-10-16: MATERIAL_UPDATE requires an **important substantive factual development** worth reporting after the shared story is known. Any factual difference is not enough. Historical dates, career summaries, older matches/titles, ancillary biography, restated quotes and media differences do not alone justify a follow-up. New consequences, confirmed plans, important professional explanations and autonomous substantial developments may qualify. This is Gemini's semantic judgment, guided by policy examples; no local keyword veto or second editorial classification is introduced. The same-run A+B coverage rule remains in force only after materiality is established.
 
 A well-formed Gemini decision bound to the supplied exact relation is the semantic authority for DUPLICATE,
 MATERIAL_UPDATE, or NO_MATCH. For the same material and contract, that decision is effective and final.

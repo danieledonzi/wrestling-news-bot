@@ -180,6 +180,7 @@ def read_feed_entries(feeds: list[dict[str, Any]]) -> tuple[list[dict[str, Any]]
                     "normalized_url": normalize_url(url),
                     "published": getattr(raw, "published", "") or getattr(raw, "updated", "") or "",
                     "summary": getattr(raw, "summary", "") or "",
+                    "reports_only": feed.get("reports_only") is True,
                 })
         except Exception as exc:
             errors.append({"feed_url": feed_url, "source": source, "error": str(exc)})
@@ -212,7 +213,8 @@ def is_wrestlinginc_source(source: str) -> bool:
 
 
 def is_preferred_report_source(entry: dict[str, Any]) -> bool:
-    # Owner amendment 2026-10-11: new canonical reports use Ringside.
+    # Discovery accepts both authorized sources. Simone alone elects the source
+    # and enforces the 08:30 fallback boundary and permanent source lock.
     return is_canonical_report_source(entry)
 
 
@@ -360,6 +362,9 @@ def classify_entries(entries: list[dict[str, Any]], already_worked_urls: set[str
             report_candidates.append(compact_entry(entry, "report_candidate", report_reason or "report_like_title", assigned_to="Simone", show_hint=show_hint, special_event_match=entry.get("special_event_match")))
             continue
         metadata = {"special_event_match": event_news_identity} if event_news_identity else {}
+        if entry.get("reports_only") is True:
+            hard_skipped.append(compact_entry(entry, "hard_skip", "report_feed_non_results"))
+            continue
         news_candidates.append(compact_entry(
             entry, "news_candidate", "requires_menzo_classification", assigned_to="Menzo", **metadata))
 

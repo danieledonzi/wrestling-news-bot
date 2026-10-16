@@ -31,7 +31,7 @@ POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY
 ADMISSION_SCHEMA_PATH = ROOT / "config/editorial_duplicate_admission_schema_v1.json"
 ADMISSION_POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_DUPLICATE_ADMISSION_POLICY_V1.md"
 RELATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_gate_schema_v6.json"
-RELATION_POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_DUPLICATE_JUDGMENT_POLICY_V3.md"
+RELATION_POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_DUPLICATE_JUDGMENT_POLICY_V4.md"
 EVENT_REGISTRY_PATH = ROOT / "config/event_registry.json"
 BOB_CAPACITY_FIELDS = ("article_type", "source_title", "category_hint", "reason",
                        "ai_editorial_reason", "event_key", "show_report_id", "show_name",

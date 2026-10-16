@@ -9,6 +9,12 @@
       "id": "ringsidenews",
       "name": "Ringside News",
       "url": "https://www.ringsidenews.com/feed/"
+    },
+    {
+      "id": "wrestleview",
+      "name": "Wrestleview Reports",
+      "url": "https://www.wrestleview.com/feed/",
+      "reports_only": true
     }
   ]
 }
