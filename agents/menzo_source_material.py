@@ -99,7 +99,7 @@ class Session:
             self.data = {'version': CONTRACT_VERSION, 'bodies': {}, 'holds': {}}
             self.cache_error = 'source_material_cache_unavailable'
 
-    def hold(self, row, reason, *, retry_after=None):
+    def hold(self, row, reason, *, retry_after=None, extraction_diagnostics=None):
         url_key = key(row)
         if not url_key:
             return
@@ -108,6 +108,9 @@ class Session:
             'first_seen_at': prior.get('first_seen_at') or self.now.isoformat(),
             'updated_at': self.now.isoformat(),
             'retry_after': retry_after or (self.now + timedelta(minutes=30)).isoformat()}
+        details = extraction_diagnostics
+        if details:
+            self.data['holds'][url_key]['extraction_diagnostics'] = copy.deepcopy(details)
         self.changed = True
 
     def hydrate(self, row, stage):
@@ -119,12 +122,14 @@ class Session:
                          if valid_for(c, row)), None)
         origin = 'canonical_reuse'
         reason = None
+        details = None
         if contract is None:
             prior = self.data['holds'].get(url_key, {})
             retry = _stamp(prior.get('retry_after'))
             if retry and retry > self.now:
                 reason = 'source_fetch_backoff'
                 origin = 'backoff'
+                details = prior.get('extraction_diagnostics')
             else:
                 item = copy.deepcopy(dict(row))
                 if not valid_for(item.get('canonical_source_body'), row):
@@ -133,6 +138,7 @@ class Session:
                     ok, reason = _fetch_body(item)
                 except Exception as exc:
                     ok, reason = False, 'source_extraction_error:' + type(exc).__name__
+                details = item.pop('_source_extraction_diagnostics', None)
                 contract = item.get('canonical_source_body') if ok else None
                 origin = 'source_fetch'
                 if not valid_for(contract, row):
@@ -141,7 +147,8 @@ class Session:
             row.pop('retained_body', None)
             row['input_coverage'] = 'BODY_UNAVAILABLE'
             retry_after = (prior.get('retry_after') if reason == 'source_fetch_backoff' else None)
-            self.hold(row, reason or 'complete_body_unavailable', retry_after=retry_after)
+            self.hold(row, reason or 'complete_body_unavailable', retry_after=retry_after,
+                      extraction_diagnostics=details)
             result = {**profile(row), 'stage': stage, 'origin': origin, 'status': 'TECHNICAL_HOLD',
                       'reason': reason or 'complete_body_unavailable'}
         else:
@@ -155,6 +162,8 @@ class Session:
                 self.changed = True
             result = {**profile(row), 'stage': stage, 'origin': origin, 'status': 'COMPLETE',
                       'provenance': copy.deepcopy(contract['provenance'])}
+        if details:
+            result['extraction_diagnostics'] = copy.deepcopy(details)
         self.rows.append(result)
         emit('editorial_source_material', 'selection', 'success' if contract else 'pending',
              {**result, 'observation_id': self.observation_id}, item=row, model_role=stage)

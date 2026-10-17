@@ -7,6 +7,13 @@ from typing import Any
 
 SCHEMA = "owtv_canonical_source_body_v1"
 MIN_COMPLETE_CHARS = 200
+EXTRACTION_DIAGNOSTIC_FIELDS = (
+    'extraction_finished', 'body_complete', 'body_complete_reason', 'body_incomplete_reasons',
+    'selected_root_name', 'selected_root_classes', 'coverage_root_name', 'coverage_root_classes',
+    'root_text_chars', 'article_container_text_chars', 'extracted_text_chars', 'root_coverage_ratio',
+    'structured_article_body_chars', 'structured_coverage_ratio', 'structured_token_overlap_ratio',
+    'truncation_access_markers', 'access_wall_dom_signals', 'clean_element_count',
+)
 
 
 def _clean(value: Any) -> str:
@@ -53,7 +60,7 @@ def contract_from_elements(url: str, elements: list[dict[str, Any]], diagnostics
 
 
 def hydrate(item: dict[str, Any]) -> tuple[bool, str]:
-    """Mutate ``item`` only after Bob's extractor proves a complete source body."""
+    """Install a body only after completeness proof; retain bounded failure facts."""
     if contract_text(item):
         return True, "canonical_cache"
     url = str(item.get("source_url") or item.get("url") or "").strip()
@@ -63,6 +70,8 @@ def hydrate(item: dict[str, Any]) -> tuple[bool, str]:
         from agents.bob import extract_elements, fetch_html
         raw_html = fetch_html(url)
         _meta, _raw, elements, _removed, diagnostics = extract_elements(url, raw_html)
+        item['_source_extraction_diagnostics'] = {
+            key: diagnostics[key] for key in EXTRACTION_DIAGNOSTIC_FIELDS if key in diagnostics}
         contract = contract_from_elements(url, elements, diagnostics)
         if not contract:
             return False, "incomplete_extraction"
