@@ -66,7 +66,7 @@ BIO_PATTERNS = [
     re.compile(r"\bfounder\s+of\s+ringside\s+news\b", re.I),
     re.compile(r"\bfelix\s+upton\b.*\bringside\s+news\b", re.I),
     re.compile(r"\bsteve\s+carrier\b.*\bringside\s+news\b", re.I),
-    re.compile(r"^\s*(?:you\s+can\s+)?follow\s+.+\s+on\s+(twitter|x|instagram|facebook|bluesky)\b", re.I),
+    re.compile(r"^\s*(?:(?:for\s+(?:more|the\s+latest)\s+(?:news|updates)[,:]?\s+)|(?:please\s+))?(?:you\s+can\s+)?follow\s+.+\s+on\s+(twitter|x|instagram|facebook|bluesky)\b", re.I),
     re.compile(r"\bhas\s+(over\s+)?\d+\s+years\s+of\s+experience\b", re.I),
     re.compile(r"\bhas\s+been\s+(reporting\s+on|covering)\s+(pro\s+)?wrestling\b", re.I),
     re.compile(r"\bhis\s+(stories|work)\s+(have\s+been\s+featured|at|on)\b", re.I),
@@ -89,6 +89,7 @@ CTA_PATTERNS = [
     re.compile(r"\bso\s+it\s+remains\s+to\s+be\s+seen\b", re.I),
     re.compile(r"\bstay\s+tuned\b", re.I),
     re.compile(r"\bsubscribe\b|\bclick\s+here\b|^\s*(?:sign\s+up|join)\b.{0,80}\bnewsletter\b", re.I),
+    re.compile(r"^\s*(?:(?:get|receive|read)\s+(?:our|the\s+free)\s+(?:free\s+)?newsletter\b|don['’]t\s+miss\s+(?:the\s+)?updates\b.{0,60}\bour\s+newsletter\b)", re.I),
 ]
 SOURCE_SELF_REFERENCE_SITE_RE = r"(?:ringside\s+news|wrestling\s*inc\.?|fightful|pwinsider|f4wonline|wrestling\s+observer|sescoops|ewrestlingnews|411mania|bodyslam\.net)"
 SOURCE_TERMINAL_BOILERPLATE_PATTERNS = [

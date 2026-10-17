@@ -56,7 +56,11 @@ def test_newsletter_source_citations_are_editorial_text_not_subscription_prompts
     assert diag['body_complete']
 
 
-@pytest.mark.parametrize('cta', ['Subscribe to our newsletter.', 'Sign up for our newsletter.', 'Join our newsletter.', 'Click here to subscribe.'])
+@pytest.mark.parametrize('cta', [
+    'Subscribe to our newsletter.', 'Sign up for our newsletter.', 'Join our newsletter.',
+    'Click here to subscribe.', 'Get our free newsletter.',
+    'Don’t miss updates—our newsletter delivers the latest news.',
+])
 def test_actual_subscription_prompts_still_disappear(cta):
     _, (_, _, clean, _, _) = extract(f'<p>{FACT * 3}</p><p>{cta}</p>')
     assert cta not in text(clean)
@@ -75,6 +79,15 @@ def test_a_quoted_follow_instruction_is_not_an_author_bio_boundary():
     quote = 'Follow the performers on Twitter and listen to their views before reaching a conclusion about the dispute.'
     _, (_, _, clean, _, _) = extract(f'<p>{FACT * 2}</p><blockquote>{quote}</blockquote><p>FINAL_FACT {FACT}</p>')
     assert quote in text(clean) and 'FINAL_FACT' in text(clean)
+
+
+@pytest.mark.parametrize('footer', [
+    'For more updates, follow Steve on Twitter.', 'Please follow Steve on Twitter.',
+    'For the latest news, you can follow Steve on Twitter.',
+])
+def test_prefixed_social_follow_calls_remain_excluded(footer):
+    _, (_, _, clean, _, _) = extract(f'<p>{FACT * 3}</p><p>{footer}</p>')
+    assert FACT.strip() in text(clean) and footer not in text(clean)
 
 
 @pytest.mark.parametrize('promo', [
