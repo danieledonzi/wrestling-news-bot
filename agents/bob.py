@@ -66,7 +66,7 @@ BIO_PATTERNS = [
     re.compile(r"\bfounder\s+of\s+ringside\s+news\b", re.I),
     re.compile(r"\bfelix\s+upton\b.*\bringside\s+news\b", re.I),
     re.compile(r"\bsteve\s+carrier\b.*\bringside\s+news\b", re.I),
-    re.compile(r"\bfollow\s+.+\s+on\s+(twitter|x|instagram|facebook|bluesky)\b", re.I),
+    re.compile(r"^\s*(?:you\s+can\s+)?follow\s+.+\s+on\s+(twitter|x|instagram|facebook|bluesky)\b", re.I),
     re.compile(r"\bhas\s+(over\s+)?\d+\s+years\s+of\s+experience\b", re.I),
     re.compile(r"\bhas\s+been\s+(reporting\s+on|covering)\s+(pro\s+)?wrestling\b", re.I),
     re.compile(r"\bhis\s+(stories|work)\s+(have\s+been\s+featured|at|on)\b", re.I),
@@ -88,7 +88,7 @@ CTA_PATTERNS = [
     re.compile(r"^\s*what\s+do\s+you\s+think\b", re.I),
     re.compile(r"\bso\s+it\s+remains\s+to\s+be\s+seen\b", re.I),
     re.compile(r"\bstay\s+tuned\b", re.I),
-    re.compile(r"\bsubscribe\b|\bnewsletter\b|\bclick\s+here\b", re.I),
+    re.compile(r"\bsubscribe\b|\bclick\s+here\b|^\s*(?:sign\s+up|join)\b.{0,80}\bnewsletter\b", re.I),
 ]
 SOURCE_SELF_REFERENCE_SITE_RE = r"(?:ringside\s+news|wrestling\s*inc\.?|fightful|pwinsider|f4wonline|wrestling\s+observer|sescoops|ewrestlingnews|411mania|bodyslam\.net)"
 SOURCE_TERMINAL_BOILERPLATE_PATTERNS = [
@@ -125,6 +125,7 @@ SOURCE_SELF_REFERENCE_PATTERNS = [
     re.compile(rf"\bstay\s+tuned\s+(?:to\s+)?{SOURCE_SELF_REFERENCE_SITE_RE}\b", re.I),
     re.compile(rf"\bwe\s+at\s+{SOURCE_SELF_REFERENCE_SITE_RE}\b", re.I),
     re.compile(rf"\b{SOURCE_SELF_REFERENCE_SITE_RE}\s+(?:will\s+)?bring\s+you\s+(?:more\s+)?updates\b", re.I),
+    re.compile(rf"\b{SOURCE_SELF_REFERENCE_SITE_RE}\s+will\s+(?:have|provide)\s+(?:full|live|match-by-match)\b.{{0,100}}\b(?:coverage|updates)\b", re.I),
 ]
 
 
@@ -167,6 +168,19 @@ def is_source_self_reference_text(text: str) -> bool:
     if not cleaned:
         return False
     return any(pattern.search(cleaned) for pattern in SOURCE_SELF_REFERENCE_PATTERNS)
+
+
+def strip_source_promotional_sentences(text: str) -> str:
+    """Preserve facts sharing a paragraph with an identifiable source CTA."""
+    for pattern in SOURCE_SELF_REFERENCE_PATTERNS:
+        for match in reversed(list(pattern.finditer(text))):
+            prefix = text[:match.start()].rstrip()
+            if prefix and not re.search(r"[.!?][\"”’')]*$", prefix):
+                continue  # Do not infer a new sentence inside an editorial clause.
+            end = re.search(r"[.!?](?:[\"”’']?)(?=\s|$)", text[match.end():])
+            boundary = match.end() + end.end() if end else len(text)
+            text = clean_text(prefix + ' ' + text[boundary:])
+    return text
 QUOTE_RE = re.compile(r"[“\"]([^”\"]{60,})[”\"]")
 EMBED_URL_RE = re.compile(r"https?://(?:www\.)?(?:x\.com|twitter\.com|instagram\.com|youtube\.com|youtube-nocookie\.com|youtu\.be|tiktok\.com|threads\.net|facebook\.com|bsky\.app)/[^\s\"'<>\\]+", re.I)
 
@@ -269,10 +283,19 @@ def structured_article_body(soup: BeautifulSoup) -> str:
 
 def assess_body_completeness(root: Tag, elements: list[dict[str, Any]], soup: BeautifulSoup) -> dict[str, Any]:
     root_text = clean_text(root.get_text(" ")) if root else ""
+    # Ringside's outer article includes headline, byline, bio and Spotlight cards.
+    # Measure its explicit body; retain the OUTER root for access-wall checks
+    # and keep extraction/media ordering unchanged.
+    coverage_root = root
+    if root and 'rsn-single-article' in (root.get('class') or []):
+        bodies = root.select('.entry-content.rsn-single-content')
+        if len(bodies) == 1:
+            coverage_root = bodies[0]
+    coverage_text = clean_text(coverage_root.get_text(" ")) if coverage_root else ""
     page_text = clean_text(soup.get_text(" "))
     extracted = clean_text(" ".join(str(e.get("text") or e.get("markdown") or "") for e in elements if e.get("type") in {"text", "heading", "quote", "table"}))
     structured = structured_article_body(soup)
-    root_coverage = min(1.0, len(extracted) / max(1, len(root_text)))
+    root_coverage = min(1.0, len(extracted) / max(1, len(coverage_text)))
     structured_coverage = min(1.0, len(extracted) / max(1, len(structured))) if structured else None
     extracted_terms=set(re.findall(r"[a-z0-9à-ÿ]{3,}",extracted.lower()))
     structured_terms=set(re.findall(r"[a-z0-9à-ÿ]{3,}",structured.lower()))
@@ -310,7 +333,10 @@ def assess_body_completeness(root: Tag, elements: list[dict[str, Any]], soup: Be
     return {
         "extraction_finished": True, "body_complete": complete,
         "body_complete_reason": "verified_structured_body" if structured_verifies and complete else "verified_dom_coverage" if complete else "body_incomplete",
-        "body_incomplete_reasons": reasons, "root_text_chars": len(root_text), "extracted_text_chars": len(extracted),
+        "body_incomplete_reasons": reasons, "root_text_chars": len(coverage_text), "extracted_text_chars": len(extracted),
+        "article_container_text_chars": len(root_text),
+        "coverage_root_name": getattr(coverage_root, "name", ""),
+        "coverage_root_classes": node_classes(coverage_root)[:300] if coverage_root else "",
         "root_coverage_ratio": round(root_coverage, 4), "structured_article_body_chars": len(structured),
         "structured_coverage_ratio": round(structured_coverage, 4) if structured_coverage is not None else None,
         "structured_token_overlap_ratio": round(structured_overlap, 4) if structured_overlap is not None else None,
@@ -555,7 +581,7 @@ def element_from_node(node: Tag, base_url: str) -> dict[str, Any] | None:
     if embed_url and (name in {"iframe", "blockquote", "figure", "div"} or any(x in classes for x in ["twitter", "tweet", "instagram", "embed", "youtube", "tiktok", "video"])):
         return {"type": "embed", "url": embed_url, "source_tag": name}
     if name in {"p", "li"}:
-        text = clean_text(node.get_text(" "))
+        text = strip_source_promotional_sentences(clean_text(node.get_text(" ")))
         terminal = is_high_confidence_source_terminal_boilerplate(text)
         if (((is_bio_or_footer_text(text) or is_source_self_reference_text(text)) and not terminal)
                 or any(p.search(text) for p in SOURCE_INTRO_PATTERNS)):
@@ -612,7 +638,7 @@ def sanitize_elements(elements: list[dict[str, Any]], featured_image: str) -> tu
         elif text and is_footer_start_text(text):
             reason = "footer_start"
             stop_after = True
-        elif text and any(p.search(text) for p in BIO_PATTERNS):
+        elif text and kind != "quote" and any(p.search(text) for p in BIO_PATTERNS):
             reason = "bio_or_credit"
             stop_after = True
         elif text and is_cta_text(text):
@@ -669,6 +695,17 @@ def extract_elements(source_url: str, raw_html: str) -> tuple[dict[str, str], li
     for node_idx, node in enumerate(scan_nodes, start=1):
         try:
             name = (node.name or "").lower()
+            author_ui = False
+            for ancestor in node.parents:
+                if ancestor is root:
+                    break
+                if set(ancestor.get('class') or []) & {'rsn-author-bio', 'rsn-author-box', 'author-bio', 'authorbox', 'author-box'}:
+                    author_ui = True
+                    break
+            if author_ui:
+                removed_by_node.append({'node_index': node_idx, 'reason': 'author_container',
+                                        'node_name': node.name})
+                continue
             if name not in {"blockquote", "table", "figure", "div", "iframe"} and node.find_parent(["blockquote", "table", "figure"]):
                 continue
             classes = node_classes(node)
