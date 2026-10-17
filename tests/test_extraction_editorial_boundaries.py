@@ -117,6 +117,25 @@ def test_genuinely_partial_extraction_still_fails_without_changing_thresholds():
     assert not diag['body_complete'] and diag['root_coverage_ratio'] < .55
 
 
+def test_outer_text_cannot_inflate_body_coverage_and_media_order_is_preserved():
+    chrome = ('<p>OUTER_CHROME ' + FACT * 10 + '</p>'
+              '<iframe src="https://www.youtube.com/embed/before123"></iframe>')
+    _, (_, _, clean, _, diag) = extract(
+        f'<p>{FACT * 2}</p><p class="share">{FACT * 10}</p>', chrome=chrome,
+        after='<iframe src="https://www.youtube.com/embed/after1234"></iframe><p>OUTER_FOOTER</p>')
+    assert not diag['body_complete'] and diag['root_coverage_ratio'] < .55
+    assert 'OUTER_CHROME' not in text(clean) and 'OUTER_FOOTER' not in text(clean)
+    assert [e['type'] for e in clean] == ['embed', 'text', 'embed']
+    assert clean[0]['url'].endswith('before123') and clean[-1]['url'].endswith('after1234')
+
+
+def test_source_promotion_cannot_consume_coverage_words_in_the_next_sentence():
+    promo = 'Ringside News will have full details tomorrow.'
+    fact = 'Officials later confirmed the coverage plans.'
+    _, (_, _, clean, _, _) = extract(f'<p>{FACT * 3} {promo} {fact}</p>')
+    assert fact in text(clean) and promo not in text(clean)
+
+
 @pytest.mark.parametrize('notice', [
     'This transcript was produced exclusively for Ringside News from the original recording. '
     'When using excerpts, provide prominent credit and a link to this article.',

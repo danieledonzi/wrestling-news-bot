@@ -126,7 +126,7 @@ SOURCE_SELF_REFERENCE_PATTERNS = [
     re.compile(rf"\bstay\s+tuned\s+(?:to\s+)?{SOURCE_SELF_REFERENCE_SITE_RE}\b", re.I),
     re.compile(rf"\bwe\s+at\s+{SOURCE_SELF_REFERENCE_SITE_RE}\b", re.I),
     re.compile(rf"\b{SOURCE_SELF_REFERENCE_SITE_RE}\s+(?:will\s+)?bring\s+you\s+(?:more\s+)?updates\b", re.I),
-    re.compile(rf"\b{SOURCE_SELF_REFERENCE_SITE_RE}\s+will\s+(?:have|provide)\s+(?:full|live|match-by-match)\b.{{0,100}}\b(?:coverage|updates)\b", re.I),
+    re.compile(rf"\b{SOURCE_SELF_REFERENCE_SITE_RE}\s+will\s+(?:have|provide)\s+(?:full|live|match-by-match)\b[^.!?]{{0,100}}\b(?:coverage|updates|details)\b", re.I),
 ]
 
 
@@ -282,16 +282,20 @@ def structured_article_body(soup: BeautifulSoup) -> str:
     return max(bodies, key=len, default="")
 
 
-def assess_body_completeness(root: Tag, elements: list[dict[str, Any]], soup: BeautifulSoup) -> dict[str, Any]:
-    root_text = clean_text(root.get_text(" ")) if root else ""
-    # Ringside's outer article includes headline, byline, bio and Spotlight cards.
-    # Measure its explicit body; retain the OUTER root for access-wall checks
-    # and keep extraction/media ordering unchanged.
-    coverage_root = root
+def article_coverage_root(root: Tag) -> Tag:
+    """Recognize an explicit editorial body without changing media traversal."""
     if root and 'rsn-single-article' in (root.get('class') or []):
         bodies = root.select('.entry-content.rsn-single-content')
         if len(bodies) == 1:
-            coverage_root = bodies[0]
+            return bodies[0]
+    return root
+
+
+def assess_body_completeness(root: Tag, elements: list[dict[str, Any]], soup: BeautifulSoup) -> dict[str, Any]:
+    root_text = clean_text(root.get_text(" ")) if root else ""
+    # Use the same body for extracted editorial text and its coverage proof.
+    # The OUTER root still owns all access-wall checks and media traversal.
+    coverage_root = article_coverage_root(root)
     coverage_text = clean_text(coverage_root.get_text(" ")) if coverage_root else ""
     page_text = clean_text(soup.get_text(" "))
     extracted = clean_text(" ".join(str(e.get("text") or e.get("markdown") or "") for e in elements if e.get("type") in {"text", "heading", "quote", "table"}))
@@ -691,6 +695,7 @@ def extract_elements(source_url: str, raw_html: str) -> tuple[dict[str, str], li
     soup = BeautifulSoup(raw_html, "html.parser")
     meta = extract_meta(soup, source_url)
     root = choose_article_root(soup)
+    coverage_root = article_coverage_root(root)
     raw_elements: list[dict[str, Any]] = []
     removed_by_node: list[dict[str, Any]] = []
     seen_text: set[str] = set()
@@ -717,6 +722,11 @@ def extract_elements(source_url: str, raw_html: str) -> tuple[dict[str, str], li
                 continue
             item = element_from_node(node, source_url)
             if not item:
+                continue
+            if (coverage_root is not root and item['type'] in {'text', 'heading', 'quote', 'table'}
+                    and not any(parent is coverage_root for parent in node.parents)):
+                removed_by_node.append({'node_index': node_idx, 'reason': 'outside_editorial_body',
+                                        'node_name': node.name})
                 continue
             if item["type"] in {"text", "heading", "quote"}:
                 key = text_key(item.get("text", ""))
