@@ -117,9 +117,13 @@ def test_genuinely_partial_extraction_still_fails_without_changing_thresholds():
     assert not diag['body_complete'] and diag['root_coverage_ratio'] < .55
 
 
-def test_structural_author_bio_cannot_keep_a_transcript_notice_in_the_body():
-    notice = ('This transcript was produced exclusively for Ringside News from the original recording. '
-              'When using excerpts, provide prominent credit and a link to this article.')
+@pytest.mark.parametrize('notice', [
+    'This transcript was produced exclusively for Ringside News from the original recording. '
+    'When using excerpts, provide prominent credit and a link to this article.',
+    'We at Ringside News prepared this transcript exclusively from the original recording. '
+    'When using excerpts, provide prominent credit and a link to this article.',
+])
+def test_structural_author_bio_cannot_keep_a_transcript_notice_in_the_body(notice):
     bio = 'Derek Holloway is a writer at Ringside News specializing in wrestling news, rumors and results.'
     _, (_, _, clean, _, diag) = extract(f'<p>{FACT * 5}</p><p>{notice}</p>',
         after=f'<section class="rsn-author-box"><div class="rsn-author-bio"><p>{bio}</p></div></section>')

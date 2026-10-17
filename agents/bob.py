@@ -582,8 +582,10 @@ def element_from_node(node: Tag, base_url: str) -> dict[str, Any] | None:
     if embed_url and (name in {"iframe", "blockquote", "figure", "div"} or any(x in classes for x in ["twitter", "tweet", "instagram", "embed", "youtube", "tiktok", "video"])):
         return {"type": "embed", "url": embed_url, "source_tag": name}
     if name in {"p", "li"}:
-        text = strip_source_promotional_sentences(clean_text(node.get_text(" ")))
+        text = clean_text(node.get_text(" "))
         terminal = is_high_confidence_source_terminal_boilerplate(text)
+        if not terminal:
+            text = strip_source_promotional_sentences(text)
         if (((is_bio_or_footer_text(text) or is_source_self_reference_text(text)) and not terminal)
                 or any(p.search(text) for p in SOURCE_INTRO_PATTERNS)):
             return None
