@@ -10,18 +10,31 @@ from typing import Any, Mapping
 
 from agents.duplicate_pair_identity import recent_history_pair_id, same_run_pair_id
 
-VERSION = 'totem-d01-bound-material-admission-v4'
+VERSION = 'totem-d01-anchored-material-admission-v5'
 
 
-def bound_schema(template: Mapping[str, Any], primary: Mapping[str, Any]) -> dict[str, Any]:
+def bound_schema(template: Mapping[str, Any], primary: Mapping[str, Any], *, payload=None) -> dict[str, Any]:
     """Make invented/out-of-range refs unrepresentable in the provider contract."""
     schema = copy.deepcopy(dict(template))
     current = [row['ref'] for row in primary['_semantic_admission']['candidates']]
     history = [row['ref'] for row in primary['_semantic_admission']['history']]
+    right = current + history
+    if payload is not None:
+        current = [payload['anchor']['ref']]
+        right = [row['ref'] for row in payload['targets']]
     properties = schema['properties']['suspected_duplicates']['items']['properties']
     properties['left_ref'] = {'type': 'string', 'enum': current}
-    properties['right_ref'] = {'type': 'string', 'enum': current + history}
+    properties['right_ref'] = {'type': 'string', 'enum': right}
     return schema
+
+
+def anchored_payloads(primary: Mapping[str, Any]) -> list[dict[str, Any]]:
+    """Elect sparsely from one current article; targets cannot be compared together."""
+    data = primary['_semantic_admission']
+    return [{'contract_version': VERSION, 'anchor': copy.deepcopy(row),
+             'targets': copy.deepcopy(data['candidates'][index + 1:] + data['history'])}
+            for index, row in enumerate(data['candidates'])
+            if data['candidates'][index + 1:] or data['history']]
 
 
 def compact(row: Mapping[str, Any]) -> dict[str, Any]:

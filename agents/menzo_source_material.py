@@ -225,7 +225,9 @@ def input_profile(prompt):
         payload = json.loads(prompt.split('INPUT=', 1)[1])
     except (IndexError, ValueError):
         return {'coverage': 'unavailable', 'endpoints': [], 'prompt_bytes': len(prompt.encode())}
-    endpoints = [profile(row) for table in ('candidates', 'history') for row in payload.get(table, [])]
+    rows = ([payload['anchor'], *payload.get('targets', [])] if 'anchor' in payload else
+            [row for table in ('candidates', 'history') for row in payload.get(table, [])])
+    endpoints = [profile(row) for row in rows]
     return {'coverage': 'full', 'endpoints': endpoints, 'prompt_bytes': len(prompt.encode()),
             'full_body_endpoints': sum(r['input_coverage'] == 'FULL_BODY' for r in endpoints),
             'body_unavailable_endpoints': sum(r['input_coverage'] != 'FULL_BODY' for r in endpoints)}

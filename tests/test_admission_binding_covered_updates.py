@@ -55,14 +55,15 @@ def test_primary_and_soft_use_bound_schema_without_a_second_attempt():
         def provider(prompt, schema, *_):
             calls.append(prompt)
             properties = schema['properties']['suspected_duplicates']['items']['properties']
-            assert properties['left_ref']['enum'] == ['a0', 'a1']
-            assert properties['right_ref']['enum'] == ['a0', 'a1', 'h0']
+            data = input_data(prompt)
+            assert properties['left_ref']['enum'] == [data['anchor']['ref']]
+            assert properties['right_ref']['enum'] == [r['ref'] for r in data['targets']]
             assert not any(k in prompt for k in ('editorial_class', 'story_core', 'relative_rank'))
             return {'admission_complete': True, 'suspected_duplicates': []}
         result = active._admit(value, provider)
         assert result['status'] == 'VALIDATED'
         # The second path can reuse the exact prior election only in its own phase.
-        assert len(calls) == result['attempts'] == 1
+        assert len(calls) == result['attempts'] == 2
 
 
 def update_provider(value, covering_index, calls, *, kinds=None, history_duplicate=False):
@@ -73,14 +74,17 @@ def update_provider(value, covering_index, calls, *, kinds=None, history_duplica
             pairs = [{'left_ref': 'a0', 'right_ref': 'a1', 'basis': 'Initial fact plus update'}]
             if history_duplicate:
                 pairs.append({'left_ref': f'a{covering_index}', 'right_ref': 'h0', 'basis': 'Published fact'})
+            anchor = data['anchor']['ref']
+            allowed = {r['ref'] for r in data['targets']}
+            pairs = [r for r in pairs if r['left_ref'] == anchor and r['right_ref'] in allowed]
             return {'admission_complete': True, 'suspected_duplicates': pairs}
         if 'DUPLICATE GATE' in prompt:
             rel = data['authorized_relations'][0]
+            if history_duplicate and rel['scope'] == 'recent_history':
+                return {'relations': [{'ref': 'r0', 'decision': 'DUPLICATE'}]}
             side = ('left' if rel['left_ref'] == f'c{covering_index}' else 'right') if covering_index is not None else 'neither'
             rows = [{'ref': 'r0', 'decision': 'MATERIAL_UPDATE', 'covering_side': side,
                      'shared_fact': 'The original initial fact', 'new_fact': 'The later confirmed update'}]
-            if history_duplicate:
-                rows.append({'ref': 'r1', 'decision': 'DUPLICATE'})
             return {'relations': rows}
         return classes(kinds or ['SHOULD_PUBLISH'] * len(value['candidates']))
     return provider

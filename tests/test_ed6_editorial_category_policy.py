@@ -75,7 +75,7 @@ def test_mixed_categories_remove_weak_soft_before_relation_work(monkeypatch):
         prompts.append(prompt)
         payload = json.loads(prompt.split("INPUT=", 1)[1])
         if "contract_version" in payload:
-            assert all("editorial_class" not in row for row in payload["candidates"])
+            assert all("editorial_class" not in row for row in [payload["anchor"]] + payload["targets"])
             return {"admission_complete": True, "suspected_duplicates": []}
         assert payload["history"] == payload["authorized_relations"] == []
         assert "publication_context" not in payload
@@ -83,7 +83,7 @@ def test_mixed_categories_remove_weak_soft_before_relation_work(monkeypatch):
     result = active.evaluate(snapshot, provider=provider)
     assert result["status"] == "VALIDATED"
     assert observed == [row["url"] for row in rows[:3]]
-    assert len(prompts) == 2
+    assert len(prompts) == 3
     assert result["editorial_prefilter"]["skipped_before_duplicate"] == 1
     assert result["output"]["policy_version"] == active.POLICY_VERSION != OLD_POLICY
 

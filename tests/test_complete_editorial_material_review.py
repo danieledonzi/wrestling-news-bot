@@ -158,11 +158,12 @@ def test_soft_missing_history_holds_only_its_connected_component(monkeypatch):
         assert 'suspected_duplicates' in schema['properties']
         return {'admission_complete': True, 'suspected_duplicates': [
             {'left_ref': 'a0', 'right_ref': 'h0', 'basis': 'Potential same development'},
-            {'left_ref': 'a0', 'right_ref': 'a1', 'basis': 'Potential connected development'}]}
+            {'left_ref': 'a0', 'right_ref': 'a1', 'basis': 'Potential connected development'}]
+            if json.loads(prompt.split('INPUT=', 1)[1])['anchor']['ref'] == 'a0' else []}
     survivors, skipped, meta = soft._revalidate_pool_duplicates(rows, provider=admission_only)
     assert [row['url'] for row in survivors] == [rows[2]['url']]
     assert {row['url'] for row in meta['source_material_held_items']} == {row['url'] for row in rows[:2]}
-    assert len(calls) == 1 and not skipped and not menzo.terminal_skip_memory()
+    assert len(calls) == 3 and not skipped and not menzo.terminal_skip_memory()
 
 
 def test_soft_source_hold_is_persisted_without_consuming_meaningful_review(monkeypatch):

@@ -38,8 +38,8 @@ def invalid_gate():
     return {"relations": [{"ref": "r0", "decision": "UNCERTAIN"}]}
 
 
-def select_all(state):
-    return response(state, tuple("SELECT" for _ in state["candidates"]))
+def select_all(state, prompt=None):
+    return response(state, tuple("SELECT" for _ in state["candidates"]), prompt=prompt)
 
 
 def canonical_body(text):
@@ -116,7 +116,7 @@ def test_invalid_single_pair_holds_without_body_repair_or_cache_pollution(isolat
         if "DR1 BODY-AWARE" in prompt:
             assert '"retained_body"' in prompt
             return no_match_relations(1)
-        return invalid_gate() if "DUPLICATE GATE" in prompt else select_all(state)
+        return invalid_gate() if "DUPLICATE GATE" in prompt else select_all(state, prompt)
     result = active.evaluate(state, provider=provider)
     assert result["status"] != "VALIDATED"
     assert not any("DR1 BODY-AWARE" in p for p in calls)
@@ -130,8 +130,8 @@ def test_partial_ordinary_no_match_is_cached_on_remaining_fallback():
     state = snapshot(3)
     state["authorized_relations"] = [suspicious_relation(state), suspicious_relation(state, right=2, pair_id="ac")]
     before = copy.deepcopy(state["candidates"])
-    gate = {"relations": [{"ref": "r0", "decision": "NO_MATCH"}, {"ref": "r1", "decision": "UNCERTAIN"}]}
-    result = active.evaluate(state, provider=lambda prompt, *_: gate if "PHASE ONLY" in prompt else select_all(state))
+    gates = iter([{"relations": [{"ref": "r0", "decision": "NO_MATCH"}]}, invalid_gate()])
+    result = active.evaluate(state, provider=lambda prompt, *_: next(gates) if "PHASE ONLY" in prompt else select_all(state, prompt))
     assert result["status"] != "VALIDATED"
     assert [{k: v for k, v in r.items() if k not in {'retained_body', 'input_coverage'}} for r in state['candidates']] == [
         {k: v for k, v in r.items() if k not in {'retained_body', 'input_coverage'}} for r in before]
@@ -159,10 +159,10 @@ def test_local_refs_keep_valid_row_when_sibling_is_invalid_without_repair(monkey
             normal_calls += 1
             return {"relations": [{"ref": "r0", "decision": "NO_MATCH" if normal_calls == 1 else "UNCERTAIN"},
                                   {"ref": "r1", "decision": "UNCERTAIN"}]}
-        return select_all(state)
+        return select_all(state, prompt)
     result = active.evaluate(state, provider=provider)
     assert result["status"] != "VALIDATED"
-    assert normal_calls == 1
+    assert normal_calls == 2
     assert "duplicate_body_revalidation" not in result
     assert set(cache.load()["entries"]) == {"pair-ab"}
     assert result["duplicate_pair_cache_entries_stored"] == 1

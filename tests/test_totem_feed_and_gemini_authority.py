@@ -42,9 +42,9 @@ def test_opening_announcement_without_headline_names_is_final_and_cached(scope):
         if "DUPLICATE GATE" in prompt:
             return {"relations": [grounded_duplicate("r0", "Roman Reigns faces LA Knight",
                 "World championship bout opens the show", "The same opening bout was announced")]}
-        return response(first, ("SELECT", "SELECT"))
+        return response(first, ("SELECT", "SELECT"), prompt=prompt)
     result = active.evaluate(first, provider=provider)
-    assert result["status"] == "VALIDATED" and len(calls) == 3
+    assert result["status"] == "VALIDATED" and len(calls) == (4 if scope == "recent_history" else 3)
     assert len(first["semantic_duplicate_skips"]) == 1
     relation = result["output"]["relations"][0]
     assert relation["decision"] == "DUPLICATE" and relation["semantic_authority"] == "gemini_final"
@@ -52,7 +52,7 @@ def test_opening_announcement_without_headline_names_is_final_and_cached(scope):
     second = state()
     def cached_provider(prompt, *_):
         assert "DUPLICATE GATE" not in prompt and "CONFIRMATION" not in prompt
-        return response(second, ("SELECT", "SELECT"))
+        return response(second, ("SELECT", "SELECT"), prompt=prompt)
     replay = active.evaluate(second, provider=cached_provider)
     assert replay["status"] == "VALIDATED"
     assert replay["output"]["relations"] == []
@@ -70,7 +70,7 @@ def test_nonduplicate_verdict_never_gets_semantic_repair(decision):
     calls = []
     def provider(prompt, *_):
         calls.append(prompt)
-        return {"relations": [row]} if "DUPLICATE GATE" in prompt else response(value, ("SELECT",))
+        return {"relations": [row]} if "DUPLICATE GATE" in prompt else response(value, ("SELECT",), prompt=prompt)
     result = active.evaluate(value, provider=provider)
     assert result["status"] == "VALIDATED" and len(calls) == 3
     assert len(value["candidates"]) == 1 and value["semantic_duplicate_skips"] == []
@@ -89,7 +89,7 @@ def test_actual_technical_errors_still_fail_closed(fault):
     calls = []
     def provider(prompt, *_):
         calls.append(prompt)
-        return {"relations": rows} if "DUPLICATE GATE" in prompt else response(value, ("SELECT", "SELECT"))
+        return {"relations": rows} if "DUPLICATE GATE" in prompt else response(value, ("SELECT", "SELECT"), prompt=prompt)
     result = active.evaluate(value, provider=provider)
     assert result["status"] != "VALIDATED"
     assert len(value["candidates"]) == 2 and not value.get("semantic_duplicate_skips")
@@ -103,16 +103,16 @@ def test_invalid_sibling_cannot_revoke_a_valid_duplicate():
     attempts = []
     def provider(prompt, *_):
         if "DUPLICATE GATE" not in prompt:
-            return response(value, ("SELECT", "SELECT", "SELECT"))
+            return response(value, ("SELECT", "SELECT", "SELECT"), prompt=prompt)
         attempts.append(prompt)
         if len(attempts) == 1:
             return {"relations": [grounded_duplicate("r0", "first endpoint fact", "second endpoint fact"),
                 {"ref": "r1", "decision": "UNCERTAIN"}]}
-        assert 'REPAIR ONLY THESE RELATION REFS=["r1"]' in prompt
-        return {"relations": [{"ref": "r0", "decision": "NO_MATCH"}, {"ref": "r1", "decision": "NO_MATCH"}]}
+        assert 'REPAIR' not in prompt
+        return {"relations": [{"ref": "r0", "decision": "UNCERTAIN"}]}
     result = active.evaluate(value, provider=provider)
     assert result["status"] != "VALIDATED"
-    assert len(attempts) == 1
+    assert len(attempts) == 2
     assert cache.load()["entries"]["pair-ab"]["final_relation"]["decision"] == "DUPLICATE"
     assert len(value["semantic_duplicate_skips"]) == 1
 
@@ -141,7 +141,7 @@ def test_invalid_reply_with_already_supplied_bodies_does_not_trigger_another_bod
     calls = []
     def provider(prompt, *_):
         calls.append(prompt)
-        return {"relations": [{"ref": "r0", "decision": "UNCERTAIN"}]} if "DUPLICATE GATE" in prompt else response(value, ("SELECT", "SELECT"))
+        return {"relations": [{"ref": "r0", "decision": "UNCERTAIN"}]} if "DUPLICATE GATE" in prompt else response(value, ("SELECT", "SELECT"), prompt=prompt)
     result = active.evaluate(value, provider=provider)
     assert result["status"] != "VALIDATED" and len(calls) == 3
     assert "duplicate_body_revalidation" not in result

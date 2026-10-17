@@ -8,7 +8,7 @@ from zoneinfo import ZoneInfo
 from pathlib import Path
 from typing import Any
 
-from modules.simone_report_integrity import PENDING_REPORTS, candidate_date_evidence, dynamic_special_event_match, is_canonical_report_source, load_effective_registry, matches_weekly_result_identity, normalize_url, reserve_report
+from modules.simone_report_integrity import PENDING_REPORTS, candidate_date_evidence, dynamic_special_event_match, is_canonical_report_source, load_effective_registry, matches_weekly_result_identity, normalize_url, reserve_report, source_identity_text
 from modules.simone_report_integrity import choose_report_source, report_source_name, REPORT_SOURCE_POLICY, REPORT_FALLBACK_AFTER_LOCAL
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -258,7 +258,7 @@ def _candidate_date_matches(candidate: dict[str, Any], date_iso: str) -> bool:
 
 
 def candidate_matches_special_report(candidate: dict[str, Any], report: dict[str, Any], *, legacy_lock: bool = False) -> tuple[bool, str]:
-    explicit_raw = " ".join(str(candidate.get(k) or "") for k in ["title", "url", "source_url"])
+    explicit_raw = source_identity_text(candidate)
     explicit_blob = normalize(explicit_raw)
     aliases = [normalize(x) for x in report.get("aliases", []) if x]
     if not is_canonical_report_source(candidate, legacy_lock=legacy_lock):
@@ -402,7 +402,7 @@ def _canonical_structured_special_match(candidate: dict[str, Any]) -> bool:
 
 
 def candidate_report_identity(candidate: dict[str, Any], report: dict[str, Any], date_iso: str, *, legacy_lock: bool = False) -> tuple[bool, str]:
-    explicit = f"{candidate.get('title', '')} {candidate.get('url', '')} {candidate.get('source_url', '')}"
+    explicit = source_identity_text(candidate)
     if not is_canonical_report_source(candidate, legacy_lock=legacy_lock) or not re.search(r"\b(results|risultati)\b", explicit, re.I):
         return False, "waiting_for_canonical_results_source"
     if _canonical_structured_special_match(candidate):

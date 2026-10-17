@@ -29,8 +29,8 @@ POLICY_VERSION = "owtv_editorial_director_policy_v9_active"
 SCHEMA_PATH = ROOT / "config/editorial_director_output_schema_v6.json"
 POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V9_ACTIVE.md"
 ADMISSION_SCHEMA_PATH = ROOT / "config/editorial_duplicate_admission_schema_v1.json"
-ADMISSION_POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_DUPLICATE_ADMISSION_POLICY_V1.md"
-RELATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_gate_schema_v6.json"
+ADMISSION_POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_DUPLICATE_ADMISSION_POLICY_V2.md"
+RELATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_gate_schema_v7.json"
 RELATION_POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_DUPLICATE_JUDGMENT_POLICY_V4.md"
 EVENT_REGISTRY_PATH = ROOT / "config/event_registry.json"
 BOB_CAPACITY_FIELDS = ("article_type", "source_title", "category_hint", "reason",
@@ -778,7 +778,8 @@ def _evaluate_duplicate_stage(snapshot: Mapping[str, Any], *, provider: Callable
     relations: list[dict[str, Any]] = []
     final_relations = [copy.deepcopy(cached_relations[str(row["pair_id"])]) for row in authorized] if not has_relations else []
     if has_relations:
-        batch_size = max(1, shadow.MAX_RELATIONS)
+        # A judge must never see other pairs or unrelated history to confuse with A/B.
+        batch_size = 1
         batch_snapshots = []
         batch_diagnostics = []
         for batch_index, offset in enumerate(range(0, len(misses), batch_size)):
@@ -812,6 +813,7 @@ def _evaluate_duplicate_stage(snapshot: Mapping[str, Any], *, provider: Callable
                 key=lambda value: int((value.get("observed") or {}).get("serialized_input_bytes", 0)))
             base["observed"] = copy.deepcopy(largest_batch.get("observed"))
             base["limit_status"] = largest_batch.get("limit_status")
+        failed_outcomes = []
         for batch_index, batch_snapshot in enumerate(batch_snapshots):
             outcome = _evaluate_duplicate_gate_batch(
                 batch_snapshot, call=call, digest=digest, cache=cache, materials=materials,
@@ -823,20 +825,24 @@ def _evaluate_duplicate_stage(snapshot: Mapping[str, Any], *, provider: Callable
             gate_logical_request_id = gate_logical_request_id or outcome.get("logical_request_id")
             gate_input_digest = gate_input_digest or outcome.get("input_digest")
             if not outcome.get("ok"):
-                finals = list(cached_relations.values()) + relations + outcome.get('valid_relations', [])
-                if any(row['decision'] == 'DUPLICATE' or row.get('material_update_covering_id') for row in finals):
-                    _apply_duplicate_gate(snapshot, finals)
-                failure_result = dict(outcome.get("result") or {})
-                return {**base, **failure_result, "attempts": gate_attempts,
-                        "duplicate_valid_relations": copy.deepcopy(finals),
-                        "duplicate_unresolved_relations": [copy.deepcopy(row) for row in authorized
-                            if row['pair_id'] not in {final['pair_id'] for final in finals}],
-                        "validation_attempts": base["validation_attempts"],
-                        "duplicate_gate_logical_request_id": gate_logical_request_id,
-                        "duplicate_gate_input_digest": gate_input_digest,
-                        "duplicate_gate_logical_request_ids": gate_logical_request_ids,
-                        "duplicate_gate_input_digests": gate_input_digests}
+                failed_outcomes.append(outcome)
             relations.extend(copy.deepcopy(outcome.get("relations") or []))
+        if failed_outcomes:
+            finals = list(cached_relations.values()) + relations
+            if any(row['decision'] == 'DUPLICATE' or row.get('material_update_covering_id') for row in finals):
+                _apply_duplicate_gate(snapshot, finals)
+            failure_result = dict(failed_outcomes[0].get('result') or {})
+            return {**base, **failure_result, 'attempts': gate_attempts,
+                    'duplicate_valid_relations': copy.deepcopy(finals),
+                    'duplicate_unresolved_relations': [copy.deepcopy(row) for row in authorized
+                        if row['pair_id'] not in {final['pair_id'] for final in finals}],
+                    'validation_attempts': base['validation_attempts'],
+                    'validation_errors': [error for failure in failed_outcomes
+                        for error in (failure.get('result') or {}).get('validation_errors', [])],
+                    'duplicate_gate_logical_request_id': gate_logical_request_id,
+                    'duplicate_gate_input_digest': gate_input_digest,
+                    'duplicate_gate_logical_request_ids': gate_logical_request_ids,
+                    'duplicate_gate_input_digests': gate_input_digests}
         base["duplicate_gate_logical_request_ids"] = copy.deepcopy(gate_logical_request_ids)
         base["duplicate_gate_input_digests"] = copy.deepcopy(gate_input_digests)
         new_by_pair = {str(row["pair_id"]): row for row in relations}
@@ -1041,20 +1047,35 @@ def _admit(snapshot, call):
     if not ids or (len(ids) < 2 and not snapshot.get('_admission_history_ids')):
         return {'status': 'VALIDATED', 'attempts': 0, 'output': [], 'admitted_relations': [],
                 'validation_attempts': [], 'validation_errors': []}
-    payload = snapshot['_semantic_admission']
-    prompt = ADMISSION_POLICY_PATH.read_text() + '\nReturn only JSON. INPUT=' + json.dumps(
-        payload, ensure_ascii=False, sort_keys=True, separators=(',', ':'))
-    def validate(raw):
-        if not isinstance(raw, Mapping):
-            return None, [{'family': 'parse_json', 'detail': 'object_required'}], []
-        rows, errors = admission.validate(raw, snapshot, [], max(300, shadow.MAX_RELATIONS))
-        return rows, errors, []
     phase = 'editorial_soft_duplicate_admission' if snapshot.get('_semantic_admission_only') else 'editorial_duplicate_admission'
-    schema = admission.bound_schema(json.loads(ADMISSION_SCHEMA_PATH.read_text()), snapshot)
-    result = _run_once(snapshot, call, prompt, schema, phase,
-                       ADMISSION_POLICY_PATH, validate, cache_success=True)
-    result['admitted_relations'] = result.get('output') or []
-    return result
+    admitted, attempts, validations, request_ids = [], 0, [], []
+    for payload in admission.anchored_payloads(snapshot):
+        prompt = ADMISSION_POLICY_PATH.read_text() + '\nReturn only JSON. INPUT=' + json.dumps(
+            payload, ensure_ascii=False, separators=(',', ':'))
+        def validate(raw):
+            if not isinstance(raw, Mapping):
+                return None, [{'family': 'parse_json', 'detail': 'object_required'}], []
+            suspects = raw.get('suspected_duplicates')
+            targets = {row['ref'] for row in payload['targets']}
+            if isinstance(suspects, list) and any(isinstance(row, Mapping) and
+                    (row.get('left_ref') != payload['anchor']['ref'] or row.get('right_ref') not in targets)
+                    for row in suspects):
+                return None, [{'family': 'semantic_admission_ref', 'detail': 'outside_anchor_request'}], []
+            rows, errors = admission.validate(raw, snapshot, [], max(300, shadow.MAX_RELATIONS))
+            return rows, errors, []
+        schema = admission.bound_schema(json.loads(ADMISSION_SCHEMA_PATH.read_text()), snapshot, payload=payload)
+        result = _run_once(snapshot, call, prompt, schema, phase,
+                           ADMISSION_POLICY_PATH, validate, cache_success=True)
+        attempts += result.get('attempts', 0)
+        validations.extend(result.get('validation_attempts', []))
+        request_ids.append(result.get('logical_request_id'))
+        if result['status'] != 'VALIDATED':
+            return {**result, 'attempts': attempts, 'validation_attempts': validations,
+                    'admitted_relations': [], 'logical_request_ids': request_ids}
+        admitted.extend(result.get('output') or [])
+    return {'status': 'VALIDATED', 'attempts': attempts, 'validation_attempts': validations,
+            'validation_errors': [], 'output': admitted, 'admitted_relations': admitted,
+            'logical_request_ids': request_ids}
 
 
 def _evaluate_complete(snapshot: dict[str, Any], material: Any, *, provider=None, artifact_index=None):
