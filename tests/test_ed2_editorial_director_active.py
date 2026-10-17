@@ -29,7 +29,7 @@ def snapshot(count=3, published=0):
     return value
 
 
-def response(s, actions=("SELECT", "DEFER", "SKIP")):
+def response(s, actions=("SELECT", "DEFER", "SKIP"), *, prompt=None):
     actions = actions + (actions[-1],) * max(0, len(s["candidates"]) - len(actions))
     classes = tuple("MUST_PUBLISH" if action == "SELECT" else
                     "PUBLISHABLE_SOFT" if action == "DEFER" else "SKIP" for action in actions)
@@ -45,6 +45,16 @@ def response(s, actions=("SELECT", "DEFER", "SKIP")):
         suspects.append({'left_ref': f'a{left}',
             'right_ref': f"{'a' if relation['scope'] == 'same_run' else 'h'}{right}",
             'basis': 'The two supplied stories may report the same central factual development.'})
+    if prompt and 'INPUT=' in prompt:
+        data = json.loads(prompt.rsplit('INPUT=', 1)[1])
+        if 'anchor' in data:
+            anchor = data['anchor']['ref']
+            targets = {r['ref'] for r in data['targets']}
+            suspects = [dict(row, left_ref=anchor,
+                        right_ref=row['right_ref'] if row['left_ref'] == anchor else row['left_ref'])
+                        for row in suspects if (row['left_ref'] == anchor and row['right_ref'] in targets)
+                        or (row['right_ref'] == anchor and row['left_ref'] in targets)]
+            return {'admission_complete': True, 'suspected_duplicates': suspects}
     return {"candidates": [{"ref": f"c{i}", "editorial_class": classes[i],
              "recommended_action": actions[i], "category": "NXT", "story_core": f"core {i}"}
             for i in range(len(s["candidates"]))], "relations": [],
@@ -96,7 +106,7 @@ def test_active_pair_cache_reuses_final_no_match_and_material_update(monkeypatch
                 if decision == "MATERIAL_UPDATE":
                     row.update(new_fact="a later confirmed development", temporal_basis="published later")
                 return {"relations": [row]}
-            return response(first, ("SELECT", "DEFER"))
+            return response(first, ("SELECT", "DEFER"), prompt=prompt)
         if decision == "MATERIAL_UPDATE":
             first["publisher_history_12h"] = [{"article_id": "history", "source_url": "https://history.test/earlier", "title": first["candidates"][1]["title"],
                                                 "published_at": "2026-01-01T00:00:00Z"}]
@@ -112,7 +122,7 @@ def test_active_pair_cache_reuses_final_no_match_and_material_update(monkeypatch
             second["authorized_relations"] = [suspicious_relation(second)]
         second_calls = []
         result = active.evaluate(second, provider=lambda prompt, *_:
-            second_calls.append(prompt) or response(second, ("SELECT", "DEFER")))
+            second_calls.append(prompt) or response(second, ("SELECT", "DEFER"), prompt=prompt))
         assert result["status"] == "VALIDATED" and result["duplicate_pair_cache_hits"] == 1
         assert not any("DUPLICATE GATE" in prompt for prompt in second_calls)
 
@@ -153,7 +163,7 @@ def test_active_relation_ceiling_applies_after_pr131_hits(monkeypatch):
         prompts.append(prompt)
         if "DUPLICATE GATE PHASE ONLY" in prompt:
             return no_match_relations(1)
-        return response(value, ("SELECT", "DEFER"))
+        return response(value, ("SELECT", "DEFER"), prompt=prompt)
 
     result = active.evaluate(value, provider=provider)
 
@@ -179,7 +189,7 @@ def test_active_relation_ceiling_batches_provider_bound_misses_atomically(monkey
             size = prompt.count('"ref":"r')
             gate_sizes.append(size)
             return no_match_relations(size)
-        return response(value, ("SELECT", "DEFER"))
+        return response(value, ("SELECT", "DEFER"), prompt=prompt)
 
     result = active.evaluate(value, provider=provider)
 
@@ -188,12 +198,12 @@ def test_active_relation_ceiling_batches_provider_bound_misses_atomically(monkey
     assert result["provider_bound_relation_count"] == 5
     assert result["provider_bound_limit_status"] == "exceeded"
     assert result["duplicate_gate_batched"] is True
-    assert result["duplicate_gate_batch_count"] == 3
-    assert gate_sizes == [2, 2, 1]
-    assert [row["relation_count"] for row in result["duplicate_gate_batches"]] == [2, 2, 1]
+    assert result["duplicate_gate_batch_count"] == 5
+    assert gate_sizes == [1] * 5
+    assert [row["relation_count"] for row in result["duplicate_gate_batches"]] == [1] * 5
     assert all(row["limit_status"] != "exceeded" for row in result["duplicate_gate_batches"])
-    assert len(result["duplicate_gate_logical_request_ids"]) == 3
-    assert len(result["duplicate_gate_input_digests"]) == 3
+    assert len(result["duplicate_gate_logical_request_ids"]) == 5
+    assert len(result["duplicate_gate_input_digests"]) == 5
 
 
 def test_active_relation_batch_failure_holds_only_suspicious_candidate(monkeypatch):
@@ -212,15 +222,15 @@ def test_active_relation_batch_failure_holds_only_suspicious_candidate(monkeypat
             if gate_call == 2:
                 raise TimeoutError("second batch unavailable")
             return no_match_relations(prompt.count('"ref":"r'))
-        return response(value, ("SELECT", "DEFER"))
+        return response(value, ("SELECT", "DEFER"), prompt=prompt)
 
     result = active.evaluate(value, provider=provider)
 
     assert result["status"] == "VALIDATED"
     assert result['duplicate_technical_failure']['status'] == 'PROVIDER_FAILED'
     assert result["duplicate_gate_batched"] is True
-    assert result["duplicate_gate_batch_count"] == 3
-    assert gate_call == 2
+    assert result["duplicate_gate_batch_count"] == 5
+    assert gate_call == 5
     assert [row["candidate_id"] for row in value["candidates"]] == before[1:]
     assert [row['candidate_id'] for row in value['source_material_holds']] == before[:1]
     assert "semantic_duplicate_skips" not in value
@@ -245,11 +255,10 @@ def test_duplicate_gate_preserves_valid_rows_without_targeted_repair(monkeypatch
     def validate(_value, snap, preserve_valid=False):
         specs = list(snap["authorized_relations"])
         validation_calls.append(len(validation_calls))
-        if len(validation_calls) == 1:
-            return [canonical(row) for row in specs[:2]], [
-                {"family": "duplicate_centrality_contract", "ref": "r2"}], []
-        return [canonical(specs[2])], [
-            {"family": "relation_coverage", "missing_refs": ["r0", "r1"]}], []
+        assert len(specs) == 1
+        if len(validation_calls) <= 2:
+            return [canonical(specs[0])], [], []
+        return [], [{"family": "relation_coverage", "missing_refs": ["r0"]}], []
 
     monkeypatch.setattr(active, "_validate_duplicate_gate", validate)
     gate_prompts = []
@@ -258,16 +267,16 @@ def test_duplicate_gate_preserves_valid_rows_without_targeted_repair(monkeypatch
         if "DUPLICATE GATE PHASE ONLY" in prompt:
             gate_prompts.append(prompt)
             return {"relations": []}
-        return response(value, ("SELECT", "DEFER"))
+        return response(value, ("SELECT", "DEFER"), prompt=prompt)
 
     result = active.evaluate(value, provider=provider)
 
     assert result["status"] == "VALIDATED" and result['duplicate_partial_clearance']
     assert len(value['source_material_holds']) == 1
-    assert validation_calls == [0]
-    assert len(gate_prompts) == 1
-    assert gate_prompts[0].count('"ref":"r') == 3
-    assert "REPAIR" not in gate_prompts[0]
+    assert validation_calls == [0, 1, 2]
+    assert len(gate_prompts) == 3
+    assert all(p.count('"ref":"r') == 1 for p in gate_prompts)
+    assert all("REPAIR" not in p for p in gate_prompts)
     assert result["duplicate_pair_cache_entries_stored"] == 0 # this fixture disables persistence
 
 
@@ -317,7 +326,7 @@ def test_active_pair_cache_mixed_batch_sends_only_misses_and_failure_is_atomic(m
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     first = snapshot(3); first["authorized_relations"] = [suspicious_relation(first)]
     active.evaluate(first, provider=lambda prompt, *_:
-        no_match_relations(1) if "DUPLICATE GATE" in prompt else response(first, ("SELECT", "DEFER", "DEFER")))
+        no_match_relations(1) if "DUPLICATE GATE" in prompt else response(first, ("SELECT", "DEFER", "DEFER"), prompt=prompt))
     from agents import menzo_editorial_recovery as recovery
     recovery.CACHE_FILE.unlink() # distinct mocked election on the same factual fixture
     mixed = snapshot(3)
@@ -325,7 +334,7 @@ def test_active_pair_cache_mixed_batch_sends_only_misses_and_failure_is_atomic(m
         suspicious_relation(mixed, left=0, right=2, pair_id="pair-ac")]
     gate_prompts = []
     result = active.evaluate(mixed, provider=lambda prompt, *_:
-        (gate_prompts.append(prompt) or no_match_relations(1)) if "DUPLICATE GATE" in prompt else response(mixed, ("SELECT", "DEFER", "DEFER")))
+        (gate_prompts.append(prompt) or no_match_relations(1)) if "DUPLICATE GATE" in prompt else response(mixed, ("SELECT", "DEFER", "DEFER"), prompt=prompt))
     assert result["status"] == "VALIDATED" and result["duplicate_pair_cache_hits"] == 1
     assert len(gate_prompts) == 1 and '"ref":"r0"' in gate_prompts[0] and '"ref":"r1"' not in gate_prompts[0]
 
@@ -360,7 +369,7 @@ def test_active_pair_cache_malformed_and_write_failure_fail_open(monkeypatch):
     gate_calls = []
     result = active.evaluate(malformed, provider=lambda prompt, *_:
         (gate_calls.append(prompt) or no_match_relations(1))
-        if "DUPLICATE GATE" in prompt else response(malformed, ("SELECT", "DEFER")))
+        if "DUPLICATE GATE" in prompt else response(malformed, ("SELECT", "DEFER"), prompt=prompt))
     assert result["status"] == "VALIDATED" and result["duplicate_pair_cache_load_status"] == "malformed"
     assert len(gate_calls) == 1
 
@@ -372,7 +381,7 @@ def test_active_pair_cache_malformed_and_write_failure_fail_open(monkeypatch):
     write_failure = snapshot(2)
     write_failure["authorized_relations"] = [suspicious_relation(write_failure)]
     result = active.evaluate(write_failure, provider=lambda prompt, *_:
-        no_match_relations(1) if "DUPLICATE GATE" in prompt else response(write_failure, ("SELECT", "DEFER")))
+        no_match_relations(1) if "DUPLICATE GATE" in prompt else response(write_failure, ("SELECT", "DEFER"), prompt=prompt))
     assert result["status"] == "VALIDATED" and result["duplicate_pair_cache_entries_stored"] == 0
     store_failures = [kwargs for event, kwargs in emitted
                       if event == "stage_failed"
@@ -395,7 +404,7 @@ def _confirmed_duplicate_provider(s, calls, confirmation_decision="CONFIRM_DUPLI
             return {"relations": [grounded_duplicate(
                 "r0", left, right, "Jasper Troy Becomes First Confirmed Release")]}
         calls.append("classification")
-        return response(s, tuple("SELECT" for _ in s["candidates"]))
+        return response(s, tuple("SELECT" for _ in s["candidates"]), prompt=prompt)
     return provider
 
 
@@ -561,7 +570,7 @@ def test_valid_active_result_projects_jasper_fixture_without_legacy_scoring(monk
     monkeypatch.setattr(menzo, "V92_ALLOWED_URLS_FILE", tmp_path / "allowed.json")
     monkeypatch.setattr(menzo, "HARD_SKIP_FILE", tmp_path / "hard-skips.json")
     (tmp_path / "menzo.json").write_text('{"decision_authority":"legacy_menzo","selected":[{"url":"https://stale"}]}')
-    result = active.evaluate(s, provider=lambda *_: response(s))
+    result = active.evaluate(s, provider=lambda *_: response(s, prompt=_[0]))
     handoff = active.project(s, result)
     assert result["status"] == "VALIDATED" and result["attempts"] == 2
     assert [len(handoff[x]) for x in ("selected", "pending", "skipped")] == [1, 1, 1]
@@ -610,7 +619,7 @@ def test_missing_action_holds_without_repair_and_must_survives_daily_reference(m
     from agents import menzo_editorial_recovery as recovery
     recovery.CACHE_FILE.unlink() # simulate expiry of the declared recovery delay
     s = snapshot(1, published=30); calls = []
-    result = active.evaluate(s, provider=lambda *_: calls.append(1) or response(s, ("SELECT",)))
+    result = active.evaluate(s, provider=lambda *_: calls.append(1) or response(s, ("SELECT",), prompt=_[0]))
     assert result["status"] == "VALIDATED" and len(calls) == 1
 
 
@@ -640,7 +649,7 @@ def test_same_run_duplicate_is_removed_after_classification_before_publication(m
         if "DUPLICATE CONFIRMATION PHASE ONLY" in prompt:
             return {"confirmations": [duplicate_confirmation(
                 "d0", s["candidates"][0]["title"], s["candidates"][1]["title"])]}
-        return response(s, ("SELECT",))
+        return response(s, ("SELECT",), prompt=prompt)
     result = active.evaluate(s, provider=provider)
     assert result["status"] == "VALIDATED" and len(calls) == 3
     assert len(result["output"]["candidates"]) == 1
@@ -681,7 +690,7 @@ def test_empty_relation_matrix_creates_no_duplicate_gate_attempt(monkeypatch):
                         lambda event, *args, **kwargs: events.append((event, kwargs)))
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **kwargs: ledger.append(kwargs))
     s = snapshot(1)
-    result = active.evaluate(s, provider=lambda *_: response(s, ("SELECT",)))
+    result = active.evaluate(s, provider=lambda *_: response(s, ("SELECT",), prompt=_[0]))
     assert result["status"] == "VALIDATED" and len(ledger) == 1
     assert ledger[0]["workload"] == "editorial_director_active"
     assert not any(kwargs.get("model_role") == "editorial_director_duplicate_gate"
@@ -857,7 +866,7 @@ def test_duplicate_gate_provider_failure_has_terminal_lifecycle_and_no_classific
     s["authorized_relations"] = [{"pair_id": "p", "scope": "same_run", "left_id": left,
         "right_id": right, "scorer_version": "v", "score": .7, "threshold": .55, "components": {}}]
     result = active.evaluate(s, provider=lambda prompt, *_: (_ for _ in ()).throw(TimeoutError())
-                             if "PHASE ONLY" in prompt else response(s, ("SELECT",)))
+                             if "PHASE ONLY" in prompt else response(s, ("SELECT",), prompt=prompt))
     assert result["status"] == "PROVIDER_FAILED" and ledger[-1]["status"] == "failed"
     failed = [kwargs for event, kwargs in events if event == "model_attempt_failed"]
     assert len(failed) == 1 and failed[0]["error_terminal"] is True
@@ -880,7 +889,7 @@ def test_gate_eliminates_all_after_one_classification_request(monkeypatch, tmp_p
         "threshold": .55, "components": {}}]
     def provider(prompt, *_):
         if "PHASE ONLY" not in prompt:
-            return response(s, ("SELECT",))
+            return response(s, ("SELECT",), prompt=prompt)
         if "DUPLICATE CONFIRMATION PHASE ONLY" in prompt:
             return {"confirmations": [duplicate_confirmation(
                 "d0", s["candidates"][0]["title"], history["title"])]}
@@ -1103,7 +1112,7 @@ def test_deterministic_exact_skip_is_persisted_to_existing_hard_memory(monkeypat
         {**same, "url": "https://exact.test/one"}, {**same, "url": "https://exact.test/two"}]},
         run_id="run", observation_timestamp="now", publisher_count_24h=0, history=[])
     monkeypatch.setattr(menzo, "hydrate_complete_article_bodies", lambda items: (True, []))
-    result = active.evaluate(s, provider=lambda *_: response(s, ("SELECT",)))
+    result = active.evaluate(s, provider=lambda *_: response(s, ("SELECT",), prompt=_[0]))
     for name in ("SOFTPOOL_FILE", "HARD_SKIP_FILE", "MENZO_DECISIONS_FILE",
                  "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE"):
         monkeypatch.setattr(menzo, name, tmp_path / f"{name}.json")
@@ -1118,7 +1127,7 @@ def test_active_soft_defer_is_owned_by_ed3_soft_board(monkeypatch, tmp_path):
            "url": "https://decay.test/soft"}
     s = shadow.capture_opportunity({"news_candidates_for_menzo": [row]}, run_id="run",
         observation_timestamp="2026-10-07T07:00:00+00:00", published_news_today_local=0, history=[])
-    result = active.evaluate(s, provider=lambda *_: response(s, ("DEFER",)))
+    result = active.evaluate(s, provider=lambda *_: response(s, ("DEFER",), prompt=_[0]))
     for field in ("SOFTPOOL_FILE", "HARD_SKIP_FILE", "MENZO_DECISIONS_FILE",
                   "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE"):
         monkeypatch.setattr(menzo, field, tmp_path / f"{field}.json")
@@ -1131,7 +1140,7 @@ def test_active_soft_defer_is_owned_by_ed3_soft_board(monkeypatch, tmp_path):
 
 def test_failed_late_active_persistence_restores_handoff_but_preserves_skips(monkeypatch, tmp_path):
     s = snapshot(); monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
-    result = active.evaluate(s, provider=lambda *_: response(s))
+    result = active.evaluate(s, provider=lambda *_: response(s, prompt=_[0]))
     fields = ("SOFTPOOL_FILE", "HARD_SKIP_FILE", "MENZO_DECISIONS_FILE",
               "ARTIFACT_DECISIONS_FILE", "V92_ALLOWED_URLS_FILE")
     before = {}
@@ -1491,7 +1500,7 @@ def test_active_artifact_preserves_gate_and_classification_provenance(monkeypatc
         if "DUPLICATE CONFIRMATION PHASE ONLY" in prompt:
             return {"confirmations": [duplicate_confirmation(
                 "d0", s["candidates"][0]["title"], s["candidates"][1]["title"])]}
-        return response(s, ("SELECT",))
+        return response(s, ("SELECT",), prompt=prompt)
     result = active.evaluate(s, provider=provider)
     assert result["status"] == "VALIDATED"
     assert result["duplicate_gate_input_digest"] != pre_gate_digest

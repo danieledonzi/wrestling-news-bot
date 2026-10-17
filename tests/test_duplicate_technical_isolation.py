@@ -17,7 +17,7 @@ def provider_for(value, verdicts, calls):
             if isinstance(verdicts, Exception):
                 raise verdicts
             return {'relations': copy.deepcopy(verdicts)}
-        return response(value, ('SELECT',) * len(value['candidates']))
+        return response(value, ('SELECT',) * len(value['candidates']), prompt=prompt)
     return provider
 
 
@@ -48,7 +48,7 @@ def test_unrelated_hard_news_proceeds_while_suspicious_pair_is_held(verdicts):
     assert [row['candidate_id'] for row in result['output']['candidates']] == ids[2:]
     assert {row['candidate_id'] for row in value['source_material_holds']} == set(ids[:2])
     assert result['editorial_prefilter']['duplicate_technical_hold_count'] == 2
-    assert len(calls) == 3 and not menzo.terminal_skip_memory()
+    assert len(calls) == 4 and not menzo.terminal_skip_memory()
     frozen = copy.deepcopy(primary.load())
     projected = active.project(value, result)
     assert len(projected['selected']) == 1 and len(projected['pending']) == 2
@@ -76,7 +76,7 @@ def test_incomplete_admission_cannot_clear_any_candidate():
         if 'suspected_duplicates' in schema['properties']:
             return {'admission_complete': True, 'suspected_duplicates': [
                 {'left_ref': 'a99', 'right_ref': 'a0', 'basis': 'Invalid reference'}]}
-        return response(value, ('SELECT', 'SELECT', 'SELECT'))
+        return response(value, ('SELECT', 'SELECT', 'SELECT'), prompt=prompt)
     result = active.evaluate(value, provider=provider)
     assert result['status'] != 'VALIDATED' and result['failure_stage'] == 'duplicate_admission'
     assert len(calls) == 2 and not menzo.terminal_skip_memory()
@@ -118,7 +118,12 @@ def test_valid_duplicate_remains_terminal_when_independent_article_proceeds():
     value['candidates'].append(fourth)
     value['authorized_relations'] = [suspicious_relation(value),
         suspicious_relation(value, left=1, right=2, pair_id='bc')]
-    result = active.evaluate(value, provider=provider_for(value, [{'ref': 'r0', 'decision': 'DUPLICATE'}], []))
+    gates = iter(['DUPLICATE', 'INVALID'])
+    def provider(prompt, schema, *_):
+        if 'DUPLICATE GATE PHASE ONLY' in prompt:
+            return {'relations': [{'ref': 'r0', 'decision': next(gates)}]}
+        return response(value, ('SELECT',) * 4, prompt=prompt)
+    result = active.evaluate(value, provider=provider)
     assert result['status'] == 'VALIDATED'
     assert [row['candidate_id'] for row in result['output']['candidates']] == ['independent-fourth']
     assert len(value['semantic_duplicate_skips']) == len(menzo.terminal_skip_memory()) == 1

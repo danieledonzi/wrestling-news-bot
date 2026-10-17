@@ -36,7 +36,14 @@ def snapshot(rows, history=()):
         observation_timestamp='2026-10-10T08:00:00Z', history=list(history), defer_relation_build=True)
 
 
-def classes(values, suspects=()):
+def classes(values, suspects=(), *, prompt=None):
+    if prompt:
+        data = json.loads(prompt.split('INPUT=', 1)[1])
+        if 'anchor' in data:
+            anchor = data['anchor']['ref']
+            targets = {r['ref'] for r in data['targets']}
+            return {'admission_complete': True, 'suspected_duplicates': [r for r in suspects
+                if r['left_ref'] == anchor and r['right_ref'] in targets]}
     return {'candidates': [{'ref': f'c{i}', 'editorial_class': value,
             'recommended_action': {'SKIP': 'SKIP', 'PUBLISHABLE_SOFT': 'DEFER'}.get(value, 'SELECT'),
             'category': 'WWE', 'story_core': f'Concrete central development {i}'}
@@ -213,15 +220,14 @@ def test_full_gate_sees_only_semantically_admitted_pair_and_cached_final_cannot_
                 'left_central_development': 'AJ Styles is released from WWE',
                 'right_central_development': 'AJ Styles is released from WWE',
                 'centrality_basis': 'Both independently report this same confirmed professional departure.'}]}
-        return classes(['SHOULD_PUBLISH'] * 3, [suspect])
+        return classes(['SHOULD_PUBLISH'] * 3, [suspect], prompt=prompt)
     first = snapshot(rows)
     result = active.evaluate(first, provider=provider)
-    assert result['status'] == 'VALIDATED' and len(calls) == 3
+    assert result['status'] == 'VALIDATED' and len(calls) == 4
     assert len(first['semantic_duplicate_skips']) == 1
-    gate = json.loads(calls[2].rsplit('INPUT=', 1)[1])
+    gate = json.loads(next(p for p in calls if 'DUPLICATE GATE PHASE ONLY' in p).rsplit('INPUT=', 1)[1])
     assert len(gate['authorized_relations']) == 1
-    # The gate may retain the candidate table but only the suspected pair has
-    # authorized full-material endpoints and decision refs.
+    # The judge receives only the two admitted endpoints and their relation.
     assert set(gate['authorized_relations'][0]) == {'ref', 'scope', 'left_ref', 'right_ref'}
     second = snapshot(rows)
     later_calls = []

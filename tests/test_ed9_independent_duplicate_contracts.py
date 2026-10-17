@@ -68,7 +68,7 @@ def test_valid_primary_row_is_saved_before_invalid_sibling_and_never_reclassifie
 @pytest.mark.parametrize('action,cls', [('SELECT', 'MUST_PUBLISH'), ('DEFER', 'PUBLISHABLE_SOFT'), ('SKIP', 'SKIP')])
 def test_first_class_survives_new_title_timestamp_policy_and_time(action, cls, monkeypatch):
     first = snapshot(1)
-    assert active.evaluate(first, provider=lambda *_: response(first, (action,)))['status'] == 'VALIDATED'
+    assert active.evaluate(first, provider=lambda *_: response(first, (action,), prompt=_[0]))['status'] == 'VALIDATED'
     frozen = copy.deepcopy(primary.load())
     monkeypatch.setattr(active, 'POLICY_VERSION', 'future-policy')
     later = snapshot(1)
@@ -90,7 +90,8 @@ def test_class_skip_removed_before_factual_election_and_judgment():
         calls.append(prompt)
         if 'suspected_duplicates' in schema['properties']:
             data = payload(prompt)
-            assert len(data['candidates']) == 2
+            assert data['anchor']['ref'] == 'a0'
+            assert len(data['targets']) == 1
             assert 'https://ed2.test/2' not in prompt
             assert not any(field in json.dumps(data) for field in ('editorial_class', 'fixed_class', 'story_core', 'relative_rank'))
             return {'admission_complete': True, 'suspected_duplicates': [
@@ -100,7 +101,7 @@ def test_class_skip_removed_before_factual_election_and_judgment():
             assert len(data['candidates']) == 2 and len(data['authorized_relations']) == 1
             assert not any(field in json.dumps(data) for field in ('editorial_class', 'story_core', 'admission_basis', 'relative_rank'))
             return {'relations': [{'ref': 'r0', 'decision': 'NO_MATCH'}]}
-        return response(value, ('SELECT', 'DEFER', 'SKIP'))
+        return response(value, ('SELECT', 'DEFER', 'SKIP'), prompt=prompt)
     result = active.evaluate(value, provider=provider)
     assert result['status'] == 'VALIDATED' and len(calls) == 3
     assert not any('REPAIR' in prompt for prompt in calls)
@@ -110,13 +111,14 @@ def test_minimal_duplicate_is_terminal_before_projection_even_with_invalid_sibli
     value = snapshot(3)
     value['authorized_relations'] = [suspicious_relation(value), suspicious_relation(value, right=2, pair_id='ac')]
     calls = []
+    gates = iter(['DUPLICATE', 'UNCERTAIN'])
     def provider(prompt, *_):
         calls.append(prompt)
         if 'DUPLICATE GATE' in prompt:
-            return {'relations': [{'ref': 'r0', 'decision': 'DUPLICATE'}, {'ref': 'r1', 'decision': 'UNCERTAIN'}]}
-        return response(value, ('SELECT', 'SELECT', 'SELECT'))
+            return {'relations': [{'ref': 'r0', 'decision': next(gates)}]}
+        return response(value, ('SELECT', 'SELECT', 'SELECT'), prompt=prompt)
     result = active.evaluate(value, provider=provider)
-    assert result['status'] != 'VALIDATED' and len(calls) == 3
+    assert result['status'] != 'VALIDATED' and len(calls) == 5
     assert cache.load()['entries']['pair-ab']['final_relation']['decision'] == 'DUPLICATE'
     assert len(menzo.terminal_skip_memory()) == len(value['semantic_duplicate_skips']) == 1
     assert len(primary.load()) == 3
@@ -127,7 +129,7 @@ def test_bad_admission_is_one_attempt_backoff_and_exact_success_clearance_is_reu
     calls = []
     def bad_provider(prompt, schema, *_):
         calls.append(prompt)
-        return {'admission_complete': False, 'suspected_duplicates': []} if 'suspected_duplicates' in schema['properties'] else response(value, ('SELECT', 'DEFER'))
+        return {'admission_complete': False, 'suspected_duplicates': []} if 'suspected_duplicates' in schema['properties'] else response(value, ('SELECT', 'DEFER'), prompt=prompt)
     first = active.evaluate(value, provider=bad_provider)
     assert first['failure_stage'] == 'duplicate_admission' and first['attempts'] == 2
     assert first['validation_errors'][0]['family'] == 'semantic_admission_coverage' and first['retry_after']
@@ -147,7 +149,7 @@ def test_bad_admission_is_one_attempt_backoff_and_exact_success_clearance_is_reu
 
 def test_changed_admission_material_recovers_without_waiting_or_reclassification():
     value = snapshot(2)
-    active.evaluate(value, provider=lambda prompt, schema, *_: {'admission_complete': False} if 'suspected_duplicates' in schema['properties'] else response(value, ('SELECT', 'SELECT')))
+    active.evaluate(value, provider=lambda prompt, schema, *_: {'admission_complete': False} if 'suspected_duplicates' in schema['properties'] else response(value, ('SELECT', 'SELECT'), prompt=prompt))
     changed = snapshot(2)
     changed['candidates'][0]['summary'] = 'New factual material in the same source URL'
     calls = []
@@ -187,7 +189,8 @@ def test_soft_admission_uses_own_schema_and_never_classifies_old_pool():
     def provider(prompt, schema, *_):
         calls.append(prompt)
         assert set(schema['properties']) == {'admission_complete', 'suspected_duplicates'}
-        assert all('editorial_class' not in row for row in payload(prompt)['candidates'])
+        assert all('editorial_class' not in row for row in
+                   [payload(prompt)['anchor'], *payload(prompt)['targets']])
         # Additional old classification-shaped rows cannot enter its dedicated validator.
         return {**CLEAR, 'candidates': [{'ref': 'c0', 'editorial_class': 'SHOULD_PUBLISH'}]}
     survivors, skipped, meta = soft._revalidate_pool_duplicates(rows, provider=provider)
@@ -225,7 +228,7 @@ def test_soft_review_clock_change_does_not_bypass_technical_backoff():
 def test_recovery_cache_write_failure_cannot_revoke_a_valid_primary(monkeypatch):
     monkeypatch.setattr(recovery, 'record', lambda *_args, **_kwargs: (_ for _ in ()).throw(OSError('disk')))
     value = snapshot(1)
-    result = active.evaluate(value, provider=lambda *_: response(value, ('SELECT',)))
+    result = active.evaluate(value, provider=lambda *_: response(value, ('SELECT',), prompt=_[0]))
     assert result['status'] == 'VALIDATED'
     assert primary.load()[menzo.source_key('https://ed2.test/0')]['editorial_class'] == 'MUST_PUBLISH'
 
@@ -249,22 +252,24 @@ def test_large_soft_duplicate_batches_preserve_valid_decisions_on_later_failure(
     def provider(prompt, schema, *_):
         calls.append(prompt)
         if 'suspected_duplicates' in schema['properties']:
-            return {'admission_complete': True, 'suspected_duplicates': [
+            rows = [
                 {'left_ref': 'a0', 'right_ref': 'a1', 'basis': 'Same contract announcement'},
-                {'left_ref': 'a1', 'right_ref': 'a2', 'basis': 'The contract announcement'}]}
-        if len(calls) == 2:
+                {'left_ref': 'a1', 'right_ref': 'a2', 'basis': 'The contract announcement'}]
+            return {'admission_complete': True, 'suspected_duplicates': [r for r in rows
+                if r['left_ref'] == payload(prompt)['anchor']['ref']]}
+        if len(calls) == 3:
             return {'relations': [{'ref': 'r0', 'decision': 'DUPLICATE'}]}
         return {'relations': [{'ref': 'r0', 'decision': 'INVALID'}]}
     survivors, skipped, meta = soft._revalidate_pool_duplicates(rows, provider=provider)
     assert meta['semantic_admission_status'] == 'TECHNICAL_BLOCK'
-    assert len(calls) == meta['gemini_duplicate_calls_executed'] == 3
+    assert len(calls) == meta['gemini_duplicate_calls_executed'] == 4
     assert len(skipped) == len(menzo.terminal_skip_memory()) == 1
     assert {row['url'] for row in survivors}.isdisjoint({row['url'] for row in skipped})
 
 
 def test_closed_url_projection_preserves_original_primary_class(monkeypatch):
     value = snapshot(1)
-    active.evaluate(value, provider=lambda *_: response(value, ('DEFER',)))
+    active.evaluate(value, provider=lambda *_: response(value, ('DEFER',), prompt=_[0]))
     menzo.save_hard_skips({'skipped': [{'url': 'https://ed2.test/0', 'reason': 'soft_board_competition_skip', 'decision_authority': 'soft_board'}]})
     later = snapshot(1)
     result = active.evaluate(later, provider=lambda *_: pytest.fail('closed URL cannot call Gemini'))

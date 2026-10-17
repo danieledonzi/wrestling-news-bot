@@ -10,7 +10,7 @@ from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 from typing import Any, Iterable
-from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
+from urllib.parse import parse_qsl, unquote, urlencode, urlsplit, urlunsplit
 from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
@@ -56,6 +56,14 @@ def _slug(value: str) -> str:
     return re.sub(r"_+", "_", re.sub(r"[^a-z0-9]+", "_", value.lower())).strip("_")
 
 
+def source_identity_text(entry: dict[str, Any]) -> str:
+    """Use the original headline and article slug, never routing folders or our title."""
+    title = str(entry.get('source_title') or entry.get('title') or '')
+    slugs = [unquote(urlsplit(str(entry.get(field) or '')).path.rstrip('/').rsplit('/', 1)[-1])
+             for field in ('url', 'source_url')]
+    return ' '.join([title, *slugs])
+
+
 def is_canonical_report_source(entry: dict[str, Any], *, legacy_lock: bool = False) -> bool:
     sources = {CANONICAL_REPORT_SOURCE, FALLBACK_REPORT_SOURCE}
     if legacy_lock and entry.get("canonical_source_locked") is True and entry.get("canonical_identity") == "wrestlinginc_results":
@@ -78,7 +86,7 @@ def is_canonical_report_source(entry: dict[str, Any], *, legacy_lock: bool = Fal
             return False
     # Discovery is independent of election time. A quick list or taping spoiler
     # must never become the fallback complete report.
-    explicit = _slug(" ".join(str(entry.get(k) or "") for k in ("title", "source_title", "url", "source_url"))).replace("_", " ")
+    explicit = _slug(source_identity_text(entry)).replace("_", " ")
     return not (source == FALLBACK_REPORT_SOURCE and re.search(r"\b(?:spoilers?|quick results|preview|predictions?)\b", explicit))
 
 
@@ -338,7 +346,7 @@ def candidate_date_evidence(entry: dict[str, Any], expected_date: str, *, timezo
         expected = datetime.strptime(expected_date, "%Y-%m-%d").date()
     except (TypeError, ValueError):
         return {"matches": False, "explicit_content_dates": set(), "feed_timestamp_dates": set()}
-    content = " ".join(str(entry.get(k) or "") for k in ("title", "url", "source_url"))
+    content = source_identity_text(entry)
     explicit: set[str] = set()
     for year, month, day in re.findall(r"\b(20\d{2})[-/](\d{1,2})[-/](\d{1,2})\b", content):
         explicit.add(f"{int(year):04d}-{int(month):02d}-{int(day):02d}")
@@ -362,7 +370,9 @@ def candidate_date_evidence(entry: dict[str, Any], expected_date: str, *, timezo
         feed_dates = {stamp.date().isoformat() for stamp in stamps if stamp is not None}
     else:
         feed_dates = set()
-    if explicit:
+    if report_source_name(entry) == FALLBACK_REPORT_SOURCE and not explicit:
+        matches = False  # Publication time cannot establish a fallback show's date.
+    elif explicit:
         matches = expected.isoformat() in explicit
         if report_source_name(entry) == FALLBACK_REPORT_SOURCE:
             matches = matches and explicit == {expected.isoformat()}
@@ -374,7 +384,7 @@ def candidate_date_evidence(entry: dict[str, Any], expected_date: str, *, timezo
 
 def configured_special_event_identity(entry: dict[str, Any], registry: dict[str, Any], *, results_required: bool = False) -> tuple[dict[str, Any] | None, str]:
     """Identify an event solely through the configured registry identity contract."""
-    raw = " ".join(str(entry.get(k) or "") for k in ("title", "url", "source_url"))
+    raw = source_identity_text(entry)
     explicit_report = bool(re.search(r"\bresults\b|\brisultati\b", raw, re.I))
     if results_required and not explicit_report:
         return None, "rejected_non_results_event_article"

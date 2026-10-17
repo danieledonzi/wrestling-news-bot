@@ -64,14 +64,15 @@ def test_complete_tail_reaches_classification_admission_and_gate_once_per_url(mo
     def provider(prompt, schema, *_):
         data = json.loads(prompt.split('INPUT=', 1)[1])
         phases.append(list(schema['properties']))
-        assert all(r['retained_body'] == body for r in data['candidates'])
+        rows = [data['anchor']] + data['targets'] if 'anchor' in data else data['candidates']
+        assert all(r['retained_body'] == body for r in rows)
         assert 'OTHER_PERFORMER_RETURN_AT_THE_END' in prompt
         if 'suspected_duplicates' in schema['properties']:
-            assert not any('editorial_class' in r for r in data['candidates'])
+            assert not any('editorial_class' in r for r in rows)
             return {'admission_complete': True, 'suspected_duplicates': [
                 {'left_ref': 'a0', 'right_ref': 'a1', 'basis': 'Potential shared event'}]}
         if 'relations' in schema['properties']:
-            assert not any('editorial_class' in r for r in data['candidates'])
+            assert not any('editorial_class' in r for r in rows)
             return {'relations': [{'ref': 'r0', 'decision': 'NO_MATCH'}]}
         return classify(2)
     result = active.evaluate(value, provider=provider)
@@ -129,7 +130,8 @@ def test_history_body_unavailable_blocks_only_admitted_component(monkeypatch):
     def provider(prompt, schema, *_):
         if 'suspected_duplicates' in schema['properties']:
             return {'admission_complete': True, 'suspected_duplicates': [
-                {'left_ref': 'a0', 'right_ref': 'h0', 'basis': 'Potential same development'}]}
+                {'left_ref': 'a0', 'right_ref': 'h0', 'basis': 'Potential same development'}]
+                if json.loads(prompt.split('INPUT=', 1)[1])['anchor']['ref'] == 'a0' else []}
         assert 'relations' not in schema['properties']
         return classify(2)
     result = active.evaluate(value, provider=provider)
