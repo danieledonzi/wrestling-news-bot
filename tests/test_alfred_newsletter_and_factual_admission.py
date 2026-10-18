@@ -9,6 +9,7 @@ from agents import menzo_editorial_director_active as active
 from agents import menzo_policy_v93_15 as menzo
 from agents import menzo_primary_classification_store as primary
 from agents import menzo_priority_queue as queue
+from agents import menzo_active_duplicate_pair_cache as pair_cache
 from test_admission_binding_covered_updates import election
 
 
@@ -56,6 +57,9 @@ def test_actual_promotional_calls_still_block(cta):
     'To receive updates, sign up for our newsletter.',
     'Per ricevere gli aggiornamenti, abbonati alla newsletter.',
     'Subscribe to our <strong>newsletter</strong>.',
+    'For more wrestling news, subscribe to our newsletter.',
+    'Stay up to date with our newsletter.',
+    'Per altre notizie, abbonati alla newsletter.',
 ])
 def test_prefixed_and_unpunctuated_paragraph_ctas_still_block(cta):
     value = article('')
@@ -131,6 +135,28 @@ def test_evidence_keeps_provider_endpoint_binding_when_pair_ids_are_sorted():
     assert not errors and relations[0]['left_id'] == 'a-target'
     assert relations[0]['admission_evidence']['anchor_id'] == 'z-anchor'
     assert relations[0]['admission_evidence']['target_id'] == 'a-target'
+
+
+def test_old_admission_cache_cannot_reinsert_pairs_but_current_decisions_remain_binding(monkeypatch):
+    def fingerprint():
+        return pair_cache.contract_fingerprint(policy_version=active.POLICY_VERSION, model=active.MODEL,
+            policy_path=active.RELATION_POLICY_PATH, gate_schema_path=active.RELATION_SCHEMA_PATH,
+            event_registry_path=active.EVENT_REGISTRY_PATH)
+    current_contract = fingerprint()
+    with monkeypatch.context() as old:
+        old.setattr(admission, 'VERSION', 'totem-d01-anchored-material-admission-v5')
+        old_contract = fingerprint()
+    assert old_contract != current_contract
+    state = {'candidates': [{'candidate_id': 'anchor'}],
+             'publisher_history_12h': [{'article_id': 'history'}]}
+    identity = {'pair_id': 'pair', 'scope': 'recent_history', 'left_id': 'anchor', 'right_id': 'history'}
+    final = {**identity, 'decision': 'DUPLICATE', 'semantic_authority': 'gemini_final'}
+    for contract, expected in [(old_contract, 0), (current_contract, 1)]:
+        entry = {'identity': identity, 'contract_fingerprint': contract, 'final_relation': final}
+        monkeypatch.setattr(pair_cache, 'load', lambda: {'entries': {'pair': entry}})
+        relations = []
+        active._preserve_cached_duplicate_admissions(state, relations)
+        assert len(relations) == expected
 
 
 def test_sparse_factual_contract_uses_one_existing_request_and_no_classes():

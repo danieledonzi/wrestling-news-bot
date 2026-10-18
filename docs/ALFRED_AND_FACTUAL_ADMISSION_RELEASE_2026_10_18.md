@@ -28,6 +28,8 @@ autonomous. This is not blanket pair immunity or permission for every extra deta
 update between equivalent dedicated articles. The independent judgment policy V4 is unchanged. Primary
 classifications, 12-hour history, terminal skips, report source/rendering, pacing, model routing, complete-body
 extraction, important-update threshold and same-run A+B coverage are unchanged. No runtime cache is purged.
+The pair-cache fingerprint derives its admission contract from the live admission VERSION: old-contract
+entries cannot reinstate pairs excluded by V6, while same-contract final decisions retain their binding reuse.
 
 ## Owner-directed URL closure
 
@@ -40,10 +42,11 @@ untouched. The real source still serves as a retained offline quality regression
 
 ## Verification
 
-- Fresh isolated production-Python checkout: **1,859 tests pass**, one previously established failing
-  oversized-body recovery test excluded. Forty new regressions cover editorial citations, real CTA
+- Fresh isolated production-Python checkout: **1,863 tests pass**, one previously established failing
+  oversized-body recovery test excluded. Forty-four new regressions cover editorial citations, real CTA
   language, retained safety checks, required factual fields, endpoint evidence binding, cache reuse and owner
-  terminal closure without primary reclassification. Eight existing fixture providers now emit the new factual
+  terminal closure without primary reclassification, and exclusion of old-contract cached admissions while
+  preserving current-contract binding decisions. Eight existing fixture providers now emit the new factual
   fields; their existing semantic/failure assertions are preserved.
 - Actual retained Caster translation: baseline Alfred reports only `cta_residue: Newsletter`; new Alfred
   reports no issue and approves it. No new translation or WordPress write was used for this control.
