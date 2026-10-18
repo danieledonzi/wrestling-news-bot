@@ -19,6 +19,7 @@ ARTIFACT_DIR = ROOT / "artifacts" / "newsroom"
 
 REPORTS_CONFIG = CONFIG_DIR / "reports_v92.json"
 REPORT_STATUS_FILE = STATE_DIR / "report_status.json"
+SIMONE_REPORT_HISTORY_FILE = NEWSROOM_STATE_DIR / "simone_report_history.json"
 MASSY_BOARD_FILE = NEWSROOM_STATE_DIR / "massy_board_latest.json"
 SIMONE_DECISIONS_FILE = NEWSROOM_STATE_DIR / "simone_reports_latest.json"
 ARTIFACT_SIMONE_FILE = ARTIFACT_DIR / "simone_reports.json"
@@ -28,7 +29,7 @@ REPORT_REGISTRY_FILE = NEWSROOM_STATE_DIR / "report_publication_registry.json"
 SIMONE_EXPECTED_EVENTS_FILE = NEWSROOM_STATE_DIR / "simone_expected_events_latest.json"
 ARTIFACT_EXPECTED_EVENTS_FILE = ARTIFACT_DIR / "simone_expected_events_latest.json"
 
-SIMONE_VERSION = "v95.21_wrestleview_0830_fallback"
+SIMONE_VERSION = "v95.22_source_independent_report_completion"
 
 DAY_NAMES = {
     "monday": 0,
@@ -354,17 +355,67 @@ def _record_source_url(record: dict[str, Any]) -> str:
     return str(record.get("source_url") or record.get("url") or job.get("source_url") or job.get("url") or "")
 
 
+def published_report_closes_identity(report: dict[str, Any], record: dict[str, Any], *, keyed_report_key: str = "") -> bool:
+    """Recognize a completed obligation without electing or authorizing a source.
+
+    Legacy publication records retain their original URL/headline. Validate those
+    factual identity fields, never the generated Italian title or publication date.
+    No current source allowlist/deadline participates in recognizing past success.
+    """
+    if not published_record_compatible(record, require_evidence=True) or str(record.get('status') or '').lower() == 'dry_run':
+        return False
+    job = record.get('job') if isinstance(record.get('job'), dict) else {}
+    key = str(report.get('report_key') or '')
+    stored_key = str(record.get('report_key') or job.get('report_key') or keyed_report_key)
+    if not key or key != stored_key:
+        return False
+    date_iso = str(report.get('date') or report.get('date_local') or report.get('show_date') or '')
+    if not date_iso and re.search(r'\d{4}_\d{2}_\d{2}$', key):
+        date_iso = key[-10:].replace('_', '-')
+    completion = record.get('report_completion')
+    if (isinstance(completion, dict) and completion.get('version') == 'totem-r01-completion-v1'
+            and completion.get('report_key') == key and re.fullmatch(r'\d{4}-\d{2}-\d{2}', date_iso)
+            and completion.get('date') == date_iso):
+        return all(not report.get(field) or not completion.get(field) or report[field] == completion[field]
+                   for field in ('event_key', 'night_key', 'report_id'))
+    original_title = str(record.get('source_title') or job.get('source_title') or '')
+    candidate = {'source_url': _record_source_url(record), 'source_title': original_title, 'title': original_title}
+    explicit = source_identity_text(candidate)
+    if (not REPORT_SIGNAL_RE.search(explicit) or
+            re.search(r'\b(?:spoilers?|preview|predictions?|quick[\s-]+results)\b', explicit, re.I)):
+        return False
+    # Historic history rows may only retain the URL; English month/date slugs
+    # carry the same explicit date as a spaced original source headline.
+    dates = candidate_date_evidence({**candidate, 'source_title': explicit + ' ' + re.sub(r'[-_]+', ' ', explicit)}, date_iso)
+    if not dates['matches'] or dates['explicit_content_dates'] != {date_iso}:
+        return False
+    configured = load_json(REPORTS_CONFIG, {'reports': []}).get('reports', [])
+    aliases = [str(x) for x in report.get('aliases', []) if x]
+    aliases.extend(str(report.get(x) or '') for x in ('event_name', 'event_identity'))
+    if any(aliases):
+        if any(isinstance(row, dict) and matches_weekly_result_identity(explicit, row, allow_branded_modifier=False)
+               for row in configured):
+            return False
+        blob = normalize(explicit)
+        return any(normalize(alias) and normalize(alias) in blob for alias in aliases)
+    report_id = str(report.get('report_id') or (key[:-11] if date_iso and key.endswith(date_iso.replace('-', '_')) else ''))
+    weekly = next((row for row in configured if isinstance(row, dict) and str(row.get('id')) == report_id), None)
+    return bool(weekly and matches_weekly_result_identity(explicit, weekly))
+
+
 def report_already_published(report: dict[str, Any], status: dict[str, Any], registry: dict[str, Any], manual_runs: list[Any]) -> bool:
-    """Publication evidence is valid only for the same canonical source URL."""
+    """A valid completed identity is final; exact-URL legacy evidence also remains usable."""
     expected_raw_url = str(report.get("source_url") or "")
     expected_url = normalize_url(expected_raw_url) if expected_raw_url else ""
-    records: list[tuple[dict[str, Any], bool]] = []
+    records: list[tuple[dict[str, Any], bool, str]] = []
     if isinstance(status, dict):
-        records.extend((value, False) for value in status.values() if isinstance(value, dict))
+        records.extend((value, False, str(key)) for key, value in status.items() if isinstance(value, dict))
     items = registry.get("items", []) if isinstance(registry, dict) else []
-    records.extend((item, True) for item in items if isinstance(item, dict))
-    records.extend((run, True) for run in manual_runs if isinstance(run, dict))
-    for record, require_evidence in records:
+    records.extend((item, True, '') for item in items if isinstance(item, dict))
+    records.extend((run, True, '') for run in manual_runs if isinstance(run, dict))
+    for record, require_evidence, stored_key in records:
+        if published_report_closes_identity(report, record, keyed_report_key=stored_key):
+            return True
         if not published_record_compatible(record, require_evidence=require_evidence):
             continue
         recorded_raw_url = _record_source_url(record)
@@ -469,6 +520,10 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     reports_cfg = load_json(REPORTS_CONFIG, {"reports": []})
     special_cfg, registry_diagnostics = load_effective_registry()
     status = load_json(REPORT_STATUS_FILE, {})
+    history = load_json(SIMONE_REPORT_HISTORY_FILE, {})
+    if isinstance(status, dict) and isinstance(history, dict):
+        status = {**status, **{f'history:{key}': {**row, 'report_key': row.get('report_key') or key}
+                              for key, row in history.items() if isinstance(row, dict)}}
     publication_registry = load_json(REPORT_REGISTRY_FILE, {"items": []})
     manual_runs = load_json(MANUAL_RUNS_FILE, [])
     reports = reports_cfg.get("reports", []) if isinstance(reports_cfg, dict) else []
@@ -517,6 +572,8 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
         valid_special, _validation_reason = candidate_matches_special_report(candidate, validation_report)
         if not valid_special:
             continue
+        if report_already_published(validation_report, status, publication_registry, manual_runs):
+            continue
         # A fallback feed can arrive first or before the deadline. Discovery
         # must not reserve it ahead of a timely Ringside URL for this identity.
         elected, _ = choose_special_report_candidate(report_candidates, validation_report, now=now)
@@ -546,6 +603,10 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
         report_id = str(report.get("id") or "")
         report_key, date_iso, publish_date_iso = discovery_report_identity(report, now)
         title = build_report_title(report, date_iso)
+        completed = {**report, 'report_id': report_id, 'report_key': report_key, 'title': title, 'date': date_iso}
+        if report_already_published(completed, status, publication_registry, manual_runs):
+            skipped.append({**completed, 'decision': 'skip', 'reason': 'already_published'})
+            continue
         locked = _pending_lock(report_key)
         if locked:
             locked_candidate = _pending_candidate(locked)
@@ -606,6 +667,10 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
 
 
     for report in expected_special:
+        if report_already_published(report, status, publication_registry, manual_runs):
+            item = {**report, 'decision': 'skip', 'reason': 'already_published'}
+            special_already.append(item); skipped.append(item)
+            continue
         locked = _pending_lock(str(report.get("report_key") or ""))
         if locked:
             locked_candidate = _pending_candidate(locked)

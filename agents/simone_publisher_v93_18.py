@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import socket
 import time
 from datetime import datetime, timezone
@@ -14,6 +15,7 @@ import requests
 from modules.report_workshop_v92 import run_report_workshop, scrape_report_article as scrape_article
 from modules.simone_report_integrity import PENDING_REPORTS, normalize_url, report_readiness
 from agents.canonical_event_ledger import active_event
+from agents.simone import report_already_published
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLISHED_DIR = ROOT / "published"
@@ -27,7 +29,7 @@ SIMONE_REPORT_HISTORY_FILE = NEWSROOM_STATE_DIR / "simone_report_history.json"
 ARTIFACT_SIMONE_PUBLISH_FILE = ARTIFACT_DIR / "simone_report_publish.json"
 WP_PREFLIGHT_FILE = NEWSROOM_STATE_DIR / "wp_preflight_latest.json"
 
-VERSION = "v95.19.1_simone_report_identity_guard"
+VERSION = "v95.22_source_independent_report_completion"
 HEADERS = {"User-Agent": "OpenWrestlingTV-v93-Simone-Reports/1.0"}
 REQUEST_TIMEOUT = int(os.getenv("V93_SIMONE_REPORT_WP_TIMEOUT", "12"))
 WP_RETRIES = int(os.getenv("V93_SIMONE_REPORT_WP_RETRIES", "2"))
@@ -283,12 +285,17 @@ def run_simone_report_publisher(simone_decision: dict[str, Any] | None = None) -
         history = {}
     already_results: list[dict[str, Any]] = []
     unresolved_reports: list[dict[str, Any]] = []
+    seen_input_keys: set[str] = set()
     for report in incoming_reports:
         if not isinstance(report, dict):
             continue
         key = report_key(report)
+        if key and key in seen_input_keys:
+            continue
+        if key:
+            seen_input_keys.add(key)
         stored = history.get(key) if key else None
-        if isinstance(stored, dict) and stored.get("source_url") and normalize_url(str(stored.get("source_url"))) == normalize_url(str(report.get("source_url") or "")):
+        if isinstance(stored, dict) and report_already_published(report, {key: stored}, {'items': []}, []):
             already_results.append({"report_key": key, "status": "already_published", "wp_post_id": stored.get("wp_post_id"), "wp_link": stored.get("wp_link"), "title": report.get("title"), "source_url": report.get("source_url")})
         else:
             # A stale/wrong URL attached to this key is not publication evidence
@@ -364,6 +371,11 @@ def run_simone_report_publisher(simone_decision: dict[str, Any] | None = None) -
             if not isinstance(report, dict):
                 continue
             key = report_key(report)
+            stored = history.get(key)
+            if isinstance(stored, dict) and report_already_published(report, {key: stored}, {'items': []}, []):
+                results.append({'report_key': key, 'status': 'already_published', 'wp_post_id': stored.get('wp_post_id'),
+                                'wp_link': stored.get('wp_link'), 'title': report.get('title'), 'source_url': stored.get('source_url')})
+                continue
             if not key:
                 results.append({"status": "skipped", "reason": "missing_report_key", "source_url": report.get("source_url")})
                 continue
@@ -374,7 +386,11 @@ def run_simone_report_publisher(simone_decision: dict[str, Any] | None = None) -
             try:
                 post_id, post_json = run_report_workshop(job, PUBLISHED_DIR, REVIEW_DIR)
                 link = post_json.get("link") if isinstance(post_json, dict) else ""
-                history[key] = {"report_key": key, "source_url": job.get("source_url"), "title": job.get("title"), "wp_post_id": post_id, "wp_link": link, "published_at": utc_now(), "categories": job.get("categories", [])}
+                history[key] = {"report_key": key, "source_url": job.get("source_url"), "title": job.get("title"), "wp_post_id": post_id, "wp_link": link, "published_at": utc_now(), "categories": job.get("categories", []),
+                                **{field: report[field] for field in ('report_id', 'event_key', 'night_key', 'date', 'aliases', 'event_name', 'source_title') if field in report},
+                                'report_completion': {'version': 'totem-r01-completion-v1', 'report_key': key,
+                                    'date': report.get('date') or report.get('date_local') or (key[-10:].replace('_', '-') if re.search(r'\d{4}_\d{2}_\d{2}$', key) else ''),
+                                    **{field: report[field] for field in ('report_id', 'event_key', 'night_key') if field in report}}}
                 results.append({"report_key": key, "status": "published", "wp_post_id": post_id, "wp_link": link, "title": job.get("title"), "source_url": job.get("source_url"), "categories": job.get("categories", [])})
             except Exception as exc:
                 results.append({"report_key": key, "status": "publish_error", "error": str(exc)[:1000], "title": job.get("title"), "source_url": job.get("source_url")})
