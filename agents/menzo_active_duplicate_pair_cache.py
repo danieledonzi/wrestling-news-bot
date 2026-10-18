@@ -62,8 +62,13 @@ def pair_material(relation: Mapping[str, Any], endpoints: Mapping[str, Mapping[s
     scorer = {key: copy.deepcopy(relation.get(key))
               for key in ("scorer_version", "score", "threshold", "components")}
     identity = {key: relation.get(key) for key in ("pair_id", "scope", "left_id", "right_id")}
-    return {"identity": identity, "endpoint_material_hash": _hash(endpoint_material),
-            "relation_contract_hash": _hash(scorer), "contract_fingerprint": contract}
+    material = {"identity": identity, "endpoint_material_hash": _hash(endpoint_material),
+                "relation_contract_hash": _hash(scorer), "contract_fingerprint": contract}
+    if isinstance(relation.get("admission_evidence"), Mapping):
+        # Audit metadata is retained without altering exact-material cache identity.
+        material["admission_evidence"] = copy.deepcopy(dict(relation["admission_evidence"]))
+        material["admission_basis"] = relation.get("admission_basis")
+    return material
 
 
 def empty(status: str = "missing") -> dict[str, Any]:

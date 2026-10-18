@@ -30,6 +30,8 @@ classifications, 12-hour history, terminal skips, report source/rendering, pacin
 extraction, important-update threshold and same-run A+B coverage are unchanged. No runtime cache is purged.
 The pair-cache fingerprint derives its admission contract from the live admission VERSION: old-contract
 entries cannot reinstate pairs excluded by V6, while same-contract final decisions retain their binding reuse.
+Cached admissions retain and restore their original endpoint facts and basis for prefilter auditing; this
+metadata does not change exact-material identity or the final cached decision.
 
 ## Owner-directed URL closure
 
@@ -42,8 +44,8 @@ untouched. The real source still serves as a retained offline quality regression
 
 ## Verification
 
-- Fresh isolated production-Python checkout: **1,863 tests pass**, one previously established failing
-  oversized-body recovery test excluded. Forty-four new regressions cover editorial citations, real CTA
+- Fresh isolated production-Python checkout: **1,864 tests pass**, one previously established failing
+  oversized-body recovery test excluded. Forty-five new regressions cover editorial citations, real CTA
   language, retained safety checks, required factual fields, endpoint evidence binding, cache reuse and owner
   terminal closure without primary reclassification, and exclusion of old-contract cached admissions while
   preserving current-contract binding decisions. Eight existing fixture providers now emit the new factual

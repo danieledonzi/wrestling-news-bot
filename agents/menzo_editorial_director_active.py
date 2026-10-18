@@ -891,6 +891,10 @@ def _preserve_cached_duplicate_admissions(snapshot: Mapping[str, Any], relations
                 left not in current or right not in (current if scope == 'same_run' else history)):
             continue
         row = admission.make_relation(scope, left, right, 'Preserve a final cached Gemini decision for exact material validation.')
+        if isinstance(entry.get('admission_evidence'), Mapping):
+            row['admission_evidence'] = copy.deepcopy(dict(entry['admission_evidence']))
+            if isinstance(entry.get('admission_basis'), str):
+                row['admission_basis'] = entry['admission_basis']
         row['pair_id'] = identity['pair_id']
         relations.append(row); included.add(row['pair_id'])
 

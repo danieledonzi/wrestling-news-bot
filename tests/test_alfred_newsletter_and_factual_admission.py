@@ -159,6 +159,31 @@ def test_old_admission_cache_cannot_reinsert_pairs_but_current_decisions_remain_
         assert len(relations) == expected
 
 
+def test_cached_duplicate_restores_original_endpoint_facts_without_affecting_cache_identity(tmp_path, monkeypatch):
+    monkeypatch.setattr(pair_cache, 'CACHE_FILE', tmp_path / 'pairs.json')
+    contract = pair_cache.contract_fingerprint(policy_version=active.POLICY_VERSION, model=active.MODEL,
+        policy_path=active.RELATION_POLICY_PATH, gate_schema_path=active.RELATION_SCHEMA_PATH,
+        event_registry_path=active.EVENT_REGISTRY_PATH)
+    relations, errors = admission.validate({'admission_complete': True,
+        'suspected_duplicates': [suspicion()]}, election(1, 1), [], 300)
+    assert not errors
+    elected = relations[0]
+    endpoints = {'left': {'title': 'Signing announcement'}, 'right': {'title': 'Same signing'}}
+    material = pair_cache.pair_material(elected, endpoints, contract)
+    identity = {k: elected[k] for k in ('pair_id', 'scope', 'left_id', 'right_id')}
+    final = {**identity, 'decision': 'DUPLICATE', 'semantic_authority': 'gemini_final'}
+    pair_cache.store(pair_cache.empty(), [(material, final)])
+    restored = []
+    active._preserve_cached_duplicate_admissions({'candidates': [{'candidate_id': 'id0'}],
+        'publisher_history_12h': [{'article_id': 'hist0'}]}, restored)
+    assert restored[0]['admission_evidence'] == elected['admission_evidence']
+    assert restored[0]['admission_basis'] == elected['admission_basis']
+    new_material = pair_cache.pair_material(restored[0], endpoints, contract)
+    assert pair_cache.lookup(pair_cache.load(), new_material)['decision'] == 'DUPLICATE'
+    restored[0]['admission_evidence']['anchor_fact'] = 'Mutated observation'
+    assert pair_cache.load()['entries'][elected['pair_id']]['admission_evidence'] == elected['admission_evidence']
+
+
 def test_sparse_factual_contract_uses_one_existing_request_and_no_classes():
     state = election(1, 1); calls = []
     def provider(prompt, schema, *_):
