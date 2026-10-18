@@ -182,7 +182,7 @@ def _isolated_simone(tmp_path, monkeypatch, now):
     monkeypatch.setattr(simone, "load_effective_registry", lambda: (cfg, {"effective_registry_source": "test"}))
     monkeypatch.setattr(simone, "local_now", lambda: now)
     paths = {}
-    for name in ["PENDING_REPORTS", "SIMONE_DECISIONS_FILE", "ARTIFACT_SIMONE_FILE", "SIMONE_EXPECTED_EVENTS_FILE", "ARTIFACT_EXPECTED_EVENTS_FILE", "REPORT_STATUS_FILE", "REPORT_REGISTRY_FILE", "MANUAL_RUNS_FILE"]:
+    for name in ["PENDING_REPORTS", "SIMONE_DECISIONS_FILE", "ARTIFACT_SIMONE_FILE", "SIMONE_EXPECTED_EVENTS_FILE", "ARTIFACT_EXPECTED_EVENTS_FILE", "REPORT_STATUS_FILE", "REPORT_REGISTRY_FILE", "MANUAL_RUNS_FILE", "SIMONE_REPORT_HISTORY_FILE"]:
         paths[name] = tmp_path / f"{name}.json"
         monkeypatch.setattr(simone, name, paths[name])
     paths["REPORT_STATUS_FILE"].write_text("{}")

@@ -10,6 +10,7 @@
 **Owner-approved conditional reform, confirmed by isolated replay:** 2026-10-13 — complete editorial source material, under TOTEM-F01.
 **Owner-approved clarification:** 2026-10-15 — same-run material updates may replace the initial article only when their own complete body contains both the initial fact and the update.
 **Owner-approved clarification:** 2026-10-18 — summary/roundup articles do not automatically cover autonomous dedicated feed news; contextual newsletter citations are not subscription CTAs.
+**Owner-approved clarification:** 2026-10-18 — a successful report publication closes that event/night/date independently of its source.
 
 ## TOTEM supremacy
 
@@ -66,6 +67,17 @@ Later candidate URLs cannot reopen source selection, replace the canonical sourc
 Owner amendment, 2026-10-16: this source policy applies to weekly shows, PLE/PPV and confirmed special events. Once Wrestleview is selected, later Ringside URLs are ignored even if translation or publication is still pending or the report has already published. No source replacement or second report is allowed. The Wrestleview feed is report-only and must not supply new ordinary news opportunities.
 
 Owner amendment, 2026-10-11, amended above: new identities originally used Ringside News for every report type. There is no automatic WrestlingInc fallback. Already validated and locked WrestlingInc URLs remain locked to preserve identity immutability; this exception does not admit new WrestlingInc reservations. Published records are not reopened.
+
+### Successful publication is final — owner clarification, 2026-10-18
+
+Once a valid report for an event/show, its specific night and its date has been successfully published,
+that report obligation is permanently fulfilled, regardless of the source used. This rule is source-agnostic:
+it applies to today's sources and to any future source. No alternative source is subsequently sought or
+elected for that fulfilled report; no further reservation, scraping, translation or report publication is
+authorized for that identity. The 08:30 fallback applies only to an unfulfilled report. A successful
+publication record must not be replaced by a later source or report. Separate nights/dates remain separate
+obligations. A preview, news article, wrong event/date, dry run or failed attempt is not successful report
+publication. This closure concerns reports only and does not suppress autonomous individual feed news.
 
 ### G. Downstream freedom
 
