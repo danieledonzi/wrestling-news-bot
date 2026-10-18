@@ -80,6 +80,24 @@ def test_weekly_completion_stops_election_and_reservation_after_source_leaves_fe
     assert not json.loads(paths['PENDING_REPORTS'].read_text())['reports']
 
 
+@pytest.mark.parametrize('hour,minute', [(6, 10), (9, 0)])
+def test_completed_pending_row_is_closed_even_before_its_deadline(tmp_path, monkeypatch, hour, minute):
+    paths = isolate_weekly(tmp_path, monkeypatch, datetime(2026, 10, 16, hour, minute, tzinfo=ROME))
+    key = 'tna_impact_2026_10_15'
+    paths['SIMONE_REPORT_HISTORY_FILE'].write_text(json.dumps({key: {
+        'report_key': key, 'source_url': RS, 'wp_post_id': 42}}))
+    row = {'report_key': key, 'report_id': 'tna_impact', 'date_local': '2026-10-15',
+           'publish_date_local': '2026-10-16', 'publish_after': '06:30', 'source': 'ringsidenews',
+           'source_url': RS, 'normalized_url': RS, 'source_title': 'TNA Impact Results October 15, 2026',
+           'canonical_source_locked': True, 'canonical_identity': 'ringsidenews_results',
+           'status': 'waiting_publish_after'}
+    paths['PENDING_REPORTS'].write_text(json.dumps({'reports': [row]}))
+    result = simone.run_simone({'report_candidates': []})
+    assert not result['ready_reports'] and not result['waiting_reports']
+    assert len(result['skipped_reports']) == 1 and result['skipped_reports'][0]['reason'] == 'already_published'
+    assert json.loads(paths['PENDING_REPORTS'].read_text())['reports'][0]['status'] == 'already_published'
+
+
 def test_special_completion_stops_structured_discovery_election_and_pending_replay(tmp_path, monkeypatch):
     paths, cfg = _isolated_simone(tmp_path, monkeypatch, datetime(2026, 8, 31, 9, tzinfo=ROME))
     cfg['events'] = [event for event in cfg['events'] if event['key'] == 'aew_all_in_2026']

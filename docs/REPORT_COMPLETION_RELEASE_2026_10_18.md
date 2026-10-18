@@ -27,11 +27,13 @@ are needed for the reform's validation. No historical publication is recreated o
 
 ## Verification
 
-- Isolated VPS Python 3.9: 102 focused report/source/identity tests pass.
-- Fresh isolated full checkout: **1,882 pass**, one established pre-existing oversized-body recovery test
-  deselected; 18 new regressions cover source independence, future receipts, feed disappearance, no election
+- Isolated VPS Python 3.9: 104 focused report/source/identity tests pass.
+- Fresh isolated full checkout: **1,884 pass**, one established pre-existing oversized-body recovery test
+  deselected; 20 new regressions cover source independence, future receipts, feed disappearance, no election
   or reservation after completion, pending replay, different nights/dates, negative legacy identities,
   publisher avoidance of downstream work, same-run duplicates and preservation of first success.
+  Completed pending rows are closed before their due-time gate and do not also appear as waiting; a completed
+  obligation is counted once in skipped diagnostics even when present in both configuration and pending state.
 - Controlled source-switch replay uses the actual WrestleDream Ringside/Wrestleview URLs and event metadata,
   with the first successful WordPress post ID 13724. It is a bounded counterfactual, not an exact archived
   historical cohort. Baseline reopens one ready report; the candidate closes the obligation before election.

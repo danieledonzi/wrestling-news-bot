@@ -737,6 +737,11 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
             report["title"] = special_expected["title"]
             report["event_type"] = special_expected.get("event_type")
             report["report_type"] = "special_event"
+        if report_already_published(report, status if isinstance(status, dict) else {}, publication_registry if isinstance(publication_registry, dict) else {}, manual_runs if isinstance(manual_runs, list) else []):
+            row["status"] = "already_published"
+            if not any(item.get('report_key') == report.get('report_key') and item.get('reason') == 'already_published' for item in skipped):
+                skipped.append({**report, "decision": "skip", "reason": "already_published"})
+            continue
         if not pending_due(row, now):
             row["status"] = "waiting_publish_after"; waiting.append({**report, "decision": "waiting", "reason": "waiting_publish_after"})
             continue
@@ -745,8 +750,6 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
             row["status"] = "invalid_canonical_identity"
             skipped.append({**report, "decision": "skip", "reason": "invalid_canonical_identity"})
             continue
-        if report_already_published(report, status if isinstance(status, dict) else {}, publication_registry if isinstance(publication_registry, dict) else {}, manual_runs if isinstance(manual_runs, list) else []):
-            row["status"] = "already_published"; skipped.append({**report, "reason": "already_published"}); continue
         if pending_due(row, now):
             ready.append(report)
         else:
