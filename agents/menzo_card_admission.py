@@ -61,8 +61,10 @@ def history_evidence(left, right):
             facets = set(a['episode_facets']) & set(b['episode_facets'])
             episodes = set(a['retrieval_episode_tags']) & set(b['retrieval_episode_tags'])
             events = set(a['specific_event_tags']) & set(b['specific_event_tags'])
+            business_episode = (a['episode_family'] in BUSINESS and b['episode_family'] in BUSINESS
+                                and (family or episodes or events))
             subjects = [s for s in shared if s[0] in {'person', 'team'} or
-                        (s[0] == 'organization' and family and a['episode_family'] in BUSINESS)]
+                        (s[0] == 'organization' and business_episode)]
             if subjects and (family or facets or episodes or events):
                 evidence.append({'left_fact': a['fact_id'], 'right_fact': b['fact_id'],
                                  'subjects': sorted(s[1] for s in subjects), 'facets': sorted(facets),

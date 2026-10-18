@@ -22,6 +22,8 @@ Five canonical event types reconcile card/admission cycles, every eligible pair 
 - All 13 Gemini-derived positive references remain eligible. They are not human ground truth, and eligibility is not an automatic duplicate verdict or required publication suppression.
 - Final full-body cache fingerprint was compared with production and is unchanged.
 
+PR166 review identified one material P2: the same organization and precise business episode could be excluded when extraction used different business families. The correction retains those cross-family pairs only with matching precise episode/event evidence; shared broad facets or federation context alone remain insufficient. Five new regression cases reproduce both failures before the correction and protect the negative boundaries. The prior real replay counts above predate this narrow additional retrieval correction; they are not recounted as new live-model results.
+
 Historical provider fixtures are explicitly adapted in tests; new-contract tests exercise the actual extraction/enrichment/complete-assessment contracts without that adapter. Older call-count assertions now distinguish new card operations from the unchanged final judge.
 
 ## Material operational limits

@@ -168,6 +168,27 @@ def test_history_gate_excludes_complete_distinct_subjects_with_auditable_reason(
     assert row['decision'] == 'EXCLUDED_HISTORY' and row['left_card_sha256'] and row['right_card_sha256']
 
 
+@pytest.mark.parametrize('shared_evidence', ['episode', 'event', 'facet', 'context', 'none'])
+def test_business_organization_cross_family_requires_specific_episode_evidence(shared_evidence):
+    def mutate(phase, data, raw):
+        if phase == 'extraction':
+            raw['facts'][0]['central_subjects'] = [{'kind': 'organization', 'name': 'WWE'}]
+            raw['facts'][0]['episode_family'] = ('business_media_ownership' if data['title']=='current0'
+                                                   else 'industry_economics')
+            raw['facts'][0]['specific_event_tags'] = (['wwe_netflix_agreement_2026']
+                                                       if shared_evidence=='event' else [])
+            raw['context_tags'] = ['WWE', 'business'] if shared_evidence=='context' else []
+        elif phase == 'enrichment':
+            raw['facts'][0]['episode_facets'] = ['industry_economics'] if shared_evidence=='facet' else []
+            raw['facts'][0]['episode_tags'] = (['wwe_netflix_agreement_2026']
+                                               if shared_evidence=='episode' else [])
+        return raw
+    result = run(state(1, 1), Model(mutate=mutate))
+    admitted = shared_evidence in {'episode', 'event'}
+    assert result['admission_summary']['pairs_offered'] == int(admitted)
+    assert result['pair_dispositions'][0]['decision'] == ('NO_SUSPICION' if admitted else 'EXCLUDED_HISTORY')
+
+
 def test_ambiguous_identity_is_not_silently_excluded_from_history():
     def mutate(phase, data, raw):
         if phase == 'enrichment' and data['title'] == 'current0': raw['identities'][0]['confidence'] = 'uncertain'
