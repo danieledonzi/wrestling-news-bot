@@ -50,6 +50,27 @@ def test_actual_promotional_calls_still_block(cta):
     assert 'cta_residue' in codes(article(cta))
 
 
+@pytest.mark.parametrize('cta', [
+    'Please subscribe to our newsletter.',
+    'You can sign up for our newsletter.',
+    'To receive updates, sign up for our newsletter.',
+    'Per ricevere gli aggiornamenti, abbonati alla newsletter.',
+    'Subscribe to our <strong>newsletter</strong>.',
+])
+def test_prefixed_and_unpunctuated_paragraph_ctas_still_block(cta):
+    value = article('')
+    value['body_html'] = f'<p>{ITALIAN * 3}</p><p>Ulteriori dettagli sulla vicenda</p><p>{cta}</p>'
+    assert 'cta_residue' in codes(value)
+
+
+def test_paragraph_boundaries_do_not_turn_reported_subscription_into_a_cta():
+    value = article('')
+    value['body_html'] = (f'<p>{ITALIAN * 3}</p><p>Ulteriori dettagli sulla vicenda</p>'
+                          '<p>Secondo la fonte, alcuni dirigenti subscribe to the Wrestling Observer '
+                          'Newsletter per seguire le notizie.</p>')
+    assert codes(value) == set()
+
+
 def test_a_newsletter_citation_does_not_whitelist_a_later_cta():
     value = article('Secondo il Wrestling Observer Newsletter, la società ha smentito le voci. '
                     'Abbonati alla newsletter per ricevere gli aggiornamenti.')

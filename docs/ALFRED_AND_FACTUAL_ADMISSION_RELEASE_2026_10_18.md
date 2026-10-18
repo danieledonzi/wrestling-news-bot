@@ -8,7 +8,9 @@ Owner authorization: two bounded interventions, Alfred and pair admission. Base:
 Alfred no longer treats the standalone word `newsletter` as a CTA. Editorial citations, including references
 to the Wrestling Observer Newsletter and reported speech about subscribing, remain reporting. Actual signup,
 subscription, promotional and comment/social invitations remain blockers. New newsletter expressions require
-promotional wording; imperative expressions are bounded to sentence starts. Existing language, HTML, quote,
+promotional wording; imperative expressions allow common invitation lead-ins and are bounded to sentence
+or HTML block starts, including after an unpunctuated paragraph. Inline markup remains transparent. The
+block-aware representation is used only for CTA detection. Existing language, HTML, quote,
 table, source-credit, translation and publication checks remain intact. No new AI request is introduced.
 
 Admission V6 uses the existing one-anchor request and complete source bodies. Every suspected pair supplies
@@ -38,8 +40,8 @@ untouched. The real source still serves as a retained offline quality regression
 
 ## Verification
 
-- Fresh isolated production-Python checkout: **1,853 tests pass**, one previously established failing
-  oversized-body recovery test excluded. Thirty-four new regressions cover editorial citations, real CTA
+- Fresh isolated production-Python checkout: **1,859 tests pass**, one previously established failing
+  oversized-body recovery test excluded. Forty new regressions cover editorial citations, real CTA
   language, retained safety checks, required factual fields, endpoint evidence binding, cache reuse and owner
   terminal closure without primary reclassification. Eight existing fixture providers now emit the new factual
   fields; their existing semantic/failure assertions are preserved.
