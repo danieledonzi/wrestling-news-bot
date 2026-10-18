@@ -75,7 +75,7 @@ def test_first_class_survives_new_title_timestamp_policy_and_time(action, cls, m
     later['observation_timestamp'] = '2027-01-01T00:00:00Z'
     later['candidates'][0].update(title='Completely changed title', published_at='2027-01-01T00:00:00Z')
     result = active.evaluate(later, provider=lambda *_: pytest.fail('already classified URL cannot call primary'))
-    assert result['status'] == 'VALIDATED' and result['attempts'] == 0
+    assert result['status'] == 'VALIDATED' and result['attempts'] == (0 if cls=='SKIP' else 2)
     assert primary.load() == frozen
     if cls == 'SKIP':
         assert not later['candidates'] and later['terminal_policy_skips']
@@ -131,8 +131,8 @@ def test_bad_admission_is_one_attempt_backoff_and_exact_success_clearance_is_reu
         calls.append(prompt)
         return {'admission_complete': False, 'suspected_duplicates': []} if 'suspected_duplicates' in schema['properties'] else response(value, ('SELECT', 'DEFER'), prompt=prompt)
     first = active.evaluate(value, provider=bad_provider)
-    assert first['failure_stage'] == 'duplicate_admission' and first['attempts'] == 2
-    assert first['validation_errors'][0]['family'] == 'semantic_admission_coverage' and first['retry_after']
+    assert first['failure_stage'] == 'duplicate_admission' and first['attempts'] == 6
+    assert first['validation_errors'][0]['family'] == 'card_pair_coverage' and first['retry_after']
     second = active.evaluate(snapshot(2), provider=lambda *_: pytest.fail('backoff must prevent repeated paid work'))
     assert second['status'] == 'TECHNICAL_HOLD' and second['attempts'] == 0
     assert not menzo.terminal_skip_memory()
@@ -151,7 +151,10 @@ def test_changed_admission_material_recovers_without_waiting_or_reclassification
     value = snapshot(2)
     active.evaluate(value, provider=lambda prompt, schema, *_: {'admission_complete': False} if 'suspected_duplicates' in schema['properties'] else response(value, ('SELECT', 'SELECT'), prompt=prompt))
     changed = snapshot(2)
-    changed['candidates'][0]['summary'] = 'New factual material in the same source URL'
+    from agents import source_body
+    changed['candidates'][0]['canonical_source_body'] = source_body.contract_from_elements(
+        changed['candidates'][0]['url'], [{'type':'text','text':'An important newly confirmed factual development. ' * 20}],
+        {'extraction_finished':True,'body_complete':True,'clean_element_count':1})
     calls = []
     result = active.evaluate(changed, provider=lambda prompt, *_: calls.append(prompt) or CLEAR)
     assert result['status'] == 'VALIDATED' and len(calls) == 1
@@ -262,7 +265,7 @@ def test_large_soft_duplicate_batches_preserve_valid_decisions_on_later_failure(
         return {'relations': [{'ref': 'r0', 'decision': 'INVALID'}]}
     survivors, skipped, meta = soft._revalidate_pool_duplicates(rows, provider=provider)
     assert meta['semantic_admission_status'] == 'TECHNICAL_BLOCK'
-    assert len(calls) == meta['gemini_duplicate_calls_executed'] == 4
+    assert len(calls) == 4 and meta['gemini_duplicate_calls_executed'] == 9
     assert len(skipped) == len(menzo.terminal_skip_memory()) == 1
     assert {row['url'] for row in survivors}.isdisjoint({row['url'] for row in skipped})
 

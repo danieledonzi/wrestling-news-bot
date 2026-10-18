@@ -120,7 +120,7 @@ def test_invalid_single_pair_holds_without_body_repair_or_cache_pollution(isolat
     result = active.evaluate(state, provider=provider)
     assert result["status"] != "VALIDATED"
     assert not any("DR1 BODY-AWARE" in p for p in calls)
-    assert result["attempts"] == len(calls) == 3
+    assert result["attempts"] == 7 and len(calls) == 3
     assert cache.load()["entries"] == {}
     assert len(state["candidates"]) == 2
     assert not any(row["workload"] == "editorial_director_duplicate_body_revalidation" for row in isolated)

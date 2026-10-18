@@ -234,8 +234,23 @@ def input_profile(prompt):
         payload = json.loads(prompt.split('INPUT=', 1)[1])
     except (IndexError, ValueError):
         return {'coverage': 'unavailable', 'endpoints': [], 'prompt_bytes': len(prompt.encode())}
-    rows = ([payload['anchor'], *payload.get('targets', [])] if 'anchor' in payload else
-            [row for table in ('candidates', 'history') for row in payload.get(table, [])])
+    if 'source_units' in payload:
+        # The entire one-source text is supplied as numbered units, without truncation.
+        body = ' '.join(str(u.get('text') or '') for u in payload['source_units'])
+        rows = [{'url': payload.get('source_url'), 'retained_body': body, 'input_coverage': 'FULL_BODY'}]
+    elif 'cards' in payload:
+        endpoints = [{'url': c.get('source_url'), 'input_coverage': 'FACT_CARD_FROM_FULL_BODY',
+                      'body_chars': 0, 'body_sha256': None, 'card_sha256': c.get('card_sha256'),
+                      'source_body_chars': c.get('source_body_chars'),
+                      'source_body_sha256': c.get('source_body_sha256'), 'fact_count': len(c.get('facts', []))}
+                     for c in payload['cards']]
+        return {'coverage': 'full', 'input_kind': 'isolated_factual_cards', 'endpoints': endpoints,
+                'prompt_bytes': len(prompt.encode()), 'full_body_endpoints': 0,
+                'body_unavailable_endpoints': 0, 'card_endpoints': len(endpoints),
+                'permitted_pair_count': len(payload.get('permitted_pairs', []))}
+    else:
+        rows = ([payload['anchor'], *payload.get('targets', [])] if 'anchor' in payload else
+                [row for table in ('candidates', 'history') for row in payload.get(table, [])])
     endpoints = [profile(row) for row in rows]
     return {'coverage': 'full', 'endpoints': endpoints, 'prompt_bytes': len(prompt.encode()),
             'full_body_endpoints': sum(r['input_coverage'] == 'FULL_BODY' for r in endpoints),

@@ -379,12 +379,10 @@ def _revalidate_pool_duplicates(pool: list[dict[str, Any]], *, provider=None) ->
     primary['publisher_history_12h'] = []
     primary['_semantic_admission_only'] = True
     admission.attach(primary, current, snapshot['publisher_history_12h'], known)
-    active._finalize_active_input(primary)
+    # Card extraction and pair batches apply their own exact transport bounds.
     meta = {'semantic_admission_version': admission.VERSION, 'gemini_duplicate_calls_executed': 0,
             'source_material': body_observation, 'source_material_held_items': source_held}
     try:
-        if primary.get('limit_status') == 'exceeded':
-            raise ValueError('semantic_admission_input_limit')
         call = provider
         selection = active._admit(primary, call)
         meta['semantic_admission_status'] = selection['status']
@@ -393,6 +391,15 @@ def _revalidate_pool_duplicates(pool: list[dict[str, Any]], *, provider=None) ->
         meta['validation_attempts'] = selection.get('validation_attempts', [])
         meta['retry_after'] = selection.get('retry_after')
         meta['logical_request_id'] = selection.get('logical_request_id')
+        meta['factual_admission'] = copy.deepcopy(selection.get('admission_summary', {}))
+        meta['factual_card_calls_executed'] = meta['factual_admission'].get('card_provider_attempts', 0)
+        meta['gemini_pair_admission_calls_executed'] = meta['factual_admission'].get('pair_provider_attempts', 0)
+        meta['gemini_final_duplicate_calls_executed'] = 0
+        admission_held_ids = set(selection.get('held_candidate_ids', []))
+        unavailable_ids.update(admission_held_ids)
+        source_held.extend(row for candidate_id, row in originals.items() if candidate_id in admission_held_ids)
+        current = [row for row in current if row['candidate_id'] not in admission_held_ids]
+        snapshot['candidates'] = current
         if selection['status'] != 'VALIDATED':
             meta['technical_block_reason'] = selection.get('fallback_reason') or selection['status']
             raise ValueError('semantic_admission_failed')
@@ -433,6 +440,7 @@ def _revalidate_pool_duplicates(pool: list[dict[str, Any]], *, provider=None) ->
             active._finalize_active_input(part)
             result = active._evaluate_duplicate_stage(part, provider=call)
             meta['gemini_duplicate_calls_executed'] += result.get('attempts', 0)
+            meta['gemini_final_duplicate_calls_executed'] += result.get('attempts', 0)
             if result['status'] != 'VALIDATED':
                 final.extend(part.get('duplicate_gate_relations', []))
                 active._apply_duplicate_gate(snapshot, final)

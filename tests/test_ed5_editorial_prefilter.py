@@ -254,7 +254,7 @@ def test_reused_strong_queue_only_needs_provider_for_uncached_relations(monkeypa
     monkeypatch.setattr(shadow, '_default_provider_factory', unavailable)
     result = active.evaluate(snapshot)
     # A partial old pair cache is not a complete sparse-admission decision.
-    assert result['status'] == 'PROVIDER_UNAVAILABLE'
+    assert result['status'] == 'TECHNICAL_HOLD'
     assert initialized == [True]
 
 

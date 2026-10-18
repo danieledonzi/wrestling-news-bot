@@ -11,6 +11,7 @@
 **Owner-approved clarification:** 2026-10-15 — same-run material updates may replace the initial article only when their own complete body contains both the initial fact and the update.
 **Owner-approved clarification:** 2026-10-18 — summary/roundup articles do not automatically cover autonomous dedicated feed news; contextual newsletter citations are not subscription CTAs.
 **Owner-approved clarification:** 2026-10-18 — a successful report publication closes that event/night/date independently of its source.
+**Owner-approved reform:** 2026-10-18 — isolated reusable factual cards, explicit identities/tags, prudent history preselection and complete admission accounting; final full-body duplicate judgment unchanged.
 
 ## TOTEM supremacy
 
@@ -159,6 +160,22 @@ capitalization, promotion, show, person, or broad action category are not suffic
 Pair-admission heuristics do not establish semantic suspicion or a duplicate verdict merely by adding these signals.
 Gemini must interpret the meaning of the supplied articles; quoting a word from each endpoint does not establish
 that they report the same development.
+
+## TOTEM-D02 — Source-isolated facts and accountable pair admission
+
+Owner decision, 2026-10-18: after the controlled card, identity/tag and complete-pair tests, the duplicate admission path uses reusable source-isolated factual cards. Each extraction and each identity/tag enrichment operation sees one complete source article only. Code binds article, fact and source-unit identities. An enrichment operation cannot rewrite the fixed statements or change their owner. Profiles distinguish complete bodies supplied to extraction from cards derived from those bodies.
+
+Primary classification still precedes duplicate work and remains immutable under TOTEM-C01. This reform cannot reclassify a URL, generate feed news from a report, revive SKIP or change soft competition. A closed URL cannot cause later card generation or appear as comparison context. Retained archived cards do not confer editorial eligibility.
+
+Cards and their isolated stages are cached against canonical URL, complete material, title, model, schema and policy. Exact reuse avoids a new provider attempt; changing a card contract does not reopen a primary classification. Explicit, conservative identity aliases and multi-facet episode tags support history retrieval; broad show/promotion/speaker context alone is insufficient. Uncertain identities or insufficient episode tags remain reviewable rather than being treated as certain distinctions. History remains the existing successful-publication lookback, not soft tombstones or a new 24-hour window.
+
+Every eligible pair has a recorded disposition: excluded from history retrieval with its card identities and reason; explicitly ADMIT or NO_SUSPICION; or unresolved TECHNICAL_HOLD. These are different authorities and must not be conflated with a final DUPLICATE/NO_MATCH/MATERIAL_UPDATE verdict. The model returns an explicit assessment for every permitted pair in bounded collective batches; there is no arbitrary pair cap that discards the remainder. Valid sibling assessments survive a malformed or missing sibling. A valid ADMIT authorizes the unchanged full-body judgment and never independently closes a URL.
+
+Technical inability to produce a card or an assessment is not a negative semantic judgment and never SKIP. Current-card failures hold their own URL. An unavailable published-history card leaves its potential current/history comparisons unresolved; without evidence to exclude them, those current endpoints remain on recoverable HOLD. A suspected same-run connection can propagate a HOLD within that connected component. These uncertainties and their scope must be visible, including the possibility that a cold/unavailable history source affects several current endpoints; they must not be reported as an empty soft pool or no qualifying news. A later eligible attempt follows the existing explicit technical backoff, without repair calls.
+
+The final two-full-body duplicate policy, schema, model and Gemini authority remain unchanged. Existing final verdicts for exact material remain reusable across this admission transport reform. Local validation owns exact references, provenance, coverage and technical limits, not semantic vetoes. Same-run material updates still require the surviving article's own complete body to contain A+B.
+
+Telemetry must reconcile captured newsroom URLs, cards, the entire eligible pair universe, retrieval exclusions, positive/negative admissions and unresolved pairs. The captured-input denominator must not be mislabeled as every URL in every RSS feed. Repeated observations, unique URLs, pair/material identities, provider attempts and final verdicts are distinct grains. Missing coverage is unavailable/partial, never a certified zero. Complete accounting does not certify AI semantic correctness. The noon report exposes these facts and technical gaps; changes to soft editorial selection remain a separate owner decision.
 
 ## TOTEM-N02 — Bookmaker odds are excluded news
 

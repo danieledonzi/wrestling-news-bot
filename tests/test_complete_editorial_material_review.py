@@ -139,7 +139,7 @@ def test_corrupt_source_cache_is_preserved_and_does_not_invent_skip(monkeypatch)
     assert material.CACHE_FILE.read_bytes() == original and not menzo.terminal_skip_memory()
 
 
-def test_soft_missing_history_holds_only_its_connected_component(monkeypatch):
+def test_soft_missing_history_card_keeps_comparisons_explicitly_unresolved(monkeypatch):
     rows = [article(name) for name in ('affected', 'connected', 'independent')]
     for row in rows:
         row['editorial_director'] = {'editorial_class': 'PUBLISHABLE_SOFT', 'recommended_action': 'DEFER',
@@ -161,9 +161,9 @@ def test_soft_missing_history_holds_only_its_connected_component(monkeypatch):
             {'left_ref': 'a0', 'right_ref': 'a1', 'anchor_fact': 'The anchor reports the concrete development under test.', 'target_fact': 'The target reports the corresponding development under test.', 'basis': 'Potential connected development'}]
             if json.loads(prompt.split('INPUT=', 1)[1])['anchor']['ref'] == 'a0' else []}
     survivors, skipped, meta = soft._revalidate_pool_duplicates(rows, provider=admission_only)
-    assert [row['url'] for row in survivors] == [rows[2]['url']]
-    assert {row['url'] for row in meta['source_material_held_items']} == {row['url'] for row in rows[:2]}
-    assert len(calls) == 3 and not skipped and not menzo.terminal_skip_memory()
+    assert survivors == []
+    assert {row['url'] for row in meta['source_material_held_items']} == {row['url'] for row in rows}
+    assert not skipped and not menzo.terminal_skip_memory()
 
 
 def test_soft_source_hold_is_persisted_without_consuming_meaningful_review(monkeypatch):
@@ -262,6 +262,11 @@ def test_oversized_full_body_is_retryable_without_classification_or_truncation(m
     assert not menzo.terminal_skip_memory() and not menzo.SOFTPOOL_FILE.exists()
     assert menzo.load_json(menzo.V92_ALLOWED_URLS_FILE, {})['allowed_urls'] == []
     monkeypatch.setattr('agents.menzo_priority_queue._published_keys', lambda: set())
+    class AfterBackoff(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return datetime.fromisoformat(value['observation_timestamp'].replace('Z','+00:00')) + timedelta(hours=1)
+    monkeypatch.setattr(material, 'datetime', AfterBackoff)
     recovered = material.augment_board({'news_candidates_for_menzo': []})
     assert recovered['news_candidates_for_menzo'][0]['url'] == article('oversized')['url']
 
@@ -277,6 +282,10 @@ def test_input_bounds_after_classification_preserve_classes_and_true_skips(monke
                 (phase == 'duplicate_gate' and row.get('authorized_relations'))):
             row['limit_status'] = 'exceeded'
     monkeypatch.setattr(active, '_finalize_active_input', bound)
+    from agents import menzo_card_admission
+    original_batch_limit = menzo_card_admission.MAX_BATCH_BYTES
+    if phase == 'admission':
+        monkeypatch.setattr(menzo_card_admission, 'MAX_BATCH_BYTES', 100)
     calls = []
     def provider(_prompt, schema, *_):
         calls.append(list(schema['properties']))
@@ -288,7 +297,7 @@ def test_input_bounds_after_classification_preserve_classes_and_true_skips(monke
         rows[0].update(editorial_class='SKIP', recommended_action='SKIP')
         return {'candidates': rows}
     result = active.evaluate(value, provider=provider)
-    assert result['status'] == 'OVERSIZE_NOT_EVALUATED'
+    assert result['status'] == ('TECHNICAL_HOLD' if phase=='admission' else 'OVERSIZE_NOT_EVALUATED')
     assert len(calls) == (1 if phase == 'admission' else 2)
     frozen = copy.deepcopy(active.primary_store.load())
     decision = runner.persist_active_fail_closed(value, result['fallback_reason'], technical_hold=True)
@@ -299,6 +308,7 @@ def test_input_bounds_after_classification_preserve_classes_and_true_skips(monke
     assert set(material._read()['holds']) == {material.key(article('left')), material.key(article('right'))}
     assert not menzo.SOFTPOOL_FILE.exists()
     monkeypatch.setattr(active, '_finalize_active_input', finalize)
+    monkeypatch.setattr(menzo_card_admission, 'MAX_BATCH_BYTES', original_batch_limit)
     def retry_provider(_prompt, schema, *_):
         assert 'candidates' not in schema['properties'], 'First classes cannot be reevaluated'
         if 'relations' in schema['properties']:

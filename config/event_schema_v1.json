@@ -790,6 +790,46 @@
         "Menzo"
       ],
       "description": "Complete-material editorial observation; versioned factual payload in result; never semantic authority."
+    },
+    {
+      "name": "editorial_admission_cycle",
+      "stage": "selection",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "Versioned source-card/pair coverage accounting; not semantic or publication authority."
+    },
+    {
+      "name": "editorial_card_observation",
+      "stage": "selection",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "Versioned source-card/pair coverage accounting; not semantic or publication authority."
+    },
+    {
+      "name": "editorial_pair_disposition",
+      "stage": "selection",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "Versioned source-card/pair coverage accounting; not semantic or publication authority."
+    },
+    {
+      "name": "editorial_candidate_inventory",
+      "stage": "selection",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "Versioned source-card/pair coverage accounting; not semantic or publication authority."
+    },
+    {
+      "name": "editorial_candidate_inventory_cycle",
+      "stage": "selection",
+      "agents": [
+        "Menzo"
+      ],
+      "description": "Versioned source-card/pair coverage accounting; not semantic or publication authority."
     }
   ],
   "identities": {
