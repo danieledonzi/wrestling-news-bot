@@ -97,6 +97,8 @@ def test_active_pair_cache_reuses_final_no_match_and_material_update(monkeypatch
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **_: None)
     for decision in ("NO_MATCH", "MATERIAL_UPDATE"):
         pair_cache.CACHE_FILE.unlink(missing_ok=True)
+        from agents import menzo_fact_cards
+        menzo_fact_cards.CACHE_FILE.unlink(missing_ok=True)  # Independent mocked semantic scenario.
         first = snapshot(2); first["authorized_relations"] = [suspicious_relation(first)]
         gate_calls = []
         def provider_one(prompt, *_):
@@ -330,6 +332,7 @@ def test_active_pair_cache_mixed_batch_sends_only_misses_and_failure_is_atomic(m
     from agents import menzo_editorial_recovery as recovery
     recovery.CACHE_FILE.unlink() # distinct mocked election on the same factual fixture
     mixed = snapshot(3)
+    mixed["candidates"][2]["title"] += " with a new material fact"
     mixed["authorized_relations"] = [suspicious_relation(mixed),
         suspicious_relation(mixed, left=0, right=2, pair_id="pair-ac")]
     gate_prompts = []
@@ -339,12 +342,13 @@ def test_active_pair_cache_mixed_batch_sends_only_misses_and_failure_is_atomic(m
     assert len(gate_prompts) == 1 and '"ref":"r0"' in gate_prompts[0] and '"ref":"r1"' not in gate_prompts[0]
 
     recovery.CACHE_FILE.unlink() # request a deliberately different mocked election
-    failing = snapshot(3); failing["authorized_relations"] = [suspicious_relation(failing),
+    failing = snapshot(3); failing["candidates"][2]["title"] += " another uncached material fact"
+    failing["authorized_relations"] = [suspicious_relation(failing),
         suspicious_relation(failing, left=0, right=2, pair_id="pair-ad")]
     before = [row["candidate_id"] for row in failing["candidates"]]
     failed = active.evaluate(failing, provider=lambda *_: (_ for _ in ()).throw(RuntimeError("down")))
-    assert failed["status"] == "PROVIDER_FAILED"
-    assert [row["candidate_id"] for row in failing["candidates"]] == before
+    assert failed["status"] == "TECHNICAL_HOLD"
+    assert {r["candidate_id"] for r in failing["source_material_holds"]} == set(before)
     assert "semantic_duplicate_skips" not in failing
 
 
@@ -572,7 +576,7 @@ def test_valid_active_result_projects_jasper_fixture_without_legacy_scoring(monk
     (tmp_path / "menzo.json").write_text('{"decision_authority":"legacy_menzo","selected":[{"url":"https://stale"}]}')
     result = active.evaluate(s, provider=lambda *_: response(s, prompt=_[0]))
     handoff = active.project(s, result)
-    assert result["status"] == "VALIDATED" and result["attempts"] == 2
+    assert result["status"] == "VALIDATED" and result["attempts"] == 6
     assert [len(handoff[x]) for x in ("selected", "pending", "skipped")] == [1, 1, 1]
     assert handoff["selected"][0]["title"].startswith("WWE Starts Cutting")
     assert handoff["skipped"][0]["title"].startswith("Jasper Troy Sparks")
@@ -673,9 +677,11 @@ def test_classification_lifecycle_and_cost_precede_duplicate_gate(monkeypatch):
     result = active.evaluate(s, provider=lambda *_: calls.append(1) or next(replies))
     assert result["status"] == "VALIDATED" and len(calls) == 3
     assert [row["workload"] for row in ledger] == [
-        "editorial_director_active", "editorial_duplicate_admission", "editorial_director_duplicate_gate"]
+        "editorial_director_active", "editorial_fact_extraction", "editorial_fact_enrichment",
+        "editorial_fact_extraction", "editorial_fact_enrichment", "editorial_duplicate_admission", "editorial_director_duplicate_gate"]
     roles = [kwargs.get("model_role") for event, kwargs in events if event == "logical_ai_request_created"]
-    assert roles == ["editorial_director_active", "editorial_duplicate_admission", "editorial_director_duplicate_gate"]
+    assert roles == ["editorial_director_active", "editorial_fact_extraction", "editorial_fact_enrichment",
+        "editorial_fact_extraction", "editorial_fact_enrichment", "editorial_duplicate_admission", "editorial_director_duplicate_gate"]
     classification_completed = next(i for i, row in enumerate(events) if row[0] == "model_attempt_completed")
     gate_created = next(i for i, row in enumerate(events)
                         if row[0] == "logical_ai_request_created" and
@@ -691,7 +697,7 @@ def test_empty_relation_matrix_creates_no_duplicate_gate_attempt(monkeypatch):
     monkeypatch.setattr(active, "record_gemini_attempt", lambda **kwargs: ledger.append(kwargs))
     s = snapshot(1)
     result = active.evaluate(s, provider=lambda *_: response(s, ("SELECT",), prompt=_[0]))
-    assert result["status"] == "VALIDATED" and len(ledger) == 1
+    assert result["status"] == "VALIDATED" and len(ledger) == 3
     assert ledger[0]["workload"] == "editorial_director_active"
     assert not any(kwargs.get("model_role") == "editorial_director_duplicate_gate"
                    for _, kwargs in events)
@@ -896,7 +902,7 @@ def test_gate_eliminates_all_after_one_classification_request(monkeypatch, tmp_p
         return {"relations": [grounded_duplicate(
             "r0", s["candidates"][0]["title"], history["title"], "Jasper Troy release confirmed")]}
     result = active.evaluate(s, provider=provider)
-    assert result["status"] == "VALIDATED" and len(ledger) == 3
+    assert result["status"] == "VALIDATED" and len(ledger) == 7
     assert result["duplicate_gate_input_digest"]
     assert result["logical_request_id"]
     assert any(event == "model_attempt_completed" for event, _ in events)

@@ -118,7 +118,7 @@ def test_known_class_reused_with_complete_body_and_closed_url_never_fetched(monk
     assert primary.load() == original
 
 
-def test_history_body_unavailable_blocks_only_admitted_component(monkeypatch):
+def test_history_body_unavailable_is_unresolved_not_silently_distinct(monkeypatch):
     earlier = {**article('history'), 'status': 'published'}
     def fetch(row):
         if row['url'] == earlier['url']:
@@ -135,9 +135,8 @@ def test_history_body_unavailable_blocks_only_admitted_component(monkeypatch):
         assert 'relations' not in schema['properties']
         return classify(2)
     result = active.evaluate(value, provider=provider)
-    assert result['status'] == 'VALIDATED'
-    assert [r['candidate_id'] for r in result['output']['candidates']] == [shadow.article_id(article('independent'))]
-    assert len(result['source_material_holds']) == 1
+    assert result['status'] == 'TECHNICAL_HOLD'
+    assert len(result['source_material_holds']) == 2
     assert not menzo.terminal_skip_memory()
 
 
@@ -160,14 +159,14 @@ def test_new_events_validate_and_cached_verdict_is_not_a_second_unique_pair(tmp_
     events = [json.loads(line) for line in ledger_path.read_text().splitlines()]
     assert all(not validate_event(row) for row in events)
     assert ledger.stats['validation_errors'] == 0
-    cutover = datetime.fromisoformat(events[0]['timestamp_utc'])
+    cutover = datetime.fromisoformat(next(e['timestamp_utc'] for e in events if e['event_type']=='editorial_full_material_cycle'))
     result = build_metrics(tmp_path, cutover, datetime.now(timezone.utc) + timedelta(seconds=1))
     final = result['duplicates']['window_metrics']
     assert result['coverage'] == 'full'
     assert final['verdict_observations'] == 2
     assert final['unique_pair_material_decisions'] == 1
     assert final['decisions'] == {'NO_MATCH': 1}
-    assert len(result['input_profiles']) == 3
+    assert len(result['input_profiles']) == 7
 
 
 def test_coverage_before_cutover_and_missing_ledger_never_means_zero(tmp_path):

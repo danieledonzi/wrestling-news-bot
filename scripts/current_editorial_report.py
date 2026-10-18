@@ -108,6 +108,7 @@ def economic_sections(root: Path, since: datetime, until: datetime) -> dict:
     workloads = {}
     names = {
         "primary_classification": {"editorial_director_active"},
+        "isolated_fact_cards": {"editorial_fact_extraction", "editorial_fact_enrichment"},
         "pair_admission": {"editorial_duplicate_admission", "editorial_soft_duplicate_admission"},
         "duplicate_verdict": {"editorial_director_duplicate_gate", "editorial_director_duplicate_confirmation"},
         "soft_competition": {"editorial_soft_board"},
@@ -523,6 +524,10 @@ def render_summary(r: dict) -> str:
     for phase, metrics in material['inputs'].items():
         lines.append(f"Input {phase}: {metrics['window_metrics'] if metrics['window_metrics'] is not None else 'n.d. (campione negli allegati)'}")
     lines.append(f"Richieste editoriali canoniche, tentativi e chiamate evitate: {material['ai_requests']['window_metrics'] if material['ai_requests']['window_metrics'] is not None else 'n.d. (campione negli allegati)'}. Profili ripetuti non sono nuove richieste.")
+    factual = material.get('factual_admission', {})
+    lines.append(f"Schede e coppie: copertura {factual.get('coverage', 'unavailable')}; metriche di finestra {factual.get('window_metrics') if factual.get('window_metrics') is not None else 'n.d. (campione negli allegati)'}. Esclusioni history, ammissioni negative e verdetti finali sono distinti.")
+    if factual.get('window_metrics') is None:
+        lines.append(f"Schede/coppie, sole osservazioni disponibili (finestra non certificata): {factual.get('observed', {})}")
     finals = material['duplicates']
     lines.append(f"Verdetti finali canonici (primario + softpool): {finals['window_metrics'] if finals['window_metrics'] is not None else 'n.d. (campione negli allegati)'}. La correttezza semantica richiede review delle fonti.")
     cache = material['pair_cache']
@@ -596,6 +601,16 @@ def render_markdown(r: dict) -> str:
     for p in material['duplicates']['records']:
         lines.append('| ' + ' | '.join(cell(v) for v in (p['at'], p.get('path'), p['left'].get('title'),
             p['right'].get('title'), p['decision'], p.get('new_fact'), p.get('cache_hit'))) + ' |')
+    factual = material.get('factual_admission', {})
+    lines += ['', '### Schede isolate e percorso di tutte le coppie eleggibili', '',
+              f"Copertura: {factual.get('coverage', 'unavailable')}; cutover: {num(factual.get('cutover_at'))}.",
+              *factual.get('interpretation', []), '',
+              '| Ora UTC | Coppia | Ambito | Esito | Motivo | Cache decisione |',
+              '|---|---|---|---|---|---|']
+    for p in factual.get('pair_dispositions', []):
+        lines.append('| ' + ' | '.join(cell(v) for v in (p['at'], p['pair_id'], p['scope'], p['decision'], p['reason'], p.get('cache_hit'))) + ' |')
+    lines += ['', f"Cicli incompleti: {factual.get('incomplete_cycles', [])}; payload non validi: {factual.get('invalid_payloads', 'n.d.')}.",
+              'Schede per URL, inventario, provenienza e cache sono negli allegati JSON. Le fonti integrali non sono replicate nella mail.']
     lines += ['', '### Relazioni semanticamente dichiarate (non cluster lessicali)', '',
         f"Componenti DUPLICATE osservati: {json.dumps(material['duplicates']['duplicate_components'], ensure_ascii=False)}",
         f"Aggiornamenti MATERIAL_UPDATE osservati: {len(material['duplicates']['material_update_links'])}",

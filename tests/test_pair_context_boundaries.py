@@ -26,7 +26,7 @@ def test_each_same_run_pair_is_offered_once_and_history_is_target_only():
     assert not any(k in json.dumps(payloads) for k in ('editorial_class', 'story_core'))
 
 
-def test_target_to_target_suspicion_is_rejected_even_with_valid_global_refs():
+def test_collective_request_explicitly_permits_all_bound_current_history_pairs():
     state = election(2, 2)
     calls = []
     def provider(prompt, *_):
@@ -35,10 +35,9 @@ def test_target_to_target_suspicion_is_rejected_even_with_valid_global_refs():
         return {'admission_complete': True, 'suspected_duplicates': [
             {'left_ref': 'a1', 'right_ref': 'h0', 'anchor_fact': 'The anchor reports the concrete development under test.', 'target_fact': 'The target reports the corresponding development under test.', 'basis': 'Two targets share a development'}]}
     result = active._admit(state, provider)
-    assert result['status'] != 'VALIDATED' and result['admitted_relations'] == []
-    assert result['validation_errors'] == [
-        {'family': 'semantic_admission_ref', 'detail': 'outside_anchor_request'}]
-    assert len(calls) == 1 and 'REPAIR' not in calls[0]
+    assert result['status'] == 'VALIDATED' and len(result['admitted_relations']) == 1
+    assert not result['validation_errors']
+    assert len(calls) == 2 and all('REPAIR' not in p for p in calls)
 
 
 def test_input_profile_counts_complete_anchor_and_targets_without_losing_tail():

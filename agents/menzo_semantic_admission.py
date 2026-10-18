@@ -1,7 +1,8 @@
-"""Sparse Gemini pair admission from article meaning, independent of primary classification.
+"""Relation identities and archived semantic-admission readers.
 
-No pair matrix is sent to the provider. Technical ref binding cannot decide whether
-articles share a central development; Gemini supplies that suspicion and its basis.
+The active provider path lives in menzo_card_admission and uses isolated factual
+cards with an explicit assessment for every permitted pair. Legacy anchor helpers
+remain available for retained artifacts and historical regression fixtures.
 """
 from __future__ import annotations
 
@@ -10,7 +11,9 @@ from typing import Any, Mapping
 
 from agents.duplicate_pair_identity import recent_history_pair_id, same_run_pair_id
 
-VERSION = 'totem-d01-factual-admission-v6'
+VERSION = 'isolated-card-complete-pair-admission-v1'
+# Admission transport changes do not reopen unchanged final full-body judgments.
+FINAL_JUDGMENT_BINDING_VERSION = 'totem-d01-factual-admission-v6'
 FACT_LIMIT = 500
 
 
@@ -125,5 +128,5 @@ def make_relation(scope: str, left_id: str, right_id: str, basis: str) -> dict[s
     pair_id = (same_run_pair_id(left_id, right_id) if scope == 'same_run'
                else recent_history_pair_id(left_id, right_id))
     return {'pair_id': pair_id, 'scope': scope, 'left_id': left_id, 'right_id': right_id,
-            'scorer_version': VERSION, 'score': 1.0, 'threshold': 1.0,
+            'scorer_version': FINAL_JUDGMENT_BINDING_VERSION, 'score': 1.0, 'threshold': 1.0,
             'components': {'gemini_semantic_suspicion': 1.0}, 'admission_basis': basis}

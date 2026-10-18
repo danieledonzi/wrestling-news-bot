@@ -965,8 +965,8 @@ def _run_once(snapshot, call, prompt, schema, phase, policy_path, validate, *, c
         operation_id=request.logical_request_id, logical_request_id=request.logical_request_id,
         canonical_attempt_id=attempt['attempt_id'], attempt_index=0, repair=False, fallback=False,
         agent='Menzo', workload=phase, phase=phase + '_primary', shadow=False,
-        candidate_count=len(snapshot.get('candidates', [])),
-        relation_count=len(snapshot.get('authorized_relations', [])), input_digest=fingerprint,
+        candidate_count=snapshot.get('_provider_candidate_count', len(snapshot.get('candidates', []))),
+        relation_count=snapshot.get('_provider_relation_count', len(snapshot.get('authorized_relations', []))), input_digest=fingerprint,
         policy_version=policy_version or POLICY_VERSION,
         policy_digest=hashlib.sha256(policy_path.read_bytes()).hexdigest(),
         status='failed' if failure_kind == 'upstream' else 'called',
@@ -1046,40 +1046,10 @@ def _classify(snapshot: dict[str, Any], call: Callable[..., Any]) -> dict[str, A
 
 
 def _admit(snapshot, call):
-    """Factual pair election only. No classification fields or primary validator."""
-    ids = snapshot.get('_admission_candidate_ids', [])
-    if not ids or (len(ids) < 2 and not snapshot.get('_admission_history_ids')):
-        return {'status': 'VALIDATED', 'attempts': 0, 'output': [], 'admitted_relations': [],
-                'validation_attempts': [], 'validation_errors': []}
-    phase = 'editorial_soft_duplicate_admission' if snapshot.get('_semantic_admission_only') else 'editorial_duplicate_admission'
-    admitted, attempts, validations, request_ids = [], 0, [], []
-    for payload in admission.anchored_payloads(snapshot):
-        prompt = ADMISSION_POLICY_PATH.read_text() + '\nReturn only JSON. INPUT=' + json.dumps(
-            payload, ensure_ascii=False, separators=(',', ':'))
-        def validate(raw):
-            if not isinstance(raw, Mapping):
-                return None, [{'family': 'parse_json', 'detail': 'object_required'}], []
-            suspects = raw.get('suspected_duplicates')
-            targets = {row['ref'] for row in payload['targets']}
-            if isinstance(suspects, list) and any(isinstance(row, Mapping) and
-                    (row.get('left_ref') != payload['anchor']['ref'] or row.get('right_ref') not in targets)
-                    for row in suspects):
-                return None, [{'family': 'semantic_admission_ref', 'detail': 'outside_anchor_request'}], []
-            rows, errors = admission.validate(raw, snapshot, [], max(300, shadow.MAX_RELATIONS))
-            return rows, errors, []
-        schema = admission.bound_schema(json.loads(ADMISSION_SCHEMA_PATH.read_text()), snapshot, payload=payload)
-        result = _run_once(snapshot, call, prompt, schema, phase,
-                           ADMISSION_POLICY_PATH, validate, cache_success=True)
-        attempts += result.get('attempts', 0)
-        validations.extend(result.get('validation_attempts', []))
-        request_ids.append(result.get('logical_request_id'))
-        if result['status'] != 'VALIDATED':
-            return {**result, 'attempts': attempts, 'validation_attempts': validations,
-                    'admitted_relations': [], 'logical_request_ids': request_ids}
-        admitted.extend(result.get('output') or [])
-    return {'status': 'VALIDATED', 'attempts': attempts, 'validation_attempts': validations,
-            'validation_errors': [], 'output': admitted, 'admitted_relations': admitted,
-            'logical_request_ids': request_ids}
+    """Isolated, reusable facts -> prudent history gate -> complete pair decisions."""
+    from agents import menzo_card_admission
+    return menzo_card_admission.execute(snapshot, call, _run_once, model=MODEL,
+                                       max_input_bytes=shadow.MAX_INPUT_BYTES)
 
 
 def _evaluate_complete(snapshot: dict[str, Any], material: Any, *, provider=None, artifact_index=None):
@@ -1158,11 +1128,14 @@ def _evaluate_complete(snapshot: dict[str, Any], material: Any, *, provider=None
     election = copy.deepcopy(snapshot)
     election['candidates'] = []; election['authorized_relations'] = []; election['publisher_history_12h'] = []
     admission.attach(election, snapshot['candidates'], snapshot.get('publisher_history_12h', []), decisions)
-    _finalize_active_input(election)
-    if election.get('limit_status') == 'exceeded':
-        return {'status': 'OVERSIZE_NOT_EVALUATED', 'attempts': primary.get('attempts', 0),
-                'failure_stage': 'duplicate_admission', 'fallback_reason': 'admission_input_limit'}
     admission_result = _admit(election, call)
+    # Missing card/assessment data is an explicit source HOLD, never a class change.
+    admission_held = set(admission_result.get('held_candidate_ids', []))
+    for row in snapshot['candidates']:
+        if row['candidate_id'] in admission_held:
+            material.hold(row, 'factual_admission_technical_hold', retry_after=admission_result.get('retry_after'))
+            snapshot.setdefault('source_material_holds', []).append(row)
+    snapshot['candidates'] = [row for row in snapshot['candidates'] if row['candidate_id'] not in admission_held]
     if admission_result['status'] != 'VALIDATED':
         return {**admission_result, 'attempts': primary.get('attempts', 0) + admission_result.get('attempts', 0),
                 'failure_stage': 'duplicate_admission',
@@ -1212,13 +1185,14 @@ def _evaluate_complete(snapshot: dict[str, Any], material: Any, *, provider=None
                  "classified": len(decisions), "newly_classified": len(fresh), "reused_primary_classes": len(reused), "reused_strong_classes": sum(row["editorial_class"] in {"MUST_PUBLISH", "SHOULD_PUBLISH"} for row in reused), "classes": counts, "skipped_before_duplicate": len(skipped),
                  "duplicate_candidates": len(eligible), "duplicate_relations": len(snapshot["authorized_relations"]),
                  "duplicate_admission_version": admission.VERSION,
+                 "factual_admission": copy.deepcopy(admission_result.get("admission_summary", {})),
                  "terminal_policy_skips": len(snapshot.get("terminal_policy_skips", [])),
                  "relations": [{"pair_id": row["pair_id"], "scope": row["scope"],
                                 "left_url": endpoints[row["left_id"]].get("url") or endpoints[row["left_id"]].get("source_url"),
                                 "right_url": endpoints[row["right_id"]].get("url") or endpoints[row["right_id"]].get("source_url"),
                                 "left_title": endpoints[row["left_id"]].get("title") or endpoints[row["left_id"]].get("source_title"),
                                 "right_title": endpoints[row["right_id"]].get("title") or endpoints[row["right_id"]].get("source_title"),
-                                "admission_version": row.get('scorer_version'),
+                                "admission_version": row.get('admission_version') or row.get('scorer_version'),
                                 "admission_basis": row.get('admission_basis'),
                                 "admission_evidence": copy.deepcopy(row.get('admission_evidence'))}
                                for row in snapshot["authorized_relations"]],
@@ -1278,6 +1252,12 @@ def evaluate(snapshot: Mapping[str, Any], *, provider=None, artifact_index=None)
     """Complete-body input; first classes and terminal decisions remain immutable."""
     if not isinstance(snapshot, dict):
         snapshot = copy.deepcopy(dict(snapshot))
+    inventory = copy.deepcopy(snapshot.get('candidates', []))
+    inventory_id = uuid.uuid4().hex
+    result = None
+    source_material.emit('editorial_candidate_inventory_cycle', 'selection', 'started',
+                         {'inventory_id': inventory_id, 'candidate_count': len(inventory),
+                          'scope': 'captured_newsroom_input'})
     material = source_material.Session(snapshot)
     try:
         result = _evaluate_complete(snapshot, material, provider=provider, artifact_index=artifact_index)
@@ -1304,6 +1284,34 @@ def evaluate(snapshot: Mapping[str, Any], *, provider=None, artifact_index=None)
     except Exception:
         material.finish()
         raise
+    finally:
+        # Every captured endpoint gets a disposition, including failures before classification.
+        # This denominator is the captured newsroom input, not an invented total RSS universe.
+        try:
+            stored = primary_store.load()
+        except Exception:
+            stored = {}
+        terminal = {r['candidate_id'] for r in snapshot.get('terminal_policy_skips', [])}
+        exact = {r['candidate_id'] for r in snapshot.get('deterministic_exact_skips', [])}
+        held = {r.get('candidate_id') for r in snapshot.get('source_material_holds', [])}
+        for row in inventory:
+            decision = stored.get(primary_store.key(row), {})
+            state = ('TERMINAL_SKIP' if row['candidate_id'] in terminal else
+                     'EXACT_DUPLICATE' if row['candidate_id'] in exact else
+                     'TECHNICAL_HOLD' if row['candidate_id'] in held else
+                     'UNRESOLVED' if result is None else
+                     'CLASSIFIED' if decision else 'UNRESOLVED')
+            source_material.emit('editorial_candidate_inventory', 'selection',
+                'pending' if state in {'TECHNICAL_HOLD', 'UNRESOLVED'} else 'success',
+                {'inventory_id': inventory_id, 'candidate_id': row['candidate_id'],
+                 'url': row.get('url') or row.get('source_url'), 'disposition': state,
+                 'first_class': decision.get('editorial_class'),
+                 'failure_stage': (result or {}).get('failure_stage'),
+                 'operation_status': (result or {}).get('status', 'EXCEPTION'),
+                 'scope': 'captured_newsroom_input'}, item=row)
+        source_material.emit('editorial_candidate_inventory_cycle', 'selection', 'success',
+                             {'inventory_id': inventory_id, 'candidate_count': len(inventory),
+                              'scope': 'captured_newsroom_input'})
 
 
 def project(snapshot: Mapping[str, Any], result: Mapping[str, Any], *, soft_board_provider: Callable[..., Any] | None = None) -> dict[str, Any]:

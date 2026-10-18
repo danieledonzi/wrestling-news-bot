@@ -132,7 +132,8 @@ def test_valid_skip_survives_admission_failure_and_is_absent_from_repair():
     prompts = []
     result = active.evaluate(snapshot(rows), provider=lambda prompt, *_:
         prompts.append(prompt) or responses.pop(0))
-    assert result['status'] != 'VALIDATED' and len(prompts) == 2
+    assert result['status']=='TECHNICAL_HOLD'
+    assert len(result['source_material_holds']) == 2 and len(prompts) == 2
     assert rows[0]['url'] not in prompts[1] and rows[0]['title'] not in prompts[1]
     assert menzo.source_key(rows[0]['url']) in menzo.terminal_skip_memory()
     assert menzo.source_key(rows[1]['url']) not in menzo.terminal_skip_memory()
@@ -233,7 +234,7 @@ def test_full_gate_sees_only_semantically_admitted_pair_and_cached_final_cannot_
     later_calls = []
     later = active.evaluate(second, provider=lambda prompt, *_:
         later_calls.append(prompt) or classes(['SHOULD_PUBLISH'] * 3))
-    assert later['status'] == 'VALIDATED' and len(later_calls) == 1
+    assert later['status'] == 'VALIDATED' and len(later_calls) == 0
     assert later['output']['relations'] == []
     assert len(second['terminal_policy_skips']) == 1
 

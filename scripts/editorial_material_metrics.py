@@ -43,7 +43,7 @@ def _endpoint(value):
               len(value['body_sha256']) == 64)))
 
 
-EDITORIAL_PHASES = {'editorial_director_active', 'editorial_duplicate_admission',
+EDITORIAL_PHASES = {'editorial_fact_extraction', 'editorial_fact_enrichment', 'editorial_director_active', 'editorial_duplicate_admission',
                     'editorial_soft_duplicate_admission', 'editorial_director_duplicate_gate',
                     'editorial_soft_board'}
 
@@ -190,7 +190,9 @@ def build_metrics(root: Path, since, until, cache_metrics=None):
                     'provider_attempts': sum(r.get('model_role') == phase for r in attempts.values()),
                     'endpoint_occurrences': len(endpoints),
                     'unique_endpoint_urls': len({e['url'] for e in endpoints if e.get('url')}),
-                    'coverage_counts': dict(counts), 'prompt_bytes': sum(r.get('prompt_bytes', 0) for r in selected),
+                    'coverage_counts': dict(counts),
+                    'input_kind_counts': dict(Counter(r.get('input_kind', 'article_bodies') for r in selected)),
+                    'fact_card_endpoint_occurrences': counts['FACT_CARD_FROM_FULL_BODY'], 'prompt_bytes': sum(r.get('prompt_bytes', 0) for r in selected),
                     'full_body_ratio': counts['FULL_BODY'] / len(endpoints) if endpoints else None}
         inputs[phase] = {'observed': observed}
     final = {}
@@ -269,7 +271,9 @@ def build_metrics(root: Path, since, until, cache_metrics=None):
                     now - _stamp(r['first_seen_at']) < timedelta(hours=24) for r in candidates)
     except (OSError, ValueError, AttributeError):
         pass
-    return {'contract_version': CONTRACT_VERSION, 'coverage': coverage,
+    from scripts.factual_admission_metrics import build as factual_metrics
+    factual = factual_metrics(rows, since, until, readable=readable and not malformed and not invalid)
+    return {'factual_admission': factual, 'contract_version': CONTRACT_VERSION, 'coverage': coverage,
         'cutover_at': cutover.isoformat() if cutover else None,
         'source': str(path.relative_to(root)), 'warnings': warnings + payload_errors,
         'invalid_event_rows': invalid, 'malformed_rows': malformed,

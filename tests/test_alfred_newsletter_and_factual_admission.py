@@ -144,7 +144,7 @@ def test_old_admission_cache_cannot_reinsert_pairs_but_current_decisions_remain_
             event_registry_path=active.EVENT_REGISTRY_PATH)
     current_contract = fingerprint()
     with monkeypatch.context() as old:
-        old.setattr(admission, 'VERSION', 'totem-d01-anchored-material-admission-v5')
+        old.setattr(admission, 'FINAL_JUDGMENT_BINDING_VERSION', 'totem-d01-anchored-material-admission-v5')
         old_contract = fingerprint()
     assert old_contract != current_contract
     state = {'candidates': [{'candidate_id': 'anchor'}],
@@ -195,7 +195,7 @@ def test_sparse_factual_contract_uses_one_existing_request_and_no_classes():
     first = active._admit(copy.deepcopy(state), provider)
     second = active._admit(copy.deepcopy(state), provider)
     assert first['status'] == second['status'] == 'VALIDATED'
-    assert len(calls) == first['attempts'] == 1 and second['attempts'] == 0
+    assert len(calls) == 1 and first['attempts'] == 5 and second['attempts'] == 0
     assert first['admitted_relations'][0]['admission_evidence'] == second['admitted_relations'][0]['admission_evidence']
 
 

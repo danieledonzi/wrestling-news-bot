@@ -18,8 +18,8 @@ def input_data(prompt):
 
 def election(count=2, old=2):
     value = {}
-    admission.attach(value, [{'candidate_id': f'id{i}', **article(i)} for i in range(count)],
-        [{'article_id': f'hist{i}', **article(f'old{i}')} for i in range(old)],
+    admission.attach(value, [{'candidate_id': f'id{i}', **article(i), 'retained_body': 'Complete source body. ' * 20, 'input_coverage': 'FULL_BODY'} for i in range(count)],
+        [{'article_id': f'hist{i}', **article(f'old{i}'), 'retained_body': 'Complete history body. ' * 20, 'input_coverage': 'FULL_BODY'} for i in range(old)],
         [{'candidate_id': f'id{i}', 'editorial_class': 'SHOULD_PUBLISH'} for i in range(count)])
     return value
 
@@ -62,8 +62,9 @@ def test_primary_and_soft_use_bound_schema_without_a_second_attempt():
             return {'admission_complete': True, 'suspected_duplicates': []}
         result = active._admit(value, provider)
         assert result['status'] == 'VALIDATED'
-        # The second path can reuse the exact prior election only in its own phase.
-        assert len(calls) == result['attempts'] == 2
+        # Source cards and pair decisions are reusable across primary and soft phases.
+        assert len(calls) == (0 if soft_phase else 2)
+        assert result['attempts'] == (0 if soft_phase else 7)
 
 
 def update_provider(value, covering_index, calls, *, kinds=None, history_duplicate=False):
