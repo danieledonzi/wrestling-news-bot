@@ -10,7 +10,8 @@ from typing import Any, Mapping
 
 from agents.duplicate_pair_identity import recent_history_pair_id, same_run_pair_id
 
-VERSION = 'totem-d01-anchored-material-admission-v5'
+VERSION = 'totem-d01-factual-admission-v6'
+FACT_LIMIT = 500
 
 
 def bound_schema(template: Mapping[str, Any], primary: Mapping[str, Any], *, payload=None) -> dict[str, Any]:
@@ -101,9 +102,19 @@ def validate(raw: Any, primary: Mapping[str, Any], decisions: list[dict[str, Any
             failures.append({'family': 'semantic_admission_ref', 'detail': 'skip_endpoint_forbidden'}); continue
         if not isinstance(basis, str) or not basis.strip() or len(basis) > 1000:
             failures.append({'family': 'semantic_admission_basis', 'detail': 'bounded_meaning_required'}); continue
+        facts = {field: row.get(field) for field in ('anchor_fact', 'target_fact')}
+        if any(not isinstance(value, str) or not value.strip() or len(value) > FACT_LIMIT
+               for value in facts.values()):
+            failures.append({'family': 'semantic_admission_facts',
+                             'detail': 'bounded_endpoint_facts_required'}); continue
+        # These are Gemini's factual explanations. Local validation never decides
+        # whether the supplied facts really overlap or vetoes a semantic judgment.
         if scope == 'same_run':
             left_id, right_id = sorted((left_id, right_id))
         relation = make_relation(scope, left_id, right_id, basis.strip())
+        relation['admission_evidence'] = {
+            'anchor_id': current[left], 'target_id': current.get(right) or history.get(right),
+            **{name: value.strip() for name, value in facts.items()}}
         if relation['pair_id'] in seen:
             failures.append({'family': 'semantic_admission_ref', 'detail': 'duplicate_pair'}); continue
         seen.add(relation['pair_id']); relations.append(relation)

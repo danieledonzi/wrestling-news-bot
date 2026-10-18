@@ -157,8 +157,8 @@ def test_soft_missing_history_holds_only_its_connected_component(monkeypatch):
         calls.append(prompt)
         assert 'suspected_duplicates' in schema['properties']
         return {'admission_complete': True, 'suspected_duplicates': [
-            {'left_ref': 'a0', 'right_ref': 'h0', 'basis': 'Potential same development'},
-            {'left_ref': 'a0', 'right_ref': 'a1', 'basis': 'Potential connected development'}]
+            {'left_ref': 'a0', 'right_ref': 'h0', 'anchor_fact': 'The anchor reports the concrete development under test.', 'target_fact': 'The target reports the corresponding development under test.', 'basis': 'Potential same development'},
+            {'left_ref': 'a0', 'right_ref': 'a1', 'anchor_fact': 'The anchor reports the concrete development under test.', 'target_fact': 'The target reports the corresponding development under test.', 'basis': 'Potential connected development'}]
             if json.loads(prompt.split('INPUT=', 1)[1])['anchor']['ref'] == 'a0' else []}
     survivors, skipped, meta = soft._revalidate_pool_duplicates(rows, provider=admission_only)
     assert [row['url'] for row in survivors] == [rows[2]['url']]
@@ -202,7 +202,7 @@ def test_missing_final_verdict_event_makes_window_unavailable(tmp_path):
     def provider(prompt, schema, *_):
         if 'suspected_duplicates' in schema['properties']:
             return {'admission_complete': True, 'suspected_duplicates': [
-                {'left_ref': 'a0', 'right_ref': 'a1', 'basis': 'Possible shared fact'}]}
+                {'left_ref': 'a0', 'right_ref': 'a1', 'anchor_fact': 'The anchor reports the concrete development under test.', 'target_fact': 'The target reports the corresponding development under test.', 'basis': 'Possible shared fact'}]}
         if 'relations' in schema['properties']:
             return {'relations': [{'ref': 'r0', 'decision': 'NO_MATCH'}]}
         return classify(2)
@@ -282,7 +282,7 @@ def test_input_bounds_after_classification_preserve_classes_and_true_skips(monke
         calls.append(list(schema['properties']))
         if 'suspected_duplicates' in schema['properties']:
             return {'admission_complete': True, 'suspected_duplicates': [
-                {'left_ref': 'a0', 'right_ref': 'a1', 'basis': 'Possible shared facts'}]}
+                {'left_ref': 'a0', 'right_ref': 'a1', 'anchor_fact': 'The anchor reports the concrete development under test.', 'target_fact': 'The target reports the corresponding development under test.', 'basis': 'Possible shared facts'}]}
         assert 'relations' not in schema['properties'] or 'candidates' in schema['properties']
         rows = classify(3)['candidates']
         rows[0].update(editorial_class='SKIP', recommended_action='SKIP')

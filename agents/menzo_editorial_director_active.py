@@ -1215,7 +1215,8 @@ def _evaluate_complete(snapshot: dict[str, Any], material: Any, *, provider=None
                                 "left_title": endpoints[row["left_id"]].get("title") or endpoints[row["left_id"]].get("source_title"),
                                 "right_title": endpoints[row["right_id"]].get("title") or endpoints[row["right_id"]].get("source_title"),
                                 "admission_version": row.get('scorer_version'),
-                                "admission_basis": row.get('admission_basis')}
+                                "admission_basis": row.get('admission_basis'),
+                                "admission_evidence": copy.deepcopy(row.get('admission_evidence'))}
                                for row in snapshot["authorized_relations"]],
                  "candidates": [{"candidate_id": row["candidate_id"], "title": row.get("title"),
                                   "url": row.get("url"), "source": row.get("source"),

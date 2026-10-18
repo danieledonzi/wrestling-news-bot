@@ -23,7 +23,10 @@ ALFRED_VERSION = "v93_8_alfred_structured_content_checks"
 CTA_PATTERNS = [
     re.compile(r"\b(fateci sapere|dicci la tua|lascia un commento|commenti qui sotto|cosa ne pensate)\b", re.I),
     re.compile(r"\b(sound off|let us know|share your thoughts|what do you think)\b", re.I),
-    re.compile(r"\b(iscriviti|newsletter|seguici su|connect with us|add as a preferred source)\b", re.I),
+    re.compile(r"\b(iscriviti|seguici su|connect with us|add as a preferred source)\b", re.I),
+    re.compile(r"(?:^|[.!?]\s+)\s*(?:la\s+nostra|le\s+nostre|our(?:\s+free)?)\s+newsletter\b[^.!?]{0,50}\b(?:offre|offers|delivers|brings|provides)\b", re.I),
+    re.compile(r"(?:^|[.!?]\s+)\s*(?:click\s+here\s+to\s+)?(?:ricevi|ricevete|leggi|scopri|abbonati|abbonatevi|registrati|registratevi|subscribe|sign\s+up|join|get|receive|read)\b[^.!?]{0,80}\bnewsletter\b", re.I),
+    re.compile(r"(?:^|[.!?]\s+)\s*(?:non\s+perderti|don['’]t\s+miss)\b[^.!?]{0,80}\bnewsletter\b", re.I),
 ]
 
 SOURCE_CREDIT_PATTERNS = [

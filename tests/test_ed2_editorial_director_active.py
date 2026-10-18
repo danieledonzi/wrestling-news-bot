@@ -44,7 +44,7 @@ def response(s, actions=("SELECT", "DEFER", "SKIP"), *, prompt=None):
         if relation['scope'] == 'same_run' and classes[right] == 'SKIP': continue
         suspects.append({'left_ref': f'a{left}',
             'right_ref': f"{'a' if relation['scope'] == 'same_run' else 'h'}{right}",
-            'basis': 'The two supplied stories may report the same central factual development.'})
+            'anchor_fact': 'The anchor reports the concrete development under test.', 'target_fact': 'The target reports the corresponding development under test.', 'basis': 'The two supplied stories may report the same central factual development.'})
     if prompt and 'INPUT=' in prompt:
         data = json.loads(prompt.rsplit('INPUT=', 1)[1])
         if 'anchor' in data:

@@ -33,7 +33,7 @@ def test_target_to_target_suspicion_is_rejected_even_with_valid_global_refs():
         calls.append(prompt)
         # Both refs exist globally, but a1 is a target of this a0 request.
         return {'admission_complete': True, 'suspected_duplicates': [
-            {'left_ref': 'a1', 'right_ref': 'h0', 'basis': 'Two targets share a development'}]}
+            {'left_ref': 'a1', 'right_ref': 'h0', 'anchor_fact': 'The anchor reports the concrete development under test.', 'target_fact': 'The target reports the corresponding development under test.', 'basis': 'Two targets share a development'}]}
     result = active._admit(state, provider)
     assert result['status'] != 'VALIDATED' and result['admitted_relations'] == []
     assert result['validation_errors'] == [

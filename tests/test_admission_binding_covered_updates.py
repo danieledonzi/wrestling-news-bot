@@ -39,7 +39,7 @@ def test_request_schema_enumerates_only_exact_current_and_history_refs():
 def test_wrong_refs_remain_hold_and_retain_bounded_diagnostic(left, right):
     value = election(1, 2)
     raw = {'admission_complete': True, 'suspected_duplicates': [
-        {'left_ref': left, 'right_ref': right, 'basis': 'Suspicious factual overlap'}]}
+        {'left_ref': left, 'right_ref': right, 'anchor_fact': 'The anchor reports the concrete development under test.', 'target_fact': 'The target reports the corresponding development under test.', 'basis': 'Suspicious factual overlap'}]}
     result, errors = admission.validate(raw, value, [], 300)
     assert result is None
     assert errors[0]['left_ref'] == left and errors[0]['right_ref'] == right
@@ -71,9 +71,9 @@ def update_provider(value, covering_index, calls, *, kinds=None, history_duplica
         calls.append(prompt)
         data = input_data(prompt)
         if 'suspected_duplicates' in schema['properties']:
-            pairs = [{'left_ref': 'a0', 'right_ref': 'a1', 'basis': 'Initial fact plus update'}]
+            pairs = [{'left_ref': 'a0', 'right_ref': 'a1', 'anchor_fact': 'The anchor reports the concrete development under test.', 'target_fact': 'The target reports the corresponding development under test.', 'basis': 'Initial fact plus update'}]
             if history_duplicate:
-                pairs.append({'left_ref': f'a{covering_index}', 'right_ref': 'h0', 'basis': 'Published fact'})
+                pairs.append({'left_ref': f'a{covering_index}', 'right_ref': 'h0', 'anchor_fact': 'The anchor reports the concrete development under test.', 'target_fact': 'The target reports the corresponding development under test.', 'basis': 'Published fact'})
             anchor = data['anchor']['ref']
             allowed = {r['ref'] for r in data['targets']}
             pairs = [r for r in pairs if r['left_ref'] == anchor and r['right_ref'] in allowed]
@@ -147,7 +147,7 @@ def test_recent_history_material_update_remains_publishable_without_consolidatio
     def provider(prompt, schema, *_):
         if 'suspected_duplicates' in schema['properties']:
             return {'admission_complete': True, 'suspected_duplicates': [
-                {'left_ref': 'a0', 'right_ref': 'h0', 'basis': 'Same developing fact'}]}
+                {'left_ref': 'a0', 'right_ref': 'h0', 'anchor_fact': 'The anchor reports the concrete development under test.', 'target_fact': 'The target reports the corresponding development under test.', 'basis': 'Same developing fact'}]}
         if 'DUPLICATE GATE' in prompt:
             return {'relations': [{'ref': 'r0', 'decision': 'MATERIAL_UPDATE', 'covering_side': 'left'}]}
         return classes(['SHOULD_PUBLISH'])
@@ -165,7 +165,7 @@ def test_softpool_uses_same_covering_body_rule_and_keeps_first_classes():
         calls.append(prompt)
         if 'suspected_duplicates' in schema['properties']:
             return {'admission_complete': True, 'suspected_duplicates': [
-                {'left_ref': 'a0', 'right_ref': 'a1', 'basis': 'Initial plus update'}]}
+                {'left_ref': 'a0', 'right_ref': 'a1', 'anchor_fact': 'The anchor reports the concrete development under test.', 'target_fact': 'The target reports the corresponding development under test.', 'basis': 'Initial plus update'}]}
         rel = input_data(prompt)['authorized_relations'][0]
         side = 'left' if rel['left_ref'] == 'c1' else 'right'
         return {'relations': [{'ref': 'r0', 'decision': 'MATERIAL_UPDATE', 'covering_side': side}]}
@@ -195,7 +195,7 @@ def test_invalid_covering_direction_cannot_close_either_url_or_trigger_repair():
         calls.append(prompt)
         if 'suspected_duplicates' in schema['properties']:
             return {'admission_complete': True, 'suspected_duplicates': [
-                {'left_ref': 'a0', 'right_ref': 'a1', 'basis': 'Initial plus update'}]}
+                {'left_ref': 'a0', 'right_ref': 'a1', 'anchor_fact': 'The anchor reports the concrete development under test.', 'target_fact': 'The target reports the corresponding development under test.', 'basis': 'Initial plus update'}]}
         if 'DUPLICATE GATE' in prompt:
             return {'relations': [{'ref': 'r0', 'decision': 'MATERIAL_UPDATE', 'covering_side': 'both'}]}
         return classes(['SHOULD_PUBLISH', 'SHOULD_PUBLISH'])

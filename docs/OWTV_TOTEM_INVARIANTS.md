@@ -9,6 +9,7 @@
 **Additional owner-approved clarification:** 2026-10-10 — immutable first valid primary classification, under TOTEM-C01.
 **Owner-approved conditional reform, confirmed by isolated replay:** 2026-10-13 — complete editorial source material, under TOTEM-F01.
 **Owner-approved clarification:** 2026-10-15 — same-run material updates may replace the initial article only when their own complete body contains both the initial fact and the update.
+**Owner-approved clarification:** 2026-10-18 — summary/roundup articles do not automatically cover autonomous dedicated feed news; contextual newsletter citations are not subscription CTAs.
 
 ## TOTEM supremacy
 
@@ -105,6 +106,20 @@ Ordinary SHOULD capacity overflow follows the existing persistent strong-news qu
 
 This rule creates no minimum article quota and does not authorize new report-derived URLs. It does not independently
 change post-show freshness rules: a later feed URL is judged on its own central development under the applicable policy.
+
+### Summary articles and dedicated news — owner clarification, 2026-10-18
+
+A news roundup or short multi-story pre-show recap does not automatically cover the autonomous dedicated
+feed news it mentions. Evaluate the dedicated article as its own publication product, as with report/news
+separation. Its substantive focused treatment and editorial media must be considered; a shared brief mention
+alone is not duplicate coverage. The approved Jay White case consists of an initial short multi-story pre-show
+article followed by a substantially more detailed dedicated article with an X embed: both remain legitimate.
+This is not blanket immunity for every roundup/dedicated pair, and it does not make every extra detail or embed
+an important material update between two ordinary dedicated articles. Gemini retains semantic authority.
+
+An editorial citation of the Wrestling Observer Newsletter or another newsletter is source attribution/reporting,
+not a subscription CTA. Alfred must identify actual promotional/subscription language rather than block the
+standalone word "newsletter". Other translation, safety and source-boilerplate checks remain in force.
 
 ## TOTEM-D01 — Gemini owns semantic duplicate decisions
 

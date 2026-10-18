@@ -75,7 +75,7 @@ def test_incomplete_admission_cannot_clear_any_candidate():
         calls.append(prompt)
         if 'suspected_duplicates' in schema['properties']:
             return {'admission_complete': True, 'suspected_duplicates': [
-                {'left_ref': 'a99', 'right_ref': 'a0', 'basis': 'Invalid reference'}]}
+                {'left_ref': 'a99', 'right_ref': 'a0', 'anchor_fact': 'The anchor reports the concrete development under test.', 'target_fact': 'The target reports the corresponding development under test.', 'basis': 'Invalid reference'}]}
         return response(value, ('SELECT', 'SELECT', 'SELECT'), prompt=prompt)
     result = active.evaluate(value, provider=provider)
     assert result['status'] != 'VALIDATED' and result['failure_stage'] == 'duplicate_admission'
