@@ -17,6 +17,8 @@
         "required": [
           "left_ref",
           "right_ref",
+          "anchor_fact",
+          "target_fact",
           "basis"
         ],
         "properties": {
@@ -32,6 +34,16 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 1000
+          },
+          "anchor_fact": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "target_fact": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
           }
         }
       }

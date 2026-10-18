@@ -23,7 +23,10 @@ ALFRED_VERSION = "v93_8_alfred_structured_content_checks"
 CTA_PATTERNS = [
     re.compile(r"\b(fateci sapere|dicci la tua|lascia un commento|commenti qui sotto|cosa ne pensate)\b", re.I),
     re.compile(r"\b(sound off|let us know|share your thoughts|what do you think)\b", re.I),
-    re.compile(r"\b(iscriviti|newsletter|seguici su|connect with us|add as a preferred source)\b", re.I),
+    re.compile(r"\b(iscriviti|seguici su|connect with us|add as a preferred source)\b", re.I),
+    re.compile(r"(?:^|[.!?]\s+)\s*(?:la\s+nostra|le\s+nostre|our(?:\s+free)?)\s+newsletter\b[^.!?]{0,50}\b(?:offre|offers|delivers|brings|provides)\b", re.I),
+    re.compile(r"(?:^|[.!?]\s+)\s*(?:(?:please|you\s+can|to\s+receive\s+(?:daily\s+)?updates,?|(?:for|per)\s+[^.!?]{1,60},|puoi|per\s+favore)\s+)?(?:click\s+here\s+to\s+)?(?:ricevi|ricevete|leggi|scopri|abbonati|abbonatevi|registrati|registratevi|subscribe|sign\s+up|join|get|receive|read|stay\s+(?:up\s+to\s+date|updated|informed|tuned))\b[^.!?]{0,80}\bnewsletter\b", re.I),
+    re.compile(r"(?:^|[.!?]\s+)\s*(?:non\s+perderti|don['’]t\s+miss)\b[^.!?]{0,80}\bnewsletter\b", re.I),
 ]
 
 SOURCE_CREDIT_PATTERNS = [
@@ -83,6 +86,13 @@ def clean_text(value: str) -> str:
     value = re.sub(r"<[^>]+>", " ", value)
     value = re.sub(r"\s+", " ", value).strip()
     return value
+
+
+def cta_text(value: str) -> str:
+    # Block starts remain invitation boundaries even when the preceding paragraph
+    # has no punctuation. This representation is only used for CTA detection.
+    blocks = re.split(r"</?(?:p|div|section|article|li|h[1-6]|blockquote|tr|td)\b[^>]*>|<br\s*/?>", value or "", flags=re.I)
+    return ". ".join(text for block in blocks if (text := clean_text(block)))
 
 
 def extract_quoted_segments(text: str) -> list[str]:
@@ -215,8 +225,9 @@ def review_article(article: dict[str, Any]) -> dict[str, Any]:
     elif excerpt_evidence["excerpt_residual_english"]:
         issues.append(issue("residual_english_excerpt", "blocker", "Excerpt composto da prosa inglese.", excerpt))
 
+    promotional_text = cta_text(body_html)
     for pattern in CTA_PATTERNS:
-        match = pattern.search(plain)
+        match = pattern.search(promotional_text)
         if match:
             issues.append(issue("cta_residue", "blocker", "Residuo di CTA/comment bait nel testo italiano.", match.group(0)))
             break

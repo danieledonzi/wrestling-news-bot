@@ -208,7 +208,7 @@ def test_corrupt_permanent_memory_cannot_silently_reopen_urls():
 def test_full_gate_sees_only_semantically_admitted_pair_and_cached_final_cannot_be_omitted():
     rows = [article('a', 'AJ Styles confirms WWE released him from his contract'),
             article('b', 'WWE confirms the release of AJ Styles'), article('c', 'NXT confirms its next venue')]
-    suspect = {'left_ref': 'a0', 'right_ref': 'a1', 'basis': 'Both report the confirmed release of AJ Styles.'}
+    suspect = {'left_ref': 'a0', 'right_ref': 'a1', 'anchor_fact': 'The anchor reports the concrete development under test.', 'target_fact': 'The target reports the corresponding development under test.', 'basis': 'Both report the confirmed release of AJ Styles.'}
     calls = []
     def provider(prompt, *_):
         calls.append(prompt)
@@ -239,9 +239,9 @@ def test_full_gate_sees_only_semantically_admitted_pair_and_cached_final_cannot_
 
 
 @pytest.mark.parametrize('bad', [
-    {'left_ref': 'a0', 'right_ref': 'h99', 'basis': 'Unknown endpoint'},
-    {'left_ref': 'a0', 'right_ref': 'a0', 'basis': 'Self comparison'},
-    {'left_ref': 'a0', 'right_ref': 'a1', 'basis': ''},
+    {'left_ref': 'a0', 'right_ref': 'h99', 'anchor_fact': 'The anchor reports the concrete development under test.', 'target_fact': 'The target reports the corresponding development under test.', 'basis': 'Unknown endpoint'},
+    {'left_ref': 'a0', 'right_ref': 'a0', 'anchor_fact': 'The anchor reports the concrete development under test.', 'target_fact': 'The target reports the corresponding development under test.', 'basis': 'Self comparison'},
+    {'left_ref': 'a0', 'right_ref': 'a1', 'anchor_fact': 'The anchor reports the concrete development under test.', 'target_fact': 'The target reports the corresponding development under test.', 'basis': ''},
 ])
 def test_invalid_suspicion_cannot_authorize_a_comparison(bad):
     primary = snapshot([article('a'), article('b')])

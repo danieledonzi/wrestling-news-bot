@@ -29,6 +29,7 @@ def contract_fingerprint(*, policy_version: str, model: str, policy_path: Path,
                          gate_schema_path: Path,
                          event_registry_path: Path) -> str:
     from agents.menzo_duplicate_scorer import SCORER_VERSION, effective_threshold
+    from agents import menzo_semantic_admission as admission
     try:
         event_registry = {"status": "available", "sha256": hashlib.sha256(
             event_registry_path.read_bytes()).hexdigest()}
@@ -43,7 +44,7 @@ def contract_fingerprint(*, policy_version: str, model: str, policy_path: Path,
         "active_policy_sha256": hashlib.sha256(policy_path.read_bytes()).hexdigest(),
         "model": model,
         "duplicate_gate_schema_sha256": hashlib.sha256(gate_schema_path.read_bytes()).hexdigest(),
-        "semantic_admission_contract": "totem-d01-anchored-material-admission-v5",
+        "semantic_admission_contract": admission.VERSION,
         "event_registry": event_registry,
         "duplicate_scorer_version": SCORER_VERSION,
         "duplicate_effective_threshold": effective_threshold(),
@@ -61,8 +62,13 @@ def pair_material(relation: Mapping[str, Any], endpoints: Mapping[str, Mapping[s
     scorer = {key: copy.deepcopy(relation.get(key))
               for key in ("scorer_version", "score", "threshold", "components")}
     identity = {key: relation.get(key) for key in ("pair_id", "scope", "left_id", "right_id")}
-    return {"identity": identity, "endpoint_material_hash": _hash(endpoint_material),
-            "relation_contract_hash": _hash(scorer), "contract_fingerprint": contract}
+    material = {"identity": identity, "endpoint_material_hash": _hash(endpoint_material),
+                "relation_contract_hash": _hash(scorer), "contract_fingerprint": contract}
+    if isinstance(relation.get("admission_evidence"), Mapping):
+        # Audit metadata is retained without altering exact-material cache identity.
+        material["admission_evidence"] = copy.deepcopy(dict(relation["admission_evidence"]))
+        material["admission_basis"] = relation.get("admission_basis")
+    return material
 
 
 def empty(status: str = "missing") -> dict[str, Any]:

@@ -70,7 +70,7 @@ def test_complete_tail_reaches_classification_admission_and_gate_once_per_url(mo
         if 'suspected_duplicates' in schema['properties']:
             assert not any('editorial_class' in r for r in rows)
             return {'admission_complete': True, 'suspected_duplicates': [
-                {'left_ref': 'a0', 'right_ref': 'a1', 'basis': 'Potential shared event'}]}
+                {'left_ref': 'a0', 'right_ref': 'a1', 'anchor_fact': 'The anchor reports the concrete development under test.', 'target_fact': 'The target reports the corresponding development under test.', 'basis': 'Potential shared event'}]}
         if 'relations' in schema['properties']:
             assert not any('editorial_class' in r for r in rows)
             return {'relations': [{'ref': 'r0', 'decision': 'NO_MATCH'}]}
@@ -130,7 +130,7 @@ def test_history_body_unavailable_blocks_only_admitted_component(monkeypatch):
     def provider(prompt, schema, *_):
         if 'suspected_duplicates' in schema['properties']:
             return {'admission_complete': True, 'suspected_duplicates': [
-                {'left_ref': 'a0', 'right_ref': 'h0', 'basis': 'Potential same development'}]
+                {'left_ref': 'a0', 'right_ref': 'h0', 'anchor_fact': 'The anchor reports the concrete development under test.', 'target_fact': 'The target reports the corresponding development under test.', 'basis': 'Potential same development'}]
                 if json.loads(prompt.split('INPUT=', 1)[1])['anchor']['ref'] == 'a0' else []}
         assert 'relations' not in schema['properties']
         return classify(2)
@@ -149,7 +149,7 @@ def test_new_events_validate_and_cached_verdict_is_not_a_second_unique_pair(tmp_
     def provider(prompt, schema, *_):
         if 'suspected_duplicates' in schema['properties']:
             return {'admission_complete': True, 'suspected_duplicates': [
-                {'left_ref': 'a0', 'right_ref': 'a1', 'basis': 'Potential same development'}]}
+                {'left_ref': 'a0', 'right_ref': 'a1', 'anchor_fact': 'The anchor reports the concrete development under test.', 'target_fact': 'The target reports the corresponding development under test.', 'basis': 'Potential same development'}]}
         if 'relations' in schema['properties']:
             # Sparse valid Gemini decisions remain final even without explanation fields.
             return {'relations': [{'ref': 'r0', 'decision': 'NO_MATCH'}]}
@@ -228,7 +228,7 @@ def test_same_run_richer_winner_reuses_the_already_extracted_canonical_body(monk
     def provider(prompt, schema, *_):
         if 'suspected_duplicates' in schema['properties']:
             return {'admission_complete': True, 'suspected_duplicates': [
-                {'left_ref': 'a0', 'right_ref': 'a1', 'basis': 'Same factual outcome'}]}
+                {'left_ref': 'a0', 'right_ref': 'a1', 'anchor_fact': 'The anchor reports the concrete development under test.', 'target_fact': 'The target reports the corresponding development under test.', 'basis': 'Same factual outcome'}]}
         if 'relations' in schema['properties']:
             return {'relations': [{'ref': 'r0', 'decision': 'DUPLICATE'}]}
         return classify(2)

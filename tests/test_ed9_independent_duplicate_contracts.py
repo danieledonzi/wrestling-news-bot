@@ -95,7 +95,7 @@ def test_class_skip_removed_before_factual_election_and_judgment():
             assert 'https://ed2.test/2' not in prompt
             assert not any(field in json.dumps(data) for field in ('editorial_class', 'fixed_class', 'story_core', 'relative_rank'))
             return {'admission_complete': True, 'suspected_duplicates': [
-                {'left_ref': 'a0', 'right_ref': 'a1', 'basis': 'Same confirmed release'}]}
+                {'left_ref': 'a0', 'right_ref': 'a1', 'anchor_fact': 'The anchor reports the concrete development under test.', 'target_fact': 'The target reports the corresponding development under test.', 'basis': 'Same confirmed release'}]}
         if 'relations' in schema['properties']:
             data = payload(prompt)
             assert len(data['candidates']) == 2 and len(data['authorized_relations']) == 1
@@ -253,8 +253,8 @@ def test_large_soft_duplicate_batches_preserve_valid_decisions_on_later_failure(
         calls.append(prompt)
         if 'suspected_duplicates' in schema['properties']:
             rows = [
-                {'left_ref': 'a0', 'right_ref': 'a1', 'basis': 'Same contract announcement'},
-                {'left_ref': 'a1', 'right_ref': 'a2', 'basis': 'The contract announcement'}]
+                {'left_ref': 'a0', 'right_ref': 'a1', 'anchor_fact': 'The anchor reports the concrete development under test.', 'target_fact': 'The target reports the corresponding development under test.', 'basis': 'Same contract announcement'},
+                {'left_ref': 'a1', 'right_ref': 'a2', 'anchor_fact': 'The anchor reports the concrete development under test.', 'target_fact': 'The target reports the corresponding development under test.', 'basis': 'The contract announcement'}]
             return {'admission_complete': True, 'suspected_duplicates': [r for r in rows
                 if r['left_ref'] == payload(prompt)['anchor']['ref']]}
         if len(calls) == 3:
