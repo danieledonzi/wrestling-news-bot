@@ -115,8 +115,8 @@ FOOTER_START_PATTERNS = [
     re.compile(r"\bhas\s+(over\s+)?\d+\s+years\s+of\s+experience\b", re.I),
     re.compile(r"\bhas\s+been\s+(reporting\s+on|covering)\s+(pro\s+)?wrestling\b", re.I),
     re.compile(r"\bhis\s+(stories|work)\s+(have\s+been\s+featured|at|on)\b", re.I),
-    re.compile(r"^\s*spotlight\b", re.I),
-    re.compile(r"\bspotlight\s+(wwe|aew|nxt|tna|roh)?\s*(videos|news)?\b", re.I),
+    # A standalone navigation label, never an editorial mention of the spotlight.
+    re.compile(r"^\s*spotlight\b(?:\s*:\s*|\s+)?(?:(?:wwe|aew|nxt|tna|roh)\b\s*)?(?:(?:videos|news)\b)?\s*:?\s*$", re.I),
     re.compile(r"\brelated\s+(articles|posts|news)\b", re.I),
     re.compile(r"\bmore\s+(wwe|aew|nxt|tna|roh)\s+news\b", re.I),
 ]
