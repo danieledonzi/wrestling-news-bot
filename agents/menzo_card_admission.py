@@ -49,8 +49,7 @@ def uncertain(card):
 
 def history_evidence(left, right):
     """A retrieval gate, never semantic authority. Insufficient tags stay reviewable."""
-    if uncertain(left) or uncertain(right):
-        return {'reason': 'uncertain_identity_or_episode', 'fact_pairs': []}
+    ambiguous = uncertain(left) or uncertain(right)
     evidence = []
     for a in left['facts']:
         for b in right['facts']:
@@ -65,12 +64,21 @@ def history_evidence(left, right):
                                 and (family or episodes or events))
             subjects = [s for s in shared if s[0] in {'person', 'team'} or
                         (s[0] == 'organization' and business_episode)]
-            if subjects and (family or facets or episodes or events):
+            # A specific shared development can bridge inconsistent episode tags.
+            # This elects the pair for semantic review; it never declares a duplicate.
+            development = set(a['development_tags']) & set(b['development_tags'])
+            specific_development = {tag for tag in development
+                                    if len(tag.split('_')) >= 3
+                                    and tag not in {'general_wrestling_news'}}
+            if subjects and (family or facets or episodes or events or specific_development):
                 evidence.append({'left_fact': a['fact_id'], 'right_fact': b['fact_id'],
                                  'subjects': sorted(s[1] for s in subjects), 'facets': sorted(facets),
                                  'episode_family': a['episode_family'] if family else None,
-                                 'episode_tags': sorted(episodes), 'event_tags': sorted(events)})
-    return {'reason': 'shared_factual_retrieval_evidence', 'fact_pairs': evidence} if evidence else None
+                                 'episode_tags': sorted(episodes), 'event_tags': sorted(events),
+                                 'development_tags': sorted(specific_development)})
+    if evidence:
+        return {'reason': 'shared_factual_retrieval_evidence', 'fact_pairs': evidence}
+    return {'reason': 'uncertain_identity_or_episode', 'fact_pairs': []} if ambiguous else None
 
 
 def projection(card):

@@ -329,3 +329,33 @@ def test_fact_and_pair_events_reconcile_and_incomplete_cycle_is_not_zero(tmp_pat
     assert missing['coverage']=='unavailable' and missing['window_metrics'] is None
     partial=build(events,since-timedelta(hours=24),until)
     assert partial['coverage']=='partial' and partial['window_metrics'] is None
+
+
+def test_ring_boy_history_metadata_mismatch_elects_same_specific_development():
+    from agents.menzo_card_admission import history_evidence
+    def card(family, tags):
+        return {'facts': [{'fact_id': family + '.1',
+                          'central_subjects': [{'kind': 'person',
+                              'canonical_entity_id': 'person:vince_mcmahon',
+                              'identity_confidence': 'certain'}],
+                          'episode_family': family, 'episode_facets': [],
+                          'retrieval_episode_tags': tags, 'specific_event_tags': [],
+                          'development_tags': ['lawsuit_dismissal_denied']}]}
+    first = card('other', [])
+    second = card('disciplinary_conduct', ['ring_boy_lawsuit_2026'])
+    result = history_evidence(first, second)
+    assert result is not None
+    assert result['fact_pairs'][0]['development_tags'] == ['lawsuit_dismissal_denied']
+
+
+def test_common_person_with_different_developments_still_excluded():
+    from agents.menzo_card_admission import history_evidence
+    def card(tag):
+        return {'facts': [{'fact_id': tag, 'central_subjects': [{'kind': 'person',
+                            'canonical_entity_id': 'person:vince_mcmahon',
+                            'identity_confidence': 'certain'}],
+                          'episode_family': 'other', 'episode_facets': [],
+                          'retrieval_episode_tags': ['unrelated_' + tag],
+                          'specific_event_tags': [], 'development_tags': [tag]}]}
+    assert history_evidence(card('lawsuit_dismissal_denied'),
+                            card('separate_contract_announcement')) is None
