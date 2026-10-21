@@ -14,6 +14,7 @@ from typing import Any, Callable, Mapping
 
 from agents import menzo_editorial_director_shadow as shadow
 from agents import menzo_active_duplicate_pair_cache as pair_cache
+from agents import menzo_duplicate_history_direction as history_direction
 from agents import source_body
 from agents import menzo_semantic_admission as admission
 from agents import menzo_primary_classification_store as primary_store
@@ -392,7 +393,10 @@ def _validate_duplicate_gate(value, snapshot, *, preserve_valid=False):
 
 def _duplicate_prompt(snapshot):
     data = _duplicate_provider_input(snapshot)
-    return (RELATION_POLICY_PATH.read_text() +
+    direction = ''.join(history_direction.INSTRUCTION_TEMPLATE.format(
+        current=row['left_ref'], published=row['right_ref'])
+        for row in data['authorized_relations'] if row['scope'] == 'recent_history')
+    return (RELATION_POLICY_PATH.read_text() + direction +
             '\nDUPLICATE GATE PHASE ONLY. Return only JSON with relations. INPUT=' +
             json.dumps(data, ensure_ascii=False, sort_keys=True, separators=(',', ':')))
 
@@ -886,7 +890,8 @@ def _preserve_cached_duplicate_admissions(snapshot: Mapping[str, Any], relations
         if (scope not in {'same_run', 'recent_history'} or not isinstance(identity.get('pair_id'), str) or
                 not isinstance(left, str) or not isinstance(right, str) or left == right or
                 any(final.get(key) != identity.get(key) for key in ('pair_id', 'scope', 'left_id', 'right_id')) or
-                entry.get('contract_fingerprint') != contract or final.get('decision') != 'DUPLICATE' or
+                entry.get('contract_fingerprint') != pair_cache.scope_contract_fingerprint(contract, scope) or
+                final.get('decision') != 'DUPLICATE' or
                 final.get('semantic_authority') != 'gemini_final' or identity.get('pair_id') in included or
                 left not in current or right not in (current if scope == 'same_run' else history)):
             continue
