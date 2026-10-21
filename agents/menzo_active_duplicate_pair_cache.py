@@ -10,6 +10,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Mapping
 
+from agents import menzo_duplicate_history_direction as history_direction
+
 ROOT = Path(__file__).resolve().parents[1]
 CACHE_FILE = ROOT / "state/newsroom/menzo_active_duplicate_pair_cache_v1.json"
 SCHEMA_VERSION = "owtv_active_duplicate_pair_cache_v1"
@@ -52,6 +54,14 @@ def contract_fingerprint(*, policy_version: str, model: str, policy_path: Path,
     return _hash(material)
 
 
+def scope_contract_fingerprint(contract: str, scope: str) -> str:
+    """Invalidate only history decisions when its directional prompt changes."""
+    if scope != 'recent_history':
+        return contract
+    return _hash({'base_contract_fingerprint': contract,
+                  'recent_history_direction': history_direction.INSTRUCTION_TEMPLATE})
+
+
 def pair_material(relation: Mapping[str, Any], endpoints: Mapping[str, Mapping[str, Any]],
                   contract: str) -> dict[str, Any]:
     """Use exact provider rows, excluding only request-local aliases."""
@@ -63,7 +73,8 @@ def pair_material(relation: Mapping[str, Any], endpoints: Mapping[str, Mapping[s
               for key in ("scorer_version", "score", "threshold", "components")}
     identity = {key: relation.get(key) for key in ("pair_id", "scope", "left_id", "right_id")}
     material = {"identity": identity, "endpoint_material_hash": _hash(endpoint_material),
-                "relation_contract_hash": _hash(scorer), "contract_fingerprint": contract}
+                "relation_contract_hash": _hash(scorer), "contract_fingerprint":
+                scope_contract_fingerprint(contract, relation.get('scope'))}
     if isinstance(relation.get("admission_evidence"), Mapping):
         # Audit metadata is retained without altering exact-material cache identity.
         material["admission_evidence"] = copy.deepcopy(dict(relation["admission_evidence"]))
