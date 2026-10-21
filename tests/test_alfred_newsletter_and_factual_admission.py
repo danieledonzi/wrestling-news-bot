@@ -152,7 +152,8 @@ def test_old_admission_cache_cannot_reinsert_pairs_but_current_decisions_remain_
     identity = {'pair_id': 'pair', 'scope': 'recent_history', 'left_id': 'anchor', 'right_id': 'history'}
     final = {**identity, 'decision': 'DUPLICATE', 'semantic_authority': 'gemini_final'}
     for contract, expected in [(old_contract, 0), (current_contract, 1)]:
-        entry = {'identity': identity, 'contract_fingerprint': contract, 'final_relation': final}
+        entry = {'identity': identity, 'contract_fingerprint':
+                 pair_cache.scope_contract_fingerprint(contract, identity['scope']), 'final_relation': final}
         monkeypatch.setattr(pair_cache, 'load', lambda: {'entries': {'pair': entry}})
         relations = []
         active._preserve_cached_duplicate_admissions(state, relations)
