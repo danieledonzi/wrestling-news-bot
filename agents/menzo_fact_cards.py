@@ -68,10 +68,12 @@ def source_input(row):
     pieces = [s for s in re.split(r'(?<=[.!?])\s+', body) if s.strip()]
     units = [{'unit_id': 'u' + str(i + 1), 'text': s} for i, s in enumerate(pieces)]
     assert ' '.join(' '.join(x['text'] for x in units).split()) == ' '.join(body.split())
-    from agents.menzo_source_material import key
-    if not key(row):
+    from agents.menzo_duplicate_scorer import canonical_source_url
+    # Use the existing article identity for source stages and owned fact refs.
+    url = canonical_source_url(dict(row))
+    if not url:
         raise ValueError('canonical_url_required')
-    return {'title': row.get('title') or '', 'source_url': row.get('url') or row.get('source_url'),
+    return {'title': row.get('title') or '', 'source_url': url,
             'source_units': units}
 
 
@@ -261,7 +263,6 @@ class Cache:
 
 def obtain(row, cache, run_once, call, model, *, max_input_bytes):
     """Return a source-bound card or a technical HOLD; at most one attempt per stage."""
-    from agents.menzo_source_material import key
     attempts, validations, request_ids = 0, [], []
     stats = {'extraction_cache_hit': False, 'enrichment_cache_hit': False}
     try:
@@ -284,7 +285,7 @@ def obtain(row, cache, run_once, call, model, *, max_input_bytes):
                     raise ValueError('invalid_cached_fact_card')
             else:
                 single = {'candidates': [row], 'authorized_relations': [],
-                          '_admission_candidate_ids': [key(row)], '_admission_history_ids': []}
+                          '_admission_candidate_ids': [payload['source_url']], '_admission_history_ids': []}
                 operation = run_once(single, call, prompt, schema, stage, path,
                                      lambda raw: validator(raw, payload), cache_success=True,
                                      policy_version=VERSION)
@@ -298,7 +299,7 @@ def obtain(row, cache, run_once, call, model, *, max_input_bytes):
                 cache.put(fingerprint, output)
             stats['extraction_cache_hit' if stage == 'editorial_fact_extraction' else 'enrichment_cache_hit'] = cached
             if stage == 'editorial_fact_extraction':
-                identity = 'f' + digest({'url': key(row), 'extraction': fingerprint})[:24]
+                identity = 'f' + digest({'url': payload['source_url'], 'extraction': fingerprint})[:24]
                 card = bind_extraction(output, payload, identity)
                 payload = enrichment_input(payload, card)
             else:
