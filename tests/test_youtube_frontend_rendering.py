@@ -17,32 +17,28 @@ from agents.publisher_policy_v93_16 import convert_plain_embed_urls_to_blocks, g
     'https://www.youtube-nocookie.com/embed/3MfNh-p5zhY',
     'https://www.youtube.com/shorts/3MfNh-p5zhY',
 ])
-def test_youtube_contains_player_without_wordpress_oembed(url):
+def test_youtube_uses_native_shortcode_that_survives_rest_sanitization(url):
     result = convert_plain_embed_urls_to_blocks('<p>Prima.</p>\n<p>' + url + '</p>\n<p>Dopo.</p>')
-    soup = BeautifulSoup(result, 'html.parser')
-    frames = soup.find_all('iframe')
-    assert len(frames) == 1
-    assert frames[0]['src'] == 'https://www.youtube.com/embed/3MfNh-p5zhY'
-    assert frames[0].has_attr('allowfullscreen')
-    assert frames[0]['referrerpolicy'] == 'strict-origin-when-cross-origin'
-    assert soup.get_text(' ', strip=True) == 'Prima. Dopo.'
-    assert result.index('Prima.') < result.index('<iframe') < result.index('Dopo.')
-    assert 'padding-bottom:56.25%' in result
+    assert result.count('[embed]https://youtu.be/3MfNh-p5zhY[/embed]') == 1
+    assert '<iframe' not in result
+    assert 'wp:embed ' not in result
+    assert result.index('Prima.') < result.index('[embed]') < result.index('Dopo.')
+    assert '<!-- wp:shortcode -->' in result
 
 
 def test_reprocessing_retains_one_player_and_text():
     first = convert_plain_embed_urls_to_blocks('<p>https://youtu.be/3MfNh-p5zhY</p>')
     assert convert_plain_embed_urls_to_blocks(first) == first
     result = convert_plain_embed_urls_to_blocks(first + '\n<p>https://www.youtube.com/watch?v=3MfNh-p5zhY</p>')
-    assert len(BeautifulSoup(result, 'html.parser').find_all('iframe')) == 1
+    assert result.count('[embed]') == 1
 
 
 def test_two_videos_keep_source_order_and_mixed_case_ids():
     result = convert_plain_embed_urls_to_blocks('<p>https://youtu.be/3MfNh-p5zhY</p>\n<p>Tra.</p>\n<p>https://youtu.be/Ao-lugrL_cs</p>')
-    soup = BeautifulSoup(result, 'html.parser')
-    assert [x['src'] for x in soup.find_all('iframe')] == [
-        'https://www.youtube.com/embed/3MfNh-p5zhY', 'https://www.youtube.com/embed/Ao-lugrL_cs']
-    assert soup.get_text(' ', strip=True) == 'Tra.'
+    assert result.index('[embed]https://youtu.be/3MfNh-p5zhY') < result.index('Tra.')
+    assert result.index('Tra.') < result.index('[embed]https://youtu.be/Ao-lugrL_cs')
+    assert result.count('[embed]') == 2
+
 
 
 @pytest.mark.parametrize('url', ['https://x.com/WWE/status/12345', 'https://www.instagram.com/p/Example/'])
@@ -58,8 +54,8 @@ def test_existing_youtube_block_preserves_caption():
         '</div></figure>', '</div><figcaption>Il podcast originale.</figcaption></figure>')
     result = render_youtube_blocks(block)
     soup = BeautifulSoup(result, 'html.parser')
-    assert len(soup.find_all('iframe')) == 1
-    assert soup.find('figcaption').get_text() == 'Il podcast originale.'
+    assert result.count('[embed]') == 1
+    assert soup.find('p', class_='wp-element-caption').get_text() == 'Il podcast originale.'
 
 
 @pytest.mark.parametrize('url', ['https://youtube.com.evil.test/watch?v=3MfNh-p5zhY',
@@ -81,3 +77,13 @@ def test_real_mixed_article_does_not_change_non_youtube_content():
     assert result.startswith(prefix)
     assert result.endswith(suffix)
     assert 'wp-block-embed__wrapper' not in result
+
+
+def test_existing_gutenberg_youtube_never_nests_or_leaves_orphan_closers():
+    block = gutenberg_embed_block('https://youtu.be/3MfNh-p5zhY')
+    result = convert_plain_embed_urls_to_blocks(block)
+    assert result.count('[embed]') == 1
+    assert 'wp:embed' not in result
+    assert '</figure>' not in result
+    assert '</div>' not in result
+    assert convert_plain_embed_urls_to_blocks(result) == result
