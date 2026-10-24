@@ -239,7 +239,8 @@ def convert_plain_embed_urls_to_blocks(content: str) -> str:
     text = remove_duplicate_embed_urls_preserve_first(text)
     text = re.sub(r"(<!-- /wp:embed -->)\s*(<p>)", r"\1\n\n\2", text)
     text = re.sub(r"\n{3,}", "\n\n", text)
-    return text
+    from agents.wordpress_youtube_embed import render_youtube_blocks
+    return render_youtube_blocks(text)
 
 
 def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]:
