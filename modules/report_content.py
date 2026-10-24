@@ -174,6 +174,17 @@ def extract_report_blocks(source_html: str, source_url: str) -> list[dict]:
     walk(root)
     from modules.simone_report_integrity import cleanup_blocks
     blocks, _diagnostics = cleanup_blocks(blocks, source_url)
+    from modules.meta_embeds import canonical_meta_url
+    seen_meta = set()
+    ordered = []
+    for block in blocks:
+        url = canonical_meta_url(block.get("url", "")) if block.get("type") == "embed" else ""
+        if url and url in seen_meta:
+            continue
+        if url:
+            seen_meta.add(url)
+        ordered.append(block)
+    blocks = ordered
     if not any(b["type"] == "paragraph" for b in blocks):
         raise ValueError("Report has no substantive text")
     return blocks

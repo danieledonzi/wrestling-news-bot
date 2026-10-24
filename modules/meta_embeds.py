@@ -65,16 +65,16 @@ def render_meta_embeds(content: str) -> str:
     while prefix in content:
         prefix += "X"
 
-    def protect(url: str, original: str, caption: str = "") -> str:
+    def protect(url: str, original: str, caption: str = "", attributes: str = "") -> str:
         token = prefix + str(len(fragments)) + "END"
-        fragments.append((url, original, caption))
+        fragments.append((url, original, caption, attributes))
         return token
 
     def block(match):
         original = match[0]
         soup = BeautifulSoup(original, "html.parser")
-        shortcode = re.search(r"\[embed\](.*?)\[/embed\]", original, re.S)
-        url = canonical_meta_url(shortcode[1]) if shortcode else ""
+        shortcode = re.search(r"\[embed(?P<attributes>(?:\s+[^\]]*)?)\](?P<url>.*?)\[/embed\]", original, re.S)
+        url = canonical_meta_url(shortcode["url"]) if shortcode else ""
         if not url:
             attrs = re.search(r"<!-- wp:embed\s+(\{.*?\})\s*-->", original, re.S)
             if attrs:
@@ -87,9 +87,9 @@ def render_meta_embeds(content: str) -> str:
         if caption and url:
             caption.name = "p"
             caption_html = "\n" + str(caption)
-        return protect(url, original, caption_html)
+        return protect(url, original, caption_html, shortcode["attributes"] if shortcode else "")
 
-    text = re.sub(r"<!-- wp:(embed|shortcode)\b.*?<!-- /wp:\1 -->|\[embed\].*?\[/embed\]", block, content, flags=re.S)
+    text = re.sub(r"<!-- wp:(embed|shortcode)\b.*?<!-- /wp:\1 -->|\[embed(?:\s+[^\]]*)?\].*?\[/embed\]", block, content, flags=re.S)
 
     def paragraph(match):
         original = match[0]
@@ -116,7 +116,7 @@ def render_meta_embeds(content: str) -> str:
         kept = "" if bare else original
         return kept + "\n" + "\n".join(protect(u, "") for u in urls)
 
-    text = re.sub(r"<p\b[^>]*>.*?</p>", paragraph, text, flags=re.S | re.I)
+    text = re.sub(r"(?:<!-- wp:paragraph\b.*?-->\s*)?<p\b[^>]*>.*?</p>(?:\s*<!-- /wp:paragraph -->)?", paragraph, text, flags=re.S | re.I)
 
     def line(match):
         url = canonical_meta_url(match[1])
@@ -126,12 +126,12 @@ def render_meta_embeds(content: str) -> str:
     seen = set()
 
     def restore(match):
-        url, original, caption = fragments[int(match[1])]
+        url, original, caption, attributes = fragments[int(match[1])]
         if not url:
             return original
         if url in seen:
             return caption
         seen.add(url)
-        return '<!-- wp:shortcode -->\n[embed]' + html.escape(url) + '[/embed]\n<!-- /wp:shortcode -->' + caption
+        return '<!-- wp:shortcode -->\n[embed' + attributes + ']' + html.escape(url) + '[/embed]\n<!-- /wp:shortcode -->' + caption
 
     return re.sub(re.escape(prefix) + r"(\d+)END", restore, text)

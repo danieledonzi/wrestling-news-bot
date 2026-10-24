@@ -66,6 +66,23 @@ def test_existing_meta_block_preserves_caption_and_case_sensitive_distinct_posts
     assert 'Didascalia.' in result
 
 
+def test_wordpress_paragraph_comments_do_not_contain_nested_shortcode_blocks():
+    source = '<!-- wp:paragraph --><p>Annuncio <a href="' + IG + '">su Instagram</a>.</p><!-- /wp:paragraph -->'
+    result = render_meta_embeds(source)
+    assert result.index('<!-- /wp:paragraph -->') < result.index('<!-- wp:shortcode -->')
+    assert render_meta_embeds(result) == result
+    bare = '<!-- wp:paragraph --><p><a href="' + IG + '">' + IG + '</a></p><!-- /wp:paragraph -->'
+    assert 'wp:paragraph' not in render_meta_embeds(bare)
+
+
+def test_existing_shortcode_dimensions_are_preserved_without_duplicate_media():
+    source = '<!-- wp:shortcode -->[embed width="600" height="420"]' + IG + '?utm_source=x[/embed]<!-- /wp:shortcode --><p>' + IG + '</p>'
+    result = render_meta_embeds(source)
+    assert result.count(IG) == 1
+    assert '[embed width="600" height="420"]' + IG + '[/embed]' in result
+    assert render_meta_embeds(result) == result
+
+
 @pytest.mark.parametrize('extractor', ['news', 'report'])
 def test_source_inline_links_keep_full_paragraph_and_media_sequence(extractor):
     source = '<article><div class="entry-content"><p>Prima: notizia e contesto della puntata.</p><p>Joseph <a href="' + IG + '?utm_source=x">announced the new project on Instagram</a>, revealing that Beyond the Bell is coming soon to The CW.</p><p>Dopo, altre informazioni sul progetto.</p><p>Il video <a href="' + FB + '">pubblicato su Facebook</a> contiene altri dettagli.</p><p>Chiusura della notizia.</p></div></article>'
@@ -89,3 +106,11 @@ def test_news_ignores_source_cta_links():
     source = '<article><div class="entry-content"><p>Questa notizia contiene fatti e dettagli editoriali.</p><p>Follow us on Instagram <a href="' + IG + '">here</a>.</p></div></article>'
     blocks = bob.extract_elements('https://www.ringsidenews.com/test/', source)[2]
     assert not any(b['type'] == 'embed' for b in blocks)
+
+
+def test_report_source_link_and_later_embedded_same_post_appear_once():
+    source = '<article><div class="entry-content"><p>Joseph annuncia <a href="' + IG + '">Beyond the Bell</a>.</p><p>Altri dettagli.</p><blockquote class="instagram-media"><a href="' + IG + '">Instagram</a></blockquote><p>Chiusura.</p></div></article>'
+    blocks = extract_report_blocks(source, 'https://www.ringsidenews.com/test/')
+    assert [b['url'] for b in blocks if b['type'] == 'embed'] == [IG]
+    assert blocks[0]['text'].startswith('Joseph') and blocks[1]['type'] == 'embed'
+    assert 'Altri dettagli' in blocks[2]['text']
