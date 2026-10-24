@@ -24,6 +24,13 @@ def now_at(value=None):
         return datetime.now(timezone.utc)
 
 
+def read_history(path):
+    raw = json.loads(path.read_text()) if path.exists() else {}
+    if not isinstance(raw, (dict, list)):
+        raise ValueError('invalid_publication_pressure_history')
+    return raw
+
+
 def published_count(records=None, *, now=None):
     """Successful unique news in (now-24h, now]; reports/dry runs do not count.
 
@@ -32,9 +39,7 @@ def published_count(records=None, *, now=None):
     if records is None:
         from agents.menzo_policy_v93_15 import publisher_history_file
         path = publisher_history_file()
-        raw = json.loads(path.read_text()) if path.exists() else {}
-        if not isinstance(raw, (dict, list)):
-            raise ValueError('invalid_publication_pressure_history')
+        raw = read_history(path)
         records = raw.values() if isinstance(raw, dict) else raw
     current = now_at(now)
     seen = set()

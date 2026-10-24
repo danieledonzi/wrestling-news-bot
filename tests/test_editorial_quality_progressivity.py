@@ -127,6 +127,8 @@ def test_publisher_retry_guard_obeys_30_and_does_not_revive_terminal_skip(monkey
     for row in rows.values():
         row['published_at']=datetime.now(timezone.utc).isoformat()
     monkeypatch.setattr(publisher,'load_json',lambda *_: rows)
+    monkeypatch.setattr(publisher,'PUBLISHER_HISTORY_FILE',tmp_path/'publisher.json')
+    publisher.PUBLISHER_HISTORY_FILE.write_text(json.dumps(rows))
     monkeypatch.setattr(publisher,'build_trace_metadata_index',lambda *_: {})
     monkeypatch.setattr(publisher,'publisher_duplicate_safety_filter',lambda a,h:(a,[]))
     monkeypatch.setattr(publisher,'wp_ready',lambda:(True,'fixture'))
@@ -144,9 +146,13 @@ def test_publisher_retry_guard_obeys_30_and_does_not_revive_terminal_skip(monkey
     assert attempted==[candidates[0]['url']]
     assert result['input']['published_news_24h']==29
     assert result['input']['publication_pressure_skipped']==2
+    assert result['handoff']['publisher_publication_pressure_blocks']==2
+    assert result['handoff']['publisher_duplicate_safety_blocks']==0
+    assert result['handoff']['publisher_unauthorized_duplicate_blocks']==0
     assert menzo.source_key(candidates[1]['url']) in menzo.terminal_skip_memory()
     # Once pressure has fallen, the same rejected URL still cannot publish.
     rows.clear();attempted.clear()
+    publisher.PUBLISHER_HISTORY_FILE.write_text(json.dumps(rows))
     result=publisher.run_publisher({'approved_articles':[candidates[1]]})
     assert attempted==[]
     assert result['skipped_approved_articles'][0]['editorial_director']['editorial_class']=='SHOULD_PUBLISH'
@@ -156,6 +162,7 @@ def test_pressure_never_overrides_duplicate_clearance(monkeypatch,tmp_path):
     from agents import publisher
     isolate(monkeypatch,tmp_path,0)
     monkeypatch.setattr(publisher,'load_json',lambda *_: {})
+    monkeypatch.setattr(publisher,'PUBLISHER_HISTORY_FILE',tmp_path/'publisher.json')
     monkeypatch.setattr(publisher,'build_trace_metadata_index',lambda *_: {})
     monkeypatch.setattr(publisher,'wp_ready',lambda:(True,'fixture'))
     monkeypatch.setattr(publisher,'DRY_RUN',True)
@@ -167,3 +174,40 @@ def test_pressure_never_overrides_duplicate_clearance(monkeypatch,tmp_path):
     result=publisher.run_publisher({'approved_articles':[row]})
     assert not attempted
     assert result['skipped_approved_articles']
+
+
+@pytest.mark.parametrize('data', ['{broken', 'null', '123'])
+def test_publisher_unreadable_or_invalid_history_never_looks_empty(monkeypatch,tmp_path,data):
+    from agents import publisher
+    path=tmp_path/'publisher.json';path.write_text(data)
+    monkeypatch.setattr(publisher,'PUBLISHER_HISTORY_FILE',path)
+    # Permissive legacy load would silently turn this into empty history.
+    monkeypatch.setattr(publisher,'load_json',lambda *_: {})
+    monkeypatch.setattr(publisher,'build_trace_metadata_index',lambda *_: {})
+    monkeypatch.setattr(publisher,'wp_ready',lambda:(True,'fixture'))
+    attempted=[]
+    monkeypatch.setattr(publisher,'publish_article',lambda *a:attempted.append(a))
+    with pytest.raises((ValueError,json.JSONDecodeError)):
+        publisher.run_publisher({'approved_articles':[article('ordinary')]})
+    assert not attempted
+
+
+def test_existing_terminal_provenance_survives_retry(monkeypatch,tmp_path):
+    from agents import publisher
+    row=article('closed','PUBLISHABLE_SOFT')
+    prior={'url':row['url'],'title':'closed','reason':'soft_board_repeatedly_outranked',
+        'decision_authority':'soft_board','editorial_director':row['editorial_director'],
+        'soft_board_content_fingerprint':'fixed','soft_board_first_seen_at':NOW.isoformat()}
+    menzo.save_hard_skips({'skipped':[prior]})
+    before=copy.deepcopy(menzo.terminal_skip_memory()[menzo.source_key(row['url'])])
+    monkeypatch.setattr(publisher,'PUBLISHER_HISTORY_FILE',tmp_path/'publisher.json')
+    monkeypatch.setattr(publisher,'load_json',lambda *_: {})
+    monkeypatch.setattr(publisher,'build_trace_metadata_index',lambda *_: {})
+    monkeypatch.setattr(publisher,'wp_ready',lambda:(True,'fixture'))
+    monkeypatch.setattr(publisher,'DRY_RUN',True)
+    monkeypatch.setattr(publisher,'write_json',lambda *_:None)
+    result=publisher.run_publisher({'approved_articles':[dict(row,source_url=row['url'])]})
+    assert menzo.terminal_skip_memory()[menzo.source_key(row['url'])]==before
+    assert result['handoff']['publisher_duplicate_safety_blocks']==0
+    assert result['handoff']['publisher_publication_pressure_blocks']==0
+    assert result['handoff']['publisher_terminal_skip_blocks']==1

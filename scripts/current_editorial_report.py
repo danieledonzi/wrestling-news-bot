@@ -119,6 +119,8 @@ def economic_sections(root: Path, since: datetime, until: datetime) -> dict:
     news_workloads = set().union(*names.values()) | {'translation_generation', 'quote_resolution',
                      'duplicate_arbitration', 'selection'}
     def partition(row):
+        if row.get("test_run") is True or row.get("workload") == "editorial_quality_reform_test":
+            return "isolated_tests"
         # Installed report producers also use pipeline/phase evidence, without
         # a workload field. Unknown work never silently becomes news cost.
         if (row.get('workload') == 'report_translation' or row.get('model_role') == 'report_translation' or
@@ -132,7 +134,7 @@ def economic_sections(root: Path, since: datetime, until: datetime) -> dict:
             return 'news_and_editorial'
         return 'unattributed'
     partitions = {name: build_gemini_economic_truth([r for r in rows if partition(r) == name], available=valid)
-                  for name in ('news_and_editorial', 'reports', 'unattributed')}
+                  for name in ('news_and_editorial', 'reports', 'isolated_tests', 'unattributed')}
     real = [r for r in rows if str(r.get('status') or '').strip().casefold() in {'called', 'failed'}]
     token_fields = ('input_tokens', 'output_tokens', 'total_tokens', 'non_cached_input_tokens',
                     'effective_cached_input_tokens', 'effective_thinking_tokens')
