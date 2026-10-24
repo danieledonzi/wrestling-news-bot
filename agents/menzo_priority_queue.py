@@ -154,10 +154,37 @@ def schedule(projected: dict[str, Any], snapshot: Mapping[str, Any]) -> None:
     def order(row):
         live = bool((row.get('show_report_id') or row.get('event_report_key') or row.get('special_event_match'))
                     and not row.get('corresponding_report_published'))
-        return (not live, row.get('priority_queue_first_seen_at', now))
+        return (not (row.get('editorial_director') or {}).get('coverage_priority', False),
+                not live, row.get('priority_queue_first_seen_at', now))
     should.sort(key=order)
     capacity, reason = dynamic_article_capacity(projected, should)
-    kept, deferred = should[:max(0, capacity)], should[max(0, capacity):]
+    from agents import editorial_publication_policy as pressure
+    count = pressure.published_count(now=now)
+    reserved = count + len(must)
+    kept, deferred, rejected = [], [], []
+    for row in should:
+        rejection = pressure.rejection_reason(row, reserved)
+        if rejection:
+            rejected.append(pressure.terminal_skip(row, rejection, reserved, stage='before_translation'))
+            by_key.pop(_key(row), None)
+        elif len(kept) < max(0, capacity):
+            kept.append(row)
+            reserved += 1
+        else:
+            deferred.append(row)
+    projected.setdefault('skipped', []).extend(rejected)
+    menzo.save_hard_skips({'skipped': rejected})
+    projected.setdefault('postprocess', {})['publication_pressure'] = {
+        'policy_version': pressure.POLICY_VERSION, 'window_hours': 24,
+        'published_news_24h': count, 'reserved_after_strong': reserved,
+        'soft_stop': pressure.SOFT_STOP, 'priority_should_stop': pressure.PRIORITY_SHOULD_STOP,
+        'should_priority_selected': sum(pressure.coverage_priority(row) for row in kept),
+        'terminal_skipped': [{'url': row.get('url') or row.get('source_url'),
+            'editorial_class': pressure.primary_class(row), 'reason': row['reason'],
+            'coverage_priority': pressure.coverage_priority(row),
+            'projected_news_count': row['publication_pressure']['projected_news_count']}
+            for row in rejected]}
+
     projected['selected'] = must + kept + [row for row in selected if row not in strong]
     for row in deferred:
         row['decision'] = 'defer'

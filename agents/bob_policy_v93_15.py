@@ -28,6 +28,9 @@ GUARDRAIL LINGUISTICI OBBLIGATORI v94.14:
 - release/released/roster cuts -> licenziamento, licenziato/licenziata, addio o uscita secondo contesto; mai rilascio/rilasciato. retirement -> ritiro/ritirarsi; mai pensione/pensionamento. cleared/not cleared -> autorizzato/non autorizzato a lottare; mai pulito/non pulito.
 - Evita calchi e parole innaturali: si e' aperto riguardo, ha affrontato una sfida, coinvolto in una dinamica, all'interno della compagnia, televisione nazionale, rivelatrice, prevalenza, stella se il senso e' wrestler/fighter/top name.
 - Se non sei sicuro su un nome proprio, titolo, show, stable, evento, cintura, stipulazione, numero, data o sigla, copialo esattamente dal sorgente.
+- Interpreta modi di dire nel contesto prima di tradurli: "caught the Hollywood bug" -> "ha preso gusto alla recitazione"; "not out of the woods" durante un recupero -> "non ha ancora recuperato completamente", non "e' ancora in pericolo" senza riscontri clinici; "one half of the tag team champions" -> "uno dei due campioni di coppia", non "una meta' dei campioni". Sono esempi contestuali, non sostituzioni universali.
+- Conserva esattamente negazioni, causalita', attribuzioni e grado di certezza: "non voleva rischiare di perdere" non significa "voleva perdere"; "reportedly", "could", "not confirmed" non diventano conferme. Non inventare nuove conseguenze mediche o cambi di programma per rendere il testo piu' fluido.
+- Rileggi mentalmente ogni frase come un redattore italiano che conosce il wrestling: accordi di genere e numero, pronomi e soggetti devono essere chiari. Conserva integralmente fatti, dettagli e citazioni: naturalezza non autorizza sintesi, nuove chiusure, biografie o CTA della fonte. Esegui questa revisione nella stessa risposta, senza aggiungere una seconda versione o note al lettore.
 """.strip()
 
 _ORIGINAL_BUILD_TRANSLATION_PROMPT = bob_base.build_translation_prompt

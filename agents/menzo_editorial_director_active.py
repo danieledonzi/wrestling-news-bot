@@ -25,14 +25,14 @@ from agents.gemini_ledger import record_gemini_attempt
 
 ROOT = Path(__file__).resolve().parents[1]
 MODEL = shadow.MODEL
-SCHEMA_VERSION = "owtv_editorial_director_output_v6"
-POLICY_VERSION = "owtv_editorial_director_policy_v9_active"
-SCHEMA_PATH = ROOT / "config/editorial_director_output_schema_v6.json"
-POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V9_ACTIVE.md"
+SCHEMA_VERSION = "owtv_editorial_director_output_v7"
+POLICY_VERSION = "owtv_editorial_director_policy_v10_active"
+SCHEMA_PATH = ROOT / "config/editorial_director_output_schema_v7.json"
+POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V10_ACTIVE.md"
 ADMISSION_SCHEMA_PATH = ROOT / "config/editorial_duplicate_admission_schema_v1.json"
 ADMISSION_POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_DUPLICATE_ADMISSION_POLICY_V2.md"
 RELATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_gate_schema_v7.json"
-RELATION_POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_DUPLICATE_JUDGMENT_POLICY_V4.md"
+RELATION_POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_DUPLICATE_JUDGMENT_POLICY_V5.md"
 EVENT_REGISTRY_PATH = ROOT / "config/event_registry.json"
 BOB_CAPACITY_FIELDS = ("article_type", "source_title", "category_hint", "reason",
                        "ai_editorial_reason", "event_key", "show_report_id", "show_name",
@@ -223,7 +223,15 @@ def _finalize_active_input(snapshot: dict[str, Any]) -> None:
 
 
 def _validate_active(value: Any, snapshot: Mapping[str, Any]):
-    output, failures, telemetry = shadow.canonicalize_output(value, snapshot)
+    raw_rows = value.get('candidates', []) if isinstance(value, Mapping) else []
+    priorities = {r.get('ref'): r.get('coverage_priority') for r in raw_rows
+                  if isinstance(r, Mapping) and isinstance(r.get('ref'), str) and 'coverage_priority' in r}
+    clean = copy.deepcopy(value)
+    if isinstance(clean, dict) and isinstance(clean.get('candidates'), list):
+        for row in clean['candidates']:
+            if isinstance(row, dict):
+                row.pop('coverage_priority', None)
+    output, failures, telemetry = shadow.canonicalize_output(clean, snapshot)
     if failures or output is None:
         return None, failures, telemetry
     refs, relations = shadow.short_ref_maps(snapshot)
@@ -232,6 +240,15 @@ def _validate_active(value: Any, snapshot: Mapping[str, Any]):
     classes: dict[str, str | None] = {}
     for ref, candidate in refs.items():
         canonical = canonical_by_id.get(candidate["candidate_id"], {})
+        if ref in priorities:
+            priority = priorities[ref]
+            if type(priority) is not bool or (priority and canonical.get('editorial_class') != 'SHOULD_PUBLISH'):
+                failures.append({'family': 'coverage_priority', 'ref': ref, 'detail': 'boolean_should_only'})
+            else:
+                canonical['coverage_priority'] = priority
+        else:
+            # Legacy provider fixtures/decisions have no priority entitlement.
+            telemetry.append({'family': 'coverage_priority', 'ref': ref, 'detail': 'missing_conservative_false'})
         action = canonical.get("recommended_action")
         if action not in shadow.ACTIONS:
             failures.append({"family": "recommended_action", "ref": ref, "detail": "mandatory_active_field"})

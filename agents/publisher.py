@@ -791,7 +791,8 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
     trace_metadata_index = build_trace_metadata_index(alfred if isinstance(alfred, dict) else {})
     valid_articles = [enrich_article_trace_metadata(article, trace_metadata_index) for article in valid_articles]
     wp_ok, wp_reason = wp_ready()
-    history = load_json(PUBLISHER_HISTORY_FILE, {})
+    from agents import editorial_publication_policy as pressure
+    history = pressure.read_history(PUBLISHER_HISTORY_FILE)
     if isinstance(history, list):
         history = {source_key(str(record.get("source_url") or record.get("url") or "")) or f"legacy:{index}": record for index, record in enumerate(history) if isinstance(record, dict)}
     elif not isinstance(history, dict):
@@ -832,18 +833,39 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
     overflow_articles: list[dict[str, Any]] = []
     new_articles_selected = 0
     projected_today = published_today
+    from agents import editorial_publication_policy as pressure
+    published_24h = pressure.published_count(history.values())
+    projected_24h = published_24h
+    pacing_skipped = []
+    terminal_skipped = []
+    from agents.menzo_policy_v93_15 import terminal_skip_memory
+    terminal_urls = terminal_skip_memory()
     for article in valid_articles:
         key = source_key(str(article.get("source_url") or article.get("url") or ""))
         if key and key in history:
             articles.append(article)
             continue
+        if key in terminal_urls:
+            prior = terminal_urls[key]
+            terminal_skipped.append({**article, 'source_url': str(article.get('source_url') or article.get('url') or ''),
+                'status': 'skipped', 'decision': 'skip', 'reason': prior.get('reason') or 'terminal_skip_memory',
+                'decision_authority': prior.get('decision_authority'), 'terminal_skip_provenance': dict(prior)})
+            continue
         cls = primary_class(article)
+        rejection = pressure.rejection_reason(article, projected_24h)
+        if rejection:
+            item = pressure.terminal_skip(article, rejection, projected_24h, stage='before_publication')
+            item.update(source_url=str(article.get('source_url') or article.get('url') or ''),
+                        title_it=str(article.get('title_it') or ''), status='skipped')
+            pacing_skipped.append(item)
+            continue
         # MUST is a totem and does not consume the ordinary per-run budget.
         # This mirrors Bob's MUST exemption and prevents validated mandatory
         # coverage from being discarded at Publisher.
         if cls == "MUST_PUBLISH":
             articles.append(article)
             projected_today += 1
+            projected_24h += 1
             continue
         if new_articles_selected >= MAX_POSTS_PER_RUN:
             overflow_articles.append({**article, "_publisher_capacity_reason": f"publisher_max_posts_per_run:{MAX_POSTS_PER_RUN}"})
@@ -852,11 +874,13 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
             articles.append(article)
             new_articles_selected += 1
             projected_today += 1
+            projected_24h += 1
             continue
         if projected_today < 30:
             articles.append(article)
             new_articles_selected += 1
             projected_today += 1
+            projected_24h += 1
         else:
             overflow_articles.append({**article, "_publisher_capacity_reason": "daily_news_ceiling:30_soft_only"})
 
@@ -872,7 +896,9 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
         }
         for article in overflow_articles
     ]
-    results_for_audit = results + capacity_skipped + safety_skipped
+    from agents.menzo_policy_v93_15 import save_hard_skips
+    save_hard_skips({'skipped': pacing_skipped})
+    results_for_audit = results + capacity_skipped + safety_skipped + pacing_skipped + terminal_skipped
     if not DRY_RUN and wp_ok:
         history = publisher_history_retention.prune_history(history)
         write_json(PUBLISHER_HISTORY_FILE, history)
@@ -882,11 +908,11 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
         "version": PUBLISHER_VERSION,
         "generated_at": utc_now(),
         "mode": "wordpress_publisher_mixed_embed_blocks",
-        "input": {"alfred_version": alfred.get("version") if isinstance(alfred, dict) else None, "approved_articles": approved_total, "attempted_articles": len(articles), "max_posts_per_run": MAX_POSTS_PER_RUN, "published_news_today_local": published_today, "remaining_news_slots_today": daily_slots, "daily_news_ceiling": 30, "capacity_skipped": len(capacity_skipped)},
+        "input": {"alfred_version": alfred.get("version") if isinstance(alfred, dict) else None, "approved_articles": approved_total, "attempted_articles": len(articles), "max_posts_per_run": MAX_POSTS_PER_RUN, "published_news_today_local": published_today, "remaining_news_slots_today": daily_slots, "daily_news_ceiling": 30, "capacity_skipped": len(capacity_skipped), "publication_pressure_policy": pressure.POLICY_VERSION, "published_news_24h": published_24h, "publication_pressure_skipped": len(pacing_skipped)},
         "wp": {"ready": wp_ok, "reason": wp_reason, "post_status": POST_STATUS, "dry_run": DRY_RUN},
         "publisher_safety_error": safety_error,
-        "results": results + safety_skipped,
-        "skipped_approved_articles": capacity_skipped + safety_skipped,
+        "results": results + safety_skipped + pacing_skipped + terminal_skipped,
+        "skipped_approved_articles": capacity_skipped + safety_skipped + pacing_skipped + terminal_skipped,
         "handoff": {
             "published": sum(1 for r in results if r.get("status") == "published"),
             "already_published": sum(1 for r in results if r.get("status") == "already_published"),
@@ -897,7 +923,9 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
             "publisher_duplicate_safety_blocks": len(safety_skipped),
             "publisher_safety_unavailable_blocks": len([r for r in safety_skipped if r.get("reason") == "skip:publisher_same_story_safety_unavailable"]),
             "skipped_capacity": len(capacity_skipped),
-            "approved_not_attempted": len(capacity_skipped) + len(safety_skipped),
+            "publisher_publication_pressure_blocks": len(pacing_skipped),
+            "publisher_terminal_skip_blocks": len(terminal_skipped),
+            "approved_not_attempted": len(capacity_skipped) + len(safety_skipped) + len(pacing_skipped) + len(terminal_skipped),
             "approved_accounted_for": len(results_for_audit),
         },
         "policy": {"source_attribution": True, "strip_inline_image_placeholders": True, "plain_youtube_urls_for_wordpress_oembed": True, "plain_instagram_urls_for_wordpress_oembed": True, "social_embed_shortcode_blocks": True, "normalized_embed_dedupe": True, "semantic_story_dedupe": True, "featured_image_source": "meta.featured_image_or_first_placeholder", "idempotency": "state/newsroom/publisher_history.json by source_url"},

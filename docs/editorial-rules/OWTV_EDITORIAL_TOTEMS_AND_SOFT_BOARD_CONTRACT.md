@@ -19,6 +19,15 @@ SKIPs. Pair admission uses full material where available and explicitly labels u
 pair with missing full material cannot reach a final verdict. The original C01/S01 memories remain authoritative.
 Full soft input remains optional competition under this contract, with no change to classes, slots or review limits.
 
+## Superseding owner amendment — 2026-10-24
+
+TOTEM-P01/D03/T01 in `docs/OWTV_TOTEM_INVARIANTS.md` explicitly supersede unconditional SHOULD publication,
+its blanket live exception and calendar-day-only pressure below. These older sections describe the pre-amendment
+contract where inconsistent: the current gate is rolling 24h, ordinary selection below 25, MUST/priority SHOULD at
+25–29, and MUST only from 30. First class and coverage_priority remain immutable; pressure exclusions are terminal
+without class rewriting. MUST, report autonomy, soft midnight expiry and duplicate safeguards remain in force.
+Primary V10 and duplicate V5 are current; old primary rows are reused without migration calls.
+
 ## 1. Duplicate authority is above every editorial class
 
 Primary editorial classification precedes semantic duplicate work. SKIP is discarded before semantic comparisons.

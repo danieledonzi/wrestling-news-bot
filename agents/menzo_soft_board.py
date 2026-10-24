@@ -176,11 +176,14 @@ def _capacity(projected: Mapping[str, Any], snapshot: Mapping[str, Any]) -> dict
     run_soft = max(0, int(ordinary_capacity) - len(should))
     remaining_today = max(0, int(snapshot.get("remaining_slots", 0) or 0))
     daily_soft = max(0, remaining_today - len(selected))
+    from agents.editorial_publication_policy import soft_remaining
+    rolling_soft = soft_remaining(selected, now=_now(snapshot))
     return {
         "ordinary_run_capacity": max(0, int(ordinary_capacity)),
         "strong_selected_this_run": len(selected),
         "should_selected_this_run": len(should),
-        "soft_capacity_this_run": min(run_soft, daily_soft),
+        "soft_capacity_this_run": min(run_soft, daily_soft, rolling_soft),
+        "rolling_soft_capacity_remaining": rolling_soft,
         "daily_soft_capacity_remaining": daily_soft,
     }
 
@@ -209,6 +212,8 @@ def _provider_payload(pool: list[dict[str, Any]], snapshot: Mapping[str, Any],
             "meaningful_reviews": int(row.get("soft_board_review_count", 0) or 0),
         })
     day = _published_day_context(now)
+    from agents.editorial_publication_policy import published_count
+    day["published_news_24h"] = published_count(now=now)
     context = {
         "local_time": now.astimezone(ROME).isoformat(),
         "local_day": now.astimezone(ROME).date().isoformat(),

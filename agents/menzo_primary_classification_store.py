@@ -39,7 +39,8 @@ def _entry(article, decision, when, policy):
             'first_seen_at': decision.get('first_seen_at') or when,
             'policy_version': decision.get('policy_version') or policy,
             **{k: copy.deepcopy(decision.get(k)) for k in
-               ('editorial_class', 'recommended_action', 'category', 'story_core', 'relative_rank')}}
+               ('editorial_class', 'recommended_action', 'category', 'story_core', 'relative_rank')},
+            **({'coverage_priority': decision['coverage_priority']} if 'coverage_priority' in decision else {})}
 
 
 def load() -> dict[str, dict[str, Any]]:
@@ -110,4 +111,5 @@ def remember(articles, decisions, *, when, policy) -> dict[str, dict[str, Any]]:
 
 def decision(entry, candidate_id):
     return {'candidate_id': candidate_id, **{k: copy.deepcopy(entry.get(k)) for k in
-        ('editorial_class', 'recommended_action', 'category', 'story_core', 'relative_rank')}}
+        ('editorial_class', 'recommended_action', 'category', 'story_core', 'relative_rank')},
+            **({'coverage_priority': entry['coverage_priority']} if 'coverage_priority' in entry else {})}

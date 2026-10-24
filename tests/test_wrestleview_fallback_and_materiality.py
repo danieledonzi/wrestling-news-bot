@@ -146,7 +146,7 @@ def test_wrestleview_cleanup_preserves_match_text_and_media_order():
 
 
 def test_materiality_policy_changes_pair_contract_without_touching_first_classes():
-    assert active.RELATION_POLICY_PATH.name.endswith('_V4.md')
+    assert active.RELATION_POLICY_PATH.name.endswith('_V5.md')
     kwargs = dict(policy_version=active.POLICY_VERSION, model=active.MODEL,
                   gate_schema_path=active.RELATION_SCHEMA_PATH, event_registry_path=active.EVENT_REGISTRY_PATH)
     assert pair_cache.contract_fingerprint(policy_path=active.RELATION_POLICY_PATH, **kwargs) != pair_cache.contract_fingerprint(policy_path=active.RELATION_POLICY_PATH.with_name('OWTV_DUPLICATE_JUDGMENT_POLICY_V3.md'), **kwargs)

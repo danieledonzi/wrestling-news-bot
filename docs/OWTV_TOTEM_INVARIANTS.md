@@ -296,3 +296,47 @@ still accept a correctly bound final decision when local semantic evidence is in
 This improves the input and execution of D01; it does not rewrite accepted classes, resurrect skipped URLs, extract
 news from reports, alter pacing, or grant soft content an entitlement to publication. Cache expiry and body-cache
 eviction never undo C01/S01. Diagnostic replays never apply their alternative decisions to production.
+
+
+## TOTEM-P01 — Quality floor, frozen priority and rolling publication pressure
+
+**Owner approved: 2026-10-24.** Explicitly supersedes earlier unconditional SHOULD publication/live exceptions and
+calendar-day-only pacing where they conflict. Source/report independence, full-body input, immutable classes,
+terminal skips, pair admission and duplicate authority remain in force.
+
+- Use primary V10's always-on quality floor even at zero publications. New interviews, quotations and supporting
+  medical/contract details do not automatically qualify as SHOULD or gain automatic SOFT admission.
+- The first valid primary class remains final. coverage_priority is an intrinsic boolean assigned in that same
+  primary call and frozen with it; true applies only to especially important SHOULD. Legacy decisions without
+  this field retain their class and have no priority entitlement. No migration/reclassification calls are allowed.
+- Count successful news in the preceding rolling 24 hours, excluding reports, dry runs and failed publications.
+  The interval is (now minus 24 hours, now]. Midnight never resets pressure. Current-day reporting and the soft
+  midnight lifecycle remain separate concepts.
+- With fewer than 25 news already published/reserved, use strict ordinary selection. At 25–29, admit only MUST
+  and priority SHOULD. At 30 or more, admit only MUST. All thresholds describe the count BEFORE the next item.
+  Reserve headroom within each run so a batch cannot bypass a boundary. MUST is always exempt after duplicate
+  clearance and technical safeguards; 30 remains a reference rather than an absolute mandatory-news ceiling.
+- Apply the gate before translation and at Publisher, including retries. SHOULD rejected for pressure is terminal
+  for its canonical URL, with its original class preserved for audit. It does not wait for midnight or enter SOFT.
+  Ordinary per-run technical capacity overflow remains queued, subject to pressure on its next eligible attempt.
+- Live SHOULD uses the same frozen priority/pressure rules; a report still cannot replace or suppress its individual
+  news by itself. No automatic promotion to MUST, live-news count quota or new source synthesis is authorized.
+- Soft capacity ends at 25 in the rolling window, subtracting strong reservations. Existing morning hold, optional
+  competition, decay and midnight expiry continue. No unused slot creates publication entitlement.
+- Record policy, rolling count, reservations, immutable priority, rejected URLs/reasons and publisher guard results.
+  Noon observation distinguishes terminal pressure exclusions from duplicate exclusions and technical holds.
+
+## TOTEM-D03 — Substantial follow-up
+
+**Owner approved: 2026-10-24.** MATERIAL_UPDATE requires an important new development that almost independently
+justifies an article AND occupies at least half the follow-up's substantive informational content, with old recap
+included in the denominator. This is a semantic full-body assessment, not a deterministic word-count validator.
+A+B same-run coverage and autonomous dedicated-news exceptions remain unchanged. V5 judgment is final for the
+same material and contract; no repair or second semantic vote is introduced.
+
+## TOTEM-T01 — Natural faithful wrestling Italian
+
+**Owner approved: 2026-10-24.** Bob interprets idioms contextually, uses natural wrestling terminology, checks
+agreement and preserves negation, causality, attribution and uncertainty. Complete text, quotes and media order
+remain mandatory. Apply instructions within the existing translation call/model route; no global string-replacement
+rules, additional translation pass, source biopic or CTA is authorized.

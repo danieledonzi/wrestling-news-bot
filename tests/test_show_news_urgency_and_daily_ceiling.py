@@ -245,31 +245,36 @@ def test_all_weekly_reports_follow_totem_0630():
     assert {report["publish_after"] for report in config["reports"]} == {"06:30"}
 
 
-def test_publisher_ceiling_is_soft_only_at_thirty(monkeypatch):
+def test_publisher_pressure_at_thirty_keeps_only_must(monkeypatch, tmp_path):
+    from agents import editorial_publication_policy as pressure
+    now = datetime(2026, 10, 2, 12, 0, tzinfo=timezone.utc)
+    history = {str(i): {"source_url": f"https://history.test/{i}", "status": "published",
+                       "published_at": "2026-10-02T10:00:00+00:00"} for i in range(30)}
+    path = tmp_path / "history.json"; path.write_text(json.dumps(history))
+    monkeypatch.setattr(publisher, "PUBLISHER_HISTORY_FILE", path)
+    monkeypatch.setattr(pressure, "now_at", lambda value=None: now)
     monkeypatch.setattr(publisher, "wp_ready", lambda: (True, "ok"))
     monkeypatch.setattr(publisher, "publisher_duplicate_safety_filter", lambda articles, history: (articles, []))
-    monkeypatch.setattr(publisher, "load_json", lambda path, default: (
-        {str(i): {"status": "published", "published_at": "2026-10-02T10:00:00+00:00"} for i in range(30)}
-        if path == publisher.PUBLISHER_HISTORY_FILE else default))
     monkeypatch.setattr("agents.news_scheduling.datetime", type("Clock", (), {
-        "now": staticmethod(lambda tz=None: datetime(2026, 10, 2, 12, 0, tzinfo=timezone.utc)),
-        "fromisoformat": staticmethod(datetime.fromisoformat),
-    }))
+        "now": staticmethod(lambda tz=None: now), "fromisoformat": staticmethod(datetime.fromisoformat)}))
     calls = []
     monkeypatch.setattr(publisher, "publish_article", lambda article, *_args:
                         calls.append(article["source_url"]) or {"status": "published"})
     monkeypatch.setattr(publisher, "write_json", lambda *args: None)
     strong = {"source_url": "https://example.test/should", "editorial_director": {
-        "editorial_class": "SHOULD_PUBLISH", "recommended_action": "SELECT"}}
+        "editorial_class": "SHOULD_PUBLISH", "recommended_action": "SELECT", "coverage_priority": True}}
+    must = {"source_url": "https://example.test/must", "editorial_director": {
+        "editorial_class": "MUST_PUBLISH", "recommended_action": "SELECT"}}
     soft_item = {"source_url": "https://example.test/soft", "editorial_director": {
         "editorial_class": "PUBLISHABLE_SOFT", "recommended_action": "DEFER"},
         "soft_board": {"disposition": "SOFT_MUST"}}
-    result = publisher.run_publisher({"approved_articles": [soft_item, strong]})
-    assert calls == ["https://example.test/should"]
+    result = publisher.run_publisher({"approved_articles": [soft_item, strong, must]})
+    assert calls == ["https://example.test/must"]
     assert result["input"]["published_news_today_local"] == 30
-    assert result["handoff"]["skipped_capacity"] == 1
-    assert result["skipped_approved_articles"][0]["source_url"] == "https://example.test/soft"
-    assert result["skipped_approved_articles"][0]["reason"] == "daily_news_ceiling:30_soft_only"
+    assert result["handoff"]["skipped_capacity"] == 0
+    assert result["handoff"]["publisher_publication_pressure_blocks"] == 2
+    assert result["handoff"]["publisher_duplicate_safety_blocks"] == 0
+    assert all(row["reason"] == "publication_pressure:30_must_only" for row in result["skipped_approved_articles"])
 
 
 
@@ -364,7 +369,7 @@ def test_publisher_actual_result_preserves_show_news_urgency_provenance(monkeypa
     assert result["corresponding_report_published"] is False
 
 
-def test_already_published_does_not_consume_last_daily_slot(monkeypatch):
+def test_already_published_does_not_consume_last_daily_slot(monkeypatch, tmp_path):
     old_url = "https://example.test/already"
     new_url = "https://example.test/new"
     history = {publisher.source_key(old_url): {
@@ -374,6 +379,10 @@ def test_already_published_does_not_consume_last_daily_slot(monkeypatch):
     monkeypatch.setattr(publisher, "wp_ready", lambda: (True, "ok"))
     monkeypatch.setattr(publisher, "publisher_duplicate_safety_filter", lambda articles, loaded: (articles, []))
     monkeypatch.setattr(publisher, "load_json", lambda path, default: history if path == publisher.PUBLISHER_HISTORY_FILE else default)
+    from agents import editorial_publication_policy as pressure
+    path = tmp_path / "history.json"; path.write_text(json.dumps(history))
+    monkeypatch.setattr(publisher, "PUBLISHER_HISTORY_FILE", path)
+    monkeypatch.setattr(pressure, "now_at", lambda value=None: datetime(2026, 10, 2, 12, 0, tzinfo=timezone.utc))
     monkeypatch.setattr("agents.news_scheduling.datetime", type("Clock", (), {
         "now": staticmethod(lambda tz=None: datetime(2026, 10, 2, 12, 0, tzinfo=timezone.utc)),
         "fromisoformat": staticmethod(datetime.fromisoformat),
@@ -387,8 +396,8 @@ def test_already_published_does_not_consume_last_daily_slot(monkeypatch):
     monkeypatch.setattr(publisher, "write_json", lambda *args: None)
 
     result = publisher.run_publisher({"approved_articles": [
-        {"source_url": old_url, "title_it": "Existing"},
-        {"source_url": new_url, "title_it": "New"},
+        {"source_url": old_url, "title_it": "Existing", "editorial_director": {"editorial_class": "SHOULD_PUBLISH", "coverage_priority": True}},
+        {"source_url": new_url, "title_it": "New", "editorial_director": {"editorial_class": "SHOULD_PUBLISH", "coverage_priority": True}},
     ]})
 
     assert result["input"]["published_news_today_local"] == 29
