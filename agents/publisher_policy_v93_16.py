@@ -216,7 +216,8 @@ def remove_duplicate_embed_urls_preserve_first(text: str) -> str:
 
 
 def convert_plain_embed_urls_to_blocks(content: str) -> str:
-    text = content or ""
+    from agents.wordpress_youtube_embed import render_youtube_blocks
+    text = render_youtube_blocks(content or "")
 
     def repl_p_start(match: re.Match[str]) -> str:
         url = clean_url(match.group(1))
@@ -235,11 +236,13 @@ def convert_plain_embed_urls_to_blocks(content: str) -> str:
     text = P_START_EMBED_RE.sub(repl_p_start, text)
     text = P_URL_THEN_TEXT_RE.sub(repl_p_start, text)
     text = P_ONLY_EMBED_RE.sub(repl_p_only, text)
+    # Protect generated YouTube blocks before scanning their standalone URLs.
+    text = render_youtube_blocks(text)
     text = EMBED_LINE_RE.sub(repl_line, text)
     text = remove_duplicate_embed_urls_preserve_first(text)
     text = re.sub(r"(<!-- /wp:embed -->)\s*(<p>)", r"\1\n\n\2", text)
     text = re.sub(r"\n{3,}", "\n\n", text)
-    return text
+    return render_youtube_blocks(text)
 
 
 def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]:
