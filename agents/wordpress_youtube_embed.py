@@ -1,7 +1,6 @@
-"""Render owned YouTube blocks without depending on WordPress's oEmbed cache."""
+"""Render YouTube with the WordPress native embed shortcode."""
 from __future__ import annotations
 
-import html
 import json
 import re
 from urllib.parse import parse_qs, urlparse
@@ -11,7 +10,7 @@ from bs4 import BeautifulSoup
 
 _EMBED_BLOCK = re.compile(r'<!-- wp:embed\s+(\{.*?\})\s*-->(.*?)<!-- /wp:embed -->', re.S)
 _OWNED_BLOCK = re.compile(
-    r'<!-- wp:html -->\s*<figure class="owtv-youtube-embed" data-video-id="([A-Za-z0-9_-]{11})"[^>]*>.*?</figure>\s*<!-- /wp:html -->',
+    r'<!-- wp:shortcode -->\s*\[embed\]https://youtu\.be/([A-Za-z0-9_-]{11})\[/embed\]\s*<!-- /wp:shortcode -->',
     re.S,
 )
 _VIDEO_ID = re.compile(r'[A-Za-z0-9_-]{11}')
@@ -48,17 +47,17 @@ def render_youtube_blocks(content: str) -> str:
         if not video_id:
             return match.group(0)
         caption = BeautifulSoup(match.group(2), 'html.parser').find('figcaption')
-        source = html.escape('https://www.youtube.com/watch?v=' + video_id, quote=True)
+        # Let WordPress generate the iframe after saving: REST sanitization strips
+        # raw iframes, and editor previews can hide failed Gutenberg oEmbeds.
+        caption_html = ''
+        if caption:
+            caption.name = 'p'
+            caption['class'] = 'wp-element-caption'
+            caption_html = '\n' + str(caption)
         return (
-            '<!-- wp:html -->\n'
-            f'<figure class="owtv-youtube-embed" data-video-id="{video_id}" data-source-url="{source}">'
-            '<div style="position:relative;width:100%;height:0;padding-bottom:56.25%;overflow:hidden;">'
-            f'<iframe src="https://www.youtube.com/embed/{video_id}" title="Video YouTube" '
-            'width="560" height="315" loading="lazy" '
-            'style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" '
-            'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" '
-            'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
-            '</div>' + (str(caption) if caption else '') + '</figure>\n<!-- /wp:html -->'
+            '<!-- wp:shortcode -->\n'
+            f'[embed]https://youtu.be/{video_id}[/embed]\n'
+            '<!-- /wp:shortcode -->' + caption_html
         )
 
     rendered = _EMBED_BLOCK.sub(replace, content)
