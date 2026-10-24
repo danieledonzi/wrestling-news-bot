@@ -766,7 +766,7 @@ def text_blocks(blocks: List[Dict[str, str]]) -> List[Dict[str, Any]]:
     out: List[Dict[str, Any]] = []
     for idx, block in enumerate(blocks):
         if block["type"] in {"heading", "paragraph", "quote"}:
-            out.append({"i": idx, "type": block["type"], "level": block.get("level"), "text": block.get("text", "")})
+            out.append({"i": idx, "type": block["type"], "level": block.get("level"), "text": block.get("translation_text") or block.get("text", "")})
     return out
 
 
@@ -830,6 +830,7 @@ REGOLE DI BLOCCO:
 - non fondere blocchi diversi;
 - non cambiare ordine;
 - non aggiungere link, immagini, tweet o placeholder: media ed embed sono reinseriti dal codice;
+- se presenti, conserva esattamente i marcatori [OWTVLINK0] e [/OWTVLINK0] (e gli altri numeri), traducendo normalmente il testo racchiuso; non inventare marcatori, URL o HTML;
 - per heading restituisci solo testo tradotto, senza tag HTML;
 - per paragraph/quote restituisci solo testo italiano naturale, senza markdown.
 
@@ -942,6 +943,7 @@ def normalize_media_identity(url: Optional[str]) -> str:
 
 def render_blocks(blocks: List[Dict[str, str]], translated: Dict[int, str], featured_image_url: Optional[str] = None, *, job: Optional[Dict[str, Any]] = None) -> str:
     from modules.report_content import preshow_open, preshow_range
+    from modules.editorial_media_links import render_linked_text
     parts: List[str] = []
     collapsible = preshow_range(blocks, job or {})
     if job is not None and any(i not in translated for i, b in enumerate(blocks) if b["type"] in {"heading", "paragraph", "quote"}):
@@ -966,11 +968,11 @@ def render_blocks(blocks: List[Dict[str, str]], translated: Dict[int, str], feat
             txt = html_lib.escape(translated.get(idx) or block.get("text", ""))
             parts.append(f"<{level}>{txt}</{level}>")
         elif btype == "paragraph":
-            txt = html_lib.escape(translated.get(idx) or block.get("text", ""))
+            txt = render_linked_text(block, translated.get(idx) or block.get("text", ""))
             tag = "li" if next_list else "p"
             parts.append(f"<{tag}>{txt}</{tag}>")
         elif btype == "quote":
-            txt = html_lib.escape(translated.get(idx) or block.get("text", ""))
+            txt = render_linked_text(block, translated.get(idx) or block.get("text", ""))
             parts.append(f"<blockquote>{txt}</blockquote>")
         elif btype == "image":
             raw_src = block.get("src")
@@ -1138,6 +1140,9 @@ def publish_report(job: Dict[str, Any], content: str, featured_image_url: Option
     if final_cleanup["final_boilerplate_blocks_removed"]:
         print(f"[REPORT CLEAN v95.13.1] final_boilerplate_blocks_removed={final_cleanup['final_boilerplate_blocks_removed']}", flush=True)
     content = append_source_attribution(content_with_embeds(content), job)
+    from modules.wordpress_media_fallback import for_wordpress
+    content, media_diagnostics = for_wordpress(content, root=wp_root(), auth=wp_auth(), session=session)
+    job["media_fallback"] = media_diagnostics
     payload: Dict[str, Any] = {
         "title": job["title"],
         "content": content,

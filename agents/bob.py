@@ -750,10 +750,10 @@ def extract_elements(source_url: str, raw_html: str) -> tuple[dict[str, str], li
                 seen_text.add(key)
             raw_elements.append(item)
             if item["type"] in {"text", "quote"} and name in {"p", "li", "blockquote"}:
-                from modules.meta_embeds import linked_meta_urls, canonical_meta_url
-                if not is_cta_text(item.get("text", "")):
-                    urls = linked_meta_urls(node, source_url)
-                    if urls and canonical_meta_url(item.get("text", "")):
+                from modules.editorial_media_links import capture_inline_media, media_url
+                if not is_cta_text(clean_text(node.get_text(" "))):
+                    urls = capture_inline_media(item, node, source_url)
+                    if urls and media_url(item.get("text", "")):
                         raw_elements.pop()
                     raw_elements.extend({"type": "embed", "url": u, "source_tag": "editorial_link"} for u in urls)
         except Exception as exc:
@@ -945,7 +945,10 @@ def build_translation_units(elements: list[dict[str, Any]]) -> list[dict[str, st
         item["block_id"] = f"b{idx}"
         kind = item.get("type")
         if kind in TRANSLATABLE_TYPES:
-            units.append({"id": item["block_id"], "type": str(kind), "text": str(item.get("text") or "")})
+            unit = {"id": item["block_id"], "type": str(kind), "text": str(item.get("translation_text") or item.get("text") or "")}
+            if item.get("translation_text"):
+                unit["inline_media_markers"] = True
+            units.append(unit)
         elif kind == "table":
             rows = item.get("rows") if isinstance(item.get("rows"), list) else []
             for ridx, row in enumerate(rows):
@@ -1008,6 +1011,7 @@ REGOLE
 - Non riassumere e non aggiungere informazioni.
 - Bob non deve cercare media con Gemini: immagini, YouTube, Instagram/Reel, X/Twitter e altri embed sono estratti dal DOM prima della traduzione e vanno preservati nella sequenza originale.
 - Conserva fedelmente il significato di ogni blocco.
+- Se presenti, conserva esattamente i marcatori [OWTVLINK0] e [/OWTVLINK0] (e gli altri numeri), traducendo normalmente il testo racchiuso. Non inventare marcatori, URL o HTML.
 - Le citazioni vanno tradotte integralmente.
 - Rimuovi qualunque frase autoreferenziale della fonte originale che prometta monitoraggio, copertura futura, aggiornamenti o inviti a seguire Ringside News, WrestlingInc, Fightful o altri siti. Non tradurla.
 - Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.
@@ -1051,6 +1055,13 @@ def parse_bob_json(raw: str) -> dict[str, Any]:
 
 
 def validate_translation(data: dict[str, Any], parse_valid: bool, units: list[dict[str, str]], source_title: str, alternate_source_title: str = "", source_description: str = "") -> dict[str, Any]:
+    from modules.editorial_media_links import strip_link_markers
+    marked_ids = {str(unit["id"]) for unit in units if unit.get("inline_media_markers")}
+    if marked_ids:
+        data = dict(data)
+        if isinstance(data.get("translations"), dict):
+            data["translations"] = {k: strip_link_markers(v) if str(k) in marked_ids and isinstance(v, str) else v for k,v in data["translations"].items()}
+        units = [{**unit, "text": strip_link_markers(unit["text"])} if str(unit["id"]) in marked_ids else unit for unit in units]
     translations_object_valid = isinstance(data.get("translations"), dict)
     raw_translations = data.get("translations") if translations_object_valid else {}
     required = [str(unit["id"]) for unit in units]
@@ -1128,6 +1139,7 @@ def validate_translation(data: dict[str, Any], parse_valid: bool, units: list[di
 
 
 def render_body(elements: list[dict[str, Any]], translations: dict[str, str]) -> str:
+    from modules.editorial_media_links import render_linked_text
     out: list[str] = []
     for item in elements:
         kind = item.get("type")
@@ -1136,9 +1148,9 @@ def render_body(elements: list[dict[str, Any]], translations: dict[str, str]) ->
             level = int(item.get("level") or 2)
             out.append(f"<h{level}>{html.escape(translations.get(block_id, str(item.get('text') or '')))}</h{level}>")
         elif kind == "text":
-            out.append(f"<p>{html.escape(translations.get(block_id, str(item.get('text') or '')))}</p>")
+            out.append(f"<p>{render_linked_text(item, translations.get(block_id, str(item.get('text') or '')))}</p>")
         elif kind == "quote":
-            out.append(f"<blockquote>{html.escape(translations.get(block_id, str(item.get('text') or '')))}</blockquote>")
+            out.append(f"<blockquote>{render_linked_text(item, translations.get(block_id, str(item.get('text') or '')))}</blockquote>")
         elif kind == "table":
             rows = item.get("rows") if isinstance(item.get("rows"), list) else []
             out.append(render_table(rows, translations, block_id))
