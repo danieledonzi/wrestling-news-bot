@@ -97,9 +97,9 @@ def extract_report_blocks(source_html: str, source_url: str) -> list[dict]:
             text = re.sub(r"\bResults by:\s*[^.]*?\bof Wrestleview\.com\s*", "", text, flags=re.I).strip()
         if text:
             blocks.append({"type": kind, "text": text, **metadata})
-            from modules.meta_embeds import linked_meta_urls, canonical_meta_url
-            urls = linked_meta_urls(node, source_url)
-            if urls and canonical_meta_url(text):
+            from modules.editorial_media_links import capture_inline_media, media_url
+            urls = capture_inline_media(blocks[-1], node, source_url) if kind in {"paragraph", "quote"} else []
+            if urls and media_url(text):
                 blocks.pop()
             blocks.extend({"type": "embed", "url": url} for url in urls)
 
