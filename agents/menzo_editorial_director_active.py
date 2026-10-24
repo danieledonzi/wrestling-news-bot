@@ -26,9 +26,9 @@ from agents.gemini_ledger import record_gemini_attempt
 ROOT = Path(__file__).resolve().parents[1]
 MODEL = shadow.MODEL
 SCHEMA_VERSION = "owtv_editorial_director_output_v7"
-POLICY_VERSION = "owtv_editorial_director_policy_v10_active"
+POLICY_VERSION = "owtv_editorial_director_policy_v11_active"
 SCHEMA_PATH = ROOT / "config/editorial_director_output_schema_v7.json"
-POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V10_ACTIVE.md"
+POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V11_ACTIVE.md"
 ADMISSION_SCHEMA_PATH = ROOT / "config/editorial_duplicate_admission_schema_v1.json"
 ADMISSION_POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_DUPLICATE_ADMISSION_POLICY_V2.md"
 RELATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_gate_schema_v7.json"
