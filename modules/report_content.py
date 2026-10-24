@@ -41,8 +41,14 @@ def clean_source_prose(text: str) -> str:
 
 
 def safe_embed_url(raw: str, base_url: str) -> str:
+    from modules.meta_embeds import canonical_meta_url
+    meta_url = canonical_meta_url(raw, base_url)
+    if meta_url:
+        return meta_url
     p = urlsplit(urljoin(base_url, raw.strip()))
     host = (p.hostname or "").lower().removeprefix("www.")
+    if host in {"instagram.com", "facebook.com", "m.facebook.com", "web.facebook.com"}:
+        return ""
     if p.scheme not in {"http", "https"} or p.username or p.password:
         return ""
     path = p.path.rstrip("/")
@@ -91,6 +97,11 @@ def extract_report_blocks(source_html: str, source_url: str) -> list[dict]:
             text = re.sub(r"\bResults by:\s*[^.]*?\bof Wrestleview\.com\s*", "", text, flags=re.I).strip()
         if text:
             blocks.append({"type": kind, "text": text, **metadata})
+            from modules.meta_embeds import linked_meta_urls, canonical_meta_url
+            urls = linked_meta_urls(node, source_url)
+            if urls and canonical_meta_url(text):
+                blocks.pop()
+            blocks.extend({"type": "embed", "url": url} for url in urls)
 
     def walk(node: Tag) -> None:
         lazy = node.get("data-rsn-html")
@@ -146,6 +157,8 @@ def extract_report_blocks(source_html: str, source_url: str) -> list[dict]:
                 for child in node.children:
                     inline(child)
                 flush()
+                from modules.meta_embeds import linked_meta_urls
+                blocks.extend({"type": "embed", "url": url} for url in linked_meta_urls(node, source_url))
         elif node.name == "img":
             src = node.get("data-src") or node.get("data-lazy-src") or node.get("src")
             if src and not str(src).startswith("data:"):
@@ -161,6 +174,17 @@ def extract_report_blocks(source_html: str, source_url: str) -> list[dict]:
     walk(root)
     from modules.simone_report_integrity import cleanup_blocks
     blocks, _diagnostics = cleanup_blocks(blocks, source_url)
+    from modules.meta_embeds import canonical_meta_url
+    seen_meta = set()
+    ordered = []
+    for block in blocks:
+        url = canonical_meta_url(block.get("url", "")) if block.get("type") == "embed" else ""
+        if url and url in seen_meta:
+            continue
+        if url:
+            seen_meta.add(url)
+        ordered.append(block)
+    blocks = ordered
     if not any(b["type"] == "paragraph" for b in blocks):
         raise ValueError("Report has no substantive text")
     return blocks
