@@ -26,14 +26,25 @@ from agents.gemini_ledger import record_gemini_attempt
 ROOT = Path(__file__).resolve().parents[1]
 MODEL = shadow.MODEL
 SCHEMA_VERSION = "owtv_editorial_director_output_v7"
-POLICY_VERSION = "owtv_editorial_director_policy_v10_active"
+POLICY_VERSION = "owtv_editorial_director_policy_v11_active"
 SCHEMA_PATH = ROOT / "config/editorial_director_output_schema_v7.json"
-POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V10_ACTIVE.md"
+POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_GEMINI_EDITORIAL_DIRECTOR_POLICY_V11_ACTIVE.md"
 ADMISSION_SCHEMA_PATH = ROOT / "config/editorial_duplicate_admission_schema_v1.json"
 ADMISSION_POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_DUPLICATE_ADMISSION_POLICY_V2.md"
 RELATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_gate_schema_v7.json"
 RELATION_POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_DUPLICATE_JUDGMENT_POLICY_V5.md"
 EVENT_REGISTRY_PATH = ROOT / "config/event_registry.json"
+# Preserve the installed V10/V5 cache namespace across primary-only policy bumps.
+# Duplicate policy/schema/model/material still contribute their own fingerprints.
+DUPLICATE_CACHE_POLICY_VERSION = "owtv_editorial_director_policy_v10_active"
+
+
+def duplicate_contract_fingerprint():
+    return pair_cache.contract_fingerprint(policy_version=DUPLICATE_CACHE_POLICY_VERSION, model=MODEL,
+        policy_path=RELATION_POLICY_PATH, gate_schema_path=RELATION_SCHEMA_PATH,
+        event_registry_path=EVENT_REGISTRY_PATH)
+
+
 BOB_CAPACITY_FIELDS = ("article_type", "source_title", "category_hint", "reason",
                        "ai_editorial_reason", "event_key", "show_report_id", "show_name",
                        "special_event_match", "event_report_key", "corresponding_report_published",
@@ -700,10 +711,7 @@ def _evaluate_duplicate_stage(snapshot: Mapping[str, Any], *, provider: Callable
     digest = hashlib.sha256(RELATION_POLICY_PATH.read_bytes()).hexdigest()
     call = provider
     authorized = list(snapshot.get("authorized_relations", []))
-    contract = pair_cache.contract_fingerprint(
-        policy_version=POLICY_VERSION, model=MODEL, policy_path=RELATION_POLICY_PATH,
-        gate_schema_path=RELATION_SCHEMA_PATH,
-        event_registry_path=EVENT_REGISTRY_PATH)
+    contract = duplicate_contract_fingerprint()
     cache = pair_cache.load()
     active_event(
         "duplicate_pair_cache_cycle", "Menzo", "duplicate", "success",
@@ -891,8 +899,7 @@ def _preserve_cached_duplicate_admissions(snapshot: Mapping[str, Any], relations
 
     The full gate still checks exact endpoint material before applying/reusing it.
     """
-    contract = pair_cache.contract_fingerprint(policy_version=POLICY_VERSION, model=MODEL,
-        policy_path=RELATION_POLICY_PATH, gate_schema_path=RELATION_SCHEMA_PATH, event_registry_path=EVENT_REGISTRY_PATH)
+    contract = duplicate_contract_fingerprint()
     current = {row['candidate_id'] for row in snapshot.get('candidates', [])}
     history = {row['article_id'] for row in snapshot.get('publisher_history_12h', [])}
     included = {row['pair_id'] for row in relations}

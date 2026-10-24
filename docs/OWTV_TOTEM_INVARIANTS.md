@@ -340,3 +340,29 @@ same material and contract; no repair or second semantic vote is introduced.
 agreement and preserves negation, causality, attribution and uncertainty. Complete text, quotes and media order
 remain mandatory. Apply instructions within the existing translation call/model route; no global string-replacement
 rules, additional translation pass, source biopic or CTA is authorized.
+
+
+## TOTEM-N03 — Mandatory current show facts
+
+**Owner-approved clarification: 2026-10-24.** Current autonomous feed news reporting concrete facts that actually
+occurred on followed shows is MUST in the FIRST valid primary classification: match results/retentions, title
+changes, returns/debuts, storyline actions, attacks/challenges and official announcements made during the show,
+including newly confirmed future matches. Timely post-show coverage of the same fact retains this rule.
+The V11 primary policy records the binding positive/negative examples. Generic SHOULD examples, significance
+thresholds and the priority flag cannot downgrade these facts. coverage_priority is false for MUST.
+Previews, speculative rundown spoilers, rumors, generic reactions and stale recaps do not qualify; a routine leak
+about who might open tonight's show is SKIP, not priority SHOULD. Report independence and feed-URL-only input remain
+unchanged: no news extraction from reports. Duplicate authority and technical safeguards still precede publication.
+MUST is pressure-exempt under P01; this is a first-classification rule, not a later promotion. Existing C01 decisions
+and terminal skips remain final, including previously accepted legacy SHOULD. No migration or reclassification.
+This explicitly supersedes N01's old SHOULD minimum for these show facts and P01's live-SHOULD wording only within
+this scope. Off-show news retains the stricter V10 quality floor and the 25/30 rolling pressure gate.
+The single false duplicate observed in the isolated replay remains a monitoring signal; duplicate V5, admission,
+validators, source extraction and model routing are not changed by this amendment.
+
+
+Implementation guard for N03: the duplicate-cache namespace is independent of primary classification policy.
+Keep the installed V10/V5 namespace for byte-compatible existing cache entries. Primary-only policy amendments
+must not invalidate final verdicts or prevent preservation of cached DUPLICATE admissions. Changes to duplicate
+policy/schema/model/material continue to invalidate through their existing contract fingerprints. No verdict or
+cache record is migrated or rewritten by this clarification.

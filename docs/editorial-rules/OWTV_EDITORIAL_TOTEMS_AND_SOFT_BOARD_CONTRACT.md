@@ -28,6 +28,13 @@ contract where inconsistent: the current gate is rolling 24h, ordinary selection
 without class rewriting. MUST, report autonomy, soft midnight expiry and duplicate safeguards remain in force.
 Primary V10 and duplicate V5 are current; old primary rows are reused without migration calls.
 
+## Followed-show clarification — 2026-10-24
+
+TOTEM-N03 now makes current concrete followed-show feed facts MUST at first classification, including actual
+results and official announcements made during the show about future matches. Pre-show spoilers do not qualify.
+V11 primary policy is current. No existing class/terminal decision is migrated; P01 pressure remains for off-show
+news and soft selection. Report independence, duplicate authority and technical safeguards remain unchanged.
+
 ## 1. Duplicate authority is above every editorial class
 
 Primary editorial classification precedes semantic duplicate work. SKIP is discarded before semantic comparisons.

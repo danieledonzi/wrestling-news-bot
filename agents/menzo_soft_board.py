@@ -349,9 +349,7 @@ def _revalidate_pool_duplicates(pool: list[dict[str, Any]], *, provider=None) ->
         contract = snapshot.get('_active_source_contracts', {}).get(row['candidate_id'])
         if contract:
             original['canonical_source_body'] = copy.deepcopy(contract)
-    contract = active.pair_cache.contract_fingerprint(policy_version=active.POLICY_VERSION, model=active.MODEL,
-        policy_path=active.RELATION_POLICY_PATH, gate_schema_path=active.RELATION_SCHEMA_PATH,
-        event_registry_path=active.EVENT_REGISTRY_PATH)
+    contract = active.duplicate_contract_fingerprint()
     eligible_ids = {row['candidate_id'] for row in snapshot['candidates']} | {
         row['article_id'] for row in snapshot['publisher_history_12h']}
     signature = hashlib.sha256(json.dumps({

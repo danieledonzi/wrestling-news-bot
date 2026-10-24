@@ -90,7 +90,7 @@ def test_show_identity_reaches_primary_without_pacing_or_history():
         assert data['candidates'][0]['show_report_id'] == 'raw'
         assert data['history'] == data['authorized_relations'] == []
         assert 'publication_context' not in data
-        assert 'at least\nSHOULD_PUBLISH' in prompt
+        assert 'assign MUST_PUBLISH and coverage_priority=false' in prompt
         return classify(['SHOULD_PUBLISH', 'SKIP'])
     result = active.evaluate(s, provider=provider)
     projected = active.project(s, result)

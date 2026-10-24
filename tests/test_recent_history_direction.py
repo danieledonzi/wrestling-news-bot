@@ -31,9 +31,7 @@ def state():
 
 
 def contract():
-    return cache.contract_fingerprint(policy_version=active.POLICY_VERSION, model=active.MODEL,
-        policy_path=active.RELATION_POLICY_PATH, gate_schema_path=active.RELATION_SCHEMA_PATH,
-        event_registry_path=active.EVENT_REGISTRY_PATH)
+    return active.duplicate_contract_fingerprint()
 
 
 def materials(value):
