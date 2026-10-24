@@ -396,7 +396,7 @@ def test_already_published_does_not_consume_last_daily_slot(monkeypatch, tmp_pat
     monkeypatch.setattr(publisher, "write_json", lambda *args: None)
 
     result = publisher.run_publisher({"approved_articles": [
-        {"source_url": old_url, "title_it": "Existing"},
+        {"source_url": old_url, "title_it": "Existing", "editorial_director": {"editorial_class": "SHOULD_PUBLISH", "coverage_priority": True}},
         {"source_url": new_url, "title_it": "New", "editorial_director": {"editorial_class": "SHOULD_PUBLISH", "coverage_priority": True}},
     ]})
 
