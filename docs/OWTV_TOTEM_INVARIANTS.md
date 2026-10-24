@@ -359,3 +359,10 @@ This explicitly supersedes N01's old SHOULD minimum for these show facts and P01
 this scope. Off-show news retains the stricter V10 quality floor and the 25/30 rolling pressure gate.
 The single false duplicate observed in the isolated replay remains a monitoring signal; duplicate V5, admission,
 validators, source extraction and model routing are not changed by this amendment.
+
+
+Implementation guard for N03: the duplicate-cache namespace is independent of primary classification policy.
+Keep the installed V10/V5 namespace for byte-compatible existing cache entries. Primary-only policy amendments
+must not invalidate final verdicts or prevent preservation of cached DUPLICATE admissions. Changes to duplicate
+policy/schema/model/material continue to invalidate through their existing contract fingerprints. No verdict or
+cache record is migrated or rewritten by this clarification.

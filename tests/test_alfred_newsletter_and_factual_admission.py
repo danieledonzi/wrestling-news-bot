@@ -139,9 +139,7 @@ def test_evidence_keeps_provider_endpoint_binding_when_pair_ids_are_sorted():
 
 def test_old_admission_cache_cannot_reinsert_pairs_but_current_decisions_remain_binding(monkeypatch):
     def fingerprint():
-        return pair_cache.contract_fingerprint(policy_version=active.POLICY_VERSION, model=active.MODEL,
-            policy_path=active.RELATION_POLICY_PATH, gate_schema_path=active.RELATION_SCHEMA_PATH,
-            event_registry_path=active.EVENT_REGISTRY_PATH)
+        return active.duplicate_contract_fingerprint()
     current_contract = fingerprint()
     with monkeypatch.context() as old:
         old.setattr(admission, 'FINAL_JUDGMENT_BINDING_VERSION', 'totem-d01-anchored-material-admission-v5')
@@ -162,9 +160,7 @@ def test_old_admission_cache_cannot_reinsert_pairs_but_current_decisions_remain_
 
 def test_cached_duplicate_restores_original_endpoint_facts_without_affecting_cache_identity(tmp_path, monkeypatch):
     monkeypatch.setattr(pair_cache, 'CACHE_FILE', tmp_path / 'pairs.json')
-    contract = pair_cache.contract_fingerprint(policy_version=active.POLICY_VERSION, model=active.MODEL,
-        policy_path=active.RELATION_POLICY_PATH, gate_schema_path=active.RELATION_SCHEMA_PATH,
-        event_registry_path=active.EVENT_REGISTRY_PATH)
+    contract = active.duplicate_contract_fingerprint()
     relations, errors = admission.validate({'admission_complete': True,
         'suspected_duplicates': [suspicion()]}, election(1, 1), [], 300)
     assert not errors

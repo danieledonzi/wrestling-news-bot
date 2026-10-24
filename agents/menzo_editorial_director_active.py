@@ -34,6 +34,17 @@ ADMISSION_POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_DUPLICATE_ADMISSION_PO
 RELATION_SCHEMA_PATH = ROOT / "config/editorial_director_duplicate_gate_schema_v7.json"
 RELATION_POLICY_PATH = ROOT / "docs/editorial-rules/OWTV_DUPLICATE_JUDGMENT_POLICY_V5.md"
 EVENT_REGISTRY_PATH = ROOT / "config/event_registry.json"
+# Preserve the installed V10/V5 cache namespace across primary-only policy bumps.
+# Duplicate policy/schema/model/material still contribute their own fingerprints.
+DUPLICATE_CACHE_POLICY_VERSION = "owtv_editorial_director_policy_v10_active"
+
+
+def duplicate_contract_fingerprint():
+    return pair_cache.contract_fingerprint(policy_version=DUPLICATE_CACHE_POLICY_VERSION, model=MODEL,
+        policy_path=RELATION_POLICY_PATH, gate_schema_path=RELATION_SCHEMA_PATH,
+        event_registry_path=EVENT_REGISTRY_PATH)
+
+
 BOB_CAPACITY_FIELDS = ("article_type", "source_title", "category_hint", "reason",
                        "ai_editorial_reason", "event_key", "show_report_id", "show_name",
                        "special_event_match", "event_report_key", "corresponding_report_published",
@@ -700,10 +711,7 @@ def _evaluate_duplicate_stage(snapshot: Mapping[str, Any], *, provider: Callable
     digest = hashlib.sha256(RELATION_POLICY_PATH.read_bytes()).hexdigest()
     call = provider
     authorized = list(snapshot.get("authorized_relations", []))
-    contract = pair_cache.contract_fingerprint(
-        policy_version=POLICY_VERSION, model=MODEL, policy_path=RELATION_POLICY_PATH,
-        gate_schema_path=RELATION_SCHEMA_PATH,
-        event_registry_path=EVENT_REGISTRY_PATH)
+    contract = duplicate_contract_fingerprint()
     cache = pair_cache.load()
     active_event(
         "duplicate_pair_cache_cycle", "Menzo", "duplicate", "success",
@@ -891,8 +899,7 @@ def _preserve_cached_duplicate_admissions(snapshot: Mapping[str, Any], relations
 
     The full gate still checks exact endpoint material before applying/reusing it.
     """
-    contract = pair_cache.contract_fingerprint(policy_version=POLICY_VERSION, model=MODEL,
-        policy_path=RELATION_POLICY_PATH, gate_schema_path=RELATION_SCHEMA_PATH, event_registry_path=EVENT_REGISTRY_PATH)
+    contract = duplicate_contract_fingerprint()
     current = {row['candidate_id'] for row in snapshot.get('candidates', [])}
     history = {row['article_id'] for row in snapshot.get('publisher_history_12h', [])}
     included = {row['pair_id'] for row in relations}
