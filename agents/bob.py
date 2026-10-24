@@ -360,6 +360,10 @@ def node_classes(node: Tag) -> str:
 
 
 def canonical_embed_url(url: str) -> str:
+    from modules.meta_embeds import canonical_meta_url
+    meta_url = canonical_meta_url(url)
+    if meta_url:
+        return meta_url
     url = html.unescape((url or "").replace("\\/", "/").strip())
     url = url.replace("https://twitter.com/", "https://x.com/").replace("http://twitter.com/", "https://x.com/")
     if "x.com/" in url or "twitter.com/" in url:
@@ -394,7 +398,8 @@ def is_valid_editorial_embed_url(url: str) -> bool:
     if host == "bsky.app":
         return "/post/" in path
     if host == "instagram.com":
-        return path.startswith(("/p/", "/reel/", "/tv/"))
+        from modules.meta_embeds import canonical_meta_url
+        return bool(canonical_meta_url(url))
     if host in {"youtube.com", "youtube-nocookie.com"}:
         return path.startswith(("/watch", "/embed/", "/shorts/")) and ("v=" in query or path.startswith(("/embed/", "/shorts/")))
     if host == "youtu.be":
@@ -404,7 +409,8 @@ def is_valid_editorial_embed_url(url: str) -> bool:
     if host == "threads.net":
         return "/post/" in path or "/t/" in path
     if host == "facebook.com":
-        return any(token in path for token in ["/posts/", "/videos/", "/watch/"])
+        from modules.meta_embeds import canonical_meta_url
+        return bool(canonical_meta_url(url))
     return False
 
 
@@ -583,6 +589,10 @@ def element_from_node(node: Tag, base_url: str) -> dict[str, Any] | None:
     if any(token in classes for token in ["share", "social-share", "gb-social", "follow", "newsletter"]):
         return None
     embed_url = extract_embed_url(node, base_url)
+    from modules.meta_embeds import canonical_meta_url
+    if canonical_meta_url(embed_url) and name in {"div", "blockquote"}:
+        if not any(marker in classes for marker in ["instagram-media", "fb-post", "fb-video", "wp-block-embed", "rsn-lazy-embed"]):
+            embed_url = ""
     if embed_url and (name in {"iframe", "blockquote", "figure", "div"} or any(x in classes for x in ["twitter", "tweet", "instagram", "embed", "youtube", "tiktok", "video"])):
         return {"type": "embed", "url": embed_url, "source_tag": name}
     if name in {"p", "li"}:
@@ -739,6 +749,13 @@ def extract_elements(source_url: str, raw_html: str) -> tuple[dict[str, str], li
                     continue
                 seen_text.add(key)
             raw_elements.append(item)
+            if item["type"] in {"text", "quote"} and name in {"p", "li", "blockquote"}:
+                from modules.meta_embeds import linked_meta_urls, canonical_meta_url
+                if not is_cta_text(item.get("text", "")):
+                    urls = linked_meta_urls(node, source_url)
+                    if urls and canonical_meta_url(item.get("text", "")):
+                        raw_elements.pop()
+                    raw_elements.extend({"type": "embed", "url": u, "source_tag": "editorial_link"} for u in urls)
         except Exception as exc:
             removed_by_node.append({"node_index": node_idx, "reason": "node_exception", "node_name": getattr(node, "name", ""), "error": str(exc)[:1000]})
     clean_elements, removed_by_sanitize = sanitize_elements(raw_elements, meta.get("featured_image", ""))
