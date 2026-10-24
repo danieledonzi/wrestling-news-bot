@@ -50,3 +50,8 @@ Older content is not automatically worse than newer content. Freshness matters a
 ## Output order
 
 Order `SOFT_MUST` candidates by publication preference, then `SOFT_SHOULD`, then `SOFT_SKIP`. Evaluate every supplied ref exactly once.
+
+
+Owner amendment 2026-10-24 (TOTEM-P01): rolling 24h pressure is additional supplied context. Soft capacity is zero
+once published news plus strong reservations reaches 25, even if calendar-day slots remain. No slot is a target.
+Rejected SHOULD never enters this board. All four soft quality criteria remain necessary even below 25.

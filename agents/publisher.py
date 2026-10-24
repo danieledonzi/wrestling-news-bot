@@ -832,18 +832,39 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
     overflow_articles: list[dict[str, Any]] = []
     new_articles_selected = 0
     projected_today = published_today
+    from agents import editorial_publication_policy as pressure
+    published_24h = pressure.published_count(history.values())
+    projected_24h = published_24h
+    pacing_skipped = []
+    from agents.menzo_policy_v93_15 import terminal_skip_memory
+    terminal_urls = terminal_skip_memory()
     for article in valid_articles:
         key = source_key(str(article.get("source_url") or article.get("url") or ""))
         if key and key in history:
             articles.append(article)
             continue
+        if key in terminal_urls:
+            item = pressure.terminal_skip(article, str(terminal_urls[key].get('reason') or 'terminal_skip_memory'),
+                                          projected_24h, stage='before_publication')
+            item.update(source_url=str(article.get('source_url') or article.get('url') or ''),
+                        title_it=str(article.get('title_it') or ''), status='skipped')
+            pacing_skipped.append(item)
+            continue
         cls = primary_class(article)
+        rejection = pressure.rejection_reason(article, projected_24h)
+        if rejection:
+            item = pressure.terminal_skip(article, rejection, projected_24h, stage='before_publication')
+            item.update(source_url=str(article.get('source_url') or article.get('url') or ''),
+                        title_it=str(article.get('title_it') or ''), status='skipped')
+            pacing_skipped.append(item)
+            continue
         # MUST is a totem and does not consume the ordinary per-run budget.
         # This mirrors Bob's MUST exemption and prevents validated mandatory
         # coverage from being discarded at Publisher.
         if cls == "MUST_PUBLISH":
             articles.append(article)
             projected_today += 1
+            projected_24h += 1
             continue
         if new_articles_selected >= MAX_POSTS_PER_RUN:
             overflow_articles.append({**article, "_publisher_capacity_reason": f"publisher_max_posts_per_run:{MAX_POSTS_PER_RUN}"})
@@ -852,11 +873,13 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
             articles.append(article)
             new_articles_selected += 1
             projected_today += 1
+            projected_24h += 1
             continue
         if projected_today < 30:
             articles.append(article)
             new_articles_selected += 1
             projected_today += 1
+            projected_24h += 1
         else:
             overflow_articles.append({**article, "_publisher_capacity_reason": "daily_news_ceiling:30_soft_only"})
 
@@ -872,6 +895,9 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
         }
         for article in overflow_articles
     ]
+    from agents.menzo_policy_v93_15 import save_hard_skips
+    save_hard_skips({'skipped': pacing_skipped})
+    safety_skipped.extend(pacing_skipped)
     results_for_audit = results + capacity_skipped + safety_skipped
     if not DRY_RUN and wp_ok:
         history = publisher_history_retention.prune_history(history)
@@ -882,7 +908,7 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
         "version": PUBLISHER_VERSION,
         "generated_at": utc_now(),
         "mode": "wordpress_publisher_mixed_embed_blocks",
-        "input": {"alfred_version": alfred.get("version") if isinstance(alfred, dict) else None, "approved_articles": approved_total, "attempted_articles": len(articles), "max_posts_per_run": MAX_POSTS_PER_RUN, "published_news_today_local": published_today, "remaining_news_slots_today": daily_slots, "daily_news_ceiling": 30, "capacity_skipped": len(capacity_skipped)},
+        "input": {"alfred_version": alfred.get("version") if isinstance(alfred, dict) else None, "approved_articles": approved_total, "attempted_articles": len(articles), "max_posts_per_run": MAX_POSTS_PER_RUN, "published_news_today_local": published_today, "remaining_news_slots_today": daily_slots, "daily_news_ceiling": 30, "capacity_skipped": len(capacity_skipped), "publication_pressure_policy": pressure.POLICY_VERSION, "published_news_24h": published_24h, "publication_pressure_skipped": len(pacing_skipped)},
         "wp": {"ready": wp_ok, "reason": wp_reason, "post_status": POST_STATUS, "dry_run": DRY_RUN},
         "publisher_safety_error": safety_error,
         "results": results + safety_skipped,

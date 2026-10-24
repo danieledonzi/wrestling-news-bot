@@ -3613,7 +3613,7 @@ def save_hard_skips(result: dict[str, Any]) -> None:
     now = utc_now()
     by_url = {key: dict(row) for key, row in terminal_skip_memory().items()}
     terminal_authorities = {"editorial_director", "deterministic_exact_duplicate",
-                            "semantic_duplicate_gate", "softpool_decay", "soft_board"}
+                            "semantic_duplicate_gate", "softpool_decay", "soft_board", "editorial_pacing"}
     for item in result.get("skipped", []) if isinstance(result.get("skipped"), list) else []:
         if str(item.get("reason") or "").startswith(("skip:duplicate_arbitration_unresolved",
                 "skip:duplicate_pair_identity_unresolved", "active_fail_closed:")):

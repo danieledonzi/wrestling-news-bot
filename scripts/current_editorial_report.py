@@ -346,6 +346,34 @@ def observed_patterns(analysis: dict, weekly: dict, current_version: str | None)
     return patterns
 
 
+def publication_pressure_observation(runs, since, until):
+    """Decision-time observations, never sums of rolling snapshot counters."""
+    observations, rejected, publisher_rejected = [], {}, {}
+    for run in runs:
+        at = run_time(run)
+        if not at or not since <= at <= until:
+            continue
+        pressure = ((run.get('editorial_pipeline') or {}).get('scheduling') or {}).get('publication_pressure')
+        if isinstance(pressure, dict):
+            observations.append({'at': at.isoformat(), **pressure})
+            for row in pressure.get('terminal_skipped', []):
+                if isinstance(row, dict) and url_key(row):
+                    rejected[url_key(row)] = row
+        for row in (run.get('menzo') or {}).get('skipped_sample', []):
+            if str(row.get('reason') or '').startswith('publication_pressure:') and url_key(row):
+                rejected.setdefault(url_key(row), compact(row))
+        for section in ('results', 'skipped_approved_articles', 'skipped'):
+            for row in (run.get('publisher') or {}).get(section, []):
+                if isinstance(row, dict) and str(row.get('reason') or '').startswith('publication_pressure:') and url_key(row):
+                    publisher_rejected[url_key(row)] = compact(row)
+    return {'available': bool(observations), 'runs_observed': len(observations),
+        'observations': observations, 'terminal_skipped_unique_observed': len(set(rejected) | set(publisher_rejected)),
+        'terminal_skipped': list(rejected.values()), 'publisher_guard_skipped': list(publisher_rejected.values()),
+        'maximum_published_news_24h_at_decision': max((r['published_news_24h'] for r in observations), default=None),
+        'meaning': 'Contatori mobili al momento della selezione, non sommabili e non massimo continuo delle pubblicazioni. Esclusioni terminali per pressione, non duplicate, riclassificazioni o blocchi tecnici. Il campione pre-riforma non certifica assenza di scarti.',
+        'semantic_quality': 'requires_full_source_review; priority flag is not a quality certification'}
+
+
 def build_report(root: Path = ROOT, *, until: datetime | None = None, hours: int = 24,
                  snapshot: dict | None = None, release: dict | None = None,
                  quality_report: dict | None = None) -> dict:
@@ -446,6 +474,7 @@ def build_report(root: Path = ROOT, *, until: datetime | None = None, hours: int
             "reports_unique_separate": pub.get("unique_report_publications") if publication_complete else None,
             "news_by_first_class": dict(classes) if enriched_complete else None,
             "news_records": [{k: a.get(k) for k in ("url", "title", "first_class", "wp_link")} for a in published_rows.values()]},
+        "publication_pressure": publication_pressure_observation(runs, since, until),
         "lifecycle": analysis, "weekly": {"available": weekly["available"], "runs_observed": weekly["runs_observed"],
             "policy_versions": weekly["policy_versions"], "cohorts": weekly["cohorts"],
             "soft_status_run_observations": weekly["softpool"]["status_run_observations"]},
@@ -514,6 +543,9 @@ def render_summary(r: dict) -> str:
     lines += [f"Violazioni candidate nella versione attuale: {len(current_patterns)} pattern (vedi evidenze e limiti negli allegati).",
         f"Duplicate nel percorso primario: coppie ammesse uniche osservate {life['duplicates']['unique_admitted_pairs_observed']}; URL chiusi per duplicate {len(life['duplicates']['terminal_duplicate_urls'])}",
         f"Controlli di traduzione: {r['translation_signals']['status_counts'] if r['translation_signals']['available'] else 'n.d.'}; riprodotto non significa errore semantico."]
+    pressure = r.get('publication_pressure') or {}
+    lines.append(f"Progressività 24h mobili: run osservate {pressure.get('runs_observed', 0)}; scarti terminali unici osservati {pressure.get('terminal_skipped_unique_observed', 0) if pressure.get('available') else 'n.d.'}; massimo contatore osservato alla selezione {num(pressure.get('maximum_published_news_24h_at_decision'))}. Report esclusi; sotto 25 selezione ordinaria rigorosa, 25–29 MUST/SHOULD prioritari, da 30 MUST. Il contatore non si azzera a mezzanotte.")
+    lines.append("Qualità della riforma: verificare su fonti complete il valore autonomo degli SHOULD, la priorità congelata, i follow-up con almeno metà informazione nuova e la naturalezza/fedeltà delle traduzioni. Le metriche automatiche non certificano questi giudizi semantici.")
     overall = r["economics"]["overall"]
     lines.append(f"Costo Gemini calcolato a listino: {num(overall.get('complete_window_computed_list_price_cost'))} {overall.get('currency') or 'n.d.'}; copertura {overall['coverage']}")
     for name, partition in r['economics']['partitions'].items():

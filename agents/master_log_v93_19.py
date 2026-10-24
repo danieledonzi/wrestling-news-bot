@@ -313,7 +313,7 @@ def build_master_record(
             "duplicate_cache_hits": (run_summary.get("editorial_director_active") or {}).get("duplicate_pair_cache_hits", 0),
             "duplicate_cache_misses": (run_summary.get("editorial_director_active") or {}).get("duplicate_pair_cache_misses", 0),
             "scheduling": {key: value for key, value in (menzo.get("postprocess") or {}).items()
-                           if key.startswith(("priority_queue", "should_deferred", "strong_", "soft_board"))},
+                           if key.startswith(("priority_queue", "should_deferred", "strong_", "soft_board", "publication_pressure"))},
             "strong_pending": [compact_item(row) for row in pending_items
                                if (row.get("editorial_director") or {}).get("editorial_class") in {"MUST_PUBLISH", "SHOULD_PUBLISH"}],
         },
@@ -374,6 +374,7 @@ def build_master_record(
             "reviews": alfred_reviews,
         },
         "publisher": {
+            "input": publisher.get("input", {}),
             "version": publisher.get("version"),
             "handoff": publisher_h,
             "policy": publisher.get("policy", {}),
