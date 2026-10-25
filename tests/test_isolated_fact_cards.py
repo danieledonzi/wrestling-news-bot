@@ -359,3 +359,106 @@ def test_common_person_with_different_developments_still_excluded():
                           'specific_event_tags': [], 'development_tags': [tag]}]}
     assert history_evidence(card('lawsuit_dismissal_denied'),
                             card('separate_contract_announcement')) is None
+
+
+@pytest.mark.parametrize('field', ['episode_facets', 'development_tags', 'episode_tags'])
+@pytest.mark.parametrize('damage,detail', [
+    ('long', 'tag_too_long'), ('many', 'tag_array_too_large'),
+    ('empty', 'tag_empty'), ('type', 'tag_string_required')])
+def test_enrichment_tag_errors_identify_owned_fact_and_constraint(field, damage, detail):
+    payload = facts.source_input(article('blood-and-guts'))
+    card = facts.bind_extraction(extraction(payload), payload, 'f_blood')
+    enriched_input = facts.enrichment_input(payload, card)
+    raw = enrichment(enriched_input)
+    value = {'long': ['x' * 151], 'many': ['tag'] * 65, 'empty': [' '], 'type': [None]}[damage]
+    raw['facts'][0][field] = value
+    output, errors, _ = facts.validate_enrichment(raw, enriched_input)
+    assert output is None
+    error = next(e for e in errors if e.get('fields') == [field])
+    assert error['ref'] == 'f_blood.k1' and error['detail'] == detail
+    assert error['family'] == 'fact_card_shape'
+    assert 'x' * 151 not in json.dumps(errors)  # Diagnostics retain no rejected source text.
+    if damage == 'long':
+        assert error['actual'] == 151 and error['limit'] == 150
+    if damage == 'many':
+        assert error['actual'] == 65 and error['limit'] == 64
+
+
+def test_enrichment_schema_exposes_existing_bounds_and_valid_boundary_is_accepted():
+    payload = facts.source_input(article('blood-and-guts'))
+    card = facts.bind_extraction(extraction(payload), payload, 'f_blood')
+    enriched_input = facts.enrichment_input(payload, card)
+    schema = facts.enrichment_schema(enriched_input)
+    fields = schema['properties']['facts']['items']['properties']
+    for name in ('episode_facets', 'development_tags', 'episode_tags'):
+        assert fields[name]['maxItems'] == 64
+        assert fields[name]['items']['maxLength'] == 150
+        assert fields[name]['items']['minLength'] == 1
+        assert '150 characters' in fields[name]['items']['description']
+    identity = schema['properties']['identities']['items']['properties']
+    assert identity['canonical_name']['maxLength'] == 150
+    assert identity['identity_basis']['maxLength'] == 1500
+    raw = enrichment(enriched_input)
+    raw['facts'][0]['episode_tags'] = ['x' * 150] * 64
+    assert not facts.validate_enrichment(raw, enriched_input)[1]
+    raw['facts'][0]['episode_facets'] = ['invented_facet']
+    assert facts.validate_enrichment(raw, enriched_input)[1][0]['detail'] == 'unknown_episode_facet'
+
+
+def test_schema_bounds_reuse_valid_legacy_cards_and_pair_decisions_without_calls(monkeypatch):
+    bounded_schema = facts.enrichment_schema
+    with monkeypatch.context() as old:
+        old.setattr(facts, 'enrichment_schema', facts._legacy_enrichment_schema)
+        first = run(state(2, 1), Model())
+    assert facts.enrichment_schema is bounded_schema
+    second = run(state(2, 1), lambda *_: pytest.fail('valid old stages must not be regenerated'))
+    assert second['attempts'] == 0 and not second['held_candidate_ids']
+    assert [r['card_sha256'] for r in first['card_observations']] == [r['card_sha256'] for r in second['card_observations']]
+    assert all(r.get('cache_hit') for r in second['pair_dispositions'])
+
+
+def test_must_tag_hold_preserves_class_and_reuses_extraction(monkeypatch, tmp_path):
+    def mutate(phase, data, raw):
+        if phase == 'classification':
+            raw['candidates'][0]['editorial_class'] = 'MUST_PUBLISH'
+        elif phase == 'enrichment' and data['title'] == 'blood-and-guts':
+            raw['facts'][0]['episode_tags'] = ['x' * 151]
+        return raw
+    def opportunity():
+        return shadow.capture_opportunity({'news_candidates_for_menzo': [article('blood-and-guts'), article('independent-news')]},
+            run_id='must-card-hold', observation_timestamp='2026-10-25T18:55:13Z',
+            history=[], defer_relation_build=True)
+    value = opportunity()
+    first = active.evaluate(value, provider=Model(mutate=mutate))
+    assert first['status'] == 'VALIDATED' and len(first['source_material_holds']) == 1
+    frozen = copy.deepcopy(primary.load())
+    assert sorted(r['editorial_class'] for r in frozen.values()) == ['MUST_PUBLISH', 'SHOULD_PUBLISH']
+    error = next(error for attempt in first['validation_attempts']
+                 for error in attempt['validation_families'] if error['family'] == 'fact_card_shape')
+    assert error['fields'] == ['episode_tags'] and error['actual'] == 151
+    from agents import menzo_priority_queue, menzo_soft_board
+    monkeypatch.setattr(menzo_priority_queue, 'schedule', lambda *_: None)
+    monkeypatch.setattr(menzo_priority_queue, 'queue_path', lambda: tmp_path / 'priority.json')
+    def soft_board(projected, *_a, **_k):
+        return {**projected, 'allowed_urls_for_v92': []}
+    monkeypatch.setattr(menzo_soft_board, 'apply', soft_board)
+    monkeypatch.setattr(menzo, 'write_json', lambda *_: None)
+    projected = active.project(value, first)
+    pending = projected['pending'][0]
+    assert pending['reason'] == 'factual_admission_technical_hold'
+    assert pending['editorial_director']['editorial_class'] == 'MUST_PUBLISH'
+    assert '_factual_admission_technical_hold' not in pending
+    assert not menzo.terminal_skip_memory()
+    waiting = active.evaluate(opportunity(), provider=lambda *_: pytest.fail('backoff must not spend calls'))
+    assert len(waiting['source_material_holds']) == 1 and primary.load() == frozen
+    lookup = recovery.lookup
+    def expired(*args, **kwargs):
+        cached = lookup(*args, **kwargs)
+        return cached if cached and cached['status'] == 'VALIDATED' else None
+    monkeypatch.setattr(recovery, 'lookup', expired)
+    model = Model()
+    resumed = active.evaluate(opportunity(), provider=model)
+    assert not resumed['source_material_holds']
+    assert any(r['editorial_class'] == 'MUST_PUBLISH' for r in resumed['output']['candidates'])
+    assert [phase for phase, _, _ in model.calls] == ['enrichment', 'admission']
+    assert primary.load() == frozen and not menzo.terminal_skip_memory()

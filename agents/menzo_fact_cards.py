@@ -146,7 +146,7 @@ def enrichment_input(payload, card):
     return {**copy.deepcopy(payload), 'subjects': list(subjects.values()), 'fixed_facts': facts}
 
 
-def enrichment_schema(payload):
+def _legacy_enrichment_schema(payload):
     string = {'type': 'string'}
     unit = {'type': 'string', 'enum': [r['unit_id'] for r in payload['source_units']]}
     # No subject may exist (e.g. a data table). Empty enums are not valid provider schemas.
@@ -160,6 +160,51 @@ def enrichment_schema(payload):
                 'episode_facets': array({'type': 'string', 'enum': FACETS}), 'development_tags': array(string),
                 'episode_tags': array(string), 'source_unit_ids': array(unit)})
     return obj({'coverage_complete': {'type': 'boolean'}, 'identities': array(entity), 'facts': array(fact)})
+
+
+def enrichment_schema(payload):
+    """Expose the existing local bounds; accepted factual content is unchanged."""
+    schema = _legacy_enrichment_schema(payload)
+    fields = schema['properties']
+    for name in ('identities', 'facts'):
+        fields[name]['maxItems'] = min(256, len(payload['subjects' if name == 'identities' else 'fixed_facts']))
+        support = fields[name]['items']['properties']['source_unit_ids']
+        support.update(minItems=1, maxItems=64)
+        support['items'].update(minLength=1, maxLength=150)
+    identity = fields['identities']['items']['properties']
+    identity['canonical_name'] = {'type': 'string', 'minLength': 1, 'maxLength': 150}
+    # The legacy schema shares string objects: copy before assigning distinct bounds.
+    identity['identity_basis'] = {'type': 'string', 'minLength': 1, 'maxLength': 1500}
+    identity['aliases'] = {'type': 'array', 'maxItems': 64,
+                           'items': {'type': 'string', 'minLength': 1, 'maxLength': 150}}
+    fact = fields['facts']['items']['properties']
+    for name in ('episode_facets', 'development_tags', 'episode_tags'):
+        fact[name]['maxItems'] = 64
+        fact[name]['items'] = {**fact[name]['items'], 'minLength': 1, 'maxLength': 150,
+            'description': 'A non-empty tag, at most 150 characters; use concise normalized English labels.'}
+        fact[name]['description'] = ('At most 64 concise tags. Every tag must contain non-whitespace text '
+                                     'and be at most 150 characters. Use an empty list if no tag applies.')
+    return schema
+
+
+def _tag_error(value, field, ref):
+    """Bounded technical evidence only: never retain the rejected article text."""
+    error = {'family': 'fact_card_shape', 'fields': [field], 'ref': ref}
+    if not isinstance(value, list):
+        return {**error, 'detail': 'tag_array_required'}
+    if len(value) > 64:
+        return {**error, 'detail': 'tag_array_too_large', 'actual': len(value), 'limit': 64}
+    for index, tag in enumerate(value):
+        evidence = {**error, 'index': index}
+        if not isinstance(tag, str):
+            return {**evidence, 'detail': 'tag_string_required'}
+        if not tag.strip():
+            return {**evidence, 'detail': 'tag_empty'}
+        if len(tag.strip()) > 150:
+            return {**evidence, 'detail': 'tag_too_long', 'actual': len(tag.strip()), 'limit': 150}
+        if field == 'episode_facets' and tag not in FACETS:
+            return {**evidence, 'detail': 'unknown_episode_facet'}
+    return None
 
 
 def validate_enrichment(raw, payload):
@@ -188,9 +233,11 @@ def validate_enrichment(raw, payload):
                 if (not text(r.get('canonical_name'), 150) or not strings(r.get('aliases')) or
                         r.get('confidence') not in {'certain', 'uncertain'} or not text(r.get('identity_basis'))):
                     errors.append({'family': 'fact_card_shape', 'detail': 'invalid_identity'})
-            elif (not strings(r.get('episode_facets')) or any(f not in FACETS for f in r['episode_facets']) or
-                  not strings(r.get('development_tags')) or not strings(r.get('episode_tags'))):
-                errors.append({'family': 'fact_card_shape', 'detail': 'invalid_episode_tags'})
+            else:
+                for tag_field in ('episode_facets', 'development_tags', 'episode_tags'):
+                    error = _tag_error(r.get(tag_field), tag_field, r.get(ref))
+                    if error:
+                        errors.append(error)
     return (None if errors else copy.deepcopy(dict(raw))), errors, []
 
 
@@ -278,6 +325,16 @@ def obtain(row, cache, run_once, call, model, *, max_input_bytes):
                 raise ValueError('fact_card_input_limit')
             fingerprint = digest({'stage': stage, 'model': model, 'prompt': prompt, 'schema': schema, 'version': VERSION})
             raw = cache.get(fingerprint)
+            if raw is None and stage == 'editorial_fact_enrichment':
+                # Bounds do not change local acceptance. Revalidate old successes and
+                # preserve their provenance/card hashes, avoiding a history-wide replay.
+                legacy_fingerprint = digest({'stage': stage, 'model': model, 'prompt': prompt,
+                    'schema': _legacy_enrichment_schema(payload), 'version': VERSION})
+                legacy = cache.get(legacy_fingerprint)
+                if legacy is not None:
+                    _, legacy_errors, _ = validator(legacy, payload)
+                    if not legacy_errors:
+                        raw, fingerprint = legacy, legacy_fingerprint
             cached = raw is not None
             if cached:
                 output, failures, _ = validator(raw, payload)
