@@ -234,10 +234,10 @@ def test_factual_event_news_stays_with_menzo():
 
 
 def test_registry_trust_policy_and_multinight():
-    proposals = [{"promotion": p, "event_name": f"{p} Event", "dates": ["2026-08-01"]} for p in ["WWE", "AEW", "TNA", "ROH", "AAA"]]
+    proposals = [{"promotion": p, "event_name": f"{p} Event", "dates": ["2026-08-01"]} for p in ["WWE", "AEW", "TNA", "ROH", "AAA", "NJPW"]]
     proposals += [{"promotion": "WWE", "event_name": "Undated", "dates": []}, {"promotion": "WWE", "event_name": "Two Nights", "dates": ["2026-08-02", "2026-08-03"]}]
     effective, diag = build_effective_registry({"events": []}, proposals)
-    assert {e["promotion"] for e in effective["events"]} == {"WWE", "AEW", "TNA", "ROH"}
+    assert {e["promotion"] for e in effective["events"]} == {"WWE", "AEW", "TNA", "ROH", "AAA"}
     assert len(next(e for e in effective["events"] if e["event_name"] == "Two Nights")["nights"]) == 2
     assert {x["reason"] for x in diag["skipped"]} == {"excluded_promotion", "missing_concrete_date"}
 

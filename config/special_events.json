@@ -626,6 +626,208 @@
       "location": "Montreal, Quebec",
       "source": "wikipedia_schedule_auto_applied",
       "last_verified_at_utc": "2026-06-12T13:57:14Z"
+    },
+    {
+      "key": "aaa_heroes_inmortales_2026",
+      "promotion": "AAA",
+      "brand": "AAA",
+      "event_name": "Heroes Inmortales",
+      "event_type": "Special",
+      "priority": "major",
+      "status": "confirmed",
+      "coverage_policy": "report_and_post_event_freeze",
+      "category_hint": "World",
+      "timezone": "America/Mexico_City",
+      "replaces_weekly_report_ids": [
+        "aaa_on_fox"
+      ],
+      "aliases": [
+        "Heroes Inmortales",
+        "AAA Heroes Inmortales",
+        "Héroes Inmortales",
+        "AAA Héroes Inmortales"
+      ],
+      "nights": [
+        {
+          "night_key": "aaa_heroes_inmortales_2026_main",
+          "label": "Week 1",
+          "date_local": "2026-10-24",
+          "report_publish_after_local": "06:30",
+          "enabled": true,
+          "aliases": [
+            "Heroes Inmortales results",
+            "AAA Heroes Inmortales results"
+          ]
+        }
+      ],
+      "source": "https://www.wwe.com/shows/aaa/aaa-h-roes-inmortales-week-1-results",
+      "schedule_note": "Use broadcast dates; later weekly parts require separate dated identities. No inferred dates."
+    },
+    {
+      "key": "aaa_guerra_de_titanes_2026",
+      "promotion": "AAA",
+      "brand": "AAA",
+      "event_name": "Guerra de Titanes",
+      "event_type": "Special",
+      "priority": "major",
+      "status": "confirmed",
+      "coverage_policy": "report_and_post_event_freeze",
+      "category_hint": "World",
+      "timezone": "America/Mexico_City",
+      "replaces_weekly_report_ids": [
+        "aaa_on_fox"
+      ],
+      "aliases": [
+        "Guerra de Titanes",
+        "AAA Guerra de Titanes"
+      ],
+      "nights": [
+        {
+          "night_key": "aaa_guerra_de_titanes_2026_main",
+          "label": "Main show",
+          "date_local": "2026-12-19",
+          "report_publish_after_local": "06:30",
+          "enabled": true,
+          "aliases": [
+            "Guerra de Titanes results",
+            "AAA Guerra de Titanes results"
+          ]
+        }
+      ],
+      "source": "https://x.com/luchalibreaaa/status/2100661053646655991",
+      "schedule_note": "Use broadcast dates; later weekly parts require separate dated identities. No inferred dates."
+    },
+    {
+      "key": "aaa_rey_de_reyes_2026",
+      "promotion": "AAA",
+      "brand": "AAA",
+      "event_name": "Rey de Reyes",
+      "event_type": "Special",
+      "priority": "major",
+      "status": "expected",
+      "coverage_policy": "await_manual_confirmation",
+      "category_hint": "World",
+      "timezone": "America/Mexico_City",
+      "replaces_weekly_report_ids": [
+        "aaa_on_fox"
+      ],
+      "aliases": [
+        "Rey de Reyes",
+        "AAA Rey de Reyes"
+      ],
+      "nights": [],
+      "source": "owner_approved_aaa_identity_awaiting_confirmed_date",
+      "schedule_note": "Use broadcast dates; later weekly parts require separate dated identities. No inferred dates."
+    },
+    {
+      "key": "aaa_triplemania_2026",
+      "promotion": "AAA",
+      "brand": "AAA",
+      "event_name": "Triplemania",
+      "event_type": "Special",
+      "priority": "major",
+      "status": "expected",
+      "coverage_policy": "await_manual_confirmation",
+      "category_hint": "World",
+      "timezone": "America/Mexico_City",
+      "replaces_weekly_report_ids": [
+        "aaa_on_fox"
+      ],
+      "aliases": [
+        "Triplemania",
+        "AAA Triplemania"
+      ],
+      "nights": [],
+      "source": "owner_approved_aaa_identity_awaiting_confirmed_date",
+      "schedule_note": "Use broadcast dates; later weekly parts require separate dated identities. No inferred dates."
+    },
+    {
+      "key": "aaa_verano_de_escandalo_2026",
+      "promotion": "AAA",
+      "brand": "AAA",
+      "event_name": "Verano de Escandalo",
+      "event_type": "Special",
+      "priority": "major",
+      "status": "expected",
+      "coverage_policy": "await_manual_confirmation",
+      "category_hint": "World",
+      "timezone": "America/Mexico_City",
+      "replaces_weekly_report_ids": [
+        "aaa_on_fox"
+      ],
+      "aliases": [
+        "Verano de Escandalo",
+        "AAA Verano de Escandalo"
+      ],
+      "nights": [],
+      "source": "owner_approved_aaa_identity_awaiting_confirmed_date",
+      "schedule_note": "Use broadcast dates; later weekly parts require separate dated identities. No inferred dates."
+    },
+    {
+      "key": "aaa_noche_de_los_grandes_2026",
+      "promotion": "AAA",
+      "brand": "AAA",
+      "event_name": "Noche de los Grandes",
+      "event_type": "Special",
+      "priority": "major",
+      "status": "expected",
+      "coverage_policy": "await_manual_confirmation",
+      "category_hint": "World",
+      "timezone": "America/Mexico_City",
+      "replaces_weekly_report_ids": [
+        "aaa_on_fox"
+      ],
+      "aliases": [
+        "Noche de los Grandes",
+        "AAA Noche de los Grandes"
+      ],
+      "nights": [],
+      "source": "owner_approved_aaa_identity_awaiting_confirmed_date",
+      "schedule_note": "Use broadcast dates; later weekly parts require separate dated identities. No inferred dates."
+    },
+    {
+      "key": "aaa_alianzas_2026",
+      "promotion": "AAA",
+      "brand": "AAA",
+      "event_name": "Alianzas",
+      "event_type": "Special",
+      "priority": "major",
+      "status": "expected",
+      "coverage_policy": "await_manual_confirmation",
+      "category_hint": "World",
+      "timezone": "America/Mexico_City",
+      "replaces_weekly_report_ids": [
+        "aaa_on_fox"
+      ],
+      "aliases": [
+        "Alianzas",
+        "AAA Alianzas"
+      ],
+      "nights": [],
+      "source": "owner_approved_aaa_identity_awaiting_confirmed_date",
+      "schedule_note": "Use broadcast dates; later weekly parts require separate dated identities. No inferred dates."
+    },
+    {
+      "key": "aaa_eternal_glory_2026",
+      "promotion": "AAA",
+      "brand": "AAA",
+      "event_name": "Eternal Glory",
+      "event_type": "Special",
+      "priority": "major",
+      "status": "expected",
+      "coverage_policy": "await_manual_confirmation",
+      "category_hint": "World",
+      "timezone": "America/Mexico_City",
+      "replaces_weekly_report_ids": [
+        "aaa_on_fox"
+      ],
+      "aliases": [
+        "Eternal Glory",
+        "AAA Eternal Glory"
+      ],
+      "nights": [],
+      "source": "owner_approved_aaa_identity_awaiting_confirmed_date",
+      "schedule_note": "Use broadcast dates; later weekly parts require separate dated identities. No inferred dates."
     }
   ]
 }

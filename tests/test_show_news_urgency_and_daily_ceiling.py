@@ -241,7 +241,7 @@ def test_dynamic_threshold_uses_current_local_day(monkeypatch, tmp_path):
 
 def test_all_weekly_reports_follow_totem_0630():
     config = json.loads((menzo.ROOT / "config/reports_v92.json").read_text())
-    assert len(config["reports"]) == 6
+    assert len(config["reports"]) == 7
     assert {report["publish_after"] for report in config["reports"]} == {"06:30"}
 
 

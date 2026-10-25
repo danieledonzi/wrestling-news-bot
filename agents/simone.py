@@ -8,7 +8,7 @@ from zoneinfo import ZoneInfo
 from pathlib import Path
 from typing import Any
 
-from modules.simone_report_integrity import PENDING_REPORTS, candidate_date_evidence, dynamic_special_event_match, is_canonical_report_source, load_effective_registry, matches_weekly_result_identity, normalize_url, reserve_report, source_identity_text
+from modules.simone_report_integrity import PENDING_REPORTS, candidate_date_evidence, dynamic_special_event_match, is_canonical_report_source, load_effective_registry, matches_weekly_result_identity, normalize_url, reserve_report, source_identity_text, weekly_special_override
 from modules.simone_report_integrity import choose_report_source, report_source_name, REPORT_SOURCE_POLICY, REPORT_FALLBACK_AFTER_LOCAL
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -268,7 +268,7 @@ def candidate_matches_special_report(candidate: dict[str, Any], report: dict[str
         return False, "rejected_non_results_event_article"
     reports_cfg = load_json(REPORTS_CONFIG, {"reports": []})
     for weekly in reports_cfg.get("reports", []) if isinstance(reports_cfg, dict) else []:
-        if isinstance(weekly, dict) and matches_weekly_result_identity(explicit_raw, weekly, allow_branded_modifier=False):
+        if isinstance(weekly, dict) and matches_weekly_result_identity(explicit_raw, weekly, allow_branded_modifier=False, allow_special_editions=False):
             return False, "rejected_conflicting_weekly_identity"
     if not any(alias and alias in explicit_blob for alias in aliases):
         return False, "event_alias_not_found"
@@ -452,13 +452,15 @@ def _canonical_structured_special_match(candidate: dict[str, Any]) -> bool:
     return candidate_matches_special_report(candidate, report, legacy_lock=True)[0]
 
 
-def candidate_report_identity(candidate: dict[str, Any], report: dict[str, Any], date_iso: str, *, legacy_lock: bool = False) -> tuple[bool, str]:
+def candidate_report_identity(candidate: dict[str, Any], report: dict[str, Any], date_iso: str, *, legacy_lock: bool = False, registry: dict[str, Any] | None = None) -> tuple[bool, str]:
     explicit = source_identity_text(candidate)
     if not is_canonical_report_source(candidate, legacy_lock=legacy_lock) or not re.search(r"\b(results|risultati)\b", explicit, re.I):
         return False, "waiting_for_canonical_results_source"
     if _canonical_structured_special_match(candidate):
         return False, "rejected_special_event_as_weekly"
-    special_cfg = load_json(SPECIAL_EVENTS_CONFIG, {"events": []})
+    special_cfg = registry if registry is not None else load_json(SPECIAL_EVENTS_CONFIG, {"events": []})
+    if weekly_special_override(report, date_iso, special_cfg):
+        return False, "replaced_by_scheduled_special"
     special, _reason = dynamic_special_event_match(candidate, special_cfg)
     if special:
         return False, "rejected_special_event_as_weekly"
@@ -469,8 +471,8 @@ def candidate_report_identity(candidate: dict[str, Any], report: dict[str, Any],
     return True, "canonical_results_match"
 
 
-def candidate_matches_report(candidate: dict[str, Any], report: dict[str, Any], date_iso: str, *, legacy_lock: bool = False) -> bool:
-    return candidate_report_identity(candidate, report, date_iso, legacy_lock=legacy_lock)[0]
+def candidate_matches_report(candidate: dict[str, Any], report: dict[str, Any], date_iso: str, *, legacy_lock: bool = False, registry: dict[str, Any] | None = None) -> bool:
+    return candidate_report_identity(candidate, report, date_iso, legacy_lock=legacy_lock, registry=registry)[0]
 
 def candidate_published_score(candidate: dict[str, Any]) -> str:
     raw = str(candidate.get("published") or candidate.get("published_at") or "")
@@ -541,7 +543,7 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
         weekly_cfg = next((x for x in reports if isinstance(x, dict) and str(x.get("id")) == str(row.get("report_id"))), None)
         special_report = next((x for x in expected_special if str(x.get("report_key")) == key), None)
         candidate = _pending_candidate(row)
-        valid = candidate_matches_report(candidate, weekly_cfg, str(row.get("date_local") or ""), legacy_lock=True) if weekly_cfg else bool(special_report and candidate_matches_special_report(candidate, special_report, legacy_lock=True)[0])
+        valid = candidate_matches_report(candidate, weekly_cfg, str(row.get("date_local") or ""), legacy_lock=True, registry=special_cfg) if weekly_cfg else bool(special_report and candidate_matches_special_report(candidate, special_report, legacy_lock=True)[0])
         if not valid and (weekly_cfg or special_report):
             row["status"] = "invalid_canonical_identity"
             row["identity_reason"] = "invalid_canonical_identity"
@@ -602,6 +604,12 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
             continue
         report_id = str(report.get("id") or "")
         report_key, date_iso, publish_date_iso = discovery_report_identity(report, now)
+        override = weekly_special_override(report, date_iso, special_cfg)
+        if override:
+            skipped.append({"report_id": report_id, "report_key": report_key,
+                            "decision": "skip", "reason": "replaced_by_scheduled_special",
+                            "event_key": override.get("key"), "date": date_iso})
+            continue
         title = build_report_title(report, date_iso)
         completed = {**report, 'report_id': report_id, 'report_key': report_key, 'title': title, 'date': date_iso}
         if report_already_published(completed, status, publication_registry, manual_runs):
@@ -715,7 +723,7 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
         weekly_cfg = next((x for x in reports if isinstance(x, dict) and str(x.get("id")) == str(pending_row.get("report_id"))), None)
         special_expected_row = next((x for x in expected_special if str(x.get("report_key")) == key), None)
         candidate = _pending_candidate(pending_row)
-        valid = candidate_matches_report(candidate, weekly_cfg, str(pending_row.get("date_local") or ""), legacy_lock=True) if weekly_cfg else bool(special_expected_row and candidate_matches_special_report(candidate, special_expected_row, legacy_lock=True)[0])
+        valid = candidate_matches_report(candidate, weekly_cfg, str(pending_row.get("date_local") or ""), legacy_lock=True, registry=special_cfg) if weekly_cfg else bool(special_expected_row and candidate_matches_special_report(candidate, special_expected_row, legacy_lock=True)[0])
         if not valid and (weekly_cfg or special_expected_row):
             pending_row["status"] = "invalid_canonical_identity"
             pending_row["identity_reason"] = "invalid_canonical_identity"
@@ -745,7 +753,7 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
         if not pending_due(row, now):
             row["status"] = "waiting_publish_after"; waiting.append({**report, "decision": "waiting", "reason": "waiting_publish_after"})
             continue
-        valid_pending = candidate_matches_report(report, weekly_cfg, str(row.get("date_local") or ""), legacy_lock=True) if weekly_cfg else bool(special_expected and candidate_matches_special_report(report, special_expected, legacy_lock=True)[0])
+        valid_pending = candidate_matches_report(report, weekly_cfg, str(row.get("date_local") or ""), legacy_lock=True, registry=special_cfg) if weekly_cfg else bool(special_expected and candidate_matches_special_report(report, special_expected, legacy_lock=True)[0])
         if not valid_pending:
             row["status"] = "invalid_canonical_identity"
             skipped.append({**report, "decision": "skip", "reason": "invalid_canonical_identity"})
