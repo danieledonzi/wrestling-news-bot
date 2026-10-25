@@ -933,7 +933,7 @@ def _technical_failures(failures):
     return [{key: (value[:80] if isinstance(value, str) else value)
              for key, value in row.items() if key in
              {'family', 'detail', 'ref', 'missing_refs', 'fields', 'left_ref', 'right_ref',
-              'candidate_count', 'history_count'}} for row in failures]
+              'candidate_count', 'history_count', 'index', 'actual', 'limit'}} for row in failures]
 
 
 def _run_once(snapshot, call, prompt, schema, phase, policy_path, validate, *, cache_success=False,
@@ -1160,6 +1160,7 @@ def _evaluate_complete(snapshot: dict[str, Any], material: Any, *, provider=None
     admission_result = _admit(election, call)
     # Missing card/assessment data is an explicit source HOLD, never a class change.
     admission_held = set(admission_result.get('held_candidate_ids', []))
+    snapshot['_factual_admission_held_ids'] = sorted(admission_held)
     for row in snapshot['candidates']:
         if row['candidate_id'] in admission_held:
             material.hold(row, 'factual_admission_technical_hold', retry_after=admission_result.get('retry_after'))
@@ -1414,11 +1415,14 @@ def project(snapshot: Mapping[str, Any], result: Mapping[str, Any], *, soft_boar
         for row in snapshot.get('source_material_holds', []):
             item = copy.deepcopy(row)
             duplicate_hold = item.pop('_duplicate_technical_hold', False)
+            admission_hold = row.get('candidate_id') in snapshot.get('_factual_admission_held_ids', [])
             entry = frozen_primary.get(primary_store.key(item))
             item.pop('candidate_id', None)
             item.update(decision='defer',
                         decision_authority='duplicate_technical_hold' if duplicate_hold else 'source_material_technical_hold',
-                        reason='duplicate_gate_technical_hold' if duplicate_hold else 'complete_source_material_unavailable')
+                        reason=('duplicate_gate_technical_hold' if duplicate_hold else
+                                'factual_admission_technical_hold' if admission_hold else
+                                'complete_source_material_unavailable'))
             if entry:
                 item['editorial_director'] = {**copy.deepcopy(entry), 'decision_authority': 'editorial_director'}
             projected['pending'].append(item)

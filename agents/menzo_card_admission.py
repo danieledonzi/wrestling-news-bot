@@ -200,7 +200,9 @@ def execute(snapshot, call, run_once, *, model, max_input_bytes):
                        'article_kind': card['article_kind'] if card else None,
                        'extraction_cache_hit': operation.get('extraction_cache_hit', False),
                        'enrichment_cache_hit': operation.get('enrichment_cache_hit', False),
-                       'reason': operation.get('fallback_reason')}
+                       'reason': operation.get('fallback_reason'),
+                       'validation_errors': copy.deepcopy(operation.get('validation_errors', []))[:16],
+                       'retry_after': operation.get('retry_after')}
             result['card_observations'].append(profile)
             emit('editorial_card_observation', 'success' if card else 'pending', profile)
             if card:
