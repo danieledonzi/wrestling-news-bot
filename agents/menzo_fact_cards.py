@@ -167,23 +167,23 @@ def enrichment_schema(payload):
     schema = _legacy_enrichment_schema(payload)
     fields = schema['properties']
     for name in ('identities', 'facts'):
-        fields[name]['maxItems'] = min(256, len(payload['subjects' if name == 'identities' else 'fixed_facts']))
+        fields[name]['description'] = 'Return each supplied reference exactly once; at most 256 rows.'
         support = fields[name]['items']['properties']['source_unit_ids']
-        support.update(minItems=1, maxItems=64)
-        support['items'].update(minLength=1, maxLength=150)
+        support['description'] = 'Between 1 and 64 local source-unit references, each at most 150 characters.'
     identity = fields['identities']['items']['properties']
-    identity['canonical_name'] = {'type': 'string', 'minLength': 1, 'maxLength': 150}
+    identity['canonical_name'] = {'type': 'string', 'description': 'Nonblank canonical name; at most 150 characters.'}
     # The legacy schema shares string objects: copy before assigning distinct bounds.
-    identity['identity_basis'] = {'type': 'string', 'minLength': 1, 'maxLength': 1500}
-    identity['aliases'] = {'type': 'array', 'maxItems': 64,
-                           'items': {'type': 'string', 'minLength': 1, 'maxLength': 150}}
+    identity['identity_basis'] = {'type': 'string', 'description': 'Nonblank identification basis; at most 1500 characters.'}
+    identity['aliases'] = {'type': 'array', 'description': 'At most 64 nonblank aliases, each at most 150 characters.',
+                           'items': {'type': 'string'}}
     fact = fields['facts']['items']['properties']
     for name in ('episode_facets', 'development_tags', 'episode_tags'):
-        fact[name]['maxItems'] = 64
-        fact[name]['items'] = {**fact[name]['items'], 'minLength': 1, 'maxLength': 150,
+        fact[name]['items'] = {**fact[name]['items'],
             'description': 'A non-empty tag, at most 150 characters; use concise normalized English labels.'}
         fact[name]['description'] = ('At most 64 concise tags. Every tag must contain non-whitespace text '
                                      'and be at most 150 characters. Use an empty list if no tag applies.')
+    # GenerateContent rejects the nested hard bounds for real cards. Descriptions
+    # communicate the limits; the unchanged local validator enforces them.
     return schema
 
 
