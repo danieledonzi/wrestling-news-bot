@@ -391,13 +391,12 @@ def test_enrichment_schema_exposes_existing_bounds_and_valid_boundary_is_accepte
     schema = facts.enrichment_schema(enriched_input)
     fields = schema['properties']['facts']['items']['properties']
     for name in ('episode_facets', 'development_tags', 'episode_tags'):
-        assert fields[name]['maxItems'] == 64
-        assert fields[name]['items']['maxLength'] == 150
-        assert fields[name]['items']['minLength'] == 1
+        assert '64' in fields[name]['description']
         assert '150 characters' in fields[name]['items']['description']
     identity = schema['properties']['identities']['items']['properties']
-    assert identity['canonical_name']['maxLength'] == 150
-    assert identity['identity_basis']['maxLength'] == 1500
+    assert '150 characters' in identity['canonical_name']['description']
+    assert '1500 characters' in identity['identity_basis']['description']
+    assert not any(key in json.dumps(schema) for key in ('maxItems', 'minItems', 'maxLength', 'minLength'))
     raw = enrichment(enriched_input)
     raw['facts'][0]['episode_tags'] = ['x' * 150] * 64
     assert not facts.validate_enrichment(raw, enriched_input)[1]

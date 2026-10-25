@@ -8,6 +8,8 @@ The WrestlingInc women's Blood & Guts announcement was classified MUST on its co
 
 The provider schema omitted bounds enforced locally: nonblank strings, 150 characters per tag, 64 tags per array. This mismatch reproduces the same rejection with synthetic inputs. The correction exposes the existing bounds and concise-tag instructions in enrichment schema descriptions; local validation remains authoritative. Google documents that string length keywords are not enforced during constrained decoding, so descriptions guide generation and local checks remain necessary: https://ai.google.dev/gemini-api/docs/structured-output . No claim is made that schema annotations guarantee every future response will validate.
 
+Production compatibility validation caught a 400 INVALID_ARGUMENT for the first schema with nested hard bounds. The compatible transport keeps the established schema structure and expresses numeric limits through supported descriptions; local checks still enforce every bound. This avoids sending unsupported/overcomplex hard constraints. The failed response had no generation usage; a subsequent isolated compatibility check, if performed, is explicitly attributed as a test in the Gemini ledger. No provider repair loop is added.
+
 ## Resulting behavior
 
 - Enrichment schema exposes the existing bounds for tag lists, identities, and evidence lists. Exact owned-reference checks remain unchanged.
