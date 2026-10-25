@@ -105,3 +105,17 @@ def test_runtime_special_invalidates_pending_weekly_lock(tmp_path,monkeypatch):
     row=json.loads(paths['PENDING_REPORTS'].read_text())['reports'][0]
     assert row['status']=='invalid_canonical_identity' and row['canonical_source_locked'] is False
     assert any(r['event_key']=='aaa_runtime_special_2026' for r in result['special_missing'])
+
+
+def test_fresh_calendar_cache_includes_new_curated_aaa_events(tmp_path,monkeypatch):
+    seed=tmp_path/'seed.json';cache=tmp_path/'cache.json'
+    seed.write_text(json.dumps(CFG))
+    legacy={'key':'other_live_event','status':'completed','nights':[{'date_local':'2026-10-24'}]}
+    cache.write_text(json.dumps({'refreshed_at_utc':'2026-10-25T06:00:00+00:00','events':[legacy]}))
+    monkeypatch.setattr(integrity,'SEED_REGISTRY',seed)
+    monkeypatch.setattr(integrity,'EFFECTIVE_REGISTRY',cache)
+    registry,diag=integrity.load_effective_registry(datetime(2026,10,25,7,tzinfo=ZoneInfo('UTC')))
+    assert diag['refresh_status']=='fresh_cache'
+    assert registry['events'][0]==legacy
+    assert next(e for e in registry['events'] if e['key']=='aaa_heroes_inmortales_2026')['nights'][0]['date_local']=='2026-10-24'
+    assert json.loads(cache.read_text())==registry

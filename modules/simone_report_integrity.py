@@ -295,6 +295,11 @@ def load_effective_registry(now: datetime | None = None) -> tuple[dict[str, Any]
         } if isinstance(seed, dict) else {}
         runtime_owned = {"status", "nights", "venue", "location", "source", "last_verified_at_utc"}
         changed = False
+        known_keys = {str(e.get("key")) for e in prior.get("events", []) if isinstance(e, dict)}
+        for key, curated in seed_events.items():
+            if key not in known_keys:
+                prior["events"].append(copy.deepcopy(curated))
+                changed = True
         for event in prior.get("events", []):
             if not isinstance(event, dict):
                 continue
