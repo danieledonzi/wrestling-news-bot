@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
-from modules.simone_report_integrity import configured_special_event_identity, dynamic_special_event_match, is_canonical_report_source, load_effective_registry, special_event_report_identity
+from modules.simone_report_integrity import configured_special_event_identity, dynamic_special_event_match, is_canonical_report_source, load_effective_registry, matches_weekly_result_identity, source_identity_text, special_event_report_identity
 
 try:
     import feedparser  # type: ignore
@@ -262,6 +262,12 @@ def report_hint(entry: dict[str, Any], special_registry: dict[str, Any] | None =
             event_match, dynamic_reason = dynamic_special_event_match(entry, special_registry or {})
         entry["special_event_match"] = event_match
         return str(event_match.get("event_name") or event_match.get("event_key")), dynamic_reason
+    # Configured full results identities are routed before primary news judgment.
+    cfg = load_json(REPORTS_CONFIG, {"reports": []})
+    for weekly in cfg.get("reports", []):
+        if (isinstance(weekly, dict) and weekly.get("enabled", True) and weekly.get("route_explicit_results") is True
+                and matches_weekly_result_identity(source_identity_text(entry), weekly)):
+            return str(weekly.get("show_name")), "weekly_show_results"
     title_url_has_results_hint = (
         "results" in title_url_normalized
         or "risultati" in title_url_normalized

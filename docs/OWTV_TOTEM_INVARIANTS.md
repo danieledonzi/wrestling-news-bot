@@ -29,6 +29,8 @@ Existing architectural guardrails continue to apply, but where interpretation is
 
 This single rule applies to every configured report-producing event: weekly shows, PLE, PPV, and confirmed special events. PLE/PPV must not have a separate, weaker semantic identity policy.
 
+AAA weekly broadcasts and confirmed AAA specials use this same Simone contract. A special with `replaces_weekly_report_ids` owns the weekly slot on its exact broadcast date: one report, never a weekly and a special report for that same transmission. Taping dates do not imply dates for later televised parts. Undated expected specials do not create report jobs. Reports remain outside ordinary news classification and news publication counts.
+
 ### B. Due time
 
 For an event/show dated **D**, its report is due at **06:30 Europe/Rome on calendar day D+1**.

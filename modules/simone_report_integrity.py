@@ -22,7 +22,7 @@ EFFECTIVE_REGISTRY = ROOT / "state" / "newsroom" / "special_events_effective.jso
 PENDING_REPORTS = ROOT / "state" / "newsroom" / "simone_pending_reports.json"
 SCHEDULE_REPORT_DIR = ROOT / "reports"
 SCHEDULE_RUNTIME_DIR = ROOT / "state" / "newsroom" / "special_events_schedule_runtime"
-TRUSTED_PROMOTIONS = {"WWE", "AEW", "TNA", "ROH"}
+TRUSTED_PROMOTIONS = {"WWE", "AEW", "TNA", "ROH", "AAA"}
 CANONICAL_REPORT_SOURCE = "ringsidenews"
 FALLBACK_REPORT_SOURCE = "wrestleview"
 REPORT_FALLBACK_AFTER_LOCAL = "08:30"
@@ -153,11 +153,16 @@ def matches_full_show_branded_weekly_identity(explicit: str, report: dict[str, A
     return bool(show_name and re.search(rf"\b{re.escape(show_name)}(?:\s+[a-z0-9]+){{1,3}}\s+(?:results?|risultati)\b", blob))
 
 
-def matches_weekly_result_identity(explicit: str, report: dict[str, Any], *, allow_branded_modifier: bool = True) -> bool:
+def matches_weekly_result_identity(explicit: str, report: dict[str, Any], *, allow_branded_modifier: bool = True, allow_special_editions: bool = True) -> bool:
     """Match a weekly results identity only against explicit title/URL material."""
     blob = _slug(explicit).replace("_", " ")
     if any(re.search(rf"\b{re.escape(identity)}\b", blob) for identity in weekly_result_identities(report)):
         return True
+    if allow_special_editions:
+        for alias in report.get("special_edition_aliases", []):
+            name = _slug(str(alias)).replace("_", " ")
+            if name and re.search(rf"\b{re.escape(name)}(?:\s+week\s+\d+)?\s+(?:results|risultati)\b", blob):
+                return True
     if not allow_branded_modifier:
         return False
     # Branded editions retain the full configured show identity but can place a
@@ -165,6 +170,18 @@ def matches_weekly_result_identity(explicit: str, report: dict[str, Any], *, all
     # this deliberately bounded and do not apply it to broad keyword aliases.
     return matches_full_show_branded_weekly_identity(explicit, report)
 
+
+
+def weekly_special_override(report: dict[str, Any], date_iso: str, registry: dict[str, Any]) -> dict[str, Any] | None:
+    """A confirmed special broadcast owns the weekly slot on that exact date."""
+    for event in registry.get("events", []):
+        if (not isinstance(event, dict) or event.get("status") not in {"confirmed", "active"}
+                or report.get("id") not in (event.get("replaces_weekly_report_ids") or [])):
+            continue
+        if any(isinstance(n, dict) and n.get("enabled", True) and n.get("date_local") == date_iso
+               for n in event.get("nights", [])):
+            return event
+    return None
 
 def _nights(key: str, dates: list[str], promotion: str, name: str) -> list[dict[str, Any]]:
     dates = sorted(set(dates))
@@ -183,7 +200,7 @@ def _proposal_event(row: dict[str, Any]) -> tuple[dict[str, Any] | None, str]:
     if not name:
         return None, "missing_event_name"
     key = f"{promotion.lower()}_{_slug(name)}_{dates[0][:4]}"
-    return {"key": key, "promotion": promotion, "brand": row.get("brand") or promotion, "event_name": name, "aliases": sorted(set([name, f"{promotion} {name}"] + list(row.get("aliases") or []))), "status": "confirmed", "coverage_policy": "multi_night_report_and_post_event_freeze" if len(dates) > 1 else "report_and_post_event_freeze", "category_hint": promotion, "nights": _nights(key, dates, promotion, name), "venue": row.get("venue"), "location": row.get("location"), "source": row.get("source") or "trusted_structured_schedule", "last_verified_at_utc": datetime.now(timezone.utc).isoformat()}, "trusted_dated_event"
+    return {"key": key, "promotion": promotion, "brand": row.get("brand") or promotion, "event_name": name, "aliases": sorted(set([name, f"{promotion} {name}"] + list(row.get("aliases") or []))), "status": "confirmed", "coverage_policy": "multi_night_report_and_post_event_freeze" if len(dates) > 1 else "report_and_post_event_freeze", "category_hint": "World" if promotion == "AAA" else promotion, **({"replaces_weekly_report_ids": ["aaa_on_fox"], "timezone": "America/Mexico_City"} if promotion == "AAA" else {}), "nights": _nights(key, dates, promotion, name), "venue": row.get("venue"), "location": row.get("location"), "source": row.get("source") or "trusted_structured_schedule", "last_verified_at_utc": datetime.now(timezone.utc).isoformat()}, "trusted_dated_event"
 
 
 def build_effective_registry(seed: dict[str, Any], proposals: Iterable[dict[str, Any]]) -> tuple[dict[str, Any], dict[str, Any]]:
@@ -390,7 +407,7 @@ def configured_special_event_identity(entry: dict[str, Any], registry: dict[str,
         return None, "rejected_non_results_event_article"
     weekly_cfg = _load(REPORTS_CONFIG, {"reports": []})
     for weekly in weekly_cfg.get("reports", []) if isinstance(weekly_cfg, dict) else []:
-        if isinstance(weekly, dict) and matches_weekly_result_identity(raw, weekly, allow_branded_modifier=False):
+        if isinstance(weekly, dict) and matches_weekly_result_identity(raw, weekly, allow_branded_modifier=False, allow_special_editions=False):
             return None, "rejected_conflicting_weekly_identity"
     blob = _slug(raw).replace("_", " ")
     matches: list[tuple[int, dict[str, Any]]] = []

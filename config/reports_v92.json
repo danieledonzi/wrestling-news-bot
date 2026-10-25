@@ -13,7 +13,11 @@
       "preferred_source": "ringsidenews",
       "fallback_source": "wrestleview",
       "title_template": "WWE Raw del {date_it} - risultati e momenti salienti",
-      "match_keywords": ["wwe raw", "raw results", "wwe raw results"]
+      "match_keywords": [
+        "wwe raw",
+        "raw results",
+        "wwe raw results"
+      ]
     },
     {
       "id": "wwe_smackdown",
@@ -28,7 +32,11 @@
       "preferred_source": "ringsidenews",
       "fallback_source": "wrestleview",
       "title_template": "WWE SmackDown del {date_it} - risultati e momenti salienti",
-      "match_keywords": ["wwe smackdown", "smackdown results", "wwe smackdown results"]
+      "match_keywords": [
+        "wwe smackdown",
+        "smackdown results",
+        "wwe smackdown results"
+      ]
     },
     {
       "id": "wwe_nxt",
@@ -43,7 +51,11 @@
       "preferred_source": "ringsidenews",
       "fallback_source": "wrestleview",
       "title_template": "WWE NXT del {date_it} - risultati e momenti salienti",
-      "match_keywords": ["wwe nxt", "nxt results", "wwe nxt results"]
+      "match_keywords": [
+        "wwe nxt",
+        "nxt results",
+        "wwe nxt results"
+      ]
     },
     {
       "id": "aew_dynamite",
@@ -58,7 +70,11 @@
       "preferred_source": "ringsidenews",
       "fallback_source": "wrestleview",
       "title_template": "AEW Dynamite del {date_it} - risultati e momenti salienti",
-      "match_keywords": ["aew dynamite", "dynamite results", "aew dynamite results"]
+      "match_keywords": [
+        "aew dynamite",
+        "dynamite results",
+        "aew dynamite results"
+      ]
     },
     {
       "id": "aew_collision",
@@ -73,7 +89,11 @@
       "preferred_source": "ringsidenews",
       "fallback_source": "wrestleview",
       "title_template": "AEW Collision del {date_it} - risultati e momenti salienti",
-      "match_keywords": ["aew collision", "collision results", "aew collision results"]
+      "match_keywords": [
+        "aew collision",
+        "collision results",
+        "aew collision results"
+      ]
     },
     {
       "id": "tna_impact",
@@ -88,7 +108,46 @@
       "preferred_source": "ringsidenews",
       "fallback_source": "wrestleview",
       "title_template": "TNA Impact del {date_it} - risultati e momenti salienti",
-      "match_keywords": ["tna impact", "impact results", "tna impact results", "impact wrestling results"]
+      "match_keywords": [
+        "tna impact",
+        "impact results",
+        "tna impact results",
+        "impact wrestling results"
+      ]
+    },
+    {
+      "id": "aaa_on_fox",
+      "enabled": true,
+      "company": "AAA",
+      "category": "World",
+      "editorial_category": "Editoriali",
+      "show_name": "Lucha Libre AAA",
+      "expected_day_after": "Sunday",
+      "show_date_offset_days": 1,
+      "publish_after": "06:30",
+      "preferred_source": "ringsidenews",
+      "fallback_source": "wrestleview",
+      "title_template": "Lucha Libre AAA del {date_it} - risultati e momenti salienti",
+      "match_keywords": [
+        "lucha libre aaa results",
+        "aaa on fox results",
+        "aaa fox results",
+        "aaa results"
+      ],
+      "special_edition_aliases": [
+        "AAA Heroes Inmortales",
+        "AAA Héroes Inmortales",
+        "AAA Guerra de Titanes",
+        "AAA Rey de Reyes",
+        "AAA Triplemania",
+        "AAA Triplemanía",
+        "AAA Verano de Escandalo",
+        "AAA Verano de Escándalo",
+        "AAA Noche de los Grandes",
+        "AAA Alianzas",
+        "AAA Eternal Glory"
+      ],
+      "route_explicit_results": true
     }
   ]
 }
