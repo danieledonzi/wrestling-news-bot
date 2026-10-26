@@ -95,10 +95,46 @@ def cta_text(value: str) -> str:
     return ". ".join(text for block in blocks if (text := clean_text(block)))
 
 
+def _single_quoted_segments(text: str, opening: str, closing: str) -> list[str]:
+    segments: list[str] = []
+    start: int | None = None
+    for index, char in enumerate(text):
+        if char == "\n":
+            start = None
+            continue
+        if char not in {opening, closing}:
+            continue
+        before = text[index - 1] if index else ""
+        after = text[index + 1] if index + 1 < len(text) else ""
+        left_word = bool(before) and (before.isalnum() or before == "_")
+        right_word = bool(after) and (after.isalnum() or after == "_")
+        if left_word and right_word:
+            continue  # An elision/contraction inside a word, never a delimiter.
+        if start is not None and char == closing and not right_word:
+            segments.append(text[start:index])
+            # James' work / the wrestlers' return can be possessives *inside*
+            # speech. Keep the short interpretation and the enclosing one;
+            # a subsequent explicit opening quote starts a new quotation.
+            if before.lower() != "s" or not re.compile(r"\s+\w").match(text, index + 1):
+                start = None
+        elif char == opening and not left_word:
+            start = index + 1
+    return segments
+
+
 def extract_quoted_segments(text: str) -> list[str]:
     segments: list[str] = []
-    for pattern in [r"\"([^\"]{8,})\"", r"“([^”]{8,})”", r"'([^']{8,})'"]:
-        segments.extend(re.findall(pattern, text or ""))
+    patterns = [
+        # Consume short quotations too, before filtering their length. Otherwise
+        # a short name's closing quote can be mistaken for the next opening.
+        r'"([^"\n]*)"',
+        r"“([^”\n]*)”",
+        r"«([^»\n]*)»",
+    ]
+    for pattern in patterns:
+        segments.extend(segment for segment in re.findall(pattern, text or "") if len(segment) >= 8)
+    for opening, closing in [("'", "'"), ("‘", "’")]:
+        segments.extend(segment for segment in _single_quoted_segments(text or "", opening, closing) if len(segment) >= 8)
     return segments
 
 
