@@ -51,14 +51,15 @@ def test_italian_elisions_and_english_contractions_are_not_quote_delimiters(apos
 
 
 @pytest.mark.parametrize("opening,closing", [('"', '"'), ("“", "”"), ("'", "'"), ("‘", "’"), ("«", "»")])
-def test_real_english_quotes_still_block(opening, closing, monkeypatch):
-    body = FIXTURES[0]["body_html"] + f"<p>Ha dichiarato: {opening}{ENGLISH}{closing}.</p>"
+@pytest.mark.parametrize("padding", ["", " "])
+def test_real_english_quotes_still_block(opening, closing, padding, monkeypatch):
+    body = FIXTURES[0]["body_html"] + f"<p>Ha dichiarato: {opening}{padding}{ENGLISH}{padding}{closing}.</p>"
     source = article(body)
     monkeypatch.setattr(policy, "call_quote_resolver_gemini", lambda *a, **k: pytest.fail("Clear English needs no resolver"))
     review, _, _ = policy.refine_review(alfred.review_article(source), source)
 
     assert review["decision"] == "needs_revision"
-    assert any(i["code"] == "untranslated_quote" and i["evidence"] == ENGLISH for i in review["issues"])
+    assert any(i["code"] == "untranslated_quote" and i["evidence"].strip() == ENGLISH for i in review["issues"])
     assert review["approved_article"] is None
 
 
@@ -96,3 +97,9 @@ def test_one_apostrophe_change_cannot_restore_the_vic_joseph_false_positive():
 def test_short_names_do_not_shift_double_quote_pairing():
     text = f'Il programma "WWE NXT" contiene "Beyond The Bell". Ha dichiarato: "{ENGLISH}".'
     assert alfred.extract_quoted_segments(text) == ["Beyond The Bell", ENGLISH]
+
+
+@pytest.mark.parametrize("opening,closing", [('"', '"'), ("“", "”"), ("'", "'"), ("‘", "’"), ("«", "»")])
+def test_empty_quotes_do_not_shift_the_next_real_quote(opening, closing):
+    text = f"Il titolo {opening}{closing} precede {opening}{ENGLISH}{closing}."
+    assert alfred.extract_quoted_segments(text) == [ENGLISH]

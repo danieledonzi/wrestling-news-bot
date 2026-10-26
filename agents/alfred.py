@@ -106,8 +106,8 @@ def extract_quoted_segments(text: str) -> list[str]:
         # Single quote delimiters need word boundaries: l'universo and don't
         # contain apostrophes, not quote openings/closings. Internal apostrophes
         # remain part of a real quotation, including English contractions.
-        r"(?<!\w)'(?=\S)([^\n]*?\S)'(?!\w)",
-        r"(?<!\w)‘(?=\S)([^\n]*?\S)’(?!\w)",
+        r"(?<!\w)'([^\n]*?)'(?!\w)",
+        r"(?<!\w)‘([^\n]*?)’(?!\w)",
     ]
     for pattern in patterns:
         segments.extend(segment for segment in re.findall(pattern, text or "") if len(segment) >= 8)

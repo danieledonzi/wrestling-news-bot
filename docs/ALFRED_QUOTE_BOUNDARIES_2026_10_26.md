@@ -14,7 +14,7 @@ triggered the existing language heuristic. The resolver identified branding but
 correctly could not allow the whole long expression under the short-name rule.
 The fourth translation passed with a different incidental pairing of apostrophes.
 
-Single-quote delimiters now require word boundaries and nonblank content;
+Single-quote delimiters now require word boundaries;
 contractions and elisions remain part of the quoted text. Straight double and
 typographic quotes consume short pairs before the existing eight-character
 filter, so a short name such as `WWE NXT` cannot shift subsequent delimiter pairs.
