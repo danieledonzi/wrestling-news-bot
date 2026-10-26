@@ -103,3 +103,20 @@ def test_short_names_do_not_shift_double_quote_pairing():
 def test_empty_quotes_do_not_shift_the_next_real_quote(opening, closing):
     text = f"Il titolo {opening}{closing} precede {opening}{ENGLISH}{closing}."
     assert alfred.extract_quoted_segments(text) == [ENGLISH]
+
+
+@pytest.mark.parametrize("opening,closing", [("'", "'"), ("‘", "’")])
+@pytest.mark.parametrize("subject", ["James", "The wrestlers"])
+def test_possessive_apostrophes_do_not_hide_the_rest_of_english_speech(opening, closing, subject):
+    phrase = f"{subject}{closing} work will show the world what we can do"
+    source = article(FIXTURES[0]["body_html"] + f"<p>Ha dichiarato: {opening}{phrase}{closing}.</p>")
+    assert phrase in alfred.extract_quoted_segments(alfred.clean_text(source["body_html"]))
+    review = alfred.review_article(source)
+    assert review["decision"] == "needs_revision"
+    assert any(i["code"] == "untranslated_quote" and i["evidence"] == phrase for i in review["issues"])
+
+
+def test_quote_ending_in_s_is_still_checked_before_another_quotation():
+    first = "We will return to the ring and work with us"
+    text = f"Ha detto '{first}' e poi ha aggiunto '{ENGLISH}'."
+    assert alfred.extract_quoted_segments(text) == [first, ENGLISH]

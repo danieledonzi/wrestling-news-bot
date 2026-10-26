@@ -15,7 +15,9 @@ correctly could not allow the whole long expression under the short-name rule.
 The fourth translation passed with a different incidental pairing of apostrophes.
 
 Single-quote delimiters now require word boundaries;
-contractions and elisions remain part of the quoted text. Straight double and
+contractions and elisions remain part of the quoted text. Ambiguous possessives
+such as `James' work` retain both the shorter and enclosing quote interpretation
+so the remainder of English speech still receives the language check. Straight double and
 typographic quotes consume short pairs before the existing eight-character
 filter, so a short name such as `WWE NXT` cannot shift subsequent delimiter pairs.
 Curly single quotes and guillemets are covered by the same extraction contract.
