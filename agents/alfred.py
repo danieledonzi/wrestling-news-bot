@@ -97,8 +97,20 @@ def cta_text(value: str) -> str:
 
 def extract_quoted_segments(text: str) -> list[str]:
     segments: list[str] = []
-    for pattern in [r"\"([^\"]{8,})\"", r"“([^”]{8,})”", r"'([^']{8,})'"]:
-        segments.extend(re.findall(pattern, text or ""))
+    patterns = [
+        # Consume short quotations too, before filtering their length. Otherwise
+        # a short name's closing quote can be mistaken for the next opening.
+        r'"([^"\n]*)"',
+        r"“([^”\n]*)”",
+        r"«([^»\n]*)»",
+        # Single quote delimiters need word boundaries: l'universo and don't
+        # contain apostrophes, not quote openings/closings. Internal apostrophes
+        # remain part of a real quotation, including English contractions.
+        r"(?<!\w)'(?=\S)([^\n]*?\S)'(?!\w)",
+        r"(?<!\w)‘(?=\S)([^\n]*?\S)’(?!\w)",
+    ]
+    for pattern in patterns:
+        segments.extend(segment for segment in re.findall(pattern, text or "") if len(segment) >= 8)
     return segments
 
 
