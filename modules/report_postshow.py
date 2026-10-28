@@ -9,17 +9,19 @@ import html
 import json
 import re
 
+from modules.report_content import PRESHOW_RE
+
 TEXT_TYPES = {"heading", "paragraph", "quote"}
 RESULTS_HEADING = re.compile(r"\bresults(?:\s*\(|\s*:|\s*$|\s+(?:and|&|live|highlights)\b)", re.I)
 NARRATIVE_START = re.compile(r"^The show (?:opens|starts|begins)\b|^The (?:announcers|commentators) welcome\b", re.I)
-RESULT_EVIDENCE = re.compile(r"^(?:The\s+)?winners?\b|\b(?:defeated|retained|retains|won the match|match (?:ends|ended)|ended in (?:a )?(?:draw|no contest))\b|\bdef\.", re.I)
-FUTURE_RESULT = re.compile(r"\bwill (?:face|challenge|defend|meet|take|compete)\b", re.I)
+RESULT_EVIDENCE = re.compile(r"^(?:The\s+)?winners?\b|\b(?:wins?|won|defeats?|defeated|pins?|pinned|submits?|submitted|retained|retains|match (?:ends|ended)|ended in (?:a )?(?:draw|no contest))\b|\bdef\.", re.I)
+FUTURE_RESULT = re.compile(r"\bwill (?:face|challenge|defend|meet|take|compete|win|defeat|pin|submit|retain)\b", re.I)
 
 
 def plan_postshow(blocks: list[dict]) -> dict | None:
     """Only replace a positively bounded preamble, never guess a match boundary."""
     boundary = next((i for i, b in enumerate(blocks) if
-        b.get("type") == "heading" and RESULTS_HEADING.search(b.get("text", ""))
+        b.get("type") == "heading" and (RESULTS_HEADING.search(b.get("text", "")) or PRESHOW_RE.search(b.get("text", "")))
         or b.get("type") == "paragraph" and not b.get("list_type")
         and NARRATIVE_START.search(b.get("text", ""))), None)
     if boundary is None or boundary == 0:
@@ -143,6 +145,7 @@ def validate_postshow(raw: object, plan: dict) -> dict:
 
 
 def render_postshow(plan: dict, blocks: list[dict] | None = None, translated: dict | None = None) -> str:
+    from modules.editorial_media_links import render_linked_text, strip_link_markers
     final = validate_postshow(plan.get("final"), plan)
     out = ["<p>" + html.escape(final["intro"]["text"]) + "</p>"]
     if final["card"]:
@@ -151,6 +154,7 @@ def render_postshow(plan: dict, blocks: list[dict] | None = None, translated: di
             prefix = {"CANCELLED": "Cancellato: ", "CHANGED": "Programma modificato: "}.get(entry["status"], "")
             suffix = " — esito non riportato nella fonte." if entry["status"] == "UNCONFIRMED" else ""
             text = entry["text"]
+            rendered = html.escape(text)
             if entry["status"] == "HELD" and blocks is not None and translated is not None:
                 result_index = entry["result_index"]
                 # Use the actual match heading and result already translated in
@@ -159,7 +163,10 @@ def render_postshow(plan: dict, blocks: list[dict] | None = None, translated: di
                 heading = next((i for i in range(result_index - 1, plan["body_start"] - 1, -1)
                                 if blocks[i].get("type") == "heading"), None)
                 label = translated[heading] if heading is not None and not RESULTS_HEADING.search(blocks[heading].get("text", "")) else ""
-                text = (label + " — " if label else "") + translated[result_index]
-            out.append("<li>" + prefix + html.escape(text) + suffix + "</li>")
+                result_block = blocks[result_index]
+                result = (render_linked_text(result_block, translated[result_index]) if result_block.get("inline_media_links")
+                          else html.escape(strip_link_markers(translated[result_index])))
+                rendered = (html.escape(strip_link_markers(label)) + " — " if label else "") + result
+            out.append("<li>" + prefix + rendered + suffix + "</li>")
         out.append("</ul>")
     return "\n".join(out)

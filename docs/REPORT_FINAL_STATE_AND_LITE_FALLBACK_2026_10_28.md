@@ -5,7 +5,7 @@ show, and use `gemini-3.5-flash-lite` as the first fallback before Pro.
 
 ## Report behavior
 
-- An explicit results heading or recognizable opening narration bounds the
+- An explicit pre-show/results heading or recognizable opening narration bounds the
   replaceable source preamble. The chronological report, quotations, final
   segment, media and source block indexes are preserved.
 - The first existing translation batch sees the complete source narrative and
@@ -78,3 +78,8 @@ Verify the deployed commit, compile changed Python files, inspect the effective
 chains after loading `.env`, and run read-only rendering/pricing checks. Compare
 hashes of production state, artifacts and publication files before and after
 deployment; do not start an extra newsroom run or replay a report.
+
+PR review regressions also preserve pre-show headings without the word results,
+recognize ordinary present/past-tense win statements while excluding future win
+predictions, and render final-card result links through the same marker-aware
+renderer as the chronological body.

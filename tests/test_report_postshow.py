@@ -211,3 +211,66 @@ def test_segment_cannot_keep_the_initial_future_announcement():
     value["card"].append({"text": "Jay White parlerà allo show", "status": "SEGMENT", "source_indexes": [6], "result_index": None, "preview_indexes": []})
     with pytest.raises(ValueError, match="still phrased as a preview"):
         validate_postshow(value, plan)
+
+
+@pytest.mark.parametrize("heading", ["Countdown Pre-Show", "Pre-Show", "Zero Hour", "Buy In", "Kickoff"])
+def test_preshow_without_results_heading_remains_complete_and_collapsible(heading):
+    source = [
+        {"type": "paragraph", "text": "Tonight's event preview."},
+        {"type": "heading", "text": heading, "level": "h2"},
+        {"type": "heading", "text": "A vs. B", "level": "h3"},
+        {"type": "paragraph", "text": "A wins!"},
+        {"type": "embed", "url": "https://twitter.com/WWE/status/123"},
+        {"type": "heading", "text": "Main show results", "level": "h2"},
+        {"type": "paragraph", "text": "The show opens with the main event."},
+    ]
+    plan = plan_postshow(source)
+    assert plan["body_start"] == 1 and plan["replace_indexes"] == [0]
+    assert 3 in plan["result_indexes"]
+    plan["final"] = {"intro": {"text": "L'evento si è concluso.", "source_indexes": [3]},
+        "card": [{"text": "A batte B.", "status": "HELD", "source_indexes": [2, 3], "result_index": 3, "preview_indexes": []}]}
+    translated = {i: b["text"] for i, b in enumerate(source) if "text" in b and i >= 1}
+    rendered = workshop.render_blocks(source, translated, job={"event_type": "PLE"}, postshow=plan)
+    from bs4 import BeautifulSoup
+    soup = BeautifulSoup(rendered, "html.parser")
+    assert "A wins!" in soup.find("details").get_text()
+    assert "status/123" in str(soup.find("details"))
+    assert "Main show results" not in soup.find("details").get_text()
+
+
+@pytest.mark.parametrize("outcome", ["A wins!", "A defeats B.", "A pins B.", "A submits B.",
+                                      "A won!", "A pinned B.", "A submitted B."])
+def test_ordinary_completed_outcomes_are_valid_held_evidence(outcome):
+    source = blocks()
+    source[10]["text"] = outcome
+    plan = plan_postshow(source)
+    assert 10 in plan["result_indexes"]
+    assert validate_postshow(final(), plan)
+
+
+@pytest.mark.parametrize("prediction", ["A will win!", "A will defeat B.", "A will pin B.", "A will submit B."])
+def test_future_win_predictions_are_not_result_evidence(prediction):
+    source = blocks()
+    source[10]["text"] = prediction
+    plan = plan_postshow(source)
+    assert 10 not in plan["result_indexes"]
+    with pytest.raises(ValueError, match="actual result evidence"):
+        validate_postshow(final(), plan)
+
+
+@pytest.mark.parametrize("has_metadata", [True, False])
+def test_final_card_never_exposes_result_inline_link_markers(has_metadata):
+    from bs4 import BeautifulSoup
+    source = blocks()
+    url = "https://twitter.com/WWE/status/789"
+    if has_metadata:
+        source[10]["inline_media_links"] = [{"index": 0, "url": url}]
+    plan = plan_postshow(source)
+    plan["final"] = final()
+    translated = {i: b["text"] for i, b in enumerate(source) if "text" in b and i >= plan["body_start"]}
+    translated[10] = "Vincitrice: [OWTVLINK0]Liv Morgan[/OWTVLINK0]."
+    rendered = render_postshow(plan, source, translated)
+    assert "OWTVLINK" not in rendered
+    soup = BeautifulSoup(rendered, "html.parser")
+    assert (soup.select_one('li a[href="' + url + '"]') is not None) == has_metadata
+    assert "Vincitrice: Liv Morgan." in soup.get_text()
