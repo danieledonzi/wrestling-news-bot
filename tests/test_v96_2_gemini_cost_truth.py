@@ -39,13 +39,14 @@ def resolved_row(**overrides):
     return row
 
 
-def test_all_six_frozen_model_rates_and_metadata():
+def test_frozen_model_rates_with_verified_lite_fallback_and_metadata():
     table = load_pricing_table()
     assert table["schema_version"] == "v96.2_pricing.v2"
-    assert table["price_table_version"] == "google-gemini-paid-standard-2026-08-22.v1"
+    assert table["price_table_version"] == "google-gemini-paid-standard-2026-10-28.v1"
     assert table["source_url"] == "https://ai.google.dev/gemini-api/docs/pricing"
     expected = {
         "gemini-3.5-flash": ("1.50", "9.00", "0.15"),
+        "gemini-3.5-flash-lite": ("0.30", "2.50", "0.03"),
         "gemini-3.1-flash-lite": ("0.25", "1.50", "0.025"),
         "gemini-3-flash-preview": ("0.50", "3.00", "0.05"),
         "gemini-2.5-flash": ("0.30", "2.50", "0.03"),
@@ -55,7 +56,8 @@ def test_all_six_frozen_model_rates_and_metadata():
         conf = table["models"][model]
         assert tuple(conf[k] for k in ("input_price_per_million", "output_price_per_million", "cached_input_price_per_million")) == rates
     assert [(x["input_price_per_million"], x["output_price_per_million"], x["cached_input_price_per_million"]) for x in table["models"]["gemini-2.5-pro"]["tiers"]] == [("1.25", "10.00", "0.125"), ("2.50", "15.00", "0.25")]
-    assert table["aliases"] == {} and "gemini-3.5-flash-lite" not in table["models"]
+    assert table["aliases"] == {}
+    assert table["model_verifications"]["gemini-3.5-flash-lite"]["verified_at"] == "2026-10-28"
     assert resolve_pricing_model("unknown", table)[1] is None
 
 

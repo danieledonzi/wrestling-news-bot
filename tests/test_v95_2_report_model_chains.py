@@ -9,9 +9,9 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-BOB_CHAIN = ["gemini-3.1-flash-lite", "gemini-3.5-flash", "gemini-2.5-flash-lite", "gemini-2.5-flash"]
-REPORT_CHAIN = ["gemini-3.5-flash", "gemini-3.1-flash-lite", "gemini-2.5-flash", "gemini-2.5-flash-lite"]
-NEWS_TITLE_CHAIN = ["gemini-3.5-flash", "gemini-3.1-flash-lite", "gemini-2.5-flash"]
+BOB_CHAIN = ["gemini-3.1-flash-lite", "gemini-3.5-flash-lite", "gemini-3.5-flash", "gemini-2.5-flash-lite", "gemini-2.5-flash"]
+REPORT_CHAIN = ["gemini-3.1-flash-lite", "gemini-3.5-flash-lite", "gemini-2.5-pro", "gemini-3.5-flash"]
+NEWS_TITLE_CHAIN = ["gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-2.5-flash"]
 CHAIN_ENVS = [
     "BOB_GEMINI_MODEL_CHAIN",
     "NEWS_GEMINI_MODEL_CHAIN",
@@ -129,7 +129,7 @@ def test_report_cooldown_skips_failed_model_on_next_batch(monkeypatch):
 def test_menzo_second_pass_default(monkeypatch):
     clear_chain_env(monkeypatch)
     menzo = reload_module("agents.menzo_policy_v93_15")
-    assert menzo.MENZO_DUPLICATE_ARBITRATION_SECOND_MODEL == "gemini-3.5-flash"
+    assert menzo.MENZO_DUPLICATE_ARBITRATION_SECOND_MODEL == "gemini-3.5-flash-lite"
     assert menzo.MENZO_DUPLICATE_ARBITRATION_SECOND_MODEL != "gemini-3-flash-preview"
 
 

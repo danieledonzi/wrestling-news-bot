@@ -20,7 +20,7 @@ ARTIFACT_ALFRED_FILE = ARTIFACT_DIR / "alfred_review.json"
 
 VERSION = "v96.4a_v95.3_alfred_quote_resolver_with_translation_safety_gate"
 QUOTE_RESOLVER_HISTORY_FILE = NEWSROOM_STATE_DIR / "alfred_quote_resolver_history.json"
-ALFRED_QUOTE_RESOLVER_MODEL_CHAIN = [m.strip() for m in os.getenv("ALFRED_QUOTE_RESOLVER_MODEL_CHAIN", "gemini-2.5-flash-lite,gemini-3.1-flash-lite").split(",") if m.strip()]
+ALFRED_QUOTE_RESOLVER_MODEL_CHAIN = [m.strip() for m in os.getenv("ALFRED_QUOTE_RESOLVER_MODEL_CHAIN", "gemini-2.5-flash-lite,gemini-3.5-flash-lite,gemini-3.1-flash-lite").split(",") if m.strip()]
 QUOTE_RESOLVER_ALLOWED_KINDS = {"nickname_or_catchphrase", "ring_name", "stable_name", "move_name", "event_name", "title_or_branding"}
 TRANSLATED_PROSE_KIND = "translated_italian_prose"
 MAX_QUOTE_RESOLVER_CALLS_PER_ARTICLE = 3

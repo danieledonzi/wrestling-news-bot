@@ -126,14 +126,20 @@ def test_obvious_summary_is_rejected_without_repair(monkeypatch):
 def test_workshop_retains_full_manifest_and_native_embeds_beyond_120_blocks(tmp_path, monkeypatch):
     blocks = extract_report_blocks(source_fixture(), SOURCE) + [{"type": "paragraph", "text": f"Action {i}."} for i in range(130)]
     monkeypatch.setattr(workshop, "scrape_report_article", lambda url: (blocks, "", None))
-    monkeypatch.setattr(workshop, "translate_report_blocks", lambda title, blocks, out_title: {i: b["text"] for i, b in enumerate(blocks) if "text" in b})
+    def translated_report(title, blocks, out_title, *, postshow=None):
+        if postshow:
+            postshow["final"] = {"intro": {"text": "A batte B.", "source_indexes": [postshow["source_indexes"][-1]]},
+                "card": [{"text": blocks[i]["text"], "status": "UNCONFIRMED", "source_indexes": [], "preview_indexes": [i]}
+                         for i in postshow["preview_indexes"]]}
+        return {i: b["text"] for i, b in enumerate(blocks) if "text" in b and (not postshow or i not in postshow["replace_indexes"])}
+    monkeypatch.setattr(workshop, "translate_report_blocks", translated_report)
     monkeypatch.setattr(workshop, "upload_media", lambda url: (1, url))
     captured = []
     monkeypatch.setattr(workshop, "publish_report", lambda job, content, featured: (captured.append(content) or (1, {"id": 1})))
     workshop.run_report_workshop({"title": "Report", "source_url": SOURCE, "source": "ringsidenews", "event_type": "PPV"}, tmp_path / "published", tmp_path / "review")
     manifest = json.loads(next((tmp_path / "review").glob("*.json")).read_text())
     assert manifest["blocks"] == blocks
-    assert len(manifest["translated_indexes"]) == len([b for b in blocks if "text" in b])
+    assert len(manifest["translated_indexes"]) + len(manifest["postshow_opening"]["replace_indexes"]) == len([b for b in blocks if "text" in b])
     assert "Action 129." in captured[0]
     assert "[embed]https://twitter.com/WWE/status/123[/embed]" in captured[0]
 
