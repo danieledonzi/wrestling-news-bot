@@ -6,7 +6,7 @@ import mimetypes
 import os
 import re
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Callable, Dict, List, Optional, Tuple
 
 from agents.gemini_ledger import make_operation_id, record_gemini_attempt, record_gemini_event
 from agents.canonical_event_ledger import OperationalAIRequest
@@ -33,8 +33,8 @@ REQUEST_TIMEOUT = int(os.getenv("V92_REQUEST_TIMEOUT", "12"))
 REQUEST_TIMEOUT_WP = int(os.getenv("V92_REQUEST_TIMEOUT_WP", "12"))
 REPORT_TRANSLATION_BATCH_SIZE = int(os.getenv("V92_REPORT_TRANSLATION_BATCH_SIZE", "24"))
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
-DEFAULT_MODEL_CHAIN_V95_2 = "gemini-3.1-flash-lite,gemini-3.5-flash,gemini-2.5-flash-lite,gemini-2.5-flash"
-DEFAULT_REPORT_MODEL_CHAIN_V95_2 = "gemini-3.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite"
+DEFAULT_MODEL_CHAIN_V95_2 = "gemini-3.1-flash-lite,gemini-3.5-flash-lite,gemini-3.5-flash,gemini-2.5-flash-lite,gemini-2.5-flash"
+DEFAULT_REPORT_MODEL_CHAIN_V95_2 = "gemini-3.1-flash-lite,gemini-3.5-flash-lite,gemini-2.5-pro,gemini-3.5-flash"
 REPORT_MODEL_ROUTING_V95_4 = "report_show_premium_allowed"
 MODEL_CHAIN = [m.strip() for m in os.getenv(
     "GEMINI_MODEL_CHAIN",
@@ -679,7 +679,7 @@ def is_temporary_gemini_error(exc: Exception) -> bool:
     return any(marker in text for marker in markers)
 
 
-def generate_json(prompt: str, chain_name: str = "unknown", cooldown_models: Optional[set[str]] = None, ledger_context: Optional[Dict[str, Any]] = None) -> Tuple[Dict[str, Any], str]:
+def generate_json(prompt: str, chain_name: str = "unknown", cooldown_models: Optional[set[str]] = None, ledger_context: Optional[Dict[str, Any]] = None, response_validator: Optional[Callable[[dict], Any]] = None) -> Tuple[Dict[str, Any], str]:
     is_report_chain = chain_name.startswith("report_")
     context = ledger_context or {}
     operational_request = (OperationalAIRequest(
@@ -720,14 +720,20 @@ def generate_json(prompt: str, chain_name: str = "unknown", cooldown_models: Opt
         ) if operational_request else None
         attempt_started_at = time.monotonic()
         try:
-            res = client.models.generate_content(model=model, contents=prompt)
+            generation_options = {"config": {"response_mime_type": "application/json"}} if response_validator else {}
+            res = client.models.generate_content(model=model, contents=prompt, **generation_options)
             data = None
             parse_error = None
+            failure_reason = "invalid_json"
             try:
                 data = extract_json_object(res.text)
+                if response_validator:
+                    failure_reason = "invalid_report_contract"
+                    response_validator(data)
             except Exception as exc:
+                data = None
                 parse_error = str(exc)[:500]
-            record_gemini_attempt(response=res, agent="Bob", phase=chain_name, model_requested=model, status="called", reason="report_translation", result="valid_json" if data is not None else "invalid_json", pipeline="report" if is_report_chain else None, operation_id=operation_id, attempt_index=attempt_index, fallback=attempt_index > 0, retry=False, purpose=chain_name, **context)
+            record_gemini_attempt(response=res, agent="Bob", phase=chain_name, model_requested=model, status="called", reason="report_translation", result="valid_json" if data is not None else failure_reason, pipeline="report" if is_report_chain else None, operation_id=operation_id, attempt_index=attempt_index, fallback=attempt_index > 0, retry=False, purpose=chain_name, **context)
             if data is None:
                 last = ValueError(parse_error or "invalid_json")
                 if operational_request and canonical_attempt:
@@ -735,7 +741,7 @@ def generate_json(prompt: str, chain_name: str = "unknown", cooldown_models: Opt
                     operational_request.failed(canonical_attempt, error_class="validation",
                                                error_terminal=not later_real_model,
                                                latency_ms=int((time.monotonic() - attempt_started_at) * 1000),
-                                               reason_code="invalid_json")
+                                               reason_code=failure_reason)
                 print(f"[TRANSLATE v92] Modello fallito: {model} | chain={chain_name} | error={parse_error or 'invalid_json'}", flush=True)
                 continue
             if is_report_chain:
@@ -770,8 +776,10 @@ def text_blocks(blocks: List[Dict[str, str]]) -> List[Dict[str, Any]]:
     return out
 
 
-def translate_report_blocks(source_title: str, blocks: List[Dict[str, str]], deterministic_title: str) -> Dict[int, str]:
-    items = text_blocks(blocks)
+def translate_report_blocks(source_title: str, blocks: List[Dict[str, str]], deterministic_title: str, *, postshow: Optional[dict] = None) -> Dict[int, str]:
+    from modules.report_postshow import postshow_prompt, validate_postshow
+    replaced = set(postshow["replace_indexes"]) if postshow else set()
+    items = [item for item in text_blocks(blocks) if item["i"] not in replaced]
     if not items:
         raise ValueError("Nessun blocco testuale da tradurre")
 
@@ -787,6 +795,10 @@ def translate_report_blocks(source_title: str, blocks: List[Dict[str, str]], det
         batch_indexes = [int(item["i"]) for item in batch]
         batch_no = (start // batch_size) + 1
         batch_total = (total + batch_size - 1) // batch_size
+        opening_context = postshow_prompt(postshow, blocks) if postshow and start == 0 else ""
+        response_format = '{"items":[{"i":0,"text":"..."}]}'
+        if opening_context:
+            response_format = '{"items":[{"i":0,"text":"..."}],"postshow":{"intro":{"text":"...","source_indexes":[0]},"card":[{"text":"...","status":"HELD","source_indexes":[0],"result_index":0,"preview_indexes":[]}]}}'
 
         prompt = f"""
 Sei un giornalista italiano esperto di wrestling.
@@ -840,8 +852,10 @@ STILE DA EVITARE:
 - non usare virgolette inutili attorno ai nomi degli show;
 - preferisci "puntata di Raw" o "Raw" a formule rigide come "WWE Raw" quando il contesto e' chiaro.
 
-Rispondi solo con JSON valido in una riga:
-{{"items":[{{"i":0,"text":"..."}}]}}
+{opening_context}
+
+Rispondi solo con JSON valido in una riga, con TUTTE le chiavi richieste:
+{response_format}
 
 TITOLO DETERMINISTICO DA NON MODIFICARE:
 {deterministic_title}
@@ -856,7 +870,10 @@ BLOCCHI JSON:
 {json.dumps(batch, ensure_ascii=False)}
 """
         print(f"[TRANSLATE v92] Batch report_blocks_legacy_prompt {batch_no}/{batch_total} | items={len(batch)} | indici={batch_indexes[0]}-{batch_indexes[-1]}", flush=True)
-        data, model = generate_json(prompt, chain_name="report_blocks_legacy_prompt", cooldown_models=cooldown_models, ledger_context={"report_id": deterministic_title or source_title, "report_key": deterministic_title or source_title, "source_url": None, "title": deterministic_title or source_title, "batch": f"{batch_no}/{batch_total}", "batch_no": batch_no, "batch_total": batch_total})
+        validator_kwargs = {"response_validator": lambda data: validate_postshow(data.get("postshow"), postshow)} if opening_context else {}
+        data, model = generate_json(prompt, chain_name="report_blocks_legacy_prompt", cooldown_models=cooldown_models, ledger_context={"report_id": deterministic_title or source_title, "report_key": deterministic_title or source_title, "source_url": None, "title": deterministic_title or source_title, "batch": f"{batch_no}/{batch_total}", "batch_no": batch_no, "batch_total": batch_total}, **validator_kwargs)
+        if postshow and start == 0:
+            postshow["final"] = validate_postshow(data.get("postshow"), postshow)
         arr = data.get("items") or []
         if not isinstance(arr, list) or len(arr) != len(batch):
             raise ValueError("Traduzione: numero di blocchi incompatibile")
@@ -941,15 +958,19 @@ def normalize_media_identity(url: Optional[str]) -> str:
     return raw
 
 
-def render_blocks(blocks: List[Dict[str, str]], translated: Dict[int, str], featured_image_url: Optional[str] = None, *, job: Optional[Dict[str, Any]] = None) -> str:
+def render_blocks(blocks: List[Dict[str, str]], translated: Dict[int, str], featured_image_url: Optional[str] = None, *, job: Optional[Dict[str, Any]] = None, postshow: Optional[dict] = None) -> str:
     from modules.report_content import preshow_open, preshow_range
     from modules.editorial_media_links import render_linked_text
-    parts: List[str] = []
+    from modules.report_postshow import render_postshow
+    parts: List[str] = [render_postshow(postshow, blocks, translated)] if postshow else []
+    replaced = set(postshow["replace_indexes"]) if postshow else set()
     collapsible = preshow_range(blocks, job or {})
-    if job is not None and any(i not in translated for i, b in enumerate(blocks) if b["type"] in {"heading", "paragraph", "quote"}):
+    if job is not None and any(i not in translated for i, b in enumerate(blocks) if i not in replaced and b["type"] in {"heading", "paragraph", "quote"}):
         raise ValueError("Report rendering requires every translated text block")
     list_type = None
     for idx, block in enumerate(blocks):
+        if idx in replaced:
+            continue
         next_list = block.get("list_type")
         if list_type != next_list:
             if list_type:
@@ -1168,8 +1189,10 @@ def run_report_workshop(job: Dict[str, Any], published_dir: Path, review_dir: Pa
     blocks, cleanup_diagnostics = cleanup_blocks(blocks, str(job.get("source") or ""))
     print(f"[REPORT CLEAN v95.13.1] {json.dumps(cleanup_diagnostics, sort_keys=True)}", flush=True)
     print(f"[REPORT v92] Blocchi estratti: total={len(blocks)} text={len([b for b in blocks if b.get('type') in {'heading','paragraph','quote'}])} images={len([b for b in blocks if b.get('type') == 'image'])} embeds={len([b for b in blocks if b.get('type') == 'embed'])} featured={bool(featured_image)}", flush=True)
-    translated = translate_report_blocks(job.get("source_title") or job.get("title") or "", blocks, job["title"])
-    content = render_blocks(blocks, translated, featured_image, job=job)
+    from modules.report_postshow import plan_postshow
+    postshow = plan_postshow(blocks)
+    translated = translate_report_blocks(job.get("source_title") or job.get("title") or "", blocks, job["title"], postshow=postshow)
+    content = render_blocks(blocks, translated, featured_image, job=job, postshow=postshow)
     published_dir.mkdir(parents=True, exist_ok=True)
     review_dir.mkdir(parents=True, exist_ok=True)
     slug = slugify(job.get("title") or job.get("report_key") or "report")
@@ -1186,6 +1209,7 @@ def run_report_workshop(job: Dict[str, Any], published_dir: Path, review_dir: Pa
         "source_embed_urls": [b["url"] for b in blocks if b["type"] == "embed"],
         "featured_image": featured_image,
         "translated_indexes": sorted(translated.keys()),
+        "postshow_opening": postshow,
         "report_model_routing_v95_4": REPORT_MODEL_ROUTING_V95_4,
         "report_model_chain": REPORT_MODEL_CHAIN,
     }, ensure_ascii=False, indent=2), encoding="utf-8")

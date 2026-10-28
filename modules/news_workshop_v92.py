@@ -22,8 +22,8 @@ except Exception:  # pragma: no cover
 
 REQUEST_TIMEOUT = int(os.getenv("V92_REQUEST_TIMEOUT", "12"))
 REQUEST_TIMEOUT_WP = int(os.getenv("V92_WP_TIMEOUT", "25"))
-DEFAULT_NEWS_MODEL_CHAIN_V95_2 = "gemini-3.1-flash-lite,gemini-3.5-flash,gemini-2.5-flash-lite,gemini-2.5-flash"
-DEFAULT_NEWS_TITLE_MODEL_CHAIN_V95_2 = "gemini-3.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash"
+DEFAULT_NEWS_MODEL_CHAIN_V95_2 = "gemini-3.1-flash-lite,gemini-3.5-flash-lite,gemini-3.5-flash,gemini-2.5-flash-lite,gemini-2.5-flash"
+DEFAULT_NEWS_TITLE_MODEL_CHAIN_V95_2 = "gemini-3.5-flash,gemini-3.5-flash-lite,gemini-3.1-flash-lite,gemini-2.5-flash"
 DEFAULT_NEWS_MODEL_CHAIN = os.getenv(
     "NEWS_GEMINI_MODEL_CHAIN",
     os.getenv("GEMINI_NEWS_MODEL_CHAIN", os.getenv("GEMINI_MODEL_CHAIN", DEFAULT_NEWS_MODEL_CHAIN_V95_2)),

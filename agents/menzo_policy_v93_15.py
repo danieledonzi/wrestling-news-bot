@@ -744,7 +744,7 @@ def enforce_selected_cap(result: dict[str, Any]) -> None:
 
 
 MENZO_DUPLICATE_ARBITRATION_FIRST_MODEL = os.getenv("MENZO_DUPLICATE_ARBITRATION_FIRST_MODEL", "gemini-3.1-flash-lite").strip() or "gemini-3.1-flash-lite"
-MENZO_DUPLICATE_ARBITRATION_SECOND_MODEL = os.getenv("MENZO_DUPLICATE_ARBITRATION_SECOND_MODEL", "gemini-3.5-flash").strip() or "gemini-3.5-flash"
+MENZO_DUPLICATE_ARBITRATION_SECOND_MODEL = os.getenv("MENZO_DUPLICATE_ARBITRATION_SECOND_MODEL", "gemini-3.5-flash-lite").strip() or "gemini-3.5-flash-lite"
 MENZO_ENABLE_35_FOR_HIGH_AMBIGUITY = os.getenv("MENZO_ENABLE_35_FOR_HIGH_AMBIGUITY", "true").strip().lower() not in {"0", "false", "no", "off"}
 MENZO_35_MIN_SCORE = int(os.getenv("MENZO_35_MIN_SCORE", "72"))
 MENZO_35_REQUIRE_DUPLICATE_OR_SAME_STORY = os.getenv("MENZO_35_REQUIRE_DUPLICATE_OR_SAME_STORY", "true").strip().lower() not in {"0", "false", "no", "off"}
@@ -1222,7 +1222,7 @@ def call_gemini_json(prompt: str) -> tuple[dict[str, Any] | None, str]:
     operation_id = make_operation_id("Menzo", "duplicate_arbitration", "model_chain")
     request = OperationalAIRequest("Menzo", "duplicate_arbitration", reason_code="duplicate_arbitration")
     real_attempt_index = 0
-    chain = [m.strip() for m in os.getenv("GEMINI_MODEL_CHAIN", "gemini-3.1-flash-lite,gemini-2.5-flash-lite").split(",") if m.strip()]
+    chain = [m.strip() for m in os.getenv("GEMINI_MODEL_CHAIN", "gemini-3.1-flash-lite,gemini-3.5-flash-lite,gemini-2.5-flash-lite").split(",") if m.strip()]
     for chain_index, model in enumerate(chain):
         data, status = call_gemini_json_model(prompt, model, operation_id=operation_id, attempt_index=real_attempt_index, fallback=real_attempt_index > 0,
                                               operational_request=request,
