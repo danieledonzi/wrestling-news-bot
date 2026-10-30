@@ -258,3 +258,35 @@ def test_snapshot_replay_preserves_crlf_bytes(monkeypatch):
     replay = dates.report_page_date(ROW, REPORT, DAY)
     assert replay["matches"] and replay["content_sha256"] == first["content_sha256"]
     assert len(calls) == 1
+
+
+def test_failed_evidence_does_not_retain_dynamic_html(monkeypatch):
+    monkeypatch.setattr(dates, "RETRY_SECONDS", 0)
+    mock_page(monkeypatch, article("<p>Still waiting, version one</p>"))
+    assert not dates.report_page_date(ROW, REPORT, DAY, allow_fetch=True)["matches"]
+    mock_page(monkeypatch, article("<p>Still waiting, version two</p>"))
+    assert not dates.report_page_date(ROW, REPORT, DAY, allow_fetch=True)["matches"]
+    assert not list(dates.CACHE_DIR.glob("*.html"))
+    assert len(list(dates.CACHE_DIR.glob("*.json"))) == 1
+
+
+@pytest.mark.skipif(not hasattr(dates.signal, "setitimer"), reason="POSIX deadline support")
+def test_total_deadline_interrupts_blocking_stream_and_restores_alarm(monkeypatch):
+    import time
+    previous = dates.signal.getsignal(dates.signal.SIGALRM)
+    closed = []
+    class Slow(Response):
+        def iter_content(self, _size):
+            time.sleep(1)
+            yield PAGE.encode()
+        def close(self):
+            closed.append(True)
+    monkeypatch.setattr(dates.requests, "get", lambda *args, **kwargs: Slow(PAGE))
+    monkeypatch.setattr(dates, "FETCH_SECONDS", 0.02)
+    start = time.monotonic()
+    result = dates.report_page_date(ROW, REPORT, DAY, allow_fetch=True)
+    assert not result["matches"] and result["reason"] == "source_show_date_fetch_failed"
+    assert time.monotonic() - start < 0.8
+    assert closed
+    assert dates.signal.getsignal(dates.signal.SIGALRM) == previous
+    assert dates.signal.getitimer(dates.signal.ITIMER_REAL)[0] == 0

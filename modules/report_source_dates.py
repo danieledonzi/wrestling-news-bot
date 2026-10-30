@@ -4,6 +4,9 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import signal
+import threading
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -17,12 +20,32 @@ from modules.simone_report_integrity import (
     report_source_name, FALLBACK_REPORT_SOURCE,
 )
 
-CACHE_DIR = Path(__file__).resolve().parents[1] / "state/newsroom/report_source_dates_v1"
+CACHE_DIR = Path(__file__).resolve().parents[1] / "state/report_source_dates_v1"
 VERSION = "article-show-date-v1"
 RETRY_SECONDS = 600
 MAX_PAGE_BYTES = 2_000_000
+FETCH_SECONDS = 8
 NOISE = "aside,nav,footer,.related,.related-posts,.td_block_related_posts,.comments-area,.wp-block-query,blockquote.twitter-tweet"
 PREVIEW = re.compile(r"\b(next week|last week|previous|preview|prediction|will face|will air|upcoming|returns? on)\b", re.I)
+
+
+
+@contextmanager
+def _fetch_deadline():
+    """Interrupt even a blocking slow-trickle read, not just socket inactivity."""
+    if (not hasattr(signal, "setitimer") or threading.current_thread() is not threading.main_thread()
+            or signal.getitimer(signal.ITIMER_REAL)[0] > 0):
+        raise ValueError("source_fetch_deadline_unavailable")
+    previous = signal.getsignal(signal.SIGALRM)
+    def expired(_signum, _frame):
+        raise TimeoutError("source_page_fetch_deadline")
+    signal.signal(signal.SIGALRM, expired)
+    signal.setitimer(signal.ITIMER_REAL, FETCH_SECONDS)
+    try:
+        yield
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0)
+        signal.signal(signal.SIGALRM, previous)
 
 
 def _show_label(text: str, report: dict[str, Any]) -> bool:
@@ -113,34 +136,35 @@ def report_page_date(candidate: dict[str, Any], report: dict[str, Any], date_iso
         return missing
     response = None
     try:
-        fetch_url = str(candidate.get("url") or candidate.get("source_url") or "")
-        for _redirect in range(3):
-            response = requests.get(fetch_url, timeout=8, stream=True, allow_redirects=False,
-                                    headers={"User-Agent": "OpenWrestlingTV-report-date/1.0"})
-            if response.status_code not in {301, 302, 303, 307, 308}:
-                break
-            target = urljoin(fetch_url, response.headers.get("Location", ""))
-            # Only canonical spelling redirects (for example the final slash),
-            # never a different article, host or a downgrade.
-            if urlsplit(target).scheme != "https" or normalize_url(target) != url:
-                raise ValueError("source_redirect_changed_identity")
-            response.close()
-            fetch_url = target
-        if response.status_code != 200:
-            raise ValueError("source_http_status")
-        chunks = []
-        size = 0
-        for chunk in response.iter_content(65536):
-            size += len(chunk)
-            if size > MAX_PAGE_BYTES:
-                raise ValueError("source_page_too_large")
-            chunks.append(chunk)
-        page = b"".join(chunks).decode("utf-8", errors="replace")
+        with _fetch_deadline():
+            fetch_url = str(candidate.get("url") or candidate.get("source_url") or "")
+            for _redirect in range(3):
+                response = requests.get(fetch_url, timeout=8, stream=True, allow_redirects=False,
+                                        headers={"User-Agent": "OpenWrestlingTV-report-date/1.0"})
+                if response.status_code not in {301, 302, 303, 307, 308}:
+                    break
+                target = urljoin(fetch_url, response.headers.get("Location", ""))
+                # Only canonical spelling redirects (for example the final slash),
+                # never a different article, host or a downgrade.
+                if urlsplit(target).scheme != "https" or normalize_url(target) != url:
+                    raise ValueError("source_redirect_changed_identity")
+                response.close()
+                fetch_url = target
+            if response.status_code != 200:
+                raise ValueError("source_http_status")
+            chunks = []
+            size = 0
+            for chunk in response.iter_content(65536):
+                size += len(chunk)
+                if size > MAX_PAGE_BYTES:
+                    raise ValueError("source_page_too_large")
+                chunks.append(chunk)
+            page = b"".join(chunks).decode("utf-8", errors="replace")
         digest = hashlib.sha256(page.encode()).hexdigest()
         evidence = page_date_evidence(page, report, date_iso)
         CACHE_DIR.mkdir(parents=True, exist_ok=True)
         snapshot = CACHE_DIR / (digest + ".html")
-        if not snapshot.exists():
+        if evidence["matches"] and not snapshot.exists():
             snapshot.write_bytes(page.encode("utf-8"))
         evidence = {**evidence, **binding, "content_sha256": digest}
         record = {**evidence, "binding": binding, "checked_at": now}
