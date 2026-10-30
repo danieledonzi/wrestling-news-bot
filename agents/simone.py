@@ -9,7 +9,8 @@ from pathlib import Path
 from typing import Any
 
 from modules.simone_report_integrity import PENDING_REPORTS, candidate_date_evidence, dynamic_special_event_match, is_canonical_report_source, load_effective_registry, matches_weekly_result_identity, normalize_url, reserve_report, source_identity_text, weekly_special_override
-from modules.simone_report_integrity import choose_report_source, report_source_name, REPORT_SOURCE_POLICY, REPORT_FALLBACK_AFTER_LOCAL
+from modules.simone_report_integrity import choose_report_source, report_source_name, report_fallback_deadline, REPORT_SOURCE_POLICY, REPORT_FALLBACK_AFTER_LOCAL
+from modules.report_source_dates import report_page_date
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_DIR = ROOT / "config"
@@ -466,7 +467,13 @@ def candidate_report_identity(candidate: dict[str, Any], report: dict[str, Any],
         return False, "rejected_special_event_as_weekly"
     if not matches_weekly_result_identity(explicit, report):
         return False, "rejected_conflicting_weekly_identity"
-    if not _candidate_date_matches(candidate, date_iso):
+    date_evidence = candidate_date_evidence(candidate, date_iso)
+    if not date_evidence["matches"]:
+        if not date_evidence["explicit_content_dates"] and report_source_name(candidate) == "wrestleview":
+            page_evidence = report_page_date(candidate, report, date_iso)
+            if page_evidence["matches"]:
+                return True, "page_show_date_verified"
+            return False, page_evidence["reason"]
         return False, "rejected_conflicting_weekly_identity"
     return True, "canonical_results_match"
 
@@ -487,14 +494,34 @@ def candidate_published_score(candidate: dict[str, Any]) -> str:
 def choose_report_candidate(candidates: list[dict[str, Any]], report: dict[str, Any], date_iso: str, now: datetime | None = None, publish_date_iso: str | None = None) -> tuple[dict[str, Any] | None, str]:
     evaluated = [(c, *candidate_report_identity(c, report, date_iso)) for c in candidates]
     matches = [c for c, matched, _reason in evaluated if matched]
-    if not matches:
-        reasons = [reason for _c, _matched, reason in evaluated]
-        for reason in ["rejected_special_event_as_weekly", "rejected_conflicting_weekly_identity"]:
-            if reason in reasons:
-                return None, reason
-        return None, "waiting_for_canonical_results_source"
-    chosen = choose_report_source(matches, date_iso, now)
-    return chosen, "canonical_results_match" if chosen else "waiting_for_canonical_results_source"
+    chosen = choose_report_source(matches, date_iso, now) if matches else None
+    # Fetch only an otherwise eligible undated fallback when no existing source
+    # can be elected, and never before the fallback deadline.
+    expected_day = DAY_NAMES.get(str(report.get("expected_day_after") or "").lower())
+    page_check_due = now is not None and (expected_day is None or rome_time(now).weekday() == expected_day)
+    if chosen is None and page_check_due and rome_time(now) >= report_fallback_deadline(date_iso):
+        for index, (candidate, matched, reason) in enumerate(evaluated):
+            if matched or not reason.startswith("source_show_date_"):
+                continue
+            evidence = report_page_date(candidate, report, date_iso, allow_fetch=True)
+            if evidence["matches"]:
+                candidate = {**candidate, "source_date_evidence": evidence}
+                matches.append(candidate)
+            else:
+                evaluated[index] = (candidate, False, evidence["reason"])
+        chosen = choose_report_source(matches, date_iso, now) if matches else None
+    if chosen:
+        evidence = report_page_date(chosen, report, date_iso)
+        if evidence["matches"]:
+            chosen = {**chosen, "source_date_evidence": evidence}
+        return chosen, "canonical_results_match"
+    reasons = [reason for _c, _matched, reason in evaluated]
+    for reason in ["source_show_date_conflict", "source_show_date_unverified",
+                   "source_show_date_fetch_failed", "source_show_date_persistence_failed",
+                   "rejected_special_event_as_weekly", "rejected_conflicting_weekly_identity"]:
+        if reason in reasons:
+            return None, reason
+    return None, "waiting_for_canonical_results_source"
 
 
 def _pending_lock(report_key: str) -> dict[str, Any] | None:
@@ -645,6 +672,7 @@ def run_simone(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
                 continue
             reservation = reserve_report(chosen, {
                 "report_key": report_key, "report_id": report_id, "event_identity": report.get("show_name"), "canonical_identity": f"{chosen.get('source')}_results",
+                **({"source_date_evidence": chosen["source_date_evidence"]} if chosen.get("source_date_evidence") else {}),
                 "date_local": date_iso, "publish_after": report.get("publish_after") or "06:30",
                 "publish_date_local": publish_date_iso, "category": report.get("category"), "title": title,
                 "categories": [x for x in [report.get("editorial_category", "Editoriali"), report.get("category")] if x], "counts_as_news": False,
