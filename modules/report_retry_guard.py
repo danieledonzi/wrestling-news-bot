@@ -110,20 +110,57 @@ def _save(job: dict[str, Any], state: dict[str, Any], state_dir: Path | None = N
 
 
 
-def _result_evidence_group(blocks: list[dict[str, Any]], index: int, body_start: int) -> str:
-    """One chronological match section counts as one outcome, not N prose hits.
+def _preview_anchors(text: str) -> tuple[str, str] | None:
+    """Extract distinctive competitor anchors from an explicitly scheduled bout.
 
-    A repeated heading is the same evidence group. Multiple winning phrases
-    inside that section cannot turn a single held bout into several results.
-    Unheaded narrative evidence stays conservative (one undifferentiated group).
+    Ambiguous preview cards are not counted as completed by inference.
     """
+    sides = re.split(r"\s+vs\.?\s+|\s+versus\s+", text, maxsplit=1, flags=re.I)
+    if len(sides) != 2:
+        return None
+    anchors = []
+    for side in sides:
+        side = re.sub(r"\([^)]*\)", " ", side)
+        side = side.rsplit(":", 1)[-1]
+        side = re.split(r"\s+[–—-]\s+", side)[0]
+        names = re.findall(r"[a-z0-9]+", side.lower())
+        if not names:
+            return None
+        anchors.append(names[-1])
+    return tuple(anchors) if anchors[0] != anchors[1] else None
+
+
+def _evidence_context(blocks: list[dict[str, Any]], index: int, body_start: int) -> str:
+    """Join outcome text with its closest heading, but do not count headings."""
+    text = str(blocks[index].get("text") or "")
     for pos in range(index, body_start - 1, -1):
-        block = blocks[pos]
-        if block.get("type") == "heading":
-            normalized = re.sub(r"\s+", " ", re.sub(r"[^a-z0-9]+", " ",
-                                str(block.get("text") or "").lower())).strip()
-            return "section:" + (normalized or "unlabelled_heading")
-    return "section:unheaded"
+        if blocks[pos].get("type") == "heading":
+            return str(blocks[pos].get("text") or "") + " " + text
+    return text
+
+
+def _positively_resolved_previews(blocks: list[dict[str, Any]], plan: dict) -> set[int]:
+    """Count unique *scheduled bouts* supported by result or cancellation evidence.
+
+    Repeated descriptions, recap headings and multiple results paragraphs cannot
+    inflate the count; one preview item contributes at most one resolved bout.
+    """
+    body_start = int(plan["body_start"])
+    outcome_indexes = set(plan.get("result_indexes") or [])
+    outcome_indexes.update(
+        i for i in plan.get("source_indexes", [])
+        if EXPLICIT_NOT_HELD_RE.search(str(blocks[i].get("text") or ""))
+    )
+    evidence = [
+        set(re.findall(r"[a-z0-9]+", _evidence_context(blocks, i, body_start).lower()))
+        for i in sorted(outcome_indexes)
+    ]
+    matched = set()
+    for i in plan["preview_indexes"]:
+        anchors = _preview_anchors(str(blocks[i].get("text") or ""))
+        if anchors and any(set(anchors).issubset(words) for words in evidence):
+            matched.add(i)
+    return matched
 
 
 def source_completion_issue(blocks: list[dict[str, Any]], plan: dict | None, *, original_html: str | None = None) -> str | None:
@@ -143,13 +180,8 @@ def source_completion_issue(blocks: list[dict[str, Any]], plan: dict | None, *, 
     narrative = [str(blocks[i].get("text") or "") for i in source_indexes]
     if not narrative:
         return "missing_postshow_narrative"
-    body_start = int(plan["body_start"])
-    held_groups = {_result_evidence_group(blocks, i, body_start)
-                   for i in plan.get("result_indexes", [])}
-    nonheld_groups = {_result_evidence_group(blocks, i, body_start)
-                      for i in source_indexes if EXPLICIT_NOT_HELD_RE.search(blocks[i].get("text") or "")}
-    actual = len(held_groups)
-    resolved_bouts = len(held_groups | nonheld_groups)
+    actual = len(plan.get("result_indexes") or [])
+    resolved_bouts = len(_positively_resolved_previews(blocks, plan))
     unfinished = original_source_unfinished(original_html) or any(UNFINISHED_RE.search(t) for t in narrative)
     # Never claim an upcoming match happened merely because the preview lists it.
     # An explicit "updates coming" marker with several unresolved bouts is strong

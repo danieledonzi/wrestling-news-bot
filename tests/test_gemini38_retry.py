@@ -308,3 +308,26 @@ def test_mixed_upstream_and_single_contract_failure_does_not_persist(monkeypatch
                                response_validator=validate)
     assert not isinstance(exc.value, workshop.ReportModelValidationError)
     assert calls == ["gemini-3.1-flash-lite", "gemini-3.5-flash-lite", "gemini-3.8-flash"]
+
+
+def test_same_bout_repeated_under_differently_named_sections_is_one_result():
+    source = fixture(completed=1, updates=False)
+    insertion = len(source) - 1
+    extra = []
+    for i in range(6):
+        extra.extend([
+            {"type": "heading", "text": f"Recap and highlights section {i}"},
+            {"type": "paragraph", "text": "A0 defeated B0 and won by pinfall in the replay."},
+        ])
+    source[insertion:insertion] = extra
+    source.insert(len(source) - 1, {"type": "paragraph", "text": "Update coming shortly."})
+    plan = plan_postshow(source)
+    assert len(plan["result_indexes"]) >= 5
+    assert source_completion_issue(source, plan) == "source_results_still_updating"
+
+
+def test_distinct_resolved_previews_with_repeated_mentions_are_not_overcounted():
+    source = fixture(completed=5, updates=True)
+    source.insert(len(source) - 1, {"type": "heading", "text": "A0 vs. B0 recap"})
+    source.insert(len(source) - 1, {"type": "paragraph", "text": "Winner A0 defeated B0 again on replay."})
+    assert source_completion_issue(source, plan_postshow(source)) is None
