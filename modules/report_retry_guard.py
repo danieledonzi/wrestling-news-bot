@@ -110,97 +110,27 @@ def _save(job: dict[str, Any], state: dict[str, Any], state_dir: Path | None = N
 
 
 
-def _preview_anchors(text: str) -> tuple[tuple[str, ...], tuple[str, ...]] | None:
-    """Canonical, opponent-distinguishing identity of a scheduled match.
+def source_completion_issue(blocks: list[dict[str, Any]], plan: dict | None,
+                            *, original_html: str | None = None) -> str | None:
+    """Proof-only preflight; the actual result/card validator remains authoritative.
 
-    Both sides retain their actual names: Jimmy Uso and Jey Uso remain distinct.
-    Identical previews share one identity even when repeated in the feed.
-    """
-    sides = re.split(r"\s+vs\.?\s+|\s+versus\s+", text, maxsplit=1, flags=re.I)
-    if len(sides) != 2:
-        return None
-    anchors = []
-    for side in sides:
-        side = re.sub(r"\([^)]*\)", " ", side)
-        side = side.rsplit(":", 1)[-1]
-        side = re.split(r"\s+[–—-]\s+", side)[0]
-        names = re.findall(r"[a-z0-9]+", side.lower())
-        if not names:
-            return None
-        anchors.append(tuple(sorted(set(names))))
-    if anchors[0] == anchors[1]:
-        return None
-    return tuple(sorted(anchors))
-
-
-def _evidence_context(blocks: list[dict[str, Any]], index: int, body_start: int) -> str:
-    """Join outcome text with its closest heading, but do not count headings."""
-    text = str(blocks[index].get("text") or "")
-    for pos in range(index, body_start - 1, -1):
-        if blocks[pos].get("type") == "heading":
-            return str(blocks[pos].get("text") or "") + " " + text
-    return text
-
-
-def _positively_resolved_previews(blocks: list[dict[str, Any]], plan: dict) -> set[tuple]:
-    """Count positively evidenced unique bout identities, not preview rows.
-
-    The same match repeated under many headings or in a duplicate preview
-    cannot inflate the number of distinct results.
-    """
-    body_start = int(plan["body_start"])
-    outcome_indexes = set(plan.get("result_indexes") or [])
-    outcome_indexes.update(
-        i for i in plan.get("source_indexes", [])
-        if EXPLICIT_NOT_HELD_RE.search(str(blocks[i].get("text") or ""))
-    )
-    evidence = [
-        set(re.findall(r"[a-z0-9]+", _evidence_context(blocks, i, body_start).lower()))
-        for i in sorted(outcome_indexes)
-    ]
-    matched = set()
-    for i in plan["preview_indexes"]:
-        anchors = _preview_anchors(str(blocks[i].get("text") or ""))
-        if anchors and any(set(anchors[0]).issubset(words) and set(anchors[1]).issubset(words)
-                           for words in evidence):
-            matched.add(anchors)
-    return matched
-
-
-def source_completion_issue(blocks: list[dict[str, Any]], plan: dict | None, *, original_html: str | None = None) -> str | None:
-    """Positive proof of an unfinished source, NOT a global readiness threshold.
-
-    A safely bounded preview and explicit pending-updates marker are both required.
-    Unknown, changed or cancelled matches are not inferred to be held.
-    Sources without a separable preview are never suppressed by this heuristic.
+    Do not infer show completeness by counting or matching result paragraphs.
+    A source that *explicitly* says updates are pending AND supplies no
+    postshow-result evidence can safely be deferred before the first AI call.
+    Any partial result evidence proceeds to the existing strict validator;
+    at most two repeated contract failures are attempted on unchanged input.
     """
     if not plan or not plan.get("preview_indexes"):
         return None
-    previews = [str(blocks[i].get("text") or "") for i in plan["preview_indexes"]]
-    # Count unique scheduled bouts, never duplicated preview rows as different
-    # matches. An ambiguous row remains unresolved while a source is updating.
-    identities = [_preview_anchors(t) for t in previews if MATCH_PREVIEW_RE.search(t)]
-    distinct = {identity for identity in identities if identity}
-    duplicate_previews = len(distinct) < len([identity for identity in identities if identity])
-    expected_matches = len(distinct) + sum(identity is None for identity in identities)
-    if len(identities) < 2:
-        return None
-    source_indexes = [i for i in plan.get("source_indexes", []) if blocks[i].get("type") in TEXT_TYPES]
-    narrative = [str(blocks[i].get("text") or "") for i in source_indexes]
+    narrative = [str(blocks[i].get("text") or "") for i in plan.get("source_indexes", [])
+                 if blocks[i].get("type") in TEXT_TYPES]
     if not narrative:
         return "missing_postshow_narrative"
-    actual = len(plan.get("result_indexes") or [])
-    resolved_bouts = len(_positively_resolved_previews(blocks, plan))
-    unfinished = original_source_unfinished(original_html) or any(UNFINISHED_RE.search(t) for t in narrative)
-    # Never claim an upcoming match happened merely because the preview lists it.
-    # An explicit "updates coming" marker with several unresolved bouts is strong
-    # evidence of an unfinished live article (unlike an unknown outcome alone).
-    if unfinished and (duplicate_previews or resolved_bouts < expected_matches):
-        return "source_results_still_updating"
-    if unfinished and actual == 0:
+    unfinished = (original_source_unfinished(original_html)
+                  or any(UNFINISHED_RE.search(t) for t in narrative))
+    if unfinished and not plan.get("result_indexes"):
         return "source_without_completed_match_results"
     return None
-
 
 def preflight(job: dict[str, Any], blocks: list[dict[str, Any]], plan: dict | None,
               *, contract_version: str = CONTRACT_VERSION, state_dir: Path | None = None,

@@ -41,15 +41,15 @@ def job(report_key="wwe_nxt_2026_11_04", source="https://www.ringsidenews.com/nx
 
 
 def test_nxt_unfinished_zero_provider_calls_and_source_change_unlocks(tmp_path):
-    source = fixture(completed=1)
+    source = fixture(completed=0)
     plan = plan_postshow(source)
     assert plan is not None
-    assert source_completion_issue(source, plan) == "source_results_still_updating"
+    assert source_completion_issue(source, plan) == "source_without_completed_match_results"
     calls = []
     for _ in range(2):
         with pytest.raises(ReportRetryDeferred) as raised:
             preflight(job(), source, plan, state_dir=tmp_path)
-        assert raised.value.reason == "source_results_still_updating"
+        assert raised.value.reason == "source_without_completed_match_results"
         assert calls == []
         files = list(tmp_path.glob("*.json"))
         assert len(files) == 1
@@ -205,20 +205,20 @@ def test_env_migration_preview_apply_idempotent_and_preserves_metadata(tmp_path)
 def test_raw_please_check_back_marker_survives_cleanup_for_safety(tmp_path, monkeypatch):
     from modules.report_content import clean_source_prose
     from modules.report_retry_guard import original_source_unfinished
-    source = fixture(completed=1, updates=False)
+    source = fixture(completed=0, updates=False)
     raw = ('<article class="rsn-single-article"><div class="entry-content">'
            '<p>Please check back for results as the show progresses.</p>'
            '</div></article>')
     assert clean_source_prose("Please check back for results as the show progresses.") == ""
     assert original_source_unfinished(raw)
     assert source_completion_issue(source, plan_postshow(source)) is None
-    assert source_completion_issue(source, plan_postshow(source), original_html=raw) == "source_results_still_updating"
+    assert source_completion_issue(source, plan_postshow(source), original_html=raw) == "source_without_completed_match_results"
     from modules import report_retry_guard as guard
     monkeypatch.setattr(guard, "STATE_DIR", tmp_path)
     monkeypatch.setattr(workshop, "scrape_report_article", lambda url: (source, raw, None))
     calls = []
     monkeypatch.setattr(workshop, "translate_report_blocks", lambda *args, **kw: calls.append(1))
-    with pytest.raises(ReportRetryDeferred, match="source_results_still_updating"):
+    with pytest.raises(ReportRetryDeferred, match="source_without_completed_match_results"):
         workshop.run_report_workshop({**job(), "title": "NXT Results"}, tmp_path, tmp_path)
     assert calls == []
 
@@ -268,35 +268,6 @@ def test_env_comment_spacing_and_uid_gid_preserved(tmp_path):
     assert install(path, apply=True)[0] == []
 
 
-def test_multiple_result_phrases_from_one_match_do_not_count_as_many_matches():
-    source = fixture(completed=1, updates=True)
-    update_index = next(i for i, b in enumerate(source)
-                        if b.get("text") == "Update coming shortly.")
-    source[update_index:update_index] = [
-        {"type": "paragraph", "text": f"The winner A0 won by pinfall (replay mention {i})."}
-        for i in range(6)
-    ]
-    plan = plan_postshow(source)
-    assert len(plan["result_indexes"]) >= 5
-    assert source_completion_issue(source, plan) == "source_results_still_updating"
-
-
-def test_repeated_cancellation_mentions_are_one_resolved_bout():
-    source = fixture(completed=1, updates=True)
-    update_index = next(i for i, b in enumerate(source)
-                        if b.get("text") == "Update coming shortly.")
-    source[update_index:update_index] = [
-        {"type": "paragraph", "text": f"The match was cancelled (mention {i})."}
-        for i in range(6)
-    ]
-    assert source_completion_issue(source, plan_postshow(source)) == "source_results_still_updating"
-
-
-def test_distinct_completed_match_sections_are_counted_once_each():
-    source = fixture(completed=5, updates=True)
-    assert source_completion_issue(source, plan_postshow(source)) is None
-
-
 def test_mixed_upstream_and_single_contract_failure_does_not_persist(monkeypatch):
     calls = mock_generate(monkeypatch, [
         RuntimeError("503 temporarily unavailable"),
@@ -310,40 +281,16 @@ def test_mixed_upstream_and_single_contract_failure_does_not_persist(monkeypatch
     assert calls == ["gemini-3.1-flash-lite", "gemini-3.5-flash-lite", "gemini-3.8-flash"]
 
 
-def test_same_bout_repeated_under_differently_named_sections_is_one_result():
-    source = fixture(completed=1, updates=False)
-    insertion = len(source) - 1
-    extra = []
-    for i in range(6):
-        extra.extend([
-            {"type": "heading", "text": f"Recap and highlights section {i}"},
-            {"type": "paragraph", "text": "A0 defeated B0 and won by pinfall in the replay."},
-        ])
-    source[insertion:insertion] = extra
-    source.insert(len(source) - 1, {"type": "paragraph", "text": "Update coming shortly."})
-    plan = plan_postshow(source)
-    assert len(plan["result_indexes"]) >= 5
-    assert source_completion_issue(source, plan) == "source_results_still_updating"
 
-
-def test_distinct_resolved_previews_with_repeated_mentions_are_not_overcounted():
-    source = fixture(completed=5, updates=True)
-    source.insert(len(source) - 1, {"type": "heading", "text": "A0 vs. B0 recap"})
-    source.insert(len(source) - 1, {"type": "paragraph", "text": "Winner A0 defeated B0 again on replay."})
+def test_partial_results_do_not_trigger_unreliable_completeness_heuristics():
+    source = fixture(completed=1, updates=True)
+    assert source_completion_issue(source, plan_postshow(source)) is None
+    source[3]["text"] = source[2]["text"]
     assert source_completion_issue(source, plan_postshow(source)) is None
 
 
-def test_duplicate_preview_rows_do_not_fabricate_distinct_results():
-    source = fixture(completed=1, updates=True)
-    source[3]["text"] = source[2]["text"]  # Two identical A0 vs B0 entries
-    plan = plan_postshow(source)
-    assert source_completion_issue(source, plan) == "source_results_still_updating"
-
-
-def test_same_surname_competitors_remain_distinct_and_can_be_resolved():
-    source = fixture(completed=5, updates=True)
-    source[2]["text"] = "Jimmy Uso vs. Jey Uso"
-    source[9]["text"] = "Jimmy Uso vs. Jey Uso"
-    source[10]["text"] = "Winner: Jimmy Uso defeated Jey Uso by pinfall"
-    plan = plan_postshow(source)
-    assert source_completion_issue(source, plan) is None
+def test_zero_result_live_source_defers_even_with_special_preview_bouts():
+    source = fixture(completed=0, updates=True)
+    source[2]["text"] = "20-Woman Battle Royal"
+    source[3]["text"] = "Jimmy Uso vs. Jey Uso"
+    assert source_completion_issue(source, plan_postshow(source)) == "source_without_completed_match_results"
