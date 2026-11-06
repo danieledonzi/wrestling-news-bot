@@ -34,7 +34,7 @@ REQUEST_TIMEOUT_WP = int(os.getenv("V92_REQUEST_TIMEOUT_WP", "12"))
 REPORT_TRANSLATION_BATCH_SIZE = int(os.getenv("V92_REPORT_TRANSLATION_BATCH_SIZE", "24"))
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 DEFAULT_MODEL_CHAIN_V95_2 = "gemini-3.1-flash-lite,gemini-3.5-flash-lite,gemini-3.5-flash,gemini-2.5-flash-lite,gemini-2.5-flash"
-DEFAULT_REPORT_MODEL_CHAIN_V95_2 = "gemini-3.1-flash-lite,gemini-3.5-flash-lite,gemini-2.5-pro,gemini-3.5-flash"
+DEFAULT_REPORT_MODEL_CHAIN_V95_2 = "gemini-3.1-flash-lite,gemini-3.5-flash-lite,gemini-3.8-flash,gemini-3.5-flash"
 REPORT_MODEL_ROUTING_V95_4 = "report_show_premium_allowed"
 MODEL_CHAIN = [m.strip() for m in os.getenv(
     "GEMINI_MODEL_CHAIN",
@@ -679,6 +679,14 @@ def is_temporary_gemini_error(exc: Exception) -> bool:
     return any(marker in text for marker in markers)
 
 
+class ReportModelValidationError(ValueError):
+    """A generated report violates the deterministic postshow contract."""
+
+
+class ReportModelPartialValidationError(ValueError):
+    """Exactly one postshow contract failure in this invocation."""
+
+
 def generate_json(prompt: str, chain_name: str = "unknown", cooldown_models: Optional[set[str]] = None, ledger_context: Optional[Dict[str, Any]] = None, response_validator: Optional[Callable[[dict], Any]] = None) -> Tuple[Dict[str, Any], str]:
     is_report_chain = chain_name.startswith("report_")
     context = ledger_context or {}
@@ -704,6 +712,7 @@ def generate_json(prompt: str, chain_name: str = "unknown", cooldown_models: Opt
     cooldown_models = cooldown_models if cooldown_models is not None else set()
     operation_id = make_operation_id("Bob", chain_name, context.get("report_id") or context.get("report_key") or context.get("batch") or "report")
     real_attempt_index = 0
+    invalid_postshow_attempts = 0
     for model in active_models:
         if is_report_chain and model in cooldown_models:
             if operational_request:
@@ -735,14 +744,24 @@ def generate_json(prompt: str, chain_name: str = "unknown", cooldown_models: Opt
                 parse_error = str(exc)[:500]
             record_gemini_attempt(response=res, agent="Bob", phase=chain_name, model_requested=model, status="called", reason="report_translation", result="valid_json" if data is not None else failure_reason, pipeline="report" if is_report_chain else None, operation_id=operation_id, attempt_index=attempt_index, fallback=attempt_index > 0, retry=False, purpose=chain_name, **context)
             if data is None:
-                last = ValueError(parse_error or "invalid_json")
+                contract_failure = failure_reason == "invalid_report_contract"
+                if contract_failure:
+                    invalid_postshow_attempts += 1
+                terminal_contract = contract_failure and invalid_postshow_attempts >= 2
+                # Only two *actual* postshow-contract failures may establish
+                # a durable terminal lock. Upstream 429/503 and malformed JSON
+                # must not convert one later contract error into a permanent hold.
+                last = (ReportModelValidationError if terminal_contract else ValueError)(parse_error or "invalid_json")
                 if operational_request and canonical_attempt:
                     later_real_model = any(candidate not in cooldown_models for candidate in active_models[active_models.index(model) + 1:])
                     operational_request.failed(canonical_attempt, error_class="validation",
-                                               error_terminal=not later_real_model,
+                                               error_terminal=terminal_contract or not later_real_model,
                                                latency_ms=int((time.monotonic() - attempt_started_at) * 1000),
                                                reason_code=failure_reason)
                 print(f"[TRANSLATE v92] Modello fallito: {model} | chain={chain_name} | error={parse_error or 'invalid_json'}", flush=True)
+                if terminal_contract:
+                    print("[REPORT RETRY] postshow contract failed twice; stop model escalation", flush=True)
+                    break
                 continue
             if is_report_chain:
                 print(f"[REPORT v95.2] model selected model={model} purpose={chain_name}", flush=True)
@@ -765,6 +784,8 @@ def generate_json(prompt: str, chain_name: str = "unknown", cooldown_models: Opt
             record_gemini_attempt(response=None, agent="Bob", phase=chain_name, model_requested=model, status="failed", reason="report_translation_temporary" if temporary else "report_translation", result=str(exc)[:500], pipeline="report" if is_report_chain else None, cooldown_applied=temporary or None, operation_id=operation_id, attempt_index=attempt_index, retry=False, fallback=attempt_index > 0, purpose=chain_name, **context)
             print(f"[TRANSLATE v92] Modello fallito: {model} | chain={chain_name} | error={str(exc)[:220]}", flush=True)
             continue
+    if invalid_postshow_attempts == 1:
+        raise ReportModelPartialValidationError("one_postshow_contract_failure") from last
     raise last if last else RuntimeError("Nessun modello disponibile")
 
 
@@ -1190,8 +1211,27 @@ def run_report_workshop(job: Dict[str, Any], published_dir: Path, review_dir: Pa
     print(f"[REPORT CLEAN v95.13.1] {json.dumps(cleanup_diagnostics, sort_keys=True)}", flush=True)
     print(f"[REPORT v92] Blocchi estratti: total={len(blocks)} text={len([b for b in blocks if b.get('type') in {'heading','paragraph','quote'}])} images={len([b for b in blocks if b.get('type') == 'image'])} embeds={len([b for b in blocks if b.get('type') == 'embed'])} featured={bool(featured_image)}", flush=True)
     from modules.report_postshow import plan_postshow
+    from modules.report_retry_guard import ReportRetryDeferred, preflight, mark_terminal_contract, note_contract_failure, route_contract_version
     postshow = plan_postshow(blocks)
-    translated = translate_report_blocks(job.get("source_title") or job.get("title") or "", blocks, job["title"], postshow=postshow)
+    route_version = route_contract_version(REPORT_MODEL_CHAIN)
+    try:
+        source_digest = preflight(job, blocks, postshow, contract_version=route_version, original_html=_html)
+    except ReportRetryDeferred as exc:
+        record_gemini_event(agent="Bob", phase="report_source_retry_guard",
+                            model=None, status="avoided", reason=exc.reason,
+                            pipeline="report", source_url=job.get("source_url"),
+                            report_key=job.get("report_key"), source_digest=exc.source_digest)
+        raise
+    try:
+        translated = translate_report_blocks(job.get("source_title") or job.get("title") or "", blocks, job["title"], postshow=postshow)
+    except ReportModelValidationError as exc:
+        mark_terminal_contract(job, source_digest, error=exc, contract_version=route_version)
+        raise ReportRetryDeferred("provider_contract_invalid", source_digest, key=str(job.get("report_key") or "")) from exc
+    except ReportModelPartialValidationError as exc:
+        if note_contract_failure(job, source_digest, error=exc, contract_version=route_version):
+            raise ReportRetryDeferred("repeated_provider_contract_invalid", source_digest,
+                                      key=str(job.get("report_key") or "")) from exc
+        raise
     content = render_blocks(blocks, translated, featured_image, job=job, postshow=postshow)
     published_dir.mkdir(parents=True, exist_ok=True)
     review_dir.mkdir(parents=True, exist_ok=True)

@@ -42,7 +42,7 @@ def resolved_row(**overrides):
 def test_frozen_model_rates_with_verified_lite_fallback_and_metadata():
     table = load_pricing_table()
     assert table["schema_version"] == "v96.2_pricing.v2"
-    assert table["price_table_version"] == "google-gemini-paid-standard-2026-10-28.v1"
+    assert table["price_table_version"] == "google-gemini-paid-standard-2026-11-06.v2"
     assert table["source_url"] == "https://ai.google.dev/gemini-api/docs/pricing"
     expected = {
         "gemini-3.5-flash": ("1.50", "9.00", "0.15"),

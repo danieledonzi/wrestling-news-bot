@@ -10,7 +10,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 BOB_CHAIN = ["gemini-3.1-flash-lite", "gemini-3.5-flash-lite", "gemini-3.5-flash", "gemini-2.5-flash-lite", "gemini-2.5-flash"]
-REPORT_CHAIN = ["gemini-3.1-flash-lite", "gemini-3.5-flash-lite", "gemini-2.5-pro", "gemini-3.5-flash"]
+REPORT_CHAIN = ["gemini-3.1-flash-lite", "gemini-3.5-flash-lite", "gemini-3.8-flash", "gemini-3.5-flash"]
 NEWS_TITLE_CHAIN = ["gemini-3.5-flash", "gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-2.5-flash"]
 CHAIN_ENVS = [
     "BOB_GEMINI_MODEL_CHAIN",
