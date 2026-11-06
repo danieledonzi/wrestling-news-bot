@@ -255,6 +255,28 @@ def calculate_v96_2_cost(usage: dict[str, Any], actual_model: Any = None, model_
         row_time = datetime.fromisoformat(str(timestamp).replace("Z", "+00:00"))
         if row_time < valid_from:
             out["cost_resolution_reason"] = "outside_price_validity"; return out
+    if "dated_rates" in conf:
+        try:
+            if not timestamp:
+                raise ValueError("missing timestamp")
+            row_time = datetime.fromisoformat(str(timestamp).replace("Z", "+00:00"))
+            if row_time.tzinfo is None:
+                raise ValueError("naive timestamp")
+            row_time = row_time.astimezone(timezone.utc)
+        except (ValueError, TypeError):
+            out["cost_resolution_reason"] = "pricing_date_unresolved"
+            return out
+        matches = []
+        for rate in conf["dated_rates"]:
+            begin = datetime.fromisoformat(str(rate["valid_from"]).replace("Z", "+00:00"))
+            until = (datetime.fromisoformat(str(rate["valid_until"]).replace("Z", "+00:00"))
+                     if rate.get("valid_until") else None)
+            if begin <= row_time and (until is None or row_time < until):
+                matches.append(rate)
+        if len(matches) != 1:
+            out["cost_resolution_reason"] = "outside_model_rate_validity"
+            return out
+        conf = matches[0]
     if "tiers" in conf:
         tiers = conf["tiers"]
         conf = tiers[0] if p <= 200000 else tiers[1]
