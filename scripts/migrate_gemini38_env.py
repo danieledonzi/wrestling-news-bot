@@ -44,7 +44,8 @@ def migrate(text: str) -> tuple[str, list[str]]:
             chain, trail = raw[1:stop], raw[stop + 1:]
         else:
             chain, mark, tail = raw.partition("#")
-            trail = mark + tail
+            # The separator belongs to the comment, not to the model list.
+            trail = chain[len(chain.rstrip()):] + mark + tail if mark else ""
         terms = [s.strip() for s in chain.strip().split(",") if s.strip()]
         if OLD not in terms:
             lines.append(line)
@@ -75,6 +76,9 @@ def install(path: Path, *, apply: bool = False) -> tuple[list[str], Path | None]
     fd, tmp = tempfile.mkstemp(prefix=".owtv-gemini38-", dir=path.parent)
     try:
         with os.fdopen(fd, "wb") as out:
+            # Atomic replacement must retain service-account ownership when
+            # the migration is invoked by a privileged deployment user.
+            os.fchown(out.fileno(), before.st_uid, before.st_gid)
             os.fchmod(out.fileno(), stat.S_IMODE(before.st_mode))
             out.write(new_text.encode("utf-8"))
             out.flush()

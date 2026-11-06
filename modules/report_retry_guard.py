@@ -14,6 +14,9 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import urlsplit
 
+from bs4 import BeautifulSoup
+from modules.report_content import CONTENT_SELECTORS, NOISE_SELECTOR
+
 CONTRACT_VERSION = "postshow_source_retry_v1_20261106"
 STATE_DIR = Path(__file__).resolve().parents[1] / "state" / "newsroom" / "report_retry_guard_v1"
 TEXT_TYPES = {"heading", "paragraph", "quote"}
@@ -34,6 +37,33 @@ class ReportRetryDeferred(RuntimeError):
         self.source_digest = source_digest
         self.report_key = key
         super().__init__(f"report_retry_deferred:{reason}:digest={source_digest[:16]}")
+
+
+
+def route_contract_version(models: list[str]) -> str:
+    """Unlock terminal failures when the effective provider route changes."""
+    signature = hashlib.sha256(json.dumps(list(models), separators=(",", ":")).encode()).hexdigest()[:20]
+    return f"{CONTRACT_VERSION}:models:{signature}"
+
+
+def original_source_unfinished(source_html: str | None) -> bool:
+    """Inspect only the article body before boilerplate sentence cleanup.
+
+    Promotional 'please check back' text is often removed by clean_source_prose;
+    it must remain available as *evidence* for the pre-provider check, never
+    copied into the published Italian report.
+    """
+    if not source_html:
+        return False
+    soup = BeautifulSoup(source_html, "html.parser")
+    root = next((node for selector in CONTENT_SELECTORS
+                 if (node := soup.select_one(selector)) is not None), None)
+    if root is None:
+        return False
+    for node in root.select(NOISE_SELECTOR):
+        node.decompose()
+    return any(UNFINISHED_RE.search(node.get_text(" ", strip=True))
+               for node in root.find_all(("p", "li", "blockquote")))
 
 
 def _identity(job: dict[str, Any]) -> str:
@@ -79,7 +109,7 @@ def _save(job: dict[str, Any], state: dict[str, Any], state_dir: Path | None = N
             os.unlink(tmp)
 
 
-def source_completion_issue(blocks: list[dict[str, Any]], plan: dict | None) -> str | None:
+def source_completion_issue(blocks: list[dict[str, Any]], plan: dict | None, *, original_html: str | None = None) -> str | None:
     """Positive proof of an unfinished source, NOT a global readiness threshold.
 
     A safely bounded preview and explicit pending-updates marker are both required.
@@ -96,7 +126,7 @@ def source_completion_issue(blocks: list[dict[str, Any]], plan: dict | None) -> 
     narrative = [str(blocks[i].get("text") or "") for i in plan.get("source_indexes", []) if blocks[i].get("type") in TEXT_TYPES]
     if not narrative:
         return "missing_postshow_narrative"
-    unfinished = any(UNFINISHED_RE.search(t) for t in narrative)
+    unfinished = original_source_unfinished(original_html) or any(UNFINISHED_RE.search(t) for t in narrative)
     explicitly_not_held = sum(bool(EXPLICIT_NOT_HELD_RE.search(t)) for t in narrative)
     # Never claim an upcoming match happened merely because the preview lists it.
     # An explicit "updates coming" marker with several unresolved bouts is strong
@@ -109,14 +139,15 @@ def source_completion_issue(blocks: list[dict[str, Any]], plan: dict | None) -> 
 
 
 def preflight(job: dict[str, Any], blocks: list[dict[str, Any]], plan: dict | None,
-              *, contract_version: str = CONTRACT_VERSION, state_dir: Path | None = None) -> str:
+              *, contract_version: str = CONTRACT_VERSION, state_dir: Path | None = None,
+              original_html: str | None = None) -> str:
     """Return digest if eligible; otherwise defer with actionable reason.
 
     Always rescrape outside this function: changed source or contract unlocks it.
     """
     digest = digest_blocks(blocks)
     key = str(job.get("report_key") or "")
-    issue = source_completion_issue(blocks, plan)
+    issue = source_completion_issue(blocks, plan, original_html=original_html)
     if issue:
         _save(job, {"schema": 1, "reason": issue, "source_digest": digest,
                     "contract_version": contract_version, "kind": "source_incomplete"}, state_dir)

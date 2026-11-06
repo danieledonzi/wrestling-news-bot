@@ -251,8 +251,16 @@ def calculate_v96_2_cost(usage: dict[str, Any], actual_model: Any = None, model_
         out["cost_resolution_reason"] = "mixed_or_unresolved_modality"; return out
     out["pricing_modality"] = "text"; out["pricing_modality_source"] = "provider_usage" if modality else "runtime_text_contract"
     if timestamp and table.get("valid_from"):
-        valid_from = datetime.fromisoformat(str(table["valid_from"]).replace("Z", "+00:00"))
-        row_time = datetime.fromisoformat(str(timestamp).replace("Z", "+00:00"))
+        try:
+            valid_from = datetime.fromisoformat(str(table["valid_from"]).replace("Z", "+00:00"))
+            row_time = datetime.fromisoformat(str(timestamp).replace("Z", "+00:00"))
+            if row_time.tzinfo is None or valid_from.tzinfo is None:
+                raise ValueError("timestamp missing timezone")
+            row_time = row_time.astimezone(timezone.utc)
+            valid_from = valid_from.astimezone(timezone.utc)
+        except (ValueError, TypeError, OverflowError):
+            out["cost_resolution_reason"] = "pricing_date_unresolved"
+            return out
         if row_time < valid_from:
             out["cost_resolution_reason"] = "outside_price_validity"; return out
     if "dated_rates" in conf:

@@ -200,3 +200,69 @@ def test_env_migration_preview_apply_idempotent_and_preserves_metadata(tmp_path)
     assert stat.S_IMODE(path.stat().st_mode) == 0o600
     assert install(path, apply=True)[0] == []
     assert path.read_bytes() == preview.encode()
+
+
+def test_raw_please_check_back_marker_survives_cleanup_for_safety(tmp_path, monkeypatch):
+    from modules.report_content import clean_source_prose
+    from modules.report_retry_guard import original_source_unfinished
+    source = fixture(completed=1, updates=False)
+    raw = ('<article class="rsn-single-article"><div class="entry-content">'
+           '<p>Please check back for results as the show progresses.</p>'
+           '</div></article>')
+    assert clean_source_prose("Please check back for results as the show progresses.") == ""
+    assert original_source_unfinished(raw)
+    assert source_completion_issue(source, plan_postshow(source)) is None
+    assert source_completion_issue(source, plan_postshow(source), original_html=raw) == "source_results_still_updating"
+    from modules import report_retry_guard as guard
+    monkeypatch.setattr(guard, "STATE_DIR", tmp_path)
+    monkeypatch.setattr(workshop, "scrape_report_article", lambda url: (source, raw, None))
+    calls = []
+    monkeypatch.setattr(workshop, "translate_report_blocks", lambda *args, **kw: calls.append(1))
+    with pytest.raises(ReportRetryDeferred, match="source_results_still_updating"):
+        workshop.run_report_workshop({**job(), "title": "NXT Results"}, tmp_path, tmp_path)
+    assert calls == []
+
+
+def test_unrelated_page_completion_marker_does_not_gate(tmp_path):
+    from modules.report_retry_guard import original_source_unfinished
+    complete = fixture(completed=5, updates=False)
+    external = ('<article class="rsn-single-article"><div class="entry-content">'
+                '<p>The winners are announced.</p></div></article>'
+                '<footer><p>Please check back for updates.</p></footer>')
+    assert not original_source_unfinished(external)
+    assert preflight(job(), complete, plan_postshow(complete), original_html=external, state_dir=tmp_path)
+
+
+def test_routing_change_unlocks_terminal_contract_on_unchanged_source(tmp_path):
+    from modules.report_retry_guard import route_contract_version
+    source = fixture(completed=5, updates=False)
+    plan = plan_postshow(source)
+    older = route_contract_version(["gemini-3.1-flash-lite", "gemini-2.5-pro"])
+    newer = route_contract_version(["gemini-3.1-flash-lite", "gemini-3.8-flash"])
+    assert older != newer
+    digest = preflight(job(), source, plan, contract_version=older, state_dir=tmp_path)
+    mark_terminal_contract(job(), digest, error=ValueError("invalid contract"),
+                           contract_version=older, state_dir=tmp_path)
+    with pytest.raises(ReportRetryDeferred, match="unchanged_source_terminal_contract"):
+        preflight(job(), source, plan, contract_version=older, state_dir=tmp_path)
+    assert preflight(job(), source, plan, contract_version=newer, state_dir=tmp_path) == digest
+
+
+@pytest.mark.parametrize("timestamp", ["2026-11-06T09:00:00", "invalid-timestamp"])
+def test_invalid_gemini38_timestamp_is_unresolved_not_exception(timestamp):
+    result = calculate_v96_2_cost(usage(), "gemini-3.8-flash", timestamp=timestamp)
+    assert result["cost_resolution_status"] == "unresolved"
+    assert result["cost_resolution_reason"] == "pricing_date_unresolved"
+
+
+def test_env_comment_spacing_and_uid_gid_preserved(tmp_path):
+    source = "REPORT_GEMINI_MODEL_CHAIN=lite,gemini-2.5-pro # keep shell comment\n"
+    path = tmp_path / ".env"
+    path.write_text(source)
+    original_stat = path.stat()
+    changed, backup = install(path, apply=True)
+    assert changed == ["REPORT_GEMINI_MODEL_CHAIN"]
+    assert backup is not None and backup.read_text() == source
+    assert path.read_text() == "REPORT_GEMINI_MODEL_CHAIN=lite,gemini-3.8-flash # keep shell comment\n"
+    assert (path.stat().st_uid, path.stat().st_gid) == (original_stat.st_uid, original_stat.st_gid)
+    assert install(path, apply=True)[0] == []

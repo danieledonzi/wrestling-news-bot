@@ -1202,10 +1202,11 @@ def run_report_workshop(job: Dict[str, Any], published_dir: Path, review_dir: Pa
     print(f"[REPORT CLEAN v95.13.1] {json.dumps(cleanup_diagnostics, sort_keys=True)}", flush=True)
     print(f"[REPORT v92] Blocchi estratti: total={len(blocks)} text={len([b for b in blocks if b.get('type') in {'heading','paragraph','quote'}])} images={len([b for b in blocks if b.get('type') == 'image'])} embeds={len([b for b in blocks if b.get('type') == 'embed'])} featured={bool(featured_image)}", flush=True)
     from modules.report_postshow import plan_postshow
-    from modules.report_retry_guard import ReportRetryDeferred, preflight, mark_terminal_contract
+    from modules.report_retry_guard import ReportRetryDeferred, preflight, mark_terminal_contract, route_contract_version
     postshow = plan_postshow(blocks)
+    route_version = route_contract_version(REPORT_MODEL_CHAIN)
     try:
-        source_digest = preflight(job, blocks, postshow)
+        source_digest = preflight(job, blocks, postshow, contract_version=route_version, original_html=_html)
     except ReportRetryDeferred as exc:
         record_gemini_event(agent="Bob", phase="report_source_retry_guard",
                             model=None, status="avoided", reason=exc.reason,
@@ -1215,7 +1216,7 @@ def run_report_workshop(job: Dict[str, Any], published_dir: Path, review_dir: Pa
     try:
         translated = translate_report_blocks(job.get("source_title") or job.get("title") or "", blocks, job["title"], postshow=postshow)
     except ReportModelValidationError as exc:
-        mark_terminal_contract(job, source_digest, error=exc)
+        mark_terminal_contract(job, source_digest, error=exc, contract_version=route_version)
         raise ReportRetryDeferred("provider_contract_invalid", source_digest, key=str(job.get("report_key") or "")) from exc
     content = render_blocks(blocks, translated, featured_image, job=job, postshow=postshow)
     published_dir.mkdir(parents=True, exist_ok=True)
