@@ -683,6 +683,10 @@ class ReportModelValidationError(ValueError):
     """A generated report violates the deterministic postshow contract."""
 
 
+class ReportModelPartialValidationError(ValueError):
+    """Exactly one postshow contract failure in this invocation."""
+
+
 def generate_json(prompt: str, chain_name: str = "unknown", cooldown_models: Optional[set[str]] = None, ledger_context: Optional[Dict[str, Any]] = None, response_validator: Optional[Callable[[dict], Any]] = None) -> Tuple[Dict[str, Any], str]:
     is_report_chain = chain_name.startswith("report_")
     context = ledger_context or {}
@@ -780,6 +784,8 @@ def generate_json(prompt: str, chain_name: str = "unknown", cooldown_models: Opt
             record_gemini_attempt(response=None, agent="Bob", phase=chain_name, model_requested=model, status="failed", reason="report_translation_temporary" if temporary else "report_translation", result=str(exc)[:500], pipeline="report" if is_report_chain else None, cooldown_applied=temporary or None, operation_id=operation_id, attempt_index=attempt_index, retry=False, fallback=attempt_index > 0, purpose=chain_name, **context)
             print(f"[TRANSLATE v92] Modello fallito: {model} | chain={chain_name} | error={str(exc)[:220]}", flush=True)
             continue
+    if invalid_postshow_attempts == 1:
+        raise ReportModelPartialValidationError("one_postshow_contract_failure") from last
     raise last if last else RuntimeError("Nessun modello disponibile")
 
 
@@ -1205,7 +1211,7 @@ def run_report_workshop(job: Dict[str, Any], published_dir: Path, review_dir: Pa
     print(f"[REPORT CLEAN v95.13.1] {json.dumps(cleanup_diagnostics, sort_keys=True)}", flush=True)
     print(f"[REPORT v92] Blocchi estratti: total={len(blocks)} text={len([b for b in blocks if b.get('type') in {'heading','paragraph','quote'}])} images={len([b for b in blocks if b.get('type') == 'image'])} embeds={len([b for b in blocks if b.get('type') == 'embed'])} featured={bool(featured_image)}", flush=True)
     from modules.report_postshow import plan_postshow
-    from modules.report_retry_guard import ReportRetryDeferred, preflight, mark_terminal_contract, route_contract_version
+    from modules.report_retry_guard import ReportRetryDeferred, preflight, mark_terminal_contract, note_contract_failure, route_contract_version
     postshow = plan_postshow(blocks)
     route_version = route_contract_version(REPORT_MODEL_CHAIN)
     try:
@@ -1221,6 +1227,11 @@ def run_report_workshop(job: Dict[str, Any], published_dir: Path, review_dir: Pa
     except ReportModelValidationError as exc:
         mark_terminal_contract(job, source_digest, error=exc, contract_version=route_version)
         raise ReportRetryDeferred("provider_contract_invalid", source_digest, key=str(job.get("report_key") or "")) from exc
+    except ReportModelPartialValidationError as exc:
+        if note_contract_failure(job, source_digest, error=exc, contract_version=route_version):
+            raise ReportRetryDeferred("repeated_provider_contract_invalid", source_digest,
+                                      key=str(job.get("report_key") or "")) from exc
+        raise
     content = render_blocks(blocks, translated, featured_image, job=job, postshow=postshow)
     published_dir.mkdir(parents=True, exist_ok=True)
     review_dir.mkdir(parents=True, exist_ok=True)

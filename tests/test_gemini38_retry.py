@@ -309,3 +309,40 @@ def test_env_migration_isolation_nonreport_chains_are_untouched():
     assert "BOB_PREMIUM_MODEL_CHAIN=lite,gemini-2.5-pro" in updated
     assert "MENZO_DUPLICATE_ARBITRATION_MODEL_CHAIN=lite,gemini-2.5-pro" in updated
     assert "NEWS_GEMINI_MODEL_CHAIN=gemini-2.5-pro" in updated
+
+
+def test_one_contract_failure_per_run_locks_only_after_second_matching_run(tmp_path):
+    from modules.report_retry_guard import note_contract_failure
+    source = fixture(completed=5, updates=False)
+    plan = plan_postshow(source)
+    digest = preflight(job(), source, plan, state_dir=tmp_path)
+    assert not note_contract_failure(job(), digest, error=ValueError("one invalid postshow"),
+                                     state_dir=tmp_path)
+    assert preflight(job(), source, plan, state_dir=tmp_path) == digest
+    assert note_contract_failure(job(), digest, error=ValueError("second invalid postshow"),
+                                 state_dir=tmp_path)
+    with pytest.raises(ReportRetryDeferred, match="unchanged_source_terminal_contract"):
+        preflight(job(), source, plan, state_dir=tmp_path)
+
+
+def test_cross_run_partial_contract_resets_on_source_or_model_change(tmp_path):
+    from modules.report_retry_guard import note_contract_failure, route_contract_version
+    source = fixture(completed=5, updates=False)
+    new_source = source + [{"type": "paragraph", "text": "New confirmed outcome"}]
+    first = route_contract_version(["lite", "gemini-3.8-flash"])
+    second = route_contract_version(["lite", "gemini-3.5-flash"])
+    token = preflight(job(), source, plan_postshow(source), state_dir=tmp_path, contract_version=first)
+    assert not note_contract_failure(job(), token, error=ValueError("first"),
+                                     state_dir=tmp_path, contract_version=first)
+    token2 = preflight(job(), new_source, plan_postshow(new_source), state_dir=tmp_path, contract_version=first)
+    assert not note_contract_failure(job(), token2, error=ValueError("new source first"),
+                                     state_dir=tmp_path, contract_version=first)
+    assert not note_contract_failure(job(), token2, error=ValueError("new route first"),
+                                     state_dir=tmp_path, contract_version=second)
+
+
+def test_single_contract_with_other_invalid_json_exposes_partial_class(monkeypatch):
+    calls = mock_generate(monkeypatch, ["not valid JSON", '{"result_index":999}', "still not JSON"])
+    with pytest.raises(workshop.ReportModelPartialValidationError):
+        workshop.generate_json("offline", chain_name="report_blocks_test", response_validator=validate)
+    assert len(calls) == 3

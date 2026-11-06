@@ -160,3 +160,26 @@ def mark_terminal_contract(job: dict[str, Any], source_digest: str, *, error: Ex
     _save(job, {"schema": 1, "kind": "terminal_model_contract", "reason": "provider_contract_invalid",
                 "source_digest": source_digest, "contract_version": contract_version,
                 "last_error": str(error)[:300]}, state_dir)
+
+
+def note_contract_failure(job: dict[str, Any], source_digest: str, *, error: Exception,
+                          contract_version: str = CONTRACT_VERSION, state_dir: Path | None = None) -> bool:
+    """Remember one contract-invalid response across independent publisher runs.
+
+    One matching prior partial failure plus the new failure locks the identical
+    source/route. Transient failures or malformed JSON alone never call this.
+    Returns True if the second error established the terminal hold.
+    """
+    previous = _read(job, state_dir)
+    matching = (previous.get("source_digest") == source_digest
+                and previous.get("contract_version") == contract_version)
+    count = int(previous.get("contract_failures", 0)) if matching and previous.get("kind") == "partial_model_contract" else 0
+    count += 1
+    if count >= 2:
+        mark_terminal_contract(job, source_digest, error=error, contract_version=contract_version,
+                               state_dir=state_dir)
+        return True
+    _save(job, {"schema": 1, "kind": "partial_model_contract", "reason": "one_contract_failure",
+                "contract_failures": count, "source_digest": source_digest,
+                "contract_version": contract_version, "last_error": str(error)[:300]}, state_dir)
+    return False
