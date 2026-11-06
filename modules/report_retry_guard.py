@@ -110,10 +110,11 @@ def _save(job: dict[str, Any], state: dict[str, Any], state_dir: Path | None = N
 
 
 
-def _preview_anchors(text: str) -> tuple[str, str] | None:
-    """Extract distinctive competitor anchors from an explicitly scheduled bout.
+def _preview_anchors(text: str) -> tuple[tuple[str, ...], tuple[str, ...]] | None:
+    """Canonical, opponent-distinguishing identity of a scheduled match.
 
-    Ambiguous preview cards are not counted as completed by inference.
+    Both sides retain their actual names: Jimmy Uso and Jey Uso remain distinct.
+    Identical previews share one identity even when repeated in the feed.
     """
     sides = re.split(r"\s+vs\.?\s+|\s+versus\s+", text, maxsplit=1, flags=re.I)
     if len(sides) != 2:
@@ -126,8 +127,10 @@ def _preview_anchors(text: str) -> tuple[str, str] | None:
         names = re.findall(r"[a-z0-9]+", side.lower())
         if not names:
             return None
-        anchors.append(names[-1])
-    return tuple(anchors) if anchors[0] != anchors[1] else None
+        anchors.append(tuple(sorted(set(names))))
+    if anchors[0] == anchors[1]:
+        return None
+    return tuple(sorted(anchors))
 
 
 def _evidence_context(blocks: list[dict[str, Any]], index: int, body_start: int) -> str:
@@ -139,11 +142,11 @@ def _evidence_context(blocks: list[dict[str, Any]], index: int, body_start: int)
     return text
 
 
-def _positively_resolved_previews(blocks: list[dict[str, Any]], plan: dict) -> set[int]:
-    """Count unique *scheduled bouts* supported by result or cancellation evidence.
+def _positively_resolved_previews(blocks: list[dict[str, Any]], plan: dict) -> set[tuple]:
+    """Count positively evidenced unique bout identities, not preview rows.
 
-    Repeated descriptions, recap headings and multiple results paragraphs cannot
-    inflate the count; one preview item contributes at most one resolved bout.
+    The same match repeated under many headings or in a duplicate preview
+    cannot inflate the number of distinct results.
     """
     body_start = int(plan["body_start"])
     outcome_indexes = set(plan.get("result_indexes") or [])
@@ -158,8 +161,9 @@ def _positively_resolved_previews(blocks: list[dict[str, Any]], plan: dict) -> s
     matched = set()
     for i in plan["preview_indexes"]:
         anchors = _preview_anchors(str(blocks[i].get("text") or ""))
-        if anchors and any(set(anchors).issubset(words) for words in evidence):
-            matched.add(i)
+        if anchors and any(set(anchors[0]).issubset(words) and set(anchors[1]).issubset(words)
+                           for words in evidence):
+            matched.add(anchors)
     return matched
 
 
@@ -173,8 +177,13 @@ def source_completion_issue(blocks: list[dict[str, Any]], plan: dict | None, *, 
     if not plan or not plan.get("preview_indexes"):
         return None
     previews = [str(blocks[i].get("text") or "") for i in plan["preview_indexes"]]
-    expected_matches = sum(bool(MATCH_PREVIEW_RE.search(t)) for t in previews)
-    if expected_matches < 2:
+    # Count unique scheduled bouts, never duplicated preview rows as different
+    # matches. An ambiguous row remains unresolved while a source is updating.
+    identities = [_preview_anchors(t) for t in previews if MATCH_PREVIEW_RE.search(t)]
+    distinct = {identity for identity in identities if identity}
+    duplicate_previews = len(distinct) < len([identity for identity in identities if identity])
+    expected_matches = len(distinct) + sum(identity is None for identity in identities)
+    if len(identities) < 2:
         return None
     source_indexes = [i for i in plan.get("source_indexes", []) if blocks[i].get("type") in TEXT_TYPES]
     narrative = [str(blocks[i].get("text") or "") for i in source_indexes]
@@ -186,7 +195,7 @@ def source_completion_issue(blocks: list[dict[str, Any]], plan: dict | None, *, 
     # Never claim an upcoming match happened merely because the preview lists it.
     # An explicit "updates coming" marker with several unresolved bouts is strong
     # evidence of an unfinished live article (unlike an unknown outcome alone).
-    if unfinished and resolved_bouts < expected_matches:
+    if unfinished and (duplicate_previews or resolved_bouts < expected_matches):
         return "source_results_still_updating"
     if unfinished and actual == 0:
         return "source_without_completed_match_results"

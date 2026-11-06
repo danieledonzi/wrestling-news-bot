@@ -331,3 +331,19 @@ def test_distinct_resolved_previews_with_repeated_mentions_are_not_overcounted()
     source.insert(len(source) - 1, {"type": "heading", "text": "A0 vs. B0 recap"})
     source.insert(len(source) - 1, {"type": "paragraph", "text": "Winner A0 defeated B0 again on replay."})
     assert source_completion_issue(source, plan_postshow(source)) is None
+
+
+def test_duplicate_preview_rows_do_not_fabricate_distinct_results():
+    source = fixture(completed=1, updates=True)
+    source[3]["text"] = source[2]["text"]  # Two identical A0 vs B0 entries
+    plan = plan_postshow(source)
+    assert source_completion_issue(source, plan) == "source_results_still_updating"
+
+
+def test_same_surname_competitors_remain_distinct_and_can_be_resolved():
+    source = fixture(completed=5, updates=True)
+    source[2]["text"] = "Jimmy Uso vs. Jey Uso"
+    source[9]["text"] = "Jimmy Uso vs. Jey Uso"
+    source[10]["text"] = "Winner: Jimmy Uso defeated Jey Uso by pinfall"
+    plan = plan_postshow(source)
+    assert source_completion_issue(source, plan) is None
