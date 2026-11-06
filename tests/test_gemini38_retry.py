@@ -266,3 +266,45 @@ def test_env_comment_spacing_and_uid_gid_preserved(tmp_path):
     assert path.read_text() == "REPORT_GEMINI_MODEL_CHAIN=lite,gemini-3.8-flash # keep shell comment\n"
     assert (path.stat().st_uid, path.stat().st_gid) == (original_stat.st_uid, original_stat.st_gid)
     assert install(path, apply=True)[0] == []
+
+
+def test_multiple_result_phrases_from_one_match_do_not_count_as_many_matches():
+    source = fixture(completed=1, updates=True)
+    update_index = next(i for i, b in enumerate(source)
+                        if b.get("text") == "Update coming shortly.")
+    source[update_index:update_index] = [
+        {"type": "paragraph", "text": f"The winner A0 won by pinfall (replay mention {i})."}
+        for i in range(6)
+    ]
+    plan = plan_postshow(source)
+    assert len(plan["result_indexes"]) >= 5
+    assert source_completion_issue(source, plan) == "source_results_still_updating"
+
+
+def test_repeated_cancellation_mentions_are_one_resolved_bout():
+    source = fixture(completed=1, updates=True)
+    update_index = next(i for i, b in enumerate(source)
+                        if b.get("text") == "Update coming shortly.")
+    source[update_index:update_index] = [
+        {"type": "paragraph", "text": f"The match was cancelled (mention {i})."}
+        for i in range(6)
+    ]
+    assert source_completion_issue(source, plan_postshow(source)) == "source_results_still_updating"
+
+
+def test_distinct_completed_match_sections_are_counted_once_each():
+    source = fixture(completed=5, updates=True)
+    assert source_completion_issue(source, plan_postshow(source)) is None
+
+
+def test_mixed_upstream_and_single_contract_failure_does_not_persist(monkeypatch):
+    calls = mock_generate(monkeypatch, [
+        RuntimeError("503 temporarily unavailable"),
+        "not valid JSON",
+        '{"result_index":999}',
+    ])
+    with pytest.raises(ValueError) as exc:
+        workshop.generate_json("offline", chain_name="report_blocks_test",
+                               response_validator=validate)
+    assert not isinstance(exc.value, workshop.ReportModelValidationError)
+    assert calls == ["gemini-3.1-flash-lite", "gemini-3.5-flash-lite", "gemini-3.8-flash"]

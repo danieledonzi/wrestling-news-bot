@@ -109,6 +109,23 @@ def _save(job: dict[str, Any], state: dict[str, Any], state_dir: Path | None = N
             os.unlink(tmp)
 
 
+
+def _result_evidence_group(blocks: list[dict[str, Any]], index: int, body_start: int) -> str:
+    """One chronological match section counts as one outcome, not N prose hits.
+
+    A repeated heading is the same evidence group. Multiple winning phrases
+    inside that section cannot turn a single held bout into several results.
+    Unheaded narrative evidence stays conservative (one undifferentiated group).
+    """
+    for pos in range(index, body_start - 1, -1):
+        block = blocks[pos]
+        if block.get("type") == "heading":
+            normalized = re.sub(r"\s+", " ", re.sub(r"[^a-z0-9]+", " ",
+                                str(block.get("text") or "").lower())).strip()
+            return "section:" + (normalized or "unlabelled_heading")
+    return "section:unheaded"
+
+
 def source_completion_issue(blocks: list[dict[str, Any]], plan: dict | None, *, original_html: str | None = None) -> str | None:
     """Positive proof of an unfinished source, NOT a global readiness threshold.
 
@@ -122,16 +139,22 @@ def source_completion_issue(blocks: list[dict[str, Any]], plan: dict | None, *, 
     expected_matches = sum(bool(MATCH_PREVIEW_RE.search(t)) for t in previews)
     if expected_matches < 2:
         return None
-    actual = len(set(plan.get("result_indexes") or []))
-    narrative = [str(blocks[i].get("text") or "") for i in plan.get("source_indexes", []) if blocks[i].get("type") in TEXT_TYPES]
+    source_indexes = [i for i in plan.get("source_indexes", []) if blocks[i].get("type") in TEXT_TYPES]
+    narrative = [str(blocks[i].get("text") or "") for i in source_indexes]
     if not narrative:
         return "missing_postshow_narrative"
+    body_start = int(plan["body_start"])
+    held_groups = {_result_evidence_group(blocks, i, body_start)
+                   for i in plan.get("result_indexes", [])}
+    nonheld_groups = {_result_evidence_group(blocks, i, body_start)
+                      for i in source_indexes if EXPLICIT_NOT_HELD_RE.search(blocks[i].get("text") or "")}
+    actual = len(held_groups)
+    resolved_bouts = len(held_groups | nonheld_groups)
     unfinished = original_source_unfinished(original_html) or any(UNFINISHED_RE.search(t) for t in narrative)
-    explicitly_not_held = sum(bool(EXPLICIT_NOT_HELD_RE.search(t)) for t in narrative)
     # Never claim an upcoming match happened merely because the preview lists it.
     # An explicit "updates coming" marker with several unresolved bouts is strong
     # evidence of an unfinished live article (unlike an unknown outcome alone).
-    if unfinished and actual + explicitly_not_held < expected_matches:
+    if unfinished and resolved_bouts < expected_matches:
         return "source_results_still_updating"
     if unfinished and actual == 0:
         return "source_without_completed_match_results"

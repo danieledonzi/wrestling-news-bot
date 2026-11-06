@@ -743,8 +743,11 @@ def generate_json(prompt: str, chain_name: str = "unknown", cooldown_models: Opt
                 contract_failure = failure_reason == "invalid_report_contract"
                 if contract_failure:
                     invalid_postshow_attempts += 1
-                last = (ReportModelValidationError if contract_failure else ValueError)(parse_error or "invalid_json")
                 terminal_contract = contract_failure and invalid_postshow_attempts >= 2
+                # Only two *actual* postshow-contract failures may establish
+                # a durable terminal lock. Upstream 429/503 and malformed JSON
+                # must not convert one later contract error into a permanent hold.
+                last = (ReportModelValidationError if terminal_contract else ValueError)(parse_error or "invalid_json")
                 if operational_request and canonical_attempt:
                     later_real_model = any(candidate not in cooldown_models for candidate in active_models[active_models.index(model) + 1:])
                     operational_request.failed(canonical_attempt, error_class="validation",
