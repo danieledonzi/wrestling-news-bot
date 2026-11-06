@@ -294,3 +294,18 @@ def test_zero_result_live_source_defers_even_with_special_preview_bouts():
     source[2]["text"] = "20-Woman Battle Royal"
     source[3]["text"] = "Jimmy Uso vs. Jey Uso"
     assert source_completion_issue(source, plan_postshow(source)) == "source_without_completed_match_results"
+
+
+def test_env_migration_isolation_nonreport_chains_are_untouched():
+    original = (
+        "REPORT_GEMINI_MODEL_CHAIN=lite,gemini-2.5-pro\n"
+        "BOB_PREMIUM_MODEL_CHAIN=lite,gemini-2.5-pro\n"
+        "MENZO_DUPLICATE_ARBITRATION_MODEL_CHAIN=lite,gemini-2.5-pro\n"
+        "NEWS_GEMINI_MODEL_CHAIN=gemini-2.5-pro\n"
+    )
+    updated, changed = migrate(original)
+    assert changed == ["REPORT_GEMINI_MODEL_CHAIN"]
+    assert "REPORT_GEMINI_MODEL_CHAIN=lite,gemini-3.8-flash" in updated
+    assert "BOB_PREMIUM_MODEL_CHAIN=lite,gemini-2.5-pro" in updated
+    assert "MENZO_DUPLICATE_ARBITRATION_MODEL_CHAIN=lite,gemini-2.5-pro" in updated
+    assert "NEWS_GEMINI_MODEL_CHAIN=gemini-2.5-pro" in updated
