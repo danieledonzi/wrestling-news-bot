@@ -941,8 +941,15 @@ def upload_media(image_url: Optional[str]) -> Tuple[Optional[int], Optional[str]
         img_res.raise_for_status()
         content_type = img_res.headers.get("Content-Type", "").split(";", 1)[0].strip().lower()
         if not content_type.startswith("image/"):
-            media_cache[image_url] = (None, None)
-            return None, None
+            # Some Ringside News smush-avif endpoints return genuine PNG bytes
+            # with application/octet-stream (and a misleading .avif URL suffix).
+            # Recover only a positively identified PNG; do not accept arbitrary
+            # binary responses or suppress the existing media-integrity gate.
+            if content_type in {"application/octet-stream", "binary/octet-stream"} and img_res.content.startswith(b"\x89PNG\r\n\x1a\n"):
+                content_type = "image/png"
+            else:
+                media_cache[image_url] = (None, None)
+                return None, None
         ext = mimetypes.guess_extension(content_type) or ".jpg"
         if ext == ".jpe":
             ext = ".jpg"
