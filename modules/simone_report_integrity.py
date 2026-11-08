@@ -84,10 +84,12 @@ def is_canonical_report_source(entry: dict[str, Any], *, legacy_lock: bool = Fal
                 return False
         except (ValueError, TypeError):
             return False
-    # Discovery is independent of election time. A quick list or taping spoiler
-    # must never become the fallback complete report.
+    # TOTEM-R01: preliminary material is not a complete Results report for
+    # EITHER canonical source. In particular, taping spoilers from the
+    # preferred Ringside source cannot establish an immutable URL lock.
+    # Inspect only the original headline/slug, not body text or generated titles.
     explicit = _slug(source_identity_text(entry)).replace("_", " ")
-    return not (source == FALLBACK_REPORT_SOURCE and re.search(r"\b(?:spoilers?|quick results|preview|predictions?)\b", explicit))
+    return not bool(re.search(r"\b(?:spoilers?|quick results|preview|predictions?)\b", explicit))
 
 
 def report_source_name(entry: dict[str, Any]) -> str:
