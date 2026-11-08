@@ -150,3 +150,50 @@ def test_post_payload_assigns_only_numeric_term_ids():
     assert names==["wwe","crownjewel","Roman Reigns"]
     assert payload["tags"] == [17,21,48]
     assert all(isinstance(t,int) for t in payload["tags"])
+
+
+def test_exactly_full_last_page_honors_wordpress_total_pages():
+    class FullPage:
+        calls = 0
+        def get(self, url, **kwargs):
+            self.calls += 1
+            assert kwargs["params"]["page"] == 1, "Must not request invalid second page"
+            response = Response(200, [
+                {"id": i + 1, "slug": f"tag-{i}", "name": f"tag-{i}"}
+                for i in range(100)
+            ])
+            response.headers["X-WP-TotalPages"] = "1"
+            return response
+        def post(self, *_args, **_kwargs):
+            raise AssertionError("Existing WordPress terms must not be recreated")
+
+    session = FullPage()
+    result = tags.resolve_tag_ids(
+        ["tag-0", "tag-99"], wp_root="https://wp.test",
+        auth=("u", "p"), session=session)
+    assert result == [1,100]
+    assert session.calls == 1
+
+
+def test_exactly_full_last_page_without_headers_keeps_prior_terms():
+    class NoHeaderFullPage:
+        calls = 0
+        def get(self, url, **kwargs):
+            self.calls += 1
+            page = kwargs["params"]["page"]
+            if page == 1:
+                return Response(200, [
+                    {"id": i + 1, "slug": f"tag-{i}", "name": f"tag-{i}"}
+                    for i in range(100)
+                ])
+            assert page == 2
+            return Response(400, {"code": "rest_post_invalid_page_number"})
+        def post(self, *_args, **_kwargs):
+            raise AssertionError("Existing WordPress terms must not be recreated")
+
+    session = NoHeaderFullPage()
+    result = tags.resolve_tag_ids(
+        ["tag-0", "tag-99"], wp_root="https://wp.test",
+        auth=("u", "p"), session=session)
+    assert result == [1,100]
+    assert session.calls == 2

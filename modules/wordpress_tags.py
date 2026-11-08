@@ -163,6 +163,17 @@ def _load_terms(root: str, auth: tuple[str, str], session: Any,
             params={"per_page": 100, "page": page, "_fields": "id,name,slug"},
             timeout=timeout)
         if response.status_code != 200:
+            # Some WordPress installations omit pagination headers. If the
+            # final valid page has exactly 100 terms, the next page returns
+            # rest_post_invalid_page_number; preserve the terms already read.
+            code = ""
+            if page > 1 and response.status_code == 400:
+                try:
+                    code = str(response.json().get("code") or "")
+                except (ValueError, AttributeError):
+                    pass
+            if code.endswith("invalid_page_number"):
+                break
             raise RuntimeError("tags_list_http_" + str(response.status_code))
         rows = response.json()
         if not isinstance(rows, list):
@@ -172,7 +183,8 @@ def _load_terms(root: str, auth: tuple[str, str], session: Any,
                 slug = str(term.get("slug") or _slug(str(term.get("name") or "")))
                 if slug:
                     terms[slug] = int(term["id"])
-        if len(rows) < 100:
+        last_page = str(response.headers.get("X-WP-TotalPages") or "")
+        if len(rows) < 100 or (last_page.isdigit() and page >= int(last_page)):
             break
     _cache = terms
     _cache_loaded_for = root
