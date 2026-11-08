@@ -643,6 +643,13 @@ def publish_article(article: dict[str, Any], history: dict[str, Any], wp_ok: boo
         "excerpt": str(article.get("excerpt_it") or "")[:500],
         "meta": {"original_url": url, "owtv_source": source, "owtv_pipeline": PUBLISHER_VERSION},
     }
+    from modules.wordpress_tags import assign_tags
+    assign_tags(
+        payload, title, [article.get("category_hint")],
+        root=wp_root(), auth=wp_auth(), session=session,
+        dry_run=DRY_RUN or not wp_ok, timeout=REQUEST_TIMEOUT,
+        logger=lambda message: print(f"[PUBLISHER WP TAGS] {message}", flush=True),
+    )
 
     media_id: int | None = None
     if wp_ok and image_url:

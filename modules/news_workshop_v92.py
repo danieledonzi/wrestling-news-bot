@@ -1124,6 +1124,12 @@ def publish_news(job: Dict[str, Any], translated_title: str, body_html: str, ima
     }
     if media_id:
         payload["featured_media"] = media_id
+    from modules.wordpress_tags import assign_tags
+    assign_tags(
+        payload, translated_title, job.get("categories") or [job.get("category")],
+        root=wp_root(), auth=wp_auth(), session=session, timeout=REQUEST_TIMEOUT_WP,
+        logger=lambda message: print(f"[WP NEWS TAGS] {message}", flush=True),
+    )
     res = wp_request_with_retry("post", wp_posts_url(), json=payload, auth=wp_auth())
     if res.status_code not in {200, 201}:
         raise RuntimeError(f"WP post news failed: {res.status_code} {res.text[:500]}")

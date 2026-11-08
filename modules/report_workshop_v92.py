@@ -1204,6 +1204,14 @@ def publish_report(job: Dict[str, Any], content: str, featured_image_url: Option
     media_id, _media_src = upload_media(featured_image_url)
     if media_id:
         payload["featured_media"] = media_id
+    from modules.wordpress_tags import assign_tags
+    assign_tags(
+        payload, str(job.get("title") or ""),
+        job.get("categories") or [job.get("category")],
+        root=wp_root(), auth=wp_auth(), session=session, timeout=REQUEST_TIMEOUT_WP,
+        report=True,
+        logger=lambda message: print(f"[WP REPORT TAGS] {message}", flush=True),
+    )
     res = wp_request_with_retry("post", wp_posts_url(), json=payload, auth=wp_auth())
     if res.status_code == 201:
         data = res.json()
