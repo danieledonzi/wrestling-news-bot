@@ -47,9 +47,57 @@ def uncertain(card):
                for f in card['facts'])
 
 
+def _scoped_history_uncertainty(left, right):
+    """Uncertain facts require a cross-article bridge, not a whole-card fan-out.
+
+    A missing identity may still be relevant when its own factual episode
+    matches. This is retrieval only; Gemini owns semantic admission.
+    """
+    if not (uncertain(left) or uncertain(right)):
+        return False
+
+    def subjects(card):
+        return {(s['kind'], s['canonical_entity_id'])
+                for fact in card['facts'] for s in fact['central_subjects']}
+
+    def tags(card, field):
+        return {tag for fact in card['facts'] for tag in fact[field]}
+
+    shared = subjects(left) & subjects(right)
+    if any(kind in {'person', 'team'} for kind, _ in shared):
+        return True
+
+    # Explicit episode or development references can bridge differing subject
+    # extraction. A generic event/show name alone is not an identity match.
+    specific_development = {tag for tag in tags(left, 'development_tags') & tags(right, 'development_tags')
+                            if len(tag.split('_')) >= 3 and tag != 'general_wrestling_news'}
+    if (tags(left, 'retrieval_episode_tags') & tags(right, 'retrieval_episode_tags')
+            or tags(left, 'specific_event_tags') & tags(right, 'specific_event_tags')
+            or specific_development):
+        return True
+
+    domain_shared = (bool(tags(left, 'episode_facets') & tags(right, 'episode_facets'))
+                     or bool({f['episode_family'] for f in left['facts'] if f['episode_family'] != 'other'}
+                             & {f['episode_family'] for f in right['facts'] if f['episode_family'] != 'other'}))
+    if domain_shared and any(kind == 'organization' for kind, _ in shared):
+        return True
+
+    # Evaluate absent/uncertain identity on the fact where it occurs. An
+    # unrelated, well-identified article is not suspect merely because one
+    # fact in its counterpart has an unclassified episode.
+    for a in left['facts']:
+        for b in right['facts']:
+            unclear_identity = (not a['central_subjects'] or not b['central_subjects']
+                                or any(s['identity_confidence'] != 'certain'
+                                       for s in a['central_subjects'] + b['central_subjects']))
+            if unclear_identity and (a['episode_family'] == b['episode_family'] != 'other'
+                                     or set(a['episode_facets']) & set(b['episode_facets'])):
+                return True
+    return False
+
+
 def history_evidence(left, right):
     """A retrieval gate, never semantic authority. Insufficient tags stay reviewable."""
-    ambiguous = uncertain(left) or uncertain(right)
     evidence = []
     for a in left['facts']:
         for b in right['facts']:
@@ -78,7 +126,8 @@ def history_evidence(left, right):
                                  'development_tags': sorted(specific_development)})
     if evidence:
         return {'reason': 'shared_factual_retrieval_evidence', 'fact_pairs': evidence}
-    return {'reason': 'uncertain_identity_or_episode', 'fact_pairs': []} if ambiguous else None
+    return ({'reason': 'uncertain_identity_or_episode', 'fact_pairs': []}
+            if _scoped_history_uncertainty(left, right) else None)
 
 
 def projection(card):
