@@ -687,7 +687,26 @@ class ReportModelPartialValidationError(ValueError):
     """Exactly one postshow contract failure in this invocation."""
 
 
-def generate_json(prompt: str, chain_name: str = "unknown", cooldown_models: Optional[set[str]] = None, ledger_context: Optional[Dict[str, Any]] = None, response_validator: Optional[Callable[[dict], Any]] = None) -> Tuple[Dict[str, Any], str]:
+class ReportBatchValidationError(ValueError):
+    """Incomplete or invalid report-body batch; not a postshow contract error."""
+
+
+def report_body_model_chain() -> List[str]:
+    """Prefer inexpensive Lite models for body blocks, retaining premium fallbacks."""
+    override = os.getenv("REPORT_BODY_GEMINI_MODEL_CHAIN", "").strip()
+    if override:
+        return list(dict.fromkeys(m.strip() for m in override.split(",") if m.strip()))
+    return [m for m in REPORT_MODEL_CHAIN if "-lite" in m] + [
+        m for m in REPORT_MODEL_CHAIN if "-lite" not in m
+    ]
+
+
+def effective_report_route() -> List[str]:
+    """Both the strict postshow route and body route identify the retry contract."""
+    return [*REPORT_MODEL_CHAIN, "--body-only--", *report_body_model_chain()]
+
+
+def generate_json(prompt: str, chain_name: str = "unknown", cooldown_models: Optional[set[str]] = None, ledger_context: Optional[Dict[str, Any]] = None, response_validator: Optional[Callable[[dict], Any]] = None, *, model_chain_override: Optional[List[str]] = None, validation_scope: str = "postshow") -> Tuple[Dict[str, Any], str]:
     is_report_chain = chain_name.startswith("report_")
     context = ledger_context or {}
     operational_request = (OperationalAIRequest(
@@ -698,7 +717,8 @@ def generate_json(prompt: str, chain_name: str = "unknown", cooldown_models: Opt
         if operational_request:
             operational_request.initialization_failed("missing_api_key")
         raise RuntimeError("GEMINI_API_KEY mancante")
-    active_models = REPORT_MODEL_CHAIN if is_report_chain else MODEL_CHAIN
+    active_models = (list(model_chain_override) if is_report_chain and model_chain_override is not None
+                     else REPORT_MODEL_CHAIN if is_report_chain else MODEL_CHAIN)
     print(f"[TRANSLATE v92] Chain attiva: {chain_name} | modelli={','.join(active_models)}", flush=True)
     if is_report_chain:
         print(f"[REPORT v95.2] Gemini chain attiva: {','.join(active_models)}", flush=True)
@@ -729,7 +749,9 @@ def generate_json(prompt: str, chain_name: str = "unknown", cooldown_models: Opt
         ) if operational_request else None
         attempt_started_at = time.monotonic()
         try:
-            generation_options = {"config": {"response_mime_type": "application/json"}} if response_validator else {}
+            # Preserve JSON provider mode for the postshow card; body-only Lite
+            # calls retain their existing request mode for compatibility.
+            generation_options = {"config": {"response_mime_type": "application/json"}} if response_validator and validation_scope == "postshow" else {}
             res = client.models.generate_content(model=model, contents=prompt, **generation_options)
             data = None
             parse_error = None
@@ -737,11 +759,16 @@ def generate_json(prompt: str, chain_name: str = "unknown", cooldown_models: Opt
             try:
                 data = extract_json_object(res.text)
                 if response_validator:
-                    failure_reason = "invalid_report_contract"
+                    failure_reason = ("invalid_report_contract" if validation_scope == "postshow"
+                                      else "invalid_report_batch")
                     response_validator(data)
             except Exception as exc:
                 data = None
                 parse_error = str(exc)[:500]
+                if isinstance(exc, ReportBatchValidationError):
+                    # A translation-body defect must never trigger the durable
+                    # two-strikes postshow result-card contract lock.
+                    failure_reason = "invalid_report_batch"
             record_gemini_attempt(response=res, agent="Bob", phase=chain_name, model_requested=model, status="called", reason="report_translation", result="valid_json" if data is not None else failure_reason, pipeline="report" if is_report_chain else None, operation_id=operation_id, attempt_index=attempt_index, fallback=attempt_index > 0, retry=False, purpose=chain_name, **context)
             if data is None:
                 contract_failure = failure_reason == "invalid_report_contract"
@@ -795,6 +822,35 @@ def text_blocks(blocks: List[Dict[str, str]]) -> List[Dict[str, Any]]:
         if block["type"] in {"heading", "paragraph", "quote"}:
             out.append({"i": idx, "type": block["type"], "level": block.get("level"), "text": block.get("translation_text") or block.get("text", "")})
     return out
+
+
+def validated_report_batch(data: Dict[str, Any], batch: List[Dict[str, Any]]) -> Dict[int, str]:
+    """Reject missing, duplicate, empty and obviously summarized text blocks.
+
+    Validation is reused inside the provider fallback loop and after selection.
+    Body failures never count as postshow-result contract failures.
+    """
+    indexes = {int(item["i"]) for item in batch}
+    arr = data.get("items") or []
+    if not isinstance(arr, list) or len(arr) != len(batch):
+        raise ReportBatchValidationError("Traduzione: numero di blocchi incompatibile")
+    translated: Dict[int, str] = {}
+    for item in arr:
+        if not isinstance(item, dict) or type(item.get("i")) is not int or not isinstance(item.get("text"), str):
+            raise ReportBatchValidationError("Traduzione: blocco non valido")
+        i = item["i"]
+        txt = clean_text(item["text"])
+        if i not in indexes or i in translated or not txt:
+            raise ReportBatchValidationError("Traduzione: indice estraneo, duplicato o testo vuoto")
+        original = next(b["text"] for b in batch if b["i"] == i)
+        # Technical lower bound on completeness, not a semantic quality claim.
+        if len(original.split()) >= 80 and len(txt.split()) < len(original.split()) * 0.65:
+            raise ReportBatchValidationError(f"Traduzione apparentemente sintetica: blocco={i}")
+        translated[i] = txt
+    missing = indexes.difference(translated)
+    if missing:
+        raise ReportBatchValidationError(f"Traduzione batch incompleta: mancanti={sorted(missing)}")
+    return translated
 
 
 def translate_report_blocks(source_title: str, blocks: List[Dict[str, str]], deterministic_title: str, *, postshow: Optional[dict] = None) -> Dict[int, str]:
@@ -891,32 +947,32 @@ BLOCCHI JSON:
 {json.dumps(batch, ensure_ascii=False)}
 """
         print(f"[TRANSLATE v92] Batch report_blocks_legacy_prompt {batch_no}/{batch_total} | items={len(batch)} | indici={batch_indexes[0]}-{batch_indexes[-1]}", flush=True)
-        validator_kwargs = {"response_validator": lambda data: validate_postshow(data.get("postshow"), postshow)} if opening_context else {}
-        data, model = generate_json(prompt, chain_name="report_blocks_legacy_prompt", cooldown_models=cooldown_models, ledger_context={"report_id": deterministic_title or source_title, "report_key": deterministic_title or source_title, "source_url": None, "title": deterministic_title or source_title, "batch": f"{batch_no}/{batch_total}", "batch_no": batch_no, "batch_total": batch_total}, **validator_kwargs)
+        def validate_response(data: Dict[str, Any]) -> None:
+            # The deterministic opening/card contract remains the authority.
+            if opening_context:
+                validate_postshow(data.get("postshow"), postshow)
+            validated_report_batch(data, batch)
+
+        # Expensive reasoning only where the final result card needs it.
+        model_chain = REPORT_MODEL_CHAIN if opening_context else report_body_model_chain()
+        data, model = generate_json(
+            prompt, chain_name="report_blocks_legacy_prompt",
+            cooldown_models=cooldown_models,
+            ledger_context={
+                "report_id": deterministic_title or source_title,
+                "report_key": deterministic_title or source_title,
+                "source_url": None, "title": deterministic_title or source_title,
+                "batch": f"{batch_no}/{batch_total}",
+                "batch_no": batch_no, "batch_total": batch_total,
+            },
+            response_validator=validate_response, model_chain_override=model_chain,
+            validation_scope="postshow" if opening_context else "batch",
+        )
         if postshow and start == 0:
             postshow["final"] = validate_postshow(data.get("postshow"), postshow)
-        arr = data.get("items") or []
-        if not isinstance(arr, list) or len(arr) != len(batch):
-            raise ValueError("Traduzione: numero di blocchi incompatibile")
-        batch_translated: Dict[int, str] = {}
-        for item in arr:
-            if not isinstance(item, dict) or type(item.get("i")) is not int or not isinstance(item.get("text"), str):
-                raise ValueError("Traduzione: blocco non valido")
-            i = item["i"]
-            txt = clean_text(item["text"])
-            if i not in batch_indexes or i in batch_translated or not txt:
-                raise ValueError("Traduzione: indice estraneo, duplicato o testo vuoto")
-            original = next(b["text"] for b in batch if b["i"] == i)
-            # A coarse technical tripwire, not a proof of semantic completeness.
-            # Reject obvious summaries without a paid repair/rewrite request.
-            if len(original.split()) >= 80 and len(txt.split()) < len(original.split()) * 0.65:
-                raise ValueError(f"Traduzione apparentemente sintetica: blocco={i}")
-            batch_translated[i] = txt
-        expected_batch = set(batch_indexes)
-        missing_batch = expected_batch.difference(batch_translated)
-        if missing_batch:
-            raise ValueError(f"Traduzione batch incompleta: batch={batch_no}/{batch_total} mancanti={sorted(list(missing_batch))} model={model}")
+        batch_translated = validated_report_batch(data, batch)
         translated.update(batch_translated)
+        expected_batch = set(batch_indexes)
         print(f"[TRANSLATE v92] Batch completato: {batch_no}/{batch_total} | modello={model} | blocchi={len(batch_translated)}/{len(expected_batch)}", flush=True)
 
     expected = {int(item["i"]) for item in items}
@@ -1228,7 +1284,7 @@ def run_report_workshop(job: Dict[str, Any], published_dir: Path, review_dir: Pa
     from modules.report_postshow import plan_postshow
     from modules.report_retry_guard import ReportRetryDeferred, preflight, mark_terminal_contract, note_contract_failure, route_contract_version
     postshow = plan_postshow(blocks)
-    route_version = route_contract_version(REPORT_MODEL_CHAIN)
+    route_version = route_contract_version(effective_report_route())
     try:
         source_digest = preflight(job, blocks, postshow, contract_version=route_version, original_html=_html)
     except ReportRetryDeferred as exc:
