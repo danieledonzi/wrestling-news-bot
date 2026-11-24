@@ -107,7 +107,7 @@ def test_report_cooldown_skips_failed_model_on_next_batch(monkeypatch):
     class FakeModels:
         def generate_content(self, *, model, contents):
             calls.append(model)
-            if model == "gemini-3.5-flash":
+            if model == "gemini-3.1-flash-lite":
                 raise RuntimeError("503 UNAVAILABLE high demand")
             response = FakeResponse()
             batch = json.loads(contents.split("BLOCCHI JSON:\n", 1)[1])
@@ -123,7 +123,7 @@ def test_report_cooldown_skips_failed_model_on_next_batch(monkeypatch):
     blocks = [{"type": "paragraph", "text": f"source {i}"} for i in range(16)]
     translated = report.translate_report_blocks("source", blocks, "Deterministic title")
     assert len(translated) == 16
-    assert calls == ["gemini-3.5-flash", "gemini-3.1-flash-lite", "gemini-3.1-flash-lite"]
+    assert calls == ["gemini-3.1-flash-lite", "gemini-3.5-flash", "gemini-3.5-flash"]
 
 
 def test_menzo_second_pass_default(monkeypatch):
