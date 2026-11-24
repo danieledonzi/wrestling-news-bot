@@ -701,9 +701,20 @@ def report_body_model_chain() -> List[str]:
     ]
 
 
+def report_postshow_model_chain() -> List[str]:
+    """Promote authorized capable models ahead of Lite for the result-card gate.
+
+    This must work even when the default REPORT_MODEL_CHAIN starts Lite-first.
+    Never inject a model that is not already configured for report use.
+    """
+    premium_priority = ("gemini-3.8-flash", "gemini-3.5-flash")
+    premium = [m for m in premium_priority if m in REPORT_MODEL_CHAIN]
+    return [*premium, *(m for m in REPORT_MODEL_CHAIN if m not in premium)]
+
+
 def effective_report_route() -> List[str]:
     """Both the strict postshow route and body route identify the retry contract."""
-    return [*REPORT_MODEL_CHAIN, "--body-only--", *report_body_model_chain()]
+    return [*report_postshow_model_chain(), "--body-only--", *report_body_model_chain()]
 
 
 def generate_json(prompt: str, chain_name: str = "unknown", cooldown_models: Optional[set[str]] = None, ledger_context: Optional[Dict[str, Any]] = None, response_validator: Optional[Callable[[dict], Any]] = None, *, model_chain_override: Optional[List[str]] = None, validation_scope: str = "postshow") -> Tuple[Dict[str, Any], str]:
@@ -954,7 +965,7 @@ BLOCCHI JSON:
             validated_report_batch(data, batch)
 
         # Expensive reasoning only where the final result card needs it.
-        model_chain = REPORT_MODEL_CHAIN if opening_context else report_body_model_chain()
+        model_chain = report_postshow_model_chain() if opening_context else report_body_model_chain()
         data, model = generate_json(
             prompt, chain_name="report_blocks_legacy_prompt",
             cooldown_models=cooldown_models,
