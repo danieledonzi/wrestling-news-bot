@@ -93,6 +93,33 @@ def test_two_body_failures_do_not_trigger_terminal_postshow_lock(monkeypatch):
     ]
 
 
+def test_lite_first_default_is_promoted_for_strict_postshow(monkeypatch):
+    """Regression for Codex P2: missing env must not make Lite first for the card."""
+    calls = fake_provider(monkeypatch, [
+        "gemini-3.1-flash-lite", "gemini-3.5-flash-lite",
+        "gemini-3.8-flash", "gemini-3.5-flash",
+    ])
+    monkeypatch.setattr(postshow_module, "postshow_prompt",
+                        lambda *args, **kw: "POSTSHOW_TEST_CONTEXT")
+
+    def check(value, plan):
+        if value != {"strict_test_card": True}:
+            raise ValueError("invalid result card")
+        return value
+
+    monkeypatch.setattr(postshow_module, "validate_postshow", check)
+    blocks = [{"type": "paragraph", "text": f"segment {i}"} for i in range(16)]
+    report.translate_report_blocks("Raw", blocks, "Raw title",
+                                   postshow={"replace_indexes": set()})
+    assert [model for model, _ in calls] == [
+        "gemini-3.8-flash", "gemini-3.1-flash-lite"
+    ]
+    assert report.report_postshow_model_chain() == [
+        "gemini-3.8-flash", "gemini-3.5-flash",
+        "gemini-3.1-flash-lite", "gemini-3.5-flash-lite",
+    ]
+
+
 def test_body_route_affects_retry_fingerprint(monkeypatch):
     monkeypatch.setattr(report, "REPORT_MODEL_CHAIN", ["gemini-3.8-flash", "gemini-3.1-flash-lite"])
     monkeypatch.delenv("REPORT_BODY_GEMINI_MODEL_CHAIN", raising=False)
