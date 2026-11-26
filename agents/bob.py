@@ -750,9 +750,9 @@ def extract_elements(source_url: str, raw_html: str) -> tuple[dict[str, str], li
                 seen_text.add(key)
             raw_elements.append(item)
             if item["type"] in {"text", "quote"} and name in {"p", "li", "blockquote"}:
-                from modules.editorial_media_links import capture_inline_media, media_url
+                from modules.editorial_media_links import capture_news_links, media_url
                 if not is_cta_text(clean_text(node.get_text(" "))):
-                    urls = capture_inline_media(item, node, source_url)
+                    urls = capture_news_links(item, node, source_url)
                     if urls and media_url(item.get("text", "")):
                         raw_elements.pop()
                     raw_elements.extend({"type": "embed", "url": u, "source_tag": "editorial_link"} for u in urls)
@@ -1139,7 +1139,7 @@ def validate_translation(data: dict[str, Any], parse_valid: bool, units: list[di
 
 
 def render_body(elements: list[dict[str, Any]], translations: dict[str, str]) -> str:
-    from modules.editorial_media_links import render_linked_text
+    from modules.editorial_media_links import render_news_linked_text
     out: list[str] = []
     for item in elements:
         kind = item.get("type")
@@ -1148,9 +1148,9 @@ def render_body(elements: list[dict[str, Any]], translations: dict[str, str]) ->
             level = int(item.get("level") or 2)
             out.append(f"<h{level}>{html.escape(translations.get(block_id, str(item.get('text') or '')))}</h{level}>")
         elif kind == "text":
-            out.append(f"<p>{render_linked_text(item, translations.get(block_id, str(item.get('text') or '')))}</p>")
+            out.append(f"<p>{render_news_linked_text(item, translations.get(block_id, str(item.get('text') or '')))}</p>")
         elif kind == "quote":
-            out.append(f"<blockquote>{render_linked_text(item, translations.get(block_id, str(item.get('text') or '')))}</blockquote>")
+            out.append(f"<blockquote>{render_news_linked_text(item, translations.get(block_id, str(item.get('text') or '')))}</blockquote>")
         elif kind == "table":
             rows = item.get("rows") if isinstance(item.get("rows"), list) else []
             out.append(render_table(rows, translations, block_id))
@@ -1349,6 +1349,11 @@ def article_package(item: dict[str, Any]) -> dict[str, Any]:
             if validation["valid"]:
                 package["title_it"] = clean_text(str(data.get("title_it") or ""))
                 package["body_html"] = render_body(elements, translations)
+                package["ordinary_link_diagnostics"] = {
+                    key: sum(int(e.get("ordinary_link_render", {}).get(key, 0)) for e in elements)
+                    for key in ("captured", "inline", "fallback", "lost")
+                }
+                package["ordinary_link_diagnostics"]["excluded"] = sum(int(e.get("ordinary_links_excluded", 0)) for e in elements)
                 package["excerpt_it"] = clean_text(str(data.get("excerpt_it") or ""))
                 package["status"] = "ready_for_alfred"
                 package["diagnostic_stage"] = "ready_for_alfred"
