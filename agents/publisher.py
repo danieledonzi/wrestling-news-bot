@@ -641,9 +641,16 @@ def publish_article(article: dict[str, Any], history: dict[str, Any], wp_ok: boo
             report_records = load_report_link_records(NEWSROOM_STATE_DIR, ROOT / "config")
         except Exception as exc:
             print(f"[PUBLISHER REPORT LINKS] read failed: {type(exc).__name__}", flush=True)
+    duplicate_records = None
+    if wp_ok and not DRY_RUN and POST_STATUS == "publish":
+        try:
+            from modules.editorial_duplicate_links import refresh_duplicate_index, duplicate_link_records
+            duplicate_records = duplicate_link_records(refresh_duplicate_index(NEWSROOM_STATE_DIR, ROOT), history)
+        except Exception as exc:
+            print(f"[PUBLISHER DUPLICATE LINKS] index unavailable: {type(exc).__name__}", flush=True)
     cleaned_body, internal_link_diagnostics = resolve_internal_links(
         cleaned_body, history, source_url=url, root=wp_root(),
-        enabled=wp_ok and not DRY_RUN and POST_STATUS == "publish", fetch=requests.get, report_records=report_records)
+        enabled=wp_ok and not DRY_RUN and POST_STATUS == "publish", fetch=requests.get, report_records=report_records, duplicate_records=duplicate_records)
     content = append_source(cleaned_body, source, url)
     image_url = candidate_featured_image(article)
     categories = resolve_category_ids(str(article.get("category_hint") or "")) if wp_ok else []
@@ -822,6 +829,12 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
             refresh_report_aliases(NEWSROOM_STATE_DIR, ROOT / "config")
         except Exception as exc:
             print(f"[PUBLISHER REPORT LINKS] index refresh failed: {type(exc).__name__}", flush=True)
+    if not DRY_RUN:
+        try:
+            from modules.editorial_duplicate_links import refresh_duplicate_index
+            refresh_duplicate_index(NEWSROOM_STATE_DIR, ROOT)
+        except Exception as exc:
+            print(f"[PUBLISHER DUPLICATE LINKS] index refresh failed: {type(exc).__name__}", flush=True)
     from agents import editorial_publication_policy as pressure
     history = pressure.read_history(PUBLISHER_HISTORY_FILE)
     if isinstance(history, list):
