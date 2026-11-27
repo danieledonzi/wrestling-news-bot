@@ -157,6 +157,10 @@ def test_special_structured_night_and_wrong_date(env):
     row=observation(title="AEW Example Results 11/26/26",original_report_reason="special_event_results",special_event_match={"report_key":special,"date_local":day})
     write(s/"massy_board_latest.json",{"hard_skipped":[row]})
     assert source_identity(SRC,report=True) in load_report_link_records(s,c)
+    row["original_report_reason"]="ordinary_news"
+    write(s/"massy_board_latest.json",{"hard_skipped":[row]})
+    assert source_identity(SRC,report=True) not in load_report_link_records(s,c)
+    row["original_report_reason"]="special_event_results"
     row["title"]="AEW Example Results 11/27/26"
     write(s/"massy_board_latest.json",{"hard_skipped":[row]})
     assert source_identity(SRC,report=True) not in load_report_link_records(s,c)
@@ -189,3 +193,22 @@ def test_publisher_real_payload_integration(env, monkeypatch):
     assert result["internal_links"]["report_rewritten"]==1
     assert f'href="{TARGET}">Collision' in payloads[0]["content"]
     assert f'href="{NEWS}" target="_blank"' in payloads[0]["content"]
+
+@pytest.mark.parametrize("incomplete",[
+    {"wp_post_id":None},
+    {"wp_link":""},
+    {"wp_post_id":"invalid"},
+    {"wp_post_id":True},
+    {"published_at":""},
+])
+def test_incomplete_record_cannot_lend_source_url(env,incomplete):
+    s,c=env
+    foreign="https://www.wrestlinginc.com/2329000/unrelated-article/"
+    write(s/"report_publication_registry.json",{"items":[published(source_url=foreign,**incomplete)]})
+    rec=load_report_link_records(s,c)
+    assert source_identity(foreign,report=True) not in rec
+    assert source_identity(CANONICAL,report=True) in rec
+    assert source_identity(SRC,report=True) in rec
+    body=f'<p><a href="{foreign}">unrelated</a></p>'
+    assert resolve(body,rec)[0]==body
+    assert not resolve(body,rec)[2]

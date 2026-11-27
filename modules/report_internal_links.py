@@ -116,7 +116,7 @@ def _observed_key(row, reports, registry):
     # For special events only use a structured Massy match, never fuzzy
     # matching by an event name or by publication date alone.
     match = row.get("special_event_match")
-    if not isinstance(match, dict):
+    if reason not in {"special_event_report_identity_match", "canonical_results_match", "special_event_results"} or not isinstance(match, dict):
         return ""
     key = match.get("report_key")
     day = _date_from_key(key)
@@ -234,15 +234,17 @@ def load_report_link_records(state_dir: Path, config_dir: Path) -> dict:
     for key, row in candidates:
         if not isinstance(row, dict) or not _date_from_key(key) or row.get("report_key", key) != key:
             continue
-        identity = source_identity(row.get("source_url"), report=True)
-        if identity is not None:
-            direct.setdefault(identity, set()).add(key)
         day = _date_from_key(key)
         if (row.get("status", "") not in {"", "publish", "published", "already_published", "completed"}
                 or any(row.get(field) and row[field] != day for field in ("date", "show_date", "date_local"))):
             invalid_keys.add(key)
             continue
-        if not _stamp(row.get("published_at")) or not row.get("wp_post_id") or not (row.get("wp_link") or row.get("link")):
+        post_id = row.get("wp_post_id")
+        if isinstance(post_id, str) and re.fullmatch(r"[1-9]\d{0,17}", post_id):
+            post_id = int(post_id)
+        link = row.get("wp_link") or row.get("link")
+        if (not _stamp(row.get("published_at")) or type(post_id) is not int or post_id <= 0
+                or not isinstance(link, str) or not link.strip()):
             continue
         completion = row.get("report_completion")
         if completion is not None and (not isinstance(completion, dict) or completion.get("version") != "totem-r01-completion-v1"
@@ -251,6 +253,9 @@ def load_report_link_records(state_dir: Path, config_dir: Path) -> dict:
             continue
         normalized = {**row, "status": "publish", "wp_link": row.get("wp_link") or row.get("link")}
         by_key.setdefault(key, []).append(normalized)
+        identity = source_identity(row.get("source_url"), report=True)
+        if identity is not None:
+            direct.setdefault(identity, set()).add(key)
 
     aliases = _alias_rows(_read(state_dir / INDEX_NAME, {}))
     # Also use the current board in read-only mode, even if index persistence
