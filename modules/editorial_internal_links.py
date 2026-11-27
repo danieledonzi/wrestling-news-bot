@@ -21,7 +21,7 @@ _BLOCK_CLASS = re.compile(r"(?:^|\s)(?:owtv-source-attribution|wp-block-embed\S*
 _ANCHOR = re.compile(r"""<a\s+href\s*=\s*(["'])(.*?)\1\s*>""", re.I | re.S)
 
 
-def source_identity(raw: str) -> tuple | None:
+def source_identity(raw: str, *, report: bool = False) -> tuple | None:
     """Preserve path case and queries; never guess a section/fragment match."""
     try:
         if not isinstance(raw, str) or not editorial_href(raw) or media_url(raw):
@@ -29,10 +29,11 @@ def source_identity(raw: str) -> tuple | None:
         p = urlsplit(raw)
         if p.fragment or not p.hostname or p.username is not None or p.password is not None:
             return None
+        hosts = _SOURCE_NEWS_HOSTS | {"wrestleview.com"} if report else _SOURCE_NEWS_HOSTS
         host = p.hostname.lower()
-        if host.startswith("www.") and host[4:] in _SOURCE_NEWS_HOSTS:
+        if host.startswith("www.") and host[4:] in hosts:
             host = host[4:]
-        if host not in _SOURCE_NEWS_HOSTS:
+        if host not in hosts:
             return None
         return (p.scheme.lower(), host, p.port, p.path.rstrip("/"), p.query)
     except (TypeError, ValueError):
@@ -57,6 +58,16 @@ def _internal_destination(raw: str, root: str) -> tuple | None:
         return (p.scheme, p.hostname, p.port, p.path.rstrip("/"))
     except (TypeError, ValueError):
         return None
+
+
+def _published_target(record, root):
+    if not isinstance(record, dict):
+        return None
+    post_id = record.get("wp_post_id")
+    link = _internal_destination(record.get("wp_link", ""), root)
+    if isinstance(post_id, str) and re.fullmatch(r"[1-9]\d{0,17}", post_id):
+        post_id = int(post_id)
+    return (post_id, link) if type(post_id) is int and post_id > 0 and link and record.get("status") == "publish" else None
 
 
 class _OrdinaryAnchors(HTMLParser):
@@ -92,17 +103,19 @@ class _OrdinaryAnchors(HTMLParser):
                 break
 
 
-def resolve_internal_links(content: str, history: dict, *, source_url: str, root: str, enabled: bool, fetch) -> tuple[str, dict]:
-    """Rewrite href only when exact history and current anonymous WP agree."""
+def resolve_internal_links(content: str, history: dict, *, source_url: str, root: str, enabled: bool, fetch, report_records=None) -> tuple[str, dict]:
+    """Prefer exact news history, then report identity; verify public WP once."""
     diag = {"eligible": 0, "matched": 0, "rewritten": 0, "unverified": 0, "budget_skipped": 0, "requests": 0, "reason": "disabled"}
+    if report_records is not None:
+        diag.update(report_matched=0, report_rewritten=0)
     if not enabled:
         return content, diag
     try:
         parser = _OrdinaryAnchors(content)
         parser.feed(content)
         parser.close()
-        current = source_identity(source_url)
-        anchors = [(start,end,source_identity(href)) for start,end,href in parser.anchors]
+        current = source_identity(source_url, report=report_records is not None)
+        anchors = [(start,end,source_identity(href) or (source_identity(href, report=True) if report_records is not None else None)) for start,end,href in parser.anchors]
         anchors = [(start,end,key) for start,end,key in anchors if key is not None and key != current]
         diag["eligible"] = len(anchors)
         diag["reason"] = "no_match"
@@ -113,22 +126,28 @@ def resolve_internal_links(content: str, history: dict, *, source_url: str, root
         for record in history.values():
             if not isinstance(record, dict):
                 continue
-            key = source_identity(record.get("source_url", ""))
+            key = source_identity(record.get("source_url", ""), report=report_records is not None)
             if key not in wanted:
                 continue
             # Invalid or conflicting historical records are ambiguous.
-            post_id = record.get("wp_post_id")
-            link = _internal_destination(record.get("wp_link", ""), root)
-            if isinstance(post_id, str) and re.fullmatch(r"[1-9]\d{0,17}", post_id):
-                post_id = int(post_id)
-            value = (post_id, link) if type(post_id) is int and post_id > 0 and link and record.get("status") == "publish" else None
-            records.setdefault(key, set()).add(value)
+            records.setdefault(key, set()).add(_published_target(record, root))
+        report_keys = set()
+        if isinstance(report_records, dict):
+            for key in wanted - records.keys():
+                rows = report_records.get(key)
+                if not isinstance(rows, list) or not rows:
+                    continue
+                records[key] = {_published_target(row, root) for row in rows}
+                report_keys.add(key)
         matches = {}
         for key, values in records.items():
             if len(values) == 1 and None not in values:
                 matches[key] = next(iter(values))
         candidates = [(start,end,matches[key]) for start,end,key in anchors if key in matches]
         diag["matched"] = len(candidates)
+        if report_records is not None:
+            diag["report_matched"] = sum(key in matches and key in report_keys for _,_,key in anchors)
+            diag["report_rewritten"] = 0
         if not candidates:
             return content, diag
         ids = list(dict.fromkeys(value[0] for _,_,value in candidates))
@@ -168,6 +187,9 @@ def resolve_internal_links(content: str, history: dict, *, source_url: str, root
         for start,end,href in sorted(edits, reverse=True):
             out = out[:start] + href + out[end:]
         diag["rewritten"] = len(edits)
+        if report_records is not None:
+            report_offsets = {start for start,_,key in anchors if key in report_keys}
+            diag["report_rewritten"] = sum(start in report_offsets for start,_,_ in edits)
         diag["unverified"] = len(pending)-len(edits)
         diag["reason"] = "verified" if edits else "not_public_or_mismatch"
         return out, diag
