@@ -512,6 +512,7 @@ def write_published_trace(article: dict[str, Any], result: dict[str, Any], slug:
         "source_cleaned_full_text": result.get("source_cleaned_full_text") or "",
         "canonical_source_body": result.get("canonical_source_body") or {},
         "media_fallback": result.get("media_fallback") or {},
+        "internal_links": result.get("internal_links") or {},
     }
     optional_map = {
         "wp_post_id": (result.get("wp_post_id"),),
@@ -632,6 +633,10 @@ def publish_article(article: dict[str, Any], history: dict[str, Any], wp_ok: boo
     from modules.wordpress_media_fallback import for_wordpress
     cleaned_body, media_diagnostics = for_wordpress(cleaned_body, root=wp_root(), auth=wp_auth(), session=session,
                                                   enabled=wp_ok and not DRY_RUN)
+    from modules.editorial_internal_links import resolve_internal_links
+    cleaned_body, internal_link_diagnostics = resolve_internal_links(
+        cleaned_body, history, source_url=url, root=wp_root(),
+        enabled=wp_ok and not DRY_RUN and POST_STATUS == "publish", fetch=requests.get)
     content = append_source(cleaned_body, source, url)
     image_url = candidate_featured_image(article)
     categories = resolve_category_ids(str(article.get("category_hint") or "")) if wp_ok else []
@@ -688,6 +693,7 @@ def publish_article(article: dict[str, Any], history: dict[str, Any], wp_ok: boo
     (PUBLISHED_DIR / f"v93_news_{review_slug}.html").write_text(content, encoding="utf-8")
     result = {"source_url": url, "title_it": title, "status": "published", "wp_post_id": post_id, "wp_link": post_link, "featured_media": media_id, "categories": categories, "cleaned_full_text": published_cleaned_full_text, "published_cleaned_full_text": published_cleaned_full_text, "source_cleaned_full_text": source_cleaned_full_text, "canonical_source_body": canonical_source_body}
     result["media_fallback"] = media_diagnostics
+    result["internal_links"] = internal_link_diagnostics
     # Preserve scheduling/editorial provenance in the actual Publisher result so
     # the authoritative master log can audit an urgency promotion end-to-end.
     for field in (
