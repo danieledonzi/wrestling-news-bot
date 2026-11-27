@@ -103,11 +103,13 @@ class _OrdinaryAnchors(HTMLParser):
                 break
 
 
-def resolve_internal_links(content: str, history: dict, *, source_url: str, root: str, enabled: bool, fetch, report_records=None) -> tuple[str, dict]:
-    """Prefer exact news history, then report identity; verify public WP once."""
+def resolve_internal_links(content: str, history: dict, *, source_url: str, root: str, enabled: bool, fetch, report_records=None, duplicate_records=None) -> tuple[str, dict]:
+    """Prefer exact news, then report identity, then validated duplicates."""
     diag = {"eligible": 0, "matched": 0, "rewritten": 0, "unverified": 0, "budget_skipped": 0, "requests": 0, "reason": "disabled"}
     if report_records is not None:
         diag.update(report_matched=0, report_rewritten=0)
+    if duplicate_records is not None:
+        diag.update(duplicate_matched=0, duplicate_rewritten=0)
     if not enabled:
         return content, diag
     try:
@@ -139,6 +141,14 @@ def resolve_internal_links(content: str, history: dict, *, source_url: str, root
                     continue
                 records[key] = {_published_target(row, root) for row in rows}
                 report_keys.add(key)
+        duplicate_keys = set()
+        if isinstance(duplicate_records, dict):
+            for key in wanted - records.keys():
+                rows = duplicate_records.get(key)
+                if not isinstance(rows, list) or not rows:
+                    continue
+                records[key] = {_published_target(row, root) for row in rows}
+                duplicate_keys.add(key)
         matches = {}
         for key, values in records.items():
             if len(values) == 1 and None not in values:
@@ -148,6 +158,8 @@ def resolve_internal_links(content: str, history: dict, *, source_url: str, root
         if report_records is not None:
             diag["report_matched"] = sum(key in matches and key in report_keys for _,_,key in anchors)
             diag["report_rewritten"] = 0
+        if duplicate_records is not None:
+            diag["duplicate_matched"] = sum(key in matches and key in duplicate_keys for _,_,key in anchors)
         if not candidates:
             return content, diag
         ids = list(dict.fromkeys(value[0] for _,_,value in candidates))
@@ -190,6 +202,9 @@ def resolve_internal_links(content: str, history: dict, *, source_url: str, root
         if report_records is not None:
             report_offsets = {start for start,_,key in anchors if key in report_keys}
             diag["report_rewritten"] = sum(start in report_offsets for start,_,_ in edits)
+        if duplicate_records is not None:
+            duplicate_offsets = {start for start,_,key in anchors if key in duplicate_keys}
+            diag["duplicate_rewritten"] = sum(start in duplicate_offsets for start,_,_ in edits)
         diag["unverified"] = len(pending)-len(edits)
         diag["reason"] = "verified" if edits else "not_public_or_mismatch"
         return out, diag
